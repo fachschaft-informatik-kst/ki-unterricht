@@ -10,3 +10,5 @@ Die Notebooklinks sind relativ (`../lab/index.html?path=ki_projekt/...`). Auf ei
 Inhalte basieren auf den drei Markdown-Unterlagen unter `content/ki_projekt/`. Termine, Klassenanzahl, Versuchsparameter und die Gewichtung 15/20/25/40 müssen bei Änderungen in beiden Darstellungen konsistent gehalten werden. Das neue Kompetenzraster konkretisiert die vorhandenen Lernziele; es führt keine eigene Notenformel ein.
 
 Browserprüfung: `npm install --no-save playwright`, `npx playwright install chromium`, danach `node tests/check_projekt_page.cjs`. Alternativ mit installiertem `playwright-core` und `CHROMIUM_PATH` auf eine lokale Chromium-Datei. Der Test verwendet einen lokalen HTTP-Server, prüft Navigation, Filter, Fortschritt, Export/Import, Mobilansicht und Darstellung ohne JavaScript. Screenshots liegen im temporären Verzeichnis, das der Test ausgibt.
+
+Die Navigation zeigt jeweils einen Bereich. Ohne JavaScript und beim Drucken bleiben alle Bereiche verfügbar. Das Fachgespräch findet im Tandem statt.

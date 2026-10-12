@@ -1,6 +1,6 @@
 # KI-Tandemprojekt: Was hat unser Netz gelernt?
 
-**Informatik · 4. Gymiklasse · Tandemarbeit · Abgabe und individuelles Fachgespräch**
+**Informatik · 4. Gymiklasse · Tandemarbeit · Abgabe und Fachgespräch im Tandem**
 
 ## Ziel und Produkt
 
@@ -70,6 +70,6 @@ Abzugeben sind das **ausgefüllte Projektjournal mit Ausgaben**, die Originalfot
 | Fragestellung und Daten | 15 % | klare Anwendung, sinnvolle Klassen, begründete Datenwahl und saubere Aufteilung |
 | Experiment | 20 % | prüfbare Vermutung, kontrollierter Vergleich, nachvollziehbare Einstellungen und alle Läufe |
 | Auswertung und Reflexion | 25 % | korrekte Interpretation, konkrete Fehleranalyse und ehrliche Grenzen |
-| Individuelles Fachgespräch | 40 % | eigene Erklärungen und Übertragung auf neue Beispiele |
+| Fachgespräch im Tandem | 40 % | eigene Erklärungen und Übertragung auf neue Beispiele |
 
-Die ersten drei Bereiche sind Tandemleistungen. Im Gespräch werden beide individuell beurteilt. Auch eine nicht bestätigte Vermutung oder ein schwaches Modell kann bei sorgfältiger Untersuchung eine gute Leistung sein. Kleine Stichproben und wenige Objekt-/Personengruppen begrenzen Ihre Schlussfolgerungen. Nach dem Abschlusstest nicht weiter optimieren und denselben Test erneut als unabhängig ausgeben.
+Die ersten drei Bereiche sind Tandemleistungen. Das Fachgespräch findet gemeinsam im Tandem statt. Beide erklären das gesamte Projekt; die individuellen Beiträge bleiben erkennbar. Auch eine nicht bestätigte Vermutung oder ein schwaches Modell kann bei sorgfältiger Untersuchung eine gute Leistung sein. Kleine Stichproben und wenige Objekt-/Personengruppen begrenzen Ihre Schlussfolgerungen. Nach dem Abschlusstest nicht weiter optimieren und denselben Test erneut als unabhängig ausgeben.
