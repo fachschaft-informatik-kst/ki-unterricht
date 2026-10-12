@@ -45,6 +45,8 @@ Persönliche Seitenstände, Fotostudio-Sammlungen und JupyterLite-Dateien sind g
 
 ### Automatischer Notebookstart
 
+Falls JupyterLite nach einem Seiten-Reload nur den Launcher wiederherstellt, öffnet die Erweiterung das zuletzt geöffnete Kursnotebook im selben Browser-Tab erneut. Explizite Notebook-Links und bereits wiederhergestellte Tabs haben Vorrang.
+
 Die sechs Lernnotebooks führen beim Öffnen und nach einem Seiten-Reload ihre mit `ki-autostart` markierten Codezellen der Reihe nach aus. Oben steht zuerst «Lernumgebung startet …», danach «Bereit». Änderungen an Einstellungen benötigen weiterhin Shift + Enter. Ein manueller Kernel-Neustart allein führt keine Zellen aus.
 
 Im Projektjournal startet **nur die Vorbereitung**. Foto-Upload, Datenimport, Training, Testfreigabe und Export bleiben manuell. Ein Reload erhält gespeicherte Eingaben und Ausgaben, stellt aber keine Python-Variablen oder hochgeladenen Dateien wieder her: Daten erneut laden und die benötigten Schritte gezielt ausführen. Vor einem Reload Journal und Ergebnisse herunterladen.

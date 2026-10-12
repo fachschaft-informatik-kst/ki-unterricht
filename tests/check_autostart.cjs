@@ -9,16 +9,17 @@ async function simulate(name, fail = false, twice = false) {
   const executed = [], badges = [];
   const panel = {
     context: {ready: Promise.resolve(), path: name},
+    disposed: {connect() {}},
     content: {widgets: nb.cells.map((cell, index) => ({index, model: {type: cell.cell_type, getMetadata: key => cell.metadata[key]}}))},
     sessionContext: {ready: Promise.resolve(), session: {kernel: {}}},
     toolbar: {addItem: (_, status) => badges.push(status)}
   };
   let callback;
-  const context = {INotebookTracker: {}, console: {error() {}}, CodeCell: {execute: async cell => {
+  const context = {INotebookTracker: {}, console: {error() {}, warn() {}}, performance: {getEntriesByType:()=>[{type:'navigate'}]}, CodeCell: {execute: async cell => {
     executed.push(cell.index); return {content: {status: fail ? 'error' : 'ok'}};
   }}, Widget: class {constructor() {this.node = {style: {}, setAttribute() {}};}}};
   vm.runInNewContext(source, context);
-  context.plugin.activate({}, {widgetAdded: {connect: cb => callback = cb}, forEach: cb => cb(panel)});
+  context.plugin.activate({restored:Promise.resolve()}, {widgetAdded: {connect: cb => callback = cb}, forEach: cb => cb(panel)});
   if (twice) callback(null, panel);
   await new Promise(resolve => setImmediate(resolve));
   return {nb, executed, badges};
@@ -40,5 +41,23 @@ async function simulate(name, fail = false, twice = false) {
   const failure = await simulate('lernarten.ipynb', true);
   assert.equal(failure.executed.length, 1, 'Stop after first error');
   assert(failure.badges[0].node.textContent.includes('fehlgeschlagen'));
-  console.log('PASS autostart: order, once per panel, journal boundary, excluded notebook, stop on error');
+  for (const [navigation, size, query, remembered, expected] of [
+    ['reload',0,'','lernarten.ipynb',1],
+    ['navigate',0,'','lernarten.ipynb',0],
+    ['reload',1,'','lernarten.ipynb',0],
+    ['reload',0,'?path=daten_training.ipynb','lernarten.ipynb',0],
+    ['reload',0,'','fremdes_notebook.ipynb',0]
+  ]) {
+    const opened = [];
+    const context = {INotebookTracker:{}, CodeCell:{}, Widget:class {}, console,
+      performance:{getEntriesByType:()=>[{type:navigation}]}, URLSearchParams,
+      location:{search:query}, sessionStorage:{getItem:()=>remembered}};
+    vm.runInNewContext(source, context);
+    context.plugin.activate({restored:Promise.resolve(), commands:{execute:async (command,args)=>opened.push([command,args.path])}},
+      {size,widgetAdded:{connect(){}},forEach(){}});
+    await new Promise(resolve=>setImmediate(resolve));
+    assert.equal(opened.length,expected);
+    if(expected) assert.deepEqual(opened[0],['docmanager:open','lernarten.ipynb']);
+  }
+  console.log('PASS autostart: order, once per panel, journal boundary, excluded notebook, stop on error, reload restoration and explicit links');
 })().catch(error => {console.error(error);process.exitCode = 1;});

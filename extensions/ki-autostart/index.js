@@ -10,6 +10,7 @@ const allowed = new Set([
   'ki_projekt/ki_tandemprojekt.ipynb'
 ]);
 const tag = 'ki-autostart';
+const rememberedPathKey = 'kst-ki-last-notebook';
 
 export default {
   id: '@kst/ki-autostart:plugin',
@@ -22,6 +23,14 @@ export default {
       seen.add(panel);
       await panel.context.ready;
       if (panel.isDisposed || !allowed.has(panel.context.path)) return;
+      try { sessionStorage.setItem(rememberedPathKey, panel.context.path); } catch {}
+      panel.disposed.connect(() => {
+        try {
+          if (sessionStorage.getItem(rememberedPathKey) === panel.context.path) {
+            sessionStorage.removeItem(rememberedPathKey);
+          }
+        } catch {}
+      });
       const cells = panel.content.widgets.filter(cell =>
         cell.model.type === 'code' &&
         (cell.model.getMetadata('tags') || []).includes(tag)
@@ -56,5 +65,17 @@ export default {
     };
     tracker.widgetAdded.connect((_, panel) => { void initialize(panel); });
     tracker.forEach(panel => { void initialize(panel); });
+    // Lite may restore only the launcher after refresh. Reopen within this tab,
+    // after normal workspace restoration; explicit links always take priority.
+    void app.restored.then(async () => {
+      try {
+        if (performance.getEntriesByType('navigation')[0]?.type !== 'reload') return;
+        if (tracker.size || new URLSearchParams(location.search).has('path')) return;
+        const path = sessionStorage.getItem(rememberedPathKey);
+        if (allowed.has(path)) {
+          await app.commands.execute('docmanager:open', {path, factory: 'Notebook'});
+        }
+      } catch (error) { console.warn('KI notebook restoration:', error); }
+    });
   }
 };

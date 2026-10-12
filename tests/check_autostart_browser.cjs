@@ -21,13 +21,15 @@ async function reveal(page, selector) {
   let browser;
   try {
     await new Promise(r => setTimeout(r, 1000));
-    browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH, headless:true, args:JSON.parse(process.env.CHROMIUM_ARGS || '[]')});
     for (const name of ['perzeptron_und_neuronale_netze.ipynb','lernarten.ipynb','ki_projekt/ki_tandemprojekt.ipynb']) {
+    browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH, headless:true, args:JSON.parse(process.env.CHROMIUM_ARGS || '[]')});
       const context = await browser.newContext();
       const page = await context.newPage();
+      page.on('console', m=>{if (m.type()==='error') console.error(m.text());});
+      page.on('pageerror',e=>console.error('PAGEERROR',e.message));
       await page.goto('http://127.0.0.1:8765/lab/index.html?path='+encodeURIComponent(name));
       for (let pass=0;pass<2;pass++) {
-        await page.waitForFunction(() => [...document.querySelectorAll('.ki-autostart-status')].some(e=>e.textContent.includes('Bereit') || e.textContent.includes('fehlgeschlagen')), null, {timeout:180000});
+        await page.waitForFunction(() => [...document.querySelectorAll('.ki-autostart-status')].some(e=>e.textContent.includes('Bereit') || e.textContent.includes('fehlgeschlagen')), null, {timeout:180000}).catch(async error=>{console.error(await page.locator('body').innerText());throw error;});
         assert.equal(await page.locator('.ki-autostart-status').textContent(), '✓ Bereit', await page.locator('body').innerText());
         if (name.startsWith('perzeptron')) {
           await reveal(page, '.widget-dropdown select');
@@ -52,7 +54,7 @@ async function reveal(page, selector) {
         console.log('PASS', name, pass ? 'reload' : 'open');
         if (!pass) await page.reload();
       }
-      await context.close();
+      await browser.close();
     }
   } finally {if(browser) await browser.close();server.kill();}
 })().catch(error => {console.error(error);process.exitCode=1;});
