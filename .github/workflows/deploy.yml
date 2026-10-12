@@ -21,6 +21,14 @@ jobs:
       - name: Install the dependencies
         run: |
           python -m pip install -r requirements.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build notebook autostart
+        run: |
+          npm ci --prefix extensions/ki-autostart
+          npm run build --prefix extensions/ki-autostart
+          node tests/check_autostart.cjs
       - name: Check simplified teaching project
         run: python tests/check_ki_basis.py
       - name: Build the JupyterLite site

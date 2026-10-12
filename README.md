@@ -37,8 +37,16 @@ Abgabe vor Unterrichtsbeginn am 19.01.2027: Journal mit Ausgaben, Fotos/JSON und
 
 ## Technik und Prüfung
 
-`jupyter lite build --contents content --output-dir dist` baut den Browserunterricht. Der Pages-Workflow kopiert zusätzlich `projekt/index.html` nach `dist/projekt/`. Dateien in ihren Ordnern zusammen belassen. Fotostudio als vollständige HTML-Datei über das Journal herunterladen; bei direktem Download gehört `fotostudio_core.js` daneben.
+Vor dem JupyterLite-Build einmal `npm ci --prefix extensions/ki-autostart` und `npm run build --prefix extensions/ki-autostart` ausführen. Danach baut `jupyter lite build --contents content --output-dir dist` den Browserunterricht. Der Pages-Workflow kopiert zusätzlich `projekt/index.html` nach `dist/projekt/`. Dateien in ihren Ordnern zusammen belassen. Fotostudio als vollständige HTML-Datei über das Journal herunterladen; bei direktem Download gehört `fotostudio_core.js` daneben.
 
 Prüfungen: `python tests/check_ki_basis.py`, `python tests/check_ki_fotos.py`, `python tests/check_ki_projekt.py`; Website: `node tests/check_projekt_page.cjs` (Playwright). Pyodide-Prüfung: `node tests/check_pyodide.cjs` (Pyodide 0.27.0; siehe Testskript). Notebooks lassen sich mit `python tests/execute_notebooks.py` ausführen; Ausgabeordner wird im Skript beschrieben.
 
 Persönliche Seitenstände, Fotostudio-Sammlungen und JupyterLite-Dateien sind getrennt. Regelmässig ausserhalb des Browsers herunterladen. Es gibt keine automatische Abgabe.
+
+### Automatischer Notebookstart
+
+Die sechs Lernnotebooks führen beim Öffnen und nach einem Seiten-Reload ihre mit `ki-autostart` markierten Codezellen der Reihe nach aus. Oben steht zuerst «Lernumgebung startet …», danach «Bereit». Änderungen an Einstellungen benötigen weiterhin Shift + Enter. Ein manueller Kernel-Neustart allein führt keine Zellen aus.
+
+Im Projektjournal startet **nur die Vorbereitung**. Foto-Upload, Datenimport, Training, Testfreigabe und Export bleiben manuell. Ein Reload erhält gespeicherte Eingaben und Ausgaben, stellt aber keine Python-Variablen oder hochgeladenen Dateien wieder her: Daten erneut laden und die benötigten Schritte gezielt ausführen. Vor einem Reload Journal und Ergebnisse herunterladen.
+
+Die Erweiterung startet ausschliesslich die aufgeführten Kursdateien, keine hochgeladenen Fremdnotebooks oder Vertiefungen. Bereits früher im Browser gespeicherte Versionen ohne Startmarkierungen müssen nach Sicherung der eigenen Arbeit durch die aktuelle Vorlage ersetzt werden; lokale Arbeiten werden nicht überschrieben. Umbenannte Journale bleiben manuell ausführbar. Prüfung: `node tests/check_autostart.cjs`.
