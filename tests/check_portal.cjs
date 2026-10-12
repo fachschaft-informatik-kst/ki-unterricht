@@ -10,9 +10,19 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:JSON.parse(process.env.CHROMIUM_ARGS||'[]')});
   const p=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());p.on('console',m=>{if(m.type()==='error')console.error('BROWSER',m.text());});
   await p.goto('http://127.0.0.1:8765/projekt/');
-  assert.equal(await p.locator('.course-card').count(),7);assert.equal(await p.locator('.nav a').count(),8);
+  assert.equal(await p.locator('.course-card').count(),7);assert.equal(await p.locator('.nav a').count(),9);
   assert.equal(await p.locator('a[href*="/lab/"]').count(),0);
   await p.screenshot({path:'/tmp/ki-portal-home.png',fullPage:true});
+  await p.locator('.nav a[href="#lernziele"]').click();await p.locator('#lernziele').waitFor({state:'visible'});assert.equal(await p.locator('#lernziele .grid > article').count(),7);
+  await p.locator('#lernziele a[href="#bewertung"]').click();const scoring=p.locator('[data-score]');assert.equal(await scoring.count(),10);
+  assert((await p.locator('#grade-result').innerText()).includes('Noch keine Gesamtnote'));
+  for(let i=0;i<10;i++)await scoring.nth(i).selectOption(i<6?'3':'0');assert((await p.locator('#grade-result').innerText()).includes('18 / 30 Punkte → Note 4.00'));
+  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('3');assert((await p.locator('#grade-result').innerText()).includes('30 / 30 Punkte → Note 6.00'));
+  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 30 Punkte → Note 1.00'));
+  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('20 / 30 Punkte → Note 4.25'));
+  await p.reload();assert((await p.locator('#grade-result').innerText()).includes('20 / 30 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
+  assert.equal(await p.locator('[data-lab="lernarten.ipynb"]').count(),0);assert.equal(await p.locator('#lernarten a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]').count(),1);
+
   await p.locator('.nav a[href="#lernarten"]').click();await p.locator('#lernarten details').first().locator('summary').click();assert.equal(await p.locator('.memory-card').count(),6);
   await p.locator('[data-answer="nim"]').fill('Mehr Training hilft gegen den Zufallsgegner.');
   await p.locator('.sidebar-bottom a[href="#journal"]').click();
@@ -55,12 +65,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     }
     await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-trained.zip');
     console.log('PASS actual training, manual final test and result package');
-    await p.locator('.nav a[href="#lernarten"]').click();await p.locator('[data-lab="lernarten.ipynb"]').click();
+    await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#lesson-frame').dataset.ready==='yes',null,{timeout:180000});
-    assert((await p.frameLocator('#lesson-frame').locator('body').innerText()).includes('Hölzer'));
+    assert((await p.frameLocator('#lesson-frame').locator('body').innerText()).includes('Gewichte'));
     await p.locator('.sidebar-bottom a[href="#journal"]').click();assert.equal(await p.locator('#project-frame').count(),1);
     assert((await cells.nth(5).innerText()).includes('Abschlusstest'));
-    console.log('PASS embedded NIM and project preservation during navigation');
+    console.log('PASS embedded perceptron and project preservation during navigation');
    }
 
   }

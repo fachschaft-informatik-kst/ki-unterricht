@@ -90,7 +90,7 @@ $('attachments').addEventListener('change',async e=>{
  }catch(error){$('download-status').textContent=error.message;}finally{e.target.value='';}
 });
 // Keep the project iframe alive during navigation. At most one additional lesson iframe.
-const names={'lernarten.ipynb':'NIM','perzeptron_und_neuronale_netze.ipynb':'Ein Neuron','mehrschichtige_netze.ipynb':'XOR-Netz','daten_training.ipynb':'Datenaufteilung','klassifikation_ziffern.ipynb':'Ziffern','ki_lernlabor.ipynb':'Projekt-Lernlabor'};
+const names={'perzeptron_und_neuronale_netze.ipynb':'Ein Neuron','mehrschichtige_netze.ipynb':'XOR-Netz','daten_training.ipynb':'Datenaufteilung','klassifikation_ziffern.ipynb':'Ziffern','ki_lernlabor.ipynb':'Projekt-Lernlabor'};
 function frameURL(name){return '../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&ki-path='+encodeURIComponent('portal/'+name);}
 function connectFrame(frame,kind){
  let attempts=0;const timer=setInterval(()=>{if(frame.dataset.ready==='yes'||++attempts>120){clearInterval(timer);if(frame.dataset.ready!=='yes')$(kind+'-lab-status').textContent='Start dauert länger. Internetverbindung prüfen.';return;}frame.contentWindow?.postMessage({channel:'ki-portal-v1',type:'hello'},location.origin);},1000);

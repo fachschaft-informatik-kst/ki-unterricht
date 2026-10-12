@@ -35,9 +35,10 @@ Am 08.12. Thema und Datenplan freigeben. Fotos als kurze vorbereitende Sammlung 
 
 `UEBUNG` kann komplett von oben nach unten laufen; der Abschlusstest bleibt absichtlich gesperrt. Eigene Daten benötigen eine Pause nach dem Upload. Nach Testfreigabe nicht erneut Varianten optimieren. Ein Kernel-Neustart kann die Arbeitsregel technisch umgehen; die Sperre ist kein Prüfungsmechanismus.
 
-## NIM
+## Verstärkendes Lernen
 
-10 Hölzer; abwechselnd 1–3 nehmen; wer das letzte nimmt, verliert. Die Tabelle bevorzugt Züge aus gewonnenen Partien und schwächt Züge aus verlorenen Partien ab (mindestens Gewicht 1). Kein Q-Learning und kein neuronales Netz. Der Trainingsgegner handelt zufällig. Der Vergleich prüft auf 400 separaten Partien mit abwechselndem Startrecht, ohne weitere Updates. Ein fester Seed macht den Vergleich wiederholbar, nicht allgemeingültig. Die menschliche Partie dient dem Erkunden, ihre Ergebnisse verändern die Tabelle nicht.
+Auf der Kursseite ist ausschliesslich die [NIM-Lernstrecke von inf-schule.de](https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke) verlinkt. Die Lernenden bearbeiten diese Lernstrecke; das eigene NIM-Notebook ist nicht mehr Teil des Unterrichtswegs.
+
 
 ## Fachgespräch und paralleler Auftrag
 
@@ -50,4 +51,4 @@ Parallel: unbenoteter KI-Fallcheck als eine Folie, jederzeit unterbrechbar. Fall
 - https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke
 - https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke
 
-Das NIM-Modell im Notebook ist eine eigene einfache Umsetzung mit denselben Spielregeln, keine Übernahme des inf-schule-Programmcodes.
+Das alte NIM-Notebook bleibt nur als bisheriges Lehrpersonenmaterial im Repository.
