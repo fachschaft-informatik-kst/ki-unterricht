@@ -3,7 +3,7 @@
 `index.html` ist die statische Übersicht für Lernende. Keine externen Bibliotheken, Fonts, Cookies oder Analysewerkzeuge. Persönlicher Seitenstand liegt in `localStorage` und lässt sich als JSON exportieren/importieren; er ist unabhängig von Notebook und Fotostudio.
 
 Der bestehende GitHub-Pages-Workflow baut JupyterLite und kopiert diese Seite nach `dist/projekt/index.html`. URL nach Merge/Deployment:
-https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/projekt/
+https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/
 
 Die Notebooklinks sind relativ (`../lab/index.html?path=ki_projekt/...`). Auf einer lokalen Vorschau ohne JupyterLite-Build sind die Zielnotebooks nicht verfügbar.
 

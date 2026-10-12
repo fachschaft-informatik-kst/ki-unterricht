@@ -517,7 +517,7 @@ if __name__ == '__main__':
     xml_str = '\n'.join(xml_lines)
     
     # In Datei schreiben
-    output_path = '/home/kbohn/repos/ml-interactive-notebooks/worksheets/md/svg/sigmoid_modelvergleich.svg'
+    output_path = '/home/kbohn/repos/ki-unterricht/worksheets/md/svg/sigmoid_modelvergleich.svg'
     with open(output_path, 'w') as f:
         f.write(xml_str)
     

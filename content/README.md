@@ -2,7 +2,7 @@
 
 ## KI-Tandemprojekt
 
-**[Zur interaktiven Projektseite](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/projekt/)** – Ablauf, Themenwahl, Bewertung, Kompetenzraster und Abgabecheckliste.
+**[Zur interaktiven Projektseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)** – Ablauf, Themenwahl, Bewertung, Kompetenzraster und Abgabecheckliste.
 
 Alle Projektmaterialien liegen im Ordner **ki_projekt**.
 

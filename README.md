@@ -1,13 +1,11 @@
-# Interactive ML Notebooks for School
+# KI-Unterricht
 
-This repository contains interactive Jupyter notebooks used to teach machine learning concepts in a school setting. It focuses on approachable, visual explanations and hands‑on widgets for exploration.
+Unterrichtsmaterialien zur künstlichen Intelligenz für das Gymnasium: interaktive Notebooks, Arbeitsblätter und ein begleitetes Tandemprojekt mit eigenen Bilddaten.
 
-We use a JupyterLite template only as a lightweight scaffold to host notebooks in the browser. The emphasis here is on the teaching materials, not on JupyterLite itself. See dokumentation at <https://jupyterlite.readthedocs.io/> for more about JupyterLite.
+- **[Projektseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/):** Ablauf, Themenideen, Bewertung und Kompetenzraster.
+- **[JupyterLite](https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html):** Notebooks direkt im Browser ausführen.
 
-Noteooks are accessible both locally (with a standard Jupyter installation) and in the browser via JupyterLite Github Pages at: <https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks>
-
-The advantage of the browser version is that no local setup is required. However, some interactive features may be limited compared to a full local installation. The ultimate advantage with jupiterlite is that students can explore the notebooks directly in the browser without installing anything. Everything runs client-side and no server is needed. In every case, the notebooks are designed to be self-contained and easy to follow.
-
+Die Notebooks laufen lokal mit Jupyter oder ohne Installation im Browser mit JupyterLite/Pyodide. Projektseite und JupyterLite werden gemeinsam über GitHub Pages bereitgestellt.
 
 ## Contents
 
@@ -19,7 +17,7 @@ The advantage of the browser version is that no local setup is required. However
 
 ## Tandemprojekt: Was hat unser Netz gelernt?
 
-**[Zur interaktiven Projektseite](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/projekt/)** – Ablauf, Themenwahl, Bewertung, Kompetenzraster und Abgabecheckliste.
+**[Zur interaktiven Projektseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)** – Ablauf, Themenwahl, Bewertung, Kompetenzraster und Abgabecheckliste.
 
 Tandems wählen eine Fotoanwendung mit zwei bis vier Klassen, sammeln eigene Bilder und trainieren ein kleines neuronales Netz auf festen MobileNet-Merkmalen. Abgabe: ausgefülltes Journal mit Ausgaben, Daten und individuelles Fachgespräch.
 
@@ -38,7 +36,7 @@ Tandems wählen eine Fotoanwendung mit zwei bis vier Klassen, sammeln eigene Bil
 
 ### Ablauf in JupyterLite / Pyodide
 
-Nach Merge und Deployment: [Lernlabor](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/lab/index.html?path=ki_projekt/ki_lernlabor.ipynb), danach [Projektjournal](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/lab/index.html?path=ki_projekt/ki_tandemprojekt.ipynb).
+Nach Merge und Deployment: [Lernlabor](https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html?path=ki_projekt/ki_lernlabor.ipynb), danach [Projektjournal](https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html?path=ki_projekt/ki_tandemprojekt.ipynb).
 
 1. Projektdateien in `content/ki_projekt/` zusammen belassen; der bestehende Build übernimmt sie.
 2. Journal in `UEBUNG` von oben nach unten ausführen. Die künstlichen Formen belegen keine Erkennungsleistung auf Alltagsfotos.
