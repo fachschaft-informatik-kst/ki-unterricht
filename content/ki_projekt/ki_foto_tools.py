@@ -24,7 +24,7 @@ def fotostudio():
 
 def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
                 train=('G01', 'G02', 'G03', 'G04'), val=('G05', 'G06'),
-                test=('G07', 'G08'), dateien=(), upload=None):
+                test=('G07', 'G08'), dateien=(), upload=None, profil='vertiefung'):
     ki.pruefe(modus in ('UEBUNG', 'EIGENE_DATEN', 'ERSATZ'), 'Modus: UEBUNG, EIGENE_DATEN oder ERSATZ.')
     if modus in ('UEBUNG', 'ERSATZ'):
         dateien = [Path(__file__).with_name('foto_uebungsdaten.json')]
@@ -34,6 +34,17 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
         values = upload.value.values() if isinstance(upload.value, dict) else upload.value
         docs += [json.loads(bytes(f['content']).decode('utf-8')) for f in values]
     ki.pruefe(bool(docs), 'JSON-Dateien aus dem Fotostudio auswählen.')
+    ki.pruefe(profil in ('basis', 'vertiefung'), 'Profil: basis oder vertiefung.')
+    if profil == 'basis' and modus in ('UEBUNG', 'ERSATZ'):
+        mapping = dict(G01='T1', G02='T2', G05='V1', G07='P1', G08='P2')
+        chosen=[]
+        for g, new in mapping.items():
+            for label in ('Kreis', 'Dreieck'):
+                rows=sorted([r for r in docs[0]['records'] if r['group']==g and r['label']==label],key=lambda r:r['id'])[:8]
+                chosen += [dict(r, group=new) for r in rows]
+        docs=[dict(docs[0], records=chosen)]
+    if profil == 'basis':
+        ki.pruefe(len(klassen)==2, 'Im Pflichtprojekt genau zwei Klassen wählen.')
     by_id = {}
     for doc in docs:
         ki.pruefe(doc.get('schema') == 'fotostudio-v1' and doc.get('pipeline') == PIPELINE,
@@ -66,12 +77,17 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
             previews.append(np.asarray(im.convert('RGB')))
     y=np.array([klassen.index(r['label']) for r in records]);gruppen=np.array([r['group'] for r in records])
     for role in [train,val,test]:
-        ki.pruefe(len(role)>=2 and len(set(role))==len(role), 'Je Rolle mindestens zwei verschiedene Datengruppen.')
+        ki.pruefe(len(role)>=(1 if profil=='basis' else 2) and len(set(role))==len(role), 'Datengruppen fehlen oder sind doppelt; Datenplan prüfen.')
         for g in role:
             ki.pruefe(set(y[gruppen==g])==set(range(len(klassen))), f'{g}: mindestens eine Klasse fehlt.')
-    ki.pruefe(len(train)>=4, 'Mindestens vier Trainingsgruppen verwenden.')
+    ki.pruefe(len(train)>=(2 if profil=='basis' else 4), 'Zu wenige Trainingsgruppen für dieses Profil.')
     ki.pruefe(set(train).isdisjoint(val) and set(train).isdisjoint(test) and set(val).isdisjoint(test), 'Datengruppen müssen getrennt sein.')
     ki.pruefe(set(gruppen)==set(train)|set(val)|set(test), 'Jede Datengruppe genau einer Rolle zuordnen.')
+    if profil == 'basis':
+        for g in list(train)+list(val)+list(test):
+            for c in range(2):
+                ki.pruefe(np.sum((gruppen==g)&(y==c)) == 8,
+                          f'{g}/{klassen[c]}: im Pflichtprojekt genau 8 verschiedene Fotos verwenden.')
     checksum=hashlib.sha256(json.dumps(records,sort_keys=True).encode()).hexdigest()
     for a in [X,y,gruppen]:a.flags.writeable=False
     d=ki.Daten(X,y,gruppen,[r['id'] for r in records],list(klassen),tuple(train),tuple(val),tuple(test),
@@ -85,3 +101,63 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
     print('Gruppe | '+' | '.join(klassen))
     for g in list(train)+list(val):print(g,'|',' | '.join(str(int(np.sum((gruppen==g)&(y==c)))) for c in range(len(klassen))))
     return d
+
+
+def projekt_laden(modus='UEBUNG', klassen=('Kreis','Dreieck'), dateien=(), upload=None):
+    """80 Fotos: zwei Klassen, fünf unabhängige Gruppen, acht Bilder je Klasse/Gruppe."""
+    return daten_laden(modus,klassen,train=('T1','T2'),val=('V1',),test=('P1','P2'),
+                       dateien=dateien,upload=upload,profil='basis')
+
+
+def vergleichen(daten, wiederholen=False):
+    """Gleiche Bildzahl: A ein Exemplar, B zwei Exemplare pro Klasse."""
+    ki.pruefe(len(daten.klassen)==2, 'Pflichtvergleich mit genau zwei Klassen.')
+    return ki.experiment_starten(daten,weg='vielfalt',bilder_pro_klasse=8,
+        wenige_personen=daten.train_personen[:1],neuronen=16,epochen=60,
+        seeds=(11,22,33) if wiederholen else (11,))
+
+
+def vergleich_zeigen(exp):
+    import matplotlib.pyplot as plt
+    runs=exp['laeufe'];n=len(exp['einstellungen']['seeds'])
+    fig,ax=plt.subplots(figsize=(7,4))
+    for i,name in enumerate(('A','B')):
+        vals=[r['val']*100 for r in runs if r['variante']==name]
+        ax.bar(i,np.mean(vals),color=('#176c63','#be572b')[i],width=.55)
+        if n>1:ax.scatter(np.full(n,i),vals,c='black',zorder=3)
+        ax.text(i,np.mean(vals)+3,f'{np.mean(vals):.1f} %',ha='center')
+    ax.set(xticks=[0,1],xticklabels=['A: ein Exemplar','B: zwei Exemplare'],ylim=(0,110),
+           ylabel='Richtige Vorhersagen (%)',title=f'Validierung · {len(exp["daten"].val)} Bilder · '+('ein Lauf' if n==1 else 'Mittelwert und einzelne Läufe'))
+    ax.axhline(50,ls=':',c='#52656a');ax.text(.5,52,'Immer dieselbe Klasse: 50 %',ha='center',fontsize=9)
+    plt.tight_layout();plt.show()
+    print('Beide Varianten: 8 Trainingsbilder pro Klasse, dasselbe Netz und dieselben Einstellungen.')
+    print('A: 8 Fotos aus T1. B: je 4 aus T1 und T2. Validierung: nur V1.')
+    print('Ein Lauf und eine Validierungsgruppe: eine Beobachtung, kein Beweis allgemeiner Überlegenheit.')
+
+
+def beispiele(exp, variante='B', test=False):
+    """Maximal drei Fehler, ansonsten richtige Beispiele ausdrücklich als solche."""
+    import matplotlib.pyplot as plt
+    d=exp['daten']
+    if test:
+        ki.pruefe(exp['test'] is not None, 'Zuerst die Auswahl begründen und den Abschlusstest freigeben.')
+        ki.pruefe(variante==exp['test']['variante'], 'Nach Testeinsicht nur die festgelegte Variante betrachten.')
+    runs=[r for r in exp['laeufe'] if r['variante']==variante]
+    ki.pruefe(bool(runs),'Variante A oder B wählen.')
+    ids=d.test if test else d.val;pred=runs[0]['netz'].predict(d.X[ids])
+    wrong=np.flatnonzero(pred!=d.y[ids]);right=np.flatnonzero(pred==d.y[ids])
+    chosen=np.r_[wrong[:3],right[:max(0,3-len(wrong))]]
+    fig,axes=plt.subplots(1,len(chosen),figsize=(8,3),squeeze=False)
+    for ax,j in zip(axes[0],chosen):
+        ki._bild_zeigen(ax,d,ids[j]);ax.axis('off')
+        ax.set_title(f'{"Fehler" if pred[j]!=d.y[ids[j]] else "Richtig"}\nBild: {d.klassen[d.y[ids[j]]]}\nNetz: {d.klassen[pred[j]]}',fontsize=10)
+    fig.suptitle(('Abschlusstest' if test else 'Validierung')+f' · Variante {variante} · erster festgelegter Lauf')
+    plt.tight_layout();plt.show()
+    print(f'{len(wrong)} Fehlvorhersagen von {len(ids)} Bildern. Gezeigt: zuerst Fehler, sonst richtige Beispiele.')
+    print('Falls keine Fehler auftreten: Grenzen benennen, keine Fehler erfinden.')
+
+
+def projekt_test(exp, variante='B', begruendung='', freigabe=False):
+    result=ki.abschlusstest(exp,variante,begruendung,freigabe)
+    if result is not None:beispiele(exp,variante,test=True)
+    return result

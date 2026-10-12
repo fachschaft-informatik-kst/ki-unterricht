@@ -12,3 +12,5 @@ Inhalte basieren auf den drei Markdown-Unterlagen unter `content/ki_projekt/`. T
 Browserprüfung: `npm install --no-save playwright`, `npx playwright install chromium`, danach `node tests/check_projekt_page.cjs`. Alternativ mit installiertem `playwright-core` und `CHROMIUM_PATH` auf eine lokale Chromium-Datei. Der Test verwendet einen lokalen HTTP-Server, prüft Navigation, Filter, Fortschritt, Export/Import, Mobilansicht und Darstellung ohne JavaScript. Screenshots liegen im temporären Verzeichnis, das der Test ausgibt.
 
 Die Navigation zeigt jeweils einen Bereich. Ohne JavaScript und beim Drucken bleiben alle Bereiche verfügbar. Das Fachgespräch findet im Tandem statt.
+
+Pflichtprofil ab Version 4: zwei Klassen, 80 Fotos (T1/T2/V1/P1/P2, acht je Klasse/Gruppe), A ein vs. B zwei Exemplare bei acht Trainingsbildern je Klasse, ein Startwert. Fünf Reflexionen im Journal; sechs organisatorische Schritte auf der Seite.

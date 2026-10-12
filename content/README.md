@@ -1,18 +1,13 @@
-# Informatik · Machine Learning
+# KI-Unterricht · 4. Gymi
 
-## KI-Tandemprojekt
+**[Hier starten](00_Start.ipynb)** – alle Pflichtnotebooks in der Unterrichtsreihenfolge.
 
-**[Zur interaktiven Projektseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)** – Ablauf, Themenwahl, Bewertung, Kompetenzraster und Abgabecheckliste.
+1. [Lernarten: Memory und NIM](lernarten.ipynb)
+2. [Ein Perzeptron](perzeptron_und_neuronale_netze.ipynb)
+3. [Mehrschichtige Netze](mehrschichtige_netze.ipynb)
+4. [Daten fair aufteilen](daten_training.ipynb)
+5. [Tandemprojekt](ki_projekt/00_Start.ipynb)
 
-Alle Projektmaterialien liegen im Ordner **ki_projekt**.
+[Projektseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/) · [Freiwillig: Ziffern erkennen](klassifikation_ziffern.ipynb)
 
-**[Projekt starten](ki_projekt/00_Start.ipynb)** – mit Auftrag, Ideenpool, Lernlabor und Projektjournal.
-
-## Unterrichtsnotebooks
-
-- [Lernarten](lernarten.ipynb)
-- [Lineare Regression](lineare_regression.ipynb)
-- [Logistische Regression](logistic_regression.ipynb)
-- [Perzeptron und neuronale Netze](perzeptron_und_neuronale_netze.ipynb)
-- [Ziffernklassifikation](klassifikation_ziffern.ipynb)
-- [Daten und Training](daten_training.ipynb)
+Regression liegt im Ordner `vertiefung` und gehört nicht zum Pflichtweg.

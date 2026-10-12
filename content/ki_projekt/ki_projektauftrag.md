@@ -1,75 +1,59 @@
-# KI-Tandemprojekt: Was hat unser Netz gelernt?
+# KI-Projekt im Tandem
 
-**Informatik · 4. Gymiklasse · Tandemarbeit · Abgabe und Fachgespräch im Tandem**
+**Zwei Bildklassen · ein Vergleich · fünf Reflexionen · gemeinsames Fachgespräch**
 
-## Ziel und Produkt
+> Helfen vielfältigere Trainingsbilder beim Erkennen neuer Gegenstände oder Personen?
 
-Entwickeln Sie im Tandem eine Bildklassifikation für einen selbst gewählten Anwendungsfall. Wählen Sie zwei bis vier Klassen aus dem [Ideenpool mit zwölf Themen](ki_ideenpool.md) oder schlagen Sie ein eigenes Thema vor. Sammeln Sie eigene Fotos, trainieren Sie ein kleines neuronales Netz und untersuchen Sie eine Veränderung kontrolliert. Beurteilen Sie die Erkennung neuer Gegenstände oder Personen.
+## Auftrag
 
-Die Bildaufbereitung ist vorbereitet: Ein eingefrorenes, vortrainiertes MobileNet liefert 1280 Bildmerkmale. Darauf trainieren Sie Ihr eigenes kleines Netz. Ihre Eigenleistung besteht aus Fragestellung, Datenplan, begründetem Versuch, Auswertung und kritischem Urteil. Eine hohe Trefferquote allein führt nicht zu einer besseren Bewertung.
+Wählen Sie eine Anwendung aus dem Ideenpool und genau zwei Klassen. Sammeln Sie 80 Fotos gemäss Datenplan: fünf unabhängige Gruppen, acht Fotos je Klasse und Gruppe.
 
-## Materialien und Reihenfolge
+Das vortrainierte Bildmodell liefert feste Merkmale. Sie trainieren darauf ein eigenes kleines neuronales Netz. Sie untersuchen Daten und Ergebnisse; Sie müssen den Hilfscode nicht selbst programmieren.
 
-1. **[Lernlabor](ki_lernlabor.ipynb):** Im Unterricht den Ablauf an ausdrücklich synthetischen Demodaten kennenlernen (ca. 20–30 Minuten).
-2. **Fotostudio:** Über die Downloadzelle im Projektjournal herunterladen, lokal öffnen und eigene JPG/PNG-Bilder verarbeiten. [Anleitung zur Datensammlung](ki_fotodaten.md).
-3. **[Projektjournal](ki_tandemprojekt.ipynb):** Während der Arbeit ausfüllen; es ist Ihre Dokumentation und Abgabe.
-
-Die Dateien `ki_projekt_tools.py`, `ki_foto_tools.py`, `fotostudio.html`, `fotostudio_core.js` und `foto_uebungsdaten.json` bleiben neben dem Fotojournal. In der JupyterLite-Umgebung werden sie zusammen mit den Materialien bereitgestellt. Eingeklappte Startzellen laden die vorhandenen Pyodide-Pakete. Kein zusätzlicher Server oder ML-Account nötig.
-
-## Sechs Projektphasen
-
-| Phase | Ihre Aufgabe | Kontrollpunkt |
+| Variante A | Variante B | Gleich bleibt |
 |---|---|---|
-| 1. Anwendung | Klassen, Einsatz und Fragestellung wählen | Ist die Frage konkret und prüfbar? |
-| 2. Daten | Aufnahmeregeln festhalten, Daten prüfen, Objekt-/Personengruppen vorab aufteilen | Lehrperson prüft Datenplan und Aufteilung |
-| 3. Ausgangsmodell | Vorgegebenes Netz trainieren, Vorhersagen und Fehler untersuchen | Mindestens zwei konkrete Beobachtungen |
-| 4. Untersuchung | Einen Weg wählen, Vermutung festhalten und A/B vergleichen | Versuchsplan **vor** dem Training festhalten |
-| 5. Abschlusstest | Modellwahl anhand der Validierung begründen, dann Test freigeben | Lehrperson bestätigt die Auswahl |
-| 6. Urteil | Frage beantworten, Grenzen und nächste Schritte benennen | Aussagen mit Ergebnissen belegen |
+| Ein Exemplar je Klasse, acht Fotos aus T1 | Zwei Exemplare je Klasse, je vier Fotos aus T1 und T2 | Acht Bilder je Klasse, 16 Neuronen, 60 Epochen, Startwert 11, Validierungsbilder |
 
-Jede Phase folgt dem Muster **Frage → Vermutung → Experiment → Beleg → Schlussfolgerung**. Füllen Sie die Felder vor beziehungsweise nach dem jeweiligen Versuch aus, nicht erst rückblickend am Ende.
+V1 dient der Auswahl. Erst nach der begründeten Wahl wird auf P1/P2 getestet. Danach nichts mehr optimieren. Die technische Sperre unterstützt diese Arbeitsregel; sie ist kein Zugriffsschutz.
 
-## Wählen Sie eine Untersuchung
+## Fünf Reflexionen im Journal
 
-| Weg | Frage | Unterschied zwischen A und B | Konstant halten |
-|---|---|---|---|
-| `menge` | Helfen mehr Trainingsbilder? | 12 bzw. 48 Bilder pro Klasse | Gruppenpool, Netz, Trainingseinstellungen, Validierungsbilder |
-| `vielfalt` | Helfen mehr verschiedene Exemplare / Personen? | Zwei bzw. vier Trainingsgruppen | 24 Bilder pro Klasse, Netz, Trainingseinstellungen, Validierungsbilder |
-| `netz` | Hilft ein grösseres Netz? | 8 bzw. 48 versteckte Neuronen | Exakt gleiche Trainingsbilder, Trainingseinstellungen, Validierungsbilder |
+1. Anwendung, Klassenregeln und Vermutung.
+2. Gruppenplan, Quellen, Aufnahmebedingungen und Datenprobleme.
+3. A/B-Ergebnisse, konkrete Beispiele, alternative Erklärung und Modellwahl.
+4. Abschlusstest, drei Beispiele, Nutzen und Grenzen. Ohne Fehler richtige Beispiele analysieren, keine Fehler erfinden.
+5. Fazit, nächster Versuch, Arbeitsteilung und verwendete Hilfen.
 
-Ein sauber dokumentierter Weg ist Pflicht. Die Einstellungen sind Ausgangswerte und dürfen **vor dem Vergleich** begründet angepasst werden. Drei vorher festgelegte Läufe zeigen Schwankungen; berichten Sie alle, nicht nur den besten. Ein optionaler weiterer Versuch muss getrennt dokumentiert und vor dem Abschlusstest durchgeführt werden.
+Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Wiederholungen mit drei festgelegten Startwerten sind freiwillige Vertiefung vor Testeinsicht; alle Ergebnisse berichten.
 
-## Datensammlung vor Projektbeginn
+## Termine
 
-Reichen Sie vor der Sammlung einen kurzen Steckbrief mit Anwendung, Klassen, Forschungsfrage und Probebildern ein. Standard sind eigene Fotos. Internetbilder sind eine begründete Ausnahme; Quellen und Nutzungsbedingungen dokumentieren, Duplikate vermeiden.
+| Datum | Ziel |
+|---|---|
+| 08.12.2026 | Vorschau, Tandem, zwei Klassen und Datenplan festlegen |
+| bis 15.12.2026 | Fotos sammeln |
+| 15.12.2026 | Einführung, Import und erster Vergleich |
+| 05.01.2027 | Fairer Vergleich und Interpretation |
+| 12.01.2027 | Modellwahl, Abschlusstest, Journal abschliessen |
+| 19.01.2027 | Abgabe **vor Unterrichtsbeginn**, Fachgespräch im Tandem |
 
-Planen Sie acht Datengruppen mit je zwölf Bildern pro Klasse (192–384 Bilder). Bei Gegenständen bezeichnet eine Gruppe je ein eigenständiges Exemplar pro Klasse, bei Gesten eine Person. Vier Gruppen trainieren, zwei validieren, zwei testen. Ein Gegenstand oder eine Person darf nicht mehreren Gruppen zugeordnet werden. Mehrere Fotos derselben Flasche ersetzen keine unterschiedlichen Flaschen.
+Die Lehrperson legt Abgabekanal und Gesprächsplan fest. Je nach Zahl der Tandems werden Gespräche auf weitere Termine verteilt; für alle gilt derselbe Abgabestand.
 
-[Die Datenanleitung](ki_fotodaten.md) erklärt Gruppen, Bildimport, Speicherung und typische Fehler. Das Fotostudio vereinheitlicht die Bildgrösse automatisch. Kontrollieren Sie die Vorschau. Originalfotos und JSON-Dateien regelmässig sichern.
+## Bewertung
 
-**Übung und Ersatz:** `UEBUNG` im Journal lädt synthetische geometrische Formen mit echten MobileNet-Merkmalen. Bei vereinbarten Ersatzprojekten `ERSATZ` verwenden, die Frage auf diese Formen begrenzen und die Herkunft offenlegen. Das ist keine empirische Untersuchung echter Fotos. Die Lehrperson bewertet die Datenkritik anstelle einer nicht erbrachten Fotosammlung anhand derselben transparenten Kriterien.
-
-## Zeitplan
-
-| Termin | Schwerpunkt | Ergebnis |
+| Bereich | Anteil | Nachweis |
 |---|---|---|
-| 08.12.2026 | Klassen und Aufnahmeregeln festlegen; Sammlung organisieren | Eigene Sammlung bis 15.12. |
-| 15.12.2026 | Anwendung, Datenprüfung, Ausgangsmodell | Funktionierender erster Versuch |
-| 05.01.2027 | Kontrollierter Vergleich | Ergebnisse und Interpretation |
-| 12.01.2027 | Abschlusstest, Urteil, Abgabe vorbereiten | Vollständiges Journal und gesicherte Dateien |
-| 19.01.2027 | Abgabe und Fachgespräch laut Terminplan der Lehrperson | Individuelles Verständnis zeigen |
+| Frage und Daten | 15 % | Klare Klassen, begründete Auswahl und saubere Gruppentrennung |
+| Experiment | 20 % | Vermutung, fairer Vergleich und nachvollziehbare Einstellungen |
+| Auswertung | 25 % | Richtige Interpretation, konkrete Beispiele und ehrliche Grenzen |
+| Fachgespräch im Tandem | 40 % | Beide erklären das gesamte Projekt und übertragen ihr Wissen |
 
-Für grössere Klassen müssen Fachgespräche über mehrere Termine verteilt werden. Die Lehrperson legt einen für alle gleichen Abgabestand vor Beginn der bewerteten Gespräche fest.
+Die ersten drei Bereiche sind gemeinsame Leistungen. Im gemeinsamen Gespräch bleiben die Beiträge beider Personen erkennbar. Punkte und Notenschlüssel legt die Lehrperson fest; keine automatische Notenformel.
 
-## Abgabe und Bewertung
+## Abgabe
 
-Abzugeben sind das **ausgefüllte Projektjournal mit Ausgaben**, die Originalfotos, eine Gruppenliste mit Quellen, die Fotostudio-JSON-Daten und das exportierte Versuchsprotokoll. Keine zusätzliche lange Dokumentation erforderlich. Beide Personen sollen das ganze Projekt erklären können. Verwendete Quellen, KI-Hilfen und die Aufgabenteilung im Journal angeben.
+- Journal mit Ausgaben und fünf ausgefüllten Reflexionen.
+- Originalfotos, Fotostudio-JSON, Gruppen-/Quellenangaben.
+- Exportiertes Versuchsprotokoll.
 
-| Bereich | Anteil | Gute Leistung zeigt sich durch … |
-|---|---:|---|
-| Fragestellung und Daten | 15 % | klare Anwendung, sinnvolle Klassen, begründete Datenwahl und saubere Aufteilung |
-| Experiment | 20 % | prüfbare Vermutung, kontrollierter Vergleich, nachvollziehbare Einstellungen und alle Läufe |
-| Auswertung und Reflexion | 25 % | korrekte Interpretation, konkrete Fehleranalyse und ehrliche Grenzen |
-| Fachgespräch im Tandem | 40 % | eigene Erklärungen und Übertragung auf neue Beispiele |
-
-Die ersten drei Bereiche sind Tandemleistungen. Das Fachgespräch findet gemeinsam im Tandem statt. Beide erklären das gesamte Projekt; die individuellen Beiträge bleiben erkennbar. Auch eine nicht bestätigte Vermutung oder ein schwaches Modell kann bei sorgfältiger Untersuchung eine gute Leistung sein. Kleine Stichproben und wenige Objekt-/Personengruppen begrenzen Ihre Schlussfolgerungen. Nach dem Abschlusstest nicht weiter optimieren und denselben Test erneut als unabhängig ausgeben.
+Kein zusätzlicher langer Bericht. Dateien ausserhalb des Browsers sichern. Bei vereinbarten Ersatzdaten Herkunft und Einschränkungen offenlegen; die Lehrperson legt den passenden Nachweis zur Datenarbeit fest.
