@@ -17,7 +17,7 @@ Ein Tandem arbeitet gemeinsam an einem Gerät; es gibt keine gleichzeitige Onlin
 
 | Notebook | Zweck |
 |---|---|
-| `lernarten.ipynb` | Memory-Aufträge und spielbares NIM; Belohnungslernen ohne Banditen |
+| Kursseite «Wie lernt KI?» | Memory-Aufträge und Link zur NIM-Lernstrecke bei inf-schule.de |
 | `perzeptron_und_neuronale_netze.ipynb` | Gewicht, Bias, ein Lernschritt, Grenze bei XOR |
 | `mehrschichtige_netze.ipynb` | XOR-Zwischenschicht, Lernen qualitativ, Brücke zu Bildmerkmalen |
 | `daten_training.ipynb` | Gruppentrennung, Datenlecks und vorsichtige Interpretation |
@@ -36,7 +36,7 @@ A erhält acht Bilder je Klasse aus T1, B je vier aus T1/T2. Gleich bleiben Bild
 
 Bilder werden im Fotostudio einheitlich als 224 × 224 RGB verarbeitet. Das eingefrorene MobileNet liefert 1280 Merkmale; das eigene Netz wird lokal in Python/Pyodide trainiert. `UEBUNG` nimmt 80 Formen aus dem mitgelieferten synthetischen Datensatz. `ERSATZ` nach Absprache, mit offener Herkunft.
 
-Abgabe vor Unterrichtsbeginn am 19.01.2027: Journal mit Ausgaben, Fotos/JSON und Protokoll. Fachgespräch gemeinsam im Tandem. Gewichtung: 15 % Daten, 20 % Experiment, 25 % Auswertung, 40 % Gespräch.
+Abgabe vor Unterrichtsbeginn am 19.01.2027: Journal mit Ausgaben, Fotos/JSON und Protokoll. Fachgespräch gemeinsam im Tandem. Zehn Kompetenzen mit je 0–3 Punkten: 18 Punkte für die Abgabe, 12 für das Gespräch. Note = 1 + 5 × Punkte / 30, auf Viertelnoten gerundet. [Vollständiges Bewertungsraster](worksheets/md/KI_Bewertungsraster.md). Die eigene Seite «Lernziele» zeigt die Ziele aller Unterrichtsblöcke.
 
 ## Vertiefung
 
@@ -54,7 +54,7 @@ python scripts/copy_portal.py dist
 
 Der Pages-Workflow verwendet dieselbe Reihenfolge. Die Startseite leitet ins Kursportal; `/lab/` bleibt für Lehrpersonen erreichbar. Die Kopie enthält Fotostudio und Hilfsdateien für vollständige Abgabepakete. Generierte Portalnotebooks werden nicht separat gepflegt.
 
-Prüfungen: `python tests/check_ki_basis.py`, `python tests/check_ki_fotos.py`, `python tests/check_ki_projekt.py`, `node tests/check_autostart.cjs` und `node tests/check_archive.cjs`. Browserprüfung: `PORTAL_SITE=dist CHROMIUM_PATH=/pfad/zu/chromium node tests/check_portal.cjs` mit installiertem `playwright-core`; `CHECK_NOTEBOOK=1` prüft zusätzlich Start, Export und Wiederherstellung eines echten Pyodide-Notebooks. `CHECK_TRAINING=1` ergänzt einen echten Trainingslauf samt manueller Testfreigabe und einen Wechsel zum NIM-Experiment. `CHROMIUM_ARGS` nimmt bei Bedarf eine JSON-Liste an.
+Prüfungen: `python tests/check_ki_basis.py`, `python tests/check_ki_fotos.py`, `python tests/check_ki_projekt.py`, `node tests/check_autostart.cjs` und `node tests/check_archive.cjs`. Browserprüfung: `PORTAL_SITE=dist CHROMIUM_PATH=/pfad/zu/chromium node tests/check_portal.cjs` mit installiertem `playwright-core`; `CHECK_NOTEBOOK=1` prüft zusätzlich Start, Export und Wiederherstellung eines echten Pyodide-Notebooks. `CHECK_TRAINING=1` ergänzt einen echten Trainingslauf samt manueller Testfreigabe und einen Wechsel zum Perzeptron-Experiment. `CHROMIUM_ARGS` nimmt bei Bedarf eine JSON-Liste an.
 
 Pyodide-Prüfung: `node tests/check_pyodide.cjs` (Pyodide 0.27.0; siehe Testskript). Diese führt Originale und eingebettete Fassungen aus. Regelmässig Zwischenstände ausserhalb des Browsers herunterladen: Browserdaten sind keine dauerhafte Sicherung.
 

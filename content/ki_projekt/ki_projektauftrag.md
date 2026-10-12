@@ -41,14 +41,11 @@ Die Lehrperson legt Abgabekanal und Gesprächsplan fest. Je nach Zahl der Tandem
 
 ## Bewertung
 
-| Bereich | Anteil | Nachweis |
-|---|---|---|
-| Frage und Daten | 15 % | Klare Klassen, begründete Auswahl und saubere Gruppentrennung |
-| Experiment | 20 % | Vermutung, fairer Vergleich und nachvollziehbare Einstellungen |
-| Auswertung | 25 % | Richtige Interpretation, konkrete Beispiele und ehrliche Grenzen |
-| Fachgespräch im Tandem | 40 % | Beide erklären das gesamte Projekt und übertragen ihr Wissen |
+Zehn Kompetenzen mit je **0–3 Punkten**, maximal **30 Punkte**. K1–K6 bewerten die Abgabe (18 Punkte), K7–K10 das gemeinsame Fachgespräch (12 Punkte). Jede Kompetenz zählt gleich; keine zusätzliche Gewichtung.
 
-Die ersten drei Bereiche sind gemeinsame Leistungen. Im gemeinsamen Gespräch bleiben die Beiträge beider Personen erkennbar. Punkte und Notenschlüssel legt die Lehrperson fest; keine automatische Notenformel.
+**Note = 1 + 5 × Punktesumme / 30**, auf Viertelnoten gerundet. Beispiele: 18 Punkte → 4,0; 24 → 5,0; 30 → 6,0. Es gibt eine gemeinsame Tandemnote; beide erklären das ganze Projekt.
+
+Die einzelnen Leistungsstufen stehen im [Bewertungsraster](../../worksheets/md/KI_Bewertungsraster.md) und auf der [Kursseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/#bewertung). Die dortige Punkteauswahl dient nur der Selbsteinschätzung.
 
 ## Abgabe
 
