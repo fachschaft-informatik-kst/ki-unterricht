@@ -20,7 +20,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from IPython.display import HTML, display
 import ipywidgets as widgets
 
-VERSION = '3.0'
+VERSION = '4.0'
 
 
 def pruefe(bedingung, meldung):
@@ -190,10 +190,10 @@ def experiment_starten(d, weg='vielfalt', bilder_pro_klasse=24, neuronen=24,
     pruefe(not d.test_verwendet, 'Abschlusstest bereits angesehen. Nicht mit denselben Testdaten weiter optimieren.')
     pruefe(weg in ['menge', 'vielfalt', 'netz', 'ausgang'], 'Weg: menge, vielfalt oder netz.')
     pruefe(1 <= neuronen <= 128 and 5 <= epochen <= 300 and 0 < lernrate <= .1, 'Netz-/Trainingseinstellungen ausserhalb des vorgesehenen Bereichs.')
-    pruefe(len(seeds) >= (1 if weg == 'ausgang' else 3) and len(set(seeds)) == len(seeds), 'Mindestens drei verschiedene, vorher festgelegte Seeds verwenden.')
+    pruefe(len(seeds) >= 1 and len(set(seeds)) == len(seeds), 'Mindestens einen vorher festgelegten Seed verwenden; Wiederholungen brauchen verschiedene Seeds.')
     few = tuple(wenige_personen or d.train_personen[:2])
     if weg == 'vielfalt':
-        pruefe(len(set(few)) == len(few) and len(few) >= 2 and set(few) < set(d.train_personen), 'Wenige Datengruppen: mindestens zwei, echte Teilmenge der Trainingsgruppen.')
+        pruefe(len(set(few)) == len(few) and len(few) >= 1 and set(few) < set(d.train_personen), 'Wenige Datengruppen: mindestens eine, echte Teilmenge der Trainingsgruppen.')
     if weg == 'menge':
         pruefe(len(mengen) == 2 and 0 < mengen[0] < mengen[1], 'Zwei aufsteigende Bildmengen wählen.')
         variants = [('A', d.train_personen, mengen[0], neuronen), ('B', d.train_personen, mengen[1], neuronen)]
@@ -292,7 +292,10 @@ def abschlusstest(exp, variante='B', begruendung='', freigabe=False):
     exp['test']=result;d.test_verwendet=True
     print(d.modus,'· Abschlusstest:',len(d.test),'Bilder von',len(d.test_personen),'Datengruppen')
     for r,s in zip(runs,scores):print(f'Lauf {r["seed"]}: {s:.1%}')
-    print(f'Mittelwert: {np.mean(scores):.1%}; Spanne: {min(scores):.1%}–{max(scores):.1%}')
+    if len(scores)>1:
+        print(f'Mittelwert: {np.mean(scores):.1%}; Spanne: {min(scores):.1%}–{max(scores):.1%}')
+    else:
+        print('Ein festgelegter Lauf; keine Aussage über die Schwankung zwischen Startwerten.')
     fig,ax=plt.subplots(figsize=(6,5))
     pred=runs[0]['netz'].predict(d.X[d.test])
     ConfusionMatrixDisplay(confusion_matrix(d.y[d.test],pred,labels=np.arange(len(d.klassen))),display_labels=d.klassen).plot(ax=ax,cmap='Blues',colorbar=False)
