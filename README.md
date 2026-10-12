@@ -19,6 +19,8 @@ The advantage of the browser version is that no local setup is required. However
 
 ## Tandemprojekt: Was hat unser Netz gelernt?
 
+**[Zur interaktiven Projektseite](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/projekt/)** – Ablauf, Themenwahl, Bewertung, Kompetenzraster und Abgabecheckliste.
+
 Tandems wählen eine Fotoanwendung mit zwei bis vier Klassen, sammeln eigene Bilder und trainieren ein kleines neuronales Netz auf festen MobileNet-Merkmalen. Abgabe: ausgefülltes Journal mit Ausgaben, Daten und individuelles Fachgespräch.
 
 | Material | Zweck |
