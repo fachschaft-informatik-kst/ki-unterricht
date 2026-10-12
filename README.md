@@ -2,9 +2,16 @@
 
 Ein kompakter KI-Block für die 4. Gymiklasse: erleben, gezielt experimentieren und erklären.
 
-- **[JupyterLite starten](https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html?path=00_Start.ipynb)**
-- **[Projektseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**
+- **[Kursportal öffnen](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**
 - **[Lehrpersonen: Ablauf und didaktische Hinweise](worksheets/md/KI_Planung.md)**
+
+## Ein Einstieg für die ganze Klasse
+
+Das Kursportal bündelt Aufgaben, kurze Erklärungen, eingebettete Python-Experimente, Fotostudio, Journal und Bewertung. Lernende benötigen keine Dateinavigation. Die folgenden Originalnotebooks bleiben als bearbeitbare Quellen für die Lehrperson erhalten; `scripts/build_portal_notebooks.py` erzeugt daraus die reduzierten eingebetteten Fassungen.
+
+Journal und Unterrichtsantworten werden auf der Webseite geschrieben und lokal gespeichert. Unter **Sichern & abgeben** entsteht eine ZIP-Datei mit lesbarem `Journal.html`, Versuchscode samt gespeicherten Ausgaben, verfügbarem Versuchsprotokoll und hinzugefügten Datendateien. Ein Zwischenstand lässt sich wieder importieren. Der Download reicht nichts automatisch ein.
+
+Ein Tandem arbeitet gemeinsam an einem Gerät; es gibt keine gleichzeitige Online-Zusammenarbeit. Beim Gerätewechsel eine ZIP-Sicherung mitnehmen. Foto-Upload im Notebook und Datendateien der Abgabeliste sind getrennt: die Fotostudio-JSON zusätzlich in die Abgabeliste aufnehmen. Nach einem Reload oder Import müssen Daten erneut ins laufende Python geladen werden. Training und Abschlusstest bleiben bewusst manuell.
 
 ## Pflichtweg
 
@@ -37,11 +44,19 @@ Abgabe vor Unterrichtsbeginn am 19.01.2027: Journal mit Ausgaben, Fotos/JSON und
 
 ## Technik und Prüfung
 
-Vor dem JupyterLite-Build einmal `npm ci --prefix extensions/ki-autostart` und `npm run build --prefix extensions/ki-autostart` ausführen. Danach baut `jupyter lite build --contents content --output-dir dist` den Browserunterricht. Der Pages-Workflow kopiert zusätzlich `projekt/index.html` nach `dist/projekt/`. Dateien in ihren Ordnern zusammen belassen. Fotostudio als vollständige HTML-Datei über das Journal herunterladen; bei direktem Download gehört `fotostudio_core.js` daneben.
+```sh
+npm ci --prefix extensions/ki-autostart
+npm run build --prefix extensions/ki-autostart
+python scripts/build_portal_notebooks.py
+jupyter lite build --contents content --output-dir dist
+python scripts/copy_portal.py dist
+```
 
-Prüfungen: `python tests/check_ki_basis.py`, `python tests/check_ki_fotos.py`, `python tests/check_ki_projekt.py`; Website: `node tests/check_projekt_page.cjs` (Playwright). Pyodide-Prüfung: `node tests/check_pyodide.cjs` (Pyodide 0.27.0; siehe Testskript). Notebooks lassen sich mit `python tests/execute_notebooks.py` ausführen; Ausgabeordner wird im Skript beschrieben.
+Der Pages-Workflow verwendet dieselbe Reihenfolge. Die Startseite leitet ins Kursportal; `/lab/` bleibt für Lehrpersonen erreichbar. Die Kopie enthält Fotostudio und Hilfsdateien für vollständige Abgabepakete. Generierte Portalnotebooks werden nicht separat gepflegt.
 
-Persönliche Seitenstände, Fotostudio-Sammlungen und JupyterLite-Dateien sind getrennt. Regelmässig ausserhalb des Browsers herunterladen. Es gibt keine automatische Abgabe.
+Prüfungen: `python tests/check_ki_basis.py`, `python tests/check_ki_fotos.py`, `python tests/check_ki_projekt.py`, `node tests/check_autostart.cjs` und `node tests/check_archive.cjs`. Browserprüfung: `PORTAL_SITE=dist CHROMIUM_PATH=/pfad/zu/chromium node tests/check_portal.cjs` mit installiertem `playwright-core`; `CHECK_NOTEBOOK=1` prüft zusätzlich Start, Export und Wiederherstellung eines echten Pyodide-Notebooks. `CHECK_TRAINING=1` ergänzt einen echten Trainingslauf samt manueller Testfreigabe und einen Wechsel zum NIM-Experiment. `CHROMIUM_ARGS` nimmt bei Bedarf eine JSON-Liste an.
+
+Pyodide-Prüfung: `node tests/check_pyodide.cjs` (Pyodide 0.27.0; siehe Testskript). Diese führt Originale und eingebettete Fassungen aus. Regelmässig Zwischenstände ausserhalb des Browsers herunterladen: Browserdaten sind keine dauerhafte Sicherung.
 
 ### Automatischer Notebookstart
 

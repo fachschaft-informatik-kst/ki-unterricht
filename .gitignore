@@ -123,3 +123,8 @@ _output
 # Built locally and in CI
 labextensions/
 node_modules/
+
+# Derived, code-focused portal notebooks
+content/portal/
+
+/extensions/ki-autostart/node_modules

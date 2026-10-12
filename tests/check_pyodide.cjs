@@ -25,7 +25,7 @@ const root=path.resolve(__dirname,'..');
  copy(path.join(root,'content'),'/project/content');copy(path.join(root,'tests'),'/project/tests');
  await py.runPythonAsync("import sys,os,matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt; sys.path[:0]=['/project/content','/project/content/ki_projekt']; plt.show=lambda *a,**k: plt.close('all')");
  py.setStdout({batched:s=>{if(s.startsWith('PASS'))console.log(s);}});
- for(const name of ['lernarten.ipynb','perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','klassifikation_ziffern.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb']){
+ for(const name of ['lernarten.ipynb','perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','klassifikation_ziffern.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb'].flatMap(n=>[n,'portal/'+path.basename(n)])){
   await py.runPythonAsync(`os.chdir(${JSON.stringify('/project/content/'+path.dirname(name))})`);
   const ns=py.toPy({__name__:'__main__'});
   for(const c of JSON.parse(fs.readFileSync(path.join(root,'content',name))).cells)if(c.cell_type==='code')await py.runPythonAsync(Array.isArray(c.source)?c.source.join(''):c.source,{globals:ns});

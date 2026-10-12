@@ -29,13 +29,14 @@ jobs:
           npm ci --prefix extensions/ki-autostart
           npm run build --prefix extensions/ki-autostart
           node tests/check_autostart.cjs
+          node tests/check_archive.cjs
       - name: Check simplified teaching project
         run: python tests/check_ki_basis.py
       - name: Build the JupyterLite site
         run: |
+          python scripts/build_portal_notebooks.py
           jupyter lite build --contents content --output-dir dist
-          mkdir -p dist/projekt
-          cp projekt/index.html dist/projekt/index.html
+          python scripts/copy_portal.py dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

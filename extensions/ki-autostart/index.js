@@ -1,3 +1,4 @@
+import { setupEmbed } from './embed';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { CodeCell } from '@jupyterlab/cells';
 import { Widget } from '@lumino/widgets';
@@ -9,6 +10,7 @@ const allowed = new Set([
   'klassifikation_ziffern.ipynb', 'ki_projekt/ki_lernlabor.ipynb',
   'ki_projekt/ki_tandemprojekt.ipynb'
 ]);
+for (const path of [...allowed]) allowed.add('portal/' + path.split('/').pop());
 const tag = 'ki-autostart';
 const rememberedPathKey = 'kst-ki-last-notebook';
 
@@ -17,13 +19,15 @@ export default {
   autoStart: true,
   requires: [INotebookTracker],
   activate: (app, tracker) => {
+    const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, allowed) : null;
     const seen = new WeakSet();
     const initialize = async panel => {
       if (seen.has(panel)) return;
       seen.add(panel);
       await panel.context.ready;
       if (panel.isDisposed || !allowed.has(panel.context.path)) return;
-      try { sessionStorage.setItem(rememberedPathKey, panel.context.path); } catch {}
+      if (embed && panel.context.path !== embed.path) return;
+      try { if (!embed) sessionStorage.setItem(rememberedPathKey, panel.context.path); } catch {}
       panel.disposed.connect(() => {
         try {
           if (sessionStorage.getItem(rememberedPathKey) === panel.context.path) {
@@ -55,12 +59,14 @@ export default {
           }
         }
         status.node.textContent = '✓ Bereit';
+        embed?.initialized(panel, true);
         status.node.title = 'Startzellen ausgeführt. Nach einem manuellen Kernel-Neustart die Zellen erneut ausführen.';
       } catch (error) {
         if (panel.isDisposed) return;
         status.node.textContent = '⚠ Start fehlgeschlagen – erste Codezelle ausführen';
         status.node.title = String(error);
         console.error('KI notebook initialization:', error);
+        embed?.initialized(panel, false);
       }
     };
     tracker.widgetAdded.connect((_, panel) => { void initialize(panel); });
@@ -69,7 +75,7 @@ export default {
     // after normal workspace restoration; explicit links always take priority.
     void app.restored.then(async () => {
       try {
-        if (performance.getEntriesByType('navigation')[0]?.type !== 'reload') return;
+        if (embed || performance.getEntriesByType('navigation')[0]?.type !== 'reload') return;
         if (tracker.size || new URLSearchParams(location.search).has('path')) return;
         const path = sessionStorage.getItem(rememberedPathKey);
         if (allowed.has(path)) {

@@ -1,0 +1,68 @@
+// Build with scripts/copy_portal.py first. Set PORTAL_SITE, CHROMIUM_PATH,
+// optional CHROMIUM_ARGS (JSON). Requires playwright-core.
+const {chromium}=require('playwright-core'),{spawn}=require('node:child_process');
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+(async()=>{
+ const server=spawn('python',['-m','http.server','8765','--bind','127.0.0.1','--directory',process.env.PORTAL_SITE||path.resolve(__dirname,'../dist')],{stdio:'ignore'});
+ let browser;
+ try{
+  await new Promise(r=>setTimeout(r,600));
+  browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:JSON.parse(process.env.CHROMIUM_ARGS||'[]')});
+  const p=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());p.on('console',m=>{if(m.type()==='error')console.error('BROWSER',m.text());});
+  await p.goto('http://127.0.0.1:8765/projekt/');
+  assert.equal(await p.locator('.course-card').count(),7);assert.equal(await p.locator('.nav a').count(),8);
+  assert.equal(await p.locator('a[href*="/lab/"]').count(),0);
+  await p.screenshot({path:'/tmp/ki-portal-home.png',fullPage:true});
+  await p.locator('.nav a[href="#lernarten"]').click();await p.locator('#lernarten details').first().locator('summary').click();assert.equal(await p.locator('.memory-card').count(),6);
+  await p.locator('[data-answer="nim"]').fill('Mehr Training hilft gegen den Zufallsgegner.');
+  await p.locator('.sidebar-bottom a[href="#journal"]').click();
+  await p.locator('[data-journal="names"]').fill('Ada & Alan <script>alert(1)</script>');
+  await p.locator('[data-journal="class"]').fill('4f · Obst');
+  await p.locator('[data-journal="purpose"]').fill('Äpfel und Birnen unterscheiden.');
+  await p.reload();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.waitForFunction(()=>document.querySelector('[data-journal="names"]').value.includes('Ada'));
+  await p.screenshot({path:'/tmp/ki-portal-journal.png',fullPage:true});
+  await p.locator('a[href="#sicherung"]').first().click();
+  await p.locator('#attachments').setInputFiles([{name:'fotos.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"test"}')},{name:'äpfel.png',mimeType:'image/png',buffer:Buffer.from([137,80,78,71,13,10,26,10])}]);
+  await p.waitForFunction(()=>document.querySelectorAll('#attachment-list li').length===2);
+  let downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();const zip=await downloaded;await zip.saveAs('/tmp/ki-portal-backup.zip');
+  await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('[data-journal="names"]').fill('Changed');await p.locator('a[href="#sicherung"]').first().click();
+  await p.locator('#restore-package').setInputFiles('/tmp/ki-portal-backup.zip');await p.waitForFunction(()=>document.querySelector('#download-status').textContent.includes('Sicherung geladen'));
+  await p.locator('.sidebar-bottom a[href="#journal"]').click();assert((await p.locator('[data-journal="names"]').inputValue()).includes('Ada'));
+  await p.locator('.nav a[href="#lernarten"]').click();assert((await p.locator('[data-answer="nim"]').inputValue()).includes('Zufallsgegner'));
+  await p.locator('.nav a[href="#sprache"]').click();await p.locator('#language-train').click();await p.locator('#language-next').click();assert((await p.locator('#language-output').innerText()).startsWith('Die '));
+  await p.setViewportSize({width:390,height:844});await p.locator('.nav a[href="#start"]').click();assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await p.screenshot({path:'/tmp/ki-portal-mobile.png',fullPage:true});
+  assert.deepEqual(errors,[]);console.log('PASS portal navigation, persistence, attachments, ZIP download/import, language model, mobile and page errors');
+  if(process.env.CHECK_NOTEBOOK){
+   await p.setViewportSize({width:1440,height:1000});await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
+   await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:60000}).catch(async e=>{console.log('FRAME',await p.frameLocator('#project-frame').locator('body').innerText());console.log('ERRORS',errors);throw e;});
+   const f=p.frameLocator('#project-frame');assert.equal(await f.locator('.jp-SideBar:visible').count(),0);assert.equal(await f.locator('#jp-top-panel:visible').count(),0);assert.equal(await f.locator('#jp-left-stack:visible').count(),0);
+   assert(await f.locator('.jp-NotebookPanel').evaluate(e=>{const r=e.getBoundingClientRect();return r.left===0&&r.top===0&&Math.abs(r.width-innerWidth)<2;}));
+   await p.screenshot({path:'/tmp/ki-portal-embedded.png',fullPage:true});
+   await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();const file=await downloaded;await file.saveAs('/tmp/ki-portal-notebook.zip');
+   console.log('PASS embedded project initializes, hides file navigation and exports real notebook');
+   await p.reload();await p.locator('a[href="#sicherung"]').first().click();await p.locator('#restore-package').setInputFiles('/tmp/ki-portal-notebook.zip');await p.waitForFunction(()=>document.querySelector('#download-status').textContent.includes('Sicherung geladen'));
+   await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();await p.waitForFunction(()=>document.querySelector('#project-lab-status').textContent.includes('Sicherung geladen'),null,{timeout:65000}).catch(async e=>{console.log('RESTORE STATUS',await p.locator('#project-lab-status').innerText());console.log('RESTORE FRAME',await p.frameLocator('#project-frame').locator('body').innerText());throw e;});
+   assert.equal(await p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(3).locator('.jp-InputPrompt').innerText(),'[ ]:');
+   console.log('PASS imported notebook restored inside iframe without automatic training or test');
+   if(process.env.CHECK_TRAINING){
+    const cells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
+    assert.equal(await cells.nth(3).locator('.jp-InputPrompt').innerText(),'[ ]:');
+    for(let i=1;i<=5;i++){
+     const editor=cells.nth(i).locator('.cm-content');await editor.click();
+     if(i===5)await editor.fill("AUSGEWAEHLT = 'B'\nBEGRUENDUNG = 'B erreicht mit vielfältigeren Daten die bessere Validierung im Übungslauf.'\nTEST_FREIGEBEN = True\ntest = foto.projekt_test(experiment, AUSGEWAEHLT, BEGRUENDUNG, TEST_FREIGEBEN)");
+     await p.keyboard.press('Shift+Enter');
+     await p.waitForFunction(i=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[i].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text);},i,{timeout:60000});
+    }
+    await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-trained.zip');
+    console.log('PASS actual training, manual final test and result package');
+    await p.locator('.nav a[href="#lernarten"]').click();await p.locator('[data-lab="lernarten.ipynb"]').click();
+    await p.waitForFunction(()=>document.querySelector('#lesson-frame').dataset.ready==='yes',null,{timeout:60000});
+    assert((await p.frameLocator('#lesson-frame').locator('body').innerText()).includes('Hölzer'));
+    await p.locator('.sidebar-bottom a[href="#journal"]').click();assert.equal(await p.locator('#project-frame').count(),1);
+    assert((await cells.nth(5).innerText()).includes('Abschlusstest'));
+    console.log('PASS embedded NIM and project preservation during navigation');
+   }
+
+  }
+ }finally{if(browser)await browser.close();server.kill();}
+})().catch(e=>{console.error(e);process.exitCode=1;});
