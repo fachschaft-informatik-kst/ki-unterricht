@@ -1,0 +1,35 @@
+{
+  "name": "@kst/ki-autostart",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Automatic initialization of trusted KI teaching notebooks",
+  "main": "index.js",
+  "scripts": {
+    "build": "jupyter labextension build ."
+  },
+  "dependencies": {
+    "@jupyterlab/application": "4.3.4",
+    "@jupyterlab/apputils": "4.3.4",
+    "@jupyterlab/cells": "4.3.4",
+    "@jupyterlab/notebook": "4.3.4",
+    "@lumino/widgets": "^2.5.0"
+  },
+  "devDependencies": {
+    "@jupyterlab/builder": "~4.3.0",
+    "webpack": "5.97.1"
+  },
+  "jupyterlab": {
+    "extension": true,
+    "outputDir": "../../labextensions/@kst/ki-autostart",
+    "sharedPackages": {
+      "@jupyterlab/notebook": {
+        "requiredVersion": "^4.3.0",
+        "bundled": false
+      },
+      "@jupyterlab/cells": {
+        "requiredVersion": "^4.3.0",
+        "bundled": false
+      }
+    }
+  }
+}

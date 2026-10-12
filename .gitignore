@@ -119,3 +119,7 @@ _output
 .venv/
 
 .workspace/*.pdf
+
+# Built locally and in CI
+labextensions/
+node_modules/
