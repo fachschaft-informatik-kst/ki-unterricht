@@ -1,8 +1,10 @@
 """Copy the portal and its runtime assets into the completed JupyterLite build."""
 from pathlib import Path
 import shutil,sys
+from fix_pyodide_lock import fix_lock
 root=Path(__file__).resolve().parents[1]
 out=Path(sys.argv[1] if len(sys.argv)>1 else root/'dist')
+fix_lock(out)
 shutil.copytree(root/'projekt',out/'projekt',dirs_exist_ok=True)
 (out/'projekt/studio').mkdir(exist_ok=True)
 (out/'projekt/runtime').mkdir(exist_ok=True)
