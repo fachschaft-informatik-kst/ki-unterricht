@@ -2,7 +2,8 @@
   "PyodideLockAddon": {
     "enabled": true,
     "specs": [
-      "ipywidgets ==8.1.0"
+      "ipywidgets ==8.1.0",
+      "ipython ==8.23.0"
     ],
     "extra_preload_packages": [
       "ipywidgets"
