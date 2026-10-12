@@ -11,7 +11,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'content'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'content' / 'ki_projekt'))
 import ki_projekt_tools as ki
 
 

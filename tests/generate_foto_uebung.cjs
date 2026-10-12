@@ -1,5 +1,5 @@
 const tf=require('@tensorflow/tfjs'),mobilenet=require('@tensorflow-models/mobilenet'),{createCanvas}=require('@napi-rs/canvas'),fs=require('fs'),crypto=require('crypto');
-const core=require('../content/fotostudio_core.js');
+const core=require('../content/ki_projekt/fotostudio_core.js');
 (async()=>{
 const model=await mobilenet.load(core.MODEL);console.log('Model loaded');
 const records=[];
@@ -15,6 +15,6 @@ for(let g=1;g<=8;g++)for(let c=0;c<2;c++)for(let k=0;k<12;k++){
  records.push({id,group:'G'+String(g).padStart(2,'0'),label:['Kreis','Dreieck'][c],source:'Synthetisch erzeugte geometrische Formen; keine echten Fotos',filename:`form-${g}-${c}-${k}.png`,features,preview:thumb.toDataURL('image/png')});
  if(k===11)console.log(g,c,records.length);
 }
-fs.writeFileSync(require('path').join(__dirname,'../content/foto_uebungsdaten.json'),JSON.stringify({schema:'fotostudio-v1',pipeline:core.PIPELINE,tfjs:'4.22.0',mobilenet:'2.1.1',synthetic:true,records}));
+fs.writeFileSync(require('path').join(__dirname,'../content/ki_projekt/foto_uebungsdaten.json'),JSON.stringify({schema:'fotostudio-v1',pipeline:core.PIPELINE,tfjs:'4.22.0',mobilenet:'2.1.1',synthetic:true,records}));
 console.log('PASS actual MobileNet extraction',records.length);
 })().catch(e=>{console.error(e);process.exit(1)});
