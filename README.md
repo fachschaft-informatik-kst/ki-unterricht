@@ -23,20 +23,22 @@ Tandems wählen eine Fotoanwendung mit zwei bis vier Klassen, sammeln eigene Bil
 
 | Material | Zweck |
 |---|---|
-| [Projektauftrag](content/ki_projektauftrag.md) | Sechs Phasen, Zeitplan, Bewertung |
-| [Ideenpool](content/ki_ideenpool.md) | Zwölf Themen und Projektsteckbrief |
-| [Datensammlung](content/ki_fotodaten.md) | Gruppenplanung, Import, Vorverarbeitung und Sicherung |
-| [Lernlabor](content/ki_lernlabor.ipynb) | 20–30 Minuten Grundlagen anhand synthetischer Symbole |
-| [Foto-Projektjournal](content/ki_tandemprojekt.ipynb) | Eigene Untersuchung; vorbereitetes UEBUNG-Beispiel |
-| [Fotostudio](content/fotostudio.html) | Browseroberfläche zur Merkmalsextraktion; über Notebook als vollständige HTML-Datei herunterladen |
-| [Übungs-/Ersatzdaten](content/foto_uebungsdaten.json) | 192 synthetische Formen mit echten MobileNet-Merkmalen |
-| [Symbolprojekt](content/ki_symbolprojekt.ipynb) | Optionale ursprüngliche Route: eigenes Netz auf gezeichneten Pixelbildern |
+| [Projektauftrag](content/ki_projekt/ki_projektauftrag.md) | Sechs Phasen, Zeitplan, Bewertung |
+| [Ideenpool](content/ki_projekt/ki_ideenpool.md) | Zwölf Themen und Projektsteckbrief |
+| [Datensammlung](content/ki_projekt/ki_fotodaten.md) | Gruppenplanung, Import, Vorverarbeitung und Sicherung |
+| [Lernlabor](content/ki_projekt/ki_lernlabor.ipynb) | 20–30 Minuten Grundlagen anhand synthetischer Symbole |
+| [Foto-Projektjournal](content/ki_projekt/ki_tandemprojekt.ipynb) | Eigene Untersuchung; vorbereitetes UEBUNG-Beispiel |
+| [Fotostudio](content/ki_projekt/fotostudio.html) | Browseroberfläche zur Merkmalsextraktion; über Notebook als vollständige HTML-Datei herunterladen |
+| [Übungs-/Ersatzdaten](content/ki_projekt/foto_uebungsdaten.json) | 192 synthetische Formen mit echten MobileNet-Merkmalen |
+| [Symbolprojekt](content/ki_projekt/ki_symbolprojekt.ipynb) | Optionale ursprüngliche Route: eigenes Netz auf gezeichneten Pixelbildern |
+
+**Einstieg:** Im JupyterLite-Dateibrowser den Ordner `ki_projekt` und darin `00_Start.ipynb` öffnen.
 
 ### Ablauf in JupyterLite / Pyodide
 
-Nach Merge und Deployment: [Lernlabor](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/lab/index.html?path=ki_lernlabor.ipynb), danach [Projektjournal](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/lab/index.html?path=ki_tandemprojekt.ipynb).
+Nach Merge und Deployment: [Lernlabor](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/lab/index.html?path=ki_projekt/ki_lernlabor.ipynb), danach [Projektjournal](https://fachschaft-informatik-kst.github.io/ml-interactive-notebooks/lab/index.html?path=ki_projekt/ki_tandemprojekt.ipynb).
 
-1. Dateien in `content/` zusammen belassen; der bestehende Build übernimmt sie.
+1. Projektdateien in `content/ki_projekt/` zusammen belassen; der bestehende Build übernimmt sie.
 2. Journal in `UEBUNG` von oben nach unten ausführen. Die künstlichen Formen belegen keine Erkennungsleistung auf Alltagsfotos.
 3. Thema, Klassen und acht unabhängige Gruppen planen, Steckbrief mit Probebildern besprechen. Pro Gruppe und Klasse zwölf Bilder sammeln. Vier Gruppen trainieren, zwei validieren, zwei testen. Dieselben Gegenstände / Personen niemals auf Rollen verteilen.
 4. Im Journal Fotostudio herunterladen und lokal öffnen. Eigene JPG/PNG-Bilder übernehmen, Vorschau kontrollieren, JSON sichern. Das Notebook bettet den Hilfscode beim HTML-Download ein. Bei direktem Download aus GitHub müssen HTML und `fotostudio_core.js` nebeneinander liegen.

@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const tf=require('@tensorflow/tfjs'),mobile=require('@tensorflow-models/mobilenet');
 const {createCanvas}=require('@napi-rs/canvas');
-const core=require('../content/fotostudio_core.js');
+const core=require('../content/ki_projekt/fotostudio_core.js');
 (async()=>{
  const input=createCanvas(100,50),ctx=input.getContext('2d');ctx.fillStyle='red';ctx.fillRect(0,0,100,50);
  const out=core.prepare(input,createCanvas),pixels=out.getContext('2d');
