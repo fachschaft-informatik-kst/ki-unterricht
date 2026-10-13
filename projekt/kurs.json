@@ -207,12 +207,13 @@
         },
         {
           "phase": "Vorwissen aktivieren",
-          "minutes": 10,
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Knüpfen Sie an Doppellektion 1 an. Überlegen Sie zu zweit, woher beim Schachprogramm und beim Spamfilter die Regel kommt (von Menschen oder aus Daten), und vervollständigen Sie den Satz «Ein System lernt aus Daten, wenn …»."
+              "text": "Knüpfen Sie an Doppellektion 1 an. Überlegen Sie zu zweit, woher beim Schachprogramm und beim Spamfilter die Regel kommt (von Menschen oder aus Daten), und vervollständigen Sie den Satz «Ein System lernt aus Daten, wenn …».",
+              "min": 3
             },
             {
               "art": "Input",
@@ -229,29 +230,42 @@
         },
         {
           "phase": "Informieren",
-          "minutes": 15,
+          "minutes": 20,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 5,
-              "text": "Zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei Filmempfehlungen."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 10,
-              "text": "Stellt drei Lernsignale an je einem Beispiel vor: Labels (Smiley-Spiel), Ähnlichkeit (K-Means), Rückmeldung (NIM)."
+              "text": "Zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Ordnen Sie jedem Beispiel das Lernsignal zu."
+              "min": 5,
+              "text": "Wissensbasiert: Spielen Sie zwei Runden Akinator (en.akinator.com) mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld. Notieren Sie, welche Fragen gestellt werden, wie Ihre Antworten zum Ergebnis führen und was bei einer seltenen oder erfundenen Figur geschieht."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Lernend: Erkunden Sie in der Filmlandkarte auf der Kursseite einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 3,
+              "text": "Stellt drei Lernsignale kurz an je einem Beispiel vor: Labels (Smiley-Spiel), Ähnlichkeit (K-Means), Rückmeldung (NIM)."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "text": "Ordnen Sie jedem Beispiel das Lernsignal zu.",
+              "min": 2
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine Zuordnung Beispiel → Lernsignal als Rüstzeug für die Memory-Runden."
+              "text": "Zwei Beobachtungen (Akinator, Filmempfehlung) und eine Zuordnung Beispiel → Lernsignal als Rüstzeug für die Memory-Runden."
             }
           ]
         },
