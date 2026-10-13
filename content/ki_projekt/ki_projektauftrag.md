@@ -32,12 +32,12 @@ Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine ho
 |---|---|
 | 08.12.2026 | Vorschau, Tandem, zwei Klassen und Datenplan festlegen |
 | bis 15.12.2026 | Fotos sammeln |
-| 15.12.2026 | Einführung, Import und erster Vergleich |
+| 15.12.2026 | Einführung, geprüfter Import und Reflexion 1–2; erster Lauf bei Zeitreserve |
 | 05.01.2027 | Fairer Vergleich und Interpretation |
 | 12.01.2027 | Modellwahl, Abschlusstest, Journal abschliessen |
 | 19.01.2027 | Abgabe **vor Unterrichtsbeginn**, Fachgespräch im Tandem |
 
-Die Lehrperson legt Abgabekanal und Gesprächsplan fest. Je nach Zahl der Tandems werden Gespräche auf weitere Termine verteilt; für alle gilt derselbe Abgabestand.
+Alle Fachgespräche finden am **19.01.2027** statt, ohne Ersatz- oder Folgetermine. Richtwert: **5 Minuten pro Tandem**, bei mehr Tandems für alle gleich kürzer. Die Lehrperson gibt Dauer, Reihenfolge und Abgabekanal vorab bekannt. Die übrigen Tandems bearbeiten den unbenoteten Fallcheck.
 
 ## Bewertung
 
@@ -49,8 +49,8 @@ Die einzelnen Leistungsstufen stehen im [Bewertungsraster](../../worksheets/md/K
 
 ## Abgabe
 
-- Journal mit Ausgaben und fünf ausgefüllten Reflexionen.
+- Webjournal mit fünf ausgefüllten Reflexionen und Versuchsnotebook mit Ausgaben.
 - Originalfotos, Fotostudio-JSON, Gruppen-/Quellenangaben.
 - Exportiertes Versuchsprotokoll.
 
-Kein zusätzlicher langer Bericht. Dateien ausserhalb des Browsers sichern. Bei vereinbarten Ersatzdaten Herkunft und Einschränkungen offenlegen; die Lehrperson legt den passenden Nachweis zur Datenarbeit fest.
+Unter «Sichern & abgeben» Originalfotos und Fotostudio-JSON hinzufügen und das ZIP-Paket herunterladen. Der Download reicht nichts automatisch ein; ZIP über den genannten Abgabekanal einreichen. Kein zusätzlicher langer Bericht. Bei vereinbarten Ersatzdaten Herkunft und Einschränkungen offenlegen; die Lehrperson legt den passenden Nachweis zur Datenarbeit fest.

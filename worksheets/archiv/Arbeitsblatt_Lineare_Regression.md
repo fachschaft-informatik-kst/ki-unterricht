@@ -8,6 +8,9 @@ header-includes:
   - \renewcommand{\figurename}{Abbildung}
 ---
 
+> **Archivmaterial aus einem früheren Kurs.** Kein Bestandteil des KI-Blocks 2026/27; dessen Leistungsnachweis ist das Tandemprojekt mit gemeinsamem Fachgespräch.
+
+
 ## 1. Lernziel
 
 Ich kann
@@ -68,7 +71,7 @@ $$
 2. Zeichne die Gerade $\hat{y} = 10x + 30$.
 3. Markiere bei **mindestens zwei Punkten** den vertikalen Abstand zur Geraden (das ist der Fehler $y-\hat{y}$).
 
-![Koordinatengitter zum Einzeichnen](svg/koordinatengitter_lineare_regression.svg)
+![Koordinatengitter zum Einzeichnen](../md/svg/koordinatengitter_lineare_regression.svg)
 
 ## Aufgabe 1b: MSE berechnen (von Hand)
 
@@ -112,7 +115,7 @@ Gegeben sind dieselben Datenpunkte:
 2. Zeichne **beide** Geraden (A und B) ins gleiche Koordinatensystem.
 3. Entscheide **visuell**, welche Gerade besser passt (kurz begründen).
 
-![Koordinatengitter zum Einzeichnen](svg/koordinatengitter_lineare_regression.svg)
+![Koordinatengitter zum Einzeichnen](../md/svg/koordinatengitter_lineare_regression.svg)
 
 \newpage
 

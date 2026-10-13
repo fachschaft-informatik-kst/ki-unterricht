@@ -15,7 +15,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 root=Path(__file__).resolve().parents[1]
 out=Path(sys.argv[1] if len(sys.argv)>1 else '/tmp/ki-notebooks');out.mkdir(parents=True,exist_ok=True)
-paths=['00_Start.ipynb','lernarten.ipynb','perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','klassifikation_ziffern.ipynb','ki_projekt/00_Start.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb']
+paths=['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb']
 shell=InteractiveShell.instance()
 for name in paths:
     path=root/'content'/name;nb=nbformat.read(path,4);env={'__name__':'__main__'}

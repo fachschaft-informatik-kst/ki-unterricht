@@ -1,0 +1,366 @@
+{
+  "minutes": 90,
+  "model": "AVIVA",
+  "lessons": [
+    {
+      "id": "01",
+      "date": "03.11.2026",
+      "view": "einstieg",
+      "title": "Was ist KI?",
+      "goal": "KI, maschinelles Lernen und neuronale Netze an Beispielen unterscheiden.",
+      "question": "Ist jedes automatisch arbeitende Programm eine KI?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Drei Alltagsbeispiele ansehen und spontan einordnen: KI oder keine KI?"
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 10,
+          "task": "Zu zweit eine erste Definition und einen Zweifelsfall sammeln."
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 20,
+          "task": "In vier Gruppen die Begriffe KI, Algorithmus, maschinelles Lernen und neuronales Netz klären: je Definition, Beispiel und Grenze."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 45,
+          "task": "Erklärungen austauschen (20 Min.). Gemeinsam eine Begriffskarte bauen (15 Min.). Anfangsbeispiele neu zuordnen und Entscheidungen begründen (10 Min.)."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Ein Beispiel erklären und eine noch offene Frage im Antwortfeld festhalten."
+        }
+      ],
+      "product": "Begriffskarte + begründete Einordnung eines Beispiels."
+    },
+    {
+      "id": "02",
+      "date": "10.11.2026",
+      "view": "lernarten",
+      "title": "Wie lernt KI?",
+      "goal": "Drei Lernarten anhand der Rückmeldung unterscheiden.",
+      "question": "Was hilft beim Lernen: Lösungen, Ähnlichkeit oder Belohnung?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Ein Bild ohne und mit Klassenname vergleichen: Welche zusätzliche Information hilft?"
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 10,
+          "task": "Die Begriffskarte ergänzen: Was heisst «aus Daten lernen»?"
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 15,
+          "task": "Die drei Lernarten mit je einem Beispiel klären. Eingabe, Label und Belohnung unterscheiden."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 50,
+          "task": "Memory-Karten beschriften und gruppieren (20 Min.). NIM-Lernstrecke bei inf-schule bearbeiten (25 Min.). Die drei Begriffspaare zuordnen (5 Min.)."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Memory und NIM begründet zuordnen. Für das Bildprojekt die passende Lernart benennen."
+        }
+      ],
+      "product": "Drei Lernarten mit Beispiel und jeweiliger Rückmeldung."
+    },
+    {
+      "id": "03",
+      "date": "24.11.2026",
+      "view": "perzeptron",
+      "title": "Wie entscheidet ein Neuron?",
+      "goal": "Eine Ausgabe berechnen, Gewicht und Bias erklären und die XOR-Grenze erkennen.",
+      "question": "Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Warnsignal: Es soll nur bei zwei aktiven Sensoren angehen. Eine Regel vermuten."
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 10,
+          "task": "Eingabe und Label am AND-Beispiel benennen; die vier möglichen Eingaben sammeln."
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 15,
+          "task": "Die Perzeptron-Grafik lesen. Eine gewichtete Summe und die Step-Ausgabe gemeinsam berechnen."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 50,
+          "task": "Arbeitsblatt: Ausgaben und einen Lernschritt berechnen (15 Min.). Notebook: Bias und Gewichte verändern, XOR untersuchen (30 Min.). Eine Erklärung mit dem Tandem prüfen (5 Min.)."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Ohne Computer einen neuen Wert bestimmen. In zwei Sätzen erklären, warum eine Gerade bei XOR scheitert."
+        }
+      ],
+      "product": "Eine nachvollziehbare Rechnung + Erklärung zu Bias und XOR."
+    },
+    {
+      "id": "04",
+      "date": "08.12.2026",
+      "view": "netze",
+      "title": "Warum mehrere Neuronen?",
+      "goal": "Eine Zwischenschicht erklären und Training, Validierung und Test trennen.",
+      "question": "Wie lösen mehrere einfache Entscheidungen das XOR-Problem?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Die nicht trennbaren XOR-Punkte erneut betrachten: Was müsste sich ändern?"
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 10,
+          "task": "Die AND-Regel erklären und die vier XOR-Zielwerte rekonstruieren."
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 15,
+          "task": "OR und NAND als Zwischenfragen mit der Netzgrafik aufbauen. Festgelegte Gewichte von Training unterscheiden."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 50,
+          "task": "XOR-Netz nachvollziehen (25 Min.). Datenaufteilung und Datenleck untersuchen (15 Min.). Projektvorschau: Tandem, zwei Klassen und fünf Gruppen planen (10 Min.)."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Den Weg durch das Netz erklären. Datenplan kurz freigeben lassen; 80 Fotos bis 15.12. sammeln."
+        }
+      ],
+      "product": "XOR-Erklärung + vorläufiger Datenplan für fünf unabhängige Gruppen."
+    },
+    {
+      "id": "05",
+      "date": "15.12.2026",
+      "view": "projekt",
+      "title": "Projektstart: Daten vorbereiten",
+      "goal": "Eine prüfbare Frage formulieren und die eigenen Daten kontrollieren.",
+      "question": "Helfen vielfältigere Trainingsbilder bei neuen Exemplaren?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Ein leichtes und ein schwieriges Bild der eigenen Anwendung vergleichen."
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 10,
+          "task": "Gruppentrennung und fairen Vergleich erklären; mitgebrachte Fotos zählen."
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 15,
+          "task": "Auftrag, fünf Reflexionen, Bewertung und Sicherung gemeinsam klären. Die feste Merkmalsextraktion vom trainierbaren Netz unterscheiden."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 50,
+          "task": "Gemeinsames Lernlabor (15 Min.). Fotostudio und Import eigener Daten (35 Min.): Klassen, Gruppen, Quellen und Vorschaubilder kontrollieren. Bei Zeitreserve erster A/B-Lauf."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Reflexion 1–2 sichern. Ein Datenproblem oder eine offene Frage festhalten und ZIP herunterladen."
+        }
+      ],
+      "product": "Geprüfte Daten + Reflexion 1–2 + erste ZIP-Sicherung."
+    },
+    {
+      "id": "06",
+      "date": "05.01.2027",
+      "view": "projekt",
+      "title": "Projekt: fair vergleichen",
+      "goal": "A und B kontrolliert vergleichen und eine Auswahl vor Testeinsicht begründen.",
+      "question": "Welche Beobachtung würde unsere Vermutung stützen – und welche nicht?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Den gesicherten Stand öffnen und ein gemeinsames Tagesziel festlegen."
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 10,
+          "task": "Ohne Vorlage erklären: Was verändert sich zwischen A und B? Was bleibt gleich?"
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 10,
+          "task": "Daten erneut laden, falls nötig. Trefferquote und Prozentpunkte an einem Zahlenbeispiel klären; Test noch geschlossen lassen."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 55,
+          "task": "A/B-Lauf durchführen, Validierungswerte ablesen und Beispiele untersuchen. Alternative Erklärungen sammeln; Auswahl im Journal begründen. Rollen nach der Hälfte wechseln."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Reflexion 3 gegenseitig prüfen: Passen Zahlen, Belege und Begründung zusammen? ZIP sichern."
+        }
+      ],
+      "product": "A/B-Ergebnisse + begründete Auswahl in Reflexion 3; noch kein Abschlusstest."
+    },
+    {
+      "id": "07",
+      "date": "12.01.2027",
+      "view": "projekt",
+      "title": "Projekt: prüfen und urteilen",
+      "goal": "Die gewählte Variante abschliessend prüfen und Grenzen mit Belegen beschreiben.",
+      "question": "Was bleibt von unserer Vermutung auf neuen Testgruppen übrig?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Die vor Testeinsicht festgehaltene Auswahl und Begründung zeigen."
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 10,
+          "task": "Warum darf die Auswahl nach Testeinsicht nicht mehr optimiert werden? Zu zweit erklären."
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 10,
+          "task": "Check vor der Freigabe: Reflexion 3 vollständig, Variante und Begründung stimmen überein. Drei Beispiele analysieren; Fehler sind keine Pflicht."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 55,
+          "task": "Gewählte Variante testen (20 Min.). Reflexion 4–5 schreiben (20 Min.). Gespräch an einem eigenen Bild üben und Abgabepaket gegenseitig prüfen (15 Min.)."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Mit dem Kompetenzraster einschätzen, fehlende Belege markieren und vollständige ZIP-Sicherung herunterladen."
+        }
+      ],
+      "product": "Abschlusstest + vollständiges Journal + geprüftes Abgabepaket."
+    },
+    {
+      "id": "08",
+      "date": "19.01.2027",
+      "view": "projekt",
+      "title": "Abgabe und Tandemgespräche",
+      "goal": "Das ganze Projekt gemeinsam erklären und Wissen auf einen neuen Fall übertragen.",
+      "question": "Welche Entscheidungen würden wir bei einem anderen KI-Einsatz treffen?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Abgabe ist vor Unterrichtsbeginn erfolgt. Zeitplan und Fallcheck klären: Alle Tandems kommen heute dran; Gespräche beginnen nach diesen fünf Minuten."
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 5,
+          "task": "Selbstständig für den Fallcheck Daten, Labels und mögliche Fehler aus dem eigenen Projekt in Erinnerung rufen. Die Tandemgespräche laufen bereits parallel."
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 5,
+          "task": "Selbstständigen Auftrag lesen: Fall → Daten → mögliche Folgen → Massnahme. Fragen schriftlich notieren, ohne die laufenden Gespräche zu unterbrechen."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 70,
+          "task": "Einen fiktiven Fall bearbeiten, eine überprüfbare Massnahme entwerfen und mit einem anderen Tandem vergleichen. Zum eigenen Zeitfenster pausieren; beide erklären das Projekt. Alle Gespräche enden vor der gemeinsamen Auswertung."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 5,
+          "task": "Unbenoteten Fallcheck sichern und eine Frage für «KI & Gesellschaft» festhalten."
+        }
+      ],
+      "product": "Bewertetes Tandemgespräch + unbenoteter Fallcheck; keine nachträgliche Projektänderung."
+    },
+    {
+      "id": "09",
+      "date": "26.01.2027",
+      "view": "sprache",
+      "title": "Wie entstehen Sprachmodelle?",
+      "goal": "Den Einfluss von Kontext und Beispielen untersuchen und Grenzen der Analogie nennen.",
+      "question": "Bedeutet eine plausible Fortsetzung auch eine richtige Aussage?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "«Heute gehen wir …» unterschiedlich fortsetzen und die Unterschiede sammeln."
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 10,
+          "task": "Mit dem Papierexperiment zwei kurze Texte schreiben: einmal nur zwei, einmal vier vorherige Wörter sichtbar lassen. Den Einfluss des Kontexts vergleichen."
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 15,
+          "task": "Vorhersage von Sprache an Beispielen erklären. Unser Wortpaarmodell von modernen Modellen mit Tokens und längerem Kontext unterscheiden."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 50,
+          "task": "Ausgewählte Papagei-Stationen bearbeiten (25 Min.). Mit Soekia gezielt Kontext oder Wortwahl variieren (20 Min.). Beobachtung mit dem kleinen Wortpaarmodell vergleichen (5 Min.)."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Einen gelungenen und einen problematischen Text belegen. Erklären, warum Plausibilität keine Richtigkeit garantiert."
+        }
+      ],
+      "product": "Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells."
+    },
+    {
+      "id": "10",
+      "date": "02.02.2027",
+      "view": "gesellschaft",
+      "title": "Wer trägt die Folgen?",
+      "goal": "Eine Benachteiligung erklären und eine überprüfbare Gegenmassnahme abwägen.",
+      "question": "Wann wird aus einer Modellvorhersage ein gesellschaftliches Problem?",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "minutes": 5,
+          "task": "Eine These positionieren: «Gleiche Regeln sind automatisch fair.»"
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "minutes": 5,
+          "task": "Ein Datenproblem aus dem Projekt oder dem Fallcheck mit seinen Folgen verbinden."
+        },
+        {
+          "phase": "Informieren",
+          "minutes": 15,
+          "task": "Cathy O’Neils Video ansehen (ca. 13 Min.). Beispiele stichwortartig sichern (2 Min.)."
+        },
+        {
+          "phase": "Verarbeiten",
+          "minutes": 55,
+          "task": "In Gruppen ein Videobeispiel erklären und eine Massnahme vorschlagen (10 Min.). Anschliessend Fallwerkstatt mit Rollen, Gegenprüfung und Empfehlung (45 Min.). Ein vorab ausgewählter Film kann diesen 45-Minuten-Teil ersetzen."
+        },
+        {
+          "phase": "Auswerten",
+          "minutes": 10,
+          "task": "Eine konkrete Massnahme, ein Erfolgskriterium und einen verbleibenden Zielkonflikt festhalten. Die Anfangsthese erneut beurteilen."
+        }
+      ],
+      "product": "Begründetes Urteil mit Massnahme, Prüfkriterium und verbleibender Grenze."
+    }
+  ]
+}

@@ -3,3 +3,21 @@
 @media print{.lab-panel,iframe,.memory-board,.subnav,#sicherung{display:none!important}.course-grid{grid-template-columns:1fr 1fr}.course-card{min-height:0;padding:10px}.lesson-steps{grid-template-columns:repeat(3,1fr)}.field textarea{border:0}}
 
 .table-scroll{max-width:100%;overflow-x:auto;margin:24px 0;border:1px solid var(--line);border-radius:12px;background:white}.rubric{width:100%;min-width:1000px;border-collapse:collapse;font-size:13px;line-height:1.5}.rubric caption{padding:16px;text-align:left;font-weight:700}.rubric th,.rubric td{padding:14px;vertical-align:top;border:1px solid var(--line);text-align:left}.rubric thead{background:var(--soft)}.rubric tbody th{min-width:170px}.rubric th small{display:block;color:var(--muted);font-weight:400;margin-top:5px}.rubric select{min-width:55px}.grade-calculator output{display:block;padding:18px;background:var(--soft);border-radius:10px;font-size:20px;font-weight:700}#lernziele .card h2{font-size:22px}#lernziele li{margin:12px 0}@media print{.table-scroll{overflow:visible}.rubric{min-width:0;font-size:9px}.rubric th,.rubric td{padding:5px}.rubric tbody th{min-width:0}}
+
+/* Dated AVIVA plans: short summaries first, detailed actions on demand. */
+.lesson-plan summary{gap:12px;font-size:14px}
+.lesson-plan summary>span:nth-child(2){flex:1}
+.lesson-plan summary small{white-space:nowrap;color:var(--muted);font-weight:400}
+.lesson-plan summary::after{margin-left:0}
+.lesson-question{font-size:19px;line-height:1.5;color:var(--accent)}
+.lesson-phases{list-style:none;padding:0!important;margin:0 0 20px}
+.lesson-phases li{display:grid;grid-template-columns:65px 1fr;gap:15px;padding:14px 0;border-top:1px solid var(--line)}
+.phase-time{font-size:12px;font-weight:700;color:var(--accent);padding-top:3px}
+.lesson-phases strong{font-size:14px}.lesson-phases p{font-size:14px;margin:5px 0 0}
+.lesson-product{background:var(--soft);border-radius:8px;padding:14px;font-size:14px;margin-bottom:0}
+.concept-figure{margin:24px 0;background:white;border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center}
+.concept-figure img{display:block;max-width:100%;width:auto;max-height:365px;margin:auto}
+.concept-figure figcaption{max-width:610px;margin:15px auto 0;color:var(--muted);font-size:13px}
+@media(max-width:720px){.lesson-plan summary{flex-wrap:wrap}.lesson-plan summary small{display:none}.lesson-phases li{grid-template-columns:52px 1fr;gap:8px}.concept-figure{padding:15px}.concept-figure img{max-height:280px}}
+
+.nav span{width:38px}

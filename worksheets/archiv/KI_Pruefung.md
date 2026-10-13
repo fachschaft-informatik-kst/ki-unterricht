@@ -8,6 +8,9 @@ header-includes:
   - \renewcommand{\figurename}{Abbildung}
 ---
 
+> **Archivmaterial aus einem früheren Kurs.** Kein Bestandteil des KI-Blocks 2026/27; dessen Leistungsnachweis ist das Tandemprojekt mit gemeinsamem Fachgespräch.
+
+
 ```{=latex}
 \begin{center}
 \renewcommand{\arraystretch}{1.7}
@@ -209,7 +212,7 @@ Beim Unsupervised Learning sind die Labels („richtige Antworten“) von Anfang
 
  a) Zeichne beide Modelle und die Datenpunkte in ein gemeinsames Koordinatensystem. [3 Punkte]
 
-![Koordinatengitter zum Einzeichnen der Modelle und Datenpunkte](svg/koordinatengitter_lineare_regression_pruefung_b2.svg)
+![Koordinatengitter zum Einzeichnen der Modelle und Datenpunkte](../md/svg/koordinatengitter_lineare_regression_pruefung_b2.svg)
 
 \vspace{0.5cm}
 
@@ -335,7 +338,7 @@ Das Netzwerk hat durch das Training bereits folgende Gewichte gelernt: $w_0=-1.0
 
 \vspace{3cm}
 
-![Koordinatengitter zum Einzeichnen der Trennlinie](svg/koordinatengitter_perzeptron_pruefung.svg)
+![Koordinatengitter zum Einzeichnen der Trennlinie](../md/svg/koordinatengitter_perzeptron_pruefung.svg)
 
  d) Erkläre kurz (1–2 Sätze), wie eine Änderung von $w_0$ (Bias) die Trennlinie verschiebt und was das im Zugangssystem konkret bedeutet. [2 Punkte]
 

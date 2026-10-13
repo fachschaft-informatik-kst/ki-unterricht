@@ -8,6 +8,9 @@ header-includes:
 	- \renewcommand{\figurename}{Abbildung}
 ---
 
+> **Archivmaterial aus einem früheren Kurs.** Kein Bestandteil des KI-Blocks 2026/27; dessen Leistungsnachweis ist das Tandemprojekt mit gemeinsamem Fachgespräch.
+
+
 # Lösung Mini-Übung: Sigmoid skizzieren
 
 Gerundete Werte für $\sigma(z)$ bei ganzzahligen $z \in [-6,6]$ (auf 3 Nachkommastellen):
@@ -31,7 +34,7 @@ Gerundete Werte für $\sigma(z)$ bei ganzzahligen $z \in [-6,6]$ (auf 3 Nachkomm
 Die Kurve kippt bei $p=0.5$ (entspricht $z=0$) und nähert sich 0 bzw. 1 asymptotisch an.
 
 Graphische Lösung auf dem Koordinatengitter (blaue Sigmoid-Kurve, rote Punkte bei $z=-6..6$):
-![Sigmoid-Skizze Lösung](svg/koordinatengitter_sigmoid_loesung.svg)
+![Sigmoid-Skizze Lösung](../md/svg/koordinatengitter_sigmoid_loesung.svg)
 
 # Beispiel 1: Besteht man den Test?
 
@@ -99,7 +102,7 @@ Korrekte: 6/6
 2. B ist steiler und liefert höhere Wahrscheinlichkeiten für die positiven Beispiele (2.5, 3.0) und niedrigere für die negativen (0.5, 1.0, 1.5, 2.0).
 
 ## Visualisierung der Modelle A und B
-![Sigmoid-Modellvergleich mit Datenpunkten](svg/sigmoid_modelvergleich.svg)
+![Sigmoid-Modellvergleich mit Datenpunkten](../md/svg/sigmoid_modelvergleich.svg)
 Die Grafik zeigt beide Sigmoid-Kurven ($p_A = \sigma(1.0x - 1.8)$ in Blau, $p_B = \sigma(1.4x - 2.9)$ in Rot) sowie die Trainingspunkte respektive die wahren Werte farblich nach Klasse (grau = nicht bestanden, grün = bestanden) im Bereich $x \in [-3,7]$. Die Wahrschlichkeit bei $p=0.5$ ist als gestrichelte Linie hervorgehoben. Die Trennlinie für Modell A liegt bei $x=1.8$, für Modell B bei $x \approx 2.07$. Dadurch wird deutlich, dass Modell B den kritischen Punkt $x=2.0$ besser trennt.
 
 # Reflexion (Musterantwort)

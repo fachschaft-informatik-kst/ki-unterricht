@@ -21,14 +21,16 @@ Jeder Gegenstand bleibt in genau einer Gruppe. Ein anderer Hintergrund erzeugt k
 
 ## Fotostudio
 
-Im Journal `foto.fotostudio()` ausführen. Die HTML-Datei herunterladen und im Browser öffnen.
+Auf der Kursseite im Journal das eingebettete Fotostudio öffnen. Beim Arbeiten mit einem eigenständigen Notebook alternativ `foto.fotostudio()` ausführen und die angebotene HTML-Datei im Browser öffnen.
 Klasse, Gruppe (T1/T2/V1/P1/P2), Quelle und Fotos eintragen. Vorschau prüfen, verarbeiten, JSON herunterladen. Zum Fortsetzen gesicherte JSON importieren. HEIC vorher als JPG exportieren.
+
+Unter «Sichern & abgeben» Originalfotos und die heruntergeladene JSON zusätzlich hinzufügen.
 
 Das Studio verarbeitet lokal; Bibliotheken und Modell werden aus dem Internet geladen. Ohne Download gehen Sammlungen beim Schliessen verloren.
 
 ## Import und einheitliche Matrix
 
-Im Journal `EIGENE_DATEN` und die zwei Klassennamen eintragen. JSON auswählen, danach die nächste Zelle starten. Die Gruppenrollen sind vorbereitet. Der Import verlangt genau acht Bilder pro Klasse/Gruppe und prüft Kopien; falsch vergebene Gruppen kann er nicht erkennen.
+Im Versuchsnotebook `EIGENE_DATEN` und die zwei Klassennamen eintragen. JSON auswählen, danach die nächste Zelle starten. Die Gruppenrollen sind vorbereitet. Der Import verlangt genau acht Bilder pro Klasse/Gruppe und prüft Kopien; falsch vergebene Gruppen kann er nicht erkennen.
 
 Jedes Bild wird proportional in **224 × 224 RGB-Pixel** eingepasst, mit weissem Rand. MobileNet V2 (alpha 0.5) liefert **1280 feste Merkmale**; das Notebook normiert sie je Bild. Nur das nachgeschaltete kleine Netz wird trainiert. 64 × 64-Vorschauen dienen der Anzeige.
 

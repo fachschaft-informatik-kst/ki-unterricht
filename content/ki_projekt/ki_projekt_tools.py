@@ -33,13 +33,6 @@ def download(text, name, mime='application/json'):
     display(HTML(f'<a download="{html.escape(name)}" href="data:{mime};base64,{payload}">{html.escape(name)} herunterladen</a>'))
 
 
-def symbolstudio():
-    path = Path(__file__).with_name('symbolstudio.html')
-    if path.exists():
-        download(path.read_text(encoding='utf-8'), 'symbolstudio.html', 'text/html')
-    else:
-        print('symbolstudio.html aus dem Repository herunterladen und lokal im Browser öffnen.')
-
 
 def daten_upload():
     uploader = widgets.FileUpload(accept='.json', multiple=True, description='JSON wählen')

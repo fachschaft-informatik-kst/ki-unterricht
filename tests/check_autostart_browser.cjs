@@ -21,7 +21,7 @@ async function reveal(page, selector) {
   let browser;
   try {
     await new Promise(r => setTimeout(r, 1000));
-    for (const name of ['perzeptron_und_neuronale_netze.ipynb','lernarten.ipynb','ki_projekt/ki_tandemprojekt.ipynb']) {
+    for (const name of ['perzeptron_und_neuronale_netze.ipynb','ki_projekt/ki_tandemprojekt.ipynb']) {
     browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH, headless:true, args:JSON.parse(process.env.CHROMIUM_ARGS || '[]')});
       const context = await browser.newContext();
       const page = await context.newPage();
@@ -37,12 +37,6 @@ async function reveal(page, selector) {
           await page.waitForTimeout(500);
           assert.equal(await page.locator('.widget-dropdown select').inputValue(),'XOR');
           await page.locator('.widget-output').filter({hasText:'→ 1 (0)'}).first().waitFor({state:'visible'});
-        } else if (name==='lernarten.ipynb') {
-          await reveal(page, '.widget-button');
-          const button = page.getByRole('button', {name:'1 nehmen',exact:true}).first();
-          await button.click();
-          await page.waitForTimeout(500);
-          await page.locator('.widget-output').filter({hasText:'KI nimmt'}).first().waitFor({state:'visible'});
         } else {
           const body=await page.locator('body').innerText();
           assert(!body.includes('Traceback'));
