@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
+<title>Aufbau einer Nervenzelle (schematisch)</title>
+<rect width="960" height="520" fill="#ffffff"/>
+<g stroke-linecap="round" stroke-linejoin="round" fill="none">
+<!-- Axone anderer Zellen mit Endknöpfchen (Synapsen) -->
+<g stroke="#9aa8ae" stroke-width="3">
+<path d="M8 52C60 58 92 80 112 100"/>
+<path d="M8 150C40 150 58 158 72 170"/>
+<path d="M8 300C30 270 50 262 66 255"/>
+<path d="M8 326C40 322 74 316 98 311"/>
+</g>
+<g fill="#be572b" stroke="none">
+<circle cx="118" cy="106" r="12"/>
+<circle cx="78" cy="174" r="7"/>
+<circle cx="70" cy="254" r="5"/>
+<circle cx="108" cy="306" r="15"/>
+</g>
+<!-- Dendriten -->
+<g stroke="#526fa0">
+<path d="M298 172C265 140 225 115 175 100" stroke-width="9"/>
+<path d="M175 100L140 78M175 100L138 112" stroke-width="4"/>
+<path d="M285 200C240 185 200 170 150 160" stroke-width="7"/>
+<path d="M150 160L108 140M150 160L102 176" stroke-width="4"/>
+<path d="M282 228C240 235 190 238 140 232" stroke-width="7"/>
+<path d="M140 232L96 214M140 232L92 252" stroke-width="4"/>
+<path d="M290 252C255 285 215 310 170 320" stroke-width="8"/>
+<path d="M170 320L128 300M170 320L132 346" stroke-width="4"/>
+</g>
+<!-- Zellkörper mit Zellkern -->
+<path d="M290 185C295 150 340 140 372 160C400 178 402 225 380 248C355 275 305 272 288 245C275 228 280 205 290 185Z" fill="#cfe8dc" stroke="#263b43" stroke-width="3"/>
+<circle cx="338" cy="212" r="23" fill="#8fb8a8" stroke="#263b43" stroke-width="2"/>
+<circle cx="345" cy="206" r="7" fill="#263b43" stroke="none"/>
+<!-- Axonhügel -->
+<path d="M388 186Q420 204 456 208L456 214Q420 218 388 236Z" fill="#cfe8dc" stroke="#263b43" stroke-width="3"/>
+<!-- Axon mit Myelinscheide -->
+<path d="M456 211H760" stroke="#263b43" stroke-width="5"/>
+<g fill="#f3dfb0" stroke="#b99650" stroke-width="2">
+<rect x="468" y="197" width="52" height="28" rx="14"/>
+<rect x="528" y="197" width="52" height="28" rx="14"/>
+<rect x="588" y="197" width="52" height="28" rx="14"/>
+<rect x="648" y="197" width="52" height="28" rx="14"/>
+<rect x="708" y="197" width="40" height="28" rx="14"/>
+</g>
+<!-- Axonendigungen -->
+<g stroke="#263b43" stroke-width="4">
+<path d="M760 211C790 190 805 170 826 160"/>
+<path d="M760 211H832"/>
+<path d="M760 211C790 232 805 252 826 262"/>
+</g>
+<g fill="#263b43" stroke="none">
+<circle cx="832" cy="157" r="10"/>
+<circle cx="840" cy="211" r="10"/>
+<circle cx="832" cy="265" r="10"/>
+</g>
+<!-- Signalrichtung -->
+<path d="M468 262H700" stroke="#52656a" stroke-width="2" stroke-dasharray="2 7"/>
+<path d="M692 255L704 262L692 269" stroke="#52656a" stroke-width="2"/>
+</g>
+<text x="584" y="288" text-anchor="middle" font-size="13" fill="#52656a">Impuls: ganz oder gar nicht</text>
+<text x="862" y="215" font-size="12" fill="#52656a">weiter an die</text>
+<text x="862" y="231" font-size="12" fill="#52656a">nächsten Zellen</text>
+<text x="10" y="30" font-size="12" fill="#52656a">Reize anderer Zellen</text>
+<!-- Nummern -->
+<g font-size="15" font-weight="700" fill="#fff" text-anchor="middle">
+<circle cx="214" cy="82" r="14" fill="#526fa0"/><text x="214" y="88">1</text>
+<circle cx="46" cy="118" r="14" fill="#be572b"/><text x="46" y="124">2</text>
+<circle cx="338" cy="122" r="14" fill="#176c63"/><text x="338" y="128">3</text>
+<circle cx="424" cy="168" r="14" fill="#8a6bb0"/><text x="424" y="174">4</text>
+<circle cx="610" cy="166" r="14" fill="#52656a"/><text x="610" y="172">5</text>
+</g>
+<!-- Legende -->
+<g>
+<g transform="translate(20,350)">
+<circle cx="14" cy="14" r="14" fill="#526fa0"/><text x="14" y="20" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+<text x="40" y="12" font-size="17" font-weight="700" fill="#182b31">Dendriten</text>
+<text x="40" y="32" font-size="13.5" fill="#52656a">nehmen Reize anderer Zellen auf</text>
+<text x="40" y="53" font-size="14" font-weight="650" fill="#076959">→ Eingaben x₁, x₂, …</text>
+</g>
+<g transform="translate(340,350)">
+<circle cx="14" cy="14" r="14" fill="#be572b"/><text x="14" y="20" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+<text x="40" y="12" font-size="17" font-weight="700" fill="#182b31">Synapsen</text>
+<text x="40" y="32" font-size="13.5" fill="#52656a">Verbindungsstärke: wie viel ein Reiz zählt</text>
+<text x="40" y="53" font-size="14" font-weight="650" fill="#076959">→ Gewichte w₁, w₂, …</text>
+</g>
+<g transform="translate(660,350)">
+<circle cx="14" cy="14" r="14" fill="#176c63"/><text x="14" y="20" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+<text x="40" y="12" font-size="17" font-weight="700" fill="#182b31">Zellkörper</text>
+<text x="40" y="32" font-size="13.5" fill="#52656a">sammelt alle Reize</text>
+<text x="40" y="53" font-size="14" font-weight="650" fill="#076959">→ Summe Σ = x₁w₁ + x₂w₂ + …</text>
+</g>
+<g transform="translate(20,440)">
+<circle cx="14" cy="14" r="14" fill="#8a6bb0"/><text x="14" y="20" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+<text x="40" y="12" font-size="17" font-weight="700" fill="#182b31">Axonhügel</text>
+<text x="40" y="32" font-size="13.5" fill="#52656a">ab einer Schwelle entsteht ein Impuls</text>
+<text x="40" y="53" font-size="14" font-weight="650" fill="#076959">→ Schwelle s (Bias b = −s)</text>
+</g>
+<g transform="translate(340,440)">
+<circle cx="14" cy="14" r="14" fill="#52656a"/><text x="14" y="20" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+<text x="40" y="12" font-size="17" font-weight="700" fill="#182b31">Axon</text>
+<text x="40" y="32" font-size="13.5" fill="#52656a">leitet den Impuls an andere Zellen weiter</text>
+<text x="40" y="53" font-size="14" font-weight="650" fill="#076959">→ Ausgabe y = 1 oder 0</text>
+</g>
+<g transform="translate(660,440)">
+<circle cx="14" cy="14" r="14" fill="#fff" stroke="#be572b" stroke-width="2"/><circle cx="14" cy="14" r="7" fill="#be572b"/>
+<text x="40" y="12" font-size="17" font-weight="700" fill="#182b31">Lernen</text>
+<text x="40" y="32" font-size="13.5" fill="#52656a">Verbindungen verändern sich</text>
+<text x="40" y="53" font-size="14" font-weight="650" fill="#076959">→ Gewichte werden angepasst</text>
+</g>
+</g>
+</svg>

@@ -42,8 +42,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await systemsOverview.locator('img').getAttribute('alt').then(value=>value.includes('Erfahrungsschatz')),true);
   assert.equal(await systemsOverview.locator('img').getAttribute('src'),'https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png');
   assert.equal(await systemsOverview.locator('a[href="https://en.akinator.com/"]').count(),1);
-  assert.equal(await systemsOverview.locator('a[href="https://pair-code.github.io/tsne-visual-recommender/"]').count(),2);
-  assert.equal(await systemsOverview.locator('iframe[data-recommender]').getAttribute('src'),'https://pair-code.github.io/tsne-visual-recommender/');
+  assert.equal(await systemsOverview.locator('a[href="https://pair-code.github.io/tsne-visual-recommender/"]').count(),1);
+  assert.equal(await systemsOverview.locator('iframe').count(),0);
   assert.equal(await systemsOverview.locator('a[href*="inf-schule.de"]').count(),0);
   await p.waitForFunction(()=>document.querySelector('#lernarten .lesson-steps article b')?.textContent==='Überwacht · mit Labels');
   const learningCards=p.locator('#lernarten .lesson-steps article');

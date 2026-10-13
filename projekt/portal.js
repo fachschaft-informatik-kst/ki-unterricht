@@ -86,24 +86,22 @@ const systemsGrid=document.createElement('div');systemsGrid.className='grid two'
 const ruleCard=document.createElement('article');ruleCard.className='card';
 const ruleHeading=document.createElement('h3');ruleHeading.textContent='Wissensbasiert · Regeln anwenden';
 const ruleText=document.createElement('p');ruleText.textContent='Menschen legen Fakten und Wenn-dann-Regeln fest. Das System wendet sie an, lernt aber nicht selbst aus Beispielen. Beispiel: ein Fragespiel, das mit Ja-Nein-Fragen Schritt für Schritt zum Ergebnis führt, wie ein Entscheidungsbaum.';
-const taskParagraph=text=>{const paragraph=document.createElement('p'),label=document.createElement('strong');label.textContent='Aufgabe (Tandem, 5 Min.): ';paragraph.append(label,text);return paragraph;};
+const taskList=items=>{const box=document.createElement('div'),label=document.createElement('p'),strong=document.createElement('strong'),list=document.createElement('ol');strong.textContent='Aufgabe · Tandem · 5 Min.';label.append(strong);for(const text of items){const item=document.createElement('li');item.textContent=text;list.append(item);}box.append(label,list);return box;};
 const ruleLink=document.createElement('a');ruleLink.href='https://en.akinator.com/';ruleLink.target='_blank';ruleLink.rel='noopener noreferrer';ruleLink.textContent='Akinator spielen ↗';
-const ruleTask=taskParagraph('Spielen Sie zwei Runden mit einer ausgedachten Figur (keine Person aus Ihrem Umfeld, keine persönlichen Angaben). Notieren Sie: Welche Fragen stellt das System und wie führen Ihre Antworten zum Ergebnis? Probieren Sie eine seltene oder erfundene Figur: Was passiert, wenn niemand an diesen Fall gedacht hat?');
+const ruleTask=taskList(['Spielen Sie zwei Runden mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld.','Notieren Sie drei Fragen des Systems und wie Ihre Antwort jeweils die nächste Frage bestimmt.','Wählen Sie nun eine erfundene oder sehr unbekannte Figur: Was geschieht?','Wer hat festgelegt, welche Fragen überhaupt möglich sind?']);
 const ruleNote=document.createElement('p');ruleNote.className='small muted';ruleNote.textContent='Akinator nutzt im Hintergrund auch frühere Antworten. Betrachten Sie hier nur den Ablauf Frage, Antwort, nächste Frage.';
 ruleCard.append(ruleHeading,ruleText,ruleLink,ruleTask,ruleNote);
 const learningCard=document.createElement('article');learningCard.className='card';
 const learningHeading=document.createElement('h3');learningHeading.textContent='Lernend · Muster aus Daten';
 const learningText=document.createElement('p');learningText.textContent='Das System baut aus Beispielen einen Erfahrungsschatz auf. Neue Daten können ihn verändern und dadurch auch seine Entscheidungen. Beispiel: Filmempfehlungen eines Streamingdienstes (z. B. Netflix).';
 const learningLink=document.createElement('a');learningLink.href='https://pair-code.github.io/tsne-visual-recommender/';learningLink.target='_blank';learningLink.rel='noopener noreferrer';learningLink.textContent='Filmempfehlungen in neuem Tab öffnen ↗';
-const learningTask=taskParagraph('Suchen Sie in der Visualisierung unten einen Film, den Sie kennen, und klicken Sie ihn an. Was haben die «Nearest Neighbors» gemeinsam? Färben Sie die Punkte nach «Genre» und danach nach «Predicted User Rating (SVD)». Ändern Sie den «User Index»: Wie verändern sich die vorhergesagten Bewertungen? Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte.');
+const learningTask=taskList(['Öffnen Sie die Filmlandkarte, suchen Sie einen Film, den Sie kennen, und klicken Sie ihn an.','Vergleichen Sie die «Nearest Neighbors»: Was haben sie gemeinsam?','Färben Sie die Punkte nach «Genre», dann nach «Predicted User Rating (SVD)» und wechseln Sie den «User Index»: Was verändert sich?','Aus welchen Daten könnte das System diese Muster gelernt haben?']);
 learningCard.append(learningHeading,learningText,learningLink,learningTask);systemsGrid.append(ruleCard,learningCard);
 const evaFigure=document.createElement('figure');evaFigure.className='concept-figure learning-system-figure';
 const evaImage=document.createElement('img');evaImage.src='https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png';evaImage.alt='EVA-Prinzip eines lernenden Systems: Eine Eingabe wird mit dem Erfahrungsschatz verarbeitet; die Ausgabe kann den Erfahrungsschatz erweitern.';evaImage.loading='lazy';
 const evaCaption=document.createElement('figcaption');evaCaption.textContent='Ein lernendes System verarbeitet Eingaben mit seinem Erfahrungsschatz. Neue Erfahrungen können ihn verändern.';evaFigure.append(evaImage,evaCaption);
 const hybridNote=document.createElement('p');hybridNote.className='small muted';hybridNote.textContent='In der Praxis können feste Regeln und Lernen aus Daten auch kombiniert werden.';
-const recommenderMap=embeddedLearningPath('https://pair-code.github.io/tsne-visual-recommender/','Filmempfehlungen als Landkarte (Google PAIR, Daten bis 2017)','Visualisierung in neuem Tab öffnen');
-recommenderMap.querySelector('iframe').dataset.recommender='';
-systemsOverview.append(systemsHeading,systemsLead,systemsGrid,evaFigure,recommenderMap,hybridNote);
+systemsOverview.append(systemsHeading,systemsLead,systemsGrid,evaFigure,hybridNote);
 learningTypes.querySelector('.lesson-steps').before(systemsOverview);
 const learningExamples=[
  {title:'Überwacht · mit Labels',description:'Das System lernt mit Beispielen und den richtigen Kategorien. Danach ordnet es neue Beispiele zu.',links:[

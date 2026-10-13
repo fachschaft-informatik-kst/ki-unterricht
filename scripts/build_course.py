@@ -25,7 +25,7 @@ def tabelle(lesson):
         for i, step in enumerate(phase['schritte']):
             zelle = ''
             if i == 0:
-                zelle = f'<th class="phase" rowspan="{len(phase["schritte"])}" scope="rowgroup">{html.escape(phase["phase"])}<small>{phase["minutes"]} Min.</small></th>'
+                zelle = f'<th class="phase" rowspan="{len(phase["schritte"])}" scope="rowgroup"><strong>{html.escape(phase["phase"])}</strong><span class="phase-titel">{html.escape(phase["titel"])}</span><small>{phase["minutes"]} Min.</small></th>'
             minuten = f'{step["min"]}' if step.get('min') else ''
             zeilen.append(f'<tr class="{wer_klasse(step["wer"])}">{zelle}<td class="wer">{html.escape(step["wer"])}</td>'
                           f'<td class="was">{html.escape(step["text"])}</td><td class="min">{minuten}</td></tr>')
@@ -39,8 +39,7 @@ def render(lesson):
             f'<p><strong>Heute können Sie:</strong> {html.escape(lesson["goal"])}</p>'
             f'<p class="lesson-question">{html.escape(lesson["question"])}</p>'
             + (f'<p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> {html.escape(lesson["motivation"])}</p>' if lesson.get('motivation') else '')
-            +
-            '<p class="small muted">Unser Ablauf · AVIVA</p>'+LEGENDE+tabelle(lesson)
+            + LEGENDE + tabelle(lesson)
             + f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p>'
             + (f'<p class="small muted"><strong>Zeit:</strong> {html.escape(lesson["zeit"])}</p>' if lesson.get('zeit') else '')
             + '</div></details>')
@@ -50,7 +49,7 @@ def remove_calendar_dates(text):
 
     def course_card(match):
         number = match.group(1)
-        label = 'Doppellektionen 5–8' if number == '05–08' else f'{int(number)}. Doppellektion'
+        label = '5.–8. Doppellektion' if number == '05–08' else f'{int(number)}. Doppellektion'
         return f'<span class="tag">{label}</span>'
 
     text = re.sub(r'<span class="tag">[^<]*</span><b>(01|02|03|04|05–08|09|10)</b>', course_card, text)
@@ -103,6 +102,7 @@ def build():
     for lesson in lessons:
         assert [p['phase'] for p in lesson['phases']] == PHASES
         assert sum(p['minutes'] for p in lesson['phases']) == 90
+        assert all(p.get('titel') and '|' not in p['titel'] for p in lesson['phases'])
     page = ROOT/'projekt/index.html'
     text = page.read_text()
     for view in dict.fromkeys(l['view'] for l in lessons):
@@ -119,7 +119,7 @@ def build():
         rows += ['| Phase | Min. | Wer | Was |', '|---|---:|---|---|']
         for p in l['phases']:
             for i, st in enumerate(p['schritte']):
-                rows.append(f'| {p["phase"] if i == 0 else ""} | {p["minutes"] if i == 0 else ""} | {st["wer"]} | {st["text"]} |')
+                rows.append(f'| {p["phase"]+" – "+p["titel"] if i == 0 else ""} | {p["minutes"] if i == 0 else ""} | {st["wer"]} | {st["text"]} |')
         rows.append('')
         rows += ['', f'**Lernprodukt:** {l["product"]}', '']
         if l.get('zeit'): rows += [f'**Zeit:** {l["zeit"]}', '']

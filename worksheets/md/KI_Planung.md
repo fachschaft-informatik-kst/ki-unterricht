@@ -25,26 +25,26 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Lehrperson | Stellt die Frage «Wann nennen Sie ein System intelligent?» und zeigt zwei Saugroboter: einer fährt feste Bahnen nach einem Programm, einer erstellt beim Fahren eine Karte der Wohnung. |
+| Ankommen – «Wann ist ein System intelligent?» | 5 | Lehrperson | Stellt die Frage «Wann nennen Sie ein System intelligent?» und zeigt zwei Saugroboter: einer fährt feste Bahnen nach einem Programm, einer erstellt beim Fahren eine Karte der Wohnung. |
 |  |  | Einzeln | Notieren Sie, welcher Roboter für Sie intelligenter wirkt, und ein Kriterium, woran Sie Intelligenz erkennen. |
 |  |  | Ergebnis | Ein persönliches Kriterium für «intelligent». |
-| Vorwissen aktivieren | 10 | Tandem | Schreiben Sie Wenn-dann-Regeln auf, mit denen ein Programm Katzen von Hunden auf Fotos unterscheiden könnte. Prüfen Sie die Regeln an drei Gegenbeispielen, etwa einer Katze mit langen Ohren oder einem Hund in Katzenpose. |
+| Vorwissen aktivieren – Regeln für Katze oder Hund schreiben | 10 | Tandem | Schreiben Sie Wenn-dann-Regeln auf, mit denen ein Programm Katzen von Hunden auf Fotos unterscheiden könnte. Prüfen Sie die Regeln an drei Gegenbeispielen, etwa einer Katze mit langen Ohren oder einem Hund in Katzenpose. |
 |  |  | Lehrperson | Sammelt zwei Regeln und je ein Gegenbeispiel an der Tafel und hält fest: Regeln von Hand zu finden ist mühsam und lückenhaft. |
 |  |  | Ergebnis | Die Erfahrung, dass Regeln von Hand Lücken haben. Sie motiviert, ein System aus Beispielen lernen zu lassen. |
-| Informieren | 25 | Lehrperson | Zeigt die Grafik «Programmierung durch Menschen» und «Datengetriebene Programmierung». Menschen: Eingabe → definierte Regeln → Ausgabe, zum Beispiel ein Schachprogramm. Daten: Daten → maschinelles Lernen → Regeln, zum Beispiel ein Spamfilter, der aus markierten Mails lernt. Verbindet mit der Katzenübung: Statt Regeln zu schreiben, geben wir Beispiele. |
+| Informieren – KI, maschinelles Lernen und Deep Learning einordnen | 25 | Lehrperson | Zeigt die Grafik «Programmierung durch Menschen» und «Datengetriebene Programmierung». Menschen: Eingabe → definierte Regeln → Ausgabe, zum Beispiel ein Schachprogramm. Daten: Daten → maschinelles Lernen → Regeln, zum Beispiel ein Spamfilter, der aus markierten Mails lernt. Verbindet mit der Katzenübung: Statt Regeln zu schreiben, geben wir Beispiele. |
 |  |  | Einzeln | Ordnen Sie Taschenrechner, Spamfilter, Ampel mit festem Zeitplan und Gesichtsentsperrung am Handy einer der beiden Seiten zu. |
 |  |  | Lehrperson | Zeigt die Einteilung der Begriffe als ineinander liegende Kreise: KI, maschinelles Lernen, Deep Learning, generative KI. Erklärt jede Ebene an einem Beispiel (Schachprogramm mit festen Regeln, Spamfilter, Bilderkennung, ChatGPT) und betont: Nicht jedes KI-System lernt aus Daten. Das Bildprojekt gehört zum maschinellen Lernen. |
 |  |  | Lehrperson | Zeigt die Meilensteine der KI von 1950 bis 2022 und erzählt zu jedem einen Satz. Markiert, ob er auf Regeln von Menschen oder auf Lernen aus Daten beruht. |
 |  |  | Lehrperson | Führt schwache und starke KI und die vier KI-Typen ein: reaktive KI, KI mit begrenztem Gedächtnis, Theory of Mind, selbstbewusste KI. Heutige Systeme gehören zu den Typen 1 und 2 und sind schwache KI; starke KI gibt es nicht. |
 |  |  | Einzeln | Notieren Sie zu jedem der vier Typen ein Merkmal in Stichworten. |
 |  |  | Ergebnis | Notizen zu Regeln und Daten, zur Einteilung der Begriffe, zu den Meilensteinen und zu den vier Typen als Grundlage für die Verarbeitung. |
-| Verarbeiten | 40 | Gruppe | Meilensteine: Jede Gruppe erhält zwei bis drei Meilensteine, klärt in einer Minute, was neu war, und entscheidet, ob er eher auf Regeln von Menschen oder auf Daten beruht. Hängen Sie die Meilensteine als Klasse in der richtigen Reihenfolge auf und markieren Sie sie mit «Regeln» oder «Daten». |
+| Verarbeiten – Meilensteine, eigene Beispiele und Asimovs Gesetze | 40 | Gruppe | Meilensteine: Jede Gruppe erhält zwei bis drei Meilensteine, klärt in einer Minute, was neu war, und entscheidet, ob er eher auf Regeln von Menschen oder auf Daten beruht. Hängen Sie die Meilensteine als Klasse in der richtigen Reihenfolge auf und markieren Sie sie mit «Regeln» oder «Daten». |
 |  |  | Tandem | Wählen Sie vier eigene Beispiele aus Alltag, Film oder Zukunft (zum Beispiel Navigationsapp, Sprachassistent, Staubsaugerroboter, HAL 9000, Terminator). Ordnen Sie jedes ein: Regeln oder Daten? Welche Ebene (KI, maschinelles Lernen, Deep Learning, generative KI)? Typ 1 bis 4? Schwache oder starke KI? Begründen Sie jede Einordnung in einem Satz im Antwortfeld. |
 |  |  | Lehrperson | Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) vor und zeigt den Fall: Ein selbstfahrendes Auto muss ausweichen und gefährdet dabei die Insassen. |
 |  |  | Gruppe | Diskutieren Sie in Vierergruppen: Welches Gesetz greift im Fall? Wer legt fest, was «Schaden» heisst? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest. |
 |  |  | Einzeln | Erklären Sie im Antwortfeld die Begriffe KI, maschinelles Lernen, Deep Learning und generative KI in je einem eigenen Satz. |
 |  |  | Ergebnis | Eine Zeitleiste mit Markierung «Regeln» oder «Daten», vier begründete Einordnungen und zwei Argumente zu den Gesetzen der Robotik. |
-| Auswerten | 10 | Klasse | Je zwei Tandems stellen eine Einordnung vor. Die Klasse prüft: Stimmt der Typ, und ist es wirklich schwache KI? |
+| Auswerten – Einordnungen prüfen und Begriffe klären | 10 | Klasse | Je zwei Tandems stellen eine Einordnung vor. Die Klasse prüft: Stimmt der Typ, und ist es wirklich schwache KI? |
 |  |  | Einzeln | Beantworten Sie im Antwortfeld: Ist jedes automatisch arbeitende Programm eine KI? Begründen Sie mit der Grafik «Regeln oder Daten» und einem eigenen Beispiel. |
 |  |  | Lehrperson | Fasst zusammen: Regeln von Menschen allein sind noch kein Lernen, heutige KI ist schwache KI, und das Bildprojekt gehört zum maschinellen Lernen. Ausblick auf Doppellektion 2: Wie lernt ein System? |
 |  |  | Ergebnis | Eine begründete Antwort auf die Leitfrage und vier eingeordnete Beispiele. |
@@ -64,26 +64,26 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Lehrperson | Zeigt zwei Karten mit demselben Motiv, eine ohne und eine mit Klassenname (zum Beispiel «Werkzeug»). |
+| Ankommen – Was hilft einem System beim Lernen? | 5 | Lehrperson | Zeigt zwei Karten mit demselben Motiv, eine ohne und eine mit Klassenname (zum Beispiel «Werkzeug»). |
 |  |  | Einzeln → Tandem | Notieren Sie einzeln, welche zusätzliche Information einem System hilft, das lernen soll, und vergleichen Sie zu zweit. |
 |  |  | Ergebnis | Eine These, wozu ein Name (Label) gut ist. |
-| Vorwissen aktivieren | 5 | Tandem | Knüpfen Sie an Doppellektion 1 an. Überlegen Sie zu zweit, woher beim Schachprogramm und beim Spamfilter die Regel kommt (von Menschen oder aus Daten), und vervollständigen Sie den Satz «Ein System lernt aus Daten, wenn …». |
+| Vorwissen aktivieren – Woher kommt die Regel? | 5 | Tandem | Knüpfen Sie an Doppellektion 1 an. Überlegen Sie zu zweit, woher beim Schachprogramm und beim Spamfilter die Regel kommt (von Menschen oder aus Daten), und vervollständigen Sie den Satz «Ein System lernt aus Daten, wenn …». |
 |  |  | Lehrperson | Schreibt zwei Formulierungen an die Tafel. |
 |  |  | Ergebnis | Eine gemeinsame Arbeitsdefinition von «aus Daten lernen». |
-| Informieren | 20 | Lehrperson | Zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix. |
+| Informieren – Wissensbasiert oder lernend? Akinator und Filmlandkarte | 20 | Lehrperson | Zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix. |
 |  |  | Tandem | Wissensbasiert: Spielen Sie zwei Runden Akinator (en.akinator.com) mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld. Notieren Sie, welche Fragen gestellt werden, wie Ihre Antworten zum Ergebnis führen und was bei einer seltenen oder erfundenen Figur geschieht. |
-|  |  | Tandem | Lernend: Erkunden Sie in der Filmlandkarte auf der Kursseite einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte. |
+|  |  | Tandem | Lernend: Erkunden Sie in der Filmlandkarte (Link auf der Kursseite) einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte. |
 |  |  | Lehrperson | Stellt drei Lernsignale kurz an je einem Beispiel vor: Labels (Smiley-Spiel), Ähnlichkeit (K-Means), Rückmeldung (NIM). |
 |  |  | Tandem | Ordnen Sie jedem Beispiel das Lernsignal zu. |
 |  |  | Ergebnis | Zwei Beobachtungen (Akinator, Filmempfehlung) und eine Zuordnung Beispiel → Lernsignal als Rüstzeug für die Memory-Runden. |
-| Verarbeiten | 50 | Lehrperson | Erklärt die Memory-Regeln und verteilt die Rollen (Agent:in, Kartenleitung, zwei Beobachtende, Zeit und Protokoll). |
+| Verarbeiten – Memory, Smiley, K-Means und NIM | 50 | Lehrperson | Erklärt die Memory-Regeln und verteilt die Rollen (Agent:in, Kartenleitung, zwei Beobachtende, Zeit und Protokoll). |
 |  |  | Gruppe | Spielen Sie drei Runden mit Rollenwechsel. Runde 1 mit Labels: Die Kartenleitung zeigt beschriftete Karten, der Agent ordnet neue Karten zu. Runde 2 ohne Labels: Sortieren Sie die Karten nach Ähnlichkeit und benennen Sie die Merkmale der Gruppen. Runde 3 mit Rückmeldung: Suchen Sie verdeckte Paare, +1 pro Treffer und 0 pro Fehlversuch, und passen Sie die Strategie nach jeder Rückmeldung an. Pro Runde vier Minuten spielen, eine Minute notieren. |
 |  |  | Einzeln | Testen Sie im Smiley-Spiel und in Quick, Draw! je eine Zeichnung (kein persönliches Motiv; Zeichnungen können in einen öffentlichen Datensatz eingehen) und beschreiben Sie, was das System aus den Labels lernt. |
 |  |  | Tandem | Wählen Sie in K-Means die Verteilung «Gaussian Mixture» und beobachten Sie, wie die Mittelpunkte wandern. |
 |  |  | Tandem | Spielen Sie NIM in der verlinkten Lernstrecke und beobachten Sie, wie das System nach Gewinn oder Verlust seine Züge anpasst. |
 |  |  | Einzeln | Finden Sie im digitalen Begriffscheck Begriff und passende Rückmeldung als Paare. |
 |  |  | Ergebnis | Pro Memory-Runde eine Beobachtung im Journalfeld. |
-| Auswerten | 10 | Einzeln | Beantworten Sie im Journal: Was lernen die Systeme aus Labels, aus Ähnlichkeit, aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts (überwacht, weil die Trainingsbilder Klassennamen erhalten). |
+| Auswerten – Die drei Lernarten vergleichen | 10 | Einzeln | Beantworten Sie im Journal: Was lernen die Systeme aus Labels, aus Ähnlichkeit, aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts (überwacht, weil die Trainingsbilder Klassennamen erhalten). |
 |  |  | Lehrperson | Klärt: In Runde 3 lernte der Mensch, nicht die KI; NIM zeigt das KI-Beispiel. |
 |  |  | Ergebnis | Drei Beobachtungen, je eine pro Lernart, und die Zuordnung des Bildprojekts. |
 
@@ -102,19 +102,19 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Lehrperson | Stellt das Warnsignal vor: Es soll nur angehen, wenn beide Sensoren auslösen. |
+| Ankommen – Das Warnsignal: Regel vermuten | 5 | Lehrperson | Stellt das Warnsignal vor: Es soll nur angehen, wenn beide Sensoren auslösen. |
 |  |  | Einzeln | Vermuten Sie die Regel in Worten und notieren Sie für die vier möglichen Eingaben 00, 01, 10 und 11, ob das Signal angeht. |
 |  |  | Ergebnis | Eine Vermutung für die Regel mit vier Tabellenzeilen. |
-| Vorwissen aktivieren | 10 | Tandem | Benennen Sie zu zweit am Warnsignal, was die Eingabe und was das Label (die richtige Antwort) ist. Schreiben Sie die vier Eingaben in eine Tabelle und ergänzen Sie die Ausgabe für UND, dann für ODER und für XOR. |
+| Vorwissen aktivieren – Eingabe und Label benennen | 10 | Tandem | Benennen Sie zu zweit am Warnsignal, was die Eingabe und was das Label (die richtige Antwort) ist. Schreiben Sie die vier Eingaben in eine Tabelle und ergänzen Sie die Ausgabe für UND, dann für ODER und für XOR. |
 |  |  | Ergebnis | Drei Wahrheitstabellen mit je vier Zeilen und die Stelle, an der sich XOR von ODER unterscheidet. |
-| Informieren | 15 | Lehrperson | Projiziert die Perzeptron-Grafik und erklärt am Vorbild Nervenzelle die Bausteine: Eingaben, Gewichte, Summe, Schwelle, Ausgabe. Schreibt «Summe = x₁·w₁ + x₂·w₂ + b» und «ab Summe 0 feuert das Neuron» an und rechnet (1, 1) und (1, 0) mit Gewichten 1 und 1 und Bias −1.5 vor (Summen 0.5 und −0.5). |
+| Informieren – Von der Nervenzelle zum Perzeptron | 15 | Lehrperson | Projiziert die Nervenzell-Grafik und danach die Perzeptron-Grafik und erklärt am Vorbild Nervenzelle die Bausteine: Eingaben, Gewichte, Summe, Schwelle, Ausgabe. Schreibt «Summe = x₁·w₁ + x₂·w₂ + b» und «ab Summe 0 feuert das Neuron» an und rechnet (1, 1) und (1, 0) mit Gewichten 1 und 1 und Bias −1.5 vor (Summen 0.5 und −0.5). |
 |  |  | Einzeln → Tandem | Rechnen Sie (0, 0) und (0, 1) selbst und prüfen Sie im Tandem. |
 |  |  | Ergebnis | Eine vollständige UND-Tabelle: Summen −1.5, −0.5, −0.5, 0.5 und Ausgaben 0, 0, 0, 1. |
-| Verarbeiten | 50 | Einzeln | Bearbeiten Sie das Arbeitsblatt: Ausgaben berechnen und einen Lernschritt rechnen (Gewichte 0.2 und 0.2, Bias −0.5, Eingabe (1, 1), Lernrate 0.2). |
+| Verarbeiten – Gewichte und Bias berechnen und ausprobieren | 50 | Einzeln | Bearbeiten Sie das Arbeitsblatt: Ausgaben berechnen und einen Lernschritt rechnen (Gewichte 0.2 und 0.2, Bias −0.5, Eingabe (1, 1), Lernrate 0.2). |
 |  |  | Tandem | Arbeiten Sie das Notebook «Ein Neuron entscheidet» durch (Zeitmarken beachten): Nervenzelle und Neuron vergleichen, ein Neuron von Hand für AND, OR und NAND einstellen (bei jeder falschen Zeile nennt die Ausgabe, was zu tun ist), das Neuron selbst lernen lassen und dabei die Lernrate verändern, an echten Messdaten zwei Pflanzenarten unterscheiden und XOR versuchen. |
 |  |  | Tandem | Erklären Sie einander, was ein Gewicht und was der Bias bewirkt. |
 |  |  | Ergebnis | Eine von Hand eingestellte und eine gelernte AND-Regel sowie die Beobachtung, dass XOR nicht gelingt. |
-| Auswerten | 10 | Einzeln | Bestimmen Sie ohne Computer die Ausgabe für (0, 1) mit Gewichten 1 und 1 und Bias −1.5. Erklären Sie in zwei Sätzen, warum eine einzige Gerade XOR nicht trennt. |
+| Auswerten – Ausgabe bestimmen und an XOR scheitern | 10 | Einzeln | Bestimmen Sie ohne Computer die Ausgabe für (0, 1) mit Gewichten 1 und 1 und Bias −1.5. Erklären Sie in zwei Sätzen, warum eine einzige Gerade XOR nicht trennt. |
 |  |  | Lehrperson | Zeigt die vier XOR-Punkte und fragt, wie viele Linien man bräuchte. |
 |  |  | Ergebnis | Eine korrekte Rechnung und eine Erklärung zu XOR im Antwortfeld. |
 
@@ -135,19 +135,19 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Lehrperson | Zeigt die XOR-Punkte (00 und 11 mit Ziel 0, 01 und 10 mit Ziel 1). |
+| Ankommen – XOR mit einer Linie trennen? | 5 | Lehrperson | Zeigt die XOR-Punkte (00 und 11 mit Ziel 0, 01 und 10 mit Ziel 1). |
 |  |  | Einzeln | Zeichnen Sie die Punkte auf Papier, versuchen Sie mit einer Linie die Klassen zu trennen und notieren Sie, was sich ändern müsste. |
 |  |  | Ergebnis | Ein Vorschlag, wie mehr als eine Gerade helfen könnte. |
-| Vorwissen aktivieren | 10 | Tandem | Erklären Sie zu zweit die AND-Rechnung aus Doppellektion 3 (Gewichte, Bias, Summe, Ausgabe) und rekonstruieren Sie die vier XOR-Zielwerte ohne Hilfsmittel. Rechnen Sie einander eine Zeile vor. |
+| Vorwissen aktivieren – AND-Rechnung wiederholen | 10 | Tandem | Erklären Sie zu zweit die AND-Rechnung aus Doppellektion 3 (Gewichte, Bias, Summe, Ausgabe) und rekonstruieren Sie die vier XOR-Zielwerte ohne Hilfsmittel. Rechnen Sie einander eine Zeile vor. |
 |  |  | Ergebnis | Eine korrekt erklärte AND-Rechnung und die vier XOR-Zielwerte. |
-| Informieren | 15 | Lehrperson | Baut an der Tafel das Netz aus zwei Zwischenfragen auf: h₁ = OR (mindestens ein Eingang 1), h₂ = NAND (nicht beide 1); der Ausgang kombiniert beide mit AND. Verfolgt die Zeile (1, 0): OR ergibt 1, NAND ergibt 1, AND ergibt 1. Stellt klar: Dieses Netz hat festgelegte Gewichte. Beim Training findet ein Netz die Gewichte selbst: Vorhersage → Fehler bewerten → Gewichte ändern → wiederholen. |
+| Informieren – Zwei Zwischenfragen bauen das XOR-Netz | 15 | Lehrperson | Baut an der Tafel das Netz aus zwei Zwischenfragen auf: h₁ = OR (mindestens ein Eingang 1), h₂ = NAND (nicht beide 1); der Ausgang kombiniert beide mit AND. Verfolgt die Zeile (1, 0): OR ergibt 1, NAND ergibt 1, AND ergibt 1. Stellt klar: Dieses Netz hat festgelegte Gewichte. Beim Training findet ein Netz die Gewichte selbst: Vorhersage → Fehler bewerten → Gewichte ändern → wiederholen. |
 |  |  | Tandem | Ergänzen Sie die Zeilen (0, 0), (0, 1) und (1, 1) paarweise. |
 |  |  | Ergebnis | Eine vollständige Tabelle x₁, x₂, OR, NAND, Ausgang = XOR. |
-| Verarbeiten | 50 | Tandem | Bearbeiten Sie das Notebook «Mehrere Neuronen kombinieren»: Regeln im Regler vergleichen, das konstruierte XOR-Netz erklären, dann ein Netz XOR selbst lernen lassen (1, 2 und 4 versteckte Neuronen, verschiedene Startwerte) und beobachten, wann es gelingt. |
+| Verarbeiten – Netze kombinieren, Daten aufteilen, Thema wählen | 50 | Tandem | Bearbeiten Sie das Notebook «Mehrere Neuronen kombinieren»: Regeln im Regler vergleichen, das konstruierte XOR-Netz erklären, dann ein Netz XOR selbst lernen lassen (1, 2 und 4 versteckte Neuronen, verschiedene Startwerte) und beobachten, wann es gelingt. |
 |  |  | Tandem | Bearbeiten Sie das Notebook «Daten fair aufteilen»: Training, Validierung und Test mit der Prüfungsanalogie klären, das Datenleck am Apfelbeispiel finden und die drei Werte desselben Netzes vergleichen. |
 |  |  | Tandem | Wählen Sie im Tandem ein Thema aus dem Ideenpool und genau zwei Klassen und skizzieren Sie die fünf Gruppen T1, T2, V1, P1 und P2 (2 Klassen × 5 Gruppen × 8 Fotos = 80). Prüfen Sie die Skizze mit der Selbstcheck-Liste am Ende des Notebooks. |
 |  |  | Ergebnis | Eine erklärte XOR-Tabelle, begründete Rollen von Training, Validierung und Test und ein vorläufiger Datenplan. |
-| Auswerten | 10 | Tandem | Erklären Sie einem anderen Tandem den Weg von (1, 0) durch das Netz. Zeigen Sie der Lehrperson Ihren Datenplan zur Freigabe. |
+| Auswerten – Den Weg durch das Netz erklären | 10 | Tandem | Erklären Sie einem anderen Tandem den Weg von (1, 0) durch das Netz. Zeigen Sie der Lehrperson Ihren Datenplan zur Freigabe. |
 |  |  | Lehrperson | Gibt die Fotoregeln mit: beide Klassen unter gleichen Bedingungen (Hintergrund, Licht), acht verschiedene Fotos je Gruppe, Gruppen vor dem Fotografieren festlegen, Personen nur mit Einverständnis, Fotos bis zur nächsten Projekt-Doppellektion. |
 |  |  | Ergebnis | Ein freigegebener Datenplan und der Auftrag, 80 Fotos zu sammeln. |
 
@@ -168,17 +168,17 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Tandem | Legen Sie je ein leichtes und ein schwieriges Foto Ihrer Anwendung nebeneinander. Beschreiben Sie dem Tandem in einem Satz, woran Sie die Klasse erkennen und was den schwierigen Fall schwierig macht. |
+| Ankommen – Ein leichtes und ein schwieriges Foto | 5 | Tandem | Legen Sie je ein leichtes und ein schwieriges Foto Ihrer Anwendung nebeneinander. Beschreiben Sie dem Tandem in einem Satz, woran Sie die Klasse erkennen und was den schwierigen Fall schwierig macht. |
 |  |  | Ergebnis | Zwei Beispielfotos mit je einem Erkennungsmerkmal. |
-| Vorwissen aktivieren | 10 | Tandem | Erklären Sie sich gegenseitig, warum Fotos desselben Exemplars in derselben Gruppe bleiben und was bei A und B verglichen wird (A: ein Exemplar je Klasse, B: zwei, gleiche Bildzahl). Zählen Sie Ihre mitgebrachten Fotos je Klasse und Gruppe (Soll: 8) und markieren Sie Lücken. |
+| Vorwissen aktivieren – Gleiches Exemplar, gleiche Gruppe | 10 | Tandem | Erklären Sie sich gegenseitig, warum Fotos desselben Exemplars in derselben Gruppe bleiben und was bei A und B verglichen wird (A: ein Exemplar je Klasse, B: zwei, gleiche Bildzahl). Zählen Sie Ihre mitgebrachten Fotos je Klasse und Gruppe (Soll: 8) und markieren Sie Lücken. |
 |  |  | Ergebnis | Eine Zähltabelle 2 Klassen × 5 Gruppen mit markierten Lücken. |
-| Informieren | 15 | Lehrperson | Erklärt Auftrag, Zeitplan und die fünf Reflexionen, zeigt das Bewertungsraster (zehn Kompetenzen, 30 Punkte: Abgabe 18, Gespräch 12) und das ZIP-Sichern. Erklärt die Kette Foto → 224 × 224 Pixel → eingefrorenes MobileNet (1280 Merkmale) → unser trainierbares Netz (16 Neuronen) → Klasse. |
+| Informieren – Auftrag, Raster und der Weg vom Bild zum Netz | 15 | Lehrperson | Erklärt Auftrag, Zeitplan und die fünf Reflexionen, zeigt das Bewertungsraster (zehn Kompetenzen, 30 Punkte: Abgabe 18, Gespräch 12) und das ZIP-Sichern. Erklärt die Kette Foto → 224 × 224 Pixel → eingefrorenes MobileNet (1280 Merkmale) → unser trainierbares Netz (16 Neuronen) → Klasse. |
 |  |  | Einzeln | Zeichnen Sie die Kette und markieren Sie, was fest ist und was lernt. |
 |  |  | Ergebnis | Eine Skizze der Kette mit markiertem trainierbarem Teil. |
-| Verarbeiten | 50 | Tandem | Durchlaufen Sie das Lernlabor mit den Übungsdaten: Daten prüfen, A und B vergleichen, ein Bild verfolgen, Vorhersagen lesen. |
+| Verarbeiten – Lernlabor und eigene Fotos im Fotostudio | 50 | Tandem | Durchlaufen Sie das Lernlabor mit den Übungsdaten: Daten prüfen, A und B vergleichen, ein Bild verfolgen, Vorhersagen lesen. |
 |  |  | Tandem | Tragen Sie im Fotostudio zu jedem Foto Klasse, Gruppe und Quelle ein, prüfen Sie die Vorschau, verarbeiten Sie die Bilder und laden Sie die JSON herunter. Setzen Sie im Versuchsnotebook MODUS = 'EIGENE_DATEN' und die Klassennamen, laden Sie die JSON und prüfen Sie die Tabelle (für T1, T2 und V1 je 8 und 8 Bildern) sowie das Gruppenbild: Stimmen Klassen, Gruppen und Exemplare? Bei Fehlermeldungen hilft der Abschnitt «Hilfe» am Notebook-Ende. Bei Zeitreserve folgt der erste A/B-Lauf. |
 |  |  | Ergebnis | Ein geprüfter Datensatz mit 80 Bildern und fünf Gruppen und die heruntergeladene JSON. |
-| Auswerten | 10 | Lehrperson | Zeigt, wo das ZIP unter «Sichern & abgeben» liegt und wohin es später abgegeben wird. |
+| Auswerten – ZIP sichern und Reflexion 1 schreiben | 10 | Lehrperson | Zeigt, wo das ZIP unter «Sichern & abgeben» liegt und wohin es später abgegeben wird. |
 |  |  | Tandem | Schreiben Sie im Journal Reflexion 1 (Anwendung, Klassenregel, Vermutung) und Reflexion 2 (Gruppen, Quellen, ein Datenproblem), markieren Sie ein Datenproblem oder eine offene Frage und laden Sie das ZIP herunter. |
 |  |  | Ergebnis | Reflexion 1–2 und ein erstes ZIP. |
 
@@ -199,19 +199,19 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Tandem | Importieren Sie Ihr gesichertes ZIP, führen Sie die Vorbereitung und den Datenimport erneut aus und legen Sie ein Tagesziel fest (A/B-Lauf, Vorhersagen lesen, Auswahl begründen). |
+| Ankommen – Projektstand wiederherstellen | 5 | Tandem | Importieren Sie Ihr gesichertes ZIP, führen Sie die Vorbereitung und den Datenimport erneut aus und legen Sie ein Tagesziel fest (A/B-Lauf, Vorhersagen lesen, Auswahl begründen). |
 |  |  | Ergebnis | Ein bereiter Stand und ein Tagesziel. |
-| Vorwissen aktivieren | 10 | Tandem | Erklären Sie dem Tandem ohne Unterlagen, was sich zwischen A und B verändert und was gleich bleibt (Bildzahl, Netz, Epochen, Startwert, Validierungsbilder) und wofür V1 und P1/P2 dienen. Schreiben Sie Ihre Vermutung für den Vergleich auf (A besser, B besser oder gleich) mit einem Grund. |
+| Vorwissen aktivieren – Was unterscheidet A und B? | 10 | Tandem | Erklären Sie dem Tandem ohne Unterlagen, was sich zwischen A und B verändert und was gleich bleibt (Bildzahl, Netz, Epochen, Startwert, Validierungsbilder) und wofür V1 und P1/P2 dienen. Schreiben Sie Ihre Vermutung für den Vergleich auf (A besser, B besser oder gleich) mit einem Grund. |
 |  |  | Ergebnis | Eine schriftliche Vermutung mit Begründung. |
-| Informieren | 10 | Lehrperson | Rechnet ein Zahlenbeispiel vor: 12 von 16 Bildern richtig sind 75 %, 14 von 16 sind 87.5 %, der Unterschied beträgt 12.5 Prozentpunkte. Erklärt, warum ein Unterschied bei 16 Bildern und einem Lauf nur eine Beobachtung ist, und zeigt die Abfolge Vermuten → Lauf → Bilder lesen → Auswahl. Der Test bleibt geschlossen. |
+| Informieren – Trefferquoten richtig lesen | 10 | Lehrperson | Rechnet ein Zahlenbeispiel vor: 12 von 16 Bildern richtig sind 75 %, 14 von 16 sind 87.5 %, der Unterschied beträgt 12.5 Prozentpunkte. Erklärt, warum ein Unterschied bei 16 Bildern und einem Lauf nur eine Beobachtung ist, und zeigt die Abfolge Vermuten → Lauf → Bilder lesen → Auswahl. Der Test bleibt geschlossen. |
 |  |  | Einzeln | Rechnen Sie 13 von 16 gegen 13 von 16. |
 |  |  | Ergebnis | Sichere Anwendung von Trefferquote und Prozentpunkten. |
-| Verarbeiten | 55 | Tandem | Führen Sie die A/B-Zelle aus und lesen Sie die Trefferquoten auf V1 und den Unterschied in Prozentpunkten ab. |
+| Verarbeiten – A und B vergleichen, Vorhersagen untersuchen | 55 | Tandem | Führen Sie die A/B-Zelle aus und lesen Sie die Trefferquoten auf V1 und den Unterschied in Prozentpunkten ab. |
 |  |  | Tandem | Untersuchen Sie bei A und B die 16 Vorhersagen: Welche Bilder sind richtig, wo ist das Netz unsicher, gibt es Fehler? Notieren Sie mindestens ein konkretes Bild als Beleg. |
 |  |  | Tandem | Sammeln Sie eine alternative Erklärung (Hintergrund, Licht, Exemplar) und tragen Sie die Auswahl A oder B mit Begründung ins Journal ein (Reflexion 3). Nach der Hälfte wechseln Bedienung und Erklärung. |
 |  |  | Tandem | Prüfen Sie die Auswahl gegenseitig. |
 |  |  | Ergebnis | Reflexion 3 mit Werten, einem Bildbeleg, einer alternativen Erklärung und einer Auswahl mit Grund. |
-| Auswerten | 10 | Tandem | Lesen Sie Reflexion 3 gegenseitig oder tauschen Sie mit einem anderen Tandem: Passen Zahlen, Belege und Auswahl zusammen? Markieren und beheben Sie Lücken und laden Sie das ZIP herunter. |
+| Auswerten – Auswahl begründen (Reflexion 3) | 10 | Tandem | Lesen Sie Reflexion 3 gegenseitig oder tauschen Sie mit einem anderen Tandem: Passen Zahlen, Belege und Auswahl zusammen? Markieren und beheben Sie Lücken und laden Sie das ZIP herunter. |
 |  |  | Lehrperson | Kündigt an, dass der Test erst nach der gesicherten Auswahl freigegeben wird. |
 |  |  | Ergebnis | Eine geprüfte Reflexion 3 und ein gesichertes ZIP. |
 
@@ -230,18 +230,18 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Tandem | Zeigen Sie der Lehrperson oder dem Nachbartandem die vor Testeinsicht festgehaltene Auswahl samt Begründung (Reflexion 3). |
+| Ankommen – Auswahl vor dem Test belegen | 5 | Tandem | Zeigen Sie der Lehrperson oder dem Nachbartandem die vor Testeinsicht festgehaltene Auswahl samt Begründung (Reflexion 3). |
 |  |  | Ergebnis | Eine sichtbar gesicherte Auswahl. |
-| Vorwissen aktivieren | 10 | Tandem | Erklären Sie zu zweit, warum die Auswahl nach Testeinsicht nicht mehr geändert wird (der Test würde sonst zu einer zweiten Validierung), und nennen Sie die Gruppen, die noch nie ausgewertet wurden. |
+| Vorwissen aktivieren – Warum nach dem Test nichts mehr ändern? | 10 | Tandem | Erklären Sie zu zweit, warum die Auswahl nach Testeinsicht nicht mehr geändert wird (der Test würde sonst zu einer zweiten Validierung), und nennen Sie die Gruppen, die noch nie ausgewertet wurden. |
 |  |  | Ergebnis | Eine Erklärung in zwei Sätzen. |
-| Informieren | 10 | Lehrperson | Zeigt die Freigabe-Checkliste (Reflexion 3 vollständig, Variante und Begründung stimmen mit der Zelle überein) und erklärt, wie der Testwert zu lesen ist: 32 Bilder von zwei neuen Exemplaren je Klasse, eine vorsichtige Aussage. Zeigt, wie drei Beispiele untersucht werden (ein typischer Treffer, ein überraschender Treffer oder ein schwieriger Fall); Fehler zu erfinden ist nicht erlaubt. |
+| Informieren – Freigabe-Checkliste | 10 | Lehrperson | Zeigt die Freigabe-Checkliste (Reflexion 3 vollständig, Variante und Begründung stimmen mit der Zelle überein) und erklärt, wie der Testwert zu lesen ist: 32 Bilder von zwei neuen Exemplaren je Klasse, eine vorsichtige Aussage. Zeigt, wie drei Beispiele untersucht werden (ein typischer Treffer, ein überraschender Treffer oder ein schwieriger Fall); Fehler zu erfinden ist nicht erlaubt. |
 |  |  | Tandem | Haken Sie die Checkliste im Tandem ab. |
 |  |  | Ergebnis | Eine abgehakte Checkliste und die Freigabe durch das Tandem. |
-| Verarbeiten | 55 | Tandem | Tragen Sie Variante und Begründung in die Testzelle ein, setzen Sie TEST_FREIGEBEN = True und führen Sie die Zelle aus. Lesen Sie Trefferquote, Verwechslungstabelle und Beispiele. |
+| Verarbeiten – Abschlusstest, Beispiele und Reflexion 4 | 55 | Tandem | Tragen Sie Variante und Begründung in die Testzelle ein, setzen Sie TEST_FREIGEBEN = True und führen Sie die Zelle aus. Lesen Sie Trefferquote, Verwechslungstabelle und Beispiele. |
 |  |  | Tandem | Schreiben Sie Reflexion 4 (Trefferquote mit Bildzahl, drei Beispiele, was nicht geprüft wurde, Nutzen und Grenzen) und Reflexion 5 (Antwort auf die Forschungsfrage, nächster Versuch, Arbeitsteilung, Quellen und KI-Hilfen). |
 |  |  | Tandem | Wählen Sie ein Bild und erklären Sie: «Was wäre anders, wenn dieses Objekt schon im Training vorkam?» Prüfen Sie das Abgabepaket gegenseitig (Journal, Notebook mit Ausgaben, Originalfotos, JSON, Protokoll). |
 |  |  | Ergebnis | Ein Testergebnis, Reflexion 4–5 und ein vollständiges ZIP. |
-| Auswerten | 10 | Tandem | Schätzen Sie sich im Bewertungsraster selbst ein, markieren Sie Kompetenzen mit fehlendem Beleg und ergänzen Sie, was möglich ist, ohne Auswahl oder Test zu ändern. Laden Sie die vollständige ZIP-Sicherung herunter. |
+| Auswerten – Selbsteinschätzung und Abgabe | 10 | Tandem | Schätzen Sie sich im Bewertungsraster selbst ein, markieren Sie Kompetenzen mit fehlendem Beleg und ergänzen Sie, was möglich ist, ohne Auswahl oder Test zu ändern. Laden Sie die vollständige ZIP-Sicherung herunter. |
 |  |  | Lehrperson | Nennt Abgabekanal, Frist (vor Beginn der Doppellektion 8) sowie Dauer und Reihenfolge der Gespräche. |
 |  |  | Ergebnis | Ein fertiges Abgabepaket und eine bekannte Gesprächszeit. |
 
@@ -260,18 +260,18 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Lehrperson | Bestätigt die Abgaben, nennt Reihenfolge und Dauer der Gespräche, teilt jedem Tandem das Abgabe-ZIP eines anderen Tandems zu und erklärt Reproduktionsprüfung und Fallcheck: Die Gespräche laufen nach diesen Minuten parallel. |
+| Ankommen – Reihenfolge, Gespräche und zugeteiltes Projekt | 5 | Lehrperson | Bestätigt die Abgaben, nennt Reihenfolge und Dauer der Gespräche, teilt jedem Tandem das Abgabe-ZIP eines anderen Tandems zu und erklärt Reproduktionsprüfung und Fallcheck: Die Gespräche laufen nach diesen Minuten parallel. |
 |  |  | Tandem | Notieren Sie Ihr Gesprächsfenster und das Tandem, dessen Projekt Sie nachprüfen. |
 |  |  | Ergebnis | Jedes Tandem kennt Zeitfenster, Ablauf und das zu prüfende Projekt. |
-| Vorwissen aktivieren | 5 | Einzeln | Rufen Sie für das Gespräch und die Reproduktionsprüfung drei Stichpunkte aus Ihrem Projekt ab: Welche Daten und Labels hatten Sie? Was war ein Datenproblem? Welche Grenze oder welcher Fehler war sichtbar? Die Gespräche laufen bereits parallel. |
+| Vorwissen aktivieren – Drei Stichpunkte fürs Gespräch | 5 | Einzeln | Rufen Sie für das Gespräch und die Reproduktionsprüfung drei Stichpunkte aus Ihrem Projekt ab: Welche Daten und Labels hatten Sie? Was war ein Datenproblem? Welche Grenze oder welcher Fehler war sichtbar? Die Gespräche laufen bereits parallel. |
 |  |  | Ergebnis | Drei Stichpunkte als Erinnerungsstütze. |
-| Informieren | 5 | Einzeln | Lesen Sie auf der Kursseite die Anleitung zur Reproduktionsprüfung und den Auftrag Fallcheck und notieren Sie Fragen schriftlich, ohne die laufenden Gespräche zu unterbrechen. |
+| Informieren – Aufträge lesen | 5 | Einzeln | Lesen Sie auf der Kursseite die Anleitung zur Reproduktionsprüfung und den Auftrag Fallcheck und notieren Sie Fragen schriftlich, ohne die laufenden Gespräche zu unterbrechen. |
 |  |  | Ergebnis | Eine Liste offener Fragen. |
-| Verarbeiten | 70 | Tandem | Reproduktionsprüfung in einem privaten Browserfenster: Stellen Sie das zugeteilte Projekt wieder her, prüfen Sie die Daten, trainieren Sie A und B mit denselben Einstellungen nach, wiederholen Sie mit drei Startwerten und prüfen Sie den Abschlusstest mit der Variante des Originals. Vergleichen Sie Datenprüfsumme und Werte mit dem Versuchsprotokoll und schreiben Sie den Reproduktionsbericht. Laden Sie am Ende das Abgabepaket herunter und reichen Sie es ein. |
+| Verarbeiten – Reproduktionsprüfung, Fallcheck und eigenes Gespräch | 70 | Tandem | Reproduktionsprüfung in einem privaten Browserfenster: Stellen Sie das zugeteilte Projekt wieder her, prüfen Sie die Daten, trainieren Sie A und B mit denselben Einstellungen nach, wiederholen Sie mit drei Startwerten und prüfen Sie den Abschlusstest mit der Variante des Originals. Vergleichen Sie Datenprüfsumme und Werte mit dem Versuchsprotokoll und schreiben Sie den Reproduktionsbericht. Laden Sie am Ende das Abgabepaket herunter und reichen Sie es ein. |
 |  |  | Tandem | Fallcheck: Wählen Sie einen der drei fiktiven Fälle (Bewerbungen, Schule, Kredit): Welche Daten braucht das Modell? Was könnte schiefgehen? Wer trägt die Folgen? Welche Massnahme ist überprüfbar? Halten Sie Ihre Empfehlung fest. |
 |  |  | Tandem | Zu Ihrem Gesprächsfenster pausieren Sie die Arbeit. Im Gespräch erklären beide das Projekt: ein Bild durch das Modell, eine Daten- oder Versuchsentscheidung, ein Ergebnis samt Grenze und die Übertragung auf einen neuen Fall. Alle Gespräche enden vor der gemeinsamen Auswertung. |
 |  |  | Ergebnis | Ein bewertetes Gespräch, ein eingereichter Reproduktionsbericht mit nachtrainiertem Notebook und ein bearbeiteter Fallcheck. |
-| Auswerten | 5 | Tandem | Prüfen Sie, dass der Reproduktionsbericht eingereicht ist, sichern Sie den unbenoteten Fallcheck und notieren Sie eine Frage für «KI & Gesellschaft». |
+| Auswerten – Bericht prüfen, Frage für Doppellektion 10 | 5 | Tandem | Prüfen Sie, dass der Reproduktionsbericht eingereicht ist, sichern Sie den unbenoteten Fallcheck und notieren Sie eine Frage für «KI & Gesellschaft». |
 |  |  | Ergebnis | Ein eingereichter Reproduktionsbericht, ein gesicherter Fallcheck und eine Frage für Doppellektion 10. |
 
 
@@ -289,19 +289,19 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Lehrperson | Schreibt «Heute gehen wir …» an die Tafel. |
+| Ankommen – «Heute gehen wir …» | 5 | Lehrperson | Schreibt «Heute gehen wir …» an die Tafel. |
 |  |  | Einzeln → Klasse | Schreiben Sie zwei Fortsetzungen und lesen Sie sie vor; die Klasse sammelt die Unterschiede in Wortwahl, Länge und Ton. |
 |  |  | Ergebnis | Eine Sammlung verschiedener Fortsetzungen desselben Satzanfangs. |
-| Vorwissen aktivieren | 10 | Gruppe | Papierexperiment: Schreiben Sie reihum je ein Wort und falten Sie das Blatt so, dass die nächste Person nur die letzten zwei Wörter sieht. Wiederholen Sie das mit vier sichtbaren Wörtern. Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? |
+| Vorwissen aktivieren – Papierexperiment: reihum Wörter schreiben | 10 | Gruppe | Papierexperiment: Schreiben Sie reihum je ein Wort und falten Sie das Blatt so, dass die nächste Person nur die letzten zwei Wörter sieht. Wiederholen Sie das mit vier sichtbaren Wörtern. Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? |
 |  |  | Ergebnis | Zwei Texte und eine Aussage zum Einfluss des Kontexts. |
-| Informieren | 15 | Lehrperson | Erklärt am Papagei-Beispiel, wie ein Modell das nächste Wort aus der Häufigkeit von Wortfolgen in früheren Texten vorhersagt. Grenzt moderne Sprachmodelle ab: Tokens, viel grösserer Kontext und ein trainiertes neuronales Netz. Zeigt an einem Beispiel, dass «wahrscheinlich» nicht «wahr» heisst. |
+| Informieren – Papagei-Modell: das nächste Wort | 15 | Lehrperson | Erklärt am Papagei-Beispiel, wie ein Modell das nächste Wort aus der Häufigkeit von Wortfolgen in früheren Texten vorhersagt. Grenzt moderne Sprachmodelle ab: Tokens, viel grösserer Kontext und ein trainiertes neuronales Netz. Zeigt an einem Beispiel, dass «wahrscheinlich» nicht «wahr» heisst. |
 |  |  | Einzeln | Notieren Sie zwei Unterschiede zwischen dem Papagei-Modell und einem modernen Sprachmodell. |
 |  |  | Ergebnis | Zwei Unterschiede als Grundlage für die Stationen. |
-| Verarbeiten | 50 | Tandem | Bearbeiten Sie die von der Lehrperson ausgewählten Papagei-Stationen und halten Sie fest, wie sich die Fortsetzung mit mehr Kontext verändert. |
+| Verarbeiten – Papagei-Stationen und Soekia | 50 | Tandem | Bearbeiten Sie die von der Lehrperson ausgewählten Papagei-Stationen und halten Sie fest, wie sich die Fortsetzung mit mehr Kontext verändert. |
 |  |  | Tandem | Verändern Sie in Soekia jeweils nur eine Grösse (Kontext oder Wortwahl), vergleichen Sie die Texte und sichern Sie einen gelungenen und einen problematischen Text mit Beleg. |
 |  |  | Tandem | Verbinden Sie Ihre Beobachtungen mit dem Papierexperiment und beantworten Sie: Ist eine plausible Fortsetzung auch wahr? «Human or Not» wird nur bei schulischer Freigabe eingesetzt und ersetzt dann zehn Minuten Soekia. |
 |  |  | Ergebnis | Ein dokumentierter Vergleich mit zwei Texten und einer Aussage zu «plausibel ≠ wahr». |
-| Auswerten | 10 | Einzeln | Erklären Sie anhand Ihrer zwei Texte in drei Sätzen, was gelang, was problematisch war und warum Plausibilität keine Richtigkeit garantiert. Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells. |
+| Auswerten – Was gelang, was war problematisch? | 10 | Einzeln | Erklären Sie anhand Ihrer zwei Texte in drei Sätzen, was gelang, was problematisch war und warum Plausibilität keine Richtigkeit garantiert. Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells. |
 |  |  | Lehrperson | Fasst zusammen: Sprachmodelle sagen das nächste Token im Kontext voraus und prüfen nicht automatisch, ob eine Aussage wahr ist. |
 |  |  | Ergebnis | Ein belegter Textvergleich und zwei Grenzen. |
 
@@ -320,18 +320,18 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen | 5 | Lehrperson | Schreibt die These «Gleiche Regeln sind automatisch fair.» an die Tafel. |
+| Ankommen – «Gleiche Regeln sind automatisch fair» | 5 | Lehrperson | Schreibt die These «Gleiche Regeln sind automatisch fair.» an die Tafel. |
 |  |  | Klasse | Positionieren Sie sich im Raum (stimme zu, unsicher, stimme nicht zu) und nennen Sie einen Grund. |
 |  |  | Ergebnis | Ein Meinungsbild als Ausgangspunkt. |
-| Vorwissen aktivieren | 5 | Einzeln | Wählen Sie ein Datenproblem aus Ihrem Bildprojekt oder dem Fallcheck, zum Beispiel gleicher Hintergrund je Klasse oder zu wenige Exemplare, und schreiben Sie in einem Satz, welche Folge es für eine betroffene Person hätte, wenn das Modell im Alltag eingesetzt würde. |
+| Vorwissen aktivieren – Ein Datenproblem und seine Folge | 5 | Einzeln | Wählen Sie ein Datenproblem aus Ihrem Bildprojekt oder dem Fallcheck, zum Beispiel gleicher Hintergrund je Klasse oder zu wenige Exemplare, und schreiben Sie in einem Satz, welche Folge es für eine betroffene Person hätte, wenn das Modell im Alltag eingesetzt würde. |
 |  |  | Ergebnis | Ein Satz «Datenproblem → Folge». |
-| Informieren | 15 | Lehrperson | Zeigt Cathy O’Neils Video (ca. 13 Min.). Beobachtungsauftrag: Notieren Sie ein genanntes Beispiel mit Zeitmarke und fragen Sie: Wer entscheidet, wer profitiert, wer ist betroffen? |
+| Informieren – Cathy O’Neils TED Talk | 15 | Lehrperson | Zeigt Cathy O’Neils Video (ca. 13 Min.). Beobachtungsauftrag: Notieren Sie ein genanntes Beispiel mit Zeitmarke und fragen Sie: Wer entscheidet, wer profitiert, wer ist betroffen? |
 |  |  | Einzeln | Sichern Sie Ihre Beispiele stichwortartig. |
 |  |  | Ergebnis | Ein Beispiel mit Beleg und Stichworten. |
-| Verarbeiten | 55 | Gruppe | Erklären Sie in der Gruppe ein Beispiel aus dem Video in der Kette Problem → Ursache → begründete Verbesserung und schlagen Sie eine Massnahme vor. |
+| Verarbeiten – Beispiele und Fallwerkstatt | 55 | Gruppe | Erklären Sie in der Gruppe ein Beispiel aus dem Video in der Kette Problem → Ursache → begründete Verbesserung und schlagen Sie eine Massnahme vor. |
 |  |  | Gruppe | Wählen Sie in der Fallwerkstatt einen Fall (Bewerbungen, Schule, Kredit) und verteilen Sie die Rollen (betroffene Person, Betreiber, prüfende Person). Bauen Sie die Kette Daten → Modellentscheidung → betroffene Person → Folge auf, entwickeln Sie zwei Massnahmen mit Zuständigkeit und Erfolgskriterium, lassen Sie die Empfehlung von einer anderen Gruppe gegenprüfen («Woran würden wir die Verbesserung erkennen?») und halten Sie einen verbleibenden Zielkonflikt fest. |
 |  |  | Ergebnis | Eine Empfehlung mit Massnahmen, Zuständigkeit, Erfolgskriterium und Zielkonflikt. |
-| Auswerten | 10 | Einzeln | Formulieren Sie eine konkrete Massnahme, ein überprüfbares Erfolgskriterium und einen verbleibenden Zielkonflikt. Beurteilen Sie die Anfangsthese neu und vergleichen Sie mit Ihrer ersten Position. |
+| Auswerten – Massnahme und Erfolgskriterium festlegen | 10 | Einzeln | Formulieren Sie eine konkrete Massnahme, ein überprüfbares Erfolgskriterium und einen verbleibenden Zielkonflikt. Beurteilen Sie die Anfangsthese neu und vergleichen Sie mit Ihrer ersten Position. |
 |  |  | Lehrperson | Fragt bei allgemeinen Vorschlägen nach: Wer ändert was, und woran wäre die Verbesserung erkennbar? |
 |  |  | Ergebnis | Ein begründetes Urteil und eine bestätigte oder veränderte Position. |
 

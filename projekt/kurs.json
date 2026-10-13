@@ -11,6 +11,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "«Wann ist ein System intelligent?»",
           "minutes": 5,
           "schritte": [
             {
@@ -34,6 +35,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Regeln für Katze oder Hund schreiben",
           "minutes": 10,
           "schritte": [
             {
@@ -57,6 +59,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "KI, maschinelles Lernen und Deep Learning einordnen",
           "minutes": 25,
           "schritte": [
             {
@@ -104,6 +107,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Meilensteine, eigene Beispiele und Asimovs Gesetze",
           "minutes": 40,
           "schritte": [
             {
@@ -145,6 +149,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Einordnungen prüfen und Begriffe klären",
           "minutes": 10,
           "schritte": [
             {
@@ -185,6 +190,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "Was hilft einem System beim Lernen?",
           "minutes": 5,
           "schritte": [
             {
@@ -207,6 +213,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Woher kommt die Regel?",
           "minutes": 5,
           "schritte": [
             {
@@ -230,6 +237,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Wissensbasiert oder lernend? Akinator und Filmlandkarte",
           "minutes": 20,
           "schritte": [
             {
@@ -248,7 +256,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Lernend: Erkunden Sie in der Filmlandkarte auf der Kursseite einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte."
+              "text": "Lernend: Erkunden Sie in der Filmlandkarte (Link auf der Kursseite) einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte."
             },
             {
               "art": "Input",
@@ -271,6 +279,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Memory, Smiley, K-Means und NIM",
           "minutes": 50,
           "schritte": [
             {
@@ -317,6 +326,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Die drei Lernarten vergleichen",
           "minutes": 10,
           "schritte": [
             {
@@ -350,6 +360,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "Das Warnsignal: Regel vermuten",
           "minutes": 5,
           "schritte": [
             {
@@ -372,6 +383,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Eingabe und Label benennen",
           "minutes": 10,
           "schritte": [
             {
@@ -388,13 +400,14 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Von der Nervenzelle zum Perzeptron",
           "minutes": 15,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 10,
-              "text": "Projiziert die Perzeptron-Grafik und erklärt am Vorbild Nervenzelle die Bausteine: Eingaben, Gewichte, Summe, Schwelle, Ausgabe. Schreibt «Summe = x₁·w₁ + x₂·w₂ + b» und «ab Summe 0 feuert das Neuron» an und rechnet (1, 1) und (1, 0) mit Gewichten 1 und 1 und Bias −1.5 vor (Summen 0.5 und −0.5)."
+              "text": "Projiziert die Nervenzell-Grafik und danach die Perzeptron-Grafik und erklärt am Vorbild Nervenzelle die Bausteine: Eingaben, Gewichte, Summe, Schwelle, Ausgabe. Schreibt «Summe = x₁·w₁ + x₂·w₂ + b» und «ab Summe 0 feuert das Neuron» an und rechnet (1, 1) und (1, 0) mit Gewichten 1 und 1 und Bias −1.5 vor (Summen 0.5 und −0.5)."
             },
             {
               "art": "Auftrag",
@@ -411,6 +424,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Gewichte und Bias berechnen und ausprobieren",
           "minutes": 50,
           "schritte": [
             {
@@ -440,6 +454,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Ausgabe bestimmen und an XOR scheitern",
           "minutes": 10,
           "schritte": [
             {
@@ -474,6 +489,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "XOR mit einer Linie trennen?",
           "minutes": 5,
           "schritte": [
             {
@@ -496,6 +512,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "AND-Rechnung wiederholen",
           "minutes": 10,
           "schritte": [
             {
@@ -512,6 +529,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Zwei Zwischenfragen bauen das XOR-Netz",
           "minutes": 15,
           "schritte": [
             {
@@ -535,6 +553,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Netze kombinieren, Daten aufteilen, Thema wählen",
           "minutes": 50,
           "schritte": [
             {
@@ -564,6 +583,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Den Weg durch das Netz erklären",
           "minutes": 10,
           "schritte": [
             {
@@ -598,6 +618,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "Ein leichtes und ein schwieriges Foto",
           "minutes": 5,
           "schritte": [
             {
@@ -614,6 +635,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Gleiches Exemplar, gleiche Gruppe",
           "minutes": 10,
           "schritte": [
             {
@@ -630,6 +652,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Auftrag, Raster und der Weg vom Bild zum Netz",
           "minutes": 15,
           "schritte": [
             {
@@ -653,6 +676,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Lernlabor und eigene Fotos im Fotostudio",
           "minutes": 50,
           "schritte": [
             {
@@ -676,6 +700,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "ZIP sichern und Reflexion 1 schreiben",
           "minutes": 10,
           "schritte": [
             {
@@ -710,6 +735,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "Projektstand wiederherstellen",
           "minutes": 5,
           "schritte": [
             {
@@ -726,6 +752,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Was unterscheidet A und B?",
           "minutes": 10,
           "schritte": [
             {
@@ -742,6 +769,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Trefferquoten richtig lesen",
           "minutes": 10,
           "schritte": [
             {
@@ -765,6 +793,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "A und B vergleichen, Vorhersagen untersuchen",
           "minutes": 55,
           "schritte": [
             {
@@ -800,6 +829,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Auswahl begründen (Reflexion 3)",
           "minutes": 10,
           "schritte": [
             {
@@ -833,6 +863,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "Auswahl vor dem Test belegen",
           "minutes": 5,
           "schritte": [
             {
@@ -849,6 +880,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Warum nach dem Test nichts mehr ändern?",
           "minutes": 10,
           "schritte": [
             {
@@ -865,6 +897,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Freigabe-Checkliste",
           "minutes": 10,
           "schritte": [
             {
@@ -888,6 +921,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Abschlusstest, Beispiele und Reflexion 4",
           "minutes": 55,
           "schritte": [
             {
@@ -917,6 +951,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Selbsteinschätzung und Abgabe",
           "minutes": 10,
           "schritte": [
             {
@@ -950,6 +985,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "Reihenfolge, Gespräche und zugeteiltes Projekt",
           "minutes": 5,
           "schritte": [
             {
@@ -972,6 +1008,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Drei Stichpunkte fürs Gespräch",
           "minutes": 5,
           "schritte": [
             {
@@ -988,6 +1025,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Aufträge lesen",
           "minutes": 5,
           "schritte": [
             {
@@ -1004,6 +1042,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Reproduktionsprüfung, Fallcheck und eigenes Gespräch",
           "minutes": 70,
           "schritte": [
             {
@@ -1033,6 +1072,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Bericht prüfen, Frage für Doppellektion 10",
           "minutes": 5,
           "schritte": [
             {
@@ -1060,6 +1100,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "«Heute gehen wir …»",
           "minutes": 5,
           "schritte": [
             {
@@ -1082,6 +1123,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Papierexperiment: reihum Wörter schreiben",
           "minutes": 10,
           "schritte": [
             {
@@ -1098,6 +1140,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Papagei-Modell: das nächste Wort",
           "minutes": 15,
           "schritte": [
             {
@@ -1121,6 +1164,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Papagei-Stationen und Soekia",
           "minutes": 50,
           "schritte": [
             {
@@ -1150,6 +1194,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Was gelang, was war problematisch?",
           "minutes": 10,
           "schritte": [
             {
@@ -1183,6 +1228,7 @@
       "phases": [
         {
           "phase": "Ankommen",
+          "titel": "«Gleiche Regeln sind automatisch fair»",
           "minutes": 5,
           "schritte": [
             {
@@ -1205,6 +1251,7 @@
         },
         {
           "phase": "Vorwissen aktivieren",
+          "titel": "Ein Datenproblem und seine Folge",
           "minutes": 5,
           "schritte": [
             {
@@ -1221,6 +1268,7 @@
         },
         {
           "phase": "Informieren",
+          "titel": "Cathy O’Neils TED Talk",
           "minutes": 15,
           "schritte": [
             {
@@ -1244,6 +1292,7 @@
         },
         {
           "phase": "Verarbeiten",
+          "titel": "Beispiele und Fallwerkstatt",
           "minutes": 55,
           "schritte": [
             {
@@ -1267,6 +1316,7 @@
         },
         {
           "phase": "Auswerten",
+          "titel": "Massnahme und Erfolgskriterium festlegen",
           "minutes": 10,
           "schritte": [
             {
