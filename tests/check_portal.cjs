@@ -27,8 +27,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('[data-lab="lernarten.ipynb"]').count(),0);assert.equal(await p.locator('#lernarten a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]').count(),1);
 
   await p.locator('.nav a[href="#einstieg"]').click();
-    assert.equal(await p.locator('#einstieg .concept').count(),0);
-    assert.equal(await p.locator('#einstieg .external-map iframe').getAttribute('src'),'https://inf-schule.de/ki/menueansicht');
+    assert.equal(await p.locator('#einstieg .external-map').count(),0);
+    assert.equal(await p.locator('#einstieg img[src="grafiken/ki_programmierung.png"]').count(),1);
+    assert.equal(await p.locator('#einstieg img[src="grafiken/ki_einteilung.png"]').count(),1);
+    assert.equal(await p.locator('#einstieg .timeline li').count(),9);
+    assert.equal(await p.locator('#einstieg table.typen').count(),2);
+    for(const key of ['ki_ordnung','gesetze','begriffe'])assert.equal(await p.locator('#einstieg [data-answer="'+key+'"]').count(),1);
   await p.locator('.nav a[href="#lernarten"]').click();
   await p.locator('#lernarten').waitFor({state:'visible'});
   const systemsOverview=p.locator('#lernarten .learning-system-overview');

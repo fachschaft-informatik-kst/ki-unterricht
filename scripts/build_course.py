@@ -7,10 +7,32 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 PHASES = ['Ankommen', 'Vorwissen aktivieren', 'Informieren', 'Verarbeiten', 'Auswerten']
 
-def render(lesson):
-    rows = []
+def wer_klasse(wer):
+    if wer == 'Lehrperson': return 'wer-l'
+    if wer == 'Ergebnis': return 'wer-r'
+    if wer.startswith('Klasse'): return 'wer-k'
+    return 'wer-e' if wer.startswith('Einzeln') else 'wer-t'
+
+
+LEGENDE = ('<p class="wer-legende"><span class="wer-l">Lehrperson: Input</span><span class="wer-e">Einzelarbeit</span>'
+           '<span class="wer-t">Tandem oder Gruppe</span><span class="wer-k">Klasse gemeinsam</span><span class="wer-r">Ergebnis</span></p>')
+
+
+def tabelle(lesson):
+    kopf = '<thead><tr><th>Phase</th><th>Wer</th><th>Was</th><th>Min.</th></tr></thead>'
+    zeilen = []
     for phase in lesson['phases']:
-        rows.append(f'<li><span class="phase-time">{phase["minutes"]} Min.</span><div><strong>{html.escape(phase["phase"])}</strong><p>{html.escape(phase["task"])}</p></div></li>')
+        for i, step in enumerate(phase['schritte']):
+            zelle = ''
+            if i == 0:
+                zelle = f'<th class="phase" rowspan="{len(phase["schritte"])}" scope="rowgroup">{html.escape(phase["phase"])}<small>{phase["minutes"]} Min.</small></th>'
+            minuten = f'{step["min"]}' if step.get('min') else ''
+            zeilen.append(f'<tr class="{wer_klasse(step["wer"])}">{zelle}<td class="wer">{html.escape(step["wer"])}</td>'
+                          f'<td class="was">{html.escape(step["text"])}</td><td class="min">{minuten}</td></tr>')
+    return f'<div class="phase-table-wrap"><table class="phase-table">{kopf}<tbody>{"".join(zeilen)}</tbody></table></div>'
+
+
+def render(lesson):
     return (f'<details class="lesson-plan" data-lesson="{lesson["id"]}"><summary>'
             f'<span class="phase-num">{lesson["id"]}</span><span>Doppellektion {int(lesson["id"])} · {html.escape(lesson["title"])}</span>'
             '<small>90 Min.</small></summary><div class="detail-body">'
@@ -18,8 +40,8 @@ def render(lesson):
             f'<p class="lesson-question">{html.escape(lesson["question"])}</p>'
             + (f'<p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> {html.escape(lesson["motivation"])}</p>' if lesson.get('motivation') else '')
             +
-            '<p class="small muted">Unser Ablauf · AVIVA</p><ol class="lesson-phases">'+''.join(rows)+'</ol>'
-            f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p>'
+            '<p class="small muted">Unser Ablauf · AVIVA</p>'+LEGENDE+tabelle(lesson)
+            + f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p>'
             + (f'<p class="small muted"><strong>Zeit:</strong> {html.escape(lesson["zeit"])}</p>' if lesson.get('zeit') else '')
             + '</div></details>')
 
@@ -93,8 +115,12 @@ def build():
     page.write_text(text.rstrip()+"\n")
     rows = []
     for l in lessons:
-        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', '', f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['| AVIVA-Phase | Min. | Tätigkeit / Auftrag |', '|---|---:|---|'])
-        rows += [f'| {p["phase"]} | {p["minutes"]} | {p["task"]} |' for p in l['phases']]
+        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', '', f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['**Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.', ''])
+        rows += ['| Phase | Min. | Wer | Was |', '|---|---:|---|---|']
+        for p in l['phases']:
+            for i, st in enumerate(p['schritte']):
+                rows.append(f'| {p["phase"] if i == 0 else ""} | {p["minutes"] if i == 0 else ""} | {st["wer"]} | {st["text"]} |')
+        rows.append('')
         rows += ['', f'**Lernprodukt:** {l["product"]}', '']
         if l.get('zeit'): rows += [f'**Zeit:** {l["zeit"]}', '']
     plan = ROOT/'worksheets/md/KI_Planung.md'

@@ -15,9 +15,19 @@
 .lesson-phases li{display:grid;grid-template-columns:65px 1fr;gap:15px;padding:14px 0;border-top:1px solid var(--line)}
 .phase-time{font-size:12px;font-weight:700;color:var(--accent);padding-top:3px}
 .lesson-phases strong{font-size:14px}.lesson-phases p{font-size:14px;margin:5px 0 0}
+.wer-legende{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px;font-size:12px}.wer-legende span{padding:3px 10px;border-radius:999px;border:1px solid var(--line)}
+.phase-table-wrap{overflow-x:auto;margin:0 0 20px}.phase-table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.5}
+.phase-table th,.phase-table td{padding:9px 11px;border-top:1px solid var(--line);vertical-align:top;text-align:left}
+.phase-table thead th{font-size:12px;text-transform:none;color:var(--muted);border-top:0}
+.phase-table th.phase{width:132px;background:white;font-size:14px}.phase-table th.phase small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+.phase-table td.wer{width:118px;font-weight:700;font-size:13px}.phase-table td.min{width:44px;text-align:right;color:var(--muted);white-space:nowrap}
+.wer-l{background:#e3edfb}.wer-e{background:#fdf0d8}.wer-t{background:#e1f2e6}.wer-k{background:#ece6f6}.wer-r{background:#f1f3f4}
+tr.wer-r td.was{font-style:italic}tr.wer-r td.wer{color:var(--muted)}
+tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{color:#1f6b3a}tr.wer-k td.wer{color:#5b3a8c}
+.phase-table tr.wer-l td,.phase-table tr.wer-e td,.phase-table tr.wer-t td,.phase-table tr.wer-k td,.phase-table tr.wer-r td{background:inherit}
 .lesson-product{background:var(--soft);border-radius:8px;padding:14px;font-size:14px;margin-bottom:0}
 .concept-figure{margin:24px 0;background:white;border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center}
-.concept-figure img{display:block;max-width:100%;width:auto;max-height:365px;margin:auto}
+.concept-figure img{display:block;width:100%;max-width:700px;height:auto;margin:auto}
 .concept-figure figcaption{max-width:610px;margin:15px auto 0;color:var(--muted);font-size:13px}
 #sicherung.project-transfer{margin:34px 0;padding:28px;background:var(--soft);border-top:5px solid var(--accent)}
 .project-transfer-actions{display:grid;gap:18px;margin:24px 0}
@@ -49,8 +59,18 @@
 .learning-path-intro p{margin-bottom:14px;color:var(--muted)}
 .turing-activity{margin:24px 0;padding:20px 22px;border-left:4px solid var(--orange);background:var(--orange-soft)}
 .turing-activity p{margin-bottom:12px}
-@media(max-width:720px){.lesson-plan summary{flex-wrap:wrap}.lesson-plan summary small{display:none}.lesson-phases li{grid-template-columns:52px 1fr;gap:8px}.concept-figure{padding:15px}.concept-figure img{max-height:280px}}
+@media(max-width:720px){.lesson-plan summary{flex-wrap:wrap}.lesson-plan summary small{display:none}.phase-table{font-size:13px}.phase-table th.phase{width:90px}.phase-table td.wer{width:84px}.concept-figure{padding:15px}}
 @media(max-width:720px){.external-map{padding:6px}.external-map iframe{height:620px}}
 @media(max-width:720px){#sicherung.project-transfer{padding:22px 17px}.project-transfer-primary{display:grid;grid-template-columns:1fr}.project-transfer-primary .btn{width:100%;text-align:center}.project-submission-action{align-items:flex-start;flex-direction:column}}
 
 .nav span{width:38px}
+.task{background:var(--soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0}
+.typen{width:100%;border-collapse:collapse;font-size:14px;line-height:1.5}.typen th,.typen td{padding:10px 12px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.typen thead th{font-size:12px;color:var(--muted);border-top:0}.typen tbody th{width:190px;background:var(--soft)}
+.timeline{list-style:none;margin:18px 0;padding:0;border-left:3px solid var(--line)}
+.timeline li{display:grid;grid-template-columns:104px 1fr;gap:14px;position:relative;padding:8px 0 14px 18px}
+.timeline li::before{content:"";position:absolute;left:-9px;top:14px;width:15px;height:15px;border-radius:50%;background:white;border:3px solid var(--accent)}
+.timeline .jahr{font-weight:700;color:var(--accent);font-size:14px}.timeline p{margin:4px 0 0;font-size:14px}
+.marke{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;vertical-align:middle}
+.marke.regeln{background:#e3edfb;color:#1f4e8c}.marke.daten{background:#e1f2e6;color:#1f6b3a}
+@media(max-width:720px){.timeline li{grid-template-columns:1fr;gap:2px}.typen tbody th{width:auto}}

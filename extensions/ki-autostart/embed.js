@@ -48,7 +48,7 @@ export function setupEmbed(app, tracker, allowed) {
   }
   window.addEventListener('message',async event=>{
     if(event.origin!==origin || event.source!==window.parent || event.data?.channel!=='ki-portal-v1')return;
-    const {type,id,notebook}=event.data;
+    const {type,id,notebook,keepKernel}=event.data;
     if(!panel || panel.isDisposed)return;
     if(type==='hello'){announce();return;}
     if(!['snapshot','restore'].includes(type))return;
@@ -73,8 +73,10 @@ export function setupEmbed(app, tracker, allowed) {
         const nb=checkedNotebook(notebook);
         await waitIdle();
         // Restore documents and outputs only, never a live namespace or imported code.
-        await panel.sessionContext.session.kernel.restart();
-        await waitIdle();
+        if(!keepKernel){
+          await panel.sessionContext.session.kernel.restart();
+          await waitIdle();
+        }
         const preparation=nb.cells.find(c=>c.cell_type==='code');
         if(preparation){preparation.metadata={...preparation.metadata,jupyter:{...preparation.metadata?.jupyter,source_hidden:false}};}
         panel.context.model.fromJSON(nb);

@@ -24,8 +24,10 @@ for lesson in lessons:
     lesson_label=f'Doppellektion {int(lesson["id"])}'
     assert plan and lesson_label in plan.get_text()
     for phase in lesson['phases']:
-        assert phase['task'] in plan.get_text()
-        assert phase['task'] in (root/'worksheets/md/KI_Planung.md').read_text()
+        assert phase['schritte'] and phase['schritte'][-1]['art']=='Ergebnis'
+        for step in phase['schritte']:
+            assert step['text'] in plan.get_text(), step['text'][:40]
+            assert step['text'] in (root/'worksheets/md/KI_Planung.md').read_text(), step['text'][:40]
 for a in soup.select('a[href^="#"]'):
     assert a['href'][1:] in ids, a['href']
 for img in soup.select('img'):
@@ -74,6 +76,12 @@ for n,talk,switch,total,reserve in rows:
     assert int(n)*(float(talk.replace(',','.'))+float(switch.replace(',','.')))==int(total)
     assert int(total)+int(reserve)==80
 assert 'Alle Fachgespräche finden in Doppellektion 8 statt.' in soup.get_text()
+repro=soup.select_one('details#reproduktion')
+assert repro and repro.select_one('textarea[data-journal="reproduktion"][data-optional]')
+assert 'privaten Fenster' in repro.get_text() and 'daten_sha256' in repro.get_text() and 'wiederholen=True' in repro.get_text()
+lesson8=soup.select_one('[data-lesson="08"]')
+assert sum(int(x.get_text()) for x in lesson8.select('.min') if x.get_text().strip().isdigit())>=70
+assert 'Reproduktionsprüfung' in lesson8.get_text() and 'Reproduktionsprüfung' in planning
 assert not re.search(r'\b\d{1,2}\.\d{1,2}\.20\d{2}\b',soup.get_text())
 for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektauftrag.md').read_text()]:
     assert not any(old in document for old in ['über mehrere Termine','auf weitere Termine','zusätzliche Gesprächszeiten'])
