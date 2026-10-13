@@ -43,8 +43,8 @@
       "date": "10.11.2026",
       "view": "lernarten",
       "title": "Wie lernt KI?",
-      "goal": "Drei Lernarten anhand der Rückmeldung unterscheiden.",
-      "question": "Was hilft beim Lernen: Lösungen, Ähnlichkeit oder Belohnung?",
+      "goal": "Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.",
+      "question": "Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
       "phases": [
         {
           "phase": "Ankommen",
@@ -59,20 +59,20 @@
         {
           "phase": "Informieren",
           "minutes": 15,
-          "task": "Die drei Lernarten mit je einem Beispiel klären. Eingabe, Label und Belohnung unterscheiden."
+          "task": "Wissensbasierte Systeme mit festen Regeln von lernenden Systemen mit Erfahrungsschatz unterscheiden. Danach Labels, Ähnlichkeit und Belohnung als drei Lernsignale einordnen."
         },
         {
           "phase": "Verarbeiten",
           "minutes": 50,
-          "task": "Memory in zwei Runden: Karten mit Labels zuordnen und ohne Labels gruppieren (15 Min.). Überwachte Beispiele mit Smiley und Quick, Draw! vergleichen (10 Min.). Unüberwachtes Gruppieren in der K-Means-Visualisierung beobachten (10 Min.). NIM-Lernstrecke mit Rückmeldungen spielen (10 Min.). Die drei Lernarten zuordnen (5 Min.)."
+          "task": "In Fünfergruppen Memory in drei Runden spielen (15 Min.; Rollen wechseln): zuerst Beispiele mit Labels zuordnen (supervised), dann ohne Labels gruppieren (unsupervised), zuletzt Memory-Paare mit +1 pro Treffer und 0 pro Fehlversuch suchen und die Strategie nach der Rückmeldung anpassen (verstärkend). Smiley und Quick, Draw! vergleichen (10 Min.), K-Means beobachten (10 Min.), NIM als verstärkendes Lernen eines KI-Systems untersuchen (10 Min.) und im digitalen Begriffscheck die drei Arten sichern (5 Min.)."
         },
         {
           "phase": "Auswerten",
           "minutes": 10,
-          "task": "Memory und NIM begründet zuordnen. Für das Bildprojekt die passende Lernart benennen."
+          "task": "Für jede Lernart eine Beobachtung im Journal festhalten. Vergleichen: Was lernen die Systeme aus Labels, Ähnlichkeit oder Rückmeldung? NIM begründet zuordnen und die Lernart des Bildprojekts benennen."
         }
       ],
-      "product": "Drei Lernarten mit Beispiel und jeweiliger Rückmeldung."
+      "product": "Ein Vergleich wissensbasierter und lernender Systeme sowie drei Beobachtungen zu Lernarten."
     },
     {
       "id": "03",

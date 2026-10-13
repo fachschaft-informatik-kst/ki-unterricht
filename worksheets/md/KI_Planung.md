@@ -31,19 +31,19 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 ### 02 · 10.11.2026 · Wie lernt KI?
 
-**Lernziel:** Drei Lernarten anhand der Rückmeldung unterscheiden.
+**Lernziel:** Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.
 
-**Leitfrage:** Was hilft beim Lernen: Lösungen, Ähnlichkeit oder Belohnung?
+**Leitfrage:** Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?
 
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
 | Ankommen | 5 | Ein Bild ohne und mit Klassenname vergleichen: Welche zusätzliche Information hilft? |
 | Vorwissen aktivieren | 10 | An die Einstiegsbeispiele anknüpfen: Was heisst «aus Daten lernen»? |
-| Informieren | 15 | Die drei Lernarten mit je einem Beispiel klären. Eingabe, Label und Belohnung unterscheiden. |
-| Verarbeiten | 50 | Memory in zwei Runden: Karten mit Labels zuordnen und ohne Labels gruppieren (15 Min.). Überwachte Beispiele mit Smiley und Quick, Draw! vergleichen (10 Min.). Unüberwachtes Gruppieren in der K-Means-Visualisierung beobachten (10 Min.). NIM-Lernstrecke mit Rückmeldungen spielen (10 Min.). Die drei Lernarten zuordnen (5 Min.). |
-| Auswerten | 10 | Memory und NIM begründet zuordnen. Für das Bildprojekt die passende Lernart benennen. |
+| Informieren | 15 | Wissensbasierte Systeme mit festen Regeln von lernenden Systemen mit Erfahrungsschatz unterscheiden. Danach Labels, Ähnlichkeit und Belohnung als drei Lernsignale einordnen. |
+| Verarbeiten | 50 | In Fünfergruppen Memory in drei Runden spielen (15 Min.; Rollen wechseln): zuerst Beispiele mit Labels zuordnen (supervised), dann ohne Labels gruppieren (unsupervised), zuletzt Memory-Paare mit +1 pro Treffer und 0 pro Fehlversuch suchen und die Strategie nach der Rückmeldung anpassen (verstärkend). Smiley und Quick, Draw! vergleichen (10 Min.), K-Means beobachten (10 Min.), NIM als verstärkendes Lernen eines KI-Systems untersuchen (10 Min.) und im digitalen Begriffscheck die drei Arten sichern (5 Min.). |
+| Auswerten | 10 | Für jede Lernart eine Beobachtung im Journal festhalten. Vergleichen: Was lernen die Systeme aus Labels, Ähnlichkeit oder Rückmeldung? NIM begründet zuordnen und die Lernart des Bildprojekts benennen. |
 
-**Lernprodukt:** Drei Lernarten mit Beispiel und jeweiliger Rückmeldung.
+**Lernprodukt:** Ein Vergleich wissensbasierter und lernender Systeme sowie drei Beobachtungen zu Lernarten.
 
 ### 03 · 24.11.2026 · Wie entscheidet ein Neuron?
 
@@ -189,11 +189,13 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 
 ### 02 · Wie lernt KI?
 
-**Vorbereiten:** Memory-Karten, Lernartenblatt sowie die drei Lernbeispiele öffnen: [Smiley-Spiel](https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2), [Quick, Draw!](https://quickdraw.withgoogle.com/), [K-Means-Visualisierung](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/) und [NIM-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke). Für das Kartenbeispiel eine eindeutige Regel bereithalten, etwa «zeigt ein Werkzeug / zeigt kein Werkzeug».
+**Vorbereiten:** Memory-Karten für Gruppen zu fünf und die EVA-Grafik bereitlegen. Rollen festlegen: Agent:in, Kartenleitung, zwei Beobachtende sowie Zeit/Protokoll. Smiley-Spiel, Quick, Draw!, K-Means-Visualisierung und NIM-Lernstrecke öffnen. Für Runde 1 eine eindeutige Label-Regel bereithalten, etwa «zeigt ein Werkzeug / zeigt kein Werkzeug».
 
-**Durchführen:** Memory zuerst mit Labels spielen: Eine Person beschriftet acht Karten, die Partnerperson ordnet neue zu. Danach ohne Labels gruppieren; mehrere sinnvolle Gruppierungen ausdrücklich zulassen. Im Smiley-Spiel und in Quick, Draw! je eine neue Zeichnung testen: Woher kommen die Kategorien, und was sieht das System? Bei Quick, Draw! keine persönlichen Motive zeichnen; Zeichnungen können in einen öffentlichen Datensatz eingehen. In der K-Means-Visualisierung den Datensatz «Gaussian Mixture» wählen und verfolgen, wie Punkte ohne Labels eingefärbt und Mittelpunkte verschoben werden. In NIM vor dem ersten Zug Spielzustand, Handlung und Rückmeldung benennen lassen.
+**Einführen:** Vor den Lernarten die EVA-Grafik zeigen: Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe. Daneben ein wissensbasiertes Beispiel stellen: Menschen formulieren Fakten und Wenn-dann-Regeln, das System wendet sie an. Fragen: «Wer hat die Regel festgelegt? Was passiert mit einem Fall, an den niemand gedacht hat?» Beim lernenden System kommt der Erfahrungsschatz aus Daten und kann sich verändern; Filmempfehlungen sind ein Beispiel.
 
-**Prüfen:** Lernende sollen bei jedem Beispiel die Eingabe und die Information nennen, die das Lernen steuert: richtige Labels beim überwachten Lernen, Ähnlichkeit ohne Labels beim unüberwachten Lernen oder Rückmeldung nach einer Handlung beim verstärkenden Lernen. Im K-Means-Beispiel sind die Farben vom Algorithmus erzeugte Gruppen, keine vorgegebenen Klassen. Das Bildprojekt ist überwacht, weil die Trainingsbilder Klassennamen erhalten.
+**Durchführen:** Drei Memory-Runden mit Rollenwechseln spielen: 1. **Supervised:** Kartenleitung zeigt gelabelte Beispiele; Agent ordnet neue Karten zu und vergleicht mit den Labels. 2. **Unsupervised:** Labels abdecken und ohne vorgegebene Zielgruppen nach Ähnlichkeit sortieren. 3. **Verstärkend:** Paare verdeckt auslegen; Treffer geben +1, Fehlversuche 0. Agent passt die Suchstrategie nach jeder Rückmeldung an. Etwa vier Minuten spielen, eine Minute beobachten und notieren. Danach im Smiley-Spiel und in Quick, Draw! je eine Zeichnung testen. Bei Quick, Draw! keine persönlichen Motive zeichnen; Zeichnungen können in einen öffentlichen Datensatz eingehen. In K-Means «Gaussian Mixture» wählen und die Gruppierung nach Mittelpunkten beobachten. NIM anschliessend als Beispiel für einen KI-Agenten mit Rückmeldungen ansehen.
+
+**Sichern und prüfen:** Pro Memory-Runde eine Beobachtung im jeweiligen Journalfeld notieren; anschliessend die Vergleichsfrage «Was fällt auf?» beantworten. Der digitale Begriffscheck darunter dient nur der Wissenssicherung und vergibt keine Belohnungspunkte. Erwartete Unterscheidung: Labels beim überwachten Lernen, selbst gewählte Ähnlichkeit beim unüberwachten Lernen und Belohnung als Signal für die nächste Handlung beim verstärkenden Lernen. In Runde 3 lernt der Mensch, nicht die KI; NIM zeigt danach das KI-Beispiel. Im K-Means-Beispiel sind Farben erzeugte Gruppen, keine vorgegebenen Klassen. Das Bildprojekt ist überwacht, weil seine Trainingsbilder Klassennamen erhalten.
 
 ### 03 · Wie entscheidet ein Neuron?
 

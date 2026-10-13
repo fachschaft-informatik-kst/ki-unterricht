@@ -29,6 +29,19 @@
 .external-map figcaption{padding:12px 8px 4px;color:var(--muted);font-size:13px}
 .learning-example-links{display:grid;gap:7px;margin-top:12px}
 .learning-example-links a{font-size:13px;font-weight:650}
+.learning-system-overview{margin:24px 0 32px}
+.learning-system-overview>.grid{margin:14px 0}
+.learning-system-overview .card h3{font-size:18px}
+.learning-system-overview .card a{font-size:13px;font-weight:650}
+.learning-system-figure{margin:18px 0}
+.learning-system-figure img{max-height:300px}
+.learning-system-figure figcaption{max-width:720px}
+.group-memory-instructions{margin:0 0 18px;padding:15px 18px;border-left:3px solid var(--accent);background:var(--soft)}
+.group-memory-instructions p{margin:0 0 10px;font-size:14px}
+.group-memory-instructions ol{margin:0 0 10px;padding-left:22px}
+.group-memory-instructions li{margin:7px 0;font-size:13px;line-height:1.5}
+.memory-observations{display:grid;gap:12px;margin:20px 0}
+.memory-observations h3{font-size:18px;margin:0}
 .learning-example-note{margin:7px 0 0!important;font-size:11px!important;line-height:1.45;color:var(--muted)}
 .learning-path-intro{padding:14px 10px 2px}
 .learning-path-intro h2,.turing-activity h2{font-size:22px;margin-bottom:8px}

@@ -1,6 +1,47 @@
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
 const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1';
+const memoryComparison=document.querySelector('#lernarten [data-answer="memory"]');
+if(memoryComparison){
+ const comparisonField=memoryComparison.closest('label.field');
+ comparisonField.querySelector('span').textContent='Was fällt auf, wenn du die drei Lernarten vergleichst?';
+ const observations=document.createElement('div');observations.className='memory-observations';
+ const heading=document.createElement('h3');heading.textContent='Meine Beobachtungen';observations.append(heading);
+ const prompts=[
+  {key:'memory-supervised',label:'Überwacht: Was zeigen die Labels? Was erkennt das System sicher oder falsch?',placeholder:'Unsere Beobachtung zu Beispielen mit Lösungen …'},
+  {key:'memory-unsupervised',label:'Unüberwacht: Nach welcher Ähnlichkeit hast du gruppiert? Gab es mehrere plausible Gruppen?',placeholder:'Unsere Beobachtung zu Gruppen ohne Labels …'},
+  {key:'memory-reinforcement',label:'Verstärkend: Welche Rückmeldung veränderte die Zugwahl? Was wurde belohnt?',placeholder:'Unsere Beobachtung zu Handlung und Rückmeldung …'}
+ ];
+ for(const prompt of prompts){
+  const field=document.createElement('label');field.className='field answer';
+  const label=document.createElement('span');label.textContent=prompt.label;
+  const textarea=document.createElement('textarea');textarea.dataset.answer=prompt.key;textarea.maxLength=10000;textarea.rows=3;textarea.placeholder=prompt.placeholder;
+  field.append(label,textarea);observations.append(field);
+ }
+ comparisonField.before(observations);
+}
+const groupMemory=[...document.querySelectorAll('#lernarten details')].find(detail=>detail.querySelector('[data-answer="memory"]'));
+if(groupMemory){
+ groupMemory.querySelector('summary').textContent='Gruppen-Memory: drei Lernrunden';
+ const instructions=document.createElement('div');instructions.className='group-memory-instructions';
+ const roles=document.createElement('p');roles.textContent='In Fünfergruppen: ein Agent, eine Kartenleitung, zwei Beobachtende und eine Person für Zeit/Protokoll. Die Agent-Rolle wechselt nach jeder Runde.';
+ const rounds=document.createElement('ol');
+ const roundTexts=[
+  'Supervised: Die Kartenleitung zeigt beschriftete Beispiele. Der Agent ordnet neue Karten zu und vergleicht danach mit den Labels.',
+  'Unsupervised: Labels abdecken und ohne Zielgruppen nach Ähnlichkeit sortieren. Mehrere sinnvolle Gruppierungen zulassen.',
+  'Verstärkend: Memory-Paare verdeckt auslegen. Ein Paar gibt +1 Punkt, ein Fehlversuch 0. Nach der Rückmeldung darf der Agent die Suchstrategie ändern.'
+ ];
+ for(const text of roundTexts){const item=document.createElement('li');item.textContent=text;rounds.append(item);}
+ const reminder=document.createElement('p');reminder.className='small';reminder.textContent='Etwa 4 Minuten spielen, dann 1 Minute beobachten und notieren. In Runde 3 lernt der Mensch als Agent, nicht die KI.';
+ instructions.append(roles,rounds,reminder);groupMemory.querySelector('.detail-body .grid.two').before(instructions);
+ const oldSheetNote=groupMemory.querySelector('.detail-body > p.small');
+ if(oldSheetNote)oldSheetNote.textContent='Die drei Runden und Beobachtungen stehen hier auf der Kursseite. NIM ist anschliessend das Beispiel für einen KI-Agenten mit Rückmeldungen.';
+}
+const knowledgeCheck=[...document.querySelectorAll('#lernarten details')].find(detail=>detail.querySelector('#memory-board'));
+if(knowledgeCheck){
+ knowledgeCheck.querySelector('summary').textContent='Wissenssicherung: Lernarten zuordnen';
+ knowledgeCheck.querySelector('.detail-body p').textContent='Ordnen Sie die Begriffe den passenden Rückmeldungen zu und begründen Sie jedes Paar. Dieser Check sichert das Gelernte; die Gruppenrunden mit Memory stehen darüber.';
+}
 const journalFields=all('[data-journal]'),answerFields=all('[data-answer]');
 let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=null,protocolSignature='',restorePending=false,files=new Map(),db=null;
 let filesStored=true,artifactStored=true;
@@ -40,7 +81,27 @@ const intro=document.getElementById('einstieg');
  intro.querySelector('.concept')?.closest('details')?.remove();
 intro.querySelector('[data-answer="begriffe"]').previousElementSibling.textContent='Welche Beispiele aus der KI-Landkarte waren neu für Sie? Woran erkennen Sie, ob ein System aus Daten lernt?';
 intro.querySelector('.lesson-steps').after(embeddedLearningPath('https://inf-schule.de/ki/menueansicht','Interaktive KI-Landkarte von inf-schule.de','in neuem Tab öffnen'));
-const language=document.getElementById('sprache');
+const learningTypes=document.getElementById('lernarten');
+const systemsOverview=document.createElement('section');systemsOverview.className='learning-system-overview';
+const systemsHeading=document.createElement('h2');systemsHeading.textContent='Wissensbasiert oder lernend?';
+const systemsLead=document.createElement('p');systemsLead.className='section-intro';systemsLead.textContent='Woher kommt die Entscheidungsregel: von Menschen oder aus Beispielen und Daten?';
+const systemsGrid=document.createElement('div');systemsGrid.className='grid two';
+const ruleCard=document.createElement('article');ruleCard.className='card';
+const ruleHeading=document.createElement('h3');ruleHeading.textContent='Wissensbasiert · Regeln anwenden';
+const ruleText=document.createElement('p');ruleText.textContent='Menschen legen Fakten und Wenn-dann-Regeln fest. Das System wendet sie an, lernt aber nicht selbst aus Beispielen. Beispiel: ein Entscheidungsbaum.';
+const ruleLink=document.createElement('a');ruleLink.href='https://inf-schule.de/ki/menueansicht/basiswissen_ki/lernarten/erkundung_WissensbasierteSysteme';ruleLink.target='_blank';ruleLink.rel='noopener noreferrer';ruleLink.textContent='Beispiel bei inf-schule ansehen ↗';
+ruleCard.append(ruleHeading,ruleText,ruleLink);
+const learningCard=document.createElement('article');learningCard.className='card';
+const learningHeading=document.createElement('h3');learningHeading.textContent='Lernend · Muster aus Daten';
+const learningText=document.createElement('p');learningText.textContent='Das System baut aus Beispielen einen Erfahrungsschatz auf. Neue Daten können ihn verändern und dadurch auch seine Entscheidungen. Beispiel: Filmempfehlungen eines Streamingdienstes.';
+const learningLink=document.createElement('a');learningLink.href='https://inf-schule.de/ki/menueansicht/basiswissen_ki/lernarten/erkundung_LernendeSysteme';learningLink.target='_blank';learningLink.rel='noopener noreferrer';learningLink.textContent='Beispiel bei inf-schule ansehen ↗';
+learningCard.append(learningHeading,learningText,learningLink);systemsGrid.append(ruleCard,learningCard);
+const evaFigure=document.createElement('figure');evaFigure.className='concept-figure learning-system-figure';
+const evaImage=document.createElement('img');evaImage.src='https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png';evaImage.alt='EVA-Prinzip eines lernenden Systems: Eine Eingabe wird mit dem Erfahrungsschatz verarbeitet; die Ausgabe kann den Erfahrungsschatz erweitern.';evaImage.loading='lazy';
+const evaCaption=document.createElement('figcaption');evaCaption.textContent='Ein lernendes System verarbeitet Eingaben mit seinem Erfahrungsschatz. Neue Erfahrungen können ihn verändern.';evaFigure.append(evaImage,evaCaption);
+const hybridNote=document.createElement('p');hybridNote.className='small muted';hybridNote.textContent='In der Praxis können feste Regeln und Lernen aus Daten auch kombiniert werden.';
+systemsOverview.append(systemsHeading,systemsLead,systemsGrid,evaFigure,hybridNote);
+learningTypes.querySelector('.lesson-steps').before(systemsOverview);
 const learningExamples=[
  {title:'Überwacht · mit Labels',description:'Das System lernt mit Beispielen und den richtigen Kategorien. Danach ordnet es neue Beispiele zu.',links:[
   {href:'https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2',text:'Smiley-Spiel: fröhlich oder traurig? · inf-schule'},
@@ -53,7 +114,7 @@ const learningExamples=[
   {href:'#nim-example',text:'NIM-Lernstrecke ansehen ↓'}
  ]}
 ];
-const learningCards=language.querySelectorAll('.lesson-steps article');
+const learningCards=learningTypes.querySelectorAll('.lesson-steps article');
 learningCards.forEach((card,index)=>{
  const example=learningExamples[index];
  card.querySelector('b').textContent=example.title;
@@ -63,7 +124,8 @@ learningCards.forEach((card,index)=>{
  card.append(links);
  if(example.note){const note=document.createElement('p');note.className='learning-example-note';note.textContent=example.note;card.append(note);}
 });
-const nimLink=language.querySelector('a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]');
+const language=document.getElementById('sprache');
+const nimLink=learningTypes.querySelector('a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]');
 if(nimLink)nimLink.id='nim-example';
 const miniModel=$('language-corpus');
 const papageiPath=embeddedLearningPath('https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke','Papagei-Lernstrecke von inf-schule.de','Lernstrecke in neuem Tab öffnen');
@@ -271,5 +333,5 @@ $('restore-package').addEventListener('change',async e=>{
 // A small matching activity, deliberately separate from the assessed project.
 const pairs=[['Überwachtes Lernen','Beispiele mit richtiger Antwort'],['Unüberwachtes Lernen','Gruppen ohne vorgegebene Antworten'],['Verstärkendes Lernen','Erfolg oder Misserfolg nach Handlungen']];
 let flipped=[],locked=false,matches=0,memoryTimer;
-function memory(){clearTimeout(memoryTimer);flipped=[];locked=false;matches=0;const cards=pairs.flatMap((p,i)=>p.map(text=>({text,pair:i})));for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]];}$('memory-board').replaceChildren();$('memory-status').textContent='Drehen Sie zwei Karten um.';for(const card of cards){const b=document.createElement('button');b.className='memory-card';b.textContent='?';b.setAttribute('aria-label','Verdeckte Karte');b.addEventListener('click',()=>{if(locked||b.classList.contains('revealed')||b.classList.contains('matched'))return;b.classList.add('revealed');b.textContent=card.text;b.setAttribute('aria-label',card.text);flipped.push({b,pair:card.pair});if(flipped.length===2){if(flipped[0].pair===flipped[1].pair){flipped.forEach(x=>{x.b.classList.add('matched');x.b.disabled=true;});flipped=[];matches++;$('memory-status').textContent=matches===3?'Alle Paare gefunden. Erklären Sie zu jeder Lernart ein eigenes Beispiel.':matches+' von 3 Paaren gefunden.';}else{locked=true;$('memory-status').textContent='Dieses Paar passt noch nicht zusammen.';memoryTimer=setTimeout(()=>{flipped.forEach(x=>{x.b.classList.remove('revealed');x.b.textContent='?';x.b.setAttribute('aria-label','Verdeckte Karte');});flipped=[];locked=false;},1000);}}});$('memory-board').append(b);}}
+function memory(){clearTimeout(memoryTimer);flipped=[];locked=false;matches=0;const cards=pairs.flatMap((p,i)=>p.map(text=>({text,pair:i})));for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]];}$('memory-board').replaceChildren();$('memory-status').textContent='Drehen Sie zwei Karten um.';for(const card of cards){const b=document.createElement('button');b.className='memory-card';b.textContent='?';b.setAttribute('aria-label','Verdeckte Karte');b.addEventListener('click',()=>{if(locked||b.classList.contains('revealed')||b.classList.contains('matched'))return;b.classList.add('revealed');b.textContent=card.text;b.setAttribute('aria-label',card.text);flipped.push({b,pair:card.pair});if(flipped.length===2){if(flipped[0].pair===flipped[1].pair){flipped.forEach(x=>{x.b.classList.add('matched');x.b.disabled=true;});flipped=[];matches++;$('memory-status').textContent=matches===3?'Alle Paare gefunden. Begründen Sie die Zuordnung.':matches+' von 3 Paaren gefunden.';}else{locked=true;$('memory-status').textContent='Dieses Paar passt noch nicht zusammen.';memoryTimer=setTimeout(()=>{flipped.forEach(x=>{x.b.classList.remove('revealed');x.b.textContent='?';x.b.setAttribute('aria-label','Verdeckte Karte');});flipped=[];locked=false;},1000);}}});$('memory-board').append(b);}}
 $('memory-reset').addEventListener('click',memory);memory();
