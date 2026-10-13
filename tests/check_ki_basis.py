@@ -20,6 +20,15 @@ def rejects(fn):
 
 def main():
     np.testing.assert_array_equal(u.xor_netz(),[0,1,1,0])
+    regeln={
+        'UND (AND)': [0,0,0,1],
+        'ODER (OR)': [0,1,1,1],
+        'NAND': [1,1,1,0],
+        'XOR': [0,1,1,0],
+    }
+    for regel,erwartet in regeln.items():
+        np.testing.assert_array_equal(u.logik_ausgaben(regel),erwartet)
+    rejects(lambda:u.logik_ausgaben('unbekannt'))
     d=foto.projekt_laden();assert d.X.shape==(80,1280)
     assert len(d.val)==16 and len(d.test)==32
     exp=foto.vergleichen(d)

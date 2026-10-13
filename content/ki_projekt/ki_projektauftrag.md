@@ -30,14 +30,14 @@ Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine ho
 
 | Datum | Ziel |
 |---|---|
-| 08.12.2026 | Vorschau, Tandem, zwei Klassen und Datenplan festlegen |
-| bis 15.12.2026 | Fotos sammeln |
-| 15.12.2026 | Einführung, geprüfter Import und Reflexion 1–2; erster Lauf bei Zeitreserve |
-| 05.01.2027 | Fairer Vergleich und Interpretation |
-| 12.01.2027 | Modellwahl, Abschlusstest, Journal abschliessen |
-| 19.01.2027 | Abgabe **vor Unterrichtsbeginn**, Fachgespräch im Tandem |
+| 4.Doppellektion | Vorschau, Tandem, zwei Klassen und Datenplan festlegen |
+| bis 5.Doppellektion | Fotos sammeln |
+| 5.Doppellektion | Einführung, geprüfter Import und Reflexion 1–2; erster Lauf bei Zeitreserve |
+| 6.Doppellektion | Fairer Vergleich und Interpretation |
+| 7.Doppellektion | Modellwahl, Abschlusstest, Journal abschliessen |
+| 8.Doppellektion | Abgabe **vor Unterrichtsbeginn**, Fachgespräch im Tandem |
 
-Alle Fachgespräche finden am **19.01.2027** statt, ohne Ersatz- oder Folgetermine. Richtwert: **5 Minuten pro Tandem**, bei mehr Tandems für alle gleich kürzer. Die Lehrperson gibt Dauer, Reihenfolge und Abgabekanal vorab bekannt. Die übrigen Tandems bearbeiten den unbenoteten Fallcheck.
+Alle Fachgespräche finden während der **8.Doppellektion** statt. Richtwert: **5 Minuten pro Tandem**, bei mehr Tandems für alle gleich kürzer. Die Lehrperson gibt Dauer, Reihenfolge und Abgabekanal vorab bekannt. Die übrigen Tandems bearbeiten den unbenoteten Fallcheck.
 
 ## Bewertung
 
@@ -49,8 +49,7 @@ Die einzelnen Leistungsstufen stehen im [Bewertungsraster](../../worksheets/md/K
 
 ## Abgabe
 
-- Webjournal mit fünf ausgefüllten Reflexionen und Versuchsnotebook mit Ausgaben.
+- Webjournal mit fünf ausgefüllten Reflexionen und Versuchsnotebook mit Ausgaben. Download als ZIP-Datei.
 - Originalfotos, Fotostudio-JSON, Gruppen-/Quellenangaben.
-- Exportiertes Versuchsprotokoll.
 
 Unter «Sichern & abgeben» Originalfotos und Fotostudio-JSON hinzufügen und das ZIP-Paket herunterladen. Der Download reicht nichts automatisch ein; ZIP über den genannten Abgabekanal einreichen. Kein zusätzlicher langer Bericht. Bei vereinbarten Ersatzdaten Herkunft und Einschränkungen offenlegen; die Lehrperson legt den passenden Nachweis zur Datenarbeit fest.

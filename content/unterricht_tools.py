@@ -74,6 +74,38 @@ def xor_netz():
     return y
 
 
+def logik_ausgaben(regel='XOR'):
+    X=np.array([[0,0],[0,1],[1,0],[1,1]])
+    anzahl=X.sum(axis=1)
+    regeln={
+        'UND (AND)': anzahl==2,
+        'ODER (OR)': anzahl>=1,
+        'NAND': anzahl<2,
+        'XOR': anzahl==1,
+    }
+    if regel not in regeln:
+        raise ValueError(f'Unbekannte Regel: {regel}')
+    return regeln[regel].astype(int)
+
+
+def logik_gatter(regel='XOR'):
+    X=np.array([[0,0],[0,1],[1,0],[1,1]])
+    y=logik_ausgaben(regel)
+    fig,ax=plt.subplots(figsize=(5,4))
+    _punkte(ax,X,y)
+    for (x1,x2),ausgabe in zip(X,y):
+        ax.annotate(str(ausgabe),(x1,x2),xytext=(7,7),textcoords='offset points',weight='bold')
+    ax.set(xticks=[0,1],yticks=[0,1],title=f'{regel}: Ausgabe für jede Eingabe')
+    plt.tight_layout();plt.show()
+    print('Eingabe 1 | Eingang 2 | Ausgabe')
+    for (x1,x2),ausgabe in zip(X,y): print(f'{x1}         | {x2}         | {ausgabe}')
+    return y
+
+
+def regler_logik():
+    return widgets.interact(logik_gatter,
+        regel=widgets.Dropdown(options=['UND (AND)','ODER (OR)','NAND','XOR'],description='Regel'))
+
 
 def datenplan(leck=False):
     fig,ax=plt.subplots(figsize=(9,3));ax.axis('off')
