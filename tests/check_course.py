@@ -33,8 +33,7 @@ for img in soup.select('img'):
     assert img.get('alt'), img
     src=img['src']
     assert (root/'projekt'/src).is_file() or src in ['previews/perzeptron.png','previews/xor.png','previews/datenplan.png'], src
-workspace=nbformat.read(root/'content/portal/ki_workspace.ipynb',4)
-assert workspace.metadata['language_info']['name']=='python'
+assert {p.name for p in (root/'content/portal').glob('*.ipynb')}=={Path(p).name for p in ITEMS}
 originals={str(p.relative_to(root/'content')) for p in (root/'content').rglob('*.ipynb') if 'portal' not in p.parts and '.ipynb_checkpoints' not in p.parts}
 assert originals==set(ITEMS), originals
 for name in ITEMS:
@@ -66,8 +65,21 @@ for name in ITEMS:
             if c.cell_type=='markdown':
                 for link in re.findall(r'\]\(([^)]+\.ipynb)\)',c.source):
                     assert (base/link).is_file(), (name,link)
+# Same-day exams must fit the stated 80-minute parallel work window.
+oral=next(l for l in lessons if l['id']=='08')
+assert oral['date']=='19.01.2027'
+assert sum(p['minutes'] for p in oral['phases'][1:-1])==80
+planning=(root/'worksheets/md/KI_Planung.md').read_text()
+rows=re.findall(r'^\| (10|12|14) \| ([\d,]+) Min\. \| ([\d,]+) Min\. \| (\d+) Min\. \| (\d+) Min\. \|$',planning,re.M)
+assert len(rows)==3
+for n,talk,switch,total,reserve in rows:
+    assert int(n)*(float(talk.replace(',','.'))+float(switch.replace(',','.')))==int(total)
+    assert int(total)+int(reserve)==80
+assert 'Alle Fachgespräche finden am 19.01.2027 statt.' in soup.get_text()
+for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektauftrag.md').read_text()]:
+    assert not any(old in document for old in ['über mehrere Termine','auf weitere Termine','zusätzliche Gesprächszeiten'])
 assert len(soup.select('[data-score]'))==10
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
 for name in ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
     assert soup.select_one('[data-lab="'+name+'"]'), name
-print('PASS 10 matching 90-minute plans, dates, anchors, graphics, five descriptive notebooks, portable attachments, manual project gates and rubric')
+print('PASS 10 matching 90-minute plans, dates, anchors, graphics, five descriptive notebooks, portable attachments, manual project gates, rubric and same-day exam timing')

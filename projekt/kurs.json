@@ -265,22 +265,22 @@
         {
           "phase": "Ankommen",
           "minutes": 5,
-          "task": "Abgabe ist vor Unterrichtsbeginn erfolgt. Gesprächszeiten und Arbeitsplatz für den Fallcheck prüfen."
+          "task": "Abgabe ist vor Unterrichtsbeginn erfolgt. Zeitplan und Fallcheck klären: Alle Tandems kommen heute dran; Gespräche beginnen nach diesen fünf Minuten."
         },
         {
           "phase": "Vorwissen aktivieren",
           "minutes": 5,
-          "task": "Für den Fallcheck Daten, Labels und mögliche Fehler aus dem eigenen Projekt in Erinnerung rufen."
+          "task": "Selbstständig für den Fallcheck Daten, Labels und mögliche Fehler aus dem eigenen Projekt in Erinnerung rufen. Die Tandemgespräche laufen bereits parallel."
         },
         {
           "phase": "Informieren",
           "minutes": 5,
-          "task": "Selbstständigen Auftrag lesen: Fall → Daten → mögliche Folgen → Massnahme. Eine offene Frage schriftlich klären."
+          "task": "Selbstständigen Auftrag lesen: Fall → Daten → mögliche Folgen → Massnahme. Fragen schriftlich notieren, ohne die laufenden Gespräche zu unterbrechen."
         },
         {
           "phase": "Verarbeiten",
           "minutes": 70,
-          "task": "Einen fiktiven Fall bearbeiten, eine überprüfbare Massnahme entwerfen und mit einem anderen Tandem vergleichen. Während des eigenen Gesprächs pausieren. Beide erklären dort das ganze Projekt."
+          "task": "Einen fiktiven Fall bearbeiten, eine überprüfbare Massnahme entwerfen und mit einem anderen Tandem vergleichen. Zum eigenen Zeitfenster pausieren; beide erklären das Projekt. Alle Gespräche enden vor der gemeinsamen Auswertung."
         },
         {
           "phase": "Auswerten",

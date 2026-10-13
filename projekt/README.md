@@ -1,6 +1,6 @@
 # Kursportal
 
-Statische Kursseite unter https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/ mit einer gemeinsamen eingebetteten Python-Umgebung. Keine Dateinavigation für Lernende. Journal, Versuch und hinzugefügte Datendateien werden unter «Sichern & abgeben» als ZIP gesichert. Der Download ist noch keine Einreichung.
+Statische Kursseite unter https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/ mit eingebetteten Notebooks in jeweils einer frischen Jupyter-Sitzung. Keine Dateinavigation für Lernende. Journal, Versuch und hinzugefügte Datendateien werden unter «Sichern & abgeben» als ZIP gesichert. Der Download ist noch keine Einreichung.
 
 ## Inhalt pflegen
 
@@ -11,7 +11,7 @@ Statische Kursseite unter https://fachschaft-informatik-kst.github.io/ki-unterri
 
 ## Laufzeit und Sicherung
 
-Der Build kopiert die Seite, das Fotostudio, Hilfsdateien und vorberechnete Beispielgrafiken nach `dist/projekt/`. Python wird beim Seitenaufruf im Hintergrund vorbereitet. Notebookwechsel verwenden denselben Kernel mit getrennten Variablenbereichen. Nach vollständigem Reload oder Import müssen Daten erneut geladen werden; Training und Abschlusstest starten weiterhin manuell.
+Der Build kopiert die Seite, das Fotostudio, Hilfsdateien und vorberechnete Beispielgrafiken nach `dist/projekt/`. Python startet erst beim Öffnen eines Notebooks. Ein fester Frame zeigt genau ein aktives Notebook. Vor einem Wechsel werden das Dokument und die Projektergebnisse gesichert; anschliessend lädt der Frame neu. Es gibt keine parallelen Notebook-Sitzungen, keine gemeinsame Laufzeit und keine eigene Namespace-Verwaltung. Beim Import werden Dokument und Ausgaben übernommen und der normale Projekt-Kernel neu gestartet. Danach Vorbereitung und Datenimport erneut ausführen; Training und Abschlusstest bleiben manuell. Nach einem Notebookwechsel oder vollständigen Reload ebenfalls Daten erneut laden.
 
 Journal und Unterrichtsantworten werden lokal gespeichert. Beim Gerätewechsel ZIP mitnehmen. Ein Tandem arbeitet gemeinsam an einem Gerät; es gibt keine Live-Zusammenarbeit. Im Notebook hochgeladene Daten zusätzlich in die Abgabeliste aufnehmen.
 

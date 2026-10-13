@@ -10,6 +10,6 @@ Fünf gepflegte Notebookquellen:
 4. [Lernlabor](ki_projekt/ki_lernlabor.ipynb)
 5. [Tandemprojekt](ki_projekt/ki_tandemprojekt.ipynb)
 
-`scripts/build_portal_notebooks.py` erzeugt die eingebetteten Fassungen in `portal/`. Erklärungen und Grafik-Anhänge bleiben erhalten. `ki_workspace.ipynb` ist eine interne gemeinsame Arbeitsansicht und kein zusätzliches Unterrichtsnotebook.
+`scripts/build_portal_notebooks.py` erzeugt die eingebetteten Fassungen in `portal/`. Erklärungen und Grafik-Anhänge bleiben erhalten. Jedes geöffnete Notebook verwendet eine normale Jupyter-Sitzung. Es gibt kein zusätzliches Workspace-Notebook.
 
 Die Lernarten werden mit Memory und der verlinkten NIM-Lernstrecke auf der Kursseite erarbeitet. Frühere Start-, Regressions-, Ziffern- und Symbolprojekt-Notebooks wurden entfernt; ihre früheren Versionen bleiben in der Git-Historie.

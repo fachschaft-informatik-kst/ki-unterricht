@@ -4,18 +4,22 @@ const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 let source = fs.readFileSync(path.join(root, 'extensions/ki-autostart/index.js'), 'utf8');
 source = source.replace(/^import .*;\n/gm, '').replace('export default', 'globalThis.plugin =');
-async function simulate(name, fail = false, twice = false) {
+async function simulate(name, fail = false, twice = false, modification = '') {
   const nb = JSON.parse(fs.readFileSync(path.join(root, 'content', name==='fremdes_notebook.ipynb'?'perzeptron_und_neuronale_netze.ipynb':name)));
+  const template = structuredClone(nb);
+  if (modification === 'edit') nb.cells.find(c => c.cell_type === 'code').source = ['raise RuntimeError("untrusted setup")'];
+  if (modification === 'tag') nb.cells.push({id:'untrusted',cell_type:'code',metadata:{tags:['ki-autostart']},source:['raise RuntimeError("untrusted tag")']});
+  if (modification === 'remove') nb.cells.splice(nb.cells.findIndex(c => c.cell_type === 'code'),1);
   const executed = [], badges = [];
   const panel = {
     context: {ready: Promise.resolve(), path: name},
     disposed: {connect() {}},
-    content: {widgets: nb.cells.map((cell, index) => ({index, model: {type: cell.cell_type, getMetadata: key => cell.metadata[key]}}))},
+    content: {widgets: nb.cells.map((cell, index) => ({index, model: {id:cell.id, type: cell.cell_type, sharedModel:{getSource:()=>cell.source.join('')}, getMetadata: key => cell.metadata[key]}}))},
     sessionContext: {ready: Promise.resolve(), session: {kernel: {}}},
     toolbar: {addItem: (_, status) => badges.push(status)}
   };
   let callback;
-  const context = {INotebookTracker: {}, console: {error() {}, warn() {}}, performance: {getEntriesByType:()=>[{type:'navigate'}]}, CodeCell: {execute: async cell => {
+  const context = {fetch:async()=>({ok:true,json:async()=>template}),URL,location:{href:'https://example.org/lab/index.html'},INotebookTracker: {}, console: {error() {}, warn() {}}, performance: {getEntriesByType:()=>[{type:'navigate'}]}, CodeCell: {execute: async cell => {
     executed.push(cell.index); return {content: {status: fail ? 'error' : 'ok'}};
   }}, Widget: class {constructor() {this.node = {style: {}, setAttribute() {}};}}};
   vm.runInNewContext(source, context);
@@ -36,6 +40,12 @@ async function simulate(name, fail = false, twice = false) {
   const setup = journal.nb.cells[journal.executed[0]].source.join('');
   assert(setup.includes('import ki_foto_tools'));
   assert(!/projekt_test|vergleichen|daten_upload|fotostudio\(/.test(setup));
+  for (const modification of ['edit','remove']) {
+    const changed = await simulate('ki_projekt/ki_tandemprojekt.ipynb',false,false,modification);
+    assert.equal(changed.executed.length,0,'Changed preparation must remain manual');
+  }
+  const tagged = await simulate('ki_projekt/ki_tandemprojekt.ipynb',false,false,'tag');
+  assert.equal(tagged.executed.length,1,'Imported tags must never expand automatic execution');
   const optional = await simulate('fremdes_notebook.ipynb');
   assert.equal(optional.executed.length, 0);
   const failure = await simulate('perzeptron_und_neuronale_netze.ipynb', true);
@@ -59,5 +69,5 @@ async function simulate(name, fail = false, twice = false) {
     assert.equal(opened.length,expected);
     if(expected) assert.deepEqual(opened[0],['docmanager:open','perzeptron_und_neuronale_netze.ipynb']);
   }
-  console.log('PASS autostart: order, once per panel, journal boundary, excluded notebook, stop on error, reload restoration and explicit links');
+  console.log('PASS autostart: order, once per panel, journal boundary, edited/removed/imported start cells, excluded notebook, stop on error, reload restoration and explicit links');
 })().catch(error => {console.error(error);process.exitCode = 1;});

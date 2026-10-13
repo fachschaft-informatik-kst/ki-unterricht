@@ -13,7 +13,7 @@ ITEMS = [
 def build():
     out = ROOT / 'content/portal'
     out.mkdir(exist_ok=True)
-    targets = {Path(s).name for s in ITEMS} | {'ki_workspace.ipynb'}
+    targets = {Path(s).name for s in ITEMS}
     for stale in out.glob('*.ipynb'):
         if stale.name not in targets:
             stale.unlink()  # This directory contains generated files only.
@@ -38,11 +38,7 @@ def build():
         nb.metadata['ki_source'] = source
         nbformat.validate(nb)
         nbformat.write(nb, out / Path(source).name)
-    workspace = nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell('Python wird vorbereitet …')])
-    workspace.metadata['kernelspec'] = nb.metadata['kernelspec']
-    workspace.metadata['language_info'] = nb.metadata['language_info']
-    nbformat.write(workspace, out/'ki_workspace.ipynb')
-    print(f'Generated {len(ITEMS)} teaching notebooks and one internal workspace')
+    print(f'Generated {len(ITEMS)} teaching notebooks')
 
 if __name__ == '__main__':
     build()

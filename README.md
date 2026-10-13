@@ -36,7 +36,7 @@ A erhält acht Bilder je Klasse aus T1, B je vier aus T1/T2. Gleich bleiben Bild
 
 Bilder werden im Fotostudio einheitlich als 224 × 224 RGB verarbeitet. Das eingefrorene MobileNet liefert 1280 Merkmale; das eigene Netz wird lokal in Python/Pyodide trainiert. `UEBUNG` nimmt 80 Formen aus dem mitgelieferten synthetischen Datensatz. `ERSATZ` nach Absprache, mit offener Herkunft.
 
-Abgabe vor Unterrichtsbeginn am 19.01.2027: Journal mit Ausgaben, Fotos/JSON und Protokoll. Fachgespräch gemeinsam im Tandem. Zehn Kompetenzen mit je 0–3 Punkten: 18 Punkte für die Abgabe, 12 für das Gespräch. Note = 1 + 5 × Punkte / 30, auf Viertelnoten gerundet. [Vollständiges Bewertungsraster](worksheets/md/KI_Bewertungsraster.md). Die eigene Seite «Lernziele» zeigt die Ziele aller Unterrichtsblöcke.
+Abgabe vor Unterrichtsbeginn am 19.01.2027: Journal mit Ausgaben, Fotos/JSON und Protokoll. Alle Fachgespräche gemeinsam im Tandem am 19.01.2027. Richtwert 5 Minuten pro Tandem, je nach Tandemzahl einheitlich kürzer; keine Folgetermine. Der [Gesprächsplan](worksheets/md/KI_Planung.md#gesprächsplan-für-den-19012027) rechnet Wechsel und Puffer mit ein. Zehn Kompetenzen mit je 0–3 Punkten: 18 Punkte für die Abgabe, 12 für das Gespräch. Note = 1 + 5 × Punkte / 30, auf Viertelnoten gerundet. [Vollständiges Bewertungsraster](worksheets/md/KI_Bewertungsraster.md). Die eigene Seite «Lernziele» zeigt die Ziele aller Unterrichtsblöcke.
 
 ## Didaktischer Aufbau
 
@@ -48,11 +48,11 @@ Drei Startwerte sind eine optionale Erweiterung **vor** Testeinsicht, keine Vora
 
 ## Schneller Einstieg
 
-Die Kursseite startet nach dem Anzeigen des Texts im Hintergrund **eine gemeinsame Python-Umgebung**. Bibliotheken werden einmal pro Seitenaufruf initialisiert. Beim Wechsel zwischen Lernversuchen bleibt derselbe Kernel erhalten; jedes Notebook hat eigene Variablen, sodass das Tandemprojekt und seine Ergebnisse erhalten bleiben. Der Status steht in der Seitenleiste.
+Die Kursseite zeigt vorberechnete Beispielgrafiken sofort. Python startet erst beim Öffnen eines Notebooks. **Ein fester Frame zeigt genau ein aktives Notebook.** Vor einem Wechsel speichert Jupyter das Dokument; Projektausgaben und Protokoll werden zusätzlich für die Abgabe übernommen. Danach lädt der Frame das nächste Notebook mit einer frischen Standard-Jupyter-Sitzung. Der Standardparameter `reset` verwirft nur die bisherige Fensteranordnung, damit keine weiteren Notebook-Tabs wieder geöffnet werden; gespeicherte Dokumente bleiben erhalten. Die Bibliotheksdateien können aus dem Browsercache kommen, Python muss sich aber erneut initialisieren. Zum Weiterrechnen im Projekt Daten neu laden und die benötigten Schritte bewusst ausführen; gespeicherte Ergebnisse bleiben sichtbar.
 
-Perzeptron und XOR haben zusätzlich vorberechnete Beispielgrafiken, die ohne Python sichtbar sind. Lernversuche initialisieren sich beim ersten Öffnen; Projekttraining und Abschlusstest bleiben manuell. Ein kompletter Reload startet Python erneut, nutzt aber den Browsercache. Ein Notebookwechsel benötigt keinen erneuten Bibliotheksstart.
+Es gibt keinen gemeinsamen Kernel, kein Umschalten von Python-Namensräumen und kein internes Workspace-Notebook. JupyterLite speichert Notebook-Dokumente. Die Kursseite speichert Journal, Dateianhänge und eine Kopie der Projektausgaben für den Download; laufende Python-Objekte werden nicht gespeichert oder rekonstruiert.
 
-Der interne `ki_workspace.ipynb` ist nur die gemeinsame Arbeitsansicht. Die eigentlichen Kursnotebooks und Abgabedateien bleiben getrennt gespeichert. `ki_portal_runtime.py` trennt ihre Python-Namensräume; der Import einer Projektsicherung setzt nur den Projektbereich zurück.
+Eine ZIP-Sicherung importiert nur Dokumente und Ergebnisse. Bei einem bereits geöffneten Projekt wird der Standard-Kernel neu gestartet; **kein importierter Code wird ausgeführt**. Danach erste Codezelle und Datenimport bewusst erneut ausführen. Gespeicherte Ausgaben bleiben sichtbar, stehen aber nicht für einen noch laufenden Versuch.
 
 ## Technik und Prüfung
 
@@ -75,8 +75,8 @@ Pyodide-Prüfung: `node tests/check_pyodide.cjs` (Pyodide 0.27.0; siehe Testskri
 
 Falls JupyterLite nach einem Seiten-Reload nur den Launcher wiederherstellt, öffnet die Erweiterung das zuletzt geöffnete Kursnotebook im selben Browser-Tab erneut. Explizite Notebook-Links und bereits wiederhergestellte Tabs haben Vorrang.
 
-Die vier Lernnotebooks führen beim Öffnen und nach einem Seiten-Reload ihre mit `ki-autostart` markierten Codezellen der Reihe nach aus. Oben steht zuerst «Lernumgebung startet …», danach «Bereit». Änderungen an Einstellungen benötigen weiterhin Shift + Enter. Ein manueller Kernel-Neustart allein führt keine Zellen aus.
+Beim Öffnen und nach einem Seiten-Reload vergleicht die Erweiterung die Startzellen mit der veröffentlichten Vorlage: Zell-ID und Quelltext müssen unverändert sein. Nur diese bekannten Startzellen werden ausgeführt; zusätzliche Startmarkierungen aus importierten Dokumenten werden ignoriert. Ist eine Startzelle verändert oder entfernt, bleibt die gesamte Startfolge manuell. Oben steht zuerst «Lernumgebung startet …», danach «Bereit» oder ein Hinweis zur manuellen Vorbereitung. Änderungen an Einstellungen benötigen weiterhin Shift + Enter. Ein manueller Kernel-Neustart allein führt keine Zellen aus.
 
 Im Projektjournal startet **nur die Vorbereitung**. Foto-Upload, Datenimport, Training, Testfreigabe und Export bleiben manuell. Ein Reload erhält gespeicherte Eingaben und Ausgaben, stellt aber keine Python-Variablen oder hochgeladenen Dateien wieder her: Daten erneut laden und die benötigten Schritte gezielt ausführen. Vor einem Reload Journal und Ergebnisse herunterladen.
 
-Die Erweiterung startet ausschliesslich die aufgeführten Kursdateien, keine hochgeladenen Fremdnotebooks oder Vertiefungen. Bereits früher im Browser gespeicherte Versionen ohne Startmarkierungen müssen nach Sicherung der eigenen Arbeit durch die aktuelle Vorlage ersetzt werden; lokale Arbeiten werden nicht überschrieben. Umbenannte Journale bleiben manuell ausführbar. Prüfung: `node tests/check_autostart.cjs`.
+Die Erweiterung startet ausschliesslich die aufgeführten Kursdateien, keine hochgeladenen Fremdnotebooks oder Vertiefungen. Ältere oder veränderte Startzellen bleiben manuell; lokale Arbeiten werden nicht überschrieben. Nach Sicherung der eigenen Arbeit kann die aktuelle Vorlage verwendet werden. Umbenannte Journale bleiben manuell ausführbar. Prüfung: `node tests/check_autostart.cjs`.

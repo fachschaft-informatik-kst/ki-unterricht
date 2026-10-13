@@ -1,4 +1,3 @@
-import { setupShared } from './shared';
 import { setupEmbed } from './embed';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { CodeCell } from '@jupyterlab/cells';
@@ -20,7 +19,6 @@ export default {
   autoStart: true,
   requires: [INotebookTracker],
   activate: (app, tracker) => {
-    if (typeof window !== 'undefined' && setupShared(app, tracker, allowed)) return;
     const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, allowed) : null;
     const seen = new WeakSet();
     const initialize = async panel => {
@@ -37,11 +35,6 @@ export default {
           }
         } catch {}
       });
-      const cells = panel.content.widgets.filter(cell =>
-        cell.model.type === 'code' &&
-        (cell.model.getMetadata('tags') || []).includes(tag)
-      );
-      if (!cells.length) return;
       const status = new Widget();
       status.node.className = 'ki-autostart-status';
       status.node.style.cssText = 'padding:4px 10px;font-size:12px;white-space:nowrap';
@@ -53,19 +46,30 @@ export default {
         if (!panel.sessionContext.session?.kernel) {
           throw new Error('Kein Python-Kernel verfügbar');
         }
-        for (const cell of cells) {
-          if (panel.isDisposed) return;
-          const reply = await CodeCell.execute(cell, panel.sessionContext);
-          if (!reply || reply.content.status !== 'ok') {
-            throw new Error('Eine Startzelle konnte nicht ausgeführt werden');
+        const response = await fetch(new URL('../files/' + panel.context.path, location.href));
+        if (!response.ok) throw new Error('Die veröffentlichte Vorlage ist nicht erreichbar');
+        const template = await response.json();
+        const starts = template.cells.filter(c => c.cell_type === 'code' && (c.metadata?.tags || []).includes(tag));
+        const cells = starts.map(c => panel.content.widgets.find(w => w.model.id === c.id));
+        const source = c => Array.isArray(c.source) ? c.source.join('') : c.source;
+        // Stop the entire automatic sequence if a start cell was changed or removed.
+        // Custom cells, imported tags and project training are always manual.
+        const unchanged = starts.length && cells.every((c, i) => c?.model.type === 'code' && c.model.sharedModel.getSource() === source(starts[i]));
+        if (unchanged) {
+          for (const cell of cells) {
+            if (panel.isDisposed) return;
+            const reply = await CodeCell.execute(cell, panel.sessionContext);
+            if (!reply || reply.content.status !== 'ok') {
+              throw new Error('Eine Startzelle konnte nicht ausgeführt werden');
+            }
           }
         }
-        status.node.textContent = '✓ Bereit';
+        status.node.textContent = unchanged ? '✓ Bereit' : 'Geänderte Vorbereitung: Zellen selbst ausführen';
         embed?.initialized(panel, true);
-        status.node.title = 'Startzellen ausgeführt. Nach einem manuellen Kernel-Neustart die Zellen erneut ausführen.';
+        status.node.title = unchanged ? 'Startzellen ausgeführt. Nach einem manuellen Kernel-Neustart die Zellen erneut ausführen.' : 'Die gespeicherte Vorbereitung weicht von der Vorlage ab. Keine Zelle wurde automatisch ausgeführt.';
       } catch (error) {
         if (panel.isDisposed) return;
-        status.node.textContent = '⚠ Start fehlgeschlagen – erste Codezelle ausführen';
+        status.node.textContent = '⚠ Start fehlgeschlagen – Versuch erneut öffnen';
         status.node.title = String(error);
         console.error('KI notebook initialization:', error);
         embed?.initialized(panel, false);

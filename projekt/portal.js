@@ -4,7 +4,7 @@ const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1';
 const journalFields=all('[data-journal]'),answerFields=all('[data-answer]');
 let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=null,protocolSignature='',restorePending=false,files=new Map(),db=null;
 let filesStored=true,artifactStored=true;
-let saving=Promise.resolve(),snapshotTimer,lessonName='',projectStarted=false,projectReady=false;
+let saving=Promise.resolve(),snapshotTimer,projectStarted=false,projectReady=false;
 const pending=new Map();
 const status=(message,error=false)=>{$('portal-save-status').textContent=message;$('portal-save-status').classList.toggle('save-error',error);};
 const cleanState=raw=>{
@@ -89,52 +89,59 @@ $('attachments').addEventListener('change',async e=>{
   saveText();renderFiles();
  }catch(error){$('download-status').textContent=error.message;}finally{e.target.value='';}
 });
-// The iframe stays at one DOM location: moving an iframe would restart Python.
-const names={'perzeptron_und_neuronale_netze.ipynb':'Ein Neuron','mehrschichtige_netze.ipynb':'XOR-Netz','daten_training.ipynb':'Datenaufteilung','ki_lernlabor.ipynb':'Projekt-Lernlabor'};
-const frame=$('project-frame'),lab=$('project-lab'),projectPath='portal/ki_tandemprojekt.ipynb';
+// One fixed iframe, one standard Jupyter session at a time. No live state is moved.
+const names={'perzeptron_und_neuronale_netze.ipynb':'Ein Neuron','mehrschichtige_netze.ipynb':'XOR-Netz','daten_training.ipynb':'Datenaufteilung','ki_lernlabor.ipynb':'Projekt-Lernlabor','ki_tandemprojekt.ipynb':'Unser Versuch'};
+const frame=$('project-frame'),lab=$('project-lab'),projectName='ki_tandemprojekt.ipynb';
+let activeName='',activeOwner='',switching=false;
+// Never move an already loaded iframe: navigation only changes visibility or its URL.
 document.querySelector('main > .footer').before(lab);$('lesson-lab').remove();
-let resolveReady,rejectReady,activeOwner='journal',warmStarted=false;
-const sharedReady=new Promise((resolve,reject)=>{resolveReady=resolve;rejectReady=reject;});sharedReady.catch(()=>{});
-function request(frame,type,extra={}){return new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Python antwortet noch nicht. Bitte warten und erneut versuchen.'));},180000);pending.set(id,{resolve,reject,timer,source:frame.contentWindow});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
-function warmup(){
- if(warmStarted)return;warmStarted=true;
- frame.src='../lab/index.html?path='+encodeURIComponent('portal/ki_workspace.ipynb')+'&ki-shared=1';
- let attempts=0;const timer=setInterval(()=>{if(frame.dataset.ready==='yes'||++attempts>180){clearInterval(timer);if(frame.dataset.ready!=='yes')$('python-status').textContent='Python startet noch. Bei Problemen Seite nach Sicherung neu laden.';return;}frame.contentWindow?.postMessage({channel:'ki-portal-v1',type:'hello'},location.origin);},1000);
-}
-function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!lab.dataset.open||!view||view.classList.contains('view-hidden');}
+function request(frame,type,extra={}){return new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet noch nicht. Warten und erneut versuchen.'));},type==='restore'?120000:30000);pending.set(id,{resolve,reject,timer,source:frame.contentWindow});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
+function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!activeName||!view||view.classList.contains('view-hidden');}
 async function showNotebook(name,owner,scroll=true){
- activeOwner=owner;lab.querySelector('details').hidden=name!=='ki_tandemprojekt.ipynb';lab.querySelector('a[href="#journal"]').hidden=name!=='ki_tandemprojekt.ipynb';lab.dataset.open='yes';visibility();$('project-lab-title').textContent=name==='ki_tandemprojekt.ipynb'?'Unser Versuch':names[name];
- $('project-lab-status').textContent=projectReady?'Versuch wird geöffnet …':'Python wird im Hintergrund vorbereitet …';
- if(scroll)lab.scrollIntoView({block:'start',behavior:'smooth'});warmup();
- try{await sharedReady;await request(frame,'open',{path:'portal/'+name});$('project-lab-status').textContent='Bereit · Shift + Enter führt eine Zelle aus';}
- catch(error){$('project-lab-status').textContent=error.message;}
+ if(!names[name]||switching)return;
+ switching=true;
+ try{
+  if(name!==activeName||frame.dataset.ready==='error'){
+   if(activeName&&frame.dataset.ready!=='error'){
+    if(frame.dataset.ready!=='yes')throw Error('Der aktuelle Versuch startet noch. Danach erneut öffnen.');
+    const saved=await request(frame,'snapshot');
+    if(activeName===projectName)capture(saved.notebook,saved.protocol);
+   }
+   activeName=name;projectStarted=name===projectName;projectReady=false;
+   frame.dataset.ready='no';delete frame.dataset.restored;
+   $('project-lab-status').textContent='Python startet …';
+   frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset';
+  }
+  activeOwner=owner;visibility();$('project-lab-title').textContent=names[name];
+  lab.querySelector('details').hidden=name!==projectName;
+  lab.querySelector('a[href="#journal"]').hidden=name!==projectName;
+  if(scroll)lab.scrollIntoView({block:'start',behavior:'smooth'});
+ }catch(error){$('project-lab-status').textContent=error.message;}
+ finally{switching=false;}
 }
-$('start-project').addEventListener('click',()=>showNotebook('ki_tandemprojekt.ipynb','journal'));
+$('start-project').addEventListener('click',()=>showNotebook(projectName,'journal'));
 $('start-studio').addEventListener('click',()=>{const frame=$('studio-frame');$('studio-panel').hidden=false;if(!frame.getAttribute('src'))frame.src='studio/index.html';$('studio-panel').scrollIntoView({block:'start',behavior:'smooth'});});
-all('[data-lab]').forEach(b=>b.addEventListener('click',()=>{if(names[b.dataset.lab])void showNotebook(b.dataset.lab,b.closest('main > section')?.id||'projekt');}));
-window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&lab.dataset.open)void showNotebook('ki_tandemprojekt.ipynb','journal',false);});
+all('[data-lab]').forEach(b=>b.addEventListener('click',()=>showNotebook(b.dataset.lab,b.closest('main > section')?.id||'projekt')));
+window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false);});
 all('[data-fullscreen]').forEach(b=>b.addEventListener('click',()=>{const node=$(b.dataset.fullscreen).closest('.lab-panel');if(node.requestFullscreen)node.requestFullscreen();}));
 window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1')return;
  const data=event.data;
+ if(data.path!=='portal/'+activeName)return;
  if(data.id&&pending.has(data.id)){const p=pending.get(data.id);clearTimeout(p.timer);pending.delete(data.id);data.type==='error'?p.reject(Error(data.error)):p.resolve(data);}
  if(data.type==='ready'){
-  if(data.error){$('python-status').textContent=data.error;$('project-lab-status').textContent=data.error;rejectReady(Error(data.error));return;}
-  if(!data.ready)return;
-  frame.dataset.ready='yes';frame.dataset.kernelId=data.kernelId;frame.dataset.path=data.path;
-  $('python-status').textContent='Python bereit · bleibt beim Aufgabenwechsel geladen.';
-  if(!projectReady){
-   projectReady=true;projectStarted=true;await initialization;
+  frame.dataset.ready=data.error?'error':(data.ready?'yes':'no');frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';
+  $('project-lab-status').textContent=data.error||(data.ready?'Bereit · gespeicherte Ausgaben bleiben sichtbar; Daten bei Bedarf erneut laden.':'Python startet …');
+  if(projectStarted&&data.ready&&!projectReady){
+   projectReady=true;await initialization;
    try{
-    if(restorePending&&notebook){await request(frame,'restore',{notebook});restorePending=false;frame.dataset.restored='yes';persistArtifacts();$('project-lab-status').textContent='Sicherung geladen. Daten erneut auswählen; Zellen schrittweise ausführen.';}
-    const result=await request(frame,'snapshot');capture(result.notebook,result.protocol);resolveReady();
-   }catch(error){$('project-lab-status').textContent=error.message;rejectReady(error);}
+    if(restorePending&&notebook){await request(frame,'restore',{notebook});restorePending=false;frame.dataset.restored='yes';persistArtifacts();$('project-lab-status').textContent='Sicherung geladen. Erste Codezelle und Datenimport erneut ausführen.';}
+    else capture(data.notebook);
+   }catch(error){frame.dataset.ready='error';projectReady=false;$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';}
   }
  }
- if(data.type==='changed'&&data.path===projectPath&&!restorePending)capture(data.notebook);
+ if(projectStarted&&data.type==='changed'&&!restorePending)capture(data.notebook);
 });
-// Let the text page render first, then warm the only Python environment.
-setTimeout(warmup,750);
 function notebookForExport(){
  if(!notebook)return null;
  const nb=structuredClone(notebook);nb.cells=nb.cells.filter(c=>!c.metadata?.['ki-journal-export']);
@@ -178,11 +185,11 @@ $('restore-package').addEventListener('change',async e=>{
   if(unpacked.has('versuch.ipynb')){nextNotebook=JSON.parse(await unpacked.get('versuch.ipynb').text());if(nextNotebook.nbformat!==4||!Array.isArray(nextNotebook.cells)||nextNotebook.cells.length>100)throw Error('Ungültiges Notebook.');nextNotebook.cells=nextNotebook.cells.filter(c=>!c.metadata?.['ki-journal-export']);}
   for(const f of next.files){const name='daten/'+f.id+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');if(!unpacked.has(name))throw Error('Datendatei fehlt: '+f.name);nextFiles.set(f.id,unpacked.get(name));}
   if(!confirm('Journal, Versuch und Abgabeliste durch diese Sicherung ersetzen? Eigene aktuelle Arbeit vorher herunterladen.'))return;
-  if(projectStarted && nextNotebook){if(!projectReady)throw Error('Bitte warten, bis der Versuch gestartet ist.');await request($('project-frame'),'restore',{notebook:nextNotebook});frame.dataset.restored='yes';}
+  if(projectStarted && nextNotebook){if(!projectReady)throw Error('Bitte warten, bis der Versuch gestartet ist.');await request($('project-frame'),'restore',{notebook:nextNotebook});$('project-frame').dataset.restored='yes';}
   await transaction('files','readwrite',s=>{s.clear();for(const [id,blob] of nextFiles)s.put(blob,id);}).catch(()=>{filesStored=false;status('Import nur für diese Sitzung. Zwischenstand herunterladen.',true);});
   state=next;files=nextFiles;notebook=nextNotebook;protocol=raw.protocol||null;protocolSignature=raw.protocolSignature||'';restorePending=!!nextNotebook&&!projectStarted;
   if(raw.progress)window.KIProgress?.restore(raw.progress);
-  render();saveText();persistArtifacts();$('download-status').textContent='Sicherung geladen. Beim Weiterarbeiten Daten im Versuch erneut auswählen. Es wurde kein Training oder Abschlusstest gestartet.';
+  render();saveText();persistArtifacts();$('download-status').textContent='Sicherung geladen. Erste Codezelle und Datenimport erneut ausführen. Gespeicherte Ausgaben bleiben sichtbar; kein Code wurde automatisch ausgeführt.';
  }catch(error){$('download-status').textContent='Import fehlgeschlagen: '+error.message;}finally{e.target.value='';}
 });
 // A small matching activity, deliberately separate from the assessed project.

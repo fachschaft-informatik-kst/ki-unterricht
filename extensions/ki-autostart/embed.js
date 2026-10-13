@@ -7,10 +7,11 @@ export function setupEmbed(app, tracker, allowed) {
   const origin = location.origin;
   const style = document.createElement('style');
   style.textContent = `#jp-top-panel,#jp-menu-panel,#jp-bottom-panel,#jp-left-stack,#jp-right-stack,.jp-SideBar,.jp-StatusBar,.lm-DockPanel-tabBar{display:none!important}
-    #jp-main-dock-panel,#jp-main-split-panel,#jp-main-vsplit-panel,#jp-main-content-panel{contain:none!important}.jp-NotebookPanel{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-width:0!important}.jp-NotebookPanel-toolbar{min-height:36px;width:100%!important;height:36px!important}.jp-NotebookPanel-notebook{width:100%!important;height:calc(100vh - 36px)!important;top:36px!important}.jp-Notebook{background:#fff}.ki-autostart-status{font-size:11px!important}`;
+    #jp-main-dock-panel,#jp-main-split-panel,#jp-main-vsplit-panel,#jp-main-content-panel{contain:none!important}.jp-NotebookPanel{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-width:0!important}.jp-NotebookPanel-toolbar{min-height:36px;width:100%!important;height:36px!important}.jp-NotebookPanel-notebook{width:100%!important;height:calc(100vh - 36px)!important;top:36px!important}.jp-Notebook{background:#fff}.jp-MarkdownCell img{max-width:100%;max-height:365px;object-fit:contain}.ki-autostart-status{font-size:11px!important}`;
   document.head.append(style);
-  const send = data => window.parent.postMessage({channel:'ki-portal-v1',path,...data},origin);
-  let panel, ready = false, timer;
+  const send = data => window.parent.postMessage({channel:'ki-portal-v1',path,kernelId:panel?.sessionContext.session?.kernel?.id,...data},origin);
+  let panel, ready = false, busy = false, error = null, timer;
+  const announce=()=>send({type:'ready',ready,error,notebook:ready&&path.endsWith('ki_tandemprojekt.ipynb')?panel.context.model.toJSON():undefined});
   const attach = async p => {
     if (p.context.path !== path) return;
     panel=p;
@@ -23,7 +24,7 @@ export function setupEmbed(app, tracker, allowed) {
     app.shell.activateById(p.id);
     p.context.model.contentChanged.connect(() => {
       clearTimeout(timer);
-      timer=setTimeout(()=>{if(!p.isDisposed && ready)send({type:'changed',notebook:p.context.model.toJSON()});},600);
+      timer=setTimeout(()=>{if(!p.isDisposed && ready && !busy)send({type:'changed',notebook:p.context.model.toJSON()});},600);
     });
     window.dispatchEvent(new Event('resize'));
   };
@@ -49,8 +50,11 @@ export function setupEmbed(app, tracker, allowed) {
     if(event.origin!==origin || event.source!==window.parent || event.data?.channel!=='ki-portal-v1')return;
     const {type,id,notebook}=event.data;
     if(!panel || panel.isDisposed)return;
-    if(type==='hello'){send({type:'ready',ready});return;}
+    if(type==='hello'){announce();return;}
+    if(!['snapshot','restore'].includes(type))return;
+    if(busy){send({type:'error',id,error:'Sicherung läuft. Bitte kurz warten.'});return;}
     if(!ready){send({type:'error',id,error:'Die Lernumgebung startet noch.'});return;}
+    busy=true;panel.node.inert=true;
     try {
       if(type==='snapshot'){
         await waitIdle();
@@ -68,19 +72,18 @@ export function setupEmbed(app, tracker, allowed) {
       }else if(type==='restore'){
         const nb=checkedNotebook(notebook);
         await waitIdle();
-        // A restored document must never keep the previous experiment in memory.
-        const setup = panel.content.widgets.find(c=>c.model.type==='code')?.model.sharedModel.getSource();
-        await panel.sessionContext.restartKernel();
+        // Restore documents and outputs only, never a live namespace or imported code.
+        await panel.sessionContext.session.kernel.restart();
+        await waitIdle();
+        const preparation=nb.cells.find(c=>c.cell_type==='code');
+        if(preparation){preparation.metadata={...preparation.metadata,jupyter:{...preparation.metadata?.jupyter,source_hidden:false}};}
         panel.context.model.fromJSON(nb);
-        if(setup){
-          const reply=await panel.sessionContext.session.kernel.requestExecute({code:setup,silent:true,store_history:false,stop_on_error:true}).done;
-          if(reply.content.status!=='ok')throw Error('Sicherung geladen, Vorbereitung bitte nochmals ausführen.');
-        }
         await panel.context.save();
         await waitIdle();
         send({type:'restored',id,notebook:panel.context.model.toJSON()});
       }
     }catch(error){send({type:'error',id,error:String(error.message||error)});}
+    finally{busy=false;panel.node.inert=false;}
   });
   return {
     path,
@@ -97,7 +100,8 @@ export function setupEmbed(app, tracker, allowed) {
         }
       }
       ready=success;
-      send({type:'ready',ready,error:success?null:'Start fehlgeschlagen. Die erste Zelle nochmals ausführen.'});
+      error=success?null:'Start fehlgeschlagen. Auf der Kursseite den Versuch erneut öffnen.';
+      announce();
     }
   };
 }

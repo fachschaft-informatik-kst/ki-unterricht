@@ -133,10 +133,10 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
-| Ankommen | 5 | Abgabe ist vor Unterrichtsbeginn erfolgt. Gesprächszeiten und Arbeitsplatz für den Fallcheck prüfen. |
-| Vorwissen aktivieren | 5 | Für den Fallcheck Daten, Labels und mögliche Fehler aus dem eigenen Projekt in Erinnerung rufen. |
-| Informieren | 5 | Selbstständigen Auftrag lesen: Fall → Daten → mögliche Folgen → Massnahme. Eine offene Frage schriftlich klären. |
-| Verarbeiten | 70 | Einen fiktiven Fall bearbeiten, eine überprüfbare Massnahme entwerfen und mit einem anderen Tandem vergleichen. Während des eigenen Gesprächs pausieren. Beide erklären dort das ganze Projekt. |
+| Ankommen | 5 | Abgabe ist vor Unterrichtsbeginn erfolgt. Zeitplan und Fallcheck klären: Alle Tandems kommen heute dran; Gespräche beginnen nach diesen fünf Minuten. |
+| Vorwissen aktivieren | 5 | Selbstständig für den Fallcheck Daten, Labels und mögliche Fehler aus dem eigenen Projekt in Erinnerung rufen. Die Tandemgespräche laufen bereits parallel. |
+| Informieren | 5 | Selbstständigen Auftrag lesen: Fall → Daten → mögliche Folgen → Massnahme. Fragen schriftlich notieren, ohne die laufenden Gespräche zu unterbrechen. |
+| Verarbeiten | 70 | Einen fiktiven Fall bearbeiten, eine überprüfbare Massnahme entwerfen und mit einem anderen Tandem vergleichen. Zum eigenen Zeitfenster pausieren; beide erklären das Projekt. Alle Gespräche enden vor der gemeinsamen Auswertung. |
 | Auswerten | 5 | Unbenoteten Fallcheck sichern und eine Frage für «KI & Gesellschaft» festhalten. |
 
 **Lernprodukt:** Bewertetes Tandemgespräch + unbenoteter Fallcheck; keine nachträgliche Projektänderung.
@@ -182,7 +182,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 - 10.11.: Memory-Karten und Lernartenblatt bereitlegen. NIM ausschliesslich in der verlinkten Lernstrecke; kein zweites Spiel/Notebook.
 - 08.12.: zehn Minuten Projektvorschau mit Themen- und Datenplan. Fotos bis 15.12. sammeln lassen. Einfache Gegenstände bevorzugen; Gesten brauchen fünf Personen. Ersatzdaten nur nach Absprache und mit sichtbarer Herkunft.
 - 15.12.: Erfolgskriterium sind geprüfte Daten und Reflexion 1–2. Ein erster Lauf ist Zeitreserve, keine zusätzliche Pflicht. Der Hauptvergleich liegt am 05.01.
-- 19.01.: vor Unterrichtsbeginn gleicher Abgabestand für alle. Die 70-minütige Arbeitsphase erlaubt **höchstens sieben Slots à 8 Minuten Gespräch + 2 Minuten Notizen/Wechsel**. Mehr Tandems brauchen vorab vereinbarte zusätzliche Gesprächszeiten; die Folgelektionsplanung darf dadurch nicht stillschweigend verkürzt werden. Beide erklären das ganze Projekt. Der parallele Fallcheck ist unbenotet und jederzeit unterbrechbar.
+- 19.01.: gleicher Abgabestand vor Unterrichtsbeginn. **Alle Fachgespräche an diesem Datum**, ohne Ersatz- oder Folgetermine. Nach fünf Minuten gemeinsamer Einführung beginnen die Gespräche; Vorwissen, Auftrag und Fallcheck bearbeiten die übrigen Tandems selbstständig. Minute 5–85 ergibt ein Gesprächsfenster von 80 Minuten; die letzten fünf Minuten bleiben für die gemeinsame Auswertung.
 - 26.01.: Papagei-Stationen vorab passend auswählen; die ganze Lernstrecke plus Soekia ist in 90 Minuten zu umfangreich. Das kleine Wortpaarmodell dient dem Vergleich, nicht als zusätzliche lange Einheit.
 - 02.02.: Cathy O’Neils vorhandenes ca. 13-minütiges Video einsetzen. Ein **45-minütiger Abschlussfilm ist noch nicht ausgewählt**. Die Planung ist mit einer Fallwerkstatt vollständig durchführbar. Ein vorab gesichteter, verfügbarer Film ersetzt diese 45 Minuten; er kommt nicht zusätzlich dazu. Beobachtungsauftrag: zwei Aussagen, Belege, offene Frage. Danach zehn Minuten gemeinsame Auswertung beibehalten.
 
@@ -196,9 +196,30 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 - Auswahl und Begründung vor Testeinsicht; danach keine Optimierung. Die Sperre unterstützt eine Arbeitsregel und ist kein Zugriffsschutz. Wenige Exemplare und ein Startwert begrenzen die Aussage.
 - Drei Beispiele analysieren, keine Fehler erfinden. Mehrere Fotos eines Exemplars sind keine unabhängigen neuen Exemplare.
 
+## Gesprächsplan für den 19.01.2027
+
+**Planungsbeispiel mit 12 Tandems** (Klassengrösse vorab prüfen): 12 × (5 Minuten Gespräch + 1 Minute Notizen/Wechsel) = 72 Minuten. Dazu 8 Minuten Reserve sowie je 5 Minuten Einführung und Abschluss = **90 Minuten**. Die Schulpause liegt ausserhalb dieser Unterrichtsminuten.
+
+| Zahl der Tandems | Gespräch pro Tandem | Notizen/Wechsel | Gesamt für Slots | Reserve im 80-Minuten-Fenster |
+| --- | --- | --- | --- | --- |
+| 10 | 5 Min. | 1 Min. | 60 Min. | 20 Min. |
+| 12 | 5 Min. | 1 Min. | 72 Min. | 8 Min. |
+| 14 | 4,5 Min. | 1 Min. | 77 Min. | 3 Min. |
+
+Für eine andere Tandemzahl: Gesprächsdauer höchstens **80 ÷ Tandemzahl − 1 Minute**, auf eine halbe Minute **abrunden** und auf höchstens 5 Minuten begrenzen. Die Dauer gilt innerhalb der Klasse für alle gleich und wird mit der Reihenfolge vorab bekannt gegeben. Keine Verlagerung auf den 26.01. oder ein anderes Datum.
+
+| Im 5-Minuten-Gespräch | Fokus | Kompetenz |
+| --- | --- | --- |
+| 1 Min. | Ein Bild durch das Modell erklären | K7 |
+| 1 Min. | Eine Daten- oder Versuchsentscheidung begründen | K8 |
+| 1,5 Min. | Ein Ergebnis samt Grenze kritisch einordnen | K9 |
+| 1,5 Min. | Vorgehen auf einen neuen Fall übertragen | K10 |
+
+Keine vorbereitete Präsentation: das abgegebene Journal liegt bereit. Beide antworten; bei jeder Frage übernimmt die andere Person eine kurze Ergänzung oder Rückfrage. Bei kürzeren Slots die Fragen entsprechend straffen. Die Lehrperson bewertet K1–K6 separat anhand der Abgabe und hält K7–K10 während des Gesprächs direkt im Raster fest. Die Minute zwischen Tandems dient nur den Gesprächspunkten und dem Wechsel. Der Fallcheck bleibt unbenotet, selbstständig und jederzeit unterbrechbar.
+
 ## Sicherung und Bewertung
 
-Eine ZIP-Abgabe enthält `Journal.html`, Versuchsnotebook mit gespeicherten Ausgaben, vorhandenes Versuchsprotokoll sowie die von Lernenden hinzugefügten Originalfotos und Fotostudio-JSON. Foto-Upload im Notebook und Dateien in der Abgabeliste sind getrennt. Nach Reload/Import Daten erneut laden; gespeicherte Ausgaben sind kein laufender Python-Zustand. Training und Test bleiben manuell.
+Eine ZIP-Abgabe enthält `Journal.html`, Versuchsnotebook mit gespeicherten Ausgaben, vorhandenes Versuchsprotokoll sowie die von Lernenden hinzugefügten Originalfotos und Fotostudio-JSON. Foto-Upload im Notebook und Dateien in der Abgabeliste sind getrennt. Nach einem Import zuerst die Vorbereitung, dann den Datenimport erneut ausführen; gespeicherte Ausgaben sind kein laufender Python-Zustand. Training und Test bleiben manuell.
 
 Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: gemeinsames Fachgespräch (12). Keine weitere Gewichtung. Note = 1 + 5 × Punkte / 30, auf Viertelnoten gerundet. Gemeinsame Tandemnote. Die Web-Selbsteinschätzung ersetzt die Bewertung der Lehrperson nicht. Details: [Bewertungsraster](KI_Bewertungsraster.md).
 

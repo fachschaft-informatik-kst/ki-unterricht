@@ -10,6 +10,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:JSON.parse(process.env.CHROMIUM_ARGS||'[]')});
   const p=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());p.on('console',m=>{if(m.type()==='error')console.error('BROWSER',m.text());});
   await p.goto('http://127.0.0.1:8765/projekt/');
+  assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,'Reading the page must not start Python');
   assert.equal(await p.locator('.course-card').count(),7);assert.equal(await p.locator('.nav a').count(),9);
   assert.equal(await p.locator('a[href*="/lab/"]').count(),0);
   await p.screenshot({path:'/tmp/ki-portal-home.png',fullPage:true});
@@ -52,7 +53,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
    await p.screenshot({path:'/tmp/ki-portal-embedded.png',fullPage:true});
    await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();const file=await downloaded;await file.saveAs('/tmp/ki-portal-notebook.zip');
    assert.equal(await p.locator('iframe[src*="lab/index"]').count(),1);
-   console.log('PASS shared project initializes, hides file navigation and exports real notebook');
+   console.log('PASS independent project initializes on demand, hides file navigation and exports real notebook');
    await p.reload();await p.locator('a[href="#sicherung"]').first().click();await p.locator('#restore-package').setInputFiles('/tmp/ki-portal-notebook.zip');await p.waitForFunction(()=>document.querySelector('#download-status').textContent.includes('Sicherung geladen'));
    await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.restored==='yes',null,{timeout:180000}).catch(async e=>{console.log('RESTORE STATUS',await p.locator('#project-lab-status').innerText());console.log('RESTORE FRAME',await p.frameLocator('#project-frame').locator('body').innerText());throw e;});
    assert.equal(await p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(3).locator('.jp-InputPrompt').innerText(),'[ ]:');
@@ -60,16 +61,20 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
    if(process.env.CHECK_TRAINING){
     const cells=p.frameLocator('#project-frame').locator('.jp-NotebookPanel:not(.lm-mod-hidden) .jp-CodeCell');
     assert.equal(await cells.nth(3).locator('.jp-InputPrompt').innerText(),'[ ]:');
-    for(let i=1;i<=5;i++){
+    for(let i=0;i<=5;i++){
      const editor=cells.nth(i).locator('.cm-content');await editor.click();
      if(i===5)await editor.fill("AUSGEWAEHLT = 'B'\nBEGRUENDUNG = 'Wir wählen B anhand der Validierung; bei Gleichstand bevorzugen wir die vielfältigere Trainingsauswahl.'\nTEST_FREIGEBEN = True\ntest = foto.projekt_test(experiment, AUSGEWAEHLT, BEGRUENDUNG, TEST_FREIGEBEN)");
      await p.keyboard.press('Shift+Enter');
      await p.waitForFunction(i=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[i].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text);},i,{timeout:180000});
+     assert.equal(await cells.nth(i).locator('.jp-OutputArea-error').count(),0,await cells.nth(i).innerText());
     }
-    await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-trained.zip');
+    await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded.catch(async e=>{console.log('EXPORT STATUS',await p.locator('#download-status').innerText());console.log('CELLS',await cells.allInnerTexts());throw e;})).saveAs('/tmp/ki-portal-trained.zip');
     console.log('PASS actual training, manual final test and result package');
     const kernelBefore=await p.locator('#project-frame').getAttribute('data-kernel-id');await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
-    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.path==='portal/perzeptron_und_neuronale_netze.ipynb',null,{timeout:180000});
+    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/perzeptron_und_neuronale_netze.ipynb',null,{timeout:180000});
+    assert.notEqual(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore);
+    assert.equal(await p.locator('iframe[src*="lab/index"]').count(),1);
+    assert.equal(await p.frameLocator('#project-frame').locator('.jp-NotebookPanel').count(),1);
     assert((await p.frameLocator('#project-frame').locator('body').innerText()).includes('Gewichte'));
     await p.frameLocator('#project-frame').locator('.jp-MarkdownCell img').first().waitFor();
     assert(await p.frameLocator('#project-frame').locator('.jp-MarkdownCell img').first().evaluate(img=>img.complete&&img.naturalWidth>100));
@@ -80,17 +85,17 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     const prior=await lessonCells.nth(1).locator('.jp-InputPrompt').innerText();await lessonCells.nth(1).locator('.cm-content').click();await p.keyboard.press('Shift+Enter');
     await p.waitForFunction(prior=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[1].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text)&&text!==prior;},prior);
     await p.locator('.nav a[href="#projekt"]').click();await p.locator('[data-lab="ki_lernlabor.ipynb"]').click();
-    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
+    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
     assert(/\[\d+\]/.test(await lessonCells.nth(2).locator('.jp-InputPrompt').innerText()));
 
-    await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.path==='portal/ki_tandemprojekt.ipynb');assert.equal(await p.locator('#project-frame').count(),1);
+    await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_tandemprojekt.ipynb',null,{timeout:180000});assert.equal(await p.locator('#project-frame').count(),1);
     assert((await cells.nth(5).innerText()).includes('Abschlusstest'));
-    assert.equal(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore);
+    assert.notEqual(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore);
     await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-after-switch.zip');
     const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../projekt/archive.js')).toString('base64'));
     const before=await archive.readZip(new Blob([fs.readFileSync('/tmp/ki-portal-trained.zip')]));const after=await archive.readZip(new Blob([fs.readFileSync('/tmp/ki-portal-after-switch.zip')]));
     assert.deepEqual(JSON.parse(await before.get('Versuchsprotokoll.json').text()),JSON.parse(await after.get('Versuchsprotokoll.json').text()));
-    console.log('PASS same kernel, interactive lesson execution, isolated learning-lab experiment and unchanged project protocol');
+    console.log('PASS one notebook at a time, fresh kernels, interactive exercises and preserved project outputs/protocol');
     // A twice-imported preparation and extra autostart tags must never execute.
     const imported=JSON.parse(await before.get('versuch.ipynb').text());
     imported.cells=imported.cells.filter(c=>!c.metadata?.['ki-journal-export']);
@@ -98,12 +103,23 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     imported.cells.push({id:'manual-only-check',cell_type:'code',metadata:{tags:['ki-autostart']},source:["raise RuntimeError('Imported training ran automatically')"],outputs:[],execution_count:null});
     for(let attempt=0;attempt<2;attempt++)await p.evaluate(nb=>new Promise((resolve,reject)=>{
      const f=document.querySelector('#project-frame'),id=crypto.randomUUID();
-     const timer=setTimeout(()=>{window.removeEventListener('message',receive);reject(Error('Restore timeout'));},30000);
+     const timer=setTimeout(()=>{window.removeEventListener('message',receive);reject(Error('Restore timeout'));},120000);
      function receive(e){if(e.source!==f.contentWindow||e.data?.id!==id)return;clearTimeout(timer);window.removeEventListener('message',receive);e.data.type==='error'?reject(Error(e.data.error)):resolve();}
      window.addEventListener('message',receive);f.contentWindow.postMessage({channel:'ki-portal-v1',type:'restore',id,notebook:nb},location.origin);
     }),imported);
     assert.equal(await p.frameLocator('#project-frame').locator('.jp-OutputArea-error').count(),0);
-    console.log('PASS repeated restore uses only published preparation, never imported setup or training tags');
+    const last=p.frameLocator('#project-frame').locator('.jp-CodeCell').last();
+    assert.equal(await last.locator('.jp-InputPrompt').innerText(),'[ ]:');
+    await last.locator('.cm-content').fill("assert 'experiment' not in globals() and 'foto' not in globals()\nprint('Fresh kernel confirmed')");
+    await p.keyboard.press('Shift+Enter');
+    await last.locator('.jp-OutputArea-output').filter({hasText:'Fresh kernel confirmed'}).waitFor({timeout:180000});
+    // Reload must also refuse an edited preparation, even with an original filename.
+    await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-import-check.zip');
+    await p.reload();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
+    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
+    assert.equal(await p.frameLocator('#project-frame').locator('.jp-OutputArea-error').count(),0);
+    assert((await p.frameLocator('#project-frame').locator('.ki-autostart-status').innerText()).includes('Geänderte Vorbereitung'));
+    console.log('PASS repeated import clears live Python; neither imported setup nor extra tags execute, including after reload');
    }
 
   }
