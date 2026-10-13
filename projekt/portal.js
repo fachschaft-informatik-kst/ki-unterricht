@@ -25,6 +25,8 @@ projectDownload.className='btn primary';projectRestore.className='btn';submissio
 transferPrimary.append(projectDownload,projectRestore);submissionAction.append(submissionLabel,submissionDownload);transferActions.replaceChildren(transferPrimary,submissionAction,restoreInput);
 saveSection.querySelector('.actions').nextElementSibling.nextElementSibling.textContent='Der Download übermittelt nichts automatisch. Das Hochladen ersetzt den aktuellen Browserstand. Laden Sie nach jeder Arbeitsphase eine ZIP herunter und bewahren Sie sie ausserhalb des Browsers auf.';
 all('a[href="#sicherung"]').forEach(link=>link.textContent='Notizen & Projekt');
+const projectGoalCard=all('#lernziele .card').find(card=>card.querySelector('h2')?.textContent.trim()==='Das Bildprojekt untersuchen');
+if(projectGoalCard)projectGoalCard.querySelector('.section-label').textContent='05–08';
 const projectTransferNote=all('#journal p').find(paragraph=>paragraph.textContent.includes('Ein gemeinsamer Stand auf einem Gerät'));
 if(projectTransferNote)projectTransferNote.textContent='Ein gemeinsamer Stand auf einem Gerät. Für Gerätewechsel Notizen und Projekt herunterladen und später unter «Notizen & Projekt» wiederherstellen.';
 function embeddedLearningPath(url,title,linkText){
