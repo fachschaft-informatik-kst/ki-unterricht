@@ -34,9 +34,12 @@ jobs:
         run: |
           python tests/check_ki_basis.py
           python tests/check_pyodide_lock.py
+          python tests/check_portal_runtime.py
       - name: Build the JupyterLite site
         run: |
+          python scripts/build_course.py
           python scripts/build_portal_notebooks.py
+          python tests/check_course.py
           jupyter lite build --contents content --output-dir dist
           python scripts/copy_portal.py dist
       - name: Check deployed notebook runtime in Chromium
@@ -44,7 +47,7 @@ jobs:
         run: |
           npm install --prefix /tmp/ki-browser playwright
           /tmp/ki-browser/node_modules/.bin/playwright install --with-deps chromium
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist CHECK_NOTEBOOK=1 node tests/check_portal.cjs
+          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

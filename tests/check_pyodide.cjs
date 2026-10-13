@@ -25,12 +25,12 @@ const root=path.resolve(__dirname,'..');
  copy(path.join(root,'content'),'/project/content');copy(path.join(root,'tests'),'/project/tests');
  await py.runPythonAsync("import sys,os,matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt; sys.path[:0]=['/project/content','/project/content/ki_projekt']; plt.show=lambda *a,**k: plt.close('all')");
  py.setStdout({batched:s=>{if(s.startsWith('PASS'))console.log(s);}});
- for(const name of ['lernarten.ipynb','perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','klassifikation_ziffern.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb'].flatMap(n=>[n,'portal/'+path.basename(n)])){
+ for(const name of ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb'].flatMap(n=>[n,'portal/'+path.basename(n)])){
   await py.runPythonAsync(`os.chdir(${JSON.stringify('/project/content/'+path.dirname(name))})`);
   const ns=py.toPy({__name__:'__main__'});
   for(const c of JSON.parse(fs.readFileSync(path.join(root,'content',name))).cells)if(c.cell_type==='code')await py.runPythonAsync(Array.isArray(c.source)?c.source.join(''):c.source,{globals:ns});
   ns.destroy();console.log('PASS Pyodide notebook:',name);
  }
  await py.runPythonAsync("import runpy; runpy.run_path('/project/tests/check_ki_basis.py',run_name='__main__')");
- console.log('PASS Pyodide 0.27.0: full required notebook path, optional digits, import and project gates');
+ console.log('PASS Pyodide 0.27.0: all five original and embedded notebooks, import and project gates');
 })().catch(e=>{console.error(e);process.exitCode=1;});

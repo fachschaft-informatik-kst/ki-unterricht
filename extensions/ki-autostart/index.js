@@ -1,3 +1,4 @@
+import { setupShared } from './shared';
 import { setupEmbed } from './embed';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { CodeCell } from '@jupyterlab/cells';
@@ -5,9 +6,9 @@ import { Widget } from '@lumino/widgets';
 
 // Deliberately limited to the course notebooks. Never execute arbitrary uploads.
 const allowed = new Set([
-  'lernarten.ipynb', 'perzeptron_und_neuronale_netze.ipynb',
+  'perzeptron_und_neuronale_netze.ipynb',
   'mehrschichtige_netze.ipynb', 'daten_training.ipynb',
-  'klassifikation_ziffern.ipynb', 'ki_projekt/ki_lernlabor.ipynb',
+  'ki_projekt/ki_lernlabor.ipynb',
   'ki_projekt/ki_tandemprojekt.ipynb'
 ]);
 for (const path of [...allowed]) allowed.add('portal/' + path.split('/').pop());
@@ -19,6 +20,7 @@ export default {
   autoStart: true,
   requires: [INotebookTracker],
   activate: (app, tracker) => {
+    if (typeof window !== 'undefined' && setupShared(app, tracker, allowed)) return;
     const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, allowed) : null;
     const seen = new WeakSet();
     const initialize = async panel => {

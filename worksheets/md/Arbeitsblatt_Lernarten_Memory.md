@@ -17,7 +17,7 @@ Unbeschriftete Karten nach Ähnlichkeit sortieren. Benennen Sie Ihr Kriterium. V
 **Festhalten:** Unser Kriterium: … · Andere mögliche Gruppierung: …
 
 ## 3 · Mit Belohnung lernen
-NIM: 10 Hölzer, abwechselnd 1–3 nehmen; das letzte Holz verliert. Erst selbst spielen, danach die lernende KI im Notebook untersuchen.
+Bearbeiten Sie die [NIM-Lernstrecke bei inf-schule.de](https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke). Verwenden Sie die dort erklärte Spielregel und untersuchen Sie, wie Rückmeldungen die Zugwahl verändern.
 
 **Festhalten:** Zustand: … · Handlung: … · Rückmeldung: … · Was verändert sich durch Training? …
 

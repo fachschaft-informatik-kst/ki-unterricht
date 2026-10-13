@@ -1,4 +1,4 @@
-"""Checks the teaching claims: NIM rules, unchanged evaluation, fair A/B, held-out gate."""
+"""Checks the teaching claims: XOR, fair A/B, held-out gate."""
 import copy
 import json
 import sys
@@ -19,30 +19,6 @@ def rejects(fn):
     raise AssertionError('Invalid input accepted')
 
 def main():
-    agent=u.Nim().lernen(1000)
-    for n in range(1,11):
-        for _ in range(20):assert 1<=agent.zug(n)<=min(3,n)
-    # Exercise widget callbacks: legal move bounds, losing on last match and reset.
-    shown=[];original=u.display;u.display=lambda widget:shown.append(widget)
-    class LastMove:
-        def zug(self,n):return min(3,n)
-    try:
-        state=u.nim_spielen(LastMove());view=shown[-1]
-        buttons=view.children[1].children
-        buttons[2].click()  # 10 -> 7 -> 4
-        assert state['rest']==4
-        buttons[2].click()  # 4 -> 1 -> 0: KI loses
-        assert state['fertig'] and all(b.disabled for b in buttons)
-        view.children[2].click();assert state['rest']==10 and not state['fertig']
-        state['rest']=1;buttons[0].click();assert state['fertig']
-    finally:u.display=original
-    old=copy.deepcopy(agent.gewichte);rng=copy.deepcopy(agent.rng.bit_generator.state)
-    score=agent.pruefen();assert 0<=score<=1
-    for n in old:np.testing.assert_array_equal(old[n],agent.gewichte[n])
-    assert rng==agent.rng.bit_generator.state and agent.partien==1000
-    fresh=u.Nim();assert fresh.pruefen()==u.Nim().pruefen()
-    # End state: taking the only remaining match loses; legal actions are bounded.
-    assert fresh.zug(1)==1
     np.testing.assert_array_equal(u.xor_netz(),[0,1,1,0])
     d=foto.projekt_laden();assert d.X.shape==(80,1280)
     assert len(d.val)==16 and len(d.test)==32
@@ -73,6 +49,6 @@ def main():
     rejects(lambda:load(dict(doc,records=records[:-1])))
     bad=copy.deepcopy(doc);bad['records'][0]['group']='V1';rejects(lambda:load(bad))
     repeated=foto.vergleichen(own,wiederholen=True);assert len(repeated['laeufe'])==6
-    print('PASS basis: NIM, XOR, 80-photo import, equal samples, group separation, final gate and optional repeats')
+    print('PASS basis: XOR, 80-photo import, equal samples, group separation, final gate and optional repeats')
 
 if __name__=='__main__':main()

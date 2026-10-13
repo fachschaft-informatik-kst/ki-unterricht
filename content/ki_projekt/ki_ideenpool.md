@@ -17,7 +17,7 @@ Wählen Sie ein Thema und **genau zwei Klassen**. Eigene Vorschläge sind mögli
 | Spielkarten | Herz, Karo, Pik, Kreuz | Überträgt es auf andere Kartendesigns? Ganze Decks als Gruppen. |
 | Arbeitsplatz | frei, teilweise belegt, voll | Sind die Klassen eindeutig? Ganze Arbeitsplätze als Gruppen. |
 
-**Gut zugänglich:** Früchte, Schreibmaterial, Besteck und Gesten. Werkzeuge, Kartendecks und verschiedene Arbeitsplätze brauchen mehr Organisation. Fotos von Symbolen folgen dem Fotoablauf; alternativ kann nach Absprache das Symbolstudio mit `ki_symbolprojekt.ipynb` verwendet werden.
+**Gut zugänglich:** Früchte, Schreibmaterial, Besteck und Gesten. Werkzeuge, Kartendecks und verschiedene Arbeitsplätze brauchen mehr Organisation. Auch gezeichnete Symbole werden fotografiert und folgen demselben Fotoablauf.
 
 Alle untersuchen **Datenvielfalt**: A lernt mit einem Exemplar pro Klasse, B mit zwei, bei gleicher Bildzahl. Wählen Sie aus den Klassenideen jeweils zwei aus. Acht Fotos je Klasse und Gruppe, fünf Gruppen: 80 Fotos. Bei Gesten brauchen Sie fünf Personen.
 

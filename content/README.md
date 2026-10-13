@@ -1,13 +1,15 @@
-# KI-Unterricht · 4. Gymi
+# KI-Unterricht · Quellen der Lernversuche
 
-**[Hier starten](00_Start.ipynb)** – alle Pflichtnotebooks in der Unterrichtsreihenfolge.
+Lernende starten im **[Kursportal](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**. Dort stehen Aufgaben, Lernziele, zehn AVIVA-Abläufe, eingebettete Notebooks, Fotostudio, Journal und Bewertung.
 
-1. [Lernarten: Memory und NIM](lernarten.ipynb)
-2. [Ein Perzeptron](perzeptron_und_neuronale_netze.ipynb)
-3. [Mehrschichtige Netze](mehrschichtige_netze.ipynb)
-4. [Daten fair aufteilen](daten_training.ipynb)
-5. [Tandemprojekt](ki_projekt/00_Start.ipynb)
+Fünf gepflegte Notebookquellen:
 
-[Projektseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/) · [Freiwillig: Ziffern erkennen](klassifikation_ziffern.ipynb)
+1. [Ein Perzeptron](perzeptron_und_neuronale_netze.ipynb)
+2. [Mehrschichtige Netze](mehrschichtige_netze.ipynb)
+3. [Daten fair aufteilen](daten_training.ipynb)
+4. [Lernlabor](ki_projekt/ki_lernlabor.ipynb)
+5. [Tandemprojekt](ki_projekt/ki_tandemprojekt.ipynb)
 
-Regression liegt im Ordner `vertiefung` und gehört nicht zum Pflichtweg.
+`scripts/build_portal_notebooks.py` erzeugt die eingebetteten Fassungen in `portal/`. Erklärungen und Grafik-Anhänge bleiben erhalten. `ki_workspace.ipynb` ist eine interne gemeinsame Arbeitsansicht und kein zusätzliches Unterrichtsnotebook.
+
+Die Lernarten werden mit Memory und der verlinkten NIM-Lernstrecke auf der Kursseite erarbeitet. Frühere Start-, Regressions-, Ziffern- und Symbolprojekt-Notebooks wurden entfernt; ihre früheren Versionen bleiben in der Git-Historie.

@@ -1,39 +1,48 @@
-"""Generate short embedded notebooks from the maintained teaching originals.
-Run before jupyter lite build. Originals and teacher resources stay available.
-"""
+"""Preserve teaching explanations and portable image attachments in embedded notebooks."""
 from pathlib import Path
+import re
 import nbformat
 
 ROOT = Path(__file__).resolve().parents[1]
-ITEMS = {
- 'lernarten.ipynb': ['Vorbereitung', 'Ohne Training spielen', 'Trainieren und vergleichen', 'Gegen die trainierte KI spielen'],
- 'perzeptron_und_neuronale_netze.ipynb': ['Vorbereitung','Ein Neuron','Gewichte verändern','Ein Lernschritt'],
- 'mehrschichtige_netze.ipynb': ['Vorbereitung','Das XOR-Netz'],
- 'daten_training.ipynb': ['Vorbereitung','Daten fair aufteilen','Was läuft hier falsch?'],
- 'klassifikation_ziffern.ipynb': ['Vorbereitung','Ziffern erkennen'],
- 'ki_projekt/ki_lernlabor.ipynb': ['Vorbereitung','Übungsdaten ansehen','A und B vergleichen','Beispiele prüfen'],
- 'ki_projekt/ki_tandemprojekt.ipynb': ['Vorbereitung','Fotostudio','1 · Daten auswählen','2 · Daten prüfen','3 · A und B trainieren','4 · Beispiele vergleichen','5 · Abschlusstest freigeben','6 · Protokoll anzeigen'],
-}
+ITEMS = [
+    'perzeptron_und_neuronale_netze.ipynb', 'mehrschichtige_netze.ipynb',
+    'daten_training.ipynb', 'ki_projekt/ki_lernlabor.ipynb',
+    'ki_projekt/ki_tandemprojekt.ipynb',
+]
 
 def build():
- out = ROOT/'content/portal'
- out.mkdir(exist_ok=True)
- for source, titles in ITEMS.items():
-  nb = nbformat.read(ROOT/'content'/source, as_version=4)
-  codes = [c for c in nb.cells if c.cell_type=='code']
-  assert len(codes)==len(titles), source
-  cells=[]
-  for i,(cell,title) in enumerate(zip(codes,titles)):
-   if source.endswith('ki_tandemprojekt.ipynb') and i==1:
-    continue  # The photo studio is embedded in the website itself.
-   cell.outputs=[];cell.execution_count=None
-   if i==0:
-    cell.source = 'from pathlib import Path\nimport sys\n_basis = Path.cwd().parent if Path.cwd().name == "portal" else Path.cwd()\nsys.path[:0] = [str(_basis), str(_basis / "ki_projekt")]\n'+cell.source
-    cell.metadata['jupyter']={'source_hidden':True}
-   cells += [nbformat.v4.new_markdown_cell('### '+title),cell]
-  nb.cells=cells
-  nb.metadata['ki_source']=source
-  nbformat.validate(nb)
-  nbformat.write(nb,out/Path(source).name)
- print(f'Generated {len(ITEMS)} embedded notebooks in content/portal')
-if __name__=='__main__':build()
+    out = ROOT / 'content/portal'
+    out.mkdir(exist_ok=True)
+    targets = {Path(s).name for s in ITEMS} | {'ki_workspace.ipynb'}
+    for stale in out.glob('*.ipynb'):
+        if stale.name not in targets:
+            stale.unlink()  # This directory contains generated files only.
+    for source in ITEMS:
+        nb = nbformat.read(ROOT/'content'/source, as_version=4)
+        nb.cells = [c for c in nb.cells if 'ki-standalone-only' not in c.metadata.get('tags', [])]
+        first = True
+        for cell in nb.cells:
+            if cell.cell_type == 'markdown':
+                cell.source = re.sub(r'\[([^]]+)\]\((?:ki_projekt/)?[^/)]+\.ipynb\)', r'**\1** (über die Kursnavigation)', cell.source)
+                continue
+            if cell.cell_type != 'code':
+                continue
+            cell.outputs = []
+            cell.execution_count = None
+            if first:
+                cell.source = ('from pathlib import Path\nimport sys\n'
+                    '_basis = Path.cwd().parent if Path.cwd().name == "portal" else Path.cwd()\n'
+                    'sys.path[:0] = [str(_basis), str(_basis / "ki_projekt")]\n' + cell.source)
+                cell.metadata['jupyter'] = {'source_hidden': True}
+                first = False
+        nb.metadata['ki_source'] = source
+        nbformat.validate(nb)
+        nbformat.write(nb, out / Path(source).name)
+    workspace = nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell('Python wird vorbereitet …')])
+    workspace.metadata['kernelspec'] = nb.metadata['kernelspec']
+    workspace.metadata['language_info'] = nb.metadata['language_info']
+    nbformat.write(workspace, out/'ki_workspace.ipynb')
+    print(f'Generated {len(ITEMS)} teaching notebooks and one internal workspace')
+
+if __name__ == '__main__':
+    build()

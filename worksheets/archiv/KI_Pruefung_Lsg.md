@@ -8,6 +8,9 @@ header-includes:
   - \renewcommand{\figurename}{Abbildung}
 ---
 
+> **Archivmaterial aus einem früheren Kurs.** Kein Bestandteil des KI-Blocks 2026/27; dessen Leistungsnachweis ist das Tandemprojekt mit gemeinsamem Fachgespräch.
+
+
 \newpage
 ## Teil A: Multiple Choice
 1. Einordnung: Welche Aussagen zur Einteilung von KI, Machine Learning (ML) und Deep Learning (DL) stimmen?
@@ -171,7 +174,7 @@ Interpretation/Verbesserung (Beispielantwort):
 - Modell A: Start zu hoch, am Ende leicht zu niedrig $\Rightarrow$ Achsenabschnitt senken und/oder Steigung etwas erhöhen.
 - Modell B: Start zu hoch und am Ende noch zu hoch $\Rightarrow$ eher Achsenabschnitt senken (Steigung passt tendenziell besser).
 
-![Modellvergleich lineare Regression](svg/koordinatengitter_lineare_regression_pruefung_b2_vergleich_loesung.svg){ width=80% }
+![Modellvergleich lineare Regression](../md/svg/koordinatengitter_lineare_regression_pruefung_b2_vergleich_loesung.svg){ width=80% }
 
 
 \newpage
@@ -246,4 +249,4 @@ Diese beiden Punkte $A$ und $B$ einzeichnen und eine Gerade durch $A$ und $B$ zi
 | $w_0$ grösser (weniger negativ) | leichter $\hat{y}=1$ | Zutritt wird grosszügiger |
 | $w_0$ kleiner (mehr negativ) | schwerer $\hat{y}=1$ | Zutritt wird strenger |
 
-![Lösungsskizze Perzeptron (Trennlinie + Punkte)](svg/koordinatengitter_perzeptron_pruefung_d1_loesung.svg){ width=80% }
+![Lösungsskizze Perzeptron (Trennlinie + Punkte)](../md/svg/koordinatengitter_perzeptron_pruefung_d1_loesung.svg){ width=80% }

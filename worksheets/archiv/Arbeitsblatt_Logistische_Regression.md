@@ -8,6 +8,9 @@ header-includes:
 	- \renewcommand{\figurename}{Abbildung}
 ---
 
+> **Archivmaterial aus einem früheren Kurs.** Kein Bestandteil des KI-Blocks 2026/27; dessen Leistungsnachweis ist das Tandemprojekt mit gemeinsamem Fachgespräch.
+
+
 ## 1. Lernziel
 Ich kann
 
@@ -67,7 +70,7 @@ Anmerkungen:
 
 - Zeige, dass die Kurve bei $0.5$ „umkippt“ und sich bei 0 bzw. 1 asymptotisch annähert.
 
-![Koordinatengitter (nutzen für Sigmoid)](svg/koordinatengitter_sigmoid.svg)
+![Koordinatengitter (nutzen für Sigmoid)](../md/svg/koordinatengitter_sigmoid.svg)
 
 \clearpage
 

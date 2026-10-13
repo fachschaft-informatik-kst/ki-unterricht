@@ -8,6 +8,9 @@ header-includes:
     - \renewcommand{\figurename}{Abbildung}
 ---
 
+> **Archivmaterial aus einem früheren Kurs.** Kein Bestandteil des KI-Blocks 2026/27; dessen Leistungsnachweis ist das Tandemprojekt mit gemeinsamem Fachgespräch.
+
+
 # Beispiel 1: Lernzeit und Testresultat
 
 Modell: $\hat{y} = 10x + 30$
@@ -33,7 +36,7 @@ $\sqrt{7}\approx2.6$ Punkte daneben.
 Visualisierung (Gerade $\hat{y}=10x+30$ mit Messpunkten):
 
 
-![Lösungsskizze lineare Regression](svg/koordinatengitter_lineare_regression_loesung.svg){ width=80% }
+![Lösungsskizze lineare Regression](../md/svg/koordinatengitter_lineare_regression_loesung.svg){ width=80% }
 
 \newpage
 
@@ -76,7 +79,7 @@ $$
 
 Visualisierung der beiden Modelle (A in Orange, B in Blau) mit Datenpunkten (Grün):
 
-![Modellvergleich lineare Regression](svg/koordinatengitter_lineare_regression_vergleich_loesung.svg){ width=80% }
+![Modellvergleich lineare Regression](../md/svg/koordinatengitter_lineare_regression_vergleich_loesung.svg){ width=80% }
 
 ## Interpretation
 

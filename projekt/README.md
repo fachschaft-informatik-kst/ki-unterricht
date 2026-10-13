@@ -1,16 +1,20 @@
-# Projektseite
+# Kursportal
 
-`index.html` ist die statische Übersicht für Lernende. Keine externen Bibliotheken, Fonts, Cookies oder Analysewerkzeuge. Persönlicher Seitenstand liegt in `localStorage` und lässt sich als JSON exportieren/importieren; er ist unabhängig von Notebook und Fotostudio.
+Statische Kursseite unter https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/ mit einer gemeinsamen eingebetteten Python-Umgebung. Keine Dateinavigation für Lernende. Journal, Versuch und hinzugefügte Datendateien werden unter «Sichern & abgeben» als ZIP gesichert. Der Download ist noch keine Einreichung.
 
-Der bestehende GitHub-Pages-Workflow baut JupyterLite und kopiert diese Seite nach `dist/projekt/index.html`. URL nach Merge/Deployment:
-https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/
+## Inhalt pflegen
 
-Die Notebooklinks sind relativ (`../lab/index.html?path=ki_projekt/...`). Auf einer lokalen Vorschau ohne JupyterLite-Build sind die Zielnotebooks nicht verfügbar.
+- `kurs.json`: zehn datierte AVIVA-Abläufe à 90 Minuten; `python scripts/build_course.py` aktualisiert die markierten Bereiche in `index.html` und `worksheets/md/KI_Planung.md`.
+- `content/*.ipynb` und `content/ki_projekt/*.ipynb`: fünf didaktische Originale. Der Notebook-Build bewahrt Markdown und eingebettete Grafiken. Generierte Fassungen nicht von Hand pflegen.
+- Bewertung: zehn Kompetenzen à 0–3 Punkte, maximal 30. K1–K6 Abgabe (18), K7–K10 Tandemgespräch (12). Note = 1 + 5 × Punkte / 30, auf Viertelnoten. Raster auf der Seite und in `worksheets/md/KI_Bewertungsraster.md` synchron halten.
+- Projektprofil: zwei Klassen, 80 Fotos, fünf Gruppen. A und B erhalten je 16 Trainingsbilder; 16 Validierungsbilder und 32 Testbilder. Ein Startwert 11, 16 Neuronen, 60 Epochen.
 
-Inhalte basieren auf den drei Markdown-Unterlagen unter `content/ki_projekt/`. Termine, Klassenanzahl, Versuchsparameter und die Gewichtung 15/20/25/40 müssen bei Änderungen in beiden Darstellungen konsistent gehalten werden. Das neue Kompetenzraster konkretisiert die vorhandenen Lernziele; es führt keine eigene Notenformel ein.
+## Laufzeit und Sicherung
 
-Browserprüfung: `npm install --no-save playwright`, `npx playwright install chromium`, danach `node tests/check_projekt_page.cjs`. Alternativ mit installiertem `playwright-core` und `CHROMIUM_PATH` auf eine lokale Chromium-Datei. Der Test verwendet einen lokalen HTTP-Server, prüft Navigation, Filter, Fortschritt, Export/Import, Mobilansicht und Darstellung ohne JavaScript. Screenshots liegen im temporären Verzeichnis, das der Test ausgibt.
+Der Build kopiert die Seite, das Fotostudio, Hilfsdateien und vorberechnete Beispielgrafiken nach `dist/projekt/`. Python wird beim Seitenaufruf im Hintergrund vorbereitet. Notebookwechsel verwenden denselben Kernel mit getrennten Variablenbereichen. Nach vollständigem Reload oder Import müssen Daten erneut geladen werden; Training und Abschlusstest starten weiterhin manuell.
 
-Die Navigation zeigt jeweils einen Bereich. Ohne JavaScript und beim Drucken bleiben alle Bereiche verfügbar. Das Fachgespräch findet im Tandem statt.
+Journal und Unterrichtsantworten werden lokal gespeichert. Beim Gerätewechsel ZIP mitnehmen. Ein Tandem arbeitet gemeinsam an einem Gerät; es gibt keine Live-Zusammenarbeit. Im Notebook hochgeladene Daten zusätzlich in die Abgabeliste aufnehmen.
 
-Pflichtprofil ab Version 4: zwei Klassen, 80 Fotos (T1/T2/V1/P1/P2, acht je Klasse/Gruppe), A ein vs. B zwei Exemplare bei acht Trainingsbildern je Klasse, ein Startwert. Fünf Reflexionen im Journal; sechs organisatorische Schritte auf der Seite.
+`python tests/check_course.py` prüft Pläne, Notebooks, Grafiken, interne Verweise und entfernte Inhalte. `PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs` prüft den echten Browserweg (Playwright und Chromium erforderlich). Die Prüfung benötigt einen vollständigen JupyterLite-Build; eine reine HTML-Vorschau enthält keine Python-Laufzeit.
+
+Ohne JavaScript sind Informationen lesbar, Experimente und lokale Sicherung benötigen JavaScript. Beim Drucken werden alle Inhaltsbereiche angezeigt.

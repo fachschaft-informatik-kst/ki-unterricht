@@ -4,7 +4,7 @@ Der Code ist für Interessierte einsehbar; Lernende ändern nur die Notebook-Ein
 import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
-from IPython.display import display, HTML
+from IPython.display import display
 
 FARBEN = ['#176c63', '#be572b']
 
@@ -74,30 +74,6 @@ def xor_netz():
     return y
 
 
-def ziffern(neuronen=16):
-    from sklearn.datasets import load_digits
-    from sklearn.model_selection import train_test_split
-    from sklearn.neural_network import MLPClassifier
-    from sklearn.metrics import accuracy_score
-    import warnings
-    from sklearn.exceptions import ConvergenceWarning
-    X,y=load_digits(return_X_y=True);X=X/16 # fixed scale, no fitting on held-out data
-    train,val=train_test_split(np.arange(len(y)),test_size=.3,stratify=y,random_state=11)
-    with warnings.catch_warnings():
-        warnings.simplefilter('ignore',ConvergenceWarning)
-        netz=MLPClassifier(hidden_layer_sizes=(neuronen,),max_iter=100,random_state=11).fit(X[train],y[train])
-    pred=netz.predict(X[val]);wrong=np.flatnonzero(pred!=y[val])
-    chosen=np.r_[wrong[:3],np.flatnonzero(pred==y[val])[:3]]
-    fig,axes=plt.subplots(1,len(chosen),figsize=(10,2.6),squeeze=False)
-    for ax,j in zip(axes[0],chosen):
-        ax.imshow(X[val[j]].reshape(8,8),cmap='gray_r');ax.axis('off')
-        ax.set_title(f'Bild: {y[val[j]]}\nNetz: {pred[j]}',fontsize=11)
-    fig.suptitle(f'Validierung: {accuracy_score(y[val],pred):.0%} richtig · {len(val)} neue Bilder')
-    plt.tight_layout();plt.show()
-    print('Erste Fehlvorhersagen und richtige Beispiele. Keine zufällige Stichprobe der Ergebnisse.')
-    print('Diese Validierungsdaten dürfen zum Vergleichen dienen; sie sind kein unabhängiger Abschlusstest.')
-    return netz
-
 
 def datenplan(leck=False):
     fig,ax=plt.subplots(figsize=(9,3));ax.axis('off')
@@ -109,80 +85,3 @@ def datenplan(leck=False):
     plt.tight_layout();plt.show()
     print('Jede Gruppe enthält ein anderes Exemplar jeder Klasse; bei Gesten eine andere Person.')
     print('Ein neues Foto desselben Gegenstands ist kein neues Exemplar.')
-
-
-class Nim:
-    """Einfaches Belohnungslernen: Zuggewichte pro Restmenge, kein neuronales Netz.
-    Nach Gewinn +1, nach Verlust −1 (mindestens 1) für die eigenen gewählten Züge.
-    Trainingsgegner: Zufall. Wer das letzte Holz nimmt, verliert.
-    """
-    def __init__(self, seed=11):
-        self.rng=np.random.default_rng(seed)
-        self.gewichte={n:np.ones(min(3,n),dtype=float) for n in range(1,11)}
-        self.partien=0
-
-    def zug(self,n,rng=None):
-        rng=self.rng if rng is None else rng
-        p=self.gewichte[n];return int(rng.choice(np.arange(1,len(p)+1),p=p/p.sum()))
-
-    def lernen(self,anzahl=200):
-        if not isinstance(anzahl,int) or not 0<=anzahl<=10000:raise ValueError('0–10000 Trainingspartien wählen.')
-        for _ in range(anzahl):
-            rest=10;dran=int(self.rng.integers(2));weg=[]
-            while rest:
-                nehmen=self.zug(rest) if dran==0 else int(self.rng.integers(1,min(3,rest)+1))
-                if dran==0:weg.append((rest,nehmen))
-                rest-=nehmen
-                if rest==0:
-                    gewonnen=dran!=0;break
-                dran=1-dran
-            for n,z in weg:self.gewichte[n][z-1]=max(1,self.gewichte[n][z-1]+(1 if gewonnen else -1))
-            self.partien+=1
-        return self
-
-    def pruefen(self,anzahl=400,seed=902):
-        # Evaluation uses separate random state and never updates the policy.
-        rng=np.random.default_rng(seed);wins=0
-        for i in range(anzahl):
-            rest=10;dran=i%2
-            while rest:
-                z=self.zug(rest,rng) if dran==0 else int(rng.integers(1,min(3,rest)+1))
-                rest-=z
-                if not rest:wins+=int(dran!=0);break
-                dran=1-dran
-        return wins/anzahl
-
-
-def nim_vergleich(partien=500):
-    vorher=Nim();nachher=Nim().lernen(partien)
-    werte=[vorher.pruefen(),nachher.pruefen()]
-    fig,ax=plt.subplots(figsize=(6,3.5));ax.bar(['Ohne Training',f'Nach {partien} Partien'],np.array(werte)*100,color=FARBEN)
-    ax.set(ylim=(0,110),ylabel='Gewonnene Partien (%)',title='400 Prüfpartien gegen einen Zufallsgegner')
-    for i,v in enumerate(werte):ax.text(i,v*100+3,f'{v:.0%}',ha='center')
-    plt.tight_layout();plt.show()
-    print('Startrecht abwechselnd. Beim Prüfen wird nicht weitergelernt. Eine feste Zufallsfolge, kein allgemeiner Beweis.')
-    return nachher
-
-
-def nim_spielen(ki):
-    out=widgets.Output();buttons=[widgets.Button(description=f'{i} nehmen') for i in (1,2,3)]
-    neu=widgets.Button(description='Neue Partie');zustand={'rest':10,'fertig':False}
-    def anzeigen(text='Sie beginnen. Während dieser Partie lernt die KI nicht.'):
-        with out:
-            out.clear_output(wait=True)
-            print('│ '*zustand['rest'], f"({zustand['rest']} Hölzer)")
-            print(text)
-        for i,b in enumerate(buttons,1):b.disabled=zustand['fertig'] or i>zustand['rest']
-    def spielen(n):
-        if zustand['fertig'] or n>zustand['rest']:return
-        zustand['rest']-=n
-        if not zustand['rest']:
-            zustand['fertig']=True;anzeigen('Sie haben das letzte Holz genommen: verloren.');return
-        z=ki.zug(zustand['rest']);zustand['rest']-=z
-        if not zustand['rest']:
-            zustand['fertig']=True;anzeigen(f'KI nimmt {z}, darunter das letzte Holz: Sie gewinnen.');return
-        anzeigen(f'KI nimmt {z}. Sie sind dran.')
-    for i,b in enumerate(buttons,1):b.on_click(lambda _,n=i:spielen(n))
-    def reset(_):zustand.update(rest=10,fertig=False);anzeigen()
-    neu.on_click(reset);display(widgets.VBox([out,widgets.HBox(buttons),neu]));anzeigen()
-    return zustand
