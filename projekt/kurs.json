@@ -28,7 +28,7 @@
         {
           "phase": "Verarbeiten",
           "minutes": 45,
-          "task": "Erklärungen austauschen (20 Min.). Gemeinsam eine Begriffskarte bauen (15 Min.). Anfangsbeispiele neu zuordnen und Entscheidungen begründen (10 Min.)."
+          "task": "Erklärungen austauschen (20 Min.). Die eingebettete KI-Landkarte mit drei Beispielen erkunden (15 Min.). Anfangsbeispiele neu zuordnen und Entscheidungen begründen (10 Min.)."
         },
         {
           "phase": "Auswerten",
@@ -36,7 +36,7 @@
           "task": "Ein Beispiel erklären und eine noch offene Frage im Antwortfeld festhalten."
         }
       ],
-      "product": "Begriffskarte + begründete Einordnung eines Beispiels."
+      "product": "Begründete Einordnung von drei Alltagsbeispielen anhand der KI-Landkarte."
     },
     {
       "id": "02",
@@ -54,7 +54,7 @@
         {
           "phase": "Vorwissen aktivieren",
           "minutes": 10,
-          "task": "Die Begriffskarte ergänzen: Was heisst «aus Daten lernen»?"
+          "task": "An die Einstiegsbeispiele anknüpfen: Was heisst «aus Daten lernen»?"
         },
         {
           "phase": "Informieren",
@@ -64,7 +64,7 @@
         {
           "phase": "Verarbeiten",
           "minutes": 50,
-          "task": "Memory-Karten beschriften und gruppieren (20 Min.). NIM-Lernstrecke bei inf-schule bearbeiten (25 Min.). Die drei Begriffspaare zuordnen (5 Min.)."
+          "task": "Memory in zwei Runden: Karten mit Labels zuordnen und ohne Labels gruppieren (15 Min.). Überwachte Beispiele mit Smiley und Quick, Draw! vergleichen (10 Min.). Unüberwachtes Gruppieren in der K-Means-Visualisierung beobachten (10 Min.). NIM-Lernstrecke mit Rückmeldungen spielen (10 Min.). Die drei Lernarten zuordnen (5 Min.)."
         },
         {
           "phase": "Auswerten",
