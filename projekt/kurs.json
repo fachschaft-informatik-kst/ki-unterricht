@@ -59,7 +59,7 @@
         {
           "phase": "Informieren",
           "minutes": 15,
-          "task": "Wissensbasierte Systeme mit festen Regeln von lernenden Systemen mit Erfahrungsschatz unterscheiden. Danach Labels, Ähnlichkeit und Belohnung als drei Lernsignale einordnen."
+          "task": "5 Min.: Wissensbasierte Systeme mit festen Regeln und lernende Systeme mit veränderlichem Erfahrungsschatz am EVA-Bild vergleichen. 10 Min.: Die Lernsignale Labels (Smiley), Ähnlichkeit (K-Means) und Rückmeldung (NIM) zuordnen."
         },
         {
           "phase": "Verarbeiten",
@@ -311,12 +311,12 @@
         {
           "phase": "Informieren",
           "minutes": 15,
-          "task": "Vorhersage von Sprache an Beispielen erklären. Unser Wortpaarmodell von modernen Modellen mit Tokens und längerem Kontext unterscheiden."
+          "task": "Vorhersage von Sprache am Papagei-Beispiel erklären und von modernen LLMs mit Tokens, grösserem Kontext und trainierten neuronalen Netzen unterscheiden."
         },
         {
           "phase": "Verarbeiten",
           "minutes": 50,
-          "task": "Ausgewählte Papagei-Stationen bearbeiten (25 Min.). Mit Soekia gezielt Kontext oder Wortwahl variieren (20 Min.). Beobachtung mit dem kleinen Wortpaarmodell vergleichen (5 Min.)."
+          "task": "Ausgewählte Papagei-Stationen bearbeiten (25 Min.). Mit Soekia gezielt Kontext oder Wortwahl variieren (20 Min.). Beobachtungen mit dem Papierexperiment verbinden und «plausibel = wahr?» festhalten (5 Min.). Human or Not nur bei schulischer Freigabe als 10-Minuten-Alternative zu einem Teil von Soekia einsetzen, nie zusätzlich."
         },
         {
           "phase": "Auswerten",

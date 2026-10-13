@@ -35,7 +35,7 @@ if(groupMemory){
  const reminder=document.createElement('p');reminder.className='small';reminder.textContent='Etwa 4 Minuten spielen, dann 1 Minute beobachten und notieren. In Runde 3 lernt der Mensch als Agent, nicht die KI.';
  instructions.append(roles,rounds,reminder);groupMemory.querySelector('.detail-body .grid.two').before(instructions);
  const oldSheetNote=groupMemory.querySelector('.detail-body > p.small');
- if(oldSheetNote)oldSheetNote.textContent='Die drei Runden und Beobachtungen stehen hier auf der Kursseite. NIM ist anschliessend das Beispiel für einen KI-Agenten mit Rückmeldungen.';
+ if(oldSheetNote)oldSheetNote.textContent='Die drei Memory-Runden und Beobachtungen stehen auf dieser Kursseite. NIM ist das separate Beispiel für einen KI-Agenten mit Rückmeldungen.';
 }
 const knowledgeCheck=[...document.querySelectorAll('#lernarten details')].find(detail=>detail.querySelector('#memory-board'));
 if(knowledgeCheck){
@@ -127,13 +127,12 @@ learningCards.forEach((card,index)=>{
 const language=document.getElementById('sprache');
 const nimLink=learningTypes.querySelector('a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]');
 if(nimLink)nimLink.id='nim-example';
-const miniModel=$('language-corpus');
 const papageiPath=embeddedLearningPath('https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke','Papagei-Lernstrecke von inf-schule.de','Lernstrecke in neuem Tab öffnen');
 const pathIntro=document.createElement('div');pathIntro.className='learning-path-intro';
 const pathHeading=document.createElement('h2');pathHeading.textContent='Wie entsteht ein Text?';
 const pathDescription=document.createElement('p');pathDescription.textContent='Die Lernstrecke führt vom Papagei-Prinzip zur Vorhersage von Wortfolgen. Vergleichen Sie die Beispiele mit dem Papierexperiment oben.';
 pathIntro.append(pathHeading,pathDescription);papageiPath.prepend(pathIntro);
-miniModel.closest('.card').replaceWith(papageiPath);
+const papageiMount=$('papagei-placeholder');if(papageiMount)papageiMount.replaceWith(papageiPath);
 language.querySelector('.lesson-steps article:nth-child(2) p').textContent='Bearbeiten Sie die eingebettete Lernstrecke. Variieren Sie Kontext oder Wortwahl und halten Sie Beobachtungen fest.';
 const turing=document.createElement('aside');turing.className='turing-activity';
 const turingHeading=document.createElement('h2');turingHeading.textContent='Turing-Test: Mensch oder KI?';

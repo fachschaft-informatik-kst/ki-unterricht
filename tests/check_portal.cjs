@@ -99,6 +99,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   const papagei=p.locator('#sprache .external-map iframe');
   assert.equal(await papagei.count(),1);assert.equal(await papagei.getAttribute('src'),'https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke');
   assert.equal(await papagei.getAttribute('title'),'Papagei-Lernstrecke von inf-schule.de');
+  assert.equal(await p.locator('#sprache #language-corpus').count(),0);
+  assert.equal(await p.locator('#sprache #papagei-placeholder').count(),0);
     const turing=p.locator('#sprache .turing-activity a');
     assert.equal(await turing.getAttribute('href'),'https://humanornot.so/start-search');assert.equal(await turing.getAttribute('target'),'_blank');
     assert((await p.locator('#sprache .turing-activity').innerText()).includes('Keine persönlichen Angaben teilen'));

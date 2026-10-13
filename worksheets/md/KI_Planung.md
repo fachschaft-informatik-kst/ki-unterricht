@@ -39,7 +39,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 |---|---:|---|
 | Ankommen | 5 | Ein Bild ohne und mit Klassenname vergleichen: Welche zusätzliche Information hilft? |
 | Vorwissen aktivieren | 10 | An die Einstiegsbeispiele anknüpfen: Was heisst «aus Daten lernen»? |
-| Informieren | 15 | Wissensbasierte Systeme mit festen Regeln von lernenden Systemen mit Erfahrungsschatz unterscheiden. Danach Labels, Ähnlichkeit und Belohnung als drei Lernsignale einordnen. |
+| Informieren | 15 | 5 Min.: Wissensbasierte Systeme mit festen Regeln und lernende Systeme mit veränderlichem Erfahrungsschatz am EVA-Bild vergleichen. 10 Min.: Die Lernsignale Labels (Smiley), Ähnlichkeit (K-Means) und Rückmeldung (NIM) zuordnen. |
 | Verarbeiten | 50 | In Fünfergruppen Memory in drei Runden spielen (15 Min.; Rollen wechseln): zuerst Beispiele mit Labels zuordnen (supervised), dann ohne Labels gruppieren (unsupervised), zuletzt Memory-Paare mit +1 pro Treffer und 0 pro Fehlversuch suchen und die Strategie nach der Rückmeldung anpassen (verstärkend). Smiley und Quick, Draw! vergleichen (10 Min.), K-Means beobachten (10 Min.), NIM als verstärkendes Lernen eines KI-Systems untersuchen (10 Min.) und im digitalen Begriffscheck die drei Arten sichern (5 Min.). |
 | Auswerten | 10 | Für jede Lernart eine Beobachtung im Journal festhalten. Vergleichen: Was lernen die Systeme aus Labels, Ähnlichkeit oder Rückmeldung? NIM begründet zuordnen und die Lernart des Bildprojekts benennen. |
 
@@ -151,8 +151,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 |---|---:|---|
 | Ankommen | 5 | «Heute gehen wir …» unterschiedlich fortsetzen und die Unterschiede sammeln. |
 | Vorwissen aktivieren | 10 | Mit dem Papierexperiment zwei kurze Texte schreiben: einmal nur zwei, einmal vier vorherige Wörter sichtbar lassen. Den Einfluss des Kontexts vergleichen. |
-| Informieren | 15 | Vorhersage von Sprache an Beispielen erklären. Unser Wortpaarmodell von modernen Modellen mit Tokens und längerem Kontext unterscheiden. |
-| Verarbeiten | 50 | Ausgewählte Papagei-Stationen bearbeiten (25 Min.). Mit Soekia gezielt Kontext oder Wortwahl variieren (20 Min.). Beobachtung mit dem kleinen Wortpaarmodell vergleichen (5 Min.). |
+| Informieren | 15 | Vorhersage von Sprache am Papagei-Beispiel erklären und von modernen LLMs mit Tokens, grösserem Kontext und trainierten neuronalen Netzen unterscheiden. |
+| Verarbeiten | 50 | Ausgewählte Papagei-Stationen bearbeiten (25 Min.). Mit Soekia gezielt Kontext oder Wortwahl variieren (20 Min.). Beobachtungen mit dem Papierexperiment verbinden und «plausibel = wahr?» festhalten (5 Min.). Human or Not nur bei schulischer Freigabe als 10-Minuten-Alternative zu einem Teil von Soekia einsetzen, nie zusätzlich. |
 | Auswerten | 10 | Einen gelungenen und einen problematischen Text belegen. Erklären, warum Plausibilität keine Richtigkeit garantiert. |
 
 **Lernprodukt:** Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells.
@@ -189,9 +189,9 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 
 ### 02 · Wie lernt KI?
 
-**Vorbereiten:** Memory-Karten für Gruppen zu fünf und die EVA-Grafik bereitlegen. Rollen festlegen: Agent:in, Kartenleitung, zwei Beobachtende sowie Zeit/Protokoll. Smiley-Spiel, Quick, Draw!, K-Means-Visualisierung und NIM-Lernstrecke öffnen. Für Runde 1 eine eindeutige Label-Regel bereithalten, etwa «zeigt ein Werkzeug / zeigt kein Werkzeug».
+**Vorbereiten:** Memory-Karten für Gruppen zu fünf, Gruppen-Memory-Anleitung auf der Kursseite und EVA-Grafik bereitlegen. Kein separates Lernarten-Arbeitsblatt nötig. Rollen festlegen: Agent:in, Kartenleitung, zwei Beobachtende sowie Zeit/Protokoll. Smiley-Spiel, Quick, Draw!, K-Means-Visualisierung und NIM-Lernstrecke öffnen. Für Runde 1 eine eindeutige Label-Regel bereithalten, etwa «zeigt ein Werkzeug / zeigt kein Werkzeug».
 
-**Einführen:** Vor den Lernarten die EVA-Grafik zeigen: Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe. Daneben ein wissensbasiertes Beispiel stellen: Menschen formulieren Fakten und Wenn-dann-Regeln, das System wendet sie an. Fragen: «Wer hat die Regel festgelegt? Was passiert mit einem Fall, an den niemand gedacht hat?» Beim lernenden System kommt der Erfahrungsschatz aus Daten und kann sich verändern; Filmempfehlungen sind ein Beispiel.
+**Einführen (5 Min.):** Vor den Lernarten die EVA-Grafik zeigen: Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe. Daneben ein wissensbasiertes Beispiel stellen: Menschen formulieren Fakten und Wenn-dann-Regeln, etwa in einem Entscheidungsbaum; das System wendet sie an. Fragen: «Wer hat die Regel festgelegt? Was passiert mit einem Fall, an den niemand gedacht hat?» Beim lernenden System kommt der Erfahrungsschatz aus Daten und kann sich verändern; Filmempfehlungen sind ein Beispiel.
 
 **Durchführen:** Drei Memory-Runden mit Rollenwechseln spielen: 1. **Supervised:** Kartenleitung zeigt gelabelte Beispiele; Agent ordnet neue Karten zu und vergleicht mit den Labels. 2. **Unsupervised:** Labels abdecken und ohne vorgegebene Zielgruppen nach Ähnlichkeit sortieren. 3. **Verstärkend:** Paare verdeckt auslegen; Treffer geben +1, Fehlversuche 0. Agent passt die Suchstrategie nach jeder Rückmeldung an. Etwa vier Minuten spielen, eine Minute beobachten und notieren. Danach im Smiley-Spiel und in Quick, Draw! je eine Zeichnung testen. Bei Quick, Draw! keine persönlichen Motive zeichnen; Zeichnungen können in einen öffentlichen Datensatz eingehen. In K-Means «Gaussian Mixture» wählen und die Gruppierung nach Mittelpunkten beobachten. NIM anschliessend als Beispiel für einen KI-Agenten mit Rückmeldungen ansehen.
 
@@ -247,13 +247,13 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 
 ### 09 · Wie entstehen Sprachmodelle?
 
-**Vorbereiten:** Zwei kurze Satzanfänge fürs Papierexperiment bereitlegen und die Papagei-Stationen so auswählen, dass sie in 25 Minuten passen. Soekia vorab öffnen. Die ganze Papagei-Lernstrecke plus Soekia ist zu umfangreich.
+**Vorbereiten:** Zwei kurze Satzanfänge fürs Papierexperiment bereitlegen und Papagei-Stationen auswählen, die in 25 Minuten passen. Soekia vorab öffnen. Human or Not nur nutzen, wenn Live-Chats mit Fremden schulisch freigegeben sind; es ersetzt dann zehn Minuten Soekia.
 
-**Durchführen:** Beim Papierexperiment einmal nur zwei, einmal vier vorherige Wörter sichtbar lassen. Fortsetzungen vergleichen und fragen: «Was ändert der zusätzliche Kontext?» In der Lernstrecke den Papagei-Vergleich an einem Beispiel auflösen: plausible Fortsetzung ist nicht automatisch wahr. Danach in Soekia nur eine Grösse verändern, etwa Kontext oder Wortwahl.
+**Durchführen:** Beim Papierexperiment einmal nur zwei, einmal vier vorherige Wörter sichtbar lassen. Fortsetzungen vergleichen und fragen: «Was ändert der zusätzliche Kontext?» In der Papagei-Lernstrecke an einem Beispiel verfolgen, wie aus vorherigen Wörtern eine wahrscheinliche Fortsetzung entsteht; mit Soekia nur eine Grösse verändern, etwa Kontext oder Wortwahl. Die einfache Papagei-Analogie von modernen LLMs mit Tokens und trainierten neuronalen Netzen unterscheiden.
 
-**Optionaler Turing-Test:** «Human or Not» ist ein Live-Chat mit fremden Teilnehmenden, keine Simulation. Nur nach schulischer Freigabe einsetzen, keine persönlichen Daten teilen und nicht als Pflichtaufgabe werten. Danach Vermutungen und konkrete Gesprächshinweise vergleichen; ein gewonnener Durchgang beweist nicht, dass ein System denkt.
+**Optionaler Turing-Test:** «Human or Not» ist ein Live-Chat mit fremden Teilnehmenden, keine Simulation. Nur nach schulischer Freigabe zehn Minuten eines Soekia-Blocks ersetzen, nie zusätzlich einsetzen; keine persönlichen Daten teilen und nicht als Pflichtaufgabe werten. Danach Vermutungen und konkrete Gesprächshinweise vergleichen; ein gewonnener Durchgang beweist nicht, dass ein System denkt.
 
-**Prüfen:** Als Lernprodukt einen gelungenen und einen problematischen Text mit Beleg sichern. LLMs sagen das nächste Token im Kontext voraus; sie prüfen damit nicht automatisch, ob eine Aussage wahr ist.
+**Prüfen:** Als Lernprodukt einen gelungenen und einen problematischen Text mit Beleg sichern. LLMs sagen das nächste Token im Kontext voraus; sie prüfen damit nicht automatisch, ob eine Aussage wahr ist. Das Papierexperiment veranschaulicht den Einfluss von Kontext, ist aber kein Modelltraining.
 
 ### 10 · Wer trägt die Folgen?
 
@@ -267,7 +267,7 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 
 - 17.11.: Konvent; 01.12.: Blockwoche; 22./29.12.: Ferien. Am 09.02. finden Maturaarbeitspräsentationen statt.
 - 03.11.: vorhandene Begriffsmaterialien auf die vier Gruppen verteilen. Die eingebettete KI-Landkarte ist die gemeinsame Übersicht; keine zweite Begriffskarte vorbereiten.
-- 10.11.: Memory-Karten und Lernartenblatt bereitlegen. NIM ausschliesslich in der verlinkten Lernstrecke; kein zweites Spiel/Notebook.
+- 10.11.: Memory-Karten und Gruppen-Memory-Anleitung auf der Kursseite bereitlegen; kein separates Lernarten-Arbeitsblatt. NIM ausschliesslich in der verlinkten Lernstrecke; kein zweites Spiel/Notebook.
 - 08.12.: zehn Minuten Projektvorschau mit Themen- und Datenplan. Fotos bis 15.12. sammeln lassen. Einfache Gegenstände bevorzugen; Gesten brauchen fünf Personen. Ersatzdaten nur nach Absprache und mit sichtbarer Herkunft.
 - 15.12.: Erfolgskriterium sind geprüfte Daten und Reflexion 1–2. Ein erster Lauf ist Zeitreserve, keine zusätzliche Pflicht. Der Hauptvergleich liegt am 05.01.
 - 19.01.: gleicher Abgabestand vor Unterrichtsbeginn. **Alle Fachgespräche an diesem Datum**, ohne Ersatz- oder Folgetermine. Nach fünf Minuten gemeinsamer Einführung beginnen die Gespräche; Vorwissen, Auftrag und Fallcheck bearbeiten die übrigen Tandems selbstständig. Minute 5–85 ergibt ein Gesprächsfenster von 80 Minuten; die letzten fünf Minuten bleiben für die gemeinsame Auswertung.

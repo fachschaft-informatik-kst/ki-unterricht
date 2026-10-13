@@ -19,6 +19,21 @@ def render(lesson):
             '<p class="small muted">Unser Ablauf · AVIVA</p><ol class="lesson-phases">'+''.join(rows)+'</ol>'
             f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p></div></details>')
 
+def update_language_lesson(text):
+    mini_model = r'<div class="card"><h3>Unser Mini-Sprachmodell</h3>.*?</div><label class="field answer"><span>Wie verändern Beispieltexte die Ausgabe\? Was erklärt das Modell – und was fehlt gegenüber heutigen Sprachmodellen\?</span>'
+    papagei_mount = '<div id="papagei-placeholder"></div><label class="field answer"><span>Welche Hinweise halfen beim Turing-Test? Was verrät ein plausibler Text über die Grenzen eines Sprachmodells?</span>'
+    text, count = re.subn(mini_model, papagei_mount, text, count=1, flags=re.S)
+    if not count:
+        assert '<div id="papagei-placeholder"></div>' in text, 'Expected mini language model or Papagei mount'
+
+    old_step = '<article><b>2 · Mit Beispielen</b><p>Trainieren Sie unten ein kleines Wortfolgemodell. Welche Fortsetzungen sind möglich, welche fehlen?</p></article>'
+    new_step = '<article><b>2 · Mit der Lernstrecke</b><p>Bearbeiten Sie die Papagei-Lernstrecke unten. Vergleichen Sie eine wahrscheinliche Wortfolge mit der Frage, ob sie auch wahr ist.</p></article>'
+    if old_step in text:
+        text = text.replace(old_step, new_step, 1)
+    else:
+        assert new_step in text, 'Expected mini-model task or Papagei learning-path task'
+    return text
+
 def build():
     lessons = json.loads((ROOT/'projekt/kurs.json').read_text())['lessons']
     assert len(lessons) == 10
@@ -32,6 +47,7 @@ def build():
         pattern = rf'<!--\s*LESSONS:{view}\s*-->.*?<!--\s*/LESSONS:{view}\s*-->'
         text, count = re.subn(pattern, f'<!-- LESSONS:{view} -->\n{body}\n<!-- /LESSONS:{view} -->', text, flags=re.S)
         assert count == 1, view
+    text = update_language_lesson(text)
     page.write_text(text.rstrip()+"\n")
     rows = []
     for l in lessons:
