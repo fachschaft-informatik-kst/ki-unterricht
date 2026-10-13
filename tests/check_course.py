@@ -1,7 +1,6 @@
 """Curriculum invariants: one current route, matching plans, portable teaching notebooks."""
 from pathlib import Path
 import base64
-import datetime
 import json
 import re
 import sys
@@ -14,16 +13,16 @@ from build_portal_notebooks import ITEMS
 from build_course import PHASES
 
 lessons=json.loads((root/'projekt/kurs.json').read_text())['lessons']
-assert len(lessons)==10 and len({l['date'] for l in lessons})==10
+assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,11)]
 soup=BeautifulSoup((root/'projekt/index.html').read_text(),'html.parser')
 ids=[x['id'] for x in soup.select('[id]')]
 assert len(ids)==len(set(ids)), 'Duplicate HTML IDs'
 for lesson in lessons:
-    assert datetime.datetime.strptime(lesson['date'],'%d.%m.%Y').weekday()==1
     assert sum(p['minutes'] for p in lesson['phases'])==90
     assert [p['phase'] for p in lesson['phases']]==PHASES
     plan=soup.select_one('[data-lesson="'+lesson['id']+'"]')
-    assert plan and lesson['date'] in plan.get_text()
+    lesson_label=f'Doppellektion {int(lesson["id"])}'
+    assert plan and lesson_label in plan.get_text()
     for phase in lesson['phases']:
         assert phase['task'] in plan.get_text()
         assert phase['task'] in (root/'worksheets/md/KI_Planung.md').read_text()
@@ -65,9 +64,8 @@ for name in ITEMS:
             if c.cell_type=='markdown':
                 for link in re.findall(r'\]\(([^)]+\.ipynb)\)',c.source):
                     assert (base/link).is_file(), (name,link)
-# Same-day exams must fit the stated 80-minute parallel work window.
+# Exams in lesson 8 must fit the stated 80-minute parallel work window.
 oral=next(l for l in lessons if l['id']=='08')
-assert oral['date']=='19.01.2027'
 assert sum(p['minutes'] for p in oral['phases'][1:-1])==80
 planning=(root/'worksheets/md/KI_Planung.md').read_text()
 rows=re.findall(r'^\| (10|12|14) \| ([\d,]+) Min\. \| ([\d,]+) Min\. \| (\d+) Min\. \| (\d+) Min\. \|$',planning,re.M)
@@ -75,11 +73,12 @@ assert len(rows)==3
 for n,talk,switch,total,reserve in rows:
     assert int(n)*(float(talk.replace(',','.'))+float(switch.replace(',','.')))==int(total)
     assert int(total)+int(reserve)==80
-assert 'Alle Fachgespräche finden am 19.01.2027 statt.' in soup.get_text()
+assert 'Alle Fachgespräche finden in Doppellektion 8 statt.' in soup.get_text()
+assert not re.search(r'\b\d{1,2}\.\d{1,2}\.20\d{2}\b',soup.get_text())
 for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektauftrag.md').read_text()]:
     assert not any(old in document for old in ['über mehrere Termine','auf weitere Termine','zusätzliche Gesprächszeiten'])
 assert len(soup.select('[data-score]'))==10
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
 for name in ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
     assert soup.select_one('[data-lab="'+name+'"]'), name
-print('PASS 10 matching 90-minute plans, dates, anchors, graphics, five descriptive notebooks, portable attachments, manual project gates, rubric and same-day exam timing')
+print('PASS 10 numbered 90-minute plans, date-free lessons, anchors, graphics, five descriptive notebooks, portable attachments, manual project gates, rubric and final-lesson exam timing')

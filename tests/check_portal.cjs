@@ -49,8 +49,9 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert((await learningCards.nth(1).textContent()).includes('Unüberwacht · ohne Labels'));
   assert.equal(await learningCards.nth(1).locator('a[href="https://www.naftaliharris.com/blog/visualizing-k-means-clustering/"]').count(),1);
   assert((await learningCards.nth(2).textContent()).includes('Verstärkend · mit Rückmeldung'));
-  assert.equal(await learningCards.nth(2).locator('a[href="#nim-example"]').count(),1);
-  assert.equal(await p.locator('#nim-example').count(),1);
+  assert.equal(await learningCards.nth(2).locator('a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]').count(),1);
+  assert.equal(await p.locator('#nim-example').count(),0);assert.equal(await p.locator('#lernarten h2').filter({hasText:'Verstärkendes Lernen erkunden'}).count(),0);
+  assert.equal(await p.locator('#lernarten [data-answer="nim"]').count(),0);
   const groupMemory=p.locator('#lernarten details').filter({has:p.locator('[data-answer="memory"]')});
   assert((await groupMemory.locator('.group-memory-instructions').innerText()).includes('In Fünfergruppen'));
   assert((await groupMemory.locator('.group-memory-instructions').innerText()).includes('+1 Punkt'));
@@ -69,7 +70,6 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert((await p.locator('#lernarten label.field.answer').filter({has:p.locator('[data-answer="memory"]')}).locator('span').textContent()).includes('Was fällt auf'));
   for(let i=0;i<3;i++)await memoryObservations.nth(i).fill('Beobachtung '+(i+1));
   await p.locator('#lernarten [data-answer="memory"]').fill('Labels, Ähnlichkeit und Rückmeldungen sind unterschiedliche Lernsignale.');
-  await p.locator('[data-answer="nim"]').fill('Mehr Training hilft gegen den Zufallsgegner.');
   await p.locator('.sidebar-bottom a[href="#journal"]').click();
   await p.locator('[data-journal="names"]').fill('Ada & Alan <script>alert(1)</script>');
   await p.locator('[data-journal="class"]').fill('4f · Obst');
@@ -90,7 +90,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('[data-journal="names"]').fill('Changed');await p.locator('a[href="#sicherung"]').first().click();
   await p.locator('#restore-package').setInputFiles('/tmp/ki-portal-backup.zip');await p.waitForFunction(()=>document.querySelector('#download-status').textContent.includes('Projektstand wiederhergestellt'));
   await p.locator('.sidebar-bottom a[href="#journal"]').click();assert((await p.locator('[data-journal="names"]').inputValue()).includes('Ada'));
-  await p.locator('.nav a[href="#lernarten"]').click();assert((await p.locator('[data-answer="nim"]').inputValue()).includes('Zufallsgegner'));
+  await p.locator('.nav a[href="#lernarten"]').click();
   assert.equal(await p.locator('#lernarten [data-answer="memory-supervised"]').inputValue(),'Beobachtung 1');
   assert.equal(await p.locator('#lernarten [data-answer="memory-unsupervised"]').inputValue(),'Beobachtung 2');
   assert.equal(await p.locator('#lernarten [data-answer="memory-reinforcement"]').inputValue(),'Beobachtung 3');

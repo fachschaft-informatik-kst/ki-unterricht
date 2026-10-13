@@ -1,4 +1,4 @@
-# KI-Block 2026/27 · Planung für Lehrpersonen
+# KI-Block · Planung für Lehrpersonen
 
 **10 Doppellektionen à 90 Unterrichtsminuten.** Die Schulpause kommt separat dazu. Kein Regressionsteil, keine schriftliche Prüfung. Der Leistungsnachweis besteht aus Tandemprojekt und gemeinsamem Fachgespräch.
 
@@ -13,7 +13,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 ## Alle Doppellektionen
 
 <!-- KURSPLAN -->
-### 01 · 03.11.2026 · Was ist KI?
+### Doppellektion 1 · Was ist KI?
 
 **Lernziel:** KI, maschinelles Lernen und neuronale Netze an Beispielen unterscheiden.
 
@@ -29,7 +29,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** Begründete Einordnung von drei Alltagsbeispielen anhand der KI-Landkarte.
 
-### 02 · 10.11.2026 · Wie lernt KI?
+### Doppellektion 2 · Wie lernt KI?
 
 **Lernziel:** Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.
 
@@ -45,7 +45,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** Ein Vergleich wissensbasierter und lernender Systeme sowie drei Beobachtungen zu Lernarten.
 
-### 03 · 24.11.2026 · Wie entscheidet ein Neuron?
+### Doppellektion 3 · Wie entscheidet ein Neuron?
 
 **Lernziel:** Eine Ausgabe berechnen, Gewicht und Bias erklären und die XOR-Grenze erkennen.
 
@@ -61,7 +61,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** Eine nachvollziehbare Rechnung + Erklärung zu Bias und XOR.
 
-### 04 · 08.12.2026 · Warum mehrere Neuronen?
+### Doppellektion 4 · Warum mehrere Neuronen?
 
 **Lernziel:** Eine Zwischenschicht erklären und Training, Validierung und Test trennen.
 
@@ -73,11 +73,11 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 | Vorwissen aktivieren | 10 | Die AND-Regel erklären und die vier XOR-Zielwerte rekonstruieren. |
 | Informieren | 15 | OR und NAND als Zwischenfragen mit der Netzgrafik aufbauen. Festgelegte Gewichte von Training unterscheiden. |
 | Verarbeiten | 50 | XOR-Netz nachvollziehen (25 Min.). Datenaufteilung und Datenleck untersuchen (15 Min.). Projektvorschau: Tandem, zwei Klassen und fünf Gruppen planen (10 Min.). |
-| Auswerten | 10 | Den Weg durch das Netz erklären. Datenplan kurz freigeben lassen; 80 Fotos bis 15.12. sammeln. |
+| Auswerten | 10 | Den Weg durch das Netz erklären. Datenplan kurz freigeben lassen; 80 Fotos bis zur nächsten Projekt-Doppellektion sammeln. |
 
 **Lernprodukt:** XOR-Erklärung + vorläufiger Datenplan für fünf unabhängige Gruppen.
 
-### 05 · 15.12.2026 · Projektstart: Daten vorbereiten
+### Doppellektion 5 · Projektstart: Daten vorbereiten
 
 **Lernziel:** Eine prüfbare Frage formulieren und die eigenen Daten kontrollieren.
 
@@ -93,7 +93,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** Geprüfte Daten + Reflexion 1–2 + erste ZIP-Sicherung.
 
-### 06 · 05.01.2027 · Projekt: fair vergleichen
+### Doppellektion 6 · Projekt: fair vergleichen
 
 **Lernziel:** A und B kontrolliert vergleichen und eine Auswahl vor Testeinsicht begründen.
 
@@ -109,7 +109,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** A/B-Ergebnisse + begründete Auswahl in Reflexion 3; noch kein Abschlusstest.
 
-### 07 · 12.01.2027 · Projekt: prüfen und urteilen
+### Doppellektion 7 · Projekt: prüfen und urteilen
 
 **Lernziel:** Die gewählte Variante abschliessend prüfen und Grenzen mit Belegen beschreiben.
 
@@ -125,7 +125,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** Abschlusstest + vollständiges Journal + geprüftes Abgabepaket.
 
-### 08 · 19.01.2027 · Abgabe und Tandemgespräche
+### Doppellektion 8 · Abgabe und Tandemgespräche
 
 **Lernziel:** Das ganze Projekt gemeinsam erklären und Wissen auf einen neuen Fall übertragen.
 
@@ -141,7 +141,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** Bewertetes Tandemgespräch + unbenoteter Fallcheck; keine nachträgliche Projektänderung.
 
-### 09 · 26.01.2027 · Wie entstehen Sprachmodelle?
+### Doppellektion 9 · Wie entstehen Sprachmodelle?
 
 **Lernziel:** Den Einfluss von Kontext und Beispielen untersuchen und Grenzen der Analogie nennen.
 
@@ -157,7 +157,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells.
 
-### 10 · 02.02.2027 · Wer trägt die Folgen?
+### Doppellektion 10 · Wer trägt die Folgen?
 
 **Lernziel:** Eine Benachteiligung erklären und eine überprüfbare Gegenmassnahme abwägen.
 
@@ -265,14 +265,14 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 
 ## Vorbereitung und realistische Zeitgrenzen
 
-- 17.11.: Konvent; 01.12.: Blockwoche; 22./29.12.: Ferien. Am 09.02. finden Maturaarbeitspräsentationen statt.
-- 03.11.: vorhandene Begriffsmaterialien auf die vier Gruppen verteilen. Die eingebettete KI-Landkarte ist die gemeinsame Übersicht; keine zweite Begriffskarte vorbereiten.
-- 10.11.: Memory-Karten und Gruppen-Memory-Anleitung auf der Kursseite bereitlegen; kein separates Lernarten-Arbeitsblatt. NIM ausschliesslich in der verlinkten Lernstrecke; kein zweites Spiel/Notebook.
-- 08.12.: zehn Minuten Projektvorschau mit Themen- und Datenplan. Fotos bis 15.12. sammeln lassen. Einfache Gegenstände bevorzugen; Gesten brauchen fünf Personen. Ersatzdaten nur nach Absprache und mit sichtbarer Herkunft.
-- 15.12.: Erfolgskriterium sind geprüfte Daten und Reflexion 1–2. Ein erster Lauf ist Zeitreserve, keine zusätzliche Pflicht. Der Hauptvergleich liegt am 05.01.
-- 19.01.: gleicher Abgabestand vor Unterrichtsbeginn. **Alle Fachgespräche an diesem Datum**, ohne Ersatz- oder Folgetermine. Nach fünf Minuten gemeinsamer Einführung beginnen die Gespräche; Vorwissen, Auftrag und Fallcheck bearbeiten die übrigen Tandems selbstständig. Minute 5–85 ergibt ein Gesprächsfenster von 80 Minuten; die letzten fünf Minuten bleiben für die gemeinsame Auswertung.
-- 26.01.: Papagei-Stationen vorab passend auswählen; die ganze Lernstrecke plus Soekia ist in 90 Minuten zu umfangreich. Das kleine Wortpaarmodell dient dem Vergleich, nicht als zusätzliche lange Einheit.
-- 02.02.: Cathy O’Neils vorhandenes ca. 13-minütiges Video einsetzen. Ein **45-minütiger Abschlussfilm ist noch nicht ausgewählt**. Die Planung ist mit einer Fallwerkstatt vollständig durchführbar. Ein vorab gesichteter, verfügbarer Film ersetzt diese 45 Minuten; er kommt nicht zusätzlich dazu. Beobachtungsauftrag: zwei Aussagen, Belege, offene Frage. Danach zehn Minuten gemeinsame Auswertung beibehalten.
+- Schulunterbrüche, Blockwochen und Präsentationen im lokalen Schulkalender ergänzen; sie ändern die Nummerierung dieser zehn Doppellektionen nicht.
+- **Doppellektion 1:** vorhandene Begriffsmaterialien auf die vier Gruppen verteilen. Die eingebettete KI-Landkarte ist die gemeinsame Übersicht.
+- **Doppellektion 2:** Memory-Karten und Gruppen-Memory-Anleitung auf der Kursseite bereitlegen; kein separates Lernarten-Arbeitsblatt. NIM optional in der verlinkten Lernstrecke, kein zusätzlicher Pflichtblock.
+- **Doppellektion 4:** zehn Minuten Projektvorschau mit Themen- und Datenplan. Fotos bis Doppellektion 5 sammeln lassen. Einfache Gegenstände bevorzugen; Gesten brauchen fünf Personen. Ersatzdaten nur nach Absprache und mit sichtbarer Herkunft.
+- **Doppellektion 5:** Erfolgskriterium sind geprüfte Daten und Reflexion 1–2. Ein erster Lauf ist Zeitreserve, keine zusätzliche Pflicht. Der Hauptvergleich liegt in Doppellektion 6.
+- **Doppellektion 8:** gleicher Abgabestand vor Unterrichtsbeginn. **Alle Fachgespräche in dieser Doppellektion**, ohne Folgetermin. Nach fünf Minuten gemeinsamer Einführung beginnen die Gespräche; die übrigen Tandems bearbeiten parallel Vorwissen, Auftrag und Fallcheck. Minute 5–85 ergibt das Gesprächsfenster von 80 Minuten; die letzten fünf Minuten bleiben für die Auswertung.
+- **Doppellektion 9:** Papagei-Stationen vorab passend auswählen; die ganze Lernstrecke plus Soekia ist zu umfangreich. Das Papierexperiment veranschaulicht den Kontexteinfluss. Human or Not höchstens als freigegebene Alternative, nicht zusätzlich.
+- **Doppellektion 10:** Cathy O’Neils Video einsetzen. Ein Abschlussfilm ist optional und ersetzt die Fallwerkstatt, kommt aber nicht zusätzlich dazu. Beobachtungsauftrag: zwei Aussagen, Belege und eine offene Frage. Danach zehn Minuten gemeinsame Auswertung.
 
 ## Fachliche Leitplanken
 
@@ -284,7 +284,7 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 - Auswahl und Begründung vor Testeinsicht; danach keine Optimierung. Die Sperre unterstützt eine Arbeitsregel und ist kein Zugriffsschutz. Wenige Exemplare und ein Startwert begrenzen die Aussage.
 - Drei Beispiele analysieren, keine Fehler erfinden. Mehrere Fotos eines Exemplars sind keine unabhängigen neuen Exemplare.
 
-## Gesprächsplan für den 19.01.2027
+## Gesprächsplan · Doppellektion 8
 
 **Planungsbeispiel mit 12 Tandems** (Klassengrösse vorab prüfen): 12 × (5 Minuten Gespräch + 1 Minute Notizen/Wechsel) = 72 Minuten. Dazu 8 Minuten Reserve sowie je 5 Minuten Einführung und Abschluss = **90 Minuten**. Die Schulpause liegt ausserhalb dieser Unterrichtsminuten.
 
@@ -294,7 +294,7 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 | 12 | 5 Min. | 1 Min. | 72 Min. | 8 Min. |
 | 14 | 4,5 Min. | 1 Min. | 77 Min. | 3 Min. |
 
-Für eine andere Tandemzahl: Gesprächsdauer höchstens **80 ÷ Tandemzahl − 1 Minute**, auf eine halbe Minute **abrunden** und auf höchstens 5 Minuten begrenzen. Die Dauer gilt innerhalb der Klasse für alle gleich und wird mit der Reihenfolge vorab bekannt gegeben. Keine Verlagerung auf den 26.01. oder ein anderes Datum.
+Für eine andere Tandemzahl: Gesprächsdauer höchstens **80 ÷ Tandemzahl − 1 Minute**, auf eine halbe Minute **abrunden** und auf höchstens 5 Minuten begrenzen. Die Dauer gilt innerhalb der Klasse für alle gleich und wird mit der Reihenfolge vorab bekannt gegeben. Gespräche nicht auf spätere Doppellektionen verlagern.
 
 | Im 5-Minuten-Gespräch | Fokus | Kompetenz |
 | --- | --- | --- |

@@ -111,7 +111,7 @@ const learningExamples=[
   {href:'https://www.naftaliharris.com/blog/visualizing-k-means-clustering/',text:'K-Means-Visualisierung öffnen'}
  ],note:'Zum Einstieg «Gaussian Mixture» wählen und beobachten, wie die Punkte den Mittelpunkten zugeordnet werden.'},
  {title:'Verstärkend · mit Rückmeldung',description:'Auf eine Handlung folgt eine Rückmeldung. Im NIM-Spiel verändert sie, welche Züge das System später wählt.',links:[
-  {href:'#nim-example',text:'NIM-Lernstrecke ansehen ↓'}
+  {href:'https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke',text:'NIM-Lernstrecke bei inf-schule öffnen ↗'}
  ]}
 ];
 const learningCards=learningTypes.querySelectorAll('.lesson-steps article');
@@ -125,8 +125,6 @@ learningCards.forEach((card,index)=>{
  if(example.note){const note=document.createElement('p');note.className='learning-example-note';note.textContent=example.note;card.append(note);}
 });
 const language=document.getElementById('sprache');
-const nimLink=learningTypes.querySelector('a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]');
-if(nimLink)nimLink.id='nim-example';
 const papageiPath=embeddedLearningPath('https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke','Papagei-Lernstrecke von inf-schule.de','Lernstrecke in neuem Tab öffnen');
 const pathIntro=document.createElement('div');pathIntro.className='learning-path-intro';
 const pathHeading=document.createElement('h2');pathHeading.textContent='Wie entsteht ein Text?';

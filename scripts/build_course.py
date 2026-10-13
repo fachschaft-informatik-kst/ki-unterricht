@@ -1,4 +1,4 @@
-"""Render one dated AVIVA plan into both the website and teacher planning notes."""
+"""Render numbered AVIVA plans into both the website and teacher planning notes."""
 from pathlib import Path
 import html
 import json
@@ -12,12 +12,44 @@ def render(lesson):
     for phase in lesson['phases']:
         rows.append(f'<li><span class="phase-time">{phase["minutes"]} Min.</span><div><strong>{html.escape(phase["phase"])}</strong><p>{html.escape(phase["task"])}</p></div></li>')
     return (f'<details class="lesson-plan" data-lesson="{lesson["id"]}"><summary>'
-            f'<span class="phase-num">{lesson["id"]}</span><span>{lesson["date"]} · {html.escape(lesson["title"])}</span>'
+            f'<span class="phase-num">{lesson["id"]}</span><span>Doppellektion {int(lesson["id"])} · {html.escape(lesson["title"])}</span>'
             '<small>90 Min.</small></summary><div class="detail-body">'
             f'<p><strong>Heute können Sie:</strong> {html.escape(lesson["goal"])}</p>'
             f'<p class="lesson-question">{html.escape(lesson["question"])}</p>'
             '<p class="small muted">Unser Ablauf · AVIVA</p><ol class="lesson-phases">'+''.join(rows)+'</ol>'
             f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p></div></details>')
+
+def remove_calendar_dates(text):
+    text, _ = re.subn(r'<details><summary>Unterrichtspausen &amp; Termine</summary>.*?</details>', '', text, count=1, flags=re.S)
+
+    def course_card(match):
+        number = match.group(1)
+        label = 'Doppellektionen 5–8' if number == '05–08' else f'{int(number)}. Doppellektion'
+        return f'<span class="tag">{label}</span>'
+
+    text = re.sub(r'<span class="tag">[^<]*</span><b>(01|02|03|04|05–08|09|10)</b>', course_card, text)
+
+    full_date = re.compile(r'(?<!\d)(?:0[1-9]|[12]\d|3[01])\.(?:0[1-9]|1[0-2])\.20\d{2}(?!\d)')
+    dates = sorted(set(full_date.findall(text)), key=lambda value: tuple(map(int, reversed(value.split('.')))))
+    full_labels = {value: f'{index}. Doppellektion' for index, value in enumerate(dates, 1)}
+    short_labels = {'.'.join(value.split('.')[:2])+'.': index for index, value in enumerate(dates, 1)}
+
+    def date_range(match):
+        first, second = match.groups()
+        if first in short_labels and second in short_labels:
+            return f'Doppellektionen {short_labels[first]}–{short_labels[second]}'
+        return match.group(0)
+
+    text = re.sub(r'(?<!\d)(\d{1,2}\.\d{1,2}\.)[–-](\d{1,2}\.\d{1,2}\.)(?!\d)', date_range, text)
+    text = full_date.sub(lambda match: full_labels[match.group(0)], text)
+    short_date = re.compile(r'(?<!\d)(\d{1,2}\.\d{1,2}\.)(?!\d)')
+    text = short_date.sub(lambda match: f'{short_labels[match.group(1)]}. Doppellektion' if match.group(1) in short_labels else match.group(0), text)
+    text = re.sub(r'<span class="section-label">0?(\d{1,2}) · \d{1,2}\. Doppellektion · Doppelstunde</span>', lambda match: f'<span class="section-label">Doppellektion {int(match.group(1))}</span>', text)
+    text = text.replace('Vor Unterrichtsbeginn am 8. Doppellektion', 'Vor Beginn der Doppellektion 8')
+    text = text.replace('Alle Fachgespräche finden am 8. Doppellektion statt', 'Alle Fachgespräche finden in Doppellektion 8 statt')
+    text = re.sub(r' · Schuljahr \d{4}/\d{2}', '', text)
+    text = text.replace('class="date"', 'class="lesson-reference"')
+    return text
 
 def update_language_lesson(text):
     mini_model = r'<div class="card"><h3>Unser Mini-Sprachmodell</h3>.*?</div><label class="field answer"><span>Wie verändern Beispieltexte die Ausgabe\? Was erklärt das Modell – und was fehlt gegenüber heutigen Sprachmodellen\?</span>'
@@ -25,6 +57,11 @@ def update_language_lesson(text):
     text, count = re.subn(mini_model, papagei_mount, text, count=1, flags=re.S)
     if not count:
         assert '<div id="papagei-placeholder"></div>' in text, 'Expected mini language model or Papagei mount'
+
+    nim_block = r'<div class="card"><h2>Verstärkendes Lernen erkunden</h2>.*?</div><label class="field answer"><span>Wie lernt das System aus Rückmeldungen\? Nennen Sie eine Grenze\.</span><textarea data-answer="nim".*?</label>'
+    text, count = re.subn(nim_block, '', text, count=1, flags=re.S)
+    if not count:
+        assert 'Verstärkendes Lernen erkunden' not in text, 'Expected NIM block to be removed or already absent'
 
     old_step = '<article><b>2 · Mit Beispielen</b><p>Trainieren Sie unten ein kleines Wortfolgemodell. Welche Fortsetzungen sind möglich, welche fehlen?</p></article>'
     new_step = '<article><b>2 · Mit der Lernstrecke</b><p>Bearbeiten Sie die Papagei-Lernstrecke unten. Vergleichen Sie eine wahrscheinliche Wortfolge mit der Frage, ob sie auch wahr ist.</p></article>'
@@ -48,10 +85,11 @@ def build():
         text, count = re.subn(pattern, f'<!-- LESSONS:{view} -->\n{body}\n<!-- /LESSONS:{view} -->', text, flags=re.S)
         assert count == 1, view
     text = update_language_lesson(text)
+    text = remove_calendar_dates(text)
     page.write_text(text.rstrip()+"\n")
     rows = []
     for l in lessons:
-        rows.extend([f'### {l["id"]} · {l["date"]} · {l["title"]}', '', f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', '', '| AVIVA-Phase | Min. | Tätigkeit / Auftrag |', '|---|---:|---|'])
+        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', '', f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', '', '| AVIVA-Phase | Min. | Tätigkeit / Auftrag |', '|---|---:|---|'])
         rows += [f'| {p["phase"]} | {p["minutes"]} | {p["task"]} |' for p in l['phases']]
         rows += ['', f'**Lernprodukt:** {l["product"]}', '']
     plan = ROOT/'worksheets/md/KI_Planung.md'

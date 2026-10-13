@@ -36,7 +36,7 @@ A erhält acht Bilder je Klasse aus T1, B je vier aus T1/T2. Gleich bleiben Bild
 
 Bilder werden im Fotostudio einheitlich als 224 × 224 RGB verarbeitet. Das eingefrorene MobileNet liefert 1280 Merkmale; das eigene Netz wird lokal in Python/Pyodide trainiert. `UEBUNG` nimmt 80 Formen aus dem mitgelieferten synthetischen Datensatz. `ERSATZ` nach Absprache, mit offener Herkunft.
 
-Abgabe vor Unterrichtsbeginn am 19.01.2027: Journal mit Ausgaben, Fotos/JSON und Protokoll. Alle Fachgespräche gemeinsam im Tandem am 19.01.2027. Richtwert 5 Minuten pro Tandem, je nach Tandemzahl einheitlich kürzer; keine Folgetermine. Der [Gesprächsplan](worksheets/md/KI_Planung.md#gesprächsplan-für-den-19012027) rechnet Wechsel und Puffer mit ein. Zehn Kompetenzen mit je 0–3 Punkten: 18 Punkte für die Abgabe, 12 für das Gespräch. Note = 1 + 5 × Punkte / 30, auf Viertelnoten gerundet. [Vollständiges Bewertungsraster](worksheets/md/KI_Bewertungsraster.md). Die eigene Seite «Lernziele» zeigt die Ziele aller Unterrichtsblöcke.
+Abgabe des Journals mit Ausgaben, Fotos/JSON und Protokoll vor Beginn von Doppellektion 8. Alle Fachgespräche finden in Doppellektion 8 statt. Richtwert 5 Minuten pro Tandem, je nach Tandemzahl einheitlich kürzer; keine Folgetermine. Der [Gesprächsplan](worksheets/md/KI_Planung.md#gesprächsplan--doppellektion-8) rechnet Wechsel und Puffer mit ein. Zehn Kompetenzen mit je 0–3 Punkten: 18 Punkte für die Abgabe, 12 für das Gespräch. Note = 1 + 5 × Punkte / 30, auf Viertelnoten gerundet. [Vollständiges Bewertungsraster](worksheets/md/KI_Bewertungsraster.md). Die eigene Seite «Lernziele» zeigt die Ziele aller Unterrichtsblöcke.
 
 ## Didaktischer Aufbau
 
