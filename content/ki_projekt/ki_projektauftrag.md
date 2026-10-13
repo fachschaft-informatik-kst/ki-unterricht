@@ -6,7 +6,7 @@
 
 ## Auftrag
 
-Wählen Sie eine Anwendung aus dem Ideenpool und genau zwei Klassen. Sammeln Sie 80 Fotos gemäss Datenplan: fünf unabhängige Gruppen, acht Fotos je Klasse und Gruppe.
+Wählen Sie eine Anwendung aus dem Ideenpool und genau zwei Klassen. Sammeln Sie 80 Fotos gemäss Datenplan: fünf unabhängige Gruppen, acht Fotos je Klasse und Gruppe. Beide Klassen werden unter gleichen Bedingungen fotografiert; Personen nur mit Einverständnis (Details in `ki_fotodaten.md`).
 
 Das vortrainierte Bildmodell liefert feste Merkmale. Sie trainieren darauf ein eigenes kleines neuronales Netz. Sie untersuchen Daten und Ergebnisse; Sie müssen den Hilfscode nicht selbst programmieren.
 

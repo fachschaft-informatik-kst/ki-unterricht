@@ -21,7 +21,7 @@ Ein Tandem arbeitet gemeinsam an einem Gerät; es gibt keine gleichzeitige Onlin
 | `perzeptron_und_neuronale_netze.ipynb` | Gewicht, Bias, ein Lernschritt, Grenze bei XOR |
 | `mehrschichtige_netze.ipynb` | XOR-Zwischenschicht, Lernen qualitativ, Brücke zu Bildmerkmalen |
 | `daten_training.ipynb` | Gruppentrennung, Datenlecks und vorsichtige Interpretation |
-| `ki_projekt/ki_lernlabor.ipynb` | 15 Minuten gemeinsamer Probelauf |
+| `ki_projekt/ki_lernlabor.ipynb` | 15 Minuten gemeinsamer Probelauf, optional 10 Minuten Zusatz (Auswahl und Abschlusstest) |
 | `ki_projekt/ki_tandemprojekt.ipynb` | Eigenes Projekt mit Anleitungen zu den fünf Webjournal-Reflexionen |
 
 Das Notebookprinzip ist immer: Vermutung → Experiment → Beobachtung → Erklärung. Codezellen enthalten wenige Aufrufe; nachvollziehbarer Hilfscode liegt in `unterricht_tools.py` und `ki_projekt/*_tools.py`.

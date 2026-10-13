@@ -61,6 +61,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** Eine nachvollziehbare Rechnung + Erklärung zu Bias und XOR.
 
+**Zeit:** Das Notebook hat einen Kern von ca. 30 Minuten (Zeitmarken ⏱). Der Abschnitt «Zusatz · Ein Neuron liest echte Ziffern» ist Vertiefung für Schnelle oder zu Hause und zählt nicht zur Planung.
+
 ### Doppellektion 4 · Warum mehrere Neuronen?
 
 **Lernziel:** Eine Zwischenschicht erklären und Training, Validierung und Test trennen.
@@ -77,6 +79,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Lernprodukt:** XOR-Erklärung + vorläufiger Datenplan für fünf unabhängige Gruppen.
 
+**Zeit:** Beide Notebooks haben einen Kern (XOR-Netz 23 Minuten, Datenaufteilung 15 Minuten, Zeitmarken ⏱). Der Zusatz «Ein trainiertes Netz erkennt Ziffern» ist Vertiefung. Bei Zeitnot im Notebook «Daten fair aufteilen» zuerst das Rechenbeispiel am Ende von «Üben» streichen, danach die Zuordnungsübung kürzen; Rollen-Tabelle, Datenleck und die Drei-Werte-Grafik bleiben. Der Datenplan wird von den Tandems mit der Checkliste am Notebook-Ende selbst geprüft; die Lehrperson stichprobenartig nachsehen.
+
 ### Doppellektion 5 · Projektstart: Daten vorbereiten
 
 **Lernziel:** Eine prüfbare Frage formulieren und die eigenen Daten kontrollieren.
@@ -92,6 +96,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 | Auswerten | 10 | Reflexion 1–2 sichern. Ein Datenproblem oder eine offene Frage festhalten und ZIP herunterladen. |
 
 **Lernprodukt:** Geprüfte Daten + Reflexion 1–2 + erste ZIP-Sicherung.
+
+**Zeit:** Das Lernlabor besteht aus fünf Abschnitten à 3 Minuten (Zeitmarken ⏱); der Zusatz zum Abschlusstest ist freiwillig. Im Lernlabor ist bei den einfachen Übungsformen Gleichstand von A und B zu erwarten; das ist ein gültiges Ergebnis, kein Fehler.
 
 ### Doppellektion 6 · Projekt: fair vergleichen
 

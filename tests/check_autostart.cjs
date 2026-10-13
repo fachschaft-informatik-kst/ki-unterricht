@@ -31,7 +31,8 @@ async function simulate(name, fail = false, twice = false, modification = '') {
 (async () => {
   for (const name of ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb']) {
     const result = await simulate(name, false, true);
-    assert.deepEqual(result.executed, result.nb.cells.flatMap((c,i) => c.cell_type === 'code' ? [i] : []));
+    // Optionale Zusatzzellen tragen den Tag nicht und bleiben manuell.
+    assert.deepEqual(result.executed, result.nb.cells.flatMap((c,i) => c.cell_type === 'code' && (c.metadata.tags||[]).includes('ki-autostart') ? [i] : []));
     assert.equal(result.badges.length, 1);
     assert.equal(result.badges[0].node.textContent, '✓ Bereit');
   }

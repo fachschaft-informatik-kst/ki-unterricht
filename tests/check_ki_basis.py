@@ -58,6 +58,13 @@ def main():
     rejects(lambda:load(dict(doc,records=records[:-1])))
     bad=copy.deepcopy(doc);bad['records'][0]['group']='V1';rejects(lambda:load(bad))
     repeated=foto.vergleichen(own,wiederholen=True);assert len(repeated['laeufe'])==6
+    # Ziffernbeispiele: trainierte Netze müssen auf neuen Bildern deutlich besser als Raten sein.
+    X,y,_,val=u._ziffern_daten();netz=u.ziffern(16);assert netz.score(X[val],y[val])>.9
+    u.ziffer_durchs_netz(netz,0);rejects(lambda:u.ziffer_durchs_netz(netz,10**6))
+    u.neuron_ziffern(0,1);rejects(lambda:u.neuron_ziffern(3,3))
+    u.drei_rollen(100);rejects(lambda:u.drei_rollen(5))
+    foto.gruppen_zeigen(d);foto.bild_durchs_netz(exp,'B',0);foto.vorhersagen_zeigen(exp,'A')
+    rejects(lambda:foto.bild_durchs_netz(exp,'B',99))
     print('PASS basis: XOR, 80-photo import, equal samples, group separation, final gate and optional repeats')
 
 if __name__=='__main__':main()

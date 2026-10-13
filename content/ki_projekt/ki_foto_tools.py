@@ -109,6 +109,65 @@ def projekt_laden(modus='UEBUNG', klassen=('Kreis','Dreieck'), dateien=(), uploa
                        dateien=dateien,upload=upload,profil='basis')
 
 
+def gruppen_zeigen(daten, je=3):
+    """Je Klasse und Trainings-/Validierungsgruppe einige Vorschauen; Testgruppen bleiben verdeckt."""
+    import matplotlib.pyplot as plt
+    gruppen=list(daten.train_personen)+list(daten.val_personen)
+    fig,axes=plt.subplots(len(daten.klassen),len(gruppen)*je,figsize=(1.5*len(gruppen)*je,1.9*len(daten.klassen)),squeeze=False)
+    for c,label in enumerate(daten.klassen):
+        for g,gruppe in enumerate(gruppen):
+            ids=np.flatnonzero((daten.y==c)&(daten.personen==gruppe))[:je]
+            for k,i in enumerate(ids):
+                ax=axes[c][g*je+k];ki._bild_zeigen(ax,daten,i);ax.axis('off')
+                ax.set_title(f'{label}\n{gruppe}',fontsize=9)
+    fig.suptitle('Jede Gruppe zeigt ein anderes Exemplar: Training T1/T2, Validierung V1')
+    plt.tight_layout();plt.show()
+    print('Gleiche Gruppe = dasselbe Exemplar in verschiedenen Fotos. Andere Gruppe = anderes Exemplar.')
+    print('P1/P2 bleiben bis zum Abschlusstest ungezeigt.')
+
+
+def bild_durchs_netz(exp, variante='B', nr=0):
+    """Ein Validierungsbild von der Vorschau über die 1280 Merkmale bis zum Modellwert."""
+    import matplotlib.pyplot as plt
+    d=exp['daten']
+    ki.pruefe(0<=nr<len(d.val), f'nr: Zahl von 0 bis {len(d.val)-1}.')
+    runs=[r for r in exp['laeufe'] if r['variante']==variante]
+    ki.pruefe(bool(runs),'Variante A oder B wählen.')
+    i=d.val[nr];netz=runs[0]['netz'];probs=netz.predict_proba(d.X[i:i+1])[0]
+    guess=int(np.argmax(probs));ok=guess==d.y[i]
+    fig,axes=plt.subplots(1,3,figsize=(12,3.4),gridspec_kw=dict(width_ratios=[1,2.6,1.6]))
+    ki._bild_zeigen(axes[0],d,i);axes[0].axis('off')
+    axes[0].set_title('1 · Foto\n224 × 224 RGB (hier 64 × 64)',fontsize=10)
+    axes[1].bar(np.arange(1280),d.X[i],width=1,color='#52656a')
+    axes[1].set(title='2 · MobileNet (eingefroren): 1280 Merkmale',xlabel='Merkmal Nr.',ylabel='Wert (normiert)')
+    axes[2].barh(d.klassen,probs*100,color=['#176c63' if j==guess else '#c9d3d6' for j in range(len(d.klassen))])
+    axes[2].set(xlim=(0,100),xlabel='Modellwert (%)',title=f'3 · Unser Netz ({netz.hidden_layer_sizes[0]} Neuronen)')
+    plt.tight_layout();plt.show()
+    print(f'Bild {nr} aus V1 · tatsächlich: {d.klassen[d.y[i]]} · Netz: {d.klassen[guess]} ({probs[guess]:.0%}) · '+('richtig' if ok else 'Fehler'))
+    print('Der Modellwert zeigt die Sicherheit des Netzes, nicht die Wahrscheinlichkeit, richtig zu liegen.')
+
+
+def vorhersagen_zeigen(exp, variante='B'):
+    """Alle Validierungsbilder mit Klasse, Vorhersage und Modellwert."""
+    import matplotlib.pyplot as plt
+    d=exp['daten']
+    runs=[r for r in exp['laeufe'] if r['variante']==variante]
+    ki.pruefe(bool(runs),'Variante A oder B wählen.')
+    probs=runs[0]['netz'].predict_proba(d.X[d.val]);pred=probs.argmax(axis=1);sure=probs.max(axis=1)
+    spalten=8;zeilen=-(-len(d.val)//spalten)
+    fig,axes=plt.subplots(zeilen,spalten,figsize=(1.9*spalten,2.4*zeilen),squeeze=False)
+    for ax in axes.ravel():ax.axis('off')
+    for ax,j,i in zip(axes.ravel(),range(len(d.val)),d.val):
+        ki._bild_zeigen(ax,d,i)
+        ok=pred[j]==d.y[i]
+        ax.set_title(f"{'✓' if ok else '✗'} {d.klassen[d.y[i]]}\nNetz: {d.klassen[pred[j]]} ({sure[j]:.0%})",fontsize=9,color='#176c63' if ok else '#b84d27')
+    fig.suptitle(f'Alle {len(d.val)} Validierungsbilder · Variante {variante} · ✓ richtig, ✗ Fehler')
+    plt.tight_layout();plt.show()
+    unsicher=int(np.argmin(sure))
+    print(f'{int(np.sum(pred==d.y[d.val]))} von {len(d.val)} richtig. Unsicherstes Bild: Nr. {unsicher} ({d.klassen[d.y[d.val[unsicher]]]}, Modellwert {sure[unsicher]:.0%}).')
+    print('Keine Fehler: nicht erfinden. Auch dann Grenzen der Daten benennen.')
+
+
 def vergleichen(daten, wiederholen=False):
     """Gleiche Bildzahl: A ein Exemplar, B zwei Exemplare pro Klasse."""
     ki.pruefe(len(daten.klassen)==2, 'Pflichtvergleich mit genau zwei Klassen.')
@@ -150,7 +209,7 @@ def beispiele(exp, variante='B', test=False):
     fig,axes=plt.subplots(1,len(chosen),figsize=(8,3),squeeze=False)
     for ax,j in zip(axes[0],chosen):
         ki._bild_zeigen(ax,d,ids[j]);ax.axis('off')
-        ax.set_title(f'{"Fehler" if pred[j]!=d.y[ids[j]] else "Richtig"}\nBild: {d.klassen[d.y[ids[j]]]}\nNetz: {d.klassen[pred[j]]}',fontsize=10)
+        ax.set_title(f'{"✗ Fehler" if pred[j]!=d.y[ids[j]] else "✓ Richtig"}\nBild: {d.klassen[d.y[ids[j]]]}\nNetz: {d.klassen[pred[j]]}',fontsize=10)
     fig.suptitle(('Abschlusstest' if test else 'Validierung')+f' · Variante {variante} · erster festgelegter Lauf')
     plt.tight_layout();plt.show()
     print(f'{len(wrong)} Fehlvorhersagen von {len(ids)} Bildern. Gezeigt: zuerst Fehler, sonst richtige Beispiele.')
