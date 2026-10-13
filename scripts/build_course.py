@@ -16,8 +16,12 @@ def render(lesson):
             '<small>90 Min.</small></summary><div class="detail-body">'
             f'<p><strong>Heute können Sie:</strong> {html.escape(lesson["goal"])}</p>'
             f'<p class="lesson-question">{html.escape(lesson["question"])}</p>'
+            + (f'<p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> {html.escape(lesson["motivation"])}</p>' if lesson.get('motivation') else '')
+            +
             '<p class="small muted">Unser Ablauf · AVIVA</p><ol class="lesson-phases">'+''.join(rows)+'</ol>'
-            f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p></div></details>')
+            f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p>'
+            + (f'<p class="small muted"><strong>Zeit:</strong> {html.escape(lesson["zeit"])}</p>' if lesson.get('zeit') else '')
+            + '</div></details>')
 
 def remove_calendar_dates(text):
     text, _ = re.subn(r'<details><summary>Unterrichtspausen &amp; Termine</summary>.*?</details>', '', text, count=1, flags=re.S)
@@ -89,9 +93,10 @@ def build():
     page.write_text(text.rstrip()+"\n")
     rows = []
     for l in lessons:
-        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', '', f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', '', '| AVIVA-Phase | Min. | Tätigkeit / Auftrag |', '|---|---:|---|'])
+        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', '', f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['| AVIVA-Phase | Min. | Tätigkeit / Auftrag |', '|---|---:|---|'])
         rows += [f'| {p["phase"]} | {p["minutes"]} | {p["task"]} |' for p in l['phases']]
         rows += ['', f'**Lernprodukt:** {l["product"]}', '']
+        if l.get('zeit'): rows += [f'**Zeit:** {l["zeit"]}', '']
     plan = ROOT/'worksheets/md/KI_Planung.md'
     text = plan.read_text()
     text, count = re.subn(r'<!-- KURSPLAN -->.*?<!-- /KURSPLAN -->', '<!-- KURSPLAN -->\n'+'\n'.join(rows)+'\n<!-- /KURSPLAN -->', text, flags=re.S)

@@ -63,6 +63,15 @@ def main():
     u.ziffer_durchs_netz(netz,0);rejects(lambda:u.ziffer_durchs_netz(netz,10**6))
     u.neuron_ziffern(0,1);rejects(lambda:u.neuron_ziffern(3,3))
     u.drei_rollen(100);rejects(lambda:u.drei_rollen(5))
+    # Lernweg Neuron: Gatter konvergieren, XOR nie; ein Neuron löst XOR höchstens 3 von 4, vier versteckte Neuronen vollständig.
+    for aufgabe in ('AND','OR','NAND','NOR'):
+        w,b=u.perzeptron_lernen(aufgabe);assert np.all((u._EINGABEN@w+b>=0)==np.array(u._ZIELE[aufgabe]))
+    w,b=u.perzeptron_lernen('XOR',runden=8);assert np.sum((u._EINGABEN@w+b>=0)==np.array(u._ZIELE['XOR']))<4
+    rejects(lambda:u.perzeptron_lernen('XYZ'));rejects(lambda:u.perzeptron(aufgabe='XYZ'))
+    u.neuron_vergleich();assert u.neuron_zeigen(1,1,1,1,-1.5)==1 and u.neuron_zeigen(1,0,1,1,-1.5)==0
+    w,b=u.iris_neuron();assert w.shape==(2,)
+    assert u.xor_lernen(1).score(u._EINGABEN,u._ZIELE['XOR'])<1 and u.xor_lernen(4).score(u._EINGABEN,u._ZIELE['XOR'])==1
+    rejects(lambda:u.xor_lernen(0))
     foto.gruppen_zeigen(d);foto.bild_durchs_netz(exp,'B',0);foto.vorhersagen_zeigen(exp,'A')
     rejects(lambda:foto.bild_durchs_netz(exp,'B',99))
     print('PASS basis: XOR, 80-photo import, equal samples, group separation, final gate and optional repeats')

@@ -10,6 +10,7 @@
 .lesson-plan summary small{white-space:nowrap;color:var(--muted);font-weight:400}
 .lesson-plan summary::after{margin-left:0}
 .lesson-question{font-size:19px;line-height:1.5;color:var(--accent)}
+.lesson-motivation{font-size:15px;line-height:1.55;margin:.2em 0 1em}
 .lesson-phases{list-style:none;padding:0!important;margin:0 0 20px}
 .lesson-phases li{display:grid;grid-template-columns:65px 1fr;gap:15px;padding:14px 0;border-top:1px solid var(--line)}
 .phase-time{font-size:12px;font-weight:700;color:var(--accent);padding-top:3px}

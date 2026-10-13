@@ -11,6 +11,7 @@ lang: de-CH
 ## 1 · Eine Entscheidung rechnen
 Summe = Eingang 1 × Gewicht 1 + Eingang 2 × Gewicht 2 + Bias.
 Ausgabe 1 bei Summe ≥ 0, sonst 0.
+Der Bias ist die negative Schwelle: Schwelle s = −Bias. Das Neuron «feuert», wenn die gewichtete Summe die Schwelle erreicht.
 Gewichte: 1 und 1, Bias: −1.5.
 
 | Eingabe | Summe | Ausgabe |

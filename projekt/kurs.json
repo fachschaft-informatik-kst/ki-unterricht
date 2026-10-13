@@ -35,7 +35,8 @@
           "task": "Ein Beispiel erklären und eine noch offene Frage im Antwortfeld festhalten."
         }
       ],
-      "product": "Begründete Einordnung von drei Alltagsbeispielen anhand der KI-Landkarte."
+      "product": "Begründete Einordnung von drei Alltagsbeispielen anhand der KI-Landkarte.",
+      "motivation": "Empfehlungen im Streamingdienst, Navigation, Fotofilter, Chatbots: Fast alles wird heute «KI» genannt. Aber was davon ist wirklich KI und was nur ein Programm mit festen Regeln? Wer das unterscheiden kann, durchschaut Werbeversprechen und Schlagzeilen."
     },
     {
       "id": "02",
@@ -70,13 +71,14 @@
           "task": "Für jede Lernart eine Beobachtung im Journal festhalten. Vergleichen: Was lernen die Systeme aus Labels, Ähnlichkeit oder Rückmeldung? NIM begründet zuordnen und die Lernart des Bildprojekts benennen."
         }
       ],
-      "product": "Ein Vergleich wissensbasierter und lernender Systeme sowie drei Beobachtungen zu Lernarten."
+      "product": "Ein Vergleich wissensbasierter und lernender Systeme sowie drei Beobachtungen zu Lernarten.",
+      "motivation": "Ein Kind lernt Hund und Katze nicht aus einer Regel, sondern aus vielen Beispielen. Auch KI-Systeme lernen, aber auf drei ganz verschiedene Arten. Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann."
     },
     {
       "id": "03",
       "view": "perzeptron",
       "title": "Wie entscheidet ein Neuron?",
-      "goal": "Eine Ausgabe berechnen, Gewicht und Bias erklären und die XOR-Grenze erkennen.",
+      "goal": "Eine Ausgabe berechnen, Gewicht und Bias erklären, die Lernregel beschreiben und die XOR-Grenze erkennen.",
       "question": "Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
       "phases": [
         {
@@ -97,7 +99,7 @@
         {
           "phase": "Verarbeiten",
           "minutes": 50,
-          "task": "Arbeitsblatt: Ausgaben und einen Lernschritt berechnen (15 Min.). Notebook: Bias und Gewichte verändern, XOR untersuchen (30 Min.). Eine Erklärung mit dem Tandem prüfen (5 Min.)."
+          "task": "Arbeitsblatt: Ausgaben und einen Lernschritt berechnen (15 Min.). Notebook: Neuron mit Zahlen sehen, von Hand einstellen, selbst lernen lassen, an echten Pflanzendaten erproben und XOR untersuchen (30 Min.). Eine Erklärung mit dem Tandem prüfen (5 Min.)."
         },
         {
           "phase": "Auswerten",
@@ -105,7 +107,9 @@
           "task": "Ohne Computer einen neuen Wert bestimmen. In zwei Sätzen erklären, warum eine Gerade bei XOR scheitert."
         }
       ],
-      "product": "Eine nachvollziehbare Rechnung + Erklärung zu Bias und XOR."
+      "product": "Eine nachvollziehbare Rechnung + Erklärung zu Bias, Lernregel und XOR.",
+      "zeit": "Das Notebook hat einen Kern von ca. 30 Minuten (Zeitmarken ⏱: Einstieg 2, Neuron 4, Nervenzelle 3, Zahlen sehen 2, von Hand einstellen 6, Lernen 5, Pflanzen 4, XOR 3). Der Abschnitt «Zusatz · Ein Neuron liest echte Ziffern» ist Vertiefung für Schnelle oder zu Hause und zählt nicht zur Planung.",
+      "motivation": "Ihr Handy erkennt Ihr Gesicht, eine App bestimmt Pflanzen aus einem Foto. Dahinter steht ein einfacher Baustein, das künstliche Neuron, dem Vorbild der Nervenzelle nachempfunden. Heute sehen Sie, dass dabei nichts Geheimnisvolles geschieht: Es wird gerechnet, verglichen und korrigiert."
     },
     {
       "id": "04",
@@ -132,7 +136,7 @@
         {
           "phase": "Verarbeiten",
           "minutes": 50,
-          "task": "XOR-Netz nachvollziehen (25 Min.). Datenaufteilung und Datenleck untersuchen (15 Min.). Projektvorschau: Tandem, zwei Klassen und fünf Gruppen planen (10 Min.)."
+          "task": "XOR-Netz nachvollziehen und selbst lernen lassen (25 Min.). Datenaufteilung und Datenleck untersuchen (15 Min.). Projektvorschau: Tandem, zwei Klassen und fünf Gruppen planen (10 Min.)."
         },
         {
           "phase": "Auswerten",
@@ -140,7 +144,9 @@
           "task": "Den Weg durch das Netz erklären. Datenplan kurz freigeben lassen; 80 Fotos bis zur nächsten Projekt-Doppellektion sammeln."
         }
       ],
-      "product": "XOR-Erklärung + vorläufiger Datenplan für fünf unabhängige Gruppen."
+      "product": "XOR-Erklärung + vorläufiger Datenplan für fünf unabhängige Gruppen.",
+      "zeit": "Beide Notebooks haben einen Kern (XOR-Netz 25 Minuten, Datenaufteilung 15 Minuten, Zeitmarken ⏱). Der Zusatz «Ein trainiertes Netz erkennt Ziffern» ist Vertiefung. Bei Zeitnot im Notebook «Daten fair aufteilen» zuerst das Rechenbeispiel am Ende von «Üben» streichen, danach die Zuordnungsübung kürzen; Rollen-Tabelle, Datenleck und die Drei-Werte-Grafik bleiben. Der Datenplan wird von den Tandems mit der Checkliste am Notebook-Ende selbst geprüft; die Lehrperson sieht stichprobenartig nach.",
+      "motivation": "Ein Neuron zieht nur eine gerade Linie. Gesichter, Sprache oder Verkehrsschilder erkennen Systeme mit vielen Neuronen in Schichten. Dazu kommt die Frage, die jedes KI-Projekt betrifft: Funktioniert das Netz auch bei Fällen, die es nie gesehen hat? Beides brauchen Sie für Ihr Projekt."
     },
     {
       "id": "05",
@@ -175,7 +181,9 @@
           "task": "Reflexion 1–2 sichern. Ein Datenproblem oder eine offene Frage festhalten und ZIP herunterladen."
         }
       ],
-      "product": "Geprüfte Daten + Reflexion 1–2 + erste ZIP-Sicherung."
+      "product": "Geprüfte Daten + Reflexion 1–2 + erste ZIP-Sicherung.",
+      "zeit": "Das Lernlabor besteht aus fünf Abschnitten à 3 Minuten (Zeitmarken ⏱); der Zusatz zum Abschlusstest ist freiwillig. Im Lernlabor ist bei den einfachen Übungsformen Gleichstand von A und B zu erwarten; das ist ein gültiges Ergebnis, kein Fehler.",
+      "motivation": "Ab heute bauen Sie selbst ein Bildmodell zu einem Thema, das Sie interessiert. Ob es später funktioniert, entscheidet sich schon jetzt bei den Daten: Schlechte Daten ergeben ein schlechtes Modell, auch mit dem besten Netz."
     },
     {
       "id": "06",
@@ -210,7 +218,8 @@
           "task": "Reflexion 3 gegenseitig prüfen: Passen Zahlen, Belege und Begründung zusammen? ZIP sichern."
         }
       ],
-      "product": "A/B-Ergebnisse + begründete Auswahl in Reflexion 3; noch kein Abschlusstest."
+      "product": "A/B-Ergebnisse + begründete Auswahl in Reflexion 3; noch kein Abschlusstest.",
+      "motivation": "Firmen werben mit «Unsere KI erkennt 98 % richtig». Heute lernen Sie, solche Zahlen kritisch zu lesen: Wurde fair verglichen? Was wurde verändert, was blieb gleich? Mit derselben Methode beantworten Sie Ihre eigene Forschungsfrage."
     },
     {
       "id": "07",
@@ -245,7 +254,8 @@
           "task": "Mit dem Kompetenzraster einschätzen, fehlende Belege markieren und vollständige ZIP-Sicherung herunterladen."
         }
       ],
-      "product": "Abschlusstest + vollständiges Journal + geprüftes Abgabepaket."
+      "product": "Abschlusstest + vollständiges Journal + geprüftes Abgabepaket.",
+      "motivation": "Ein KI-System sollte erst eingesetzt werden, wenn es an neuen Fällen geprüft wurde, etwa ein Modell, das auf Röntgenbildern Auffälligkeiten sucht. Heute machen Sie diesen Test ehrlich: einmal, ohne Nachbessern, mit allen Fehlern. Das ist mehr wert als eine schöne Zahl."
     },
     {
       "id": "08",
@@ -280,7 +290,8 @@
           "task": "Unbenoteten Fallcheck sichern und eine Frage für «KI & Gesellschaft» festhalten."
         }
       ],
-      "product": "Bewertetes Tandemgespräch + unbenoteter Fallcheck; keine nachträgliche Projektänderung."
+      "product": "Bewertetes Tandemgespräch + unbenoteter Fallcheck; keine nachträgliche Projektänderung.",
+      "motivation": "In Studium und Beruf zählt nicht nur, dass etwas funktioniert, sondern dass Sie es erklären und begründen können. Heute zeigen Sie im Gespräch, dass Sie Ihr Projekt verstanden haben, und übertragen es auf einen neuen Fall."
     },
     {
       "id": "09",
@@ -315,7 +326,8 @@
           "task": "Einen gelungenen und einen problematischen Text belegen. Erklären, warum Plausibilität keine Richtigkeit garantiert."
         }
       ],
-      "product": "Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells."
+      "product": "Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells.",
+      "motivation": "Chatbots schreiben Texte, die überzeugend klingen, und erfinden manchmal trotzdem Dinge. Wie kann das sein? Mit einem kleinen Modell sehen Sie selbst, wie aus Wahrscheinlichkeiten Sätze entstehen und warum plausibel nicht dasselbe ist wie wahr."
     },
     {
       "id": "10",
@@ -350,7 +362,8 @@
           "task": "Eine konkrete Massnahme, ein Erfolgskriterium und einen verbleibenden Zielkonflikt festhalten. Die Anfangsthese erneut beurteilen."
         }
       ],
-      "product": "Begründetes Urteil mit Massnahme, Prüfkriterium und verbleibender Grenze."
+      "product": "Begründetes Urteil mit Massnahme, Prüfkriterium und verbleibender Grenze.",
+      "motivation": "Programme entscheiden mit, etwa bei Empfehlungen, Bewerbungen oder Kreditprüfungen. Behandelt ein Modell bestimmte Gruppen schlechter, trägt jemand die Folgen. Heute prüfen Sie, wann aus einer Vorhersage ein gesellschaftliches Problem wird und was man dagegen tun kann."
     }
   ]
 }

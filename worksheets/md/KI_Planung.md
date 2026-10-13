@@ -19,6 +19,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Leitfrage:** Ist jedes automatisch arbeitende Programm eine KI?
 
+**Motivation:** Empfehlungen im Streamingdienst, Navigation, Fotofilter, Chatbots: Fast alles wird heute «KI» genannt. Aber was davon ist wirklich KI und was nur ein Programm mit festen Regeln? Wer das unterscheiden kann, durchschaut Werbeversprechen und Schlagzeilen.
+
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
 | Ankommen | 5 | Drei Alltagsbeispiele ansehen und spontan einordnen: KI oder keine KI? |
@@ -35,6 +37,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Leitfrage:** Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?
 
+**Motivation:** Ein Kind lernt Hund und Katze nicht aus einer Regel, sondern aus vielen Beispielen. Auch KI-Systeme lernen, aber auf drei ganz verschiedene Arten. Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.
+
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
 | Ankommen | 5 | Ein Bild ohne und mit Klassenname vergleichen: Welche zusätzliche Information hilft? |
@@ -47,21 +51,23 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 ### Doppellektion 3 · Wie entscheidet ein Neuron?
 
-**Lernziel:** Eine Ausgabe berechnen, Gewicht und Bias erklären und die XOR-Grenze erkennen.
+**Lernziel:** Eine Ausgabe berechnen, Gewicht und Bias erklären, die Lernregel beschreiben und die XOR-Grenze erkennen.
 
 **Leitfrage:** Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?
+
+**Motivation:** Ihr Handy erkennt Ihr Gesicht, eine App bestimmt Pflanzen aus einem Foto. Dahinter steht ein einfacher Baustein, das künstliche Neuron, dem Vorbild der Nervenzelle nachempfunden. Heute sehen Sie, dass dabei nichts Geheimnisvolles geschieht: Es wird gerechnet, verglichen und korrigiert.
 
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
 | Ankommen | 5 | Warnsignal: Es soll nur bei zwei aktiven Sensoren angehen. Eine Regel vermuten. |
 | Vorwissen aktivieren | 10 | Eingabe und Label am AND-Beispiel benennen; die vier möglichen Eingaben sammeln. |
 | Informieren | 15 | Die Perzeptron-Grafik lesen. Eine gewichtete Summe und die Step-Ausgabe gemeinsam berechnen. |
-| Verarbeiten | 50 | Arbeitsblatt: Ausgaben und einen Lernschritt berechnen (15 Min.). Notebook: Bias und Gewichte verändern, XOR untersuchen (30 Min.). Eine Erklärung mit dem Tandem prüfen (5 Min.). |
+| Verarbeiten | 50 | Arbeitsblatt: Ausgaben und einen Lernschritt berechnen (15 Min.). Notebook: Neuron mit Zahlen sehen, von Hand einstellen, selbst lernen lassen, an echten Pflanzendaten erproben und XOR untersuchen (30 Min.). Eine Erklärung mit dem Tandem prüfen (5 Min.). |
 | Auswerten | 10 | Ohne Computer einen neuen Wert bestimmen. In zwei Sätzen erklären, warum eine Gerade bei XOR scheitert. |
 
-**Lernprodukt:** Eine nachvollziehbare Rechnung + Erklärung zu Bias und XOR.
+**Lernprodukt:** Eine nachvollziehbare Rechnung + Erklärung zu Bias, Lernregel und XOR.
 
-**Zeit:** Das Notebook hat einen Kern von ca. 30 Minuten (Zeitmarken ⏱). Der Abschnitt «Zusatz · Ein Neuron liest echte Ziffern» ist Vertiefung für Schnelle oder zu Hause und zählt nicht zur Planung.
+**Zeit:** Das Notebook hat einen Kern von ca. 30 Minuten (Zeitmarken ⏱: Einstieg 2, Neuron 4, Nervenzelle 3, Zahlen sehen 2, von Hand einstellen 6, Lernen 5, Pflanzen 4, XOR 3). Der Abschnitt «Zusatz · Ein Neuron liest echte Ziffern» ist Vertiefung für Schnelle oder zu Hause und zählt nicht zur Planung.
 
 ### Doppellektion 4 · Warum mehrere Neuronen?
 
@@ -69,23 +75,27 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Leitfrage:** Wie lösen mehrere einfache Entscheidungen das XOR-Problem?
 
+**Motivation:** Ein Neuron zieht nur eine gerade Linie. Gesichter, Sprache oder Verkehrsschilder erkennen Systeme mit vielen Neuronen in Schichten. Dazu kommt die Frage, die jedes KI-Projekt betrifft: Funktioniert das Netz auch bei Fällen, die es nie gesehen hat? Beides brauchen Sie für Ihr Projekt.
+
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
 | Ankommen | 5 | Die nicht trennbaren XOR-Punkte erneut betrachten: Was müsste sich ändern? |
 | Vorwissen aktivieren | 10 | Die AND-Regel erklären und die vier XOR-Zielwerte rekonstruieren. |
 | Informieren | 15 | OR und NAND als Zwischenfragen mit der Netzgrafik aufbauen. Festgelegte Gewichte von Training unterscheiden. |
-| Verarbeiten | 50 | XOR-Netz nachvollziehen (25 Min.). Datenaufteilung und Datenleck untersuchen (15 Min.). Projektvorschau: Tandem, zwei Klassen und fünf Gruppen planen (10 Min.). |
+| Verarbeiten | 50 | XOR-Netz nachvollziehen und selbst lernen lassen (25 Min.). Datenaufteilung und Datenleck untersuchen (15 Min.). Projektvorschau: Tandem, zwei Klassen und fünf Gruppen planen (10 Min.). |
 | Auswerten | 10 | Den Weg durch das Netz erklären. Datenplan kurz freigeben lassen; 80 Fotos bis zur nächsten Projekt-Doppellektion sammeln. |
 
 **Lernprodukt:** XOR-Erklärung + vorläufiger Datenplan für fünf unabhängige Gruppen.
 
-**Zeit:** Beide Notebooks haben einen Kern (XOR-Netz 23 Minuten, Datenaufteilung 15 Minuten, Zeitmarken ⏱). Der Zusatz «Ein trainiertes Netz erkennt Ziffern» ist Vertiefung. Bei Zeitnot im Notebook «Daten fair aufteilen» zuerst das Rechenbeispiel am Ende von «Üben» streichen, danach die Zuordnungsübung kürzen; Rollen-Tabelle, Datenleck und die Drei-Werte-Grafik bleiben. Der Datenplan wird von den Tandems mit der Checkliste am Notebook-Ende selbst geprüft; die Lehrperson stichprobenartig nachsehen.
+**Zeit:** Beide Notebooks haben einen Kern (XOR-Netz 25 Minuten, Datenaufteilung 15 Minuten, Zeitmarken ⏱). Der Zusatz «Ein trainiertes Netz erkennt Ziffern» ist Vertiefung. Bei Zeitnot im Notebook «Daten fair aufteilen» zuerst das Rechenbeispiel am Ende von «Üben» streichen, danach die Zuordnungsübung kürzen; Rollen-Tabelle, Datenleck und die Drei-Werte-Grafik bleiben. Der Datenplan wird von den Tandems mit der Checkliste am Notebook-Ende selbst geprüft; die Lehrperson sieht stichprobenartig nach.
 
 ### Doppellektion 5 · Projektstart: Daten vorbereiten
 
 **Lernziel:** Eine prüfbare Frage formulieren und die eigenen Daten kontrollieren.
 
 **Leitfrage:** Helfen vielfältigere Trainingsbilder bei neuen Exemplaren?
+
+**Motivation:** Ab heute bauen Sie selbst ein Bildmodell zu einem Thema, das Sie interessiert. Ob es später funktioniert, entscheidet sich schon jetzt bei den Daten: Schlechte Daten ergeben ein schlechtes Modell, auch mit dem besten Netz.
 
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
@@ -105,6 +115,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Leitfrage:** Welche Beobachtung würde unsere Vermutung stützen – und welche nicht?
 
+**Motivation:** Firmen werben mit «Unsere KI erkennt 98 % richtig». Heute lernen Sie, solche Zahlen kritisch zu lesen: Wurde fair verglichen? Was wurde verändert, was blieb gleich? Mit derselben Methode beantworten Sie Ihre eigene Forschungsfrage.
+
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
 | Ankommen | 5 | Den gesicherten Stand öffnen und ein gemeinsames Tagesziel festlegen. |
@@ -120,6 +132,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 **Lernziel:** Die gewählte Variante abschliessend prüfen und Grenzen mit Belegen beschreiben.
 
 **Leitfrage:** Was bleibt von unserer Vermutung auf neuen Testgruppen übrig?
+
+**Motivation:** Ein KI-System sollte erst eingesetzt werden, wenn es an neuen Fällen geprüft wurde, etwa ein Modell, das auf Röntgenbildern Auffälligkeiten sucht. Heute machen Sie diesen Test ehrlich: einmal, ohne Nachbessern, mit allen Fehlern. Das ist mehr wert als eine schöne Zahl.
 
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
@@ -137,6 +151,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Leitfrage:** Welche Entscheidungen würden wir bei einem anderen KI-Einsatz treffen?
 
+**Motivation:** In Studium und Beruf zählt nicht nur, dass etwas funktioniert, sondern dass Sie es erklären und begründen können. Heute zeigen Sie im Gespräch, dass Sie Ihr Projekt verstanden haben, und übertragen es auf einen neuen Fall.
+
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
 | Ankommen | 5 | Abgabe ist vor Unterrichtsbeginn erfolgt. Zeitplan und Fallcheck klären: Alle Tandems kommen heute dran; Gespräche beginnen nach diesen fünf Minuten. |
@@ -153,6 +169,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Leitfrage:** Bedeutet eine plausible Fortsetzung auch eine richtige Aussage?
 
+**Motivation:** Chatbots schreiben Texte, die überzeugend klingen, und erfinden manchmal trotzdem Dinge. Wie kann das sein? Mit einem kleinen Modell sehen Sie selbst, wie aus Wahrscheinlichkeiten Sätze entstehen und warum plausibel nicht dasselbe ist wie wahr.
+
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|
 | Ankommen | 5 | «Heute gehen wir …» unterschiedlich fortsetzen und die Unterschiede sammeln. |
@@ -168,6 +186,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 **Lernziel:** Eine Benachteiligung erklären und eine überprüfbare Gegenmassnahme abwägen.
 
 **Leitfrage:** Wann wird aus einer Modellvorhersage ein gesellschaftliches Problem?
+
+**Motivation:** Programme entscheiden mit, etwa bei Empfehlungen, Bewerbungen oder Kreditprüfungen. Behandelt ein Modell bestimmte Gruppen schlechter, trägt jemand die Folgen. Heute prüfen Sie, wann aus einer Vorhersage ein gesellschaftliches Problem wird und was man dagegen tun kann.
 
 | AVIVA-Phase | Min. | Tätigkeit / Auftrag |
 |---|---:|---|

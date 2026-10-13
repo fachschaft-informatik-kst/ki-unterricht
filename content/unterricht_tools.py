@@ -16,21 +16,104 @@ def _punkte(ax, X, y):
     ax.legend(loc='upper left'); ax.grid(alpha=.15)
 
 
+_EINGABEN = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+_ZIELE = {'AND': [0, 0, 0, 1], 'OR': [0, 1, 1, 1], 'NAND': [1, 1, 1, 0], 'NOR': [1, 0, 0, 0], 'XOR': [0, 1, 1, 0]}
+
+
+def _t(x):
+    return tuple(int(v) for v in x)
+
+
+def _grenze(ax, w1, w2, bias, **stil):
+    if abs(w2) > 1e-10:
+        x = np.array([-.4, 1.4]); ax.plot(x, -(w1 * x + bias) / w2, **stil)
+    elif abs(w1) > 1e-10:
+        ax.axvline(-bias / w1, **stil)
+
+
+def neuron_zeigen(x1=1, x2=1, w1=1., w2=1., bias=-1.5):
+    """Ein künstliches Neuron mit konkreten Zahlen: Eingaben, Gewichte, Summe, Bias, Ausgabe."""
+    summe = x1 * w1 + x2 * w2; gesamt = summe + bias; feuert = gesamt >= 0
+    fig, ax = plt.subplots(figsize=(9, 3.8)); ax.axis('off'); ax.set(xlim=(0, 10), ylim=(0, 5))
+    for y, name, x, w in [(3.7, 'x₁', x1, w1), (1.3, 'x₂', x2, w2)]:
+        ax.add_patch(plt.Circle((.9, y), .6, fc='#eaf1f8', ec='#30628c'))
+        ax.text(.9, y, f'{name}\n{x:g}', ha='center', va='center', fontsize=10)
+        ende = 2.5 + (y - 2.5) * .3
+        ax.annotate('', xy=(5.3, ende), xytext=(1.5, y), arrowprops=dict(arrowstyle='->', lw=1 + abs(w), color='#be572b' if w < 0 else '#176c63'))
+        ax.text(3.4, (y + ende) / 2 + (.3 if y > 2.5 else -.3), f'Gewicht {w:g}', ha='center', fontsize=9)
+    ax.add_patch(plt.Circle((6.2, 2.5), .9, fc='#cfe8dc' if feuert else '#e3e6e8', ec='#263b43', lw=2))
+    ax.text(6.2, 2.5, f'Σ + b\n{gesamt:g}', ha='center', va='center', fontsize=11, weight='bold')
+    ax.text(6.2, 4.0, f'Bias b = {bias:g}', ha='center', fontsize=10, color='#52656a')
+    ax.annotate('', xy=(9.0, 2.5), xytext=(7.1, 2.5), arrowprops=dict(arrowstyle='->', lw=2))
+    ax.text(9.5, 2.5, f'y = {int(feuert)}', ha='center', va='center', fontsize=13, weight='bold', color='#176c63' if feuert else '#52656a')
+    ax.text(5, .35, f'Σ = {x1:g}·{w1:g} + {x2:g}·{w2:g} = {summe:g}   ·   {summe:g} + ({bias:g}) = {gesamt:g}   ·   '
+            + (f'{gesamt:g} ≥ 0: das Neuron «feuert»' if feuert else f'{gesamt:g} < 0: das Neuron feuert nicht'), ha='center', fontsize=9.5)
+    plt.tight_layout(); plt.show()
+    print(f'Schwelle s = −Bias = {-bias:g}: Das Neuron feuert, wenn die gewichtete Summe Σ = {summe:g} mindestens {-bias:g} erreicht.')
+    return int(feuert)
+
+
+def neuron_vergleich():
+    """Nervenzelle und künstliches Neuron nebeneinander; gleiche Nummern bezeichnen gleiche Aufgaben."""
+    farben = ['#526fa0', '#be572b', '#176c63', '#8a6bb0', '#52656a']
+    def marke(ax, x, y, n):
+        ax.text(x, y, str(n), ha='center', va='center', fontsize=10, color='white', weight='bold',
+                bbox=dict(boxstyle='circle,pad=.25', fc=farben[n - 1], ec='none'))
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4.4))
+    for ax in axes:
+        ax.axis('off'); ax.set(xlim=(0, 10), ylim=(0, 6.4))
+    ys = (5, 3, 1)
+    ax = axes[0]; ax.set_title('Nervenzelle (stark vereinfacht)')
+    for y, groesse in zip(ys, (9, 17, 5)):
+        ende = 3 + (y - 3) * .2
+        ax.plot([.3, 3.7], [y, ende], color='#8d9aa0', lw=1.5)
+        ax.plot([.3 + .25 * 3.4], [y + .25 * (ende - y)], 'o', color='#be572b', ms=groesse)
+    ax.add_patch(plt.Circle((4.5, 3), .85, fc='#e3e6e8', ec='#263b43', lw=2))
+    ax.plot([5.35, 8.6], [3, 3], color='#263b43', lw=3)
+    for dy in (-.9, 0, .9):
+        ax.plot([8.6, 9.5], [3, 3 + dy], color='#263b43', lw=1.5); ax.plot([9.5], [3 + dy], 'o', color='#263b43', ms=5)
+    ax.text(4.5, 3, 'Zellkörper', ha='center', va='center', fontsize=8)
+    ax.text(5.0, 6.0, 'Impuls ganz oder gar nicht', ha='center', fontsize=8, color='#52656a')
+    ax.text(1.2, 6.0, 'Reize anderer Zellen', ha='center', fontsize=8, color='#52656a')
+    for n, (x, y) in {1: (.3, 5.7), 2: (1.15, 4.5), 3: (4.5, 4.2), 4: (4.5, 1.7), 5: (7, 3.6)}.items(): marke(ax, x, y, n)
+    ax = axes[1]; ax.set_title('Künstliches Neuron')
+    for y, nr, lw in zip(ys, ('x₁', 'x₂', 'x₃'), (1.5, 4, .8)):
+        ende = 3 + (y - 3) * .2
+        ax.add_patch(plt.Circle((.5, y), .4, fc='#eaf1f8', ec='#30628c')); ax.text(.5, y, nr, ha='center', va='center', fontsize=9)
+        ax.annotate('', xy=(3.7, ende), xytext=(.9, y), arrowprops=dict(arrowstyle='->', lw=lw, color='#be572b'))
+    ax.text(1.9, 3.95, 'w₁', fontsize=9, color='#be572b'); ax.text(1.9, 3.2, 'w₂', fontsize=9, color='#be572b'); ax.text(1.9, 1.95, 'w₃', fontsize=9, color='#be572b')
+    ax.add_patch(plt.Circle((4.5, 3), .85, fc='#cfe8dc', ec='#263b43', lw=2))
+    ax.text(4.5, 3, 'Σ', ha='center', va='center', fontsize=14, weight='bold')
+    ax.annotate('', xy=(8.6, 3), xytext=(5.4, 3), arrowprops=dict(arrowstyle='->', lw=2))
+    ax.text(9.2, 3, 'y', fontsize=13, ha='center', va='center')
+    ax.text(5.0, 6.0, 'Ausgabe 1 oder 0', ha='center', fontsize=8, color='#52656a')
+    ax.text(4.5, 1.0, 'Schwelle s\n(Bias b = −s)', ha='center', fontsize=8, color='#52656a')
+    ax.text(1.2, 6.0, 'Eingaben (Zahlen)', ha='center', fontsize=8, color='#52656a')
+    for n, (x, y) in {1: (.5, 5.7), 2: (2.4, 4.5), 3: (4.5, 4.2), 4: (4.5, 1.7), 5: (7, 3.6)}.items(): marke(ax, x, y, n)
+    fig.text(.5, .02, '1 Reize aufnehmen · 2 Verbindungsstärke · 3 Summieren · 4 Schwelle · 5 Weiterleiten (ganz oder gar nicht)', ha='center', fontsize=9)
+    plt.tight_layout(rect=(0, .05, 1, 1)); plt.show()
+    print('Gleiche Nummer = gleiche Aufgabe. Die Dicke der Verbindung in beiden Bildern steht für ihre Stärke (Gewicht).')
+
+
 def perzeptron(w1=1., w2=1., bias=-1.5, aufgabe='AND'):
-    X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-    y = np.array([0, 0, 0, 1]) if aufgabe == 'AND' else np.array([0, 1, 1, 0])
+    if aufgabe not in _ZIELE: raise ValueError(f'Aufgabe: {", ".join(_ZIELE)}.')
+    X = _EINGABEN; y = np.array(_ZIELE[aufgabe])
     z = X @ [w1, w2] + bias
     fig, ax = plt.subplots(figsize=(6, 4)); _punkte(ax, X, y)
-    if abs(w2) > 1e-10:
-        x = np.array([-.4, 1.4]); ax.plot(x, -(w1*x+bias)/w2, color='#263b43')
-    elif abs(w1) > 1e-10:
-        ax.axvline(-bias/w1, color='#263b43')
+    _grenze(ax, w1, w2, bias, color='#263b43')
     pred = (z >= 0).astype(int)
     ax.set_title(f'{aufgabe}: {np.sum(pred == y)} von 4 richtig · Ausgabe 1 bei Summe ≥ 0')
     plt.tight_layout(); plt.show()
-    print('Eingaben → gewichtete Summe → Ausgabe (Ziel)')
+    print('Eingaben → Summe (mit Bias) → Ausgabe (Ziel)')
     for x, s, p, target in zip(X, z, pred, y):
-        print(f'{tuple(x)} → {s:.1f} → {p} ({target})')
+        print(f'{_t(x)} → {s:.1f} → {p} ({target}) ' + ('✓' if p == target else '✗'))
+    for x, p, target in zip(X, pred, y):
+        if p == target: continue
+        if x.sum() == 0: hinweis = 'Hier ist kein Eingang aktiv: Nur der Bias kann die Summe ändern.'
+        elif target == 1: hinweis = 'Neuron soll feuern, tut es aber nicht: Gewichte der aktiven Eingänge erhöhen oder Bias erhöhen.'
+        else: hinweis = 'Neuron feuert, soll aber nicht: Gewichte der aktiven Eingänge verringern oder Bias verringern.'
+        print(f'{_t(x)}: {hinweis}')
+    if np.all(pred == y): print('Alle vier Zeilen stimmen. Dieses Neuron löst die Aufgabe.')
     return pred
 
 
@@ -39,7 +122,112 @@ def regler_perzeptron():
         w1=widgets.FloatSlider(value=1, min=-2, max=2, step=.5, description='Gewicht 1'),
         w2=widgets.FloatSlider(value=1, min=-2, max=2, step=.5, description='Gewicht 2'),
         bias=widgets.FloatSlider(value=-1.5, min=-3, max=2, step=.5, description='Bias'),
-        aufgabe=widgets.Dropdown(options=['AND', 'XOR'], description='Aufgabe'))
+        aufgabe=widgets.Dropdown(options=list(_ZIELE), description='Aufgabe'))
+
+
+def perzeptron_lernen(aufgabe='AND', lernrate=.2, runden=10, start=(.2, .2, -.5)):
+    """Das Neuron korrigiert sich Zeile für Zeile selbst; gezeigt werden Runden, Fehler und Grenzgeraden."""
+    if aufgabe not in _ZIELE: raise ValueError(f'Aufgabe: {", ".join(_ZIELE)}.')
+    if not 0 < lernrate <= 2 or not 1 <= runden <= 30: raise ValueError('lernrate: 0 bis 2, runden: 1 bis 30.')
+    X = _EINGABEN; y = np.array(_ZIELE[aufgabe])
+    w = np.array(start[:2], float); b = float(start[2]); staende = [(w.copy(), b)]; fehler = []
+    print(f'{aufgabe} · Start: Gewichte {w[0]:g} / {w[1]:g}, Bias {b:g} · Lernrate {lernrate:g}')
+    print('Runde 1, Korrekturen: neues Gewicht = altes + Lernrate × (Ziel − Ausgabe) × Eingang; Bias: Eingang 1')
+    for runde in range(1, runden + 1):
+        n = 0
+        for x, t in zip(X, y):
+            f = t - int(x @ w + b >= 0)
+            if not f: continue
+            n += 1; alt = (w.copy(), b)
+            w = w + lernrate * f * x; b = b + lernrate * f
+            if runde == 1:
+                print(f'  {_t(x)} Ziel {t}, Ausgabe {t - f}: w₁ {alt[0][0]:g}→{w[0]:g}, w₂ {alt[0][1]:g}→{w[1]:g}, b {alt[1]:g}→{b:g}')
+        fehler.append(n); staende.append((w.copy(), b))
+        if n == 0: break
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+    _punkte(axes[0], X, y)
+    farben = plt.cm.Blues(np.linspace(.3, 1, len(staende)))
+    for k, ((wk, bk), farbe) in enumerate(zip(staende, farben)):
+        _grenze(axes[0], wk[0], wk[1], bk, color=farbe, lw=3 if k == len(staende) - 1 else 1.2)
+    axes[0].set_title('Grenzgerade: heller = früher, dunkel = zuletzt')
+    axes[1].bar(range(1, len(fehler) + 1), fehler, color=['#be572b' if f else '#176c63' for f in fehler])
+    for k, f in enumerate(fehler, 1): axes[1].text(k, f + .08, str(f) if f else '0 ✓', ha='center')
+    axes[1].set(xlabel='Runde', ylabel='Korrekturen in dieser Runde', title='Wie viele Zeilen mussten korrigiert werden?',
+                xticks=range(1, len(fehler) + 1), ylim=(0, 4.5))
+    plt.tight_layout(); plt.show()
+    if fehler[-1] == 0:
+        print(f'Nach {len(fehler) - 1} Korrekturrunde(n) stimmen alle vier Zeilen. Endwerte: Gewichte {w[0]:g} / {w[1]:g}, Bias {b:g}.')
+    else:
+        print(f'Auch nach {runden} Runden sind noch Zeilen falsch. Das Neuron korrigiert immer weiter, ohne anzukommen:')
+        print('Für diese Aufgabe gibt es keine Gerade, die die Klassen trennt.' if aufgabe == 'XOR' else 'Mehr Runden oder eine andere Lernrate probieren.')
+    return w, b
+
+
+def iris_neuron(lernrate=.1, runden=15):
+    """Ein Neuron lernt, zwei Pflanzenarten an Länge und Breite des Kronblatts zu unterscheiden (echte Messdaten)."""
+    from sklearn.datasets import load_iris
+    d = load_iris(); m = d.target < 2
+    X = d.data[m][:, [2, 3]]; y = d.target[m]; namen = ['Iris setosa', 'Iris versicolor']
+    rng = np.random.default_rng(3); p = rng.permutation(len(y)); train, neu = p[:70], p[70:]
+    w = rng.uniform(-1, 1, 2); b = 0.; staende = [(w.copy(), b)]; fehler = []
+    for _ in range(runden):
+        n = 0
+        for i in rng.permutation(train):
+            f = y[i] - int(X[i] @ w + b >= 0)
+            if f: w = w + lernrate * f * X[i]; b += lernrate * f; n += 1
+        fehler.append(n); staende.append((w.copy(), b))
+        if n == 0: break
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+    for c, (farbe, marker) in enumerate(zip(FARBEN, ['o', '^'])):
+        axes[0].scatter(X[train][y[train] == c, 0], X[train][y[train] == c, 1], c=farbe, marker=marker, s=40, label=f'{namen[c]} (Training)')
+        axes[0].scatter(X[neu][y[neu] == c, 0], X[neu][y[neu] == c, 1], facecolors='none', edgecolors=farbe, marker=marker, s=60, label=f'{namen[c]} (neu)')
+    xs = np.array([0.5, 5.5])
+    for k, (wk, bk) in enumerate(staende):
+        if abs(wk[1]) > 1e-10: axes[0].plot(xs, -(wk[0] * xs + bk) / wk[1], color=plt.cm.Blues(.3 + .7 * k / max(1, len(staende) - 1)), lw=3 if k == len(staende) - 1 else 1)
+    axes[0].set(xlim=(0.5, 5.5), ylim=(0, 2.2), xlabel='Länge des Kronblatts (cm)', ylabel='Breite des Kronblatts (cm)', title='Messdaten und gelernte Grenze')
+    axes[0].legend(fontsize=8, loc='upper left')
+    axes[1].bar(range(1, len(fehler) + 1), fehler, color=['#be572b' if f else '#176c63' for f in fehler])
+    for k, f in enumerate(fehler, 1): axes[1].text(k, f + .08, str(f) if f else '0 ✓', ha='center')
+    axes[1].set(xlabel='Runde', ylabel='Korrekturen in dieser Runde', title='Das Neuron lernt von Runde zu Runde', xticks=range(1, len(fehler) + 1))
+    plt.tight_layout(); plt.show()
+    pred = (X[neu] @ w + b >= 0).astype(int)
+    print(f'Training: 70 von 100 Pflanzen, {len(fehler)} Runde(n). Gelernt: Gewichte {w[0]:.2f} / {w[1]:.2f}, Bias {b:.2f}.')
+    print(f'Neue, nie gesehene Pflanzen: {int(np.sum(pred == y[neu]))} von {len(neu)} richtig.')
+    print('Drei neue Messungen (Länge cm, Breite cm) → Summe → Antwort:')
+    for laenge, breite in [(1.4, .2), (4.5, 1.4), (2.9, .9)]:
+        s = laenge * w[0] + breite * w[1] + b
+        print(f'  ({laenge}, {breite}) → {s:+.2f} → {namen[int(s >= 0)]}')
+    print('Das Neuron kennt nur eine Gerade. Die dritte Messung liegt zwischen den Gruppen: Hier ist die Antwort unsicher.')
+    return w, b
+
+
+def xor_lernen(neuronen=2, startwert=1):
+    """Ein Netz mit versteckter Schicht lernt XOR aus den vier Beispielen selbst."""
+    import warnings
+    from sklearn.neural_network import MLPClassifier
+    if not 1 <= neuronen <= 8: raise ValueError('neuronen: 1 bis 8.')
+    y = np.array(_ZIELE['XOR'])
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+        netz = MLPClassifier(hidden_layer_sizes=(neuronen,), activation='tanh', solver='lbfgs', max_iter=3000, random_state=startwert).fit(_EINGABEN, y)
+    gx, gy = np.meshgrid(np.linspace(-.4, 1.4, 120), np.linspace(-.4, 1.4, 120))
+    z = netz.predict_proba(np.c_[gx.ravel(), gy.ravel()])[:, 1].reshape(gx.shape)
+    fig, ax = plt.subplots(figsize=(6, 4.5))
+    ax.contourf(gx, gy, z, levels=[0, .5, 1], colors=['#d7ebe3', '#f3dfd3'], alpha=.9)
+    xs = np.array([-.4, 1.4])
+    for j in range(neuronen):
+        wj = netz.coefs_[0][:, j]; bj = netz.intercepts_[0][j]
+        if abs(wj[1]) > 1e-6: ax.plot(xs, -(wj[0] * xs + bj) / wj[1], '--', color='#526fa0', lw=1)
+    _punkte(ax, _EINGABEN, y)
+    ax.set(xlim=(-.4, 1.4), ylim=(-.4, 1.4))
+    richtig = int(np.sum(netz.predict(_EINGABEN) == y))
+    ax.set_title(f'{neuronen} versteckte Neuronen: {richtig} von 4 richtig')
+    plt.tight_layout(); plt.show()
+    print('Grün: Ausgabe 0, Orange: Ausgabe 1. Gestrichelte Linien: Was jedes versteckte Neuron «fragt».')
+    if richtig == 4: print('Das Netz hat XOR aus den vier Beispielen selbst gelernt. Wir haben keine Gewichte vorgegeben.')
+    elif neuronen == 1: print('Ein einziges Neuron ist eine einzige Gerade: Mehr als 3 von 4 sind nicht möglich.')
+    else: print('Das Training ist hängen geblieben. Anderen Startwert oder mehr Neuronen probieren.')
+    return netz
 
 
 def lernschritt():
@@ -70,7 +258,7 @@ def xor_netz():
     axes[1].set_title('Kleines, von uns konstruiertes Netz')
     plt.tight_layout();plt.show()
     print('Eingabe | OR | NAND | Ausgabe XOR')
-    for x,a,b,c in zip(X,h1,h2,y): print(tuple(x),'|',a,'|',b,'|',c)
+    for x,a,b,c in zip(X,h1,h2,y): print(_t(x),'|',a,'|',b,'|',c)
     return y
 
 
