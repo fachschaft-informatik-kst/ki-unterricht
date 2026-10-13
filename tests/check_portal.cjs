@@ -108,6 +108,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
      window.addEventListener('message',receive);f.contentWindow.postMessage({channel:'ki-portal-v1',type:'restore',id,notebook:nb},location.origin);
     }),imported);
     assert.equal(await p.frameLocator('#project-frame').locator('.jp-OutputArea-error').count(),0);
+    await p.locator('.sidebar-bottom a[href="#journal"]').click();
     const last=p.frameLocator('#project-frame').locator('.jp-CodeCell').last();
     assert.equal(await last.locator('.jp-InputPrompt').innerText(),'[ ]:');
     await last.locator('.cm-content').fill("assert 'experiment' not in globals() and 'foto' not in globals()\nprint('Fresh kernel confirmed')");
