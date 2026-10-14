@@ -32,12 +32,24 @@ def tabelle(lesson):
     return f'<div class="phase-table-wrap"><table class="phase-table">{kopf}<tbody>{"".join(zeilen)}</tbody></table></div>'
 
 
+def verlinke(text):
+    """Jede genannte «Doppellektion N» wird zum Link auf den Plan dieser Doppellektion."""
+    return re.sub(r'Doppellektion (\d+)', lambda m: f'<a href="#doppellektion-{int(m.group(1)):02d}">{m.group(0)}</a>', text)
+
+
+def figur(f):
+    return (f'<figure class="concept-figure"><img alt="{html.escape(f["alt"])}" loading="lazy" src="{html.escape(f["src"])}"/>'
+            f'<figcaption>{html.escape(f["caption"])}</figcaption></figure>')
+
+
 def render(lesson, voll=False):
     """Kursseite: nur Ziel, Leitfrage und Motivation. Mit voll=True zusätzlich Ablauftabelle (Lehrperson)."""
-    return (f'<details class="lesson-plan" data-lesson="{lesson["id"]}" open><summary>'
+    return (f'<details class="lesson-plan" id="doppellektion-{lesson["id"]}" data-lesson="{lesson["id"]}" open><summary>'
             f'<span class="phase-num">{lesson["id"]}</span><span>Doppellektion {int(lesson["id"])} · {html.escape(lesson["title"])}</span>'
             '<small>90 Min.</small></summary><div class="detail-body">'
-            f'<p><strong>Heute können Sie:</strong> {html.escape(lesson["goal"])}</p>'
+            + (f'<p class="lesson-recap"><strong>Rückblick:</strong> {verlinke(html.escape(lesson["rueckblick"]))}</p>' if lesson.get('rueckblick') else '')
+            + (figur(lesson['rueckblick_figur']) if lesson.get('rueckblick_figur') else '')
+            + f'<p><strong>Heute können Sie:</strong> {html.escape(lesson["goal"])}</p>'
             f'<p class="lesson-question">{html.escape(lesson["question"])}</p>'
             + (f'<p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> {html.escape(lesson["motivation"])}</p>' if lesson.get('motivation') else '')
             + ((LEGENDE + tabelle(lesson)
@@ -129,7 +141,7 @@ def build():
     (ROOT/'projekt/unterrichtsplan.html').write_text(lehrpersonen_seite(lessons, text))
     rows = []
     for l in lessons:
-        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', '', f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['**Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.', ''])
+        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', ''] + ([f'**Rückblick:** {l["rueckblick"]}', ''] + ([f'*{l["rueckblick_figur"]["caption"]}*', ''] if l.get('rueckblick_figur') else []) if l.get('rueckblick') else []) + [f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['**Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.', ''])
         rows += ['| Phase | Min. | Wer | Was |', '|---|---:|---|---|']
         for p in l['phases']:
             for i, st in enumerate(p['schritte']):

@@ -54,6 +54,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 ### Doppellektion 2 · Wie lernt KI?
 
+**Rückblick:** In Doppellektion 1 haben Sie KI von Programmen mit festen Regeln unterschieden und KI, maschinelles Lernen, Deep Learning und generative KI eingeordnet. Immer wieder ging es darum, ob die Regeln von Menschen stammen oder aus Daten gelernt werden, etwa beim Schachprogramm und beim Spamfilter. Heute fragen wir: Wie lernt ein System überhaupt aus Daten?
+
 **Lernziel:** Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.
 
 **Leitfrage:** Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?
@@ -72,18 +74,18 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 |  |  | Ergebnis | Eine gemeinsame Arbeitsdefinition von «aus Daten lernen». |
 | Informieren – Wissensbasiert oder lernend? Akinator und Filmlandkarte | 20 | Lehrperson | Führt das EVA-Prinzip (Eingabe, Verarbeitung, Ausgabe) neu ein und zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix. |
 |  |  | Tandem | Erklären Sie die EVA-Grafik in einfachen Worten am Beispiel Spamfilter (Eingabe, Erfahrungsschatz, Ausgabe, was eine neue Erfahrung verändert) und halten Sie die Erklärung im Antwortfeld der Kursseite fest. Vergleichen Sie mit dem Schachprogramm aus Doppellektion 1. |
-|  |  | Tandem | Wissensbasiert: Spielen Sie zwei Runden Akinator (en.akinator.com) mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld. Notieren Sie, welche Fragen gestellt werden, wie Ihre Antworten zum Ergebnis führen und was bei einer seltenen oder erfundenen Figur geschieht. |
-|  |  | Tandem | Lernend: Erkunden Sie in der Filmlandkarte (Link auf der Kursseite) einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte. |
+|  |  | Tandem | Wissensbasiert: Spielen Sie zwei Runden Akinator (en.akinator.com) mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld. Halten Sie in den Antwortfeldern der Kursseite fest, welche Fragen gestellt werden, wie Ihre Antworten zum Ergebnis führen und was bei einer seltenen oder erfundenen Figur geschieht. |
+|  |  | Tandem | Lernend: Erkunden Sie in der Filmlandkarte (Link auf der Kursseite) einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Halten Sie in den Antwortfeldern der Kursseite fest, welche Muster das System in welchen Daten gefunden haben könnte. |
 |  |  | Lehrperson | Stellt drei Lernsignale kurz an je einem Beispiel vor: Labels (Smiley-Spiel), Ähnlichkeit (K-Means), Rückmeldung (NIM). |
 |  |  | Tandem | Ordnen Sie jedem Beispiel das Lernsignal zu. |
 |  |  | Ergebnis | Zwei Beobachtungen (Akinator, Filmempfehlung) und eine Zuordnung Beispiel → Lernsignal als Rüstzeug für die Memory-Runden. |
-| Verarbeiten – Memory, Smiley, K-Means und NIM | 50 | Lehrperson | Erklärt die Memory-Regeln und verteilt die Rollen (Agent:in, Kartenleitung, zwei Beobachtende, Zeit und Protokoll). |
-|  |  | Gruppe | Spielen Sie drei Runden mit Rollenwechsel. Runde 1 mit Labels: Die Kartenleitung zeigt beschriftete Karten, der Agent ordnet neue Karten zu. Runde 2 ohne Labels: Sortieren Sie die Karten nach Ähnlichkeit und benennen Sie die Merkmale der Gruppen. Runde 3 mit Rückmeldung: Suchen Sie verdeckte Paare, +1 pro Treffer und 0 pro Fehlversuch, und passen Sie die Strategie nach jeder Rückmeldung an. Pro Runde vier Minuten spielen, eine Minute notieren. |
+| Verarbeiten – Memory, Smiley, K-Means und NIM | 50 | Lehrperson | Erklärt anhand von Kapitel 4 der Kursseite («Gruppen-Memory: Aufgabe und Ablauf») die Memory-Regeln und verteilt die Rollen (Agent:in, Kartenleitung, zwei Beobachtende, Zeit und Protokoll). |
+|  |  | Gruppe | Spielen Sie drei Runden mit Rollenwechsel. Runde 1 mit Labels: Die Kartenleitung zeigt beschriftete Karten, der Agent ordnet neue Karten zu. Runde 2 ohne Labels: Sortieren Sie die Karten nach Ähnlichkeit und benennen Sie die Merkmale der Gruppen. Runde 3 mit Rückmeldung: Suchen Sie verdeckte Paare, +1 pro Treffer und 0 pro Fehlversuch, und passen Sie die Strategie nach jeder Rückmeldung an. Pro Runde vier Minuten spielen, eine Minute notieren: Die Aufgabe jeder Runde steht in Kapitel 5 bis 7, die Beobachtung kommt in das Antwortfeld des Kapitels. |
 |  |  | Einzeln | Testen Sie im Smiley-Spiel und in Quick, Draw! je eine Zeichnung (kein persönliches Motiv; Zeichnungen können in einen öffentlichen Datensatz eingehen) und beschreiben Sie, was das System aus den Labels lernt. |
 |  |  | Tandem | Wählen Sie in K-Means die Verteilung «Gaussian Mixture» und beobachten Sie, wie die Mittelpunkte wandern. |
 |  |  | Tandem | Spielen Sie NIM in der verlinkten Lernstrecke und beobachten Sie, wie das System nach Gewinn oder Verlust seine Züge anpasst. |
 |  |  | Einzeln | Finden Sie im digitalen Begriffscheck Begriff und passende Rückmeldung als Paare. |
-|  |  | Ergebnis | Pro Memory-Runde eine Beobachtung im Journalfeld. |
+|  |  | Ergebnis | Pro Memory-Runde eine Beobachtung im Antwortfeld der Kursseite. |
 | Auswerten – Die drei Lernarten vergleichen | 10 | Einzeln | Beantworten Sie im Antwortfeld «Was fällt auf, wenn Sie die drei Lernarten vergleichen?»: Was lernen die Systeme aus Labels, aus Ähnlichkeit, aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts (überwacht, weil die Trainingsbilder Klassennamen erhalten). |
 |  |  | Lehrperson | Klärt: In Runde 3 lernte der Mensch, nicht die KI; NIM zeigt das KI-Beispiel. |
 |  |  | Ergebnis | Drei Beobachtungen, je eine pro Lernart, und die Zuordnung des Bildprojekts. |
@@ -92,6 +94,10 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 **Lernprodukt:** Ein Vergleich wissensbasierter und lernender Systeme sowie drei Beobachtungen zu Lernarten.
 
 ### Doppellektion 3 · Wie entscheidet ein Neuron?
+
+**Rückblick:** In Doppellektion 2 haben Sie wissensbasierte Systeme (Akinator) mit lernenden Systemen (Filmempfehlungen) verglichen und drei Lernsignale kennengelernt: Labels (Smiley-Spiel), Ähnlichkeit (K-Means) und Rückmeldung (NIM). Die Grafik zeigt noch einmal, wie ein lernendes System aufgebaut ist. Offen blieb, was in der dunklen Box steckt. Heute öffnen Sie diese Box und untersuchen ihren kleinsten Baustein: ein einzelnes künstliches Neuron.
+
+*In der dunklen Box steckt das neuronale Netz: Es verarbeitet die Eingabe, und sein Erfahrungsschatz sind die gelernten Gewichte. Neue Erfahrungen verändern diese Gewichte. Grafik: inf-schule.de (CC BY-SA 4.0).*
 
 **Lernziel:** Eine Ausgabe berechnen, Gewicht und Bias erklären, die Lernregel beschreiben und die XOR-Grenze erkennen.
 
@@ -126,6 +132,10 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 ### Doppellektion 4 · Warum mehrere Neuronen?
 
+**Rückblick:** In Doppellektion 3 haben Sie ein Neuron eingestellt: Es gewichtet seine Eingaben, addiert einen Bias und gibt 1 oder 0 aus. Es kann sich selbst korrigieren, scheitert aber an XOR. Die Grafik wiederholt, warum: XOR gibt 1, wenn die beiden Eingaben verschieden sind. Zeichnet man die vier Fälle als Punkte, liegen die beiden mit Ausgabe 1 diagonal gegenüber. Ein einzelnes Neuron kann nur eine gerade Linie ziehen, und jede solche Linie lässt mindestens auf einer Seite Punkte beider Farben zurück. Heute lösen Sie dieses Problem mit mehreren Neuronen und klären, welche Daten ein Netz beim Lernen sehen darf.
+
+*Egal ob senkrecht, waagrecht oder schräg: Keine gerade Linie trennt die roten von den blauen Punkten. Genau das kann ein einzelnes Neuron nicht, mehrere Neuronen schon.*
+
 **Lernziel:** Eine Zwischenschicht erklären und Training, Validierung und Test trennen.
 
 **Leitfrage:** Wie lösen mehrere einfache Entscheidungen das XOR-Problem?
@@ -159,6 +169,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 ### Doppellektion 5 · Projektstart: Daten vorbereiten
 
+**Rückblick:** In Doppellektion 4 haben Sie erklärt, wie eine Zwischenschicht XOR löst, Training, Validierung und Test getrennt und ein Thema mit vorläufigem Datenplan gewählt. Heute beginnt Ihr eigenes Projekt: Sie formulieren eine prüfbare Frage und bereiten Ihre Fotos als Daten für Ihr Netz vor.
+
 **Lernziel:** Eine prüfbare Frage formulieren und die eigenen Daten kontrollieren.
 
 **Leitfrage:** Helfen vielfältigere Trainingsbilder bei neuen Exemplaren?
@@ -189,6 +201,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 **Zeit:** Das Lernlabor besteht aus fünf Abschnitten à 3 Minuten (Zeitmarken ⏱); der Zusatz zum Abschlusstest ist freiwillig. Im Lernlabor ist bei den einfachen Übungsformen Gleichstand von A und B zu erwarten; das ist ein gültiges Ergebnis, kein Fehler.
 
 ### Doppellektion 6 · Projekt: fair vergleichen
+
+**Rückblick:** In Doppellektion 5 haben Sie Ihre Frage formuliert, eigene Fotos im Fotostudio aufgenommen und kontrolliert und Ihren Stand als ZIP gesichert. Heute vergleichen Sie zwei Varianten (A und B) unter gleichen Bedingungen und wählen eine aus, ohne den Abschlusstest anzusehen.
 
 **Lernziel:** A und B kontrolliert vergleichen und eine Auswahl vor Testeinsicht begründen.
 
@@ -221,6 +235,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 ### Doppellektion 7 · Projekt: prüfen und urteilen
 
+**Rückblick:** In Doppellektion 6 haben Sie A und B fair verglichen, Vorhersagen untersucht und Ihre Auswahl vor der Testeinsicht begründet (Reflexion 3). Heute prüfen Sie die gewählte Variante einmal mit dem Abschlusstest und beschreiben ihre Grenzen mit Belegen.
+
 **Lernziel:** Die gewählte Variante abschliessend prüfen und Grenzen mit Belegen beschreiben.
 
 **Leitfrage:** Was bleibt von unserer Vermutung auf neuen Testgruppen übrig?
@@ -251,6 +267,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 ### Doppellektion 8 · Abgabe und Tandemgespräche
 
+**Rückblick:** In Doppellektion 7 haben Sie die gewählte Variante mit dem Abschlusstest geprüft, Ihr Journal vervollständigt und das Abgabepaket kontrolliert. Heute erklären Sie Ihr Projekt im Tandemgespräch und trainieren das Modell eines anderen Tandems nach.
+
 **Lernziel:** Das ganze Projekt gemeinsam erklären und das Modell eines anderen Tandems nachtrainieren.
 
 **Leitfrage:** Kommen wir mit den Daten und Einstellungen eines anderen Tandems zum gleichen Ergebnis?
@@ -279,6 +297,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 **Lernprodukt:** Bewertetes Tandemgespräch + eingereichter Reproduktionsbericht + unbenoteter Fallcheck; keine nachträgliche Projektänderung.
 
 ### Doppellektion 9 · Wie entstehen Sprachmodelle?
+
+**Rückblick:** In Doppellektion 8 haben Sie Ihr Bildprojekt im Tandemgespräch erklärt und das Modell eines anderen Tandems nachtrainiert. Dabei lernte ein Netz aus Beispielen: Bilder gehen hinein, eine Klasse kommt heraus. Heute geht es um Sprache: Wie kann ein Modell Text erzeugen, und stimmt, was es sagt?
 
 **Lernziel:** Den Einfluss von Kontext und Beispielen untersuchen und Grenzen der Analogie nennen.
 
@@ -312,6 +332,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 **Lernprodukt:** Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells + Begründung, warum neuronale Sprachmodelle mehr sind als Statistik.
 
 ### Doppellektion 10 · Wer trägt die Folgen?
+
+**Rückblick:** In Doppellektion 9 haben Sie gesehen, dass ein Sprachmodell das nächste Wort aus Beispieltexten vorhersagt, zuerst als Papagei-Modell mit Zählen, dann als neuronales Netz. Eine plausible Fortsetzung ist dabei nicht automatisch wahr. Heute fragen Sie, was passiert, wenn die Beispiele selbst einseitig sind: Wer trägt die Folgen?
 
 **Lernziel:** Eine Benachteiligung erklären und eine überprüfbare Gegenmassnahme abwägen.
 
@@ -361,7 +383,7 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 
 **Einführen (5 Min.):** Vor den Lernarten die EVA-Grafik zeigen: Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe. Daneben ein wissensbasiertes Beispiel stellen: Menschen formulieren Fakten und Wenn-dann-Regeln, etwa in einem Entscheidungsbaum; das System wendet sie an. Fragen: «Wer hat die Regel festgelegt? Was passiert mit einem Fall, an den niemand gedacht hat?» Beim lernenden System kommt der Erfahrungsschatz aus Daten und kann sich verändern; Filmempfehlungen sind ein Beispiel.
 
-**Durchführen:** Drei Memory-Runden mit Rollenwechseln spielen: 1. **Supervised:** Kartenleitung zeigt gelabelte Beispiele; Agent ordnet neue Karten zu und vergleicht mit den Labels. 2. **Unsupervised:** Labels abdecken und ohne vorgegebene Zielgruppen nach Ähnlichkeit sortieren. 3. **Verstärkend:** Paare verdeckt auslegen; Treffer geben +1, Fehlversuche 0. Agent passt die Suchstrategie nach jeder Rückmeldung an. Etwa vier Minuten spielen, eine Minute beobachten und notieren. Danach im Smiley-Spiel und in Quick, Draw! je eine Zeichnung testen. Bei Quick, Draw! keine persönlichen Motive zeichnen; Zeichnungen können in einen öffentlichen Datensatz eingehen. In K-Means «Gaussian Mixture» wählen und die Gruppierung nach Mittelpunkten beobachten. NIM anschliessend als Beispiel für einen KI-Agenten mit Rückmeldungen ansehen.
+**Durchführen:** Drei Memory-Runden mit Rollenwechseln spielen: 1. **Überwacht:** Kartenleitung zeigt gelabelte Beispiele; Agent ordnet neue Karten zu und vergleicht mit den Labels. 2. **Unüberwacht:** Labels abdecken und ohne vorgegebene Zielgruppen nach Ähnlichkeit sortieren. 3. **Verstärkend:** Paare verdeckt auslegen; Treffer geben +1, Fehlversuche 0. Agent passt die Suchstrategie nach jeder Rückmeldung an. Etwa vier Minuten spielen, eine Minute beobachten und notieren. Danach im Smiley-Spiel und in Quick, Draw! je eine Zeichnung testen. Bei Quick, Draw! keine persönlichen Motive zeichnen; Zeichnungen können in einen öffentlichen Datensatz eingehen. In K-Means «Gaussian Mixture» wählen und die Gruppierung nach Mittelpunkten beobachten. NIM anschliessend als Beispiel für einen KI-Agenten mit Rückmeldungen ansehen.
 
 **Sichern und prüfen:** Pro Memory-Runde eine Beobachtung im jeweiligen Journalfeld notieren; anschliessend die Vergleichsfrage «Was fällt auf?» beantworten. Der digitale Begriffscheck darunter dient nur der Wissenssicherung und vergibt keine Belohnungspunkte. Erwartete Unterscheidung: Labels beim überwachten Lernen, selbst gewählte Ähnlichkeit beim unüberwachten Lernen und Belohnung als Signal für die nächste Handlung beim verstärkenden Lernen. In Runde 3 lernt der Mensch, nicht die KI; NIM zeigt danach das KI-Beispiel. Im K-Means-Beispiel sind Farben erzeugte Gruppen, keine vorgegebenen Klassen. Das Bildprojekt ist überwacht, weil seine Trainingsbilder Klassennamen erhalten.
 

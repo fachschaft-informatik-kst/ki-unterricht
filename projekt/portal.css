@@ -11,6 +11,7 @@
 .lesson-plan summary::after{margin-left:0}
 .lesson-question{font-size:19px;line-height:1.5;color:var(--accent)}
 .lesson-motivation{font-size:15px;line-height:1.55;margin:.2em 0 1em}
+.lesson-recap{font-size:15px;line-height:1.55;margin:.2em 0 1em;padding:.5em .9em;border-left:3px solid var(--accent);background:rgba(127,127,127,.08)}
 .lesson-phases{list-style:none;padding:0!important;margin:0 0 20px}
 .lesson-phases li{display:grid;grid-template-columns:65px 1fr;gap:15px;padding:14px 0;border-top:1px solid var(--line)}
 .phase-time{font-size:12px;font-weight:700;color:var(--accent);padding-top:3px}
@@ -51,8 +52,8 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 .group-memory-instructions p{margin:0 0 10px;font-size:14px}
 .group-memory-instructions ol{margin:0 0 10px;padding-left:22px}
 .group-memory-instructions li{margin:7px 0;font-size:13px;line-height:1.5}
-.memory-observations{display:grid;gap:12px;margin:20px 0}
-.memory-observations h3{font-size:18px;margin:0}
+.memory-round{margin:20px 0;padding:16px 18px;border:1px solid var(--line);border-radius:12px}
+.memory-round h3{font-size:18px;margin:0 0 8px}
 .learning-example-note{margin:7px 0 0!important;font-size:11px!important;line-height:1.45;color:var(--muted)}
 .learning-path-intro{padding:14px 10px 2px}
 .learning-path-intro h2,.turing-activity h2{font-size:22px;margin-bottom:8px}

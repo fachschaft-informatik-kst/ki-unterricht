@@ -2,48 +2,12 @@ import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
 const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1';
 const setChapterTitle=(detail,text)=>{(detail.querySelector('summary .kapitel-titel')||detail.querySelector('summary')).textContent=text;};
-const memoryComparison=document.querySelector('#lernarten [data-answer="memory"]');
-if(memoryComparison){
- const comparisonField=memoryComparison.closest('label.field');
- comparisonField.querySelector('span').textContent='Was fällt auf, wenn Sie die drei Lernarten vergleichen? Was lernen die Systeme aus Labels, aus Ähnlichkeit und aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts.';
- const observations=document.createElement('div');observations.className='memory-observations';
- const heading=document.createElement('h3');heading.textContent='Meine Beobachtungen';observations.append(heading);
- const prompts=[
-  {key:'memory-supervised',label:'Überwacht: Was zeigen die Labels? Was erkennt das System sicher oder falsch?',placeholder:'Unsere Beobachtung zu Beispielen mit Lösungen …'},
-  {key:'memory-unsupervised',label:'Unüberwacht: Nach welcher Ähnlichkeit haben Sie gruppiert? Gab es mehrere plausible Gruppen?',placeholder:'Unsere Beobachtung zu Gruppen ohne Labels …'},
-  {key:'memory-reinforcement',label:'Verstärkend: Welche Rückmeldung veränderte die Zugwahl? Was wurde belohnt?',placeholder:'Unsere Beobachtung zu Handlung und Rückmeldung …'}
- ];
- for(const prompt of prompts){
-  const field=document.createElement('label');field.className='field answer';
-  const label=document.createElement('span');label.textContent=prompt.label;
-  const textarea=document.createElement('textarea');textarea.dataset.answer=prompt.key;textarea.maxLength=10000;textarea.rows=3;textarea.placeholder=prompt.placeholder;
-  field.append(label,textarea);observations.append(field);
- }
- comparisonField.before(observations);
-}
-const groupMemory=[...document.querySelectorAll('#lernarten details')].find(detail=>detail.querySelector('[data-answer="memory"]'));
-if(groupMemory){
- setChapterTitle(groupMemory,'Gruppen-Memory: drei Lernrunden');
- const instructions=document.createElement('div');instructions.className='group-memory-instructions';
- const roles=document.createElement('p');roles.textContent='In Fünfergruppen: ein Agent, eine Kartenleitung, zwei Beobachtende und eine Person für Zeit/Protokoll. Die Agent-Rolle wechselt nach jeder Runde.';
- const rounds=document.createElement('ol');
- const roundTexts=[
-  'Supervised: Die Kartenleitung zeigt beschriftete Beispiele. Der Agent ordnet neue Karten zu und vergleicht danach mit den Labels.',
-  'Unsupervised: Labels abdecken und ohne Zielgruppen nach Ähnlichkeit sortieren. Mehrere sinnvolle Gruppierungen zulassen.',
-  'Verstärkend: Memory-Paare verdeckt auslegen. Ein Paar gibt +1 Punkt, ein Fehlversuch 0. Nach der Rückmeldung darf der Agent die Suchstrategie ändern.'
- ];
- for(const text of roundTexts){const item=document.createElement('li');item.textContent=text;rounds.append(item);}
- const reminder=document.createElement('p');reminder.className='small';reminder.textContent='Etwa 4 Minuten spielen, dann 1 Minute beobachten und notieren. In Runde 3 lernt der Mensch als Agent, nicht die KI.';
- instructions.append(roles,rounds,reminder);groupMemory.querySelector('.detail-body .grid.two').before(instructions);
- const oldSheetNote=groupMemory.querySelector('.detail-body > p.small');
- if(oldSheetNote)oldSheetNote.textContent='Die drei Memory-Runden und Beobachtungen stehen auf dieser Kursseite. NIM ist das separate Beispiel für einen KI-Agenten mit Rückmeldungen.';
-}
 const knowledgeCheck=[...document.querySelectorAll('#lernarten details')].find(detail=>detail.querySelector('#memory-board'));
 if(knowledgeCheck){
  setChapterTitle(knowledgeCheck,'Wissenssicherung: Lernarten zuordnen');
  knowledgeCheck.querySelector('.detail-body p').textContent='Ordnen Sie die Begriffe den passenden Rückmeldungen zu und begründen Sie jedes Paar. Dieser Check sichert das Gelernte; die Gruppenrunden mit Memory stehen darüber.';
 }
-const journalFields=all('[data-journal]'),answerFields=all('[data-answer]');
+const journalFields=all('[data-journal]');let answerFields=all('[data-answer]');
 let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=null,protocolSignature='',restorePending=false,files=new Map(),db=null;
 let others={},otherReady=false,otherRestoring=false;
 let filesStored=true,artifactStored=true;
@@ -90,14 +54,17 @@ const ruleText=document.createElement('p');ruleText.textContent='Menschen legen 
 const taskList=items=>{const box=document.createElement('div'),label=document.createElement('p'),strong=document.createElement('strong'),list=document.createElement('ol');strong.textContent='Aufgabe · Tandem · 5 Min.';label.append(strong);for(const text of items){const item=document.createElement('li');item.textContent=text;list.append(item);}box.append(label,list);return box;};
 const ruleLink=document.createElement('a');ruleLink.href='https://en.akinator.com/';ruleLink.target='_blank';ruleLink.rel='noopener noreferrer';ruleLink.textContent='Akinator spielen ↗';
 const ruleTask=taskList(['Spielen Sie zwei Runden mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld.','Notieren Sie drei Fragen des Systems und wie Ihre Antwort jeweils die nächste Frage bestimmt.','Wählen Sie nun eine erfundene oder sehr unbekannte Figur: Was geschieht?','Wer hat festgelegt, welche Fragen überhaupt möglich sind?']);
+const answerField=(key,text,placeholder)=>{const field=document.createElement('label'),label=document.createElement('span'),area=document.createElement('textarea');field.className='field answer';label.textContent=text;area.dataset.answer=key;area.maxLength=10000;area.rows=3;area.placeholder=placeholder;field.append(label,area);return field;};
+const ruleAnswers=[answerField('wissen_fragen','Drei Fragen des Systems und wie Ihre Antwort jeweils die nächste Frage bestimmt:','Frage 1 → meine Antwort → nächste Frage …'),answerField('wissen_unbekannt','Was geschieht bei einer erfundenen oder sehr unbekannten Figur?','Das System …'),answerField('wissen_regeln','Wer hat festgelegt, welche Fragen überhaupt möglich sind? Warum lernt das System hier nicht selbst?','Die Fragen …')];
 const ruleNote=document.createElement('p');ruleNote.className='small muted';ruleNote.textContent='Akinator nutzt im Hintergrund auch frühere Antworten. Betrachten Sie hier nur den Ablauf Frage, Antwort, nächste Frage.';
-ruleCard.append(ruleHeading,ruleText,ruleLink,ruleTask,ruleNote);
+ruleCard.append(ruleHeading,ruleText,ruleLink,ruleTask,...ruleAnswers,ruleNote);
 const learningCard=document.createElement('article');learningCard.className='card';
 const learningHeading=document.createElement('h3');learningHeading.textContent='Lernend · Muster aus Daten';
 const learningText=document.createElement('p');learningText.textContent='Das System baut aus Beispielen einen Erfahrungsschatz auf. Neue Daten können ihn verändern und dadurch auch seine Entscheidungen. Beispiel: Filmempfehlungen eines Streamingdienstes (z. B. Netflix).';
 const learningLink=document.createElement('a');learningLink.href='https://pair-code.github.io/tsne-visual-recommender/';learningLink.target='_blank';learningLink.rel='noopener noreferrer';learningLink.textContent='Filmempfehlungen in neuem Tab öffnen ↗';
 const learningTask=taskList(['Öffnen Sie die Filmlandkarte, suchen Sie einen Film, den Sie kennen, und klicken Sie ihn an.','Vergleichen Sie die «Nearest Neighbors»: Was haben sie gemeinsam?','Färben Sie die Punkte nach «Genre», dann nach «Predicted User Rating (SVD)» und wechseln Sie den «User Index»: Was verändert sich?','Aus welchen Daten könnte das System diese Muster gelernt haben?']);
-learningCard.append(learningHeading,learningText,learningLink,learningTask);systemsGrid.append(ruleCard,learningCard);
+const learningAnswers=[answerField('lernend_nachbarn','Was haben die «Nearest Neighbors» Ihres Films gemeinsam?','Die Nachbarn …'),answerField('lernend_aendert','Was verändert sich beim Färben nach «Genre» und «Predicted User Rating» und beim Wechsel des «User Index»?','Es verändert sich …'),answerField('lernend_daten','Aus welchen Daten könnte das System diese Muster gelernt haben?','Vermutlich aus …')];
+learningCard.append(learningHeading,learningText,learningLink,learningTask,...learningAnswers);systemsGrid.append(ruleCard,learningCard);
 const evaFigure=document.createElement('figure');evaFigure.className='concept-figure learning-system-figure';
 const evaImage=document.createElement('img');evaImage.src='https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png';evaImage.alt='EVA-Prinzip eines lernenden Systems: Eine Eingabe wird mit dem Erfahrungsschatz verarbeitet; die Ausgabe kann den Erfahrungsschatz erweitern.';evaImage.loading='lazy';
 const evaCaption=document.createElement('figcaption');evaCaption.textContent='Ein lernendes System verarbeitet Eingaben mit seinem Erfahrungsschatz. Neue Erfahrungen können ihn verändern.';evaFigure.append(evaImage,evaCaption);
@@ -106,6 +73,7 @@ systemsOverview.append(systemsHeading,systemsLead,systemsGrid,evaFigure,hybridNo
 // Jede Karte kommt in ihr eigenes Kapitel, damit alle Teile in der Navigation stehen.
 const introMount=$('lernarten-intro'),ruleMount=$('lernarten-wissen'),learnMount=$('lernarten-lernend');
 if(introMount&&ruleMount&&learnMount){introMount.append(evaFigure,hybridNote);ruleMount.append(ruleCard);learnMount.append(learningCard);}else learningTypes.querySelector('.lesson-steps').before(systemsOverview);
+answerFields=all('[data-answer]');
 const learningExamples=[
  {title:'Überwacht · mit Labels',description:'Das System lernt mit Beispielen und den richtigen Kategorien. Danach ordnet es neue Beispiele zu.',links:[
   {href:'https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2',text:'Smiley-Spiel: fröhlich oder traurig? · inf-schule'},

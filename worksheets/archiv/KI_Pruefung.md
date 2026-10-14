@@ -165,8 +165,8 @@ Der Turing-Test kann auch als reiner Text-Chat durchgeführt werden. & $\square$
 \hline
 Aussage & richtig & falsch \\
 \hline
-Beim Reinforcement Learning lernt man über Belohnung. & $\square$ & $\square$ \\
-Beim Unsupervised Learning sind die Labels („richtige Antworten“) von Anfang an vorgegeben. & $\square$ & $\square$ \\
+Beim verstärkenden Lernen lernt man über Belohnung. & $\square$ & $\square$ \\
+Beim unüberwachten Lernen sind die Labels („richtige Antworten“) von Anfang an vorgegeben. & $\square$ & $\square$ \\
 \hline
 \end{tabular}
 

@@ -185,6 +185,7 @@
       "id": "02",
       "view": "lernarten",
       "title": "Wie lernt KI?",
+      "rueckblick": "In Doppellektion 1 haben Sie KI von Programmen mit festen Regeln unterschieden und KI, maschinelles Lernen, Deep Learning und generative KI eingeordnet. Immer wieder ging es darum, ob die Regeln von Menschen stammen oder aus Daten gelernt werden, etwa beim Schachprogramm und beim Spamfilter. Heute fragen wir: Wie lernt ein System überhaupt aus Daten?",
       "goal": "Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.",
       "question": "Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
       "phases": [
@@ -256,13 +257,13 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Wissensbasiert: Spielen Sie zwei Runden Akinator (en.akinator.com) mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld. Notieren Sie, welche Fragen gestellt werden, wie Ihre Antworten zum Ergebnis führen und was bei einer seltenen oder erfundenen Figur geschieht."
+              "text": "Wissensbasiert: Spielen Sie zwei Runden Akinator (en.akinator.com) mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld. Halten Sie in den Antwortfeldern der Kursseite fest, welche Fragen gestellt werden, wie Ihre Antworten zum Ergebnis führen und was bei einer seltenen oder erfundenen Figur geschieht."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Lernend: Erkunden Sie in der Filmlandkarte (Link auf der Kursseite) einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte."
+              "text": "Lernend: Erkunden Sie in der Filmlandkarte (Link auf der Kursseite) einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Halten Sie in den Antwortfeldern der Kursseite fest, welche Muster das System in welchen Daten gefunden haben könnte."
             },
             {
               "art": "Input",
@@ -291,13 +292,13 @@
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "text": "Erklärt die Memory-Regeln und verteilt die Rollen (Agent:in, Kartenleitung, zwei Beobachtende, Zeit und Protokoll)."
+              "text": "Erklärt anhand von Kapitel 4 der Kursseite («Gruppen-Memory: Aufgabe und Ablauf») die Memory-Regeln und verteilt die Rollen (Agent:in, Kartenleitung, zwei Beobachtende, Zeit und Protokoll)."
             },
             {
               "art": "Auftrag",
               "wer": "Gruppe",
               "min": 15,
-              "text": "Spielen Sie drei Runden mit Rollenwechsel. Runde 1 mit Labels: Die Kartenleitung zeigt beschriftete Karten, der Agent ordnet neue Karten zu. Runde 2 ohne Labels: Sortieren Sie die Karten nach Ähnlichkeit und benennen Sie die Merkmale der Gruppen. Runde 3 mit Rückmeldung: Suchen Sie verdeckte Paare, +1 pro Treffer und 0 pro Fehlversuch, und passen Sie die Strategie nach jeder Rückmeldung an. Pro Runde vier Minuten spielen, eine Minute notieren."
+              "text": "Spielen Sie drei Runden mit Rollenwechsel. Runde 1 mit Labels: Die Kartenleitung zeigt beschriftete Karten, der Agent ordnet neue Karten zu. Runde 2 ohne Labels: Sortieren Sie die Karten nach Ähnlichkeit und benennen Sie die Merkmale der Gruppen. Runde 3 mit Rückmeldung: Suchen Sie verdeckte Paare, +1 pro Treffer und 0 pro Fehlversuch, und passen Sie die Strategie nach jeder Rückmeldung an. Pro Runde vier Minuten spielen, eine Minute notieren: Die Aufgabe jeder Runde steht in Kapitel 5 bis 7, die Beobachtung kommt in das Antwortfeld des Kapitels."
             },
             {
               "art": "Auftrag",
@@ -326,7 +327,7 @@
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Pro Memory-Runde eine Beobachtung im Journalfeld."
+              "text": "Pro Memory-Runde eine Beobachtung im Antwortfeld der Kursseite."
             }
           ]
         },
@@ -361,6 +362,12 @@
       "id": "03",
       "view": "perzeptron",
       "title": "Wie entscheidet ein Neuron?",
+      "rueckblick": "In Doppellektion 2 haben Sie wissensbasierte Systeme (Akinator) mit lernenden Systemen (Filmempfehlungen) verglichen und drei Lernsignale kennengelernt: Labels (Smiley-Spiel), Ähnlichkeit (K-Means) und Rückmeldung (NIM). Die Grafik zeigt noch einmal, wie ein lernendes System aufgebaut ist. Offen blieb, was in der dunklen Box steckt. Heute öffnen Sie diese Box und untersuchen ihren kleinsten Baustein: ein einzelnes künstliches Neuron.",
+      "rueckblick_figur": {
+        "src": "grafiken/eva_erfahrungsschatz.png",
+        "alt": "EVA-Prinzip eines lernenden Systems: Die Eingabe geht in eine dunkle Box mit Verarbeitung und Erfahrungsschatz, daraus entsteht die Ausgabe.",
+        "caption": "In der dunklen Box steckt das neuronale Netz: Es verarbeitet die Eingabe, und sein Erfahrungsschatz sind die gelernten Gewichte. Neue Erfahrungen verändern diese Gewichte. Grafik: inf-schule.de (CC BY-SA 4.0)."
+      },
       "goal": "Eine Ausgabe berechnen, Gewicht und Bias erklären, die Lernregel beschreiben und die XOR-Grenze erkennen.",
       "question": "Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
       "phases": [
@@ -490,6 +497,12 @@
       "id": "04",
       "view": "netze",
       "title": "Warum mehrere Neuronen?",
+      "rueckblick": "In Doppellektion 3 haben Sie ein Neuron eingestellt: Es gewichtet seine Eingaben, addiert einen Bias und gibt 1 oder 0 aus. Es kann sich selbst korrigieren, scheitert aber an XOR. Die Grafik wiederholt, warum: XOR gibt 1, wenn die beiden Eingaben verschieden sind. Zeichnet man die vier Fälle als Punkte, liegen die beiden mit Ausgabe 1 diagonal gegenüber. Ein einzelnes Neuron kann nur eine gerade Linie ziehen, und jede solche Linie lässt mindestens auf einer Seite Punkte beider Farben zurück. Heute lösen Sie dieses Problem mit mehreren Neuronen und klären, welche Daten ein Netz beim Lernen sehen darf.",
+      "rueckblick_figur": {
+        "src": "grafiken/xor_gerade.svg",
+        "alt": "Links die Wahrheitstabelle von XOR: 0 und 0 ergibt 0, 0 und 1 ergibt 1, 1 und 0 ergibt 1, 1 und 1 ergibt 0. Rechts die vier Fälle als Punkte in einem Quadrat: Die beiden Punkte mit Ausgabe 1 liegen diagonal gegenüber, die beiden mit Ausgabe 0 auf der anderen Diagonale. Senkrechte, waagrechte und schräge gestrichelte Linien trennen die Farben nicht.",
+        "caption": "Egal ob senkrecht, waagrecht oder schräg: Keine gerade Linie trennt die roten von den blauen Punkten. Genau das kann ein einzelnes Neuron nicht, mehrere Neuronen schon."
+      },
       "goal": "Eine Zwischenschicht erklären und Training, Validierung und Test trennen.",
       "question": "Wie lösen mehrere einfache Entscheidungen das XOR-Problem?",
       "phases": [
@@ -619,6 +632,7 @@
       "id": "05",
       "view": "projekt",
       "title": "Projektstart: Daten vorbereiten",
+      "rueckblick": "In Doppellektion 4 haben Sie erklärt, wie eine Zwischenschicht XOR löst, Training, Validierung und Test getrennt und ein Thema mit vorläufigem Datenplan gewählt. Heute beginnt Ihr eigenes Projekt: Sie formulieren eine prüfbare Frage und bereiten Ihre Fotos als Daten für Ihr Netz vor.",
       "goal": "Eine prüfbare Frage formulieren und die eigenen Daten kontrollieren.",
       "question": "Helfen vielfältigere Trainingsbilder bei neuen Exemplaren?",
       "phases": [
@@ -736,6 +750,7 @@
       "id": "06",
       "view": "projekt",
       "title": "Projekt: fair vergleichen",
+      "rueckblick": "In Doppellektion 5 haben Sie Ihre Frage formuliert, eigene Fotos im Fotostudio aufgenommen und kontrolliert und Ihren Stand als ZIP gesichert. Heute vergleichen Sie zwei Varianten (A und B) unter gleichen Bedingungen und wählen eine aus, ohne den Abschlusstest anzusehen.",
       "goal": "A und B kontrolliert vergleichen und eine Auswahl vor Testeinsicht begründen.",
       "question": "Welche Beobachtung würde unsere Vermutung stützen – und welche nicht?",
       "phases": [
@@ -864,6 +879,7 @@
       "id": "07",
       "view": "projekt",
       "title": "Projekt: prüfen und urteilen",
+      "rueckblick": "In Doppellektion 6 haben Sie A und B fair verglichen, Vorhersagen untersucht und Ihre Auswahl vor der Testeinsicht begründet (Reflexion 3). Heute prüfen Sie die gewählte Variante einmal mit dem Abschlusstest und beschreiben ihre Grenzen mit Belegen.",
       "goal": "Die gewählte Variante abschliessend prüfen und Grenzen mit Belegen beschreiben.",
       "question": "Was bleibt von unserer Vermutung auf neuen Testgruppen übrig?",
       "phases": [
@@ -986,6 +1002,7 @@
       "id": "08",
       "view": "projekt",
       "title": "Abgabe und Tandemgespräche",
+      "rueckblick": "In Doppellektion 7 haben Sie die gewählte Variante mit dem Abschlusstest geprüft, Ihr Journal vervollständigt und das Abgabepaket kontrolliert. Heute erklären Sie Ihr Projekt im Tandemgespräch und trainieren das Modell eines anderen Tandems nach.",
       "goal": "Das ganze Projekt gemeinsam erklären und das Modell eines anderen Tandems nachtrainieren.",
       "question": "Kommen wir mit den Daten und Einstellungen eines anderen Tandems zum gleichen Ergebnis?",
       "phases": [
@@ -1101,6 +1118,7 @@
       "id": "09",
       "view": "sprache",
       "title": "Wie entstehen Sprachmodelle?",
+      "rueckblick": "In Doppellektion 8 haben Sie Ihr Bildprojekt im Tandemgespräch erklärt und das Modell eines anderen Tandems nachtrainiert. Dabei lernte ein Netz aus Beispielen: Bilder gehen hinein, eine Klasse kommt heraus. Heute geht es um Sprache: Wie kann ein Modell Text erzeugen, und stimmt, was es sagt?",
       "goal": "Den Einfluss von Kontext und Beispielen untersuchen und Grenzen der Analogie nennen.",
       "question": "Bedeutet eine plausible Fortsetzung auch eine richtige Aussage?",
       "phases": [
@@ -1242,6 +1260,7 @@
       "id": "10",
       "view": "gesellschaft",
       "title": "Wer trägt die Folgen?",
+      "rueckblick": "In Doppellektion 9 haben Sie gesehen, dass ein Sprachmodell das nächste Wort aus Beispieltexten vorhersagt, zuerst als Papagei-Modell mit Zählen, dann als neuronales Netz. Eine plausible Fortsetzung ist dabei nicht automatisch wahr. Heute fragen Sie, was passiert, wenn die Beispiele selbst einseitig sind: Wer trägt die Folgen?",
       "goal": "Eine Benachteiligung erklären und eine überprüfbare Gegenmassnahme abwägen.",
       "question": "Wann wird aus einer Modellvorhersage ein gesellschaftliches Problem?",
       "phases": [

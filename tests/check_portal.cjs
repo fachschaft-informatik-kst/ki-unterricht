@@ -31,7 +31,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_programmierung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_einteilung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg .timeline li').count(),9);
-    for(const [id,n] of Object.entries({einstieg:5,lernarten:8,perzeptron:4,netze:4,sprache:7,gesellschaft:3,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
+    for(const [id,n] of Object.entries({einstieg:5,lernarten:9,perzeptron:4,netze:4,sprache:7,gesellschaft:3,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
     assert.equal(await p.locator('.nav-sub a').count(),5);
     assert.equal(await p.locator('#einstieg .kapitel-karte').count(),5);
     await p.locator('#einstieg-3 > summary').click();await p.locator('#einstieg .kapitel-karte').nth(2).click();await p.waitForFunction(()=>document.getElementById('einstieg-3').open);
@@ -68,8 +68,10 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('#nim-example').count(),0);assert.equal(await p.locator('#lernarten h2').filter({hasText:'Verstärkendes Lernen erkunden'}).count(),0);
   assert.equal(await p.locator('#lernarten [data-answer="nim"]').count(),0);
   const groupMemory=p.locator('#lernarten details').filter({has:p.locator('[data-answer="memory"]')});
-  assert((await groupMemory.locator('.group-memory-instructions').innerText()).includes('In Fünfergruppen'));
-  assert((await groupMemory.locator('.group-memory-instructions').innerText()).includes('+1 Punkt'));
+  const memoryIntro=p.locator('#lernarten-4 .group-memory-instructions');
+  assert((await memoryIntro.innerText()).includes('In Fünfergruppen'));
+  assert((await p.locator('#lernarten-7 .memory-round').innerText()).includes('+1 Punkt'));
+  for(const [n,key] of [[5,'memory-supervised'],[6,'memory-unsupervised'],[7,'memory-reinforcement']])assert.equal(await p.locator('#lernarten-'+n+' [data-answer="'+key+'"]').count(),1);
   const groupMemoryNote=await groupMemory.locator('.detail-body > p.small').innerText();
   assert(!groupMemoryNote.includes('Arbeitsblatt'));assert(groupMemoryNote.includes('NIM ist das separate Beispiel'));
   const knowledgeCheck=p.locator('#lernarten details').filter({has:p.locator('#memory-board')});
