@@ -584,10 +584,21 @@ def _ziffer_titel(ax, X, y, i, guess, sicherheit):
     ax.set_title(f"{'✓' if ok else '✗'} Bild: {y[i]}\nNetz: {guess} ({sicherheit:.0%})", fontsize=9, color='#176c63' if ok else '#b84d27')
 
 
+_ZIFFERNNETZE = {}
+
+
+def _netz_fuer(neuronen):
+    """Pro Neuronenzahl wird nur einmal trainiert; Regler wechseln dann ohne Wartezeit."""
+    if neuronen not in _ZIFFERNNETZE:
+        X, y, train, val = _ziffern_daten()
+        _ZIFFERNNETZE[neuronen] = _ziffern_netz(X, y, train, neuronen)
+    return _ZIFFERNNETZE[neuronen]
+
+
 def ziffern(neuronen=16):
     """Netz mit einer versteckten Schicht erkennt handgeschriebene Ziffern (8 × 8 Pixel)."""
     X, y, train, val = _ziffern_daten()
-    netz = _ziffern_netz(X, y, train, neuronen)
+    netz = _netz_fuer(neuronen)
     probs = netz.predict_proba(X[val]); pred = netz.classes_[probs.argmax(axis=1)]; sicher = probs.max(axis=1)
     fig, axes = plt.subplots(2, 10, figsize=(14, 4.4), squeeze=False)
     for ax in axes.ravel(): ax.axis('off')
@@ -602,6 +613,8 @@ def ziffern(neuronen=16):
     fig.text(.005, .27, 'Fehler' if len(wrong) else 'keine Fehler', rotation=90, va='center', fontsize=9)
     plt.tight_layout(rect=(.02, 0, 1, .93)); plt.show()
     print(f'Oben je Ziffer ein richtig erkanntes Bild (Zahl in Klammern: Modellwert). Unten die ersten Fehler von {len(wrong)}.')
+    anzahl = sum(c.size for c in netz.coefs_) + sum(i.size for i in netz.intercepts_)
+    print(f'Dieses Netz hat {anzahl} Gewichte und Bias-Werte (64 Eingaben → {neuronen} → 10 Ausgaben), alle vom Training gefunden.')
     print('Die Validierungsbilder dienen zum Vergleichen; sie sind kein unabhängiger Abschlusstest.')
     return netz
 
@@ -623,6 +636,36 @@ def ziffer_durchs_netz(netz, nr=0):
     plt.tight_layout(); plt.show()
     print(f'Bild {nr}: tatsächlich {y[i]} · Netz: {guess} ({probs.max():.0%}) · ' + ('richtig' if guess == y[i] else 'Fehler'))
     print('Neuronen mit Wert 0 sind für dieses Bild «still». Jedes Neuron reagiert auf ein anderes Muster.')
+
+
+_ZIFFERN_NEURONEN = [2, 4, 8, 16, 32]
+
+
+def ziffern_regler():
+    def lauf(neuronen):
+        ziffern(neuronen)
+    return widgets.interact(lauf, neuronen=widgets.Dropdown(options=_ZIFFERN_NEURONEN, value=16, description='Neuronen'))
+
+
+def ziffer_regler():
+    n = len(_ziffern_daten()[3])
+    def lauf(nr, neuronen):
+        ziffer_durchs_netz(_netz_fuer(neuronen), nr=nr)
+    return widgets.interact(lauf, nr=widgets.IntSlider(value=3, min=0, max=n - 1, description='Bild Nr.'),
+                            neuronen=widgets.Dropdown(options=_ZIFFERN_NEURONEN, value=16, description='Neuronen'))
+
+
+def ziffern_vorschau():
+    """Statisches Beispielbild für die Kursseite: ein Ziffernbild durch das Netz (16 Neuronen)."""
+    ziffer_durchs_netz(_netz_fuer(16), nr=3)
+
+
+def xor_lernen_regler():
+    def lauf(neuronen, startwert):
+        xor_lernen(neuronen=neuronen, startwert=startwert)
+    return widgets.interact(lauf,
+        neuronen=widgets.IntSlider(value=2, min=1, max=4, description='Neuronen'),
+        startwert=widgets.IntSlider(value=1, min=0, max=5, description='Startwert'))
 
 
 def neuron_ziffern(ziffer_a=0, ziffer_b=1):

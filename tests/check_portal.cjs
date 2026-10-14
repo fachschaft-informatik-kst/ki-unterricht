@@ -87,6 +87,10 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert((await p.locator('#lernarten label.field.answer').filter({has:p.locator('[data-answer="memory"]')}).locator('span').textContent()).includes('Was fällt auf'));
   for(let i=0;i<3;i++)await memoryObservations.nth(i).fill('Beobachtung '+(i+1));
   await p.locator('#lernarten [data-answer="memory"]').fill('Labels, Ähnlichkeit und Rückmeldungen sind unterschiedliche Lernsignale.');
+  await p.locator('.nav a[href="#perzeptron"]').click();
+  await p.locator('#perzeptron [data-answer="hand_and_w1"]').fill('0.5');await p.locator('#perzeptron [data-answer="hand_xor_max"]').selectOption('3');
+  await p.locator('.nav a[href="#netze"]').click();
+  await p.locator('#netze [data-answer="zif_16"]').fill('95');await p.locator('#netze [data-answer="zif_brauchbar"]').selectOption('8');
   await p.locator('.sidebar-bottom a[href="#journal"]').click();
   await p.locator('[data-journal="names"]').fill('Ada & Alan <script>alert(1)</script>');
   await p.locator('[data-journal="class"]').fill('4f · Obst');
@@ -107,6 +111,10 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('[data-journal="names"]').fill('Changed');await p.locator('a[href="#sicherung"]').first().click();
   await p.locator('#restore-package').setInputFiles('/tmp/ki-portal-backup.zip');await p.waitForFunction(()=>document.querySelector('#download-status').textContent.includes('Projektstand wiederhergestellt'));
   await p.locator('.sidebar-bottom a[href="#journal"]').click();assert((await p.locator('[data-journal="names"]').inputValue()).includes('Ada'));
+  await p.locator('.nav a[href="#perzeptron"]').click();
+  assert.equal(await p.locator('#perzeptron [data-answer="hand_and_w1"]').inputValue(),'0.5');assert.equal(await p.locator('#perzeptron [data-answer="hand_xor_max"]').inputValue(),'3');
+  await p.locator('.nav a[href="#netze"]').click();
+  assert.equal(await p.locator('#netze [data-answer="zif_16"]').inputValue(),'95');assert.equal(await p.locator('#netze [data-answer="zif_brauchbar"]').inputValue(),'8');
   await p.locator('.nav a[href="#lernarten"]').click();
   assert.equal(await p.locator('#lernarten [data-answer="memory-supervised"]').inputValue(),'Beobachtung 1');
   assert.equal(await p.locator('#lernarten [data-answer="memory-unsupervised"]').inputValue(),'Beobachtung 2');

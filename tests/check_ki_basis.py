@@ -63,6 +63,8 @@ def main():
     u.ziffer_durchs_netz(netz,0);rejects(lambda:u.ziffer_durchs_netz(netz,10**6))
     u.neuron_ziffern(0,1);rejects(lambda:u.neuron_ziffern(3,3))
     u.drei_rollen(100);rejects(lambda:u.drei_rollen(5))
+    for regler in (u.ziffern_regler,u.ziffer_regler,u.xor_lernen_regler):regler()
+    u.ziffern_vorschau()
     # Lernweg Neuron: Gatter konvergieren, XOR nie; ein Neuron löst XOR höchstens 3 von 4, vier versteckte Neuronen vollständig.
     for aufgabe in ('AND','OR','NAND','NOR'):
         w,b=u.perzeptron_lernen(aufgabe);assert np.all((u._EINGABEN@w+b>=0)==np.array(u._ZIELE[aufgabe]))
