@@ -1,15 +1,16 @@
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
 const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1';
+const setChapterTitle=(detail,text)=>{(detail.querySelector('summary .kapitel-titel')||detail.querySelector('summary')).textContent=text;};
 const memoryComparison=document.querySelector('#lernarten [data-answer="memory"]');
 if(memoryComparison){
  const comparisonField=memoryComparison.closest('label.field');
- comparisonField.querySelector('span').textContent='Was fällt auf, wenn du die drei Lernarten vergleichst?';
+ comparisonField.querySelector('span').textContent='Was fällt auf, wenn Sie die drei Lernarten vergleichen? Was lernen die Systeme aus Labels, aus Ähnlichkeit und aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts.';
  const observations=document.createElement('div');observations.className='memory-observations';
  const heading=document.createElement('h3');heading.textContent='Meine Beobachtungen';observations.append(heading);
  const prompts=[
   {key:'memory-supervised',label:'Überwacht: Was zeigen die Labels? Was erkennt das System sicher oder falsch?',placeholder:'Unsere Beobachtung zu Beispielen mit Lösungen …'},
-  {key:'memory-unsupervised',label:'Unüberwacht: Nach welcher Ähnlichkeit hast du gruppiert? Gab es mehrere plausible Gruppen?',placeholder:'Unsere Beobachtung zu Gruppen ohne Labels …'},
+  {key:'memory-unsupervised',label:'Unüberwacht: Nach welcher Ähnlichkeit haben Sie gruppiert? Gab es mehrere plausible Gruppen?',placeholder:'Unsere Beobachtung zu Gruppen ohne Labels …'},
   {key:'memory-reinforcement',label:'Verstärkend: Welche Rückmeldung veränderte die Zugwahl? Was wurde belohnt?',placeholder:'Unsere Beobachtung zu Handlung und Rückmeldung …'}
  ];
  for(const prompt of prompts){
@@ -22,7 +23,7 @@ if(memoryComparison){
 }
 const groupMemory=[...document.querySelectorAll('#lernarten details')].find(detail=>detail.querySelector('[data-answer="memory"]'));
 if(groupMemory){
- groupMemory.querySelector('summary').textContent='Gruppen-Memory: drei Lernrunden';
+ setChapterTitle(groupMemory,'Gruppen-Memory: drei Lernrunden');
  const instructions=document.createElement('div');instructions.className='group-memory-instructions';
  const roles=document.createElement('p');roles.textContent='In Fünfergruppen: ein Agent, eine Kartenleitung, zwei Beobachtende und eine Person für Zeit/Protokoll. Die Agent-Rolle wechselt nach jeder Runde.';
  const rounds=document.createElement('ol');
@@ -39,7 +40,7 @@ if(groupMemory){
 }
 const knowledgeCheck=[...document.querySelectorAll('#lernarten details')].find(detail=>detail.querySelector('#memory-board'));
 if(knowledgeCheck){
- knowledgeCheck.querySelector('summary').textContent='Wissenssicherung: Lernarten zuordnen';
+ setChapterTitle(knowledgeCheck,'Wissenssicherung: Lernarten zuordnen');
  knowledgeCheck.querySelector('.detail-body p').textContent='Ordnen Sie die Begriffe den passenden Rückmeldungen zu und begründen Sie jedes Paar. Dieser Check sichert das Gelernte; die Gruppenrunden mit Memory stehen darüber.';
 }
 const journalFields=all('[data-journal]'),answerFields=all('[data-answer]');
@@ -102,7 +103,9 @@ const evaImage=document.createElement('img');evaImage.src='https://inf-schule.de
 const evaCaption=document.createElement('figcaption');evaCaption.textContent='Ein lernendes System verarbeitet Eingaben mit seinem Erfahrungsschatz. Neue Erfahrungen können ihn verändern.';evaFigure.append(evaImage,evaCaption);
 const hybridNote=document.createElement('p');hybridNote.className='small muted';hybridNote.textContent='In der Praxis können feste Regeln und Lernen aus Daten auch kombiniert werden.';
 systemsOverview.append(systemsHeading,systemsLead,systemsGrid,evaFigure,hybridNote);
-learningTypes.querySelector('.lesson-steps').before(systemsOverview);
+// Jede Karte kommt in ihr eigenes Kapitel, damit alle Teile in der Navigation stehen.
+const introMount=$('lernarten-intro'),ruleMount=$('lernarten-wissen'),learnMount=$('lernarten-lernend');
+if(introMount&&ruleMount&&learnMount){introMount.append(evaFigure,hybridNote);ruleMount.append(ruleCard);learnMount.append(learningCard);}else learningTypes.querySelector('.lesson-steps').before(systemsOverview);
 const learningExamples=[
  {title:'Überwacht · mit Labels',description:'Das System lernt mit Beispielen und den richtigen Kategorien. Danach ordnet es neue Beispiele zu.',links:[
   {href:'https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2',text:'Smiley-Spiel: fröhlich oder traurig? · inf-schule'},
@@ -132,16 +135,17 @@ const pathHeading=document.createElement('h2');pathHeading.textContent='Wie ents
 const pathDescription=document.createElement('p');pathDescription.textContent='Die Lernstrecke führt vom Papagei-Prinzip zur Vorhersage von Wortfolgen. Vergleichen Sie die Beispiele mit dem Papierexperiment oben.';
 pathIntro.append(pathHeading,pathDescription);papageiPath.prepend(pathIntro);
 const papageiMount=$('papagei-placeholder');if(papageiMount)papageiMount.replaceWith(papageiPath);
-language.querySelector('.lesson-steps article:nth-child(2) p').textContent='Bearbeiten Sie die eingebettete Lernstrecke. Variieren Sie Kontext oder Wortwahl und halten Sie Beobachtungen fest.';
+$('sprache-2').querySelector('.lesson-steps article p').textContent='Bearbeiten Sie die eingebettete Lernstrecke. Variieren Sie Kontext oder Wortwahl und halten Sie Beobachtungen fest.';
 const turing=document.createElement('aside');turing.className='turing-activity';
 const turingHeading=document.createElement('h2');turingHeading.textContent='Turing-Test: Mensch oder KI?';
 const turingDescription=document.createElement('p');turingDescription.textContent='Human or Not ist ein kurzes Live-Chat-Spiel: Entscheiden Sie nach dem Gespräch, ob Sie mit einem Menschen oder einem KI-Bot geschrieben haben. Ein einzelner Versuch ist kein Beweis dafür, dass eine KI menschlich denkt.';
 const privacyNote=document.createElement('p');privacyNote.className='small';privacyNote.textContent='Sie chatten mit fremden Teilnehmenden. Keine persönlichen Angaben teilen; nur nach Freigabe der Lehrperson spielen.';
 const turingLink=document.createElement('a');turingLink.className='btn primary';turingLink.href='https://humanornot.so/start-search';turingLink.target='_blank';turingLink.rel='noopener noreferrer';turingLink.textContent='Human or Not extern öffnen';
-turing.append(turingHeading,turingDescription,privacyNote,turingLink);papageiPath.after(turing);
-language.querySelector('[data-answer="sprache"]').previousElementSibling.textContent='Welche Hinweise halfen Ihnen beim Turing-Test? Was verrät ein plausibler Text über die Grenzen eines Sprachmodells?';
-const papageiLink=language.querySelector('details a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke"]');
-if(papageiLink){const materials=papageiLink.closest('details');papageiLink.remove();materials.querySelector('summary').textContent='Papierexperiment von inf-schule';}
+turing.append(turingHeading,turingDescription,privacyNote,turingLink);
+const turingMount=$('turing-mount');if(turingMount){turingHeading.remove();turingMount.replaceWith(turing);}else papageiPath.after(turing);
+language.querySelector('[data-answer="sprache"]').previousElementSibling.textContent='Erklären Sie anhand Ihrer zwei Texte in drei Sätzen: Was gelang, was war problematisch, und warum garantiert Plausibilität keine Richtigkeit? Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells.';
+const papageiLink=language.querySelector('#sprache-7 a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke"]');
+if(papageiLink){const materials=papageiLink.closest('details');papageiLink.remove();setChapterTitle(materials,'Papierexperiment von inf-schule');}
 const status=(message,error=false)=>{$('portal-save-status').textContent=message;$('portal-save-status').classList.toggle('save-error',error);};
 const cleanState=raw=>{
  if(raw?.schema!==SCHEMA)throw Error('Keine gültige Kurssicherung.');

@@ -31,17 +31,17 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 | Vorwissen aktivieren – Regeln für Katze oder Hund schreiben | 10 | Tandem | Schreiben Sie Wenn-dann-Regeln auf, mit denen ein Programm Katzen von Hunden auf Fotos unterscheiden könnte. Prüfen Sie die Regeln an drei Gegenbeispielen, etwa einer Katze mit langen Ohren oder einem Hund in Katzenpose. |
 |  |  | Lehrperson | Sammelt zwei Regeln und je ein Gegenbeispiel an der Tafel und hält fest: Regeln von Hand zu finden ist mühsam und lückenhaft. |
 |  |  | Ergebnis | Die Erfahrung, dass Regeln von Hand Lücken haben. Sie motiviert, ein System aus Beispielen lernen zu lassen. |
-| Informieren – KI, maschinelles Lernen und Deep Learning einordnen | 25 | Lehrperson | Zeigt die Grafik «Programmierung durch Menschen» und «Datengetriebene Programmierung». Menschen: Eingabe → definierte Regeln → Ausgabe, zum Beispiel ein Schachprogramm. Daten: Daten → maschinelles Lernen → Regeln, zum Beispiel ein Spamfilter, der aus markierten Mails lernt. Verbindet mit der Katzenübung: Statt Regeln zu schreiben, geben wir Beispiele. |
+| Informieren – KI, maschinelles Lernen und Deep Learning einordnen | 25 | Lehrperson | Zeigt die Grafik «Programmierung durch Menschen» und «Datengetriebene Programmierung». Menschen: Eingabe → definierte Regeln → Ausgabe, zum Beispiel ein Schachprogramm. Daten: Daten → maschinelles Lernen → Regeln, zum Beispiel ein Spamfilter, der aus markierten Mails lernt. Verbindet mit der Übung «Regeln für Katze oder Hund schreiben»: Statt Regeln zu schreiben, geben wir Beispiele. |
 |  |  | Einzeln | Ordnen Sie Taschenrechner, Spamfilter, Ampel mit festem Zeitplan und Gesichtsentsperrung am Handy einer der beiden Seiten zu. |
-|  |  | Lehrperson | Zeigt die Einteilung der Begriffe als ineinander liegende Kreise: KI, maschinelles Lernen, Deep Learning, generative KI. Erklärt jede Ebene an einem Beispiel (Schachprogramm mit festen Regeln, Spamfilter, Bilderkennung, ChatGPT) und betont: Nicht jedes KI-System lernt aus Daten. Das Bildprojekt gehört zum maschinellen Lernen. |
+|  |  | Lehrperson | Zeigt die Einteilung der Begriffe als ineinander liegende Kreise: KI, maschinelles Lernen, Deep Learning, generative KI. Erklärt jede Ebene kurz; die Lernenden tragen in der Tabelle der Kursseite zu jedem Begriff ein eigenes Beispiel ein (mögliche Beispiele: Schachprogramm mit festen Regeln, Spamfilter, Bilderkennung, ChatGPT). Betont: Nicht jedes KI-System lernt aus Daten. Das Bildprojekt gehört zum maschinellen Lernen. |
 |  |  | Lehrperson | Zeigt die Meilensteine der KI von 1950 bis 2022 und erzählt zu jedem einen Satz. Markiert, ob er auf Regeln von Menschen oder auf Lernen aus Daten beruht. |
-|  |  | Lehrperson | Führt schwache und starke KI und die vier KI-Typen ein: reaktive KI, KI mit begrenztem Gedächtnis, Theory of Mind, selbstbewusste KI. Heutige Systeme gehören zu den Typen 1 und 2 und sind schwache KI; starke KI gibt es nicht. |
-|  |  | Einzeln | Notieren Sie zu jedem der vier Typen ein Merkmal in Stichworten. |
+|  |  | Lehrperson | Führt schwache und starke KI und die vier KI-Typen ein: reaktive KI, KI mit begrenztem Gedächtnis, Theory of Mind, selbstbewusste KI. Heutige Systeme gehören zu den Typen 1 und 2 und sind schwache KI; starke KI gibt es nicht. Mögliche Beispiele zur Kontrolle: Typ 1 Schachcomputer Deep Blue, Typ 2 selbstfahrende Autos, Chatbots und Bilderkennung, Typ 3 und 4 bisher nur Forschung und Science-Fiction. |
+|  |  | Einzeln | Nennen Sie zu jedem der vier Typen in der Tabelle auf der Kursseite ein eigenes Beispiel und notieren Sie, ob es das heute gibt, mit kurzer Begründung. |
 |  |  | Ergebnis | Notizen zu Regeln und Daten, zur Einteilung der Begriffe, zu den Meilensteinen und zu den vier Typen als Grundlage für die Verarbeitung. |
 | Verarbeiten – Meilensteine, eigene Beispiele und Asimovs Gesetze | 40 | Gruppe | Meilensteine: Jede Gruppe erhält zwei bis drei Meilensteine, klärt in einer Minute, was neu war, und entscheidet, ob er eher auf Regeln von Menschen oder auf Daten beruht. Hängen Sie die Meilensteine als Klasse in der richtigen Reihenfolge auf und markieren Sie sie mit «Regeln» oder «Daten». |
 |  |  | Tandem | Wählen Sie vier eigene Beispiele aus Alltag, Film oder Zukunft (zum Beispiel Navigationsapp, Sprachassistent, Staubsaugerroboter, HAL 9000, Terminator). Ordnen Sie jedes ein: Regeln oder Daten? Welche Ebene (KI, maschinelles Lernen, Deep Learning, generative KI)? Typ 1 bis 4? Schwache oder starke KI? Begründen Sie jede Einordnung in einem Satz im Antwortfeld. |
-|  |  | Lehrperson | Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) vor und zeigt den Fall: Ein selbstfahrendes Auto muss ausweichen und gefährdet dabei die Insassen. |
-|  |  | Gruppe | Diskutieren Sie in Vierergruppen: Welches Gesetz greift im Fall? Wer legt fest, was «Schaden» heisst? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest. |
+|  |  | Lehrperson | Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) vor und zeigt das Trolley-Problem (Weichenstellerfall, Wikipedia) und überträgt es auf den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen, weil zwei Kinder auf die Fahrbahn rennen. Drei Möglichkeiten: geradeaus bremsen (Kinder gefährdet), nach rechts in die Mauer (Fahrgast gefährdet), nach links (Person auf dem Velo gefährdet). Betont, dass es keine richtige Lösung gibt. |
+|  |  | Gruppe | Entscheiden Sie im Fall «Schulweg» zuerst allein und vergleichen Sie dann in Vierergruppen: Wo gehen die Entscheidungen auseinander? Welches Gesetz greift, und widersprechen sich die Gesetze? Wer legt fest, was «Schaden» heisst und wessen Schaden mehr zählt? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest. |
 |  |  | Einzeln | Erklären Sie im Antwortfeld die Begriffe KI, maschinelles Lernen, Deep Learning und generative KI in je einem eigenen Satz. |
 |  |  | Ergebnis | Eine Zeitleiste mit Markierung «Regeln» oder «Daten», vier begründete Einordnungen und zwei Argumente zu den Gesetzen der Robotik. |
 | Auswerten – Einordnungen prüfen und Begriffe klären | 10 | Klasse | Je zwei Tandems stellen eine Einordnung vor. Die Klasse prüft: Stimmt der Typ, und ist es wirklich schwache KI? |
@@ -70,7 +70,8 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 | Vorwissen aktivieren – Woher kommt die Regel? | 5 | Tandem | Knüpfen Sie an Doppellektion 1 an. Überlegen Sie zu zweit, woher beim Schachprogramm und beim Spamfilter die Regel kommt (von Menschen oder aus Daten), und vervollständigen Sie den Satz «Ein System lernt aus Daten, wenn …». |
 |  |  | Lehrperson | Schreibt zwei Formulierungen an die Tafel. |
 |  |  | Ergebnis | Eine gemeinsame Arbeitsdefinition von «aus Daten lernen». |
-| Informieren – Wissensbasiert oder lernend? Akinator und Filmlandkarte | 20 | Lehrperson | Zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix. |
+| Informieren – Wissensbasiert oder lernend? Akinator und Filmlandkarte | 20 | Lehrperson | Führt das EVA-Prinzip (Eingabe, Verarbeitung, Ausgabe) neu ein und zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix. |
+|  |  | Tandem | Erklären Sie die EVA-Grafik in einfachen Worten am Beispiel Spamfilter (Eingabe, Erfahrungsschatz, Ausgabe, was eine neue Erfahrung verändert) und halten Sie die Erklärung im Antwortfeld der Kursseite fest. Vergleichen Sie mit dem Schachprogramm aus Doppellektion 1. |
 |  |  | Tandem | Wissensbasiert: Spielen Sie zwei Runden Akinator (en.akinator.com) mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld. Notieren Sie, welche Fragen gestellt werden, wie Ihre Antworten zum Ergebnis führen und was bei einer seltenen oder erfundenen Figur geschieht. |
 |  |  | Tandem | Lernend: Erkunden Sie in der Filmlandkarte (Link auf der Kursseite) einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Notieren Sie, welche Muster das System in welchen Daten gefunden haben könnte. |
 |  |  | Lehrperson | Stellt drei Lernsignale kurz an je einem Beispiel vor: Labels (Smiley-Spiel), Ähnlichkeit (K-Means), Rückmeldung (NIM). |
@@ -83,7 +84,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 |  |  | Tandem | Spielen Sie NIM in der verlinkten Lernstrecke und beobachten Sie, wie das System nach Gewinn oder Verlust seine Züge anpasst. |
 |  |  | Einzeln | Finden Sie im digitalen Begriffscheck Begriff und passende Rückmeldung als Paare. |
 |  |  | Ergebnis | Pro Memory-Runde eine Beobachtung im Journalfeld. |
-| Auswerten – Die drei Lernarten vergleichen | 10 | Einzeln | Beantworten Sie im Journal: Was lernen die Systeme aus Labels, aus Ähnlichkeit, aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts (überwacht, weil die Trainingsbilder Klassennamen erhalten). |
+| Auswerten – Die drei Lernarten vergleichen | 10 | Einzeln | Beantworten Sie im Antwortfeld «Was fällt auf, wenn Sie die drei Lernarten vergleichen?»: Was lernen die Systeme aus Labels, aus Ähnlichkeit, aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts (überwacht, weil die Trainingsbilder Klassennamen erhalten). |
 |  |  | Lehrperson | Klärt: In Runde 3 lernte der Mensch, nicht die KI; NIM zeigt das KI-Beispiel. |
 |  |  | Ergebnis | Drei Beobachtungen, je eine pro Lernart, und die Zuordnung des Bildprojekts. |
 
@@ -114,7 +115,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 |  |  | Tandem | Arbeiten Sie das Notebook «Ein Neuron entscheidet» durch (Zeitmarken beachten): Nervenzelle und Neuron vergleichen, ein Neuron von Hand für AND, OR und NAND einstellen (bei jeder falschen Zeile nennt die Ausgabe, was zu tun ist), das Neuron selbst lernen lassen und dabei die Lernrate verändern, an echten Messdaten zwei Pflanzenarten unterscheiden und XOR versuchen. |
 |  |  | Tandem | Erklären Sie einander, was ein Gewicht und was der Bias bewirkt. |
 |  |  | Ergebnis | Eine von Hand eingestellte und eine gelernte AND-Regel sowie die Beobachtung, dass XOR nicht gelingt. |
-| Auswerten – Ausgabe bestimmen und an XOR scheitern | 10 | Einzeln | Bestimmen Sie ohne Computer die Ausgabe für (0, 1) mit Gewichten 1 und 1 und Bias −1.5. Erklären Sie in zwei Sätzen, warum eine einzige Gerade XOR nicht trennt. |
+| Auswerten – Ausgabe bestimmen und an XOR scheitern | 10 | Einzeln | Bestimmen Sie ohne Computer die Ausgabe für (0, 1) mit Gewichten 1 und 1 und Bias −1.5. Beantworten Sie dann im Antwortfeld der Kursseite: Was bewirken Gewicht und Bias? Wie korrigiert sich ein Neuron selbst? Warum scheitert ein einzelnes Perzeptron an XOR (zwei Sätze)? |
 |  |  | Lehrperson | Zeigt die vier XOR-Punkte und fragt, wie viele Linien man bräuchte. |
 |  |  | Ergebnis | Eine korrekte Rechnung und eine Erklärung zu XOR im Antwortfeld. |
 
@@ -145,9 +146,9 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 |  |  | Ergebnis | Eine vollständige Tabelle x₁, x₂, OR, NAND, Ausgang = XOR. |
 | Verarbeiten – Netze kombinieren, Daten aufteilen, Thema wählen | 50 | Tandem | Bearbeiten Sie das Notebook «Mehrere Neuronen kombinieren»: Regeln im Regler vergleichen, das konstruierte XOR-Netz erklären, dann ein Netz XOR selbst lernen lassen (1, 2 und 4 versteckte Neuronen, verschiedene Startwerte) und beobachten, wann es gelingt. |
 |  |  | Tandem | Bearbeiten Sie das Notebook «Daten fair aufteilen»: Training, Validierung und Test mit der Prüfungsanalogie klären, das Datenleck am Apfelbeispiel finden und die drei Werte desselben Netzes vergleichen. |
-|  |  | Tandem | Wählen Sie im Tandem ein Thema aus dem Ideenpool und genau zwei Klassen und skizzieren Sie die fünf Gruppen T1, T2, V1, P1 und P2 (2 Klassen × 5 Gruppen × 8 Fotos = 80). Prüfen Sie die Skizze mit der Selbstcheck-Liste am Ende des Notebooks. |
+|  |  | Tandem | Wählen Sie im Tandem ein Thema aus dem Ideenpool und genau zwei Klassen und skizzieren Sie die fünf Gruppen T1, T2, V1, P1 und P2 (2 Klassen × 5 Gruppen × 8 Fotos = 80). Prüfen Sie die Skizze im Notebook «Daten fair aufteilen» (Abschnitt «Den eigenen Datenplan prüfen»; Aufgabe am Ende der Seite «Neuronale Netze»). |
 |  |  | Ergebnis | Eine erklärte XOR-Tabelle, begründete Rollen von Training, Validierung und Test und ein vorläufiger Datenplan. |
-| Auswerten – Den Weg durch das Netz erklären | 10 | Tandem | Erklären Sie einem anderen Tandem den Weg von (1, 0) durch das Netz. Zeigen Sie der Lehrperson Ihren Datenplan zur Freigabe. |
+| Auswerten – Den Weg durch das Netz erklären | 10 | Tandem | Erklären Sie einem anderen Tandem den Weg von (1, 0) durch das Netz und beantworten Sie im Antwortfeld der Kursseite, was die Zwischenschicht leistet und warum Gegenstände oder Personen zwischen den Datengruppen getrennt bleiben. Zeigen Sie der Lehrperson Ihren Datenplan zur Freigabe. |
 |  |  | Lehrperson | Gibt die Fotoregeln mit: beide Klassen unter gleichen Bedingungen (Hintergrund, Licht), acht verschiedene Fotos je Gruppe, Gruppen vor dem Fotografieren festlegen, Personen nur mit Einverständnis, Fotos bis zur nächsten Projekt-Doppellektion. |
 |  |  | Ergebnis | Ein freigegebener Datenplan und der Auftrag, 80 Fotos zu sammeln. |
 
@@ -199,7 +200,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen – Projektstand wiederherstellen | 5 | Tandem | Importieren Sie Ihr gesichertes ZIP, führen Sie die Vorbereitung und den Datenimport erneut aus und legen Sie ein Tagesziel fest (A/B-Lauf, Vorhersagen lesen, Auswahl begründen). |
+| Ankommen – Projektstand wiederherstellen | 5 | Tandem | Stellen Sie Ihr gesichertes ZIP unter «Notizen & Projekt wiederherstellen» wieder her, führen Sie die Vorbereitung und den Datenimport erneut aus und legen Sie ein Tagesziel fest (A/B-Lauf, Vorhersagen lesen, Auswahl begründen). |
 |  |  | Ergebnis | Ein bereiter Stand und ein Tagesziel. |
 | Vorwissen aktivieren – Was unterscheidet A und B? | 10 | Tandem | Erklären Sie dem Tandem ohne Unterlagen, was sich zwischen A und B verändert und was gleich bleibt (Bildzahl, Netz, Epochen, Startwert, Validierungsbilder) und wofür V1 und P1/P2 dienen. Schreiben Sie Ihre Vermutung für den Vergleich auf (A besser, B besser oder gleich) mit einem Grund. |
 |  |  | Ergebnis | Eine schriftliche Vermutung mit Begründung. |
@@ -292,7 +293,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 | Ankommen – «Heute gehen wir …» | 5 | Lehrperson | Schreibt «Heute gehen wir …» an die Tafel. |
 |  |  | Einzeln → Klasse | Schreiben Sie zwei Fortsetzungen und lesen Sie sie vor; die Klasse sammelt die Unterschiede in Wortwahl, Länge und Ton. |
 |  |  | Ergebnis | Eine Sammlung verschiedener Fortsetzungen desselben Satzanfangs. |
-| Vorwissen aktivieren – Papierexperiment: reihum Wörter schreiben | 10 | Gruppe | Papierexperiment: Schreiben Sie reihum je ein Wort und falten Sie das Blatt so, dass die nächste Person nur die letzten zwei Wörter sieht. Wiederholen Sie das mit vier sichtbaren Wörtern. Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? |
+| Vorwissen aktivieren – Papierexperiment: reihum Wörter schreiben | 10 | Gruppe | Papierexperiment in Gruppen von drei bis vier Personen mit demselben Satzanfang auf zwei Blättern: Reihum schreibt jede Person ein Wort, und das Blatt wird so gefaltet, dass nur die letzten zwei Wörter sichtbar bleiben (Runde A, etwa 12 Wörter). Wiederholen Sie das mit vier sichtbaren Wörtern (Runde B). Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? Das Papagei-Modell macht dasselbe mit Zahlen (Kapitel 2 der Kursseite). |
 |  |  | Ergebnis | Zwei Texte und eine Aussage zum Einfluss des Kontexts. |
 | Informieren – Papagei-Modell: das nächste Wort | 15 | Lehrperson | Erklärt am Papagei-Beispiel, wie ein Modell das nächste Wort aus der Häufigkeit von Wortfolgen in früheren Texten vorhersagt. Grenzt moderne Sprachmodelle ab: Tokens, viel grösserer Kontext und ein trainiertes neuronales Netz. Zeigt an einem Beispiel, dass «wahrscheinlich» nicht «wahr» heisst. |
 |  |  | Einzeln | Notieren Sie zwei Unterschiede zwischen dem Papagei-Modell und einem modernen Sprachmodell. |
@@ -301,12 +302,14 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 |  |  | Tandem | Verändern Sie in Soekia jeweils nur eine Grösse (Kontext oder Wortwahl), vergleichen Sie die Texte und sichern Sie einen gelungenen und einen problematischen Text mit Beleg. |
 |  |  | Tandem | Verbinden Sie Ihre Beobachtungen mit dem Papierexperiment und beantworten Sie: Ist eine plausible Fortsetzung auch wahr? «Human or Not» wird nur bei schulischer Freigabe eingesetzt und ersetzt dann zehn Minuten Soekia. |
 |  |  | Ergebnis | Ein dokumentierter Vergleich mit zwei Texten und einer Aussage zu «plausibel ≠ wahr». |
-| Auswerten – Was gelang, was war problematisch? | 10 | Einzeln | Erklären Sie anhand Ihrer zwei Texte in drei Sätzen, was gelang, was problematisch war und warum Plausibilität keine Richtigkeit garantiert. Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells. |
-|  |  | Lehrperson | Fasst zusammen: Sprachmodelle sagen das nächste Token im Kontext voraus und prüfen nicht automatisch, ob eine Aussage wahr ist. |
-|  |  | Ergebnis | Ein belegter Textvergleich und zwei Grenzen. |
+| Auswerten – Texte erklären, Papagei und Netz verbinden | 10 | Einzeln | Erklären Sie im Antwortfeld anhand Ihrer zwei Texte in drei Sätzen, was gelang, was problematisch war und warum Plausibilität keine Richtigkeit garantiert. Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells. |
+|  |  | Lehrperson | Brücke zu den neuronalen Netzen: Zeigt die Grafik «Papagei-Modell und neuronales Sprachmodell». Gleiches Ziel (das nächste Token vorhersagen), aber das Netz speichert sein Wissen in Gewichten statt in einer Tabelle, behandelt ähnliche Wörter ähnlich (Wörter als Zahlen), nutzt viel längeren Kontext und wird wie das Neuron aus Doppellektion 3 trainiert, nur mit Milliarden Gewichten. Betont: Das ist mehr als Zählen. Es bleibt dabei: Das Modell prüft nicht, ob etwas wahr ist. |
+|  |  | Tandem | Beantworten Sie im Antwortfeld «Warum ist ein neuronales Sprachmodell mehr als reine Statistik? Welche Grenze bleibt?»: Was sagt die Papagei-Tabelle zu «Das Kätzchen verfolgt die …», was kann ein Netz tun, in dem Katze und Kätzchen ähnliche Zahlen haben? |
+|  |  | Lehrperson | Fasst zusammen: Sprachmodelle sagen das nächste Token im Kontext voraus und prüfen nicht automatisch, ob eine Aussage wahr ist. Ausblick auf Doppellektion 10: Wer trägt die Folgen? |
+|  |  | Ergebnis | Ein belegter Textvergleich, zwei Grenzen und eine Begründung, warum neuronale Sprachmodelle mehr sind als reine Statistik. |
 
 
-**Lernprodukt:** Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells.
+**Lernprodukt:** Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells + Begründung, warum neuronale Sprachmodelle mehr sind als Statistik.
 
 ### Doppellektion 10 · Wer trägt die Folgen?
 

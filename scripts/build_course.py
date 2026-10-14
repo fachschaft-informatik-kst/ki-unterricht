@@ -32,17 +32,30 @@ def tabelle(lesson):
     return f'<div class="phase-table-wrap"><table class="phase-table">{kopf}<tbody>{"".join(zeilen)}</tbody></table></div>'
 
 
-def render(lesson):
-    return (f'<details class="lesson-plan" data-lesson="{lesson["id"]}"><summary>'
+def render(lesson, voll=False):
+    """Kursseite: nur Ziel, Leitfrage und Motivation. Mit voll=True zusätzlich Ablauftabelle (Lehrperson)."""
+    return (f'<details class="lesson-plan" data-lesson="{lesson["id"]}" open><summary>'
             f'<span class="phase-num">{lesson["id"]}</span><span>Doppellektion {int(lesson["id"])} · {html.escape(lesson["title"])}</span>'
             '<small>90 Min.</small></summary><div class="detail-body">'
             f'<p><strong>Heute können Sie:</strong> {html.escape(lesson["goal"])}</p>'
             f'<p class="lesson-question">{html.escape(lesson["question"])}</p>'
             + (f'<p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> {html.escape(lesson["motivation"])}</p>' if lesson.get('motivation') else '')
-            + LEGENDE + tabelle(lesson)
+            + ((LEGENDE + tabelle(lesson)
             + f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p>'
-            + (f'<p class="small muted"><strong>Zeit:</strong> {html.escape(lesson["zeit"])}</p>' if lesson.get('zeit') else '')
+            + (f'<p class="small muted"><strong>Zeit:</strong> {html.escape(lesson["zeit"])}</p>' if lesson.get('zeit') else '')) if voll else '')
             + '</div></details>')
+
+def lehrpersonen_seite(lessons, kursseite):
+    """Eigenständige Seite mit allen Ablauftabellen; nicht in der Navigation der Kursseite verlinkt."""
+    stil = re.search(r'<style>.*?</style>', kursseite, re.S).group(0)
+    plaene = '\n'.join(render(l, voll=True) for l in lessons)
+    return ('<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            '<meta name="robots" content="noindex"><title>Unterrichtsplan · Lehrperson</title>'
+            '<link href="favicon.svg" rel="icon" type="image/svg+xml">'+stil+'<link href="portal.css" rel="stylesheet">'
+            '<body class="lehrpersonen-seite"><main><div class="crumb"><span>Nur für die Lehrperson</span></div>'
+            '<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller zehn Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
+            'Gleiche Fassung wie in <code>worksheets/md/KI_Planung.md</code>.</p>'
+            '<p><a href="index.html">← Zur Kursseite</a></p>\n'+plaene+'\n<p><a href="index.html">← Zur Kursseite</a></p></main></body></html>\n')
 
 def remove_calendar_dates(text):
     text, _ = re.subn(r'<details><summary>Unterrichtspausen &amp; Termine</summary>.*?</details>', '', text, count=1, flags=re.S)
@@ -113,6 +126,7 @@ def build():
     text = update_language_lesson(text)
     text = remove_calendar_dates(text)
     page.write_text(text.rstrip()+"\n")
+    (ROOT/'projekt/unterrichtsplan.html').write_text(lehrpersonen_seite(lessons, text))
     rows = []
     for l in lessons:
         rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', '', f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['**Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.', ''])

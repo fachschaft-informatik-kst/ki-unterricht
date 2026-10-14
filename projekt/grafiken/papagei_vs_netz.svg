@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 500" font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
+<title>Papagei-Modell und neuronales Sprachmodell im Vergleich</title>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#52656a"/></marker>
+</defs>
+<rect width="980" height="500" fill="#fff"/>
+<!-- Zeile A: Papagei-Modell -->
+<text x="20" y="30" font-size="19" font-weight="700" fill="#be572b">Papagei-Modell: zählt Wortfolgen</text>
+<g font-size="15" fill="#182b31">
+<rect x="20" y="48" width="230" height="110" rx="14" fill="#fff0e7" stroke="#be572b" stroke-width="2"/>
+<text x="38" y="78" font-weight="700">Kontext</text>
+<text x="38" y="106">«Das Kätzchen</text>
+<text x="38" y="128">verfolgt die …»</text>
+<path d="M254 103H300" stroke="#52656a" stroke-width="3" marker-end="url(#a)"/>
+<rect x="304" y="48" width="400" height="110" rx="14" fill="#fff" stroke="#be572b" stroke-width="2"/>
+<text x="322" y="78" font-weight="700">Häufigkeitstabelle</text>
+<text x="322" y="102" fill="#52656a">«Katze jagt die»  → Maus 12 · Ratte 3</text>
+<text x="322" y="124" fill="#52656a">«Hund holt den»  → Ball 9 · Stock 5</text>
+<text x="322" y="146" font-weight="700" fill="#be572b">«Kätzchen verfolgt die»  → nicht gesehen</text>
+<path d="M708 103H754" stroke="#52656a" stroke-width="3" marker-end="url(#a)"/>
+<rect x="758" y="48" width="202" height="110" rx="14" fill="#fff0e7" stroke="#be572b" stroke-width="2"/>
+<text x="776" y="78" font-weight="700">Nächstes Wort</text>
+<text x="776" y="116" font-size="30" font-weight="700" fill="#be572b">?</text>
+<text x="776" y="144" font-size="13.5" fill="#52656a">keine Vorhersage</text>
+</g>
+<!-- Zeile B: neuronales Sprachmodell -->
+<text x="20" y="206" font-size="19" font-weight="700" fill="#076959">Neuronales Sprachmodell: rechnet mit Zahlen und Gewichten</text>
+<g font-size="15" fill="#182b31">
+<rect x="20" y="224" width="200" height="140" rx="14" fill="#e7f1eb" stroke="#076959" stroke-width="2"/>
+<text x="38" y="254" font-weight="700">Kontext</text>
+<text x="38" y="282">«Das Kätzchen</text>
+<text x="38" y="304">verfolgt die …»</text>
+<path d="M224 294H256" stroke="#52656a" stroke-width="3" marker-end="url(#a)"/>
+<rect x="260" y="224" width="210" height="140" rx="14" fill="#fff" stroke="#076959" stroke-width="2"/>
+<text x="278" y="254" font-weight="700">Wörter als Zahlen</text>
+<text x="278" y="282" fill="#52656a">Katze    (0.9 | 0.1 | …)</text>
+<text x="278" y="304" fill="#52656a">Kätzchen (0.8 | 0.2 | …)</text>
+<text x="278" y="326" fill="#52656a">Auto     (0.1 | 0.9 | …)</text>
+<text x="278" y="350" font-size="13" fill="#076959">ähnlich → ähnliche Zahlen</text>
+<path d="M474 294H506" stroke="#52656a" stroke-width="3" marker-end="url(#a)"/>
+<rect x="510" y="224" width="250" height="140" rx="14" fill="#fff" stroke="#076959" stroke-width="2"/>
+<text x="528" y="254" font-weight="700">Schichten aus Neuronen</text>
+<g stroke="#076959" stroke-opacity=".45" stroke-width="1.3">
+<path d="M540 284L600 272M540 284L600 304M540 284L600 336M540 314L600 272M540 314L600 304M540 314L600 336M540 344L600 272M540 344L600 304M540 344L600 336"/>
+<path d="M600 272L660 284M600 272L660 314M600 304L660 284M600 304L660 314M600 336L660 284M600 336L660 314"/>
+<path d="M660 284L720 299M660 314L720 299"/>
+</g>
+<g fill="#e7f1eb" stroke="#076959" stroke-width="2">
+<circle cx="540" cy="284" r="9"/><circle cx="540" cy="314" r="9"/><circle cx="540" cy="344" r="9"/>
+<circle cx="600" cy="272" r="9"/><circle cx="600" cy="304" r="9"/><circle cx="600" cy="336" r="9"/>
+<circle cx="660" cy="284" r="9"/><circle cx="660" cy="314" r="9"/>
+<circle cx="720" cy="299" r="9"/>
+</g>
+<path d="M764 294H796" stroke="#52656a" stroke-width="3" marker-end="url(#a)"/>
+<rect x="800" y="224" width="160" height="140" rx="14" fill="#e7f1eb" stroke="#076959" stroke-width="2"/>
+<text x="816" y="254" font-weight="700">Nächstes Wort</text>
+<text x="816" y="282">Maus   61 %</text>
+<text x="816" y="304" fill="#52656a">Ratte    22 %</text>
+<text x="816" y="326" fill="#52656a">Ball       4 %</text>
+<text x="816" y="350" font-size="13" fill="#076959">…</text>
+</g>
+<!-- Fusszeile -->
+<rect x="20" y="392" width="940" height="88" rx="14" fill="#f5f4ee" stroke="#d8dfdb"/>
+<g font-size="15.5" fill="#182b31">
+<text x="40" y="420"><tspan font-weight="700">Gleiches Ziel:</tspan> das nächste Wort vorhersagen.</text>
+<text x="40" y="446"><tspan font-weight="700" fill="#be572b">Papagei:</tspan> merkt sich nur, was es genau so gesehen hat.</text>
+<text x="40" y="470"><tspan font-weight="700" fill="#076959">Netz:</tspan> lernt in seinen Gewichten, was ähnlich ist, und überträgt es auf Neues.</text>
+</g>
+</svg>

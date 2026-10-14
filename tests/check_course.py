@@ -15,14 +15,20 @@ from build_course import PHASES
 lessons=json.loads((root/'projekt/kurs.json').read_text())['lessons']
 assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,11)]
 soup=BeautifulSoup((root/'projekt/index.html').read_text(),'html.parser')
+# Ablauftabellen stehen nur auf der Lehrpersonen-Seite, nicht auf der Kursseite.
+plans=BeautifulSoup((root/'projekt/unterrichtsplan.html').read_text(),'html.parser')
+assert not soup.select('.phase-table') and 'Unser Ablauf' not in soup.get_text() and 'Am Ende sichtbar' not in soup.get_text()
+assert soup.select_one('a[href="unterrichtsplan.html"]')
 ids=[x['id'] for x in soup.select('[id]')]
 assert len(ids)==len(set(ids)), 'Duplicate HTML IDs'
 for lesson in lessons:
     assert sum(p['minutes'] for p in lesson['phases'])==90
     assert [p['phase'] for p in lesson['phases']]==PHASES
-    plan=soup.select_one('[data-lesson="'+lesson['id']+'"]')
+    intro=soup.select_one('[data-lesson="'+lesson['id']+'"]')
+    plan=plans.select_one('[data-lesson="'+lesson['id']+'"]')
     lesson_label=f'Doppellektion {int(lesson["id"])}'
-    assert plan and lesson_label in plan.get_text()
+    assert intro and lesson_label in intro.get_text() and lesson['goal'] in intro.get_text() and lesson['question'] in intro.get_text()
+    assert plan and lesson_label in plan.get_text() and lesson['product'] in plan.get_text()
     for phase in lesson['phases']:
         assert phase['schritte'] and phase['schritte'][-1]['art']=='Ergebnis'
         for step in phase['schritte']:
@@ -79,12 +85,15 @@ assert 'Alle Fachgespräche finden in Doppellektion 8 statt.' in soup.get_text()
 repro=soup.select_one('details#reproduktion')
 assert repro and repro.select_one('textarea[data-journal="reproduktion"][data-optional]')
 assert 'privaten Fenster' in repro.get_text() and 'daten_sha256' in repro.get_text() and 'wiederholen=True' in repro.get_text()
-lesson8=soup.select_one('[data-lesson="08"]')
+lesson8=plans.select_one('[data-lesson="08"]')
 assert sum(int(x.get_text()) for x in lesson8.select('.min') if x.get_text().strip().isdigit())>=70
 assert 'Reproduktionsprüfung' in lesson8.get_text() and 'Reproduktionsprüfung' in planning
 assert not re.search(r'\b\d{1,2}\.\d{1,2}\.20\d{2}\b',soup.get_text())
 for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektauftrag.md').read_text()]:
     assert not any(old in document for old in ['über mehrere Termine','auf weitere Termine','zusätzliche Gesprächszeiten'])
+for sid,minimum in {'einstieg':5,'lernarten':4,'perzeptron':4,'netze':4,'sprache':7,'gesellschaft':3,'projekt':4}.items():
+    chapters=soup.select(f'#{sid} details.kapitel')
+    assert len(chapters)>=minimum and all(c.select_one('.kapitel-nr') and c.select_one('h2.kapitel-titel') for c in chapters) and all(c.get('data-kurz') for c in chapters), sid
 assert len(soup.select('[data-score]'))==10
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
 for name in ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:

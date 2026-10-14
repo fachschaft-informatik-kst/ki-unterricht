@@ -44,17 +44,70 @@ $('import-state').addEventListener('change',async e=>{try{const f=e.target.files
 $('reset-state').addEventListener('click',()=>{if(confirm('Häkchen, Notizen, Themenwahl und Selbsteinschätzung auf diesem Gerät zurücksetzen? Notebook und Fotos bleiben erhalten.')){state=blank();render();save();}});
 let beforePrint=[];window.addEventListener('beforeprint',()=>{beforePrint=all('details').map(d=>[d,d.open]);all('details').forEach(d=>d.open=true);});window.addEventListener('afterprint',()=>beforePrint.forEach(([d,open])=>d.open=open));$('print-page').addEventListener('click',()=>window.print());
 const links=all('.nav a'),views=all('main > section');
+let chapterObserver=null;
+// Kapitel der aktuellen Seite: Unterpunkte in der Navigation, Knopf «Alle ein-/aufklappen», aktuelle Leseposition.
+function renderChapters(view){
+ all('.nav-sub').forEach(e=>e.remove());
+ if(chapterObserver){chapterObserver.disconnect();chapterObserver=null;}
+ const chapters=Array.from(view.querySelectorAll('details.kapitel'));
+ if(chapters.length<2)return;
+ const navLink=links.find(a=>a.hash==='#'+(view.dataset.nav||view.id));
+ const subLinks=new Map();
+ if(navLink){
+  const box=document.createElement('div');box.className='nav-sub';
+  for(const k of chapters){
+   const a=document.createElement('a'),nr=document.createElement('span');
+   a.href='#'+k.id;nr.textContent=k.querySelector('.kapitel-nr').textContent;
+   a.append(nr,k.querySelector('.kapitel-titel').textContent);box.append(a);subLinks.set(k,a);
+  }
+  navLink.after(box);
+ }
+ view.querySelectorAll('.kapitel-uebersicht').forEach(e=>e.remove());
+ const overview=document.createElement('nav'),head=document.createElement('div'),heading=document.createElement('p'),toggle=document.createElement('button'),grid=document.createElement('div');
+ overview.className='kapitel-uebersicht';overview.setAttribute('aria-label','Kapitel dieser Doppellektion');
+ head.className='kapitel-uebersicht-kopf';heading.textContent='Kapitel dieser Doppellektion';
+ toggle.type='button';toggle.className='btn compact';grid.className='kapitel-karten';
+ const label=()=>{toggle.textContent=chapters.some(k=>k.open)?'Alle einklappen':'Alle aufklappen';};
+ toggle.addEventListener('click',()=>{const open=!chapters.some(k=>k.open);chapters.forEach(k=>{k.open=open;});label();});
+ for(const k of chapters){
+  k.removeEventListener('toggle',k._label);k._label=label;k.addEventListener('toggle',label);
+  const card=document.createElement('a'),nr=document.createElement('span'),text=document.createElement('span'),title=document.createElement('b'),desc=document.createElement('span');
+  card.href='#'+k.id;card.className='kapitel-karte';nr.className='kapitel-nr';nr.textContent=k.querySelector('.kapitel-nr').textContent;
+  text.className='kapitel-karte-text';title.textContent=k.querySelector('.kapitel-titel').textContent;desc.textContent=k.dataset.kurz||'';
+  text.append(title,desc);card.append(nr,text);
+  card.addEventListener('click',e=>{if(location.hash==='#'+k.id){e.preventDefault();k.open=true;k.scrollIntoView({block:'start'});}});
+  grid.append(card);
+ }
+ label();head.append(heading,toggle);overview.append(head,grid);chapters[0].before(overview);
+ if('IntersectionObserver' in window&&subLinks.size){
+  chapterObserver=new IntersectionObserver(entries=>{
+   for(const e of entries)if(e.isIntersecting){subLinks.forEach((a,k)=>{if(k===e.target)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});}
+  },{rootMargin:'-15% 0px -70% 0px'});
+  chapters.forEach(k=>chapterObserver.observe(k));
+ }
+}
+let currentView=null;
 function route(){
  const id=decodeURIComponent(location.hash.slice(1)||'start');
  const target=$(id),view=target?.closest('main > section')||$('start');
  views.forEach(v=>v.classList.toggle('view-hidden',v!==view));
  links.forEach(a=>{if(a.hash==='#'+(view.dataset.nav||view.id))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
- if(target&&target!==view){let p=target.parentElement;while(p){if(p.tagName==='DETAILS')p.open=true;p=p.parentElement;}}
+ if(target&&target!==view){let p=target;while(p){if(p.tagName==='DETAILS')p.open=true;p=p.parentElement;}}
+ currentView=view;renderChapters(view);
  view.tabIndex=-1;
  requestAnimationFrame(()=>{if(target&&target!==view)target.scrollIntoView({block:'start'});else window.scrollTo({top:0,behavior:'instant'});view.focus({preventScroll:true});});
 }
 window.addEventListener('hashchange',route);
+document.addEventListener('DOMContentLoaded',()=>{if(currentView)renderChapters(currentView);});
 window.KIProgress={get:()=>structuredClone(state),restore:raw=>{state=valid(raw);render();save();}};
 render();filter();experiment('vielfalt');document.documentElement.classList.add('has-js');route();
+// Navigation einklappen (nur Desktop); der Zustand bleibt im Browser erhalten.
+{const toggle=document.createElement('button'),navKey='kst-ki-nav-collapsed',sidebar=document.querySelector('.sidebar');let collapsed=false;
+ try{collapsed=localStorage.getItem(navKey)==='1';}catch{}
+ toggle.type='button';toggle.className='nav-toggle';
+ const apply=()=>{document.body.classList.toggle('nav-collapsed',collapsed);sidebar.inert=collapsed&&matchMedia('(min-width:721px)').matches;toggle.setAttribute('aria-expanded',String(!collapsed));toggle.setAttribute('aria-label',collapsed?'Navigation einblenden':'Navigation einklappen');toggle.title=toggle.getAttribute('aria-label');toggle.textContent=collapsed?'›':'‹';};
+ toggle.addEventListener('click',()=>{collapsed=!collapsed;try{localStorage.setItem(navKey,collapsed?'1':'0');}catch{}apply();});
+ matchMedia('(min-width:721px)').addEventListener('change',apply);
+ document.body.append(toggle);apply();}
 if(!storageOK)$('save-status').textContent='Gespeicherter Stand konnte nicht geladen werden. Sichern Sie Ihre Arbeit über den Download.';
 })();

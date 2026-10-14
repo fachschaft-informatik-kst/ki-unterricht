@@ -66,7 +66,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 6,
-              "text": "Zeigt die Grafik «Programmierung durch Menschen» und «Datengetriebene Programmierung». Menschen: Eingabe → definierte Regeln → Ausgabe, zum Beispiel ein Schachprogramm. Daten: Daten → maschinelles Lernen → Regeln, zum Beispiel ein Spamfilter, der aus markierten Mails lernt. Verbindet mit der Katzenübung: Statt Regeln zu schreiben, geben wir Beispiele."
+              "text": "Zeigt die Grafik «Programmierung durch Menschen» und «Datengetriebene Programmierung». Menschen: Eingabe → definierte Regeln → Ausgabe, zum Beispiel ein Schachprogramm. Daten: Daten → maschinelles Lernen → Regeln, zum Beispiel ein Spamfilter, der aus markierten Mails lernt. Verbindet mit der Übung «Regeln für Katze oder Hund schreiben»: Statt Regeln zu schreiben, geben wir Beispiele."
             },
             {
               "art": "Auftrag",
@@ -78,7 +78,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 6,
-              "text": "Zeigt die Einteilung der Begriffe als ineinander liegende Kreise: KI, maschinelles Lernen, Deep Learning, generative KI. Erklärt jede Ebene an einem Beispiel (Schachprogramm mit festen Regeln, Spamfilter, Bilderkennung, ChatGPT) und betont: Nicht jedes KI-System lernt aus Daten. Das Bildprojekt gehört zum maschinellen Lernen."
+              "text": "Zeigt die Einteilung der Begriffe als ineinander liegende Kreise: KI, maschinelles Lernen, Deep Learning, generative KI. Erklärt jede Ebene kurz; die Lernenden tragen in der Tabelle der Kursseite zu jedem Begriff ein eigenes Beispiel ein (mögliche Beispiele: Schachprogramm mit festen Regeln, Spamfilter, Bilderkennung, ChatGPT). Betont: Nicht jedes KI-System lernt aus Daten. Das Bildprojekt gehört zum maschinellen Lernen."
             },
             {
               "art": "Input",
@@ -90,13 +90,13 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 6,
-              "text": "Führt schwache und starke KI und die vier KI-Typen ein: reaktive KI, KI mit begrenztem Gedächtnis, Theory of Mind, selbstbewusste KI. Heutige Systeme gehören zu den Typen 1 und 2 und sind schwache KI; starke KI gibt es nicht."
+              "text": "Führt schwache und starke KI und die vier KI-Typen ein: reaktive KI, KI mit begrenztem Gedächtnis, Theory of Mind, selbstbewusste KI. Heutige Systeme gehören zu den Typen 1 und 2 und sind schwache KI; starke KI gibt es nicht. Mögliche Beispiele zur Kontrolle: Typ 1 Schachcomputer Deep Blue, Typ 2 selbstfahrende Autos, Chatbots und Bilderkennung, Typ 3 und 4 bisher nur Forschung und Science-Fiction."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 1,
-              "text": "Notieren Sie zu jedem der vier Typen ein Merkmal in Stichworten."
+              "text": "Nennen Sie zu jedem der vier Typen in der Tabelle auf der Kursseite ein eigenes Beispiel und notieren Sie, ob es das heute gibt, mit kurzer Begründung."
             },
             {
               "art": "Ergebnis",
@@ -126,13 +126,13 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 3,
-              "text": "Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) vor und zeigt den Fall: Ein selbstfahrendes Auto muss ausweichen und gefährdet dabei die Insassen."
+              "text": "Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) vor und zeigt das Trolley-Problem (Weichenstellerfall, Wikipedia) und überträgt es auf den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen, weil zwei Kinder auf die Fahrbahn rennen. Drei Möglichkeiten: geradeaus bremsen (Kinder gefährdet), nach rechts in die Mauer (Fahrgast gefährdet), nach links (Person auf dem Velo gefährdet). Betont, dass es keine richtige Lösung gibt."
             },
             {
               "art": "Auftrag",
               "wer": "Gruppe",
               "min": 8,
-              "text": "Diskutieren Sie in Vierergruppen: Welches Gesetz greift im Fall? Wer legt fest, was «Schaden» heisst? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest."
+              "text": "Entscheiden Sie im Fall «Schulweg» zuerst allein und vergleichen Sie dann in Vierergruppen: Wo gehen die Entscheidungen auseinander? Welches Gesetz greift, und widersprechen sich die Gesetze? Wer legt fest, was «Schaden» heisst und wessen Schaden mehr zählt? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest."
             },
             {
               "art": "Auftrag",
@@ -243,8 +243,14 @@
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 5,
-              "text": "Zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix."
+              "min": 3,
+              "text": "Führt das EVA-Prinzip (Eingabe, Verarbeitung, Ausgabe) neu ein und zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Erklären Sie die EVA-Grafik in einfachen Worten am Beispiel Spamfilter (Eingabe, Erfahrungsschatz, Ausgabe, was eine neue Erfahrung verändert) und halten Sie die Erklärung im Antwortfeld der Kursseite fest. Vergleichen Sie mit dem Schachprogramm aus Doppellektion 1."
             },
             {
               "art": "Auftrag",
@@ -332,7 +338,7 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "text": "Beantworten Sie im Journal: Was lernen die Systeme aus Labels, aus Ähnlichkeit, aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts (überwacht, weil die Trainingsbilder Klassennamen erhalten)."
+              "text": "Beantworten Sie im Antwortfeld «Was fällt auf, wenn Sie die drei Lernarten vergleichen?»: Was lernen die Systeme aus Labels, aus Ähnlichkeit, aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts (überwacht, weil die Trainingsbilder Klassennamen erhalten)."
             },
             {
               "art": "Input",
@@ -460,7 +466,7 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "text": "Bestimmen Sie ohne Computer die Ausgabe für (0, 1) mit Gewichten 1 und 1 und Bias −1.5. Erklären Sie in zwei Sätzen, warum eine einzige Gerade XOR nicht trennt."
+              "text": "Bestimmen Sie ohne Computer die Ausgabe für (0, 1) mit Gewichten 1 und 1 und Bias −1.5. Beantworten Sie dann im Antwortfeld der Kursseite: Was bewirken Gewicht und Bias? Wie korrigiert sich ein Neuron selbst? Warum scheitert ein einzelnes Perzeptron an XOR (zwei Sätze)?"
             },
             {
               "art": "Input",
@@ -572,7 +578,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Wählen Sie im Tandem ein Thema aus dem Ideenpool und genau zwei Klassen und skizzieren Sie die fünf Gruppen T1, T2, V1, P1 und P2 (2 Klassen × 5 Gruppen × 8 Fotos = 80). Prüfen Sie die Skizze mit der Selbstcheck-Liste am Ende des Notebooks."
+              "text": "Wählen Sie im Tandem ein Thema aus dem Ideenpool und genau zwei Klassen und skizzieren Sie die fünf Gruppen T1, T2, V1, P1 und P2 (2 Klassen × 5 Gruppen × 8 Fotos = 80). Prüfen Sie die Skizze im Notebook «Daten fair aufteilen» (Abschnitt «Den eigenen Datenplan prüfen»; Aufgabe am Ende der Seite «Neuronale Netze»)."
             },
             {
               "art": "Ergebnis",
@@ -589,7 +595,7 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Erklären Sie einem anderen Tandem den Weg von (1, 0) durch das Netz. Zeigen Sie der Lehrperson Ihren Datenplan zur Freigabe."
+              "text": "Erklären Sie einem anderen Tandem den Weg von (1, 0) durch das Netz und beantworten Sie im Antwortfeld der Kursseite, was die Zwischenschicht leistet und warum Gegenstände oder Personen zwischen den Datengruppen getrennt bleiben. Zeigen Sie der Lehrperson Ihren Datenplan zur Freigabe."
             },
             {
               "art": "Input",
@@ -741,7 +747,7 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Importieren Sie Ihr gesichertes ZIP, führen Sie die Vorbereitung und den Datenimport erneut aus und legen Sie ein Tagesziel fest (A/B-Lauf, Vorhersagen lesen, Auswahl begründen)."
+              "text": "Stellen Sie Ihr gesichertes ZIP unter «Notizen & Projekt wiederherstellen» wieder her, führen Sie die Vorbereitung und den Datenimport erneut aus und legen Sie ein Tagesziel fest (A/B-Lauf, Vorhersagen lesen, Auswahl begründen)."
             },
             {
               "art": "Ergebnis",
@@ -1129,7 +1135,7 @@
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "text": "Papierexperiment: Schreiben Sie reihum je ein Wort und falten Sie das Blatt so, dass die nächste Person nur die letzten zwei Wörter sieht. Wiederholen Sie das mit vier sichtbaren Wörtern. Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum?"
+              "text": "Papierexperiment in Gruppen von drei bis vier Personen mit demselben Satzanfang auf zwei Blättern: Reihum schreibt jede Person ein Wort, und das Blatt wird so gefaltet, dass nur die letzten zwei Wörter sichtbar bleiben (Runde A, etwa 12 Wörter). Wiederholen Sie das mit vier sichtbaren Wörtern (Runde B). Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? Das Papagei-Modell macht dasselbe mit Zahlen (Kapitel 2 der Kursseite)."
             },
             {
               "art": "Ergebnis",
@@ -1194,29 +1200,42 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Was gelang, was war problematisch?",
+          "titel": "Texte erklären, Papagei und Netz verbinden",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "text": "Erklären Sie anhand Ihrer zwei Texte in drei Sätzen, was gelang, was problematisch war und warum Plausibilität keine Richtigkeit garantiert. Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells."
+              "text": "Erklären Sie im Antwortfeld anhand Ihrer zwei Texte in drei Sätzen, was gelang, was problematisch war und warum Plausibilität keine Richtigkeit garantiert. Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells.",
+              "min": 3
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 3,
+              "text": "Brücke zu den neuronalen Netzen: Zeigt die Grafik «Papagei-Modell und neuronales Sprachmodell». Gleiches Ziel (das nächste Token vorhersagen), aber das Netz speichert sein Wissen in Gewichten statt in einer Tabelle, behandelt ähnliche Wörter ähnlich (Wörter als Zahlen), nutzt viel längeren Kontext und wird wie das Neuron aus Doppellektion 3 trainiert, nur mit Milliarden Gewichten. Betont: Das ist mehr als Zählen. Es bleibt dabei: Das Modell prüft nicht, ob etwas wahr ist."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Beantworten Sie im Antwortfeld «Warum ist ein neuronales Sprachmodell mehr als reine Statistik? Welche Grenze bleibt?»: Was sagt die Papagei-Tabelle zu «Das Kätzchen verfolgt die …», was kann ein Netz tun, in dem Katze und Kätzchen ähnliche Zahlen haben?"
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Fasst zusammen: Sprachmodelle sagen das nächste Token im Kontext voraus und prüfen nicht automatisch, ob eine Aussage wahr ist."
+              "text": "Fasst zusammen: Sprachmodelle sagen das nächste Token im Kontext voraus und prüfen nicht automatisch, ob eine Aussage wahr ist. Ausblick auf Doppellektion 10: Wer trägt die Folgen?"
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein belegter Textvergleich und zwei Grenzen."
+              "text": "Ein belegter Textvergleich, zwei Grenzen und eine Begründung, warum neuronale Sprachmodelle mehr sind als reine Statistik."
             }
           ]
         }
       ],
-      "product": "Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells.",
+      "product": "Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells + Begründung, warum neuronale Sprachmodelle mehr sind als Statistik.",
       "motivation": "Chatbots schreiben Texte, die überzeugend klingen, und erfinden manchmal trotzdem Dinge. Wie kann das sein? Mit einem kleinen Modell sehen Sie selbst, wie aus Wahrscheinlichkeiten Sätze entstehen und warum plausibel nicht dasselbe ist wie wahr."
     },
     {
