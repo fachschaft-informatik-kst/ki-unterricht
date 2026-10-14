@@ -8,10 +8,9 @@ if(knowledgeCheck){
  knowledgeCheck.querySelector('.detail-body p').textContent='Ordnen Sie die Begriffe den passenden Rückmeldungen zu und begründen Sie jedes Paar. Dieser Check sichert das Gelernte; die Gruppenrunden mit Memory stehen darüber.';
 }
 const journalFields=all('[data-journal]');let answerFields=all('[data-answer]');
-let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=null,protocolSignature='',restorePending=false,files=new Map(),db=null;
-let others={},otherReady=false,otherRestoring=false;
-let filesStored=true,artifactStored=true;
-let saving=Promise.resolve(),snapshotTimer,projectStarted=false,projectReady=false;
+let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=null,protocolSignature='',files=new Map(),db=null;
+let others={},filesStored=true,artifactStored=true,notebookDirty=false,notebookRevision=0;
+let saving=Promise.resolve(),notebookUpdates=Promise.resolve(),fileUpdates=Promise.resolve(),artifactVersion=0,transferring=false;
 const pending=new Map();
 const saveSection=$('sicherung');
 saveSection.classList.add('project-transfer');
@@ -19,7 +18,7 @@ saveSection.querySelector('.section-label').textContent='Notizen & Projekt';
 saveSection.querySelector('h1').textContent='Alles herunterladen. Später weiterarbeiten.';
 saveSection.querySelector('.section-intro').textContent='Ein ZIP enthält Journal, Antworten, Projekt-Notebook mit Ausgaben, Protokoll, Ihre Eingaben in den Übungsnotebooks und hinzugefügte Dateien. Auf einem anderen Gerät laden Sie das ZIP hier wieder hoch.';
 saveSection.querySelector('.card h3').textContent='Dateien zum Projekt hinzufügen';
-saveSection.querySelector('.card .small').textContent='Fotostudio-JSON und Originalfotos hier hinzufügen, damit sie im gemeinsamen Projekt-Download enthalten sind.';
+saveSection.querySelector('.card .small').textContent='Im Notebook ausgewählte Dateien werden mitgesichert. Originalfotos und weitere Dateien hier hinzufügen. Eine Sammlung im Fotostudio zuerst herunterladen und hier hinzufügen.';
 $('download-submission').textContent='Abgabepaket herunterladen ↓';
 $('download-backup').textContent='Notizen & Projekt herunterladen ↓';
 saveSection.querySelector('label[for="restore-package"]').textContent='Notizen & Projekt wiederherstellen ↑';
@@ -115,6 +114,10 @@ language.querySelector('[data-answer="sprache"]').previousElementSibling.textCon
 const papageiLink=language.querySelector('#sprache-7 a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke"]');
 if(papageiLink){const materials=papageiLink.closest('details');papageiLink.remove();setChapterTitle(materials,'Papierexperiment von inf-schule');}
 const status=(message,error=false)=>{$('portal-save-status').textContent=message;$('portal-save-status').classList.toggle('save-error',error);};
+function checkNotebook(nb){
+ if(nb?.nbformat!==4||!Array.isArray(nb.cells)||nb.cells.filter(c=>!c.metadata?.['ki-journal-export']).length>200||JSON.stringify(nb).length>50000000||nb.cells.some(c=>!['code','markdown','raw'].includes(c.cell_type)))throw Error('Ungültiges oder zu grosses Notebook.');
+ return nb;
+}
 const cleanState=raw=>{
  if(raw?.schema!==SCHEMA)throw Error('Keine gültige Kurssicherung.');
  const result={schema:SCHEMA,journal:{},answers:{},files:[]};
@@ -136,9 +139,11 @@ function transaction(store,mode,action){
 }
 function read(store,key){return new Promise((resolve,reject)=>{const q=db.transaction(store).objectStore(store).get(key);q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);});}
 function persistArtifacts(){
- clearTimeout(snapshotTimer);snapshotTimer=setTimeout(()=>{
-    saving=transaction('artifacts','readwrite',s=>s.put({notebook,protocol,protocolSignature,restorePending,others},'project')).catch(()=>{artifactStored=false;status('Versuch nur vorübergehend verfügbar – Notizen & Projekt herunterladen.',true);});
- },400);
+ const version=++artifactVersion,payload={notebook,protocol,protocolSignature,others};artifactStored=false;
+ saving=saving.then(()=>transaction('artifacts','readwrite',s=>s.put(payload,'project'))).then(()=>{
+  if(version===artifactVersion){artifactStored=true;status(notebookDirty?'Notebook wird gesichert …':'Notizen und Notebooks in diesem Browser gespeichert.');}
+ }).catch(()=>{artifactStored=false;status('Notebook nur vorübergehend verfügbar – Notizen & Projekt herunterladen.',true);});
+ return saving;
 }
 function signature(nb){return JSON.stringify(nb?.cells?.filter(c=>c.cell_type==='code').slice(1).map(c=>({source:c.source,outputs:c.outputs}))||[]);}
 function capture(nb,newProtocol=undefined){
@@ -149,15 +154,32 @@ function capture(nb,newProtocol=undefined){
  if(newProtocol){protocol=newProtocol;protocolSignature=nextSignature;}
  persistArtifacts();updateChecks();
 }
-// Widget-Ansichten ohne Modell würden nach dem Wiederherstellen als Fehler erscheinen.
-function withoutWidgets(nb){
- const copy=structuredClone(nb);if(copy.metadata)delete copy.metadata.widgets;
- for(const c of copy.cells)if(Array.isArray(c.outputs))c.outputs=c.outputs.filter(o=>!o.data?.['application/vnd.jupyter.widget-view+json']);
- return copy;
-}
 function captureOther(name,nb){
- if(!names[name]||name===projectName||!nb||nb.nbformat!==4||!Array.isArray(nb.cells)||nb.cells.length>100)return;
- others[name]=withoutWidgets(nb);persistArtifacts();
+ if(!names[name]||name===projectName||!nb||nb.nbformat!==4||!Array.isArray(nb.cells))return;
+ others[name]=nb;persistArtifacts();
+}
+function archiveName(f){return 'daten/'+f.id+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_').replace(/\.{2,}/g,'_');}
+async function rememberFiles(selected){
+ for(const f of selected){
+  if(!f.name||f.name.length>300)throw Error('Ungültiger Dateiname.');
+  const bytes=await f.arrayBuffer(),hash=await crypto.subtle.digest('SHA-256',await new Blob([f.name,'\0',bytes]).arrayBuffer());
+  const id=Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('');
+  if(files.has(id))continue;
+  if([...files.values()].reduce((s,b)=>s+b.size,0)+f.size>500*1024*1024||state.files.length>=200)throw Error('Maximal 500 MB und 200 Dateien pro Paket.');
+  files.set(id,f);state.files.push({id,name:f.name,type:f.type});
+  await transaction('files','readwrite',s=>s.put(f,id)).catch(()=>{filesStored=false;});
+ }
+ saveText();renderFiles();
+}
+async function captureSnapshot(name,data){
+ if(data.files?.length){
+  const selected=data.files.map(f=>new File([Uint8Array.from(atob(f.content),c=>c.charCodeAt(0))],f.name,{type:f.type}));
+  fileUpdates=fileUpdates.catch(()=>{}).then(()=>rememberFiles(selected));await fileUpdates;
+ }
+ if((data.revision||0)>=notebookRevision)notebookDirty=false;
+ if(name===projectName)capture(data.notebook,data.protocol);else captureOther(name,data.notebook);
+ if(data.protocolError)status('Notebook gespeichert; Protokoll noch unvollständig: '+data.protocolError,true);
+ await saving;
 }
 function render(){
  journalFields.forEach(e=>e.value=state.journal[e.dataset.journal]||'');
@@ -187,12 +209,13 @@ function updateChecks(){
 }
 const initialization=(async()=>{
  try{const raw=localStorage.getItem(KEY);if(raw)state=cleanState(JSON.parse(raw));else{const old=window.KIProgress?.get();if(old){state.journal.purpose=old.notes?.topic||old.topic||'';state.journal.groups=old.notes?.data||'';state.journal.hypothesis=old.notes?.question||'';}}}catch{status('Gespeicherter Text konnte nicht geladen werden. Projektstand hochladen.',true);}
+ render();
  try{
   db=await new Promise((resolve,reject)=>{const q=indexedDB.open('kst-ki-kursportal',1);q.onupgradeneeded=()=>{q.result.createObjectStore('files');q.result.createObjectStore('artifacts');};q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);q.onblocked=()=>reject(Error('Browserspeicher blockiert'));});
-  const artifact=await read('artifacts','project');if(artifact){notebook=artifact.notebook;protocol=artifact.protocol;protocolSignature=artifact.protocolSignature||'';restorePending=!!artifact.restorePending;if(artifact.others&&typeof artifact.others==='object')others=artifact.others;}
+  const artifact=await read('artifacts','project');if(artifact){notebook=artifact.notebook;protocol=artifact.protocol;protocolSignature=artifact.protocolSignature||'';if(artifact.others&&typeof artifact.others==='object')others=artifact.others;}
   for(const f of state.files){const b=await read('files',f.id);if(b)files.set(f.id,b);}
  }catch{filesStored=false;status('Dateien werden nicht dauerhaft gespeichert. Notizen & Projekt herunterladen.',true);}
- render();
+ renderFiles();updateChecks();
 })();
 for(const e of journalFields)e.addEventListener('input',()=>{state.journal[e.dataset.journal]=e.value;saveText();});
 for(const e of answerFields)e.addEventListener('input',()=>{state.answers[e.dataset.answer]=e.value;saveText();});
@@ -203,32 +226,35 @@ $('attachments').addEventListener('change',async e=>{
  try{
     for(const f of selected){if(!/\.(json|zip|jpe?g|png|webp)$/i.test(f.name))throw Error('Bitte nur Fotodaten oder Foto-ZIP hinzufügen.');total+=f.size;}
   if(total>500*1024*1024 || state.files.length+selected.length>200)throw Error('Maximal 500 MB und 200 Dateien pro Paket. Fotos bei Bedarf vorher verkleinern.');
-    for(const f of selected){const id=crypto.randomUUID();files.set(id,f);state.files.push({id,name:f.name,type:f.type});await transaction('files','readwrite',s=>s.put(f,id)).catch(()=>{filesStored=false;status('Dateien nur vorübergehend verfügbar – Notizen & Projekt herunterladen.',true);});}
-  saveText();renderFiles();
+  fileUpdates=fileUpdates.catch(()=>{}).then(()=>rememberFiles(selected));await fileUpdates;
  }catch(error){$('download-status').textContent=error.message;}finally{e.target.value='';}
 });
 // One fixed iframe, one standard Jupyter session at a time. No live state is moved.
 const names={'perzeptron_und_neuronale_netze.ipynb':'Ein Neuron','mehrschichtige_netze.ipynb':'XOR-Netz','daten_training.ipynb':'Datenaufteilung','ki_lernlabor.ipynb':'Projekt-Lernlabor','ki_tandemprojekt.ipynb':'Unser Versuch'};
 const frame=$('project-frame'),lab=$('project-lab'),projectName='ki_tandemprojekt.ipynb';
-let activeName='',activeOwner='',switching=false;
-// Never move an already loaded iframe: navigation only changes visibility or its URL.
+let activeName='',activeOwner='',switching=false,initializingFrame=false;
+// Never move an already loaded iframe. Saved documents are the source of truth;
+// every new frame has a fresh Python kernel, including after a page reload.
 document.querySelector('main > .footer').before(lab);$('lesson-lab').remove();
-function request(frame,type,extra={}){return new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet noch nicht. Warten und erneut versuchen.'));},type==='restore'?120000:30000);pending.set(id,{resolve,reject,timer,source:frame.contentWindow});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
+function request(frame,type,extra={}){return new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet noch nicht. Warten und erneut versuchen.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer,source:frame.contentWindow});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
 function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!activeName||!view||view.classList.contains('view-hidden');}
+async function snapshotCurrent(){
+ await notebookUpdates;
+ if(!activeName)return;
+ if(frame.dataset.ready!=='yes')throw Error('Das Notebook ist noch nicht bereit. Bitte warten oder erneut öffnen.');
+ await captureSnapshot(activeName,await request(frame,'snapshot'));
+}
 async function showNotebook(name,owner,scroll=true){
- if(!names[name]||switching)return;
+ if(!names[name]||switching||transferring)return;
  switching=true;
  try{
+  await initialization;
   if(name!==activeName||frame.dataset.ready==='error'){
-   if(activeName&&frame.dataset.ready!=='error'){
-    if(frame.dataset.ready!=='yes')throw Error('Der aktuelle Versuch startet noch. Danach erneut öffnen.');
-    const saved=await request(frame,'snapshot');
-    if(activeName===projectName)capture(saved.notebook,saved.protocol);else captureOther(activeName,saved.notebook);
-   }
-   activeName=name;projectStarted=name===projectName;projectReady=false;otherReady=false;otherRestoring=false;
-   frame.dataset.ready='no';delete frame.dataset.restored;
-   $('project-lab-status').textContent='Python startet …';
-   frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset';
+   if(activeName&&frame.dataset.ready!=='error')await snapshotCurrent();
+   activeName=name;initializingFrame=false;notebookRevision=0;notebookDirty=false;frame.dataset.ready='no';delete frame.dataset.restored;
+   const saved=name===projectName?notebook:others[name];
+   $('project-lab-status').textContent=saved?'Gesichertes Notebook wird geöffnet …':'Python startet …';
+   frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
   }
   activeOwner=owner;visibility();$('project-lab-title').textContent=names[name];
   lab.querySelector('details').hidden=name!==projectName;
@@ -242,29 +268,33 @@ $('start-studio').addEventListener('click',()=>{const frame=$('studio-frame');$(
 all('[data-lab]').forEach(b=>b.addEventListener('click',()=>showNotebook(b.dataset.lab,b.closest('main > section')?.id||'projekt')));
 window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false);});
 all('[data-fullscreen]').forEach(b=>b.addEventListener('click',()=>{const node=$(b.dataset.fullscreen).closest('.lab-panel');if(node.requestFullscreen)node.requestFullscreen();}));
+window.addEventListener('beforeunload',event=>{
+ if(notebookDirty||!artifactStored||!filesStored||transferring){event.preventDefault();event.returnValue='Änderungen sind noch nicht vollständig gesichert.';}
+});
 window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1')return;
- const data=event.data;
- if(data.path!=='portal/'+activeName)return;
- if(data.id&&pending.has(data.id)){const p=pending.get(data.id);clearTimeout(p.timer);pending.delete(data.id);data.type==='error'?p.reject(Error(data.error)):p.resolve(data);}
- if(data.type==='ready'){
-  frame.dataset.ready=data.error?'error':(data.ready?'yes':'no');frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';
-  $('project-lab-status').textContent=data.error||(data.ready?'Bereit · gespeicherte Ausgaben bleiben sichtbar; Daten bei Bedarf erneut laden.':'Python startet …');
-  if(projectStarted&&data.ready&&!projectReady){
-   projectReady=true;await initialization;
-   try{
-    if(restorePending&&notebook){await request(frame,'restore',{notebook});restorePending=false;frame.dataset.restored='yes';persistArtifacts();$('project-lab-status').textContent='Projektstand geladen. Erste Codezelle und Datenimport erneut ausführen.';}
-    else capture(data.notebook);
-   }catch(error){frame.dataset.ready='error';projectReady=false;$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';}
-  }
-  if(!projectStarted&&data.ready&&!otherReady&&!otherRestoring){
-   otherRestoring=true;await initialization;
-   try{if(others[activeName])await request(frame,'restore',{notebook:others[activeName],keepKernel:true});}catch{/* Das Originalnotebook bleibt sichtbar. */}
-   otherRestoring=false;otherReady=true;
-  }
+ const data=event.data,name=activeName;
+ if(data.path!=='portal/'+name)return;
+ if(data.id&&pending.has(data.id)){const p=pending.get(data.id);clearTimeout(p.timer);pending.delete(data.id);data.type==='error'?p.reject(Error(data.error)):p.resolve(data);return;}
+ if(data.type==='ready'&&!initializingFrame&&frame.dataset.ready!=='yes'){
+  if(data.error){frame.dataset.ready='error';$('project-lab-status').textContent=data.error;return;}
+  if(!data.ready)return;
+  initializingFrame=true;
+  try{
+   await initialization;
+   const saved=name===projectName?notebook:others[name];
+   if(saved){await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
+   else await captureSnapshot(name,await request(frame,'snapshot'));
+   frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';
+   $('project-lab-status').textContent=saved?'Gesicherte Eingaben und Ergebnisse geladen. Vorbereitung und gewünschte Zellen erneut ausführen.':'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
+  }catch(error){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';}
+  finally{initializingFrame=false;}
  }
- if(projectStarted&&data.type==='changed'&&!restorePending)capture(data.notebook);
- if(!projectStarted&&otherReady&&data.type==='changed')captureOther(activeName,data.notebook);
+ if(data.type==='dirty'){notebookRevision=Math.max(notebookRevision,data.revision||0);notebookDirty=true;status('Notebook wird gesichert …');}
+ if(data.type==='save-error'){notebookDirty=true;status('Notebook noch nicht gesichert: '+data.error,true);}
+ if(data.type==='changed'&&frame.dataset.ready==='yes'&&!transferring){
+  notebookUpdates=notebookUpdates.then(()=>captureSnapshot(name,data)).catch(error=>{notebookDirty=true;status('Notebook noch nicht vollständig gesichert: '+error.message,true);});
+ }
 });
 function notebookForExport(){
  if(!notebook)return null;
@@ -286,47 +316,65 @@ function journalHTML(){
 function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}
 async function pack(submission){
  await initialization;
+ if(transferring||switching)return;
+ transferring=true;
  const button=$(submission?'download-submission':'download-backup');button.disabled=true;$('download-status').textContent='Paket wird vorbereitet …';
  try{
-  if(projectStarted){if(restorePending)throw Error('Der Projektstand wird noch geladen. Bitte warten.');if(!projectReady)throw Error('Der Versuch startet noch. Bitte warten.');const result=await request($('project-frame'),'snapshot');capture(result.notebook,result.protocol);}
-  else if(activeName&&otherReady&&frame.dataset.ready==='yes'){const result=await request(frame,'snapshot');captureOther(activeName,result.notebook);}
+  await snapshotCurrent();await fileUpdates;await saving;
   if(state.files.some(f=>!files.has(f.id)))throw Error('Einige Datendateien fehlen. Bitte erneut hinzufügen.');
   const absent=missing();if(submission&&absent.length&&!confirm('Noch unvollständig: '+absent.join(', ')+'. Trotzdem diesen Stand herunterladen?'))return;
-  const snapshot={...state,exported:new Date().toISOString(),progress:window.KIProgress?.get(),protocol,protocolSignature};
-    const entries=[{name:'kursstand.json',data:JSON.stringify(snapshot,null,2)},{name:'Journal.html',data:journalHTML()},{name:'LESEN.txt',data:'Journal.html im Browser öffnen: Antworten und Versuchsausgaben.\nversuch.ipynb enthält den Code und die Ausgaben.\nDie ZIP-Datei kann auf der Kursseite als Projektstand wiederhergestellt werden.\nOriginale und Fotostudio-JSON liegen im Ordner daten.\nIm Ordner notebooks liegen Ihre Eingaben in den Übungsnotebooks.\nFür eine lokale Wiederholung: Python 3.12, numpy, scipy, scikit-learn, matplotlib, pillow, ipywidgets; Notebook-Zellen der Reihe nach ausführen und Fotostudio-JSON auswählen.\nDer Download ist keine automatische Einreichung.\n'}];
-  const nb=notebookForExport();if(nb)entries.push({name:'versuch.ipynb',data:JSON.stringify(nb,null,1)});
+  const savedNames=Object.keys(others).filter(name=>names[name]&&name!==projectName);
+  const snapshot={...state,exported:new Date().toISOString(),progress:window.KIProgress?.get(),protocol,protocolSignature,notebooks:[...(notebook?['versuch.ipynb']:[]),...savedNames.map(name=>'notebooks/'+name)]};
+    const entries=[{name:'kursstand.json',data:JSON.stringify(snapshot,null,2)},{name:'Journal.html',data:journalHTML()},{name:'LESEN.txt',data:'Journal.html enthält das Projektjournal und Versuchsausgaben.\nkursstand.json enthält auch Unterrichtsantworten, Häkchen und Selbsteinschätzungen.\nversuch.ipynb und notebooks/ enthalten bearbeitete Notebooks mit Code, Markdown, eingebetteten Bildern und Ausgaben. Widget-Werte und Diagramme sind als lesbarer Stand gesichert.\nDie ZIP-Datei kann auf der Kursseite als Projektstand wiederhergestellt werden.\nHinzugefügte Dateien und im Notebook ausgewählte Uploads liegen unter daten/.\nOriginalfotos und eine noch offene Fotostudio-Sammlung müssen zusätzlich unter «Notizen & Projekt» hinzugefügt werden.\nPython-Variablen und trainierte Modelle im Arbeitsspeicher sind nicht gespeichert. Nach Wiederherstellung Vorbereitung, Datenimport und benötigte Berechnungen erneut ausführen.\nFür eine lokale Wiederholung: Python 3.12, numpy, scipy, scikit-learn, matplotlib, pillow, ipywidgets; Notebook-Zellen der Reihe nach ausführen und Fotostudio-JSON aus daten/ auswählen.\nDer Download ist keine automatische Einreichung.\n'}];
+  const nb=notebookForExport();if(nb)entries.push({name:'versuch.ipynb',data:JSON.stringify(checkNotebook(nb),null,1)});
   if(protocol)entries.push({name:'Versuchsprotokoll.json',data:JSON.stringify(protocol,null,2)});
-  for(const [name,nb] of Object.entries(others))if(names[name]&&name!==projectName)entries.push({name:'notebooks/'+name,data:JSON.stringify(nb,null,1)});
-  for(const f of state.files)entries.push({name:'daten/'+f.id+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_'),data:files.get(f.id)});
-  if(nb){for(const file of ['ki_foto_tools.py','ki_projekt_tools.py','foto_uebungsdaten.json']){const r=await fetch('runtime/'+file);if(!r.ok)throw Error('Hilfsdateien konnten nicht geladen werden. Internetverbindung prüfen.');entries.push({name:'ki_projekt/'+file,data:await r.blob()});}}
-    const blob=await makeZip(entries);download(blob,(submission?'KI-Abgabe':'KI-Projektstand')+'-'+new Date().toISOString().slice(0,10)+'.zip');$('download-status').textContent=submission?'Abgabepaket heruntergeladen. '+(absent.length?'Noch offen: '+absent.join(' · '):'Vor dem Einreichen das Journal kurz prüfen.'):'Notizen und Projekt heruntergeladen. Das ZIP enthält Ihren vollständigen Projektstand.';
- }catch(error){$('download-status').textContent='Download nicht erstellt: '+error.message;}finally{button.disabled=false;}
+  for(const name of savedNames)entries.push({name:'notebooks/'+name,data:JSON.stringify(checkNotebook(others[name]),null,1)});
+  for(const f of state.files)entries.push({name:archiveName(f),data:files.get(f.id)});
+  if(nb||savedNames.length){for(const file of ['ki_foto_tools.py','ki_projekt_tools.py','foto_uebungsdaten.json','unterricht_tools.py']){
+   const r=await fetch('runtime/'+file);if(!r.ok)throw Error('Hilfsdateien konnten nicht geladen werden. Internetverbindung prüfen.');
+   const data=await r.blob(),name=file==='unterricht_tools.py'?file:'ki_projekt/'+file;
+   entries.push({name,data});if(savedNames.length)entries.push({name:'notebooks/'+name,data});
+  }}
+  const blob=await makeZip(entries);if(blob.size>550*1024*1024)throw Error('Das ZIP ist zu gross zum Wiederherstellen (maximal 550 MB).');
+  download(blob,(submission?'KI-Abgabe':'KI-Projektstand')+'-'+new Date().toISOString().slice(0,10)+'.zip');$('download-status').textContent=submission?'Abgabepaket heruntergeladen. '+(absent.length?'Noch offen: '+absent.join(' · '):'Vor dem Einreichen das Journal kurz prüfen.'):'Notizen, gespeicherte Notebooks und hinzugefügte Dateien heruntergeladen.';
+ }catch(error){$('download-status').textContent='Download nicht erstellt: '+error.message;}finally{button.disabled=false;transferring=false;}
 }
 $('download-submission').addEventListener('click',()=>pack(true));$('download-backup').addEventListener('click',()=>pack(false));
 $('restore-package').addEventListener('change',async e=>{
  await initialization;const file=e.target.files[0];if(!file)return;
+ if(transferring||switching){e.target.value='';return;}transferring=true;
  try{
+  await notebookUpdates;await saving;await fileUpdates;
   const unpacked=await readZip(file),raw=JSON.parse(await unpacked.get('kursstand.json').text()),next=cleanState(raw),nextFiles=new Map();
   if(raw.progress && raw.progress.schema!=='ki-projekt-seitenstand-v1')throw Error('Ungültiger Projekt-Seitenstand.');
+  if(raw.notebooks!==undefined&&(!Array.isArray(raw.notebooks)||raw.notebooks.some(name=>typeof name!=='string'||!unpacked.has(name))))throw Error('Ein gesichertes Notebook fehlt im ZIP.');
   let nextNotebook=null;
-  if(unpacked.has('versuch.ipynb')){nextNotebook=JSON.parse(await unpacked.get('versuch.ipynb').text());if(nextNotebook.nbformat!==4||!Array.isArray(nextNotebook.cells)||nextNotebook.cells.length>100)throw Error('Ungültiges Notebook.');nextNotebook.cells=nextNotebook.cells.filter(c=>!c.metadata?.['ki-journal-export']);}
+  if(unpacked.has('versuch.ipynb')){nextNotebook=checkNotebook(JSON.parse(await unpacked.get('versuch.ipynb').text()));nextNotebook.cells=nextNotebook.cells.filter(c=>!c.metadata?.['ki-journal-export']);}
   const nextOthers={};
   for(const name of Object.keys(names)){
    if(name===projectName||!unpacked.has('notebooks/'+name))continue;
    const nb=JSON.parse(await unpacked.get('notebooks/'+name).text());
-   if(nb.nbformat!==4||!Array.isArray(nb.cells)||nb.cells.length>100)throw Error('Ungültiges Notebook: '+names[name]);
-   nextOthers[name]=withoutWidgets(nb);
+   nextOthers[name]=checkNotebook(nb);
   }
-  for(const f of next.files){const name='daten/'+f.id+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');if(!unpacked.has(name))throw Error('Datendatei fehlt: '+f.name);nextFiles.set(f.id,unpacked.get(name));}
+  for(const f of next.files){const name=archiveName(f);if(!unpacked.has(name))throw Error('Datendatei fehlt: '+f.name);nextFiles.set(f.id,new Blob([unpacked.get(name)],{type:f.type}));}
     if(!confirm('Aktuelle Notizen, Versuch und Dateien durch diesen Projektstand ersetzen? Ungesicherte Änderungen gehen verloren.'))return;
-  if(projectStarted && nextNotebook){if(!projectReady)throw Error('Bitte warten, bis der Versuch gestartet ist.');await request($('project-frame'),'restore',{notebook:nextNotebook});$('project-frame').dataset.restored='yes';}
-  if(!projectStarted&&activeName&&otherReady&&nextOthers[activeName])await request(frame,'restore',{notebook:nextOthers[activeName],keepKernel:true});
-  others=nextOthers;
-  await transaction('files','readwrite',s=>{s.clear();for(const [id,blob] of nextFiles)s.put(blob,id);}).catch(()=>{filesStored=false;status('Import nur für diese Sitzung. Notizen & Projekt herunterladen.',true);});
-  state=next;files=nextFiles;notebook=nextNotebook;protocol=raw.protocol||null;protocolSignature=raw.protocolSignature||'';restorePending=!!nextNotebook&&!projectStarted;
-  if(raw.progress)window.KIProgress?.restore(raw.progress);
-    render();saveText();persistArtifacts();$('download-status').textContent='Projektstand wiederhergestellt. Erste Codezelle und Datenimport erneut ausführen. Gespeicherte Ausgaben bleiben sichtbar; kein Code wurde automatisch ausgeführt.';
- }catch(error){$('download-status').textContent='Import fehlgeschlagen: '+error.message;}finally{e.target.value='';}
+  // Close the old document first, even if the imported ZIP contains no notebook.
+  // Its late events must never resurrect a previous tandem's work.
+  frame.src='about:blank';activeName='';activeOwner='';initializingFrame=false;frame.dataset.ready='no';notebookDirty=false;visibility();
+  const nextArtifact={notebook:nextNotebook,others:nextOthers,protocol:raw.protocol||null,protocolSignature:raw.protocolSignature||''};
+  try{
+   if(!db)throw Error('Browserspeicher nicht verfügbar');
+   await new Promise((resolve,reject)=>{
+    const tx=db.transaction(['files','artifacts'],'readwrite'),store=tx.objectStore('files');
+    store.clear();for(const [id,blob] of nextFiles)store.put(blob,id);
+    tx.objectStore('artifacts').put(nextArtifact,'project');
+    tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);
+   });filesStored=true;artifactStored=true;
+  }catch{filesStored=false;artifactStored=false;}
+  state=next;files=nextFiles;notebook=nextNotebook;others=nextOthers;protocol=nextArtifact.protocol;protocolSignature=nextArtifact.protocolSignature;
+  window.KIProgress?.restore(raw.progress||{schema:'ki-projekt-seitenstand-v1'});
+    render();saveText();$('download-status').textContent=filesStored&&artifactStored?'Projektstand wiederhergestellt. Notebook über die Kursseite öffnen; Vorbereitung und Datenimport erneut ausführen. Gespeicherte Ausgaben bleiben sichtbar; kein Code wurde automatisch ausgeführt.':'Projektstand wiederhergestellt, aber nur für diese Sitzung. Browserspeicher nicht verfügbar; ZIP ausserhalb des Browsers aufbewahren.';
+ }catch(error){$('download-status').textContent='Import fehlgeschlagen: '+error.message;}finally{e.target.value='';transferring=false;}
 });
 // A small matching activity, deliberately separate from the assessed project.
 const pairs=[['Überwachtes Lernen','Beispiele mit richtiger Antwort'],['Unüberwachtes Lernen','Gruppen ohne vorgegebene Antworten'],['Verstärkendes Lernen','Erfolg oder Misserfolg nach Handlungen']];
