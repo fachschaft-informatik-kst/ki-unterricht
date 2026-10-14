@@ -72,6 +72,22 @@ def main():
     w,b=u.iris_neuron();assert w.shape==(2,)
     assert u.xor_lernen(1).score(u._EINGABEN,u._ZIELE['XOR'])<1 and u.xor_lernen(4).score(u._EINGABEN,u._ZIELE['XOR'])==1
     rejects(lambda:u.xor_lernen(0))
+    # Neuron-Doppellektion: Alltagsneuron, Lernen per Klick, XOR-Widerspruch.
+    ziel=[u._alltag_ziel(s,f,p) for s in (0,1) for f in (0,1) for p in (0,1)]
+    assert list(u.alltagsneuron(1,1,-3,-.5))==ziel and list(u.alltagsneuron())!=ziel
+    for aufgabe in ('AND','OR','NAND','NOR'):
+        l=u._Lerner(aufgabe)
+        while l.schritt():pass
+        assert l.fertig and np.all((u._EINGABEN@l.w+l.b>=0)==np.array(u._ZIELE[aufgabe]))
+    l=u._Lerner('XOR')
+    while l.schritt():pass
+    assert l.abgebrochen and not l.fertig
+    l=u._Lerner('AND',.2);erste=[l.schritt() for _ in range(4)][3]
+    assert erste['fehler']==1 and np.allclose(erste['w_neu'],[.4,.4]) and abs(erste['b_neu']+.3)<1e-9
+    assert isinstance(u.lernen_klick(),u._Lerner);u.xor_problem();assert u.xor_versuch(1,1,-.5)<4
+    z=u.xor_suche();assert z['AND'][4]>0 and z['XOR'][4]==0 and z['XOR'][3]>0
+    for regler in (u.regler_alltag,u.neuron_rechner,u.lernen_regler,u.iris_regler,u.regler_xor):regler()
+    u.frage('Test',['a','b'],0,'ok');rejects(lambda:u.frage('Test',['a'],2,'x'))
     foto.gruppen_zeigen(d);foto.bild_durchs_netz(exp,'B',0);foto.vorhersagen_zeigen(exp,'A')
     rejects(lambda:foto.bild_durchs_netz(exp,'B',99))
     print('PASS basis: XOR, 80-photo import, equal samples, group separation, final gate and optional repeats')

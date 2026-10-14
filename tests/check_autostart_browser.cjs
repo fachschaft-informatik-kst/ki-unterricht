@@ -32,10 +32,12 @@ async function reveal(page, selector) {
         await page.waitForFunction(() => [...document.querySelectorAll('.ki-autostart-status')].some(e=>e.textContent.includes('Bereit') || e.textContent.includes('fehlgeschlagen')), null, {timeout:180000}).catch(async error=>{console.error(await page.locator('body').innerText());throw error;});
         assert.equal(await page.locator('.ki-autostart-status').textContent(), '✓ Bereit', await page.locator('body').innerText());
         if (name.startsWith('perzeptron')) {
-          await reveal(page, '.widget-dropdown select');
-          await page.locator('.widget-dropdown select').selectOption({label:'XOR'});
+          // Dropdown des Reglers «Ein Neuron von Hand einstellen» (nur dieser bietet XOR im interact an).
+          const aufgabe = '.widget-interact .widget-dropdown select:has(option:text-is("XOR"))';
+          await reveal(page, aufgabe);
+          await page.locator(aufgabe).selectOption({label:'XOR'});
           await page.waitForTimeout(500);
-          assert.equal(await page.locator('.widget-dropdown select').inputValue(),'XOR');
+          assert.equal(await page.locator(aufgabe).inputValue(),'XOR');
           await page.locator('.widget-output').filter({hasText:'→ 1 (0)'}).first().waitFor({state:'visible'});
         } else {
           const body=await page.locator('body').innerText();

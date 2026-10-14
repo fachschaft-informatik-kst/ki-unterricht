@@ -31,7 +31,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_programmierung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_einteilung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg .timeline li').count(),9);
-    for(const [id,n] of Object.entries({einstieg:5,lernarten:9,perzeptron:4,netze:4,sprache:7,gesellschaft:3,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
+    for(const [id,n] of Object.entries({einstieg:5,lernarten:9,perzeptron:7,netze:4,sprache:7,gesellschaft:3,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
     assert.equal(await p.locator('.nav-sub a').count(),5);
     assert.equal(await p.locator('#einstieg .kapitel-karte').count(),5);
     await p.locator('#einstieg-3 > summary').click();await p.locator('#einstieg .kapitel-karte').nth(2).click();await p.waitForFunction(()=>document.getElementById('einstieg-3').open);

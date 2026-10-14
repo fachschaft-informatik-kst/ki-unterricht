@@ -7,6 +7,7 @@ import ipywidgets as widgets
 from IPython.display import display
 
 FARBEN = ['#176c63', '#be572b']
+FARBEN_HELL = ['#d7ebe3', '#f3dfd3']
 
 def _punkte(ax, X, y):
     for c, (farbe, marker) in enumerate(zip(FARBEN, ['o', '^'])):
@@ -157,6 +158,11 @@ def perzeptron_lernen(aufgabe='AND', lernrate=.2, runden=10, start=(.2, .2, -.5)
     plt.tight_layout(); plt.show()
     if fehler[-1] == 0:
         print(f'Nach {len(fehler) - 1} Korrekturrunde(n) stimmen alle vier Zeilen. Endwerte: Gewichte {w[0]:g} / {w[1]:g}, Bias {b:g}.')
+        print(f'Gelernt hat das Neuron nur diese drei Zahlen: w₁ {start[0]:g} → {w[0]:g}, w₂ {start[1]:g} → {w[1]:g}, b {start[2]:g} → {b:g}.')
+        print('So entscheidet es jetzt: Summe = x₁·w₁ + x₂·w₂ + b, ab Summe 0 ist die Ausgabe 1.')
+        for x, t in zip(X, y):
+            summe = float(x @ w + b)
+            print(f'  {_t(x)} → {summe:+.2f} → Ausgabe {int(summe >= 0)} (Ziel {t})')
     else:
         print(f'Auch nach {runden} Runden sind noch Zeilen falsch. Das Neuron korrigiert immer weiter, ohne anzukommen:')
         print('Für diese Aufgabe gibt es keine Gerade, die die Klassen trennt.' if aufgabe == 'XOR' else 'Mehr Runden oder eine andere Lernrate probieren.')
@@ -240,6 +246,253 @@ def lernschritt():
     print(f'Nachher: Gewichte {neu[0]:.1f} / {neu[1]:.1f}, Bias {neuer_bias:.1f}.')
     print(f'Neue Summe {neu@x+neuer_bias:.1f} → Ausgabe {int(neu@x+neuer_bias>=0)}.')
     print('Ein korrigiertes Beispiel bedeutet noch nicht, dass alle Beispiele richtig sind.')
+
+
+_ALLTAG = ['Sonne scheint', 'Freund:innen gehen mit', 'Prüfung morgen']
+
+
+def _alltag_ziel(s, f, p):
+    return int((s or f) and not p)
+
+
+def alltagsneuron(sonne=1., freunde=1., pruefung=-1., bias=-1.5):
+    """Ein Neuron als Entscheider: Gehe ich schwimmen? Die Gewichte sagen, wie wichtig jeder Faktor ist."""
+    zeilen = [(s, f, p) for s in (0, 1) for f in (0, 1) for p in (0, 1)]
+    summen = [s * sonne + f * freunde + p * pruefung + bias for s, f, p in zeilen]
+    pred = [int(v >= 0) for v in summen]; ziel = [_alltag_ziel(*z) for z in zeilen]
+    fig, ax = plt.subplots(figsize=(9, 3.6))
+    farben = [('#176c63' if p else '#8d9aa0') for p in pred]
+    ax.bar(range(8), summen, color=farben, edgecolor=['#263b43' if p == t else '#be572b' for p, t in zip(pred, ziel)], linewidth=[1 if p == t else 3 for p, t in zip(pred, ziel)])
+    ax.axhline(0, color='#263b43', lw=1.5)
+    ax.set_xticks(range(8)); ax.set_xticklabels([f'S={s} F={f} P={p}' for s, f, p in zeilen], fontsize=8)
+    ax.set(ylabel='Summe inkl. Bias', title='Grün: Neuron sagt «Ja, schwimmen». Roter Rand: weicht von Ihrer Regel ab.')
+    plt.tight_layout(); plt.show()
+    print('Regel (Ziel): Ich gehe schwimmen, wenn die Sonne scheint oder Freund:innen mitkommen, aber nie am Tag vor einer Prüfung.')
+    print('S = Sonne, F = Freund:innen, P = Prüfung (1 = ja, 0 = nein)  ·  Summe = S·w_S + F·w_F + P·w_P + Bias, ab 0: Ja')
+    for (s, f, p), v, a_, t in zip(zeilen, summen, pred, ziel):
+        print(f'S={s} F={f} P={p} → {v:+.1f} → {"Ja" if a_ else "Nein"} (Ziel: {"Ja" if t else "Nein"}) ' + ('✓' if a_ == t else '✗'))
+    richtig = sum(a_ == t for a_, t in zip(pred, ziel))
+    print(f'{richtig} von 8 Situationen stimmen.' + (' Das Neuron trifft Ihre Entscheidung in jeder Situation.' if richtig == 8 else ''))
+    return pred
+
+
+def regler_alltag():
+    gewicht = lambda name, wert: widgets.FloatSlider(value=wert, min=-5, max=5, step=.5, description=name, style={'description_width': '120px'}, layout=widgets.Layout(width='420px'))
+    return widgets.interact(alltagsneuron, sonne=gewicht('Gewicht Sonne', 1), freunde=gewicht('Gewicht Freund:innen', 1),
+                            pruefung=gewicht('Gewicht Prüfung', -1), bias=gewicht('Bias', -1.5))
+
+
+def neuron_rechner():
+    def lauf(x1, x2, w1, w2, bias):
+        neuron_zeigen(x1, x2, w1, w2, bias)
+        perzeptron(w1, w2, bias)
+    return widgets.interact(lauf,
+        x1=widgets.Dropdown(options=[0, 1], value=1, description='Eingabe 1'),
+        x2=widgets.Dropdown(options=[0, 1], value=0, description='Eingabe 2'),
+        w1=widgets.FloatSlider(value=1, min=-2, max=2, step=.5, description='Gewicht 1'),
+        w2=widgets.FloatSlider(value=1, min=-2, max=2, step=.5, description='Gewicht 2'),
+        bias=widgets.FloatSlider(value=-1.5, min=-3, max=2, step=.5, description='Bias'))
+
+
+def frage(text, optionen, richtig, erklaerung):
+    """Selbstcheck mit sofortiger Rückmeldung: Antwort anklicken."""
+    import html
+    optionen = list(optionen)
+    if not 0 <= richtig < len(optionen): raise ValueError('richtig: Index einer Antwortmöglichkeit.')
+    auswahl = widgets.RadioButtons(options=optionen, value=None, description='')
+    ausgabe = widgets.Output()
+    def pruefen(change):
+        if change['new'] is None: return
+        with ausgabe:
+            ausgabe.clear_output()
+            if optionen.index(change['new']) == richtig: print('✓ Richtig. ' + erklaerung)
+            else: print('✗ Noch nicht. Lesen Sie den Abschnitt noch einmal und wählen Sie eine andere Antwort.')
+    auswahl.observe(pruefen, names='value')
+    display(widgets.HTML('<b>Selbstcheck:</b> ' + html.escape(text)), auswahl, ausgabe)
+    return auswahl, ausgabe
+
+
+def _zahl(v):
+    return f'{round(float(v), 6):g}'
+
+
+class _Lerner:
+    """Das Neuron lernt ein Beispiel nach dem anderen. Der Zustand ist von der Anzeige getrennt."""
+    MAX_RUNDEN = 30
+
+    def __init__(self, aufgabe='AND', lernrate=.2, start=(.2, .2, -.5)):
+        if aufgabe not in _ZIELE: raise ValueError(f'Aufgabe: {", ".join(_ZIELE)}.')
+        if not 0 < lernrate <= 2: raise ValueError('lernrate: 0 bis 2.')
+        self.aufgabe, self.rate, self.start = aufgabe, lernrate, start
+        self.y = np.array(_ZIELE[aufgabe]); self.zuruecksetzen()
+
+    def zuruecksetzen(self):
+        self.w = np.array(self.start[:2], float); self.b = float(self.start[2])
+        self.i = 0; self.runde = 1; self.korr = 0; self.fertig = False; self.abgebrochen = False
+        self.staende = [(self.w.copy(), self.b)]; self.fehler = []
+
+    def schritt(self):
+        if self.fertig or self.abgebrochen: return None
+        x = _EINGABEN[self.i]; t = int(self.y[self.i]); summe = float(x @ self.w + self.b)
+        ausgabe = int(summe >= 0); f = t - ausgabe
+        info = dict(runde=self.runde, x=x, ziel=t, summe=summe, ausgabe=ausgabe, w_alt=self.w.copy(), b_alt=self.b, fehler=f)
+        if f:
+            self.w = self.w + self.rate * f * x; self.b += self.rate * f; self.korr += 1
+            self.staende.append((self.w.copy(), self.b))
+        info.update(w_neu=self.w.copy(), b_neu=self.b, beispiel=self.i)
+        self.i += 1
+        if self.i == len(_EINGABEN):
+            info['runde_ende'] = self.korr; self.fehler.append(self.korr)
+            if self.korr == 0: self.fertig = True
+            elif self.runde >= self.MAX_RUNDEN: self.abgebrochen = True
+            self.i = 0; self.runde += 1; self.korr = 0
+        return info
+
+
+def _schritt_text(info):
+    x = info['x']; z = f'{_t(x)}'
+    zeilen = [f'Runde {info["runde"]} · Beispiel {z}, Ziel {info["ziel"]}',
+              f'  Summe = {x[0]}·{_zahl(info["w_alt"][0])} + {x[1]}·{_zahl(info["w_alt"][1])} + ({_zahl(info["b_alt"])}) = {_zahl(info["summe"])} → Ausgabe {info["ausgabe"]} '
+              + ('✓ stimmt, nichts ändert sich.' if not info['fehler'] else '✗ ' + ('Das Neuron feuert zu wenig.' if info['fehler'] > 0 else 'Das Neuron feuert zu viel.'))]
+    if info['fehler']:
+        zeilen.append(f'  Korrektur: neu = alt + Lernrate × (Ziel − Ausgabe) × Eingang, also (Lernrate × {info["fehler"]:+d})')
+        zeilen.append(f'    w₁: {_zahl(info["w_alt"][0])} → {_zahl(info["w_neu"][0])}   w₂: {_zahl(info["w_alt"][1])} → {_zahl(info["w_neu"][1])}   b: {_zahl(info["b_alt"])} → {_zahl(info["b_neu"])}')
+    return '\n'.join(zeilen)
+
+
+def _lern_bild(l, aktuell=None):
+    fig, ax = plt.subplots(figsize=(5.4, 4))
+    _punkte(ax, _EINGABEN, l.y)
+    for k, (wk, bk) in enumerate(l.staende):
+        letzte = k == len(l.staende) - 1
+        _grenze(ax, wk[0], wk[1], bk, color='#263b43' if letzte else plt.cm.Blues(.3 + .5 * k / max(1, len(l.staende))), lw=3 if letzte else 1.2)
+    if aktuell is not None:
+        ax.scatter(*aktuell['x'], s=420, facecolors='none', edgecolors='#be572b', linewidths=2.5)
+    ax.set_title(f'{l.aufgabe}: Grenze nach {len(l.staende) - 1} Korrektur(en)')
+    plt.tight_layout(); plt.show()
+
+
+def lernen_klick(aufgabe='AND', lernrate=.2):
+    """Das Neuron lernt per Klick: ein Beispiel nach dem anderen, mit Rechnung und wandernder Grenze."""
+    from IPython.display import clear_output
+    l = _Lerner(aufgabe, lernrate)
+    wahl = widgets.Dropdown(options=list(_ZIELE), value=aufgabe, description='Aufgabe')
+    rate = widgets.FloatSlider(value=lernrate, min=.05, max=1, step=.05, description='Lernrate')
+    weiter = widgets.Button(description='Nächstes Beispiel ▶', button_style='primary')
+    runde = widgets.Button(description='Ganze Runde ▶▶')
+    neu = widgets.Button(description='Zurücksetzen')
+    ausgabe = widgets.Output()
+
+    def zeigen(infos):
+        with ausgabe:
+            clear_output(wait=True)
+            if not infos:
+                print('Fertig. Mit «Zurücksetzen» oder einer anderen Einstellung beginnen Sie neu.')
+            else:
+                for info in infos:
+                    print(_schritt_text(info))
+                    if 'runde_ende' in info:
+                        print(f'  → Runde {info["runde"]} abgeschlossen: {info["runde_ende"]} Korrektur(en).')
+                _lern_bild(l, infos[-1])
+                if l.fertig: print(f'Alle vier Zeilen stimmen: Das Neuron hat gelernt. Gewichte {_zahl(l.w[0])} / {_zahl(l.w[1])}, Bias {_zahl(l.b)}.')
+                elif l.abgebrochen: print(f'Nach {l.MAX_RUNDEN} Runden stimmen noch nicht alle Zeilen: Hier hilft keine Lernrate. Eine Gerade reicht für {l.aufgabe} nicht.')
+                else: print(f'Aktuell: Gewichte {_zahl(l.w[0])} / {_zahl(l.w[1])}, Bias {_zahl(l.b)}. Das ist alles, was das Neuron «weiss».')
+    def klick_weiter(_=None):
+        info = l.schritt(); zeigen([info] if info else [])
+    def klick_runde(_=None):
+        infos = []
+        while True:
+            info = l.schritt()
+            if not info: break
+            infos.append(info)
+            if 'runde_ende' in info: break
+        zeigen(infos)
+    def neu_starten(_=None):
+        l.aufgabe, l.rate = wahl.value, rate.value; l.y = np.array(_ZIELE[l.aufgabe]); l.zuruecksetzen()
+        with ausgabe:
+            clear_output(wait=True)
+            print(f'Neu gestartet: {l.aufgabe}, Gewichte {_zahl(l.w[0])} / {_zahl(l.w[1])}, Bias {_zahl(l.b)}, Lernrate {_zahl(l.rate)}. Klicken Sie auf «Nächstes Beispiel».')
+    weiter.on_click(klick_weiter); runde.on_click(klick_runde); neu.on_click(neu_starten)
+    wahl.observe(lambda c: neu_starten(), names='value'); rate.observe(lambda c: neu_starten(), names='value')
+    display(widgets.VBox([widgets.HBox([wahl, rate]), widgets.HBox([weiter, runde, neu]), ausgabe]))
+    neu_starten()
+    return l
+
+
+def lernen_regler():
+    def lauf(aufgabe, lernrate):
+        perzeptron_lernen(aufgabe, lernrate=lernrate)
+    return widgets.interact(lauf,
+        aufgabe=widgets.Dropdown(options=['AND', 'OR', 'NAND', 'NOR'], value='AND', description='Aufgabe'),
+        lernrate=widgets.FloatSlider(value=.2, min=.05, max=1, step=.05, description='Lernrate'))
+
+
+def iris_regler():
+    def lauf(lernrate, runden):
+        iris_neuron(lernrate=lernrate, runden=runden)
+    return widgets.interact(lauf,
+        lernrate=widgets.FloatSlider(value=.1, min=.01, max=1, step=.01, description='Lernrate'),
+        runden=widgets.IntSlider(value=15, min=1, max=30, description='Runden'))
+
+
+def xor_problem():
+    """XOR: Wahrheitstabelle, die vier Punkte und drei Versuche mit einer Geraden."""
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.2), gridspec_kw=dict(width_ratios=[1, 1.15]))
+    axes[0].axis('off')
+    tabelle = axes[0].table(cellText=[[0, 0, 0], [0, 1, 1], [1, 0, 1], [1, 1, 0]], colLabels=['Eingabe 1', 'Eingabe 2', 'XOR'],
+                            cellLoc='center', loc='center', cellColours=[['white', 'white', FARBEN_HELL[t]] for t in (0, 1, 1, 0)])
+    tabelle.scale(1, 2.2); tabelle.set_fontsize(12)
+    axes[0].set_title('Wahrheitstabelle: 1, wenn die Eingaben verschieden sind')
+    _punkte(axes[1], _EINGABEN, np.array(_ZIELE['XOR']))
+    x = np.array([-.4, 1.4])
+    axes[1].plot(x, [.5, .5], '--', color='#8d9aa0'); axes[1].axvline(.5, ls='--', color='#8d9aa0'); axes[1].plot(x, .3 - x + .2, '--', color='#8d9aa0')
+    axes[1].set_title('Die vier Fälle als Punkte. Gestrichelt: drei Versuche mit einer Geraden')
+    plt.tight_layout(); plt.show()
+    print('Die beiden Punkte der Klasse 1 liegen diagonal gegenüber. Jede der drei Geraden lässt auf mindestens einer Seite beide Klassen zurück.')
+
+
+
+def xor_versuch(w1=1., w2=1., bias=-.5):
+    """XOR mit einem Neuron: Jede Zeile wird zu einer Bedingung an Gewichte und Bias."""
+    y = np.array(_ZIELE['XOR']); z = _EINGABEN @ [w1, w2] + bias; pred = (z >= 0).astype(int)
+    fig, ax = plt.subplots(figsize=(5.4, 4)); _punkte(ax, _EINGABEN, y); _grenze(ax, w1, w2, bias, color='#263b43')
+    ax.set_title(f'XOR: {int(np.sum(pred == y))} von 4 richtig'); plt.tight_layout(); plt.show()
+    bed = {(0, 0): 'b < 0', (0, 1): 'w₂ + b ≥ 0', (1, 0): 'w₁ + b ≥ 0', (1, 1): 'w₁ + w₂ + b < 0'}
+    for x, v, p, t in zip(_EINGABEN, z, pred, y):
+        print(f'{_t(x)} Ziel {t}: Bedingung «{bed[_t(x)]}» → Summe {v:+.1f} → Ausgabe {p} ' + ('✓' if p == t else '✗'))
+    if np.all(pred == y): print('Alle vier stimmen. (Das lässt sich nach der Rechnung unten nie erreichen.)')
+    else: print('Mindestens eine Bedingung verletzt. Bessern Sie eine Zeile aus: Dann kippt eine andere.')
+    return int(np.sum(pred == y))
+
+
+def regler_xor():
+    return widgets.interact(xor_versuch,
+        w1=widgets.FloatSlider(value=1, min=-3, max=3, step=.5, description='Gewicht 1'),
+        w2=widgets.FloatSlider(value=1, min=-3, max=3, step=.5, description='Gewicht 2'),
+        bias=widgets.FloatSlider(value=-.5, min=-3, max=3, step=.5, description='Bias'))
+
+
+def xor_suche():
+    """Alle Einstellungen in einem Raster ausprobieren: AND hat Treffer mit 4 von 4, XOR nie."""
+    werte = np.arange(-3, 3.01, .5)
+    w1, w2, b = np.meshgrid(werte, werte, werte, indexing='ij')
+    z = _EINGABEN[:, 0, None] * w1.ravel() + _EINGABEN[:, 1, None] * w2.ravel() + b.ravel()
+    pred = (z >= 0).astype(int)
+    zaehler = {}
+    for aufgabe in ('AND', 'XOR'):
+        richtig = (pred == np.array(_ZIELE[aufgabe])[:, None]).sum(axis=0)
+        zaehler[aufgabe] = np.bincount(richtig, minlength=5)
+    fig, ax = plt.subplots(figsize=(8, 3.6)); breite = .38
+    ax.bar(np.arange(5) - breite / 2, zaehler['AND'], breite, color='#176c63', label='AND')
+    ax.bar(np.arange(5) + breite / 2, zaehler['XOR'], breite, color='#be572b', label='XOR')
+    for k in range(5):
+        ax.text(k - breite / 2, zaehler['AND'][k], str(zaehler['AND'][k]), ha='center', va='bottom', fontsize=8)
+        ax.text(k + breite / 2, zaehler['XOR'][k], str(zaehler['XOR'][k]), ha='center', va='bottom', fontsize=8)
+    ax.set(xlabel='Richtige Zeilen (von 4)', ylabel='Anzahl Einstellungen', title=f'Alle {len(werte) ** 3} Einstellungen von Gewicht 1, Gewicht 2 und Bias im Raster', xticks=range(5))
+    ax.legend(); plt.tight_layout(); plt.show()
+    print(f'AND: {zaehler["AND"][4]} Einstellungen lösen alle 4 Zeilen. XOR: {zaehler["XOR"][4]}. Mehr als 3 von 4 erreicht bei XOR keine einzige.')
+    print('Das ist kein Zufall: Die vier Bedingungen von XOR widersprechen sich (siehe Rechnung oben).')
+    return zaehler
 
 
 def xor_netz():

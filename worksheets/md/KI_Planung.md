@@ -99,7 +99,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 *In der dunklen Box steckt das neuronale Netz: Es verarbeitet die Eingabe, und sein Erfahrungsschatz sind die gelernten Gewichte. Neue Erfahrungen verändern diese Gewichte. Grafik: inf-schule.de (CC BY-SA 4.0).*
 
-**Lernziel:** Eine Ausgabe berechnen, Gewicht und Bias erklären, die Lernregel beschreiben und die XOR-Grenze erkennen.
+**Lernziel:** Erklären, wofür ein Neuron da ist, Gewicht und Bias erklären, die Lernregel beschreiben, sagen was genau gelernt wird und die XOR-Grenze begründen.
 
 **Leitfrage:** Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?
 
@@ -114,21 +114,21 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 |  |  | Ergebnis | Eine Vermutung für die Regel mit vier Tabellenzeilen. |
 | Vorwissen aktivieren – Eingabe und Label benennen | 10 | Tandem | Benennen Sie zu zweit am Warnsignal, was die Eingabe und was das Label (die richtige Antwort) ist. Schreiben Sie die vier Eingaben in eine Tabelle und ergänzen Sie die Ausgabe für UND, dann für ODER und für XOR. |
 |  |  | Ergebnis | Drei Wahrheitstabellen mit je vier Zeilen und die Stelle, an der sich XOR von ODER unterscheidet. |
-| Informieren – Von der Nervenzelle zum Perzeptron | 15 | Lehrperson | Projiziert die Nervenzell-Grafik und danach die Perzeptron-Grafik und erklärt am Vorbild Nervenzelle die Bausteine: Eingaben, Gewichte, Summe, Schwelle, Ausgabe. Schreibt «Summe = x₁·w₁ + x₂·w₂ + b» und «ab Summe 0 feuert das Neuron» an und rechnet (1, 1) und (1, 0) mit Gewichten 1 und 1 und Bias −1.5 vor (Summen 0.5 und −0.5). |
+| Informieren – Von der Nervenzelle zum Perzeptron | 15 | Lehrperson | Erklärt zuerst am Schwimmbad-Beispiel (Kursseite Kapitel 1), wofür ein Neuron da ist: ein kleiner Entscheider, der aus mehreren Zahlen Ja oder Nein macht; Gewichte sagen, wie wichtig ein Faktor ist, der Bias ist die Grundhaltung. Projiziert dann die Nervenzell-Grafik und die Perzeptron-Grafik und erklärt am Vorbild Nervenzelle die Bausteine: Eingaben, Gewichte, Summe, Schwelle, Ausgabe. Schreibt «Summe = x₁·w₁ + x₂·w₂ + b» und «ab Summe 0 feuert das Neuron» an und rechnet (1, 1) und (1, 0) mit Gewichten 1 und 1 und Bias −1.5 vor (Summen 0.5 und −0.5). Sagt in einem Satz, was später gelernt wird: nur Gewichte und Bias, also der Erfahrungsschatz des Neurons. |
 |  |  | Einzeln → Tandem | Rechnen Sie (0, 0) und (0, 1) selbst und prüfen Sie im Tandem. |
 |  |  | Ergebnis | Eine vollständige UND-Tabelle: Summen −1.5, −0.5, −0.5, 0.5 und Ausgaben 0, 0, 0, 1. |
 | Verarbeiten – Gewichte und Bias berechnen und ausprobieren | 50 | Einzeln | Bearbeiten Sie das Arbeitsblatt: Ausgaben berechnen und einen Lernschritt rechnen (Gewichte 0.2 und 0.2, Bias −0.5, Eingabe (1, 1), Lernrate 0.2). |
-|  |  | Tandem | Arbeiten Sie das Notebook «Ein Neuron entscheidet» durch (Zeitmarken beachten): Nervenzelle und Neuron vergleichen, ein Neuron von Hand für AND, OR und NAND einstellen (bei jeder falschen Zeile nennt die Ausgabe, was zu tun ist), das Neuron selbst lernen lassen und dabei die Lernrate verändern, an echten Messdaten zwei Pflanzenarten unterscheiden und XOR versuchen. |
+|  |  | Tandem | Arbeiten Sie das Notebook «Ein Neuron entscheidet» durch (Zeitmarken beachten, Regler und Selbstchecks direkt bedienen): im Schwimmbad-Beispiel ein Neuron als Entscheider einstellen, Nervenzelle und Neuron vergleichen, ein Neuron von Hand für AND, OR und NAND einstellen (bei jeder falschen Zeile nennt die Ausgabe, was zu tun ist), das Neuron per Klick Beispiel für Beispiel lernen lassen und dabei erkennen, dass nur Gewichte und Bias gelernt werden, an echten Messdaten zwei Pflanzenarten unterscheiden und XOR in fünf Schritten untersuchen (Lernen lassen, Punkte ansehen, selbst einstellen, vier Bedingungen, Ausweg). |
 |  |  | Tandem | Erklären Sie einander, was ein Gewicht und was der Bias bewirkt. |
 |  |  | Ergebnis | Eine von Hand eingestellte und eine gelernte AND-Regel sowie die Beobachtung, dass XOR nicht gelingt. |
 | Auswerten – Ausgabe bestimmen und an XOR scheitern | 10 | Einzeln | Bestimmen Sie ohne Computer die Ausgabe für (0, 1) mit Gewichten 1 und 1 und Bias −1.5. Beantworten Sie dann im Antwortfeld der Kursseite: Was bewirken Gewicht und Bias? Wie korrigiert sich ein Neuron selbst? Warum scheitert ein einzelnes Perzeptron an XOR (zwei Sätze)? |
-|  |  | Lehrperson | Zeigt die vier XOR-Punkte und fragt, wie viele Linien man bräuchte. |
+|  |  | Lehrperson | Zeigt die XOR-Grafik (Tabelle und vier Punkte) und die vier Bedingungen an der Tafel und lasst die Klasse den Widerspruch nachvollziehen: Die beiden mittleren Bedingungen zusammen ergeben w₁ + w₂ + b > 0, die letzte verlangt < 0. Fragt: Liegt das an der Lernregel oder am Bau des Neurons? Wie viele Linien bräuchte man? |
 |  |  | Ergebnis | Eine korrekte Rechnung und eine Erklärung zu XOR im Antwortfeld. |
 
 
-**Lernprodukt:** Eine nachvollziehbare Rechnung + Erklärung zu Bias, Lernregel und XOR.
+**Lernprodukt:** Eine nachvollziehbare Rechnung + Erklärung zu Bias, Lernregel (was genau gelernt wird) und XOR.
 
-**Zeit:** Das Notebook hat einen Kern von ca. 30 Minuten (Zeitmarken ⏱: Einstieg 2, Neuron 4, Nervenzelle 3, Zahlen sehen 2, von Hand einstellen 6, Lernen 5, Pflanzen 4, XOR 3). Der Abschnitt «Zusatz · Ein Neuron liest echte Ziffern» ist Vertiefung für Schnelle oder zu Hause und zählt nicht zur Planung.
+**Zeit:** Das Notebook hat einen Kern von ca. 35 Minuten (Zeitmarken ⏱: Einstieg 2, Wofür ein Neuron 4, Neuron aufbauen 3, Nervenzelle 3, Zahlen sehen 2, von Hand einstellen 5, Was lernt ein Neuron 4, Alle Runden lernen 3, Pflanzen 3, XOR 6). Der Abschnitt «Zusatz · Ein Neuron liest echte Ziffern» ist Vertiefung für Schnelle oder zu Hause und zählt nicht zur Planung.
 
 ### Doppellektion 4 · Warum mehrere Neuronen?
 
