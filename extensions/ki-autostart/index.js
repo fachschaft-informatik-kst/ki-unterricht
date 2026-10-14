@@ -46,9 +46,17 @@ export default {
         if (!panel.sessionContext.session?.kernel) {
           throw new Error('Kein Python-Kernel verfügbar');
         }
+        if (embed?.restoreOnly) {
+          status.node.textContent = 'Gesicherter Stand · Zellen bei Bedarf erneut ausführen';
+          await embed.initialized(panel, true);
+          return;
+        }
         const response = await fetch(new URL('../files/' + panel.context.path, location.href));
         if (!response.ok) throw new Error('Die veröffentlichte Vorlage ist nicht erreichbar');
         const template = await response.json();
+        // In the portal, its saved document is authoritative. If none exists,
+        // start from the published template, never a different tandem's Lite cache.
+        if (embed) panel.context.model.fromJSON(template);
         const starts = template.cells.filter(c => c.cell_type === 'code' && (c.metadata?.tags || []).includes(tag));
         const cells = starts.map(c => panel.content.widgets.find(w => w.model.id === c.id));
         const source = c => Array.isArray(c.source) ? c.source.join('') : c.source;

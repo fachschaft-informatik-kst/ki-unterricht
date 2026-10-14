@@ -223,7 +223,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     await p.reload();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
     assert.equal(await p.frameLocator('#project-frame').locator('.jp-OutputArea-error').count(),0);
-    assert((await p.frameLocator('#project-frame').locator('.ki-autostart-status').innerText()).includes('Geänderte Vorbereitung'));
+    assert((await p.frameLocator('#project-frame').locator('.ki-autostart-status').innerText()).includes('Gesicherter Stand'));
     console.log('PASS repeated import clears live Python; neither imported setup nor extra tags execute, including after reload');
    }
 

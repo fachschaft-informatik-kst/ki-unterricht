@@ -30,6 +30,7 @@ jobs:
           npm run build --prefix extensions/ki-autostart
           node tests/check_autostart.cjs
           node tests/check_archive.cjs
+          node tests/check_notebook_snapshot.cjs
       - name: Check simplified teaching project
         run: |
           python tests/check_ki_basis.py
@@ -42,11 +43,12 @@ jobs:
           jupyter lite build --contents content --output-dir dist
           python scripts/copy_portal.py dist
       - name: Check deployed notebook runtime in Chromium
-        timeout-minutes: 15
+        timeout-minutes: 20
         run: |
           npm install --prefix /tmp/ki-browser playwright
           /tmp/ki-browser/node_modules/.bin/playwright install --with-deps chromium
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs
+          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_persistence.cjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
