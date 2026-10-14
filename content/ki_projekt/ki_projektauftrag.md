@@ -30,7 +30,8 @@ Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine ho
 
 | Datum | Ziel |
 |---|---|
-| 4.Doppellektion | Vorschau, Tandem, zwei Klassen und Datenplan festlegen |
+| 4.Doppellektion | Tandem, Thema und zwei Klassen festlegen; die Lehrperson segnet die Idee mündlich ab |
+| bis 5.Doppellektion | Hausaufgabe: Datenplan festlegen und Fotos sammeln |
 | bis 5.Doppellektion | Fotos sammeln |
 | 5.Doppellektion | Einführung, geprüfter Import und Reflexion 1–2; erster Lauf bei Zeitreserve |
 | 6.Doppellektion | Fairer Vergleich und Interpretation |
