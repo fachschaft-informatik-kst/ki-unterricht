@@ -58,6 +58,11 @@ def main():
     rejects(lambda:load(dict(doc,records=records[:-1])))
     bad=copy.deepcopy(doc);bad['records'][0]['group']='V1';rejects(lambda:load(bad))
     repeated=foto.vergleichen(own,wiederholen=True);assert len(repeated['laeufe'])==6
+    # Fremdtest: Modell eines anderen Tandems beurteilt die eigenen Klassen C und D.
+    umbenannt=dict(doc,records=[dict(r,label={'Kreis':'Hund','Dreieck':'Katze'}[r['label']]) for r in records])
+    eigene=foto.projekt_laden('EIGENE_DATEN',['Hund','Katze'],upload=SimpleNamespace(value=({'content':json.dumps(umbenannt).encode()},)))
+    ft=foto.fremdtest(exp,eigene);assert ft['matrix'].shape==(2,2) and ft['matrix'].sum()==80 and 0.5<=ft['trennschaerfe']<=1
+    rejects(lambda:foto.fremdtest(exp,eigene,variante='Z'))
     # Ziffernbeispiele: trainierte Netze müssen auf neuen Bildern deutlich besser als Raten sein.
     X,y,_,val=u._ziffern_daten();netz=u.ziffern(16);assert netz.score(X[val],y[val])>.9
     u.ziffer_durchs_netz(netz,0);rejects(lambda:u.ziffer_durchs_netz(netz,10**6))

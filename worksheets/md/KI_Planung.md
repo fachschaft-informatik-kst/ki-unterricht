@@ -269,7 +269,7 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Rückblick:** In Doppellektion 7 haben Sie die gewählte Variante mit dem Abschlusstest geprüft, Ihr Journal vervollständigt und das Abgabepaket kontrolliert. Heute erklären Sie Ihr Projekt im Tandemgespräch und trainieren das Modell eines anderen Tandems nach.
 
-**Lernziel:** Das ganze Projekt gemeinsam erklären und das Modell eines anderen Tandems nachtrainieren.
+**Lernziel:** Das ganze Projekt gemeinsam erklären, das Modell eines anderen Tandems nachtrainieren und an den eigenen Klassen testen.
 
 **Leitfrage:** Kommen wir mit den Daten und Einstellungen eines anderen Tandems zum gleichen Ergebnis?
 
@@ -279,22 +279,22 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen – Reihenfolge, Gespräche und zugeteiltes Projekt | 5 | Lehrperson | Bestätigt die Abgaben, nennt Reihenfolge und Dauer der Gespräche, teilt jedem Tandem das Abgabe-ZIP eines anderen Tandems zu und erklärt Reproduktionsprüfung und Fallcheck: Die Gespräche laufen nach diesen Minuten parallel. |
+| Ankommen – Reihenfolge, Gespräche und zugeteiltes Projekt | 5 | Lehrperson | Bestätigt die Abgaben, nennt Reihenfolge und Dauer der Gespräche, teilt jedem Tandem das Abgabe-ZIP eines anderen Tandems zu und erklärt Reproduktionsprüfung und Fremdtest: Die Gespräche laufen nach diesen Minuten parallel. |
 |  |  | Tandem | Notieren Sie Ihr Gesprächsfenster und das Tandem, dessen Projekt Sie nachprüfen. |
 |  |  | Ergebnis | Jedes Tandem kennt Zeitfenster, Ablauf und das zu prüfende Projekt. |
 | Vorwissen aktivieren – Drei Stichpunkte fürs Gespräch | 5 | Einzeln | Rufen Sie für das Gespräch und die Reproduktionsprüfung drei Stichpunkte aus Ihrem Projekt ab: Welche Daten und Labels hatten Sie? Was war ein Datenproblem? Welche Grenze oder welcher Fehler war sichtbar? Die Gespräche laufen bereits parallel. |
 |  |  | Ergebnis | Drei Stichpunkte als Erinnerungsstütze. |
-| Informieren – Aufträge lesen | 5 | Einzeln | Lesen Sie auf der Kursseite die Anleitung zur Reproduktionsprüfung und den Auftrag Fallcheck und notieren Sie Fragen schriftlich, ohne die laufenden Gespräche zu unterbrechen. |
+| Informieren – Aufträge lesen | 5 | Einzeln | Lesen Sie auf der Kursseite die Anleitung zur Reproduktionsprüfung und den Auftrag Fremdtest und notieren Sie Fragen schriftlich, ohne die laufenden Gespräche zu unterbrechen. |
 |  |  | Ergebnis | Eine Liste offener Fragen. |
-| Verarbeiten – Reproduktionsprüfung, Fallcheck und eigenes Gespräch | 70 | Tandem | Reproduktionsprüfung in einem privaten Browserfenster: Stellen Sie das zugeteilte Projekt wieder her, prüfen Sie die Daten, trainieren Sie A und B mit denselben Einstellungen nach, wiederholen Sie mit drei Startwerten und prüfen Sie den Abschlusstest mit der Variante des Originals. Vergleichen Sie Datenprüfsumme und Werte mit dem Versuchsprotokoll und schreiben Sie den Reproduktionsbericht. Laden Sie am Ende das Abgabepaket herunter und reichen Sie es ein. |
-|  |  | Tandem | Fallcheck: Wählen Sie einen der drei fiktiven Fälle (Bewerbungen, Schule, Kredit): Welche Daten braucht das Modell? Was könnte schiefgehen? Wer trägt die Folgen? Welche Massnahme ist überprüfbar? Halten Sie Ihre Empfehlung fest. |
+| Verarbeiten – Reproduktionsprüfung, Fremdtest und eigenes Gespräch | 70 | Tandem | Reproduktionsprüfung in einem privaten Browserfenster: Stellen Sie das zugeteilte Projekt wieder her, prüfen Sie die Daten, trainieren Sie A und B mit denselben Einstellungen nach, wiederholen Sie mit drei Startwerten und prüfen Sie den Abschlusstest mit der Variante des Originals. Vergleichen Sie Datenprüfsumme und Werte mit dem Versuchsprotokoll und schreiben Sie den Reproduktionsbericht. Laden Sie am Ende das Abgabepaket herunter und reichen Sie es ein. |
+|  |  | Tandem | Fremdtest: Das nachtrainierte Modell des anderen Tandems kennt nur seine zwei Klassen. Tragen Sie zuerst Ihre Erwartung ein, laden Sie dann Ihre eigenen Fotos (Klassen C und D) in dasselbe Notebook und lassen Sie das fremde Modell sie beurteilen («6 · Fremdtest»). Lesen Sie Tabelle und Trennschärfe und beantworten Sie im Protokoll: Wie gut trennt das Modell C und D, und warum (Gegenstand, Hintergrund, Licht, nur zwei Klassen zur Auswahl)? Was bedeutet das für Trefferquoten? |
 |  |  | Tandem | Zu Ihrem Gesprächsfenster pausieren Sie die Arbeit. Im Gespräch erklären beide das Projekt: ein Bild durch das Modell, eine Daten- oder Versuchsentscheidung, ein Ergebnis samt Grenze und die Übertragung auf einen neuen Fall. Alle Gespräche enden vor der gemeinsamen Auswertung. |
-|  |  | Ergebnis | Ein bewertetes Gespräch, ein eingereichter Reproduktionsbericht mit nachtrainiertem Notebook und ein bearbeiteter Fallcheck. |
-| Auswerten – Bericht prüfen, Frage für Doppellektion 10 | 5 | Tandem | Prüfen Sie, dass der Reproduktionsbericht eingereicht ist, sichern Sie den unbenoteten Fallcheck und notieren Sie eine Frage für «KI & Gesellschaft». |
-|  |  | Ergebnis | Ein eingereichter Reproduktionsbericht, ein gesicherter Fallcheck und eine Frage für Doppellektion 10. |
+|  |  | Ergebnis | Ein bewertetes Gespräch, ein eingereichter Reproduktionsbericht mit nachtrainiertem Notebook und ein ausgewerteter Fremdtest. |
+| Auswerten – Bericht prüfen, Frage für Doppellektion 10 | 5 | Tandem | Prüfen Sie, dass der Reproduktionsbericht eingereicht ist, sichern Sie den unbenoteten Fremdtest und notieren Sie eine Frage für «KI & Gesellschaft». |
+|  |  | Ergebnis | Ein eingereichter Reproduktionsbericht, ein gesicherter Fremdtest und eine Frage für Doppellektion 10. |
 
 
-**Lernprodukt:** Bewertetes Tandemgespräch + eingereichter Reproduktionsbericht + unbenoteter Fallcheck; keine nachträgliche Projektänderung.
+**Lernprodukt:** Bewertetes Tandemgespräch + eingereichter Reproduktionsbericht + unbenoteter Fremdtest; keine nachträgliche Projektänderung.
 
 ### Doppellektion 9 · Wie entstehen Sprachmodelle?
 
@@ -313,13 +313,13 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 | Ankommen – «Heute gehen wir …» | 5 | Lehrperson | Schreibt «Heute gehen wir …» an die Tafel. |
 |  |  | Einzeln → Klasse | Schreiben Sie zwei Fortsetzungen und lesen Sie sie vor; die Klasse sammelt die Unterschiede in Wortwahl, Länge und Ton. |
 |  |  | Ergebnis | Eine Sammlung verschiedener Fortsetzungen desselben Satzanfangs. |
-| Vorwissen aktivieren – Papierexperiment: reihum Wörter schreiben | 10 | Gruppe | Papierexperiment in Gruppen von drei bis vier Personen mit demselben Satzanfang auf zwei Blättern: Reihum schreibt jede Person ein Wort, und das Blatt wird so gefaltet, dass nur die letzten zwei Wörter sichtbar bleiben (Runde A, etwa 12 Wörter). Wiederholen Sie das mit vier sichtbaren Wörtern (Runde B). Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? Das Papagei-Modell macht dasselbe mit Zahlen (Kapitel 2 der Kursseite). |
+| Vorwissen aktivieren – Papierexperiment: reihum Wörter schreiben | 10 | Gruppe | Papierexperiment in Gruppen von drei bis vier Personen mit demselben Satzanfang auf zwei Blättern: Reihum schreibt jede Person ein Wort, und das Blatt wird so gefaltet, dass nur die letzten zwei Wörter sichtbar bleiben (Runde A, etwa 12 Wörter). Wiederholen Sie das mit vier sichtbaren Wörtern (Runde B). Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? Das Papagei-Modell macht dasselbe mit Zahlen (Kapitel 2 der Kursseite). Halten Sie beide Texte und Ihre Beobachtung im Protokoll der Kursseite (Kapitel 1) fest. |
 |  |  | Ergebnis | Zwei Texte und eine Aussage zum Einfluss des Kontexts. |
 | Informieren – Papagei-Modell: das nächste Wort | 15 | Lehrperson | Erklärt am Papagei-Beispiel, wie ein Modell das nächste Wort aus der Häufigkeit von Wortfolgen in früheren Texten vorhersagt. Grenzt moderne Sprachmodelle ab: Tokens, viel grösserer Kontext und ein trainiertes neuronales Netz. Zeigt an einem Beispiel, dass «wahrscheinlich» nicht «wahr» heisst. |
 |  |  | Einzeln | Notieren Sie zwei Unterschiede zwischen dem Papagei-Modell und einem modernen Sprachmodell. |
 |  |  | Ergebnis | Zwei Unterschiede als Grundlage für die Stationen. |
-| Verarbeiten – Papagei-Stationen und Soekia | 50 | Tandem | Bearbeiten Sie die von der Lehrperson ausgewählten Papagei-Stationen und halten Sie fest, wie sich die Fortsetzung mit mehr Kontext verändert. |
-|  |  | Tandem | Verändern Sie in Soekia jeweils nur eine Grösse (Kontext oder Wortwahl), vergleichen Sie die Texte und sichern Sie einen gelungenen und einen problematischen Text mit Beleg. |
+| Verarbeiten – Papagei-Stationen und Soekia | 50 | Tandem | Bearbeiten Sie die von der Lehrperson ausgewählten Papagei-Stationen und halten Sie fest, wie sich die Fortsetzung mit mehr Kontext verändert. Tragen Sie die Stationen ins Protokoll der Kursseite ein (Kapitel 2): Satzanfang, Kontext, vorhergesagtes Wort, plausibel, wahr. |
+|  |  | Tandem | Verändern Sie in Soekia jeweils nur eine Grösse (Kontext oder Wortwahl), vergleichen Sie die Texte und sichern Sie einen gelungenen und einen problematischen Text mit Beleg. Dokumentieren Sie beide Texte mit Beleg im Protokoll der Kursseite (Kapitel 3). |
 |  |  | Tandem | Verbinden Sie Ihre Beobachtungen mit dem Papierexperiment und beantworten Sie: Ist eine plausible Fortsetzung auch wahr? «Human or Not» wird nur bei schulischer Freigabe eingesetzt und ersetzt dann zehn Minuten Soekia. |
 |  |  | Ergebnis | Ein dokumentierter Vergleich mit zwei Texten und einer Aussage zu «plausibel ≠ wahr». |
 | Auswerten – Texte erklären, Papagei und Netz verbinden | 10 | Einzeln | Erklären Sie im Antwortfeld anhand Ihrer zwei Texte in drei Sätzen, was gelang, was problematisch war und warum Plausibilität keine Richtigkeit garantiert. Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells. |
@@ -335,11 +335,11 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 
 **Rückblick:** In Doppellektion 9 haben Sie gesehen, dass ein Sprachmodell das nächste Wort aus Beispieltexten vorhersagt, zuerst als Papagei-Modell mit Zählen, dann als neuronales Netz. Eine plausible Fortsetzung ist dabei nicht automatisch wahr. Heute fragen Sie, was passiert, wenn die Beispiele selbst einseitig sind: Wer trägt die Folgen?
 
-**Lernziel:** Eine Benachteiligung erklären und eine überprüfbare Gegenmassnahme abwägen.
+**Lernziel:** Ein Modell mit den Kriterien Opacity, Scale und Damage prüfen, eine Rückkopplung beschreiben, Cathy O’Neils Aussagen in einer Debatte kritisch hinterfragen und auf den Themenblock zurückblicken.
 
 **Leitfrage:** Wann wird aus einer Modellvorhersage ein gesellschaftliches Problem?
 
-**Motivation:** Programme entscheiden mit, etwa bei Empfehlungen, Bewerbungen oder Kreditprüfungen. Behandelt ein Modell bestimmte Gruppen schlechter, trägt jemand die Folgen. Heute prüfen Sie, wann aus einer Vorhersage ein gesellschaftliches Problem wird und was man dagegen tun kann.
+**Motivation:** Programme entscheiden mit, etwa bei Empfehlungen, Bewerbungen oder Kreditprüfungen. Behandelt ein Modell bestimmte Gruppen schlechter, trägt jemand die Folgen. Heute prüfen Sie mit drei Kriterien, wann ein Modell gefährlich wird, erkennen, wie Modelle ihre eigenen Daten erzeugen können, und lesen die Kritik von Cathy O’Neil selbst kritisch: Ein Warnruf ist ein guter Anlass, genau hinzusehen, aber keine fertige Antwort.
 
 **Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.
 
@@ -348,20 +348,24 @@ Die Notebooks sind Arbeitsphasen innerhalb einer Doppellektion. Ihre angegebenen
 | Ankommen – «Gleiche Regeln sind automatisch fair» | 5 | Lehrperson | Schreibt die These «Gleiche Regeln sind automatisch fair.» an die Tafel. |
 |  |  | Klasse | Positionieren Sie sich im Raum (stimme zu, unsicher, stimme nicht zu) und nennen Sie einen Grund. |
 |  |  | Ergebnis | Ein Meinungsbild als Ausgangspunkt. |
-| Vorwissen aktivieren – Ein Datenproblem und seine Folge | 5 | Einzeln | Wählen Sie ein Datenproblem aus Ihrem Bildprojekt oder dem Fallcheck, zum Beispiel gleicher Hintergrund je Klasse oder zu wenige Exemplare, und schreiben Sie in einem Satz, welche Folge es für eine betroffene Person hätte, wenn das Modell im Alltag eingesetzt würde. |
+| Vorwissen aktivieren – Ein Datenproblem und seine Folge | 5 | Einzeln | Wählen Sie ein Datenproblem aus Ihrem Bildprojekt oder dem Fremdtest, zum Beispiel gleicher Hintergrund je Klasse oder zu wenige Exemplare, und schreiben Sie in einem Satz, welche Folge es für eine betroffene Person hätte, wenn das Modell im Alltag eingesetzt würde. |
 |  |  | Ergebnis | Ein Satz «Datenproblem → Folge». |
-| Informieren – Cathy O’Neils TED Talk | 15 | Lehrperson | Zeigt Cathy O’Neils Video (ca. 13 Min.). Beobachtungsauftrag: Notieren Sie ein genanntes Beispiel mit Zeitmarke und fragen Sie: Wer entscheidet, wer profitiert, wer ist betroffen? |
+| Informieren – Cathy O’Neils TED Talk | 15 | Lehrperson | Zeigt Cathy O’Neils Video (ca. 13 Min.). Beobachtungsauftrag: Notieren Sie ein genanntes Beispiel mit Zeitmarke und fragen Sie: Wer entscheidet, wer profitiert, wer ist betroffen? Wie wäre es, wenn Betroffene die Entscheidung prüfen könnten? |
 |  |  | Einzeln | Sichern Sie Ihre Beispiele stichwortartig. |
 |  |  | Ergebnis | Ein Beispiel mit Beleg und Stichworten. |
-| Verarbeiten – Beispiele und Fallwerkstatt | 55 | Gruppe | Erklären Sie in der Gruppe ein Beispiel aus dem Video in der Kette Problem → Ursache → begründete Verbesserung und schlagen Sie eine Massnahme vor. |
-|  |  | Gruppe | Wählen Sie in der Fallwerkstatt einen Fall (Bewerbungen, Schule, Kredit) und verteilen Sie die Rollen (betroffene Person, Betreiber, prüfende Person). Bauen Sie die Kette Daten → Modellentscheidung → betroffene Person → Folge auf, entwickeln Sie zwei Massnahmen mit Zuständigkeit und Erfolgskriterium, lassen Sie die Empfehlung von einer anderen Gruppe gegenprüfen («Woran würden wir die Verbesserung erkennen?») und halten Sie einen verbleibenden Zielkonflikt fest. |
-|  |  | Ergebnis | Eine Empfehlung mit Massnahmen, Zuständigkeit, Erfolgskriterium und Zielkonflikt. |
-| Auswerten – Massnahme und Erfolgskriterium festlegen | 10 | Einzeln | Formulieren Sie eine konkrete Massnahme, ein überprüfbares Erfolgskriterium und einen verbleibenden Zielkonflikt. Beurteilen Sie die Anfangsthese neu und vergleichen Sie mit Ihrer ersten Position. |
+| Verarbeiten – WMD-Check, Rückkopplung und Debatte | 45 | Gruppe | WMD-Check im Gespräch: Wählen Sie einen der drei Fälle (Bewerbungen, Schule, Kredit). Beurteilen Sie ein Beispiel aus dem Video, Ihren Fall und Ihr eigenes Bildprojekt mit Opacity (intransparent), Scale (skaliert) und Damage (Schaden). Tragen Sie die Stufen ein und entscheiden Sie: WMD, teilweise oder keine WMD? Warum ist das Bildprojekt wahrscheinlich keine WMD? |
+|  |  | Gruppe | Rückkopplung im Gespräch: Erzählen Sie an Ihrem Fall die Schleife Modell entscheidet → Realität verändert sich → neue Daten → Modell bestätigt sich in vier Sätzen. Warum erfährt das Modell nie, was aus den Abgelehnten geworden wäre? Wo können Sie die Schleife unterbrechen? |
+|  |  | Klasse | Debatte «Cathy O’Neil kritisch lesen»: Die Klasse teilt sich in Pro («Warnung überzeugend, Forderung richtig») und Contra («Warnung zugespitzt, Modelle können besser sein als Menschen, Forderung hat Nebenwirkungen»). 5 Minuten Argumente sammeln anhand der Leitfragen (Wer spricht? Welche Beispiele fehlen? Womit vergleicht sie? Was ist belegt? Welche Nebenwirkungen?), 10 Minuten abwechselnder Austausch, 4 Minuten Seitenwechsel: Jede Person nennt das stärkste Argument der anderen Seite. |
+|  |  | Ergebnis | Ein WMD-Check mit Begründung, eine erzählte Rückkopplung und das stärkste Argument der Gegenseite. |
+| Auswerten – Mein Urteil und Rückblick | 20 | Einzeln | Beurteilen Sie die Anfangsthese neu und vergleichen Sie mit Ihrer ersten Position. Formulieren Sie für Ihren Fall eine konkrete Massnahme mit überprüfbarem Erfolgskriterium und einem verbleibenden Zielkonflikt. |
 |  |  | Lehrperson | Fragt bei allgemeinen Vorschlägen nach: Wer ändert was, und woran wäre die Verbesserung erkennbar? |
-|  |  | Ergebnis | Ein begründetes Urteil und eine bestätigte oder veränderte Position. |
+|  |  | Klasse | Rückblick auf den Themenblock: Nennen Sie reihum eine Erkenntnis aus dem Themenblock und eine Frage, die für Sie offen bleibt. Geben Sie der Lehrperson eine Rückmeldung zum Themenblock: Was hat am meisten gebracht, was würden Sie ändern? |
+|  |  | Ergebnis | Ein begründetes Urteil mit Massnahme, eine bestätigte oder veränderte Position und ein Rückblick auf den Themenblock. |
 
 
-**Lernprodukt:** Begründetes Urteil mit Massnahme, Prüfkriterium und verbleibender Grenze.
+**Lernprodukt:** Begründetes Urteil (WMD-Check, Rückkopplung, Debatte) mit Massnahme und Zielkonflikt sowie ein kurzer Rückblick auf den Themenblock.
+
+**Zeit:** Letzte Lektion zum Thema KI: bewusst gesprächsorientiert, mit wenig Schreibarbeit. WMD-Check und Rückkopplung laufen mündlich in der Gruppe, die Dropdowns und Kurzfelder der Kursseite halten nur das Ergebnis fest. Die Debatte braucht keine Vorbereitung ausser den Leitfragen.
 
 <!-- /KURSPLAN -->
 
@@ -433,9 +437,9 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 
 **Vorbereiten:** Abgabestand und Reihenfolge vor Unterrichtsbeginn kontrollieren. Gesprächszeiten anhand der Tandemzahl nach dem Gesprächsplan berechnen; Journal und Bewertungsraster für jedes Tandem öffnen. Für die Reproduktionsprüfung jedem Tandem das Abgabe-ZIP eines anderen Tandems zuteilen (im Kreis: Tandem n prüft Tandem n + 1) und die ZIP-Dateien im Abgabekanal bereitstellen. Vorab klären, ob Personenfotos weitergegeben werden dürfen; sonst dieses Tandem nicht zuteilen oder ein ZIP ohne Originalfotos verteilen (die Fotostudio-JSON enthält 64 × 64 Vorschaubilder).
 
-**Durchführen:** Eine Lehrperson führt die Gespräche, die übrigen Tandems führen die Reproduktionsprüfung (45 Minuten, Abgabe) und den unbenoteten Fallcheck (20 Minuten) durch. Beim Nachtrainieren arbeiten sie in einem privaten Browserfenster, damit ihr eigener Stand nicht ersetzt wird; bei gleichen Daten und Einstellungen sind die Werte wegen des festen Startwerts identisch, Abweichungen deuten auf andere Daten, Klassennamen oder Einstellungen hin. Beide Lernenden erklären das eigene Modellbild; danach begründet jede Person eine Daten- oder Versuchsentscheidung und überträgt eine Erkenntnis auf den neuen Fall. Rollenwechsel im Gespräch sicherstellen.
+**Durchführen:** Eine Lehrperson führt die Gespräche, die übrigen Tandems führen die Reproduktionsprüfung (45 Minuten, Abgabe) und den unbenoteten Fremdtest (20 Minuten) durch: Das nachtrainierte Modell des anderen Tandems beurteilt die eigenen Klassen C und D. Dafür braucht jedes Tandem seine eigene Fotostudio-JSON griffbereit. Die Frage «Wie gut, und warum?» führt zu Daten, Hintergrund und Licht und bereitet Doppellektion 10 vor. Beim Nachtrainieren arbeiten sie in einem privaten Browserfenster, damit ihr eigener Stand nicht ersetzt wird; bei gleichen Daten und Einstellungen sind die Werte wegen des festen Startwerts identisch, Abweichungen deuten auf andere Daten, Klassennamen oder Einstellungen hin. Beide Lernenden erklären das eigene Modellbild; danach begründet jede Person eine Daten- oder Versuchsentscheidung und überträgt eine Erkenntnis auf den neuen Fall. Rollenwechsel im Gespräch sicherstellen.
 
-**Prüfen:** Bewertet werden die Erklärung und Begründung, nicht die Trefferquote. Die Gesprächsminute für Notizen und Wechsel in der Zeitplanung berücksichtigen. Reproduktionsbericht und Fallcheck dürfen unterbrochen werden, sobald ein Tandem aufgerufen wird. Die Reproduktionsberichte (Bericht, nachtrainiertes Notebook, Protokoll) nach der Doppellektion sichten; ob sie in die Bewertung einfliessen, legt die Lehrperson fest: Sie gehören nicht zu den Kompetenzen K1–K10 des Bewertungsrasters.
+**Prüfen:** Bewertet werden die Erklärung und Begründung, nicht die Trefferquote. Die Gesprächsminute für Notizen und Wechsel in der Zeitplanung berücksichtigen. Reproduktionsbericht und Fremdtest dürfen unterbrochen werden, sobald ein Tandem aufgerufen wird. Die Reproduktionsberichte (Bericht, nachtrainiertes Notebook, Protokoll) nach der Doppellektion sichten; ob sie in die Bewertung einfliessen, legt die Lehrperson fest: Sie gehören nicht zu den Kompetenzen K1–K10 des Bewertungsrasters.
 
 ### 09 · Wie entstehen Sprachmodelle?
 
@@ -449,11 +453,11 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 
 ### 10 · Wer trägt die Folgen?
 
-**Vorbereiten:** Video vorab testen und die drei Fallkarten Bewerbungen, Schule und Kredit verteilen. Pro Gruppe Rollen festlegen: betroffene Person, Betreiber, prüfende Person.
+**Vorbereiten:** Video vorab testen. Die drei Fälle Bewerbungen, Schule und Kredit stehen auf der Kursseite; jede Gruppe wählt einen Fall. Für die Debatte die Klasse in zwei etwa gleich grosse Seiten (Pro und Contra) einteilen; die Seite kann zugelost werden. Es ist die letzte Lektion zum Thema KI: bewusst ruhig halten, wenig schreiben lassen und Zeit für den Rückblick auf den Themenblock einplanen.
 
-**Durchführen:** Nach dem Video eine konkrete Aussage mit Zeitmarke oder Beispiel notieren lassen. In der Fallwerkstatt die Kette «Daten → Modellentscheidung → betroffene Person → Folge» aufbauen. Jede Gruppe formuliert eine umsetzbare Massnahme, ein prüfbares Erfolgskriterium und einen verbleibenden Zielkonflikt.
+**Durchführen:** Nach dem Video eine konkrete Aussage mit Zeitmarke oder Beispiel notieren lassen. WMD-Check (Opacity, Scale, Damage) und Rückkopplung mündlich in der Gruppe führen; die Kursseite hält nur Stufen, Urteil und eine kurze Erzählung fest. Das Bildprojekt ist wahrscheinlich keine WMD (kaum Scale, kein Damage), und genau das soll die Klasse begründen. Die Rückkopplung am Kreditbeispiel zeigen: Das Modell sieht nie, was aus den Abgelehnten geworden wäre. In der Debatte beide Seiten ernst nehmen und weder das Video noch Modelle pauschal verteufeln oder verteidigen. Zum Schluss jede Person das stärkste Argument der Gegenseite nennen lassen.
 
-**Prüfen:** Allgemeine Vorschläge wie «mehr Fairness» nachfragen: Wer ändert was, und woran wäre eine Verbesserung erkennbar? Zum Schluss die Anfangsthese «Gleiche Regeln sind automatisch fair» erneut beurteilen.
+**Prüfen:** Allgemeine Vorschläge wie «mehr Fairness» nachfragen: Wer ändert was, und woran wäre eine Verbesserung erkennbar? Die Anfangsthese «Gleiche Regeln sind automatisch fair» erneut beurteilen lassen. Den Rückblick auf den Themenblock (eine Erkenntnis, eine offene Frage, eine Rückmeldung zum Themenblock) reihum im Plenum einholen.
 
 ## Vorbereitung und realistische Zeitgrenzen
 
@@ -462,7 +466,7 @@ Die Tabelle oben ist der 90-Minuten-Ablauf. Die Hinweise hier machen Material, I
 - **Doppellektion 2:** Memory-Karten und Gruppen-Memory-Anleitung auf der Kursseite bereitlegen; kein separates Lernarten-Arbeitsblatt. NIM optional in der verlinkten Lernstrecke, kein zusätzlicher Pflichtblock.
 - **Doppellektion 4:** zehn Minuten Projektvorschau mit Themen- und Datenplan. Fotos bis Doppellektion 5 sammeln lassen. Einfache Gegenstände bevorzugen; Gesten brauchen fünf Personen. Ersatzdaten nur nach Absprache und mit sichtbarer Herkunft.
 - **Doppellektion 5:** Erfolgskriterium sind geprüfte Daten und Reflexion 1–2. Ein erster Lauf ist Zeitreserve, keine zusätzliche Pflicht. Der Hauptvergleich liegt in Doppellektion 6.
-- **Doppellektion 8:** gleicher Abgabestand vor Unterrichtsbeginn. **Alle Fachgespräche in dieser Doppellektion**, ohne Folgetermin. Nach fünf Minuten gemeinsamer Einführung beginnen die Gespräche; die übrigen Tandems bearbeiten parallel Vorwissen, Auftrag, Reproduktionsprüfung und Fallcheck. Minute 5–85 ergibt das Gesprächsfenster von 80 Minuten; die letzten fünf Minuten bleiben für die Auswertung.
+- **Doppellektion 8:** gleicher Abgabestand vor Unterrichtsbeginn. **Alle Fachgespräche in dieser Doppellektion**, ohne Folgetermin. Nach fünf Minuten gemeinsamer Einführung beginnen die Gespräche; die übrigen Tandems bearbeiten parallel Vorwissen, Auftrag, Reproduktionsprüfung und Fremdtest. Minute 5–85 ergibt das Gesprächsfenster von 80 Minuten; die letzten fünf Minuten bleiben für die Auswertung.
 - **Doppellektion 9:** Papagei-Stationen vorab passend auswählen; die ganze Lernstrecke plus Soekia ist zu umfangreich. Das Papierexperiment veranschaulicht den Kontexteinfluss. Human or Not höchstens als freigegebene Alternative, nicht zusätzlich.
 - **Doppellektion 10:** Cathy O’Neils TED Talk «The era of blind faith in big data must end» einsetzen: <https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end>. Danach zehn Minuten gemeinsame Auswertung.
 
@@ -495,7 +499,7 @@ Für eine andere Tandemzahl: Gesprächsdauer höchstens **80 ÷ Tandemzahl − 1
 | 1,5 Min. | Ein Ergebnis samt Grenze kritisch einordnen | K9 |
 | 1,5 Min. | Vorgehen auf einen neuen Fall übertragen | K10 |
 
-Keine vorbereitete Präsentation: das abgegebene Journal liegt bereit. Beide antworten; bei jeder Frage übernimmt die andere Person eine kurze Ergänzung oder Rückfrage. Bei kürzeren Slots die Fragen entsprechend straffen. Die Lehrperson bewertet K1–K6 separat anhand der Abgabe und hält K7–K10 während des Gesprächs direkt im Raster fest. Die Minute zwischen Tandems dient nur den Gesprächspunkten und dem Wechsel. Der Fallcheck bleibt unbenotet, selbstständig und jederzeit unterbrechbar.
+Keine vorbereitete Präsentation: das abgegebene Journal liegt bereit. Beide antworten; bei jeder Frage übernimmt die andere Person eine kurze Ergänzung oder Rückfrage. Bei kürzeren Slots die Fragen entsprechend straffen. Die Lehrperson bewertet K1–K6 separat anhand der Abgabe und hält K7–K10 während des Gesprächs direkt im Raster fest. Die Minute zwischen Tandems dient nur den Gesprächspunkten und dem Wechsel. Der Fremdtest bleibt unbenotet, selbstständig und jederzeit unterbrechbar.
 
 ## Sicherung und Bewertung
 

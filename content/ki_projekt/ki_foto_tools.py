@@ -220,3 +220,48 @@ def projekt_test(exp, variante='B', begruendung='', freigabe=False):
     result=ki.abschlusstest(exp,variante,begruendung,freigabe)
     if result is not None:beispiele(exp,variante,test=True)
     return result
+
+
+def fremdtest(exp, eigene, variante=None):
+    """Das nachtrainierte Modell eines anderen Tandems beurteilt die eigenen Klassen (C und D)."""
+    import matplotlib.pyplot as plt
+    fremd=exp['daten']
+    ki.pruefe(len(eigene.klassen)==2 and len(fremd.klassen)==2,'Fremdtest mit je genau zwei Klassen.')
+    if variante is None:variante=exp['test']['variante'] if exp.get('test') else 'B'
+    runs=[r for r in exp['laeufe'] if r['variante']==variante]
+    ki.pruefe(bool(runs),'Variante A oder B wählen.')
+    netz=runs[0]['netz']
+    probs=netz.predict_proba(eigene.X);pred=probs.argmax(axis=1);sicher=probs.max(axis=1)
+    n=len(pred);M=np.array([[int(np.sum((eigene.y==c)&(pred==k))) for k in range(2)] for c in range(2)])
+    gerade=M[0,0]+M[1,1];gekreuzt=M[0,1]+M[1,0]
+    trenn=max(gerade,gekreuzt)/n;best=(0,1) if gerade>=gekreuzt else (1,0)
+    farben=['#176c63','#be572b']
+    fig,axes=plt.subplots(1,2,figsize=(13,3.8),gridspec_kw=dict(width_ratios=[1,1.7]))
+    ax=axes[0]
+    for c in range(2):
+        anteil=M[c]/M[c].sum()*100
+        ax.barh(c,anteil[0],color=farben[0]);ax.barh(c,anteil[1],left=anteil[0],color=farben[1])
+        for k in range(2):
+            if anteil[k]>=8:ax.text(anteil[:k].sum()+anteil[k]/2,c,f'{anteil[k]:.0f} %',ha='center',va='center',color='white',weight='bold')
+    ax.set(yticks=[0,1],yticklabels=[f'Ihre Klasse\n{k}' for k in eigene.klassen],xlim=(0,100),xlabel='Vorhersage des fremden Modells (%)',
+           title=f'{n} eigene Bilder · Modell «{variante}» des anderen Tandems')
+    ax.invert_yaxis()
+    ax.legend(handles=[plt.Rectangle((0,0),1,1,color=farben[k]) for k in range(2)],labels=[f'sagt «{k}»' for k in fremd.klassen],loc='lower center',bbox_to_anchor=(.5,-.5),ncol=2,fontsize=9)
+    axes[1].axis('off');sub=axes[1].get_subplotspec().subgridspec(2,4,wspace=.05,hspace=.55)
+    for c in range(2):
+        ids=np.flatnonzero(eigene.y==c)[:4]
+        for j,i in enumerate(ids):
+            a=fig.add_subplot(sub[c,j]);a.imshow(eigene.bilder[i]);a.axis('off')
+            a.set_title(f'{eigene.klassen[c]}\nModell: {fremd.klassen[pred[i]]} ({sicher[i]:.0%})',fontsize=8,color=farben[pred[i]])
+    plt.tight_layout();plt.show()
+    print(f'Fremdes Modell: {fremd.klassen[0]} oder {fremd.klassen[1]}. Ihre Klassen: {eigene.klassen[0]} und {eigene.klassen[1]}.')
+    print('Zeile = Ihre Klasse, Spalte = Vorhersage des fremden Modells:')
+    print(f'{"":14s}'+''.join(f'{"sagt "+k:>16s}' for k in fremd.klassen))
+    for c in range(2):print(f'{eigene.klassen[c]:14s}'+''.join(f'{M[c,k]:16d}' for k in range(2)))
+    print(f'Trennschärfe: {trenn:.0%} (Zuordnung {eigene.klassen[0]} → {fremd.klassen[best[0]]}, {eigene.klassen[1]} → {fremd.klassen[best[1]]}); Raten ergäbe etwa 50 %.')
+    print(f'Mittlerer Modellwert: {sicher.mean():.0%}; {int(np.sum(sicher>=.9))} von {n} Bildern mit mindestens 90 %.')
+    if trenn>=.9:print('Das fremde Modell trennt Ihre Klassen fast vollständig, obwohl es sie nie gelernt hat. Prüfen Sie, woran: Gegenstand, Form, Farbe, Hintergrund oder Licht?')
+    elif trenn>=.65:print('Das fremde Modell trennt Ihre Klassen teilweise. Welche Bilder gehen schief, und was haben sie gemeinsam?')
+    else:print('Das fremde Modell trennt Ihre Klassen kaum besser als Raten. Seine Merkmale taugen für Ihre Aufgabe nicht.')
+    print('Das Modell kann nur zwischen seinen zwei Klassen wählen; «weder noch» kennt es nicht. Ein hoher Modellwert heisst nicht, dass es sich auskennt.')
+    return dict(variante=variante,matrix=M,trennschaerfe=float(trenn),zuordnung=best,mittlerer_modellwert=float(sicher.mean()))

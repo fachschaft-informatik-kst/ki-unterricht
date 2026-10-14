@@ -158,3 +158,5 @@ input[type=text]{border:1px solid #aebeb5;background:#fff;border-radius:8px;padd
 .protokoll-block{margin-top:26px;padding:16px 18px;border:1px solid var(--line);border-radius:12px}
 .protokoll-block h3{margin:0 0 6px;font-size:18px}
 .protokoll-block h4{margin:18px 0 6px;font-size:15px}
+.protokoll input.breit{max-width:none;min-width:160px}
+.protokoll td textarea{min-width:260px}

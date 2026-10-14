@@ -1003,7 +1003,7 @@
       "view": "projekt",
       "title": "Abgabe und Tandemgespräche",
       "rueckblick": "In Doppellektion 7 haben Sie die gewählte Variante mit dem Abschlusstest geprüft, Ihr Journal vervollständigt und das Abgabepaket kontrolliert. Heute erklären Sie Ihr Projekt im Tandemgespräch und trainieren das Modell eines anderen Tandems nach.",
-      "goal": "Das ganze Projekt gemeinsam erklären und das Modell eines anderen Tandems nachtrainieren.",
+      "goal": "Das ganze Projekt gemeinsam erklären, das Modell eines anderen Tandems nachtrainieren und an den eigenen Klassen testen.",
       "question": "Kommen wir mit den Daten und Einstellungen eines anderen Tandems zum gleichen Ergebnis?",
       "phases": [
         {
@@ -1015,7 +1015,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 4,
-              "text": "Bestätigt die Abgaben, nennt Reihenfolge und Dauer der Gespräche, teilt jedem Tandem das Abgabe-ZIP eines anderen Tandems zu und erklärt Reproduktionsprüfung und Fallcheck: Die Gespräche laufen nach diesen Minuten parallel."
+              "text": "Bestätigt die Abgaben, nennt Reihenfolge und Dauer der Gespräche, teilt jedem Tandem das Abgabe-ZIP eines anderen Tandems zu und erklärt Reproduktionsprüfung und Fremdtest: Die Gespräche laufen nach diesen Minuten parallel."
             },
             {
               "art": "Auftrag",
@@ -1054,7 +1054,7 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "text": "Lesen Sie auf der Kursseite die Anleitung zur Reproduktionsprüfung und den Auftrag Fallcheck und notieren Sie Fragen schriftlich, ohne die laufenden Gespräche zu unterbrechen."
+              "text": "Lesen Sie auf der Kursseite die Anleitung zur Reproduktionsprüfung und den Auftrag Fremdtest und notieren Sie Fragen schriftlich, ohne die laufenden Gespräche zu unterbrechen."
             },
             {
               "art": "Ergebnis",
@@ -1065,7 +1065,7 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Reproduktionsprüfung, Fallcheck und eigenes Gespräch",
+          "titel": "Reproduktionsprüfung, Fremdtest und eigenes Gespräch",
           "minutes": 70,
           "schritte": [
             {
@@ -1078,7 +1078,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 20,
-              "text": "Fallcheck: Wählen Sie einen der drei fiktiven Fälle (Bewerbungen, Schule, Kredit): Welche Daten braucht das Modell? Was könnte schiefgehen? Wer trägt die Folgen? Welche Massnahme ist überprüfbar? Halten Sie Ihre Empfehlung fest."
+              "text": "Fremdtest: Das nachtrainierte Modell des anderen Tandems kennt nur seine zwei Klassen. Tragen Sie zuerst Ihre Erwartung ein, laden Sie dann Ihre eigenen Fotos (Klassen C und D) in dasselbe Notebook und lassen Sie das fremde Modell sie beurteilen («6 · Fremdtest»). Lesen Sie Tabelle und Trennschärfe und beantworten Sie im Protokoll: Wie gut trennt das Modell C und D, und warum (Gegenstand, Hintergrund, Licht, nur zwei Klassen zur Auswahl)? Was bedeutet das für Trefferquoten?"
             },
             {
               "art": "Auftrag",
@@ -1089,7 +1089,7 @@
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein bewertetes Gespräch, ein eingereichter Reproduktionsbericht mit nachtrainiertem Notebook und ein bearbeiteter Fallcheck."
+              "text": "Ein bewertetes Gespräch, ein eingereichter Reproduktionsbericht mit nachtrainiertem Notebook und ein ausgewerteter Fremdtest."
             }
           ]
         },
@@ -1101,17 +1101,17 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Prüfen Sie, dass der Reproduktionsbericht eingereicht ist, sichern Sie den unbenoteten Fallcheck und notieren Sie eine Frage für «KI & Gesellschaft»."
+              "text": "Prüfen Sie, dass der Reproduktionsbericht eingereicht ist, sichern Sie den unbenoteten Fremdtest und notieren Sie eine Frage für «KI & Gesellschaft»."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein eingereichter Reproduktionsbericht, ein gesicherter Fallcheck und eine Frage für Doppellektion 10."
+              "text": "Ein eingereichter Reproduktionsbericht, ein gesicherter Fremdtest und eine Frage für Doppellektion 10."
             }
           ]
         }
       ],
-      "product": "Bewertetes Tandemgespräch + eingereichter Reproduktionsbericht + unbenoteter Fallcheck; keine nachträgliche Projektänderung.",
+      "product": "Bewertetes Tandemgespräch + eingereichter Reproduktionsbericht + unbenoteter Fremdtest; keine nachträgliche Projektänderung.",
       "motivation": "In Studium und Beruf zählt nicht nur, dass etwas funktioniert, sondern dass Sie es erklären und begründen können. Heute zeigen Sie im Gespräch, dass Sie Ihr Projekt verstanden haben, und prüfen, ob ein anderes Tandem mit seinen Daten wirklich zum selben Ergebnis kommt, so wie es in der Forschung üblich ist."
     },
     {
@@ -1153,7 +1153,7 @@
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "text": "Papierexperiment in Gruppen von drei bis vier Personen mit demselben Satzanfang auf zwei Blättern: Reihum schreibt jede Person ein Wort, und das Blatt wird so gefaltet, dass nur die letzten zwei Wörter sichtbar bleiben (Runde A, etwa 12 Wörter). Wiederholen Sie das mit vier sichtbaren Wörtern (Runde B). Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? Das Papagei-Modell macht dasselbe mit Zahlen (Kapitel 2 der Kursseite)."
+              "text": "Papierexperiment in Gruppen von drei bis vier Personen mit demselben Satzanfang auf zwei Blättern: Reihum schreibt jede Person ein Wort, und das Blatt wird so gefaltet, dass nur die letzten zwei Wörter sichtbar bleiben (Runde A, etwa 12 Wörter). Wiederholen Sie das mit vier sichtbaren Wörtern (Runde B). Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? Das Papagei-Modell macht dasselbe mit Zahlen (Kapitel 2 der Kursseite). Halten Sie beide Texte und Ihre Beobachtung im Protokoll der Kursseite (Kapitel 1) fest."
             },
             {
               "art": "Ergebnis",
@@ -1195,13 +1195,13 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 25,
-              "text": "Bearbeiten Sie die von der Lehrperson ausgewählten Papagei-Stationen und halten Sie fest, wie sich die Fortsetzung mit mehr Kontext verändert."
+              "text": "Bearbeiten Sie die von der Lehrperson ausgewählten Papagei-Stationen und halten Sie fest, wie sich die Fortsetzung mit mehr Kontext verändert. Tragen Sie die Stationen ins Protokoll der Kursseite ein (Kapitel 2): Satzanfang, Kontext, vorhergesagtes Wort, plausibel, wahr."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 20,
-              "text": "Verändern Sie in Soekia jeweils nur eine Grösse (Kontext oder Wortwahl), vergleichen Sie die Texte und sichern Sie einen gelungenen und einen problematischen Text mit Beleg."
+              "text": "Verändern Sie in Soekia jeweils nur eine Grösse (Kontext oder Wortwahl), vergleichen Sie die Texte und sichern Sie einen gelungenen und einen problematischen Text mit Beleg. Dokumentieren Sie beide Texte mit Beleg im Protokoll der Kursseite (Kapitel 3)."
             },
             {
               "art": "Auftrag",
@@ -1261,7 +1261,7 @@
       "view": "gesellschaft",
       "title": "Wer trägt die Folgen?",
       "rueckblick": "In Doppellektion 9 haben Sie gesehen, dass ein Sprachmodell das nächste Wort aus Beispieltexten vorhersagt, zuerst als Papagei-Modell mit Zählen, dann als neuronales Netz. Eine plausible Fortsetzung ist dabei nicht automatisch wahr. Heute fragen Sie, was passiert, wenn die Beispiele selbst einseitig sind: Wer trägt die Folgen?",
-      "goal": "Eine Benachteiligung erklären und eine überprüfbare Gegenmassnahme abwägen.",
+      "goal": "Ein Modell mit den Kriterien Opacity, Scale und Damage prüfen, eine Rückkopplung beschreiben, Cathy O’Neils Aussagen in einer Debatte kritisch hinterfragen und auf den Themenblock zurückblicken.",
       "question": "Wann wird aus einer Modellvorhersage ein gesellschaftliches Problem?",
       "phases": [
         {
@@ -1295,7 +1295,7 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "text": "Wählen Sie ein Datenproblem aus Ihrem Bildprojekt oder dem Fallcheck, zum Beispiel gleicher Hintergrund je Klasse oder zu wenige Exemplare, und schreiben Sie in einem Satz, welche Folge es für eine betroffene Person hätte, wenn das Modell im Alltag eingesetzt würde."
+              "text": "Wählen Sie ein Datenproblem aus Ihrem Bildprojekt oder dem Fremdtest, zum Beispiel gleicher Hintergrund je Klasse oder zu wenige Exemplare, und schreiben Sie in einem Satz, welche Folge es für eine betroffene Person hätte, wenn das Modell im Alltag eingesetzt würde."
             },
             {
               "art": "Ergebnis",
@@ -1313,7 +1313,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Zeigt Cathy O’Neils Video (ca. 13 Min.). Beobachtungsauftrag: Notieren Sie ein genanntes Beispiel mit Zeitmarke und fragen Sie: Wer entscheidet, wer profitiert, wer ist betroffen?"
+              "text": "Zeigt Cathy O’Neils Video (ca. 13 Min.). Beobachtungsauftrag: Notieren Sie ein genanntes Beispiel mit Zeitmarke und fragen Sie: Wer entscheidet, wer profitiert, wer ist betroffen? Wie wäre es, wenn Betroffene die Entscheidung prüfen könnten?"
             },
             {
               "art": "Auftrag",
@@ -1330,37 +1330,44 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Beispiele und Fallwerkstatt",
-          "minutes": 55,
+          "titel": "WMD-Check, Rückkopplung und Debatte",
+          "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "min": 10,
-              "text": "Erklären Sie in der Gruppe ein Beispiel aus dem Video in der Kette Problem → Ursache → begründete Verbesserung und schlagen Sie eine Massnahme vor."
+              "min": 15,
+              "text": "WMD-Check im Gespräch: Wählen Sie einen der drei Fälle (Bewerbungen, Schule, Kredit). Beurteilen Sie ein Beispiel aus dem Video, Ihren Fall und Ihr eigenes Bildprojekt mit Opacity (intransparent), Scale (skaliert) und Damage (Schaden). Tragen Sie die Stufen ein und entscheiden Sie: WMD, teilweise oder keine WMD? Warum ist das Bildprojekt wahrscheinlich keine WMD?"
             },
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "min": 45,
-              "text": "Wählen Sie in der Fallwerkstatt einen Fall (Bewerbungen, Schule, Kredit) und verteilen Sie die Rollen (betroffene Person, Betreiber, prüfende Person). Bauen Sie die Kette Daten → Modellentscheidung → betroffene Person → Folge auf, entwickeln Sie zwei Massnahmen mit Zuständigkeit und Erfolgskriterium, lassen Sie die Empfehlung von einer anderen Gruppe gegenprüfen («Woran würden wir die Verbesserung erkennen?») und halten Sie einen verbleibenden Zielkonflikt fest."
+              "min": 10,
+              "text": "Rückkopplung im Gespräch: Erzählen Sie an Ihrem Fall die Schleife Modell entscheidet → Realität verändert sich → neue Daten → Modell bestätigt sich in vier Sätzen. Warum erfährt das Modell nie, was aus den Abgelehnten geworden wäre? Wo können Sie die Schleife unterbrechen?"
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 20,
+              "text": "Debatte «Cathy O’Neil kritisch lesen»: Die Klasse teilt sich in Pro («Warnung überzeugend, Forderung richtig») und Contra («Warnung zugespitzt, Modelle können besser sein als Menschen, Forderung hat Nebenwirkungen»). 5 Minuten Argumente sammeln anhand der Leitfragen (Wer spricht? Welche Beispiele fehlen? Womit vergleicht sie? Was ist belegt? Welche Nebenwirkungen?), 10 Minuten abwechselnder Austausch, 4 Minuten Seitenwechsel: Jede Person nennt das stärkste Argument der anderen Seite."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine Empfehlung mit Massnahmen, Zuständigkeit, Erfolgskriterium und Zielkonflikt."
+              "text": "Ein WMD-Check mit Begründung, eine erzählte Rückkopplung und das stärkste Argument der Gegenseite."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Massnahme und Erfolgskriterium festlegen",
-          "minutes": 10,
+          "titel": "Mein Urteil und Rückblick",
+          "minutes": 20,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "text": "Formulieren Sie eine konkrete Massnahme, ein überprüfbares Erfolgskriterium und einen verbleibenden Zielkonflikt. Beurteilen Sie die Anfangsthese neu und vergleichen Sie mit Ihrer ersten Position."
+              "min": 10,
+              "text": "Beurteilen Sie die Anfangsthese neu und vergleichen Sie mit Ihrer ersten Position. Formulieren Sie für Ihren Fall eine konkrete Massnahme mit überprüfbarem Erfolgskriterium und einem verbleibenden Zielkonflikt."
             },
             {
               "art": "Input",
@@ -1369,15 +1376,22 @@
               "text": "Fragt bei allgemeinen Vorschlägen nach: Wer ändert was, und woran wäre die Verbesserung erkennbar?"
             },
             {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 10,
+              "text": "Rückblick auf den Themenblock: Nennen Sie reihum eine Erkenntnis aus dem Themenblock und eine Frage, die für Sie offen bleibt. Geben Sie der Lehrperson eine Rückmeldung zum Themenblock: Was hat am meisten gebracht, was würden Sie ändern?"
+            },
+            {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein begründetes Urteil und eine bestätigte oder veränderte Position."
+              "text": "Ein begründetes Urteil mit Massnahme, eine bestätigte oder veränderte Position und ein Rückblick auf den Themenblock."
             }
           ]
         }
       ],
-      "product": "Begründetes Urteil mit Massnahme, Prüfkriterium und verbleibender Grenze.",
-      "motivation": "Programme entscheiden mit, etwa bei Empfehlungen, Bewerbungen oder Kreditprüfungen. Behandelt ein Modell bestimmte Gruppen schlechter, trägt jemand die Folgen. Heute prüfen Sie, wann aus einer Vorhersage ein gesellschaftliches Problem wird und was man dagegen tun kann."
+      "product": "Begründetes Urteil (WMD-Check, Rückkopplung, Debatte) mit Massnahme und Zielkonflikt sowie ein kurzer Rückblick auf den Themenblock.",
+      "motivation": "Programme entscheiden mit, etwa bei Empfehlungen, Bewerbungen oder Kreditprüfungen. Behandelt ein Modell bestimmte Gruppen schlechter, trägt jemand die Folgen. Heute prüfen Sie mit drei Kriterien, wann ein Modell gefährlich wird, erkennen, wie Modelle ihre eigenen Daten erzeugen können, und lesen die Kritik von Cathy O’Neil selbst kritisch: Ein Warnruf ist ein guter Anlass, genau hinzusehen, aber keine fertige Antwort.",
+      "zeit": "Letzte Lektion zum Thema KI: bewusst gesprächsorientiert, mit wenig Schreibarbeit. WMD-Check und Rückkopplung laufen mündlich in der Gruppe, die Dropdowns und Kurzfelder der Kursseite halten nur das Ergebnis fest. Die Debatte braucht keine Vorbereitung ausser den Leitfragen."
     }
   ]
 }

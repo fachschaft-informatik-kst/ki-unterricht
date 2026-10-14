@@ -31,7 +31,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_programmierung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_einteilung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg .timeline li').count(),9);
-    for(const [id,n] of Object.entries({einstieg:5,lernarten:9,perzeptron:7,netze:4,sprache:7,gesellschaft:3,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
+    for(const [id,n] of Object.entries({einstieg:5,lernarten:9,perzeptron:7,netze:4,sprache:7,gesellschaft:6,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
     assert.equal(await p.locator('.nav-sub a').count(),5);
     assert.equal(await p.locator('#einstieg .kapitel-karte').count(),5);
     await p.locator('#einstieg-3 > summary').click();await p.locator('#einstieg .kapitel-karte').nth(2).click();await p.waitForFunction(()=>document.getElementById('einstieg-3').open);
@@ -89,6 +89,10 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.locator('#lernarten [data-answer="memory"]').fill('Labels, Ähnlichkeit und Rückmeldungen sind unterschiedliche Lernsignale.');
   await p.locator('.nav a[href="#perzeptron"]').click();
   await p.locator('#perzeptron [data-answer="hand_and_w1"]').fill('0.5');await p.locator('#perzeptron [data-answer="hand_xor_max"]').selectOption('3');
+  await p.locator('.nav a[href="#sprache"]').click();
+  await p.locator('#sprache [data-answer="pap_text_a"]').fill('Am Samstag gehe ich Brot');await p.locator('#sprache [data-answer="pst_1_plausibel"]').selectOption('ja');
+  await p.locator('.nav a[href="#gesellschaft"]').click();
+  await p.locator('#gesellschaft [data-answer="wmd_bild_u"]').selectOption('nein');await p.locator('#gesellschaft [data-answer="loop_text"]').fill('Kredit abgelehnt');
   await p.locator('.nav a[href="#netze"]').click();
   await p.locator('#netze [data-answer="zif_16"]').fill('95');await p.locator('#netze [data-answer="zif_brauchbar"]').selectOption('8');
   await p.locator('.sidebar-bottom a[href="#journal"]').click();
@@ -113,6 +117,10 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.locator('.sidebar-bottom a[href="#journal"]').click();assert((await p.locator('[data-journal="names"]').inputValue()).includes('Ada'));
   await p.locator('.nav a[href="#perzeptron"]').click();
   assert.equal(await p.locator('#perzeptron [data-answer="hand_and_w1"]').inputValue(),'0.5');assert.equal(await p.locator('#perzeptron [data-answer="hand_xor_max"]').inputValue(),'3');
+  await p.locator('.nav a[href="#sprache"]').click();
+  assert.equal(await p.locator('#sprache [data-answer="pap_text_a"]').inputValue(),'Am Samstag gehe ich Brot');assert.equal(await p.locator('#sprache [data-answer="pst_1_plausibel"]').inputValue(),'ja');
+  await p.locator('.nav a[href="#gesellschaft"]').click();
+  assert.equal(await p.locator('#gesellschaft [data-answer="wmd_bild_u"]').inputValue(),'nein');assert.equal(await p.locator('#gesellschaft [data-answer="loop_text"]').inputValue(),'Kredit abgelehnt');
   await p.locator('.nav a[href="#netze"]').click();
   assert.equal(await p.locator('#netze [data-answer="zif_16"]').inputValue(),'95');assert.equal(await p.locator('#netze [data-answer="zif_brauchbar"]').inputValue(),'8');
   await p.locator('.nav a[href="#lernarten"]').click();

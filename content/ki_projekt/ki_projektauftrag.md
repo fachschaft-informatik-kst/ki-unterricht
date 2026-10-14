@@ -37,7 +37,7 @@ Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine ho
 | 7.Doppellektion | Modellwahl, Abschlusstest, Journal abschliessen |
 | 8.Doppellektion | Abgabe **vor Unterrichtsbeginn**, Fachgespräch im Tandem |
 
-Alle Fachgespräche finden während der **8.Doppellektion** statt. Richtwert: **5 Minuten pro Tandem**, bei mehr Tandems für alle gleich kürzer. Die Lehrperson gibt Dauer, Reihenfolge und Abgabekanal vorab bekannt. Die übrigen Tandems bearbeiten den unbenoteten Fallcheck.
+Alle Fachgespräche finden während der **8.Doppellektion** statt. Richtwert: **5 Minuten pro Tandem**, bei mehr Tandems für alle gleich kürzer. Die Lehrperson gibt Dauer, Reihenfolge und Abgabekanal vorab bekannt. Die übrigen Tandems bearbeiten den unbenoteten Fremdtest (fremdes Modell an den eigenen Klassen testen).
 
 ## Bewertung
 

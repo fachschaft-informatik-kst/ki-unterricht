@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="350" viewBox="0 0 640 350" font-family="Helvetica, Arial, sans-serif" font-size="14">
+  <defs>
+    <clipPath id="clipA"><circle cx="195" cy="135" r="95"/></clipPath>
+    <clipPath id="clipB"><circle cx="305" cy="135" r="95"/></clipPath>
+    <pattern id="schraff" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="7" height="7" fill="#ffffff"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#8a1c1c" stroke-width="3"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="350" fill="#ffffff"/>
+
+  <g fill-opacity=".5">
+    <circle cx="195" cy="135" r="95" fill="#9ec0f0"/>
+    <circle cx="305" cy="135" r="95" fill="#a9d89c"/>
+    <circle cx="250" cy="230" r="95" fill="#f2a6a2"/>
+  </g>
+
+  <g clip-path="url(#clipA)"><g clip-path="url(#clipB)">
+    <circle cx="250" cy="230" r="95" fill="url(#schraff)"/>
+  </g></g>
+
+  <g fill="none" stroke-width="2.5">
+    <circle cx="195" cy="135" r="95" stroke="#4a79b8"/>
+    <circle cx="305" cy="135" r="95" stroke="#5f9a4e"/>
+    <circle cx="250" cy="230" r="95" stroke="#b04a46"/>
+  </g>
+
+  <g text-anchor="middle" fill="#1d2b30">
+    <text x="148" y="130" font-size="18" font-weight="bold">Opacity</text>
+    <text x="148" y="149" font-size="12">intransparent</text>
+    <text x="352" y="130" font-size="18" font-weight="bold">Scale</text>
+    <text x="352" y="149" font-size="12">skaliert</text>
+    <text x="250" y="285" font-size="18" font-weight="bold">Damage</text>
+    <text x="250" y="304" font-size="12">Schaden</text>
+    <text x="250" y="182" font-size="19" font-weight="bold" fill="#8a1c1c" stroke="#ffffff" stroke-width="5" paint-order="stroke">WMD</text>
+  </g>
+
+  <g fill="#1d2b30">
+    <rect x="432" y="42" width="14" height="14" fill="#9ec0f0" stroke="#4a79b8" stroke-width="2"/>
+    <text x="454" y="54" font-weight="bold">Opacity</text>
+    <text x="454" y="72" font-size="12.5">Betroffene können es nicht</text>
+    <text x="454" y="88" font-size="12.5">verstehen, prüfen, anfechten.</text>
+
+    <rect x="432" y="112" width="14" height="14" fill="#a9d89c" stroke="#5f9a4e" stroke-width="2"/>
+    <text x="454" y="124" font-weight="bold">Scale</text>
+    <text x="454" y="142" font-size="12.5">Tausend- bis millionenfach</text>
+    <text x="454" y="158" font-size="12.5">im Einsatz.</text>
+
+    <rect x="432" y="182" width="14" height="14" fill="#f2a6a2" stroke="#b04a46" stroke-width="2"/>
+    <text x="454" y="194" font-weight="bold">Damage</text>
+    <text x="454" y="212" font-size="12.5">Reale negative Folgen: Job,</text>
+    <text x="454" y="228" font-size="12.5">Wohnung, Bildung, Freiheit.</text>
+
+    <rect x="432" y="252" width="14" height="14" fill="url(#schraff)" stroke="#8a1c1c" stroke-width="2"/>
+    <text x="454" y="264" font-weight="bold" fill="#8a1c1c">WMD</text>
+    <text x="454" y="282" font-size="12.5">Nur wenn alle drei Kriterien</text>
+    <text x="454" y="298" font-size="12.5">zugleich zutreffen.</text>
+  </g>
+</svg>
