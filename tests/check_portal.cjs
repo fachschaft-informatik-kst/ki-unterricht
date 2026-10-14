@@ -182,9 +182,15 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     const importedCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
     const last=importedCells.nth(await importedCells.count()-1);
     assert.equal(await last.locator('.jp-InputPrompt').innerText(),'[ ]:');
-    await last.locator('.cm-content').fill("assert 'experiment' not in globals() and 'foto' not in globals()\nprint('Fresh kernel confirmed')");
-    await p.keyboard.press('Shift+Enter');
-    await last.locator('.jp-OutputArea-output').filter({hasText:'Fresh kernel confirmed'}).waitFor({timeout:180000});
+    // A slow runner can drop the typed text or the key press while the restored notebook re-renders: retry the input, never the assertion.
+    let confirmed=false;
+    for(let attempt=0;attempt<3&&!confirmed;attempt++){
+     const editor=last.locator('.cm-content');
+     await editor.fill("assert 'experiment' not in globals() and 'foto' not in globals()\nprint('Fresh kernel confirmed')");
+     await p.keyboard.press('Shift+Enter');
+     confirmed=await last.locator('.jp-OutputArea-output').filter({hasText:'Fresh kernel confirmed'}).waitFor({timeout:90000}).then(()=>true,()=>false);
+    }
+    assert(confirmed,'Fresh kernel not confirmed: '+await last.innerText());
     // Reload must also refuse an edited preparation, even with an original filename.
     await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-import-check.zip');
     await p.reload();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
