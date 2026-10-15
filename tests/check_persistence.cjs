@@ -71,9 +71,36 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   const chooser=p.waitForEvent('filechooser');await uploadButton.click();
   await(await chooser).setFiles({name:'daten..json',mimeType:'application/json',buffer:Buffer.from('{"meine_daten":[1,2,3],"text":"Äpfel"}')});
   await p.waitForFunction(()=>document.querySelector('#attachment-list').textContent.includes('daten..json'),null,{timeout:60000});
+  // Fill EVERY course textbox and journal field with identifiable test content.
+  // This detects newly missed fields in both ZIP export and clean-browser restore.
+  const formSnapshot=await p.evaluate(()=>{
+    const saved={answers:{},journal:{}};
+    for(const el of document.querySelectorAll('[data-answer], [data-journal]')){
+      const kind=el.hasAttribute('data-answer')?'answers':'journal';
+      const key=el.getAttribute(kind==='answers'?'data-answer':'data-journal');
+      if(kind==='answers'&&key==='ki_ordnung'){
+        saved.answers[key]=el.value;
+        continue; // preserve the fixture's existing answer
+      }
+      if(el.tagName==='SELECT'){
+        const opt=[...el.options].find(option=>option.value&&!option.disabled);
+        if(opt)el.value=opt.value;
+      }else{
+        el.value='ZIP-Test: '+key;
+      }
+      el.dispatchEvent(new Event('input',{bubbles:true}));
+      el.dispatchEvent(new Event('change',{bubbles:true}));
+      saved[kind][key]=el.value;
+    }
+    return saved;
+  });
+  assert(Object.keys(formSnapshot.answers).length>=140,'Not all course answer fields found');
+  assert(Object.keys(formSnapshot.journal).length>=15,'Not all project journal fields found');
   // Immediate export must include edits even before the background save delay.
   await edit(p,cells.nth(1),"print('zuletzt geändert – noch nicht ausgeführt')");
   const exported=await download(p,'export.zip'),manifest=JSON.parse(await exported.files.get('kursstand.json').text());
+  for(const [key,value] of Object.entries(formSnapshot.answers))assert.equal(manifest.answers[key],value,'ZIP answer: '+key);
+  for(const [key,value] of Object.entries(formSnapshot.journal))assert.equal(manifest.journal[key],value,'ZIP journal: '+key);
   assert.equal(manifest.notebooks.length,5);
   assert.equal(manifest.answers.ki_ordnung,state.answers.ki_ordnung);
   const uploaded=manifest.files.find(f=>f.name==='daten..json');assert(uploaded,'Notebook upload missing');
@@ -92,7 +119,9 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   const second=await setup();await importZip(second.p,exported.file);await openProject(second.p);
   assert((await second.p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1).innerText()).includes('zuletzt geändert'));
   const transferred=await download(second.p,'transferred.zip');
-  assert.deepEqual(JSON.parse(await transferred.files.get('kursstand.json').text()).answers,manifest.answers);
+  const transferredState=JSON.parse(await transferred.files.get('kursstand.json').text());
+  assert.deepEqual(transferredState.answers,manifest.answers);
+  assert.deepEqual(transferredState.journal,manifest.journal);
   // Missing manifest entries fail before changing any stored document.
   const broken=await zipFile(entries.filter(e=>e.name!=='notebooks/'+names[0]),'missing.zip');
   await second.p.locator('#restore-package').setInputFiles(broken);
