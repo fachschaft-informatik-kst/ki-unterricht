@@ -1,3 +1,38 @@
-<details class="kapitel" id="einstieg-5" data-kurz="Asimovs drei Regeln und der Fall «Schulweg»: Wer legt fest, was Schaden heisst?" open><summary><span class="kapitel-nr">5</span><h2 class="kapitel-titel">Die drei Gesetze der Robotik</h2></summary><div class="kapitel-body"><div class="card"><p>Der Schriftsteller Isaac Asimov liess 1942 in einer Kurzgeschichte Roboter nach drei Regeln handeln:</p><ol><li>Ein Roboter darf keinen Menschen verletzen oder durch Untätigkeit zu Schaden kommen lassen.</li><li>Er muss den Befehlen von Menschen gehorchen, ausser sie verstossen gegen das erste Gesetz.</li><li>Er schützt seine eigene Existenz, solange das nicht gegen das erste oder zweite Gesetz verstösst.</li></ol></div><figure class="concept-figure"><img alt="Das Trolley-Problem: Eine Strassenbahn rollt auf Gleise zu, die sich verzweigen. An einem Gleis steht eine Person, am anderen mehrere. Ein Hebel stellt die Weiche." loading="lazy" src="grafiken/trolley_problem.svg"/><figcaption>Das Trolley-Problem (Weichenstellerfall). Grafik: McGeddon / Zapyon, <a href="https://commons.wikimedia.org/wiki/File:Trolley_Problem.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</figcaption></figure><p>Beim <a href="https://de.wikipedia.org/wiki/Trolley-Problem" target="_blank" rel="noopener noreferrer">Trolley-Problem</a> ist eine Strassenbahn ausser Kontrolle: Sie würde fünf Personen treffen, durch Umstellen einer Weiche stattdessen eine. Selbstfahrende Autos stehen vor derselben Art von Frage.</p><div class="card"><h3>Fall «Schulweg»</h3><p>Ein selbstfahrendes Taxi ohne Fahrperson ist um 8 Uhr morgens mit 50 km/h auf einer schmalen Strasse am Schulhaus vorbei unterwegs. Ein Fahrgast sitzt im Auto. Plötzlich rennen zwei Kinder hinter einem parkierten Lieferwagen auf die Fahrbahn. Bremsen allein reicht nicht mehr. Dem Auto bleiben drei Möglichkeiten:</p><ol><li><b>Geradeaus bremsen:</b> Die Kinder werden mit hoher Wahrscheinlichkeit verletzt.</li><li><b>Nach rechts ausweichen:</b> Das Taxi prallt in eine Mauer, der Fahrgast wird mit hoher Wahrscheinlichkeit verletzt.</li><li><b>Nach links ausweichen:</b> Eine entgegenkommende Person auf dem Velo wird mit hoher Wahrscheinlichkeit verletzt.</li></ol><p class="small">Für diesen Fall gibt es keine richtige oder falsche Lösung. Menschen, Länder und Rechtssysteme gewichten unterschiedlich. Entscheidend sind Ihre Begründungen.</p></div>
-<p class="task"><b>Aufgabe:</b> Entscheiden Sie zuerst allein, welche Möglichkeit Sie wählen würden und warum (oder weshalb Sie keine der drei wählen können). Vergleichen Sie dann in der Vierergruppe: Wo gehen die Entscheidungen auseinander? Welches der drei Gesetze greift, und widersprechen sich die Gesetze hier? Wer legt fest, was «Schaden» heisst und wessen Schaden mehr zählt: Hersteller, Staat oder Fahrgäste? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest.</p><label class="field answer"><span>Zwei Argumente zum Fall «Schulweg» und zu den Gesetzen der Robotik</span><textarea data-answer="gesetze" maxlength="10000" placeholder="Ihre Argumente …" rows="3"></textarea></label>
-</div></details>
+<details class="kapitel" id="einstieg-5" data-kurz="Asimovs drei Regeln und der Fall «Schulweg»: Wer legt fest, was Schaden heisst?" open>
+  <summary><span class="kapitel-nr">5</span>
+    <h2 class="kapitel-titel">Die drei Gesetze der Robotik</h2>
+  </summary>
+  <div class="kapitel-body">
+    <div class="card">
+      <!-- MD:START -->
+Der Schriftsteller Isaac Asimov liess 1942 in einer Kurzgeschichte Roboter nach drei Regeln handeln:
+<!-- MD:END -->
+      <ol>
+        <li>Ein Roboter darf keinen Menschen verletzen oder durch Untätigkeit zu Schaden kommen lassen.</li>
+        <li>Er muss den Befehlen von Menschen gehorchen, ausser sie verstossen gegen das erste Gesetz.</li>
+        <li>Er schützt seine eigene Existenz, solange das nicht gegen das erste oder zweite Gesetz verstösst.</li>
+      </ol>
+    </div>
+    <figure class="concept-figure">
+      <img alt="Das Trolley-Problem: Eine Strassenbahn rollt auf Gleise zu, die sich verzweigen. An einem Gleis steht eine Person, am anderen mehrere. Ein Hebel stellt die Weiche." loading="lazy" src="grafiken/trolley_problem.svg"/>
+      <figcaption>Das Trolley-Problem (Weichenstellerfall). Grafik: McGeddon / Zapyon, <a href="https://commons.wikimedia.org/wiki/File:Trolley_Problem.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</figcaption>
+    </figure>
+    <p>Beim <a href="https://de.wikipedia.org/wiki/Trolley-Problem" target="_blank" rel="noopener noreferrer">Trolley-Problem</a> ist eine Strassenbahn ausser Kontrolle: Sie würde fünf Personen treffen, durch Umstellen einer Weiche stattdessen eine. Selbstfahrende Autos stehen vor derselben Art von Frage.</p>
+    <div class="card">
+      <!-- MD:START -->
+### Fall «Schulweg»
+<!-- MD:END -->
+      <!-- MD:START -->
+Ein selbstfahrendes Taxi ohne Fahrperson ist um 8 Uhr morgens mit 50 km/h auf einer schmalen Strasse am Schulhaus vorbei unterwegs. Ein Fahrgast sitzt im Auto. Plötzlich rennen zwei Kinder hinter einem parkierten Lieferwagen auf die Fahrbahn. Bremsen allein reicht nicht mehr. Dem Auto bleiben drei Möglichkeiten:
+<!-- MD:END -->
+      <ol>
+        <li><b>Geradeaus bremsen:</b> Die Kinder werden mit hoher Wahrscheinlichkeit verletzt.</li>
+        <li><b>Nach rechts ausweichen:</b> Das Taxi prallt in eine Mauer, der Fahrgast wird mit hoher Wahrscheinlichkeit verletzt.</li>
+        <li><b>Nach links ausweichen:</b> Eine entgegenkommende Person auf dem Velo wird mit hoher Wahrscheinlichkeit verletzt.</li>
+      </ol>
+      <p class="small">Für diesen Fall gibt es keine richtige oder falsche Lösung. Menschen, Länder und Rechtssysteme gewichten unterschiedlich. Entscheidend sind Ihre Begründungen.</p>
+    </div>
+    <p class="task"><b>Aufgabe:</b> Entscheiden Sie zuerst allein, welche Möglichkeit Sie wählen würden und warum (oder weshalb Sie keine der drei wählen können). Vergleichen Sie dann in der Vierergruppe: Wo gehen die Entscheidungen auseinander? Welches der drei Gesetze greift, und widersprechen sich die Gesetze hier? Wer legt fest, was «Schaden» heisst und wessen Schaden mehr zählt: Hersteller, Staat oder Fahrgäste? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest.</p>
+    <label class="field answer"><span>Zwei Argumente zum Fall «Schulweg» und zu den Gesetzen der Robotik</span><textarea data-answer="gesetze" maxlength="10000" placeholder="Ihre Argumente …" rows="3"></textarea></label>
+  </div>
+</details>

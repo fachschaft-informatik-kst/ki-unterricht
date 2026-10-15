@@ -1,1 +1,189 @@
-<details class="kapitel" id="perzeptron-5" data-kurz="Im Notebook entscheiden, rechnen, einstellen, per Klick lernen lassen und XOR versuchen (ca. 35 Minuten)." open><summary><span class="kapitel-nr">5</span><h2 class="kapitel-titel">Im Notebook: entscheiden, einstellen, lernen lassen</h2></summary><div class="kapitel-body"><div class="lesson-steps"><article><b>1 · Entscheiden</b><p>Stellen Sie im Schwimmbad-Beispiel Gewichte und Bias so ein, dass das Neuron Ihre Regel trifft (8 von 8). Selbstcheck: Wofür ist ein Neuron da?</p></article><article><b>2 · Rechnen</b><p>Mit den Reglern Eingaben, Gewichte und Bias ändern: Wann feuert das Neuron? Vergleichen Sie es mit der Nervenzelle.</p></article><article><b>3 · Von Hand einstellen</b><p>Stellen Sie AND, OR und NAND ein. Feuert das Neuron zu wenig oder zu viel? Die Ausgabe nennt die Korrektur.</p></article><article><b>4 · Lernen per Klick</b><p>Das Neuron lernt Beispiel für Beispiel. Klicken Sie weiter und beobachten Sie Rechnung, Zahlen und Grenzlinie. Dann lernt es alle Runden selbst; ändern Sie die Lernrate.</p></article><article><b>5 · Pflanzen bestimmen</b><p>Ein Neuron unterscheidet an echten Messdaten zwei Pflanzenarten und wird an neuen Pflanzen geprüft.</p></article><article><b>6 · XOR versuchen</b><p>Lernen lassen, selbst einstellen, die vier Bedingungen prüfen: Warum gelingt XOR nie? Selbstchecks geben sofort Rückmeldung.</p></article></div><details><summary>Beispielgrafik – sofort verfügbar</summary><div class="detail-body"><p>Vorberechnetes Beispiel mit den Grundeinstellungen. Ihr interaktiver Versuch kann andere Ergebnisse zeigen.</p><img alt="Beispielausgabe: perzeptron" loading="lazy" src="previews/perzeptron.png" style="max-width:100%;height:auto"/></div></details><button class="btn primary" data-lab="perzeptron_und_neuronale_netze.ipynb">Neuron starten ▶</button><div class="protokoll-block"><h3>Mein Protokoll</h3><p class="small">Tragen Sie während der Notebookarbeit Ihre Einstellungen und Ergebnisse ein. Die Einträge werden im Browser gespeichert und im ZIP gesichert.</p><h4>1 · Schwimmbad-Neuron</h4><div class="table-scroll"><table class="typen protokoll"><thead><tr><th></th><th>Gewicht Sonne</th><th>Gewicht Freund:innen</th><th>Gewicht Prüfung</th><th>Bias</th><th>Treffer (von 8)</th></tr></thead><tbody><tr><th>Meine Einstellung</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw_gs" aria-label="Gewicht Sonne" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw_gf" aria-label="Gewicht Freund:innen" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw_gp" aria-label="Gewicht Prüfung" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw_bias" aria-label="Bias" placeholder=""></td><td><select data-answer="sw_treffer" aria-label="Treffer von 8"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></td></tr><tr><th>Zweite Einstellung mit 8 von 8</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw2_gs" aria-label="Zweite Einstellung Gewicht Sonne" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw2_gf" aria-label="Zweite Einstellung Gewicht Freund:innen" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw2_gp" aria-label="Zweite Einstellung Gewicht Prüfung" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw2_bias" aria-label="Zweite Einstellung Bias" placeholder=""></td><td><select data-answer="sw2_gefunden" aria-label="Zweite Einstellung gefunden?"><option value="">–</option><option value="ja">Ja, gefunden</option><option value="nein">Nein</option></select></td></tr></tbody></table></div><h4>2 · Von Hand eingestellt</h4><div class="table-scroll"><table class="typen protokoll"><thead><tr><th>Aufgabe</th><th>Gewicht 1</th><th>Gewicht 2</th><th>Bias</th><th>Alle vier Zeilen ✓?</th></tr></thead><tbody><tr><th>AND</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_and_w1" aria-label="AND Gewicht 1" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_and_w2" aria-label="AND Gewicht 2" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_and_b" aria-label="AND Bias" placeholder=""></td><td><select data-answer="hand_and_ok" aria-label="AND gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td></tr><tr><th>OR</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_or_w1" aria-label="OR Gewicht 1" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_or_w2" aria-label="OR Gewicht 2" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_or_b" aria-label="OR Bias" placeholder=""></td><td><select data-answer="hand_or_ok" aria-label="OR gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td></tr><tr><th>NAND</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_nand_w1" aria-label="NAND Gewicht 1" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_nand_w2" aria-label="NAND Gewicht 2" placeholder=""></td><td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_nand_b" aria-label="NAND Bias" placeholder=""></td><td><select data-answer="hand_nand_ok" aria-label="NAND gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td></tr><tr><th>XOR</th><td>–</td><td>–</td><td>–</td><td><select data-answer="hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></td></tr></tbody></table></div><h4>3 · Lernrate ändern (AND)</h4><div class="table-scroll"><table class="typen protokoll"><thead><tr><th>Lernrate</th><th>Runden, bis alle vier Zeilen stimmen</th></tr></thead><tbody><tr><th>0.05</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_005" aria-label="Runden bei Lernrate 0.05" placeholder=""></td></tr><tr><th>0.2</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_02" aria-label="Runden bei Lernrate 0.2" placeholder=""></td></tr><tr><th>0.5</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_05" aria-label="Runden bei Lernrate 0.5" placeholder=""></td></tr><tr><th>1.0</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_10" aria-label="Runden bei Lernrate 1.0" placeholder=""></td></tr></tbody></table></div><label class="field answer"><span>Was fällt auf, wenn die Lernrate kleiner oder grösser wird? Gibt es eine Lernrate, die schlecht ist?</span><textarea data-answer="lr_beob" maxlength="10000" placeholder="Bei kleiner Lernrate …" rows="3"></textarea></label><h4>4 · Pflanzen bestimmen</h4><div class="table-scroll"><table class="typen protokoll"><thead><tr><th>Messung</th><th>Ihr Ergebnis</th></tr></thead><tbody><tr><th>Neue Pflanzen richtig erkannt (von 30)</th><td><input type="text" inputmode="decimal" maxlength="40" data-answer="iris_richtig" aria-label="Neue Pflanzen richtig erkannt" placeholder=""></td></tr><tr><th>Welcher Eingang hat das grössere Gewicht?</th><td><select data-answer="iris_gewicht" aria-label="Grösseres Gewicht"><option value="">–</option><option value="laenge">Länge des Kronblatts</option><option value="breite">Breite des Kronblatts</option></select></td></tr></tbody></table></div></div></div></details>
+<details class="kapitel" id="perzeptron-5" data-kurz="Im Notebook entscheiden, rechnen, einstellen, per Klick lernen lassen und XOR versuchen (ca. 35 Minuten)." open>
+  <summary><span class="kapitel-nr">5</span>
+    <h2 class="kapitel-titel">Im Notebook: entscheiden, einstellen, lernen lassen</h2>
+  </summary>
+  <div class="kapitel-body">
+    <div class="lesson-steps">
+      <article>
+        <b>1 · Entscheiden</b>
+        <!-- MD:START -->
+Stellen Sie im Schwimmbad-Beispiel Gewichte und Bias so ein, dass das Neuron Ihre Regel trifft (8 von 8). Selbstcheck: Wofür ist ein Neuron da?
+<!-- MD:END -->
+      </article>
+      <article>
+        <b>2 · Rechnen</b>
+        <!-- MD:START -->
+Mit den Reglern Eingaben, Gewichte und Bias ändern: Wann feuert das Neuron? Vergleichen Sie es mit der Nervenzelle.
+<!-- MD:END -->
+      </article>
+      <article>
+        <b>3 · Von Hand einstellen</b>
+        <!-- MD:START -->
+Stellen Sie AND, OR und NAND ein. Feuert das Neuron zu wenig oder zu viel? Die Ausgabe nennt die Korrektur.
+<!-- MD:END -->
+      </article>
+      <article>
+        <b>4 · Lernen per Klick</b>
+        <!-- MD:START -->
+Das Neuron lernt Beispiel für Beispiel. Klicken Sie weiter und beobachten Sie Rechnung, Zahlen und Grenzlinie. Dann lernt es alle Runden selbst; ändern Sie die Lernrate.
+<!-- MD:END -->
+      </article>
+      <article>
+        <b>5 · Pflanzen bestimmen</b>
+        <!-- MD:START -->
+Ein Neuron unterscheidet an echten Messdaten zwei Pflanzenarten und wird an neuen Pflanzen geprüft.
+<!-- MD:END -->
+      </article>
+      <article>
+        <b>6 · XOR versuchen</b>
+        <!-- MD:START -->
+Lernen lassen, selbst einstellen, die vier Bedingungen prüfen: Warum gelingt XOR nie? Selbstchecks geben sofort Rückmeldung.
+<!-- MD:END -->
+      </article>
+    </div>
+    <details>
+      <summary>Beispielgrafik – sofort verfügbar</summary>
+      <div class="detail-body">
+        <!-- MD:START -->
+Vorberechnetes Beispiel mit den Grundeinstellungen. Ihr interaktiver Versuch kann andere Ergebnisse zeigen.
+<!-- MD:END -->
+        <img alt="Beispielausgabe: perzeptron" loading="lazy" src="previews/perzeptron.png" style="max-width:100%;height:auto"/>
+      </div>
+    </details>
+    <button class="btn primary" data-lab="perzeptron_und_neuronale_netze.ipynb">Neuron starten ▶</button>
+    <div class="protokoll-block">
+      <!-- MD:START -->
+### Mein Protokoll
+<!-- MD:END -->
+      <p class="small">Tragen Sie während der Notebookarbeit Ihre Einstellungen und Ergebnisse ein. Die Einträge werden im Browser gespeichert und im ZIP gesichert.</p>
+      <h4>1 · Schwimmbad-Neuron</h4>
+      <div class="table-scroll">
+        <table class="typen protokoll">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Gewicht Sonne</th>
+              <th>Gewicht Freund:innen</th>
+              <th>Gewicht Prüfung</th>
+              <th>Bias</th>
+              <th>Treffer (von 8)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Meine Einstellung</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw_gs" aria-label="Gewicht Sonne" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw_gf" aria-label="Gewicht Freund:innen" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw_gp" aria-label="Gewicht Prüfung" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw_bias" aria-label="Bias" placeholder=""></td>
+              <td><select data-answer="sw_treffer" aria-label="Treffer von 8"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></td>
+            </tr>
+            <tr>
+              <th>Zweite Einstellung mit 8 von 8</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw2_gs" aria-label="Zweite Einstellung Gewicht Sonne" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw2_gf" aria-label="Zweite Einstellung Gewicht Freund:innen" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw2_gp" aria-label="Zweite Einstellung Gewicht Prüfung" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="sw2_bias" aria-label="Zweite Einstellung Bias" placeholder=""></td>
+              <td><select data-answer="sw2_gefunden" aria-label="Zweite Einstellung gefunden?"><option value="">–</option><option value="ja">Ja, gefunden</option><option value="nein">Nein</option></select></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h4>2 · Von Hand eingestellt</h4>
+      <div class="table-scroll">
+        <table class="typen protokoll">
+          <thead>
+            <tr>
+              <th>Aufgabe</th>
+              <th>Gewicht 1</th>
+              <th>Gewicht 2</th>
+              <th>Bias</th>
+              <th>Alle vier Zeilen ✓?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>AND</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_and_w1" aria-label="AND Gewicht 1" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_and_w2" aria-label="AND Gewicht 2" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_and_b" aria-label="AND Bias" placeholder=""></td>
+              <td><select data-answer="hand_and_ok" aria-label="AND gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td>
+            </tr>
+            <tr>
+              <th>OR</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_or_w1" aria-label="OR Gewicht 1" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_or_w2" aria-label="OR Gewicht 2" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_or_b" aria-label="OR Bias" placeholder=""></td>
+              <td><select data-answer="hand_or_ok" aria-label="OR gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td>
+            </tr>
+            <tr>
+              <th>NAND</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_nand_w1" aria-label="NAND Gewicht 1" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_nand_w2" aria-label="NAND Gewicht 2" placeholder=""></td>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_nand_b" aria-label="NAND Bias" placeholder=""></td>
+              <td><select data-answer="hand_nand_ok" aria-label="NAND gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td>
+            </tr>
+            <tr>
+              <th>XOR</th>
+              <td>–</td>
+              <td>–</td>
+              <td>–</td>
+              <td><select data-answer="hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h4>3 · Lernrate ändern (AND)</h4>
+      <div class="table-scroll">
+        <table class="typen protokoll">
+          <thead>
+            <tr>
+              <th>Lernrate</th>
+              <th>Runden, bis alle vier Zeilen stimmen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>0.05</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_005" aria-label="Runden bei Lernrate 0.05" placeholder=""></td>
+            </tr>
+            <tr>
+              <th>0.2</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_02" aria-label="Runden bei Lernrate 0.2" placeholder=""></td>
+            </tr>
+            <tr>
+              <th>0.5</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_05" aria-label="Runden bei Lernrate 0.5" placeholder=""></td>
+            </tr>
+            <tr>
+              <th>1.0</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_10" aria-label="Runden bei Lernrate 1.0" placeholder=""></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <label class="field answer"><span>Was fällt auf, wenn die Lernrate kleiner oder grösser wird? Gibt es eine Lernrate, die schlecht ist?</span><textarea data-answer="lr_beob" maxlength="10000" placeholder="Bei kleiner Lernrate …" rows="3"></textarea></label>
+      <h4>4 · Pflanzen bestimmen</h4>
+      <div class="table-scroll">
+        <table class="typen protokoll">
+          <thead>
+            <tr>
+              <th>Messung</th>
+              <th>Ihr Ergebnis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Neue Pflanzen richtig erkannt (von 30)</th>
+              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="iris_richtig" aria-label="Neue Pflanzen richtig erkannt" placeholder=""></td>
+            </tr>
+            <tr>
+              <th>Welcher Eingang hat das grössere Gewicht?</th>
+              <td><select data-answer="iris_gewicht" aria-label="Grösseres Gewicht"><option value="">–</option><option value="laenge">Länge des Kronblatts</option><option value="breite">Breite des Kronblatts</option></select></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</details>

@@ -1,3 +1,50 @@
-<details class="kapitel" id="einstieg-4" data-kurz="Wie stark ist heutige KI? Ordnen Sie vier eigene Beispiele ein." open><summary><span class="kapitel-nr">4</span><h2 class="kapitel-titel">Schwache und starke KI, vier Typen</h2></summary><div class="kapitel-body"><p><strong>Schwache KI</strong> löst bestimmte Aufgaben, zum Beispiel Schach spielen, Bilder erkennen oder Texte schreiben, und kann nichts darüber hinaus. <strong>Starke KI</strong> wäre ein System mit allgemeiner, menschenähnlicher Intelligenz, das jede geistige Aufgabe lernen und verstehen könnte. Eine verbreitete Einteilung unterscheidet vier Typen:</p>
-<p class="task"><b>Aufgabe:</b> Nennen Sie zu jedem der vier Typen ein eigenes Beispiel und schreiben Sie, ob es das heute gibt, mit kurzer Begründung.</p><div class="table-scroll"><table class="typen"><thead><tr><th>Typ</th><th>Was kann das System?</th><th>Ihr Beispiel</th><th>Gibt es das heute? Ihre Einschätzung</th></tr></thead><tbody><tr><th>1 · Reaktive KI</th><td>Reagiert nur auf die aktuelle Eingabe. Es hat kein Gedächtnis und lernt nicht aus früheren Fällen.</td><td><textarea aria-label="Beispiel für Typ 1" data-answer="typ_bsp_1" maxlength="10000" placeholder="Eigenes Beispiel …" rows="3"></textarea></td><td><textarea aria-label="Gibt es das heute? Ihre Einschätzung zu Typ 1" data-answer="typ_1" maxlength="10000" placeholder="Ja oder nein? Begründen Sie kurz …" rows="3"></textarea></td></tr><tr><th>2 · Begrenztes Gedächtnis</th><td>Lernt aus Erfahrungsdaten und nutzt vergangene Informationen für Entscheidungen.</td><td><textarea aria-label="Beispiel für Typ 2" data-answer="typ_bsp_2" maxlength="10000" placeholder="Eigenes Beispiel …" rows="3"></textarea></td><td><textarea aria-label="Gibt es das heute? Ihre Einschätzung zu Typ 2" data-answer="typ_2" maxlength="10000" placeholder="Ja oder nein? Begründen Sie kurz …" rows="3"></textarea></td></tr><tr><th>3 · Theory of Mind</th><td>Versteht Gefühle, Absichten und Überzeugungen anderer und passt sich im sozialen Umgang an.</td><td><textarea aria-label="Beispiel für Typ 3" data-answer="typ_bsp_3" maxlength="10000" placeholder="Eigenes Beispiel …" rows="3"></textarea></td><td><textarea aria-label="Gibt es das heute? Ihre Einschätzung zu Typ 3" data-answer="typ_3" maxlength="10000" placeholder="Ja oder nein? Begründen Sie kurz …" rows="3"></textarea></td></tr><tr><th>4 · Selbstbewusste KI</th><td>Weiss von sich selbst und besitzt Bewusstsein. Das wäre starke KI.</td><td><textarea aria-label="Beispiel für Typ 4" data-answer="typ_bsp_4" maxlength="10000" placeholder="Eigenes Beispiel …" rows="3"></textarea></td><td><textarea aria-label="Gibt es das heute? Ihre Einschätzung zu Typ 4" data-answer="typ_4" maxlength="10000" placeholder="Ja oder nein? Begründen Sie kurz …" rows="3"></textarea></td></tr></tbody></table></div><p class="small">Einteilung nach <a href="https://www.robominds.de/en/blog/das-sind-die-vier-typen-von-kunstlicher-intelligenz" target="_blank" rel="noopener noreferrer">robominds: Das sind die vier Typen von Künstlicher Intelligenz</a> (2024); eigene Zusammenfassung.</p>
-<p class="task"><b>Aufgabe:</b> Wählen Sie im Tandem vier eigene Beispiele (Alltag, Film oder Zukunft, etwa Navigationsapp, Sprachassistent, Staubsaugerroboter, HAL 9000, Terminator). Ordnen Sie jedes ein: Regeln oder Daten? Welche Ebene? Welcher Typ? Schwache oder starke KI? Begründen Sie jede Einordnung in einem Satz.</p><label class="field answer"><span>Unsere vier Beispiele mit Einordnung und Begründung</span><textarea data-answer="ki_ordnung" maxlength="10000" placeholder="Beispiel · Regeln oder Daten? · Ebene · Typ 1–4 · schwach/stark · Begründung" rows="6"></textarea></label></div></details>
+<details class="kapitel" id="einstieg-4" data-kurz="Wie stark ist heutige KI? Ordnen Sie vier eigene Beispiele ein." open>
+  <summary><span class="kapitel-nr">4</span>
+    <h2 class="kapitel-titel">Schwache und starke KI, vier Typen</h2>
+  </summary>
+  <div class="kapitel-body">
+    <p><strong>Schwache KI</strong> löst bestimmte Aufgaben, zum Beispiel Schach spielen, Bilder erkennen oder Texte schreiben, und kann nichts darüber hinaus. <strong>Starke KI</strong> wäre ein System mit allgemeiner, menschenähnlicher Intelligenz, das jede geistige Aufgabe lernen und verstehen könnte. Eine verbreitete Einteilung unterscheidet vier Typen:</p>
+    <p class="task"><b>Aufgabe:</b> Nennen Sie zu jedem der vier Typen ein eigenes Beispiel und schreiben Sie, ob es das heute gibt, mit kurzer Begründung.</p>
+    <div class="table-scroll">
+      <table class="typen">
+        <thead>
+          <tr>
+            <th>Typ</th>
+            <th>Was kann das System?</th>
+            <th>Ihr Beispiel</th>
+            <th>Gibt es das heute? Ihre Einschätzung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1 · Reaktive KI</th>
+            <td>Reagiert nur auf die aktuelle Eingabe. Es hat kein Gedächtnis und lernt nicht aus früheren Fällen.</td>
+            <td><textarea aria-label="Beispiel für Typ 1" data-answer="typ_bsp_1" maxlength="10000" placeholder="Eigenes Beispiel …" rows="3"></textarea></td>
+            <td><textarea aria-label="Gibt es das heute? Ihre Einschätzung zu Typ 1" data-answer="typ_1" maxlength="10000" placeholder="Ja oder nein? Begründen Sie kurz …" rows="3"></textarea></td>
+          </tr>
+          <tr>
+            <th>2 · Begrenztes Gedächtnis</th>
+            <td>Lernt aus Erfahrungsdaten und nutzt vergangene Informationen für Entscheidungen.</td>
+            <td><textarea aria-label="Beispiel für Typ 2" data-answer="typ_bsp_2" maxlength="10000" placeholder="Eigenes Beispiel …" rows="3"></textarea></td>
+            <td><textarea aria-label="Gibt es das heute? Ihre Einschätzung zu Typ 2" data-answer="typ_2" maxlength="10000" placeholder="Ja oder nein? Begründen Sie kurz …" rows="3"></textarea></td>
+          </tr>
+          <tr>
+            <th>3 · Theory of Mind</th>
+            <td>Versteht Gefühle, Absichten und Überzeugungen anderer und passt sich im sozialen Umgang an.</td>
+            <td><textarea aria-label="Beispiel für Typ 3" data-answer="typ_bsp_3" maxlength="10000" placeholder="Eigenes Beispiel …" rows="3"></textarea></td>
+            <td><textarea aria-label="Gibt es das heute? Ihre Einschätzung zu Typ 3" data-answer="typ_3" maxlength="10000" placeholder="Ja oder nein? Begründen Sie kurz …" rows="3"></textarea></td>
+          </tr>
+          <tr>
+            <th>4 · Selbstbewusste KI</th>
+            <td>Weiss von sich selbst und besitzt Bewusstsein. Das wäre starke KI.</td>
+            <td><textarea aria-label="Beispiel für Typ 4" data-answer="typ_bsp_4" maxlength="10000" placeholder="Eigenes Beispiel …" rows="3"></textarea></td>
+            <td><textarea aria-label="Gibt es das heute? Ihre Einschätzung zu Typ 4" data-answer="typ_4" maxlength="10000" placeholder="Ja oder nein? Begründen Sie kurz …" rows="3"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small">Einteilung nach <a href="https://www.robominds.de/en/blog/das-sind-die-vier-typen-von-kunstlicher-intelligenz" target="_blank" rel="noopener noreferrer">robominds: Das sind die vier Typen von Künstlicher Intelligenz</a> (2024); eigene Zusammenfassung.</p>
+    <p class="task"><b>Aufgabe:</b> Wählen Sie im Tandem vier eigene Beispiele (Alltag, Film oder Zukunft, etwa Navigationsapp, Sprachassistent, Staubsaugerroboter, HAL 9000, Terminator). Ordnen Sie jedes ein: Regeln oder Daten? Welche Ebene? Welcher Typ? Schwache oder starke KI? Begründen Sie jede Einordnung in einem Satz.</p>
+    <label class="field answer"><span>Unsere vier Beispiele mit Einordnung und Begründung</span><textarea data-answer="ki_ordnung" maxlength="10000" placeholder="Beispiel · Regeln oder Daten? · Ebene · Typ 1–4 · schwach/stark · Begründung" rows="6"></textarea></label>
+  </div>
+</details>

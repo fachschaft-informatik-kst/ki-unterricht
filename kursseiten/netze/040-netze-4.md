@@ -1,1 +1,9 @@
-<details class="kapitel" id="netze-4" data-kurz="Zwischenschicht erklären und den eigenen Datenplan skizzieren." open><summary><span class="kapitel-nr">4</span><h2 class="kapitel-titel">Festhalten und Datenplan</h2></summary><div class="kapitel-body"><label class="field answer"><span>Was leistet die Zwischenschicht? Warum müssen Gegenstände oder Personen zwischen den Datengruppen getrennt bleiben?</span><textarea data-answer="netze" maxlength="10000" placeholder="Ihre Beobachtung …" rows="3"></textarea></label><p class="task"><b>Aufgabe (Tandem):</b> Wählen Sie unter <a href="#projekt">Unser Projekt</a> ein Thema aus dem Ideenpool und genau zwei Klassen und lassen Sie die Idee mündlich bei der Lehrperson absegnen. <b>Hausaufgabe:</b> Skizzieren Sie die fünf Gruppen T1, T2, V1, P1 und P2 (2 Klassen × 5 Gruppen × 8 Fotos = 80), prüfen Sie die Skizze im Notebook «Daten fair aufteilen» (Abschnitt «Den eigenen Datenplan prüfen») und zeigen Sie sie zu Beginn der nächsten Doppellektion.</p></div></details>
+<details class="kapitel" id="netze-4" data-kurz="Zwischenschicht erklären und den eigenen Datenplan skizzieren." open>
+  <summary><span class="kapitel-nr">4</span>
+    <h2 class="kapitel-titel">Festhalten und Datenplan</h2>
+  </summary>
+  <div class="kapitel-body">
+    <label class="field answer"><span>Was leistet die Zwischenschicht? Warum müssen Gegenstände oder Personen zwischen den Datengruppen getrennt bleiben?</span><textarea data-answer="netze" maxlength="10000" placeholder="Ihre Beobachtung …" rows="3"></textarea></label>
+    <p class="task"><b>Aufgabe (Tandem):</b> Wählen Sie unter <a href="#projekt">Unser Projekt</a> ein Thema aus dem Ideenpool und genau zwei Klassen und lassen Sie die Idee mündlich bei der Lehrperson absegnen. <b>Hausaufgabe:</b> Skizzieren Sie die fünf Gruppen T1, T2, V1, P1 und P2 (2 Klassen × 5 Gruppen × 8 Fotos = 80), prüfen Sie die Skizze im Notebook «Daten fair aufteilen» (Abschnitt «Den eigenen Datenplan prüfen») und zeigen Sie sie zu Beginn der nächsten Doppellektion.</p>
+  </div>
+</details>

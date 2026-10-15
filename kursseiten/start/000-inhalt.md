@@ -1,1 +1,53 @@
-<h1>Künstliche <em>Intelligenz</em></h1><div class="course-grid"><a class="course-card" href="#einstieg"><span class="tag">1. Doppellektion</span><h3>Was ist KI?</h3><p>Begriffe ordnen · Beispiele prüfen</p><span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#lernarten"><span class="tag">2. Doppellektion</span><h3>Wie lernt KI?</h3><p>Memory · NIM · drei Lernarten</p><span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#perzeptron"><span class="tag">3. Doppellektion</span><h3>Ein Neuron</h3><p>Gewichte · Bias · Grenzen</p><span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#netze"><span class="tag">4. Doppellektion</span><h3>Neuronale Netze</h3><p>Zwischenschichten · Daten aufteilen</p><span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#projekt"><span class="tag">5.–8. Doppellektion</span><h3>Unser Bildprojekt</h3><p>Zu zweit forschen · Journal führen</p><span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#sprache"><span class="tag">9. Doppellektion</span><h3>Sprachmodelle</h3><p>Texte vorhersagen · Grenzen erkennen</p><span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#gesellschaft"><span class="tag">10. Doppellektion</span><h3>KI &amp; Gesellschaft</h3><p>Folgen beurteilen · Lösungen abwägen</p><span aria-hidden="true" class="course-arrow">↗</span></a></div>
+<h1>Künstliche <em>Intelligenz</em></h1>
+<div class="course-grid">
+  <a class="course-card" href="#einstieg"><span class="tag">1. Doppellektion</span>
+  <!-- MD:START -->
+### Was ist KI?
+<!-- MD:END -->
+  <!-- MD:START -->
+Begriffe ordnen · Beispiele prüfen
+<!-- MD:END -->
+  <span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#lernarten"><span class="tag">2. Doppellektion</span>
+  <!-- MD:START -->
+### Wie lernt KI?
+<!-- MD:END -->
+  <!-- MD:START -->
+Memory · NIM · drei Lernarten
+<!-- MD:END -->
+  <span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#perzeptron"><span class="tag">3. Doppellektion</span>
+  <!-- MD:START -->
+### Ein Neuron
+<!-- MD:END -->
+  <!-- MD:START -->
+Gewichte · Bias · Grenzen
+<!-- MD:END -->
+  <span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#netze"><span class="tag">4. Doppellektion</span>
+  <!-- MD:START -->
+### Neuronale Netze
+<!-- MD:END -->
+  <!-- MD:START -->
+Zwischenschichten · Daten aufteilen
+<!-- MD:END -->
+  <span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#projekt"><span class="tag">5.–8. Doppellektion</span>
+  <!-- MD:START -->
+### Unser Bildprojekt
+<!-- MD:END -->
+  <!-- MD:START -->
+Zu zweit forschen · Journal führen
+<!-- MD:END -->
+  <span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#sprache"><span class="tag">9. Doppellektion</span>
+  <!-- MD:START -->
+### Sprachmodelle
+<!-- MD:END -->
+  <!-- MD:START -->
+Texte vorhersagen · Grenzen erkennen
+<!-- MD:END -->
+  <span aria-hidden="true" class="course-arrow">↗</span></a><a class="course-card" href="#gesellschaft"><span class="tag">10. Doppellektion</span>
+  <!-- MD:START -->
+### KI &amp; Gesellschaft
+<!-- MD:END -->
+  <!-- MD:START -->
+Folgen beurteilen · Lösungen abwägen
+<!-- MD:END -->
+  <span aria-hidden="true" class="course-arrow">↗</span></a>
+</div>

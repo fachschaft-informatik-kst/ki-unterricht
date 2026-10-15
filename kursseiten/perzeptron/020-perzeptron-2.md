@@ -1,1 +1,11 @@
-<details class="kapitel" id="perzeptron-2" data-kurz="Wie eine Nervenzelle Reize aufnimmt, gewichtet, summiert und weiterleitet." open><summary><span class="kapitel-nr">2</span><h2 class="kapitel-titel">Das Vorbild: die Nervenzelle</h2></summary><div class="kapitel-body"><figure class="concept-figure neuron-figure"><img alt="Schematische Nervenzelle mit Dendriten, Synapsen, Zellkörper, Axonhügel und Axon. Jedem Teil ist der passende Baustein des künstlichen Neurons zugeordnet." loading="lazy" src="grafiken/neuron_biologisch.svg"/><figcaption>Das Vorbild: Eine Nervenzelle nimmt Reize auf, gewichtet sie an den Synapsen, summiert sie im Zellkörper und feuert ab einer Schwelle. Genau diese Bausteine baut das künstliche Neuron nach, als Rechenmodell und nicht als Nachbau.</figcaption></figure></div></details>
+<details class="kapitel" id="perzeptron-2" data-kurz="Wie eine Nervenzelle Reize aufnimmt, gewichtet, summiert und weiterleitet." open>
+  <summary><span class="kapitel-nr">2</span>
+    <h2 class="kapitel-titel">Das Vorbild: die Nervenzelle</h2>
+  </summary>
+  <div class="kapitel-body">
+    <figure class="concept-figure neuron-figure">
+      <img alt="Schematische Nervenzelle mit Dendriten, Synapsen, Zellkörper, Axonhügel und Axon. Jedem Teil ist der passende Baustein des künstlichen Neurons zugeordnet." loading="lazy" src="grafiken/neuron_biologisch.svg"/>
+      <figcaption>Das Vorbild: Eine Nervenzelle nimmt Reize auf, gewichtet sie an den Synapsen, summiert sie im Zellkörper und feuert ab einer Schwelle. Genau diese Bausteine baut das künstliche Neuron nach, als Rechenmodell und nicht als Nachbau.</figcaption>
+    </figure>
+  </div>
+</details>
