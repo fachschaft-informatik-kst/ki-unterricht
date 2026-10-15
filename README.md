@@ -63,6 +63,7 @@ Eine ZIP-Sicherung importiert nur Dokumente und Ergebnisse. Bei einem bereits ge
 ```sh
 npm ci --prefix extensions/ki-autostart
 npm run build --prefix extensions/ki-autostart
+python scripts/build_portal.py
 python scripts/build_course.py
 python scripts/build_portal_notebooks.py
 jupyter lite build --contents content --output-dir dist

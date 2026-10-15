@@ -21,3 +21,7 @@ jupyterlab_widgets==3.0.13
 
 # Match the browser runtime and Matplotlib 3.8 display hooks.
 ipython==8.23.0
+
+# Content-first page generator
+markdown-it-py==3.0.0
+PyYAML==6.0.2

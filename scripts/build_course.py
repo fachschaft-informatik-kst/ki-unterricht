@@ -200,9 +200,8 @@ def build():
         pattern = rf'<!--\s*LESSONS:{view}\s*-->.*?<!--\s*/LESSONS:{view}\s*-->'
         text, count = re.subn(pattern, f'<!-- LESSONS:{view} -->\n{body}\n<!-- /LESSONS:{view} -->', text, flags=re.S)
         assert count == 1, view
-    text = update_language_lesson(text)
-    text = remove_calendar_dates(text)
-    text = update_sol_material(text)
+    # All published teaching copy already comes from kursseiten/*.md.
+    # Only the AVIVA overviews and teacher plans are generated here.
     page.write_text(text.rstrip()+"\n")
     (ROOT/'projekt/unterrichtsplan.html').write_text(lehrpersonen_seite(lessons, text))
     rows = []

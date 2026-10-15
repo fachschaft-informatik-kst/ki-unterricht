@@ -1,0 +1,1 @@
+<details class="kapitel" id="lernarten-2" data-kurz="Menschen legen Fakten und Regeln fest. Ausprobieren mit dem Fragespiel Akinator." open><summary><span class="kapitel-nr">2</span><h2 class="kapitel-titel">Wissensbasiert · Regeln anwenden</h2></summary><div class="kapitel-body"><div id="lernarten-wissen"></div></div></details>

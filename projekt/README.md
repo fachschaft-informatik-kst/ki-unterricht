@@ -4,6 +4,9 @@ Statische Kursseite unter https://fachschaft-informatik-kst.github.io/ki-unterri
 
 ## Inhalt pflegen
 
+Unterrichtsseiten und Kapitel liegen in `kursseiten/<bereich>/*.md`. Bestehende interaktive HTML-Komponenten bleiben unverändert; neue Kapitel lassen sich mit Markdown und YAML-Kopf hinzufügen. Einfache neue Text- und Bildblöcke können innerhalb bestehender Kapitel zwischen `<!-- MD:START -->` und `<!-- MD:END -->` ergänzt werden. Siehe `kursseiten/README.md`. Für den Build erst `python scripts/build_portal.py`, danach `python scripts/build_course.py` ausführen. Niemals `projekt/index.html` direkt editieren.
+
+
 - `kurs.json`: zehn nummerierte AVIVA-Abläufe à 90 Minuten; `python scripts/build_course.py` aktualisiert die markierten Bereiche in `index.html` und `worksheets/md/KI_Planung.md`.
 - Doppellektionen 5–8: SOL mit selbst geplanten Etappen statt lektionenweisem Gleichschritt; in 8 Fachgespräche parallel zur unbenoteten Fremdauswertung. `build_course.py` synchronisiert auch SOL-Hinweise, Projekttermine und den vereinfachten Austauschauftrag. Die bestehenden Journalfelder bleiben erhalten.
 - `content/*.ipynb` und `content/ki_projekt/*.ipynb`: fünf didaktische Originale. Der Notebook-Build bewahrt Markdown und eingebettete Grafiken. Generierte Fassungen nicht von Hand pflegen.
