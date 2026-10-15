@@ -5,6 +5,15 @@ Ein kompakter KI-Block: erleben, gezielt experimentieren und erklären.
 - **[Kursportal öffnen](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**
 - **[Lehrpersonen: Ablauf und didaktische Hinweise](worksheets/md/KI_Planung.md)**
 
+## Inhalte einfach bearbeiten
+
+Die Doppellektionen liegen kapitelweise unter [`kursseiten/`](kursseiten).
+Absätze und Zwischenüberschriften in den Markdown-Bereichen sind direkt
+lesbar und editierbar; nur Formulare, Tabellen und interaktive Teile enthalten
+noch sauber eingerücktes HTML. Die Markierungen `<!-- MD:START -->` und
+`<!-- MD:END -->` kennzeichnen Markdown-Blöcke in bestehenden Kapiteln.
+Details: [Anleitung zum Bearbeiten](kursseiten/README.md).
+
 ## Lokale Vorschau – schneller Einstieg
 
 Nach dem Klonen des Repositories eine virtuelle Umgebung erstellen und die

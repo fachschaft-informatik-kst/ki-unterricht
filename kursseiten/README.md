@@ -10,6 +10,30 @@ Dateien beginnen mit 000 (Einleitung), dann 010, 020 usw. (Kapitel), und 999 (Ab
 Bestehende Textpassagen können direkt in der jeweiligen Kapiteldatei geändert oder
 entfernt werden. Die ursprünglichen HTML-Elemente bleiben zur Kompatibilität erhalten.
 
+## Lesefreundliche Quelldateien
+
+Die Kapiteldateien sind für die direkte Bearbeitung im GitHub-Editor aufbereitet:
+klare HTML-Einrückungen, getrennte Aufgabenblöcke und einfache Absätze bzw.
+Zwischenüberschriften als **Markdown**. Komplexe Tabellen, Notebook-Schalter,
+Grafiken und Eingabefelder bleiben als strukturiertes HTML, damit sämtliche
+`id`- und `data-...`-Schlüssel unverändert bleiben.
+
+`<!-- MD:START -->` und `<!-- MD:END -->` begrenzen gewöhnlichen Markdown-
+Text innerhalb der bestehenden HTML-Kapitel. Zwischen diesen Markierungen
+lassen sich Absätze, **Fettdruck**, Listen, Bilder und Unterüberschriften
+ohne HTML bearbeiten. Den Rest des Formular-HTML nicht unbeabsichtigt ändern.
+
+Neue oder stark veränderte HTML-Abschnitte können mit folgendem Befehl
+automatisch lesbar formatiert werden:
+
+```sh
+python scripts/format_course_sources.py
+```
+
+Mit `--check` prüft GitHub Actions, dass die Formatierung konsistent ist.
+Der Formatter wandelt nur unkomplizierte Textabsätze und Überschriften in
+Markdown um; interaktives HTML bleibt intakt.
+
 ## Neue Texte, Unterkapitel und Bilder
 
 In einer bestehenden Kapiteldatei innerhalb von div class=kapitel-body einfügen:
