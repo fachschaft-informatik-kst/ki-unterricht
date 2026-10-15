@@ -14,34 +14,56 @@ noch sauber eingerücktes HTML. Die Markierungen `<!-- MD:START -->` und
 `<!-- MD:END -->` kennzeichnen Markdown-Blöcke in bestehenden Kapiteln.
 Details: [Anleitung zum Bearbeiten](kursseiten/README.md).
 
-## Lokale Vorschau – schneller Einstieg
+## Lokal starten – mit Makefile
 
-Nach dem Klonen des Repositories eine virtuelle Umgebung erstellen und die
-kleinen Abhängigkeiten für die Inhaltsaufbereitung installieren:
-
-```sh
-python3 -m venv .venv
-source .venv/bin/activate
-pip install markdown-it-py==3.0.0 PyYAML==6.0.2
-python scripts/preview.py
-```
-
-Dann **http://localhost:8000/projekt/** im Browser öffnen.
-Änderungen an `kursseiten/*.md` werden erkannt und neu gebaut;
-anschliessend einfach den Browser aktualisieren. Die Schnellvorschau zeigt
-Texte, Kapitel, Bilder, Navigation und Formulare, aber **noch nicht** die
-Python-Notebooks und die daraus erzeugten Vorschaugrafiken.
-
-Die **vollständige App mit JupyterLite, Notebooks und ZIP-Sicherung** lokal starten:
+Voraussetzungen: **Python 3.12**, **make**, und für die vollständige Version
+**Node.js 22 mit npm** (Linux, macOS oder WSL). Im geklonten Repository
+genügt **ein einziger Befehl**, ohne manuelle `pip`-/`npm`-Installation oder
+Aktivierung einer virtuellen Umgebung:
 
 ```sh
-pip install -r requirements.txt
-python scripts/preview.py --full
+make
 ```
 
-Dafür sind zusätzlich Node.js/npm nötig. Der Full-Build erzeugt `dist/` und
-serviert diese Dateien. Für Inhaltsänderungen den Full-Build erneut starten.
-Zum Beenden `Ctrl+C`; mit `--port 8080` einen anderen Port wählen.
+Das Makefile legt bei Bedarf `.venv/` an, installiert Python- und npm-Pakete,
+baut die eingebetteten Jupyter-Notebooks und JupyterLite vollständig nach
+`dist/` und startet einen lokalen HTTP-Server. Anschliessend
+**[http://localhost:8000/projekt/](http://localhost:8000/projekt/)** öffnen.
+Auch der ZIP-Download, das Importieren von Sicherungen und die Python-Notebooks
+sind in diesem Modus verfügbar. Beim ersten Notebookstart lädt der Browser
+gegebenenfalls zusätzliche Laufzeitdateien. Mit `Ctrl+C` den Server beenden.
+
+### Kurze Vorschau beim Bearbeiten
+
+```sh
+make preview
+```
+
+Diese Variante benötigt nur zwei kleine Python-Pakete. Sie zeigt Texte, Bilder,
+Navigation und Formulare sofort, überwacht die Dateien unter `kursseiten/`
+und erstellt die HTML-Seite beim Speichern automatisch neu (Browser aktualisieren).
+Die Notebooks und der vollständige ZIP-Laufzeitexport benötigen dagegen
+`make` bzw. `make local`.
+
+### Weitere Befehle
+
+| Befehl | Zweck |
+|---|---|
+| `make` oder `make local` | Vollständige App bauen und lokal starten |
+| `make preview` | Schnelle Kursvorschau mit automatischem Neuaufbau |
+| `make build` | Komplette Seite nach `dist/` bauen, ohne Server |
+| `make serve` | Vorhandenen Build aus `dist/` direkt ansehen |
+| `make test` | Build und lokale Struktur-/Funktionstests ausführen |
+| `make install` | Alle Abhängigkeiten installieren |
+| `make clean` | Generierte lokale Umgebung und Build-Dateien entfernen |
+| `make help` | Kurzübersicht der Befehle anzeigen |
+
+Port ändern: `make PORT=8080` (oder `make preview PORT=8080`).
+Standardmässig lauscht der Server **nur auf 127.0.0.1**, nicht im Schulnetz.
+Nach Änderungen, die auch die Notebooks betreffen, die vollständige Version
+mit `make` erneut bauen; `make serve` verwendet nur den zuletzt gebauten Stand.
+Die umfassenden Browser-Regressionstests für JupyterLite, ZIP und Layout
+laufen weiterhin automatisch in GitHub Actions.
 
 ### Inhalt, View und Controller (MVC-Prinzip)
 
@@ -112,15 +134,10 @@ Eine ZIP-Sicherung importiert nur Dokumente und Ergebnisse. Bei einem bereits ge
 
 ## Technik und Prüfung
 
-```sh
-npm ci --prefix extensions/ki-autostart
-npm run build --prefix extensions/ki-autostart
-python scripts/build_portal.py
-python scripts/build_course.py
-python scripts/build_portal_notebooks.py
-jupyter lite build --contents content --output-dir dist
-python scripts/copy_portal.py dist
-```
+Für einen vollständigen lokalen Build genügt `make build`, zum
+Anschauen `make`. Das Makefile führt dieselben Schritte aus wie GitHub
+Actions: npm-Extension, Kursportal, AVIVA-Pläne, eingebettete Notebooks,
+JupyterLite, Runtime-Dateien und die Vorschaugrafiken.
 
 Der Pages-Workflow verwendet dieselbe Reihenfolge. Die Startseite leitet ins Kursportal; `/lab/` bleibt für Lehrpersonen erreichbar. Die Kopie enthält Fotostudio und Hilfsdateien für vollständige Abgabepakete. Generierte Portalnotebooks werden nicht separat gepflegt.
 

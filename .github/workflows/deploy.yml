@@ -24,6 +24,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify local Makefile targets
+        run: |
+          make help
+          make -n preview > /tmp/ki-preview-make.txt
+          grep -Fq 'scripts/preview.py' /tmp/ki-preview-make.txt
+          make -n local > /tmp/ki-local-make.txt
+          grep -Fq 'jupyter lite build' /tmp/ki-local-make.txt
+          grep -Fq 'scripts/copy_portal.py' /tmp/ki-local-make.txt
+          grep -Fq 'http.server' /tmp/ki-local-make.txt
       - name: Build notebook autostart
         run: |
           npm ci --prefix extensions/ki-autostart
