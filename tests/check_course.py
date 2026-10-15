@@ -15,6 +15,20 @@ from build_course import PHASES, update_sol_material
 lessons=json.loads((root/'projekt/kurs.json').read_text())['lessons']
 assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,11)]
 soup=BeautifulSoup((root/'projekt/index.html').read_text(),'html.parser')
+rules=soup.select_one('#einstieg-1')
+assert rules.select_one('textarea[data-answer="regeln_oder_daten"][aria-label]')
+task=rules.select_one('.task').get_text()
+assert 'Getränkeautomat' in task and 'Übersetzungsapp' in task
+assert 'Taschenrechner' not in task and 'Spamfilter' not in task
+intro=soup.select_one('#einstieg > .section-intro')
+assert 'Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?' in intro.get_text()
+conclusion=soup.select_one('#einstieg-9')
+assert conclusion.select_one('.kapitel-nr').get_text()=='9'
+assert 'Welche Frage bleibt offen?' in conclusion.get_text()
+for answer in ['begriffe_saetze','begriffe']:
+    fields=soup.select(f'textarea[data-answer="{answer}"]')
+    assert len(fields)==1 and fields[0] in conclusion.select('textarea')
+assert 'in je einem eigenen Satz' in conclusion.select_one('.task').get_text()
 assert not re.search(r'\bSOL\b',soup.get_text()), 'Use concrete student-facing language instead of SOL'
 page=(root/'projekt/index.html').read_text()
 assert update_sol_material(page)==page, 'Repeated builds must not duplicate or change SOL guidance'
@@ -100,9 +114,10 @@ assert sol and 'keine festen Lektionstermine' in sol.get_text()
 assert 'unbenotet' in repro.get_text()
 assert 'Freiwillige Vertiefung, kein Pflichtteil' in repro.get_text()
 assert 'Etappenplan' in soup.select_one('textarea[data-journal="contribution"]').parent.get_text()
+assert 'Ihr Arbeitsweg:' not in soup.get_text()
+assert 'Ihr Arbeitsweg:' not in plans.get_text()
+assert 'Garry Kasparov' in soup.get_text()
 for lesson in lessons:
-    if lesson['id'] not in ['05','06','07','08']:
-        assert lesson['arbeitsweg'] in soup.select_one('[data-lesson="'+lesson['id']+'"]').get_text()
     work=lesson['phases'][3]
     reserve=[s for s in work['schritte'] if 'Puffer' in s['text']]
     assert sum(s['min'] for s in reserve)>=10, lesson['id']

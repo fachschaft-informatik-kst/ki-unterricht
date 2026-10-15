@@ -52,7 +52,6 @@ def render(lesson, voll=False):
             + f'<p><strong>Heute können Sie:</strong> {html.escape(lesson["goal"])}</p>'
             f'<p class="lesson-question">{html.escape(lesson["question"])}</p>'
             + (f'<p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> {html.escape(lesson["motivation"])}</p>' if lesson.get('motivation') else '')
-            + (f'<p class="callout"><strong>Ihr Arbeitsweg:</strong> {html.escape(lesson["arbeitsweg"])}</p>' if lesson.get('arbeitsweg') else '')
             + ((LEGENDE + tabelle(lesson)
             + f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p>'
             + (f'<p class="small muted"><strong>Zeit:</strong> {html.escape(lesson["zeit"])}</p>' if lesson.get('zeit') else '')) if voll else '')
@@ -214,7 +213,6 @@ def build():
             for i, st in enumerate(p['schritte']):
                 rows.append(f'| {p["phase"]+" – "+p["titel"] if i == 0 else ""} | {p["minutes"] if i == 0 else ""} | {st["wer"]} | {st["text"]} |')
         rows.append('')
-        if l.get('arbeitsweg'): rows += [f'**Arbeitsweg:** {l["arbeitsweg"]}', '']
         rows += ['', f'**Lernprodukt:** {l["product"]}', '']
         if l.get('zeit'): rows += [f'**Zeit:** {l["zeit"]}', '']
     plan = ROOT/'worksheets/md/KI_Planung.md'

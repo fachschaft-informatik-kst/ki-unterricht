@@ -47,8 +47,6 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Einzeln | Beantworten Sie die Leitfrage mit einem eigenen Beispiel und erklären Sie den Unterschied zwischen festen Regeln und Lernen aus Daten. |
 |  |  | Ergebnis | Eine eigene begründete Antwort auf die Leitfrage. |
 
-**Arbeitsweg:** Pflicht: Regeln prüfen und drei Beispiele einordnen. Die Kurskapitel sind Material, kein zusätzlicher Aufgabenparcours. Meilensteine und Asimovs Gesetze sind freiwillige Vertiefung.
-
 
 **Lernprodukt:** Drei begründet eingeordnete Beispiele und eine eigene Antwort auf die Leitfrage.
 
@@ -82,8 +80,6 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Auswerten – Lernarten vergleichen | 10 | Einzeln | Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung. Ordnen Sie NIM und das Bildprojekt begründet zu. Erklären Sie, warum im Memory der Mensch und nicht ein KI-Modell gelernt hat. |
 |  |  | Lehrperson | Klärt offene Zuordnungen und sichert: Das Bildprojekt ist überwacht, weil Trainingsbilder Klassennamen erhalten. |
 |  |  | Ergebnis | Ein begründeter Vergleich der drei Lernarten. |
-
-**Arbeitsweg:** Pflicht: drei Memory-Runden und NIM gemeinsam untersuchen. Akinator, Filmlandkarte, Smiley, K-Means und Begriffscheck sind Nachschlage- oder Wahlmaterial; nicht alle Tools durchlaufen.
 
 
 **Lernprodukt:** Ein Vergleich wissensbasierter und lernender Systeme und je eine begründete Beobachtung zu den drei Lernarten.
@@ -120,8 +116,6 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Lehrperson | Sichert an der XOR-Grafik: Die Grenze liegt am Bau des Neurons, nicht an zu wenig Übung. Der algebraische Widerspruch ist Vertiefung. |
 |  |  | Ergebnis | Eine eigene Erklärung von Lernen und XOR-Grenze. |
 
-**Arbeitsweg:** Ein Notebookblock mit Handrechnung, Einstellen, Lernen und XOR. Das Arbeitsblatt ist eine Hilfe, kein zweiter vollständiger Auftrag. Pflanzen und Ziffern sind freiwillig.
-
 
 **Lernprodukt:** Eine nachvollziehbare Rechnung, ein erklärter Lernschritt und eine begründete XOR-Grenze.
 
@@ -156,8 +150,6 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Auswerten – Brücke zur SOL-Phase | 10 | Tandem | Halten Sie fest, was die Zwischenschicht leistet und warum dasselbe Objekt nicht zugleich in Training und Test vorkommt. Notieren Sie Ihren nächsten Vorbereitungsschritt. |
 |  |  | Lehrperson | Gibt den vorbereitenden Auftrag: Datenplan mit fünf unabhängigen Gruppen prüfen und bis Doppellektion 5 möglichst 80 Fotos sammeln, acht je Klasse und Gruppe. Beide Klassen unter gleichen Bedingungen; Personen nur mit Einverständnis. Fehlende Daten werden in der SOL-Zeit ergänzt; Ersatzdaten nur nach Absprache mit offener Herkunft. |
 |  |  | Ergebnis | Eine fachliche Sicherung und ein klarer Vorbereitungsauftrag. |
-
-**Arbeitsweg:** Pflicht: XOR-Kern im Netz-Notebook, Datenrollen mit Kursgrafik und Themenwahl. Ziffern und das vollständige Daten-Notebook sind Vertiefung; die Datenplan-Checkliste hilft bei der Vorbereitung.
 
 
 **Lernprodukt:** XOR-Erklärung, begründete Datentrennung und ein freigegebenes Projektthema mit zwei Klassen.
@@ -317,8 +309,6 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Lehrperson | Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen einer falschen, aber überzeugenden Ausgabe? |
 |  |  | Ergebnis | Eine eigene Erklärung von Verfahren und Grenzen. |
 
-**Arbeitsweg:** Die Lehrperson legt einen digitalen Arbeitsweg fest: ausgewählte Papagei-Stationen oder Soekia. Nur das dazu passende Protokoll ausfüllen. Die andere Strecke bleibt freiwillig; die Lernziele bleiben gleich.
-
 
 **Lernprodukt:** Ein dokumentierter Kontextvergleich, ein plausibles und ein problematisches Beispiel sowie zwei Grenzen der Analogie.
 
@@ -351,8 +341,6 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Auswerten – Urteil und ruhiger Kursabschluss | 15 | Klasse | Besprechen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut; die Lehrperson fragt: Wer ändert was, und woran wäre die Verbesserung erkennbar? |
 |  |  | Einzeln | Notieren Sie kurz eine Erkenntnis, eine offene Frage und eine Rückmeldung zum KI-Block. Einzelne freiwillige Stimmen schliessen den Kurs ab; keine verpflichtende Runde aller Personen. |
 |  |  | Ergebnis | Eine überprüfte Position und ein persönlicher Rückblick. |
-
-**Arbeitsweg:** Ein Fall in derselben Gruppe: Kriterien, Rückkopplung, stärkstes Pro- und Gegenargument, Urteil. Die Debattenfragen sind Gesprächshilfe, kein zusätzlicher Auftrag; nur zentrale Stichworte festhalten.
 
 
 **Lernprodukt:** Ein begründetes Fallurteil mit WMD-Check, Rückkopplung, Massnahme und Zielkonflikt sowie ein kurzer persönlicher Kursrückblick.

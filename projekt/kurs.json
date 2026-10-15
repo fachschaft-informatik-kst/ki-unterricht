@@ -10,7 +10,6 @@
       "question": "Ist jedes automatisch arbeitende Programm eine KI?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
       "product": "Drei begründet eingeordnete Beispiele und eine eigene Antwort auf die Leitfrage.",
-      "arbeitsweg": "Pflicht: Regeln prüfen und drei Beispiele einordnen. Die Kurskapitel sind Material, kein zusätzlicher Aufgabenparcours. Meilensteine und Asimovs Gesetze sind freiwillige Vertiefung.",
       "zeit": "10 Minuten echter Puffer im Arbeitsblock, ohne Zusatzpflicht. Meilensteine und Asimovs Gesetze sind Vertiefung, keine zusätzlichen Klassenaktivitäten; die ethische Diskussion folgt in Doppellektion 10. Die Klasse bleibt nach dem Einstieg in denselben Tandems.",
       "phases": [
         {
@@ -144,7 +143,6 @@
       "question": "Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
       "motivation": "Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.",
       "product": "Ein Vergleich wissensbasierter und lernender Systeme und je eine begründete Beobachtung zu den drei Lernarten.",
-      "arbeitsweg": "Pflicht: drei Memory-Runden und NIM gemeinsam untersuchen. Akinator, Filmlandkarte, Smiley, K-Means und Begriffscheck sind Nachschlage- oder Wahlmaterial; nicht alle Tools durchlaufen.",
       "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours. 10 Minuten Puffer im Arbeitsblock.",
       "phases": [
         {
@@ -277,7 +275,6 @@
       "question": "Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und wo seine Grenze liegt.",
       "product": "Eine nachvollziehbare Rechnung, ein erklärter Lernschritt und eine begründete XOR-Grenze.",
-      "arbeitsweg": "Ein Notebookblock mit Handrechnung, Einstellen, Lernen und XOR. Das Arbeitsblatt ist eine Hilfe, kein zweiter vollständiger Auftrag. Pflanzen und Ziffern sind freiwillig.",
       "zeit": "Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Pflanzen und Ziffern sind Wahlvertiefung; XOR bleibt Pflicht. 10 Minuten Puffer innerhalb der 55 Minuten Verarbeitung.",
       "phases": [
         {
@@ -404,7 +401,6 @@
       "question": "Wie lösen mehrere einfache Entscheidungen das XOR-Problem?",
       "motivation": "Viele Neuronen erweitern die Möglichkeiten. Ob das Netz bei neuen Fällen funktioniert, hängt auch von einer fairen Datenaufteilung ab.",
       "product": "XOR-Erklärung, begründete Datentrennung und ein freigegebenes Projektthema mit zwei Klassen.",
-      "arbeitsweg": "Pflicht: XOR-Kern im Netz-Notebook, Datenrollen mit Kursgrafik und Themenwahl. Ziffern und das vollständige Daten-Notebook sind Vertiefung; die Datenplan-Checkliste hilft bei der Vorbereitung.",
       "zeit": "Nur das Netz-Notebook ist für alle Pflicht. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik erarbeitet; das zweite Notebook ist Nachschlagewerk oder Vertiefung, kein weiterer Pflichtwechsel. 10 Minuten Puffer im Arbeitsblock. Themenfreigaben während der 55 Minuten, nicht erst im Abschluss; bei zwölf Tandems etwa eine Minute je Tandem. Datenplan und Fotos als vorbereitender Auftrag bis Doppellektion 5.",
       "phases": [
         {
@@ -974,7 +970,6 @@
       "question": "Warum ist eine plausible Fortsetzung nicht automatisch wahr?",
       "motivation": "Sprachmodelle können überzeugend schreiben, ohne die Richtigkeit einer Aussage zu prüfen.",
       "product": "Ein dokumentierter Kontextvergleich, ein plausibles und ein problematisches Beispiel sowie zwei Grenzen der Analogie.",
-      "arbeitsweg": "Die Lehrperson legt einen digitalen Arbeitsweg fest: ausgewählte Papagei-Stationen oder Soekia. Nur das dazu passende Protokoll ausfüllen. Die andere Strecke bleibt freiwillig; die Lernziele bleiben gleich.",
       "zeit": "Ein digitaler Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia, nicht beides als Pflicht. 10 Minuten Puffer im Arbeitsblock. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht.",
       "phases": [
         {
@@ -1090,7 +1085,6 @@
       "question": "Sind gleiche Regeln automatisch fair?",
       "motivation": "Entscheidungen mit KI betreffen Menschen. Ein begründetes Urteil braucht einen konkreten Fall, Belege und einen Blick auf die Folgen.",
       "product": "Ein begründetes Fallurteil mit WMD-Check, Rückkopplung, Massnahme und Zielkonflikt sowie ein kurzer persönlicher Kursrückblick.",
-      "arbeitsweg": "Ein Fall in derselben Gruppe: Kriterien, Rückkopplung, stärkstes Pro- und Gegenargument, Urteil. Die Debattenfragen sind Gesprächshilfe, kein zusätzlicher Auftrag; nur zentrale Stichworte festhalten.",
       "zeit": "Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock. Keine zusätzliche Pro/Contra-Raumaufteilung. 10 Minuten Puffer im Arbeitsblock. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.",
       "phases": [
         {
