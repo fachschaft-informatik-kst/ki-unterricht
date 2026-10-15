@@ -67,3 +67,7 @@ weiterhin funktionieren. Neue Blöcke und neue Kapitel sind Markdown-fähig.
     python tests/check_portal_content.py
 
 GitHub Actions baut die Seite beim Push automatisch.
+
+## MVC und lokale Vorschau
+
+Fachliche Texte, Aufgaben und Links werden in `kursseiten/` gepflegt; `projekt/portal.js` enthält nur noch Controller-Logik. Für eine schnelle lokale Vorschau `python scripts/preview.py` ausführen; `--full` baut und startet zusätzlich JupyterLite. Siehe Haupt-README.

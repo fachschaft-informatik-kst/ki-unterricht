@@ -5,6 +5,49 @@ Ein kompakter KI-Block: erleben, gezielt experimentieren und erklären.
 - **[Kursportal öffnen](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**
 - **[Lehrpersonen: Ablauf und didaktische Hinweise](worksheets/md/KI_Planung.md)**
 
+## Lokale Vorschau – schneller Einstieg
+
+Nach dem Klonen des Repositories eine virtuelle Umgebung erstellen und die
+kleinen Abhängigkeiten für die Inhaltsaufbereitung installieren:
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip install markdown-it-py==3.0.0 PyYAML==6.0.2
+python scripts/preview.py
+```
+
+Dann **http://localhost:8000/projekt/** im Browser öffnen.
+Änderungen an `kursseiten/*.md` werden erkannt und neu gebaut;
+anschliessend einfach den Browser aktualisieren. Die Schnellvorschau zeigt
+Texte, Kapitel, Bilder, Navigation und Formulare, aber **noch nicht** die
+Python-Notebooks und die daraus erzeugten Vorschaugrafiken.
+
+Die **vollständige App mit JupyterLite, Notebooks und ZIP-Sicherung** lokal starten:
+
+```sh
+pip install -r requirements.txt
+python scripts/preview.py --full
+```
+
+Dafür sind zusätzlich Node.js/npm nötig. Der Full-Build erzeugt `dist/` und
+serviert diese Dateien. Für Inhaltsänderungen den Full-Build erneut starten.
+Zum Beenden `Ctrl+C`; mit `--port 8080` einen anderen Port wählen.
+
+### Inhalt, View und Controller (MVC-Prinzip)
+
+- **Model/Inhalt:** `kursseiten/` (Lerntexte, Aufgaben, Medien, Formulare),
+  `projekt/kurs.json` (AVIVA-Planung).
+- **View:** `projekt/index.template.html`, `projekt/portal.css` und die
+  Python-Generatoren `scripts/build_portal.py`, `scripts/build_course.py`.
+- **Controller:** `projekt/portal.js`, `projekt/progress.js` (Notebook-Events,
+  Browserpersistenz, ZIP, Navigation, Memory-Interaktion). Keine Lehrtexte
+  werden mehr nach dem Seitenladen per `createElement` hineingeschrieben.
+  Temporäre UI-Elemente wie Navigation und Memory-Karten dürfen aus
+  den bereits gerenderten Inhalten oder aus Nutzereingaben erzeugt werden.
+
+---
+
 ## Ein Einstieg für die ganze Klasse
 
 Das Kursportal bündelt Aufgaben, kurze Erklärungen, eingebettete Python-Experimente, Fotostudio, Journal und Bewertung. Lernende benötigen keine Dateinavigation. Die folgenden Originalnotebooks bleiben als bearbeitbare Quellen für die Lehrperson erhalten; `scripts/build_portal_notebooks.py` erzeugt daraus die eingebetteten Fassungen mit allen Erklärungen und Grafik-Anhängen.

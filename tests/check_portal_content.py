@@ -29,7 +29,13 @@ assert no_aviva(rendered) == no_aviva(assembled), (
 soup = BeautifulSoup(rendered, "html.parser")
 ids = {tag.get("id") for tag in soup.select("[id]")}
 assert len(soup.select("[id]")) == len(ids), "Duplicate HTML ids"
-assert set(contract["ids"]) <= ids, "Existing links or DOM ids were removed"
+# Temporary runtime mounts are replaced by their real static components at build time.
+retired_mounts = {"papagei-placeholder", "turing-mount"}
+assert set(contract["ids"]) - retired_mounts <= ids, "Existing links or DOM ids were removed"
+assert all(not soup.select_one("#" + mount) for mount in retired_mounts)
+assert soup.select_one("#sprache-2 figure.external-map iframe")
+assert soup.select_one("#sprache-4 aside.turing-activity")
+assert soup.select_one("#memory-pairs[type='application/json']")
 for attr, values in contract["tags"].items():
     current = [tag.get(attr) for tag in soup.select(f"[{attr}]")]
     assert len(current) == len(set(current)), f"Duplicate persistent key: {attr}"
