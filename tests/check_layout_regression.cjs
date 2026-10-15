@@ -49,7 +49,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
    const boxes=[];
    for(const item of pages){
     const {page,folder}=item;
-    await page.locator('.nav a[href="#'+view+'"]').click();
+    await page.locator('a[href="#'+view+'"]').first().click();
     await page.locator(selector).waitFor({state:'visible'});
     await page.evaluate(()=>document.fonts.ready);
     const elt=page.locator(selector);
