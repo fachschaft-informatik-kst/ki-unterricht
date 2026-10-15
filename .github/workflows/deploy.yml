@@ -37,6 +37,7 @@ jobs:
           python tests/check_pyodide_lock.py
       - name: Build the JupyterLite site
         run: |
+          python scripts/build_portal.py
           python scripts/build_course.py
           python scripts/build_portal_notebooks.py
           python tests/check_course.py

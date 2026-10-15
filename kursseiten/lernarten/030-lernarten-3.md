@@ -1,0 +1,1 @@
+<details class="kapitel" id="lernarten-3" data-kurz="Das System lernt Muster aus Beispielen. Erkunden Sie Filmempfehlungen." open><summary><span class="kapitel-nr">3</span><h2 class="kapitel-titel">Lernend · Muster aus Daten</h2></summary><div class="kapitel-body"><div id="lernarten-lernend"></div></div></details>
