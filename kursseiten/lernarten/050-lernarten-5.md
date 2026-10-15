@@ -1,1 +1,28 @@
-<details class="kapitel" id="lernarten-5" data-kurz="Lernen mit Beispielen und richtigen Antworten (Labels). Dazu Memory-Runde 1." open><summary><span class="kapitel-nr">5</span><h2 class="kapitel-titel">Überwacht · mit Labels</h2></summary><div class="kapitel-body"><div class="lesson-steps single"><article><b>Überwacht · mit Labels</b><p>Das System lernt mit Beispielen und den richtigen Kategorien. Danach ordnet es neue Beispiele zu.</p><div class="learning-example-links"><a href="https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2" target="_blank" rel="noopener noreferrer">Smiley-Spiel: fröhlich oder traurig? · inf-schule</a><a href="https://quickdraw.withgoogle.com/" target="_blank" rel="noopener noreferrer">Quick, Draw! Zeichnungen erkennen lassen</a></div><p class="learning-example-note">Quick, Draw! kann Zeichnungen zum öffentlichen Datensatz beitragen. Keine Namen oder persönlichen Motive zeichnen.</p></article></div><div class="memory-round"><h3>Memory-Runde 1 · überwacht · 4 + 1 Min.</h3><p>Nehmen Sie jedes Motiv nur einmal. Die Kartenleitung beschriftet acht offene Karten nach einer eindeutigen Regel. Der Agent ordnet die übrigen Karten zu. Danach vergleicht die Kartenleitung mit den Labels. Prüfen Sie gemeinsam: Waren die Labels eindeutig und konsistent?</p><label class="field answer"><span>Überwacht: Was zeigen die Labels? Was erkennt das System sicher oder falsch?</span><textarea data-answer="memory-supervised" maxlength="10000" placeholder="Unsere Beobachtung zu Beispielen mit Lösungen …" rows="3"></textarea></label></div></div></details>
+<details class="kapitel" id="lernarten-5" data-kurz="Lernen mit Beispielen und richtigen Antworten (Labels). Dazu Memory-Runde 1." open>
+  <summary><span class="kapitel-nr">5</span>
+    <h2 class="kapitel-titel">Überwacht · mit Labels</h2>
+  </summary>
+  <div class="kapitel-body">
+    <div class="lesson-steps single">
+      <article>
+        <b>Überwacht · mit Labels</b>
+        <!-- MD:START -->
+Das System lernt mit Beispielen und den richtigen Kategorien. Danach ordnet es neue Beispiele zu.
+<!-- MD:END -->
+        <div class="learning-example-links">
+          <a href="https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2" target="_blank" rel="noopener noreferrer">Smiley-Spiel: fröhlich oder traurig? · inf-schule</a><a href="https://quickdraw.withgoogle.com/" target="_blank" rel="noopener noreferrer">Quick, Draw! Zeichnungen erkennen lassen</a>
+        </div>
+        <p class="learning-example-note">Quick, Draw! kann Zeichnungen zum öffentlichen Datensatz beitragen. Keine Namen oder persönlichen Motive zeichnen.</p>
+      </article>
+    </div>
+    <div class="memory-round">
+      <!-- MD:START -->
+### Memory-Runde 1 · überwacht · 4 + 1 Min.
+<!-- MD:END -->
+      <!-- MD:START -->
+Nehmen Sie jedes Motiv nur einmal. Die Kartenleitung beschriftet acht offene Karten nach einer eindeutigen Regel. Der Agent ordnet die übrigen Karten zu. Danach vergleicht die Kartenleitung mit den Labels. Prüfen Sie gemeinsam: Waren die Labels eindeutig und konsistent?
+<!-- MD:END -->
+      <label class="field answer"><span>Überwacht: Was zeigen die Labels? Was erkennt das System sicher oder falsch?</span><textarea data-answer="memory-supervised" maxlength="10000" placeholder="Unsere Beobachtung zu Beispielen mit Lösungen …" rows="3"></textarea></label>
+    </div>
+  </div>
+</details>

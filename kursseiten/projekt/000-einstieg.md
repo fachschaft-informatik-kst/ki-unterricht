@@ -1,1 +1,23 @@
-<div class="eyebrow">Doppellektion 5–8 · Von eigenen Bildern zum eigenen Urteil</div><h1>Was hat unser<br/>Netz <em>gelernt?</em></h1><p class="lead">Eigene Bilder. Ein neuronales Netz. Ein fairer Vergleich – zu zweit.</p><div class="actions"><a class="btn primary" href="#journal">Versuch &amp; Journal →</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a><button class="btn" data-lab="ki_lernlabor.ipynb">Lernlabor bei Bedarf ▶</button></div><div class="facts"><div class="fact"><strong>2 Personen</strong><small>gemeinsam untersuchen</small></div><div class="fact"><strong>2 Klassen</strong><small>auf Bildern unterscheiden</small></div><div class="fact"><strong>1 Vergleich</strong><small>gezielt eine Grösse verändern</small></div><div class="fact"><strong>8. Doppellektion</strong><small>Abgabe &amp; Tandemgespräch</small></div></div><p class="overview-note">Bewertet wird Ihre Untersuchung – nicht die höchste Trefferquote.</p>
+<div class="eyebrow">
+  Doppellektion 5–8 · Von eigenen Bildern zum eigenen Urteil
+</div>
+<h1>Was hat unser<br/>Netz <em>gelernt?</em></h1>
+<p class="lead">Eigene Bilder. Ein neuronales Netz. Ein fairer Vergleich – zu zweit.</p>
+<div class="actions">
+  <a class="btn primary" href="#journal">Versuch &amp; Journal →</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a><button class="btn" data-lab="ki_lernlabor.ipynb">Lernlabor bei Bedarf ▶</button>
+</div>
+<div class="facts">
+  <div class="fact">
+    <strong>2 Personen</strong><small>gemeinsam untersuchen</small>
+  </div>
+  <div class="fact">
+    <strong>2 Klassen</strong><small>auf Bildern unterscheiden</small>
+  </div>
+  <div class="fact">
+    <strong>1 Vergleich</strong><small>gezielt eine Grösse verändern</small>
+  </div>
+  <div class="fact">
+    <strong>8. Doppellektion</strong><small>Abgabe &amp; Tandemgespräch</small>
+  </div>
+</div>
+<p class="overview-note">Bewertet wird Ihre Untersuchung – nicht die höchste Trefferquote.</p>

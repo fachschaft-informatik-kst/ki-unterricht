@@ -1,3 +1,17 @@
-<span class="section-label">Doppellektion 4</span><h1>Gemeinsam mehr erkennen.</h1><!-- LESSONS:netze -->
-<details class="lesson-plan" id="doppellektion-04" data-lesson="04" open><summary><span class="phase-num">04</span><span>Doppellektion 4 · Warum mehrere Neuronen?</span><small>90 Min.</small></summary><div class="detail-body"><p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-03">Doppellektion 3</a> scheiterte ein einzelnes Neuron an XOR. Heute kombinieren Sie mehrere Entscheidungen und klären, welche Daten ein Netz beim Lernen sehen darf.</p><figure class="concept-figure"><img alt="XOR-Tabelle und vier Punkte: Keine gerade Linie trennt die beiden Klassen." loading="lazy" src="grafiken/xor_gerade.svg"/><figcaption>Ein einzelnes Neuron kann XOR nicht trennen; eine Zwischenschicht kann zusätzliche Grenzen darstellen.</figcaption></figure><p><strong>Heute können Sie:</strong> Eine Zwischenschicht erklären und Training, Validierung und Test trennen.</p><p class="lesson-question">Wie lösen mehrere einfache Entscheidungen das XOR-Problem?</p><p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Viele Neuronen erweitern die Möglichkeiten. Ob das Netz bei neuen Fällen funktioniert, hängt auch von einer fairen Datenaufteilung ab.</p></div></details>
+<span class="section-label">Doppellektion 4</span>
+<h1>Gemeinsam mehr erkennen.</h1>
+<!-- LESSONS:netze -->
+<details class="lesson-plan" id="doppellektion-04" data-lesson="04" open>
+  <summary><span class="phase-num">04</span><span>Doppellektion 4 · Warum mehrere Neuronen?</span><small>90 Min.</small></summary>
+  <div class="detail-body">
+    <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-03">Doppellektion 3</a> scheiterte ein einzelnes Neuron an XOR. Heute kombinieren Sie mehrere Entscheidungen und klären, welche Daten ein Netz beim Lernen sehen darf.</p>
+    <figure class="concept-figure">
+      <img alt="XOR-Tabelle und vier Punkte: Keine gerade Linie trennt die beiden Klassen." loading="lazy" src="grafiken/xor_gerade.svg"/>
+      <figcaption>Ein einzelnes Neuron kann XOR nicht trennen; eine Zwischenschicht kann zusätzliche Grenzen darstellen.</figcaption>
+    </figure>
+    <p><strong>Heute können Sie:</strong> Eine Zwischenschicht erklären und Training, Validierung und Test trennen.</p>
+    <p class="lesson-question">Wie lösen mehrere einfache Entscheidungen das XOR-Problem?</p>
+    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Viele Neuronen erweitern die Möglichkeiten. Ob das Netz bei neuen Fällen funktioniert, hängt auch von einer fairen Datenaufteilung ab.</p>
+  </div>
+</details>
 <!-- /LESSONS:netze -->

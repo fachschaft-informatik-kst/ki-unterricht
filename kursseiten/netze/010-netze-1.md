@@ -1,1 +1,73 @@
-<details class="kapitel" id="netze-1" data-kurz="Zwei Zwischenneuronen lösen XOR: das Netz Schritt für Schritt nachvollziehen." open><summary><span class="kapitel-nr">1</span><h2 class="kapitel-titel">Ein Netz löst XOR</h2></summary><div class="kapitel-body"><figure class="concept-figure"><img alt="Zwei Eingaben, zwei Zwischenneuronen und ein Ausgabeneuron mit Gewichten und Bias." loading="lazy" src="grafiken/merhschichtiges_netzwerk.svg"/><figcaption>Die versteckte Schicht bildet Zwischenergebnisse. Im Notebook verfolgen Sie damit die XOR-Entscheidung.</figcaption></figure><div class="process"><span>Eingabe</span><b>→</b><span>Versteckte Schicht</span><b>→</b><span>Ausgabe</span></div><p>Prüfen Sie für (1, 0): Was antworten OR und NAND? Was entsteht, wenn der Ausgang beide Antworten mit AND kombiniert?</p><details><summary>Beispielgrafik – sofort verfügbar</summary><div class="detail-body"><p>Vorberechnetes Beispiel mit den Grundeinstellungen. Ihr interaktiver Versuch kann andere Ergebnisse zeigen.</p><img alt="Beispielausgabe: xor" loading="lazy" src="previews/xor.png" style="max-width:100%;height:auto"/></div></details><button class="btn primary" data-lab="mehrschichtige_netze.ipynb">XOR-Netz starten ▶</button><div class="protokoll-block"><h3>Mein Protokoll: XOR-Netz lernen</h3><div class="table-scroll"><table class="typen protokoll"><thead><tr><th>Versteckte Neuronen (Startwert 1)</th><th>Zeilen richtig (von 4)</th></tr></thead><tbody><tr><th>1</th><td><select data-answer="xornetz_1" aria-label="1 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td></tr><tr><th>2</th><td><select data-answer="xornetz_2" aria-label="2 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td></tr><tr><th>4</th><td><select data-answer="xornetz_4" aria-label="4 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td></tr></tbody></table></div><div class="table-scroll"><table class="typen protokoll"><thead><tr><th>Bei 2 Neuronen, Startwerte 0 bis 5</th><th>Ihre Beobachtung</th></tr></thead><tbody><tr><th>Gelingt es immer?</th><td><select data-answer="xornetz_start" aria-label="Gelingt es bei jedem Startwert?"><option value="">–</option><option value="immer">Ja, immer</option><option value="manchmal">Nur bei manchen Startwerten</option><option value="nie">Nie</option></select></td></tr></tbody></table></div><label class="field answer"><span>Wie viele versteckte Neuronen braucht ein Netz für XOR mindestens? Was verändert der Startwert?</span><textarea data-answer="xornetz_beob" maxlength="10000" placeholder="Mindestens … Der Startwert …" rows="3"></textarea></label></div></div></details>
+<details class="kapitel" id="netze-1" data-kurz="Zwei Zwischenneuronen lösen XOR: das Netz Schritt für Schritt nachvollziehen." open>
+  <summary><span class="kapitel-nr">1</span>
+    <h2 class="kapitel-titel">Ein Netz löst XOR</h2>
+  </summary>
+  <div class="kapitel-body">
+    <figure class="concept-figure">
+      <img alt="Zwei Eingaben, zwei Zwischenneuronen und ein Ausgabeneuron mit Gewichten und Bias." loading="lazy" src="grafiken/merhschichtiges_netzwerk.svg"/>
+      <figcaption>Die versteckte Schicht bildet Zwischenergebnisse. Im Notebook verfolgen Sie damit die XOR-Entscheidung.</figcaption>
+    </figure>
+    <div class="process">
+      <span>Eingabe</span><b>→</b><span>Versteckte Schicht</span><b>→</b><span>Ausgabe</span>
+    </div>
+    <!-- MD:START -->
+Prüfen Sie für (1, 0): Was antworten OR und NAND? Was entsteht, wenn der Ausgang beide Antworten mit AND kombiniert?
+<!-- MD:END -->
+    <details>
+      <summary>Beispielgrafik – sofort verfügbar</summary>
+      <div class="detail-body">
+        <!-- MD:START -->
+Vorberechnetes Beispiel mit den Grundeinstellungen. Ihr interaktiver Versuch kann andere Ergebnisse zeigen.
+<!-- MD:END -->
+        <img alt="Beispielausgabe: xor" loading="lazy" src="previews/xor.png" style="max-width:100%;height:auto"/>
+      </div>
+    </details>
+    <button class="btn primary" data-lab="mehrschichtige_netze.ipynb">XOR-Netz starten ▶</button>
+    <div class="protokoll-block">
+      <!-- MD:START -->
+### Mein Protokoll: XOR-Netz lernen
+<!-- MD:END -->
+      <div class="table-scroll">
+        <table class="typen protokoll">
+          <thead>
+            <tr>
+              <th>Versteckte Neuronen (Startwert 1)</th>
+              <th>Zeilen richtig (von 4)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1</th>
+              <td><select data-answer="xornetz_1" aria-label="1 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td>
+            </tr>
+            <tr>
+              <th>2</th>
+              <td><select data-answer="xornetz_2" aria-label="2 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td>
+            </tr>
+            <tr>
+              <th>4</th>
+              <td><select data-answer="xornetz_4" aria-label="4 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-scroll">
+        <table class="typen protokoll">
+          <thead>
+            <tr>
+              <th>Bei 2 Neuronen, Startwerte 0 bis 5</th>
+              <th>Ihre Beobachtung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Gelingt es immer?</th>
+              <td><select data-answer="xornetz_start" aria-label="Gelingt es bei jedem Startwert?"><option value="">–</option><option value="immer">Ja, immer</option><option value="manchmal">Nur bei manchen Startwerten</option><option value="nie">Nie</option></select></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <label class="field answer"><span>Wie viele versteckte Neuronen braucht ein Netz für XOR mindestens? Was verändert der Startwert?</span><textarea data-answer="xornetz_beob" maxlength="10000" placeholder="Mindestens … Der Startwert …" rows="3"></textarea></label>
+    </div>
+  </div>
+</details>
