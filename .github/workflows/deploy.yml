@@ -24,6 +24,34 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify local Makefile targets
+        run: |
+          make help
+          make -n preview > /tmp/ki-preview-make.txt
+          grep -Fq 'scripts/preview.py' /tmp/ki-preview-make.txt
+          make -n local > /tmp/ki-local-make.txt
+          grep -Fq 'jupyter lite build' /tmp/ki-local-make.txt
+          grep -Fq 'scripts/copy_portal.py' /tmp/ki-local-make.txt
+          grep -Fq 'http.server' /tmp/ki-local-make.txt
+      - name: Smoke-test local Makefile preview
+        run: |
+          timeout 75s make preview PORT=8765 > /tmp/ki-preview-server.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for attempt in $(seq 1 45); do
+            if curl -fsS --max-time 3 -o /tmp/ki-preview.html http://127.0.0.1:8765/projekt/; then
+              ready=1
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then
+            cat /tmp/ki-preview-server.log
+            exit 1
+          fi
+          grep -Fq 'data-answer=' /tmp/ki-preview.html
+          echo 'PASS Makefile preview: isolated Python setup, course build and HTTP server'
       - name: Build notebook autostart
         run: |
           npm ci --prefix extensions/ki-autostart
