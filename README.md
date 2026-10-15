@@ -100,7 +100,7 @@ Vorhandene Grafiken zu Perzeptron und mehrschichtigem Netz sind auf der Seite un
 
 Doppellektionen **5–8 sind als SOL-Phase** organisiert: In 5–7 planen die Tandems Tagesziele, Rollen, Tempo und Hilfen selbst. Die Etappen Datencheck → Vergleich → Auswahl → Test → Fazit sind keine festen Lektionstermine. Etappenplan und kurze Fortschrittsreflexion stehen im bestehenden Journal; kein zusätzliches Lerntagebuch. In Doppellektion 8 werten die übrigen Tandems parallel zu den Fachgesprächen ein fremdes Modell aus: ein Reproduktionslauf mit Startwert 11, Fremdtest und begründete Rückmeldung. Diese Fremdauswertung ist verbindlich, aber unbenotet; die eigene Abgabe bleibt unverändert.
 
-Drei Startwerte sind eine optionale Erweiterung **vor** Testeinsicht, auch bei der Fremdauswertung keine Pflicht. Die Grundlagen- und Transferlektionen haben klare Pflichtkerne, weniger Tool-/Sozialformwechsel und je zehn Minuten eingeplanten Puffer. Nicht jedes Kurskapitel oder Antwortfeld ist eine zusätzliche Pflichtaufgabe.
+Drei Startwerte sind eine optionale Erweiterung **vor** Testeinsicht, auch bei der Fremdauswertung keine Pflicht. Die Grundlagen- und Transferlektionen haben klare Pflichtkerne, weniger Tool-/Sozialformwechsel. Nicht jedes Kurskapitel oder Antwortfeld ist eine zusätzliche Pflichtaufgabe.
 
 ## Schneller Einstieg
 

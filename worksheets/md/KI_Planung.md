@@ -14,7 +14,7 @@
 
 **PADUA** prägt die Lernversuche: Frage und Vermutung, erklärtes Beispiel, Durcharbeiten, Üben und Übertragen. Es ist keine zweite Minutenplanung. Die Notebook-Zeit kommt nicht zusätzlich zur Unterrichtszeit hinzu. Handrechnung und digitale Versuche gehören zum selben Lernweg.
 
-Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite übernommen. Die Puffer sind bereits in den 90 Minuten enthalten; sie sind nicht mit zusätzlichen Pflichtaufgaben belegt.
+Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite übernommen. Die Puffer in den Doppellektionen 5–8 sind bereits in den 90 Minuten enthalten; sie sind nicht mit zusätzlichen Pflichtaufgaben belegt.
 
 ## Alle Doppellektionen
 
@@ -40,17 +40,18 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Informieren – Begriffe an einem Beispiel ordnen | 20 | Lehrperson | Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Ordnet schwache und starke KI sowie die vier KI-Typen ein: heutige Systeme sind schwache KI, Typ 1 oder 2; Typ 3 und 4 sind Forschungsziele. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen. |
 |  |  | Tandem | Ordnen Sie einen Spamfilter gemeinsam ein und klären Sie Ihre Fragen zu den Begriffen. |
 |  |  | Ergebnis | Eine gemeinsame Beispieleinordnung als Orientierung. |
-| Verarbeiten – Eigene Beispiele begründet einordnen | 45 | Tandem | Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk. Wer früh fertig ist, kann die Meilensteine oder Asimovs Gesetze lesen; keine weitere Pflichtaufgabe. |
-|  |  | Tandem | Puffer für Fragen, langsameres Arbeiten und das Fertigstellen der drei Beispiele. Keine neue Aufgabe beginnen müssen. |
-|  |  | Ergebnis | Drei begründete Beispiele, offene Fragen sichtbar markiert. |
+| Verarbeiten – Eigene Beispiele begründet einordnen | 45 | Tandem | Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk. |
+|  |  | Lehrperson | Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) kurz vor und zeigt den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen und gefährdet dabei den Fahrgast. |
+|  |  | Tandem | Entscheiden Sie zuerst allein, was das Auto tun soll, und vergleichen Sie im Tandem. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite). |
+|  |  | Ergebnis | Drei begründete Beispiele, offene Fragen sichtbar markiert, und zwei Argumente zum Fall «Schulweg». |
 | Auswerten – Die Leitfrage beantworten | 10 | Lehrperson | Bespricht zwei strittige Zuordnungen. Klärt: Ein Programm mit festen Regeln kann KI sein, lernt aber nicht aus Daten; nicht jede Automatisierung ist KI. |
 |  |  | Einzeln | Beantworten Sie die Leitfrage mit einem eigenen Beispiel und erklären Sie den Unterschied zwischen festen Regeln und Lernen aus Daten. |
 |  |  | Ergebnis | Eine eigene begründete Antwort auf die Leitfrage. |
 
 
-**Lernprodukt:** Drei begründet eingeordnete Beispiele und eine eigene Antwort auf die Leitfrage.
+**Lernprodukt:** Drei begründet eingeordnete Beispiele, zwei Argumente zum Fall «Schulweg» und eine eigene Antwort auf die Leitfrage.
 
-**Zeit:** 10 Minuten echter Puffer im Arbeitsblock, ohne Zusatzpflicht. Meilensteine und Asimovs Gesetze sind Vertiefung, keine zusätzlichen Klassenaktivitäten; die ethische Diskussion folgt in Doppellektion 10. Die Klasse bleibt nach dem Einstieg in denselben Tandems.
+**Zeit:** Asimovs Gesetze werden kurz angeschnitten; die ausführliche ethische Diskussion folgt in Doppellektion 10. Die Meilensteine sind freiwillige Vertiefung.
 
 ### Doppellektion 2 · Wie lernt KI?
 
@@ -74,8 +75,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Tandem | Erklären Sie am Spamfilter Eingabe, Erfahrungsschatz und Ausgabe. |
 |  |  | Ergebnis | EVA-Erklärung und Orientierung für die drei Memory-Runden. |
 | Verarbeiten – Memory und Rückmeldung bei NIM | 55 | Gruppe | Spielen Sie in festen Gruppen die drei Memory-Runden: neue Karten mit Labels zuordnen, ohne Labels nach Ähnlichkeit sortieren, verdeckte Paare mit +1 für Treffer und 0 für Fehlversuche suchen. Halten Sie pro Runde das Lernsignal und eine Beobachtung fest. Rollenwechsel nur zwischen den Runden; Material und Gruppe bleiben gleich. |
-|  |  | Klasse | Erkunden Sie NIM am Beamer. Entscheiden Sie gemeinsam Züge und beobachten Sie, was sich durch Gewinn oder Verlust verändert. Sichern Sie eine konkrete Beobachtung. Im Memory lernte ein Mensch; hier untersuchen Sie das KI-Beispiel. |
-|  |  | Gruppe | Puffer für Spielaufbau, Rückfragen und die Beobachtungen. Wer fertig ist, wählt höchstens eine Vertiefung (Smiley oder K-Means); kein Pflichtwechsel zu weiteren Tools. |
+|  |  | Klasse | Erkunden Sie NIM am Beamer. Entscheiden Sie gemeinsam Züge und beobachten Sie, was sich durch Gewinn oder Verlust verändert. Sichern Sie eine konkrete Beobachtung. Im Memory lernte ein Mensch; hier untersuchen Sie das KI-Beispiel. Wer fertig ist, wählt höchstens eine Vertiefung (Smiley oder K-Means); kein Pflichtwechsel zu weiteren Tools. |
 |  |  | Ergebnis | Drei Beobachtungen zu Lernsignalen und ein KI-Beleg aus NIM. |
 | Auswerten – Lernarten vergleichen | 10 | Einzeln | Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung. Ordnen Sie NIM und das Bildprojekt begründet zu. Erklären Sie, warum im Memory der Mensch und nicht ein KI-Modell gelernt hat. |
 |  |  | Lehrperson | Klärt offene Zuordnungen und sichert: Das Bildprojekt ist überwacht, weil Trainingsbilder Klassennamen erhalten. |
@@ -84,7 +84,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 **Lernprodukt:** Ein Vergleich wissensbasierter und lernender Systeme und je eine begründete Beobachtung zu den drei Lernarten.
 
-**Zeit:** Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours. 10 Minuten Puffer im Arbeitsblock.
+**Zeit:** Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours.
 
 ### Doppellektion 3 · Wie entscheidet ein Neuron?
 
@@ -110,7 +110,6 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Tandem | Rechnen Sie (0,1) selbst und erklären Sie den Unterschied zwischen Gewicht und Bias. |
 |  |  | Ergebnis | Eine geprüfte Rechnung als Orientierung für das Experiment. |
 | Verarbeiten – Ein Neuron einstellen und lernen lassen | 55 | Tandem | Arbeiten Sie im Notebook «Ein Neuron entscheidet»: ein Neuron von Hand einstellen, einen Lernschritt mit Gewichten 0.2/0.2, Bias −0.5, Eingabe (1,1) und Lernrate 0.2 von Hand nachvollziehen und mit der Ausgabe prüfen, dann lernen lassen. Untersuchen Sie XOR mit Punkten und Reglern. Dokumentieren Sie nur die zentrale Rechnung, eine beobachtete Korrektur und die XOR-Erklärung. Pflanzen und echte Ziffern sind freiwillig. |
-|  |  | Tandem | Puffer für Notebookstart, Rechenfehler, Rückfragen und die XOR-Erklärung. Keine zusätzlichen Experimente nötig. |
 |  |  | Ergebnis | Handrechnung, beobachteter Lernschritt und begründete Grenze. |
 | Auswerten – Was lernt das Neuron? | 10 | Einzeln | Erklären Sie Gewicht, Bias und die Korrektur bei einer falschen Ausgabe. Begründen Sie mit den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt. |
 |  |  | Lehrperson | Sichert an der XOR-Grafik: Die Grenze liegt am Bau des Neurons, nicht an zu wenig Übung. Der algebraische Widerspruch ist Vertiefung. |
@@ -119,7 +118,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 **Lernprodukt:** Eine nachvollziehbare Rechnung, ein erklärter Lernschritt und eine begründete XOR-Grenze.
 
-**Zeit:** Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Pflanzen und Ziffern sind Wahlvertiefung; XOR bleibt Pflicht. 10 Minuten Puffer innerhalb der 55 Minuten Verarbeitung.
+**Zeit:** Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Pflanzen und Ziffern sind Wahlvertiefung; XOR bleibt Pflicht.
 
 ### Doppellektion 4 · Warum mehrere Neuronen?
 
@@ -144,8 +143,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Informieren – Zwischenschicht und Datentrennung | 15 | Lehrperson | Verfolgt (1,0) durch h₁ = OR und h₂ = NAND, danach AND am Ausgang. Unterscheidet festgelegte Gewichte von gelernten Gewichten. Zeigt anschliessend die Datentrennung mit Prüfungsanalogie und fünf Gruppenkarten: T1/T2 zum Trainieren, V1 zur Auswahl, P1/P2 erst zum Abschlusstest. Dasselbe Exemplar bleibt in derselben Gruppe. Nennt die Freigabekriterien für Projektthema und Klassen. |
 |  |  | Ergebnis | Zwei Orientierungshilfen: Netzbild und Rollen der fünf Datengruppen. |
 | Verarbeiten – XOR verstehen und das Projekt vorbereiten | 55 | Tandem | Bearbeiten Sie im Notebook «Mehrere Neuronen kombinieren» den XOR-Kern: die vier Zeilen durch das konstruierte Netz verfolgen, dann ein Netz mit 1, 2 und 4 versteckten Neuronen lernen lassen. Erklären Sie die Funktion der Zwischenschicht. Ziffernexperimente sind Wahlvertiefung. |
-|  |  | Tandem | Bleiben Sie im selben Tandem. Ordnen Sie mit Gruppenkarten und Kursgrafik Training, Validierung und Test zu und erklären Sie ein Datenleck. Wählen Sie Thema und zwei Klassen aus dem Ideenpool; lassen Sie diese während der Arbeit bei der Lehrperson freigeben. Skizzieren Sie fünf unabhängige Gruppen. Das Notebook «Daten fair aufteilen» hilft bei Bedarf, ist aber kein zweiter Pflichtdurchlauf. |
-|  |  | Tandem | Puffer für Technik, Themenfreigaben und Datenfragen. Wer fertig ist, prüft freiwillig den Datenplan mit der Notebook-Checkliste. |
+|  |  | Tandem | Ordnen Sie mit Gruppenkarten und Kursgrafik Training, Validierung und Test zu und erklären Sie ein Datenleck. Wählen Sie Thema und zwei Klassen aus dem Ideenpool; lassen Sie diese während der Arbeit bei der Lehrperson freigeben. Skizzieren Sie fünf unabhängige Gruppen. Das Notebook «Daten fair aufteilen» hilft bei Bedarf, ist aber kein zweiter Pflichtdurchlauf. |
 |  |  | Ergebnis | XOR-Erklärung, Datenrollen und ein freigegebenes Thema mit zwei Klassen. |
 | Auswerten – Brücke zur SOL-Phase | 10 | Tandem | Halten Sie fest, was die Zwischenschicht leistet und warum dasselbe Objekt nicht zugleich in Training und Test vorkommt. Notieren Sie Ihren nächsten Vorbereitungsschritt. |
 |  |  | Lehrperson | Gibt den vorbereitenden Auftrag: Datenplan mit fünf unabhängigen Gruppen prüfen und bis Doppellektion 5 möglichst 80 Fotos sammeln, acht je Klasse und Gruppe. Beide Klassen unter gleichen Bedingungen; Personen nur mit Einverständnis. Fehlende Daten werden in der SOL-Zeit ergänzt; Ersatzdaten nur nach Absprache mit offener Herkunft. |
@@ -154,7 +152,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 **Lernprodukt:** XOR-Erklärung, begründete Datentrennung und ein freigegebenes Projektthema mit zwei Klassen.
 
-**Zeit:** Nur das Netz-Notebook ist für alle Pflicht. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik erarbeitet; das zweite Notebook ist Nachschlagewerk oder Vertiefung, kein weiterer Pflichtwechsel. 10 Minuten Puffer im Arbeitsblock. Themenfreigaben während der 55 Minuten, nicht erst im Abschluss; bei zwölf Tandems etwa eine Minute je Tandem. Datenplan und Fotos als vorbereitender Auftrag bis Doppellektion 5.
+**Zeit:** Nur das Netz-Notebook ist für alle Pflicht. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik erarbeitet; das zweite Notebook ist Nachschlagewerk oder Vertiefung, kein weiterer Pflichtwechsel. Themenfreigaben während der 55 Minuten, nicht erst im Abschluss; bei zwölf Tandems etwa eine Minute je Tandem. Datenplan und Fotos als vorbereitender Auftrag bis Doppellektion 5.
 
 ### Doppellektion 5 · Ihr Projekt starten und die Arbeit planen
 
@@ -302,8 +300,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Ergebnis | Ein erster Kontextvergleich. |
 | Informieren – Vom Wortfolgemodell zum Netz | 15 | Lehrperson | Erklärt zusammenhängend das Papagei-Modell: Häufigkeiten von Wortfolgen liefern Fortsetzungen. Zeigt danach die Grafik «Papagei-Modell und neuronales Sprachmodell»: gleiches Ziel, nächstes Token vorhersagen, aber trainierte Gewichte, Zahlendarstellungen ähnlicher Wörter und grösserer Kontext statt blosser Häufigkeitstabelle. Beide Verfahren garantieren keine Wahrheit. Nennt einen digitalen Arbeitsweg und die passenden Pflichtstationen; die Alternative dient nur bei Bedarf. |
 |  |  | Ergebnis | Ein Modellverständnis als Grundlage für den Vergleich. |
-| Verarbeiten – Ein Werkzeug gründlich untersuchen | 50 | Tandem | Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag. |
-|  |  | Tandem | Puffer für Zugang, Experiment und Interpretation. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen. |
+| Verarbeiten – Ein Werkzeug gründlich untersuchen | 50 | Tandem | Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen. |
 |  |  | Ergebnis | Ein belegter Vergleich und zwei kritisch eingeordnete Beispiele. |
 | Auswerten – Plausibilität und Wahrheit trennen | 10 | Einzeln | Erklären Sie anhand Ihrer Beispiele, warum eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Papagei-Tabelle und neuronalem Sprachmodell und eine gemeinsame Grenze. |
 |  |  | Lehrperson | Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen einer falschen, aber überzeugenden Ausgabe? |
@@ -312,7 +309,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 **Lernprodukt:** Ein dokumentierter Kontextvergleich, ein plausibles und ein problematisches Beispiel sowie zwei Grenzen der Analogie.
 
-**Zeit:** Ein digitaler Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia, nicht beides als Pflicht. 10 Minuten Puffer im Arbeitsblock. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht.
+**Zeit:** Ein digitaler Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia, nicht beides als Pflicht. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht.
 
 ### Doppellektion 10 · Wer trägt die Folgen?
 
@@ -336,7 +333,6 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Lehrperson | Klärt Opacity, Scale und Damage an einem Video-Beispiel und erklärt eine Rückkopplung. Die Lernenden ergänzen nur Stichworte. Keine separate Schreib- oder Wechselphase. |
 |  |  | Ergebnis | Ein Video-Beleg und gemeinsame Prüfkriterien. |
 | Verarbeiten – Einen Fall gründlich beurteilen | 45 | Gruppe | Bleiben Sie in derselben Gruppe und wählen Sie Bewerbungen, Schule oder Kredit. Prüfen Sie Ihren Fall mit Opacity, Scale und Damage, erzählen Sie seine Rückkopplung und entwickeln Sie eine konkrete Massnahme mit Erfolgskriterium und Zielkonflikt. Vergleichen Sie kurz mit einem Video-Beispiel und dem Bildprojekt: Warum ist das Schulprojekt wahrscheinlich keine WMD? Prüfen Sie O’Neils Aussage an Ihrem Fall: stärkstes Argument dafür, stärkstes Gegenargument, gemeinsames Urteil. Nutzen Sie die Leitfragen der Debatte als Gesprächshilfe; halten Sie nur zentrale Stichworte fest. |
-|  |  | Gruppe | Puffer für Diskussion, Rückfragen und das Fallurteil. Keine weitere Fallanalyse oder separate Debatte als Zusatzpflicht. |
 |  |  | Ergebnis | Ein Fallurteil mit Belegen, Gegenargument und überprüfbarer Massnahme. |
 | Auswerten – Urteil und ruhiger Kursabschluss | 15 | Klasse | Besprechen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut; die Lehrperson fragt: Wer ändert was, und woran wäre die Verbesserung erkennbar? |
 |  |  | Einzeln | Notieren Sie kurz eine Erkenntnis, eine offene Frage und eine Rückmeldung zum KI-Block. Einzelne freiwillige Stimmen schliessen den Kurs ab; keine verpflichtende Runde aller Personen. |
@@ -345,7 +341,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 **Lernprodukt:** Ein begründetes Fallurteil mit WMD-Check, Rückkopplung, Massnahme und Zielkonflikt sowie ein kurzer persönlicher Kursrückblick.
 
-**Zeit:** Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock. Keine zusätzliche Pro/Contra-Raumaufteilung. 10 Minuten Puffer im Arbeitsblock. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.
+**Zeit:** Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock. Keine zusätzliche Pro/Contra-Raumaufteilung. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.
 
 <!-- /KURSPLAN -->
 
@@ -382,25 +378,25 @@ Bis Ende Doppellektion 6 bei jedem Tandem kurz den Zeitplan und mögliche Daten-
 
 ### Doppellektion 1 · Begriffe an wenigen Beispielen sichern
 
-Regeln für Katze/Hund motivieren den zusammenhängenden Begriffsinput. Danach drei statt vier eigene Beispiele im selben Tandem begründet einordnen. Meilensteine und Asimovs Gesetze bleiben Material zur Wahlvertiefung; keine zusätzliche Zeitleistenaktion oder Gruppenrotation. Die ethische Diskussion findet in Doppellektion 10 statt. **10 Minuten Puffer.**
+Regeln für Katze/Hund motivieren den zusammenhängenden Begriffsinput. Danach drei statt vier eigene Beispiele begründet einordnen. Meilensteine und Asimovs Gesetze bleiben Material zur Wahlvertiefung; keine zusätzliche Zeitleistenaktion oder Gruppenrotation. Die ethische Diskussion findet in Doppellektion 10 statt.
 
 Fachlich sichern: Ein regelbasiertes System kann KI sein, lernt aber nicht aus Daten. Nicht jede Automatisierung ist KI. Heutige Systeme sind schwache KI; die vier KI-Typen sind eine Einteilung, keine Entwicklungsstufen, die jedes System durchläuft.
 
 ### Doppellektion 2 · Eine Erfahrung und ein digitales Beispiel
 
-Memory-Material und Rollen vorab bereitstellen. Die Gruppe bleibt über die drei Runden bestehen; nur die Rollen wechseln. Nach jeder Runde ein Lernsignal und eine Beobachtung notieren. Danach NIM gemeinsam am Beamer: Was ändert sich durch Rückmeldung? **10 Minuten Puffer** für Aufbau und Beobachtung.
+Memory-Material und Rollen vorab bereitstellen. Die Gruppe bleibt über die drei Runden bestehen; nur die Rollen wechseln. Nach jeder Runde ein Lernsignal und eine Beobachtung notieren. Danach NIM gemeinsam am Beamer: Was ändert sich durch Rückmeldung?
 
 Akinator und Filmempfehlungen als Beispiele erläutern, nicht als weitere Pflichttools öffnen. Smiley, K-Means und Begriffscheck sind Wahlmaterial; Quick, Draw! nur freiwillig ohne persönliche Motive. Fachlich unterscheiden: Im Memory lernt ein Mensch; NIM zeigt das KI-Beispiel. Beim unüberwachten Lernen werden keine Zielklassen vorgegeben.
 
 ### Doppellektion 3 · Ein Arbeitsweg durch das Neuron
 
-Nach einem vorgeführten Beispiel im selben Notebook arbeiten. Handrechnung auf Papier daneben, nicht zusätzlich das ganze Arbeitsblatt und das ganze Notebook abarbeiten. Pflicht: Gewicht/Bias, ein Lernschritt, Lernen beobachten, XOR-Grenze. Pflanzen und echte Ziffern sind Vertiefung. **10 Minuten Puffer** im Arbeitsblock.
+Nach einem vorgeführten Beispiel im selben Notebook arbeiten. Handrechnung auf Papier daneben, nicht zusätzlich das ganze Arbeitsblatt und das ganze Notebook abarbeiten. Pflicht: Gewicht/Bias, ein Lernschritt, Lernen beobachten, XOR-Grenze. Pflanzen und echte Ziffern sind Vertiefung.
 
 Gewichte und Bias werden gelernt, Eingaben und Labels nicht. Bei falscher Ausgabe die Richtung einer Korrektur erklären lassen. XOR mit den Punkten begründen; den algebraischen Widerspruch nur bei Bedarf vertiefen.
 
 ### Doppellektion 4 · Netz und Projektbrücke entlasten
 
-Nur den XOR-Kern des Netz-Notebooks verbindlich durchführen. Datenrollen mit Kursgrafik und fünf Gruppenkarten klären; das zweite Notebook bleibt Hilfe und Vertiefung. Keine zwei vollständigen Notebookdurchläufe. Ziffernexperimente sind optional. **10 Minuten Puffer** für Technik und Themenfreigaben.
+Nur den XOR-Kern des Netz-Notebooks verbindlich durchführen. Datenrollen mit Kursgrafik und fünf Gruppenkarten klären; das zweite Notebook bleibt Hilfe und Vertiefung. Keine zwei vollständigen Notebookdurchläufe. Ziffernexperimente sind optional.
 
 Thema und zwei Klassen bereits während des Arbeitsblocks mündlich freigeben, nicht alle Freigaben in den letzten Minuten erledigen. Pro Tandem etwa eine Minute einplanen. Datenplan und Fotos als vorbereitenden Auftrag mitgeben: acht Fotos je Klasse und Gruppe, Gruppen vor dem Fotografieren festlegen, Personen nur mit Einverständnis. Fehlende Daten in der SOL-Zeit gezielt ergänzen.
 
@@ -426,7 +422,7 @@ In den letzten fünf Minuten sichern und eine Transferfrage für Doppellektion 1
 
 ### Doppellektion 9 · Einen Kontextvergleich vertiefen
 
-Nach dem kurzen Papierexperiment Papagei-Modell und neuronales Sprachmodell zusammenhängend erklären. Anschliessend **einen** digitalen Arbeitsweg festlegen: ausgewählte Papagei-Stationen **oder** Soekia. Nur das dazugehörige Protokoll verlangen. Soekia und Beispielausgaben vorab testen beziehungsweise bereitstellen. **10 Minuten Puffer.**
+Nach dem kurzen Papierexperiment Papagei-Modell und neuronales Sprachmodell zusammenhängend erklären. Anschliessend **einen** digitalen Arbeitsweg festlegen: ausgewählte Papagei-Stationen **oder** Soekia. Nur das dazugehörige Protokoll verlangen. Soekia und Beispielausgaben vorab testen beziehungsweise bereitstellen.
 
 Human or Not ist ein Live-Chat mit Fremden, keine Simulation. Nur nach schulischer Freigabe als freiwillige Alternative innerhalb desselben Zeitbudgets einsetzen; keine persönlichen Daten. Kein zusätzlicher Pflichtwechsel.
 
@@ -434,7 +430,7 @@ Sichern: Moderne Sprachmodelle lernen Gewichte und Zahlendarstellungen; sie sind
 
 ### Doppellektion 10 · Ein Fall und ein ruhiger Abschluss
 
-Video und Wiedergabe vorab prüfen. Nach dem Video die WMD-Kriterien und Rückkopplung explizit erklären. In derselben Gruppe einen Fall bearbeiten: Kriterien, Rückkopplung, stärkstes Pro- und Gegenargument, überprüfbare Massnahme, Zielkonflikt. Debattenfragen als Hilfe, keine zusätzliche Pro/Contra-Aufstellung und keine zweite Fallrotation. **10 Minuten Puffer.**
+Video und Wiedergabe vorab prüfen. Nach dem Video die WMD-Kriterien und Rückkopplung explizit erklären. In derselben Gruppe einen Fall bearbeiten: Kriterien, Rückkopplung, stärkstes Pro- und Gegenargument, überprüfbare Massnahme, Zielkonflikt. Debattenfragen als Hilfe, keine zusätzliche Pro/Contra-Aufstellung und keine zweite Fallrotation.
 
 Mit Video-Beispiel und Bildprojekt kurz vergleichen. Das Schulprojekt ist wahrscheinlich keine WMD, weil grosse Reichweite und erheblicher Schaden fehlen; dies begründen lassen. Rückkopplung am Kreditfall: Über Abgelehnte fehlen spätere Erfolgsdaten. Nach allgemeinen Vorschlägen fragen: Wer ändert was, und woran wäre die Verbesserung erkennbar?
 

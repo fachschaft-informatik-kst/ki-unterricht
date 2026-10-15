@@ -206,7 +206,7 @@ def build():
     (ROOT/'projekt/unterrichtsplan.html').write_text(lehrpersonen_seite(lessons, text))
     rows = []
     for l in lessons:
-        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', ''] + ([f'**Rückblick:** {l["rueckblick"]}', ''] + ([f'*{l["rueckblick_figur"]["caption"]}*', ''] if l.get('rueckblick_figur') else []) if l.get('rueckblick') else []) + [f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"]}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['**Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.', ''])
+        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', ''] + ([f'**Rückblick:** {l["rueckblick"]}', ''] + ([f'*{l["rueckblick_figur"]["caption"]}*', ''] if l.get('rueckblick_figur') else []) if l.get('rueckblick') else []) + [f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"].removeprefix("Leitfrage:").strip()}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['**Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.', ''])
         rows += ['| Phase | Min. | Wer | Was |', '|---|---:|---|---|']
         for p in l['phases']:
             for i, st in enumerate(p['schritte']):

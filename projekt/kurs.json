@@ -9,8 +9,8 @@
       "goal": "KI von Programmen mit festen Regeln unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen und schwache und starke KI sowie die vier KI-Typen unterscheiden.",
       "question": "Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
-      "product": "Drei begründet eingeordnete Beispiele und eine eigene Antwort auf die Leitfrage.",
-      "zeit": "10 Minuten echter Puffer im Arbeitsblock, ohne Zusatzpflicht. Meilensteine und Asimovs Gesetze sind Vertiefung, keine zusätzlichen Klassenaktivitäten; die ethische Diskussion folgt in Doppellektion 10. Die Klasse bleibt nach dem Einstieg in denselben Tandems.",
+      "product": "Drei begründet eingeordnete Beispiele, zwei Argumente zum Fall «Schulweg» und eine eigene Antwort auf die Leitfrage.",
+      "zeit": "Asimovs Gesetze werden kurz angeschnitten; die ausführliche ethische Diskussion folgt in Doppellektion 10. Die Meilensteine sind freiwillige Vertiefung.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -92,19 +92,25 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 35,
-              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk. Wer früh fertig ist, kann die Meilensteine oder Asimovs Gesetze lesen; keine weitere Pflichtaufgabe."
+              "min": 30,
+              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 5,
+              "text": "Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) kurz vor und zeigt den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen und gefährdet dabei den Fahrgast."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Puffer für Fragen, langsameres Arbeiten und das Fertigstellen der drei Beispiele. Keine neue Aufgabe beginnen müssen."
+              "text": "Entscheiden Sie zuerst allein, was das Auto tun soll, und vergleichen Sie im Tandem. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite)."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Drei begründete Beispiele, offene Fragen sichtbar markiert."
+              "text": "Drei begründete Beispiele, offene Fragen sichtbar markiert, und zwei Argumente zum Fall «Schulweg»."
             }
           ]
         },
@@ -143,7 +149,7 @@
       "question": "Leitfrage: Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
       "motivation": "Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.",
       "product": "Ein Vergleich wissensbasierter und lernender Systeme und je eine begründete Beobachtung zu den drei Lernarten.",
-      "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours. 10 Minuten Puffer im Arbeitsblock.",
+      "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -213,20 +219,14 @@
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "min": 25,
+              "min": 30,
               "text": "Spielen Sie in festen Gruppen die drei Memory-Runden: neue Karten mit Labels zuordnen, ohne Labels nach Ähnlichkeit sortieren, verdeckte Paare mit +1 für Treffer und 0 für Fehlversuche suchen. Halten Sie pro Runde das Lernsignal und eine Beobachtung fest. Rollenwechsel nur zwischen den Runden; Material und Gruppe bleiben gleich."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 20,
-              "text": "Erkunden Sie NIM am Beamer. Entscheiden Sie gemeinsam Züge und beobachten Sie, was sich durch Gewinn oder Verlust verändert. Sichern Sie eine konkrete Beobachtung. Im Memory lernte ein Mensch; hier untersuchen Sie das KI-Beispiel."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Gruppe",
-              "min": 10,
-              "text": "Puffer für Spielaufbau, Rückfragen und die Beobachtungen. Wer fertig ist, wählt höchstens eine Vertiefung (Smiley oder K-Means); kein Pflichtwechsel zu weiteren Tools."
+              "min": 25,
+              "text": "Erkunden Sie NIM am Beamer. Entscheiden Sie gemeinsam Züge und beobachten Sie, was sich durch Gewinn oder Verlust verändert. Sichern Sie eine konkrete Beobachtung. Im Memory lernte ein Mensch; hier untersuchen Sie das KI-Beispiel. Wer fertig ist, wählt höchstens eine Vertiefung (Smiley oder K-Means); kein Pflichtwechsel zu weiteren Tools."
             },
             {
               "art": "Ergebnis",
@@ -275,7 +275,7 @@
       "question": "Leitfrage: Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und wo seine Grenze liegt.",
       "product": "Eine nachvollziehbare Rechnung, ein erklärter Lernschritt und eine begründete XOR-Grenze.",
-      "zeit": "Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Pflanzen und Ziffern sind Wahlvertiefung; XOR bleibt Pflicht. 10 Minuten Puffer innerhalb der 55 Minuten Verarbeitung.",
+      "zeit": "Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Pflanzen und Ziffern sind Wahlvertiefung; XOR bleibt Pflicht.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -345,14 +345,8 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 45,
+              "min": 55,
               "text": "Arbeiten Sie im Notebook «Ein Neuron entscheidet»: ein Neuron von Hand einstellen, einen Lernschritt mit Gewichten 0.2/0.2, Bias −0.5, Eingabe (1,1) und Lernrate 0.2 von Hand nachvollziehen und mit der Ausgabe prüfen, dann lernen lassen. Untersuchen Sie XOR mit Punkten und Reglern. Dokumentieren Sie nur die zentrale Rechnung, eine beobachtete Korrektur und die XOR-Erklärung. Pflanzen und echte Ziffern sind freiwillig."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 10,
-              "text": "Puffer für Notebookstart, Rechenfehler, Rückfragen und die XOR-Erklärung. Keine zusätzlichen Experimente nötig."
             },
             {
               "art": "Ergebnis",
@@ -401,7 +395,7 @@
       "question": "Leitfrage: Wie lösen mehrere einfache Entscheidungen das XOR-Problem?",
       "motivation": "Viele Neuronen erweitern die Möglichkeiten. Ob das Netz bei neuen Fällen funktioniert, hängt auch von einer fairen Datenaufteilung ab.",
       "product": "XOR-Erklärung, begründete Datentrennung und ein freigegebenes Projektthema mit zwei Klassen.",
-      "zeit": "Nur das Netz-Notebook ist für alle Pflicht. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik erarbeitet; das zweite Notebook ist Nachschlagewerk oder Vertiefung, kein weiterer Pflichtwechsel. 10 Minuten Puffer im Arbeitsblock. Themenfreigaben während der 55 Minuten, nicht erst im Abschluss; bei zwölf Tandems etwa eine Minute je Tandem. Datenplan und Fotos als vorbereitender Auftrag bis Doppellektion 5.",
+      "zeit": "Nur das Netz-Notebook ist für alle Pflicht. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik erarbeitet; das zweite Notebook ist Nachschlagewerk oder Vertiefung, kein weiterer Pflichtwechsel. Themenfreigaben während der 55 Minuten, nicht erst im Abschluss; bei zwölf Tandems etwa eine Minute je Tandem. Datenplan und Fotos als vorbereitender Auftrag bis Doppellektion 5.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -465,20 +459,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 25,
+              "min": 30,
               "text": "Bearbeiten Sie im Notebook «Mehrere Neuronen kombinieren» den XOR-Kern: die vier Zeilen durch das konstruierte Netz verfolgen, dann ein Netz mit 1, 2 und 4 versteckten Neuronen lernen lassen. Erklären Sie die Funktion der Zwischenschicht. Ziffernexperimente sind Wahlvertiefung."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 20,
-              "text": "Bleiben Sie im selben Tandem. Ordnen Sie mit Gruppenkarten und Kursgrafik Training, Validierung und Test zu und erklären Sie ein Datenleck. Wählen Sie Thema und zwei Klassen aus dem Ideenpool; lassen Sie diese während der Arbeit bei der Lehrperson freigeben. Skizzieren Sie fünf unabhängige Gruppen. Das Notebook «Daten fair aufteilen» hilft bei Bedarf, ist aber kein zweiter Pflichtdurchlauf."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 10,
-              "text": "Puffer für Technik, Themenfreigaben und Datenfragen. Wer fertig ist, prüft freiwillig den Datenplan mit der Notebook-Checkliste."
+              "min": 25,
+              "text": "Ordnen Sie mit Gruppenkarten und Kursgrafik Training, Validierung und Test zu und erklären Sie ein Datenleck. Wählen Sie Thema und zwei Klassen aus dem Ideenpool; lassen Sie diese während der Arbeit bei der Lehrperson freigeben. Skizzieren Sie fünf unabhängige Gruppen. Das Notebook «Daten fair aufteilen» hilft bei Bedarf, ist aber kein zweiter Pflichtdurchlauf."
             },
             {
               "art": "Ergebnis",
@@ -970,7 +958,7 @@
       "question": "Leitfrage: Warum ist eine plausible Fortsetzung nicht automatisch wahr?",
       "motivation": "Sprachmodelle können überzeugend schreiben, ohne die Richtigkeit einer Aussage zu prüfen.",
       "product": "Ein dokumentierter Kontextvergleich, ein plausibles und ein problematisches Beispiel sowie zwei Grenzen der Analogie.",
-      "zeit": "Ein digitaler Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia, nicht beides als Pflicht. 10 Minuten Puffer im Arbeitsblock. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht.",
+      "zeit": "Ein digitaler Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia, nicht beides als Pflicht. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -1034,14 +1022,8 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 40,
-              "text": "Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 10,
-              "text": "Puffer für Zugang, Experiment und Interpretation. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
+              "min": 50,
+              "text": "Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
             },
             {
               "art": "Ergebnis",
@@ -1085,7 +1067,7 @@
       "question": "Leitfrage: Sind gleiche Regeln automatisch fair?",
       "motivation": "Entscheidungen mit KI betreffen Menschen. Ein begründetes Urteil braucht einen konkreten Fall, Belege und einen Blick auf die Folgen.",
       "product": "Ein begründetes Fallurteil mit WMD-Check, Rückkopplung, Massnahme und Zielkonflikt sowie ein kurzer persönlicher Kursrückblick.",
-      "zeit": "Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock. Keine zusätzliche Pro/Contra-Raumaufteilung. 10 Minuten Puffer im Arbeitsblock. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.",
+      "zeit": "Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock. Keine zusätzliche Pro/Contra-Raumaufteilung. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -1155,14 +1137,8 @@
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "min": 35,
+              "min": 45,
               "text": "Bleiben Sie in derselben Gruppe und wählen Sie Bewerbungen, Schule oder Kredit. Prüfen Sie Ihren Fall mit Opacity, Scale und Damage, erzählen Sie seine Rückkopplung und entwickeln Sie eine konkrete Massnahme mit Erfolgskriterium und Zielkonflikt. Vergleichen Sie kurz mit einem Video-Beispiel und dem Bildprojekt: Warum ist das Schulprojekt wahrscheinlich keine WMD? Prüfen Sie O’Neils Aussage an Ihrem Fall: stärkstes Argument dafür, stärkstes Gegenargument, gemeinsames Urteil. Nutzen Sie die Leitfragen der Debatte als Gesprächshilfe; halten Sie nur zentrale Stichworte fest."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Gruppe",
-              "min": 10,
-              "text": "Puffer für Diskussion, Rückfragen und das Fallurteil. Keine weitere Fallanalyse oder separate Debatte als Zusatzpflicht."
             },
             {
               "art": "Ergebnis",

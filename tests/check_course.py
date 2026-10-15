@@ -117,6 +117,7 @@ assert 'Ihr Arbeitsweg:' not in soup.get_text()
 assert 'Ihr Arbeitsweg:' not in plans.get_text()
 assert 'Garry Kasparov' in soup.get_text()
 for lesson in lessons:
+    if lesson['id'] not in ['05','06','07','08']: continue
     work=lesson['phases'][3]
     reserve=[s for s in work['schritte'] if 'Puffer' in s['text']]
     assert sum(s['min'] for s in reserve)>=10, lesson['id']
