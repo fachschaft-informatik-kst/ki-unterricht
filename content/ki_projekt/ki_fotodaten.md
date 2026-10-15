@@ -19,7 +19,7 @@ Jeder Gegenstand bleibt in genau einer Gruppe. Ein anderer Hintergrund erzeugt k
 3. **Beide Klassen unter gleichen Bedingungen** aufnehmen (Hintergrund, Licht, Kamera). Sonst lernt das Netz womöglich den Hintergrund statt den Gegenstand: Liegen alle Äpfel auf Holz und alle Birnen auf Weiss, sagt «Holz» die Klasse voraus.
 4. Gruppenzuordnung (T1, T2, V1, P1, P2) **vor** dem Fotografieren festlegen und nicht nach den Ergebnissen ändern.
 5. Quellen und Aufnahmebedingungen notieren. Eigene Fotos verwenden; Internetbilder nur nach Absprache mit Quellen und Nutzungsbedingungen.
-6. Fotos bis zur 5. Doppellektion bereithalten. Originale ausserhalb des Browsers sichern.
+6. Fotos möglichst bis Doppellektion 5 bereithalten; fehlende Aufnahmen während Ihrer Projektarbeit ergänzen, bevor Sie trainieren. Planen Sie dafür Zeit ein. Originale ausserhalb des Browsers sichern.
 
 **Personen und Datenschutz:** Personen (etwa bei Gesten) nur mit Einverständnis fotografieren und die lokalen Datenschutzregeln einhalten. Gesichter vermeiden, wenn die Frage sie nicht braucht. Fotos und JSON enthalten die Bilder; das ZIP nur über den Abgabekanal der Lehrperson weitergeben.
 

@@ -10,11 +10,14 @@ from bs4 import BeautifulSoup
 root=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(root/'scripts'))
 from build_portal_notebooks import ITEMS
-from build_course import PHASES
+from build_course import PHASES, update_sol_material
 
 lessons=json.loads((root/'projekt/kurs.json').read_text())['lessons']
 assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,11)]
 soup=BeautifulSoup((root/'projekt/index.html').read_text(),'html.parser')
+assert not re.search(r'\bSOL\b',soup.get_text()), 'Use concrete student-facing language instead of SOL'
+page=(root/'projekt/index.html').read_text()
+assert update_sol_material(page)==page, 'Repeated builds must not duplicate or change SOL guidance'
 # Ablauftabellen stehen nur auf der Lehrpersonen-Seite, nicht auf der Kursseite.
 plans=BeautifulSoup((root/'projekt/unterrichtsplan.html').read_text(),'html.parser')
 assert not soup.select('.phase-table') and 'Unser Ablauf' not in soup.get_text() and 'Am Ende sichtbar' not in soup.get_text()
@@ -31,6 +34,7 @@ for lesson in lessons:
     assert plan and lesson_label in plan.get_text() and lesson['product'] in plan.get_text()
     for phase in lesson['phases']:
         assert phase['schritte'] and phase['schritte'][-1]['art']=='Ergebnis'
+        assert sum(step.get('min',0) for step in phase['schritte'])==phase['minutes']
         for step in phase['schritte']:
             assert step['text'] in plan.get_text(), step['text'][:40]
             assert step['text'] in (root/'worksheets/md/KI_Planung.md').read_text(), step['text'][:40]
@@ -81,6 +85,7 @@ assert len(rows)==3
 for n,talk,switch,total,reserve in rows:
     assert int(n)*(float(talk.replace(',','.'))+float(switch.replace(',','.')))==int(total)
     assert int(total)+int(reserve)==80
+    assert int(reserve)>=8, 'Conversation window needs a real reserve'
 assert 'Alle Fachgespräche finden in Doppellektion 8 statt.' in soup.get_text()
 repro=soup.select_one('details#reproduktion')
 assert repro and repro.select_one('textarea[data-journal="reproduktion"][data-optional]')
@@ -88,6 +93,27 @@ assert 'privaten Fenster' in repro.get_text() and 'daten_sha256' in repro.get_te
 lesson8=plans.select_one('[data-lesson="08"]')
 assert sum(int(x.get_text()) for x in lesson8.select('.min') if x.get_text().strip().isdigit())>=70
 assert 'Reproduktionsprüfung' in lesson8.get_text() and 'Reproduktionsprüfung' in planning
+assert 'Fremdtest und Rückmeldung' in lesson8.get_text()
+assert '15 Minuten Puffer' in planning
+sol=soup.select_one('#sol-rahmen')
+assert sol and 'keine festen Lektionstermine' in sol.get_text()
+assert 'unbenotet' in repro.get_text()
+assert 'Freiwillige Vertiefung, kein Pflichtteil' in repro.get_text()
+assert 'Etappenplan' in soup.select_one('textarea[data-journal="contribution"]').parent.get_text()
+for lesson in lessons:
+    if lesson['id'] not in ['05','06','07','08']:
+        assert lesson['arbeitsweg'] in soup.select_one('[data-lesson="'+lesson['id']+'"]').get_text()
+    work=lesson['phases'][3]
+    reserve=[s for s in work['schritte'] if 'Puffer' in s['text']]
+    assert sum(s['min'] for s in reserve)>=10, lesson['id']
+for lid in ['06','07']:
+    lesson=next(l for l in lessons if l['id']==lid)
+    assert lesson['phases'][3]['minutes']==70
+    assert all(s['wer']!='Lehrperson' for p in lesson['phases'] for s in p['schritte'])
+project_nb=nbformat.read(root/'content/ki_projekt/ki_tandemprojekt.ipynb',4)
+intro=project_nb.cells[0].source
+assert 'keine festen Lektionstermine' in intro and 'Etappenplan' in intro
+assert not any(f'| Doppellektion {n} |' in intro for n in [5,6,7])
 assert not re.search(r'\b\d{1,2}\.\d{1,2}\.20\d{2}\b',soup.get_text())
 for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektauftrag.md').read_text()]:
     assert not any(old in document for old in ['über mehrere Termine','auf weitere Termine','zusätzliche Gesprächszeiten'])

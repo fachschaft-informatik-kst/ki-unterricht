@@ -26,19 +26,42 @@ V1 dient der Auswahl. Erst nach der begründeten Wahl wird auf P1/P2 getestet. D
 
 Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Wiederholungen mit drei festgelegten Startwerten sind freiwillige Vertiefung vor Testeinsicht; alle Ergebnisse berichten.
 
-## Termine
+## So planen und steuern Sie Ihre Projektarbeit
 
-| Datum | Ziel |
+In **Doppellektion 5–7** steuern Sie Ihre Arbeit im Tandem selbst. Es gibt keine gemeinsame Vorgabe «heute alle trainieren». Die fachliche Reihenfolge bleibt verbindlich:
+
+**Daten prüfen → A/B vergleichen → Auswahl begründen → Abschlusstest → Fazit und Abgabe.**
+
+- **Sie entscheiden:** Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und benötigte Hilfen. Nutzen Sie das Lernlabor einmal als Orientierung, falls Sie den Ablauf noch nicht kennen; keine Pflichtwiederholung.
+- **Verbindlich bleiben:** Datenplan, fairer Vergleich, fünf Reflexionen, Auswahl vor Testeinsicht, keine Optimierung danach und die Abgabefrist.
+- **Planen:** Ergänzen Sie in Reflexion 1 einen kurzen Etappenplan mit Zuständigkeiten, Zeitbedarf und Reserve. Beide übernehmen praktische und erklärende Aufgaben; wechseln Sie die Rollen.
+- **Steuern:** Am Ende jeder Arbeitsphase im bestehenden Journal kurz ergänzen: erreicht, offen, nächster Schritt, benötigte Hilfe. Passen Sie den Plan bei Bedarf an; kein zusätzliches Lerntagebuch.
+- **Prüfen:** Nutzen Sie das Raster für fehlende Belege und erklären Sie sich gegenseitig das ganze Projekt. In Reflexion 5 beurteilen Sie auch, was an Ihrem Plan funktionierte und was Sie änderten. Diese Hinweise sind keine zusätzlichen Bewertungskompetenzen.
+
+Die Lehrperson bietet kurze Beratungen zu Ihren Fragen an, statt die Klasse bei jeder Etappe anzuhalten. Melden Sie frühzeitig, wenn Daten oder Technik den Abschluss gefährden.
+
+## Zeitrahmen und Termine
+
+| Zeitpunkt | Rahmen |
 |---|---|
-| 4.Doppellektion | Tandem, Thema und zwei Klassen festlegen; die Lehrperson segnet die Idee mündlich ab |
-| bis 5.Doppellektion | Hausaufgabe: Datenplan festlegen und Fotos sammeln |
-| bis 5.Doppellektion | Fotos sammeln |
-| 5.Doppellektion | Einführung, geprüfter Import und Reflexion 1–2; erster Lauf bei Zeitreserve |
-| 6.Doppellektion | Fairer Vergleich und Interpretation |
-| 7.Doppellektion | Modellwahl, Abschlusstest, Journal abschliessen |
-| 8.Doppellektion | Abgabe **vor Unterrichtsbeginn**, Fachgespräch im Tandem |
+| Doppellektion 4 | Thema und zwei Klassen freigeben lassen; fünf unabhängige Gruppen skizzieren |
+| bis Doppellektion 5 | Datenplan prüfen und möglichst die Fotos sammeln; fehlende Fotos während der Projektarbeit gezielt ergänzen |
+| Doppellektionen 5–7 | Eigener Etappenplan, selbstständige Arbeit, Beratung und laufende Sicherung; Etappen frei auf die Zeit verteilen |
+| vor Beginn der Doppellektion 8 | Vollständiges ZIP über den Abgabekanal einreichen |
+| Doppellektion 8 | Fachgespräch; parallel selbstständige Fremdauswertung mit Rückmeldung |
 
-Alle Fachgespräche finden während der **8.Doppellektion** statt. Richtwert: **5 Minuten pro Tandem**, bei mehr Tandems für alle gleich kürzer. Die Lehrperson gibt Dauer, Reihenfolge und Abgabekanal vorab bekannt. Die übrigen Tandems bearbeiten den unbenoteten Fremdtest (fremdes Modell an den eigenen Klassen testen).
+Alle Fachgespräche finden während der **Doppellektion 8** statt. Richtwert: **5 Minuten pro Tandem**, bei mehr Tandems für alle gleich kürzer. Die Lehrperson gibt Dauer, Reihenfolge, Austauschpartner und Abgabekanal vorab bekannt.
+
+### Während der Fachgespräche: ein fremdes Modell auswerten
+
+Arbeiten Sie selbstständig und pausieren Sie nur für Ihr Gespräch. Die Fremdauswertung ist **verbindlich, aber unbenotet**; die bewertete eigene Abgabe bleibt unverändert.
+
+1. Übernehmen Sie das zugeteilte Projekt in einem **privaten Browserfenster**, damit Sie Ihren eigenen Stand nicht ersetzen. Weitergabe nur mit geklärter Berechtigung; auch die Fotostudio-JSON enthält Vorschaubilder.
+2. **Reproduktionscheck, ca. 30 Minuten:** Prüfen Sie Daten und Einstellungen, trainieren Sie A/B einmal mit Startwert 11 nach und prüfen Sie die ursprünglich gewählte Variante. Vergleichen Sie Prüfsumme und Ergebnisse; dokumentieren Sie Abweichungen. Drei Startwerte sind freiwillige Vertiefung, kein Pflichtteil.
+3. **Fremdtest und Rückmeldung, ca. 25 Minuten:** Lassen Sie das fremde Modell Ihre eigenen Klassen beurteilen. Halten Sie vorher eine Erwartung fest und werten Sie danach Tabelle, Trennschärfe und Beispiele aus. Begründen Sie das Ergebnis, nennen Sie eine Grenze und geben Sie dem anderen Tandem eine konkrete Rückmeldung.
+4. Sichern und reichen Sie die kurze Fremdauswertung separat im bestehenden Reproduktions- und Fremdtest-Protokoll ein. Kein zusätzlicher langer Bericht.
+
+Für Gespräch, Wiedereinstieg und Technik bleibt Reserve. Bei einem nicht lösbaren Trainingsproblem werten Sie die gespeicherten fremden Ausgaben aus und dokumentieren ausdrücklich, welcher Versuch nicht möglich war. Die Auswertung entfällt nicht, aber Sie behaupten keinen erfolgreichen Test. Erhaltene Fotos nur für diesen Auftrag verwenden und nach der vereinbarten Aufbewahrungsregel löschen.
 
 ## Bewertung
 

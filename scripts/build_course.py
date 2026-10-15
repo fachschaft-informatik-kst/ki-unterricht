@@ -52,6 +52,7 @@ def render(lesson, voll=False):
             + f'<p><strong>Heute können Sie:</strong> {html.escape(lesson["goal"])}</p>'
             f'<p class="lesson-question">{html.escape(lesson["question"])}</p>'
             + (f'<p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> {html.escape(lesson["motivation"])}</p>' if lesson.get('motivation') else '')
+            + (f'<p class="callout"><strong>Ihr Arbeitsweg:</strong> {html.escape(lesson["arbeitsweg"])}</p>' if lesson.get('arbeitsweg') else '')
             + ((LEGENDE + tabelle(lesson)
             + f'<p class="lesson-product"><strong>Am Ende sichtbar:</strong> {html.escape(lesson["product"])}</p>'
             + (f'<p class="small muted"><strong>Zeit:</strong> {html.escape(lesson["zeit"])}</p>' if lesson.get('zeit') else '')) if voll else '')
@@ -66,6 +67,7 @@ def lehrpersonen_seite(lessons, kursseite):
             '<link href="favicon.svg" rel="icon" type="image/svg+xml">'+stil+'<link href="portal.css" rel="stylesheet">'
             '<body class="lehrpersonen-seite"><main><div class="crumb"><span>Nur für die Lehrperson</span></div>'
             '<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller zehn Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
+            'In Doppellektion 5–8 dient AVIVA nur als äusserer Rahmen der SOL-Arbeit, nicht als gemeinsamer Takt für die Projektetappen. '
             'Gleiche Fassung wie in <code>worksheets/md/KI_Planung.md</code>.</p>'
             '<p><a href="index.html">← Zur Kursseite</a></p>\n'+plaene+'\n<p><a href="index.html">← Zur Kursseite</a></p></main></body></html>\n')
 
@@ -121,6 +123,68 @@ def update_language_lesson(text):
         assert new_step in text, 'Expected mini-model task or Papagei learning-path task'
     return text
 
+def update_sol_material(text):
+    """Keep project guidance aligned with the SOL frame without changing saved fields."""
+    sol = (
+        '<div class="callout" id="sol-rahmen"><h3>Ihr Projekt: Arbeit planen, durchführen und überprüfen</h3>'
+        '<p>In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. '
+        'Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen Fachgespräch und Fremdauswertung.</p>'
+        '<p><strong>Verbindlich:</strong> fünf Datengruppen, fairer A/B-Vergleich, fünf Reflexionen, '
+        'Auswahl vor Testeinsicht und danach keine Optimierung. Abgabe vor Beginn der Doppellektion 8.</p>'
+        '<p><strong>Sie entscheiden:</strong> Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. '
+        'Planen Sie in Reflexion 1 die Etappen, Zuständigkeiten und Reserve. Halten Sie am Ende jeder Arbeitsphase '
+        'kurz fest: erreicht, offen, nächster Schritt, benötigte Hilfe. Reflektieren Sie Ihren Plan in Reflexion 5. '
+        'Kein zusätzliches Lerntagebuch. Beratung und Lernlabor nutzen Sie nach Bedarf.</p>'
+        '<p><strong>Reihenfolge aus fachlichen Gründen:</strong> Daten prüfen → A/B vergleichen → Auswahl begründen '
+        '→ Abschlusstest → Fazit und Abgabe. Wie Sie diese Etappen auf die Arbeitszeit verteilen, planen Sie selbst.</p></div>'
+    )
+    text = re.sub(r'<div class="callout" id="sol-rahmen">.*?</div>', '', text, flags=re.S)
+    text = text.replace('<!-- /LESSONS:projekt -->', '<!-- /LESSONS:projekt -->'+sol, 1)
+    schedule = (
+        '<details><summary>Termine ansehen</summary><div class="detail-body"><div class="table-wrap"><table>'
+        '<thead><tr><th scope="col">Termin</th><th scope="col">Rahmen</th><th scope="col">Verbindlicher Stand</th></tr></thead><tbody>'
+        '<tr><td>4. Doppellektion</td><td>Thema freigeben; Datenplan und Fotos vorbereiten</td>'
+        '<td>Zwei Klassen und fünf unabhängige Gruppen planen</td></tr>'
+        '<tr><td>Doppellektionen 5–7</td><td>Sie legen Tagesziele fest, teilen die Arbeit auf und holen bei Bedarf Hilfe</td>'
+        '<td>Datencheck → Vergleich → begründete Auswahl → Test → Fazit; Etappen frei auf die Zeit verteilen</td></tr>'
+        '<tr><td>Vor Beginn der Doppellektion 8</td><td>ZIP über den Abgabekanal einreichen</td>'
+        '<td>Vollständiges Journal, Versuch mit Ausgaben, Daten und Protokoll</td></tr>'
+        '<tr><td>8. Doppellektion</td><td>Fachgespräche; parallel selbstständige Fremdauswertung</td>'
+        '<td>Ein Reproduktionslauf, Fremdtest und kurze Rückmeldung; unbenotet, eigene Abgabe unverändert</td></tr>'
+        '</tbody></table></div><p class="small muted">Alle Fachgespräche finden in Doppellektion 8 statt. '
+        'Reihenfolge und gleiche Dauer vorab bekannt; keine weiteren Gesprächstermine.</p></div></details>'
+    )
+    text, count = re.subn(r'<details><summary>Termine ansehen</summary>.*?</details>', schedule, text, count=1, flags=re.S)
+    assert count == 1, 'Expected project schedule'
+    replacements = {
+        'Reproduktionsprüfung (abgabepflichtig)': 'Reproduktionscheck (Teil der unbenoteten Fremdauswertung)',
+        'unbenoteter Fremdtest →': 'Fremdtest und Rückmeldung →',
+        'Reproduktionsprüfung · 45 Minuten · wird abgegeben': 'Reproduktionsprüfung · ca. 30 Minuten · unbenotet',
+        'Fremdtest · 20 Minuten · unbenotet': 'Fremdtest &amp; Rückmeldung · ca. 25 Minuten · unbenotet',
+        '<strong>Daten prüfen (10 Min.).</strong>': '<strong>Daten prüfen (5 Min.).</strong>',
+        '<strong>Nachtrainieren (15 Min.).</strong>': '<strong>Nachtrainieren (10 Min.).</strong>',
+        '<strong>Vergleichen und berichten (10 Min.).</strong>': '<strong>Vergleichen und berichten (5 Min.).</strong>',
+        '<strong>Auswerten (10 Min.).</strong>': '<strong>Auswerten und rückmelden (15 Min.).</strong>',
+        'Starten Sie danach in einer neuen Zelle': '<strong>Freiwillige Vertiefung, kein Pflichtteil:</strong> Starten Sie bei Zeitreserve vor dem Test in einer neuen Zelle',
+        '<li>Ergebnis bei drei Startwerten: Trägt die Aussage des Originals noch?</li>':
+            '<li>Nur bei freiwilliger Vertiefung: Ergebnis bei drei Startwerten. Sonst entfällt dieser Punkt.</li>',
+        'Wie haben Sie die Arbeit aufgeteilt? Welche Quellen und KI-Hilfen haben Sie verwendet?':
+            'Wie haben Sie die Arbeit gesteuert? Was gelang an Ihrem Etappenplan, was haben Sie angepasst? Welche Quellen und KI-Hilfen haben Sie verwendet?',
+        '<span>Was erwarten Sie vom Vergleich A/B?</span>':
+            '<span>Was erwarten Sie vom Vergleich A/B? Planen Sie darunter Ihre Etappen, Zuständigkeiten und Zeitreserve. Aktualisieren Sie kurz: erreicht, offen, nächster Schritt, Hilfe.</span>',
+        'Gemeinsamer Probelauf ▶': 'Lernlabor bei Bedarf ▶',
+        '<strong>Abgabe:</strong> Laden Sie im privaten Fenster':
+            '<strong>Separate unbenotete Fremdauswertung:</strong> Schliessen Sie zuerst den Fremdtest samt Rückmeldung ab. Laden Sie danach im privaten Fenster',
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    text = text.replace(
+        'Lesen Sie Grafik und Tabelle und füllen Sie das Protokoll aus. Beantworten Sie dann die Fragen «Wie gut?» und «Warum?».',
+        'Lesen Sie Grafik, Tabelle und konkrete Beispiele. Füllen Sie das Protokoll aus: «Wie gut?» und «Warum?». '
+        'Formulieren Sie im Begründungsfeld auch eine konkrete Rückmeldung an das andere Tandem.'
+    )
+    return text
+
 def build():
     lessons = json.loads((ROOT/'projekt/kurs.json').read_text())['lessons']
     assert len(lessons) == 10
@@ -128,6 +192,8 @@ def build():
         assert [p['phase'] for p in lesson['phases']] == PHASES
         assert sum(p['minutes'] for p in lesson['phases']) == 90
         assert all(p.get('titel') and '|' not in p['titel'] for p in lesson['phases'])
+        for phase in lesson['phases']:
+            assert sum(step.get('min', 0) for step in phase['schritte']) == phase['minutes']
     page = ROOT/'projekt/index.html'
     text = page.read_text()
     for view in dict.fromkeys(l['view'] for l in lessons):
@@ -137,6 +203,7 @@ def build():
         assert count == 1, view
     text = update_language_lesson(text)
     text = remove_calendar_dates(text)
+    text = update_sol_material(text)
     page.write_text(text.rstrip()+"\n")
     (ROOT/'projekt/unterrichtsplan.html').write_text(lehrpersonen_seite(lessons, text))
     rows = []
@@ -147,6 +214,7 @@ def build():
             for i, st in enumerate(p['schritte']):
                 rows.append(f'| {p["phase"]+" – "+p["titel"] if i == 0 else ""} | {p["minutes"] if i == 0 else ""} | {st["wer"]} | {st["text"]} |')
         rows.append('')
+        if l.get('arbeitsweg'): rows += [f'**Arbeitsweg:** {l["arbeitsweg"]}', '']
         rows += ['', f'**Lernprodukt:** {l["product"]}', '']
         if l.get('zeit'): rows += [f'**Zeit:** {l["zeit"]}', '']
     plan = ROOT/'worksheets/md/KI_Planung.md'

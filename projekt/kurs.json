@@ -8,214 +8,160 @@
       "title": "Was ist KI?",
       "goal": "KI von Programmen mit festen Regeln unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen und schwache und starke KI sowie die vier KI-Typen unterscheiden.",
       "question": "Ist jedes automatisch arbeitende Programm eine KI?",
+      "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
+      "product": "Drei begründet eingeordnete Beispiele und eine eigene Antwort auf die Leitfrage.",
+      "arbeitsweg": "Pflicht: Regeln prüfen und drei Beispiele einordnen. Die Kurskapitel sind Material, kein zusätzlicher Aufgabenparcours. Meilensteine und Asimovs Gesetze sind freiwillige Vertiefung.",
+      "zeit": "10 Minuten echter Puffer im Arbeitsblock, ohne Zusatzpflicht. Meilensteine und Asimovs Gesetze sind Vertiefung, keine zusätzlichen Klassenaktivitäten; die ethische Diskussion folgt in Doppellektion 10. Die Klasse bleibt nach dem Einstieg in denselben Tandems.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "«Wann ist ein System intelligent?»",
+          "titel": "Wann ist ein System intelligent?",
           "minutes": 5,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 1,
-              "text": "Stellt die Frage «Wann nennen Sie ein System intelligent?» und zeigt zwei Saugroboter: einer fährt feste Bahnen nach einem Programm, einer erstellt beim Fahren eine Karte der Wohnung."
+              "text": "Zeigt zwei Saugroboter: einer fährt feste Bahnen, einer erstellt beim Fahren eine Karte. Stellt die Frage «Wann nennen Sie ein System intelligent?»."
             },
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
+              "wer": "Tandem",
               "min": 4,
-              "text": "Notieren Sie, welcher Roboter für Sie intelligenter wirkt, und ein Kriterium, woran Sie Intelligenz erkennen."
+              "text": "Notieren Sie ein Kriterium für Intelligenz und vergleichen Sie Ihre Einschätzungen zu den Robotern."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein persönliches Kriterium für «intelligent»."
+              "text": "Ein erstes Kriterium für «intelligent»."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Regeln für Katze oder Hund schreiben",
+          "titel": "Regeln für Katze oder Hund",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 6,
-              "text": "Schreiben Sie Wenn-dann-Regeln auf, mit denen ein Programm Katzen von Hunden auf Fotos unterscheiden könnte. Prüfen Sie die Regeln an drei Gegenbeispielen, etwa einer Katze mit langen Ohren oder einem Hund in Katzenpose."
+              "min": 7,
+              "text": "Schreiben Sie Wenn-dann-Regeln, um Katzen und Hunde auf Fotos zu unterscheiden. Prüfen Sie Ihre Regeln an zwei Gegenbeispielen und markieren Sie eine Lücke."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 4,
-              "text": "Sammelt zwei Regeln und je ein Gegenbeispiel an der Tafel und hält fest: Regeln von Hand zu finden ist mühsam und lückenhaft."
+              "min": 3,
+              "text": "Sammelt zwei Regeln mit Gegenbeispielen. Daraus entsteht die Frage: Können wir statt Regeln Beispiele geben?"
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Die Erfahrung, dass Regeln von Hand Lücken haben. Sie motiviert, ein System aus Beispielen lernen zu lassen."
+              "text": "Regeln und eine begründete Grenze der Regeln."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "KI, maschinelles Lernen und Deep Learning einordnen",
-          "minutes": 25,
+          "titel": "Begriffe an einem Beispiel ordnen",
+          "minutes": 20,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 6,
-              "text": "Zeigt die Grafik «Programmierung durch Menschen» und «Datengetriebene Programmierung». Menschen: Eingabe → definierte Regeln → Ausgabe, zum Beispiel ein Schachprogramm. Daten: Daten → maschinelles Lernen → Regeln, zum Beispiel ein Spamfilter, der aus markierten Mails lernt. Verbindet mit der Übung «Regeln für Katze oder Hund schreiben»: Statt Regeln zu schreiben, geben wir Beispiele."
+              "min": 15,
+              "text": "Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Ordnet schwache und starke KI sowie die vier KI-Typen ein: heutige Systeme sind schwache KI, Typ 1 oder 2; Typ 3 und 4 sind Forschungsziele. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen."
             },
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 1,
-              "text": "Ordnen Sie Taschenrechner, Spamfilter, Ampel mit festem Zeitplan und Gesichtsentsperrung am Handy einer der beiden Seiten zu."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 6,
-              "text": "Zeigt die Einteilung der Begriffe als ineinander liegende Kreise: KI, maschinelles Lernen, Deep Learning, generative KI. Erklärt jede Ebene kurz; die Lernenden tragen in der Tabelle der Kursseite zu jedem Begriff ein eigenes Beispiel ein (mögliche Beispiele: Schachprogramm mit festen Regeln, Spamfilter, Bilderkennung, ChatGPT). Betont: Nicht jedes KI-System lernt aus Daten. Das Bildprojekt gehört zum maschinellen Lernen."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
+              "wer": "Tandem",
               "min": 5,
-              "text": "Zeigt die Meilensteine der KI von 1950 bis 2022 und erzählt zu jedem einen Satz. Markiert, ob er auf Regeln von Menschen oder auf Lernen aus Daten beruht."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 6,
-              "text": "Führt schwache und starke KI und die vier KI-Typen ein: reaktive KI, KI mit begrenztem Gedächtnis, Theory of Mind, selbstbewusste KI. Heutige Systeme gehören zu den Typen 1 und 2 und sind schwache KI; starke KI gibt es nicht. Mögliche Beispiele zur Kontrolle: Typ 1 Schachcomputer Deep Blue, Typ 2 selbstfahrende Autos, Chatbots und Bilderkennung, Typ 3 und 4 bisher nur Forschung und Science-Fiction."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 1,
-              "text": "Nennen Sie zu jedem der vier Typen in der Tabelle auf der Kursseite ein eigenes Beispiel und notieren Sie, ob es das heute gibt, mit kurzer Begründung."
+              "text": "Ordnen Sie einen Spamfilter gemeinsam ein und klären Sie Ihre Fragen zu den Begriffen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Notizen zu Regeln und Daten, zur Einteilung der Begriffe, zu den Meilensteinen und zu den vier Typen als Grundlage für die Verarbeitung."
+              "text": "Eine gemeinsame Beispieleinordnung als Orientierung."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Meilensteine, eigene Beispiele und Asimovs Gesetze",
-          "minutes": 40,
+          "titel": "Eigene Beispiele begründet einordnen",
+          "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Gruppe",
-              "min": 8,
-              "text": "Meilensteine: Jede Gruppe erhält zwei bis drei Meilensteine, klärt in einer Minute, was neu war, und entscheidet, ob er eher auf Regeln von Menschen oder auf Daten beruht. Hängen Sie die Meilensteine als Klasse in der richtigen Reihenfolge auf und markieren Sie sie mit «Regeln» oder «Daten»."
+              "wer": "Tandem",
+              "min": 35,
+              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk. Wer früh fertig ist, kann die Meilensteine oder Asimovs Gesetze lesen; keine weitere Pflichtaufgabe."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 15,
-              "text": "Wählen Sie vier eigene Beispiele aus Alltag, Film oder Zukunft (zum Beispiel Navigationsapp, Sprachassistent, Staubsaugerroboter, HAL 9000, Terminator). Ordnen Sie jedes ein: Regeln oder Daten? Welche Ebene (KI, maschinelles Lernen, Deep Learning, generative KI)? Typ 1 bis 4? Schwache oder starke KI? Begründen Sie jede Einordnung in einem Satz im Antwortfeld."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 3,
-              "text": "Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) vor und zeigt das Trolley-Problem (Weichenstellerfall, Wikipedia) und überträgt es auf den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen, weil zwei Kinder auf die Fahrbahn rennen. Drei Möglichkeiten: geradeaus bremsen (Kinder gefährdet), nach rechts in die Mauer (Fahrgast gefährdet), nach links (Person auf dem Velo gefährdet). Betont, dass es keine richtige Lösung gibt."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Gruppe",
-              "min": 6,
-              "text": "Entscheiden Sie im Fall «Schulweg» zuerst allein und vergleichen Sie dann in Vierergruppen: Wo gehen die Entscheidungen auseinander? Welches Gesetz greift, und widersprechen sich die Gesetze? Wer legt fest, was «Schaden» heisst und wessen Schaden mehr zählt? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 3,
-              "text": "Erklären Sie im Antwortfeld die Begriffe KI, maschinelles Lernen, Deep Learning und generative KI in je einem eigenen Satz."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Klasse",
-              "min": 5,
-              "text": "Reserve: Nachzügler, Technik und Vertiefung. Wer fertig ist, ergänzt ein weiteres eigenes Beispiel mit Einordnung."
+              "min": 10,
+              "text": "Puffer für Fragen, langsameres Arbeiten und das Fertigstellen der drei Beispiele. Keine neue Aufgabe beginnen müssen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine Zeitleiste mit Markierung «Regeln» oder «Daten», vier begründete Einordnungen und zwei Argumente zu den Gesetzen der Robotik."
+              "text": "Drei begründete Beispiele, offene Fragen sichtbar markiert."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Einordnungen prüfen und Begriffe klären",
+          "titel": "Die Leitfrage beantworten",
           "minutes": 10,
           "schritte": [
             {
-              "art": "Auftrag",
-              "wer": "Klasse",
+              "art": "Input",
+              "wer": "Lehrperson",
               "min": 5,
-              "text": "Je zwei Tandems stellen eine Einordnung vor. Die Klasse prüft: Stimmt der Typ, und ist es wirklich schwache KI?"
+              "text": "Bespricht zwei strittige Zuordnungen. Klärt: Ein Programm mit festen Regeln kann KI sein, lernt aber nicht aus Daten; nicht jede Automatisierung ist KI."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 3,
-              "text": "Beantworten Sie im Antwortfeld: Ist jedes automatisch arbeitende Programm eine KI? Begründen Sie mit der Grafik «Regeln oder Daten» und einem eigenen Beispiel."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Fasst zusammen: Regeln von Menschen allein sind noch kein Lernen, heutige KI ist schwache KI, und das Bildprojekt gehört zum maschinellen Lernen. Ausblick auf Doppellektion 2: Wie lernt ein System?"
+              "min": 5,
+              "text": "Beantworten Sie die Leitfrage mit einem eigenen Beispiel und erklären Sie den Unterschied zwischen festen Regeln und Lernen aus Daten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine begründete Antwort auf die Leitfrage und vier eingeordnete Beispiele."
+              "text": "Eine eigene begründete Antwort auf die Leitfrage."
             }
           ]
         }
-      ],
-      "product": "Vier selbst gewählte Beispiele, eingeordnet nach Regeln oder Daten, Ebene, KI-Typ und schwach oder stark, mit Begründung.",
-      "motivation": "Empfehlungen im Streamingdienst, Navigation, Fotofilter, Chatbots: Fast alles wird heute «KI» genannt, und Filme zeigen Roboter, die denken und fühlen. Was davon ist Realität, und was ist Science-Fiction? Wer KI einordnen kann, durchschaut Werbeversprechen und Schlagzeilen.",
-      "zeit": "Planung mit 5 Minuten Reserve in der Phase «Verarbeiten». Bei Zeitnot die Meilensteine nur mit je einem Satz erzählen und die Reserve für die eigenen Beispiele nutzen."
+      ]
     },
     {
       "id": "02",
       "view": "lernarten",
       "title": "Wie lernt KI?",
-      "rueckblick": "In Doppellektion 1 haben Sie KI von Programmen mit festen Regeln unterschieden und KI, maschinelles Lernen, Deep Learning und generative KI eingeordnet. Immer wieder ging es darum, ob die Regeln von Menschen stammen oder aus Daten gelernt werden, etwa beim Schachprogramm und beim Spamfilter. Heute fragen wir: Wie lernt ein System überhaupt aus Daten?",
+      "rueckblick": "In Doppellektion 1 haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.",
       "goal": "Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.",
       "question": "Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
+      "motivation": "Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.",
+      "product": "Ein Vergleich wissensbasierter und lernender Systeme und je eine begründete Beobachtung zu den drei Lernarten.",
+      "arbeitsweg": "Pflicht: drei Memory-Runden und NIM gemeinsam untersuchen. Akinator, Filmlandkarte, Smiley, K-Means und Begriffscheck sind Nachschlage- oder Wahlmaterial; nicht alle Tools durchlaufen.",
+      "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours. 10 Minuten Puffer im Arbeitsblock.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Was hilft einem System beim Lernen?",
+          "titel": "Was hilft beim Lernen?",
           "minutes": 5,
           "schritte": [
             {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 1,
-              "text": "Zeigt zwei Karten mit demselben Motiv, eine ohne und eine mit Klassenname (zum Beispiel «Werkzeug»)."
-            },
-            {
               "art": "Auftrag",
-              "wer": "Einzeln → Tandem",
-              "text": "Notieren Sie einzeln, welche zusätzliche Information einem System hilft, das lernen soll, und vergleichen Sie zu zweit."
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Vergleichen Sie dasselbe Motiv mit und ohne Klassenname. Welche zusätzliche Information hilft beim Lernen?"
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine These, wozu ein Name (Label) gut ist."
+              "text": "Eine Vermutung zum Nutzen eines Labels."
             }
           ]
         },
@@ -227,1065 +173,941 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Knüpfen Sie an Doppellektion 1 an. Überlegen Sie zu zweit, woher beim Schachprogramm und beim Spamfilter die Regel kommt (von Menschen oder aus Daten), und vervollständigen Sie den Satz «Ein System lernt aus Daten, wenn …».",
-              "min": 3
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Schreibt zwei Formulierungen an die Tafel."
+              "min": 5,
+              "text": "Vergleichen Sie Schachprogramm und Spamfilter aus Doppellektion 1: Wer oder was erzeugt die Entscheidungsregel? Vervollständigen Sie «Ein System lernt aus Daten, wenn …»."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine gemeinsame Arbeitsdefinition von «aus Daten lernen»."
+              "text": "Ein erster Vergleich von festen Regeln und Lernen."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Wissensbasiert oder lernend? Akinator und Filmlandkarte",
-          "minutes": 20,
+          "titel": "EVA und drei Lernsignale",
+          "minutes": 15,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
+              "min": 12,
+              "text": "Zeigt die EVA-Grafik mit Erfahrungsschatz. Vergleicht einen menschlich festgelegten Entscheidungsbaum mit einem lernenden Spamfilter. Führt Labels, Ähnlichkeit und Rückmeldung als drei Lernsignale ein und erklärt den Memory-Auftrag. Die Beispiele Akinator und Filmempfehlungen dienen der Erklärung, nicht als zusätzliche Tool-Wechsel."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
               "min": 3,
-              "text": "Führt das EVA-Prinzip (Eingabe, Verarbeitung, Ausgabe) neu ein und zeigt die EVA-Grafik (Eingabe → Verarbeitung mit Erfahrungsschatz → Ausgabe) und stellt ein wissensbasiertes System daneben: Menschen legen Fakten und Wenn-dann-Regeln fest, etwa in einem Entscheidungsbaum oder im Fragespiel Akinator, das System wendet sie an. Fragen: Wer hat die Regel festgelegt? Was geschieht mit einem Fall, an den niemand gedacht hat? Bei einem lernenden System stammt der Erfahrungsschatz aus Daten und kann sich verändern, etwa bei den Filmempfehlungen von Netflix."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 2,
-              "text": "Erklären Sie die EVA-Grafik in einfachen Worten am Beispiel Spamfilter (Eingabe, Erfahrungsschatz, Ausgabe, was eine neue Erfahrung verändert) und halten Sie die Erklärung im Antwortfeld der Kursseite fest. Vergleichen Sie mit dem Schachprogramm aus Doppellektion 1."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 5,
-              "text": "Wissensbasiert: Spielen Sie zwei Runden Akinator (en.akinator.com) mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld. Halten Sie in den Antwortfeldern der Kursseite fest, welche Fragen gestellt werden, wie Ihre Antworten zum Ergebnis führen und was bei einer seltenen oder erfundenen Figur geschieht."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 5,
-              "text": "Lernend: Erkunden Sie in der Filmlandkarte (Link auf der Kursseite) einen Film, den Sie kennen: Was haben die nächsten Nachbarn gemeinsam? Färben Sie nach Genre und nach vorhergesagter Bewertung und wechseln Sie den User Index. Halten Sie in den Antwortfeldern der Kursseite fest, welche Muster das System in welchen Daten gefunden haben könnte."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 3,
-              "text": "Stellt drei Lernsignale kurz an je einem Beispiel vor: Labels (Smiley-Spiel), Ähnlichkeit (K-Means), Rückmeldung (NIM)."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Ordnen Sie jedem Beispiel das Lernsignal zu.",
-              "min": 2
+              "text": "Erklären Sie am Spamfilter Eingabe, Erfahrungsschatz und Ausgabe."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Zwei Beobachtungen (Akinator, Filmempfehlung) und eine Zuordnung Beispiel → Lernsignal als Rüstzeug für die Memory-Runden."
+              "text": "EVA-Erklärung und Orientierung für die drei Memory-Runden."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Memory, Smiley, K-Means und NIM",
-          "minutes": 50,
+          "titel": "Memory und Rückmeldung bei NIM",
+          "minutes": 55,
           "schritte": [
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "text": "Erklärt anhand von Kapitel 4 der Kursseite («Gruppen-Memory: Aufgabe und Ablauf») die Memory-Regeln und verteilt die Rollen (Agent:in, Kartenleitung, zwei Beobachtende, Zeit und Protokoll).",
-              "min": 3
-            },
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "min": 15,
-              "text": "Spielen Sie drei Runden mit Rollenwechsel. Runde 1 mit Labels: Die Kartenleitung zeigt beschriftete Karten, der Agent ordnet neue Karten zu. Runde 2 ohne Labels: Sortieren Sie die Karten nach Ähnlichkeit und benennen Sie die Merkmale der Gruppen. Runde 3 mit Rückmeldung: Suchen Sie verdeckte Paare, +1 pro Treffer und 0 pro Fehlversuch, und passen Sie die Strategie nach jeder Rückmeldung an. Pro Runde vier Minuten spielen, eine Minute notieren: Die Aufgabe jeder Runde steht in Kapitel 5 bis 7, die Beobachtung kommt in das Antwortfeld des Kapitels."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 6,
-              "text": "Testen Sie im Smiley-Spiel eine Zeichnung und beschreiben Sie, was das System aus den Labels lernt. Freiwillig, wer früher fertig ist: dasselbe in Quick, Draw! (kein persönliches Motiv; Zeichnungen können in einen öffentlichen Datensatz eingehen)."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 8,
-              "text": "Wählen Sie in K-Means die Verteilung «Gaussian Mixture» und beobachten Sie, wie die Mittelpunkte wandern."
+              "min": 25,
+              "text": "Spielen Sie in festen Gruppen die drei Memory-Runden: neue Karten mit Labels zuordnen, ohne Labels nach Ähnlichkeit sortieren, verdeckte Paare mit +1 für Treffer und 0 für Fehlversuche suchen. Halten Sie pro Runde das Lernsignal und eine Beobachtung fest. Rollenwechsel nur zwischen den Runden; Material und Gruppe bleiben gleich."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 15,
-              "text": "NIM im Plenum: Die Lehrperson zeigt die verlinkte Lernstrecke am Beamer und die Klasse entscheidet gemeinsam jeden Zug. Zwischen den Runden spielen Freiwillige oder Tandems selbst eine Runde. Erarbeiten Sie gemeinsam an der Tafel: Was verändert das System nach Gewinn oder Verlust? Woran sehen wir, dass es lernt? Welche Rückmeldung bekommt es?"
+              "min": 20,
+              "text": "Erkunden Sie NIM am Beamer. Entscheiden Sie gemeinsam Züge und beobachten Sie, was sich durch Gewinn oder Verlust verändert. Sichern Sie eine konkrete Beobachtung. Im Memory lernte ein Mensch; hier untersuchen Sie das KI-Beispiel."
             },
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 3,
-              "text": "Reserve: finden Sie im digitalen Begriffscheck Begriff und passende Rückmeldung als Paare. Freiwillig; wer noch beim Spielen oder Notieren ist, schliesst zuerst das ab."
+              "wer": "Gruppe",
+              "min": 10,
+              "text": "Puffer für Spielaufbau, Rückfragen und die Beobachtungen. Wer fertig ist, wählt höchstens eine Vertiefung (Smiley oder K-Means); kein Pflichtwechsel zu weiteren Tools."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Pro Memory-Runde eine Beobachtung im Antwortfeld der Kursseite."
+              "text": "Drei Beobachtungen zu Lernsignalen und ein KI-Beleg aus NIM."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Die drei Lernarten vergleichen",
+          "titel": "Lernarten vergleichen",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "text": "Beantworten Sie im Antwortfeld «Was fällt auf, wenn Sie die drei Lernarten vergleichen?»: Was lernen die Systeme aus Labels, aus Ähnlichkeit, aus Rückmeldung? Ordnen Sie NIM begründet zu und nennen Sie die Lernart des Bildprojekts (überwacht, weil die Trainingsbilder Klassennamen erhalten)."
+              "min": 7,
+              "text": "Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung. Ordnen Sie NIM und das Bildprojekt begründet zu. Erklären Sie, warum im Memory der Mensch und nicht ein KI-Modell gelernt hat."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 2,
-              "text": "Klärt: In Runde 3 lernte der Mensch, nicht die KI; NIM zeigt das KI-Beispiel."
+              "min": 3,
+              "text": "Klärt offene Zuordnungen und sichert: Das Bildprojekt ist überwacht, weil Trainingsbilder Klassennamen erhalten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Drei Beobachtungen, je eine pro Lernart, und die Zuordnung des Bildprojekts."
+              "text": "Ein begründeter Vergleich der drei Lernarten."
             }
           ]
         }
-      ],
-      "product": "Ein Vergleich wissensbasierter und lernender Systeme sowie drei Beobachtungen zu Lernarten.",
-      "motivation": "Ein Kind lernt Hund und Katze nicht aus einer Regel, sondern aus vielen Beispielen. Auch KI-Systeme lernen, aber auf drei ganz verschiedene Arten. Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.",
-      "zeit": "Planung mit 3 Minuten Reserve in der Phase «Verarbeiten»: Der digitale Begriffscheck ist freiwillig und entfällt bei Zeitnot, ebenso Quick, Draw!. NIM läuft im Plenum, so bleibt der Zeitbedarf steuerbar."
+      ]
     },
     {
       "id": "03",
       "view": "perzeptron",
       "title": "Wie entscheidet ein Neuron?",
-      "rueckblick": "In Doppellektion 2 haben Sie wissensbasierte Systeme (Akinator) mit lernenden Systemen (Filmempfehlungen) verglichen und drei Lernsignale kennengelernt: Labels (Smiley-Spiel), Ähnlichkeit (K-Means) und Rückmeldung (NIM). Die Grafik zeigt noch einmal, wie ein lernendes System aufgebaut ist. Offen blieb, was in der dunklen Box steckt. Heute öffnen Sie diese Box und untersuchen ihren kleinsten Baustein: ein einzelnes künstliches Neuron.",
+      "rueckblick": "In Doppellektion 2 haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.",
       "rueckblick_figur": {
         "src": "grafiken/eva_erfahrungsschatz.png",
-        "alt": "EVA-Prinzip eines lernenden Systems: Die Eingabe geht in eine dunkle Box mit Verarbeitung und Erfahrungsschatz, daraus entsteht die Ausgabe.",
-        "caption": "In der dunklen Box steckt das neuronale Netz: Es verarbeitet die Eingabe, und sein Erfahrungsschatz sind die gelernten Gewichte. Neue Erfahrungen verändern diese Gewichte. Grafik: inf-schule.de (CC BY-SA 4.0)."
+        "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
+        "caption": "Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0)."
       },
-      "goal": "Erklären, wofür ein Neuron da ist, Gewicht und Bias erklären, die Lernregel beschreiben, sagen was genau gelernt wird und die XOR-Grenze begründen.",
+      "goal": "Gewicht und Bias erklären, einen Lernschritt nachvollziehen und die XOR-Grenze eines einzelnen Neurons begründen.",
       "question": "Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
+      "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und wo seine Grenze liegt.",
+      "product": "Eine nachvollziehbare Rechnung, ein erklärter Lernschritt und eine begründete XOR-Grenze.",
+      "arbeitsweg": "Ein Notebookblock mit Handrechnung, Einstellen, Lernen und XOR. Das Arbeitsblatt ist eine Hilfe, kein zweiter vollständiger Auftrag. Pflanzen und Ziffern sind freiwillig.",
+      "zeit": "Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Pflanzen und Ziffern sind Wahlvertiefung; XOR bleibt Pflicht. 10 Minuten Puffer innerhalb der 55 Minuten Verarbeitung.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Das Warnsignal: Regel vermuten",
+          "titel": "Warnsignal vermuten",
           "minutes": 5,
           "schritte": [
             {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 1,
-              "text": "Stellt das Warnsignal vor: Es soll nur angehen, wenn beide Sensoren auslösen."
-            },
-            {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "text": "Vermuten Sie die Regel in Worten und notieren Sie für die vier möglichen Eingaben 00, 01, 10 und 11, ob das Signal angeht."
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Ein Signal soll nur bei zwei aktiven Sensoren angehen. Notieren Sie die Ausgabe zu 00, 01, 10 und 11."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine Vermutung für die Regel mit vier Tabellenzeilen."
+              "text": "Eine UND-Tabelle als erste Vermutung."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Eingabe und Label benennen",
-          "minutes": 10,
+          "titel": "Eingabe und Label",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Benennen Sie zu zweit am Warnsignal, was die Eingabe und was das Label (die richtige Antwort) ist. Schreiben Sie die vier Eingaben in eine Tabelle und ergänzen Sie die Ausgabe für UND, dann für ODER und für XOR."
+              "min": 5,
+              "text": "Benennen Sie Eingabe und Label. Ergänzen Sie die Ausgaben für ODER und XOR und markieren Sie den Unterschied."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Drei Wahrheitstabellen mit je vier Zeilen und die Stelle, an der sich XOR von ODER unterscheidet."
+              "text": "Vier Eingaben mit Zielwerten für UND, ODER und XOR."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Von der Nervenzelle zum Perzeptron",
+          "titel": "Gewicht, Bias und Lernschritt",
           "minutes": 15,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 10,
-              "text": "Erklärt zuerst am Schwimmbad-Beispiel (Kursseite Kapitel 1), wofür ein Neuron da ist: ein kleiner Entscheider, der aus mehreren Zahlen Ja oder Nein macht; Gewichte sagen, wie wichtig ein Faktor ist, der Bias ist die Grundhaltung. Projiziert dann die Nervenzell-Grafik und die Perzeptron-Grafik und erklärt am Vorbild Nervenzelle die Bausteine: Eingaben, Gewichte, Summe, Schwelle, Ausgabe. Schreibt «Summe = x₁·w₁ + x₂·w₂ + b» und «ab Summe 0 feuert das Neuron» an und rechnet (1, 1) und (1, 0) mit Gewichten 1 und 1 und Bias −1.5 vor (Summen 0.5 und −0.5). Sagt in einem Satz, was später gelernt wird: nur Gewichte und Bias, also der Erfahrungsschatz des Neurons."
+              "min": 12,
+              "text": "Erklärt am Schwimmbad-Beispiel das Neuron als Entscheider und vergleicht es kurz mit der Nervenzelle. Rechnet Summe = x₁·w₁ + x₂·w₂ + b mit Gewichten 1 und 1, Bias −1.5 für (1,1) und (1,0) vor; ab Summe 0 feuert das Neuron. Zeigt einen Lernschritt: Gewichte und Bias werden korrigiert, nicht die Eingaben oder Labels."
             },
             {
               "art": "Auftrag",
-              "wer": "Einzeln → Tandem",
-              "min": 5,
-              "text": "Rechnen Sie (0, 0) und (0, 1) selbst und prüfen Sie im Tandem."
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Rechnen Sie (0,1) selbst und erklären Sie den Unterschied zwischen Gewicht und Bias."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine vollständige UND-Tabelle: Summen −1.5, −0.5, −0.5, 0.5 und Ausgaben 0, 0, 0, 1."
+              "text": "Eine geprüfte Rechnung als Orientierung für das Experiment."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Gewichte und Bias berechnen und ausprobieren",
-          "minutes": 50,
+          "titel": "Ein Neuron einstellen und lernen lassen",
+          "minutes": 55,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 10,
-              "text": "Bearbeiten Sie das Arbeitsblatt: Ausgaben berechnen und einen Lernschritt rechnen (Gewichte 0.2 und 0.2, Bias −0.5, Eingabe (1, 1), Lernrate 0.2)."
+              "wer": "Tandem",
+              "min": 45,
+              "text": "Arbeiten Sie im Notebook «Ein Neuron entscheidet»: ein Neuron von Hand einstellen, einen Lernschritt mit Gewichten 0.2/0.2, Bias −0.5, Eingabe (1,1) und Lernrate 0.2 von Hand nachvollziehen und mit der Ausgabe prüfen, dann lernen lassen. Untersuchen Sie XOR mit Punkten und Reglern. Dokumentieren Sie nur die zentrale Rechnung, eine beobachtete Korrektur und die XOR-Erklärung. Pflanzen und echte Ziffern sind freiwillig."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 40,
-              "text": "Arbeiten Sie das Notebook «Ein Neuron entscheidet» durch (Zeitmarken beachten, Regler und Selbstchecks direkt bedienen): im Schwimmbad-Beispiel ein Neuron als Entscheider einstellen, Nervenzelle und Neuron vergleichen, ein Neuron von Hand für AND, OR und NAND einstellen (bei jeder falschen Zeile nennt die Ausgabe, was zu tun ist), das Neuron per Klick Beispiel für Beispiel lernen lassen und dabei erkennen, dass nur Gewichte und Bias gelernt werden, an echten Messdaten zwei Pflanzenarten unterscheiden und XOR in fünf Schritten untersuchen (Lernen lassen, Punkte ansehen, selbst einstellen, vier Bedingungen, Ausweg). Tragen Sie Ihre Einstellungen und Ergebnisse laufend ins Protokoll der Kursseite ein (Kapitel «Im Notebook»). Erklären Sie sich im Tandem mit Rollenwechsel, was ein Gewicht und was der Bias bewirkt."
+              "min": 10,
+              "text": "Puffer für Notebookstart, Rechenfehler, Rückfragen und die XOR-Erklärung. Keine zusätzlichen Experimente nötig."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine von Hand eingestellte und eine gelernte AND-Regel sowie die Beobachtung, dass XOR nicht gelingt."
+              "text": "Handrechnung, beobachteter Lernschritt und begründete Grenze."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Ausgabe bestimmen und an XOR scheitern",
+          "titel": "Was lernt das Neuron?",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "text": "Bestimmen Sie ohne Computer die Ausgabe für (0, 1) mit Gewichten 1 und 1 und Bias −1.5. Beantworten Sie dann im Antwortfeld der Kursseite: Was bewirken Gewicht und Bias? Wie korrigiert sich ein Neuron selbst? Warum scheitert ein einzelnes Perzeptron an XOR (zwei Sätze)?"
+              "min": 6,
+              "text": "Erklären Sie Gewicht, Bias und die Korrektur bei einer falschen Ausgabe. Begründen Sie mit den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 3,
-              "text": "Zeigt die XOR-Grafik (Tabelle und vier Punkte) und die vier Bedingungen an der Tafel und lasst die Klasse den Widerspruch nachvollziehen: Die beiden mittleren Bedingungen zusammen ergeben w₁ + w₂ + b > 0, die letzte verlangt < 0. Fragt: Liegt das an der Lernregel oder am Bau des Neurons? Wie viele Linien bräuchte man?"
+              "min": 4,
+              "text": "Sichert an der XOR-Grafik: Die Grenze liegt am Bau des Neurons, nicht an zu wenig Übung. Der algebraische Widerspruch ist Vertiefung."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine korrekte Rechnung und eine Erklärung zu XOR im Antwortfeld."
+              "text": "Eine eigene Erklärung von Lernen und XOR-Grenze."
             }
           ]
         }
-      ],
-      "product": "Eine nachvollziehbare Rechnung + Erklärung zu Bias, Lernregel (was genau gelernt wird) und XOR.",
-      "zeit": "Das Notebook hat einen Kern von ca. 35 Minuten (Zeitmarken ⏱: Einstieg 2, Wofür ein Neuron 4, Neuron aufbauen 3, Nervenzelle 3, Zahlen sehen 2, von Hand einstellen 5, Was lernt ein Neuron 4, Alle Runden lernen 3, Pflanzen 3, XOR 6). Geplant sind 40 Minuten: 5 Minuten Reserve für Technik und Nachzügler. Bei Zeitnot den Abschnitt «Pflanzen» überspringen, XOR bleibt. Der Abschnitt «Zusatz · Ein Neuron liest echte Ziffern» ist Vertiefung für Schnelle oder zu Hause und zählt nicht zur Planung.",
-      "motivation": "Ihr Handy erkennt Ihr Gesicht, eine App bestimmt Pflanzen aus einem Foto. Dahinter steht ein einfacher Baustein, das künstliche Neuron, dem Vorbild der Nervenzelle nachempfunden. Heute sehen Sie, dass dabei nichts Geheimnisvolles geschieht: Es wird gerechnet, verglichen und korrigiert."
+      ]
     },
     {
       "id": "04",
       "view": "netze",
       "title": "Warum mehrere Neuronen?",
-      "rueckblick": "In Doppellektion 3 haben Sie ein Neuron eingestellt: Es gewichtet seine Eingaben, addiert einen Bias und gibt 1 oder 0 aus. Es kann sich selbst korrigieren, scheitert aber an XOR. Die Grafik wiederholt, warum: XOR gibt 1, wenn die beiden Eingaben verschieden sind. Zeichnet man die vier Fälle als Punkte, liegen die beiden mit Ausgabe 1 diagonal gegenüber. Ein einzelnes Neuron kann nur eine gerade Linie ziehen, und jede solche Linie lässt mindestens auf einer Seite Punkte beider Farben zurück. Heute lösen Sie dieses Problem mit mehreren Neuronen und klären, welche Daten ein Netz beim Lernen sehen darf.",
+      "rueckblick": "In Doppellektion 3 scheiterte ein einzelnes Neuron an XOR. Heute kombinieren Sie mehrere Entscheidungen und klären, welche Daten ein Netz beim Lernen sehen darf.",
       "rueckblick_figur": {
         "src": "grafiken/xor_gerade.svg",
-        "alt": "Links die Wahrheitstabelle von XOR: 0 und 0 ergibt 0, 0 und 1 ergibt 1, 1 und 0 ergibt 1, 1 und 1 ergibt 0. Rechts die vier Fälle als Punkte in einem Quadrat: Die beiden Punkte mit Ausgabe 1 liegen diagonal gegenüber, die beiden mit Ausgabe 0 auf der anderen Diagonale. Senkrechte, waagrechte und schräge gestrichelte Linien trennen die Farben nicht.",
-        "caption": "Egal ob senkrecht, waagrecht oder schräg: Keine gerade Linie trennt die roten von den blauen Punkten. Genau das kann ein einzelnes Neuron nicht, mehrere Neuronen schon."
+        "alt": "XOR-Tabelle und vier Punkte: Keine gerade Linie trennt die beiden Klassen.",
+        "caption": "Ein einzelnes Neuron kann XOR nicht trennen; eine Zwischenschicht kann zusätzliche Grenzen darstellen."
       },
       "goal": "Eine Zwischenschicht erklären und Training, Validierung und Test trennen.",
       "question": "Wie lösen mehrere einfache Entscheidungen das XOR-Problem?",
+      "motivation": "Viele Neuronen erweitern die Möglichkeiten. Ob das Netz bei neuen Fällen funktioniert, hängt auch von einer fairen Datenaufteilung ab.",
+      "product": "XOR-Erklärung, begründete Datentrennung und ein freigegebenes Projektthema mit zwei Klassen.",
+      "arbeitsweg": "Pflicht: XOR-Kern im Netz-Notebook, Datenrollen mit Kursgrafik und Themenwahl. Ziffern und das vollständige Daten-Notebook sind Vertiefung; die Datenplan-Checkliste hilft bei der Vorbereitung.",
+      "zeit": "Nur das Netz-Notebook ist für alle Pflicht. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik erarbeitet; das zweite Notebook ist Nachschlagewerk oder Vertiefung, kein weiterer Pflichtwechsel. 10 Minuten Puffer im Arbeitsblock. Themenfreigaben während der 55 Minuten, nicht erst im Abschluss; bei zwölf Tandems etwa eine Minute je Tandem. Datenplan und Fotos als vorbereitender Auftrag bis Doppellektion 5.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "XOR mit einer Linie trennen?",
-          "minutes": 5,
-          "schritte": [
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 1,
-              "text": "Zeigt die XOR-Punkte (00 und 11 mit Ziel 0, 01 und 10 mit Ziel 1)."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "text": "Zeichnen Sie die Punkte auf Papier, versuchen Sie mit einer Linie die Klassen zu trennen und notieren Sie, was sich ändern müsste."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Ein Vorschlag, wie mehr als eine Gerade helfen könnte."
-            }
-          ]
-        },
-        {
-          "phase": "Vorwissen aktivieren",
-          "titel": "AND-Rechnung wiederholen",
+          "titel": "XOR wieder aufnehmen",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Erklären Sie zu zweit die AND-Rechnung aus Doppellektion 3 (Gewichte, Bias, Summe, Ausgabe) und rekonstruieren Sie die vier XOR-Zielwerte ohne Hilfsmittel. Rechnen Sie einander eine Zeile vor."
+              "min": 5,
+              "text": "Zeichnen Sie die XOR-Punkte und erklären Sie, warum eine einzige Linie die Klassen nicht trennt."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine korrekt erklärte AND-Rechnung und die vier XOR-Zielwerte."
+              "text": "Die Grenze des einzelnen Neurons ist wieder präsent."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Eine Entscheidung rekonstruieren",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Rechnen Sie einander eine UND-Zeile mit Gewichten 1/1 und Bias −1.5 vor. Benennen Sie Eingabe, Summe und Ausgabe."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine überprüfte Neuronenrechnung."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Zwei Zwischenfragen bauen das XOR-Netz",
+          "titel": "Zwischenschicht und Datentrennung",
           "minutes": 15,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Verfolgt (1,0) durch h₁ = OR und h₂ = NAND, danach AND am Ausgang. Unterscheidet festgelegte Gewichte von gelernten Gewichten. Zeigt anschliessend die Datentrennung mit Prüfungsanalogie und fünf Gruppenkarten: T1/T2 zum Trainieren, V1 zur Auswahl, P1/P2 erst zum Abschlusstest. Dasselbe Exemplar bleibt in derselben Gruppe. Nennt die Freigabekriterien für Projektthema und Klassen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Zwei Orientierungshilfen: Netzbild und Rollen der fünf Datengruppen."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "XOR verstehen und das Projekt vorbereiten",
+          "minutes": 55,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 25,
+              "text": "Bearbeiten Sie im Notebook «Mehrere Neuronen kombinieren» den XOR-Kern: die vier Zeilen durch das konstruierte Netz verfolgen, dann ein Netz mit 1, 2 und 4 versteckten Neuronen lernen lassen. Erklären Sie die Funktion der Zwischenschicht. Ziffernexperimente sind Wahlvertiefung."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 20,
+              "text": "Bleiben Sie im selben Tandem. Ordnen Sie mit Gruppenkarten und Kursgrafik Training, Validierung und Test zu und erklären Sie ein Datenleck. Wählen Sie Thema und zwei Klassen aus dem Ideenpool; lassen Sie diese während der Arbeit bei der Lehrperson freigeben. Skizzieren Sie fünf unabhängige Gruppen. Das Notebook «Daten fair aufteilen» hilft bei Bedarf, ist aber kein zweiter Pflichtdurchlauf."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Puffer für Technik, Themenfreigaben und Datenfragen. Wer fertig ist, prüft freiwillig den Datenplan mit der Notebook-Checkliste."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "XOR-Erklärung, Datenrollen und ein freigegebenes Thema mit zwei Klassen."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Brücke zur SOL-Phase",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 6,
+              "text": "Halten Sie fest, was die Zwischenschicht leistet und warum dasselbe Objekt nicht zugleich in Training und Test vorkommt. Notieren Sie Ihren nächsten Vorbereitungsschritt."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 4,
+              "text": "Gibt den vorbereitenden Auftrag: Datenplan mit fünf unabhängigen Gruppen prüfen und bis Doppellektion 5 möglichst 80 Fotos sammeln, acht je Klasse und Gruppe. Beide Klassen unter gleichen Bedingungen; Personen nur mit Einverständnis. Fehlende Daten werden in der SOL-Zeit ergänzt; Ersatzdaten nur nach Absprache mit offener Herkunft."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine fachliche Sicherung und ein klarer Vorbereitungsauftrag."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "view": "projekt",
+      "title": "Ihr Projekt starten und die Arbeit planen",
+      "rueckblick": "In Doppellektion 4 haben Sie Thema und Klassen gewählt sowie die Datentrennung geklärt. Sie übernehmen jetzt die Planung Ihres Projekts im Tandem.",
+      "goal": "Eigene Tagesziele und Arbeitsschritte planen, eine überprüfbare Vermutung formulieren und die Datenqualität kontrollieren.",
+      "question": "Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?",
+      "motivation": "Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.",
+      "product": "Ein eigener Etappenplan mit Rollen, eine Vermutung und ein gesicherter Arbeitsstand mit dokumentiertem Datencheck.",
+      "zeit": "Gemeinsamer SOL-Auftakt nur in Doppellektion 5. Danach 60 Minuten selbst organisierte Arbeit mit 10 Minuten frei verfügbarem Puffer darin. Lernlabor einmal als Orientierung nutzen, sofern der Ablauf noch unklar ist, nicht als Pflichtwiederholung. Etappen sind nicht an einzelne Doppellektionen gebunden; keine einheitliche Pflicht, heute bereits zu trainieren.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Arbeitsstand öffnen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Öffnen Sie Projektauftrag und vorhandene Fotos. Halten Sie fest, was bereit ist und was Ihnen noch fehlt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein ehrlicher Ausgangsstand."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Den fairen Vergleich klären",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Erklären Sie sich: A nutzt ein Exemplar je Klasse, B zwei; Bildzahl und Einstellungen bleiben gleich. Warum darf dasselbe Exemplar nicht in mehreren Datengruppen liegen?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Die fachlichen Leitplanken sind geklärt."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "SOL-Rahmen statt Tagesrezepte",
+          "minutes": 10,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 10,
-              "text": "Baut an der Tafel das Netz aus zwei Zwischenfragen auf: h₁ = OR (mindestens ein Eingang 1), h₂ = NAND (nicht beide 1); der Ausgang kombiniert beide mit AND. Verfolgt die Zeile (1, 0): OR ergibt 1, NAND ergibt 1, AND ergibt 1. Stellt klar: Dieses Netz hat festgelegte Gewichte. Beim Training findet ein Netz die Gewichte selbst, wie das einzelne Neuron in Doppellektion 3. Zeigt dann am Ziffernbeispiel (Kapitel 2 der Kursseite), wie ein echtes Netz aussieht: 64 Pixel → 16 versteckte Neuronen → 10 Ausgaben, 1210 gelernte Zahlen."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 5,
-              "text": "Ergänzen Sie die Zeilen (0, 0), (0, 1) und (1, 1) paarweise."
+              "text": "Klärt einmal Auftrag, fünf Reflexionen, Bewertung und Frist vor Doppellektion 8. Verbindlich sind Datenregeln, fairer A/B-Vergleich, begründete Auswahl vor Testeinsicht und keine Optimierung danach. Frei sind Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. Zeigt Foto → festes MobileNet → 1280 Merkmale → trainierbares Netz sowie ZIP-Sicherung. Kündigt kurze Beratung auf Anfrage statt weiterer gemeinsamer Inputs an."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine vollständige Tabelle x₁, x₂, OR, NAND, Ausgang = XOR."
+              "text": "Ein gemeinsamer Rahmen und freie Planung innerhalb der fachlichen Abhängigkeiten."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Netze kombinieren und Daten aufteilen",
-          "minutes": 50,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 30,
-              "text": "Bearbeiten Sie das Notebook «Mehrere Neuronen kombinieren»: Regeln im Regler vergleichen, das konstruierte XOR-Netz erklären, ein Netz XOR selbst lernen lassen (1, 2 und 4 versteckte Neuronen, verschiedene Startwerte) und ein Netz Ziffern erkennen lassen (Neuronenzahl 2 bis 32 vergleichen, ein Bild durch das Netz verfolgen). Tragen Sie die Ergebnisse ins Protokoll der Kursseite ein (Kapitel 1 und 2)."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 20,
-              "text": "Bearbeiten Sie das Notebook «Daten fair aufteilen»: Training, Validierung und Test mit der Prüfungsanalogie klären, das Datenleck am Apfelbeispiel finden und die drei Werte desselben Netzes vergleichen."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Eine erklärte XOR-Tabelle und begründete Rollen von Training, Validierung und Test."
-            }
-          ]
-        },
-        {
-          "phase": "Auswerten",
-          "titel": "Den Weg durch das Netz erklären",
-          "minutes": 15,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 11,
-              "text": "Erklären Sie einem anderen Tandem den Weg von (1, 0) durch das Netz und beantworten Sie im Antwortfeld der Kursseite, was die Zwischenschicht leistet und warum Gegenstände oder Personen zwischen den Datengruppen getrennt bleiben. Einigen Sie sich auf ein Thema aus dem Ideenpool und genau zwei Klassen und lassen Sie die Idee mündlich bei der Lehrperson absegnen."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 4,
-              "text": "Gibt die Hausaufgabe und die Fotoregeln mit: Die fünf Gruppen T1, T2, V1, P1 und P2 für das abgesegnete Thema skizzieren und mit der Checkliste im Notebook «Daten fair aufteilen» (Abschnitt «Den eigenen Datenplan prüfen») prüfen. Während der Tandemarbeit kommt jedes Tandem kurz zur Lehrperson, die Thema und zwei Klassen mündlich freigibt. Beide Klassen unter gleichen Bedingungen fotografieren (Hintergrund, Licht), acht verschiedene Fotos je Gruppe, Gruppen vor dem Fotografieren festlegen, Personen nur mit Einverständnis, Fotos bis zur nächsten Projekt-Doppellektion."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Ein abgesegnetes Thema; als Hausaufgabe der Datenplan und 80 gesammelte Fotos."
-            }
-          ]
-        }
-      ],
-      "product": "XOR-Erklärung und begründete Aufteilung in Training, Validierung und Test; ein mündlich abgesegnetes Thema und als Hausaufgabe ein Datenplan für fünf unabhängige Gruppen.",
-      "zeit": "Beide Notebooks haben einen Kern (Mehrere Neuronen kombinieren Kern 25 Minuten, geplant 30 Minuten mit 5 Minuten Reserve, Datenaufteilung Kern 13 Minuten, geplant 20 Minuten mit 7 Minuten Reserve, Zeitmarken ⏱: Einstieg 2, Regler 3, Aufbauen 3, Üben 4, XOR lernt selbst 4, Ziffern erkennen 6, Foto zur Klasse 3). Bei Zeitnot im Notebook «Daten fair aufteilen» zuerst das Rechenbeispiel am Ende von «Üben» streichen, danach die Zuordnungsübung kürzen; Rollen-Tabelle, Datenleck und die Drei-Werte-Grafik bleiben. Die Themenwahl wird in der Auswertungsphase mündlich abgesegnet (ca. 1 Minute je Tandem, während die anderen Tandems arbeiten). Der Datenplan ist Hausaufgabe (ca. 20 Minuten im Tandem, Notebook-Abschnitt «Den eigenen Datenplan prüfen» mit Checkliste); die Lehrperson sieht zu Beginn der nächsten Doppellektion stichprobenartig nach.",
-      "motivation": "Ein Neuron zieht nur eine gerade Linie. Gesichter, Sprache oder Verkehrsschilder erkennen Systeme mit vielen Neuronen in Schichten. Dazu kommt die Frage, die jedes KI-Projekt betrifft: Funktioniert das Netz auch bei Fällen, die es nie gesehen hat? Beides brauchen Sie für Ihr Projekt."
-    },
-    {
-      "id": "05",
-      "view": "projekt",
-      "title": "Projektstart: Daten vorbereiten",
-      "rueckblick": "In Doppellektion 4 haben Sie erklärt, wie eine Zwischenschicht XOR löst, Training, Validierung und Test getrennt ein Thema gewählt und als Hausaufgabe den Datenplan vorbereitet. Heute beginnt Ihr eigenes Projekt: Sie formulieren eine prüfbare Frage und bereiten Ihre Fotos als Daten für Ihr Netz vor.",
-      "goal": "Eine prüfbare Frage formulieren und die eigenen Daten kontrollieren.",
-      "question": "Helfen vielfältigere Trainingsbilder bei neuen Exemplaren?",
-      "phases": [
-        {
-          "phase": "Ankommen",
-          "titel": "Ein leichtes und ein schwieriges Foto",
-          "minutes": 5,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Legen Sie je ein leichtes und ein schwieriges Foto Ihrer Anwendung nebeneinander. Beschreiben Sie dem Tandem in einem Satz, woran Sie die Klasse erkennen und was den schwierigen Fall schwierig macht."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Zwei Beispielfotos mit je einem Erkennungsmerkmal."
-            }
-          ]
-        },
-        {
-          "phase": "Vorwissen aktivieren",
-          "titel": "Gleiches Exemplar, gleiche Gruppe",
-          "minutes": 5,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Erklären Sie sich gegenseitig, warum Fotos desselben Exemplars in derselben Gruppe bleiben und was bei A und B verglichen wird (A: ein Exemplar je Klasse, B: zwei, gleiche Bildzahl). Zählen Sie Ihre mitgebrachten Fotos je Klasse und Gruppe (Soll: 8) und markieren Sie Lücken. Zeigen Sie der Lehrperson Thema und Datenplan."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Eine Zähltabelle 2 Klassen × 5 Gruppen mit markierten Lücken."
-            }
-          ]
-        },
-        {
-          "phase": "Informieren",
-          "titel": "Auftrag, Raster und der Weg vom Bild zum Netz",
-          "minutes": 10,
-          "schritte": [
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 8,
-              "text": "Erklärt Auftrag, Zeitplan und die fünf Reflexionen, zeigt das Bewertungsraster (zehn Kompetenzen, 30 Punkte: Abgabe 18, Gespräch 12) und das ZIP-Sichern. Erklärt die Kette Foto → 224 × 224 Pixel → eingefrorenes MobileNet (1280 Merkmale) → unser trainierbares Netz (16 Neuronen) → Klasse."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 2,
-              "text": "Zeichnen Sie die Kette und markieren Sie, was fest ist und was lernt."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Eine Skizze der Kette mit markiertem trainierbarem Teil."
-            }
-          ]
-        },
-        {
-          "phase": "Verarbeiten",
-          "titel": "Lernlabor und eigene Fotos im Fotostudio",
+          "titel": "Etappen planen und selbstständig arbeiten",
           "minutes": 60,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 15,
-              "text": "Durchlaufen Sie das Lernlabor mit den Übungsdaten: Daten prüfen, A und B vergleichen, ein Bild verfolgen, Vorhersagen lesen."
+              "min": 50,
+              "text": "Erstellen Sie zu Beginn in Reflexion 1 einen kurzen Etappenplan bis zur Abgabe: nächste Schritte, Zuständigkeiten, Zeitbedarf und Reserve. Wählen Sie Ihr Tagesziel und bearbeiten Sie die passende Etappe. Prüfen und ergänzen Sie Fotos, importieren Sie die Daten und dokumentieren Sie Vermutung und Datenprobleme in Reflexion 1–2. Nutzen Sie Lernlabor und Hilfen nur nach Bedarf. Wer bereit ist, kann bereits vergleichen; wer Datenlücken hat, arbeitet zuerst daran. Die Lehrperson berät einzelne Tandems."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 45,
-              "text": "Tragen Sie im Fotostudio zu jedem Foto Klasse, Gruppe und Quelle ein, prüfen Sie die Vorschau, verarbeiten Sie die Bilder und laden Sie die JSON herunter. Setzen Sie im Versuchsnotebook MODUS = 'EIGENE_DATEN' und die Klassennamen, laden Sie die JSON und prüfen Sie die Tabelle (für T1, T2 und V1 je 8 und 8 Bildern) sowie das Gruppenbild: Stimmen Klassen, Gruppen und Exemplare? Bei Fehlermeldungen hilft der Abschnitt «Hilfe» am Notebook-Ende. Bei Zeitreserve folgt der erste A/B-Lauf."
+              "min": 10,
+              "text": "Frei verfügbarer Puffer im SOL-Block für Datenlücken, Technik, Fragen oder gründlicheres Arbeiten; keine Zusatzpflicht."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein geprüfter Datensatz mit 80 Bildern und fünf Gruppen und die heruntergeladene JSON."
+              "text": "Eigener Plan und nachvollziehbarer Fortschritt, nicht ein identischer Stand aller Tandems."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "ZIP sichern und Reflexion 1 schreiben",
+          "titel": "Fortschritt prüfen und sichern",
           "minutes": 10,
           "schritte": [
             {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Zeigt, wo das ZIP unter «Sichern & abgeben» liegt und wohin es später abgegeben wird."
-            },
-            {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Schreiben Sie im Journal Reflexion 1 (Anwendung, Klassenregel, Vermutung) und Reflexion 2 (Gruppen, Quellen, ein Datenproblem), markieren Sie ein Datenproblem oder eine offene Frage und laden Sie das ZIP herunter."
+              "min": 10,
+              "text": "Prüfen Sie Ihr Tagesziel. Ergänzen Sie im bestehenden Journal kurz: erreicht, offen, nächster Schritt und benötigte Hilfe. Passen Sie Ihren Plan an und laden Sie eine ZIP-Sicherung herunter. Kein zusätzlicher SOL-Bericht."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Reflexion 1–2 und ein erstes ZIP."
+              "text": "Gesicherter Stand und selbst gewählter nächster Schritt."
             }
           ]
         }
-      ],
-      "product": "Geprüfte Daten + Reflexion 1–2 + erste ZIP-Sicherung.",
-      "zeit": "Das Lernlabor besteht aus fünf Abschnitten à 3 Minuten (Zeitmarken ⏱); der Zusatz zum Abschlusstest ist freiwillig. Im Lernlabor ist bei den einfachen Übungsformen Gleichstand von A und B zu erwarten; das ist ein gültiges Ergebnis, kein Fehler. Für das Fotostudio sind 45 Minuten geplant, weil Aufnehmen, Prüfen und Verarbeiten von 80 Fotos länger dauern kann.",
-      "motivation": "Ab heute bauen Sie selbst ein Bildmodell zu einem Thema, das Sie interessiert. Ob es später funktioniert, entscheidet sich schon jetzt bei den Daten: Schlechte Daten ergeben ein schlechtes Modell, auch mit dem besten Netz."
+      ]
     },
     {
       "id": "06",
       "view": "projekt",
-      "title": "Projekt: fair vergleichen",
-      "rueckblick": "In Doppellektion 5 haben Sie Ihre Frage formuliert, eigene Fotos im Fotostudio aufgenommen und kontrolliert und Ihren Stand als ZIP gesichert. Heute vergleichen Sie zwei Varianten (A und B) unter gleichen Bedingungen und wählen eine aus, ohne den Abschlusstest anzusehen.",
-      "goal": "A und B kontrolliert vergleichen und eine Auswahl vor Testeinsicht begründen.",
-      "question": "Welche Beobachtung würde unsere Vermutung stützen – und welche nicht?",
+      "title": "Untersuchen und Entscheidungen begründen",
+      "rueckblick": "In Doppellektion 5 haben Sie Ihren Lernweg geplant. Heute setzen Sie an Ihrem eigenen Arbeitsstand an, nicht an einem neuen gemeinsamen Rezept.",
+      "goal": "Den eigenen Arbeitsplan steuern und einen fairen Vergleich mit Belegen und alternativen Erklärungen auswerten.",
+      "question": "Was zeigen unsere Daten, und welche andere Erklärung ist möglich?",
+      "motivation": "Ein gutes Ergebnis ist nicht eine hohe Trefferquote, sondern ein nachvollziehbarer Vergleich und eine ehrliche Interpretation.",
+      "product": "Ein belegter Fortschritt an der gewählten Etappe und ein aktualisierter Plan; bei bereiten Tandems A/B-Auswertung und Auswahlbegründung.",
+      "zeit": "70 Minuten ununterbrochener SOL-Block, davon 10 Minuten Puffer. Kein neuer gemeinsamer Input und keine Synchronisierung aller Tandems. Datencheck, Vergleich und Abschluss sind Etappen, keine festen Lektionstermine.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Projektstand wiederherstellen",
+          "titel": "Am eigenen Stand anknüpfen",
           "minutes": 5,
           "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Stellen Sie Ihr gesichertes ZIP unter «Notizen & Projekt wiederherstellen» wieder her, führen Sie die Vorbereitung und den Datenimport erneut aus und legen Sie ein Tagesziel fest (A/B-Lauf, Vorhersagen lesen, Auswahl begründen)."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Ein bereiter Stand und ein Tagesziel."
-            }
-          ]
-        },
-        {
-          "phase": "Vorwissen aktivieren",
-          "titel": "Was unterscheidet A und B?",
-          "minutes": 5,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Erklären Sie dem Tandem ohne Unterlagen, was sich zwischen A und B verändert und was gleich bleibt (Bildzahl, Netz, Epochen, Startwert, Validierungsbilder) und wofür V1 und P1/P2 dienen. Schreiben Sie Ihre Vermutung für den Vergleich auf (A besser, B besser oder gleich) mit einem Grund."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Eine schriftliche Vermutung mit Begründung."
-            }
-          ]
-        },
-        {
-          "phase": "Informieren",
-          "titel": "Trefferquoten richtig lesen",
-          "minutes": 10,
-          "schritte": [
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 8,
-              "text": "Rechnet ein Zahlenbeispiel vor: 12 von 16 Bildern richtig sind 75 %, 14 von 16 sind 87.5 %, der Unterschied beträgt 12.5 Prozentpunkte. Erklärt, warum ein Unterschied bei 16 Bildern und einem Lauf nur eine Beobachtung ist, und zeigt die Abfolge Vermuten → Lauf → Bilder lesen → Auswahl. Der Test bleibt geschlossen."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 2,
-              "text": "Rechnen Sie 13 von 16 gegen 13 von 16."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Sichere Anwendung von Trefferquote und Prozentpunkten."
-            }
-          ]
-        },
-        {
-          "phase": "Verarbeiten",
-          "titel": "A und B vergleichen, Vorhersagen untersuchen",
-          "minutes": 60,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 15,
-              "text": "Führen Sie die A/B-Zelle aus und lesen Sie die Trefferquoten auf V1 und den Unterschied in Prozentpunkten ab."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 15,
-              "text": "Untersuchen Sie bei A und B die 16 Vorhersagen: Welche Bilder sind richtig, wo ist das Netz unsicher, gibt es Fehler? Notieren Sie mindestens ein konkretes Bild als Beleg."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 25,
-              "text": "Sammeln Sie eine alternative Erklärung (Hintergrund, Licht, Exemplar) und tragen Sie die Auswahl A oder B mit Begründung ins Journal ein (Reflexion 3). Nach der Hälfte wechseln Bedienung und Erklärung."
-            },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Prüfen Sie die Auswahl gegenseitig."
+              "text": "Öffnen Sie Ihren letzten Stand. Nach Import oder Reload führen Sie Vorbereitung und Datenimport bewusst erneut aus. Sehen Sie Ihren letzten nächsten Schritt an."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Reflexion 3 mit Werten, einem Bildbeleg, einer alternativen Erklärung und einer Auswahl mit Grund."
-            }
-          ]
-        },
-        {
-          "phase": "Auswerten",
-          "titel": "Auswahl begründen (Reflexion 3)",
-          "minutes": 10,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Lesen Sie Reflexion 3 gegenseitig oder tauschen Sie mit einem anderen Tandem: Passen Zahlen, Belege und Auswahl zusammen? Markieren und beheben Sie Lücken und laden Sie das ZIP herunter."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Kündigt an, dass der Test erst nach der gesicherten Auswahl freigegeben wird."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Eine geprüfte Reflexion 3 und ein gesichertes ZIP."
-            }
-          ]
-        }
-      ],
-      "product": "A/B-Ergebnisse + begründete Auswahl in Reflexion 3; noch kein Abschlusstest.",
-      "motivation": "Firmen werben mit «Unsere KI erkennt 98 % richtig». Heute lernen Sie, solche Zahlen kritisch zu lesen: Wurde fair verglichen? Was wurde verändert, was blieb gleich? Mit derselben Methode beantworten Sie Ihre eigene Forschungsfrage.",
-      "zeit": "Für die alternative Erklärung und die Auswahl (Reflexion 3) sind 25 Minuten geplant."
-    },
-    {
-      "id": "07",
-      "view": "projekt",
-      "title": "Projekt: prüfen und urteilen",
-      "rueckblick": "In Doppellektion 6 haben Sie A und B fair verglichen, Vorhersagen untersucht und Ihre Auswahl vor der Testeinsicht begründet (Reflexion 3). Heute prüfen Sie die gewählte Variante einmal mit dem Abschlusstest und beschreiben ihre Grenzen mit Belegen.",
-      "goal": "Die gewählte Variante abschliessend prüfen und Grenzen mit Belegen beschreiben.",
-      "question": "Was bleibt von unserer Vermutung auf neuen Testgruppen übrig?",
-      "phases": [
-        {
-          "phase": "Ankommen",
-          "titel": "Auswahl vor dem Test belegen",
-          "minutes": 5,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Zeigen Sie der Lehrperson oder dem Nachbartandem die vor Testeinsicht festgehaltene Auswahl samt Begründung (Reflexion 3)."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Eine sichtbar gesicherte Auswahl."
+              "text": "Ein wieder arbeitsfähiger Projektstand."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Warum nach dem Test nichts mehr ändern?",
-          "minutes": 5,
+          "titel": "Tagesziel setzen",
+          "minutes": 3,
           "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Erklären Sie zu zweit, warum die Auswahl nach Testeinsicht nicht mehr geändert wird (der Test würde sonst zu einer zweiten Validierung), und nennen Sie die Gruppen, die noch nie ausgewertet wurden."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Eine Erklärung in zwei Sätzen."
-            }
-          ]
-        },
-        {
-          "phase": "Informieren",
-          "titel": "Freigabe-Checkliste",
-          "minutes": 10,
-          "schritte": [
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 7,
-              "text": "Zeigt die Freigabe-Checkliste (Reflexion 3 vollständig, Variante und Begründung stimmen mit der Zelle überein) und erklärt, wie der Testwert zu lesen ist: 32 Bilder von zwei neuen Exemplaren je Klasse, eine vorsichtige Aussage. Zeigt, wie drei Beispiele untersucht werden (ein typischer Treffer, ein überraschender Treffer oder ein schwieriger Fall); Fehler zu erfinden ist nicht erlaubt."
-            },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 3,
-              "text": "Haken Sie die Checkliste im Tandem ab."
+              "text": "Wählen Sie ein realistisches Tagesziel und verteilen Sie die Rollen neu. Prüfen Sie, welche Voraussetzung Ihrer Etappe noch fehlt."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine abgehakte Checkliste und die Freigabe durch das Tandem."
-            }
-          ]
-        },
-        {
-          "phase": "Verarbeiten",
-          "titel": "Abschlusstest, Beispiele und Reflexion 4",
-          "minutes": 60,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 20,
-              "text": "Tragen Sie Variante und Begründung in die Testzelle ein, setzen Sie TEST_FREIGEBEN = True und führen Sie die Zelle aus. Lesen Sie Trefferquote, Verwechslungstabelle und Beispiele."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 25,
-              "text": "Schreiben Sie Reflexion 4 (Trefferquote mit Bildzahl, drei Beispiele, was nicht geprüft wurde, Nutzen und Grenzen) und Reflexion 5 (Antwort auf die Forschungsfrage, nächster Versuch, Arbeitsteilung, Quellen und KI-Hilfen)."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 15,
-              "text": "Wählen Sie ein Bild und erklären Sie: «Was wäre anders, wenn dieses Objekt schon im Training vorkam?» Prüfen Sie das Abgabepaket gegenseitig (Journal, Notebook mit Ausgaben, Originalfotos, JSON, Protokoll)."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Ein Testergebnis, Reflexion 4–5 und ein vollständiges ZIP."
-            }
-          ]
-        },
-        {
-          "phase": "Auswerten",
-          "titel": "Selbsteinschätzung und Abgabe",
-          "minutes": 10,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Schätzen Sie sich im Bewertungsraster selbst ein, markieren Sie Kompetenzen mit fehlendem Beleg und ergänzen Sie, was möglich ist, ohne Auswahl oder Test zu ändern. Laden Sie die vollständige ZIP-Sicherung herunter."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Nennt Abgabekanal, Frist (vor Beginn der Doppellektion 8) sowie Dauer und Reihenfolge der Gespräche."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Ein fertiges Abgabepaket und eine bekannte Gesprächszeit."
-            }
-          ]
-        }
-      ],
-      "product": "Abschlusstest + vollständiges Journal + geprüftes Abgabepaket.",
-      "motivation": "Ein KI-System sollte erst eingesetzt werden, wenn es an neuen Fällen geprüft wurde, etwa ein Modell, das auf Röntgenbildern Auffälligkeiten sucht. Heute machen Sie diesen Test ehrlich: einmal, ohne Nachbessern, mit allen Fehlern. Das ist mehr wert als eine schöne Zahl.",
-      "zeit": "Für Reflexion 4 und 5 sind 25 Minuten geplant."
-    },
-    {
-      "id": "08",
-      "view": "projekt",
-      "title": "Abgabe und Tandemgespräche",
-      "rueckblick": "In Doppellektion 7 haben Sie die gewählte Variante mit dem Abschlusstest geprüft, Ihr Journal vervollständigt und das Abgabepaket kontrolliert. Heute erklären Sie Ihr Projekt im Tandemgespräch und trainieren das Modell eines anderen Tandems nach.",
-      "goal": "Das ganze Projekt gemeinsam erklären, das Modell eines anderen Tandems nachtrainieren und an den eigenen Klassen testen.",
-      "question": "Kommen wir mit den Daten und Einstellungen eines anderen Tandems zum gleichen Ergebnis?",
-      "phases": [
-        {
-          "phase": "Ankommen",
-          "titel": "Reihenfolge, Gespräche und zugeteiltes Projekt",
-          "minutes": 5,
-          "schritte": [
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 4,
-              "text": "Bestätigt die Abgaben, nennt Reihenfolge und Dauer der Gespräche, teilt jedem Tandem das Abgabe-ZIP eines anderen Tandems zu und erklärt Reproduktionsprüfung und Fremdtest: Die Gespräche laufen nach diesen Minuten parallel."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "text": "Notieren Sie Ihr Gesprächsfenster und das Tandem, dessen Projekt Sie nachprüfen."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Jedes Tandem kennt Zeitfenster, Ablauf und das zu prüfende Projekt."
-            }
-          ]
-        },
-        {
-          "phase": "Vorwissen aktivieren",
-          "titel": "Drei Stichpunkte fürs Gespräch",
-          "minutes": 5,
-          "schritte": [
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "text": "Rufen Sie für das Gespräch und die Reproduktionsprüfung drei Stichpunkte aus Ihrem Projekt ab: Welche Daten und Labels hatten Sie? Was war ein Datenproblem? Welche Grenze oder welcher Fehler war sichtbar? Die Gespräche laufen bereits parallel."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Drei Stichpunkte als Erinnerungsstütze."
+              "text": "Ein eigenes Tagesziel mit Zuständigkeiten."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Aufträge lesen",
-          "minutes": 5,
+          "titel": "Benötigte Hilfe selbst wählen",
+          "minutes": 2,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "text": "Lesen Sie auf der Kursseite die Anleitung zur Reproduktionsprüfung und den Auftrag Fremdtest und notieren Sie Fragen schriftlich, ohne die laufenden Gespräche zu unterbrechen."
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Wählen Sie bei Bedarf eine passende Hilfe im Notebook oder eine konkrete Beratungsfrage. Kein gemeinsamer Input; bei klarem Vorgehen direkt weiterarbeiten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine Liste offener Fragen."
+              "text": "Ein passender Zugang zur nächsten Aufgabe."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Reproduktionsprüfung, Fremdtest und eigenes Gespräch",
+          "titel": "Selbst organisierte Untersuchung",
           "minutes": 70,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 45,
-              "text": "Reproduktionsprüfung in einem privaten Browserfenster: Stellen Sie das zugeteilte Projekt wieder her, prüfen Sie die Daten, trainieren Sie A und B mit denselben Einstellungen nach, wiederholen Sie mit drei Startwerten und prüfen Sie den Abschlusstest mit der Variante des Originals. Vergleichen Sie Datenprüfsumme und Werte mit dem Versuchsprotokoll und schreiben Sie den Reproduktionsbericht. Laden Sie am Ende das Abgabepaket herunter und reichen Sie es ein."
+              "min": 60,
+              "text": "Arbeiten Sie an Ihrer gewählten Etappe. Vor jedem A/B-Lauf Daten prüfen; dann Bildzahl, Netz, Epochen und Startwert konstant halten. Lesen Sie Validierung und konkrete Vorhersagen, prüfen Sie eine alternative Erklärung und begründen Sie Ihre Auswahl in Reflexion 3 vor Testeinsicht. Bereite Tandems dürfen bereits abschliessen; andere ergänzen zuerst Daten und Reflexion 1–2. Die Lehrperson fragt in kurzen Beratungen nach Ziel, Beleg und nächstem Schritt; keine Unterbrechung der ganzen Klasse."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 20,
-              "text": "Fremdtest: Das nachtrainierte Modell des anderen Tandems kennt nur seine zwei Klassen. Tragen Sie zuerst Ihre Erwartung ein, laden Sie dann Ihre eigenen Fotos (Klassen C und D) in dasselbe Notebook und lassen Sie das fremde Modell sie beurteilen («6 · Fremdtest»). Lesen Sie Tabelle und Trennschärfe und beantworten Sie im Protokoll: Wie gut trennt das Modell C und D, und warum (Gegenstand, Hintergrund, Licht, nur zwei Klassen zur Auswahl)? Was bedeutet das für Trefferquoten?"
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 5,
-              "text": "Zu Ihrem Gesprächsfenster pausieren Sie die Arbeit. Im Gespräch erklären beide das Projekt: ein Bild durch das Modell, eine Daten- oder Versuchsentscheidung, ein Ergebnis samt Grenze und die Übertragung auf einen neuen Fall. Alle Gespräche enden vor der gemeinsamen Auswertung."
+              "min": 10,
+              "text": "Frei verfügbarer Puffer für Technik, Interpretation oder Beratung. Eine Vertiefung mit weiteren Startwerten ist freiwillig und nur vor Testeinsicht möglich."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein bewertetes Gespräch, ein eingereichter Reproduktionsbericht mit nachtrainiertem Notebook und ein ausgewerteter Fremdtest."
+              "text": "Belegte Ergebnisse der gewählten Etappe; keine Pflicht zu einem klassenweit gleichen Stand."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Bericht prüfen, Frage für Doppellektion 10",
+          "titel": "Zeitplan und Abgabe im Blick",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Vergleichen Sie Tagesziel und Ergebnis. Aktualisieren Sie den Etappenplan und den nächsten Schritt im Journal, sichern Sie als ZIP. Wenn die Abgabe gefährdet ist, vereinbaren Sie jetzt mit der Lehrperson eine realistische Lösung innerhalb der Projektregeln."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Gesicherter Fortschritt und ein realistischer Abschlussplan."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07",
+      "view": "projekt",
+      "title": "Das Projekt abschliessen und die Arbeit überprüfen",
+      "rueckblick": "Sie haben in Ihrem eigenen Tempo Daten geprüft und Varianten verglichen. Heute organisieren Sie den Abschluss und prüfen Ihre Belege.",
+      "goal": "Die Untersuchung selbstständig abschliessen, Grenzen belegen und den eigenen Arbeitsprozess reflektieren.",
+      "question": "Was können wir mit unseren Ergebnissen begründet behaupten?",
+      "motivation": "Zum selbst organisierten Arbeiten gehört, einen klaren Schluss zu ziehen und ungesicherte Behauptungen sichtbar zu machen.",
+      "product": "Vollständiges Journal, geprüfte ZIP-Abgabe und ein von beiden erklärbares Projekt.",
+      "zeit": "70 Minuten SOL-Block, davon 15 Minuten Abschluss- und Technikpuffer. Kein zusätzlicher Bericht oder vorbereitete Präsentation. Fachgesprächsregeln und Austauschpartner bereits vor Doppellektion 8 mitteilen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Arbeitsstand und Frist",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "text": "Prüfen Sie, dass der Reproduktionsbericht eingereicht ist, sichern Sie den unbenoteten Fremdtest und notieren Sie eine Frage für «KI & Gesellschaft»."
+              "min": 5,
+              "text": "Öffnen Sie Ihren Stand und prüfen Sie, was bis zur Abgabe noch fehlt."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein eingereichter Reproduktionsbericht, ein gesicherter Fremdtest und eine Frage für Doppellektion 10."
-            }
-          ]
-        }
-      ],
-      "product": "Bewertetes Tandemgespräch + eingereichter Reproduktionsbericht + unbenoteter Fremdtest; keine nachträgliche Projektänderung.",
-      "motivation": "In Studium und Beruf zählt nicht nur, dass etwas funktioniert, sondern dass Sie es erklären und begründen können. Heute zeigen Sie im Gespräch, dass Sie Ihr Projekt verstanden haben, und prüfen, ob ein anderes Tandem mit seinen Daten wirklich zum selben Ergebnis kommt, so wie es in der Forschung üblich ist.",
-      "zeit": "Der Fremdtest ist der Puffer dieser Doppellektion: Bei Zeitnot nur die Schritte 1 bis 3 (Vorbereiten, Vermuten, Testen) ausführen und die Auswertung mündlich im Tandem machen."
-    },
-    {
-      "id": "09",
-      "view": "sprache",
-      "title": "Wie entstehen Sprachmodelle?",
-      "rueckblick": "In Doppellektion 8 haben Sie Ihr Bildprojekt im Tandemgespräch erklärt und das Modell eines anderen Tandems nachtrainiert. Dabei lernte ein Netz aus Beispielen: Bilder gehen hinein, eine Klasse kommt heraus. Heute geht es um Sprache: Wie kann ein Modell Text erzeugen, und stimmt, was es sagt?",
-      "goal": "Den Einfluss von Kontext und Beispielen untersuchen und Grenzen der Analogie nennen.",
-      "question": "Bedeutet eine plausible Fortsetzung auch eine richtige Aussage?",
-      "phases": [
-        {
-          "phase": "Ankommen",
-          "titel": "«Heute gehen wir …»",
-          "minutes": 5,
-          "schritte": [
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 1,
-              "text": "Schreibt «Heute gehen wir …» an die Tafel."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln → Klasse",
-              "text": "Schreiben Sie zwei Fortsetzungen und lesen Sie sie vor; die Klasse sammelt die Unterschiede in Wortwahl, Länge und Ton."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "text": "Eine Sammlung verschiedener Fortsetzungen desselben Satzanfangs."
+              "text": "Eine eigene Abschlussliste."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Papierexperiment: reihum Wörter schreiben",
-          "minutes": 10,
+          "titel": "Voraussetzungen prüfen",
+          "minutes": 3,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Gruppe",
-              "text": "Papierexperiment in Gruppen von drei bis vier Personen mit demselben Satzanfang auf zwei Blättern: Reihum schreibt jede Person ein Wort, und das Blatt wird so gefaltet, dass nur die letzten zwei Wörter sichtbar bleiben (Runde A, etwa 12 Wörter). Wiederholen Sie das mit vier sichtbaren Wörtern (Runde B). Lesen Sie beide Texte vor: Welcher klingt sinnvoller, und warum? Das Papagei-Modell macht dasselbe mit Zahlen (Kapitel 2 der Kursseite). Halten Sie beide Texte und Ihre Beobachtung im Protokoll der Kursseite (Kapitel 1) fest."
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Prüfen Sie vor dem Abschlusstest: Ist die Auswahl samt Begründung dokumentiert? Sind P1/P2 bisher unangetastet? Nach Testeinsicht wird nichts optimiert."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Zwei Texte und eine Aussage zum Einfluss des Kontexts."
+              "text": "Ein selbst durchgeführter Freigabecheck."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Papagei-Modell: das nächste Wort",
-          "minutes": 12,
+          "titel": "Abgabehilfen nach Bedarf",
+          "minutes": 2,
           "schritte": [
             {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 9,
-              "text": "Erklärt am Papagei-Beispiel, wie ein Modell das nächste Wort aus der Häufigkeit von Wortfolgen in früheren Texten vorhersagt. Grenzt moderne Sprachmodelle ab: Tokens, viel grösserer Kontext und ein trainiertes neuronales Netz. Zeigt an einem Beispiel, dass «wahrscheinlich» nicht «wahr» heisst."
-            },
-            {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 3,
-              "text": "Notieren Sie zwei Unterschiede zwischen dem Papagei-Modell und einem modernen Sprachmodell."
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Nutzen Sie Projektauftrag und Raster für fehlende Belege. Lesen Sie die bereits bekannt gegebenen Gesprächszeiten und Austauschregeln; Beratung nur bei konkreten Fragen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Zwei Unterschiede als Grundlage für die Stationen."
+              "text": "Klarheit über den eigenen Abschlussweg."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Papagei-Stationen und Soekia",
-          "minutes": 53,
+          "titel": "Abschluss selbst steuern",
+          "minutes": 70,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 25,
-              "text": "Bearbeiten Sie die von der Lehrperson ausgewählten Papagei-Stationen und halten Sie fest, wie sich die Fortsetzung mit mehr Kontext verändert. Tragen Sie die Stationen ins Protokoll der Kursseite ein (Kapitel 2): Satzanfang, Kontext, vorhergesagtes Wort, plausibel, wahr."
+              "min": 55,
+              "text": "Schliessen Sie die noch offenen Etappen ab. Testen Sie die begründet ausgewählte Variante einmal auf P1/P2; untersuchen Sie drei konkrete Beispiele, ohne Fehler zu erfinden. Schreiben Sie Reflexion 4–5 mit Grenzen, Fazit, nächstem Versuch, Arbeitsteilung, Hilfen und einer kurzen Rückschau auf Ihren Etappenplan. Prüfen Sie Journal und Ausgaben mit dem Raster. Erklären Sie sich gegenseitig das ganze Projekt; keine Folien nötig. Bereiten Sie die erlaubten Austauschdateien vor."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 23,
-              "text": "Verändern Sie in Soekia jeweils nur eine Grösse (Kontext oder Wortwahl), vergleichen Sie die Texte und sichern Sie einen gelungenen und einen problematischen Text mit Beleg. Dokumentieren Sie beide Texte mit Beleg im Protokoll der Kursseite (Kapitel 3)."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 5,
-              "text": "Verbinden Sie Ihre Beobachtungen mit dem Papierexperiment und beantworten Sie: Ist eine plausible Fortsetzung auch wahr? «Human or Not» wird nur bei schulischer Freigabe eingesetzt und ersetzt dann zehn Minuten Soekia."
+              "min": 15,
+              "text": "Puffer für fehlende Belege, technischen Export und Beratung. Datenarbeit bei Bedarf zuerst fertigstellen, nicht zugunsten eines schnellen Tests überspringen. Keine neuen Pflichtversuche."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein dokumentierter Vergleich mit zwei Texten und einer Aussage zu «plausibel ≠ wahr»."
+              "text": "Eine nachvollziehbare abgeschlossene Untersuchung und vorbereitete Austauschdateien."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Texte erklären, Papagei und Netz verbinden",
+          "titel": "Abgabe sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "text": "Erklären Sie im Antwortfeld anhand Ihrer zwei Texte in drei Sätzen, was gelang, was problematisch war und warum Plausibilität keine Richtigkeit garantiert. Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells.",
-              "min": 3
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 3,
-              "text": "Brücke zu den neuronalen Netzen: Zeigt die Grafik «Papagei-Modell und neuronales Sprachmodell». Gleiches Ziel (das nächste Token vorhersagen), aber das Netz speichert sein Wissen in Gewichten statt in einer Tabelle, behandelt ähnliche Wörter ähnlich (Wörter als Zahlen), nutzt viel längeren Kontext und wird wie das Neuron aus Doppellektion 3 trainiert, nur mit Milliarden Gewichten. Betont: Das ist mehr als Zählen. Es bleibt dabei: Das Modell prüft nicht, ob etwas wahr ist."
-            },
-            {
-              "art": "Auftrag",
               "wer": "Tandem",
-              "min": 2,
-              "text": "Beantworten Sie im Antwortfeld «Warum ist ein neuronales Sprachmodell mehr als reine Statistik? Welche Grenze bleibt?»: Was sagt die Papagei-Tabelle zu «Das Kätzchen verfolgt die …», was kann ein Netz tun, in dem Katze und Kätzchen ähnliche Zahlen haben?"
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Fasst zusammen: Sprachmodelle sagen das nächste Token im Kontext voraus und prüfen nicht automatisch, ob eine Aussage wahr ist. Ausblick auf Doppellektion 10: Wer trägt die Folgen?"
+              "min": 10,
+              "text": "Prüfen Sie das ZIP auf Journal, Notebook mit Ausgaben, Daten und Protokoll. Laden Sie den finalen Stand herunter und reichen Sie ihn spätestens vor Beginn der Doppellektion 8 über den angegebenen Kanal ein. Halten Sie Ihre eigene Fotostudio-JSON für die Fremdauswertung bereit. Der Download allein ist keine Einreichung."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein belegter Textvergleich, zwei Grenzen und eine Begründung, warum neuronale Sprachmodelle mehr sind als reine Statistik."
+              "text": "Ein geprüftes Abgabepaket und Bereitschaft für Gespräch und Austausch."
             }
           ]
         }
-      ],
-      "product": "Dokumentierter Vergleich + zwei Grenzen des vereinfachten Modells + Begründung, warum neuronale Sprachmodelle mehr sind als Statistik.",
-      "motivation": "Chatbots schreiben Texte, die überzeugend klingen, und erfinden manchmal trotzdem Dinge. Wie kann das sein? Mit einem kleinen Modell sehen Sie selbst, wie aus Wahrscheinlichkeiten Sätze entstehen und warum plausibel nicht dasselbe ist wie wahr.",
-      "zeit": "Für Soekia sind 23 Minuten geplant. Human or Not ersetzt nur nach schulischer Freigabe zehn Minuten Soekia."
+      ]
     },
     {
-      "id": "10",
-      "view": "gesellschaft",
-      "title": "Wer trägt die Folgen?",
-      "rueckblick": "In Doppellektion 9 haben Sie gesehen, dass ein Sprachmodell das nächste Wort aus Beispieltexten vorhersagt, zuerst als Papagei-Modell mit Zählen, dann als neuronales Netz. Eine plausible Fortsetzung ist dabei nicht automatisch wahr. Heute fragen Sie, was passiert, wenn die Beispiele selbst einseitig sind: Wer trägt die Folgen?",
-      "goal": "Ein Modell mit den Kriterien Opacity, Scale und Damage prüfen, eine Rückkopplung beschreiben, Cathy O’Neils Aussagen in einer Debatte kritisch hinterfragen und auf den Themenblock zurückblicken.",
-      "question": "Wann wird aus einer Modellvorhersage ein gesellschaftliches Problem?",
+      "id": "08",
+      "view": "projekt",
+      "title": "Das eigene Projekt erklären und ein fremdes Modell prüfen",
+      "rueckblick": "Ihr eigener Abgabestand ist eingefroren. Während der Fachgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.",
+      "goal": "Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.",
+      "question": "Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?",
+      "motivation": "Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.",
+      "product": "Bewertetes Tandemgespräch und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.",
+      "zeit": "Gespräche parallel in Minute 5–85, nicht zusätzlich zu den 90 Minuten. Im 80-Minuten-Fenster selbstständig arbeiten und beim Aufruf pausieren. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest samt Auswertung. Drei Startwerte sind Zusatz. 15 Minuten Puffer im Arbeitsblock; die Fremdauswertung selbst entfällt nicht.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "«Gleiche Regeln sind automatisch fair»",
+          "titel": "Abgaben und Organisation",
           "minutes": 5,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 1,
-              "text": "Schreibt die These «Gleiche Regeln sind automatisch fair.» an die Tafel."
+              "min": 4,
+              "text": "Bestätigt Abgaben, Gesprächsreihenfolge und die bereits zugeteilten Austauschprojekte. Erinnert an privates Browserfenster, Datenschutz und das unveränderte eigene Abgabepaket. Ab Minute 5 laufen alle Fachgespräche parallel bis Minute 85."
             },
             {
               "art": "Auftrag",
-              "wer": "Klasse",
-              "text": "Positionieren Sie sich im Raum (stimme zu, unsicher, stimme nicht zu) und nennen Sie einen Grund."
+              "wer": "Tandem",
+              "min": 1,
+              "text": "Öffnen Sie das zugeteilte Paket und notieren Sie Ihr Gesprächsfenster."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein Meinungsbild als Ausgangspunkt."
+              "text": "Alle kennen Gesprächszeit und Austauschprojekt."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Eigene Prüffrage wählen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Lesen Sie Vermutung und Ergebnis des anderen Tandems. Notieren Sie, was Sie nachprüfen wollen und welches Ergebnis Sie für Ihre eigenen Bilder erwarten. Die Gespräche laufen bereits; Sie arbeiten selbstständig."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine eigene Prüffrage und eine Erwartung vor dem Fremdtest."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Austauschauftrag erschliessen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Lesen Sie Reproduktionsprüfung und Fremdtest auf der Kursseite. Teilen Sie die Arbeit auf. Vergleichen Sie einen Lauf mit Startwert 11; weitere Startwerte sind freiwillig. Nutzen Sie Hilfetexte und notieren Sie technische Blockaden, ohne laufende Gespräche zu unterbrechen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein selbst gewähltes Vorgehen für die Fremdauswertung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Fremdes Modell prüfen; Gespräche parallel",
+          "minutes": 70,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 30,
+              "text": "Reproduktionsprüfung: Stellen Sie das fremde Projekt in einem privaten Browserfenster wieder her. Laden Sie Daten und trainieren Sie A/B einmal mit den Einstellungen des Originals und Startwert 11 nach. Wiederholen Sie den Abschlusstest mit der ursprünglichen Auswahl. Vergleichen Sie Datenprüfsumme und Werte mit dem Protokoll. Dokumentieren Sie kurz, was übereinstimmt, abweicht oder nicht prüfbar ist. Dies ist der erste Teil der unbenoteten Fremdauswertung."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 25,
+              "text": "Fremdtest und Rückmeldung: Lassen Sie das nachtrainierte fremde Modell Ihre eigenen Klassen C/D beurteilen. Lesen Sie Tabelle, Trennschärfe und konkrete Beispiele. Begründen Sie «Wie gut?» und «Warum?» mit mindestens zwei möglichen Erklärungen und einer Grenze. Formulieren Sie eine Rückmeldung an das andere Tandem und sichern Sie sie im bestehenden Fremdtest-Protokoll."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 15,
+              "text": "Puffer für Gesprächsunterbrechung, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim Aufruf pausieren Sie. Im Fachgespräch erklären beide das eigene Projekt, eine Entscheidung, ein Ergebnis samt Grenze und einen neuen Fall. Bei nicht lösbarem Trainingsproblem werten Sie die gespeicherten fremden Ausgaben und Beispiele aus und dokumentieren, was nicht reproduziert werden konnte; keinen erfolgreichen Test behaupten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein Fachgespräch und eine belegte Fremdauswertung; der eigene Abgabestand bleibt unverändert."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Rückmeldung sichern",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Gesicherte Rückmeldung und eine Transferfrage; keine nachträgliche Änderung der bewerteten Abgabe."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "view": "sprache",
+      "title": "Wie entstehen Sprachmodelle?",
+      "rueckblick": "Im Bildprojekt haben Sie Vorhersagen und deren Grenzen geprüft. Heute untersuchen Sie Vorhersagen für Sprache.",
+      "goal": "Den Einfluss von Kontext untersuchen und ein Wortfolgemodell von einem neuronalen Sprachmodell unterscheiden.",
+      "question": "Warum ist eine plausible Fortsetzung nicht automatisch wahr?",
+      "motivation": "Sprachmodelle können überzeugend schreiben, ohne die Richtigkeit einer Aussage zu prüfen.",
+      "product": "Ein dokumentierter Kontextvergleich, ein plausibles und ein problematisches Beispiel sowie zwei Grenzen der Analogie.",
+      "arbeitsweg": "Die Lehrperson legt einen digitalen Arbeitsweg fest: ausgewählte Papagei-Stationen oder Soekia. Nur das dazu passende Protokoll ausfüllen. Die andere Strecke bleibt freiwillig; die Lernziele bleiben gleich.",
+      "zeit": "Ein digitaler Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia, nicht beides als Pflicht. 10 Minuten Puffer im Arbeitsblock. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Eine Fortsetzung vermuten",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Ergänzen Sie «Heute gehen wir …» auf zwei Arten. Vergleichen Sie, welche Fortsetzung plausibel wirkt und ob Sie wissen können, dass sie wahr ist."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Zwei Fortsetzungen und eine erste Unterscheidung von plausibel und wahr."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Kontext auf Papier",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Schreiben Sie abwechselnd je ein Wort zu demselben Satzanfang. Lassen Sie einmal nur die letzten zwei, einmal die letzten vier Wörter sichtbar. Vergleichen Sie die kurzen Texte und sichern Sie eine Beobachtung. Das illustriert Kontext, nicht Modelltraining."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein erster Kontextvergleich."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Vom Wortfolgemodell zum Netz",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Erklärt zusammenhängend das Papagei-Modell: Häufigkeiten von Wortfolgen liefern Fortsetzungen. Zeigt danach die Grafik «Papagei-Modell und neuronales Sprachmodell»: gleiches Ziel, nächstes Token vorhersagen, aber trainierte Gewichte, Zahlendarstellungen ähnlicher Wörter und grösserer Kontext statt blosser Häufigkeitstabelle. Beide Verfahren garantieren keine Wahrheit. Nennt einen digitalen Arbeitsweg und die passenden Pflichtstationen; die Alternative dient nur bei Bedarf."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein Modellverständnis als Grundlage für den Vergleich."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Ein Werkzeug gründlich untersuchen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 40,
+              "text": "Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Puffer für Zugang, Experiment und Interpretation. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein belegter Vergleich und zwei kritisch eingeordnete Beispiele."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Plausibilität und Wahrheit trennen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 7,
+              "text": "Erklären Sie anhand Ihrer Beispiele, warum eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Papagei-Tabelle und neuronalem Sprachmodell und eine gemeinsame Grenze."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 3,
+              "text": "Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen einer falschen, aber überzeugenden Ausgabe?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine eigene Erklärung von Verfahren und Grenzen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "view": "gesellschaft",
+      "title": "Wer trägt die Folgen?",
+      "rueckblick": "Bild- und Sprachmodelle liefern Vorhersagen, keine Garantien. Heute prüfen Sie die Folgen von Entscheidungen auf dieser Grundlage.",
+      "goal": "Ein Modell mit Opacity, Scale und Damage prüfen, eine Rückkopplung erklären und eine überprüfbare Massnahme mit Zielkonflikt begründen.",
+      "question": "Sind gleiche Regeln automatisch fair?",
+      "motivation": "Entscheidungen mit KI betreffen Menschen. Ein begründetes Urteil braucht einen konkreten Fall, Belege und einen Blick auf die Folgen.",
+      "product": "Ein begründetes Fallurteil mit WMD-Check, Rückkopplung, Massnahme und Zielkonflikt sowie ein kurzer persönlicher Kursrückblick.",
+      "arbeitsweg": "Ein Fall in derselben Gruppe: Kriterien, Rückkopplung, stärkstes Pro- und Gegenargument, Urteil. Die Debattenfragen sind Gesprächshilfe, kein zusätzlicher Auftrag; nur zentrale Stichworte festhalten.",
+      "zeit": "Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock. Keine zusätzliche Pro/Contra-Raumaufteilung. 10 Minuten Puffer im Arbeitsblock. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Eine erste Position",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Beziehen Sie am Platz Position zur These «Gleiche Regeln sind automatisch fair» und notieren Sie einen Grund."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine persönliche Ausgangsposition."
             }
           ]
         },
@@ -1296,104 +1118,90 @@
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "text": "Wählen Sie ein Datenproblem aus Ihrem Bildprojekt oder dem Fremdtest, zum Beispiel gleicher Hintergrund je Klasse oder zu wenige Exemplare, und schreiben Sie in einem Satz, welche Folge es für eine betroffene Person hätte, wenn das Modell im Alltag eingesetzt würde."
+              "wer": "Gruppe",
+              "min": 5,
+              "text": "Wählen Sie eine Beobachtung aus Bildprojekt, Fremdauswertung oder Sprachmodell und nennen Sie eine mögliche Folge für Betroffene."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein Satz «Datenproblem → Folge»."
+              "text": "Eine Verbindung zwischen Modellgrenze und gesellschaftlicher Folge."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Cathy O’Neils TED Talk",
-          "minutes": 15,
+          "titel": "O’Neils Warnung verstehen",
+          "minutes": 20,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Zeigt Cathy O’Neils Video (ca. 13 Min.). Beobachtungsauftrag: Notieren Sie ein genanntes Beispiel mit Zeitmarke und fragen Sie: Wer entscheidet, wer profitiert, wer ist betroffen? Wie wäre es, wenn Betroffene die Entscheidung prüfen könnten?"
+              "text": "Zeigt Cathy O’Neils TED Talk mit Beobachtungsauftrag: ein Beispiel, wer entscheidet, wer betroffen ist und ob Betroffene die Entscheidung prüfen können."
             },
             {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 2,
-              "text": "Sichern Sie Ihre Beispiele stichwortartig."
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 7,
+              "text": "Klärt Opacity, Scale und Damage an einem Video-Beispiel und erklärt eine Rückkopplung. Die Lernenden ergänzen nur Stichworte. Keine separate Schreib- oder Wechselphase."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein Beispiel mit Beleg und Stichworten."
+              "text": "Ein Video-Beleg und gemeinsame Prüfkriterien."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "WMD-Check, Rückkopplung und Debatte",
+          "titel": "Einen Fall gründlich beurteilen",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "min": 15,
-              "text": "WMD-Check im Gespräch: Wählen Sie einen der drei Fälle (Bewerbungen, Schule, Kredit). Beurteilen Sie ein Beispiel aus dem Video, Ihren Fall und Ihr eigenes Bildprojekt mit Opacity (intransparent), Scale (skaliert) und Damage (Schaden). Tragen Sie die Stufen ein und entscheiden Sie: WMD, teilweise oder keine WMD? Warum ist das Bildprojekt wahrscheinlich keine WMD?"
+              "min": 35,
+              "text": "Bleiben Sie in derselben Gruppe und wählen Sie Bewerbungen, Schule oder Kredit. Prüfen Sie Ihren Fall mit Opacity, Scale und Damage, erzählen Sie seine Rückkopplung und entwickeln Sie eine konkrete Massnahme mit Erfolgskriterium und Zielkonflikt. Vergleichen Sie kurz mit einem Video-Beispiel und dem Bildprojekt: Warum ist das Schulprojekt wahrscheinlich keine WMD? Prüfen Sie O’Neils Aussage an Ihrem Fall: stärkstes Argument dafür, stärkstes Gegenargument, gemeinsames Urteil. Nutzen Sie die Leitfragen der Debatte als Gesprächshilfe; halten Sie nur zentrale Stichworte fest."
             },
             {
               "art": "Auftrag",
               "wer": "Gruppe",
               "min": 10,
-              "text": "Rückkopplung im Gespräch: Erzählen Sie an Ihrem Fall die Schleife Modell entscheidet → Realität verändert sich → neue Daten → Modell bestätigt sich in vier Sätzen. Warum erfährt das Modell nie, was aus den Abgelehnten geworden wäre? Wo können Sie die Schleife unterbrechen?"
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Klasse",
-              "min": 20,
-              "text": "Debatte «Cathy O’Neil kritisch lesen»: Die Klasse teilt sich in Pro («Warnung überzeugend, Forderung richtig») und Contra («Warnung zugespitzt, Modelle können besser sein als Menschen, Forderung hat Nebenwirkungen»). 5 Minuten Argumente sammeln anhand der Leitfragen (Wer spricht? Welche Beispiele fehlen? Womit vergleicht sie? Was ist belegt? Welche Nebenwirkungen?), 10 Minuten abwechselnder Austausch, 4 Minuten Seitenwechsel: Jede Person nennt das stärkste Argument der anderen Seite."
+              "text": "Puffer für Diskussion, Rückfragen und das Fallurteil. Keine weitere Fallanalyse oder separate Debatte als Zusatzpflicht."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein WMD-Check mit Begründung, eine erzählte Rückkopplung und das stärkste Argument der Gegenseite."
+              "text": "Ein Fallurteil mit Belegen, Gegenargument und überprüfbarer Massnahme."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Mein Urteil und Rückblick",
-          "minutes": 20,
+          "titel": "Urteil und ruhiger Kursabschluss",
+          "minutes": 15,
           "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 7,
+              "text": "Besprechen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut; die Lehrperson fragt: Wer ändert was, und woran wäre die Verbesserung erkennbar?"
+            },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Beurteilen Sie die Anfangsthese neu und vergleichen Sie mit Ihrer ersten Position. Formulieren Sie für Ihren Fall eine konkrete Massnahme mit überprüfbarem Erfolgskriterium und einem verbleibenden Zielkonflikt."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Fragt bei allgemeinen Vorschlägen nach: Wer ändert was, und woran wäre die Verbesserung erkennbar?"
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Klasse",
-              "min": 10,
-              "text": "Rückblick auf den Themenblock: Nennen Sie reihum eine Erkenntnis aus dem Themenblock und eine Frage, die für Sie offen bleibt. Geben Sie der Lehrperson eine Rückmeldung zum Themenblock: Was hat am meisten gebracht, was würden Sie ändern?"
+              "text": "Notieren Sie kurz eine Erkenntnis, eine offene Frage und eine Rückmeldung zum KI-Block. Einzelne freiwillige Stimmen schliessen den Kurs ab; keine verpflichtende Runde aller Personen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein begründetes Urteil mit Massnahme, eine bestätigte oder veränderte Position und ein Rückblick auf den Themenblock."
+              "text": "Eine überprüfte Position und ein persönlicher Rückblick."
             }
           ]
         }
-      ],
-      "product": "Begründetes Urteil (WMD-Check, Rückkopplung, Debatte) mit Massnahme und Zielkonflikt sowie ein kurzer Rückblick auf den Themenblock.",
-      "motivation": "Programme entscheiden mit, etwa bei Empfehlungen, Bewerbungen oder Kreditprüfungen. Behandelt ein Modell bestimmte Gruppen schlechter, trägt jemand die Folgen. Heute prüfen Sie mit drei Kriterien, wann ein Modell gefährlich wird, erkennen, wie Modelle ihre eigenen Daten erzeugen können, und lesen die Kritik von Cathy O’Neil selbst kritisch: Ein Warnruf ist ein guter Anlass, genau hinzusehen, aber keine fertige Antwort.",
-      "zeit": "Letzte Lektion zum Thema KI: bewusst gesprächsorientiert, mit wenig Schreibarbeit. WMD-Check und Rückkopplung laufen mündlich in der Gruppe, die Dropdowns und Kurzfelder der Kursseite halten nur das Ergebnis fest. Die Debatte braucht keine Vorbereitung ausser den Leitfragen."
+      ]
     }
   ]
 }

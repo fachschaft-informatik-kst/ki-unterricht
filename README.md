@@ -13,15 +13,17 @@ Journal und Unterrichtsantworten werden auf der Webseite geschrieben und lokal g
 
 Ein Tandem arbeitet gemeinsam an einem Gerät; es gibt keine gleichzeitige Online-Zusammenarbeit. Beim Gerätewechsel eine ZIP-Sicherung mitnehmen. Foto-Upload im Notebook und Datendateien der Abgabeliste sind getrennt: die Fotostudio-JSON zusätzlich in die Abgabeliste aufnehmen. Nach einem Reload oder Import müssen Daten erneut ins laufende Python geladen werden. Training und Abschlusstest bleiben bewusst manuell.
 
-## Pflichtweg
+## Materialien und Arbeitswege
+
+Die Planung benennt je Doppellektion den Pflichtkern. Die folgenden Materialien sind kein vollständig abzuarbeitender Parcours.
 
 | Notebook | Zweck |
 |---|---|
 | Kursseite «Wie lernt KI?» | Memory-Aufträge und Link zur NIM-Lernstrecke bei inf-schule.de |
 | `perzeptron_und_neuronale_netze.ipynb` | Gewicht, Bias, ein Lernschritt, Grenze bei XOR |
 | `mehrschichtige_netze.ipynb` | XOR-Zwischenschicht, Lernen qualitativ, Brücke zu Bildmerkmalen |
-| `daten_training.ipynb` | Gruppentrennung, Datenlecks und vorsichtige Interpretation |
-| `ki_projekt/ki_lernlabor.ipynb` | 15 Minuten gemeinsamer Probelauf, optional 10 Minuten Zusatz (Auswahl und Abschlusstest) |
+| `daten_training.ipynb` | Hilfe zu Gruppentrennung, Datenlecks und eigenem Datenplan; kein zweiter vollständiger Pflichtdurchlauf in Doppellektion 4 |
+| `ki_projekt/ki_lernlabor.ipynb` | Orientierung nach Bedarf: 15 Minuten Probelauf, optionaler Zusatz; keine Pflichtwiederholung |
 | `ki_projekt/ki_tandemprojekt.ipynb` | Eigenes Projekt mit Anleitungen zu den fünf Webjournal-Reflexionen |
 
 Das Notebookprinzip ist immer: Vermutung → Experiment → Beobachtung → Erklärung. Codezellen enthalten wenige Aufrufe; nachvollziehbarer Hilfscode liegt in `unterricht_tools.py` und `ki_projekt/*_tools.py`.
@@ -44,7 +46,9 @@ Alle zehn Doppellektionen haben einen AVIVA-Ablauf mit 90 Minuten, Leitfrage und
 
 Vorhandene Grafiken zu Perzeptron und mehrschichtigem Netz sind auf der Seite und als portable Notebook-Anhänge eingebaut. Sieben nicht mehr benötigte Notebooks wurden entfernt: beide Startnotebooks, NIM, Ziffern, Symbolprojekt sowie lineare und logistische Regression. Alte Prüfungs- und Regressionsblätter liegen gekennzeichnet in `worksheets/archiv/`.
 
-Drei Startwerte sind eine optionale Erweiterung **vor** Testeinsicht, keine Voraussetzung für eine gute Note.
+Doppellektionen **5–8 sind als SOL-Phase** organisiert: In 5–7 planen die Tandems Tagesziele, Rollen, Tempo und Hilfen selbst. Die Etappen Datencheck → Vergleich → Auswahl → Test → Fazit sind keine festen Lektionstermine. Etappenplan und kurze Fortschrittsreflexion stehen im bestehenden Journal; kein zusätzliches Lerntagebuch. In Doppellektion 8 werten die übrigen Tandems parallel zu den Fachgesprächen ein fremdes Modell aus: ein Reproduktionslauf mit Startwert 11, Fremdtest und begründete Rückmeldung. Diese Fremdauswertung ist verbindlich, aber unbenotet; die eigene Abgabe bleibt unverändert.
+
+Drei Startwerte sind eine optionale Erweiterung **vor** Testeinsicht, auch bei der Fremdauswertung keine Pflicht. Die Grundlagen- und Transferlektionen haben klare Pflichtkerne, weniger Tool-/Sozialformwechsel und je zehn Minuten eingeplanten Puffer. Nicht jedes Kurskapitel oder Antwortfeld ist eine zusätzliche Pflichtaufgabe.
 
 ## Schneller Einstieg
 
