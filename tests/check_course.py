@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 root=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(root/'scripts'))
 from build_portal_notebooks import ITEMS
-from build_course import PHASES, update_sol_material
+from build_course import PHASES
 
 lessons=json.loads((root/'projekt/kurs.json').read_text())['lessons']
 assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,11)]
@@ -30,7 +30,7 @@ for answer in ['begriffe_saetze','begriffe']:
 assert 'in je einem eigenen Satz' in conclusion.select_one('.task').get_text()
 assert not re.search(r'\bSOL\b',soup.get_text()), 'Use concrete student-facing language instead of SOL'
 page=(root/'projekt/index.html').read_text()
-assert update_sol_material(page)==page, 'Repeated builds must not duplicate or change SOL guidance'
+assert len([d for d in soup.select('#projekt details') if d.find('summary', recursive=False) and d.find('summary', recursive=False).get_text(strip=True)=='Termine ansehen']) == 1, 'There must be exactly one project schedule'
 # Ablauftabellen stehen nur auf der Lehrpersonen-Seite, nicht auf der Kursseite.
 plans=BeautifulSoup((root/'projekt/unterrichtsplan.html').read_text(),'html.parser')
 assert not soup.select('.phase-table') and 'Unser Ablauf' not in soup.get_text() and 'Am Ende sichtbar' not in soup.get_text()
