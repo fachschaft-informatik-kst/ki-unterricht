@@ -70,7 +70,7 @@ def pretty_html(source):
                 continue
             if beginning:
                 # Already indented HTML text must not gain new indentation on reruns.
-                token=token.lstrip(" \t")
+                token=token.lstrip()
             emit(token)
             continue
         m=re.match(r"<\s*(/?)\s*([\w:-]+)",token)
