@@ -2,6 +2,7 @@
 from pathlib import Path
 import shutil,sys
 from fix_pyodide_lock import fix_lock
+from patch_pyodide_kernel import patch_bundle
 from build_previews import build_previews
 root=Path(__file__).resolve().parents[1]
 out=Path(sys.argv[1] if len(sys.argv)>1 else root/'dist')
@@ -17,3 +18,4 @@ shutil.copy(root/'content/unterricht_tools.py',out/'projekt/runtime/unterricht_t
 shutil.copy(root/'portal-index.html',out/'index.html')
 
 build_previews(out)
+patch_bundle(out)

@@ -63,6 +63,7 @@ jobs:
         run: |
           python tests/check_ki_basis.py
           python tests/check_pyodide_lock.py
+          python tests/check_kernel_compat.py
       - name: Build the JupyterLite site
         run: |
           python scripts/build_portal.py
