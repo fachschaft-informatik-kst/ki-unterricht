@@ -18,9 +18,12 @@ jobs:
           python-version: '3.12'
       - name: Format all source lessons
         run: |
-          for round in 1 2 3 4 5 6; do
-            python scripts/format_course_sources.py
-          done
+          python scripts/format_course_sources.py
+          cp kursseiten/projekt/000-einstieg.md /tmp/projekt-original.md
+          cp kursseiten/einstieg/010-einstieg-1.md /tmp/einstieg-original.md
+          python scripts/format_course_sources.py
+          diff -u /tmp/projekt-original.md kursseiten/projekt/000-einstieg.md | head -100 || true
+          diff -u /tmp/einstieg-original.md kursseiten/einstieg/010-einstieg-1.md | head -100 || true
           python scripts/format_course_sources.py --check
       - name: Commit formatted sources to branch
         run: |
