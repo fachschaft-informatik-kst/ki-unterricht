@@ -42,6 +42,7 @@ jobs:
           python scripts/build_portal_notebooks.py
           python tests/check_course.py
           python tests/check_portal_content.py
+          python tests/check_content_mvc.py
           jupyter lite build --contents content --output-dir dist
           python scripts/copy_portal.py dist
       - name: Check deployed notebook runtime in Chromium
@@ -51,6 +52,10 @@ jobs:
           /tmp/ki-browser/node_modules/.bin/playwright install --with-deps chromium
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_persistence.cjs
+      - name: Verify unchanged visual layout against PR 12
+        run: |
+          python scripts/prepare_visual_baseline.py dist
+          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_layout_regression.cjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

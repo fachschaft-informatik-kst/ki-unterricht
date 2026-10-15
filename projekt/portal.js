@@ -1,118 +1,13 @@
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
 const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1';
-const setChapterTitle=(detail,text)=>{(detail.querySelector('summary .kapitel-titel')||detail.querySelector('summary')).textContent=text;};
-const knowledgeCheck=[...document.querySelectorAll('#lernarten details')].find(detail=>detail.querySelector('#memory-board'));
-if(knowledgeCheck){
- setChapterTitle(knowledgeCheck,'Wissenssicherung: Lernarten zuordnen');
- knowledgeCheck.querySelector('.detail-body p').textContent='Ordnen Sie die Begriffe den passenden Rückmeldungen zu und begründen Sie jedes Paar. Dieser Check sichert das Gelernte; die Gruppenrunden mit Memory stehen darüber.';
-}
-const journalFields=all('[data-journal]');let answerFields=all('[data-answer]');
+// Content and permanent markup are authored only in kursseiten/.
+// Controller code below handles persistence, notebooks, ZIP and ephemeral widgets.
+const journalFields=all('[data-journal]'),answerFields=all('[data-answer]');
 let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=null,protocolSignature='',files=new Map(),db=null;
 let others={},filesStored=true,artifactStored=true,notebookDirty=false,notebookRevision=0;
 let saving=Promise.resolve(),notebookUpdates=Promise.resolve(),fileUpdates=Promise.resolve(),artifactVersion=0,transferring=false;
 const pending=new Map();
-const saveSection=$('sicherung');
-saveSection.classList.add('project-transfer');
-saveSection.querySelector('.section-label').textContent='Notizen & Projekt';
-saveSection.querySelector('h1').textContent='Alles herunterladen. Später weiterarbeiten.';
-saveSection.querySelector('.section-intro').textContent='Ein ZIP enthält Journal, Antworten, Projekt-Notebook mit Ausgaben, Protokoll, Ihre Eingaben in den Übungsnotebooks und hinzugefügte Dateien. Auf einem anderen Gerät laden Sie das ZIP hier wieder hoch.';
-saveSection.querySelector('.card h3').textContent='Dateien zum Projekt hinzufügen';
-saveSection.querySelector('.card .small').textContent='Im Notebook ausgewählte Dateien werden mitgesichert. Originalfotos und weitere Dateien hier hinzufügen. Eine Sammlung im Fotostudio zuerst herunterladen und hier hinzufügen.';
-$('download-submission').textContent='Abgabepaket herunterladen ↓';
-$('download-backup').textContent='Notizen & Projekt herunterladen ↓';
-saveSection.querySelector('label[for="restore-package"]').textContent='Notizen & Projekt wiederherstellen ↑';
-const transferActions=saveSection.querySelector('.actions');transferActions.classList.add('project-transfer-actions');
-const transferPrimary=document.createElement('div');transferPrimary.className='project-transfer-primary';
-const submissionAction=document.createElement('div');submissionAction.className='project-submission-action';
-const submissionLabel=document.createElement('p');submissionLabel.className='small';submissionLabel.textContent='Für die formelle Abgabe:';
-const projectDownload=$('download-backup'),projectRestore=saveSection.querySelector('label[for="restore-package"]'),restoreInput=$('restore-package'),submissionDownload=$('download-submission');
-projectDownload.className='btn primary';projectRestore.className='btn';submissionDownload.className='btn';
-transferPrimary.append(projectDownload,projectRestore);submissionAction.append(submissionLabel,submissionDownload);transferActions.replaceChildren(transferPrimary,submissionAction,restoreInput);
-saveSection.querySelector('.actions').nextElementSibling.nextElementSibling.textContent='Der Download übermittelt nichts automatisch. Das Hochladen ersetzt den aktuellen Browserstand. Laden Sie nach jeder Arbeitsphase eine ZIP herunter und bewahren Sie sie ausserhalb des Browsers auf.';
-all('a[href="#sicherung"]').forEach(link=>link.textContent='Notizen & Projekt');
-const projectGoalCard=all('#lernziele .card').find(card=>card.querySelector('h2')?.textContent.trim()==='Das Bildprojekt untersuchen');
-if(projectGoalCard)projectGoalCard.querySelector('.section-label').textContent='05–08';
-const projectTransferNote=all('#journal p').find(paragraph=>paragraph.textContent.includes('Ein gemeinsamer Stand auf einem Gerät'));
-if(projectTransferNote)projectTransferNote.textContent='Ein gemeinsamer Stand auf einem Gerät. Für Gerätewechsel Notizen und Projekt herunterladen und später unter «Notizen & Projekt» wiederherstellen.';
-function embeddedLearningPath(url,title,linkText){
- const figure=document.createElement('figure');figure.className='external-map';
- const frame=document.createElement('iframe');frame.src=url;frame.title=title;frame.loading='lazy';frame.referrerPolicy='strict-origin-when-cross-origin';
- const caption=document.createElement('figcaption');caption.append(title+' · ');
- const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=linkText;
- caption.append(link);figure.append(frame,caption);return figure;
-}
-const learningTypes=document.getElementById('lernarten');
-const systemsOverview=document.createElement('section');systemsOverview.className='learning-system-overview';
-const systemsHeading=document.createElement('h2');systemsHeading.textContent='Wissensbasiert oder lernend?';
-const systemsLead=document.createElement('p');systemsLead.className='section-intro';systemsLead.textContent='Woher kommt die Entscheidungsregel: von Menschen oder aus Beispielen und Daten?';
-const systemsGrid=document.createElement('div');systemsGrid.className='grid two';
-const ruleCard=document.createElement('article');ruleCard.className='card';
-const ruleHeading=document.createElement('h3');ruleHeading.textContent='Wissensbasiert · Regeln anwenden';
-const ruleText=document.createElement('p');ruleText.textContent='Menschen legen Fakten und Wenn-dann-Regeln fest. Das System wendet sie an, lernt aber nicht selbst aus Beispielen. Beispiel: ein Fragespiel, das mit Ja-Nein-Fragen Schritt für Schritt zum Ergebnis führt, wie ein Entscheidungsbaum.';
-const taskList=items=>{const box=document.createElement('div'),label=document.createElement('p'),strong=document.createElement('strong'),list=document.createElement('ol');strong.textContent='Aufgabe · Tandem · 5 Min.';label.append(strong);for(const text of items){const item=document.createElement('li');item.textContent=text;list.append(item);}box.append(label,list);return box;};
-const ruleLink=document.createElement('a');ruleLink.href='https://en.akinator.com/';ruleLink.target='_blank';ruleLink.rel='noopener noreferrer';ruleLink.textContent='Akinator spielen ↗';
-const ruleTask=taskList(['Spielen Sie zwei Runden mit einer ausgedachten Figur, keine Person aus Ihrem Umfeld.','Notieren Sie drei Fragen des Systems und wie Ihre Antwort jeweils die nächste Frage bestimmt.','Wählen Sie nun eine erfundene oder sehr unbekannte Figur: Was geschieht?','Wer hat festgelegt, welche Fragen überhaupt möglich sind?']);
-const answerField=(key,text,placeholder)=>{const field=document.createElement('label'),label=document.createElement('span'),area=document.createElement('textarea');field.className='field answer';label.textContent=text;area.dataset.answer=key;area.maxLength=10000;area.rows=3;area.placeholder=placeholder;field.append(label,area);return field;};
-const ruleAnswers=[answerField('wissen_fragen','Drei Fragen des Systems und wie Ihre Antwort jeweils die nächste Frage bestimmt:','Frage 1 → meine Antwort → nächste Frage …'),answerField('wissen_unbekannt','Was geschieht bei einer erfundenen oder sehr unbekannten Figur?','Das System …'),answerField('wissen_regeln','Wer hat festgelegt, welche Fragen überhaupt möglich sind? Warum lernt das System hier nicht selbst?','Die Fragen …')];
-const ruleNote=document.createElement('p');ruleNote.className='small muted';ruleNote.textContent='Akinator nutzt im Hintergrund auch frühere Antworten. Betrachten Sie hier nur den Ablauf Frage, Antwort, nächste Frage.';
-ruleCard.append(ruleHeading,ruleText,ruleLink,ruleTask,...ruleAnswers,ruleNote);
-const learningCard=document.createElement('article');learningCard.className='card';
-const learningHeading=document.createElement('h3');learningHeading.textContent='Lernend · Muster aus Daten';
-const learningText=document.createElement('p');learningText.textContent='Das System baut aus Beispielen einen Erfahrungsschatz auf. Neue Daten können ihn verändern und dadurch auch seine Entscheidungen. Beispiel: Filmempfehlungen eines Streamingdienstes (z. B. Netflix).';
-const learningLink=document.createElement('a');learningLink.href='https://pair-code.github.io/tsne-visual-recommender/';learningLink.target='_blank';learningLink.rel='noopener noreferrer';learningLink.textContent='Filmempfehlungen in neuem Tab öffnen ↗';
-const learningTask=taskList(['Öffnen Sie die Filmlandkarte, suchen Sie einen Film, den Sie kennen, und klicken Sie ihn an.','Vergleichen Sie die «Nearest Neighbors»: Was haben sie gemeinsam?','Färben Sie die Punkte nach «Genre», dann nach «Predicted User Rating (SVD)» und wechseln Sie den «User Index»: Was verändert sich?','Aus welchen Daten könnte das System diese Muster gelernt haben?']);
-const learningAnswers=[answerField('lernend_nachbarn','Was haben die «Nearest Neighbors» Ihres Films gemeinsam?','Die Nachbarn …'),answerField('lernend_aendert','Was verändert sich beim Färben nach «Genre» und «Predicted User Rating» und beim Wechsel des «User Index»?','Es verändert sich …'),answerField('lernend_daten','Aus welchen Daten könnte das System diese Muster gelernt haben?','Vermutlich aus …')];
-learningCard.append(learningHeading,learningText,learningLink,learningTask,...learningAnswers);systemsGrid.append(ruleCard,learningCard);
-const evaFigure=document.createElement('figure');evaFigure.className='concept-figure learning-system-figure';
-const evaImage=document.createElement('img');evaImage.src='https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png';evaImage.alt='EVA-Prinzip eines lernenden Systems: Eine Eingabe wird mit dem Erfahrungsschatz verarbeitet; die Ausgabe kann den Erfahrungsschatz erweitern.';evaImage.loading='lazy';
-const evaCaption=document.createElement('figcaption');evaCaption.textContent='Ein lernendes System verarbeitet Eingaben mit seinem Erfahrungsschatz. Neue Erfahrungen können ihn verändern.';evaFigure.append(evaImage,evaCaption);
-const hybridNote=document.createElement('p');hybridNote.className='small muted';hybridNote.textContent='In der Praxis können feste Regeln und Lernen aus Daten auch kombiniert werden.';
-systemsOverview.append(systemsHeading,systemsLead,systemsGrid,evaFigure,hybridNote);
-// Jede Karte kommt in ihr eigenes Kapitel, damit alle Teile in der Navigation stehen.
-const introMount=$('lernarten-intro'),ruleMount=$('lernarten-wissen'),learnMount=$('lernarten-lernend');
-if(introMount&&ruleMount&&learnMount){introMount.append(evaFigure,hybridNote);ruleMount.append(ruleCard);learnMount.append(learningCard);}else learningTypes.querySelector('.lesson-steps').before(systemsOverview);
-answerFields=all('[data-answer]');
-const learningExamples=[
- {title:'Überwacht · mit Labels',description:'Das System lernt mit Beispielen und den richtigen Kategorien. Danach ordnet es neue Beispiele zu.',links:[
-  {href:'https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2',text:'Smiley-Spiel: fröhlich oder traurig? · inf-schule'},
-  {href:'https://quickdraw.withgoogle.com/',text:'Quick, Draw! Zeichnungen erkennen lassen'}
- ],note:'Quick, Draw! kann Zeichnungen zum öffentlichen Datensatz beitragen. Keine Namen oder persönlichen Motive zeichnen.'},
- {title:'Unüberwacht · ohne Labels',description:'Ohne vorgegebene Kategorien gruppiert das System ähnliche Punkte. Farben und Mittelpunkte zeigen, wie sich die Gruppen verändern.',links:[
-  {href:'https://www.naftaliharris.com/blog/visualizing-k-means-clustering/',text:'K-Means-Visualisierung öffnen'}
- ],note:'Zum Einstieg «Gaussian Mixture» wählen und beobachten, wie die Punkte den Mittelpunkten zugeordnet werden.'},
- {title:'Verstärkend · mit Rückmeldung',description:'Auf eine Handlung folgt eine Rückmeldung. Im NIM-Spiel verändert sie, welche Züge das System später wählt.',links:[
-  {href:'https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke',text:'NIM-Lernstrecke bei inf-schule öffnen ↗'}
- ]}
-];
-const learningCards=learningTypes.querySelectorAll('.lesson-steps article');
-learningCards.forEach((card,index)=>{
- const example=learningExamples[index];
- card.querySelector('b').textContent=example.title;
- card.querySelector('p').textContent=example.description;
- const links=document.createElement('div');links.className='learning-example-links';
- for(const item of example.links){const link=document.createElement('a');link.href=item.href;link.textContent=item.text;if(item.href.startsWith('https:')){link.target='_blank';link.rel='noopener noreferrer';}links.append(link);}
- card.append(links);
- if(example.note){const note=document.createElement('p');note.className='learning-example-note';note.textContent=example.note;card.append(note);}
-});
-const language=document.getElementById('sprache');
-const papageiPath=embeddedLearningPath('https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke','Papagei-Lernstrecke von inf-schule.de','Lernstrecke in neuem Tab öffnen');
-const pathIntro=document.createElement('div');pathIntro.className='learning-path-intro';
-const pathHeading=document.createElement('h2');pathHeading.textContent='Wie entsteht ein Text?';
-const pathDescription=document.createElement('p');pathDescription.textContent='Die Lernstrecke führt vom Papagei-Prinzip zur Vorhersage von Wortfolgen. Vergleichen Sie die Beispiele mit dem Papierexperiment oben.';
-pathIntro.append(pathHeading,pathDescription);papageiPath.prepend(pathIntro);
-const papageiMount=$('papagei-placeholder');if(papageiMount)papageiMount.replaceWith(papageiPath);
-$('sprache-2').querySelector('.lesson-steps article p').textContent='Bearbeiten Sie die eingebettete Lernstrecke. Variieren Sie Kontext oder Wortwahl und halten Sie Beobachtungen fest.';
-const turing=document.createElement('aside');turing.className='turing-activity';
-const turingHeading=document.createElement('h2');turingHeading.textContent='Turing-Test: Mensch oder KI?';
-const turingDescription=document.createElement('p');turingDescription.textContent='Human or Not ist ein kurzes Live-Chat-Spiel: Entscheiden Sie nach dem Gespräch, ob Sie mit einem Menschen oder einem KI-Bot geschrieben haben. Ein einzelner Versuch ist kein Beweis dafür, dass eine KI menschlich denkt.';
-const privacyNote=document.createElement('p');privacyNote.className='small';privacyNote.textContent='Sie chatten mit fremden Teilnehmenden. Keine persönlichen Angaben teilen; nur nach Freigabe der Lehrperson spielen.';
-const turingLink=document.createElement('a');turingLink.className='btn primary';turingLink.href='https://humanornot.so/start-search';turingLink.target='_blank';turingLink.rel='noopener noreferrer';turingLink.textContent='Human or Not extern öffnen';
-turing.append(turingHeading,turingDescription,privacyNote,turingLink);
-const turingMount=$('turing-mount');if(turingMount){turingHeading.remove();turingMount.replaceWith(turing);}else papageiPath.after(turing);
-language.querySelector('[data-answer="sprache"]').previousElementSibling.textContent='Erklären Sie anhand Ihrer zwei Texte in drei Sätzen: Was gelang, was war problematisch, und warum garantiert Plausibilität keine Richtigkeit? Nennen Sie zwei Grenzen des vereinfachten Papagei-Modells.';
-const papageiLink=language.querySelector('#sprache-7 a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke"]');
-if(papageiLink){const materials=papageiLink.closest('details');papageiLink.remove();setChapterTitle(materials,'Papierexperiment von inf-schule');}
 const status=(message,error=false)=>{$('portal-save-status').textContent=message;$('portal-save-status').classList.toggle('save-error',error);};
 function checkNotebook(nb){
  if(nb?.nbformat!==4||!Array.isArray(nb.cells)||nb.cells.filter(c=>!c.metadata?.['ki-journal-export']).length>200||JSON.stringify(nb).length>50000000||nb.cells.some(c=>!['code','markdown','raw'].includes(c.cell_type)))throw Error('Ungültiges oder zu grosses Notebook.');
@@ -377,7 +272,7 @@ $('restore-package').addEventListener('change',async e=>{
  }catch(error){$('download-status').textContent='Import fehlgeschlagen: '+error.message;}finally{e.target.value='';transferring=false;}
 });
 // A small matching activity, deliberately separate from the assessed project.
-const pairs=[['Überwachtes Lernen','Beispiele mit richtiger Antwort'],['Unüberwachtes Lernen','Gruppen ohne vorgegebene Antworten'],['Verstärkendes Lernen','Erfolg oder Misserfolg nach Handlungen']];
+const pairs=JSON.parse($('memory-pairs').textContent);
 let flipped=[],locked=false,matches=0,memoryTimer;
 function memory(){clearTimeout(memoryTimer);flipped=[];locked=false;matches=0;const cards=pairs.flatMap((p,i)=>p.map(text=>({text,pair:i})));for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]];}$('memory-board').replaceChildren();$('memory-status').textContent='Drehen Sie zwei Karten um.';for(const card of cards){const b=document.createElement('button');b.className='memory-card';b.textContent='?';b.setAttribute('aria-label','Verdeckte Karte');b.addEventListener('click',()=>{if(locked||b.classList.contains('revealed')||b.classList.contains('matched'))return;b.classList.add('revealed');b.textContent=card.text;b.setAttribute('aria-label',card.text);flipped.push({b,pair:card.pair});if(flipped.length===2){if(flipped[0].pair===flipped[1].pair){flipped.forEach(x=>{x.b.classList.add('matched');x.b.disabled=true;});flipped=[];matches++;$('memory-status').textContent=matches===3?'Alle Paare gefunden. Begründen Sie die Zuordnung.':matches+' von 3 Paaren gefunden.';}else{locked=true;$('memory-status').textContent='Dieses Paar passt noch nicht zusammen.';memoryTimer=setTimeout(()=>{flipped.forEach(x=>{x.b.classList.remove('revealed');x.b.textContent='?';x.b.setAttribute('aria-label','Verdeckte Karte');});flipped=[];locked=false;},1000);}}});$('memory-board').append(b);}}
 $('memory-reset').addEventListener('click',memory);memory();

@@ -56,7 +56,7 @@ for a in soup.select('a[href^="#"]'):
 for img in soup.select('img'):
     assert img.get('alt'), img
     src=img['src']
-    assert (root/'projekt'/src).is_file() or src in ['previews/perzeptron.png','previews/xor.png','previews/datenplan.png'], src
+    assert (root/'projekt'/src).is_file() or src in ['previews/perzeptron.png','previews/xor.png','previews/datenplan.png','https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png'], src
 assert {p.name for p in (root/'content/portal').glob('*.ipynb')}=={Path(p).name for p in ITEMS}
 originals={str(p.relative_to(root/'content')) for p in (root/'content').rglob('*.ipynb') if 'portal' not in p.parts and '.ipynb_checkpoints' not in p.parts}
 assert originals==set(ITEMS), originals
