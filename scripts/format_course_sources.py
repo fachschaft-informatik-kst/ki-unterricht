@@ -71,7 +71,12 @@ def pretty_html(source):
             if beginning:
                 # Already indented HTML text must not gain new indentation on reruns.
                 token=token.lstrip()
-            emit(token)
+            # Trailing indentation after a text node is source formatting, not
+            # prose. Keeping it would add one blank line on every formatter pass.
+            if re.search(r"\n[ \t]*$",token):
+                token=token.rstrip()
+            if token:
+                emit(token)
             continue
         m=re.match(r"<\s*(/?)\s*([\w:-]+)",token)
         if not m:

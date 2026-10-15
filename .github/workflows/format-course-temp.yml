@@ -19,11 +19,6 @@ jobs:
       - name: Format all source lessons
         run: |
           python scripts/format_course_sources.py
-          cp kursseiten/einstieg/010-einstieg-1.md /tmp/chapter-before.md
-          cp kursseiten/projekt/030-projekt-3.md /tmp/project-before.md
-          python scripts/format_course_sources.py
-          diff -u /tmp/chapter-before.md kursseiten/einstieg/010-einstieg-1.md | head -120 || true
-          diff -u /tmp/project-before.md kursseiten/projekt/030-projekt-3.md | head -120 || true
           python scripts/format_course_sources.py --check
       - name: Commit formatted sources to branch
         run: |
