@@ -70,7 +70,9 @@ for key in ['kst-ki-kursportal-v1', 'data-answer', 'data-journal', 'download-bac
 for key in ['ki-projekt-seitenstand-v1', 'data-check', 'data-skill']:
     assert key in progress, key
 for notebook in ["perzeptron_und_neuronale_netze.ipynb", "mehrschichtige_netze.ipynb",
-                 "daten_training.ipynb", "ki_lernlabor.ipynb", "ki_tandemprojekt.ipynb"]:
-    assert notebook in rendered and notebook in js or notebook in rendered, notebook
+                 "daten_training.ipynb", "ki_lernlabor.ipynb"]:
+    assert notebook in rendered, notebook
+assert (ROOT / "content/ki_projekt/ki_tandemprojekt.ipynb").is_file()
+assert "projectName" in js and "showNotebook(projectName" in js
 
 print("PASS lossless assembled course, stable form keys, Markdown authoring, export/import hooks")
