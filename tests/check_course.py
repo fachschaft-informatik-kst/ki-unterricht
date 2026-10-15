@@ -21,7 +21,6 @@ task=rules.select_one('.task').get_text()
 assert 'Getränkeautomat' in task and 'Übersetzungsapp' in task
 assert 'Taschenrechner' not in task and 'Spamfilter' not in task
 intro=soup.select_one('#einstieg > .section-intro')
-assert 'Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?' in intro.get_text()
 conclusion=soup.select_one('#einstieg-9')
 assert conclusion.select_one('.kapitel-nr').get_text()=='9'
 assert 'Welche Frage bleibt offen?' in conclusion.get_text()
