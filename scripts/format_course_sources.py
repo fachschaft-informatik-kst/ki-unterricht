@@ -68,6 +68,9 @@ def pretty_html(source):
         if not token.startswith("<"):
             if token.isspace() and ("\n" in token or beginning):
                 continue
+            if beginning:
+                # Already indented HTML text must not gain new indentation on reruns.
+                token=token.lstrip(" \t")
             emit(token)
             continue
         m=re.match(r"<\s*(/?)\s*([\w:-]+)",token)
