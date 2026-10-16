@@ -14,7 +14,7 @@ Hier findest du **alles für die Vorbereitung und den direkten Einsatz im Unterr
 - [Grafik: KI, ML und Deep Learning](grafiken/ki_einteilung.png) · [Begriffe und Beispiele](index.html#einstieg-2)
 - [Schwache/starke KI und vier Typen](index.html#einstieg-4)
 - [Asimovs drei Gesetze und Fall «Schulweg»](index.html#einstieg-5) · [Trolley-Grafik](grafiken/trolley_problem.svg)
-- [Musterantworten zur Doppellektion](musterloesungen/#doppellektion-1-was-ist-ki-doppellektion-1)
+- [Musterantworten für die Lehrperson](musterloesungen/)
 
 ### Druckvorlage: Zwei Saugroboter – Impuls für den Beamer (5 Min.)
 
@@ -154,7 +154,7 @@ Hier findest du **alles für die Vorbereitung und den direkten Einsatz im Unterr
 ### Direkt öffnen
 
 - [Projektauftrag und visualisierte Trainingspipeline](index.html#projekt) · [Arbeitsschritte](index.html#projekt-1)
-- [Foto-Studio öffnen](studio/) · [Fotoanleitung (.md)](materialien/downloads/ki_fotodaten.md)
+- [Fotostudio im Kursportal öffnen](index.html#journal) · [Fotoanleitung (.md)](materialien/downloads/ki_fotodaten.md)
 - [Tandem-Notebook im Journal](index.html#journal) · [Tandem-Notebook herunterladen](materialien/downloads/ki_tandemprojekt.ipynb)
 - [Lernlabor herunterladen (.ipynb)](materialien/downloads/ki_lernlabor.ipynb)
 - [Bewertungsraster im Kurs](index.html#bewertung) · [Bewertungsraster als Datei (.md)](materialien/downloads/KI_Bewertungsraster.md)
