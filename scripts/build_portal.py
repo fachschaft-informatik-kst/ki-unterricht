@@ -56,6 +56,37 @@ def assemble() -> str:
     found = re.findall(r"<!-- CONTENT:([a-z0-9-]+) -->", page)
     if found != sections:
         raise ValueError(f"Template sections mismatch: {found!r} != {sections!r}")
+    # Added lessons have their own view and chapter directory; legacy sections
+    # keep their stable IDs and links. A new lesson needs no template edit.
+    lessons = json.loads((PORTAL / "kurs.json").read_text(encoding="utf-8"))["lessons"]
+    extra = [l for l in lessons if l["view"] not in sections]
+    ids = [l["view"] for l in extra]
+    if len(ids) != len(set(ids)):
+        raise ValueError("New lessons must each have their own view")
+    extra_html = []
+    for lesson in extra:
+        view = lesson["view"]
+        if not re.fullmatch(r"dl-[0-9]{2}", view) or view != f'dl-{lesson["id"]}':
+            raise ValueError(f"Invalid additional lesson view: {view}")
+        folder = PAGES / view
+        files = sorted(folder.glob("*.md"))
+        if not files:
+            raise ValueError(f"New lesson {view} needs at least one chapter")
+        content = "".join(render_fragment(p.read_text(encoding="utf-8"), p) for p in files)
+        extra_html.append(
+            f'<section class="section" id="{view}">'
+            f'<h2>Doppellektion {int(lesson["id"])} · {html.escape(lesson["title"])}</h2>'
+            f'<!-- LESSONS:{view} --><!-- /LESSONS:{view} -->'
+            f'{content}</section>')
+    if extra_html:
+        navigation = "".join(
+            f'<a href="#{l["view"]}"><span>{l["id"]}</span>{html.escape(l["title"])}</a>'
+            for l in extra)
+        page = page.replace('</nav><div class="sidebar-bottom">',''.join([navigation,'</nav><div class="sidebar-bottom">']),1)
+        anchor = '<footer class="footer">'
+        if page.count(anchor) != 1:
+            raise ValueError("Course footer insertion point not found")
+        page = page.replace(anchor, "".join(extra_html)+anchor, 1)
     for section in sections:
         folder = PAGES / section
         files = sorted(folder.glob("*.md"))

@@ -53,7 +53,7 @@ async function load(path){
 async function refresh(){
   const data=await api("/api/chapters");
   state.chapters=data.chapters.sort((a,b)=>a.path.localeCompare(b.path));
-  const valid=[...new Set(state.chapters.map(c=>c.path.split("/")[1]))].filter(x=>sections.includes(x));
+  const valid=[...new Set(state.chapters.map(c=>c.path.split("/")[1]))].filter(x=>sections.includes(x)||/^dl-\d{2}$/.test(x));
   const previous=$("section").value;
   $("section").replaceChildren();
   for(const value of valid){const option=document.createElement("option");option.value=value;option.textContent=value;$("section").append(option);}
@@ -128,6 +128,9 @@ function addChapter(){
 function stage(){
   const c=state.current;if(!c)throw Error("Kein Kapitel geladen.");
   const content=$("source").value;if(!content.trim())throw Error("Kapitel darf nicht leer sein.");
+  if(c.path==="projekt/kurs.json"){
+    try{const data=JSON.parse(content);if(!Array.isArray(data.lessons))throw Error();}catch{throw Error("Ungültiges JSON im Unterrichtsplan.");}
+  }
   if(c.sha){
     const selector=/data-(?:answer|journal|score|skill|check|lab)\s*=\s*["']([^"']+)["']/g;
     const before=[...c.original.matchAll(selector)].map(x=>x[0]);
@@ -206,6 +209,87 @@ async function publish(){
     await refresh();
   }catch(e){error(e);}finally{$("publish").disabled=false;}
 }
+
+
+async function editPlan(){
+  try{
+    const path="projekt/kurs.json",staged=state.staged.get(path);
+    if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
+    const file=await api("/api/file?path="+encodeURIComponent(path));
+    useFile(path,file.sha,file.content);status("Unterrichtsplan: AVIVA-Zeiten und Texte im JSON bearbeiten. Für jede Doppellektion insgesamt 90 Minuten.");
+  }catch(e){error(e);}
+}
+async function editMaterials(){
+  try{
+    const section=$("section").value;
+    const path=/^dl-\d{2}$/.test(section)?"lehrperson/ergaenzungen/"+section+".md":"lehrperson/materialien.md";
+    const staged=state.staged.get(path);
+    if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
+    const file=await api("/api/file?path="+encodeURIComponent(path));
+    useFile(path,file.sha,file.content);status("Lehrpersonenmaterial bearbeiten. Ergänzungen werden beim nächsten Build generiert.");
+  }catch(e){error(e);}
+}
+
+function lessonPlan(id,title,view){
+  const labels=["Ankommen","Vorwissen aktivieren","Informieren","Verarbeiten","Auswerten"];
+  const minutes=[5,10,15,50,10];
+  return {
+    id,title,view,goal:"Lernziel für diese Doppellektion formulieren.",
+    question:"Leitfrage für diese Doppellektion formulieren.",
+    motivation:"Begründen, weshalb dieses Thema relevant ist.",
+    product:"Ein begründetes Lernergebnis.",
+    phases:labels.map((phase,i)=>({
+      phase,titel:phase,minutes:minutes[i],
+      schritte:[
+        {wer:"Lehrperson",min:minutes[i]-1,text:"Arbeitsauftrag und Ablauf festlegen.",art:"Auftrag"},
+        {wer:"Ergebnis",min:1,text:"Ergebnis festhalten.",art:"Ergebnis"}
+      ]
+    }))
+  };
+}
+async function addLesson(){
+  try{
+    status("Lade aktuelle Unterrichtsplanung …");
+    const file=await api("/api/file?path=projekt/kurs.json");
+    const staged=state.staged.get("projekt/kurs.json");
+    const original=JSON.parse(staged?.content||file.content);
+    const next=original.lessons.length+1;
+    if(next>99)throw Error("Es werden maximal 99 Doppellektionen unterstützt.");
+    const id=String(next).padStart(2,"0"),view="dl-"+id;
+    const title=prompt("Titel der neuen Doppellektion "+next+":");
+    if(!title)return;
+    const chapterTitle=prompt("Titel des ersten Unterkapitels:","Einstieg und Auftrag");
+    if(!chapterTitle)return;
+    const lesson=lessonPlan(id,title.trim(),view);
+    original.lessons.push(lesson);
+    const metadata="projekt/kurs.json";
+    state.staged.set(metadata,{path:metadata,expectedSha:file.sha,content:JSON.stringify(original,null,2)+"\n"});
+    const chapter="kursseiten/"+view+"/010-"+slug(chapterTitle)+".md";
+    const chapterSource="---\ntype: chapter\nid: "+view+"-"+slug(chapterTitle)+
+      "\nnummer: \"1\"\ntitel: "+JSON.stringify(chapterTitle)+
+      "\nkurz: "+JSON.stringify(chapterTitle)+"\nopen: true\n---\n\n"+
+      "## Lernauftrag\n\nHier die Aufgabe beschreiben.\n";
+    state.staged.set(chapter,{path:chapter,expectedSha:null,content:chapterSource});
+    const extras="lehrperson/ergaenzungen/"+view+".md";
+    state.staged.set(extras,{path:extras,expectedSha:null,content:
+      "## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"+
+      "Hier ergänzende Grafiken, Tabellen und Hinweise für die Lehrperson einfügen.\n\n"+
+      "- [Zur neuen Kursseite](index.html#"+view+")\n"});
+    state.chapters.push({path:chapter,sha:null});
+    if(!$("section").querySelector('option[value="'+view+'"]')){
+      const opt=document.createElement("option");opt.value=view;
+      opt.textContent=next+" · "+title;$("section").append(opt);
+    }
+    $("section").value=view;
+    useFile(chapter,null,chapterSource);
+    stagingList();
+    status("Doppellektion "+next+" vorgemerkt: Kurskapitel, Unterrichtsplan und Lehrpersonenmaterial. AVIVA-Zeiten vor Einreichen in projekt/kurs.json fachlich ausarbeiten.");
+  }catch(e){error(e);}
+}
+
+$("createLesson").addEventListener("click",addLesson);
+$("editPlan").addEventListener("click",editPlan);
+$("editMaterials").addEventListener("click",editMaterials);
 $("section").addEventListener("change",chapterList);
 $("refresh").addEventListener("click",()=>refresh().catch(error));
 $("create").addEventListener("click",addChapter);

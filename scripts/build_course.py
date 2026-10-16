@@ -186,7 +186,13 @@ def update_sol_material(text):
 
 def build():
     lessons = json.loads((ROOT/'projekt/kurs.json').read_text())['lessons']
-    assert len(lessons) == 10
+    if len(lessons) < 10 or [l["id"] for l in lessons[:10]] != [f"{i:02d}" for i in range(1, 11)]:
+        raise ValueError("Core lessons 01–10 must be preserved")
+    additional = lessons[10:]
+    if [l["id"] for l in additional] != [f"{i:02d}" for i in range(11, 11+len(additional))]:
+        raise ValueError("Additional lessons must be consecutively numbered")
+    if any(l.get("view") != f'dl-{l["id"]}' for l in additional):
+        raise ValueError("Each added lesson needs its own dl-NN view")
     for lesson in lessons:
         assert [p['phase'] for p in lesson['phases']] == PHASES
         assert sum(p['minutes'] for p in lesson['phases']) == 90
@@ -221,7 +227,7 @@ def build():
     plan.write_text(text)
     from build_materials import build as build_materials
     build_materials(lessons)
-    print('Generated 10 consistent AVIVA plans, each 90 minutes')
+    print(f'Generated {len(lessons)} consistent AVIVA plans, each 90 minutes')
 
 if __name__ == '__main__':
     build()

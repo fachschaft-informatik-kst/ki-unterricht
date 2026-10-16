@@ -1,5 +1,6 @@
 """Check the compact teacher resource page, visible images and valid links."""
 from pathlib import Path
+import json
 from urllib.parse import urlsplit, unquote
 
 from bs4 import BeautifulSoup
@@ -10,8 +11,9 @@ page = PORTAL / "materialien.html"
 assert page.is_file()
 soup = BeautifulSoup(page.read_text(encoding="utf-8"), "html.parser")
 sections = soup.select("section.lesson-resources")
-assert [sec["id"] for sec in sections] == [f"dl-{n:02d}" for n in range(1, 11)]
-assert len(soup.select("nav.quick a[href^='#dl-']")) == 10
+lessons=json.loads((PORTAL/"kurs.json").read_text(encoding="utf-8"))["lessons"]
+assert [sec["id"] for sec in sections] == [f"dl-{l['id']}" for l in lessons]
+assert len(soup.select("nav.quick a[href^='#dl-']")) == len(lessons)
 
 # Real diagrams are shown inline and clickable; there are no synthetic memory
 # cards, print templates, checklists or dead buttons.
@@ -47,7 +49,7 @@ plan = BeautifulSoup((PORTAL / "unterrichtsplan.html").read_text(encoding="utf-8
 assert course.select_one('a[href="materialien.html"]')
 for sec in sections:
     assert plan.find(id="doppellektion-" + sec["id"][-2:])
-    assert len(sec.select("a[href]")) >= 2, sec["id"]
+    assert len(sec.select("a[href]")) >= (2 if int(sec["id"][-2:]) <= 10 else 1), sec["id"]
 
 count = 0
 for link in [*soup.select("a[href]"), *soup.select("img[src]")]:
@@ -67,4 +69,4 @@ assert count >= 26, count
 for required in ("perzeptron_und_neuronale_netze.ipynb", "ki_tandemprojekt.ipynb",
                  "KI_Bewertungsraster.md", "daten_training.ipynb"):
     assert (PORTAL / "materialien/downloads" / required).is_file()
-print(f"PASS compact teacher resources: 10 lessons, {len(figures)} visible graphics and {count} valid links")
+print(f"PASS compact teacher resources: {len(lessons)} lessons, {len(figures)} visible graphics and {count} valid links")

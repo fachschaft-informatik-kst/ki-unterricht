@@ -16,10 +16,10 @@ soup=BeautifulSoup(source,"html.parser")
 iframe=soup.find("iframe",id="preview")
 assert iframe is not None and iframe.has_attr("sandbox") and not iframe.get("sandbox")
 assert soup.select_one("script[src='admin.js'][type='module']")
-for selector in ("#source","#create","#addImage","#addAnswer","#stage","#publish","#archive","#login"):
+for selector in ("#source","#create","#createLesson","#editPlan","#editMaterials","#addImage","#addAnswer","#stage","#publish","#archive","#login"):
     assert soup.select_one(selector),selector
 code=(site/"admin.js").read_text(encoding="utf-8")
-for item in ("/api/file","/api/chapters","/api/publish","data-answer",
+for item in ("/api/file","/api/chapters","/api/publish","function addLesson","function editPlan","function editMaterials","data-answer",
              "grafiken/uploads/","sandbox"):
     assert item in code,item
 backend=worker.read_text(encoding="utf-8")

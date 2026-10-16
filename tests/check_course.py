@@ -13,7 +13,9 @@ from build_portal_notebooks import ITEMS
 from build_course import PHASES
 
 lessons=json.loads((root/'projekt/kurs.json').read_text())['lessons']
-assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,11)]
+assert len(lessons)>=10
+assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,len(lessons)+1)]
+assert [l['view'] for l in lessons[10:]]==[f'dl-{i:02d}' for i in range(11,len(lessons)+1)]
 planned_minutes={
     role: sum(step.get('min',0) for lesson in lessons for phase in lesson['phases'] for step in phase['schritte'] if step['wer']==role)
     for role in ['Einzeln','Klasse']
@@ -148,4 +150,4 @@ assert len(soup.select('[data-score]'))==10
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
 for name in ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
     assert soup.select_one('[data-lab="'+name+'"]'), name
-print('PASS 10 numbered 90-minute plans, date-free lessons, anchors, graphics, five descriptive notebooks, portable attachments, manual project gates, rubric and final-lesson exam timing')
+print(f'PASS {len(lessons)} numbered 90-minute plans, date-free lessons, anchors, graphics, five descriptive notebooks, portable attachments, manual project gates, rubric and final-lesson exam timing')
