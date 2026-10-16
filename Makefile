@@ -12,7 +12,7 @@ FULL_STAMP := $(VENV)/.full-ready
 NPM_STAMP := $(VENV)/.npm-ready
 NODE_DIR := extensions/ki-autostart
 
-.PHONY: help preview local full build serve install install-preview test clean
+.PHONY: help preview local full build serve install install-preview test clean new-chapter
 
 help:
 	@printf '%s\n' \
@@ -21,6 +21,7 @@ help:
 		'make build         Vollstaendige App inklusive JupyterLite nach dist/ bauen' \
 		'make serve         Bereits gebaute App aus dist/ anzeigen' \
 		'make test          Build und lokale Struktur-/Funktionstests (Browser-CI separat)' \
+		'make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." AFTER=030' \
 		'make install       Alle lokalen Python- und npm-Abhaengigkeiten installieren' \
 		'make clean         Lokale Build-Dateien und Umgebungen loeschen' \
 		'PORT=8080 make     Alternativen lokalen Port verwenden'
@@ -45,6 +46,11 @@ $(NPM_STAMP): $(NODE_DIR)/package.json $(NODE_DIR)/package-lock.json | $(VENV_PY
 install-preview: $(PREVIEW_STAMP)
 
 install: $(FULL_STAMP) $(NPM_STAMP)
+
+# Optional authoring helper (no virtual environment needed).
+new-chapter:
+	@test -n "$(SECTION)" -a -n "$(NUMMER)" -a -n "$(TITLE)" || { echo 'Benutzung: make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." [AFTER=030]' >&2; exit 2; }
+	$(PYTHON) scripts/new_chapter.py $(SECTION) --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
 
 preview: install-preview
 	@printf 'Schnellvorschau: http://$(HOST):$(PORT)/projekt/\n'
@@ -71,6 +77,8 @@ full: local
 
 test: build
 	$(VENV_PY) tests/check_course.py
+	$(VENV_PY) tests/check_generated_content.py
+	$(VENV_PY) tests/check_new_chapter.py
 	$(VENV_PY) tests/check_portal_content.py
 	$(VENV_PY) tests/check_solutions.py
 	$(VENV_PY) tests/check_content_mvc.py

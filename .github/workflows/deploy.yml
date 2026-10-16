@@ -81,6 +81,8 @@ jobs:
           python scripts/build_course.py
           python scripts/build_portal_notebooks.py
           python tests/check_course.py
+          python tests/check_generated_content.py
+          python tests/check_new_chapter.py
           python tests/check_materials.py
           python scripts/format_course_sources.py --check
           python tests/check_portal_content.py

@@ -1,6 +1,6 @@
 # Unterrichtsinhalte bearbeiten
 
-Diese Dateien sind die Quellen der Kursseite. projekt/index.html wird beim Build erzeugt.
+Diese Dateien sind die Quellen der Kursseite. `projekt/index.html` und `projekt/unterrichtsplan.html` werden beim Build erzeugt und **nicht** in Git versioniert.
 
 Die Bereiche einstieg, lernarten, perzeptron, netze, projekt, sprache und gesellschaft
 entsprechen den Doppellektionen 1–10; projekt umfasst Doppellektionen 5–8.
@@ -50,6 +50,17 @@ Die Bilddatei gehört nach projekt/grafiken. Die Bildpfade sind relativ zur
 generierten Projektseite. ### erzeugt eine untergeordnete Überschrift.
 
 ## Ein ganz neues Kapitel
+
+Ohne HTML- oder Python-Programmierung ein neues Unterkapitel einfügen:
+
+```sh
+python scripts/new_chapter.py einstieg --after 030 --nummer 3a --title "Neue Perspektiven" --short "Ein Beispiel genauer betrachten"
+make preview
+```
+
+Das erzeugt `kursseiten/einstieg/035-neue-perspektiven.md` mit dem passenden YAML-Kopf. Neue Kapitel erscheinen automatisch in der bestehenden Kapitel-Navigation. Mit `--after 030` kommt das Kapitel zwischen die Dateien 030 und 040; ohne `--after` landet es am Ende, vor `999-abschluss.md`. `--nummer` und `--title` sind erforderlich. Bestehende Dateien und stabile Schülerantwort-IDs werden nicht angefasst. Weitere Optionen: `python scripts/new_chapter.py --help`.
+
+Alternativ eine Kapiteldatei von Hand anlegen:
 
 Eine neue Datei z. B. kursseiten/perzeptron/035-vertiefung.md erstellen:
 

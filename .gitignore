@@ -129,6 +129,10 @@ content/portal/
 
 /extensions/ki-autostart/node_modules
 
+# Generated course pages (built from kursseiten/ and projekt/kurs.json)
+/projekt/index.html
+/projekt/unterrichtsplan.html
+
 # Generated unlinked teacher model answer page
 /projekt/musterloesungen/index.html
 
