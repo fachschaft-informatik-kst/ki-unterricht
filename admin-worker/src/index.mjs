@@ -41,7 +41,7 @@ const canWrite=async token => (await github(token,"/repos/"+REPO)).permissions?.
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/(einstieg|lernarten|perzeptron|netze|projekt|sprache|gesellschaft|dl-[0-9]{2})\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path)||
   /^lehrperson\/ergaenzungen\/dl-[0-9]{2}\.md$/.test(path)||
-  path==="projekt/kurs.json"||
+  path==="projekt/kurs.json"||path==="lehrperson/materialien.md"||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
 function validate(changes){
@@ -101,14 +101,17 @@ async function publish(req,token){
     const currentPlan=await github(token,prefix+"/contents/projekt/kurs.json?ref=main");
     const current=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(currentPlan.content.replace(/\s/g,"")),c=>c.charCodeAt(0))));
     const next=JSON.parse(planChange.content);
-    if(JSON.stringify(next.lessons.slice(0,current.lessons.length))!==JSON.stringify(current.lessons))
-      return fail(403,"Bestehende Doppellektionen dürfen beim Anlegen nicht überschrieben werden.");
-    if(next.lessons.length!==current.lessons.length+1)
-      return fail(400,"Pro Pull Request genau eine zusätzliche Doppellektion.");
-    const id=next.lessons.at(-1).id;
-    if(!body.changes.some(x=>x.path.startsWith("kursseiten/dl-"+id+"/"))||
-       !body.changes.some(x=>x.path==="lehrperson/ergaenzungen/dl-"+id+".md"))
-      return fail(400,"Unterrichtsinhalt und Lehrpersonenmaterial müssen zusammen ergänzt werden.");
+    if(next.lessons.length<current.lessons.length||next.lessons.length>current.lessons.length+1)
+      return fail(400,"Pro Pull Request maximal eine neue Doppellektion; keine bisherigen löschen.");
+    for(let i=0;i<current.lessons.length;i++)
+      if(next.lessons[i].id!==current.lessons[i].id||next.lessons[i].view!==current.lessons[i].view)
+        return fail(403,"IDs und bestehende Kursansichten dürfen nicht verändert werden.");
+    if(next.lessons.length>current.lessons.length){
+      const id=next.lessons.at(-1).id;
+      if(!body.changes.some(x=>x.path.startsWith("kursseiten/dl-"+id+"/"))||
+         !body.changes.some(x=>x.path==="lehrperson/ergaenzungen/dl-"+id+".md"))
+        return fail(400,"Unterrichtsinhalt und Lehrpersonenmaterial müssen zusammen ergänzt werden.");
+    }
   }
   for(const c of body.changes){
     if((known.get(c.path)||null)!==c.expectedSha)return fail(409,"Konflikt bei "+c.path+". Bitte neu laden.");

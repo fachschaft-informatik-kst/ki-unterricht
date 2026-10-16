@@ -128,6 +128,9 @@ function addChapter(){
 function stage(){
   const c=state.current;if(!c)throw Error("Kein Kapitel geladen.");
   const content=$("source").value;if(!content.trim())throw Error("Kapitel darf nicht leer sein.");
+  if(c.path==="projekt/kurs.json"){
+    try{const data=JSON.parse(content);if(!Array.isArray(data.lessons))throw Error();}catch{throw Error("Ungültiges JSON im Unterrichtsplan.");}
+  }
   if(c.sha){
     const selector=/data-(?:answer|journal|score|skill|check|lab)\s*=\s*["']([^"']+)["']/g;
     const before=[...c.original.matchAll(selector)].map(x=>x[0]);
@@ -207,6 +210,26 @@ async function publish(){
   }catch(e){error(e);}finally{$("publish").disabled=false;}
 }
 
+
+async function editPlan(){
+  try{
+    const path="projekt/kurs.json",staged=state.staged.get(path);
+    if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
+    const file=await api("/api/file?path="+encodeURIComponent(path));
+    useFile(path,file.sha,file.content);status("Unterrichtsplan: AVIVA-Zeiten und Texte im JSON bearbeiten. Für jede Doppellektion insgesamt 90 Minuten.");
+  }catch(e){error(e);}
+}
+async function editMaterials(){
+  try{
+    const section=$("section").value;
+    const path=/^dl-\d{2}$/.test(section)?"lehrperson/ergaenzungen/"+section+".md":"lehrperson/materialien.md";
+    const staged=state.staged.get(path);
+    if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
+    const file=await api("/api/file?path="+encodeURIComponent(path));
+    useFile(path,file.sha,file.content);status("Lehrpersonenmaterial bearbeiten. Ergänzungen werden beim nächsten Build generiert.");
+  }catch(e){error(e);}
+}
+
 function lessonPlan(id,title,view){
   const labels=["Ankommen","Vorwissen aktivieren","Informieren","Verarbeiten","Auswerten"];
   const minutes=[5,10,15,50,10];
@@ -265,6 +288,8 @@ async function addLesson(){
 }
 
 $("createLesson").addEventListener("click",addLesson);
+$("editPlan").addEventListener("click",editPlan);
+$("editMaterials").addEventListener("click",editMaterials);
 $("section").addEventListener("change",chapterList);
 $("refresh").addEventListener("click",()=>refresh().catch(error));
 $("create").addEventListener("click",addChapter);
