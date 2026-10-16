@@ -528,6 +528,15 @@ $("previewFullscreen").addEventListener("click",()=>{
   $("preview").requestFullscreen().catch(()=>status("Vollbildansicht wird vom Browser nicht unterstützt.",true));
 });
 $("stage").addEventListener("click",()=>{try{stage();}catch(e){error(e);}});
+$("checkPermissions").addEventListener("click",async()=>{
+  const button=$("checkPermissions");button.disabled=true;
+  try{
+    const result=await api("/api/permissions");
+    status(result.ready?
+      "GitHub-App-Installation, Repository-Zugriff und Schreibrechte überprüft.":
+      "GitHub-Berechtigungen fehlen: "+(result.error||"Bitte App-Installation prüfen."),!result.ready);
+  }catch(e){error(e);}finally{button.disabled=false;}
+});
 $("publish").addEventListener("click",publish);
 $("addHeading").addEventListener("click",()=>insert("\n\n## Neue Zwischenüberschrift\n\n"));
 $("addAnswer").addEventListener("click",()=>{
