@@ -71,7 +71,8 @@ async function refresh(){
   const previous=$("section").value;
   $("section").replaceChildren();
   for(const value of valid){const option=document.createElement("option");option.value=value;option.textContent=value;$("section").append(option);}
-  $("section").value=valid.includes(previous)?previous:state.current?.path.split("/")[1]||valid[0]||"";
+  const currentSection=state.current?.path.split("/")[1];
+  $("section").value=valid.includes(previous)?previous:(valid.includes(currentSection)?currentSection:valid[0]||"");
   chapterList();
 }
 function insert(text){
@@ -215,7 +216,10 @@ async function publish(){
       {path:c.path,expectedSha:c.expectedSha,delete:true}:
       {path:c.path,expectedSha:c.expectedSha,content:c.content});
     const result=await post("/api/publish",{title:$("prTitle").value,changes});
+    const newPaths=new Set([...state.staged.values()].filter(c=>!c.expectedSha&&c.path.startsWith("kursseiten/")).map(c=>c.path));
     state.staged.clear();stagingList();
+    // The chapter only exists on the PR branch until GitHub merges it.
+    state.chapters=state.chapters.filter(c=>!newPaths.has(c.path));
     if(state.current)state.current.original=$("source").value;
     const out=$("published");out.replaceChildren("Pull Request #"+result.number+": ");
     const link=document.createElement("a");link.href=result.url;link.rel="noopener noreferrer";link.target="_blank";link.textContent="Auf GitHub öffnen";out.append(link);
@@ -284,6 +288,7 @@ async function addLesson(){
     if(!title)return;
     const chapterTitle=prompt("Titel des ersten Unterkapitels:","Einstieg und Auftrag");
     if(!chapterTitle)return;
+    if(!title.trim()||!slug(chapterTitle))throw Error("Titel und Kapitelname dürfen nicht leer sein.");
     const lesson=lessonPlan(id,title.trim(),view);
     original.lessons.push(lesson);
     const metadata="projekt/kurs.json";
