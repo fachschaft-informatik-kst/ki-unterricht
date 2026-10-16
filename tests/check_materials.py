@@ -16,36 +16,29 @@ assert len(soup.select("nav.quick a[href^='#dl-']")) == 10
 # Real diagrams are shown inline and clickable; there are no synthetic memory
 # cards, print templates, checklists or dead buttons.
 figures = soup.select(".graphic-grid figure")
-assert len(figures) == 14, f"Expected 14 core diagrams including XOR recap, got {len(figures)}"
+assert len(figures) == 6, f"Expected six additional teacher graphics, got {len(figures)}"
 for f in figures:
     img = f.select_one("a > img")
     assert img and img.get("alt")
-    assert f.select_one("figcaption .phase-label"), "Diagram needs AVIVA use"
+    assert f.select_one("figcaption .phase-label"), "AVIVA usage missing"
     assert f.select_one("figcaption").get_text(" ", strip=True).endswith(img["alt"])
     assert f.a["href"] == img["src"]
 assert not soup.select("article.print-sheet, button.print-this")
 assert "Memory-Kartensatz" not in soup.get_text(" ", strip=True)
 assert "Eigene vorhandene Spiele" in soup.get_text(" ", strip=True)
-assert "Wahlvertiefung" in soup.select_one("#dl-04").get_text(" ", strip=True)
-assert not soup.select_one("#dl-04 .graphic-grid img[src$='ziffern_netz.png']"), "Ziffern are optional"
-assert [img["src"] for img in soup.select("#dl-04 .graphic-grid img")][:2] == [
-    "grafiken/xor_gerade.svg", "grafiken/merhschichtiges_netzwerk_xor.svg"]
-assert len(soup.select(".source-graphic")) == 2, "Reuse original course visualizations"
-assert [b.strong.get_text(strip=True) for b in soup.select("#dl-04 .source-graphic .group-box")] == [
-    "T1", "T2", "V1", "P1", "P2"]
-assert len(soup.select("#dl-05 .source-graphic .project-train-flow > li")) == 4
-assert soup.select_one("#dl-05 .source-graphic .model-trained")
-assert "Einzeln" in soup.select_one("#dl-01").get_text(" ", strip=True)
-assert "Klasse" in soup.select_one("#dl-03").get_text(" ", strip=True)
-# The XOR SVG must stay white in both browsers and its copied source.
-xor = PORTAL / "grafiken/merhschichtiges_netzwerk_xor.svg"
-original_xor = ROOT / "content/img/merhschichtiges_netzwerk_xor.svg"
-assert xor.read_bytes() == original_xor.read_bytes()
-svg = xor.read_text(encoding="utf-8")
-assert 'color-scheme: light;' in svg
-assert 'style="fill: #ffffff;"' in svg
-assert 'background-color: #ffffff;' in svg
-assert 'color-scheme: light dark;' not in svg
+assert len(soup.select(".lesson-resources table")) >= 3
+assert len(soup.select("#dl-03 .graphic-grid figure")) == 4
+assert len(soup.select("#dl-04 .graphic-grid figure")) == 2
+assert not soup.select(".source-graphic"), "Avoid duplicating student diagrams"
+for img in soup.select(".graphic-grid img"):
+    assert img["src"].startswith("materialien/downloads/"), img["src"]
+student_sources = {img["src"] for img in course.select("img[src]")}
+for img in soup.select(".graphic-grid img"):
+    assert img["src"] not in student_sources, "Diagram is already on student page"
+xor_svg = PORTAL / "grafiken/merhschichtiges_netzwerk_xor.svg"
+assert xor_svg.read_bytes() == (ROOT / "content/img/merhschichtiges_netzwerk_xor.svg").read_bytes()
+assert "color-scheme: light;" in xor_svg.read_text(encoding="utf-8")
+assert "background-color: #ffffff;" in xor_svg.read_text(encoding="utf-8")
 assert soup.select_one('meta[name="robots"]')
 
 course = BeautifulSoup((PORTAL / "index.html").read_text(encoding="utf-8"), "html.parser")
