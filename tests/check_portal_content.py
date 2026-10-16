@@ -67,6 +67,18 @@ block = render_fragment(
 assert "<strong>neuer</strong>" in block
 assert "<div>" in block and "</div>" in block
 
+# Project diagram distinguishes pretrained feature extraction from the actual training.
+pipeline = soup.select("#projekt .project-train-flow > li")
+assert len(pipeline) == 4, "Expected four visible training stages in project introduction"
+assert [item.select_one("strong").get_text(strip=True)[0] for item in pipeline] == list("1234")
+assert "model-fixed" in pipeline[1].get("class", [])
+assert "1280" in pipeline[1].get_text()
+assert "unverändert" in pipeline[1].get_text()
+assert "model-trained" in pipeline[2].get("class", [])
+assert "60 Epochen" in pipeline[2].get_text()
+assert "Hier wird wirklich trainiert" in pipeline[2].get_text()
+assert "neuen Bildern" in pipeline[3].get_text()
+
 # Students still download/import their full local answer state and all notebooks.
 js = (ROOT / "projekt/portal.js").read_text(encoding="utf-8")
 progress = (ROOT / "projekt/progress.js").read_text(encoding="utf-8")
