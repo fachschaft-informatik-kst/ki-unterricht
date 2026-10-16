@@ -8,7 +8,7 @@ from build_portal import render_fragment
 ROOT=Path(__file__).resolve().parents[1]
 site=ROOT/"projekt/admin"
 worker=ROOT/"admin-worker/src/index.mjs"
-for name in ("index.html","admin.css","admin.js"):
+for name in ("index.html","admin.css","admin.js","plan-editor.js"):
     assert (site/name).is_file(),name
 assert worker.is_file()
 source=(site/"index.html").read_text(encoding="utf-8")
@@ -16,7 +16,7 @@ soup=BeautifulSoup(source,"html.parser")
 iframe=soup.find("iframe",id="preview")
 assert iframe is not None and iframe.has_attr("sandbox") and not iframe.get("sandbox")
 assert soup.select_one("script[src='admin.js'][type='module']")
-for selector in ("#source","#create","#createLesson","#editPlan","#editMaterials","#addImage","#addAnswer","#stage","#publish","#archive","#login"):
+for selector in ("#planEditor","#planLesson","#planTotal","#planFields","#planPhases","#source","#create","#createLesson","#editPlan","#editMaterials","#addImage","#addAnswer","#stage","#publish","#archive","#login"):
     assert soup.select_one(selector),selector
 code=(site/"admin.js").read_text(encoding="utf-8")
 for item in ("/api/file","/api/chapters","/api/publish","function addLesson","function editPlan","function editMaterials","data-answer",
@@ -29,6 +29,10 @@ for item in ("GITHUB_CLIENT_SECRET","GITHUB_CLIENT_ID","SESSION_KEY",
     assert item in backend,item
 course=(ROOT/"projekt/index.html").read_text(encoding="utf-8")
 assert '<a href="admin/">' in course
+planner=(site/"plan-editor.js").read_text(encoding="utf-8")
+assert "function createPlanner" in planner and "Die AVIVA-Phasen müssen 90 Minuten" in planner
+assert 'plan-editor.js' in code
+assert '"/plan-editor.js":"plan-editor.js"' in backend
 assert "access_token" not in source and "client_secret" not in source
 archived=render_fragment("---\ntype: chapter\nid: example-archived\nnummer: \"7\"\ntitel: \"Archiviert\"\nkurz: \"Nicht sichtbar\"\narchiviert: true\n---\n<label><textarea data-answer=\"old_answer\"></textarea></label>\n",ROOT/"kursseiten"/"test.md")
 fragment=BeautifulSoup(archived,"html.parser")

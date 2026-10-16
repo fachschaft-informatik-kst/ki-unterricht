@@ -71,8 +71,14 @@ jobs:
           node tests/check_archive.cjs
           node tests/check_notebook_snapshot.cjs
           node --check projekt/admin/admin.js
+          node --check projekt/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
           node tests/check_admin.mjs
+      - name: Browser-check teacher editor
+        run: |
+          npm install --prefix /tmp/ki-browser playwright
+          /tmp/ki-browser/node_modules/.bin/playwright install --with-deps chromium
+          NODE_PATH=/tmp/ki-browser/node_modules node tests/check_admin_form.cjs
       - name: Check simplified teaching project
         run: |
           python tests/check_ki_basis.py
@@ -97,11 +103,10 @@ jobs:
           python scripts/copy_portal.py dist
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
+          test -f dist/projekt/admin/plan-editor.js
       - name: Check deployed notebook runtime in Chromium
         timeout-minutes: 20
         run: |
-          npm install --prefix /tmp/ki-browser playwright
-          /tmp/ki-browser/node_modules/.bin/playwright install --with-deps chromium
           # Independent browser tests use different local ports. Run them in
           # parallel, preserve both exit codes and print both diagnostic logs.
           set +e

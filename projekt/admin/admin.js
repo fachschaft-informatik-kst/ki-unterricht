@@ -1,6 +1,8 @@
+import {createPlanner} from "./plan-editor.js";
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map()};
+const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
 const sections=["einstieg","lernarten","perzeptron","netze","projekt","sprache","gesellschaft"];
 function status(message,error=false){$("notice").textContent=message;$("notice").classList.toggle("error",error);}
 function error(err){status(String(err.message||err),true);}
@@ -36,8 +38,15 @@ function chapterList(){
 function useFile(path,sha,content,original=content){
   state.current={path,sha,original};
   $("path").textContent=path;$("heading").textContent=filename(path);
-  $("source").value=content;$("move").disabled=!sha;$("archive").disabled=!sha;
-  chapterList();preview();
+  const isPlan=path==="projekt/kurs.json";
+  $("source").value=content;
+  $("move").disabled=!sha||isPlan;$("archive").disabled=!sha||isPlan;
+  for(const id of ["toolbar","editorHelper","sourceLabel","previewButton","previewHeading","preview"])
+    $(id).hidden=isPlan;
+  $("source").hidden=isPlan;
+  if(isPlan)planner.open(content,$("section").value);
+  else {planner.close();preview();}
+  chapterList();
 }
 function savedText(){return state.current?state.staged.get(state.current.path)?.content??state.current.original:"";}
 async function load(path){
@@ -52,12 +61,18 @@ async function load(path){
 }
 async function refresh(){
   const data=await api("/api/chapters");
-  state.chapters=data.chapters.sort((a,b)=>a.path.localeCompare(b.path));
+  const known=data.chapters.filter(c=>!state.staged.get(c.path)?.delete);
+  // A refresh must not discard newly created (as yet unmerged) lesson chapters.
+  const pending=[...state.staged.values()].filter(c=>c.path.startsWith("kursseiten/")&&!c.delete&&!known.some(k=>k.path===c.path))
+    .map(c=>({path:c.path,sha:c.expectedSha}));
+  const unsubmitted=state.chapters.filter(c=>!c.sha&&!state.staged.has(c.path)&&!known.some(k=>k.path===c.path));
+  state.chapters=[...known,...pending,...unsubmitted].sort((a,b)=>a.path.localeCompare(b.path));
   const valid=[...new Set(state.chapters.map(c=>c.path.split("/")[1]))].filter(x=>sections.includes(x)||/^dl-\d{2}$/.test(x));
   const previous=$("section").value;
   $("section").replaceChildren();
   for(const value of valid){const option=document.createElement("option");option.value=value;option.textContent=value;$("section").append(option);}
-  $("section").value=valid.includes(previous)?previous:state.current?.path.split("/")[1]||valid[0]||"";
+  const currentSection=state.current?.path.split("/")[1];
+  $("section").value=valid.includes(previous)?previous:(valid.includes(currentSection)?currentSection:valid[0]||"");
   chapterList();
 }
 function insert(text){
@@ -68,7 +83,7 @@ function insert(text){
 function escapeHtml(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");}
 function inline(s){
   let out=escapeHtml(s);
-  out=out.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,(_,caption,url)=>'<img alt="'+caption+'" src="'+url+'">');
+  out=out.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;([^)]*)&quot;)?\)/g,(_,caption,url,title)=>'<img alt="'+caption+'" src="'+url+'"'+(title?' title="'+title+'"':"")+'>');
   out=out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(_,label,url)=>'<a href="'+url+'">'+label+'</a>');
   return out.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
 }
@@ -89,6 +104,14 @@ function markdown(source){
 }
 function preview(){
   let content=$("source").value;
+  // Display not-yet-merged image uploads in the isolated preview, without server persistence.
+  for(const item of state.staged.values()){
+    if(!item.path.startsWith("projekt/grafiken/uploads/")||item.delete)continue;
+    const src=item.path.replace(/^projekt\//,"");
+    const extension=item.path.split(".").pop();
+    const mime=extension==="jpg"||extension==="jpeg"?"jpeg":extension;
+    content=content.replaceAll(src,"data:image/"+mime+";base64,"+item.content);
+  }
   if(content.includes("<!-- MD:START -->"))
     content=content.replace(/<!-- MD:START -->([\s\S]*?)<!-- MD:END -->/g,(_,text)=>markdown(text));
   else if(!/^\s*<details\b/.test(content)&&!/^\s*<section\b/.test(content))
@@ -111,6 +134,7 @@ function availableOrder(section,after){
 }
 function addChapter(){
   try{
+    if(!confirmUnsaved())return;
     const section=$("section").value;
     const title=prompt("Titel des neuen Unterkapitels:");if(!title)return;
     const number=prompt("Sichtbare Kapitelnummer (z. B. 3a):");if(!number)return;
@@ -129,7 +153,7 @@ function stage(){
   const c=state.current;if(!c)throw Error("Kein Kapitel geladen.");
   const content=$("source").value;if(!content.trim())throw Error("Kapitel darf nicht leer sein.");
   if(c.path==="projekt/kurs.json"){
-    try{const data=JSON.parse(content);if(!Array.isArray(data.lessons))throw Error();}catch{throw Error("Ungültiges JSON im Unterrichtsplan.");}
+    planner.validate(content);
   }
   if(c.sha){
     const selector=/data-(?:answer|journal|score|skill|check|lab)\s*=\s*["']([^"']+)["']/g;
@@ -174,20 +198,47 @@ function move(){
     useFile(target,null,$("source").value);stagingList();status("Verschiebung vorgemerkt; Kapitel-ID bleibt erhalten.");
   }catch(e){error(e);}
 }
+async function imageAvivaAttribution(){
+  const path=state.current?.path||"";
+  if(!path.startsWith("lehrperson/"))return "";
+  let id=path.match(/ergaenzungen\/dl-(\d{2})\.md$/)?.[1];
+  if(!id){
+    const previous=$("source").value.slice(0,$("source").selectionStart);
+    id=[...previous.matchAll(/^## Doppellektion (\d+)\s*$/gm)].at(-1)?.[1];
+  }
+  if(!id)throw Error("Bild in den Materialien unter einer Doppellektion-Überschrift einfügen.");
+  const json=state.staged.get("projekt/kurs.json")?.content||
+    (await api("/api/file?path=projekt/kurs.json")).content;
+  const lesson=JSON.parse(json).lessons.find(l=>Number(l.id)===Number(id));
+  if(!lesson)throw Error("Doppellektion "+id+" im Unterrichtsplan nicht gefunden.");
+  const phases=lesson.phases.map(p=>p.phase);
+  const phase=prompt("AVIVA-Phase für Doppellektion "+Number(id)+":\n"+phases.join(" / "),phases[0]);
+  if(phase===null)throw Error("Bild-Upload abgebrochen.");
+  const entry=lesson.phases.find(p=>p.phase===phase.trim());
+  if(!entry)throw Error("AVIVA-Phase muss exakt einer der fünf Phasen entsprechen.");
+  const roles=[...new Set(entry.schritte.map(step=>step.wer))];
+  const role=prompt("Sozialform in dieser Phase:\n"+roles.join(" / "),roles[0]);
+  if(role===null)throw Error("Bild-Upload abgebrochen.");
+  if(!roles.includes(role.trim()))throw Error("Sozialform kommt in der gewählten AVIVA-Phase nicht vor.");
+  return ' "'+entry.phase+" | "+role.trim()+'"';
+}
 async function addImage(event){
   const file=event.target.files?.[0];if(!file)return;
   try{
     if(file.size>3000000)throw Error("Maximal 3 MB pro Bild.");
     const ext={"image/png":"png","image/jpeg":"jpg","image/webp":"webp"}[file.type];
     if(!ext)throw Error("Nur PNG, JPG oder WebP verwenden.");
+    const caption=prompt("Bildbeschreibung:",file.name);
+    if(caption===null)throw Error("Bild-Upload abgebrochen.");
+    if(!caption.trim()||/[\[\]\n"]/.test(caption))throw Error("Bitte eine kurze Bildbeschreibung ohne Klammern oder Anführungszeichen wählen.");
+    const attribution=await imageAvivaAttribution();
     const name=(slug(file.name.replace(/\.[^.]+$/,""))||"bild").slice(0,42)+"-"+crypto.randomUUID().slice(0,8)+"."+ext;
     const bytes=new Uint8Array(await file.arrayBuffer());
     let chars="";for(let i=0;i<bytes.length;i+=8192)chars+=String.fromCharCode(...bytes.subarray(i,i+8192));
     const path="projekt/grafiken/uploads/"+name;
     state.staged.set(path,{path,expectedSha:null,content:btoa(chars)});
-    const caption=prompt("Bildbeschreibung:",file.name)||"Illustration";
-    insert("\n\n!["+caption.replaceAll("]","")+"](grafiken/uploads/"+name+")\n\n");
-    stagingList();status("Bild vorgemerkt. Wird zusammen mit dem Kapitel veröffentlicht.");
+    insert("\n\n!["+caption.trim()+"](grafiken/uploads/"+name+attribution+")\n\n");
+    stagingList();status("Bild mit AVIVA-Zuordnung vorgemerkt und im Inhalt eingefügt.");
   }catch(e){error(e);}finally{event.target.value="";}
 }
 async function publish(){
@@ -201,7 +252,10 @@ async function publish(){
       {path:c.path,expectedSha:c.expectedSha,delete:true}:
       {path:c.path,expectedSha:c.expectedSha,content:c.content});
     const result=await post("/api/publish",{title:$("prTitle").value,changes});
+    const newPaths=new Set([...state.staged.values()].filter(c=>!c.expectedSha&&c.path.startsWith("kursseiten/")).map(c=>c.path));
     state.staged.clear();stagingList();
+    // The chapter only exists on the PR branch until GitHub merges it.
+    state.chapters=state.chapters.filter(c=>!newPaths.has(c.path));
     if(state.current)state.current.original=$("source").value;
     const out=$("published");out.replaceChildren("Pull Request #"+result.number+": ");
     const link=document.createElement("a");link.href=result.url;link.rel="noopener noreferrer";link.target="_blank";link.textContent="Auf GitHub öffnen";out.append(link);
@@ -213,14 +267,16 @@ async function publish(){
 
 async function editPlan(){
   try{
+    if(!confirmUnsaved())return;
     const path="projekt/kurs.json",staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
     const file=await api("/api/file?path="+encodeURIComponent(path));
-    useFile(path,file.sha,file.content);status("Unterrichtsplan: AVIVA-Zeiten und Texte im JSON bearbeiten. Für jede Doppellektion insgesamt 90 Minuten.");
+    useFile(path,file.sha,file.content);status("AVIVA-Plan als Formular bearbeiten: pro Doppellektion fünf Phasen und insgesamt 90 Minuten.");
   }catch(e){error(e);}
 }
 async function editMaterials(){
   try{
+    if(!confirmUnsaved())return;
     const section=$("section").value;
     const path=/^dl-\d{2}$/.test(section)?"lehrperson/ergaenzungen/"+section+".md":"lehrperson/materialien.md";
     const staged=state.staged.get(path);
@@ -230,6 +286,10 @@ async function editMaterials(){
   }catch(e){error(e);}
 }
 
+function confirmUnsaved(){
+  return !(state.current&&$("source").value!==savedText())||
+    confirm("Nicht vorgemerkte Änderungen verwerfen? Bitte vorher «Änderung vormerken» wählen.");
+}
 function lessonPlan(id,title,view){
   const labels=["Ankommen","Vorwissen aktivieren","Informieren","Verarbeiten","Auswerten"];
   const minutes=[5,10,15,50,10];
@@ -249,10 +309,14 @@ function lessonPlan(id,title,view){
 }
 async function addLesson(){
   try{
+    if(!confirmUnsaved())return;
     status("Lade aktuelle Unterrichtsplanung …");
     const file=await api("/api/file?path=projekt/kurs.json");
     const staged=state.staged.get("projekt/kurs.json");
     const original=JSON.parse(staged?.content||file.content);
+    const committed=JSON.parse(file.content);
+    if(original.lessons.length!==committed.lessons.length)
+      throw Error("Eine neue Doppellektion ist bereits vorgemerkt. Pro Pull Request ist nur eine möglich.");
     const next=original.lessons.length+1;
     if(next>99)throw Error("Es werden maximal 99 Doppellektionen unterstützt.");
     const id=String(next).padStart(2,"0"),view="dl-"+id;
@@ -260,10 +324,11 @@ async function addLesson(){
     if(!title)return;
     const chapterTitle=prompt("Titel des ersten Unterkapitels:","Einstieg und Auftrag");
     if(!chapterTitle)return;
+    if(!title.trim()||!slug(chapterTitle))throw Error("Titel und Kapitelname dürfen nicht leer sein.");
     const lesson=lessonPlan(id,title.trim(),view);
     original.lessons.push(lesson);
     const metadata="projekt/kurs.json";
-    state.staged.set(metadata,{path:metadata,expectedSha:file.sha,content:JSON.stringify(original,null,2)+"\n"});
+    state.staged.set(metadata,{path:metadata,expectedSha:file.sha,original:file.content,content:JSON.stringify(original,null,2)+"\n"});
     const chapter="kursseiten/"+view+"/010-"+slug(chapterTitle)+".md";
     const chapterSource="---\ntype: chapter\nid: "+view+"-"+slug(chapterTitle)+
       "\nnummer: \"1\"\ntitel: "+JSON.stringify(chapterTitle)+
@@ -275,15 +340,15 @@ async function addLesson(){
       "## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"+
       "Hier ergänzende Grafiken, Tabellen und Hinweise für die Lehrperson einfügen.\n\n"+
       "- [Zur neuen Kursseite](index.html#"+view+")\n"});
-    state.chapters.push({path:chapter,sha:null});
+    state.chapters.push({path:chapter,sha:null});state.chapters.sort((a,b)=>a.path.localeCompare(b.path));
     if(!$("section").querySelector('option[value="'+view+'"]')){
       const opt=document.createElement("option");opt.value=view;
       opt.textContent=next+" · "+title;$("section").append(opt);
     }
     $("section").value=view;
-    useFile(chapter,null,chapterSource);
+    useFile(metadata,file.sha,state.staged.get(metadata).content,file.content);
     stagingList();
-    status("Doppellektion "+next+" vorgemerkt: Kurskapitel, Unterrichtsplan und Lehrpersonenmaterial. AVIVA-Zeiten vor Einreichen in projekt/kurs.json fachlich ausarbeiten.");
+    status("Doppellektion "+next+" mit Kapitel und Materialien vorgemerkt. Jetzt den AVIVA-Plan im Formular ausarbeiten, danach Kapitel und Materialien ergänzen.");
   }catch(e){error(e);}
 }
 

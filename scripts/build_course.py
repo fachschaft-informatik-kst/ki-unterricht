@@ -65,7 +65,7 @@ def lehrpersonen_seite(lessons, kursseite):
             '<meta name="robots" content="noindex"><title>Unterrichtsplan · Lehrperson</title>'
             '<link href="favicon.svg" rel="icon" type="image/svg+xml">'+stil+'<link href="portal.css" rel="stylesheet">'
             '<body class="lehrpersonen-seite"><main><div class="crumb"><span>Nur für die Lehrperson</span></div>'
-            '<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller zehn Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
+            f'<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller {len(lessons)} Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
             'In Doppellektion 5–8 dient AVIVA nur als äusserer Rahmen der SOL-Arbeit, nicht als gemeinsamer Takt für die Projektetappen. '
             'Gleiche Fassung wie in <code>worksheets/md/KI_Planung.md</code>.</p>'
             '<p><a href="index.html">← Zur Kursseite</a></p>\n'+plaene+'\n<p><a href="index.html">← Zur Kursseite</a></p></main></body></html>\n')

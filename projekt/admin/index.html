@@ -36,20 +36,30 @@
         <div class="actions"><button id="move" class="button light" type="button">Verschieben</button>
           <button id="archive" class="button light danger" type="button">Ausblenden</button></div>
       </div>
-      <div class="toolbar" aria-label="Inhalte einfügen">
+      <div class="toolbar" id="toolbar" aria-label="Inhalte einfügen">
         <button type="button" id="addHeading">+ Überschrift</button>
         <button type="button" id="addAnswer">+ Antwortfeld</button>
         <button type="button" id="addImage">+ Bild hochladen</button>
         <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden>
       </div>
-      <p class="helper">Markdown und bestehendes HTML können editiert werden. Bei älteren Kapiteln sind HTML-Blöcke teilweise nötig; IDs und <code>data-answer</code> nicht unbeabsichtigt ändern.</p>
-      <label for="source" class="field-title">Kapitelquelltext</label>
+      <p class="helper" id="editorHelper">Markdown und bestehendes HTML können editiert werden. Bei älteren Kapiteln sind HTML-Blöcke teilweise nötig; IDs und <code>data-answer</code> nicht unbeabsichtigt ändern.</p>
+      <section id="planEditor" class="plan-editor" hidden>
+        <h2>Unterrichtsplan nach AVIVA</h2>
+        <p class="helper">Lernziele, Leitfrage, Phasen, Minuten und Arbeitsschritte bearbeiten. Die Gesamtzeit muss 90 Minuten betragen. Nummerierung und bestehende Kursverknüpfungen bleiben unverändert.</p>
+        <label for="planLesson">Doppellektion auswählen</label>
+        <select id="planLesson"></select>
+        <div id="planFields"></div>
+        <h3>AVIVA-Ablauf</h3>
+        <p id="planTotal" role="status"></p>
+        <div id="planPhases"></div>
+      </section>
+      <label for="source" class="field-title" id="sourceLabel">Kapitelquelltext</label>
       <textarea id="source" spellcheck="true" rows="20" placeholder="Wähle links ein Kapitel aus."></textarea>
       <div class="editor-actions">
         <button id="previewButton" type="button" class="button light">Vorschau aktualisieren</button>
         <button id="stage" type="button" class="button primary">Änderung vormerken</button>
       </div>
-      <h2 class="preview-title">Vorschau <span>ohne ausführbaren JavaScript-Code</span></h2>
+      <h2 class="preview-title" id="previewHeading">Vorschau <span>ohne ausführbaren JavaScript-Code</span></h2>
       <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer"></iframe>
       <section class="publish">
         <h2>Änderungen einreichen</h2>
