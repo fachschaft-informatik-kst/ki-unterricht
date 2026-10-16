@@ -2,10 +2,12 @@
 from pathlib import Path
 from bs4 import BeautifulSoup
 import sys
+import subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
 from build_portal import render_fragment
 
 ROOT=Path(__file__).resolve().parents[1]
+subprocess.run([sys.executable, str(ROOT/"scripts/sync_editor_preview.py"), "--check"], check=True)
 site=ROOT/"projekt/admin"
 worker=ROOT/"admin-worker/src/index.mjs"
 for name in ("index.html","admin.css","admin.js","plan-editor.js"):
