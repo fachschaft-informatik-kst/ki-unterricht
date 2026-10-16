@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Lehrpersonen-Editor · KI-Unterricht</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">KI</span><span><strong>Unterricht bearbeiten</strong><small>Kantonsschule Stadelhofen · GitHub-Editor</small></span></div>
+    <div class="account"><span id="who">Nicht angemeldet</span>
+      <a id="login" class="button primary" href="/auth/start" hidden>Mit GitHub anmelden</a>
+      <button id="logout" class="button light" hidden>Abmelden</button>
+    </div>
+  </header>
+  <div class="notice" id="notice" role="status" aria-live="polite">Editor wird geladen …</div>
+  <section class="intro" id="intro">
+    <h1>Die Kursinhalte direkt bearbeiten</h1>
+    <p>Kapitel bearbeiten, neue Unterkapitel einfügen, Bilder hochladen und Antwortfelder ergänzen. Änderungen werden als <strong>Pull Request</strong> eingereicht und erst nach Prüfung und Merge auf GitHub Pages veröffentlicht.</p>
+    <p>Die Anmeldung läuft über eine separat eingerichtete GitHub App. Auf der öffentlichen GitHub-Pages-Adresse steht dieser Editor nur als Vorschau bereit. Für Schreibzugriff muss er über den <strong>Admin-Worker</strong> geöffnet werden. <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/docs/ADMIN-EDITOR.md">Einrichtungsanleitung</a></p>
+  </section>
+  <main class="workspace" id="workspace" hidden>
+    <aside class="sidebar" aria-label="Kurskapitel">
+      <div class="sidebar-heading"><h2>Kapitel</h2><button id="refresh" class="button subtle" type="button">↻</button></div>
+      <label for="section">Unterrichtsbereich</label>
+      <select id="section"></select>
+      <nav id="chapters" class="chapter-list" aria-label="Unterkapitel"></nav>
+      <button id="create" type="button" class="button full">+ Neues Unterkapitel</button>
+      <p class="small">Die Nummer vor dem Dateinamen bestimmt die Reihenfolge. Bestehende IDs bleiben beim Verschieben erhalten.</p>
+    </aside>
+    <section class="editor">
+      <div class="editor-heading">
+        <div><p class="eyebrow" id="path">Kein Kapitel ausgewählt</p><h1 id="heading">Kapitel bearbeiten</h1></div>
+        <div class="actions"><button id="move" class="button light" type="button">Verschieben</button>
+          <button id="archive" class="button light danger" type="button">Archivieren</button></div>
+      </div>
+      <div class="toolbar" aria-label="Inhalte einfügen">
+        <button type="button" id="addHeading">+ Überschrift</button>
+        <button type="button" id="addAnswer">+ Antwortfeld</button>
+        <button type="button" id="addImage">+ Bild hochladen</button>
+        <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden>
+      </div>
+      <p class="helper">Markdown und bestehendes HTML können editiert werden. Bei älteren Kapiteln sind HTML-Blöcke teilweise nötig; IDs und <code>data-answer</code> nicht unbeabsichtigt ändern.</p>
+      <label for="source" class="field-title">Kapitelquelltext</label>
+      <textarea id="source" spellcheck="true" rows="20" placeholder="Wähle links ein Kapitel aus."></textarea>
+      <div class="editor-actions">
+        <button id="previewButton" type="button" class="button light">Vorschau aktualisieren</button>
+        <button id="stage" type="button" class="button primary">Änderung vormerken</button>
+      </div>
+      <h2 class="preview-title">Vorschau <span>ohne ausführbaren JavaScript-Code</span></h2>
+      <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer"></iframe>
+      <section class="publish">
+        <h2>Änderungen einreichen</h2>
+        <p>Alle vorgemerkten Änderungen werden zusammen in einem eigenen GitHub-Branch gespeichert. Ein Pull Request startet automatisch die bestehenden Tests.</p>
+        <ul id="staged" class="staged-list"><li>Noch keine Änderungen vorgemerkt.</li></ul>
+        <label for="prTitle">Titel des Pull Requests</label>
+        <input id="prTitle" type="text" maxlength="100" value="Unterrichtsinhalte aktualisieren">
+        <button id="publish" type="button" class="button primary">Pull Request erstellen</button>
+        <div id="published" role="status"></div>
+      </section>
+    </section>
+  </main>
+  <footer>Inhalte bleiben im Repository versioniert. <a href="../">Zur Kursseite</a> · <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht">GitHub-Repository</a></footer>
+  <script src="admin.js" type="module"></script>
+</body>
+</html>

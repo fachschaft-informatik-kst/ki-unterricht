@@ -1,0 +1,43 @@
+:root{--bg:#f5f4ee;--text:#192f32;--muted:#5d6b6d;--line:#d9e0db;--accent:#086a59;--soft:#eaf3ef}*{box-sizing:border-box}
+html{font:16px/1.52 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg)}
+body{margin:0}button,input,select,textarea{font:inherit}a{color:var(--accent)}
+button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:15px clamp(16px,3vw,36px);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}.brand strong{display:block;font-size:18px}.brand small{display:block;font-size:12px;color:var(--muted)}
+.logo{display:grid;place-items:center;background:var(--accent);color:white;width:42px;height:42px;border-radius:12px;font-weight:800}
+.account{display:flex;align-items:center;gap:12px;font-size:13px}
+.button{display:inline-flex;justify-content:center;align-items:center;gap:6px;padding:10px 14px;border:1px solid #b7c9c1;border-radius:8px;background:white;color:var(--text);text-decoration:none;font-weight:600}
+.button.primary{background:var(--accent);border-color:var(--accent);color:white}.button.full{width:100%;margin-top:18px}
+.button.light{background:white}.button.danger{color:#a52c31;border-color:#e4c8c8}.button.subtle{padding:5px 12px;background:transparent;border:0}
+.button:hover:not(:disabled){filter:brightness(.96)}
+.notice{margin:0;padding:9px clamp(18px,3vw,38px);background:#e5f0ec;color:#185849;font-size:14px;min-height:40px}
+.notice.error{background:#fff1ee;color:#9b3425}
+.intro{max-width:740px;margin:55px auto;padding:32px;background:white;border:1px solid var(--line);border-radius:15px}.intro h1{font-size:30px}
+.workspace{max-width:1550px;margin:auto;display:grid;grid-template-columns:270px minmax(0,1fr);gap:20px;padding:25px 27px}
+.workspace[hidden],.intro[hidden]{display:none}
+.sidebar,.editor{background:white;border:1px solid var(--line);border-radius:13px;padding:23px}
+.sidebar{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 35px);overflow:auto}
+.sidebar-heading{display:flex;align-items:center;justify-content:space-between}.sidebar h2{font-size:20px;margin:0 0 15px}
+label{display:block;margin:12px 0 6px;font-size:13px;font-weight:650}
+select,input[type=text]{width:100%;padding:9px 10px;border:1px solid #b8c6c1;border-radius:7px;background:white}
+.chapter-list{margin-top:18px;display:grid;gap:3px}
+.chapter-list button{display:block;width:100%;text-align:left;overflow-wrap:anywhere;border:0;border-radius:7px;background:transparent;padding:9px 10px;font-size:13px}
+.chapter-list button:hover,.chapter-list button[aria-current=true]{background:var(--soft);color:var(--accent)}
+.small,.helper{font-size:13px;color:var(--muted)}
+.editor-heading{display:flex;align-items:start;justify-content:space-between;gap:12px}
+.editor-heading h1{font-size:clamp(22px,2.5vw,30px);margin:0 0 20px}
+.eyebrow{font-size:12px;color:var(--muted);margin:0 0 4px;overflow-wrap:anywhere}
+.actions,.toolbar,.editor-actions{display:flex;gap:8px;flex-wrap:wrap}
+.toolbar{padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.toolbar button{padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:#f8faf8}
+.editor textarea{width:100%;min-height:370px;resize:vertical;border:1px solid #b8c6c1;border-radius:8px;padding:14px;font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2}
+.editor-actions{justify-content:flex-end;margin:12px 0 25px}
+.preview-title{font-size:19px;margin:20px 0 12px}.preview-title span{color:var(--muted);font-size:12px;font-weight:400}
+iframe#preview{width:100%;height:370px;border:1px solid var(--line);border-radius:8px;background:white}
+.publish{margin-top:28px;border-top:1px solid var(--line);padding-top:16px}
+.publish h2{font-size:20px}.publish p{color:var(--muted);font-size:14px}
+.staged-list{padding-left:22px;font-size:13px}.staged-list li{padding:3px 0;overflow-wrap:anywhere}
+.publish #publish{margin-top:12px}.publish #published{margin-top:12px}
+footer{padding:20px 30px;text-align:center;color:var(--muted);font-size:12px}
+:focus-visible{outline:3px solid #b55137;outline-offset:3px}
+@media(max-width:760px){.topbar{align-items:flex-start}.workspace{display:block;padding:14px}.sidebar{position:static;max-height:380px;margin-bottom:15px}.editor{padding:15px}.editor-heading{display:block}.actions{margin-bottom:12px}.intro{margin:20px 12px}.account{flex-direction:column;align-items:end}}
