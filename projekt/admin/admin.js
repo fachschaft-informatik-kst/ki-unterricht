@@ -532,7 +532,32 @@ $("addAnswer").addEventListener("click",()=>{
   insert('\n\n<label class="field answer"><span>'+escapeHtml(question)+
     '</span><textarea aria-label="'+escapeHtml(question)+'" data-answer="'+id+'" rows="4"></textarea></label>\n\n');
 });
+// Reusable, production-styled content blocks. They do not create persistent
+// answer IDs or alter existing course markup when inserted.
+const blocks={
+  task:'<div class="task">\n  <p><strong>Aufgabe:</strong> Beschreiben Sie den Arbeitsauftrag.</p>\n</div>',
+  info:'<div class="callout">\n  <p><strong>Merksatz:</strong> Die wichtigste Erkenntnis.</p>\n</div>',
+  warning:'<div class="callout warn">\n  <p><strong>Achtung:</strong> Diesen Punkt beachten.</p>\n</div>',
+  card:'<div class="card">\n  <h3>Titel der Karte</h3>\n  <p>Inhalt der Karte.</p>\n</div>',
+  two:'<div class="grid two">\n  <div class="card"><h3>Links</h3><p>Erster Inhalt.</p></div>\n  <div class="card"><h3>Rechts</h3><p>Zweiter Inhalt.</p></div>\n</div>',
+  three:'<div class="grid">\n  <div class="card"><h3>1</h3><p>Inhalt.</p></div>\n  <div class="card"><h3>2</h3><p>Inhalt.</p></div>\n  <div class="card"><h3>3</h3><p>Inhalt.</p></div>\n</div>',
+  steps:'<div class="lesson-steps">\n  <article><b>1 · Einstieg</b><p>Erster Schritt.</p></article>\n  <article><b>2 · Erarbeiten</b><p>Zweiter Schritt.</p></article>\n  <article><b>3 · Sichern</b><p>Dritter Schritt.</p></article>\n</div>',
+  flow:'<div class="process">\n  <span>Eingabe</span><strong>→</strong><span>Verarbeitung</span><strong>→</strong><span>Ausgabe</span>\n</div>',
+  timeline:'<ol class="timeline">\n  <li><span class="jahr">1950</span><div><strong>Meilenstein</strong> <span class="marke regeln">Regeln von Menschen</span><p>Beschreibung.</p></div></li>\n  <li><span class="jahr">2022</span><div><strong>Weiterer Meilenstein</strong> <span class="marke daten">Lernen aus Daten</span><p>Beschreibung.</p></div></li>\n</ol>',
+  figure:'<figure class="concept-figure">\n  <img src="grafiken/beispiel.svg" alt="Bildbeschreibung">\n  <figcaption>Bildlegende und Quellenangabe.</figcaption>\n</figure>',
+  table:'<div class="table-scroll">\n  <table><thead><tr><th>Kriterium</th><th>Wert</th></tr></thead>\n    <tbody><tr><td>Beispiel</td><td>Erklärung</td></tr></tbody></table>\n</div>',
+  quote:'<blockquote>\n  <p>Zitat oder zentraler Gedanke.</p>\n</blockquote>',
+  code:'<pre><code class="language-python"># Python-Beispiel\nprint("Hallo Welt")</code></pre>'
+};
+function insertBlock(){
+  const value=$("blockType").value;
+  if(!Object.hasOwn(blocks,value))return status("Unbekannter Baustein.",true);
+  insert("\n\n"+blocks[value]+"\n\n");
+  status("Baustein eingefügt – Änderungen vormerken, bevor sie veröffentlicht werden.");
+}
+
 $("addImage").addEventListener("click",()=>$("imageFile").click());
+$("addBlock").addEventListener("click",insertBlock);
 $("imageFile").addEventListener("change",addImage);
 $("logout").addEventListener("click",async()=>{try{await post("/auth/logout",{});location.assign("/");}catch(e){error(e);}});
 window.addEventListener("beforeunload",e=>{if(state.staged.size||(state.current&&$("source").value!==savedText())){e.preventDefault();e.returnValue="";}});
