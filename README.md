@@ -7,6 +7,17 @@ Ein kompakter KI-Block: erleben, gezielt experimentieren und erklären.
 
 ## Inhalte einfach bearbeiten
 
+**Single Source of Truth:** Die Unterrichtstexte werden unter `kursseiten/` gepflegt, die AVIVA-Planung in `projekt/kurs.json`. `projekt/index.html` und `projekt/unterrichtsplan.html` sind generierte Dateien und **nicht mehr in Git versioniert**. `make preview` und GitHub Actions bauen sie automatisch.
+
+Ein neues Unterkapitel kannst du direkt erstellen und anschliessend als Markdown bearbeiten:
+
+```sh
+python scripts/new_chapter.py einstieg --after 030 --nummer 3a --title "Ein neuer Blick auf KI"
+make preview
+```
+
+Der Generator prüft Sortierung, gültigen Bereich und eindeutige IDs; bestehende Kapitel werden nicht verändert. Für vollständig **neue Doppellektionen** braucht es heute noch Anpassungen an `projekt/kurs.json` und an mehreren fixen Zuordnungen. Der Weg zu einer dateibasierten, CMS-ähnlichen Architektur ist in [docs/ARCHITEKTUR.md](docs/ARCHITEKTUR.md) beschrieben.
+
 Die Doppellektionen liegen kapitelweise unter [`kursseiten/`](kursseiten).
 Absätze und Zwischenüberschriften in den Markdown-Bereichen sind direkt
 lesbar und editierbar; nur Formulare, Tabellen und interaktive Teile enthalten
@@ -39,7 +50,7 @@ gegebenenfalls zusätzliche Laufzeitdateien. Mit `Ctrl+C` den Server beenden.
 make preview
 ```
 
-Diese Variante benötigt nur zwei kleine Python-Pakete. Sie zeigt Texte, Bilder,
+Diese Variante benötigt nur wenige kleine Python-Pakete. Sie zeigt Texte, Bilder,
 Navigation und Formulare sofort, überwacht die Dateien unter `kursseiten/`
 und erstellt die HTML-Seite beim Speichern automatisch neu (Browser aktualisieren).
 Die Notebooks und der vollständige ZIP-Laufzeitexport benötigen dagegen
