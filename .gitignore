@@ -128,3 +128,6 @@ node_modules/
 content/portal/
 
 /extensions/ki-autostart/node_modules
+
+# Generated unlinked teacher model answer page
+/projekt/musterloesungen/index.html
