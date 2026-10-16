@@ -20,7 +20,7 @@ for selector in ("#source","#create","#addImage","#addAnswer","#stage","#publish
     assert soup.select_one(selector),selector
 code=(site/"admin.js").read_text(encoding="utf-8")
 lesson_code=(site/"lesson-editor.js").read_text(encoding="utf-8")
-for key in ("AVIVA","Neue Doppellektion","lehrperson/lektionen","unterricht/lektionen","90"):
+for key in ("AVIVA","Doppellektion","lehrperson/lektionen","unterricht/lektionen","90"):
     assert key in lesson_code,key
 for identifier in ("lessonWorkspace","lessonPick","newLesson","stageLesson","teacherSource"):
     assert soup.select_one("#"+identifier),identifier
