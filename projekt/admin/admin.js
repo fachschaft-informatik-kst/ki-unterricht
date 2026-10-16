@@ -99,24 +99,94 @@ function insert(text){
 }
 function escapeHtml(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");}
 function inline(s){
+  // Escape plain text first; render the safe Markdown constructs afterwards.
   let out=escapeHtml(s);
-  out=out.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;([^)]*)&quot;)?\)/g,(_,caption,url,title)=>'<img alt="'+caption+'" src="'+url+'"'+(title?' title="'+title+'"':"")+'>');
-  out=out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(_,label,url)=>'<a href="'+url+'">'+label+'</a>');
-  return out.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
+  const code=[];
+  out=out.replace(/`([^`]+)`/g,(_,value)=>{
+    code.push("<code>"+value+"</code>");return "\uE000"+(code.length-1)+"\uE001";
+  });
+  out=out.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;([^)]*)&quot;)?\)/g,(_,alt,url,title)=>{
+    const safe=/^(?:javascript|vbscript):/i.test(url)?"":url;
+    return '<img alt="'+alt+'" src="'+safe+'"'+(title?' title="'+title+'"':"")+'/>';
+  });
+  out=out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(_,name,url)=>{
+    const safe=/^(?:javascript|vbscript|data):/i.test(url)?"#":url;
+    return '<a href="'+safe+'">'+name+"</a>";
+  });
+  out=out.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")
+    .replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g,"<em>$1</em>")
+    .replace(/~~(.+?)~~/g,"<del>$1</del>");
+  return out.replace(/\uE000(\d+)\uE001/g,(_,i)=>code[Number(i)]);
+}
+function tableCells(line){
+  return line.trim().replace(/^\|/,"").replace(/\|$/,"").split(/(?<!\\)\|/).map(x=>x.replace(/\\\|/g,"|").trim());
 }
 function markdown(source){
-  const lines=source.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/,"").split(/\r?\n/);
-  let list=false;const out=[];
-  for(const raw of lines){
-    const s=raw.trim();
-    if(!s){if(list){out.push("</ul>");list=false;}continue;}
-    if(s.startsWith("<")){if(list){out.push("</ul>");list=false;}out.push(raw);continue;}
-    const heading=s.match(/^(#{1,5})\s+(.+)$/);
-    if(heading){if(list){out.push("</ul>");list=false;}const n=heading[1].length;out.push("<h"+n+">"+inline(heading[2])+"</h"+n+">");continue;}
-    if(/^[-*] /.test(s)){if(!list){out.push("<ul>");list=true;}out.push("<li>"+inline(s.slice(2))+"</li>");continue;}
-    if(list){out.push("</ul>");list=false;}out.push("<p>"+inline(s)+"</p>");
+  const lines=source.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/,"").replace(/\r\n/g,"\n").split("\n");
+  const out=[];let i=0;
+  const heading=/^(#{1,6})\s+(.+)$/;
+  const item=/^(\s*)([-+*]|\d+[.)])\s+(.+)$/;
+  const tableLine=line=>line.includes("|");
+  const isSeparator=line=>/^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+  while(i<lines.length){
+    const raw=lines[i],s=raw.trim();
+    if(!s){i++;continue;}
+    if(/^(```|~~~)/.test(s)){
+      const fence=s.slice(0,3),language=s.slice(3).trim().replace(/[^a-z0-9_-]/gi,"");
+      const content=[];i++;
+      while(i<lines.length&&!lines[i].trim().startsWith(fence))content.push(lines[i++]);
+      if(i<lines.length)i++;
+      out.push('<pre><code'+(language?' class="language-'+language+'"':"")+'>'+
+        escapeHtml(content.join("\n"))+'</code></pre>');continue;
+    }
+    const h=s.match(heading);
+    if(h){out.push("<h"+h[1].length+">"+inline(h[2])+"</h"+h[1].length+">");i++;continue;}
+    if(/^([-*_])(?:\s*\1){2,}\s*$/.test(s)){out.push("<hr>");i++;continue;}
+    if(tableLine(s)&&i+1<lines.length&&isSeparator(lines[i+1])){
+      const headers=tableCells(s),align=tableCells(lines[i+1]).map(x=>x.startsWith(":")?(x.endsWith(":")?"center":"left"):(x.endsWith(":")?"right":""));
+      out.push('<div class="table-scroll"><table><thead><tr>'+headers.map((x,j)=>'<th'+(align[j]?' style="text-align:'+align[j]+'"':"")+'>'+inline(x)+'</th>').join("")+'</tr></thead><tbody>');
+      i+=2;
+      while(i<lines.length&&lines[i].trim()&&tableLine(lines[i])){
+        const values=tableCells(lines[i++]);
+        out.push("<tr>"+headers.map((_,j)=>'<td'+(align[j]?' style="text-align:'+align[j]+'"':"")+'>'+inline(values[j]||"")+"</td>").join("")+"</tr>");
+      }
+      out.push("</tbody></table></div>");continue;
+    }
+    if(/^>\s?/.test(raw)){
+      const part=[];
+      while(i<lines.length&&/^>\s?/.test(lines[i]))part.push(lines[i++].replace(/^>\s?/,""));
+      out.push("<blockquote>"+markdown(part.join("\n"))+"</blockquote>");continue;
+    }
+    if(item.test(raw)){
+      const top=item.exec(raw)[1].length,ordered=/^\d/.test(item.exec(raw)[2]);
+      const tag=ordered?"ol":"ul";out.push("<"+tag+">");
+      while(i<lines.length){
+        const match=item.exec(lines[i]);
+        if(!match||match[1].length!==top||/^\d/.test(match[2])!==ordered)break;
+        i++;
+        const fragment=[match[3]];
+        while(i<lines.length&&lines[i].trim()&&!item.test(lines[i])&&/^\s+/.test(lines[i]))
+          fragment.push(lines[i++].trim());
+        out.push("<li>"+fragment.map(inline).join(" ")+"</li>");
+      }
+      out.push("</"+tag+">");continue;
+    }
+    if(/^</.test(s)){
+      // Legacy source files contain complete HTML blocks. Retain their markup;
+      // the containing iframe forbids scripts and same-origin execution.
+      const html=[];
+      while(i<lines.length&&lines[i].trim()){html.push(lines[i++]);}
+      out.push(html.join("\n"));continue;
+    }
+    const para=[s];i++;
+    while(i<lines.length&&lines[i].trim()&&!heading.test(lines[i].trim())&&
+      !item.test(lines[i])&&!/^>\s?/.test(lines[i])&&
+      !/^(```|~~~)/.test(lines[i].trim())&&
+      !/^</.test(lines[i].trim())&&!(i+1<lines.length&&tableLine(lines[i])&&isSeparator(lines[i+1]))){
+      para.push(lines[i++].trim());
+    }
+    out.push("<p>"+inline(para.join(" "))+"</p>");
   }
-  if(list)out.push("</ul>");
   return out.join("\n");
 }
 const COURSE_PREVIEW_BASE = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/";
