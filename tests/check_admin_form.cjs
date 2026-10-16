@@ -68,7 +68,7 @@ const server=http.createServer((req,res)=>{
     await materialFrame.locator(".table-scroll table").first().waitFor();
     assert.equal(await materialFrame.locator(".table-scroll table th").count()>=2,true);
     await page.locator("#source").fill("# Testmaterialien\n\n| Schritt | Ziel |\n|---|---|\n| Übung | Prüfen |\n");
-    await materialFrame.locator("table td").first().waitFor();
+    await materialFrame.locator("table td").filter({hasText:"Übung"}).waitFor();
     assert.equal(await materialFrame.locator("table td").first().textContent(),"Übung");
     await page.locator("#blockType").selectOption("warning");
     await page.locator("#addBlock").click();
