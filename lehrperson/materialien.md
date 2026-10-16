@@ -293,8 +293,8 @@ Hier findest du **alles für die Vorbereitung und den direkten Einsatz im Unterr
 
 - [Cathy O'Neil: TED-Talk](https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end)
 - [Video-Auftrag mit Antwortfeldern](index.html#gesellschaft-1) · [WMD-Grafik](grafiken/wmd_kriterien.svg)
-- [Drei WMD-Kriterien](index.html#gesellschaft-2) · [Rückkopplungsgrafik](grafiken/rueckkopplung.svg)
-- [Debattenfragen](index.html#gesellschaft-4) · [Schlussurteil](index.html#gesellschaft-5)
+- [Drei WMD-Kriterien](index.html#wmd) · [Rückkopplungsgrafik](grafiken/rueckkopplung.svg)
+- [Debattenfragen](index.html#kritisch) · [Schlussurteil](index.html#urteil)
 
 ### Druckvorlage: Video-Beobachtung und Debatte
 
