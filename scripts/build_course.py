@@ -4,6 +4,8 @@ import html
 import json
 import re
 
+from lesson_schema import write_compatibility_file
+
 ROOT = Path(__file__).resolve().parents[1]
 PHASES = ['Ankommen', 'Vorwissen aktivieren', 'Informieren', 'Verarbeiten', 'Auswerten']
 
@@ -65,7 +67,7 @@ def lehrpersonen_seite(lessons, kursseite):
             '<meta name="robots" content="noindex"><title>Unterrichtsplan · Lehrperson</title>'
             '<link href="favicon.svg" rel="icon" type="image/svg+xml">'+stil+'<link href="portal.css" rel="stylesheet">'
             '<body class="lehrpersonen-seite"><main><div class="crumb"><span>Nur für die Lehrperson</span></div>'
-            '<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller zehn Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
+            '<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
             'In Doppellektion 5–8 dient AVIVA nur als äusserer Rahmen der SOL-Arbeit, nicht als gemeinsamer Takt für die Projektetappen. '
             'Gleiche Fassung wie in <code>worksheets/md/KI_Planung.md</code>.</p>'
             '<p><a href="index.html">← Zur Kursseite</a></p>\n'+plaene+'\n<p><a href="index.html">← Zur Kursseite</a></p></main></body></html>\n')
@@ -185,8 +187,7 @@ def update_sol_material(text):
     return text
 
 def build():
-    lessons = json.loads((ROOT/'projekt/kurs.json').read_text())['lessons']
-    assert len(lessons) == 10
+    lessons = write_compatibility_file(ROOT)
     for lesson in lessons:
         assert [p['phase'] for p in lesson['phases']] == PHASES
         assert sum(p['minutes'] for p in lesson['phases']) == 90
@@ -221,7 +222,7 @@ def build():
     plan.write_text(text)
     from build_materials import build as build_materials
     build_materials(lessons)
-    print('Generated 10 consistent AVIVA plans, each 90 minutes')
+    print(f'Generated {len(lessons)} consistent AVIVA plans, each 90 minutes')
 
 if __name__ == '__main__':
     build()

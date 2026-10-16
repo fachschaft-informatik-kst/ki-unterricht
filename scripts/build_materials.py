@@ -69,8 +69,6 @@ footer{color:var(--muted);font-size:13px;padding-top:20px}
 """
 
 def build(lessons: list[dict]) -> None:
-    if len(lessons) != 10:
-        raise ValueError("Expected exactly ten lessons")
     DOWNLOADS.mkdir(parents=True, exist_ok=True)
     for name, rel in FILES.items():
         path = ROOT / rel
@@ -90,7 +88,10 @@ def build(lessons: list[dict]) -> None:
             )
             target.write_text(svg, encoding="utf-8")
 
-    source = SOURCE.read_text(encoding="utf-8")
+    source = SOURCE.read_text(encoding="utf-8") + "\n\n" + "\n\n".join(
+        (ROOT / "lehrperson/lektionen" / (lesson["id"] + ".md")).read_text(encoding="utf-8")
+        for lesson in lessons
+    )
     soup = BeautifulSoup(
         '<div id="materials-content">' +
         MarkdownIt("commonmark", {"html": False}).enable("table").render(source) + "</div>",
@@ -102,7 +103,7 @@ def build(lessons: list[dict]) -> None:
     headers = content.find_all("h2", recursive=False)
     expected = [f"Doppellektion {int(l['id']):02d}" for l in lessons]
     if [h.get_text(strip=True) for h in headers] != expected:
-        raise ValueError("Material sections must match the ten lessons")
+        raise ValueError("Material sections must match the actual lessons")
 
     for lesson, heading in zip(lessons, headers):
         group = soup.new_tag("section", id=f"dl-{lesson['id']}",
@@ -171,4 +172,5 @@ def build(lessons: list[dict]) -> None:
 
 if __name__ == "__main__":
     import json
-    build(json.loads((ROOT / "projekt/kurs.json").read_text(encoding="utf-8"))["lessons"])
+    from lesson_schema import load_lessons
+    build(load_lessons(ROOT))

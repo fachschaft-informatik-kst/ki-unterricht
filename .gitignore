@@ -139,3 +139,6 @@ content/portal/
 # Generated print/download package for teacher material kit
 /projekt/materialien.html
 /projekt/materialien/downloads/
+
+# Canonical plans are in unterricht/lektionen/*.json
+/projekt/kurs.json

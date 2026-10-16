@@ -47,6 +47,43 @@ def render_fragment(source: str, filename: Path) -> str:
     return re.sub(pattern, lambda m: MARKDOWN.render(m.group(1)), source, flags=re.S)
 
 
+def add_extra_lessons(page: str, root: Path = ROOT) -> str:
+    """Render new self-contained course areas from independent lesson files."""
+    from lesson_schema import load_lessons
+    lessons = [lesson for lesson in load_lessons(root) if lesson["view"].startswith("lektion-")]
+    sections = []
+    links = []
+    seen_ids = set(re.findall(r'\bid="([^"]+)"', page))
+    for lesson in lessons:
+        identifier = lesson["id"]
+        view = lesson["view"]
+        folder = root / "kursseiten" / "lektionen" / identifier
+        chapters = [render_fragment(p.read_text(encoding="utf-8"), p)
+                    for p in sorted(folder.glob("*.md"))]
+        for fragment in chapters:
+            for item in re.findall(r'\bid="([^"]+)"', fragment):
+                if item in seen_ids:
+                    raise ValueError(f"Duplicate ID in course: {item}")
+                seen_ids.add(item)
+        sections.append(
+            f'<section class="section" id="{view}" data-nav="{view}">'
+            f'<span class="section-label">Doppellektion {int(identifier)}</span>'
+            f'<h2>{html.escape(lesson["title"])}</h2>'
+            f'<!-- LESSONS:{view} --><!-- /LESSONS:{view} -->'
+            + "".join(chapters) + '</section>'
+        )
+        links.append(f'<a href="#{view}"><span>{identifier}</span>'
+                     f'{html.escape(lesson["title"])}</a>')
+    if sections:
+        marker = '<div class="lab-panel"'
+        nav_end = '</nav><div class="sidebar-bottom">'
+        if page.count(marker) != 1 or page.count(nav_end) != 1:
+            raise ValueError("Navigation or section insertion point not found")
+        page = page.replace(marker, "".join(sections) + marker, 1)
+        page = page.replace(nav_end, "".join(links) + nav_end, 1)
+    return page
+
+
 def assemble() -> str:
     manifest = json.loads((PAGES / "manifest.json").read_text(encoding="utf-8"))
     sections = manifest["sections"]
@@ -66,7 +103,7 @@ def assemble() -> str:
         if page.count(marker) != 1:
             raise ValueError(f"Expected exactly one marker: {marker}")
         page = page.replace(marker, "".join(parts), 1)
-    return page
+    return add_extra_lessons(page)
 
 
 def build() -> None:
