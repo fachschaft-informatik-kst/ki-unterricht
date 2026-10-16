@@ -81,6 +81,11 @@ const server=http.createServer((req,res)=>{
     await page.locator("#imageFile").setInputFiles({name:"test.png",mimeType:"image/png",buffer:png});
     await page.locator("#stage").click();
     assert.match(await page.locator("#source").inputValue(),/AVIVA-Testgrafik.*"Ankommen \| Lehrperson"/);
+    await page.locator("#previewButton").click();
+    const previewImage=page.frameLocator("#preview").locator('img[alt="AVIVA-Testgrafik"]');
+    await previewImage.waitFor();
+    assert.match(await previewImage.getAttribute("src"),/^data:image\/png;base64,/);
+
     await page.locator("#chapters button").first().click();
     assert.match(await page.locator("#path").textContent(),/kursseiten\/dl-11\//);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\nEin eigenes Beispiel.\n");
