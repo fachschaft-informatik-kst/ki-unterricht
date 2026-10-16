@@ -197,7 +197,7 @@ export default {
     const url=new URL(req.url);
     try{
       if(!env.SESSION_KEY)return fail(503,"Admin-Worker ist noch nicht eingerichtet.");
-      if(req.method==="GET"&&["/auth/start","/auth/callback"].includes(url.pathname))return auth(req,env,url);
+      if(req.method==="GET"&&["/auth/start","/auth/callback"].includes(url.pathname))return await auth(req,env,url);
       if(req.method==="POST"&&url.pathname==="/auth/logout"){
         if(!allowedPost(req))return fail(403,"Unerlaubter Aufruf.");
         return response({ok:true},200,{"Set-Cookie":cookie("ki_session","",0)});
@@ -220,10 +220,10 @@ export default {
           const content=decoder.decode(Uint8Array.from(atob(f.content.replace(/\s/g,"")),c=>c.charCodeAt(0)));
           return response({path,sha:f.sha,content});
         }
-        if(req.method==="POST"&&url.pathname==="/api/publish")return publish(req,active.token);
+        if(req.method==="POST"&&url.pathname==="/api/publish")return await publish(req,active.token);
         return fail(404,"Unbekannte Funktion.");
       }
-      if(req.method==="GET")return staticPage(url);
+      if(req.method==="GET")return await staticPage(url);
       return fail(405,"Methode nicht erlaubt.");
     }catch(err){return fail(err.status>=400&&err.status<500?err.status:502,
       String(err.message||"GitHub nicht erreichbar").slice(0,230));}
