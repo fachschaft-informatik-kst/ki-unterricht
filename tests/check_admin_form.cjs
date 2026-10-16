@@ -53,12 +53,24 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#planTotal").textContent(),/90 von 90/);
     await page.locator("#planFields input").first().fill("Was ist KI? – Überarbeitet");
     await page.locator("#stage").click();
+    assert.match(await page.locator("#notice").textContent(),/Vorgemerkt/,"Initial plan change was not staged");
     await page.evaluate(()=>{
       const responses=["Vertiefung: KI im Alltag","Einstieg und Auftrag"];
-      window.prompt=()=>responses.shift()??null;
+      window.__promptCalls=[];
+      window.prompt=()=>{const value=responses.shift()??null;window.__promptCalls.push(value);return value;};
     });
     await page.locator("#createLesson").click();
-    await page.waitForFunction(()=>document.querySelector("#section")?.value==="dl-11");
+    try{
+      await page.waitForFunction(()=>document.querySelector("#section")?.value==="dl-11",null,{timeout:6500});
+    }catch(err){
+      const diagnostic=await page.evaluate(()=>({
+        notice:document.querySelector("#notice")?.textContent,
+        section:document.querySelector("#section")?.value,
+        prompts:window.__promptCalls,
+        staged:document.querySelector("#staged")?.textContent
+      }));
+      throw Error("DL11 creation did not complete: "+JSON.stringify(diagnostic),{cause:err});
+    }
     assert.equal(await page.locator("#section").inputValue(),"dl-11");
     assert.equal(await page.locator("#planLesson").inputValue(),"10");
     assert.equal(await page.locator("#planPhases fieldset").count(),5);
