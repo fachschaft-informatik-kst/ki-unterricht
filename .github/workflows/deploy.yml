@@ -71,6 +71,7 @@ jobs:
           node tests/check_archive.cjs
           node tests/check_notebook_snapshot.cjs
           node --check projekt/admin/admin.js
+          node --check projekt/admin/lesson-editor.js
           node --check admin-worker/src/index.mjs
           node tests/check_admin.mjs
       - name: Check simplified teaching project
@@ -86,6 +87,7 @@ jobs:
           python tests/check_course.py
           python tests/check_generated_content.py
           python tests/check_new_chapter.py
+          python tests/check_dynamic_lessons.py
           python tests/check_admin.py
           python tests/check_materials.py
           python scripts/format_course_sources.py --check

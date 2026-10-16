@@ -12,7 +12,7 @@ FULL_STAMP := $(VENV)/.full-ready
 NPM_STAMP := $(VENV)/.npm-ready
 NODE_DIR := extensions/ki-autostart
 
-.PHONY: help preview local full build serve install install-preview test clean new-chapter
+.PHONY: help preview local full build serve install install-preview test clean new-chapter new-lesson
 
 help:
 	@printf '%s\n' \
@@ -22,6 +22,7 @@ help:
 		'make serve         Bereits gebaute App aus dist/ anzeigen' \
 		'make test          Build und lokale Struktur-/Funktionstests (Browser-CI separat)' \
 		'make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." AFTER=030' \
+		'make new-lesson TITLE="Ein neues Thema"' \
 		'make install       Alle lokalen Python- und npm-Abhaengigkeiten installieren' \
 		'make clean         Lokale Build-Dateien und Umgebungen loeschen' \
 		'PORT=8080 make     Alternativen lokalen Port verwenden'
@@ -52,6 +53,10 @@ new-chapter:
 	@test -n "$(SECTION)" -a -n "$(NUMMER)" -a -n "$(TITLE)" || { echo 'Benutzung: make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." [AFTER=030]' >&2; exit 2; }
 	$(PYTHON) scripts/new_chapter.py $(SECTION) --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
 
+new-lesson:
+	@test -n "$(TITLE)" || { echo 'Benutzung: make new-lesson TITLE="Titel"' >&2; exit 2; }
+	$(PYTHON) scripts/new_lesson.py "$(TITLE)"
+
 preview: install-preview
 	@printf 'Schnellvorschau: http://$(HOST):$(PORT)/projekt/\n'
 	$(VENV_PY) scripts/preview.py --host $(HOST) --port $(PORT)
@@ -79,6 +84,7 @@ test: build
 	$(VENV_PY) tests/check_course.py
 	$(VENV_PY) tests/check_generated_content.py
 	$(VENV_PY) tests/check_new_chapter.py
+	$(VENV_PY) tests/check_dynamic_lessons.py
 	$(VENV_PY) tests/check_portal_content.py
 	$(VENV_PY) tests/check_solutions.py
 	$(VENV_PY) tests/check_content_mvc.py

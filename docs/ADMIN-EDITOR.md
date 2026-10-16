@@ -1,5 +1,23 @@
 # Lehrpersonen-Editor für den KI-Unterricht
 
+## Doppellektionen und Unterkapitel direkt erstellen
+
+Seit der generischen Lektionsverwaltung liegen AVIVA-Unterrichtspläne in
+`unterricht/lektionen/NN.json` und die zugehörigen Zusatzmaterialien in
+`lehrperson/lektionen/NN.md`. Der Unterrichts-Editor bietet links die neue
+Auswahl **«Doppellektionen» → «Plan & Materialien bearbeiten»**, wo Titel,
+Lernziel, Leitfrage, Lernprodukt und sämtliche fünf AVIVA-Phasen samt
+Arbeitsschritten geändert werden können.
+
+Mit **«+ Neue Doppellektion»** erzeugt der Editor gleichzeitig drei Dateien:
+den Plan, ein neues Kurs-Unterkapitel und ein Materialblatt. Der Seitenaufbau,
+die Navigation, der Unterrichtsplan und der Materialkoffer werden beim Merge
+automatisch erweitert. Bearbeitung und Veröffentlichung erfolgen wie bisher
+gemeinsam als Pull Request; es muss kein neuer Programmcode geschrieben werden.
+
+Neue Einheiten lassen sich auch lokal anlegen:
+`python scripts/new_lesson.py "Titel der Doppellektion"`.
+
 ## Was jetzt umgesetzt ist
 
 Die statische Website enthält unter \`/projekt/admin/\` einen Editor für vorhandene
@@ -109,10 +127,7 @@ eine Fehlermeldung statt eines stillen Überschreibens.
 
 ## Einschränkungen und Sicherheit
 
-- Aktuell nur Unterkapitel in bestehenden Bereichen. **Eine ganz neue
-  Doppellektion** ist noch nicht als Ein-Klick-Vorgang verfügbar: dafür müssen
-  zuerst die festen Lektionszahlen aus \`projekt/kurs.json\` und den Generatoren
-  entfernt werden. Siehe \`docs/ARCHITEKTUR.md\`.
+- **Neue Doppellektionen werden unterstützt.** Bestehende Kursbestandteile und ZIP-Felder bleiben unter ihren bisherigen IDs. Neue Kapitel benötigen neue eindeutige IDs.
 - Alte Unterkapitel enthalten teilweise echtes HTML und interaktive Elemente.
   Der Editor ist deshalb ein **Quelltexteditor mit vereinfachter Vorschau**,
   noch kein vollständig visueller WYSIWYG-Editor.
@@ -124,8 +139,7 @@ eine Fehlermeldung statt eines stillen Überschreibens.
 - Bereits bestehende \`data-answer\`, \`data-journal\`, Notebook- und
   Beurteilungs-IDs **nicht ändern oder löschen**. Der Editor warnt beim
   Entfernen, die CI prüft die Verträge mit gespeicherten Schülerdaten.
-- Max. 12 Dateien pro PR. Es sind nur Kapiteldateien
-  und neue Bilddateien unter \`projekt/grafiken/uploads/\` schreibbar.
+- Max. 12 Dateien pro PR. Schreibbar sind Unterrichtskapitel, einzelne Lektionspläne, Lehrpersonenmaterialien und neue Bilddateien unter \`projekt/grafiken/uploads/\`; Workflows und Anwendungscode bleiben gesperrt.
   JS, GitHub-Workflows, Metadaten und Administrationscode sind gesperrt.
 - HTML in bearbeiteten Kapiteln kann auf der veröffentlichten öffentlichen
   Website ausgeführt werden. Deshalb gehören auch Editor-Pull-Requests
@@ -138,6 +152,7 @@ eine Fehlermeldung statt eines stillen Überschreibens.
 
 - \`projekt/admin/index.html\` – Oberfläche
 - \`projekt/admin/admin.css\` – Gestaltung
+- \`projekt/admin/lesson-editor.js\` – AVIVA-Plan und Materialien bearbeiten
 - \`projekt/admin/admin.js\` – Editor, Vorschau, Upload
 - \`admin-worker/src/index.mjs\` – OAuth, Berechtigungskontrolle, atomische Commits und PR
 - \`admin-worker/wrangler.jsonc\` – Deploykonfiguration (ohne Secrets)

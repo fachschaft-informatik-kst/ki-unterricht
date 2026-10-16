@@ -100,3 +100,20 @@ Dann soll **eine neue Doppellektion** aus einem neuen Ordner mit \`lektion.yml\`
 **Etappe D:** Erst nach bestandenen Browser- und ZIP-Tests Ordner schrittweise umbenennen, veraltete Hilfsskripte entfernen und optional eine Formularoberfläche zur Bearbeitung von \`.yml\` und \`.md\` über Git integrieren. Dafür ist **kein Backend** nötig; man kann zunächst den GitHub-Webeditor verwenden.
 
 **Nicht anfassen ohne Migration:** \`data-answer\`, \`data-journal\`, \`data-check\`, \`data-score\`, Notebooknamen und ZIP-Pfade. Sie gehören zum gespeicherten Schülerstand. Ein Umbau, der die alten IDs verändert, braucht eine explizite und getestete Versionierung/Migration des ZIP-Formats.
+
+
+## Realisierter Stand: Generische Doppellektionen
+
+AVIVA-Unterrichtspläne sind unter `unterricht/lektionen/01.json` usw. aufgeteilt.
+Pro Lektion ist `lehrperson/lektionen/NN.md` die separate Quelle der Zusatzmaterialien.
+`projekt/kurs.json` wird als reine Kompatibilitätsdatei beim Build generiert und
+ist nicht mehr in Git versioniert. Das schützt vorhandene Skripte und Tests,
+während die Pflege datengetrieben geworden ist. Neue Einheiten unter
+`kursseiten/lektionen/NN/` werden automatisch in die Kursnavigation,
+den AVIVA-Lehrpersonenplan und den Materialkoffer eingefügt.
+
+Die Administration erlaubt das Anlegen einer Doppellektion samt Eingabeformularen
+für alle fünf AVIVA-Phasen, Ziel, Produkt und Materialnotizen. Es gibt weiter
+kein Laufzeitbackend für Schülerantworten. Bestehende IDs und Notebooks bleiben
+unverändert. Die URL `/projekt/admin/` ist erst nach der geschützten OAuth-
+Worker-Einrichtung zum Schreiben nutzbar.

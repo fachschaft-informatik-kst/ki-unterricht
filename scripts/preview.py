@@ -29,10 +29,11 @@ def build_full():
 
 
 def fingerprints():
-    paths = [ROOT / "projekt/index.template.html", ROOT / "projekt/kurs.json"]
+    paths = [ROOT / "projekt/index.template.html"]
     paths.extend((ROOT / "kursseiten").rglob("*.md"))
     paths.extend((ROOT / "lehrperson").rglob("*.md"))
     paths.extend((ROOT / "kursseiten").rglob("*.json"))
+    paths.extend((ROOT / "unterricht/lektionen").glob("*.json"))
     return {str(path): path.stat().st_mtime_ns for path in paths if path.is_file()}
 
 
