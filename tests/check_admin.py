@@ -1,6 +1,9 @@
 """Basic contracts for the static teacher editor and its GitHub gateway."""
 from pathlib import Path
 from bs4 import BeautifulSoup
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
+from build_portal import render_fragment
 
 ROOT=Path(__file__).resolve().parents[1]
 site=ROOT/"projekt/admin"
@@ -27,4 +30,9 @@ for item in ("GITHUB_CLIENT_SECRET","GITHUB_CLIENT_ID","SESSION_KEY",
 course=(ROOT/"projekt/index.html").read_text(encoding="utf-8")
 assert '<a href="admin/">' in course
 assert "access_token" not in source and "client_secret" not in source
-print("PASS static teacher editor, sandboxed preview and GitHub App gateway contracts")
+archived=render_fragment("---\ntype: chapter\nid: example-archived\nnummer: \"7\"\ntitel: \"Archiviert\"\nkurz: \"Nicht sichtbar\"\narchiviert: true\n---\n<label><textarea data-answer=\"old_answer\"></textarea></label>\n",ROOT/"kursseiten"/"test.md")
+fragment=BeautifulSoup(archived,"html.parser")
+chapter=fragment.select_one("details#example-archived")
+assert chapter.has_attr("hidden") and chapter["data-archived"]=="true"
+assert fragment.select_one('textarea[data-answer="old_answer"]'),"Archived answer keys must survive"
+print("PASS static teacher editor, reversible archive and protected OAuth gateway contracts")

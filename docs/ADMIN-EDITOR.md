@@ -7,7 +7,7 @@ Kapitel und neue Unterkapitel in den bestehenden Unterrichtsbereichen. Er kann:
 
 - bestehende Markdown-/HTML-Kapitel **lesen und bearbeiten** (unveränderte IDs beibehalten),
 - neue Unterkapitel mit YAML-Kopf **ohne HTML-Code** anlegen,
-- Unterkapitel durch Dateiumbenennung verschieben oder **archivieren** statt unwiederbringlich löschen,
+- Unterkapitel durch Dateiumbenennung verschieben oder **ausblenden** statt unwiederbringlich löschen,
 - neue Antwortfelder mit eindeutigen \`data-answer\`-Schlüsseln einfügen,
 - **PNG/JPEG/WebP** bis 3 MB zusammen mit der zugehörigen Markdown-Datei einreichen,
 - Inhalte in einem **skriptgesperrten Vorschau-iframe** ansehen,
@@ -120,13 +120,11 @@ eine Fehlermeldung statt eines stillen Überschreibens.
   keine Formularsendung und kein Zugriff auf das GitHub-Login.
 - Keine SVG-Uploads, weil fremde SVGs aktive Inhalte enthalten können.
   Bestehende gepflegte SVGs bleiben weiterhin nutzbar.
-- Archivierung entfernt ein Kapitel aus der veröffentlichten Navigation,
-  bewahrt den Text aber unter \`kursseiten/_archiv/\` und in der Git-Historie.
-  Alte Links zum Kapitel sind nach der Archivierung vorübergehend ungültig.
+- **Ausblenden statt Löschen:** Ein Kapitel bleibt im Quelltext und im generierten HTML mit allen bisherigen Antwort-IDs erhalten. Die Anzeige wird per YAML-Metadatum `archiviert: true` bzw. HTML-Attribut `data-archived` verborgen. Rückgängig machen: Marker entfernen.
 - Bereits bestehende \`data-answer\`, \`data-journal\`, Notebook- und
   Beurteilungs-IDs **nicht ändern oder löschen**. Der Editor warnt beim
   Entfernen, die CI prüft die Verträge mit gespeicherten Schülerdaten.
-- Max. 12 Dateien pro PR. Es sind nur Kapiteldateien, die Archivablage
+- Max. 12 Dateien pro PR. Es sind nur Kapiteldateien
   und neue Bilddateien unter \`projekt/grafiken/uploads/\` schreibbar.
   JS, GitHub-Workflows, Metadaten und Administrationscode sind gesperrt.
 - HTML in bearbeiteten Kapiteln kann auf der veröffentlichten öffentlichen

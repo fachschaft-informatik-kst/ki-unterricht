@@ -40,7 +40,7 @@ async function github(token,path,options={}){
 const canWrite=async token => (await github(token,"/repos/"+REPO)).permissions?.push===true;
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/(einstieg|lernarten|perzeptron|netze|projekt|sprache|gesellschaft)\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path)||
-  /^kursseiten\/_archiv\/(einstieg|lernarten|perzeptron|netze|projekt|sprache|gesellschaft)\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path)||
+
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
 function validate(changes){
   if(!Array.isArray(changes)||changes.length<1||changes.length>12)throw Error("1–12 Dateien pro Pull Request.");
@@ -53,7 +53,7 @@ function validate(changes){
       if(c.expectedSha===null||c.content!==undefined)throw Error("Nur vorhandene Dateien können archiviert werden.");
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
-      if(c.expectedSha===null&&!c.content.startsWith("---\n")&&!c.path.includes("/_archiv/"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
+      if(c.expectedSha===null&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
     }else{
       if(typeof c.content!=="string"||c.content.length>4100000)throw Error("Bild ungültig oder zu gross.");
       let bytes;try{bytes=Uint8Array.from(atob(c.content),x=>x.charCodeAt(0));}catch{throw Error("Ungültiges Bildformat.");}
