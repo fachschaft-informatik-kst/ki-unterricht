@@ -40,6 +40,9 @@ async function github(token,path,options={}){
 const canWrite=async token => (await github(token,"/repos/"+REPO)).permissions?.push===true;
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/(einstieg|lernarten|perzeptron|netze|projekt|sprache|gesellschaft)\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path)||
+  /^kursseiten\/lektionen\/[0-9]{2}\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path)||
+  /^unterricht\/lektionen\/[0-9]{2}\.json$/.test(path)||
+  /^lehrperson\/lektionen\/[0-9]{2}\.md$/.test(path)||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
 function validate(changes){
@@ -51,9 +54,17 @@ function validate(changes){
     if(c.expectedSha!==null&&!/^[a-f0-9]{40}$/.test(c.expectedSha||""))throw Error("Ungültige Ausgangsversion.");
     if(c.delete===true){
       if(c.expectedSha===null||c.content!==undefined)throw Error("Nur vorhandene Dateien können archiviert werden.");
+    }else if(c.path.endsWith(".json")){
+      if(typeof c.content!=="string"||c.content.length>160000)throw Error("Lektionsplan zu gross.");
+      let lesson;try{lesson=JSON.parse(c.content);}catch{throw Error("Ungültiger Lektionsplan.");}
+      if(c.path!=="unterricht/lektionen/"+lesson.id+".json" || !/^\d{2}$/.test(lesson.id) ||
+         !(["einstieg","lernarten","perzeptron","netze","projekt","sprache","gesellschaft","lektion-"+lesson.id].includes(lesson.view)) ||
+         !Array.isArray(lesson.phases)||lesson.phases.length!==5 ||
+         lesson.phases.reduce((a,p)=>a+Number(p.minutes||0),0)!==90)
+         throw Error("Ungültige Lektions-ID, Unterrichtsbereich oder AVIVA-Minuten.");
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
-      if(c.expectedSha===null&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
+      if(c.expectedSha===null&&c.path.startsWith("kursseiten/")&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
     }else{
       if(typeof c.content!=="string"||c.content.length>4100000)throw Error("Bild ungültig oder zu gross.");
       let bytes;try{bytes=Uint8Array.from(atob(c.content),x=>x.charCodeAt(0));}catch{throw Error("Ungültiges Bildformat.");}
@@ -89,7 +100,7 @@ async function publish(req,token){
   const entries=[];
   for(const c of body.changes){
     if(c.delete)entries.push({path:c.path,mode:"100644",type:"blob",sha:null});
-    else if(c.path.endsWith(".md"))entries.push({path:c.path,mode:"100644",type:"blob",content:c.content});
+    else if(c.path.endsWith(".md")||c.path.endsWith(".json"))entries.push({path:c.path,mode:"100644",type:"blob",content:c.content});
     else{
       const blob=await github(token,prefix+"/git/blobs",{method:"POST",body:JSON.stringify({content:c.content,encoding:"base64"})});
       entries.push({path:c.path,mode:"100644",type:"blob",sha:blob.sha});
@@ -170,6 +181,11 @@ export default {
       if(url.pathname==="/api/session"&&req.method==="GET")return response({authenticated:!!active,login:active?.login||null});
       if(url.pathname.startsWith("/api/")){
         if(!active)return fail(401,"Bitte mit GitHub anmelden.");
+        if(req.method==="GET"&&url.pathname==="/api/lessons"){
+          const tree=await github(active.token,"/repos/"+REPO+"/git/trees/main?recursive=1");
+          if(tree.truncated)return fail(409,"Unvollständiger Dateiindex.");
+          return response({plans:tree.tree.filter(x=>x.type==="blob"&&/^unterricht\/lektionen\/[0-9]{2}\.json$/.test(x.path)).map(x=>({path:x.path,sha:x.sha}))});
+        }
         if(req.method==="GET"&&url.pathname==="/api/chapters"){
           const tree=await github(active.token,"/repos/"+REPO+"/git/trees/main?recursive=1");
           if(tree.truncated)return fail(409,"Unvollständiger Dateiindex.");
@@ -177,7 +193,7 @@ export default {
         }
         if(req.method==="GET"&&url.pathname==="/api/file"){
           const path=url.searchParams.get("path");
-          if(!allowed(path)||!path.endsWith(".md"))return fail(400,"Ungültige Datei.");
+          if(!allowed(path)||!(path.endsWith(".md")||path.endsWith(".json")))return fail(400,"Ungültige Datei.");
           const f=await github(active.token,"/repos/"+REPO+"/contents/"+path+"?ref=main");
           if(f.encoding!=="base64")return fail(409,"Datei nicht lesbar.");
           const content=decoder.decode(Uint8Array.from(atob(f.content.replace(/\s/g,"")),c=>c.charCodeAt(0)));

@@ -29,6 +29,11 @@
       <nav id="chapters" class="chapter-list" aria-label="Unterkapitel"></nav>
       <button id="create" type="button" class="button full">+ Neues Unterkapitel</button>
       <p class="small">Die Nummer vor dem Dateinamen bestimmt die Reihenfolge. Bestehende IDs bleiben beim Verschieben erhalten.</p>
+      <div class="sidebar-heading"><h2>Doppellektionen</h2></div>
+      <label for="lessonPick">Lektionsplan auswählen</label>
+      <select id="lessonPick"></select>
+      <button id="editLesson" type="button" class="button full">Plan & Materialien bearbeiten</button>
+      <button id="newLesson" type="button" class="button full">+ Neue Doppellektion</button>
     </aside>
     <section class="editor">
       <div class="editor-heading">
@@ -60,6 +65,22 @@
         <button id="publish" type="button" class="button primary">Pull Request erstellen</button>
         <div id="published" role="status"></div>
       </section>
+    </section>
+    <section id="lessonWorkspace" class="editor" hidden>
+      <div class="editor-heading"><div><p class="eyebrow" id="lessonPath"></p>
+      <h1 id="lessonHeading">Doppellektion bearbeiten</h1></div>
+      <button id="backToChapters" type="button" class="button light">Zurück zu den Kapiteln</button></div>
+      <p class="helper">Titel, Ziele und AVIVA-Unterrichtsplan sind eine eigenständige Datei.
+      Materialien erscheinen automatisch auf der Lehrpersonenseite. Jede AVIVA-Phase muss eine Dauer und ein Ergebnis enthalten; alle Zeiten zusammen ergeben 90 Minuten.</p>
+      <div id="lessonFields"></div>
+      <h2>AVIVA-Unterrichtsplan</h2><div id="phaseFields"></div>
+      <h2>Zusätzliche Lehrpersonenmaterialien</h2>
+      <p class="small">Hier Grafiken und Verweise in Markdown erfassen. Bestehende Kursgrafiken nur verlinken.</p>
+      <textarea id="teacherSource" rows="12" aria-label="Zusätzliche Lehrpersonenmaterialien"></textarea>
+      <div class="editor-actions">
+        <button id="stageLesson" class="button primary" type="button">Plan und Materialien vormerken</button>
+      </div>
+      <p class="small">Danach unten unter «Änderungen einreichen» den Pull Request erstellen.</p>
     </section>
   </main>
   <footer>Inhalte bleiben im Repository versioniert. <a href="https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/">Zur Kursseite</a> · <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht">GitHub-Repository</a></footer>

@@ -1,6 +1,6 @@
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
-const state={chapters:[],current:null,staged:new Map()};
+const state={chapters:[],current:null,staged:new Map(),plans:[],lesson:null};
 const sections=["einstieg","lernarten","perzeptron","netze","projekt","sprache","gesellschaft"];
 function status(message,error=false){$("notice").textContent=message;$("notice").classList.toggle("error",error);}
 function error(err){status(String(err.message||err),true);}
@@ -26,7 +26,9 @@ function stagingList(){
 }
 function chapterList(){
   const nav=$("chapters");nav.replaceChildren();
-  const prefix="kursseiten/"+$("section").value+"/";
+  const selected=$("section").value;
+  const prefix=selected.startsWith("lektion-") ?
+    "kursseiten/lektionen/"+selected.slice(8)+"/" : "kursseiten/"+selected+"/";
   for(const item of state.chapters.filter(c=>c.path.startsWith(prefix))){
     const button=document.createElement("button");button.type="button";
     button.textContent=filename(item.path);button.setAttribute("aria-current",String(state.current?.path===item.path));
@@ -34,6 +36,8 @@ function chapterList(){
   }
 }
 function useFile(path,sha,content,original=content){
+  $("lessonWorkspace").hidden=true;
+  document.querySelector(".workspace > .editor").hidden=false;
   state.current={path,sha,original};
   $("path").textContent=path;$("heading").textContent=filename(path);
   $("source").value=content;$("move").disabled=!sha;$("archive").disabled=!sha;
@@ -53,12 +57,15 @@ async function load(path){
 async function refresh(){
   const data=await api("/api/chapters");
   state.chapters=data.chapters.sort((a,b)=>a.path.localeCompare(b.path));
-  const valid=[...new Set(state.chapters.map(c=>c.path.split("/")[1]))].filter(x=>sections.includes(x));
+  const valid=[...new Set(state.chapters.map(c=>c.path.split("/")[1]==="lektionen"?
+    "lektion-"+c.path.split("/")[2]:c.path.split("/")[1]))].filter(x=>sections.includes(x)||/^lektion-\d{2}$/.test(x));
   const previous=$("section").value;
   $("section").replaceChildren();
   for(const value of valid){const option=document.createElement("option");option.value=value;option.textContent=value;$("section").append(option);}
-  $("section").value=valid.includes(previous)?previous:state.current?.path.split("/")[1]||valid[0]||"";
+  $("section").value=valid.includes(previous)?previous:(state.current?.path.split("/")[1]==="lektionen"?
+    "lektion-"+state.current.path.split("/")[2]:state.current?.path.split("/")[1])||valid[0]||"";
   chapterList();
+  await refreshLessons();
 }
 function insert(text){
   const source=$("source");source.focus();
@@ -98,7 +105,8 @@ function preview(){
   $("preview").srcdoc='<!doctype html><html lang="de"><head><meta charset="utf-8"><base href="https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/">'+stylesheet+'</head><body>'+content+"</body></html>";
 }
 function availableOrder(section,after){
-  const prefix="kursseiten/"+section+"/";
+  const prefix=section.startsWith("lektion-") ?
+    "kursseiten/lektionen/"+section.slice(8)+"/" : "kursseiten/"+section+"/";
   const orders=state.chapters.filter(c=>c.path.startsWith(prefix)).map(c=>Number(filename(c.path).slice(0,3))).filter(Number.isFinite).sort((a,b)=>a-b);
   if(!orders.length)throw Error("Dieser Unterrichtsbereich ist leer.");
   if(!after){const last=Math.max(...orders.filter(n=>n!==999));if(last+10>=999)throw Error("Kein freier Platz am Ende.");return last+10;}
@@ -118,8 +126,9 @@ function addChapter(){
     const after=prompt("Nach welchem Dateipräfix einfügen (z. B. 030)? Leer = anhängen:","");if(after===null)return;
     const numberPrefix=String(availableOrder(section,after.trim())).padStart(3,"0");
     const name=slug(title);if(!name)throw Error("Ungültiger Titel.");
-    const path="kursseiten/"+section+"/"+numberPrefix+"-"+name+".md";
-    if(state.chapters.some(c=>c.path===path||c.path.split("/").pop().slice(4)===(name+".md")&&c.path.startsWith("kursseiten/"+section+"/"))||state.staged.has(path))throw Error("Kapitel-ID oder Dateiname existiert bereits.");
+    const prefix=section.startsWith("lektion-") ? "kursseiten/lektionen/"+section.slice(8)+"/" : "kursseiten/"+section+"/";
+    const path=prefix+numberPrefix+"-"+name+".md";
+    if(state.chapters.some(c=>c.path===path||c.path.split("/").pop().slice(4)===(name+".md")&&c.path.startsWith(prefix))||state.staged.has(path))throw Error("Kapitel-ID oder Dateiname existiert bereits.");
     const doc="---\ntype: chapter\nid: "+section+"-"+name+"\nnummer: "+JSON.stringify(number)+"\ntitel: "+JSON.stringify(title)+"\nkurz: "+JSON.stringify(title)+"\nopen: true\n---\n\nText hier bearbeiten.\n\n## Auftrag\n\nAufgabe formulieren.\n";
     state.chapters.push({path,sha:null});state.chapters.sort((a,b)=>a.path.localeCompare(b.path));
     useFile(path,null,doc);status("Neues Kapitel angelegt; zuerst vormerken, dann Pull Request erstellen.");
@@ -161,9 +170,10 @@ function move(){
   const c=state.current;if(!c?.sha)return;
   try{
     const after=prompt("Nach welchem Dateipräfix verschieben?","030");if(after===null)return;
-    const section=c.path.split("/")[1];
+    const section=c.path.includes("/lektionen/")?"lektion-"+c.path.split("/")[2]:c.path.split("/")[1];
     const num=String(availableOrder(section,after.trim())).padStart(3,"0");
-    const target="kursseiten/"+section+"/"+num+c.path.split("/").pop().slice(3);
+    const folder=section.startsWith("lektion-")?"kursseiten/lektionen/"+section.slice(8)+"/":"kursseiten/"+section+"/";
+    const target=folder+num+c.path.split("/").pop().slice(3);
     if(state.chapters.some(x=>x.path===target)||state.staged.has(target))throw Error("Zielposition schon belegt.");
     state.staged.set(c.path,{path:c.path,expectedSha:c.sha,delete:true});
     state.staged.set(target,{path:target,expectedSha:null,content:$("source").value});
