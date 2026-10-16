@@ -1,4 +1,7 @@
 import {createPlanner} from "./plan-editor.js";
+// The public Pages origin has no authenticated API. Send editors to the Worker origin.
+const pagesOrigin = location.hostname === "fachschaft-informatik-kst.github.io";
+if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/" + location.search + location.hash);
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map()};
@@ -375,7 +378,7 @@ $("addImage").addEventListener("click",()=>$("imageFile").click());
 $("imageFile").addEventListener("change",addImage);
 $("logout").addEventListener("click",async()=>{try{await post("/auth/logout",{});location.assign("/");}catch(e){error(e);}});
 window.addEventListener("beforeunload",e=>{if(state.staged.size||(state.current&&$("source").value!==savedText())){e.preventDefault();e.returnValue="";}});
-(async()=>{
+if (!pagesOrigin) (async()=>{
   try{
     const s=await api("/api/session");
     $("intro").hidden=s.authenticated;$("login").hidden=s.authenticated;$("logout").hidden=!s.authenticated;
