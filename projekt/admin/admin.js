@@ -134,6 +134,7 @@ function availableOrder(section,after){
 }
 function addChapter(){
   try{
+    if(!confirmUnsaved())return;
     const section=$("section").value;
     const title=prompt("Titel des neuen Unterkapitels:");if(!title)return;
     const number=prompt("Sichtbare Kapitelnummer (z. B. 3a):");if(!number)return;
