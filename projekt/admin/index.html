@@ -40,9 +40,26 @@
         <button type="button" id="addHeading">+ Überschrift</button>
         <button type="button" id="addAnswer">+ Antwortfeld</button>
         <button type="button" id="addImage">+ Bild hochladen</button>
+        <label class="block-picker-label" for="blockType">Baustein</label>
+        <select id="blockType" aria-label="Inhaltsbaustein auswählen">
+          <option value="task">Aufgabe</option>
+          <option value="info">Infobox / Merksatz</option>
+          <option value="warning">Hinweis / Warnung</option>
+          <option value="card">Karte</option>
+          <option value="two">Zwei Spalten</option>
+          <option value="three">Drei Spalten</option>
+          <option value="steps">Arbeitsschritte</option>
+          <option value="flow">Prozess / Ablauf</option>
+          <option value="timeline">Zeitleiste / Meilensteine</option>
+          <option value="figure">Abbildung mit Bildlegende</option>
+          <option value="table">Tabelle</option>
+          <option value="quote">Zitat</option>
+          <option value="code">Codebeispiel</option>
+        </select>
+        <button id="addBlock" type="button">+ Baustein einfügen</button>
         <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden>
       </div>
-      <p class="helper" id="editorHelper">Markdown und bestehendes HTML können editiert werden. Bei älteren Kapiteln sind HTML-Blöcke teilweise nötig; IDs und <code>data-answer</code> nicht unbeabsichtigt ändern.</p>
+      <p class="helper" id="editorHelper">Markdown und bestehendes HTML können editiert werden. Die Bausteine verwenden die Klassen der veröffentlichten Kursseite. Antwort- und Notebook-IDs beim Bearbeiten nicht verändern.</p>
       <section id="planEditor" class="plan-editor" hidden>
         <h2>Unterrichtsplan nach AVIVA</h2>
         <p class="helper">Lernziele, Leitfrage, Phasen, Minuten und Arbeitsschritte bearbeiten. Die Gesamtzeit muss 90 Minuten betragen. Nummerierung und bestehende Kursverknüpfungen bleiben unverändert.</p>
