@@ -1,3 +1,4 @@
+import {setupLessonEditor} from "./lesson-editor.js";
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),plans:[],lesson:null};
@@ -216,6 +217,8 @@ async function publish(){
     await refresh();
   }catch(e){error(e);}finally{$("publish").disabled=false;}
 }
+const lessonEditor=setupLessonEditor({state,api,stage,status,error,$});
+async function refreshLessons(){await lessonEditor.refresh();}
 $("section").addEventListener("change",chapterList);
 $("refresh").addEventListener("click",()=>refresh().catch(error));
 $("create").addEventListener("click",addChapter);

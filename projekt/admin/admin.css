@@ -41,3 +41,19 @@ iframe#preview{width:100%;height:370px;border:1px solid var(--line);border-radiu
 footer{padding:20px 30px;text-align:center;color:var(--muted);font-size:12px}
 :focus-visible{outline:3px solid #b55137;outline-offset:3px}
 @media(max-width:760px){.topbar{align-items:flex-start}.workspace{display:block;padding:14px}.sidebar{position:static;max-height:380px;margin-bottom:15px}.editor{padding:15px}.editor-heading{display:block}.actions{margin-bottom:12px}.intro{margin:20px 12px}.account{flex-direction:column;align-items:end}}
+
+/* Editor for independent AVIVA plan and teacher material files. */
+#lessonWorkspace[hidden],.workspace>.editor[hidden]{display:none!important}
+#lessonWorkspace{min-width:0}
+.lesson-field{display:block;margin:11px 0}
+.lesson-field span{display:block;margin-bottom:5px;font-weight:650;font-size:13px}
+.lesson-field input,.lesson-field textarea{width:100%;border:1px solid #b8c6c1;padding:9px 10px;border-radius:7px;background:#fff}
+.lesson-field textarea{min-height:65px;resize:vertical}
+.aviva-phase{background:#f9fbf9;border:1px solid var(--line);border-radius:10px;padding:16px;margin:15px 0}
+.aviva-phase h3{font-size:17px}
+.aviva-step{display:grid;grid-template-columns:minmax(110px,1fr) minmax(110px,1fr);gap:8px;padding:10px;border:1px solid #e2e8e4;border-radius:8px;margin:12px 0;background:white}
+.aviva-step>.lesson-field{grid-column:1/-1}
+.aviva-step>select{min-width:0;width:100%;border:1px solid var(--line);border-radius:6px;padding:8px}
+.aviva-step>button{justify-self:end}
+#teacherSource{width:100%;min-height:220px;padding:12px;border:1px solid var(--line);border-radius:8px}
+@media(max-width:540px){.aviva-step{grid-template-columns:1fr}}
