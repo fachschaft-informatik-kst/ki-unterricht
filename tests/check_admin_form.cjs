@@ -73,6 +73,14 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#path").textContent(),/lehrperson\/ergaenzungen\/dl-11.md/);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n- Neues Experiment vorbereiten\n");
     await page.locator("#stage").click();
+    await page.evaluate(()=>{
+      const answers=["AVIVA-Testgrafik","Ankommen","Lehrperson"];
+      window.prompt=()=>answers.shift()??null;
+    });
+    const png=Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/XxkAAAAASUVORK5CYII=","base64");
+    await page.locator("#imageFile").setInputFiles({name:"test.png",mimeType:"image/png",buffer:png});
+    await page.locator("#stage").click();
+    assert.match(await page.locator("#source").inputValue(),/AVIVA-Testgrafik.*"Ankommen \| Lehrperson"/);
     await page.locator("#chapters button").first().click();
     assert.match(await page.locator("#path").textContent(),/kursseiten\/dl-11\//);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\nEin eigenes Beispiel.\n");
@@ -80,11 +88,12 @@ const server=http.createServer((req,res)=>{
     await page.locator("#publish").click();
     assert.ok(submitted);
     const names=submitted.changes.map(c=>c.path).sort();
-    assert.deepEqual(names,[
+    assert.deepEqual(names.filter(n=>!n.startsWith("projekt/grafiken/uploads/")),[
       "kursseiten/dl-11/010-einstieg-und-auftrag.md",
       "lehrperson/ergaenzungen/dl-11.md",
       "projekt/kurs.json"
     ]);
+    assert.equal(names.filter(n=>/^projekt\/grafiken\/uploads\/test-[a-f0-9]{8}\.png$/.test(n)).length,1);
     const updated=JSON.parse(submitted.changes.find(c=>c.path==="projekt/kurs.json").content);
     assert.equal(updated.lessons.length,11);
     assert.equal(updated.lessons[0].title,"Was ist KI? – Überarbeitet");
