@@ -29,5 +29,14 @@ assert.ok(query.get("state").length>=32);
 assert.match(auth.headers.get("Set-Cookie"),/HttpOnly; Secure; SameSite=Lax/);
 const invalid=await route("/auth/callback?code=wrong&state=wrong");
 assert.equal(invalid.status,403);
+// Asynchronous upstream errors must be caught by the Worker and encoded as
+// JSON. Otherwise Cloudflare returns a bare Error 1101 HTML page.
+const priorFetch=globalThis.fetch;
+try{
+  globalThis.fetch=async()=>{throw Error("Mock static upstream unavailable");};
+  const failure=await route("/admin.css");
+  assert.equal(failure.status,502);
+  assert.equal((await failure.json()).error,"Mock static upstream unavailable");
+}finally{globalThis.fetch=priorFetch;}
 // OAuth flow is intentionally not fully simulated: no GitHub credentials in CI.
 console.log("PASS admin: protected endpoints, OAuth PKCE, encrypted-cookie gateway and origin protection");
