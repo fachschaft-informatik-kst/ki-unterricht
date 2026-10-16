@@ -25,6 +25,6 @@ Journal und Unterrichtsantworten werden lokal gespeichert. Alle fünf geöffnete
 
 Ohne JavaScript sind Informationen lesbar, Experimente sowie Download und Wiederherstellung des Projektstands benötigen JavaScript. Beim Drucken werden alle Inhaltsbereiche angezeigt.
 
-## Grafiken und Materialien für Lehrpersonen
+## Zusatzgrafiken für Lehrpersonen
 
-Die kompakte Seite `projekt/materialien.html` entsteht aus `lehrperson/materialien.md` beim Aufruf von `scripts/build_course.py`. Sie ist im Lehrpersonen-Fussbereich neben dem Unterrichtsplan verlinkt. Grafiken aus `projekt/grafiken/` werden direkt angezeigt, können gross geöffnet werden und sind den zehn Doppellektionen zugeordnet. Die Seite enthält nur die wichtigsten Kurslinks und Downloads; Memory-Karten und zusätzliche Druckvorlagen werden nicht generiert. Verlinkte Notebooks und Arbeitsblätter werden weiterhin direkt aus den gepflegten Originalen nach `projekt/materialien/downloads/` kopiert.
+Die Seite `projekt/materialien.html` wird aus `lehrperson/materialien.md` generiert und steht neben dem Unterrichtsplan. Sie zeigt bewusst **zusätzliche** SVGs und kompakte Tafel-Tabellen, die nicht auf der allgemeinen Kursseite eingebettet sind, u. a. Perzeptron-Lernregel, Bias-Verschiebung und AND-/XOR-Gitter. Die Originale bleiben unter `content/img/` bzw. `worksheets/md/svg/`; der Build kopiert sie nach `projekt/materialien/downloads/`. Einsatzphasen und Sozialformen werden gegen `projekt/kurs.json` validiert. Auf der Schüler-Kursseite vorhandene Grafiken werden nur verlinkt, nicht dupliziert. Es gibt keine Memory-Vorlagen, da eigene Spiele verwendet werden.

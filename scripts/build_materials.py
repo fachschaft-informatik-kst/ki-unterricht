@@ -26,6 +26,12 @@ FILES = {
     "Arbeitsblatt_Perzeptron.md": "worksheets/md/Arbeitsblatt_Perzeptron.md",
     "Arbeitsblatt_Perzeptron_Lsg.md": "worksheets/md/Arbeitsblatt_Perzeptron_Lsg.md",
     "koordinatengitter_perzeptron.svg": "worksheets/md/svg/koordinatengitter_perzeptron.svg",
+    "perzeptron_lernregel_flussdiagramm.svg": "content/img/perzeptron_lernregel_flussdiagramm.svg",
+    "perzeptron_bias_shift.svg": "worksheets/md/svg/perzeptron_bias_shift.svg",
+    "koordinatengitter_perzeptron_and_loesung.svg": "worksheets/md/svg/koordinatengitter_perzeptron_and_loesung.svg",
+    "koordinatengitter_xor_einfach.svg": "worksheets/md/svg/koordinatengitter_xor_einfach.svg",
+    "koordinatengitter_or_nand_xor.svg": "worksheets/md/svg/koordinatengitter_or_nand_xor.svg",
+    "koordinatengitter_or_nand_xor_leer.svg": "worksheets/md/svg/koordinatengitter_or_nand_xor_leer.svg",
 }
 
 STYLE = """
@@ -52,7 +58,11 @@ nav.quick a:hover{background:var(--soft)}
 .graphic-grid figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fafcfb}
 .graphic-grid a{display:flex;align-items:center;justify-content:center;padding:12px;background:white;min-height:160px}
 .graphic-grid img{display:block;width:100%;height:220px;object-fit:contain}
-.graphic-grid figcaption{padding:9px 13px;color:var(--muted);font-size:13px;line-height:1.35}
+.graphic-grid figcaption{padding:9px 13px;color:var(--muted);font-size:13px;line-height:1.4}
+.graphic-grid figcaption .phase-label{display:block;margin:0 0 5px;color:var(--accent);font-weight:750;font-size:11px}
+.lesson-resources table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:14px}
+.lesson-resources th,.lesson-resources td{border:1px solid var(--line);padding:9px 11px;text-align:left}
+.lesson-resources th{background:#edf5ef}
 footer{color:var(--muted);font-size:13px;padding-top:20px}
 @media(max-width:600px){main{padding:20px 13px 60px}.lesson-resources{padding:17px 14px}.graphic-grid{grid-template-columns:1fr}.graphic-grid img{height:auto;max-height:250px}}
 @media print{body{background:white}main{padding:0;max-width:none}nav.quick,header a{display:none}.lesson-resources{border:0;border-bottom:1px solid #aaa;border-radius:0;break-inside:avoid;padding:16px 0}.graphic-grid img{height:180px}.graphic-grid figure{break-inside:avoid}}
@@ -67,11 +77,23 @@ def build(lessons: list[dict]) -> None:
         if not path.is_file():
             raise FileNotFoundError(f"Missing teacher download: {rel}")
         shutil.copyfile(path, DOWNLOADS / name)
+        if name == "perzeptron_lernregel_flussdiagramm.svg":
+            # Pin the exported draw.io background to white in the deployed copy.
+            target = DOWNLOADS / name
+            svg = target.read_text(encoding="utf-8")
+            svg = svg.replace(
+                "background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color-scheme: light dark;",
+                "background-color: #ffffff; color-scheme: light;"
+            ).replace(
+                "fill: light-dark(#ffffff, var(--ge-dark-color, #121212));",
+                "fill: #ffffff;"
+            )
+            target.write_text(svg, encoding="utf-8")
 
     source = SOURCE.read_text(encoding="utf-8")
     soup = BeautifulSoup(
         '<div id="materials-content">' +
-        MarkdownIt("commonmark", {"html": False}).render(source) + "</div>",
+        MarkdownIt("commonmark", {"html": False}).enable("table").render(source) + "</div>",
         "html.parser"
     )
     content = soup.find(id="materials-content")
@@ -103,14 +125,29 @@ def build(lessons: list[dict]) -> None:
                 alt = img.get("alt", "")
                 if not src or not alt:
                     raise ValueError(f"Image requires source and description in lesson {lesson['id']}")
+                phase_info = img.get("title", "")
+                if " | " not in phase_info:
+                    raise ValueError(f"Missing AVIVA assignment for {src}")
+                phase, roles = phase_info.split(" | ", 1)
+                p = next((p for p in lesson["phases"] if p["phase"] == phase), None)
+                if p is None:
+                    raise ValueError(f"Unknown AVIVA phase {phase} in lesson {lesson['id']}")
+                allowed = {step["wer"] for step in p["schritte"]}
+                for role in (r.strip() for r in roles.split("→")):
+                    if role not in allowed:
+                        raise ValueError(f"Unplanned AVIVA role {role} in lesson {lesson['id']}")
                 figure = soup.new_tag("figure")
                 link = soup.new_tag("a", href=src, target="_blank", rel="noopener")
                 img.extract()
+                img.attrs.pop("title", None)
                 img["loading"] = "lazy"
                 link.append(img)
                 figure.append(link)
                 caption = soup.new_tag("figcaption")
-                caption.string = alt
+                tag = soup.new_tag("span", attrs={"class": "phase-label"})
+                tag.string = phase + " · " + roles
+                caption.append(tag)
+                caption.append(alt)
                 figure.append(caption)
                 grid.append(figure)
                 paragraph.decompose()
@@ -130,7 +167,7 @@ def build(lessons: list[dict]) -> None:
 <footer>Grafiken können durch Anklicken vergrössert werden. Die Quelle dieser Übersicht liegt in <code>lehrperson/materialien.md</code>.</footer>
 </main></body></html>
 """, encoding="utf-8")
-    print(f"Built simplified teacher materials: {len(lessons)} lessons, {len(FILES)} downloads")
+    print(f"Built teacher extras: {len(lessons)} lessons, {len(FILES)} downloads")
 
 if __name__ == "__main__":
     import json
