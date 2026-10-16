@@ -169,7 +169,7 @@ async function auth(req,env,url){
   return new Response(null,{status:303,headers});
 }
 async function staticPage(url){
-  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js"};
+  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/plan-editor.js":"plan-editor.js"};
   const file=files[url.pathname];
   if(!file)return fail(404,"Nicht gefunden.");
   const source=await fetch(STATIC+file,{redirect:"error"});
