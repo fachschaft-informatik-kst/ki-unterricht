@@ -5,6 +5,16 @@ Ein kompakter KI-Block: erleben, gezielt experimentieren und erklären.
 - **[Kursportal öffnen](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**
 - **[Lehrpersonen: Ablauf und didaktische Hinweise](worksheets/md/KI_Planung.md)**
 
+## Lehrpersonen-Editor (GitHub)
+
+Ein integrierter [Lehrpersonen-Editor](projekt/admin/) ermöglicht neue und bestehende
+Unterkapitel, Bilder, Antwortfelder, Vorschau und versionierte Pull Requests direkt
+über die Weboberfläche. Die bereits vorhandene GitHub Action prüft alle Änderungen
+und veröffentlicht sie erst nach einem Merge auf `main`. Für den **geschützten
+GitHub-Login** muss einmalig eine GitHub App plus Cloudflare Worker eingerichtet
+werden; die reine GitHub-Pages-Seite kann keine Schreib-Tokens verwalten.
+Siehe [Einrichtung und Sicherheit](docs/ADMIN-EDITOR.md).
+
 ## Inhalte einfach bearbeiten
 
 **Single Source of Truth:** Die Unterrichtstexte werden unter `kursseiten/` gepflegt, die AVIVA-Planung in `projekt/kurs.json`. `projekt/index.html` und `projekt/unterrichtsplan.html` sind generierte Dateien und **nicht mehr in Git versioniert**. `make preview` und GitHub Actions bauen sie automatisch.
