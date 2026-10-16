@@ -404,7 +404,11 @@ async function publish(){
     const changes=[...state.staged.values()].map(c=>c.delete?
       {path:c.path,expectedSha:c.expectedSha,delete:true}:
       {path:c.path,expectedSha:c.expectedSha,content:c.content});
-    const result=await post("/api/publish",{title:$("prTitle").value,changes});
+    if(changes.length>12)throw Error("Maximal 12 Dateien pro Pull Request. Bitte Änderungen auf mehrere Pull Requests verteilen.");
+    const payload={title:$("prTitle").value,changes};
+    const bytes=new TextEncoder().encode(JSON.stringify(payload)).byteLength;
+    if(bytes>5000000)throw Error("Das Änderungspaket ist "+(bytes/1000000).toFixed(1)+" MB gross (maximal 5 MB). Bilder verkleinern oder Änderungen auf mehrere Pull Requests verteilen; vorgemerkte Änderungen bleiben erhalten.");
+    const result=await post("/api/publish",payload);
     const newPaths=new Set([...state.staged.values()].filter(c=>!c.expectedSha&&c.path.startsWith("kursseiten/")).map(c=>c.path));
     state.staged.clear();stagingList();
     // The chapter only exists on the PR branch until GitHub merges it.
