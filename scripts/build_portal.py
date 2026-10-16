@@ -30,7 +30,10 @@ def render_fragment(source: str, filename: Path) -> str:
         number, title, short = (str(meta.get(key, "")) for key in ("nummer", "titel", "kurz"))
         if not (number and title and short):
             raise ValueError(f"Chapter needs nummer, titel and kurz in {filename}")
-        status = " open" if meta.get("open", True) else ""
+        archived = meta.get("archiviert") is True
+        status = " open" if meta.get("open", True) and not archived else ""
+        if archived:
+            status += ' data-archived="true" hidden style="display:none"'
         body = MARKDOWN.render(source[match.end():])
         return (
             f'<details class="kapitel" id="{html.escape(chapter_id)}" '
