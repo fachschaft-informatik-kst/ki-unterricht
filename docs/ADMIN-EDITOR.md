@@ -13,7 +13,7 @@ Kapitel und neue Unterkapitel in den bestehenden Unterrichtsbereichen. Er kann:
 - Inhalte in einem **skriptgesperrten Vorschau-iframe** ansehen,
 - alles als **einen atomaren Commit auf einem neuen Branch und Pull Request** einreichen.
 
-Eine neue Doppellektion erzeugt automatisch Navigation, AVIVA-Unterrichtsplan und Materialabschnitt. Über «Unterrichtsplan bearbeiten» und «Materialien bearbeiten» können diese Dateien vor dem Pull Request angepasst werden.
+Eine neue Doppellektion erzeugt automatisch Navigation, AVIVA-Unterrichtsplan und Materialabschnitt. Über «Unterrichtsplan bearbeiten» erscheint ein **AVIVA-Formular** mit allen bestehenden und neuen Doppellektionen. Hier können Lernziele, Leitfrage, fünf Phasen, Zeiten, Sozialformen und einzelne Arbeitsschritte ohne JSON-Kenntnisse ergänzt werden. Die Minutenanzeige prüft auf 90 Minuten; neue Schritte lassen sich hinzufügen oder entfernen. «Materialien bearbeiten» öffnet die Markdown-Ergänzungen für die ausgewählte neue Doppellektion oder die bisherigen Materialseiten. Beides wird zusammen mit dem ersten Kapitel als Pull Request eingereicht. Eine neue Doppellektion pro Pull Request ist zulässig.
 
 Der Pull Request startet die **bestehende GitHub-Action**. Erst ein erfolgreicher
 Merge nach \`main\` löst die Veröffentlichung über GitHub Pages aus. Es gibt
