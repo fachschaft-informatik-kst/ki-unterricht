@@ -10,9 +10,23 @@ const sections=["einstieg","lernarten","perzeptron","netze","projekt","sprache",
 function status(message,error=false){$("notice").textContent=message;$("notice").classList.toggle("error",error);}
 function error(err){status(String(err.message||err),true);}
 async function api(url,options={}){
-  const response=await fetch(url,{credentials:"same-origin",cache:"no-store",...options});
-  const data=await response.json().catch(()=>({error:"Admin-Gateway nicht eingerichtet."}));
-  if(!response.ok)throw Error(data.error||"Serverfehler "+response.status);
+  let response;
+  try{response=await fetch(url,{credentials:"same-origin",cache:"no-store",redirect:"manual",...options});}
+  catch(e){throw Error("Admin-Gateway nicht erreichbar ("+url+"): "+String(e.message||e));}
+  const raw=await response.text();
+  let data=null;
+  try{data=JSON.parse(raw);}catch{}
+  if(!response.ok||!data||typeof data!=="object"){
+    const detail=typeof data?.error==="string"?data.error:null;
+    const label="HTTP "+response.status+" bei "+url;
+    if(response.status===401)throw Error("GitHub-Sitzung abgelaufen. Bitte erneut anmelden. ("+label+")");
+    if(response.status===413)throw Error("Die Änderungen sind für das Gateway zu gross ("+label+"). Bitte Bilder verkleinern.");
+    if(response.status===403)throw Error((detail||"Zugriff verweigert – GitHub-App-Rechte und Anmeldung prüfen.")+" ("+label+")");
+    if(detail)throw Error(detail+" ("+label+")");
+    throw Error("Admin-Gateway liefert keine gültige JSON-Antwort ("+label+
+      ", Content-Type: "+(response.headers.get("content-type")||"unbekannt")+
+      "). Prüfe Cloudflare Worker Logs und die Bereitstellung unter "+location.origin+".");
+  }
   return data;
 }
 const post=(url,value)=>api(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(value)});
@@ -85,24 +99,94 @@ function insert(text){
 }
 function escapeHtml(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");}
 function inline(s){
+  // Escape plain text first; render the safe Markdown constructs afterwards.
   let out=escapeHtml(s);
-  out=out.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;([^)]*)&quot;)?\)/g,(_,caption,url,title)=>'<img alt="'+caption+'" src="'+url+'"'+(title?' title="'+title+'"':"")+'>');
-  out=out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(_,label,url)=>'<a href="'+url+'">'+label+'</a>');
-  return out.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
+  const code=[];
+  out=out.replace(/`([^`]+)`/g,(_,value)=>{
+    code.push("<code>"+value+"</code>");return "\uE000"+(code.length-1)+"\uE001";
+  });
+  out=out.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;([^)]*)&quot;)?\)/g,(_,alt,url,title)=>{
+    const safe=/^(?:javascript|vbscript):/i.test(url)?"":url;
+    return '<img alt="'+alt+'" src="'+safe+'"'+(title?' title="'+title+'"':"")+'/>';
+  });
+  out=out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(_,name,url)=>{
+    const safe=/^(?:javascript|vbscript|data):/i.test(url)?"#":url;
+    return '<a href="'+safe+'">'+name+"</a>";
+  });
+  out=out.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")
+    .replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g,"<em>$1</em>")
+    .replace(/~~(.+?)~~/g,"<del>$1</del>");
+  return out.replace(/\uE000(\d+)\uE001/g,(_,i)=>code[Number(i)]);
+}
+function tableCells(line){
+  return line.trim().replace(/^\|/,"").replace(/\|$/,"").split(/(?<!\\)\|/).map(x=>x.replace(/\\\|/g,"|").trim());
 }
 function markdown(source){
-  const lines=source.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/,"").split(/\r?\n/);
-  let list=false;const out=[];
-  for(const raw of lines){
-    const s=raw.trim();
-    if(!s){if(list){out.push("</ul>");list=false;}continue;}
-    if(s.startsWith("<")){if(list){out.push("</ul>");list=false;}out.push(raw);continue;}
-    const heading=s.match(/^(#{1,5})\s+(.+)$/);
-    if(heading){if(list){out.push("</ul>");list=false;}const n=heading[1].length;out.push("<h"+n+">"+inline(heading[2])+"</h"+n+">");continue;}
-    if(/^[-*] /.test(s)){if(!list){out.push("<ul>");list=true;}out.push("<li>"+inline(s.slice(2))+"</li>");continue;}
-    if(list){out.push("</ul>");list=false;}out.push("<p>"+inline(s)+"</p>");
+  const lines=source.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/,"").replace(/\r\n/g,"\n").split("\n");
+  const out=[];let i=0;
+  const heading=/^(#{1,6})\s+(.+)$/;
+  const item=/^(\s*)([-+*]|\d+[.)])\s+(.+)$/;
+  const tableLine=line=>line.includes("|");
+  const isSeparator=line=>/^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+  while(i<lines.length){
+    const raw=lines[i],s=raw.trim();
+    if(!s){i++;continue;}
+    if(/^(```|~~~)/.test(s)){
+      const fence=s.slice(0,3),language=s.slice(3).trim().replace(/[^a-z0-9_-]/gi,"");
+      const content=[];i++;
+      while(i<lines.length&&!lines[i].trim().startsWith(fence))content.push(lines[i++]);
+      if(i<lines.length)i++;
+      out.push('<pre><code'+(language?' class="language-'+language+'"':"")+'>'+
+        escapeHtml(content.join("\n"))+'</code></pre>');continue;
+    }
+    const h=s.match(heading);
+    if(h){out.push("<h"+h[1].length+">"+inline(h[2])+"</h"+h[1].length+">");i++;continue;}
+    if(/^([-*_])(?:\s*\1){2,}\s*$/.test(s)){out.push("<hr>");i++;continue;}
+    if(tableLine(s)&&i+1<lines.length&&isSeparator(lines[i+1])){
+      const headers=tableCells(s),align=tableCells(lines[i+1]).map(x=>x.startsWith(":")?(x.endsWith(":")?"center":"left"):(x.endsWith(":")?"right":""));
+      out.push('<div class="table-scroll"><table><thead><tr>'+headers.map((x,j)=>'<th'+(align[j]?' style="text-align:'+align[j]+'"':"")+'>'+inline(x)+'</th>').join("")+'</tr></thead><tbody>');
+      i+=2;
+      while(i<lines.length&&lines[i].trim()&&tableLine(lines[i])){
+        const values=tableCells(lines[i++]);
+        out.push("<tr>"+headers.map((_,j)=>'<td'+(align[j]?' style="text-align:'+align[j]+'"':"")+'>'+inline(values[j]||"")+"</td>").join("")+"</tr>");
+      }
+      out.push("</tbody></table></div>");continue;
+    }
+    if(/^>\s?/.test(raw)){
+      const part=[];
+      while(i<lines.length&&/^>\s?/.test(lines[i]))part.push(lines[i++].replace(/^>\s?/,""));
+      out.push("<blockquote>"+markdown(part.join("\n"))+"</blockquote>");continue;
+    }
+    if(item.test(raw)){
+      const top=item.exec(raw)[1].length,ordered=/^\d/.test(item.exec(raw)[2]);
+      const tag=ordered?"ol":"ul";out.push("<"+tag+">");
+      while(i<lines.length){
+        const match=item.exec(lines[i]);
+        if(!match||match[1].length!==top||/^\d/.test(match[2])!==ordered)break;
+        i++;
+        const fragment=[match[3]];
+        while(i<lines.length&&lines[i].trim()&&!item.test(lines[i])&&/^\s+/.test(lines[i]))
+          fragment.push(lines[i++].trim());
+        out.push("<li>"+fragment.map(inline).join(" ")+"</li>");
+      }
+      out.push("</"+tag+">");continue;
+    }
+    if(/^</.test(s)){
+      // Legacy source files contain complete HTML blocks. Retain their markup;
+      // the containing iframe forbids scripts and same-origin execution.
+      const html=[];
+      while(i<lines.length&&lines[i].trim()){html.push(lines[i++]);}
+      out.push(html.join("\n"));continue;
+    }
+    const para=[s];i++;
+    while(i<lines.length&&lines[i].trim()&&!heading.test(lines[i].trim())&&
+      !item.test(lines[i])&&!/^>\s?/.test(lines[i])&&
+      !/^(```|~~~)/.test(lines[i].trim())&&
+      !/^</.test(lines[i].trim())&&!(i+1<lines.length&&tableLine(lines[i])&&isSeparator(lines[i+1]))){
+      para.push(lines[i++].trim());
+    }
+    out.push("<p>"+inline(para.join(" "))+"</p>");
   }
-  if(list)out.push("</ul>");
   return out.join("\n");
 }
 const COURSE_PREVIEW_BASE = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/";
@@ -307,13 +391,24 @@ async function publish(){
   if(!state.staged.size)return status("Zuerst Änderungen vormerken.",true);
   $("publish").disabled=true;
   try{
+    // Verify session immediately before writing. A browser tab may stay open
+    // long after the GitHub OAuth access token expires.
+    const session=await api("/api/session");
+    if(!session.authenticated){
+      $("login").hidden=false;
+      throw Error("Die GitHub-Sitzung ist abgelaufen. Bitte oben erneut anmelden; vorgemerkte Änderungen bleiben erhalten.");
+    }
     const c=state.current;
     if(c&&!state.staged.get(c.path)?.delete&&$("source").value!==savedText()&&!stage())return;
     status("Pull Request wird bei GitHub erstellt …");
     const changes=[...state.staged.values()].map(c=>c.delete?
       {path:c.path,expectedSha:c.expectedSha,delete:true}:
       {path:c.path,expectedSha:c.expectedSha,content:c.content});
-    const result=await post("/api/publish",{title:$("prTitle").value,changes});
+    if(changes.length>12)throw Error("Maximal 12 Dateien pro Pull Request. Bitte Änderungen auf mehrere Pull Requests verteilen.");
+    const payload={title:$("prTitle").value,changes};
+    const bytes=new TextEncoder().encode(JSON.stringify(payload)).byteLength;
+    if(bytes>5000000)throw Error("Das Änderungspaket ist "+(bytes/1000000).toFixed(1)+" MB gross (maximal 5 MB). Bilder verkleinern oder Änderungen auf mehrere Pull Requests verteilen; vorgemerkte Änderungen bleiben erhalten.");
+    const result=await post("/api/publish",payload);
     const newPaths=new Set([...state.staged.values()].filter(c=>!c.expectedSha&&c.path.startsWith("kursseiten/")).map(c=>c.path));
     state.staged.clear();stagingList();
     // The chapter only exists on the PR branch until GitHub merges it.
@@ -422,7 +517,12 @@ $("refresh").addEventListener("click",()=>refresh().catch(error));
 $("create").addEventListener("click",addChapter);
 $("move").addEventListener("click",move);
 $("archive").addEventListener("click",archive);
-$("source").addEventListener("input",()=>{});
+// Render changes shortly after typing, but do not interrupt rapid edits.
+let previewDebounce=null;
+$("source").addEventListener("input",()=>{
+  clearTimeout(previewDebounce);
+  if(!$("source").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
+});
 $("previewButton").addEventListener("click",preview);
 $("previewFullscreen").addEventListener("click",()=>{
   $("preview").requestFullscreen().catch(()=>status("Vollbildansicht wird vom Browser nicht unterstützt.",true));
@@ -436,7 +536,32 @@ $("addAnswer").addEventListener("click",()=>{
   insert('\n\n<label class="field answer"><span>'+escapeHtml(question)+
     '</span><textarea aria-label="'+escapeHtml(question)+'" data-answer="'+id+'" rows="4"></textarea></label>\n\n');
 });
+// Reusable, production-styled content blocks. They do not create persistent
+// answer IDs or alter existing course markup when inserted.
+const blocks={
+  task:'<div class="task">\n  <p><strong>Aufgabe:</strong> Beschreiben Sie den Arbeitsauftrag.</p>\n</div>',
+  info:'<div class="callout">\n  <p><strong>Merksatz:</strong> Die wichtigste Erkenntnis.</p>\n</div>',
+  warning:'<div class="callout warn">\n  <p><strong>Achtung:</strong> Diesen Punkt beachten.</p>\n</div>',
+  card:'<div class="card">\n  <h3>Titel der Karte</h3>\n  <p>Inhalt der Karte.</p>\n</div>',
+  two:'<div class="grid two">\n  <div class="card"><h3>Links</h3><p>Erster Inhalt.</p></div>\n  <div class="card"><h3>Rechts</h3><p>Zweiter Inhalt.</p></div>\n</div>',
+  three:'<div class="grid">\n  <div class="card"><h3>1</h3><p>Inhalt.</p></div>\n  <div class="card"><h3>2</h3><p>Inhalt.</p></div>\n  <div class="card"><h3>3</h3><p>Inhalt.</p></div>\n</div>',
+  steps:'<div class="lesson-steps">\n  <article><b>1 · Einstieg</b><p>Erster Schritt.</p></article>\n  <article><b>2 · Erarbeiten</b><p>Zweiter Schritt.</p></article>\n  <article><b>3 · Sichern</b><p>Dritter Schritt.</p></article>\n</div>',
+  flow:'<div class="process">\n  <span>Eingabe</span><strong>→</strong><span>Verarbeitung</span><strong>→</strong><span>Ausgabe</span>\n</div>',
+  timeline:'<ol class="timeline">\n  <li><span class="jahr">1950</span><div><strong>Meilenstein</strong> <span class="marke regeln">Regeln von Menschen</span><p>Beschreibung.</p></div></li>\n  <li><span class="jahr">2022</span><div><strong>Weiterer Meilenstein</strong> <span class="marke daten">Lernen aus Daten</span><p>Beschreibung.</p></div></li>\n</ol>',
+  figure:'<figure class="concept-figure">\n  <img src="grafiken/beispiel.svg" alt="Bildbeschreibung">\n  <figcaption>Bildlegende und Quellenangabe.</figcaption>\n</figure>',
+  table:'<div class="table-scroll">\n  <table><thead><tr><th>Kriterium</th><th>Wert</th></tr></thead>\n    <tbody><tr><td>Beispiel</td><td>Erklärung</td></tr></tbody></table>\n</div>',
+  quote:'<blockquote>\n  <p>Zitat oder zentraler Gedanke.</p>\n</blockquote>',
+  code:'<pre><code class="language-python"># Python-Beispiel\nprint("Hallo Welt")</code></pre>'
+};
+function insertBlock(){
+  const value=$("blockType").value;
+  if(!Object.hasOwn(blocks,value))return status("Unbekannter Baustein.",true);
+  insert("\n\n"+blocks[value]+"\n\n");
+  status("Baustein eingefügt – Änderungen vormerken, bevor sie veröffentlicht werden.");
+}
+
 $("addImage").addEventListener("click",()=>$("imageFile").click());
+$("addBlock").addEventListener("click",insertBlock);
 $("imageFile").addEventListener("change",addImage);
 $("logout").addEventListener("click",async()=>{try{await post("/auth/logout",{});location.assign("/");}catch(e){error(e);}});
 window.addEventListener("beforeunload",e=>{if(state.staged.size||(state.current&&$("source").value!==savedText())){e.preventDefault();e.returnValue="";}});

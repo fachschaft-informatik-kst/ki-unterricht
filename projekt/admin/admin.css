@@ -64,3 +64,7 @@ footer{padding:20px 30px;text-align:center;color:var(--muted);font-size:12px}
 .preview-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .preview-heading .preview-title{margin-bottom:12px}
 iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
+
+.toolbar .block-picker-label{display:inline-flex;align-items:center;font-size:13px;font-weight:650;color:var(--muted);margin-left:6px}
+.toolbar select{font-size:13px;max-width:225px;padding:8px 10px}
+.toolbar #addBlock{background:var(--soft);border-color:#a4bdb2;font-weight:650}
