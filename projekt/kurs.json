@@ -25,9 +25,15 @@
             },
             {
               "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Notieren Sie allein ein Kriterium für Intelligenz und Ihre Einschätzung zu den Robotern."
+            },
+            {
+              "art": "Auftrag",
               "wer": "Tandem",
-              "min": 4,
-              "text": "Notieren Sie ein Kriterium für Intelligenz und vergleichen Sie Ihre Einschätzungen zu den Robotern."
+              "min": 2,
+              "text": "Vergleichen Sie Ihre Einschätzungen zu den Robotern."
             },
             {
               "art": "Ergebnis",
@@ -44,14 +50,20 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 7,
+              "min": 5,
               "text": "Schreiben Sie Wenn-dann-Regeln, um Katzen und Hunde auf Fotos zu unterscheiden. Prüfen Sie Ihre Regeln an zwei Gegenbeispielen und markieren Sie eine Lücke."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 3,
+              "min": 2,
               "text": "Sammelt zwei Regeln mit Gegenbeispielen. Daraus entsteht die Frage: Können wir statt Regeln Beispiele geben?"
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 3,
+              "text": "Vergleichen Sie zwei Regelideen und benennen Sie gemeinsam eine Lücke."
             },
             {
               "art": "Ergebnis",
@@ -103,9 +115,15 @@
             },
             {
               "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Entscheiden Sie allein, was das Auto im Fall «Schulweg» tun soll, und notieren Sie einen Grund."
+            },
+            {
+              "art": "Auftrag",
               "wer": "Tandem",
-              "min": 10,
-              "text": "Entscheiden Sie zuerst allein, was das Auto tun soll, und vergleichen Sie im Tandem. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite)."
+              "min": 5,
+              "text": "Vergleichen Sie die Einzelentscheidungen. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite)."
             },
             {
               "art": "Ergebnis",
@@ -122,8 +140,14 @@
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 5,
+              "min": 2,
               "text": "Bespricht zwei strittige Zuordnungen. Klärt: Ein Programm mit festen Regeln kann KI sein, lernt aber nicht aus Daten; nicht jede Automatisierung ist KI."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 3,
+              "text": "Teilen Sie zwei strittige Beispielzuordnungen und prüfen Sie gemeinsam die Begründungen."
             },
             {
               "art": "Auftrag",
@@ -345,8 +369,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 55,
+              "min": 45,
               "text": "Arbeiten Sie im Notebook «Ein Neuron entscheidet»: ein Neuron von Hand einstellen, einen Lernschritt mit Gewichten 0.2/0.2, Bias −0.5, Eingabe (1,1) und Lernrate 0.2 von Hand nachvollziehen und mit der Ausgabe prüfen, dann lernen lassen. Untersuchen Sie XOR mit Punkten und Reglern. Dokumentieren Sie nur die zentrale Rechnung, eine beobachtete Korrektur und die XOR-Erklärung. Pflanzen und echte Ziffern sind freiwillig."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Zeichnen Sie allein die vier XOR-Punkte und notieren Sie, welche Grenze ein einzelnes Neuron Ihrer Vermutung nach lernen kann."
             },
             {
               "art": "Ergebnis",
@@ -363,13 +393,19 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 6,
+              "min": 4,
               "text": "Erklären Sie Gewicht, Bias und die Korrektur bei einer falschen Ausgabe. Begründen Sie mit den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 4,
+              "text": "Vergleichen Sie zwei Erklärungen zur XOR-Grenze und benennen Sie gemeinsam, was das einzelne Neuron begrenzt."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 4,
+              "min": 2,
               "text": "Sichert an der XOR-Grafik: Die Grenze liegt am Bau des Neurons, nicht an zu wenig Übung. Der algebraische Widerspruch ist Vertiefung."
             },
             {
@@ -459,8 +495,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 30,
+              "min": 25,
               "text": "Bearbeiten Sie im Notebook «Mehrere Neuronen kombinieren» den XOR-Kern: die vier Zeilen durch das konstruierte Netz verfolgen, dann ein Netz mit 1, 2 und 4 versteckten Neuronen lernen lassen. Erklären Sie die Funktion der Zwischenschicht. Ziffernexperimente sind Wahlvertiefung."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Skizzieren Sie allein, wie eine Zwischenschicht die XOR-Punkte trennen könnte, und markieren Sie Ihre offene Frage."
             },
             {
               "art": "Auftrag",
@@ -483,13 +525,19 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 6,
+              "min": 3,
               "text": "Halten Sie fest, was die Zwischenschicht leistet und warum dasselbe Objekt nicht zugleich in Training und Test vorkommt. Notieren Sie Ihren nächsten Vorbereitungsschritt."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 4,
+              "text": "Teilen Sie eine Erklärung zur Zwischenschicht oder zum Datenleck und prüfen Sie sie gemeinsam."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 4,
+              "min": 3,
               "text": "Gibt den vorbereitenden Auftrag: Datenplan mit fünf unabhängigen Gruppen prüfen und bis Doppellektion 5 möglichst 80 Fotos sammeln, acht je Klasse und Gruppe. Beide Klassen unter gleichen Bedingungen; Personen nur mit Einverständnis. Fehlende Daten werden in der SOL-Zeit ergänzt; Ersatzdaten nur nach Absprache mit offener Herkunft."
             },
             {
@@ -574,8 +622,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Erstellen Sie zu Beginn in Reflexion 1 einen kurzen Etappenplan bis zur Abgabe: nächste Schritte, Zuständigkeiten, Zeitbedarf und Reserve. Wählen Sie Ihr Tagesziel und bearbeiten Sie die passende Etappe. Prüfen und ergänzen Sie Fotos, importieren Sie die Daten und dokumentieren Sie Vermutung und Datenprobleme in Reflexion 1–2. Nutzen Sie Lernlabor und Hilfen nur nach Bedarf. Wer bereit ist, kann bereits vergleichen; wer Datenlücken hat, arbeitet zuerst daran. Die Lehrperson berät einzelne Tandems."
+              "min": 40,
+              "text": "Gleichen Sie Ihre persönlichen nächsten Schritte und Rollen ab und erstellen Sie in Reflexion 1 einen kurzen Etappenplan bis zur Abgabe: Zuständigkeiten, Zeitbedarf und Reserve. Wählen Sie Ihr Tagesziel und bearbeiten Sie die passende Etappe. Prüfen und ergänzen Sie Fotos, importieren Sie die Daten und dokumentieren Sie Vermutung und Datenprobleme in Reflexion 1–2. Nutzen Sie Lernlabor und Hilfen nur nach Bedarf. Wer bereit ist, kann bereits vergleichen; wer Datenlücken hat, arbeitet zuerst daran. Die Lehrperson berät einzelne Tandems."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Prüfen Sie allein, welchen konkreten Beitrag Sie als Nächstes übernehmen und woran Sie erkennen, dass er gelungen ist."
             },
             {
               "art": "Auftrag",
@@ -683,8 +737,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 60,
+              "min": 50,
               "text": "Arbeiten Sie an Ihrer gewählten Etappe. Vor jedem A/B-Lauf Daten prüfen; dann Bildzahl, Netz, Epochen und Startwert konstant halten. Lesen Sie Validierung und konkrete Vorhersagen, prüfen Sie eine alternative Erklärung und begründen Sie Ihre Auswahl in Reflexion 3 vor Testeinsicht. Bereite Tandems dürfen bereits abschliessen; andere ergänzen zuerst Daten und Reflexion 1–2. Die Lehrperson fragt in kurzen Beratungen nach Ziel, Beleg und nächstem Schritt; keine Unterbrechung der ganzen Klasse."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Bearbeiten Sie zuerst allein einen klar abgegrenzten Teil Ihrer gewählten Etappe und sichern Sie dazu einen konkreten Beleg. Greifen Sie bei fehlenden Daten weiterhin zuerst diese Lücke auf."
             },
             {
               "art": "Auftrag",
@@ -792,8 +852,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 55,
+              "min": 45,
               "text": "Schliessen Sie die noch offenen Etappen ab. Testen Sie die begründet ausgewählte Variante einmal auf P1/P2; untersuchen Sie drei konkrete Beispiele, ohne Fehler zu erfinden. Schreiben Sie Reflexion 4–5 mit Grenzen, Fazit, nächstem Versuch, Arbeitsteilung, Hilfen und einer kurzen Rückschau auf Ihren Etappenplan. Prüfen Sie Journal und Ausgaben mit dem Raster. Erklären Sie sich gegenseitig das ganze Projekt; keine Folien nötig. Bereiten Sie die erlaubten Austauschdateien vor."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Prüfen Sie allein einen persönlichen Anteil Ihrer Abschlussliste anhand des Rasters und notieren Sie einen noch fehlenden Beleg oder eine offene Frage."
             },
             {
               "art": "Auftrag",
@@ -871,8 +937,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 5,
+              "min": 2,
               "text": "Lesen Sie Vermutung und Ergebnis des anderen Tandems. Notieren Sie, was Sie nachprüfen wollen und welches Ergebnis Sie für Ihre eigenen Bilder erwarten. Die Gespräche laufen bereits; Sie arbeiten selbstständig."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 3,
+              "text": "Lesen Sie allein Vermutung und Ergebnis des anderen Tandems. Notieren Sie Ihre Prüffrage und eine Erwartung für Ihre eigenen Bilder."
             },
             {
               "art": "Ergebnis",
@@ -913,8 +985,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 25,
+              "min": 20,
               "text": "Fremdtest und Rückmeldung: Lassen Sie das nachtrainierte fremde Modell Ihre eigenen Klassen C/D beurteilen. Lesen Sie Tabelle, Trennschärfe und konkrete Beispiele. Begründen Sie «Wie gut?» und «Warum?» mit mindestens zwei möglichen Erklärungen und einer Grenze. Formulieren Sie eine Rückmeldung an das andere Tandem und sichern Sie sie im bestehenden Fremdtest-Protokoll."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Halten Sie nach dem Fremdtest zuerst allein fest, welche Beobachtung Sie am überzeugendsten finden und welche Grenze Ihre Aussage hat."
             },
             {
               "art": "Auftrag",
@@ -1022,8 +1100,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
+              "min": 40,
               "text": "Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Formulieren Sie vor dem digitalen Arbeitsweg allein eine Erwartung: Wie verändert ein grösserer Kontext die nächste Wortvorhersage? Halten Sie sie für den späteren Vergleich fest."
             },
             {
               "art": "Ergebnis",
@@ -1040,14 +1124,20 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 7,
+              "min": 5,
               "text": "Erklären Sie anhand Ihrer Beispiele, warum eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Papagei-Tabelle und neuronalem Sprachmodell und eine gemeinsame Grenze."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 3,
+              "min": 2,
               "text": "Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen einer falschen, aber überzeugenden Ausgabe?"
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 3,
+              "text": "Teilen Sie zwei Beispiele und klären Sie gemeinsam, weshalb Plausibilität keine Wahrheitsprüfung ist."
             },
             {
               "art": "Ergebnis",
@@ -1094,9 +1184,15 @@
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Gruppe",
-              "min": 5,
-              "text": "Wählen Sie eine Beobachtung aus Bildprojekt, Fremdauswertung oder Sprachmodell und nennen Sie eine mögliche Folge für Betroffene."
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Wählen Sie allein eine Beobachtung aus Bildprojekt, Fremdauswertung oder Sprachmodell und notieren Sie eine mögliche Folge für Betroffene."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 3,
+              "text": "Teilen Sie zwei Beobachtungen und verbinden Sie sie mit möglichen Folgen für Betroffene."
             },
             {
               "art": "Ergebnis",
@@ -1137,8 +1233,14 @@
             {
               "art": "Auftrag",
               "wer": "Gruppe",
-              "min": 45,
+              "min": 37,
               "text": "Bleiben Sie in derselben Gruppe und wählen Sie Bewerbungen, Schule oder Kredit. Prüfen Sie Ihren Fall mit Opacity, Scale und Damage, erzählen Sie seine Rückkopplung und entwickeln Sie eine konkrete Massnahme mit Erfolgskriterium und Zielkonflikt. Vergleichen Sie kurz mit einem Video-Beispiel und dem Bildprojekt: Warum ist das Schulprojekt wahrscheinlich keine WMD? Prüfen Sie O’Neils Aussage an Ihrem Fall: stärkstes Argument dafür, stärkstes Gegenargument, gemeinsames Urteil. Nutzen Sie die Leitfragen der Debatte als Gesprächshilfe; halten Sie nur zentrale Stichworte fest."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Prüfen Sie allein den gewählten Fall: Wer ist betroffen, welcher Beleg ist besonders wichtig und welche Folge könnte übersehen werden? Notieren Sie Stichworte für die anschliessende Gruppenbeurteilung."
             },
             {
               "art": "Ergebnis",
@@ -1155,13 +1257,13 @@
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 7,
+              "min": 10,
               "text": "Besprechen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut; die Lehrperson fragt: Wer ändert was, und woran wäre die Verbesserung erkennbar?"
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 8,
+              "min": 5,
               "text": "Notieren Sie kurz eine Erkenntnis, eine offene Frage und eine Rückmeldung zum KI-Block. Einzelne freiwillige Stimmen schliessen den Kurs ab; keine verpflichtende Runde aller Personen."
             },
             {

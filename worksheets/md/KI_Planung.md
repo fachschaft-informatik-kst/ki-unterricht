@@ -6,11 +6,11 @@
 
 **Doppellektionen 1–4:** gemeinsame Grundlagen mit einem zusammenhängenden Arbeitsblock pro Thema. Die Kursseite ist eine Materialsammlung, kein vollständig abzuarbeitender Parcours. Pflichtkern und Wahlvertiefung werden jeweils vor der Arbeit deutlich benannt. Nicht jedes Antwortfeld muss ausgefüllt werden.
 
-**Doppellektionen 5–8: SOL (selbst organisiertes Lernen).** Die Tandems setzen Tagesziele, verteilen Rollen und Zeit, wählen Hilfen, prüfen Fortschritte und passen ihren Plan an. Die Lehrperson verantwortet Rahmen, Beratung und Qualitätssicherung, nicht den gemeinsamen Takt aller Etappen. Doppellektion 8 gehört zur SOL-Phase: Während die Lehrperson Fachgespräche führt, werten die anderen Tandems selbstständig ein fremdes Modell aus.
+**Doppellektionen 5–8: SOL (selbst organisiertes Lernen).** Die Tandems setzen Tagesziele, verteilen Rollen und Zeit, wählen Hilfen, prüfen Fortschritte und passen ihren Plan an. In den längeren Arbeitsblöcken sind kurze individuelle Denk- und Prüfzeiten ausdrücklich eingeplant; sie ersetzen keine gemeinsame Projektarbeit. Die Lehrperson verantwortet Rahmen, Beratung und Qualitätssicherung, nicht den gemeinsamen Takt aller Etappen. Doppellektion 8 gehört zur SOL-Phase: Während die Lehrperson Fachgespräche führt, werten die anderen Tandems selbstständig ein fremdes Modell aus.
 
 **Doppellektionen 9–10:** Transfer zu Sprache und Gesellschaft, jeweils mit einem vertieften Arbeitsweg statt mehreren kurzen Stationen.
 
-**AVIVA** bleibt die äussere Orientierung: Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten. In den SOL-Lektionen sind Aktivierung, Informationssuche und Auswertung Tätigkeiten der Tandems, keine zusätzlichen Plenumswechsel. Die ausgewiesenen Zeiten sind Planungsbudgets, keine Signale zum synchronen Wechsel. Kurze Start- und Sicherungsroutinen rahmen lange Arbeitsblöcke.
+**AVIVA** bleibt die äussere Orientierung: Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten. Kurze gemeinsame Sicherungen und individuelle Denkzeiten sind dort ausgewiesen, wo sie fachlich etwas beitragen. In den SOL-Lektionen sind Aktivierung, Informationssuche und Auswertung Tätigkeiten der Tandems oder kurze individuelle Arbeitsschritte, keine zusätzlichen Plenumswechsel. Die ausgewiesenen Zeiten sind Planungsbudgets, keine Signale zum synchronen Wechsel. Kurze Start- und Sicherungsroutinen rahmen lange Arbeitsblöcke.
 
 **PADUA** prägt die Lernversuche: Frage und Vermutung, erklärtes Beispiel, Durcharbeiten, Üben und Übertragen. Es ist keine zweite Minutenplanung. Die Notebook-Zeit kommt nicht zusätzlich zur Unterrichtszeit hinzu. Handrechnung und digitale Versuche gehören zum selben Lernweg.
 
@@ -32,19 +32,23 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
 | Ankommen – Wann ist ein System intelligent? | 5 | Lehrperson | Zeigt zwei Saugroboter: einer fährt feste Bahnen, einer erstellt beim Fahren eine Karte. Stellt die Frage «Wann nennen Sie ein System intelligent?». |
-|  |  | Tandem | Notieren Sie ein Kriterium für Intelligenz und vergleichen Sie Ihre Einschätzungen zu den Robotern. |
+|  |  | Einzeln | Notieren Sie allein ein Kriterium für Intelligenz und Ihre Einschätzung zu den Robotern. |
+|  |  | Tandem | Vergleichen Sie Ihre Einschätzungen zu den Robotern. |
 |  |  | Ergebnis | Ein erstes Kriterium für «intelligent». |
 | Vorwissen aktivieren – Regeln für Katze oder Hund | 10 | Tandem | Schreiben Sie Wenn-dann-Regeln, um Katzen und Hunde auf Fotos zu unterscheiden. Prüfen Sie Ihre Regeln an zwei Gegenbeispielen und markieren Sie eine Lücke. |
 |  |  | Lehrperson | Sammelt zwei Regeln mit Gegenbeispielen. Daraus entsteht die Frage: Können wir statt Regeln Beispiele geben? |
+|  |  | Klasse | Vergleichen Sie zwei Regelideen und benennen Sie gemeinsam eine Lücke. |
 |  |  | Ergebnis | Regeln und eine begründete Grenze der Regeln. |
 | Informieren – Begriffe an einem Beispiel ordnen | 20 | Lehrperson | Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Ordnet schwache und starke KI sowie die vier KI-Typen ein: heutige Systeme sind schwache KI, Typ 1 oder 2; Typ 3 und 4 sind Forschungsziele. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen. |
 |  |  | Tandem | Ordnen Sie einen Spamfilter gemeinsam ein und klären Sie Ihre Fragen zu den Begriffen. |
 |  |  | Ergebnis | Eine gemeinsame Beispieleinordnung als Orientierung. |
 | Verarbeiten – Eigene Beispiele begründet einordnen | 45 | Tandem | Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk. |
 |  |  | Lehrperson | Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) kurz vor und zeigt den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen und gefährdet dabei den Fahrgast. |
-|  |  | Tandem | Entscheiden Sie zuerst allein, was das Auto tun soll, und vergleichen Sie im Tandem. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite). |
+|  |  | Einzeln | Entscheiden Sie allein, was das Auto im Fall «Schulweg» tun soll, und notieren Sie einen Grund. |
+|  |  | Tandem | Vergleichen Sie die Einzelentscheidungen. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite). |
 |  |  | Ergebnis | Drei begründete Beispiele, offene Fragen sichtbar markiert, und zwei Argumente zum Fall «Schulweg». |
 | Auswerten – Die Leitfrage beantworten | 10 | Lehrperson | Bespricht zwei strittige Zuordnungen. Klärt: Ein Programm mit festen Regeln kann KI sein, lernt aber nicht aus Daten; nicht jede Automatisierung ist KI. |
+|  |  | Klasse | Teilen Sie zwei strittige Beispielzuordnungen und prüfen Sie gemeinsam die Begründungen. |
 |  |  | Einzeln | Beantworten Sie die Leitfrage mit einem eigenen Beispiel und erklären Sie den Unterschied zwischen festen Regeln und Lernen aus Daten. |
 |  |  | Ergebnis | Eine eigene begründete Antwort auf die Leitfrage. |
 
@@ -110,8 +114,10 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Tandem | Rechnen Sie (0,1) selbst und erklären Sie den Unterschied zwischen Gewicht und Bias. |
 |  |  | Ergebnis | Eine geprüfte Rechnung als Orientierung für das Experiment. |
 | Verarbeiten – Ein Neuron einstellen und lernen lassen | 55 | Tandem | Arbeiten Sie im Notebook «Ein Neuron entscheidet»: ein Neuron von Hand einstellen, einen Lernschritt mit Gewichten 0.2/0.2, Bias −0.5, Eingabe (1,1) und Lernrate 0.2 von Hand nachvollziehen und mit der Ausgabe prüfen, dann lernen lassen. Untersuchen Sie XOR mit Punkten und Reglern. Dokumentieren Sie nur die zentrale Rechnung, eine beobachtete Korrektur und die XOR-Erklärung. Pflanzen und echte Ziffern sind freiwillig. |
+|  |  | Einzeln | Zeichnen Sie allein die vier XOR-Punkte und notieren Sie, welche Grenze ein einzelnes Neuron Ihrer Vermutung nach lernen kann. |
 |  |  | Ergebnis | Handrechnung, beobachteter Lernschritt und begründete Grenze. |
 | Auswerten – Was lernt das Neuron? | 10 | Einzeln | Erklären Sie Gewicht, Bias und die Korrektur bei einer falschen Ausgabe. Begründen Sie mit den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt. |
+|  |  | Klasse | Vergleichen Sie zwei Erklärungen zur XOR-Grenze und benennen Sie gemeinsam, was das einzelne Neuron begrenzt. |
 |  |  | Lehrperson | Sichert an der XOR-Grafik: Die Grenze liegt am Bau des Neurons, nicht an zu wenig Übung. Der algebraische Widerspruch ist Vertiefung. |
 |  |  | Ergebnis | Eine eigene Erklärung von Lernen und XOR-Grenze. |
 
@@ -143,9 +149,11 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Informieren – Zwischenschicht und Datentrennung | 15 | Lehrperson | Verfolgt (1,0) durch h₁ = OR und h₂ = NAND, danach AND am Ausgang. Unterscheidet festgelegte Gewichte von gelernten Gewichten. Zeigt anschliessend die Datentrennung mit Prüfungsanalogie und fünf Gruppenkarten: T1/T2 zum Trainieren, V1 zur Auswahl, P1/P2 erst zum Abschlusstest. Dasselbe Exemplar bleibt in derselben Gruppe. Nennt die Freigabekriterien für Projektthema und Klassen. |
 |  |  | Ergebnis | Zwei Orientierungshilfen: Netzbild und Rollen der fünf Datengruppen. |
 | Verarbeiten – XOR verstehen und das Projekt vorbereiten | 55 | Tandem | Bearbeiten Sie im Notebook «Mehrere Neuronen kombinieren» den XOR-Kern: die vier Zeilen durch das konstruierte Netz verfolgen, dann ein Netz mit 1, 2 und 4 versteckten Neuronen lernen lassen. Erklären Sie die Funktion der Zwischenschicht. Ziffernexperimente sind Wahlvertiefung. |
+|  |  | Einzeln | Skizzieren Sie allein, wie eine Zwischenschicht die XOR-Punkte trennen könnte, und markieren Sie Ihre offene Frage. |
 |  |  | Tandem | Ordnen Sie mit Gruppenkarten und Kursgrafik Training, Validierung und Test zu und erklären Sie ein Datenleck. Wählen Sie Thema und zwei Klassen aus dem Ideenpool; lassen Sie diese während der Arbeit bei der Lehrperson freigeben. Skizzieren Sie fünf unabhängige Gruppen. Das Notebook «Daten fair aufteilen» hilft bei Bedarf, ist aber kein zweiter Pflichtdurchlauf. |
 |  |  | Ergebnis | XOR-Erklärung, Datenrollen und ein freigegebenes Thema mit zwei Klassen. |
 | Auswerten – Brücke zur SOL-Phase | 10 | Tandem | Halten Sie fest, was die Zwischenschicht leistet und warum dasselbe Objekt nicht zugleich in Training und Test vorkommt. Notieren Sie Ihren nächsten Vorbereitungsschritt. |
+|  |  | Klasse | Teilen Sie eine Erklärung zur Zwischenschicht oder zum Datenleck und prüfen Sie sie gemeinsam. |
 |  |  | Lehrperson | Gibt den vorbereitenden Auftrag: Datenplan mit fünf unabhängigen Gruppen prüfen und bis Doppellektion 5 möglichst 80 Fotos sammeln, acht je Klasse und Gruppe. Beide Klassen unter gleichen Bedingungen; Personen nur mit Einverständnis. Fehlende Daten werden in der SOL-Zeit ergänzt; Ersatzdaten nur nach Absprache mit offener Herkunft. |
 |  |  | Ergebnis | Eine fachliche Sicherung und ein klarer Vorbereitungsauftrag. |
 
@@ -174,7 +182,8 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Ergebnis | Die fachlichen Leitplanken sind geklärt. |
 | Informieren – SOL-Rahmen statt Tagesrezepte | 10 | Lehrperson | Klärt einmal Auftrag, fünf Reflexionen, Bewertung und Frist vor Doppellektion 8. Verbindlich sind Datenregeln, fairer A/B-Vergleich, begründete Auswahl vor Testeinsicht und keine Optimierung danach. Frei sind Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. Zeigt Foto → festes MobileNet → 1280 Merkmale → trainierbares Netz sowie ZIP-Sicherung. Kündigt kurze Beratung auf Anfrage statt weiterer gemeinsamer Inputs an. |
 |  |  | Ergebnis | Ein gemeinsamer Rahmen und freie Planung innerhalb der fachlichen Abhängigkeiten. |
-| Verarbeiten – Etappen planen und selbstständig arbeiten | 60 | Tandem | Erstellen Sie zu Beginn in Reflexion 1 einen kurzen Etappenplan bis zur Abgabe: nächste Schritte, Zuständigkeiten, Zeitbedarf und Reserve. Wählen Sie Ihr Tagesziel und bearbeiten Sie die passende Etappe. Prüfen und ergänzen Sie Fotos, importieren Sie die Daten und dokumentieren Sie Vermutung und Datenprobleme in Reflexion 1–2. Nutzen Sie Lernlabor und Hilfen nur nach Bedarf. Wer bereit ist, kann bereits vergleichen; wer Datenlücken hat, arbeitet zuerst daran. Die Lehrperson berät einzelne Tandems. |
+| Verarbeiten – Etappen planen und selbstständig arbeiten | 60 | Tandem | Gleichen Sie Ihre persönlichen nächsten Schritte und Rollen ab und erstellen Sie in Reflexion 1 einen kurzen Etappenplan bis zur Abgabe: Zuständigkeiten, Zeitbedarf und Reserve. Wählen Sie Ihr Tagesziel und bearbeiten Sie die passende Etappe. Prüfen und ergänzen Sie Fotos, importieren Sie die Daten und dokumentieren Sie Vermutung und Datenprobleme in Reflexion 1–2. Nutzen Sie Lernlabor und Hilfen nur nach Bedarf. Wer bereit ist, kann bereits vergleichen; wer Datenlücken hat, arbeitet zuerst daran. Die Lehrperson berät einzelne Tandems. |
+|  |  | Einzeln | Prüfen Sie allein, welchen konkreten Beitrag Sie als Nächstes übernehmen und woran Sie erkennen, dass er gelungen ist. |
 |  |  | Tandem | Frei verfügbarer Puffer im SOL-Block für Datenlücken, Technik, Fragen oder gründlicheres Arbeiten; keine Zusatzpflicht. |
 |  |  | Ergebnis | Eigener Plan und nachvollziehbarer Fortschritt, nicht ein identischer Stand aller Tandems. |
 | Auswerten – Fortschritt prüfen und sichern | 10 | Tandem | Prüfen Sie Ihr Tagesziel. Ergänzen Sie im bestehenden Journal kurz: erreicht, offen, nächster Schritt und benötigte Hilfe. Passen Sie Ihren Plan an und laden Sie eine ZIP-Sicherung herunter. Kein zusätzlicher SOL-Bericht. |
@@ -206,6 +215,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Informieren – Benötigte Hilfe selbst wählen | 2 | Tandem | Wählen Sie bei Bedarf eine passende Hilfe im Notebook oder eine konkrete Beratungsfrage. Kein gemeinsamer Input; bei klarem Vorgehen direkt weiterarbeiten. |
 |  |  | Ergebnis | Ein passender Zugang zur nächsten Aufgabe. |
 | Verarbeiten – Selbst organisierte Untersuchung | 70 | Tandem | Arbeiten Sie an Ihrer gewählten Etappe. Vor jedem A/B-Lauf Daten prüfen; dann Bildzahl, Netz, Epochen und Startwert konstant halten. Lesen Sie Validierung und konkrete Vorhersagen, prüfen Sie eine alternative Erklärung und begründen Sie Ihre Auswahl in Reflexion 3 vor Testeinsicht. Bereite Tandems dürfen bereits abschliessen; andere ergänzen zuerst Daten und Reflexion 1–2. Die Lehrperson fragt in kurzen Beratungen nach Ziel, Beleg und nächstem Schritt; keine Unterbrechung der ganzen Klasse. |
+|  |  | Einzeln | Bearbeiten Sie zuerst allein einen klar abgegrenzten Teil Ihrer gewählten Etappe und sichern Sie dazu einen konkreten Beleg. Greifen Sie bei fehlenden Daten weiterhin zuerst diese Lücke auf. |
 |  |  | Tandem | Frei verfügbarer Puffer für Technik, Interpretation oder Beratung. Eine Vertiefung mit weiteren Startwerten ist freiwillig und nur vor Testeinsicht möglich. |
 |  |  | Ergebnis | Belegte Ergebnisse der gewählten Etappe; keine Pflicht zu einem klassenweit gleichen Stand. |
 | Auswerten – Zeitplan und Abgabe im Blick | 10 | Tandem | Vergleichen Sie Tagesziel und Ergebnis. Aktualisieren Sie den Etappenplan und den nächsten Schritt im Journal, sichern Sie als ZIP. Wenn die Abgabe gefährdet ist, vereinbaren Sie jetzt mit der Lehrperson eine realistische Lösung innerhalb der Projektregeln. |
@@ -237,6 +247,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Informieren – Abgabehilfen nach Bedarf | 2 | Tandem | Nutzen Sie Projektauftrag und Raster für fehlende Belege. Lesen Sie die bereits bekannt gegebenen Gesprächszeiten und Austauschregeln; Beratung nur bei konkreten Fragen. |
 |  |  | Ergebnis | Klarheit über den eigenen Abschlussweg. |
 | Verarbeiten – Abschluss selbst steuern | 70 | Tandem | Schliessen Sie die noch offenen Etappen ab. Testen Sie die begründet ausgewählte Variante einmal auf P1/P2; untersuchen Sie drei konkrete Beispiele, ohne Fehler zu erfinden. Schreiben Sie Reflexion 4–5 mit Grenzen, Fazit, nächstem Versuch, Arbeitsteilung, Hilfen und einer kurzen Rückschau auf Ihren Etappenplan. Prüfen Sie Journal und Ausgaben mit dem Raster. Erklären Sie sich gegenseitig das ganze Projekt; keine Folien nötig. Bereiten Sie die erlaubten Austauschdateien vor. |
+|  |  | Einzeln | Prüfen Sie allein einen persönlichen Anteil Ihrer Abschlussliste anhand des Rasters und notieren Sie einen noch fehlenden Beleg oder eine offene Frage. |
 |  |  | Tandem | Puffer für fehlende Belege, technischen Export und Beratung. Datenarbeit bei Bedarf zuerst fertigstellen, nicht zugunsten eines schnellen Tests überspringen. Keine neuen Pflichtversuche. |
 |  |  | Ergebnis | Eine nachvollziehbare abgeschlossene Untersuchung und vorbereitete Austauschdateien. |
 | Auswerten – Abgabe sichern | 10 | Tandem | Prüfen Sie das ZIP auf Journal, Notebook mit Ausgaben, Daten und Protokoll. Laden Sie den finalen Stand herunter und reichen Sie ihn spätestens vor Beginn der Doppellektion 8 über den angegebenen Kanal ein. Halten Sie Ihre eigene Fotostudio-JSON für die Fremdauswertung bereit. Der Download allein ist keine Einreichung. |
@@ -265,11 +276,13 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Tandem | Öffnen Sie das zugeteilte Paket und notieren Sie Ihr Gesprächsfenster. |
 |  |  | Ergebnis | Alle kennen Gesprächszeit und Austauschprojekt. |
 | Vorwissen aktivieren – Eigene Prüffrage wählen | 5 | Tandem | Lesen Sie Vermutung und Ergebnis des anderen Tandems. Notieren Sie, was Sie nachprüfen wollen und welches Ergebnis Sie für Ihre eigenen Bilder erwarten. Die Gespräche laufen bereits; Sie arbeiten selbstständig. |
+|  |  | Einzeln | Lesen Sie allein Vermutung und Ergebnis des anderen Tandems. Notieren Sie Ihre Prüffrage und eine Erwartung für Ihre eigenen Bilder. |
 |  |  | Ergebnis | Eine eigene Prüffrage und eine Erwartung vor dem Fremdtest. |
 | Informieren – Austauschauftrag erschliessen | 5 | Tandem | Lesen Sie Reproduktionsprüfung und Fremdtest auf der Kursseite. Teilen Sie die Arbeit auf. Vergleichen Sie einen Lauf mit Startwert 11; weitere Startwerte sind freiwillig. Nutzen Sie Hilfetexte und notieren Sie technische Blockaden, ohne laufende Gespräche zu unterbrechen. |
 |  |  | Ergebnis | Ein selbst gewähltes Vorgehen für die Fremdauswertung. |
 | Verarbeiten – Fremdes Modell prüfen; Gespräche parallel | 70 | Tandem | Reproduktionsprüfung: Stellen Sie das fremde Projekt in einem privaten Browserfenster wieder her. Laden Sie Daten und trainieren Sie A/B einmal mit den Einstellungen des Originals und Startwert 11 nach. Wiederholen Sie den Abschlusstest mit der ursprünglichen Auswahl. Vergleichen Sie Datenprüfsumme und Werte mit dem Protokoll. Dokumentieren Sie kurz, was übereinstimmt, abweicht oder nicht prüfbar ist. Dies ist der erste Teil der unbenoteten Fremdauswertung. |
 |  |  | Tandem | Fremdtest und Rückmeldung: Lassen Sie das nachtrainierte fremde Modell Ihre eigenen Klassen C/D beurteilen. Lesen Sie Tabelle, Trennschärfe und konkrete Beispiele. Begründen Sie «Wie gut?» und «Warum?» mit mindestens zwei möglichen Erklärungen und einer Grenze. Formulieren Sie eine Rückmeldung an das andere Tandem und sichern Sie sie im bestehenden Fremdtest-Protokoll. |
+|  |  | Einzeln | Halten Sie nach dem Fremdtest zuerst allein fest, welche Beobachtung Sie am überzeugendsten finden und welche Grenze Ihre Aussage hat. |
 |  |  | Tandem | Puffer für Gesprächsunterbrechung, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim Aufruf pausieren Sie. Im Fachgespräch erklären beide das eigene Projekt, eine Entscheidung, ein Ergebnis samt Grenze und einen neuen Fall. Bei nicht lösbarem Trainingsproblem werten Sie die gespeicherten fremden Ausgaben und Beispiele aus und dokumentieren, was nicht reproduziert werden konnte; keinen erfolgreichen Test behaupten. |
 |  |  | Ergebnis | Ein Fachgespräch und eine belegte Fremdauswertung; der eigene Abgabestand bleibt unverändert. |
 | Auswerten – Rückmeldung sichern | 5 | Tandem | Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel. |
@@ -301,9 +314,11 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Informieren – Vom Wortfolgemodell zum Netz | 15 | Lehrperson | Erklärt zusammenhängend das Papagei-Modell: Häufigkeiten von Wortfolgen liefern Fortsetzungen. Zeigt danach die Grafik «Papagei-Modell und neuronales Sprachmodell»: gleiches Ziel, nächstes Token vorhersagen, aber trainierte Gewichte, Zahlendarstellungen ähnlicher Wörter und grösserer Kontext statt blosser Häufigkeitstabelle. Beide Verfahren garantieren keine Wahrheit. Nennt einen digitalen Arbeitsweg und die passenden Pflichtstationen; die Alternative dient nur bei Bedarf. |
 |  |  | Ergebnis | Ein Modellverständnis als Grundlage für den Vergleich. |
 | Verarbeiten – Ein Werkzeug gründlich untersuchen | 50 | Tandem | Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen. |
+|  |  | Einzeln | Formulieren Sie vor dem digitalen Arbeitsweg allein eine Erwartung: Wie verändert ein grösserer Kontext die nächste Wortvorhersage? Halten Sie sie für den späteren Vergleich fest. |
 |  |  | Ergebnis | Ein belegter Vergleich und zwei kritisch eingeordnete Beispiele. |
 | Auswerten – Plausibilität und Wahrheit trennen | 10 | Einzeln | Erklären Sie anhand Ihrer Beispiele, warum eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Papagei-Tabelle und neuronalem Sprachmodell und eine gemeinsame Grenze. |
 |  |  | Lehrperson | Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen einer falschen, aber überzeugenden Ausgabe? |
+|  |  | Klasse | Teilen Sie zwei Beispiele und klären Sie gemeinsam, weshalb Plausibilität keine Wahrheitsprüfung ist. |
 |  |  | Ergebnis | Eine eigene Erklärung von Verfahren und Grenzen. |
 
 
@@ -327,12 +342,14 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |---|---:|---|---|
 | Ankommen – Eine erste Position | 5 | Einzeln | Beziehen Sie am Platz Position zur These «Gleiche Regeln sind automatisch fair» und notieren Sie einen Grund. |
 |  |  | Ergebnis | Eine persönliche Ausgangsposition. |
-| Vorwissen aktivieren – Ein Datenproblem und seine Folge | 5 | Gruppe | Wählen Sie eine Beobachtung aus Bildprojekt, Fremdauswertung oder Sprachmodell und nennen Sie eine mögliche Folge für Betroffene. |
+| Vorwissen aktivieren – Ein Datenproblem und seine Folge | 5 | Einzeln | Wählen Sie allein eine Beobachtung aus Bildprojekt, Fremdauswertung oder Sprachmodell und notieren Sie eine mögliche Folge für Betroffene. |
+|  |  | Klasse | Teilen Sie zwei Beobachtungen und verbinden Sie sie mit möglichen Folgen für Betroffene. |
 |  |  | Ergebnis | Eine Verbindung zwischen Modellgrenze und gesellschaftlicher Folge. |
 | Informieren – O’Neils Warnung verstehen | 20 | Lehrperson | Zeigt Cathy O’Neils TED Talk mit Beobachtungsauftrag: ein Beispiel, wer entscheidet, wer betroffen ist und ob Betroffene die Entscheidung prüfen können. |
 |  |  | Lehrperson | Klärt Opacity, Scale und Damage an einem Video-Beispiel und erklärt eine Rückkopplung. Die Lernenden ergänzen nur Stichworte. Keine separate Schreib- oder Wechselphase. |
 |  |  | Ergebnis | Ein Video-Beleg und gemeinsame Prüfkriterien. |
 | Verarbeiten – Einen Fall gründlich beurteilen | 45 | Gruppe | Bleiben Sie in derselben Gruppe und wählen Sie Bewerbungen, Schule oder Kredit. Prüfen Sie Ihren Fall mit Opacity, Scale und Damage, erzählen Sie seine Rückkopplung und entwickeln Sie eine konkrete Massnahme mit Erfolgskriterium und Zielkonflikt. Vergleichen Sie kurz mit einem Video-Beispiel und dem Bildprojekt: Warum ist das Schulprojekt wahrscheinlich keine WMD? Prüfen Sie O’Neils Aussage an Ihrem Fall: stärkstes Argument dafür, stärkstes Gegenargument, gemeinsames Urteil. Nutzen Sie die Leitfragen der Debatte als Gesprächshilfe; halten Sie nur zentrale Stichworte fest. |
+|  |  | Einzeln | Prüfen Sie allein den gewählten Fall: Wer ist betroffen, welcher Beleg ist besonders wichtig und welche Folge könnte übersehen werden? Notieren Sie Stichworte für die anschliessende Gruppenbeurteilung. |
 |  |  | Ergebnis | Ein Fallurteil mit Belegen, Gegenargument und überprüfbarer Massnahme. |
 | Auswerten – Urteil und ruhiger Kursabschluss | 15 | Klasse | Besprechen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut; die Lehrperson fragt: Wer ändert was, und woran wäre die Verbesserung erkennbar? |
 |  |  | Einzeln | Notieren Sie kurz eine Erkenntnis, eine offene Frage und eine Rückmeldung zum KI-Block. Einzelne freiwillige Stimmen schliessen den Kurs ab; keine verpflichtende Runde aller Personen. |

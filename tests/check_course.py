@@ -14,6 +14,15 @@ from build_course import PHASES
 
 lessons=json.loads((root/'projekt/kurs.json').read_text())['lessons']
 assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,11)]
+planned_minutes={
+    role: sum(step.get('min',0) for lesson in lessons for phase in lesson['phases'] for step in phase['schritte'] if step['wer']==role)
+    for role in ['Einzeln','Klasse']
+}
+assert planned_minutes['Einzeln']>=100
+assert planned_minutes['Klasse']>=50
+for lesson in lessons:
+    if lesson['id'] in ['05','06','07','08']:
+        assert any(step['wer']=='Einzeln' for phase in lesson['phases'] for step in phase['schritte'])
 soup=BeautifulSoup((root/'projekt/index.html').read_text(),'html.parser')
 rules=soup.select_one('#einstieg-1')
 assert rules.select_one('textarea[data-answer="regeln_oder_daten"][aria-label]')
