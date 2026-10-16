@@ -2,9 +2,11 @@
 
 Diese Dateien sind die Quellen der Kursseite. `projekt/index.html` und `projekt/unterrichtsplan.html` werden beim Build erzeugt und **nicht** in Git versioniert.
 
-Die Bereiche einstieg, lernarten, perzeptron, netze, projekt, sprache und gesellschaft
-entsprechen den Doppellektionen 1–10; projekt umfasst Doppellektionen 5–8.
-start, lernziele, journal, bewertung und sicherung sind übergreifende Bereiche.
+Die bestehenden Bereiche einstieg, lernarten, perzeptron, netze, projekt, sprache und gesellschaft
+entsprechen Doppellektionen 1–10; projekt umfasst Doppellektionen 5–8.
+Weitere Doppellektionen erhalten automatisch den Ordner `kursseiten/lektionen/NN/`
+mit eigener Navigation. `start`, `lernziele`, `journal`, `bewertung` und `sicherung`
+bleiben übergreifende Bereiche.
 
 Dateien beginnen mit 000 (Einleitung), dann 010, 020 usw. (Kapitel), und 999 (Abschluss).
 Bestehende Textpassagen können direkt in der jeweiligen Kapiteldatei geändert oder
@@ -80,6 +82,23 @@ Eine neue Datei z. B. kursseiten/perzeptron/035-vertiefung.md erstellen:
     ![Neuron](grafiken/perzeptron.svg)
 
 Die Kapitelübersicht entsteht automatisch aus allen details.kapitel.
+
+## Eine neue vollständige Doppellektion
+
+Beispiel (nach den bestehenden zehn Doppellektionen):
+
+```sh
+python scripts/new_lesson.py "KI und Umwelt"
+python scripts/new_chapter.py lektion-11 --nummer 2 --title "Vertiefung"
+make preview
+```
+
+Die erste Anweisung erzeugt den AVIVA-Plan in `unterricht/lektionen/NN.json`,
+den Kurs-Einstieg unter `kursseiten/lektionen/NN/` und das Materialblatt
+`lehrperson/lektionen/NN.md`. Die neue Lektion erscheint automatisch in
+Kursnavigation, AVIVA-Unterrichtsplan und Lehrpersonen-Materialkoffer.
+Im angemeldeten Admin-Editor erledigt der Knopf «Neue Doppellektion» dieselbe
+Aufgabe mit Formularen für Lernziele und AVIVA-Phasen.
 
 ## Wichtige Kompatibilitätsregeln
 

@@ -17,7 +17,7 @@ Siehe [Einrichtung und Sicherheit](docs/ADMIN-EDITOR.md).
 
 ## Inhalte einfach bearbeiten
 
-**Single Source of Truth:** Die Unterrichtstexte werden unter `kursseiten/` gepflegt, die AVIVA-Planung in `projekt/kurs.json`. `projekt/index.html` und `projekt/unterrichtsplan.html` sind generierte Dateien und **nicht mehr in Git versioniert**. `make preview` und GitHub Actions bauen sie automatisch.
+**Single Source of Truth:** Die Unterrichtstexte liegen unter `kursseiten/`, die AVIVA-Pläne **pro Doppellektion** unter `unterricht/lektionen/01.json`, `02.json` usw. und die Lehrpersonenmaterialien unter `lehrperson/lektionen/01.md` usw. `projekt/kurs.json`, `projekt/index.html` und `projekt/unterrichtsplan.html` werden beim Build generiert und **nicht in Git versioniert**.
 
 Ein neues Unterkapitel kannst du direkt erstellen und anschliessend als Markdown bearbeiten:
 
@@ -26,7 +26,13 @@ python scripts/new_chapter.py einstieg --after 030 --nummer 3a --title "Ein neue
 make preview
 ```
 
-Der Generator prüft Sortierung, gültigen Bereich und eindeutige IDs; bestehende Kapitel werden nicht verändert. Für vollständig **neue Doppellektionen** braucht es heute noch Anpassungen an `projekt/kurs.json` und an mehreren fixen Zuordnungen. Der Weg zu einer dateibasierten, CMS-ähnlichen Architektur ist in [docs/ARCHITEKTUR.md](docs/ARCHITEKTUR.md) beschrieben.
+**Neue Doppellektion:** Im angemeldeten [Lehrpersonen-Editor](projekt/admin/) auf «+ Neue Doppellektion» klicken. Lernziel, Leitfrage, AVIVA-Zeiten, Arbeitsschritte und zusätzliche Materialien über Formulare bearbeiten; Kursabschnitt, Plan und Materialseite erscheinen nach dem Merge automatisch. Lokal geht das ebenso mit:
+```sh
+python scripts/new_lesson.py "KI und Umwelt"
+python scripts/new_chapter.py lektion-11 --nummer 2 --title "Vertiefung"
+make preview
+```
+Die Nummer 11 ist ein Beispiel für die nächste freie Doppellektion; falls schon weitere vorhanden sind, erhöht das Skript die Nummer automatisch. Details: [Architektur](docs/ARCHITEKTUR.md).
 
 Die Doppellektionen liegen kapitelweise unter [`kursseiten/`](kursseiten).
 Absätze und Zwischenüberschriften in den Markdown-Bereichen sind direkt
@@ -75,6 +81,7 @@ Die Notebooks und der vollständige ZIP-Laufzeitexport benötigen dagegen
 | `make build` | Komplette Seite nach `dist/` bauen, ohne Server |
 | `make serve` | Vorhandenen Build aus `dist/` direkt ansehen |
 | `make test` | Build und lokale Struktur-/Funktionstests ausführen |
+| `make new-lesson TITLE="..."` | Eine neue Doppellektion samt AVIVA-Plan und Materialien erstellen |
 | `make install` | Alle Abhängigkeiten installieren |
 | `make clean` | Generierte lokale Umgebung und Build-Dateien entfernen |
 | `make help` | Kurzübersicht der Befehle anzeigen |
@@ -89,7 +96,7 @@ laufen weiterhin automatisch in GitHub Actions.
 ### Inhalt, View und Controller (MVC-Prinzip)
 
 - **Model/Inhalt:** `kursseiten/` (Lerntexte, Aufgaben, Medien, Formulare),
-  `projekt/kurs.json` (AVIVA-Planung).
+  `unterricht/lektionen/*.json` (AVIVA), `lehrperson/lektionen/*.md` (Zusatzmaterialien).
 - **View:** `projekt/index.template.html`, `projekt/portal.css` und die
   Python-Generatoren `scripts/build_portal.py`, `scripts/build_course.py`.
 - **Controller:** `projekt/portal.js`, `projekt/progress.js` (Notebook-Events,
