@@ -71,6 +71,7 @@ jobs:
           node tests/check_archive.cjs
           node tests/check_notebook_snapshot.cjs
           node --check projekt/admin/admin.js
+          node --check projekt/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
           node tests/check_admin.mjs
       - name: Check simplified teaching project
@@ -97,6 +98,7 @@ jobs:
           python scripts/copy_portal.py dist
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
+          test -f dist/projekt/admin/plan-editor.js
       - name: Check deployed notebook runtime in Chromium
         timeout-minutes: 20
         run: |
