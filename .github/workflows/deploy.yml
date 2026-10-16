@@ -72,6 +72,7 @@ jobs:
           python tests/check_course.py
           python scripts/format_course_sources.py --check
           python tests/check_portal_content.py
+          python tests/check_solutions.py
           python tests/check_content_mvc.py
           jupyter lite build --contents content --output-dir dist
           python scripts/copy_portal.py dist

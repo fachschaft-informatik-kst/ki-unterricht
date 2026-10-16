@@ -72,6 +72,7 @@ full: local
 test: build
 	$(VENV_PY) tests/check_course.py
 	$(VENV_PY) tests/check_portal_content.py
+	$(VENV_PY) tests/check_solutions.py
 	$(VENV_PY) tests/check_content_mvc.py
 	$(VENV_PY) tests/check_ki_basis.py
 	$(VENV_PY) tests/check_pyodide_lock.py

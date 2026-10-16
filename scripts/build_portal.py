@@ -68,6 +68,8 @@ def assemble() -> str:
 
 def build() -> None:
     (PORTAL / "index.html").write_text(assemble(), encoding="utf-8")
+    from build_solutions import build as build_solutions
+    build_solutions()
     print("Built course portal from editable content fragments")
 
 
