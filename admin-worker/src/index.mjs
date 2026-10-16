@@ -66,7 +66,7 @@ function validate(changes){
       }
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
-      if(c.expectedSha===null&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
+      if(c.expectedSha===null&&c.path.startsWith("kursseiten/")&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
     }else{
       if(typeof c.content!=="string"||c.content.length>4100000)throw Error("Bild ungültig oder zu gross.");
       let bytes;try{bytes=Uint8Array.from(atob(c.content),x=>x.charCodeAt(0));}catch{throw Error("Ungültiges Bildformat.");}
