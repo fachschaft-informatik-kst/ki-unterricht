@@ -4,17 +4,21 @@ Die Grafiken folgen den **zehn Doppellektionen** und sind mit ihrem Einsatz im �
 
 ## Doppellektion 01
 
-### Grafiken
+### Saugroboter für den Einstieg
 
-![Regeln programmieren oder aus Daten lernen](grafiken/ki_programmierung.png "Informieren | Lehrperson")
+| Roboter A | Roboter B |
+|---|---|
+| Fährt nach einem festgelegten Fahrmuster. | Erstellt eine Karte und plant seine Route. |
+| **Frage:** Welche Regeln sind vorgegeben? | **Frage:** Beweist eine Karte bereits maschinelles Lernen? |
 
-![KI, maschinelles Lernen und Deep Learning](grafiken/ki_einteilung.png "Informieren | Lehrperson")
 
-![Trolley-Problem als Diskussionsanlass](grafiken/trolley_problem.svg "Verarbeiten | Einzeln → Tandem")
+
+
+
 
 ### Direkt öffnen
 
-- [Kurskapitel «Was ist KI?»](index.html#einstieg)
+- [Kurskapitel «Was ist KI?» mit den Kursgrafiken](index.html#einstieg)
 - [Regeln versus Daten](index.html#einstieg-1) · [Begriffe einordnen](index.html#einstieg-2)
 - [Robotergesetze und Fall «Schulweg»](index.html#einstieg-5)
 
@@ -22,9 +26,7 @@ Die Grafiken folgen den **zehn Doppellektionen** und sind mit ihrem Einsatz im �
 
 ## Doppellektion 02
 
-### Grafiken
 
-![EVA-Prinzip und Erfahrungsschatz](grafiken/eva_erfahrungsschatz.png "Informieren | Lehrperson")
 
 ### Direkt öffnen
 
@@ -36,19 +38,25 @@ Die Grafiken folgen den **zehn Doppellektionen** und sind mit ihrem Einsatz im �
 
 ## Doppellektion 03
 
-### Grafiken
+### Zusätzliche Grafiken
 
-![Künstliches Neuron als Entscheider](grafiken/neuron_entscheider.svg "Informieren | Lehrperson")
+![Lernregel eines Perzeptrons als Flussdiagramm](materialien/downloads/perzeptron_lernregel_flussdiagramm.svg "Informieren | Lehrperson")
 
-![Biologische Nervenzelle](grafiken/neuron_biologisch.svg "Informieren | Lehrperson")
+![Verschiebung der Entscheidungsgrenze durch den Bias](materialien/downloads/perzeptron_bias_shift.svg "Verarbeiten | Tandem")
 
-![Perzeptron mit Eingaben, Gewichten und Bias](grafiken/perzeptron.svg "Informieren | Lehrperson")
+![AND-Entscheidungsgrenze mit Lösung](materialien/downloads/koordinatengitter_perzeptron_and_loesung.svg "Informieren | Lehrperson")
 
-![Warum XOR eine einzelne Gerade überfordert](grafiken/xor_gerade.svg "Auswerten | Klasse")
+![Leeres Koordinatengitter mit XOR-Eingaben](materialien/downloads/koordinatengitter_xor_einfach.svg "Verarbeiten | Einzeln")
+
+
+
+
+
+
 
 ### Direkt öffnen
 
-- [Notebook «Ein Neuron entscheidet» im Kurs](index.html#perzeptron-5) · [Notebook herunterladen](materialien/downloads/perzeptron_und_neuronale_netze.ipynb)
+- [Neuron und Perzeptron im Kurs](index.html#perzeptron-1) · [Notebook «Ein Neuron entscheidet» im Kurs](index.html#perzeptron-5) · [Notebook herunterladen](materialien/downloads/perzeptron_und_neuronale_netze.ipynb)
 - [Perzeptron-Arbeitsblatt](materialien/downloads/Arbeitsblatt_Perzeptron.md) · [Lösung](materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md)
 - [Leeres Koordinatengitter](materialien/downloads/koordinatengitter_perzeptron.svg)
 
@@ -56,30 +64,34 @@ Die Grafiken folgen den **zehn Doppellektionen** und sind mit ihrem Einsatz im �
 
 ## Doppellektion 04
 
-### Grafiken
+### Zusätzliche Grafiken
 
-![XOR-Punkte: keine einzelne gerade Grenze reicht](grafiken/xor_gerade.svg "Ankommen | Tandem")
+![OR- und NAND-Entscheidungsgrenzen bei XOR](materialien/downloads/koordinatengitter_or_nand_xor.svg "Informieren | Lehrperson")
 
-![Mehrschichtiges Netz löst XOR](grafiken/merhschichtiges_netzwerk_xor.svg "Informieren | Lehrperson")
+![Leeres Gitter für die eigene Skizze der XOR-Zwischenschicht](materialien/downloads/koordinatengitter_or_nand_xor_leer.svg "Verarbeiten | Einzeln")
 
-![Aufbau eines mehrschichtigen neuronalen Netzes](grafiken/merhschichtiges_netzwerk.svg "Informieren | Lehrperson")
+### Tafelübersicht: OR + NAND ergibt XOR
 
-### Datengruppen im Plan
+| Eingabe | OR | NAND | AND der beiden = XOR |
+|---|---:|---:|---:|
+| (0,0) | 0 | 1 | 0 |
+| (0,1) | 1 | 1 | 1 |
+| (1,0) | 1 | 1 | 1 |
+| (1,1) | 1 | 0 | 0 |
 
-Die Gruppenübersicht wird direkt aus der Kursseite übernommen, damit Training, Validierung und Test übereinstimmen.
+
+
+
+
 
 ### Direkt öffnen
 
-- [Mehrschichtige Netze auf der Kursseite](index.html#netze) · [Notebook](materialien/downloads/mehrschichtige_netze.ipynb)
+- [Mehrschichtige Netze und XOR-Grafik im Kurs](index.html#netze) · [Notebook](materialien/downloads/mehrschichtige_netze.ipynb)
 - [Datenaufteilung T1/T2/V1/P1/P2](index.html#netze-3) · [Notebook «Daten fair aufteilen»](materialien/downloads/daten_training.ipynb)
 - [Themenpool und Datenplan](index.html#projekt-2) · [Projektgruppen](index.html#projekt-3)
 - **Wahlvertiefung:** [Ziffernerkennung](index.html#netze-2)
 
 ## Doppellektion 05
-
-### Trainingsablauf zeigen
-
-Die Trainingsgrafik wird direkt aus der Kursseite übernommen.
 
 ### Direkt öffnen
 
@@ -122,9 +134,15 @@ Die Trainingsgrafik wird direkt aus der Kursseite übernommen.
 
 ## Doppellektion 09
 
-### Grafiken
+### Tafelvorlage zum Kontextvergleich
 
-![Papagei-Modell und neuronales Sprachmodell vergleichen](grafiken/papagei_vs_netz.svg "Informieren | Lehrperson")
+| Zwei Wörter sichtbar | Vier Wörter sichtbar |
+|---|---|
+| Fortsetzung: ______ | Fortsetzung: ______ |
+| Beobachtung: ______ | Beobachtung: ______ |
+
+
+
 
 ### Direkt öffnen
 
@@ -136,16 +154,13 @@ Die Trainingsgrafik wird direkt aus der Kursseite übernommen.
 
 ## Doppellektion 10
 
-### Grafiken
 
-![Weapons of Math Destruction: drei Kriterien](grafiken/wmd_kriterien.svg "Informieren | Lehrperson")
 
-![Wie Rückkopplungen Benachteiligungen verstärken können](grafiken/rueckkopplung.svg "Verarbeiten | Gruppe")
 
 ### Direkt öffnen
 
 - [TED Talk von Cathy O’Neil](https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end)
-- [Beobachtungsauftrag im Kurs](index.html#gesellschaft-1) · [WMD-Kriterien](index.html#wmd)
+- [Video-Auftrag, WMD- und Rückkopplungsgrafiken im Kurs](index.html#gesellschaft-1) · [WMD-Kriterien](index.html#wmd)
 - [Debattenfragen](index.html#kritisch) · [Schlussurteil](index.html#urteil)
 
 **Ablauf:** Individuelle Ausgangsposition, gemeinsame Kriterien am Video, anschliessend **Einzelüberlegung → Gruppenurteil → Klassenaustausch**.
