@@ -32,9 +32,16 @@ def create_chapter(
     slug: str | None = None, dry_run: bool = False,
 ) -> Path:
     manifest = json.loads((root / "kursseiten/manifest.json").read_text(encoding="utf-8"))
-    if section not in manifest["sections"]:
+    is_extra = re.fullmatch(r"lektion-[0-9]{2}", section) is not None
+    if is_extra:
+        number_id = section.removeprefix("lektion-")
+        if not (root / "unterricht" / "lektionen" / (number_id + ".json")).is_file():
+            raise ValueError(f"Doppellektion {number_id} existiert noch nicht")
+        folder = root / "kursseiten" / "lektionen" / number_id
+    elif section in manifest["sections"]:
+        folder = root / "kursseiten" / section
+    else:
         raise ValueError(f"Unbekannter Bereich: {section}. Verfügbar: {', '.join(manifest['sections'])}")
-    folder = root / "kursseiten" / section
     if not folder.is_dir():
         raise ValueError(f"Bereichsordner fehlt: {folder}")
     if not any(
@@ -50,7 +57,7 @@ def create_chapter(
     chapter_id = f"{section}-{slug}"
 
     # IDs refer to students' saved answers and are therefore never replaced.
-    for file in (root / "kursseiten").glob("*/*.md"):
+    for file in (root / "kursseiten").rglob("*.md"):
         source = file.read_text(encoding="utf-8")
         if re.search(r"\bid\s*=\s*['\"]" + re.escape(chapter_id) + r"['\"]", source):
             raise ValueError(f"Kapitel-ID ist schon vorhanden: {chapter_id}")

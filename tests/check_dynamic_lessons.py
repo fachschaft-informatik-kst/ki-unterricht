@@ -13,6 +13,7 @@ sys.path.insert(0,str(ROOT/"scripts"))
 import build_portal, build_course, build_materials
 from lesson_schema import load_lessons, write_compatibility_file
 from new_lesson import create as create_lesson
+from new_chapter import create_chapter
 
 baseline=load_lessons(ROOT)
 assert len(baseline)>=10 and [l["id"] for l in baseline[:10]]==[
@@ -29,6 +30,8 @@ with TemporaryDirectory() as tmp:
     assert plan.relative_to(dest).as_posix()=="unterricht/lektionen/11.json"
     assert chapter.relative_to(dest).as_posix()=="kursseiten/lektionen/11/010-einstieg.md"
     assert materials.relative_to(dest).as_posix()=="lehrperson/lektionen/11.md"
+    second=create_chapter(dest,"lektion-11","Vertiefung","2")
+    assert second.name=="020-vertiefung.md"
     lessons=load_lessons(dest)
     assert len(lessons)==len(baseline)+1
     assert lessons[:10]==baseline,"Existing AVIVA plans must be identical"
@@ -47,6 +50,7 @@ with TemporaryDirectory() as tmp:
     resources=BeautifulSoup((dest/"projekt/materialien.html").read_text(encoding="utf-8"),"html.parser")
     assert student.select_one('a[href="#lektion-11"]')
     assert student.select_one('section#lektion-11 details#lektion-11-einstieg')
+    assert student.select_one('section#lektion-11 details#lektion-11-vertiefung')
     assert student.select_one('section#lektion-11 details.lesson-plan[data-lesson="11"]')
     assert teacher.select_one('details.lesson-plan[data-lesson="11"]')
     assert resources.select_one("section#dl-11")
