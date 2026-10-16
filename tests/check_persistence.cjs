@@ -17,7 +17,8 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
  const entries=[{name:'kursstand.json',data:JSON.stringify(state)},{name:'daten/original__pfel.png',data:Buffer.from(png,'base64')},{name:'versuch.ipynb',data:JSON.stringify(doc('Projekt'))},...names.map(n=>({name:'notebooks/'+n,data:JSON.stringify(doc(n))}))];
  async function zipFile(entries,name){const file=path.join(tmp,name);fs.writeFileSync(file,Buffer.from(await (await archive.makeZip(entries)).arrayBuffer()));return file;}
  const fixture=await zipFile(entries,'alle-daten.zip');
- const server=spawn('python',['-m','http.server','8765','--bind','127.0.0.1','--directory',process.env.PORTAL_SITE||path.resolve(__dirname,'../dist')],{stdio:'ignore'});
+ const port=process.env.PORTAL_TEST_PORT||'8765';
+ const server=spawn('python',['-m','http.server',port,'--bind','127.0.0.1','--directory',process.env.PORTAL_SITE||path.resolve(__dirname,'../dist')],{stdio:'ignore'});
  let browser;
  const errors=[];
  const setup=async()=>{
@@ -25,7 +26,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   p.on('dialog',d=>d.accept());p.on('pageerror',e=>errors.push(e.message));
   // External teaching links are unrelated to the local storage contract.
   await p.route(/https:\/\/(inf-schule\.de|humanornot\.so|pair-code\.github\.io)\//,r=>r.abort());
-  await p.goto('http://127.0.0.1:8765/projekt/');
+  await p.goto(`http://127.0.0.1:${port}/projekt/`);
   return {context,p};
  };
  const importZip=async(p,file)=>{
