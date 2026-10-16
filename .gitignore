@@ -131,3 +131,7 @@ content/portal/
 
 # Generated unlinked teacher model answer page
 /projekt/musterloesungen/index.html
+
+# Generated print/download package for teacher material kit
+/projekt/materialien.html
+/projekt/materialien/downloads/
