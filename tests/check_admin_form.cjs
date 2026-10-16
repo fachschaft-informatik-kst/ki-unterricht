@@ -34,7 +34,8 @@ const server=http.createServer((req,res)=>{
     await page.route("**/api/chapters",route=>route.fulfill({json:{
       chapters:files.map(path=>({path,sha:"a".repeat(40)}))
     }}));
-    await page.route("**/api/file?*",route=>{
+    // Match query strings containing slashes too (glob * does not cross /).
+    await page.route(/\/api\/file\?/,route=>{
       const p=new URL(route.request().url()).searchParams.get("path");
       const content=p==="projekt/kurs.json"?plan:fs.readFileSync(path.join(ROOT,p),"utf8");
       return route.fulfill({json:{path:p,sha:"a".repeat(40),content}});
