@@ -44,8 +44,10 @@ const server=http.createServer((req,res)=>{
       return route.fulfill({json:{path:p,sha:"a".repeat(40),content}});
     });
     let submitted=null;
+    let publishFailure=false;
     await page.route("**/api/publish",route=>{
       submitted=route.request().postDataJSON();
+      if(publishFailure)return route.fulfill({status:502,contentType:"text/html",body:"<h1>Upstream failure</h1>"});
       return route.fulfill({json:{url:"https://github.com/example/repo/pull/123",number:123}});
     });
     // Mock only the published KST logo; relative requests to worker origin
@@ -57,6 +59,24 @@ const server=http.createServer((req,res)=>{
     }));
 
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
+
+    // Materials are Markdown documents with tables; they must have a usable
+    // preview and update without the manual refresh button.
+    await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="lehrperson/materialien.md");
+    const materialFrame=page.frameLocator("#preview");
+    await materialFrame.locator(".table-scroll table").first().waitFor();
+    assert.equal(await materialFrame.locator(".table-scroll table th").count()>=2,true);
+    await page.locator("#source").fill("# Testmaterialien\n\n| Schritt | Ziel |\n|---|---|\n| Übung | Prüfen |\n");
+    await materialFrame.locator("table td").first().waitFor();
+    assert.equal(await materialFrame.locator("table td").first().textContent(),"Übung");
+    await page.locator("#blockType").selectOption("warning");
+    await page.locator("#addBlock").click();
+    await materialFrame.locator(".callout.warn").waitFor();
+    assert.match(await page.locator("#source").inputValue(),/callout warn/);
+    // Restore the original un-staged content before changing files.
+    await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"lehrperson/materialien.md"),"utf8"));
+    await materialFrame.locator(".table-scroll table").first().waitFor();
 
     // Visual regression for the real CSS selectors and HTML wrappers.
     // Missing portal.css used to turn the milestone timeline into an ordinary
@@ -184,6 +204,21 @@ const server=http.createServer((req,res)=>{
     assert.equal(updated.lessons[10].phases[0].schritte.at(-1).art,"Ergebnis");
     assert.equal(updated.lessons[10].phases[0].schritte.reduce((n,s)=>n+Number(s.min||0),0),6);
     assert.match(await page.locator("#published").textContent(),/#123/);
+
+    // A non-JSON Cloudflare/edge failure must expose its HTTP status and retain
+    // all staged edits. It must never masquerade as "Gateway not installed".
+    await page.locator("#section").selectOption("einstieg");
+    await page.locator("#chapters button").filter({hasText:"010-einstieg-1"}).click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/010-einstieg-1.md");
+    await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n<!-- regression test -->");
+    await page.locator("#stage").click();
+    publishFailure=true;
+    await page.locator("#publish").click();
+    await page.waitForFunction(()=>document.querySelector("#notice")?.textContent?.includes("HTTP 502"));
+    assert.match(await page.locator("#notice").textContent(),/keine gültige JSON-Antwort/);
+    assert.doesNotMatch(await page.locator("#notice").textContent(),/Gateway nicht eingerichtet/);
+    assert.match(await page.locator("#staged").textContent(),/010-einstieg-1\.md/);
+
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
   }finally{
     await browser.close();
