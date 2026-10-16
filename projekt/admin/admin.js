@@ -83,7 +83,7 @@ function insert(text){
 function escapeHtml(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");}
 function inline(s){
   let out=escapeHtml(s);
-  out=out.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,(_,caption,url)=>'<img alt="'+caption+'" src="'+url+'">');
+  out=out.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;([^)]*)&quot;)?\)/g,(_,caption,url,title)=>'<img alt="'+caption+'" src="'+url+'"'+(title?' title="'+title+'"':"")+'>');
   out=out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(_,label,url)=>'<a href="'+url+'">'+label+'</a>');
   return out.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
 }
@@ -104,6 +104,14 @@ function markdown(source){
 }
 function preview(){
   let content=$("source").value;
+  // Display not-yet-merged image uploads in the isolated preview, without server persistence.
+  for(const item of state.staged.values()){
+    if(!item.path.startsWith("projekt/grafiken/uploads/")||item.delete)continue;
+    const src=item.path.replace(/^projekt\//,"");
+    const extension=item.path.split(".").pop();
+    const mime=extension==="jpg"||extension==="jpeg"?"jpeg":extension;
+    content=content.replaceAll(src,"data:image/"+mime+";base64,"+item.content);
+  }
   if(content.includes("<!-- MD:START -->"))
     content=content.replace(/<!-- MD:START -->([\s\S]*?)<!-- MD:END -->/g,(_,text)=>markdown(text));
   else if(!/^\s*<details\b/.test(content)&&!/^\s*<section\b/.test(content))
