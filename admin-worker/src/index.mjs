@@ -57,10 +57,16 @@ function validate(changes){
       if(typeof c.content!=="string"||c.content.length>200000)throw Error("Unterrichtsplan zu gross.");
       let plan;try{plan=JSON.parse(c.content);}catch{throw Error("Ungültiger Unterrichtsplan.");}
       if(!Array.isArray(plan.lessons)||plan.lessons.length<10||plan.lessons.length>99)throw Error("Doppellektionen fehlen.");
+      const phases=["Ankommen","Vorwissen aktivieren","Informieren","Verarbeiten","Auswerten"];
       for(let i=0;i<plan.lessons.length;i++){
         const l=plan.lessons[i],id=String(i+1).padStart(2,"0");
         if(l.id!==id||!l.title||!Array.isArray(l.phases)||l.phases.length!==5||
-          l.phases.reduce((a,p)=>a+Number(p.minutes||0),0)!==90)
+          l.phases.reduce((a,p)=>a+Number(p.minutes||0),0)!==90||
+          l.phases.some((p,j)=>p.phase!==phases[j]||!Number.isInteger(p.minutes)||p.minutes<1||
+            !p.titel||!Array.isArray(p.schritte)||!p.schritte.length||
+            p.schritte.at(-1)?.art!=="Ergebnis"||
+            p.schritte.reduce((n,s)=>n+Number(s.min||0),0)!==p.minutes||
+            p.schritte.some(s=>!s.wer||!s.text||!Number.isInteger(s.min||0)||Number(s.min||0)<0)))
           throw Error("Ungültige Lektionsnummer oder AVIVA-Plan bei "+id);
         if(i>=10&&l.view!=="dl-"+id)throw Error("Neue Lektionsansichten müssen dl-NN heissen.");
       }
