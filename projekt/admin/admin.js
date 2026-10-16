@@ -119,7 +119,7 @@ function addChapter(){
     const numberPrefix=String(availableOrder(section,after.trim())).padStart(3,"0");
     const name=slug(title);if(!name)throw Error("Ungültiger Titel.");
     const path="kursseiten/"+section+"/"+numberPrefix+"-"+name+".md";
-    if(state.chapters.some(c=>c.path===path)||state.staged.has(path))throw Error("Kapitel existiert.");
+    if(state.chapters.some(c=>c.path===path||c.path.split("/").pop().slice(4)===(name+".md")&&c.path.startsWith("kursseiten/"+section+"/"))||state.staged.has(path))throw Error("Kapitel-ID oder Dateiname existiert bereits.");
     const doc="---\ntype: chapter\nid: "+section+"-"+name+"\nnummer: "+JSON.stringify(number)+"\ntitel: "+JSON.stringify(title)+"\nkurz: "+JSON.stringify(title)+"\nopen: true\n---\n\nText hier bearbeiten.\n\n## Auftrag\n\nAufgabe formulieren.\n";
     state.chapters.push({path,sha:null});state.chapters.sort((a,b)=>a.path.localeCompare(b.path));
     useFile(path,null,doc);status("Neues Kapitel angelegt; zuerst vormerken, dann Pull Request erstellen.");
@@ -139,11 +139,23 @@ function stage(){
 }
 function archive(){
   const c=state.current;if(!c?.sha)return;
-  if(!confirm("Kapitel archivieren? Es verschwindet aus dem Schülerkurs; ältere Lesezeichen funktionieren dann nicht mehr."))return;
-  const to="kursseiten/_archiv/"+c.path.slice("kursseiten/".length);
-  state.staged.set(c.path,{path:c.path,expectedSha:c.sha,delete:true});
-  state.staged.set(to,{path:to,expectedSha:null,content:$("source").value});
-  stagingList();status("Archivierung vorgemerkt.");
+  if(!confirm("Kapitel ausblenden? Der Inhalt bleibt mit seinen stabilen IDs in der Datei erhalten und kann später wieder aktiviert werden."))return;
+  let contents=$("source").value;
+  if(contents.startsWith("---\n")){
+    if(/^archiviert:\s*true\s*$/m.test(contents))return status("Kapitel ist bereits ausgeblendet.");
+    contents=contents.replace(/^---\n/,"---\narchiviert: true\n");
+  }else{
+    const tag=/<details\b[^>]*class="kapitel"[^>]*>/;
+    if(!tag.test(contents))return error(Error("Kapitel-Markierung nicht gefunden."));
+    contents=contents.replace(tag,match=>{
+      let changed=match.replace(/\s+open(?=[\s>])/,"");
+      changed=changed.replace(/>$/,' data-archived="true" hidden style="display:none">');
+      return changed;
+    });
+  }
+  $("source").value=contents;
+  stage();
+  status("Kapitel ausgeblendet und vorgemerkt. IDs und gespeicherte Antworten bleiben erhalten.");
 }
 function move(){
   const c=state.current;if(!c?.sha)return;
@@ -187,6 +199,7 @@ async function publish(){
       {path:c.path,expectedSha:c.expectedSha,content:c.content});
     const result=await post("/api/publish",{title:$("prTitle").value,changes});
     state.staged.clear();stagingList();
+    if(state.current)state.current.original=$("source").value;
     const out=$("published");out.replaceChildren("Pull Request #"+result.number+": ");
     const link=document.createElement("a");link.href=result.url;link.rel="noopener noreferrer";link.target="_blank";link.textContent="Auf GitHub öffnen";out.append(link);
     status("Pull Request erstellt. Nach Merge und grünen CI-Tests wird veröffentlicht.");
