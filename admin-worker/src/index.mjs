@@ -178,7 +178,8 @@ async function staticPage(url){
   const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/plan-editor.js":"plan-editor.js"};
   const file=files[url.pathname];
   if(!file)return fail(404,"Nicht gefunden.");
-  const source=await fetch(STATIC+file,{redirect:"error"});
+  const source=await fetch(STATIC+file,{redirect:"manual"});
+  if(source.status>=300&&source.status<400)return fail(502,"Unerwartete Weiterleitung beim Laden der Editor-Dateien.");
   if(!source.ok)return fail(503,"Admin-Dateien sind noch nicht veröffentlicht.");
   const ext=file.split(".").pop();
   const mime={html:"text/html",css:"text/css",js:"text/javascript"}[ext];
