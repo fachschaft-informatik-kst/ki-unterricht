@@ -10,9 +10,23 @@ const sections=["einstieg","lernarten","perzeptron","netze","projekt","sprache",
 function status(message,error=false){$("notice").textContent=message;$("notice").classList.toggle("error",error);}
 function error(err){status(String(err.message||err),true);}
 async function api(url,options={}){
-  const response=await fetch(url,{credentials:"same-origin",cache:"no-store",...options});
-  const data=await response.json().catch(()=>({error:"Admin-Gateway nicht eingerichtet."}));
-  if(!response.ok)throw Error(data.error||"Serverfehler "+response.status);
+  let response;
+  try{response=await fetch(url,{credentials:"same-origin",cache:"no-store",redirect:"manual",...options});}
+  catch(e){throw Error("Admin-Gateway nicht erreichbar ("+url+"): "+String(e.message||e));}
+  const raw=await response.text();
+  let data=null;
+  try{data=JSON.parse(raw);}catch{}
+  if(!response.ok||!data||typeof data!=="object"){
+    const detail=typeof data?.error==="string"?data.error:null;
+    const label="HTTP "+response.status+" bei "+url;
+    if(response.status===401)throw Error("GitHub-Sitzung abgelaufen. Bitte erneut anmelden. ("+label+")");
+    if(response.status===413)throw Error("Die Änderungen sind für das Gateway zu gross ("+label+"). Bitte Bilder verkleinern.");
+    if(response.status===403)throw Error((detail||"Zugriff verweigert – GitHub-App-Rechte und Anmeldung prüfen.")+" ("+label+")");
+    if(detail)throw Error(detail+" ("+label+")");
+    throw Error("Admin-Gateway liefert keine gültige JSON-Antwort ("+label+
+      ", Content-Type: "+(response.headers.get("content-type")||"unbekannt")+
+      "). Prüfe Cloudflare Worker Logs und die Bereitstellung unter "+location.origin+".");
+  }
   return data;
 }
 const post=(url,value)=>api(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(value)});
@@ -307,6 +321,13 @@ async function publish(){
   if(!state.staged.size)return status("Zuerst Änderungen vormerken.",true);
   $("publish").disabled=true;
   try{
+    // Verify session immediately before writing. A browser tab may stay open
+    // long after the GitHub OAuth access token expires.
+    const session=await api("/api/session");
+    if(!session.authenticated){
+      $("login").hidden=false;
+      throw Error("Die GitHub-Sitzung ist abgelaufen. Bitte oben erneut anmelden; vorgemerkte Änderungen bleiben erhalten.");
+    }
     const c=state.current;
     if(c&&!state.staged.get(c.path)?.delete&&$("source").value!==savedText()&&!stage())return;
     status("Pull Request wird bei GitHub erstellt …");
@@ -422,7 +443,12 @@ $("refresh").addEventListener("click",()=>refresh().catch(error));
 $("create").addEventListener("click",addChapter);
 $("move").addEventListener("click",move);
 $("archive").addEventListener("click",archive);
-$("source").addEventListener("input",()=>{});
+// Render changes shortly after typing, but do not interrupt rapid edits.
+let previewDebounce=null;
+$("source").addEventListener("input",()=>{
+  clearTimeout(previewDebounce);
+  if(!$("source").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
+});
 $("previewButton").addEventListener("click",preview);
 $("previewFullscreen").addEventListener("click",()=>{
   $("preview").requestFullscreen().catch(()=>status("Vollbildansicht wird vom Browser nicht unterstützt.",true));
