@@ -108,7 +108,7 @@ def build(lessons: list[dict]) -> None:
     headers = content.find_all("h2", recursive=False)
     expected = [f"Doppellektion {int(l['id']):02d}" for l in lessons]
     if [h.get_text(strip=True) for h in headers] != expected:
-        raise ValueError("Material sections must match the ten lessons")
+        raise ValueError("Material sections must match every planned lesson")
 
     for lesson, heading in zip(lessons, headers):
         group = soup.new_tag("section", id=f"dl-{lesson['id']}",
