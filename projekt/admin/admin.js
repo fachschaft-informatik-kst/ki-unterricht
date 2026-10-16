@@ -194,8 +194,18 @@ async function addImage(event){
     const path="projekt/grafiken/uploads/"+name;
     state.staged.set(path,{path,expectedSha:null,content:btoa(chars)});
     const caption=prompt("Bildbeschreibung:",file.name)||"Illustration";
-    insert("\n\n!["+caption.replaceAll("]","")+"](grafiken/uploads/"+name+")\n\n");
-    stagingList();status("Bild vorgemerkt. Wird zusammen mit dem Kapitel veröffentlicht.");
+    const inMaterials=!$("lessonWorkspace").hidden;
+    if(inMaterials){
+      const plan=state.lesson?.plan;
+      const phase=plan?.phases?.find(p=>p.phase==="Informieren")||plan?.phases?.[0];
+      const role=phase?.schritte?.find(step=>step.wer!=="Ergebnis")?.wer||"Tandem";
+      const markup="\\n\\n!["+caption.replaceAll("]","")+"](grafiken/uploads/"+name+' "'+phase.phase+" | "+role+'")\\n\\n';
+      const editor=$("teacherSource"),start=editor.selectionStart,end=editor.selectionEnd;
+      editor.focus();editor.setRangeText(markup,start,end,"end");
+    }else{
+      insert("\n\n!["+caption.replaceAll("]","")+"](grafiken/uploads/"+name+")\n\n");
+    }
+    stagingList();status("Bild vorgemerkt. Bitte das "+(inMaterials?"Materialblatt":"Kapitel")+" mit vormerken.");
   }catch(e){error(e);}finally{event.target.value="";}
 }
 async function publish(){
@@ -236,6 +246,7 @@ $("addAnswer").addEventListener("click",()=>{
     '</span><textarea aria-label="'+escapeHtml(question)+'" data-answer="'+id+'" rows="4"></textarea></label>\n\n');
 });
 $("addImage").addEventListener("click",()=>$("imageFile").click());
+$("addTeacherImage").addEventListener("click",()=>$("imageFile").click());
 $("imageFile").addEventListener("change",addImage);
 $("logout").addEventListener("click",async()=>{try{await post("/auth/logout",{});location.assign("/");}catch(e){error(e);}});
 window.addEventListener("beforeunload",e=>{if(state.staged.size||(state.current&&$("source").value!==savedText())){e.preventDefault();e.returnValue="";}});

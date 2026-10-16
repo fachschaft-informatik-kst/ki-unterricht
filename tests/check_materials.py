@@ -20,7 +20,7 @@ assert len(soup.select("nav.quick a[href^='#dl-']")) == len(lessons)
 # Real diagrams are shown inline and clickable; there are no synthetic memory
 # cards, print templates, checklists or dead buttons.
 figures = soup.select(".graphic-grid figure")
-assert len(figures) == 6, f"Expected six additional teacher graphics, got {len(figures)}"
+assert len(figures) >= 6, f"Six base graphics plus optional lesson-specific graphics expected: {len(figures)}"
 for f in figures:
     img = f.select_one("a > img")
     assert img and img.get("alt")
@@ -35,7 +35,7 @@ assert len(soup.select("#dl-03 .graphic-grid figure")) == 4
 assert len(soup.select("#dl-04 .graphic-grid figure")) == 2
 assert not soup.select(".source-graphic"), "Avoid duplicating student diagrams"
 for img in soup.select(".graphic-grid img"):
-    assert img["src"].startswith("materialien/downloads/"), img["src"]
+    assert img["src"].startswith(("materialien/downloads/", "grafiken/uploads/")), img["src"]
 student_course = BeautifulSoup((PORTAL / "index.html").read_text(encoding="utf-8"), "html.parser")
 student_sources = {img["src"] for img in student_course.select("img[src]")}
 for img in soup.select(".graphic-grid img"):
