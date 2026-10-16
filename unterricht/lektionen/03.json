@@ -1,0 +1,132 @@
+{
+  "id": "03",
+  "view": "perzeptron",
+  "title": "Wie entscheidet ein Neuron?",
+  "rueckblick": "In Doppellektion 2 haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.",
+  "rueckblick_figur": {
+    "src": "grafiken/eva_erfahrungsschatz.png",
+    "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
+    "caption": "Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0)."
+  },
+  "goal": "Gewicht und Bias erklären, einen Lernschritt nachvollziehen und die XOR-Grenze eines einzelnen Neurons begründen.",
+  "question": "Leitfrage: Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
+  "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und wo seine Grenze liegt.",
+  "product": "Eine nachvollziehbare Rechnung, ein erklärter Lernschritt und eine begründete XOR-Grenze.",
+  "zeit": "Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Pflanzen und Ziffern sind Wahlvertiefung; XOR bleibt Pflicht.",
+  "phases": [
+    {
+      "phase": "Ankommen",
+      "titel": "Warnsignal vermuten",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 5,
+          "text": "Ein Signal soll nur bei zwei aktiven Sensoren angehen. Notieren Sie die Ausgabe zu 00, 01, 10 und 11."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine UND-Tabelle als erste Vermutung."
+        }
+      ]
+    },
+    {
+      "phase": "Vorwissen aktivieren",
+      "titel": "Eingabe und Label",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 5,
+          "text": "Benennen Sie Eingabe und Label. Ergänzen Sie die Ausgaben für ODER und XOR und markieren Sie den Unterschied."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Vier Eingaben mit Zielwerten für UND, ODER und XOR."
+        }
+      ]
+    },
+    {
+      "phase": "Informieren",
+      "titel": "Gewicht, Bias und Lernschritt",
+      "minutes": 15,
+      "schritte": [
+        {
+          "art": "Input",
+          "wer": "Lehrperson",
+          "min": 12,
+          "text": "Erklärt am Schwimmbad-Beispiel das Neuron als Entscheider und vergleicht es kurz mit der Nervenzelle. Rechnet Summe = x₁·w₁ + x₂·w₂ + b mit Gewichten 1 und 1, Bias −1.5 für (1,1) und (1,0) vor; ab Summe 0 feuert das Neuron. Zeigt einen Lernschritt: Gewichte und Bias werden korrigiert, nicht die Eingaben oder Labels."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 3,
+          "text": "Rechnen Sie (0,1) selbst und erklären Sie den Unterschied zwischen Gewicht und Bias."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine geprüfte Rechnung als Orientierung für das Experiment."
+        }
+      ]
+    },
+    {
+      "phase": "Verarbeiten",
+      "titel": "Ein Neuron einstellen und lernen lassen",
+      "minutes": 55,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 45,
+          "text": "Arbeiten Sie im Notebook «Ein Neuron entscheidet»: ein Neuron von Hand einstellen, einen Lernschritt mit Gewichten 0.2/0.2, Bias −0.5, Eingabe (1,1) und Lernrate 0.2 von Hand nachvollziehen und mit der Ausgabe prüfen, dann lernen lassen. Untersuchen Sie XOR mit Punkten und Reglern. Dokumentieren Sie nur die zentrale Rechnung, eine beobachtete Korrektur und die XOR-Erklärung. Pflanzen und echte Ziffern sind freiwillig."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 10,
+          "text": "Zeichnen Sie allein die vier XOR-Punkte und notieren Sie, welche Grenze ein einzelnes Neuron Ihrer Vermutung nach lernen kann."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Handrechnung, beobachteter Lernschritt und begründete Grenze."
+        }
+      ]
+    },
+    {
+      "phase": "Auswerten",
+      "titel": "Was lernt das Neuron?",
+      "minutes": 10,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 4,
+          "text": "Erklären Sie Gewicht, Bias und die Korrektur bei einer falschen Ausgabe. Begründen Sie mit den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Klasse",
+          "min": 4,
+          "text": "Vergleichen Sie zwei Erklärungen zur XOR-Grenze und benennen Sie gemeinsam, was das einzelne Neuron begrenzt."
+        },
+        {
+          "art": "Input",
+          "wer": "Lehrperson",
+          "min": 2,
+          "text": "Sichert an der XOR-Grafik: Die Grenze liegt am Bau des Neurons, nicht an zu wenig Übung. Der algebraische Widerspruch ist Vertiefung."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine eigene Erklärung von Lernen und XOR-Grenze."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "id": "10",
+  "view": "gesellschaft",
+  "title": "Wer trägt die Folgen?",
+  "rueckblick": "Bild- und Sprachmodelle liefern Vorhersagen, keine Garantien. Heute prüfen Sie die Folgen von Entscheidungen auf dieser Grundlage.",
+  "goal": "Ein Modell mit Opacity, Scale und Damage prüfen, eine Rückkopplung erklären und eine überprüfbare Massnahme mit Zielkonflikt begründen.",
+  "question": "Leitfrage: Sind gleiche Regeln automatisch fair?",
+  "motivation": "Entscheidungen mit KI betreffen Menschen. Ein begründetes Urteil braucht einen konkreten Fall, Belege und einen Blick auf die Folgen.",
+  "product": "Ein begründetes Fallurteil mit WMD-Check, Rückkopplung, Massnahme und Zielkonflikt sowie ein kurzer persönlicher Kursrückblick.",
+  "zeit": "Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock. Keine zusätzliche Pro/Contra-Raumaufteilung. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.",
+  "phases": [
+    {
+      "phase": "Ankommen",
+      "titel": "Eine erste Position",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 5,
+          "text": "Beziehen Sie am Platz Position zur These «Gleiche Regeln sind automatisch fair» und notieren Sie einen Grund."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine persönliche Ausgangsposition."
+        }
+      ]
+    },
+    {
+      "phase": "Vorwissen aktivieren",
+      "titel": "Ein Datenproblem und seine Folge",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 2,
+          "text": "Wählen Sie allein eine Beobachtung aus Bildprojekt, Fremdauswertung oder Sprachmodell und notieren Sie eine mögliche Folge für Betroffene."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Klasse",
+          "min": 3,
+          "text": "Teilen Sie zwei Beobachtungen und verbinden Sie sie mit möglichen Folgen für Betroffene."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine Verbindung zwischen Modellgrenze und gesellschaftlicher Folge."
+        }
+      ]
+    },
+    {
+      "phase": "Informieren",
+      "titel": "O’Neils Warnung verstehen",
+      "minutes": 20,
+      "schritte": [
+        {
+          "art": "Input",
+          "wer": "Lehrperson",
+          "min": 13,
+          "text": "Zeigt Cathy O’Neils TED Talk mit Beobachtungsauftrag: ein Beispiel, wer entscheidet, wer betroffen ist und ob Betroffene die Entscheidung prüfen können."
+        },
+        {
+          "art": "Input",
+          "wer": "Lehrperson",
+          "min": 7,
+          "text": "Klärt Opacity, Scale und Damage an einem Video-Beispiel und erklärt eine Rückkopplung. Die Lernenden ergänzen nur Stichworte. Keine separate Schreib- oder Wechselphase."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein Video-Beleg und gemeinsame Prüfkriterien."
+        }
+      ]
+    },
+    {
+      "phase": "Verarbeiten",
+      "titel": "Einen Fall gründlich beurteilen",
+      "minutes": 45,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Gruppe",
+          "min": 37,
+          "text": "Bleiben Sie in derselben Gruppe und wählen Sie Bewerbungen, Schule oder Kredit. Prüfen Sie Ihren Fall mit Opacity, Scale und Damage, erzählen Sie seine Rückkopplung und entwickeln Sie eine konkrete Massnahme mit Erfolgskriterium und Zielkonflikt. Vergleichen Sie kurz mit einem Video-Beispiel und dem Bildprojekt: Warum ist das Schulprojekt wahrscheinlich keine WMD? Prüfen Sie O’Neils Aussage an Ihrem Fall: stärkstes Argument dafür, stärkstes Gegenargument, gemeinsames Urteil. Nutzen Sie die Leitfragen der Debatte als Gesprächshilfe; halten Sie nur zentrale Stichworte fest."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 8,
+          "text": "Prüfen Sie allein den gewählten Fall: Wer ist betroffen, welcher Beleg ist besonders wichtig und welche Folge könnte übersehen werden? Notieren Sie Stichworte für die anschliessende Gruppenbeurteilung."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein Fallurteil mit Belegen, Gegenargument und überprüfbarer Massnahme."
+        }
+      ]
+    },
+    {
+      "phase": "Auswerten",
+      "titel": "Urteil und ruhiger Kursabschluss",
+      "minutes": 15,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Klasse",
+          "min": 10,
+          "text": "Besprechen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut; die Lehrperson fragt: Wer ändert was, und woran wäre die Verbesserung erkennbar?"
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 5,
+          "text": "Notieren Sie kurz eine Erkenntnis, eine offene Frage und eine Rückmeldung zum KI-Block. Einzelne freiwillige Stimmen schliessen den Kurs ab; keine verpflichtende Runde aller Personen."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine überprüfte Position und ein persönlicher Rückblick."
+        }
+      ]
+    }
+  ]
+}

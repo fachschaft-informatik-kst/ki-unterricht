@@ -1,0 +1,115 @@
+{
+  "id": "05",
+  "view": "projekt",
+  "title": "Ihr Projekt starten und die Arbeit planen",
+  "rueckblick": "In Doppellektion 4 haben Sie Thema und Klassen gewählt sowie die Datentrennung geklärt. Sie übernehmen jetzt die Planung Ihres Projekts im Tandem.",
+  "goal": "Eigene Tagesziele und Arbeitsschritte planen, eine überprüfbare Vermutung formulieren und die Datenqualität kontrollieren.",
+  "question": "Leitfrage: Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?",
+  "motivation": "Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.",
+  "product": "Ein eigener Etappenplan mit Rollen, eine Vermutung und ein gesicherter Arbeitsstand mit dokumentiertem Datencheck.",
+  "zeit": "Gemeinsamer SOL-Auftakt nur in Doppellektion 5. Danach 60 Minuten selbst organisierte Arbeit mit 10 Minuten frei verfügbarem Puffer darin. Lernlabor einmal als Orientierung nutzen, sofern der Ablauf noch unklar ist, nicht als Pflichtwiederholung. Etappen sind nicht an einzelne Doppellektionen gebunden; keine einheitliche Pflicht, heute bereits zu trainieren.",
+  "phases": [
+    {
+      "phase": "Ankommen",
+      "titel": "Arbeitsstand öffnen",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 5,
+          "text": "Öffnen Sie Projektauftrag und vorhandene Fotos. Halten Sie fest, was bereit ist und was Ihnen noch fehlt."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein ehrlicher Ausgangsstand."
+        }
+      ]
+    },
+    {
+      "phase": "Vorwissen aktivieren",
+      "titel": "Den fairen Vergleich klären",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 5,
+          "text": "Erklären Sie sich: A nutzt ein Exemplar je Klasse, B zwei; Bildzahl und Einstellungen bleiben gleich. Warum darf dasselbe Exemplar nicht in mehreren Datengruppen liegen?"
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Die fachlichen Leitplanken sind geklärt."
+        }
+      ]
+    },
+    {
+      "phase": "Informieren",
+      "titel": "SOL-Rahmen statt Tagesrezepte",
+      "minutes": 10,
+      "schritte": [
+        {
+          "art": "Input",
+          "wer": "Lehrperson",
+          "min": 10,
+          "text": "Klärt einmal Auftrag, fünf Reflexionen, Bewertung und Frist vor Doppellektion 8. Verbindlich sind Datenregeln, fairer A/B-Vergleich, begründete Auswahl vor Testeinsicht und keine Optimierung danach. Frei sind Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. Zeigt Foto → festes MobileNet → 1280 Merkmale → trainierbares Netz sowie ZIP-Sicherung. Kündigt kurze Beratung auf Anfrage statt weiterer gemeinsamer Inputs an."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein gemeinsamer Rahmen und freie Planung innerhalb der fachlichen Abhängigkeiten."
+        }
+      ]
+    },
+    {
+      "phase": "Verarbeiten",
+      "titel": "Etappen planen und selbstständig arbeiten",
+      "minutes": 60,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 40,
+          "text": "Gleichen Sie Ihre persönlichen nächsten Schritte und Rollen ab und erstellen Sie in Reflexion 1 einen kurzen Etappenplan bis zur Abgabe: Zuständigkeiten, Zeitbedarf und Reserve. Wählen Sie Ihr Tagesziel und bearbeiten Sie die passende Etappe. Prüfen und ergänzen Sie Fotos, importieren Sie die Daten und dokumentieren Sie Vermutung und Datenprobleme in Reflexion 1–2. Nutzen Sie Lernlabor und Hilfen nur nach Bedarf. Wer bereit ist, kann bereits vergleichen; wer Datenlücken hat, arbeitet zuerst daran. Die Lehrperson berät einzelne Tandems."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 10,
+          "text": "Prüfen Sie allein, welchen konkreten Beitrag Sie als Nächstes übernehmen und woran Sie erkennen, dass er gelungen ist."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 10,
+          "text": "Frei verfügbarer Puffer im SOL-Block für Datenlücken, Technik, Fragen oder gründlicheres Arbeiten; keine Zusatzpflicht."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eigener Plan und nachvollziehbarer Fortschritt, nicht ein identischer Stand aller Tandems."
+        }
+      ]
+    },
+    {
+      "phase": "Auswerten",
+      "titel": "Fortschritt prüfen und sichern",
+      "minutes": 10,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 10,
+          "text": "Prüfen Sie Ihr Tagesziel. Ergänzen Sie im bestehenden Journal kurz: erreicht, offen, nächster Schritt und benötigte Hilfe. Passen Sie Ihren Plan an und laden Sie eine ZIP-Sicherung herunter. Kein zusätzlicher SOL-Bericht."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Gesicherter Stand und selbst gewählter nächster Schritt."
+        }
+      ]
+    }
+  ]
+}

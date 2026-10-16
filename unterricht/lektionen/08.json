@@ -1,0 +1,133 @@
+{
+  "id": "08",
+  "view": "projekt",
+  "title": "Das eigene Projekt erklären und ein fremdes Modell prüfen",
+  "rueckblick": "Ihr eigener Abgabestand ist eingefroren. Während der Fachgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.",
+  "goal": "Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.",
+  "question": "Leitfrage: Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?",
+  "motivation": "Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.",
+  "product": "Bewertetes Tandemgespräch und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.",
+  "zeit": "Gespräche parallel in Minute 5–85, nicht zusätzlich zu den 90 Minuten. Im 80-Minuten-Fenster selbstständig arbeiten und beim Aufruf pausieren. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest samt Auswertung. Drei Startwerte sind Zusatz. 15 Minuten Puffer im Arbeitsblock; die Fremdauswertung selbst entfällt nicht.",
+  "phases": [
+    {
+      "phase": "Ankommen",
+      "titel": "Abgaben und Organisation",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Input",
+          "wer": "Lehrperson",
+          "min": 4,
+          "text": "Bestätigt Abgaben, Gesprächsreihenfolge und die bereits zugeteilten Austauschprojekte. Erinnert an privates Browserfenster, Datenschutz und das unveränderte eigene Abgabepaket. Ab Minute 5 laufen alle Fachgespräche parallel bis Minute 85."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 1,
+          "text": "Öffnen Sie das zugeteilte Paket und notieren Sie Ihr Gesprächsfenster."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Alle kennen Gesprächszeit und Austauschprojekt."
+        }
+      ]
+    },
+    {
+      "phase": "Vorwissen aktivieren",
+      "titel": "Eigene Prüffrage wählen",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 2,
+          "text": "Lesen Sie Vermutung und Ergebnis des anderen Tandems. Notieren Sie, was Sie nachprüfen wollen und welches Ergebnis Sie für Ihre eigenen Bilder erwarten. Die Gespräche laufen bereits; Sie arbeiten selbstständig."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 3,
+          "text": "Lesen Sie allein Vermutung und Ergebnis des anderen Tandems. Notieren Sie Ihre Prüffrage und eine Erwartung für Ihre eigenen Bilder."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine eigene Prüffrage und eine Erwartung vor dem Fremdtest."
+        }
+      ]
+    },
+    {
+      "phase": "Informieren",
+      "titel": "Austauschauftrag erschliessen",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 5,
+          "text": "Lesen Sie Reproduktionsprüfung und Fremdtest auf der Kursseite. Teilen Sie die Arbeit auf. Vergleichen Sie einen Lauf mit Startwert 11; weitere Startwerte sind freiwillig. Nutzen Sie Hilfetexte und notieren Sie technische Blockaden, ohne laufende Gespräche zu unterbrechen."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein selbst gewähltes Vorgehen für die Fremdauswertung."
+        }
+      ]
+    },
+    {
+      "phase": "Verarbeiten",
+      "titel": "Fremdes Modell prüfen; Gespräche parallel",
+      "minutes": 70,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 30,
+          "text": "Reproduktionsprüfung: Stellen Sie das fremde Projekt in einem privaten Browserfenster wieder her. Laden Sie Daten und trainieren Sie A/B einmal mit den Einstellungen des Originals und Startwert 11 nach. Wiederholen Sie den Abschlusstest mit der ursprünglichen Auswahl. Vergleichen Sie Datenprüfsumme und Werte mit dem Protokoll. Dokumentieren Sie kurz, was übereinstimmt, abweicht oder nicht prüfbar ist. Dies ist der erste Teil der unbenoteten Fremdauswertung."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 20,
+          "text": "Fremdtest und Rückmeldung: Lassen Sie das nachtrainierte fremde Modell Ihre eigenen Klassen C/D beurteilen. Lesen Sie Tabelle, Trennschärfe und konkrete Beispiele. Begründen Sie «Wie gut?» und «Warum?» mit mindestens zwei möglichen Erklärungen und einer Grenze. Formulieren Sie eine Rückmeldung an das andere Tandem und sichern Sie sie im bestehenden Fremdtest-Protokoll."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 5,
+          "text": "Halten Sie nach dem Fremdtest zuerst allein fest, welche Beobachtung Sie am überzeugendsten finden und welche Grenze Ihre Aussage hat."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 15,
+          "text": "Puffer für Gesprächsunterbrechung, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim Aufruf pausieren Sie. Im Fachgespräch erklären beide das eigene Projekt, eine Entscheidung, ein Ergebnis samt Grenze und einen neuen Fall. Bei nicht lösbarem Trainingsproblem werten Sie die gespeicherten fremden Ausgaben und Beispiele aus und dokumentieren, was nicht reproduziert werden konnte; keinen erfolgreichen Test behaupten."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein Fachgespräch und eine belegte Fremdauswertung; der eigene Abgabestand bleibt unverändert."
+        }
+      ]
+    },
+    {
+      "phase": "Auswerten",
+      "titel": "Rückmeldung sichern",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 5,
+          "text": "Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Gesicherte Rückmeldung und eine Transferfrage; keine nachträgliche Änderung der bewerteten Abgabe."
+        }
+      ]
+    }
+  ]
+}

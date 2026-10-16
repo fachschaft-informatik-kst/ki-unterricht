@@ -1,0 +1,115 @@
+{
+  "id": "07",
+  "view": "projekt",
+  "title": "Das Projekt abschliessen und die Arbeit überprüfen",
+  "rueckblick": "Sie haben in Ihrem eigenen Tempo Daten geprüft und Varianten verglichen. Heute organisieren Sie den Abschluss und prüfen Ihre Belege.",
+  "goal": "Die Untersuchung selbstständig abschliessen, Grenzen belegen und den eigenen Arbeitsprozess reflektieren.",
+  "question": "Leitfrage: Was können wir mit unseren Ergebnissen begründet behaupten?",
+  "motivation": "Zum selbst organisierten Arbeiten gehört, einen klaren Schluss zu ziehen und ungesicherte Behauptungen sichtbar zu machen.",
+  "product": "Vollständiges Journal, geprüfte ZIP-Abgabe und ein von beiden erklärbares Projekt.",
+  "zeit": "70 Minuten SOL-Block, davon 15 Minuten Abschluss- und Technikpuffer. Kein zusätzlicher Bericht oder vorbereitete Präsentation. Fachgesprächsregeln und Austauschpartner bereits vor Doppellektion 8 mitteilen.",
+  "phases": [
+    {
+      "phase": "Ankommen",
+      "titel": "Arbeitsstand und Frist",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 5,
+          "text": "Öffnen Sie Ihren Stand und prüfen Sie, was bis zur Abgabe noch fehlt."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine eigene Abschlussliste."
+        }
+      ]
+    },
+    {
+      "phase": "Vorwissen aktivieren",
+      "titel": "Voraussetzungen prüfen",
+      "minutes": 3,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 3,
+          "text": "Prüfen Sie vor dem Abschlusstest: Ist die Auswahl samt Begründung dokumentiert? Sind P1/P2 bisher unangetastet? Nach Testeinsicht wird nichts optimiert."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein selbst durchgeführter Freigabecheck."
+        }
+      ]
+    },
+    {
+      "phase": "Informieren",
+      "titel": "Abgabehilfen nach Bedarf",
+      "minutes": 2,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 2,
+          "text": "Nutzen Sie Projektauftrag und Raster für fehlende Belege. Lesen Sie die bereits bekannt gegebenen Gesprächszeiten und Austauschregeln; Beratung nur bei konkreten Fragen."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Klarheit über den eigenen Abschlussweg."
+        }
+      ]
+    },
+    {
+      "phase": "Verarbeiten",
+      "titel": "Abschluss selbst steuern",
+      "minutes": 70,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 45,
+          "text": "Schliessen Sie die noch offenen Etappen ab. Testen Sie die begründet ausgewählte Variante einmal auf P1/P2; untersuchen Sie drei konkrete Beispiele, ohne Fehler zu erfinden. Schreiben Sie Reflexion 4–5 mit Grenzen, Fazit, nächstem Versuch, Arbeitsteilung, Hilfen und einer kurzen Rückschau auf Ihren Etappenplan. Prüfen Sie Journal und Ausgaben mit dem Raster. Erklären Sie sich gegenseitig das ganze Projekt; keine Folien nötig. Bereiten Sie die erlaubten Austauschdateien vor."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 10,
+          "text": "Prüfen Sie allein einen persönlichen Anteil Ihrer Abschlussliste anhand des Rasters und notieren Sie einen noch fehlenden Beleg oder eine offene Frage."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 15,
+          "text": "Puffer für fehlende Belege, technischen Export und Beratung. Datenarbeit bei Bedarf zuerst fertigstellen, nicht zugunsten eines schnellen Tests überspringen. Keine neuen Pflichtversuche."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Eine nachvollziehbare abgeschlossene Untersuchung und vorbereitete Austauschdateien."
+        }
+      ]
+    },
+    {
+      "phase": "Auswerten",
+      "titel": "Abgabe sichern",
+      "minutes": 10,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 10,
+          "text": "Prüfen Sie das ZIP auf Journal, Notebook mit Ausgaben, Daten und Protokoll. Laden Sie den finalen Stand herunter und reichen Sie ihn spätestens vor Beginn der Doppellektion 8 über den angegebenen Kanal ein. Halten Sie Ihre eigene Fotostudio-JSON für die Fremdauswertung bereit. Der Download allein ist keine Einreichung."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein geprüftes Abgabepaket und Bereitschaft für Gespräch und Austausch."
+        }
+      ]
+    }
+  ]
+}

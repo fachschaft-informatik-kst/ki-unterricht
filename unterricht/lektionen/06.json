@@ -1,0 +1,115 @@
+{
+  "id": "06",
+  "view": "projekt",
+  "title": "Untersuchen und Entscheidungen begründen",
+  "rueckblick": "In Doppellektion 5 haben Sie Ihren Lernweg geplant. Heute setzen Sie an Ihrem eigenen Arbeitsstand an, nicht an einem neuen gemeinsamen Rezept.",
+  "goal": "Den eigenen Arbeitsplan steuern und einen fairen Vergleich mit Belegen und alternativen Erklärungen auswerten.",
+  "question": "Leitfrage: Was zeigen unsere Daten, und welche andere Erklärung ist möglich?",
+  "motivation": "Ein gutes Ergebnis ist nicht eine hohe Trefferquote, sondern ein nachvollziehbarer Vergleich und eine ehrliche Interpretation.",
+  "product": "Ein belegter Fortschritt an der gewählten Etappe und ein aktualisierter Plan; bei bereiten Tandems A/B-Auswertung und Auswahlbegründung.",
+  "zeit": "70 Minuten ununterbrochener SOL-Block, davon 10 Minuten Puffer. Kein neuer gemeinsamer Input und keine Synchronisierung aller Tandems. Datencheck, Vergleich und Abschluss sind Etappen, keine festen Lektionstermine.",
+  "phases": [
+    {
+      "phase": "Ankommen",
+      "titel": "Am eigenen Stand anknüpfen",
+      "minutes": 5,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 5,
+          "text": "Öffnen Sie Ihren letzten Stand. Nach Import oder Reload führen Sie Vorbereitung und Datenimport bewusst erneut aus. Sehen Sie Ihren letzten nächsten Schritt an."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein wieder arbeitsfähiger Projektstand."
+        }
+      ]
+    },
+    {
+      "phase": "Vorwissen aktivieren",
+      "titel": "Tagesziel setzen",
+      "minutes": 3,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 3,
+          "text": "Wählen Sie ein realistisches Tagesziel und verteilen Sie die Rollen neu. Prüfen Sie, welche Voraussetzung Ihrer Etappe noch fehlt."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein eigenes Tagesziel mit Zuständigkeiten."
+        }
+      ]
+    },
+    {
+      "phase": "Informieren",
+      "titel": "Benötigte Hilfe selbst wählen",
+      "minutes": 2,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 2,
+          "text": "Wählen Sie bei Bedarf eine passende Hilfe im Notebook oder eine konkrete Beratungsfrage. Kein gemeinsamer Input; bei klarem Vorgehen direkt weiterarbeiten."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Ein passender Zugang zur nächsten Aufgabe."
+        }
+      ]
+    },
+    {
+      "phase": "Verarbeiten",
+      "titel": "Selbst organisierte Untersuchung",
+      "minutes": 70,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 50,
+          "text": "Arbeiten Sie an Ihrer gewählten Etappe. Vor jedem A/B-Lauf Daten prüfen; dann Bildzahl, Netz, Epochen und Startwert konstant halten. Lesen Sie Validierung und konkrete Vorhersagen, prüfen Sie eine alternative Erklärung und begründen Sie Ihre Auswahl in Reflexion 3 vor Testeinsicht. Bereite Tandems dürfen bereits abschliessen; andere ergänzen zuerst Daten und Reflexion 1–2. Die Lehrperson fragt in kurzen Beratungen nach Ziel, Beleg und nächstem Schritt; keine Unterbrechung der ganzen Klasse."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Einzeln",
+          "min": 10,
+          "text": "Bearbeiten Sie zuerst allein einen klar abgegrenzten Teil Ihrer gewählten Etappe und sichern Sie dazu einen konkreten Beleg. Greifen Sie bei fehlenden Daten weiterhin zuerst diese Lücke auf."
+        },
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 10,
+          "text": "Frei verfügbarer Puffer für Technik, Interpretation oder Beratung. Eine Vertiefung mit weiteren Startwerten ist freiwillig und nur vor Testeinsicht möglich."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Belegte Ergebnisse der gewählten Etappe; keine Pflicht zu einem klassenweit gleichen Stand."
+        }
+      ]
+    },
+    {
+      "phase": "Auswerten",
+      "titel": "Zeitplan und Abgabe im Blick",
+      "minutes": 10,
+      "schritte": [
+        {
+          "art": "Auftrag",
+          "wer": "Tandem",
+          "min": 10,
+          "text": "Vergleichen Sie Tagesziel und Ergebnis. Aktualisieren Sie den Etappenplan und den nächsten Schritt im Journal, sichern Sie als ZIP. Wenn die Abgabe gefährdet ist, vereinbaren Sie jetzt mit der Lehrperson eine realistische Lösung innerhalb der Projektregeln."
+        },
+        {
+          "art": "Ergebnis",
+          "wer": "Ergebnis",
+          "text": "Gesicherter Fortschritt und ein realistischer Abschlussplan."
+        }
+      ]
+    }
+  ]
+}
