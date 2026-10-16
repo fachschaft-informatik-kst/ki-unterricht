@@ -3,6 +3,9 @@ from pathlib import Path
 from urllib.parse import urlsplit, unquote
 
 from bs4 import BeautifulSoup
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
+from lesson_schema import load_lessons
 
 ROOT = Path(__file__).resolve().parents[1]
 PORTAL = ROOT / "projekt"
@@ -10,8 +13,9 @@ page = PORTAL / "materialien.html"
 assert page.is_file()
 soup = BeautifulSoup(page.read_text(encoding="utf-8"), "html.parser")
 sections = soup.select("section.lesson-resources")
-assert [sec["id"] for sec in sections] == [f"dl-{n:02d}" for n in range(1, 11)]
-assert len(soup.select("nav.quick a[href^='#dl-']")) == 10
+lessons=load_lessons(ROOT)
+assert [sec["id"] for sec in sections] == ["dl-"+lesson["id"] for lesson in lessons]
+assert len(soup.select("nav.quick a[href^='#dl-']")) == len(lessons)
 
 # Real diagrams are shown inline and clickable; there are no synthetic memory
 # cards, print templates, checklists or dead buttons.
@@ -67,4 +71,4 @@ assert count >= 26, count
 for required in ("perzeptron_und_neuronale_netze.ipynb", "ki_tandemprojekt.ipynb",
                  "KI_Bewertungsraster.md", "daten_training.ipynb"):
     assert (PORTAL / "materialien/downloads" / required).is_file()
-print(f"PASS compact teacher resources: 10 lessons, {len(figures)} visible graphics and {count} valid links")
+print(f"PASS compact teacher resources: {len(lessons)} lessons, {len(figures)} visible graphics and {count} valid links")
