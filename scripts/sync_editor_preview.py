@@ -17,7 +17,7 @@ ADMIN = ROOT / "projekt/admin/admin.js"
 
 def values():
     template = PAGE.read_text(encoding="utf-8")
-    m = re.search(r"<style>([\\s\\S]*?)</style>", template)
+    m = re.search(r"<style>(.*?)</style>", template, flags=re.S)
     if not m:
         raise RuntimeError("Embedded course stylesheet is missing")
     body = template.index("<body>") + len("<body>")
