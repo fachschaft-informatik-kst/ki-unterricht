@@ -59,3 +59,4 @@ footer{padding:20px 30px;text-align:center;color:var(--muted);font-size:12px}
 .plan-step-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
 #planTotal{font-weight:750;color:var(--accent)}#planTotal.invalid{color:#a52c31}
 @media(max-width:850px){.plan-overview,.plan-phase-meta,.plan-step-grid{grid-template-columns:1fr}}
+.plan-step-total{font-size:13px;font-weight:650;color:var(--accent);margin:8px 0 12px}.plan-step-total.invalid{color:#a52c31}
