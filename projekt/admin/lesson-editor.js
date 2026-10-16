@@ -138,6 +138,12 @@ export function setupLessonEditor({state,api,stage,status,error,$}){
       state.staged.set(teacherPath,{path:teacherPath,expectedSha:null,content:material});
       state.chapters.push({path:contentPath,sha:null});
       state.chapters.sort((a,b)=>a.path.localeCompare(b.path));
+      const section=$("section"),view="lektion-"+id;
+      if(![...section.options].some(o=>o.value===view)){
+        const option=node("option",null,"Doppellektion "+Number(id));
+        option.value=view;section.append(option);
+      }
+      section.value=view;
       state.plans.push({path:lessonPath,sha:null});
       renderOptions();
       $("lessonPick").value=lessonPath;
