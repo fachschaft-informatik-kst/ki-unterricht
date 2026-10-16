@@ -189,20 +189,47 @@ function move(){
     useFile(target,null,$("source").value);stagingList();status("Verschiebung vorgemerkt; Kapitel-ID bleibt erhalten.");
   }catch(e){error(e);}
 }
+async function imageAvivaAttribution(){
+  const path=state.current?.path||"";
+  if(!path.startsWith("lehrperson/"))return "";
+  let id=path.match(/ergaenzungen\/dl-(\d{2})\.md$/)?.[1];
+  if(!id){
+    const previous=$("source").value.slice(0,$("source").selectionStart);
+    id=[...previous.matchAll(/^## Doppellektion (\d+)\s*$/gm)].at(-1)?.[1];
+  }
+  if(!id)throw Error("Bild in den Materialien unter einer Doppellektion-Überschrift einfügen.");
+  const json=state.staged.get("projekt/kurs.json")?.content||
+    (await api("/api/file?path=projekt/kurs.json")).content;
+  const lesson=JSON.parse(json).lessons.find(l=>Number(l.id)===Number(id));
+  if(!lesson)throw Error("Doppellektion "+id+" im Unterrichtsplan nicht gefunden.");
+  const phases=lesson.phases.map(p=>p.phase);
+  const phase=prompt("AVIVA-Phase für Doppellektion "+Number(id)+":\n"+phases.join(" / "),phases[0]);
+  if(phase===null)throw Error("Bild-Upload abgebrochen.");
+  const entry=lesson.phases.find(p=>p.phase===phase.trim());
+  if(!entry)throw Error("AVIVA-Phase muss exakt einer der fünf Phasen entsprechen.");
+  const roles=[...new Set(entry.schritte.map(step=>step.wer))];
+  const role=prompt("Sozialform in dieser Phase:\n"+roles.join(" / "),roles[0]);
+  if(role===null)throw Error("Bild-Upload abgebrochen.");
+  if(!roles.includes(role.trim()))throw Error("Sozialform kommt in der gewählten AVIVA-Phase nicht vor.");
+  return ' "'+entry.phase+" | "+role.trim()+'"';
+}
 async function addImage(event){
   const file=event.target.files?.[0];if(!file)return;
   try{
     if(file.size>3000000)throw Error("Maximal 3 MB pro Bild.");
     const ext={"image/png":"png","image/jpeg":"jpg","image/webp":"webp"}[file.type];
     if(!ext)throw Error("Nur PNG, JPG oder WebP verwenden.");
+    const caption=prompt("Bildbeschreibung:",file.name);
+    if(caption===null)throw Error("Bild-Upload abgebrochen.");
+    if(!caption.trim()||/[\[\]\n"]/.test(caption))throw Error("Bitte eine kurze Bildbeschreibung ohne Klammern oder Anführungszeichen wählen.");
+    const attribution=await imageAvivaAttribution();
     const name=(slug(file.name.replace(/\.[^.]+$/,""))||"bild").slice(0,42)+"-"+crypto.randomUUID().slice(0,8)+"."+ext;
     const bytes=new Uint8Array(await file.arrayBuffer());
     let chars="";for(let i=0;i<bytes.length;i+=8192)chars+=String.fromCharCode(...bytes.subarray(i,i+8192));
     const path="projekt/grafiken/uploads/"+name;
     state.staged.set(path,{path,expectedSha:null,content:btoa(chars)});
-    const caption=prompt("Bildbeschreibung:",file.name)||"Illustration";
-    insert("\n\n!["+caption.replaceAll("]","")+"](grafiken/uploads/"+name+")\n\n");
-    stagingList();status("Bild vorgemerkt. Wird zusammen mit dem Kapitel veröffentlicht.");
+    insert("\n\n!["+caption.trim()+"](grafiken/uploads/"+name+attribution+")\n\n");
+    stagingList();status("Bild mit AVIVA-Zuordnung vorgemerkt und im Inhalt eingefügt.");
   }catch(e){error(e);}finally{event.target.value="";}
 }
 async function publish(){
