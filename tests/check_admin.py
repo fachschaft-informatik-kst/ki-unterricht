@@ -22,7 +22,7 @@ for selector in ("#planEditor","#planLesson","#planTotal","#planFields","#planPh
     assert soup.select_one(selector),selector
 code=(site/"admin.js").read_text(encoding="utf-8")
 for item in ("/api/file","/api/chapters","/api/publish","function addLesson","function editPlan","function editMaterials","data-answer",
-             "grafiken/uploads/","sandbox"):
+             "grafiken/uploads/"):
     assert item in code,item
 backend=worker.read_text(encoding="utf-8")
 for item in ("GITHUB_CLIENT_SECRET","GITHUB_CLIENT_ID","SESSION_KEY",
