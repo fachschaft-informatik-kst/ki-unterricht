@@ -21,7 +21,9 @@ const server=http.createServer((req,res)=>{
   fs.readFile(file,(err,data)=>{
     if(err){res.writeHead(404).end();return;}
     const ext=path.extname(file);
-    res.writeHead(200,{"Content-Type":ext===".js"?"text/javascript":ext===".css"?"text/css":"text/html"});
+    res.writeHead(200,{"Content-Type":ext===".js"?"text/javascript":ext===".css"?"text/css":"text/html",
+      // Reproduce the Worker constraint that causes <base href> to be ignored.
+      "Content-Security-Policy":"base-uri 'none'; img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io"});
     res.end(data);
   });
 });
@@ -46,6 +48,14 @@ const server=http.createServer((req,res)=>{
       submitted=route.request().postDataJSON();
       return route.fulfill({json:{url:"https://github.com/example/repo/pull/123",number:123}});
     });
+    // Mock only the published KST logo; relative requests to worker origin
+    // must fail under the server rules above, just like on Cloudflare.
+    const logoUrl="https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/grafiken/kst_logo.png";
+    const tinyPng=Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/XxkAAAAASUVORK5CYII=","base64");
+    await page.route(logoUrl,route=>route.fulfill({
+      status:200,contentType:"image/png",body:tinyPng
+    }));
+
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
 
     // Visual regression for the real CSS selectors and HTML wrappers.
@@ -54,6 +64,19 @@ const server=http.createServer((req,res)=>{
     await page.locator("#chapters button").filter({hasText:"030-einstieg-3"}).click();
     const preview=page.frameLocator("#preview");
     await preview.locator(".timeline li").first().waitFor();
+    const kstLogo=preview.locator(".crumb .school-logo");
+    await kstLogo.waitFor();
+    const logoResult=await kstLogo.evaluate(img=>new Promise(resolve=>{
+      const finish=()=>resolve({src:img.currentSrc||img.src,loaded:img.complete&&img.naturalWidth>0});
+      if(img.complete)finish();
+      else{
+        img.addEventListener("load",finish,{once:true});
+        img.addEventListener("error",finish,{once:true});
+      }
+    }));
+    assert.equal(logoResult.src,logoUrl,"Logo must resolve to published asset despite CSP base-uri 'none'");
+    assert.equal(logoResult.loaded,true,"The KST logo must actually load in the sandboxed preview");
+
     assert.equal(await preview.locator(".timeline li").count(),9);
     const timelineStyle=await preview.locator(".timeline li").first().evaluate(el=>({
       display:getComputedStyle(el).display,
