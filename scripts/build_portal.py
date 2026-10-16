@@ -77,8 +77,11 @@ def add_extra_lessons(page: str, root: Path = ROOT) -> str:
     if sections:
         marker = '<div class="lab-panel"'
         nav_end = '</nav><div class="sidebar-bottom">'
-        if page.count(marker) != 1 or page.count(nav_end) != 1:
-            raise ValueError("Navigation or section insertion point not found")
+        if marker not in page or nav_end not in page:
+            raise ValueError(
+                f"Navigation/lesson marker missing: lab={page.count(marker)}, "
+                f"nav={page.count(nav_end)}"
+            )
         page = page.replace(marker, "".join(sections) + marker, 1)
         page = page.replace(nav_end, "".join(links) + nav_end, 1)
     return page
