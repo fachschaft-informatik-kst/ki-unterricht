@@ -176,7 +176,10 @@ function preview(){
   const section=state.current?.path.split("/")[1]||"einstieg";
   const safeSection=/^[a-z0-9-]+$/.test(section)?section:"einstieg";
   const stylesheet="<style>"+COURSE_PREVIEW_CSS+"</style>";
-  $("preview").srcdoc='<!doctype html><html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="'+COURSE_PREVIEW_BASE+'">'+stylesheet+'</head><body>'+COURSE_PREVIEW_CHROME+'<section class="section" id="'+safeSection+'">'+content+'</section></main></div></body></html>';
+  // The Worker CSP intentionally forbids <base> (base-uri 'none'). Inline chrome
+  // assets must therefore be absolute, just like images from edited chapters.
+  const chrome=COURSE_PREVIEW_CHROME.replace(/\bsrc="grafiken\//g,'src="'+COURSE_PREVIEW_BASE+'grafiken/');
+  $("preview").srcdoc='<!doctype html><html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="'+COURSE_PREVIEW_BASE+'">'+stylesheet+'</head><body>'+chrome+'<section class="section" id="'+safeSection+'">'+content+'</section></main></div></body></html>';
 
 }
 function availableOrder(section,after){
