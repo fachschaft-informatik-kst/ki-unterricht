@@ -63,8 +63,10 @@ const server=http.createServer((req,res)=>{
     await phase.locator("button").last().click();
     assert.equal(await phase.locator(".plan-step").count(),3);
     await page.locator("#planPhases fieldset").first().locator("input[type=number]").first().fill("6");
+    await page.locator("#planPhases fieldset").first().locator(".plan-step").first().locator("input[type=number]").fill("5");
     assert.match(await page.locator("#planTotal").textContent(),/91 von 90/);
     await page.locator("#planPhases fieldset").nth(1).locator("input[type=number]").first().fill("9");
+    await page.locator("#planPhases fieldset").nth(1).locator(".plan-step").first().locator("input[type=number]").fill("8");
     assert.match(await page.locator("#planTotal").textContent(),/90 von 90/);
     await page.locator("#stage").click();
     await page.locator("#editMaterials").click();
@@ -89,6 +91,8 @@ const server=http.createServer((req,res)=>{
     assert.equal(updated.lessons[10].view,"dl-11");
     assert.equal(updated.lessons[10].phases.reduce((n,p)=>n+p.minutes,0),90);
     assert.equal(updated.lessons[10].phases[0].schritte.length,3);
+    assert.equal(updated.lessons[10].phases[0].schritte.at(-1).art,"Ergebnis");
+    assert.equal(updated.lessons[10].phases[0].schritte.reduce((n,s)=>n+Number(s.min||0),0),6);
     assert.match(await page.locator("#published").textContent(),/#123/);
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
   }finally{
