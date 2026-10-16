@@ -8,7 +8,8 @@ const ROOT=path.resolve(__dirname,"..");
 const plan=fs.readFileSync(path.join(ROOT,"projekt/kurs.json"),"utf8");
 const files=[
   "kursseiten/einstieg/000-einstieg.md",
-  "kursseiten/einstieg/010-einstieg-1.md"
+  "kursseiten/einstieg/010-einstieg-1.md",
+  "kursseiten/einstieg/030-einstieg-3.md"
 ];
 const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
@@ -46,6 +47,40 @@ const server=http.createServer((req,res)=>{
       return route.fulfill({json:{url:"https://github.com/example/repo/pull/123",number:123}});
     });
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
+
+    // Visual regression for the real CSS selectors and HTML wrappers.
+    // Missing portal.css used to turn the milestone timeline into an ordinary
+    // numbered list and removed the circular chapter numbers.
+    await page.locator("#chapters button").filter({hasText:"030-einstieg-3"}).click();
+    const preview=page.frameLocator("#preview");
+    await preview.locator(".timeline li").first().waitFor();
+    assert.equal(await preview.locator(".timeline li").count(),9);
+    const timelineStyle=await preview.locator(".timeline li").first().evaluate(el=>({
+      display:getComputedStyle(el).display,
+      columns:getComputedStyle(el).gridTemplateColumns
+    }));
+    assert.equal(timelineStyle.display,"grid","Milestones must use published two-column timeline");
+    assert.match(timelineStyle.columns,/104px/,"Milestone year column must match site CSS");
+    const chapterStyle=await preview.locator(".kapitel > summary .kapitel-nr").evaluate(el=>({
+      display:getComputedStyle(el).display,
+      radius:getComputedStyle(el).borderTopLeftRadius,
+      width:getComputedStyle(el).width,
+      value:el.textContent
+    }));
+    assert.equal(chapterStyle.value,"3");
+    assert.equal(chapterStyle.display,"grid","Chapter number styling was missing");
+    assert.equal(chapterStyle.radius,"50%","Chapter number circle must match site");
+    assert.equal(chapterStyle.width,"34px");
+    assert.equal(await preview.locator(".sidebar").count(),1,"Course sidebar shell must match site");
+
+    // An unmerged YAML-backed chapter also needs the exact numbered wrapper.
+    await page.locator("#source").fill("---\ntype: chapter\nid: einstieg-test\nnummer: \"3a\"\ntitel: \"Testtitel\"\nkurz: \"Test\"\nopen: true\n---\n\n## Neuer Inhalt\n");
+    await page.locator("#previewButton").click();
+    assert.equal(await preview.locator(".kapitel-nr").first().textContent(),"3a");
+    assert.equal(await preview.locator(".kapitel-titel").first().textContent(),"Testtitel");
+    // Restore the original source without staging a change.
+    await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/030-einstieg-3.md"),"utf8"));
+
     await page.locator("#editPlan").click();
     // UI operations fetch their files asynchronously; click() does not await handlers.
     await page.locator("#planEditor").waitFor({state:"visible"});

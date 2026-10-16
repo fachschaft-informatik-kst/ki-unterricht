@@ -59,8 +59,8 @@
         <button id="previewButton" type="button" class="button light">Vorschau aktualisieren</button>
         <button id="stage" type="button" class="button primary">Änderung vormerken</button>
       </div>
-      <h2 class="preview-title" id="previewHeading">Vorschau <span>ohne ausführbaren JavaScript-Code</span></h2>
-      <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer"></iframe>
+      <div class="preview-heading"><h2 class="preview-title" id="previewHeading">Kursvorschau <span>wie auf der Kurswebsite · ohne ausführbaren JavaScript-Code</span></h2><button id="previewFullscreen" class="button light" type="button">⛶ Vollbild-Vorschau</button></div>
+      <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer" allowfullscreen></iframe>
       <section class="publish">
         <h2>Änderungen einreichen</h2>
         <p>Alle vorgemerkten Änderungen werden zusammen in einem eigenen GitHub-Branch gespeichert. Ein Pull Request startet automatisch die bestehenden Tests.</p>
