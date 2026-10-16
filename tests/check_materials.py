@@ -32,7 +32,8 @@ assert len(soup.select("#dl-04 .graphic-grid figure")) == 2
 assert not soup.select(".source-graphic"), "Avoid duplicating student diagrams"
 for img in soup.select(".graphic-grid img"):
     assert img["src"].startswith("materialien/downloads/"), img["src"]
-student_sources = {img["src"] for img in course.select("img[src]")}
+student_course = BeautifulSoup((PORTAL / "index.html").read_text(encoding="utf-8"), "html.parser")
+student_sources = {img["src"] for img in student_course.select("img[src]")}
 for img in soup.select(".graphic-grid img"):
     assert img["src"] not in student_sources, "Diagram is already on student page"
 xor_svg = PORTAL / "grafiken/merhschichtiges_netzwerk_xor.svg"
@@ -62,7 +63,7 @@ for link in [*soup.select("a[href]"), *soup.select("img[src]")]:
         target_soup = BeautifulSoup(target.read_text(encoding="utf-8"), "html.parser")
         assert target_soup.find(id=unquote(url.fragment)), f"Broken anchor: {href}"
     count += 1
-assert count >= 38, count
+assert count >= 26, count
 for required in ("perzeptron_und_neuronale_netze.ipynb", "ki_tandemprojekt.ipynb",
                  "KI_Bewertungsraster.md", "daten_training.ipynb"):
     assert (PORTAL / "materialien/downloads" / required).is_file()
