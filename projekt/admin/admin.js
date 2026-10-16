@@ -421,6 +421,9 @@ $("move").addEventListener("click",move);
 $("archive").addEventListener("click",archive);
 $("source").addEventListener("input",()=>{});
 $("previewButton").addEventListener("click",preview);
+$("previewFullscreen").addEventListener("click",()=>{
+  $("preview").requestFullscreen().catch(()=>status("Vollbildansicht wird vom Browser nicht unterstützt.",true));
+});
 $("stage").addEventListener("click",()=>{try{stage();}catch(e){error(e);}});
 $("publish").addEventListener("click",publish);
 $("addHeading").addEventListener("click",()=>insert("\n\n## Neue Zwischenüberschrift\n\n"));
