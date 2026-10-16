@@ -8,7 +8,7 @@ from build_portal import render_fragment
 ROOT=Path(__file__).resolve().parents[1]
 site=ROOT/"projekt/admin"
 worker=ROOT/"admin-worker/src/index.mjs"
-for name in ("index.html","admin.css","admin.js"):
+for name in ("index.html","admin.css","admin.js","lesson-editor.js"):
     assert (site/name).is_file(),name
 assert worker.is_file()
 source=(site/"index.html").read_text(encoding="utf-8")
@@ -19,6 +19,11 @@ assert soup.select_one("script[src='admin.js'][type='module']")
 for selector in ("#source","#create","#addImage","#addAnswer","#stage","#publish","#archive","#login"):
     assert soup.select_one(selector),selector
 code=(site/"admin.js").read_text(encoding="utf-8")
+lesson_code=(site/"lesson-editor.js").read_text(encoding="utf-8")
+for key in ("AVIVA","Neue Doppellektion","lehrperson/lektionen","unterricht/lektionen","90"):
+    assert key in lesson_code,key
+for identifier in ("lessonWorkspace","lessonPick","newLesson","stageLesson","teacherSource"):
+    assert soup.select_one("#"+identifier),identifier
 for item in ("/api/file","/api/chapters","/api/publish","data-answer",
              "grafiken/uploads/","sandbox"):
     assert item in code,item
