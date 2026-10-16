@@ -26,7 +26,14 @@ python scripts/new_chapter.py einstieg --after 030 --nummer 3a --title "Ein neue
 make preview
 ```
 
-Der Generator prüft Sortierung, gültigen Bereich und eindeutige IDs; bestehende Kapitel werden nicht verändert. Für vollständig **neue Doppellektionen** braucht es heute noch Anpassungen an `projekt/kurs.json` und an mehreren fixen Zuordnungen. Der Weg zu einer dateibasierten, CMS-ähnlichen Architektur ist in [docs/ARCHITEKTUR.md](docs/ARCHITEKTUR.md) beschrieben.
+Der Generator prüft Sortierung, gültigen Bereich und eindeutige IDs; bestehende Kapitel werden nicht verändert. **Neue Doppellektionen** können bereits im [Admin-Editor](projekt/admin/) inklusive AVIVA-Plan und Materialanhang erstellt werden. Alternativ funktioniert dies direkt im geklonten Repository, ohne GitHub-App-Anmeldung:
+
+```sh
+python scripts/new_lesson.py "KI im Alltag" --chapter "Anwendungen entdecken"
+make preview
+```
+
+Der Generator legt den AVIVA-Plan in `projekt/kurs.json`, ein erstes Kapitel unter `kursseiten/dl-NN/` und die Lehrpersonenmaterialien unter `lehrperson/ergaenzungen/` an. Er verändert keine bestehenden Lektionen und prüft eindeutige IDs und vorhandene Dateien. Die automatisch erzeugten didaktischen Platzhalter müssen anschliessend ausgearbeitet werden. Mit `--dry-run` zeigt er die geplanten Dateien ohne Änderungen. Die längerfristige Idee einzelner Quelldateien pro Lektion ist in [docs/ARCHITEKTUR.md](docs/ARCHITEKTUR.md) dokumentiert.
 
 Die Doppellektionen liegen kapitelweise unter [`kursseiten/`](kursseiten).
 Absätze und Zwischenüberschriften in den Markdown-Bereichen sind direkt
