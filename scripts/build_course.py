@@ -219,6 +219,8 @@ def build():
     text, count = re.subn(r'<!-- KURSPLAN -->.*?<!-- /KURSPLAN -->', '<!-- KURSPLAN -->\n'+'\n'.join(rows)+'\n<!-- /KURSPLAN -->', text, flags=re.S)
     assert count == 1
     plan.write_text(text)
+    from build_materials import build as build_materials
+    build_materials(lessons)
     print('Generated 10 consistent AVIVA plans, each 90 minutes')
 
 if __name__ == '__main__':

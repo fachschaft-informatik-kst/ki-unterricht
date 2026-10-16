@@ -24,3 +24,7 @@ Journal und Unterrichtsantworten werden lokal gespeichert. Alle fünf geöffnete
 `python tests/check_course.py` prüft Pläne, Notebooks, Grafiken, interne Verweise und entfernte Inhalte. `PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs` prüft den echten Browserweg (Playwright und Chromium erforderlich). Die Prüfung benötigt einen vollständigen JupyterLite-Build; eine reine HTML-Vorschau enthält keine Python-Laufzeit.
 
 Ohne JavaScript sind Informationen lesbar, Experimente sowie Download und Wiederherstellung des Projektstands benötigen JavaScript. Beim Drucken werden alle Inhaltsbereiche angezeigt.
+
+## Materialkoffer für Lehrpersonen
+
+Die Seite `projekt/materialien.html` wird aus [`lehrperson/materialien.md`](../lehrperson/materialien.md) beim `scripts/build_course.py` erzeugt und erscheint im Lehrpersonen-Fussbereich neben dem Unterrichtsplan. Sie enthält pro Doppellektion direkt nutzbare Grafiken, Kursabschnitte, Notebook-/Arbeitsblatt-Downloads und druckbare Vorlagen, etwa für Memory und die fünf Datengruppen. Die zusätzlichen Dateien unter `projekt/materialien/downloads/` werden automatisch aus den vorhandenen Originalen kopiert. Kein manuelles Kopieren in den Pages-Build nötig.
