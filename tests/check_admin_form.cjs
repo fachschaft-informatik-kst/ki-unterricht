@@ -46,6 +46,8 @@ const server=http.createServer((req,res)=>{
     });
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
     await page.locator("#editPlan").click();
+    // UI operations fetch their files asynchronously; click() does not await handlers.
+    await page.locator("#planEditor").waitFor({state:"visible"});
     assert.equal(await page.locator("#planEditor").isVisible(),true);
     assert.equal(await page.locator("#source").isVisible(),false);
     assert.match(await page.locator("#planTotal").textContent(),/90 von 90/);
@@ -56,6 +58,7 @@ const server=http.createServer((req,res)=>{
       window.prompt=()=>responses.shift()??null;
     });
     await page.locator("#createLesson").click();
+    await page.waitForFunction(()=>document.querySelector("#section")?.value==="dl-11");
     assert.equal(await page.locator("#section").inputValue(),"dl-11");
     assert.equal(await page.locator("#planLesson").inputValue(),"10");
     assert.equal(await page.locator("#planPhases fieldset").count(),5);
@@ -70,6 +73,7 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#planTotal").textContent(),/90 von 90/);
     await page.locator("#stage").click();
     await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.includes("lehrperson/ergaenzungen/dl-11.md"));
     assert.match(await page.locator("#path").textContent(),/lehrperson\/ergaenzungen\/dl-11.md/);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n- Neues Experiment vorbereiten\n");
     await page.locator("#stage").click();
@@ -91,6 +95,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\nEin eigenes Beispiel.\n");
     await page.locator("#stage").click();
     await page.locator("#publish").click();
+    await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
     assert.ok(submitted);
     const names=submitted.changes.map(c=>c.path).sort();
     assert.deepEqual(names.filter(n=>!n.startsWith("projekt/grafiken/uploads/")),[
