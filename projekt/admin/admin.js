@@ -199,7 +199,7 @@ async function addImage(event){
       const plan=state.lesson?.plan;
       const phase=plan?.phases?.find(p=>p.phase==="Informieren")||plan?.phases?.[0];
       const role=phase?.schritte?.find(step=>step.wer!=="Ergebnis")?.wer||"Tandem";
-      const markup="\\n\\n!["+caption.replaceAll("]","")+"](grafiken/uploads/"+name+' "'+phase.phase+" | "+role+'")\\n\\n';
+      const markup="\n\n!["+caption.replaceAll("]","")+"](grafiken/uploads/"+name+' "'+phase.phase+" | "+role+'")\n\n';
       const editor=$("teacherSource"),start=editor.selectionStart,end=editor.selectionEnd;
       editor.focus();editor.setRangeText(markup,start,end,"end");
     }else{
