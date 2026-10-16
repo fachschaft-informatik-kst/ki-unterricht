@@ -34,10 +34,44 @@ async function github(token,path,options={}){
     "X-GitHub-Api-Version":"2022-11-28","User-Agent":"KST-KI-Editor",...(options.headers||{})
   }});
   const data=await r.json().catch(()=>({}));
-  if(!r.ok)throw Object.assign(Error("GitHub ("+r.status+"): "+String(data.message||r.statusText).slice(0,160)),{status:r.status});
+  if(!r.ok){
+    const action=(options.method||"GET").toUpperCase()+" "+path.split("?")[0];
+    const required=r.headers.get("X-Accepted-GitHub-Permissions");
+    const hint=required?" Benötigte App-Rechte: "+required.slice(0,130)+".":"";
+    throw Object.assign(Error("GitHub ("+r.status+") bei "+action+": "+
+      String(data.message||r.statusText).slice(0,160)+"."+hint),{status:r.status});
+  }
   return data;
 }
 const canWrite=async token => (await github(token,"/repos/"+REPO)).permissions?.push===true;
+// A user's personal push permission does NOT prove that this GitHub App has
+// been installed on the organization's repository with write permissions.
+// GitHub exposes the active installation permissions to App user tokens.
+async function appInstallationStatus(token,request=github){
+  const owner=REPO.split("/")[0].toLowerCase();
+  const all=await request(token,"/user/installations?per_page=100");
+  const matches=(all.installations||[]).filter(item=>
+    item.account?.login?.toLowerCase()===owner);
+  if(!matches.length)return {ready:false,reason:
+    "Die GitHub App ist nicht auf der Organisation "+owner+" installiert oder nicht für dein Benutzerkonto zugänglich. Unter Organisation → Settings → GitHub Apps die App installieren und "+REPO+" auswählen."};
+  for(const installation of matches){
+    const permissions=installation.permissions||{};
+    if(permissions.contents!=="write")return {ready:false,reason:
+      "Die App-Installation hat Contents: "+(permissions.contents||"keine")+" statt Read and write. App-Berechtigungen ändern und die Änderung in der Organisation genehmigen."};
+    if(permissions.pull_requests!=="write")return {ready:false,reason:
+      "Die App-Installation hat Pull requests: "+(permissions.pull_requests||"keine")+" statt Read and write. App-Berechtigungen ändern und die Änderung in der Organisation genehmigen."};
+    if(installation.repository_selection==="all")return {ready:true};
+    for(let page=1;page<=10;page++){
+      const listed=await request(token,"/user/installations/"+installation.id+
+        "/repositories?per_page=100&page="+page);
+      if((listed.repositories||[]).some(item=>item.full_name?.toLowerCase()===REPO.toLowerCase()))
+        return {ready:true};
+      if(page*100>=(listed.total_count||0))break;
+    }
+  }
+  return {ready:false,reason:"Die App ist auf "+owner+" installiert, aber das Repository "+
+    REPO+" gehört nicht zur App-Auswahl. In der Organisation unter Installed GitHub Apps → Configure das Repository hinzufügen."};
+}
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/(einstieg|lernarten|perzeptron|netze|projekt|sprache|gesellschaft|dl-[0-9]{2})\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path)||
   /^lehrperson\/ergaenzungen\/dl-[0-9]{2}\.md$/.test(path)||
@@ -94,7 +128,9 @@ async function publish(req,token){
   let body;try{body=JSON.parse(raw);validate(body.changes);}catch(e){return fail(400,e.message);}
   const title=String(body.title||"Unterrichtsänderung").trim().slice(0,100);
   if(!title)return fail(400,"Titel fehlt.");
-  if(!(await canWrite(token)))return fail(403,"Keine Schreibberechtigung im Repository.");
+  if(!(await canWrite(token)))return fail(403,"Keine persönliche Schreibberechtigung im Repository.");
+  const installation=await appInstallationStatus(token);
+  if(!installation.ready)return fail(403,installation.reason);
   const prefix="/repos/"+REPO;
   const ref=await github(token,prefix+"/git/ref/heads/main");
   const baseSha=ref.object.sha;
@@ -207,6 +243,12 @@ export default {
       if(url.pathname==="/api/session"&&req.method==="GET")return response({authenticated:!!active,login:active?.login||null});
       if(url.pathname.startsWith("/api/")){
         if(!active)return fail(401,"Bitte mit GitHub anmelden.");
+        if(req.method==="GET"&&url.pathname==="/api/permissions"){
+          const humanCanWrite=await canWrite(active.token);
+          const installation=await appInstallationStatus(active.token);
+          return response({ready:humanCanWrite&&installation.ready,
+            error:!humanCanWrite?"Dein GitHub-Benutzer hat keine Schreibberechtigung.":installation.reason||null});
+        }
         if(req.method==="GET"&&url.pathname==="/api/chapters"){
           const tree=await github(active.token,"/repos/"+REPO+"/git/trees/main?recursive=1");
           if(tree.truncated)return fail(409,"Unvollständiger Dateiindex.");
@@ -229,3 +271,5 @@ export default {
       String(err.message||"GitHub nicht erreichbar").slice(0,230));}
   }
 };
+
+export {appInstallationStatus};
