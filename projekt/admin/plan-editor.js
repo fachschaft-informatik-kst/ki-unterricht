@@ -9,6 +9,12 @@ export function createPlanner(panel,onChange){
     const sum=draft.lessons[selected].phases.reduce((n,p)=>n+Number(p.minutes||0),0);
     total.textContent="Geplant: "+sum+" von 90 Minuten";
     total.classList.toggle("invalid",sum!==90);
+    phases.querySelectorAll(".plan-step-total").forEach((hint,i)=>{
+      const p=draft.lessons[selected].phases[i];
+      const used=p.schritte.reduce((n,s)=>n+Number(s.min||0),0);
+      hint.textContent="Arbeitsschritte: "+used+" von "+p.minutes+" Minuten";
+      hint.classList.toggle("invalid",used!==p.minutes);
+    });
   }
   function commit(){onChange(JSON.stringify(draft,null,2)+"\n");totalMinutes();}
   function input(parent,title,value,options,change){
@@ -49,14 +55,15 @@ export function createPlanner(panel,onChange){
         row.append(grid);
         input(row,"Auftrag und erwartetes Ergebnis",s.text,{multiline:true,rows:3},v=>{s.text=v;});
         const remove=el("button","Schritt entfernen","button light danger");
-        remove.type="button";remove.disabled=p.schritte.length<=1;
-        remove.addEventListener("click",()=>{if(p.schritte.length<=1)return;p.schritte.splice(si,1);commit();render();});
+        remove.type="button";remove.disabled=p.schritte.length<=1||si===p.schritte.length-1;
+        remove.addEventListener("click",()=>{if(p.schritte.length<=1||si===p.schritte.length-1)return;p.schritte.splice(si,1);commit();render();});
         row.append(remove);rows.append(row);
       });
       card.append(rows);
+      card.append(el("p","", "plan-step-total"));
       const add=el("button","+ Arbeitsschritt","button light");add.type="button";
       add.addEventListener("click",()=>{
-        p.schritte.push({art:"Auftrag",wer:"Tandem",min:0,text:"Neuen Arbeitsschritt formulieren."});
+        p.schritte.splice(p.schritte.length-1,0,{art:"Auftrag",wer:"Tandem",min:0,text:"Neuen Arbeitsschritt formulieren."});
         commit();render();
       });
       card.append(add);phases.append(card);
@@ -81,6 +88,8 @@ export function createPlanner(panel,onChange){
         if(!Array.isArray(l.phases)||l.phases.length!==5||
           l.phases.some((p,j)=>p.phase!==PHASES[j]||!Number.isInteger(p.minutes)||p.minutes<1||
             !p.titel?.trim()||!Array.isArray(p.schritte)||!p.schritte.length||
+            p.schritte.at(-1)?.art!=="Ergebnis"||
+            p.schritte.reduce((n,s)=>n+Number(s.min||0),0)!==p.minutes||
             p.schritte.some(s=>!s.wer?.trim()||!s.text?.trim()||
               (s.min!==undefined&&(!Number.isInteger(s.min)||s.min<0)))))
           throw Error("Doppellektion "+(i+1)+": AVIVA-Phasen oder Arbeitsschritte unvollständig.");
