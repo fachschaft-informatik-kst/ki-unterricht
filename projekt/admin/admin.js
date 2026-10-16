@@ -122,10 +122,42 @@ function previewAssets(content){
   }
   return root.innerHTML;
 }
+// Mirror build_portal.render_fragment's chapter wrapper for YAML-backed chapters.
+// The number and title must appear even before the first PR is merged.
+function chapterFromYaml(source){
+  const header=/^---\r?\n([\s\S]*?)\r?\n---\r?\n/.exec(source);
+  if(!header)return null;
+  const meta={};
+  for(const line of header[1].split(/\r?\n/)){
+    const match=/^([a-z_]+):\s*(.*?)\s*$/.exec(line);
+    if(!match)continue;
+    const raw=match[2];
+    if(raw.startsWith('"')){try{meta[match[1]]=JSON.parse(raw);}catch{meta[match[1]]=raw;}}
+    else if(raw.startsWith("'")&&raw.endsWith("'"))
+      meta[match[1]]=raw.slice(1,-1).replaceAll("''","'");
+    else if(raw==="true"||raw==="false")meta[match[1]]=raw==="true";
+    else meta[match[1]]=raw;
+  }
+  if(meta.type!=="chapter")return null;
+  const id=String(meta.id||"");
+  if(!/^[a-z][a-z0-9-]*$/.test(id))return null;
+  const nr=escapeHtml(meta.nummer??"");
+  const title=escapeHtml(meta.titel??"");
+  const short=escapeHtml(meta.kurz??"");
+  const archived=meta.archiviert===true;
+  const open=meta.open!==false&&!archived?' open':"";
+  const hidden=archived?' data-archived="true" hidden style="display:none"':"";
+  return '<details class="kapitel" id="'+id+'" data-kurz="'+short+'"'+open+hidden+
+    '><summary><span class="kapitel-nr">'+nr+'</span><h2 class="kapitel-titel">'+
+    title+'</h2></summary><div class="kapitel-body">'+markdown(source.slice(header[0].length))+
+    '</div></details>';
+}
 function preview(){
   let content=$("source").value;
   if(content.includes("<!-- MD:START -->"))
     content=content.replace(/<!-- MD:START -->([\s\S]*?)<!-- MD:END -->/g,(_,text)=>markdown(text));
+  else if(content.startsWith("---\n"))
+    content=chapterFromYaml(content)??markdown(content);
   else if(!/^\s*<(?:details|section)\b/.test(content))
     content=markdown(content);
   content=previewAssets(content);
