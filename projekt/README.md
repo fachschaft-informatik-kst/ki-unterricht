@@ -25,6 +25,6 @@ Journal und Unterrichtsantworten werden lokal gespeichert. Alle fünf geöffnete
 
 Ohne JavaScript sind Informationen lesbar, Experimente sowie Download und Wiederherstellung des Projektstands benötigen JavaScript. Beim Drucken werden alle Inhaltsbereiche angezeigt.
 
-## Materialkoffer für Lehrpersonen
+## Grafiken und Materialien für Lehrpersonen
 
-Die Seite `projekt/materialien.html` wird aus [`lehrperson/materialien.md`](../lehrperson/materialien.md) beim `scripts/build_course.py` erzeugt und erscheint im Lehrpersonen-Fussbereich neben dem Unterrichtsplan. Sie enthält pro Doppellektion direkt nutzbare Grafiken, Kursabschnitte, Notebook-/Arbeitsblatt-Downloads und druckbare Vorlagen, etwa für Memory und die fünf Datengruppen. Die zusätzlichen Dateien unter `projekt/materialien/downloads/` werden automatisch aus den vorhandenen Originalen kopiert. Kein manuelles Kopieren in den Pages-Build nötig.
+Die kompakte Seite `projekt/materialien.html` entsteht aus `lehrperson/materialien.md` beim Aufruf von `scripts/build_course.py`. Sie ist im Lehrpersonen-Fussbereich neben dem Unterrichtsplan verlinkt. Grafiken aus `projekt/grafiken/` werden direkt angezeigt, können gross geöffnet werden und sind den zehn Doppellektionen zugeordnet. Die Seite enthält nur die wichtigsten Kurslinks und Downloads; Memory-Karten und zusätzliche Druckvorlagen werden nicht generiert. Verlinkte Notebooks und Arbeitsblätter werden weiterhin direkt aus den gepflegten Originalen nach `projekt/materialien/downloads/` kopiert.
