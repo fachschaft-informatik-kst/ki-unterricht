@@ -69,8 +69,8 @@ footer{color:var(--muted);font-size:13px;padding-top:20px}
 """
 
 def build(lessons: list[dict]) -> None:
-    if len(lessons) != 10:
-        raise ValueError("Expected exactly ten lessons")
+    if len(lessons) < 10:
+        raise ValueError("The ten existing lessons must remain")
     DOWNLOADS.mkdir(parents=True, exist_ok=True)
     for name, rel in FILES.items():
         path = ROOT / rel
@@ -91,6 +91,12 @@ def build(lessons: list[dict]) -> None:
             target.write_text(svg, encoding="utf-8")
 
     source = SOURCE.read_text(encoding="utf-8")
+    # Optional additional per-lesson Markdown, maintained by the teacher editor.
+    for lesson in lessons[10:]:
+        extension = ROOT / "lehrperson" / "ergaenzungen" / f'dl-{lesson["id"]}.md'
+        if not extension.is_file():
+            raise FileNotFoundError(f"Missing teacher material for {lesson['id']}")
+        source += "\n\n" + extension.read_text(encoding="utf-8")
     soup = BeautifulSoup(
         '<div id="materials-content">' +
         MarkdownIt("commonmark", {"html": False}).enable("table").render(source) + "</div>",
