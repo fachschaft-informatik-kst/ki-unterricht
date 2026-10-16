@@ -52,7 +52,30 @@ nav.quick a:hover{background:var(--soft)}
 .graphic-grid figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fafcfb}
 .graphic-grid a{display:flex;align-items:center;justify-content:center;padding:12px;background:white;min-height:160px}
 .graphic-grid img{display:block;width:100%;height:220px;object-fit:contain}
-.graphic-grid figcaption{padding:9px 13px;color:var(--muted);font-size:13px;line-height:1.35}
+.graphic-grid figcaption{padding:9px 13px;color:var(--muted);font-size:13px;line-height:1.4}
+.graphic-grid figcaption .phase-label{display:block;margin:0 0 4px;color:var(--accent);font-weight:700;font-size:11px}
+.source-graphic{margin:10px 0 22px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#fbfdfb}
+.source-graphic .source-role{font-size:12px;color:var(--accent);font-weight:700;margin:0 0 10px}
+.source-graphic .groups{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.source-graphic .group-box{padding:10px 5px;border:1px solid var(--line);border-radius:8px;text-align:center;font-size:13px}
+.source-graphic .group-box strong{display:block;font-size:20px}
+.source-graphic .group-box.train{background:#e9f2ec}
+.source-graphic .group-box.val{background:#e7edf8}
+.source-graphic .group-box.test{background:#fdf0e9}
+.source-graphic .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
+.source-graphic .legend span{display:flex;gap:5px;align-items:center}
+.source-graphic .legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.source-graphic .project-train-overview{margin:0}
+.source-graphic .project-train-overview h2{font-size:1.08rem;margin:0 0 13px}
+.source-graphic .project-train-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;list-style:none;margin:0;padding:0}
+.source-graphic .project-train-flow li{min-width:0;padding:11px;border:1px solid var(--line);border-radius:8px;background:#f5f8f5;font-size:12px}
+.source-graphic .project-train-flow li strong,.source-graphic .project-train-flow li span{display:block}
+.source-graphic .project-train-flow li strong{margin-bottom:6px}
+.source-graphic .project-train-flow li em{display:block;margin-top:8px;font-size:11px}
+.source-graphic .project-train-flow li.model-trained{border:2px solid var(--accent);background:var(--soft)}
+.source-graphic .project-train-note{font-size:12px;margin:12px 0 0;color:var(--muted)}
+@media(max-width:720px){.source-graphic .groups{grid-template-columns:repeat(3,minmax(0,1fr))}.source-graphic .project-train-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.source-graphic .groups{grid-template-columns:repeat(2,minmax(0,1fr))}.source-graphic .project-train-flow{grid-template-columns:1fr}}
 footer{color:var(--muted);font-size:13px;padding-top:20px}
 @media(max-width:600px){main{padding:20px 13px 60px}.lesson-resources{padding:17px 14px}.graphic-grid{grid-template-columns:1fr}.graphic-grid img{height:auto;max-height:250px}}
 @media print{body{background:white}main{padding:0;max-width:none}nav.quick,header a{display:none}.lesson-resources{border:0;border-bottom:1px solid #aaa;border-radius:0;break-inside:avoid;padding:16px 0}.graphic-grid img{height:180px}.graphic-grid figure{break-inside:avoid}}
@@ -103,17 +126,66 @@ def build(lessons: list[dict]) -> None:
                 alt = img.get("alt", "")
                 if not src or not alt:
                     raise ValueError(f"Image requires source and description in lesson {lesson['id']}")
+                phase_info = img.get("title", "")
+                if " | " not in phase_info:
+                    raise ValueError(f"Missing AVIVA phase and role on {src}")
+                phase, roles = phase_info.split(" | ", 1)
+                plan = next((p for p in lesson["phases"] if p["phase"] == phase), None)
+                if plan is None:
+                    raise ValueError(f"Phase {phase} not planned in lesson {lesson['id']}")
+                valid_roles = {step["wer"] for step in plan["schritte"]}
+                for role in [role.strip() for role in roles.split("→")]:
+                    if role not in valid_roles:
+                        raise ValueError(f"Role {role} not in {phase} of lesson {lesson['id']}")
                 figure = soup.new_tag("figure")
                 link = soup.new_tag("a", href=src, target="_blank", rel="noopener")
                 img.extract()
+                img.attrs.pop("title", None)
                 img["loading"] = "lazy"
                 link.append(img)
                 figure.append(link)
                 caption = soup.new_tag("figcaption")
-                caption.string = alt
+                label = soup.new_tag("span", attrs={"class": "phase-label"})
+                label.string = phase + " · " + roles
+                caption.append(label)
+                caption.append(alt)
                 figure.append(caption)
                 grid.append(figure)
                 paragraph.decompose()
+
+        # Reuse the actual diagrams from the student course rather than copy
+        # their definitions into a second, easily outdated source file.
+        if lesson["id"] in ("04", "05"):
+            course = BeautifulSoup(
+                (ROOT / "projekt/index.html").read_text(encoding="utf-8"), "html.parser"
+            )
+            if lesson["id"] == "04":
+                heading_text = "Datengruppen im Plan"
+                selectors = ("#projekt-3 .groups", "#projekt-3 .legend")
+                phase = "Informieren · Lehrperson / Verarbeiten · Tandem"
+            else:
+                heading_text = "Trainingsablauf zeigen"
+                selectors = ("#projekt .project-train-overview",)
+                phase = "Informieren · Lehrperson"
+            placeholder = next(
+                (h for h in group.find_all("h3", recursive=False)
+                 if h.get_text(strip=True) == heading_text), None
+            )
+            if placeholder is None:
+                raise ValueError(f"Missing teaching diagram in lesson {lesson['id']}")
+            box = soup.new_tag("div", attrs={"class": "source-graphic"})
+            label = soup.new_tag("p", attrs={"class": "source-role"})
+            label.string = phase
+            box.append(label)
+            for selector in selectors:
+                original = course.select_one(selector)
+                if original is None:
+                    raise ValueError(f"Original course graphic not found: {selector}")
+                copied = BeautifulSoup(str(original), "html.parser").find()
+                if copied.has_attr("id"):
+                    del copied["id"]
+                box.append(copied)
+            placeholder.insert_after(box)
 
     links = "".join(f'<a href="#dl-{l["id"]}">{int(l["id"])} · {html.escape(l["title"])}</a>'
                     for l in lessons)
@@ -130,7 +202,7 @@ def build(lessons: list[dict]) -> None:
 <footer>Grafiken können durch Anklicken vergrössert werden. Die Quelle dieser Übersicht liegt in <code>lehrperson/materialien.md</code>.</footer>
 </main></body></html>
 """, encoding="utf-8")
-    print(f"Built simplified teacher materials: {len(lessons)} lessons, {len(FILES)} downloads")
+    print(f"Built plan-aligned teacher materials: {len(lessons)} lessons, {len(FILES)} downloads")
 
 if __name__ == "__main__":
     import json
