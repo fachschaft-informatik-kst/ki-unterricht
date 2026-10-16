@@ -100,3 +100,16 @@ Dann soll **eine neue Doppellektion** aus einem neuen Ordner mit \`lektion.yml\`
 **Etappe D:** Erst nach bestandenen Browser- und ZIP-Tests Ordner schrittweise umbenennen, veraltete Hilfsskripte entfernen und optional eine Formularoberfläche zur Bearbeitung von \`.yml\` und \`.md\` über Git integrieren. Dafür ist **kein Backend** nötig; man kann zunächst den GitHub-Webeditor verwenden.
 
 **Nicht anfassen ohne Migration:** \`data-answer\`, \`data-journal\`, \`data-check\`, \`data-score\`, Notebooknamen und ZIP-Pfade. Sie gehören zum gespeicherten Schülerstand. Ein Umbau, der die alten IDs verändert, braucht eine explizite und getestete Versionierung/Migration des ZIP-Formats.
+
+
+## Doppellektionen 11+ (implementiert)
+
+Neue Doppellektionen können im Admin-Editor über **«Neue Doppellektion»** angelegt werden. Dabei werden in einem gemeinsamen Pull Request drei zusammengehörige Dateien erstellt:
+
+- Ein neuer Eintrag in `projekt/kurs.json` mit fünf AVIVA-Phasen und insgesamt 90 Minuten. Im Editor «Unterrichtsplan bearbeiten» wählen und die didaktischen Platzhalter vor der Veröffentlichung konkretisieren.
+- Eine Markdown-Kapiteldatei `kursseiten/dl-11/010-einstieg.md` (für weitere Lektionen entsprechend `dl-12`, usw.). Zusätzliche Unterkapitel können nach demselben Schema ergänzt werden.
+- Lehrpersonenmaterial `lehrperson/ergaenzungen/dl-11.md`, erreichbar über «Materialien bearbeiten». Der Materialgenerator hängt diesen Abschnitt automatisch an die vorhandene Materialübersicht an.
+
+Der Build ergänzt daraus die Unterrichtsübersicht und Kapitel auf der Kursseite, eine Navigation zur neuen Doppellektion, einen AVIVA-Block im Lehrpersonen-Unterrichtsplan sowie einen Materialabschnitt. Die ursprünglichen Doppellektionen 1–10 und ihre URL-Anker bleiben unverändert. Alte Antwortfeld-IDs und ZIP-Daten werden nicht migriert.
+
+Die alten zehn Lektionen bleiben aus Kompatibilitätsgründen noch in der grossen JSON-Datei. Das geplante Aufteilen in einzelne `lektion.yml`-Dateien ist eine **weitere Refaktorierung**, nicht Voraussetzung für neue Unterrichtseinheiten.

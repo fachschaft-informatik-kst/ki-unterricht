@@ -13,6 +13,8 @@ Kapitel und neue Unterkapitel in den bestehenden Unterrichtsbereichen. Er kann:
 - Inhalte in einem **skriptgesperrten Vorschau-iframe** ansehen,
 - alles als **einen atomaren Commit auf einem neuen Branch und Pull Request** einreichen.
 
+Eine neue Doppellektion erzeugt automatisch Navigation, AVIVA-Unterrichtsplan und Materialabschnitt. Über «Unterrichtsplan bearbeiten» und «Materialien bearbeiten» können diese Dateien vor dem Pull Request angepasst werden.
+
 Der Pull Request startet die **bestehende GitHub-Action**. Erst ein erfolgreicher
 Merge nach \`main\` löst die Veröffentlichung über GitHub Pages aus. Es gibt
 **keine automatische Veröffentlichung unmittelbar nach dem Bearbeiten**.
@@ -109,10 +111,7 @@ eine Fehlermeldung statt eines stillen Überschreibens.
 
 ## Einschränkungen und Sicherheit
 
-- Aktuell nur Unterkapitel in bestehenden Bereichen. **Eine ganz neue
-  Doppellektion** ist noch nicht als Ein-Klick-Vorgang verfügbar: dafür müssen
-  zuerst die festen Lektionszahlen aus \`projekt/kurs.json\` und den Generatoren
-  entfernt werden. Siehe \`docs/ARCHITEKTUR.md\`.
+- **Neue Doppellektionen** lassen sich ab Nummer 11 anlegen. Der Editor erzeugt einen AVIVA-Plan (90 Minuten), die erste Kurskapiteldatei und den zugehörigen Lehrpersonen-Materialabschnitt. Die Platzhalter im Plan sollten vor der Freigabe fachlich über «Unterrichtsplan bearbeiten» konkretisiert werden.
 - Alte Unterkapitel enthalten teilweise echtes HTML und interaktive Elemente.
   Der Editor ist deshalb ein **Quelltexteditor mit vereinfachter Vorschau**,
   noch kein vollständig visueller WYSIWYG-Editor.
