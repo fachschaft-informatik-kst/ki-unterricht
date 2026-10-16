@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {randomBytes} from "node:crypto";
-import backend from "../admin-worker/src/index.mjs";
+import backend,{appInstallationStatus} from "../admin-worker/src/index.mjs";
 const env={SESSION_KEY:randomBytes(32).toString("base64url")};
 async function route(path,opts={}){
   return backend.fetch(new Request("https://teacher-editor.example"+path,opts),env);
@@ -38,5 +38,36 @@ try{
   assert.equal(failure.status,502);
   assert.equal((await failure.json()).error,"Mock static upstream unavailable");
 }finally{globalThis.fetch=priorFetch;}
+// The authenticated user's push permission is not enough: the GitHub App
+// must be installed on the organization repo with both write permissions.
+const app=async(token,path)=>{
+  if(path.startsWith("/user/installations?"))return {installations:[{
+    id:42,account:{login:"fachschaft-informatik-kst"},
+    permissions:{contents:"write",pull_requests:"write"},
+    repository_selection:"selected"
+  }]};
+  if(path.startsWith("/user/installations/42/repositories?"))return {
+    total_count:1,repositories:[{full_name:"fachschaft-informatik-kst/ki-unterricht"}]
+  };
+  throw Error("Unexpected mock request "+path);
+};
+assert.equal((await appInstallationStatus("dummy",app)).ready,true);
+const withoutInstall=await appInstallationStatus("dummy",async()=>({installations:[]}));
+assert.equal(withoutInstall.ready,false);
+assert.match(withoutInstall.reason,/nicht auf der Organisation/);
+const lackingPull=await appInstallationStatus("dummy",async()=>({installations:[{
+  id:42,account:{login:"fachschaft-informatik-kst"},
+  permissions:{contents:"write",pull_requests:"read"},
+  repository_selection:"all"
+}]}));
+assert.equal(lackingPull.ready,false);
+assert.match(lackingPull.reason,/Pull requests/);
+const wrongRepo=await appInstallationStatus("dummy",async(token,path)=>
+  path.startsWith("/user/installations/")?
+    {total_count:1,repositories:[{full_name:"fachschaft-informatik-kst/anderes-repo"}]}:
+    {installations:[{id:42,account:{login:"fachschaft-informatik-kst"},
+      permissions:{contents:"write",pull_requests:"write"},repository_selection:"selected"}]});
+assert.equal(wrongRepo.ready,false);
+assert.match(wrongRepo.reason,/Repository/);
 // OAuth flow is intentionally not fully simulated: no GitHub credentials in CI.
 console.log("PASS admin: protected endpoints, OAuth PKCE, encrypted-cookie gateway and origin protection");
