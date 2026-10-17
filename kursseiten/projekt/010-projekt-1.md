@@ -38,7 +38,7 @@
     <details class="lesson-plan" id="doppellektion-08" data-lesson="08" open>
       <summary><span class="phase-num">08</span><span>Doppellektion 8 · Das eigene Projekt erklären und ein fremdes Modell prüfen</span><small>90 Min.</small></summary>
       <div class="detail-body">
-        <p class="lesson-recap"><strong>Rückblick:</strong> Ihr eigener Abgabestand ist eingefroren. Während der Fachgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.</p>
+        <p class="lesson-recap"><strong>Rückblick:</strong> Ihr eigener Abgabestand ist eingefroren. Während der Einzelgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.</p>
         <p><strong>Heute können Sie:</strong> Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.</p>
         <p class="lesson-question">Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?</p>
         <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.</p>
@@ -50,13 +50,13 @@
 ### Ihr Projekt: Arbeit planen, durchführen und überprüfen
 <!-- MD:END -->
       <!-- MD:START -->
-In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen Fachgespräch und Fremdauswertung.
+In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen individuelle Einzelgespräche und die Fremdauswertung.
 <!-- MD:END -->
       <p><strong>Verbindlich:</strong> fünf Datengruppen, fairer A/B-Vergleich, fünf Reflexionen, Auswahl vor Testeinsicht und danach keine Optimierung. Abgabe vor Beginn der Doppellektion 8.</p>
       <p><strong>Sie entscheiden:</strong> Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. Planen Sie in Reflexion 1 die Etappen, Zuständigkeiten und Reserve. Halten Sie am Ende jeder Arbeitsphase kurz fest: erreicht, offen, nächster Schritt, benötigte Hilfe. Reflektieren Sie Ihren Plan in Reflexion 5. Kein zusätzliches Lerntagebuch. Beratung und Lernlabor nutzen Sie nach Bedarf.</p>
       <p><strong>Reihenfolge aus fachlichen Gründen:</strong> Daten prüfen → A/B vergleichen → Auswahl begründen → Abschlusstest → Fazit und Abgabe. Wie Sie diese Etappen auf die Arbeitszeit verteilen, planen Sie selbst.</p>
     </div>
-    <p class="small">8. Doppellektion, während der Tandemgespräche: <a href="#sicherung">Reproduktionscheck (Teil der unbenoteten Fremdauswertung) →</a> und <a href="#fremdtest">Fremdtest und Rückmeldung →</a></p>
+    <p class="small">8. Doppellektion, während der Einzelgespräche: <a href="#sicherung">Reproduktionscheck (Teil der unbenoteten Fremdauswertung) →</a> und <a href="#fremdtest">Fremdtest und Rückmeldung →</a></p>
     <div class="progress-card js-only">
       <div class="progress-title">
         <strong>Ihr persönlicher Projektstand</strong><span aria-live="polite" id="progress-text">0 von 12 Schritten</span>
@@ -139,7 +139,7 @@ Reflexion 4: drei Beispiele und Grenzen; richtige Beispiele sind erlaubt.
 Reflexion 5: Fazit, Grenzen und nächster Versuch.
 <!-- MD:END -->
         <!-- MD:START -->
-Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich auf das gemeinsame Fachgespräch vor.
+Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich jeweils auf ihr vierminütiges Einzelgespräch vor.
 <!-- MD:END -->
         <label class="check"><input data-check="phase-6" type="checkbox"/><span>Unser Fazit ist belegt und wir können das ganze Projekt erklären.</span></label>
         <a href="#abgabe">Zur Abgabecheckliste →</a>
@@ -181,7 +181,7 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
             </tbody>
           </table>
         </div>
-        <p class="small muted">Alle Fachgespräche finden in Doppellektion 8 statt. Reihenfolge und gleiche Dauer vorab bekannt; keine weiteren Gesprächstermine.</p>
+        <p class="small muted">Alle Einzelgespräche finden in Doppellektion 8 statt (4 Minuten je Person). Reihenfolge und gleiche Dauer vorab bekannt; keine weiteren Gesprächstermine.</p>
       </div>
     </details>
   </div>
