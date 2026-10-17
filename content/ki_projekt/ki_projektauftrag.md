@@ -50,7 +50,7 @@ Die Lehrperson bietet kurze Beratungen zu Ihren Fragen an, statt die Klasse bei 
 | vor Beginn der Doppellektion 8 | Vollständiges ZIP über den Abgabekanal einreichen |
 | Doppellektion 8 | Fachgespräch; parallel selbstständige Fremdauswertung mit Rückmeldung |
 
-Alle **Einzelgespräche** finden während der **Doppellektion 8** statt: **4 Minuten pro Person**, dazu **1 Minute für Bewertung, Notizen und Wechsel**. Mit einer prüfenden Lehrperson lassen sich im 80-Minuten-Fenster höchstens 16 Personen ohne Reserve, für mindestens 8 Minuten Reserve jedoch **höchstens 14 Personen** prüfen. Bei mehr Lernenden ist für denselben Termin eine zweite prüfende Lehrperson erforderlich; die Gesprächsdauer wird nicht gekürzt. Die Lehrperson gibt individuelle Gesprächsfenster, Zuständigkeiten, Austauschpartner und Abgabekanal vorab bekannt.
+Die **20 Einzelgespräche** finden mit **einer Lehrperson** direkt ab Beginn der **Doppellektion 8** statt: **4 Minuten pro Person** plus **1 Minute für Bewertung, Notizen und Wechsel**. Das ergibt **100 Minuten**: 90 Minuten Unterricht und **10 Minuten im unmittelbaren Anschluss** für die letzten zwei Personen. Es gibt keinen Zeitpuffer. Die Lehrperson teilt die festen Gesprächsfenster, Austauschprojekte und den Abgabekanal spätestens vor der Doppellektion mit. Alle anderen beginnen sofort selbstständig mit der Fremdauswertung; es gibt keine zusätzliche Einführung oder gemeinsame Schlussbesprechung und keine Ersatztermine.
 
 ### Während der Fachgespräche: ein fremdes Modell auswerten
 
