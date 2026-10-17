@@ -63,6 +63,7 @@ const server=http.createServer((req,res)=>{
 
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
     await page.locator("#section").selectOption("einstieg");
+    await page.locator("#lessonOrder .lesson-sort-head").first().waitFor();
     assert.equal(await page.locator("#lessonOrder .lesson-sort-head").count(),7,
       "All teaching sections need an ordered draggable entry");
     assert.equal(await page.locator("#lessonOrder .lesson-sort-item").count(),10,
