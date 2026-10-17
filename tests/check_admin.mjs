@@ -40,6 +40,25 @@ try{
   assert.equal(failure.status,502);
   assert.equal((await failure.json()).error,"Mock static upstream unavailable");
 }finally{globalThis.fetch=priorFetch;}
+// The Cloudflare Worker must serve the new browser modules with the correct
+// MIME types; the editor cannot start if its import dependency returns a 404.
+const priorStaticFetch=globalThis.fetch;
+try{
+  const files=[];
+  globalThis.fetch=async url=>{
+    files.push(String(url));
+    return new Response("export const ok = true;",{status:200,headers:{"Content-Type":"text/javascript"}});
+  };
+  for(const [path,mime] of [["/admin.js","text/javascript"],["/plan-editor.js","text/javascript"],
+      ["/course-model.js","text/javascript"],["/course-rules.json","application/json"]]){
+    const result=await route(path);
+    assert.equal(result.status,200,"Worker route missing: "+path);
+    assert.match(result.headers.get("Content-Type"),new RegExp(mime));
+    assert.equal(result.headers.get("X-Content-Type-Options"),"nosniff");
+  }
+  assert.ok(files.every(x=>x.startsWith("https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/")));
+}finally{globalThis.fetch=priorStaticFetch;}
+
 // The authenticated user's push permission is not enough: the GitHub App
 // must be installed on the organization repo with both write permissions.
 const app=async(token,path)=>{
