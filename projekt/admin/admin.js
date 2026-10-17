@@ -7,6 +7,32 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null};
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
+
+const sourceLayer=$("sourceHighlight");
+function highlightSource(){
+  const raw=$("source").value;
+  // Tokenise escaped text, so authored HTML can never execute in the highlight layer.
+  const escape=v=>v.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+  const tokens=/(<!--[\\s\\S]*?-->|^#{1,6}[^\\n]*|\`{3}[^\\n]*|<\\/?[a-z][^>]*>|\\b[a-zA-Z_-]+(?=\\s*[:=])|"(?:[^"\\n]|\\\\.)*"|'(?:[^'\\n]|\\\\.)*')/gm;
+  let result="",end=0,match;
+  while((match=tokens.exec(raw))){
+    result+=escape(raw.slice(end,match.index));
+    const part=match[0];
+    const style=part.startsWith("<!--")?"comment":part.startsWith("#")?"heading":
+      part.startsWith("\`")?"code":part.startsWith("<")?"tag":
+      /^[\"']/.test(part)?"string":"key";
+    result+='<span class="tok-'+style+'">'+escape(part)+'</span>';
+    end=tokens.lastIndex;
+  }
+  sourceLayer.innerHTML=result+escape(raw.slice(end))+"\\n";
+  sourceLayer.scrollTop=$("source").scrollTop;
+  sourceLayer.scrollLeft=$("source").scrollLeft;
+}
+$("source").addEventListener("scroll",()=>{
+  sourceLayer.scrollTop=$("source").scrollTop;
+  sourceLayer.scrollLeft=$("source").scrollLeft;
+});
+
 function status(message,error=false){$("notice").textContent=message;$("notice").classList.toggle("error",error);}
 function error(err){status(String(err.message||err),true);}
 async function api(url,options={}){
@@ -57,13 +83,14 @@ function useFile(path,sha,content,original=content){
   $("path").textContent=path;$("heading").textContent=filename(path);
   const isPlan=path.endsWith("/planung.json");
   $("source").value=content;
+  highlightSource();
   const isChapter=/\/[0-9]{3}-[^/]+\.md$/.test(path);
   $("move").disabled=!sha||!isChapter;$("archive").disabled=!sha||!isChapter;
   for(const id of ["toolbar","editorHelper","sourceLabel","previewButton","previewHeading","preview"])
     $(id).hidden=isPlan;
-  $("source").hidden=isPlan;
+  $("codeEditor").hidden=isPlan;
   if(isPlan)planner.open(content,$("section").value);
-  else {planner.close();preview();}
+  else {planner.close();$("preview").hidden=false;$("previewHeading").hidden=false;preview();}
   chapterList();
 }
 function savedText(){return state.current?state.staged.get(state.current.path)?.content??state.current.original:"";}
@@ -88,7 +115,7 @@ async function refresh(){
   const unsubmitted=state.chapters.filter(c=>!c.sha&&!state.staged.has(c.path)&&!known.some(k=>k.path===c.path));
   state.chapters=[...known,...pending,...unsubmitted].sort((a,b)=>a.path.localeCompare(b.path));
   const definitions=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||manifest.content).sections;
-  const valid=definitions.filter(s=>s.teaching).map(s=>s.id);
+  const valid=definitions.filter(s=>s.teaching||s.id==="lernziele").map(s=>s.id);
   const previous=$("section").value;
   $("section").replaceChildren();
   for(const value of valid){const option=document.createElement("option");option.value=value;option.textContent=value;$("section").append(option);}
@@ -99,7 +126,7 @@ async function refresh(){
 function insert(text){
   const source=$("source");source.focus();
   const start=source.selectionStart,end=source.selectionEnd;
-  source.setRangeText(text,start,end,"end");preview();
+  source.setRangeText(text,start,end,"end");highlightSource();preview();
 }
 function escapeHtml(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");}
 function inline(s){
@@ -335,6 +362,7 @@ function archive(){
     });
   }
   $("source").value=contents;
+  highlightSource();
   stage();
   status("Kapitel ausgeblendet und vorgemerkt. IDs und gespeicherte Antworten bleiben erhalten.");
 }
@@ -518,6 +546,7 @@ $("archive").addEventListener("click",archive);
 // Render changes shortly after typing, but do not interrupt rapid edits.
 let previewDebounce=null;
 $("source").addEventListener("input",()=>{
+  highlightSource();
   clearTimeout(previewDebounce);
   if(!$("source").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
 });
