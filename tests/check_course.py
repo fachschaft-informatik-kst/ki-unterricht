@@ -108,12 +108,12 @@ planning=(root/'worksheets/md/KI_Planung.md').read_text()
 assert '20 × (4 + 1) = 100 Minuten' in planning
 assert '90 Minuten Unterricht plus 10 Minuten unmittelbar anschliessend' in planning
 assert 'eine Lehrperson' in planning
-assert 'Minute 0–100' in planning
+assert 'Minute **0**' in planning and 'Minute **100**' in planning
 assert 'keine Zeitreserve' in planning
 assert 'Personen 19 und 20' in planning
-assert len(re.findall(r'^\\| (?:1–4|5–8|9–12|13–16|17–18|19–20) \\| Minute ',planning,re.M))==6
+assert len(re.findall(r'^\| (?:1–4|5–8|9–12|13–16|17–18|19–20) \| Minute ',planning,re.M))==6
 assert 'zweite prüfende Lehrperson' not in planning
-assert 'Alle Einzelgespräche finden in Doppellektion 8 statt' in soup.get_text()
+assert '20 Einzelgespräche bei einer Lehrperson' in soup.get_text()
 assert 'Ein gemeinsames Journal. Zwei getrennte Einzelgespräche.' in soup.get_text()
 assert 'vierminütige' in planning or 'Vier Minuten Einzelgespräch' in planning
 assert '100 Minuten' in oral['zeit'] and 'eine Lehrperson' in oral['zeit']
