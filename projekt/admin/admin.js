@@ -112,6 +112,8 @@ function chapterList(){
     const grip=document.createElement("span");grip.className="drag-handle";grip.textContent="⠿";grip.title="Ziehen, um die Reihenfolge zu ändern";
     const button=document.createElement("button");button.type="button";
     button.textContent=(index+1)+". "+filename(item.path).replace(/^[0-9]{3}-/,"").replaceAll("-"," ");
+    const detail=document.createElement("small");detail.className="chapter-file";detail.textContent=filename(item.path);
+    button.append(detail);
     button.setAttribute("aria-current",String(state.current?.path===item.path));
     button.addEventListener("click",()=>load(item.path));
     row.append(grip,button);
