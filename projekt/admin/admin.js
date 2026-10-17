@@ -218,6 +218,7 @@ function renderLessonOrder(){
     list.append(box);
   }
 }
+let navigationRevision=0;
 function useFile(path,sha,content,original=content){
   state.current={path,sha,original};
   $("path").textContent=path;$("heading").textContent=filename(path);
@@ -226,21 +227,28 @@ function useFile(path,sha,content,original=content){
   highlightSource();
   const isChapter=/\/[0-9]{3}-[^/]+\.md$/.test(path);
   $("move").disabled=!sha||!isChapter;$("archive").disabled=!sha||!isChapter;
-  for(const id of ["toolbar","editorHelper","sourceLabel","previewButton","previewHeading","preview"])
+  for(const id of ["toolbar","editorHelper","sourceLabel"])
     $(id).hidden=isPlan;
+  $("previewButton").hidden=false;
+  $("previewHeading").hidden=false;
+  $("preview").hidden=false;
   $("codeEditor").hidden=isPlan;
   if(isPlan)planner.open(content,$("section").value);
-  else {planner.close();$("preview").hidden=false;$("previewHeading").hidden=false;preview();}
+  else planner.close();
+  // Force a new document for every navigation, including plans and materials.
+  $("preview").removeAttribute("srcdoc");
+  preview();
   chapterList();
 }
 function savedText(){return state.current?state.staged.get(state.current.path)?.content??state.current.original:"";}
 async function load(path){
   if(state.current&&$("source").value!==savedText()&&!confirm("Nicht vorgemerkte Änderungen verwerfen?"))return;
+  const revision=++navigationRevision;
   try{
     status("Lade Kapitel …");
     const staged=state.staged.get(path);
     if(staged&&!staged.delete)useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);
-    else{const file=await api("/api/file?path="+encodeURIComponent(path));useFile(path,file.sha,file.content);}
+    else{const file=await api("/api/file?path="+encodeURIComponent(path));if(revision!==navigationRevision)return;useFile(path,file.sha,file.content);}
     status("Kapitel bereit. Nach dem Speichern einen Pull Request erstellen.");
   }catch(e){error(e);}
 }
@@ -411,7 +419,10 @@ function chapterFromYaml(source){
 }
 function preview(){
   let content=$("source").value;
-  if(content.includes("<!-- MD:START -->"))
+  if(state.current?.path.endsWith("/planung.json")){
+    const plan=JSON.parse(content);
+    content="<h2>Unterrichtsplan</h2>"+plan.lessons.map(l=>"<article class=\"card\"><h3>"+escapeHtml(l.title)+"</h3><p>"+escapeHtml(l.goal)+"</p>"+l.phases.map(p=>"<p><strong>"+escapeHtml(p.phase)+" · "+p.minutes+" min</strong> – "+escapeHtml(p.titel)+"</p>").join("")+"</article>").join("");
+  }else if(content.includes("<!-- MD:START -->"))
     content=content.replace(/<!-- MD:START -->([\s\S]*?)<!-- MD:END -->/g,(_,text)=>markdown(text));
   else if(content.startsWith("---\n"))
     content=chapterFromYaml(content)??markdown(content);
