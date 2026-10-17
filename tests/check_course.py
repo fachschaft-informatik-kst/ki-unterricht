@@ -104,7 +104,7 @@ for name in ITEMS:
 oral=next(l for l in lessons if l['id']=='08')
 assert sum(p['minutes'] for p in oral['phases'][1:-1])==80
 planning=(root/'worksheets/md/KI_Planung.md').read_text()
-rows=re.findall(r'^\| (10|12|14) \| ([\d,]+) Min\. \| ([\d,]+) Min\. \| (\d+) Min\. \| (\d+) Min\. \|
+rows=re.findall(r'^\| (10|12|14) \| ([\d,]+) Min\. \| ([\d,]+) Min\. \| (\d+) Min\. \| (\d+) Min\. \|$',planning,re.M)
 assert len(rows)==3
 for n,talk,switch,total,reserve in rows:
     assert int(n)*(float(talk.replace(',','.'))+float(switch.replace(',','.')))==int(total)
