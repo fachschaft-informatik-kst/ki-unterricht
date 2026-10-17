@@ -24,16 +24,16 @@
   <main class="workspace" id="workspace" hidden>
     <aside class="sidebar" aria-label="Kurskapitel">
       <div class="sidebar-heading"><h2>Kapitel</h2><button id="refresh" class="button subtle" type="button">↻</button></div>
-      <label for="section">Unterrichtsbereich</label>
+      <h3 class="sort-title">Unterrichtsreihenfolge</h3><p class="small">Doppellektionen am Griff ziehen, um sie zu sortieren. Die Nummern werden automatisch neu berechnet; IDs bleiben erhalten.</p><div id="lessonOrder" class="order-list" aria-label="Doppellektionen sortieren"></div><label for="section">Kapitel eines Bereichs auswählen</label>
       <select id="section"></select>
-      <nav id="chapters" class="chapter-list" aria-label="Unterkapitel"></nav>
+      <p class="small">Unterkapitel am Griff in die gewünschte Position ziehen. Die Reihenfolge entspricht der Kurswebsite.</p><nav id="chapters" class="chapter-list" aria-label="Unterkapitel sortieren"></nav>
       <button id="create" type="button" class="button full">+ Neues Unterkapitel</button><button id="createLesson" type="button" class="button full">+ Neue Doppellektion</button><button id="editPlan" type="button" class="button full">Unterrichtsplan bearbeiten</button><button id="editMaterials" type="button" class="button full">Materialien bearbeiten</button>
-      <p class="small">Die Nummer vor dem Dateinamen bestimmt die Reihenfolge. Bestehende IDs bleiben beim Verschieben erhalten.</p>
+      <p class="small">Änderungen an der Reihenfolge werden für den nächsten Pull Request vorgemerkt. Die sichtbaren Kursnummern entstehen beim Build.</p>
     </aside>
     <section class="editor">
       <div class="editor-heading">
         <div><p class="eyebrow" id="path">Kein Kapitel ausgewählt</p><h1 id="heading">Kapitel bearbeiten</h1></div>
-        <div class="actions"><button id="move" class="button light" type="button">Verschieben</button>
+        <div class="actions"><button id="move" class="button light" type="button" hidden>Verschieben</button>
           <button id="archive" class="button light danger" type="button">Ausblenden</button></div>
       </div>
       <div class="toolbar" id="toolbar" aria-label="Inhalte einfügen">

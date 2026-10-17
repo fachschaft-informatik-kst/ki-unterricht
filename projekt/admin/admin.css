@@ -96,3 +96,18 @@ iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
 .source-highlight .tok-heading{color:#8150a4;font-weight:700}
 .source-highlight .tok-code{color:#a1445e}
 .source-highlight .tok-key{color:#365a9d}
+
+
+/* Direct visual ordering. Drag handles are separate from chapter-selection buttons. */
+.sort-title{font-size:15px;margin:25px 0 6px}
+.order-list{display:grid;gap:7px;margin:14px 0 22px;max-height:350px;overflow-y:auto}
+.lesson-sort-group{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.lesson-sort-head{background:var(--soft);padding:9px 10px;font-size:13px;font-weight:700;cursor:grab}
+.lesson-sort-item{font-size:12px;padding:7px 10px 7px 22px;border-top:1px solid var(--line);cursor:grab}
+.drag-over{box-shadow:inset 0 -3px 0 var(--accent);background:#d4ede2!important}
+.chapter-list .order-row{display:flex;align-items:center;border-radius:7px}
+.chapter-list .drag-handle{font-size:23px;line-height:1;color:var(--muted);cursor:grab;padding:7px;user-select:none}
+.chapter-list .order-row button{flex:1;min-width:0}
+.chapter-list .order-row:hover{background:var(--soft)}
+
+.chapter-list .chapter-file{display:block;color:var(--muted);font-size:10px;line-height:1.35;font-weight:400}

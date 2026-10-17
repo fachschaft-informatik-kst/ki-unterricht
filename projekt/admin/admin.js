@@ -5,7 +5,7 @@ const pagesOrigin = location.hostname === "fachschaft-informatik-kst.github.io";
 if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/" + location.search + location.hash);
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
-const state={chapters:[],current:null,staged:new Map(),manifest:null};
+const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map()};
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
 
 const sourceLayer=$("sourceHighlight");
@@ -69,13 +69,153 @@ function stagingList(){
     li.append(remove);node.append(li);
   }
 }
+const chapterPath=path=>/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(path);
+const chaptersFor=section=>state.chapters.filter(c=>c.path.startsWith("kursseiten/"+section+"/")&&chapterPath(c.path))
+  .sort((a,b)=>a.path.localeCompare(b.path));
+function chapterContent(item){
+  if(state.current?.path===item.path)return $("source").value;
+  return state.staged.get(item.path)?.content;
+}
+async function stageChapterOrder(section,source,target){
+  if(source===target)return;
+  if(!confirmUnsaved())return;
+  const items=chaptersFor(section);
+  const from=items.findIndex(x=>x.path===source),to=items.findIndex(x=>x.path===target);
+  if(from<0||to<0)throw Error("Kapitel nicht gefunden.");
+  const ordered=items.slice(),[moving]=ordered.splice(from,1);
+  ordered.splice(to,0,moving);
+  const pos=ordered.findIndex(x=>x.path===source);
+  const prev=pos>0?Number(ordered[pos-1].path.split("/").pop().slice(0,3)):0;
+  const next=pos<ordered.length-1?Number(ordered[pos+1].path.split("/").pop().slice(0,3)):999;
+  const prefix=Math.floor((prev+next)/2);
+  if(prefix<=prev||prefix>=next)
+    throw Error("Zwischen diesen Kapiteln ist kein freier Sortierplatz. Bitte ein benachbartes Kapitel verschieben.");
+  const path="kursseiten/"+section+"/"+String(prefix).padStart(3,"0")+source.split("/").pop().slice(3);
+  if(state.chapters.some(x=>x.path===path)||state.staged.has(path))
+    throw Error("Der Zielplatz ist belegt.");
+  if(state.staged.size+(moving.sha?2:1)>12)
+    throw Error("Maximal zwölf Dateien pro Pull Request. Bitte bestehende Änderungen zuerst einreichen.");
+  const content=chapterContent(moving)??(await api("/api/file?path="+encodeURIComponent(source))).content;
+  if(moving.sha)state.staged.set(source,{path:source,expectedSha:moving.sha,delete:true});
+  else state.staged.delete(source);
+  state.staged.set(path,{path,expectedSha:null,content});
+  state.chapters=state.chapters.map(x=>x.path===source?{path,sha:null}:x);
+  if(state.current?.path===source)useFile(path,null,content);
+  chapterList();stagingList();
+  status("Unterkapitel verschoben und für den Pull Request vorgemerkt.");
+}
 function chapterList(){
   const nav=$("chapters");nav.replaceChildren();
-  const prefix="kursseiten/"+$("section").value+"/";
-  for(const item of state.chapters.filter(c=>c.path.startsWith(prefix)&&/\/[0-9]{3}-[^/]+\.md$/.test(c.path))){
+  const section=$("section").value;
+  for(const [index,item] of chaptersFor(section).entries()){
+    const row=document.createElement("div");row.className="order-row";row.draggable=true;row.dataset.path=item.path;
+    const grip=document.createElement("span");grip.className="drag-handle";grip.textContent="⠿";grip.title="Ziehen, um die Reihenfolge zu ändern";
     const button=document.createElement("button");button.type="button";
-    button.textContent=filename(item.path);button.setAttribute("aria-current",String(state.current?.path===item.path));
-    button.addEventListener("click",()=>load(item.path));nav.append(button);
+    button.textContent=(index+1)+". "+filename(item.path).replace(/^[0-9]{3}-/,"").replaceAll("-"," ");
+    const detail=document.createElement("small");detail.className="chapter-file";detail.textContent=filename(item.path);
+    button.append(detail);
+    button.setAttribute("aria-current",String(state.current?.path===item.path));
+    button.addEventListener("click",()=>load(item.path));
+    row.append(grip,button);
+    row.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",item.path);e.dataTransfer.effectAllowed="move";});
+    row.addEventListener("dragover",e=>{e.preventDefault();row.classList.add("drag-over");});
+    row.addEventListener("dragleave",()=>row.classList.remove("drag-over"));
+    row.addEventListener("drop",e=>{e.preventDefault();row.classList.remove("drag-over");
+      const source=e.dataTransfer.getData("text/plain");
+      if(source.startsWith("kursseiten/"+section+"/"))stageChapterOrder(section,source,item.path).catch(error);
+    });
+    nav.append(row);
+  }
+}
+async function loadPlans(){
+  const manifest=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||state.manifest.content);
+  await Promise.all(manifest.sections.filter(x=>x.teaching).map(async section=>{
+    const path="kursseiten/"+section.id+"/planung.json";
+    if(!state.plans.has(path)){
+      const file=state.staged.get(path)||await api("/api/file?path="+encodeURIComponent(path));
+      state.plans.set(path,{sha:file.expectedSha??file.sha,original:file.original??file.content});
+    }
+  }));
+  renderLessonOrder();
+}
+function orderedSections(){
+  const manifest=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||state.manifest.content);
+  return manifest.sections.filter(x=>x.teaching).map(section=>{
+    const path="kursseiten/"+section.id+"/planung.json";
+    const stored=state.staged.get(path)?.content||state.plans.get(path)?.original;
+    const lessons=JSON.parse(stored).lessons.slice().sort((a,b)=>a.order-b.order);
+    return {section,path,lessons};
+  }).sort((a,b)=>a.lessons[0].order-b.lessons[0].order);
+}
+function commitLessonOrder(groups){
+  const lessonIds=groups.flatMap(g=>g.lessons.map(l=>l.id));
+  if(new Set(lessonIds).size!==lessonIds.length)throw Error("Doppelte Lektions-ID.");
+  let number=0;
+  for(const group of groups){
+    for(const lesson of group.lessons)lesson.order=(++number)*10;
+    const entry=state.plans.get(group.path);
+    const plan=JSON.parse(state.staged.get(group.path)?.content||entry.original);
+    plan.lessons=group.lessons;
+    const content=JSON.stringify(plan,null,2)+"\n";
+    if(content===entry.original&&!state.staged.has(group.path))continue;
+    state.staged.set(group.path,{path:group.path,expectedSha:entry.sha,
+      original:entry.original,content});
+    if(state.current?.path===group.path){
+      $("source").value=content;
+      planner.open(content,group.section.id);
+    }
+  }
+  if(state.staged.size>12)throw Error("Maximal zwölf Dateien pro PR.");
+  stagingList();renderLessonOrder();
+  status("Neue Reihenfolge vorgemerkt. Sichtbare Lektionsnummern werden automatisch neu berechnet.");
+}
+function renderLessonOrder(){
+  const list=$("lessonOrder");list.replaceChildren();
+  if(!state.plans.size)return;
+  const groups=orderedSections();
+  const selector=$("section"),selected=selector.value;
+  const options=[...selector.options];
+  const position=new Map(groups.map((group,i)=>[group.section.id,i]));
+  options.sort((a,b)=>(position.get(a.value)??-1)-(position.get(b.value)??-1));
+  selector.replaceChildren(...options);
+  selector.value=selected;
+  let visible=0;
+  for(const group of groups){
+    const box=document.createElement("div");box.className="lesson-sort-group";
+    const head=document.createElement("div");head.className="lesson-sort-head";head.draggable=true;
+    const first=visible+1;visible+=group.lessons.length;
+    head.textContent="⠿  "+(first===visible?first:first+"–"+visible)+" · "+group.section.navigation.title;
+    head.title="Gesamten Unterrichtsblock ziehen";
+    head.addEventListener("dragstart",e=>{e.dataTransfer.setData("application/x-course-group",group.section.id);e.dataTransfer.effectAllowed="move";});
+    head.addEventListener("dragover",e=>{e.preventDefault();e.stopPropagation();head.classList.add("drag-over");});
+    head.addEventListener("dragleave",()=>head.classList.remove("drag-over"));
+    head.addEventListener("drop",e=>{e.preventDefault();e.stopPropagation();head.classList.remove("drag-over");
+      const id=e.dataTransfer.getData("application/x-course-group");
+      if(!id||id===group.section.id)return;
+      try{if(!confirmUnsaved())return;const from=groups.findIndex(g=>g.section.id===id);
+        const to=groups.findIndex(g=>g.section.id===group.section.id);
+        const [item]=groups.splice(from,1);groups.splice(to,0,item);commitLessonOrder(groups);
+      }catch(err){error(err);}
+    });
+    box.append(head);
+    for(const lesson of group.lessons){
+      const row=document.createElement("div");row.className="lesson-sort-item";row.draggable=true;
+      row.textContent="⋮⋮  "+(group.lessons.indexOf(lesson)+first)+". "+lesson.title;
+      row.title="Innerhalb dieses Bereichs verschieben";
+      row.addEventListener("dragstart",e=>{e.stopPropagation();e.dataTransfer.setData("application/x-course-lesson",lesson.id);});
+      row.addEventListener("dragover",e=>{e.preventDefault();e.stopPropagation();row.classList.add("drag-over");});
+      row.addEventListener("dragleave",()=>row.classList.remove("drag-over"));
+      row.addEventListener("drop",e=>{e.preventDefault();e.stopPropagation();row.classList.remove("drag-over");
+        const id=e.dataTransfer.getData("application/x-course-lesson");
+        const from=group.lessons.findIndex(l=>l.id===id),to=group.lessons.findIndex(l=>l.id===lesson.id);
+        if(from<0||from===to)return;
+        try{if(!confirmUnsaved())return;const [item]=group.lessons.splice(from,1);
+          group.lessons.splice(to,0,item);commitLessonOrder(groups);
+        }catch(err){error(err);}
+      });
+      box.append(row);
+    }
+    list.append(box);
   }
 }
 function useFile(path,sha,content,original=content){
@@ -122,6 +262,7 @@ async function refresh(){
   const currentSection=state.current?.path.split("/")[1];
   $("section").value=valid.includes(previous)?previous:(valid.includes(currentSection)?currentSection:valid[0]||"");
   chapterList();
+  await loadPlans();
 }
 function insert(text){
   const source=$("source");source.focus();

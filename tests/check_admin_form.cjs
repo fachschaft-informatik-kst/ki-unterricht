@@ -63,8 +63,24 @@ const server=http.createServer((req,res)=>{
 
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
     await page.locator("#section").selectOption("einstieg");
+    await page.locator("#lessonOrder .lesson-sort-head").first().waitFor();
+    assert.equal(await page.locator("#lessonOrder .lesson-sort-head").count(),7,
+      "All teaching sections need an ordered draggable entry");
+    assert.equal(await page.locator("#lessonOrder .lesson-sort-item").count(),10,
+      "All ten existing lessons remain visible in the ordering overview");
     assert.equal(await page.locator("#chapters button").count(),3,
       "Only numbered chapter Markdown files belong in chapter navigation");
+
+    // Reordering a lesson group must update the staged plan without changing stable IDs.
+    const lessonHeads=page.locator("#lessonOrder .lesson-sort-head");
+    await lessonHeads.nth(1).dragTo(lessonHeads.nth(2));
+    await page.waitForFunction(()=>document.querySelector("#staged")?.textContent?.includes("planung.json"));
+    assert.ok((await lessonHeads.nth(2).textContent()).includes("Wie lernt KI?"));
+    assert.ok((await page.locator("#staged").textContent()).includes("planung.json"));
+    // Reset the reorder before testing the normal editor flow by refreshing
+    // (a new page resets unstaged test changes).
+    await page.reload();
+    await page.locator("#section").selectOption("einstieg");
 
     // Materials are Markdown documents with tables; they must have a usable
     // preview and update without the manual refresh button.
