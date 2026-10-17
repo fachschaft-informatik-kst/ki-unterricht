@@ -109,3 +109,5 @@ iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
 .chapter-list .drag-handle{font-size:23px;line-height:1;color:var(--muted);cursor:grab;padding:7px;user-select:none}
 .chapter-list .order-row button{flex:1;min-width:0}
 .chapter-list .order-row:hover{background:var(--soft)}
+
+.chapter-list .chapter-file{display:block;color:var(--muted);font-size:10px;line-height:1.35;font-weight:400}
