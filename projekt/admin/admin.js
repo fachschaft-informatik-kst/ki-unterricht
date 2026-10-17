@@ -13,7 +13,7 @@ function highlightSource(){
   const raw=$("source").value;
   // Tokenise escaped text, so authored HTML can never execute in the highlight layer.
   const escape=v=>v.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
-  const tokens=/(<!--[\\s\\S]*?-->|^#{1,6}[^\\n]*|\`{3}[^\\n]*|<\\/?[a-z][^>]*>|\\b[a-zA-Z_-]+(?=\\s*[:=])|"(?:[^"\\n]|\\\\.)*"|'(?:[^'\\n]|\\\\.)*')/gm;
+  const tokens=/(<!--[\s\S]*?-->|^#{1,6}[^\n]*|```[^\n]*|<\/?[a-z][^>]*>|\b[a-zA-Z_-]+(?=\s*[:=])|"(?:[^"\n]|\\.)*"|'(?:[^'\n]|\\.)*')/gm;
   let result="",end=0,match;
   while((match=tokens.exec(raw))){
     result+=escape(raw.slice(end,match.index));
@@ -24,7 +24,7 @@ function highlightSource(){
     result+='<span class="tok-'+style+'">'+escape(part)+'</span>';
     end=tokens.lastIndex;
   }
-  sourceLayer.innerHTML=result+escape(raw.slice(end))+"\\n";
+  sourceLayer.innerHTML=result+escape(raw.slice(end))+"\n";
   sourceLayer.scrollTop=$("source").scrollTop;
   sourceLayer.scrollLeft=$("source").scrollLeft;
 }
