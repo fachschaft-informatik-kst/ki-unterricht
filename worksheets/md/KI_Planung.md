@@ -1,12 +1,12 @@
 # KI-Block · Planung für Lehrpersonen
 
-**10 Doppellektionen à 90 Unterrichtsminuten.** Die Schulpause kommt separat dazu. Kein Regressionsteil, keine schriftliche Prüfung. Leistungsnachweis: Tandemprojekt und gemeinsames Fachgespräch.
+**10 Doppellektionen à 90 Unterrichtsminuten.** Die Schulpause kommt separat dazu. Kein Regressionsteil, keine schriftliche Prüfung. Leistungsnachweis: gemeinsame Projektabgabe und vierminütiges Einzelgespräch je Person; individuelle Gesamtnote.
 
 ## Ein roter Faden mit weniger Wechseln
 
 **Doppellektionen 1–4:** gemeinsame Grundlagen mit einem zusammenhängenden Arbeitsblock pro Thema. Die Kursseite ist eine Materialsammlung, kein vollständig abzuarbeitender Parcours. Pflichtkern und Wahlvertiefung werden jeweils vor der Arbeit deutlich benannt. Nicht jedes Antwortfeld muss ausgefüllt werden.
 
-**Doppellektionen 5–8: SOL (selbst organisiertes Lernen).** Die Tandems setzen Tagesziele, verteilen Rollen und Zeit, wählen Hilfen, prüfen Fortschritte und passen ihren Plan an. In den längeren Arbeitsblöcken sind kurze individuelle Denk- und Prüfzeiten ausdrücklich eingeplant; sie ersetzen keine gemeinsame Projektarbeit. Die Lehrperson verantwortet Rahmen, Beratung und Qualitätssicherung, nicht den gemeinsamen Takt aller Etappen. Doppellektion 8 gehört zur SOL-Phase: Während die Lehrperson Fachgespräche führt, werten die anderen Tandems selbstständig ein fremdes Modell aus.
+**Doppellektionen 5–8: SOL (selbst organisiertes Lernen).** Die Tandems setzen Tagesziele, verteilen Rollen und Zeit, wählen Hilfen, prüfen Fortschritte und passen ihren Plan an. In den längeren Arbeitsblöcken sind kurze individuelle Denk- und Prüfzeiten ausdrücklich eingeplant; sie ersetzen keine gemeinsame Projektarbeit. Die Lehrperson verantwortet Rahmen, Beratung und Qualitätssicherung, nicht den gemeinsamen Takt aller Etappen. Doppellektion 8 gehört zur SOL-Phase: Während die Lehrperson Einzelgespräche führt, werten die anderen Tandems selbstständig ein fremdes Modell aus.
 
 **Doppellektionen 9–10:** Transfer zu Sprache und Gesellschaft, jeweils mit einem vertieften Arbeitsweg statt mehreren kurzen Stationen.
 
@@ -256,11 +256,11 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 **Lernprodukt:** Vollständiges Journal, geprüfte ZIP-Abgabe und ein von beiden erklärbares Projekt.
 
-**Zeit:** 70 Minuten SOL-Block, davon 15 Minuten Abschluss- und Technikpuffer. Kein zusätzlicher Bericht oder vorbereitete Präsentation. Fachgesprächsregeln und Austauschpartner bereits vor Doppellektion 8 mitteilen.
+**Zeit:** 70 Minuten SOL-Block, davon 15 Minuten Abschluss- und Technikpuffer. Kein zusätzlicher Bericht oder vorbereitete Präsentation. Individuelle Gesprächsfenster (je 4 Minuten) und Austauschpartner bereits vor Doppellektion 8 mitteilen.
 
 ### Doppellektion 8 · Das eigene Projekt erklären und ein fremdes Modell prüfen
 
-**Rückblick:** Ihr eigener Abgabestand ist eingefroren. Während der Fachgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.
+**Rückblick:** Ihr eigener Abgabestand ist eingefroren. Während der Einzelgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.
 
 **Lernziel:** Das gemeinsame Bildprojekt im vierminütigen Einzelgespräch selbstständig erklären und ein fremdes Modell anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.
 
@@ -373,7 +373,7 @@ Der A/B-Vergleich bleibt als fachliches Gerüst bestehen: zwei Klassen, 80 Fotos
 | Datenregeln, Datenschutz, faire Bildzahl und konstante Einstellungen | Anwendung im genehmigten Rahmen, Klassenregeln, geeignete Exemplare und Aufnahmeorganisation |
 | Datencheck vor Vergleich; Auswahl vor Test; keine Optimierung nach Testeinsicht | Zeitverteilung der Etappen auf Doppellektion 5–7, Tagesziele und Rollen |
 | Fünf Reflexionen, nachvollziehbare Belege, Abgabe vor Doppellektion 8 | Benötigte Hilfen, Beratung, freiwillige Vertiefung vor Testeinsicht |
-| Beide erklären das ganze Projekt; Fachgespräch in Doppellektion 8 | Wie sie sich gegenseitig prüfen und auf das Erklären vorbereiten |
+| Jede Person erklärt das ganze Projekt im Einzelgespräch in Doppellektion 8 | Wie die Tandemmitglieder sich gegenseitig auf die individuellen Gespräche vorbereiten |
 | Fremdauswertung in Doppellektion 8, unbenotet | Eigene Prüffrage, Arbeitsteilung und begründete Rückmeldung |
 
 **Kein versteckter Gleichschritt:** Die Titel der Doppellektionen 5–7 benennen den Lernprozess, keine verpflichtenden Versuchstermine. Ein Tandem darf in Doppellektion 5 schon vergleichen und ein anderes in Doppellektion 6 noch Daten ergänzen. Die fachliche Reihenfolge bleibt erhalten.
@@ -397,7 +397,7 @@ Bis Ende Doppellektion 6 bei jedem Tandem kurz den Zeitplan und mögliche Daten-
 
 Regeln für Katze/Hund motivieren den zusammenhängenden Begriffsinput. Danach drei statt vier eigene Beispiele begründet einordnen. Meilensteine und Asimovs Gesetze bleiben Material zur Wahlvertiefung; keine zusätzliche Zeitleistenaktion oder Gruppenrotation. Die ethische Diskussion findet in Doppellektion 10 statt.
 
-Fachlich sichern: Ein regelbasiertes System kann KI sein, lernt aber nicht aus Daten. Nicht jede Automatisierung ist KI. Heutige Systeme sind schwache KI; die vier KI-Typen sind eine Einteilung, keine Entwicklungsstufen, die jedes System durchläuft.
+Fachlich sichern: Ein regelbasiertes System kann KI sein, lernt aber nicht aus Daten. Nicht jede Automatisierung ist KI. Heutige Systeme werden hier als schwache KI eingeordnet; für hypothetische starke KI gibt es kein allgemein anerkanntes nachgewiesenes Beispiel.
 
 ### Doppellektion 2 · Eine Erfahrung und ein digitales Beispiel
 
