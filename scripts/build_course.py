@@ -67,7 +67,7 @@ def lehrpersonen_seite(lessons, kursseite):
             '<body class="lehrpersonen-seite"><main><div class="crumb"><span>Nur für die Lehrperson</span></div>'
             f'<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller {len(lessons)} Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
             'In Doppellektion 5–8 dient AVIVA nur als äusserer Rahmen der SOL-Arbeit, nicht als gemeinsamer Takt für die Projektetappen. '
-            'Die vollständige Planung steht auch als <a href="KI_Planung.md">Markdown-Download</a> bereit.</p>'
+            'Die vollständigen Ablauftabellen finden Sie direkt weiter unten.</p>'
             '<p><a href="index.html">← Zur Kursseite</a></p>\n'+plaene+'\n<p><a href="index.html">← Zur Kursseite</a></p></main></body></html>\n')
 
 def remove_calendar_dates(text):
