@@ -903,24 +903,24 @@
       "question": "Leitfrage: Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?",
       "motivation": "Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.",
       "product": "Individuell bewertetes vierminütiges Einzelgespräch je Person und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.",
-      "zeit": "Einzelgespräche zu je 4 Minuten plus 1 Minute Wechsel/Notizen pro Person im 80-Minuten-Fenster von Doppellektion 8. Für verlässliche 8 Minuten Reserve sind mit einer prüfenden Lehrperson höchstens 14 Einzelgespräche möglich. Bei mehr Lernenden eine zweite prüfende Lehrperson für denselben Termin organisieren; keine kürzeren Gespräche und keine Ersatztermine. Pflichtkern Fremdauswertung: Reproduktionslauf mit Startwert 11 und Fremdtest, drei Startwerte nur Zusatz.",
+      "zeit": "20 Lernende, eine Lehrperson: 20 × (4 Minuten Einzelgespräch + 1 Minute für Notizen/Wechsel) = 100 Minuten. Gesprächsreihe beginnt direkt bei Minute 0; die ersten 90 Minuten gehören zu Doppellektion 8, die letzten 10 Minuten werden unmittelbar angehängt. Es gibt keine Gesprächsreserve und keine klassenweite Einführung oder Abschlussbesprechung: Zeitplan, Austauschprojekt und Abgabekanal sind vorab bekannt; Fremdauswertung und Sicherung laufen selbstständig. Keine zweite Lehrperson, keine Ersatztermine. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest, drei Startwerte nur Zusatz.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Abgaben und Organisation",
+          "titel": "Direkter selbstständiger Einstieg",
           "minutes": 5,
           "schritte": [
             {
-              "art": "Input",
-              "wer": "Lehrperson",
+              "art": "Auftrag",
+              "wer": "Einzeln",
               "min": 4,
-              "text": "Bestätigt Abgaben, die individuellen Vierminuten-Gesprächsfenster und die bereits zugeteilten Austauschprojekte. Erinnert an privates Browserfenster, Datenschutz und das unveränderte eigene Abgabepaket. Ab Minute 5 laufen die Einzelgespräche parallel bis Minute 85; bei mehr als 14 Lernenden prüft eine zweite Lehrperson parallel."
+              "text": "Starten Sie die Fremdauswertung sofort selbstständig nach der vorab verteilten schriftlichen Anleitung. Die Abgabe, der individuelle Gesprächsplan mit vier Minuten pro Person und die Austauschprojekte liegen schon bereit. Die Lehrperson führt ab Minute 0 ohne klassenweite Einführung Einzelgespräche; Gesprächsfenster bis Minute 100 (einschliesslich zehn Minuten unmittelbar nach der Doppellektion)."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 1,
-              "text": "Öffnen Sie das zugeteilte Paket und notieren Sie beide individuellen Gesprächsfenster."
+              "text": "Öffnen Sie das zugeteilte Paket und kontrollieren Sie vorab bekannt gegebene individuelle Gesprächszeiten."
             },
             {
               "art": "Ergebnis",
@@ -998,7 +998,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 15,
-              "text": "Puffer für Einzelgespräch, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim persönlichen Aufruf pausieren Sie. Jede Person erklärt in vier Minuten selbstständig den Modellweg, eine Datenentscheidung, ein Ergebnis samt Grenze und einen nächsten Versuch. Beim nicht lösbaren Training gespeicherte fremde Ausgaben auswerten und fehlende Reproduktion ehrlich dokumentieren."
+              "text": "15 Minuten Puffer ausschliesslich für die eigenständige Fremdauswertung, persönliche Gesprächsunterbrechung, Wiedereinstieg und Technik; dieser Puffer ist keine freie Zeit im eng getakteten Prüfungsplan. Beim persönlichen Aufruf pausieren Sie. Jede Person erklärt in vier Minuten selbstständig den Modellweg, eine Datenentscheidung, ein Ergebnis samt Grenze und einen nächsten Versuch. Beim nicht lösbaren Training gespeicherte fremde Ausgaben auswerten und fehlende Reproduktion ehrlich dokumentieren."
             },
             {
               "art": "Ergebnis",
@@ -1009,14 +1009,14 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Rückmeldung sichern",
+          "titel": "Fremdauswertung eigenständig sichern",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel."
+              "text": "Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung selbstständig mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel. Die Lehrperson führt währenddessen weiter Einzelgespräche, die letzten zwei im unmittelbaren zehnminütigen Anschluss."
             },
             {
               "art": "Ergebnis",
