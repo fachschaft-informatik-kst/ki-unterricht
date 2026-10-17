@@ -68,3 +68,31 @@ iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
 .toolbar .block-picker-label{display:inline-flex;align-items:center;font-size:13px;font-weight:650;color:var(--muted);margin-left:6px}
 .toolbar select{font-size:13px;max-width:225px;padding:8px 10px}
 .toolbar #addBlock{background:var(--soft);border-color:#a4bdb2;font-weight:650}
+
+/* Highlight under the native textarea: editing, selection and keyboard shortcuts
+   continue to work exactly as before, without external editor dependencies. */
+.code-editor{position:relative;min-height:370px}
+.code-editor .source-highlight,.code-editor #source{
+  margin:0;width:100%;min-height:370px;padding:14px;
+  border:1px solid #b8c6c1;border-radius:8px;
+  font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;
+  tab-size:2;letter-spacing:normal;white-space:pre-wrap;overflow-wrap:break-word
+}
+.code-editor .source-highlight{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  color:#263b43;background:#fbfcfa;z-index:0;
+}
+.code-editor #source{
+  position:relative;z-index:1;background:transparent;color:transparent;
+  -webkit-text-fill-color:transparent;caret-color:#18343a;resize:vertical;
+  overflow:auto;
+}
+.code-editor #source::selection{background:rgba(42,132,185,.25)}
+.code-editor #source:focus-visible{outline-offset:2px}
+.source-highlight .tok-comment{color:#768776}
+.source-highlight .tok-tag{color:#96501d}
+.source-highlight .tok-attr{color:#235f99}
+.source-highlight .tok-string{color:#2c735c}
+.source-highlight .tok-heading{color:#8150a4;font-weight:700}
+.source-highlight .tok-code{color:#a1445e}
+.source-highlight .tok-key{color:#365a9d}

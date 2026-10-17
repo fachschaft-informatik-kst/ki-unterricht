@@ -37,7 +37,8 @@ const server=http.createServer((req,res)=>{
     await page.route("**/api/chapters",route=>route.fulfill({json:{
       chapters:[...files.map(path=>({path,sha:"a".repeat(40)})),
         {path:"kursseiten/einstieg/planung.json",sha:"a".repeat(40)},
-        {path:"kursseiten/einstieg/materialien.md",sha:"a".repeat(40)}]
+        {path:"kursseiten/einstieg/materialien.md",sha:"a".repeat(40)},
+        {path:"kursseiten/lernziele/000-inhalt.md",sha:"a".repeat(40)}]
     }}));
     // Match query strings containing slashes too (glob * does not cross /).
     await page.route(/\/api\/file\?/,route=>{
@@ -87,6 +88,12 @@ const server=http.createServer((req,res)=>{
     // Missing portal.css used to turn the milestone timeline into an ordinary
     // numbered list and removed the circular chapter numbers.
     await page.locator("#chapters button").filter({hasText:"030-einstieg-3"}).click();
+    assert.equal(await page.locator("#preview").isVisible(),true,
+      "Chapter preview must reappear after editing materials");
+    assert.equal(await page.locator("#codeEditor").isVisible(),true,
+      "Highlighted source editor must be visible for chapters");
+    assert.ok((await page.locator("#sourceHighlight").innerHTML()).includes("tok-"),
+      "Source preview must contain syntax highlighting tokens");
     const preview=page.frameLocator("#preview");
     await preview.locator(".timeline li").first().waitFor();
     const kstLogo=preview.locator(".crumb .school-logo");
@@ -226,6 +233,13 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#notice").textContent(),/keine gültige JSON-Antwort/);
     assert.doesNotMatch(await page.locator("#notice").textContent(),/Gateway nicht eingerichtet/);
     assert.match(await page.locator("#staged").textContent(),/010-einstieg-1\.md/);
+
+    // Non-teaching learning objectives are also editable using the same source editor.
+    await page.locator("#section").selectOption("lernziele");
+    await page.locator("#chapters button").first().click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/lernziele/000-inhalt.md");
+    assert.equal(await page.locator("#source").isVisible(),true);
+    assert.equal(await page.locator("#preview").isVisible(),true);
 
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
   }finally{
