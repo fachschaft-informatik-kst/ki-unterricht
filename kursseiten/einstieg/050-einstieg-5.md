@@ -30,7 +30,6 @@ Ein selbstfahrendes Taxi ohne Fahrperson ist um 8 Uhr morgens mit 50 km/h auf ei
         <li><b>Nach rechts ausweichen:</b> Das Taxi prallt in eine Mauer, der Fahrgast wird mit hoher Wahrscheinlichkeit verletzt.</li>
         <li><b>Nach links ausweichen:</b> Eine entgegenkommende Person auf dem Velo wird mit hoher Wahrscheinlichkeit verletzt.</li>
       </ol>
-      <p class="small">Für diesen Fall gibt es keine richtige oder falsche Lösung. Menschen, Länder und Rechtssysteme gewichten unterschiedlich. Entscheidend sind Ihre Begründungen.</p>
     </div>
     <p class="task"><b>Aufgabe:</b> Entscheiden Sie zuerst allein, welche Möglichkeit Sie wählen würden und warum (oder weshalb Sie keine der drei wählen können). Vergleichen Sie dann in der Vierergruppe: Wo gehen die Entscheidungen auseinander? Welches der drei Gesetze greift, und widersprechen sich die Gesetze hier? Wer legt fest, was «Schaden» heisst und wessen Schaden mehr zählt: Hersteller, Staat oder Fahrgäste? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest.</p>
     <label class="field answer"><span>Zwei Argumente zum Fall «Schulweg» und zu den Gesetzen der Robotik</span><textarea data-answer="gesetze" maxlength="10000" placeholder="Ihre Argumente …" rows="3"></textarea></label>
