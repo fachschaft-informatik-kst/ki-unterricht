@@ -100,6 +100,14 @@ const server=http.createServer((req,res)=>{
     await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/materialien.md"),"utf8"));
     await materialFrame.locator(".table-scroll table").first().waitFor();
 
+    // Every navigation must replace the iframe document, even after viewing
+    // AVIVA plans or material files. No stale material preview may remain.
+    await page.locator("#editPlan").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/planung.json");
+    assert.equal(await page.locator("#preview").isVisible(),true);
+    await page.frameLocator("#preview").locator("h2").filter({hasText:"Unterrichtsplan"}).waitFor();
+    await page.locator("#editMaterials").click();
+    await page.frameLocator("#preview").locator(".table-scroll table").first().waitFor();
     // Visual regression for the real CSS selectors and HTML wrappers.
     // Missing portal.css used to turn the milestone timeline into an ordinary
     // numbered list and removed the circular chapter numbers.
