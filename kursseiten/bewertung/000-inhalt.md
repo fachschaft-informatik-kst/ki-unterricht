@@ -165,7 +165,7 @@ Jede Person kommt einzeln und erklärt das gemeinsame Projekt selbstständig. Da
           <li>Was lässt sich daraus noch nicht schliessen?</li>
           <li>Wie würden wir ein neues Problem untersuchen?</li>
         </ul>
-        <p class="small muted">Doppellektion 8 · 4 Minuten pro Person plus 1 Minute Wechsel/Notizen. Die Lehrperson gibt persönliche Gesprächsfenster vorab bekannt. Für mehr als 14 Lernende braucht es eine zweite prüfende Lehrperson im selben Zeitfenster; keine Ersatztermine.</p>
+        <p class="small muted">Doppellektion 8 · 20 Einzelgespräche mit einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Notizen/Wechsel. Insgesamt 100 Minuten, davon die letzten 10 direkt nach den 90 Unterrichtsminuten. Die festen Gesprächsfenster werden vorab mitgeteilt; die übrigen arbeiten selbstständig. Keine Zeitreserve und keine Ersatztermine.</p>
       </div>
     </div>
     <h3 style="margin-top:28px">Fragen zum Üben</h3>
