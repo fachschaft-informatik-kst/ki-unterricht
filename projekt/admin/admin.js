@@ -69,7 +69,7 @@ function stagingList(){
     li.append(remove);node.append(li);
   }
 }
-const chapterPath=path=>/^kursseiten\\/[^/]+\\/[0-9]{3}-[^/]+\\.md$/.test(path);
+const chapterPath=path=>/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(path);
 const chaptersFor=section=>state.chapters.filter(c=>c.path.startsWith("kursseiten/"+section+"/")&&chapterPath(c.path))
   .sort((a,b)=>a.path.localeCompare(b.path));
 function chapterContent(item){
