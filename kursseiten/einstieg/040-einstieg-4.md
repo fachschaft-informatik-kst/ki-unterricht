@@ -7,10 +7,24 @@
     <p><strong>Starke KI</strong> bezeichnet die hypothetische Vorstellung einer KI mit allgemeiner, menschenähnlicher Intelligenz, die sehr unterschiedliche geistige Aufgaben selbstständig bewältigen und Neues lernen könnte. Es gibt derzeit kein allgemein anerkanntes nachgewiesenes Beispiel. <strong>Bewusstsein ist nicht dasselbe wie allgemeine Intelligenz</strong> und wird hier nicht vorausgesetzt.</p>
     <div class="table-scroll">
       <table class="typen">
-        <thead><tr><th>Unterscheidung</th><th>Schwache KI</th><th>Starke KI (hypothetisch)</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Unterscheidung</th>
+            <th>Schwache KI</th>
+            <th>Starke KI (hypothetisch)</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><th>Fähigkeiten</th><td>Für bestimmte Aufgabenbereiche entwickelt; kann darin sehr gut sein.</td><td>Breites Verständnis und selbstständige Problemlösung über viele Bereiche hinweg.</td></tr>
-          <tr><th>Beispiele</th><td>Schachcomputer, Bilderkennung, heutige Chatbots.</td><td>Kein allgemein anerkanntes nachgewiesenes System.</td></tr>
+          <tr>
+            <th>Fähigkeiten</th>
+            <td>Für bestimmte Aufgabenbereiche entwickelt; kann darin sehr gut sein.</td>
+            <td>Breites Verständnis und selbstständige Problemlösung über viele Bereiche hinweg.</td>
+          </tr>
+          <tr>
+            <th>Beispiele</th>
+            <td>Schachcomputer, Bilderkennung, heutige Chatbots.</td>
+            <td>Kein allgemein anerkanntes nachgewiesenes System.</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -19,10 +33,7 @@
     <!-- Frühere Antworten zu den vier Typen bleiben in älteren ZIP-Sicherungen erhalten.
          Versteckte Felder sichern die Schlüssel bei erneuter Speicherung, ohne die Typologie zu unterrichten. -->
     <div hidden aria-hidden="true">
-      <textarea data-answer="typ_bsp_1"></textarea><textarea data-answer="typ_1"></textarea>
-      <textarea data-answer="typ_bsp_2"></textarea><textarea data-answer="typ_2"></textarea>
-      <textarea data-answer="typ_bsp_3"></textarea><textarea data-answer="typ_3"></textarea>
-      <textarea data-answer="typ_bsp_4"></textarea><textarea data-answer="typ_4"></textarea>
+      <textarea data-answer="typ_bsp_1"></textarea><textarea data-answer="typ_1"></textarea><textarea data-answer="typ_bsp_2"></textarea><textarea data-answer="typ_2"></textarea><textarea data-answer="typ_bsp_3"></textarea><textarea data-answer="typ_3"></textarea><textarea data-answer="typ_bsp_4"></textarea><textarea data-answer="typ_4"></textarea>
     </div>
   </div>
 </details>
