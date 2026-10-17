@@ -11,7 +11,7 @@ K1–K6: Journal, Daten und Versuch.
   <article>
     <b>12 Punkte · Gespräch</b>
     <!-- MD:START -->
-K7–K10: gemeinsames Fachgespräch im Tandem.
+K7–K10: vierminütiges Einzelgespräch je Person; eigene Gesprächspunkte.
 <!-- MD:END -->
   </article>
   <article>
@@ -109,12 +109,12 @@ K7–K10: gemeinsames Fachgespräch im Tandem.
         <td><select aria-label="Punkte K9: Ergebnisse kritisch einordnen" data-score="k9"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
       <tr>
-        <th scope="row">K10 · Verständnis &amp; Transfer im Tandem<small>Gespräch</small></th>
-        <td>Gemeinsames Projektverständnis nicht erkennbar.</td>
+        <th scope="row">K10 · Individuelles Verständnis &amp; Transfer<small>Gespräch</small></th>
+        <td>Eigenes Projektverständnis nicht erkennbar.</td>
         <td>Nur einzelne Arbeitsteile erklärbar; viel Unterstützung nötig.</td>
-        <td>Beide erklären das ganze Projekt und schlagen einen passenden nächsten Versuch vor.</td>
-        <td>Beide übertragen das Vorgehen selbstständig auf eine neue Anwendung und begründen Anpassungen.</td>
-        <td><select aria-label="Punkte K10: Verständnis &amp; Transfer im Tandem" data-score="k10"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+        <td>Erklärt das gemeinsame Projekt selbstständig und schlägt einen passenden nächsten Versuch vor.</td>
+        <td>Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet Anpassungen.</td>
+        <td><select aria-label="Punkte K10: Individuelles Verständnis und Transfer" data-score="k10"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
     </tbody>
   </table>
@@ -128,17 +128,17 @@ K7–K10: gemeinsames Fachgespräch im Tandem.
 Die Endnote wird auf die nächste Viertelnote gerundet. 18 Punkte → 4,0 · 24 Punkte → 5,0 · 30 Punkte → 6,0.
 <!-- MD:END -->
   <output aria-live="polite" id="grade-result">Wählen Sie für jede Kompetenz 0–3 Punkte.</output>
-  <p class="small">Der Rechner ist Ihre Selbsteinschätzung. Die Lehrperson vergibt die Bewertung anhand der Abgabe und des gemeinsamen Gesprächs. Die Bewertung erfolgt für das Tandem; beide müssen das ganze Projekt erklären können.</p>
+  <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>
 </div>
 <a class="btn" href="#lernziele">Zu den Lernzielen →</a>
 <details>
-  <summary>Abgabe &amp; Fachgespräch im Tandem</summary>
+  <summary>Gemeinsame Abgabe &amp; Einzelgespräche</summary>
   <div class="detail-body" id="abgabe">
     <span class="section-label">07 · Zum Abschluss</span>
     <!-- MD:START -->
 ## Ein Journal. Ein begründetes Urteil.
 <!-- MD:END -->
-    <p class="section-intro">Ein gemeinsames Journal. Ein gemeinsames Fachgespräch. Beide erklären das ganze Projekt.</p>
+    <p class="section-intro">Ein gemeinsames Journal. Zwei getrennte Einzelgespräche. Jede Person erklärt das ganze Projekt selbstständig.</p>
     <div class="grid two">
       <div class="card">
         <!-- MD:START -->
@@ -152,12 +152,12 @@ Die Endnote wird auf die nächste Viertelnote gerundet. 18 Punkte → 4,0 · 24 
         <label class="check"><input data-check="submit-contribution" type="checkbox"/><span>Arbeitsteilung, Quellen &amp; KI-Hilfen</span></label>
       </div>
       <div class="card">
-        <span class="tag orange">Im Tandem · 40 %</span>
+        <span class="tag orange">Individuell · 40 %</span>
         <!-- MD:START -->
 ### Das Fachgespräch
 <!-- MD:END -->
         <!-- MD:START -->
-Sie kommen gemeinsam. Beide begründen Entscheidungen und erklären Ergebnisse am Journal.
+Jede Person kommt einzeln und erklärt das gemeinsame Projekt selbstständig. Das abgegebene Journal liegt als Gesprächsgrundlage bereit.
 <!-- MD:END -->
         <ul>
           <li>Was haben wir entschieden – und warum?</li>
@@ -165,7 +165,7 @@ Sie kommen gemeinsam. Beide begründen Entscheidungen und erklären Ergebnisse a
           <li>Was lässt sich daraus noch nicht schliessen?</li>
           <li>Wie würden wir ein neues Problem untersuchen?</li>
         </ul>
-        <p class="small muted">8. Doppellektion · Richtwert: 5 Minuten pro Tandem. Bei mehr Tandems wird die Dauer für alle gleich gekürzt. Dauer, Reihenfolge und Abgabekanal stehen vorab fest.</p>
+        <p class="small muted">Doppellektion 8 · 20 Einzelgespräche mit einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Notizen/Wechsel. Insgesamt 100 Minuten, davon die letzten 10 direkt nach den 90 Unterrichtsminuten. Die festen Gesprächsfenster werden vorab mitgeteilt; die übrigen arbeiten selbstständig. Keine Zeitreserve und keine Ersatztermine.</p>
       </div>
     </div>
     <h3 style="margin-top:28px">Fragen zum Üben</h3>

@@ -2,10 +2,12 @@
 from pathlib import Path
 from bs4 import BeautifulSoup
 import sys
+import subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
 from build_portal import render_fragment
 
 ROOT=Path(__file__).resolve().parents[1]
+subprocess.run([sys.executable, str(ROOT/"scripts/sync_editor_preview.py"), "--check"], check=True)
 site=ROOT/"projekt/admin"
 worker=ROOT/"admin-worker/src/index.mjs"
 for name in ("index.html","admin.css","admin.js","plan-editor.js"):
@@ -20,7 +22,7 @@ for selector in ("#planEditor","#planLesson","#planTotal","#planFields","#planPh
     assert soup.select_one(selector),selector
 code=(site/"admin.js").read_text(encoding="utf-8")
 for item in ("/api/file","/api/chapters","/api/publish","function addLesson","function editPlan","function editMaterials","data-answer",
-             "grafiken/uploads/","sandbox"):
+             "grafiken/uploads/"):
     assert item in code,item
 backend=worker.read_text(encoding="utf-8")
 for item in ("GITHUB_CLIENT_SECRET","GITHUB_CLIENT_ID","SESSION_KEY",

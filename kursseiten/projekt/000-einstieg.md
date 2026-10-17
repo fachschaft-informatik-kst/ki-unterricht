@@ -28,7 +28,7 @@
     <strong>1 Vergleich</strong><small>gezielt eine Grösse verändern</small>
   </div>
   <div class="fact">
-    <strong>8. Doppellektion</strong><small>Abgabe &amp; Tandemgespräch</small>
+    <strong>8. Doppellektion</strong><small>Abgabe &amp; Einzelgespräche</small>
   </div>
 </div>
 <p class="overview-note">Bewertet wird Ihre Untersuchung – nicht die höchste Trefferquote.</p>

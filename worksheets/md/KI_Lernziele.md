@@ -13,9 +13,9 @@ Ich kann …
 - Daten nach unabhängigen Gegenständen/Personen in Training, Validierung und Test trennen.
 - einen fairen A/B-Vergleich beschreiben und Prozentwerte sowie Prozentpunkte interpretieren.
 - konkrete Vorhersagen untersuchen und Aussagen auf die geprüften Daten begrenzen.
-- im Tandemgespräch das ganze Projekt erklären und einen nächsten Versuch begründen.
+- im vierminütigen Einzelgespräch das gemeinsame Projekt selbstständig erklären und einen nächsten Versuch begründen.
 - bei Sprachmodellen den Einfluss von Kontext und Trainingsmaterial beschreiben.
 - ein Modell mit Opacity, Scale und Damage prüfen, eine Rückkopplung beschreiben und eine Quelle kritisch lesen.
 - gesellschaftliche Folgen und Gegenmassnahmen an einem Beispiel diskutieren.
 
-Keine Pflicht: lineare/logistische Regression, Backpropagation ausrechnen, eigene Trainingsbibliothek programmieren. Leistungsnachweis: Tandemprojekt und gemeinsames Fachgespräch, keine schriftliche Prüfung.
+Keine Pflicht: lineare/logistische Regression, Backpropagation ausrechnen, eigene Trainingsbibliothek programmieren. Leistungsnachweis: gemeinsame Projektabgabe (18 Punkte) und vierminütiges Einzelgespräch je Person (12 Punkte), individuelle Gesamtnote; keine schriftliche Prüfung.

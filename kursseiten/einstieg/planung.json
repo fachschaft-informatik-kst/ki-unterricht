@@ -4,7 +4,7 @@
       "id": "01",
       "view": "einstieg",
       "title": "Was ist KI?",
-      "goal": "KI von Programmen mit festen Regeln unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen und schwache und starke KI sowie die vier KI-Typen unterscheiden.",
+      "goal": "KI von automatisierten Programmen unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen sowie schwache und starke KI an Beispielen gegenüberstellen.",
       "question": "Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
       "product": "Drei begründet eingeordnete Beispiele, zwei Argumente zum Fall «Schulweg» und eine eigene Antwort auf die Leitfrage.",
@@ -79,7 +79,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 15,
-              "text": "Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Ordnet schwache und starke KI sowie die vier KI-Typen ein: heutige Systeme sind schwache KI, Typ 1 oder 2; Typ 3 und 4 sind Forschungsziele. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen."
+              "text": "Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Stellt nur schwache KI (für bestimmte Aufgabenbereiche) und hypothetische starke KI (allgemeine Intelligenz) gegenüber; Bewusstsein ist dafür keine Voraussetzung. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen."
             },
             {
               "art": "Auftrag",
@@ -103,7 +103,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 30,
-              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk."
+              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Lernen aus Daten, KI/ML/Deep Learning/generative KI und schwache oder hypothetische starke KI. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk."
             },
             {
               "art": "Input",

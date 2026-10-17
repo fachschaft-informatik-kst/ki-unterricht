@@ -86,7 +86,7 @@
     <a href="#gesellschaft">Zum Unterricht →</a>
   </article>
 </div>
-<p class="callout">Benotet wird das Tandemprojekt mit den Kompetenzen K1–K10. Die Lernziele zu Sprachmodellen und Gesellschaft gehören zum anschliessenden Unterricht und fliessen nicht nachträglich in die Projektnote ein.</p>
+<p class="callout">Benotet wird die gemeinsame Projektabgabe (K1–K6) plus das individuelle vierminütige Einzelgespräch (K7–K10); jede Person erhält eine eigene Gesamtnote. Die Lernziele zu Sprachmodellen und Gesellschaft gehören zum anschliessenden Unterricht und fliessen nicht nachträglich in die Projektnote ein.</p>
 <a class="btn primary" href="#bewertung">Bewertungsraster öffnen →</a>
 <details>
   <summary>Lernziele zum Projekt: Selbsteinschätzung</summary>

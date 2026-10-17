@@ -7,7 +7,8 @@ const {chromium}=require("playwright");
 const ROOT=path.resolve(__dirname,"..");
 const files=[
   "kursseiten/einstieg/000-einstieg.md",
-  "kursseiten/einstieg/010-einstieg-1.md"
+  "kursseiten/einstieg/010-einstieg-1.md",
+  "kursseiten/einstieg/030-einstieg-3.md"
 ];
 const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
@@ -20,7 +21,9 @@ const server=http.createServer((req,res)=>{
   fs.readFile(file,(err,data)=>{
     if(err){res.writeHead(404).end();return;}
     const ext=path.extname(file);
-    res.writeHead(200,{"Content-Type":ext===".json"?"application/json":ext===".js"?"text/javascript":ext===".css"?"text/css":"text/html"});
+    res.writeHead(200,{"Content-Type":ext===".json"?"application/json":ext===".js"?"text/javascript":ext===".css"?"text/css":"text/html",
+      // Reproduce the Worker constraint that causes <base href> to be ignored.
+      "Content-Security-Policy":"base-uri 'none'; img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io"});
     res.end(data);
   });
 });
@@ -41,12 +44,87 @@ const server=http.createServer((req,res)=>{
       return route.fulfill({json:{path:p,sha:"a".repeat(40),content}});
     });
     let submitted=null;
+    let publishFailure=false;
     await page.route("**/api/publish",route=>{
       submitted=route.request().postDataJSON();
+      if(publishFailure)return route.fulfill({status:502,contentType:"text/html",body:"<h1>Upstream failure</h1>"});
       return route.fulfill({json:{url:"https://github.com/example/repo/pull/123",number:123}});
     });
+    // Mock only the published KST logo; relative requests to worker origin
+    // must fail under the server rules above, just like on Cloudflare.
+    const logoUrl="https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/grafiken/kst_logo.png";
+    const tinyPng=Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/XxkAAAAASUVORK5CYII=","base64");
+    await page.route(logoUrl,route=>route.fulfill({
+      status:200,contentType:"image/png",body:tinyPng
+    }));
+
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
     await page.locator("#section").selectOption("einstieg");
+
+    // Materials are Markdown documents with tables; they must have a usable
+    // preview and update without the manual refresh button.
+    await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/materialien.md");
+    const materialFrame=page.frameLocator("#preview");
+    await materialFrame.locator(".table-scroll table").first().waitFor();
+    assert.equal(await materialFrame.locator(".table-scroll table th").count()>=2,true);
+    await page.locator("#source").fill("# Testmaterialien\n\n| Schritt | Ziel |\n|---|---|\n| Übung | Prüfen |\n");
+    await materialFrame.locator("table td").filter({hasText:"Übung"}).waitFor();
+    assert.equal(await materialFrame.locator("table td").first().textContent(),"Übung");
+    await page.locator("#blockType").selectOption("warning");
+    await page.locator("#addBlock").click();
+    await materialFrame.locator(".callout.warn").waitFor();
+    assert.match(await page.locator("#source").inputValue(),/callout warn/);
+    // Restore the original un-staged content before changing files.
+    await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/materialien.md"),"utf8"));
+    await materialFrame.locator(".table-scroll table").first().waitFor();
+
+    // Visual regression for the real CSS selectors and HTML wrappers.
+    // Missing portal.css used to turn the milestone timeline into an ordinary
+    // numbered list and removed the circular chapter numbers.
+    await page.locator("#chapters button").filter({hasText:"030-einstieg-3"}).click();
+    const preview=page.frameLocator("#preview");
+    await preview.locator(".timeline li").first().waitFor();
+    const kstLogo=preview.locator(".crumb .school-logo");
+    await kstLogo.waitFor();
+    const logoResult=await kstLogo.evaluate(img=>new Promise(resolve=>{
+      const finish=()=>resolve({src:img.currentSrc||img.src,loaded:img.complete&&img.naturalWidth>0});
+      if(img.complete)finish();
+      else{
+        img.addEventListener("load",finish,{once:true});
+        img.addEventListener("error",finish,{once:true});
+      }
+    }));
+    assert.equal(logoResult.src,logoUrl,"Logo must resolve to published asset despite CSP base-uri 'none'");
+    assert.equal(logoResult.loaded,true,"The KST logo must actually load in the sandboxed preview");
+
+    assert.equal(await preview.locator(".timeline li").count(),9);
+    const timelineStyle=await preview.locator(".timeline li").first().evaluate(el=>({
+      display:getComputedStyle(el).display,
+      columns:getComputedStyle(el).gridTemplateColumns
+    }));
+    assert.equal(timelineStyle.display,"grid","Milestones must use published two-column timeline");
+    assert.match(timelineStyle.columns,/104px/,"Milestone year column must match site CSS");
+    const chapterStyle=await preview.locator(".kapitel > summary .kapitel-nr").evaluate(el=>({
+      display:getComputedStyle(el).display,
+      radius:getComputedStyle(el).borderTopLeftRadius,
+      width:getComputedStyle(el).width,
+      value:el.textContent
+    }));
+    assert.equal(chapterStyle.value,"3");
+    assert.equal(chapterStyle.display,"grid","Chapter number styling was missing");
+    assert.equal(chapterStyle.radius,"50%","Chapter number circle must match site");
+    assert.equal(chapterStyle.width,"34px");
+    assert.equal(await preview.locator(".sidebar").count(),1,"Course sidebar shell must match site");
+
+    // An unmerged YAML-backed chapter also needs the exact numbered wrapper.
+    await page.locator("#source").fill("---\ntype: chapter\nid: einstieg-test\nnummer: \"3a\"\ntitel: \"Testtitel\"\nkurz: \"Test\"\nopen: true\n---\n\n## Neuer Inhalt\n");
+    await page.locator("#previewButton").click();
+    assert.equal(await preview.locator(".kapitel-nr").first().textContent(),"3a");
+    assert.equal(await preview.locator(".kapitel-titel").first().textContent(),"Testtitel");
+    // Restore the original source without staging a change.
+    await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/030-einstieg-3.md"),"utf8"));
+
     await page.locator("#editPlan").click();
     // UI operations fetch their files asynchronously; click() does not await handlers.
     await page.locator("#planEditor").waitFor({state:"visible"});
@@ -130,6 +208,21 @@ const server=http.createServer((req,res)=>{
     assert.equal(updated.lessons[0].phases[0].schritte.at(-1).art,"Ergebnis");
     assert.equal(updated.lessons[0].phases[0].schritte.reduce((n,s)=>n+Number(s.min||0),0),6);
     assert.match(await page.locator("#published").textContent(),/#123/);
+
+    // A non-JSON Cloudflare/edge failure must expose its HTTP status and retain
+    // all staged edits. It must never masquerade as "Gateway not installed".
+    await page.locator("#section").selectOption("einstieg");
+    await page.locator("#chapters button").filter({hasText:"010-einstieg-1"}).click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/010-einstieg-1.md");
+    await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n<!-- regression test -->");
+    await page.locator("#stage").click();
+    publishFailure=true;
+    await page.locator("#publish").click();
+    await page.waitForFunction(()=>document.querySelector("#notice")?.textContent?.includes("HTTP 502"));
+    assert.match(await page.locator("#notice").textContent(),/keine gültige JSON-Antwort/);
+    assert.doesNotMatch(await page.locator("#notice").textContent(),/Gateway nicht eingerichtet/);
+    assert.match(await page.locator("#staged").textContent(),/010-einstieg-1\.md/);
+
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
   }finally{
     await browser.close();

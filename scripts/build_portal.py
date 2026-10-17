@@ -105,9 +105,11 @@ def build() -> None:
     if target.exists():
         shutil.rmtree(target)
     target.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(PORTAL, target, dirs_exist_ok=True,
-                    ignore=shutil.ignore_patterns("*.template.html", "README.md", "index.html",
-                                                 "unterrichtsplan.html", "materialien.html", "musterloesungen", "materialien"))
+    generated = {"index.html", "unterrichtsplan.html", "materialien.html", "musterloesungen", "materialien"}
+    def ignore(folder, names):
+        return [name for name in names if name.endswith(".template.html") or name == "README.md"
+                or (Path(folder) == PORTAL and name in generated)]
+    shutil.copytree(PORTAL, target, dirs_exist_ok=True, ignore=ignore)
     for path in (ROOT / "shared").glob("*"):
         shutil.copyfile(path, target / "admin" / path.name)
     shutil.copyfile(ROOT / "experimente/registry.json", target / "experiments.json")

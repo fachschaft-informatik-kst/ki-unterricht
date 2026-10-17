@@ -28,4 +28,7 @@ assert example in course.get_text(" ", strip=True)
 assert course.select_one("#einstieg-3")
 plan = BeautifulSoup((ROOT / GENERATED[1]).read_text(encoding="utf-8"), "html.parser")
 assert plan.select_one("#doppellektion-01")
+for name in ("index.html", "admin.js", "plan-editor.js", "course-model.js", "course-rules.json"):
+    assert (ROOT / "_build/site/projekt/admin" / name).is_file(), f"Editor asset missing: {name}"
+assert course.select_one('nav a[href="#gesellschaft"]').get_text(strip=True) == "10KI & Gesellschaft"
 print("PASS untracked, reproducible course HTML and teacher plan from content sources")

@@ -106,4 +106,8 @@ Gesamtkurs und SHA-Konflikte vor dem Anlegen eines PR.
 `make test` prüft Inhalte, Redaktionswerkzeuge, gespeicherte Schlüssel und
 Worker-Verträge. GitHub Actions prüft zusätzlich den Editor im Browser sowie
 Notebookstart, Training, Wechsel, Uploads und ZIP-Wiederherstellung.
-Die Editorvorschau bleibt vereinfacht und ersetzt den echten Build nicht.
+Die Editorvorschau übernimmt Kurs-CSS und Layout; ihre Navigation liest dieselben
+Bereichsmetadaten. Nur nach Änderungen an CSS oder der Quellvorlage ist
+`python scripts/sync_editor_preview.py` nötig, nicht nach neuen Inhalten.
+Die Vorschau führt keine Notebooks oder anderen Skripte aus und ersetzt den
+echten Build nicht.

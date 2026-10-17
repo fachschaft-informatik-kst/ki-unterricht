@@ -19,7 +19,7 @@
   <section class="intro" id="intro">
     <h1>Die Kursinhalte direkt bearbeiten</h1>
     <p>Kapitel bearbeiten, neue Unterkapitel einfügen, Bilder hochladen und Antwortfelder ergänzen. Änderungen werden als <strong>Pull Request</strong> eingereicht und erst nach Prüfung und Merge auf GitHub Pages veröffentlicht.</p>
-    <p>Die Anmeldung läuft über eine separat eingerichtete GitHub App. Auf der öffentlichen GitHub-Pages-Adresse steht dieser Editor nur als Vorschau bereit. Für Schreibzugriff muss er über den <strong>Admin-Worker</strong> geöffnet werden. <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/docs/ADMIN-EDITOR.md">Einrichtungsanleitung</a></p>
+    <p>Die Anmeldung läuft über eine separat eingerichtete GitHub App. Auf der öffentlichen GitHub-Pages-Adresse steht dieser Editor nur als Vorschau bereit. Für Schreibzugriff wird auf den <a href="https://kst-ki-admin.kevin-bohn.workers.dev/"><strong>Admin-Worker</strong></a> weitergeleitet. <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/docs/ADMIN-EDITOR.md">Einrichtungsanleitung</a></p>
   </section>
   <main class="workspace" id="workspace" hidden>
     <aside class="sidebar" aria-label="Kurskapitel">
@@ -40,9 +40,26 @@
         <button type="button" id="addHeading">+ Überschrift</button>
         <button type="button" id="addAnswer">+ Antwortfeld</button>
         <button type="button" id="addImage">+ Bild hochladen</button>
+        <label class="block-picker-label" for="blockType">Baustein</label>
+        <select id="blockType" aria-label="Inhaltsbaustein auswählen">
+          <option value="task">Aufgabe</option>
+          <option value="info">Infobox / Merksatz</option>
+          <option value="warning">Hinweis / Warnung</option>
+          <option value="card">Karte</option>
+          <option value="two">Zwei Spalten</option>
+          <option value="three">Drei Spalten</option>
+          <option value="steps">Arbeitsschritte</option>
+          <option value="flow">Prozess / Ablauf</option>
+          <option value="timeline">Zeitleiste / Meilensteine</option>
+          <option value="figure">Abbildung mit Bildlegende</option>
+          <option value="table">Tabelle</option>
+          <option value="quote">Zitat</option>
+          <option value="code">Codebeispiel</option>
+        </select>
+        <button id="addBlock" type="button">+ Baustein einfügen</button>
         <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden>
       </div>
-      <p class="helper" id="editorHelper">Markdown und bestehendes HTML können editiert werden. Bei älteren Kapiteln sind HTML-Blöcke teilweise nötig; IDs und <code>data-answer</code> nicht unbeabsichtigt ändern.</p>
+      <p class="helper" id="editorHelper">Markdown und bestehendes HTML können editiert werden. Die Bausteine verwenden die Klassen der veröffentlichten Kursseite. Antwort- und Notebook-IDs beim Bearbeiten nicht verändern.</p>
       <section id="planEditor" class="plan-editor" hidden>
         <h2>Unterrichtsplan nach AVIVA</h2>
         <p class="helper">Lernziele, Leitfrage, Phasen, Minuten und Arbeitsschritte bearbeiten. Die Gesamtzeit muss 90 Minuten betragen. Nummerierung und bestehende Kursverknüpfungen bleiben unverändert.</p>
@@ -59,15 +76,15 @@
         <button id="previewButton" type="button" class="button light">Vorschau aktualisieren</button>
         <button id="stage" type="button" class="button primary">Änderung vormerken</button>
       </div>
-      <h2 class="preview-title" id="previewHeading">Vorschau <span>ohne ausführbaren JavaScript-Code</span></h2>
-      <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer"></iframe>
+      <div class="preview-heading"><h2 class="preview-title" id="previewHeading">Kursvorschau <span>wie auf der Kurswebsite · ohne ausführbaren JavaScript-Code</span></h2><button id="previewFullscreen" class="button light" type="button">⛶ Vollbild-Vorschau</button></div>
+      <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer" allowfullscreen></iframe>
       <section class="publish">
         <h2>Änderungen einreichen</h2>
         <p>Alle vorgemerkten Änderungen werden zusammen in einem eigenen GitHub-Branch gespeichert. Ein Pull Request startet automatisch die bestehenden Tests.</p>
         <ul id="staged" class="staged-list"><li>Noch keine Änderungen vorgemerkt.</li></ul>
         <label for="prTitle">Titel des Pull Requests</label>
         <input id="prTitle" type="text" maxlength="100" value="Unterrichtsinhalte aktualisieren">
-        <button id="publish" type="button" class="button primary">Pull Request erstellen</button>
+        <div class="publish-actions"><button id="checkPermissions" type="button" class="button light">GitHub-App-Berechtigungen prüfen</button><button id="publish" type="button" class="button primary">Pull Request erstellen</button></div>
         <div id="published" role="status"></div>
       </section>
     </section>

@@ -97,7 +97,7 @@ def remove_calendar_dates(text):
     text = short_date.sub(lambda match: f'{short_labels[match.group(1)]}. Doppellektion' if match.group(1) in short_labels else match.group(0), text)
     text = re.sub(r'<span class="section-label">0?(\d{1,2}) · \d{1,2}\. Doppellektion · Doppelstunde</span>', lambda match: f'<span class="section-label">Doppellektion {int(match.group(1))}</span>', text)
     text = text.replace('Vor Unterrichtsbeginn am 8. Doppellektion', 'Vor Beginn der Doppellektion 8')
-    text = text.replace('Alle Fachgespräche finden am 8. Doppellektion statt', 'Alle Fachgespräche finden in Doppellektion 8 statt')
+    text = text.replace('Alle Fachgespräche finden am 8. Doppellektion statt', 'Alle Einzelgespräche finden in Doppellektion 8 statt')
     text = re.sub(r' · Schuljahr \d{4}/\d{2}', '', text)
     text = text.replace('class="date"', 'class="lesson-reference"')
     return text
@@ -127,7 +127,7 @@ def update_sol_material(text):
     sol = (
         '<div class="callout" id="sol-rahmen"><h3>Ihr Projekt: Arbeit planen, durchführen und überprüfen</h3>'
         '<p>In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. '
-        'Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen Fachgespräch und Fremdauswertung.</p>'
+        'Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen individuelle Einzelgespräche und die Fremdauswertung.</p>'
         '<p><strong>Verbindlich:</strong> fünf Datengruppen, fairer A/B-Vergleich, fünf Reflexionen, '
         'Auswahl vor Testeinsicht und danach keine Optimierung. Abgabe vor Beginn der Doppellektion 8.</p>'
         '<p><strong>Sie entscheiden:</strong> Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. '
@@ -148,10 +148,11 @@ def update_sol_material(text):
         '<td>Datencheck → Vergleich → begründete Auswahl → Test → Fazit; Etappen frei auf die Zeit verteilen</td></tr>'
         '<tr><td>Vor Beginn der Doppellektion 8</td><td>ZIP über den Abgabekanal einreichen</td>'
         '<td>Vollständiges Journal, Versuch mit Ausgaben, Daten und Protokoll</td></tr>'
-        '<tr><td>8. Doppellektion</td><td>Fachgespräche; parallel selbstständige Fremdauswertung</td>'
+        '<tr><td>8. Doppellektion</td><td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>'
         '<td>Ein Reproduktionslauf, Fremdtest und kurze Rückmeldung; unbenotet, eigene Abgabe unverändert</td></tr>'
-        '</tbody></table></div><p class="small muted">Alle Fachgespräche finden in Doppellektion 8 statt. '
-        'Reihenfolge und gleiche Dauer vorab bekannt; keine weiteren Gesprächstermine.</p></div></details>'
+        '</tbody></table></div><p class="small muted">20 Einzelgespräche bei einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Wechsel/Notizen ab Minute 0. '
+        'Die letzten 10 Minuten schliessen unmittelbar an die 90-minütige Doppellektion an. '
+        'Gesprächsreihenfolge vorab bekannt, die übrigen arbeiten selbstständig; keine Zeitreserve oder weiteren Termine.</p></div></details>'
     )
     text, count = re.subn(r'<details><summary>Termine ansehen</summary>.*?</details>', schedule, text, count=1, flags=re.S)
     assert count == 1, 'Expected project schedule'

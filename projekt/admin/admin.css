@@ -33,7 +33,7 @@ select,input[type=text]{width:100%;padding:9px 10px;border:1px solid #b8c6c1;bor
 .editor textarea{width:100%;min-height:370px;resize:vertical;border:1px solid #b8c6c1;border-radius:8px;padding:14px;font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2}
 .editor-actions{justify-content:flex-end;margin:12px 0 25px}
 .preview-title{font-size:19px;margin:20px 0 12px}.preview-title span{color:var(--muted);font-size:12px;font-weight:400}
-iframe#preview{width:100%;height:370px;border:1px solid var(--line);border-radius:8px;background:white}
+iframe#preview{width:100%;height:660px;border:1px solid var(--line);border-radius:8px;background:white}
 .publish{margin-top:28px;border-top:1px solid var(--line);padding-top:16px}
 .publish h2{font-size:20px}.publish p{color:var(--muted);font-size:14px}
 .staged-list{padding-left:22px;font-size:13px}.staged-list li{padding:3px 0;overflow-wrap:anywhere}
@@ -60,3 +60,11 @@ footer{padding:20px 30px;text-align:center;color:var(--muted);font-size:12px}
 #planTotal{font-weight:750;color:var(--accent)}#planTotal.invalid{color:#a52c31}
 @media(max-width:850px){.plan-overview,.plan-phase-meta,.plan-step-grid{grid-template-columns:1fr}}
 .plan-step-total{font-size:13px;font-weight:650;color:var(--accent);margin:8px 0 12px}.plan-step-total.invalid{color:#a52c31}
+
+.preview-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.preview-heading .preview-title{margin-bottom:12px}
+iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
+
+.toolbar .block-picker-label{display:inline-flex;align-items:center;font-size:13px;font-weight:650;color:var(--muted);margin-left:6px}
+.toolbar select{font-size:13px;max-width:225px;padding:8px 10px}
+.toolbar #addBlock{background:var(--soft);border-color:#a4bdb2;font-weight:650}

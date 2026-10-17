@@ -17,11 +17,6 @@ DOWNLOADS = output(ROOT) / "materialien/downloads"
 
 # Reuse the maintained source files rather than maintaining separate copies.
 FILES = {
-    "perzeptron_und_neuronale_netze.ipynb": "content/perzeptron_und_neuronale_netze.ipynb",
-    "mehrschichtige_netze.ipynb": "content/mehrschichtige_netze.ipynb",
-    "daten_training.ipynb": "content/daten_training.ipynb",
-    "ki_tandemprojekt.ipynb": "content/ki_projekt/ki_tandemprojekt.ipynb",
-    "ki_lernlabor.ipynb": "content/ki_projekt/ki_lernlabor.ipynb",
     "ki_fotodaten.md": "content/ki_projekt/ki_fotodaten.md",
     "ki_projektauftrag.md": "content/ki_projekt/ki_projektauftrag.md",
     "KI_Bewertungsraster.md": "worksheets/md/KI_Bewertungsraster.md",
