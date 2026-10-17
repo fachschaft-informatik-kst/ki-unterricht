@@ -35,7 +35,9 @@ const server=http.createServer((req,res)=>{
     page.on("pageerror",error=>{throw error;});
     await page.route("**/api/session",route=>route.fulfill({json:{authenticated:true,login:"integration-test"}}));
     await page.route("**/api/chapters",route=>route.fulfill({json:{
-      chapters:files.map(path=>({path,sha:"a".repeat(40)}))
+      chapters:[...files.map(path=>({path,sha:"a".repeat(40)})),
+        {path:"kursseiten/einstieg/planung.json",sha:"a".repeat(40)},
+        {path:"kursseiten/einstieg/materialien.md",sha:"a".repeat(40)}]
     }}));
     // Match query strings containing slashes too (glob * does not cross /).
     await page.route(/\/api\/file\?/,route=>{
@@ -60,6 +62,8 @@ const server=http.createServer((req,res)=>{
 
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
     await page.locator("#section").selectOption("einstieg");
+    assert.equal(await page.locator("#chapters button").count(),3,
+      "Only numbered chapter Markdown files belong in chapter navigation");
 
     // Materials are Markdown documents with tables; they must have a usable
     // preview and update without the manual refresh button.
