@@ -1,8 +1,8 @@
 # Bewertungsraster KI-Tandemprojekt
 
-10 Kompetenzen, jeweils 0–3 Punkte, maximal 30 Punkte. K1–K6: Abgabe (18 Punkte); K7–K10: gemeinsames Fachgespräch (12 Punkte). Keine zusätzliche Gewichtung. Es gilt die höchste vollständig erfüllte Stufe.
+10 Kompetenzen, jeweils 0–3 Punkte, maximal 30 Punkte. K1–K6: Abgabe (18 Punkte); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte). Keine zusätzliche Gewichtung. Es gilt die höchste vollständig erfüllte Stufe.
 
-Note = 1 + 5 × (Punkte / 30), auf die nächste Viertelnote gerundet. 18 → 4,0; 24 → 5,0; 30 → 6,0. Eine gemeinsame Tandemnote; beide müssen das gesamte Projekt erklären können.
+Note = 1 + 5 × (Punkte / 30), auf die nächste Viertelnote gerundet. 18 → 4,0; 24 → 5,0; 30 → 6,0. K1–K6 (maximal 18 Punkte) gelten gemeinsam für beide Tandemmitglieder. K7–K10 (maximal 12 Punkte) werden im vierminütigen Einzelgespräch für jede Person separat erhoben. Damit hat jede Person eine individuelle Gesamtnote.
 
 | Kompetenz / Nachweis | 0 Punkte | 1 Punkt | 2 Punkte | 3 Punkte |
 |---|---|---|---|---|
@@ -15,4 +15,6 @@ Note = 1 + 5 × (Punkte / 30), auf die nächste Viertelnote gerundet. 18 → 4,0
 | K7 Modell erklären (Gespräch) | Zentrale Modellschritte nicht erklärbar. | Einzelne Begriffe richtig, Ablauf noch lückenhaft. | Bildmatrix, feste Merkmale und selbst trainiertes Netz richtig erklärt. | Zusätzlich Zusammenhang von Gewichten, Training und Vorhersage am Projekt erklärt. |
 | K8 Entscheidungen begründen (Gespräch) | Daten- und Versuchsentscheidungen nicht erklärbar. | Entscheidungen genannt, Begründungen bleiben unklar. | Datenaufteilung, fairer Vergleich und Auswahl verständlich begründet. | Zusätzlich Alternativen verglichen und deren Folgen richtig abgeschätzt. |
 | K9 Ergebnisse kritisch einordnen (Gespräch) | Zahlen oder Zuverlässigkeit falsch eingeordnet. | Ergebnisse beschrieben; Reichweite bleibt unklar. | Ergebnisse, konkrete Beispiele und Grenzen in eigenen Worten erklärt. | Zusätzlich mögliche andere Erklärungen und nötige Belege diskutiert. |
-| K10 Verständnis & Transfer im Tandem (Gespräch) | Gemeinsames Projektverständnis nicht erkennbar. | Nur einzelne Arbeitsteile erklärbar; viel Unterstützung nötig. | Beide erklären das ganze Projekt und schlagen einen passenden nächsten Versuch vor. | Beide übertragen das Vorgehen selbstständig auf eine neue Anwendung und begründen Anpassungen. |
+| K10 Individuelles Verständnis & Transfer (Gespräch) | Eigenes Projektverständnis nicht erkennbar. | Nur einzelne Arbeitsteile erklärbar; viel Unterstützung nötig. | Erklärt das gemeinsame Projekt selbstständig und schlägt einen passenden nächsten Versuch vor. | Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet notwendige Anpassungen. |
+
+**Organisation:** Je Person 4 Minuten Fachgespräch und 1 Minute Notizen/Wechsel, alle in Doppellektion 8. Bei einer prüfenden Lehrperson höchstens 14 Einzelgespräche mit mindestens 8 Minuten Reserve; für grössere Klassen eine zweite prüfende Lehrperson zur gleichen Zeit organisieren. Jeweils vier kurze Nachweise für K7–K10, ohne vorbereitete Präsentation. Die bereits abgegebene gemeinsame Projektarbeit bleibt unverändert.
