@@ -150,8 +150,9 @@ def update_sol_material(text):
         '<td>Vollständiges Journal, Versuch mit Ausgaben, Daten und Protokoll</td></tr>'
         '<tr><td>8. Doppellektion</td><td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>'
         '<td>Ein Reproduktionslauf, Fremdtest und kurze Rückmeldung; unbenotet, eigene Abgabe unverändert</td></tr>'
-        '</tbody></table></div><p class="small muted">Alle Einzelgespräche finden in Doppellektion 8 statt (4 Minuten je Person). '
-        'Reihenfolge und gleiche Dauer vorab bekannt; keine weiteren Gesprächstermine.</p></div></details>'
+        '</tbody></table></div><p class="small muted">20 Einzelgespräche bei einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Wechsel/Notizen ab Minute 0. '
+        'Die letzten 10 Minuten schliessen unmittelbar an die 90-minütige Doppellektion an. '
+        'Gesprächsreihenfolge vorab bekannt, die übrigen arbeiten selbstständig; keine Zeitreserve oder weiteren Termine.</p></div></details>'
     )
     text, count = re.subn(r'<details><summary>Termine ansehen</summary>.*?</details>', schedule, text, count=1, flags=re.S)
     assert count == 1, 'Expected project schedule'
