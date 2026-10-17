@@ -100,7 +100,7 @@ async function stageChapterOrder(section,source,target){
   else state.staged.delete(source);
   state.staged.set(path,{path,expectedSha:null,content});
   state.chapters=state.chapters.map(x=>x.path===source?{path,sha:null}:x);
-  if(state.current?.path===source)state.current.path=path;
+  if(state.current?.path===source)useFile(path,null,content);
   chapterList();stagingList();
   status("Unterkapitel verschoben und für den Pull Request vorgemerkt.");
 }
@@ -154,7 +154,7 @@ function commitLessonOrder(groups){
     const entry=state.plans.get(group.path);
     const plan=JSON.parse(state.staged.get(group.path)?.content||entry.original);
     plan.lessons=group.lessons;
-    const content=JSON.stringify(plan,null,2)+"\\n";
+    const content=JSON.stringify(plan,null,2)+"\n";
     if(content===entry.original&&!state.staged.has(group.path))continue;
     state.staged.set(group.path,{path:group.path,expectedSha:entry.sha,
       original:entry.original,content});
@@ -171,6 +171,12 @@ function renderLessonOrder(){
   const list=$("lessonOrder");list.replaceChildren();
   if(!state.plans.size)return;
   const groups=orderedSections();
+  const selector=$("section"),selected=selector.value;
+  const options=[...selector.options];
+  const position=new Map(groups.map((group,i)=>[group.section.id,i]));
+  options.sort((a,b)=>(position.get(a.value)??-1)-(position.get(b.value)??-1));
+  selector.replaceChildren(...options);
+  selector.value=selected;
   let visible=0;
   for(const group of groups){
     const box=document.createElement("div");box.className="lesson-sort-group";
