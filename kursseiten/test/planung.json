@@ -1,0 +1,112 @@
+{
+  "lessons": [
+    {
+      "id": "test",
+      "title": "test",
+      "view": "test",
+      "goal": "Lernziel für diese Doppellektion formulieren.",
+      "question": "Leitfrage für diese Doppellektion formulieren.",
+      "motivation": "Begründen, weshalb dieses Thema relevant ist.",
+      "product": "Ein begründetes Lernergebnis.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "wer": "Lehrperson",
+              "min": 4,
+              "text": "Arbeitsauftrag und Ablauf festlegen.",
+              "art": "Auftrag"
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Ergebnis festhalten.",
+              "art": "Ergebnis"
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren",
+          "minutes": 10,
+          "schritte": [
+            {
+              "wer": "Lehrperson",
+              "min": 9,
+              "text": "Arbeitsauftrag und Ablauf festlegen.",
+              "art": "Auftrag"
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Ergebnis festhalten.",
+              "art": "Ergebnis"
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren",
+          "minutes": 15,
+          "schritte": [
+            {
+              "wer": "Lehrperson",
+              "min": 14,
+              "text": "Arbeitsauftrag und Ablauf festlegen.",
+              "art": "Auftrag"
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Ergebnis festhalten.",
+              "art": "Ergebnis"
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten",
+          "minutes": 50,
+          "schritte": [
+            {
+              "wer": "Lehrperson",
+              "min": 49,
+              "text": "Arbeitsauftrag und Ablauf festlegen.",
+              "art": "Auftrag"
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Ergebnis festhalten.",
+              "art": "Ergebnis"
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten",
+          "minutes": 10,
+          "schritte": [
+            {
+              "wer": "Lehrperson",
+              "min": 9,
+              "text": "Arbeitsauftrag und Ablauf festlegen.",
+              "art": "Auftrag"
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Ergebnis festhalten.",
+              "art": "Ergebnis"
+            }
+          ]
+        }
+      ],
+      "order": 110,
+      "zeit": "Tws"
+    }
+  ]
+}

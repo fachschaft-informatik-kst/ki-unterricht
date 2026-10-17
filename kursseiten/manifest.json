@@ -132,6 +132,16 @@
       "id": "sicherung",
       "class": "section project-transfer",
       "navParent": "projekt"
+    },
+    {
+      "id": "test",
+      "class": "section",
+      "teaching": true,
+      "navigation": {
+        "order": 9,
+        "label": "",
+        "title": "test"
+      }
     }
   ]
 }
