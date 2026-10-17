@@ -104,7 +104,70 @@ for name in ITEMS:
 oral=next(l for l in lessons if l['id']=='08')
 assert sum(p['minutes'] for p in oral['phases'][1:-1])==80
 planning=(root/'worksheets/md/KI_Planung.md').read_text()
-rows=re.findall(r'^\| (10|12|14) \| ([\d,]+) Min\. \| ([\d,]+) Min\. \| (\d+) Min\. \| (\d+) Min\. \|$',planning,re.M)
+rows=re.findall(r'^\| (10|12|14) \| ([\d,]+) Min\. \| ([\d,]+) Min\. \| (\d+) Min\. \| (\d+) Min\. \|
+assert len(rows)==3
+for n,talk,switch,total,reserve in rows:
+    assert int(n)*(float(talk.replace(',','.'))+float(switch.replace(',','.')))==int(total)
+    assert int(total)+int(reserve)==80
+    assert int(reserve)>=8, 'Conversation window needs a real reserve'
+    assert float(talk.replace(',','.'))==4, 'Every individual oral must last exactly four minutes'
+assert 'Alle Einzelgespräche finden in Doppellektion 8 statt' in soup.get_text()
+assert 'Ein gemeinsames Journal. Zwei getrennte Einzelgespräche.' in soup.get_text()
+assert 'vierminütige' in planning or 'Vier Minuten Einzelgespräch' in planning
+assert 'zweite prüfende Lehrperson' in planning
+assert 'individuelle Gesprächspunkte' in planning
+assert 'K10 · Individuelles Verständnis' in soup.get_text()
+assert len(soup.select('#einstieg-4 .typen tbody tr')) == 2
+assert 'Schwache und starke KI' in soup.select_one('#einstieg-4 summary').get_text()
+assert 'Theory of Mind' not in soup.select_one('#einstieg-4').get_text()
+assert 'vier KI-Typen' not in plans.get_text()
+assert 'Typ 1–4' not in planning
+assert len(soup.select('#einstieg-4 textarea[data-answer="ki_ordnung"]')) == 1
+# Keep historical answer IDs present to avoid dropping previously saved entries.
+assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_{n}"]')) == 1 for n in range(1,5))
+assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_bsp_{n}"]')) == 1 for n in range(1,5))
+
+repro=soup.select_one('details#reproduktion')
+assert repro and repro.select_one('textarea[data-journal="reproduktion"][data-optional]')
+assert 'privaten Fenster' in repro.get_text() and 'daten_sha256' in repro.get_text() and 'wiederholen=True' in repro.get_text()
+lesson8=plans.select_one('[data-lesson="08"]')
+assert sum(int(x.get_text()) for x in lesson8.select('.min') if x.get_text().strip().isdigit())>=70
+assert 'Reproduktionsprüfung' in lesson8.get_text() and 'Reproduktionsprüfung' in planning
+assert 'Fremdtest und Rückmeldung' in lesson8.get_text()
+assert '15 Minuten Puffer' in planning
+sol=soup.select_one('#sol-rahmen')
+assert sol and 'keine festen Lektionstermine' in sol.get_text()
+assert 'unbenotet' in repro.get_text()
+assert 'Freiwillige Vertiefung, kein Pflichtteil' in repro.get_text()
+assert 'Etappenplan' in soup.select_one('textarea[data-journal="contribution"]').parent.get_text()
+assert 'Ihr Arbeitsweg:' not in soup.get_text()
+assert 'Ihr Arbeitsweg:' not in plans.get_text()
+assert 'Garry Kasparov' in soup.get_text()
+for lesson in lessons:
+    if lesson['id'] not in ['05','06','07','08']: continue
+    work=lesson['phases'][3]
+    reserve=[s for s in work['schritte'] if 'Puffer' in s['text']]
+    assert sum(s['min'] for s in reserve)>=10, lesson['id']
+for lid in ['06','07']:
+    lesson=next(l for l in lessons if l['id']==lid)
+    assert lesson['phases'][3]['minutes']==70
+    assert all(s['wer']!='Lehrperson' for p in lesson['phases'] for s in p['schritte'])
+project_nb=nbformat.read(root/'content/ki_projekt/ki_tandemprojekt.ipynb',4)
+intro=project_nb.cells[0].source
+assert 'keine festen Lektionstermine' in intro and 'Etappenplan' in intro
+assert not any(f'| Doppellektion {n} |' in intro for n in [5,6,7])
+assert not re.search(r'\b\d{1,2}\.\d{1,2}\.20\d{2}\b',soup.get_text())
+for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektauftrag.md').read_text()]:
+    assert not any(old in document for old in ['über mehrere Termine','auf weitere Termine','zusätzliche Gesprächszeiten'])
+for sid,minimum in {'einstieg':5,'lernarten':4,'perzeptron':4,'netze':4,'sprache':7,'gesellschaft':5,'projekt':4}.items():
+    chapters=soup.select(f'#{sid} details.kapitel')
+    assert len(chapters)>=minimum and all(c.select_one('.kapitel-nr') and c.select_one('h2.kapitel-titel') for c in chapters) and all(c.get('data-kurz') for c in chapters), sid
+assert len(soup.select('[data-score]'))==10
+assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
+for name in ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
+    assert soup.select_one('[data-lab="'+name+'"]'), name
+print(f'PASS {len(lessons)} numbered 90-minute plans, date-free lessons, anchors, graphics, five descriptive notebooks, portable attachments, manual project gates, rubric and final-lesson exam timing')
+,planning,re.M)
 assert len(rows)==3
 for n,talk,switch,total,reserve in rows:
     assert int(n)*(float(talk.replace(',','.'))+float(switch.replace(',','.')))==int(total)
