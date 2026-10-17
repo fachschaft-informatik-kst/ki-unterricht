@@ -1,7 +1,6 @@
 """Preserve teaching explanations and portable image attachments in embedded notebooks."""
 from pathlib import Path
 import re
-import nbformat
 import json
 import shutil
 
@@ -12,6 +11,8 @@ if len({Path(p).name for p in ITEMS}) != len(ITEMS) or sum(bool(e.get("project")
     raise ValueError("Experiments need unique notebook names and exactly one project")
 
 def build():
+    import nbformat
+
     staging = ROOT / '_build/content'
     if staging.exists():
         shutil.rmtree(staging)
