@@ -76,7 +76,7 @@ function chapterContent(item){
   if(state.current?.path===item.path)return $("source").value;
   return state.staged.get(item.path)?.content;
 }
-function stageChapterOrder(section,source,target){
+async function stageChapterOrder(section,source,target){
   if(source===target)return;
   if(!confirmUnsaved())return;
   const items=chaptersFor(section);
@@ -84,32 +84,25 @@ function stageChapterOrder(section,source,target){
   if(from<0||to<0)throw Error("Kapitel nicht gefunden.");
   const ordered=items.slice(),[moving]=ordered.splice(from,1);
   ordered.splice(to,0,moving);
-  // Renumber into a clean 010, 020, ... sequence only where necessary.
-  // Never change the YAML/HTML IDs inside a chapter.
-  const updates=ordered.map((item,i)=>({item,path:"kursseiten/"+section+"/"+
-    String((i+1)*10).padStart(3,"0")+item.path.split("/").pop().slice(3)}))
-    .filter(x=>x.path!==x.item.path);
-  const required=updates.reduce((n,x)=>n+(x.item.sha?2:1),0);
-  if(state.staged.size+required>12)throw Error("Zu viele Dateiverschiebungen für einen PR (maximal 12 Dateien). Zuerst andere Änderungen einreichen.");
-  const originals=new Map();
-  for(const {item} of updates){
-    const sourceText=chapterContent(item);
-    if(item.sha&&!sourceText)throw Error("Bitte Kapitel zuerst öffnen und erneut versuchen: "+item.path);
-    originals.set(item.path,sourceText);
-  }
-  // Stage deletion and recreation atomically; retain content and stable IDs.
-  for(const {item} of updates){
-    if(item.sha)state.staged.set(item.path,{path:item.path,expectedSha:item.sha,delete:true});
-    else state.staged.delete(item.path);
-  }
-  for(const {item,path} of updates){
-    state.staged.set(path,{path,expectedSha:null,content:originals.get(item.path)});
-  }
-  const rename=new Map(updates.map(x=>[x.item.path,x.path]));
-  state.chapters=state.chapters.map(c=>rename.has(c.path)?{path:rename.get(c.path),sha:null}:c);
-  if(rename.has(state.current?.path))state.current.path=rename.get(state.current.path);
+  const pos=ordered.findIndex(x=>x.path===source);
+  const prev=pos>0?Number(ordered[pos-1].path.split("/").pop().slice(0,3)):0;
+  const next=pos<ordered.length-1?Number(ordered[pos+1].path.split("/").pop().slice(0,3)):999;
+  const prefix=Math.floor((prev+next)/2);
+  if(prefix<=prev||prefix>=next)
+    throw Error("Zwischen diesen Kapiteln ist kein freier Sortierplatz. Bitte ein benachbartes Kapitel verschieben.");
+  const path="kursseiten/"+section+"/"+String(prefix).padStart(3,"0")+source.split("/").pop().slice(3);
+  if(state.chapters.some(x=>x.path===path)||state.staged.has(path))
+    throw Error("Der Zielplatz ist belegt.");
+  if(state.staged.size+(moving.sha?2:1)>12)
+    throw Error("Maximal zwölf Dateien pro Pull Request. Bitte bestehende Änderungen zuerst einreichen.");
+  const content=chapterContent(moving)??(await api("/api/file?path="+encodeURIComponent(source))).content;
+  if(moving.sha)state.staged.set(source,{path:source,expectedSha:moving.sha,delete:true});
+  else state.staged.delete(source);
+  state.staged.set(path,{path,expectedSha:null,content});
+  state.chapters=state.chapters.map(x=>x.path===source?{path,sha:null}:x);
+  if(state.current?.path===source)state.current.path=path;
   chapterList();stagingList();
-  status("Unterkapitel neu angeordnet und für den Pull Request vorgemerkt.");
+  status("Unterkapitel verschoben und für den Pull Request vorgemerkt.");
 }
 function chapterList(){
   const nav=$("chapters");nav.replaceChildren();
@@ -127,7 +120,7 @@ function chapterList(){
     row.addEventListener("dragleave",()=>row.classList.remove("drag-over"));
     row.addEventListener("drop",e=>{e.preventDefault();row.classList.remove("drag-over");
       const source=e.dataTransfer.getData("text/plain");
-      if(source.startsWith("kursseiten/"+section+"/"))stageChapterOrder(section,source,item.path);
+      if(source.startsWith("kursseiten/"+section+"/"))stageChapterOrder(section,source,item.path).catch(error);
     });
     nav.append(row);
   }
