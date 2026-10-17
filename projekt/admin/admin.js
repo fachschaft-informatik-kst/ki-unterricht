@@ -46,7 +46,7 @@ function stagingList(){
 function chapterList(){
   const nav=$("chapters");nav.replaceChildren();
   const prefix="kursseiten/"+$("section").value+"/";
-  for(const item of state.chapters.filter(c=>c.path.startsWith(prefix))){
+  for(const item of state.chapters.filter(c=>c.path.startsWith(prefix)&&/\/[0-9]{3}-[^/]+\.md$/.test(c.path))){
     const button=document.createElement("button");button.type="button";
     button.textContent=filename(item.path);button.setAttribute("aria-current",String(state.current?.path===item.path));
     button.addEventListener("click",()=>load(item.path));nav.append(button);
