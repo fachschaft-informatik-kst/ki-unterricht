@@ -175,7 +175,7 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
               </tr>
               <tr>
                 <td>8. Doppellektion</td>
-                <td>Fachgespräche; parallel selbstständige Fremdauswertung</td>
+                <td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>
                 <td>Ein Reproduktionslauf, Fremdtest und kurze Rückmeldung; unbenotet, eigene Abgabe unverändert</td>
               </tr>
             </tbody>
