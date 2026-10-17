@@ -1,0 +1,12 @@
+{
+  "duration": 90,
+  "phases": ["Ankommen", "Vorwissen aktivieren", "Informieren", "Verarbeiten", "Auswerten"],
+  "defaultMinutes": [5, 10, 15, 50, 10],
+  "required": ["title", "goal", "question", "product"],
+  "defaults": {
+    "goal": "Lernziel für diese Doppellektion formulieren.",
+    "question": "Leitfrage für diese Doppellektion formulieren.",
+    "motivation": "Begründen, weshalb dieses Thema relevant ist.",
+    "product": "Ein begründetes Lernergebnis."
+  }
+}

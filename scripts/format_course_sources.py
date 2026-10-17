@@ -114,8 +114,9 @@ def main():
     args=parser.parse_args()
     changed=[]
     for path in sorted(COURSE.rglob("*.md")):
-        if path.name=="README.md": continue
+        if not re.fullmatch(r"[0-9]{3}-.+\.md", path.name): continue
         old=path.read_text(encoding="utf-8")
+        if old.startswith("---\n"): continue
         new=format_fragment(old)
         if new!=old:
             changed.append(str(path.relative_to(ROOT)))

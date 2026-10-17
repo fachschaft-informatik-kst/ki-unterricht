@@ -1,5 +1,6 @@
 /* Structured AVIVA editor. Preserve existing IDs, metadata and all unedited keys. */
-const PHASES=["Ankommen","Vorwissen aktivieren","Informieren","Verarbeiten","Auswerten"];
+import {rules,validatePlan} from "./course-model.js";
+const PHASES=rules.phases;
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 export function createPlanner(panel,onChange){
   const picker=panel.querySelector("#planLesson"),fields=panel.querySelector("#planFields"),
@@ -7,8 +8,8 @@ export function createPlanner(panel,onChange){
   let draft=null,selected=0;
   function totalMinutes(){
     const sum=draft.lessons[selected].phases.reduce((n,p)=>n+Number(p.minutes||0),0);
-    total.textContent="Geplant: "+sum+" von 90 Minuten";
-    total.classList.toggle("invalid",sum!==90);
+    total.textContent="Geplant: "+sum+" von "+rules.duration+" Minuten";
+    total.classList.toggle("invalid",sum!==rules.duration);
     phases.querySelectorAll(".plan-step-total").forEach((hint,i)=>{
       const p=draft.lessons[selected].phases[i];
       const used=p.schritte.reduce((n,s)=>n+Number(s.min||0),0);
@@ -20,7 +21,7 @@ export function createPlanner(panel,onChange){
   function input(parent,title,value,options,change){
     const label=el("label",title,"plan-field"),item=el(options.multiline?"textarea":"input");
     if(!options.multiline)item.type=options.number?"number":"text";
-    if(options.number){item.min=String(options.min??0);item.step="1";}
+    if(options.number){item.min=String(options.min??0);item.step=options.step||"1";}
     if(options.multiline)item.rows=options.rows||2;
     item.value=value??"";
     item.addEventListener("input",()=>{change(options.number?(item.value===""?0:Number(item.value)):item.value);commit();});
@@ -28,7 +29,7 @@ export function createPlanner(panel,onChange){
   }
   function render(){
     const lesson=draft.lessons[selected];picker.replaceChildren();
-    draft.lessons.forEach((l,i)=>{const o=el("option",Number(l.id)+" · "+l.title);o.value=String(i);picker.append(o);});
+    draft.lessons.forEach((l,i)=>{const o=el("option",l.title);o.value=String(i);picker.append(o);});
     picker.value=String(selected);fields.replaceChildren();phases.replaceChildren();
     const overview=el("div",undefined,"plan-overview");
     for(const [key,title,multiline] of [
@@ -37,6 +38,7 @@ export function createPlanner(panel,onChange){
       ["zeit","Zeitliche Hinweise (optional)",true]
     ])input(overview,title,lesson[key]||"",{multiline},v=>{lesson[key]=v;});
     fields.append(overview);
+    input(overview,"Reihenfolge (stabile ID bleibt unverändert)",lesson.order,{number:true,step:"any"},v=>{lesson.order=v;});
     lesson.phases.forEach((p,pi)=>{
       const card=el("fieldset",undefined,"plan-phase");
       card.append(el("legend",(pi+1)+" · "+PHASES[pi]));
@@ -79,24 +81,6 @@ export function createPlanner(panel,onChange){
       panel.hidden=false;render();
     },
     close(){panel.hidden=true;draft=null;},
-    validate(source){
-      const plan=JSON.parse(source);
-      if(!Array.isArray(plan.lessons)||plan.lessons.length<10)throw Error("Mindestens zehn Doppellektionen erwartet.");
-      plan.lessons.forEach((l,i)=>{
-        if(l.id!==String(i+1).padStart(2,"0")||!l.title?.trim()||!l.goal?.trim()||!l.question?.trim()||!l.product?.trim())
-          throw Error("Doppellektion "+(i+1)+": Titel, Lernziele, Leitfrage oder Ergebnis fehlt.");
-        if(!Array.isArray(l.phases)||l.phases.length!==5||
-          l.phases.some((p,j)=>p.phase!==PHASES[j]||!Number.isInteger(p.minutes)||p.minutes<1||
-            !p.titel?.trim()||!Array.isArray(p.schritte)||!p.schritte.length||
-            p.schritte.at(-1)?.art!=="Ergebnis"||
-            p.schritte.reduce((n,s)=>n+Number(s.min||0),0)!==p.minutes||
-            p.schritte.some(s=>!s.wer?.trim()||!s.text?.trim()||
-              (s.min!==undefined&&(!Number.isInteger(s.min)||s.min<0)))))
-          throw Error("Doppellektion "+(i+1)+": AVIVA-Phasen oder Arbeitsschritte unvollständig.");
-        if(l.phases.reduce((sum,p)=>sum+p.minutes,0)!==90)
-          throw Error("Doppellektion "+(i+1)+": Die AVIVA-Phasen müssen 90 Minuten ergeben.");
-      });
-      return true;
-    }
+    validate(source){return validatePlan(JSON.parse(source));}
   };
 }

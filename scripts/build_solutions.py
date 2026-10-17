@@ -1,9 +1,10 @@
 """Build a deliberately unlinked teacher answer page from editable Markdown."""
 from pathlib import Path
 from markdown_it import MarkdownIt
+from course_model import output
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "lehrperson/musterloesungen.md"
-OUTPUT = ROOT / "projekt/musterloesungen/index.html"
+OUTPUT = output(ROOT) / "musterloesungen/index.html"
 
 def render(source: str) -> str:
     body = MarkdownIt("commonmark", {"html": False}).enable("table").render(source)

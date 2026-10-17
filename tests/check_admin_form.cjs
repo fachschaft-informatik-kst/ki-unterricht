@@ -5,7 +5,6 @@ const fs=require("node:fs");
 const path=require("node:path");
 const {chromium}=require("playwright");
 const ROOT=path.resolve(__dirname,"..");
-const plan=fs.readFileSync(path.join(ROOT,"projekt/kurs.json"),"utf8");
 const files=[
   "kursseiten/einstieg/000-einstieg.md",
   "kursseiten/einstieg/010-einstieg-1.md"
@@ -13,14 +12,15 @@ const files=[
 const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
   const relative=location==="/projekt/admin/"?"projekt/admin/index.html":location.replace(/^\//,"");
-  const file=path.resolve(ROOT,relative);
-  if(!file.startsWith(ROOT+path.sep)||!file.startsWith(path.join(ROOT,"projekt/admin")+path.sep)){
+  const shared=["course-model.js","course-rules.json"].includes(path.basename(relative));
+  const file=path.resolve(ROOT,shared?"shared/"+path.basename(relative):relative);
+  if(!file.startsWith(ROOT+path.sep)||(!shared&&!file.startsWith(path.join(ROOT,"projekt/admin")+path.sep))){
     res.writeHead(404).end();return;
   }
   fs.readFile(file,(err,data)=>{
     if(err){res.writeHead(404).end();return;}
     const ext=path.extname(file);
-    res.writeHead(200,{"Content-Type":ext===".js"?"text/javascript":ext===".css"?"text/css":"text/html"});
+    res.writeHead(200,{"Content-Type":ext===".json"?"application/json":ext===".js"?"text/javascript":ext===".css"?"text/css":"text/html"});
     res.end(data);
   });
 });
@@ -37,7 +37,7 @@ const server=http.createServer((req,res)=>{
     // Match query strings containing slashes too (glob * does not cross /).
     await page.route(/\/api\/file\?/,route=>{
       const p=new URL(route.request().url()).searchParams.get("path");
-      const content=p==="projekt/kurs.json"?plan:fs.readFileSync(path.join(ROOT,p),"utf8");
+      const content=fs.readFileSync(path.join(ROOT,p),"utf8");
       return route.fulfill({json:{path:p,sha:"a".repeat(40),content}});
     });
     let submitted=null;
@@ -46,6 +46,7 @@ const server=http.createServer((req,res)=>{
       return route.fulfill({json:{url:"https://github.com/example/repo/pull/123",number:123}});
     });
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
+    await page.locator("#section").selectOption("einstieg");
     await page.locator("#editPlan").click();
     // UI operations fetch their files asynchronously; click() does not await handlers.
     await page.locator("#planEditor").waitFor({state:"visible"});
@@ -62,7 +63,7 @@ const server=http.createServer((req,res)=>{
     });
     await page.locator("#createLesson").click();
     try{
-      await page.waitForFunction(()=>document.querySelector("#section")?.value==="dl-11",null,{timeout:6500});
+      await page.waitForFunction(()=>document.querySelector("#section")?.value==="vertiefung-ki-im-alltag",null,{timeout:6500});
     }catch(err){
       const diagnostic=await page.evaluate(()=>({
         notice:document.querySelector("#notice")?.textContent,
@@ -72,8 +73,8 @@ const server=http.createServer((req,res)=>{
       }));
       throw Error("DL11 creation did not complete: "+JSON.stringify(diagnostic),{cause:err});
     }
-    assert.equal(await page.locator("#section").inputValue(),"dl-11");
-    assert.equal(await page.locator("#planLesson").inputValue(),"10");
+    assert.equal(await page.locator("#section").inputValue(),"vertiefung-ki-im-alltag");
+    assert.equal(await page.locator("#planLesson").inputValue(),"0");
     assert.equal(await page.locator("#planPhases fieldset").count(),5);
     const phase=page.locator("#planPhases fieldset").first();
     await phase.locator("button").last().click();
@@ -86,8 +87,8 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#planTotal").textContent(),/90 von 90/);
     await page.locator("#stage").click();
     await page.locator("#editMaterials").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.includes("lehrperson/ergaenzungen/dl-11.md"));
-    assert.match(await page.locator("#path").textContent(),/lehrperson\/ergaenzungen\/dl-11.md/);
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.includes("/vertiefung-ki-im-alltag/materialien.md"));
+    assert.match(await page.locator("#path").textContent(),/kursseiten\/vertiefung-ki-im-alltag\/materialien.md/);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n- Neues Experiment vorbereiten\n");
     await page.locator("#stage").click();
     await page.evaluate(()=>{
@@ -104,7 +105,7 @@ const server=http.createServer((req,res)=>{
     assert.match(await previewImage.getAttribute("src"),/^data:image\/png;base64,/);
 
     await page.locator("#chapters button").first().click();
-    assert.match(await page.locator("#path").textContent(),/kursseiten\/dl-11\//);
+    assert.match(await page.locator("#path").textContent(),/kursseiten\/vertiefung-ki-im-alltag\//);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\nEin eigenes Beispiel.\n");
     await page.locator("#stage").click();
     await page.locator("#publish").click();
@@ -112,19 +113,22 @@ const server=http.createServer((req,res)=>{
     assert.ok(submitted);
     const names=submitted.changes.map(c=>c.path).sort();
     assert.deepEqual(names.filter(n=>!n.startsWith("projekt/grafiken/uploads/")),[
-      "kursseiten/dl-11/010-einstieg-und-auftrag.md",
-      "lehrperson/ergaenzungen/dl-11.md",
-      "projekt/kurs.json"
+      "kursseiten/einstieg/planung.json",
+      "kursseiten/manifest.json",
+      "kursseiten/vertiefung-ki-im-alltag/010-einstieg-und-auftrag.md",
+      "kursseiten/vertiefung-ki-im-alltag/materialien.md",
+      "kursseiten/vertiefung-ki-im-alltag/planung.json"
     ]);
     assert.equal(names.filter(n=>/^projekt\/grafiken\/uploads\/test-[a-f0-9]{8}\.png$/.test(n)).length,1);
-    const updated=JSON.parse(submitted.changes.find(c=>c.path==="projekt/kurs.json").content);
-    assert.equal(updated.lessons.length,11);
-    assert.equal(updated.lessons[0].title,"Was ist KI? – Überarbeitet");
-    assert.equal(updated.lessons[10].view,"dl-11");
-    assert.equal(updated.lessons[10].phases.reduce((n,p)=>n+p.minutes,0),90);
-    assert.equal(updated.lessons[10].phases[0].schritte.length,3);
-    assert.equal(updated.lessons[10].phases[0].schritte.at(-1).art,"Ergebnis");
-    assert.equal(updated.lessons[10].phases[0].schritte.reduce((n,s)=>n+Number(s.min||0),0),6);
+    const initial=JSON.parse(submitted.changes.find(c=>c.path==="kursseiten/einstieg/planung.json").content);
+    assert.equal(initial.lessons[0].title,"Was ist KI? – Überarbeitet");
+    const updated=JSON.parse(submitted.changes.find(c=>c.path==="kursseiten/vertiefung-ki-im-alltag/planung.json").content);
+    assert.equal(updated.lessons.length,1);
+    assert.equal(updated.lessons[0].view,"vertiefung-ki-im-alltag");
+    assert.equal(updated.lessons[0].phases.reduce((n,p)=>n+p.minutes,0),90);
+    assert.equal(updated.lessons[0].phases[0].schritte.length,3);
+    assert.equal(updated.lessons[0].phases[0].schritte.at(-1).art,"Ergebnis");
+    assert.equal(updated.lessons[0].phases[0].schritte.reduce((n,s)=>n+Number(s.min||0),0),6);
     assert.match(await page.locator("#published").textContent(),/#123/);
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
   }finally{

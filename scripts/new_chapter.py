@@ -32,8 +32,9 @@ def create_chapter(
     slug: str | None = None, dry_run: bool = False,
 ) -> Path:
     manifest = json.loads((root / "kursseiten/manifest.json").read_text(encoding="utf-8"))
-    if section not in manifest["sections"]:
-        raise ValueError(f"Unbekannter Bereich: {section}. Verfügbar: {', '.join(manifest['sections'])}")
+    sections = [s["id"] for s in manifest["sections"] if s.get("teaching")]
+    if section not in sections:
+        raise ValueError(f"Unbekannter Bereich: {section}. Verfügbar: {', '.join(sections)}")
     folder = root / "kursseiten" / section
     if not folder.is_dir():
         raise ValueError(f"Bereichsordner fehlt: {folder}")

@@ -1,0 +1,10 @@
+## Doppellektion 02
+
+### Direkt öffnen
+
+- [Drei Lernarten und Memory-Auftrag](index.html#lernarten-4)
+- [NIM-Lernstrecke (inf-schule)](https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke)
+- [Freiwillig: K-Means visualisieren](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/)
+
+**Memory:** Eigene vorhandene Spiele verwenden. NIM anschliessend **gemeinsam am Beamer** erkunden; keine zusätzlichen Memory-Karten.
+

@@ -4,7 +4,7 @@ import subprocess
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
-GENERATED = ("projekt/index.html", "projekt/unterrichtsplan.html")
+GENERATED = ("_build/site/projekt/index.html", "_build/site/projekt/unterrichtsplan.html")
 for rel in GENERATED:
     path = ROOT / rel
     assert path.is_file(), f"Build missing: {rel}"

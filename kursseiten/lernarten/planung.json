@@ -1,0 +1,126 @@
+{
+  "lessons": [
+    {
+      "id": "02",
+      "view": "lernarten",
+      "title": "Wie lernt KI?",
+      "rueckblick": "In Doppellektion 1 haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.",
+      "goal": "Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.",
+      "question": "Leitfrage: Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
+      "motivation": "Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.",
+      "product": "Ein Vergleich wissensbasierter und lernender Systeme und je eine begründete Beobachtung zu den drei Lernarten.",
+      "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Was hilft beim Lernen?",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Vergleichen Sie dasselbe Motiv mit und ohne Klassenname. Welche zusätzliche Information hilft beim Lernen?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine Vermutung zum Nutzen eines Labels."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Woher kommt die Regel?",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Vergleichen Sie Schachprogramm und Spamfilter aus Doppellektion 1: Wer oder was erzeugt die Entscheidungsregel? Vervollständigen Sie «Ein System lernt aus Daten, wenn …»."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein erster Vergleich von festen Regeln und Lernen."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "EVA und drei Lernsignale",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 12,
+              "text": "Zeigt die EVA-Grafik mit Erfahrungsschatz. Vergleicht einen menschlich festgelegten Entscheidungsbaum mit einem lernenden Spamfilter. Führt Labels, Ähnlichkeit und Rückmeldung als drei Lernsignale ein und erklärt den Memory-Auftrag. Die Beispiele Akinator und Filmempfehlungen dienen der Erklärung, nicht als zusätzliche Tool-Wechsel."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Erklären Sie am Spamfilter Eingabe, Erfahrungsschatz und Ausgabe."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "EVA-Erklärung und Orientierung für die drei Memory-Runden."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Memory und Rückmeldung bei NIM",
+          "minutes": 55,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Gruppe",
+              "min": 30,
+              "text": "Spielen Sie in festen Gruppen die drei Memory-Runden: neue Karten mit Labels zuordnen, ohne Labels nach Ähnlichkeit sortieren, verdeckte Paare mit +1 für Treffer und 0 für Fehlversuche suchen. Halten Sie pro Runde das Lernsignal und eine Beobachtung fest. Rollenwechsel nur zwischen den Runden; Material und Gruppe bleiben gleich."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 25,
+              "text": "Erkunden Sie NIM am Beamer. Entscheiden Sie gemeinsam Züge und beobachten Sie, was sich durch Gewinn oder Verlust verändert. Sichern Sie eine konkrete Beobachtung. Im Memory lernte ein Mensch; hier untersuchen Sie das KI-Beispiel. Wer fertig ist, wählt höchstens eine Vertiefung (Smiley oder K-Means); kein Pflichtwechsel zu weiteren Tools."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Drei Beobachtungen zu Lernsignalen und ein KI-Beleg aus NIM."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Lernarten vergleichen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 7,
+              "text": "Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung. Ordnen Sie NIM und das Bildprojekt begründet zu. Erklären Sie, warum im Memory der Mensch und nicht ein KI-Modell gelernt hat."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 3,
+              "text": "Klärt offene Zuordnungen und sichert: Das Bildprojekt ist überwacht, weil Trainingsbilder Klassennamen erhalten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein begründeter Vergleich der drei Lernarten."
+            }
+          ]
+        }
+      ],
+      "order": 20
+    }
+  ]
+}

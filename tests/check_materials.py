@@ -6,7 +6,7 @@ from urllib.parse import urlsplit, unquote
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
-PORTAL = ROOT / "projekt"
+PORTAL = ROOT / "_build/site/projekt"
 page = PORTAL / "materialien.html"
 assert page.is_file()
 soup = BeautifulSoup(page.read_text(encoding="utf-8"), "html.parser")

@@ -5,9 +5,11 @@ import html
 import json
 from pathlib import Path
 import re
+import shutil
 
 from markdown_it import MarkdownIt
 import yaml
+from course_model import load_course, output
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ROOT / "kursseiten"
@@ -50,58 +52,67 @@ def render_fragment(source: str, filename: Path) -> str:
 def assemble() -> str:
     manifest = json.loads((PAGES / "manifest.json").read_text(encoding="utf-8"))
     sections = manifest["sections"]
-    if len(sections) != len(set(sections)):
-        raise ValueError("Duplicate section in manifest")
+    course = load_course(ROOT)
+    grouped = {s["id"]: [l for l in course["lessons"] if l["view"] == s["id"]] for s in sections}
+    def nav_order(section):
+        return grouped[section["id"]][0]["number"] if grouped[section["id"]] else -100 + section["navigation"]["order"]
+
+    overview = []
+    for section in sorted((s for s in sections if s.get("teaching")), key=nav_order):
+        lessons = grouped[section["id"]]
+        first, last = lessons[0]["number"], lessons[-1]["number"]
+        number = f"{first}.–{last}." if first != last else f"{first}."
+        meta = section.get("overview", {})
+        title = meta.get("title", section["navigation"]["title"])
+        summary = meta.get("summary", lessons[0]["goal"])
+        overview.append(f'<a class="course-card" href="#{section["id"]}"><span class="tag">{number} Doppellektion</span>'
+                        f'<h3>{html.escape(html.unescape(title))}</h3><p>{html.escape(summary)}</p><span aria-hidden="true" class="course-arrow">↗</span></a>')
     page = (PORTAL / "index.template.html").read_text(encoding="utf-8")
-    found = re.findall(r"<!-- CONTENT:([a-z0-9-]+) -->", page)
-    if found != sections:
-        raise ValueError(f"Template sections mismatch: {found!r} != {sections!r}")
-    # Added lessons have their own view and chapter directory; legacy sections
-    # keep their stable IDs and links. A new lesson needs no template edit.
-    lessons = json.loads((PORTAL / "kurs.json").read_text(encoding="utf-8"))["lessons"]
-    extra = [l for l in lessons if l["view"] not in sections]
-    ids = [l["view"] for l in extra]
-    if len(ids) != len(set(ids)):
-        raise ValueError("New lessons must each have their own view")
-    extra_html = []
-    for lesson in extra:
-        view = lesson["view"]
-        if not re.fullmatch(r"dl-[0-9]{2}", view) or view != f'dl-{lesson["id"]}':
-            raise ValueError(f"Invalid additional lesson view: {view}")
-        folder = PAGES / view
-        files = sorted(folder.glob("*.md"))
-        if not files:
-            raise ValueError(f"New lesson {view} needs at least one chapter")
-        content = "".join(render_fragment(p.read_text(encoding="utf-8"), p) for p in files)
-        extra_html.append(
-            f'<section class="section" id="{view}">'
-            f'<h2>Doppellektion {int(lesson["id"])} · {html.escape(lesson["title"])}</h2>'
-            f'<!-- LESSONS:{view} --><!-- /LESSONS:{view} -->'
-            f'{content}</section>')
-    if extra_html:
-        navigation = "".join(
-            f'<a href="#{l["view"]}"><span>{l["id"]}</span>{html.escape(l["title"])}</a>'
-            for l in extra)
-        page = page.replace('</nav><div class="sidebar-bottom">',''.join([navigation,'</nav><div class="sidebar-bottom">']),1)
-        anchor = '<footer class="footer">'
-        if page.count(anchor) != 1:
-            raise ValueError("Course footer insertion point not found")
-        page = page.replace(anchor, "".join(extra_html)+anchor, 1)
+    rendered = []
     for section in sections:
-        folder = PAGES / section
-        files = sorted(folder.glob("*.md"))
+        view = section["id"]
+        folder = PAGES / view
+        files = sorted(folder.glob("[0-9][0-9][0-9]-*.md"))
         if not files:
             raise ValueError(f"No content files in {folder}")
         parts = [render_fragment(path.read_text(encoding="utf-8"), path) for path in files]
-        marker = f"<!-- CONTENT:{section} -->"
+        content = "".join(parts)
+        content = content.replace("<!-- OVERVIEW -->", '<div class="course-grid">' + "".join(overview) + "</div>")
+        lessons = [l for l in course["lessons"] if l["view"] == view]
+        if lessons and f"<!-- LESSONS:{view} -->" not in content:
+            content = f'<!-- LESSONS:{view} --><!-- /LESSONS:{view} -->' + content
+        attrs = f'class="{html.escape(section["class"])}" id="{view}"'
+        if section.get("navParent"):
+            attrs += f' data-nav="{html.escape(section["navParent"])}"'
+        rendered.append(f"<section {attrs}>{content}</section>")
+    navigation = []
+    for section in sorted((s for s in sections if "navigation" in s), key=nav_order):
+        nav = section["navigation"]
+        label = nav["label"]
+        if grouped[section["id"]]:
+            nums = [l["number"] for l in grouped[section["id"]]]
+            label = f"{nums[0]:02d}" if len(nums) == 1 else f"{nums[0]:02d}–{nums[-1]:02d}"
+        navigation.append(f'<a href="#{section["id"]}"><span>{html.escape(label)}</span>{html.escape(nav["title"])}</a>')
+    for marker, content in [("<!-- COURSE -->", "".join(rendered)), ("<!-- NAVIGATION -->", "".join(navigation))]:
         if page.count(marker) != 1:
             raise ValueError(f"Expected exactly one marker: {marker}")
-        page = page.replace(marker, "".join(parts), 1)
+        page = page.replace(marker, content)
     return page
 
 
 def build() -> None:
-    (PORTAL / "index.html").write_text(assemble(), encoding="utf-8")
+    target = output(ROOT)
+    if target.exists():
+        shutil.rmtree(target)
+    target.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(PORTAL, target, dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns("*.template.html", "README.md", "index.html",
+                                                 "unterrichtsplan.html", "materialien.html", "musterloesungen", "materialien"))
+    for path in (ROOT / "shared").glob("*"):
+        shutil.copyfile(path, target / "admin" / path.name)
+    shutil.copyfile(ROOT / "experimente/registry.json", target / "experiments.json")
+    (target / "index.html").write_text(assemble(), encoding="utf-8")
+    (target / "kurs.json").write_text(json.dumps(load_course(ROOT), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     from build_solutions import build as build_solutions
     build_solutions()
     print("Built course portal from editable content fragments")

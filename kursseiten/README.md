@@ -1,6 +1,22 @@
 # Unterrichtsinhalte bearbeiten
 
-Diese Dateien sind die Quellen der Kursseite. `projekt/index.html` und `projekt/unterrichtsplan.html` werden beim Build erzeugt und **nicht** in Git versioniert.
+Diese Dateien sind die Quellen der Kursseite. HTML und der vollständige Markdown-Unterrichtsplan werden unter `_build/site/projekt/` erzeugt und **nicht** in Git versioniert.
+
+Pro Thema liegen hier `planung.json` (eine oder mehrere Doppellektionen),
+`materialien.md` (Abschnitte mit `## Doppellektion <stabile-id>`) und nummerierte
+Kapiteldateien. `manifest.json` enthält Bereichsmetadaten und Navigation.
+Alle Themen verwenden denselben Build, unabhängig vom Erstellungszeitpunkt.
+
+```sh
+python scripts/new_lesson.py "KI im Alltag"
+python scripts/new_lesson.py "Weitere Lernarten" --section lernarten --after 02
+make preview
+```
+
+Der Generator erstellt AVIVA-Platzhalter, ein erstes Kapitel und Materialien.
+`--after` bezeichnet die stabile Lektions-ID, `order` bestimmt die Reihenfolge.
+Sichtbare Nummern entstehen erst beim Build; IDs niemals zum Umsortieren ändern.
+Bei Einfügungen Nummernverweise in frei geschriebenen Texten redaktionell prüfen.
 
 Die Bereiche einstieg, lernarten, perzeptron, netze, projekt, sprache und gesellschaft
 entsprechen den Doppellektionen 1–10; projekt umfasst Doppellektionen 5–8.
@@ -31,6 +47,7 @@ python scripts/format_course_sources.py
 ```
 
 Mit `--check` prüft GitHub Actions, dass die Formatierung konsistent ist.
+Reine Markdown-Kapitel mit YAML-Kopf und Materialdateien bleiben unverändert.
 Der Formatter wandelt nur unkomplizierte Textabsätze und Überschriften in
 Markdown um; interaktives HTML bleibt intakt.
 

@@ -1,0 +1,167 @@
+{
+  "lessons": [
+    {
+      "id": "01",
+      "view": "einstieg",
+      "title": "Was ist KI?",
+      "goal": "KI von Programmen mit festen Regeln unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen und schwache und starke KI sowie die vier KI-Typen unterscheiden.",
+      "question": "Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?",
+      "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
+      "product": "Drei begründet eingeordnete Beispiele, zwei Argumente zum Fall «Schulweg» und eine eigene Antwort auf die Leitfrage.",
+      "zeit": "Asimovs Gesetze werden kurz angeschnitten; die ausführliche ethische Diskussion folgt in Doppellektion 10. Die Meilensteine sind freiwillige Vertiefung.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Wann ist ein System intelligent?",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 1,
+              "text": "Zeigt zwei Saugroboter: einer fährt feste Bahnen, einer erstellt beim Fahren eine Karte. Stellt die Frage «Wann nennen Sie ein System intelligent?»."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Notieren Sie allein ein Kriterium für Intelligenz und Ihre Einschätzung zu den Robotern."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Vergleichen Sie Ihre Einschätzungen zu den Robotern."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein erstes Kriterium für «intelligent»."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Regeln für Katze oder Hund",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Schreiben Sie Wenn-dann-Regeln, um Katzen und Hunde auf Fotos zu unterscheiden. Prüfen Sie Ihre Regeln an zwei Gegenbeispielen und markieren Sie eine Lücke."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 2,
+              "text": "Sammelt zwei Regeln mit Gegenbeispielen. Daraus entsteht die Frage: Können wir statt Regeln Beispiele geben?"
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 3,
+              "text": "Vergleichen Sie zwei Regelideen und benennen Sie gemeinsam eine Lücke."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Regeln und eine begründete Grenze der Regeln."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Begriffe an einem Beispiel ordnen",
+          "minutes": 20,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Ordnet schwache und starke KI sowie die vier KI-Typen ein: heutige Systeme sind schwache KI, Typ 1 oder 2; Typ 3 und 4 sind Forschungsziele. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Ordnen Sie einen Spamfilter gemeinsam ein und klären Sie Ihre Fragen zu den Begriffen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine gemeinsame Beispieleinordnung als Orientierung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Eigene Beispiele begründet einordnen",
+          "minutes": 45,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 30,
+              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 5,
+              "text": "Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) kurz vor und zeigt den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen und gefährdet dabei den Fahrgast."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Entscheiden Sie allein, was das Auto im Fall «Schulweg» tun soll, und notieren Sie einen Grund."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Vergleichen Sie die Einzelentscheidungen. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Drei begründete Beispiele, offene Fragen sichtbar markiert, und zwei Argumente zum Fall «Schulweg»."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Die Leitfrage beantworten",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 2,
+              "text": "Bespricht zwei strittige Zuordnungen. Klärt: Ein Programm mit festen Regeln kann KI sein, lernt aber nicht aus Daten; nicht jede Automatisierung ist KI."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 3,
+              "text": "Teilen Sie zwei strittige Beispielzuordnungen und prüfen Sie gemeinsam die Begründungen."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Beantworten Sie die Leitfrage mit einem eigenen Beispiel und erklären Sie den Unterschied zwischen festen Regeln und Lernen aus Daten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine eigene begründete Antwort auf die Leitfrage."
+            }
+          ]
+        }
+      ],
+      "order": 10
+    }
+  ]
+}

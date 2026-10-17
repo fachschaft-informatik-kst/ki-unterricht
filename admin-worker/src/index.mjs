@@ -1,3 +1,4 @@
+import {validatePlan,validateManifest} from "../../shared/course-model.js";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
 const encoder = new TextEncoder();
@@ -39,9 +40,8 @@ async function github(token,path,options={}){
 }
 const canWrite=async token => (await github(token,"/repos/"+REPO)).permissions?.push===true;
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
-  /^kursseiten\/(einstieg|lernarten|perzeptron|netze|projekt|sprache|gesellschaft|dl-[0-9]{2})\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path)||
-  /^lehrperson\/ergaenzungen\/dl-[0-9]{2}\.md$/.test(path)||
-  path==="projekt/kurs.json"||path==="lehrperson/materialien.md"||
+  /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
+  path==="kursseiten/manifest.json"||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
 function validate(changes){
@@ -52,27 +52,15 @@ function validate(changes){
     seen.add(c.path);
     if(c.expectedSha!==null&&!/^[a-f0-9]{40}$/.test(c.expectedSha||""))throw Error("Ungültige Ausgangsversion.");
     if(c.delete===true){
-      if(c.expectedSha===null||c.content!==undefined)throw Error("Nur vorhandene Dateien können archiviert werden.");
-    }else if(c.path==="projekt/kurs.json"){
+      if(c.expectedSha===null||c.content!==undefined||!/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(c.path))throw Error("Nur vorhandene Kapitel können verschoben werden.");
+    }else if(c.path.endsWith(".json")){
       if(typeof c.content!=="string"||c.content.length>200000)throw Error("Unterrichtsplan zu gross.");
       let plan;try{plan=JSON.parse(c.content);}catch{throw Error("Ungültiger Unterrichtsplan.");}
-      if(!Array.isArray(plan.lessons)||plan.lessons.length<10||plan.lessons.length>99)throw Error("Doppellektionen fehlen.");
-      const phases=["Ankommen","Vorwissen aktivieren","Informieren","Verarbeiten","Auswerten"];
-      for(let i=0;i<plan.lessons.length;i++){
-        const l=plan.lessons[i],id=String(i+1).padStart(2,"0");
-        if(l.id!==id||!l.title||!Array.isArray(l.phases)||l.phases.length!==5||
-          l.phases.reduce((a,p)=>a+Number(p.minutes||0),0)!==90||
-          l.phases.some((p,j)=>p.phase!==phases[j]||!Number.isInteger(p.minutes)||p.minutes<1||
-            !p.titel||!Array.isArray(p.schritte)||!p.schritte.length||
-            p.schritte.at(-1)?.art!=="Ergebnis"||
-            p.schritte.reduce((n,s)=>n+Number(s.min||0),0)!==p.minutes||
-            p.schritte.some(s=>!s.wer||!s.text||!Number.isInteger(s.min||0)||Number(s.min||0)<0)))
-          throw Error("Ungültige Lektionsnummer oder AVIVA-Plan bei "+id);
-        if(i>=10&&l.view!=="dl-"+id)throw Error("Neue Lektionsansichten müssen dl-NN heissen.");
-      }
+      if(c.path.endsWith("/planung.json"))validatePlan(plan);
+      else validateManifest(plan);
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
-      if(c.expectedSha===null&&c.path.startsWith("kursseiten/")&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
+      if(c.expectedSha===null&&/\/[0-9]{3}-/.test(c.path)&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
     }else{
       if(typeof c.content!=="string"||c.content.length>4100000)throw Error("Bild ungültig oder zu gross.");
       let bytes;try{bytes=Uint8Array.from(atob(c.content),x=>x.charCodeAt(0));}catch{throw Error("Ungültiges Bildformat.");}
@@ -102,30 +90,48 @@ async function publish(req,token){
   const tree=await github(token,prefix+"/git/trees/"+commit.tree.sha+"?recursive=1");
   if(tree.truncated)return fail(409,"Repository-Baum unvollständig.");
   const known=new Map(tree.tree.filter(x=>x.type==="blob").map(x=>[x.path,x.sha]));
-  const planChange=body.changes.find(x=>x.path==="projekt/kurs.json");
-  if(planChange){
-    const currentPlan=await github(token,prefix+"/contents/projekt/kurs.json?ref=main");
-    const current=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(currentPlan.content.replace(/\s/g,"")),c=>c.charCodeAt(0))));
-    const next=JSON.parse(planChange.content);
-    if(next.lessons.length<current.lessons.length||next.lessons.length>current.lessons.length+1)
-      return fail(400,"Pro Pull Request maximal eine neue Doppellektion; keine bisherigen löschen.");
-    for(let i=0;i<current.lessons.length;i++)
-      if(next.lessons[i].id!==current.lessons[i].id||next.lessons[i].view!==current.lessons[i].view)
-        return fail(403,"IDs und bestehende Kursansichten dürfen nicht verändert werden.");
-    if(next.lessons.length>current.lessons.length){
-      const id=next.lessons.at(-1).id;
-      if(!body.changes.some(x=>x.path.startsWith("kursseiten/dl-"+id+"/"))||
-         !body.changes.some(x=>x.path==="lehrperson/ergaenzungen/dl-"+id+".md"))
-        return fail(400,"Unterrichtsinhalt und Lehrpersonenmaterial müssen zusammen ergänzt werden.");
-    }
-  }
   for(const c of body.changes){
     if((known.get(c.path)||null)!==c.expectedSha)return fail(409,"Konflikt bei "+c.path+". Bitte neu laden.");
   }
+  const changes=new Map(body.changes.map(c=>[c.path,c]));
+  const readJson=async path=>{
+    const file=await github(token,prefix+"/contents/"+path+"?ref="+baseSha);
+    return JSON.parse(decoder.decode(Uint8Array.from(atob(file.content.replace(/\s/g,"")),c=>c.charCodeAt(0))));
+  };
+  const proposed=async path=>changes.has(path)?JSON.parse(changes.get(path).content):readJson(path);
+  try{
+    const previous=await readJson("kursseiten/manifest.json");
+    const manifest=await proposed("kursseiten/manifest.json");
+    validateManifest(manifest);
+    if(previous.sections.some(s=>!manifest.sections.some(n=>n.id===s.id&&!!n.teaching===!!s.teaching)))
+      throw Error("Bestehende Bereichs-IDs müssen erhalten bleiben.");
+    const all=[];
+    for(const section of manifest.sections.filter(s=>s.teaching)){
+      const path="kursseiten/"+section.id+"/planung.json";
+      const next=await proposed(path);
+      validatePlan(next);
+      if(next.lessons.some(l=>l.view!==section.id))throw Error("Falsche Bereichszuordnung: "+section.id);
+      if(known.has(path)){
+        const old=await readJson(path);
+        if(old.lessons.some(l=>!next.lessons.some(n=>n.id===l.id&&n.view===l.view)))
+          throw Error("Bestehende Lektions-IDs müssen erhalten bleiben.");
+      }
+      const material="kursseiten/"+section.id+"/materialien.md";
+      if(!known.has(material)&&!changes.has(material))throw Error("Lehrpersonenmaterial fehlt: "+section.id);
+      const chapterPrefix="kursseiten/"+section.id+"/";
+      if(![...new Set([...known.keys(),...changes.keys()])].some(p=>
+        p.startsWith(chapterPrefix)&&/\/[0-9]{3}-[^/]+\.md$/.test(p)&&!changes.get(p)?.delete))
+        throw Error("Kapitel fehlt: "+section.id);
+      all.push(...next.lessons);
+    }
+    validatePlan({lessons:all});
+    if(all.some(l=>!Number.isFinite(l.order))||new Set(all.map(l=>l.order)).size!==all.length)
+      throw Error("Lektionsreihenfolge ungültig oder doppelt.");
+  }catch(e){if(e.status)throw e;return fail(400,e.message);}
   const entries=[];
   for(const c of body.changes){
     if(c.delete)entries.push({path:c.path,mode:"100644",type:"blob",sha:null});
-    else if(c.path.endsWith(".md"))entries.push({path:c.path,mode:"100644",type:"blob",content:c.content});
+    else if(/\.(md|json)$/.test(c.path))entries.push({path:c.path,mode:"100644",type:"blob",content:c.content});
     else{
       const blob=await github(token,prefix+"/git/blobs",{method:"POST",body:JSON.stringify({content:c.content,encoding:"base64"})});
       entries.push({path:c.path,mode:"100644",type:"blob",sha:blob.sha});
@@ -175,13 +181,13 @@ async function auth(req,env,url){
   return new Response(null,{status:303,headers});
 }
 async function staticPage(url){
-  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/plan-editor.js":"plan-editor.js"};
+  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/plan-editor.js":"plan-editor.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json"};
   const file=files[url.pathname];
   if(!file)return fail(404,"Nicht gefunden.");
   const source=await fetch(STATIC+file,{redirect:"error"});
   if(!source.ok)return fail(503,"Admin-Dateien sind noch nicht veröffentlicht.");
   const ext=file.split(".").pop();
-  const mime={html:"text/html",css:"text/css",js:"text/javascript"}[ext];
+  const mime={html:"text/html",css:"text/css",js:"text/javascript",json:"application/json"}[ext];
   const csp=["default-src 'none'","script-src 'self'","style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io",
     "connect-src 'self'","frame-src 'self' blob:","base-uri 'none'","form-action 'none'",
@@ -196,7 +202,7 @@ export default {
     const url=new URL(req.url);
     try{
       if(!env.SESSION_KEY)return fail(503,"Admin-Worker ist noch nicht eingerichtet.");
-      if(req.method==="GET"&&["/auth/start","/auth/callback"].includes(url.pathname))return auth(req,env,url);
+      if(req.method==="GET"&&["/auth/start","/auth/callback"].includes(url.pathname))return await auth(req,env,url);
       if(req.method==="POST"&&url.pathname==="/auth/logout"){
         if(!allowedPost(req))return fail(403,"Unerlaubter Aufruf.");
         return response({ok:true},200,{"Set-Cookie":cookie("ki_session","",0)});
@@ -209,20 +215,20 @@ export default {
         if(req.method==="GET"&&url.pathname==="/api/chapters"){
           const tree=await github(active.token,"/repos/"+REPO+"/git/trees/main?recursive=1");
           if(tree.truncated)return fail(409,"Unvollständiger Dateiindex.");
-          return response({chapters:tree.tree.filter(x=>x.type==="blob"&&allowed(x.path)&&x.path.startsWith("kursseiten/")&&!x.path.includes("/_archiv/")).map(x=>({path:x.path,sha:x.sha}))});
+          return response({chapters:tree.tree.filter(x=>x.type==="blob"&&allowed(x.path)&&/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)).map(x=>({path:x.path,sha:x.sha}))});
         }
         if(req.method==="GET"&&url.pathname==="/api/file"){
           const path=url.searchParams.get("path");
-          if(!allowed(path)||!(path.endsWith(".md")||path==="projekt/kurs.json"))return fail(400,"Ungültige Datei.");
+          if(!allowed(path)||!/\.(md|json)$/.test(path))return fail(400,"Ungültige Datei.");
           const f=await github(active.token,"/repos/"+REPO+"/contents/"+path+"?ref=main");
           if(f.encoding!=="base64")return fail(409,"Datei nicht lesbar.");
           const content=decoder.decode(Uint8Array.from(atob(f.content.replace(/\s/g,"")),c=>c.charCodeAt(0)));
           return response({path,sha:f.sha,content});
         }
-        if(req.method==="POST"&&url.pathname==="/api/publish")return publish(req,active.token);
+        if(req.method==="POST"&&url.pathname==="/api/publish")return await publish(req,active.token);
         return fail(404,"Unbekannte Funktion.");
       }
-      if(req.method==="GET")return staticPage(url);
+      if(req.method==="GET")return await staticPage(url);
       return fail(405,"Methode nicht erlaubt.");
     }catch(err){return fail(err.status>=400&&err.status<500?err.status:502,
       String(err.message||"GitHub nicht erreichbar").slice(0,230));}

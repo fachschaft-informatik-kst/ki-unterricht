@@ -3,7 +3,7 @@
 Ein kompakter KI-Block: erleben, gezielt experimentieren und erklären.
 
 - **[Kursportal öffnen](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**
-- **[Lehrpersonen: Ablauf und didaktische Hinweise](worksheets/md/KI_Planung.md)**
+- **[Lehrpersonen: vollständiger Ablauf](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/unterrichtsplan.html)** und [didaktische Hinweise](worksheets/md/KI_Planung.md)
 
 ## Lehrpersonen-Editor (GitHub)
 
@@ -17,7 +17,7 @@ Siehe [Einrichtung und Sicherheit](docs/ADMIN-EDITOR.md).
 
 ## Inhalte einfach bearbeiten
 
-**Single Source of Truth:** Die Unterrichtstexte werden unter `kursseiten/` gepflegt, die AVIVA-Planung in `projekt/kurs.json`. `projekt/index.html` und `projekt/unterrichtsplan.html` sind generierte Dateien und **nicht mehr in Git versioniert**. `make preview` und GitHub Actions bauen sie automatisch.
+**Single Source of Truth:** Texte, AVIVA-Planung und Lehrpersonenmaterial liegen gemeinsam unter `kursseiten/<thema>/`: nummerierte Kapitel, `planung.json` und `materialien.md`. Das Manifest definiert Bereiche und Navigation. `projekt/` enthält nur App-Quellen; die generierten Seiten liegen unter `_build/site/projekt/`, die veröffentlichte Website unter `dist/`. `make preview` und GitHub Actions bauen sie automatisch.
 
 Ein neues Unterkapitel kannst du direkt erstellen und anschliessend als Markdown bearbeiten:
 
@@ -33,7 +33,13 @@ python scripts/new_lesson.py "KI im Alltag" --chapter "Anwendungen entdecken"
 make preview
 ```
 
-Der Generator legt den AVIVA-Plan in `projekt/kurs.json`, ein erstes Kapitel unter `kursseiten/dl-NN/` und die Lehrpersonenmaterialien unter `lehrperson/ergaenzungen/` an. Er verändert keine bestehenden Lektionen und prüft eindeutige IDs und vorhandene Dateien. Die automatisch erzeugten didaktischen Platzhalter müssen anschliessend ausgearbeitet werden. Mit `--dry-run` zeigt er die geplanten Dateien ohne Änderungen. Die längerfristige Idee einzelner Quelldateien pro Lektion ist in [docs/ARCHITEKTUR.md](docs/ARCHITEKTUR.md) dokumentiert.
+Der Generator erstellt `kursseiten/ki-im-alltag/` mit AVIVA-Plan, erstem Kapitel und Lehrpersonenmaterial und ergänzt das Manifest. Ein bestehendes Thema kann mehrere Doppellektionen enthalten:
+
+```sh
+python scripts/new_lesson.py "Weitere Lernarten" --section lernarten --after 02
+```
+
+`--after` verwendet eine stabile Lektions-ID. Die sichtbaren Nummern werden neu berechnet; IDs, vorhandene Kapitel und gespeicherte Schülerdaten bleiben unverändert. Didaktische Nummernverweise in freien Texten nach Einfügungen prüfen. Mit `--dry-run` zeigt das Werkzeug die geplanten Dateien ohne Änderungen. Die AVIVA-Platzhalter müssen anschliessend ausgearbeitet werden. Details: [Architektur und Redaktionskonzept](docs/ARCHITEKTUR.md).
 
 Die Doppellektionen liegen kapitelweise unter [`kursseiten/`](kursseiten).
 Absätze und Zwischenüberschriften in den Markdown-Bereichen sind direkt
@@ -95,8 +101,8 @@ laufen weiterhin automatisch in GitHub Actions.
 
 ### Inhalt, View und Controller (MVC-Prinzip)
 
-- **Model/Inhalt:** `kursseiten/` (Lerntexte, Aufgaben, Medien, Formulare),
-  `projekt/kurs.json` (AVIVA-Planung).
+- **Model/Inhalt:** `kursseiten/` (Kapitel, Themenpläne und Materialien),
+  `experimente/registry.json` (Notebookregistrierung), `shared/course-rules.json` (AVIVA-Regeln).
 - **View:** `projekt/index.template.html`, `projekt/portal.css` und die
   Python-Generatoren `scripts/build_portal.py`, `scripts/build_course.py`.
 - **Controller:** `projekt/portal.js`, `projekt/progress.js` (Notebook-Events,
@@ -144,7 +150,7 @@ Abgabe des Journals mit Ausgaben, Fotos/JSON und Protokoll vor Beginn von Doppel
 
 ## Didaktischer Aufbau
 
-Alle zehn Doppellektionen haben einen AVIVA-Ablauf mit 90 Minuten, Leitfrage und Lernprodukt. `projekt/kurs.json` ist die gemeinsame Quelle für Kursseite und Lehrpersonenplanung. Die Notebooks folgen PADUA: Problem, erklärtes Beispiel, Durcharbeiten, Üben und Übertragen. Vor Codezellen stehen Zweck, Beobachtungsauftrag und eine Hilfe zur Interpretation.
+Alle Doppellektionen haben einen AVIVA-Ablauf mit 90 Minuten, Leitfrage und Lernprodukt. Die Themenpläne unter `kursseiten/<thema>/planung.json` sind die gemeinsame Quelle für Kursseite und Lehrpersonenplanung. Die Notebooks folgen PADUA: Problem, erklärtes Beispiel, Durcharbeiten, Üben und Übertragen. Vor Codezellen stehen Zweck, Beobachtungsauftrag und eine Hilfe zur Interpretation.
 
 Vorhandene Grafiken zu Perzeptron und mehrschichtigem Netz sind auf der Seite und als portable Notebook-Anhänge eingebaut. Sieben nicht mehr benötigte Notebooks wurden entfernt: beide Startnotebooks, NIM, Ziffern, Symbolprojekt sowie lineare und logistische Regression. Alte Prüfungs- und Regressionsblätter liegen gekennzeichnet in `worksheets/archiv/`.
 

@@ -1,17 +1,137 @@
 {
-  "version": 1,
+  "version": 2,
   "sections": [
-    "start",
-    "lernziele",
-    "projekt",
-    "bewertung",
-    "einstieg",
-    "lernarten",
-    "perzeptron",
-    "netze",
-    "journal",
-    "sprache",
-    "gesellschaft",
-    "sicherung"
+    {
+      "id": "start",
+      "class": "hero",
+      "navigation": {
+        "order": 0,
+        "label": "00",
+        "title": "Übersicht"
+      }
+    },
+    {
+      "id": "lernziele",
+      "class": "section",
+      "navigation": {
+        "order": 1,
+        "label": "◎",
+        "title": "Lernziele"
+      }
+    },
+    {
+      "id": "projekt",
+      "class": "hero",
+      "navParent": "projekt",
+      "navigation": {
+        "order": 6,
+        "label": "05–08",
+        "title": "Unser Projekt"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Unser Bildprojekt",
+        "summary": "Zu zweit forschen · Journal führen"
+      }
+    },
+    {
+      "id": "bewertung",
+      "class": "section",
+      "navParent": "projekt"
+    },
+    {
+      "id": "einstieg",
+      "class": "section",
+      "navigation": {
+        "order": 2,
+        "label": "01",
+        "title": "Was ist KI?"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Was ist KI?",
+        "summary": "Begriffe ordnen · Beispiele prüfen"
+      }
+    },
+    {
+      "id": "lernarten",
+      "class": "section",
+      "navigation": {
+        "order": 3,
+        "label": "02",
+        "title": "Wie lernt KI?"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Wie lernt KI?",
+        "summary": "Memory · NIM · drei Lernarten"
+      }
+    },
+    {
+      "id": "perzeptron",
+      "class": "section",
+      "navigation": {
+        "order": 4,
+        "label": "03",
+        "title": "Ein Neuron"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Ein Neuron",
+        "summary": "Gewichte · Bias · Grenzen"
+      }
+    },
+    {
+      "id": "netze",
+      "class": "section",
+      "navigation": {
+        "order": 5,
+        "label": "04",
+        "title": "Neuronale Netze"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Neuronale Netze",
+        "summary": "Zwischenschichten · Daten aufteilen"
+      }
+    },
+    {
+      "id": "journal",
+      "class": "section",
+      "navParent": "projekt"
+    },
+    {
+      "id": "sprache",
+      "class": "section",
+      "navigation": {
+        "order": 7,
+        "label": "09",
+        "title": "Sprachmodelle"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Sprachmodelle",
+        "summary": "Texte vorhersagen · Grenzen erkennen"
+      }
+    },
+    {
+      "id": "gesellschaft",
+      "class": "section",
+      "navigation": {
+        "order": 8,
+        "label": "10",
+        "title": "KI &amp; Gesellschaft"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "KI &amp; Gesellschaft",
+        "summary": "Folgen beurteilen · Lösungen abwägen"
+      }
+    },
+    {
+      "id": "sicherung",
+      "class": "section project-transfer",
+      "navParent": "projekt"
+    }
   ]
 }

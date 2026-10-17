@@ -1,9 +1,9 @@
 import {createPlanner} from "./plan-editor.js";
+import {lessonTemplate} from "./course-model.js";
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
-const state={chapters:[],current:null,staged:new Map()};
+const state={chapters:[],current:null,staged:new Map(),manifest:null};
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
-const sections=["einstieg","lernarten","perzeptron","netze","projekt","sprache","gesellschaft"];
 function status(message,error=false){$("notice").textContent=message;$("notice").classList.toggle("error",error);}
 function error(err){status(String(err.message||err),true);}
 async function api(url,options={}){
@@ -38,9 +38,10 @@ function chapterList(){
 function useFile(path,sha,content,original=content){
   state.current={path,sha,original};
   $("path").textContent=path;$("heading").textContent=filename(path);
-  const isPlan=path==="projekt/kurs.json";
+  const isPlan=path.endsWith("/planung.json");
   $("source").value=content;
-  $("move").disabled=!sha||isPlan;$("archive").disabled=!sha||isPlan;
+  const isChapter=/\/[0-9]{3}-[^/]+\.md$/.test(path);
+  $("move").disabled=!sha||!isChapter;$("archive").disabled=!sha||!isChapter;
   for(const id of ["toolbar","editorHelper","sourceLabel","previewButton","previewHeading","preview"])
     $(id).hidden=isPlan;
   $("source").hidden=isPlan;
@@ -60,14 +61,17 @@ async function load(path){
   }catch(e){error(e);}
 }
 async function refresh(){
+  const manifest=await api("/api/file?path=kursseiten%2Fmanifest.json");
+  state.manifest={sha:manifest.sha,content:manifest.content};
   const data=await api("/api/chapters");
   const known=data.chapters.filter(c=>!state.staged.get(c.path)?.delete);
   // A refresh must not discard newly created (as yet unmerged) lesson chapters.
-  const pending=[...state.staged.values()].filter(c=>c.path.startsWith("kursseiten/")&&!c.delete&&!known.some(k=>k.path===c.path))
+  const pending=[...state.staged.values()].filter(c=>/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(c.path)&&!c.delete&&!known.some(k=>k.path===c.path))
     .map(c=>({path:c.path,sha:c.expectedSha}));
   const unsubmitted=state.chapters.filter(c=>!c.sha&&!state.staged.has(c.path)&&!known.some(k=>k.path===c.path));
   state.chapters=[...known,...pending,...unsubmitted].sort((a,b)=>a.path.localeCompare(b.path));
-  const valid=[...new Set(state.chapters.map(c=>c.path.split("/")[1]))].filter(x=>sections.includes(x)||/^dl-\d{2}$/.test(x));
+  const definitions=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||manifest.content).sections;
+  const valid=definitions.filter(s=>s.teaching).map(s=>s.id);
   const previous=$("section").value;
   $("section").replaceChildren();
   for(const value of valid){const option=document.createElement("option");option.value=value;option.textContent=value;$("section").append(option);}
@@ -152,7 +156,7 @@ function addChapter(){
 function stage(){
   const c=state.current;if(!c)throw Error("Kein Kapitel geladen.");
   const content=$("source").value;if(!content.trim())throw Error("Kapitel darf nicht leer sein.");
-  if(c.path==="projekt/kurs.json"){
+  if(c.path.endsWith("/planung.json")){
     planner.validate(content);
   }
   if(c.sha){
@@ -200,19 +204,17 @@ function move(){
 }
 async function imageAvivaAttribution(){
   const path=state.current?.path||"";
-  if(!path.startsWith("lehrperson/"))return "";
-  let id=path.match(/ergaenzungen\/dl-(\d{2})\.md$/)?.[1];
-  if(!id){
-    const previous=$("source").value.slice(0,$("source").selectionStart);
-    id=[...previous.matchAll(/^## Doppellektion (\d+)\s*$/gm)].at(-1)?.[1];
-  }
+  if(!path.endsWith("/materialien.md"))return "";
+  const previous=$("source").value.slice(0,$("source").selectionStart);
+  const id=[...previous.matchAll(/^## Doppellektion ([a-z0-9-]+)\s*$/gm)].at(-1)?.[1];
   if(!id)throw Error("Bild in den Materialien unter einer Doppellektion-Überschrift einfügen.");
-  const json=state.staged.get("projekt/kurs.json")?.content||
-    (await api("/api/file?path=projekt/kurs.json")).content;
-  const lesson=JSON.parse(json).lessons.find(l=>Number(l.id)===Number(id));
+  const planPath="kursseiten/"+path.split("/")[1]+"/planung.json";
+  const json=state.staged.get(planPath)?.content||
+    (await api("/api/file?path="+encodeURIComponent(planPath))).content;
+  const lesson=JSON.parse(json).lessons.find(l=>l.id===id);
   if(!lesson)throw Error("Doppellektion "+id+" im Unterrichtsplan nicht gefunden.");
   const phases=lesson.phases.map(p=>p.phase);
-  const phase=prompt("AVIVA-Phase für Doppellektion "+Number(id)+":\n"+phases.join(" / "),phases[0]);
+  const phase=prompt("AVIVA-Phase für Doppellektion "+id+":\n"+phases.join(" / "),phases[0]);
   if(phase===null)throw Error("Bild-Upload abgebrochen.");
   const entry=lesson.phases.find(p=>p.phase===phase.trim());
   if(!entry)throw Error("AVIVA-Phase muss exakt einer der fünf Phasen entsprechen.");
@@ -268,7 +270,7 @@ async function publish(){
 async function editPlan(){
   try{
     if(!confirmUnsaved())return;
-    const path="projekt/kurs.json",staged=state.staged.get(path);
+    const path="kursseiten/"+$("section").value+"/planung.json",staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
     const file=await api("/api/file?path="+encodeURIComponent(path));
     useFile(path,file.sha,file.content);status("AVIVA-Plan als Formular bearbeiten: pro Doppellektion fünf Phasen und insgesamt 90 Minuten.");
@@ -278,7 +280,7 @@ async function editMaterials(){
   try{
     if(!confirmUnsaved())return;
     const section=$("section").value;
-    const path=/^dl-\d{2}$/.test(section)?"lehrperson/ergaenzungen/"+section+".md":"lehrperson/materialien.md";
+    const path="kursseiten/"+section+"/materialien.md";
     const staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
     const file=await api("/api/file?path="+encodeURIComponent(path));
@@ -291,51 +293,43 @@ function confirmUnsaved(){
     confirm("Nicht vorgemerkte Änderungen verwerfen? Bitte vorher «Änderung vormerken» wählen.");
 }
 function lessonPlan(id,title,view){
-  const labels=["Ankommen","Vorwissen aktivieren","Informieren","Verarbeiten","Auswerten"];
-  const minutes=[5,10,15,50,10];
-  return {
-    id,title,view,goal:"Lernziel für diese Doppellektion formulieren.",
-    question:"Leitfrage für diese Doppellektion formulieren.",
-    motivation:"Begründen, weshalb dieses Thema relevant ist.",
-    product:"Ein begründetes Lernergebnis.",
-    phases:labels.map((phase,i)=>({
-      phase,titel:phase,minutes:minutes[i],
-      schritte:[
-        {wer:"Lehrperson",min:minutes[i]-1,text:"Arbeitsauftrag und Ablauf festlegen.",art:"Auftrag"},
-        {wer:"Ergebnis",min:1,text:"Ergebnis festhalten.",art:"Ergebnis"}
-      ]
-    }))
-  };
+  return lessonTemplate(id,title,view);
 }
 async function addLesson(){
   try{
     if(!confirmUnsaved())return;
     status("Lade aktuelle Unterrichtsplanung …");
-    const file=await api("/api/file?path=projekt/kurs.json");
-    const staged=state.staged.get("projekt/kurs.json");
-    const original=JSON.parse(staged?.content||file.content);
-    const committed=JSON.parse(file.content);
-    if(original.lessons.length!==committed.lessons.length)
-      throw Error("Eine neue Doppellektion ist bereits vorgemerkt. Pro Pull Request ist nur eine möglich.");
-    const next=original.lessons.length+1;
-    if(next>99)throw Error("Es werden maximal 99 Doppellektionen unterstützt.");
-    const id=String(next).padStart(2,"0"),view="dl-"+id;
-    const title=prompt("Titel der neuen Doppellektion "+next+":");
+    const file=await api("/api/file?path=kursseiten%2Fmanifest.json");
+    const manifest=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||file.content);
+    const title=prompt("Titel der neuen Doppellektion:");
     if(!title)return;
     const chapterTitle=prompt("Titel des ersten Unterkapitels:","Einstieg und Auftrag");
     if(!chapterTitle)return;
     if(!title.trim()||!slug(chapterTitle))throw Error("Titel und Kapitelname dürfen nicht leer sein.");
+    const id=slug(title),view=id;
+    if(!/^[a-z]/.test(view)||manifest.sections.some(s=>s.id===view))throw Error("Bereichs-ID ungültig oder bereits vorhanden.");
+    const blocks=await Promise.all(manifest.sections.filter(s=>s.teaching).map(async s=>{
+      const path="kursseiten/"+s.id+"/planung.json";
+      const draft=state.staged.get(path);
+      return JSON.parse(draft?.content||(await api("/api/file?path="+encodeURIComponent(path))).content);
+    }));
+    if(blocks.some(b=>b.lessons.some(l=>l.id===id)))throw Error("Lektions-ID bereits vorhanden.");
+    const order=Math.max(...blocks.flatMap(b=>b.lessons.map(l=>l.order)))+10;
     const lesson=lessonPlan(id,title.trim(),view);
-    original.lessons.push(lesson);
-    const metadata="projekt/kurs.json";
-    state.staged.set(metadata,{path:metadata,expectedSha:file.sha,original:file.content,content:JSON.stringify(original,null,2)+"\n"});
+    lesson.order=order;
+    const metadata="kursseiten/"+view+"/planung.json";
+    const planSource=JSON.stringify({lessons:[lesson]},null,2)+"\n";
+    state.staged.set(metadata,{path:metadata,expectedSha:null,content:planSource});
+    const next=Math.max(...manifest.sections.map(s=>s.navigation?.order??-1))+1;
+    manifest.sections.push({id:view,class:"section",teaching:true,navigation:{order:next,label:"",title:title.trim()}});
+    state.staged.set("kursseiten/manifest.json",{path:"kursseiten/manifest.json",expectedSha:file.sha,original:file.content,content:JSON.stringify(manifest,null,2)+"\n"});
     const chapter="kursseiten/"+view+"/010-"+slug(chapterTitle)+".md";
     const chapterSource="---\ntype: chapter\nid: "+view+"-"+slug(chapterTitle)+
       "\nnummer: \"1\"\ntitel: "+JSON.stringify(chapterTitle)+
       "\nkurz: "+JSON.stringify(chapterTitle)+"\nopen: true\n---\n\n"+
       "## Lernauftrag\n\nHier die Aufgabe beschreiben.\n";
     state.staged.set(chapter,{path:chapter,expectedSha:null,content:chapterSource});
-    const extras="lehrperson/ergaenzungen/"+view+".md";
+    const extras="kursseiten/"+view+"/materialien.md";
     state.staged.set(extras,{path:extras,expectedSha:null,content:
       "## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"+
       "Hier ergänzende Grafiken, Tabellen und Hinweise für die Lehrperson einfügen.\n\n"+
@@ -346,9 +340,9 @@ async function addLesson(){
       opt.textContent=next+" · "+title;$("section").append(opt);
     }
     $("section").value=view;
-    useFile(metadata,file.sha,state.staged.get(metadata).content,file.content);
+    useFile(metadata,null,planSource);
     stagingList();
-    status("Doppellektion "+next+" mit Kapitel und Materialien vorgemerkt. Jetzt den AVIVA-Plan im Formular ausarbeiten, danach Kapitel und Materialien ergänzen.");
+    status("Neue Doppellektion mit Kapitel und Materialien vorgemerkt. Jetzt den AVIVA-Plan im Formular ausarbeiten, danach Kapitel und Materialien ergänzen.");
   }catch(e){error(e);}
 }
 

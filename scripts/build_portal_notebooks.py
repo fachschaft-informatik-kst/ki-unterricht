@@ -2,16 +2,22 @@
 from pathlib import Path
 import re
 import nbformat
+import json
+import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
-ITEMS = [
-    'perzeptron_und_neuronale_netze.ipynb', 'mehrschichtige_netze.ipynb',
-    'daten_training.ipynb', 'ki_projekt/ki_lernlabor.ipynb',
-    'ki_projekt/ki_tandemprojekt.ipynb',
-]
+REGISTRY = json.loads((ROOT / "experimente/registry.json").read_text(encoding="utf-8"))
+ITEMS = [e["source"] for e in REGISTRY]
+if len({Path(p).name for p in ITEMS}) != len(ITEMS) or sum(bool(e.get("project")) for e in REGISTRY) != 1:
+    raise ValueError("Experiments need unique notebook names and exactly one project")
 
 def build():
-    out = ROOT / 'content/portal'
+    staging = ROOT / '_build/content'
+    if staging.exists():
+        shutil.rmtree(staging)
+    shutil.copytree(ROOT / 'content', staging, dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns('portal', '__pycache__', '.ipynb_checkpoints'))
+    out = staging / 'portal'
     out.mkdir(exist_ok=True)
     targets = {Path(s).name for s in ITEMS}
     for stale in out.glob('*.ipynb'):

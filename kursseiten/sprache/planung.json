@@ -1,0 +1,126 @@
+{
+  "lessons": [
+    {
+      "id": "09",
+      "view": "sprache",
+      "title": "Wie entstehen Sprachmodelle?",
+      "rueckblick": "Im Bildprojekt haben Sie Vorhersagen und deren Grenzen geprüft. Heute untersuchen Sie Vorhersagen für Sprache.",
+      "goal": "Den Einfluss von Kontext untersuchen und ein Wortfolgemodell von einem neuronalen Sprachmodell unterscheiden.",
+      "question": "Leitfrage: Warum ist eine plausible Fortsetzung nicht automatisch wahr?",
+      "motivation": "Sprachmodelle können überzeugend schreiben, ohne die Richtigkeit einer Aussage zu prüfen.",
+      "product": "Ein dokumentierter Kontextvergleich, ein plausibles und ein problematisches Beispiel sowie zwei Grenzen der Analogie.",
+      "zeit": "Ein digitaler Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia, nicht beides als Pflicht. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Eine Fortsetzung vermuten",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Ergänzen Sie «Heute gehen wir …» auf zwei Arten. Vergleichen Sie, welche Fortsetzung plausibel wirkt und ob Sie wissen können, dass sie wahr ist."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Zwei Fortsetzungen und eine erste Unterscheidung von plausibel und wahr."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Kontext auf Papier",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Schreiben Sie abwechselnd je ein Wort zu demselben Satzanfang. Lassen Sie einmal nur die letzten zwei, einmal die letzten vier Wörter sichtbar. Vergleichen Sie die kurzen Texte und sichern Sie eine Beobachtung. Das illustriert Kontext, nicht Modelltraining."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein erster Kontextvergleich."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Vom Wortfolgemodell zum Netz",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Erklärt zusammenhängend das Papagei-Modell: Häufigkeiten von Wortfolgen liefern Fortsetzungen. Zeigt danach die Grafik «Papagei-Modell und neuronales Sprachmodell»: gleiches Ziel, nächstes Token vorhersagen, aber trainierte Gewichte, Zahlendarstellungen ähnlicher Wörter und grösserer Kontext statt blosser Häufigkeitstabelle. Beide Verfahren garantieren keine Wahrheit. Nennt einen digitalen Arbeitsweg und die passenden Pflichtstationen; die Alternative dient nur bei Bedarf."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein Modellverständnis als Grundlage für den Vergleich."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Ein Werkzeug gründlich untersuchen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 40,
+              "text": "Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Formulieren Sie vor dem digitalen Arbeitsweg allein eine Erwartung: Wie verändert ein grösserer Kontext die nächste Wortvorhersage? Halten Sie sie für den späteren Vergleich fest."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein belegter Vergleich und zwei kritisch eingeordnete Beispiele."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Plausibilität und Wahrheit trennen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Erklären Sie anhand Ihrer Beispiele, warum eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Papagei-Tabelle und neuronalem Sprachmodell und eine gemeinsame Grenze."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 2,
+              "text": "Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen einer falschen, aber überzeugenden Ausgabe?"
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 3,
+              "text": "Teilen Sie zwei Beispiele und klären Sie gemeinsam, weshalb Plausibilität keine Wahrheitsprüfung ist."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine eigene Erklärung von Verfahren und Grenzen."
+            }
+          ]
+        }
+      ],
+      "order": 90
+    }
+  ]
+}

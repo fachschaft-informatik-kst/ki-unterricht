@@ -1,0 +1,137 @@
+{
+  "lessons": [
+    {
+      "id": "04",
+      "view": "netze",
+      "title": "Warum mehrere Neuronen?",
+      "rueckblick": "In Doppellektion 3 scheiterte ein einzelnes Neuron an XOR. Heute kombinieren Sie mehrere Entscheidungen und klären, welche Daten ein Netz beim Lernen sehen darf.",
+      "rueckblick_figur": {
+        "src": "grafiken/xor_gerade.svg",
+        "alt": "XOR-Tabelle und vier Punkte: Keine gerade Linie trennt die beiden Klassen.",
+        "caption": "Ein einzelnes Neuron kann XOR nicht trennen; eine Zwischenschicht kann zusätzliche Grenzen darstellen."
+      },
+      "goal": "Eine Zwischenschicht erklären und Training, Validierung und Test trennen.",
+      "question": "Leitfrage: Wie lösen mehrere einfache Entscheidungen das XOR-Problem?",
+      "motivation": "Viele Neuronen erweitern die Möglichkeiten. Ob das Netz bei neuen Fällen funktioniert, hängt auch von einer fairen Datenaufteilung ab.",
+      "product": "XOR-Erklärung, begründete Datentrennung und ein freigegebenes Projektthema mit zwei Klassen.",
+      "zeit": "Nur das Netz-Notebook ist für alle Pflicht. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik erarbeitet; das zweite Notebook ist Nachschlagewerk oder Vertiefung, kein weiterer Pflichtwechsel. Themenfreigaben während der 55 Minuten, nicht erst im Abschluss; bei zwölf Tandems etwa eine Minute je Tandem. Datenplan und Fotos als vorbereitender Auftrag bis Doppellektion 5.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "XOR wieder aufnehmen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Zeichnen Sie die XOR-Punkte und erklären Sie, warum eine einzige Linie die Klassen nicht trennt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Die Grenze des einzelnen Neurons ist wieder präsent."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Eine Entscheidung rekonstruieren",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Rechnen Sie einander eine UND-Zeile mit Gewichten 1/1 und Bias −1.5 vor. Benennen Sie Eingabe, Summe und Ausgabe."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine überprüfte Neuronenrechnung."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Zwischenschicht und Datentrennung",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Verfolgt (1,0) durch h₁ = OR und h₂ = NAND, danach AND am Ausgang. Unterscheidet festgelegte Gewichte von gelernten Gewichten. Zeigt anschliessend die Datentrennung mit Prüfungsanalogie und fünf Gruppenkarten: T1/T2 zum Trainieren, V1 zur Auswahl, P1/P2 erst zum Abschlusstest. Dasselbe Exemplar bleibt in derselben Gruppe. Nennt die Freigabekriterien für Projektthema und Klassen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Zwei Orientierungshilfen: Netzbild und Rollen der fünf Datengruppen."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "XOR verstehen und das Projekt vorbereiten",
+          "minutes": 55,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 25,
+              "text": "Bearbeiten Sie im Notebook «Mehrere Neuronen kombinieren» den XOR-Kern: die vier Zeilen durch das konstruierte Netz verfolgen, dann ein Netz mit 1, 2 und 4 versteckten Neuronen lernen lassen. Erklären Sie die Funktion der Zwischenschicht. Ziffernexperimente sind Wahlvertiefung."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Skizzieren Sie allein, wie eine Zwischenschicht die XOR-Punkte trennen könnte, und markieren Sie Ihre offene Frage."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 25,
+              "text": "Ordnen Sie mit Gruppenkarten und Kursgrafik Training, Validierung und Test zu und erklären Sie ein Datenleck. Wählen Sie Thema und zwei Klassen aus dem Ideenpool; lassen Sie diese während der Arbeit bei der Lehrperson freigeben. Skizzieren Sie fünf unabhängige Gruppen. Das Notebook «Daten fair aufteilen» hilft bei Bedarf, ist aber kein zweiter Pflichtdurchlauf."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "XOR-Erklärung, Datenrollen und ein freigegebenes Thema mit zwei Klassen."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Brücke zur SOL-Phase",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Halten Sie fest, was die Zwischenschicht leistet und warum dasselbe Objekt nicht zugleich in Training und Test vorkommt. Notieren Sie Ihren nächsten Vorbereitungsschritt."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 4,
+              "text": "Teilen Sie eine Erklärung zur Zwischenschicht oder zum Datenleck und prüfen Sie sie gemeinsam."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 3,
+              "text": "Gibt den vorbereitenden Auftrag: Datenplan mit fünf unabhängigen Gruppen prüfen und bis Doppellektion 5 möglichst 80 Fotos sammeln, acht je Klasse und Gruppe. Beide Klassen unter gleichen Bedingungen; Personen nur mit Einverständnis. Fehlende Daten werden in der SOL-Zeit ergänzt; Ersatzdaten nur nach Absprache mit offener Herkunft."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine fachliche Sicherung und ein klarer Vorbereitungsauftrag."
+            }
+          ]
+        }
+      ],
+      "order": 40
+    }
+  ]
+}

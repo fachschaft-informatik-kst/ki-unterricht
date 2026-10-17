@@ -1,0 +1,486 @@
+{
+  "lessons": [
+    {
+      "id": "05",
+      "view": "projekt",
+      "title": "Ihr Projekt starten und die Arbeit planen",
+      "rueckblick": "In Doppellektion 4 haben Sie Thema und Klassen gewählt sowie die Datentrennung geklärt. Sie übernehmen jetzt die Planung Ihres Projekts im Tandem.",
+      "goal": "Eigene Tagesziele und Arbeitsschritte planen, eine überprüfbare Vermutung formulieren und die Datenqualität kontrollieren.",
+      "question": "Leitfrage: Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?",
+      "motivation": "Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.",
+      "product": "Ein eigener Etappenplan mit Rollen, eine Vermutung und ein gesicherter Arbeitsstand mit dokumentiertem Datencheck.",
+      "zeit": "Gemeinsamer SOL-Auftakt nur in Doppellektion 5. Danach 60 Minuten selbst organisierte Arbeit mit 10 Minuten frei verfügbarem Puffer darin. Lernlabor einmal als Orientierung nutzen, sofern der Ablauf noch unklar ist, nicht als Pflichtwiederholung. Etappen sind nicht an einzelne Doppellektionen gebunden; keine einheitliche Pflicht, heute bereits zu trainieren.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Arbeitsstand öffnen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Öffnen Sie Projektauftrag und vorhandene Fotos. Halten Sie fest, was bereit ist und was Ihnen noch fehlt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein ehrlicher Ausgangsstand."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Den fairen Vergleich klären",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Erklären Sie sich: A nutzt ein Exemplar je Klasse, B zwei; Bildzahl und Einstellungen bleiben gleich. Warum darf dasselbe Exemplar nicht in mehreren Datengruppen liegen?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Die fachlichen Leitplanken sind geklärt."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "SOL-Rahmen statt Tagesrezepte",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 10,
+              "text": "Klärt einmal Auftrag, fünf Reflexionen, Bewertung und Frist vor Doppellektion 8. Verbindlich sind Datenregeln, fairer A/B-Vergleich, begründete Auswahl vor Testeinsicht und keine Optimierung danach. Frei sind Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. Zeigt Foto → festes MobileNet → 1280 Merkmale → trainierbares Netz sowie ZIP-Sicherung. Kündigt kurze Beratung auf Anfrage statt weiterer gemeinsamer Inputs an."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein gemeinsamer Rahmen und freie Planung innerhalb der fachlichen Abhängigkeiten."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Etappen planen und selbstständig arbeiten",
+          "minutes": 60,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 40,
+              "text": "Gleichen Sie Ihre persönlichen nächsten Schritte und Rollen ab und erstellen Sie in Reflexion 1 einen kurzen Etappenplan bis zur Abgabe: Zuständigkeiten, Zeitbedarf und Reserve. Wählen Sie Ihr Tagesziel und bearbeiten Sie die passende Etappe. Prüfen und ergänzen Sie Fotos, importieren Sie die Daten und dokumentieren Sie Vermutung und Datenprobleme in Reflexion 1–2. Nutzen Sie Lernlabor und Hilfen nur nach Bedarf. Wer bereit ist, kann bereits vergleichen; wer Datenlücken hat, arbeitet zuerst daran. Die Lehrperson berät einzelne Tandems."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Prüfen Sie allein, welchen konkreten Beitrag Sie als Nächstes übernehmen und woran Sie erkennen, dass er gelungen ist."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Frei verfügbarer Puffer im SOL-Block für Datenlücken, Technik, Fragen oder gründlicheres Arbeiten; keine Zusatzpflicht."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eigener Plan und nachvollziehbarer Fortschritt, nicht ein identischer Stand aller Tandems."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Fortschritt prüfen und sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Prüfen Sie Ihr Tagesziel. Ergänzen Sie im bestehenden Journal kurz: erreicht, offen, nächster Schritt und benötigte Hilfe. Passen Sie Ihren Plan an und laden Sie eine ZIP-Sicherung herunter. Kein zusätzlicher SOL-Bericht."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Gesicherter Stand und selbst gewählter nächster Schritt."
+            }
+          ]
+        }
+      ],
+      "order": 50
+    },
+    {
+      "id": "06",
+      "view": "projekt",
+      "title": "Untersuchen und Entscheidungen begründen",
+      "rueckblick": "In Doppellektion 5 haben Sie Ihren Lernweg geplant. Heute setzen Sie an Ihrem eigenen Arbeitsstand an, nicht an einem neuen gemeinsamen Rezept.",
+      "goal": "Den eigenen Arbeitsplan steuern und einen fairen Vergleich mit Belegen und alternativen Erklärungen auswerten.",
+      "question": "Leitfrage: Was zeigen unsere Daten, und welche andere Erklärung ist möglich?",
+      "motivation": "Ein gutes Ergebnis ist nicht eine hohe Trefferquote, sondern ein nachvollziehbarer Vergleich und eine ehrliche Interpretation.",
+      "product": "Ein belegter Fortschritt an der gewählten Etappe und ein aktualisierter Plan; bei bereiten Tandems A/B-Auswertung und Auswahlbegründung.",
+      "zeit": "70 Minuten ununterbrochener SOL-Block, davon 10 Minuten Puffer. Kein neuer gemeinsamer Input und keine Synchronisierung aller Tandems. Datencheck, Vergleich und Abschluss sind Etappen, keine festen Lektionstermine.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Am eigenen Stand anknüpfen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Öffnen Sie Ihren letzten Stand. Nach Import oder Reload führen Sie Vorbereitung und Datenimport bewusst erneut aus. Sehen Sie Ihren letzten nächsten Schritt an."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein wieder arbeitsfähiger Projektstand."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Tagesziel setzen",
+          "minutes": 3,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Wählen Sie ein realistisches Tagesziel und verteilen Sie die Rollen neu. Prüfen Sie, welche Voraussetzung Ihrer Etappe noch fehlt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein eigenes Tagesziel mit Zuständigkeiten."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Benötigte Hilfe selbst wählen",
+          "minutes": 2,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Wählen Sie bei Bedarf eine passende Hilfe im Notebook oder eine konkrete Beratungsfrage. Kein gemeinsamer Input; bei klarem Vorgehen direkt weiterarbeiten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein passender Zugang zur nächsten Aufgabe."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Selbst organisierte Untersuchung",
+          "minutes": 70,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Arbeiten Sie an Ihrer gewählten Etappe. Vor jedem A/B-Lauf Daten prüfen; dann Bildzahl, Netz, Epochen und Startwert konstant halten. Lesen Sie Validierung und konkrete Vorhersagen, prüfen Sie eine alternative Erklärung und begründen Sie Ihre Auswahl in Reflexion 3 vor Testeinsicht. Bereite Tandems dürfen bereits abschliessen; andere ergänzen zuerst Daten und Reflexion 1–2. Die Lehrperson fragt in kurzen Beratungen nach Ziel, Beleg und nächstem Schritt; keine Unterbrechung der ganzen Klasse."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Bearbeiten Sie zuerst allein einen klar abgegrenzten Teil Ihrer gewählten Etappe und sichern Sie dazu einen konkreten Beleg. Greifen Sie bei fehlenden Daten weiterhin zuerst diese Lücke auf."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Frei verfügbarer Puffer für Technik, Interpretation oder Beratung. Eine Vertiefung mit weiteren Startwerten ist freiwillig und nur vor Testeinsicht möglich."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Belegte Ergebnisse der gewählten Etappe; keine Pflicht zu einem klassenweit gleichen Stand."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Zeitplan und Abgabe im Blick",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Vergleichen Sie Tagesziel und Ergebnis. Aktualisieren Sie den Etappenplan und den nächsten Schritt im Journal, sichern Sie als ZIP. Wenn die Abgabe gefährdet ist, vereinbaren Sie jetzt mit der Lehrperson eine realistische Lösung innerhalb der Projektregeln."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Gesicherter Fortschritt und ein realistischer Abschlussplan."
+            }
+          ]
+        }
+      ],
+      "order": 60
+    },
+    {
+      "id": "07",
+      "view": "projekt",
+      "title": "Das Projekt abschliessen und die Arbeit überprüfen",
+      "rueckblick": "Sie haben in Ihrem eigenen Tempo Daten geprüft und Varianten verglichen. Heute organisieren Sie den Abschluss und prüfen Ihre Belege.",
+      "goal": "Die Untersuchung selbstständig abschliessen, Grenzen belegen und den eigenen Arbeitsprozess reflektieren.",
+      "question": "Leitfrage: Was können wir mit unseren Ergebnissen begründet behaupten?",
+      "motivation": "Zum selbst organisierten Arbeiten gehört, einen klaren Schluss zu ziehen und ungesicherte Behauptungen sichtbar zu machen.",
+      "product": "Vollständiges Journal, geprüfte ZIP-Abgabe und ein von beiden erklärbares Projekt.",
+      "zeit": "70 Minuten SOL-Block, davon 15 Minuten Abschluss- und Technikpuffer. Kein zusätzlicher Bericht oder vorbereitete Präsentation. Fachgesprächsregeln und Austauschpartner bereits vor Doppellektion 8 mitteilen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Arbeitsstand und Frist",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Öffnen Sie Ihren Stand und prüfen Sie, was bis zur Abgabe noch fehlt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine eigene Abschlussliste."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Voraussetzungen prüfen",
+          "minutes": 3,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Prüfen Sie vor dem Abschlusstest: Ist die Auswahl samt Begründung dokumentiert? Sind P1/P2 bisher unangetastet? Nach Testeinsicht wird nichts optimiert."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein selbst durchgeführter Freigabecheck."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Abgabehilfen nach Bedarf",
+          "minutes": 2,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Nutzen Sie Projektauftrag und Raster für fehlende Belege. Lesen Sie die bereits bekannt gegebenen Gesprächszeiten und Austauschregeln; Beratung nur bei konkreten Fragen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Klarheit über den eigenen Abschlussweg."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Abschluss selbst steuern",
+          "minutes": 70,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 45,
+              "text": "Schliessen Sie die noch offenen Etappen ab. Testen Sie die begründet ausgewählte Variante einmal auf P1/P2; untersuchen Sie drei konkrete Beispiele, ohne Fehler zu erfinden. Schreiben Sie Reflexion 4–5 mit Grenzen, Fazit, nächstem Versuch, Arbeitsteilung, Hilfen und einer kurzen Rückschau auf Ihren Etappenplan. Prüfen Sie Journal und Ausgaben mit dem Raster. Erklären Sie sich gegenseitig das ganze Projekt; keine Folien nötig. Bereiten Sie die erlaubten Austauschdateien vor."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Prüfen Sie allein einen persönlichen Anteil Ihrer Abschlussliste anhand des Rasters und notieren Sie einen noch fehlenden Beleg oder eine offene Frage."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 15,
+              "text": "Puffer für fehlende Belege, technischen Export und Beratung. Datenarbeit bei Bedarf zuerst fertigstellen, nicht zugunsten eines schnellen Tests überspringen. Keine neuen Pflichtversuche."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine nachvollziehbare abgeschlossene Untersuchung und vorbereitete Austauschdateien."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Abgabe sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Prüfen Sie das ZIP auf Journal, Notebook mit Ausgaben, Daten und Protokoll. Laden Sie den finalen Stand herunter und reichen Sie ihn spätestens vor Beginn der Doppellektion 8 über den angegebenen Kanal ein. Halten Sie Ihre eigene Fotostudio-JSON für die Fremdauswertung bereit. Der Download allein ist keine Einreichung."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein geprüftes Abgabepaket und Bereitschaft für Gespräch und Austausch."
+            }
+          ]
+        }
+      ],
+      "order": 70
+    },
+    {
+      "id": "08",
+      "view": "projekt",
+      "title": "Das eigene Projekt erklären und ein fremdes Modell prüfen",
+      "rueckblick": "Ihr eigener Abgabestand ist eingefroren. Während der Fachgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.",
+      "goal": "Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.",
+      "question": "Leitfrage: Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?",
+      "motivation": "Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.",
+      "product": "Bewertetes Tandemgespräch und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.",
+      "zeit": "Gespräche parallel in Minute 5–85, nicht zusätzlich zu den 90 Minuten. Im 80-Minuten-Fenster selbstständig arbeiten und beim Aufruf pausieren. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest samt Auswertung. Drei Startwerte sind Zusatz. 15 Minuten Puffer im Arbeitsblock; die Fremdauswertung selbst entfällt nicht.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Abgaben und Organisation",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 4,
+              "text": "Bestätigt Abgaben, Gesprächsreihenfolge und die bereits zugeteilten Austauschprojekte. Erinnert an privates Browserfenster, Datenschutz und das unveränderte eigene Abgabepaket. Ab Minute 5 laufen alle Fachgespräche parallel bis Minute 85."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 1,
+              "text": "Öffnen Sie das zugeteilte Paket und notieren Sie Ihr Gesprächsfenster."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Alle kennen Gesprächszeit und Austauschprojekt."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Eigene Prüffrage wählen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Lesen Sie Vermutung und Ergebnis des anderen Tandems. Notieren Sie, was Sie nachprüfen wollen und welches Ergebnis Sie für Ihre eigenen Bilder erwarten. Die Gespräche laufen bereits; Sie arbeiten selbstständig."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 3,
+              "text": "Lesen Sie allein Vermutung und Ergebnis des anderen Tandems. Notieren Sie Ihre Prüffrage und eine Erwartung für Ihre eigenen Bilder."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine eigene Prüffrage und eine Erwartung vor dem Fremdtest."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Austauschauftrag erschliessen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Lesen Sie Reproduktionsprüfung und Fremdtest auf der Kursseite. Teilen Sie die Arbeit auf. Vergleichen Sie einen Lauf mit Startwert 11; weitere Startwerte sind freiwillig. Nutzen Sie Hilfetexte und notieren Sie technische Blockaden, ohne laufende Gespräche zu unterbrechen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein selbst gewähltes Vorgehen für die Fremdauswertung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Fremdes Modell prüfen; Gespräche parallel",
+          "minutes": 70,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 30,
+              "text": "Reproduktionsprüfung: Stellen Sie das fremde Projekt in einem privaten Browserfenster wieder her. Laden Sie Daten und trainieren Sie A/B einmal mit den Einstellungen des Originals und Startwert 11 nach. Wiederholen Sie den Abschlusstest mit der ursprünglichen Auswahl. Vergleichen Sie Datenprüfsumme und Werte mit dem Protokoll. Dokumentieren Sie kurz, was übereinstimmt, abweicht oder nicht prüfbar ist. Dies ist der erste Teil der unbenoteten Fremdauswertung."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 20,
+              "text": "Fremdtest und Rückmeldung: Lassen Sie das nachtrainierte fremde Modell Ihre eigenen Klassen C/D beurteilen. Lesen Sie Tabelle, Trennschärfe und konkrete Beispiele. Begründen Sie «Wie gut?» und «Warum?» mit mindestens zwei möglichen Erklärungen und einer Grenze. Formulieren Sie eine Rückmeldung an das andere Tandem und sichern Sie sie im bestehenden Fremdtest-Protokoll."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Halten Sie nach dem Fremdtest zuerst allein fest, welche Beobachtung Sie am überzeugendsten finden und welche Grenze Ihre Aussage hat."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 15,
+              "text": "Puffer für Gesprächsunterbrechung, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim Aufruf pausieren Sie. Im Fachgespräch erklären beide das eigene Projekt, eine Entscheidung, ein Ergebnis samt Grenze und einen neuen Fall. Bei nicht lösbarem Trainingsproblem werten Sie die gespeicherten fremden Ausgaben und Beispiele aus und dokumentieren, was nicht reproduziert werden konnte; keinen erfolgreichen Test behaupten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein Fachgespräch und eine belegte Fremdauswertung; der eigene Abgabestand bleibt unverändert."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Rückmeldung sichern",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Gesicherte Rückmeldung und eine Transferfrage; keine nachträgliche Änderung der bewerteten Abgabe."
+            }
+          ]
+        }
+      ],
+      "order": 80
+    }
+  ]
+}

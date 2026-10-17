@@ -61,7 +61,7 @@ build: install
 	$(VENV_PY) scripts/build_portal.py
 	$(VENV_PY) scripts/build_course.py
 	$(VENV_PY) scripts/build_portal_notebooks.py
-	$(VENV)/bin/jupyter lite build --contents content --output-dir dist
+	$(VENV)/bin/jupyter lite build --contents _build/content --output-dir dist
 	$(VENV_PY) scripts/copy_portal.py dist
 	@printf 'Vollstaendiger lokaler Build: dist/\n'
 
@@ -79,6 +79,11 @@ test: build
 	$(VENV_PY) tests/check_course.py
 	$(VENV_PY) tests/check_generated_content.py
 	$(VENV_PY) tests/check_new_chapter.py
+	$(VENV_PY) tests/check_new_lessons.py
+	$(VENV_PY) tests/check_new_lesson_cli.py
+	$(VENV_PY) tests/check_materials.py
+	$(VENV_PY) tests/check_admin.py
+	$(VENV_PY) tests/check_course_model.py
 	$(VENV_PY) tests/check_portal_content.py
 	$(VENV_PY) tests/check_solutions.py
 	$(VENV_PY) tests/check_content_mvc.py
@@ -87,6 +92,8 @@ test: build
 	node tests/check_autostart.cjs
 	node tests/check_archive.cjs
 	node tests/check_notebook_snapshot.cjs
+	node tests/check_admin.mjs
+	PYTHON=$(VENV_PY) node tests/check_course_model.mjs
 	@echo 'Lokale Tests bestanden. Echte Notebook- und ZIP-Browsertests laufen in GitHub Actions.'
 
 clean:

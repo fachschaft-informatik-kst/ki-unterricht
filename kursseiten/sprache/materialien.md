@@ -1,0 +1,20 @@
+## Doppellektion 09
+
+### Tafelvorlage zum Kontextvergleich
+
+| Zwei Wörter sichtbar | Vier Wörter sichtbar |
+|---|---|
+| Fortsetzung: ______ | Fortsetzung: ______ |
+| Beobachtung: ______ | Beobachtung: ______ |
+
+
+
+
+### Direkt öffnen
+
+- [Papierexperiment im Kurs](index.html#sprache-1)
+- [Papagei-Lernstrecke (inf-schule)](https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke)
+- [Soekia-Protokoll](index.html#sprache-3)
+
+**Papierexperiment:** Zwei und vier sichtbare Wörter vergleichen. Vor dem digitalen Versuch eine Erwartung **einzeln** formulieren; bei der Sicherung zwei Beispiele **in der Klasse** besprechen.
+
