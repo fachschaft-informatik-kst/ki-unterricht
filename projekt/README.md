@@ -8,9 +8,9 @@ Unterrichtsseiten und Kapitel liegen in `kursseiten/<bereich>/*.md`. Bestehende 
 
 
 - `kurs.json`: zehn nummerierte AVIVA-Abläufe à 90 Minuten; `python scripts/build_course.py` aktualisiert die markierten Bereiche in `index.html` und `worksheets/md/KI_Planung.md`.
-- Doppellektionen 5–8: SOL mit selbst geplanten Etappen statt lektionenweisem Gleichschritt; in 8 Fachgespräche parallel zur unbenoteten Fremdauswertung. `build_course.py` synchronisiert auch SOL-Hinweise, Projekttermine und den vereinfachten Austauschauftrag. Die bestehenden Journalfelder bleiben erhalten.
+- Doppellektionen 5–8: SOL mit selbst geplanten Etappen statt lektionenweisem Gleichschritt; in 8 vierminütige Einzelgespräche parallel zur unbenoteten Fremdauswertung. `build_course.py` synchronisiert auch SOL-Hinweise, Projekttermine und den vereinfachten Austauschauftrag. Die bestehenden Journalfelder bleiben erhalten.
 - `content/*.ipynb` und `content/ki_projekt/*.ipynb`: fünf didaktische Originale. Der Notebook-Build bewahrt Markdown und eingebettete Grafiken. Generierte Fassungen nicht von Hand pflegen.
-- Bewertung: zehn Kompetenzen à 0–3 Punkte, maximal 30. K1–K6 Abgabe (18), K7–K10 Tandemgespräch (12). Note = 1 + 5 × Punkte / 30, auf Viertelnoten. Raster auf der Seite und in `worksheets/md/KI_Bewertungsraster.md` synchron halten.
+- Bewertung: zehn Kompetenzen à 0–3 Punkte, maximal 30. K1–K6 Abgabe (18), K7–K10 Einzelgespräch zu 4 Minuten pro Person (12 individuelle Punkte). Note = 1 + 5 × Punkte / 30, auf Viertelnoten. Raster auf der Seite und in `worksheets/md/KI_Bewertungsraster.md` synchron halten.
 - Projektprofil: zwei Klassen, 80 Fotos, fünf Gruppen. A und B erhalten je 16 Trainingsbilder; 16 Validierungsbilder und 32 Testbilder. Ein Startwert 11, 16 Neuronen, 60 Epochen.
 
 ## Laufzeit und Projektstand
