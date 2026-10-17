@@ -127,7 +127,7 @@ def update_sol_material(text):
     sol = (
         '<div class="callout" id="sol-rahmen"><h3>Ihr Projekt: Arbeit planen, durchführen und überprüfen</h3>'
         '<p>In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. '
-        'Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen Fachgespräch und Fremdauswertung.</p>'
+        'Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen individuelle Einzelgespräche und die Fremdauswertung.</p>'
         '<p><strong>Verbindlich:</strong> fünf Datengruppen, fairer A/B-Vergleich, fünf Reflexionen, '
         'Auswahl vor Testeinsicht und danach keine Optimierung. Abgabe vor Beginn der Doppellektion 8.</p>'
         '<p><strong>Sie entscheiden:</strong> Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. '
@@ -150,7 +150,7 @@ def update_sol_material(text):
         '<td>Vollständiges Journal, Versuch mit Ausgaben, Daten und Protokoll</td></tr>'
         '<tr><td>8. Doppellektion</td><td>Fachgespräche; parallel selbstständige Fremdauswertung</td>'
         '<td>Ein Reproduktionslauf, Fremdtest und kurze Rückmeldung; unbenotet, eigene Abgabe unverändert</td></tr>'
-        '</tbody></table></div><p class="small muted">Alle Fachgespräche finden in Doppellektion 8 statt. '
+        '</tbody></table></div><p class="small muted">Alle Einzelgespräche finden in Doppellektion 8 statt (4 Minuten je Person). '
         'Reihenfolge und gleiche Dauer vorab bekannt; keine weiteren Gesprächstermine.</p></div></details>'
     )
     text, count = re.subn(r'<details><summary>Termine ansehen</summary>.*?</details>', schedule, text, count=1, flags=re.S)
