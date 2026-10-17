@@ -548,7 +548,7 @@ let previewDebounce=null;
 $("source").addEventListener("input",()=>{
   highlightSource();
   clearTimeout(previewDebounce);
-  if(!$("source").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
+  if(!$("codeEditor").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
 });
 $("previewButton").addEventListener("click",preview);
 $("previewFullscreen").addEventListener("click",()=>{
