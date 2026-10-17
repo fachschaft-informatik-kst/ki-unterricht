@@ -71,7 +71,7 @@
         <div id="planPhases"></div>
       </section>
       <label for="source" class="field-title" id="sourceLabel">Kapitelquelltext</label>
-      <textarea id="source" spellcheck="true" rows="20" placeholder="Wähle links ein Kapitel aus."></textarea>
+      <div class="code-editor" id="codeEditor"><pre id="sourceHighlight" class="source-highlight" aria-hidden="true"></pre><textarea id="source" spellcheck="false" rows="20" placeholder="Wähle links ein Kapitel aus." aria-label="Kapitelquelltext mit Syntaxhervorhebung"></textarea></div>
       <div class="editor-actions">
         <button id="previewButton" type="button" class="button light">Vorschau aktualisieren</button>
         <button id="stage" type="button" class="button primary">Änderung vormerken</button>
