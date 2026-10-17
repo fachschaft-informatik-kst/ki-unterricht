@@ -13,7 +13,19 @@ Kapitel und neue Unterkapitel in den bestehenden Unterrichtsbereichen. Er kann:
 - Inhalte in einem **skriptgesperrten Vorschau-iframe** ansehen,
 - alles als **einen atomaren Commit auf einem neuen Branch und Pull Request** einreichen.
 
-Eine neue Doppellektion erzeugt automatisch Navigation, AVIVA-Unterrichtsplan und Materialabschnitt. Über «Unterrichtsplan bearbeiten» erscheint ein **AVIVA-Formular** mit allen bestehenden und neuen Doppellektionen. Hier können Lernziele, Leitfrage, fünf Phasen, Zeiten, Sozialformen und einzelne Arbeitsschritte ohne JSON-Kenntnisse ergänzt werden. Die Minutenanzeige prüft auf 90 Minuten; neue Schritte lassen sich hinzufügen oder entfernen. «Materialien bearbeiten» öffnet die Markdown-Ergänzungen für die ausgewählte neue Doppellektion oder die bisherigen Materialseiten. Bei Grafiken in Lehrpersonenmaterialien fragt der Editor zusätzlich nach AVIVA-Phase und Sozialform, damit die Abbildungen im Materialkoffer korrekt beschriftet und geprüft werden. Beides wird zusammen mit dem ersten Kapitel als Pull Request eingereicht. Eine neue Doppellektion pro Pull Request ist zulässig.
+Eine neue Doppellektion erzeugt einen Themenordner mit `planung.json`, erstem
+Kapitel und `materialien.md` und ergänzt `kursseiten/manifest.json`. Navigation,
+Übersichtskarte und Lehrpersonenübersichten entstehen beim Build automatisch.
+Über «Unterrichtsplan bearbeiten» erscheint ein **AVIVA-Formular für das ausgewählte
+Thema**, bei mehreren Lektionen mit Auswahlfeld. Lernziele, Leitfrage, fünf Phasen,
+Zeiten, Sozialformen und Arbeitsschritte sind ohne JSON-Kenntnisse bearbeitbar.
+Die Minutenanzeige prüft auf 90 Minuten; `order` bestimmt die Reihenfolge, nicht
+die unveränderliche Lektions-ID. «Materialien bearbeiten» öffnet die zugehörige
+Markdown-Datei. Bei Bildern werden AVIVA-Phase und Sozialform abgefragt.
+Alles wird zusammen als Pull Request eingereicht, innerhalb des Limits von
+12 Dateien. Zusätzliche Lektionen in bestehenden Themen können lokal mit
+`scripts/new_lesson.py --section <thema>` angelegt und danach im Formular bearbeitet
+werden. Siehe [Redaktionskonzept](ARCHITEKTUR.md).
 
 Der Pull Request startet die **bestehende GitHub-Action**. Erst ein erfolgreicher
 Merge nach \`main\` löst die Veröffentlichung über GitHub Pages aus. Es gibt
@@ -111,7 +123,7 @@ eine Fehlermeldung statt eines stillen Überschreibens.
 
 ## Einschränkungen und Sicherheit
 
-- **Neue Doppellektionen** lassen sich ab Nummer 11 anlegen. Der Editor erzeugt einen AVIVA-Plan (90 Minuten), die erste Kurskapiteldatei und den zugehörigen Lehrpersonen-Materialabschnitt. Die Platzhalter im Plan sollten vor der Freigabe fachlich über «Unterrichtsplan bearbeiten» konkretisiert werden.
+- **Neue Doppellektionen** verwenden dasselbe Schema wie bestehende. Die sichtbare Nummer entsteht aus der Reihenfolge beim Build. Die Platzhalter im Plan müssen vor der Freigabe fachlich konkretisiert werden.
 - Alte Unterkapitel enthalten teilweise echtes HTML und interaktive Elemente.
   Der Editor ist deshalb ein **Quelltexteditor mit vereinfachter Vorschau**,
   noch kein vollständig visueller WYSIWYG-Editor.
@@ -123,9 +135,11 @@ eine Fehlermeldung statt eines stillen Überschreibens.
 - Bereits bestehende \`data-answer\`, \`data-journal\`, Notebook- und
   Beurteilungs-IDs **nicht ändern oder löschen**. Der Editor warnt beim
   Entfernen, die CI prüft die Verträge mit gespeicherten Schülerdaten.
-- Max. 12 Dateien pro PR. Es sind nur Kapiteldateien
-  und neue Bilddateien unter \`projekt/grafiken/uploads/\` schreibbar.
-  JS, GitHub-Workflows, Metadaten und Administrationscode sind gesperrt.
+- Max. 12 Dateien pro PR. Schreibbar sind nummerierte Kapitel,
+  Themenpläne, Themenmaterialien, das Bereichsmanifest und neue Bilddateien
+  unter \`projekt/grafiken/uploads/\`. Der Worker prüft den Gesamtkurs auf
+  bestehende IDs, vollständige Themen, eindeutige Reihenfolge und gültige AVIVA-Pläne.
+  JS, GitHub-Workflows und Administrationscode bleiben gesperrt.
 - HTML in bearbeiteten Kapiteln kann auf der veröffentlichten öffentlichen
   Website ausgeführt werden. Deshalb gehören auch Editor-Pull-Requests
   in ein **Code-Review**; GitHub App nur an vertrauenswürdige Maintainer geben.

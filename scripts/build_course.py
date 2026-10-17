@@ -3,9 +3,9 @@ from pathlib import Path
 import html
 import json
 import re
+from course_model import load_course, output, PHASES
 
 ROOT = Path(__file__).resolve().parents[1]
-PHASES = ['Ankommen', 'Vorwissen aktivieren', 'Informieren', 'Verarbeiten', 'Auswerten']
 
 def wer_klasse(wer):
     if wer == 'Lehrperson': return 'wer-l'
@@ -45,7 +45,7 @@ def figur(f):
 def render(lesson, voll=False):
     """Kursseite: nur Ziel, Leitfrage und Motivation. Mit voll=True zusätzlich Ablauftabelle (Lehrperson)."""
     return (f'<details class="lesson-plan" id="doppellektion-{lesson["id"]}" data-lesson="{lesson["id"]}" open><summary>'
-            f'<span class="phase-num">{lesson["id"]}</span><span>Doppellektion {int(lesson["id"])} · {html.escape(lesson["title"])}</span>'
+            f'<span class="phase-num">{str(lesson.get("number", lesson["id"])).zfill(2)}</span><span>Doppellektion {lesson.get("number", lesson["id"])} · {html.escape(lesson["title"])}</span>'
             '<small>90 Min.</small></summary><div class="detail-body">'
             + (f'<p class="lesson-recap"><strong>Rückblick:</strong> {verlinke(html.escape(lesson["rueckblick"]))}</p>' if lesson.get('rueckblick') else '')
             + (figur(lesson['rueckblick_figur']) if lesson.get('rueckblick_figur') else '')
@@ -67,7 +67,7 @@ def lehrpersonen_seite(lessons, kursseite):
             '<body class="lehrpersonen-seite"><main><div class="crumb"><span>Nur für die Lehrperson</span></div>'
             f'<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller {len(lessons)} Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
             'In Doppellektion 5–8 dient AVIVA nur als äusserer Rahmen der SOL-Arbeit, nicht als gemeinsamer Takt für die Projektetappen. '
-            'Gleiche Fassung wie in <code>worksheets/md/KI_Planung.md</code>.</p>'
+            'Die vollständigen Ablauftabellen finden Sie direkt weiter unten.</p>'
             '<p><a href="index.html">← Zur Kursseite</a></p>\n'+plaene+'\n<p><a href="index.html">← Zur Kursseite</a></p></main></body></html>\n')
 
 def remove_calendar_dates(text):
@@ -186,21 +186,8 @@ def update_sol_material(text):
     return text
 
 def build():
-    lessons = json.loads((ROOT/'projekt/kurs.json').read_text())['lessons']
-    if len(lessons) < 10 or [l["id"] for l in lessons[:10]] != [f"{i:02d}" for i in range(1, 11)]:
-        raise ValueError("Core lessons 01–10 must be preserved")
-    additional = lessons[10:]
-    if [l["id"] for l in additional] != [f"{i:02d}" for i in range(11, 11+len(additional))]:
-        raise ValueError("Additional lessons must be consecutively numbered")
-    if any(l.get("view") != f'dl-{l["id"]}' for l in additional):
-        raise ValueError("Each added lesson needs its own dl-NN view")
-    for lesson in lessons:
-        assert [p['phase'] for p in lesson['phases']] == PHASES
-        assert sum(p['minutes'] for p in lesson['phases']) == 90
-        assert all(p.get('titel') and '|' not in p['titel'] for p in lesson['phases'])
-        for phase in lesson['phases']:
-            assert sum(step.get('min', 0) for step in phase['schritte']) == phase['minutes']
-    page = ROOT/'projekt/index.html'
+    lessons = load_course(ROOT)['lessons']
+    page = output(ROOT) / 'index.html'
     text = page.read_text()
     for view in dict.fromkeys(l['view'] for l in lessons):
         body = '\n'.join(render(l) for l in lessons if l['view'] == view)
@@ -210,10 +197,10 @@ def build():
     # All published teaching copy already comes from kursseiten/*.md.
     # Only the AVIVA overviews and teacher plans are generated here.
     page.write_text(text.rstrip()+"\n")
-    (ROOT/'projekt/unterrichtsplan.html').write_text(lehrpersonen_seite(lessons, text))
+    (output(ROOT) / 'unterrichtsplan.html').write_text(lehrpersonen_seite(lessons, text))
     rows = []
     for l in lessons:
-        rows.extend([f'### Doppellektion {int(l["id"])} · {l["title"]}', ''] + ([f'**Rückblick:** {l["rueckblick"]}', ''] + ([f'*{l["rueckblick_figur"]["caption"]}*', ''] if l.get('rueckblick_figur') else []) if l.get('rueckblick') else []) + [f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"].removeprefix("Leitfrage:").strip()}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['**Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.', ''])
+        rows.extend([f'### Doppellektion {l["number"]} · {l["title"]}', ''] + ([f'**Rückblick:** {l["rueckblick"]}', ''] + ([f'*{l["rueckblick_figur"]["caption"]}*', ''] if l.get('rueckblick_figur') else []) if l.get('rueckblick') else []) + [f'**Lernziel:** {l["goal"]}', '', f'**Leitfrage:** {l["question"].removeprefix("Leitfrage:").strip()}', ''] + ([f'**Motivation:** {l["motivation"]}', ''] if l.get('motivation') else []) + ['**Ablauf (AVIVA):** In der Spalte «Wer» steht, ob die Lehrperson Input gibt oder ob einzeln, im Tandem, in der Gruppe oder in der Klasse gearbeitet wird.', ''])
         rows += ['| Phase | Min. | Wer | Was |', '|---|---:|---|---|']
         for p in l['phases']:
             for i, st in enumerate(p['schritte']):
@@ -223,9 +210,9 @@ def build():
         if l.get('zeit'): rows += [f'**Zeit:** {l["zeit"]}', '']
     plan = ROOT/'worksheets/md/KI_Planung.md'
     text = plan.read_text()
-    text, count = re.subn(r'<!-- KURSPLAN -->.*?<!-- /KURSPLAN -->', '<!-- KURSPLAN -->\n'+'\n'.join(rows)+'\n<!-- /KURSPLAN -->', text, flags=re.S)
+    text, count = re.subn(r'<!-- KURSPLAN -->', '\n'.join(rows), text)
     assert count == 1
-    plan.write_text(text)
+    (output(ROOT) / 'KI_Planung.md').write_text(text)
     from build_materials import build as build_materials
     build_materials(lessons)
     print(f'Generated {len(lessons)} consistent AVIVA plans, each 90 minutes')

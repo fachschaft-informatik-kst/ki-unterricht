@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from build_portal import assemble, render_fragment
 
 contract = json.loads((ROOT / "tests/fixtures/content-contract.json").read_text(encoding="utf-8"))
-rendered = (ROOT / "projekt/index.html").read_text(encoding="utf-8")
+rendered = (ROOT / "_build/site/projekt/index.html").read_text(encoding="utf-8")
 assembled = assemble()
 
 # The AVIVA builder replaces only deliberately generated teaching-plan blocks.

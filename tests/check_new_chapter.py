@@ -16,7 +16,7 @@ with TemporaryDirectory() as temp:
     folder = root / "kursseiten/einstieg"
     folder.mkdir(parents=True)
     (root / "kursseiten/manifest.json").write_text(
-        json.dumps({"sections": ["einstieg", "start"]}), encoding="utf-8"
+        json.dumps({"sections": [{"id": "einstieg", "teaching": True}, {"id": "start"}]}), encoding="utf-8"
     )
     for n in (0, 30, 40, 999):
         (folder / f"{n:03d}-example.md").write_text(

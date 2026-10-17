@@ -74,6 +74,7 @@ jobs:
           node --check projekt/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
           node tests/check_admin.mjs
+          node tests/check_course_model.mjs
       - name: Browser-check teacher editor
         run: |
           npm install --prefix /tmp/ki-browser playwright
@@ -95,12 +96,13 @@ jobs:
           python tests/check_admin.py
           python tests/check_new_lessons.py
           python tests/check_new_lesson_cli.py
+          python tests/check_course_model.py
           python tests/check_materials.py
           python scripts/format_course_sources.py --check
           python tests/check_portal_content.py
           python tests/check_solutions.py
           python tests/check_content_mvc.py
-          jupyter lite build --contents content --output-dir dist
+          jupyter lite build --contents _build/content --output-dir dist
           python scripts/copy_portal.py dist
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js

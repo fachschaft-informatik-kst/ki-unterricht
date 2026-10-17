@@ -21,7 +21,7 @@ def values():
     if not m:
         raise RuntimeError("Embedded course stylesheet is missing")
     body = template.index("<body>") + len("<body>")
-    first_section = template.index('<section class="hero" id="start">', body)
+    first_section = template.index('<!-- COURSE -->', body)
     chrome = template[body:first_section]
     if '<div class="shell"><main id="inhalt">' not in chrome:
         raise RuntimeError("Course shell structure has changed")

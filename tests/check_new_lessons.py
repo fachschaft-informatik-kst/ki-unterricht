@@ -1,46 +1,51 @@
-"""Additional lessons are generated without modifying the legacy HTML template."""
-import json
+"""One renderer handles existing topics, inserted topics and grouped lessons."""
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from bs4 import BeautifulSoup
+from unittest.mock import patch
+import shutil
 import sys
-ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/"scripts"))
-import build_portal
-from build_course import render, PHASES
+from bs4 import BeautifulSoup
 
-original=json.loads((ROOT/"projekt/kurs.json").read_text(encoding="utf-8"))
-assert len(original["lessons"])>=10
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+import build_portal
+import build_course
+import build_materials
+import build_solutions
+from course_model import load_course, output
+from new_lesson import create
+
 with TemporaryDirectory() as tmp:
-    target=Path(tmp)
-    pages=target/"kursseiten"
-    pages.mkdir()
-    for name in json.loads((ROOT/"kursseiten/manifest.json").read_text())["sections"]:
-        (pages/name).symlink_to(ROOT/"kursseiten"/name, target_is_directory=True)
-    (pages/"manifest.json").write_text((ROOT/"kursseiten/manifest.json").read_text())
-    folder=pages/"dl-11"
-    folder.mkdir()
-    (folder/"010-beispiel.md").write_text(
-        "---\ntype: chapter\nid: dl-11-beispiel\nnummer: \"1\"\ntitel: \"Zusatzkapitel\"\nkurz: \"Neue Aufgabe\"\n---\n\nEine neue Doppellektion.\n",
-        encoding="utf-8")
-    portal=target/"projekt"
-    portal.mkdir()
-    (portal/"index.template.html").write_text((ROOT/"projekt/index.template.html").read_text(),encoding="utf-8")
-    new=dict(original["lessons"][-1])
-    new.update({"id":"11","view":"dl-11","title":"Neue Doppellektion"})
-    original["lessons"].append(new)
-    (portal/"kurs.json").write_text(json.dumps(original),encoding="utf-8")
-    old_pages,old_portal=build_portal.PAGES,build_portal.PORTAL
-    try:
-        build_portal.PAGES,build_portal.PORTAL=pages,portal
-        rendered=build_portal.assemble()
-    finally:
-        build_portal.PAGES,build_portal.PORTAL=old_pages,old_portal
-    soup=BeautifulSoup(rendered,"html.parser")
-    assert soup.select_one("section#dl-11 details#dl-11-beispiel")
-    assert soup.select_one('nav.nav a[href="#dl-11"]')
-    assert "<!-- LESSONS:dl-11 -->" in rendered
-    assert soup.select_one("section#einstieg")
-    assert "Neue Doppellektion" in render(new,True)
-    assert [p["phase"] for p in new["phases"]]==PHASES
-print("PASS dynamic lesson 11 with navigable Markdown and AVIVA plan")
+    root = Path(tmp)
+    for folder in ("kursseiten", "projekt", "lehrperson", "worksheets", "content", "shared", "experimente"):
+        shutil.copytree(ROOT / folder, root / folder, ignore=shutil.ignore_patterns("__pycache__", "portal", "materialien", "musterloesungen", "index.html", "unterrichtsplan.html", "materialien.html"))
+    create(root, "KI im Alltag", after="03")
+    create(root, "Vertiefung", section="ki-im-alltag", after="ki-im-alltag")
+    target = output(root)
+    with patch.multiple(build_solutions, SOURCE=root/"lehrperson/musterloesungen.md",
+                        OUTPUT=target/"musterloesungen/index.html"):
+        with patch.multiple(build_portal, ROOT=root, PAGES=root/"kursseiten", PORTAL=root/"projekt"):
+            build_portal.build()
+    with patch.multiple(build_materials, ROOT=root, SOURCE=root/"lehrperson/materialien.md",
+                        OUTPUT=target/"materialien.html", DOWNLOADS=target/"materialien/downloads"):
+        with patch.object(build_course, "ROOT", root):
+            build_course.build()
+    soup = BeautifulSoup((target/"index.html").read_text(), "html.parser")
+    assert soup.select_one("section#ki-im-alltag details.kapitel")
+    assert len(soup.select("#ki-im-alltag .lesson-plan")) == 2
+    nav = [a["href"] for a in soup.select(".nav > a")]
+    assert nav.index("#perzeptron") < nav.index("#ki-im-alltag") < nav.index("#netze")
+    assert soup.select_one('.course-card[href="#ki-im-alltag"]')
+    assert soup.select_one("#doppellektion-03"), "Existing lesson URL must survive insertion"
+    assert soup.select_one("#doppellektion-vertiefung")
+    material = BeautifulSoup((target/"materialien.html").read_text(), "html.parser")
+    assert len(material.select(".lesson-resources")) == 12
+    assert material.select_one("#dl-vertiefung")
+    assert [s["id"] for s in material.select(".lesson-resources")] == [
+        "dl-" + l["id"] for l in load_course(root)["lessons"]
+    ]
+    course = load_course(root)
+    assert next(l for l in course["lessons"] if l["id"] == "04")["number"] == 6
+    assert "<!-- KURSPLAN -->" in (root/"worksheets/md/KI_Planung.md").read_text()
+    assert "Vertiefung" in (target/"KI_Planung.md").read_text()
+print("PASS full new-topic build, grouped lessons, inserted navigation, teacher material and source isolation")

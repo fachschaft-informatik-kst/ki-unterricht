@@ -4,7 +4,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
-soup = BeautifulSoup((ROOT / "projekt/index.html").read_text(), "html.parser")
+soup = BeautifulSoup((ROOT / "_build/site/projekt/index.html").read_text(), "html.parser")
 js = (ROOT / "projekt/portal.js").read_text()
 for forbidden in ("createElement('figure')", "createElement('article')",
                   "createElement('iframe')", "createElement('textarea')",

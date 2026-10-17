@@ -24,15 +24,19 @@ def build_full():
     command("npm", "ci", "--prefix", "extensions/ki-autostart")
     command("npm", "run", "build", "--prefix", "extensions/ki-autostart")
     command(sys.executable, "scripts/build_portal_notebooks.py")
-    command("jupyter", "lite", "build", "--contents", "content", "--output-dir", "dist")
+    command("jupyter", "lite", "build", "--contents", "_build/content", "--output-dir", "dist")
     command(sys.executable, "scripts/copy_portal.py", "dist")
 
 
 def fingerprints():
-    paths = [ROOT / "projekt/index.template.html", ROOT / "projekt/kurs.json"]
+    paths = list((ROOT / "projekt").rglob("*"))
+    paths.extend((ROOT / "shared").glob("*"))
+    paths.extend((ROOT / "experimente").glob("*"))
     paths.extend((ROOT / "kursseiten").rglob("*.md"))
     paths.extend((ROOT / "lehrperson").rglob("*.md"))
     paths.extend((ROOT / "kursseiten").rglob("*.json"))
+    paths.append(ROOT / "worksheets/md/KI_Planung.md")
+    paths.extend((ROOT / "scripts").glob("*.py"))
     return {str(path): path.stat().st_mtime_ns for path in paths if path.is_file()}
 
 
@@ -60,7 +64,7 @@ def main():
     build_content()
     if args.full:
         build_full()
-    directory = ROOT / "dist" if args.full else ROOT
+    directory = ROOT / "dist" if args.full else ROOT / "_build/site"
     handler = functools.partial(SimpleHTTPRequestHandler, directory=str(directory))
     stop = threading.Event()
     if not args.no_watch and not args.full:

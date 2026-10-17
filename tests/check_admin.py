@@ -29,10 +29,10 @@ for item in ("GITHUB_CLIENT_SECRET","GITHUB_CLIENT_ID","SESSION_KEY",
              "AES-GCM","code_challenge_method","/auth/callback","/git/trees",
              "/git/commits","/pulls","SameSite=Lax","expectedSha"):
     assert item in backend,item
-course=(ROOT/"projekt/index.html").read_text(encoding="utf-8")
+course=(ROOT/"_build/site/projekt/index.html").read_text(encoding="utf-8")
 assert '<a href="admin/">' in course
 planner=(site/"plan-editor.js").read_text(encoding="utf-8")
-assert "function createPlanner" in planner and "Die AVIVA-Phasen müssen 90 Minuten" in planner
+assert "function createPlanner" in planner and "validatePlan" in planner
 assert 'plan-editor.js' in code
 assert '"/plan-editor.js":"plan-editor.js"' in backend
 assert "access_token" not in source and "client_secret" not in source

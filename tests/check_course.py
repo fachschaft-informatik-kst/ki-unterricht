@@ -12,7 +12,7 @@ sys.path.insert(0,str(root/'scripts'))
 from build_portal_notebooks import ITEMS
 from build_course import PHASES
 
-lessons=json.loads((root/'projekt/kurs.json').read_text())['lessons']
+lessons=json.loads((root/'_build/site/projekt/kurs.json').read_text())['lessons']
 assert len(lessons)>=10
 assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,len(lessons)+1)]
 assert [l['view'] for l in lessons[10:]]==[f'dl-{i:02d}' for i in range(11,len(lessons)+1)]
@@ -25,7 +25,7 @@ assert planned_minutes['Klasse']>=50
 for lesson in lessons:
     if lesson['id'] in ['05','06','07','08']:
         assert any(step['wer']=='Einzeln' for phase in lesson['phases'] for step in phase['schritte'])
-soup=BeautifulSoup((root/'projekt/index.html').read_text(),'html.parser')
+soup=BeautifulSoup((root/'_build/site/projekt/index.html').read_text(),'html.parser')
 rules=soup.select_one('#einstieg-1')
 assert rules.select_one('textarea[data-answer="regeln_oder_daten"][aria-label]')
 task=rules.select_one('.task').get_text()
@@ -40,10 +40,10 @@ for answer in ['begriffe_saetze','begriffe']:
     assert len(fields)==1 and fields[0] in conclusion.select('textarea')
 assert 'in je einem eigenen Satz' in conclusion.select_one('.task').get_text()
 assert not re.search(r'\bSOL\b',soup.get_text()), 'Use concrete student-facing language instead of SOL'
-page=(root/'projekt/index.html').read_text()
+page=(root/'_build/site/projekt/index.html').read_text()
 assert len([d for d in soup.select('#projekt details') if d.find('summary', recursive=False) and d.find('summary', recursive=False).get_text(strip=True)=='Termine ansehen']) == 1, 'There must be exactly one project schedule'
 # Ablauftabellen stehen nur auf der Lehrpersonen-Seite, nicht auf der Kursseite.
-plans=BeautifulSoup((root/'projekt/unterrichtsplan.html').read_text(),'html.parser')
+plans=BeautifulSoup((root/'_build/site/projekt/unterrichtsplan.html').read_text(),'html.parser')
 assert not soup.select('.phase-table') and 'Unser Ablauf' not in soup.get_text() and 'Am Ende sichtbar' not in soup.get_text()
 assert soup.select_one('a[href="unterrichtsplan.html"]')
 ids=[x['id'] for x in soup.select('[id]')]
@@ -61,19 +61,19 @@ for lesson in lessons:
         assert sum(step.get('min',0) for step in phase['schritte'])==phase['minutes']
         for step in phase['schritte']:
             assert step['text'] in plan.get_text(), step['text'][:40]
-            assert step['text'] in (root/'worksheets/md/KI_Planung.md').read_text(), step['text'][:40]
+            assert step['text'] in (root/'_build/site/projekt/KI_Planung.md').read_text(), step['text'][:40]
 for a in soup.select('a[href^="#"]'):
     assert a['href'][1:] in ids, a['href']
 for img in soup.select('img'):
     assert img.get('alt'), img
     src=img['src']
-    assert (root/'projekt'/src).is_file() or src in ['previews/perzeptron.png','previews/xor.png','previews/datenplan.png','https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png'], src
-assert {p.name for p in (root/'content/portal').glob('*.ipynb')}=={Path(p).name for p in ITEMS}
+    assert (root/'_build/site/projekt'/src).is_file() or src in ['previews/perzeptron.png','previews/xor.png','previews/datenplan.png','https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png'], src
+assert {p.name for p in (root/'_build/content/portal').glob('*.ipynb')}=={Path(p).name for p in ITEMS}
 originals={str(p.relative_to(root/'content')) for p in (root/'content').rglob('*.ipynb') if 'portal' not in p.parts and '.ipynb_checkpoints' not in p.parts}
 assert originals==set(ITEMS), originals
 for name in ITEMS:
     src=nbformat.read(root/'content'/name,4)
-    embedded=nbformat.read(root/'content/portal'/Path(name).name,4)
+    embedded=nbformat.read(root/'_build/content/portal'/Path(name).name,4)
     for nb in [src,embedded]:
         nbformat.validate(nb)
         assert sum(len(c.source) for c in nb.cells if c.cell_type=='markdown')>1200, name
@@ -95,7 +95,7 @@ for name in ITEMS:
     for a,b in zip(original_md,embedded_md):
         assert len(b.source)>=len(a.source)-40, 'Explanations removed: '+name
         assert a.get('attachments')==b.get('attachments')
-    for nb,base in [(src,(root/'content'/name).parent),(embedded,root/'content/portal')]:
+    for nb,base in [(src,(root/'content'/name).parent),(embedded,root/'_build/content/portal')]:
         for c in nb.cells:
             if c.cell_type=='markdown':
                 for link in re.findall(r'\]\(([^)]+\.ipynb)\)',c.source):
@@ -104,7 +104,7 @@ for name in ITEMS:
 oral=next(l for l in lessons if l['id']=='08')
 assert sum(p['minutes'] for p in oral['phases'])==90  # AVIVA class plan
 assert oral['phases'][0]['schritte'][0]['wer']=='Einzeln', 'No whole-class introduction while examinations are running'
-planning=(root/'worksheets/md/KI_Planung.md').read_text()
+planning=(root/'_build/site/projekt/KI_Planung.md').read_text()
 assert '20 × (4 + 1) = 100 Minuten' in planning
 assert '90 Minuten Unterricht plus 10 Minuten unmittelbar anschliessend' in planning
 assert 'eine Lehrperson' in planning

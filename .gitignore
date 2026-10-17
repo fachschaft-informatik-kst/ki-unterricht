@@ -117,6 +117,7 @@ dmypy.json
 _output
 
 .venv/
+/_build/
 
 .workspace/*.pdf
 

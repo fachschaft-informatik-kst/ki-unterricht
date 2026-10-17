@@ -1,4 +1,5 @@
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
+import experiments from './experiments.json' with {type:'json'};
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
 const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1';
 // Content and permanent markup are authored only in kursseiten/.
@@ -125,8 +126,8 @@ $('attachments').addEventListener('change',async e=>{
  }catch(error){$('download-status').textContent=error.message;}finally{e.target.value='';}
 });
 // One fixed iframe, one standard Jupyter session at a time. No live state is moved.
-const names={'perzeptron_und_neuronale_netze.ipynb':'Ein Neuron','mehrschichtige_netze.ipynb':'XOR-Netz','daten_training.ipynb':'Datenaufteilung','ki_lernlabor.ipynb':'Projekt-Lernlabor','ki_tandemprojekt.ipynb':'Unser Versuch'};
-const frame=$('project-frame'),lab=$('project-lab'),projectName='ki_tandemprojekt.ipynb';
+const names=Object.fromEntries(experiments.map(e=>[e.source.split('/').pop(),e.title]));
+const frame=$('project-frame'),lab=$('project-lab'),projectName=experiments.find(e=>e.project).source.split('/').pop();
 let activeName='',activeOwner='',switching=false,initializingFrame=false;
 // Never move an already loaded iframe. Saved documents are the source of truth;
 // every new frame has a fresh Python kernel, including after a page reload.

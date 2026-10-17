@@ -7,19 +7,16 @@ import shutil
 
 from bs4 import BeautifulSoup
 from markdown_it import MarkdownIt
+from course_model import output, load_course
+from build_portal_notebooks import REGISTRY
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "lehrperson/materialien.md"
-OUTPUT = ROOT / "projekt/materialien.html"
-DOWNLOADS = ROOT / "projekt/materialien/downloads"
+OUTPUT = output(ROOT) / "materialien.html"
+DOWNLOADS = output(ROOT) / "materialien/downloads"
 
 # Reuse the maintained source files rather than maintaining separate copies.
 FILES = {
-    "perzeptron_und_neuronale_netze.ipynb": "content/perzeptron_und_neuronale_netze.ipynb",
-    "mehrschichtige_netze.ipynb": "content/mehrschichtige_netze.ipynb",
-    "daten_training.ipynb": "content/daten_training.ipynb",
-    "ki_tandemprojekt.ipynb": "content/ki_projekt/ki_tandemprojekt.ipynb",
-    "ki_lernlabor.ipynb": "content/ki_projekt/ki_lernlabor.ipynb",
     "ki_fotodaten.md": "content/ki_projekt/ki_fotodaten.md",
     "ki_projektauftrag.md": "content/ki_projekt/ki_projektauftrag.md",
     "KI_Bewertungsraster.md": "worksheets/md/KI_Bewertungsraster.md",
@@ -33,6 +30,7 @@ FILES = {
     "koordinatengitter_or_nand_xor.svg": "worksheets/md/svg/koordinatengitter_or_nand_xor.svg",
     "koordinatengitter_or_nand_xor_leer.svg": "worksheets/md/svg/koordinatengitter_or_nand_xor_leer.svg",
 }
+FILES.update({Path(e["source"]).name: "content/" + e["source"] for e in REGISTRY})
 
 STYLE = """
 :root{--ink:#182b31;--muted:#52656a;--accent:#076959;--paper:#f5f4ee;--line:#d8dfdb;--soft:#e7f1eb}
@@ -69,8 +67,6 @@ footer{color:var(--muted);font-size:13px;padding-top:20px}
 """
 
 def build(lessons: list[dict]) -> None:
-    if len(lessons) < 10:
-        raise ValueError("The ten existing lessons must remain")
     DOWNLOADS.mkdir(parents=True, exist_ok=True)
     for name, rel in FILES.items():
         path = ROOT / rel
@@ -91,11 +87,10 @@ def build(lessons: list[dict]) -> None:
             target.write_text(svg, encoding="utf-8")
 
     source = SOURCE.read_text(encoding="utf-8")
-    # Optional additional per-lesson Markdown, maintained by the teacher editor.
-    for lesson in lessons[10:]:
-        extension = ROOT / "lehrperson" / "ergaenzungen" / f'dl-{lesson["id"]}.md'
+    for view in dict.fromkeys(l["view"] for l in lessons):
+        extension = ROOT / "kursseiten" / view / "materialien.md"
         if not extension.is_file():
-            raise FileNotFoundError(f"Missing teacher material for {lesson['id']}")
+            raise FileNotFoundError(f"Missing teacher material for {view}")
         source += "\n\n" + extension.read_text(encoding="utf-8")
     soup = BeautifulSoup(
         '<div id="materials-content">' +
@@ -106,20 +101,21 @@ def build(lessons: list[dict]) -> None:
     if "Grafiken und Materialien" not in content.h1.get_text():
         raise ValueError("Missing material index heading")
     headers = content.find_all("h2", recursive=False)
-    expected = [f"Doppellektion {int(l['id']):02d}" for l in lessons]
-    if [h.get_text(strip=True) for h in headers] != expected:
-        raise ValueError("Material sections must match every planned lesson")
+    by_id = {h.get_text(strip=True).removeprefix("Doppellektion "): h for h in headers}
+    if len(by_id) != len(headers) or set(by_id) != {l["id"] for l in lessons}:
+        raise ValueError("Material sections must match lesson IDs")
 
-    for lesson, heading in zip(lessons, headers):
+    for lesson in lessons:
+        heading = by_id[lesson["id"]]
         group = soup.new_tag("section", id=f"dl-{lesson['id']}",
                              attrs={"class": "lesson-resources"})
         heading.insert_before(group)
         node = heading
-        while node is not None and (node is heading or node.name != "h2"):
+        while node is not None and (node is heading or node.name not in ("h2", "section")):
             next_node = node.find_next_sibling()
             group.append(node.extract())
             node = next_node
-        heading.string = f"Doppellektion {int(lesson['id'])} · {lesson['title']}"
+        heading.string = f"Doppellektion {lesson['number']} · {lesson['title']}"
 
         images = group.select("p > img")
         if images:
@@ -158,7 +154,9 @@ def build(lessons: list[dict]) -> None:
                 grid.append(figure)
                 paragraph.decompose()
 
-    links = "".join(f'<a href="#dl-{l["id"]}">{int(l["id"])} · {html.escape(l["title"])}</a>'
+    for lesson in lessons:
+        content.append(content.find(id=f"dl-{lesson['id']}").extract())
+    links = "".join(f'<a href="#dl-{l["id"]}">{l["number"]} · {html.escape(l["title"])}</a>'
                     for l in lessons)
     OUTPUT.write_text(f"""<!doctype html>
 <html lang="de-CH"><head><meta charset="utf-8">
@@ -170,11 +168,11 @@ def build(lessons: list[dict]) -> None:
 <p><a href="unterrichtsplan.html">← Unterrichtsplan</a> · <a href="index.html">Kursseite</a></p></header>
 <nav class="quick" aria-label="Doppellektionen">{links}</nav>
 {content}
-<footer>Grafiken können durch Anklicken vergrössert werden. Die Quelle dieser Übersicht liegt in <code>lehrperson/materialien.md</code>.</footer>
+<footer>Grafiken können durch Anklicken vergrössert werden. Quellen: <code>kursseiten/&lt;thema&gt;/materialien.md</code> und <code>lehrperson/materialien.md</code>.</footer>
 </main></body></html>
 """, encoding="utf-8")
     print(f"Built teacher extras: {len(lessons)} lessons, {len(FILES)} downloads")
 
 if __name__ == "__main__":
     import json
-    build(json.loads((ROOT / "projekt/kurs.json").read_text(encoding="utf-8"))["lessons"])
+    build(load_course(ROOT)["lessons"])
