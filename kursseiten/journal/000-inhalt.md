@@ -42,7 +42,7 @@
   <summary>5 · Fazit &amp; Zusammenarbeit<span class="completion" data-completion="4"></span></summary>
   <div class="detail-body">
     <label class="field"><span>Wie beantworten Sie Ihre Forschungsfrage? Was wäre ein sinnvoller nächster Versuch?</span><textarea data-journal="conclusion" maxlength="20000" placeholder="Unsere Beobachtungen sprechen dafür, dass …" rows="4"></textarea></label>
-    <label class="field"><span>Wie haben Sie die Arbeit gesteuert? Was gelang an Ihrem Etappenplan, was haben Sie angepasst? Welche Quellen und KI-Hilfen haben Sie verwendet?</span><textarea data-journal="contribution" maxlength="20000" placeholder="Beide erklären das ganze Projekt. Hilfsmittel konkret nennen …" rows="4"></textarea></label>
+    <label class="field"><span>Wie haben Sie die Arbeit gesteuert? Was gelang an Ihrem Etappenplan, was haben Sie angepasst? Welche Quellen und KI-Hilfen haben Sie verwendet?</span><textarea data-journal="contribution" maxlength="20000" placeholder="Bereiten Sie sich beide auf das jeweilige Einzelgespräch vor. Hilfsmittel konkret nennen …" rows="4"></textarea></label>
   </div>
 </details>
 <div class="actions">

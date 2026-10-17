@@ -22,16 +22,13 @@ Eine Katze lässt sich nicht durch wenige handprogrammierte Merkmale erkennen: P
 
 **Zusammenhang:** Deep Learning ist Teil von ML, ML Teil von KI. «Generativ» beschreibt die Aufgabe, nicht eine vierte gleichrangige technische Schublade. Historisch führen Meilensteine von symbolischen Programmen über Expertensysteme und datengetriebenes Lernen zu tiefen und grossen generativen Modellen.
 
-### Schwache/starke KI und vier Typen
+### Schwache und starke KI
 
-**Schwache KI:** für bestimmte Aufgaben entwickelt. **Starke KI:** hypothetische allgemeine, menschenähnliche Intelligenz; kein allgemein anerkanntes nachgewiesenes Beispiel.
+- **Schwache KI:** für bestimmte Aufgaben oder Aufgabenbereiche entwickelt; Beispiele sind Schachcomputer, Bilderkennung und heutige Chatbots. Viele Fähigkeiten bedeuten nicht automatisch allgemeine Intelligenz.
+- **Starke KI:** hypothetische allgemeine, menschenähnliche Intelligenz; bisher kein allgemein anerkanntes nachgewiesenes Beispiel. Bewusstsein ist nicht mit allgemeiner Intelligenz gleichzusetzen und keine Voraussetzung dieser Einordnung.
+- **Begründete Beispiele:** Ein regelbasierter Schachcomputer ist schwache KI ohne maschinelles Lernen; ein trainierter Spamfilter nutzt ML und ist ebenfalls schwache KI. Eine fiktionale Figur kann als starke KI gedacht sein, ohne dass dadurch ihre Existenz belegt wäre.
 
-1. **Reaktive KI:** Ein einfaches regelbasiertes Spielprogramm reagiert auf den aktuellen Zustand.
-2. **Begrenztes Gedächtnis:** Ein trainierter Klassifikator verwendet Muster aus früheren Daten.
-3. **Theory of Mind:** Ein System würde fremde Gedanken und Überzeugungen tatsächlich verstehen; ein scheinbar einfühlsamer Chatbot beweist das nicht.
-4. **Selbstbewusste KI:** Ein System mit eigenem subjektivem Bewusstsein; dafür gibt es kein gesichertes Beispiel.
-
-Diese vier Typen sind eine vereinfachte didaktische Darstellung, keine trennscharfe technische Norm.
+Die Begriffe «KI/ML/Deep Learning/generativ» beschreiben technische Verfahren beziehungsweise Aufgaben, «schwach/stark» den Grad allgemeiner Fähigkeiten. Sie sind keine austauschbaren Kategorien.
 
 ### Asimovs Gesetze: Fall «Schulweg»
 

@@ -100,17 +100,35 @@ for name in ITEMS:
             if c.cell_type=='markdown':
                 for link in re.findall(r'\]\(([^)]+\.ipynb)\)',c.source):
                     assert (base/link).is_file(), (name,link)
-# Exams in lesson 8 must fit the stated 80-minute parallel work window.
+# Exactly 20 individual oral interviews by ONE examiner fit 90 + 10 minutes.
 oral=next(l for l in lessons if l['id']=='08')
-assert sum(p['minutes'] for p in oral['phases'][1:-1])==80
+assert sum(p['minutes'] for p in oral['phases'])==90  # AVIVA class plan
+assert oral['phases'][0]['schritte'][0]['wer']=='Einzeln', 'No whole-class introduction while examinations are running'
 planning=(root/'worksheets/md/KI_Planung.md').read_text()
-rows=re.findall(r'^\| (10|12|14) \| ([\d,]+) Min\. \| ([\d,]+) Min\. \| (\d+) Min\. \| (\d+) Min\. \|$',planning,re.M)
-assert len(rows)==3
-for n,talk,switch,total,reserve in rows:
-    assert int(n)*(float(talk.replace(',','.'))+float(switch.replace(',','.')))==int(total)
-    assert int(total)+int(reserve)==80
-    assert int(reserve)>=8, 'Conversation window needs a real reserve'
-assert 'Alle Fachgespräche finden in Doppellektion 8 statt.' in soup.get_text()
+assert '20 × (4 + 1) = 100 Minuten' in planning
+assert '90 Minuten Unterricht plus 10 Minuten unmittelbar anschliessend' in planning
+assert 'eine Lehrperson' in planning
+assert 'Minute **0**' in planning and 'Minute **100**' in planning
+assert 'keine Zeitreserve' in planning
+assert 'Personen 19 und 20' in planning
+assert len(re.findall(r'^\| (?:1–4|5–8|9–12|13–16|17–18|19–20) \| Minute ',planning,re.M))==6
+assert 'zweite prüfende Lehrperson' not in planning
+assert '20 Einzelgespräche bei einer Lehrperson' in soup.get_text()
+assert 'Ein gemeinsames Journal. Zwei getrennte Einzelgespräche.' in soup.get_text()
+assert 'vierminütige' in planning or 'Vier Minuten Einzelgespräch' in planning
+assert '100 Minuten' in oral['zeit'] and 'eine Lehrperson' in oral['zeit']
+assert 'individuelle Gesprächspunkte' in planning
+assert 'K10 · Individuelles Verständnis' in soup.get_text()
+assert len(soup.select('#einstieg-4 .typen tbody tr')) == 2
+assert 'Schwache und starke KI' in soup.select_one('#einstieg-4 summary').get_text()
+assert 'Theory of Mind' not in soup.select_one('#einstieg-4').get_text()
+assert 'vier KI-Typen' not in plans.get_text()
+assert 'Typ 1–4' not in planning
+assert len(soup.select('#einstieg-4 textarea[data-answer="ki_ordnung"]')) == 1
+# Keep historical answer IDs present to avoid dropping previously saved entries.
+assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_{n}"]')) == 1 for n in range(1,5))
+assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_bsp_{n}"]')) == 1 for n in range(1,5))
+
 repro=soup.select_one('details#reproduktion')
 assert repro and repro.select_one('textarea[data-journal="reproduktion"][data-optional]')
 assert 'privaten Fenster' in repro.get_text() and 'daten_sha256' in repro.get_text() and 'wiederholen=True' in repro.get_text()

@@ -1,12 +1,12 @@
 # KI-Block · Planung für Lehrpersonen
 
-**10 Doppellektionen à 90 Unterrichtsminuten.** Die Schulpause kommt separat dazu. Kein Regressionsteil, keine schriftliche Prüfung. Leistungsnachweis: Tandemprojekt und gemeinsames Fachgespräch.
+**10 Doppellektionen à 90 Unterrichtsminuten.** Die Schulpause kommt separat dazu. Kein Regressionsteil, keine schriftliche Prüfung. Leistungsnachweis: gemeinsame Projektabgabe und vierminütiges Einzelgespräch je Person; individuelle Gesamtnote.
 
 ## Ein roter Faden mit weniger Wechseln
 
 **Doppellektionen 1–4:** gemeinsame Grundlagen mit einem zusammenhängenden Arbeitsblock pro Thema. Die Kursseite ist eine Materialsammlung, kein vollständig abzuarbeitender Parcours. Pflichtkern und Wahlvertiefung werden jeweils vor der Arbeit deutlich benannt. Nicht jedes Antwortfeld muss ausgefüllt werden.
 
-**Doppellektionen 5–8: SOL (selbst organisiertes Lernen).** Die Tandems setzen Tagesziele, verteilen Rollen und Zeit, wählen Hilfen, prüfen Fortschritte und passen ihren Plan an. In den längeren Arbeitsblöcken sind kurze individuelle Denk- und Prüfzeiten ausdrücklich eingeplant; sie ersetzen keine gemeinsame Projektarbeit. Die Lehrperson verantwortet Rahmen, Beratung und Qualitätssicherung, nicht den gemeinsamen Takt aller Etappen. Doppellektion 8 gehört zur SOL-Phase: Während die Lehrperson Fachgespräche führt, werten die anderen Tandems selbstständig ein fremdes Modell aus.
+**Doppellektionen 5–8: SOL (selbst organisiertes Lernen).** Die Tandems setzen Tagesziele, verteilen Rollen und Zeit, wählen Hilfen, prüfen Fortschritte und passen ihren Plan an. In den längeren Arbeitsblöcken sind kurze individuelle Denk- und Prüfzeiten ausdrücklich eingeplant; sie ersetzen keine gemeinsame Projektarbeit. Die Lehrperson verantwortet Rahmen, Beratung und Qualitätssicherung, nicht den gemeinsamen Takt aller Etappen. Doppellektion 8 gehört zur SOL-Phase: Während die Lehrperson Einzelgespräche führt, werten die anderen Tandems selbstständig ein fremdes Modell aus.
 
 **Doppellektionen 9–10:** Transfer zu Sprache und Gesellschaft, jeweils mit einem vertieften Arbeitsweg statt mehreren kurzen Stationen.
 
@@ -21,7 +21,7 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 <!-- KURSPLAN -->
 ### Doppellektion 1 · Was ist KI?
 
-**Lernziel:** KI von Programmen mit festen Regeln unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen und schwache und starke KI sowie die vier KI-Typen unterscheiden.
+**Lernziel:** KI von automatisierten Programmen unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen sowie schwache und starke KI an Beispielen gegenüberstellen.
 
 **Leitfrage:** Ist jedes automatisch arbeitende Programm eine KI?
 
@@ -39,10 +39,10 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 |  |  | Lehrperson | Sammelt zwei Regeln mit Gegenbeispielen. Daraus entsteht die Frage: Können wir statt Regeln Beispiele geben? |
 |  |  | Klasse | Vergleichen Sie zwei Regelideen und benennen Sie gemeinsam eine Lücke. |
 |  |  | Ergebnis | Regeln und eine begründete Grenze der Regeln. |
-| Informieren – Begriffe an einem Beispiel ordnen | 20 | Lehrperson | Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Ordnet schwache und starke KI sowie die vier KI-Typen ein: heutige Systeme sind schwache KI, Typ 1 oder 2; Typ 3 und 4 sind Forschungsziele. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen. |
+| Informieren – Begriffe an einem Beispiel ordnen | 20 | Lehrperson | Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Stellt nur schwache KI (für bestimmte Aufgabenbereiche) und hypothetische starke KI (allgemeine Intelligenz) gegenüber; Bewusstsein ist dafür keine Voraussetzung. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen. |
 |  |  | Tandem | Ordnen Sie einen Spamfilter gemeinsam ein und klären Sie Ihre Fragen zu den Begriffen. |
 |  |  | Ergebnis | Eine gemeinsame Beispieleinordnung als Orientierung. |
-| Verarbeiten – Eigene Beispiele begründet einordnen | 45 | Tandem | Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk. |
+| Verarbeiten – Eigene Beispiele begründet einordnen | 45 | Tandem | Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Lernen aus Daten, KI/ML/Deep Learning/generative KI und schwache oder hypothetische starke KI. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk. |
 |  |  | Lehrperson | Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) kurz vor und zeigt den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen und gefährdet dabei den Fahrgast. |
 |  |  | Einzeln | Entscheiden Sie allein, was das Auto im Fall «Schulweg» tun soll, und notieren Sie einen Grund. |
 |  |  | Tandem | Vergleichen Sie die Einzelentscheidungen. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite). |
@@ -256,13 +256,13 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 **Lernprodukt:** Vollständiges Journal, geprüfte ZIP-Abgabe und ein von beiden erklärbares Projekt.
 
-**Zeit:** 70 Minuten SOL-Block, davon 15 Minuten Abschluss- und Technikpuffer. Kein zusätzlicher Bericht oder vorbereitete Präsentation. Fachgesprächsregeln und Austauschpartner bereits vor Doppellektion 8 mitteilen.
+**Zeit:** 70 Minuten SOL-Block, davon 15 Minuten Abschluss- und Technikpuffer. Kein zusätzlicher Bericht oder vorbereitete Präsentation. Individuelle Gesprächsfenster (je 4 Minuten) und Austauschpartner bereits vor Doppellektion 8 mitteilen.
 
 ### Doppellektion 8 · Das eigene Projekt erklären und ein fremdes Modell prüfen
 
-**Rückblick:** Ihr eigener Abgabestand ist eingefroren. Während der Fachgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.
+**Rückblick:** Ihr eigener Abgabestand ist eingefroren. Während der Einzelgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.
 
-**Lernziel:** Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.
+**Lernziel:** Das gemeinsame Bildprojekt im vierminütigen Einzelgespräch selbstständig erklären und ein fremdes Modell anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.
 
 **Leitfrage:** Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?
 
@@ -272,8 +272,8 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen – Abgaben und Organisation | 5 | Lehrperson | Bestätigt Abgaben, Gesprächsreihenfolge und die bereits zugeteilten Austauschprojekte. Erinnert an privates Browserfenster, Datenschutz und das unveränderte eigene Abgabepaket. Ab Minute 5 laufen alle Fachgespräche parallel bis Minute 85. |
-|  |  | Tandem | Öffnen Sie das zugeteilte Paket und notieren Sie Ihr Gesprächsfenster. |
+| Ankommen – Direkter selbstständiger Einstieg | 5 | Einzeln | Starten Sie die Fremdauswertung sofort selbstständig nach der vorab verteilten schriftlichen Anleitung. Die Abgabe, der individuelle Gesprächsplan mit vier Minuten pro Person und die Austauschprojekte liegen schon bereit. Die Lehrperson führt ab Minute 0 ohne klassenweite Einführung Einzelgespräche; Gesprächsfenster bis Minute 100 (einschliesslich zehn Minuten unmittelbar nach der Doppellektion). |
+|  |  | Tandem | Öffnen Sie das zugeteilte Paket und kontrollieren Sie vorab bekannt gegebene individuelle Gesprächszeiten. |
 |  |  | Ergebnis | Alle kennen Gesprächszeit und Austauschprojekt. |
 | Vorwissen aktivieren – Eigene Prüffrage wählen | 5 | Tandem | Lesen Sie Vermutung und Ergebnis des anderen Tandems. Notieren Sie, was Sie nachprüfen wollen und welches Ergebnis Sie für Ihre eigenen Bilder erwarten. Die Gespräche laufen bereits; Sie arbeiten selbstständig. |
 |  |  | Einzeln | Lesen Sie allein Vermutung und Ergebnis des anderen Tandems. Notieren Sie Ihre Prüffrage und eine Erwartung für Ihre eigenen Bilder. |
@@ -283,15 +283,15 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Verarbeiten – Fremdes Modell prüfen; Gespräche parallel | 70 | Tandem | Reproduktionsprüfung: Stellen Sie das fremde Projekt in einem privaten Browserfenster wieder her. Laden Sie Daten und trainieren Sie A/B einmal mit den Einstellungen des Originals und Startwert 11 nach. Wiederholen Sie den Abschlusstest mit der ursprünglichen Auswahl. Vergleichen Sie Datenprüfsumme und Werte mit dem Protokoll. Dokumentieren Sie kurz, was übereinstimmt, abweicht oder nicht prüfbar ist. Dies ist der erste Teil der unbenoteten Fremdauswertung. |
 |  |  | Tandem | Fremdtest und Rückmeldung: Lassen Sie das nachtrainierte fremde Modell Ihre eigenen Klassen C/D beurteilen. Lesen Sie Tabelle, Trennschärfe und konkrete Beispiele. Begründen Sie «Wie gut?» und «Warum?» mit mindestens zwei möglichen Erklärungen und einer Grenze. Formulieren Sie eine Rückmeldung an das andere Tandem und sichern Sie sie im bestehenden Fremdtest-Protokoll. |
 |  |  | Einzeln | Halten Sie nach dem Fremdtest zuerst allein fest, welche Beobachtung Sie am überzeugendsten finden und welche Grenze Ihre Aussage hat. |
-|  |  | Tandem | Puffer für Gesprächsunterbrechung, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim Aufruf pausieren Sie. Im Fachgespräch erklären beide das eigene Projekt, eine Entscheidung, ein Ergebnis samt Grenze und einen neuen Fall. Bei nicht lösbarem Trainingsproblem werten Sie die gespeicherten fremden Ausgaben und Beispiele aus und dokumentieren, was nicht reproduziert werden konnte; keinen erfolgreichen Test behaupten. |
-|  |  | Ergebnis | Ein Fachgespräch und eine belegte Fremdauswertung; der eigene Abgabestand bleibt unverändert. |
-| Auswerten – Rückmeldung sichern | 5 | Tandem | Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel. |
+|  |  | Tandem | 15 Minuten Puffer ausschliesslich für die eigenständige Fremdauswertung, persönliche Gesprächsunterbrechung, Wiedereinstieg und Technik; dieser Puffer ist keine freie Zeit im eng getakteten Prüfungsplan. Beim persönlichen Aufruf pausieren Sie. Jede Person erklärt in vier Minuten selbstständig den Modellweg, eine Datenentscheidung, ein Ergebnis samt Grenze und einen nächsten Versuch. Beim nicht lösbaren Training gespeicherte fremde Ausgaben auswerten und fehlende Reproduktion ehrlich dokumentieren. |
+|  |  | Ergebnis | Je ein vierminütiges Einzelgespräch pro Person und eine belegte Fremdauswertung; die gemeinsame Projektabgabe bleibt unverändert. |
+| Auswerten – Fremdauswertung eigenständig sichern | 5 | Tandem | Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung selbstständig mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel. Die Lehrperson führt währenddessen weiter Einzelgespräche, die letzten zwei im unmittelbaren zehnminütigen Anschluss. |
 |  |  | Ergebnis | Gesicherte Rückmeldung und eine Transferfrage; keine nachträgliche Änderung der bewerteten Abgabe. |
 
 
-**Lernprodukt:** Bewertetes Tandemgespräch und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.
+**Lernprodukt:** Individuell bewertetes vierminütiges Einzelgespräch je Person und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.
 
-**Zeit:** Gespräche parallel in Minute 5–85, nicht zusätzlich zu den 90 Minuten. Im 80-Minuten-Fenster selbstständig arbeiten und beim Aufruf pausieren. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest samt Auswertung. Drei Startwerte sind Zusatz. 15 Minuten Puffer im Arbeitsblock; die Fremdauswertung selbst entfällt nicht.
+**Zeit:** 20 Lernende, eine Lehrperson: 20 × (4 Minuten Einzelgespräch + 1 Minute für Notizen/Wechsel) = 100 Minuten. Gesprächsreihe beginnt direkt bei Minute 0; die ersten 90 Minuten gehören zu Doppellektion 8, die letzten 10 Minuten werden unmittelbar angehängt. Es gibt keine Gesprächsreserve und keine klassenweite Einführung oder Abschlussbesprechung: Zeitplan, Austauschprojekt und Abgabekanal sind vorab bekannt; Fremdauswertung und Sicherung laufen selbstständig. Keine zweite Lehrperson, keine Ersatztermine. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest, drei Startwerte nur Zusatz.
 
 ### Doppellektion 9 · Wie entstehen Sprachmodelle?
 
@@ -373,7 +373,7 @@ Der A/B-Vergleich bleibt als fachliches Gerüst bestehen: zwei Klassen, 80 Fotos
 | Datenregeln, Datenschutz, faire Bildzahl und konstante Einstellungen | Anwendung im genehmigten Rahmen, Klassenregeln, geeignete Exemplare und Aufnahmeorganisation |
 | Datencheck vor Vergleich; Auswahl vor Test; keine Optimierung nach Testeinsicht | Zeitverteilung der Etappen auf Doppellektion 5–7, Tagesziele und Rollen |
 | Fünf Reflexionen, nachvollziehbare Belege, Abgabe vor Doppellektion 8 | Benötigte Hilfen, Beratung, freiwillige Vertiefung vor Testeinsicht |
-| Beide erklären das ganze Projekt; Fachgespräch in Doppellektion 8 | Wie sie sich gegenseitig prüfen und auf das Erklären vorbereiten |
+| Jede Person erklärt das ganze Projekt im Einzelgespräch in Doppellektion 8 | Wie die Tandemmitglieder sich gegenseitig auf die individuellen Gespräche vorbereiten |
 | Fremdauswertung in Doppellektion 8, unbenotet | Eigene Prüffrage, Arbeitsteilung und begründete Rückmeldung |
 
 **Kein versteckter Gleichschritt:** Die Titel der Doppellektionen 5–7 benennen den Lernprozess, keine verpflichtenden Versuchstermine. Ein Tandem darf in Doppellektion 5 schon vergleichen und ein anderes in Doppellektion 6 noch Daten ergänzen. Die fachliche Reihenfolge bleibt erhalten.
@@ -397,7 +397,7 @@ Bis Ende Doppellektion 6 bei jedem Tandem kurz den Zeitplan und mögliche Daten-
 
 Regeln für Katze/Hund motivieren den zusammenhängenden Begriffsinput. Danach drei statt vier eigene Beispiele begründet einordnen. Meilensteine und Asimovs Gesetze bleiben Material zur Wahlvertiefung; keine zusätzliche Zeitleistenaktion oder Gruppenrotation. Die ethische Diskussion findet in Doppellektion 10 statt.
 
-Fachlich sichern: Ein regelbasiertes System kann KI sein, lernt aber nicht aus Daten. Nicht jede Automatisierung ist KI. Heutige Systeme sind schwache KI; die vier KI-Typen sind eine Einteilung, keine Entwicklungsstufen, die jedes System durchläuft.
+Fachlich sichern: Ein regelbasiertes System kann KI sein, lernt aber nicht aus Daten. Nicht jede Automatisierung ist KI. Heutige Systeme werden hier als schwache KI eingeordnet; für hypothetische starke KI gibt es kein allgemein anerkanntes nachgewiesenes Beispiel.
 
 ### Doppellektion 2 · Eine Erfahrung und ein digitales Beispiel
 
@@ -427,9 +427,9 @@ Vor Ende Doppellektion 7 Abgabekanal, Gesprächsfenster und Austauschpartner mit
 
 ### Doppellektion 8 · Fremdauswertung ist der Arbeitsauftrag, nicht die Reserve
 
-Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrperson führt von Minute 5 bis 85 alle Gespräche. Die anderen Tandems organisieren die Fremdauswertung selbst und unterbrechen sie für ihr Gespräch.
+Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrperson führt bei 20 Lernenden ab Minute 0 bis Minute 100 die vierminütigen Einzelgespräche mit jeweils einer Minute Notizen/Wechsel (90 Minuten Unterricht plus 10 Minuten direkt im Anschluss). Die anderen Tandems organisieren die Fremdauswertung selbst und pausieren jeweils nur für ihr persönliches Gespräch.
 
-**Pflichtkern im 80-Minuten-Fenster:** 5 Minuten Prüffrage/Erwartung, 5 Minuten Auftrag erschliessen, ca. 30 Minuten Reproduktionscheck und 25 Minuten Fremdtest mit begründeter Rückmeldung. Die verbleibenden **15 Minuten** decken Gespräch, Wiedereinstieg und Technik ab. Das Gespräch wird nicht ein zweites Mal als zusätzliche Phase eingerechnet. Ein Reproduktionslauf mit Startwert 11 genügt; drei Startwerte sind nur Zusatz.
+**Pflichtkern der selbstständigen Fremdauswertung während der Doppellektion:** 5 Minuten Prüffrage/Erwartung, 5 Minuten Auftrag erschliessen, ca. 30 Minuten Reproduktionscheck und 25 Minuten Fremdtest mit begründeter Rückmeldung. Für Wiedereinstieg und Technik bleiben innerhalb der Schülerarbeit **15 Minuten**, nicht im lückenlosen Gesprächsplan der Lehrperson. Das Gespräch wird nicht ein zweites Mal als zusätzliche Phase eingerechnet. Ein Reproduktionslauf mit Startwert 11 genügt; drei Startwerte sind nur Zusatz.
 
 Im privaten Browserfenster fremdes ZIP importieren, Vorbereitung und Datenimport ausführen, A/B nachtrainieren und den Test mit der Auswahl des Originals prüfen. Prüfsumme und Originalwerte vergleichen. Danach dasselbe fremde Modell die eigenen Klassen C/D beurteilen lassen. Eine hohe Trennschärfe kann mit Hintergrund, Licht oder Form zusammenhängen; das Modell kennt weiterhin nur seine ursprünglichen Klassen und kein «weder noch».
 
@@ -465,37 +465,41 @@ Für den Abschluss zwei Fallurteile diskutieren, danach jede Person kurz eine Er
 
 ## Gesprächsplan · Doppellektion 8
 
-**Planungsbeispiel mit 12 Tandems:** 12 × (5 Minuten Gespräch + 1 Minute Notizen/Wechsel) = 72 Minuten, dazu 8 Minuten Reserve sowie je 5 Minuten Einführung und Abschluss = **90 Minuten**. Die Schulpause liegt ausserhalb dieser Unterrichtsminuten.
+**20 Lernende, eine Lehrperson, vier Minuten Einzelgespräch pro Person plus eine Minute für Notizen und Wechsel.** Die gemeinsame Projektabgabe ist bereits vor Beginn der Doppellektion eingereicht. Jede Person erhält eigene K7–K10-Gesprächspunkte; die gemeinsame Bewertung K1–K6 wird unverändert übernommen.
 
-| Zahl der Tandems | Gespräch pro Tandem | Notizen/Wechsel | Gesamt für Slots | Reserve im 80-Minuten-Fenster |
-| --- | --- | --- | --- | --- |
-| 10 | 5 Min. | 1 Min. | 60 Min. | 20 Min. |
-| 12 | 5 Min. | 1 Min. | 72 Min. | 8 Min. |
-| 14 | 4 Min. | 1 Min. | 70 Min. | 10 Min. |
+**Zeitbudget: 20 × (4 + 1) = 100 Minuten.** Die Lehrperson beginnt mit Gespräch 1 exakt bei Minute **0**, prüft alle 20 Personen ohne Unterbrechung bis Minute **100**. Das sind **90 Minuten Unterricht plus 10 Minuten unmittelbar anschliessend**. Die Personen 19 und 20 bleiben für die letzten zehn Minuten. Für Verzögerungen gibt es **keine Zeitreserve**; die Gesprächsreihenfolge und der Bewertungsbogen müssen vorher bereitliegen. Das ist zeitlich eng, aber rechnerisch möglich.
 
-Für andere Tandemzahlen **mindestens 8 Minuten Reserve** einplanen: Gesprächsdauer höchstens **72 ÷ Tandemzahl − 1 Minute**, auf eine halbe Minute **abrunden**, auf höchstens 5 Minuten begrenzen. Dauer und Reihenfolge gelten für alle gleich und werden vorab bekannt gegeben. Gespräche nicht auf spätere Doppellektionen verlagern. Bei sehr grossen Klassen vor Beginn der SOL-Phase prüfen, ob vier Kompetenzen mit beiden Personen in den berechneten Slots seriös beurteilbar sind; falls nicht, eine zweite prüfende Lehrperson für Doppellektion 8 organisieren, nicht stillschweigend die Reserve streichen.
+| Personen | Gesprächsfenster ab Beginn | Zeitaufwand | Hinweis |
+| --- | --- | --- | --- |
+| 1–4 | Minute 0–20 | 20 Min. | Normaler Unterricht |
+| 5–8 | Minute 20–40 | 20 Min. | Normaler Unterricht |
+| 9–12 | Minute 40–60 | 20 Min. | Normaler Unterricht |
+| 13–16 | Minute 60–80 | 20 Min. | Normaler Unterricht |
+| 17–18 | Minute 80–90 | 10 Min. | Ende der Doppellektion |
+| 19–20 | Minute 90–100 | 10 Min. | Unmittelbarer Anschluss |
 
-| Im 5-Minuten-Gespräch | Fokus | Kompetenz |
+**Vorbereitung vor Doppellektion 8:** Individuelle Fünfminuten-Slots sowie die zugeteilten fremden Projekte schriftlich verteilen, Zugriff und Abgabekanal prüfen, ausgefüllte Projekt-Raster und Kurzfragen bereitlegen. **Keine klassenweite Einführung oder Abschlussbesprechung am Prüfungstag.** Die übrigen Lernenden starten direkt selbstständig mit der verbindlichen, unbenoteten Fremdauswertung und pausieren nur für ihr Einzelgespräch. Die Abgabe ihrer Fremdauswertung wird selbstständig organisiert; die Lehrperson kann während der laufenden Gespräche keine Beratung leisten.
+
+| Im vierminütigen Einzelgespräch | Fokus | Kompetenz |
 | --- | --- | --- |
-| 1 Min. | Ein Bild durch das Modell erklären | K7 |
-| 1 Min. | Eine Daten- oder Versuchsentscheidung begründen | K8 |
-| 1,5 Min. | Ein Ergebnis samt Grenze kritisch einordnen | K9 |
-| 1,5 Min. | Vorgehen auf einen neuen Fall übertragen | K10 |
+| 1 Min. | Bildweg: feste Merkmale und selbst trainiertes Netz erklären | K7 |
+| 1 Min. | Eigene Daten- und A/B-Entscheidung begründen | K8 |
+| 1 Min. | Ein Ergebnis mit seiner Grenze einordnen | K9 |
+| 1 Min. | Einen nächsten Versuch auf einen neuen Fall übertragen | K10 |
 
-Keine vorbereitete Präsentation: Das abgegebene Journal liegt bereit. Beide antworten und ergänzen einander. Bei kürzeren Slots die Fragen straffen. K1–K6 separat anhand der Abgabe bewerten, K7–K10 direkt während des Gesprächs im Raster festhalten. Die Wechselminute ist für Notizen und den nächsten Aufruf reserviert. Die Fremdauswertung bleibt jederzeit unterbrechbar.
+Die anschliessende **eine Minute** gehört zu den Notizen/Punkten und dem Wechsel und ist keine zusätzliche Redezeit. Keine vorbereitete Präsentation. Kurze, vergleichbare Fragen und das abgegebene Journal genügen. Vier Kompetenzen in vier Minuten sind knapp; bewerten Sie pro Kriterium nur einen zentralen Nachweis. **K1–K6** gemeinsam anhand der Projektabgabe bewerten, **K7–K10** pro Person separat. Die Gesamtnote wird individuell errechnet.
 
 ## Sicherung und Bewertung
 
 Eine ZIP-Abgabe enthält `Journal.html`, Versuchsnotebook mit gespeicherten Ausgaben, vorhandenes Versuchsprotokoll sowie hinzugefügte Originalfotos und Fotostudio-JSON. Foto-Upload im Notebook und Dateien der Abgabeliste sind getrennt. Nach Import zuerst Vorbereitung und Datenimport erneut ausführen; gespeicherte Ausgaben sind kein laufender Python-Zustand. Training und Test bleiben manuell.
 
-Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: gemeinsames Fachgespräch (12). Keine weitere Gewichtung. Note = 1 + 5 × Punkte / 30, auf Viertelnoten gerundet. Gemeinsame Tandemnote. SOL-Routinen und Fremdauswertung schaffen keine zusätzlichen Bewertungskategorien. Details: [Bewertungsraster](KI_Bewertungsraster.md).
+Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte). Keine weitere Gewichtung. Pro Person gilt: Note = 1 + 5 × (gemeinsame Projektpunkte + individuelle Gesprächspunkte) / 30, auf Viertelnoten gerundet. SOL-Routinen und Fremdauswertung schaffen keine zusätzlichen Bewertungskategorien. Details: [Bewertungsraster](KI_Bewertungsraster.md).
 
 ## Didaktische und fachliche Quellen
 
 - [PH Zürich: AVIVA – kompetenzorientiert unterrichten](https://phzh.ch/ueber-die-phzh/aktuell/medien-und-publikationen/news-und-medienmitteilungen/2023/dezember-2023/kompetenzorientiert-unterrichten/)
 - [PHBern / NMS: Planungsmodelle, PADUA nach Aebli, S. 95](https://ilias.phnmsbern.ch/go/file/199847/download)
 - [inf-schule: KI-Landkarte](https://inf-schule.de/ki/menueansicht) (Grafiken und Meilensteine, CC BY-SA 4.0)
-- [robominds: Die vier Typen von Künstlicher Intelligenz](https://www.robominds.de/en/blog/das-sind-die-vier-typen-von-kunstlicher-intelligenz)
 - [inf-schule: NIM-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke)
 - [inf-schule: Papagei-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke)
 
