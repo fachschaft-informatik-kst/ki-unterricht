@@ -181,7 +181,7 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
             </tbody>
           </table>
         </div>
-        <p class="small muted">Alle Einzelgespräche finden in Doppellektion 8 statt (4 Minuten je Person). Reihenfolge und gleiche Dauer vorab bekannt; keine weiteren Gesprächstermine.</p>
+        <p class="small muted">20 Einzelgespräche bei einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Wechsel/Notizen ab Minute 0. Die letzten 10 Minuten schliessen unmittelbar an die 90-minütige Doppellektion an. Gesprächsreihenfolge vorab bekannt, die übrigen arbeiten selbstständig; keine Zeitreserve oder weiteren Termine.</p>
       </div>
     </details>
   </div>
