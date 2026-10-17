@@ -272,8 +272,8 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 
 | Phase | Min. | Wer | Was |
 |---|---:|---|---|
-| Ankommen – Abgaben und Organisation | 5 | Lehrperson | Bestätigt Abgaben, die individuellen Vierminuten-Gesprächsfenster und die bereits zugeteilten Austauschprojekte. Erinnert an privates Browserfenster, Datenschutz und das unveränderte eigene Abgabepaket. Ab Minute 5 laufen die Einzelgespräche parallel bis Minute 85; bei mehr als 14 Lernenden prüft eine zweite Lehrperson parallel. |
-|  |  | Tandem | Öffnen Sie das zugeteilte Paket und notieren Sie beide individuellen Gesprächsfenster. |
+| Ankommen – Direkter selbstständiger Einstieg | 5 | Einzeln | Starten Sie die Fremdauswertung sofort selbstständig nach der vorab verteilten schriftlichen Anleitung. Die Abgabe, der individuelle Gesprächsplan mit vier Minuten pro Person und die Austauschprojekte liegen schon bereit. Die Lehrperson führt ab Minute 0 ohne klassenweite Einführung Einzelgespräche; Gesprächsfenster bis Minute 100 (einschliesslich zehn Minuten unmittelbar nach der Doppellektion). |
+|  |  | Tandem | Öffnen Sie das zugeteilte Paket und kontrollieren Sie vorab bekannt gegebene individuelle Gesprächszeiten. |
 |  |  | Ergebnis | Alle kennen Gesprächszeit und Austauschprojekt. |
 | Vorwissen aktivieren – Eigene Prüffrage wählen | 5 | Tandem | Lesen Sie Vermutung und Ergebnis des anderen Tandems. Notieren Sie, was Sie nachprüfen wollen und welches Ergebnis Sie für Ihre eigenen Bilder erwarten. Die Gespräche laufen bereits; Sie arbeiten selbstständig. |
 |  |  | Einzeln | Lesen Sie allein Vermutung und Ergebnis des anderen Tandems. Notieren Sie Ihre Prüffrage und eine Erwartung für Ihre eigenen Bilder. |
@@ -283,15 +283,15 @@ Alle Abläufe werden aus `projekt/kurs.json` in diese Planung und die Webseite �
 | Verarbeiten – Fremdes Modell prüfen; Gespräche parallel | 70 | Tandem | Reproduktionsprüfung: Stellen Sie das fremde Projekt in einem privaten Browserfenster wieder her. Laden Sie Daten und trainieren Sie A/B einmal mit den Einstellungen des Originals und Startwert 11 nach. Wiederholen Sie den Abschlusstest mit der ursprünglichen Auswahl. Vergleichen Sie Datenprüfsumme und Werte mit dem Protokoll. Dokumentieren Sie kurz, was übereinstimmt, abweicht oder nicht prüfbar ist. Dies ist der erste Teil der unbenoteten Fremdauswertung. |
 |  |  | Tandem | Fremdtest und Rückmeldung: Lassen Sie das nachtrainierte fremde Modell Ihre eigenen Klassen C/D beurteilen. Lesen Sie Tabelle, Trennschärfe und konkrete Beispiele. Begründen Sie «Wie gut?» und «Warum?» mit mindestens zwei möglichen Erklärungen und einer Grenze. Formulieren Sie eine Rückmeldung an das andere Tandem und sichern Sie sie im bestehenden Fremdtest-Protokoll. |
 |  |  | Einzeln | Halten Sie nach dem Fremdtest zuerst allein fest, welche Beobachtung Sie am überzeugendsten finden und welche Grenze Ihre Aussage hat. |
-|  |  | Tandem | Puffer für Einzelgespräch, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim persönlichen Aufruf pausieren Sie. Jede Person erklärt in vier Minuten selbstständig den Modellweg, eine Datenentscheidung, ein Ergebnis samt Grenze und einen nächsten Versuch. Beim nicht lösbaren Training gespeicherte fremde Ausgaben auswerten und fehlende Reproduktion ehrlich dokumentieren. |
+|  |  | Tandem | 15 Minuten Puffer ausschliesslich für die eigenständige Fremdauswertung, persönliche Gesprächsunterbrechung, Wiedereinstieg und Technik; dieser Puffer ist keine freie Zeit im eng getakteten Prüfungsplan. Beim persönlichen Aufruf pausieren Sie. Jede Person erklärt in vier Minuten selbstständig den Modellweg, eine Datenentscheidung, ein Ergebnis samt Grenze und einen nächsten Versuch. Beim nicht lösbaren Training gespeicherte fremde Ausgaben auswerten und fehlende Reproduktion ehrlich dokumentieren. |
 |  |  | Ergebnis | Je ein vierminütiges Einzelgespräch pro Person und eine belegte Fremdauswertung; die gemeinsame Projektabgabe bleibt unverändert. |
-| Auswerten – Rückmeldung sichern | 5 | Tandem | Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel. |
+| Auswerten – Fremdauswertung eigenständig sichern | 5 | Tandem | Reichen Sie Reproduktionscheck und Fremdtest-Protokoll als separate unbenotete Fremdauswertung ein und teilen Sie die Rückmeldung selbstständig mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel. Die Lehrperson führt währenddessen weiter Einzelgespräche, die letzten zwei im unmittelbaren zehnminütigen Anschluss. |
 |  |  | Ergebnis | Gesicherte Rückmeldung und eine Transferfrage; keine nachträgliche Änderung der bewerteten Abgabe. |
 
 
 **Lernprodukt:** Individuell bewertetes vierminütiges Einzelgespräch je Person und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.
 
-**Zeit:** Einzelgespräche zu je 4 Minuten plus 1 Minute Wechsel/Notizen pro Person im 80-Minuten-Fenster von Doppellektion 8. Für verlässliche 8 Minuten Reserve sind mit einer prüfenden Lehrperson höchstens 14 Einzelgespräche möglich. Bei mehr Lernenden eine zweite prüfende Lehrperson für denselben Termin organisieren; keine kürzeren Gespräche und keine Ersatztermine. Pflichtkern Fremdauswertung: Reproduktionslauf mit Startwert 11 und Fremdtest, drei Startwerte nur Zusatz.
+**Zeit:** 20 Lernende, eine Lehrperson: 20 × (4 Minuten Einzelgespräch + 1 Minute für Notizen/Wechsel) = 100 Minuten. Gesprächsreihe beginnt direkt bei Minute 0; die ersten 90 Minuten gehören zu Doppellektion 8, die letzten 10 Minuten werden unmittelbar angehängt. Es gibt keine Gesprächsreserve und keine klassenweite Einführung oder Abschlussbesprechung: Zeitplan, Austauschprojekt und Abgabekanal sind vorab bekannt; Fremdauswertung und Sicherung laufen selbstständig. Keine zweite Lehrperson, keine Ersatztermine. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest, drei Startwerte nur Zusatz.
 
 ### Doppellektion 9 · Wie entstehen Sprachmodelle?
 
@@ -427,9 +427,9 @@ Vor Ende Doppellektion 7 Abgabekanal, Gesprächsfenster und Austauschpartner mit
 
 ### Doppellektion 8 · Fremdauswertung ist der Arbeitsauftrag, nicht die Reserve
 
-Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrperson führt von Minute 5 bis 85 alle Gespräche. Die anderen Tandems organisieren die Fremdauswertung selbst und unterbrechen sie für ihr Gespräch.
+Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrperson führt bei 20 Lernenden ab Minute 0 bis Minute 100 die vierminütigen Einzelgespräche mit jeweils einer Minute Notizen/Wechsel (90 Minuten Unterricht plus 10 Minuten direkt im Anschluss). Die anderen Tandems organisieren die Fremdauswertung selbst und pausieren jeweils nur für ihr persönliches Gespräch.
 
-**Pflichtkern im 80-Minuten-Fenster:** 5 Minuten Prüffrage/Erwartung, 5 Minuten Auftrag erschliessen, ca. 30 Minuten Reproduktionscheck und 25 Minuten Fremdtest mit begründeter Rückmeldung. Die verbleibenden **15 Minuten** decken Gespräch, Wiedereinstieg und Technik ab. Das Gespräch wird nicht ein zweites Mal als zusätzliche Phase eingerechnet. Ein Reproduktionslauf mit Startwert 11 genügt; drei Startwerte sind nur Zusatz.
+**Pflichtkern der selbstständigen Fremdauswertung während der Doppellektion:** 5 Minuten Prüffrage/Erwartung, 5 Minuten Auftrag erschliessen, ca. 30 Minuten Reproduktionscheck und 25 Minuten Fremdtest mit begründeter Rückmeldung. Für Wiedereinstieg und Technik bleiben innerhalb der Schülerarbeit **15 Minuten**, nicht im lückenlosen Gesprächsplan der Lehrperson. Das Gespräch wird nicht ein zweites Mal als zusätzliche Phase eingerechnet. Ein Reproduktionslauf mit Startwert 11 genügt; drei Startwerte sind nur Zusatz.
 
 Im privaten Browserfenster fremdes ZIP importieren, Vorbereitung und Datenimport ausführen, A/B nachtrainieren und den Test mit der Auswahl des Originals prüfen. Prüfsumme und Originalwerte vergleichen. Danach dasselbe fremde Modell die eigenen Klassen C/D beurteilen lassen. Eine hohe Trennschärfe kann mit Hintergrund, Licht oder Form zusammenhängen; das Modell kennt weiterhin nur seine ursprünglichen Klassen und kein «weder noch».
 
@@ -465,26 +465,29 @@ Für den Abschluss zwei Fallurteile diskutieren, danach jede Person kurz eine Er
 
 ## Gesprächsplan · Doppellektion 8
 
-**Vier Minuten Einzelgespräch pro Person, eine Minute für Notizen/Wechsel.** Die Gespräche finden vollständig in **Doppellektion 8** statt. Die gemeinsamen Projektabgaben (K1–K6) liegen schon vor Beginn vor. Während der Gespräche arbeiten die anderen Lernenden am unbenoteten Fremdtest und pausieren jeweils beim persönlichen Aufruf.
+**20 Lernende, eine Lehrperson, vier Minuten Einzelgespräch pro Person plus eine Minute für Notizen und Wechsel.** Die gemeinsame Projektabgabe ist bereits vor Beginn der Doppellektion eingereicht. Jede Person erhält eigene K7–K10-Gesprächspunkte; die gemeinsame Bewertung K1–K6 wird unverändert übernommen.
 
-**Zeitbudget:** Minute 0–5 Einführung, Minute 5–85 Prüfungsfenster (80 Minuten), Minute 85–90 gemeinsamer Abschluss. Bei nur einer prüfenden Lehrperson bleiben mindestens **8 Minuten Reserve** für kleine Unterbrechungen und Technik. Daher höchstens **14 Einzelgespräche** pro Lehrperson; bei grösseren Klassen ist **eine zweite prüfende Lehrperson am selben Termin** nötig, nicht eine Kürzung der Gesprächsdauer oder ein Ersatztermin.
+**Zeitbudget: 20 × (4 + 1) = 100 Minuten.** Die Lehrperson beginnt mit Gespräch 1 exakt bei Minute **0**, prüft alle 20 Personen ohne Unterbrechung bis Minute **100**. Das sind **90 Minuten Unterricht plus 10 Minuten unmittelbar anschliessend**. Die Personen 19 und 20 bleiben für die letzten zehn Minuten. Für Verzögerungen gibt es **keine Zeitreserve**; die Gesprächsreihenfolge und der Bewertungsbogen müssen vorher bereitliegen. Das ist zeitlich eng, aber rechnerisch möglich.
 
-| Lernende je prüfender Lehrperson | Einzelgespräch | Notizen/Wechsel | Gesamt für Slots | Reserve im 80-Minuten-Fenster |
-| --- | --- | --- | --- | --- |
-| 10 | 4 Min. | 1 Min. | 50 Min. | 30 Min. |
-| 12 | 4 Min. | 1 Min. | 60 Min. | 20 Min. |
-| 14 | 4 Min. | 1 Min. | 70 Min. | 10 Min. |
+| Personen | Gesprächsfenster ab Beginn | Zeitaufwand | Hinweis |
+| --- | --- | --- | --- |
+| 1–4 | Minute 0–20 | 20 Min. | Normaler Unterricht |
+| 5–8 | Minute 20–40 | 20 Min. | Normaler Unterricht |
+| 9–12 | Minute 40–60 | 20 Min. | Normaler Unterricht |
+| 13–16 | Minute 60–80 | 20 Min. | Normaler Unterricht |
+| 17–18 | Minute 80–90 | 10 Min. | Ende der Doppellektion |
+| 19–20 | Minute 90–100 | 10 Min. | Unmittelbarer Anschluss |
 
-Bei **20 Lernenden** beispielsweise prüfen zwei Lehrpersonen parallel je 10 Lernende; bei **24 Lernenden** je 12. Die Lehrperson veröffentlicht individuelle Gesprächsfenster vorab, damit die Fremdauswertung gut unterbrechbar bleibt.
+**Vorbereitung vor Doppellektion 8:** Individuelle Fünfminuten-Slots sowie die zugeteilten fremden Projekte schriftlich verteilen, Zugriff und Abgabekanal prüfen, ausgefüllte Projekt-Raster und Kurzfragen bereitlegen. **Keine klassenweite Einführung oder Abschlussbesprechung am Prüfungstag.** Die übrigen Lernenden starten direkt selbstständig mit der verbindlichen, unbenoteten Fremdauswertung und pausieren nur für ihr Einzelgespräch. Die Abgabe ihrer Fremdauswertung wird selbstständig organisiert; die Lehrperson kann während der laufenden Gespräche keine Beratung leisten.
 
-| Im 4-Minuten-Einzelgespräch | Fokus | Kompetenz |
+| Im vierminütigen Einzelgespräch | Fokus | Kompetenz |
 | --- | --- | --- |
 | 1 Min. | Bildweg: feste Merkmale und selbst trainiertes Netz erklären | K7 |
 | 1 Min. | Eigene Daten- und A/B-Entscheidung begründen | K8 |
-| 1 Min. | Ein gemessenes Ergebnis mit Grenze einordnen | K9 |
-| 1 Min. | Auf einen neuen Fall übertragen und nächsten Versuch vorschlagen | K10 |
+| 1 Min. | Ein Ergebnis mit seiner Grenze einordnen | K9 |
+| 1 Min. | Einen nächsten Versuch auf einen neuen Fall übertragen | K10 |
 
-Keine vorbereitete Präsentation. Jede Person erklärt selbstständig; kurze vergleichbare Fragen und ein bereitliegendes Journal genügen. Vier Nachweise in vier Minuten sind knapp: jeweils nur den zentralen Punkt prüfen und die Beobachtung unmittelbar im Raster festhalten. **K1–K6** separat für das **gemeinsame Projekt** bewerten; **K7–K10** für **jede Person einzeln** dokumentieren. Jede Person erhält ihre eigene Gesamtnote aus den gemeinsamen Projektpunkten und den individuellen Gesprächspunkten.
+Die anschliessende **eine Minute** gehört zu den Notizen/Punkten und dem Wechsel und ist keine zusätzliche Redezeit. Keine vorbereitete Präsentation. Kurze, vergleichbare Fragen und das abgegebene Journal genügen. Vier Kompetenzen in vier Minuten sind knapp; bewerten Sie pro Kriterium nur einen zentralen Nachweis. **K1–K6** gemeinsam anhand der Projektabgabe bewerten, **K7–K10** pro Person separat. Die Gesamtnote wird individuell errechnet.
 
 ## Sicherung und Bewertung
 
