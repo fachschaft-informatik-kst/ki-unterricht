@@ -6,7 +6,7 @@
       "id": "01",
       "view": "einstieg",
       "title": "Was ist KI?",
-      "goal": "KI von Programmen mit festen Regeln unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen und schwache und starke KI sowie die vier KI-Typen unterscheiden.",
+      "goal": "KI von automatisierten Programmen unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen sowie schwache und starke KI an Beispielen gegenüberstellen.",
       "question": "Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
       "product": "Drei begründet eingeordnete Beispiele, zwei Argumente zum Fall «Schulweg» und eine eigene Antwort auf die Leitfrage.",
@@ -81,7 +81,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 15,
-              "text": "Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Ordnet schwache und starke KI sowie die vier KI-Typen ein: heutige Systeme sind schwache KI, Typ 1 oder 2; Typ 3 und 4 sind Forschungsziele. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen."
+              "text": "Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Stellt nur schwache KI (für bestimmte Aufgabenbereiche) und hypothetische starke KI (allgemeine Intelligenz) gegenüber; Bewusstsein ist dafür keine Voraussetzung. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen."
             },
             {
               "art": "Auftrag",
@@ -105,7 +105,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 30,
-              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Daten, KI/ML/Deep Learning/generative KI, Typ 1–4, schwach oder stark. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk."
+              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Lernen aus Daten, KI/ML/Deep Learning/generative KI und schwache oder hypothetische starke KI. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk."
             },
             {
               "art": "Input",
@@ -899,11 +899,11 @@
       "view": "projekt",
       "title": "Das eigene Projekt erklären und ein fremdes Modell prüfen",
       "rueckblick": "Ihr eigener Abgabestand ist eingefroren. Während der Fachgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.",
-      "goal": "Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.",
+      "goal": "Das gemeinsame Bildprojekt im vierminütigen Einzelgespräch selbstständig erklären und ein fremdes Modell anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.",
       "question": "Leitfrage: Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?",
       "motivation": "Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.",
-      "product": "Bewertetes Tandemgespräch und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.",
-      "zeit": "Gespräche parallel in Minute 5–85, nicht zusätzlich zu den 90 Minuten. Im 80-Minuten-Fenster selbstständig arbeiten und beim Aufruf pausieren. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest samt Auswertung. Drei Startwerte sind Zusatz. 15 Minuten Puffer im Arbeitsblock; die Fremdauswertung selbst entfällt nicht.",
+      "product": "Individuell bewertetes vierminütiges Einzelgespräch je Person und kurze unbenotete Fremdauswertung mit Reproduktionscheck, Fremdtest und begründetem Rückmeldungsfazit.",
+      "zeit": "Einzelgespräche zu je 4 Minuten plus 1 Minute Wechsel/Notizen pro Person im 80-Minuten-Fenster von Doppellektion 8. Für verlässliche 8 Minuten Reserve sind mit einer prüfenden Lehrperson höchstens 14 Einzelgespräche möglich. Bei mehr Lernenden eine zweite prüfende Lehrperson für denselben Termin organisieren; keine kürzeren Gespräche und keine Ersatztermine. Pflichtkern Fremdauswertung: Reproduktionslauf mit Startwert 11 und Fremdtest, drei Startwerte nur Zusatz.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -914,13 +914,13 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 4,
-              "text": "Bestätigt Abgaben, Gesprächsreihenfolge und die bereits zugeteilten Austauschprojekte. Erinnert an privates Browserfenster, Datenschutz und das unveränderte eigene Abgabepaket. Ab Minute 5 laufen alle Fachgespräche parallel bis Minute 85."
+              "text": "Bestätigt Abgaben, die individuellen Vierminuten-Gesprächsfenster und die bereits zugeteilten Austauschprojekte. Erinnert an privates Browserfenster, Datenschutz und das unveränderte eigene Abgabepaket. Ab Minute 5 laufen die Einzelgespräche parallel bis Minute 85; bei mehr als 14 Lernenden prüft eine zweite Lehrperson parallel."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 1,
-              "text": "Öffnen Sie das zugeteilte Paket und notieren Sie Ihr Gesprächsfenster."
+              "text": "Öffnen Sie das zugeteilte Paket und notieren Sie beide individuellen Gesprächsfenster."
             },
             {
               "art": "Ergebnis",
@@ -998,12 +998,12 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 15,
-              "text": "Puffer für Gesprächsunterbrechung, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim Aufruf pausieren Sie. Im Fachgespräch erklären beide das eigene Projekt, eine Entscheidung, ein Ergebnis samt Grenze und einen neuen Fall. Bei nicht lösbarem Trainingsproblem werten Sie die gespeicherten fremden Ausgaben und Beispiele aus und dokumentieren, was nicht reproduziert werden konnte; keinen erfolgreichen Test behaupten."
+              "text": "Puffer für Einzelgespräch, Wiedereinstieg und Technik; keine zusätzliche Gesprächsphase. Beim persönlichen Aufruf pausieren Sie. Jede Person erklärt in vier Minuten selbstständig den Modellweg, eine Datenentscheidung, ein Ergebnis samt Grenze und einen nächsten Versuch. Beim nicht lösbaren Training gespeicherte fremde Ausgaben auswerten und fehlende Reproduktion ehrlich dokumentieren."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein Fachgespräch und eine belegte Fremdauswertung; der eigene Abgabestand bleibt unverändert."
+              "text": "Je ein vierminütiges Einzelgespräch pro Person und eine belegte Fremdauswertung; die gemeinsame Projektabgabe bleibt unverändert."
             }
           ]
         },
