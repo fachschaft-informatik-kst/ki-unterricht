@@ -84,6 +84,7 @@ test: build
 	$(VENV_PY) tests/check_materials.py
 	$(VENV_PY) tests/check_admin.py
 	$(VENV_PY) tests/check_course_model.py
+	$(VENV_PY) tests/check_didactics.py
 	$(VENV_PY) tests/check_portal_content.py
 	$(VENV_PY) tests/check_solutions.py
 	$(VENV_PY) tests/check_content_mvc.py
