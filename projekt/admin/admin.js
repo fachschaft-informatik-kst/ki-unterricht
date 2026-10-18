@@ -712,7 +712,7 @@ async function addLessonToCurrentSection(){
     const lesson=lessonPlan(id,title.trim(),view);
     lesson.order=max+10;
     target.data.lessons.push(lesson);
-    const planSource=JSON.stringify(target.data,null,2)+"\\n";
+    const planSource=JSON.stringify(target.data,null,2)+"\n";
     const chapterPrefix=Math.max(0,...chaptersFor(view).map(x=>Number(x.path.split("/").pop().slice(0,3))))+10;
     if(chapterPrefix>=999)throw Error("Kein Sortierplatz für ein neues Kapitel.");
     const chapter="kursseiten/"+view+"/"+String(chapterPrefix).padStart(3,"0")+"-"+id+"-"+chapterSlug+".md";
@@ -722,13 +722,13 @@ async function addLessonToCurrentSection(){
     const materialFile=materialsDraft?null:await api("/api/file?path="+encodeURIComponent(materialsPath));
     if(state.staged.size+3>12)throw Error("Maximal zwölf Dateien pro Pull Request. Änderungen zuerst einreichen.");
     state.staged.set(target.path,{path:target.path,expectedSha:target.draft?.expectedSha??target.file?.sha??null,content:planSource});
-    const chapterSource="---\\ntype: chapter\\nid: "+view+"-"+id+"-"+chapterSlug+
-      "\\nnummer: \\""+(target.data.lessons.length)+"\\"\\ntitel: "+JSON.stringify(chapterTitle)+
-      "\\nkurz: "+JSON.stringify(chapterTitle)+"\\nopen: true\\n---\\n\\n"+
-      "## Lernauftrag\\n\\nHier die Aufgabe beschreiben.\\n";
+    const chapterSource="---\ntype: chapter\nid: "+view+"-"+id+"-"+chapterSlug+
+      "\nnummer: \""+(target.data.lessons.length)+"\"\ntitel: "+JSON.stringify(chapterTitle)+
+      "\nkurz: "+JSON.stringify(chapterTitle)+"\nopen: true\n---\n\n"+
+      "## Lernauftrag\n\nHier die Aufgabe beschreiben.\n";
     state.staged.set(chapter,{path:chapter,expectedSha:null,content:chapterSource});
     state.staged.set(materialsPath,{path:materialsPath,expectedSha:materialsDraft?.expectedSha??materialFile?.sha??null,
-      content:materials+"\\n\\n## Doppellektion "+id+"\\n\\n### Zusätzliche Materialien\\n\\n"});
+      content:materials+"\n\n## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"});
     state.chapters.push({path:chapter,sha:null});
     state.chapters.sort((a,b)=>a.path.localeCompare(b.path));
     useFile(target.path,target.draft?.expectedSha??target.file?.sha??null,planSource);
