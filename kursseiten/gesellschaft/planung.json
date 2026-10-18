@@ -103,25 +103,31 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Urteil und ruhiger Kursabschluss",
+          "titel": "Urteil sichern und Kurs abschliessen",
           "minutes": 15,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 10,
-              "text": "Besprechen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut; die Lehrperson fragt: Wer ändert was, und woran wäre die Verbesserung erkennbar?"
+              "min": 8,
+              "text": "Vergleichen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut: Wer müsste was ändern, und woran wäre die Verbesserung erkennbar?"
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Notieren Sie kurz eine Erkenntnis, eine offene Frage und eine Rückmeldung zum KI-Block. Einzelne freiwillige Stimmen schliessen den Kurs ab; keine verpflichtende Runde aller Personen."
+              "min": 4,
+              "text": "Notieren Sie eine eigene Erkenntnis und eine offene Frage zum KI-Block. Einige freiwillige Rückmeldungen schliessen die Diskussion ab."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 3,
+              "text": "Sicherung: Formulieren Sie einzeln ein begründetes Schlussurteil zur Leitfrage «Sind gleiche Regeln automatisch fair?». Nennen Sie am behandelten Fall eine Folge für Betroffene und eine überprüfbare Gegenmassnahme."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine überprüfte Position und ein persönlicher Rückblick."
+              "text": "Ein eigenständiges begründetes Schlussurteil mit konkretem Fallbeispiel und Massnahme."
             }
           ]
         }
