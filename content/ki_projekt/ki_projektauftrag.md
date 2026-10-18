@@ -18,13 +18,55 @@ V1 dient der Auswahl. Erst nach der begründeten Wahl wird auf P1/P2 getestet. D
 
 ## Fünf Reflexionen im Journal
 
-1. Anwendung, Klassenregeln und Vermutung.
-2. Gruppenplan, Quellen, Aufnahmebedingungen und Datenprobleme.
-3. A/B-Ergebnisse, konkrete Beispiele, alternative Erklärung und Modellwahl.
-4. Abschlusstest, drei Beispiele, Nutzen und Grenzen. Ohne Fehler richtige Beispiele analysieren, keine Fehler erfinden.
-5. Fazit, nächster Versuch, Arbeitsteilung und verwendete Hilfen.
+1. **Was möchten wir erkennen?** Zwei Klassen, ein möglicher Grenzfall und unsere Vermutung zu mehr Bildvielfalt. Kurzer Etappenplan.
+2. **Sind unsere Bilder geeignet?** Fünf Gruppen, Herkunft und Aufnahmebedingungen sowie ein mögliches Datenproblem.
+3. **Was unterscheidet A und B?** Ergebnisse auf V1 und eine konkrete Vorhersage; mögliche Erklärung. **Vor dem Test** die Modellwahl begründen.
+4. **Was passiert mit neuen Bildern?** Testergebnis und drei konkrete Vorhersagen beschreiben; Nutzen und Grenzen nennen. Auch richtige Beispiele sind interessant – keine Fehler erfinden.
+5. **Was haben wir gelernt?** Fazit, nächster Versuch, Arbeitsteilung und verwendete Hilfen (einschliesslich KI).
 
 Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Wiederholungen mit drei festgelegten Startwerten sind freiwillige Vertiefung vor Testeinsicht; alle Ergebnisse berichten.
+
+## Etappen-Check: Bereit für den nächsten Schritt?
+
+Die fünf Checks helfen Ihnen, den eigenen Fortschritt einzuschätzen. Sie sind **keine zusätzlichen Abgaben und keine zusätzlichen Bewertungskriterien**. Arbeiten Sie die Etappen in der angegebenen Reihenfolge durch, teilen Sie Ihre Zeit in Doppellektion 5–7 aber selbst ein. Falls etwas fehlt, klären Sie es im Tandem oder holen Sie gezielt Hilfe.
+
+### 1. Anwendung und Plan
+- [ ] Wir haben zwei klar unterscheidbare Klassen und ein freigegebenes Thema.
+- [ ] Wir können in einem Satz sagen, was wir mit A und B untersuchen.
+- [ ] Wir haben eine Vermutung und einen realistischen Etappenplan mit wechselnden Rollen.
+
+**Weiter, wenn:** Wir wissen, was wir testen und welche Bilder wir benötigen.
+
+### 2. Bilder und Gruppen
+- [ ] Wir haben je Klasse acht Bilder in jeder der fünf Gruppen T1, T2, V1, P1 und P2.
+- [ ] Bilder desselben Exemplars bzw. derselben Person sind nicht auf mehrere Gruppen verteilt.
+- [ ] Beide Klassen wurden vergleichbar aufgenommen; Quellen und Besonderheiten stehen in Reflexion 2.
+- [ ] Unsere Fotos und die Fotostudio-JSON sind separat gesichert.
+
+**Weiter, wenn:** Der Datenimport funktioniert und wir erklären können, weshalb Trainings- und Prüfbilder getrennt sind.
+
+### 3. Modelle A und B vergleichen
+- [ ] Wir haben A und B mit den vorgegebenen gleichen Einstellungen trainiert.
+- [ ] Wir kennen den Unterschied zwischen den Trainingsbildern von A und B.
+- [ ] Wir haben die Resultate auf V1 und mindestens eine konkrete Vorhersage angesehen.
+- [ ] Wir haben **vor Einsicht in P1/P2** in Reflexion 3 begründet, welches Modell wir auswählen.
+
+**Weiter, wenn:** Unsere Modellwahl feststeht. Eine hohe Trefferquote ist nicht nötig.
+
+### 4. Abschlusstest verstehen
+- [ ] Wir haben nur die ausgewählte Variante auf P1/P2 getestet und danach nichts mehr optimiert.
+- [ ] Wir können drei konkrete Vorhersagen erklären, auch wenn alle richtig sind.
+- [ ] Wir unterscheiden, was unsere Ergebnisse zeigen und was wir damit noch nicht wissen.
+
+**Weiter, wenn:** Testausgaben und Reflexion 4 gesichert sind.
+
+### 5. Abgabe und Fachgespräch vorbereiten
+- [ ] Alle fünf Reflexionen sind verständlich und mit eigenen Resultaten verbunden.
+- [ ] Wir haben das Notebook mit Ausgaben, Originalbilder, JSON und Journal im ZIP überprüft.
+- [ ] Beide können die Datentrennung, den A/B-Vergleich und mindestens ein eigenes Ergebnis ohne Ablesen erklären.
+- [ ] Wir haben die ZIP-Datei **über den Abgabekanal eingereicht**; ein Download allein reicht nicht.
+
+**Fertig, wenn:** Abgabe eingereicht und beide auf das individuelle Fachgespräch vorbereitet sind.
 
 ## So planen und steuern Sie Ihre Projektarbeit
 
