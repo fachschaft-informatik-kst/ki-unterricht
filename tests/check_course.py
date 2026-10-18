@@ -14,8 +14,12 @@ from build_course import PHASES
 
 lessons=json.loads((root/'_build/site/projekt/kurs.json').read_text())['lessons']
 assert len(lessons)>=10
-assert [l['id'] for l in lessons]==[f'{i:02d}' for i in range(1,len(lessons)+1)]
-assert [l['view'] for l in lessons[10:]]==[f'dl-{i:02d}' for i in range(11,len(lessons)+1)]
+assert len({l['id'] for l in lessons})==len(lessons), 'Lesson IDs must be stable and unique'
+assert [l['number'] for l in lessons]==list(range(1,len(lessons)+1))
+assert all(l['view'] and l['order'] is not None for l in lessons)
+assert [l['order'] for l in lessons]==sorted(l['order'] for l in lessons)
+# Historical IDs are durable storage and deep-link contracts, not a numbering scheme.
+assert {f'{i:02d}' for i in range(1,11)}.issubset({l['id'] for l in lessons})
 planned_minutes={
     role: sum(step.get('min',0) for lesson in lessons for phase in lesson['phases'] for step in phase['schritte'] if step['wer']==role)
     for role in ['Einzeln','Klasse']
@@ -53,7 +57,7 @@ for lesson in lessons:
     assert [p['phase'] for p in lesson['phases']]==PHASES
     intro=soup.select_one('[data-lesson="'+lesson['id']+'"]')
     plan=plans.select_one('[data-lesson="'+lesson['id']+'"]')
-    lesson_label=f'Doppellektion {int(lesson["id"])}'
+    lesson_label=f'Doppellektion {lesson["number"]}'
     assert intro and lesson_label in intro.get_text() and lesson['goal'] in intro.get_text() and lesson['question'] in intro.get_text()
     assert plan and lesson_label in plan.get_text() and lesson['product'] in plan.get_text()
     for phase in lesson['phases']:
