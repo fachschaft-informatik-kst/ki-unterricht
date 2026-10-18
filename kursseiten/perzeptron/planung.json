@@ -108,13 +108,13 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 3,
+              "min": 2,
               "text": "Erklären Sie Gewicht, Bias und eine Korrektur bei falscher Ausgabe. Begründen Sie an den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 3,
+              "min": 4,
               "text": "Vergleichen Sie zwei Erklärungen der XOR-Grenze und überprüfen Sie sie an der Grafik."
             },
             {
