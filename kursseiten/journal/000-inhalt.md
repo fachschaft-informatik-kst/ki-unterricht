@@ -42,7 +42,7 @@
   <summary>5 · Fazit &amp; Zusammenarbeit<span class="completion" data-completion="4"></span></summary>
   <div class="detail-body">
     <label class="field"><span>Was haben Sie über Bildvielfalt gelernt? Was würden Sie als Nächstes ausprobieren?</span><textarea data-journal="conclusion" maxlength="20000" placeholder="Unsere Beobachtungen sprechen dafür, dass …" rows="4"></textarea></label>
-    <label class="field"><span>Wer hat welche Aufgaben übernommen? Was haben Sie am Plan geändert? Welche Hilfen (auch KI) haben Sie benutzt?</span><textarea data-journal="contribution" maxlength="20000" placeholder="Bereiten Sie sich beide auf das jeweilige Einzelgespräch vor. Hilfsmittel konkret nennen …" rows="4"></textarea></label>
+    <label class="field"><span>Wer hat welche Aufgaben übernommen? Was haben Sie an Ihrem Etappenplan geändert? Welche Hilfen (auch KI) haben Sie benutzt?</span><textarea data-journal="contribution" maxlength="20000" placeholder="Bereiten Sie sich beide auf das jeweilige Einzelgespräch vor. Hilfsmittel konkret nennen …" rows="4"></textarea></label>
   </div>
 </details>
 <div class="actions">
