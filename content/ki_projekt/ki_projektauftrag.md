@@ -18,11 +18,11 @@ V1 dient der Auswahl. Erst nach der begründeten Wahl wird auf P1/P2 getestet. D
 
 ## Fünf Reflexionen im Journal
 
-1. Anwendung, Klassenregeln und Vermutung.
-2. Gruppenplan, Quellen, Aufnahmebedingungen und Datenprobleme.
-3. A/B-Ergebnisse, konkrete Beispiele, alternative Erklärung und Modellwahl.
-4. Abschlusstest, drei Beispiele, Nutzen und Grenzen. Ohne Fehler richtige Beispiele analysieren, keine Fehler erfinden.
-5. Fazit, nächster Versuch, Arbeitsteilung und verwendete Hilfen.
+1. **Was möchten wir erkennen?** Zwei Klassen, ein möglicher Grenzfall und unsere Vermutung zu mehr Bildvielfalt. Kurzer Etappenplan.
+2. **Sind unsere Bilder geeignet?** Fünf Gruppen, Herkunft und Aufnahmebedingungen sowie ein mögliches Datenproblem.
+3. **Was unterscheidet A und B?** Ergebnisse auf V1 und eine konkrete Vorhersage; mögliche Erklärung. **Vor dem Test** die Modellwahl begründen.
+4. **Was passiert mit neuen Bildern?** Testergebnis und drei konkrete Vorhersagen beschreiben; Nutzen und Grenzen nennen. Auch richtige Beispiele sind interessant – keine Fehler erfinden.
+5. **Was haben wir gelernt?** Fazit, nächster Versuch, Arbeitsteilung und verwendete Hilfen (einschliesslich KI).
 
 Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Wiederholungen mit drei festgelegten Startwerten sind freiwillige Vertiefung vor Testeinsicht; alle Ergebnisse berichten.
 
