@@ -91,31 +91,37 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Plausibilität und Wahrheit trennen",
+          "titel": "Plausibilität und Wahrheit sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Erklären Sie anhand Ihrer Beispiele, warum eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Papagei-Tabelle und neuronalem Sprachmodell und eine gemeinsame Grenze."
+              "min": 2,
+              "text": "Erklären Sie anhand Ihrer Beispiele, weshalb eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Wortfolgetabelle und neuronalem Sprachmodell."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen einer falschen, aber überzeugenden Ausgabe?"
+              "text": "Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen falscher, aber überzeugender Ausgaben?"
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 3,
-              "text": "Teilen Sie zwei Beispiele und klären Sie gemeinsam, weshalb Plausibilität keine Wahrheitsprüfung ist."
+              "min": 4,
+              "text": "Teilen Sie zwei Beispiele und prüfen Sie gemeinsam, weshalb Plausibilität keine Wahrheitsprüfung ist."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Sicherung: Beantworten Sie einzeln die Leitfrage mit einem eigenen Beispiel und einem Merksatz: Was leisten Sprachmodelle bei der Vorhersage, und was lässt sich daraus nicht über Wahrheit ableiten?"
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine eigene Erklärung von Verfahren und Grenzen."
+              "text": "Ein eigener Merksatz mit Beispiel zur Unterscheidung von plausibler Vorhersage und Wahrheit."
             }
           ]
         }

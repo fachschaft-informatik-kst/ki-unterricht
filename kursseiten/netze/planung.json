@@ -102,31 +102,37 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Brücke zur SOL-Phase",
+          "titel": "Neues Wissen sichern und SOL vorbereiten",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 3,
-              "text": "Halten Sie fest, was die Zwischenschicht leistet und warum dasselbe Objekt nicht zugleich in Training und Test vorkommt. Notieren Sie Ihren nächsten Vorbereitungsschritt."
+              "min": 2,
+              "text": "Erklären Sie im Tandem die Aufgabe einer Zwischenschicht und warum dasselbe Objekt nicht zugleich in Training und Test vorkommen darf."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Teilen Sie eine Erklärung zur Zwischenschicht oder zum Datenleck und prüfen Sie sie gemeinsam."
+              "text": "Prüfen Sie eine Erklärung zur Zwischenschicht und zum Datenleck gemeinsam."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 3,
+              "min": 2,
               "text": "Gibt den vorbereitenden Auftrag: Datenplan mit fünf unabhängigen Gruppen prüfen und bis Doppellektion 5 möglichst 80 Fotos sammeln, acht je Klasse und Gruppe. Beide Klassen unter gleichen Bedingungen; Personen nur mit Einverständnis. Fehlende Daten werden in der SOL-Zeit ergänzt; Ersatzdaten nur nach Absprache mit offener Herkunft."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Sicherung: Halten Sie einzeln zwei Erkenntnisse fest: Wie ermöglicht eine Zwischenschicht die Lösung von XOR, und warum müssen Trainings- und Testdaten getrennt bleiben? Notieren Sie danach Ihren nächsten Vorbereitungsschritt."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine fachliche Sicherung und ein klarer Vorbereitungsauftrag."
+              "text": "Zwei gesicherte Kernaussagen zu Zwischenschicht und Datenleck sowie ein Vorbereitungsschritt."
             }
           ]
         }

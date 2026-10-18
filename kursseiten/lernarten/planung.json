@@ -97,25 +97,31 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Lernarten vergleichen",
+          "titel": "Lernarten vergleichen und sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 7,
+              "min": 4,
               "text": "Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung. Ordnen Sie NIM und das Bildprojekt begründet zu. Erklären Sie, warum im Memory der Mensch und nicht ein KI-Modell gelernt hat."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 3,
-              "text": "Klärt offene Zuordnungen und sichert: Das Bildprojekt ist überwacht, weil Trainingsbilder Klassennamen erhalten."
+              "text": "Klärt zwei strittige Zuordnungen gemeinsam und hält fest: Das Bildprojekt lernt überwacht mit beschrifteten Trainingsbildern."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 3,
+              "text": "Sicherung: Beantworten Sie einzeln die Leitfrage «Wie lernt KI?» in zwei bis drei Sätzen. Nennen Sie zu einer Lernart ein Beispiel und begründen Sie, weshalb es dazugehört."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein begründeter Vergleich der drei Lernarten."
+              "text": "Eine eigene begründete Zuordnung der Lernarten als schriftliche Lernzielkontrolle."
             }
           ]
         }

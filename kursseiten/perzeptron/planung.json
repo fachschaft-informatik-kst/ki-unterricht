@@ -102,31 +102,37 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Was lernt das Neuron?",
+          "titel": "Lernen und XOR-Grenze sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 4,
-              "text": "Erklären Sie Gewicht, Bias und die Korrektur bei einer falschen Ausgabe. Begründen Sie mit den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt."
+              "min": 2,
+              "text": "Erklären Sie Gewicht, Bias und eine Korrektur bei falscher Ausgabe. Begründen Sie an den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Vergleichen Sie zwei Erklärungen zur XOR-Grenze und benennen Sie gemeinsam, was das einzelne Neuron begrenzt."
+              "text": "Vergleichen Sie zwei Erklärungen der XOR-Grenze und überprüfen Sie sie an der Grafik."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Sichert an der XOR-Grafik: Die Grenze liegt am Bau des Neurons, nicht an zu wenig Übung. Der algebraische Widerspruch ist Vertiefung."
+              "text": "Hält fest: Die XOR-Grenze liegt an der Struktur eines einzelnen Neurons, nicht an zu wenig Training."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Sicherung: Schreiben Sie einzeln einen Merksatz dazu, wie ein Neuron entscheidet und lernt, und einen Satz dazu, weshalb ein einzelnes Neuron XOR nicht lösen kann."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine eigene Erklärung von Lernen und XOR-Grenze."
+              "text": "Ein eigener Merksatz zu Gewicht, Bias, Lernen und XOR-Grenze."
             }
           ]
         }
