@@ -519,9 +519,12 @@ def logik_ausgaben(regel='XOR'):
     X=np.array([[0,0],[0,1],[1,0],[1,1]])
     anzahl=X.sum(axis=1)
     regeln={
+        'AND': anzahl==2,
         'UND (AND)': anzahl==2,
+        'OR': anzahl>=1,
         'ODER (OR)': anzahl>=1,
         'NAND': anzahl<2,
+        'NOR': anzahl==0,
         'XOR': anzahl==1,
     }
     if regel not in regeln:
@@ -545,7 +548,7 @@ def logik_gatter(regel='XOR'):
 
 def regler_logik():
     return widgets.interact(logik_gatter,
-        regel=widgets.Dropdown(options=['UND (AND)','ODER (OR)','NAND','XOR'],description='Regel'))
+        regel=widgets.Dropdown(options=['AND','OR','NAND','NOR','XOR'],description='Regel'))
 
 
 def datenplan(leck=False):
