@@ -109,7 +109,7 @@
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 8,
+              "min": 9,
               "text": "Vergleichen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut: Wer müsste was ändern, und woran wäre die Verbesserung erkennbar?"
             },
             {
@@ -121,7 +121,7 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 3,
+              "min": 2,
               "text": "Sicherung: Formulieren Sie einzeln ein begründetes Schlussurteil zur Leitfrage «Sind gleiche Regeln automatisch fair?». Nennen Sie am behandelten Fall eine Folge für Betroffene und eine überprüfbare Gegenmassnahme."
             },
             {
