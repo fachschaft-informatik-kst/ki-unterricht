@@ -13,6 +13,11 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,'Reading the page must not start Python');
   assert.equal(await p.locator('.course-card').count(),7);assert.equal(await p.locator('.nav a').count(),9);
   assert.equal(await p.locator('a[href*="/lab/"]').count(),0);
+  // Visual geometry smoke test: keep overview cards sizeable on desktop.
+  // Full-page desktop/mobile captures below remain available for review.
+  const desktopCard=await p.locator('.course-card').first().boundingBox();
+  assert(desktopCard&&desktopCard.width>=150&&desktopCard.height>=55,
+    'Desktop course card collapsed or invisible');
   await p.screenshot({path:'/tmp/ki-portal-home.png',fullPage:true});
   assert.equal(await p.locator('.lesson-plan').count(),10);
   await p.locator('.nav a[href="#lernziele"]').click();await p.locator('#lernziele').waitFor({state:'visible'});assert.equal(await p.locator('#lernziele .grid > article').count(),7);
@@ -138,7 +143,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await turing.getAttribute('href'),'https://humanornot.so/start-search');assert.equal(await turing.getAttribute('target'),'_blank');
     assert((await p.locator('#sprache .turing-activity').innerText()).includes('Keine persönlichen Angaben teilen'));
   assert.equal(await p.locator('#sprache #language-corpus').count(),0);
-  await p.setViewportSize({width:390,height:844});await p.locator('.nav a[href="#start"]').click();await p.locator('#start').waitFor({state:'visible'});assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await p.screenshot({path:'/tmp/ki-portal-mobile.png',fullPage:true});
+  await p.setViewportSize({width:390,height:844});await p.locator('.nav a[href="#start"]').click();await p.locator('#start').waitFor({state:'visible'});assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));const mobileCard=await p.locator('.course-card').first().boundingBox();assert(mobileCard&&mobileCard.width>=120,'Mobile overview card collapsed');await p.screenshot({path:'/tmp/ki-portal-mobile.png',fullPage:true});
   assert.deepEqual(errors,[]);console.log('PASS portal navigation, persistence, attachments, ZIP download/import, Papagei learning path, mobile and page errors');
   await p.setViewportSize({width:1440,height:1000});await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lesson="03"] summary').click();await p.screenshot({path:'/tmp/ki-lesson-plan.png',fullPage:true});
   if(process.env.CHECK_NOTEBOOK){
