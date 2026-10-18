@@ -97,7 +97,7 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 4,
+              "min": 2,
               "text": "Erklären Sie anhand Ihrer Beispiele, weshalb eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Wortfolgetabelle und neuronalem Sprachmodell."
             },
             {
@@ -109,7 +109,7 @@
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 2,
+              "min": 4,
               "text": "Teilen Sie zwei Beispiele und prüfen Sie gemeinsam, weshalb Plausibilität keine Wahrheitsprüfung ist."
             },
             {
