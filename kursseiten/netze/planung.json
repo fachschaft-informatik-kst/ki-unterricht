@@ -108,19 +108,19 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 3,
+              "min": 2,
               "text": "Erklären Sie im Tandem die Aufgabe einer Zwischenschicht und warum dasselbe Objekt nicht zugleich in Training und Test vorkommen darf."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 2,
+              "min": 4,
               "text": "Prüfen Sie eine Erklärung zur Zwischenschicht und zum Datenleck gemeinsam."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 3,
+              "min": 2,
               "text": "Gibt den vorbereitenden Auftrag: Datenplan mit fünf unabhängigen Gruppen prüfen und bis Doppellektion 5 möglichst 80 Fotos sammeln, acht je Klasse und Gruppe. Beide Klassen unter gleichen Bedingungen; Personen nur mit Einverständnis. Fehlende Daten werden in der SOL-Zeit ergänzt; Ersatzdaten nur nach Absprache mit offener Herkunft."
             },
             {
