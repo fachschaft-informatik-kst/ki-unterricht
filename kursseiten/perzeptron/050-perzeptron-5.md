@@ -1,43 +1,27 @@
-<details class="kapitel" id="perzeptron-5" data-kurz="Im Notebook entscheiden, rechnen, einstellen, per Klick lernen lassen und XOR versuchen (ca. 35 Minuten)." open>
+<details class="kapitel" id="perzeptron-5" data-kurz="Vier kompakte interaktive Versuche zu Entscheidung, Gewichten, Lernen und XOR (ca. 35 Minuten)." open>
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Im Notebook: entscheiden, einstellen, lernen lassen</h2>
   </summary>
   <div class="kapitel-body">
     <div class="lesson-steps">
-      <article>
-        <b>1 · Entscheiden</b>
+      <article><b>1 · Alltag: Schwimmen?</b>
         <!-- MD:START -->
-Stellen Sie im Schwimmbad-Beispiel Gewichte und Bias so ein, dass das Neuron Ihre Regel trifft (8 von 8). Selbstcheck: Wofür ist ein Neuron da?
+Ändern Sie die Gewichte des Schwimmbad-Neurons. Vergleichen Sie in der **Live-Tabelle** die acht Eingaben mit den berechneten Ausgaben und Zielen. Erreichen Sie 8 von 8?
 <!-- MD:END -->
       </article>
-      <article>
-        <b>2 · Rechnen</b>
+      <article><b>2 · Logische Gatter einstellen</b>
         <!-- MD:START -->
-Mit den Reglern Eingaben, Gewichte und Bias ändern: Wann feuert das Neuron? Vergleichen Sie es mit der Nervenzelle.
+Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder **NAND**. Die vier Ausgaben werden sofort in der Tabelle aktualisiert.
 <!-- MD:END -->
       </article>
-      <article>
-        <b>3 · Von Hand einstellen</b>
+      <article><b>3 · Lernen beobachten</b>
         <!-- MD:START -->
-Stellen Sie AND, OR und NAND ein. Feuert das Neuron zu wenig oder zu viel? Die Ausgabe nennt die Korrektur.
+Lassen Sie das Neuron einzelne Beispiele bearbeiten. Beobachten Sie **eine Korrektur** und vergleichen Sie die Parameter vor und nach diesem Schritt.
 <!-- MD:END -->
       </article>
-      <article>
-        <b>4 · Lernen per Klick</b>
+      <article><b>4 · XOR als Grenze</b>
         <!-- MD:START -->
-Das Neuron lernt Beispiel für Beispiel. Klicken Sie weiter und beobachten Sie Rechnung, Zahlen und Grenzlinie. Dann lernt es alle Runden selbst; ändern Sie die Lernrate.
-<!-- MD:END -->
-      </article>
-      <article>
-        <b>5 · Pflanzen bestimmen</b>
-        <!-- MD:START -->
-Ein Neuron unterscheidet an echten Messdaten zwei Pflanzenarten und wird an neuen Pflanzen geprüft.
-<!-- MD:END -->
-      </article>
-      <article>
-        <b>6 · XOR versuchen</b>
-        <!-- MD:START -->
-Lernen lassen, selbst einstellen, die vier Bedingungen prüfen: Warum gelingt XOR nie? Selbstchecks geben sofort Rückmeldung.
+Versuchen Sie, mit einem Neuron alle vier XOR-Zielwerte zu erreichen. Begründen Sie anhand Ihrer Beobachtung, warum das nicht gelingt.
 <!-- MD:END -->
       </article>
     </div>
