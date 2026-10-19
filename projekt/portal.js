@@ -181,7 +181,7 @@ window.addEventListener('message',async event=>{
   initializingFrame=true;
   try{
    await initialization;
-   const saved=name===projectName?notebook:others[name];
+   const saved=name===projectName?notebook:(name==='perzeptron_und_neuronale_netze.ipynb'?null:others[name]);
    if(saved){await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
    else await captureSnapshot(name,await request(frame,'snapshot'));
    frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';
