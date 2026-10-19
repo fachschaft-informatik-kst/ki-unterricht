@@ -62,23 +62,9 @@ function renderChapters(view){
   }
   navLink.after(box);
  }
+ // Die Unterkapitel stehen bereits in der Seitennavigation und als aufklappbare Kapitel.
+ // Keine zweite Kapitelübersicht über dem Inhalt erzeugen.
  view.querySelectorAll('.kapitel-uebersicht').forEach(e=>e.remove());
- const overview=document.createElement('nav'),head=document.createElement('div'),heading=document.createElement('p'),toggle=document.createElement('button'),grid=document.createElement('div');
- overview.className='kapitel-uebersicht';overview.setAttribute('aria-label','Kapitel dieser Doppellektion');
- head.className='kapitel-uebersicht-kopf';heading.textContent='Kapitel dieser Doppellektion';
- toggle.type='button';toggle.className='btn compact';grid.className='kapitel-karten';
- const label=()=>{toggle.textContent=chapters.some(k=>k.open)?'Alle einklappen':'Alle aufklappen';};
- toggle.addEventListener('click',()=>{const open=!chapters.some(k=>k.open);chapters.forEach(k=>{k.open=open;});label();});
- for(const k of chapters){
-  k.removeEventListener('toggle',k._label);k._label=label;k.addEventListener('toggle',label);
-  const card=document.createElement('a'),nr=document.createElement('span'),text=document.createElement('span'),title=document.createElement('b'),desc=document.createElement('span');
-  card.href='#'+k.id;card.className='kapitel-karte';nr.className='kapitel-nr';nr.textContent=k.querySelector('.kapitel-nr').textContent;
-  text.className='kapitel-karte-text';title.textContent=k.querySelector('.kapitel-titel').textContent;desc.textContent=k.dataset.kurz||'';
-  text.append(title,desc);card.append(nr,text);
-  card.addEventListener('click',e=>{if(location.hash==='#'+k.id){e.preventDefault();k.open=true;k.scrollIntoView({block:'start'});}});
-  grid.append(card);
- }
- label();head.append(heading,toggle);overview.append(head,grid);chapters[0].before(overview);
  if('IntersectionObserver' in window&&subLinks.size){
   chapterObserver=new IntersectionObserver(entries=>{
    for(const e of entries)if(e.isIntersecting){subLinks.forEach((a,k)=>{if(k===e.target)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});}
