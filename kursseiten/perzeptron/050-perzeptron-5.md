@@ -115,57 +115,57 @@ Versuchen Sie, mit einem Neuron alle vier XOR-Zielwerte zu erreichen. Begründen
       <details>
         <summary>Frühere Zusatzversuche – optional (gespeicherte Einträge bleiben erhalten)</summary>
         <div class="detail-body">
-      <h4>3 · Lernrate ändern (AND)</h4>
-      <div class="table-scroll">
-        <table class="typen protokoll">
-          <thead>
-            <tr>
-              <th>Lernrate</th>
-              <th>Runden, bis alle vier Zeilen stimmen</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>0.05</th>
-              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_005" aria-label="Runden bei Lernrate 0.05" placeholder=""></td>
-            </tr>
-            <tr>
-              <th>0.2</th>
-              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_02" aria-label="Runden bei Lernrate 0.2" placeholder=""></td>
-            </tr>
-            <tr>
-              <th>0.5</th>
-              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_05" aria-label="Runden bei Lernrate 0.5" placeholder=""></td>
-            </tr>
-            <tr>
-              <th>1.0</th>
-              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_10" aria-label="Runden bei Lernrate 1.0" placeholder=""></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <label class="field answer"><span>Was fällt auf, wenn die Lernrate kleiner oder grösser wird? Gibt es eine Lernrate, die schlecht ist?</span><textarea data-answer="lr_beob" maxlength="10000" placeholder="Bei kleiner Lernrate …" rows="3"></textarea></label>
-      <h4>4 · Pflanzen bestimmen</h4>
-      <div class="table-scroll">
-        <table class="typen protokoll">
-          <thead>
-            <tr>
-              <th>Messung</th>
-              <th>Ihr Ergebnis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Neue Pflanzen richtig erkannt (von 30)</th>
-              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="iris_richtig" aria-label="Neue Pflanzen richtig erkannt" placeholder=""></td>
-            </tr>
-            <tr>
-              <th>Welcher Eingang hat das grössere Gewicht?</th>
-              <td><select data-answer="iris_gewicht" aria-label="Grösseres Gewicht"><option value="">–</option><option value="laenge">Länge des Kronblatts</option><option value="breite">Breite des Kronblatts</option></select></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <h4>3 · Lernrate ändern (AND)</h4>
+          <div class="table-scroll">
+            <table class="typen protokoll">
+              <thead>
+                <tr>
+                  <th>Lernrate</th>
+                  <th>Runden, bis alle vier Zeilen stimmen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>0.05</th>
+                  <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_005" aria-label="Runden bei Lernrate 0.05" placeholder=""></td>
+                </tr>
+                <tr>
+                  <th>0.2</th>
+                  <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_02" aria-label="Runden bei Lernrate 0.2" placeholder=""></td>
+                </tr>
+                <tr>
+                  <th>0.5</th>
+                  <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_05" aria-label="Runden bei Lernrate 0.5" placeholder=""></td>
+                </tr>
+                <tr>
+                  <th>1.0</th>
+                  <td><input type="text" inputmode="decimal" maxlength="40" data-answer="lr_10" aria-label="Runden bei Lernrate 1.0" placeholder=""></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <label class="field answer"><span>Was fällt auf, wenn die Lernrate kleiner oder grösser wird? Gibt es eine Lernrate, die schlecht ist?</span><textarea data-answer="lr_beob" maxlength="10000" placeholder="Bei kleiner Lernrate …" rows="3"></textarea></label>
+          <h4>4 · Pflanzen bestimmen</h4>
+          <div class="table-scroll">
+            <table class="typen protokoll">
+              <thead>
+                <tr>
+                  <th>Messung</th>
+                  <th>Ihr Ergebnis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Neue Pflanzen richtig erkannt (von 30)</th>
+                  <td><input type="text" inputmode="decimal" maxlength="40" data-answer="iris_richtig" aria-label="Neue Pflanzen richtig erkannt" placeholder=""></td>
+                </tr>
+                <tr>
+                  <th>Welcher Eingang hat das grössere Gewicht?</th>
+                  <td><select data-answer="iris_gewicht" aria-label="Grösseres Gewicht"><option value="">–</option><option value="laenge">Länge des Kronblatts</option><option value="breite">Breite des Kronblatts</option></select></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </details>
     </div>
