@@ -4,22 +4,26 @@
   </summary>
   <div class="kapitel-body">
     <div class="lesson-steps">
-      <article><b>1 · Alltag: Schwimmen?</b>
+      <article>
+        <b>1 · Alltag: Schwimmen?</b>
         <!-- MD:START -->
 Ändern Sie die Gewichte des Schwimmbad-Neurons. Vergleichen Sie in der **Live-Tabelle** die acht Eingaben mit den berechneten Ausgaben und Zielen. Erreichen Sie 8 von 8?
 <!-- MD:END -->
       </article>
-      <article><b>2 · Logische Gatter einstellen</b>
+      <article>
+        <b>2 · Logische Gatter einstellen</b>
         <!-- MD:START -->
 Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder **NAND**. Die vier Ausgaben werden sofort in der Tabelle aktualisiert.
 <!-- MD:END -->
       </article>
-      <article><b>3 · Lernen beobachten</b>
+      <article>
+        <b>3 · Lernen beobachten</b>
         <!-- MD:START -->
 Lassen Sie das Neuron einzelne Beispiele bearbeiten. Beobachten Sie **eine Korrektur** und vergleichen Sie die Parameter vor und nach diesem Schritt.
 <!-- MD:END -->
       </article>
-      <article><b>4 · XOR als Grenze</b>
+      <article>
+        <b>4 · XOR als Grenze</b>
         <!-- MD:START -->
 Versuchen Sie, mit einem Neuron alle vier XOR-Zielwerte zu erreichen. Begründen Sie anhand Ihrer Beobachtung, warum das nicht gelingt.
 <!-- MD:END -->
@@ -108,6 +112,9 @@ Versuchen Sie, mit einem Neuron alle vier XOR-Zielwerte zu erreichen. Begründen
           </tbody>
         </table>
       </div>
+      <details>
+        <summary>Frühere Zusatzversuche – optional (gespeicherte Einträge bleiben erhalten)</summary>
+        <div class="detail-body">
       <h4>3 · Lernrate ändern (AND)</h4>
       <div class="table-scroll">
         <table class="typen protokoll">
@@ -159,6 +166,8 @@ Versuchen Sie, mit einem Neuron alle vier XOR-Zielwerte zu erreichen. Begründen
           </tbody>
         </table>
       </div>
+        </div>
+      </details>
     </div>
   </div>
 </details>
