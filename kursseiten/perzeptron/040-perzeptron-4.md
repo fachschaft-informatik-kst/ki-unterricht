@@ -55,13 +55,43 @@
     <div class="table-scroll">
       <table class="typen">
         <thead>
-          <tr><th>Zeitpunkt</th><th>Eingabe (x₁, x₂)</th><th>Ziel / Neuron</th><th>Änderung</th><th>Werte danach (w₁, w₂, b)</th></tr>
+          <tr>
+            <th>Zeitpunkt</th>
+            <th>Eingabe (x₁, x₂)</th>
+            <th>Ziel / Neuron</th>
+            <th>Änderung</th>
+            <th>Werte danach (w₁, w₂, b)</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><th>Start</th><td>–</td><td>–</td><td>noch kein Training</td><td>0.2 / 0.2 / −0.5</td></tr>
-          <tr><th>Runde 1</th><td>(1, 1)</td><td>1 / <strong>0 ✗</strong></td><td>Zu wenig: w₁, w₂ und b je +0.2</td><td>0.4 / 0.4 / −0.3</td></tr>
-          <tr><th>Runde 2</th><td>(0, 1)</td><td>0 / <strong>1 ✗</strong></td><td>Zu viel: w₂ und b je −0.2</td><td>0.4 / 0.2 / −0.5</td></tr>
-          <tr><th>Runde 3</th><td>alle vier</td><td><strong>alle richtig ✓</strong></td><td>keine Korrektur mehr</td><td>0.4 / 0.2 / −0.5</td></tr>
+          <tr>
+            <th>Start</th>
+            <td>–</td>
+            <td>–</td>
+            <td>noch kein Training</td>
+            <td>0.2 / 0.2 / −0.5</td>
+          </tr>
+          <tr>
+            <th>Runde 1</th>
+            <td>(1, 1)</td>
+            <td>1 / <strong>0 ✗</strong></td>
+            <td>Zu wenig: w₁, w₂ und b je +0.2</td>
+            <td>0.4 / 0.4 / −0.3</td>
+          </tr>
+          <tr>
+            <th>Runde 2</th>
+            <td>(0, 1)</td>
+            <td>0 / <strong>1 ✗</strong></td>
+            <td>Zu viel: w₂ und b je −0.2</td>
+            <td>0.4 / 0.2 / −0.5</td>
+          </tr>
+          <tr>
+            <th>Runde 3</th>
+            <td>alle vier</td>
+            <td><strong>alle richtig ✓</strong></td>
+            <td>keine Korrektur mehr</td>
+            <td>0.4 / 0.2 / −0.5</td>
+          </tr>
         </tbody>
       </table>
     </div>
