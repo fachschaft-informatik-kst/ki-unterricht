@@ -14,7 +14,7 @@ from course_model import load_course, output
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ROOT / "kursseiten"
 PORTAL = ROOT / "projekt"
-MARKDOWN = MarkdownIt("commonmark", {"html": True})
+MARKDOWN = MarkdownIt("commonmark", {"html": True}).enable("table")
 
 
 def render_fragment(source: str, filename: Path) -> str:
