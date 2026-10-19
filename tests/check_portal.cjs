@@ -177,11 +177,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('iframe[src*="lab/index"]').count(),1);
     assert.equal(await p.frameLocator('#project-frame').locator('.jp-NotebookPanel').count(),1);
     assert((await p.frameLocator('#project-frame').locator('body').innerText()).includes('Gewichte'));
-    await p.frameLocator('#project-frame').locator('.jp-MarkdownCell img').first().waitFor();
-    assert(await p.frameLocator('#project-frame').locator('.jp-MarkdownCell img').first().evaluate(img=>img.complete&&img.naturalWidth>100));
-    await p.frameLocator('#project-frame').locator('.jp-MarkdownCell img').first().scrollIntoViewIfNeeded();
-    await p.screenshot({path:'/tmp/ki-notebook-graphic.png',fullPage:true});
-    const lessonCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
+     const liveTable=p.frameLocator('#project-frame').locator('.widget-html table').first();
+     await liveTable.waitFor({state:'visible'});
+     assert.equal(await liveTable.locator('tbody tr').count(),8,'Expected eight swim situations');
+     await liveTable.scrollIntoViewIfNeeded();
+     await p.screenshot({path:'/tmp/ki-notebook-interactive-table.png',fullPage:true});
+     const lessonCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
     assert(/\[\d+\]/.test(await lessonCells.nth(1).locator('.jp-InputPrompt').innerText()));
     const prior=await lessonCells.nth(1).locator('.jp-InputPrompt').innerText();await lessonCells.nth(1).locator('.cm-content').click();await p.keyboard.press('Shift+Enter');
     await p.waitForFunction(prior=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[1].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text)&&text!==prior;},prior);
