@@ -148,7 +148,10 @@ async function showNotebook(name,owner,scroll=true){
   if(name!==activeName||frame.dataset.ready==='error'){
    if(activeName&&frame.dataset.ready!=='error')await snapshotCurrent();
    activeName=name;initializingFrame=false;notebookRevision=0;notebookDirty=false;frame.dataset.ready='no';delete frame.dataset.restored;
-   const saved=name===projectName?notebook:others[name];
+   // The short, read-only teaching lab always starts from the published template.
+   // Old saved lessons may contain obsolete cells and non-functional widget views.
+   // Written lesson answers stay in state.answers; the project journal is never reset.
+   const saved=name===projectName?notebook:(name==='perzeptron_und_neuronale_netze.ipynb'?null:others[name]);
    $('project-lab-status').textContent=saved?'Gesichertes Notebook wird geöffnet …':'Python startet …';
    frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
   }
@@ -178,7 +181,7 @@ window.addEventListener('message',async event=>{
   initializingFrame=true;
   try{
    await initialization;
-   const saved=name===projectName?notebook:others[name];
+   const saved=name===projectName?notebook:(name==='perzeptron_und_neuronale_netze.ipynb'?null:others[name]);
    if(saved){await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
    else await captureSnapshot(name,await request(frame,'snapshot'));
    frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';

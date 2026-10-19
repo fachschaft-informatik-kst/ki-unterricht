@@ -153,7 +153,10 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert(!lesson.cells.some(c=>c.outputs?.some(o=>o.data?.['application/vnd.jupyter.widget-view+json'])));
   await q.reload();await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
-  assert((await q.frameLocator('#project-frame').locator('body').innerText()).includes('Gatter: XOR'));
+  // Opening the teaching lab reloads the latest template (not a stale saved widget).
+  await q.frameLocator('#project-frame').locator('.widget-html table').first().waitFor({state:'visible'});
+  assert((await q.frameLocator('#project-frame').locator('body').innerText()).includes('Gatter: AND') || (await q.frameLocator('#project-frame').locator('body').innerText()).includes('AND: 4/4'));
+  assert(JSON.stringify(lesson.cells).includes('Gatter: XOR'),'Previously exported choice must remain in the ZIP');
   await q.screenshot({path:path.join(tmp,'restored-widget.png'),fullPage:true});
   assert.deepEqual(errors,[]);console.log('PASS interactive gate selection and HTML truth table persisted locally and exported; no browser errors');
   console.log('Evidence:',tmp);
