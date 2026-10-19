@@ -41,15 +41,6 @@ Lernen lassen, selbst einstellen, die vier Bedingungen prüfen: Warum gelingt XO
 <!-- MD:END -->
       </article>
     </div>
-    <details>
-      <summary>Beispielgrafik – sofort verfügbar</summary>
-      <div class="detail-body">
-        <!-- MD:START -->
-Vorberechnetes Beispiel mit den Grundeinstellungen. Ihr interaktiver Versuch kann andere Ergebnisse zeigen.
-<!-- MD:END -->
-        <img alt="Beispielausgabe: perzeptron" loading="lazy" src="previews/perzeptron.png" style="max-width:100%;height:auto"/>
-      </div>
-    </details>
     <button class="btn primary" data-lab="perzeptron_und_neuronale_netze.ipynb">Neuron starten ▶</button>
     <div class="protokoll-block">
       <!-- MD:START -->
