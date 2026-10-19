@@ -67,6 +67,19 @@ block = render_fragment(
 assert "<strong>neuer</strong>" in block
 assert "<div>" in block and "</div>" in block
 
+# Markdown tables in lesson fragments must become actual HTML tables, not pipe text.
+perzeptron_tables = soup.select("#perzeptron-3 table")
+assert len(perzeptron_tables) >= 2, "Perzeptron truth/calculation tables not rendered"
+truth = perzeptron_tables[0]
+assert [c.get_text(strip=True) for c in truth.select("thead th")] == [
+    "x₁", "x₂", "AND", "OR", "NAND", "XOR"
+]
+assert len(truth.select("tbody tr")) == 4
+calculation = perzeptron_tables[1]
+assert len(calculation.select("tbody tr")) == 4
+assert "AND-Ziel" in calculation.get_text()
+assert "|:--:" not in soup.select_one("#perzeptron-3").get_text()
+
 # Project diagram distinguishes pretrained feature extraction from the actual training.
 pipeline = soup.select("#projekt .project-train-flow > li")
 assert len(pipeline) == 4, "Expected four visible training stages in project introduction"
