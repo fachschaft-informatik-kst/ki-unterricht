@@ -276,6 +276,67 @@ def alltagsneuron(sonne=1., freunde=1., pruefung=-1., bias=-1.5):
     return pred
 
 
+def _live_tabelle(kopf, zeilen):
+    """Kompakte, horizontale statt überlagerte Widget-Ergebnisse."""
+    from html import escape
+    head = ''.join('<th style="padding:6px 9px;text-align:center;border-bottom:2px solid #8b9ca2">' + escape(str(h)) + '</th>' for h in kopf)
+    body = ''.join('<tr>' + ''.join('<td style="padding:5px 9px;text-align:center;border-bottom:1px solid #c5cdd0">' + escape(str(v)) + '</td>' for v in row) + '</tr>' for row in zeilen)
+    return '<div style="overflow-x:auto;max-width:100%"><table style="border-collapse:collapse;width:100%;font-size:14px;line-height:1.4"><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table></div>'
+
+
+def live_alltag():
+    """Sofort sichtbare Wahrheitstabelle der acht Alltagssituationen."""
+    from html import escape
+    labels = [('Sonne',1.), ('Freund:innen',1.), ('Prüfung',-1.), ('Bias',-1.5)]
+    sliders = [widgets.FloatSlider(value=v,min=-5,max=5,step=.5,description=k,
+               style={'description_width':'105px'},layout=widgets.Layout(width='min(100%, 420px)'),continuous_update=False)
+               for k,v in labels]
+    result = widgets.HTML(layout=widgets.Layout(width='100%'))
+    def update(_=None):
+        w_s,w_f,w_p,b = (w.value for w in sliders)
+        rows=[]
+        korrekt=0
+        for sonne in (0,1):
+            for freunde in (0,1):
+                for pruefung in (0,1):
+                    s=sonne*w_s+freunde*w_f+pruefung*w_p+b
+                    y=int(s>=0)
+                    ziel=int((sonne or freunde) and not pruefung)
+                    korrekt+=y==ziel
+                    rows.append((sonne,freunde,pruefung,f'{s:+.1f}',str(y)+' · '+('Ja' if y else 'Nein'),ziel,'✓' if y==ziel else '✗'))
+        result.value=('<p><strong>Regel:</strong> Sonne oder Freund:innen, aber keine Prüfung am nächsten Tag. '
+                      '<strong>'+str(korrekt)+'/8 richtig</strong>. Verändern Sie ein Gewicht und beobachten Sie die Ausgaben.</p>'
+                     +_live_tabelle(('Sonne (S)','Freund:innen (F)','Prüfung (P)','Summe','Ausgabe','Ziel','Vergleich'),rows))
+    for w in sliders:w.observe(update,names='value')
+    update()
+    display(widgets.VBox([widgets.VBox(sliders),result],layout=widgets.Layout(width='100%')))
+    return sliders,result
+
+
+def live_gatter(aufgabe='AND'):
+    """Gewichte verändern; jede Wahrheitstabellen-Zeile reagiert direkt."""
+    weight=lambda title,value:widgets.FloatSlider(value=value,min=-3,max=3,step=.5,description=title,
+       style={'description_width':'105px'},layout=widgets.Layout(width='min(100%, 420px)'),continuous_update=False)
+    w1,w2,b=(weight('Gewicht x₁',1.),weight('Gewicht x₂',1.),weight('Bias',-1.5))
+    gate=widgets.Dropdown(options=('AND','OR','NAND','NOR','XOR'),value=aufgabe,description='Gatter',
+      style={'description_width':'105px'},layout=widgets.Layout(width='250px'))
+    result=widgets.HTML(layout=widgets.Layout(width='100%'))
+    def update(_=None):
+        target=list(_ZIELE[gate.value])
+        rows=[];correct=0
+        for i,(x1,x2) in enumerate(((0,0),(0,1),(1,0),(1,1))):
+            s=x1*w1.value+x2*w2.value+b.value
+            y=int(s>=0);correct+=y==target[i]
+            rows.append((x1,x2,f'{s:+.1f}',y,target[i],'✓' if y==target[i] else '✗'))
+        result.value=(f'<p><strong>{gate.value}: {correct}/4 richtig.</strong> '
+                      'Grün ✓ = Ausgabe stimmt mit Ziel überein. Ändern Sie einen Regler.</p>'
+                     +_live_tabelle(('x₁','x₂','Summe','Neuron','Gatter-Ziel','Prüfung'),rows))
+    for w in (w1,w2,b,gate):w.observe(update,names='value')
+    update()
+    display(widgets.VBox([gate,widgets.VBox([w1,w2,b]),result],layout=widgets.Layout(width='100%')))
+    return gate,w1,w2,b,result
+
+
 def regler_alltag():
     gewicht = lambda name, wert: widgets.FloatSlider(value=wert, min=-5, max=5, step=.5, description=name, style={'description_width': '120px'}, layout=widgets.Layout(width='420px'))
     return widgets.interact(alltagsneuron, sonne=gewicht('Gewicht Sonne', 1), freunde=gewicht('Gewicht Freund:innen', 1),
@@ -295,21 +356,24 @@ def neuron_rechner():
 
 
 def frage(text, optionen, richtig, erklaerung):
-    """Selbstcheck mit sofortiger Rückmeldung: Antwort anklicken."""
-    import html
-    optionen = list(optionen)
-    if not 0 <= richtig < len(optionen): raise ValueError('richtig: Index einer Antwortmöglichkeit.')
-    auswahl = widgets.RadioButtons(options=optionen, value=None, description='')
-    ausgabe = widgets.Output()
-    def pruefen(change):
-        if change['new'] is None: return
-        with ausgabe:
-            ausgabe.clear_output()
-            if optionen.index(change['new']) == richtig: print('✓ Richtig. ' + erklaerung)
-            else: print('✗ Noch nicht. Lesen Sie den Abschnitt noch einmal und wählen Sie eine andere Antwort.')
-    auswahl.observe(pruefen, names='value')
-    display(widgets.HTML('<b>Selbstcheck:</b> ' + html.escape(text)), auswahl, ausgabe)
-    return auswahl, ausgabe
+    """Platzsparender Selbstcheck ohne überlaufende Radiobutton-Labels."""
+    from html import escape
+    optionen=list(optionen)
+    if not 0 <= richtig < len(optionen):raise ValueError('Ungültiger Index.')
+    antwort=widgets.Dropdown(options=[('Antwort auswählen …',None)]+[(f'{i+1}. {o}',i) for i,o in enumerate(optionen)],
+        value=None,layout=widgets.Layout(width='min(100%, 650px)'),style={'description_width':'0px'})
+    feedback=widgets.HTML(layout=widgets.Layout(width='100%'))
+    def changed(change):
+        if change['new'] is None:
+            feedback.value=''
+        elif change['new']==richtig:
+            feedback.value='<p style="white-space:normal">✓ Richtig. '+escape(erklaerung)+'</p>'
+        else:
+            feedback.value='<p style="white-space:normal">✗ Noch nicht. Prüfen Sie die Eingaben und versuchen Sie es erneut.</p>'
+    antwort.observe(changed,names='value')
+    display(widgets.VBox([widgets.HTML('<strong>Selbstcheck:</strong> '+escape(text)),antwort,feedback],
+        layout=widgets.Layout(width='100%')))
+    return antwort,feedback
 
 
 def _zahl(v):
