@@ -32,15 +32,15 @@ Die Eingaben werden nicht einfach addiert: Jede wird mit ihrem **Gewicht** multi
     </div>
     <p><strong>Konkrete Einstellung für AND:</strong> Gewicht w₁ = 1, Gewicht w₂ = 1, Bias b = −1.5. So lässt sich überprüfen, ob die Ausgaben tatsächlich der AND-Spalte oben entsprechen.</p>
     <!-- MD:START -->
-| Sensor 1 (x₁) | Sensor 2 (x₂) | Rechnung x₁·1 + x₂·1 − 1.5 | Summe s | Ausgabe des Neurons | AND-Ziel |
-|:---:|:---:|:---|---:|:---:|:---:|
-| 0 · aus | 0 · aus | 0 + 0 − 1.5 | −1.5 | **0 · aus** | 0 ✓ |
-| 0 · aus | 1 · ein | 0 + 1 − 1.5 | −0.5 | **0 · aus** | 0 ✓ |
-| 1 · ein | 0 · aus | 1 + 0 − 1.5 | −0.5 | **0 · aus** | 0 ✓ |
-| 1 · ein | 1 · ein | 1 + 1 − 1.5 | +0.5 | **1 · ein** | 1 ✓ |
+| Eingaben (x₁, x₂) | Rechnung → Summe s | Neuron / AND-Ziel |
+|:---:|:---|:---:|
+| (0, 0) · aus/aus | 0 + 0 − 1.5 = **−1.5** | **0 / 0 ✓** |
+| (0, 1) · aus/ein | 0 + 1 − 1.5 = **−0.5** | **0 / 0 ✓** |
+| (1, 0) · ein/aus | 1 + 0 − 1.5 = **−0.5** | **0 / 0 ✓** |
+| (1, 1) · ein/ein | 1 + 1 − 1.5 = **+0.5** | **1 / 1 ✓** |
 <!-- MD:END -->
     <!-- MD:START -->
-**Lesen Sie eine Zeile von links nach rechts:** Eingaben → Rechnung → Summe → tatsächliche Ausgabe. Die letzte Spalte zeigt nur zur **Kontrolle** das gewünschte AND-Ergebnis. Was würde sich ändern, wenn der Bias −0.5 wäre? Probieren Sie das später im Notebook aus.
+**So lesen Sie die drei Spalten:** links stehen die beiden Sensor-Eingaben (0 = aus, 1 = ein), in der Mitte die Rechnung inklusive Bias. Rechts steht **Ausgabe des Neurons / gewünschtes AND-Ziel**; ✓ bedeutet Übereinstimmung. Was würde sich ändern, wenn der Bias −0.5 wäre? Probieren Sie das später im Notebook aus.
 <!-- MD:END -->
   </div>
 </details>
