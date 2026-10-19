@@ -3,9 +3,9 @@
     <h2 class="kapitel-titel">Warum scheitert XOR?</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>XOR</strong> (entweder-oder) gibt 1, wenn <strong>genau eine</strong> der beiden Eingaben 1 ist. Beispiel: Ein Modus startet, wenn genau eine von zwei Tasten gedrückt ist. Das Neuron lernt auch hier nach derselben Regel wie bei AND, und trotzdem kommt es nie ans Ziel.</p>
+    <p><strong>XOR</strong> (exklusives Oder) gibt 1, wenn <strong>genau eine</strong> der beiden Eingaben 1 ist. Beispiel: Ein Modus startet, wenn genau eine von zwei Tasten gedrückt ist. Das Neuron lernt auch hier nach derselben Regel wie bei AND, und trotzdem kommt es nie ans Ziel.</p>
     <!-- MD:START -->
-### 1 · Die Tabelle: wo sich XOR von ODER unterscheidet
+### 1 · Zur Wahrheitstabelle aus Kapitel 3 zurückkehren
 <!-- MD:END -->
     <div class="table-scroll">
       <table class="typen">
@@ -13,8 +13,8 @@
           <tr>
             <th>Eingabe 1</th>
             <th>Eingabe 2</th>
-            <th>UND</th>
-            <th>ODER</th>
+            <th>AND</th>
+            <th>OR</th>
             <th>XOR</th>
           </tr>
         </thead>
@@ -51,7 +51,7 @@
       </table>
     </div>
     <!-- MD:START -->
-XOR und ODER unterscheiden sich nur in der letzten Zeile: Bei (1, 1) soll XOR 0 ausgeben.
+Vergleichen Sie mit der vollständigen Gattertabelle in Kapitel 3: XOR und OR unterscheiden sich nur in der letzten Zeile: Bei (1, 1) soll XOR 0 ausgeben.
 <!-- MD:END -->
     <!-- MD:START -->
 ### 2 · Das Bild: die vier Fälle als Punkte
@@ -110,15 +110,15 @@ Jede Zeile ist eine Bedingung an w₁, w₂ und b (Ausgabe 1 heisst Summe ≥ 0,
     <!-- MD:START -->
 ### 4 · Der Ausweg: mehrere Neuronen
 <!-- MD:END -->
-    <p>Ein einzelnes Neuron kann nur eine Gerade ziehen. Mit <strong>zwei Neuronen</strong> in einer Zwischenschicht, eines für ODER und eines für NAND, und einem dritten, das beide mit UND verbindet, entsteht aus der einen Geraden ein Streifen. Dann gelingt XOR:</p>
+    <p>Ein einzelnes Neuron kann nur eine Gerade ziehen. Mit <strong>zwei Neuronen</strong> in einer Zwischenschicht, eines für OR und eines für NAND, und einem dritten, das beide mit AND verbindet, entsteht aus der einen Geraden ein Streifen. Dann gelingt XOR:</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
           <tr>
             <th>Eingabe</th>
-            <th>ODER</th>
+            <th>OR</th>
             <th>NAND</th>
-            <th>UND von beiden = XOR</th>
+            <th>AND von beiden = XOR</th>
           </tr>
         </thead>
         <tbody>
