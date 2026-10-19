@@ -139,23 +139,23 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   const third=await setup(),q=third.p;
   await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:240000}).catch(async e=>{console.error('LESSON',await q.locator('#project-lab-status').innerText());throw e;});
-  const choices=q.frameLocator('#project-frame').locator('.widget-interact .widget-dropdown select:has(option:text-is("XOR"))');
+  const choices=q.frameLocator('#project-frame').locator('.widget-dropdown select:has(option:text-is("XOR"))');
   await choices.first().selectOption({label:'XOR'});
   await q.waitForFunction(async()=>{
    const db=await new Promise(resolve=>{const r=indexedDB.open('kst-ki-kursportal',1);r.onsuccess=()=>resolve(r.result);});
    const a=await new Promise(resolve=>{const r=db.transaction('artifacts').objectStore('artifacts').get('project');r.onsuccess=()=>resolve(r.result);});db.close();
-   return JSON.stringify(a?.others?.['perzeptron_und_neuronale_netze.ipynb']?.cells).includes('Aufgabe: XOR');
+   return JSON.stringify(a?.others?.['perzeptron_und_neuronale_netze.ipynb']?.cells).includes('Gatter: XOR');
   },null,{timeout:60000});
   const widgetExport=await download(q,'widget.zip');
   const lesson=JSON.parse(await widgetExport.files.get('notebooks/perzeptron_und_neuronale_netze.ipynb').text());
-  assert(lesson.cells.some(c=>c.outputs?.some(o=>o.data?.['image/png'])),'Widget chart missing');
-  assert(JSON.stringify(lesson.cells).includes('Aufgabe: XOR'));
+  assert(lesson.cells.some(c=>c.outputs?.some(o=>String(o.data?.['text/html']||'').includes('<table'))),'Live widget table missing');
+  assert(JSON.stringify(lesson.cells).includes('Gatter: XOR'));
   assert(!lesson.cells.some(c=>c.outputs?.some(o=>o.data?.['application/vnd.jupyter.widget-view+json'])));
   await q.reload();await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
-  assert((await q.frameLocator('#project-frame').locator('body').innerText()).includes('Aufgabe: XOR'));
+  assert((await q.frameLocator('#project-frame').locator('body').innerText()).includes('Gatter: XOR'));
   await q.screenshot({path:path.join(tmp,'restored-widget.png'),fullPage:true});
-  assert.deepEqual(errors,[]);console.log('PASS actual teaching widget selection and charts persisted locally and exported; no browser errors');
+  assert.deepEqual(errors,[]);console.log('PASS interactive gate selection and HTML truth table persisted locally and exported; no browser errors');
   console.log('Evidence:',tmp);
  }finally{if(browser)await browser.close();server.kill();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
