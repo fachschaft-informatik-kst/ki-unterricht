@@ -31,17 +31,14 @@ Die Eingaben werden nicht einfach addiert: Jede wird mit ihrem **Gewicht** multi
       <span>Eingaben × Gewichte</span><b>+</b><span>Bias</span><b>→</b><span>Summe ≥ 0?<br/><strong>Ausgabe 1 oder 0</strong></span>
     </div>
     <p><strong>Konkrete Einstellung für AND:</strong> Gewicht w₁ = 1, Gewicht w₂ = 1, Bias b = −1.5. So lässt sich überprüfen, ob die Ausgaben tatsächlich der AND-Spalte oben entsprechen.</p>
-    <div class="table-scroll">
-      <table class="typen">
-        <thead><tr><th scope="col">Sensor 1<br/>x₁</th><th scope="col">Sensor 2<br/>x₂</th><th scope="col">Rechnung<br/>x₁·1 + x₂·1 − 1.5</th><th scope="col">Summe s</th><th scope="col">Neuron-Ausgabe</th><th scope="col">AND-Ziel</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">0 · aus</th><td>0 · aus</td><td>0 + 0 − 1.5</td><td>−1.5</td><td><strong>0 · aus</strong></td><td>0 ✓</td></tr>
-          <tr><th scope="row">0 · aus</th><td>1 · ein</td><td>0 + 1 − 1.5</td><td>−0.5</td><td><strong>0 · aus</strong></td><td>0 ✓</td></tr>
-          <tr><th scope="row">1 · ein</th><td>0 · aus</td><td>1 + 0 − 1.5</td><td>−0.5</td><td><strong>0 · aus</strong></td><td>0 ✓</td></tr>
-          <tr><th scope="row">1 · ein</th><td>1 · ein</td><td>1 + 1 − 1.5</td><td>+0.5</td><td><strong>1 · ein</strong></td><td>1 ✓</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- MD:START -->
+| Sensor 1 (x₁) | Sensor 2 (x₂) | Rechnung x₁·1 + x₂·1 − 1.5 | Summe s | Ausgabe des Neurons | AND-Ziel |
+|:---:|:---:|:---|---:|:---:|:---:|
+| 0 · aus | 0 · aus | 0 + 0 − 1.5 | −1.5 | **0 · aus** | 0 ✓ |
+| 0 · aus | 1 · ein | 0 + 1 − 1.5 | −0.5 | **0 · aus** | 0 ✓ |
+| 1 · ein | 0 · aus | 1 + 0 − 1.5 | −0.5 | **0 · aus** | 0 ✓ |
+| 1 · ein | 1 · ein | 1 + 1 − 1.5 | +0.5 | **1 · ein** | 1 ✓ |
+<!-- MD:END -->
     <!-- MD:START -->
 **Lesen Sie eine Zeile von links nach rechts:** Eingaben → Rechnung → Summe → tatsächliche Ausgabe. Die letzte Spalte zeigt nur zur **Kontrolle** das gewünschte AND-Ergebnis. Was würde sich ändern, wenn der Bias −0.5 wäre? Probieren Sie das später im Notebook aus.
 <!-- MD:END -->
