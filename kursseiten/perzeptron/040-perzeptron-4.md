@@ -47,17 +47,19 @@
     <p>Beim Bias ist der Eingang 1. Die <strong>Lernrate</strong> dämpft die Korrektur: Zu grosse Schritte würden das Neuron nur auf das zuletzt gesehene Beispiel zuschneiden.</p>
     <!-- MD:START -->
 ### Beispiel: AND lernen (Lernrate 0.2)
+
+**So lesen Sie die Tabelle:** Jede Zeile zeigt die *Eingaben*, was das Neuron daraus berechnet, das **richtige AND-Ziel** und – falls es falsch liegt – welche Gewichte und welchen Bias es korrigiert. Die letzte Spalte ist der neue Zustand **nach** dem Schritt. Die einzelnen Rechnungen sehen Sie anschliessend im Notebook.
 <!-- MD:END -->
     <div class="table-scroll">
       <table class="typen">
         <thead>
           <tr>
             <th>Schritt</th>
-            <th>Beispiel</th>
-            <th>Summe → Ausgabe</th>
-            <th>Ziel</th>
+            <th>Eingaben (x₁, x₂)</th>
+            <th>Berechnete Summe s → Ausgabe</th>
+            <th>AND-Ziel</th>
             <th>Korrektur</th>
-            <th>Danach: w₁ / w₂ / b</th>
+            <th>Neue Werte<br/>w₁ / w₂ / Bias</th>
           </tr>
         </thead>
         <tbody>
