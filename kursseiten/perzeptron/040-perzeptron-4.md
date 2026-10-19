@@ -48,18 +48,19 @@
     <!-- MD:START -->
 ### Beispiel: AND lernen (Lernrate 0.2)
 
-**So lesen Sie die Tabelle:** Jede Zeile zeigt die *Eingaben*, was das Neuron daraus berechnet, das **richtige AND-Ziel** und – falls es falsch liegt – welche Gewichte und welchen Bias es korrigiert. Die letzte Spalte ist der neue Zustand **nach** dem Schritt. Die einzelnen Rechnungen sehen Sie anschliessend im Notebook.
+**Startwerte:** `w₁ = 0.2`, `w₂ = 0.2` und `b = −0.5`. Das Ziel ist **AND**: Nur bei den Eingaben `(1, 1)` soll das Neuron **1** ausgeben.
+
+**So lesen Sie die Tabelle:** *Eingabe* sind die Sensorwerte. *Ziel* ist die richtige AND-Ausgabe; *Neuron* ist seine bisherige Antwort. Die letzten Werte gelten **nach** der Korrektur.
 <!-- MD:END -->
     <div class="table-scroll">
       <table class="typen">
         <thead>
           <tr>
-            <th>Schritt</th>
-            <th>Eingaben (x₁, x₂)</th>
-            <th>Berechnete Summe s → Ausgabe</th>
-            <th>AND-Ziel</th>
-            <th>Korrektur</th>
-            <th>Neue Werte<br/>w₁ / w₂ / Bias</th>
+            <th>Zeitpunkt</th>
+            <th>Eingabe (x₁, x₂)</th>
+            <th>Ziel / Neuron</th>
+            <th>Änderung</th>
+            <th>Werte danach (w₁, w₂, b)</th>
           </tr>
         </thead>
         <tbody>
@@ -67,47 +68,37 @@
             <th>Start</th>
             <td>–</td>
             <td>–</td>
-            <td>–</td>
-            <td>–</td>
-            <td>0.2 / 0.2 / −0.5</td>
-          </tr>
-          <tr>
-            <th>Runde 1</th>
-            <td>(0, 0), (0, 1), (1, 0)</td>
-            <td>−0.5, −0.3, −0.3 → 0</td>
-            <td>0</td>
-            <td>keine</td>
+            <td>noch kein Training</td>
             <td>0.2 / 0.2 / −0.5</td>
           </tr>
           <tr>
             <th>Runde 1</th>
             <td>(1, 1)</td>
-            <td>−0.1 → 0</td>
-            <td>1</td>
-            <td>Feuert zu wenig: alle drei Zahlen steigen um 0.2</td>
+            <td>1 / <strong>0 ✗</strong></td>
+            <td>Zu wenig: w₁, w₂ und b je +0.2</td>
             <td>0.4 / 0.4 / −0.3</td>
           </tr>
           <tr>
             <th>Runde 2</th>
             <td>(0, 1)</td>
-            <td>0.1 → 1</td>
-            <td>0</td>
-            <td>Feuert zu viel: w₂ und b sinken um 0.2</td>
+            <td>0 / <strong>1 ✗</strong></td>
+            <td>Zu viel: w₂ und b je −0.2</td>
             <td>0.4 / 0.2 / −0.5</td>
           </tr>
           <tr>
             <th>Runde 3</th>
             <td>alle vier</td>
-            <td>alle richtig</td>
-            <td>–</td>
-            <td>keine: fertig</td>
+            <td><strong>alle richtig ✓</strong></td>
+            <td>keine Korrektur mehr</td>
             <td>0.4 / 0.2 / −0.5</td>
           </tr>
         </tbody>
       </table>
     </div>
     <!-- MD:START -->
-Nach drei Runden stimmen alle Zeilen. Mehr hat das Neuron nicht gelernt als diese drei Zahlen: 0.4, 0.2 und −0.5. Im Notebook sehen Sie diesen Ablauf Beispiel für Beispiel und können die Lernrate verändern.
+**Weshalb fehlen andere Eingaben?** Bei ihnen lag das Neuron schon richtig; es musste nichts verändern. Das Notebook zeigt auch diese Zwischenschritte. **Beispielrechnung:** Bei (1, 1) ergibt der Startzustand `0.2 + 0.2 − 0.5 = −0.1`, also 0 statt des AND-Ziels 1. Nach der Korrektur sind die Werte `0.4 / 0.4 / −0.3`.
+
+Am Schluss stimmen alle vier Eingaben. Gelernt wurden nur die beiden Gewichte und der Bias; die Entscheidungsregel bleibt gleich.
 <!-- MD:END -->
     <label class="field answer"><span>Aufgabe: Was hat das Neuron im AND-Beispiel gelernt? Was hat sich zwischen Start und Ende verändert, was nicht? Wo steckt das Gelernte?</span><textarea data-answer="neuron_gelernt" maxlength="10000" placeholder="Verändert haben sich … Unverändert blieb … Das Gelernte steckt in …" rows="4"></textarea></label>
   </div>

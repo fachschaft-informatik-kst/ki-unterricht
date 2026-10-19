@@ -14,7 +14,7 @@
       "question": "Leitfrage: Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und wo seine Grenze liegt.",
       "product": "Eine nachvollziehbare Rechnung, ein erklärter Lernschritt und eine begründete XOR-Grenze.",
-      "zeit": "Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Pflanzen und Ziffern sind Wahlvertiefung; XOR bleibt Pflicht.",
+      "zeit": "Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Vier Kernexperimente (Alltag, Gatter, Lernschritt, XOR), ohne zusätzliche Pflanzendaten- oder Ziffernübung.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -85,7 +85,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 45,
-              "text": "Arbeiten Sie im Notebook «Ein Neuron entscheidet»: ein Neuron von Hand einstellen, einen Lernschritt mit Gewichten 0.2/0.2, Bias −0.5, Eingabe (1,1) und Lernrate 0.2 von Hand nachvollziehen und mit der Ausgabe prüfen, dann lernen lassen. Untersuchen Sie XOR mit Punkten und Reglern. Dokumentieren Sie nur die zentrale Rechnung, eine beobachtete Korrektur und die XOR-Erklärung. Pflanzen und echte Ziffern sind freiwillig."
+              "text": "Arbeiten Sie im Notebook «Neuron-Labor»: Verändern Sie zuerst die Gewichte des Schwimmbad-Neurons und lesen Sie die sofort aktualisierte Ein-/Ausgabetabelle. Stellen Sie AND und ein weiteres Gatter mit Gewichten und Bias ein. Verfolgen Sie dann beim Lernen die Korrektur des Beispiels (1,1) mit Startwerten 0.2/0.2, Bias −0.5 und Lernrate 0.2. Untersuchen Sie zum Schluss XOR über die vier Zielwerte. Dokumentieren Sie eine zentrale Beobachtung, eine Korrektur und die XOR-Erklärung."
             },
             {
               "art": "Auftrag",
