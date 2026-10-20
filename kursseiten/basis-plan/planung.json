@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b04",
+      "view": "basis-plan",
+      "title": "Bildprojekt planen",
+      "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
+      "goal": "Zwei Bildklassen, eine prüfbare Frage und einen fairen Testplan erstellen.",
+      "question": "Welche zwei Dinge soll unsere KI unterscheiden?",
+      "motivation": "Eigene KI-Versuche machen Lernprozesse und Fehler verständlich.",
+      "product": "Dokumentierter Projektfortschritt mit Begründung.",
+      "zeit": "90 Minuten; betreutes Zweierprojekt mit eigenem Testprotokoll.",
+      "order": 40,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Forschungsfrage",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Einstieg anhand der Leitfrage: Welche zwei Dinge soll unsere KI unterscheiden?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Hypothesen austauschen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Den bisherigen Projektstand vergleichen und eine Vermutung formulieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Gute Testpraxis klären",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Anhand eines Beispiels den nächsten Untersuchungsschritt erklären."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Eigener Projektversuch",
+          "minutes": 45,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 43,
+              "text": "Wählt zwei unkritische Gegenstände, beispielsweise Becher und Buch. Formuliert eine Frage: Erkennt die KI den Gegenstand auch auf einem anderen Hintergrund? Plant pro Klasse 15–20 Trainingsbilder und mindestens fünf zusätzlich zurückgehaltene Testbilder, auch mit anderem Hintergrund."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Kurzsicherung",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Individuelle Erkenntnis über eine beobachtete Grenze notieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
