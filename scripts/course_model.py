@@ -47,8 +47,8 @@ def validate_lessons(lessons: list[dict]) -> None:
             raise ValueError(f"Dauer muss {RULES['duration']} Minuten betragen: {identifier}")
 
 
-def load_course(root: Path = ROOT) -> dict:
-    manifest = read_json(root / "kursseiten/manifest.json")
+def load_course(root: Path = ROOT, manifest_path: str = "kursseiten/manifest.json") -> dict:
+    manifest = read_json(root / manifest_path)
     sections = manifest.get("sections")
     if not isinstance(sections, list) or not sections or any(not isinstance(s, dict) for s in sections):
         raise ValueError("Unterrichtsbereiche fehlen")
