@@ -29,6 +29,23 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   return {nb, executed, badges};
 }
 (async () => {
+  // Initial import budgets: the basic neuron lab needs only numpy/matplotlib.
+  // Image-project notebooks deliberately retain Pillow and sklearn.
+  const packages = name => {
+    const nb = JSON.parse(fs.readFileSync(path.join(root, 'content', name)));
+    const setup = nb.cells.find(c => c.cell_type==='code' && c.metadata.tags?.includes('ki-autostart'));
+    const match = setup.source.join('').match(/await pyodide_js\.loadPackage\(\[([^\]]+)\]\)/);
+    assert(match, 'Package declaration missing in ' + name);
+    return [...match[1].matchAll(/'([^']+)'/g)].map(m=>m[1]);
+  };
+  assert.deepEqual(packages('perzeptron_und_neuronale_netze.ipynb'), ['numpy','matplotlib']);
+  for (const name of ['mehrschichtige_netze.ipynb','daten_training.ipynb']) {
+    assert(!packages(name).includes('pillow'), name + ' must not preload unused Pillow');
+    assert(packages(name).includes('scikit-learn'));
+  }
+  for (const name of ['ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb']) {
+    assert(packages(name).includes('pillow'), 'Image-project experiments still need Pillow');
+  }
   for (const name of ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb']) {
     // JupyterLite shows the Python repr of a returned widget object unless the
   // cell suppresses the final expression.  Interactive controls already call

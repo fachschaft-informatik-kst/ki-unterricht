@@ -943,17 +943,27 @@ _ZIFFERN_NEURONEN = [2, 4, 8, 16, 32]
 
 
 def ziffern_regler():
+    """Freiwillige Vertiefung: das teure Training erst auf Knopfdruck starten.
+
+    Die Regler erscheinen sofort, ohne beim Öffnen des Notebooks ein Modell
+    zu trainieren. Beim Ausführen und beim Export bleiben die Ergebnisse erhalten.
+    """
     def lauf(neuronen):
         ziffern(neuronen)
-    return widgets.interact(lauf, neuronen=widgets.Dropdown(options=_ZIFFERN_NEURONEN, value=16, description='Neuronen'))
+    return widgets.interact_manual.options(manual_name='Modell berechnen ▶')(
+        lauf, neuronen=widgets.Dropdown(options=_ZIFFERN_NEURONEN, value=16, description='Neuronen'))
 
 
 def ziffer_regler():
-    n = len(_ziffern_daten()[3])
+    """Ziffern-Vorhersagen erst nach dem bewussten Start berechnen."""
+    # load_digits besitzt 1797 Bilder; train_test_split(test_size=.3) ergibt
+    # 540 Validierungsbilder (Index 0..539). Die Daten werden erst beim Klick
+    # geladen, nicht schon zur Berechnung der Slider-Grenze beim Notebook-Start.
     def lauf(nr, neuronen):
         ziffer_durchs_netz(_netz_fuer(neuronen), nr=nr)
-    return widgets.interact(lauf, nr=widgets.IntSlider(value=3, min=0, max=n - 1, description='Bild Nr.'),
-                            neuronen=widgets.Dropdown(options=_ZIFFERN_NEURONEN, value=16, description='Neuronen'))
+    return widgets.interact_manual.options(manual_name='Vorhersage berechnen ▶')(
+        lauf, nr=widgets.IntSlider(value=3, min=0, max=539, description='Bild Nr.'),
+        neuronen=widgets.Dropdown(options=_ZIFFERN_NEURONEN, value=16, description='Neuronen'))
 
 
 def ziffern_vorschau():
