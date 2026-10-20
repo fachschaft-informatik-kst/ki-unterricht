@@ -284,32 +284,134 @@ def _live_tabelle(kopf, zeilen):
     return '<div style="overflow-x:auto;max-width:100%"><table style="border-collapse:collapse;width:100%;font-size:14px;line-height:1.4"><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table></div>'
 
 
-def live_alltag():
-    """Sofort sichtbare Wahrheitstabelle der acht Alltagssituationen."""
+def _schwimmbad_svg(eingaben, gewichte, bias):
+    """Dieselbe Eingaben–Gewichte–Neuron–Ausgabe-Darstellung wie in der Doppellektion.
+
+    Die Beschriftungen werden aus genau den Parametern der Live-Tabelle berechnet.
+    """
+    s, f, p = (int(x) for x in eingaben)
+    w_s, w_f, w_p = (float(w) for w in gewichte)
+    summe = s * w_s + f * w_f + p * w_p + bias
+    ausgabe = int(summe >= 0)
+
+    def zahl(w):
+        return f'{w:+g}'.replace('-', '−')
+
+    def farbe(w):
+        return '#176c63' if w > 0 else '#be572b' if w < 0 else '#8d9aa0'
+
+    def dicke(w):
+        return min(5, 2 + abs(w) * .75)
+
+    # Geometrie, Reihenfolge und Farben folgen der Grafik neuron_entscheider.svg.
+    # Eigenständiges SVG: funktioniert auch im heruntergeladenen Offline-Notebook.
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" font-family="Helvetica, Arial, sans-serif" font-size="15" role="img" aria-label="Schwimmbad-Neuron">
+  <title>Schwimmbad-Neuron: Eingaben, Gewichte, Bias und Ausgabe</title>
+  <defs><marker id="pfeil" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#263b43"/></marker></defs>
+  <rect width="760" height="330" fill="#ffffff"/>
+  <text x="30" y="26" font-weight="bold" fill="#222">Eingaben</text>
+  <text x="215" y="26" font-weight="bold" fill="#222">Gewichte</text>
+  <text x="415" y="26" font-weight="bold" fill="#222">Neuron</text>
+  <text x="615" y="26" font-weight="bold" fill="#222">Ausgabe</text>
+  <g fill="#eaf1f8" stroke="#30628c" stroke-width="1.5">
+    <circle cx="90" cy="70" r="30"/><circle cx="90" cy="165" r="30"/><circle cx="90" cy="260" r="30"/>
+  </g>
+  <g text-anchor="middle" fill="#000" font-weight="bold" font-size="20">
+    <text x="90" y="77">{s}</text><text x="90" y="172">{f}</text><text x="90" y="267">{p}</text>
+  </g>
+  <g fill="#222" font-size="13" text-anchor="middle">
+    <text x="90" y="116">S: Sonne scheint</text>
+    <text x="90" y="211">F: Freund:innen gehen mit</text>
+    <text x="90" y="306">P: Prüfung morgen</text>
+  </g>
+  <g fill="none" marker-end="url(#pfeil)">
+    <line x1="125" y1="70" x2="400" y2="138" stroke="{farbe(w_s)}" stroke-width="{dicke(w_s)}"/>
+    <line x1="125" y1="165" x2="396" y2="165" stroke="{farbe(w_f)}" stroke-width="{dicke(w_f)}"/>
+    <line x1="125" y1="260" x2="400" y2="192" stroke="{farbe(w_p)}" stroke-width="{dicke(w_p)}"/>
+  </g>
+  <g font-weight="bold" font-size="17">
+    <text x="215" y="86" fill="{farbe(w_s)}">{zahl(w_s)}</text>
+    <text x="215" y="155" fill="{farbe(w_f)}">{zahl(w_f)}</text>
+    <text x="215" y="262" fill="{farbe(w_p)}">{zahl(w_p)}</text>
+  </g>
+  <text x="215" y="306" fill="#52656a" font-size="13">Negatives Gewicht: Dieser Faktor spricht dagegen.</text>
+  <circle cx="450" cy="165" r="52" fill="#cfe8dc" stroke="#263b43" stroke-width="2.5"/>
+  <text x="450" y="162" text-anchor="middle" font-size="22" font-weight="bold">Σ + b</text>
+  <text x="450" y="186" text-anchor="middle" font-size="15" fill="#263b43">= {zahl(summe)}</text>
+  <text x="450" y="240" text-anchor="middle" fill="#52656a" font-size="14">Bias b = {zahl(bias)}</text>
+  <text x="450" y="258" text-anchor="middle" fill="#52656a" font-size="13">(Grundhaltung)</text>
+  <line x1="505" y1="165" x2="590" y2="165" stroke="#263b43" stroke-width="2.5" marker-end="url(#pfeil)"/>
+  <rect x="600" y="132" width="140" height="66" rx="12" fill="{'#d7ebe3' if ausgabe else '#e3e6e8'}" stroke="#263b43" stroke-width="2"/>
+  <text x="670" y="162" text-anchor="middle" font-size="22" font-weight="bold" fill="{'#176c63' if ausgabe else '#52656a'}">{'Ja' if ausgabe else 'Nein'}</text>
+  <text x="670" y="184" text-anchor="middle" font-size="13" fill="#52656a">y = {ausgabe}</text>
+</svg>'''
+
+
+def _schwimmbad_bild(eingaben, gewichte, bias):
+    """Ein SVG als eingebettetes Bild im HTML-Widget, ohne externe Datei/JS."""
+    import base64
     from html import escape
-    labels = [('Sonne',1.), ('Freund:innen',1.), ('Prüfung',-1.), ('Bias',-1.5)]
-    sliders = [widgets.FloatSlider(value=v,min=-5,max=5,step=.5,description=k,
-               style={'description_width':'105px'},layout=widgets.Layout(width='min(100%, 420px)'),continuous_update=False)
-               for k,v in labels]
+    s, f, p = (int(x) for x in eingaben)
+    w_s, w_f, w_p = gewichte
+    summe = s*w_s + f*w_f + p*w_p + bias
+    ausgabe = int(summe >= 0)
+    svg = _schwimmbad_svg(eingaben, gewichte, bias)
+    bild = base64.b64encode(svg.encode('utf-8')).decode('ascii')
+    alternativ = escape(f'Schwimmbad-Neuron: Sonne {s}, Freund:innen {f}, Prüfung {p}; Summe {summe:+g}, Ausgabe {ausgabe}.', quote=True)
+    rechnung = (f'{s}·({w_s:+g}) + {f}·({w_f:+g}) + {p}·({w_p:+g}) + ({bias:+g}) = '
+                f'<strong>{summe:+g} → {ausgabe} · {"Ja" if ausgabe else "Nein"}</strong>')
+    return ('<figure style="margin:12px 0;max-width:100%">'
+            f'<img alt="{alternativ}" src="data:image/svg+xml;base64,{bild}" '
+            'style="width:100%;max-width:760px;height:auto;display:block" />'
+            '<figcaption style="font-size:14px;line-height:1.5;margin:8px 0">'
+            '<strong>Rechnung:</strong> ' + rechnung +
+            ' (ab 0: Ja)</figcaption></figure>')
+
+
+def live_alltag():
+    """Schwimmbad-Neuron als Live-Schaubild mit Parametern und Wahrheitstabelle."""
+    labels = [('Sonne',2.), ('Freund:innen',2.), ('Prüfung',-1.), ('Bias',-1.)]
+    sliders = [widgets.FloatSlider(value=v, min=-5, max=5, step=.5, description=k,
+               style={'description_width':'105px'}, layout=widgets.Layout(width='min(100%, 420px)'),
+               continuous_update=False) for k,v in labels]
+    eingaben = [
+        widgets.Checkbox(value=v, description=k, indent=False,
+                         layout=widgets.Layout(width='190px'))
+        for k,v in [('Sonne scheint (S)',True), ('Freund:innen (F)',False), ('Prüfung morgen (P)',True)]
+    ]
+    bild = widgets.HTML(layout=widgets.Layout(width='100%'))
     result = widgets.HTML(layout=widgets.Layout(width='100%'))
+
     def update(_=None):
         w_s,w_f,w_p,b = (w.value for w in sliders)
+        aktuell = tuple(int(w.value) for w in eingaben)
+        bild.value = _schwimmbad_bild(aktuell, (w_s,w_f,w_p), b)
         rows=[]
         korrekt=0
         for sonne in (0,1):
             for freunde in (0,1):
                 for pruefung in (0,1):
-                    s=sonne*w_s+freunde*w_f+pruefung*w_p+b
-                    y=int(s>=0)
-                    ziel=int((sonne or freunde) and not pruefung)
+                    summe=sonne*w_s+freunde*w_f+pruefung*w_p+b
+                    y=int(summe>=0)
+                    ziel=_alltag_ziel(sonne,freunde,pruefung)
                     korrekt+=y==ziel
-                    rows.append((sonne,freunde,pruefung,f'{s:+.1f}',str(y)+' · '+('Ja' if y else 'Nein'),ziel,'✓' if y==ziel else '✗'))
+                    rows.append((sonne,freunde,pruefung,f'{summe:+.1f}',
+                                 str(y)+' · '+('Ja' if y else 'Nein'),
+                                 ziel,'✓' if y==ziel else '✗'))
         result.value=('<p><strong>Regel:</strong> Sonne oder Freund:innen, aber keine Prüfung am nächsten Tag. '
                       '<strong>'+str(korrekt)+'/8 richtig</strong>. Verändern Sie ein Gewicht und beobachten Sie die Ausgaben.</p>'
                      +_live_tabelle(('Sonne (S)','Freund:innen (F)','Prüfung (P)','Summe','Ausgabe','Ziel','Vergleich'),rows))
-    for w in sliders:w.observe(update,names='value')
+
+    for w in (*sliders,*eingaben):
+        w.observe(update,names='value')
     update()
-    display(widgets.VBox([widgets.VBox(sliders),result],layout=widgets.Layout(width='100%')))
+    display(widgets.VBox([
+        widgets.HTML('<strong>Aktuelle Situation (Eingaben 0/1):</strong> Wählen Sie eine Kombination.'),
+        widgets.HBox(eingaben, layout=widgets.Layout(width='100%',flex_flow='row wrap')),
+        widgets.HTML('<strong>Parameter des Neurons:</strong> Gewichte und Bias verändern.'),
+        widgets.VBox(sliders, layout=widgets.Layout(width='100%')),
+        bild, result
+    ],layout=widgets.Layout(width='100%')))
     return sliders,result
 
 
