@@ -33,7 +33,6 @@
       <li>Ich erkläre, wofür ein künstliches Neuron da ist: Es macht aus mehreren Zahlen eine Ja/Nein-Entscheidung.</li>
       <li>Ich bestimme bei gegebenen Eingaben, Gewichten, Bias und Schwelle die Ausgabe eines Perzeptrons.</li>
       <li>Ich sage, was beim Lernen genau gelernt wird (Gewichte und Bias), und beschreibe die Lernregel.</li>
-      <li>Ich begründe mit Tabelle, Punkten und den vier Bedingungen, warum ein einzelnes Perzeptron XOR nicht lösen kann.</li>
     </ul>
     <a href="#perzeptron">Zum Unterricht →</a>
   </article>
@@ -43,9 +42,9 @@
 ## Mehrschichtige Netze verstehen
 <!-- MD:END -->
     <ul>
+      <li>Ich begründe mit Wahrheitstabelle, Punktdarstellung und Bedingungen, warum ein einzelnes Perzeptron XOR nicht lösen kann.</li>
       <li>Ich erkläre qualitativ, wie eine Zwischenschicht das XOR-Problem lösen kann.</li>
-      <li>Ich beschreibe am Beispiel der Ziffernerkennung, wie ein Netz aus Eingabe (64 Pixel), versteckter Schicht und Ausgabe (10 Ziffern) aufgebaut ist und was es lernt.</li>
-      <li>Ich unterscheide Training, Validierung und Test und erkenne ein Datenleck.</li>
+      <li>Freiwillige Vertiefung: Ich beschreibe am Beispiel der Ziffernerkennung ein Netz mit 64 Eingaben, einer versteckten Schicht und 10 Ausgaben.</li>
     </ul>
     <a href="#netze">Zum Unterricht →</a>
   </article>
@@ -55,9 +54,10 @@
 ## Das Bildprojekt untersuchen
 <!-- MD:END -->
     <ul>
-      <li>Ich plane einen fairen A/B-Vergleich, dokumentiere Bildquellen und trenne ganze Datengruppen.</li>
+      <li>Ich unterscheide Training, Validierung und Test und erkenne Datenlecks (selbstständiger Lernpfad in DL5).</li>
+      <li>Ich plane einen fairen A/B-Vergleich, dokumentiere Bildquellen und halte Exemplare in getrennten Datengruppen.</li>
       <li>Ich begründe die Modellwahl vor dem Abschlusstest, interpretiere Ergebnisse und benenne Grenzen.</li>
-      <li>Ich erkläre im Tandem den Weg vom Bild über feste Merkmale zum selbst trainierten Netz.</li>
+      <li>Ich erkläre den Weg vom Bild über feste Merkmale zum trainierten Netz und kann den gesamten Versuch im individuellen Fachgespräch begründen.</li>
     </ul>
     <a href="#projekt">Zum Unterricht →</a>
   </article>

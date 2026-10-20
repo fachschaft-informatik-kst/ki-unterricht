@@ -103,6 +103,35 @@ assert not soup.select_one('#netze-1 [data-lab="mehrschichtige_netze.ipynb"]')
 assert 'XOR-Netz lernen' not in soup.select_one('#netze-3').get_text()
 assert 'Keine Lernregel der Welt' not in soup.select_one('#netze-1').get_text()
 
+# Cross-check exact lesson headings, student-facing workbook instructions,
+# two-column form semantics and the revised division of topics by lesson.
+chapter_title=soup.select_one('#netze-2 > summary > h2.kapitel-titel').get_text(strip=True)
+xor_check=next(c.source for c in xor.cells if c.id=='b84a6c2e')
+assert f'«{chapter_title}»' in xor_check, 'XOR notebook points to a non-existent chapter title'
+digit_chapter=soup.select_one('#netze-5')
+digit_tables=digit_chapter.select('table.protokoll')
+assert len(digit_tables)>=2
+question_headers=[cell.get_text(' ',strip=True) for cell in digit_tables[-1].select('thead th')]
+assert question_headers==['Frage','Ihre Antwort'], question_headers
+assert digit_tables[-1].select_one('select[data-answer="zif_brauchbar"]')
+assert '80' in digit_tables[-1].get_text(' ',strip=True)
+assert digit_tables[-1].select_one('select[data-answer="zif_verw_a"] option[value="keine"]')
+assert digit_tables[-1].select_one('select[data-answer="zif_verw_b"]')
+assert 'Freiwilliger Transfer:' in digit_chapter.get_text(' ',strip=True)
+cards={card.select_one('.section-label').get_text(strip=True):card.get_text(' ',strip=True)
+       for card in soup.select('#lernziele .grid.two > article.card')}
+assert 'XOR' not in cards['03'], 'XOR does not belong in single-neuron DL3 learning goals'
+assert 'XOR' in cards['04'] and 'Datenleck' not in cards['04']
+assert 'Datenlecks' in cards['05–08'], 'Data split is learned independently during DL5'
+guide=(root/'lehrperson/musterloesungen.md').read_text()
+dl3_guide=guide.split('## 3 ·',1)[1].split('## 4 ·',1)[0]
+dl4_guide=guide.split('## 4 ·',1)[1].split('## 5–8 ·',1)[0]
+assert 'XOR:' not in dl3_guide and 'Doppellektion 4' in guide
+assert 'Warum XOR ein einzelnes Neuron überfordert' in dl4_guide
+assert 'Warum Gruppen trennen?' not in dl4_guide
+assert 'Datenaufteilung selbstständig erarbeiten (Doppellektion 5)' in guide
+
+
 # DL4 only covers XOR and neural networks; DL5 guides data-split self-study.
 dl4plan=next(l for l in lessons if l['id']=='04')
 dl5plan=next(l for l in lessons if l['id']=='05')
