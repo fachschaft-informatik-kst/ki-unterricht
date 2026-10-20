@@ -9,9 +9,9 @@
       <img alt="EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe." loading="lazy" src="grafiken/eva_erfahrungsschatz.png"/>
       <figcaption>Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0).</figcaption>
     </figure>
-    <p><strong>Heute können Sie:</strong> Gewicht und Bias erklären, einen Lernschritt nachvollziehen und die XOR-Grenze eines einzelnen Neurons begründen.</p>
-    <p class="lesson-question">Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?</p>
-    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und wo seine Grenze liegt.</p>
+    <p><strong>Heute können Sie:</strong> Gewicht und Bias erklären, einen Lernschritt nachvollziehen und die Entscheidung eines einzelnen Neurons selbst berechnen.</p>
+    <p class="lesson-question">Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?</p>
+    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was die Gewichte und den Bias verändert und was bei der Entscheidung gleich bleibt.</p>
   </div>
 </details>
 <!-- /LESSONS:perzeptron -->
