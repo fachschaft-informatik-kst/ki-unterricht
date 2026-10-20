@@ -655,7 +655,9 @@ def lernen_klick(aufgabe='AND', lernrate=.2):
     """Das Neuron lernt per Klick: ein Beispiel nach dem anderen, mit Rechnung und wandernder Grenze."""
     from IPython.display import clear_output
     l = _Lerner(aufgabe, lernrate)
-    wahl = widgets.Dropdown(options=list(_ZIELE), value=aufgabe, description='Aufgabe')
+    # DL3's learning experiment stays on the already introduced gates.
+    lern_gatter=('AND','OR','NAND','NOR') if aufgabe!='XOR' else ('XOR','AND','OR','NAND','NOR')
+    wahl = widgets.Dropdown(options=lern_gatter, value=aufgabe, description='Aufgabe')
     rate = widgets.FloatSlider(value=lernrate, min=.05, max=1, step=.05, description='Lernrate')
     weiter = widgets.Button(description='Nächstes Beispiel ▶', button_style='primary')
     runde = widgets.Button(description='Ganze Runde ▶▶')
