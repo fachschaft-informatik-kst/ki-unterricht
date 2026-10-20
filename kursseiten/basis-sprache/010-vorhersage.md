@@ -1,27 +1,68 @@
----
-type: chapter
-id: basis-sprache-vorhersage
-nummer: 1
-titel: Wörter vorhersagen
-kurz: Wie der Zusammenhang die Fortsetzung beeinflusst
----
-
-**Experiment:** Ein Sprachmodell verarbeitet Text in kleinen Bausteinen, sogenannten **Tokens**. Es berechnet, welche Fortsetzung zum bisherigen Text passt. Je nach Kontext sind andere Fortsetzungen wahrscheinlich.
-
-Das kleine **Wortlabor** ist eine *vereinfachte Simulation*, kein trainiertes Sprachmodell. Die Prozentzahlen sind nur veranschaulichende Beispiele.
-
-<div class="basis-language-lab" data-basis-language>
-  <label for="basis-language-context">Satzanfang auswählen</label>
-  <select id="basis-language-context" data-language-context>
-    <option value="garten">Im Garten jagt der Hund den …</option>
-    <option value="sport">Auf dem Fussballplatz jagt der Hund den …</option>
-    <option value="maerchen">Im Märchen wohnt der König im …</option>
-  </select>
-  <p class="basis-language-prompt" data-language-prompt>Im Garten jagt der Hund den …</p>
-  <div class="basis-language-options" data-language-options aria-live="polite"></div>
-  <p class="basis-language-result" data-language-result>Wähle eine Fortsetzung und beobachte die Vorschläge.</p>
-</div>
-
-**Beobachtet:** Vergleicht die beiden Sätze mit dem Hund. Welches Wort wird am häufigsten vorgeschlagen? Warum verändert sich die Auswahl? Was bedeutet «wahrscheinlicher» – und was bedeutet es **nicht**?
-
-<div class="basis-answer"><label for="basis-sprache-a">Unsere Beobachtung zum Kontext</label><textarea id="basis-sprache-a" data-basis-answer="basis-sprache-a" rows="3" placeholder="Wenn sich der Kontext ändert, …"></textarea></div>
+<!-- Originalinhalt der 4. Klasse, für die 1. Klasse als Kern- bzw. Wahlstation übernommen. -->
+<details class="kapitel" id="basis-sprache-papier" data-kurz="Reihum Wörter schreiben und das Blatt falten: Wie entsteht ein plausibler Text?" open>
+  <summary><span class="kapitel-nr">1</span>
+    <h2 class="kapitel-titel">Ohne Computer: Papierexperiment</h2>
+  </summary>
+  <div class="kapitel-body">
+    <div class="lesson-steps single">
+      <article>
+        <b>1 · Ohne Computer</b>
+        <!-- MD:START -->
+Arbeiten Sie in Gruppen von drei bis vier Personen mit zwei Blättern. Jedes Blatt beginnt mit demselben Satzanfang, etwa «Am Samstag gehe ich …».
+<!-- MD:END -->
+        <ol>
+          <li><b>Runde A (zwei Wörter sichtbar):</b> Reihum schreibt jede Person genau ein Wort. Danach wird das Blatt so gefaltet, dass die nächste Person nur die letzten <b>zwei</b> Wörter sieht. Schreiben Sie, bis das Blatt etwa 12 Wörter hat.</li>
+          <li><b>Runde B (vier Wörter sichtbar):</b> Gleicher Ablauf auf dem zweiten Blatt, aber es bleiben die letzten <b>vier</b> Wörter sichtbar.</li>
+          <li><b>Vergleichen:</b> Lesen Sie beide Texte laut vor. Welcher klingt sinnvoller? Wo bricht der Sinn ab? Notieren Sie einen Satz: «Mit mehr sichtbarem Kontext …».</li>
+        </ol>
+        <p>Das macht das <a href="#basis-sprache-papagei">Papagei-Modell</a> mit Zahlen: Es sieht ebenfalls nur die letzten Wörter und wählt das nächste Wort nach Häufigkeit. Probieren Sie es in der Papagei-Lernstrecke (Kapitel 2) mit zwei und mehr Wörtern Kontext aus und vergleichen Sie mit Ihren Papieren.</p>
+      </article>
+    </div>
+    <div class="protokoll-block">
+      <!-- MD:START -->
+### Mein Protokoll: Papierexperiment
+<!-- MD:END -->
+      <div class="table-scroll">
+        <table class="typen protokoll">
+          <thead>
+            <tr>
+              <th>Runde</th>
+              <th>Unser Text</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>A: zwei Wörter sichtbar</th>
+              <td><textarea data-basis-answer="basis-sprache-pap_text_a" aria-label="Text der Runde A" maxlength="10000" placeholder="Unser Text …" rows="3"></textarea></td>
+            </tr>
+            <tr>
+              <th>B: vier Wörter sichtbar</th>
+              <td><textarea data-basis-answer="basis-sprache-pap_text_b" aria-label="Text der Runde B" maxlength="10000" placeholder="Unser Text …" rows="3"></textarea></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-scroll">
+        <table class="typen protokoll">
+          <thead>
+            <tr>
+              <th>Frage</th>
+              <th>Antwort</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Welcher Text klingt sinnvoller?</th>
+              <td><select data-basis-answer="basis-sprache-pap_besser" aria-label="Welcher Text klingt sinnvoller?"><option value="">–</option><option value="a">Text A (zwei Wörter)</option><option value="b">Text B (vier Wörter)</option><option value="gleich">Beide gleich</option></select></td>
+            </tr>
+            <tr>
+              <th>Nach wie vielen Wörtern bricht der Sinn ab?</th>
+              <td>Text A: <input type="text" maxlength="200" data-basis-answer="basis-sprache-pap_bruch_a" aria-label="Wörter bis zum Sinnbruch in Text A" placeholder="z. B. 4"> Text B: <input type="text" maxlength="200" data-basis-answer="basis-sprache-pap_bruch_b" aria-label="Wörter bis zum Sinnbruch in Text B" placeholder="z. B. 8"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <label class="field answer"><span>Vervollständigen Sie: Mit mehr sichtbarem Kontext …</span><textarea data-basis-answer="basis-sprache-pap_kontext" maxlength="10000" placeholder="Mit mehr sichtbarem Kontext …" rows="2"></textarea></label>
+    </div>
+  </div>
+</details>
