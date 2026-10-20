@@ -1,7 +1,7 @@
 {
   "lessons": [
     {
-      "id": "b03",
+      "id": "b05",
       "view": "basis-daten",
       "title": "Daten und faire Tests",
       "rueckblick": "Ergebnisse der vorherigen Doppellektion wieder aufgreifen.",
@@ -10,7 +10,7 @@
       "motivation": "KI kann man durch eigenes Ausprobieren und systematische Beobachtung verstehen.",
       "product": "Ein Versuch mit einer nachvollziehbaren Beobachtung.",
       "zeit": "90 Minuten; explorativ, kein mathematischer Formalismus.",
-      "order": 30,
+      "order": 50,
       "phases": [
         {
           "phase": "Ankommen",
