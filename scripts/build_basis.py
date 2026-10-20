@@ -4,6 +4,7 @@ from pathlib import Path
 import html
 import json
 import re
+import shutil
 
 from build_portal import render_fragment
 from build_course import render as render_lesson, tabelle
@@ -72,6 +73,8 @@ def build():
     if not match:
         raise ValueError("Gemeinsame CSS-Basis der vertieften Kursseite fehlt")
     (OUT / "theme.css").write_text(match.group(1) + "\n", encoding="utf-8")
+    # Shared images stay authored in projekt/grafiken; copy them for relative editor URLs.
+    shutil.copytree(ROOT / "projekt" / "grafiken", OUT / "grafiken", dirs_exist_ok=True)
     for filename in ("basis.css", "basis.js"):
         (OUT / filename).write_bytes((SOURCE / filename).read_bytes())
     page, lessons = assemble()
