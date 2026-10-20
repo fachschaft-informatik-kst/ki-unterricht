@@ -5,23 +5,23 @@
       "view": "basis-plan",
       "title": "Bildprojekt planen",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Zwei Bildklassen, eine prüfbare Frage und einen fairen Testplan erstellen.",
-      "question": "Welche zwei Dinge soll unsere KI unterscheiden?",
-      "motivation": "Eigene KI-Versuche machen Lernprozesse und Fehler verständlich.",
-      "product": "Dokumentierter Projektfortschritt mit Begründung.",
-      "zeit": "90 Minuten; betreutes Zweierprojekt mit eigenem Testprotokoll.",
+      "goal": "Im Tandem eigenständig eine Forschungsfrage zu einem Bildklassifikator entwickeln, Hypothese, Trainings-/Testdaten und Testkriterium festlegen.",
+      "question": "Welche eigene Frage kann unser Bildmodell durch faire Tests beantworten?",
+      "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
+      "product": "Selbst gewählte Forschungsfrage, unabhängiger Testplan und Peer-Feedback.",
+      "zeit": "Selbstorganisiertes Lernen (SOL) in Tandems, mit verbindlichen Zwischenprodukten.",
       "order": 70,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Forschungsfrage",
+          "titel": "SOL 1: eigene Frage und Plan",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Einstieg anhand der Leitfrage: Welche zwei Dinge soll unsere KI unterscheiden?"
+              "text": "Beispiel eines Bildmodells mit Hintergrundfehler betrachten; offene Forschungsfragen sammeln."
             },
             {
               "art": "Ergebnis",
@@ -33,14 +33,14 @@
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Hypothesen austauschen",
+          "titel": "Projektstatus abstimmen",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Den bisherigen Projektstand vergleichen und eine Vermutung formulieren."
+              "text": "Frei gewählte Klassen und Einflussfaktor vorschlagen; miteinander abstimmen."
             },
             {
               "art": "Ergebnis",
@@ -52,14 +52,14 @@
         },
         {
           "phase": "Informieren",
-          "titel": "Gute Testpraxis klären",
+          "titel": "Kriterien nutzen",
           "minutes": 15,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Anhand eines Beispiels den nächsten Untersuchungsschritt erklären."
+              "text": "Kriterien guter Forschungsfragen und Unterschied zwischen Trainings- und Testbildern klären."
             },
             {
               "art": "Ergebnis",
@@ -71,14 +71,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Eigener Projektversuch",
+          "titel": "Selbstständig arbeiten",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Wählt zwei unkritische Gegenstände, beispielsweise Becher und Buch. Formuliert eine Frage: Erkennt die KI den Gegenstand auch auf einem anderen Hintergrund? Plant pro Klasse 15–20 Trainingsbilder und mindestens fünf zusätzlich zurückgehaltene Testbilder, auch mit anderem Hintergrund."
+              "text": "Selbstorganisiertes Tandemprojekt: Thema wählen, Hypothese formulieren, Trainings-/Testplan aufbauen; Peer-Feedback annehmen; bei Bedarf Lehrperson konsultieren."
             },
             {
               "art": "Ergebnis",
@@ -90,14 +90,14 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Kurzsicherung",
+          "titel": "Erkenntnisse sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Individuelle Erkenntnis über eine beobachtete Grenze notieren."
+              "text": "Forschungsplan mit zwei Klassen, Testbedingungen und erwarteter Beobachtung sichern."
             },
             {
               "art": "Ergebnis",
