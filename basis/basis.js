@@ -66,4 +66,40 @@ for(const lab of document.querySelectorAll('[data-basis-neuron]')){
  for(const slider of sliders)slider.addEventListener('input',render);
  render();
 }
+}
+// Lokale und bewusst vereinfachte Wortvorhersage (kein Chatbot und kein ML-Modell).
+// Feste Beispielwerte illustrieren den Einfluss des Kontexts auf Wortvorschläge.
+for(const lab of document.querySelectorAll('[data-basis-language]')){
+ const context=lab.querySelector('[data-language-context]'),
+  prompt=lab.querySelector('[data-language-prompt]'),
+  options=lab.querySelector('[data-language-options]'),
+  result=lab.querySelector('[data-language-result]');
+ const examples={
+  garten:{text:'Im Garten jagt der Hund den …',words:[['Ball',50],['Schmetterling',35],['Fussball',15]]},
+  sport:{text:'Auf dem Fussballplatz jagt der Hund den …',words:[['Fussball',75],['Ball',20],['Schmetterling',5]]},
+  maerchen:{text:'Im Märchen wohnt der König im …',words:[['Schloss',80],['Haus',15],['Zelt',5]]}
+ };
+ const redraw=()=>{
+  const example=examples[context.value];if(!example)return;
+  prompt.textContent=example.text;
+  result.textContent='Wähle eine der möglichen Fortsetzungen. Eine hohe Beispiel-Wahrscheinlichkeit beweist keine Wahrheit.';
+  options.replaceChildren();
+  for(const [word,weight] of example.words){
+   const button=document.createElement('button');
+   button.type='button';button.className='basis-language-option';
+   button.setAttribute('aria-label',word+', Beispiel-Wahrscheinlichkeit '+weight+' Prozent');
+   const wordLabel=document.createElement('span');wordLabel.textContent=word;
+   const percentage=document.createElement('strong');percentage.textContent=weight+' %';
+   const bar=document.createElement('span');bar.className='basis-language-bar';
+   const fill=document.createElement('span');fill.style.width=weight+'%';
+   bar.append(fill);button.append(wordLabel,percentage,bar);
+   button.addEventListener('click',()=>{
+    result.textContent=example.text.replace('…',word+'.')+' Das ist nur eine mögliche Fortsetzung.';
+   });
+   options.append(button);
+  }
+ };
+ context.addEventListener('change',redraw);
+ redraw();
+}
 })();
