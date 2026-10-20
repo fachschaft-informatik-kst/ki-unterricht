@@ -79,6 +79,45 @@ def main():
     w,b=u.iris_neuron();assert w.shape==(2,)
     assert u.xor_lernen(1).score(u._EINGABEN,u._ZIELE['XOR'])<1 and u.xor_lernen(4).score(u._EINGABEN,u._ZIELE['XOR'])==1
     rejects(lambda:u.xor_lernen(0))
+    # Gleiches Schaubild wie in der Doppellektion: drei veränderbare Eingaben,
+    # Gewichte, Summe + Bias und Output. Ohne externe SVG-Datei / JS lauffähig.
+    import base64, re
+    import xml.etree.ElementTree as ET
+    aufgezeichnet=[]
+    original_display=u.display
+    try:
+        u.display=lambda widget: aufgezeichnet.append(widget)
+        sliders,tabelle=u.live_alltag()
+    finally:
+        u.display=original_display
+    assert len(aufgezeichnet)==1
+    controls=aufgezeichnet[0].children
+    checks=next(c for c in controls if isinstance(c,u.widgets.HBox)).children
+    schaubild=next(c for c in controls if isinstance(c,u.widgets.HTML)
+                   and 'data:image/svg+xml;base64,' in c.value)
+    def grafikwerte():
+        match=re.search(r'data:image/svg\+xml;base64,([^"]+)',schaubild.value)
+        assert match, 'Das Schwimmbad-Schaubild fehlt'
+        svg=base64.b64decode(match.group(1))
+        xml=ET.fromstring(svg)
+        assert xml.attrib['viewBox']=='0 0 760 330'
+        return [node.text for node in xml.iter() if node.tag.endswith('text')]
+    ursprung=schaubild.value
+    assert '5/8 richtig' in tabelle.value
+    assert all(w.value==v for w,v in zip(sliders,[2.,2.,-1.,-1.]))
+    assert [c.value for c in checks]==[True,False,True]
+    assert 'Ja' in grafikwerte() and '= +0' in grafikwerte()
+    sliders[2].value=-4.
+    assert '8/8 richtig' in tabelle.value
+    assert schaubild.value!=ursprung
+    assert 'Nein' in grafikwerte() and '= −3' in grafikwerte()
+    assert any('−4'==value for value in grafikwerte())
+    checks[2].value=False
+    assert 'Ja' in grafikwerte() and '= +1' in grafikwerte()
+    checks[0].value=False
+    assert 'Nein' in grafikwerte() and '= −1' in grafikwerte()
+    assert tabelle.value.count('<tr>')==9  # Kopfzeile + acht Situationen
+
     # Neuron-Doppellektion: Alltagsneuron, Lernen per Klick, XOR-Widerspruch.
     ziel=[u._alltag_ziel(s,f,p) for s in (0,1) for f in (0,1) for p in (0,1)]
     assert list(u.alltagsneuron(1,1,-3,-.5))==ziel and list(u.alltagsneuron())!=ziel

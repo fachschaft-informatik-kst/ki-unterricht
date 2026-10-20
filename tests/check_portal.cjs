@@ -189,6 +189,24 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
      const liveTable=p.frameLocator('#project-frame').locator('.widget-html table').first();
      await liveTable.waitFor({state:'visible'});
      assert.equal(await liveTable.locator('tbody tr').count(),8,'Expected eight swim situations');
+     // The interactive figure must match the swimming example on the lesson
+     // page, and change when one of its three scenario inputs changes.
+     const neuronFigure=p.frameLocator('#project-frame').locator('.widget-html img[alt^="Schwimmbad-Neuron"]').first();
+     await neuronFigure.waitFor({state:'visible'});
+     const originalNeuron=await neuronFigure.getAttribute('src');
+     assert(originalNeuron.startsWith('data:image/svg+xml;base64,'));
+     const originalSvg=Buffer.from(originalNeuron.split(',')[1],'base64').toString('utf8');
+     assert(originalSvg.includes('Eingaben')&&originalSvg.includes('Gewichte')&&originalSvg.includes('Neuron')&&originalSvg.includes('Ausgabe'));
+     assert(originalSvg.includes('= +0')&&originalSvg.includes('>Ja</text>'));
+     const checks=p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1).locator('.widget-checkbox input[type="checkbox"]');
+     assert.equal(await checks.count(),3,'Expected all three changeable situation inputs');
+     await checks.nth(2).uncheck();
+     await p.waitForFunction(before=>{
+       const image=document.querySelector('#project-frame')?.contentDocument?.querySelector('.widget-html img[alt^="Schwimmbad-Neuron"]');
+       return image&&image.getAttribute('src')!==before;
+     },originalNeuron,{timeout:20000});
+     const updatedSvg=Buffer.from((await neuronFigure.getAttribute('src')).split(',')[1],'base64').toString('utf8');
+     assert(updatedSvg.includes('= +1')&&updatedSvg.includes('>Ja</text>'),'Changing an input must update the weighted sum and output');
      assert(!/FloatSlider\(value=|HTML\(value=/.test(await p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1).locator('.jp-OutputArea').innerText()),'Notebook must show widgets without echoing their Python repr');
      await liveTable.scrollIntoViewIfNeeded();
      await p.screenshot({path:'/tmp/ki-notebook-interactive-table.png',fullPage:true});
