@@ -82,7 +82,7 @@ def build():
     (OUT / "kurs.json").write_text(json.dumps({"course": "basis", "lessons": lessons}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     planning = ['<!doctype html><html lang="de-CH"><meta charset="utf-8"><title>Basis-Kurs · Unterrichtsplanung</title>',
                 '<link rel="stylesheet" href="theme.css"><link rel="stylesheet" href="../projekt/portal.css">',
-                '<main><h1>KI entdecken · AVIVA-Unterrichtsplan</h1><p>Sieben Doppellektionen à 90 Minuten.</p>']
+                '<main><h1>KI entdecken · AVIVA-Unterrichtsplan</h1><p>Zehn Doppellektionen à 90 Minuten.</p>']
     for lesson in lessons:
         planning.append(f'<h2>{lesson["number"]}. {html.escape(lesson["title"])}</h2>')
         planning.append('<div class="phase-table-wrap">' + tabelle(lesson) + '</div>')
