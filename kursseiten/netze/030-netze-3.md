@@ -1,28 +1,11 @@
-<details class="kapitel" id="netze-3" data-kurz="Training, Validierung und Test: warum getrennte Daten nötig sind." open>
+<details class="kapitel" id="netze-3" data-kurz="Ausblick: Den Umgang mit Daten erarbeiten Sie selbstständig in Doppellektion 5." open>
   <summary><span class="kapitel-nr">3</span>
-    <h2 class="kapitel-titel">Welche Daten darf das Netz sehen?</h2>
+    <h2 class="kapitel-titel">Ausblick: Vom Netz zum eigenen Projekt</h2>
   </summary>
   <div class="kapitel-body">
-    <div class="lesson-steps">
-      <article>
-        <b>Training</b>
-        <!-- MD:START -->
-Gewichte lernen.
+    <!-- MD:START -->
+Heute haben Sie erklärt, warum mehrere Neuronen XOR lösen können. In **Doppellektion 5** beginnen Sie die eigene Bilduntersuchung. Wie Sie Trainings- und Prüfbilder fair aufteilen, lernen Sie dort **selbstständig mit Beispielen, Übungen und Lösungen**.
 <!-- MD:END -->
-      </article>
-      <article>
-        <b>Validierung</b>
-        <!-- MD:START -->
-Varianten vergleichen.
-<!-- MD:END -->
-      </article>
-      <article>
-        <b>Abschlusstest</b>
-        <!-- MD:START -->
-Die festgelegte Auswahl mit neuen Gruppen prüfen.
-<!-- MD:END -->
-      </article>
-    </div>
-    <button class="btn primary" data-lab="daten_training.ipynb">Datenaufteilung starten ▶</button>
+    <p><a href="#projekt-3">Zum selbstständigen Lernpfad in Doppellektion 5 →</a></p>
   </div>
 </details>
