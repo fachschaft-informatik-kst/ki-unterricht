@@ -4,112 +4,112 @@
       "id": "05",
       "view": "projekt",
       "title": "Ihr Projekt starten und die Arbeit planen",
-      "rueckblick": "In Doppellektion 4 haben Sie Thema und Klassen gewählt sowie die Datentrennung geklärt. Sie übernehmen jetzt die Planung Ihres Projekts im Tandem.",
-      "goal": "Eigene Tagesziele und Arbeitsschritte planen, eine überprüfbare Vermutung formulieren und die Datenqualität kontrollieren.",
+      "rueckblick": "In Doppellektion 4 haben Sie gesehen, weshalb XOR mehrere Neuronen benötigt. Nun starten Sie selbstständig das Bildprojekt und erarbeiten zuerst die Regeln zur fairen Datenaufteilung.",
+      "goal": "Training, Validierung und Test selbstständig unterscheiden, Datenlecks erkennen, einen unabhängigen Fünf-Gruppen-Plan erstellen und die eigene Projektarbeit planen.",
       "question": "Leitfrage: Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?",
       "motivation": "Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.",
-      "product": "Ein eigener Etappenplan mit Rollen, eine Vermutung und ein gesicherter Arbeitsstand mit dokumentiertem Datencheck.",
-      "zeit": "Gemeinsamer SOL-Auftakt nur in Doppellektion 5. Danach 60 Minuten selbst organisierte Arbeit mit 10 Minuten frei verfügbarem Puffer darin. Lernlabor einmal als Orientierung nutzen, sofern der Ablauf noch unklar ist, nicht als Pflichtwiederholung. Etappen sind nicht an einzelne Doppellektionen gebunden; keine einheitliche Pflicht, heute bereits zu trainieren.",
+      "product": "Ausgefüllter SOL-Selbstcheck zur Datenaufteilung, fünf korrekt getrennte Bildgruppen und eine erste Vermutung mit Etappenplan im Journal.",
+      "zeit": "Doppellektion 5 ist der Start des selbstständigen Arbeitens. Der Datenaufteilungs-Lernpfad liegt vollständig hier und enthält Erklärungen, Musterbeispiele, Übungsfälle, Selbstkontrolle, Fehlersuche und Transfer auf die eigenen fünf Fotogruppen. Die Lehrperson erklärt lediglich den organisatorischen Rahmen, keinen fachlichen Datenaufteilungs-Input. Wer früher fertig ist, arbeitet selbstgesteuert am Projekt weiter; mindestens 10 Minuten Puffer.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Arbeitsstand öffnen",
+          "titel": "SOL-Auftrag öffnen",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Öffnen Sie Projektauftrag und vorhandene Fotos. Halten Sie fest, was bereit ist und was Ihnen noch fehlt."
+              "text": "Öffnen Sie die selbstständige Lernstrecke «Daten fair aufteilen» im Projektteil und lesen Sie das Ziel. Notieren Sie vorab, wie man beurteilen könnte, ob ein Modell wirklich neue Bilder erkennt."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein ehrlicher Ausgangsstand."
+              "text": "Eigene Ausgangsvermutung zum fairen Testen."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Den fairen Vergleich klären",
+          "titel": "Vorwissen zum Netz aktivieren",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Erklären Sie sich: A nutzt ein Exemplar je Klasse, B zwei; Bildzahl und Einstellungen bleiben gleich. Warum darf dasselbe Exemplar nicht in mehreren Datengruppen liegen?"
+              "text": "Wiederholen Sie allein den Unterschied zwischen einem Trainingsbeispiel und einer neuen Eingabe. Vergleichen Sie danach Ihre Antwort zu zweit; eine Musterantwort steht im Lernpfad."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Die fachlichen Leitplanken sind geklärt."
+              "text": "Ein erster Vergleich zwischen bekannten und neuen Daten."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "SOL-Rahmen statt Tagesrezepte",
+          "titel": "Nur den SOL-Rahmen klären",
           "minutes": 10,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 10,
-              "text": "Klärt einmal Auftrag, fünf Reflexionen, Bewertung und Frist vor Doppellektion 8. Verbindlich sind Datenregeln, fairer A/B-Vergleich, begründete Auswahl vor Testeinsicht und keine Optimierung danach. Frei sind Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. Zeigt Foto → festes MobileNet → 1280 Merkmale → trainierbares Netz sowie ZIP-Sicherung. Kündigt kurze Beratung auf Anfrage statt weiterer gemeinsamer Inputs an."
+              "text": "Erklärt Ablauf, fünf Reflexionen, Bewertung, Abgabe vor Doppellektion 8 und ZIP-Sicherung. Verweist auf den eigenständig aufgebauten Lernpfad zur Datenaufteilung mit Erklärung, Beispielen und Lösungen. Kein gemeinsamer inhaltlicher Vortrag zu Training, Validierung, Test oder Datenlecks; Hilfe nur auf konkrete Fragen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein gemeinsamer Rahmen und freie Planung innerhalb der fachlichen Abhängigkeiten."
+              "text": "Organisatorischer Rahmen ist klar; fachliche Regeln erschliessen sich die Lernenden selbst."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Etappen planen und selbstständig arbeiten",
+          "titel": "Datenaufteilung selbst erarbeiten und Projekt starten",
           "minutes": 60,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 40,
-              "text": "Gleichen Sie Ihre persönlichen nächsten Schritte und Rollen ab und erstellen Sie in Reflexion 1 einen kurzen Etappenplan bis zur Abgabe: Zuständigkeiten, Zeitbedarf und Reserve. Wählen Sie Ihr Tagesziel und bearbeiten Sie die passende Etappe. Prüfen und ergänzen Sie Fotos, importieren Sie die Daten und dokumentieren Sie Vermutung und Datenprobleme in Reflexion 1–2. Nutzen Sie Lernlabor und Hilfen nur nach Bedarf. Wer bereit ist, kann bereits vergleichen; wer Datenlücken hat, arbeitet zuerst daran. Die Lehrperson berät einzelne Tandems."
+              "text": "Bearbeiten Sie in Ihrem eigenen Tempo den SOL-Lernpfad in Kapitel «Datenplan»: Lesen Sie die drei Datenrollen, ordnen Sie Beispiele zu, untersuchen Sie im Notebook «Datenaufteilung» ein Datenleck, kontrollieren Sie sich mit den eingeblendeten Lösungen und übertragen Sie die Regeln auf T1/T2/V1/P1/P2 mit zwei Klassen und acht Fotos je Gruppe. Halten Sie eine Begründung im bestehenden Journal fest. Danach wählen Sie Thema, Tagesziel und Rollen und ergänzen Reflexion 1–2. Wer weiter ist, beginnt das Sammeln oder Importieren; niemand muss heute bereits ein Modell trainieren."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 10,
-              "text": "Prüfen Sie allein, welchen konkreten Beitrag Sie als Nächstes übernehmen und woran Sie erkennen, dass er gelungen ist."
+              "text": "Prüfen Sie einzeln anhand der Selbstkontrolle im Datenplan, ob Ihr Beispiel für P1 ein wirklich neues Exemplar zeigt. Notieren Sie einen möglichen Fehler und die nötige Korrektur."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Frei verfügbarer Puffer im SOL-Block für Datenlücken, Technik, Fragen oder gründlicheres Arbeiten; keine Zusatzpflicht."
+              "text": "Frei verfügbarer Puffer für Datenlücken, Notebook-Start, eigene Fragen oder die gründlichere Selbstkontrolle; keine zusätzliche Pflicht."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eigener Plan und nachvollziehbarer Fortschritt, nicht ein identischer Stand aller Tandems."
+              "text": "Selbstständig erarbeitete Datenregeln, begründeter Fünf-Gruppen-Plan und individueller Projektfortschritt."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Fortschritt prüfen und sichern",
+          "titel": "Selbstkontrolle und Stand sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Prüfen Sie Ihr Tagesziel. Ergänzen Sie im bestehenden Journal kurz: erreicht, offen, nächster Schritt und benötigte Hilfe. Passen Sie Ihren Plan an und laden Sie eine ZIP-Sicherung herunter. Kein zusätzlicher SOL-Bericht."
+              "text": "Prüfen Sie mithilfe der Musterlösung und des abschliessenden SOL-Checks: Unterscheiden wir Training, Validierung und Test? Ist jedes Exemplar genau einer Gruppe zugeordnet? Sind es 80 Bilder insgesamt? Übertragen Sie allfällige Korrekturen in Ihren Datenplan, sichern Sie Journal/Notebook als ZIP und notieren Sie Ihren nächsten Schritt."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Gesicherter Stand und selbst gewählter nächster Schritt."
+              "text": "Eigenständig korrigierter Datenplan, gesicherter Arbeitsstand und nächster Schritt."
             }
           ]
         }

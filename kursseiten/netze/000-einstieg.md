@@ -11,7 +11,7 @@
     </figure>
     <p><strong>Heute können Sie:</strong> Die Grenze eines einzelnen Neurons an XOR erklären, eine Zwischenschicht verstehen und Training, Validierung und Test trennen.</p>
     <p class="lesson-question">Wie lösen mehrere einfache Entscheidungen das XOR-Problem?</p>
-    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Viele Neuronen erweitern die Möglichkeiten. Ob das Netz bei neuen Fällen funktioniert, hängt auch von einer fairen Datenaufteilung ab.</p>
+    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Viele Neuronen erweitern die Möglichkeiten. Wie wir mit solchen Netzen später eigene Fotos untersuchen, erarbeiten Sie ab Doppellektion 5 selbstständig.</p>
   </div>
 </details>
 <!-- /LESSONS:netze -->

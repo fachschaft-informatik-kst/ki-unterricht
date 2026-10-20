@@ -25,7 +25,6 @@
 ### Direkt öffnen
 
 - [Mehrschichtige Netze und XOR-Grafik im Kurs](index.html#netze) · [Notebook](materialien/downloads/mehrschichtige_netze.ipynb)
-- [Datenaufteilung T1/T2/V1/P1/P2](index.html#netze-3) · [Notebook «Daten fair aufteilen»](materialien/downloads/daten_training.ipynb)
 - [Themenpool und Datenplan](index.html#projekt-2) · [Projektgruppen](index.html#projekt-3)
 - **Wahlvertiefung:** [Ziffernerkennung](index.html#netze-2)
 

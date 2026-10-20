@@ -91,6 +91,25 @@ first_code=[c.source for c in multi.cells if c.cell_type=='code']
 assert 'u.live_gatter(' in first_code[1] and "'XOR'" in first_code[1], 'DL4 must introduce XOR before the network solution'
 assert any('u.xor_netz()' in source for source in first_code[2:]), 'DL4 multi-neuron solution must remain'
 
+# DL4 only covers XOR and neural networks; DL5 guides data-split self-study.
+dl4plan=next(l for l in lessons if l['id']=='04')
+dl5plan=next(l for l in lessons if l['id']=='05')
+assert 'Datenaufteilung' not in dl4plan['goal'] and 'Validierung' not in dl4plan['goal']
+assert all('Datenleck' not in step['text'] and 'T1/T2' not in step['text']
+           for phase in dl4plan['phases'] for step in phase['schritte'])
+assert 'Datenlecks' in dl5plan['goal']
+assert all(step['wer']!='Lehrperson' for step in dl5plan['phases'][3]['schritte'])
+sol_data=soup.select_one('#projekt-3')
+assert sol_data and sol_data.select_one('[data-lab="daten_training.ipynb"]')
+assert 'Training:' in sol_data.get_text() and 'Validierung:' in sol_data.get_text()
+assert 'Musterlösung' in sol_data.get_text() and 'Datenleck' in sol_data.get_text()
+assert 'Reflexion 2' in sol_data.get_text() and '80 Bilder' in sol_data.get_text()
+assert not soup.select_one('#netze [data-lab="daten_training.ipynb"]')
+data_nb=nbformat.read(root/'content/daten_training.ipynb',4)
+assert 'Doppellektion 5' in data_nb.cells[0].source
+assert 'selbstständig' in data_nb.cells[0].source
+
+
 assert {p.name for p in (root/'_build/content/portal').glob('*.ipynb')}=={Path(p).name for p in ITEMS}
 originals={str(p.relative_to(root/'content')) for p in (root/'content').rglob('*.ipynb') if 'portal' not in p.parts and '.ipynb_checkpoints' not in p.parts}
 assert originals==set(ITEMS), originals
