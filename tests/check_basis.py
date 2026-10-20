@@ -36,7 +36,7 @@ assert page.select_one("#basis-ki #einstieg-1")
 assert page.select_one("#basis-lernen #lernarten-4")
 assert page.select_one("#basis-lernen #memory-board")
 assert page.select_one("#basis-gesellschaft #gesellschaft-1")
-assert page.select_one(".crumb img.school-logo[src='../projekt/grafiken/kst_logo.png']")
+assert page.select_one(".crumb img.school-logo[src='grafiken/kst_logo.png']")
 assert "Kantonsschule Stadelhofen" in page.get_text()
 assert all(len(page.select(f"#{v} details.kapitel")) >= 2 for v in ("basis-neuron","basis-netze","basis-plan","basis-gesellschaft"))
 assert "Sprachmodelle" in page.get_text()
@@ -48,6 +48,7 @@ styles = (base/"theme.css").read_text(encoding="utf-8")
 assert "--accent" in styles and ".sidebar" in styles
 basic_style=(base/"basis.css").read_text(encoding="utf-8")
 assert "--accent:#3653a3" in basic_style
+assert (base/"grafiken/kst_logo.png").is_file(), "KST logo must be packaged with basic course"
 assert "basis-network-diagram" in basic_style
 js=(base/"basis.js").read_text(encoding="utf-8")
 assert "kst-ki-basis-v1" in js and "data-live-output" in js
