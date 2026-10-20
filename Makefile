@@ -60,6 +60,7 @@ build: install
 	npm run build --prefix $(NODE_DIR)
 	$(VENV_PY) scripts/build_portal.py
 	$(VENV_PY) scripts/build_course.py
+	$(VENV_PY) scripts/build_basis.py
 	$(VENV_PY) scripts/build_portal_notebooks.py
 	$(VENV)/bin/jupyter lite build --contents _build/content --output-dir dist
 	$(VENV_PY) scripts/copy_portal.py dist
@@ -76,6 +77,7 @@ local: build
 full: local
 
 test: build
+	$(VENV_PY) tests/check_basis.py
 	$(VENV_PY) tests/check_course.py
 	$(VENV_PY) tests/check_generated_content.py
 	$(VENV_PY) tests/check_new_chapter.py
