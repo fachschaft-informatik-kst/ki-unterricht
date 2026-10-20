@@ -29,8 +29,8 @@ assert not soup.select("article.print-sheet, button.print-this")
 assert "Memory-Kartensatz" not in soup.get_text(" ", strip=True)
 assert "Eigene vorhandene Spiele" in soup.get_text(" ", strip=True)
 assert len(soup.select(".lesson-resources table")) >= 3
-assert len(soup.select("#dl-03 .graphic-grid figure")) == 4
-assert len(soup.select("#dl-04 .graphic-grid figure")) == 2
+assert len(soup.select("#dl-03 .graphic-grid figure")) == 3
+assert len(soup.select("#dl-04 .graphic-grid figure")) == 3
 assert not soup.select(".source-graphic"), "Avoid duplicating student diagrams"
 for img in soup.select(".graphic-grid img"):
     assert img["src"].startswith("materialien/downloads/"), img["src"]

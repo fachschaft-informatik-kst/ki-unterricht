@@ -1,4 +1,4 @@
-<details class="kapitel" id="perzeptron-5" data-kurz="Vier kompakte interaktive Versuche zu Entscheidung, Gewichten, Lernen und XOR (ca. 35 Minuten)." open>
+<details class="kapitel" id="perzeptron-5" data-kurz="Drei interaktive Versuche zu Entscheidung, Gewichten und Lernen (ca. 30 Minuten)." open>
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Im Notebook: entscheiden, einstellen, lernen lassen</h2>
   </summary>
@@ -20,12 +20,6 @@ Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder
         <b>3 · Lernen beobachten</b>
         <!-- MD:START -->
 Lassen Sie das Neuron einzelne Beispiele bearbeiten. Beobachten Sie **eine Korrektur** und vergleichen Sie die Parameter vor und nach diesem Schritt.
-<!-- MD:END -->
-      </article>
-      <article>
-        <b>4 · XOR als Grenze</b>
-        <!-- MD:START -->
-Versuchen Sie, mit einem Neuron alle vier XOR-Zielwerte zu erreichen. Begründen Sie anhand Ihrer Beobachtung, warum das nicht gelingt.
 <!-- MD:END -->
       </article>
     </div>
@@ -101,13 +95,6 @@ Versuchen Sie, mit einem Neuron alle vier XOR-Zielwerte zu erreichen. Begründen
               <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_nand_w2" aria-label="NAND Gewicht 2" placeholder=""></td>
               <td><input type="text" inputmode="decimal" maxlength="40" data-answer="hand_nand_b" aria-label="NAND Bias" placeholder=""></td>
               <td><select data-answer="hand_nand_ok" aria-label="NAND gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td>
-            </tr>
-            <tr>
-              <th>XOR</th>
-              <td>–</td>
-              <td>–</td>
-              <td>–</td>
-              <td><select data-answer="hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></td>
             </tr>
           </tbody>
         </table>

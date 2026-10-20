@@ -6,16 +6,16 @@
     <!-- MD:START -->
 ### Zuerst die Eingaben verstehen
 
-Ein logisches Gatter erhält **zwei Eingaben**: `x₁` und `x₂`. **0** bedeutet «nein / aus», **1** bedeutet «ja / ein». Für zwei Eingaben gibt es genau **vier mögliche Kombinationen**. Die Spalten AND, OR, NAND und XOR zeigen die **gewünschte Ausgabe** – noch keine Rechnung des Neurons.
+Ein logisches Gatter erhält **zwei Eingaben**: `x₁` und `x₂`. **0** bedeutet «nein / aus», **1** bedeutet «ja / ein». Für zwei Eingaben gibt es genau **vier mögliche Kombinationen**. Die Spalten AND, OR und NAND zeigen die **gewünschte Ausgabe** – noch keine Rechnung des Neurons.
 
-| x₁ | x₂ | AND | OR | NAND | XOR |
-|:--:|:--:|:---:|:--:|:----:|:---:|
-| 0 | 0 | 0 | 0 | 1 | 0 |
-| 0 | 1 | 0 | 1 | 1 | 1 |
-| 1 | 0 | 0 | 1 | 1 | 1 |
-| 1 | 1 | **1** | 1 | **0** | **0** |
+| x₁ | x₂ | AND | OR | NAND |
+|:--:|:--:|:---:|:--:|:----:|
+| 0 | 0 | 0 | 0 | 1 |
+| 0 | 1 | 0 | 1 | 1 |
+| 1 | 0 | 0 | 1 | 1 |
+| 1 | 1 | **1** | 1 | **0** |
 
-**AND:** beide aktiv · **OR:** mindestens eine aktiv · **NAND:** Gegenteil von AND · **XOR:** genau eine aktiv.
+**AND:** beide aktiv · **OR:** mindestens eine aktiv · **NAND:** Gegenteil von AND.
 
 Für den ersten Versuch verwenden wir **AND** als Ziel: Ein Warnsignal soll **nur dann** leuchten, wenn beide Sensoren aktiv sind. Das Perzeptron soll diese vier Ausgaben durch eine Rechnung erzeugen.
 

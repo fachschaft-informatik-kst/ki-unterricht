@@ -72,6 +72,25 @@ for img in soup.select('img'):
     assert img.get('alt'), img
     src=img['src']
     assert (root/'_build/site/projekt'/src).is_file() or src in ['previews/perzeptron.png','previews/xor.png','previews/datenplan.png','https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png'], src
+# XOR is a *new* problem in Doppellektion 4; DL3 contains only single
+# neuron calculations and trainable AND/OR examples. Keep historic form IDs
+# in the new chapter so previously saved answers remain available.
+dl3=soup.select_one('#perzeptron')
+dl4=soup.select_one('#netze')
+assert dl3 and dl4 and soup.select_one('#perzeptron-6'), 'Historic DL3 chapter anchor must survive'
+assert 'XOR' not in dl3.get_text(), 'DL3 must not reveal XOR before the network lesson'
+assert dl4.select_one('[data-answer="hand_xor_max"]'), 'Historic XOR result must move intact into DL4'
+assert dl4.select_one('[data-answer="xor_warum"]'), 'Historic XOR explanation must move intact into DL4'
+assert not dl3.select_one('[data-answer="hand_xor_max"],[data-answer="xor_warum"]')
+assert 'Vier mögliche' not in soup.select_one('#perzeptron-5').get_text()
+single=nbformat.read(root/'content/perzeptron_und_neuronale_netze.ipynb',4)
+multi=nbformat.read(root/'content/mehrschichtige_netze.ipynb',4)
+assert sum('ki-autostart' in c.metadata.get('tags',[]) for c in single.cells)==4
+assert not any('XOR' in c.source for c in single.cells), 'XOR experiment must not remain in DL3'
+first_code=[c.source for c in multi.cells if c.cell_type=='code']
+assert 'u.live_gatter(' in first_code[1] and "'XOR'" in first_code[1], 'DL4 must introduce XOR before the network solution'
+assert any('u.xor_netz()' in source for source in first_code[2:]), 'DL4 multi-neuron solution must remain'
+
 assert {p.name for p in (root/'_build/content/portal').glob('*.ipynb')}=={Path(p).name for p in ITEMS}
 originals={str(p.relative_to(root/'content')) for p in (root/'content').rglob('*.ipynb') if 'portal' not in p.parts and '.ipynb_checkpoints' not in p.parts}
 assert originals==set(ITEMS), originals

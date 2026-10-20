@@ -96,7 +96,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   for(let i=0;i<3;i++)await memoryObservations.nth(i).fill('Beobachtung '+(i+1));
   await p.locator('#lernarten [data-answer="memory"]').fill('Labels, Ähnlichkeit und Rückmeldungen sind unterschiedliche Lernsignale.');
   await p.locator('.nav a[href="#perzeptron"]').click();
-  await p.locator('#perzeptron [data-answer="hand_and_w1"]').fill('0.5');await p.locator('#perzeptron [data-answer="hand_xor_max"]').selectOption('3');
+  await p.locator('#perzeptron [data-answer="hand_and_w1"]').fill('0.5');await p.locator('.nav a[href="#netze"]').click();await p.locator('#netze [data-answer="hand_xor_max"]').selectOption('3');
   await p.locator('.nav a[href="#sprache"]').click();
   await p.locator('#sprache [data-answer="pap_text_a"]').fill('Am Samstag gehe ich Brot');await p.locator('#sprache [data-answer="pst_1_plausibel"]').selectOption('ja');
   await p.locator('.nav a[href="#gesellschaft"]').click();
@@ -124,7 +124,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.locator('#restore-package').setInputFiles('/tmp/ki-portal-backup.zip');await p.waitForFunction(()=>document.querySelector('#download-status').textContent.includes('Projektstand wiederhergestellt'));
   await p.locator('.sidebar-bottom a[href="#journal"]').click();assert((await p.locator('[data-journal="names"]').inputValue()).includes('Ada'));
   await p.locator('.nav a[href="#perzeptron"]').click();
-  assert.equal(await p.locator('#perzeptron [data-answer="hand_and_w1"]').inputValue(),'0.5');assert.equal(await p.locator('#perzeptron [data-answer="hand_xor_max"]').inputValue(),'3');
+  assert.equal(await p.locator('#perzeptron [data-answer="hand_and_w1"]').inputValue(),'0.5');await p.locator('.nav a[href="#netze"]').click();assert.equal(await p.locator('#netze [data-answer="hand_xor_max"]').inputValue(),'3');
   await p.locator('.nav a[href="#sprache"]').click();
   assert.equal(await p.locator('#sprache [data-answer="pap_text_a"]').inputValue(),'Am Samstag gehe ich Brot');assert.equal(await p.locator('#sprache [data-answer="pst_1_plausibel"]').inputValue(),'ja');
   await p.locator('.nav a[href="#gesellschaft"]').click();
@@ -212,13 +212,13 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
      await p.screenshot({path:'/tmp/ki-notebook-interactive-table.png',fullPage:true});
      const lessonCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
     assert(/\[\d+\]/.test(await lessonCells.nth(1).locator('.jp-InputPrompt').innerText()));
-    // Each of the four notebook exercises must now contain a neuron figure.
-    // Gate and XOR each present four *separate* decisions, not merely a table.
+    // DL3 retains four visualized AND/OR cases but must not show XOR.
     const smallNeuron='img[alt^="Neuron: Eingaben"]';
     const gateCell=lessonCells.nth(2);
     const gateCards=gateCell.locator(smallNeuron);
     await gateCards.first().waitFor({state:'visible'});
     assert.equal(await gateCards.count(),4,'AND must show one neuron per input pair');
+    assert.equal(await gateCell.locator('.widget-dropdown option:text-is("XOR")').count(),0,'XOR belongs in DL4');
     const andSource=await gateCards.last().getAttribute('src');
     assert(andSource.startsWith('data:image/svg+xml;base64,'));
     assert(Buffer.from(andSource.split(',')[1],'base64').toString('utf8').includes('Ziel 1 ✓'));
@@ -230,11 +230,6 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     },null,{timeout:20000});
     assert.equal(await gateCards.count(),4,'Changing the gate must preserve all four neuron cases');
     assert((await gateCell.innerText()).includes('2/4 richtig'),'OR must initially be 2/4 with AND weights');
-    const xorCell=lessonCells.nth(4);
-    const xorCards=xorCell.locator(smallNeuron);
-    await xorCards.first().waitFor({state:'visible'});
-    assert.equal(await xorCards.count(),4,'XOR must show the four neuron decisions');
-    assert((await xorCell.innerText()).includes('Gatter: XOR'));
     const learnCell=lessonCells.nth(3);
     await learnCell.locator(smallNeuron).first().waitFor({state:'visible'});
     assert.equal(await learnCell.locator(smallNeuron).count(),1,'Learning should show its starting neuron');
@@ -247,6 +242,17 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert((await learnCell.innerText()).includes('Nachher · neue Gewichte'));
     const prior=await lessonCells.nth(1).locator('.jp-InputPrompt').innerText();await lessonCells.nth(1).locator('.cm-content').click();await p.keyboard.press('Shift+Enter');
     await p.waitForFunction(prior=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[1].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text)&&text!==prior;},prior);
+    // DL4 introduces XOR as a new problem, before the multilayer solution.
+    await p.locator('.nav a[href="#netze"]').click();
+    await p.locator('[data-lab="mehrschichtige_netze.ipynb"]').click();
+    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/mehrschichtige_netze.ipynb',null,{timeout:180000});
+    const networkCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
+    const xorCell=networkCells.nth(1);
+    await xorCell.locator(smallNeuron).first().waitFor({state:'visible'});
+    assert.equal(await xorCell.locator(smallNeuron).count(),4,'DL4 starts with four XOR decisions');
+    assert((await xorCell.innerText()).includes('Gatter: XOR'),'DL4 must expose the new XOR challenge');
+    assert.equal(await xorCell.locator('.widget-dropdown option:text-is("XOR")').count(),1,'XOR should be selectable in DL4');
+    assert((await xorCell.locator('.jp-OutputArea').innerText()).includes('Ziel'));
     await p.locator('.nav a[href="#projekt"]').click();await p.locator('[data-lab="ki_lernlabor.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
     assert(/\[\d+\]/.test(await lessonCells.nth(2).locator('.jp-InputPrompt').innerText()));

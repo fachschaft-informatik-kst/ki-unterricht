@@ -8,7 +8,6 @@
 
 ![AND-Entscheidungsgrenze mit Lösung](materialien/downloads/koordinatengitter_perzeptron_and_loesung.svg "Informieren | Lehrperson")
 
-![Leeres Koordinatengitter mit XOR-Eingaben](materialien/downloads/koordinatengitter_xor_einfach.svg "Verarbeiten | Einzeln")
 
 
 
@@ -22,5 +21,5 @@
 - [Perzeptron-Arbeitsblatt](materialien/downloads/Arbeitsblatt_Perzeptron.md) · [Lösung](materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md)
 - [Leeres Koordinatengitter](materialien/downloads/koordinatengitter_perzeptron.svg)
 
-**XOR-Sicherung:** Die Lernenden zeichnen zunächst **einzeln** die Punkte; danach wird die Grenze **in der Klasse** diskutiert.
+**Sicherung:** Die Lernenden rechnen allein eine neue Eingabe und erklären anschliessend, wie die Gewichte und der Bias beim Lernen verändert wurden.
 

@@ -528,7 +528,10 @@ def live_gatter(aufgabe='AND'):
     weight=lambda title,value:widgets.FloatSlider(value=value,min=-3,max=3,step=.5,description=title,
        style={'description_width':'105px'},layout=widgets.Layout(width='min(100%, 420px)'),continuous_update=False)
     w1,w2,b=(weight('Gewicht x₁',1.),weight('Gewicht x₂',1.),weight('Bias',-1.5))
-    gate=widgets.Dropdown(options=('AND','OR','NAND','NOR','XOR'),value=aufgabe,description='Gatter',
+    # XOR is introduced only in DL4. The AND-based DL3 exercise must not
+    # offer the new problem ahead of the next lesson.
+    optionen=('AND','OR','NAND','NOR') if aufgabe!='XOR' else ('XOR','AND','OR','NAND','NOR')
+    gate=widgets.Dropdown(options=optionen,value=aufgabe,description='Gatter',
       style={'description_width':'105px'},layout=widgets.Layout(width='250px'))
     diagramme=widgets.HTML(layout=widgets.Layout(width='100%'))
     result=widgets.HTML(layout=widgets.Layout(width='100%'))
@@ -652,7 +655,9 @@ def lernen_klick(aufgabe='AND', lernrate=.2):
     """Das Neuron lernt per Klick: ein Beispiel nach dem anderen, mit Rechnung und wandernder Grenze."""
     from IPython.display import clear_output
     l = _Lerner(aufgabe, lernrate)
-    wahl = widgets.Dropdown(options=list(_ZIELE), value=aufgabe, description='Aufgabe')
+    # DL3's learning experiment stays on the already introduced gates.
+    lern_gatter=('AND','OR','NAND','NOR') if aufgabe!='XOR' else ('XOR','AND','OR','NAND','NOR')
+    wahl = widgets.Dropdown(options=lern_gatter, value=aufgabe, description='Aufgabe')
     rate = widgets.FloatSlider(value=lernrate, min=.05, max=1, step=.05, description='Lernrate')
     weiter = widgets.Button(description='Nächstes Beispiel ▶', button_style='primary')
     runde = widgets.Button(description='Ganze Runde ▶▶')

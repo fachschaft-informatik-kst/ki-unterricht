@@ -72,7 +72,7 @@ perzeptron_tables = soup.select("#perzeptron-3 table")
 assert len(perzeptron_tables) >= 2, "Perzeptron truth/calculation tables not rendered"
 truth = perzeptron_tables[0]
 assert [c.get_text(strip=True) for c in truth.select("thead th")] == [
-    "x₁", "x₂", "AND", "OR", "NAND", "XOR"
+    "x₁", "x₂", "AND", "OR", "NAND"
 ]
 assert len(truth.select("tbody tr")) == 4
 calculation = perzeptron_tables[1]

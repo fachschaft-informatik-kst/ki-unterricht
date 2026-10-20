@@ -4,69 +4,69 @@
       "id": "04",
       "view": "netze",
       "title": "Warum mehrere Neuronen?",
-      "rueckblick": "In Doppellektion 3 scheiterte ein einzelnes Neuron an XOR. Heute kombinieren Sie mehrere Entscheidungen und klären, welche Daten ein Netz beim Lernen sehen darf.",
+      "rueckblick": "In Doppellektion 3 haben Sie einzelne Neuronen für AND und OR berechnet, eingestellt und trainiert. Heute lernen Sie XOR als neue Herausforderung kennen und untersuchen, warum mehrere Neuronen nötig sind.",
       "rueckblick_figur": {
-        "src": "grafiken/xor_gerade.svg",
-        "alt": "XOR-Tabelle und vier Punkte: Keine gerade Linie trennt die beiden Klassen.",
-        "caption": "Ein einzelnes Neuron kann XOR nicht trennen; eine Zwischenschicht kann zusätzliche Grenzen darstellen."
+        "src": "grafiken/perzeptron.svg",
+        "alt": "Ein künstliches Neuron mit zwei Eingängen, Gewichten und Bias.",
+        "caption": "Rückblick: Ein Neuron berechnet die gewichtete Summe und entscheidet anhand einer Schwelle."
       },
-      "goal": "Eine Zwischenschicht erklären und Training, Validierung und Test trennen.",
-      "question": "Leitfrage: Wie lösen mehrere einfache Entscheidungen das XOR-Problem?",
-      "motivation": "Viele Neuronen erweitern die Möglichkeiten. Ob das Netz bei neuen Fällen funktioniert, hängt auch von einer fairen Datenaufteilung ab.",
-      "product": "XOR-Erklärung, begründete Datentrennung und ein freigegebenes Projektthema mit zwei Klassen.",
-      "zeit": "Nur das Netz-Notebook ist für alle Pflicht. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik erarbeitet; das zweite Notebook ist Nachschlagewerk oder Vertiefung, kein weiterer Pflichtwechsel. Themenfreigaben während der 55 Minuten, nicht erst im Abschluss; bei zwölf Tandems etwa eine Minute je Tandem. Datenplan und Fotos als vorbereitender Auftrag bis Doppellektion 5. Der Datenplan ist hier ein Einstieg; die genaue Prüfung der Gruppen und das Beschaffen fehlender Fotos erfolgen in Doppellektion 5. Vorrang hat die Erklärung des mehrschichtigen XOR-Netzes.",
+      "goal": "Die XOR-Grenze eines einzelnen Neurons an vier Fällen begründen, die Funktion einer Zwischenschicht erklären und Training, Validierung und Test trennen.",
+      "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
+      "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
+      "product": "Begründete 3/4-Grenze für ein einzelnes Neuron, Erklärung des XOR-Netzes und ein erster Datenplan mit getrennten Gruppen.",
+      "zeit": "XOR wird hier erstmals vorgestellt: Die vier Fälle zunächst ohne Lösung testen, die Grenze des einzelnen Neurons erklären und dann zwei Zwischenneuronen als Ausweg kennenlernen. Pflicht: XOR-Einstieg und Netzwerk-Experimente, Ziffern freiwillig. Datenaufteilung wird mit fünf Gruppenkarten und der Kursgrafik bearbeitet; zweites Notebook nur als Vertiefung. Themenfreigaben während der 55 Minuten; Datenplan und erste Fotos bis Doppellektion 5.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "XOR wieder aufnehmen",
+          "titel": "Neue Herausforderung: XOR entdecken",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Zeichnen Sie die XOR-Punkte und erklären Sie, warum eine einzige Linie die Klassen nicht trennt."
+              "text": "Eine neue Ja/Nein-Regel: Das Signal soll angehen, wenn genau eine der beiden Tasten aktiv ist. Notieren Sie zu 00, 01, 10 und 11 die Zielwerte (XOR). Vermuten Sie, ob das bisherige Neuron die Regel lernen kann."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Die Grenze des einzelnen Neurons ist wieder präsent."
+              "text": "Vier erstmals erarbeitete XOR-Zielwerte und eine Hypothese."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Eine Entscheidung rekonstruieren",
+          "titel": "Einzelnes Neuron in Erinnerung rufen",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Rechnen Sie einander eine UND-Zeile mit Gewichten 1/1 und Bias −1.5 vor. Benennen Sie Eingabe, Summe und Ausgabe."
+              "text": "Rechnen Sie eine AND-Zeile mit Gewichten 1/1 und Bias −1.5 vor. Erklären Sie, warum die Gewichte und der Bias für alle Eingabefälle gleich bleiben müssen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine überprüfte Neuronenrechnung."
+              "text": "Eine geprüfte Neuronenrechnung als Ausgangspunkt für XOR."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Zwischenschicht und Datentrennung",
+          "titel": "XOR-Grenze und Zwischenschicht",
           "minutes": 15,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 15,
-              "text": "Verfolgt (1,0) durch h₁ = OR und h₂ = NAND, danach AND am Ausgang. Unterscheidet festgelegte Gewichte von gelernten Gewichten. Zeigt anschliessend die Datentrennung mit Prüfungsanalogie und fünf Gruppenkarten: T1/T2 zum Trainieren, V1 zur Auswahl, P1/P2 erst zum Abschlusstest. Dasselbe Exemplar bleibt in derselben Gruppe. Nennt die Freigabekriterien für Projektthema und Klassen."
+              "text": "Lässt die Lernenden zunächst vier XOR-Fälle im Notebook mit dem einzelnen Neuron testen (Gewichte und Bias ändern). Vergleicht die besten Ergebnisse und erklärt dann anhand der diagonalen Punkte, warum eine einzige Gerade nicht genügt. Führt h₁ = OR und h₂ = NAND mit AND am Ausgang als neue Lösung ein. Zeigt die Datentrennung mit fünf Gruppen: T1/T2 zum Trainieren, V1 zur Auswahl und P1/P2 für den Abschlusstest. Nennt die Freigabekriterien für das Projektthema."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Zwei Orientierungshilfen: Netzbild und Rollen der fünf Datengruppen."
+              "text": "XOR-Grenze und Netzbild als Antwort auf das neue Problem; erste Orientierung zu den fünf Datengruppen."
             }
           ]
         },
@@ -79,13 +79,13 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 35,
-              "text": "Bearbeiten Sie im Notebook «Mehrere Neuronen kombinieren» den XOR-Kern: die vier Zeilen durch das konstruierte Netz verfolgen, dann ein Netz mit 1, 2 und 4 versteckten Neuronen lernen lassen. Erklären Sie die Funktion der Zwischenschicht. Ziffernexperimente sind Wahlvertiefung."
+              "text": "Bearbeiten Sie das Notebook «Mehrere Neuronen kombinieren» in dieser Reihenfolge: zuerst die vier XOR-Fälle als vier Neuron-Grafiken einstellen und die Grenze begründen, dann die Fälle im Netz aus OR, NAND und AND nachvollziehen. Lassen Sie anschliessend ein Netz mit 1, 2 und 4 versteckten Neuronen lernen. Erklären Sie den Unterschied zwischen einem einzelnen Neuron und einer Zwischenschicht. Ziffernexperimente bleiben Wahlvertiefung."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Skizzieren Sie allein, wie eine Zwischenschicht die XOR-Punkte trennen könnte, und markieren Sie Ihre offene Frage."
+              "text": "Skizzieren Sie allein die vier XOR-Punkte und markieren Sie, warum eine einzige Gerade die beiden Zielklassen nicht trennt."
             },
             {
               "art": "Auftrag",
@@ -96,7 +96,7 @@
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "XOR-Erklärung, Datenrollen und ein freigegebenes Thema mit zwei Klassen."
+              "text": "XOR als neues Problem begründet, Funktion der Zwischenschicht erklärt, Datenrollen erfasst und Projektthema mit zwei Klassen freigegeben."
             }
           ]
         },
@@ -109,13 +109,13 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 2,
-              "text": "Erklären Sie im Tandem die Aufgabe einer Zwischenschicht und warum dasselbe Objekt nicht zugleich in Training und Test vorkommen darf."
+              "text": "Erklären Sie im Tandem, weshalb ein einzelnes Neuron die neuen XOR-Fälle nicht alle lösen kann, wie eine Zwischenschicht hilft und warum dasselbe Objekt nicht zugleich in Training und Test vorkommen darf."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Prüfen Sie eine Erklärung zur Zwischenschicht und zum Datenleck gemeinsam."
+              "text": "Prüfen Sie gemeinsam eine Erklärung zur XOR-Grenze, zur Zwischenschicht und zum Datenleck."
             },
             {
               "art": "Input",
@@ -127,12 +127,12 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 2,
-              "text": "Sicherung: Halten Sie einzeln zwei Erkenntnisse fest: Wie ermöglicht eine Zwischenschicht die Lösung von XOR, und warum müssen Trainings- und Testdaten getrennt bleiben? Notieren Sie danach Ihren nächsten Vorbereitungsschritt."
+              "text": "Sicherung: Halten Sie einzeln zwei Erkenntnisse fest: Warum genügt ein einzelnes Neuron für XOR nicht und wie hilft eine Zwischenschicht? Warum dürfen Trainings- und Testdaten nicht dieselben Beispiele enthalten? Notieren Sie danach Ihren nächsten Vorbereitungsschritt."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Zwei gesicherte Kernaussagen zu Zwischenschicht und Datenleck sowie ein Vorbereitungsschritt."
+              "text": "Zwei gesicherte Kernaussagen zu XOR und Datentrennung sowie ein Vorbereitungsschritt."
             }
           ]
         }
