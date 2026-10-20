@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b03",
+      "view": "basis-daten",
+      "title": "Daten und faire Tests",
+      "rueckblick": "Ergebnisse der vorherigen Doppellektion wieder aufgreifen.",
+      "goal": "Trainingsdaten und Testdaten unterscheiden.",
+      "question": "Ein Modell kann einen Hintergrund erkennen, obwohl es einen Gegenstand erkennen soll.",
+      "motivation": "KI kann man durch eigenes Ausprobieren und systematische Beobachtung verstehen.",
+      "product": "Ein Versuch mit einer nachvollziehbaren Beobachtung.",
+      "zeit": "90 Minuten; explorativ, kein mathematischer Formalismus.",
+      "order": 30,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Die Datenfalle",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Zum Einstieg: Ein Modell kann einen Hintergrund erkennen, obwohl es einen Gegenstand erkennen soll."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein kurzer überprüfbarer Zwischenschritt oder Merksatz."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vermutungen vergleichen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Vorwissen austauschen und eine Hypothese notieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein kurzer überprüfbarer Zwischenschritt oder Merksatz."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Einfaches Modell erklären",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Ein- und Ausgaben im Zusammenhang mit «Daten und faire Tests» erklären."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein kurzer überprüfbarer Zwischenschritt oder Merksatz."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Aktiv experimentieren",
+          "minutes": 45,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 43,
+              "text": "Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergrund zu sehen, Bücher immer vor einem schwarzen. Was könnte das Modell irrtümlich lernen?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein kurzer überprüfbarer Zwischenschritt oder Merksatz."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Erkenntnis sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Ein eigenes Fazit formulieren und mit der Leitfrage vergleichen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein kurzer überprüfbarer Zwischenschritt oder Merksatz."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

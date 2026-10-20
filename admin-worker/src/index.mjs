@@ -75,7 +75,7 @@ async function appInstallationStatus(token,request=github){
 }
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  path==="kursseiten/manifest.json"||
+  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json")||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
 function validate(changes){
@@ -136,8 +136,9 @@ async function publish(req,token){
   };
   const proposed=async path=>changes.has(path)?JSON.parse(changes.get(path).content):readJson(path);
   try{
-    const previous=await readJson("kursseiten/manifest.json");
-    const manifest=await proposed("kursseiten/manifest.json");
+    for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json"]){
+    const previous=await readJson(manifestPath);
+    const manifest=await proposed(manifestPath);
     validateManifest(manifest);
     if(previous.sections.some(s=>!manifest.sections.some(n=>n.id===s.id&&!!n.teaching===!!s.teaching)))
       throw Error("Bestehende Bereichs-IDs müssen erhalten bleiben.");
@@ -163,6 +164,7 @@ async function publish(req,token){
     validatePlan({lessons:all});
     if(all.some(l=>!Number.isFinite(l.order))||new Set(all.map(l=>l.order)).size!==all.length)
       throw Error("Lektionsreihenfolge ungültig oder doppelt.");
+    }
   }catch(e){if(e.status)throw e;return fail(400,e.message);}
   const entries=[];
   for(const c of body.changes){

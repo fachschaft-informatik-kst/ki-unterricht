@@ -123,3 +123,16 @@ GitHub Actions baut die Seite beim Push automatisch.
 ## MVC und lokale Vorschau
 
 Fachliche Texte, Aufgaben und Links werden in `kursseiten/` gepflegt; `projekt/portal.js` enthält nur noch Controller-Logik. Für eine schnelle lokale Vorschau `python scripts/preview.py` ausführen; `--full` baut und startet zusätzlich JupyterLite. Siehe Haupt-README.
+
+## Zwei Kurse aus einer Codebasis
+
+- **4. Kurzgymnasium (Vertiefung):** `kursseiten/manifest.json`, Kursseite `/projekt/` (historischer Speicher- und Notebook-Stand bleibt erhalten).
+- **1. Kurzgymnasium (Basis):** `kursseiten/basis-manifest.json`, sieben Doppellektionen in `kursseiten/basis-*/`, Kursseite `/basis/`.
+- **Kursauswahl:** `/kurse.html`; die ursprüngliche Start-URL führt weiterhin zum vertieften Kurs, um bestehende Links nicht zu brechen.
+- **Editor:** Gemeinsamer GitHub-Editor unter `/projekt/admin/`; dort vor dem Bearbeiten den Kurs auswählen. Neue Bereiche des Basiskurses erhalten den Präfix `basis-`.
+- **Gemeinsam:** CSS, Grafiken, Kapitelrenderer und AVIVA-Validierung. Separate Notizen des Basiskurses nutzen `kst-ki-basis-v1`; der bisherige Portal-, Journal- und Notebook-Speicher bleibt unangetastet.
+
+Build und Vorschau erzeugen beide Seiten: `python scripts/build_portal.py && python scripts/build_course.py && python scripts/build_basis.py` bzw. `make preview`.
+Für einen lokalen Volltest: `make test`. Der CI-Browsercheck testet zusätzlich Kurswahl, Regler sowie Notizen beim erneuten Öffnen.
+
+**Didaktische Trennung:** Der Basiskurs ist eine angeleitete Bildklassifikation mit unkritischen Gegenständen und Testbildern; die 4. Klasse arbeitet weiterhin mit selbstständiger Evaluation, Notebook-Projekt und Fachgespräch. Teachable Machine ist ein externer Dienst: vor der Verwendung schulische Datenschutzregeln beachten; keine Gesichter oder persönlichen Daten hochladen.

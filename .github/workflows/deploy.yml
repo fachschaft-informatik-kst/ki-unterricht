@@ -90,7 +90,9 @@ jobs:
         run: |
           python scripts/build_portal.py
           python scripts/build_course.py
+          python scripts/build_basis.py
           python scripts/build_portal_notebooks.py
+          python tests/check_basis.py
           python tests/check_course.py
           python tests/check_generated_content.py
           python tests/check_new_chapter.py
@@ -109,6 +111,9 @@ jobs:
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
           test -f dist/projekt/admin/plan-editor.js
+      - name: Browser-check basic course
+        run: |
+          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
       - name: Check deployed notebook runtime in Chromium
         timeout-minutes: 20
         run: |

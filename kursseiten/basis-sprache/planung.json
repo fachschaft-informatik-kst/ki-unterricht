@@ -1,0 +1,125 @@
+{
+  "lessons": [
+    {
+      "id": "b-sprache",
+      "view": "basis-sprache",
+      "title": "Wie erzeugen Sprachmodelle Text?",
+      "rueckblick": "Daten und faire Tests: Modelle können überzeugend wirken, obwohl sie Fehler machen.",
+      "goal": "sprachbasierte KI als Vorhersage von Textbausteinen erklären, Prompts vergleichen und Tatsachenbehauptungen überprüfen.",
+      "question": "Weshalb kann ein Chatbot überzeugend schreiben und trotzdem etwas Falsches behaupten?",
+      "motivation": "Sprachmodelle begegnen uns in Chatbots und Schreibassistenten; ihre Antworten müssen kritisch geprüft werden.",
+      "product": "Wortvorhersage-Experiment, präzisierter Prompt und belegte Faktenprüfung.",
+      "zeit": "1. Kurzgymnasium: spielerisch, kein Training grosser Modelle und keine Programmierung; Chatbot optional.",
+      "order": 35,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Welches Wort kommt als Nächstes?",
+          "minutes": 10,
+          "schritte": [
+            {
+              "wer": "Lehrperson",
+              "min": 8,
+              "art": "Auftrag",
+              "text": "Zwei Sätze mit unterschiedlichem Kontext anzeigen. Die Klasse schlägt mögliche nächste Wörter vor und erklärt, warum diese unterschiedlich sind."
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 2,
+              "art": "Ergebnis",
+              "text": "Eine begründete Vermutung zur Wortfortsetzung."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Was sagt eine Vorhersage aus?",
+          "minutes": 10,
+          "schritte": [
+            {
+              "wer": "Tandem",
+              "min": 8,
+              "art": "Auftrag",
+              "text": "Alltagsvervollständigung mit Chatbot-Erfahrungen vergleichen. Hypothese: Ändert der Kontext die nächste Wortvorhersage?"
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 2,
+              "art": "Ergebnis",
+              "text": "Hypothese zur Bedeutung des Kontexts."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Token und Kontext im vereinfachten Modell",
+          "minutes": 15,
+          "schritte": [
+            {
+              "wer": "Lehrperson",
+              "min": 13,
+              "art": "Auftrag",
+              "text": "An einer vereinfachten Wortvorhersage demonstrieren: Ein Sprachmodell schätzt wahrscheinliche nächste Textbausteine (Tokens) aus dem Kontext. Ein plausibler Text ist kein Wahrheitsbeweis. Die abgebildeten Wahrscheinlichkeiten sind nur ein vereinfachtes Beispiel, kein reales Sprachmodell."
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 2,
+              "art": "Ergebnis",
+              "text": "Begriff Token und eine Grenze der Analogie in eigenen Worten."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Wortlabor, Prompts und Quellen",
+          "minutes": 45,
+          "schritte": [
+            {
+              "wer": "Tandem",
+              "min": 16,
+              "art": "Experiment",
+              "text": "Im lokalen Wortlabor Kontext A und B wechseln und eine ungewöhnliche Fortsetzung auswählen. Beobachten, wie sich Textvorschläge durch Kontext verändern. Die Werte sind illustrativ."
+            },
+            {
+              "wer": "Tandem",
+              "min": 17,
+              "art": "Auftrag",
+              "text": "Vergleicht zwei Prompts für die gleiche Aufgabe: ungenau und mit klarer Zielgruppe, Länge und Format. Formuliert, weshalb die Antworten unterschiedlich ausfallen könnten. Optional mit einem schulisch freigegebenen Chatbot ausprobieren; keine persönlichen Daten eingeben."
+            },
+            {
+              "wer": "Tandem",
+              "min": 10,
+              "art": "Auftrag",
+              "text": "Prüft die vorgegebene (absichtlich falsche) Beispielbehauptung «Die Schweiz hat 30 Kantone» an einer verlässlichen Quelle. Unterscheidet flüssig formulierte Antwort von überprüftem Fakt."
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 2,
+              "art": "Ergebnis",
+              "text": "Dokumentierte Kontextbeobachtung, verbesserter Prompt und geprüfte Behauptung."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Sicherung: plausibel ist nicht immer wahr",
+          "minutes": 10,
+          "schritte": [
+            {
+              "wer": "Einzeln",
+              "min": 8,
+              "art": "Auftrag",
+              "text": "Erklären: Was wird beim Generieren vorhergesagt? Warum beeinflusst der Prompt die Ausgabe? Wie prüft man eine Tatsachenbehauptung?"
+            },
+            {
+              "wer": "Ergebnis",
+              "min": 2,
+              "art": "Ergebnis",
+              "text": "Drei Sätze zu Token, Prompt und Verifikation."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b02",
+      "view": "basis-lernen",
+      "title": "Wie lernt eine KI?",
+      "rueckblick": "Letzte Doppellektion: Erkenntnisse für das heutige Experiment nutzen.",
+      "goal": "Eingaben, Trainingsbeispiele und Vorhersagen unterscheiden",
+      "question": "Wie kann eine KI entscheiden, ohne dass wir jede Regel vorgeben?",
+      "motivation": "An echten Beispielen verstehen, beobachten und hinterfragen, wie KI-Systeme lernen.",
+      "product": "Eine überprüfbare Beobachtung oder ein dokumentierter Projektfortschritt.",
+      "zeit": "Kurzgymnasium 1. Klasse; explorativ, wenig Theorie, kurze Sicherung.",
+      "order": 20,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Objekte nach Merkmalen sortieren",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "An einem Beispiel die Leitfrage untersuchen und erste Vermutungen notieren: Wie kann eine KI entscheiden, ohne dass wir jede Regel vorgeben?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Eine erste Vermutung zur Leitfrage."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vermutungen zu Trainingsbeispielen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Vorwissen zu «Wie lernt eine KI?» sammeln, vergleichen und offene Fragen markieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Zwei gesammelte Vorannahmen."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Mit Gewichten experimentieren",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Die zentralen Begriffe anhand eines kurzen Beispiels und der Kursseite erklären: Eingaben, Trainingsbeispiele und Vorhersagen unterscheiden."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein verständliches Beispiel mit Fachbegriffen."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Ein einfaches Modell testen",
+          "minutes": 45,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 43,
+              "text": "Die Aufgaben des Kapitels experimentell beziehungsweise projektorientiert bearbeiten; Beobachtungen im eigenen Protokoll dokumentieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Dokumentierte Versuche oder ein konkretes Projekt-Zwischenergebnis."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Was hat das Modell gelernt?",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Eine Beobachtung anhand der Leitfrage erklären und einen eigenen Merksatz festhalten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Individuell formulierter Erkenntnissatz."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

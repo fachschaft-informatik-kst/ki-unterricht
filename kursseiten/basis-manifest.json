@@ -1,0 +1,114 @@
+{
+  "version": 2,
+  "course": "basis",
+  "title": "KI entdecken · 1. Kurzgymnasium",
+  "sections": [
+    {
+      "id": "basis-start",
+      "class": "hero",
+      "navigation": {
+        "order": 0,
+        "label": "00",
+        "title": "Übersicht"
+      }
+    },
+    {
+      "id": "basis-ki",
+      "class": "section",
+      "navigation": {
+        "order": 1,
+        "label": "01",
+        "title": "Was ist KI?"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Was ist KI?",
+        "summary": "KI erkennen und begründet unterscheiden"
+      }
+    },
+    {
+      "id": "basis-lernen",
+      "class": "section",
+      "navigation": {
+        "order": 2,
+        "label": "02",
+        "title": "Wie lernt eine KI?"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Wie lernt eine KI?",
+        "summary": "Klassifikation spielerisch entdecken"
+      }
+    },
+    {
+      "id": "basis-daten",
+      "class": "section",
+      "navigation": {
+        "order": 3,
+        "label": "03",
+        "title": "Daten und faire Tests"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Daten und faire Tests",
+        "summary": "Trainieren ist nicht gleich Testen"
+      }
+    },
+    {
+      "id": "basis-sprache",
+      "class": "section",
+      "navigation": {
+        "order": 4,
+        "label": "04",
+        "title": "Sprachmodelle"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Wie erzeugt KI Texte?",
+        "summary": "Wortvorhersage · Prompts · Fehler prüfen"
+      }
+    },
+    {
+      "id": "basis-plan",
+      "class": "section",
+      "navigation": {
+        "order": 5,
+        "label": "05",
+        "title": "Unser Bildprojekt planen"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Unser Bildprojekt planen",
+        "summary": "Zwei Klassen und eine Forschungsfrage"
+      }
+    },
+    {
+      "id": "basis-training",
+      "class": "section",
+      "navigation": {
+        "order": 6,
+        "label": "06",
+        "title": "Trainieren und verbessern"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Trainieren und verbessern",
+        "summary": "Modell bauen, testen, Fehler entdecken"
+      }
+    },
+    {
+      "id": "basis-abschluss",
+      "class": "section",
+      "navigation": {
+        "order": 7,
+        "label": "07",
+        "title": "Testen und präsentieren"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Testen und präsentieren",
+        "summary": "Ergebnisse verständlich begründen"
+      }
+    }
+  ]
+}
