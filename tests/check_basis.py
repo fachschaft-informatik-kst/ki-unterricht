@@ -27,7 +27,7 @@ assert len(page.select("details.kapitel")) >= 30
 assert len(page.select("[data-basis-answer]")) >= 24
 assert len(page.select("a.course-card")) == 10
 assert len(page.select(".nav > a")) == 11
-assert page.select_one("#basis-lernen .basis-neuron table")
+assert page.select_one("#basis-neuron .basis-neuron table")
 assert page.select_one("#basis-sprache [data-basis-language] select[data-language-context]")
 assert len(page.select("#basis-sprache details.kapitel")) == 2
 assert [l["view"] for l in basic["lessons"]] == ["basis-ki","basis-lernen","basis-neuron","basis-netze","basis-daten","basis-sprache","basis-plan","basis-training","basis-abschluss","basis-gesellschaft"]
