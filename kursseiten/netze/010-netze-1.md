@@ -3,8 +3,8 @@
     <h2 class="kapitel-titel">Das XOR-Problem: Warum reicht ein Neuron nicht?</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>Neue Herausforderung:</strong> In Doppellektion 3 konnten Sie AND und OR mit einem einzelnen Neuron einstellen. Gelingt das bei der folgenden Regel auch? Prüfen Sie zuerst Ihre Vermutung, bevor Sie die Erklärung und das mehrschichtige Netz untersuchen.</p>
-    <p><strong>XOR</strong> (exklusives Oder) gibt 1, wenn <strong>genau eine</strong> der beiden Eingaben 1 ist. Beispiel: Ein Modus startet, wenn genau eine von zwei Tasten gedrückt ist. Das Neuron lernt auch hier nach derselben Regel wie bei AND, und trotzdem kommt es nie ans Ziel.</p>
+    <p><strong>Neue Herausforderung:</strong> In Doppellektion 3 konnten Sie AND und OR mit einem einzelnen Neuron einstellen. Gelingt das bei der folgenden Regel auch? Notieren Sie zuerst Ihre Vermutung. Untersuchen Sie danach das XOR-Problem und anschliessend das mehrschichtige Netz.</p>
+    <p><strong>XOR</strong> (exklusives Oder) gibt 1, wenn <strong>genau eine</strong> der beiden Eingaben 1 ist. Beispiel: Ein Modus startet, wenn genau eine von zwei Tasten gedrückt ist. Wir prüfen, ob sich auch diese Regel mit Gewichten und Bias eines einzelnen Neurons darstellen lässt.</p>
     <!-- MD:START -->
 ### 1 · XOR kennenlernen: eine neue Regel
 <!-- MD:END -->
