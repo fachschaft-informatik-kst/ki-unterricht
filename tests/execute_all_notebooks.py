@@ -1,9 +1,10 @@
-"""Execute every code cell of all five teaching notebooks, including optional sections.
+"""Execute every code cell of all registered teaching notebooks, including optional sections.
 
 Runs locally with the CI Python packages, not as a replacement for browser/Pyodide tests.
 Browser-only file upload remains covered by check_ki_basis and Chromium tests.
 """
 import io
+import json
 import sys
 from contextlib import redirect_stdout, redirect_stderr
 from pathlib import Path
@@ -14,13 +15,9 @@ from IPython.core.interactiveshell import InteractiveShell
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "content"), str(ROOT / "content/ki_projekt")]
-PATHS = [
-    "perzeptron_und_neuronale_netze.ipynb",
-    "mehrschichtige_netze.ipynb",
-    "daten_training.ipynb",
-    "ki_projekt/ki_lernlabor.ipynb",
-    "ki_projekt/ki_tandemprojekt.ipynb",
-]
+# The registry is the single source of truth: newly separated exercises must
+# never escape the full notebook execution check.
+PATHS = [e["source"] for e in json.loads((ROOT / "experimente/registry.json").read_text())]
 
 def run_notebook(path):
     shell = InteractiveShell.instance()
