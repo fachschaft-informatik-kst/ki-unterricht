@@ -158,9 +158,14 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert(!lesson.cells.some(c=>c.outputs?.some(o=>o.data?.['application/vnd.jupyter.widget-view+json'])));
   await q.reload();await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
-  // Opening the teaching lab reloads the latest template (not a stale saved widget).
-  await q.frameLocator('#project-frame').locator('.widget-html table').first().waitFor({state:'visible'});
-  assert((await q.frameLocator('#project-frame').locator('body').innerText()).includes('Gatter: AND') || (await q.frameLocator('#project-frame').locator('body').innerText()).includes('AND: 4/4'));
+  // A saved neuron lab must NEVER be discarded on reopening. The restored
+  // widget outputs become portable, readable HTML (not live Python widgets);
+  // students can rerun individual cells when they need fresh controls.
+  assert.equal(await q.locator('#project-frame').getAttribute('data-restored'),'yes');
+  const restoredGate=q.frameLocator('#project-frame').locator('.jp-CodeCell').nth(2).locator('.jp-OutputArea');
+  await restoredGate.getByText('Gatter: XOR', {exact:false}).first().waitFor({state:'visible'});
+  assert((await restoredGate.innerText()).includes('Gatter: XOR'),'Saved XOR choice must remain visible after reload');
+  assert.equal(await restoredGate.locator('img[alt^="Neuron: Eingaben"]').count(),4,'Saved neuron diagrams must survive page reload');
   assert(JSON.stringify(lesson.cells).includes('Gatter: XOR'),'Previously exported choice must remain in the ZIP');
   await q.screenshot({path:path.join(tmp,'restored-widget.png'),fullPage:true});
   assert.deepEqual(errors,[]);console.log('PASS interactive gate selection and HTML truth table persisted locally and exported; no browser errors');
