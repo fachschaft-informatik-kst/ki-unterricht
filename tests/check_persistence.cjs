@@ -189,7 +189,13 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
   assert.equal(await q.locator('#project-frame').getAttribute('data-restored'),'yes');
   const savedXor=q.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1).locator('.jp-OutputArea');
+  // JupyterLab renders restored output asynchronously after the portal announces
+  // "ready", so wait for the actual HTML view (as in the DL3 restore test).
+  await savedXor.getByText('Gatter: OR',{exact:false}).first().waitFor({state:'visible',timeout:45000})
+    .catch(async error=>{console.error('RESTORED DL4 OUTPUT',await savedXor.innerText());
+      console.error('STORED DL4 STATE',JSON.stringify((await localArtifacts(q))?.others?.['mehrschichtige_netze.ipynb']?.cells?.[4]?.outputs||[]).slice(0,1800));throw error;});
   assert((await savedXor.innerText()).includes('Gatter: OR'),'DL4 saved Gatter choice must survive page reload');
+  await savedXor.locator('img[alt^="Neuron: Eingaben"]').first().waitFor({state:'visible'});
   assert.equal(await savedXor.locator('img[alt^="Neuron: Eingaben"]').count(),4,'Four DL4 cases survive refresh');
   await q.screenshot({path:path.join(tmp,'restored-widget.png'),fullPage:true});
   assert.deepEqual(errors,[]);console.log('PASS interactive gate selection and HTML truth table persisted locally and exported; no browser errors');
