@@ -178,3 +178,13 @@ input[type=text]{border:1px solid #aebeb5;background:#fff;border-radius:8px;padd
   .project-train-flow li+li::before{content:"↓";top:-24px;left:50%;transform:translateX(-50%)}
 }
 @media(max-width:500px){.project-train-overview{padding:16px}.project-train-overview h2{font-size:1.1rem}}
+
+/* One loader shared by all embedded notebooks, including restored projects. */
+.lab-frame-shell{position:relative;min-width:0}
+.lab-loading:not([hidden]){position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;background:#f8fbf9;text-align:center;color:var(--ink)}
+.lab-loading[hidden],.lab-loading button[hidden]{display:none!important}
+.lab-loading p{margin:0;max-width:36rem;font-size:15px;font-weight:600;line-height:1.55}
+.lab-loading-spinner{width:46px;height:46px;border:4px solid #d0e2d9;border-top-color:var(--accent);border-radius:50%;animation:ki-notebook-loading .85s linear infinite}
+.lab-loading[data-state="error"] .lab-loading-spinner{display:none}
+@keyframes ki-notebook-loading{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.lab-loading-spinner{animation:none;border-top-color:var(--accent);border-right-color:var(--accent)}}
