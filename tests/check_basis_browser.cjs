@@ -12,7 +12,7 @@ const assert=require('node:assert/strict');
     browser=await chromium.launch({headless:true});
     const page=await browser.newPage();
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
-    await page.goto('http://127.0.0.1:8770/');
+    await page.goto('http://127.0.0.1:8770/kurse.html');
     assert.equal(await page.locator('a.choice').count(),2,'Both Kurzgymi tracks must appear');
     await page.locator('a.choice[href="basis/"]').click();
     assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
