@@ -13,6 +13,8 @@
 
 **Transfer:** Zeigen Sie anhand der Eingaben `(1, 0)`, dass ein Neuron mit `w₁ = 1`, `w₂ = 1` und `b = −1.5` die Ausgabe 0 liefert. Welche Änderung des Bias ergibt Ausgabe 1?
 <!-- MD:END -->
-    <p>In der nächsten Doppellektion testen Sie eine neue Entscheidungsaufgabe und untersuchen, wann mehrere Neuronen nötig sind.</p>
+    <!-- MD:START -->
+In der nächsten Doppellektion testen Sie eine neue Entscheidungsaufgabe und untersuchen, wann mehrere Neuronen nötig sind.
+<!-- MD:END -->
   </div>
 </details>
