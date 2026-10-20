@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b10",
+      "view": "basis-gesellschaft",
+      "title": "KI und Gesellschaft: Wer trägt die Folgen?",
+      "rueckblick": "Bezug zur vorherigen KI-Doppellektion herstellen.",
+      "goal": "Benachteiligungen durch KI anhand eines Fallbeispiels erkennen, Betroffene benennen und eine begründete Massnahme vorschlagen.",
+      "question": "Sind Entscheidungen fair, nur weil ein Computer sie trifft?",
+      "motivation": "Eigenes Ausprobieren und sachlich begründete Entscheidungen stehen im Vordergrund.",
+      "product": "Ein begründetes Fallurteil mit überprüfbarer Massnahme und einem Zielkonflikt.",
+      "zeit": "90 Minuten, Tandemarbeit mit kurzen Einzelreflexionen.",
+      "order": 100,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Problem entdecken",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Einstieg: Ein automatisches Bewerbungssystem benachteiligt einzelne Gruppen. Was wäre fair?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen verbinden",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Eigene Erfahrungen mit algorithmischen Empfehlungen und den Folgen austauschen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Modell kennenlernen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Cathy-O’Neil-Video bzw. einen ausgewählten Ausschnitt mit Leitfragen zu Macht, Daten und Verantwortung einführen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Eigene Versuche",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 48,
+              "text": "Den Fall mit Wer–Warum–Was ändern untersuchen; begründete Massnahme und möglichen Nachteil diskutieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Erkenntnis sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Ein persönliches Urteil schriftlich sichern, Rückblick auf die ganze Sequenz."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
