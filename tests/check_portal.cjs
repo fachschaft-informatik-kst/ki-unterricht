@@ -263,6 +263,15 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     await multiCells.nth(2).locator('.jp-OutputArea').waitFor({state:'visible',timeout:60000});
     assert.equal(await multiCells.nth(1).locator('img[alt^="Neuron: Eingaben"]').count(),0,'XOR single-neuron experiment must be separate from network notebook');
 
+    // Optional handwriting recognition is now its own notebook. Training must
+    // only start from explicit manual buttons, not while opening the notebook.
+    await p.locator('#netze-5 [data-lab="ziffernerkennung.ipynb"]').click();
+    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ziffernerkennung.ipynb',null,{timeout:180000});
+    const digitFrame=p.frameLocator('#project-frame');
+    await digitFrame.getByRole('button',{name:/Modell berechnen/}).first().waitFor({state:'visible',timeout:60000});
+    await digitFrame.getByRole('button',{name:/Vorhersage berechnen/}).first().waitFor({state:'visible',timeout:60000});
+    assert.equal(await digitFrame.locator('.jp-OutputArea-error').count(),0,'Optional digit notebook must start with controls, not model errors');
+
     await p.locator('.nav a[href="#projekt"]').click();await p.locator('[data-lab="ki_lernlabor.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
     assert(/\[\d+\]/.test(await lessonCells.nth(2).locator('.jp-InputPrompt').innerText()));
