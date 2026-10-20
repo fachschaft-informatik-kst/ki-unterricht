@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b06",
+      "view": "basis-abschluss",
+      "title": "Testen und präsentieren",
+      "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
+      "goal": "Ergebnisse nachvollziehbar präsentieren und einen Fehler oder eine Grenze erklären.",
+      "question": "Wie gut funktioniert unser Modell auf neuen Beispielen?",
+      "motivation": "Eigene KI-Versuche machen Lernprozesse und Fehler verständlich.",
+      "product": "Dokumentierter Projektfortschritt mit Begründung.",
+      "zeit": "90 Minuten; betreutes Zweierprojekt mit eigenem Testprotokoll.",
+      "order": 60,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ergebnisse sortieren",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Einstieg anhand der Leitfrage: Wie gut funktioniert unser Modell auf neuen Beispielen?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Hypothesen austauschen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Den bisherigen Projektstand vergleichen und eine Vermutung formulieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Gute Testpraxis klären",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Anhand eines Beispiels den nächsten Untersuchungsschritt erklären."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Eigener Projektversuch",
+          "minutes": 45,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 43,
+              "text": "Vergleicht eure Testergebnisse vor und nach der Änderung. Nennt eine überraschende Vorhersage. Bereitet eine Zwei-Minuten-Präsentation vor: Fragestellung, Trainingsdaten, neuer Test, Vergleich und Grenze. Beide Personen übernehmen einen Teil."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Kurzsicherung",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Individuelle Erkenntnis über eine beobachtete Grenze notieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
