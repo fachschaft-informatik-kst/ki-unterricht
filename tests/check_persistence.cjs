@@ -182,8 +182,12 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
     const db=await new Promise(resolve=>{const r=indexedDB.open('kst-ki-kursportal',1);r.onsuccess=()=>resolve(r.result);});
     const req=db.transaction('artifacts').objectStore('artifacts').get('project');
     const value=await new Promise(resolve=>{req.onsuccess=()=>resolve(req.result);});db.close();
-    return JSON.stringify(value?.others?.['mehrschichtige_netze.ipynb']?.cells).includes('Gatter: OR');
+    const cell=value?.others?.['mehrschichtige_netze.ipynb']?.cells?.find(c=>c.id==='b6a815c4');
+    return JSON.stringify(cell?.outputs||[]).includes('Gatter: OR');
   },null,{timeout:60000});
+  const beforeReload=(await localArtifacts(q))?.others?.['mehrschichtige_netze.ipynb'];
+  const beforeCell=beforeReload?.cells?.find(c=>c.id==='b6a815c4');
+  assert(JSON.stringify(beforeCell?.outputs||[]).includes('Gatter: OR'),'XOR lab selection must be present in the specific saved cell before reload');
   await q.reload();await q.locator('.nav a[href="#netze"]').click();
   await q.locator('[data-lab="mehrschichtige_netze.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
