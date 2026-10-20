@@ -2,12 +2,20 @@
 type: chapter
 id: basis-training-reflexion
 nummer: 2
-titel: Prüfen und erklären
-kurz: Testergebnisse verständlich dokumentieren
+titel: Eigenständig verbessern
+kurz: Eine Veränderung – derselbe Test
 ---
+**Pflicht-Meilenstein 3 – Vergleich zweier Modellversionen:**
 
-Ändert nur einen Aspekt eurer Trainingsbilder (z. B. Hintergründe), trainiert neu und testet nochmals mit denselben zurückgehaltenen Fotos.
+Entscheidet selbst, welche <strong>eine</strong> Massnahme ihr ausprobieren möchtet. Zum Beispiel abwechslungsreichere Hintergründe, neue Blickwinkel oder ausgewogenere Trainingsbilder.
 
-<div class="basis-answer"><label for="basis-training-b">Unsere Ergebnisse und ihre Erklärung</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="4" placeholder="Wir haben getestet … / Daraus schliessen wir …"></textarea></div>
+Trainiert erneut und prüft das verbesserte Modell mit den **gleichen zurückgehaltenen Testbildern**. Vergleicht die beiden Ergebnisse, bevor ihr weitere Veränderungen vornehmt.
 
-<details><summary>Hilfestellung</summary><p>Trainingsbilder sind kein unabhängiger Test. Notiert beide Trefferzahlen und erklärt einen Fehler; hohe Zahlen allein sind kein Beleg für allgemeine Zuverlässigkeit.</p></details>
+| Versuch | Richtige / alle Testbilder | Beobachtung |
+|---|:---:|---|
+| Vor der Änderung | … / … | … |
+| Nach der Änderung | … / … | … |
+
+<div class="basis-answer"><label for="basis-training-b">Unsere Änderung, Vergleich und nächste Frage</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="6" placeholder="Wir änderten …, weil … / Vorher … / Nachher … / Daraus folgt …"></textarea></div>
+
+**Zwischenkontrolle zu zweit:** Könnt ihr erklären, was ihr verändert habt? Könnte die beobachtete Verbesserung auch andere Ursachen haben?
