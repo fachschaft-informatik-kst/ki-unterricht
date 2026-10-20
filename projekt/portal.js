@@ -129,6 +129,27 @@ $('attachments').addEventListener('change',async e=>{
 const names=Object.fromEntries(experiments.map(e=>[e.source.split('/').pop(),e.title]));
 const frame=$('project-frame'),lab=$('project-lab'),projectName=experiments.find(e=>e.project).source.split('/').pop();
 let activeName='',activeOwner='',switching=false,initializingFrame=false;
+const loader=$('project-lab-loading'),loaderText=$('project-lab-loading-text'),loaderRetry=$('project-lab-retry');
+let loaderTimeout;
+function notebookLoading(phase,message='') {
+ clearTimeout(loaderTimeout);
+ loader.dataset.state=phase;
+ loader.hidden=phase==='ready';
+ frame.inert=phase!=='ready';
+ loaderRetry.hidden=phase!=='error';
+ if(message)loaderText.textContent=message;
+ if(phase==='loading'){
+  const expected=activeName;
+  loaderTimeout=setTimeout(()=>{
+   if(activeName!==expected||frame.dataset.ready==='yes'||frame.dataset.ready==='error')return;
+   frame.dataset.ready='error';
+   const error='Der Notebook-Start dauert zu lange. Bitte erneut versuchen.';
+   $('project-lab-status').textContent=error;
+   notebookLoading('error',error);
+  },180000);
+ }
+}
+loaderRetry.addEventListener('click',()=>{if(activeName)void showNotebook(activeName,activeOwner,false);});
 // Never move an already loaded iframe. Saved documents are the source of truth;
 // every new frame has a fresh Python kernel, including after a page reload.
 document.querySelector('main > .footer').before(lab);$('lesson-lab').remove();
@@ -153,13 +174,14 @@ async function showNotebook(name,owner,scroll=true){
    // Written lesson answers stay in state.answers; the project journal is never reset.
    const saved=name===projectName?notebook:(name==='perzeptron_und_neuronale_netze.ipynb'?null:others[name]);
    $('project-lab-status').textContent=saved?'Gesichertes Notebook wird geöffnet …':'Python startet …';
+   notebookLoading('loading',saved?'Gesicherten Notebook-Stand laden …':'Notebook wird gestartet. Python und die interaktiven Übungen werden vorbereitet …');
    frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
   }
   activeOwner=owner;visibility();$('project-lab-title').textContent=names[name];
   lab.querySelector('details').hidden=name!==projectName;
   lab.querySelector('a[href="#journal"]').hidden=name!==projectName;
   if(scroll)lab.scrollIntoView({block:'start',behavior:'smooth'});
- }catch(error){$('project-lab-status').textContent=error.message;}
+ }catch(error){$('project-lab-status').textContent=error.message;notebookLoading('error',error.message+' Bitte erneut versuchen.');}
  finally{switching=false;}
 }
 $('start-project').addEventListener('click',()=>showNotebook(projectName,'journal'));
@@ -176,17 +198,19 @@ window.addEventListener('message',async event=>{
  if(data.path!=='portal/'+name)return;
  if(data.id&&pending.has(data.id)){const p=pending.get(data.id);clearTimeout(p.timer);pending.delete(data.id);data.type==='error'?p.reject(Error(data.error)):p.resolve(data);return;}
  if(data.type==='ready'&&!initializingFrame&&frame.dataset.ready!=='yes'){
-  if(data.error){frame.dataset.ready='error';$('project-lab-status').textContent=data.error;return;}
+  if(data.error){frame.dataset.ready='error';$('project-lab-status').textContent=data.error;notebookLoading('error',data.error);return;}
   if(!data.ready)return;
   initializingFrame=true;
   try{
    await initialization;
    const saved=name===projectName?notebook:(name==='perzeptron_und_neuronale_netze.ipynb'?null:others[name]);
+   notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Start abgeschlossen. Ergebnisse werden gesichert …');
    if(saved){await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
    else await captureSnapshot(name,await request(frame,'snapshot'));
    frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';
+   notebookLoading('ready');
    $('project-lab-status').textContent=saved?'Gesicherte Eingaben und Ergebnisse geladen. Vorbereitung und gewünschte Zellen erneut ausführen.':'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
-  }catch(error){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';}
+  }catch(error){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
   finally{initializingFrame=false;}
  }
  if(data.type==='dirty'){notebookRevision=Math.max(notebookRevision,data.revision||0);notebookDirty=true;status('Notebook wird gesichert …');}
@@ -259,7 +283,7 @@ $('restore-package').addEventListener('change',async e=>{
     if(!confirm('Aktuelle Notizen, Versuch und Dateien durch diesen Projektstand ersetzen? Ungesicherte Änderungen gehen verloren.'))return;
   // Close the old document first, even if the imported ZIP contains no notebook.
   // Its late events must never resurrect a previous tandem's work.
-  frame.src='about:blank';activeName='';activeOwner='';initializingFrame=false;frame.dataset.ready='no';notebookDirty=false;visibility();
+  frame.src='about:blank';activeName='';activeOwner='';initializingFrame=false;frame.dataset.ready='no';notebookDirty=false;notebookLoading('ready');visibility();
   const nextArtifact={notebook:nextNotebook,others:nextOthers,protocol:raw.protocol||null,protocolSignature:raw.protocolSignature||''};
   try{
    if(!db)throw Error('Browserspeicher nicht verfügbar');
