@@ -151,6 +151,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   const widgetExport=await download(q,'widget.zip');
   const lesson=JSON.parse(await widgetExport.files.get('notebooks/perzeptron_und_neuronale_netze.ipynb').text());
   assert(lesson.cells.some(c=>c.outputs?.some(o=>String(o.data?.['text/html']||'').includes('<table'))),'Live widget table missing');
+  assert(lesson.cells.some(c=>c.outputs?.some(o=>String(o.data?.['text/html']||'').includes('data:image/svg+xml;base64,'))),'Swimming-pool neuron diagram missing from the portable export');
   assert(JSON.stringify(lesson.cells).includes('Gatter: XOR'));
   assert(!lesson.cells.some(c=>c.outputs?.some(o=>o.data?.['application/vnd.jupyter.widget-view+json'])));
   await q.reload();await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
