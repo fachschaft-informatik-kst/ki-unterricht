@@ -18,6 +18,7 @@ def command(*args):
 def build_content():
     command(sys.executable, "scripts/build_portal.py")
     command(sys.executable, "scripts/build_course.py")
+    command(sys.executable, "scripts/build_basis.py")
 
 
 def build_full():
