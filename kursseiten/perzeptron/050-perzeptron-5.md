@@ -13,7 +13,7 @@
       <article>
         <b>2 · Logische Gatter einstellen</b>
         <!-- MD:START -->
-Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder **NAND**. Die vier Ausgaben werden sofort in der Tabelle aktualisiert.
+Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder **NAND**. **Alle vier Eingabefälle** werden als einzelne Neuronen dargestellt; die darunterliegende Tabelle fasst die Ergebnisse zusammen.
 <!-- MD:END -->
       </article>
       <article>
