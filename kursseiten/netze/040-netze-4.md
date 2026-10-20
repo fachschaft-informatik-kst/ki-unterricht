@@ -1,9 +1,11 @@
-<details class="kapitel" id="netze-4" data-kurz="Zwischenschicht erklären und den eigenen Datenplan skizzieren." open>
+<details class="kapitel" id="netze-4" data-kurz="Das XOR-Netz erklären und die Kernaussage sichern." open>
   <summary><span class="kapitel-nr">4</span>
-    <h2 class="kapitel-titel">Festhalten und Datenplan</h2>
+    <h2 class="kapitel-titel">Das XOR-Netz festhalten</h2>
   </summary>
   <div class="kapitel-body">
-    <label class="field answer"><span>Was leistet die Zwischenschicht? Warum müssen Gegenstände oder Personen zwischen den Datengruppen getrennt bleiben?</span><textarea data-answer="netze" maxlength="10000" placeholder="Ihre Beobachtung …" rows="3"></textarea></label>
-    <p class="task"><b>Aufgabe (Tandem):</b> Wählen Sie unter <a href="#projekt">Unser Projekt</a> ein Thema aus dem Ideenpool und genau zwei Klassen und lassen Sie die Idee mündlich bei der Lehrperson absegnen. <b>Hausaufgabe:</b> Skizzieren Sie die fünf Gruppen T1, T2, V1, P1 und P2 (2 Klassen × 5 Gruppen × 8 Fotos = 80), prüfen Sie die Skizze im Notebook «Daten fair aufteilen» (Abschnitt «Den eigenen Datenplan prüfen») und zeigen Sie sie zu Beginn der nächsten Doppellektion.</p>
+    <label class="field answer"><span>Warum kann ein einzelnes Neuron XOR nicht lösen und wie hilft die Zwischenschicht?</span><textarea data-answer="netze" maxlength="10000" placeholder="Ihre Beobachtung …" rows="3"></textarea></label>
+    <!-- MD:START -->
+**Sicherung (einzeln):** Erklären Sie die Ausgaben der beiden Zwischenneuronen OR und NAND und des Ausgangsneurons AND für die Eingabe `(1,1)`. Prüfen Sie Ihre Rechnung an der Netzgrafik. Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.
+<!-- MD:END -->
   </div>
 </details>
