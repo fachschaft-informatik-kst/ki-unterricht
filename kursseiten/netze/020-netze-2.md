@@ -49,10 +49,8 @@ Ein einzelnes Neuron kann bei XOR nur eine Entscheidungsgrenze bilden. **Mehrere
       </table>
     </div>
     <!-- MD:START -->
-Überprüfen Sie die Lösung im Notebook «Neuronale Netze».
+Die Tabelle zeigt die Lösung: Die zwei Zwischenneuronen berechnen OR und NAND, das Ausgabeneuron kombiniert ihre Werte mit AND. Im anschliessenden Experimentierkapitel können Sie den vollständigen Signalweg selbst testen.
 <!-- MD:END -->
-    <label class="field answer"><span>Aufgabe: Welche der vier Bedingungen widersprechen sich, und was bedeutet das für die Lernregel? Erklären Sie es mit Ihren eigenen Worten.</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die Bedingungen für (0, 1), (1, 0) und (1, 1) …" rows="4"></textarea></label>
-    <label class="field answer"><span>Protokoll: Wie viele der vier XOR-Fälle schafft Ihr einzelnes Neuron mit der besten Einstellung?</span><select data-answer="hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></label>
     <!-- MD:START -->
 ### Eine versteckte Schicht zwischen Ein- und Ausgabe
 <!-- MD:END -->
