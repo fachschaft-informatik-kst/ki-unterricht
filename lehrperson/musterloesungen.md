@@ -77,11 +77,13 @@ Es bildet die **gewichtete Summe plus Bias** und gibt ab Summe 0 die Ausgabe 1 a
 
 **Gewichte und Bias** werden anhand bekannter Trainingsziele schrittweise korrigiert; die Grundrechnung und die Schwelle ändern sich nicht. Eine höhere Lernrate kann schneller korrigieren, aber auch überschiessen. Beobachtete Gewichtsänderungen müssen aus dem eigenen Notebook stammen.
 
+## 4 · XOR und neuronale Netze (Doppellektion 4)
+
+### Warum XOR ein einzelnes Neuron überfordert
+
 **XOR:** Nur (0,1) und (1,0) ergeben 1, die beiden anderen Fälle 0. Eine einzige Gerade kann die Punkte nicht korrekt trennen. Deshalb scheitert ein einzelnes Perzeptron an XOR, egal welche Gewichte es lernt.
 
-## 4 · Neuronale Netze und Datentrennung (Doppellektion 4)
-
-### Ein Netz löst XOR
+### Ein mehrschichtiges neuronales Netz löst XOR
 
 Eine mögliche Zusammensetzung: Zwischenschicht mit **ODER** und **NAND**, danach **UND**:
 
@@ -98,6 +100,10 @@ Mit einer Zwischenschicht sind auch nichtlinear trennbare Muster möglich. Beim 
 
 Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte Schicht **16 Neuronen** und der Ausgang **10 Werte** für 0 bis 9. Der höchste Wert bestimmt die Vorhersage, garantiert aber keine Korrektheit. Eine echte Verwechslung muss anhand des gezeigten Bilds erläutert werden.
 
+## 5–8 · Tandemprojekt: beispielhafte Musterlösung
+
+### Datenaufteilung selbstständig erarbeiten (Doppellektion 5)
+
 ### Warum Gruppen trennen?
 
 - **Training:** Gewichte werden gelernt.
@@ -105,8 +111,6 @@ Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte
 - **Abschlusstest:** Die festgelegte Variante wird auf neuen Exemplaren überprüft.
 
 Fotos derselben Person oder desselben Gegenstands müssen in **derselben Gruppe** bleiben. Sonst entsteht ein Datenleck, das eine zu hohe Leistung vortäuschen kann.
-
-## 5–8 · Tandemprojekt: beispielhafte Musterlösung
 
 **Beispielthema:** Apfel/Birne. Alle nachfolgenden Prozentzahlen sind **rein fiktive Rechenbeispiele**, **keine tatsächlich gemessenen Modellwerte**. Für das echte Journal müssen die Resultate aus dem ausgeführten Notebook und eigene Bilder verwendet werden.
 
