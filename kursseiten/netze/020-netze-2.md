@@ -64,7 +64,6 @@ Die Tabelle zeigt die Lösung: Die zwei Zwischenneuronen berechnen OR und NAND, 
     <!-- MD:START -->
 Prüfen Sie für (1, 0): Was antworten OR und NAND? Was entsteht, wenn der Ausgang beide Antworten mit AND kombiniert?
 <!-- MD:END -->
-
     <!-- MD:START -->
 **Überprüfen Sie den Aufbau:** Was leisten die beiden Neuronen der versteckten Schicht? Welche Aufgabe übernimmt das Ausgabeneuron? Im nächsten Kapitel erproben Sie das Netz und beobachten sein Lernen.
 <!-- MD:END -->
