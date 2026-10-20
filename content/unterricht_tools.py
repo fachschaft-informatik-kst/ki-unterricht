@@ -415,13 +415,122 @@ def live_alltag():
     return sliders,result
 
 
+def _neuron_zwei_svg(x1, x2, w1, w2, bias, ziel):
+    """Zwei-Eingabe-Neuron im gleichen Stil wie das Schwimmbad-Beispiel.
+
+    Eigenständiges SVG für JupyterLite und den Offline-ZIP-Export.
+    Alle angezeigten Zahlen kommen aus genau derselben Rechnung wie die Tabelle.
+    """
+    x1, x2 = int(x1), int(x2)
+    w1, w2, bias = float(w1), float(w2), float(bias)
+    summe = x1*w1 + x2*w2 + bias
+    ausgabe = int(summe >= 0)
+    richtig = ausgabe == int(ziel)
+
+    def zahl(v):
+        return f'{v:+g}'.replace('-', '−')
+
+    def farbe(w):
+        return '#176c63' if w > 0 else '#be572b' if w < 0 else '#8d9aa0'
+
+    def dicke(w):
+        return min(5, 2 + .75*abs(w))
+
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 242" width="470" height="242"
+  font-family="Helvetica, Arial, sans-serif" font-size="14" role="img"
+  aria-label="Neuron für die Eingaben {x1} und {x2}, Ausgabe {ausgabe}, Ziel {int(ziel)}">
+  <title>Neuron mit Eingaben, Gewichten, Bias und Ausgabe</title>
+  <defs><marker id="neuron-pfeil" markerUnits="userSpaceOnUse" viewBox="0 0 10 10"
+    refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#263b43"/></marker></defs>
+  <rect width="470" height="242" fill="#ffffff"/>
+  <g font-size="13" font-weight="bold" fill="#263b43">
+    <text x="10" y="18">Eingaben</text><text x="128" y="18">Gewichte</text>
+    <text x="269" y="18">Neuron</text><text x="397" y="18">Ausgabe</text>
+  </g>
+  <g fill="#eaf1f8" stroke="#30628c" stroke-width="1.7">
+    <circle cx="46" cy="70" r="24"/><circle cx="46" cy="160" r="24"/>
+  </g>
+  <g font-size="20" font-weight="bold" text-anchor="middle" fill="#222">
+    <text x="46" y="77">{x1}</text><text x="46" y="167">{x2}</text>
+  </g>
+  <g font-size="13" text-anchor="middle" fill="#52656a">
+    <text x="46" y="111">x₁</text><text x="46" y="202">x₂</text>
+  </g>
+  <g fill="none" marker-end="url(#neuron-pfeil)">
+    <line x1="75" y1="70" x2="249" y2="104" stroke="{farbe(w1)}" stroke-width="{dicke(w1)}"/>
+    <line x1="75" y1="160" x2="249" y2="128" stroke="{farbe(w2)}" stroke-width="{dicke(w2)}"/>
+  </g>
+  <g font-size="17" font-weight="bold">
+    <text x="144" y="64" fill="{farbe(w1)}">{zahl(w1)}</text>
+    <text x="144" y="166" fill="{farbe(w2)}">{zahl(w2)}</text>
+  </g>
+  <circle cx="294" cy="116" r="44" fill="#cfe8dc" stroke="#263b43" stroke-width="2"/>
+  <text x="294" y="112" text-anchor="middle" font-size="20" font-weight="bold">Σ + b</text>
+  <text x="294" y="136" text-anchor="middle" font-size="14" fill="#263b43">= {zahl(summe)}</text>
+  <text x="294" y="186" text-anchor="middle" font-size="13" fill="#52656a">Bias {zahl(bias)}</text>
+  <line x1="340" y1="116" x2="374" y2="116" stroke="#263b43" stroke-width="2"
+    marker-end="url(#neuron-pfeil)"/>
+  <rect x="385" y="84" width="73" height="65" rx="11"
+    fill="{'#d7ebe3' if ausgabe else '#e3e6e8'}" stroke="#263b43" stroke-width="2"/>
+  <text x="421" y="111" text-anchor="middle" font-size="18" font-weight="bold"
+    fill="{'#176c63' if ausgabe else '#52656a'}">{'Ja' if ausgabe else 'Nein'}</text>
+  <text x="421" y="133" text-anchor="middle" font-size="15" fill="#52656a">y = {ausgabe}</text>
+  <text x="10" y="228" fill="#263b43" font-size="13">
+    {x1}·({zahl(w1)}) + {x2}·({zahl(w2)}) + ({zahl(bias)}) = {zahl(summe)}
+  </text>
+  <text x="458" y="228" text-anchor="end" font-size="13" font-weight="bold"
+    fill="{'#176c63' if richtig else '#be572b'}">Ziel {int(ziel)} {'✓' if richtig else '✗'}</text>
+</svg>'''
+
+
+def _neuron_zwei_karte(x1, x2, w1, w2, bias, ziel, titel):
+    """Barrierearm beschriftete, responsiv skalierende Neuron-Grafik."""
+    from html import escape
+    import base64
+    summe = int(x1)*w1 + int(x2)*w2 + bias
+    ausgabe = int(summe >= 0)
+    richtig = ausgabe == int(ziel)
+    bild = base64.b64encode(_neuron_zwei_svg(x1, x2, w1, w2, bias, ziel).encode('utf-8')).decode('ascii')
+    status = '✓ stimmt mit dem Ziel überein' if richtig else '✗ stimmt nicht mit dem Ziel überein'
+    return ('<section style="min-width:0;border:1.5px solid '
+            + ('#176c63' if richtig else '#be572b')
+            + ';border-radius:10px;padding:9px;background:#fff">'
+            f'<strong>{escape(titel)}</strong>'
+            f'<img src="data:image/svg+xml;base64,{bild}" '
+            f'alt="Neuron: Eingaben {int(x1)} und {int(x2)}, Ausgabe {ausgabe}, Ziel {int(ziel)}" '
+            'style="display:block;width:100%;max-width:470px;height:auto;margin:8px auto 2px"/>'
+            f'<div style="font-size:13px;line-height:1.5;color:'
+            + ('#176c63' if richtig else '#be572b')
+            + f'"><strong>{status}</strong> · Ausgabe {ausgabe}, Ziel {int(ziel)}</div></section>')
+
+
+def _neuron_vier_faelle(aufgabe, w1, w2, bias):
+    """Alle vier Wahrheitstabellen-Eingaben parallel als einzelne Neuronen."""
+    zielwerte = _ZIELE[aufgabe]
+    karten = []
+    korrekt = 0
+    for i, (x1, x2) in enumerate(_EINGABEN):
+        ausgabe = int(x1*w1 + x2*w2 + bias >= 0)
+        korrekt += ausgabe == zielwerte[i]
+        karten.append(_neuron_zwei_karte(
+            x1, x2, w1, w2, bias, zielwerte[i],
+            f'Fall {i+1} · x₁={x1}, x₂={x2}'))
+    return (f'<p><strong>Gatter: {aufgabe} · {korrekt}/4 richtig.</strong> '
+            'Jede Karte zeigt eine der vier Eingabekombinationen. '
+            'Die Gewichte und der Bias sind für alle vier Neuronen gleich.</p>'
+            '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));'
+            'gap:12px;max-width:1010px">' + ''.join(karten) + '</div>')
+
+
 def live_gatter(aufgabe='AND'):
-    """Gewichte verändern; jede Wahrheitstabellen-Zeile reagiert direkt."""
+    """Vier neuronale Einzelfälle und Wahrheitstabelle reagieren auf Gewichte und Bias."""
     weight=lambda title,value:widgets.FloatSlider(value=value,min=-3,max=3,step=.5,description=title,
        style={'description_width':'105px'},layout=widgets.Layout(width='min(100%, 420px)'),continuous_update=False)
     w1,w2,b=(weight('Gewicht x₁',1.),weight('Gewicht x₂',1.),weight('Bias',-1.5))
     gate=widgets.Dropdown(options=('AND','OR','NAND','NOR','XOR'),value=aufgabe,description='Gatter',
       style={'description_width':'105px'},layout=widgets.Layout(width='250px'))
+    diagramme=widgets.HTML(layout=widgets.Layout(width='100%'))
     result=widgets.HTML(layout=widgets.Layout(width='100%'))
     def update(_=None):
         target=list(_ZIELE[gate.value])
@@ -430,12 +539,13 @@ def live_gatter(aufgabe='AND'):
             s=x1*w1.value+x2*w2.value+b.value
             y=int(s>=0);correct+=y==target[i]
             rows.append((x1,x2,f'{s:+.1f}',y,target[i],'✓' if y==target[i] else '✗'))
+        diagramme.value=_neuron_vier_faelle(gate.value,w1.value,w2.value,b.value)
         result.value=(f'<p><strong>{gate.value}: {correct}/4 richtig.</strong> '
                       'Grün ✓ = Ausgabe stimmt mit Ziel überein. Ändern Sie einen Regler.</p>'
                      +_live_tabelle(('x₁','x₂','Summe','Neuron','Gatter-Ziel','Prüfung'),rows))
     for w in (w1,w2,b,gate):w.observe(update,names='value')
     update()
-    display(widgets.VBox([gate,widgets.VBox([w1,w2,b]),result],layout=widgets.Layout(width='100%')))
+    display(widgets.VBox([gate,widgets.VBox([w1,w2,b]),diagramme,result],layout=widgets.Layout(width='100%')))
     return gate,w1,w2,b,result
 
 
@@ -548,8 +658,29 @@ def lernen_klick(aufgabe='AND', lernrate=.2):
     runde = widgets.Button(description='Ganze Runde ▶▶')
     neu = widgets.Button(description='Zurücksetzen')
     ausgabe = widgets.Output()
+    beispiel_bilder = widgets.HTML(layout=widgets.Layout(width='100%'))
+
+    def zeige_neuron_vorher_nachher(info=None):
+        if info is None:
+            x1,x2=(int(v) for v in _EINGABEN[0])
+            beispiel_bilder.value=(
+                '<p><strong>Start:</strong> So entscheidet das Neuron über das erste Beispiel. '
+                'Klicken Sie auf «Nächstes Beispiel», um die Änderung zu sehen.</p>'
+                + _neuron_zwei_karte(x1,x2,l.w[0],l.w[1],l.b,int(l.y[0]),'Startzustand'))
+            return
+        x1,x2=(int(v) for v in info['x'])
+        ziel=int(info['ziel'])
+        beispiel_bilder.value=(
+            '<p><strong>Dieser Lernschritt:</strong> Links die Entscheidung vor dem Lernen, '
+            'rechts dieselbe Eingabe mit den angepassten Parametern. '
+            + ('Das Gewicht bzw. der Bias wurde korrigiert.' if info['fehler'] else 'Keine Korrektur nötig.')
+            + '</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px;max-width:1010px">'
+            + _neuron_zwei_karte(x1,x2,info['w_alt'][0],info['w_alt'][1],info['b_alt'],ziel,'Vorher · Entscheidung')
+            + _neuron_zwei_karte(x1,x2,info['w_neu'][0],info['w_neu'][1],info['b_neu'],ziel,'Nachher · neue Gewichte')
+            + '</div>')
 
     def zeigen(infos):
+        zeige_neuron_vorher_nachher(infos[-1] if infos else None)
         with ausgabe:
             clear_output(wait=True)
             if not infos:
@@ -575,12 +706,13 @@ def lernen_klick(aufgabe='AND', lernrate=.2):
         zeigen(infos)
     def neu_starten(_=None):
         l.aufgabe, l.rate = wahl.value, rate.value; l.y = np.array(_ZIELE[l.aufgabe]); l.zuruecksetzen()
+        zeige_neuron_vorher_nachher()
         with ausgabe:
             clear_output(wait=True)
             print(f'Neu gestartet: {l.aufgabe}, Gewichte {_zahl(l.w[0])} / {_zahl(l.w[1])}, Bias {_zahl(l.b)}, Lernrate {_zahl(l.rate)}. Klicken Sie auf «Nächstes Beispiel».')
     weiter.on_click(klick_weiter); runde.on_click(klick_runde); neu.on_click(neu_starten)
     wahl.observe(lambda c: neu_starten(), names='value'); rate.observe(lambda c: neu_starten(), names='value')
-    display(widgets.VBox([widgets.HBox([wahl, rate]), widgets.HBox([weiter, runde, neu]), ausgabe]))
+    display(widgets.VBox([widgets.HBox([wahl, rate]), widgets.HBox([weiter, runde, neu]), beispiel_bilder, ausgabe]))
     neu_starten()
     return l
 
