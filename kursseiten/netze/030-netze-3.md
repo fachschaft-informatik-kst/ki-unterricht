@@ -24,7 +24,7 @@
           <tbody>
             <tr>
               <th>1</th>
-              <td><select data-answer="xornetz_1" aria-label="1 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td>
+              <td><select data-answer="xornetz_1" aria-label="1 verstecktes Neuron: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td>
             </tr>
             <tr>
               <th>2</th>
@@ -41,7 +41,7 @@
         <table class="typen protokoll">
           <thead>
             <tr>
-              <th>Bei 2 Neuronen, Startwerte 0 bis 5</th>
+              <th>Bei 2 versteckten Neuronen: Startwerte 0 bis 5</th>
               <th>Ihre Beobachtung</th>
             </tr>
           </thead>
@@ -53,7 +53,7 @@
           </tbody>
         </table>
       </div>
-      <label class="field answer"><span>Wie viele versteckte Neuronen braucht ein Netz für XOR mindestens? Was verändert der Startwert?</span><textarea data-answer="xornetz_beob" maxlength="10000" placeholder="Mindestens … Der Startwert …" rows="3"></textarea></label>
+      <label class="field answer"><span>Wie viele versteckte Neuronen benötigt dieses Netzwerk mindestens, um XOR in Ihren Versuchen vollständig zu lösen? Was beobachten Sie bei verschiedenen Startwerten?</span><textarea data-answer="xornetz_beob" maxlength="10000" placeholder="Mindestens … Der Startwert …" rows="3"></textarea></label>
     </div>
   </div>
 </details>
