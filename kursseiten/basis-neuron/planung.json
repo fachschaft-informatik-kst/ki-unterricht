@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b03",
+      "view": "basis-neuron",
+      "title": "Wie entscheidet ein Neuron?",
+      "rueckblick": "Bezug zur vorherigen KI-Doppellektion herstellen.",
+      "goal": "Eingaben, Gewichte und Bias anhand eigener Vorhersagen erklären; eine 0/1-Ausgabe durch Veränderung der Gewichte beeinflussen.",
+      "question": "Wie kann dieselbe Eingabe je nach Gewichten zu einer anderen Entscheidung führen?",
+      "motivation": "Eigenes Ausprobieren und sachlich begründete Entscheidungen stehen im Vordergrund.",
+      "product": "Reglereinstellungen mit mindestens zwei vorhergesagten und überprüften Ausgaben.",
+      "zeit": "90 Minuten, Tandemarbeit mit kurzen Einzelreflexionen.",
+      "order": 30,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Problem entdecken",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Einstieg: Können zwei verschiedene Einstellungen bei denselben Sensorwerten etwas anderes entscheiden?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen verbinden",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "An die Eingabe/Verarbeitung/Ausgabe aus Doppellektion 2 erinnern. Eine Vermutung über ein Gewicht äussern."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Modell kennenlernen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Gewicht, Bias und 0/1-Ausgabe mit einer einfachen Vier-Zeilen-Tabelle demonstrieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Eigene Versuche",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 48,
+              "text": "Aufgaben «Vorhersagen, Regler testen, AND/OR entdecken» zu zweit bearbeiten und vorher/nachher-Werte festhalten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Erkenntnis sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Mit einem Satz den Einfluss von Gewicht und Bias erläutern."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
