@@ -23,7 +23,7 @@
       "teaching": true,
       "overview": {
         "title": "Was ist KI?",
-        "summary": "KI erkennen und begründet unterscheiden"
+        "summary": "Begriffe · Regeln · Fallbeispiele"
       }
     },
     {
@@ -32,82 +32,124 @@
       "navigation": {
         "order": 2,
         "label": "02",
-        "title": "Wie lernt eine KI?"
+        "title": "Wie lernt KI?"
       },
       "teaching": true,
       "overview": {
-        "title": "Wie lernt eine KI?",
-        "summary": "Klassifikation spielerisch entdecken"
+        "title": "Wie lernt KI?",
+        "summary": "Lernarten · Memory · Beobachtungen"
+      }
+    },
+    {
+      "id": "basis-neuron",
+      "class": "section",
+      "teaching": true,
+      "overview": {
+        "title": "Wie entscheidet ein Neuron?",
+        "summary": "Gewichte · Bias · Ein-/Ausgaben"
+      },
+      "navigation": {
+        "order": 3,
+        "label": "03",
+        "title": "Wie entscheidet ein Neuron?"
+      }
+    },
+    {
+      "id": "basis-netze",
+      "class": "section",
+      "teaching": true,
+      "overview": {
+        "title": "Warum braucht KI mehrere Neuronen?",
+        "summary": "Zwischenschicht · XOR ohne Formeln"
+      },
+      "navigation": {
+        "order": 4,
+        "label": "04",
+        "title": "Warum braucht KI mehrere Neuronen?"
       }
     },
     {
       "id": "basis-daten",
       "class": "section",
       "navigation": {
-        "order": 3,
-        "label": "03",
+        "order": 5,
+        "label": "05",
         "title": "Daten und faire Tests"
       },
       "teaching": true,
       "overview": {
         "title": "Daten und faire Tests",
-        "summary": "Trainieren ist nicht gleich Testen"
+        "summary": "Datenfallen · Testbeispiele"
       }
     },
     {
       "id": "basis-sprache",
       "class": "section",
       "navigation": {
-        "order": 4,
-        "label": "04",
+        "order": 6,
+        "label": "06",
         "title": "Sprachmodelle"
       },
       "teaching": true,
       "overview": {
-        "title": "Wie erzeugt KI Texte?",
-        "summary": "Wortvorhersage · Prompts · Fehler prüfen"
+        "title": "Sprachmodelle",
+        "summary": "Kontext · Tokens · Faktenprüfung"
       }
     },
     {
       "id": "basis-plan",
       "class": "section",
       "navigation": {
-        "order": 5,
-        "label": "05",
-        "title": "Unser Bildprojekt planen"
+        "order": 7,
+        "label": "07",
+        "title": "Bildprojekt planen"
       },
       "teaching": true,
       "overview": {
-        "title": "Unser Bildprojekt planen",
-        "summary": "Zwei Klassen und eine Forschungsfrage"
+        "title": "Bildprojekt planen",
+        "summary": "Eigene Fragestellung · fairer Testplan"
       }
     },
     {
       "id": "basis-training",
       "class": "section",
       "navigation": {
-        "order": 6,
-        "label": "06",
-        "title": "Trainieren und verbessern"
+        "order": 8,
+        "label": "08",
+        "title": "Selbstständig forschen"
       },
       "teaching": true,
       "overview": {
-        "title": "Trainieren und verbessern",
-        "summary": "Modell bauen, testen, Fehler entdecken"
+        "title": "Selbstständig forschen",
+        "summary": "Trainieren · testen · gezielt verbessern"
       }
     },
     {
       "id": "basis-abschluss",
       "class": "section",
       "navigation": {
-        "order": 7,
-        "label": "07",
-        "title": "Testen und präsentieren"
+        "order": 9,
+        "label": "09",
+        "title": "Präsentieren und erklären"
       },
       "teaching": true,
       "overview": {
-        "title": "Testen und präsentieren",
-        "summary": "Ergebnisse verständlich begründen"
+        "title": "Präsentieren und erklären",
+        "summary": "Fehler erklären · Modell kritisch beurteilen"
+      }
+    },
+    {
+      "id": "basis-gesellschaft",
+      "class": "section",
+      "teaching": true,
+      "overview": {
+        "title": "KI und Gesellschaft",
+        "summary": "Folgen · Fairness · begründetes Urteil"
+      },
+      "navigation": {
+        "order": 10,
+        "label": "10",
+        "title": "KI und Gesellschaft"
       }
     }
   ]

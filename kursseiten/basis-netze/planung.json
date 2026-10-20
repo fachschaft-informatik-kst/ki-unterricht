@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b04",
+      "view": "basis-netze",
+      "title": "Warum braucht KI mehrere Neuronen?",
+      "rueckblick": "Bezug zur vorherigen KI-Doppellektion herstellen.",
+      "goal": "den Aufbau Eingabe–Zwischenschicht–Ausgabe erklären und an XOR beobachten, wieso mehrere einfache Entscheidungen kombiniert werden.",
+      "question": "Wie können mehrere einfache Neuronen gemeinsam etwas entscheiden, das ein einzelnes nicht schafft?",
+      "motivation": "Eigenes Ausprobieren und sachlich begründete Entscheidungen stehen im Vordergrund.",
+      "product": "Beobachtung zu vier XOR-Fällen und eine eigene Erklärung der Zwischenschicht.",
+      "zeit": "90 Minuten, Tandemarbeit mit kurzen Einzelreflexionen.",
+      "order": 40,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Problem entdecken",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Vier XOR-Fälle mit Karten oder Fingerzeichen ausprobieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen verbinden",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Einzelne AND- und OR-Entscheidungen wiederholen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Modell kennenlernen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Ein Netz mit zwei verborgenen Entscheidungen OR/NAND und einer AND-Ausgabe als anschauliches Modell zeigen; keine Lernregel oder Matrixrechnung."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Eigene Versuche",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 48,
+              "text": "Interaktives Zwei-Schicht-Netz erkunden; alle vier Eingaben untersuchen und eigene Erklärung notieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Erkenntnis sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Warum mehrere Neuronen? Zwei Sätze zur Zwischenschicht schreiben."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

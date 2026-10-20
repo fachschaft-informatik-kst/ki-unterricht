@@ -1,27 +1,27 @@
 {
   "lessons": [
     {
-      "id": "b06",
+      "id": "b09",
       "view": "basis-abschluss",
       "title": "Testen und präsentieren",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Ergebnisse nachvollziehbar präsentieren und einen Fehler oder eine Grenze erklären.",
-      "question": "Wie gut funktioniert unser Modell auf neuen Beispielen?",
-      "motivation": "Eigene KI-Versuche machen Lernprozesse und Fehler verständlich.",
-      "product": "Dokumentierter Projektfortschritt mit Begründung.",
-      "zeit": "90 Minuten; betreutes Zweierprojekt mit eigenem Testprotokoll.",
-      "order": 60,
+      "goal": "Eine eigenständige Bilduntersuchung mit Belegen präsentieren, die Grenze des Modells erklären und die eigene Arbeit kritisch reflektieren.",
+      "question": "Welche Ergebnisse dürfen wir aus unserem Versuch ableiten?",
+      "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
+      "product": "Nachvollziehbare 3–4-Minuten-Präsentation und individuelle Reflexion.",
+      "zeit": "Selbstorganisiertes Lernen (SOL) in Tandems, mit verbindlichen Zwischenprodukten.",
+      "order": 90,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Ergebnisse sortieren",
+          "titel": "SOL 3: analysieren und präsentieren",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Einstieg anhand der Leitfrage: Wie gut funktioniert unser Modell auf neuen Beispielen?"
+              "text": "Welche Aussage darf ich aus meinen Testergebnissen ableiten? Einstieg über einen Beispiel-Fehlschluss."
             },
             {
               "art": "Ergebnis",
@@ -33,14 +33,14 @@
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Hypothesen austauschen",
+          "titel": "Projektstatus abstimmen",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Den bisherigen Projektstand vergleichen und eine Vermutung formulieren."
+              "text": "Ergebnis- und Präsentationsplan im Team aufteilen; beide Personen übernehmen einen Teil."
             },
             {
               "art": "Ergebnis",
@@ -52,14 +52,14 @@
         },
         {
           "phase": "Informieren",
-          "titel": "Gute Testpraxis klären",
+          "titel": "Kriterien nutzen",
           "minutes": 15,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Anhand eines Beispiels den nächsten Untersuchungsschritt erklären."
+              "text": "Bewertungskriterien kurz klären: nachvollziehbare Frage, Test, Vergleich, Fehleranalyse, Grenzen; nicht die höchste Trefferquote."
             },
             {
               "art": "Ergebnis",
@@ -71,14 +71,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Eigener Projektversuch",
+          "titel": "Selbstständig arbeiten",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Vergleicht eure Testergebnisse vor und nach der Änderung. Nennt eine überraschende Vorhersage. Bereitet eine Zwei-Minuten-Präsentation vor: Fragestellung, Trainingsdaten, neuer Test, Vergleich und Grenze. Beide Personen übernehmen einen Teil."
+              "text": "Selbstorganisiert Schlussfolgerung und Kurzpräsentation vorbereiten, mit einem anderen Team Rückfragen erproben und Ergebnisse vorstellen."
             },
             {
               "art": "Ergebnis",
@@ -90,14 +90,14 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Kurzsicherung",
+          "titel": "Erkenntnisse sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Individuelle Erkenntnis über eine beobachtete Grenze notieren."
+              "text": "Jede Person dokumentiert eine eigene Erkenntnis und eine Verbesserungsidee."
             },
             {
               "art": "Ergebnis",

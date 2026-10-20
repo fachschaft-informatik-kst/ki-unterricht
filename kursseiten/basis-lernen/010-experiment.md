@@ -1,18 +1,16 @@
----
-type: chapter
-id: basis-lernen-experiment
-nummer: 1
-titel: Entdecken und ausprobieren
-kurz: Mit einer Vermutung ins Experiment starten
----
-
-### Regler und Eingaben
-
-Verändert die Gewichte für Sonne, Freund:innen und den Bias. Beobachtet, wann das Neuron 0 oder 1 ausgibt.
-
-<div class="basis-answer"><label for="basis-lernen-a">Unsere Vermutung und Beobachtung</label><textarea id="basis-lernen-a" data-basis-answer="basis-lernen-a" rows="3" placeholder="Wir vermuten … / Wir sehen …"></textarea></div>
-<div class="basis-neuron" data-basis-neuron><h3>Neuron-Labor: Wann gehen wir schwimmen?</h3>
-<label>Gewicht Sonne <input type="range" data-weight="sun" min="-2" max="2" step="0.5" value="1"><output data-value="sun">1</output></label>
-<label>Gewicht Freund:innen <input type="range" data-weight="friend" min="-2" max="2" step="0.5" value="1"><output data-value="friend">1</output></label>
-<label>Bias <input type="range" data-weight="bias" min="-3" max="2" step="0.5" value="-1.5"><output data-value="bias">−1.5</output></label>
-<div class="table-scroll"><table><thead><tr><th>Sonne</th><th>Freund:innen</th><th>Summe</th><th>Ausgabe</th></tr></thead><tbody data-live-output></tbody></table></div></div>
+<details class="kapitel" id="lernarten-1" data-kurz="Eingabe, Erfahrungsschatz, Ausgabe: Menschen schreiben Regeln oder Daten liefern sie." open>
+  <summary><span class="kapitel-nr">1</span>
+    <h2 class="kapitel-titel">Woher kommt die Regel?</h2>
+  </summary>
+  <div class="kapitel-body">
+    <p>In <a href="#basis-ki">Doppellektion 1</a> haben Sie zwei Wege kennengelernt, wie ein System zu seinen Regeln kommt: <strong>Menschen schreiben die Regeln auf</strong> (Schachprogramm mit festen Bewertungsregeln) oder das System <strong>lernt die Regeln aus Daten</strong> (Spamfilter). In Doppellektion 1 haben Sie gesehen, wie schwer es ist, die Regeln für «Katze auf einem Foto» von Hand aufzuschreiben. Die Grafik zeigt das <strong>EVA-Prinzip</strong>, nach dem jedes Programm arbeitet: <strong>E</strong>ingabe, <strong>V</strong>erarbeitung, <strong>A</strong>usgabe. Bei einem lernenden System kommt etwas dazu: der <strong>Erfahrungsschatz</strong>, das gespeicherte Wissen des Systems. Die Verarbeitung nutzt diesen Erfahrungsschatz, und neue Erfahrungen können ihn verändern.</p>
+    <div id="lernarten-intro">
+      <figure class="concept-figure learning-system-figure">
+        <img src="https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png" alt="EVA-Prinzip eines lernenden Systems: Eine Eingabe wird mit dem Erfahrungsschatz verarbeitet; die Ausgabe kann den Erfahrungsschatz erweitern." loading="lazy"/>
+        <figcaption>Ein lernendes System verarbeitet Eingaben mit seinem Erfahrungsschatz. Neue Erfahrungen können ihn verändern.</figcaption>
+      </figure>
+      <p class="small muted">In der Praxis können feste Regeln und Lernen aus Daten auch kombiniert werden.</p>
+    </div>
+    <label class="field answer"><span>Aufgabe: Erklären Sie die Grafik in einfachen Worten, so dass jemand sie versteht, der noch nie von KI gehört hat. Nehmen Sie den Spamfilter als Beispiel: Was ist die Eingabe? Was steckt im Erfahrungsschatz? Was ist die Ausgabe? Wie kann eine neue Erfahrung den Erfahrungsschatz verändern? Und worin unterscheidet sich das von einem Schachprogramm mit festen Regeln?</span><textarea data-basis-answer="eva_erklaerung" maxlength="10000" placeholder="Meine Erklärung in drei bis fünf Sätzen …" rows="5"></textarea></label>
+  </div>
+</details>
