@@ -1,7 +1,7 @@
 {
   "lessons": [
     {
-      "id": "b05",
+      "id": "b08",
       "view": "basis-training",
       "title": "Trainieren und verbessern",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
@@ -10,7 +10,7 @@
       "motivation": "Eigene KI-Versuche machen Lernprozesse und Fehler verständlich.",
       "product": "Dokumentierter Projektfortschritt mit Begründung.",
       "zeit": "90 Minuten; betreutes Zweierprojekt mit eigenem Testprotokoll.",
-      "order": 50,
+      "order": 80,
       "phases": [
         {
           "phase": "Ankommen",
