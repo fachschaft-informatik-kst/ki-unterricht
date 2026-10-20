@@ -66,7 +66,6 @@ for(const lab of document.querySelectorAll('[data-basis-neuron]')){
  for(const slider of sliders)slider.addEventListener('input',render);
  render();
 }
-}
 // Lokale und bewusst vereinfachte Wortvorhersage (kein Chatbot und kein ML-Modell).
 // Feste Beispielwerte illustrieren den Einfluss des Kontexts auf Wortvorschläge.
 for(const lab of document.querySelectorAll('[data-basis-language]')){
