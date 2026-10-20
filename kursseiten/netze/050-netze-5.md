@@ -3,7 +3,7 @@
     <h2 class="kapitel-titel">Ein Netz erkennt Ziffern</h2>
   </summary>
   <div class="kapitel-body">
-    <p>**Freiwilliger Transfer:** Im vorherigen Kapitel ging es um zwei Eingaben. Ein echtes Problem ist grösser: Ein Netz soll <strong>handgeschriebene Ziffern</strong> lesen. Jedes Bild hat 8 × 8 Pixel, also <strong>64 Helligkeitswerte</strong>. Auch hier gibt es eine Eingabe-, eine versteckte und eine Ausgabeschicht:</p>
+    <p><strong>Freiwilliger Transfer:</strong> Beim XOR-Beispiel gab es zwei Eingaben. Jetzt betrachten Sie ein grösseres Problem: Ein Netz soll <strong>handgeschriebene Ziffern</strong> lesen. Jedes Bild hat 8 × 8 Pixel, also <strong>64 Helligkeitswerte</strong>. Auch hier gibt es eine Eingabe-, eine versteckte und eine Ausgabeschicht:</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
@@ -82,30 +82,30 @@
       </table>
     </div>
     <!-- MD:START -->
-Das Notebook «Ziffernerkennung» ist ein **eigenständiger freiwilliger Versuch**. Öffnen Sie es mit der Schaltfläche unten, berechnen Sie unterschiedliche Neuronenzahlen und tragen Sie die Ergebnisse hier ein.
+Das Notebook «Ziffernerkennung» ist eine **freiwillige Vertiefung**. Öffnen Sie es über die Schaltfläche unten, testen Sie verschiedene Zahlen versteckter Neuronen und tragen Sie die Trefferquoten oben ein. Falls keine Verwechslung vorkommt, wählen Sie «Keine Verwechslung beobachtet» und lassen das zweite Ziffernfeld leer.
 <!-- MD:END -->
     <button class="btn primary" data-lab="ziffernerkennung.ipynb">Ziffernerkennung starten ▶</button>
     <div class="table-scroll">
       <table class="typen protokoll">
         <thead>
           <tr>
-            <th>Frage</
+            <th>Frage</th>
             <th>Ihre Antwort</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th>Ab wie vielen versteckten Neuronen wird das Netz brauchbar?</th>
-            <td><select data-answer="zif_brauchbar" aria-label="Ab wie vielen Neuronen brauchbar?"><option value="">–</option><option value="2">ab 2</option><option value="4">ab 4</option><option value="8">ab 8</option><option value="16">ab 16</option><option value="32">ab 32</option></select></td>
+            <th>Ab welcher getesteten Anzahl versteckter Neuronen erreicht das Netz erstmals mindestens 80&nbsp;% richtige Vorhersagen?</th>
+            <td><select data-answer="zif_brauchbar" aria-label="Erstmals mindestens 80 Prozent richtige Vorhersagen"><option value="">–</option><option value="2">ab 2</option><option value="4">ab 4</option><option value="8">ab 8</option><option value="16">ab 16</option><option value="32">ab 32</option><option value="keine">Keine erreicht 80 %</option></select></td>
           </tr>
           <tr>
-            <th>Ein Netz mit 16 Neuronen verwechselt …</th>
-            <td><select data-answer="zif_verw_a" aria-label="Verwechselte Ziffer, tatsächlich"><option value="">–</option><option value="0">die Ziffer 0</option><option value="1">die Ziffer 1</option><option value="2">die Ziffer 2</option><option value="3">die Ziffer 3</option><option value="4">die Ziffer 4</option><option value="5">die Ziffer 5</option><option value="6">die Ziffer 6</option><option value="7">die Ziffer 7</option><option value="8">die Ziffer 8</option><option value="9">die Ziffer 9</option></select> mit <select data-answer="zif_verw_b" aria-label="Verwechselte Ziffer, vom Netz erkannt als"><option value="">–</option><option value="0">der Ziffer 0</option><option value="1">der Ziffer 1</option><option value="2">der Ziffer 2</option><option value="3">der Ziffer 3</option><option value="4">der Ziffer 4</option><option value="5">der Ziffer 5</option><option value="6">der Ziffer 6</option><option value="7">der Ziffer 7</option><option value="8">der Ziffer 8</option><option value="9">der Ziffer 9</option></select></td>
+            <th>Welche Verwechslung beobachten Sie bei 16 versteckten Neuronen?</th>
+            <td><select data-answer="zif_verw_a" aria-label="Tatsächliche Ziffer"><option value="">–</option><option value="keine">Keine Verwechslung beobachtet</option><option value="0">die Ziffer 0</option><option value="1">die Ziffer 1</option><option value="2">die Ziffer 2</option><option value="3">die Ziffer 3</option><option value="4">die Ziffer 4</option><option value="5">die Ziffer 5</option><option value="6">die Ziffer 6</option><option value="7">die Ziffer 7</option><option value="8">die Ziffer 8</option><option value="9">die Ziffer 9</option></select> <span class="select-connector">mit</span> <select data-answer="zif_verw_b" aria-label="Verwechselte Ziffer, vom Netz erkannt als"><option value="">–</option><option value="0">der Ziffer 0</option><option value="1">der Ziffer 1</option><option value="2">der Ziffer 2</option><option value="3">der Ziffer 3</option><option value="4">der Ziffer 4</option><option value="5">der Ziffer 5</option><option value="6">der Ziffer 6</option><option value="7">der Ziffer 7</option><option value="8">der Ziffer 8</option><option value="9">der Ziffer 9</option></select></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <label class="field answer"><span>Warum bringt mehr Neuronen ab einer gewissen Zahl kaum noch etwas? Warum können sich diese zwei Ziffern ähneln?</span><textarea data-answer="zif_beob" maxlength="10000" placeholder="Ab einer gewissen Zahl …" rows="3"></textarea></label>
+    <label class="field answer"><span>Warum verbessert eine grössere Zahl versteckter Neuronen die Trefferquote nicht unbedingt? Falls Sie eine Verwechslung gefunden haben: Warum könnten diese beiden Ziffern ähnlich aussehen?</span><textarea data-answer="zif_beob" maxlength="10000" placeholder="Ab einer gewissen Zahl …" rows="3"></textarea></label>
     <p><strong>Brücke zum Bildprojekt:</strong> Ihr Projekt funktioniert genauso. Ein Foto wird von einem bereits trainierten Netz (MobileNet) in 1280 Zahlen beschrieben. Ein kleines Netz mit 16 versteckten Neuronen lernt daraus die Zuordnung zu Ihren zwei Klassen und wird an Fotos geprüft, die es nie gesehen hat. Der vorgeschaltete Bildmerkmalsextraktor bleibt unverändert.</p>
     <label class="field answer"><span>Aufgabe: Beschreiben Sie in drei Sätzen den Weg eines Ziffernbildes durch das Netz (64 → 16 → 10). Was wurde beim Training gelernt, und warum prüft man an Bildern, die das Netz nie gesehen hat?</span><textarea data-answer="netze_ziffern" maxlength="10000" placeholder="Das Bild geht … Gelernt wurden … Geprüft wird an neuen Bildern, weil …" rows="4"></textarea></label>
   </div>
