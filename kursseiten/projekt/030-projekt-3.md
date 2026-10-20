@@ -9,6 +9,79 @@
     <p class="section-intro">Eigene Fotos · klare Klassen · unabhängige Exemplare.</p>
     <div class="card">
       <!-- MD:START -->
+### Selbstlernauftrag · Daten fair aufteilen (ca. 20–30 Minuten)
+
+**Das lernen Sie hier ohne Einführung der Lehrperson:** Sie können die drei Datenrollen unterscheiden, ein Datenleck erkennen und Ihre eigenen Fotos so auf fünf Gruppen verteilen, dass das Ergebnis aussagekräftig bleibt.
+
+**Arbeitsweg:** (1) Erklärungen lesen → (2) Fälle selbst lösen → (3) mit der Lösung vergleichen → (4) Notebook ausprobieren → (5) eigene fünf Gruppen planen. Arbeiten Sie zu zweit, halten Sie die erste Vermutung aber jeweils allein fest. Bei Fehlern: Erklärung nochmals lesen und die Lösung verbessern.
+<!-- MD:END -->
+      <div class="lesson-steps">
+        <article>
+          <b>1 · Training: Gewichte lernen</b>
+          <!-- MD:START -->
+Mit den **Trainingsbildern** passt das Netz seine Gewichte an. Beispiele aus T1 und T2 dürfen beim Lernen verwendet werden. Dass das Netz diese Bilder erkennt, sagt allein noch nicht, ob es neue Bilder erkennt.
+<!-- MD:END -->
+        </article>
+        <article>
+          <b>2 · Validierung: Variante auswählen</b>
+          <!-- MD:START -->
+**V1** enthält neue Exemplare, deren Bilder nicht im Training waren. Mit diesen Ergebnissen vergleichen Sie Modell A und B und entscheiden **vor** dem Abschlusstest, welche Variante Sie behalten.
+<!-- MD:END -->
+        </article>
+        <article>
+          <b>3 · Test: unabhängig prüfen</b>
+          <!-- MD:START -->
+**P1 und P2** bleiben bis nach der Auswahl unbenutzt. Sie zeigen, wie die **festgelegte** Variante mit bisher unbekannten Exemplaren zurechtkommt. Nach dem Test werden weder die Gewichte noch die Modellwahl nachträglich angepasst.
+<!-- MD:END -->
+        </article>
+      </div>
+      <!-- MD:START -->
+### Fallbeispiel · Zwei Äpfel
+
+Ein Tandem fotografiert einen roten Apfel **achtmal** mit verschiedenen Hintergründen. Vier Fotos legt es nach T1, vier nach P1. Der Test ergibt eine sehr hohe Trefferquote.
+
+**Überlegen Sie ohne Lösung:** Kann das ein überzeugender unabhängiger Test sein? Entscheidend ist nicht nur, ob zwei Bilddateien verschieden sind, sondern **ob derselbe reale Gegenstand** schon beim Training vorkam.
+<!-- MD:END -->
+      <details>
+        <summary>Lösung zum Apfelbeispiel prüfen</summary>
+        <div class="detail-body">
+          <!-- MD:START -->
+**Nein: Datenleck.** Das Netz könnte Merkmale genau dieses Apfels wiedererkennen. Andere Perspektive und anderer Hintergrund machen aus demselben Apfel **kein neues Exemplar**. Alle acht Bilder dieses Apfels gehören in dieselbe Gruppe. Für P1 benötigen Sie einen **anderen Apfel**, der im Training nicht vorkam.
+<!-- MD:END -->
+        </div>
+      </details>
+      <!-- MD:START -->
+### Selbstcheck · Drei Entscheidungen
+
+Ordnen Sie zunächst ohne Hilfe zu und begründen Sie kurz:
+
+1. Sie probieren zwei Netzwerkvarianten aus. Mit welchen Bildern entscheiden Sie, welche besser geeignet ist: T1, V1 oder P1?
+2. Nach der Modellwahl fotografieren Sie einen bisher unbekannten Gegenstand. In welchen Bereich gehört der unabhängige Abschlusstest?
+3. Eine Person wurde für T2 fotografiert und zeigt dieselbe Geste nochmals für P2. Darf das als unabhängiger Test verwendet werden?
+
+Vergleichen Sie Ihre Antworten erst, wenn Sie alle drei gelöst haben.
+<!-- MD:END -->
+      <details>
+        <summary>Musterlösung und Begründungen anzeigen</summary>
+        <div class="detail-body">
+          <!-- MD:START -->
+1. **V1 (Validierung):** Mit V1 vergleichen Sie A und B, ohne den Abschlusstest zu verbrauchen.
+2. **P1/P2 (Test):** Die ausgewählte Variante wird mit neuen, bislang ungesehenen Exemplaren geprüft.
+3. **Nein:** Dieselbe Person in T2 und P2 ist ein Datenleck. Für die Testgruppen braucht es andere Personen. Bei Gesten sind fünf unterschiedliche Personen nötig, die jeweils beide Gesten zeigen.
+
+**Merksatz:** Trainingsdaten helfen beim Lernen, Validierungsdaten bei der Auswahl und Testdaten prüfen am Schluss unabhängig.
+<!-- MD:END -->
+        </div>
+      </details>
+      <!-- MD:START -->
+### Interaktiver Versuch · Datenleck erkennen
+
+Öffnen Sie das Notebook, bearbeiten Sie zuerst **«Drei Aufgaben für Daten»**, danach **«Ein Datenleck»**. Lesen Sie jeweils die Frage, treffen Sie eine Vermutung und verändern Sie **eine Einstellung**. Vergleichen Sie Ihre Beobachtung mit dem Merksatz. Die dritte Vertiefung ist freiwillig.
+<!-- MD:END -->
+      <button class="btn primary" data-lab="daten_training.ipynb">Notebook «Daten fair aufteilen» starten ▶</button>
+    </div>
+    <div class="card">
+      <!-- MD:START -->
 ### Fünf Gruppen. 80 Fotos.
 <!-- MD:END -->
       <!-- MD:START -->
@@ -44,6 +117,25 @@ Pro Gruppe ein anderes Exemplar jeder Klasse, davon je acht Fotos. Bei Gesten: f
       <!-- MD:START -->
 Derselbe Gegenstand oder dieselbe Person bleibt immer in derselben Gruppe – auch bei anderem Hintergrund.
 <!-- MD:END -->
+    </div>
+    <div class="card">
+      <!-- MD:START -->
+### Transfer · Ihr eigener Datenplan
+
+Tragen Sie für **beide Klassen** je fünf voneinander unabhängige Exemplare ein: T1, T2, V1, P1 und P2. Planen Sie **acht Fotos pro Exemplar**. Wenn Sie die Exemplare noch nicht haben, beschreiben Sie eindeutig, welche Sie sammeln möchten. Bei Gesten brauchen Sie fünf unterschiedliche Personen; jede zeigt beide Gesten.
+
+Rechnen Sie nach: **2 Klassen × 5 Gruppen × 8 Fotos = 80 Bilder**. Insgesamt sind **32 Trainings-, 16 Validierungs- und 32 Testbilder** vorgesehen. Die beiden Klassen sollen unter vergleichbaren Aufnahmebedingungen fotografiert werden.
+
+**Abschlusskontrolle:**
+1. Steht kein realer Gegenstand oder keine Person in mehr als einer Gruppe?
+2. Sind V1, P1 und P2 unabhängig von T1 und T2?
+3. Wird V1 zur Entscheidung verwendet und P1/P2 erst für den Abschlusstest?
+4. Sind beide Klassen mit je 40 Fotos vertreten und die Quellen dokumentiert?
+5. Können Sie in einem Satz erklären, warum eine hohe Trefferquote auf bekannten Bildern kein unabhängiger Test ist?
+
+Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das Ergebnis in **Reflexion 2 des bestehenden Journals** fest – kein neues Formular und keine zusätzliche Abgabe. Sichern Sie Ihre Arbeit unter «Notizen &amp; Projekt» als ZIP. Bei offenen Fragen benutzen Sie zuerst die Musterlösung oben und die Notebook-Erklärungen.
+<!-- MD:END -->
+      <p><a href="#journal">Zur Reflexion im Journal →</a> · <a href="#sicherung">Stand als ZIP sichern →</a></p>
     </div>
     <details>
       <summary>Fotos aufnehmen &amp; Bildformat verstehen</summary>
