@@ -36,7 +36,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_programmierung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_einteilung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg .timeline li').count(),9);
-    for(const [id,n] of Object.entries({einstieg:6,lernarten:9,perzeptron:7,netze:4,sprache:7,gesellschaft:6,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
+    for(const [id,n] of Object.entries({einstieg:6,lernarten:9,perzeptron:7,netze:5,sprache:7,gesellschaft:6,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
     assert.equal(await p.locator('.nav-sub a').count(),6);
     assert.equal(await p.locator('.kapitel-uebersicht, .kapitel-karte').count(),0,'Duplicate chapter overview must be absent');
     await p.locator('#einstieg-3 > summary').click();
@@ -242,17 +242,36 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert((await learnCell.innerText()).includes('Nachher · neue Gewichte'));
     const prior=await lessonCells.nth(1).locator('.jp-InputPrompt').innerText();await lessonCells.nth(1).locator('.cm-content').click();await p.keyboard.press('Shift+Enter');
     await p.waitForFunction(prior=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[1].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text)&&text!==prior;},prior);
-    // DL4 introduces XOR as a new problem, before the multilayer solution.
+    // DL4 now starts with its own single-neuron XOR experiment after the theory.
     await p.locator('.nav a[href="#netze"]').click();
-    await p.locator('[data-lab="mehrschichtige_netze.ipynb"]').click();
-    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/mehrschichtige_netze.ipynb',null,{timeout:180000});
-    const networkCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
-    const xorCell=networkCells.nth(1);
+    assert.equal(await p.locator('#netze-1 [data-lab="xor_einzelne_neuronen.ipynb"]').count(),1);
+    assert.equal(await p.locator('#netze-3 [data-lab="mehrschichtige_netze.ipynb"]').count(),1);
+    assert.equal(await p.locator('#netze-5 [data-lab="ziffernerkennung.ipynb"]').count(),1);
+    await p.locator('#netze-1 [data-lab="xor_einzelne_neuronen.ipynb"]').click();
+    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/xor_einzelne_neuronen.ipynb',null,{timeout:180000});
+    const xorCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
+    const xorCell=xorCells.nth(1);
     await xorCell.locator(smallNeuron).first().waitFor({state:'visible'});
     assert.equal(await xorCell.locator(smallNeuron).count(),4,'DL4 starts with four XOR decisions');
     assert((await xorCell.innerText()).includes('Gatter: XOR'),'DL4 must expose the new XOR challenge');
     assert.equal(await xorCell.locator('.widget-dropdown option:text-is("XOR")').count(),1,'XOR should be selectable in DL4');
     assert((await xorCell.locator('.jp-OutputArea').innerText()).includes('Ziel'));
+    // Network experiment is another notebook, not the XOR single-neuron cell.
+    await p.locator('#netze-3 [data-lab="mehrschichtige_netze.ipynb"]').click();
+    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/mehrschichtige_netze.ipynb',null,{timeout:180000});
+    const multiCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
+    await multiCells.nth(2).locator('.jp-OutputArea').waitFor({state:'visible',timeout:60000});
+    assert.equal(await multiCells.nth(1).locator('img[alt^="Neuron: Eingaben"]').count(),0,'XOR single-neuron experiment must be separate from network notebook');
+
+    // Optional handwriting recognition is now its own notebook. Training must
+    // only start from explicit manual buttons, not while opening the notebook.
+    await p.locator('#netze-5 [data-lab="ziffernerkennung.ipynb"]').click();
+    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ziffernerkennung.ipynb',null,{timeout:180000});
+    const digitFrame=p.frameLocator('#project-frame');
+    await digitFrame.getByRole('button',{name:/Modell berechnen/}).first().waitFor({state:'visible',timeout:60000});
+    await digitFrame.getByRole('button',{name:/Vorhersage berechnen/}).first().waitFor({state:'visible',timeout:60000});
+    assert.equal(await digitFrame.locator('.jp-OutputArea-error').count(),0,'Optional digit notebook must start with controls, not model errors');
+
     await p.locator('.nav a[href="#projekt"]').click();await p.locator('[data-lab="ki_lernlabor.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
     assert(/\[\d+\]/.test(await lessonCells.nth(2).locator('.jp-InputPrompt').innerText()));

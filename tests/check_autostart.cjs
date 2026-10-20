@@ -39,14 +39,15 @@ async function simulate(name, fail = false, twice = false, modification = '') {
     return [...match[1].matchAll(/'([^']+)'/g)].map(m=>m[1]);
   };
   assert.deepEqual(packages('perzeptron_und_neuronale_netze.ipynb'), ['numpy','matplotlib']);
-  for (const name of ['mehrschichtige_netze.ipynb','daten_training.ipynb']) {
+  assert.deepEqual(packages('xor_einzelne_neuronen.ipynb'), ['numpy','matplotlib']);
+  for (const name of ['mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb']) {
     assert(!packages(name).includes('pillow'), name + ' must not preload unused Pillow');
     assert(packages(name).includes('scikit-learn'));
   }
   for (const name of ['ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb']) {
     assert(packages(name).includes('pillow'), 'Image-project experiments still need Pillow');
   }
-  for (const name of ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb']) {
+  for (const name of ['perzeptron_und_neuronale_netze.ipynb','xor_einzelne_neuronen.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb']) {
     // JupyterLite shows the Python repr of a returned widget object unless the
   // cell suppresses the final expression.  Interactive controls already call
   // display(...) internally, so their auto-run cells must end with ';'.

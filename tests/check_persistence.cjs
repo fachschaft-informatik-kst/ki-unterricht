@@ -1,4 +1,4 @@
-// End-to-end storage contract: local reload, all five notebooks, a fresh browser,
+// End-to-end storage contract: local reload, all seven notebooks, a fresh browser,
 // binary attachments, real widget outputs/uploads and replacement without leaks.
 const {chromium}=require('playwright-core');
 const {spawn}=require('node:child_process');
@@ -6,7 +6,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
 (async()=>{
  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'ki-persistence-'));
  const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../projekt/archive.js')).toString('base64'));
- const names=['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_lernlabor.ipynb'];
+ const names=['perzeptron_und_neuronale_netze.ipynb','xor_einzelne_neuronen.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_lernlabor.ipynb'];
  const png='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+j2ioAAAAASUVORK5CYII=';
  const doc=name=>({nbformat:4,nbformat_minor:5,metadata:{kernelspec:{display_name:'Python (Pyodide)',language:'python',name:'python'},custom:name},cells:[
   {id:'notes',cell_type:'markdown',metadata:{},source:'Eigene Notiz '+name+' ![Bild](attachment:bild.png)',attachments:{'bild.png':{'image/png':png}}},
@@ -60,7 +60,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   const first=await setup(),p=first.p;
   await importZip(p,fixture);await p.reload();
   const saved=await localArtifacts(p);
-  assert.deepEqual(saved.notebook,doc('Projekt'));assert.equal(Object.keys(saved.others).length,4);
+  assert.deepEqual(saved.notebook,doc('Projekt'));assert.equal(Object.keys(saved.others).length,6);
   await openProject(p);
   console.log('PASS local restore of imported project without automatic code execution');
   let cells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
@@ -104,7 +104,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   const exported=await download(p,'export.zip'),manifest=JSON.parse(await exported.files.get('kursstand.json').text());
   for(const [key,value] of Object.entries(formSnapshot.answers))assert.equal(manifest.answers[key],value,'ZIP answer: '+key);
   for(const [key,value] of Object.entries(formSnapshot.journal))assert.equal(manifest.journal[key],value,'ZIP journal: '+key);
-  assert.equal(manifest.notebooks.length,5);
+  assert.equal(manifest.notebooks.length,7);
   assert.equal(manifest.answers.ki_ordnung,state.answers.ki_ordnung);
   const uploaded=manifest.files.find(f=>f.name==='daten..json');assert(uploaded,'Notebook upload missing');
   assert.equal(await exported.files.get('daten/'+uploaded.id+'_daten_json').text(),'{"meine_daten":[1,2,3],"text":"Äpfel"}');
@@ -117,7 +117,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert((await cells.nth(1).innerText()).includes('zuletzt geändert'));
   assert((await cells.nth(0).innerText()).includes('daten..json'));
   assert.equal(await p.frameLocator('#project-frame').locator('.widget-upload').count(),0,'Restored output is readable, not a stale live widget');
-  console.log('PASS all five notebooks, latest edit, Markdown/image attachment, binary files and real notebook upload in ZIP and after reload');
+  console.log('PASS all seven notebooks, latest edit, Markdown/image attachment, binary files and real notebook upload in ZIP and after reload');
 
   const second=await setup();await importZip(second.p,exported.file);await openProject(second.p);
   assert((await second.p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1).innerText()).includes('zuletzt geändert'));
@@ -178,8 +178,8 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   // DL4 introduces XOR; its four neuron graphics and chosen state are saved
   // independently from the DL3 OR notebook and survive reopening.
   await q.locator('.nav a[href="#netze"]').click();
-  await q.locator('[data-lab="mehrschichtige_netze.ipynb"]').click();
-  await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/mehrschichtige_netze.ipynb',null,{timeout:240000});
+  await q.locator('[data-lab="xor_einzelne_neuronen.ipynb"]').click();
+  await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/xor_einzelne_neuronen.ipynb',null,{timeout:240000});
   const xorOutput=q.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1);
   await xorOutput.locator('img[alt^="Neuron: Eingaben"]').first().waitFor({state:'visible'});
   assert.equal(await xorOutput.locator('img[alt^="Neuron: Eingaben"]').count(),4,'DL4 must start with four XOR neurons');
@@ -191,7 +191,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
     const db=await new Promise(resolve=>{const r=indexedDB.open('kst-ki-kursportal',1);r.onsuccess=()=>resolve(r.result);});
     const req=db.transaction('artifacts').objectStore('artifacts').get('project');
     const value=await new Promise(resolve=>{req.onsuccess=()=>resolve(req.result);});db.close();
-    const nb=value?.others?.['mehrschichtige_netze.ipynb'];
+    const nb=value?.others?.['xor_einzelne_neuronen.ipynb'];
     return nb?.cells?.filter(c=>c.cell_type==='code')?.some(c=>
       JSON.stringify(c.outputs||[]).includes('Gatter: OR') &&
       JSON.stringify(c.outputs||[]).includes('Fall 4'));
@@ -199,17 +199,17 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   // A forced export must capture the latest visible widget state, not an old
   // autosave; check the exact portable notebook before reloading.
   const dl4Backup=await download(q,'dl4-xor.zip');
-  const dl4Saved=JSON.parse(await dl4Backup.files.get('notebooks/mehrschichtige_netze.ipynb').text());
+  const dl4Saved=JSON.parse(await dl4Backup.files.get('notebooks/xor_einzelne_neuronen.ipynb').text());
   const savedCell=dl4Saved.cells.find(c=>c.cell_type==='code' &&
       JSON.stringify(c.outputs||[]).includes('Fall 4'));
   assert(savedCell,'DL4 XOR neuron output missing from ZIP');
   assert(JSON.stringify(savedCell.outputs).includes('Gatter: OR'),'DL4 XOR selection must be portable and saved');
-  const beforeReload=(await localArtifacts(q))?.others?.['mehrschichtige_netze.ipynb'];
+  const beforeReload=(await localArtifacts(q))?.others?.['xor_einzelne_neuronen.ipynb'];
   assert(beforeReload?.cells?.some(c=>c.cell_type==='code' &&
     JSON.stringify(c.outputs||[]).includes('Gatter: OR') && JSON.stringify(c.outputs||[]).includes('Fall 4')),
     'Latest DL4 XOR neuron state missing before reload');
   await q.reload();await q.locator('.nav a[href="#netze"]').click();
-  await q.locator('[data-lab="mehrschichtige_netze.ipynb"]').click();
+  await q.locator('[data-lab="xor_einzelne_neuronen.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
   assert.equal(await q.locator('#project-frame').getAttribute('data-restored'),'yes');
   const savedXor=q.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1).locator('.jp-OutputArea');
@@ -217,7 +217,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   // "ready", so wait for the actual HTML view (as in the DL3 restore test).
   await savedXor.getByText('Gatter: OR',{exact:false}).first().waitFor({state:'visible',timeout:45000})
     .catch(async error=>{console.error('RESTORED DL4 OUTPUT',await savedXor.innerText());
-      console.error('STORED DL4 STATE',JSON.stringify((await localArtifacts(q))?.others?.['mehrschichtige_netze.ipynb']?.cells?.[4]?.outputs||[]).slice(0,1800));throw error;});
+      console.error('STORED DL4 STATE',JSON.stringify((await localArtifacts(q))?.others?.['xor_einzelne_neuronen.ipynb']?.cells?.[4]?.outputs||[]).slice(0,1800));throw error;});
   assert((await savedXor.innerText()).includes('Gatter: OR'),'DL4 saved Gatter choice must survive page reload');
   await savedXor.locator('img[alt^="Neuron: Eingaben"]').first().waitFor({state:'visible'});
   assert.equal(await savedXor.locator('img[alt^="Neuron: Eingaben"]').count(),4,'Four DL4 cases survive refresh');

@@ -24,7 +24,8 @@
 
 ### Direkt öffnen
 
-- [Mehrschichtige Netze und XOR-Grafik im Kurs](index.html#netze) · [Notebook](materialien/downloads/mehrschichtige_netze.ipynb)
+- [XOR-Problem mit einem Neuron](index.html#netze-1) · [XOR-Notebook](materialien/downloads/xor_einzelne_neuronen.ipynb)
+- [Mehrschichtiges Netz verstehen](index.html#netze-2) · [Netzwerk-Notebook](materialien/downloads/mehrschichtige_netze.ipynb)
 - [Themenpool und Datenplan](index.html#projekt-2) · [Projektgruppen](index.html#projekt-3)
-- **Wahlvertiefung:** [Ziffernerkennung](index.html#netze-2)
+- **Wahlvertiefung:** [Ziffernerkennung](index.html#netze-5) · [Ziffern-Notebook](materialien/downloads/ziffernerkennung.ipynb)
 

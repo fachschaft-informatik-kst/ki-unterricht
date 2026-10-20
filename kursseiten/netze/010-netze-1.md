@@ -1,6 +1,6 @@
-<details class="kapitel" id="netze-1" data-kurz="XOR neu entdecken, die Grenze eines Neurons prüfen und die Zwischenschicht als Lösung verstehen." open>
+<details class="kapitel" id="netze-1" data-kurz="XOR verstehen: Wahrheitstabelle, Trennlinie, widersprüchliche Bedingungen und eigenes Experiment." open>
   <summary><span class="kapitel-nr">1</span>
-    <h2 class="kapitel-titel">Warum brauchen wir mehrere Neuronen? Das XOR-Problem</h2>
+    <h2 class="kapitel-titel">Das XOR-Problem: Warum reicht ein Neuron nicht?</h2>
   </summary>
   <div class="kapitel-body">
     <p><strong>Neue Herausforderung:</strong> In Doppellektion 3 konnten Sie AND und OR mit einem einzelnen Neuron einstellen. Gelingt das bei der folgenden Regel auch? Prüfen Sie zuerst Ihre Vermutung, bevor Sie die Erklärung und das mehrschichtige Netz untersuchen.</p>
@@ -107,113 +107,13 @@ Jede Zeile ist eine Bedingung an w₁, w₂ und b (Ausgabe 1 heisst Summe ≥ 0,
       <li>Aus der ersten Bedingung wissen wir b &lt; 0, also ist −b positiv. Daraus folgt <strong>w₁ + w₂ + b &gt; 0</strong>.</li>
       <li>Die vierte Bedingung verlangt aber <strong>w₁ + w₂ + b &lt; 0</strong>. Das ist ein Widerspruch.</li>
     </ol>
-    <p>Es gibt also <strong>keine</strong> Gewichte und keinen Bias, die alle vier Zeilen erfüllen. Das liegt nicht an der Lernregel und auch nicht an der Lernrate: Keine Lernregel der Welt kann Zahlen finden, die es nicht gibt. **Probieren Sie es selbst aus:** Öffnen Sie das Notebook «Neuronale Netze» über die Schaltfläche unten. Im ersten Experiment verändern Sie Gewichte und Bias und sehen alle vier Eingabefälle als einzelne Neuronen.</p>
     <!-- MD:START -->
-### 4 · Der Ausweg: mehrere Neuronen
+**Fazit:** Für das einzelne Neuron gibt es **keine Kombination aus Gewichten und Bias**, die alle vier XOR-Fälle korrekt unterscheidet. Die vier Bedingungen widersprechen sich. Eine andere Lernrate oder mehr Trainingsrunden können diese grundsätzliche Grenze nicht aufheben.
+
+**Jetzt selbst überprüfen:** Öffnen Sie das eigenständige XOR-Notebook. Ändern Sie Gewichte und Bias und vergleichen Sie die **vier Neuron-Grafiken**. Halten Sie fest, wie viele Fälle Ihre beste Einstellung richtig löst. Danach geht es im nächsten Kapitel um einen Lösungsweg mit mehreren Neuronen.
 <!-- MD:END -->
-    <p>Ein einzelnes Neuron kann nur eine Gerade ziehen. Mit <strong>zwei Neuronen</strong> in einer Zwischenschicht, eines für OR und eines für NAND, und einem dritten, das beide mit AND verbindet, entsteht aus der einen Geraden ein Streifen. Dann gelingt XOR:</p>
-    <div class="table-scroll">
-      <table class="typen">
-        <thead>
-          <tr>
-            <th>Eingabe</th>
-            <th>OR</th>
-            <th>NAND</th>
-            <th>AND von beiden = XOR</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>(0, 0)</th>
-            <td>0</td>
-            <td>1</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <th>(0, 1)</th>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <th>(1, 0)</th>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <th>(1, 1)</th>
-            <td>1</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- MD:START -->
-Überprüfen Sie die Lösung im Notebook «Neuronale Netze».
-<!-- MD:END -->
-    <label class="field answer"><span>Aufgabe: Welche der vier Bedingungen widersprechen sich, und was bedeutet das für die Lernregel? Erklären Sie es mit Ihren eigenen Worten.</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die Bedingungen für (0, 1), (1, 0) und (1, 1) …" rows="4"></textarea></label>
+    <button class="btn primary" data-lab="xor_einzelne_neuronen.ipynb">XOR mit einem Neuron ausprobieren ▶</button>
     <label class="field answer"><span>Protokoll: Wie viele der vier XOR-Fälle schafft Ihr einzelnes Neuron mit der besten Einstellung?</span><select data-answer="hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></label>
-    <!-- MD:START -->
-### 5 · Das mehrschichtige Netz nachvollziehen
-<!-- MD:END -->
-    <figure class="concept-figure">
-      <img alt="Zwei Eingaben, zwei Zwischenneuronen und ein Ausgabeneuron mit Gewichten und Bias." loading="lazy" src="grafiken/merhschichtiges_netzwerk.svg"/>
-      <figcaption>Die versteckte Schicht bildet Zwischenergebnisse. Im Notebook verfolgen Sie damit die XOR-Entscheidung.</figcaption>
-    </figure>
-    <div class="process">
-      <span>Eingabe</span><b>→</b><span>Versteckte Schicht</span><b>→</b><span>Ausgabe</span>
-    </div>
-    <!-- MD:START -->
-Prüfen Sie für (1, 0): Was antworten OR und NAND? Was entsteht, wenn der Ausgang beide Antworten mit AND kombiniert?
-<!-- MD:END -->
-    <button class="btn primary" data-lab="mehrschichtige_netze.ipynb">Neuronale Netze starten ▶</button>
-    <div class="protokoll-block">
-      <!-- MD:START -->
-### Mein Protokoll: XOR-Netz lernen
-<!-- MD:END -->
-      <div class="table-scroll">
-        <table class="typen protokoll">
-          <thead>
-            <tr>
-              <th>Versteckte Neuronen (Startwert 1)</th>
-              <th>Zeilen richtig (von 4)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>1</th>
-              <td><select data-answer="xornetz_1" aria-label="1 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td>
-            </tr>
-            <tr>
-              <th>2</th>
-              <td><select data-answer="xornetz_2" aria-label="2 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td>
-            </tr>
-            <tr>
-              <th>4</th>
-              <td><select data-answer="xornetz_4" aria-label="4 versteckte Neuronen: Zeilen richtig"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-scroll">
-        <table class="typen protokoll">
-          <thead>
-            <tr>
-              <th>Bei 2 Neuronen, Startwerte 0 bis 5</th>
-              <th>Ihre Beobachtung</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Gelingt es immer?</th>
-              <td><select data-answer="xornetz_start" aria-label="Gelingt es bei jedem Startwert?"><option value="">–</option><option value="immer">Ja, immer</option><option value="manchmal">Nur bei manchen Startwerten</option><option value="nie">Nie</option></select></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <label class="field answer"><span>Wie viele versteckte Neuronen braucht ein Netz für XOR mindestens? Was verändert der Startwert?</span><textarea data-answer="xornetz_beob" maxlength="10000" placeholder="Mindestens … Der Startwert …" rows="3"></textarea></label>
-    </div>
+    <label class="field answer"><span>Welche Bedingungen lassen sich nicht gleichzeitig erfüllen? Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die Bedingungen für (0, 1), (1, 0) und (1, 1) …" rows="4"></textarea></label>
   </div>
 </details>

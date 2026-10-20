@@ -9,7 +9,7 @@
       <img alt="Ein einzelnes Neuron mit Eingaben, Gewichten, Bias und Ausgabe." loading="lazy" src="grafiken/perzeptron.svg"/>
       <figcaption>Rückblick: Ein einzelnes Neuron verrechnet Eingaben, Gewichte und Bias zu einer Ausgabe.</figcaption>
     </figure>
-    <p><strong>Heute können Sie:</strong> Die Grenze eines einzelnen Neurons an XOR erklären, eine Zwischenschicht verstehen und Training, Validierung und Test trennen.</p>
+    <p><strong>Heute können Sie:</strong> Die Grenze eines einzelnen Neurons an XOR erklären und die Funktion einer Zwischenschicht anhand des Netzwerkmodells verstehen.</p>
     <p class="lesson-question">Wie lösen mehrere einfache Entscheidungen das XOR-Problem?</p>
     <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Viele Neuronen erweitern die Möglichkeiten. Wie wir mit solchen Netzen später eigene Fotos untersuchen, erarbeiten Sie ab Doppellektion 5 selbstständig.</p>
   </div>

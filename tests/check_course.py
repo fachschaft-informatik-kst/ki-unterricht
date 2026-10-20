@@ -84,12 +84,24 @@ assert dl4.select_one('[data-answer="xor_warum"]'), 'Historic XOR explanation mu
 assert not dl3.select_one('[data-answer="hand_xor_max"],[data-answer="xor_warum"]')
 assert 'Vier mögliche' not in soup.select_one('#perzeptron-5').get_text()
 single=nbformat.read(root/'content/perzeptron_und_neuronale_netze.ipynb',4)
+xor=nbformat.read(root/'content/xor_einzelne_neuronen.ipynb',4)
 multi=nbformat.read(root/'content/mehrschichtige_netze.ipynb',4)
+digits=nbformat.read(root/'content/ziffernerkennung.ipynb',4)
 assert sum('ki-autostart' in c.metadata.get('tags',[]) for c in single.cells)==4
 assert not any('XOR' in c.source for c in single.cells), 'XOR experiment must not remain in DL3'
-first_code=[c.source for c in multi.cells if c.cell_type=='code']
-assert 'u.live_gatter(' in first_code[1] and "'XOR'" in first_code[1], 'DL4 must introduce XOR before the network solution'
-assert any('u.xor_netz()' in source for source in first_code[2:]), 'DL4 multi-neuron solution must remain'
+assert any("u.live_gatter('XOR')" in c.source for c in xor.cells if c.cell_type=='code')
+assert not any("u.live_gatter('XOR')" in c.source for c in multi.cells if c.cell_type=='code'), 'XOR single-neuron lab must be separate'
+assert any('u.xor_netz()' in c.source for c in multi.cells if c.cell_type=='code'), 'DL4 multilayer solution must remain'
+assert not any('u.ziffern_regler()' in c.source for c in multi.cells), 'Digits must move to own notebook'
+assert any('u.ziffern_regler()' in c.source for c in digits.cells)
+assert any('u.ziffer_regler()' in c.source for c in digits.cells)
+assert [c.id for c in xor.cells if c.cell_type=='code'] != [c.id for c in multi.cells if c.cell_type=='code']
+assert soup.select_one('#netze-1 [data-lab="xor_einzelne_neuronen.ipynb"]')
+assert soup.select_one('#netze-3 [data-lab="mehrschichtige_netze.ipynb"]')
+assert soup.select_one('#netze-5 [data-lab="ziffernerkennung.ipynb"]')
+assert not soup.select_one('#netze-1 [data-lab="mehrschichtige_netze.ipynb"]')
+assert 'XOR-Netz lernen' not in soup.select_one('#netze-3').get_text()
+assert 'Keine Lernregel der Welt' not in soup.select_one('#netze-1').get_text()
 
 # DL4 only covers XOR and neural networks; DL5 guides data-split self-study.
 dl4plan=next(l for l in lessons if l['id']=='04')
@@ -208,6 +220,6 @@ for sid,minimum in {'einstieg':5,'lernarten':4,'perzeptron':4,'netze':4,'sprache
     assert len(chapters)>=minimum and all(c.select_one('.kapitel-nr') and c.select_one('h2.kapitel-titel') for c in chapters) and all(c.get('data-kurz') for c in chapters), sid
 assert len(soup.select('[data-score]'))==10
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
-for name in ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
+for name in ['perzeptron_und_neuronale_netze.ipynb','xor_einzelne_neuronen.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
     assert soup.select_one('[data-lab="'+name+'"]'), name
-print(f'PASS {len(lessons)} numbered 90-minute plans, date-free lessons, anchors, graphics, five descriptive notebooks, portable attachments, manual project gates, rubric and final-lesson exam timing')
+print(f'PASS {len(lessons)} numbered 90-minute plans, date-free lessons, anchors, graphics, seven descriptive notebooks, portable attachments, manual project gates, rubric and final-lesson exam timing')
