@@ -101,4 +101,63 @@ for(const lab of document.querySelectorAll('[data-basis-language]')){
  context.addEventListener('change',redraw);
  redraw();
 }
+
+// Zwei-Schicht-XOR ist als logisches Modell vollständig lokal ausführbar.
+for(const lab of document.querySelectorAll('[data-basis-network]')){
+ const a=lab.querySelector('[data-network-input="a"]'),b=lab.querySelector('[data-network-input="b"]');
+ const rows=lab.querySelector('[data-network-rows]'),result=lab.querySelector('[data-network-result]');
+ const calc=(x,y)=>{const or=Number(Boolean(x||y)),nand=Number(!(x&&y));return [or,nand,Number(Boolean(or&&nand))]};
+ const render=()=>{
+  const x=Number(a.checked),y=Number(b.checked);
+  lab.querySelector('[data-network-value="a"]').textContent=x;
+  lab.querySelector('[data-network-value="b"]').textContent=y;
+  rows.replaceChildren();
+  for(const i of [0,1])for(const j of [0,1]){
+   const tr=document.createElement('tr'),vals=[i,j,...calc(i,j)];
+   if(i===x&&j===y)tr.dataset.selected='true';
+   for(const v of vals){const td=document.createElement('td');td.textContent=String(v);tr.append(td);}
+   rows.append(tr);
+  }
+  const [or,nand,xor]=calc(x,y);
+  result.textContent='OR = '+or+', NAND = '+nand+' → XOR = '+xor+' (genau eine Eingabe aktiv).';
+ };
+ a.addEventListener('change',render);b.addEventListener('change',render);render();
+}
+// Die drei Lernarten aus der 4. Klasse behalten ihr Memory als selbstständige Sicherung.
+const memory=document.querySelector('#memory-board');
+const cardsData=document.querySelector('#memory-pairs');
+if(memory&&cardsData){
+ const pairs=JSON.parse(cardsData.textContent),status=document.querySelector('#memory-status');
+ let first=null,matched=new Set();
+ const deck=pairs.flatMap(([left,right],i)=>[{value:left,pair:i},{value:right,pair:i}]);
+ const buttons=[];
+ const hideUnmatched=()=>{buttons.forEach((button,index)=>{if(!matched.has(index)&&index!==first){button.textContent='?';button.setAttribute('aria-label','Verdeckte Memory-Karte');}});};
+ const shuffle=()=>{
+  matched=new Set();first=null;buttons.length=0;memory.replaceChildren();
+  const cards=[...deck].sort(()=>Math.random()-.5);
+  const grid=document.createElement('div');grid.className='basis-memory-grid';
+  cards.forEach(({value,pair},index)=>{
+    const button=document.createElement('button');button.type='button';button.textContent='?';button.dataset.matched='false';
+    button.setAttribute('aria-label','Verdeckte Memory-Karte');
+    button.addEventListener('click',()=>{
+      if(matched.has(index)||button===buttons[first])return;
+      button.textContent=value;button.setAttribute('aria-label',value);
+      if(first===null){first=index;status.textContent='Welche passende Karte gehört dazu?';return;}
+      const start=first;first=null;
+      if(cards[start].pair===pair){
+        matched.add(start);matched.add(index);
+        buttons[start].dataset.matched='true';button.dataset.matched='true';
+        status.textContent=matched.size===cards.length?'Alle drei Lernarten richtig zugeordnet!':'Richtig – das Paar gehört zusammen.';
+      }else{
+        status.textContent='Noch kein Paar: überlegen und erneut versuchen.';
+        setTimeout(()=>{if(!matched.has(start)&&!matched.has(index)){buttons[start].textContent='?';button.textContent='?';}},800);
+      }
+    });
+    buttons.push(button);grid.append(button);
+  });
+  memory.append(grid);status.textContent='Drehen Sie zwei Karten um.';
+ };
+ document.querySelector('#memory-reset')?.addEventListener('click',shuffle);
+ shuffle();
+}
 })();
