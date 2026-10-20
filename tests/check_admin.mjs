@@ -92,8 +92,9 @@ assert.equal(wrongRepo.ready,false);
 assert.match(wrongRepo.reason,/Repository/);
 // Exercise the actual publisher against an isolated GitHub API contract.
 const manifest=JSON.parse(readFileSync(new URL("../kursseiten/manifest.json",import.meta.url)));
-const sources=new Map([["kursseiten/manifest.json",JSON.stringify(manifest)]]);
-for(const section of manifest.sections.filter(s=>s.teaching)){
+const basisManifest=JSON.parse(readFileSync(new URL("../kursseiten/basis-manifest.json",import.meta.url)));
+const sources=new Map([["kursseiten/manifest.json",JSON.stringify(manifest)],["kursseiten/basis-manifest.json",JSON.stringify(basisManifest)]]);
+for(const section of [...manifest.sections,...basisManifest.sections].filter(s=>s.teaching)){
   const prefix="kursseiten/"+section.id+"/";
   for(const name of readdirSync(new URL("../"+prefix,import.meta.url))){
     if(/\.(json|md)$/.test(name))
