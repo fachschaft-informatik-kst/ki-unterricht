@@ -2,12 +2,13 @@
 
 ### Direkt öffnen
 
+- [SOL-Lernpfad Datenaufteilung mit Selbstkontrolle](index.html#projekt-3) · [Notebook «Daten fair aufteilen»](materialien/downloads/daten_training.ipynb)
 - [Projektauftrag mit Trainingsvisualisierung](index.html#projekt)
 - [Journal und Fotostudio](index.html#journal) · [Fotoanleitung](materialien/downloads/ki_fotodaten.md)
 - [Projekt-Notebook](materialien/downloads/ki_tandemprojekt.ipynb) · [Lernlabor](materialien/downloads/ki_lernlabor.ipynb)
 - [Bewertungsraster](index.html#bewertung)
 
-**Informieren:** Die Grafik im kurzen gemeinsamen Input zeigen. Im anschliessenden **SOL-Block** planen die Tandems ihre Etappen und prüfen zwischendurch den eigenen Beitrag einzeln.
+**Selbstständig erarbeiten:** Ohne fachlichen Lehrpersonen-Input den Datenaufteilungs-Lernpfad lesen, Beispiele lösen, Notebook ausführen, mit Musterlösungen kontrollieren und fünf Gruppen planen. Die Lehrperson klärt nur den organisatorischen Rahmen.
 
 ## Doppellektion 06
 
