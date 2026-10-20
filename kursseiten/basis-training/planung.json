@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b05",
+      "view": "basis-training",
+      "title": "Trainieren und verbessern",
+      "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
+      "goal": "Einen Bildklassifikator trainieren, an neuen Bildern testen und gezielt verbessern.",
+      "question": "Was verändert die Zuverlässigkeit eines Bildklassifikators?",
+      "motivation": "Eigene KI-Versuche machen Lernprozesse und Fehler verständlich.",
+      "product": "Dokumentierter Projektfortschritt mit Begründung.",
+      "zeit": "90 Minuten; betreutes Zweierprojekt mit eigenem Testprotokoll.",
+      "order": 50,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Erster Durchlauf",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Einstieg anhand der Leitfrage: Was verändert die Zuverlässigkeit eines Bildklassifikators?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Hypothesen austauschen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Den bisherigen Projektstand vergleichen und eine Vermutung formulieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Gute Testpraxis klären",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Anhand eines Beispiels den nächsten Untersuchungsschritt erklären."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Eigener Projektversuch",
+          "minutes": 45,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 43,
+              "text": "Trainiert mit euren zwei Bildklassen in Teachable Machine. Haltet fünf oder mehr neue Bilder je Klasse für einen Test zurück. Zählt richtige und falsche Vorhersagen. Ändert nur einen Aspekt eurer Trainingsbilder (z. B. Hintergründe), trainiert neu und testet nochmals mit denselben zurückgehaltenen Fotos."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Kurzsicherung",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Individuelle Erkenntnis über eine beobachtete Grenze notieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
