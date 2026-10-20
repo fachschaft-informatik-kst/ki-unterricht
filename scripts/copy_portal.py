@@ -8,6 +8,7 @@ root=Path(__file__).resolve().parents[1]
 out=Path(sys.argv[1] if len(sys.argv)>1 else root/'dist')
 fix_lock(out)
 shutil.copytree(root/'_build/site/projekt',out/'projekt',dirs_exist_ok=True)
+shutil.copytree(root/'_build/site/basis',out/'basis',dirs_exist_ok=True)
 (out/'projekt/studio').mkdir(exist_ok=True)
 (out/'projekt/runtime').mkdir(exist_ok=True)
 shutil.copy(root/'content/ki_projekt/fotostudio.html',out/'projekt/studio/index.html')
