@@ -5,23 +5,23 @@
       "view": "basis-training",
       "title": "Trainieren und verbessern",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Einen Bildklassifikator trainieren, an neuen Bildern testen und gezielt verbessern.",
-      "question": "Was verändert die Zuverlässigkeit eines Bildklassifikators?",
-      "motivation": "Eigene KI-Versuche machen Lernprozesse und Fehler verständlich.",
-      "product": "Dokumentierter Projektfortschritt mit Begründung.",
-      "zeit": "90 Minuten; betreutes Zweierprojekt mit eigenem Testprotokoll.",
+      "goal": "Ein selbst gewähltes Bildmodell trainieren, unabhängig testen und eine gezielte Veränderung anhand derselben Testbeispiele beurteilen.",
+      "question": "Welche Trainingsänderung hilft wirklich – und woran erkennen wir das?",
+      "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
+      "product": "Dokumentierter Vorher/Nachher-Vergleich mit Zählwerten und analysiertem Fehler.",
+      "zeit": "Selbstorganisiertes Lernen (SOL) in Tandems, mit verbindlichen Zwischenprodukten.",
       "order": 80,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Erster Durchlauf",
+          "titel": "SOL 2: experimentieren und vergleichen",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Einstieg anhand der Leitfrage: Was verändert die Zuverlässigkeit eines Bildklassifikators?"
+              "text": "Forschungsfrage und geplante Bedingungen aus der letzten Lektion abrufen."
             },
             {
               "art": "Ergebnis",
@@ -33,14 +33,14 @@
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Hypothesen austauschen",
+          "titel": "Projektstatus abstimmen",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Den bisherigen Projektstand vergleichen und eine Vermutung formulieren."
+              "text": "Aufgaben und Ressourcen im Team selbst zuteilen; ein Testkriterium festlegen."
             },
             {
               "art": "Ergebnis",
@@ -52,14 +52,14 @@
         },
         {
           "phase": "Informieren",
-          "titel": "Gute Testpraxis klären",
+          "titel": "Kriterien nutzen",
           "minutes": 15,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Anhand eines Beispiels den nächsten Untersuchungsschritt erklären."
+              "text": "Fairen Vergleich und Datenschutzregeln an kurzen Beispielen wiederholen."
             },
             {
               "art": "Ergebnis",
@@ -71,14 +71,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Eigener Projektversuch",
+          "titel": "Selbstständig arbeiten",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Trainiert mit euren zwei Bildklassen in Teachable Machine. Haltet fünf oder mehr neue Bilder je Klasse für einen Test zurück. Zählt richtige und falsche Vorhersagen. Ändert nur einen Aspekt eurer Trainingsbilder (z. B. Hintergründe), trainiert neu und testet nochmals mit denselben zurückgehaltenen Fotos."
+              "text": "Selbstorganisierte Arbeitsphase: Daten sammeln, Modell trainieren, getrennt testen, genau eine Änderung durchführen; Ergebnisse in Kapitel 1–2 dokumentieren."
             },
             {
               "art": "Ergebnis",
@@ -90,14 +90,14 @@
         },
         {
           "phase": "Auswerten",
-          "titel": "Kurzsicherung",
+          "titel": "Erkenntnisse sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Individuelle Erkenntnis über eine beobachtete Grenze notieren."
+              "text": "Einen Fehler und die Aussagekraft des Vergleichs im Tandem erklären."
             },
             {
               "art": "Ergebnis",
