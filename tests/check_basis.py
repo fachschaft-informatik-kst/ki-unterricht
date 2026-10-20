@@ -21,15 +21,21 @@ assert set(l["view"] for l in basic["lessons"]).isdisjoint({l["view"] for l in a
 base = ROOT / "_build/site/basis"
 page = BeautifulSoup((base / "index.html").read_text(encoding="utf-8"), "html.parser")
 assert page.select_one("#basis-start h1").get_text() == "KI entdecken"
-assert len(page.select("main > section")) == 11
+assert len(page.select("main > section")) == 12
 assert len(page.select("details.lesson-plan")) == 10
 assert len(page.select("details.kapitel")) >= 30
 assert len(page.select("[data-basis-answer]")) >= 24
 assert len(page.select("a.course-card")) == 10
-assert len(page.select(".nav > a")) == 11
+assert len(page.select(".nav > a")) == 12
 assert page.select_one("#basis-neuron .basis-neuron table")
+assert page.select_one("#basis-neuron img[src='grafiken/neuron_biologisch.svg']")
+assert page.select_one("#basis-neuron #basis-neuron-vorbild")
 assert page.select_one("#basis-sprache [data-basis-language] select[data-language-context]")
-assert len(page.select("#basis-sprache details.kapitel")) == 2
+assert page.select_one("#basis-sprache #basis-sprache-papier")
+assert page.select_one("#basis-sprache #basis-sprache-papagei iframe[src*='inf-schule.de']")
+assert page.select_one("#basis-sprache #basis-sprache-netz img[src='grafiken/papagei_vs_netz.svg']")
+assert page.select_one("#basis-sprache #basis-sprache-soekia.basis-optional")
+assert len(page.select("#basis-sprache details.kapitel")) == 7
 assert [l["view"] for l in basic["lessons"]] == ["basis-ki","basis-lernen","basis-neuron","basis-netze","basis-daten","basis-sprache","basis-plan","basis-training","basis-abschluss","basis-gesellschaft"]
 assert page.select_one("#basis-netze [data-basis-network] table")
 assert page.select_one("#basis-ki #einstieg-1")
@@ -37,6 +43,11 @@ assert page.select_one("#basis-lernen #lernarten-4")
 assert page.select_one("#basis-lernen #memory-board")
 assert page.select_one("#basis-gesellschaft #gesellschaft-1")
 assert page.select_one(".crumb img.school-logo[src='grafiken/kst_logo.png']")
+assert page.select_one("#basis-lernziele .grid.two")
+assert len(page.select("#basis-lernziele .card")) == 7
+assert not page.select("a[href='../projekt/']"), "Course switching must use the landing page, not direct cross-links"
+assert page.select_one("a[href='../kurse.html']")
+assert "Kantonsschule Stadelhofen Informatik Künstliche Intelligenz" in page.select_one(".crumb").get_text(" ",strip=True)
 assert "Kantonsschule Stadelhofen" in page.get_text()
 assert all(len(page.select(f"#{v} details.kapitel")) >= 2 for v in ("basis-neuron","basis-netze","basis-plan","basis-gesellschaft"))
 assert "Sprachmodelle" in page.get_text()
@@ -58,5 +69,5 @@ assert "kst-ki-kursportal-v1" in (ROOT/"projekt/portal.js").read_text(encoding="
 assert "kursseiten/basis-manifest.json" in (ROOT/"projekt/admin/admin.js").read_text(encoding="utf-8")
 assert "basis-manifest.json" in (ROOT/"admin-worker/src/index.mjs").read_text(encoding="utf-8")
 assert "KI entdecken" in (base/"unterrichtsplan.html").read_text(encoding="utf-8")
-assert "Verstehen · Von der Nervenzelle" not in (base/"index.html").read_text(encoding="utf-8")
+assert "Papagei" in (base/"index.html").read_text(encoding="utf-8")
 print("PASS ten differentiated 90-minute basic lessons, shared styling, live activity, separate storage and one editor")

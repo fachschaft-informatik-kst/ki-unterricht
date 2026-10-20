@@ -2,6 +2,7 @@
 (()=>{
 const sections=[...document.querySelectorAll('main > section')];
 const links=[...document.querySelectorAll('.nav > a')];
+const submenus=new Map();
 const key='kst-ki-basis-v1';
 document.documentElement.classList.add('has-js');
 function show(){
@@ -13,6 +14,14 @@ function show(){
   for(const a of [...document.querySelectorAll('.nav a')])a.removeAttribute('aria-current');
   const current=links.find(a=>a.hash==='#'+active.id);
   if(current)current.setAttribute('aria-current','page');
+  // Only expand subchapters for the current double lesson. Keep all lesson
+  // links visible so students can always switch lessons.
+  for(const [lessonId,menu] of submenus){
+    const expanded=lessonId===active.id;
+    menu.hidden=!expanded;
+    const lessonLink=links.find(a=>a.hash==='#'+lessonId);
+    if(lessonLink)lessonLink.setAttribute('aria-expanded',String(expanded));
+  }
   if(chapter?.matches('details.kapitel'))chapter.open=true;
   if(id!==active.id&&chapter)requestAnimationFrame(()=>chapter.scrollIntoView({block:'start'}));
   else window.scrollTo({top:0,left:0});
@@ -22,13 +31,16 @@ for(const section of sections){
  if(!chapters.length)continue;
  const link=links.find(a=>a.hash==='#'+section.id);
  if(!link)continue;
- const submenu=document.createElement('div');submenu.className='nav-sub';
+ const submenu=document.createElement('div');submenu.className='nav-sub';submenu.hidden=true;
+ submenu.setAttribute('role','group');submenu.setAttribute('aria-label','Unterkapitel zu '+(link.textContent||section.id).trim());
  for(const chapter of chapters){
    const a=document.createElement('a');a.href='#'+chapter.id;
    a.textContent=chapter.querySelector('.kapitel-titel')?.textContent||chapter.id;
    submenu.append(a);
  }
  link.after(submenu);
+ submenus.set(section.id,submenu);
+ link.setAttribute('aria-expanded','false');
 }
 window.addEventListener('hashchange',show);
 show();
