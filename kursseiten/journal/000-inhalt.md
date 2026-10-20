@@ -63,7 +63,14 @@
     </ol>
   </details>
   <p class="small">Beim Notebookwechsel werden die Ergebnisse gesichert und Python startet neu. Zum Weiterrechnen Daten erneut laden; gespeicherte Ausgaben bleiben sichtbar.</p>
-  <iframe allow="fullscreen" id="project-frame" title="Projektversuch – Python-Notebook"></iframe>
+  <div class="lab-frame-shell">
+    <iframe allow="fullscreen" id="project-frame" title="Projektversuch – Python-Notebook"></iframe>
+    <div class="lab-loading" id="project-lab-loading" role="status" aria-live="polite" aria-atomic="true" hidden>
+      <span class="lab-loading-spinner" aria-hidden="true"></span>
+      <p id="project-lab-loading-text">Notebook wird vorbereitet …</p>
+      <button class="btn compact" id="project-lab-retry" type="button" hidden>Erneut versuchen</button>
+    </div>
+  </div>
 </div>
 <details hidden="" id="studio-panel" open="">
   <summary>Fotostudio · eigene Bilder vorbereiten</summary>

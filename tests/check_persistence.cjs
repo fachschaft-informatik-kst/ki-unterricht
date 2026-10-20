@@ -44,7 +44,9 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
  };
  const openProject=async p=>{
   await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
+  await p.locator('#project-lab-loading').waitFor({state:'visible'});
   await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000}).catch(async e=>{console.error(await p.locator('#project-lab-status').innerText());throw e;});
+  assert.equal(await p.locator('#project-lab-loading').isVisible(),false,'The loader must hide after every project restore');
  };
  const localArtifacts=p=>p.evaluate(()=>new Promise((resolve,reject)=>{const q=indexedDB.open('kst-ki-kursportal',1);q.onerror=()=>reject(q.error);q.onsuccess=()=>{const db=q.result,r=db.transaction('artifacts').objectStore('artifacts').get('project');r.onsuccess=()=>{resolve(r.result);db.close();};r.onerror=()=>reject(r.error);};}));
  const edit=async(p,cell,source)=>{

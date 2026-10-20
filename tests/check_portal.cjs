@@ -151,7 +151,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.setViewportSize({width:1440,height:1000});await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lesson="03"] summary').click();await p.screenshot({path:'/tmp/ki-lesson-plan.png',fullPage:true});
   if(process.env.CHECK_NOTEBOOK){
    await p.setViewportSize({width:1440,height:1000});await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
+   await p.locator('#project-lab-loading').waitFor({state:'visible'});
+   assert.equal(await p.locator('#project-lab-loading').getAttribute('data-state'),'loading','Spinner must cover notebook during initialization');
+   assert.equal(await p.locator('#project-frame').getAttribute('inert'),'','Notebook stays inert until initialization completes');
    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000}).catch(async e=>{console.log('FRAME',await p.frameLocator('#project-frame').locator('body').innerText());console.log('ERRORS',errors);throw e;});
+   assert.equal(await p.locator('#project-lab-loading').isVisible(),false,'Spinner must disappear after all startup cells');
+   assert.equal(await p.locator('#project-frame').getAttribute('inert'),null,'Ready notebook must accept input');
    const f=p.frameLocator('#project-frame');assert.equal(await f.locator('.jp-SideBar:visible').count(),0);assert.equal(await f.locator('#jp-top-panel:visible').count(),0);assert.equal(await f.locator('#jp-left-stack:visible').count(),0);
    assert(await f.locator('.jp-NotebookPanel').evaluate(e=>{const r=e.getBoundingClientRect();return r.left===0&&r.top===0&&Math.abs(r.width-innerWidth)<2;}));
    await p.screenshot({path:'/tmp/ki-portal-embedded.png',fullPage:true});
@@ -180,9 +185,11 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('iframe[src*="lab/index"]').count(),1);
     assert.equal(await p.frameLocator('#project-frame').locator('.jp-NotebookPanel').count(),1);
     assert((await p.frameLocator('#project-frame').locator('body').innerText()).includes('Gewichte'));
+     assert.equal(await p.locator('#project-lab-loading').isVisible(),false,'Spinner must also disappear after neuron startup');
      const liveTable=p.frameLocator('#project-frame').locator('.widget-html table').first();
      await liveTable.waitFor({state:'visible'});
      assert.equal(await liveTable.locator('tbody tr').count(),8,'Expected eight swim situations');
+     assert(!/FloatSlider\(value=|HTML\(value=/.test(await p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1).locator('.jp-OutputArea').innerText()),'Notebook must show widgets without echoing their Python repr');
      await liveTable.scrollIntoViewIfNeeded();
      await p.screenshot({path:'/tmp/ki-notebook-interactive-table.png',fullPage:true});
      const lessonCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
