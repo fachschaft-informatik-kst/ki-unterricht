@@ -17,6 +17,7 @@ for file in ['ki_foto_tools.py','ki_projekt_tools.py','foto_uebungsdaten.json']:
  shutil.copy(root/'content/ki_projekt'/file,out/'projekt/runtime'/file)
 shutil.copy(root/'content/unterricht_tools.py',out/'projekt/runtime/unterricht_tools.py')
 shutil.copy(root/'portal-index.html',out/'index.html')
+shutil.copy(root/'kurse.html',out/'kurse.html')
 
 build_previews(out)
 patch_bundle(out)
