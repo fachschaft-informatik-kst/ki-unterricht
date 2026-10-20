@@ -187,6 +187,20 @@ def main():
     assert erste['fehler']==1 and np.allclose(erste['w_neu'],[.4,.4]) and abs(erste['b_neu']+.3)<1e-9
     assert isinstance(u.lernen_klick(),u._Lerner);u.xor_problem();assert u.xor_versuch(1,1,-.5)<4
     z=u.xor_suche();assert z['AND'][4]>0 and z['XOR'][4]==0 and z['XOR'][3]>0
+    # Freiwillige Ziffernexperimente müssen beim Öffnen nur Regler anzeigen.
+    # Weder die Datensätze noch ein rechenintensives Modell dürfen vor dem
+    # bewussten Klick auf «Modell berechnen» geladen / trainiert werden.
+    def nicht_beim_start(*args, **kwargs):
+        raise AssertionError('Teures Ziffernmodell beim Notebookstart berechnet')
+    ziffern_alt, daten_alt, netz_alt = u.ziffern, u._ziffern_daten, u._netz_fuer
+    try:
+        u.ziffern = nicht_beim_start
+        u._ziffern_daten = nicht_beim_start
+        u._netz_fuer = nicht_beim_start
+        u.ziffern_regler()
+        u.ziffer_regler()
+    finally:
+        u.ziffern, u._ziffern_daten, u._netz_fuer = ziffern_alt, daten_alt, netz_alt
     for regler in (u.regler_alltag,u.neuron_rechner,u.lernen_regler,u.iris_regler,u.regler_xor):regler()
     u.frage('Test',['a','b'],0,'ok');rejects(lambda:u.frage('Test',['a'],2,'x'))
     foto.gruppen_zeigen(d);foto.bild_durchs_netz(exp,'B',0);foto.vorhersagen_zeigen(exp,'A')
