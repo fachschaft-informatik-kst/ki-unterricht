@@ -30,7 +30,16 @@ async function simulate(name, fail = false, twice = false, modification = '') {
 }
 (async () => {
   for (const name of ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb']) {
-    const result = await simulate(name, false, true);
+    // JupyterLite shows the Python repr of a returned widget object unless the
+  // cell suppresses the final expression.  Interactive controls already call
+  // display(...) internally, so their auto-run cells must end with ';'.
+  const uiCells = nb => nb.cells.filter(c => c.cell_type === 'code').map(c => c.source.join('').trim());
+  for (const statement of uiCells(JSON.parse(fs.readFileSync(path.join(root, 'content', name))))) {
+    if (/^u\.(?:live_alltag|live_gatter|lernen_klick|regler_logik)\(/.test(statement)) {
+      assert(statement.endsWith(';'), `Duplicate plain-text widget output in ${name}: ${statement}`);
+    }
+  }
+  const result = await simulate(name, false, true);
     // Optionale Zusatzzellen tragen den Tag nicht und bleiben manuell.
     assert.deepEqual(result.executed, result.nb.cells.flatMap((c,i) => c.cell_type === 'code' && (c.metadata.tags||[]).includes('ki-autostart') ? [i] : []));
     assert.equal(result.badges.length, 1);
