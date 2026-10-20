@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b01",
+      "view": "basis-ki",
+      "title": "Was ist KI?",
+      "rueckblick": "Aus dem Alltag bekannte Beispiele für automatisch entscheidende Systeme.",
+      "goal": "an Beispielen erklären, was KI kann, und KI von festen Regeln unterscheiden",
+      "question": "Ist jeder Computer, der automatisch entscheidet, eine KI?",
+      "motivation": "An echten Beispielen verstehen, beobachten und hinterfragen, wie KI-Systeme lernen.",
+      "product": "Eine überprüfbare Beobachtung oder ein dokumentierter Projektfortschritt.",
+      "zeit": "Kurzgymnasium 1. Klasse; explorativ, wenig Theorie, kurze Sicherung.",
+      "order": 10,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "KI im Alltag suchen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "An einem Beispiel die Leitfrage untersuchen und erste Vermutungen notieren: Ist jeder Computer, der automatisch entscheidet, eine KI?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Eine erste Vermutung zur Leitfrage."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vermutungen vergleichen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Vorwissen zu «Was ist KI?» sammeln, vergleichen und offene Fragen markieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Zwei gesammelte Vorannahmen."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Regeln und lernende Systeme unterscheiden",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Die zentralen Begriffe anhand eines kurzen Beispiels und der Kursseite erklären: an Beispielen erklären, was KI kann, und KI von festen Regeln unterscheiden."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein verständliches Beispiel mit Fachbegriffen."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Beispiele sortieren und begründen",
+          "minutes": 45,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 43,
+              "text": "Die Aufgaben des Kapitels experimentell beziehungsweise projektorientiert bearbeiten; Beobachtungen im eigenen Protokoll dokumentieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Dokumentierte Versuche oder ein konkretes Projekt-Zwischenergebnis."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Eigene Unterscheidung formulieren",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Eine Beobachtung anhand der Leitfrage erklären und einen eigenen Merksatz festhalten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Individuell formulierter Erkenntnissatz."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
