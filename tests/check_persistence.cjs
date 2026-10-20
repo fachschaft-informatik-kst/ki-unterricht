@@ -178,16 +178,28 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert((await xorOutput.innerText()).includes('Gatter: XOR'));
   const xorChooser=xorOutput.locator('.widget-dropdown select');
   await xorChooser.selectOption({label:'OR'});
+  await xorOutput.getByText('Gatter: OR',{exact:false}).first().waitFor({state:'visible',timeout:30000});
   await q.waitForFunction(async()=>{
     const db=await new Promise(resolve=>{const r=indexedDB.open('kst-ki-kursportal',1);r.onsuccess=()=>resolve(r.result);});
     const req=db.transaction('artifacts').objectStore('artifacts').get('project');
     const value=await new Promise(resolve=>{req.onsuccess=()=>resolve(req.result);});db.close();
-    const cell=value?.others?.['mehrschichtige_netze.ipynb']?.cells?.find(c=>c.id==='b6a815c4');
-    return JSON.stringify(cell?.outputs||[]).includes('Gatter: OR');
+    const nb=value?.others?.['mehrschichtige_netze.ipynb'];
+    return nb?.cells?.filter(c=>c.cell_type==='code')?.some(c=>
+      JSON.stringify(c.outputs||[]).includes('Gatter: OR') &&
+      JSON.stringify(c.outputs||[]).includes('Fall 4'));
   },null,{timeout:60000});
+  // A forced export must capture the latest visible widget state, not an old
+  // autosave; check the exact portable notebook before reloading.
+  const dl4Backup=await download(q,'dl4-xor.zip');
+  const dl4Saved=JSON.parse(await dl4Backup.files.get('notebooks/mehrschichtige_netze.ipynb').text());
+  const savedCell=dl4Saved.cells.find(c=>c.cell_type==='code' &&
+      JSON.stringify(c.outputs||[]).includes('Fall 4'));
+  assert(savedCell,'DL4 XOR neuron output missing from ZIP');
+  assert(JSON.stringify(savedCell.outputs).includes('Gatter: OR'),'DL4 XOR selection must be portable and saved');
   const beforeReload=(await localArtifacts(q))?.others?.['mehrschichtige_netze.ipynb'];
-  const beforeCell=beforeReload?.cells?.find(c=>c.id==='b6a815c4');
-  assert(JSON.stringify(beforeCell?.outputs||[]).includes('Gatter: OR'),'XOR lab selection must be present in the specific saved cell before reload');
+  assert(beforeReload?.cells?.some(c=>c.cell_type==='code' &&
+    JSON.stringify(c.outputs||[]).includes('Gatter: OR') && JSON.stringify(c.outputs||[]).includes('Fall 4')),
+    'Latest DL4 XOR neuron state missing before reload');
   await q.reload();await q.locator('.nav a[href="#netze"]').click();
   await q.locator('[data-lab="mehrschichtige_netze.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
