@@ -10,11 +10,11 @@
         "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
         "caption": "Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0)."
       },
-      "goal": "Gewicht und Bias erklären, einen Lernschritt nachvollziehen und die XOR-Grenze eines einzelnen Neurons begründen.",
-      "question": "Leitfrage: Kann eine einzige Rechenregel jede Ja/Nein-Aufgabe lösen?",
-      "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und wo seine Grenze liegt.",
-      "product": "Eine nachvollziehbare Rechnung, ein erklärter Lernschritt und eine begründete XOR-Grenze.",
-      "zeit": "Ein zusammenhängender Notebookblock statt Arbeitsblatt plus vollständigem Notebook. Handrechnung im selben Arbeitsblock. Vier Kernexperimente (Alltag, Gatter, Lernschritt, XOR), ohne zusätzliche Pflanzendaten- oder Ziffernübung.",
+      "goal": "Gewicht und Bias erklären, die Ausgabe eines einzelnen Neurons berechnen und einen Lernschritt anhand von Vorher-Nachher-Werten nachvollziehen.",
+      "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",
+      "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und was unverändert bleibt.",
+      "product": "Eine nachvollziehbare Schwimmbad- und AND-Rechnung, passende Parameter für AND/OR und ein erklärter Lernschritt.",
+      "zeit": "Drei zusammenhängende Notebook-Experimente (Schwimmbad, AND/OR-Gatter, Lernschritt) mit Neuron-Grafiken. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt. Die Zeit nutzen wir für die Erklärung der Gewichte und der Korrektur.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -43,12 +43,12 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Benennen Sie Eingabe und Label. Ergänzen Sie die Ausgaben für ODER und XOR und markieren Sie den Unterschied."
+              "text": "Benennen Sie zu einer AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe. Ergänzen Sie die Ausgaben für OR und erklären Sie, worin sich AND und OR unterscheiden."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Vier Eingaben mit Zielwerten für UND, ODER und XOR."
+              "text": "Vier Eingabefälle mit AND- und OR-Zielwerten."
             }
           ]
         },
@@ -78,61 +78,61 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Ein Neuron einstellen und lernen lassen",
+          "titel": "Mit einem Neuron entscheiden und lernen",
           "minutes": 55,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 45,
-              "text": "Arbeiten Sie im Notebook «Neuron-Labor»: Verändern Sie zuerst die Gewichte des Schwimmbad-Neurons und lesen Sie die sofort aktualisierte Ein-/Ausgabetabelle. Stellen Sie AND und ein weiteres Gatter mit Gewichten und Bias ein. Verfolgen Sie dann beim Lernen die Korrektur des Beispiels (1,1) mit Startwerten 0.2/0.2, Bias −0.5 und Lernrate 0.2. Untersuchen Sie zum Schluss XOR über die vier Zielwerte. Dokumentieren Sie eine zentrale Beobachtung, eine Korrektur und die XOR-Erklärung."
+              "text": "Arbeiten Sie im Notebook «Neuron-Labor» mit drei Experimenten: Verändern Sie die Gewichte des Schwimmbad-Neurons und lesen Sie Grafik und Ein-/Ausgabetabelle. Stellen Sie AND und OR mit Gewichten und Bias ein. Verfolgen Sie dann beim Lernen die Korrektur des Beispiels (1,1) mit Startwerten 0.2/0.2, Bias −0.5 und Lernrate 0.2. Halten Sie eine passende Einstellung und einen Vorher-Nachher-Vergleich fest."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 10,
-              "text": "Zeichnen Sie allein die vier XOR-Punkte und notieren Sie, welche Grenze ein einzelnes Neuron Ihrer Vermutung nach lernen kann."
+              "text": "Rechnen Sie allein für ein ausgewähltes AND- oder OR-Beispiel die gewichtete Summe samt Bias aus. Erklären Sie, welche Änderung der Parameter die Ausgabe umkehren würde."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Handrechnung, beobachteter Lernschritt und begründete Grenze."
+              "text": "Eine eigene Handrechnung, nachvollziehbare Regler-Einstellungen und ein erklärter Lernschritt."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Lernen und XOR-Grenze sichern",
+          "titel": "Gewichte, Bias und Lernen sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 2,
-              "text": "Erklären Sie Gewicht, Bias und eine Korrektur bei falscher Ausgabe. Begründen Sie an den XOR-Punkten, warum eine einzige gerade Grenze nicht genügt."
+              "text": "Erklären Sie anhand einer selbst gewählten Neuronenrechnung die Bedeutung von Gewicht und Bias. Zeigen Sie eine Korrektur bei falscher Ausgabe."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Vergleichen Sie zwei Erklärungen der XOR-Grenze und überprüfen Sie sie an der Grafik."
+              "text": "Vergleichen Sie zwei Vorher-Nachher-Erklärungen aus dem Lernversuch und prüfen Sie, ob die korrigierten Werte zur Rechnung passen."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Hält fest: Die XOR-Grenze liegt an der Struktur eines einzelnen Neurons, nicht an zu wenig Training."
+              "text": "Hält fest: Gelernt werden die Gewichte und der Bias, nicht die Eingaben, Zielwerte oder die Entscheidungsregel. In Doppellektion 4 prüfen wir eine neue Entscheidungsaufgabe."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 2,
-              "text": "Sicherung: Schreiben Sie einzeln einen Merksatz dazu, wie ein Neuron entscheidet und lernt, und einen Satz dazu, weshalb ein einzelnes Neuron XOR nicht lösen kann."
+              "text": "Sicherung: Formulieren Sie einzeln einen Merksatz dazu, wie ein Neuron entscheidet, und einen weiteren dazu, wie es beim Lernen seine Parameter verändert."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein eigener Merksatz zu Gewicht, Bias, Lernen und XOR-Grenze."
+              "text": "Zwei eigene Merksätze zu Rechnung, Gewicht, Bias und Lernschritt."
             }
           ]
         }
