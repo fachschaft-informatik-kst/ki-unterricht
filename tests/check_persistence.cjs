@@ -153,6 +153,8 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert(lesson.cells.some(c=>c.outputs?.some(o=>String(o.data?.['text/html']||'').includes('<table'))),'Live widget table missing');
   assert(lesson.cells.some(c=>c.outputs?.some(o=>String(o.data?.['text/html']||'').includes('data:image/svg+xml;base64,'))),'Swimming-pool neuron diagram missing from the portable export');
   assert(JSON.stringify(lesson.cells).includes('Gatter: XOR'));
+  assert(JSON.stringify(lesson.cells).includes('Fall 4'), 'All four neuron cases must be saved with the widgets');
+  assert(JSON.stringify(lesson.cells).includes('Neuron: Eingaben'), 'Export must include the individual neuron drawings');
   assert(!lesson.cells.some(c=>c.outputs?.some(o=>o.data?.['application/vnd.jupyter.widget-view+json'])));
   await q.reload();await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
