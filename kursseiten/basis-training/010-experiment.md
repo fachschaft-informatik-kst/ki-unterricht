@@ -2,14 +2,20 @@
 type: chapter
 id: basis-training-experiment
 nummer: 1
-titel: Forschen und ausprobieren
-kurz: Unser Bildprojekt Schritt für Schritt
+titel: Trainieren und echte Tests durchführen
+kurz: Ohne Schritt-für-Schritt-Rezept selbst arbeiten
 ---
+**Selbstorganisierte Arbeitsphase:** Ihr kennt eure Forschungsfrage und habt einen Testplan. Entscheidet selbst, in welcher Reihenfolge ihr eure Bilder aufnehmt, ordnet und trainiert.
 
-### Erster Durchlauf
+1. Erstellt euer Modell mit zwei Klassen, z. B. in [Teachable Machine](https://teachablemachine.withgoogle.com/train/image). Nur ein **schulisch freigegebenes Werkzeug** verwenden; keine personenbezogenen Daten hochladen.
+2. Testet es ausschliesslich mit Bildern, die **nicht beim Training verwendet** wurden.
+3. Notiert für jede Klasse die Anzahl **richtiger / getesteter** Vorhersagen. Haltet **mindestens einen Fehler** fest.
+4. Überprüft: Beantwortet der erste Versuch eure Forschungsfrage bereits? Falls nicht, was fehlt noch?
 
-Trainiert mit euren zwei Bildklassen in Teachable Machine. Haltet fünf oder mehr neue Bilder je Klasse für einen Test zurück. Zählt richtige und falsche Vorhersagen.
+| Testklasse | Richtig | Insgesamt |
+|---|:---:|:---:|
+| Klasse A | … | … |
+| Klasse B | … | … |
 
-<div class="basis-answer"><label for="basis-training-a">Fragestellung, Hypothese und Beobachtung</label><textarea id="basis-training-a" data-basis-answer="basis-training-a" rows="4" placeholder="Wir untersuchen … / Wir vermuten … / Wir sehen …"></textarea></div>
-
-<p><a href="https://teachablemachine.withgoogle.com/train/image" target="_blank" rel="noopener noreferrer">Teachable Machine für das Bildexperiment öffnen ↗</a></p>
+<div class="basis-answer"><label for="basis-training-a">Meilenstein 2: Erstes Testergebnis und auffälliger Fehler</label><textarea id="basis-training-a" data-basis-answer="basis-training-a" rows="6" placeholder="Klasse A … / Klasse B … / Das Modell verwechselte … / Unsere Erklärung …"></textarea></div>
+<details class="basis-hint"><summary>Hilfe bei Problemen</summary><div class="detail-body"><p>Überprüft zunächst, ob beide Klassen ähnlich viele verschiedene Beispiele enthalten und ob die Bilder gut sichtbar sind. Prüft danach, ob ihr unabsichtlich denselben Hintergrund pro Klasse verwendet. Dokumentiert Fehlversuche, statt sie zu löschen.</p></div></details>
