@@ -11,8 +11,8 @@
     <details class="lesson-plan" id="doppellektion-05" data-lesson="05" open>
       <summary><span class="phase-num">05</span><span>Doppellektion 5 · Ihr Projekt starten und die Arbeit planen</span><small>90 Min.</small></summary>
       <div class="detail-body">
-        <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-04">Doppellektion 4</a> haben Sie Thema und Klassen gewählt sowie die Datentrennung geklärt. Sie übernehmen jetzt die Planung Ihres Projekts im Tandem.</p>
-        <p><strong>Heute können Sie:</strong> Eigene Tagesziele und Arbeitsschritte planen, eine überprüfbare Vermutung formulieren und die Datenqualität kontrollieren.</p>
+        <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-04">Doppellektion 4</a> haben Sie XOR mit mehreren Neuronen gelöst. Jetzt erarbeiten Sie die Regeln zur Datenaufteilung selbstständig und planen Ihre Untersuchung.</p>
+        <p><strong>Heute können Sie:</strong> Training, Validierung und Test selbstständig unterscheiden, Datenlecks erkennen und einen überprüfbaren Datenplan mit fünf Gruppen erstellen.</p>
         <p class="lesson-question">Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?</p>
         <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.</p>
       </div>
@@ -161,12 +161,12 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
             <tbody>
               <tr>
                 <td>4. Doppellektion</td>
-                <td>Thema freigeben; Datenplan und Fotos vorbereiten</td>
-                <td>Zwei Klassen und fünf unabhängige Gruppen planen</td>
+                <td>XOR und die Grenzen eines einzelnen Neurons untersuchen</td>
+                <td>Erklärung der Zwischenschicht; noch keine Pflicht zur Datenplanung</td>
               </tr>
               <tr>
                 <td>Doppellektionen 5–7</td>
-                <td>Sie legen Tagesziele fest, teilen die Arbeit auf und holen bei Bedarf Hilfe</td>
+                <td>In DL5 Datenaufteilung selbstständig erarbeiten; anschliessend Tagesziele und Arbeitsphasen selbst planen</td>
                 <td>Datencheck → Vergleich → begründete Auswahl → Test → Fazit; Etappen frei auf die Zeit verteilen</td>
               </tr>
               <tr>
