@@ -118,6 +118,61 @@ def main():
     assert 'Nein' in grafikwerte() and '= −1' in grafikwerte()
     assert tabelle.value.count('<tr>')==9  # Kopfzeile + acht Situationen
 
+    # Experimente 2 und 4: dieselben Parameter für vier einzeln gezeichnete
+    # Neuronen (00, 01, 10, 11), inklusive Ausgabe und Ziel.
+    shown=[]
+    original_display=u.display
+    try:
+        u.display=lambda widget: shown.append(widget)
+        gate,w1,w2,b,table=u.live_gatter('AND')
+    finally:
+        u.display=original_display
+    assert len(shown)==1 and len(shown[0].children)==4
+    cards=shown[0].children[2]
+    assert cards.value.count('data:image/svg+xml;base64,')==4
+    assert cards.value.count('Fall ') == 4
+    assert 'Gatter: AND' in cards.value and '4/4 richtig' in cards.value
+    assert table.value.count('<tr>')==5  # Kopfzeile und vier Fälle.
+    def minineuronen():
+        matches=re.findall(r'data:image/svg\+xml;base64,([^"]+)',cards.value)
+        assert len(matches)==4
+        xmls=[ET.fromstring(base64.b64decode(encoded)) for encoded in matches]
+        assert all(xml.attrib['viewBox']=='0 0 470 242' for xml in xmls)
+        return [[node.text for node in xml.iter() if node.tag.endswith('text')]
+                for xml in xmls]
+    assert ['y = 0','Ziel 0 ✓'] == [
+        value for value in minineuronen()[0] if value in ('y = 0','Ziel 0 ✓')]
+    old_cards=cards.value
+    w1.value=0.
+    assert cards.value!=old_cards and '3/4 richtig' in cards.value
+    assert 'y = 0' in minineuronen()[3]
+    gate.value='XOR'
+    assert 'Gatter: XOR' in cards.value and '4/4 richtig' not in cards.value
+    assert 'Ziel 1 ✗' in minineuronen()[1]
+    w1.value=3.
+    assert cards.value.count('data:image/svg+xml;base64,')==4
+    assert 'Gatter: XOR' in cards.value
+
+    # Experiment 3: Auch der Lernschritt zeigt das bearbeitete Neuron;
+    # nach dem Klick dieselbe Eingabe mit alten und neuen Gewichten.
+    shown=[]
+    original_display=u.display
+    try:
+        u.display=lambda widget: shown.append(widget)
+        learner=u.lernen_klick('AND', .2)
+    finally:
+        u.display=original_display
+    assert len(shown)==1
+    learning_view=shown[0].children[2]
+    assert learning_view.value.count('data:image/svg+xml;base64,')==1
+    shown[0].children[1].children[1].click()  # Ganze Runde: vier Beispiele
+    assert learning_view.value.count('data:image/svg+xml;base64,')==2
+    assert 'Vorher · Entscheidung' in learning_view.value
+    assert 'Nachher · neue Gewichte' in learning_view.value
+    assert abs(learner.w[0]-.4)<1e-9 and abs(learner.b+.3)<1e-9
+    shown[0].children[1].children[2].click()  # Zurücksetzen
+    assert learning_view.value.count('data:image/svg+xml;base64,')==1
+
     # Neuron-Doppellektion: Alltagsneuron, Lernen per Klick, XOR-Widerspruch.
     ziel=[u._alltag_ziel(s,f,p) for s in (0,1) for f in (0,1) for p in (0,1)]
     assert list(u.alltagsneuron(1,1,-3,-.5))==ziel and list(u.alltagsneuron())!=ziel
