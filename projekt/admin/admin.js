@@ -6,6 +6,7 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map()};
+const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":manifestPath();
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
 
 const sourceLayer=$("sourceHighlight");
@@ -128,7 +129,7 @@ function chapterList(){
   }
 }
 async function loadPlans(){
-  const manifest=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||state.manifest.content);
+  const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
   await Promise.all(manifest.sections.filter(x=>x.teaching).map(async section=>{
     const path="kursseiten/"+section.id+"/planung.json";
     if(!state.plans.has(path)){
@@ -139,7 +140,7 @@ async function loadPlans(){
   renderLessonOrder();
 }
 function orderedSections(){
-  const manifest=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||state.manifest.content);
+  const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
   return manifest.sections.filter(x=>x.teaching).map(section=>{
     const path="kursseiten/"+section.id+"/planung.json";
     const stored=state.staged.get(path)?.content||state.plans.get(path)?.original;
@@ -253,7 +254,7 @@ async function load(path){
   }catch(e){error(e);}
 }
 async function refresh(){
-  const manifest=await api("/api/file?path=kursseiten%2Fmanifest.json");
+  const manifest=await api("/api/file?path="+encodeURIComponent(manifestPath()));
   state.manifest={sha:manifest.sha,content:manifest.content};
   const data=await api("/api/chapters");
   const known=data.chapters.filter(c=>!state.staged.get(c.path)?.delete);
@@ -262,7 +263,7 @@ async function refresh(){
     .map(c=>({path:c.path,sha:c.expectedSha}));
   const unsubmitted=state.chapters.filter(c=>!c.sha&&!state.staged.has(c.path)&&!known.some(k=>k.path===c.path));
   state.chapters=[...known,...pending,...unsubmitted].sort((a,b)=>a.path.localeCompare(b.path));
-  const definitions=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||manifest.content).sections;
+  const definitions=JSON.parse(state.staged.get(manifestPath())?.content||manifest.content).sections;
   const valid=definitions.filter(s=>s.teaching||s.id==="lernziele").map(s=>s.id);
   const previous=$("section").value;
   $("section").replaceChildren();
@@ -445,7 +446,7 @@ function preview(){
   const stylesheet="<style>"+COURSE_PREVIEW_CSS+"</style>";
   // The Worker CSP intentionally forbids <base> (base-uri 'none'). Inline chrome
   // assets must therefore be absolute, just like images from edited chapters.
-  const definitions=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||state.manifest.content).sections;
+  const definitions=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content).sections;
   const navigation=definitions.filter(s=>s.navigation).sort((a,b)=>a.navigation.order-b.navigation.order)
     .map(s=>'<a href="#'+escapeHtml(s.id)+'"><span>'+escapeHtml(s.navigation.label)+'</span>'+escapeHtml(s.navigation.title)+'</a>').join("");
   const chrome=COURSE_PREVIEW_CHROME.replace("<!-- NAVIGATION -->",navigation)
@@ -640,14 +641,14 @@ async function addLesson(){
   try{
     if(!confirmUnsaved())return;
     status("Lade aktuelle Unterrichtsplanung …");
-    const file=await api("/api/file?path=kursseiten%2Fmanifest.json");
-    const manifest=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||file.content);
+    const file=await api("/api/file?path="+encodeURIComponent(manifestPath()));
+    const manifest=JSON.parse(state.staged.get(manifestPath())?.content||file.content);
     const title=prompt("Titel der neuen Doppellektion:");
     if(!title)return;
     const chapterTitle=prompt("Titel des ersten Unterkapitels:","Einstieg und Auftrag");
     if(!chapterTitle)return;
     if(!title.trim()||!slug(chapterTitle))throw Error("Titel und Kapitelname dürfen nicht leer sein.");
-    const id=slug(title),view=id;
+    const id=($("courseSelect").value==="basis"?"basis-":"")+slug(title),view=id;
     if(!/^[a-z]/.test(view)||manifest.sections.some(s=>s.id===view))throw Error("Bereichs-ID ungültig oder bereits vorhanden.");
     const blocks=await Promise.all(manifest.sections.filter(s=>s.teaching).map(async s=>{
       const path="kursseiten/"+s.id+"/planung.json";
@@ -663,7 +664,7 @@ async function addLesson(){
     state.staged.set(metadata,{path:metadata,expectedSha:null,content:planSource});
     const next=Math.max(...manifest.sections.map(s=>s.navigation?.order??-1))+1;
     manifest.sections.push({id:view,class:"section",teaching:true,navigation:{order:next,label:"",title:title.trim()}});
-    state.staged.set("kursseiten/manifest.json",{path:"kursseiten/manifest.json",expectedSha:file.sha,original:file.content,content:JSON.stringify(manifest,null,2)+"\n"});
+    state.staged.set(manifestPath(),{path:manifestPath(),expectedSha:file.sha,original:file.content,content:JSON.stringify(manifest,null,2)+"\n"});
     const chapter="kursseiten/"+view+"/010-"+slug(chapterTitle)+".md";
     const chapterSource="---\ntype: chapter\nid: "+view+"-"+slug(chapterTitle)+
       "\nnummer: \"1\"\ntitel: "+JSON.stringify(chapterTitle)+
@@ -698,7 +699,7 @@ async function addLessonToCurrentSection(){
     if(!chapterTitle)return;
     const id=slug(title),chapterSlug=slug(chapterTitle);
     if(!/^[a-z][a-z0-9-]*$/.test(id)||!chapterSlug)throw Error("Ungültiger Titel.");
-    const manifest=JSON.parse(state.staged.get("kursseiten/manifest.json")?.content||state.manifest.content);
+    const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
     if(!manifest.sections.some(x=>x.id===view&&x.teaching))throw Error("Kein Unterrichtsbereich.");
     const all=await Promise.all(manifest.sections.filter(x=>x.teaching).map(async x=>{
       const path="kursseiten/"+x.id+"/planung.json",draft=state.staged.get(path);
@@ -742,6 +743,15 @@ $("createLessonHere").addEventListener("click",addLessonToCurrentSection);
 $("editPlan").addEventListener("click",editPlan);
 $("editMaterials").addEventListener("click",editMaterials);
 $("section").addEventListener("change",chapterList);
+$("courseSelect").addEventListener("change",async()=>{
+  if(!confirmUnsaved())return;
+  state.current=null;
+  $("source").value="";
+  $("path").textContent="Kurs gewechselt";
+  $("heading").textContent="Kapitel auswählen";
+  await refresh().catch(error);
+  status("Kursauswahl geändert. Kapitel und AVIVA-Pläne gehören zum gewählten Kurs.");
+});
 $("refresh").addEventListener("click",()=>refresh().catch(error));
 $("create").addEventListener("click",addChapter);
 $("move").addEventListener("click",move);
