@@ -14,7 +14,7 @@
       "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
       "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
       "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung.",
-      "zeit": "Doppellektion 4 behandelt ausschliesslich XOR, die Grenzen des einzelnen Neurons und mehrschichtige Netze. Datenaufteilung, Training/Validierung/Test, Foto-Gruppen und Datenplan werden erst im selbstständigen SOL-Teil der Doppellektion 5 eingeführt. Ziffern bleiben freiwillige Vertiefung.",
+      "zeit": "Drei klar getrennte DL4-Lernangebote: (1) eigenständiges XOR-Notebook nach der Theorie zu einem einzelnen Neuron; (2) Einführung der Zwischenschicht und Pflichtnotebook «Neuronale Netze» mit Netzwerk- und Lernversuchen; (3) separates freiwilliges Ziffern-Notebook als Transfer. Die 90 Minuten konzentrieren sich auf XOR und Netzwerkverständnis. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -61,7 +61,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 15,
-              "text": "Lässt die Lernenden zuerst vier XOR-Fälle am einzelnen Neuron testen. Zeigt anhand der diagonal gegenüberliegenden Zielwerte, warum eine Gerade nicht genügt, und erklärt h₁ = OR, h₂ = NAND sowie AND am Ausgang als Lösungsweg."
+              "text": "Erklärt die XOR-Zielwerte, die vier widersprüchlichen Bedingungen und den fehlenden linearen Trenner. Nach der Theorie öffnen die Lernenden das eigenständige Notebook «XOR: Ein Neuron» und prüfen alle vier Fälle. Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang (AND) ein."
             },
             {
               "art": "Ergebnis",
@@ -79,7 +79,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 35,
-              "text": "Bearbeiten Sie das Notebook «Mehrere Neuronen kombinieren» in dieser Reihenfolge: zuerst die vier XOR-Fälle als vier Neuron-Grafiken einstellen und die Grenze begründen, dann die Fälle im Netz aus OR, NAND und AND nachvollziehen. Lassen Sie anschliessend ein Netz mit 1, 2 und 4 versteckten Neuronen lernen. Erklären Sie den Unterschied zwischen einem einzelnen Neuron und einer Zwischenschicht. Ziffernexperimente bleiben Wahlvertiefung."
+              "text": "Arbeiten Sie in der Reihenfolge der Kurskapitel: Im eigenständigen XOR-Notebook die vier Eingaben mit denselben Gewichten und demselben Bias prüfen (ein Neuron höchstens 3/4). Danach im Notebook «Neuronale Netze» den vollständigen Signalweg über OR, NAND und AND verfolgen und ein Netzwerk mit 1, 2 und 4 versteckten Neuronen lernen lassen. Die Ziffernerkennung ist ein freiwilliges, eigenständiges drittes Notebook und kein Teil des Pflichtdurchlaufs."
             },
             {
               "art": "Auftrag",
