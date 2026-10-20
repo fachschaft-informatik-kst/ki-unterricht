@@ -5,117 +5,117 @@
       "view": "basis-sprache",
       "title": "Wie erzeugen Sprachmodelle Text?",
       "rueckblick": "Daten und faire Tests: Modelle können überzeugend wirken, obwohl sie Fehler machen.",
-      "goal": "sprachbasierte KI als Vorhersage von Textbausteinen erklären, Prompts vergleichen und Tatsachenbehauptungen überprüfen.",
+      "goal": "Am Papierexperiment und einer Wortfolgen-Lernstrecke erklären, wie Kontext Vorhersagen verändert, eine statistische Worttabelle vom neuronalen Sprachmodell unterscheiden und plausible Aussagen kritisch prüfen.",
       "question": "Weshalb kann ein Chatbot überzeugend schreiben und trotzdem etwas Falsches behaupten?",
       "motivation": "Sprachmodelle begegnen uns in Chatbots und Schreibassistenten; ihre Antworten müssen kritisch geprüft werden.",
-      "product": "Wortvorhersage-Experiment, präzisierter Prompt und belegte Faktenprüfung.",
-      "zeit": "1. Kurzgymnasium: spielerisch, kein Training grosser Modelle und keine Programmierung; Chatbot optional.",
+      "product": "Zwei Papiertexte mit unterschiedlichem Kontext, zwei Papagei-Versuche, Vergleich Häufigkeitstabelle/Netz und Quellenprüfung.",
+      "zeit": "90 Minuten: Kernstationen Papierexperiment, Papagei, neuronales Modell, Transfer; Soekia/Turing und lokales Labor sind Wahlvertiefungen.",
       "order": 60,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Welches Wort kommt als Nächstes?",
-          "minutes": 10,
+          "titel": "Texte als Wortvorhersage",
+          "minutes": 5,
           "schritte": [
             {
-              "wer": "Lehrperson",
-              "min": 8,
               "art": "Auftrag",
-              "text": "Zwei Sätze mit unterschiedlichem Kontext anzeigen. Die Klasse schlägt mögliche nächste Wörter vor und erklärt, warum diese unterschiedlich sind."
+              "wer": "Lehrperson",
+              "min": 4,
+              "text": "Satzanfang vorgeben; mögliche nächste Wörter sammeln und Hypothesen zum Kontext formulieren."
             },
             {
-              "wer": "Ergebnis",
-              "min": 2,
               "art": "Ergebnis",
-              "text": "Eine begründete Vermutung zur Wortfortsetzung."
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Vermutung zur Wirkung des Kontexts."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Was sagt eine Vorhersage aus?",
-          "minutes": 10,
+          "titel": "Papierexperiment mit wenig/viel Kontext",
+          "minutes": 20,
           "schritte": [
             {
-              "wer": "Tandem",
-              "min": 8,
-              "art": "Auftrag",
-              "text": "Alltagsvervollständigung mit Chatbot-Erfahrungen vergleichen. Hypothese: Ändert der Kontext die nächste Wortvorhersage?"
+              "art": "Experiment",
+              "wer": "Gruppen",
+              "min": 18,
+              "text": "Originales Papierexperiment in zwei Durchläufen spielen: zwei versus vier sichtbare Wörter; Textqualität vergleichen."
             },
             {
+              "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 2,
-              "art": "Ergebnis",
-              "text": "Hypothese zur Bedeutung des Kontexts."
+              "text": "Zwei Texte und ein begründeter Kontextvergleich."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Token und Kontext im vereinfachten Modell",
-          "minutes": 15,
+          "titel": "Papagei-Modell und Statistik",
+          "minutes": 10,
           "schritte": [
             {
-              "wer": "Lehrperson",
-              "min": 13,
               "art": "Auftrag",
-              "text": "An einer vereinfachten Wortvorhersage demonstrieren: Ein Sprachmodell schätzt wahrscheinliche nächste Textbausteine (Tokens) aus dem Kontext. Ein plausibler Text ist kein Wahrheitsbeweis. Die abgebildeten Wahrscheinlichkeiten sind nur ein vereinfachtes Beispiel, kein reales Sprachmodell."
+              "wer": "Lehrperson",
+              "min": 8,
+              "text": "Anhand des Papagei-Modells erklären, wie Häufigkeit, Kontextfenster und die Prognose des nächsten Tokens zusammenhängen."
             },
             {
+              "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 2,
-              "art": "Ergebnis",
-              "text": "Begriff Token und eine Grenze der Analogie in eigenen Worten."
+              "text": "Ein korrektes Beispiel für Kontext und Vorhersage."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Wortlabor, Prompts und Quellen",
+          "titel": "Lernstrecke und Transfer zu Netzen",
           "minutes": 45,
           "schritte": [
             {
-              "wer": "Tandem",
-              "min": 16,
               "art": "Experiment",
-              "text": "Im lokalen Wortlabor Kontext A und B wechseln und eine ungewöhnliche Fortsetzung auswählen. Beobachten, wie sich Textvorschläge durch Kontext verändern. Die Werte sind illustrativ."
-            },
-            {
               "wer": "Tandem",
-              "min": 17,
-              "art": "Auftrag",
-              "text": "Vergleicht zwei Prompts für die gleiche Aufgabe: ungenau und mit klarer Zielgruppe, Länge und Format. Formuliert, weshalb die Antworten unterschiedlich ausfallen könnten. Optional mit einem schulisch freigegebenen Chatbot ausprobieren; keine persönlichen Daten eingeben."
+              "min": 25,
+              "text": "Papagei-Lernstrecke eigenständig bearbeiten, mindestens zwei Stationen protokollieren und Ergebnisse vergleichen."
             },
             {
+              "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "art": "Auftrag",
-              "text": "Prüft die vorgegebene (absichtlich falsche) Beispielbehauptung «Die Schweiz hat 30 Kantone» an einer verlässlichen Quelle. Unterscheidet flüssig formulierte Antwort von überprüftem Fakt."
+              "text": "An Vergleichsgrafik erläutern, warum ein neuronales Sprachmodell über Häufigkeitstabellen hinausgeht: numerische Repräsentation, Gewichte, Schichten."
             },
             {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Prompts präzisieren und ein Beispiel zu Wahrheit/Plausibilität durch eine externe Quelle überprüfen; Wahlstationen bei zusätzlicher Zeit."
+            },
+            {
+              "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 2,
-              "art": "Ergebnis",
-              "text": "Dokumentierte Kontextbeobachtung, verbesserter Prompt und geprüfte Behauptung."
+              "text": "Protokoll, Vergleich und belegte Tatsachenprüfung."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Sicherung: plausibel ist nicht immer wahr",
+          "titel": "Was können Sprachmodelle? Was nicht?",
           "minutes": 10,
           "schritte": [
             {
+              "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "art": "Auftrag",
-              "text": "Erklären: Was wird beim Generieren vorhergesagt? Warum beeinflusst der Prompt die Ausgabe? Wie prüft man eine Tatsachenbehauptung?"
+              "text": "Weshalb verändert der Kontext die Ausgabe? Wie unterscheiden sich Papagei-Tabelle und neuronales Netz? Weshalb ist eine plausible Aussage nicht automatisch wahr?"
             },
             {
+              "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 2,
-              "art": "Ergebnis",
-              "text": "Drei Sätze zu Token, Prompt und Verifikation."
+              "text": "Drei individuelle Erklärsätze."
             }
           ]
         }
