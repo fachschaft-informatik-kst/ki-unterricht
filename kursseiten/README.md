@@ -127,7 +127,7 @@ Fachliche Texte, Aufgaben und Links werden in `kursseiten/` gepflegt; `projekt/p
 ## Zwei Kurse aus einer Codebasis
 
 - **4. Kurzgymnasium (Vertiefung):** `kursseiten/manifest.json`, Kursseite `/projekt/` (historischer Speicher- und Notebook-Stand bleibt erhalten).
-- **1. Kurzgymnasium (Basis):** `kursseiten/basis-manifest.json`, sieben Doppellektionen in `kursseiten/basis-*/`, Kursseite `/basis/`.
+- **1. Kurzgymnasium (Basis):** `kursseiten/basis-manifest.json`, zehn Doppellektionen in `kursseiten/basis-*/`, Kursseite `/basis/`.
 - **Kursauswahl:** `/kurse.html`; die ursprüngliche Start-URL führt weiterhin zum vertieften Kurs, um bestehende Links nicht zu brechen.
 - **Editor:** Gemeinsamer GitHub-Editor unter `/projekt/admin/`; dort vor dem Bearbeiten den Kurs auswählen. Neue Bereiche des Basiskurses erhalten den Präfix `basis-`.
 - **Gemeinsam:** CSS, Grafiken, Kapitelrenderer und AVIVA-Validierung. Separate Notizen des Basiskurses nutzen `kst-ki-basis-v1`; der bisherige Portal-, Journal- und Notebook-Speicher bleibt unangetastet.
