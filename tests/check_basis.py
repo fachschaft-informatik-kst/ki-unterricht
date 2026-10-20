@@ -49,6 +49,7 @@ assert "--accent" in styles and ".sidebar" in styles
 basic_style=(base/"basis.css").read_text(encoding="utf-8")
 assert "--accent:#3653a3" in basic_style
 assert (base/"grafiken/kst_logo.png").is_file(), "KST logo must be packaged with basic course"
+assert (base/"grafiken/kst_logo.png").stat().st_size > 100, "Logo must contain real image data"
 assert "basis-network-diagram" in basic_style
 js=(base/"basis.js").read_text(encoding="utf-8")
 assert "kst-ki-basis-v1" in js and "data-live-output" in js
