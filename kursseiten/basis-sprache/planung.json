@@ -1,7 +1,7 @@
 {
   "lessons": [
     {
-      "id": "b-sprache",
+      "id": "b06",
       "view": "basis-sprache",
       "title": "Wie erzeugen Sprachmodelle Text?",
       "rueckblick": "Daten und faire Tests: Modelle können überzeugend wirken, obwohl sie Fehler machen.",
@@ -10,7 +10,7 @@
       "motivation": "Sprachmodelle begegnen uns in Chatbots und Schreibassistenten; ihre Antworten müssen kritisch geprüft werden.",
       "product": "Wortvorhersage-Experiment, präzisierter Prompt und belegte Faktenprüfung.",
       "zeit": "1. Kurzgymnasium: spielerisch, kein Training grosser Modelle und keine Programmierung; Chatbot optional.",
-      "order": 35,
+      "order": 60,
       "phases": [
         {
           "phase": "Ankommen",
