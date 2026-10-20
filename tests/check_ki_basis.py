@@ -118,7 +118,7 @@ def main():
     assert 'Nein' in grafikwerte() and '= −1' in grafikwerte()
     assert tabelle.value.count('<tr>')==9  # Kopfzeile + acht Situationen
 
-    # Experimente 2 und 4: dieselben Parameter für vier einzeln gezeichnete
+    # DL3 Gatter-Experiment und DL4 XOR: dieselben Parameter für vier einzeln gezeichnete
     # Neuronen (00, 01, 10, 11), inklusive Ausgabe und Ziel.
     shown=[]
     original_display=u.display
@@ -146,12 +146,20 @@ def main():
     w1.value=0.
     assert cards.value!=old_cards and '3/4 richtig' in cards.value
     assert 'y = 0' in minineuronen()[3]
-    gate.value='XOR'
-    assert 'Gatter: XOR' in cards.value and '4/4 richtig' not in cards.value
-    assert 'Ziel 1 ✗' in minineuronen()[1]
-    w1.value=3.
-    assert cards.value.count('data:image/svg+xml;base64,')==4
-    assert 'Gatter: XOR' in cards.value
+    assert 'XOR' not in gate.options, 'DL3 must not teach XOR early'
+    # DL4 uses the same reusable visualization, but exposes XOR explicitly.
+    original_display=u.display
+    try:
+        u.display=lambda widget: shown.append(widget)
+        xor_gate,xor_w1,xor_w2,xor_b,xor_table=u.live_gatter('XOR')
+    finally:
+        u.display=original_display
+    xor_cards=shown[-1].children[2]
+    assert xor_gate.value=='XOR' and 'XOR' in xor_gate.options
+    assert 'Gatter: XOR' in xor_cards.value and '4/4 richtig' not in xor_cards.value
+    assert xor_cards.value.count('data:image/svg+xml;base64,')==4
+    xor_w1.value=3.
+    assert 'Gatter: XOR' in xor_cards.value
 
     # Experiment 3: Auch der Lernschritt zeigt das bearbeitete Neuron;
     # nach dem Klick dieselbe Eingabe mit alten und neuen Gewichten.
@@ -173,7 +181,7 @@ def main():
     shown[0].children[1].children[2].click()  # Zurücksetzen
     assert learning_view.value.count('data:image/svg+xml;base64,')==1
 
-    # Neuron-Doppellektion: Alltagsneuron, Lernen per Klick, XOR-Widerspruch.
+    # Gemeinsamer Backendtest: DL3-Neuron, DL4-XOR-Limit und Lernen.
     ziel=[u._alltag_ziel(s,f,p) for s in (0,1) for f in (0,1) for p in (0,1)]
     assert list(u.alltagsneuron(1,1,-3,-.5))==ziel and list(u.alltagsneuron())!=ziel
     for aufgabe in ('AND','OR','NAND','NOR'):
