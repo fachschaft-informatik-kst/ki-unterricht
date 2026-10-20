@@ -6,7 +6,7 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map()};
-const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":manifestPath();
+const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
 
 const sourceLayer=$("sourceHighlight");
