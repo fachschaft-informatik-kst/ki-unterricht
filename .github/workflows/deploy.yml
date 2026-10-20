@@ -90,7 +90,9 @@ jobs:
         run: |
           python scripts/build_portal.py
           python scripts/build_course.py
+          python scripts/build_basis.py
           python scripts/build_portal_notebooks.py
+          python tests/check_basis.py
           python tests/check_course.py
           python tests/check_generated_content.py
           python tests/check_new_chapter.py
