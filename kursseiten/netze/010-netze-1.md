@@ -107,7 +107,7 @@ Jede Zeile ist eine Bedingung an w₁, w₂ und b (Ausgabe 1 heisst Summe ≥ 0,
       <li>Aus der ersten Bedingung wissen wir b &lt; 0, also ist −b positiv. Daraus folgt <strong>w₁ + w₂ + b &gt; 0</strong>.</li>
       <li>Die vierte Bedingung verlangt aber <strong>w₁ + w₂ + b &lt; 0</strong>. Das ist ein Widerspruch.</li>
     </ol>
-    <p>Es gibt also <strong>keine</strong> Gewichte und keinen Bias, die alle vier Zeilen erfüllen. Das liegt nicht an der Lernregel und auch nicht an der Lernrate: Keine Lernregel der Welt kann Zahlen finden, die es nicht gibt. Im Notebook probieren Sie Gewichte und Bias mit vier sichtbaren Einzelneuronen aus.</p>
+    <p>Es gibt also <strong>keine</strong> Gewichte und keinen Bias, die alle vier Zeilen erfüllen. Das liegt nicht an der Lernregel und auch nicht an der Lernrate: Keine Lernregel der Welt kann Zahlen finden, die es nicht gibt. **Probieren Sie es selbst aus:** Öffnen Sie das Notebook «Neuronale Netze» über die Schaltfläche unten. Im ersten Experiment verändern Sie Gewichte und Bias und sehen alle vier Eingabefälle als einzelne Neuronen.</p>
     <!-- MD:START -->
 ### 4 · Der Ausweg: mehrere Neuronen
 <!-- MD:END -->
@@ -151,7 +151,7 @@ Jede Zeile ist eine Bedingung an w₁, w₂ und b (Ausgabe 1 heisst Summe ≥ 0,
       </table>
     </div>
     <!-- MD:START -->
-Überprüfen Sie diese Lösung jetzt im Notebook «Mehrere Neuronen kombinieren».
+Überprüfen Sie die Lösung im Notebook «Neuronale Netze».
 <!-- MD:END -->
     <label class="field answer"><span>Aufgabe: Welche der vier Bedingungen widersprechen sich, und was bedeutet das für die Lernregel? Erklären Sie es mit Ihren eigenen Worten.</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die Bedingungen für (0, 1), (1, 0) und (1, 1) …" rows="4"></textarea></label>
     <label class="field answer"><span>Protokoll: Wie viele der vier XOR-Fälle schafft Ihr einzelnes Neuron mit der besten Einstellung?</span><select data-answer="hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></label>
@@ -168,16 +168,7 @@ Jede Zeile ist eine Bedingung an w₁, w₂ und b (Ausgabe 1 heisst Summe ≥ 0,
     <!-- MD:START -->
 Prüfen Sie für (1, 0): Was antworten OR und NAND? Was entsteht, wenn der Ausgang beide Antworten mit AND kombiniert?
 <!-- MD:END -->
-    <details>
-      <summary>Beispielgrafik – sofort verfügbar</summary>
-      <div class="detail-body">
-        <!-- MD:START -->
-Vorberechnetes Beispiel mit den Grundeinstellungen. Ihr interaktiver Versuch kann andere Ergebnisse zeigen.
-<!-- MD:END -->
-        <img alt="Beispielausgabe: xor" loading="lazy" src="previews/xor.png" style="max-width:100%;height:auto"/>
-      </div>
-    </details>
-    <button class="btn primary" data-lab="mehrschichtige_netze.ipynb">XOR-Netz starten ▶</button>
+    <button class="btn primary" data-lab="mehrschichtige_netze.ipynb">Neuronale Netze starten ▶</button>
     <div class="protokoll-block">
       <!-- MD:START -->
 ### Mein Protokoll: XOR-Netz lernen

@@ -166,6 +166,14 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await restoredGate.getByText('Gatter: OR', {exact:false}).first().waitFor({state:'visible'});
   assert((await restoredGate.innerText()).includes('Gatter: OR'),'Saved OR choice must remain visible after reload');
   assert.equal(await restoredGate.locator('img[alt^="Neuron: Eingaben"]').count(),4,'Saved neuron diagrams must survive page reload');
+  // After restoring saved outputs, a dedicated control safely reactivates the
+  // published visual lessons without discarding the stored notebook.
+  const refreshDL3=q.frameLocator('#project-frame').getByRole('button',{name:'Grafiken aktivieren ↻'});
+  await refreshDL3.waitFor({state:'visible'});
+  await refreshDL3.click();
+  await q.frameLocator('#project-frame').getByRole('button',{name:'Grafiken aktualisiert ✓'}).waitFor({state:'visible',timeout:120000});
+  await restoredGate.locator('.widget-dropdown select').first().waitFor({state:'visible'});
+  assert.equal(await restoredGate.locator('img[alt^="Neuron: Eingaben"]').count(),4,'All four figures must become interactive again');
   assert(JSON.stringify(lesson.cells).includes('Gatter: OR'),'Previously exported OR choice must remain in the ZIP');
   // DL4 introduces XOR; its four neuron graphics and chosen state are saved
   // independently from the DL3 OR notebook and survive reopening.

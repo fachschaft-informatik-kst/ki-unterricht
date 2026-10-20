@@ -1,6 +1,6 @@
 [
   {"source": "perzeptron_und_neuronale_netze.ipynb", "title": "Ein Neuron"},
-  {"source": "mehrschichtige_netze.ipynb", "title": "XOR-Netz"},
+  {"source": "mehrschichtige_netze.ipynb", "title": "Neuronale Netze"},
   {"source": "daten_training.ipynb", "title": "Datenaufteilung"},
   {"source": "ki_projekt/ki_lernlabor.ipynb", "title": "Projekt-Lernlabor"},
   {"source": "ki_projekt/ki_tandemprojekt.ipynb", "title": "Unser Versuch", "project": true}

@@ -47,7 +47,52 @@ export default {
           throw new Error('Kein Python-Kernel verfügbar');
         }
         if (embed?.restoreOnly) {
-          status.node.textContent = 'Gesicherter Stand · Zellen bei Bedarf erneut ausführen';
+          status.node.textContent = 'Gesicherter Stand · Interaktive Grafiken bei Bedarf aktivieren';
+          // A restored notebook deliberately does not execute imported or edited
+          // Python. Offer an explicit one-click restart for the untouched,
+          // published visual teaching cells only; saved edits remain unchanged.
+          if (panel.context.path === 'portal/perzeptron_und_neuronale_netze.ipynb' ||
+              panel.context.path === 'portal/mehrschichtige_netze.ipynb') {
+            const activate = new Widget();
+            activate.node.className = 'ki-activate-figures';
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = 'Grafiken aktivieren ↻';
+            button.title = 'Gespeicherte Inhalte bleiben erhalten; veröffentlichte interaktive Übungen werden erneut ausgeführt.';
+            button.style.cssText = 'font:inherit;padding:5px 11px;background:#e3f2ed;border:1px solid #246d5b;border-radius:7px;cursor:pointer;color:#143b33';
+            activate.node.append(button);
+            panel.toolbar.addItem('ki-activate-figures', activate);
+            button.addEventListener('click', async () => {
+              button.disabled = true;
+              button.textContent = 'Grafiken starten …';
+              try {
+                const url = new URL('../files/' + panel.context.path, location.href);
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('Die veröffentlichte Vorlage ist nicht erreichbar.');
+                const published = await res.json();
+                const code = cell => Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+                const starts = published.cells.filter(c => c.cell_type === 'code' &&
+                  (c.metadata?.tags || []).includes(tag));
+                // No executing arbitrary student-uploaded code, even when it has
+                // an autostart tag. Every selected cell must equal the published
+                // source and retain its stable Jupyter cell ID.
+                const cells = starts.map(c => panel.content.widgets.find(w => w.model.id === c.id));
+                if (!starts.length || !cells.every((cell,i) =>
+                  cell?.model.type === 'code' &&
+                  cell.model.sharedModel.getSource() === code(starts[i]))) {
+                  throw new Error('Bearbeitete Zellen erkannt: Bitte Vorbereitung und gewünschte Versuche mit Shift + Enter ausführen.');
+                }
+                for (const cell of cells) {
+                  const reply = await CodeCell.execute(cell, panel.sessionContext);
+                  if (!reply || reply.content.status !== 'ok') throw new Error('Eine Grafik konnte nicht berechnet werden.');
+                }
+                button.textContent = 'Grafiken aktualisiert ✓';
+              } catch (error) {
+                status.node.textContent = String(error.message || error);
+                button.textContent = 'Grafiken erneut aktivieren ↻';
+              } finally { button.disabled = false; }
+            });
+          }
           await embed.initialized(panel, true);
           return;
         }
