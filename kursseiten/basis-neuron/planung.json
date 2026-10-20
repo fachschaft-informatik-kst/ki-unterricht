@@ -3,12 +3,12 @@
     {
       "id": "b03",
       "view": "basis-neuron",
-      "title": "Wie entscheidet ein Neuron?",
+      "title": "Vom biologischen Neuron zum neuronalen Netz",
       "rueckblick": "Bezug zur vorherigen KI-Doppellektion herstellen.",
-      "goal": "Eingaben, Gewichte und Bias anhand eigener Vorhersagen erklären; eine 0/1-Ausgabe durch Veränderung der Gewichte beeinflussen.",
-      "question": "Wie kann dieselbe Eingabe je nach Gewichten zu einer anderen Entscheidung führen?",
+      "goal": "Die Nervenzelle als biologisches Vorbild vom Rechenmodell unterscheiden, Netzschichten erläutern und Gewichte, Bias sowie eine 0/1-Ausgabe anhand von Versuchen nachvollziehen.",
+      "question": "Wie arbeitet der einzelne Baustein eines Netzes, und wo endet der Vergleich mit dem Gehirn?",
       "motivation": "Eigenes Ausprobieren und sachlich begründete Entscheidungen stehen im Vordergrund.",
-      "product": "Reglereinstellungen mit mindestens zwei vorhergesagten und überprüften Ausgaben.",
+      "product": "Erklärte Zuordnung biologischer/künstlicher Bausteine, Netzskizze und mindestens zwei vorausgesagte und überprüfte Ausgaben.",
       "zeit": "90 Minuten, Tandemarbeit mit kurzen Einzelreflexionen.",
       "order": 30,
       "phases": [
@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 3,
-              "text": "Einstieg: Können zwei verschiedene Einstellungen bei denselben Sensorwerten etwas anderes entscheiden?"
+              "text": "Einstieg mit der biologischen Nervenzelle und der Frage: Wie kann ein Netzwerk aus solchen Bausteinen Entscheidungen treffen?"
             },
             {
               "art": "Ergebnis",
@@ -59,7 +59,7 @@
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Gewicht, Bias und 0/1-Ausgabe mit einer einfachen Vier-Zeilen-Tabelle demonstrieren."
+              "text": "Nervenzelle, künstliches Neuron und dreischichtiges Netz vergleichen; Gewicht, Bias und Schwelle an einem einfachen Rechenbeispiel klären."
             },
             {
               "art": "Ergebnis",
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 48,
-              "text": "Aufgaben «Vorhersagen, Regler testen, AND/OR entdecken» zu zweit bearbeiten und vorher/nachher-Werte festhalten."
+              "text": "Zuerst Schichten und biologisches Vorbild erklären, danach Regler testen und AND/OR experimentell einstellen; Ergebnisse und Grenzen der Analogie dokumentieren."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Mit einem Satz den Einfluss von Gewicht und Bias erläutern."
+              "text": "Eine Netzskizze und die Beziehung von Gewicht/Bias zur Ausgabe in eigenen Worten erläutern."
             },
             {
               "art": "Ergebnis",
