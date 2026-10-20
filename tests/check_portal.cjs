@@ -212,6 +212,39 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
      await p.screenshot({path:'/tmp/ki-notebook-interactive-table.png',fullPage:true});
      const lessonCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
     assert(/\[\d+\]/.test(await lessonCells.nth(1).locator('.jp-InputPrompt').innerText()));
+    // Each of the four notebook exercises must now contain a neuron figure.
+    // Gate and XOR each present four *separate* decisions, not merely a table.
+    const smallNeuron='img[alt^="Neuron: Eingaben"]';
+    const gateCell=lessonCells.nth(2);
+    const gateCards=gateCell.locator(smallNeuron);
+    await gateCards.first().waitFor({state:'visible'});
+    assert.equal(await gateCards.count(),4,'AND must show one neuron per input pair');
+    const andSource=await gateCards.last().getAttribute('src');
+    assert(andSource.startsWith('data:image/svg+xml;base64,'));
+    assert(Buffer.from(andSource.split(',')[1],'base64').toString('utf8').includes('Ziel 1 ✓'));
+    await gateCell.locator('.widget-dropdown select').selectOption('OR');
+    await p.waitForFunction(()=>{
+      const html=document.querySelector('#project-frame')?.contentDocument
+        ?.querySelectorAll('.jp-CodeCell')[2]?.innerText||'';
+      return html.includes('Gatter: OR');
+    },null,{timeout:20000});
+    assert.equal(await gateCards.count(),4,'Changing the gate must preserve all four neuron cases');
+    assert((await gateCell.innerText()).includes('2/4 richtig'),'OR must initially be 2/4 with AND weights');
+    const xorCell=lessonCells.nth(4);
+    const xorCards=xorCell.locator(smallNeuron);
+    await xorCards.first().waitFor({state:'visible'});
+    assert.equal(await xorCards.count(),4,'XOR must show the four neuron decisions');
+    assert((await xorCell.innerText()).includes('Gatter: XOR'));
+    const learnCell=lessonCells.nth(3);
+    await learnCell.locator(smallNeuron).first().waitFor({state:'visible'});
+    assert.equal(await learnCell.locator(smallNeuron).count(),1,'Learning should show its starting neuron');
+    await learnCell.getByRole('button',{name:'Ganze Runde ▶▶'}).click();
+    await p.waitForFunction(()=>{
+      const cell=document.querySelector('#project-frame')?.contentDocument?.querySelectorAll('.jp-CodeCell')[3];
+      return cell?.querySelectorAll('img[alt^="Neuron: Eingaben"]').length===2;
+    },null,{timeout:30000});
+    assert((await learnCell.innerText()).includes('Vorher · Entscheidung'));
+    assert((await learnCell.innerText()).includes('Nachher · neue Gewichte'));
     const prior=await lessonCells.nth(1).locator('.jp-InputPrompt').innerText();await lessonCells.nth(1).locator('.cm-content').click();await p.keyboard.press('Shift+Enter');
     await p.waitForFunction(prior=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[1].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text)&&text!==prior;},prior);
     await p.locator('.nav a[href="#projekt"]').click();await p.locator('[data-lab="ki_lernlabor.ipynb"]').click();
