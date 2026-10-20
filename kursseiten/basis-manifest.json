@@ -55,11 +55,25 @@
       }
     },
     {
-      "id": "basis-plan",
+      "id": "basis-sprache",
       "class": "section",
       "navigation": {
         "order": 4,
         "label": "04",
+        "title": "Sprachmodelle"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Wie erzeugt KI Texte?",
+        "summary": "Wortvorhersage · Prompts · Fehler prüfen"
+      }
+    },
+    {
+      "id": "basis-plan",
+      "class": "section",
+      "navigation": {
+        "order": 5,
+        "label": "05",
         "title": "Unser Bildprojekt planen"
       },
       "teaching": true,
@@ -72,8 +86,8 @@
       "id": "basis-training",
       "class": "section",
       "navigation": {
-        "order": 5,
-        "label": "05",
+        "order": 6,
+        "label": "06",
         "title": "Trainieren und verbessern"
       },
       "teaching": true,
@@ -86,8 +100,8 @@
       "id": "basis-abschluss",
       "class": "section",
       "navigation": {
-        "order": 6,
-        "label": "06",
+        "order": 7,
+        "label": "07",
         "title": "Testen und präsentieren"
       },
       "teaching": true,
