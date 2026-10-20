@@ -46,10 +46,16 @@ def assemble() -> tuple[str, list[dict]]:
         start = f"<!-- LESSONS:{ident} -->"
         finish = f"<!-- /LESSONS:{ident} -->"
         if section.get("teaching"):
-            if content.count(start) != 1 or content.count(finish) != 1:
-                raise ValueError(f"Fehlender oder doppelter Lektionsplatzhalter in {ident}")
-            content = re.sub(re.escape(start) + r".*?" + re.escape(finish),
-                             "".join(render_lesson(lesson) for lesson in by_view[ident]), content, flags=re.S)
+            if content.count(start) == 1 and content.count(finish) == 1:
+                content = re.sub(re.escape(start) + r".*?" + re.escape(finish),
+                                 "".join(render_lesson(lesson) for lesson in by_view[ident]), content, flags=re.S)
+            elif start in content or finish in content:
+                raise ValueError(f"Unvollständiger Lektionsplatzhalter in {ident}")
+            else:
+                # A newly authored topic may start with a YAML chapter only.
+                lesson = by_view[ident][0]
+                content = (f'<h1>{html.escape(lesson["title"])}</h1>'
+                           + "".join(render_lesson(item) for item in by_view[ident]) + content)
         klass = html.escape(section["class"])
         pieces.append(f'<section class="{klass}" id="{ident}">{content}</section>')
         label = f'{by_view[ident][0]["number"]:02d}' if by_view[ident] else section["navigation"]["label"]
