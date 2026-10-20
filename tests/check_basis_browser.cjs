@@ -18,12 +18,12 @@ const assert=require('node:assert/strict');
     assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
     assert.equal(await page.locator('main > section').count(),12);
     // Shared KST breadcrumb; track switching happens only via the landing page.
-    const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\\s+/g,' ').trim();
+    const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
     assert(!await page.locator('a[href="../projekt/"]').count(),'No direct link to 4th-year course');
     assert.equal(await page.locator('a[href="../kurse.html"]').count(),1);
     const advanced=await browser.newPage();
     await advanced.goto('http://127.0.0.1:8770/projekt/');
-    const advancedBreadcrumb=(await advanced.locator('.crumb').innerText()).replace(/\\s+/g,' ').trim();
+    const advancedBreadcrumb=(await advanced.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
     assert.equal(basicBreadcrumb,advancedBreadcrumb,'Both course headers must match exactly');
     assert.equal(await advanced.locator('a[href="../basis/"]').count(),0,'Advanced course must link to landing, not basic class');
     await advanced.close();
@@ -60,12 +60,10 @@ const assert=require('node:assert/strict');
     assert.equal(await activeSubmenus.locator('a[href^="#einstieg-"]').count(),0,'Previous lesson submenu must collapse');
     assert.equal(await page.locator('.nav > a[href="#basis-ki"]').getAttribute('aria-expanded'),'false');
     assert.equal(await page.locator('#basis-lernen details.kapitel').count(),9,'Retained original learning-type chapters');
+    assert.equal(await page.locator('#memory-board .basis-memory-grid button').count(),6,'Original learning memory must be interactive');
     await page.locator('.nav > a[href="#basis-neuron"]').click();
     await page.locator('#basis-neuron-vorbild').waitFor({state:'visible'});
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_biologisch.svg"]').count(),1);
-
-    assert.equal(await page.locator('#memory-board .basis-memory-grid button').count(),6,'Original learning memory must be interactive');
-    await page.locator('.nav > a[href="#basis-neuron"]').click();
     const lab=page.locator('[data-basis-neuron]');
     assert.equal(await lab.locator('tbody tr').count(),4);
     const before=await lab.locator('tbody').innerText();
