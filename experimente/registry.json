@@ -1,7 +1,31 @@
 [
-  {"source": "perzeptron_und_neuronale_netze.ipynb", "title": "Ein Neuron"},
-  {"source": "mehrschichtige_netze.ipynb", "title": "Neuronale Netze"},
-  {"source": "daten_training.ipynb", "title": "Datenaufteilung"},
-  {"source": "ki_projekt/ki_lernlabor.ipynb", "title": "Projekt-Lernlabor"},
-  {"source": "ki_projekt/ki_tandemprojekt.ipynb", "title": "Unser Versuch", "project": true}
+  {
+    "source": "perzeptron_und_neuronale_netze.ipynb",
+    "title": "Ein Neuron"
+  },
+  {
+    "source": "xor_einzelne_neuronen.ipynb",
+    "title": "XOR: Ein Neuron"
+  },
+  {
+    "source": "mehrschichtige_netze.ipynb",
+    "title": "Neuronale Netze"
+  },
+  {
+    "source": "ziffernerkennung.ipynb",
+    "title": "Ziffernerkennung"
+  },
+  {
+    "source": "daten_training.ipynb",
+    "title": "Datenaufteilung"
+  },
+  {
+    "source": "ki_projekt/ki_lernlabor.ipynb",
+    "title": "Projekt-Lernlabor"
+  },
+  {
+    "source": "ki_projekt/ki_tandemprojekt.ipynb",
+    "title": "Unser Versuch",
+    "project": true
+  }
 ]
