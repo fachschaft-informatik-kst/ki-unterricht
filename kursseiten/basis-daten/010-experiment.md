@@ -21,6 +21,6 @@ Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergr
 
 ### Ziffernnetz und unbekannte Buchstaben
 
-[**Notebook «Bildmodell» starten ↗**](../lab/index.html?path=basis_bildmodell.ipynb)
+[**Notebook «Bildmodell» starten ↗**](../lab/index.html?path=portal/basis_bildmodell.ipynb)
 
 Führt im Notebook den Abschnitt **DL 5** aus: Prüft zunächst Ziffernvorhersagen und testet dann die Buchstaben A und B. Notiert, welche **Ziffern** das Modell für die Buchstaben ausgibt. Das Modell kennt keine Buchstabenklasse: Die Vorhersage ist deshalb keine gültige Buchstabenerkennung. Die Bilder werden lokal erzeugt.
