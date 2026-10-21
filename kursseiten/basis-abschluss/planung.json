@@ -15,18 +15,18 @@
         {
           "phase": "Ankommen",
           "titel": "SOL 3: analysieren und präsentieren",
-          "minutes": 5,
+          "minutes": 1,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 3,
+              "min": 1,
               "text": "Gesprächsreihenfolge, Bewertungskriterien und selbstständige Fremdmodell-Analyse klären."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
+              "min": 0,
               "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
             }
           ]
@@ -34,12 +34,12 @@
         {
           "phase": "Vorwissen aktivieren",
           "titel": "Projektstatus abstimmen",
-          "minutes": 0,
+          "minutes": 1,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 0,
+              "min": 1,
               "text": "Keine zusätzliche Vorwissensphase: Die Fachgespräche beginnen unmittelbar."
             },
             {
@@ -53,12 +53,12 @@
         {
           "phase": "Informieren",
           "titel": "Kriterien nutzen",
-          "minutes": 0,
+          "minutes": 1,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 0,
+              "min": 1,
               "text": "Bewertungsraster wurde vor dem Termin bekanntgegeben."
             },
             {
@@ -72,18 +72,18 @@
         {
           "phase": "Verarbeiten",
           "titel": "Individuelle Fachgespräche",
-          "minutes": 85,
+          "minutes": 86,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 83,
+              "min": 85,
               "text": "Bis zu 14 Einzelgespräche: jeweils 5 Minuten Gespräch plus 1 Minute Wechsel/Bewertung (84 Minuten). Restzeit als Puffer. Andere Lernende bearbeiten unbenotet eine Fremdmodell-Analyse."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
+              "min": 1,
               "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
             }
           ]
@@ -91,12 +91,12 @@
         {
           "phase": "Auswerten",
           "titel": "Erkenntnisse sichern",
-          "minutes": 0,
+          "minutes": 1,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 0,
+              "min": 1,
               "text": "Schriftliche Reflexion in der Fremdmodell-Analyse integriert."
             },
             {
