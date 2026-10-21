@@ -83,20 +83,20 @@
       "navigation": {
         "order": 6,
         "label": "05",
-        "title": "Daten und faire Tests"
+        "title": "Bildprojekt: Einstieg"
       },
       "teaching": true,
       "overview": {
-        "title": "Daten und faire Tests",
-        "summary": "Datenfallen · Testbeispiele"
+        "title": "Bildprojekt: Einstieg",
+        "summary": "Datenfallen · erster Modellversuch"
       }
     },
     {
       "id": "basis-sprache",
       "class": "section",
       "navigation": {
-        "order": 7,
-        "label": "06",
+        "order": 10,
+        "label": "09",
         "title": "Sprachmodelle"
       },
       "teaching": true,
@@ -109,42 +109,42 @@
       "id": "basis-plan",
       "class": "section",
       "navigation": {
-        "order": 8,
-        "label": "07",
-        "title": "Bildprojekt planen"
+        "order": 7,
+        "label": "06",
+        "title": "Bildprojekt: planen"
       },
       "teaching": true,
       "overview": {
-        "title": "Bildprojekt planen",
-        "summary": "Eigene Fragestellung · fairer Testplan"
+        "title": "Bildprojekt: planen",
+        "summary": "Geführter Testplan · Hypothesen"
       }
     },
     {
       "id": "basis-training",
       "class": "section",
       "navigation": {
-        "order": 9,
-        "label": "08",
-        "title": "Selbstständig forschen"
+        "order": 8,
+        "label": "07",
+        "title": "Bildprojekt: experimentieren"
       },
       "teaching": true,
       "overview": {
-        "title": "Selbstständig forschen",
-        "summary": "Trainieren · testen · gezielt verbessern"
+        "title": "Bildprojekt: experimentieren",
+        "summary": "Trainieren · vergleichen · verbessern"
       }
     },
     {
       "id": "basis-abschluss",
       "class": "section",
       "navigation": {
-        "order": 10,
-        "label": "09",
-        "title": "Präsentieren und erklären"
+        "order": 9,
+        "label": "08",
+        "title": "Projektabschluss und Fachgespräche"
       },
       "teaching": true,
       "overview": {
-        "title": "Präsentieren und erklären",
-        "summary": "Fehler erklären · Modell kritisch beurteilen"
+        "title": "Projektabschluss und Fachgespräche",
+        "summary": "Individuell erklären · benoteter Nachweis"
       }
     },
     {
