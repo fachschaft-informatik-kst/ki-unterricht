@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Forschungsfrage und geplante Bedingungen aus der letzten Lektion abrufen."
+              "text": "Die vor DL 7 erstellten Fotostudio-Sammlungen prüfen: zwei Klassen, je acht Bilder in T1/T2/V1/P1/P2; fehlende Datensätze mit Übungsdaten ersetzen."
             },
             {
               "art": "Ergebnis",
@@ -40,7 +40,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Aufgaben und Ressourcen im Team selbst zuteilen; ein Testkriterium festlegen."
+              "text": "Unterschied zwischen Ziffernnetz (DL 5–6) und MobileNet-Merkmalen für echte Gegenstandsfotos klären."
             },
             {
               "art": "Ergebnis",
@@ -59,7 +59,7 @@
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Fairen Vergleich und Datenschutzregeln an kurzen Beispielen wiederholen."
+              "text": "Die Fotostudio-Vorverarbeitung zeigen: Seitenverhältnis erhalten, weisser Rand, 224×224 RGB, 1280 MobileNet-Merkmale; Gruppen T1/T2/V1/P1/P2 zuordnen."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Den fairen Vergleich und seine Grenzen erklären, die gemeinsame Schlussfolgerung formulieren und die Tandemabgabe für die Einreichung vor DL 8 sichern."
+              "text": "ZIP-Kursstand mit Reflexionen, Notebook und Fotostudio-JSON sichern. Die Modellwahl vor P1/P2 begründen; Testdaten nicht zur Optimierung verwenden."
             },
             {
               "art": "Ergebnis",
