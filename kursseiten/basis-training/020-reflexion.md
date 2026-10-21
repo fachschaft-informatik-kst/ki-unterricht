@@ -19,3 +19,5 @@ Trainiert erneut und prüft das verbesserte Modell mit den **gleichen zurückgeh
 <div class="basis-answer"><label for="basis-training-b">Unsere Änderung, Vergleich und nächste Frage</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="6" placeholder="Wir änderten …, weil … / Vorher … / Nachher … / Daraus folgt …"></textarea></div>
 
 **Zwischenkontrolle zu zweit:** Könnt ihr erklären, was ihr verändert habt? Könnte die beobachtete Verbesserung auch andere Ursachen haben?
+
+**Pflicht-Meilenstein 4 – Abgabe vor DL 8:** Schreibt eure Schlussfolgerung zu Forschungsfrage, Hypothese, Testzahlen pro Klasse, beobachtetem Fehler oder möglichem Grenzfall und Grenzen des Vergleichs. Sichert eure gemeinsame Dokumentation und gebt sie **vor Beginn der nächsten Doppellektion** ab. In DL 8 finden ausschliesslich die individuellen benoteten Fachgespräche statt.
