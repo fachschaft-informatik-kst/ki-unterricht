@@ -55,7 +55,8 @@ assert "Kantonsschule Stadelhofen" in page.get_text()
 assert all(len(page.select(f"#{v} details.kapitel")) >= 2 for v in ("basis-neuron","basis-netze","basis-plan","basis-gesellschaft"))
 assert "Sprachmodelle" in page.get_text()
 assert "wahrscheinliche" in page.get_text()
-assert page.select_one("a[href*='teachablemachine.withgoogle.com']")
+assert page.select_one("a[href*='portal/basis_fotoprojekt.ipynb']")
+assert (base/"persistence.js").is_file(), "Basis ZIP export/import controller missing"
 for path in ["basis.css","basis.js","theme.css","kurs.json","unterrichtsplan.html"]:
     assert (base/path).is_file(), path
 styles = (base/"theme.css").read_text(encoding="utf-8")
