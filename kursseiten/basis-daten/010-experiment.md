@@ -18,3 +18,9 @@ Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergr
 
 <div class="basis-answer"><label for="basis-daten-a">Unsere Vermutung und Beobachtung</label><textarea id="basis-daten-a" data-basis-answer="basis-daten-a" rows="3" placeholder="Wir vermuten … / Wir sehen …"></textarea></div>
 
+
+### Trainingswerkzeug öffnen
+
+Für den ersten Versuch braucht ihr eine **ausführbare Trainingsumgebung**, nicht nur dieses Textfeld. Bis das eigene Bildtrainings-Notebook der 1. Klasse eingebunden ist, verwendet ihr nach Freigabe durch die Lehrperson [Google Teachable Machine – Bildprojekt](https://teachablemachine.withgoogle.com/train/image). Alternativ könnt ihr das [bestehende Projekt-Notebook der 4. Klasse](../projekt/#projekt) verwenden, wenn ihr mit Python arbeiten möchtet.
+
+Erstellt zwei Klassen mit unkritischen Gegenstandsbildern, trainiert das Modell und testet es mit Bildern, die ihr vorher zurückgelegt habt. Notiert mindestens zwei Vorhersagen. **Keine Gesichter oder personenbezogenen Bilder hochladen.**
