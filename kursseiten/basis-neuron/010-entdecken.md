@@ -23,7 +23,7 @@ Im Alltag treffen wir Entscheidungen anhand von mehreren Hinweisen. Ein künstli
 
 ### Eigenes Notebook: Ein Neuron untersuchen
 
-[**Notebook «Ein Neuron» starten ↗**](../lab/index.html?path=basis_neuron.ipynb)
+[**Notebook «Ein Neuron» starten ↗**](../lab/index.html?path=portal/basis_neuron.ipynb)
 
 1. Führt die erste Zelle aus und überprüft die AND-Ausgaben.
 2. Ändert nur den Bias und vergleicht die vier Ausgaben.
