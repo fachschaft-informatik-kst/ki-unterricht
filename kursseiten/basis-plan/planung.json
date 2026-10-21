@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Beispiel eines Bildmodells mit Hintergrundfehler betrachten; offene Forschungsfragen sammeln."
+              "text": "Zwei Buchstabenbilder A und B zeigen: Das Ziffernnetz hat gestern Ziffern ausgegeben. Was müsste sich ändern?"
             },
             {
               "art": "Ergebnis",
@@ -40,7 +40,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Frei gewählte Klassen und Einflussfaktor vorschlagen; miteinander abstimmen."
+              "text": "Ziffernklassen und gelernte Bildmerkmale aus DL 5 wiederholen; Vorhersage zur Wirkung eines neuen Ausgabekopfs formulieren."
             },
             {
               "art": "Ergebnis",
@@ -59,7 +59,7 @@
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Kriterien guter Forschungsfragen und Unterschied zwischen Trainings- und Testbildern klären."
+              "text": "Transfer Learning vereinfacht erklären: Gelernte Merkmale weiterverwenden, alten Ziffernkopf durch A/B-Kopf ersetzen, nur neuen Kopf trainieren; Trainings- und Testbilder trennen."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Forschungsplan mit zwei Klassen, Testbedingungen und erwarteter Beobachtung sichern."
+              "text": "Sichern: Was blieb eingefroren, was wurde neu trainiert? Ausblick: In DL 7 verwenden wir MobileNet statt Ziffernnetz für eigene Gegenstandsfotos. LP: Fotostudio und 80 Fotos müssen vor DL 7 vorbereitet sein."
             },
             {
               "art": "Ergebnis",
