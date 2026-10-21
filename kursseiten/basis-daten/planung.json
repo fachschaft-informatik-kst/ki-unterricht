@@ -3,13 +3,13 @@
     {
       "id": "b05",
       "view": "basis-daten",
-      "title": "Daten und faire Tests",
+      "title": "Bildprojekt I: Daten und erstes Modell",
       "rueckblick": "Ergebnisse der vorherigen Doppellektion wieder aufgreifen.",
-      "goal": "Trainingsdaten und Testdaten unterscheiden.",
+      "goal": "An vorgegebenen zwei Bildklassen Trainings-, Validierungs- und Testdaten unterscheiden, das gemeinsame Notebook starten und ein erstes Modell trainieren.",
       "question": "Ein Modell kann einen Hintergrund erkennen, obwohl es einen Gegenstand erkennen soll.",
       "motivation": "KI kann man durch eigenes Ausprobieren und systematische Beobachtung verstehen.",
-      "product": "Ein Versuch mit einer nachvollziehbaren Beobachtung.",
-      "zeit": "90 Minuten; explorativ, kein mathematischer Formalismus.",
+      "product": "Datensatzcheck, erster Trainingslauf und eine begründete Vermutung zu möglichen Datenfallen.",
+      "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 50,
       "phases": [
         {
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergrund zu sehen, Bücher immer vor einem schwarzen. Was könnte das Modell irrtümlich lernen?"
+              "text": "Lehrperson demonstriert Datensatzaufteilung und Notebookstart. Tandems prüfen die Bilder auf Hintergrund-Lecks, laden den vorbereiteten Datensatz und trainieren gemeinsam das erste Modell. Beobachtungen und einen Fehler im Journal sichern."
             },
             {
               "art": "Ergebnis",
