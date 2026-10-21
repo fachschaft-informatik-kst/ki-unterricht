@@ -92,20 +92,6 @@
       }
     },
     {
-      "id": "basis-sprache",
-      "class": "section",
-      "navigation": {
-        "order": 10,
-        "label": "09",
-        "title": "Sprachmodelle"
-      },
-      "teaching": true,
-      "overview": {
-        "title": "Sprachmodelle",
-        "summary": "Kontext · Tokens · Faktenprüfung"
-      }
-    },
-    {
       "id": "basis-plan",
       "class": "section",
       "navigation": {
@@ -145,6 +131,20 @@
       "overview": {
         "title": "Projektabschluss und Fachgespräche",
         "summary": "Individuell erklären · benoteter Nachweis"
+      }
+    },
+    {
+      "id": "basis-sprache",
+      "class": "section",
+      "navigation": {
+        "order": 10,
+        "label": "09",
+        "title": "Sprachmodelle"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Sprachmodelle",
+        "summary": "Kontext · Tokens · Faktenprüfung"
       }
     },
     {
