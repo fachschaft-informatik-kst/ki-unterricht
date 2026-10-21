@@ -39,7 +39,8 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8
+              "min": 8,
+              "text": "An die zehn Ziffernausgaben aus dem vortrainierten Netz anknüpfen: Welche Eingaben und Ausgaben kennen wir? Vermutet zunächst, was bei einem Buchstabenbild geschieht."
             },
             {
               "art": "Ergebnis",
