@@ -2,20 +2,19 @@
 type: chapter
 id: basis-training-experiment
 nummer: 1
-titel: Trainieren und echte Tests durchführen
-kurz: Mit Leitfragen selbstständig vergleichen
+titel: Zwei eigene Fotoklassen trainieren
+kurz: MobileNet-Merkmale · eigenes Klassifikationsnetz
 ---
-**Geführte Arbeitsphase:** Entwerft zwei eigene 8×8-Pixelbildklassen und trainiert auf den eingefrorenen Merkmalen des Ziffernnetzes einen neuen Klassifikationskopf. Testet mit neuen Varianten derselben Muster.
 
-1. Öffnet euer [**Bildmodell-Notebook**](../lab/index.html?path=basis_bildmodell.ipynb) und führt den Abschnitt **DL 7** aus. Zeichnet eure zwei Klassen als Pixelraster, trainiert den neuen Kopf und testet beide Klassen.
-2. Testet es ausschliesslich mit Bildern, die **nicht beim Training verwendet** wurden.
-3. Notiert für jede Klasse die Anzahl **richtiger / getesteter** Vorhersagen. Dokumentiert beobachtete Fehler; falls alle Beispiele richtig sind, beschreibt eine mögliche Grenze eures Tests.
-4. Verändert genau einen Einflussfaktor und trainiert eine zweite Modellvariante. Vergleicht beide mit denselben zurückgehaltenen Testbildern.
+**Projektauftrag:** Trainiert einen Bildklassifikator für zwei eigene Gegenstandsklassen. Anders als beim Ziffernnetz verwenden wir jetzt **MobileNet V2**, das für echte Fotos geeignete Merkmale liefert. Das vortrainierte Bildnetz bleibt eingefroren; ihr trainiert nur das nachgeschaltete Netz.
 
-| Testklasse | Richtig | Insgesamt |
-|---|:---:|:---:|
-| Klasse A | … | … |
-| Klasse B | … | … |
+[**Fotostudio öffnen ↗**](../projekt/studio/)
 
-<div class="basis-answer"><label for="basis-training-a">Meilenstein 2: Erstes Testergebnis und kritische Beobachtung</label><textarea id="basis-training-a" data-basis-answer="basis-training-a" rows="6" placeholder="Klasse A … / Klasse B … / Beobachteter Fehler oder mögliche Grenze … / Unsere Erklärung …"></textarea></div>
-<details class="basis-hint"><summary>Hilfe bei Problemen</summary><div class="detail-body"><p>Überprüft zunächst, ob beide Klassen ähnlich viele verschiedene Beispiele enthalten und ob die Bilder gut sichtbar sind. Prüft danach, ob ihr unabsichtlich denselben Hintergrund pro Klasse verwendet. Dokumentiert Fehlversuche, statt sie zu löschen.</p></div></details>
+[**Notebook «Eigene Fotos» starten ↗**](../lab/index.html?path=basis_fotoprojekt.ipynb)
+
+1. Wählt zwei Gegenstandsklassen und erstellt im Fotostudio je Klasse **acht Fotos pro Gruppe** für T1, T2, V1, P1 und P2. Verwendet unterschiedliche Exemplare in unterschiedlichen Gruppen.
+2. Exportiert die JSON-Datei und ladet sie im Notebook hoch. Prüft die Gruppen und Klassen.
+3. Trainiert Modell A und B und vergleicht ihre Vorhersagen auf den Validierungsbildern **V1**.
+4. Wählt eine Variante mit Begründung. Die Testbilder **P1/P2** bleiben bis zur Freigabe unberührt.
+
+<div class="basis-answer"><label for="basis-training-a">Unsere Fotoklassen und erste Ergebnisse</label><textarea id="basis-training-a" data-basis-answer="basis-training-a" rows="6" placeholder="Klasse 1 … / Klasse 2 … / Validierung A … / B … / Unsere Wahl …"></textarea></div>
