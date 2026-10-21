@@ -87,8 +87,8 @@
       },
       "teaching": true,
       "overview": {
-        "title": "Bildprojekt: Einstieg",
-        "summary": "Vortrainiertes Netz · Grenzen erkennen"
+        "title": "Ziffern und Buchstaben",
+        "summary": "Ziffernnetz · Ausgabeklassen · Grenzen"
       }
     },
     {
@@ -101,8 +101,8 @@
       },
       "teaching": true,
       "overview": {
-        "title": "Bildprojekt: planen",
-        "summary": "Transfer Learning · neuer Ausgabekopf"
+        "title": "Buchstaben lernen",
+        "summary": "Neuer A/B-Kopf · Transfer Learning"
       }
     },
     {
@@ -115,8 +115,8 @@
       },
       "teaching": true,
       "overview": {
-        "title": "Bildprojekt: experimentieren",
-        "summary": "Zwei Pixelmuster · trainieren · fair testen"
+        "title": "Eigene Fotoklassen",
+        "summary": "Fotostudio · MobileNet · Vergleich A/B"
       }
     },
     {
