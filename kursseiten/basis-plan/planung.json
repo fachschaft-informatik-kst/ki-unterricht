@@ -3,12 +3,12 @@
     {
       "id": "b07",
       "view": "basis-plan",
-      "title": "Bildprojekt II: geführter Versuchsplan",
+      "title": "Bildprojekt II: Buchstaben durch Transfer Learning",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Mit einer vorgegebenen Auswahl an Bilddatensätzen eine überprüfbare Hypothese und einen fairen Modellvergleich planen.",
-      "question": "Welche eigene Frage kann unser Bildmodell durch faire Tests beantworten?",
+      "goal": "Die eingefrorene Merkmalschicht eines Ziffernnetzes mit einem neuen Ausgabekopf für A/B verwenden und die Veränderung sachlich beurteilen.",
+      "question": "Wie kann ein vortrainiertes Netz neue Bildklassen unterscheiden?",
       "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
-      "product": "Abgenommener Testplan mit konstanten Bedingungen und genau einer geplanten Veränderung.",
+      "product": "Ausgeführtes Notebook mit neuem A/B-Kopf und Erklärung, welche Schicht übernommen wurde.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 60,
       "phases": [
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Im eigenen Bildmodell-Notebook eine überprüfbare Hypothese formulieren, genau eine Variation (Trainingsbildzahl ODER Bildrauschen) auswählen und unveränderte Testbilder festlegen. Anschliessend den Versuchsplan mit der Lehrperson abstimmen. Das Modell wird erst in DL 7 verglichen."
+              "text": "Merkmalsübertragung erklären und den A/B-Kopf im Notebook trainieren (25 Min); neue A/B-Testbilder auswerten (10 Min); Grenzen und Unterschied zwischen Ziffern- und Buchstabenausgaben erläutern (8 Min)."
             },
             {
               "art": "Ergebnis",
