@@ -1,5 +1,5 @@
-## Materialien · basis-abschluss
+## Materialien · Fachgespräche
 
-- Eigenes JupyterLite-Notebook der 1. Klasse: [Bildmodell · Ziffern, Buchstaben, eigene Pixelklassen](../lab/index.html?path=basis_bildmodell.ipynb)
-- Kursseite mit Protokoll und Unterrichtsplan
-- Keine externen Foto-Uploads; die Versuche verwenden lokale 8×8-Pixelbilder
+- Ausgeführtes [Fotoprojekt-Notebook](../lab/index.html?path=basis_fotoprojekt.ipynb)
+- Fotostudio-JSON und Kursantworten aus DL 7
+- Bewertungsraster und individuelle Gesprächsplanung
