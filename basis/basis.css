@@ -77,3 +77,37 @@ body input[type="checkbox"],body input[type="radio"]{accent-color:var(--accent)}
 
 /* Match the fourth-year mobile navigation: no nested chapters in the compact header. */
 @media(max-width:720px){body .sidebar .nav-sub{display:none!important}}
+
+
+/* Complete first-year palette: the shared theme also contains hard-coded
+   green gradients, a green illustration and pale-green card backgrounds. */
+body{
+  background:radial-gradient(1200px 600px at 85% -10%,#dfe9ff 0,transparent 60%) no-repeat fixed,var(--paper);
+  color:#1e2d43;
+}
+body::before{background-image:url(grafiken/netz_hintergrund_blau.svg);}
+body .sidebar{background:linear-gradient(180deg,#fff 0,#f5f8ff 100%);}
+body .course-card:hover{box-shadow:0 14px 34px #253f9118;}
+body .lab-head{background:#e9eefc;}
+body .concept,body .concept div{border-color:#7893d1;background:#e7edff;}
+body .concept div{background:#d8e4ff;}
+body .concept div div{background:#c6d8ff;}
+body .group-box.train{background:#edf2ff;border-color:#acbde6;}
+body .memory-card.matched{background:#edf2ff;}
+body .variant{background:#f8faff;}
+body .wer-t{background:#e6edff;}
+body .lesson-recap{border-left-color:var(--accent);}
+body .footer{border-top:1px solid var(--line);margin-top:25px;}
+body .footer .detail-body a{overflow-wrap:anywhere;}
+body .footer .detail-body>p:last-child a{margin-right:18px;}
+.basis-transfer{margin:34px 0;padding:26px;background:#e9eefc;border-top:5px solid var(--accent);border-radius:0 0 12px 12px;}
+.basis-transfer h2{font-size:clamp(1.5rem,2.4vw,2rem);}
+.basis-transfer-actions{display:grid;gap:14px;max-width:680px;}
+.basis-backup-controls{display:grid;gap:14px;}
+.basis-backup-controls label{display:grid;gap:6px;font-size:14px;font-weight:650;}
+.basis-backup-controls input[type="file"]{font-weight:400;background:white;border:1px solid var(--line);border-radius:8px;padding:10px;width:100%;}
+.basis-backup-controls button{justify-self:start;}
+@media(max-width:720px){
+  .basis-transfer{padding:19px 16px;}
+  .basis-backup-controls button{width:100%;}
+}
