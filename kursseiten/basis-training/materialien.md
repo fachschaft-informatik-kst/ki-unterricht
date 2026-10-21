@@ -1,5 +1,6 @@
-## Materialien · basis-training
+## Materialien · eigenes Fotoprojekt
 
-- Eigenes JupyterLite-Notebook der 1. Klasse: [Bildmodell · Ziffern, Buchstaben, eigene Pixelklassen](../lab/index.html?path=basis_bildmodell.ipynb)
-- Kursseite mit Protokoll und Unterrichtsplan
-- Keine externen Foto-Uploads; die Versuche verwenden lokale 8×8-Pixelbilder
+- [Fotostudio der 4. Klasse – gemeinsame technische Infrastruktur](../projekt/studio/)
+- [Dediziertes Notebook «Eigene Fotos» der 1. Klasse](../lab/index.html?path=basis_fotoprojekt.ipynb)
+- Zwei Gegenstandsklassen, fünf Gruppen T1/T2/V1/P1/P2, je acht Fotos pro Klasse und Gruppe
+- Keine Personenfotos; JSON und Notebook lokal sichern
