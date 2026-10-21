@@ -74,4 +74,21 @@ assert "kursseiten/basis-manifest.json" in (ROOT/"projekt/admin/admin.js").read_
 assert "basis-manifest.json" in (ROOT/"admin-worker/src/index.mjs").read_text(encoding="utf-8")
 assert "KI entdecken" in (base/"unterrichtsplan.html").read_text(encoding="utf-8")
 assert "Papagei" in (base/"index.html").read_text(encoding="utf-8")
+# The first-year image project must be runnable and restorable after deployment.
+import json as _json
+_registry=_json.loads((ROOT/"experimente/registry.json").read_text(encoding="utf-8"))
+_names={item["source"] for item in _registry}
+assert {"basis_neuron.ipynb","basis_netze.ipynb","basis_bildmodell.ipynb","basis_fotoprojekt.ipynb"} <= _names
+for _name in ("basis_neuron.ipynb","basis_netze.ipynb","basis_bildmodell.ipynb","basis_fotoprojekt.ipynb"):
+    _nb=_json.loads((ROOT/"content"/_name).read_text(encoding="utf-8"))
+    assert _nb["nbformat"] == 4 and any(c["cell_type"]=="code" for c in _nb["cells"])
+    assert (ROOT/"_build/content/portal"/_name).is_file(), f"Notebook missing from JupyterLite staging: {_name}"
+assert (base/"index.html").read_text(encoding="utf-8").count('<script type="module" src="persistence.js"></script>') == 1
+assert (ROOT/"content/ki_projekt/fotostudio_core.js").is_file()
+assert (ROOT/"content/ki_projekt/fotostudio.html").is_file()
+assert "224" in (ROOT/"content/ki_projekt/fotostudio_core.js").read_text(encoding="utf-8")
+_persistence=(base/"persistence.js").read_text(encoding="utf-8")
+assert "indexedDB" in _persistence and "makeZip" in _persistence and "readZip" in _persistence
+assert "fotodaten/fotostudio.json" in _persistence and "Reflexionen.txt" in _persistence
+assert "basis_fotoprojekt.ipynb" in (base/"index.html").read_text(encoding="utf-8")
 print("PASS ten differentiated 90-minute basic lessons, shared styling, live activity, separate storage and one editor")
