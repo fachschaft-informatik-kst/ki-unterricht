@@ -7,7 +7,7 @@ kurz: Eine Veränderung – derselbe Test
 ---
 **Pflicht-Meilenstein 3 – Vergleich zweier Modellversionen:**
 
-Entscheidet selbst, welche <strong>eine</strong> Massnahme ihr ausprobieren möchtet. Zum Beispiel abwechslungsreichere Hintergründe, neue Blickwinkel oder ausgewogenere Trainingsbilder.
+Wählt aus den mit der Lehrperson besprochenen Möglichkeiten <strong>eine</strong> Massnahme aus und haltet eure Hypothese fest. Zum Beispiel abwechslungsreichere Hintergründe, neue Blickwinkel oder ausgewogenere Trainingsbilder.
 
 Trainiert erneut und prüft das verbesserte Modell mit den **gleichen zurückgehaltenen Testbildern**. Vergleicht die beiden Ergebnisse, bevor ihr weitere Veränderungen vornehmt.
 
