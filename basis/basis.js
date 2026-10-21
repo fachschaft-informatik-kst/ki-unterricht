@@ -176,7 +176,6 @@ if(memory&&cardsData){
  document.querySelector('#memory-reset')?.addEventListener('click',shuffle);
  shuffle();
 }
-}
 // Keep the desktop navigation collapsible like the fourth-year course.
 // Persist this independently so both courses can use different preferences.
 {
