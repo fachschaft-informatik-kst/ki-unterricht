@@ -5,12 +5,12 @@ nummer: 1
 titel: Trainieren und echte Tests durchführen
 kurz: Ohne Schritt-für-Schritt-Rezept selbst arbeiten
 ---
-**Selbstorganisierte Arbeitsphase:** Ihr kennt eure Forschungsfrage und habt einen Testplan. Entscheidet selbst, in welcher Reihenfolge ihr eure Bilder aufnehmt, ordnet und trainiert.
+**Geführte Arbeitsphase:** Folgt dem geprüften Versuchsplan. Trainiert zwei Varianten mit genau einer Änderung und verwendet dieselben unabhängigen Testbilder.
 
 1. Erstellt euer Modell mit zwei Klassen, z. B. in [Teachable Machine](https://teachablemachine.withgoogle.com/train/image). Nur ein **schulisch freigegebenes Werkzeug** verwenden; keine personenbezogenen Daten hochladen.
 2. Testet es ausschliesslich mit Bildern, die **nicht beim Training verwendet** wurden.
 3. Notiert für jede Klasse die Anzahl **richtiger / getesteter** Vorhersagen. Haltet **mindestens einen Fehler** fest.
-4. Überprüft: Beantwortet der erste Versuch eure Forschungsfrage bereits? Falls nicht, was fehlt noch?
+4. Verändert genau einen Einflussfaktor und trainiert eine zweite Modellvariante. Vergleicht beide mit denselben zurückgehaltenen Testbildern.
 
 | Testklasse | Richtig | Insgesamt |
 |---|:---:|:---:|
