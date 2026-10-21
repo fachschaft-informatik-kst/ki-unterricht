@@ -3,12 +3,12 @@
     {
       "id": "b08",
       "view": "basis-training",
-      "title": "Bildprojekt III: trainieren, vergleichen, verbessern",
+      "title": "Bildprojekt III: zwei eigene Bildklassen",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Zwei Trainingsvarianten unter kontrollierten Bedingungen vergleichen, Fehler erklären und die Grenzen kleiner Datensätze erkennen.",
-      "question": "Welche Trainingsänderung hilft wirklich – und woran erkennen wir das?",
+      "goal": "Zwei eigene 8×8-Pixelmuster entwerfen, auf den eingefrorenen Ziffernnetz-Merkmalen einen neuen Kopf trainieren und zwei Varianten fair testen.",
+      "question": "Kann das vortrainierte Netz unsere eigenen Pixelmuster unterscheiden?",
       "motivation": "Angeleitet untersuchen, eigene Entscheidungen begründen und mit einem fairen Test belegen.",
-      "product": "Vorher/Nachher-Vergleich, Testbelege und Analyse eines beobachteten Fehlers oder einer Modellgrenze.",
+      "product": "Zwei eigene Pixelbildklassen, zwei Trainingsvarianten und ein dokumentierter Vergleich mit gleichen Testbildern.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 70,
       "phases": [
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Im JupyterLite-Bildmodell-Notebook Ausgangsmodell und Variante B trainieren (20 Min), beide mit denselben neuen Pixelbildern testen (10 Min), Ergebnisse je Klasse protokollieren (10 Min) und eine Modellgrenze erklären (3 Min)."
+              "text": "Zwei Pixelmuster entwerfen (10 Min), eigenen Kopf trainieren (15 Min), Testbilder prüfen (8 Min), Trainingsbildzahl verändern und mit gleichen Testbildern vergleichen (10 Min)."
             },
             {
               "art": "Ergebnis",
