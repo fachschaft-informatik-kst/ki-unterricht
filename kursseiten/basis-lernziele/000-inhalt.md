@@ -43,8 +43,8 @@
 ## Daten prüfen
 <!-- MD:END -->
     <ul>
-      <li>Ich trenne Trainingsdaten und unabhängige Testdaten.</li>
-      <li>Ich erkenne falsche Abkürzungen wie den Hintergrund und erkläre, warum ein Modell auf neuen Bildern scheitern kann.</li>
+      <li>Ich erkläre, weshalb ein Ziffernnetz für Buchstaben weiterhin nur Ziffern ausgibt.</li>
+      <li>Ich unterscheide Ausgabeklassen, Trainingsdaten und neue Testbilder.</li>
     </ul>
     <a href="#basis-daten">Zum Unterricht →</a>
   </article>
@@ -66,9 +66,9 @@
 ## Geführtes Bildprojekt und Fachgespräch
 <!-- MD:END -->
     <ul>
-      <li>Ich formuliere mit Hilfestellungen eine überprüfbare Hypothese zu einem vorbereiteten Bilddatensatz.</li>
-      <li>Ich trainiere mit einem vorbereiteten Notebook ein Bildmodell und vergleiche zwei Varianten mit unabhängigen Testbildern.</li>
-      <li>Ich interpretiere Fehlklassifikationen, dokumentiere eine gezielte Verbesserung und erkläre meine Ergebnisse im individuellen Fachgespräch.</li>
+      <li>Ich passe unter Anleitung den Ausgabekopf eines Ziffernnetzes für Buchstaben an.</li>
+      <li>Ich erstelle zwei eigene Gegenstandsklassen und trainiere mit MobileNet-Merkmalen zwei Klassifikationsvarianten.</li>
+      <li>Ich trenne Trainings-, Validierungs- und Testbilder, begründe meine Modellwahl und erkläre meine Ergebnisse im Fachgespräch.</li>
     </ul>
     <a href="#basis-plan">Zum Projekt →</a>
   </article>
@@ -84,4 +84,4 @@
     <a href="#basis-gesellschaft">Zum Unterricht →</a>
   </article>
 </div>
-<p class="callout">Das Bildprojekt wird schrittweise angeleitet. Verbindlich sind ein erster Trainingslauf, ein abgenommener Versuchsplan, ein fairer Modellvergleich, eine dokumentierte Fehleranalyse und ein individuelles Fachgespräch.</p>
+<p class="callout">Das Bildprojekt wird schrittweise angeleitet. Verbindlich sind ein erster Trainingslauf, ein angeleitetes Buchstaben-Fine-Tuning, ein fairer Modellvergleich, eine dokumentierte Fehleranalyse und ein individuelles Fachgespräch.</p>
