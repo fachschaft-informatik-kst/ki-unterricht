@@ -19,8 +19,8 @@ Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergr
 <div class="basis-answer"><label for="basis-daten-a">Unsere Vermutung und Beobachtung</label><textarea id="basis-daten-a" data-basis-answer="basis-daten-a" rows="3" placeholder="Wir vermuten … / Wir sehen …"></textarea></div>
 
 
-### Eigenes Bildmodell trainieren
+### Ziffernnetz und unbekannte Buchstaben
 
 [**Notebook «Bildmodell» starten ↗**](../lab/index.html?path=basis_bildmodell.ipynb)
 
-Im Notebook erzeugt ihr einfache 8×8-Pixelbilder mit zwei unterschiedlichen Mustern und trainiert damit einen echten Klassifikator. Führt in dieser Doppellektion die Abschnitte **DL 5** aus. Das Notebook verwendet nur lokal erzeugte Bilddaten; es werden keine persönlichen Fotos benötigt.
+Führt im Notebook den Abschnitt **DL 5** aus: Prüft zunächst Ziffernvorhersagen und testet dann die Buchstaben A und B. Notiert, welche **Ziffern** das Modell für die Buchstaben ausgibt. Das Modell kennt keine Buchstabenklasse: Die Vorhersage ist deshalb keine gültige Buchstabenerkennung. Die Bilder werden lokal erzeugt.
