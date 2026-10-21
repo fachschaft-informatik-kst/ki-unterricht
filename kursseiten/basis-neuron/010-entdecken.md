@@ -20,3 +20,13 @@ Im Alltag treffen wir Entscheidungen anhand von mehreren Hinweisen. Ein künstli
 <p class="small">Regel: Ist die gewichtete Summe inklusive Bias mindestens 0, lautet die Ausgabe 1; sonst 0. Verändern Sie die Regler und beobachten Sie die vier Zeilen.</p>
 </div>
 <div class="basis-answer"><label for="basis-neuron-a">Vorhersage und tatsächliche Beobachtung</label><textarea id="basis-neuron-a" data-basis-answer="basis-neuron-a" rows="4" placeholder="Meine Vorhersage … / Beim Verändern von … passiert …"></textarea></div>
+
+### Vertiefung aus dem Kurs der 4. Klasse: Ein Perzeptron untersuchen
+
+Im interaktiven Labor oben habt ihr Gewichte und Bias verändert. Im [Notebook «Ein Neuron entscheidet»](../projekt/#perzeptron-5) könnt ihr dieselbe Entscheidung mit Python untersuchen. Öffnet das Notebook über die Kursseite der 4. Klasse; die **Aufgaben hier** sind für die 1. Klasse vereinfacht.
+
+1. Stellt zuerst die AND-Regel ein: Ausgabe 1 nur bei (1, 1). Haltet Gewichte und Bias fest.
+2. Verändert **nur den Bias**. Welche der vier Eingaben wechseln ihre Ausgabe?
+3. Erklärt in eigenen Worten, warum ein Neuron eine gewichtete Summe und eine Schwelle benötigt.
+
+**Pflicht:** ein Experiment und eine Erklärung. Die mathematische Herleitung des Lernalgorithmus ist eine freiwillige Vertiefung.
