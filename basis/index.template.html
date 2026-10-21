@@ -13,15 +13,28 @@
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt</a>
 <aside class="sidebar"><a class="brand" href="#basis-start"><span aria-hidden="true" class="mark"><svg viewBox="0 0 26 26" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><path d="M4 6l9 -2M4 6l9 8M4 6l9 15M4 20l9 -16M4 20l9 -6M4 20l9 1M13 4l9 9M13 14l9 -1M13 21l9 -8" opacity=".7"/><g fill="#fff" stroke="none"><circle cx="4" cy="6" r="2.2"/><circle cx="4" cy="20" r="2.2"/><circle cx="13" cy="4" r="2.2"/><circle cx="13" cy="14" r="2.2"/><circle cx="13" cy="21" r="2.2"/><circle cx="22" cy="13" r="2.6"/></g></svg></span><span class="brand-text">Künstliche<br/>Intelligenz<small>Informatik</small></span></a>
-<nav class="nav" aria-label="Doppellektionen">
+<nav class="nav" aria-label="Unterricht">
 <!-- NAVIGATION -->
 </nav>
-<div class="sidebar-bottom"><a href="../kurse.html">Kursauswahl</a><a href="../projekt/admin/">Lehrpersonen-Editor</a><p id="basis-save-status" role="status">Notizen werden nur in diesem Browser gespeichert.</p><button class="btn compact" id="basis-download">Meine Notizen als JSON sichern</button></div>
+<div class="sidebar-bottom"><a href="../kurse.html">Kursauswahl</a><a href="#basis-sicherung">Notizen &amp; Projekt</a><p class="status" id="basis-save-status" role="status">Nur in diesem Browser gespeichert.</p></div>
 </aside>
 <div class="shell"><main id="inhalt">
 <div class="crumb"><span><img alt="Logo KST" class="school-logo" height="22" src="grafiken/kst_logo.png" width="44"/>Kantonsschule Stadelhofen</span><span>Informatik</span><span>Künstliche Intelligenz</span></div>
 <!-- COURSE -->
-<footer class="footer"><p>KI-Unterricht · Kantonsschule Stadelhofen</p></footer>
+<div class="basis-transfer" id="basis-sicherung" tabindex="-1">
+<h2>Notizen &amp; Projekt</h2>
+<p>Hier könnt ihr eure Antworten, Reflexionen, bearbeiteten Notebooks und die Fotostudio-JSON gemeinsam als ZIP sichern und später wiederherstellen. Speichert die Originalfotos separat.</p>
+<div class="basis-transfer-actions">
+<button class="btn compact" id="basis-download" type="button">Meine Textantworten als JSON sichern</button>
+<div id="basis-backup-controls" class="basis-backup-controls"></div>
+</div>
+</div>
+<footer class="footer"><details><summary>Quellen &amp; Hinweise für die Lehrperson</summary><div class="detail-body">
+<div class="actions"><button class="btn js-only" id="print-page" type="button">Unterrichtsübersicht drucken / als PDF sichern</button><a class="btn" href="#basis-start">Nach oben ↑</a></div>
+<p>KI entdecken · 1. Kurzgymnasium · Kantonsschule Stadelhofen</p>
+<p><a href="unterrichtsplan.html">Unterrichtsplan mit Ablauftabellen (AVIVA) aller Doppellektionen</a> · <a href="materialien.html">Materialkoffer für Lehrpersonen – alle Doppellektionen</a> · <a href="../projekt/admin/">Lehrpersonen-Editor (GitHub-Anmeldung)</a></p>
+<p><a href="https://github.com/fachschaft-informatik-kst/ki-unterricht">Materialien auf GitHub</a><a href="https://github.com/tensorflow/tfjs-models/tree/master/mobilenet">Bildmodell: MobileNet</a><a href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html">Eigenes Netz: MLPClassifier</a></p>
+</div></details></footer>
 </main></div>
 <script src="basis.js" defer></script>
 <script type="module" src="persistence.js"></script>
