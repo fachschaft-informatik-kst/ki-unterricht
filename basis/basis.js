@@ -7,6 +7,10 @@ const key='kst-ki-basis-v1';
 document.documentElement.classList.add('has-js');
 function show(){
   const id=decodeURIComponent((location.hash||'#basis-start').slice(1));
+  if(id==='basis-sicherung'){
+    requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({block:'start'}));
+    return;
+  }
   const chapter=document.getElementById(id);
   const parent=sections.find(s=>s.id===id||s.contains(chapter));
   const active=parent||sections[0];
@@ -172,4 +176,27 @@ if(memory&&cardsData){
  document.querySelector('#memory-reset')?.addEventListener('click',shuffle);
  shuffle();
 }
+}
+// Keep the desktop navigation collapsible like the fourth-year course.
+// Persist this independently so both courses can use different preferences.
+{
+ const sidebar=document.querySelector('.sidebar'),navKey='kst-ki-basis-nav-collapsed';
+ const toggle=document.createElement('button');
+ let collapsed=false;
+ try{collapsed=localStorage.getItem(navKey)==='1';}catch{}
+ toggle.type='button';toggle.className='nav-toggle';
+ const media=matchMedia('(min-width:721px)');
+ const apply=()=>{
+   document.body.classList.toggle('nav-collapsed',collapsed);
+   sidebar.inert=collapsed&&media.matches;
+   toggle.setAttribute('aria-expanded',String(!collapsed));
+   toggle.setAttribute('aria-label',collapsed?'Navigation einblenden':'Navigation einklappen');
+   toggle.title=toggle.getAttribute('aria-label');
+   toggle.textContent=collapsed?'›':'‹';
+ };
+ toggle.addEventListener('click',()=>{collapsed=!collapsed;try{localStorage.setItem(navKey,collapsed?'1':'0');}catch{}apply();});
+ media.addEventListener('change',apply);
+ document.body.append(toggle);apply();
+}
+document.getElementById('print-page')?.addEventListener('click',()=>window.print());
 })();
