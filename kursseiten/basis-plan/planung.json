@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Aus vorbereiteten Datensätzen wählen; Klassen, Trainings- und Testgruppen kennzeichnen; Hypothese notieren; genau einen Einflussfaktor auswählen. Lehrperson prüft den Plan vor dem Experiment."
+              "text": "Im eigenen Bildmodell-Notebook eine überprüfbare Hypothese formulieren, genau eine Variation (Trainingsbildzahl ODER Bildrauschen) auswählen und unveränderte Testbilder festlegen. Anschliessend den Versuchsplan mit der Lehrperson abstimmen. Das Modell wird erst in DL 7 verglichen."
             },
             {
               "art": "Ergebnis",
