@@ -2,12 +2,12 @@
 type: chapter
 id: basis-daten-reflexion
 nummer: 2
-titel: Vergleichen und erklären
-kurz: Aus der Beobachtung eine Erklärung machen
+titel: Warum scheitert das Ziffernnetz an Buchstaben?
+kurz: Ausgabeklassen und Grenzen verstehen
 ---
 
-Plant je zwei NEUE Testbilder pro Klasse, mit neuen Winkeln und vertauschten Hintergründen. Was erwartet ihr?
+Das vortrainierte Netz kennt **zehn Ziffernklassen** und keine Buchstaben. Es gibt für A und B trotzdem eine Ziffer aus.
 
-<div class="basis-answer"><label for="basis-daten-b">Unser Ergebnis und seine Begründung</label><textarea id="basis-daten-b" data-basis-answer="basis-daten-b" rows="3" placeholder="Unsere Erklärung …"></textarea></div>
+**Auftrag:** Notiert zwei beobachtete Ausgaben. Erklärt, weshalb eine Ziffernvorhersage für A oder B nicht beweist, dass das Modell Buchstaben erkennt. Welche Änderung wäre nötig, damit es A und B unterscheiden kann?
 
-<details><summary>Hilfestellung</summary><p>Es könnte die Hintergrundfarbe statt des Gegenstands verwenden. Gute Treffer bei Trainingsbildern allein beweisen keine Zuverlässigkeit.</p></details>
+<div class="basis-answer"><label for="basis-daten-b">Unsere Erklärung</label><textarea id="basis-daten-b" data-basis-answer="basis-daten-b" rows="4" placeholder="Das Netz sagt … / Es kennt … / Für A und B bräuchte es …"></textarea></div>
