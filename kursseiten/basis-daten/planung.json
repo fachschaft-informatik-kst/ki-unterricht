@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Zum Einstieg: Ein Modell kann einen Hintergrund erkennen, obwohl es einen Gegenstand erkennen soll."
+              "text": "Ein bereits trainiertes Ziffernnetz zeigt verschiedene Ziffern korrekt an. Anschliessend die Frage stellen: Was passiert bei einem A?"
             },
             {
               "art": "Ergebnis",
@@ -39,8 +39,7 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
-              "text": "Vorwissen austauschen und eine Hypothese notieren."
+              "min": 8
             },
             {
               "art": "Ergebnis",
@@ -59,7 +58,7 @@
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Ein- und Ausgaben im Zusammenhang mit «Daten und faire Tests» erklären."
+              "text": "Eingaben als 8×8-Pixelbilder und Ausgaben als zehn Ziffernklassen (0–9) erklären; Buchstaben sind keine trainierten Ausgabeklassen."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +96,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Ein eigenes Fazit formulieren und mit der Leitfrage vergleichen."
+              "text": "Sichern: Ein Ziffernnetz muss auch für Buchstaben eine Ziffer ausgeben. Welche Änderung wäre nötig, damit es A/B erkennen könnte?"
             },
             {
               "art": "Ergebnis",
