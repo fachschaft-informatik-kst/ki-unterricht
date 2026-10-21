@@ -3,12 +3,12 @@
     {
       "id": "b08",
       "view": "basis-training",
-      "title": "Bildprojekt III: zwei eigene Bildklassen",
+      "title": "Bildprojekt III: zwei eigene Fotoklassen",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Zwei eigene 8×8-Pixelmuster entwerfen, auf den eingefrorenen Ziffernnetz-Merkmalen einen neuen Kopf trainieren und zwei Varianten fair testen.",
-      "question": "Kann das vortrainierte Netz unsere eigenen Pixelmuster unterscheiden?",
+      "goal": "Zwei reale Gegenstandsklassen mit MobileNet-Merkmalen klassifizieren; Trainings-, Validierungs- und Testgruppen trennen und zwei Varianten auf V1 vergleichen.",
+      "question": "Kann unser eigenes Netz zwei Gegenstandsklassen anhand vortrainierter Bildmerkmale unterscheiden?",
       "motivation": "Angeleitet untersuchen, eigene Entscheidungen begründen und mit einem fairen Test belegen.",
-      "product": "Zwei eigene Pixelbildklassen, zwei Trainingsvarianten und ein dokumentierter Vergleich mit gleichen Testbildern.",
+      "product": "Fotostudio-JSON, ausgeführtes Notebook, Vergleich A/B auf V1 und begründete Modellwahl.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 70,
       "phases": [
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Zwei Pixelmuster entwerfen (10 Min), eigenen Kopf trainieren (15 Min), Testbilder prüfen (8 Min), Trainingsbildzahl verändern und mit gleichen Testbildern vergleichen (10 Min)."
+              "text": "Eigene Fotostudio-JSON laden und Gruppen prüfen (10 Min), MobileNet-Merkmale und eingefrorenes Netz erklären (5 Min), A/B-Klassifikationsköpfe trainieren (15 Min), Vorhersagen auf V1 untersuchen (10 Min), Modellwahl protokollieren (3 Min). LP-Hinweis: Fotodaten müssen vor DL 7 erstellt werden; 80 Fotos können nicht zusätzlich in dieser Lektion aufgenommen werden."
             },
             {
               "art": "Ergebnis",
