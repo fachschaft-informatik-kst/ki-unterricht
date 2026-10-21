@@ -5,9 +5,9 @@ nummer: 1
 titel: Trainieren und echte Tests durchführen
 kurz: Mit Leitfragen selbstständig vergleichen
 ---
-**Geführte Arbeitsphase:** Folgt dem geprüften Versuchsplan. Trainiert zwei Varianten mit genau einer Änderung und verwendet dieselben zurückgehaltenen Vergleichsbilder. Verwendet dafür das bereits in DL 5 eingeführte Werkzeug.
+**Geführte Arbeitsphase:** Entwerft zwei eigene 8×8-Pixelbildklassen und trainiert auf den eingefrorenen Merkmalen des Ziffernnetzes einen neuen Klassifikationskopf. Testet mit neuen Varianten derselben Muster.
 
-1. Öffnet euer [**Bildmodell-Notebook**](../lab/index.html?path=basis_bildmodell.ipynb) und führt die Abschnitte DL 6 und DL 7 aus. Verwendet die im Notebook erzeugten Bilddaten und dieselben Testbilder für beide Varianten.
+1. Öffnet euer [**Bildmodell-Notebook**](../lab/index.html?path=basis_bildmodell.ipynb) und führt den Abschnitt **DL 7** aus. Zeichnet eure zwei Klassen als Pixelraster, trainiert den neuen Kopf und testet beide Klassen.
 2. Testet es ausschliesslich mit Bildern, die **nicht beim Training verwendet** wurden.
 3. Notiert für jede Klasse die Anzahl **richtiger / getesteter** Vorhersagen. Dokumentiert beobachtete Fehler; falls alle Beispiele richtig sind, beschreibt eine mögliche Grenze eures Tests.
 4. Verändert genau einen Einflussfaktor und trainiert eine zweite Modellvariante. Vergleicht beide mit denselben zurückgehaltenen Testbildern.
