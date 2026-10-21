@@ -75,7 +75,7 @@ def build():
     (OUT / "theme.css").write_text(match.group(1) + "\n", encoding="utf-8")
     # Shared images stay authored in projekt/grafiken; copy them for relative editor URLs.
     shutil.copytree(ROOT / "projekt" / "grafiken", OUT / "grafiken", dirs_exist_ok=True)
-    for filename in ("basis.css", "basis.js"):
+    for filename in ("basis.css", "basis.js", "persistence.js"):
         (OUT / filename).write_bytes((SOURCE / filename).read_bytes())
     page, lessons = assemble()
     (OUT / "index.html").write_text(page, encoding="utf-8")
