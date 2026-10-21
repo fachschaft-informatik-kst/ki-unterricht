@@ -1,5 +1,6 @@
-## Materialien · basis-daten
+## Ziffernnetz: eigene und unbekannte Klassen
 
-- Eigenes JupyterLite-Notebook der 1. Klasse: [Bildmodell · Ziffern, Buchstaben, eigene Pixelklassen](../lab/index.html?path=portal/basis_bildmodell.ipynb)
-- Kursseite mit Protokoll und Unterrichtsplan
-- Keine externen Foto-Uploads; die Versuche verwenden lokale 8×8-Pixelbilder
+- Dediziertes Notebook der 1. Klasse: [Ziffernnetz und Buchstaben](../lab/index.html?path=portal/basis_bildmodell.ipynb)
+- DL 5: Ziffern erkennen, Buchstaben A/B testen; das Netz besitzt zunächst nur Ausgaben 0–9
+- Vorbereitete 8×8-Pixelbilder und ein vortrainiertes Ziffernnetz; keine persönlichen Aufnahmen
+- Reflexionsfelder für falsche Erwartungen und Grenzen des Modells
