@@ -15,4 +15,8 @@ kurz: Ein fairer Vergleich · dieselben Validierungsbilder
 
 <div class="basis-answer"><label for="basis-training-b">Unser Vergleich und seine Grenzen</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="6" placeholder="Unsere Modellwahl … / V1 … / Mögliche Datenfalle … / Eine Grenze …"></textarea></div>
 
-**Vor DL 8:** Sichert das ausgeführte Notebook, die Fotostudio-JSON und eure Antworten. Bereitet euch darauf vor, den Unterschied zwischen Training, Validierung und Test sowie die Rolle von MobileNet zu erklären.
+**Unabhängiger Abschlusstest:** Nach der begründeten Modellwahl und Freigabe durch die Lehrperson prüft ihr die ausgewählte Variante **einmal** auf P1/P2. Notiert das Ergebnis und einen beobachteten Fehler oder einen möglichen Grenzfall. Optimiert das Modell danach nicht weiter anhand dieser Testbilder.
+
+<div class="basis-answer"><label for="basis-training-test">Unser unabhängiger Abschlusstest</label><textarea id="basis-training-test" data-basis-answer="basis-training-test" rows="4" placeholder="Gewähltes Modell … / P1/P2 richtig … / Fehler oder Grenze …"></textarea></div>
+
+**Vor DL 8:** Sichert das ausgeführte Notebook, die Fotostudio-JSON und eure Antworten als ZIP. Bereitet euch darauf vor, den Unterschied zwischen Training, Validierung und Test sowie die Rolle von MobileNet zu erklären.
