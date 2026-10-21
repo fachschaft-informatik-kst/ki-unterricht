@@ -3,12 +3,12 @@
     {
       "id": "b05",
       "view": "basis-daten",
-      "title": "Bildprojekt I: Daten und erstes Modell",
+      "title": "Bildprojekt I: Ziffernnetz und Buchstaben",
       "rueckblick": "Ergebnisse der vorherigen Doppellektion wieder aufgreifen.",
-      "goal": "Einfache 8×8-Pixelbilder als Trainings- und Testdaten unterscheiden und im eigenen Jupyter-Notebook einen binären Bildklassifikator tatsächlich trainieren und testen.",
-      "question": "Ein Modell kann einen Hintergrund erkennen, obwohl es einen Gegenstand erkennen soll.",
+      "goal": "Ein vortrainiertes Ziffernnetz testen, seine Ausgabeklassen verstehen und die Grenzen bei Buchstabenbildern erklären.",
+      "question": "Warum sagt ein Ziffernnetz auch bei Buchstaben eine Ziffer voraus?",
       "motivation": "KI kann man durch eigenes Ausprobieren und systematische Beobachtung verstehen.",
-      "product": "Datensatzcheck, erster Trainingslauf und eine begründete Vermutung zu möglichen Datenfallen.",
+      "product": "Dokumentierte Ziffern- und Buchstabenvorhersagen sowie Erklärung der Ausgabeklassen.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 50,
       "phases": [
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Lehrperson demonstriert den Start des JupyterLite-Notebooks (5 Min). Tandems betrachten zwei Pixelbildklassen (10 Min), führen den vorbereiteten Trainingscode aus (15 Min), prüfen Vorhersagen mit zurückgehaltenen Bildern (10 Min) und halten eine Modellgrenze fest (3 Min)."
+              "text": "Notebook starten und Ziffernnetz ausführen (15 Min), Ziffernbeispiele prüfen (10 Min), Buchstaben A/B testen (10 Min), Resultate und Grenzen begründen (8 Min)."
             },
             {
               "art": "Ergebnis",
