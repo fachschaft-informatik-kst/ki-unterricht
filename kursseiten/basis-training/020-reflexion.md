@@ -2,17 +2,17 @@
 type: chapter
 id: basis-training-reflexion
 nummer: 2
-titel: Zwei Modelle fair vergleichen
-kurz: Eine Veränderung · dieselben Testbilder
+titel: Modellvergleich begründen
+kurz: Ein fairer Vergleich · dieselben Validierungsbilder
 ---
 
-**Meilenstein 2:** Ändert im Notebook **nur die Anzahl der Trainingsvarianten pro Klasse**. Trainiert den neuen Klassifikationskopf erneut. Verwendet für beide Modelle exakt **dieselben zurückgehaltenen Testbilder**.
+**Meilenstein:** Beide Modelle verwenden gleich viele Trainingsfotos, aber unterschiedliche Trainingsgruppen. Vergleicht die Trefferquoten auf **V1**, nicht auf den späteren Testbildern P1/P2.
 
-| Versuch | Klasse 0 richtig / getestet | Klasse 1 richtig / getestet |
-|---|:---:|:---:|
-| Erstes Modell | … / … | … / … |
-| Vergleichsmodell | … / … | … / … |
+| Modell | V1 richtig / getestet | Beobachtung |
+|---|:---:|---|
+| A – Fotos aus T1 | … / … | … |
+| B – Fotos aus T1 und T2 | … / … | … |
 
-<div class="basis-answer"><label for="basis-training-b">Unser Vergleich und seine Grenzen</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="6" placeholder="Wir änderten … / Beide Tests verwendeten … / Wir folgern … / Unsicher bleibt …"></textarea></div>
+<div class="basis-answer"><label for="basis-training-b">Unser Vergleich und seine Grenzen</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="6" placeholder="Unsere Modellwahl … / V1 … / Mögliche Datenfalle … / Eine Grenze …"></textarea></div>
 
-**Abgabe vor DL 8:** Sichert euer ausgeführtes Notebook und die Antworten auf der Kursseite. Formuliert eure Forschungsfrage, dokumentiert beide Testergebnisse und erklärt eine Grenze eures Versuchs. Im Fachgespräch soll jede Person den Trainingsprozess selbstständig erläutern können.
+**Vor DL 8:** Sichert das ausgeführte Notebook, die Fotostudio-JSON und eure Antworten. Bereitet euch darauf vor, den Unterschied zwischen Training, Validierung und Test sowie die Rolle von MobileNet zu erklären.
