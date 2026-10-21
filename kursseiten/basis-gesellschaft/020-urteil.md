@@ -5,7 +5,16 @@ nummer: 2
 titel: Wer entscheidet – und für wen?
 kurz: Eine Massnahme fair und kritisch beurteilen
 ---
-Wie im Video von Cathy O’Neil geht es um die Folgen automatisierter Entscheidungen. Nicht jedes Modell ist absichtlich ungerecht. Probleme können entstehen, wenn Trainingsdaten vergangene Ungleichheiten übernehmen oder niemand Entscheidungen überprüft.
+
+### Videoimpuls (Deutsch)
+
+Schaut gemeinsam [ARTE: «Jurriaan, KI-Prüfer aus den Niederlanden» (3 Min.)](https://www.arte.tv/de/videos/119741-000-A/jurriaan-ki-pruefer-aus-den-niederlanden/). Notiert beim Schauen: **Welche Menschen können benachteiligt werden? Wie lässt sich ein Algorithmus unabhängig überprüfen?**
+
+Für eine vertiefte Filmphase eignet sich ein **vorab ausgewählter Ausschnitt** aus [ARTE: «Digital Aliens – Die neue Ungleichheit»](https://www.arte.tv/de/videos/120412-000-A/digital-aliens/). Die vollständige Dokumentation dauert 90 Minuten und passt deshalb nicht zusätzlich zur Diskussion in eine Doppellektion. Die Lehrperson legt einen thematisch passenden Ausschnitt vor Unterrichtsbeginn fest und prüft die Verfügbarkeit.
+
+**Transfer aus eurem Bildprojekt:** Welche Datenfalle habt ihr selbst beobachtet? Was wäre anders, wenn die Fehlklassifikation nicht einen Gegenstand, sondern einen Menschen beträfe?
+
+Wie in der Diskussion um Cathy O’Neils «Angriff der Algorithmen» geht es um die Folgen automatisierter Entscheidungen. Nicht jedes Modell ist absichtlich ungerecht. Probleme können entstehen, wenn Trainingsdaten vergangene Ungleichheiten übernehmen oder niemand Entscheidungen überprüft.
 
 **Untersucht zu zweit einen Fall eurer Wahl:**
 

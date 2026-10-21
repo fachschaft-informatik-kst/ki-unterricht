@@ -49,7 +49,7 @@
     <a href="#basis-daten">Zum Unterricht →</a>
   </article>
   <article class="card">
-    <span class="section-label">06</span>
+    <span class="section-label">09</span>
     <!-- MD:START -->
 ## Sprachmodelle untersuchen
 <!-- MD:END -->
@@ -61,14 +61,14 @@
     <a href="#basis-sprache">Zum Unterricht →</a>
   </article>
   <article class="card">
-    <span class="section-label">07–09</span>
+    <span class="section-label">05–08</span>
     <!-- MD:START -->
-## Eigenständiges Bildprojekt
+## Geführtes Bildprojekt und Fachgespräch
 <!-- MD:END -->
     <ul>
-      <li>Ich formuliere eine überprüfbare Forschungsfrage mit Hypothese.</li>
-      <li>Ich plane und dokumentiere einen fairen Vergleich, führe das Training und einen unabhängigen Test durch.</li>
-      <li>Ich interpretiere Fehler, verbessere gezielt einen Aspekt und erläutere die Grenzen des Modells.</li>
+      <li>Ich formuliere mit Hilfestellungen eine überprüfbare Hypothese zu einem vorbereiteten Bilddatensatz.</li>
+      <li>Ich trainiere mit einem vorbereiteten Notebook ein Bildmodell und vergleiche zwei Varianten mit unabhängigen Testbildern.</li>
+      <li>Ich interpretiere Fehlklassifikationen, dokumentiere eine gezielte Verbesserung und erkläre meine Ergebnisse im individuellen Fachgespräch.</li>
     </ul>
     <a href="#basis-plan">Zum Projekt →</a>
   </article>
@@ -84,4 +84,4 @@
     <a href="#basis-gesellschaft">Zum Unterricht →</a>
   </article>
 </div>
-<p class="callout">Bei den Projektlektionen entscheidest du selbst, wie du deine Forschungsfrage untersuchst. Verbindlich sind nachvollziehbare Zwischenprodukte, unabhängige Tests und eine begründete Auswertung.</p>
+<p class="callout">Das Bildprojekt wird schrittweise angeleitet. Verbindlich sind ein erster Trainingslauf, ein abgenommener Versuchsplan, ein fairer Modellvergleich, eine dokumentierte Fehleranalyse und ein individuelles Fachgespräch.</p>

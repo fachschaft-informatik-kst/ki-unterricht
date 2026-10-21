@@ -3,14 +3,14 @@
     {
       "id": "b07",
       "view": "basis-plan",
-      "title": "Bildprojekt planen",
+      "title": "Bildprojekt II: geführter Versuchsplan",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Im Tandem eigenständig eine Forschungsfrage zu einem Bildklassifikator entwickeln, Hypothese, Trainings-/Testdaten und Testkriterium festlegen.",
+      "goal": "Mit einer vorgegebenen Auswahl an Bilddatensätzen eine überprüfbare Hypothese und einen fairen Modellvergleich planen.",
       "question": "Welche eigene Frage kann unser Bildmodell durch faire Tests beantworten?",
       "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
-      "product": "Selbst gewählte Forschungsfrage, unabhängiger Testplan und Peer-Feedback.",
-      "zeit": "Selbstorganisiertes Lernen (SOL) in Tandems, mit verbindlichen Zwischenprodukten.",
-      "order": 70,
+      "product": "Abgenommener Testplan mit konstanten Bedingungen und genau einer geplanten Veränderung.",
+      "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
+      "order": 60,
       "phases": [
         {
           "phase": "Ankommen",
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Selbstorganisiertes Tandemprojekt: Thema wählen, Hypothese formulieren, Trainings-/Testplan aufbauen; Peer-Feedback annehmen; bei Bedarf Lehrperson konsultieren."
+              "text": "Aus vorbereiteten Datensätzen wählen; Klassen, Trainings- und Testgruppen kennzeichnen; Hypothese notieren; genau einen Einflussfaktor auswählen. Lehrperson prüft den Plan vor dem Experiment."
             },
             {
               "art": "Ergebnis",

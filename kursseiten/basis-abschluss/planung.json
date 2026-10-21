@@ -3,107 +3,107 @@
     {
       "id": "b09",
       "view": "basis-abschluss",
-      "title": "Testen und präsentieren",
+      "title": "Bildprojekt IV: individuelle Fachgespräche",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Eine eigenständige Bilduntersuchung mit Belegen präsentieren, die Grenze des Modells erklären und die eigene Arbeit kritisch reflektieren.",
+      "goal": "Eigene Modellresultate im individuellen Fachgespräch verständlich erklären und einen fairen Test kritisch beurteilen.",
       "question": "Welche Ergebnisse dürfen wir aus unserem Versuch ableiten?",
-      "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
-      "product": "Nachvollziehbare 3–4-Minuten-Präsentation und individuelle Reflexion.",
-      "zeit": "Selbstorganisiertes Lernen (SOL) in Tandems, mit verbindlichen Zwischenprodukten.",
-      "order": 90,
+      "motivation": "Eigene Modellentscheidungen fachlich erklären; die gemeinsame Abgabe wird durch einen individuellen Leistungsnachweis ergänzt.",
+      "product": "Tandemabgabe und individuelle benotete Fachgespräche.",
+      "zeit": "90 Minuten; 12–14 individuelle Gespräche à 5 Minuten einschliesslich Wechsel und Bewertung, restliche Zeit als Puffer.",
+      "order": 80,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "SOL 3: analysieren und präsentieren",
-          "minutes": 10,
+          "titel": "Gesprächsplan und Fremdauftrag",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
-              "text": "Welche Aussage darf ich aus meinen Testergebnissen ableiten? Einstieg über einen Beispiel-Fehlschluss."
+              "min": 4,
+              "text": "Gesprächsreihenfolge, Bewertungskriterien und selbstständige Fremdmodell-Analyse klären."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "min": 1,
+              "text": "Gesprächsplan liegt bereit."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Projektstatus abstimmen",
-          "minutes": 10,
+          "titel": "Drei Gesprächsfragen abrufen",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
-              "text": "Ergebnis- und Präsentationsplan im Team aufteilen; beide Personen übernehmen einen Teil."
+              "min": 4,
+              "text": "Keine zusätzliche Vorwissensphase: Die Fachgespräche beginnen unmittelbar."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "min": 1,
+              "text": "Jede Person kennt die drei Fragebereiche."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Kriterien nutzen",
-          "minutes": 15,
+          "titel": "Bewertungskriterien klären",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 13,
-              "text": "Bewertungskriterien kurz klären: nachvollziehbare Frage, Test, Vergleich, Fehleranalyse, Grenzen; nicht die höchste Trefferquote."
+              "min": 4,
+              "text": "Bewertungsraster wurde vor dem Termin bekanntgegeben."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "min": 1,
+              "text": "Bewertungsraster wurde im Projekt ausgeteilt."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Selbstständig arbeiten",
-          "minutes": 45,
+          "titel": "Individuelle Fachgespräche",
+          "minutes": 70,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 43,
-              "text": "Selbstorganisiert Schlussfolgerung und Kurzpräsentation vorbereiten, mit einem anderen Team Rückfragen erproben und Ergebnisse vorstellen."
+              "min": 69,
+              "text": "12–14 Einzelgespräche à 5 Minuten inklusive Wechsel und Kurzbewertung (maximal 70 Minuten). Andere Lernende bearbeiten die unbenotete Fremdmodell-Analyse. Bei weniger Gesprächen zusätzliche Reflexionszeit."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "min": 1,
+              "text": "Bewertungsbogen pro Person dokumentiert."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Erkenntnisse sichern",
-          "minutes": 10,
+          "titel": "Rückblick und Sicherung",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 8,
-              "text": "Jede Person dokumentiert eine eigene Erkenntnis und eine Verbesserungsidee."
+              "min": 4,
+              "text": "Jede Person notiert eine eigene Erkenntnis und eine Grenze ihres Bildmodells."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "min": 1,
+              "text": "Individuelle Reflexion abgeschlossen."
             }
           ]
         }

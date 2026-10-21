@@ -3,14 +3,14 @@
     {
       "id": "b06",
       "view": "basis-sprache",
-      "title": "Wie erzeugen Sprachmodelle Text?",
+      "title": "Sprachmodelle: vom Kontext zur Textvorhersage",
       "rueckblick": "Daten und faire Tests: Modelle können überzeugend wirken, obwohl sie Fehler machen.",
-      "goal": "Am Papierexperiment und einer Wortfolgen-Lernstrecke erklären, wie Kontext Vorhersagen verändert, eine statistische Worttabelle vom neuronalen Sprachmodell unterscheiden und plausible Aussagen kritisch prüfen.",
+      "goal": "In einer Doppellektion die Inhalte der 4. Klasse zu Kontext, Tokenvorhersage, neuronalen Sprachmodellen und Quellenprüfung bearbeiten.",
       "question": "Weshalb kann ein Chatbot überzeugend schreiben und trotzdem etwas Falsches behaupten?",
       "motivation": "Sprachmodelle begegnen uns in Chatbots und Schreibassistenten; ihre Antworten müssen kritisch geprüft werden.",
-      "product": "Zwei Papiertexte mit unterschiedlichem Kontext, zwei Papagei-Versuche, Vergleich Häufigkeitstabelle/Netz und Quellenprüfung.",
-      "zeit": "90 Minuten: Kernstationen Papierexperiment, Papagei, neuronales Modell, Transfer; Soekia/Turing und lokales Labor sind Wahlvertiefungen.",
-      "order": 60,
+      "product": "Papierexperiment, Papagei-Versuch, Vergleich neuronales Modell und begründete Faktenprüfung.",
+      "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
+      "order": 90,
       "phases": [
         {
           "phase": "Ankommen",
@@ -78,7 +78,7 @@
               "art": "Experiment",
               "wer": "Tandem",
               "min": 25,
-              "text": "Papagei-Lernstrecke eigenständig bearbeiten, mindestens zwei Stationen protokollieren und Ergebnisse vergleichen."
+              "text": "Papierexperiment und Papagei-Lernstrecke der 4. Klasse übernehmen; Unterschiede zwischen statistischer Tabelle und neuronalen Sprachmodellen diskutieren und eine plausibel klingende Aussage extern prüfen."
             },
             {
               "art": "Auftrag",
