@@ -12,6 +12,10 @@
     "title": "1. Klasse: Bildprojekt"
   },
   {
+    "source": "basis_fotoprojekt.ipynb",
+    "title": "1. Klasse: Eigene Fotos"
+  },
+  {
     "source": "perzeptron_und_neuronale_netze.ipynb",
     "title": "Ein Neuron"
   },
