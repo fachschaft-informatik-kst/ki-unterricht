@@ -19,3 +19,9 @@ Ihr arbeitet zu zweit mit einem vorbereiteten Bilddatensatz und einem angeleitet
 <div class="basis-answer"><label for="basis-plan-a">Unsere Forschungsfrage, Klassen und Hypothese</label><textarea id="basis-plan-a" data-basis-answer="basis-plan-a" rows="5" placeholder="Unsere Klassen … / Wir untersuchen … / Wir vermuten, dass …"></textarea></div>
 
 <details class="basis-hint"><summary>Ideenhilfe (nur wenn ihr keine eigene Idee findet)</summary><div class="detail-body"><p>Hintergrund wechseln, Beleuchtung verändern, Abstand vergrössern oder Gegenstände aus einer anderen Perspektive zeigen. Untersucht nach Möglichkeit <strong>nur einen Einflussfaktor</strong>.</p></div></details>
+
+### Versuchsplan im eigenen Notebook vorbereiten
+
+[**Notebook «Bildmodell» öffnen ↗**](../lab/index.html?path=basis_bildmodell.ipynb)
+
+Öffnet den Abschnitt **DL 6**. Legt eine einzige Veränderung fest: die Anzahl Trainingsbilder **oder** die Stärke des Bildrauschens. Notiert zuerst eure Vermutung. Die Testbilder bleiben für beide Modelle identisch.
