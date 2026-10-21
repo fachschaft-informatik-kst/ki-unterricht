@@ -15,4 +15,4 @@ kurz: Forschungsfrage mit Belegen beantworten
 
 <div class="basis-answer"><label for="basis-abschluss-a">Schlussfolgerung unseres Teams</label><textarea id="basis-abschluss-a" data-basis-answer="basis-abschluss-a" rows="6" placeholder="Wir untersuchten … / Vorher … / Nachher … / Unser Fehler … / Unsere Grenze …"></textarea></div>
 
-**Selbstständig organisieren:** Ihr habt Zeit für die Auswertung, eine knappe Präsentation und Rückfragen. Teilt die Arbeit im Tandem selbst auf.
+**Benoteter Abschluss:** Die Tandemabgabe liegt vor Beginn der DL 8 vor. Jede Person führt ein etwa fünfminütiges individuelles Fachgespräch zu Modell, Versuch und Fehleranalyse. Die übrigen Tandems bearbeiten parallel eine unbenotete Fremdmodell-Analyse.
