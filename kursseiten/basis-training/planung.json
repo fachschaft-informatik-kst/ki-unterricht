@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Ausgangsmodell trainieren, genau einen Faktor verändern, dieselben unabhängigen Testbeispiele verwenden, Unterschiede tabellarisch protokollieren und einen beobachteten Fehler mit Bildbeleg oder eine mögliche Modellgrenze erklären."
+              "text": "Im JupyterLite-Bildmodell-Notebook Ausgangsmodell und Variante B trainieren (20 Min), beide mit denselben neuen Pixelbildern testen (10 Min), Ergebnisse je Klasse protokollieren (10 Min) und eine Modellgrenze erklären (3 Min)."
             },
             {
               "art": "Ergebnis",
