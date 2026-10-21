@@ -3,19 +3,19 @@
     {
       "id": "b09",
       "view": "basis-abschluss",
-      "title": "Testen und präsentieren",
+      "title": "Bildprojekt IV: individueller Leistungsnachweis",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Eine eigenständige Bilduntersuchung mit Belegen präsentieren, die Grenze des Modells erklären und die eigene Arbeit kritisch reflektieren.",
+      "goal": "Eigene Modellresultate im individuellen Fachgespräch verständlich erklären und einen fairen Test kritisch beurteilen.",
       "question": "Welche Ergebnisse dürfen wir aus unserem Versuch ableiten?",
       "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
-      "product": "Nachvollziehbare 3–4-Minuten-Präsentation und individuelle Reflexion.",
-      "zeit": "Selbstorganisiertes Lernen (SOL) in Tandems, mit verbindlichen Zwischenprodukten.",
-      "order": 90,
+      "product": "Tandemabgabe und individuelle benotete Fachgespräche.",
+      "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
+      "order": 80,
       "phases": [
         {
           "phase": "Ankommen",
           "titel": "SOL 3: analysieren und präsentieren",
-          "minutes": 10,
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
@@ -34,7 +34,7 @@
         {
           "phase": "Vorwissen aktivieren",
           "titel": "Projektstatus abstimmen",
-          "minutes": 10,
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
@@ -53,7 +53,7 @@
         {
           "phase": "Informieren",
           "titel": "Kriterien nutzen",
-          "minutes": 15,
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
@@ -71,14 +71,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Selbstständig arbeiten",
-          "minutes": 45,
+          "titel": "Individuelle Fachgespräche",
+          "minutes": 65,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 43,
-              "text": "Selbstorganisiert Schlussfolgerung und Kurzpräsentation vorbereiten, mit einem anderen Team Rückfragen erproben und Ergebnisse vorstellen."
+              "min": 63,
+              "text": "Abgabe vor Beginn der Lektion sichern. Pro Person 5 Minuten Fachgespräch plus etwa 1 Minute Wechsel/Bewertung; bei 14 Lernenden 84 Minuten. Übrige Tandems bearbeiten selbstständig eine unbenotete Fremdmodell-Analyse."
             },
             {
               "art": "Ergebnis",
