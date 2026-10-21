@@ -19,7 +19,7 @@ kurz: Alle vier Fälle selbst untersuchen
 
 ### Eigenes Notebook: Neuronale Netze
 
-[**Notebook «Neuronale Netze» starten ↗**](../lab/index.html?path=basis_netze.ipynb)
+[**Notebook «Neuronale Netze» starten ↗**](../lab/index.html?path=portal/basis_netze.ipynb)
 
 1. Vergleicht die vier XOR-Zielwerte mit den Ausgaben eines einzelnen Neurons.
 2. Führt danach das Netz aus OR, NAND und AND aus.
