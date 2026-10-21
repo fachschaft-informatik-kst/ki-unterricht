@@ -74,3 +74,6 @@ body .wer-t{background:#e6edff}
 body tr.wer-t td.wer{color:#3156a0}
 body .btn.primary{background:var(--accent);border-color:var(--accent)}
 body input[type="checkbox"],body input[type="radio"]{accent-color:var(--accent)}
+
+/* Match the fourth-year mobile navigation: no nested chapters in the compact header. */
+@media(max-width:720px){body .sidebar .nav-sub{display:none!important}}
