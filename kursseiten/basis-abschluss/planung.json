@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 3,
-              "text": "Welche Aussage darf ich aus meinen Testergebnissen ableiten? Einstieg über einen Beispiel-Fehlschluss."
+              "text": "Gesprächsreihenfolge, Bewertungskriterien und selbstständige Fremdmodell-Analyse klären."
             },
             {
               "art": "Ergebnis",
@@ -40,7 +40,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 0,
-              "text": "Ergebnis- und Präsentationsplan im Team aufteilen; beide Personen übernehmen einen Teil."
+              "text": "Keine zusätzliche Vorwissensphase: Die Fachgespräche beginnen unmittelbar."
             },
             {
               "art": "Ergebnis",
@@ -59,7 +59,7 @@
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 0,
-              "text": "Bewertungskriterien kurz klären: nachvollziehbare Frage, Test, Vergleich, Fehleranalyse, Grenzen; nicht die höchste Trefferquote."
+              "text": "Bewertungsraster wurde vor dem Termin bekanntgegeben."
             },
             {
               "art": "Ergebnis",
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 83,
-              "text": "Bis zu 14 Einzelgespräche à 5 Minuten plus 1 Minute Wechsel und Bewertung = 84 Minuten. Andere Lernende bearbeiten parallel eine unbenotete Fremdmodell-Analyse; die Tandemabgabe liegt vor der Lektion vor."
+              "text": "Bis zu 14 Einzelgespräche: jeweils 5 Minuten Gespräch plus 1 Minute Wechsel/Bewertung (84 Minuten). Restzeit als Puffer. Andere Lernende bearbeiten unbenotet eine Fremdmodell-Analyse."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 0,
-              "text": "Jede Person dokumentiert eine eigene Erkenntnis und eine Verbesserungsidee."
+              "text": "Schriftliche Reflexion in der Fremdmodell-Analyse integriert."
             },
             {
               "art": "Ergebnis",
