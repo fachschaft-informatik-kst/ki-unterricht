@@ -10,7 +10,7 @@ kurz: MobileNet-Merkmale · eigenes Klassifikationsnetz
 
 [**Fotostudio öffnen ↗**](../projekt/studio/)
 
-[**Notebook «Eigene Fotos» starten ↗**](../lab/index.html?path=basis_fotoprojekt.ipynb)
+[**Notebook «Eigene Fotos» starten ↗**](../lab/index.html?path=portal/basis_fotoprojekt.ipynb)
 
 1. Wählt zwei Gegenstandsklassen und erstellt im Fotostudio je Klasse **acht Fotos pro Gruppe** für T1, T2, V1, P1 und P2. Verwendet unterschiedliche Exemplare in unterschiedlichen Gruppen.
 2. Exportiert die JSON-Datei und ladet sie im Notebook hoch. Prüft die Gruppen und Klassen.
