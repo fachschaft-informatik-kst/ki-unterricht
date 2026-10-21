@@ -1,4 +1,4 @@
-/* Same KST course layout; blue-violet accent distinguishes the 1st-year course. */
+/* Same KST course layout; blue accent distinguishes the 1st-year course. */
 :root{--accent:#3653a3;--soft:#e9eefc;--paper:#f3f5fb;--line:#d9e0ef;--muted:#46536a}
 .sidebar .mark{background:var(--accent)}
 .course-card:hover,.basis-language-option:hover{border-color:var(--accent)}
@@ -19,13 +19,13 @@
 .memory-board{max-width:100%}
 .basis-memory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:15px 0}
 .basis-memory-grid button{background:var(--soft);padding:16px 8px;border:1px solid var(--line);border-radius:8px;min-height:72px;font-weight:650;overflow-wrap:anywhere}
-.basis-memory-grid button[data-matched="true"]{background:#dce9df;color:#234c36}
+.basis-memory-grid button[data-matched="true"]{background:#dbe7ff;color:#244a8c}
 @media(max-width:720px){.basis-memory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.basis-network-lab{padding:12px}.basis-network-diagram{min-width:0}.basis-network-lab table{font-size:12px}}
 
 /* The base typography and portal components come from the shared project styles. */
 .basis-answer{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin:20px 0}
 .basis-answer label{display:block;font-weight:650;font-size:14px;margin-bottom:9px}
-.basis-answer textarea{display:block;width:100%;min-height:100px;resize:vertical;padding:12px;border:1px solid #b4c9c0;border-radius:9px}
+.basis-answer textarea{display:block;width:100%;min-height:100px;resize:vertical;padding:12px;border:1px solid #9daeca;border-radius:9px}
 .basis-neuron{background:#fff;border:1px solid var(--line);padding:20px;border-radius:12px;margin:24px 0}
 .basis-neuron>label{display:grid;grid-template-columns:minmax(140px,1fr) minmax(80px,2fr) 35px;gap:10px;align-items:center;margin:8px 0}
 .basis-neuron input{width:100%;accent-color:var(--accent)}
@@ -48,16 +48,29 @@
 
 .basis-language-lab{border:1px solid var(--line);background:#fff;border-radius:12px;padding:20px;margin:20px 0;max-width:100%;overflow:hidden}
 .basis-language-lab>label{display:block;font-weight:650;font-size:14px;margin-bottom:6px}
-.basis-language-lab select{display:block;max-width:100%;width:100%;padding:9px;border:1px solid #b4c9c0;border-radius:8px;font:inherit}
+.basis-language-lab select{display:block;max-width:100%;width:100%;padding:9px;border:1px solid #9daeca;border-radius:8px;font:inherit}
 .basis-language-prompt{margin:18px 0;font-weight:700;font-size:1.1rem;overflow-wrap:anywhere}
 .basis-language-options{display:grid;gap:9px}
-.basis-language-option{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;text-align:left;width:100%;padding:10px 12px;border:1px solid #d8dfdb;border-radius:8px;background:#f9faf8;font:inherit}
-.basis-language-option:hover,.basis-language-option:focus-visible{border-color:var(--accent);background:#e7f1eb}
+.basis-language-option{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;text-align:left;width:100%;padding:10px 12px;border:1px solid #d9e0ef;border-radius:8px;background:#f7f9ff;font:inherit}
+.basis-language-option:hover,.basis-language-option:focus-visible{border-color:var(--accent);background:#e9eefc}
 .basis-language-option>span:first-child{overflow-wrap:anywhere}
 .basis-language-option strong{font-size:.9rem;font-variant-numeric:tabular-nums}
-.basis-language-bar{grid-column:1/-1;display:block;height:7px;border-radius:99px;background:#d9e4df;overflow:hidden}
+.basis-language-bar{grid-column:1/-1;display:block;height:7px;border-radius:99px;background:#d9e3f7;overflow:hidden}
 .basis-language-bar>span{display:block;height:100%;border-radius:99px;background:var(--accent)}
-.basis-language-result{padding:11px 13px;background:#e7f1eb;border-radius:8px;margin:16px 0 0;overflow-wrap:anywhere}
+.basis-language-result{padding:11px 13px;background:#e9eefc;border-radius:8px;margin:16px 0 0;overflow-wrap:anywhere}
 
 /* An active lesson is the only one with an expanded chapter list. */
 .nav-sub[hidden]{display:none!important}
+
+/* First-year colour layer: override the shared fourth-year green theme. */
+body .sidebar .brand .mark{background:linear-gradient(145deg,#5079d7,#253f91)}
+body .course-card::before{background:linear-gradient(90deg,var(--accent),#89a8f3)}
+body .nav a[aria-current],body .nav a:hover{background:var(--soft);color:var(--accent)}
+body .sidebar .brand,body .sidebar .brand:hover{color:var(--ink)}
+body .basis-language-option:hover,body .basis-language-option:focus-visible{background:var(--soft)}
+body .basis-language-result{background:var(--soft)}
+body .basis-memory-grid button[data-matched="true"]{background:#dbe7ff;color:#244a8c}
+body .wer-t{background:#e6edff}
+body tr.wer-t td.wer{color:#3156a0}
+body .btn.primary{background:var(--accent);border-color:var(--accent)}
+body input[type="checkbox"],body input[type="radio"]{accent-color:var(--accent)}
