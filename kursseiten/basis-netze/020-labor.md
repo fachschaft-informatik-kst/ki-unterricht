@@ -17,12 +17,12 @@ kurz: Alle vier Fälle selbst untersuchen
 
 <div class="basis-answer"><label for="basis-netze-a">Unsere Vorhersage und Erklärung</label><textarea id="basis-netze-a" data-basis-answer="basis-netze-a" rows="4" placeholder="Wir erwarteten … / XOR funktioniert durch …"></textarea></div>
 
-### Neuronale Netze im Notebook untersuchen
+### Eigenes Notebook: Neuronale Netze
 
-Öffnet im [Kurs der 4. Klasse die Netzwerk-Experimente](../projekt/#netze-3) und startet dort das Notebook «Neuronale Netze». Vergleicht zunächst das feste XOR-Netz aus OR, NAND und AND mit dem Labor oben.
+[**Notebook «Neuronale Netze» starten ↗**](../lab/index.html?path=basis_netze.ipynb)
 
-1. Sucht eine Eingabe, bei der ein einzelnes Neuron die XOR-Regel nicht vollständig erfüllen kann.
-2. Vergleicht beim trainierbaren Netzwerk **1, 2 und 4 versteckte Neuronen**. Haltet jeweils die Anzahl richtiger XOR-Fälle fest.
-3. Formuliert einen Merksatz: Was ermöglicht die zusätzliche Schicht? Warum garantiert eine grössere Anzahl Neuronen allein noch kein gutes Ergebnis?
+1. Vergleicht die vier XOR-Zielwerte mit den Ausgaben eines einzelnen Neurons.
+2. Führt danach das Netz aus OR, NAND und AND aus.
+3. Erklärt anhand einer Eingabe, wie die Zwischenschicht zur Ausgabe beiträgt.
 
-
+Haltet eure Erkenntnisse auf dieser Kursseite fest.
