@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 48,
-              "text": "Zuerst Schichten und biologisches Vorbild erklären, danach Regler testen und AND/OR experimentell einstellen; Ergebnisse und Grenzen der Analogie dokumentieren. LP-Hinweis: Mathematische Herleitung des Lernalgorithmus bei genügend Zeit als freiwillige Vertiefung anbieten."
+              "text": "Biologisches Vorbild kurz sichern (10 Min), interaktives Reglerlabor (15 Min), eigenes Jupyter-Notebook «Ein Neuron» mit AND/OR und Bias (20 Min), Ergebnisse dokumentieren (3 Min). LP-Hinweis: Mathematische Herleitung des Lernalgorithmus nur bei verbleibender Zeit."
             },
             {
               "art": "Ergebnis",
