@@ -20,8 +20,8 @@ Ihr arbeitet zu zweit mit einem vorbereiteten Bilddatensatz und einem angeleitet
 
 <details class="basis-hint"><summary>Ideenhilfe (nur wenn ihr keine eigene Idee findet)</summary><div class="detail-body"><p>Hintergrund wechseln, Beleuchtung verändern, Abstand vergrössern oder Gegenstände aus einer anderen Perspektive zeigen. Untersucht nach Möglichkeit <strong>nur einen Einflussfaktor</strong>.</p></div></details>
 
-### Versuchsplan im eigenen Notebook vorbereiten
+### Ein Ziffernnetz für Buchstaben anpassen
 
 [**Notebook «Bildmodell» öffnen ↗**](../lab/index.html?path=basis_bildmodell.ipynb)
 
-Öffnet den Abschnitt **DL 6**. Legt eine einzige Veränderung fest: die Anzahl Trainingsbilder **oder** die Stärke des Bildrauschens. Notiert zuerst eure Vermutung. Die Testbilder bleiben für beide Modelle identisch.
+Öffnet den Abschnitt **DL 6**. Trainiert unter Anleitung einen neuen Klassifikationskopf für A und B. Die erste Schicht des Ziffernnetzes bleibt eingefroren. Vergleicht, **welche Ausgaben** vor und nach der Anpassung möglich sind. Notiert, weshalb eine Ziffernausgabe nicht direkt mit der Trefferquote des Buchstabenmodells verglichen werden darf.
