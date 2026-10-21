@@ -9,19 +9,19 @@
       "question": "Welche Ergebnisse dürfen wir aus unserem Versuch ableiten?",
       "motivation": "Eigene Modellentscheidungen fachlich erklären; die gemeinsame Abgabe wird durch einen individuellen Leistungsnachweis ergänzt.",
       "product": "Tandemabgabe und individuelle benotete Fachgespräche.",
-      "zeit": "90 Minuten; 12–14 individuelle Gespräche à 5 Minuten einschliesslich Wechsel und Bewertung, restliche Zeit als Puffer.",
+      "zeit": "90 Minuten; bei bis zu 20 Lernenden rund 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Bewertung pro Person. Alle Gespräche am selben Datum. Ab 21 Lernenden zusätzliche Prüfstation oder kürzere Gesprächsslots planen.",
       "order": 80,
       "phases": [
         {
           "phase": "Ankommen",
           "titel": "Gesprächsplan und Fremdauftrag",
-          "minutes": 5,
+          "minutes": 3,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 4,
-              "text": "Gesprächsreihenfolge, Bewertungskriterien und selbstständige Fremdmodell-Analyse klären."
+              "min": 2,
+              "text": "Gesprächsreihenfolge, Bewertungskriterien und selbstständige Fremdmodell-Analyse kurz klären. Raster und Vorbereitung sind bereits vor der Lektion zugänglich."
             },
             {
               "art": "Ergebnis",
@@ -34,13 +34,13 @@
         {
           "phase": "Vorwissen aktivieren",
           "titel": "Drei Gesprächsfragen abrufen",
-          "minutes": 5,
+          "minutes": 2,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 4,
-              "text": "Keine zusätzliche Vorwissensphase: Die Fachgespräche beginnen unmittelbar."
+              "min": 1,
+              "text": "Die drei bekannten Fragebereiche lediglich sichtbar machen. Keine zusätzliche Prüfungsvorbereitung vor Ort: Gespräche beginnen sofort."
             },
             {
               "art": "Ergebnis",
@@ -53,13 +53,13 @@
         {
           "phase": "Informieren",
           "titel": "Bewertungskriterien klären",
-          "minutes": 5,
+          "minutes": 2,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 4,
-              "text": "Bewertungsraster wurde vor dem Termin bekanntgegeben."
+              "min": 1,
+              "text": "Bewertungskriterien wurden vorab bekannt gegeben. Nur die Startregel und Zeittaktung wiederholen."
             },
             {
               "art": "Ergebnis",
@@ -72,13 +72,13 @@
         {
           "phase": "Verarbeiten",
           "titel": "Individuelle Fachgespräche",
-          "minutes": 70,
+          "minutes": 80,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 69,
-              "text": "12–14 Einzelgespräche à 5 Minuten inklusive Wechsel und Kurzbewertung (maximal 70 Minuten). Andere Lernende bearbeiten die unbenotete Fremdmodell-Analyse. Bei weniger Gesprächen zusätzliche Reflexionszeit."
+              "min": 79,
+              "text": "Bis zu 20 individuelle Fachgespräche à 4 Minuten einschliesslich Wechsel und Kurzbewertung (3½ Minuten Gespräch + ½ Minute Notiz). Andere Lernende bearbeiten die unbenotete Fremdmodell-Analyse ohne Unterbrechung. LP-Hinweis: Bei mehr als 20 Personen zweite Prüfstation oder organisatorische Anpassung; keine Ersatztermine."
             },
             {
               "art": "Ergebnis",
@@ -91,13 +91,13 @@
         {
           "phase": "Auswerten",
           "titel": "Rückblick und Sicherung",
-          "minutes": 5,
+          "minutes": 3,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 4,
-              "text": "Jede Person notiert eine eigene Erkenntnis und eine Grenze ihres Bildmodells."
+              "min": 2,
+              "text": "Alle notieren einzeln eine eigene Erkenntnis und eine Grenze ihres Bildmodells, ohne das individuelle Prüfungsgespräch zu verlängern."
             },
             {
               "art": "Ergebnis",
