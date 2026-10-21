@@ -2,6 +2,7 @@
 const {chromium}=require('playwright');
 const {spawn}=require('node:child_process');
 const path=require('node:path');
+const fs=require('node:fs'),os=require('node:os');
 const assert=require('node:assert/strict');
 (async()=>{
   const directory=process.env.PORTAL_SITE||path.resolve(__dirname,'../dist');
@@ -106,6 +107,29 @@ const assert=require('node:assert/strict');
     assert(await page.evaluate(()=>Boolean(localStorage.getItem('kst-ki-basis-v1'))));
     assert.equal(await page.evaluate(()=>localStorage.getItem('kst-ki-kursportal-v1')),null,
       'Basic course must not use the advanced course storage');
+    // Full first-year ZIP round trip: reflection fields, notebook snapshots and Fotostudio JSON.
+    const notebook={nbformat:4,nbformat_minor:5,metadata:{},cells:[{cell_type:'code',metadata:{},source:['print("Mein Versuch")'],execution_count:1,outputs:[{output_type:'stream',name:'stdout',text:['Mein Ergebnis\\n']}]}]};
+    await page.evaluate(nb=>localStorage.setItem('kst-ki-basis-notebooks-v1',JSON.stringify({'basis_neuron.ipynb':nb})),notebook);
+    await page.reload();
+    await page.locator('.nav > a[href="#basis-ki"]').click();
+    await note.fill('Gesicherte Reflexion im ZIP.');
+    const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
+    await page.locator('input[aria-label="Fotostudio-JSON zur ZIP-Sicherung hinzufügen"]').setInputFiles({name:'fotos.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(studio))});
+    const downloadPromise=page.waitForEvent('download');
+    await page.getByRole('button',{name:'Gesamten Kursstand als ZIP sichern'}).click();
+    const download=await downloadPromise;
+    const archivePath=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'ki-basis-zip-')),'kursstand.zip');
+    await download.saveAs(archivePath);
+    const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../projekt/archive.js')).toString('base64'));
+    const files=await archive.readZip(new Blob([fs.readFileSync(archivePath)]));
+    assert(files.has('Reflexionen.txt')&&files.has('notebooks/basis_neuron.ipynb')&&files.has('fotodaten/fotostudio.json'));
+    assert.equal(JSON.parse(await files.get('notebooks/basis_neuron.ipynb').text()).cells[0].source[0],'print("Mein Versuch")');
+    await note.fill('Wird beim Import ersetzt');
+    const restoredPhoto=page.waitForEvent('download');
+    await page.locator('input[aria-label="ZIP-Kursstand wiederherstellen"]').setInputFiles(archivePath);
+    await restoredPhoto;
+    assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.');
+    assert.equal(JSON.parse(await page.evaluate(()=>localStorage.getItem('kst-ki-basis-notebooks-v1')))['basis_neuron.ipynb'].cells[0].execution_count,1);
     assert.deepEqual(errors,[]);
     console.log('PASS both course links, ten lessons, reused KI/ML, blue KST layout, two-layer network, live neuron controls and isolated persistent answers');
   }finally{if(browser)await browser.close();server.kill();}
