@@ -36,7 +36,10 @@ assert page.select_one("#basis-sprache #basis-sprache-papagei iframe[src*='inf-s
 assert page.select_one("#basis-sprache #basis-sprache-netz img[src='grafiken/papagei_vs_netz.svg']")
 assert page.select_one("#basis-sprache #basis-sprache-soekia.basis-optional")
 assert len(page.select("#basis-sprache details.kapitel")) == 7
-assert [l["view"] for l in basic["lessons"]] == ["basis-ki","basis-lernen","basis-neuron","basis-netze","basis-daten","basis-sprache","basis-plan","basis-training","basis-abschluss","basis-gesellschaft"]
+assert [l["view"] for l in basic["lessons"]] == ["basis-ki","basis-lernen","basis-neuron","basis-netze","basis-daten","basis-plan","basis-training","basis-abschluss","basis-sprache","basis-gesellschaft"]
+assert [lesson["title"] for lesson in basic["lessons"]][7].lower().find("fachgespräch") >= 0
+assert basic["lessons"][8]["view"] == "basis-sprache"
+assert basic["lessons"][9]["view"] == "basis-gesellschaft"
 assert page.select_one("#basis-netze [data-basis-network] table")
 assert page.select_one("#basis-ki #einstieg-1")
 assert page.select_one("#basis-lernen #lernarten-4")
