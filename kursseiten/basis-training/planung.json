@@ -7,14 +7,14 @@
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
       "goal": "Zwei Trainingsvarianten unter kontrollierten Bedingungen vergleichen, Fehler erklären und die Grenzen kleiner Datensätze erkennen.",
       "question": "Welche Trainingsänderung hilft wirklich – und woran erkennen wir das?",
-      "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
-      "product": "Vorher/Nachher-Vergleich, Testbelege und dokumentierte Fehlklassifikation.",
+      "motivation": "Angeleitet untersuchen, eigene Entscheidungen begründen und mit einem fairen Test belegen.",
+      "product": "Vorher/Nachher-Vergleich, Testbelege und Analyse eines beobachteten Fehlers oder einer Modellgrenze.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 70,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "SOL 2: experimentieren und vergleichen",
+          "titel": "Geführt experimentieren und vergleichen",
           "minutes": 10,
           "schritte": [
             {
@@ -71,14 +71,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Selbstständig arbeiten",
+          "titel": "Mit Versuchsplan arbeiten",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Ausgangsmodell trainieren, genau einen Faktor verändern, dieselben unabhängigen Testbeispiele verwenden, Unterschiede tabellarisch protokollieren und mindestens einen Fehler mit Bildbeleg erklären."
+              "text": "Ausgangsmodell trainieren, genau einen Faktor verändern, dieselben unabhängigen Testbeispiele verwenden, Unterschiede tabellarisch protokollieren und einen beobachteten Fehler mit Bildbeleg oder eine mögliche Modellgrenze erklären."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Einen Fehler und die Aussagekraft des Vergleichs im Tandem erklären."
+              "text": "Einen beobachteten Fehler oder eine Modellgrenze und die Aussagekraft des Vergleichs im Tandem erklären."
             },
             {
               "art": "Ergebnis",

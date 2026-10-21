@@ -8,7 +8,7 @@ kurz: Mit einer Vermutung ins Experiment starten
 
 ### Die Datenfalle und der erste Modellversuch
 
-**Pflichtkern:** Prüft zuerst mit der Lehrperson die zwei Bildklassen, die Herkunft und die Trennung von Trainings- und Testbildern. Öffnet anschliessend das vorbereitete Bildklassifikationswerkzeug, trainiert ein erstes Modell und notiert mindestens eine richtige sowie eine falsche Vorhersage. Die unabhängigen Testbilder dürfen nicht ins Training gelangen.
+**Pflichtkern:** Prüft zuerst mit der Lehrperson die zwei Bildklassen, die Herkunft und die Trennung von Trainings- und Testbildern. Öffnet anschliessend das vorbereitete Bildklassifikationswerkzeug, trainiert ein erstes Modell und notiert mindestens zwei Vorhersagen samt tatsächlicher Klasse. Falls kein Fehler auftritt, beschreibt eine mögliche Schwachstelle statt einen Fehler zu erfinden. Die unabhängigen Testbilder dürfen nicht ins Training gelangen.
 
 **Leitfrage:** Was lernt das Modell wirklich – den Gegenstand oder einen zufälligen Bildhintergrund?
 

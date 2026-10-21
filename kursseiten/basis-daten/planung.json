@@ -5,7 +5,7 @@
       "view": "basis-daten",
       "title": "Bildprojekt I: Daten und erstes Modell",
       "rueckblick": "Ergebnisse der vorherigen Doppellektion wieder aufgreifen.",
-      "goal": "An vorgegebenen zwei Bildklassen Trainings-, Validierungs- und Testdaten unterscheiden, das gemeinsame Notebook starten und ein erstes Modell trainieren.",
+      "goal": "An vorgegebenen zwei Bildklassen Trainings-, Validierungs- und Testdaten unterscheiden, das von der Lehrperson vorbereitete Bildklassifikationswerkzeug starten und ein erstes Modell trainieren.",
       "question": "Ein Modell kann einen Hintergrund erkennen, obwohl es einen Gegenstand erkennen soll.",
       "motivation": "KI kann man durch eigenes Ausprobieren und systematische Beobachtung verstehen.",
       "product": "Datensatzcheck, erster Trainingslauf und eine begründete Vermutung zu möglichen Datenfallen.",
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Lehrperson demonstriert Datensatzaufteilung und Notebookstart. Tandems prüfen die Bilder auf Hintergrund-Lecks, laden den vorbereiteten Datensatz und trainieren gemeinsam das erste Modell. Beobachtungen und einen Fehler im Journal sichern."
+              "text": "Lehrperson demonstriert Datensatzaufteilung und Start des vorbereiteten Werkzeugs. Tandems prüfen die Bilder auf Hintergrund-Lecks, laden den vorbereiteten Datensatz und trainieren gemeinsam das erste Modell. Vorhersagen und, falls vorhanden, einen Fehler dokumentieren; sonst eine mögliche Grenze des Modells festhalten."
             },
             {
               "art": "Ergebnis",
