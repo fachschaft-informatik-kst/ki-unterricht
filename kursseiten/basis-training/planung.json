@@ -3,14 +3,14 @@
     {
       "id": "b08",
       "view": "basis-training",
-      "title": "Trainieren und verbessern",
+      "title": "Bildprojekt III: trainieren, vergleichen, verbessern",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Ein selbst gewähltes Bildmodell trainieren, unabhängig testen und eine gezielte Veränderung anhand derselben Testbeispiele beurteilen.",
+      "goal": "Zwei Trainingsvarianten unter kontrollierten Bedingungen vergleichen, Fehler erklären und die Grenzen kleiner Datensätze erkennen.",
       "question": "Welche Trainingsänderung hilft wirklich – und woran erkennen wir das?",
       "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
-      "product": "Dokumentierter Vorher/Nachher-Vergleich mit Zählwerten und analysiertem Fehler.",
-      "zeit": "Selbstorganisiertes Lernen (SOL) in Tandems, mit verbindlichen Zwischenprodukten.",
-      "order": 80,
+      "product": "Vorher/Nachher-Vergleich, Testbelege und dokumentierte Fehlklassifikation.",
+      "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
+      "order": 70,
       "phases": [
         {
           "phase": "Ankommen",
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Selbstorganisierte Arbeitsphase: Daten sammeln, Modell trainieren, getrennt testen, genau eine Änderung durchführen; Ergebnisse in Kapitel 1–2 dokumentieren."
+              "text": "Ausgangsmodell trainieren, genau einen Faktor verändern, dieselben unabhängigen Testbeispiele verwenden, Unterschiede tabellarisch protokollieren und mindestens einen Fehler mit Bildbeleg erklären."
             },
             {
               "art": "Ergebnis",
