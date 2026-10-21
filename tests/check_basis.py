@@ -91,4 +91,24 @@ _persistence=(base/"persistence.js").read_text(encoding="utf-8")
 assert "indexedDB" in _persistence and "makeZip" in _persistence and "readZip" in _persistence
 assert "fotodaten/fotostudio.json" in _persistence and "Reflexionen.txt" in _persistence
 assert "basis_fotoprojekt.ipynb" in (base/"index.html").read_text(encoding="utf-8")
+# The teacher footer, navbar and complete blue palette must match the fourth-year structure.
+teacher_footer = page.select_one("footer.footer > details")
+assert teacher_footer is not None
+assert teacher_footer.summary.get_text(" ", strip=True) == "Quellen & Hinweise für die Lehrperson"
+for target in ("unterrichtsplan.html", "materialien.html", "../projekt/admin/"):
+    assert teacher_footer.select_one(f'a[href="{target}"]'), f"Teacher link missing: {target}"
+assert page.select_one('.sidebar-bottom a[href="#basis-sicherung"]')
+assert page.select_one("#basis-sicherung #basis-download")
+assert page.select_one("#basis-sicherung #basis-backup-controls")
+assert (base/"materialien.html").is_file()
+material_page = BeautifulSoup((base/"materialien.html").read_text(encoding="utf-8"), "html.parser")
+assert len(material_page.select("section.basis-resource")) == 10, "All ten teacher-resource sections required"
+assert (base/"grafiken/netz_hintergrund_blau.svg").is_file()
+blue_svg=(base/"grafiken/netz_hintergrund_blau.svg").read_text(encoding="utf-8")
+assert "#3653a3" in blue_svg and "#076959" not in blue_svg, "Network artwork must use blue, not green"
+assert "netz_hintergrund_blau.svg" in basic_style
+assert "radial-gradient(1200px 600px at 85% -10%,#dfe9ff" in basic_style
+assert "kst-ki-basis-nav-collapsed" in js
+assert "window.print()" in js
+
 print("PASS ten differentiated 90-minute basic lessons, shared styling, live activity, separate storage and one editor")
