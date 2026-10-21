@@ -1,5 +1,6 @@
-## Materialien · basis-plan
+## Transfer Learning mit Buchstaben
 
-- Eigenes JupyterLite-Notebook der 1. Klasse: [Bildmodell · Ziffern, Buchstaben, eigene Pixelklassen](../lab/index.html?path=portal/basis_bildmodell.ipynb)
-- Kursseite mit Protokoll und Unterrichtsplan
-- Keine externen Foto-Uploads; die Versuche verwenden lokale 8×8-Pixelbilder
+- Dediziertes Notebook der 1. Klasse: [Ziffernnetz auf A/B anpassen](../lab/index.html?path=portal/basis_bildmodell.ipynb)
+- DL 6: Erste Schicht des Ziffernnetzes einfrieren und neuen A/B-Ausgabekopf angeleitet trainieren
+- Trainings- und unabhängige Testbilder unterscheiden; keine personenbezogenen Daten
+- Vorbereitung für DL 7: echte Fotos mit dem Fotostudio erstellen; **80 Fotos vor Beginn der nächsten Doppellektion**
