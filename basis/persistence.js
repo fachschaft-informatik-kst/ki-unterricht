@@ -8,7 +8,7 @@ panel.style.cssText='margin:24px 0;padding:18px;border:1px solid #a8b6d5;border-
 panel.innerHTML='<h3>Notebook der 1. Klasse</h3><p id="basis-lab-status" role="status">Noch kein Notebook geöffnet.</p><iframe id="basis-lab-frame" title="Jupyter Notebook" style="width:100%;height:680px;border:1px solid #c9d4e5" allow="clipboard-read; clipboard-write"></iframe>';
 const frame=panel.querySelector('iframe'),status=panel.querySelector('#basis-lab-status');
 let current=null,owner=null,ready=false,revision=0,restoring=false,changed=false;
-let saved={};try{saved=JSON.parse(localStorage.getItem(NBKEY)||'{}')||{};}catch{}
+let saved={},notebookUploads={},photoJSON=null;try{saved=JSON.parse(localStorage.getItem(NBKEY)||'{}')||{};}catch{}
 const pending=new Map();
 const storeReady=new Promise(resolve=>{
  if(!('indexedDB' in window)){resolve(null);return;}
@@ -18,15 +18,17 @@ const storeReady=new Promise(resolve=>{
  req.onerror=()=>resolve(null);
 });
 const loaded=(async()=>{const db=await storeReady;if(!db)return;
- try{const result=await new Promise((resolve,reject)=>{const tx=db.transaction('notebooks','readonly'),r=tx.objectStore('notebooks').get('all');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
- if(result&&typeof result==='object')saved={...saved,...result};
+ try{const result=await new Promise((resolve,reject)=>{const tx=db.transaction('notebooks','readonly'),store=tx.objectStore('notebooks');let remaining=3;const values={};for(const name of ['all','uploads','photo']){const r=store.get(name);r.onsuccess=()=>{values[name]=r.result;if(!--remaining)resolve(values);};r.onerror=()=>reject(r.error);}});
+ if(result.all&&typeof result.all==='object')saved={...saved,...result.all};
+ if(result.uploads&&typeof result.uploads==='object')notebookUploads=result.uploads;
+ if(result.photo?.content)photoJSON=result.photo;
  }catch(e){status.textContent='Gesicherte Notebooks konnten nicht gelesen werden: '+e.message;}
 })();
-async function persistDB(){const db=await storeReady;if(!db)return false;await new Promise((resolve,reject)=>{const tx=db.transaction('notebooks','readwrite');tx.objectStore('notebooks').put(saved,'all');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});return true;}
+async function persistDB(){const db=await storeReady;if(!db)return false;await new Promise((resolve,reject)=>{const tx=db.transaction('notebooks','readwrite');const store=tx.objectStore('notebooks');store.put(saved,'all');store.put(notebookUploads,'uploads');store.put(photoJSON,'photo');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});return true;}
 function validate(nb){if(!nb||nb.nbformat!==4||!Array.isArray(nb.cells)||nb.cells.length>200||JSON.stringify(nb).length>50000000)throw Error('Ungültiges Notebook.');return nb;}
 function request(type,extra={}){return new Promise((resolve,reject)=>{if(!frame.contentWindow)return reject(Error('Notebook nicht geladen'));const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet nicht.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
 async function persist(){try{const durable=await persistDB();try{localStorage.setItem(NBKEY,JSON.stringify(saved));}catch{}if(!durable&&!localStorage.getItem(NBKEY))throw Error('Kein verfügbarer Speicher');status.textContent='Notebook im Browser gespeichert. Für eine vollständige Sicherung ZIP herunterladen.';}catch(e){changed=true;status.textContent='Notebook konnte nicht dauerhaft gespeichert werden: '+e.message+'. Bitte ZIP herunterladen.';}}
-async function snapshot(){if(!current)return;if(!ready)throw Error('Notebook noch nicht bereit.');const result=await request('snapshot');saved[current]=validate(result.notebook);await persist();}
+async function snapshot(){if(!current)return;if(!ready)throw Error('Notebook noch nicht bereit.');const result=await request('snapshot');saved[current]=validate(result.notebook);if(Array.isArray(result.files)&&result.files.length){notebookUploads[current]=result.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));}await persist();}
 // Never move a running JupyterLite iframe between lesson sections: moving it
 // destroys the browser kernel and may discard in-flight student edits.
 function mount(){
@@ -41,15 +43,14 @@ window.addEventListener('message',async event=>{if(event.origin!==location.origi
 if(d.id&&pending.has(d.id)){const p=pending.get(d.id);clearTimeout(p.timer);pending.delete(d.id);d.type==='error'?p.reject(Error(d.error)):p.resolve(d);return;}
 if(d.type==='ready'&&d.ready&&!ready&&!restoring){restoring=true;try{await loaded;if(saved[current])await request('restore',{notebook:validate(saved[current]),keepKernel:true});ready=true;await snapshot();status.textContent='Notebook bereit; gespeicherte Eingaben und Ergebnisse geladen.';}catch(e){status.textContent='Wiederherstellung fehlgeschlagen: '+e.message;}finally{restoring=false;}}
 if(d.type==='dirty')changed=true;
-if(d.type==='changed'&&ready&&!restoring){try{saved[current]=validate(d.notebook);await persist();if(status.textContent.startsWith('Notebook im Browser'))changed=false;}catch(e){status.textContent='Notebook konnte nicht gesichert werden: '+e.message;}}
+if(d.type==='changed'&&ready&&!restoring){try{saved[current]=validate(d.notebook);if(Array.isArray(d.files)&&d.files.length)notebookUploads[current]=d.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));await persist();if(status.textContent.startsWith('Notebook im Browser'))changed=false;}catch(e){status.textContent='Notebook konnte nicht gesichert werden: '+e.message;}}
 });
 window.addEventListener('hashchange',()=>{if(current)mount();});
 const backupControls=document.getElementById('basis-backup-controls');
 const backup=document.createElement('button');backup.className='btn compact';backup.textContent='Gesamten Kursstand als ZIP sichern';backup.type='button';backup.classList.add('primary');
 const restore=document.createElement('input');restore.type='file';restore.accept='.zip';restore.style.display='block';restore.setAttribute('aria-label','ZIP-Kursstand wiederherstellen');const restoreLabel=document.createElement('label');restoreLabel.textContent='Gesicherten Kursstand (ZIP) laden';restoreLabel.append(restore);
 const photoInput=document.createElement('input');photoInput.type='file';photoInput.accept='.json';photoInput.setAttribute('aria-label','Fotostudio-JSON zur ZIP-Sicherung hinzufügen');const photoLabel=document.createElement('label');photoLabel.textContent='Fotostudio-JSON in die ZIP-Sicherung aufnehmen';photoLabel.append(photoInput);photoInput.style.display='block';
-let photoJSON=null;
-photoInput.addEventListener('change',async()=>{const file=photoInput.files?.[0];if(!file)return;try{const content=await file.text(),obj=JSON.parse(content);if(obj.schema!=='fotostudio-v1')throw Error('Keine Fotostudio-JSON');photoJSON={name:file.name,content};document.getElementById('basis-save-status').textContent='Fotostudio-JSON für ZIP vorgemerkt.';}catch(e){alert(e.message);}});
+photoInput.addEventListener('change',async()=>{const file=photoInput.files?.[0];if(!file)return;try{const content=await file.text(),obj=JSON.parse(content);if(obj.schema!=='fotostudio-v1')throw Error('Keine Fotostudio-JSON');photoJSON={name:file.name,content};await persist();document.getElementById('basis-save-status').textContent='Fotostudio-JSON für ZIP vorgemerkt.';}catch(e){alert(e.message);}});
 backupControls.append(backup,restoreLabel,photoLabel);
 function answers(){return Object.fromEntries([...document.querySelectorAll('[data-basis-answer]')].map(f=>[f.dataset.basisAnswer,f.value]));}
 backup.addEventListener('click',async()=>{backup.disabled=true;try{await loaded;if(current)await snapshot();const data={schema:SCHEMA,answers:answers(),notebooks:notebookNames.filter(n=>saved[n])};const entries=[{name:'kursstand.json',data:JSON.stringify(data,null,2)},{name:'Reflexionen.txt',data:Object.entries(data.answers).map(([k,v])=>k+'\n'+v).join('\n\n')},...data.notebooks.map(n=>({name:'notebooks/'+n,data:JSON.stringify(saved[n])}))];if(photoJSON)entries.push({name:'fotodaten/fotostudio.json',data:photoJSON.content});const zip=await makeZip(entries);const url=URL.createObjectURL(zip),a=document.createElement('a');a.href=url;a.download='KI-1-Klasse-Kursstand.zip';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);status.textContent='ZIP mit Reflexionen und Notebook-Ständen erstellt.';}catch(e){status.textContent='ZIP nicht erstellt: '+e.message;}finally{backup.disabled=false;}});
