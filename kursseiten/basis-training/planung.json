@@ -5,10 +5,10 @@
       "view": "basis-training",
       "title": "Bildprojekt III: zwei eigene Fotoklassen",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Zwei reale Gegenstandsklassen mit MobileNet-Merkmalen klassifizieren; Trainings-, Validierungs- und Testgruppen trennen und zwei Varianten auf V1 vergleichen.",
+      "goal": "Zwei Gegenstandsklassen mit eingefrorenen MobileNet-Merkmalen klassifizieren, A/B auf V1 vergleichen, eine Modellwahl begründen und den gewählten Klassifikator auf P1/P2 unabhängig testen.",
       "question": "Kann unser eigenes Netz zwei Gegenstandsklassen anhand vortrainierter Bildmerkmale unterscheiden?",
       "motivation": "Angeleitet untersuchen, eigene Entscheidungen begründen und mit einem fairen Test belegen.",
-      "product": "Fotostudio-JSON, ausgeführtes Notebook, Vergleich A/B auf V1 und begründete Modellwahl.",
+      "product": "Fotostudio-JSON, ausgeführtes Notebook, A/B-Vergleich auf V1, begründete Modellwahl und unabhängiger Abschlusstest auf P1/P2.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 70,
       "phases": [
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Eigene Fotostudio-JSON laden und Gruppen prüfen (10 Min), MobileNet-Merkmale und eingefrorenes Netz erklären (5 Min), A/B-Klassifikationsköpfe trainieren (15 Min), Vorhersagen auf V1 untersuchen (10 Min), Modellwahl protokollieren (3 Min). LP-Hinweis: Fotodaten müssen vor DL 7 erstellt werden; 80 Fotos können nicht zusätzlich in dieser Lektion aufgenommen werden."
+              "text": "Vorbereitete Fotostudio-JSON laden und Gruppen prüfen (8 Min), eingefrorene MobileNet-Merkmale erklären (5 Min), Klassifikationsköpfe A/B trainieren (14 Min), Vergleich auf V1 auswerten und Wahl festhalten (9 Min), nach LP-Freigabe nur gewählte Variante einmal auf P1/P2 testen (7 Min). LP: Alle 80 Fotos müssen vorher fertig sein; sonst Übungsdaten verwenden."
             },
             {
               "art": "Ergebnis",
