@@ -20,7 +20,7 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
+              "min": 3,
               "text": "Welche Aussage darf ich aus meinen Testergebnissen ableiten? Einstieg über einen Beispiel-Fehlschluss."
             },
             {
@@ -34,18 +34,18 @@
         {
           "phase": "Vorwissen aktivieren",
           "titel": "Projektstatus abstimmen",
-          "minutes": 5,
+          "minutes": 0,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
+              "min": 0,
               "text": "Ergebnis- und Präsentationsplan im Team aufteilen; beide Personen übernehmen einen Teil."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
+              "min": 0,
               "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
             }
           ]
@@ -53,18 +53,18 @@
         {
           "phase": "Informieren",
           "titel": "Kriterien nutzen",
-          "minutes": 5,
+          "minutes": 0,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 13,
+              "min": 0,
               "text": "Bewertungskriterien kurz klären: nachvollziehbare Frage, Test, Vergleich, Fehleranalyse, Grenzen; nicht die höchste Trefferquote."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
+              "min": 0,
               "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
             }
           ]
@@ -72,13 +72,13 @@
         {
           "phase": "Verarbeiten",
           "titel": "Individuelle Fachgespräche",
-          "minutes": 65,
+          "minutes": 85,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 63,
-              "text": "Abgabe vor Beginn der Lektion sichern. Pro Person 5 Minuten Fachgespräch plus etwa 1 Minute Wechsel/Bewertung; bei 14 Lernenden 84 Minuten. Übrige Tandems bearbeiten selbstständig eine unbenotete Fremdmodell-Analyse."
+              "min": 83,
+              "text": "Bis zu 14 Einzelgespräche à 5 Minuten plus 1 Minute Wechsel und Bewertung = 84 Minuten. Andere Lernende bearbeiten parallel eine unbenotete Fremdmodell-Analyse; die Tandemabgabe liegt vor der Lektion vor."
             },
             {
               "art": "Ergebnis",
@@ -91,18 +91,18 @@
         {
           "phase": "Auswerten",
           "titel": "Erkenntnisse sichern",
-          "minutes": 10,
+          "minutes": 0,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 8,
+              "min": 0,
               "text": "Jede Person dokumentiert eine eigene Erkenntnis und eine Verbesserungsidee."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
+              "min": 0,
               "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
             }
           ]
