@@ -122,4 +122,42 @@ assert "radial-gradient(1200px 600px at 85% -10%,#dfe9ff" in basic_style
 assert "kst-ki-basis-nav-collapsed" in js
 assert "window.print()" in js
 
+# Source parity: first-year DL3/4 must retain *all* fourth-year teaching content,
+# except the optional digit-recognition chapter and its bridge in the network notebook.
+import re as _re
+import nbformat as _nbformat
+
+def _mirror_chapter(raw,src,dst):
+    raw=raw.replace(f'id="{src}-',f'id="{dst}-').replace(f'href="#{src}-',f'href="#{dst}-')
+    raw=_re.sub(r'data-answer="([^"]+)"',lambda m:f'data-basis-answer="{dst}-{m.group(1)}"',raw)
+    def _button(m):
+        notebook={"perzeptron_und_neuronale_netze.ipynb":"basis_neuron.ipynb",
+                  "mehrschichtige_netze.ipynb":"basis_netze.ipynb"}.get(m.group(1),m.group(1))
+        return f'<a class="btn primary" href="../lab/index.html?path=portal/{notebook}">{m.group(2)}</a>'
+    return _re.sub(r'<button class="btn primary" data-lab="([^"]+)">([\s\S]*?)</button>',_button,raw)
+
+for _a,_b,_filenames in [
+    ("perzeptron","basis-neuron",[f"0{i}0-perzeptron-{i}.md" for i in range(1,8)]),
+    ("netze","basis-netze",[f"0{i}0-netze-{i}.md" for i in range(1,5)]),
+]:
+    for _file in _filenames:
+        _fourth=(ROOT/"kursseiten"/_a/_file).read_text(encoding="utf-8")
+        _expect=_mirror_chapter(_fourth,_a,_b)
+        if _file=="040-netze-4.md":
+            _expect=_expect.replace(
+                "Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.",
+                "In Doppellektion 5 untersucht ihr erstmals das Ziffernerkennungsmodell.")
+        _first=(ROOT/"kursseiten"/_b/_file).read_text(encoding="utf-8")
+        assert _first==_expect, f"DL3/4 source drift from fourth-year course: {_b}/{_file}"
+
+_nb4_neuron=_nbformat.read(ROOT/"content/perzeptron_und_neuronale_netze.ipynb",as_version=4)
+_nb1_neuron=_nbformat.read(ROOT/"content/basis_neuron.ipynb",as_version=4)
+assert [c.source for c in _nb1_neuron.cells]==[c.source for c in _nb4_neuron.cells], "DL3 notebook must match fourth year"
+_nb4_network=_nbformat.read(ROOT/"content/mehrschichtige_netze.ipynb",as_version=4)
+_nb1_network=_nbformat.read(ROOT/"content/basis_netze.ipynb",as_version=4)
+assert len(_nb1_network.cells)==len(_nb4_network.cells)-1, "Only digit model bridge may be omitted"
+assert not any("Ziffernerkennung" in c.source for c in _nb1_network.cells if c.cell_type=="markdown"), "No digits in DL4"
+assert _nb1_neuron.metadata.get("ki_didaktik",{}).get("ursprung")=="content/perzeptron_und_neuronale_netze.ipynb"
+assert _nb1_network.metadata.get("ki_didaktik",{}).get("ursprung")=="content/mehrschichtige_netze.ipynb"
+
 print("PASS ten differentiated 90-minute basic lessons, shared styling, live activity, separate storage and one editor")
