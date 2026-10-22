@@ -2,7 +2,7 @@ import {makeZip,readZip} from '../projekt/archive.js';
 
 // The basic course has its own backup schema and does not alter the fourth-year portal.
 const KEY='kst-ki-basis-v1', NBKEY='kst-ki-basis-notebooks-v1', SCHEMA='ki-basis-zip-v1';
-const notebookNames=['basis_neuron.ipynb','basis_netze.ipynb','basis_bildmodell.ipynb','basis_fotoprojekt.ipynb'];
+const notebookNames=['basis_neuron.ipynb','xor_einzelne_neuronen.ipynb','basis_netze.ipynb','basis_bildmodell.ipynb','basis_fotoprojekt.ipynb'];
 const panel=document.createElement('div');panel.id='basis-notebook-panel';panel.hidden=true;
 panel.style.cssText='margin:24px 0;padding:18px;border:1px solid #a8b6d5;border-radius:12px;background:white';
 panel.innerHTML='<h3>Notebook der 1. Klasse</h3><p id="basis-lab-status" role="status">Noch kein Notebook geöffnet.</p><iframe id="basis-lab-frame" title="Jupyter Notebook" style="width:100%;height:680px;border:1px solid #c9d4e5" allow="clipboard-read; clipboard-write"></iframe>';
