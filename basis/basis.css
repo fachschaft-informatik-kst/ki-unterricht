@@ -6,7 +6,8 @@
 .basis-answer textarea,.basis-language-lab select{border-color:#9daeca}
 .basis-language-option:hover,.basis-language-option:focus-visible{background:var(--soft)}
 .basis-language-result{background:var(--soft)}
-.concept-figure img{max-width:100%;height:auto}
+.concept-figure img{display:block;width:100%;max-width:700px;height:auto;margin-inline:auto}
+.neuron-figure img{max-width:900px}
 .school-logo{display:inline-block;vertical-align:middle;object-fit:contain}
 .crumb>span:first-child{display:inline-flex;gap:9px;align-items:center}
 .basis-network-diagram{display:block;width:100%;max-width:760px;height:auto;margin:auto}
@@ -111,3 +112,32 @@ body .footer .detail-body>p:last-child a{margin-right:18px;}
   .basis-transfer{padding:19px 16px;}
   .basis-backup-controls button{width:100%;}
 }
+
+
+/* Consistent figure sizes with the 4th-year course, especially in DL 1–4.
+   The original portal defines 700px for diagrams and 900px for the biological
+   neuron. Don't override that with max-width:100%, which made both larger. */
+body .concept-figure img{display:block;width:100%;max-width:700px;height:auto;margin-inline:auto}
+body .neuron-figure img{max-width:900px}
+body .learning-system-figure img{max-height:300px}
+body .concept-figure svg{max-width:700px;height:auto;margin-inline:auto}
+
+/* Shared table layout, blue first-year palette instead of inherited sage. */
+body thead th,body .typen thead th,body .phase-table thead th{
+  background:#e6edff;
+  color:#284b8e;
+  border-bottom-color:#c3d2f0;
+}
+body .typen tbody th{background:var(--soft);color:#294778}
+body .table-scroll,body .table-wrap{border-color:#c6d2e7}
+body .phase-table tr.wer-l td{background:#e7eeff}
+body .phase-table tr.wer-t td{background:#e9f0ff}
+body .phase-table tr.wer-k td{background:#f0edff}
+body .marke.daten{background:#e3ecff;color:#284b8e}
+body .marke.regeln{background:#eff3fb;color:#3c557d}
+body input[type=text],body select,body textarea{border-color:#9daeca}
+body .lab-panel{border-color:#b5c5e8}
+body .lab-head{background:#e6edff;color:#284b8e}
+body .lab-loading:not([hidden]){background:#f7faff}
+body .lab-loading-spinner{border-color:#d1dffa;border-top-color:var(--accent)}
+@media(max-width:720px){body .concept-figure img{max-width:100%}}
