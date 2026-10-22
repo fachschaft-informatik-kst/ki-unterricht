@@ -27,9 +27,12 @@ assert len(page.select("details.kapitel")) >= 30
 assert len(page.select("[data-basis-answer]")) >= 24
 assert len(page.select("a.course-card")) == 10
 assert len(page.select(".nav > a")) == 12
-assert page.select_one("#basis-neuron .basis-neuron table")
+assert len(page.select("#basis-neuron details.kapitel")) == 7, "DL3 must mirror seven fourth-year chapters"
+assert page.select_one("#basis-neuron .typen.protokoll")
+assert page.select_one("#basis-neuron a[href*='portal/basis_neuron.ipynb']")
+assert page.select_one('[data-basis-answer="basis-neuron-sw_gs"]')
 assert page.select_one("#basis-neuron img[src='grafiken/neuron_biologisch.svg']")
-assert page.select_one("#basis-neuron #basis-neuron-vorbild")
+assert page.select_one("#basis-neuron #basis-neuron-2")
 assert page.select_one("#basis-sprache [data-basis-language] select[data-language-context]")
 assert page.select_one("#basis-sprache #basis-sprache-papier")
 assert page.select_one("#basis-sprache #basis-sprache-papagei iframe[src*='inf-schule.de']")
@@ -40,7 +43,14 @@ assert [l["view"] for l in basic["lessons"]] == ["basis-ki","basis-lernen","basi
 assert [lesson["title"] for lesson in basic["lessons"]][7].lower().find("fachgespräch") >= 0
 assert basic["lessons"][8]["view"] == "basis-sprache"
 assert basic["lessons"][9]["view"] == "basis-gesellschaft"
-assert page.select_one("#basis-netze [data-basis-network] table")
+assert len(page.select("#basis-netze details.kapitel")) == 4, "DL4 must have all non-digit fourth-year chapters"
+assert page.select_one("#basis-netze img[src='grafiken/xor_gerade.svg']")
+assert page.select_one("#basis-netze a[href*='portal/xor_einzelne_neuronen.ipynb']")
+assert page.select_one("#basis-netze a[href*='portal/basis_netze.ipynb']")
+assert page.select_one('[data-basis-answer="basis-netze-hand_xor_max"]')
+assert not page.select("#basis-netze a[href*='ziffernerkennung.ipynb']")
+assert not page.select("#basis-netze img[src='grafiken/ziffern_netz.png']")
+assert page.select_one("#basis-daten a[href*='portal/basis_bildmodell.ipynb']"), "Digit classifier must begin in DL5"
 assert page.select_one("#basis-ki #einstieg-1")
 assert page.select_one("#basis-lernen #lernarten-4")
 assert page.select_one("#basis-lernen #memory-board")
@@ -67,7 +77,7 @@ assert (base/"grafiken/kst_logo.png").is_file(), "KST logo must be packaged with
 assert (base/"grafiken/kst_logo.png").stat().st_size > 100, "Logo must contain real image data"
 assert "basis-network-diagram" in basic_style
 js=(base/"basis.js").read_text(encoding="utf-8")
-assert "kst-ki-basis-v1" in js and "data-live-output" in js
+assert "kst-ki-basis-v1" in js
 assert "kst-ki-kursportal-v1" not in js
 assert "kst-ki-kursportal-v1" in (ROOT/"projekt/portal.js").read_text(encoding="utf-8")
 assert "kursseiten/basis-manifest.json" in (ROOT/"projekt/admin/admin.js").read_text(encoding="utf-8")
@@ -91,6 +101,7 @@ _persistence=(base/"persistence.js").read_text(encoding="utf-8")
 assert "indexedDB" in _persistence and "makeZip" in _persistence and "readZip" in _persistence
 assert "fotodaten/fotostudio.json" in _persistence and "Reflexionen.txt" in _persistence
 assert "basis_fotoprojekt.ipynb" in (base/"index.html").read_text(encoding="utf-8")
+assert "xor_einzelne_neuronen.ipynb" in _persistence, "The extra XOR notebook must be saved in ZIP"
 # The teacher footer, navbar and complete blue palette must match the fourth-year structure.
 teacher_footer = page.select_one("footer.footer > details")
 assert teacher_footer is not None
