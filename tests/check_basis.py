@@ -76,6 +76,14 @@ assert "--accent:#3653a3" in basic_style
 assert (base/"grafiken/kst_logo.png").is_file(), "KST logo must be packaged with basic course"
 assert (base/"grafiken/kst_logo.png").stat().st_size > 100, "Logo must contain real image data"
 assert "basis-network-diagram" in basic_style
+# Typography and figure sizing must match the shared fourth-year portal in DL1–4.
+assert "body .concept-figure img{display:block;width:100%;max-width:700px" in basic_style
+assert "body .neuron-figure img{max-width:900px}" in basic_style
+assert "body thead th,body .typen thead th,body .phase-table thead th" in basic_style
+assert "background:#e6edff" in basic_style
+assert page.select_one("#basis-ki img[src='grafiken/ki_programmierung.png']")
+assert page.select_one("#basis-neuron img[src='grafiken/neuron_biologisch.svg']")
+
 js=(base/"basis.js").read_text(encoding="utf-8")
 assert "kst-ki-basis-v1" in js
 assert "kst-ki-kursportal-v1" not in js
@@ -102,6 +110,12 @@ assert "indexedDB" in _persistence and "makeZip" in _persistence and "readZip" i
 assert "fotodaten/fotostudio.json" in _persistence and "Reflexionen.txt" in _persistence
 assert "basis_fotoprojekt.ipynb" in (base/"index.html").read_text(encoding="utf-8")
 assert "xor_einzelne_neuronen.ipynb" in _persistence, "The extra XOR notebook must be saved in ZIP"
+assert 'Notebook der 1. Klasse' not in _persistence, "Remove generic first-year notebook title"
+assert "const notebookTitles=" in _persistence
+assert "className='lab-panel'" in _persistence, "Reuse fourth-year notebook presentation"
+assert "portal/'+name" in _persistence, "Open selected Jupyter notebook directly"
+assert "requestFullscreen" in _persistence
+
 # The teacher footer, navbar and complete blue palette must match the fourth-year structure.
 teacher_footer = page.select_one("footer.footer > details")
 assert teacher_footer is not None
