@@ -3,10 +3,49 @@ import {makeZip,readZip} from '../projekt/archive.js';
 // The basic course has its own backup schema and does not alter the fourth-year portal.
 const KEY='kst-ki-basis-v1', NBKEY='kst-ki-basis-notebooks-v1', SCHEMA='ki-basis-zip-v1';
 const notebookNames=['basis_neuron.ipynb','xor_einzelne_neuronen.ipynb','basis_netze.ipynb','basis_bildmodell.ipynb','basis_fotoprojekt.ipynb'];
-const panel=document.createElement('div');panel.id='basis-notebook-panel';panel.hidden=true;
-panel.style.cssText='margin:24px 0;padding:18px;border:1px solid #a8b6d5;border-radius:12px;background:white';
-panel.innerHTML='<h3>Notebook der 1. Klasse</h3><p id="basis-lab-status" role="status">Noch kein Notebook geöffnet.</p><iframe id="basis-lab-frame" title="Jupyter Notebook" style="width:100%;height:680px;border:1px solid #c9d4e5" allow="clipboard-read; clipboard-write"></iframe>';
-const frame=panel.querySelector('iframe'),status=panel.querySelector('#basis-lab-status');
+// The fourth-year course uses the same fixed lab panel and direct JupyterLite path.
+const notebookTitles={
+ 'basis_neuron.ipynb':'Ein Neuron',
+ 'xor_einzelne_neuronen.ipynb':'XOR: Ein Neuron',
+ 'basis_netze.ipynb':'Neuronale Netze',
+ 'basis_bildmodell.ipynb':'Ziffern und Buchstaben',
+ 'basis_fotoprojekt.ipynb':'Eigene Fotos erkennen'
+};
+const panel=document.createElement('div');panel.id='basis-notebook-panel';panel.className='lab-panel';panel.hidden=true;
+panel.innerHTML=`<div class="lab-head">
+  <b id="basis-lab-title">Experiment</b>
+  <span id="basis-lab-status" role="status">Noch kein Notebook geöffnet.</span>
+  <button type="button" class="btn compact" id="basis-lab-fullscreen">Vergrössern</button>
+</div>
+<p class="small">Codezelle anklicken, ändern und mit Shift + Enter ausführen. Die Vorbereitung startet automatisch.</p>
+<div class="lab-frame-shell">
+  <div class="lab-loading" id="basis-lab-loading" data-state="loading" role="status" hidden>
+    <div class="lab-loading-spinner" aria-hidden="true"></div>
+    <p id="basis-lab-loading-text">Notebook wird vorbereitet …</p>
+    <button type="button" class="btn compact" id="basis-lab-retry" hidden>Erneut öffnen</button>
+  </div>
+  <iframe id="basis-lab-frame" title="Jupyter Notebook" allow="clipboard-read; clipboard-write"></iframe>
+</div>`;
+const frame=panel.querySelector('iframe'),status=panel.querySelector('#basis-lab-status'),heading=panel.querySelector('#basis-lab-title');
+const loader=panel.querySelector('#basis-lab-loading'),loaderText=panel.querySelector('#basis-lab-loading-text'),loaderRetry=panel.querySelector('#basis-lab-retry');
+let loaderTimeout;
+function notebookLoading(state,message=''){
+ clearTimeout(loaderTimeout);loader.dataset.state=state;loader.hidden=state==='ready';
+ frame.inert=state!=='ready';loaderRetry.hidden=state!=='error';
+ if(message)loaderText.textContent=message;
+ if(state==='loading'){
+  const expected=current;
+  loaderTimeout=setTimeout(()=>{
+   if(current!==expected||ready)return;
+   status.textContent='Notebook-Start dauert zu lange.';
+   notebookLoading('error','Notebook reagiert nicht. Erneut öffnen oder die Kursseite neu laden.');
+  },180000);
+ }
+}
+panel.querySelector('#basis-lab-fullscreen').addEventListener('click',()=>{
+ if(panel.requestFullscreen)panel.requestFullscreen();
+});
+loaderRetry.addEventListener('click',()=>{if(current)void openNotebook(current,owner,true);});
 let current=null,owner=null,ready=false,revision=0,restoring=false,changed=false;
 let saved={},legacyNotebooks={},notebookUploads={},photoJSON=null;try{saved=JSON.parse(localStorage.getItem(NBKEY)||'{}')||{};}catch{}
 const pending=new Map();
@@ -41,15 +80,40 @@ function mount(){
  const active=document.getElementById(hash)?.closest('main > section')?.id||hash;
  panel.hidden=!current||(active!==owner&&hash!=='basis-sicherung');
 }
-async function openNotebook(name,view){await loaded;owner=view||owner;if(!notebookNames.includes(name))throw Error('Unbekanntes Notebook.');
+async function openNotebook(name,view,force=false){
+ await loaded;
+ if(!notebookNames.includes(name))throw Error('Unbekanntes Notebook.');
  if(saved[name]&&!matchesCurrentLesson(name,saved[name])){
   legacyNotebooks[name]=saved[name];delete saved[name];await persist();
-  document.getElementById('basis-backup-status').textContent='Älteres Notebook archiviert. Die neue Version der 4.-Klasse-Lernstrecke wird geöffnet. Den alten Notebook-Stand könnt ihr weiterhin als ZIP herunterladen.';
- }if(current===name&&ready){mount();panel.scrollIntoView({behavior:'smooth'});return;}if(current&&ready)await snapshot();current=name;ready=false;changed=false;mount();status.textContent='Notebook wird geladen …';frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');panel.scrollIntoView({behavior:'smooth'});}
+  document.getElementById('basis-backup-status').textContent='Älteres Notebook archiviert. Die neue Version wird geöffnet. Den alten Stand könnt ihr als ZIP herunterladen.';
+ }
+ if(current!==name&&ready)await snapshot();
+ owner=view||owner;heading.textContent=notebookTitles[name]||'Experiment';
+ if(current===name&&ready&&!force){mount();panel.scrollIntoView({behavior:'smooth'});return;}
+ current=name;ready=false;changed=false;mount();
+ status.textContent='Notebook wird geladen …';
+ notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Notebook wird gestartet. Python wird vorbereitet …');
+ // Open the actual notebook, not JupyterLite's file browser (same as the fourth year).
+ frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');
+ panel.scrollIntoView({behavior:'smooth'});
+}
 document.querySelectorAll('a[href*="../lab/index.html?path="]').forEach(a=>{const url=new URL(a.href);const name=url.searchParams.get('path')?.split('/').pop();if(!notebookNames.includes(name))return;a.addEventListener('click',event=>{event.preventDefault();openNotebook(name,a.closest('main > section')?.id).catch(e=>status.textContent=e.message);});});
 window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1'||!current)return;const d=event.data;if(d.path!=='portal/'+current)return;
 if(d.id&&pending.has(d.id)){const p=pending.get(d.id);clearTimeout(p.timer);pending.delete(d.id);d.type==='error'?p.reject(Error(d.error)):p.resolve(d);return;}
-if(d.type==='ready'&&d.ready&&!ready&&!restoring){restoring=true;try{await loaded;if(saved[current])await request('restore',{notebook:validate(saved[current]),keepKernel:true});ready=true;await snapshot();status.textContent='Notebook bereit; gespeicherte Eingaben und Ergebnisse geladen.';}catch(e){status.textContent='Wiederherstellung fehlgeschlagen: '+e.message;}finally{restoring=false;}}
+if(d.type==='ready'&&d.error){status.textContent=d.error;notebookLoading('error',d.error);return;}
+if(d.type==='ready'&&d.ready&&!ready&&!restoring){
+ restoring=true;
+ try{
+  await loaded;
+  if(saved[current])await request('restore',{notebook:validate(saved[current]),keepKernel:true});
+  ready=true;await snapshot();
+  status.textContent='Notebook bereit; Eingaben und Ergebnisse gesichert.';
+  notebookLoading('ready');
+ }catch(e){
+  status.textContent='Wiederherstellung fehlgeschlagen: '+e.message;
+  notebookLoading('error','Notebook konnte nicht wiederhergestellt werden. Erneut öffnen.');
+ }finally{restoring=false;}
+}
 if(d.type==='dirty')changed=true;
 if(d.type==='changed'&&ready&&!restoring){try{saved[current]=validate(d.notebook);if(Array.isArray(d.files)&&d.files.length)notebookUploads[current]=d.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));await persist();if(status.textContent.startsWith('Notebook im Browser'))changed=false;}catch(e){status.textContent='Notebook konnte nicht gesichert werden: '+e.message;}}
 });
