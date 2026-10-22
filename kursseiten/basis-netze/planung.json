@@ -3,111 +3,141 @@
     {
       "id": "b04",
       "view": "basis-netze",
-      "title": "Warum braucht KI mehrere Neuronen?",
-      "rueckblick": "Bezug zur vorherigen KI-Doppellektion herstellen.",
-      "goal": "den Aufbau Eingabe–Zwischenschicht–Ausgabe erklären und an XOR beobachten, wieso mehrere einfache Entscheidungen kombiniert werden.",
-      "question": "Wie können mehrere einfache Neuronen gemeinsam etwas entscheiden, das ein einzelnes nicht schafft?",
-      "motivation": "Eigenes Ausprobieren und sachlich begründete Entscheidungen stehen im Vordergrund.",
-      "product": "Beobachtung zu vier XOR-Fällen und eine eigene Erklärung der Zwischenschicht.",
-      "zeit": "90 Minuten, Tandemarbeit mit kurzen Einzelreflexionen.",
-      "order": 40,
+      "title": "Warum mehrere Neuronen?",
+      "rueckblick": "In Doppellektion 3 haben Sie einzelne Neuronen für AND und OR berechnet, eingestellt und trainiert. Heute lernen Sie XOR als neue Herausforderung kennen und untersuchen, warum mehrere Neuronen nötig sind.",
+      "rueckblick_figur": {
+        "src": "grafiken/perzeptron.svg",
+        "alt": "Ein künstliches Neuron mit zwei Eingängen, Gewichten und Bias.",
+        "caption": "Rückblick: Ein Neuron berechnet die gewichtete Summe und entscheidet anhand einer Schwelle."
+      },
+      "goal": "Die XOR-Grenze eines einzelnen Neurons begründen und zeigen, wie eine Zwischenschicht das Problem löst.",
+      "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
+      "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
+      "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung.",
+      "zeit": "90 Minuten. Wie DL 4 der 4. Klasse: XOR-Wahrheitstabelle, linearer Trenner und Widerspruch, eigenes XOR-Notebook, Aufbau OR/NAND/AND, danach Netz-Notebook mit Training von 1/2/4 versteckten Neuronen. Die freiwillige Ziffernerkennung der 4. Klasse wird hier vollständig ausgespart und kommt erst in DL 5.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Problem entdecken",
+          "titel": "Neue Herausforderung: XOR entdecken",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 3,
-              "text": "Vier XOR-Fälle mit Karten oder Fingerzeichen ausprobieren."
+              "min": 5,
+              "text": "Eine neue Ja/Nein-Regel: Das Signal soll angehen, wenn genau eine der beiden Tasten aktiv ist. Notieren Sie zu 00, 01, 10 und 11 die Zielwerte (XOR). Vermuten Sie, ob das bisherige Neuron die Regel lernen kann."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Vier erstmals erarbeitete XOR-Zielwerte und eine Hypothese."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Vorwissen verbinden",
-          "minutes": 10,
+          "titel": "Einzelnes Neuron in Erinnerung rufen",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
-              "text": "Einzelne AND- und OR-Entscheidungen wiederholen."
+              "min": 5,
+              "text": "Rechnen Sie eine AND-Zeile mit Gewichten 1/1 und Bias −1.5 vor. Erklären Sie, warum die Gewichte und der Bias für alle Eingabefälle gleich bleiben müssen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Eine geprüfte Neuronenrechnung als Ausgangspunkt für XOR."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Modell kennenlernen",
+          "titel": "XOR-Grenze und Zwischenschicht",
           "minutes": 15,
           "schritte": [
             {
-              "art": "Auftrag",
+              "art": "Input",
               "wer": "Lehrperson",
-              "min": 13,
-              "text": "Ein Netz mit zwei verborgenen Entscheidungen OR/NAND und einer AND-Ausgabe als anschauliches Modell zeigen; keine Lernregel oder Matrixrechnung."
+              "min": 15,
+              "text": "Erklärt die XOR-Zielwerte, die vier widersprüchlichen Bedingungen und den fehlenden linearen Trenner. Nach der Theorie öffnen die Lernenden das eigenständige Notebook «XOR: Ein Neuron» und prüfen alle vier Fälle. Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang (AND) ein."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Die Grenze eines Neurons und eine begründete Netzlösung."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Eigene Versuche",
-          "minutes": 50,
+          "titel": "XOR und Netz-Lernversuche bearbeiten",
+          "minutes": 55,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 48,
-              "text": "XOR zunächst mit den vier Eingabefällen erklären (10 Min), interaktives Netz (10 Min), eigenes Jupyter-Notebook «Neuronale Netze» ausführen und zwei Netzaufbauten vergleichen (20 Min), Erkenntnis protokollieren (8 Min). LP-Hinweis: Weitere Zufallsstarts/Lernraten nur bei Zeitreserve."
+              "min": 35,
+              "text": "Arbeiten Sie in der Reihenfolge der Kurskapitel: Im eigenständigen XOR-Notebook die vier Eingaben mit denselben Gewichten und demselben Bias prüfen (ein Neuron höchstens 3/4). Danach im Notebook «Neuronale Netze» den vollständigen Signalweg über OR, NAND und AND verfolgen und ein Netzwerk mit 1, 2 und 4 versteckten Neuronen lernen lassen. Das Ziffernmodell gehört ausdrücklich nicht zu dieser Doppellektion."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Skizzieren Sie allein die vier XOR-Punkte und markieren Sie, warum eine einzige Gerade die beiden Zielklassen nicht trennt."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 15,
+              "text": "Wählen Sie einen zusätzlichen XOR-Eingabefall und zeichnen Sie die Ausgaben der beiden Zwischenneuronen und des Ausgangsneurons Schritt für Schritt nach. Vergleichen Sie mit der Vorhersage des einzelnen Neurons."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "XOR-Grenze begründet, Netzlösung anhand eines vollständigen Signalwegs erklärt und Gewichtslernen beobachtet."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Erkenntnis sichern",
+          "titel": "Mehrschichtige Netze sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Erklären Sie Ihrem Tandem, warum das einzelne Neuron bei XOR scheitert und wie die Zwischenschicht das Problem löst."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 4,
+              "text": "Prüfen Sie gemeinsam die Erklärung für einen XOR-Fall und die Aufgaben von OR, NAND und AND im Netz."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 2,
+              "text": "Gibt nur den Ausblick: In Doppellektion 5 wird erstmals das Ziffernnetz verwendet, das anschliessend für Buchstaben weiterentwickelt wird."
+            },
+            {
+              "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 8,
-              "text": "Warum mehrere Neuronen? Zwei Sätze zur Zwischenschicht schreiben."
+              "min": 2,
+              "text": "Sicherung: Notieren Sie einzeln, warum XOR mit einem einzelnen Neuron nicht vollständig funktioniert, und erklären Sie anhand eines Beispiels die Funktion der Zwischenschicht."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Zwei überprüfbare Merksätze zu XOR und zur Aufgabe der Zwischenschicht."
             }
           ]
         }
-      ]
+      ],
+      "order": 40
     }
   ]
 }
