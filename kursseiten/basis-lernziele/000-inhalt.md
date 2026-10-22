@@ -31,9 +31,10 @@
 ## Neuron und Netz verstehen
 <!-- MD:END -->
     <ul>
-      <li>Ich ordne Dendriten, Synapsen und Zellkörper den passenden Bausteinen eines künstlichen Neurons zu und erkläre die Grenzen des Vergleichs.</li>
-      <li>Ich berechne mit einfachen Eingaben, Gewichten und Bias eine Ausgabe und überprüfe sie experimentell.</li>
-      <li>Ich erkläre, warum XOR mit einer Zwischenschicht möglich ist, und unterscheide Eingabe-, versteckte und Ausgabeschicht.</li>
+      <li>Ich erkläre das biologische Vorbild und wie ein künstliches Neuron mithilfe von Gewichten und Bias eine 0/1-Entscheidung berechnet.</li>
+      <li>Ich stelle AND und OR mit Gewichten und Bias ein und erkläre die Perzeptron-Lernregel anhand eines konkreten Vorher-Nachher-Lernschritts.</li>
+      <li>Ich begründe mit Wahrheitstabelle, Punktdarstellung und widersprüchlichen Bedingungen, warum ein einzelnes Perzeptron XOR nicht lösen kann.</li>
+      <li>Ich zeige am Netz aus OR, NAND und AND, wie eine Zwischenschicht XOR ermöglicht, und untersuche das Training von Netzen mit 1, 2 und 4 versteckten Neuronen.</li>
     </ul>
     <a href="#basis-neuron">Zum Neuron →</a> · <a href="#basis-netze">Zum Netz →</a>
   </article>
