@@ -1,5 +1,21 @@
 [
   {
+    "source": "basis_neuron.ipynb",
+    "title": "1. Klasse: Neuron"
+  },
+  {
+    "source": "basis_netze.ipynb",
+    "title": "1. Klasse: Netze"
+  },
+  {
+    "source": "basis_bildmodell.ipynb",
+    "title": "1. Klasse: Bildprojekt"
+  },
+  {
+    "source": "basis_fotoprojekt.ipynb",
+    "title": "1. Klasse: Eigene Fotos"
+  },
+  {
     "source": "perzeptron_und_neuronale_netze.ipynb",
     "title": "Ein Neuron"
   },

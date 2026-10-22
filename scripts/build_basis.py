@@ -75,19 +75,24 @@ def build():
     (OUT / "theme.css").write_text(match.group(1) + "\n", encoding="utf-8")
     # Shared images stay authored in projekt/grafiken; copy them for relative editor URLs.
     shutil.copytree(ROOT / "projekt" / "grafiken", OUT / "grafiken", dirs_exist_ok=True)
-    for filename in ("basis.css", "basis.js"):
+    source_svg = (ROOT / "projekt" / "grafiken" / "netz_hintergrund.svg").read_text(encoding="utf-8")
+    blue_svg = source_svg.replace("#076959", "#3653a3").replace("#b84d27", "#6488d6").replace("#f5f4ee", "#f3f5fb")
+    (OUT / "grafiken" / "netz_hintergrund_blau.svg").write_text(blue_svg, encoding="utf-8")
+    for filename in ("basis.css", "basis.js", "persistence.js"):
         (OUT / filename).write_bytes((SOURCE / filename).read_bytes())
     page, lessons = assemble()
     (OUT / "index.html").write_text(page, encoding="utf-8")
     (OUT / "kurs.json").write_text(json.dumps({"course": "basis", "lessons": lessons}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     planning = ['<!doctype html><html lang="de-CH"><meta charset="utf-8"><title>Basis-Kurs · Unterrichtsplanung</title>',
-                '<link rel="stylesheet" href="theme.css"><link rel="stylesheet" href="../projekt/portal.css">',
+                '<link rel="stylesheet" href="theme.css"><link rel="stylesheet" href="../projekt/portal.css"><link rel="stylesheet" href="basis.css">',
                 '<main><h1>KI entdecken · AVIVA-Unterrichtsplan</h1><p>Zehn Doppellektionen à 90 Minuten.</p>']
     for lesson in lessons:
         planning.append(f'<h2>{lesson["number"]}. {html.escape(lesson["title"])}</h2>')
         planning.append('<div class="phase-table-wrap">' + tabelle(lesson) + '</div>')
     planning.append('</main></html>')
     (OUT / "unterrichtsplan.html").write_text("".join(planning), encoding="utf-8")
+    from build_basis_materials import build as build_basic_materials
+    build_basic_materials(ROOT, OUT, lessons)
     print(f"Built independent basis portal with {len(lessons)} double lessons")
 
 

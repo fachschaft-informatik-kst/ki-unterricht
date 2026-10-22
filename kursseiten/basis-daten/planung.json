@@ -3,12 +3,12 @@
     {
       "id": "b05",
       "view": "basis-daten",
-      "title": "Bildprojekt I: Daten und erstes Modell",
+      "title": "Bildprojekt I: Ziffernnetz und Buchstaben",
       "rueckblick": "Ergebnisse der vorherigen Doppellektion wieder aufgreifen.",
-      "goal": "An vorgegebenen zwei Bildklassen Trainings-, Validierungs- und Testdaten unterscheiden, das von der Lehrperson vorbereitete Bildklassifikationswerkzeug starten und ein erstes Modell trainieren.",
-      "question": "Ein Modell kann einen Hintergrund erkennen, obwohl es einen Gegenstand erkennen soll.",
+      "goal": "Ein vortrainiertes Ziffernnetz testen, seine Ausgabeklassen verstehen und die Grenzen bei Buchstabenbildern erklären.",
+      "question": "Warum sagt ein Ziffernnetz auch bei Buchstaben eine Ziffer voraus?",
       "motivation": "KI kann man durch eigenes Ausprobieren und systematische Beobachtung verstehen.",
-      "product": "Datensatzcheck, erster Trainingslauf und eine begründete Vermutung zu möglichen Datenfallen.",
+      "product": "Dokumentierte Ziffern- und Buchstabenvorhersagen sowie Erklärung der Ausgabeklassen.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 50,
       "phases": [
@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Zum Einstieg: Ein Modell kann einen Hintergrund erkennen, obwohl es einen Gegenstand erkennen soll."
+              "text": "Ein bereits trainiertes Ziffernnetz zeigt verschiedene Ziffern korrekt an. Anschliessend die Frage stellen: Was passiert bei einem A?"
             },
             {
               "art": "Ergebnis",
@@ -40,7 +40,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Vorwissen austauschen und eine Hypothese notieren."
+              "text": "An die zehn Ziffernausgaben aus dem vortrainierten Netz anknüpfen: Welche Eingaben und Ausgaben kennen wir? Vermutet zunächst, was bei einem Buchstabenbild geschieht."
             },
             {
               "art": "Ergebnis",
@@ -59,7 +59,7 @@
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Ein- und Ausgaben im Zusammenhang mit «Daten und faire Tests» erklären."
+              "text": "Eingaben als 8×8-Pixelbilder und Ausgaben als zehn Ziffernklassen (0–9) erklären; Buchstaben sind keine trainierten Ausgabeklassen."
             },
             {
               "art": "Ergebnis",
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Lehrperson demonstriert Datensatzaufteilung und Start des vorbereiteten Werkzeugs. Tandems prüfen die Bilder auf Hintergrund-Lecks, laden den vorbereiteten Datensatz und trainieren gemeinsam das erste Modell. Vorhersagen und, falls vorhanden, einen Fehler dokumentieren; sonst eine mögliche Grenze des Modells festhalten."
+              "text": "Notebook starten und Ziffernnetz ausführen (15 Min), Ziffernbeispiele prüfen (10 Min), Buchstaben A/B testen (10 Min), Resultate und Grenzen begründen (8 Min)."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Ein eigenes Fazit formulieren und mit der Leitfrage vergleichen."
+              "text": "Sichern: Ein Ziffernnetz muss auch für Buchstaben eine Ziffer ausgeben. Welche Änderung wäre nötig, damit es A/B erkennen könnte?"
             },
             {
               "art": "Ergebnis",

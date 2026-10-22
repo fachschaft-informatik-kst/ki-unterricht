@@ -83,12 +83,12 @@
       "navigation": {
         "order": 6,
         "label": "05",
-        "title": "Bildprojekt: Einstieg"
+        "title": "Ziffern und Buchstaben"
       },
       "teaching": true,
       "overview": {
-        "title": "Bildprojekt: Einstieg",
-        "summary": "Datenfallen · erster Modellversuch"
+        "title": "Ziffern und Buchstaben",
+        "summary": "Ziffernnetz · Ausgabeklassen · Grenzen"
       }
     },
     {
@@ -97,12 +97,12 @@
       "navigation": {
         "order": 7,
         "label": "06",
-        "title": "Bildprojekt: planen"
+        "title": "Buchstaben lernen"
       },
       "teaching": true,
       "overview": {
-        "title": "Bildprojekt: planen",
-        "summary": "Geführter Testplan · Hypothesen"
+        "title": "Buchstaben lernen",
+        "summary": "Neuer A/B-Kopf · Transfer Learning"
       }
     },
     {
@@ -111,12 +111,12 @@
       "navigation": {
         "order": 8,
         "label": "07",
-        "title": "Bildprojekt: experimentieren"
+        "title": "Eigene Bildklassen"
       },
       "teaching": true,
       "overview": {
-        "title": "Bildprojekt: experimentieren",
-        "summary": "Trainieren · vergleichen · verbessern"
+        "title": "Eigene Fotoklassen",
+        "summary": "Fotostudio · MobileNet · Vergleich A/B"
       }
     },
     {

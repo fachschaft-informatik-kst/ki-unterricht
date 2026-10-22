@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 48,
-              "text": "Interaktives Zwei-Schicht-Netz erkunden; alle vier Eingaben untersuchen und eigene Erklärung notieren."
+              "text": "XOR zunächst mit den vier Eingabefällen erklären (10 Min), interaktives Netz (10 Min), eigenes Jupyter-Notebook «Neuronale Netze» ausführen und zwei Netzaufbauten vergleichen (20 Min), Erkenntnis protokollieren (8 Min). LP-Hinweis: Weitere Zufallsstarts/Lernraten nur bei Zeitreserve."
             },
             {
               "art": "Ergebnis",

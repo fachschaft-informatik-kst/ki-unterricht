@@ -16,3 +16,13 @@ kurz: Alle vier Fälle selbst untersuchen
 **Auftrag:** Sagt vor dem Klicken voraus, welche Ausgabe bei (1,1) entsteht. Testet danach **alle vier** Eingabekombinationen. Wo entsteht die Entscheidung, dass (1,1) zu 0 wird?
 
 <div class="basis-answer"><label for="basis-netze-a">Unsere Vorhersage und Erklärung</label><textarea id="basis-netze-a" data-basis-answer="basis-netze-a" rows="4" placeholder="Wir erwarteten … / XOR funktioniert durch …"></textarea></div>
+
+### Eigenes Notebook: Neuronale Netze
+
+[**Notebook «Neuronale Netze» starten ↗**](../lab/index.html?path=portal/basis_netze.ipynb)
+
+1. Vergleicht die vier XOR-Zielwerte mit den Ausgaben eines einzelnen Neurons.
+2. Führt danach das Netz aus OR, NAND und AND aus.
+3. Erklärt anhand einer Eingabe, wie die Zwischenschicht zur Ausgabe beiträgt.
+
+Haltet eure Erkenntnisse auf dieser Kursseite fest.

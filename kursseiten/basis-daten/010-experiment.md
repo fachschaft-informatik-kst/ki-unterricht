@@ -18,3 +18,9 @@ Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergr
 
 <div class="basis-answer"><label for="basis-daten-a">Unsere Vermutung und Beobachtung</label><textarea id="basis-daten-a" data-basis-answer="basis-daten-a" rows="3" placeholder="Wir vermuten … / Wir sehen …"></textarea></div>
 
+
+### Ziffernnetz und unbekannte Buchstaben
+
+[**Notebook «Bildmodell» starten ↗**](../lab/index.html?path=portal/basis_bildmodell.ipynb)
+
+Führt im Notebook den Abschnitt **DL 5** aus: Prüft zunächst Ziffernvorhersagen und testet dann die Buchstaben A und B. Notiert, welche **Ziffern** das Modell für die Buchstaben ausgibt. Das Modell kennt keine Buchstabenklasse: Die Vorhersage ist deshalb keine gültige Buchstabenerkennung. Die Bilder werden lokal erzeugt.

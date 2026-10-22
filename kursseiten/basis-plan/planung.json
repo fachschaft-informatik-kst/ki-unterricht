@@ -3,12 +3,12 @@
     {
       "id": "b07",
       "view": "basis-plan",
-      "title": "Bildprojekt II: geführter Versuchsplan",
+      "title": "Bildprojekt II: Buchstaben durch Transfer Learning",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Mit einer vorgegebenen Auswahl an Bilddatensätzen eine überprüfbare Hypothese und einen fairen Modellvergleich planen.",
-      "question": "Welche eigene Frage kann unser Bildmodell durch faire Tests beantworten?",
+      "goal": "Die eingefrorene Merkmalschicht eines Ziffernnetzes mit einem neuen Ausgabekopf für A/B verwenden und die Veränderung sachlich beurteilen.",
+      "question": "Wie kann ein vortrainiertes Netz neue Bildklassen unterscheiden?",
       "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
-      "product": "Abgenommener Testplan mit konstanten Bedingungen und genau einer geplanten Veränderung.",
+      "product": "Ausgeführtes Notebook mit neuem A/B-Kopf und Erklärung, welche Schicht übernommen wurde.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 60,
       "phases": [
@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Beispiel eines Bildmodells mit Hintergrundfehler betrachten; offene Forschungsfragen sammeln."
+              "text": "Zwei Buchstabenbilder A und B zeigen: Das Ziffernnetz hat gestern Ziffern ausgegeben. Was müsste sich ändern?"
             },
             {
               "art": "Ergebnis",
@@ -40,7 +40,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Frei gewählte Klassen und Einflussfaktor vorschlagen; miteinander abstimmen."
+              "text": "Ziffernklassen und gelernte Bildmerkmale aus DL 5 wiederholen; Vorhersage zur Wirkung eines neuen Ausgabekopfs formulieren."
             },
             {
               "art": "Ergebnis",
@@ -59,7 +59,7 @@
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Kriterien guter Forschungsfragen und Unterschied zwischen Trainings- und Testbildern klären."
+              "text": "Transfer Learning vereinfacht erklären: Gelernte Merkmale weiterverwenden, alten Ziffernkopf durch A/B-Kopf ersetzen, nur neuen Kopf trainieren; Trainings- und Testbilder trennen."
             },
             {
               "art": "Ergebnis",
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Aus vorbereiteten Datensätzen wählen; Klassen, Trainings- und Testgruppen kennzeichnen; Hypothese notieren; genau einen Einflussfaktor auswählen. Lehrperson prüft den Plan vor dem Experiment."
+              "text": "Merkmalsübertragung erklären und den A/B-Kopf im Notebook trainieren (25 Min); neue A/B-Testbilder auswerten (10 Min); Grenzen und Unterschied zwischen Ziffern- und Buchstabenausgaben erläutern (8 Min)."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Forschungsplan mit zwei Klassen, Testbedingungen und erwarteter Beobachtung sichern."
+              "text": "Sichern: Was blieb eingefroren, was wurde neu trainiert? Ausblick: In DL 7 verwenden wir MobileNet statt Ziffernnetz für eigene Gegenstandsfotos. LP: Fotostudio und 80 Fotos müssen vor DL 7 vorbereitet sein."
             },
             {
               "art": "Ergebnis",

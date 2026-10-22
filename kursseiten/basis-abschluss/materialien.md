@@ -1,5 +1,5 @@
-## Doppellektion b06
+## Materialien · Fachgespräche
 
-- Browser, Partnergeräte und eigene Beobachtungsnotizen
-- Für das Bildprojekt: https://teachablemachine.withgoogle.com/train/image
-- Nur nicht-personenbezogene Gegenstandsbilder nach schulischen Datenschutzvorgaben
+- Ausgeführtes [Fotoprojekt-Notebook](../lab/index.html?path=portal/basis_fotoprojekt.ipynb)
+- Fotostudio-JSON und Kursantworten aus DL 7
+- Bewertungsraster und individuelle Gesprächsplanung

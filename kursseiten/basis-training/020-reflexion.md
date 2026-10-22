@@ -2,22 +2,21 @@
 type: chapter
 id: basis-training-reflexion
 nummer: 2
-titel: Eigenständig verbessern
-kurz: Eine Veränderung – derselbe Test
+titel: Modellvergleich begründen
+kurz: Ein fairer Vergleich · dieselben Validierungsbilder
 ---
-**Pflicht-Meilenstein 3 – Vergleich zweier Modellversionen:**
 
-Wählt aus den mit der Lehrperson besprochenen Möglichkeiten <strong>eine</strong> Massnahme aus und haltet eure Hypothese fest. Zum Beispiel abwechslungsreichere Hintergründe, neue Blickwinkel oder ausgewogenere Trainingsbilder.
+**Meilenstein:** Beide Modelle verwenden gleich viele Trainingsfotos, aber unterschiedliche Trainingsgruppen. Vergleicht die Trefferquoten auf **V1**, nicht auf den späteren Testbildern P1/P2.
 
-Trainiert erneut und prüft das verbesserte Modell mit den **gleichen zurückgehaltenen Testbildern**. Vergleicht die beiden Ergebnisse, bevor ihr weitere Veränderungen vornehmt.
-
-| Versuch | Richtige / alle Testbilder | Beobachtung |
+| Modell | V1 richtig / getestet | Beobachtung |
 |---|:---:|---|
-| Vor der Änderung | … / … | … |
-| Nach der Änderung | … / … | … |
+| A – Fotos aus T1 | … / … | … |
+| B – Fotos aus T1 und T2 | … / … | … |
 
-<div class="basis-answer"><label for="basis-training-b">Unsere Änderung, Vergleich und nächste Frage</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="6" placeholder="Wir änderten …, weil … / Vorher … / Nachher … / Daraus folgt …"></textarea></div>
+<div class="basis-answer"><label for="basis-training-b">Unser Vergleich und seine Grenzen</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="6" placeholder="Unsere Modellwahl … / V1 … / Mögliche Datenfalle … / Eine Grenze …"></textarea></div>
 
-**Zwischenkontrolle zu zweit:** Könnt ihr erklären, was ihr verändert habt? Könnte die beobachtete Verbesserung auch andere Ursachen haben?
+**Unabhängiger Abschlusstest:** Nach der begründeten Modellwahl und Freigabe durch die Lehrperson prüft ihr die ausgewählte Variante **einmal** auf P1/P2. Notiert das Ergebnis und einen beobachteten Fehler oder einen möglichen Grenzfall. Optimiert das Modell danach nicht weiter anhand dieser Testbilder.
 
-**Pflicht-Meilenstein 4 – Abgabe vor DL 8:** Schreibt eure Schlussfolgerung zu Forschungsfrage, Hypothese, Testzahlen pro Klasse, beobachtetem Fehler oder möglichem Grenzfall und Grenzen des Vergleichs. Sichert eure gemeinsame Dokumentation und gebt sie **vor Beginn der nächsten Doppellektion** ab. In DL 8 finden ausschliesslich die individuellen benoteten Fachgespräche statt.
+<div class="basis-answer"><label for="basis-training-test">Unser unabhängiger Abschlusstest</label><textarea id="basis-training-test" data-basis-answer="basis-training-test" rows="4" placeholder="Gewähltes Modell … / P1/P2 richtig … / Fehler oder Grenze …"></textarea></div>
+
+**Vor DL 8:** Sichert das ausgeführte Notebook, die Fotostudio-JSON und eure Antworten als ZIP. Bereitet euch darauf vor, den Unterschied zwischen Training, Validierung und Test sowie die Rolle von MobileNet zu erklären.

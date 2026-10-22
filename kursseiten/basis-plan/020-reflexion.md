@@ -2,20 +2,14 @@
 type: chapter
 id: basis-plan-reflexion
 nummer: 2
-titel: Trainings- und Testplan
-kurz: Daten sammeln und fair überprüfen
+titel: Ergebnisse erklären und eigenes Projekt vorbereiten
+kurz: Buchstabenmodell prüfen · Fotoprojekt vorbereiten
 ---
-**Pflicht-Meilenstein 1 – Forschungsplan** (Ende dieser Doppellektion)
 
-| Was? | Eure Entscheidung |
-|---|---|
-| Trainingsbilder | Richtwert: 15–20 unterschiedliche Bilder **pro Klasse** |
-| Unabhängiger Test | Mindestens 5 **neue** Bilder pro Klasse zurückhalten |
-| Variation | Eine gezielte Veränderung der Bedingungen planen |
-| Messung | Richtige / falsche Vorhersagen je Klasse zählen |
-| Datenschutz | Nur unkritische Gegenstände, keine Gesichter oder Personendaten |
+**Meilenstein 1:** Zeigt der Lehrperson eure A/B-Vorhersagen und erklärt, warum das Ziffernnetz zuvor nur Ziffern ausgeben konnte.
 
-**Peer-Feedback:** Tauscht eure Planung mit einem anderen Team. Kann das Team aus euren Angaben einen **fairen Test** rekonstruieren? Ergänzt euren Plan, bevor ihr fotografiert.
+**Vorbereitung auf DL 7 (vor der nächsten Doppellektion):** Wählt zwei verschiedene Gegenstandsklassen, zum Beispiel Becher und Bücher. Erstellt die Fotodatensammlung mit dem [Fotostudio](../projekt/studio/). Pro Klasse benötigt ihr je acht Bilder in **T1, T2, V1, P1 und P2** – insgesamt 80 Fotos. Verwendet zwischen den Gruppen unterschiedliche Exemplare, keine Personenfotos und keine mehrfach verwendeten Bilder. Das Studio erzeugt daraus passende **224 × 224 RGB-Bilder und MobileNet-Merkmale**. Exportiert eure JSON-Datei und nehmt sie zur nächsten Lektion mit. 
 
-<div class="basis-answer"><label for="basis-plan-b">Unser Versuchsplan und erhaltenes Feedback</label><textarea id="basis-plan-b" data-basis-answer="basis-plan-b" rows="6" placeholder="Trainingsbilder … / Testbilder … / Was wir verändern … / Rückmeldung …"></textarea></div>
-<details class="basis-hint"><summary>Selbstkontrolle: bereit zum Training?</summary><div class="detail-body"><p>Wir haben zwei Klassen, eine überprüfbare Frage, getrennte Trainings- und Testbilder, eine geplante Änderung und einen Weg, Fehler zu zählen. Die Lehrperson prüft und genehmigt den Versuchsplan **vor** dem zweiten Trainingslauf.</p></div></details>
+**Zeitplanung:** Das Fotografieren ist nicht Teil der 90 Minuten von DL 7. Wenn die Sammlung nicht bereit ist, arbeitet ihr mit den mitgelieferten Übungsdaten. Überlegt euch schon jetzt eine überprüfbare Vermutung: Wie wirkt sich die Vielfalt der Trainingsbilder auf die Erkennung unbekannter Gegenstände aus?
+
+<div class="basis-answer"><label for="basis-plan-b">Unser Ergebnis und unsere Idee</label><textarea id="basis-plan-b" data-basis-answer="basis-plan-b" rows="5" placeholder="A/B-Test … / Neue Klassen … / Wir vermuten …"></textarea></div>

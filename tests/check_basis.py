@@ -55,7 +55,8 @@ assert "Kantonsschule Stadelhofen" in page.get_text()
 assert all(len(page.select(f"#{v} details.kapitel")) >= 2 for v in ("basis-neuron","basis-netze","basis-plan","basis-gesellschaft"))
 assert "Sprachmodelle" in page.get_text()
 assert "wahrscheinliche" in page.get_text()
-assert page.select_one("a[href*='teachablemachine.withgoogle.com']")
+assert page.select_one("a[href*='portal/basis_fotoprojekt.ipynb']")
+assert (base/"persistence.js").is_file(), "Basis ZIP export/import controller missing"
 for path in ["basis.css","basis.js","theme.css","kurs.json","unterrichtsplan.html"]:
     assert (base/path).is_file(), path
 styles = (base/"theme.css").read_text(encoding="utf-8")
@@ -73,4 +74,41 @@ assert "kursseiten/basis-manifest.json" in (ROOT/"projekt/admin/admin.js").read_
 assert "basis-manifest.json" in (ROOT/"admin-worker/src/index.mjs").read_text(encoding="utf-8")
 assert "KI entdecken" in (base/"unterrichtsplan.html").read_text(encoding="utf-8")
 assert "Papagei" in (base/"index.html").read_text(encoding="utf-8")
+# The first-year image project must be runnable and restorable after deployment.
+import json as _json
+_registry=_json.loads((ROOT/"experimente/registry.json").read_text(encoding="utf-8"))
+_names={item["source"] for item in _registry}
+assert {"basis_neuron.ipynb","basis_netze.ipynb","basis_bildmodell.ipynb","basis_fotoprojekt.ipynb"} <= _names
+for _name in ("basis_neuron.ipynb","basis_netze.ipynb","basis_bildmodell.ipynb","basis_fotoprojekt.ipynb"):
+    _nb=_json.loads((ROOT/"content"/_name).read_text(encoding="utf-8"))
+    assert _nb["nbformat"] == 4 and any(c["cell_type"]=="code" for c in _nb["cells"])
+    assert (ROOT/"_build/content/portal"/_name).is_file(), f"Notebook missing from JupyterLite staging: {_name}"
+assert (base/"index.html").read_text(encoding="utf-8").count('<script type="module" src="persistence.js"></script>') == 1
+assert (ROOT/"content/ki_projekt/fotostudio_core.js").is_file()
+assert (ROOT/"content/ki_projekt/fotostudio.html").is_file()
+assert "224" in (ROOT/"content/ki_projekt/fotostudio_core.js").read_text(encoding="utf-8")
+_persistence=(base/"persistence.js").read_text(encoding="utf-8")
+assert "indexedDB" in _persistence and "makeZip" in _persistence and "readZip" in _persistence
+assert "fotodaten/fotostudio.json" in _persistence and "Reflexionen.txt" in _persistence
+assert "basis_fotoprojekt.ipynb" in (base/"index.html").read_text(encoding="utf-8")
+# The teacher footer, navbar and complete blue palette must match the fourth-year structure.
+teacher_footer = page.select_one("footer.footer > details")
+assert teacher_footer is not None
+assert teacher_footer.summary.get_text(" ", strip=True) == "Quellen & Hinweise für die Lehrperson"
+for target in ("unterrichtsplan.html", "materialien.html", "../projekt/admin/"):
+    assert teacher_footer.select_one(f'a[href="{target}"]'), f"Teacher link missing: {target}"
+assert page.select_one('.sidebar-bottom a[href="#basis-sicherung"]')
+assert page.select_one("#basis-sicherung #basis-download")
+assert page.select_one("#basis-sicherung #basis-backup-controls")
+assert (base/"materialien.html").is_file()
+material_page = BeautifulSoup((base/"materialien.html").read_text(encoding="utf-8"), "html.parser")
+assert len(material_page.select("section.basis-resource")) == 10, "All ten teacher-resource sections required"
+assert (base/"grafiken/netz_hintergrund_blau.svg").is_file()
+blue_svg=(base/"grafiken/netz_hintergrund_blau.svg").read_text(encoding="utf-8")
+assert "#3653a3" in blue_svg and "#076959" not in blue_svg, "Network artwork must use blue, not green"
+assert "netz_hintergrund_blau.svg" in basic_style
+assert "radial-gradient(1200px 600px at 85% -10%,#dfe9ff" in basic_style
+assert "kst-ki-basis-nav-collapsed" in js
+assert "window.print()" in js
+
 print("PASS ten differentiated 90-minute basic lessons, shared styling, live activity, separate storage and one editor")
