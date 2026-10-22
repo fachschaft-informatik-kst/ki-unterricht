@@ -47,6 +47,18 @@ const assert=require('node:assert/strict');
     assert(await page.locator('#basis-sicherung #basis-backup-controls button').count());
     const advanced=await browser.newPage();
     await advanced.goto('http://127.0.0.1:8770/projekt/');
+    // Figure limits come from the same styles as the fourth-year course, not a 100% override.
+    const figureSizes=async target=>({
+      rules:await target.locator('img[src="grafiken/ki_programmierung.png"]').first().evaluate(el=>getComputedStyle(el).maxWidth),
+      neuron:await target.locator('img[src="grafiken/neuron_biologisch.svg"]').first().evaluate(el=>getComputedStyle(el).maxWidth)
+    });
+    const firstYearSizes=await figureSizes(page),fourthYearSizes=await figureSizes(advanced);
+    assert.deepEqual(firstYearSizes,fourthYearSizes,'First-year diagrams must retain fourth-year max widths');
+    assert.equal(firstYearSizes.rules,'700px');
+    assert.equal(firstYearSizes.neuron,'900px');
+    const firstYearTableColor=await page.locator('#basis-ki table.typen thead th').first()
+      .evaluate(el=>getComputedStyle(el).backgroundColor);
+    assert.equal(firstYearTableColor,'rgb(230, 237, 255)','First-year table headers must be blue');
     const advancedBreadcrumb=(await advanced.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
     assert.equal(basicBreadcrumb,advancedBreadcrumb,'Both course headers must match exactly');
     assert.equal(await advanced.locator('a[href="../basis/"]').count(),0,'Advanced course must link to landing, not basic class');
@@ -167,6 +179,26 @@ const assert=require('node:assert/strict');
     assert(await mobilePage.locator('#basis-sicherung #basis-backup-controls button').isVisible(),
       'Mobile devices must expose the full ZIP backup controls outside the hidden sidebar');
     await mobilePage.close();
+    // The first-year buttons must launch the selected notebook directly inside
+    // the same lab-panel component used in the fourth-year course.
+    for(const [lesson,link,notebook,title] of [
+      ['basis-neuron','basis_neuron.ipynb','basis_neuron.ipynb','Ein Neuron'],
+      ['basis-netze','xor_einzelne_neuronen.ipynb','xor_einzelne_neuronen.ipynb','XOR: Ein Neuron'],
+      ['basis-netze','basis_netze.ipynb','basis_netze.ipynb','Neuronale Netze']
+    ]){
+      const notebookPage=await browser.newPage();
+      await notebookPage.goto('http://127.0.0.1:8770/basis/#'+lesson);
+      await notebookPage.locator('#'+lesson+' a[href*="'+link+'"]').first().click();
+      await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
+      const source=await notebookPage.locator('#basis-lab-frame').getAttribute('src');
+      assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/'+notebook,
+        'Notebook must launch its own Jupyter document directly');
+      assert.equal(await notebookPage.locator('#basis-lab-title').innerText(),title);
+      assert.equal(await notebookPage.locator('#basis-notebook-panel.lab-panel').count(),1);
+      assert.equal(await notebookPage.getByText('Notebook der 1. Klasse').count(),0);
+      assert.equal(await notebookPage.locator('#basis-lab-fullscreen').count(),1);
+      await notebookPage.close();
+    }
     assert.deepEqual(errors,[]);
     console.log('PASS both course links, ten lessons, reused KI/ML, blue KST layout, two-layer network, live neuron controls and isolated persistent answers');
   }finally{if(browser)await browser.close();server.kill();}
