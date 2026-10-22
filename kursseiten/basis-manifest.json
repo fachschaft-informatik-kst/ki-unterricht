@@ -54,13 +54,13 @@
       "class": "section",
       "teaching": true,
       "overview": {
-        "title": "Wie entscheidet ein Neuron?",
-        "summary": "Gewichte · Bias · Ein-/Ausgaben"
+        "title": "Ein Neuron",
+        "summary": "Schwimmbad · Gewichte und Bias · Lernregel"
       },
       "navigation": {
         "order": 4,
         "label": "03",
-        "title": "Wie entscheidet ein Neuron?"
+        "title": "Ein Neuron"
       }
     },
     {
@@ -68,13 +68,13 @@
       "class": "section",
       "teaching": true,
       "overview": {
-        "title": "Warum braucht KI mehrere Neuronen?",
-        "summary": "Zwischenschicht · XOR ohne Formeln"
+        "title": "Neuronale Netze",
+        "summary": "XOR · Trennlinie · Zwischenschicht · Training"
       },
       "navigation": {
         "order": 5,
         "label": "04",
-        "title": "Warum braucht KI mehrere Neuronen?"
+        "title": "Neuronale Netze"
       }
     },
     {

@@ -27,9 +27,12 @@ assert len(page.select("details.kapitel")) >= 30
 assert len(page.select("[data-basis-answer]")) >= 24
 assert len(page.select("a.course-card")) == 10
 assert len(page.select(".nav > a")) == 12
-assert page.select_one("#basis-neuron .basis-neuron table")
+assert len(page.select("#basis-neuron details.kapitel")) == 7, "DL3 must mirror seven fourth-year chapters"
+assert page.select_one("#basis-neuron .typen.protokoll")
+assert page.select_one("#basis-neuron a[href*='portal/basis_neuron.ipynb']")
+assert page.select_one('[data-basis-answer="basis-neuron-sw_gs"]')
 assert page.select_one("#basis-neuron img[src='grafiken/neuron_biologisch.svg']")
-assert page.select_one("#basis-neuron #basis-neuron-vorbild")
+assert page.select_one("#basis-neuron #basis-neuron-2")
 assert page.select_one("#basis-sprache [data-basis-language] select[data-language-context]")
 assert page.select_one("#basis-sprache #basis-sprache-papier")
 assert page.select_one("#basis-sprache #basis-sprache-papagei iframe[src*='inf-schule.de']")
@@ -40,7 +43,14 @@ assert [l["view"] for l in basic["lessons"]] == ["basis-ki","basis-lernen","basi
 assert [lesson["title"] for lesson in basic["lessons"]][7].lower().find("fachgespräch") >= 0
 assert basic["lessons"][8]["view"] == "basis-sprache"
 assert basic["lessons"][9]["view"] == "basis-gesellschaft"
-assert page.select_one("#basis-netze [data-basis-network] table")
+assert len(page.select("#basis-netze details.kapitel")) == 4, "DL4 must have all non-digit fourth-year chapters"
+assert page.select_one("#basis-netze img[src='grafiken/xor_gerade.svg']")
+assert page.select_one("#basis-netze a[href*='portal/xor_einzelne_neuronen.ipynb']")
+assert page.select_one("#basis-netze a[href*='portal/basis_netze.ipynb']")
+assert page.select_one('[data-basis-answer="basis-netze-hand_xor_max"]')
+assert not page.select("#basis-netze a[href*='ziffernerkennung.ipynb']")
+assert not page.select("#basis-netze img[src='grafiken/ziffern_netz.png']")
+assert page.select_one("#basis-daten a[href*='portal/basis_bildmodell.ipynb']"), "Digit classifier must begin in DL5"
 assert page.select_one("#basis-ki #einstieg-1")
 assert page.select_one("#basis-lernen #lernarten-4")
 assert page.select_one("#basis-lernen #memory-board")
@@ -67,7 +77,7 @@ assert (base/"grafiken/kst_logo.png").is_file(), "KST logo must be packaged with
 assert (base/"grafiken/kst_logo.png").stat().st_size > 100, "Logo must contain real image data"
 assert "basis-network-diagram" in basic_style
 js=(base/"basis.js").read_text(encoding="utf-8")
-assert "kst-ki-basis-v1" in js and "data-live-output" in js
+assert "kst-ki-basis-v1" in js
 assert "kst-ki-kursportal-v1" not in js
 assert "kst-ki-kursportal-v1" in (ROOT/"projekt/portal.js").read_text(encoding="utf-8")
 assert "kursseiten/basis-manifest.json" in (ROOT/"projekt/admin/admin.js").read_text(encoding="utf-8")
@@ -91,6 +101,7 @@ _persistence=(base/"persistence.js").read_text(encoding="utf-8")
 assert "indexedDB" in _persistence and "makeZip" in _persistence and "readZip" in _persistence
 assert "fotodaten/fotostudio.json" in _persistence and "Reflexionen.txt" in _persistence
 assert "basis_fotoprojekt.ipynb" in (base/"index.html").read_text(encoding="utf-8")
+assert "xor_einzelne_neuronen.ipynb" in _persistence, "The extra XOR notebook must be saved in ZIP"
 # The teacher footer, navbar and complete blue palette must match the fourth-year structure.
 teacher_footer = page.select_one("footer.footer > details")
 assert teacher_footer is not None
@@ -110,5 +121,43 @@ assert "netz_hintergrund_blau.svg" in basic_style
 assert "radial-gradient(1200px 600px at 85% -10%,#dfe9ff" in basic_style
 assert "kst-ki-basis-nav-collapsed" in js
 assert "window.print()" in js
+
+# Source parity: first-year DL3/4 must retain *all* fourth-year teaching content,
+# except the optional digit-recognition chapter and its bridge in the network notebook.
+import re as _re
+import nbformat as _nbformat
+
+def _mirror_chapter(raw,src,dst):
+    raw=raw.replace(f'id="{src}-',f'id="{dst}-').replace(f'href="#{src}-',f'href="#{dst}-')
+    raw=_re.sub(r'data-answer="([^"]+)"',lambda m:f'data-basis-answer="{dst}-{m.group(1)}"',raw)
+    def _button(m):
+        notebook={"perzeptron_und_neuronale_netze.ipynb":"basis_neuron.ipynb",
+                  "mehrschichtige_netze.ipynb":"basis_netze.ipynb"}.get(m.group(1),m.group(1))
+        return f'<a class="btn primary" href="../lab/index.html?path=portal/{notebook}">{m.group(2)}</a>'
+    return _re.sub(r'<button class="btn primary" data-lab="([^"]+)">([\s\S]*?)</button>',_button,raw)
+
+for _a,_b,_filenames in [
+    ("perzeptron","basis-neuron",[f"0{i}0-perzeptron-{i}.md" for i in range(1,8)]),
+    ("netze","basis-netze",[f"0{i}0-netze-{i}.md" for i in range(1,5)]),
+]:
+    for _file in _filenames:
+        _fourth=(ROOT/"kursseiten"/_a/_file).read_text(encoding="utf-8")
+        _expect=_mirror_chapter(_fourth,_a,_b)
+        if _file=="040-netze-4.md":
+            _expect=_expect.replace(
+                "Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.",
+                "In Doppellektion 5 untersucht ihr erstmals das Ziffernerkennungsmodell.")
+        _first=(ROOT/"kursseiten"/_b/_file).read_text(encoding="utf-8")
+        assert _first==_expect, f"DL3/4 source drift from fourth-year course: {_b}/{_file}"
+
+_nb4_neuron=_nbformat.read(ROOT/"content/perzeptron_und_neuronale_netze.ipynb",as_version=4)
+_nb1_neuron=_nbformat.read(ROOT/"content/basis_neuron.ipynb",as_version=4)
+assert [c.source for c in _nb1_neuron.cells]==[c.source for c in _nb4_neuron.cells], "DL3 notebook must match fourth year"
+_nb4_network=_nbformat.read(ROOT/"content/mehrschichtige_netze.ipynb",as_version=4)
+_nb1_network=_nbformat.read(ROOT/"content/basis_netze.ipynb",as_version=4)
+assert len(_nb1_network.cells)==len(_nb4_network.cells)-1, "Only digit model bridge may be omitted"
+assert not any("Ziffernerkennung" in c.source for c in _nb1_network.cells if c.cell_type=="markdown"), "No digits in DL4"
+assert _nb1_neuron.metadata.get("ki_didaktik",{}).get("ursprung")=="content/perzeptron_und_neuronale_netze.ipynb"
+assert _nb1_network.metadata.get("ki_didaktik",{}).get("ursprung")=="content/mehrschichtige_netze.ipynb"
 
 print("PASS ten differentiated 90-minute basic lessons, shared styling, live activity, separate storage and one editor")

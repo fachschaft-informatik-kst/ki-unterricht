@@ -3,111 +3,141 @@
     {
       "id": "b03",
       "view": "basis-neuron",
-      "title": "Vom biologischen Neuron zum neuronalen Netz",
-      "rueckblick": "Bezug zur vorherigen KI-Doppellektion herstellen.",
-      "goal": "Die Nervenzelle als biologisches Vorbild vom Rechenmodell unterscheiden, Netzschichten erläutern und Gewichte, Bias sowie eine 0/1-Ausgabe anhand von Versuchen nachvollziehen.",
-      "question": "Wie arbeitet der einzelne Baustein eines Netzes, und wo endet der Vergleich mit dem Gehirn?",
-      "motivation": "Eigenes Ausprobieren und sachlich begründete Entscheidungen stehen im Vordergrund.",
-      "product": "Erklärte Zuordnung biologischer/künstlicher Bausteine, Netzskizze und mindestens zwei vorausgesagte und überprüfte Ausgaben.",
-      "zeit": "90 Minuten, Tandemarbeit mit kurzen Einzelreflexionen.",
-      "order": 30,
+      "title": "Wie entscheidet ein Neuron?",
+      "rueckblick": "In Doppellektion 2 haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.",
+      "rueckblick_figur": {
+        "src": "grafiken/eva_erfahrungsschatz.png",
+        "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
+        "caption": "Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0)."
+      },
+      "goal": "Gewicht und Bias erklären, die Ausgabe eines einzelnen Neurons berechnen und einen Lernschritt anhand von Vorher-Nachher-Werten nachvollziehen.",
+      "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",
+      "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und was unverändert bleibt.",
+      "product": "Eine nachvollziehbare Schwimmbad- und AND-Rechnung, passende Parameter für AND/OR und ein erklärter Lernschritt.",
+      "zeit": "90 Minuten. Gleiches Programm wie DL 3 der 4. Klasse: Schwimmbad-Entscheider, AND/OR und Gewichte/Bias, Perzeptron-Lernregel, grafisch-interaktives Neuron-Labor mit drei Versuchen und individueller Ergebnissicherung.",
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Problem entdecken",
+          "titel": "Warnsignal vermuten",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 3,
-              "text": "Einstieg mit der biologischen Nervenzelle und der Frage: Wie kann ein Netzwerk aus solchen Bausteinen Entscheidungen treffen?"
+              "min": 5,
+              "text": "Ein Signal soll nur bei zwei aktiven Sensoren angehen. Notieren Sie die Ausgabe zu 00, 01, 10 und 11."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Eine UND-Tabelle als erste Vermutung."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Vorwissen verbinden",
-          "minutes": 10,
+          "titel": "Eingabe und Label",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
-              "text": "An die Eingabe/Verarbeitung/Ausgabe aus Doppellektion 2 erinnern. Eine Vermutung über ein Gewicht äussern."
+              "min": 5,
+              "text": "Benennen Sie zu einer AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe. Ergänzen Sie die Ausgaben für OR und erklären Sie, worin sich AND und OR unterscheiden."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Vier Eingabefälle mit AND- und OR-Zielwerten."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Modell kennenlernen",
+          "titel": "Gewicht, Bias und Lernschritt",
           "minutes": 15,
           "schritte": [
             {
-              "art": "Auftrag",
+              "art": "Input",
               "wer": "Lehrperson",
-              "min": 13,
-              "text": "Nervenzelle, künstliches Neuron und dreischichtiges Netz vergleichen; Gewicht, Bias und Schwelle an einem einfachen Rechenbeispiel klären."
+              "min": 12,
+              "text": "Erklärt am Schwimmbad-Beispiel das Neuron als Entscheider und vergleicht es kurz mit der Nervenzelle. Rechnet Summe = x₁·w₁ + x₂·w₂ + b mit Gewichten 1 und 1, Bias −1.5 für (1,1) und (1,0) vor; ab Summe 0 feuert das Neuron. Zeigt einen Lernschritt: Gewichte und Bias werden korrigiert, nicht die Eingaben oder Labels."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Rechnen Sie (0,1) selbst und erklären Sie den Unterschied zwischen Gewicht und Bias."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Eine geprüfte Rechnung als Orientierung für das Experiment."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Eigene Versuche",
-          "minutes": 50,
+          "titel": "Mit einem Neuron entscheiden und lernen",
+          "minutes": 55,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 48,
-              "text": "Biologisches Vorbild kurz sichern (10 Min), interaktives Reglerlabor (15 Min), eigenes Jupyter-Notebook «Ein Neuron» mit AND/OR und Bias (20 Min), Ergebnisse dokumentieren (3 Min). LP-Hinweis: Mathematische Herleitung des Lernalgorithmus nur bei verbleibender Zeit."
+              "min": 45,
+              "text": "Arbeiten Sie im Notebook «Neuron-Labor» mit drei Experimenten: Verändern Sie die Gewichte des Schwimmbad-Neurons und lesen Sie Grafik und Ein-/Ausgabetabelle. Stellen Sie AND und OR mit Gewichten und Bias ein. Verfolgen Sie dann beim Lernen die Korrektur des Beispiels (1,1) mit Startwerten 0.2/0.2, Bias −0.5 und Lernrate 0.2. Halten Sie eine passende Einstellung und einen Vorher-Nachher-Vergleich fest."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Rechnen Sie allein für ein ausgewähltes AND- oder OR-Beispiel die gewichtete Summe samt Bias aus. Erklären Sie, welche Änderung der Parameter die Ausgabe umkehren würde."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Eine eigene Handrechnung, nachvollziehbare Regler-Einstellungen und ein erklärter Lernschritt."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Erkenntnis sichern",
+          "titel": "Gewichte, Bias und Lernen sichern",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 8,
-              "text": "Eine Netzskizze und die Beziehung von Gewicht/Bias zur Ausgabe in eigenen Worten erläutern."
+              "min": 2,
+              "text": "Erklären Sie anhand einer selbst gewählten Neuronenrechnung die Bedeutung von Gewicht und Bias. Zeigen Sie eine Korrektur bei falscher Ausgabe."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 4,
+              "text": "Vergleichen Sie zwei Vorher-Nachher-Erklärungen aus dem Lernversuch und prüfen Sie, ob die korrigierten Werte zur Rechnung passen."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 2,
+              "text": "Hält fest: Gelernt werden die Gewichte und der Bias, nicht die Eingaben, Zielwerte oder die Entscheidungsregel. In Doppellektion 4 prüfen wir eine neue Entscheidungsaufgabe."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Sicherung: Formulieren Sie einzeln einen Merksatz dazu, wie ein Neuron entscheidet, und einen weiteren dazu, wie es beim Lernen seine Parameter verändert."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Zwei eigene Merksätze zu Rechnung, Gewicht, Bias und Lernschritt."
             }
           ]
         }
-      ]
+      ],
+      "order": 30
     }
   ]
 }
