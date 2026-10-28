@@ -6,7 +6,10 @@ export function setupEmbed(app, tracker, allowed) {
   if (query.get('ki-embed') !== '1' || window.parent === window) return null;
   const path = query.get('ki-path') || query.get('path');
   if (!allowed.has(path) || !path.startsWith('portal/')) return null;
-  const origin = location.origin;
+  // The authenticated teacher editor may embed the same JupyterLite runtime.
+  // Accept only this exact trusted editor origin, never an arbitrary URL parameter.
+  const teacherOrigin = 'https://kst-ki-admin.kevin-bohn.workers.dev';
+  const origin = query.get('ki-teacher')==='1' ? teacherOrigin : location.origin;
   const style = document.createElement('style');
   style.textContent = `#jp-top-panel,#jp-menu-panel,#jp-bottom-panel,#jp-left-stack,#jp-right-stack,.jp-SideBar,.jp-StatusBar,.lm-DockPanel-tabBar{display:none!important}
     #jp-main-dock-panel,#jp-main-split-panel,#jp-main-vsplit-panel,#jp-main-content-panel{contain:none!important}.jp-NotebookPanel{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-width:0!important}.jp-NotebookPanel-toolbar{min-height:36px;width:100%!important;height:36px!important}.jp-NotebookPanel-notebook{width:100%!important;height:calc(100vh - 36px)!important;top:36px!important}.jp-Notebook{background:#fff}.jp-MarkdownCell img{max-width:100%;max-height:365px;object-fit:contain}.jp-OutputArea .jp-RenderedSVG svg,.jp-OutputArea .jp-RenderedHTMLCommon svg{max-width:100%!important;height:auto!important;display:block}.jp-OutputArea .jp-RenderedImage img{max-width:100%;height:auto}.jp-OutputArea .widget-box{max-width:100%;min-width:0}.ki-autostart-status{font-size:11px!important}`;
