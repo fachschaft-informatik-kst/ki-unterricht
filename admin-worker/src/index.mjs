@@ -77,7 +77,8 @@ const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includ
   /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
   (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json")||
 
-  /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
+  /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
+  /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
 function validate(changes){
   if(!Array.isArray(changes)||changes.length<1||changes.length>12)throw Error("1–12 Dateien pro Pull Request.");
   const seen=new Set();
@@ -92,6 +93,13 @@ function validate(changes){
       let plan;try{plan=JSON.parse(c.content);}catch{throw Error("Ungültiger Unterrichtsplan.");}
       if(c.path.endsWith("/planung.json"))validatePlan(plan);
       else validateManifest(plan);
+    }else if(c.path.endsWith(".ipynb")){
+      if(typeof c.content!=="string"||encoder.encode(c.content).length>700000)throw Error("Notebook zu gross.");
+      let doc;try{doc=JSON.parse(c.content);}catch{throw Error("Notebook ist kein gültiges JSON.");}
+      if(doc.nbformat!==4||!Array.isArray(doc.cells)||!doc.metadata||!doc.cells.every(cell=>
+        ["code","markdown","raw"].includes(cell.cell_type)&&Array.isArray(cell.source)&&cell.source.every(s=>typeof s==="string")))
+        throw Error("Ungültige Jupyter-Notebook-Struktur.");
+      if(c.expectedSha===null)throw Error("Neue Notebooks müssen vorerst über GitHub angelegt werden.");
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
       if(c.expectedSha===null&&/\/[0-9]{3}-/.test(c.path)&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
@@ -169,7 +177,7 @@ async function publish(req,token){
   const entries=[];
   for(const c of body.changes){
     if(c.delete)entries.push({path:c.path,mode:"100644",type:"blob",sha:null});
-    else if(/\.(md|json)$/.test(c.path))entries.push({path:c.path,mode:"100644",type:"blob",content:c.content});
+    else if(/\.(md|json|ipynb)$/.test(c.path))entries.push({path:c.path,mode:"100644",type:"blob",content:c.content});
     else{
       const blob=await github(token,prefix+"/git/blobs",{method:"POST",body:JSON.stringify({content:c.content,encoding:"base64"})});
       entries.push({path:c.path,mode:"100644",type:"blob",sha:blob.sha});
@@ -262,9 +270,14 @@ export default {
           if(tree.truncated)return fail(409,"Unvollständiger Dateiindex.");
           return response({chapters:tree.tree.filter(x=>x.type==="blob"&&allowed(x.path)&&/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)).map(x=>({path:x.path,sha:x.sha}))});
         }
+        if(req.method==="GET"&&url.pathname==="/api/notebooks"){
+          const tree=await github(active.token,"/repos/"+REPO+"/git/trees/main?recursive=1");
+          if(tree.truncated)return fail(409,"Unvollständiger Dateiindex.");
+          return response({notebooks:tree.tree.filter(x=>x.type==="blob"&&x.path.endsWith(".ipynb")&&allowed(x.path)).map(x=>({path:x.path,sha:x.sha}))});
+        }
         if(req.method==="GET"&&url.pathname==="/api/file"){
           const path=url.searchParams.get("path");
-          if(!allowed(path)||!/\.(md|json)$/.test(path))return fail(400,"Ungültige Datei.");
+          if(!allowed(path)||!/\.(md|json|ipynb)$/.test(path))return fail(400,"Ungültige Datei.");
           const f=await github(active.token,"/repos/"+REPO+"/contents/"+path+"?ref=main");
           if(f.encoding!=="base64")return fail(409,"Datei nicht lesbar.");
           const content=decoder.decode(Uint8Array.from(atob(f.content.replace(/\s/g,"")),c=>c.charCodeAt(0)));
