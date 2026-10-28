@@ -125,3 +125,7 @@ iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
 .notebook-cell-head select{width:auto;max-width:150px}
 .notebook-cell .notebook-cell-source{min-height:125px;background:white;color:var(--text);-webkit-text-fill-color:var(--text);font:13px/1.5 ui-monospace,monospace}
 @media(max-width:760px){.workspace{display:block}.sidebar{max-height:none}}
+
+#notebookRuntime{width:100%;height:min(75vh,850px);min-height:540px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.notebook-runtime-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+#notebookRuntimeStatus{font-size:13px;color:var(--accent)}
