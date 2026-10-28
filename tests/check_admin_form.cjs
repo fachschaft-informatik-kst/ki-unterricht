@@ -34,6 +34,7 @@ const server=http.createServer((req,res)=>{
     const page=await browser.newPage();
     page.on("pageerror",error=>{throw error;});
     await page.route("**/api/session",route=>route.fulfill({json:{authenticated:true,login:"integration-test"}}));
+    await page.route("**/api/notebooks",route=>route.fulfill({json:{notebooks:[]}}));
     await page.route("**/api/chapters",route=>route.fulfill({json:{
       chapters:[...files.map(path=>({path,sha:"a".repeat(40)})),
         {path:"kursseiten/einstieg/planung.json",sha:"a".repeat(40)},
