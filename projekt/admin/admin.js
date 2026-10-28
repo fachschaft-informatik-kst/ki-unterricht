@@ -5,7 +5,7 @@ const pagesOrigin = location.hostname === "fachschaft-informatik-kst.github.io";
 if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/" + location.search + location.hash);
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
-const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map()};
+const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung"};
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
 
@@ -59,6 +59,7 @@ async function api(url,options={}){
 const post=(url,value)=>api(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(value)});
 const slug=text=>text.trim().toLowerCase().replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const filename=path=>path.split("/").pop().replace(".md","");
+const notebookPath=path=>/^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path);
 function stagingList(){
   const node=$("staged");node.replaceChildren();
   if(!state.staged.size){const li=document.createElement("li");li.textContent="Keine Änderungen vorgemerkt.";node.append(li);return;}
@@ -224,22 +225,27 @@ function useFile(path,sha,content,original=content){
   state.current={path,sha,original};
   $("path").textContent=path;$("heading").textContent=filename(path);
   const isPlan=path.endsWith("/planung.json");
+  const isNotebook=notebookPath(path);
   $("source").value=content;
   highlightSource();
   const isChapter=/\/[0-9]{3}-[^/]+\.md$/.test(path);
   $("move").disabled=!sha||!isChapter;$("archive").disabled=!sha||!isChapter;
-  for(const id of ["toolbar","editorHelper","sourceLabel"])
-    $(id).hidden=isPlan;
-  $("previewButton").hidden=false;
-  $("previewHeading").hidden=false;
-  $("preview").hidden=false;
-  $("codeEditor").hidden=isPlan;
+  for(const id of ["toolbar","editorHelper"])
+    $(id).hidden=isPlan||isNotebook;
+  $("sourceLabel").hidden=isPlan||isNotebook;
+  $("notebookEditor").hidden=!isNotebook;
+  if(isNotebook)renderNotebook(content);
+  $("previewButton").hidden=isNotebook;
+  $("previewHeading").hidden=isNotebook;
+  $("preview").hidden=isNotebook;
+  $("codeEditor").hidden=isPlan||isNotebook;
   if(isPlan)planner.open(content,$("section").value);
   else planner.close();
   // Force a new document for every navigation, including plans and materials.
   $("preview").removeAttribute("srcdoc");
-  preview();
+  if(!isNotebook)preview();
   chapterList();
+  for(const b of $("notebooks").querySelectorAll("button"))b.setAttribute("aria-current",String(b.title===path));
 }
 function savedText(){return state.current?state.staged.get(state.current.path)?.content??state.current.original:"";}
 async function load(path){
@@ -254,9 +260,12 @@ async function load(path){
   }catch(e){error(e);}
 }
 async function refresh(){
+  const course=state.course;
   const manifest=await api("/api/file?path="+encodeURIComponent(manifestPath()));
+  if(course!==state.course)return;
   state.manifest={sha:manifest.sha,content:manifest.content};
   const data=await api("/api/chapters");
+  if(course!==state.course)return;
   const known=data.chapters.filter(c=>!state.staged.get(c.path)?.delete);
   // A refresh must not discard newly created (as yet unmerged) lesson chapters.
   const pending=[...state.staged.values()].filter(c=>/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(c.path)&&!c.delete&&!known.some(k=>k.path===c.path))
@@ -267,11 +276,14 @@ async function refresh(){
   const valid=definitions.filter(s=>s.teaching||s.id==="lernziele").map(s=>s.id);
   const previous=$("section").value;
   $("section").replaceChildren();
-  for(const value of valid){const option=document.createElement("option");option.value=value;option.textContent=value;$("section").append(option);}
+  for(const entry of definitions.filter(s=>valid.includes(s.id))){const option=document.createElement("option");option.value=entry.id;option.textContent=entry.navigation?.title||entry.id;$("section").append(option);}
   const currentSection=state.current?.path.split("/")[1];
   $("section").value=valid.includes(previous)?previous:(valid.includes(currentSection)?currentSection:valid[0]||"");
   chapterList();
+  state.plans.clear();
   await loadPlans();
+  if(course!==state.course)return;
+  await refreshNotebooks();
 }
 function insert(text){
   const source=$("source");source.focus();
@@ -485,10 +497,12 @@ function addChapter(){
 }
 function stage(){
   const c=state.current;if(!c)throw Error("Kein Kapitel geladen.");
+  if(notebookPath(c.path))syncNotebook();
   const content=$("source").value;if(!content.trim())throw Error("Kapitel darf nicht leer sein.");
   if(c.path.endsWith("/planung.json")){
     planner.validate(content);
   }
+  if(notebookPath(c.path))validateNotebook(JSON.parse(content));
   if(c.sha){
     const selector=/data-(?:answer|journal|score|skill|check|lab)\s*=\s*["']([^"']+)["']/g;
     const before=[...c.original.matchAll(selector)].map(x=>x[0]);
@@ -738,17 +752,66 @@ async function addLessonToCurrentSection(){
   }catch(e){error(e);}
 }
 
+
+function validateNotebook(doc){
+  if(!doc||!Array.isArray(doc.cells)||doc.nbformat!==4||!doc.metadata||!doc.cells.every(c=>
+    ["markdown","code","raw"].includes(c.cell_type)&&Array.isArray(c.source)&&c.source.every(s=>typeof s==="string")))
+    throw Error("Ungültiges Jupyter-Notebook. Zellen, Metadaten und nbformat müssen erhalten bleiben.");
+}
+let notebookDraft=null;
+function renderNotebook(content){
+  const root=$("notebookCells");root.replaceChildren();
+  const doc=JSON.parse(content);validateNotebook(doc);notebookDraft=doc;
+  doc.cells.forEach((cell,index)=>{
+    const wrap=document.createElement("section");wrap.className="notebook-cell";
+    const header=document.createElement("div");header.className="notebook-cell-head";
+    const title=document.createElement("strong");title.textContent="Zelle "+(index+1)+" · "+cell.cell_type;
+    const selector=document.createElement("select");selector.setAttribute("aria-label","Zellentyp "+(index+1));
+    for(const type of ["markdown","code","raw"]){const opt=document.createElement("option");opt.value=type;opt.textContent=type;selector.append(opt);}
+    selector.value=cell.cell_type;
+    selector.addEventListener("change",()=>{cell.cell_type=selector.value;if(selector.value==="code"){cell.execution_count??=null;cell.outputs??=[];}else{delete cell.execution_count;delete cell.outputs;}syncNotebook();});
+    const textarea=document.createElement("textarea");textarea.value=cell.source.join("");textarea.rows=Math.max(4,Math.min(18,textarea.value.split("\n").length+2));
+    textarea.setAttribute("aria-label","Inhalt der Zelle "+(index+1));textarea.className="notebook-cell-source";
+    textarea.addEventListener("input",()=>{cell.source=textarea.value.match(/[^\n]*\n|[^\n]+$/g)||[];syncNotebook();});
+    header.append(title,selector);wrap.append(header,textarea);root.append(wrap);
+  });
+  $("notebookInfo").textContent=doc.cells.length+" Zellen · Ausgaben und Metadaten bleiben erhalten. Code wird hier nicht ausgeführt.";
+}
+function syncNotebook(){
+  if(!notebookDraft||!state.current||!notebookPath(state.current.path))return;
+  $("source").value=JSON.stringify(notebookDraft,null,1)+"\n";
+}
+async function refreshNotebooks(){
+  const result=await api("/api/notebooks");
+  state.notebooks=result.notebooks;
+  const list=$("notebooks");list.replaceChildren();
+  for(const item of state.notebooks){
+    const button=document.createElement("button");button.type="button";
+    button.textContent=item.path.split("/").pop().replace(".ipynb","").replaceAll("_"," ");
+    button.title=item.path;button.addEventListener("click",()=>load(item.path));
+    button.setAttribute("aria-current",String(state.current?.path===item.path));list.append(button);
+  }
+}
+
 $("createLesson").addEventListener("click",addLesson);
 $("createLessonHere").addEventListener("click",addLessonToCurrentSection);
 $("editPlan").addEventListener("click",editPlan);
 $("editMaterials").addEventListener("click",editMaterials);
 $("section").addEventListener("change",chapterList);
 $("courseSelect").addEventListener("change",async()=>{
-  if(!confirmUnsaved())return;
+  const selected=$("courseSelect").value;
+  if(!confirmUnsaved()){$("courseSelect").value=state.course;return;}
+  state.course=selected;
+  ++navigationRevision;
+  state.plans.clear();
+  state.manifest=null;
+  $("section").replaceChildren();$("chapters").replaceChildren();$("lessonOrder").replaceChildren();
   state.current=null;
   $("source").value="";
   $("path").textContent="Kurs gewechselt";
   $("heading").textContent="Kapitel auswählen";
+  $("notebookEditor").hidden=true;
+  $("notebooks").replaceChildren();
   await refresh().catch(error);
   status("Kursauswahl geändert. Kapitel und AVIVA-Pläne gehören zum gewählten Kurs.");
 });
