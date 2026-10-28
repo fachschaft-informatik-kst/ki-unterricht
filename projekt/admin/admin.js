@@ -781,7 +781,7 @@ async function openRuntimeNotebook(content,path){
   runtimeStatus("Python-Umgebung wird geladen …");
   // Start with a known teaching notebook and restore the actual selected source.
   // The iframe may not access OAuth cookies or the GitHub API.
-  const name="portal/basis_neuron.ipynb";
+  const name="portal/"+path.split("/").pop();
   runtimeFrame.src=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+encodeURIComponent(name)+"&ki-embed=1&ki-restore=1&ki-teacher=1&reset";
 }
 window.addEventListener("message",async event=>{
