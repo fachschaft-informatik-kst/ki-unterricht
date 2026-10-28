@@ -234,7 +234,7 @@ function useFile(path,sha,content,original=content){
     $(id).hidden=isPlan||isNotebook;
   $("sourceLabel").hidden=isPlan||isNotebook;
   $("notebookEditor").hidden=!isNotebook;
-  if(isNotebook)renderNotebook(content);
+  if(isNotebook)openRuntimeNotebook(content,path);
   $("previewButton").hidden=isNotebook;
   $("previewHeading").hidden=isNotebook;
   $("preview").hidden=isNotebook;
@@ -249,7 +249,7 @@ function useFile(path,sha,content,original=content){
 }
 function savedText(){return state.current?state.staged.get(state.current.path)?.content??state.current.original:"";}
 async function load(path){
-  if(state.current&&$("source").value!==savedText()&&!confirm("Nicht vorgemerkte Änderungen verwerfen?"))return;
+  if(state.current&&(runtimeDirty&&notebookPath(state.current.path)||$("source").value!==savedText())&&!confirm("Nicht vorgemerkte Änderungen verwerfen?"))return;
   const revision=++navigationRevision;
   try{
     status("Lade Kapitel …");
@@ -497,7 +497,7 @@ function addChapter(){
 }
 function stage(){
   const c=state.current;if(!c)throw Error("Kein Kapitel geladen.");
-  if(notebookPath(c.path))syncNotebook();
+  if(notebookPath(c.path)&&runtimeDirty)throw Error("Notebook wurde verändert. Vor dem Vormerken bitte «Notebook-Stand übernehmen» wählen.");
   const content=$("source").value;if(!content.trim())throw Error("Kapitel darf nicht leer sein.");
   if(c.path.endsWith("/planung.json")){
     planner.validate(content);
@@ -645,7 +645,7 @@ async function editMaterials(){
 }
 
 function confirmUnsaved(){
-  return !(state.current&&$("source").value!==savedText())||
+  return !(state.current&&(runtimeDirty&&notebookPath(state.current.path)||$("source").value!==savedText()))||
     confirm("Nicht vorgemerkte Änderungen verwerfen? Bitte vorher «Änderung vormerken» wählen.");
 }
 function lessonPlan(id,title,view){
@@ -758,29 +758,64 @@ function validateNotebook(doc){
     ["markdown","code","raw"].includes(c.cell_type)&&Array.isArray(c.source)&&c.source.every(s=>typeof s==="string")))
     throw Error("Ungültiges Jupyter-Notebook. Zellen, Metadaten und nbformat müssen erhalten bleiben.");
 }
-let notebookDraft=null;
-function renderNotebook(content){
-  const root=$("notebookCells");root.replaceChildren();
-  const doc=JSON.parse(content);validateNotebook(doc);notebookDraft=doc;
-  doc.cells.forEach((cell,index)=>{
-    const wrap=document.createElement("section");wrap.className="notebook-cell";
-    const header=document.createElement("div");header.className="notebook-cell-head";
-    const title=document.createElement("strong");title.textContent="Zelle "+(index+1)+" · "+cell.cell_type;
-    const selector=document.createElement("select");selector.setAttribute("aria-label","Zellentyp "+(index+1));
-    for(const type of ["markdown","code","raw"]){const opt=document.createElement("option");opt.value=type;opt.textContent=type;selector.append(opt);}
-    selector.value=cell.cell_type;
-    selector.addEventListener("change",()=>{cell.cell_type=selector.value;if(selector.value==="code"){cell.execution_count??=null;cell.outputs??=[];}else{delete cell.execution_count;delete cell.outputs;}syncNotebook();});
-    const textarea=document.createElement("textarea");textarea.value=cell.source.join("");textarea.rows=Math.max(4,Math.min(18,textarea.value.split("\n").length+2));
-    textarea.setAttribute("aria-label","Inhalt der Zelle "+(index+1));textarea.className="notebook-cell-source";
-    textarea.addEventListener("input",()=>{cell.source=textarea.value.match(/[^\n]*\n|[^\n]+$/g)||[];syncNotebook();});
-    header.append(title,selector);wrap.append(header,textarea);root.append(wrap);
+// JupyterLite runs on Pages; the teacher editor remains on the authenticated Worker.
+// The existing notebook bridge sends explicit snapshots to the editor for GitHub PRs.
+const runtimeOrigin="https://fachschaft-informatik-kst.github.io";
+const runtimeFrame=$("notebookRuntime");
+let runtimeReady=false,runtimeDirty=false,runtimeRevision=0,runtimePath="",runtimeRequests=new Map();
+function runtimeStatus(message){$("notebookRuntimeStatus").textContent=message;}
+function runtimeRequest(type,extra={}){
+  return new Promise((resolve,reject)=>{
+    if(!runtimeFrame.contentWindow)return reject(Error("JupyterLite ist nicht geöffnet."));
+    const id=crypto.randomUUID();
+    const timeout=setTimeout(()=>{runtimeRequests.delete(id);reject(Error("JupyterLite antwortet nicht."));},120000);
+    runtimeRequests.set(id,{resolve,reject,timeout});
+    runtimeFrame.contentWindow.postMessage({channel:"ki-portal-v1",type,id,...extra},runtimeOrigin);
   });
-  $("notebookInfo").textContent=doc.cells.length+" Zellen · Ausgaben und Metadaten bleiben erhalten. Code wird hier nicht ausgeführt.";
 }
-function syncNotebook(){
-  if(!notebookDraft||!state.current||!notebookPath(state.current.path))return;
-  $("source").value=JSON.stringify(notebookDraft,null,1)+"\n";
+async function openRuntimeNotebook(content,path){
+  validateNotebook(JSON.parse(content));
+  runtimePath=path;runtimeReady=false;runtimeDirty=false;runtimeRevision=0;
+  for(const request of runtimeRequests.values()){clearTimeout(request.timeout);request.reject(Error("Notebook gewechselt."));}
+  runtimeRequests.clear();
+  runtimeStatus("Python-Umgebung wird geladen …");
+  // Start with a known teaching notebook and restore the actual selected source.
+  // The iframe may not access OAuth cookies or the GitHub API.
+  const name="portal/basis_neuron.ipynb";
+  runtimeFrame.src=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+encodeURIComponent(name)+"&ki-embed=1&ki-restore=1&ki-teacher=1&reset";
 }
+window.addEventListener("message",async event=>{
+  if(event.origin!==runtimeOrigin||event.source!==runtimeFrame.contentWindow||event.data?.channel!=="ki-portal-v1"||!notebookPath(state.current?.path||""))return;
+  const data=event.data;
+  if(data.id&&runtimeRequests.has(data.id)){
+    const req=runtimeRequests.get(data.id);clearTimeout(req.timeout);runtimeRequests.delete(data.id);
+    if(data.type==="error")req.reject(Error(data.error||"Notebook-Fehler"));else req.resolve(data);
+  }
+  if(data.type==="ready"){
+    if(!data.ready){runtimeStatus(data.error||"Notebook-Start fehlgeschlagen.");return;}
+    if(runtimeReady)return;
+    runtimeReady=true;
+    try{
+      const original=JSON.parse($("source").value);
+      await runtimeRequest("restore",{notebook:original,keepKernel:true});
+      runtimeStatus("Bereit: Zellen bearbeiten und mit Shift + Enter ausführen.");
+    }catch(e){error(e);runtimeStatus("Notebook konnte nicht geladen werden: "+e.message);}
+  }
+  if(data.type==="dirty"){runtimeDirty=true;runtimeStatus("Änderungen vorhanden – bitte Notebook-Stand übernehmen.");}
+  if(data.type==="save-error")runtimeStatus("Automatische Sicherung fehlgeschlagen: "+data.error);
+  if(data.type==="changed"&&data.notebook&&data.revision>=runtimeRevision){
+    runtimeRevision=data.revision;runtimeDirty=true;
+  }
+});
+async function snapshotRuntime(){
+  if(!runtimeReady)throw Error("JupyterLite ist noch nicht bereit.");
+  const data=await runtimeRequest("snapshot");
+  validateNotebook(data.notebook);
+  $("source").value=JSON.stringify(data.notebook,null,1)+"\\n";
+  runtimeDirty=false;runtimeStatus("Notebook übernommen. Jetzt «Änderung vormerken» wählen.");
+}
+$("notebookSnapshot").addEventListener("click",()=>snapshotRuntime().catch(error));
+$("notebookReload").addEventListener("click",()=>{if(!confirmUnsaved())return;if(state.current&&notebookPath(state.current.path))openRuntimeNotebook(savedText(),state.current.path);});
 async function refreshNotebooks(){
   const result=await api("/api/notebooks");
   state.notebooks=result.notebooks;
