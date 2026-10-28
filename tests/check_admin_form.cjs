@@ -176,6 +176,7 @@ const server=http.createServer((req,res)=>{
       window.__promptCalls=[];
       window.prompt=()=>{const value=responses.shift()??null;window.__promptCalls.push(value);return value;};
     });
+    await page.locator("#createLesson").evaluate(button=>button.closest("details").open=true);
     await page.locator("#createLesson").click();
     try{
       await page.waitForFunction(()=>document.querySelector("#section")?.value==="vertiefung-ki-im-alltag",null,{timeout:6500});
