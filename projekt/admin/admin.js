@@ -820,7 +820,7 @@ async function refreshNotebooks(){
   const result=await api("/api/notebooks");
   state.notebooks=result.notebooks;
   const list=$("notebooks");list.replaceChildren();
-  for(const item of state.notebooks){
+  for(const item of state.notebooks.filter(item=>state.course==="basis"?/\/basis_[^/]+\.ipynb$/.test(item.path):!/\/basis_[^/]+\.ipynb$/.test(item.path))){
     const button=document.createElement("button");button.type="button";
     button.textContent=item.path.split("/").pop().replace(".ipynb","").replaceAll("_"," ");
     button.title=item.path;button.addEventListener("click",()=>load(item.path));
