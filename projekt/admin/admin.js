@@ -320,7 +320,7 @@ function markdown(source){
   const heading=/^(#{1,6})\s+(.+)$/;
   const item=/^(\s*)([-+*]|\d+[.)])\s+(.+)$/;
   const tableLine=line=>line.includes("|");
-  const isSeparator=line=>/^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+  const isSeparator=line=>/^\s*\|?\s*:?-{2,}:?\s*(?:\|\s*:?-{2,}:?\s*)+\|?\s*$/.test(line);
   while(i<lines.length){
     const raw=lines[i],s=raw.trim();
     if(!s){i++;continue;}
