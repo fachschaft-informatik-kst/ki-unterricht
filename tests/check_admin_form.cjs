@@ -8,7 +8,9 @@ const ROOT=path.resolve(__dirname,"..");
 const files=[
   "kursseiten/einstieg/000-einstieg.md",
   "kursseiten/einstieg/010-einstieg-1.md",
-  "kursseiten/einstieg/030-einstieg-3.md"
+  "kursseiten/einstieg/030-einstieg-3.md",
+  "kursseiten/perzeptron/030-perzeptron-3.md",
+  "kursseiten/basis-neuron/030-perzeptron-3.md"
 ];
 const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
@@ -73,6 +75,33 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#chapters button").count(),3,
       "Only numbered chapter Markdown files belong in chapter navigation");
 
+    // Regression: DL3 logic-gate tables must render with the same markup as
+    // markdown-it on the published pages (including the compact :--: delimiter).
+    async function checkGateTable(course,section,chapter,expectedAccent){
+      if(await page.locator("#courseSelect").inputValue()!==course)
+        await page.locator("#courseSelect").selectOption(course);
+      await page.locator("#section").selectOption(section);
+      await page.locator('[data-path="'+chapter+'"] button').click();
+      await page.waitForFunction(path=>document.querySelector("#path")?.textContent===path,chapter);
+      const frame=page.frameLocator("#preview");
+      const table=frame.locator(".kapitel-body table").first();
+      await table.locator("tbody tr").first().waitFor();
+      assert.equal(await table.locator("thead th").count(),5,"AND/OR/NAND headers should form a table");
+      assert.equal(await table.locator("tbody tr").count(),4,"All four truth-table combinations must render");
+      assert.equal(await frame.locator(".kapitel-body .table-scroll table").count(),0,
+        "Published Markdown tables are not wrapped in table-scroll");
+      assert.equal(await table.locator("thead th").first().evaluate(el=>getComputedStyle(el).textAlign),"center");
+      assert.equal(await frame.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),expectedAccent);
+    }
+    await checkGateTable("vertiefung","perzeptron",
+      "kursseiten/perzeptron/030-perzeptron-3.md","#076959");
+    await checkGateTable("basis","basis-neuron",
+      "kursseiten/basis-neuron/030-perzeptron-3.md","#3653a3");
+    assert.equal(await page.frameLocator("#preview").locator(".sidebar-bottom a[href='#basis-sicherung']").count(),1,
+      "Basis course must use its real sidebar");
+    await page.locator("#courseSelect").selectOption("vertiefung");
+    await page.locator("#section").selectOption("einstieg");
+
     // Reordering a lesson group must update the staged plan without changing stable IDs.
     const lessonHeads=page.locator("#lessonOrder .lesson-sort-head");
     await lessonHeads.nth(1).dragTo(lessonHeads.nth(2));
@@ -89,7 +118,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#editMaterials").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/materialien.md");
     const materialFrame=page.frameLocator("#preview");
-    await materialFrame.locator(".table-scroll table").first().waitFor();
+    await materialFrame.locator("table").first().waitFor();
     assert.equal(await materialFrame.locator(".table-scroll table th").count()>=2,true);
     await page.locator("#source").fill("# Testmaterialien\n\n| Schritt | Ziel |\n|---|---|\n| Übung | Prüfen |\n");
     await materialFrame.locator("table td").filter({hasText:"Übung"}).waitFor();
@@ -109,7 +138,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#preview").isVisible(),true);
     await page.frameLocator("#preview").locator("h2").filter({hasText:"Unterrichtsplan"}).waitFor();
     await page.locator("#editMaterials").click();
-    await page.frameLocator("#preview").locator(".table-scroll table").first().waitFor();
+    await page.frameLocator("#preview").locator("table").first().waitFor();
     // Visual regression for the real CSS selectors and HTML wrappers.
     // Missing portal.css used to turn the milestone timeline into an ordinary
     // numbered list and removed the circular chapter numbers.
