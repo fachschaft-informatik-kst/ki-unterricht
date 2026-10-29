@@ -129,3 +129,7 @@ iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
 #notebookRuntime{width:100%;height:min(75vh,850px);min-height:540px;border:1px solid var(--line);border-radius:9px;background:#fff}
 .notebook-runtime-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
 #notebookRuntimeStatus{font-size:13px;color:var(--accent)}
+
+/* The first-year editor uses the same blue accent palette as basis/basis.css. */
+body.course-basis{--accent:#3653a3;--soft:#e9eefc;--bg:#f3f5fb;--line:#d9e0ef;--muted:#46536a}
+body.course-basis .drag-over{background:#dfe6fb!important}

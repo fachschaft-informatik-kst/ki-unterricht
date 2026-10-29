@@ -352,6 +352,7 @@ function chapterFromYaml(source){
 }
 function preview(){
   const isBasis=state.course==="basis";
+  document.body.classList.toggle("course-basis",isBasis);
   const previewBase=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
   let content=$("source").value;
   if(state.current?.path.endsWith("/planung.json")){
@@ -761,6 +762,7 @@ $("courseSelect").addEventListener("change",async()=>{
   const selected=$("courseSelect").value;
   if(!confirmUnsaved()){$("courseSelect").value=state.course;return;}
   state.course=selected;
+  document.body.classList.toggle("course-basis",selected==="basis");
   ++navigationRevision;
   state.plans.clear();
   state.manifest=null;
