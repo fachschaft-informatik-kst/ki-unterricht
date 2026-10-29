@@ -34,6 +34,7 @@ const server=http.createServer((req,res)=>{
     const page=await browser.newPage();
     page.on("pageerror",error=>{throw error;});
     await page.route("**/api/session",route=>route.fulfill({json:{authenticated:true,login:"integration-test"}}));
+    await page.route("**/api/notebooks",route=>route.fulfill({json:{notebooks:[]}}));
     await page.route("**/api/chapters",route=>route.fulfill({json:{
       chapters:[...files.map(path=>({path,sha:"a".repeat(40)})),
         {path:"kursseiten/einstieg/planung.json",sha:"a".repeat(40)},
@@ -63,6 +64,7 @@ const server=http.createServer((req,res)=>{
 
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
     await page.locator("#section").selectOption("einstieg");
+    await page.locator(".sidebar-details summary").first().click();
     await page.locator("#lessonOrder .lesson-sort-head").first().waitFor();
     assert.equal(await page.locator("#lessonOrder .lesson-sort-head").count(),7,
       "All teaching sections need an ordered draggable entry");
@@ -174,6 +176,7 @@ const server=http.createServer((req,res)=>{
       window.__promptCalls=[];
       window.prompt=()=>{const value=responses.shift()??null;window.__promptCalls.push(value);return value;};
     });
+    await page.locator("#createLesson").evaluate(button=>button.closest("details").open=true);
     await page.locator("#createLesson").click();
     try{
       await page.waitForFunction(()=>document.querySelector("#section")?.value==="vertiefung-ki-im-alltag",null,{timeout:6500});

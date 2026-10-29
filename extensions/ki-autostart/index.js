@@ -9,7 +9,8 @@ const allowed = new Set([
   'xor_einzelne_neuronen.ipynb', 'mehrschichtige_netze.ipynb',
   'ziffernerkennung.ipynb', 'daten_training.ipynb',
   'ki_projekt/ki_lernlabor.ipynb',
-  'ki_projekt/ki_tandemprojekt.ipynb'
+  'ki_projekt/ki_tandemprojekt.ipynb',
+  'basis_neuron.ipynb', 'basis_netze.ipynb', 'basis_bildmodell.ipynb', 'basis_fotoprojekt.ipynb'
 ]);
 for (const path of [...allowed]) allowed.add('portal/' + path.split('/').pop());
 const tag = 'ki-autostart';

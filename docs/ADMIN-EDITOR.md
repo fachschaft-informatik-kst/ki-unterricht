@@ -96,15 +96,20 @@ angelegt, und GitHub-Pages-Seiten können keine geheimen OAuth-Schlüssel speich
    absichtlich **nicht** aktiv. Die sichere, angemeldete Ansicht befindet sich
    auf der Worker-Origin, wo auch der Login-Cookie gültig ist.
 
-5. Änderung auf dem Worker nach späteren Code-Updates:
+5. Automatische Worker-Updates: Im Repository unter **Settings → Secrets and variables → Actions** zwei Repository-Secrets anlegen:
+   - `CLOUDFLARE_API_TOKEN`: Cloudflare-API-Token mit Bearbeitungsrecht für Workers Scripts im betreffenden Account.
+   - `CLOUDFLARE_ACCOUNT_ID`: Cloudflare-Konto-ID.
 
-   \`\`\`sh
+   Die Werte bleiben in GitHub Actions verborgen. **Keine GitHub-App-Secrets und keinen Session-Key in GitHub hinterlegen.** Die bereits im Worker hinterlegten Secrets bleiben beim Deploy erhalten.
+
+   Nach jedem erfolgreichen Build auf `main` prüft GitHub Actions, ob sich `admin-worker/` oder der Workflow geändert hat. Nur dann wird der Worker automatisch mit Wrangler aktualisiert. Fehlen die beiden Secrets, schlägt der Deploy-Schritt mit einer klaren Fehlermeldung fehl; die Website kann unabhängig davon veröffentlicht werden.
+
+   Für einen manuellen Deploy weiterhin möglich:
+
+   ```sh
    cd admin-worker
    npx wrangler deploy
-   \`\`\`
-
-   Die normale GitHub-Pages-Action veröffentlicht **nur die statische Website**.
-   Der Worker wird absichtlich nicht mit ungeschützten CI-Zugangsdaten deployed.
+   ```
 
 ## Redaktionsablauf
 

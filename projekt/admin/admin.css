@@ -111,3 +111,21 @@ iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
 .chapter-list .order-row:hover{background:var(--soft)}
 
 .chapter-list .chapter-file{display:block;color:var(--muted);font-size:10px;line-height:1.35;font-weight:400}
+
+/* Compact, task-oriented navigation and notebook cells. */
+.workspace{grid-template-columns:minmax(285px,320px) minmax(0,1fr)}
+.sidebar-details{margin:15px 0;border-top:1px solid var(--line);padding-top:10px}
+.sidebar-details summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--accent);padding:6px 0}
+.sidebar-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.sidebar-actions .button{padding:9px 6px;font-size:12px}
+.sidebar-details .order-list{max-height:260px}
+.sidebar .chapter-list{margin-top:8px;max-height:310px;overflow-y:auto}
+.notebook-cell{border:1px solid var(--line);border-radius:10px;margin:13px 0;padding:12px;background:#fbfcfb}
+.notebook-cell-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
+.notebook-cell-head select{width:auto;max-width:150px}
+.notebook-cell .notebook-cell-source{min-height:125px;background:white;color:var(--text);-webkit-text-fill-color:var(--text);font:13px/1.5 ui-monospace,monospace}
+@media(max-width:760px){.workspace{display:block}.sidebar{max-height:none}}
+
+#notebookRuntime{width:100%;height:min(75vh,850px);min-height:540px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.notebook-runtime-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+#notebookRuntimeStatus{font-size:13px;color:var(--accent)}
