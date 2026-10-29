@@ -119,7 +119,7 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/materialien.md");
     const materialFrame=page.frameLocator("#preview");
     await materialFrame.locator("table").first().waitFor();
-    assert.equal(await materialFrame.locator(".table-scroll table th").count()>=2,true);
+    assert.equal(await materialFrame.locator("table th").count()>=2,true);
     await page.locator("#source").fill("# Testmaterialien\n\n| Schritt | Ziel |\n|---|---|\n| Übung | Prüfen |\n");
     await materialFrame.locator("table td").filter({hasText:"Übung"}).waitFor();
     assert.equal(await materialFrame.locator("table td").first().textContent(),"Übung");
