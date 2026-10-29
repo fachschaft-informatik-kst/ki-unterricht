@@ -2,7 +2,7 @@
 
 The Worker only exposes the existing admin.js route, so both stylesheets and
 course chrome must be inlined into that JavaScript. Run without --check after
-changing portal.css or index.template.html, then commit the changed admin.js.
+changing course stylesheets or templates, then commit the changed admin.js.
 """
 from pathlib import Path
 import argparse
@@ -11,6 +11,8 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "projekt/index.template.html"
+BASIS_PAGE = ROOT / "basis/index.template.html"
+BASIS_CSS = ROOT / "basis/basis.css"
 PORTAL_CSS = ROOT / "projekt/portal.css"
 ADMIN = ROOT / "projekt/admin/admin.js"
 
@@ -25,9 +27,17 @@ def values():
     chrome = template[body:first_section]
     if '<div class="shell"><main id="inhalt">' not in chrome:
         raise RuntimeError("Course shell structure has changed")
+    basis = BASIS_PAGE.read_text(encoding="utf-8")
+    basis_body = basis.index("<body>") + len("<body>")
+    basis_section = basis.index("<!-- COURSE -->", basis_body)
+    basis_chrome = basis[basis_body:basis_section]
+    if '<div class="shell"><main id="inhalt">' not in basis_chrome:
+        raise RuntimeError("Basis course shell structure has changed")
     return {
         "COURSE_PREVIEW_CSS": m.group(1) + "\n" + PORTAL_CSS.read_text(encoding="utf-8"),
         "COURSE_PREVIEW_CHROME": chrome,
+        "COURSE_PREVIEW_BASIS_CSS": BASIS_CSS.read_text(encoding="utf-8"),
+        "COURSE_PREVIEW_BASIS_CHROME": basis_chrome,
     }
 
 
