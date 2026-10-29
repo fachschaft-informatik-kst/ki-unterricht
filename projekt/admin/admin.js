@@ -353,7 +353,7 @@ function preview(){
     const plan=JSON.parse(content);
     content="<h2>Unterrichtsplan</h2>"+plan.lessons.map(l=>"<article class=\"card\"><h3>"+escapeHtml(l.title)+"</h3><p>"+escapeHtml(l.goal)+"</p>"+l.phases.map(p=>"<p><strong>"+escapeHtml(p.phase)+" · "+p.minutes+" min</strong> – "+escapeHtml(p.titel)+"</p>").join("")+"</article>").join("");
   }else if(content.includes("<!-- MD:START -->"))
-    content=content.replace(/<!-- MD:START -->([\s\S]*?)<!-- MD:END -->/g,(_,text)=>markdown(text));
+    content=content.replace(/<!-- MD:START -->\r?\n([\s\S]*?)\r?\n<!-- MD:END -->/g,(_,text)=>markdown(text));
   else if(content.startsWith("---\n"))
     content=chapterFromYaml(content)??markdown(content);
   else if(!/^\s*<(?:details|section)\b/.test(content))
