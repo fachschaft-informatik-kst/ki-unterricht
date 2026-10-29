@@ -74,6 +74,7 @@ jobs:
           node --check projekt/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
           node tests/check_admin.mjs
+          node tests/check_markdown_parity.cjs
           node tests/check_course_model.mjs
       - name: Browser-check teacher editor
         run: |
