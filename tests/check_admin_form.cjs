@@ -129,7 +129,7 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#source").inputValue(),/callout warn/);
     // Restore the original un-staged content before changing files.
     await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/materialien.md"),"utf8"));
-    await materialFrame.locator(".table-scroll table").first().waitFor();
+    await materialFrame.locator("table").first().waitFor();
 
     // Every navigation must replace the iframe document, even after viewing
     // AVIVA plans or material files. No stale material preview may remain.
