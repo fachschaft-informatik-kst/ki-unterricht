@@ -164,3 +164,20 @@ try{
 }finally{globalThis.fetch=priorFetch;}
 // OAuth flow is intentionally not fully simulated: no GitHub credentials in CI.
 console.log("PASS admin: protected endpoints, OAuth PKCE, app permissions, atomic course PR, stable IDs and conflict protection");
+
+// The editor's Markdown table recognizer must accept the real DL3 truth
+// tables (including two-hyphen alignment cells) from both course variants.
+const editorSource=readFileSync(new URL("../projekt/admin/admin.js",import.meta.url),"utf8");
+const separatorDefinition=editorSource.match(/const isSeparator=line=>(\/[^\n]+?\/)\.test\(line\);/);
+assert.ok(separatorDefinition,"Editor table separator recognizer missing");
+const separatorRegex=Function("return "+separatorDefinition[1])();
+for(const course of ["perzeptron","basis-neuron"]){
+  const chapter=readFileSync(new URL("../kursseiten/"+course+"/030-perzeptron-3.md",import.meta.url),"utf8");
+  const lines=chapter.split(/\r?\n/);
+  const headerIndex=lines.findIndex(line=>line.includes("| AND | OR | NAND |"));
+  assert.ok(headerIndex>=0,course+" truth table missing");
+  assert.ok(separatorRegex.test(lines[headerIndex+1]),course+" truth table not recognized by editor");
+  const rows=lines.slice(headerIndex+2,headerIndex+6);
+  assert.equal(rows.length,4);
+  assert.ok(rows.every(line=>line.trim().startsWith("|")&&line.trim().endsWith("|")));
+}
