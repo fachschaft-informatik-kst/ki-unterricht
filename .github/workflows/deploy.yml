@@ -74,6 +74,7 @@ jobs:
           node --check projekt/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
           node tests/check_admin.mjs
+          node tests/check_markdown_parity.cjs
           node tests/check_course_model.mjs
       - name: Browser-check teacher editor
         run: |
@@ -103,6 +104,7 @@ jobs:
           python tests/check_didactics.py
           python tests/check_materials.py
           python scripts/format_course_sources.py --check
+          python scripts/sync_editor_preview.py --check
           python tests/check_portal_content.py
           python tests/check_solutions.py
           python tests/check_content_mvc.py

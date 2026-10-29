@@ -49,7 +49,7 @@ try{
     files.push(String(url));
     return new Response("export const ok = true;",{status:200,headers:{"Content-Type":"text/javascript"}});
   };
-  for(const [path,mime] of [["/admin.js","text/javascript"],["/plan-editor.js","text/javascript"],
+  for(const [path,mime] of [["/admin.js","text/javascript"],["/markdown-it.min.js","text/javascript"],["/plan-editor.js","text/javascript"],
       ["/course-model.js","text/javascript"],["/course-rules.json","application/json"]]){
     const result=await route(path);
     assert.equal(result.status,200,"Worker route missing: "+path);
@@ -164,3 +164,4 @@ try{
 }finally{globalThis.fetch=priorFetch;}
 // OAuth flow is intentionally not fully simulated: no GitHub credentials in CI.
 console.log("PASS admin: protected endpoints, OAuth PKCE, app permissions, atomic course PR, stable IDs and conflict protection");
+
