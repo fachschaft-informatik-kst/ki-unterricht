@@ -273,7 +273,7 @@ const server=http.createServer((req,res)=>{
     // Theme regression: 1st-year preview must load exactly the published blue
     // basis.css and basis course shell, not the green fourth-year course chrome.
     await page.locator("#courseSelect").selectOption("basis");
-    await page.locator('#section option[value="basis-neuron"]').waitFor();
+    await page.locator('#section option[value="basis-neuron"]').waitFor({state:"attached"});
     await page.locator("#section").selectOption("basis-neuron");
     await page.locator("#chapters button").filter({hasText:"030-perzeptron-3"}).click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/030-perzeptron-3.md");
@@ -298,7 +298,7 @@ const server=http.createServer((req,res)=>{
 
     // Switching back restores the actual fourth-year stylesheet and sidebar.
     await page.locator("#courseSelect").selectOption("vertiefung");
-    await page.locator('#section option[value="perzeptron"]').waitFor();
+    await page.locator('#section option[value="perzeptron"]').waitFor({state:"attached"});
     await page.locator("#section").selectOption("perzeptron");
     await page.locator("#chapters button").filter({hasText:"030-perzeptron-3"}).click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/perzeptron/030-perzeptron-3.md");
