@@ -65,6 +65,11 @@ const server=http.createServer((req,res)=>{
     }));
 
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
+    await page.locator("#courseSelect").selectOption("basis");
+    assert.equal(await page.locator("body").evaluate(node=>node.classList.contains("course-basis")),true,"First-year editor theme is not blue");
+    assert.equal(await page.locator("body").evaluate(node=>getComputedStyle(node).getPropertyValue("--accent").trim()),"#3653a3");
+    await page.locator("#courseSelect").selectOption("vertiefung");
+    assert.equal(await page.locator("body").evaluate(node=>node.classList.contains("course-basis")),false,"Fourth-year editor should retain green theme");
     await page.locator("#section").selectOption("einstieg");
     await page.locator(".sidebar-details summary").first().click();
     await page.locator("#lessonOrder .lesson-sort-head").first().waitFor();
