@@ -8,7 +8,9 @@ const ROOT=path.resolve(__dirname,"..");
 const files=[
   "kursseiten/einstieg/000-einstieg.md",
   "kursseiten/einstieg/010-einstieg-1.md",
-  "kursseiten/einstieg/030-einstieg-3.md"
+  "kursseiten/einstieg/030-einstieg-3.md",
+  "kursseiten/perzeptron/030-perzeptron-3.md",
+  "kursseiten/basis-neuron/030-perzeptron-3.md"
 ];
 const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
@@ -267,6 +269,44 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/lernziele/000-inhalt.md");
     assert.equal(await page.locator("#source").isVisible(),true);
     assert.equal(await page.locator("#preview").isVisible(),true);
+
+    // Theme regression: 1st-year preview must load exactly the published blue
+    // basis.css and basis course shell, not the green fourth-year course chrome.
+    await page.locator("#courseSelect").selectOption("basis");
+    await page.locator('#section option[value="basis-neuron"]').waitFor({state:"attached"});
+    await page.locator("#section").selectOption("basis-neuron");
+    await page.locator("#chapters button").filter({hasText:"030-perzeptron-3"}).click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/030-perzeptron-3.md");
+    const basisPreview=page.frameLocator("#preview");
+    await basisPreview.locator("table").first().waitFor();
+    assert.equal(await basisPreview.locator("table").first().locator("thead th").count(),5,
+      "Logical-gate truth table in the blue course must have five headers");
+    const basisTheme=await basisPreview.locator("html").evaluate(el=>{
+      const vars=getComputedStyle(el),body=getComputedStyle(el.ownerDocument.body);
+      return {accent:vars.getPropertyValue("--accent").trim(),
+        paper:vars.getPropertyValue("--paper").trim(),
+        background:body.backgroundColor,
+        brand:el.ownerDocument.querySelector(".sidebar .brand")?.getAttribute("href"),
+        image:el.ownerDocument.querySelector(".kapitel img")?.getAttribute("src")};
+    });
+    assert.equal(basisTheme.accent,"#3653a3","First-year accent must be blue");
+    assert.equal(basisTheme.paper,"#f3f5fb","First-year paper must be pale blue");
+    assert.equal(basisTheme.background,"rgb(243, 245, 251)");
+    assert.equal(basisTheme.brand,"#basis-start","Preview must use the first-year course shell");
+    assert.ok(basisTheme.image?.startsWith("https://fachschaft-informatik-kst.github.io/ki-unterricht/basis/grafiken/"),
+      "First-year images must resolve against the blue basis course");
+
+    // Switching back restores the actual fourth-year stylesheet and sidebar.
+    await page.locator("#courseSelect").selectOption("vertiefung");
+    await page.locator('#section option[value="perzeptron"]').waitFor({state:"attached"});
+    await page.locator("#section").selectOption("perzeptron");
+    await page.locator("#chapters button").filter({hasText:"030-perzeptron-3"}).click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/perzeptron/030-perzeptron-3.md");
+    const fourthPreview=page.frameLocator("#preview");
+    await fourthPreview.locator("table").first().waitFor();
+    const fourthAccent=await fourthPreview.locator("html").evaluate(el=>
+      getComputedStyle(el).getPropertyValue("--accent").trim());
+    assert.equal(fourthAccent,"#076959","Fourth-year accent must remain green");
 
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
   }finally{
