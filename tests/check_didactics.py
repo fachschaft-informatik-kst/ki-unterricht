@@ -15,7 +15,7 @@ PLACEHOLDERS = (
     "arbeitsauftrag und ablauf festlegen",
     "hier die aufgabe beschreiben",
 )
-def check(lessons):
+def check(lessons, *, require_individual=True):
     issues = []
     for lesson in lessons:
         label = lesson["id"]
@@ -27,7 +27,7 @@ def check(lessons):
             for step in phase["schritte"]:
                 if any(placeholder in step["text"].casefold() for placeholder in PLACEHOLDERS):
                     issues.append(f"{label}: placeholder in {phase['phase']}")
-        if lesson["id"] in {"05", "06", "07", "08"}:
+        if not require_individual or lesson["id"] in {"05", "06", "07", "08"}:
             continue
         final = [s for s in lesson["phases"][-1]["schritte"] if s.get("min", 0)][-1]
         if final["wer"] != "Einzeln" or final["min"] < 2:
@@ -38,6 +38,7 @@ def check(lessons):
 
 if __name__ == "__main__":
     issues = check(load_course(ROOT)["lessons"])
+    issues += check(load_course(ROOT, "kursseiten/basis-manifest.json")["lessons"], require_individual=False)
     if issues:
         raise SystemExit("Didaktischer Mindestcheck:\\n" + "\\n".join(issues))
-    print("PASS basic editorial quality gate (manual review still required)")
+    print("PASS editorial quality gate for both courses (manual review still required)")
