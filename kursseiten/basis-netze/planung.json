@@ -10,11 +10,11 @@
         "alt": "Ein künstliches Neuron mit zwei Eingängen, Gewichten und Bias.",
         "caption": "Rückblick: Ein Neuron berechnet die gewichtete Summe und entscheidet anhand einer Schwelle."
       },
-      "goal": "Die XOR-Grenze eines einzelnen Neurons begründen und zeigen, wie eine Zwischenschicht das Problem löst.",
+      "goal": "XOR an vier Beispielen erklären, die Grenze eines einzelnen Neurons anhand einer Grafik erkennen und die OR-/NAND-/AND-Zwischenschicht verfolgen.",
       "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
       "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
-      "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung.",
-      "zeit": "90 Minuten. Wie DL 4 der 4. Klasse: XOR-Wahrheitstabelle, linearer Trenner und Widerspruch, eigenes XOR-Notebook, Aufbau OR/NAND/AND, danach Netz-Notebook mit Training von 1/2/4 versteckten Neuronen. Die freiwillige Ziffernerkennung der 4. Klasse wird hier vollständig ausgespart und kommt erst in DL 5.",
+      "product": "Vier XOR-Fälle, ein eigener Notebookversuch und eine begründete Erklärung, weshalb eine Zwischenschicht hilft.",
+      "zeit": "90 Minuten: XOR-Wahrheitstabelle, grafische Beobachtung und OR/NAND/AND als Pflichtkern; Ungleichungsbeweis und Variation der versteckten Neuronen als Wahlvertiefung. Ziffernmodell erst in DL5.",
       "phases": [
         {
           "phase": "Ankommen",
