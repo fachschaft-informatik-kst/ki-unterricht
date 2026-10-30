@@ -17,7 +17,7 @@ const assert=require('node:assert/strict');
     assert.equal(await page.locator('a.choice').count(),2,'Both Kurzgymi tracks must appear');
     await page.locator('a.choice[href="basis/"]').click();
     assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
-    assert.equal(await page.locator('main > section').count(),12);
+    assert.equal(await page.locator('main > section').count(),13);
     // Shared KST breadcrumb; track switching happens only via the landing page.
     const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
     assert(!await page.locator('a[href="../projekt/"]').count(),'No direct link to 4th-year course');
