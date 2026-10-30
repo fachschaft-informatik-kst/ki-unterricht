@@ -77,6 +77,7 @@ jobs:
           node tests/check_markdown_parity.cjs
           node --check projekt/glossar.js
           node --check content/ki_projekt/fotostudio_storage.js
+          node tests/check_fotostudio_inline.cjs
           node tests/check_course_model.mjs
       - name: Browser-check teacher editor
         run: |
