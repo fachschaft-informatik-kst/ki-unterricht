@@ -158,6 +158,9 @@ for _a,_b,_filenames in [
         _fourth=(ROOT/"kursseiten"/_a/_file).read_text(encoding="utf-8")
         _expect=_mirror_chapter(_fourth,_a,_b)
         if _file=="040-netze-4.md":
+            # The ungraded readiness check is deliberately part of advanced DL4,
+            # not the first-year mirror. Keep all shared XOR lessons identical.
+            _expect=_re.sub(r'(?m)^    <div class="callout" id="projekt-bereit-check"[^\n]*\n[\s\S]*?^    </div>\n','',_expect)
             _expect=_expect.replace(
                 "Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.",
                 "In Doppellektion 5 untersucht ihr erstmals das Ziffernerkennungsmodell.")
