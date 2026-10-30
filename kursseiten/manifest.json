@@ -132,6 +132,15 @@
       "id": "sicherung",
       "class": "section project-transfer",
       "navParent": "projekt"
+    },
+    {
+      "id": "glossar",
+      "class": "section",
+      "navigation": {
+        "order": 9,
+        "label": "A–Z",
+        "title": "Glossar"
+      }
     }
   ]
 }

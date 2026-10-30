@@ -9,6 +9,7 @@ import shutil
 from build_portal import render_fragment
 from build_course import render as render_lesson, tabelle
 from course_model import load_course
+from glossary import render_glossary
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "kursseiten" / "basis-manifest.json"
@@ -43,6 +44,7 @@ def assemble() -> tuple[str, list[dict]]:
         if not sources:
             raise ValueError(f"Keine Kapiteldatei: {folder}")
         content = "".join(render_fragment(file.read_text(encoding="utf-8"), file) for file in sources)
+        content = content.replace("<!-- GLOSSARY -->", render_glossary("basis"))
         content = content.replace("<!-- OVERVIEW -->", '<div class="course-grid">' + "".join(cards) + "</div>")
         start = f"<!-- LESSONS:{ident} -->"
         finish = f"<!-- /LESSONS:{ident} -->"
@@ -78,6 +80,8 @@ def build():
     source_svg = (ROOT / "projekt" / "grafiken" / "netz_hintergrund.svg").read_text(encoding="utf-8")
     blue_svg = source_svg.replace("#076959", "#3653a3").replace("#b84d27", "#6488d6").replace("#f5f4ee", "#f3f5fb")
     (OUT / "grafiken" / "netz_hintergrund_blau.svg").write_text(blue_svg, encoding="utf-8")
+    for filename in ("glossar.css", "glossar.js"):
+        (OUT / filename).write_bytes((ROOT / "projekt" / filename).read_bytes())
     for filename in ("basis.css", "basis.js", "persistence.js"):
         (OUT / filename).write_bytes((SOURCE / filename).read_bytes())
     page, lessons = assemble()

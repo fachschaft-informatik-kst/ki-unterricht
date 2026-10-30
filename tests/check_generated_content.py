@@ -37,13 +37,13 @@ expected_sections = [
     ("start", "hero"), ("lernziele", "section"), ("projekt", "hero"),
     ("bewertung", "section"), ("einstieg", "section"), ("lernarten", "section"),
     ("perzeptron", "section"), ("netze", "section"), ("journal", "section"),
-    ("sprache", "section"), ("gesellschaft", "section"), ("sicherung", "section"),
+    ("sprache", "section"), ("gesellschaft", "section"), ("sicherung", "section"), ("glossar", "section"),
 ]
 actual_sections = [(node.get("id"), node.get("class", [""])[0])
                    for node in course.select("main > section[id]")]
 assert actual_sections == expected_sections, (actual_sections, expected_sections)
 expected_nav = ["start", "lernziele", "einstieg", "lernarten", "perzeptron",
-                "netze", "projekt", "sprache", "gesellschaft"]
+                "netze", "projekt", "sprache", "gesellschaft", "glossar"]
 actual_nav = [node.get("href", "")[1:] for node in course.select(".sidebar nav a")]
 assert actual_nav == expected_nav, (actual_nav, expected_nav)
 assert course.select_one("#projekt")["data-nav"] == "projekt"

@@ -6,15 +6,17 @@ titel: Entdecken und ausprobieren
 kurz: Mit einer Vermutung ins Experiment starten
 ---
 
-### Die Datenfalle und der erste Modellversuch
+### Der erste Versuch mit einem Ziffernnetz
 
-**Pflichtkern:** Prüft zuerst mit der Lehrperson die zwei Bildklassen, die Herkunft und die Trennung von Trainings- und Testbildern. Öffnet anschliessend das vorbereitete Bildklassifikationswerkzeug, trainiert ein erstes Modell und notiert mindestens zwei Vorhersagen samt tatsächlicher Klasse. Falls kein Fehler auftritt, beschreibt eine mögliche Schwachstelle statt einen Fehler zu erfinden. Die unabhängigen Testbilder dürfen nicht ins Training gelangen.
+**Pflichtkern:** Öffnet das vorbereitete Notebook und startet den Abschnitt **DL 5**. Das Ziffernnetz wurde bereits mit Ziffernbildern trainiert: **Ihr trainiert in dieser Lektion noch kein eigenes Modell.** Prüft zuerst mindestens zwei Ziffernbilder und notiert jeweils die tatsächliche Ziffer und die Vorhersage. Testet anschliessend die Buchstaben **A und B**. Notiert, welche Ziffer (0–9) das Netz jeweils ausgibt. Eine Ziffernausgabe für A oder B ist **kein** Beleg für eine korrekte Buchstabenerkennung, weil es keine Buchstaben-Ausgabeklassen gibt.
 
-**Leitfrage:** Was lernt das Modell wirklich – den Gegenstand oder einen zufälligen Bildhintergrund?
+**Leitfrage:** Warum gibt ein Ziffernnetz auch bei unbekannten Buchstaben eine Ziffer aus?
 
-### Die Datenfalle
+Begriffe zum Nachschlagen: [Modell](#basis-glossar-modell), [Label / Klasse](#basis-glossar-label) und [Training](#basis-glossar-training).
 
-Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergrund zu sehen, Bücher immer vor einem schwarzen. Was könnte das Modell irrtümlich lernen?
+### Gedankenexperiment: die Datenfalle
+
+Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergrund zu sehen, Bücher immer vor einem schwarzen. Was könnte das Modell irrtümlich lernen? Das ist ein Gedankenexperiment für die späteren Fotolektionen – **kein zweiter Trainingsauftrag in DL 5**.
 
 <div class="basis-answer"><label for="basis-daten-a">Unsere Vermutung und Beobachtung</label><textarea id="basis-daten-a" data-basis-answer="basis-daten-a" rows="3" placeholder="Wir vermuten … / Wir sehen …"></textarea></div>
 

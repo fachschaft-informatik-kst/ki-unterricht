@@ -14,7 +14,7 @@ Für eine vertiefte Filmphase eignet sich ein **vorab ausgewählter Ausschnitt**
 
 **Transfer aus eurem Bildprojekt:** Welche Datenfalle habt ihr selbst beobachtet? Was wäre anders, wenn die Fehlklassifikation nicht einen Gegenstand, sondern einen Menschen beträfe?
 
-Wie in der Diskussion um Cathy O’Neils «Angriff der Algorithmen» geht es um die Folgen automatisierter Entscheidungen. Nicht jedes Modell ist absichtlich ungerecht. Probleme können entstehen, wenn Trainingsdaten vergangene Ungleichheiten übernehmen oder niemand Entscheidungen überprüft.
+Der Kurzfilm zeigt einen Anlass, über die **unabhängige Prüfung** von KI nachzudenken. Nicht jedes Modell ist absichtlich ungerecht. Probleme können entstehen, wenn Trainingsdaten vergangene Ungleichheiten übernehmen oder niemand Entscheidungen überprüft. Erklärt mit euren eigenen Worten, was [Fairness](#basis-glossar-fairness) und [Verzerrung in Daten](#basis-glossar-bias-daten) damit zu tun haben.
 
 **Untersucht zu zweit einen Fall eurer Wahl:**
 

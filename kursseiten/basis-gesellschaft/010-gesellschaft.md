@@ -1,25 +1,26 @@
-<details class="kapitel" id="gesellschaft-1" data-kurz="Cathy O’Neils Video: Wer entscheidet, wer profitiert, wer ist betroffen?" open>
+<details class="kapitel" id="gesellschaft-1" data-kurz="ARTE-Kurzfilm über KI-Prüfung: Wer wird geschützt, wer trägt Risiken?" open>
   <summary><span class="kapitel-nr">1</span>
-    <h2 class="kapitel-titel">Das Video auswerten</h2>
+    <h2 class="kapitel-titel">Den ARTE-Kurzfilm auswerten</h2>
   </summary>
   <div class="kapitel-body">
+    <p>Schaut gemeinsam <a href="https://www.arte.tv/de/videos/119741-000-A/jurriaan-ki-pruefer-aus-den-niederlanden/" target="_blank" rel="noopener">ARTE: «Jurriaan, KI-Prüfer aus den Niederlanden» (ca. 3 Min.)</a>. Die Lehrperson prüft den Link vorab. Notiert zuerst <strong>eine tatsächlich im Film genannte oder gezeigte Beobachtung</strong>. Unterscheidet danach zwischen Beobachtung und eigener Vermutung.</p>
     <div class="lesson-steps">
       <article>
         <b>Wer?</b>
         <!-- MD:START -->
-Wer entscheidet, wer profitiert, wer ist betroffen?
+Was macht eine Person, die KI-Systeme überprüft? Wer könnte von den Entscheidungen betroffen sein?
 <!-- MD:END -->
       </article>
       <article>
         <b>Warum?</b>
         <!-- MD:START -->
-Welche Daten, Ziele oder Rückkopplungen verursachen das Problem?
+Welches Risiko oder welche mögliche Benachteiligung wird im Film angesprochen? Was ist eure eigene Vermutung dazu?
 <!-- MD:END -->
       </article>
       <article>
         <b>Was ändern?</b>
         <!-- MD:START -->
-Was wäre eine konkrete Verbesserung? Wie prüfen Sie deren Wirkung?
+Wie könnte man ein KI-System unabhängig prüfen? Woran würdet ihr merken, dass eine Massnahme hilft?
 <!-- MD:END -->
       </article>
     </div>
@@ -27,22 +28,22 @@ Was wäre eine konkrete Verbesserung? Wie prüfen Sie deren Wirkung?
       <table class="typen">
         <thead>
           <tr>
-            <th>Beobachtung im Video</th>
-            <th>Ihr Eintrag</th>
+            <th>Beobachtung im Kurzfilm</th>
+            <th>Euer Eintrag</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th>Ein genanntes Beispiel (Stichwort)</th>
-            <td><input type="text" maxlength="200" data-basis-answer="video_beispiel" aria-label="Beispiel aus dem Video" placeholder="z. B. Bewerbung, Schule, Gericht …"></td>
+            <th>Ein tatsächlich gezeigter oder genannter Punkt</th>
+            <td><input type="text" maxlength="200" data-basis-answer="video_beispiel" aria-label="Beobachtung aus dem ARTE-Kurzfilm" placeholder="Im Film wird …"></td>
           </tr>
           <tr>
-            <th>Zeitmarke</th>
-            <td><input type="text" maxlength="200" data-basis-answer="video_zeit" aria-label="Zeitmarke" placeholder="z. B. 04:30"></td>
+            <th>Zeitmarke (ungefähr)</th>
+            <td><input type="text" maxlength="200" data-basis-answer="video_zeit" aria-label="Zeitmarke aus dem ARTE-Kurzfilm" placeholder="z. B. 01:20"></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <label class="field answer"><span>Ein Beispiel aus dem Video: Problem → Ursache → begründete Verbesserung</span><textarea data-basis-answer="video" maxlength="10000" placeholder="Ihre Beobachtung …" rows="3"></textarea></label>
+    <label class="field answer"><span>Eure Analyse: Beobachtung → mögliches Problem → begründete Prüfung oder Verbesserung</span><textarea data-basis-answer="video" maxlength="10000" placeholder="Im Film sehen wir … / Wir vermuten … / Prüfen könnte man …" rows="3"></textarea></label>
   </div>
 </details>

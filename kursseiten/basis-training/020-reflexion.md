@@ -6,7 +6,7 @@ titel: Modellvergleich begründen
 kurz: Ein fairer Vergleich · dieselben Validierungsbilder
 ---
 
-**Meilenstein:** Beide Modelle verwenden gleich viele Trainingsfotos, aber unterschiedliche Trainingsgruppen. Vergleicht die Trefferquoten auf **V1**, nicht auf den späteren Testbildern P1/P2.
+**Meilenstein:** Beide Modelle verwenden gleich viele Trainingsfotos, aber unterschiedliche Trainingsgruppen. Vergleicht die Trefferquoten auf **[V1 (Validierung)](#basis-glossar-validierung)**, nicht auf den späteren **[unabhängigen Testbildern P1/P2](#basis-glossar-testdaten)**.
 
 | Modell | V1 richtig / getestet | Beobachtung |
 |---|:---:|---|
