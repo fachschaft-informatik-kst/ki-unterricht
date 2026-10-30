@@ -199,6 +199,22 @@ const assert=require('node:assert/strict');
       assert.equal(await notebookPage.locator('#basis-lab-fullscreen').count(),1);
       await notebookPage.close();
     }
+    // Glossary links open an accessible explanation without leaving the current lesson.
+    const glossaryPage=await browser.newPage();
+    await glossaryPage.goto('http://127.0.0.1:8770/basis/#basis-daten');
+    await glossaryPage.locator('a[href="#basis-glossar-modell"]').first().click();
+    assert(await glossaryPage.locator('dialog.glossary-dialog').isVisible(),'Inline glossary dialog');
+    assert((await glossaryPage.locator('dialog.glossary-dialog').innerText()).includes('Modell'));
+    await glossaryPage.locator('dialog.glossary-dialog .glossary-close').click();
+    assert(!await glossaryPage.locator('dialog.glossary-dialog').isVisible());
+    await glossaryPage.locator('.nav a[href="#basis-glossar"]').click();
+    assert(await glossaryPage.locator('#basis-glossar [data-glossary-search]').isVisible());
+    await glossaryPage.locator('[data-glossary-search]').fill('Token');
+    assert(await glossaryPage.locator('#basis-glossar-token').isVisible());
+    assert(!await glossaryPage.locator('#basis-glossar-xor').isVisible());
+    await glossaryPage.locator('[data-glossary-search]').fill('');
+    assert.equal(await glossaryPage.locator('#basis-glossar .glossary-entry:visible').count(),29);
+    await glossaryPage.close();
     assert.deepEqual(errors,[]);
     console.log('PASS both course links, ten lessons, reused KI/ML, blue KST layout, two-layer network, live neuron controls and isolated persistent answers');
   }finally{if(browser)await browser.close();server.kill();}
