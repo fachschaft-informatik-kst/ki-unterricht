@@ -34,9 +34,13 @@ for level,path,prefix in (
     assert {e["id"] for e in entries}=={f"{prefix}-{ident}" for ident in ids}
     assert len(section.select(".glossary-group"))==len(data["gruppen"])
     for entry in entries:
-        answer=entry.select_one("details.glossary-answer:not([open])")
+        panel=entry.select_one(".glossary-selfcheck")
+        assert panel is not None and panel.select_one(".glossary-question"), entry["id"]
+        answer=panel.select_one("details.glossary-answer:not([open])")
         assert answer is not None and answer.select_one("summary"), entry["id"]
-        assert answer.select_one("p").get_text(strip=True), entry["id"]
+        assert answer.select_one(".glossary-answer-show").get_text(strip=True)=="Antwort anzeigen"
+        assert answer.select_one(".glossary-answer-hide").get_text(strip=True)=="Antwort verbergen"
+        assert answer.select_one(".glossary-answer-body p").get_text(strip=True), entry["id"]
     assert soup.select_one(f'.nav a[href="#{prefix}"]')
     manifest=json.loads((ROOT/"kursseiten"/("basis-manifest.json" if level=="basis" else "manifest.json")).read_text(encoding="utf-8"))
     for topic in (s for s in manifest["sections"] if s.get("teaching")):

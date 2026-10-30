@@ -27,8 +27,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert(await glossaryDialog.isVisible(),'Begriff wird ohne Kurswechsel erklärt');
   const quickAnswer=glossaryDialog.locator('details.glossary-answer');
   assert(!await quickAnswer.evaluate(el=>el.open),'Leitfrage-Antwort bleibt zunächst verborgen');
+  assert.equal(await quickAnswer.locator('summary').evaluate(el=>getComputedStyle(el).display),'flex');
+  assert((await quickAnswer.locator('summary').boundingBox()).height>=44,'Grosszügiger Klickbereich');
   await quickAnswer.locator('summary').click();
   assert(await quickAnswer.evaluate(el=>el.open),'Leitfrage-Antwort lässt sich aufklappen');
+  assert(await quickAnswer.locator('.glossary-answer-hide').isVisible());
+  assert(await quickAnswer.locator('.glossary-answer-body').isVisible());
   await glossaryDialog.locator('.glossary-close').click();
   await p.locator('.nav a[href="#lernziele"]').click();await p.locator('#lernziele').waitFor({state:'visible'});assert.equal(await p.locator('#lernziele .grid > article').count(),7);
   assert.equal(await p.locator('#lernziele .grid > article').filter({hasText:'Das Bildprojekt untersuchen'}).locator('.section-label').innerText(),'05–08');

@@ -10,12 +10,27 @@
 .glossary-entry p{font-size:14px;line-height:1.6;margin:0 0 9px}
 .glossary-entry p:last-child{margin-bottom:0}
 .glossary-example{padding-top:8px;border-top:1px solid var(--line)}
-.glossary-question{color:var(--muted)}
-.glossary-answer{margin-top:8px;border-top:1px dashed var(--line);padding-top:10px}
-.glossary-answer summary{display:list-item;cursor:pointer;color:var(--accent);font-size:14px;font-weight:700;line-height:1.5;margin-left:16px}
-.glossary-answer summary:hover{text-decoration:underline;text-underline-offset:3px}
-.glossary-answer summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
-.glossary-answer[open] p{margin:8px 0 0;padding:9px 12px;border-radius:8px;background:var(--soft);color:var(--ink)}
+/* A self-check is a single compact panel. Scope the native details to override
+   the course-wide accordion rules without affecting lesson chapters. */
+.glossary-selfcheck{margin-top:16px;padding:15px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
+.glossary-entry .glossary-question{margin:0 0 12px;color:var(--ink);font-size:14px;line-height:1.55}
+.glossary-question strong{display:block;margin-bottom:4px;color:var(--accent);font-size:11px;font-weight:750;letter-spacing:.08em;line-height:1.4;text-transform:uppercase}
+.glossary-answer{margin:0;border:0;border-radius:9px;background:transparent;overflow:visible}
+.glossary-answer>summary{display:flex;align-items:center;gap:10px;min-height:44px;margin:0;padding:10px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--accent);font-size:13px;font-weight:700;line-height:1.4;list-style:none;text-decoration:none;cursor:pointer}
+.glossary-answer>summary::-webkit-details-marker{display:none}
+.glossary-answer>summary::after{content:"";width:8px;height:8px;flex:0 0 8px;margin-left:auto;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .18s ease}
+.glossary-answer>summary:hover{border-color:var(--accent);background:#fff}
+.glossary-answer>summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.glossary-answer .glossary-answer-hide{display:none}
+.glossary-answer[open] .glossary-answer-show{display:none}
+.glossary-answer[open] .glossary-answer-hide{display:inline}
+.glossary-answer[open]>summary{border-radius:9px 9px 0 0;border-bottom:0}
+.glossary-answer[open]>summary::after{content:"";transform:rotate(-135deg)}
+.glossary-answer-body{padding:0 13px 13px;border:1px solid var(--line);border-top:0;border-radius:0 0 9px 9px;background:#fff}
+.glossary-answer-body::before{content:"";display:block;margin-bottom:10px;border-top:1px solid var(--line)}
+.glossary-entry .glossary-answer-body p{margin:0;color:var(--ink);font-size:14px;line-height:1.55}
+@media(max-width:720px){.glossary-selfcheck{padding:12px}.glossary-answer>summary{min-height:46px}}
+@media(prefers-reduced-motion:reduce){.glossary-answer>summary::after{transition:none}}
 .glossary-related{font-size:14px;line-height:1.6;color:var(--muted);margin:12px 0 18px}
 .glossary-related a{color:var(--accent);font-weight:600;text-underline-offset:3px}
 a[href^="#glossar-"]:not(.nav a),a[href^="#basis-glossar-"]:not(.nav a){text-decoration-style:dotted;text-underline-offset:4px}
