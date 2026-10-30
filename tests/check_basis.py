@@ -21,7 +21,7 @@ assert set(l["view"] for l in basic["lessons"]).isdisjoint({l["view"] for l in a
 base = ROOT / "_build/site/basis"
 page = BeautifulSoup((base / "index.html").read_text(encoding="utf-8"), "html.parser")
 assert page.select_one("#basis-start h1").get_text() == "KI entdecken"
-assert len(page.select("main > section")) == 12
+assert len(page.select("main > section")) == 13
 assert len(page.select("details.lesson-plan")) == 10
 assert len(page.select("details.kapitel")) >= 30
 assert len(page.select("[data-basis-answer]")) >= 24
