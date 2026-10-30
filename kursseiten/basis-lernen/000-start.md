@@ -11,3 +11,11 @@
   </div>
 </details>
 <!-- /LESSONS:basis-lernen -->
+<div class="callout basis-learning-route" data-p1-route="b02">
+  <!-- MD:START -->
+## Unser Pflichtkern (ca. 45 Minuten)
+<!-- MD:END -->
+  <p><strong>1.</strong> Erklärt bei einem Spamfilter: Was wird eingegeben, was kommt heraus? <strong>2.</strong> Spielt das Memory als Beispiel für Rückmeldung. <strong>3.</strong> Vergleicht die drei Lernarten anhand von je einem alltagsnahen Beispiel (Bilder mit Labels, Bilder gruppieren, Spiel mit Belohnung).</p>
+  <p><strong>Hilfe:</strong> <a href="#basis-glossar-ueberwachtes-lernen">Überwacht</a> = Antworten bekannt; <a href="#basis-glossar-unueberwachtes-lernen">unüberwacht</a> = Gruppen entdecken; <a href="#basis-glossar-verstaerkendes-lernen">verstärkend</a> = Rückmeldung zu Handlungen.</p>
+  <p><strong>Wahlvertiefung:</strong> weitere Lernspiele, Akinator und zusätzliche Stationen. Nicht alle Stationen müssen bearbeitet werden.</p>
+</div>

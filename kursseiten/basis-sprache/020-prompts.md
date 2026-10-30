@@ -8,7 +8,7 @@
       <article>
         <b>2 · Mit der Lernstrecke</b>
         <!-- MD:START -->
-Bearbeiten Sie die eingebettete Lernstrecke. Variieren Sie Kontext oder Wortwahl und halten Sie Beobachtungen fest.
+Bearbeitet die eingebettete Lernstrecke. Variiert Kontext oder Wortwahl und haltet eure Beobachtungen fest.
 <!-- MD:END -->
       </article>
     </div>
@@ -18,7 +18,7 @@ Bearbeiten Sie die eingebettete Lernstrecke. Variieren Sie Kontext oder Wortwahl
 ## Wie entsteht ein Text?
 <!-- MD:END -->
         <!-- MD:START -->
-Die Lernstrecke führt vom Papagei-Prinzip zur Vorhersage von Wortfolgen. Vergleichen Sie die Beispiele mit dem Papierexperiment oben.
+Die Lernstrecke führt vom Papagei-Prinzip zur Vorhersage von Wortfolgen. Vergleicht die Beispiele mit dem Papierexperiment oben.
 <!-- MD:END -->
       </div>
       <iframe src="https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke" title="Papagei-Lernstrecke von inf-schule.de" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -28,7 +28,7 @@ Die Lernstrecke führt vom Papagei-Prinzip zur Vorhersage von Wortfolgen. Vergle
       <!-- MD:START -->
 ### Mein Protokoll: Papagei-Stationen
 <!-- MD:END -->
-      <p class="small">Tragen Sie die Stationen ein, die Ihre Lehrperson ausgewählt hat (mindestens zwei).</p>
+      <p class="small">Tragt die Stationen ein, die Eure Lehrperson ausgewählt hat (mindestens zwei).</p>
       <div class="table-scroll">
         <table class="typen protokoll">
           <thead>
@@ -69,7 +69,7 @@ Die Lernstrecke führt vom Papagei-Prinzip zur Vorhersage von Wortfolgen. Vergle
           </tbody>
         </table>
       </div>
-      <label class="field answer"><span>Wie verändert sich die Fortsetzung mit mehr Kontext? Nennen Sie ein Beispiel, in dem plausibel nicht wahr bedeutet.</span><textarea data-basis-answer="basis-sprache-pst_beob" maxlength="10000" placeholder="Mit mehr Kontext …" rows="3"></textarea></label>
+      <label class="field answer"><span>Wie verändert sich die Fortsetzung mit mehr Kontext? Nennt ein Beispiel, in dem plausibel nicht wahr bedeutet.</span><textarea data-basis-answer="basis-sprache-pst_beob" maxlength="10000" placeholder="Mit mehr Kontext …" rows="3"></textarea></label>
     </div>
   </div>
 </details>

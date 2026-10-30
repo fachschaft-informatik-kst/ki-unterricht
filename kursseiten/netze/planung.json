@@ -14,7 +14,7 @@
       "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
       "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
       "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung.",
-      "zeit": "Drei klar getrennte DL4-Lernangebote: (1) eigenständiges XOR-Notebook nach der Theorie zu einem einzelnen Neuron; (2) Einführung der Zwischenschicht und Pflichtnotebook «Neuronale Netze» mit Netzwerk- und Lernversuchen; (3) separates freiwilliges Ziffern-Notebook als Transfer. Die 90 Minuten konzentrieren sich auf XOR und Netzwerkverständnis. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5.",
+      "zeit": "Drei klar getrennte DL4-Lernangebote: (1) eigenständiges XOR-Notebook nach der Theorie zu einem einzelnen Neuron; (2) Einführung der Zwischenschicht und Pflichtnotebook «Neuronale Netze» mit Netzwerk- und Lernversuchen; (3) separates freiwilliges Ziffern-Notebook als Transfer. Die 90 Minuten konzentrieren sich auf XOR und Netzwerkverständnis. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient ein zweiminütiger unbenoteter Lernstandscheck; offene Punkte vor SOL-Beginn anhand des Lernlabors klären.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -127,7 +127,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 2,
-              "text": "Sicherung: Notieren Sie einzeln, warum XOR mit einem einzelnen Neuron nicht vollständig funktioniert, und erklären Sie anhand eines Beispiels die Funktion der Zwischenschicht."
+              "text": "Sicherung: Kurzcheck vor dem Projektstart: einzeln in zwei Minuten erklären, was Gewichte und Bias bewirken und warum XOR eine Zwischenschicht braucht. Eine Unsicherheit zur Datentrennung markieren; der Datenaufteilungs-Lernpfad beginnt erst in DL5."
             },
             {
               "art": "Ergebnis",

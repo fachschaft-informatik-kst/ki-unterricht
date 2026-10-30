@@ -1,31 +1,42 @@
 <!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Fotostudio · KI-Projekt</title>
 <style>body{font:17px system-ui;max-width:900px;margin:30px auto;padding:20px;color:#19334b;background:#f5f7fa}button,input,select{font:inherit;padding:9px;margin:5px}label{display:block}button{background:#164e76;color:white;border:0;border-radius:5px}button:disabled{opacity:.5}img,canvas{max-width:224px;max-height:224px;border:1px solid #aaa}#preview{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}small{line-height:1.6}#status{white-space:pre-wrap}li{margin:.4em 0}</style>
 <h1>Fotostudio</h1><p>Eigene Bilder → einheitliche Bildmatrix → feste Bildmerkmale → JSON fürs Projektjournal.</p>
-<ol><li>Klasse und Datengruppe eintragen. Eine Gruppe enthält pro Klasse ein anderes Objekt; bei Gesten entspricht sie einer Person. Ein Objekt / eine Person darf niemals mehrere Gruppencodes erhalten.</li><li>JPG- oder PNG-Bilder auswählen, Vorschau prüfen und übernehmen. HEIC vorher als JPG exportieren.</li><li>Für jede Klasse und Gruppe wiederholen. Sammlung regelmässig herunterladen.</li></ol>
-<p><strong>Pflichtprojekt:</strong> Zwei Klassen, Gruppen T1/T2/V1/P1/P2, genau acht Fotos je Klasse und Gruppe (80 insgesamt). T1/T2 trainieren, V1 hilft auswählen, P1/P2 bleiben für den Abschlusstest.</p>
+<ol><li>Klasse und Datengruppe eintragen. Eine Gruppe enthält pro Klasse ein anderes Objekt; bei Gesten entspricht sie einer Person. Ein Objekt / eine Person darf niemals mehrere Gruppencodes erhalten.</li><li>JPG- oder PNG-Bilder auswählen, Vorschau prüfen und übernehmen. HEIC vorher als JPG exportieren.</li><li>Für jede Klasse und Gruppe wiederholen. Nach jedem Bild lokal zwischensichern; die JSON-Datei trotzdem regelmässig herunterladen.</li></ol>
+<p><strong>Bei Nutzung eigener Fotos:</strong> Zwei Klassen, Gruppen T1/T2/V1/P1/P2, genau acht Fotos je Klasse und Gruppe (80 insgesamt). T1/T2 trainieren, V1 hilft auswählen, P1/P2 bleiben für den Abschlusstest.</p>
 <details><summary>Bildformat und Modell</summary><p><strong>Technik:</strong> 224 × 224 RGB, Seitenverhältnis erhalten, weisser Rand; MobileNet V2 (α=0.5) liefert 1280 Merkmale. Das vortrainierte Modell bleibt unverändert. Ihr eigenes Netz trainieren Sie im Notebook.</p></details>
-<small>Verarbeitung auf diesem Gerät. Für Bibliotheken und Modell ist Internet nötig (jsDelivr / Google). Bilder werden von dieser Seite nicht hochgeladen. Die JSON-Datei enthält kleine Bildvorschauen. Originalfotos separat aufbewahren. Keine automatische dauerhafte Speicherung.</small>
+<small>Verarbeitung auf diesem Gerät. Für Bibliotheken und Modell ist Internet nötig (jsDelivr / Google). Bilder werden von dieser Seite nicht hochgeladen. Die JSON-Datei enthält kleine Bildvorschauen. Originalfotos separat aufbewahren. Der Browser sichert neue Einträge automatisch lokal mit IndexedDB, sofern möglich. Das ist kein dauerhaftes Backup: Vor Gerätewechsel und regelmässig die JSON exportieren.</small>
 <label>Klasse <input id="label" value="Apfel" maxlength="40"></label>
 <label>Datengruppe <input id="group" value="T1" list="gruppen" maxlength="30"></label>
 <datalist id="gruppen"><option value="T1"><option value="T2"><option value="V1"><option value="P1"><option value="P2"></datalist>
 <label>Bildquelle / Aufnahmebedingungen <input id="source" value="Eigene Fotos" maxlength="200"></label>
 <label>Bilder <input id="files" type="file" accept="image/jpeg,image/png" multiple></label>
 <div id="preview"></div>
-<button id="add">Auswahl verarbeiten</button><button id="save">Sammlung herunterladen</button>
+<button id="add">Auswahl verarbeiten</button><button id="save">Sammlung herunterladen</button><button id="clear" type="button">Lokale Sammlung löschen</button>
 <label>Gesicherte Sammlung fortsetzen <input id="resume" type="file" accept=".json"></label>
-<p id="status" role="status">Noch keine Bilder übernommen.</p><ul id="counts"></ul>
+<p id="status" role="status">Noch keine Bilder übernommen.</p><p id="autosave-status" role="status">Lokale Zwischensicherung wird geprüft …</p><ul id="counts"></ul>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
 <script src="fotostudio_core.js"></script>
+<script src="fotostudio_storage.js"></script>
 <script>
 const el=id=>document.getElementById(id), makeCanvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
-let records=[],model=null,busy=false;
+let records=[],model=null,busy=false,storage=null,unsaved=false;
+const saveStatus=message=>{el('autosave-status').textContent=message;};
+function validRecord(r){return r&&typeof r.id==='string'&&r.id.length>0&&typeof r.group==='string'&&r.group.trim()&&typeof r.label==='string'&&r.label.trim()&&Array.isArray(r.features)&&r.features.length===1280&&r.features.every(Number.isFinite);}
+const ready=PhotoStorage.open().then(async db=>{
+ const saved=await db.list();
+ if(!saved.every(validRecord))throw Error('Ungültige Einträge im Browser-Speicher');
+ storage=db;records=saved;counts();
+ saveStatus(saved.length?String(saved.length)+' Bilder automatisch wiederhergestellt. JSON-Backup empfohlen.':'Automatische lokale Zwischensicherung aktiv. JSON-Backup weiterhin empfohlen.');
+ if(saved.length)el('status').textContent=String(saved.length)+' Bilder aus Browser-Speicher wiederhergestellt.';
+}).catch(e=>{storage=null;saveStatus('ACHTUNG: Kein automatisches Speichern ('+e.message+'). JSON nach jeder Änderung herunterladen.');});
 function counts(){const c={};records.forEach(r=>{const k=r.group+' / '+r.label;c[k]=(c[k]||0)+1;});el('counts').replaceChildren(...Object.entries(c).map(([k,v])=>{const li=document.createElement('li');li.textContent=k+': '+v;return li;}));}
 async function decode(file){const url=URL.createObjectURL(file),img=new Image();try{img.src=url;await img.decode();return img;}finally{URL.revokeObjectURL(url);}}
 async function preview(file){const img=await decode(file),canvas=PhotoCore.prepare(img,makeCanvas);el('preview').replaceChildren(img,canvas);return canvas;}
 el('files').onchange=async()=>{try{if(el('files').files.length)await preview(el('files').files[0]);}catch(e){el('status').textContent='Bild nicht lesbar: '+e.message;}};
 el('add').onclick=async()=>{
  if(busy)return;
+ await ready;
  const label=el('label').value.trim(),group=el('group').value.trim(),source=el('source').value.trim(),files=[...el('files').files];
  if(!label||!group||!source||!files.length){el('status').textContent='Klasse, Gruppe, Quelle und Bilder angeben.';return;}
  busy=true;el('add').disabled=true;el('resume').disabled=true;let added=0,duplicates=0;
@@ -42,13 +53,25 @@ el('add').onclick=async()=>{
    const old=records.find(r=>r.id===id);
    if(old){if(old.label!==label||old.group!==group)throw Error('Identisches Bild mit anderer Klasse/Gruppe: '+file.name);duplicates++;continue;}
    const small=makeCanvas(64,64);small.getContext('2d').drawImage(canvas,0,0,64,64);
-   records.push({id,group,label,source,filename:file.name,features,preview:small.toDataURL('image/png')});added++;counts();
+   const record={id,group,label,source,filename:file.name,features,preview:small.toDataURL('image/png')};
+   records.push(record);added++;counts();
+   if(storage){
+    try{await storage.put(record);if(!unsaved)saveStatus('Lokal zwischengespeichert: '+records.length+' Bilder. JSON-Backup empfohlen.');}
+    catch(error){unsaved=true;saveStatus('ACHTUNG: Browser-Speicher voll oder nicht verfügbar ('+error.message+'). JSON sofort herunterladen.');}
+   }else unsaved=true;
   }
-  el('status').textContent=`${added} hinzugefügt, ${duplicates} Duplikate übersprungen. Insgesamt ${records.length}. Jetzt sichern.`;
+  el('status').textContent=`${added} hinzugefügt, ${duplicates} Duplikate übersprungen. Insgesamt ${records.length}. JSON-Backup herunterladen.`;
  }catch(e){el('status').textContent=`Fehler: ${e.message}. Bereits übernommene Bilder bleiben erhalten und können gespeichert werden. Bei Ladefehler Netzwerk prüfen und erneut versuchen.`;}
  finally{busy=false;el('add').disabled=false;el('resume').disabled=false;}
 };
 el('save').onclick=()=>{if(!records.length)return;const doc={schema:'fotostudio-v1',pipeline:PhotoCore.PIPELINE,tfjs:'4.22.0',mobilenet:'2.1.1',records};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(doc)],{type:'application/json'}));a.download='fotos_'+Date.now()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
-el('resume').onchange=async()=>{if(busy)return;try{const doc=JSON.parse(await el('resume').files[0].text());if(doc.schema!=='fotostudio-v1'||doc.pipeline!==PhotoCore.PIPELINE||!Array.isArray(doc.records))throw Error('Falsches Dateiformat');const merged=new Map(records.map(r=>[r.id,r]));for(const r of doc.records){if(typeof r.id!=='string'||!r.group||!r.label||r.features?.length!==1280||!r.features.every(Number.isFinite))throw Error('Ungültiger Datensatz');const old=merged.get(r.id);if(old&&JSON.stringify(old)!==JSON.stringify(r))throw Error('Widersprüchliche Bild-ID');merged.set(r.id,r);}records=[...merged.values()];counts();el('status').textContent=records.length+' Bilder wiederhergestellt.';}catch(e){el('status').textContent=e.message;}};
-window.onbeforeunload=e=>{if(records.length){e.preventDefault();e.returnValue='Sammlung gesichert?';}};
+el('resume').onchange=async()=>{if(busy)return;await ready;try{const doc=JSON.parse(await el('resume').files[0].text());if(doc.schema!=='fotostudio-v1'||doc.pipeline!==PhotoCore.PIPELINE||!Array.isArray(doc.records))throw Error('Falsches Dateiformat');const merged=new Map(records.map(r=>[r.id,r]));for(const r of doc.records){if(!validRecord(r))throw Error('Ungültiger Datensatz');const old=merged.get(r.id);if(old&&JSON.stringify(old)!==JSON.stringify(r))throw Error('Widersprüchliche Bild-ID');merged.set(r.id,r);}if(storage){try{await storage.putMany([...merged.values()]);}catch(error){unsaved=true;saveStatus('Import nicht lokal gesichert ('+error.message+'). JSON exportieren.');}}else unsaved=true;
+ records=[...merged.values()];counts();el('status').textContent=records.length+' Bilder wiederhergestellt. '+(unsaved?'JSON-Backup jetzt herunterladen.':'Automatisch lokal gesichert.');}catch(e){el('status').textContent=e.message;}};
+el('clear').onclick=async()=>{
+ if(busy)return;await ready;
+ if(!confirm('Alle Bilder aus diesem Browser löschen? Vorher JSON-Backup herunterladen.'))return;
+ try{if(storage)await storage.clear();records=[];unsaved=false;counts();el('status').textContent='Lokale Sammlung gelöscht.';saveStatus(storage?'Lokaler Speicher geleert.':'Automatische Zwischensicherung nicht verfügbar.');}
+ catch(e){el('status').textContent='Löschen fehlgeschlagen: '+e.message;}
+};
+window.onbeforeunload=e=>{if(unsaved&&records.length){e.preventDefault();e.returnValue='Bilder noch nicht automatisch gesichert!';}};
 </script></html>

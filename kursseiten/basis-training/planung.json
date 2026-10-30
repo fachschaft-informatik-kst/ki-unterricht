@@ -5,10 +5,10 @@
       "view": "basis-training",
       "title": "Bildprojekt III: zwei eigene Fotoklassen",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Zwei Gegenstandsklassen mit eingefrorenen MobileNet-Merkmalen klassifizieren, A/B auf V1 vergleichen, eine Modellwahl begründen und den gewählten Klassifikator auf P1/P2 unabhängig testen.",
+      "goal": "Auf bereitgestellten synthetischen Übungsdaten oder freiwillig eigenen Fotos den gleichen MobileNet-basierten Klassifikationsweg erproben, A/B auf V1 vergleichen und die gewählte Variante einmal auf P1/P2 testen.",
       "question": "Kann unser eigenes Netz zwei Gegenstandsklassen anhand vortrainierter Bildmerkmale unterscheiden?",
       "motivation": "Angeleitet untersuchen, eigene Entscheidungen begründen und mit einem fairen Test belegen.",
-      "product": "Fotostudio-JSON, ausgeführtes Notebook, A/B-Vergleich auf V1, begründete Modellwahl und unabhängiger Abschlusstest auf P1/P2.",
+      "product": "Dokumentierter Datenweg, ausgeführtes Notebook, A/B-Vergleich auf V1, begründete Modellwahl und unabhängiger Abschlusstest auf P1/P2.",
       "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
       "order": 70,
       "phases": [
@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Die vor DL 7 erstellten Fotostudio-Sammlungen prüfen: zwei Klassen, je acht Bilder in T1/T2/V1/P1/P2; fehlende Datensätze mit Übungsdaten ersetzen."
+              "text": "Zwischen zwei gleichwertigen Datenwegen wählen: vorbereitete synthetische Übungsdaten aus dem Notebook (Standard) oder eine freiwillig vorbereitete Fotostudio-JSON (80 Fotos). Keine Datenbeschaffung als Hausaufgabe verlangen."
             },
             {
               "art": "Ergebnis",
@@ -78,7 +78,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 43,
-              "text": "Vorbereitete Fotostudio-JSON laden und Gruppen prüfen (8 Min), eingefrorene MobileNet-Merkmale erklären (5 Min), Klassifikationsköpfe A/B trainieren (14 Min), Vergleich auf V1 auswerten und Wahl festhalten (9 Min), nach LP-Freigabe nur gewählte Variante einmal auf P1/P2 testen (7 Min). LP: Alle 80 Fotos müssen vorher fertig sein; sonst Übungsdaten verwenden."
+              "text": "Übungsdaten im Modus UEBUNG oder eigene Fotostudio-JSON im Modus EIGENE_DATEN laden und Gruppen prüfen (8 Min), eingefrorene MobileNet-Merkmale erklären (5 Min), Klassifikationsköpfe A/B trainieren (14 Min), Vergleich auf V1 auswerten und Wahl festhalten (9 Min), nach LP-Freigabe nur gewählte Variante einmal auf P1/P2 testen (7 Min). Ergebnisse synthetischer Daten nicht auf reale Fotos übertragen."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "ZIP-Kursstand mit Reflexionen, Notebook und Fotostudio-JSON sichern. Die Modellwahl vor P1/P2 begründen; Testdaten nicht zur Optimierung verwenden."
+              "text": "ZIP-Kursstand mit Reflexionen und Notebook sichern; bei freiwilligen eigenen Fotos zusätzlich die Fotostudio-JSON exportieren. Die Modellwahl vor P1/P2 begründen; Testdaten nicht zur Optimierung verwenden."
             },
             {
               "art": "Ergebnis",

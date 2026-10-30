@@ -2,6 +2,7 @@
   Doppellektion 5–8 · Von eigenen Bildern zum eigenen Urteil
 </div>
 <h1>Was hat unser<br/>Netz <em>gelernt?</em></h1>
+<p class="small" id="projekt-vorabcheck-hinweis"><strong>Vor dem Projektstart:</strong> Der unbenotete <a href="#projekt-bereit-check">Lernstandscheck aus DL 4</a> hilft, offene Fragen zu Neuron und Netz zu erkennen. Die faire Datenaufteilung lernt ihr selbstständig im Lernpfad von DL 5.</p>
 <p class="lead">Eigene Bilder. Ein neuronales Netz. Ein fairer Vergleich – zu zweit. In Doppellektion 5 lernen Sie zunächst selbstständig, wie man Daten fair aufteilt.</p>
 <!-- Klarer Überblick vor dem ersten Training: nur das zweite Netz lernt. -->
 <div class="project-train-overview" aria-labelledby="projekt-training-titel">

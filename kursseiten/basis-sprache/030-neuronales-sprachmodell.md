@@ -4,7 +4,7 @@
     <h2 class="kapitel-titel">Vom Papagei zum neuronalen Netz</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Das Papagei-Modell zählt Wortfolgen. Heutige Sprachmodelle wie ChatGPT sagen ebenfalls das nächste Wort voraus, aber sie zählen nicht nur: Dahinter steckt ein <strong>neuronales Netz</strong> mit denselben Bausteinen, die Sie schon kennen (Gewichte, Summen, Schichten), nur mit Milliarden von Gewichten.</p>
+    <p>Das Papagei-Modell zählt Wortfolgen. Heutige Sprachmodelle wie ChatGPT sagen ebenfalls das nächste Wort voraus, aber sie zählen nicht nur: Dahinter steckt ein <strong>neuronales Netz</strong> mit denselben Bausteinen, die ihr schon kennt (Gewichte, Summen, Schichten), nur mit Milliarden von Gewichten.</p>
     <figure class="concept-figure">
       <img alt="Vergleich: Das Papagei-Modell schlägt in einer Häufigkeitstabelle nach und kennt «Das Kätzchen verfolgt die» nicht. Das neuronale Sprachmodell wandelt Wörter in Zahlen um, rechnet in Schichten aus Neuronen und gibt Wahrscheinlichkeiten für das nächste Wort aus." loading="lazy" src="grafiken/papagei_vs_netz.svg"/>
       <figcaption>Gleiches Ziel, anderes Verfahren: Die Tabelle merkt sich Gesehenes, das Netz lernt, was ähnlich ist.</figcaption>
@@ -42,7 +42,7 @@
       </table>
     </div>
     <p class="small">Um das nächste Wort gut vorherzusagen, muss das Netz Grammatik, Zusammenhänge und Muster in seinen Gewichten speichern. Das ist mehr als Zählen. Ob man das «Verstehen» nennen soll, ist unter Fachleuten umstritten.</p>
-    <p class="task"><b>Aufgabe (Tandem, 2 Min.):</b> Die Tabelle des Papagei-Modells kennt nur «Die Katze jagt die Maus». Was sagt sie zu «Das Kätzchen verfolgt die …»? Was kann ein neuronales Netz tun, in dem «Katze» und «Kätzchen» ähnliche Zahlen haben? Begründen Sie, warum ein neuronales Sprachmodell mehr ist als eine Häufigkeitstabelle, und nennen Sie eine Grenze, die bleibt.</p>
+    <p class="task"><b>Aufgabe (Tandem, 2 Min.):</b> Die Tabelle des Papagei-Modells kennt nur «Die Katze jagt die Maus». Was sagt sie zu «Das Kätzchen verfolgt die …»? Was kann ein neuronales Netz tun, in dem «Katze» und «Kätzchen» ähnliche Zahlen haben? Begründet, warum ein neuronales Sprachmodell mehr ist als eine Häufigkeitstabelle, und nennt eine Grenze, die bleibt.</p>
     <div class="protokoll-block">
       <!-- MD:START -->
 ### Mein Protokoll: Papagei und Netz

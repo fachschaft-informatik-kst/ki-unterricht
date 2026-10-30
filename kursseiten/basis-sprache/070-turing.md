@@ -7,16 +7,16 @@
     <p class="small muted"><strong>Wahlvertiefung:</strong> Bearbeitet diese Station, wenn ihr mit den Kernexperimenten fertig seid und die Lehrperson sie freigegeben hat.</p>
     <aside class="turing-activity">
       <!-- MD:START -->
-Human or Not ist ein kurzes Live-Chat-Spiel: Entscheiden Sie nach dem Gespräch, ob Sie mit einem Menschen oder einem KI-Bot geschrieben haben. Ein einzelner Versuch ist kein Beweis dafür, dass eine KI menschlich denkt.
+Human or Not ist ein kurzes Live-Chat-Spiel: Entscheidet nach dem Gespräch, ob ihr mit einem Menschen oder einem KI-Bot geschrieben haben. Ein einzelner Versuch ist kein Beweis dafür, dass eine KI menschlich denkt.
 <!-- MD:END -->
-      <p class="small">Sie chatten mit fremden Teilnehmenden. Keine persönlichen Angaben teilen; nur nach Freigabe der Lehrperson spielen.</p>
+      <p class="small">Ihr chattet mit fremden Teilnehmenden. Keine persönlichen Angaben teilen; nur nach Freigabe der Lehrperson spielen.</p>
       <a class="btn primary" href="https://humanornot.so/start-search" target="_blank" rel="noopener noreferrer">Human or Not extern öffnen</a>
     </aside>
     <div class="protokoll-block">
       <!-- MD:START -->
 ### Mein Protokoll: Turing-Test
 <!-- MD:END -->
-      <p class="small">Nur ausfüllen, wenn Ihre Lehrperson den Turing-Test freigegeben hat.</p>
+      <p class="small">Nur ausfüllen, wenn eure Lehrperson den Turing-Test freigegeben hat.</p>
       <div class="table-scroll">
         <table class="typen protokoll">
           <thead>

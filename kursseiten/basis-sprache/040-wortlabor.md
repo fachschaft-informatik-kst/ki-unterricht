@@ -8,7 +8,7 @@ kurz: Wie der Zusammenhang die Fortsetzung beeinflusst
 
 **Experiment:** Ein Sprachmodell verarbeitet Text in kleinen Bausteinen, sogenannten **Tokens**. Es berechnet, welche Fortsetzung zum bisherigen Text passt. Je nach Kontext sind andere Fortsetzungen wahrscheinlich.
 
-**Wahlvertiefung:** Das kleine Wortlabor ist eine *vereinfachte Simulation*, kein trainiertes Sprachmodell. Die Prozentzahlen sind nur veranschaulichende Beispiele.
+**Wahlvertiefung (nicht Teil des Pflichtkerns):** Das kleine Wortlabor ist eine *vereinfachte Simulation*, kein trainiertes Sprachmodell. Die Prozentzahlen sind nur veranschaulichende Beispiele.
 
 <div class="basis-language-lab" data-basis-language>
   <label for="basis-language-context">Satzanfang auswählen</label>
