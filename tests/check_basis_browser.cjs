@@ -208,7 +208,7 @@ const assert=require('node:assert/strict');
     await glossaryPage.locator('dialog.glossary-dialog .glossary-close').click();
     assert(!await glossaryPage.locator('dialog.glossary-dialog').isVisible());
     await glossaryPage.locator('.nav a[href="#basis-glossar"]').click();
-    assert(await glossaryPage.locator('#basis-glossar [data-glossary-search]').isVisible());
+    await glossaryPage.locator('#basis-glossar [data-glossary-search]').waitFor({state:'visible',timeout:10000});
     await glossaryPage.locator('[data-glossary-search]').fill('Token');
     assert(await glossaryPage.locator('#basis-glossar-token').isVisible());
     assert(!await glossaryPage.locator('#basis-glossar-xor').isVisible());
