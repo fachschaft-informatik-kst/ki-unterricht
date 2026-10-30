@@ -9,7 +9,7 @@
       "question": "Wie kann ein vortrainiertes Netz neue Bildklassen unterscheiden?",
       "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
       "product": "Ausgeführtes Notebook mit neuem A/B-Kopf und Erklärung, welche Schicht übernommen wurde.",
-      "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
+      "zeit": "90 Minuten: A/B-Transfer-Learning im Unterricht. Vorbereitung für DL7 wahlweise mit bereitgestellten synthetischen Übungsdaten (Standard) oder freiwillig eigenen Fotostudio-Daten; keine Foto-Hausaufgabe voraussetzen.",
       "order": 60,
       "phases": [
         {
