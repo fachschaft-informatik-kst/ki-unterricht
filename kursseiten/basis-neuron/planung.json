@@ -10,11 +10,11 @@
         "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
         "caption": "Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0)."
       },
-      "goal": "Gewicht und Bias erklären, die Ausgabe eines einzelnen Neurons berechnen und einen Lernschritt anhand von Vorher-Nachher-Werten nachvollziehen.",
+      "goal": "Am Schwimmbad-Beispiel Gewichte und Bias erklären, eine Ja/Nein-Ausgabe nachvollziehen und zeigen, wie ein Lernschritt die Parameter verändert.",
       "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und was unverändert bleibt.",
-      "product": "Eine nachvollziehbare Schwimmbad- und AND-Rechnung, passende Parameter für AND/OR und ein erklärter Lernschritt.",
-      "zeit": "90 Minuten. Gleiches Programm wie DL 3 der 4. Klasse: Schwimmbad-Entscheider, AND/OR und Gewichte/Bias, Perzeptron-Lernregel, grafisch-interaktives Neuron-Labor mit drei Versuchen und individueller Ergebnissicherung.",
+      "product": "Schwimmbad-Begründung, ein eingestellter Neuron-Versuch und ein erklärter Vorher-Nachher-Lernschritt.",
+      "zeit": "90 Minuten: geführter Pflichtkern mit Alltag, Reglern und einer beobachteten Korrektur; formale Perzeptron-Lernregel, weitere Gatter und Parameterherleitungen als Wahlvertiefung. Bestehende Notebook-Aufgaben bleiben zugänglich.",
       "phases": [
         {
           "phase": "Ankommen",
