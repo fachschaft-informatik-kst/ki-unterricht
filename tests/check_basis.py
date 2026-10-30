@@ -26,7 +26,7 @@ assert len(page.select("details.lesson-plan")) == 10
 assert len(page.select("details.kapitel")) >= 30
 assert len(page.select("[data-basis-answer]")) >= 24
 assert len(page.select("a.course-card")) == 10
-assert len(page.select(".nav > a")) == 12
+assert len(page.select(".nav > a")) == 13
 assert len(page.select("#basis-neuron details.kapitel")) == 7, "DL3 must mirror seven fourth-year chapters"
 assert page.select_one("#basis-neuron .typen.protokoll")
 assert page.select_one("#basis-neuron a[href*='portal/basis_neuron.ipynb']")
