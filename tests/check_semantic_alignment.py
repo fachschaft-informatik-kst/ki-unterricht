@@ -55,7 +55,7 @@ ensure(("Validierungsbildern V1","Test der gewählten Variante auf P1/P2"),rubri
 # match the actual student-facing activities.
 lang=lesson("basis-sprache",basic)
 assert "Inhalte der 4. Klasse" not in lang["goal"]
-ensure(("Kontext","Vorhersage","Quelle"),lang["goal"],"basic language goal")
+ensure(("Kontext","vorhersage","Quelle"),lang["goal"],"basic language goal")
 ensure(("Wahlvertiefung","Faktenprüfung"),lang["zeit"],"basic language timing")
 ensure(("Pflichtkern","Wahlvertiefung","Tokens"),source("kursseiten/basis-sprache/000-start.md"),"language student guide")
 ensure(("Schweiz hat 30 Kantone","Quelle"),source("kursseiten/basis-sprache/050-prompts.md"),"language fact check")
