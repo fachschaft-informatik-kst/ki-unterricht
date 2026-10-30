@@ -9,7 +9,7 @@
       <article>
         <b>3 · Übertragen</b>
         <!-- MD:START -->
-Untersuchen Sie mit Soekia den Einfluss von Kontext und Wortwahl. Halten Sie einen gelungenen und einen problematischen Text fest.
+Untersucht mit Soekia den Einfluss von Kontext und Wortwahl. Haltet einen gelungenen und einen problematischen Text fest.
 <!-- MD:END -->
       </article>
     </div>
@@ -22,12 +22,12 @@ Untersuchen Sie mit Soekia den Einfluss von Kontext und Wortwahl. Halten Sie ein
           <thead>
             <tr>
               <th>Frage</th>
-              <th>Ihre Antwort</th>
+              <th>Eure Antwort</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th>Was haben Sie pro Versuch verändert?</th>
+              <th>Was haben ihr pro Versuch verändert?</th>
               <td><select data-basis-answer="basis-sprache-soe_variable" aria-label="Was verändert?"><option value="">–</option><option value="kontext">Nur den Kontext</option><option value="wortwahl">Nur die Wortwahl</option><option value="beides">Beides abwechselnd</option></select></td>
             </tr>
             <tr>
