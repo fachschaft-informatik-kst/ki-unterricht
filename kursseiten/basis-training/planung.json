@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "ZIP-Kursstand mit Reflexionen, Notebook und Fotostudio-JSON sichern. Die Modellwahl vor P1/P2 begründen; Testdaten nicht zur Optimierung verwenden."
+              "text": "ZIP-Kursstand mit Reflexionen und Notebook sichern; bei freiwilligen eigenen Fotos zusätzlich die Fotostudio-JSON exportieren. Die Modellwahl vor P1/P2 begründen; Testdaten nicht zur Optimierung verwenden."
             },
             {
               "art": "Ergebnis",
