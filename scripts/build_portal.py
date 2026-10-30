@@ -10,6 +10,7 @@ import shutil
 from markdown_it import MarkdownIt
 import yaml
 from course_model import load_course, output
+from glossary import render_glossary
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ROOT / "kursseiten"
@@ -55,7 +56,7 @@ def assemble() -> str:
     course = load_course(ROOT)
     grouped = {s["id"]: [l for l in course["lessons"] if l["view"] == s["id"]] for s in sections}
     def nav_order(section):
-        return grouped[section["id"]][0]["number"] if grouped[section["id"]] else -100 + section["navigation"]["order"]
+        return grouped[section["id"]][0]["number"] if grouped[section["id"]] else (1000 + section["navigation"]["order"] if section["navigation"]["order"] >= 9 else -100 + section["navigation"]["order"])
 
     overview = []
     for section in sorted((s for s in sections if s.get("teaching")), key=nav_order):
@@ -77,6 +78,7 @@ def assemble() -> str:
             raise ValueError(f"No content files in {folder}")
         parts = [render_fragment(path.read_text(encoding="utf-8"), path) for path in files]
         content = "".join(parts)
+        content = content.replace("<!-- GLOSSARY -->", render_glossary("vertieft"))
         content = content.replace("<!-- OVERVIEW -->", '<div class="course-grid">' + "".join(overview) + "</div>")
         lessons = [l for l in course["lessons"] if l["view"] == view]
         if lessons and f"<!-- LESSONS:{view} -->" not in content:
