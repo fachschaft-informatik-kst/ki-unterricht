@@ -37,7 +37,7 @@ expected_sections = [
     ("start", "hero"), ("lernziele", "section"), ("projekt", "hero"),
     ("bewertung", "section"), ("einstieg", "section"), ("lernarten", "section"),
     ("perzeptron", "section"), ("netze", "section"), ("journal", "section"),
-    ("sprache", "section"), ("gesellschaft", "section"), ("sicherung", "section"),
+    ("sprache", "section"), ("gesellschaft", "section"), ("sicherung", "section"), ("glossar", "section"),
 ]
 actual_sections = [(node.get("id"), node.get("class", [""])[0])
                    for node in course.select("main > section[id]")]
