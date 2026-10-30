@@ -6,7 +6,7 @@
 1. Zwei Bildklassen und Datenherkunft; Trainings- und unabhängige Testbilder getrennt.
 2. Forschungsfrage, überprüfbare Hypothese und ein von der Lehrperson freigegebener Versuchsplan.
 3. Ausgangsmodell und zweite Variante; genau **ein** Einflussfaktor wird verändert.
-4. Gleiche, zuvor zurückgehaltene Testbilder für beide Varianten; richtige/alle Vorhersagen **pro Klasse**.
+4. **Fairer Variantenvergleich auf denselben Validierungsbildern V1**: richtige/alle Vorhersagen **pro Klasse** für Modell A und B. **Schriftlich begründete Auswahl vor Testeinsicht**, Bestätigung durch die Lehrperson und erst dann **einmaliger unabhängiger Test der gewählten Variante auf P1/P2**. Diese Testbilder bleiben bis zur Auswahl zurückgehalten; danach keine Optimierung anhand von P1/P2.
 5. Ein beobachteter Fehler mit plausibler Erklärung oder – falls keiner auftrat – ein begründeter Grenzfall; dazu Grenzen der Aussage und persönliche Reflexion.
 6. Export bzw. Sicherung der Resultate vor DL 8. Keine Fotos von Personen und keine personenbezogenen Daten in externen Diensten.
 
@@ -25,7 +25,9 @@
 
 **Notenvorschlag (kantonale und schulische Vorgaben prüfen):** Note = 1 + 5 × (erreichte Punkte / 30), anschliessend auf Viertelnoten runden. Kein Bonus für die höchste Modellgenauigkeit.
 
-## Ablauf DL 8 (12–14 Lernende)
-Die gemeinsame Abgabe liegt **vor Beginn** der Lektion vor. Reihenfolge vorab mitteilen. Maximal 14 Gespräche à **5 Minuten inkl. Bewertung und Wechsel** = 70 Minuten; die restlichen 20 Minuten dienen Einführung, Verzögerungen und Abschluss. Gesprächsfragen: (1) Wie arbeitet euer neuronales Netz? (2) Was habt ihr verändert und wie fair verglichen? (3) Erkläre einen beobachteten Fehler oder einen begründeten Grenzfall und eine Grenze. Bei 12 Lernenden sind es 60 Minuten. Die übrigen Lernenden untersuchen selbstständig ein fremdes Modell und notieren zwei Stärken, einen Fehler und einen Verbesserungsvorschlag (unbenotet).
+## Ablauf DL 8 (bis zu 20 Lernende)
+Die gemeinsame Abgabe liegt **vor Beginn** der Lektion vor. Reihenfolge und Raster sind vorab bekannt. Die ersten **7 Minuten** dienen einem knappen Start mit Gesprächsplan und Auftrag für die wartenden Lernenden. Danach **80 Minuten** für bis zu **20 Fachgespräche à 4 Minuten** (ungefähr 3½ Minuten Gespräch und ½ Minute Wechsel/Kurzbewertung). Die letzten **3 Minuten** dienen einer persönlichen Abschlussreflexion. Bei weniger als 20 Lernenden bleibt mehr Zeit für die selbstständige Fremdmodell-Analyse. Ab 21 Lernenden braucht es eine organisatorische Anpassung (etwa eine zweite Prüfstation).
+
+Die Gesprächsfragen sind: (1) Wie arbeitet euer neuronales Netz? (2) Was habt ihr verändert und wie fair auf V1 verglichen? (3) Was hat der einmalige Test des gewählten Modells auf P1/P2 gezeigt und wo liegen Grenzen? Die übrigen Lernenden untersuchen selbstständig ein fremdes Modell und notieren zwei Stärken, einen Fehler oder begründeten Grenzfall und einen Verbesserungsvorschlag (unbenotet).
 
 **Bewertungsgrundsatz:** Jede Person wird individuell befragt; die Lehrperson dokumentiert pro Kriterium eine kurze Beobachtung. Das Gespräch überprüft das Verständnis, nicht auswendig gelernte Präsentationen.
