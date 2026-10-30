@@ -16,7 +16,8 @@
       "basis": "Eine genaue Schritt-für-Schritt-Anleitung, nach der ein Computer eine Aufgabe löst.",
       "vertieft": "Eine endliche, eindeutig beschriebene Folge von Anweisungen zur Lösung eines Problems.",
       "beispiel": "Ein Kochrezept ähnelt einem Algorithmus.",
-      "frage": "Warum muss eine Anleitung eindeutig sein?"
+      "frage": "Warum muss eine Anleitung eindeutig sein?",
+      "antwort": "Damit alle dieselben Schritte ausführen und zum gleichen Ergebnis kommen."
     },
     {
       "id": "ki",
@@ -25,7 +26,8 @@
       "basis": "Computerprogramme, die Aufgaben lösen, für die Menschen oft Wahrnehmung, Sprache oder Schlussfolgerungen brauchen.",
       "vertieft": "Sammelbegriff für Systeme, die beispielsweise Muster erkennen, Vorhersagen erstellen oder Inhalte generieren; nicht zwingend mit maschinellem Lernen.",
       "beispiel": "Eine Bilderkennung entscheidet, ob ein Foto eine Katze zeigt.",
-      "frage": "Ist jedes Computerprogramm automatisch KI?"
+      "frage": "Ist jedes Computerprogramm automatisch KI?",
+      "antwort": "Nein. Auch Programme mit festen Regeln können automatisch arbeiten."
     },
     {
       "id": "modell",
@@ -34,7 +36,8 @@
       "basis": "Ein trainiertes System, das aus Eingaben eine Vorhersage oder Entscheidung berechnet.",
       "vertieft": "Eine parametrisierte Abbildung von Eingaben auf Ausgaben; die Parameter werden beispielsweise anhand von Trainingsdaten bestimmt.",
       "beispiel": "Das Ziffernmodell ordnet einem 8×8-Bild eine Ziffer zu.",
-      "frage": "Warum kann ein Modell auch falsch liegen?"
+      "frage": "Warum kann ein Modell auch falsch liegen?",
+      "antwort": "Es kennt nur gelernte Muster und kann bei neuen Beispielen irren."
     },
     {
       "id": "maschinelles-lernen",
@@ -43,7 +46,8 @@
       "basis": "Ein Programm entdeckt anhand vieler Beispiele Muster, statt alle Regeln von Hand zu bekommen.",
       "vertieft": "Verfahren, die Parameter oder Strukturen durch Optimierung anhand von Daten und einem Lernziel bestimmen.",
       "beispiel": "Ein Spamfilter lernt aus als Spam markierten Nachrichten.",
-      "frage": "Wodurch unterscheidet sich Lernen von einer festen Regel?"
+      "frage": "Wodurch unterscheidet sich Lernen von einer festen Regel?",
+      "antwort": "Beim Lernen werden Muster aus Beispielen angepasst; feste Regeln ändern sich nicht."
     },
     {
       "id": "deep-learning",
@@ -52,7 +56,8 @@
       "basis": "Maschinelles Lernen mit neuronalen Netzen, die mehrere Schichten haben.",
       "vertieft": "Teilgebiet des maschinellen Lernens mit tiefen neuronalen Netzen und hierarchisch erlernten Repräsentationen.",
       "beispiel": "Ein tiefes Bildnetz erkennt erst einfache Bildmerkmale, dann komplexere Muster.",
-      "frage": "Warum helfen mehrere Schichten?"
+      "frage": "Warum helfen mehrere Schichten?",
+      "antwort": "Sie verbinden einfache Merkmale schrittweise zu komplexen Mustern."
     },
     {
       "id": "generative-ki",
@@ -61,7 +66,8 @@
       "basis": "KI, die neue Inhalte wie Texte oder Bilder erzeugt.",
       "vertieft": "Modelle, die aus gelernten Verteilungen neue Datenbeispiele wie Tokenfolgen oder Bilder generieren.",
       "beispiel": "Ein Sprachmodell formuliert eine Antwort.",
-      "frage": "Warum ist ein erzeugter Text nicht automatisch wahr?"
+      "frage": "Warum ist ein erzeugter Text nicht automatisch wahr?",
+      "antwort": "Das Modell erzeugt plausible Inhalte, prüft aber Fakten nicht automatisch."
     },
     {
       "id": "ueberwachtes-lernen",
@@ -70,7 +76,8 @@
       "basis": "Das Modell übt mit Beispielen, bei denen die richtige Antwort bekannt ist.",
       "vertieft": "Lernen anhand gelabelter Eingabe-Ziel-Paare durch Minimierung eines Vorhersagefehlers.",
       "beispiel": "Fotos sind mit «Tasse» oder «Buch» beschriftet.",
-      "frage": "Welche Information braucht das Modell zusätzlich zum Foto?"
+      "frage": "Welche Information braucht das Modell zusätzlich zum Foto?",
+      "antwort": "Das richtige Label, also die gesuchte Klasse."
     },
     {
       "id": "unueberwachtes-lernen",
@@ -79,7 +86,8 @@
       "basis": "Das Modell sucht ohne vorgegebene richtige Antworten nach Gemeinsamkeiten.",
       "vertieft": "Verfahren zur Entdeckung von Strukturen in unbeschrifteten Daten, etwa Clustering.",
       "beispiel": "Ähnliche Bilder werden zu Gruppen zusammengefasst.",
-      "frage": "Woher weiss man, ob die Gruppen sinnvoll sind?"
+      "frage": "Woher weiss man, ob die Gruppen sinnvoll sind?",
+      "antwort": "Man prüft, ob die Gruppen für die Aufgabe sinnvoll und nachvollziehbar sind."
     },
     {
       "id": "verstaerkendes-lernen",
@@ -88,7 +96,8 @@
       "basis": "Ein System probiert Handlungen aus und erhält dafür Belohnungen oder Nachteile.",
       "vertieft": "Ein Agent optimiert eine Strategie aufgrund von Zuständen, Aktionen und Rückmeldungen.",
       "beispiel": "Ein Spielprogramm lernt durch gewonnene und verlorene Runden.",
-      "frage": "Warum ist eine Belohnung nicht dasselbe wie eine richtige Musterantwort?"
+      "frage": "Warum ist eine Belohnung nicht dasselbe wie eine richtige Musterantwort?",
+      "antwort": "Eine Belohnung bewertet den Erfolg einer Handlung, nicht eine vorgegebene Musterantwort."
     },
     {
       "id": "label",
@@ -97,7 +106,8 @@
       "basis": "Ein Label nennt die richtige Kategorie eines Trainingsbeispiels.",
       "vertieft": "Eine Zielkennzeichnung; bei der Klassifikation ist sie die zugehörige diskrete Klasse.",
       "beispiel": "Ein Foto hat das Label «Tasse».",
-      "frage": "Was passiert bei falschen Labels?"
+      "frage": "Was passiert bei falschen Labels?",
+      "antwort": "Das Modell lernt falsche Zuordnungen und macht eher Fehler."
     },
     {
       "id": "neuron",
@@ -106,7 +116,8 @@
       "basis": "Ein kleiner Rechenbaustein: Er bewertet Eingaben und berechnet daraus eine Ausgabe.",
       "vertieft": "Es bildet typischerweise eine gewichtete Summe mit Bias und wendet darauf eine Aktivierungsfunktion an.",
       "beispiel": "Das Schwimmbad-Neuron berücksichtigt Sonne und Begleitung.",
-      "frage": "Ist ein künstliches Neuron eine Kopie einer Nervenzelle?"
+      "frage": "Ist ein künstliches Neuron eine Kopie einer Nervenzelle?",
+      "antwort": "Nein. Es ist ein stark vereinfachtes mathematisches Modell."
     },
     {
       "id": "gewicht",
@@ -115,7 +126,8 @@
       "basis": "Eine Zahl, die bestimmt, wie stark eine Eingabe die Ausgabe beeinflusst.",
       "vertieft": "Ein trainierbarer Parameter, der den Beitrag einer Eingabe zur gewichteten Summe skaliert.",
       "beispiel": "Sonnenschein kann das Schwimmbad-Neuron stark beeinflussen.",
-      "frage": "Was bewirkt ein negatives Gewicht?"
+      "frage": "Was bewirkt ein negatives Gewicht?",
+      "antwort": "Es kann den Einfluss einer Eingabe abschwächen oder der Entscheidung entgegenwirken."
     },
     {
       "id": "bias-neuron",
@@ -124,7 +136,8 @@
       "basis": "Die Grundeinstellung eines Neurons: Sie verschiebt, wann es «Ja» sagt.",
       "vertieft": "Ein additiver Parameter b in f(w₁x₁ + … + wₙxₙ + b), der die Entscheidungsschwelle verschiebt.",
       "beispiel": "Auch ohne Sonne kann ein positiver Bias eine Entscheidung begünstigen.",
-      "frage": "Worin unterscheidet sich der Bias von einem Gewicht?"
+      "frage": "Worin unterscheidet sich der Bias von einem Gewicht?",
+      "antwort": "Gewichte steuern einzelne Eingaben; der Bias verschiebt die Grundeinstellung."
     },
     {
       "id": "aktivierungsfunktion",
@@ -133,7 +146,8 @@
       "basis": "Eine Rechenregel, die aus der Summe eines Neurons seine Ausgabe macht.",
       "vertieft": "Eine Funktion f, häufig nichtlinear, die auf die gewichtete Summe mit Bias angewendet wird.",
       "beispiel": "Eine Schwellenfunktion gibt bei genügend grosser Summe 1 aus.",
-      "frage": "Warum reicht eine reine Summe oft nicht?"
+      "frage": "Warum reicht eine reine Summe oft nicht?",
+      "antwort": "Nichtlineare Aktivierungen ermöglichen Muster, die eine reine Summe nicht darstellen kann."
     },
     {
       "id": "schicht",
@@ -142,7 +156,8 @@
       "basis": "Mehrere Neuronen, die gemeinsam Werte berechnen; versteckte Schichten liegen zwischen Ein- und Ausgabe.",
       "vertieft": "Eine Ebene der Netzwerkarchitektur; Zwischenschichten ermöglichen durch Nichtlinearitäten komplexe Abbildungen.",
       "beispiel": "Ein Netz kann zuerst einfache, dann kombinierte Muster erkennen.",
-      "frage": "Was ermöglicht eine Zwischenschicht zusätzlich?"
+      "frage": "Was ermöglicht eine Zwischenschicht zusätzlich?",
+      "antwort": "Sie kombiniert einfache Merkmale zu schwierigeren Mustern."
     },
     {
       "id": "xor",
@@ -151,7 +166,8 @@
       "basis": "Eine Entweder-oder-Regel: Das Ergebnis ist 1, wenn genau eine von zwei Eingaben 1 ist.",
       "vertieft": "Eine boolesche Funktion, die mit einer einzigen linearen Trennlinie nicht separierbar ist.",
       "beispiel": "Beim XOR ist 1 XOR 0 wahr, 1 XOR 1 falsch.",
-      "frage": "Warum braucht XOR eine nichtlineare Trennung?"
+      "frage": "Warum braucht XOR eine nichtlineare Trennung?",
+      "antwort": "Keine einzelne Gerade kann die beiden XOR-Klassen voneinander trennen."
     },
     {
       "id": "training",
@@ -160,7 +176,8 @@
       "basis": "Das Modell passt beim Üben seine Werte anhand von Trainingsbeispielen an.",
       "vertieft": "Optimierung von Modellparametern anhand einer Trainingsmenge, üblicherweise mit einer Verlustfunktion.",
       "beispiel": "Aus Fotos von Tassen und Büchern lernt das Modell Klassen.",
-      "frage": "Warum sind Trainingsfehler allein kein guter Leistungsnachweis?"
+      "frage": "Warum sind Trainingsfehler allein kein guter Leistungsnachweis?",
+      "antwort": "Das Modell könnte Trainingsbeispiele auswendig kennen, aber bei neuen Bildern scheitern."
     },
     {
       "id": "validierung",
@@ -169,7 +186,8 @@
       "basis": "Mit eigenen Prüfbeispielen vergleicht ihr Varianten und entscheidet, welche besser geeignet ist.",
       "vertieft": "Ein vom Training getrennter Datensatz zur Modellauswahl und Abstimmung; seine Nutzung beeinflusst indirekt die Modellwahl.",
       "beispiel": "Im Fotoprojekt vergleicht ihr Modell A und B auf denselben V1-Bildern.",
-      "frage": "Warum darf die Schlussbewertung nicht nur auf V1 beruhen?"
+      "frage": "Warum darf die Schlussbewertung nicht nur auf V1 beruhen?",
+      "antwort": "V1 wurde schon zur Modellwahl genutzt. Für die Schlussbewertung braucht es neue Testdaten."
     },
     {
       "id": "testdaten",
@@ -178,7 +196,8 @@
       "basis": "Neue Beispiele, die bis zur endgültigen Modellwahl unangetastet bleiben.",
       "vertieft": "Zur möglichst unverzerrten Schätzung der Leistung nach Abschluss der Modellauswahl; nach Einsicht nicht erneut zur Optimierung nutzen.",
       "beispiel": "Nur die ausgewählte Variante wird einmal mit P1/P2 geprüft.",
-      "frage": "Was geht verloren, wenn man das Modell danach noch anpasst?"
+      "frage": "Was geht verloren, wenn man das Modell danach noch anpasst?",
+      "antwort": "Die Testdaten sind dann nicht mehr unabhängig; das Ergebnis wird zu optimistisch."
     },
     {
       "id": "datenleck",
@@ -187,7 +206,8 @@
       "basis": "Beim Training oder bei der Auswahl gelangt unabsichtlich Wissen aus den Testbildern ins Modell.",
       "vertieft": "Unzulässige Informationsübertragung zwischen Training, Validierung und unabhängigem Test, die die Leistungsbewertung verzerrt.",
       "beispiel": "Dasselbe Foto taucht im Training und im Abschlusstest auf.",
-      "frage": "Weshalb sieht die Genauigkeit dadurch möglicherweise besser aus?"
+      "frage": "Weshalb sieht die Genauigkeit dadurch möglicherweise besser aus?",
+      "antwort": "Das Modell kennt Prüfbeispiele bereits und erkennt sie darum leichter."
     },
     {
       "id": "ueberanpassung",
@@ -196,7 +216,8 @@
       "basis": "Das Modell merkt sich Trainingsbeispiele zu stark und erkennt neue Beispiele schlechter.",
       "vertieft": "Zu starke Anpassung an Besonderheiten oder Rauschen der Trainingsdaten, verbunden mit schwacher Generalisierung.",
       "beispiel": "Ein Bildmodell lernt den Hintergrund statt den Gegenstand.",
-      "frage": "Wie hilft ein unabhängiger Test, das Problem zu erkennen?"
+      "frage": "Wie hilft ein unabhängiger Test, das Problem zu erkennen?",
+      "antwort": "Er zeigt, ob das Modell auch bisher unbekannte Beispiele richtig erkennt."
     },
     {
       "id": "transfer-learning",
@@ -205,7 +226,8 @@
       "basis": "Ein schon trainiertes Netz hilft bei einer neuen Aufgabe; oft wird nur der neue Klassifikationskopf trainiert.",
       "vertieft": "Übertragung vortrainierter Merkmale auf eine neue Aufgabe, hier mit eingefrorenem Basisnetz und trainierbarem Klassifikationskopf.",
       "beispiel": "MobileNet liefert Bildmerkmale, ein neues Netz lernt Tasse gegen Buch.",
-      "frage": "Welcher Teil des Netzes wird im Fotoprojekt neu trainiert?"
+      "frage": "Welcher Teil des Netzes wird im Fotoprojekt neu trainiert?",
+      "antwort": "Nur der neue Klassifikationskopf; das vortrainierte Basisnetz bleibt unverändert."
     },
     {
       "id": "mobilenet",
@@ -214,7 +236,8 @@
       "basis": "Ein vortrainiertes Bildnetz, das aus echten Fotos nützliche Merkmale berechnet.",
       "vertieft": "Effiziente Familie von Faltungsnetzen für Bildmerkmale und Bildklassifikation; im Projekt wird MobileNet V2 als Merkmalsextraktor eingesetzt.",
       "beispiel": "Aus einem Foto entstehen Merkmalswerte für euren eigenen Klassifikator.",
-      "frage": "Wieso genügt nicht die direkte Betrachtung einzelner Pixel?"
+      "frage": "Wieso genügt nicht die direkte Betrachtung einzelner Pixel?",
+      "antwort": "Einzelne Pixel erklären wenig; MobileNet verbindet sie zu nützlichen Bildmerkmalen."
     },
     {
       "id": "genauigkeit",
@@ -223,7 +246,8 @@
       "basis": "Wie viele der geprüften Beispiele hat das Modell richtig erkannt?",
       "vertieft": "Anteil korrekter Klassifikationen an allen betrachteten Beispielen; bei ungleichen Klassenverteilungen allein oft unzureichend.",
       "beispiel": "8 richtige Vorhersagen von 10 entsprechen 80 Prozent.",
-      "frage": "Warum sollte man auch die Treffer pro Klasse anschauen?"
+      "frage": "Warum sollte man auch die Treffer pro Klasse anschauen?",
+      "antwort": "Die Gesamtquote kann verdecken, dass eine Klasse oft falsch erkannt wird."
     },
     {
       "id": "token",
@@ -232,7 +256,8 @@
       "basis": "Ein Textbaustein, den ein Sprachmodell verarbeitet; das kann ein Wort oder nur ein Wortteil sein.",
       "vertieft": "Eine Einheit der Tokenisierung, auf deren Sequenz das Modell Wahrscheinlichkeiten für Folgetokens berechnet.",
       "beispiel": "«Schwimmbad» kann in mehrere Tokens zerlegt werden.",
-      "frage": "Ist ein Token immer ein ganzes Wort?"
+      "frage": "Ist ein Token immer ein ganzes Wort?",
+      "antwort": "Nein. Ein Token kann auch ein Wortteil oder ein Zeichen sein."
     },
     {
       "id": "kontext",
@@ -241,7 +266,8 @@
       "basis": "Der bisher sichtbare Text, den das Sprachmodell beim nächsten Wortteil berücksichtigt.",
       "vertieft": "Die verfügbaren Tokens im Kontextfenster, welche die bedingte Vorhersage beeinflussen.",
       "beispiel": "Mit mehr vorherigen Wörtern wird eine Fortsetzung oft passender.",
-      "frage": "Warum ändern zusätzliche Informationen die Antwort?"
+      "frage": "Warum ändern zusätzliche Informationen die Antwort?",
+      "antwort": "Das Modell berücksichtigt zusätzliche Informationen bei der nächsten Vorhersage."
     },
     {
       "id": "halluzination",
@@ -250,7 +276,8 @@
       "basis": "Eine KI-Antwort klingt überzeugend, enthält aber erfundene oder falsche Angaben.",
       "vertieft": "Nicht durch die Faktenlage gestützte generierte Behauptung, die trotz sprachlicher Plausibilität auftreten kann.",
       "beispiel": "Ein Chatbot erfindet eine Literaturquelle.",
-      "frage": "Wie kann man wichtige Aussagen verifizieren?"
+      "frage": "Wie kann man wichtige Aussagen verifizieren?",
+      "antwort": "Wichtige Behauptungen mit unabhängigen, verlässlichen Quellen vergleichen."
     },
     {
       "id": "fairness",
@@ -259,7 +286,8 @@
       "basis": "Ein KI-System soll Menschen nicht ungerecht benachteiligen.",
       "vertieft": "Bewertung von Entscheidungen und Ergebnissen anhand transparenter Gerechtigkeitskriterien, deren Ziele in Konflikt stehen können.",
       "beispiel": "Ein Bewerbungsfilter bevorzugt Bewerbungen aus bestimmten Schulen.",
-      "frage": "Wessen Sicht muss man bei einer Fairnessprüfung berücksichtigen?"
+      "frage": "Wessen Sicht muss man bei einer Fairnessprüfung berücksichtigen?",
+      "antwort": "Vor allem Betroffene und unterschiedliche Gruppen, nicht nur die Entwickelnden."
     },
     {
       "id": "bias-daten",
@@ -268,7 +296,8 @@
       "basis": "Wenn Beispiele einseitig oder ungerecht verteilt sind, kann das Modell Benachteiligungen übernehmen.",
       "vertieft": "Systematische Verzerrung in Erhebung, Labels, Stichprobe oder Zielsetzung, die Modellentscheidungen beeinflusst; nicht mit dem Neuron-Bias gleichsetzen.",
       "beispiel": "Ein Bewerbungsmodell lernt aus früheren einseitigen Einstellungen.",
-      "frage": "Warum reicht eine hohe Genauigkeit nicht als Fairnessnachweis?"
+      "frage": "Warum reicht eine hohe Genauigkeit nicht als Fairnessnachweis?",
+      "antwort": "Ein Modell kann insgesamt genau sein und trotzdem bestimmte Gruppen benachteiligen."
     }
   ]
 }

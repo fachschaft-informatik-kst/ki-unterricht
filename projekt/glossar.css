@@ -11,6 +11,13 @@
 .glossary-entry p:last-child{margin-bottom:0}
 .glossary-example{padding-top:8px;border-top:1px solid var(--line)}
 .glossary-question{color:var(--muted)}
+.glossary-answer{margin-top:8px;border-top:1px dashed var(--line);padding-top:10px}
+.glossary-answer summary{display:list-item;cursor:pointer;color:var(--accent);font-size:14px;font-weight:700;line-height:1.5;margin-left:16px}
+.glossary-answer summary:hover{text-decoration:underline;text-underline-offset:3px}
+.glossary-answer summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
+.glossary-answer[open] p{margin:8px 0 0;padding:9px 12px;border-radius:8px;background:var(--soft);color:var(--ink)}
+.glossary-related{font-size:14px;line-height:1.6;color:var(--muted);margin:12px 0 18px}
+.glossary-related a{color:var(--accent);font-weight:600;text-underline-offset:3px}
 a[href^="#glossar-"]:not(.nav a),a[href^="#basis-glossar-"]:not(.nav a){text-decoration-style:dotted;text-underline-offset:4px}
 .glossary-dialog{border:1px solid var(--line);border-radius:16px;width:min(510px,calc(100vw - 32px));max-height:85vh;padding:22px;background:#fff;color:var(--ink);box-shadow:0 18px 55px #182b3140}
 .glossary-dialog::backdrop{background:#182b3180}

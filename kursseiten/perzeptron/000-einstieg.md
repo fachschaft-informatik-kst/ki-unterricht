@@ -15,3 +15,4 @@
   </div>
 </details>
 <!-- /LESSONS:perzeptron -->
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-neuron">Neuron</a> · <a href="#glossar-gewicht">Gewicht</a> · <a href="#glossar-bias-neuron">Bias</a></p>

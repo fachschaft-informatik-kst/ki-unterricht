@@ -15,3 +15,4 @@
   </div>
 </details>
 <!-- /LESSONS:netze -->
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-xor">XOR</a> · <a href="#glossar-schicht">Zwischenschicht</a> · <a href="#glossar-aktivierungsfunktion">Aktivierungsfunktion</a></p>

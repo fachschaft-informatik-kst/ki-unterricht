@@ -31,7 +31,9 @@ def render_glossary(course: str) -> str:
             parts.append(f'<article class="glossary-entry" id="{prefix}-{esc("id")}" data-glossary-id="{esc("id")}">'
                          f'<h3>{esc("begriff")}</h3><p>{esc("basis" if course == "basis" else "vertieft")}</p>'
                          f'<p class="glossary-example"><strong>Beispiel:</strong> {esc("beispiel")}</p>'
-                         f'<p class="glossary-question"><strong>Prüffrage:</strong> {esc("frage")}</p></article>')
+                         f'<p class="glossary-question"><strong>Leitfrage:</strong> {esc("frage")}</p>'
+                         f'<details class="glossary-answer"><summary>Kurze Antwort anzeigen</summary>'
+                         f'<p>{esc("antwort")}</p></details></article>')
         parts.append('</div></div>')
     parts.append('<p class="glossary-empty" data-glossary-empty hidden>Kein Begriff gefunden. Probiere ein anderes Suchwort.</p></div>')
     return "\n".join(parts)

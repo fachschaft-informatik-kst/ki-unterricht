@@ -4,6 +4,7 @@
 <h1>Was hat unser<br/>Netz <em>gelernt?</em></h1>
 <p class="small" id="projekt-vorabcheck-hinweis"><strong>Vor dem Projektstart:</strong> Der unbenotete <a href="#projekt-bereit-check">Lernstandscheck aus DL 4</a> hilft, offene Fragen zu Neuron und Netz zu erkennen. Die faire Datenaufteilung lernt ihr selbstständig im Lernpfad von DL 5.</p>
 <p class="lead">Eigene Bilder. Ein neuronales Netz. Ein fairer Vergleich – zu zweit. In Doppellektion 5 lernen Sie zunächst selbstständig, wie man Daten fair aufteilt.</p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung V1</a> · <a href="#glossar-testdaten">Testdaten P1/P2</a></p>
 <!-- Klarer Überblick vor dem ersten Training: nur das zweite Netz lernt. -->
 <div class="project-train-overview" aria-labelledby="projekt-training-titel">
   <h2 id="projekt-training-titel">Was wird hier eigentlich trainiert?</h2>
