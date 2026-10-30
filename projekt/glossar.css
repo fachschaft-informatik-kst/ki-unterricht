@@ -1,4 +1,4 @@
-/* Gemeinsame Glossar-Darstellung: alle Farben folgen der jeweiligen Kurs-Palette. */
+/* KI-Glossar: gleicher Aufbau in beiden Kursen, Farben aus der jeweiligen Palette. */
 .glossary{max-width:1050px}
 .glossary-search-label{display:block;font-weight:700;margin:18px 0 6px}
 .glossary [data-glossary-search]{display:block;width:100%;max-width:580px;min-height:45px;border:1px solid var(--line);border-radius:9px;padding:9px 13px;background:#fff;color:var(--ink)}
@@ -10,20 +10,41 @@
 .glossary-entry p{font-size:14px;line-height:1.6;margin:0 0 9px}
 .glossary-entry p:last-child{margin-bottom:0}
 .glossary-example{padding-top:8px;border-top:1px solid var(--line)}
-.glossary-question{color:var(--muted)}
-.glossary-answer{margin-top:8px;border-top:1px dashed var(--line);padding-top:10px}
-.glossary-answer summary{display:list-item;cursor:pointer;color:var(--accent);font-size:14px;font-weight:700;line-height:1.5;margin-left:16px}
-.glossary-answer summary:hover{text-decoration:underline;text-underline-offset:3px}
-.glossary-answer summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
-.glossary-answer[open] p{margin:8px 0 0;padding:9px 12px;border-radius:8px;background:var(--soft);color:var(--ink)}
+
+/* Self-check is one calm panel, not a second accordion card within a card.
+   Override the course-wide details/summary borders, padding and + marker. */
+.glossary-selfcheck{margin-top:15px;padding:14px 16px 8px;background:#f8faf9;background:color-mix(in srgb,var(--soft) 48%,#fff);border:1px solid var(--line);border-radius:12px}
+.glossary-entry .glossary-question{display:grid;gap:4px;margin:0;color:var(--ink);line-height:1.5}
+.glossary-question-label{display:block;font-size:11px;line-height:1.35;font-weight:800;letter-spacing:.085em;text-transform:uppercase;color:var(--accent)}
+.glossary-question-text{font-size:14px;font-weight:550;overflow-wrap:anywhere}
+.glossary-selfcheck>details.glossary-answer{margin:0;border:0;border-radius:0;background:transparent;overflow:visible}
+.glossary-answer>summary{display:flex;align-items:center;gap:10px;box-sizing:border-box;width:100%;min-height:44px;margin:10px 0 0;padding:10px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--accent);font-size:14px;font-weight:700;line-height:1.4;list-style:none;cursor:pointer}
+.glossary-answer>summary::-webkit-details-marker{display:none}
+.glossary-answer>summary::after,.glossary-answer[open]>summary::after{content:none}
+.glossary-answer[open]>summary{border-top:1px solid var(--line);border-bottom:0}
+.glossary-answer>summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:5px}
+.glossary-answer>summary:hover{color:var(--ink)}
+.glossary-answer-hide{display:none}
+.glossary-answer[open] .glossary-answer-show{display:none}
+.glossary-answer[open] .glossary-answer-hide{display:inline}
+.glossary-answer-icon{width:28px;height:28px;margin-left:auto;flex:none;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:white;color:var(--accent)}
+.glossary-answer-icon::before{content:"";display:block;width:7px;height:7px;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-2px) rotate(45deg);transition:transform .16s ease}
+.glossary-answer[open] .glossary-answer-icon::before{transform:translateY(2px) rotate(225deg)}
+.glossary-answer>summary:hover .glossary-answer-icon{border-color:var(--accent)}
+.glossary-answer-content{margin:8px 0 6px;padding:11px 13px;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:#fff}
+.glossary-answer-content p{margin:0;color:var(--ink);line-height:1.6;overflow-wrap:anywhere}
+
 .glossary-related{font-size:14px;line-height:1.6;color:var(--muted);margin:12px 0 18px}
 .glossary-related a{color:var(--accent);font-weight:600;text-underline-offset:3px}
 a[href^="#glossar-"]:not(.nav a),a[href^="#basis-glossar-"]:not(.nav a){text-decoration-style:dotted;text-underline-offset:4px}
-.glossary-dialog{border:1px solid var(--line);border-radius:16px;width:min(510px,calc(100vw - 32px));max-height:85vh;padding:22px;background:#fff;color:var(--ink);box-shadow:0 18px 55px #182b3140}
+.glossary-dialog{position:relative;box-sizing:border-box;overflow-y:auto;border:1px solid var(--line);border-radius:16px;width:min(540px,calc(100vw - 24px));max-height:85vh;padding:27px 28px;background:#fff;color:var(--ink);box-shadow:0 18px 55px #182b3140}
 .glossary-dialog::backdrop{background:#182b3180}
 .glossary-dialog .glossary-entry{border:0;padding:0}
-.glossary-dialog .glossary-entry h3{padding-right:45px}
-.glossary-close{float:right;border:1px solid var(--line);background:var(--soft);color:var(--accent);font-size:20px;border-radius:8px;padding:0 12px;min-height:36px}
+.glossary-dialog .glossary-entry h3{padding-right:46px}
+.glossary-close{position:absolute;top:17px;right:17px;display:grid;place-items:center;border:1px solid var(--line);background:var(--soft);color:var(--accent);font-size:22px;line-height:1;border-radius:9px;width:38px;height:38px;padding:0}
+.glossary-close:hover{border-color:var(--accent)}
+.glossary-close:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .glossary-empty{padding:20px;background:#fff;border:1px dashed var(--line);border-radius:12px}
-@media(max-width:720px){.glossary-grid{grid-template-columns:1fr}.glossary-group h2{font-size:1.3rem}.glossary-entry{scroll-margin-top:100px}}
+@media(max-width:720px){.glossary-grid{grid-template-columns:1fr}.glossary-group h2{font-size:1.3rem}.glossary-entry{scroll-margin-top:100px}.glossary-selfcheck{padding:13px 14px 7px}.glossary-dialog{padding:22px 18px}.glossary-close{top:12px;right:12px}}
+@media(prefers-reduced-motion:reduce){.glossary-answer-icon::before{transition:none}}
 @media print{.glossary-dialog{display:none!important}.glossary-entry{break-inside:avoid}.glossary [data-glossary-search]{display:none}}
