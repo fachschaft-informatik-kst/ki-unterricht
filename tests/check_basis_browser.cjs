@@ -206,9 +206,22 @@ const assert=require('node:assert/strict');
     assert(await glossaryPage.locator('dialog.glossary-dialog').isVisible(),'Inline glossary dialog');
     assert((await glossaryPage.locator('dialog.glossary-dialog').innerText()).includes('Modell'));
     const popupAnswer=glossaryPage.locator('dialog.glossary-dialog details.glossary-answer');
+    const basisPanel=glossaryPage.locator('dialog.glossary-dialog .glossary-qa');
+    assert.equal(await basisPanel.count(),1,'Leitfrage und Antwort bilden eine eigene, kompakte Karte');
+    assert.equal(await popupAnswer.locator('.glossary-answer-icon').count(),1,'Der Pfeil gehört zum Aufklapp-Button');
+    assert.equal(await popupAnswer.locator('summary').evaluate(el=>getComputedStyle(el,'::after').content),'none',
+      'Die allgemeine Plus-/Minus-Markierung des Kursdesigns ist unterdrückt');
+    assert.equal((await basisPanel.locator('.glossary-question-label').textContent()).trim(),'Leitfrage');
+    assert.equal(await popupAnswer.locator('.glossary-answer-show').isVisible(),true);
+    assert.equal(await popupAnswer.locator('.glossary-answer-hide').isVisible(),false);
     assert(!await popupAnswer.evaluate(el=>el.open),'Antwort in der Begriffs-Erklärung bleibt anfangs zu');
     await popupAnswer.locator('summary').click();
     assert(await popupAnswer.evaluate(el=>el.open),'Antwort lässt sich im Dialog aufklappen');
+    assert.equal(await popupAnswer.locator('.glossary-answer-hide').isVisible(),true);
+    assert.equal(await popupAnswer.locator('.glossary-answer-show').isVisible(),false);
+    assert(await popupAnswer.locator('.glossary-answer-content').isVisible(),'Antworttext ist sichtbar');
+    assert.equal(await popupAnswer.locator('summary').evaluate(el=>Math.round(el.getBoundingClientRect().height)>=44),true,
+      'Aufklappziel ist mindestens 44 Pixel hoch');
     await glossaryPage.locator('dialog.glossary-dialog .glossary-close').click();
     assert(!await glossaryPage.locator('dialog.glossary-dialog').isVisible());
     await glossaryPage.locator('.nav a[href="#basis-glossar"]').click();

@@ -26,9 +26,17 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   const glossaryDialog=p.locator('dialog.glossary-dialog');
   assert(await glossaryDialog.isVisible(),'Begriff wird ohne Kurswechsel erklärt');
   const quickAnswer=glossaryDialog.locator('details.glossary-answer');
+  assert.equal(await glossaryDialog.locator('.glossary-qa').count(),1,'Question and answer form a single panel');
+  assert.equal(await quickAnswer.locator('summary').evaluate(el=>getComputedStyle(el,'::after').content),'none',
+    'No inherited lesson accordion plus/minus indicator');
+  assert(await quickAnswer.locator('.glossary-answer-icon').isVisible());
+  assert(await quickAnswer.locator('.glossary-answer-show').isVisible());
   assert(!await quickAnswer.evaluate(el=>el.open),'Leitfrage-Antwort bleibt zunächst verborgen');
   await quickAnswer.locator('summary').click();
   assert(await quickAnswer.evaluate(el=>el.open),'Leitfrage-Antwort lässt sich aufklappen');
+  assert(await quickAnswer.locator('.glossary-answer-hide').isVisible());
+  assert(!await quickAnswer.locator('.glossary-answer-show').isVisible());
+  assert(await quickAnswer.locator('.glossary-answer-content').isVisible());
   await glossaryDialog.locator('.glossary-close').click();
   await p.locator('.nav a[href="#lernziele"]').click();await p.locator('#lernziele').waitFor({state:'visible'});assert.equal(await p.locator('#lernziele .grid > article').count(),7);
   assert.equal(await p.locator('#lernziele .grid > article').filter({hasText:'Das Bildprojekt untersuchen'}).locator('.section-label').innerText(),'05–08');

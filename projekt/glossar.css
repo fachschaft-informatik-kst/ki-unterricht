@@ -10,12 +10,27 @@
 .glossary-entry p{font-size:14px;line-height:1.6;margin:0 0 9px}
 .glossary-entry p:last-child{margin-bottom:0}
 .glossary-example{padding-top:8px;border-top:1px solid var(--line)}
-.glossary-question{color:var(--muted)}
-.glossary-answer{margin-top:8px;border-top:1px dashed var(--line);padding-top:10px}
-.glossary-answer summary{display:list-item;cursor:pointer;color:var(--accent);font-size:14px;font-weight:700;line-height:1.5;margin-left:16px}
-.glossary-answer summary:hover{text-decoration:underline;text-underline-offset:3px}
-.glossary-answer summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
-.glossary-answer[open] p{margin:8px 0 0;padding:9px 12px;border-radius:8px;background:var(--soft);color:var(--ink)}
+/* Small, self-contained Q&A panel; does not inherit the large lesson-details controls. */
+.glossary-qa{margin-top:17px;border:1px solid var(--line);border-radius:12px;background:var(--soft);overflow:hidden}
+.glossary-entry .glossary-question{display:grid;gap:5px;margin:0;padding:14px 16px;font-size:14px;line-height:1.5;color:var(--ink)}
+.glossary-question-label{display:block;font-size:11px;font-weight:750;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.glossary-question-text{display:block;font-weight:600;overflow-wrap:anywhere}
+.glossary-entry .glossary-answer{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:#fff;overflow:visible}
+.glossary-entry .glossary-answer > summary{display:flex;align-items:center;gap:10px;min-height:48px;width:100%;padding:10px 16px;border:0;background:#fff;color:var(--accent);font-size:14px;font-weight:700;line-height:1.35;list-style:none;cursor:pointer}
+.glossary-entry .glossary-answer > summary::-webkit-details-marker{display:none}
+.glossary-entry .glossary-answer > summary::marker{content:""}
+.glossary-entry .glossary-answer > summary::after,.glossary-entry .glossary-answer[open] > summary::after{content:none;display:none}
+.glossary-entry .glossary-answer > summary:hover{background:var(--soft)}
+.glossary-entry .glossary-answer > summary:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:4px}
+.glossary-answer-icon{display:grid;place-items:center;flex:none;width:28px;height:28px;margin-left:auto;border-radius:8px;background:var(--soft);color:var(--accent)}
+.glossary-answer-icon::before{content:"";display:block;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .18s ease}
+.glossary-entry .glossary-answer[open] > summary{border-bottom:0}
+.glossary-answer[open] .glossary-answer-icon::before{transform:translateY(2px) rotate(225deg)}
+.glossary-answer-hide,.glossary-answer[open] .glossary-answer-show{display:none}
+.glossary-answer[open] .glossary-answer-hide{display:inline}
+.glossary-answer-content{padding:14px 16px 16px;border-top:1px solid var(--line);background:#fff}
+.glossary-entry .glossary-answer-content p{margin:0;padding:0 0 0 12px;border-left:3px solid var(--accent);color:var(--ink);font-size:14px;line-height:1.65;overflow-wrap:anywhere}
+@media(prefers-reduced-motion:reduce){.glossary-answer-icon::before{transition:none}}
 .glossary-related{font-size:14px;line-height:1.6;color:var(--muted);margin:12px 0 18px}
 .glossary-related a{color:var(--accent);font-weight:600;text-underline-offset:3px}
 a[href^="#glossar-"]:not(.nav a),a[href^="#basis-glossar-"]:not(.nav a){text-decoration-style:dotted;text-underline-offset:4px}
