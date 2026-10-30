@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Sichern: Was blieb eingefroren, was wurde neu trainiert? Ausblick: In DL 7 verwenden wir MobileNet statt Ziffernnetz für eigene Gegenstandsfotos. LP: Fotostudio und 80 Fotos müssen vor DL 7 vorbereitet sein."
+              "text": "Sichern: Was blieb eingefroren, was wurde neu trainiert? Ausblick: In DL 7 verwenden wir MobileNet mit den vorbereiteten synthetischen Übungsdaten (Standard) oder freiwillig eigenen Gegenstandsfotos. Niemand muss zuhause 80 Fotos aufnehmen."
             },
             {
               "art": "Ergebnis",
