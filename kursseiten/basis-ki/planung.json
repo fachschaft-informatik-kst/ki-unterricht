@@ -4,11 +4,11 @@
       "id": "b01",
       "view": "basis-ki",
       "title": "Was ist KI?",
-      "goal": "KI von automatisierten Programmen unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen sowie schwache und starke KI an Beispielen gegenüberstellen.",
+      "goal": "An vier Beispielen entscheiden, ob feste Regeln oder Lernen aus Daten verwendet werden, und KI, maschinelles Lernen und Deep Learning mit je einem Beispiel erklären.",
       "question": "Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
       "product": "Drei begründet eingeordnete Beispiele, zwei Argumente zum Fall «Schulweg» und eine eigene Antwort auf die Leitfrage.",
-      "zeit": "Asimovs Gesetze werden kurz angeschnitten; die ausführliche ethische Diskussion folgt in Doppellektion 10. Die Meilensteine sind freiwillige Vertiefung.",
+      "zeit": "90 Minuten: Pflichtkern Zuordnen, Begründen und Begriffe anwenden; starke KI, Meilensteine und Robotergesetze als Wahlvertiefung.",
       "phases": [
         {
           "phase": "Ankommen",
