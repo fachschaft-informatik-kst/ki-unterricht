@@ -1,6 +1,6 @@
 # Leistungsnachweis KI – 1. Kurzgymnasium (DL 5–8)
 
-**Rahmen:** Zweierteams bearbeiten ein angeleitetes Bildklassifikationsprojekt. Gemeinsame Abgabe vor DL 8; in DL 8 individuelle Fachgespräche. Die 4.-Klasse-Bewertung ist davon unabhängig.
+**Rahmen:** Zweierteams bearbeiten ein angeleitetes Bildklassifikationsprojekt mit **bereitgestellten synthetischen Übungsdaten oder freiwillig eigenen Gegenstandsfotos**. Beide Wege werden gleich bewertet; die Datenwahl gibt keinen Bonus. Gemeinsame Abgabe vor DL 8; in DL 8 individuelle Fachgespräche. Die 4.-Klasse-Bewertung ist davon unabhängig.
 
 ## Verbindliche Abgabe
 1. Zwei Bildklassen und Datenherkunft; Trainings- und unabhängige Testbilder getrennt.
