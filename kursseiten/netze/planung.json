@@ -127,7 +127,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 2,
-              "text": "Kurzcheck vor dem Projektstart: einzeln in zwei Minuten erklären, was Gewichte und Bias bewirken und warum XOR eine Zwischenschicht braucht. Eine Unsicherheit zur Datentrennung markieren; der Datenaufteilungs-Lernpfad beginnt erst in DL5."
+              "text": "Sicherung: Kurzcheck vor dem Projektstart: einzeln in zwei Minuten erklären, was Gewichte und Bias bewirken und warum XOR eine Zwischenschicht braucht. Eine Unsicherheit zur Datentrennung markieren; der Datenaufteilungs-Lernpfad beginnt erst in DL5."
             },
             {
               "art": "Ergebnis",
