@@ -13,6 +13,7 @@ shutil.copytree(root/'_build/site/basis',out/'basis',dirs_exist_ok=True)
 (out/'projekt/runtime').mkdir(exist_ok=True)
 shutil.copy(root/'content/ki_projekt/fotostudio.html',out/'projekt/studio/index.html')
 shutil.copy(root/'content/ki_projekt/fotostudio_core.js',out/'projekt/studio/fotostudio_core.js')
+shutil.copy(root/'content/ki_projekt/fotostudio_storage.js',out/'projekt/studio/fotostudio_storage.js')
 for file in ['ki_foto_tools.py','ki_projekt_tools.py','foto_uebungsdaten.json']:
  shutil.copy(root/'content/ki_projekt'/file,out/'projekt/runtime'/file)
 shutil.copy(root/'content/unterricht_tools.py',out/'projekt/runtime/unterricht_tools.py')
