@@ -27,11 +27,20 @@ Wie könnte man ein KI-System unabhängig prüfen? Woran würdet ihr merken, das
     <div class="table-scroll">
       <table class="typen">
         <thead>
-          <tr><th>Beobachtung im Kurzfilm</th><th>Euer Eintrag</th></tr>
+          <tr>
+            <th>Beobachtung im Kurzfilm</th>
+            <th>Euer Eintrag</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><th>Ein tatsächlich gezeigter oder genannter Punkt</th><td><input type="text" maxlength="200" data-basis-answer="video_beispiel" aria-label="Beobachtung aus dem ARTE-Kurzfilm" placeholder="Im Film wird …"></td></tr>
-          <tr><th>Zeitmarke (ungefähr)</th><td><input type="text" maxlength="200" data-basis-answer="video_zeit" aria-label="Zeitmarke aus dem ARTE-Kurzfilm" placeholder="z. B. 01:20"></td></tr>
+          <tr>
+            <th>Ein tatsächlich gezeigter oder genannter Punkt</th>
+            <td><input type="text" maxlength="200" data-basis-answer="video_beispiel" aria-label="Beobachtung aus dem ARTE-Kurzfilm" placeholder="Im Film wird …"></td>
+          </tr>
+          <tr>
+            <th>Zeitmarke (ungefähr)</th>
+            <td><input type="text" maxlength="200" data-basis-answer="video_zeit" aria-label="Zeitmarke aus dem ARTE-Kurzfilm" placeholder="z. B. 01:20"></td>
+          </tr>
         </tbody>
       </table>
     </div>
