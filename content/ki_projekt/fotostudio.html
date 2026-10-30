@@ -53,13 +53,25 @@ el('add').onclick=async()=>{
    const old=records.find(r=>r.id===id);
    if(old){if(old.label!==label||old.group!==group)throw Error('Identisches Bild mit anderer Klasse/Gruppe: '+file.name);duplicates++;continue;}
    const small=makeCanvas(64,64);small.getContext('2d').drawImage(canvas,0,0,64,64);
-   records.push({id,group,label,source,filename:file.name,features,preview:small.toDataURL('image/png')});added++;counts();
+   const record={id,group,label,source,filename:file.name,features,preview:small.toDataURL('image/png')};
+   records.push(record);added++;counts();
+   if(storage){
+    try{await storage.put(record);if(!unsaved)saveStatus('Lokal zwischengespeichert: '+records.length+' Bilder. JSON-Backup empfohlen.');}
+    catch(error){unsaved=true;saveStatus('ACHTUNG: Browser-Speicher voll oder nicht verfügbar ('+error.message+'). JSON sofort herunterladen.');}
+   }else unsaved=true;
   }
-  el('status').textContent=`${added} hinzugefügt, ${duplicates} Duplikate übersprungen. Insgesamt ${records.length}. Jetzt sichern.`;
+  el('status').textContent=`${added} hinzugefügt, ${duplicates} Duplikate übersprungen. Insgesamt ${records.length}. JSON-Backup herunterladen.`;
  }catch(e){el('status').textContent=`Fehler: ${e.message}. Bereits übernommene Bilder bleiben erhalten und können gespeichert werden. Bei Ladefehler Netzwerk prüfen und erneut versuchen.`;}
  finally{busy=false;el('add').disabled=false;el('resume').disabled=false;}
 };
 el('save').onclick=()=>{if(!records.length)return;const doc={schema:'fotostudio-v1',pipeline:PhotoCore.PIPELINE,tfjs:'4.22.0',mobilenet:'2.1.1',records};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(doc)],{type:'application/json'}));a.download='fotos_'+Date.now()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
-el('resume').onchange=async()=>{if(busy)return;await ready;try{const doc=JSON.parse(await el('resume').files[0].text());if(doc.schema!=='fotostudio-v1'||doc.pipeline!==PhotoCore.PIPELINE||!Array.isArray(doc.records))throw Error('Falsches Dateiformat');const merged=new Map(records.map(r=>[r.id,r]));for(const r of doc.records){if(typeof r.id!=='string'||!r.group||!r.label||r.features?.length!==1280||!r.features.every(Number.isFinite))throw Error('Ungültiger Datensatz');const old=merged.get(r.id);if(old&&JSON.stringify(old)!==JSON.stringify(r))throw Error('Widersprüchliche Bild-ID');merged.set(r.id,r);}records=[...merged.values()];counts();el('status').textContent=records.length+' Bilder wiederhergestellt.';}catch(e){el('status').textContent=e.message;}};
-window.onbeforeunload=e=>{if(records.length){e.preventDefault();e.returnValue='Sammlung gesichert?';}};
+el('resume').onchange=async()=>{if(busy)return;await ready;try{const doc=JSON.parse(await el('resume').files[0].text());if(doc.schema!=='fotostudio-v1'||doc.pipeline!==PhotoCore.PIPELINE||!Array.isArray(doc.records))throw Error('Falsches Dateiformat');const merged=new Map(records.map(r=>[r.id,r]));for(const r of doc.records){!validRecord(r)throw Error('Ungültiger Datensatz');const old=merged.get(r.id);if(old&&JSON.stringify(old)!==JSON.stringify(r))throw Error('Widersprüchliche Bild-ID');merged.set(r.id,r);}if(storage){try{await storage.putMany([...merged.values()]);}catch(error){unsaved=true;saveStatus('Import nicht lokal gesichert ('+error.message+'). JSON exportieren.');}}else unsaved=true;
+ records=[...merged.values()];counts();el('status').textContent=records.length+' Bilder wiederhergestellt. '+(unsaved?'JSON-Backup jetzt herunterladen.':'Automatisch lokal gesichert.');}catch(e){el('status').textContent=e.message;}};
+el('clear').onclick=async()=>{
+ if(busy)return;await ready;
+ if(!confirm('Alle Bilder aus diesem Browser löschen? Vorher JSON-Backup herunterladen.'))return;
+ try{if(storage)await storage.clear();records=[];unsaved=false;counts();el('status').textContent='Lokale Sammlung gelöscht.';saveStatus(storage?'Lokaler Speicher geleert.':'Automatische Zwischensicherung nicht verfügbar.');}
+ catch(e){el('status').textContent='Löschen fehlgeschlagen: '+e.message;}
+};
+window.onbeforeunload=e=>{if(unsaved&&records.length){e.preventDefault();e.returnValue='Bilder noch nicht automatisch gesichert!';}};
 </script></html>
