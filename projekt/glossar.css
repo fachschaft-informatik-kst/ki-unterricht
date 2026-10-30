@@ -1,0 +1,22 @@
+/* Gemeinsame Glossar-Darstellung: alle Farben folgen der jeweiligen Kurs-Palette. */
+.glossary{max-width:1050px}
+.glossary-search-label{display:block;font-weight:700;margin:18px 0 6px}
+.glossary [data-glossary-search]{display:block;width:100%;max-width:580px;min-height:45px;border:1px solid var(--line);border-radius:9px;padding:9px 13px;background:#fff;color:var(--ink)}
+.glossary-group{margin:30px 0}
+.glossary-group h2{font-size:1.6rem;margin-bottom:14px}
+.glossary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.glossary-entry{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px 20px;min-width:0;scroll-margin-top:25px}
+.glossary-entry h3{font-size:1.14rem;color:var(--accent);margin-bottom:9px}
+.glossary-entry p{font-size:14px;line-height:1.6;margin:0 0 9px}
+.glossary-entry p:last-child{margin-bottom:0}
+.glossary-example{padding-top:8px;border-top:1px solid var(--line)}
+.glossary-question{color:var(--muted)}
+a[href^="#glossar-"]:not(.nav a),a[href^="#basis-glossar-"]:not(.nav a){text-decoration-style:dotted;text-underline-offset:4px}
+.glossary-dialog{border:1px solid var(--line);border-radius:16px;width:min(510px,calc(100vw - 32px));max-height:85vh;padding:22px;background:#fff;color:var(--ink);box-shadow:0 18px 55px #182b3140}
+.glossary-dialog::backdrop{background:#182b3180}
+.glossary-dialog .glossary-entry{border:0;padding:0}
+.glossary-dialog .glossary-entry h3{padding-right:45px}
+.glossary-close{float:right;border:1px solid var(--line);background:var(--soft);color:var(--accent);font-size:20px;border-radius:8px;padding:0 12px;min-height:36px}
+.glossary-empty{padding:20px;background:#fff;border:1px dashed var(--line);border-radius:12px}
+@media(max-width:720px){.glossary-grid{grid-template-columns:1fr}.glossary-group h2{font-size:1.3rem}.glossary-entry{scroll-margin-top:100px}}
+@media print{.glossary-dialog{display:none!important}.glossary-entry{break-inside:avoid}.glossary [data-glossary-search]{display:none}}
