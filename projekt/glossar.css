@@ -10,12 +10,22 @@
 .glossary-entry p{font-size:14px;line-height:1.6;margin:0 0 9px}
 .glossary-entry p:last-child{margin-bottom:0}
 .glossary-example{padding-top:8px;border-top:1px solid var(--line)}
-.glossary-question{color:var(--muted)}
-.glossary-answer{margin-top:8px;border-top:1px dashed var(--line);padding-top:10px}
-.glossary-answer summary{display:list-item;cursor:pointer;color:var(--accent);font-size:14px;font-weight:700;line-height:1.5;margin-left:16px}
-.glossary-answer summary:hover{text-decoration:underline;text-underline-offset:3px}
-.glossary-answer summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
-.glossary-answer[open] p{margin:8px 0 0;padding:9px 12px;border-radius:8px;background:var(--soft);color:var(--ink)}
+.glossary-question{color:var(--ink);font-weight:500;margin:12px 0 0!important}
+.glossary-question strong{display:block;margin-bottom:2px;font-size:11px;font-weight:750;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+/* Reset the portal's large generic <details>/<summary> UI: one quiet, 44px-tall answer toggle. */
+.glossary-entry details.glossary-answer{margin:12px 0 0;border:1px solid var(--line);border-radius:11px;background:var(--soft);overflow:hidden}
+.glossary-answer>summary{display:flex;align-items:center;gap:12px;min-height:44px;margin:0;padding:10px 14px;border:0;background:var(--soft);font-size:13px;font-weight:700;line-height:1.5;color:var(--accent);list-style:none;cursor:pointer}
+.glossary-answer>summary::-webkit-details-marker{display:none}
+.glossary-answer>summary::after{content:'';box-sizing:border-box;display:block;width:9px;height:9px;flex:0 0 9px;margin-left:auto;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .18s ease}
+.glossary-answer[open]>summary{border-bottom:0}
+.glossary-answer[open]>summary::after{content:'';transform:rotate(225deg)}
+.glossary-answer .glossary-answer-hide{display:none}
+.glossary-answer[open] .glossary-answer-show{display:none}
+.glossary-answer[open] .glossary-answer-hide{display:inline}
+.glossary-answer>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:9px}
+.glossary-answer>p.glossary-answer-text{margin:0;padding:12px 14px 13px;background:#fff;border-top:1px solid var(--line);color:var(--ink);font-size:14px;line-height:1.6}
+@media(hover:hover){.glossary-answer>summary:hover{background:color-mix(in srgb,var(--soft) 75%,#fff)}}
+@media(prefers-reduced-motion:reduce){.glossary-answer>summary::after{transition:none}}
 .glossary-related{font-size:14px;line-height:1.6;color:var(--muted);margin:12px 0 18px}
 .glossary-related a{color:var(--accent);font-weight:600;text-underline-offset:3px}
 a[href^="#glossar-"]:not(.nav a),a[href^="#basis-glossar-"]:not(.nav a){text-decoration-style:dotted;text-underline-offset:4px}

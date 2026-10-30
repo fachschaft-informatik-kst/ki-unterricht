@@ -36,7 +36,9 @@ for level,path,prefix in (
     for entry in entries:
         answer=entry.select_one("details.glossary-answer:not([open])")
         assert answer is not None and answer.select_one("summary"), entry["id"]
-        assert answer.select_one("p").get_text(strip=True), entry["id"]
+        assert answer.select_one("p.glossary-answer-text").get_text(strip=True), entry["id"]
+        assert answer.select_one("summary .glossary-answer-show").get_text(strip=True)=="Antwort anzeigen"
+        assert answer.select_one("summary .glossary-answer-hide").get_text(strip=True)=="Antwort verbergen"
     assert soup.select_one(f'.nav a[href="#{prefix}"]')
     manifest=json.loads((ROOT/"kursseiten"/("basis-manifest.json" if level=="basis" else "manifest.json")).read_text(encoding="utf-8"))
     for topic in (s for s in manifest["sections"] if s.get("teaching")):

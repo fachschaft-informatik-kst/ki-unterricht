@@ -27,8 +27,14 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert(await glossaryDialog.isVisible(),'Begriff wird ohne Kurswechsel erklärt');
   const quickAnswer=glossaryDialog.locator('details.glossary-answer');
   assert(!await quickAnswer.evaluate(el=>el.open),'Leitfrage-Antwort bleibt zunächst verborgen');
-  await quickAnswer.locator('summary').click();
+  const advancedSummary=quickAnswer.locator('summary');
+  assert.equal(await advancedSummary.innerText(),'Antwort anzeigen');
+  assert((await advancedSummary.boundingBox()).height>=44,'Glossar-Schalter gut bedienbar');
+  assert.equal(await advancedSummary.evaluate(el=>getComputedStyle(el).paddingLeft),'14px','Kompakter Glossar-Schalter');
+  await advancedSummary.click();
   assert(await quickAnswer.evaluate(el=>el.open),'Leitfrage-Antwort lässt sich aufklappen');
+  assert.equal(await advancedSummary.innerText(),'Antwort verbergen');
+  assert(await quickAnswer.locator('.glossary-answer-text').isVisible());
   await glossaryDialog.locator('.glossary-close').click();
   await p.locator('.nav a[href="#lernziele"]').click();await p.locator('#lernziele').waitFor({state:'visible'});assert.equal(await p.locator('#lernziele .grid > article').count(),7);
   assert.equal(await p.locator('#lernziele .grid > article').filter({hasText:'Das Bildprojekt untersuchen'}).locator('.section-label').innerText(),'05–08');
