@@ -6,6 +6,8 @@ titel: Prompts und verlässliche Aussagen
 kurz: Gute Fragen stellen und KI-Aussagen überprüfen
 ---
 
+**Wahlvertiefung:** Hier könnt ihr Prompts genauer untersuchen. Die Faktenprüfung unten ist dagegen Teil des Pflichtkerns.
+
 ### Gleiche Aufgabe – zwei Prompts
 
 Vergleicht die beiden Aufträge an einen Chatbot:
