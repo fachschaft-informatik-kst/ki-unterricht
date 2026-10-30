@@ -34,6 +34,18 @@ Merge nach \`main\` löst die Veröffentlichung über GitHub Pages aus. Es gibt
 Die bisherige Kursseite ist weiter rein statisch; es gibt kein Backend für
 Schülerdaten und keine Cloud-Speicherung von Schülerantworten.
 
+## Glossar für beide Klassen
+
+Unter **«Glossar bearbeiten»** lässt sich die zentrale Datei `kursseiten/glossar.json`
+über strukturierte Felder ohne JSON-Kenntnisse bearbeiten. Die Erklärungen für
+**1. Kurzgymnasium** und **4. Kurzgymnasium** bleiben getrennt; Fachbegriff,
+Beispiel, Leitfrage und aufklappbare Kurzantwort sind aktuell gemeinsam. Die
+Vorschau lässt sich zwischen blauem Basis-Kurs und grünem vertieftem Kurs
+umschalten. Neue Begriffe erhalten eine dauerhafte ID, bestehende IDs können
+wegen der Kursverlinkungen nicht gelöscht werden. Änderungen werden wie Kapitel
+vorgemerkt und als PR eingereicht. Die Worker-Validierung schützt die gemeinsame
+JSON-Datenstruktur auch bei direkten API-Aufrufen.
+
 ## Einmalige Einrichtung des GitHub-Logins (erforderlich)
 
 **WICHTIG:** Die Anwendung ist zwar im Repository eingebaut, die Anmeldung kann

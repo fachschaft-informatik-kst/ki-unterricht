@@ -50,7 +50,7 @@ try{
     return new Response("export const ok = true;",{status:200,headers:{"Content-Type":"text/javascript"}});
   };
   for(const [path,mime] of [["/admin.js","text/javascript"],["/markdown-it.min.js","text/javascript"],["/plan-editor.js","text/javascript"],
-      ["/course-model.js","text/javascript"],["/course-rules.json","application/json"]]){
+      ["/course-model.js","text/javascript"],["/glossary-model.js","text/javascript"],["/course-rules.json","application/json"]]){
     const result=await route(path);
     assert.equal(result.status,200,"Worker route missing: "+path);
     assert.match(result.headers.get("Content-Type"),new RegExp(mime));
@@ -93,7 +93,8 @@ assert.match(wrongRepo.reason,/Repository/);
 // Exercise the actual publisher against an isolated GitHub API contract.
 const manifest=JSON.parse(readFileSync(new URL("../kursseiten/manifest.json",import.meta.url)));
 const basisManifest=JSON.parse(readFileSync(new URL("../kursseiten/basis-manifest.json",import.meta.url)));
-const sources=new Map([["kursseiten/manifest.json",JSON.stringify(manifest)],["kursseiten/basis-manifest.json",JSON.stringify(basisManifest)]]);
+const sources=new Map([["kursseiten/manifest.json",JSON.stringify(manifest)],["kursseiten/basis-manifest.json",JSON.stringify(basisManifest)],
+  ["kursseiten/glossar.json",readFileSync(new URL("../kursseiten/glossar.json",import.meta.url),"utf8")]]);
 for(const section of [...manifest.sections,...basisManifest.sections].filter(s=>s.teaching)){
   const prefix="kursseiten/"+section.id+"/";
   for(const name of readdirSync(new URL("../"+prefix,import.meta.url))){
@@ -161,6 +162,22 @@ try{
   assert.match((await rejected.json()).error,/Lektions-IDs/);
   assert.equal((await submit(changes.filter(c=>!c.path.endsWith("materialien.md")))).status,400);
   assert.equal(writes.length,0,"Invalid courses and conflicts must never create Git objects");
+  // Glossary updates use the same atomic PR workflow. Existing deep-link IDs are protected.
+  const glossary=JSON.parse(sources.get("kursseiten/glossar.json"));
+  const glossaryChanges=doc=>[{path:"kursseiten/glossar.json",expectedSha:"a".repeat(40),content:JSON.stringify(doc)}];
+  const edited=structuredClone(glossary);
+  edited.begriffe[0].basis="Einfache Unterrichtserklärung für die 1. Klasse.";
+  edited.begriffe[0].vertieft="Ausführliche technische Erklärung für die 4. Klasse.";
+  assert.equal((await submit(glossaryChanges(edited))).status,201);
+  assert.equal(writes.find(w=>w.path.endsWith("/git/trees")).body.tree[0].path,"kursseiten/glossar.json");
+  writes.length=0;
+  const removed=structuredClone(glossary);removed.begriffe.shift();
+  const blocked=await submit(glossaryChanges(removed));
+  assert.equal(blocked.status,400);
+  assert.match((await blocked.json()).error,/Glossar-IDs/);
+  const invalid=structuredClone(glossary);invalid.begriffe[0].basis=invalid.begriffe[0].vertieft;
+  assert.equal((await submit(glossaryChanges(invalid))).status,400);
+  assert.equal(writes.length,0,"Invalid glossary edits must not write to GitHub");
 }finally{globalThis.fetch=priorFetch;}
 // OAuth flow is intentionally not fully simulated: no GitHub credentials in CI.
 console.log("PASS admin: protected endpoints, OAuth PKCE, app permissions, atomic course PR, stable IDs and conflict protection");

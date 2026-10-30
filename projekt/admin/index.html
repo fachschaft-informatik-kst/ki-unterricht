@@ -27,7 +27,7 @@
       <label for="courseSelect">Kurs auswählen</label><select id="courseSelect" aria-label="Kurs auswählen"><option value="vertiefung">4. Kurzgymnasium · KI vertiefen</option><option value="basis">1. Kurzgymnasium · KI entdecken</option></select><details class="sidebar-details"><summary>Unterrichtsreihenfolge anpassen</summary><p class="small">Doppellektionen am Griff ziehen. IDs bleiben erhalten.</p><div id="lessonOrder" class="order-list" aria-label="Doppellektionen sortieren"></div></details><label for="section">Kapitel eines Bereichs auswählen</label>
       <select id="section"></select>
       <p class="small">Kapitel auswählen oder am Griff verschieben.</p><nav id="chapters" class="chapter-list" aria-label="Unterkapitel sortieren"></nav>
-      <button id="create" type="button" class="button full">+ Unterkapitel</button><div class="sidebar-actions"><button id="editPlan" type="button" class="button">AVIVA-Plan</button><button id="editMaterials" type="button" class="button">Materialien</button></div><details class="sidebar-details"><summary>Neue Doppellektion</summary><button id="createLesson" type="button" class="button full">+ Neuer Bereich</button><button id="createLessonHere" type="button" class="button full">+ In diesem Bereich</button></details><details class="sidebar-details"><summary>Jupyter-Notebooks bearbeiten</summary><p class="small">Notebooks können in beiden Kursen verwendet werden. Änderungen an einer gemeinsamen Datei betreffen beide Kurse.</p><nav id="notebooks" class="chapter-list" aria-label="Jupyter-Notebooks"></nav></details>
+      <button id="create" type="button" class="button full">+ Unterkapitel</button><div class="sidebar-actions"><button id="editPlan" type="button" class="button">AVIVA-Plan</button><button id="editMaterials" type="button" class="button">Materialien</button></div><button id="editGlossary" type="button" class="button full glossary-sidebar-button">✎ Glossar bearbeiten <small>1. und 4. Klasse</small></button><details class="sidebar-details"><summary>Neue Doppellektion</summary><button id="createLesson" type="button" class="button full">+ Neuer Bereich</button><button id="createLessonHere" type="button" class="button full">+ In diesem Bereich</button></details><details class="sidebar-details"><summary>Jupyter-Notebooks bearbeiten</summary><p class="small">Notebooks können in beiden Kursen verwendet werden. Änderungen an einer gemeinsamen Datei betreffen beide Kurse.</p><nav id="notebooks" class="chapter-list" aria-label="Jupyter-Notebooks"></nav></details>
       <p class="small">Änderungen an der Reihenfolge werden für den nächsten Pull Request vorgemerkt. Die sichtbaren Kursnummern entstehen beim Build.</p>
     </aside>
     <section class="editor">
@@ -69,6 +69,32 @@
         <h3>AVIVA-Ablauf</h3>
         <p id="planTotal" role="status"></p>
         <div id="planPhases"></div>
+      </section>
+      <section id="glossaryEditor" class="glossary-editor" hidden>
+        <div class="glossary-intro"><h2>Gemeinsames Glossar bearbeiten</h2><p>Die <strong>Definitionen sind nach Klasse getrennt</strong>: einfach für die 1. Klasse, vertieft für die 4. Klasse. Begriff, Beispiel, Leitfrage und Kurzantwort gelten für beide Klassen. Alle Änderungen werden gemeinsam als ein Pull Request vorgemerkt.</p></div>
+        <div class="glossary-edit-grid">
+          <div class="glossary-picker">
+            <label for="glossarySearch">Begriff suchen</label><input id="glossarySearch" type="search" placeholder="z. B. Neuron, Token">
+            <p class="small" id="glossaryCount" role="status"></p>
+            <nav id="glossaryTerms" class="glossary-term-list" aria-label="Glossarbegriffe"></nav>
+            <button id="glossaryAdd" type="button" class="button full">+ Begriff hinzufügen</button>
+          </div>
+          <div class="glossary-fields">
+            <h3 id="glossaryCurrent">Begriff auswählen</h3><p class="small" id="glossaryId"></p>
+            <label for="glossaryName">Begriff</label><input id="glossaryName" type="text" maxlength="100">
+            <label for="glossaryGroup">Themenbereich</label><select id="glossaryGroup"></select>
+            <div class="glossary-level-grid">
+              <div class="glossary-level glossary-level-basis"><h4>1. Klasse <span>einfach</span></h4><label for="glossaryBasis">Erklärung für das 1. Kurzgymnasium</label><textarea id="glossaryBasis" rows="5"></textarea></div>
+              <div class="glossary-level glossary-level-advanced"><h4>4. Klasse <span>vertieft</span></h4><label for="glossaryVertieft">Erklärung für das 4. Kurzgymnasium</label><textarea id="glossaryVertieft" rows="5"></textarea></div>
+            </div>
+            <div class="glossary-shared"><h4>Für beide Klassen gemeinsam</h4>
+              <label for="glossaryExample">Beispiel</label><textarea id="glossaryExample" rows="2"></textarea>
+              <label for="glossaryQuestion">Leitfrage</label><textarea id="glossaryQuestion" rows="2"></textarea>
+              <label for="glossaryAnswer">Kurze, aufklappbare Antwort <span class="small">(max. 180 Zeichen)</span></label><textarea id="glossaryAnswer" maxlength="180" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="glossary-preview-switch"><label for="glossaryPreviewLevel">Vorschau der Kursseite</label><select id="glossaryPreviewLevel"><option value="basis">1. Kurzgymnasium · blau</option><option value="vertiefung">4. Kurzgymnasium · grün</option></select><p class="small">Die Vorschau zeigt den ausgewählten Begriff im echten Kurslayout. Die Antwort lässt sich darin öffnen.</p></div>
       </section>
       <section id="notebookEditor" hidden><h2>Jupyter-Notebook · ausführbare Umgebung</h2><p class="helper" id="notebookInfo"></p><p id="notebookRuntimeStatus" role="status">JupyterLite wird gestartet …</p><div class="notebook-runtime-actions"><button type="button" id="notebookSnapshot" class="button primary">Notebook-Stand übernehmen</button><button type="button" id="notebookReload" class="button light">Notebook neu öffnen</button></div><iframe id="notebookRuntime" title="Ausführbares JupyterLite-Notebook" referrerpolicy="no-referrer" allow="clipboard-read; clipboard-write"></iframe></section><label for="source" class="field-title" id="sourceLabel">Kapitelquelltext</label>
       <div class="code-editor" id="codeEditor"><pre id="sourceHighlight" class="source-highlight" aria-hidden="true"></pre><textarea id="source" spellcheck="false" rows="20" placeholder="Wähle links ein Kapitel aus." aria-label="Kapitelquelltext mit Syntaxhervorhebung"></textarea></div>

@@ -1,11 +1,12 @@
 import {createPlanner} from "./plan-editor.js";
 import {lessonTemplate} from "./course-model.js";
+import {validateGlossary,GLOSSARY_PATH} from "./glossary-model.js";
 // The public Pages origin has no authenticated API. Send editors to the Worker origin.
 const pagesOrigin = location.hostname === "fachschaft-informatik-kst.github.io";
 if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/" + location.search + location.hash);
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
-const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung"};
+const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
 
@@ -223,7 +224,8 @@ function renderLessonOrder(){
 let navigationRevision=0;
 function useFile(path,sha,content,original=content){
   state.current={path,sha,original};
-  $("path").textContent=path;$("heading").textContent=filename(path);
+  $("path").textContent=path;$("heading").textContent=path===GLOSSARY_PATH?"KI-Glossar bearbeiten":filename(path);
+  const isGlossary=path===GLOSSARY_PATH;
   const isPlan=path.endsWith("/planung.json");
   const isNotebook=notebookPath(path);
   $("source").value=content;
@@ -231,14 +233,16 @@ function useFile(path,sha,content,original=content){
   const isChapter=/\/[0-9]{3}-[^/]+\.md$/.test(path);
   $("move").disabled=!sha||!isChapter;$("archive").disabled=!sha||!isChapter;
   for(const id of ["toolbar","editorHelper"])
-    $(id).hidden=isPlan||isNotebook;
-  $("sourceLabel").hidden=isPlan||isNotebook;
+    $(id).hidden=isPlan||isNotebook||isGlossary;
+  $("sourceLabel").hidden=isPlan||isNotebook||isGlossary;
+  $("glossaryEditor").hidden=!isGlossary;
   $("notebookEditor").hidden=!isNotebook;
   if(isNotebook)openRuntimeNotebook(content,path);
   $("previewButton").hidden=isNotebook;
   $("previewHeading").hidden=isNotebook;
   $("preview").hidden=isNotebook;
-  $("codeEditor").hidden=isPlan||isNotebook;
+  $("codeEditor").hidden=isPlan||isNotebook||isGlossary;
+  if(isGlossary)openGlossaryControls(content);
   if(isPlan)planner.open(content,$("section").value);
   else planner.close();
   // Force a new document for every navigation, including plans and materials.
@@ -305,6 +309,7 @@ const COURSE_PREVIEW_CSS = "\n:root{--ink:#182b31;--muted:#52656a;--paper:#f5f4e
 const COURSE_PREVIEW_CHROME = "\n<a class=\"skip\" href=\"#inhalt\">Zum Inhalt</a>\n<aside class=\"sidebar\"><a class=\"brand\" href=\"#start\"><span aria-hidden=\"true\" class=\"mark\"><svg viewBox=\"0 0 26 26\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1.4\" stroke-linecap=\"round\"><path d=\"M4 6l9 -2M4 6l9 8M4 6l9 15M4 20l9 -16M4 20l9 -6M4 20l9 1M13 4l9 9M13 14l9 -1M13 21l9 -8\" opacity=\".7\"/><g fill=\"#fff\" stroke=\"none\"><circle cx=\"4\" cy=\"6\" r=\"2.2\"/><circle cx=\"4\" cy=\"20\" r=\"2.2\"/><circle cx=\"13\" cy=\"4\" r=\"2.2\"/><circle cx=\"13\" cy=\"14\" r=\"2.2\"/><circle cx=\"13\" cy=\"21\" r=\"2.2\"/><circle cx=\"22\" cy=\"13\" r=\"2.6\"/></g></svg></span><span class=\"brand-text\">Künstliche<br/>Intelligenz<small>Informatik</small></span></a>\n<nav aria-label=\"Unterricht\" class=\"nav\"><!-- NAVIGATION --></nav><div class=\"sidebar-bottom\"><a href=\"../kurse.html\">Kursauswahl</a><a href=\"#journal\">✎ Unser Journal</a><a href=\"#sicherung\">Notizen &amp; Projekt</a><p class=\"status\" id=\"portal-save-status\" role=\"status\">Nur in diesem Browser gespeichert.</p></div></aside>\n<div class=\"shell\"><main id=\"inhalt\"><div class=\"crumb\"><span><img alt=\"Logo KST\" class=\"school-logo\" height=\"22\" src=\"grafiken/kst_logo.png\" width=\"44\"/>Kantonsschule Stadelhofen</span><span>Informatik</span><span>Künstliche Intelligenz</span></div>\n";
 const BASIS_PREVIEW_CSS = "/* Same KST course layout; blue accent distinguishes the 1st-year course. */\n:root{--accent:#3653a3;--soft:#e9eefc;--paper:#f3f5fb;--line:#d9e0ef;--muted:#46536a}\n.sidebar .mark{background:var(--accent)}\n.course-card:hover,.basis-language-option:hover{border-color:var(--accent)}\n.basis-answer{border-color:var(--line)}\n.basis-answer textarea,.basis-language-lab select{border-color:#9daeca}\n.basis-language-option:hover,.basis-language-option:focus-visible{background:var(--soft)}\n.basis-language-result{background:var(--soft)}\n.concept-figure img{display:block;width:100%;max-width:700px;height:auto;margin-inline:auto}\n.neuron-figure img{max-width:900px}\n.school-logo{display:inline-block;vertical-align:middle;object-fit:contain}\n.crumb>span:first-child{display:inline-flex;gap:9px;align-items:center}\n.basis-network-diagram{display:block;width:100%;max-width:760px;height:auto;margin:auto}\n.basis-network-lab{background:white;border:1px solid var(--line);border-radius:12px;padding:17px;margin:17px 0}\n.basis-network-controls{display:flex;gap:15px;flex-wrap:wrap}\n.basis-network-controls label{background:var(--soft);border:1px solid var(--line);padding:12px 18px;border-radius:9px;cursor:pointer;font-weight:650}\n.basis-network-controls input{accent-color:var(--accent);width:17px;height:17px}\n.basis-network-lab td[data-selected=\"true\"]{background:var(--soft);font-weight:700}\n.basis-hint{background:white}\n.memory-board{max-width:100%}\n.basis-memory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:15px 0}\n.basis-memory-grid button{background:var(--soft);padding:16px 8px;border:1px solid var(--line);border-radius:8px;min-height:72px;font-weight:650;overflow-wrap:anywhere}\n.basis-memory-grid button[data-matched=\"true\"]{background:#dbe7ff;color:#244a8c}\n@media(max-width:720px){.basis-memory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.basis-network-lab{padding:12px}.basis-network-diagram{min-width:0}.basis-network-lab table{font-size:12px}}\n\n/* The base typography and portal components come from the shared project styles. */\n.basis-answer{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin:20px 0}\n.basis-answer label{display:block;font-weight:650;font-size:14px;margin-bottom:9px}\n.basis-answer textarea{display:block;width:100%;min-height:100px;resize:vertical;padding:12px;border:1px solid #9daeca;border-radius:9px}\n.basis-neuron{background:#fff;border:1px solid var(--line);padding:20px;border-radius:12px;margin:24px 0}\n.basis-neuron>label{display:grid;grid-template-columns:minmax(140px,1fr) minmax(80px,2fr) 35px;gap:10px;align-items:center;margin:8px 0}\n.basis-neuron input{width:100%;accent-color:var(--accent)}\n.basis-neuron output{text-align:right;font-variant-numeric:tabular-nums}\n.basis-neuron table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}\n.basis-neuron th,.basis-neuron td{padding:9px 10px;text-align:center;border-bottom:1px solid var(--line)}\n.basis-neuron td[data-on=\"1\"]{color:var(--accent);font-weight:750}\n.basis-hint{padding:14px;border:1px solid var(--line);border-radius:10px;margin:18px 0}\n.course-grid{margin-bottom:40px}.course-card{min-height:155px}\n.section-label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:13px}\n.section{padding-top:24px}\n.section .lead{max-width:780px;font-size:18px;color:var(--muted)}\n.section details.kapitel{max-width:100%;overflow-wrap:anywhere}\n.crumb{margin-bottom:30px}\n.sidebar-bottom .btn{margin-top:12px;text-align:left;font-size:11px}\n.has-js .basis-view-hidden{display:none!important}\n.nav-sub{display:grid;gap:1px;padding-left:14px;margin-bottom:8px}.nav-sub a{font-size:12px;line-height:1.35;padding:6px 8px}.nav-sub span{margin-right:4px}\n@media(max-width:720px){.basis-neuron>label{grid-template-columns:1fr 50px}.basis-neuron input{grid-column:1 / 2}.basis-neuron output{grid-column:2;grid-row:2}.basis-neuron table{font-size:12px}}\n@media print{.has-js .basis-view-hidden{display:block!important}.sidebar-bottom button{display:none}}\n\n.basis-language-lab{border:1px solid var(--line);background:#fff;border-radius:12px;padding:20px;margin:20px 0;max-width:100%;overflow:hidden}\n.basis-language-lab>label{display:block;font-weight:650;font-size:14px;margin-bottom:6px}\n.basis-language-lab select{display:block;max-width:100%;width:100%;padding:9px;border:1px solid #9daeca;border-radius:8px;font:inherit}\n.basis-language-prompt{margin:18px 0;font-weight:700;font-size:1.1rem;overflow-wrap:anywhere}\n.basis-language-options{display:grid;gap:9px}\n.basis-language-option{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;text-align:left;width:100%;padding:10px 12px;border:1px solid #d9e0ef;border-radius:8px;background:#f7f9ff;font:inherit}\n.basis-language-option:hover,.basis-language-option:focus-visible{border-color:var(--accent);background:#e9eefc}\n.basis-language-option>span:first-child{overflow-wrap:anywhere}\n.basis-language-option strong{font-size:.9rem;font-variant-numeric:tabular-nums}\n.basis-language-bar{grid-column:1/-1;display:block;height:7px;border-radius:99px;background:#d9e3f7;overflow:hidden}\n.basis-language-bar>span{display:block;height:100%;border-radius:99px;background:var(--accent)}\n.basis-language-result{padding:11px 13px;background:#e9eefc;border-radius:8px;margin:16px 0 0;overflow-wrap:anywhere}\n\n/* An active lesson is the only one with an expanded chapter list. */\n.nav-sub[hidden]{display:none!important}\n\n/* First-year colour layer: override the shared fourth-year green theme. */\nbody .sidebar .brand .mark{background:linear-gradient(145deg,#5079d7,#253f91)}\nbody .course-card::before{background:linear-gradient(90deg,var(--accent),#89a8f3)}\nbody .nav a[aria-current],body .nav a:hover{background:var(--soft);color:var(--accent)}\nbody .sidebar .brand,body .sidebar .brand:hover{color:var(--ink)}\nbody .basis-language-option:hover,body .basis-language-option:focus-visible{background:var(--soft)}\nbody .basis-language-result{background:var(--soft)}\nbody .basis-memory-grid button[data-matched=\"true\"]{background:#dbe7ff;color:#244a8c}\nbody .wer-t{background:#e6edff}\nbody tr.wer-t td.wer{color:#3156a0}\nbody .btn.primary{background:var(--accent);border-color:var(--accent)}\nbody input[type=\"checkbox\"],body input[type=\"radio\"]{accent-color:var(--accent)}\n\n/* Match the fourth-year mobile navigation: no nested chapters in the compact header. */\n@media(max-width:720px){body .sidebar .nav-sub{display:none!important}}\n\n\n/* Complete first-year palette: the shared theme also contains hard-coded\n   green gradients, a green illustration and pale-green card backgrounds. */\nbody{\n  background:radial-gradient(1200px 600px at 85% -10%,#dfe9ff 0,transparent 60%) no-repeat fixed,var(--paper);\n  color:#1e2d43;\n}\nbody::before{background-image:url(grafiken/netz_hintergrund_blau.svg);}\nbody .sidebar{background:linear-gradient(180deg,#fff 0,#f5f8ff 100%);}\nbody .course-card:hover{box-shadow:0 14px 34px #253f9118;}\nbody .lab-head{background:#e9eefc;}\nbody .concept,body .concept div{border-color:#7893d1;background:#e7edff;}\nbody .concept div{background:#d8e4ff;}\nbody .concept div div{background:#c6d8ff;}\nbody .group-box.train{background:#edf2ff;border-color:#acbde6;}\nbody .memory-card.matched{background:#edf2ff;}\nbody .variant{background:#f8faff;}\nbody .wer-t{background:#e6edff;}\nbody .lesson-recap{border-left-color:var(--accent);}\nbody .footer{border-top:1px solid var(--line);margin-top:25px;}\nbody .footer .detail-body a{overflow-wrap:anywhere;}\nbody .footer .detail-body>p:last-child a{margin-right:18px;}\n.basis-transfer{margin:34px 0;padding:26px;background:#e9eefc;border-top:5px solid var(--accent);border-radius:0 0 12px 12px;}\n.basis-transfer h2{font-size:clamp(1.5rem,2.4vw,2rem);}\n.basis-transfer-actions{display:grid;gap:14px;max-width:680px;}\n.basis-backup-controls{display:grid;gap:14px;}\n.basis-backup-controls label{display:grid;gap:6px;font-size:14px;font-weight:650;}\n.basis-backup-controls input[type=\"file\"]{font-weight:400;background:white;border:1px solid var(--line);border-radius:8px;padding:10px;width:100%;}\n.basis-backup-controls button{justify-self:start;}\n@media(max-width:720px){\n  .basis-transfer{padding:19px 16px;}\n  .basis-backup-controls button{width:100%;}\n}\n\n\n/* Consistent figure sizes with the 4th-year course, especially in DL 1–4.\n   The original portal defines 700px for diagrams and 900px for the biological\n   neuron. Don't override that with max-width:100%, which made both larger. */\nbody .concept-figure img{display:block;width:100%;max-width:700px;height:auto;margin-inline:auto}\nbody .neuron-figure img{max-width:900px}\nbody .learning-system-figure img{max-height:300px}\nbody .concept-figure svg{max-width:700px;height:auto;margin-inline:auto}\n\n/* Shared table layout, blue first-year palette instead of inherited sage. */\nbody thead th,body .typen thead th,body .phase-table thead th{\n  background:#e6edff;\n  color:#284b8e;\n  border-bottom-color:#c3d2f0;\n}\nbody .typen tbody th{background:var(--soft);color:#294778}\nbody .table-scroll,body .table-wrap{border-color:#c6d2e7}\nbody .phase-table tr.wer-l td{background:#e7eeff}\nbody .phase-table tr.wer-t td{background:#e9f0ff}\nbody .phase-table tr.wer-k td{background:#f0edff}\nbody .marke.daten{background:#e3ecff;color:#284b8e}\nbody .marke.regeln{background:#eff3fb;color:#3c557d}\nbody input[type=text],body select,body textarea{border-color:#9daeca}\nbody .lab-panel{border-color:#b5c5e8}\nbody .lab-head{background:#e6edff;color:#284b8e}\nbody .lab-loading:not([hidden]){background:#f7faff}\nbody .lab-loading-spinner{border-color:#d1dffa;border-top-color:var(--accent)}\n@media(max-width:720px){body .concept-figure img{max-width:100%}}\n";
 const BASIS_PREVIEW_CHROME = "\n<a class=\"skip\" href=\"#inhalt\">Zum Inhalt</a>\n<aside class=\"sidebar\"><a class=\"brand\" href=\"#basis-start\"><span aria-hidden=\"true\" class=\"mark\"><svg viewBox=\"0 0 26 26\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1.4\" stroke-linecap=\"round\"><path d=\"M4 6l9 -2M4 6l9 8M4 6l9 15M4 20l9 -16M4 20l9 -6M4 20l9 1M13 4l9 9M13 14l9 -1M13 21l9 -8\" opacity=\".7\"/><g fill=\"#fff\" stroke=\"none\"><circle cx=\"4\" cy=\"6\" r=\"2.2\"/><circle cx=\"4\" cy=\"20\" r=\"2.2\"/><circle cx=\"13\" cy=\"4\" r=\"2.2\"/><circle cx=\"13\" cy=\"14\" r=\"2.2\"/><circle cx=\"13\" cy=\"21\" r=\"2.2\"/><circle cx=\"22\" cy=\"13\" r=\"2.6\"/></g></svg></span><span class=\"brand-text\">Künstliche<br/>Intelligenz<small>Informatik</small></span></a>\n<nav class=\"nav\" aria-label=\"Unterricht\">\n<!-- NAVIGATION -->\n</nav>\n<div class=\"sidebar-bottom\"><a href=\"../kurse.html\">Kursauswahl</a><a href=\"#basis-sicherung\">Notizen &amp; Projekt</a><p class=\"status\" id=\"basis-save-status\" role=\"status\">Nur in diesem Browser gespeichert.</p></div>\n</aside>\n<div class=\"shell\"><main id=\"inhalt\">\n<div class=\"crumb\"><span><img alt=\"Logo KST\" class=\"school-logo\" height=\"22\" src=\"grafiken/kst_logo.png\" width=\"44\"/>Kantonsschule Stadelhofen</span><span>Informatik</span><span>Künstliche Intelligenz</span></div>\n";
+const GLOSSARY_PREVIEW_CSS = "/* KI-Glossar: gleicher Aufbau in beiden Kursen, Farben aus der jeweiligen Palette. */\n.glossary{max-width:1050px}\n.glossary-search-label{display:block;font-weight:700;margin:18px 0 6px}\n.glossary [data-glossary-search]{display:block;width:100%;max-width:580px;min-height:45px;border:1px solid var(--line);border-radius:9px;padding:9px 13px;background:#fff;color:var(--ink)}\n.glossary-group{margin:30px 0}\n.glossary-group h2{font-size:1.6rem;margin-bottom:14px}\n.glossary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}\n.glossary-entry{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px 20px;min-width:0;scroll-margin-top:25px}\n.glossary-entry h3{font-size:1.14rem;color:var(--accent);margin-bottom:9px}\n.glossary-entry p{font-size:14px;line-height:1.6;margin:0 0 9px}\n.glossary-entry p:last-child{margin-bottom:0}\n.glossary-example{padding-top:8px;border-top:1px solid var(--line)}\n\n/* Self-check is one calm panel, not a second accordion card within a card.\n   Override the course-wide details/summary borders, padding and + marker. */\n.glossary-selfcheck{margin-top:15px;padding:14px 16px 8px;background:#f8faf9;background:color-mix(in srgb,var(--soft) 48%,#fff);border:1px solid var(--line);border-radius:12px}\n.glossary-entry .glossary-question{display:grid;gap:4px;margin:0;color:var(--ink);line-height:1.5}\n.glossary-question-label{display:block;font-size:11px;line-height:1.35;font-weight:800;letter-spacing:.085em;text-transform:uppercase;color:var(--accent)}\n.glossary-question-text{font-size:14px;font-weight:550;overflow-wrap:anywhere}\n.glossary-selfcheck>details.glossary-answer{margin:0;border:0;border-radius:0;background:transparent;overflow:visible}\n.glossary-answer>summary{display:flex;align-items:center;gap:10px;box-sizing:border-box;width:100%;min-height:44px;margin:10px 0 0;padding:10px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--accent);font-size:14px;font-weight:700;line-height:1.4;list-style:none;cursor:pointer}\n.glossary-answer>summary::-webkit-details-marker{display:none}\n.glossary-answer>summary::after,.glossary-answer[open]>summary::after{content:none}\n.glossary-answer[open]>summary{border-top:1px solid var(--line);border-bottom:0}\n.glossary-answer>summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:5px}\n.glossary-answer>summary:hover{color:var(--ink)}\n.glossary-answer-hide{display:none}\n.glossary-answer[open] .glossary-answer-show{display:none}\n.glossary-answer[open] .glossary-answer-hide{display:inline}\n.glossary-answer-icon{width:28px;height:28px;margin-left:auto;flex:none;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:white;color:var(--accent)}\n.glossary-answer-icon::before{content:\"\";display:block;width:7px;height:7px;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-2px) rotate(45deg);transition:transform .16s ease}\n.glossary-answer[open] .glossary-answer-icon::before{transform:translateY(2px) rotate(225deg)}\n.glossary-answer>summary:hover .glossary-answer-icon{border-color:var(--accent)}\n.glossary-answer-content{margin:8px 0 6px;padding:11px 13px;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:#fff}\n.glossary-answer-content p{margin:0;color:var(--ink);line-height:1.6;overflow-wrap:anywhere}\n\n.glossary-related{font-size:14px;line-height:1.6;color:var(--muted);margin:12px 0 18px}\n.glossary-related a{color:var(--accent);font-weight:600;text-underline-offset:3px}\na[href^=\"#glossar-\"]:not(.nav a),a[href^=\"#basis-glossar-\"]:not(.nav a){text-decoration-style:dotted;text-underline-offset:4px}\n.glossary-dialog{position:relative;box-sizing:border-box;overflow-y:auto;border:1px solid var(--line);border-radius:16px;width:min(540px,calc(100vw - 24px));max-height:85vh;padding:27px 28px;background:#fff;color:var(--ink);box-shadow:0 18px 55px #182b3140}\n.glossary-dialog::backdrop{background:#182b3180}\n.glossary-dialog .glossary-entry{border:0;padding:0}\n.glossary-dialog .glossary-entry h3{padding-right:46px}\n.glossary-close{position:absolute;top:17px;right:17px;display:grid;place-items:center;border:1px solid var(--line);background:var(--soft);color:var(--accent);font-size:22px;line-height:1;border-radius:9px;width:38px;height:38px;padding:0}\n.glossary-close:hover{border-color:var(--accent)}\n.glossary-close:focus-visible{outline:2px solid var(--accent);outline-offset:3px}\n.glossary-empty{padding:20px;background:#fff;border:1px dashed var(--line);border-radius:12px}\n@media(max-width:720px){.glossary-grid{grid-template-columns:1fr}.glossary-group h2{font-size:1.3rem}.glossary-entry{scroll-margin-top:100px}.glossary-selfcheck{padding:13px 14px 7px}.glossary-dialog{padding:22px 18px}.glossary-close{top:12px;right:12px}}\n@media(prefers-reduced-motion:reduce){.glossary-answer-icon::before{transition:none}}\n@media print{.glossary-dialog{display:none!important}.glossary-entry{break-inside:avoid}.glossary [data-glossary-search]{display:none}}\n";
 // Resolve images just like the built course pages: their URLs are relative to /projekt/,
 // NOT to the Markdown file in /kursseiten/ or to the worker's root.
 function previewAssets(content,baseUrl){
@@ -350,12 +355,107 @@ function chapterFromYaml(source){
     title+'</h2></summary><div class="kapitel-body">'+markdown(source.slice(header[0].length))+
     '</div></details>';
 }
+
+/* The glossary lives in a single versioned JSON file, shared by the two courses.
+   The first-year and fourth-year explanations are intentionally independent. */
+function currentGlossaryTerm(){
+  return state.glossary?.begriffe.find(t=>t.id===state.glossarySelected);
+}
+function glossaryList(){
+  const root=$("glossaryTerms");root.replaceChildren();
+  const q=$("glossarySearch").value.trim().toLocaleLowerCase("de-CH");
+  const terms=state.glossary.begriffe.slice().sort((a,b)=>a.begriff.localeCompare(b.begriff,"de-CH"));
+  const matches=terms.filter(t=>(t.begriff+" "+t.gruppe).toLocaleLowerCase("de-CH").includes(q));
+  $("glossaryCount").textContent=matches.length+" von "+terms.length+" Begriffen";
+  for(const term of matches){
+    const button=document.createElement("button");button.type="button";
+    button.textContent=term.begriff||"(Neuer Begriff)";
+    const group=document.createElement("small");group.textContent=term.gruppe;button.append(group);
+    button.setAttribute("aria-current",String(state.glossarySelected===term.id));
+    button.addEventListener("click",()=>{
+      state.glossarySelected=term.id;
+      glossaryList();glossaryFields();preview();
+    });
+    root.append(button);
+  }
+}
+function glossaryFields(){
+  const term=currentGlossaryTerm();if(!term)return;
+  $("glossaryCurrent").textContent=term.begriff||"Neuer Begriff";
+  $("glossaryId").textContent="Stabile Verknüpfungs-ID: "+term.id+" · wird nicht umbenannt";
+  const mapping={glossaryName:"begriff",glossaryBasis:"basis",glossaryVertieft:"vertieft",
+    glossaryExample:"beispiel",glossaryQuestion:"frage",glossaryAnswer:"antwort"};
+  for(const [id,key] of Object.entries(mapping))$(id).value=term[key];
+  const group=$("glossaryGroup");group.replaceChildren();
+  for(const name of state.glossary.gruppen){
+    const option=document.createElement("option");option.value=name;option.textContent=name;
+    group.append(option);
+  }
+  group.value=term.gruppe;
+}
+function openGlossaryControls(content){
+  state.glossary=validateGlossary(JSON.parse(content));
+  if(!state.glossary.begriffe.some(t=>t.id===state.glossarySelected))
+    state.glossarySelected=state.glossary.begriffe[0].id;
+  $("glossaryPreviewLevel").value=state.course==="basis"?"basis":"vertiefung";
+  $("glossarySearch").value="";
+  glossaryList();glossaryFields();
+}
+function glossaryChange(key,value){
+  const term=currentGlossaryTerm();if(!term)return;
+  term[key]=value;
+  $("source").value=JSON.stringify(state.glossary,null,2)+"\n";
+  if(key==="begriff"||key==="gruppe"){
+    $("glossaryCurrent").textContent=term.begriff||"Neuer Begriff";
+    glossaryList();
+  }
+  preview();
+}
+function glossaryAdd(){
+  const name=prompt("Neuer Glossarbegriff:");
+  if(name===null)return;
+  if(name.trim().length<2){status("Der Begriff muss mindestens zwei Zeichen haben.",true);return;}
+  const id=slug(name);
+  if(!/^[a-z][a-z0-9-]{0,69}$/.test(id)||state.glossary.begriffe.some(t=>t.id===id)){
+    status("Ungültige oder bereits vorhandene Glossar-ID. Bitte einen anderen Begriff verwenden.",true);return;
+  }
+  state.glossary.begriffe.push({id,gruppe:state.glossary.gruppen[0],begriff:name.trim(),
+    basis:"",vertieft:"",beispiel:"",frage:"",antwort:""});
+  state.glossarySelected=id;
+  $("glossarySearch").value="";
+  $("source").value=JSON.stringify(state.glossary,null,2)+"\n";
+  glossaryList();glossaryFields();preview();$("glossaryBasis").focus();
+  status("Neuer Begriff angelegt. Bitte beide Erklärungen, Beispiel, Leitfrage und Antwort ergänzen.");
+}
+function glossaryPreviewHtml(level){
+  const t=currentGlossaryTerm();if(!t)return "";
+  const prefix=level==="basis"?"basis-glossar":"glossar";
+  const e=escapeHtml;
+  return '<span class="section-label">Nachschlagen · '+(level==="basis"?"1. Kurzgymnasium":"beide Kurse")+'</span>'+
+    '<h1>KI-Glossar</h1><div class="glossary"><div class="glossary-group"><h2>'+e(t.gruppe)+'</h2><div class="glossary-grid">'+
+    '<article class="glossary-entry" id="'+prefix+'-'+e(t.id)+'" data-glossary-id="'+e(t.id)+'">'+
+    '<h3>'+e(t.begriff)+'</h3><p>'+e(t[level==="basis"?"basis":"vertieft"])+'</p>'+
+    '<p class="glossary-example"><strong>Beispiel:</strong> '+e(t.beispiel)+'</p>'+
+    '<div class="glossary-selfcheck">'+
+    '<p class="glossary-question"><span class="glossary-question-label">Leitfrage</span>'+
+    '<span class="glossary-question-text">'+e(t.frage)+'</span></p>'+
+    '<details class="glossary-answer"><summary>'+
+    '<span class="glossary-answer-show">Antwort anzeigen</span>'+
+    '<span class="glossary-answer-hide">Antwort verbergen</span>'+
+    '<span class="glossary-answer-icon" aria-hidden="true"></span></summary>'+
+    '<div class="glossary-answer-content"><p>'+e(t.antwort)+'</p></div>'+
+    '</details></div></article></div></div></div>';
+}
+
 function preview(){
-  const isBasis=state.course==="basis";
-  document.body.classList.toggle("course-basis",isBasis);
+  const isGlossary=state.current?.path===GLOSSARY_PATH;
+  const isBasis=isGlossary?$("glossaryPreviewLevel").value==="basis":state.course==="basis";
+  document.body.classList.toggle("course-basis",state.course==="basis");
   const previewBase=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
-  let content=$("source").value;
-  if(state.current?.path.endsWith("/planung.json")){
+  let content=isGlossary?glossaryPreviewHtml(isBasis?"basis":"vertiefung"):$("source").value;
+  if(isGlossary){
+    // Same semantic elements and stylesheet as scripts/glossary.py on the published pages.
+  }else if(state.current?.path.endsWith("/planung.json")){
     const plan=JSON.parse(content);
     content="<h2>Unterrichtsplan</h2>"+plan.lessons.map(l=>"<article class=\"card\"><h3>"+escapeHtml(l.title)+"</h3><p>"+escapeHtml(l.goal)+"</p>"+l.phases.map(p=>"<p><strong>"+escapeHtml(p.phase)+" · "+p.minutes+" min</strong> – "+escapeHtml(p.titel)+"</p>").join("")+"</article>").join("");
   }else if(content.includes("<!-- MD:START -->"))
@@ -376,9 +476,9 @@ function preview(){
   // Match the actual rendered /projekt/index.html DOM hierarchy. The course's
   // main and section layout rules must not be replaced with generic editor styles.
   // Keep the preview inert: no allow-scripts and no allow-same-origin.
-  const section=state.current?.path.split("/")[1]||(isBasis?"basis-start":"einstieg");
+  const section=isGlossary?(isBasis?"basis-glossar":"glossar"):(state.current?.path.split("/")[1]||(isBasis?"basis-start":"einstieg"));
   const safeSection=/^[a-z0-9-]+$/.test(section)?section:(isBasis?"basis-start":"einstieg");
-  const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+"</style>";
+  const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+(isGlossary?GLOSSARY_PREVIEW_CSS:"")+"</style>";
   // The Worker CSP intentionally forbids <base> (base-uri 'none'). Inline chrome
   // assets must therefore be absolute, just like images from edited chapters.
   const definitions=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content).sections;
@@ -428,6 +528,14 @@ function stage(){
     planner.validate(content);
   }
   if(notebookPath(c.path))validateNotebook(JSON.parse(content));
+  if(c.path===GLOSSARY_PATH){
+    const doc=validateGlossary(JSON.parse(content));
+    if(c.sha){
+      const old=validateGlossary(JSON.parse(c.original));
+      const nextIds=new Set(doc.begriffe.map(t=>t.id));
+      if(old.begriffe.some(t=>!nextIds.has(t.id)))throw Error("Bestehende Glossar-IDs dürfen nicht gelöscht werden.");
+    }
+  }
   if(c.sha){
     const selector=/data-(?:answer|journal|score|skill|check|lab)\s*=\s*["']([^"']+)["']/g;
     const before=[...c.original.matchAll(selector)].map(x=>x[0]);
@@ -757,6 +865,14 @@ $("createLesson").addEventListener("click",addLesson);
 $("createLessonHere").addEventListener("click",addLessonToCurrentSection);
 $("editPlan").addEventListener("click",editPlan);
 $("editMaterials").addEventListener("click",editMaterials);
+$("editGlossary").addEventListener("click",()=>load(GLOSSARY_PATH));
+$("glossarySearch").addEventListener("input",()=>{if(state.glossary)glossaryList();});
+$("glossaryAdd").addEventListener("click",glossaryAdd);
+$("glossaryPreviewLevel").addEventListener("change",()=>{if(state.current?.path===GLOSSARY_PATH)preview();});
+for(const [id,key] of Object.entries({glossaryName:"begriff",glossaryBasis:"basis",
+  glossaryVertieft:"vertieft",glossaryExample:"beispiel",glossaryQuestion:"frage",glossaryAnswer:"antwort"}))
+  $(id).addEventListener("input",event=>glossaryChange(key,event.target.value));
+$("glossaryGroup").addEventListener("change",event=>glossaryChange("gruppe",event.target.value));
 $("section").addEventListener("change",chapterList);
 $("courseSelect").addEventListener("change",async()=>{
   const selected=$("courseSelect").value;

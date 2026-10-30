@@ -15,6 +15,7 @@ PORTAL_CSS = ROOT / "projekt/portal.css"
 BASIS_PAGE = ROOT / "basis/index.template.html"
 BASIS_CSS = ROOT / "basis/basis.css"
 ADMIN = ROOT / "projekt/admin/admin.js"
+GLOSSARY_CSS = ROOT / "projekt/glossar.css"
 
 
 def values():
@@ -39,6 +40,7 @@ def values():
         # Identical order to build_basis.py: theme.css + portal.css + basis.css.
         "BASIS_PREVIEW_CSS": BASIS_CSS.read_text(encoding="utf-8"),
         "BASIS_PREVIEW_CHROME": basis_chrome,
+        "GLOSSARY_PREVIEW_CSS": GLOSSARY_CSS.read_text(encoding="utf-8"),
     }
 
 

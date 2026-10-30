@@ -1,4 +1,5 @@
 import {validatePlan,validateManifest} from "../../shared/course-model.js";
+import {validateGlossary,GLOSSARY_PATH} from "../../shared/glossary-model.js";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
 const encoder = new TextEncoder();
@@ -75,7 +76,7 @@ async function appInstallationStatus(token,request=github){
 }
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json")||
+  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json"||path===GLOSSARY_PATH)||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
   /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
@@ -89,9 +90,10 @@ function validate(changes){
     if(c.delete===true){
       if(c.expectedSha===null||c.content!==undefined||!/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(c.path))throw Error("Nur vorhandene Kapitel können verschoben werden.");
     }else if(c.path.endsWith(".json")){
-      if(typeof c.content!=="string"||c.content.length>200000)throw Error("Unterrichtsplan zu gross.");
+      if(typeof c.content!=="string"||c.content.length>200000)throw Error("JSON-Datei zu gross.");
       let plan;try{plan=JSON.parse(c.content);}catch{throw Error("Ungültiger Unterrichtsplan.");}
-      if(c.path.endsWith("/planung.json"))validatePlan(plan);
+      if(c.path===GLOSSARY_PATH)validateGlossary(plan);
+      else if(c.path.endsWith("/planung.json"))validatePlan(plan);
       else validateManifest(plan);
     }else if(c.path.endsWith(".ipynb")){
       if(typeof c.content!=="string"||encoder.encode(c.content).length>700000)throw Error("Notebook zu gross.");
@@ -144,6 +146,13 @@ async function publish(req,token){
   };
   const proposed=async path=>changes.has(path)?JSON.parse(changes.get(path).content):readJson(path);
   try{
+    if(changes.has(GLOSSARY_PATH)){
+      const oldGlossary=validateGlossary(await readJson(GLOSSARY_PATH));
+      const nextGlossary=validateGlossary(await proposed(GLOSSARY_PATH));
+      const nextIds=new Set(nextGlossary.begriffe.map(t=>t.id));
+      if(oldGlossary.begriffe.some(t=>!nextIds.has(t.id)))
+        throw Error("Bestehende Glossar-IDs dürfen nicht gelöscht werden, weil Kursseiten darauf verlinken.");
+    }
     for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json"]){
     const previous=await readJson(manifestPath);
     const manifest=await proposed(manifestPath);
@@ -227,7 +236,7 @@ async function auth(req,env,url){
   return new Response(null,{status:303,headers});
 }
 async function staticPage(url){
-  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/markdown-it.min.js":"markdown-it.min.js","/plan-editor.js":"plan-editor.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json"};
+  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/markdown-it.min.js":"markdown-it.min.js","/plan-editor.js":"plan-editor.js","/glossary-model.js":"glossary-model.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json"};
   const file=files[url.pathname];
   if(!file)return fail(404,"Nicht gefunden.");
   const source=await fetch(STATIC+file,{redirect:"manual"});
