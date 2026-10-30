@@ -160,6 +160,15 @@
         "label": "10",
         "title": "KI und Gesellschaft"
       }
+    },
+    {
+      "id": "basis-glossar",
+      "class": "section",
+      "navigation": {
+        "order": 12,
+        "label": "?",
+        "title": "Glossar"
+      }
     }
   ]
 }
