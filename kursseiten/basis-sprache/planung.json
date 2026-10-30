@@ -5,11 +5,11 @@
       "view": "basis-sprache",
       "title": "Sprachmodelle: vom Kontext zur Textvorhersage",
       "rueckblick": "Daten und faire Tests: Modelle können überzeugend wirken, obwohl sie Fehler machen.",
-      "goal": "In einer Doppellektion die Inhalte der 4. Klasse zu Kontext, Tokenvorhersage, neuronalen Sprachmodellen und Quellenprüfung bearbeiten.",
+      "goal": "An zwei selbst erzeugten Textfortsetzungen erklären, wie der Kontext eine Wortvorhersage verändert, und eine plausibel klingende Behauptung mithilfe einer unabhängigen Quelle überprüfen.",
       "question": "Weshalb kann ein Chatbot überzeugend schreiben und trotzdem etwas Falsches behaupten?",
       "motivation": "Sprachmodelle begegnen uns in Chatbots und Schreibassistenten; ihre Antworten müssen kritisch geprüft werden.",
-      "product": "Papierexperiment, Papagei-Versuch, Vergleich neuronales Modell und begründete Faktenprüfung.",
-      "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
+      "product": "Zwei Papiertexte, zwei dokumentierte Papagei-Vorhersagen, ein kurzer Kontextvergleich und eine belegte Faktenkorrektur.",
+      "zeit": "90 Minuten: Papierexperiment, zwei Papagei-Beispiele und Faktenprüfung verbindlich; ausführlicher Netzwerkvergleich, Wortlabor, Soekia und Turing-Test wahlweise bei Zeit und mit Freigabe.",
       "order": 90,
       "phases": [
         {
@@ -59,7 +59,7 @@
               "art": "Auftrag",
               "wer": "Lehrperson",
               "min": 8,
-              "text": "Anhand des Papagei-Modells erklären, wie Häufigkeit, Kontextfenster und die Prognose des nächsten Tokens zusammenhängen."
+              "text": "Am Papagei-Modell zeigen, wie aus sichtbaren Vorwörtern der nächste Wortbaustein vorgeschlagen wird; ein Beispiel gemeinsam prüfen."
             },
             {
               "art": "Ergebnis",
@@ -78,19 +78,19 @@
               "art": "Experiment",
               "wer": "Tandem",
               "min": 25,
-              "text": "Papierexperiment und Papagei-Lernstrecke der 4. Klasse übernehmen; Unterschiede zwischen statistischer Tabelle und neuronalen Sprachmodellen diskutieren und eine plausibel klingende Aussage extern prüfen."
+              "text": "In der Papagei-Lernstrecke zwei Vorhersagen mit unterschiedlichem Kontext testen und dokumentieren, anschliessend die Ergebnisse mit den Papiertexten vergleichen."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "An Vergleichsgrafik erläutern, warum ein neuronales Sprachmodell über Häufigkeitstabellen hinausgeht: numerische Repräsentation, Gewichte, Schichten."
+              "text": "Eine einfache Vergleichsgrafik ansehen: Papagei zählt Wortfolgen, ein neuronales Netz berechnet Wahrscheinlichkeiten; formale Erklärung ist Wahlvertiefung."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 8,
-              "text": "Prompts präzisieren und ein Beispiel zu Wahrheit/Plausibilität durch eine externe Quelle überprüfen; Wahlstationen bei zusätzlicher Zeit."
+              "text": "Die absichtlich falsche Aussage «Die Schweiz hat 30 Kantone» mit einer vertrauenswürdigen Quelle überprüfen und die korrekte Zahl mit Quellenangabe sichern; Prompt-Varianten sind freiwillig."
             },
             {
               "art": "Ergebnis",
@@ -109,7 +109,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Weshalb verändert der Kontext die Ausgabe? Wie unterscheiden sich Papagei-Tabelle und neuronales Netz? Weshalb ist eine plausible Aussage nicht automatisch wahr?"
+              "text": "Einzeln drei überprüfbare Sätze notieren: «Mit mehr Kontext …», «Das Modell weiss nicht automatisch …» und «Meine Quelle zeigt …»."
             },
             {
               "art": "Ergebnis",
