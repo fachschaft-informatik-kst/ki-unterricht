@@ -9,7 +9,7 @@
       "question": "Weshalb kann ein Chatbot überzeugend schreiben und trotzdem etwas Falsches behaupten?",
       "motivation": "Sprachmodelle begegnen uns in Chatbots und Schreibassistenten; ihre Antworten müssen kritisch geprüft werden.",
       "product": "Zwei Papiertexte, zwei dokumentierte Papagei-Vorhersagen, ein kurzer Kontextvergleich und eine belegte Faktenkorrektur.",
-      "zeit": "90 Minuten: Papierexperiment, zwei Papagei-Beispiele und Faktenprüfung verbindlich; ausführlicher Netzwerkvergleich, Wortlabor, Soekia und Turing-Test wahlweise bei Zeit und mit Freigabe.",
+      "zeit": "90 Minuten: Papierexperiment, zwei Papagei-Beispiele und Faktenprüfung verbindlich; ausführlicher Netzwerkvergleich, Wortlabor, Soekia und Turing-Test als Wahlvertiefung bei Zeit und mit Freigabe.",
       "order": 90,
       "phases": [
         {
