@@ -15,7 +15,7 @@ Arbeitet in Gruppen von drei bis vier Personen mit zwei Blättern. Jedes Blatt b
           <li><b>Runde B (vier Wörter sichtbar):</b> Gleicher Ablauf auf dem zweiten Blatt, aber es bleiben die letzten <b>vier</b> Wörter sichtbar.</li>
           <li><b>Vergleichen:</b> Lest beide Texte laut vor. Welcher klingt sinnvoller? Wo bricht der Sinn ab? Notiert einen Satz: «Mit mehr sichtbarem Kontext …».</li>
         </ol>
-        <p>Das macht das <a href="#basis-sprache-papagei">Papagei-Modell</a> mit Zahlen: Es sieht ebenfalls nur die letzten Wörter und wählt das nächste Wort nach Häufigkeit. Probieren ihr es in der Papagei-Lernstrecke (Kapitel 2) mit zwei und mehr Wörtern Kontext aus und vergleichen ihr mit Ihren Papieren.</p>
+        <p>Das macht das <a href="#basis-sprache-papagei">Papagei-Modell</a> mit Zahlen: Es sieht ebenfalls nur die letzten Wörter und wählt das nächste Wort nach Häufigkeit. Probiert es in der Papagei-Lernstrecke (Kapitel 2) mit zwei und mehr Wörtern Kontext aus und vergleicht mit euren Papiertexten.</p>
       </article>
     </div>
     <div class="protokoll-block">
