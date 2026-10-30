@@ -8,14 +8,14 @@
       <article>
         <b>1 · Ohne Computer</b>
         <!-- MD:START -->
-Arbeiten Sie in Gruppen von drei bis vier Personen mit zwei Blättern. Jedes Blatt beginnt mit demselben Satzanfang, etwa «Am Samstag gehe ich …».
+Arbeitet in Gruppen von drei bis vier Personen mit zwei Blättern. Jedes Blatt beginnt mit demselben Satzanfang, etwa «Am Samstag gehe ich …».
 <!-- MD:END -->
         <ol>
-          <li><b>Runde A (zwei Wörter sichtbar):</b> Reihum schreibt jede Person genau ein Wort. Danach wird das Blatt so gefaltet, dass die nächste Person nur die letzten <b>zwei</b> Wörter sieht. Schreiben Sie, bis das Blatt etwa 12 Wörter hat.</li>
+          <li><b>Runde A (zwei Wörter sichtbar):</b> Reihum schreibt jede Person genau ein Wort. Danach wird das Blatt so gefaltet, dass die nächste Person nur die letzten <b>zwei</b> Wörter sieht. Schreibt, bis das Blatt etwa 12 Wörter hat.</li>
           <li><b>Runde B (vier Wörter sichtbar):</b> Gleicher Ablauf auf dem zweiten Blatt, aber es bleiben die letzten <b>vier</b> Wörter sichtbar.</li>
-          <li><b>Vergleichen:</b> Lesen Sie beide Texte laut vor. Welcher klingt sinnvoller? Wo bricht der Sinn ab? Notieren Sie einen Satz: «Mit mehr sichtbarem Kontext …».</li>
+          <li><b>Vergleichen:</b> Lest beide Texte laut vor. Welcher klingt sinnvoller? Wo bricht der Sinn ab? Notiert einen Satz: «Mit mehr sichtbarem Kontext …».</li>
         </ol>
-        <p>Das macht das <a href="#basis-sprache-papagei">Papagei-Modell</a> mit Zahlen: Es sieht ebenfalls nur die letzten Wörter und wählt das nächste Wort nach Häufigkeit. Probieren Sie es in der Papagei-Lernstrecke (Kapitel 2) mit zwei und mehr Wörtern Kontext aus und vergleichen Sie mit Ihren Papieren.</p>
+        <p>Das macht das <a href="#basis-sprache-papagei">Papagei-Modell</a> mit Zahlen: Es sieht ebenfalls nur die letzten Wörter und wählt das nächste Wort nach Häufigkeit. Probieren ihr es in der Papagei-Lernstrecke (Kapitel 2) mit zwei und mehr Wörtern Kontext aus und vergleichen ihr mit Ihren Papieren.</p>
       </article>
     </div>
     <div class="protokoll-block">
@@ -62,7 +62,7 @@ Arbeiten Sie in Gruppen von drei bis vier Personen mit zwei Blättern. Jedes Bla
           </tbody>
         </table>
       </div>
-      <label class="field answer"><span>Vervollständigen Sie: Mit mehr sichtbarem Kontext …</span><textarea data-basis-answer="basis-sprache-pap_kontext" maxlength="10000" placeholder="Mit mehr sichtbarem Kontext …" rows="2"></textarea></label>
+      <label class="field answer"><span>Vervollständigt: Mit mehr sichtbarem Kontext …</span><textarea data-basis-answer="basis-sprache-pap_kontext" maxlength="10000" placeholder="Mit mehr sichtbarem Kontext …" rows="2"></textarea></label>
     </div>
   </div>
 </details>
