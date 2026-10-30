@@ -15,7 +15,7 @@ assert set(data["gruppen"])=={t["gruppe"] for t in terms}
 assert {"modell","gewicht","bias-neuron","validierung","testdaten","transfer-learning","token","fairness"}<=set(ids)
 for t in terms:
     for key in ("begriff","basis","vertieft","beispiel","frage"):
-        assert isinstance(t[key],str) and len(t[key])>=8, (t["id"],key)
+        assert isinstance(t[key],str) and len(t[key])>=(2 if key=="begriff" else 8), (t["id"],key)
     assert t["basis"]!=t["vertieft"],t["id"]
 
 for level,path,prefix in (
