@@ -8,7 +8,7 @@
       <article>
         <b>2 · Mit der Lernstrecke</b>
         <!-- MD:START -->
-Bearbeitet die eingebettete Lernstrecke. Variiert Kontext oder Wortwahl und halten ihr Beobachtungen fest.
+Bearbeitet die eingebettete Lernstrecke. Variiert Kontext oder Wortwahl und haltet eure Beobachtungen fest.
 <!-- MD:END -->
       </article>
     </div>
@@ -69,7 +69,7 @@ Die Lernstrecke führt vom Papagei-Prinzip zur Vorhersage von Wortfolgen. Vergle
           </tbody>
         </table>
       </div>
-      <label class="field answer"><span>Wie verändert sich die Fortsetzung mit mehr Kontext? Nennen ihr ein Beispiel, in dem plausibel nicht wahr bedeutet.</span><textarea data-basis-answer="basis-sprache-pst_beob" maxlength="10000" placeholder="Mit mehr Kontext …" rows="3"></textarea></label>
+      <label class="field answer"><span>Wie verändert sich die Fortsetzung mit mehr Kontext? Nennt ein Beispiel, in dem plausibel nicht wahr bedeutet.</span><textarea data-basis-answer="basis-sprache-pst_beob" maxlength="10000" placeholder="Mit mehr Kontext …" rows="3"></textarea></label>
     </div>
   </div>
 </details>
