@@ -76,6 +76,7 @@ jobs:
           node tests/check_admin.mjs
           node tests/check_markdown_parity.cjs
           node --check projekt/glossar.js
+          node --check content/ki_projekt/fotostudio_storage.js
           node tests/check_course_model.mjs
       - name: Browser-check teacher editor
         run: |
@@ -104,6 +105,7 @@ jobs:
           python tests/check_course_model.py
           python tests/check_didactics.py
           python tests/check_glossary_p0.py
+          python tests/check_semantic_alignment.py
           python tests/check_materials.py
           python scripts/format_course_sources.py --check
           python scripts/sync_editor_preview.py --check
@@ -118,6 +120,7 @@ jobs:
       - name: Browser-check basic course
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
+          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
       - name: Check deployed notebook runtime in Chromium
         timeout-minutes: 20
         run: |
