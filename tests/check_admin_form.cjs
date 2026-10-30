@@ -15,7 +15,7 @@ const files=[
 const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
   const relative=location==="/projekt/admin/"?"projekt/admin/index.html":location.replace(/^\//,"");
-  const shared=["course-model.js","course-rules.json"].includes(path.basename(relative));
+  const shared=["course-model.js","course-rules.json","glossary-model.js"].includes(path.basename(relative));
   const file=path.resolve(ROOT,shared?"shared/"+path.basename(relative):relative);
   if(!file.startsWith(ROOT+path.sep)||(!shared&&!file.startsWith(path.join(ROOT,"projekt/admin")+path.sep))){
     res.writeHead(404).end();return;
