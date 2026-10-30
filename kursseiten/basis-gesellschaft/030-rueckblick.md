@@ -3,13 +3,13 @@
     <h2 class="kapitel-titel">Rückblick auf den Themenblock</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Das ist die <strong>letzte Lektion zum Thema KI</strong>. Nehmen Sie sich zum Schluss ein paar Minuten für einen Rückblick auf den ganzen Themenblock: von «Was ist KI?» über das Neuron und Ihr Bildprojekt bis zu den Sprachmodellen und der Frage, wer die Folgen trägt.</p>
+    <p>Das ist die <strong>letzte Lektion zum Thema KI</strong>. Nehmt euch zum Schluss ein paar Minuten für einen Rückblick auf den ganzen Themenblock: von «Was ist KI?» über das Neuron und euer Bildprojekt bis zu den Sprachmodellen und der Frage, wer die Folgen trägt.</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
           <tr>
             <th>Frage</th>
-            <th>Ihre Antwort</th>
+            <th>Eure Antwort</th>
           </tr>
         </thead>
         <tbody>
