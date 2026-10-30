@@ -68,7 +68,7 @@ const assert=require('node:assert/strict');
     assert.equal(await page.locator('#basis-lernziele .card').count(),7);
     // Keep all double-lesson links visible, but expand one chapter list only.
     const activeSubmenus=page.locator('.nav-sub:not([hidden])');
-    assert.equal(await page.locator('.nav > a').count(),12);
+    assert.equal(await page.locator('.nav > a').count(),13);
     assert.equal(await activeSubmenus.count(),0,'Overview must not expand lesson chapters');
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await activeSubmenus.first().waitFor({state:'visible'});
