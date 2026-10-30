@@ -14,9 +14,10 @@ assert all(re.fullmatch(r"[a-z][a-z0-9-]+",i) for i in ids)
 assert set(data["gruppen"])=={t["gruppe"] for t in terms}
 assert {"modell","gewicht","bias-neuron","validierung","testdaten","transfer-learning","token","fairness"}<=set(ids)
 for t in terms:
-    for key in ("begriff","basis","vertieft","beispiel","frage"):
+    for key in ("begriff","basis","vertieft","beispiel","frage","antwort"):
         assert isinstance(t[key],str) and len(t[key])>=(2 if key=="begriff" else 8), (t["id"],key)
     assert t["basis"]!=t["vertieft"],t["id"]
+    assert len(t["antwort"]) <= 180, (t["id"], "Antwort zu lang")
 
 for level,path,prefix in (
     ("basis","basis/index.html","basis-glossar"),
@@ -32,7 +33,14 @@ for level,path,prefix in (
     assert {e["data-glossary-id"] for e in entries}==set(ids)
     assert {e["id"] for e in entries}=={f"{prefix}-{ident}" for ident in ids}
     assert len(section.select(".glossary-group"))==len(data["gruppen"])
+    for entry in entries:
+        answer=entry.select_one("details.glossary-answer:not([open])")
+        assert answer is not None and answer.select_one("summary"), entry["id"]
+        assert answer.select_one("p").get_text(strip=True), entry["id"]
     assert soup.select_one(f'.nav a[href="#{prefix}"]')
+    manifest=json.loads((ROOT/"kursseiten"/("basis-manifest.json" if level=="basis" else "manifest.json")).read_text(encoding="utf-8"))
+    for topic in (s for s in manifest["sections"] if s.get("teaching")):
+        assert soup.select_one(f'main > section#{topic["id"]} a[href^="#{prefix}-"]'), (level,topic["id"],"Glossar-Link fehlt")
     for asset in ("glossar.css","glossar.js"):
         assert (page.parent/asset).is_file(),(level,asset)
     for link in soup.select('a[href^="#glossar-"], a[href^="#basis-glossar-"]'):

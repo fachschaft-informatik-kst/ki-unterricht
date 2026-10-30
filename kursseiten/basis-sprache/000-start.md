@@ -1,5 +1,6 @@
 <span class="section-label">Doppellektion 9</span>
 <h1>Sprachmodelle</h1>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#basis-glossar-token">Token</a> · <a href="#basis-glossar-kontext">Kontext</a> · <a href="#basis-glossar-halluzination">Halluzination</a></p>
 <p class="lead">Wie erzeugt eine einfache Wortstatistik Texte – und was macht ein neuronales Sprachmodell anders? Untersuche Kontext, Häufigkeiten, Gewichte und Plausibilität. <strong>Pflichtkern:</strong> In der Papierübung zwei Kontexte vergleichen, in der Papagei-Lernstrecke zwei Vorhersagen dokumentieren und eine erfundene Behauptung anhand einer Quelle prüfen. <strong>Wahlvertiefung:</strong> ausführlicher Netzwerkvergleich, Wortlabor, Soekia und Turing-Test; kein zusätzlicher Pflichtnachweis.</p>
 <div class="callout basis-learning-route" data-p1-route="b06">
   <!-- MD:START -->

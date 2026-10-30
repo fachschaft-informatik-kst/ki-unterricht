@@ -11,3 +11,4 @@
   </div>
 </details>
 <!-- /LESSONS:lernarten -->
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#glossar-unueberwachtes-lernen">unüberwachtes Lernen</a> · <a href="#glossar-verstaerkendes-lernen">verstärkendes Lernen</a></p>

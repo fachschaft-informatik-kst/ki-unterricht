@@ -20,6 +20,16 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     'Desktop course card collapsed or invisible');
   await p.screenshot({path:'/tmp/ki-portal-home.png',fullPage:true});
   assert.equal(await p.locator('.lesson-plan').count(),10);
+  // Contextual glossary links keep learners in the lesson; answers open on demand.
+  await p.locator('.nav a[href="#einstieg"]').click();
+  await p.locator('#einstieg .glossary-related a[href="#glossar-ki"]').click();
+  const glossaryDialog=p.locator('dialog.glossary-dialog');
+  assert(await glossaryDialog.isVisible(),'Begriff wird ohne Kurswechsel erklärt');
+  const quickAnswer=glossaryDialog.locator('details.glossary-answer');
+  assert(!await quickAnswer.evaluate(el=>el.open),'Leitfrage-Antwort bleibt zunächst verborgen');
+  await quickAnswer.locator('summary').click();
+  assert(await quickAnswer.evaluate(el=>el.open),'Leitfrage-Antwort lässt sich aufklappen');
+  await glossaryDialog.locator('.glossary-close').click();
   await p.locator('.nav a[href="#lernziele"]').click();await p.locator('#lernziele').waitFor({state:'visible'});assert.equal(await p.locator('#lernziele .grid > article').count(),7);
   assert.equal(await p.locator('#lernziele .grid > article').filter({hasText:'Das Bildprojekt untersuchen'}).locator('.section-label').innerText(),'05–08');
   await p.locator('#lernziele a[href="#bewertung"]').click();const scoring=p.locator('[data-score]');assert.equal(await scoring.count(),10);

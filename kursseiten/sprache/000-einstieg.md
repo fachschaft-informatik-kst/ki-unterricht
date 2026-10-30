@@ -11,3 +11,4 @@
   </div>
 </details>
 <!-- /LESSONS:sprache -->
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-token">Token</a> · <a href="#glossar-kontext">Kontext</a> · <a href="#glossar-halluzination">Halluzination</a></p>
