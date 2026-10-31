@@ -2,7 +2,7 @@
 import {rules,validatePlan} from "./course-model.js";
 const PHASES=rules.phases;
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
-export function createPlanner(panel,onChange){
+export function createPlanner(panel,onChange,onSelect=()=>{}){
   const picker=panel.querySelector("#planLesson"),fields=panel.querySelector("#planFields"),
     phases=panel.querySelector("#planPhases"),total=panel.querySelector("#planTotal");
   let draft=null,selected=0;
@@ -72,7 +72,7 @@ export function createPlanner(panel,onChange){
     });
     totalMinutes();
   }
-  picker.addEventListener("change",()=>{selected=Number(picker.value);render();});
+  picker.addEventListener("change",()=>{selected=Number(picker.value);render();onSelect();});
   return {
     open(source,view){
       draft=JSON.parse(source);
