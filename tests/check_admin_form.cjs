@@ -726,7 +726,8 @@ const server=http.createServer((req,res)=>{
 
     await notebookCard.waitFor();
     assert.equal(await notebookCard.getAttribute("data-notebook"),"content/lesson_einstieg_mein_python_labor.ipynb");
-    assert.match(await notebookCard.locator("a.ki-notebook-direct").getAttribute("href"),/portal\/lesson_einstieg_mein_python_labor.ipynb/);
+    assert.equal(new URL(await notebookCard.locator("a.ki-notebook-direct").getAttribute("href")).searchParams.get("path"),
+      "portal/lesson_einstieg_mein_python_labor.ipynb");
     await page.locator("#chapterNotebookLinks button").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/lesson_einstieg_mein_python_labor.ipynb");
     await page.locator("#notebookBack").click();
