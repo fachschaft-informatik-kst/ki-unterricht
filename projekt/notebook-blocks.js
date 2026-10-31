@@ -19,8 +19,8 @@
     const open=document.createElement("button");open.type="button";
     open.className="ki-notebook-launch";open.textContent="Notebook hier öffnen";
     open.setAttribute("aria-expanded","false");
-    const external=document.createElement("a");external.href=url.href;
-    external.target="_blank";external.rel="noopener noreferrer";
+    const external=card.querySelector(".ki-notebook-direct")||document.createElement("a");
+    external.href=url.href;external.target="_blank";external.rel="noopener noreferrer";
     external.textContent="In JupyterLite öffnen ↗";
     actions.append(open,external);card.append(actions);
     const region=document.createElement("div");region.className="ki-notebook-runtime";
