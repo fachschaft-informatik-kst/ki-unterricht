@@ -84,6 +84,54 @@ const post=(url,value)=>api(url,{method:"POST",headers:{"Content-Type":"applicat
 const slug=text=>text.trim().toLowerCase().replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const filename=path=>path.split("/").pop().replace(".md","");
 const notebookPath=path=>/^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path);
+const chapterPath=path=>/^kursseiten\/[a-z0-9-]+\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path);
+const gradeNotebook=path=>notebookPath(path)&&
+  (state.course==="basis"?/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path):
+    !/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path));
+let returnChapterPath=null;
+function notebookReferences(source){
+  const items=[...source.matchAll(/data-notebook=["'](content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb)["']/g)]
+    .map(m=>m[1]).filter(gradeNotebook);
+  return [...new Set(items)];
+}
+function linkedNotebookMarkup(path,title){
+  const name=escapeHtml(title);
+  return '<div class="ki-notebook-block" data-notebook="'+path+'" data-title="'+name+'">\n'+
+    '  <h3>Jupyter-Notebook · '+name+'</h3>\n'+
+    '  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>\n'+
+    '</div>';
+}
+function refreshNotebookAssociations(){
+  const node=$("chapterNotebookLinks");node.replaceChildren();
+  const c=state.current;
+  const paths=chapterPath(c?.path||"")?notebookReferences($("source").value):[];
+  node.hidden=paths.length===0;
+  if(!paths.length)return;
+  const title=document.createElement("strong");title.textContent="Notebooks in diesem Unterkapitel";
+  node.append(title);
+  for(const path of paths){
+    const line=document.createElement("div");line.className="chapter-notebook-row";
+    const label=document.createElement("span");
+    label.textContent=path.split("/").pop().replace(".ipynb","").replaceAll("_"," ");
+    const button=document.createElement("button");button.type="button";button.className="button light";
+    button.textContent="Öffnen & bearbeiten";
+    button.addEventListener("click",()=>openChapterNotebook(path).catch(error));
+    line.append(label,button);node.append(line);
+  }
+}
+async function openChapterNotebook(path){
+  if(!gradeNotebook(path))throw Error("Das Notebook gehört nicht zur ausgewählten Klasse.");
+  const current=state.current;
+  if(chapterPath(current?.path||"")){
+    // Preserve edits in the chapter before temporarily switching to JupyterLite.
+    if($("source").value!==savedText())stage();
+    returnChapterPath=current.path;
+  }
+  if(!state.staged.has(path)&&!state.notebooks.some(item=>item.path===path))
+    throw Error("Notebook wurde noch nicht angelegt. Bitte zuerst über «Notebook erstellen» hinzufügen.");
+  await load(path);
+}
+
 function stagingList(){
   const node=$("staged");node.replaceChildren();
   const count=state.staged.size;
@@ -335,6 +383,10 @@ function useFile(path,sha,content,original=content){
   $("formEditor").hidden=!(isPlan||isGlossary);
   $("glossaryEditor").hidden=!isGlossary;
   $("notebookEditor").hidden=!isNotebook;
+  $("notebookBack").hidden=!(isNotebook&&returnChapterPath);
+  $("notebookInfo").textContent=isNotebook?
+    (path.split("/").pop()+" · Änderungen im JupyterLite bearbeiten, «Notebook-Stand übernehmen», danach «Änderung vormerken»."):"";
+  $("notebookPanel").hidden=true;
   if(isNotebook)openRuntimeNotebook(content,path);
   $("previewButton").hidden=isNotebook;
   $("previewHeading").hidden=isNotebook;
@@ -350,6 +402,7 @@ function useFile(path,sha,content,original=content){
   // Force a new document for every navigation, including plans and materials.
   $("preview").removeAttribute("srcdoc");
   if(!isNotebook)preview();
+  refreshNotebookAssociations();
   chapterList();
   for(const [id,active] of [
     ["editPlan",isPlan],["editMaterials",path.endsWith("/materialien.md")],["editGlossary",isGlossary]
@@ -970,7 +1023,12 @@ async function openRuntimeNotebook(content,path){
   runtimeStatus("Python-Umgebung wird geladen …");
   // Start with a known teaching notebook and restore the actual selected source.
   // The iframe may not access OAuth cookies or the GitHub API.
-  const name="portal/"+path.split("/").pop();
+  // For a new draft the published path does not exist yet. Open a known
+  // trusted notebook and restore the new draft over it in the teacher editor.
+  // After merge the lesson file will have its own published JupyterLite path.
+  const name=state.current?.sha===null?
+    (state.course==="basis"?"portal/basis_neuron.ipynb":"portal/daten_training.ipynb"):
+    "portal/"+path.split("/").pop();
   runtimeFrame.src=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+encodeURIComponent(name)+"&ki-embed=1&ki-restore=1&ki-teacher=1&reset";
 }
 window.addEventListener("message",async event=>{
@@ -1005,9 +1063,19 @@ async function snapshotRuntime(){
 }
 $("notebookSnapshot").addEventListener("click",()=>snapshotRuntime().catch(error));
 $("notebookReload").addEventListener("click",()=>{if(!confirmUnsaved())return;if(state.current&&notebookPath(state.current.path))openRuntimeNotebook(savedText(),state.current.path);});
+$("notebookBack").addEventListener("click",async()=>{
+  try{
+    if(runtimeDirty)throw Error("Notebook wurde verändert: erst «Notebook-Stand übernehmen» auswählen.");
+    if(state.current&&$("source").value!==savedText())stage();
+    const path=returnChapterPath;returnChapterPath=null;
+    $("notebookBack").hidden=true;
+    if(path)await load(path);
+  }catch(e){error(e);}
+});
 async function refreshNotebooks(){
   const result=await api("/api/notebooks");
-  state.notebooks=result.notebooks;
+  state.notebooks=[...result.notebooks,
+    ...[...state.staged.values()].filter(c=>notebookPath(c.path)&&!result.notebooks.some(item=>item.path===c.path)).map(c=>({path:c.path,sha:c.expectedSha}))];
   const list=$("notebooks");list.replaceChildren();
   for(const item of state.notebooks.filter(item=>state.course==="basis"?/\/basis_[^/]+\.ipynb$/.test(item.path):!/\/basis_[^/]+\.ipynb$/.test(item.path))){
     const button=document.createElement("button");button.type="button";
@@ -1080,6 +1148,7 @@ $("source").addEventListener("input",()=>{
   highlightSource();
   clearTimeout(previewDebounce);
   if(!$("codeEditor").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
+  refreshNotebookAssociations();
 });
 $("previewButton").addEventListener("click",preview);
 // Real resizable split pane: pointer, keyboard and double-click reset all use
