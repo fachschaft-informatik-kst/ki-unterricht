@@ -146,7 +146,19 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator(".split-source").isVisible(),true);
     assert.equal(await page.locator("#splitDivider").isVisible(),true);
     await page.frameLocator("#preview").locator(".phase-table tbody tr").first().waitFor();
-    assert.equal(await page.frameLocator("#preview").locator(".phase-table tbody tr").count(),5);
+    assert.equal(await page.frameLocator("#preview").locator(".phase-table tbody tr").count(),20,
+      "AVIVA preview must render one coloured table row for each teaching step, not only a row per phase");
+    const colours=await page.frameLocator("#preview").locator(".phase-table tbody tr").evaluateAll(rows=>
+      Object.fromEntries([...new Set(rows.map(row=>row.className))].map(name=>{
+        const cell=rows.find(row=>row.className===name).querySelector("td.wer");
+        return [name,getComputedStyle(cell).backgroundColor];
+      })));
+    assert.deepEqual(colours,{
+      "wer-l":"rgb(227, 237, 251)","wer-e":"rgb(253, 240, 216)",
+      "wer-t":"rgb(225, 242, 230)","wer-r":"rgb(241, 243, 244)",
+      "wer-k":"rgb(236, 230, 246)"
+    },"AVIVA legend colours must match the published lesson plan in the live preview");
+    assert.equal(await page.frameLocator("#preview").locator(".wer-legende span").count(),5);
     const planHeights=await page.locator("#splitEditor").evaluate(el=>[
       el.querySelector("#formEditor").getBoundingClientRect().height,
       el.querySelector("#previewFrame").getBoundingClientRect().height
