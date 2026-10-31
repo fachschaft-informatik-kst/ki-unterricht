@@ -653,19 +653,31 @@ function preview(){
     const esc=escapeHtml;
     if(!lesson)content="<p>Keine Doppellektion vorhanden.</p>";
     else{
-      const rows=lesson.phases.map((phase,index)=>{
-        const steps=(phase.schritte||[]).map(step=>
-          '<div class="aviva-step"><strong>'+esc(step.art||"Auftrag")+'</strong> · '+esc(step.wer||"")+
-          (step.min?' · '+Number(step.min)+' Min.':'')+'<p>'+esc(step.text||"")+'</p></div>').join("");
-        return '<tr><th scope="row">'+(index+1)+'. '+esc(phase.phase||"")+'</th><td><strong>'+esc(phase.titel||"")+'</strong>'+steps+'</td><td>'+Number(phase.minutes||0)+' Min.</td></tr>';
-      }).join("");
+      // Keep the exact row/role structure used by scripts/build_course.py:
+      // every AVIVA step receives its matching teaching-role colour.
+      const werClass=wer=>wer==="Lehrperson"?"wer-l":wer==="Ergebnis"?"wer-r":
+        wer.startsWith("Klasse")?"wer-k":wer.startsWith("Einzeln")?"wer-e":"wer-t";
+      const legend='<p class="wer-legende">'+
+        '<span class="wer-l">Lehrperson: Input</span><span class="wer-e">Einzelarbeit</span>'+
+        '<span class="wer-t">Tandem oder Gruppe</span><span class="wer-k">Klasse gemeinsam</span>'+
+        '<span class="wer-r">Ergebnis</span></p>';
+      const rows=lesson.phases.flatMap(phase=>(phase.schritte||[]).map((step,index)=>{
+        const heading=index===0?
+          '<th class="phase" rowspan="'+phase.schritte.length+'" scope="rowgroup"><strong>'+
+          esc(phase.phase||"")+'</strong><span class="phase-titel">'+esc(phase.titel||"")+
+          '</span><small>'+Number(phase.minutes||0)+' Min.</small></th>':"";
+        return '<tr class="'+werClass(step.wer||"")+'">'+heading+
+          '<td class="wer">'+esc(step.wer||"")+'</td>'+
+          '<td class="was">'+esc(step.text||"")+'</td>'+
+          '<td class="min">'+(step.min?Number(step.min):"")+'</td></tr>';
+      })).join("");
       const detail=[["Leitfrage",lesson.question],["Motivation",lesson.motivation],["Lernergebnis",lesson.product]]
         .filter(([name,value])=>value).map(([name,value])=>'<p><strong>'+name+':</strong> '+esc(value)+'</p>').join("");
       const sum=lesson.phases.reduce((total,phase)=>total+Number(phase.minutes||0),0);
       content='<span class="section-label">Unterrichtsplanung · '+(isBasis?"1.":"4.")+' Kurzgymnasium</span>'+
         '<h2>AVIVA · '+esc(lesson.title)+'</h2>'+
         '<div class="card"><h3>Lernziele</h3><p>'+esc(lesson.goal||"")+'</p>'+detail+'</div>'+
-        '<div class="table-scroll"><table class="phase-table"><thead><tr><th>Phase</th><th>Arbeitsschritte</th><th>Zeit</th></tr></thead>'+
+        legend+'<div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Phase</th><th>Wer</th><th>Was</th><th>Min.</th></tr></thead>'+
         '<tbody>'+rows+'</tbody></table></div><p><strong>Gesamtzeit: '+sum+' Minuten</strong></p>';
     }
   }else if(content.includes("<!-- MD:START -->"))
