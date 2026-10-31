@@ -127,6 +127,21 @@ const server=http.createServer((req,res)=>{
       "Highlighted source editor must be visible for chapters");
     assert.ok((await page.locator("#sourceHighlight").innerHTML()).includes("tok-"),
       "Source preview must contain syntax highlighting tokens");
+    const originalSource=await page.locator("#source").inputValue();
+    await page.locator("#source").fill('<figure class="test" data-info="1 > 0" hidden><img src="bild.svg" alt="Sonne > Wolken"></figure>\\n<!-- Kommentar -->');
+    const coloured=await page.locator("#sourceHighlight").evaluate(el=>({
+      tags:[...el.querySelectorAll(".tok-tag")].map(n=>n.textContent),
+      attrs:[...el.querySelectorAll(".tok-attr")].map(n=>n.textContent),
+      strings:[...el.querySelectorAll(".tok-string")].map(n=>n.textContent),
+      comments:[...el.querySelectorAll(".tok-comment")].map(n=>n.textContent),
+      text:el.textContent
+    }));
+    assert(coloured.tags.includes("figure")&&coloured.tags.includes("img"),"HTML tag names highlighted");
+    assert(["class","data-info","hidden","src","alt"].every(a=>coloured.attrs.includes(a)),"HTML attributes including boolean attributes highlighted");
+    assert(coloured.strings.includes('"1 > 0"')&&coloured.strings.includes('"Sonne > Wolken"'),"Quoted > in HTML attribute values preserved");
+    assert(coloured.comments.includes("<!-- Kommentar -->"),"HTML comments highlighted");
+    assert(coloured.text.includes("<figure")&&coloured.text.includes("</figure>"),"Source remains readable");
+    await page.locator("#source").fill(originalSource);
     const preview=page.frameLocator("#preview");
     await preview.locator(".timeline li").first().waitFor();
     const kstLogo=preview.locator(".crumb .school-logo");
