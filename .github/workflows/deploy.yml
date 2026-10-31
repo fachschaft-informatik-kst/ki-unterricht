@@ -16,9 +16,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     outputs:
       site_changed: ${{ steps.scope.outputs.site_changed }}
       worker_changed: ${{ steps.scope.outputs.worker_changed }}
+      runtime_changed: ${{ steps.scope.outputs.runtime_changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,10 +46,12 @@ jobs:
             echo "Cannot determine changed files: conservatively build and deploy both targets."
             echo "site_changed=true" >> "$GITHUB_OUTPUT"
             echo "worker_changed=true" >> "$GITHUB_OUTPUT"
+            echo "runtime_changed=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           site=false
           worker=false
+          runtime=false
           while IFS= read -r -d '' file; do
             echo "Changed: $file"
             case "$file" in
@@ -57,6 +61,12 @@ jobs:
               shared/course-model.js|shared/glossary-model.js)
                 site=true
                 worker=true
+                runtime=true
+                ;;
+              projekt/admin/*|tests/check_admin.mjs|tests/check_admin_form.cjs)
+                # Editor UI changes still build Pages and run editor browser tests,
+                # but do not need the Pyodide/notebook integration suite.
+                site=true
                 ;;
               README.md|docs/*)
                 # Documentation is not included in either deployed runtime.
@@ -64,12 +74,14 @@ jobs:
               *)
                 # All other changes get full site CI, including CI changes.
                 site=true
+                runtime=true
                 ;;
             esac
           done < /tmp/ki-changed-paths
           echo "site_changed=$site" >> "$GITHUB_OUTPUT"
           echo "worker_changed=$worker" >> "$GITHUB_OUTPUT"
-          echo "Impact: site=$site worker=$worker"
+          echo "runtime_changed=$runtime" >> "$GITHUB_OUTPUT"
+          echo "Impact: site=$site worker=$worker runtime=$runtime"
       - name: Verify Worker-only changes
         if: steps.scope.outputs.worker_changed == 'true' && steps.scope.outputs.site_changed != 'true'
         run: |
@@ -170,7 +182,7 @@ jobs:
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_admin_form.cjs
       - name: Check simplified teaching project
-        if: steps.scope.outputs.site_changed == 'true'
+        if: steps.scope.outputs.runtime_changed == 'true'
         run: |
           python tests/check_ki_basis.py
           python tests/execute_all_notebooks.py
@@ -178,6 +190,7 @@ jobs:
           python tests/check_kernel_compat.py
       - name: Build the JupyterLite site
         if: steps.scope.outputs.site_changed == 'true'
+        timeout-minutes: 8
         run: |
           python scripts/build_portal.py
           python scripts/build_course.py
@@ -208,13 +221,13 @@ jobs:
           test -f dist/projekt/admin/plan-editor.js
           test -f dist/projekt/admin/glossary-model.js
       - name: Browser-check basic course
-        if: steps.scope.outputs.site_changed == 'true'
+        if: steps.scope.outputs.runtime_changed == 'true'
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
       - name: Check deployed notebook runtime in Chromium
-        if: steps.scope.outputs.site_changed == 'true'
-        timeout-minutes: 20
+        if: steps.scope.outputs.runtime_changed == 'true'
+        timeout-minutes: 12
         run: |
           # Independent browser tests use different local ports. Run them in
           # parallel, preserve both exit codes and print both diagnostic logs.
