@@ -16,7 +16,7 @@ const assert=require('node:assert/strict');
     await page.goto('http://127.0.0.1:8770/kurse.html');
     assert.equal(await page.locator('a.choice').count(),2,'Both Kurzgymi tracks must appear');
     await page.locator('a.choice[href="basis/"]').click();
-    assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
+    assert.equal(await page.title(),'BOK · 1. Klasse · KI entdecken');
     assert.equal(await page.locator('main > section').count(),13);
     // Shared KST breadcrumb; track switching happens only via the landing page.
     const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "courses": [
+    {
+      "id": "bok-1-klasse",
+      "teacher": "BOK",
+      "grade": 1,
+      "slug": "bok/1-klasse",
+      "source": "basis",
+      "status": "published",
+      "name": "KI entdecken"
+    },
+    {
+      "id": "bok-4-klasse",
+      "teacher": "BOK",
+      "grade": 4,
+      "slug": "bok/4-klasse",
+      "source": "projekt",
+      "status": "published",
+      "name": "KI vertiefen"
+    },
+    {
+      "id": "irn-1-klasse",
+      "teacher": "IRN",
+      "grade": 1,
+      "slug": "irn/1-klasse",
+      "source": null,
+      "status": "planned",
+      "name": "KI-Unterricht"
+    },
+    {
+      "id": "irn-4-klasse",
+      "teacher": "IRN",
+      "grade": 4,
+      "slug": "irn/4-klasse",
+      "source": null,
+      "status": "planned",
+      "name": "KI-Unterricht"
+    }
+  ]
+}
