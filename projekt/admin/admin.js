@@ -1119,30 +1119,125 @@ const blocks={
   figure:'<figure class="concept-figure">\n  <img src="grafiken/beispiel.svg" alt="Bildbeschreibung">\n  <figcaption>Bildlegende und Quellenangabe.</figcaption>\n</figure>',
   table:'<div class="table-scroll">\n  <table><thead><tr><th>Kriterium</th><th>Wert</th></tr></thead>\n    <tbody><tr><td>Beispiel</td><td>Erklärung</td></tr></tbody></table>\n</div>',
   quote:'<blockquote>\n  <p>Zitat oder zentraler Gedanke.</p>\n</blockquote>',
-  code:'<pre><code class="language-python"># Python-Beispiel\nprint("Hallo Welt")</code></pre>'
+  code:'<pre><code class="language-python"># Python-Beispiel\nprint("Hallo Welt")</code></pre>',
+  goal:'<div class="callout">\n  <p><strong>Lernziele:</strong> Nach diesem Abschnitt können Sie …</p>\n  <ul><li>ein Konzept erklären</li><li>ein Beispiel beurteilen</li></ul>\n</div>',
+  prior:'<div class="task">\n  <p><strong>Vorwissen aktivieren</strong></p>\n  <p>Was wissen Sie bereits über dieses Thema? Notieren Sie zwei Gedanken und tauschen Sie sich aus.</p>\n</div>',
+  checklist:'<div class="card">\n  <h3>Checkliste</h3>\n  <ul><li>☐ Aufgabenstellung verstanden</li><li>☐ Beispiel ausprobiert</li><li>☐ Ergebnis überprüft</li></ul>\n</div>',
+  reflect:'<div class="task">\n  <p><strong>Reflexion:</strong> Was habe ich gelernt?</p>\n  <ul><li>Das habe ich verstanden: …</li><li>Das ist noch offen: …</li></ul>\n</div>',
+  compare:'<div class="grid two">\n  <div class="card"><h3>Vorteile</h3><ul><li>Erster Vorteil</li><li>Zweiter Vorteil</li></ul></div>\n  <div class="card"><h3>Grenzen</h3><ul><li>Erste Grenze</li><li>Zweite Grenze</li></ul></div>\n</div>',
+  reveal:'<details class="card">\n  <summary><strong>Warum ist das so? – Antwort aufklappen</strong></summary>\n  <p>Hier steht die Erklärung oder Musterlösung.</p>\n</details>',
+  example:'<div class="grid two">\n  <div class="card"><h3>Begriff</h3><p>Kurze Erklärung des Konzepts.</p></div>\n  <div class="card"><h3>Beispiel</h3><p>Konkrete Anwendung aus dem Alltag.</p></div>\n</div>'
 };
 // Every block uses the same course classes as the published site.
 const blockHelp={
   task:"Aufgabe mit hervorgehobenem Arbeitsauftrag",
   info:"Merksatz in einer Infobox",
   warning:"Auffälliger Hinweis oder Warnung",
+  goal:"Zwei Lernziele mit klaren Erwartungen",
+  prior:"Kurze Einstiegsfrage zum Vorwissen",
   steps:"Drei nummerierte Arbeitsschritte",
+  checklist:"Übersichtliche Checkliste zum Abhaken auf Papier",
+  reflect:"Rückblick mit zwei Reflexionsfragen",
   card:"Eine Karte mit Titel und Text",
   two:"Zwei Karten nebeneinander",
   three:"Drei Karten in einem Raster",
+  compare:"Pro und Contra in zwei Spalten",
   figure:"Bild mit Alternativtext, Legende und Quelle",
   table:"Tabelle mit zwei Spalten",
   flow:"Eingabe, Verarbeitung und Ausgabe",
   timeline:"Zeitachse mit zwei Meilensteinen",
   quote:"Zitat als eigener Textblock",
-  code:"Formatiertes Codebeispiel"
+  code:"Formatiertes Codebeispiel",
+  reveal:"Frage mit ausklappbarer Erklärung",
+  example:"Begriff und konkretes Beispiel nebeneinander"
 };
+const blockSelect=$("blockType"),blockPicker=$("blockPicker"),blockMenu=$("blockMenu");
+const blockChoiceContainer=$("blockChoices"),blockPreview=$("blockPreview");
+const blockOption=value=>[...blockSelect.options].find(option=>option.value===value);
+
 function updateBlockHelp(){
-  const selector=$("blockType");
-  $("blockDescription").textContent=blockHelp[selector.value]||"Baustein auswählen";
+  const option=blockOption(blockSelect.value);
+  $("blockPickerName").textContent=option?.textContent||"Baustein wählen";
+  $("blockDescription").textContent=blockHelp[blockSelect.value]||"Baustein auswählen";
+  for(const button of blockChoiceContainer.querySelectorAll("[data-block]")){
+    const selected=button.dataset.block===blockSelect.value;
+    button.setAttribute("aria-pressed",String(selected));
+  }
 }
-$("blockType").addEventListener("change",updateBlockHelp);
-updateBlockHelp();
+// The floating example uses the same course CSS strings as the full editor
+// preview. A sandboxed iframe renders authored, static snippets without scripts.
+function inspectBlock(value){
+  if(!Object.hasOwn(blocks,value))return;
+  const option=blockOption(value);
+  $("blockPreviewTitle").textContent=option?.textContent||"Baustein";
+  $("blockPreviewHint").textContent=blockHelp[value]||"Beispielansicht";
+  const isBasis=state.course==="basis";
+  const base=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
+  const sample=previewAssets(blocks[value],base);
+  const styles=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"");
+  blockPreview.srcdoc='<!doctype html><html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>'+
+    styles+'\nhtml,body{margin:0!important;overflow-x:hidden}body{background:var(--paper)!important;padding:12px!important;font-size:14px!important}main{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important}.section,.kapitel{display:block!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;box-shadow:none!important}.kapitel>*:first-child{margin-top:0!important}.lesson-steps{grid-template-columns:repeat(3,minmax(0,1fr))}.lesson-steps article{padding:8px!important}.timeline li{grid-template-columns:58px minmax(0,1fr)}.grid{gap:8px}.card{padding:12px!important}img{max-height:130px;object-fit:contain}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body><main><section class="section" id="einstieg"><article class="kapitel">'+
+    sample+'</article></section></main></body></html>';
+}
+function renderBlockChoices(){
+  blockChoiceContainer.replaceChildren();
+  for(const group of blockSelect.querySelectorAll("optgroup")){
+    const wrapper=document.createElement("section");wrapper.className="block-choice-group";
+    const heading=document.createElement("h3");heading.textContent=group.label;
+    wrapper.append(heading);
+    for(const option of group.querySelectorAll("option")){
+      const button=document.createElement("button");button.type="button";
+      button.className="block-choice";
+      button.dataset.block=option.value;
+      button.textContent=option.textContent;
+      button.addEventListener("pointerenter",()=>inspectBlock(option.value));
+      button.addEventListener("focus",()=>inspectBlock(option.value));
+      button.addEventListener("click",()=>{
+        blockSelect.value=option.value;
+        blockSelect.dispatchEvent(new Event("change",{bubbles:true}));
+        setBlockMenuOpen(false);
+        blockPicker.focus();
+      });
+      wrapper.append(button);
+    }
+    blockChoiceContainer.append(wrapper);
+  }
+  updateBlockHelp();
+}
+function setBlockMenuOpen(open,focus=false){
+  blockMenu.hidden=!open;
+  blockPicker.setAttribute("aria-expanded",String(open));
+  if(open){
+    inspectBlock(blockSelect.value);
+    if(focus)blockChoiceContainer.querySelector('[aria-pressed="true"]')?.focus();
+  }
+}
+blockPicker.addEventListener("click",()=>setBlockMenuOpen(blockMenu.hidden));
+blockSelect.addEventListener("change",updateBlockHelp);
+blockChoiceContainer.addEventListener("keydown",event=>{
+  if(!["ArrowDown","ArrowUp","Home","End"].includes(event.key))return;
+  const choices=[...blockChoiceContainer.querySelectorAll("button[data-block]")];
+  const current=choices.indexOf(document.activeElement);
+  const next=event.key==="Home"?0:event.key==="End"?choices.length-1:
+    (current+(event.key==="ArrowDown"?1:-1)+choices.length)%choices.length;
+  event.preventDefault();choices[next]?.focus();
+});
+blockPicker.addEventListener("keydown",event=>{
+  if(event.key==="ArrowDown"||event.key==="ArrowUp"){
+    event.preventDefault();
+    setBlockMenuOpen(true,true);
+  }
+});
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"&&!blockMenu.hidden){
+    event.preventDefault();setBlockMenuOpen(false);blockPicker.focus();
+  }
+});
+document.addEventListener("pointerdown",event=>{
+  if(!blockMenu.hidden&&!$("toolbar").querySelector(".toolbar-template").contains(event.target))
+    setBlockMenuOpen(false);
+});
+renderBlockChoices();
 
 function insertBlock(){
   const value=$("blockType").value;
