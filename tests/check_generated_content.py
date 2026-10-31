@@ -26,6 +26,26 @@ assert example in fragment.read_text(encoding="utf-8")
 course = BeautifulSoup((ROOT / GENERATED[0]).read_text(encoding="utf-8"), "html.parser")
 assert example in course.get_text(" ", strip=True)
 assert course.select_one("#einstieg-3")
+
+# Both DL1 timelines must expose nine editable, sourced picture panels.
+basis=BeautifulSoup((ROOT / "_build/site/basis/index.html").read_text(encoding="utf-8"), "html.parser")
+for doc,section in ((course,"#einstieg-3"),(basis,"#basis-ki #einstieg-3")):
+    timeline=doc.select_one(section)
+    assert timeline is not None, section
+    events=timeline.select("ol.timeline > li")
+    assert len(events)==9,(section,len(events))
+    for item in events:
+        trigger=item.select_one("button.milestone-trigger[data-milestone-open]")
+        panel=item.select_one("template[data-milestone-detail]")
+        assert trigger and panel and trigger["data-milestone-open"]==panel["data-milestone-detail"]
+        assert trigger.get("aria-haspopup")=="dialog"
+        assert panel.select_one("img[alt][src^='https://commons.wikimedia.org/wiki/Special:FilePath/']")
+        assert panel.select_one("figcaption").get_text(strip=True)
+        source=panel.select_one(".milestone-source a[href^='https://commons.wikimedia.org/wiki/File:']")
+        assert source and ("CC " in source.get_text() or "gemeinfrei" in source.get_text())
+for topic in ("basis-ki","basis-lernen","basis-neuron","basis-netze","basis-daten","basis-plan","basis-training","basis-abschluss","basis-sprache","basis-gesellschaft"):
+    assert basis.select_one(f"#{topic} .glossary-related a[href^='#basis-glossar-']"), topic
+
 plan = BeautifulSoup((ROOT / GENERATED[1]).read_text(encoding="utf-8"), "html.parser")
 assert plan.select_one("#doppellektion-01")
 for name in ("index.html", "admin.js", "plan-editor.js", "course-model.js", "course-rules.json"):
