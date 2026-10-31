@@ -1,11 +1,12 @@
 import {createPlanner} from "./plan-editor.js";
 import {lessonTemplate} from "./course-model.js";
+import {validateGlossary,GLOSSARY_PATH} from "./glossary-model.js";
 // The public Pages origin has no authenticated API. Send editors to the Worker origin.
 const pagesOrigin = location.hostname === "fachschaft-informatik-kst.github.io";
 if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/" + location.search + location.hash);
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
-const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung"};
+const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
 
@@ -223,7 +224,8 @@ function renderLessonOrder(){
 let navigationRevision=0;
 function useFile(path,sha,content,original=content){
   state.current={path,sha,original};
-  $("path").textContent=path;$("heading").textContent=filename(path);
+  $("path").textContent=path;$("heading").textContent=path===GLOSSARY_PATH?"KI-Glossar bearbeiten":filename(path);
+  const isGlossary=path===GLOSSARY_PATH;
   const isPlan=path.endsWith("/planung.json");
   const isNotebook=notebookPath(path);
   $("source").value=content;
@@ -231,14 +233,16 @@ function useFile(path,sha,content,original=content){
   const isChapter=/\/[0-9]{3}-[^/]+\.md$/.test(path);
   $("move").disabled=!sha||!isChapter;$("archive").disabled=!sha||!isChapter;
   for(const id of ["toolbar","editorHelper"])
-    $(id).hidden=isPlan||isNotebook;
-  $("sourceLabel").hidden=isPlan||isNotebook;
+    $(id).hidden=isPlan||isNotebook||isGlossary;
+  $("sourceLabel").hidden=isPlan||isNotebook||isGlossary;
+  $("glossaryEditor").hidden=!isGlossary;
   $("notebookEditor").hidden=!isNotebook;
   if(isNotebook)openRuntimeNotebook(content,path);
   $("previewButton").hidden=isNotebook;
   $("previewHeading").hidden=isNotebook;
   $("preview").hidden=isNotebook;
-  $("codeEditor").hidden=isPlan||isNotebook;
+  $("codeEditor").hidden=isPlan||isNotebook||isGlossary;
+  if(isGlossary)openGlossaryControls(content);
   if(isPlan)planner.open(content,$("section").value);
   else planner.close();
   // Force a new document for every navigation, including plans and materials.
@@ -350,12 +354,107 @@ function chapterFromYaml(source){
     title+'</h2></summary><div class="kapitel-body">'+markdown(source.slice(header[0].length))+
     '</div></details>';
 }
+
+/* The glossary lives in a single versioned JSON file, shared by the two courses.
+   The first-year and fourth-year explanations are intentionally independent. */
+function currentGlossaryTerm(){
+  return state.glossary?.begriffe.find(t=>t.id===state.glossarySelected);
+}
+function glossaryList(){
+  const root=$("glossaryTerms");root.replaceChildren();
+  const q=$("glossarySearch").value.trim().toLocaleLowerCase("de-CH");
+  const terms=state.glossary.begriffe.slice().sort((a,b)=>a.begriff.localeCompare(b.begriff,"de-CH"));
+  const matches=terms.filter(t=>(t.begriff+" "+t.gruppe).toLocaleLowerCase("de-CH").includes(q));
+  $("glossaryCount").textContent=matches.length+" von "+terms.length+" Begriffen";
+  for(const term of matches){
+    const button=document.createElement("button");button.type="button";
+    button.textContent=term.begriff||"(Neuer Begriff)";
+    const group=document.createElement("small");group.textContent=term.gruppe;button.append(group);
+    button.setAttribute("aria-current",String(state.glossarySelected===term.id));
+    button.addEventListener("click",()=>{
+      state.glossarySelected=term.id;
+      glossaryList();glossaryFields();preview();
+    });
+    root.append(button);
+  }
+}
+function glossaryFields(){
+  const term=currentGlossaryTerm();if(!term)return;
+  $("glossaryCurrent").textContent=term.begriff||"Neuer Begriff";
+  $("glossaryId").textContent="Stabile Verknüpfungs-ID: "+term.id+" · wird nicht umbenannt";
+  const mapping={glossaryName:"begriff",glossaryBasis:"basis",glossaryVertieft:"vertieft",
+    glossaryExample:"beispiel",glossaryQuestion:"frage",glossaryAnswer:"antwort"};
+  for(const [id,key] of Object.entries(mapping))$(id).value=term[key];
+  const group=$("glossaryGroup");group.replaceChildren();
+  for(const name of state.glossary.gruppen){
+    const option=document.createElement("option");option.value=name;option.textContent=name;
+    group.append(option);
+  }
+  group.value=term.gruppe;
+}
+function openGlossaryControls(content){
+  state.glossary=validateGlossary(JSON.parse(content));
+  if(!state.glossary.begriffe.some(t=>t.id===state.glossarySelected))
+    state.glossarySelected=state.glossary.begriffe[0].id;
+  $("glossaryPreviewLevel").value=state.course==="basis"?"basis":"vertiefung";
+  $("glossarySearch").value="";
+  glossaryList();glossaryFields();
+}
+function glossaryChange(key,value){
+  const term=currentGlossaryTerm();if(!term)return;
+  term[key]=value;
+  $("source").value=JSON.stringify(state.glossary,null,2)+"\n";
+  if(key==="begriff"||key==="gruppe"){
+    $("glossaryCurrent").textContent=term.begriff||"Neuer Begriff";
+    glossaryList();
+  }
+  preview();
+}
+function glossaryAdd(){
+  const name=prompt("Neuer Glossarbegriff:");
+  if(name===null)return;
+  if(name.trim().length<2){status("Der Begriff muss mindestens zwei Zeichen haben.",true);return;}
+  const id=slug(name);
+  if(!/^[a-z][a-z0-9-]{0,69}$/.test(id)||state.glossary.begriffe.some(t=>t.id===id)){
+    status("Ungültige oder bereits vorhandene Glossar-ID. Bitte einen anderen Begriff verwenden.",true);return;
+  }
+  state.glossary.begriffe.push({id,gruppe:state.glossary.gruppen[0],begriff:name.trim(),
+    basis:"",vertieft:"",beispiel:"",frage:"",antwort:""});
+  state.glossarySelected=id;
+  $("glossarySearch").value="";
+  $("source").value=JSON.stringify(state.glossary,null,2)+"\n";
+  glossaryList();glossaryFields();preview();$("glossaryBasis").focus();
+  status("Neuer Begriff angelegt. Bitte beide Erklärungen, Beispiel, Leitfrage und Antwort ergänzen.");
+}
+function glossaryPreviewHtml(level){
+  const t=currentGlossaryTerm();if(!t)return "";
+  const prefix=level==="basis"?"basis-glossar":"glossar";
+  const e=escapeHtml;
+  return '<span class="section-label">Nachschlagen · '+(level==="basis"?"1. Kurzgymnasium":"beide Kurse")+'</span>'+
+    '<h1>KI-Glossar</h1><div class="glossary"><div class="glossary-group"><h2>'+e(t.gruppe)+'</h2><div class="glossary-grid">'+
+    '<article class="glossary-entry" id="'+prefix+'-'+e(t.id)+'" data-glossary-id="'+e(t.id)+'">'+
+    '<h3>'+e(t.begriff)+'</h3><p>'+e(t[level==="basis"?"basis":"vertieft"])+'</p>'+
+    '<p class="glossary-example"><strong>Beispiel:</strong> '+e(t.beispiel)+'</p>'+
+    '<div class="glossary-selfcheck">'+
+    '<p class="glossary-question"><span class="glossary-question-label">Leitfrage</span>'+
+    '<span class="glossary-question-text">'+e(t.frage)+'</span></p>'+
+    '<details class="glossary-answer"><summary>'+
+    '<span class="glossary-answer-show">Antwort anzeigen</span>'+
+    '<span class="glossary-answer-hide">Antwort verbergen</span>'+
+    '<span class="glossary-answer-icon" aria-hidden="true"></span></summary>'+
+    '<div class="glossary-answer-content"><p>'+e(t.antwort)+'</p></div>'+
+    '</details></div></article></div></div></div>';
+}
+
 function preview(){
-  const isBasis=state.course==="basis";
-  document.body.classList.toggle("course-basis",isBasis);
+  const isGlossary=state.current?.path===GLOSSARY_PATH;
+  const isBasis=isGlossary?$("glossaryPreviewLevel").value==="basis":state.course==="basis";
+  document.body.classList.toggle("course-basis",state.course==="basis");
   const previewBase=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
-  let content=$("source").value;
-  if(state.current?.path.endsWith("/planung.json")){
+  let content=isGlossary?glossaryPreviewHtml(isBasis?"basis":"vertiefung"):$("source").value;
+  if(isGlossary){
+    // Same semantic elements and stylesheet as scripts/glossary.py on the published pages.
+  }else if(state.current?.path.endsWith("/planung.json")){
     const plan=JSON.parse(content);
     content="<h2>Unterrichtsplan</h2>"+plan.lessons.map(l=>"<article class=\"card\"><h3>"+escapeHtml(l.title)+"</h3><p>"+escapeHtml(l.goal)+"</p>"+l.phases.map(p=>"<p><strong>"+escapeHtml(p.phase)+" · "+p.minutes+" min</strong> – "+escapeHtml(p.titel)+"</p>").join("")+"</article>").join("");
   }else if(content.includes("<!-- MD:START -->"))
@@ -376,7 +475,7 @@ function preview(){
   // Match the actual rendered /projekt/index.html DOM hierarchy. The course's
   // main and section layout rules must not be replaced with generic editor styles.
   // Keep the preview inert: no allow-scripts and no allow-same-origin.
-  const section=state.current?.path.split("/")[1]||(isBasis?"basis-start":"einstieg");
+  const section=isGlossary?(isBasis?"basis-glossar":"glossar"):(state.current?.path.split("/")[1]||(isBasis?"basis-start":"einstieg"));
   const safeSection=/^[a-z0-9-]+$/.test(section)?section:(isBasis?"basis-start":"einstieg");
   const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+"</style>";
   // The Worker CSP intentionally forbids <base> (base-uri 'none'). Inline chrome
@@ -428,6 +527,14 @@ function stage(){
     planner.validate(content);
   }
   if(notebookPath(c.path))validateNotebook(JSON.parse(content));
+  if(c.path===GLOSSARY_PATH){
+    const doc=validateGlossary(JSON.parse(content));
+    if(c.sha){
+      const old=validateGlossary(JSON.parse(c.original));
+      const nextIds=new Set(doc.begriffe.map(t=>t.id));
+      if(old.begriffe.some(t=>!nextIds.has(t.id)))throw Error("Bestehende Glossar-IDs dürfen nicht gelöscht werden.");
+    }
+  }
   if(c.sha){
     const selector=/data-(?:answer|journal|score|skill|check|lab)\s*=\s*["']([^"']+)["']/g;
     const before=[...c.original.matchAll(selector)].map(x=>x[0]);
@@ -757,6 +864,14 @@ $("createLesson").addEventListener("click",addLesson);
 $("createLessonHere").addEventListener("click",addLessonToCurrentSection);
 $("editPlan").addEventListener("click",editPlan);
 $("editMaterials").addEventListener("click",editMaterials);
+$("editGlossary").addEventListener("click",()=>load(GLOSSARY_PATH));
+$("glossarySearch").addEventListener("input",()=>{if(state.glossary)glossaryList();});
+$("glossaryAdd").addEventListener("click",glossaryAdd);
+$("glossaryPreviewLevel").addEventListener("change",()=>{if(state.current?.path===GLOSSARY_PATH)preview();});
+for(const [id,key] of Object.entries({glossaryName:"begriff",glossaryBasis:"basis",
+  glossaryVertieft:"vertieft",glossaryExample:"beispiel",glossaryQuestion:"frage",glossaryAnswer:"antwort"}))
+  $(id).addEventListener("input",event=>glossaryChange(key,event.target.value));
+$("glossaryGroup").addEventListener("change",event=>glossaryChange("gruppe",event.target.value));
 $("section").addEventListener("change",chapterList);
 $("courseSelect").addEventListener("change",async()=>{
   const selected=$("courseSelect").value;

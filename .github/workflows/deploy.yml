@@ -80,6 +80,7 @@ jobs:
           node --check content/ki_projekt/fotostudio_storage.js
           node tests/check_fotostudio_inline.cjs
           node tests/check_course_model.mjs
+          node tests/check_glossary_model.mjs
       - name: Browser-check teacher editor
         run: |
           npm install --prefix /tmp/ki-browser playwright
@@ -120,6 +121,7 @@ jobs:
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
           test -f dist/projekt/admin/plan-editor.js
+          test -f dist/projekt/admin/glossary-model.js
       - name: Browser-check basic course
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs

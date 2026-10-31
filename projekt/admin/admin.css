@@ -133,3 +133,35 @@ iframe#preview:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
 /* The first-year editor uses the same blue accent palette as basis/basis.css. */
 body.course-basis{--accent:#3653a3;--soft:#e9eefc;--bg:#f3f5fb;--line:#d9e0ef;--muted:#46536a}
 body.course-basis .drag-over{background:#dfe6fb!important}
+
+
+/* Structured glossary editor with explicit class-specific definitions. */
+.glossary-sidebar-button{margin-top:12px;display:flex;flex-direction:column;text-align:left;align-items:flex-start}
+.glossary-sidebar-button small{font-size:11px;font-weight:400;color:var(--muted)}
+.glossary-editor{margin:6px 0 12px}
+.glossary-intro{background:var(--soft);border-radius:12px;padding:16px 19px;margin-bottom:16px}
+.glossary-intro h2{font-size:19px;margin:0 0 6px}.glossary-intro p{font-size:13px;margin:0;line-height:1.6}
+.glossary-edit-grid{display:grid;grid-template-columns:minmax(180px,220px) minmax(0,1fr);gap:17px}
+.glossary-picker{border:1px solid var(--line);padding:12px;border-radius:10px;align-self:start}
+.glossary-picker input{min-width:0;width:100%}
+.glossary-term-list{display:grid;max-height:380px;overflow:auto;gap:3px;margin:10px 0}
+.glossary-term-list button{border:0;border-radius:7px;background:transparent;text-align:left;padding:9px 10px;width:100%;font-size:13px}
+.glossary-term-list button:hover,.glossary-term-list button[aria-current=true]{background:var(--soft);color:var(--accent)}
+.glossary-term-list small{display:block;font-size:10px;color:var(--muted)}
+.glossary-picker .button.full{margin-top:12px}
+.glossary-fields{min-width:0;border:1px solid var(--line);padding:18px;border-radius:11px}
+.glossary-fields h3{font-size:19px;margin:0 0 3px}.glossary-fields>p.small{margin:0 0 12px}
+.glossary-fields input,.glossary-fields select,.glossary-fields textarea{display:block;box-sizing:border-box;width:100%;min-width:0;margin-top:5px;padding:9px 11px;border:1px solid #b8c6c1;border-radius:7px;background:#fff;color:var(--text);font:inherit;font-size:14px}
+.glossary-fields textarea{min-height:72px;resize:vertical}
+.glossary-level-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.glossary-level{padding:12px;border:1px solid var(--line);border-radius:9px;min-width:0}
+.glossary-level-basis{border-top:4px solid #3653a3;background:#f3f6ff}
+.glossary-level-advanced{border-top:4px solid #076959;background:#f2f8f5}
+.glossary-level h4,.glossary-shared h4{font-size:14px;margin:0 0 10px}
+.glossary-level h4 span{font-size:12px;font-weight:400}
+.glossary-level label{font-size:12px}
+.glossary-shared{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.glossary-preview-switch{display:flex;flex-wrap:wrap;gap:8px 15px;align-items:center;margin:18px 0 6px;padding:13px 15px;border-radius:9px;background:var(--soft)}
+.glossary-preview-switch label{margin:0}.glossary-preview-switch select{width:auto;max-width:100%}
+.glossary-preview-switch p{width:100%;margin:0}
+@media(max-width:1080px){.glossary-edit-grid{grid-template-columns:1fr}.glossary-term-list{max-height:190px}.glossary-level-grid{grid-template-columns:1fr}}
