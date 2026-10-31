@@ -40,9 +40,9 @@ for doc,section in ((course,"#einstieg-3"),(basis,"#basis-ki #einstieg-3")):
         assert trigger and panel and trigger["data-milestone-open"]==panel["data-milestone-detail"]
         assert trigger.get("aria-haspopup")=="dialog"
         assert panel.select_one("img[alt][src^='https://commons.wikimedia.org/wiki/Special:FilePath/']")
-        assert panel.select_one("figcaption").get_text(strip=True)
+        assert panel.select_one("figcaption").decode_contents().strip()
         source=panel.select_one(".milestone-source a[href^='https://commons.wikimedia.org/wiki/File:']")
-        assert source and ("CC " in source.get_text() or "gemeinfrei" in source.get_text())
+        assert source and ("CC " in source.decode_contents() or "gemeinfrei" in source.decode_contents())
 for topic in ("basis-ki","basis-lernen","basis-neuron","basis-netze","basis-daten","basis-plan","basis-training","basis-abschluss","basis-sprache","basis-gesellschaft"):
     assert basis.select_one(f"#{topic} .glossary-related a[href^='#basis-glossar-']"), topic
 
