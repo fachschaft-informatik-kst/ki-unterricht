@@ -86,13 +86,61 @@ const filename=path=>path.split("/").pop().replace(".md","");
 const notebookPath=path=>/^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path);
 function stagingList(){
   const node=$("staged");node.replaceChildren();
-  if(!state.staged.size){const li=document.createElement("li");li.textContent="Keine Änderungen vorgemerkt.";node.append(li);return;}
+  const count=state.staged.size;
+  $("pendingCount").textContent=String(count);
+  $("pendingCount").setAttribute("aria-label",count+" vorgemerkt");
+  $("toggleChanges").classList.toggle("has-changes",count>0);
+  $("publishHint").textContent=count===0?"Noch nichts vorgemerkt":
+    count===1?"1 Datei bereit für den Pull Request":count+" Dateien bereit für den Pull Request";
+  $("publish").disabled=count===0;
+  if(!count){
+    const li=document.createElement("li");li.className="staged-empty";
+    li.textContent="Noch keine Änderungen. Bearbeite einen Inhalt und klicke auf «Änderung vormerken».";
+    node.append(li);return;
+  }
   for(const c of state.staged.values()){
-    const li=document.createElement("li");
-    li.textContent=(c.delete?"Archivieren: ":"Ändern: ")+c.path+" ";
-    const remove=document.createElement("button");remove.type="button";remove.textContent="Entfernen";
+    const li=document.createElement("li");li.className="staged-item";
+    const text=document.createElement("span");text.className="staged-info";
+    const name=document.createElement("strong");
+    name.textContent=c.path.split("/").pop();
+    const location=document.createElement("small");location.textContent=c.path;
+    location.title=c.path;
+    text.append(name,location);
+    const remove=document.createElement("button");remove.type="button";remove.className="staged-remove";
+    remove.textContent="×";remove.title="Vormerkung entfernen";remove.setAttribute("aria-label",c.path+" aus Vormerkungen entfernen");
     remove.addEventListener("click",()=>{state.staged.delete(c.path);stagingList();});
-    li.append(remove);node.append(li);
+    li.append(text,remove);node.append(li);
+  }
+}
+// Section and chapter navigation share one selection state; the legacy
+// native selector remains available to keyboard and assistive technologies.
+function renderSectionNav(){
+  const nav=$("sectionNav");nav.replaceChildren();
+  const selected=$("section").value;
+  for(const [index,option] of [...$("section").options].entries()){
+    const section=option.value;
+    const button=document.createElement("button");
+    button.type="button";button.className="section-link";
+    button.dataset.section=section;
+    button.setAttribute("aria-current",String(section===selected));
+    const icon=document.createElement("span");icon.className="section-icon";
+    icon.setAttribute("aria-hidden","true");
+    icon.innerHTML='<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3Z"/></svg>';
+    const name=document.createElement("span");name.className="section-name";name.textContent=option.textContent;
+    const count=document.createElement("span");count.className="section-count";
+    count.textContent=String(chaptersFor(section).length);
+    count.title="Anzahl Unterkapitel";
+    button.append(icon,name,count);
+    button.addEventListener("click",()=>{
+      if($("section").value!==section){
+        if(!confirmUnsaved())return;
+        $("section").value=section;
+        chapterList();
+      }
+      const first=$("chapters").querySelector("button");
+      if(first)first.focus();
+    });
+    nav.append(button);
   }
 }
 const chapterPath=path=>/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(path);
@@ -133,14 +181,28 @@ async function stageChapterOrder(section,source,target){
 function chapterList(){
   const nav=$("chapters");nav.replaceChildren();
   const section=$("section").value;
-  for(const [index,item] of chaptersFor(section).entries()){
+  const items=chaptersFor(section);
+  $("subchapterTitle").textContent="Unterkapitel";
+  if(!items.length){
+    const empty=document.createElement("p");empty.className="chapter-empty";
+    empty.textContent="Noch keine Unterkapitel.";
+    nav.append(empty);
+  }
+  for(const [index,item] of items.entries()){
     const row=document.createElement("div");row.className="order-row";row.draggable=true;row.dataset.path=item.path;
-    const grip=document.createElement("span");grip.className="drag-handle";grip.textContent="⠿";grip.title="Ziehen, um die Reihenfolge zu ändern";
+    const grip=document.createElement("span");grip.className="drag-handle";grip.textContent="⠿";
+    grip.setAttribute("aria-hidden","true");grip.title="Zum Sortieren ziehen";
     const button=document.createElement("button");button.type="button";
-    button.textContent=(index+1)+". "+filename(item.path).replace(/^[0-9]{3}-/,"").replaceAll("-"," ");
-    const detail=document.createElement("small");detail.className="chapter-file";detail.textContent=filename(item.path);
-    button.append(detail);
+    const number=document.createElement("span");number.className="chapter-number";
+    number.textContent=String(index+1).padStart(2,"0");
+    const label=document.createElement("span");label.className="chapter-label";
+    const name=document.createElement("span");name.className="chapter-name";
+    name.textContent=filename(item.path).replace(/^[0-9]{3}-/,"").replaceAll("-"," ");
+    const detail=document.createElement("small");detail.className="chapter-file";
+    detail.textContent=filename(item.path);
+    label.append(name,detail);button.append(number,label);
     button.setAttribute("aria-current",String(state.current?.path===item.path));
+    button.title=item.path;
     button.addEventListener("click",()=>load(item.path));
     row.append(grip,button);
     row.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",item.path);e.dataTransfer.effectAllowed="move";});
@@ -152,6 +214,7 @@ function chapterList(){
     });
     nav.append(row);
   }
+  renderSectionNav();
 }
 async function loadPlans(){
   const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
@@ -205,6 +268,7 @@ function renderLessonOrder(){
   options.sort((a,b)=>(position.get(a.value)??-1)-(position.get(b.value)??-1));
   selector.replaceChildren(...options);
   selector.value=selected;
+  renderSectionNav();
   let visible=0;
   for(const group of groups){
     const box=document.createElement("div");box.className="lesson-sort-group";
@@ -887,6 +951,25 @@ async function refreshNotebooks(){
   }
 }
 
+// The publishing workflow lives next to the editor actions rather than
+// below the editing canvas. Keep it closed unless requested.
+function showChanges(open){
+  $("publishPanel").hidden=!open;
+  $("toggleChanges").setAttribute("aria-expanded",String(open));
+}
+$("toggleChanges").addEventListener("click",()=>showChanges($("publishPanel").hidden));
+$("closeChanges").addEventListener("click",()=>{
+  showChanges(false);$("toggleChanges").focus();
+});
+document.addEventListener("pointerdown",event=>{
+  if(!$("publishPanel").hidden&&!$("publishPanel").contains(event.target)&&
+    !$("toggleChanges").contains(event.target))showChanges(false);
+});
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"&&!$("publishPanel").hidden){
+    showChanges(false);$("toggleChanges").focus();
+  }
+});
 $("createLesson").addEventListener("click",addLesson);
 $("createLessonHere").addEventListener("click",addLessonToCurrentSection);
 $("editPlan").addEventListener("click",editPlan);
