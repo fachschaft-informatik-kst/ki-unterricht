@@ -419,7 +419,6 @@ const server=http.createServer((req,res)=>{
     assert.equal(await planDiff.getAttribute("open"),"");
 
     await planDiff.locator(".diff-add").first().waitFor();
-    await planDiff.locator(".diff-add").first().waitFor();
     assert.match(await planDiff.locator(".diff-add").allTextContents().then(lines=>lines.join("\n")),/Was ist KI\? – Überarbeitet/);
     assert.match(await planDiff.locator(".diff-remove").allTextContents().then(lines=>lines.join("\n")),/Was ist KI\?/);
     assert.match(await planDiff.locator(".diff-summary").textContent(),/\+\d+ \/ −\d+/);
@@ -687,7 +686,7 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#source").inputValue(),/Neues Python-Experiment/);
     await page.locator("#toggleChanges").click();
     const updatedDiff=page.locator('#staged details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
-    await updatedDiff.locator("summary").click();
+    if(!(await updatedDiff.evaluate(el=>el.open)))await updatedDiff.locator("summary").click();
     await updatedDiff.locator(".diff-add").first().waitFor();
     assert.match(await updatedDiff.locator(".diff-viewport").textContent(),/Neues Python-Experiment/);
     await page.locator("#closeChanges").click();
