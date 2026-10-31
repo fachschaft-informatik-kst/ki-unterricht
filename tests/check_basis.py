@@ -143,6 +143,10 @@ import nbformat as _nbformat
 
 def _mirror_chapter(raw,src,dst):
     raw=raw.replace(f'id="{src}-',f'id="{dst}-').replace(f'href="#{src}-',f'href="#{dst}-')
+    # In-chapter Notebook blocks mirror the very same activity, but open the
+    # class-specific JupyterLite notebook just like the existing lab buttons.
+    raw=raw.replace('content/perzeptron_und_neuronale_netze.ipynb','content/basis_neuron.ipynb')
+    raw=raw.replace('portal/perzeptron_und_neuronale_netze.ipynb','portal/basis_neuron.ipynb')
     raw=_re.sub(r'data-answer="([^"]+)"',lambda m:f'data-basis-answer="{dst}-{m.group(1)}"',raw)
     def _button(m):
         notebook={"perzeptron_und_neuronale_netze.ipynb":"basis_neuron.ipynb",
