@@ -3,7 +3,7 @@
     <h2 class="kapitel-titel">Rückblick auf den Themenblock</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Das ist die <strong>letzte Lektion zum Thema KI</strong>. Nehmt euch zum Schluss ein paar Minuten für einen Rückblick auf den ganzen Themenblock: von «Was ist KI?» über das Neuron und euer Bildprojekt bis zu den Sprachmodellen und der Frage, wer die Folgen trägt.</p>
+    <p><strong>Zum Abschluss (4 Min.):</strong> Notiert kurze Stichworte; vollständige Sätze sind nicht nötig. Das ist die <strong>letzte Lektion zum Thema KI</strong>. Blickt zurück auf den ganzen Themenblock: von «Was ist KI?» über das Neuron und euer Bildprojekt bis zu den Sprachmodellen und der Frage, wer die Folgen trägt.</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
