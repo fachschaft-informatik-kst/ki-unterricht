@@ -2,7 +2,7 @@
 <title id="title">So arbeitet ein regelbasiertes Expertensystem</title>
 <desc id="desc">Fachleute erfassen Wenn-dann-Regeln in einer Wissensbasis. Ein Benutzer meldet einen Fall. Die Schlussfolgerungs-Komponente wendet passende Regeln an und gibt eine begründete Diagnose zurück.</desc>
 <defs>
-<marker id="arrow" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#31586f"/></marker>
+<marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#31586f"/></marker>
 </defs>
 <rect width="960" height="575" rx="22" fill="#f5f8fb"/>
 <text x="42" y="54" fill="#203d50" font-family="Arial,Helvetica,sans-serif" font-size="26" font-weight="700">Wie arbeitet ein Expertensystem?</text>
