@@ -87,6 +87,17 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_einteilung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg .timeline li').count(),9);
 
+    // Both course palettes must distinguish rule-based milestones from data-driven ones.
+    const milestoneBadgeColours=await p.locator('#einstieg-3 .section-intro .marke').evaluateAll(nodes=>
+      nodes.map(node=>({label:node.textContent.trim(),background:getComputedStyle(node).backgroundColor,color:getComputedStyle(node).color})));
+    assert.deepEqual(milestoneBadgeColours,[
+      {label:'Regeln von Menschen',background:'rgb(30, 64, 175)',color:'rgb(255, 255, 255)'},
+      {label:'Lernen aus Daten',background:'rgb(154, 52, 18)',color:'rgb(255, 255, 255)'}
+    ],'Distinct blue/orange markers with white text in DL1');
+    const legendDescription=await p.locator('#einstieg-3 .section-intro').innerText();
+    assert(legendDescription.includes('blau')&&legendDescription.includes('orange')&&legendDescription.includes('KI-Winter'));
+
+
     // All nine history titles open sourced image panels without losing lesson position.
     assert.equal(await p.locator('#einstieg-3 .milestone-trigger').count(),9);
     const firstHistory=p.locator('#einstieg-3 .milestone-trigger').first();

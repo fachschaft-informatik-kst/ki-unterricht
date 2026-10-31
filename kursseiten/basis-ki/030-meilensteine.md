@@ -3,7 +3,7 @@
     <h2 class="kapitel-titel">Meilensteine der KI</h2>
   </summary>
   <div class="kapitel-body">
-    <p class="section-intro">Klicke auf einen Meilenstein-Titel, um ein Bild, eine kurze Erklärung und die Bildquelle zu sehen. Die Marke zeigt, worauf ein Meilenstein hauptsächlich beruht. Beim KI-Winter steht keine Marke, weil dort kein Verfahren entstand. Beobachtet, wie sich der Schwerpunkt verschiebt.</p>
+    <p class="section-intro">Die <strong>farbigen Marken neben den Meilenstein-Titeln</strong> zeigen, worauf ein Meilenstein hauptsächlich beruht: <span class="marke regeln">Regeln von Menschen</span> (blau) bedeutet, dass Menschen das Vorgehen oder die Regeln festlegen. <span class="marke daten">Lernen aus Daten</span> (orange) bedeutet, dass ein System Muster aus Beispielen lernt. Diese Einteilung ist vereinfacht. Beim <strong>KI-Winter</strong> fehlt eine Marke, weil er eine Phase rückläufigen Interesses bezeichnet und keine neue Technik. Klickt auf einen Titel, um ein Bild, eine kurze Erklärung und die Bildquelle zu sehen.</p>
     <ol class="timeline">
       <li><span class="jahr">1950</span>
         <div>

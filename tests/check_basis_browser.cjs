@@ -88,6 +88,17 @@ const assert=require('node:assert/strict');
     for(const topic of ['basis-ki','basis-lernen','basis-neuron','basis-netze','basis-daten','basis-plan','basis-training','basis-abschluss','basis-sprache','basis-gesellschaft'])
       assert(await page.locator('#'+topic+' .glossary-related a[href^="#basis-glossar-"]').count(),topic+' glossary links');
     assert.equal(await page.locator('#basis-ki #einstieg-3 .milestone-trigger').count(),9);
+
+    // Both course palettes must distinguish rule-based milestones from data-driven ones.
+    const milestoneBadgeColours=await page.locator('#basis-ki #einstieg-3 .section-intro .marke').evaluateAll(nodes=>
+      nodes.map(node=>({label:node.textContent.trim(),background:getComputedStyle(node).backgroundColor,color:getComputedStyle(node).color})));
+    assert.deepEqual(milestoneBadgeColours,[
+      {label:'Regeln von Menschen',background:'rgb(30, 64, 175)',color:'rgb(255, 255, 255)'},
+      {label:'Lernen aus Daten',background:'rgb(154, 52, 18)',color:'rgb(255, 255, 255)'}
+    ],'Distinct blue/orange markers with white text in DL1');
+    const legendDescription=await page.locator('#basis-ki #einstieg-3 .section-intro').innerText();
+    assert(legendDescription.includes('blau')&&legendDescription.includes('orange')&&legendDescription.includes('KI-Winter'));
+
     const firstYearHistory=page.locator('#basis-ki #einstieg-3 [data-milestone-open="turing"]');
     await firstYearHistory.click();
     const firstYearHistoryDialog=page.locator('dialog.milestone-dialog');

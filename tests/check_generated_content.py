@@ -21,11 +21,25 @@ for rel in GENERATED:
     assert ignored.returncode == 0, f"Generated artifact should be ignored: {rel}"
 
 fragment = ROOT / "kursseiten/einstieg/030-einstieg-3.md"
-example = "Die Marke zeigt, worauf ein Meilenstein hauptsächlich beruht."
+example = "farbigen Marken neben den Meilenstein-Titeln"
 assert example in fragment.read_text(encoding="utf-8")
 course = BeautifulSoup((ROOT / GENERATED[0]).read_text(encoding="utf-8"), "html.parser")
 assert example in course.get_text(" ", strip=True)
 assert course.select_one("#einstieg-3")
+
+# The blue/orange legend must be explicit in each course and use genuinely
+# distinct shared colours rather than first-year-only blue overrides.
+for doc,scope in ((course,"#einstieg-3"),(BeautifulSoup((ROOT / "_build/site/basis/index.html").read_text(encoding="utf-8"),"html.parser"),"#basis-ki #einstieg-3")):
+    intro=doc.select_one(scope+" .section-intro")
+    assert intro and "blau" in intro.get_text().lower() and "orange" in intro.get_text().lower()
+    assert len(intro.select(".marke.regeln"))==1 and len(intro.select(".marke.daten"))==1
+    assert "KI-Winter" in intro.get_text() and "Klickt auf einen Titel" in intro.get_text()
+shared_css=(ROOT / "projekt/portal.css").read_text(encoding="utf-8")
+basis_css=(ROOT / "basis/basis.css").read_text(encoding="utf-8")
+assert ".marke.regeln{background:#1e40af;color:#fff}" in shared_css
+assert ".marke.daten{background:#9a3412;color:#fff}" in shared_css
+assert "body .marke.daten" not in basis_css and "body .marke.regeln" not in basis_css
+
 
 # Both DL1 timelines must expose nine editable, sourced picture panels.
 basis=BeautifulSoup((ROOT / "_build/site/basis/index.html").read_text(encoding="utf-8"), "html.parser")
