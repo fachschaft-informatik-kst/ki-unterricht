@@ -25,7 +25,7 @@ const server=http.createServer((req,res)=>{
     const ext=path.extname(file);
     res.writeHead(200,{"Content-Type":ext===".json"?"application/json":ext===".js"?"text/javascript":ext===".css"?"text/css":"text/html",
       // Reproduce the Worker constraint that causes <base href> to be ignored.
-      "Content-Security-Policy":"base-uri 'none'; img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io"});
+      "Content-Security-Policy":"default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io; frame-src 'self' blob: https://fachschaft-informatik-kst.github.io; base-uri 'none'"});
     res.end(data);
   });
 });
@@ -64,6 +64,23 @@ const server=http.createServer((req,res)=>{
       status:200,contentType:"image/png",body:tinyPng
     }));
 
+    // Intercept the real GitHub Pages URL with a lightweight JupyterLite
+    // protocol fixture. The strict Worker-like frame-src CSP is still active,
+    // so the test fails if cross-origin notebook framing is blocked again.
+    await page.route(/^https:\/\/fachschaft-informatik-kst\.github\.io\/ki-unterricht\/lab\/index\.html\?/,route=>
+      route.fulfill({status:200,contentType:"text/html",body:
+        '<!doctype html><html><body><h1>JupyterLite test notebook</h1>'+
+        '<textarea id="notebook-code" aria-label="Python-Zelle"></textarea>'+
+        '<script>let notebook=null;const send=data=>parent.postMessage({channel:"ki-portal-v1",...data},"*");'+
+        'window.addEventListener("message",event=>{const message=event.data||{};if(message.type==="restore"){'+
+        'notebook=message.notebook;document.querySelector("#notebook-code").value='+
+        '(notebook.cells.find(c=>c.cell_type==="code")?.source||[]).join("");'+
+        'send({type:"restored",id:message.id,notebook});}'+
+        'if(message.type==="snapshot"){notebook.cells.find(c=>c.cell_type==="code").source='+
+        '[document.querySelector("#notebook-code").value];'+
+        'send({type:"snapshot",id:message.id,notebook,revision:1});}});'+
+        'setTimeout(()=>send({type:"ready",ready:true}),10);<\/script></body></html>'
+      }));
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
     await page.locator("#courseSelect").selectOption("basis");
     assert.equal(await page.locator("body").evaluate(node=>node.classList.contains("course-basis")),true,"First-year editor theme is not blue");
@@ -642,6 +659,21 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/lesson_einstieg_mein_python_labor.ipynb");
     assert.equal(await page.locator("#notebookEditor").isVisible(),true);
     assert.equal(await page.locator("#notebookBack").isVisible(),true);
+    await page.frameLocator("#notebookRuntime").locator("#notebook-code").waitFor({state:"visible"});
+    await page.waitForFunction(()=>document.querySelector("#notebookRuntimeStatus")?.textContent?.includes("Bereit:"));
+    assert.match(await page.frameLocator("#notebookRuntime").locator("#notebook-code").inputValue(),/Mein erstes Experiment/);
+    assert.equal(await page.locator("#notebookDraftNotice").isVisible(),true,
+      "An unmerged notebook must explain how the existing JupyterLite template is used");
+    // Direct cell editing must also work if the live runtime cannot be reached.
+    await page.locator("#notebookSourcePanel summary").click();
+    const directCell=page.locator("#notebookCellList .notebook-cell-source").last();
+    await directCell.fill("print('Neues Python-Experiment')");
+    await page.locator("#notebookApplyCells").click();
+    assert.match(await page.locator("#source").inputValue(),/Neues Python-Experiment/);
+    await page.frameLocator("#notebookRuntime").locator("#notebook-code").waitFor({state:"visible"});
+    await page.waitForFunction(()=>document.querySelector("#notebookRuntimeStatus")?.textContent?.includes("Bereit:"));
+    assert.match(await page.frameLocator("#notebookRuntime").locator("#notebook-code").inputValue(),/Neues Python-Experiment/);
+
     assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fdaten_training.ipynb/,
       "Undeployed notebook must start from a trusted template to support live editing");
     assert.equal(await page.locator("#pendingCount").textContent(),"2");
@@ -651,6 +683,19 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#source").inputValue(),/data-notebook="content\/lesson_einstieg_mein_python_labor.ipynb"/);
     assert.equal(await page.locator("#chapterNotebookLinks button").count(),1);
     const notebookCard=page.frameLocator("#preview").locator(".ki-notebook-block");
+    await page.frameLocator("#preview").locator(".ki-notebook-block .ki-notebook-actions .ki-notebook-launch").waitFor();
+    assert.equal(await page.frameLocator("#preview").locator(".ki-notebook-block .ki-notebook-actions a").count(),1,
+      "The chapter preview must have the same launch button and external link as the published course");
+    const previewStyle=await page.frameLocator("#preview").locator(".ki-notebook-block").evaluate(el=>{
+      const button=el.querySelector(".ki-notebook-launch");
+      const card=getComputedStyle(el),control=getComputedStyle(button);
+      return {cardPadding:card.padding,cardBorder:card.borderLeftWidth,
+        buttonBackground:control.backgroundColor,buttonRadius:control.borderRadius};
+    });
+    assert.equal(previewStyle.cardPadding,"18px 20px");
+    assert.equal(previewStyle.cardBorder,"4px");
+    assert.equal(previewStyle.buttonRadius,"8px");
+
     await notebookCard.waitFor();
     assert.equal(await notebookCard.getAttribute("data-notebook"),"content/lesson_einstieg_mein_python_labor.ipynb");
     assert.match(await notebookCard.locator("a.ki-notebook-direct").getAttribute("href"),/portal\/lesson_einstieg_mein_python_labor.ipynb/);
@@ -672,6 +717,10 @@ const server=http.createServer((req,res)=>{
     await page.locator("#createChapterNotebook").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/basis_lesson_basis_neuron_meine_neuron_uebung.ipynb");
     assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fbasis_neuron.ipynb/);
+    await page.frameLocator("#notebookRuntime").locator("#notebook-code").waitFor({state:"visible"});
+    await page.waitForFunction(()=>document.querySelector("#notebookRuntimeStatus")?.textContent?.includes("Bereit:"));
+    assert.equal(await page.locator("#notebookSourcePanel .notebook-cell").count(),2);
+
     assert.match(await page.locator("#staged").innerText(),/basis_lesson_basis_neuron_meine_neuron_uebung.ipynb/);
 
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
