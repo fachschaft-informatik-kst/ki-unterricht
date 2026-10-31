@@ -54,7 +54,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await rulesTask.locator('[data-ki-sort-card]').count(),4);
     assert.equal(await termsTask.locator('[data-ki-sort-card]').count(),5);
     assert(await rulesTask.locator('[data-ki-sort-check]').isDisabled());
-    await rulesTask.locator('[data-ki-sort-card="automat"]').dragTo(rulesTask.locator('[data-ki-sort-bin="regeln"]'),{sourcePosition:{x:15,y:15}});
+    // Exercise the HTML5 drag-and-drop event contract deterministically in Chromium.
+    const transfer=await p.evaluateHandle(()=>new DataTransfer());
+    await rulesTask.locator('[data-ki-sort-card="automat"]').dispatchEvent('dragstart',{dataTransfer:transfer});
+    await rulesTask.locator('[data-ki-sort-bin="regeln"]').dispatchEvent('dragover',{dataTransfer:transfer});
+    await rulesTask.locator('[data-ki-sort-bin="regeln"]').dispatchEvent('drop',{dataTransfer:transfer});
+    await rulesTask.locator('[data-ki-sort-card="automat"]').dispatchEvent('dragend',{dataTransfer:transfer});
     assert.equal(await rulesTask.locator('[data-ki-sort-card="automat"] select').inputValue(),'regeln',JSON.stringify(await rulesTask.evaluate(el=>({ready:el.classList.contains('ki-sort-ready'),pool:el.querySelector('[data-ki-sort-pool]').children.length,target:el.querySelector('[data-ki-sort-bin="regeln"] [data-ki-sort-target]').children.length}))),'Drag updates answer field');
     await rulesTask.locator('[data-ki-sort-card="uebersetzung"] select').selectOption('daten');
     await rulesTask.locator('[data-ki-sort-card="ampel"] select').selectOption('regeln');

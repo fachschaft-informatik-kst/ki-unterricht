@@ -6,7 +6,7 @@
     bins=[...task.querySelectorAll('[data-ki-sort-bin]')],status=task.querySelector('[data-ki-sort-status]'),
     check=task.querySelector('[data-ki-sort-check]'),
     targets=new Map(bins.map(b=>[b.dataset.kiSortBin,b.querySelector('[data-ki-sort-target]')]));
-  let dragged=null;
+  let dragged=null,chosen=null;
   const selected=card=>card.querySelector('select');
   const forget=()=>{
    for(const card of cards){card.removeAttribute('data-ki-sort-result');card.querySelector('.ki-sort-card-result').textContent='';}
@@ -28,6 +28,13 @@
    result.className='ki-sort-card-result';result.setAttribute('aria-live','polite');card.append(result);
    input.addEventListener('input',()=>{forget();render();});
    input.addEventListener('change',()=>{forget();render();});
+   // Tap one card and then a category as another robust, fully visible alternative.
+   card.addEventListener('click',e=>{
+    if(e.target.closest('select,label'))return;
+    chosen=card;
+    for(const other of cards)other.classList.toggle('ki-sort-selected',other===card);
+    status.textContent='Beispiel ausgewählt. Ziehe es oder tippe auf eine Kategorie.';
+   });
    card.addEventListener('dragstart',e=>{
     dragged=card;card.classList.add('ki-sort-dragging');
     e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',card.dataset.kiSortCard);
@@ -38,6 +45,11 @@
    });
   }
   for(const [area,value] of [[pool,''],...bins.map(b=>[b,b.dataset.kiSortBin])]){
+   area.addEventListener('click',e=>{
+    if(!chosen||e.target.closest('.ki-sort-card'))return;
+    assign(chosen,value);
+    chosen.classList.remove('ki-sort-selected');chosen=null;
+   });
    area.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='move';area.classList.add('ki-sort-drop-active');});
    area.addEventListener('dragleave',e=>{if(!area.contains(e.relatedTarget))area.classList.remove('ki-sort-drop-active');});
    area.addEventListener('drop',e=>{

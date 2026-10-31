@@ -93,7 +93,12 @@ const assert=require('node:assert/strict');
     const basisTerms=page.locator('#basis-ki [data-ki-sort-task="begriffe"]');
     assert.equal(await basisRules.locator('[data-ki-sort-card]').count(),4);
     assert.equal(await basisTerms.locator('[data-ki-sort-card]').count(),5);
-    await basisRules.locator('[data-ki-sort-card="automat"]').dragTo(basisRules.locator('[data-ki-sort-bin="regeln"]'),{sourcePosition:{x:15,y:15}});
+    // Exercise the HTML5 drag-and-drop event contract deterministically in Chromium.
+    const transfer=await page.evaluateHandle(()=>new DataTransfer());
+    await basisRules.locator('[data-ki-sort-card="automat"]').dispatchEvent('dragstart',{dataTransfer:transfer});
+    await basisRules.locator('[data-ki-sort-bin="regeln"]').dispatchEvent('dragover',{dataTransfer:transfer});
+    await basisRules.locator('[data-ki-sort-bin="regeln"]').dispatchEvent('drop',{dataTransfer:transfer});
+    await basisRules.locator('[data-ki-sort-card="automat"]').dispatchEvent('dragend',{dataTransfer:transfer});
     assert.equal(await basisRules.locator('[data-ki-sort-card="automat"] select').inputValue(),'regeln',JSON.stringify(await basisRules.evaluate(el=>({ready:el.classList.contains('ki-sort-ready'),pool:el.querySelector('[data-ki-sort-pool]').children.length,target:el.querySelector('[data-ki-sort-bin="regeln"] [data-ki-sort-target]').children.length}))));
     await basisTerms.locator('[data-ki-sort-card="spam"] select').selectOption('ml');
     assert.equal(await basisTerms.locator('[data-ki-sort-card="spam"] select').inputValue(),'ml');
