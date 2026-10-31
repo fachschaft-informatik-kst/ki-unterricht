@@ -140,10 +140,18 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/planung.json");
     assert.equal(await page.locator("#preview").isVisible(),true);
     await page.frameLocator("#preview").locator("h2").filter({hasText:"Unterrichtsplan"}).waitFor();
-    assert.equal(await page.locator("#splitEditor").evaluate(el=>el.classList.contains("preview-only")),true,
-      "Plan view must not reserve a blank source column");
-    assert.equal(await page.locator(".split-source").isVisible(),false);
-    assert.equal(await page.locator("#splitDivider").isVisible(),false,"Plan view must not expose a resize handle");
+    assert.equal(await page.locator("#splitEditor").evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(" ").length),3,
+      "AVIVA planning requires the same adjustable two-panel editor as chapters");
+    assert.equal(await page.locator("#formEditor").isVisible(),true);
+    assert.equal(await page.locator(".split-source").isVisible(),true);
+    assert.equal(await page.locator("#splitDivider").isVisible(),true);
+    await page.frameLocator("#preview").locator(".phase-table tbody tr").first().waitFor();
+    assert.equal(await page.frameLocator("#preview").locator(".phase-table tbody tr").count(),5);
+    const planHeights=await page.locator("#splitEditor").evaluate(el=>[
+      el.querySelector("#formEditor").getBoundingClientRect().height,
+      el.querySelector("#previewFrame").getBoundingClientRect().height
+    ]);
+    assert.ok(Math.abs(planHeights[0]-planHeights[1])<=2,"AVIVA form and preview must have the same height");
     await page.locator("#editMaterials").click();
     await page.frameLocator("#preview").locator("table").first().waitFor();
     // Visual regression for the real CSS selectors and HTML wrappers.
@@ -485,6 +493,21 @@ const server=http.createServer((req,res)=>{
     assert.ok(basisTheme.image?.startsWith("https://fachschaft-informatik-kst.github.io/ki-unterricht/basis/grafiken/"),
       "First-year images must resolve against the blue basis course");
 
+    // Course-specific AVIVA and materials use the same split layout and
+    // cannot navigate into fourth-year files.
+    await page.locator("#editPlan").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/planung.json");
+    assert.equal(await page.locator("#formEditor").isVisible(),true);
+    assert.equal(await page.locator("#splitDivider").isVisible(),true);
+    assert.match(await page.locator("#planCourseTag").textContent(),/1. Klasse/);
+    assert.equal(await basisPreview.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#3653a3");
+    await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/materialien.md");
+    assert.equal(await page.locator("#codeEditor").isVisible(),true);
+    assert.equal(await page.locator("#formEditor").isVisible(),false);
+    assert.equal(await page.locator("#splitDivider").isVisible(),true);
+    assert.equal(await basisPreview.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#3653a3");
+
     // Switching back restores the actual fourth-year stylesheet and sidebar.
     await page.locator("#courseSelect").selectOption("vertiefung");
     await page.locator('#section option[value="perzeptron"]').waitFor({state:"attached"});
@@ -497,43 +520,60 @@ const server=http.createServer((req,res)=>{
       getComputedStyle(el).getPropertyValue("--accent").trim());
     assert.equal(fourthAccent,"#076959","Fourth-year accent must remain green");
 
-    // Structured glossary form edits one shared JSON file, with separate definitions.
+    // Strict grade scope: basis form has its own blue preview and only basis
+    // fields. Course-specific examples/questions/answers must not leak to year 4.
     await page.reload();
+    await page.locator("#courseSelect").selectOption("basis");
     await page.locator("#editGlossary").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/glossar.json");
-    assert(await page.locator("#glossaryEditor").isVisible());
-    assert.equal(await page.locator("#splitEditor").evaluate(el=>el.classList.contains("preview-only")),true,
-      "Glossary view must use the whole preview width");
-    assert(!await page.locator("#codeEditor").isVisible(),"JSON must be edited through form fields");
+    assert.equal(await page.locator("#glossaryEditor").isVisible(),true);
+    assert.equal(await page.locator("#formEditor").isVisible(),true);
+    assert.equal(await page.locator("#splitDivider").isVisible(),true);
+    assert.equal(await page.locator("#codeEditor").isVisible(),false);
+    assert.equal(await page.locator("#glossaryBasis").isVisible(),true);
+    assert.equal(await page.locator("#glossaryVertieft").isVisible(),false);
+    assert.match(await page.locator("#glossaryCourseTitle").textContent(),/1. Klasse/);
     assert.equal(await page.locator("#glossaryTerms button").count(),29);
     await page.locator("#glossarySearch").fill("Token");
-    assert.equal(await page.locator("#glossaryTerms button").count(),1);
     await page.locator("#glossaryTerms button").click();
-    assert.notEqual(await page.locator("#glossaryBasis").inputValue(),await page.locator("#glossaryVertieft").inputValue());
-    await page.locator("#glossaryBasis").fill("Ein Token ist ein Wort oder ein Stück davon.");
-    await page.locator("#glossaryVertieft").fill("Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");
-    await page.locator("#glossaryPreviewLevel").selectOption("basis");
     const glossaryFrame=page.frameLocator("#preview");
-    await glossaryFrame.locator(".glossary-entry .glossary-question").waitFor();
-    assert.match(await glossaryFrame.locator(".glossary-entry").innerText(),/Ein Token ist ein Wort oder ein Stück davon/);
+    await page.locator("#glossaryBasis").fill("Ein Token ist ein Wort oder ein Stück davon.");
+    await page.locator("#glossaryExample").fill("In der ersten Klasse schneiden wir den Text in kurze Stücke.");
+    await glossaryFrame.locator(".glossary-entry .glossary-example").waitFor();
+    assert.match(await glossaryFrame.locator(".glossary-entry").innerText(),/ersten Klasse/);
     assert.equal(await glossaryFrame.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#3653a3");
+    await page.locator("#stage").click();
+    assert.equal(await page.locator("#pendingCount").textContent(),"1");
+
+    // After changing the course, only advanced fields can be edited; the
+    // previously staged first-year values remain in the shared JSON payload.
+    await page.locator("#courseSelect").selectOption("vertiefung");
+    await page.locator('#section option[value="einstieg"]').waitFor({state:"attached"});
+    await page.locator("#editGlossary").click();
+    await page.waitForFunction(()=>document.querySelector("#glossaryEditor")&&!document.querySelector("#glossaryEditor").hidden);
+    assert.equal(await page.locator("#glossaryBasis").isVisible(),false);
+    assert.equal(await page.locator("#glossaryVertieft").isVisible(),true);
+    assert.match(await page.locator("#glossaryCourseTitle").textContent(),/4. Klasse/);
+    await page.locator("#glossarySearch").fill("Token");
+    await page.locator("#glossaryTerms button").click();
+    await page.locator("#glossaryVertieft").fill("Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");
+    await page.locator("#glossaryExample").fill("Ein Sprachmodell verarbeitet Tokenfolgen bei der Textgenerierung.");
+    await glossaryFrame.locator(".glossary-entry .glossary-example").waitFor();
+    assert.match(await glossaryFrame.locator(".glossary-entry").innerText(),/Tokenfolgen/);
+    assert.doesNotMatch(await glossaryFrame.locator(".glossary-entry").innerText(),/ersten Klasse/);
+    assert.equal(await glossaryFrame.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#076959");
     await glossaryFrame.locator("details.glossary-answer summary").click();
     assert(await glossaryFrame.locator("details.glossary-answer").evaluate(el=>el.open));
-    await page.locator("#glossaryPreviewLevel").selectOption("vertiefung");
-    await glossaryFrame.locator(".glossary-entry").waitFor();
-    assert.match(await glossaryFrame.locator(".glossary-entry").innerText(),/Ein Token ist die Einheit einer Tokenisierung/);
-    assert.equal(await glossaryFrame.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#076959");
     await page.evaluate(()=>window.prompt=()=>"Testglossarbegriff");
     await page.locator("#glossaryAdd").click();
     assert.match(await page.locator("#glossaryId").innerText(),/testglossarbegriff/);
-    await page.locator("#glossaryBasis").fill("Eine Erklärung für den Basiskurs.");
     await page.locator("#glossaryVertieft").fill("Eine genauere Erklärung für den vertieften Kurs.");
-    await page.locator("#glossaryExample").fill("Ein konkretes Unterrichtsbeispiel.");
-    await page.locator("#glossaryQuestion").fill("Wie kann man das erklären?");
-    await page.locator("#glossaryAnswer").fill("Mit einem klaren Beispiel.");
+    await page.locator("#glossaryExample").fill("Ein konkretes Unterrichtsbeispiel für die vierte Klasse.");
+    await page.locator("#glossaryQuestion").fill("Wie kann man das technisch erklären?");
+    await page.locator("#glossaryAnswer").fill("Mit einem fachlich korrekten Beispiel.");
     await page.locator("#stage").click();
     assert((await page.locator("#staged").innerText()).includes("kursseiten/glossar.json"));
-    publishFailure=false; // Earlier simulated 502 must not affect the successful glossary publication test.
+    publishFailure=false;
     await page.locator("#toggleChanges").click();
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
@@ -541,8 +581,11 @@ const server=http.createServer((req,res)=>{
     assert.equal(submitted.changes[0].path,"kursseiten/glossar.json");
     const submittedGlossary=JSON.parse(submitted.changes[0].content);
     assert.equal(submittedGlossary.begriffe.length,30);
-    assert.equal(submittedGlossary.begriffe.find(t=>t.id==="token").basis,"Ein Token ist ein Wort oder ein Stück davon.");
-    assert.equal(submittedGlossary.begriffe.find(t=>t.id==="token").vertieft,"Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");
+    const token=submittedGlossary.begriffe.find(t=>t.id==="token");
+    assert.equal(token.basis,"Ein Token ist ein Wort oder ein Stück davon.");
+    assert.equal(token.vertieft,"Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");
+    assert.match(token.basisBeispiel,/ersten Klasse/);
+    assert.match(token.vertieftBeispiel,/Tokenfolgen/);
     assert(submittedGlossary.begriffe.some(t=>t.id==="testglossarbegriff"));
 
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
