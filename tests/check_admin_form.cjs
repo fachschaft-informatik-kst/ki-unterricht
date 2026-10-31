@@ -246,7 +246,7 @@ const server=http.createServer((req,res)=>{
       "Inspecting a block must never edit the chapter");
     await page.locator('[data-block="reveal"]').focus();
     await page.frameLocator("#blockPreview").locator("details summary").waitFor();
-    assert.match(await page.locator("#blockPreviewHint").textContent(),/aufklappbar/);
+    assert.match(await page.locator("#blockPreviewHint").textContent(),/ausklappbar/);
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#blockMenu").isVisible(),false);
     await page.locator("#blockPicker").click();
