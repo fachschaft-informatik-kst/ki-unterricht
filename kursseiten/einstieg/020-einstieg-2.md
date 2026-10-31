@@ -77,7 +77,7 @@
         <button class="ki-sort-check" type="button" data-ki-sort-check>Zuordnung prüfen</button><button class="ki-sort-reset" type="button" data-ki-sort-reset>Neu zuordnen</button><output class="ki-sort-status" data-ki-sort-status role="status" aria-live="polite">Noch nicht geprüft.</output>
       </div>
       <details class="ki-sort-help">
-        <summary>Hilfe zur Zuordnung</summary>
+        <summary><span class="ki-sort-help-show">Hilfe zur Zuordnung anzeigen</span><span class="ki-sort-help-hide">Hilfe zur Zuordnung ausblenden</span><span class="ki-sort-help-icon" aria-hidden="true"></span></summary>
         <!-- MD:START -->
 Ein Zeitplan ist keine KI. Ein Suchverfahren kann regelbasierte KI sein. Ein Entscheidungsbaum ist maschinelles Lernen ohne tiefes Netz. Texte erzeugende Sprachmodelle sind hier generative KI.
 <!-- MD:END -->
