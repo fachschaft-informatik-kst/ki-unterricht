@@ -539,7 +539,7 @@ const server=http.createServer((req,res)=>{
     const glossaryFrame=page.frameLocator("#preview");
     await page.locator("#glossaryBasis").fill("Ein Token ist ein Wort oder ein Stück davon.");
     await page.locator("#glossaryExample").fill("In der ersten Klasse schneiden wir den Text in kurze Stücke.");
-    await glossaryFrame.locator(".glossary-entry .glossary-example").waitFor();
+    await glossaryFrame.locator(".glossary-entry .glossary-example").filter({hasText:"ersten Klasse"}).waitFor();
     assert.match(await glossaryFrame.locator(".glossary-entry").innerText(),/ersten Klasse/);
     assert.equal(await glossaryFrame.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#3653a3");
     await page.locator("#stage").click();
@@ -558,7 +558,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#glossaryTerms button").click();
     await page.locator("#glossaryVertieft").fill("Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");
     await page.locator("#glossaryExample").fill("Ein Sprachmodell verarbeitet Tokenfolgen bei der Textgenerierung.");
-    await glossaryFrame.locator(".glossary-entry .glossary-example").waitFor();
+    await glossaryFrame.locator(".glossary-entry .glossary-example").filter({hasText:"Tokenfolgen"}).waitFor();
     assert.match(await glossaryFrame.locator(".glossary-entry").innerText(),/Tokenfolgen/);
     assert.doesNotMatch(await glossaryFrame.locator(".glossary-entry").innerText(),/ersten Klasse/);
     assert.equal(await glossaryFrame.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#076959");
