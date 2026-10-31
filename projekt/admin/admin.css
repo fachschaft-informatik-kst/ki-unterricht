@@ -194,3 +194,103 @@ body.course-basis .drag-over{background:#dfe6fb!important}
   .workspace>.sidebar{position:static;max-height:55vh;overflow:auto;margin-bottom:12px}
   .split-source .code-editor .source-highlight,.split-source .code-editor #source{height:450px}
 }
+
+
+/* Quiet, aligned editing workspace. Keep code and real course rendering the
+   same height without adding a separate fullscreen toolbar row. */
+.topbar{padding:9px 18px;gap:12px}
+.brand{gap:9px}.brand strong{font-size:15px;line-height:1.25}
+.brand small{font-size:11px}.logo{width:34px;height:34px;border-radius:9px;font-size:13px}
+.notice{padding:6px 18px;min-height:0;font-size:12px}
+.workspace{grid-template-columns:238px minmax(0,1fr);gap:12px;padding:12px}
+.sidebar,.editor{border-radius:11px;padding:14px 15px}
+.sidebar{top:12px;max-height:calc(100dvh - 24px)}
+.sidebar h2{font-size:16px;margin:0}
+.sidebar label{margin:12px 0 5px}
+.sidebar .chapter-list{max-height:38vh}
+.sidebar .button.full{margin-top:10px}
+.sidebar-details{margin:10px 0;padding-top:7px}
+.editor-heading{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:12px}
+.editor-heading>div:first-of-type{min-width:140px}
+.editor-heading h1{font-size:19px;line-height:1.3;margin:0;overflow-wrap:anywhere}
+.editor-heading .eyebrow{font-size:11px;margin:0;color:var(--muted);line-height:1.4}
+.editor-heading .actions{align-items:center;gap:6px}
+.editor-heading .actions .button{padding:7px 10px;font-size:12px}
+.nav-toggle{height:34px;min-width:36px;padding:6px 9px;font-size:17px;flex-shrink:0}
+.toolbar{padding:8px 0 10px;margin-bottom:10px;gap:6px;border-top:0}
+.toolbar button,.toolbar select{font-size:12px;padding:6px 9px;border-radius:7px}
+.toolbar select{max-width:195px}
+.toolbar .block-picker-label.visually-hidden,.visually-hidden{
+  position:absolute!important;width:1px!important;height:1px!important;padding:0!important;
+  margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;border:0!important
+}
+.split-editor{
+  --pane-height:clamp(460px,calc(100dvh - 250px),900px);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;align-items:start
+}
+.split-source,.split-preview{min-width:0;display:flex;flex-direction:column}
+.split-preview{top:12px}
+.pane-heading{height:36px;min-height:36px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 7px}
+.pane-heading .field-title,.pane-heading .preview-title{
+  display:block;margin:0;font-size:12px;line-height:1.25;font-weight:700;color:var(--muted)
+}
+.pane-heading .preview-title{font-size:12px}
+.split-preview .preview-heading{min-height:36px}
+.icon-button{
+  width:30px;height:30px;padding:0;display:inline-grid;place-items:center;
+  border:1px solid transparent;border-radius:7px;color:var(--muted);
+  background:transparent;flex:0 0 auto
+}
+.icon-button:hover{background:var(--soft);color:var(--accent)}
+.split-source .code-editor{height:var(--pane-height);min-height:0}
+.split-source .code-editor .source-highlight,
+.split-source .code-editor #source{
+  height:100%;min-height:0;padding:12px 13px;border-radius:9px;
+  resize:none;font-size:13px;line-height:1.6
+}
+.preview-frame{
+  position:relative;width:100%;height:var(--pane-height);min-height:0;
+  overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#fff
+}
+.split-preview .preview-frame iframe#preview{
+  display:block;width:100%;height:100%;min-height:0;border:0;border-radius:0;background:#fff
+}
+.preview-fullscreen{
+  position:absolute;top:9px;right:9px;z-index:2;width:34px;height:34px;
+  border:1px solid #dbe2e0;border-radius:8px;
+  background:rgba(255,255,255,.96);color:#253d43;box-shadow:0 1px 5px #193a331c
+}
+.preview-fullscreen:hover{background:#fff;border-color:#a8bcb5}
+.preview-frame:fullscreen{
+  width:100vw;height:100vh;border:0;border-radius:0;background:#fff
+}
+.preview-frame:fullscreen iframe#preview{width:100%;height:100%;border:0}
+.preview-frame:fullscreen .preview-fullscreen{top:14px;right:14px}
+.split-editor.preview-only{grid-template-columns:minmax(0,1fr)}
+.split-editor.preview-only .preview-frame{height:min(75dvh,840px)}
+.publish{margin-top:22px;padding-top:12px}
+.publish h2{font-size:16px;margin:0 0 4px}
+.publish p{font-size:12px;margin:0 0 10px}
+footer{padding:12px;font-size:11px}
+@media(max-width:1100px){
+  .split-editor{grid-template-columns:1fr}
+  .split-preview{position:static}
+  .split-editor{--pane-height:clamp(410px,58dvh,680px)}
+  .split-editor.preview-only .preview-frame{height:clamp(410px,58dvh,680px)}
+}
+@media(max-width:760px){
+  .workspace,.workspace.sidebar-collapsed{padding:8px}
+  .sidebar,.editor{padding:12px}
+  .editor-heading{display:flex}
+  .editor-heading>div:first-of-type{flex:1}
+  .editor-heading .actions{width:100%;justify-content:flex-end}
+  .split-editor{--pane-height:440px}
+  .topbar{padding:9px 12px}
+  .brand small{display:none}
+  .notice{padding:6px 12px}
+}
+
+/* Fullscreen must override the normal and preview-only panel heights. */
+.split-editor .preview-frame:fullscreen{height:100vh;width:100vw}

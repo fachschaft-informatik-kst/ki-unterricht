@@ -115,6 +115,9 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/planung.json");
     assert.equal(await page.locator("#preview").isVisible(),true);
     await page.frameLocator("#preview").locator("h2").filter({hasText:"Unterrichtsplan"}).waitFor();
+    assert.equal(await page.locator("#splitEditor").evaluate(el=>el.classList.contains("preview-only")),true,
+      "Plan view must not reserve a blank source column");
+    assert.equal(await page.locator(".split-source").isVisible(),false);
     await page.locator("#editMaterials").click();
     await page.frameLocator("#preview").locator("table").first().waitFor();
     // Visual regression for the real CSS selectors and HTML wrappers.
@@ -127,6 +130,26 @@ const server=http.createServer((req,res)=>{
       "Highlighted source editor must be visible for chapters");
     assert.equal(await page.locator("#splitEditor").evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(" ").length),2,
       "Editor source and course preview must be visible side by side on desktop");
+    // Both working surfaces must align, and fullscreen belongs inside the preview.
+    const layout=await page.locator("#splitEditor").evaluate(el=>{
+      const code=el.querySelector("#codeEditor").getBoundingClientRect();
+      const render=el.querySelector("#previewFrame").getBoundingClientRect();
+      const action=el.querySelector("#previewFullscreen").getBoundingClientRect();
+      const iframe=el.querySelector("#preview").getBoundingClientRect();
+      return {
+        topDiff:Math.abs(code.top-render.top),heightDiff:Math.abs(code.height-render.height),
+        frameContainsButton:action.left>=render.left&&action.right<=render.right&&
+          action.top>=render.top&&action.bottom<=render.bottom,
+        iframeHeight:iframe.height,frameHeight:render.height,
+        fullscreenParent:el.querySelector("#previewFullscreen").parentElement.id
+      };
+    });
+    assert.ok(layout.topDiff<=2,"Source and preview must start on the same horizontal line");
+    assert.ok(layout.heightDiff<=2,"Source and preview must have the same height");
+    assert.ok(Math.abs(layout.iframeHeight-layout.frameHeight)<=2,"Preview iframe must fill its frame");
+    assert.ok(layout.frameContainsButton,"Fullscreen button must overlay the preview, not use its own toolbar");
+    assert.equal(layout.fullscreenParent,"previewFrame");
+    assert.equal(await page.locator("#previewFullscreen").getAttribute("aria-label"),"Vorschau im Vollbild anzeigen");
     await page.locator("#toggleSidebar").click();
     assert.equal(await page.locator("#courseSidebar").isVisible(),false,"Chapter navigation must collapse");
     assert.equal(await page.locator("#toggleSidebar").getAttribute("aria-expanded"),"false");
@@ -347,6 +370,8 @@ const server=http.createServer((req,res)=>{
     await page.locator("#editGlossary").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/glossar.json");
     assert(await page.locator("#glossaryEditor").isVisible());
+    assert.equal(await page.locator("#splitEditor").evaluate(el=>el.classList.contains("preview-only")),true,
+      "Glossary view must use the whole preview width");
     assert(!await page.locator("#codeEditor").isVisible(),"JSON must be edited through form fields");
     assert.equal(await page.locator("#glossaryTerms button").count(),29);
     await page.locator("#glossarySearch").fill("Token");
