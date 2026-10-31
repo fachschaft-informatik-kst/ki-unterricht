@@ -69,7 +69,7 @@ lesson10=json.loads((ROOT/"kursseiten/basis-gesellschaft/planung.json").read_tex
 assert "Quarks" in video and "ARD-Mediathek" in video and "45 Min." in video
 assert all(f'data-basis-answer="{key}"' in video for key in ("video_beispiel","video_zeit","video"))
 assert all(f'data-basis-answer="{key}"' in debate for key in ("basis-gesellschaft-fall","basis-gesellschaft-pro","basis-gesellschaft-contra","basis-gesellschaft-urteil","basis-gesellschaft-reflexion"))
-assert "Dreier- oder Vierergruppen" not in debate or "drei oder vier" in debate.lower()
+assert "Gruppen mit drei oder vier Personen" in debate and "Klassengespräch" in debate
 assert "Quarks" in lesson10["phases"][2]["schritte"][0]["text"]
 assert [p["minutes"] for p in lesson10["phases"]]==[5,5,45,27,8]
 assert sum(p["minutes"] for p in lesson10["phases"])==90
