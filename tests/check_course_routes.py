@@ -2,6 +2,13 @@
 from pathlib import Path
 import json
 import re
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+from build_course_routes import add_path_depth
+assert add_path_depth("../lab/") == "../../lab/"
+assert add_path_depth("../../projekt/archive.js") == "../../../projekt/archive.js"
+assert add_path_depth("https://example.org/a/../b") == "https://example.org/a/../b"
 
 ROOT = Path(__file__).resolve().parents[1]
 dist = ROOT / "dist"

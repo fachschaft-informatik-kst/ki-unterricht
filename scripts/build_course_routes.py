@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "shared/course-sites.json"
-RELATIVE_PARENT = re.compile(r"(?<![A-Za-z0-9./])(?:\\.\\./)+")
+RELATIVE_PARENT = re.compile(r"(?<![A-Za-z0-9./])(?:\.\./)+")
 
 
 def add_path_depth(source: str) -> str:
