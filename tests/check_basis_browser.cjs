@@ -261,11 +261,13 @@ const assert=require('node:assert/strict');
     await notebookPageInline.route('**/lab/index.html?**',route=>route.fulfill({
       status:200,contentType:'text/html',body:'<!doctype html><html><body>JupyterLite test runtime</body></html>'
     }));
-    for(const [url,expected] of [
-      ['http://127.0.0.1:8770/basis/','content/basis_neuron.ipynb'],
-      ['http://127.0.0.1:8770/projekt/','content/perzeptron_und_neuronale_netze.ipynb']
+    for(const [url,section,expected] of [
+      ['http://127.0.0.1:8770/basis/','basis-neuron','content/basis_neuron.ipynb'],
+      ['http://127.0.0.1:8770/projekt/','perzeptron','content/perzeptron_und_neuronale_netze.ipynb']
     ]){
-      await notebookPageInline.goto(url);
+      // Navigate just as a student would: inactive lesson sections are hidden.
+      // Opening only the nested <details> does not make a hidden lesson visible.
+      await notebookPageInline.goto(url+'#'+section);
       const card=notebookPageInline.locator('.ki-notebook-block[data-notebook="'+expected+'"]');
       assert.equal(await card.count(),1,'Notebook must be present in the matching chapter');
       await card.evaluate(el=>{el.closest('details.kapitel').open=true;});
