@@ -271,7 +271,7 @@ function stagingList(){
       try{
         // Some structured editors stage files without retaining the old text.
         // Fetch it lazily only when the user opens that file's diff.
-        let before=entry.original;
+        let before=entry.expectedSha?entry.original:"";
         if(entry.expectedSha&&before===undefined){
           const previous=await api("/api/file?path="+encodeURIComponent(entry.path));
           before=previous.content;
