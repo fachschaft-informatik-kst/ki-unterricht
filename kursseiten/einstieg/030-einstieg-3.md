@@ -36,10 +36,10 @@ Auf einer Konferenz in Dartmouth wird der Begriff «Artificial Intelligence» ge
           <p class="milestone-detail-kicker">Meilenstein der KI-Geschichte</p>
           <h2 class="milestone-detail-title">Der Begriff «KI»</h2>
           <figure>
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dartmouth-hall.jpg?width=960" alt="Dartmouth Hall auf dem Campus des Dartmouth College, fotografiert nach 1956." loading="lazy" decoding="async" referrerpolicy="no-referrer">
-            <figcaption>1956 diskutierten Forschende am Dartmouth College die Idee, menschliche Intelligenz mit Computern nachzubilden. Der Workshop gilt als wichtiger Ausgangspunkt des Forschungsfelds KI. Das Foto zeigt den Campus in späterer Zeit.</figcaption>
+            <img src="grafiken/ki_dartmouth_1955.svg" alt="Anschauliche Nachzeichnung des Dartmouth-Forschungsantrags von 1955: Der Ausdruck Artificial Intelligence ist hervorgehoben. Ein Pfeil führt zum Workshop 1956." loading="lazy" decoding="async">
+            <figcaption>Der Begriff <strong>Artificial Intelligence</strong> stand bereits 1955 im Titel eines Forschungsantrags von John McCarthy und weiteren Forschenden. 1956 trafen sich Forschende zum Dartmouth-Workshop, der als ein Ausgangspunkt der KI-Forschung gilt. Das Bild zeichnet die Titelseite bewusst vereinfacht nach und ist kein Originalscan.</figcaption>
           </figure>
-          <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:Dartmouth-hall.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Wikimedia Commons · gemeinfrei</a></p>
+          <p class="milestone-source">Illustration: eigene grafische Nachzeichnung nach <a href="https://commons.wikimedia.org/wiki/File:A_Proposal_for_the_Dartmouth_Summer_Research_Project_on_Artificial_Intelligence,_by_John_McCarthy_et_al,_1955.pdf" target="_blank" rel="noopener noreferrer">John McCarthy et al., Original-Forschungsantrag (1955), Wikimedia Commons</a>.</p>
         </article>
         </template></li>
       <li><span class="jahr">1958</span>
@@ -54,10 +54,10 @@ Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es i
           <p class="milestone-detail-kicker">Meilenstein der KI-Geschichte</p>
           <h2 class="milestone-detail-title">Perzeptron</h2>
           <figure>
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Elementary_perceptron.jpg?width=960" alt="Schema eines einfachen Perzeptrons mit Eingaben und lernbarer Ausgabeeinheit." loading="lazy" decoding="async" referrerpolicy="no-referrer">
-            <figcaption>Das Perzeptron verbindet Eingaben mit Gewichten und einer Entscheidung. Beim Lernen werden Gewichte verändert, damit es Beispiele besser unterscheiden kann. Gezeigt ist eine später erstellte schematische Darstellung.</figcaption>
+            <img src="grafiken/neuron_entscheider.svg" alt="Schwimmbad-Neuron aus DL 3: Sonne, Freundinnen und Freunde sowie eine Prüfung sind drei Eingaben mit unterschiedlich starken Gewichten, die zur Entscheidung Ja oder Nein führen." loading="lazy" decoding="async">
+            <figcaption>Beim Schwimmbad-Beispiel entscheidet ein einzelnes künstliches Neuron anhand von Sonne, Begleitung und einer bevorstehenden Prüfung: Gehe ich schwimmen? Jede Eingabe hat ein Gewicht. <strong>In DL 3</strong> untersucht ihr dieselbe Grafik genauer und seht, wie Gewichte beim Lernen angepasst werden. Das Bild illustriert das Funktionsprinzip, nicht ein historisches Gerät.</figcaption>
           </figure>
-          <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:Elementary_perceptron.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Kirdin, Sidorov und Zolotykh · CC BY 4.0</a></p>
+          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/projekt/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 3</a>.</p>
         </article>
         </template></li>
       <li><span class="jahr">1966</span>
