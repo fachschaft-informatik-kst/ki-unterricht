@@ -33,7 +33,7 @@ def build():
     for source in ITEMS:
         nb = nbformat.read(ROOT/'content'/source, as_version=4)
         nb.cells = [c for c in nb.cells if 'ki-standalone-only' not in c.metadata.get('tags', [])]
-        first = True
+        first = not Path(source).name.startswith(("lesson_", "basis_lesson_"))
         for cell in nb.cells:
             if cell.cell_type == 'markdown':
                 cell.source = re.sub(r'\[([^]]+)\]\((?:ki_projekt/)?[^/)]+\.ipynb\)', r'**\1** (über die Kursnavigation)', cell.source)
