@@ -237,6 +237,7 @@ body.course-basis .drag-over{background:#dfe6fb!important}
   display:block;margin:0;font-size:12px;line-height:1.25;font-weight:700;color:var(--muted)
 }
 .pane-heading .preview-title{font-size:12px}
+.split-preview .preview-heading{min-height:36px}
 .icon-button{
   width:30px;height:30px;padding:0;display:inline-grid;place-items:center;
   border:1px solid transparent;border-radius:7px;color:var(--muted);
@@ -290,3 +291,6 @@ footer{padding:12px;font-size:11px}
   .brand small{display:none}
   .notice{padding:6px 12px}
 }
+
+/* Fullscreen must override the normal and preview-only panel heights. */
+.split-editor .preview-frame:fullscreen{height:100vh;width:100vw}
