@@ -170,6 +170,13 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   // published visual lessons without discarding the stored notebook.
   const refreshDL3=q.frameLocator('#project-frame').getByRole('button',{name:'Grafiken aktivieren ↻'});
   await refreshDL3.waitFor({state:'visible'});
+  // The course page and embedded JupyterLite notebook scroll independently.
+  // When the lesson is reopened after a reload, its iframe can be below the
+  // outer viewport even though the toolbar button is visible inside the frame.
+  // Bring the iframe's TOP (where the toolbar lives) into view first, then
+  // exercise an actual user click rather than bypassing it with DOM .click().
+  await q.locator('#project-frame').evaluate(frame =>
+    frame.scrollIntoView({block:'start',inline:'nearest',behavior:'instant'}));
   await refreshDL3.click();
   await q.frameLocator('#project-frame').getByRole('button',{name:'Grafiken aktualisiert ✓'}).waitFor({state:'visible',timeout:120000});
   await restoredGate.locator('.widget-dropdown select').first().waitFor({state:'visible'});
