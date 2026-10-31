@@ -22,6 +22,10 @@ Eine Katze lässt sich nicht durch wenige handprogrammierte Merkmale erkennen: P
 
 **Zusammenhang:** Deep Learning ist Teil von ML, ML Teil von KI. «Generativ» beschreibt die Aufgabe, nicht eine vierte gleichrangige technische Schublade. Historisch führen Meilensteine von symbolischen Programmen über Expertensysteme und datengetriebenes Lernen zu tiefen und grossen generativen Modellen.
 
+**Zuordnungsaktivität DL 1 (spezifischste Kategorie):** Ampel mit festem Zeitplan = keine KI; regelbasiertes Schach-Suchprogramm = regelbasierte KI; Spamfilter mit gelerntem Entscheidungsbaum = maschinelles Lernen ohne Deep Learning; Bildklassifikator mit tiefem neuronalem Netz = Deep Learning; Text erzeugendes Sprachmodell = generative KI. Ein tiefes Sprachmodell gehört gleichzeitig zu Deep Learning, ML und KI; die Zuordnung ist deshalb nicht als gegenseitiger Ausschluss zu verstehen. Auf die **konkrete Systembeschreibung** kommt es an.
+
+**Didaktik:** In der 1. Klasse sind vier plus fünf eindeutige Beispiele und eine kurze Reflexion der Pflichtkern. In der 4. Klasse begründen die Lernenden zusätzlich zwei Grenzfälle; eigene Beispiele bleiben Wahlvertiefung. Tastatur-/Touch-Auswahl ist gleichwertig mit Drag-and-drop. Die automatische Selbstkontrolle gibt erst nach vollständiger Einordnung Rückmeldung.
+
 ### Schwache und starke KI
 
 - **Schwache KI:** für bestimmte Aufgaben oder Aufgabenbereiche entwickelt; Beispiele sind Schachcomputer, Bilderkennung und heutige Chatbots. Viele Fähigkeiten bedeuten nicht automatisch allgemeine Intelligenz.

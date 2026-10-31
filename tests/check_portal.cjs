@@ -48,6 +48,40 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('[data-lab="lernarten.ipynb"]').count(),0);assert.equal(await p.locator('#lernarten a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]').count(),1);
 
   await p.locator('.nav a[href="#einstieg"]').click();
+    // DL1 two accessible matching activities: mouse drag, select fallback, feedback and reset.
+    const rulesTask=p.locator('#einstieg [data-ki-sort-task="regeln"]');
+    const termsTask=p.locator('#einstieg [data-ki-sort-task="begriffe"]');
+    assert.equal(await rulesTask.locator('[data-ki-sort-card]').count(),4);
+    assert.equal(await termsTask.locator('[data-ki-sort-card]').count(),5);
+    assert(await rulesTask.locator('[data-ki-sort-check]').isDisabled());
+    // Exercise the HTML5 drag-and-drop event contract deterministically in Chromium.
+    const transfer=await p.evaluateHandle(()=>new DataTransfer());
+    await rulesTask.locator('[data-ki-sort-card="automat"]').dispatchEvent('dragstart',{dataTransfer:transfer});
+    await rulesTask.locator('[data-ki-sort-bin="regeln"]').dispatchEvent('dragover',{dataTransfer:transfer});
+    await rulesTask.locator('[data-ki-sort-bin="regeln"]').dispatchEvent('drop',{dataTransfer:transfer});
+    await rulesTask.locator('[data-ki-sort-card="automat"]').dispatchEvent('dragend',{dataTransfer:transfer});
+    assert.equal(await rulesTask.locator('[data-ki-sort-card="automat"] select').inputValue(),'regeln',JSON.stringify(await rulesTask.evaluate(el=>({ready:el.classList.contains('ki-sort-ready'),pool:el.querySelector('[data-ki-sort-pool]').children.length,target:el.querySelector('[data-ki-sort-bin="regeln"] [data-ki-sort-target]').children.length}))),'Drag updates answer field');
+    await rulesTask.locator('[data-ki-sort-card="uebersetzung"] select').selectOption('daten');
+    await rulesTask.locator('[data-ki-sort-card="ampel"] select').selectOption('regeln');
+    await rulesTask.locator('[data-ki-sort-card="gesicht"] select').selectOption('daten');
+    await rulesTask.locator('[data-ki-sort-check]').click();
+    assert((await rulesTask.locator('[data-ki-sort-status]').innerText()).includes('Alle 4 Beispiele richtig'));
+    await rulesTask.locator('[data-ki-sort-reset]').click();
+    assert.equal(await rulesTask.locator('[data-ki-sort-card="automat"] select').inputValue(),'');
+    await termsTask.locator('[data-ki-sort-card="spam"] select').selectOption('deep');
+    await termsTask.locator('[data-ki-sort-card="ampel"] select').selectOption('keine');
+    await termsTask.locator('[data-ki-sort-card="schach"] select').selectOption('regelki');
+    await termsTask.locator('[data-ki-sort-card="bilder"] select').selectOption('deep');
+    await termsTask.locator('[data-ki-sort-card="text"] select').selectOption('generativ');
+    await termsTask.locator('[data-ki-sort-check]').click();
+    assert((await termsTask.locator('[data-ki-sort-status]').innerText()).includes('4 von 5 richtig'));
+    assert.equal(await termsTask.locator('[data-ki-sort-card="spam"]').getAttribute('data-ki-sort-result'),'incorrect');
+    await termsTask.locator('[data-ki-sort-card="spam"] select').selectOption('ml');
+    await termsTask.locator('[data-ki-sort-check]').click();
+    assert((await termsTask.locator('[data-ki-sort-status]').innerText()).includes('Alle 5 Beispiele richtig'));
+    assert.equal(await termsTask.locator('select[data-answer]').count(),5);
+    assert.equal(await p.locator('#einstieg-2 [data-answer="begriff_bsp_1"]').count(),1,'Prior free examples remain available');
+    assert.equal(await p.locator('#einstieg-2 [data-answer="regeln_oder_daten"]').count(),1,'One reflection answer');
     assert.equal(await p.locator('#einstieg .external-map').count(),0);
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_programmierung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_einteilung.png"]').count(),1);
@@ -63,7 +97,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#einstieg-2').evaluate(e=>e.open),false);
     await p.locator('.nav-sub a[href="#einstieg-2"]').click();
     await p.waitForFunction(()=>document.getElementById('einstieg-2').open);
-    assert.equal(await p.locator('#einstieg table.typen').count(),2);
+    assert.equal(await p.locator('#einstieg table.typen').count(),1);
     for(const key of ['ki_ordnung','gesetze','begriffe'])assert.equal(await p.locator('#einstieg [data-answer="'+key+'"]').count(),1);
   await p.locator('.nav a[href="#lernarten"]').click();
   await p.locator('#lernarten').waitFor({state:'visible'});

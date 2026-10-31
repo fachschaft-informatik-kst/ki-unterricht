@@ -12,10 +12,11 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "projekt/index.template.html"
 PORTAL_CSS = ROOT / "projekt/portal.css"
+GLOSSARY_CSS = ROOT / "projekt/glossar.css"
+SORT_CSS = ROOT / "projekt/dl1_sort.css"
 BASIS_PAGE = ROOT / "basis/index.template.html"
 BASIS_CSS = ROOT / "basis/basis.css"
 ADMIN = ROOT / "projekt/admin/admin.js"
-GLOSSARY_CSS = ROOT / "projekt/glossar.css"
 
 
 def values():
@@ -34,13 +35,13 @@ def values():
     basis_chrome = basis_template[basis_body:basis_section]
     if '<div class="shell"><main id="inhalt">' not in basis_chrome:
         raise RuntimeError("First-year course shell structure has changed")
+    shared_styles = GLOSSARY_CSS.read_text(encoding="utf-8") + "\n" + SORT_CSS.read_text(encoding="utf-8")
     return {
-        "COURSE_PREVIEW_CSS": m.group(1) + "\n" + PORTAL_CSS.read_text(encoding="utf-8"),
+        "COURSE_PREVIEW_CSS": m.group(1) + "\n" + PORTAL_CSS.read_text(encoding="utf-8") + "\n" + shared_styles,
         "COURSE_PREVIEW_CHROME": chrome,
         # Identical order to build_basis.py: theme.css + portal.css + basis.css.
-        "BASIS_PREVIEW_CSS": BASIS_CSS.read_text(encoding="utf-8"),
+        "BASIS_PREVIEW_CSS": BASIS_CSS.read_text(encoding="utf-8") + "\n" + shared_styles,
         "BASIS_PREVIEW_CHROME": basis_chrome,
-        "GLOSSARY_PREVIEW_CSS": GLOSSARY_CSS.read_text(encoding="utf-8"),
     }
 
 

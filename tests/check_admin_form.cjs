@@ -231,6 +231,7 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#path").textContent(),/kursseiten\/vertiefung-ki-im-alltag\//);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\nEin eigenes Beispiel.\n");
     await page.locator("#stage").click();
+    publishFailure=false; // Previous API failure is a deliberate regression test; restore success before testing glossary PR publishing.
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
     assert.ok(submitted);

@@ -67,7 +67,7 @@ assert "Sprachmodelle" in page.get_text()
 assert "wahrscheinliche" in page.get_text()
 assert page.select_one("a[href*='portal/basis_fotoprojekt.ipynb']")
 assert (base/"persistence.js").is_file(), "Basis ZIP export/import controller missing"
-for path in ["basis.css","basis.js","theme.css","kurs.json","unterrichtsplan.html"]:
+for path in ["basis.css","basis.js","theme.css","dl1_sort.css","dl1_sort.js","kurs.json","unterrichtsplan.html"]:
     assert (base/path).is_file(), path
 styles = (base/"theme.css").read_text(encoding="utf-8")
 assert "--accent" in styles and ".sidebar" in styles
