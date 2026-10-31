@@ -54,7 +54,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await rulesTask.locator('[data-ki-sort-card]').count(),4);
     assert.equal(await termsTask.locator('[data-ki-sort-card]').count(),5);
     assert(await rulesTask.locator('[data-ki-sort-check]').isDisabled());
-    await rulesTask.locator('[data-ki-sort-card="automat"]').dragTo(rulesTask.locator('[data-ki-sort-bin="regeln"]'));
+    await rulesTask.locator('[data-ki-sort-card="automat"]').dragTo(rulesTask.locator('[data-ki-sort-bin="regeln"]'),{sourcePosition:{x:15,y:15}});
     assert.equal(await rulesTask.locator('[data-ki-sort-card="automat"] select').inputValue(),'regeln','Drag updates answer field');
     await rulesTask.locator('[data-ki-sort-card="uebersetzung"] select').selectOption('daten');
     await rulesTask.locator('[data-ki-sort-card="ampel"] select').selectOption('regeln');
