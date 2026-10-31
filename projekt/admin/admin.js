@@ -237,6 +237,7 @@ function stagingList(){
   $("publishHint").textContent=count===0?"Noch nichts vorgemerkt":
     count===1?"1 Datei bereit für den Pull Request":count+" Dateien bereit für den Pull Request";
   $("publish").disabled=count===0;
+  $("diffControls").hidden=count===0;
   if(!count){
     const li=document.createElement("li");li.className="staged-empty";
     li.textContent="Noch keine Änderungen. Bearbeite einen Inhalt und klicke auf «Änderung vormerken».";
@@ -258,7 +259,7 @@ function stagingList(){
     details.dataset.diffPath=entry.path;
     const summary=document.createElement("summary");
     summary.textContent=(entry.delete?"Gelöschte Datei":!entry.expectedSha?"Neue Datei":"Änderungen")+
-      " · Code-Diff anzeigen";
+      " · Zeilenvergleich (vorher / nachher)";
     details.append(summary);
     const panel=document.createElement("div");panel.className="diff-result";
     details.append(panel);
@@ -286,9 +287,15 @@ function stagingList(){
       }
     });
     li.append(details);node.append(li);
-    if(openPaths.has(entry.path))details.open=true;
+    if(openPaths.has(entry.path)||count<=3)details.open=true;
   }
 }
+$("expandDiffs").addEventListener("click",()=>{
+  for(const details of $("staged").querySelectorAll("details.staged-diff"))details.open=true;
+});
+$("collapseDiffs").addEventListener("click",()=>{
+  for(const details of $("staged").querySelectorAll("details.staged-diff"))details.open=false;
+});
 // Section and chapter navigation share one selection state; the legacy
 // native selector remains available to keyboard and assistive technologies.
 function renderSectionNav(){
