@@ -97,7 +97,7 @@ const assert=require('node:assert/strict');
       {label:'Lernen aus Daten',background:'rgb(154, 52, 18)',color:'rgb(255, 255, 255)'}
     ],'Distinct blue/orange markers with white text in DL1');
     const legendDescription=await page.locator('#basis-ki #einstieg-3 .section-intro').innerText();
-    assert(legendDescription.includes('blau')&&legendDescription.includes('orange')&&legendDescription.includes('KI-Winter'));
+    assert(legendDescription.includes('Regeln von Menschen')&&legendDescription.includes('Lernen aus Daten')&&legendDescription.includes('KI-Winter'));
 
     const firstYearHistory=page.locator('#basis-ki #einstieg-3 [data-milestone-open="turing"]');
     const basisScrollBefore=await page.evaluate(()=>{window.scrollTo({top:340,behavior:'instant'});return window.scrollY});
