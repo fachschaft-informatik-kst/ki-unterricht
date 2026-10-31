@@ -693,11 +693,11 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#pendingCount").textContent(),"2");
     await page.locator("#toggleChanges").click();
     const newNotebookDiff=page.locator('#staged details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
-    await newNotebookDiff.locator("summary").click();
+    if(!(await newNotebookDiff.evaluate(el=>el.open)))await newNotebookDiff.locator("summary").click();
     await newNotebookDiff.locator(".diff-add").first().waitFor();
     assert.match(await newNotebookDiff.locator(".diff-summary").textContent(),/Neue Datei/);
     assert.equal(await newNotebookDiff.locator(".diff-remove").count(),0);
-    assert.match(await newNotebookDiff.locator(".diff-viewport").textContent(),/Mein erstes Experiment/);
+    assert.match(await newNotebookDiff.locator(".diff-viewport").textContent(),/Neues Python-Experiment/);
     // Treat HTML in diffs as literal source, never as executable markup.
     await page.evaluate(()=>{
       const details=document.querySelector('details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
