@@ -31,7 +31,7 @@ assert course.select_one("#einstieg-3")
 # distinct shared colours rather than first-year-only blue overrides.
 for doc,scope in ((course,"#einstieg-3"),(BeautifulSoup((ROOT / "_build/site/basis/index.html").read_text(encoding="utf-8"),"html.parser"),"#basis-ki #einstieg-3")):
     intro=doc.select_one(scope+" .section-intro")
-    assert intro and "blau" in intro.get_text().lower() and "orange" in intro.get_text().lower()
+    assert intro and "Regeln von Menschen" in intro.get_text() and "Lernen aus Daten" in intro.get_text()
     assert len(intro.select(".marke.regeln"))==1 and len(intro.select(".marke.daten"))==1
     assert "KI-Winter" in intro.get_text() and "Klickt auf einen Titel" in intro.get_text()
 shared_css=(ROOT / "projekt/portal.css").read_text(encoding="utf-8")
