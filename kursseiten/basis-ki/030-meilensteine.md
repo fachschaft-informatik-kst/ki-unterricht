@@ -19,7 +19,7 @@ Alan Turing schlägt vor, Maschinenintelligenz so zu prüfen: Kann ein Mensch im
           <h2 class="milestone-detail-title">Turing-Test</h2>
           <figure>
             <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Turing_test_diagram.svg?width=960" alt="Schema des Turing-Tests: Eine fragende Person erhält Textantworten von einer unbekannten Maschine und einem Menschen." loading="lazy" decoding="async" referrerpolicy="no-referrer">
-            <figcaption>So funktioniert der Turing-Test: Eine Person stellt schriftlich Fragen und erhält Antworten von zwei verborgenen Gesprächspartnern – einem Menschen und einem Computer. Kann sie zuverlässig herausfinden, welche Antworten von der Maschine stammen? Das Bild zeigt den Versuchsaufbau, nicht Alan Turing selbst.</figcaption>
+            <figcaption>Alan Turing schlug 1950 diesen Versuchsaufbau vor: Eine Person stellt schriftlich Fragen und erhält Antworten von zwei verborgenen Gesprächspartnern – einem Menschen und einem Computer. Kann sie zuverlässig herausfinden, welche Antworten von der Maschine stammen? Das Bild zeigt den Versuchsaufbau, nicht Alan Turing selbst.</figcaption>
           </figure>
           <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:Turing_test_diagram.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Schoeneh · CC0 1.0</a></p>
         </article>
