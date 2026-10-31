@@ -388,7 +388,7 @@ function useFile(path,sha,content,original=content){
   $("notebookInfo").textContent=isNotebook?
     (path.split("/").pop()+" · Änderungen im JupyterLite bearbeiten, «Notebook-Stand übernehmen», danach «Änderung vormerken»."):"";
   $("notebookPanel").hidden=true;
-  if(isNotebook)openRuntimeNotebook(content,path);
+  if(isNotebook){renderNotebookCells();openRuntimeNotebook(content,path);}
   $("previewButton").hidden=isNotebook;
   $("previewHeading").hidden=isNotebook;
   $("preview").hidden=isNotebook;
@@ -1032,6 +1032,66 @@ async function addLessonToCurrentSection(){
 }
 
 
+// Native cell editor is always available, including before a new .ipynb is
+// published or if the cross-origin JupyterLite frame cannot be loaded.
+function appendNotebookCell(type,value,index){
+  const item=document.createElement("div");item.className="notebook-cell";
+  if(index!==null)item.dataset.originalIndex=String(index);
+  const head=document.createElement("div");head.className="notebook-cell-head";
+  const title=document.createElement("strong");title.textContent="Zelle "+($("notebookCellList").children.length+1);
+  const select=document.createElement("select");select.setAttribute("aria-label","Zelltyp");
+  for(const [key,label] of [["code","Python"],["markdown","Markdown"],["raw","Rohtext"]]){
+    const option=document.createElement("option");option.value=key;option.textContent=label;select.append(option);
+  }
+  select.value=type;
+  const remove=document.createElement("button");remove.type="button";remove.className="button light";
+  remove.textContent="Zelle entfernen";
+  remove.addEventListener("click",()=>item.remove());
+  head.append(title,select,remove);
+  const source=document.createElement("textarea");source.className="notebook-cell-source";
+  source.setAttribute("aria-label","Quelltext der Zelle");
+  source.rows=type==="code"?6:4;source.value=value;
+  item.append(head,source);$("notebookCellList").append(item);
+  return item;
+}
+function renderNotebookCells(){
+  const container=$("notebookCellList");container.replaceChildren();
+  const doc=JSON.parse($("source").value);validateNotebook(doc);
+  doc.cells.forEach((cell,i)=>appendNotebookCell(cell.cell_type,cell.source.join(""),i));
+}
+function applyNotebookCells(){
+  if(!notebookPath(state.current?.path||""))throw Error("Bitte zuerst ein Notebook auswählen.");
+  if(runtimeDirty)throw Error("JupyterLite hat noch ungesicherte Änderungen. Erst «Notebook-Stand übernehmen» wählen.");
+  const doc=JSON.parse($("source").value);
+  doc.cells=[...$("notebookCellList").children].map(item=>{
+    const type=item.querySelector("select").value;
+    const source=item.querySelector("textarea").value;
+    const n=Number(item.dataset.originalIndex);
+    const original=item.dataset.originalIndex===undefined?null:doc.cells[n];
+    const cell=original?.cell_type===type?structuredClone(original):{
+      cell_type:type,id:crypto.randomUUID().slice(0,8),metadata:{},
+      ...(type==="code"?{execution_count:null,outputs:[]}:{})
+    };
+    cell.source=[source];
+    if(type==="code"){
+      cell.execution_count=null;cell.outputs=[];
+    }
+    return cell;
+  });
+  validateNotebook(doc);
+  const content=JSON.stringify(doc,null,1)+"\n";
+  $("source").value=content;
+  highlightSource();
+  if(!stage())throw Error("Notebook konnte nicht vorgemerkt werden.");
+  renderNotebookCells();
+  // A live frame can be out of date after editing cells in the fallback.
+  // Reload from the exact staged content so both views stay consistent.
+  openRuntimeNotebook(content,state.current.path);
+  runtimeStatus("Zellen vorgemerkt. JupyterLite lädt die aktualisierte Notebook-Version.");
+}
+$("notebookAddCode").addEventListener("click",()=>appendNotebookCell("code","# Neuer Python-Code\n",null));
+$("notebookAddMarkdown").addEventListener("click",()=>appendNotebookCell("markdown","## Neuer Abschnitt\n",null));
+$("notebookApplyCells").addEventListener("click",()=>{try{applyNotebookCells();}catch(e){error(e);}});
 function validateNotebook(doc){
   if(!doc||!Array.isArray(doc.cells)||doc.nbformat!==4||!doc.metadata||!doc.cells.every(c=>
     ["markdown","code","raw"].includes(c.cell_type)&&Array.isArray(c.source)&&c.source.every(s=>typeof s==="string")))
@@ -1041,7 +1101,7 @@ function validateNotebook(doc){
 // The existing notebook bridge sends explicit snapshots to the editor for GitHub PRs.
 const runtimeOrigin="https://fachschaft-informatik-kst.github.io";
 const runtimeFrame=$("notebookRuntime");
-let runtimeReady=false,runtimeDirty=false,runtimeRevision=0,runtimePath="",runtimeRequests=new Map();
+let runtimeReady=false,runtimeDirty=false,runtimeRevision=0,runtimePath="",runtimeRequests=new Map(),runtimeStartTimer=null;
 function runtimeStatus(message){$("notebookRuntimeStatus").textContent=message;}
 function runtimeRequest(type,extra={}){
   return new Promise((resolve,reject)=>{
@@ -1057,7 +1117,18 @@ async function openRuntimeNotebook(content,path){
   runtimePath=path;runtimeReady=false;runtimeDirty=false;runtimeRevision=0;
   for(const request of runtimeRequests.values()){clearTimeout(request.timeout);request.reject(Error("Notebook gewechselt."));}
   runtimeRequests.clear();
-  runtimeStatus("Python-Umgebung wird geladen …");
+  clearTimeout(runtimeStartTimer);
+  runtimeStatus("JupyterLite wird geladen. Falls die Verbindung nicht klappt, kannst du unten die Notebook-Zellen direkt bearbeiten.");
+  const unpublished=state.current?.sha===null;
+  $("notebookDraftNotice").hidden=!unpublished;
+  const external=$("notebookExternal");
+  external.hidden=unpublished;
+  if(!unpublished)external.href=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+
+    encodeURIComponent("portal/"+path.split("/").pop());
+  runtimeStartTimer=setTimeout(()=>{
+    if(!runtimeReady&&runtimePath===path)
+      runtimeStatus("JupyterLite hat noch nicht geantwortet. Prüfe die Verbindung oder bearbeite die Notebook-Zellen unten direkt.");
+  },45000);
   // Start with a known teaching notebook and restore the actual selected source.
   // The iframe may not access OAuth cookies or the GitHub API.
   // For a new draft the published path does not exist yet. Open a known
@@ -1076,7 +1147,8 @@ window.addEventListener("message",async event=>{
     if(data.type==="error")req.reject(Error(data.error||"Notebook-Fehler"));else req.resolve(data);
   }
   if(data.type==="ready"){
-    if(!data.ready){runtimeStatus(data.error||"Notebook-Start fehlgeschlagen.");return;}
+    clearTimeout(runtimeStartTimer);
+    if(!data.ready){runtimeStatus((data.error||"Notebook-Start fehlgeschlagen.")+" Die Notebook-Zellen können unten direkt bearbeitet werden.");return;}
     if(runtimeReady)return;
     runtimeReady=true;
     try{
@@ -1096,6 +1168,7 @@ async function snapshotRuntime(){
   const data=await runtimeRequest("snapshot");
   validateNotebook(data.notebook);
   $("source").value=JSON.stringify(data.notebook,null,1)+"\\n";
+  renderNotebookCells();
   runtimeDirty=false;runtimeStatus("Notebook übernommen. Jetzt «Änderung vormerken» wählen.");
 }
 $("notebookSnapshot").addEventListener("click",()=>snapshotRuntime().catch(error));
