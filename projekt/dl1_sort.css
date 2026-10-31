@@ -35,9 +35,9 @@
 .ki-sort-check{background:var(--accent);color:white}.ki-sort-check:disabled{opacity:.48;cursor:not-allowed}
 .ki-sort-reset{background:white;color:var(--accent)}
 .ki-sort-status{flex-basis:100%;font-size:13px;color:var(--muted);line-height:1.5}
-/* Same quiet accordion language as the glossary Leitfrage (no nested card). */
-.ki-sort-task details.ki-sort-help{margin:14px 0 0;padding:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;overflow:visible}
-.ki-sort-task .ki-sort-help>summary{display:flex;align-items:center;gap:10px;box-sizing:border-box;width:100%;min-height:44px;margin:0;padding:11px 0;border:0;border-radius:0;background:transparent;color:var(--accent);font-size:14px;font-weight:700;line-height:1.4;list-style:none;cursor:pointer}
+/* Same panel, divider, toggle and answer surface as the glossary Leitfrage. */
+.ki-sort-task details.ki-sort-help{margin:15px 0 0;padding:14px 16px 8px;border:1px solid var(--line);border-radius:12px;background:#f8faf9;background:color-mix(in srgb,var(--soft) 48%,#fff);overflow:visible}
+.ki-sort-task .ki-sort-help>summary{display:flex;align-items:center;gap:10px;box-sizing:border-box;width:100%;min-height:44px;margin:0;padding:10px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--accent);font-size:14px;font-weight:700;line-height:1.4;list-style:none;cursor:pointer}
 .ki-sort-help>summary::-webkit-details-marker{display:none}
 .ki-sort-help>summary::after,.ki-sort-help[open]>summary::after{content:none}
 .ki-sort-help>summary:hover{color:var(--ink)}
@@ -49,8 +49,9 @@
 .ki-sort-help-icon::before{content:"";display:block;width:7px;height:7px;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-2px) rotate(45deg);transition:transform .16s ease}
 .ki-sort-help[open] .ki-sort-help-icon::before{transform:translateY(2px) rotate(225deg)}
 .ki-sort-help>summary:hover .ki-sort-help-icon{border-color:var(--accent)}
-.ki-sort-help>p{margin:2px 0 6px;padding:11px 13px;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:#fff;color:var(--ink);font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.ki-sort-help>p{margin:8px 0 6px;padding:11px 13px;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:#fff;color:var(--ink);font-size:14px;line-height:1.6;overflow-wrap:anywhere}
 @media(prefers-reduced-motion:reduce){.ki-sort-help-icon::before{transition:none}}
+@media(max-width:720px){.ki-sort-task details.ki-sort-help{padding:13px 14px 7px}}
 .ki-sort-reflection{max-width:700px}
 .ki-sort-legacy{margin:22px 0;border:1px solid var(--line);border-radius:12px;background:white}
 .ki-sort-legacy>summary{padding:13px 16px;font-size:14px}
