@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 575" role="img" aria-labelledby="title desc">
+<title id="title">So arbeitet ein regelbasiertes Expertensystem</title>
+<desc id="desc">Fachleute erfassen Wenn-dann-Regeln in einer Wissensbasis. Ein Benutzer meldet einen Fall. Die Schlussfolgerungs-Komponente wendet passende Regeln an und gibt eine begründete Diagnose zurück.</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#31586f"/></marker>
+</defs>
+<rect width="960" height="575" rx="22" fill="#f5f8fb"/>
+<text x="42" y="54" fill="#203d50" font-family="Arial,Helvetica,sans-serif" font-size="26" font-weight="700">Wie arbeitet ein Expertensystem?</text>
+<text x="42" y="81" fill="#516776" font-family="Arial,Helvetica,sans-serif" font-size="15">Menschen geben Fachwissen als Regeln vor – das System schliesst daraus.</text>
+<g font-family="Arial,Helvetica,sans-serif">
+<rect x="34" y="119" width="268" height="142" rx="15" fill="#fff" stroke="#9ab2c5" stroke-width="2"/>
+<text x="54" y="151" font-size="20" font-weight="700" fill="#203d50">Fachleute</text>
+<text x="54" y="183" font-size="16" fill="#344d5e">kennen Zusammenhänge</text>
+<text x="54" y="209" font-size="16" fill="#344d5e">und formulieren Regeln</text>
+<text x="54" y="238" font-size="13" fill="#516776">Wissen wird festgelegt</text>
+<rect x="372" y="119" width="548" height="142" rx="15" fill="#e3effa" stroke="#739abd" stroke-width="2"/>
+<text x="394" y="151" font-size="20" font-weight="700" fill="#203d50">Wissensbasis</text>
+<text x="394" y="184" font-size="17" fill="#203d50" font-weight="700">WENN</text>
+<text x="459" y="184" font-size="16" fill="#344d5e">Gerät startet nicht und Akku ist leer,</text>
+<text x="394" y="215" font-size="17" fill="#203d50" font-weight="700">DANN</text>
+<text x="459" y="215" font-size="16" fill="#344d5e">Akku laden oder prüfen.</text>
+<text x="394" y="242" font-size="13" fill="#516776">Viele solcher Regeln sind gespeichert.</text>
+<path d="M302 184 H367" fill="none" stroke="#31586f" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="322" y="169" font-size="13" fill="#31586f">Regeln</text>
+<rect x="34" y="324" width="268" height="147" rx="15" fill="#fff" stroke="#9ab2c5" stroke-width="2"/>
+<text x="54" y="357" font-size="20" font-weight="700" fill="#203d50">Konkreter Fall</text>
+<text x="54" y="390" font-size="16" fill="#344d5e">«Mein Gerät startet nicht.</text>
+<text x="54" y="416" font-size="16" fill="#344d5e">Der Akku ist leer.»</text>
+<text x="54" y="447" font-size="13" fill="#516776">Angaben der nutzenden Person</text>
+<rect x="372" y="324" width="268" height="147" rx="15" fill="#dcefe7" stroke="#6eaa94" stroke-width="2"/>
+<text x="392" y="357" font-size="19" font-weight="700" fill="#203d50">Schlussfolgerung</text>
+<text x="392" y="389" font-size="16" fill="#344d5e">Welche Regeln passen</text>
+<text x="392" y="415" font-size="16" fill="#344d5e">zu diesem Fall?</text>
+<text x="392" y="445" font-size="13" fill="#516776">Regeln werden angewendet</text>
+<rect x="706" y="324" width="214" height="147" rx="15" fill="#fff0d9" stroke="#d3a65c" stroke-width="2"/>
+<text x="728" y="357" font-size="20" font-weight="700" fill="#684a17">Ergebnis</text>
+<text x="728" y="389" font-size="16" fill="#4f493c">«Akku laden</text>
+<text x="728" y="415" font-size="16" fill="#4f493c">oder prüfen.»</text>
+<text x="728" y="446" font-size="13" fill="#766349">begründeter Vorschlag</text>
+<path d="M302 396 H367" fill="none" stroke="#31586f" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M640 396 H701" fill="none" stroke="#31586f" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M630 261 V306 H508 V319" fill="none" stroke="#31586f" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="653" y="291" font-size="13" fill="#31586f">Regeln</text>
+<rect x="34" y="502" width="886" height="45" rx="10" fill="#e9eef4"/>
+<text x="55" y="531" font-size="16" fill="#203d50"><tspan font-weight="700">Wichtig:</tspan> Das System lernt diese Regeln nicht selbst – Fachleute haben sie eingegeben.</text>
+</g>
+</svg>
