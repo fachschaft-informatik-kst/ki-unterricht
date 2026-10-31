@@ -340,6 +340,9 @@ function useFile(path,sha,content,original=content){
   $("preview").removeAttribute("srcdoc");
   if(!isNotebook)preview();
   chapterList();
+  for(const [id,active] of [
+    ["editPlan",isPlan],["editMaterials",path.endsWith("/materialien.md")],["editGlossary",isGlossary]
+  ])$(id).setAttribute("aria-current",String(active));
   for(const b of $("notebooks").querySelectorAll("button"))b.setAttribute("aria-current",String(b.title===path));
 }
 function savedText(){return state.current?state.staged.get(state.current.path)?.content??state.current.original:"";}
