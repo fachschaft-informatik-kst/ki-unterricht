@@ -612,6 +612,56 @@ const server=http.createServer((req,res)=>{
     assert.match(token.vertieftBeispiel,/Tokenfolgen/);
     assert(submittedGlossary.begriffe.some(t=>t.id==="testglossarbegriff"));
 
+    // Notebook block belongs to the selected chapter and creates two files
+    // atomically: a valid .ipynb and the chapter that embeds it.
+    await page.reload();
+    await page.locator("#section").selectOption("einstieg");
+    await page.locator("#chapters button").filter({hasText:"030-einstieg-3"}).click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/030-einstieg-3.md");
+    await page.locator("#blockPicker").click();
+    await page.locator('[data-block="notebook"]').hover();
+    await page.locator("#blockPreview .ki-notebook-block").waitFor();
+    await page.locator('[data-block="notebook"]').click();
+    await page.locator("#addBlock").click();
+    assert.equal(await page.locator("#notebookPanel").isVisible(),true);
+    assert.equal(await page.locator("#insertExistingNotebook").isDisabled(),true);
+    await page.locator("#notebookNewTitle").fill("Mein Python Labor");
+    await page.locator("#createChapterNotebook").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/lesson_einstieg_mein_python_labor.ipynb");
+    assert.equal(await page.locator("#notebookEditor").isVisible(),true);
+    assert.equal(await page.locator("#notebookBack").isVisible(),true);
+    assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fdaten_training.ipynb/,
+      "Undeployed notebook must start from a trusted template to support live editing");
+    assert.equal(await page.locator("#pendingCount").textContent(),"2");
+    assert.match(await page.locator("#staged").innerText(),/lesson_einstieg_mein_python_labor.ipynb/);
+    await page.locator("#notebookBack").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/030-einstieg-3.md");
+    assert.match(await page.locator("#source").inputValue(),/data-notebook="content\/lesson_einstieg_mein_python_labor.ipynb"/);
+    assert.equal(await page.locator("#chapterNotebookLinks button").count(),1);
+    const notebookCard=page.frameLocator("#preview").locator(".ki-notebook-block");
+    await notebookCard.waitFor();
+    assert.equal(await notebookCard.getAttribute("data-notebook"),"content/lesson_einstieg_mein_python_labor.ipynb");
+    assert.match(await notebookCard.locator("a.ki-notebook-direct").getAttribute("href"),/portal\/lesson_einstieg_mein_python_labor.ipynb/);
+    await page.locator("#chapterNotebookLinks button").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/lesson_einstieg_mein_python_labor.ipynb");
+    await page.locator("#notebookBack").click();
+    await page.locator("#addNotebook").click();
+    await page.locator("#notebookExisting").selectOption("content/lesson_einstieg_mein_python_labor.ipynb");
+    assert.equal(await page.locator("#insertExistingNotebook").isEnabled(),true);
+    await page.locator("#closeNotebookPanel").click();
+
+    // The first-year course uses a different notebook prefix and blue theme.
+    await page.locator("#courseSelect").selectOption("basis");
+    await page.locator("#section").selectOption("basis-neuron");
+    await page.locator("#chapters button").filter({hasText:"030-perzeptron-3"}).click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/030-perzeptron-3.md");
+    await page.locator("#addNotebook").click();
+    await page.locator("#notebookNewTitle").fill("Meine Neuron Übung");
+    await page.locator("#createChapterNotebook").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/basis_lesson_basis_neuron_meine_neuron_uebung.ipynb");
+    assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fbasis_neuron.ipynb/);
+    assert.match(await page.locator("#staged").innerText(),/basis_lesson_basis_neuron_meine_neuron_uebung.ipynb/);
+
     console.log("PASS admin AVIVA form, dynamic DL11, materials, chapter and atomic PR payload");
   }finally{
     await browser.close();
