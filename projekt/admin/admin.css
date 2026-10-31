@@ -566,3 +566,75 @@ button[aria-current=true] .chapter-number{color:var(--accent);background:#fff;bo
   .editor-heading .actions .button{min-height:34px}
   .publish{top:118px;right:10px;width:calc(100% - 20px);max-height:calc(100dvh - 125px)}
 }
+
+
+/* Visual block palette: unlike native <select> options, these rows support
+   real hover/focus previews. The iframe uses the same course CSS as the editor. */
+.toolbar-template{position:relative}
+.toolbar #blockType.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;min-width:1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}
+.toolbar .block-picker{
+  min-width:160px;max-width:225px;justify-content:space-between;
+  background:#fff;border:1px solid #b8c6c1;border-radius:7px;
+  padding:7px 9px;font-size:12px;font-weight:630;text-align:left
+}
+.block-picker span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.block-picker svg{flex-shrink:0}
+.toolbar .block-picker[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 2px var(--soft)}
+.block-menu{
+  position:absolute;left:auto;right:0;top:calc(100% + 8px);
+  z-index:55;width:min(735px,calc(100vw - 48px));
+  background:#fff;border:1px solid #c8d7d0;border-radius:14px;
+  box-shadow:0 18px 48px #162d3032,0 3px 10px #162d3014;
+  padding:0;overflow:hidden;color:var(--text)
+}
+.block-menu[hidden]{display:none!important}
+.block-menu-title{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  padding:12px 15px;background:#fafcfb;border-bottom:1px solid var(--line)
+}
+.block-menu-title strong{font-size:13px}
+.block-menu-title span{color:var(--muted);font-size:11px;text-align:right}
+.block-menu-body{display:grid;grid-template-columns:minmax(185px,240px) minmax(0,1fr)}
+.block-choices{
+  max-height:min(395px,65dvh);overflow:auto;overscroll-behavior:contain;
+  padding:7px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+.block-choice-group{margin:0 0 6px}
+.block-choice-group h3{
+  color:var(--muted);margin:6px 8px 4px;font-size:10px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase
+}
+.toolbar .block-choice{
+  display:block;text-align:left;width:100%;min-height:31px;margin:1px 0;
+  padding:6px 10px;font-size:12px;line-height:1.25;font-weight:540;
+  border:1px solid transparent;border-radius:7px;background:transparent;
+  white-space:normal
+}
+.toolbar .block-choice:hover,.toolbar .block-choice:focus-visible{
+  background:var(--soft);color:var(--accent);border-color:#c4d7ce
+}
+.toolbar .block-choice[aria-pressed=true]{
+  background:var(--soft);color:var(--accent);font-weight:740
+}
+.block-inspection{padding:13px;min-width:0;background:#f8faf8;display:flex;flex-direction:column;gap:8px}
+.block-inspection-heading{display:flex;flex-direction:column;gap:3px}
+.block-inspection-heading strong{font-size:13px;line-height:1.25}
+.block-inspection-heading span{font-size:11px;color:var(--muted);line-height:1.4}
+.block-inspection iframe{
+  display:block;width:100%;height:260px;flex:0 0 260px;border:1px solid var(--line);
+  border-radius:10px;background:#fff
+}
+.block-inspection-note{display:block;color:var(--muted);font-size:10px;line-height:1.4}
+@media(max-width:670px){
+  .block-menu{right:-8px;width:min(480px,calc(100vw - 34px))}
+  .block-menu-title{display:block;padding:9px 12px}
+  .block-menu-title span{display:block;margin-top:3px;text-align:left}
+  .block-menu-body{grid-template-columns:1fr}
+  .block-choices{max-height:170px;border-right:0;border-bottom:1px solid var(--line)}
+  .block-choice-group{display:contents}
+  .block-choice-group h3{margin:6px 8px 2px}
+  .block-inspection{padding:8px;gap:4px}
+  .block-inspection iframe{height:165px;flex-basis:165px}
+  .block-inspection-note{display:none}
+  .toolbar .block-picker{min-width:140px}
+}
