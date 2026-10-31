@@ -1262,7 +1262,8 @@ const blocks={
   reflect:'<div class="task">\n  <p><strong>Reflexion:</strong> Was habe ich gelernt?</p>\n  <ul><li>Das habe ich verstanden: …</li><li>Das ist noch offen: …</li></ul>\n</div>',
   compare:'<div class="grid two">\n  <div class="card"><h3>Vorteile</h3><ul><li>Erster Vorteil</li><li>Zweiter Vorteil</li></ul></div>\n  <div class="card"><h3>Grenzen</h3><ul><li>Erste Grenze</li><li>Zweite Grenze</li></ul></div>\n</div>',
   reveal:'<details class="card">\n  <summary><strong>Warum ist das so? – Antwort aufklappen</strong></summary>\n  <p>Hier steht die Erklärung oder Musterlösung.</p>\n</details>',
-  example:'<div class="grid two">\n  <div class="card"><h3>Begriff</h3><p>Kurze Erklärung des Konzepts.</p></div>\n  <div class="card"><h3>Beispiel</h3><p>Konkrete Anwendung aus dem Alltag.</p></div>\n</div>'
+  example:'<div class="grid two">\n  <div class="card"><h3>Begriff</h3><p>Kurze Erklärung des Konzepts.</p></div>\n  <div class="card"><h3>Beispiel</h3><p>Konkrete Anwendung aus dem Alltag.</p></div>\n</div>',
+  notebook:'<div class="ki-notebook-block"><h3>Jupyter-Notebook · Python-Labor</h3><p>Zellen bearbeiten und mit Shift + Enter ausführen.</p><div class="ki-notebook-actions"><button type="button">Notebook hier öffnen</button></div></div>'
 };
 // Every block uses the same course classes as the published site.
 const blockHelp={
@@ -1285,7 +1286,8 @@ const blockHelp={
   quote:"Zitat als eigener Textblock",
   code:"Formatiertes Codebeispiel",
   reveal:"Frage mit ausklappbarer Erklärung",
-  example:"Begriff und konkretes Beispiel nebeneinander"
+  example:"Begriff und konkretes Beispiel nebeneinander",
+  notebook:"Python-Notebook im Unterkapitel öffnen, bearbeiten oder neu erstellen"
 };
 const blockSelect=$("blockType"),blockPicker=$("blockPicker"),blockMenu=$("blockMenu");
 const blockChoiceContainer=$("blockChoices"),blockPreview=$("blockPreview");
@@ -1404,9 +1406,81 @@ document.addEventListener("pointerdown",event=>{
 });
 renderBlockChoices();
 
+function showNotebookPanel(){
+  if(!chapterPath(state.current?.path||"")){
+    status("Bitte zuerst ein Unterkapitel auswählen, um dort ein Notebook einzufügen.",true);return;
+  }
+  const select=$("notebookExisting");select.replaceChildren();
+  const options=state.notebooks.filter(item=>gradeNotebook(item.path));
+  for(const item of options){
+    const option=document.createElement("option");option.value=item.path;
+    option.textContent=item.path.split("/").pop().replace(".ipynb","").replaceAll("_"," ");
+    select.append(option);
+  }
+  $("insertExistingNotebook").disabled=options.length===0;
+  $("notebookPanel").hidden=false;
+  $("notebookNewTitle").focus();
+}
+function insertNotebookReference(path,title){
+  if(!chapterPath(state.current?.path||""))throw Error("Notebook-Bausteine müssen in ein Unterkapitel eingefügt werden.");
+  if(!gradeNotebook(path))throw Error("Notebook gehört zur anderen Klassenstufe.");
+  if(notebookReferences($("source").value).includes(path))
+    throw Error("Dieses Notebook ist in diesem Unterkapitel bereits verknüpft.");
+  insert("\n\n"+linkedNotebookMarkup(path,title)+"\n\n");
+  $("notebookPanel").hidden=true;
+  refreshNotebookAssociations();
+}
+function createLessonNotebook(){
+  try{
+    if(!chapterPath(state.current?.path||""))throw Error("Bitte zuerst ein Unterkapitel auswählen.");
+    const title=$("notebookNewTitle").value.trim();
+    if(title.length<3)throw Error("Bitte einen verständlichen Notebook-Titel mit mindestens drei Zeichen eingeben.");
+    const section=$("section").value.replaceAll("-","_");
+    const basename=slug(title).replaceAll("-","_").slice(0,45);
+    if(!basename)throw Error("Ungültiger Notebook-Titel.");
+    const path="content/"+(state.course==="basis"?"basis_":"")+"lesson_"+section+"_"+basename+".ipynb";
+    if(state.notebooks.some(item=>item.path===path)||state.staged.has(path))
+      throw Error("Ein Notebook mit diesem Namen existiert bereits. Bitte einen anderen Titel wählen.");
+    if(state.staged.size+(state.staged.has(state.current.path)?1:2)>12)
+      throw Error("Maximal zwölf Dateien pro Pull Request. Bitte bisherige Änderungen zuerst einreichen.");
+    const cell=(type,text)=>({
+      cell_type:type,id:crypto.randomUUID().slice(0,8),metadata:{},
+      ...(type==="code"?{execution_count:null,outputs:[]}:{}),source:[text]
+    });
+    const doc={cells:[
+      cell("markdown","# "+title+"\n\n## Auftrag\n\nBeschreiben Sie die Aufgabe und Ihre Beobachtungen.\n"),
+      cell("code","# Python-Code hier ergänzen\nprint('Mein erstes Experiment')\n")
+    ],metadata:{kernelspec:{display_name:"Python (Pyodide)",language:"python",name:"python"},
+      language_info:{name:"python"}},nbformat:4,nbformat_minor:5};
+    validateNotebook(doc);
+    const parent=state.current.path;
+    insertNotebookReference(path,title);
+    if(!stage())return;
+    const content=JSON.stringify(doc,null,1)+"\n";
+    state.staged.set(path,{path,expectedSha:null,content,original:content});
+    state.notebooks.push({path,sha:null});
+    returnChapterPath=parent;
+    stagingList();
+    useFile(path,null,content);
+    status("Notebook und Unterkapitel gemeinsam vorgemerkt. In JupyterLite bearbeiten, Stand übernehmen und vormerken.");
+  }catch(e){error(e);}
+}
+$("addNotebook").addEventListener("click",showNotebookPanel);
+$("closeNotebookPanel").addEventListener("click",()=>{$("notebookPanel").hidden=true;});
+$("insertExistingNotebook").addEventListener("click",()=>{
+  try{
+    const path=$("notebookExisting").value;
+    if(!gradeNotebook(path))throw Error("Bitte ein gültiges Notebook auswählen.");
+    const title=$("notebookExisting").selectedOptions[0]?.textContent||path.split("/").pop();
+    insertNotebookReference(path,title);
+    status("Notebook im Unterkapitel verknüpft. Über «Öffnen & bearbeiten» direkt bearbeiten.");
+  }catch(e){error(e);}
+});
+$("createChapterNotebook").addEventListener("click",createLessonNotebook);
 function insertBlock(){
   const value=$("blockType").value;
   if(!Object.hasOwn(blocks,value))return status("Unbekannter Baustein.",true);
+  if(value==="notebook"){showNotebookPanel();return;}
   insert("\n\n"+blocks[value]+"\n\n");
   status("Baustein eingefügt – Änderungen vormerken, bevor sie veröffentlicht werden.");
 }
