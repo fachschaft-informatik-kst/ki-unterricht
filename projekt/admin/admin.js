@@ -84,7 +84,6 @@ const post=(url,value)=>api(url,{method:"POST",headers:{"Content-Type":"applicat
 const slug=text=>text.trim().toLowerCase().replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const filename=path=>path.split("/").pop().replace(".md","");
 const notebookPath=path=>/^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path);
-const chapterPath=path=>/^kursseiten\/[a-z0-9-]+\/[0-9]{3}-[a-z0-9-]+\.md$/.test(path);
 const gradeNotebook=path=>notebookPath(path)&&
   (state.course==="basis"?/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path):
     !/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path));
