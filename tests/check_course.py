@@ -75,7 +75,13 @@ for a in soup.select('a[href^="#"]'):
 for img in soup.select('img'):
     assert img.get('alt'), img
     src=img['src']
-    assert (root/'_build/site/projekt'/src).is_file() or src in ['previews/perzeptron.png','previews/xor.png','previews/datenplan.png','https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png'], src
+    # External Commons images are permitted only inside the reviewed DL1 milestone panels.
+    history_image=(img.find_parent('template',attrs={'data-milestone-detail':True}) is not None
+                   and src.startswith('https://commons.wikimedia.org/wiki/Special:FilePath/')
+                   and img.find_parent('template').select_one(".milestone-source a[href^='https://commons.wikimedia.org/wiki/File:']"))
+    assert ((root/'_build/site/projekt'/src).is_file()
+            or src in ['previews/perzeptron.png','previews/xor.png','previews/datenplan.png','https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png']
+            or history_image), src
 # XOR is a *new* problem in Doppellektion 4; DL3 contains only single
 # neuron calculations and trainable AND/OR examples. Keep historic form IDs
 # in the new chapter so previously saved answers remain available.
