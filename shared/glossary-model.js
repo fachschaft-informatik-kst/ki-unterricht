@@ -20,6 +20,12 @@ export function validateGlossary(doc){
       const max=key==="antwort"?180:key==="begriff"?100:1500;
       if(!validText(term[key],min,max))throw Error("Glossarbegriff "+term.id+": Feld "+key+" fehlt oder ist zu lang/kurz.");
     }
+    // Optional course-specific text overrides keep existing shared values as
+    // backwards-compatible defaults. The editor never writes across levels.
+    for(const key of ["basisBeispiel","basisFrage","basisAntwort","vertieftBeispiel","vertieftFrage","vertieftAntwort"]){
+      if(term[key]!==undefined&&!validText(term[key],8,key.endsWith("Antwort")?180:1500))
+        throw Error("Glossarbegriff "+term.id+": Kursfeld "+key+" fehlt oder ist zu lang/kurz.");
+    }
     if(term.basis===term.vertieft)throw Error("1. und 4. Klasse brauchen unterschiedliche Begriffserklärungen: "+term.id+".");
   }
   return doc;
