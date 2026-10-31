@@ -101,7 +101,15 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     // All nine history titles open sourced image panels without losing lesson position.
     assert.equal(await p.locator('#einstieg-3 .milestone-trigger').count(),9);
     const firstHistory=p.locator('#einstieg-3 .milestone-trigger').first();
-    await firstHistory.click();
+    // Native browser activation is tested without Playwright auto-scrolling
+    // the target; opening and closing must preserve the actual reading position.
+    const historyScrollBefore=await p.evaluate(()=>{window.scrollTo(0,320);return window.scrollY});
+    assert(historyScrollBefore>80,'Timeline page is scrollable');
+    const historyHashBefore=await p.evaluate(()=>location.hash);
+    await firstHistory.evaluate(el=>el.click());
+    await p.waitForTimeout(80);
+    assert.equal(await p.evaluate(()=>window.scrollY),historyScrollBefore,'Opening a milestone must not scroll to the top');
+    assert.equal(await p.evaluate(()=>location.hash),historyHashBefore,'Opening a milestone must not navigate');
     const historyDialog=p.locator('dialog.milestone-dialog');
     assert(await historyDialog.isVisible(),'KI history title opens a modal');
     assert(await historyDialog.locator('img[alt]').count());
@@ -109,9 +117,11 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert((await historyDialog.locator('.milestone-source a').getAttribute('href')).includes('commons.wikimedia.org/wiki/File:'));
     await p.keyboard.press('Escape');
     assert(!await historyDialog.isVisible(),'Escape closes the history modal');
+    assert.equal(await p.evaluate(()=>window.scrollY),historyScrollBefore,'Closing a milestone must preserve scroll');
     assert(await firstHistory.evaluate(el=>el===document.activeElement),'Keyboard focus returns to milestone');
     await p.locator('#einstieg-3 [data-milestone-open="alexnet"]').click();
     assert((await historyDialog.innerText()).includes('AlexNet'));
+    assert.equal(await p.evaluate(()=>window.scrollY),historyScrollBefore,'Opening another popup keeps position');
     await historyDialog.locator('.milestone-close').click();
 
     for(const [id,n] of Object.entries({einstieg:6,lernarten:9,perzeptron:7,netze:5,sprache:7,gesellschaft:6,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
