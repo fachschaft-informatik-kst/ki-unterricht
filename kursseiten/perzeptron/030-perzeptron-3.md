@@ -42,8 +42,8 @@ Die Eingaben werden nicht einfach addiert: Jede wird mit ihrem **Gewicht** multi
     <!-- MD:START -->
 **So lesen Sie die drei Spalten:** links stehen die beiden Sensor-Eingaben (0 = aus, 1 = ein), in der Mitte die Rechnung inklusive Bias. Rechts steht **Ausgabe des Neurons / gewünschtes AND-Ziel**; ✓ bedeutet Übereinstimmung. Was würde sich ändern, wenn der Bias −0.5 wäre? Probieren Sie das später im Notebook aus.
 <!-- MD:END -->
-  <div class="ki-notebook-block" data-notebook="content/perzeptron_und_neuronale_netze.ipynb" data-title="Perzeptron-Labor · 4. Klasse">
-    <h3>Jupyter-Notebook · Perzeptron-Labor · 4. Klasse</h3>
+  <div class="ki-notebook-block" data-notebook="content/perzeptron_und_neuronale_netze.ipynb" data-title="Neuron-Labor · Doppellektion 3">
+    <h3>Jupyter-Notebook · Neuron-Labor · Doppellektion 3</h3>
     <p>Probieren Sie die Werte nun selbst aus. Öffnen Sie das Notebook direkt hier, bearbeiten Sie Python-Zellen und führen Sie diese mit Shift + Enter aus.</p>
     <a class="ki-notebook-direct" href="https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html?path=portal/perzeptron_und_neuronale_netze.ipynb" target="_blank" rel="noopener noreferrer">Notebook in JupyterLite öffnen ↗</a>
   </div>
