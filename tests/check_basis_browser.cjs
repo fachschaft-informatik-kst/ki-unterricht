@@ -100,7 +100,13 @@ const assert=require('node:assert/strict');
     assert(legendDescription.includes('blau')&&legendDescription.includes('orange')&&legendDescription.includes('KI-Winter'));
 
     const firstYearHistory=page.locator('#basis-ki #einstieg-3 [data-milestone-open="turing"]');
-    await firstYearHistory.click();
+    const basisScrollBefore=await page.evaluate(()=>{window.scrollTo(0,340);return window.scrollY});
+    assert(basisScrollBefore>80,'Timeline in first-year course is scrollable');
+    const basisHashBefore=await page.evaluate(()=>location.hash);
+    await firstYearHistory.evaluate(el=>el.click());
+    await page.waitForTimeout(80);
+    assert.equal(await page.evaluate(()=>window.scrollY),basisScrollBefore,'Opening in first-year course must not jump to top');
+    assert.equal(await page.evaluate(()=>location.hash),basisHashBefore,'Opening popup must not change lesson');
     const firstYearHistoryDialog=page.locator('dialog.milestone-dialog');
     assert(await firstYearHistoryDialog.isVisible(),'History modal in basic course');
     assert((await firstYearHistoryDialog.locator('figcaption').innerText()).includes('Alan Turing'));
@@ -108,6 +114,7 @@ const assert=require('node:assert/strict');
     assert((await firstYearHistoryDialog.locator('.milestone-source').innerText()).includes('Bildquelle'));
     await page.keyboard.press('Escape');
     assert(!await firstYearHistoryDialog.isVisible());
+    assert.equal(await page.evaluate(()=>window.scrollY),basisScrollBefore,'Closing in first-year course must preserve scroll');
     assert(await firstYearHistory.evaluate(el=>el===document.activeElement));
 
     const logo=page.locator('.crumb img.school-logo');
