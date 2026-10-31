@@ -13,20 +13,34 @@ const planner=createPlanner($("planEditor"),content=>{$("source").value=content;
 const sourceLayer=$("sourceHighlight");
 function highlightSource(){
   const raw=$("source").value;
-  // Tokenise escaped text, so authored HTML can never execute in the highlight layer.
   const escape=v=>v.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
-  const tokens=/(<!--[\s\S]*?-->|^#{1,6}[^\n]*|```[^\n]*|<\/?[a-z][^>]*>|\b[a-zA-Z_-]+(?=\s*[:=])|"(?:[^"\n]|\\.)*"|'(?:[^'\n]|\\.)*')/gm;
-  let result="",end=0,match;
-  while((match=tokens.exec(raw))){
-    result+=escape(raw.slice(end,match.index));
+  const token=(kind,s)=>'<span class="tok-'+kind+'">'+escape(s)+'</span>';
+  const renderTag=part=>{
+    const start=/^<(\/?)([A-Za-z][\w:-]*)/.exec(part);
+    if(!start)return token("tag",part);
+    let result=escape("<"+start[1])+token("tag",start[2]);
+    const tail=part.slice(start[0].length);
+    const attrs=/(\s+)([^\s=/>]+)(\s*=\s*)("(?:[^"]*)"|'(?:[^'])*'|[^\s>]+)/g;
+    let index=0,match;
+    while((match=attrs.exec(tail))){
+      result+=escape(tail.slice(index,match.index)+match[1]);
+      result+=token("attr",match[2])+escape(match[3])+token("string",match[4]);
+      index=attrs.lastIndex;
+    }
+    return result+escape(tail.slice(index));
+  };
+  // A quoted > is not a tag terminator. HTML comments span multiple lines.
+  const pieces=/(<!--[\s\S]*?(?:-->|$)|<!DOCTYPE\b[^>]*>|<\/?[A-Za-z][\w:-]*(?:[^>"']|"[^"]*"|'[^']*')*>|^#{1,6}[^\n]*)/gm;
+  let result="",position=0;
+  for(const match of raw.matchAll(pieces)){
+    result+=escape(raw.slice(position,match.index));
     const part=match[0];
-    const style=part.startsWith("<!--")?"comment":part.startsWith("#")?"heading":
-      part.startsWith("\`")?"code":part.startsWith("<")?"tag":
-      /^[\"']/.test(part)?"string":"key";
-    result+='<span class="tok-'+style+'">'+escape(part)+'</span>';
-    end=tokens.lastIndex;
+    result+=part.startsWith("<!--")?token("comment",part):
+      /^<!DOCTYPE/i.test(part)?token("tag",part):
+      part.startsWith("<")?renderTag(part):token("heading",part);
+    position=match.index+part.length;
   }
-  sourceLayer.innerHTML=result+escape(raw.slice(end))+"\n";
+  sourceLayer.innerHTML=result+escape(raw.slice(position))+"\n";
   sourceLayer.scrollTop=$("source").scrollTop;
   sourceLayer.scrollLeft=$("source").scrollLeft;
 }
