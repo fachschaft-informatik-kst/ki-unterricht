@@ -95,7 +95,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
       {label:'Lernen aus Daten',background:'rgb(154, 52, 18)',color:'rgb(255, 255, 255)'}
     ],'Distinct blue/orange markers with white text in DL1');
     const legendDescription=await p.locator('#einstieg-3 .section-intro').innerText();
-    assert(legendDescription.includes('blau')&&legendDescription.includes('orange')&&legendDescription.includes('KI-Winter'));
+    assert(legendDescription.includes('Regeln von Menschen')&&legendDescription.includes('Lernen aus Daten')&&legendDescription.includes('KI-Winter'));
 
 
     // All nine history titles open sourced image panels without losing lesson position.
