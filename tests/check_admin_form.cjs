@@ -214,6 +214,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#addBlock").click();
     assert.match(await page.locator("#source").inputValue(),/class="timeline"/);
     await page.locator("#source").fill(beforeBlock);
+    await page.locator("#previewButton").click(); // Restore the iframe before later course-layout assertions.
     // On a narrow viewport the stacked panes keep fullscreen buttons but hide the divider.
     await page.setViewportSize({width:900,height:800});
     assert.equal(await page.locator("#splitDivider").isVisible(),false);
