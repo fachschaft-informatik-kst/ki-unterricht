@@ -14,9 +14,25 @@ const assert=require('node:assert/strict');
     const page=await browser.newPage();
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto('http://127.0.0.1:8770/kurse.html');
-    assert.equal(await page.locator('a.choice').count(),2,'Both Kurzgymi tracks must appear');
-    await page.locator('a.choice[href="basis/"]').click();
-    assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
+    assert.equal(await page.locator('a.choice').count(),4,'Two BOK courses and two IRN course slots must appear');
+    assert.equal(await page.locator('a.choice[href="bok/1-klasse/"]').count(),1);
+    assert.equal(await page.locator('a.choice[href="bok/4-klasse/"]').count(),1);
+    assert.equal(await page.locator('a.choice[href="irn/1-klasse/"]').count(),1);
+    assert.equal(await page.locator('a.choice[href="irn/4-klasse/"]').count(),1);
+    const routed=await browser.newPage();
+    await routed.goto('http://127.0.0.1:8770/bok/1-klasse/');
+    assert.equal(await routed.title(),'BOK · 1. Klasse · KI entdecken');
+    assert.equal(await routed.locator('a[href="../../kurse.html"]').count(),1);
+    assert.equal(await routed.locator('img.school-logo').evaluate(img=>img.complete&&img.naturalWidth>0),true);
+    await routed.goto('http://127.0.0.1:8770/bok/4-klasse/');
+    assert.equal(await routed.title(),'BOK · 4. Klasse · KI vertiefen');
+    assert.equal(await routed.locator('a[href="../../kurse.html"]').count(),1);
+    await routed.goto('http://127.0.0.1:8770/irn/1-klasse/');
+    assert((await routed.locator('main').innerText()).includes('in Vorbereitung'));
+    await routed.close();
+    // Legacy URL remains available to preserve existing bookmarks and student data.
+    await page.goto('http://127.0.0.1:8770/basis/');
+    assert.equal(await page.title(),'BOK · 1. Klasse · KI entdecken');
     assert.equal(await page.locator('main > section').count(),13);
     // Shared KST breadcrumb; track switching happens only via the landing page.
     const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();

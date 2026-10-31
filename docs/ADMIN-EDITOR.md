@@ -1,5 +1,7 @@
 # Lehrpersonen-Editor für den KI-Unterricht
 
+**Architektur auf einen Blick:** [Diagramm mit Cloudflare Worker, GitHub-Login, Editor-Arbeitsschritten und Veröffentlichung](ARCHITEKTUR.md#architekturdiagramm-editor-und-veröffentlichung).
+
 ## Was jetzt umgesetzt ist
 
 Die statische Website enthält unter \`/projekt/admin/\` einen Editor für vorhandene

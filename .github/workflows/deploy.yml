@@ -92,6 +92,8 @@ jobs:
           python tests/execute_all_notebooks.py
           python tests/check_pyodide_lock.py
           python tests/check_kernel_compat.py
+      # One site, one artifact, one GitHub Pages deployment for every course URL.
+      # A failing course test blocks the shared deployment; no extra Cloudflare Pages projects.
       - name: Build the JupyterLite site
         run: |
           python scripts/build_portal.py
@@ -118,6 +120,7 @@ jobs:
           python tests/check_content_mvc.py
           jupyter lite build --contents _build/content --output-dir dist
           python scripts/copy_portal.py dist
+          python tests/check_course_routes.py
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
           test -f dist/projekt/admin/plan-editor.js

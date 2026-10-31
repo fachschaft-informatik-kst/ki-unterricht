@@ -19,6 +19,7 @@ def build_content():
     command(sys.executable, "scripts/build_portal.py")
     command(sys.executable, "scripts/build_course.py")
     command(sys.executable, "scripts/build_basis.py")
+    command(sys.executable, "scripts/build_course_routes.py", "_build/site")
 
 
 def build_full():
@@ -70,7 +71,7 @@ def main():
     stop = threading.Event()
     if not args.no_watch and not args.full:
         threading.Thread(target=watch, args=(stop,), daemon=True).start()
-    url = f"http://{args.host}:{args.port}/projekt/"
+    url = f"http://{args.host}:{args.port}/kurse.html"
     print("Kursportal:", url, flush=True)
     if not args.full:
         print("Schnellvorschau ohne lauffähige Jupyter-Notebooks/Vorschaugrafiken;")

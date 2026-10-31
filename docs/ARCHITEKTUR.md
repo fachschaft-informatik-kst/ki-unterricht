@@ -7,6 +7,77 @@ Notebookstände liegen im Browser und werden als ZIP gesichert. Der optionale
 Lehrpersonen-Editor verwendet einen geschützten Cloudflare Worker, um Änderungen
 als GitHub-Pull-Request einzureichen; er speichert keine Schülerdaten.
 
+## Architekturdiagramm: Editor und Veröffentlichung
+
+Das Diagramm trennt **Redaktion mit Schreibberechtigung** (oben) von der
+**veröffentlichten Kurswebsite für Lernende** (unten). Der Cloudflare Worker
+ist **kein zweiter Kursserver**: Er liefert den geschützten Editor aus, übernimmt
+GitHub-Login und API-Zugriffe und legt Änderungen als Pull Request an.
+Die Kursseiten bleiben statisch auf GitHub Pages.
+
+```mermaid
+flowchart TB
+    LP["Lehrperson im Browser"]
+    W["Cloudflare Worker: kst-ki-admin<br/>Geschützter Editor + API"]
+    AUTH["GitHub App<br/>Anmeldung + Schreibrechte"]
+    EDIT["Im Editor: Kurs / Unterkapitel wählen<br/>Quelltext + Live-Vorschau<br/>AVIVA / Materialien / Glossar / Notebooks"]
+    REPO[("GitHub-Repository<br/>main: kursseiten/ · content/ · projekt/")]
+    PR["Neuer Branch + Pull Request<br/>Änderungen im Review"]
+    CHECK["GitHub Actions<br/>Tests + Build"]
+    MAIN["Review + Merge nach main"]
+    BUILD["GitHub Actions<br/>Website aus Quellen bauen"]
+    PAGES["GitHub Pages<br/>öffentliche statische Kursseiten + JupyterLite"]
+    S["Lernende im Browser"]
+    LOCAL["Lokale Lernstände im Browser<br/>ZIP-Export / Import"]
+    UPDATE["GitHub Actions: Worker-Deploy<br/>nur bei relevanten Codeänderungen"]
+
+    LP -->|"Editor-URL öffnen"| W
+    W <-->|"OAuth / Berechtigung"| AUTH
+    W -->|"Editor ausliefern"| EDIT
+    EDIT -->|"Dateien lesen"| W
+    W -->|"GitHub API"| REPO
+    EDIT -->|"1. Bearbeiten · 2. Vormerken · 3. PR erstellen"| W
+    W -->|"GitHub API erstellt"| PR
+    PR -->|"Prüfen"| CHECK
+    CHECK -->|"Bei grünen Tests und Freigabe"| MAIN
+    MAIN -->|"aktualisiert"| REPO
+    MAIN --> BUILD
+    BUILD -->|"Website bereitstellen"| PAGES
+    PAGES --> S
+    S -->|"Antworten / Notebookstände"| LOCAL
+    MAIN -.->|"bei Worker-Änderungen"| UPDATE
+    UPDATE -.-> W
+
+    classDef editor fill:#fff3df,stroke:#d97706,color:#4b2700,stroke-width:2px
+    classDef git fill:#ebefff,stroke:#5b69b1,color:#1e2766
+    classDef website fill:#e7f7f0,stroke:#19865a,color:#0a4b33
+    class W,EDIT editor
+    class REPO,PR,CHECK,MAIN,BUILD,UPDATE,AUTH git
+    class PAGES,S,LOCAL website
+```
+
+### So benutzt du den Lehrpersonen-Editor
+
+1. **Geschützten Editor öffnen:** [kst-ki-admin.kevin-bohn.workers.dev](https://kst-ki-admin.kevin-bohn.workers.dev/) statt nur die öffentliche Pages-Seite aufrufen, und mit der GitHub App anmelden. Erforderlich sind Schreibrechte am Repository.
+2. **Kurs und Bereich wählen:** In der Seitenleiste 1. oder 4. Kurzgymnasium, Themenbereich und Unterkapitel auswählen. Die Navigation lässt sich zugunsten der Split-Ansicht ausblenden.
+3. **Inhalt bearbeiten:** Links Markdown/HTML oder ein Formular bearbeiten, rechts die Vorschau prüfen. Für AVIVA, Materialien und Glossar die entsprechenden Einträge verwenden; für Notebooks den Baustein «Jupyter-Notebook» bzw. «Notebook» nutzen.
+4. **Notebook separat übernehmen:** Im eingebetteten JupyterLite das Notebook öffnen und bearbeiten, dann **«Notebook-Stand übernehmen»** wählen; das Notebook und die zugehörige Kapiteländerung müssen vorgemerkt werden.
+5. **Änderungen vormerken:** Mit **«Änderung vormerken»** weitere Dateien sammeln; das ist **noch keine Veröffentlichung**. Danach **«Pull Request erstellen»** wählen.
+6. **Review, Tests und Veröffentlichung:** Pull Request auf GitHub kontrollieren. Erst nach erfolgreichen Tests und Merge nach `main` baut GitHub Actions die öffentliche Website neu; der Worker wird **nur bei relevanten Worker-/Workflow-Änderungen** ebenfalls automatisch aktualisiert.
+
+**Wichtig:** Schülerinnen und Schüler benötigen keinen Worker und keinen GitHub-Login.
+Ihre Antworten und Notebookstände werden im Browser gespeichert und können als ZIP
+exportiert/importiert werden. Der Worker speichert keine Schülerantworten.
+
+### BOK und IRN: gemeinsames Deployment (PR #100, noch nicht veröffentlicht)
+
+Im **offenen Feature-Branch** `feature/bok-irn-kurswege` ist eine Übersicht mit
+`/bok/1-klasse/`, `/bok/4-klasse/`, `/irn/1-klasse/` und
+`/irn/4-klasse/` vorbereitet. Die IRN-Seiten sind bisher Platzhalter.
+Diese zusätzlichen Routen sind **noch nicht auf `main`**. Auch nach einem Merge
+bleiben es **ein Repository, ein gemeinsamer GitHub-Pages-Build und ein Cloudflare
+Worker**; separate vollständige Editorprofile für IRN sind noch nicht umgesetzt.
+
 ## Verbindliche Quellen
 
 ```text

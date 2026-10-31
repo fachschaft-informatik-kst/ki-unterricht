@@ -1,3 +1,41 @@
-<!doctype html><html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KI-Unterricht · Kurse</title><link rel="icon" href="projekt/favicon.svg" type="image/svg+xml">
-<style>:root{font-family:system-ui,sans-serif;color:#182b31;background:#f5f4ee}*{box-sizing:border-box}body{margin:0}main{max-width:950px;margin:9vh auto;padding:28px}h1{font-size:clamp(2rem,5vw,3.8rem);margin:12px 0}p{line-height:1.65;color:#52656a}.eyebrow{color:#076959;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:36px}.choice{display:block;text-decoration:none;background:#fff;border:1px solid #d8dfdb;border-radius:16px;padding:30px;color:#182b31}.choice:hover,.choice:focus-visible{border-color:#076959;box-shadow:0 9px 25px #142d2518}.choice h2{margin:10px 0 12px;font-size:1.55rem}.tag{color:#076959;font-weight:700;font-size:.85rem}small{display:block;margin-top:22px}a{color:#076959}@media(max-width:650px){.choices{grid-template-columns:1fr}}</style></head><body><main><div class="eyebrow">Kantonsschule Stadelhofen · Informatik</div><h1>Künstliche Intelligenz</h1><p>Wähle deinen Unterrichtskurs. Beide Kurse haben eigene Inhalte und Fortschritte.</p><div class="choices"><a class="choice" href="basis/"><span class="tag">1. Kurzgymnasium</span><h2>KI entdecken ↗</h2><p>Zehn Doppellektionen: KI entdecken, neuronale Netze erkunden, Sprachmodelle untersuchen und ein eigenes Bildprojekt durchführen.</p></a><a class="choice" href="projekt/"><span class="tag">4. Kurzgymnasium</span><h2>KI vertiefen ↗</h2><p>Neuronale Netze, eigene Projekte, Evaluation und wissenschaftliche Reflexion.</p></a></div><small><a href="projekt/admin/">Lehrpersonen-Editor</a></small></main></body></html>
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="KI-Unterricht der Kantonsschule Stadelhofen: Kurse von BOK und IRN für die 1. und 4. Klasse.">
+<title>KI-Unterricht · Alle Kurse</title><link rel="icon" href="projekt/favicon.svg" type="image/svg+xml">
+<style>
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#182b31;background:#f5f4ee;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;min-height:100vh}main{max-width:1080px;margin:0 auto;padding:clamp(28px,6vw,72px) 24px 80px}
+h1{font-size:clamp(2.4rem,5vw,4rem);letter-spacing:-.045em;line-height:1.08;margin:12px 0 18px}
+h2{font-size:1.32rem;letter-spacing:-.02em;margin:0}p{line-height:1.65;color:#52656a}
+.eyebrow{color:#076959;font-size:.8rem;font-weight:750;letter-spacing:.11em;text-transform:uppercase}
+.intro{max-width:680px}.group{margin-top:42px}.group-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px}.group-heading span{font-size:.83rem;color:#52656a}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.choice{display:flex;flex-direction:column;min-height:225px;text-decoration:none;background:#fff;border:1px solid #d8dfdb;border-radius:16px;padding:25px;color:#182b31;transition:border-color .15s,box-shadow .15s}
+a.choice:hover,a.choice:focus-visible{border-color:#076959;box-shadow:0 9px 25px #142d2518}
+.choice h3{margin:10px 0 3px;font-size:1.5rem;letter-spacing:-.025em}.choice p{font-size:.93rem;margin:10px 0 auto}
+.choice-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;font-size:.86rem;font-weight:650;color:#076959}
+.tag{font-size:.75rem;color:#076959;font-weight:750}.tag.planned{color:#78562c}
+.planned-card{background:#fbfaf7;border-style:dashed}.planned-card .choice-bottom{color:#78562c}
+footer{border-top:1px solid #d8dfdb;margin-top:48px;padding-top:18px;font-size:.86rem}a{color:#076959;text-underline-offset:3px}
+@media(max-width:650px){.choices{grid-template-columns:1fr}.group-heading{align-items:flex-start;flex-direction:column}.choice{min-height:190px}}
+@media(prefers-reduced-motion:reduce){.choice{transition:none}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">Kantonsschule Stadelhofen · Informatik</div>
+<h1>KI-Unterricht</h1>
+<p class="intro">Wähle deine Lehrperson und Klassenstufe. Jede Kursseite hat ihre eigenen Unterrichtsmaterialien und ihren eigenen Lernfortschritt.</p>
+<section class="group" aria-labelledby="bok"><div class="group-heading"><h2 id="bok">BOK</h2><span>2 veröffentlichte Kurse</span></div>
+<div class="choices">
+<a class="choice" href="bok/1-klasse/"><span class="tag">BOK · 1. Klasse · Verfügbar</span><h3>KI entdecken</h3><p>Grundlagen der künstlichen Intelligenz, neuronale Netze und ein angeleitetes Bildprojekt.</p><span class="choice-bottom"><span>Zum Kurs</span><span aria-hidden="true">↗</span></span></a>
+<a class="choice" href="bok/4-klasse/"><span class="tag">BOK · 4. Klasse · Verfügbar</span><h3>KI vertiefen</h3><p>Neuronale Netze, praktische Experimente, eigenständige Projekte und Reflexion.</p><span class="choice-bottom"><span>Zum Kurs</span><span aria-hidden="true">↗</span></span></a>
+</div></section>
+<section class="group" aria-labelledby="irn"><div class="group-heading"><h2 id="irn">IRN</h2><span>2 Kursplätze in Vorbereitung</span></div>
+<div class="choices">
+<a class="choice planned-card" href="irn/1-klasse/"><span class="tag planned">IRN · 1. Klasse · In Vorbereitung</span><h3>KI-Unterricht</h3><p>Der Kursbereich ist eingerichtet. Unterrichtsmaterialien werden von IRN ergänzt.</p><span class="choice-bottom"><span>Kursstatus ansehen</span><span aria-hidden="true">↗</span></span></a>
+<a class="choice planned-card" href="irn/4-klasse/"><span class="tag planned">IRN · 4. Klasse · In Vorbereitung</span><h3>KI-Unterricht</h3><p>Der Kursbereich ist eingerichtet. Unterrichtsmaterialien werden von IRN ergänzt.</p><span class="choice-bottom"><span>Kursstatus ansehen</span><span aria-hidden="true">↗</span></span></a>
+</div></section>
+<footer><a href="projekt/admin/">Lehrpersonen-Editor</a> · <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht">Quellcode auf GitHub</a></footer>
+</main></body></html>
