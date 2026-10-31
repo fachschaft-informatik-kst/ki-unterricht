@@ -68,7 +68,9 @@
   close.addEventListener('click',()=>dialog.close());
   dialog.append(close);
   let lastTrigger=null;
-  dialog.addEventListener('close',()=>lastTrigger?.focus());
+  // Focusing a trigger in a hidden/offscreen lesson can otherwise scroll the
+  // underlying course page back to the top (especially in the basis course).
+  dialog.addEventListener('close',()=>lastTrigger?.focus({preventScroll:true}));
   dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
   document.body.append(dialog);
   for(const trigger of triggers){
@@ -79,8 +81,12 @@
       dialog.querySelector('.milestone-detail')?.remove();
       dialog.append(template.content.cloneNode(true));
       lastTrigger=trigger;
+      // Keep the document at exactly the same reading position while the
+      // fixed top-layer dialog opens. Modal focus must not scroll the page.
+      const x=window.scrollX, y=window.scrollY;
       dialog.showModal();
-      close.focus();
+      close.focus({preventScroll:true});
+      if(window.scrollX!==x || window.scrollY!==y)window.scrollTo(x,y);
     });
   }
 })();
