@@ -50,11 +50,23 @@ Weitere Massnahmen:
   Host-Bibliotheken werden bei Bedarf installiert und der Browserstart
   anschliessend erneut kontrolliert.
 - Die `build`-Joblaufzeit ist auf **30 Minuten** begrenzt. Die
-  vorher zusammengefasste Buildphase ist in Generierung (4 Minuten),
-  Inhaltsprüfung (5 Minuten) und JupyterLite-Paketierung (8 Minuten)
-  aufgeteilt. Der notebookbasierte Chromium-Test ist auf **12 Minuten**
-  begrenzt. Aussergewöhnliche Hänger werden damit sichtbar statt
-  still weiterzulaufen.
+  zuvor zusammengefasste Buildphase ist in Kursgenerierung (4 Minuten),
+  Inhaltsprüfung (5 Minuten), JupyterLite-Runtime-Build bei Cache-Miss
+  (8 Minuten) und Packaging/Overlay (4 Minuten) aufgeteilt.
+  Der notebookbasierte Chromium-Test ist auf **12 Minuten** begrenzt.
+  Ein hängen gebliebener Build läuft damit nicht unbegrenzt weiter.
+- **Rohes JupyterLite-Runtime-Verzeichnis als wiederverwendbarer Cache:**
+  Der Schlüssel umfasst Python-/JupyterLite-Abhängigkeiten, JupyterLite-Konfiguration,
+  alle Notebook-Inhalte, Experimentregister sowie Autostart-Erweiterung und
+  Notebook-Generator. Die Website-Kursseiten/Editor-Dateien bleiben
+  bewusst ausserhalb dieses Cache-Schlüssels. Nur bei Cache-Miss
+  wird `jupyter lite build` ausgeführt. Der Cache wird **vor**
+  `scripts/copy_portal.py` gespeichert; aktuelle Kursseiten, Materialien,
+  CSS, Glossar und Editor werden in jedem Website-Build frisch auf
+  den gecachten Kern kopiert und im Browser validiert.
+  Ein Cache-Miss oder ein ungeeigneter/fehlender Cache führt zu einem
+  normalen vollständigen JupyterLite-Build; die erste Ausführung
+  muss deshalb nicht schneller sein.
 - Cloudflare-Worker-Deployments starten nicht mehr nach reinen
   Änderungen an der CI-Workflowdatei. Sie bleiben weiterhin vom
   erfolgreichen Build-/Prüfjob abhängig.
