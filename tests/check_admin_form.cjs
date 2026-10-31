@@ -123,7 +123,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#blockPicker").click();
     assert.equal(await page.locator("#blockPicker").getAttribute("aria-expanded"),"true");
     await page.locator('[data-block="warning"]').hover();
-    await page.frameLocator("#blockPreview").locator(".callout.warn").waitFor();
+    await page.locator("#blockPreview callout.warn").waitFor();
     await page.locator('[data-block="warning"]').click();
     assert.equal(await page.locator("#blockType").inputValue(),"warning");
     assert.equal(await page.locator("#blockMenu").isVisible(),false);
@@ -246,14 +246,27 @@ const server=http.createServer((req,res)=>{
     await page.locator("#blockPicker").click();
     assert.ok(await page.locator("#blockChoices button[data-block]").count()>=20,
       "The course template palette should offer the expanded blocks");
-    assert.equal(await page.locator("#blockPreview").getAttribute("sandbox"),"");
+    assert.equal(await page.locator("#blockPreview").evaluate(el=>!!el.shadowRoot),true,
+      "The rendered block preview must be in a self-contained Shadow DOM");
+    assert.equal(await page.locator("#blockPreview").isVisible(),true);
+    const visualBlock=await page.locator("#blockPreview").evaluate(el=>{
+      const content=el.shadowRoot.querySelector(".block-preview-canvas");
+      const rect=content.getBoundingClientRect();
+      return {height:rect.height,width:rect.width,text:content.textContent.trim(),
+        bg:getComputedStyle(content).backgroundColor,
+        accent:getComputedStyle(el).getPropertyValue("--accent").trim()};
+    });
+    assert.ok(visualBlock.height>30&&visualBlock.width>180,"Block preview must have actual visible dimensions");
+    assert.ok(visualBlock.text.length>20,"The template preview must contain visible rendered content");
+    assert.notEqual(visualBlock.bg,"rgba(0, 0, 0, 0)","The preview canvas must be styled");
+    assert.equal(visualBlock.accent,"#076959");
     await page.locator('[data-block="timeline"]').hover();
-    await page.frameLocator("#blockPreview").locator(".timeline li").first().waitFor();
+    await page.locator("#blockPreview timeline li").first().waitFor();
     assert.match(await page.locator("#blockPreviewTitle").textContent(),/Zeitleiste/);
     assert.equal(await page.locator("#source").inputValue(),beforeBlock,
       "Inspecting a block must never edit the chapter");
     await page.locator('[data-block="reveal"]').focus();
-    await page.frameLocator("#blockPreview").locator("details summary").waitFor();
+    await page.locator("#blockPreview "details summary").waitFor();
     assert.match(await page.locator("#blockPreviewHint").textContent(),/ausklappbar/);
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#blockMenu").isVisible(),false);
@@ -271,7 +284,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#source").fill(beforeBlock);
     await page.locator("#blockPicker").click();
     await page.locator('[data-block="compare"]').hover();
-    await page.frameLocator("#blockPreview").locator(".grid.two .card").first().waitFor();
+    await page.locator("#blockPreview grid.two .card").first().waitFor();
     await page.locator('[data-block="compare"]').click();
     await page.locator("#addBlock").click();
     await page.frameLocator("#preview").locator(".grid.two .card").first().waitFor();
@@ -466,6 +479,16 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/lernziele/000-inhalt.md");
     assert.equal(await page.locator("#source").isVisible(),true);
     assert.equal(await page.locator("#preview").isVisible(),true);
+
+    // The block preview must also render in the blue course style, not just
+    // the main editor iframe.
+    await page.locator("#blockPicker").click();
+    await page.locator('[data-block="goal"]').hover();
+    await page.locator("#blockPreview .callout").waitFor();
+    assert.equal(await page.locator("#blockPreview").evaluate(el=>
+      getComputedStyle(el).getPropertyValue("--accent").trim()),"#3653a3");
+    assert.ok(await page.locator("#blockPreview .callout").isVisible());
+    await page.keyboard.press("Escape");
 
     // Theme regression: 1st-year preview must load exactly the published blue
     // basis.css and basis course shell, not the green fourth-year course chrome.
