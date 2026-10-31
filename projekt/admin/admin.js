@@ -8,7 +8,7 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
-const planner=createPlanner($("planEditor"),content=>{$("source").value=content;preview();});
+const planner=createPlanner($("planEditor"),content=>{$("source").value=content;preview();},()=>preview());
 
 const sidebarToggle=$("toggleSidebar");
 sidebarToggle.addEventListener("click",()=>{
@@ -310,6 +310,10 @@ function renderLessonOrder(){
 }
 let navigationRevision=0;
 function useFile(path,sha,content,original=content){
+  const targetSection=path.split("/")[1];
+  if(/\/\/(?:planung\.json|materialien\.md)$/.test(path) &&
+      (targetSection.startsWith("basis-")!==(state.course==="basis")))
+    throw Error("Dieser Inhalt gehört zur anderen Klassenstufe. Bitte zuerst den Kurs wechseln.");
   state.current={path,sha,original};
   $("path").textContent=(state.course==="basis"?"1. Kurzgymnasium":"4. Kurzgymnasium")+" · "+path;
   $("heading").textContent=path===GLOSSARY_PATH?"KI-Glossar bearbeiten":
@@ -582,8 +586,26 @@ function preview(){
   if(isGlossary){
     // Same semantic elements and stylesheet as scripts/glossary.py on the published pages.
   }else if(state.current?.path.endsWith("/planung.json")){
-    const plan=JSON.parse(content);
-    content="<h2>Unterrichtsplan</h2>"+plan.lessons.map(l=>"<article class=\"card\"><h3>"+escapeHtml(l.title)+"</h3><p>"+escapeHtml(l.goal)+"</p>"+l.phases.map(p=>"<p><strong>"+escapeHtml(p.phase)+" · "+p.minutes+" min</strong> – "+escapeHtml(p.titel)+"</p>").join("")+"</article>").join("");
+    const plan=JSON.parse(content),selected=Math.max(0,Number($("planLesson").value)||0);
+    const lesson=plan.lessons[selected]||plan.lessons[0];
+    const esc=escapeHtml;
+    if(!lesson)content="<p>Keine Doppellektion vorhanden.</p>";
+    else{
+      const rows=lesson.phases.map((phase,index)=>{
+        const steps=(phase.schritte||[]).map(step=>
+          '<div class="aviva-step"><strong>'+esc(step.art||"Auftrag")+'</strong> · '+esc(step.wer||"")+
+          (step.min?' · '+Number(step.min)+' Min.':'')+'<p>'+esc(step.text||"")+'</p></div>').join("");
+        return '<tr><th scope="row">'+(index+1)+'. '+esc(phase.phase||"")+'</th><td><strong>'+esc(phase.titel||"")+'</strong>'+steps+'</td><td>'+Number(phase.minutes||0)+' Min.</td></tr>';
+      }).join("");
+      const detail=[["Leitfrage",lesson.question],["Motivation",lesson.motivation],["Lernergebnis",lesson.product]]
+        .filter(([name,value])=>value).map(([name,value])=>'<p><strong>'+name+':</strong> '+esc(value)+'</p>').join("");
+      const sum=lesson.phases.reduce((total,phase)=>total+Number(phase.minutes||0),0);
+      content='<span class="section-label">Unterrichtsplanung · '+(isBasis?"1.":"4.")+' Kurzgymnasium</span>'+
+        '<h2>AVIVA · '+esc(lesson.title)+'</h2>'+
+        '<div class="card"><h3>Lernziele</h3><p>'+esc(lesson.goal||"")+'</p>'+detail+'</div>'+
+        '<div class="table-scroll"><table class="phase-table"><thead><tr><th>Phase</th><th>Arbeitsschritte</th><th>Zeit</th></tr></thead>'+
+        '<tbody>'+rows+'</tbody></table></div><p><strong>Gesamtzeit: '+sum+' Minuten</strong></p>';
+    }
   }else if(content.includes("<!-- MD:START -->"))
     content=content.replace(/<!-- MD:START -->\r?\n([\s\S]*?)\r?\n<!-- MD:END -->/g,(_,text)=>markdown(text));
   else if(content.startsWith("---\n"))
@@ -785,7 +807,11 @@ async function publish(){
 async function editPlan(){
   try{
     if(!confirmUnsaved())return;
-    const path="kursseiten/"+$("section").value+"/planung.json",staged=state.staged.get(path);
+    const section=$("section").value;
+    const currentManifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
+    if(!currentManifest.sections.some(item=>item.id===section&&item.teaching))
+      throw Error("Bitte einen Unterrichtsbereich der ausgewählten Klasse wählen.");
+    const path="kursseiten/"+section+"/planung.json",staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
     const file=await api("/api/file?path="+encodeURIComponent(path));
     useFile(path,file.sha,file.content);status("AVIVA-Plan als Formular bearbeiten: pro Doppellektion fünf Phasen und insgesamt 90 Minuten.");
@@ -795,6 +821,9 @@ async function editMaterials(){
   try{
     if(!confirmUnsaved())return;
     const section=$("section").value;
+    const currentManifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
+    if(!currentManifest.sections.some(item=>item.id===section&&item.teaching))
+      throw Error("Bitte einen Unterrichtsbereich der ausgewählten Klasse wählen.");
     const path="kursseiten/"+section+"/materialien.md";
     const staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
