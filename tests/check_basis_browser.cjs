@@ -272,7 +272,7 @@ const assert=require('node:assert/strict');
       assert.equal(await card.count(),1,'Notebook must be present in the matching chapter');
       await card.evaluate(el=>{el.closest('details.kapitel').open=true;});
       assert.equal(await card.locator('.ki-notebook-iframe').count(),0,'No runtime iframe before user action');
-      const launch=card.getByRole('button',{name:'Notebook hier öffnen'});
+      const launch=card.locator('button.ki-notebook-launch');
       const scriptResult=await notebookPageInline.request.get(new URL('notebook-blocks.js',url).href);
       assert.equal(scriptResult.status(),200,'Notebook block script must be served alongside each course');
       await notebookPageInline.waitForFunction(path=>{
