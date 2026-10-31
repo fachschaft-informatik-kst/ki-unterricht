@@ -767,3 +767,16 @@ button[aria-current=true] .chapter-number{color:var(--accent);background:#fff;bo
 .notebook-cell-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0}
 #notebookExternal[hidden],#notebookDraftNotice[hidden]{display:none!important}
 #notebookExternal{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+
+/* Review every staged file before creating the PR. */
+.diff-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:12px 0 8px;font-size:12px;font-weight:700;color:var(--accent)}
+.diff-controls[hidden]{display:none!important}
+.diff-controls>div{display:flex;gap:6px;flex-wrap:wrap}
+.diff-controls .button{padding:5px 8px;font-size:11px;min-height:30px}
+.staged-diff summary{font-size:12px;padding:7px 3px}
+.staged-diff[open] summary{margin-bottom:7px}
+.diff-summary{font-size:12px}
+.diff-viewport{max-height:400px}
+.diff-line{font-size:11px;min-height:17px}
+.diff-line.diff-add{background:#dcf2e0;color:#185b30}
+.diff-line.diff-remove{background:#fce3e0;color:#8b2828}
