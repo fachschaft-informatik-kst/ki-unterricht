@@ -103,7 +103,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     const firstHistory=p.locator('#einstieg-3 .milestone-trigger').first();
     // Native browser activation is tested without Playwright auto-scrolling
     // the target; opening and closing must preserve the actual reading position.
-    const historyScrollBefore=await p.evaluate(()=>{window.scrollTo(0,320);return window.scrollY});
+    const historyScrollBefore=await p.evaluate(()=>{window.scrollTo({top:320,behavior:'instant'});return window.scrollY});
     assert(historyScrollBefore>80,'Timeline page is scrollable');
     const historyHashBefore=await p.evaluate(()=>location.hash);
     await firstHistory.evaluate(el=>el.click());
