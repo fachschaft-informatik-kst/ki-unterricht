@@ -410,6 +410,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n<!-- regression test -->");
     await page.locator("#stage").click();
     publishFailure=true;
+    await page.locator("#toggleChanges").click();
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#notice")?.textContent?.includes("HTTP 502"));
     assert.match(await page.locator("#notice").textContent(),/keine gültige JSON-Antwort/);
