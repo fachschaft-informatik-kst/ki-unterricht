@@ -65,7 +65,9 @@ export default {
             button.title = 'Gespeicherte Inhalte bleiben erhalten; veröffentlichte interaktive Übungen werden erneut ausgeführt.';
             button.style.cssText = 'font:inherit;padding:5px 11px;background:#e3f2ed;border:1px solid #246d5b;border-radius:7px;cursor:pointer;color:#143b33';
             activate.node.append(button);
-            panel.toolbar.addItem('ki-activate-figures', activate);
+            // The embedded notebook toolbar may overflow horizontally on small
+            // screens. Keep the restore action first so it stays reachable.
+            panel.toolbar.insertItem(0, 'ki-activate-figures', activate);
             button.addEventListener('click', async () => {
               button.disabled = true;
               button.textContent = 'Grafiken starten …';
