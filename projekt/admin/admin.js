@@ -639,7 +639,7 @@ const NOTEBOOK_BLOCK_CSS=[
   ".ki-notebook-block p{margin:0 0 12px;color:var(--muted);font-size:14px}",
   ".ki-notebook-direct{display:inline-block;font-size:13px;font-weight:650;color:var(--accent);text-decoration:underline}",
   ".ki-notebook-actions button{border:1px solid var(--accent);border-radius:8px;background:var(--accent);color:white;font:650 12px system-ui;padding:9px 12px}"
-].join("\\n");
+].join("\n");
 function preview(){
   const isGlossary=state.current?.path===GLOSSARY_PATH;
   const isBasis=state.course==="basis";
@@ -1459,7 +1459,7 @@ function createLessonNotebook(){
     const doc={cells:[
       cell("markdown","# "+title+"\n\n## Auftrag\n\nBeschreiben Sie die Aufgabe und Ihre Beobachtungen.\n"),
       cell("code","# Python-Code hier ergänzen\nprint('Mein erstes Experiment')\n")
-    ],metadata:{kernelspec:{display_name:"Python (Pyodide)",language:"python",name:"python"},
+    ],metadata:{kernelspec:{display_name:"Python 3 (Pyodide)",language:"python",name:"python3"},
       language_info:{name:"python"}},nbformat:4,nbformat_minor:5};
     validateNotebook(doc);
     const parent=state.current.path;
