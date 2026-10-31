@@ -116,9 +116,13 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert((await historyDialog.locator('figcaption').innerText()).length>60);
     assert((await historyDialog.locator('.milestone-source a').getAttribute('href')).includes('commons.wikimedia.org/wiki/File:'));
     await p.keyboard.press('Escape');
-    assert(!await historyDialog.isVisible(),'Escape closes the history modal');
+    await historyDialog.waitFor({state:'hidden'});
+    // A hidden native dialog can still have its "close" event pending.
+    // Check the focus-return contract after that event rather than racing it.
+    await p.waitForFunction(()=>
+      document.activeElement===document.querySelector('#einstieg-3 .milestone-trigger'),
+      null,{timeout:3000});
     assert.equal(await p.evaluate(()=>window.scrollY),historyScrollBefore,'Closing a milestone must preserve scroll');
-    assert(await firstHistory.evaluate(el=>el===document.activeElement),'Keyboard focus returns to milestone');
     await p.locator('#einstieg-3 [data-milestone-open="alexnet"]').evaluate(el=>el.click());
     assert((await historyDialog.innerText()).includes('AlexNet'));
     assert.equal(await p.evaluate(()=>window.scrollY),historyScrollBefore,'Opening another popup keeps position');

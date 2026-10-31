@@ -113,9 +113,13 @@ const assert=require('node:assert/strict');
     assert(await firstYearHistoryDialog.locator('img[alt]').count());
     assert((await firstYearHistoryDialog.locator('.milestone-source').innerText()).includes('Bildquelle'));
     await page.keyboard.press('Escape');
-    assert(!await firstYearHistoryDialog.isVisible());
+    await firstYearHistoryDialog.waitFor({state:'hidden'});
+    // The native <dialog> "close" event fires asynchronously after the
+    // dialog disappears. Wait for our focus-return handler, then check scroll.
+    await page.waitForFunction(()=>
+      document.activeElement===document.querySelector('#basis-ki #einstieg-3 [data-milestone-open="turing"]'),
+      null,{timeout:3000});
     assert.equal(await page.evaluate(()=>window.scrollY),basisScrollBefore,'Closing in first-year course must preserve scroll');
-    assert(await firstYearHistory.evaluate(el=>el===document.activeElement));
 
     const logo=page.locator('.crumb img.school-logo');
     assert.equal(await logo.count(),1,'KST school logo must be present');
