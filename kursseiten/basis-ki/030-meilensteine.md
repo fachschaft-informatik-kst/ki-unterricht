@@ -90,10 +90,10 @@ Menschen halten das Wissen von Fachleuten in Wenn-dann-Regeln fest, etwa zur Dia
           <p class="milestone-detail-kicker">Meilenstein der KI-Geschichte</p>
           <h2 class="milestone-detail-title">Expertensysteme</h2>
           <figure>
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/EXPERTENSYSTEM.png?width=960" alt="Deutsch beschriftetes Schema eines regelbasierten Expertensystems." loading="lazy" decoding="async" referrerpolicy="no-referrer">
-            <figcaption>Expertensysteme speichern das Wissen von Fachleuten als Regeln. Eine Schlussfolgerungs-Komponente wendet diese Regeln auf einen Fall an, zum Beispiel bei einer technischen Diagnose. Das Schaubild wurde später erstellt.</figcaption>
+            <img src="grafiken/expertensystem_ablauf.svg" alt="Vektorgrafik zum Expertensystem: Fachleute tragen Wenn-dann-Regeln in die Wissensbasis ein; eine Schlussfolgerungs-Komponente wendet die Regeln auf einen konkreten Fall an und liefert einen begründeten Vorschlag." loading="lazy" decoding="async">
+            <figcaption>Expertensysteme speichern das Wissen von Fachleuten als Regeln. Eine Schlussfolgerungs-Komponente wendet diese Regeln auf einen Fall an, zum Beispiel bei einer technischen Diagnose. Die Grafik ist eine vereinfachte, moderne Darstellung des Prinzips.</figcaption>
           </figure>
-          <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:EXPERTENSYSTEM.png" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Dr. Günther Fritz · CC BY-SA 4.0</a></p>
+          <p class="milestone-source">Illustration: eigene Vektorgrafik, schematische Darstellung eines regelbasierten Expertensystems.</p>
         </article>
         </template></li>
       <li><span class="jahr">1980er/90er</span>
