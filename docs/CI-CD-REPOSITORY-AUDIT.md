@@ -45,9 +45,10 @@ Weitere Massnahmen:
   Playwright-Version und die Runner-Plattform enthält. Fehlende
   Host-Bibliotheken werden bei Bedarf installiert und der Browserstart
   anschliessend erneut kontrolliert.
-- Die `build`-Joblaufzeit ist auf **30 Minuten**, der
-  JupyterLite-Build-/Content-Prüfschritt auf **8 Minuten** und der
-  notebookbasierte Chromium-Integrationsschritt auf **12 Minuten**
+- Die `build`-Joblaufzeit ist auf **30 Minuten** begrenzt. Die
+  vorher zusammengefasste Buildphase ist in Generierung (4 Minuten),
+  Inhaltsprüfung (5 Minuten) und JupyterLite-Paketierung (8 Minuten)
+  aufgeteilt. Der notebookbasierte Chromium-Test ist auf **12 Minuten**
   begrenzt. Aussergewöhnliche Hänger werden damit sichtbar statt
   still weiterzulaufen.
 - Cloudflare-Worker-Deployments starten nicht mehr nach reinen
