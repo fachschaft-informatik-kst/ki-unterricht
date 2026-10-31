@@ -133,8 +133,6 @@ body .table-scroll,body .table-wrap{border-color:#c6d2e7}
 body .phase-table tr.wer-l td{background:#e7eeff}
 body .phase-table tr.wer-t td{background:#e9f0ff}
 body .phase-table tr.wer-k td{background:#f0edff}
-body .marke.daten{background:#e3ecff;color:#284b8e}
-body .marke.regeln{background:#eff3fb;color:#3c557d}
 body input[type=text],body select,body textarea{border-color:#9daeca}
 body .lab-panel{border-color:#b5c5e8}
 body .lab-head{background:#e6edff;color:#284b8e}
