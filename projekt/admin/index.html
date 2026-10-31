@@ -57,6 +57,7 @@
       </div>
       <section class="publish" id="publishPanel" aria-label="Änderungen einreichen" hidden>
         <div class="publish-heading"><div><h2>Änderungen einreichen</h2><p id="publishHint">Noch nichts vorgemerkt</p></div><button id="closeChanges" class="icon-button" type="button" aria-label="Schliessen" title="Schliessen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+        <div class="diff-controls" id="diffControls" hidden><span>Code-Änderungen pro Datei</span><div><button type="button" id="expandDiffs" class="button light">Alle Diffs öffnen</button><button type="button" id="collapseDiffs" class="button light">Alle schliessen</button></div></div>
         <ul id="staged" class="staged-list" aria-label="Vorgemerkte Dateien"><li>Noch keine Änderungen vorgemerkt.</li></ul>
         <label for="prTitle">Titel des Pull Requests</label><input id="prTitle" type="text" maxlength="100" value="Unterrichtsinhalte aktualisieren">
         <button id="publish" type="button" class="button primary publish-submit" disabled>Pull Request erstellen</button>
