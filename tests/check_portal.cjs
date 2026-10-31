@@ -97,7 +97,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#einstieg-2').evaluate(e=>e.open),false);
     await p.locator('.nav-sub a[href="#einstieg-2"]').click();
     await p.waitForFunction(()=>document.getElementById('einstieg-2').open);
-    assert.equal(await p.locator('#einstieg table.typen').count(),2);
+    assert.equal(await p.locator('#einstieg table.typen').count(),1);
     for(const key of ['ki_ordnung','gesetze','begriffe'])assert.equal(await p.locator('#einstieg [data-answer="'+key+'"]').count(),1);
   await p.locator('.nav a[href="#lernarten"]').click();
   await p.locator('#lernarten').waitFor({state:'visible'});
