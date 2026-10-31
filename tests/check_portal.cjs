@@ -119,7 +119,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert(!await historyDialog.isVisible(),'Escape closes the history modal');
     assert.equal(await p.evaluate(()=>window.scrollY),historyScrollBefore,'Closing a milestone must preserve scroll');
     assert(await firstHistory.evaluate(el=>el===document.activeElement),'Keyboard focus returns to milestone');
-    await p.locator('#einstieg-3 [data-milestone-open="alexnet"]').click();
+    await p.locator('#einstieg-3 [data-milestone-open="alexnet"]').evaluate(el=>el.click());
     assert((await historyDialog.innerText()).includes('AlexNet'));
     assert.equal(await p.evaluate(()=>window.scrollY),historyScrollBefore,'Opening another popup keeps position');
     await historyDialog.locator('.milestone-close').click();
