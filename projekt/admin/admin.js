@@ -315,7 +315,8 @@ function useFile(path,sha,content,original=content){
       (targetSection.startsWith("basis-")!==(state.course==="basis")))
     throw Error("Dieser Inhalt gehört zur anderen Klassenstufe. Bitte zuerst den Kurs wechseln.");
   state.current={path,sha,original};
-  $("path").textContent=(state.course==="basis"?"1. Kurzgymnasium":"4. Kurzgymnasium")+" · "+path;
+  $("path").textContent=path;
+  $("courseContext").textContent=state.course==="basis"?"1. Kurzgymnasium · KI entdecken":"4. Kurzgymnasium · KI vertiefen";
   $("heading").textContent=path===GLOSSARY_PATH?"KI-Glossar bearbeiten":
     path.endsWith("/planung.json")?"AVIVA-Unterrichtsplan":
     path.endsWith("/materialien.md")?"Unterrichtsmaterialien":filename(path);
@@ -1053,6 +1054,7 @@ $("courseSelect").addEventListener("change",async()=>{
   if(!confirmUnsaved()){$("courseSelect").value=state.course;return;}
   state.course=selected;
   document.body.classList.toggle("course-basis",selected==="basis");
+  $("courseContext").textContent=selected==="basis"?"1. Kurzgymnasium · KI entdecken":"4. Kurzgymnasium · KI vertiefen";
   ++navigationRevision;
   state.plans.clear();
   state.manifest=null;
