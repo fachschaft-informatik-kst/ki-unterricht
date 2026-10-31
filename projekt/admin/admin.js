@@ -8,7 +8,7 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
-const planner=createPlanner($("planEditor"),content=>{$("source").value=content;preview();});
+const planner=createPlanner($("planEditor"),content=>{$("source").value=content;preview();},()=>preview());
 
 const sidebarToggle=$("toggleSidebar");
 sidebarToggle.addEventListener("click",()=>{
@@ -310,8 +310,16 @@ function renderLessonOrder(){
 }
 let navigationRevision=0;
 function useFile(path,sha,content,original=content){
+  const targetSection=path.split("/")[1];
+  if(/\/(?:planung\.json|materialien\.md)$/.test(path) &&
+      (targetSection.startsWith("basis-")!==(state.course==="basis")))
+    throw Error("Dieser Inhalt gehört zur anderen Klassenstufe. Bitte zuerst den Kurs wechseln.");
   state.current={path,sha,original};
-  $("path").textContent=path;$("heading").textContent=path===GLOSSARY_PATH?"KI-Glossar bearbeiten":filename(path);
+  $("path").textContent=path;
+  $("courseContext").textContent=state.course==="basis"?"1. Kurzgymnasium · KI entdecken":"4. Kurzgymnasium · KI vertiefen";
+  $("heading").textContent=path===GLOSSARY_PATH?"KI-Glossar bearbeiten":
+    path.endsWith("/planung.json")?"AVIVA-Unterrichtsplan":
+    path.endsWith("/materialien.md")?"Unterrichtsmaterialien":filename(path);
   const isGlossary=path===GLOSSARY_PATH;
   const isPlan=path.endsWith("/planung.json");
   const isNotebook=notebookPath(path);
@@ -321,7 +329,10 @@ function useFile(path,sha,content,original=content){
   $("move").disabled=!sha||!isChapter;$("archive").disabled=!sha||!isChapter;
   for(const id of ["toolbar","editorHelper"])
     $(id).hidden=isPlan||isNotebook||isGlossary;
-  $("sourceLabel").hidden=isPlan||isNotebook||isGlossary;
+  $("sourceLabel").hidden=isNotebook;
+  $("sourceLabel").textContent=isPlan?"AVIVA-Formular":isGlossary?"Glossarbegriffe bearbeiten":"HTML / Markdown";
+  $("planCourseTag").textContent=state.course==="basis"?"1. Klasse":"4. Klasse";
+  $("formEditor").hidden=!(isPlan||isGlossary);
   $("glossaryEditor").hidden=!isGlossary;
   $("notebookEditor").hidden=!isNotebook;
   if(isNotebook)openRuntimeNotebook(content,path);
@@ -329,10 +340,10 @@ function useFile(path,sha,content,original=content){
   $("previewHeading").hidden=isNotebook;
   $("preview").hidden=isNotebook;
   $("codeEditor").hidden=isPlan||isNotebook||isGlossary;
-  // Structured editors keep a full-width preview; notebooks use JupyterLite.
+  // Every course editor has the same resizable two-column workspace.
   $("splitEditor").hidden=isNotebook;
-  $("splitEditor").classList.toggle("preview-only",isPlan||isGlossary);
-  $("splitEditor").querySelector(".split-source").hidden=isPlan||isGlossary;
+  $("splitEditor").classList.remove("preview-only");
+  $("splitEditor").querySelector(".split-source").hidden=false;
   if(isGlossary)openGlossaryControls(content);
   if(isPlan)planner.open(content,$("section").value);
   else planner.close();
@@ -472,31 +483,52 @@ function glossaryList(){
     root.append(button);
   }
 }
+// The shared glossary keeps stable term IDs and names, but each course edits
+// only its own definition and optional example/self-check overrides.
+const glossaryDetailKey=(level,key)=>level+(key==="beispiel"?"Beispiel":key==="frage"?"Frage":"Antwort");
+const glossaryContent=(term,level,key)=>term[glossaryDetailKey(level,key)]??term[key];
 function glossaryFields(){
   const term=currentGlossaryTerm();if(!term)return;
+  const level=state.course==="basis"?"basis":"vertieft";
   $("glossaryCurrent").textContent=term.begriff||"Neuer Begriff";
-  $("glossaryId").textContent="Stabile Verknüpfungs-ID: "+term.id+" · wird nicht umbenannt";
-  const mapping={glossaryName:"begriff",glossaryBasis:"basis",glossaryVertieft:"vertieft",
-    glossaryExample:"beispiel",glossaryQuestion:"frage",glossaryAnswer:"antwort"};
-  for(const [id,key] of Object.entries(mapping))$(id).value=term[key];
+  $("glossaryId").textContent="Stabile Verknüpfungs-ID: "+term.id;
+  $("glossaryBasis").value=term.basis;
+  $("glossaryVertieft").value=term.vertieft;
+  $("glossaryExample").value=glossaryContent(term,level,"beispiel");
+  $("glossaryQuestion").value=glossaryContent(term,level,"frage");
+  $("glossaryAnswer").value=glossaryContent(term,level,"antwort");
+  $("glossaryName").value=term.begriff;
   const group=$("glossaryGroup");group.replaceChildren();
   for(const name of state.glossary.gruppen){
-    const option=document.createElement("option");option.value=name;option.textContent=name;
-    group.append(option);
+    const option=document.createElement("option");option.value=name;option.textContent=name;group.append(option);
   }
   group.value=term.gruppe;
+  $("glossaryBasis").closest(".glossary-level").hidden=level!=="basis";
+  $("glossaryVertieft").closest(".glossary-level").hidden=level!=="vertieft";
 }
 function openGlossaryControls(content){
   state.glossary=validateGlossary(JSON.parse(content));
   if(!state.glossary.begriffe.some(t=>t.id===state.glossarySelected))
     state.glossarySelected=state.glossary.begriffe[0].id;
-  $("glossaryPreviewLevel").value=state.course==="basis"?"basis":"vertiefung";
+  $("glossaryCourseTitle").textContent="KI-Glossar · "+(state.course==="basis"?"1. Klasse":"4. Klasse");
+  $("glossaryLevelName").textContent=state.course==="basis"?"die 1. Klasse":"die 4. Klasse";
   $("glossarySearch").value="";
+  $("glossaryEditor").querySelector(".glossary-common").open=false;
   glossaryList();glossaryFields();
 }
 function glossaryChange(key,value){
   const term=currentGlossaryTerm();if(!term)return;
-  term[key]=value;
+  const level=state.course==="basis"?"basis":"vertieft";
+  // UI guards against changing the other course even with programmatic events.
+  if(key==="basis"||key==="vertieft"){
+    if(key!==level)return;
+    term[level]=value;
+  }else if(["beispiel","frage","antwort"].includes(key)){
+    term[glossaryDetailKey(level,key)]=value;
+  }else{
+    // Explicitly grouped shared metadata, never silently tied to level changes.
+    term[key]=value;
+  }
   $("source").value=JSON.stringify(state.glossary,null,2)+"\n";
   if(key==="begriff"||key==="gruppe"){
     $("glossaryCurrent").textContent=term.begriff||"Neuer Begriff";
@@ -512,45 +544,69 @@ function glossaryAdd(){
   if(!/^[a-z][a-z0-9-]{0,69}$/.test(id)||state.glossary.begriffe.some(t=>t.id===id)){
     status("Ungültige oder bereits vorhandene Glossar-ID. Bitte einen anderen Begriff verwenden.",true);return;
   }
-  state.glossary.begriffe.push({id,gruppe:state.glossary.gruppen[0],begriff:name.trim(),
-    basis:"",vertieft:"",beispiel:"",frage:"",antwort:""});
+  const term={id,gruppe:state.glossary.gruppen[0],begriff:name.trim(),
+    basis:"Erklärung für die 1. Klasse hier ergänzen.",
+    vertieft:"Vertiefte fachliche Erklärung für die 4. Klasse hier ergänzen.",
+    beispiel:"Hier ein konkretes Beispiel ergänzen.",
+    frage:"Welche Frage passt zu diesem Begriff?",
+    antwort:"Eine kurze Antwort zur Leitfrage ergänzen."};
+  state.glossary.begriffe.push(term);
   state.glossarySelected=id;
   $("glossarySearch").value="";
   $("source").value=JSON.stringify(state.glossary,null,2)+"\n";
-  glossaryList();glossaryFields();preview();$("glossaryBasis").focus();
-  status("Neuer Begriff angelegt. Bitte beide Erklärungen, Beispiel, Leitfrage und Antwort ergänzen.");
+  glossaryList();glossaryFields();preview();
+  $(state.course==="basis"?"glossaryBasis":"glossaryVertieft").focus();
+  status("Begriff angelegt. Nur die ausgewählte Klassenstufe bearbeiten; bitte auch die andere Erklärung später ergänzen.");
 }
 function glossaryPreviewHtml(level){
   const t=currentGlossaryTerm();if(!t)return "";
   const prefix=level==="basis"?"basis-glossar":"glossar";
   const e=escapeHtml;
-  return '<span class="section-label">Nachschlagen · '+(level==="basis"?"1. Kurzgymnasium":"beide Kurse")+'</span>'+
+  return '<span class="section-label">Nachschlagen · '+(level==="basis"?"1. Kurzgymnasium":"4. Kurzgymnasium")+'</span>'+
     '<h1>KI-Glossar</h1><div class="glossary"><div class="glossary-group"><h2>'+e(t.gruppe)+'</h2><div class="glossary-grid">'+
     '<article class="glossary-entry" id="'+prefix+'-'+e(t.id)+'" data-glossary-id="'+e(t.id)+'">'+
     '<h3>'+e(t.begriff)+'</h3><p>'+e(t[level==="basis"?"basis":"vertieft"])+'</p>'+
-    '<p class="glossary-example"><strong>Beispiel:</strong> '+e(t.beispiel)+'</p>'+
+    '<p class="glossary-example"><strong>Beispiel:</strong> '+e(glossaryContent(t,level,"beispiel"))+'</p>'+
     '<div class="glossary-selfcheck">'+
     '<p class="glossary-question"><span class="glossary-question-label">Leitfrage</span>'+
-    '<span class="glossary-question-text">'+e(t.frage)+'</span></p>'+
+    '<span class="glossary-question-text">'+e(glossaryContent(t,level,"frage"))+'</span></p>'+
     '<details class="glossary-answer"><summary>'+
     '<span class="glossary-answer-show">Antwort anzeigen</span>'+
     '<span class="glossary-answer-hide">Antwort verbergen</span>'+
     '<span class="glossary-answer-icon" aria-hidden="true"></span></summary>'+
-    '<div class="glossary-answer-content"><p>'+e(t.antwort)+'</p></div>'+
+    '<div class="glossary-answer-content"><p>'+e(glossaryContent(t,level,"antwort"))+'</p></div>'+
     '</details></div></article></div></div></div>';
 }
 
 function preview(){
   const isGlossary=state.current?.path===GLOSSARY_PATH;
-  const isBasis=isGlossary?$("glossaryPreviewLevel").value==="basis":state.course==="basis";
+  const isBasis=state.course==="basis";
   document.body.classList.toggle("course-basis",state.course==="basis");
   const previewBase=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
-  let content=isGlossary?glossaryPreviewHtml(isBasis?"basis":"vertiefung"):$("source").value;
+  let content=isGlossary?glossaryPreviewHtml(isBasis?"basis":"vertieft"):$("source").value;
   if(isGlossary){
     // Same semantic elements and stylesheet as scripts/glossary.py on the published pages.
   }else if(state.current?.path.endsWith("/planung.json")){
-    const plan=JSON.parse(content);
-    content="<h2>Unterrichtsplan</h2>"+plan.lessons.map(l=>"<article class=\"card\"><h3>"+escapeHtml(l.title)+"</h3><p>"+escapeHtml(l.goal)+"</p>"+l.phases.map(p=>"<p><strong>"+escapeHtml(p.phase)+" · "+p.minutes+" min</strong> – "+escapeHtml(p.titel)+"</p>").join("")+"</article>").join("");
+    const plan=JSON.parse(content),selected=Math.max(0,Number($("planLesson").value)||0);
+    const lesson=plan.lessons[selected]||plan.lessons[0];
+    const esc=escapeHtml;
+    if(!lesson)content="<p>Keine Doppellektion vorhanden.</p>";
+    else{
+      const rows=lesson.phases.map((phase,index)=>{
+        const steps=(phase.schritte||[]).map(step=>
+          '<div class="aviva-step"><strong>'+esc(step.art||"Auftrag")+'</strong> · '+esc(step.wer||"")+
+          (step.min?' · '+Number(step.min)+' Min.':'')+'<p>'+esc(step.text||"")+'</p></div>').join("");
+        return '<tr><th scope="row">'+(index+1)+'. '+esc(phase.phase||"")+'</th><td><strong>'+esc(phase.titel||"")+'</strong>'+steps+'</td><td>'+Number(phase.minutes||0)+' Min.</td></tr>';
+      }).join("");
+      const detail=[["Leitfrage",lesson.question],["Motivation",lesson.motivation],["Lernergebnis",lesson.product]]
+        .filter(([name,value])=>value).map(([name,value])=>'<p><strong>'+name+':</strong> '+esc(value)+'</p>').join("");
+      const sum=lesson.phases.reduce((total,phase)=>total+Number(phase.minutes||0),0);
+      content='<span class="section-label">Unterrichtsplanung · '+(isBasis?"1.":"4.")+' Kurzgymnasium</span>'+
+        '<h2>AVIVA · '+esc(lesson.title)+'</h2>'+
+        '<div class="card"><h3>Lernziele</h3><p>'+esc(lesson.goal||"")+'</p>'+detail+'</div>'+
+        '<div class="table-scroll"><table class="phase-table"><thead><tr><th>Phase</th><th>Arbeitsschritte</th><th>Zeit</th></tr></thead>'+
+        '<tbody>'+rows+'</tbody></table></div><p><strong>Gesamtzeit: '+sum+' Minuten</strong></p>';
+    }
   }else if(content.includes("<!-- MD:START -->"))
     content=content.replace(/<!-- MD:START -->\r?\n([\s\S]*?)\r?\n<!-- MD:END -->/g,(_,text)=>markdown(text));
   else if(content.startsWith("---\n"))
@@ -752,7 +808,11 @@ async function publish(){
 async function editPlan(){
   try{
     if(!confirmUnsaved())return;
-    const path="kursseiten/"+$("section").value+"/planung.json",staged=state.staged.get(path);
+    const section=$("section").value;
+    const currentManifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
+    if(!currentManifest.sections.some(item=>item.id===section&&item.teaching))
+      throw Error("Bitte einen Unterrichtsbereich der ausgewählten Klasse wählen.");
+    const path="kursseiten/"+section+"/planung.json",staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
     const file=await api("/api/file?path="+encodeURIComponent(path));
     useFile(path,file.sha,file.content);status("AVIVA-Plan als Formular bearbeiten: pro Doppellektion fünf Phasen und insgesamt 90 Minuten.");
@@ -762,6 +822,9 @@ async function editMaterials(){
   try{
     if(!confirmUnsaved())return;
     const section=$("section").value;
+    const currentManifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
+    if(!currentManifest.sections.some(item=>item.id===section&&item.teaching))
+      throw Error("Bitte einen Unterrichtsbereich der ausgewählten Klasse wählen.");
     const path="kursseiten/"+section+"/materialien.md";
     const staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
@@ -980,7 +1043,7 @@ $("editMaterials").addEventListener("click",editMaterials);
 $("editGlossary").addEventListener("click",()=>load(GLOSSARY_PATH));
 $("glossarySearch").addEventListener("input",()=>{if(state.glossary)glossaryList();});
 $("glossaryAdd").addEventListener("click",glossaryAdd);
-$("glossaryPreviewLevel").addEventListener("change",()=>{if(state.current?.path===GLOSSARY_PATH)preview();});
+
 for(const [id,key] of Object.entries({glossaryName:"begriff",glossaryBasis:"basis",
   glossaryVertieft:"vertieft",glossaryExample:"beispiel",glossaryQuestion:"frage",glossaryAnswer:"antwort"}))
   $(id).addEventListener("input",event=>glossaryChange(key,event.target.value));
@@ -991,6 +1054,7 @@ $("courseSelect").addEventListener("change",async()=>{
   if(!confirmUnsaved()){$("courseSelect").value=state.course;return;}
   state.course=selected;
   document.body.classList.toggle("course-basis",selected==="basis");
+  $("courseContext").textContent=selected==="basis"?"1. Kurzgymnasium · KI entdecken":"4. Kurzgymnasium · KI vertiefen";
   ++navigationRevision;
   state.plans.clear();
   state.manifest=null;
@@ -1000,6 +1064,8 @@ $("courseSelect").addEventListener("change",async()=>{
   $("path").textContent="Kurs gewechselt";
   $("heading").textContent="Kapitel auswählen";
   $("notebookEditor").hidden=true;
+  $("planEditor").hidden=true;$("glossaryEditor").hidden=true;
+  $("formEditor").hidden=true;$("splitEditor").hidden=true;
   $("notebooks").replaceChildren();
   await refresh().catch(error);
   status("Kursauswahl geändert. Kapitel und AVIVA-Pläne gehören zum gewählten Kurs.");
@@ -1067,6 +1133,7 @@ splitDivider.addEventListener("dblclick",()=>setSplitRatio(50,true));
 // The source overlay, selection and syntax layer remain functional in fullscreen.
 const fullscreenSurfaces=[
   {element:$("codeEditor"),button:$("sourceFullscreen"),name:"Code"},
+  {element:$("formEditor"),button:$("formFullscreen"),name:"Formular"},
   {element:$("previewFrame"),button:$("previewFullscreen"),name:"Vorschau"}
 ];
 for(const {element,button} of fullscreenSurfaces){
@@ -1166,6 +1233,9 @@ function updateBlockHelp(){
 }
 // The floating example uses the same course CSS strings as the full editor
 // preview. A sandboxed iframe renders authored, static snippets without scripts.
+// Render in a Shadow DOM instead of an iframe. The deployed admin Worker
+// applies a strict frame CSP; Shadow DOM keeps the course styling isolated
+// without requesting another frame or allowing template scripts to execute.
 function inspectBlock(value){
   if(!Object.hasOwn(blocks,value))return;
   const option=blockOption(value);
@@ -1174,10 +1244,36 @@ function inspectBlock(value){
   const isBasis=state.course==="basis";
   const base=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
   const sample=previewAssets(blocks[value],base);
-  const styles=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"");
-  blockPreview.srcdoc='<!doctype html><html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>'+
-    styles+'\nhtml,body{margin:0!important;overflow-x:hidden}body{background:var(--paper)!important;padding:12px!important;font-size:14px!important}main{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important}.section,.kapitel{display:block!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;box-shadow:none!important}.kapitel>*:first-child{margin-top:0!important}.lesson-steps{grid-template-columns:repeat(3,minmax(0,1fr))}.lesson-steps article{padding:8px!important}.timeline li{grid-template-columns:58px minmax(0,1fr)}.grid{gap:8px}.card{padding:12px!important}img{max-height:130px;object-fit:contain}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body><main><section class="section" id="einstieg"><article class="kapitel">'+
-    sample+'</article></section></main></body></html>';
+  const shadow=blockPreview.shadowRoot||blockPreview.attachShadow({mode:"open"});
+  const styles=document.createElement("style");
+  styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+
+    '\n:host{display:block;box-sizing:border-box;font:14px/1.55 system-ui,-apple-system,sans-serif;'+
+    'color:#182b31;--accent:'+(isBasis?'#3653a3':'#076959')+';'+
+    '--soft:'+(isBasis?'#e9eefc':'#e7f1eb')+';'+
+    '--paper:'+(isBasis?'#f3f5fb':'#f5f4ee')+';'+
+    '--line:'+(isBasis?'#d9e0ef':'#d8dfdb')+';'+
+    '--muted:'+(isBasis?'#46536a':'#52656a')+';--ink:#182b31;}'+
+    '\n.block-preview-canvas{padding:12px;min-height:100%;box-sizing:border-box;background:var(--paper);overflow-wrap:anywhere;}'+
+    '\n.block-preview-canvas main,.block-preview-canvas .section,.block-preview-canvas .kapitel{display:block!important;position:static!important;'+
+    'width:100%!important;max-width:100%!important;min-height:0!important;min-width:0!important;'+
+    'margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;}'+
+    '\n.block-preview-canvas .kapitel{background:transparent!important;}'+
+    '\n.block-preview-canvas h1,.block-preview-canvas h2,.block-preview-canvas h3{font-size:16px;line-height:1.25;margin:0 0 9px;}'+
+    '\n.block-preview-canvas p{margin:0 0 10px;}'+
+    '\n.block-preview-canvas .callout,.block-preview-canvas .task,.block-preview-canvas .card{padding:12px;margin:4px 0 12px;}'+
+    '\n.block-preview-canvas .grid{gap:8px;}'+
+    '\n.block-preview-canvas .lesson-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;}'+
+    '\n.block-preview-canvas .lesson-steps article{padding:8px;}'+
+    '\n.block-preview-canvas .timeline li{grid-template-columns:58px minmax(0,1fr);gap:8px;}'+
+    '\n.block-preview-canvas img{display:block;max-width:100%;max-height:130px;object-fit:contain;}'+
+    '\n.block-preview-canvas pre{white-space:pre-wrap;overflow-wrap:anywhere;}';
+  const canvas=document.createElement("div");
+  canvas.className="block-preview-canvas";
+  // Only predefined, trusted templates are rendered; no user-authored HTML
+  // is introduced here. Scripts are never executed by this insertion.
+  canvas.innerHTML='<main><section class="section" id="einstieg"><article class="kapitel">'+
+    sample+'</article></section></main>';
+  shadow.replaceChildren(styles,canvas);
 }
 function renderBlockChoices(){
   blockChoiceContainer.replaceChildren();

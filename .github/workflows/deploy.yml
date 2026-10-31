@@ -188,7 +188,7 @@ jobs:
         id: changes
         shell: bash
         run: |
-          if git diff --quiet HEAD^ HEAD -- admin-worker/ .github/workflows/deploy.yml; then
+          if git diff --quiet HEAD^ HEAD -- admin-worker/ shared/glossary-model.js shared/course-model.js .github/workflows/deploy.yml; then
             echo "worker=false" >> "$GITHUB_OUTPUT"
           else
             echo "worker=true" >> "$GITHUB_OUTPUT"

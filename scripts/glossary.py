@@ -28,17 +28,22 @@ def render_glossary(course: str) -> str:
         for term in subset:
             def esc(key):
                 return html.escape(term[key], quote=True)
+            def course_text(key):
+                # Course-specific edits in the teacher editor override the
+                # original shared text; older glossary entries remain valid.
+                suffix = {"beispiel": "Beispiel", "frage": "Frage", "antwort": "Antwort"}[key]
+                return html.escape(term.get(course + suffix, term[key]), quote=True)
             parts.append(f'<article class="glossary-entry" id="{prefix}-{esc("id")}" data-glossary-id="{esc("id")}">'
                          f'<h3>{esc("begriff")}</h3><p>{esc("basis" if course == "basis" else "vertieft")}</p>'
-                         f'<p class="glossary-example"><strong>Beispiel:</strong> {esc("beispiel")}</p>'
+                         f'<p class="glossary-example"><strong>Beispiel:</strong> {course_text("beispiel")}</p>'
                          f'<div class="glossary-selfcheck">'
                          f'<p class="glossary-question"><span class="glossary-question-label">Leitfrage</span>'
-                         f'<span class="glossary-question-text">{esc("frage")}</span></p>'
+                         f'<span class="glossary-question-text">{course_text("frage")}</span></p>'
                          f'<details class="glossary-answer"><summary>'
                          f'<span class="glossary-answer-show">Antwort anzeigen</span>'
                          f'<span class="glossary-answer-hide">Antwort verbergen</span>'
                          f'<span class="glossary-answer-icon" aria-hidden="true"></span></summary>'
-                         f'<div class="glossary-answer-content"><p>{esc("antwort")}</p></div>'
+                         f'<div class="glossary-answer-content"><p>{course_text("antwort")}</p></div>'
                          f'</details></div></article>')
         parts.append('</div></div>')
     parts.append('<p class="glossary-empty" data-glossary-empty hidden>Kein Begriff gefunden. Probiere ein anderes Suchwort.</p></div>')

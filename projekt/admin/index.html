@@ -52,7 +52,7 @@
     <section class="editor">
       <div class="editor-heading">
         <button id="toggleSidebar" class="button light nav-toggle" type="button" aria-controls="courseSidebar" aria-expanded="true" aria-label="Kapitelnavigation ausblenden" title="Kapitelnavigation ausblenden"><span aria-hidden="true">☰</span></button>
-        <div><p class="eyebrow" id="path">Kein Kapitel ausgewählt</p><h1 id="heading">Kapitel bearbeiten</h1></div>
+        <div><p class="eyebrow course-context" id="courseContext">4. Kurzgymnasium · KI vertiefen</p><p class="eyebrow" id="path">Kein Kapitel ausgewählt</p><h1 id="heading">Kapitel bearbeiten</h1></div>
         <div class="actions"><button id="move" class="button light" type="button" hidden>Verschieben</button><button id="archive" class="button light danger" type="button">Ausblenden</button><button id="stage" type="button" class="button primary">Änderung vormerken</button><button id="toggleChanges" type="button" class="button changes-toggle" aria-controls="publishPanel" aria-expanded="false"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8l5 5v13H3V3h5ZM16 3v5h5M8 13h8"/></svg><span>Änderungen</span><span id="pendingCount" class="pending-count" aria-label="0 vorgemerkt">0</span></button></div>
       </div>
       <section class="publish" id="publishPanel" aria-label="Änderungen einreichen" hidden>
@@ -111,7 +111,7 @@
               <div id="blockChoices" class="block-choices" aria-label="Vorlagen"></div>
               <div class="block-inspection">
                 <div class="block-inspection-heading"><strong id="blockPreviewTitle">Aufgabe</strong><span id="blockPreviewHint">Beispielansicht im aktuellen Kursstil</span></div>
-                <iframe id="blockPreview" title="Bausteinvorschau im Kursdesign" sandbox="" referrerpolicy="no-referrer" tabindex="-1"></iframe>
+                <div id="blockPreview" class="block-preview-host" role="img" aria-label="Gerenderte Beispielansicht des ausgewählten Bausteins im Kursdesign"></div>
                 <small class="block-inspection-note">Die Vorschau zeigt die Gestaltung, ohne den Kursinhalt zu verändern.</small>
               </div>
             </div>
@@ -120,42 +120,6 @@
         <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden>
       </div>
       <p class="helper visually-hidden" id="editorHelper">Markdown und HTML bearbeiten. Die Vorschau aktualisiert sich automatisch. Bestehende Antwort- und Notebook-IDs beibehalten.</p>
-      <section id="planEditor" class="plan-editor" hidden>
-        <h2>Unterrichtsplan nach AVIVA</h2>
-        <p class="helper">Lernziele, Leitfrage, Phasen, Minuten und Arbeitsschritte bearbeiten. Die Gesamtzeit muss 90 Minuten betragen. Nummerierung und bestehende Kursverknüpfungen bleiben unverändert.</p>
-        <label for="planLesson">Doppellektion auswählen</label>
-        <select id="planLesson"></select>
-        <div id="planFields"></div>
-        <h3>AVIVA-Ablauf</h3>
-        <p id="planTotal" role="status"></p>
-        <div id="planPhases"></div>
-      </section>
-      <section id="glossaryEditor" class="glossary-editor" hidden>
-        <div class="glossary-intro"><h2>Gemeinsames Glossar bearbeiten</h2><p>Die <strong>Definitionen sind nach Klasse getrennt</strong>: einfach für die 1. Klasse, vertieft für die 4. Klasse. Begriff, Beispiel, Leitfrage und Kurzantwort gelten für beide Klassen. Alle Änderungen werden gemeinsam als ein Pull Request vorgemerkt.</p></div>
-        <div class="glossary-edit-grid">
-          <div class="glossary-picker">
-            <label for="glossarySearch">Begriff suchen</label><input id="glossarySearch" type="search" placeholder="z. B. Neuron, Token">
-            <p class="small" id="glossaryCount" role="status"></p>
-            <nav id="glossaryTerms" class="glossary-term-list" aria-label="Glossarbegriffe"></nav>
-            <button id="glossaryAdd" type="button" class="button full">+ Begriff hinzufügen</button>
-          </div>
-          <div class="glossary-fields">
-            <h3 id="glossaryCurrent">Begriff auswählen</h3><p class="small" id="glossaryId"></p>
-            <label for="glossaryName">Begriff</label><input id="glossaryName" type="text" maxlength="100">
-            <label for="glossaryGroup">Themenbereich</label><select id="glossaryGroup"></select>
-            <div class="glossary-level-grid">
-              <div class="glossary-level glossary-level-basis"><h4>1. Klasse <span>einfach</span></h4><label for="glossaryBasis">Erklärung für das 1. Kurzgymnasium</label><textarea id="glossaryBasis" rows="5"></textarea></div>
-              <div class="glossary-level glossary-level-advanced"><h4>4. Klasse <span>vertieft</span></h4><label for="glossaryVertieft">Erklärung für das 4. Kurzgymnasium</label><textarea id="glossaryVertieft" rows="5"></textarea></div>
-            </div>
-            <div class="glossary-shared"><h4>Für beide Klassen gemeinsam</h4>
-              <label for="glossaryExample">Beispiel</label><textarea id="glossaryExample" rows="2"></textarea>
-              <label for="glossaryQuestion">Leitfrage</label><textarea id="glossaryQuestion" rows="2"></textarea>
-              <label for="glossaryAnswer">Kurze, aufklappbare Antwort <span class="small">(max. 180 Zeichen)</span></label><textarea id="glossaryAnswer" maxlength="180" rows="2"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="glossary-preview-switch"><label for="glossaryPreviewLevel">Vorschau der Kursseite</label><select id="glossaryPreviewLevel"><option value="basis">1. Kurzgymnasium · blau</option><option value="vertiefung">4. Kurzgymnasium · grün</option></select><p class="small">Die Vorschau zeigt den ausgewählten Begriff im echten Kurslayout. Die Antwort lässt sich darin öffnen.</p></div>
-      </section>
       <section id="notebookEditor" hidden><h2>Jupyter-Notebook · ausführbare Umgebung</h2><p class="helper" id="notebookInfo"></p><p id="notebookRuntimeStatus" role="status">JupyterLite wird gestartet …</p><div class="notebook-runtime-actions"><button type="button" id="notebookSnapshot" class="button primary">Notebook-Stand übernehmen</button><button type="button" id="notebookReload" class="button light">Notebook neu öffnen</button></div><iframe id="notebookRuntime" title="Ausführbares JupyterLite-Notebook" referrerpolicy="no-referrer" allow="clipboard-read; clipboard-write"></iframe></section><div class="split-editor" id="splitEditor">
         <div class="split-source">
           <div class="pane-heading">
@@ -164,6 +128,52 @@
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14-5L4 8m0-4v4h4M4 13a8 8 0 0 0 14 5l2-2m0 4v-4h-4"/></svg>
             </button>
           </div>
+      <div id="formEditor" class="form-editor" hidden>
+        <button id="formFullscreen" class="icon-button pane-fullscreen" type="button" aria-label="Formular im Vollbild anzeigen" aria-pressed="false" title="Formular im Vollbild anzeigen">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg>
+        </button>
+        <section id="planEditor" class="plan-editor" hidden>
+          <h2>AVIVA-Unterrichtsplanung <span id="planCourseTag" class="level-label"></span></h2>
+          <p class="helper">Nur die Planung der ausgewählten Klasse bearbeiten. Die Vorschau rechts aktualisiert sich direkt.</p>
+          <label for="planLesson">Doppellektion auswählen</label>
+          <select id="planLesson"></select>
+          <div id="planFields"></div>
+          <h3>AVIVA-Ablauf</h3>
+          <p id="planTotal" role="status"></p>
+          <div id="planPhases"></div>
+        </section>
+        <section id="glossaryEditor" class="glossary-editor" hidden>
+          <div class="glossary-intro"><h2 id="glossaryCourseTitle">Glossar</h2><p>Du bearbeitest nur die Erklärungen und Beispiele der oben gewählten Klasse. Die andere Klassenstufe bleibt unverändert.</p></div>
+          <div class="glossary-edit-grid">
+            <div class="glossary-picker">
+              <label for="glossarySearch">Begriff suchen</label><input id="glossarySearch" type="search" placeholder="z. B. Neuron, Token">
+              <p class="small" id="glossaryCount" role="status"></p>
+              <nav id="glossaryTerms" class="glossary-term-list" aria-label="Glossarbegriffe"></nav>
+              <button id="glossaryAdd" type="button" class="button full">+ Begriff hinzufügen</button>
+            </div>
+            <div class="glossary-fields">
+              <h3 id="glossaryCurrent">Begriff auswählen</h3><p class="small" id="glossaryId"></p>
+              <div class="glossary-level-grid">
+                <div class="glossary-level glossary-level-basis"><h4>1. Klasse <span>einfach</span></h4><label for="glossaryBasis">Erklärung für das 1. Kurzgymnasium</label><textarea id="glossaryBasis" rows="5"></textarea></div>
+                <div class="glossary-level glossary-level-advanced"><h4>4. Klasse <span>vertieft</span></h4><label for="glossaryVertieft">Erklärung für das 4. Kurzgymnasium</label><textarea id="glossaryVertieft" rows="5"></textarea></div>
+              </div>
+              <div class="glossary-shared glossary-level-content">
+                <h4>Ergänzungen für <span id="glossaryLevelName">diese Klasse</span></h4>
+                <label for="glossaryExample">Beispiel</label><textarea id="glossaryExample" rows="2"></textarea>
+                <label for="glossaryQuestion">Leitfrage</label><textarea id="glossaryQuestion" rows="2"></textarea>
+                <label for="glossaryAnswer">Kurze, aufklappbare Antwort <span class="small">(max. 180 Zeichen)</span></label><textarea id="glossaryAnswer" maxlength="180" rows="2"></textarea>
+              </div>
+              <details class="glossary-common"><summary>Gemeinsame Stammdaten (beide Klassen)</summary>
+                <p class="small">Achtung: Begriff und Themenbereich sind für beide Kurse gleich und werden bei Änderungen in beiden angepasst.</p>
+                <label for="glossaryName">Begriff</label><input id="glossaryName" type="text" maxlength="100">
+                <label for="glossaryGroup">Themenbereich</label><select id="glossaryGroup"></select>
+              </details>
+            </div>
+          </div>
+          <div class="glossary-preview-switch"><span class="small">Die Vorschau rechts zeigt ausschliesslich das Glossar der ausgewählten Klasse.</span></div>
+        </section>
+
+      </div>
           <div class="code-editor" id="codeEditor">
             <pre id="sourceHighlight" class="source-highlight" aria-hidden="true"></pre>
             <textarea id="source" spellcheck="false" rows="20" placeholder="Kapitel auswählen …" aria-label="HTML- und Markdown-Quelltext mit Syntaxhervorhebung"></textarea>
@@ -175,7 +185,7 @@
         <div class="split-divider" id="splitDivider" role="separator" tabindex="0"
           aria-label="Breite von Code und Vorschau anpassen" aria-orientation="vertical"
           aria-valuemin="25" aria-valuemax="75" aria-valuenow="50"
-          aria-controls="codeEditor previewFrame" title="Ziehen oder mit den Pfeiltasten verschieben · Doppelklick: 50:50">
+          aria-controls="codeEditor formEditor previewFrame" title="Ziehen oder mit den Pfeiltasten verschieben · Doppelklick: 50:50">
           <span class="divider-grip" aria-hidden="true"></span>
         </div>
         <div class="split-preview">
