@@ -218,11 +218,33 @@ jobs:
           python tests/check_portal_content.py
           python tests/check_solutions.py
           python tests/check_content_mvc.py
-      - name: Build and package JupyterLite for Pages
+      # JupyterLite's kernel, compiled labextension and notebook snapshot are
+      # independent of Markdown/CSS/editor pages. Cache the RAW runtime only.
+      # Save BEFORE copy_portal.py so old course pages never enter the cache.
+      - name: Restore JupyterLite runtime cache
         if: steps.scope.outputs.site_changed == 'true'
+        id: lite-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dist
+          key: lite-runtime-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'content/**', 'experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
+      - name: Build JupyterLite runtime on cache miss
+        if: steps.scope.outputs.site_changed == 'true' && steps.lite-cache.outputs.cache-hit != 'true'
         timeout-minutes: 8
         run: |
+          echo "No matching JupyterLite runtime cache: building from current notebooks"
           jupyter lite build --contents _build/content --output-dir dist
+      - name: Cache raw JupyterLite runtime before course overlay
+        if: steps.scope.outputs.site_changed == 'true' && steps.lite-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: dist
+          key: ${{ steps.lite-cache.outputs.cache-primary-key }}
+      - name: Package current course pages with JupyterLite
+        if: steps.scope.outputs.site_changed == 'true'
+        timeout-minutes: 4
+        run: |
+          test -f dist/jupyter-lite.json
           python scripts/copy_portal.py dist
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
