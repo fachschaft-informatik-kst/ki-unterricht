@@ -243,7 +243,7 @@ async function staticPage(url){
   if(source.status>=300&&source.status<400)return fail(502,"Unerwartete Weiterleitung beim Laden der Editor-Dateien.");
   if(!source.ok)return fail(503,"Admin-Dateien sind noch nicht veröffentlicht.");
   const ext=file.split(".").pop();
-  const mime={html:"text/html",css:"text/css",js:"text/javascript",json:"application/json"}[ext];
+  const mime={html:"text/html",css:"text/css",js:"text/javascript",json:"application/json",svg:"image/svg+xml"}[ext];
   const csp=["default-src 'none'","script-src 'self'","style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io",
     "connect-src 'self'","frame-src 'self' blob:","base-uri 'none'","form-action 'none'",
