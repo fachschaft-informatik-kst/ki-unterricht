@@ -8,7 +8,7 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
-const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
+const planner=createPlanner($("planEditor"),content=>{$("source").value=content;preview();});
 
 const sidebarToggle=$("toggleSidebar");
 sidebarToggle.addEventListener("click",()=>{
