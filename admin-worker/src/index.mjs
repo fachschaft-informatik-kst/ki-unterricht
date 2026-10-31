@@ -256,7 +256,7 @@ async function staticPage(url){
   const mime={html:"text/html",css:"text/css",js:"text/javascript",json:"application/json",svg:"image/svg+xml"}[ext];
   const csp=["default-src 'none'","script-src 'self'","style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io",
-    "connect-src 'self'","frame-src 'self' blob:","base-uri 'none'","form-action 'none'",
+    "connect-src 'self'","frame-src 'self' blob: https://fachschaft-informatik-kst.github.io","base-uri 'none'","form-action 'none'",
     "frame-ancestors 'none'"].join("; ");
   return new Response(source.body,{headers:{
     "Content-Type":mime+"; charset=utf-8","Cache-Control":"no-store",
