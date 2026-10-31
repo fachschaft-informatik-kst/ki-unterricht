@@ -13,6 +13,8 @@ const allowed = new Set([
   'basis_neuron.ipynb', 'basis_netze.ipynb', 'basis_bildmodell.ipynb', 'basis_fotoprojekt.ipynb'
 ]);
 for (const path of [...allowed]) allowed.add('portal/' + path.split('/').pop());
+const lessonNotebook = path => /^portal\/(?:basis_)?lesson_[a-z0-9_]+\.ipynb$/.test(path);
+const isAllowed = path => allowed.has(path) || lessonNotebook(path);
 const tag = 'ki-autostart';
 const rememberedPathKey = 'kst-ki-last-notebook';
 
@@ -27,7 +29,7 @@ export default {
       if (seen.has(panel)) return;
       seen.add(panel);
       await panel.context.ready;
-      if (panel.isDisposed || !allowed.has(panel.context.path)) return;
+      if (panel.isDisposed || !isAllowed(panel.context.path)) return;
       if (embed && panel.context.path !== embed.path) return;
       try { if (!embed) sessionStorage.setItem(rememberedPathKey, panel.context.path); } catch {}
       panel.disposed.connect(() => {
@@ -143,7 +145,7 @@ export default {
         if (embed || performance.getEntriesByType('navigation')[0]?.type !== 'reload') return;
         if (tracker.size || new URLSearchParams(location.search).has('path')) return;
         const path = sessionStorage.getItem(rememberedPathKey);
-        if (allowed.has(path)) {
+        if (isAllowed(path)) {
           await app.commands.execute('docmanager:open', {path, factory: 'Notebook'});
         }
       } catch (error) { console.warn('KI notebook restoration:', error); }
