@@ -632,13 +632,29 @@ function glossaryPreviewHtml(level){
     '</details></div></article></div></div></div>';
 }
 
-const NOTEBOOK_BLOCK_CSS=[
-  ".ki-notebook-block{margin:20px 0;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;background:#fff}",
-  ".ki-notebook-block h3{margin:0 0 8px!important;color:var(--accent);font-size:18px!important}",
-  ".ki-notebook-block p{margin:0 0 12px;color:var(--muted);font-size:14px}",
-  ".ki-notebook-direct{display:inline-block;font-size:13px;font-weight:650;color:var(--accent);text-decoration:underline}",
-  ".ki-notebook-actions button{border:1px solid var(--accent);border-radius:8px;background:var(--accent);color:white;font:650 12px system-ui;padding:9px 12px}"
-].join("\n");
+// Render exactly the same initial notebook card/controls as notebook-blocks.js
+// on the published course. The preview remains script-free by design.
+function prepareNotebookPreview(content){
+  if(!content.includes("ki-notebook-block"))return content;
+  const host=document.createElement("template");host.innerHTML=content;
+  for(const card of host.content.querySelectorAll(".ki-notebook-block[data-notebook]")){
+    const path=card.getAttribute("data-notebook");
+    if(!notebookPath(path)||card.querySelector(".ki-notebook-actions"))continue;
+    const actions=document.createElement("div");actions.className="ki-notebook-actions";
+    const button=document.createElement("button");button.type="button";
+    button.className="ki-notebook-launch";button.textContent="Notebook hier öffnen";
+    button.setAttribute("aria-expanded","false");
+    const link=card.querySelector(".ki-notebook-direct")||document.createElement("a");
+    link.className="ki-notebook-direct";link.target="_blank";link.rel="noopener noreferrer";
+    link.textContent="In JupyterLite öffnen ↗";
+    link.href=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+
+      encodeURIComponent("portal/"+path.split("/").pop());
+    actions.append(button,link);card.append(actions);
+    const region=document.createElement("div");region.className="ki-notebook-runtime";region.hidden=true;
+    card.append(region);
+  }
+  return host.innerHTML;
+}
 function preview(){
   const isGlossary=state.current?.path===GLOSSARY_PATH;
   const isBasis=state.course==="basis";
@@ -687,6 +703,7 @@ function preview(){
   else if(!/^\s*<(?:details|section)\b/.test(content))
     content=markdown(content);
   content=previewAssets(content,previewBase);
+  content=prepareNotebookPreview(content);
   // Display staged image uploads without uploading or executing their content.
   for(const item of state.staged.values()){
     if(!item.path.startsWith("projekt/grafiken/uploads/")||item.delete)continue;
@@ -700,7 +717,7 @@ function preview(){
   // Keep the preview inert: no allow-scripts and no allow-same-origin.
   const section=isGlossary?(isBasis?"basis-glossar":"glossar"):(state.current?.path.split("/")[1]||(isBasis?"basis-start":"einstieg"));
   const safeSection=/^[a-z0-9-]+$/.test(section)?section:(isBasis?"basis-start":"einstieg");
-  const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+NOTEBOOK_BLOCK_CSS+"</style>";
+  const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+"</style>";
   // The Worker CSP intentionally forbids <base> (base-uri 'none'). Inline chrome
   // assets must therefore be absolute, just like images from edited chapters.
   const definitions=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content).sections;
@@ -1337,7 +1354,7 @@ function inspectBlock(value){
   const sample=previewAssets(blocks[value],base);
   const shadow=blockPreview.shadowRoot||blockPreview.attachShadow({mode:"open"});
   const styles=document.createElement("style");
-  styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+NOTEBOOK_BLOCK_CSS+
+  styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+
     '\n:host{display:block;box-sizing:border-box;font:14px/1.55 system-ui,-apple-system,sans-serif;'+
     'color:#182b31;--accent:'+(isBasis?'#3653a3':'#076959')+';'+
     '--soft:'+(isBasis?'#e9eefc':'#e7f1eb')+';'+
