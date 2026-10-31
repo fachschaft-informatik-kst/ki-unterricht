@@ -139,7 +139,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#editPlan").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/planung.json");
     assert.equal(await page.locator("#preview").isVisible(),true);
-    await page.frameLocator("#preview").locator("h2").filter({hasText:"Unterrichtsplan"}).waitFor();
+    await page.frameLocator("#preview").locator("h2").filter({hasText:"AVIVA"}).waitFor();
     assert.equal(await page.locator("#splitEditor").evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(" ").length),3,
       "AVIVA planning requires the same adjustable two-panel editor as chapters");
     assert.equal(await page.locator("#formEditor").isVisible(),true);
