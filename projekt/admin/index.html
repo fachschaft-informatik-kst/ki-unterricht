@@ -10,7 +10,7 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="logo">KI</span><span><strong>Unterricht bearbeiten</strong><small>Kantonsschule Stadelhofen · GitHub-Editor</small></span></div>
+    <div class="brand"><span class="logo">KI</span><span><strong>KI-Unterricht</strong><small>Lehrpersonen-Editor</small></span></div>
     <div class="account"><span id="who">Nicht angemeldet</span>
       <a id="login" class="button primary" href="/auth/start" hidden>Mit GitHub anmelden</a>
       <button id="logout" class="button light" hidden>Abmelden</button>
@@ -24,25 +24,25 @@
   </section>
   <main class="workspace" id="workspace" hidden>
     <aside class="sidebar" id="courseSidebar" aria-label="Kurskapitel">
-      <div class="sidebar-heading"><h2>Kapitel</h2><button id="refresh" class="button subtle" type="button">↻</button></div>
-      <label for="courseSelect">Kurs auswählen</label><select id="courseSelect" aria-label="Kurs auswählen"><option value="vertiefung">4. Kurzgymnasium · KI vertiefen</option><option value="basis">1. Kurzgymnasium · KI entdecken</option></select><details class="sidebar-details"><summary>Unterrichtsreihenfolge anpassen</summary><p class="small">Doppellektionen am Griff ziehen. IDs bleiben erhalten.</p><div id="lessonOrder" class="order-list" aria-label="Doppellektionen sortieren"></div></details><label for="section">Kapitel eines Bereichs auswählen</label>
+      <div class="sidebar-heading"><h2>Kapitel</h2><button id="refresh" class="button subtle" type="button" aria-label="Kapitel neu laden" title="Neu laden">↻</button></div>
+      <label for="courseSelect">Kurs</label><select id="courseSelect" aria-label="Kurs auswählen"><option value="vertiefung">4. Kurzgymnasium · KI vertiefen</option><option value="basis">1. Kurzgymnasium · KI entdecken</option></select><details class="sidebar-details"><summary>Unterrichtsreihenfolge anpassen</summary><p class="small">Doppellektionen am Griff ziehen. IDs bleiben erhalten.</p><div id="lessonOrder" class="order-list" aria-label="Doppellektionen sortieren"></div></details><label for="section">Bereich</label>
       <select id="section"></select>
-      <p class="small">Kapitel auswählen oder am Griff verschieben.</p><nav id="chapters" class="chapter-list" aria-label="Unterkapitel sortieren"></nav>
+      <nav id="chapters" class="chapter-list" aria-label="Unterkapitel sortieren"></nav>
       <button id="create" type="button" class="button full">+ Unterkapitel</button><div class="sidebar-actions"><button id="editPlan" type="button" class="button">AVIVA-Plan</button><button id="editMaterials" type="button" class="button">Materialien</button></div><button id="editGlossary" type="button" class="button full glossary-sidebar-button">✎ Glossar bearbeiten <small>1. und 4. Klasse</small></button><details class="sidebar-details"><summary>Neue Doppellektion</summary><button id="createLesson" type="button" class="button full">+ Neuer Bereich</button><button id="createLessonHere" type="button" class="button full">+ In diesem Bereich</button></details><details class="sidebar-details"><summary>Jupyter-Notebooks bearbeiten</summary><p class="small">Notebooks können in beiden Kursen verwendet werden. Änderungen an einer gemeinsamen Datei betreffen beide Kurse.</p><nav id="notebooks" class="chapter-list" aria-label="Jupyter-Notebooks"></nav></details>
-      <p class="small">Änderungen an der Reihenfolge werden für den nächsten Pull Request vorgemerkt. Die sichtbaren Kursnummern entstehen beim Build.</p>
+      
     </aside>
     <section class="editor">
       <div class="editor-heading">
-        <button id="toggleSidebar" class="button light" type="button" aria-controls="courseSidebar" aria-expanded="true">☰ Kapitelauswahl ausblenden</button>
+        <button id="toggleSidebar" class="button light nav-toggle" type="button" aria-controls="courseSidebar" aria-expanded="true" aria-label="Kapitelnavigation ausblenden" title="Kapitelnavigation ausblenden"><span aria-hidden="true">☰</span></button>
         <div><p class="eyebrow" id="path">Kein Kapitel ausgewählt</p><h1 id="heading">Kapitel bearbeiten</h1></div>
-        <div class="actions"><button id="move" class="button light" type="button" hidden>Verschieben</button>
+        <div class="actions"><button id="stage" type="button" class="button primary">Änderung vormerken</button><button id="move" class="button light" type="button" hidden>Verschieben</button>
           <button id="archive" class="button light danger" type="button">Ausblenden</button></div>
       </div>
       <div class="toolbar" id="toolbar" aria-label="Inhalte einfügen">
         <button type="button" id="addHeading">+ Überschrift</button>
         <button type="button" id="addAnswer">+ Antwortfeld</button>
-        <button type="button" id="addImage">+ Bild hochladen</button>
-        <label class="block-picker-label" for="blockType">Baustein</label>
+        <button type="button" id="addImage">+ Bild</button>
+        <label class="block-picker-label visually-hidden" for="blockType">Baustein</label>
         <select id="blockType" aria-label="Inhaltsbaustein auswählen">
           <option value="task">Aufgabe</option>
           <option value="info">Infobox / Merksatz</option>
@@ -58,10 +58,10 @@
           <option value="quote">Zitat</option>
           <option value="code">Codebeispiel</option>
         </select>
-        <button id="addBlock" type="button">+ Baustein einfügen</button>
+        <button id="addBlock" type="button">+ Einfügen</button>
         <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden>
       </div>
-      <p class="helper" id="editorHelper">Markdown und bestehendes HTML können editiert werden. Die Bausteine verwenden die Klassen der veröffentlichten Kursseite. Antwort- und Notebook-IDs beim Bearbeiten nicht verändern.</p>
+      <p class="helper visually-hidden" id="editorHelper">Markdown und HTML bearbeiten. Die Vorschau aktualisiert sich automatisch. Bestehende Antwort- und Notebook-IDs beibehalten.</p>
       <section id="planEditor" class="plan-editor" hidden>
         <h2>Unterrichtsplan nach AVIVA</h2>
         <p class="helper">Lernziele, Leitfrage, Phasen, Minuten und Arbeitsschritte bearbeiten. Die Gesamtzeit muss 90 Minuten betragen. Nummerierung und bestehende Kursverknüpfungen bleiben unverändert.</p>
@@ -99,17 +99,28 @@
         <div class="glossary-preview-switch"><label for="glossaryPreviewLevel">Vorschau der Kursseite</label><select id="glossaryPreviewLevel"><option value="basis">1. Kurzgymnasium · blau</option><option value="vertiefung">4. Kurzgymnasium · grün</option></select><p class="small">Die Vorschau zeigt den ausgewählten Begriff im echten Kurslayout. Die Antwort lässt sich darin öffnen.</p></div>
       </section>
       <section id="notebookEditor" hidden><h2>Jupyter-Notebook · ausführbare Umgebung</h2><p class="helper" id="notebookInfo"></p><p id="notebookRuntimeStatus" role="status">JupyterLite wird gestartet …</p><div class="notebook-runtime-actions"><button type="button" id="notebookSnapshot" class="button primary">Notebook-Stand übernehmen</button><button type="button" id="notebookReload" class="button light">Notebook neu öffnen</button></div><iframe id="notebookRuntime" title="Ausführbares JupyterLite-Notebook" referrerpolicy="no-referrer" allow="clipboard-read; clipboard-write"></iframe></section><div class="split-editor" id="splitEditor">
-        <div class="split-source"><label for="source" class="field-title" id="sourceLabel">Kapitelquelltext</label>
-      <div class="code-editor" id="codeEditor"><pre id="sourceHighlight" class="source-highlight" aria-hidden="true"></pre><textarea id="source" spellcheck="false" rows="20" placeholder="Wähle links ein Kapitel aus." aria-label="Kapitelquelltext mit Syntaxhervorhebung"></textarea></div>
-      <div class="editor-actions">
-        <button id="previewButton" type="button" class="button light">Vorschau aktualisieren</button>
-        <button id="stage" type="button" class="button primary">Änderung vormerken</button>
+        <div class="split-source">
+          <div class="pane-heading">
+            <label for="source" class="field-title" id="sourceLabel">HTML / Markdown</label>
+            <button id="previewButton" type="button" class="icon-button" aria-label="Vorschau aktualisieren" title="Vorschau aktualisieren">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14-5L4 8m0-4v4h4M4 13a8 8 0 0 0 14 5l2-2m0 4v-4h-4"/></svg>
+            </button>
+          </div>
+          <div class="code-editor" id="codeEditor"><pre id="sourceHighlight" class="source-highlight" aria-hidden="true"></pre><textarea id="source" spellcheck="false" rows="20" placeholder="Kapitel auswählen …" aria-label="HTML- und Markdown-Quelltext mit Syntaxhervorhebung"></textarea></div>
+        </div>
+        <div class="split-preview">
+          <div class="pane-heading preview-heading"><h2 class="preview-title" id="previewHeading">Vorschau</h2></div>
+          <div class="preview-frame" id="previewFrame">
+            <iframe id="preview" title="Kursvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer" allowfullscreen></iframe>
+            <button id="previewFullscreen" class="icon-button preview-fullscreen" type="button" aria-label="Vorschau im Vollbild anzeigen" aria-pressed="false" title="Vollbild">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
-        </div><div class="split-preview"><div class="preview-heading"><h2 class="preview-title" id="previewHeading">Kursvorschau <span>wie auf der Kurswebsite · ohne ausführbaren JavaScript-Code</span></h2><button id="previewFullscreen" class="button light" type="button">⛶ Vollbild-Vorschau</button></div>
-      <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer" allowfullscreen></iframe></div></div>
       <section class="publish">
-        <h2>Änderungen einreichen</h2>
-        <p>Alle vorgemerkten Änderungen werden zusammen in einem eigenen GitHub-Branch gespeichert. Ein Pull Request startet automatisch die bestehenden Tests.</p>
+        <h2>Pull Request</h2>
+        <p>Vorgemerkte Änderungen gemeinsam als Pull Request einreichen.</p>
         <ul id="staged" class="staged-list"><li>Noch keine Änderungen vorgemerkt.</li></ul>
         <label for="prTitle">Titel des Pull Requests</label>
         <input id="prTitle" type="text" maxlength="100" value="Unterrichtsinhalte aktualisieren">
