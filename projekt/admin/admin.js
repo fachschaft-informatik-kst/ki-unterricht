@@ -1233,6 +1233,9 @@ function updateBlockHelp(){
 }
 // The floating example uses the same course CSS strings as the full editor
 // preview. A sandboxed iframe renders authored, static snippets without scripts.
+// Render in a Shadow DOM instead of an iframe. The deployed admin Worker
+// applies a strict frame CSP; Shadow DOM keeps the course styling isolated
+// without requesting another frame or allowing template scripts to execute.
 function inspectBlock(value){
   if(!Object.hasOwn(blocks,value))return;
   const option=blockOption(value);
@@ -1241,10 +1244,36 @@ function inspectBlock(value){
   const isBasis=state.course==="basis";
   const base=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
   const sample=previewAssets(blocks[value],base);
-  const styles=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"");
-  blockPreview.srcdoc='<!doctype html><html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>'+
-    styles+'\nhtml,body{margin:0!important;overflow-x:hidden}body{background:var(--paper)!important;padding:12px!important;font-size:14px!important}main{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important}.section,.kapitel{display:block!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;box-shadow:none!important}.kapitel>*:first-child{margin-top:0!important}.lesson-steps{grid-template-columns:repeat(3,minmax(0,1fr))}.lesson-steps article{padding:8px!important}.timeline li{grid-template-columns:58px minmax(0,1fr)}.grid{gap:8px}.card{padding:12px!important}img{max-height:130px;object-fit:contain}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body><main><section class="section" id="einstieg"><article class="kapitel">'+
-    sample+'</article></section></main></body></html>';
+  const shadow=blockPreview.shadowRoot||blockPreview.attachShadow({mode:"open"});
+  const styles=document.createElement("style");
+  styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+
+    '\n:host{display:block;box-sizing:border-box;font:14px/1.55 system-ui,-apple-system,sans-serif;'+
+    'color:#182b31;--accent:'+(isBasis?'#3653a3':'#076959')+';'+
+    '--soft:'+(isBasis?'#e9eefc':'#e7f1eb')+';'+
+    '--paper:'+(isBasis?'#f3f5fb':'#f5f4ee')+';'+
+    '--line:'+(isBasis?'#d9e0ef':'#d8dfdb')+';'+
+    '--muted:'+(isBasis?'#46536a':'#52656a')+';--ink:#182b31;}'+
+    '\n.block-preview-canvas{padding:12px;min-height:100%;box-sizing:border-box;background:var(--paper);overflow-wrap:anywhere;}'+
+    '\n.block-preview-canvas main,.block-preview-canvas .section,.block-preview-canvas .kapitel{display:block!important;position:static!important;'+
+    'width:100%!important;max-width:100%!important;min-height:0!important;min-width:0!important;'+
+    'margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;}'+
+    '\n.block-preview-canvas .kapitel{background:transparent!important;}'+
+    '\n.block-preview-canvas h1,.block-preview-canvas h2,.block-preview-canvas h3{font-size:16px;line-height:1.25;margin:0 0 9px;}'+
+    '\n.block-preview-canvas p{margin:0 0 10px;}'+
+    '\n.block-preview-canvas .callout,.block-preview-canvas .task,.block-preview-canvas .card{padding:12px;margin:4px 0 12px;}'+
+    '\n.block-preview-canvas .grid{gap:8px;}'+
+    '\n.block-preview-canvas .lesson-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;}'+
+    '\n.block-preview-canvas .lesson-steps article{padding:8px;}'+
+    '\n.block-preview-canvas .timeline li{grid-template-columns:58px minmax(0,1fr);gap:8px;}'+
+    '\n.block-preview-canvas img{display:block;max-width:100%;max-height:130px;object-fit:contain;}'+
+    '\n.block-preview-canvas pre{white-space:pre-wrap;overflow-wrap:anywhere;}';
+  const canvas=document.createElement("div");
+  canvas.className="block-preview-canvas";
+  // Only predefined, trusted templates are rendered; no user-authored HTML
+  // is introduced here. Scripts are never executed by this insertion.
+  canvas.innerHTML='<main><section class="section" id="einstieg"><article class="kapitel">'+
+    sample+'</article></section></main>';
+  shadow.replaceChildren(styles,canvas);
 }
 function renderBlockChoices(){
   blockChoiceContainer.replaceChildren();
