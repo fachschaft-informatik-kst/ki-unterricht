@@ -133,8 +133,103 @@ async function openChapterNotebook(path){
   await load(path);
 }
 
+// Small, browser-native unified diffs. Calculate exact line edits for normal
+// teaching files, falling back to a safe whole-middle change for very large
+// generated JSON or notebook sources to avoid quadratic browser freezes.
+function diffLines(before,after){
+  const a=before.split("\n"),b=after.split("\n");
+  if(a.length&&a[a.length-1]==="")a.pop();
+  if(b.length&&b[b.length-1]==="")b.pop();
+  let first=0;while(first<a.length&&first<b.length&&a[first]===b[first])first++;
+  let lastA=a.length,lastB=b.length;
+  while(lastA>first&&lastB>first&&a[lastA-1]===b[lastB-1]){lastA--;lastB--;}
+  const result=[];
+  const append=(kind,text,oldNum,newNum)=>result.push({kind,text,oldNum,newNum});
+  for(let i=0;i<first;i++)append("same",a[i],i+1,i+1);
+  const left=a.slice(first,lastA),right=b.slice(first,lastB),m=left.length,n=right.length;
+  if(m*n<=350000){
+    // Longest-common-subsequence table: gives a true diff, rather than
+    // incorrectly treating nearby insertions as replacements.
+    const table=Array.from({length:m+1},()=>new Uint32Array(n+1));
+    for(let i=m-1;i>=0;i--)for(let j=n-1;j>=0;j--)
+      table[i][j]=left[i]===right[j]?1+table[i+1][j+1]:
+        Math.max(table[i+1][j],table[i][j+1]);
+    let i=0,j=0;
+    while(i<m||j<n){
+      if(i<m&&j<n&&left[i]===right[j]){
+        append("same",left[i],first+i+1,first+j+1);i++;j++;
+      }else if(j<n&&(i===m||table[i][j+1]>table[i+1][j])){
+        append("add",right[j],null,first+j+1);j++;
+      }else{append("remove",left[i],first+i+1,null);i++;}
+    }
+  }else{
+    for(let i=0;i<m;i++)append("remove",left[i],first+i+1,null);
+    for(let i=0;i<n;i++)append("add",right[i],null,first+i+1);
+  }
+  for(let i=lastA;i<a.length;i++)append("same",a[i],i+1,lastB+i-lastA+1);
+  return result;
+}
+function renderStagedDiff(panel,entry,before){
+  panel.replaceChildren();
+  if(/\.(?:png|jpe?g|gif|webp|svg|ico)$/i.test(entry.path)&&
+     !entry.path.endsWith(".svg")||entry.path.endsWith(".ipynb")&&entry.content?.length>450000){
+    const note=document.createElement("p");note.className="diff-note";
+    note.textContent="Diese grosse oder binäre Datei kann hier nicht vollständig als Text-Diff angezeigt werden. Der GitHub Pull Request zeigt die Dateiunterschiede.";
+    panel.append(note);return;
+  }
+  const after=entry.delete?"":entry.content||"";
+  const items=diffLines(before,after),added=items.filter(x=>x.kind==="add").length,
+    removed=items.filter(x=>x.kind==="remove").length;
+  const header=document.createElement("div");header.className="diff-summary";
+  header.textContent=(entry.delete?"Datei gelöscht · ":!entry.expectedSha?"Neue Datei · ":"Änderungen · ")+
+    "+"+added+" / −"+removed+" Zeilen";
+  panel.append(header);
+  const viewport=document.createElement("div");viewport.className="diff-viewport";
+  viewport.setAttribute("role","region");viewport.setAttribute("aria-label","Code-Diff für "+entry.path);
+  const visible=new Set();
+  items.forEach((item,i)=>{
+    if(item.kind!=="same")for(let k=Math.max(0,i-3);k<=Math.min(items.length-1,i+3);k++)visible.add(k);
+  });
+  const significant=items.filter(x=>x.kind!=="same").length;
+  if(!significant){
+    const note=document.createElement("p");note.className="diff-note";
+    note.textContent="Keine Textänderungen gegenüber dem Ausgangsstand.";
+    panel.append(note);return;
+  }
+  const cutoff=800;
+  let shown=0,skipped=0;
+  for(let i=0;i<items.length;i++){
+    if(!visible.has(i)){skipped++;continue;}
+    if(skipped){
+      const marker=document.createElement("div");marker.className="diff-omitted";
+      marker.textContent="··· "+skipped+" unveränderte Zeilen ···";
+      viewport.append(marker);skipped=0;
+    }
+    if(shown>=cutoff)break;
+    const item=items[i],line=document.createElement("div");
+    line.className="diff-line diff-"+item.kind;
+    const oldNum=document.createElement("span");oldNum.className="diff-number";
+    oldNum.textContent=item.oldNum??"";
+    const newNum=document.createElement("span");newNum.className="diff-number";
+    newNum.textContent=item.newNum??"";
+    const marker=document.createElement("span");marker.className="diff-marker";
+    marker.textContent=item.kind==="add"?"+":item.kind==="remove"?"−":" ";
+    const code=document.createElement("code");code.textContent=item.text||" ";
+    line.append(oldNum,newNum,marker,code);viewport.append(line);
+    shown++;
+  }
+  if(shown>=cutoff&&visible.size>cutoff){
+    const note=document.createElement("div");note.className="diff-omitted";
+    note.textContent="Diff-Vorschau nach 800 Zeilen gekürzt. Nach dem Einreichen ist der vollständige Diff auf GitHub sichtbar.";
+    viewport.append(note);
+  }
+  panel.append(viewport);
+}
 function stagingList(){
-  const node=$("staged");node.replaceChildren();
+  const node=$("staged");
+  const openPaths=new Set([...node.querySelectorAll("details[data-diff-path]")].
+    filter(el=>el.open).map(el=>el.dataset.diffPath));
+  node.replaceChildren();
   const count=state.staged.size;
   $("pendingCount").textContent=String(count);
   $("pendingCount").setAttribute("aria-label",count+" vorgemerkt");
@@ -142,25 +237,65 @@ function stagingList(){
   $("publishHint").textContent=count===0?"Noch nichts vorgemerkt":
     count===1?"1 Datei bereit für den Pull Request":count+" Dateien bereit für den Pull Request";
   $("publish").disabled=count===0;
+  $("diffControls").hidden=count===0;
   if(!count){
     const li=document.createElement("li");li.className="staged-empty";
     li.textContent="Noch keine Änderungen. Bearbeite einen Inhalt und klicke auf «Änderung vormerken».";
     node.append(li);return;
   }
-  for(const c of state.staged.values()){
+  for(const entry of state.staged.values()){
     const li=document.createElement("li");li.className="staged-item";
-    const text=document.createElement("span");text.className="staged-info";
-    const name=document.createElement("strong");
-    name.textContent=c.path.split("/").pop();
-    const location=document.createElement("small");location.textContent=c.path;
-    location.title=c.path;
-    text.append(name,location);
+    const main=document.createElement("div");main.className="staged-item-main";
+    const info=document.createElement("span");info.className="staged-info";
+    const name=document.createElement("strong");name.textContent=entry.path.split("/").pop();
+    const location=document.createElement("small");location.textContent=entry.path;location.title=entry.path;
+    info.append(name,location);
     const remove=document.createElement("button");remove.type="button";remove.className="staged-remove";
-    remove.textContent="×";remove.title="Vormerkung entfernen";remove.setAttribute("aria-label",c.path+" aus Vormerkungen entfernen");
-    remove.addEventListener("click",()=>{state.staged.delete(c.path);stagingList();});
-    li.append(text,remove);node.append(li);
+    remove.textContent="×";remove.title="Vormerkung entfernen";
+    remove.setAttribute("aria-label",entry.path+" aus Vormerkungen entfernen");
+    remove.addEventListener("click",()=>{state.staged.delete(entry.path);stagingList();});
+    main.append(info,remove);li.append(main);
+    const details=document.createElement("details");details.className="staged-diff";
+    details.dataset.diffPath=entry.path;
+    const summary=document.createElement("summary");
+    summary.textContent=(entry.delete?"Gelöschte Datei":!entry.expectedSha?"Neue Datei":"Änderungen")+
+      " · Zeilenvergleich (vorher / nachher)";
+    details.append(summary);
+    const panel=document.createElement("div");panel.className="diff-result";
+    details.append(panel);
+    let loaded=false;
+    details.addEventListener("toggle",async()=>{
+      if(!details.open||loaded)return;
+      loaded=true;
+      const note=document.createElement("p");note.className="diff-note";
+      note.textContent="Vergleiche bisherigen und neuen Stand …";panel.replaceChildren(note);
+      try{
+        // Some structured editors stage files without retaining the old text.
+        // Fetch it lazily only when the user opens that file's diff.
+        let before=entry.expectedSha?entry.original:"";
+        if(entry.expectedSha&&before===undefined){
+          const previous=await api("/api/file?path="+encodeURIComponent(entry.path));
+          before=previous.content;
+        }
+        if(state.staged.get(entry.path)!==entry)return;
+        renderStagedDiff(panel,entry,before||"");
+      }catch(e){
+        const message=document.createElement("p");message.className="diff-note";
+        message.textContent="Diff konnte nicht geladen werden: "+e.message;
+        panel.replaceChildren(message);
+        loaded=false;
+      }
+    });
+    li.append(details);node.append(li);
+    if(openPaths.has(entry.path)||count<=3)details.open=true;
   }
 }
+$("expandDiffs").addEventListener("click",()=>{
+  for(const details of $("staged").querySelectorAll("details.staged-diff"))details.open=true;
+});
+$("collapseDiffs").addEventListener("click",()=>{
+  for(const details of $("staged").querySelectorAll("details.staged-diff"))details.open=false;
+});
 // Section and chapter navigation share one selection state; the legacy
 // native selector remains available to keyboard and assistive technologies.
 function renderSectionNav(){
@@ -388,7 +523,7 @@ function useFile(path,sha,content,original=content){
   $("notebookInfo").textContent=isNotebook?
     (path.split("/").pop()+" · Änderungen im JupyterLite bearbeiten, «Notebook-Stand übernehmen», danach «Änderung vormerken»."):"";
   $("notebookPanel").hidden=true;
-  if(isNotebook)openRuntimeNotebook(content,path);
+  if(isNotebook){renderNotebookCells();openRuntimeNotebook(content,path);}
   $("previewButton").hidden=isNotebook;
   $("previewHeading").hidden=isNotebook;
   $("preview").hidden=isNotebook;
@@ -632,13 +767,29 @@ function glossaryPreviewHtml(level){
     '</details></div></article></div></div></div>';
 }
 
-const NOTEBOOK_BLOCK_CSS=[
-  ".ki-notebook-block{margin:20px 0;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;background:#fff}",
-  ".ki-notebook-block h3{margin:0 0 8px!important;color:var(--accent);font-size:18px!important}",
-  ".ki-notebook-block p{margin:0 0 12px;color:var(--muted);font-size:14px}",
-  ".ki-notebook-direct{display:inline-block;font-size:13px;font-weight:650;color:var(--accent);text-decoration:underline}",
-  ".ki-notebook-actions button{border:1px solid var(--accent);border-radius:8px;background:var(--accent);color:white;font:650 12px system-ui;padding:9px 12px}"
-].join("\n");
+// Render exactly the same initial notebook card/controls as notebook-blocks.js
+// on the published course. The preview remains script-free by design.
+function prepareNotebookPreview(content){
+  if(!content.includes("ki-notebook-block"))return content;
+  const host=document.createElement("template");host.innerHTML=content;
+  for(const card of host.content.querySelectorAll(".ki-notebook-block[data-notebook]")){
+    const path=card.getAttribute("data-notebook");
+    if(!notebookPath(path)||card.querySelector(".ki-notebook-actions"))continue;
+    const actions=document.createElement("div");actions.className="ki-notebook-actions";
+    const button=document.createElement("button");button.type="button";
+    button.className="ki-notebook-launch";button.textContent="Notebook hier öffnen";
+    button.setAttribute("aria-expanded","false");
+    const link=card.querySelector(".ki-notebook-direct")||document.createElement("a");
+    link.className="ki-notebook-direct";link.target="_blank";link.rel="noopener noreferrer";
+    link.textContent="In JupyterLite öffnen ↗";
+    link.href=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+
+      encodeURIComponent("portal/"+path.split("/").pop());
+    actions.append(button,link);card.append(actions);
+    const region=document.createElement("div");region.className="ki-notebook-runtime";region.hidden=true;
+    card.append(region);
+  }
+  return host.innerHTML;
+}
 function preview(){
   const isGlossary=state.current?.path===GLOSSARY_PATH;
   const isBasis=state.course==="basis";
@@ -687,6 +838,7 @@ function preview(){
   else if(!/^\s*<(?:details|section)\b/.test(content))
     content=markdown(content);
   content=previewAssets(content,previewBase);
+  content=prepareNotebookPreview(content);
   // Display staged image uploads without uploading or executing their content.
   for(const item of state.staged.values()){
     if(!item.path.startsWith("projekt/grafiken/uploads/")||item.delete)continue;
@@ -700,7 +852,7 @@ function preview(){
   // Keep the preview inert: no allow-scripts and no allow-same-origin.
   const section=isGlossary?(isBasis?"basis-glossar":"glossar"):(state.current?.path.split("/")[1]||(isBasis?"basis-start":"einstieg"));
   const safeSection=/^[a-z0-9-]+$/.test(section)?section:(isBasis?"basis-start":"einstieg");
-  const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+NOTEBOOK_BLOCK_CSS+"</style>";
+  const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+"</style>";
   // The Worker CSP intentionally forbids <base> (base-uri 'none'). Inline chrome
   // assets must therefore be absolute, just like images from edited chapters.
   const definitions=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content).sections;
@@ -1015,6 +1167,66 @@ async function addLessonToCurrentSection(){
 }
 
 
+// Native cell editor is always available, including before a new .ipynb is
+// published or if the cross-origin JupyterLite frame cannot be loaded.
+function appendNotebookCell(type,value,index){
+  const item=document.createElement("div");item.className="notebook-cell";
+  if(index!==null)item.dataset.originalIndex=String(index);
+  const head=document.createElement("div");head.className="notebook-cell-head";
+  const title=document.createElement("strong");title.textContent="Zelle "+($("notebookCellList").children.length+1);
+  const select=document.createElement("select");select.setAttribute("aria-label","Zelltyp");
+  for(const [key,label] of [["code","Python"],["markdown","Markdown"],["raw","Rohtext"]]){
+    const option=document.createElement("option");option.value=key;option.textContent=label;select.append(option);
+  }
+  select.value=type;
+  const remove=document.createElement("button");remove.type="button";remove.className="button light";
+  remove.textContent="Zelle entfernen";
+  remove.addEventListener("click",()=>item.remove());
+  head.append(title,select,remove);
+  const source=document.createElement("textarea");source.className="notebook-cell-source";
+  source.setAttribute("aria-label","Quelltext der Zelle");
+  source.rows=type==="code"?6:4;source.value=value;
+  item.append(head,source);$("notebookCellList").append(item);
+  return item;
+}
+function renderNotebookCells(){
+  const container=$("notebookCellList");container.replaceChildren();
+  const doc=JSON.parse($("source").value);validateNotebook(doc);
+  doc.cells.forEach((cell,i)=>appendNotebookCell(cell.cell_type,cell.source.join(""),i));
+}
+function applyNotebookCells(){
+  if(!notebookPath(state.current?.path||""))throw Error("Bitte zuerst ein Notebook auswählen.");
+  if(runtimeDirty)throw Error("JupyterLite hat noch ungesicherte Änderungen. Erst «Notebook-Stand übernehmen» wählen.");
+  const doc=JSON.parse($("source").value);
+  doc.cells=[...$("notebookCellList").children].map(item=>{
+    const type=item.querySelector("select").value;
+    const source=item.querySelector("textarea").value;
+    const n=Number(item.dataset.originalIndex);
+    const original=item.dataset.originalIndex===undefined?null:doc.cells[n];
+    const cell=original?.cell_type===type?structuredClone(original):{
+      cell_type:type,id:crypto.randomUUID().slice(0,8),metadata:{},
+      ...(type==="code"?{execution_count:null,outputs:[]}:{})
+    };
+    cell.source=[source];
+    if(type==="code"){
+      cell.execution_count=null;cell.outputs=[];
+    }
+    return cell;
+  });
+  validateNotebook(doc);
+  const content=JSON.stringify(doc,null,1)+"\n";
+  $("source").value=content;
+  highlightSource();
+  if(!stage())throw Error("Notebook konnte nicht vorgemerkt werden.");
+  renderNotebookCells();
+  // A live frame can be out of date after editing cells in the fallback.
+  // Reload from the exact staged content so both views stay consistent.
+  openRuntimeNotebook(content,state.current.path);
+  runtimeStatus("Zellen vorgemerkt. JupyterLite lädt die aktualisierte Notebook-Version.");
+}
+$("notebookAddCode").addEventListener("click",()=>appendNotebookCell("code","# Neuer Python-Code\n",null));
+$("notebookAddMarkdown").addEventListener("click",()=>appendNotebookCell("markdown","## Neuer Abschnitt\n",null));
+$("notebookApplyCells").addEventListener("click",()=>{try{applyNotebookCells();}catch(e){error(e);}});
 function validateNotebook(doc){
   if(!doc||!Array.isArray(doc.cells)||doc.nbformat!==4||!doc.metadata||!doc.cells.every(c=>
     ["markdown","code","raw"].includes(c.cell_type)&&Array.isArray(c.source)&&c.source.every(s=>typeof s==="string")))
@@ -1024,7 +1236,7 @@ function validateNotebook(doc){
 // The existing notebook bridge sends explicit snapshots to the editor for GitHub PRs.
 const runtimeOrigin="https://fachschaft-informatik-kst.github.io";
 const runtimeFrame=$("notebookRuntime");
-let runtimeReady=false,runtimeDirty=false,runtimeRevision=0,runtimePath="",runtimeRequests=new Map();
+let runtimeReady=false,runtimeDirty=false,runtimeRevision=0,runtimePath="",runtimeRequests=new Map(),runtimeStartTimer=null;
 function runtimeStatus(message){$("notebookRuntimeStatus").textContent=message;}
 function runtimeRequest(type,extra={}){
   return new Promise((resolve,reject)=>{
@@ -1040,7 +1252,18 @@ async function openRuntimeNotebook(content,path){
   runtimePath=path;runtimeReady=false;runtimeDirty=false;runtimeRevision=0;
   for(const request of runtimeRequests.values()){clearTimeout(request.timeout);request.reject(Error("Notebook gewechselt."));}
   runtimeRequests.clear();
-  runtimeStatus("Python-Umgebung wird geladen …");
+  clearTimeout(runtimeStartTimer);
+  runtimeStatus("JupyterLite wird geladen. Falls die Verbindung nicht klappt, kannst du unten die Notebook-Zellen direkt bearbeiten.");
+  const unpublished=state.current?.sha===null;
+  $("notebookDraftNotice").hidden=!unpublished;
+  const external=$("notebookExternal");
+  external.hidden=unpublished;
+  if(!unpublished)external.href=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+
+    encodeURIComponent("portal/"+path.split("/").pop());
+  runtimeStartTimer=setTimeout(()=>{
+    if(!runtimeReady&&runtimePath===path)
+      runtimeStatus("JupyterLite hat noch nicht geantwortet. Prüfe die Verbindung oder bearbeite die Notebook-Zellen unten direkt.");
+  },45000);
   // Start with a known teaching notebook and restore the actual selected source.
   // The iframe may not access OAuth cookies or the GitHub API.
   // For a new draft the published path does not exist yet. Open a known
@@ -1059,7 +1282,8 @@ window.addEventListener("message",async event=>{
     if(data.type==="error")req.reject(Error(data.error||"Notebook-Fehler"));else req.resolve(data);
   }
   if(data.type==="ready"){
-    if(!data.ready){runtimeStatus(data.error||"Notebook-Start fehlgeschlagen.");return;}
+    clearTimeout(runtimeStartTimer);
+    if(!data.ready){runtimeStatus((data.error||"Notebook-Start fehlgeschlagen.")+" Die Notebook-Zellen können unten direkt bearbeitet werden.");return;}
     if(runtimeReady)return;
     runtimeReady=true;
     try{
@@ -1079,6 +1303,7 @@ async function snapshotRuntime(){
   const data=await runtimeRequest("snapshot");
   validateNotebook(data.notebook);
   $("source").value=JSON.stringify(data.notebook,null,1)+"\\n";
+  renderNotebookCells();
   runtimeDirty=false;runtimeStatus("Notebook übernommen. Jetzt «Änderung vormerken» wählen.");
 }
 $("notebookSnapshot").addEventListener("click",()=>snapshotRuntime().catch(error));
@@ -1337,7 +1562,7 @@ function inspectBlock(value){
   const sample=previewAssets(blocks[value],base);
   const shadow=blockPreview.shadowRoot||blockPreview.attachShadow({mode:"open"});
   const styles=document.createElement("style");
-  styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+NOTEBOOK_BLOCK_CSS+
+  styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+
     '\n:host{display:block;box-sizing:border-box;font:14px/1.55 system-ui,-apple-system,sans-serif;'+
     'color:#182b31;--accent:'+(isBasis?'#3653a3':'#076959')+';'+
     '--soft:'+(isBasis?'#e9eefc':'#e7f1eb')+';'+

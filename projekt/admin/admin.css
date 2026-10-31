@@ -523,7 +523,7 @@ button[aria-current=true] .chapter-number{color:var(--accent);background:#fff;bo
 .editor-heading .changes-toggle.has-changes{border-color:#aaccc0;background:var(--soft)}
 .changes-toggle.has-changes .pending-count{background:var(--accent);color:#fff}
 .publish{
-  position:absolute;right:15px;top:70px;width:min(450px,calc(100% - 30px));
+  position:absolute;right:15px;top:70px;width:min(720px,calc(100% - 30px));
   max-height:min(77vh,720px);overflow-y:auto;overscroll-behavior:contain;
   z-index:30;margin:0;padding:16px 17px;
   background:#fff;border:1px solid var(--line);border-radius:13px;
@@ -535,12 +535,34 @@ button[aria-current=true] .chapter-number{color:var(--accent);background:#fff;bo
 .publish-heading .icon-button{flex:0 0 30px;border:1px solid var(--line)}
 .publish .staged-list{
   display:grid;gap:5px;list-style:none;margin:3px 0 12px;padding:0;
-  max-height:195px;overflow-y:auto;font-size:12px
+  max-height:min(48vh,470px);overflow-y:auto;font-size:12px
 }
 .publish .staged-item{
-  display:flex;align-items:center;gap:8px;min-width:0;
-  padding:7px 8px;border:1px solid var(--line);border-radius:8px;background:#fbfcfb
+  display:block;min-width:0;
+  padding:8px 9px;border:1px solid var(--line);border-radius:8px;background:#fbfcfb
 }
+.staged-item-main{display:flex;align-items:center;gap:8px;min-width:0}
+.staged-diff{margin:8px 0 0;border-top:1px solid var(--line);padding-top:7px;min-width:0}
+.staged-diff summary{cursor:pointer;color:var(--accent);font-size:11px;font-weight:700;padding:5px 2px}
+.staged-diff summary:hover{text-decoration:underline}
+.diff-result{margin:6px 0 1px;font-size:11px;min-width:0}
+.diff-summary{display:block;margin:0 0 8px;padding:5px 7px;background:var(--soft);border-radius:5px;font:650 11px/1.3 system-ui}
+.diff-note{margin:6px 0;font-size:11px;line-height:1.5;color:var(--muted)}
+.diff-viewport{
+  max-height:360px;overflow:auto;overscroll-behavior:contain;min-width:0;
+  border:1px solid var(--line);border-radius:7px;background:#fff;
+  font:11px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;
+  tab-size:2
+}
+.diff-line{display:grid;grid-template-columns:30px 30px 17px minmax(0,1fr);align-items:baseline;min-width:0}
+.diff-line .diff-number{font-size:10px;color:#69777e;text-align:right;padding-right:4px;user-select:none;border-right:1px solid #d7e0dc}
+.diff-line .diff-marker{text-align:center;font-weight:800;user-select:none}
+.diff-line code{font:inherit;white-space:pre;overflow-wrap:normal;min-width:0;padding:0 5px;display:block;width:max-content;max-width:none}
+.diff-line.diff-add{background:#e7f7eb;color:#185b30}
+.diff-line.diff-remove{background:#fdebea;color:#8b2828}
+.diff-line.diff-same{background:#fff;color:#283e42}
+.diff-omitted{padding:5px 8px;background:#eef3f4;color:#63767b;font:italic 10px system-ui}
+
 .staged-info{min-width:0;flex:1}
 .staged-info strong{display:block;font-size:12px;line-height:1.3;overflow-wrap:anywhere}
 .staged-info small{display:block;font-size:10px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -730,3 +752,31 @@ button[aria-current=true] .chapter-number{color:var(--accent);background:#fff;bo
 .notebook-editor-heading h2{margin:0;font-size:18px}
 #notebookEditor .notebook-runtime-actions{margin:12px 0}
 @media(max-width:700px){.notebook-panel-grid{grid-template-columns:1fr}.chapter-notebook-row{align-items:flex-start}}
+
+/* JupyterLite remains the executable editor; source-only cell editing is an
+   independent recovery path when third-party framing or networking fails. */
+.notebook-source-panel{margin-top:16px;border:1px solid var(--line);border-radius:11px;padding:12px 15px;background:#fbfcfb}
+.notebook-source-panel summary{cursor:pointer;font-size:14px;font-weight:750;color:var(--accent);padding:3px 0}
+.notebook-source-panel>.helper{margin:12px 0}
+.notebook-source-panel .notebook-cell{margin:9px 0;background:#fff}
+.notebook-source-panel .notebook-cell-head{flex-wrap:wrap}
+.notebook-source-panel .notebook-cell-head strong{font-size:12px}
+.notebook-source-panel .notebook-cell-head select{font-size:12px;border:1px solid var(--line);padding:6px;border-radius:6px;background:#fff}
+.notebook-source-panel .notebook-cell-head button{font-size:11px}
+.notebook-source-panel textarea{display:block;width:100%;min-height:108px;padding:10px;resize:vertical;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--text);font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
+.notebook-cell-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0}
+#notebookExternal[hidden],#notebookDraftNotice[hidden]{display:none!important}
+#notebookExternal{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+
+/* Review every staged file before creating the PR. */
+.diff-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:12px 0 8px;font-size:12px;font-weight:700;color:var(--accent)}
+.diff-controls[hidden]{display:none!important}
+.diff-controls>div{display:flex;gap:6px;flex-wrap:wrap}
+.diff-controls .button{padding:5px 8px;font-size:11px;min-height:30px}
+.staged-diff summary{font-size:12px;padding:7px 3px}
+.staged-diff[open] summary{margin-bottom:7px}
+.diff-summary{font-size:12px}
+.diff-viewport{max-height:400px}
+.diff-line{font-size:11px;min-height:17px}
+.diff-line.diff-add{background:#dcf2e0;color:#185b30}
+.diff-line.diff-remove{background:#fce3e0;color:#8b2828}
