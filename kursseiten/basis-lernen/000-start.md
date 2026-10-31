@@ -11,6 +11,7 @@
   </div>
 </details>
 <!-- /LESSONS:basis-lernen -->
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#basis-glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#basis-glossar-unueberwachtes-lernen">unüberwachtes Lernen</a> · <a href="#basis-glossar-verstaerkendes-lernen">verstärkendes Lernen</a></p>
 <div class="callout basis-learning-route" data-p1-route="b02">
   <!-- MD:START -->
 ## Unser Pflichtkern (ca. 45 Minuten)
