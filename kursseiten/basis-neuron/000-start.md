@@ -2,6 +2,7 @@
 <h1>Wie entscheidet ein Neuron?</h1>
 <!-- LESSONS:basis-neuron -->
 <!-- /LESSONS:basis-neuron -->
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#basis-glossar-neuron">Neuron</a> · <a href="#basis-glossar-gewicht">Gewicht</a> · <a href="#basis-glossar-bias-neuron">Bias</a></p>
 <div class="callout basis-learning-route" data-p1-route="b03">
   <!-- MD:START -->
 ## Pflichtkern: Entscheidungen sichtbar machen
