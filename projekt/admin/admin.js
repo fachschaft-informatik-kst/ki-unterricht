@@ -14,7 +14,9 @@ const sidebarToggle=$("toggleSidebar");
 sidebarToggle.addEventListener("click",()=>{
   const collapsed=$("workspace").classList.toggle("sidebar-collapsed");
   sidebarToggle.setAttribute("aria-expanded",String(!collapsed));
-  sidebarToggle.textContent=collapsed?"☰ Kapitelauswahl einblenden":"☰ Kapitelauswahl ausblenden";
+  const label=collapsed?"Kapitelnavigation einblenden":"Kapitelnavigation ausblenden";
+  sidebarToggle.setAttribute("aria-label",label);
+  sidebarToggle.title=label;
 });
 
 const sourceLayer=$("sourceHighlight");
@@ -263,6 +265,10 @@ function useFile(path,sha,content,original=content){
   $("previewHeading").hidden=isNotebook;
   $("preview").hidden=isNotebook;
   $("codeEditor").hidden=isPlan||isNotebook||isGlossary;
+  // Structured editors keep a full-width preview; notebooks use JupyterLite.
+  $("splitEditor").hidden=isNotebook;
+  $("splitEditor").classList.toggle("preview-only",isPlan||isGlossary);
+  $("splitEditor").querySelector(".split-source").hidden=isPlan||isGlossary;
   if(isGlossary)openGlossaryControls(content);
   if(isPlan)planner.open(content,$("section").value);
   else planner.close();
@@ -924,8 +930,22 @@ $("source").addEventListener("input",()=>{
   if(!$("codeEditor").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
 });
 $("previewButton").addEventListener("click",preview);
-$("previewFullscreen").addEventListener("click",()=>{
-  $("preview").requestFullscreen().catch(()=>status("Vollbildansicht wird vom Browser nicht unterstützt.",true));
+const previewFrame=$("previewFrame");
+const fullscreenButton=$("previewFullscreen");
+fullscreenButton.addEventListener("click",async()=>{
+  try{
+    if(document.fullscreenElement===previewFrame)await document.exitFullscreen();
+    else await previewFrame.requestFullscreen();
+  }catch{
+    status("Vollbildansicht wird vom Browser nicht unterstützt.",true);
+  }
+});
+document.addEventListener("fullscreenchange",()=>{
+  const expanded=document.fullscreenElement===previewFrame;
+  fullscreenButton.setAttribute("aria-pressed",String(expanded));
+  const label=expanded?"Vollbild schliessen":"Vorschau im Vollbild anzeigen";
+  fullscreenButton.setAttribute("aria-label",label);
+  fullscreenButton.title=label;
 });
 $("stage").addEventListener("click",()=>{try{stage();}catch(e){error(e);}});
 $("checkPermissions").addEventListener("click",async()=>{
