@@ -409,6 +409,13 @@ const server=http.createServer((req,res)=>{
     await page.locator("#toggleChanges").click();
     assert.equal(await page.locator("#publish").isEnabled(),true);
     assert.match(await page.locator("#staged .staged-item").first().textContent(),/planung.json/);
+    const planDiff=page.locator('#staged details[data-diff-path="kursseiten/einstieg/planung.json"]');
+    await planDiff.locator("summary").click();
+    await planDiff.locator(".diff-add").first().waitFor();
+    assert.match(await planDiff.locator(".diff-add").allTextContents().then(lines=>lines.join("\n")),/Was ist KI\? – Überarbeitet/);
+    assert.match(await planDiff.locator(".diff-remove").allTextContents().then(lines=>lines.join("\n")),/Was ist KI\?/);
+    assert.match(await planDiff.locator(".diff-summary").textContent(),/\+\d+ \/ −\d+/);
+
     await page.locator("#closeChanges").click();
     await page.evaluate(()=>{
       const responses=["Vertiefung: KI im Alltag","Einstieg und Auftrag"];
@@ -670,6 +677,13 @@ const server=http.createServer((req,res)=>{
     await directCell.fill("print('Neues Python-Experiment')");
     await page.locator("#notebookApplyCells").click();
     assert.match(await page.locator("#source").inputValue(),/Neues Python-Experiment/);
+    await page.locator("#toggleChanges").click();
+    const updatedDiff=page.locator('#staged details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
+    await updatedDiff.locator("summary").click();
+    await updatedDiff.locator(".diff-add").first().waitFor();
+    assert.match(await updatedDiff.locator(".diff-viewport").textContent(),/Neues Python-Experiment/);
+    await page.locator("#closeChanges").click();
+
     await page.frameLocator("#notebookRuntime").locator("#notebook-code").waitFor({state:"visible"});
     await page.waitForFunction(()=>document.querySelector("#notebookRuntimeStatus")?.textContent?.includes("Bereit:"));
     assert.match(await page.frameLocator("#notebookRuntime").locator("#notebook-code").inputValue(),/Neues Python-Experiment/);
@@ -677,6 +691,20 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fdaten_training.ipynb/,
       "Undeployed notebook must start from a trusted template to support live editing");
     assert.equal(await page.locator("#pendingCount").textContent(),"2");
+    await page.locator("#toggleChanges").click();
+    const newNotebookDiff=page.locator('#staged details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
+    await newNotebookDiff.locator("summary").click();
+    await newNotebookDiff.locator(".diff-add").first().waitFor();
+    assert.match(await newNotebookDiff.locator(".diff-summary").textContent(),/Neue Datei/);
+    assert.equal(await newNotebookDiff.locator(".diff-remove").count(),0);
+    assert.match(await newNotebookDiff.locator(".diff-viewport").textContent(),/Mein erstes Experiment/);
+    // Treat HTML in diffs as literal source, never as executable markup.
+    await page.evaluate(()=>{
+      const details=document.querySelector('details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
+      if(details)window.__diffOpenBefore=details.open;
+    });
+    await page.locator("#closeChanges").click();
+
     assert.match(await page.locator("#staged").innerText(),/lesson_einstieg_mein_python_labor.ipynb/);
     await page.locator("#notebookBack").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/030-einstieg-3.md");
