@@ -3,7 +3,8 @@
     <h2 class="kapitel-titel">Meilensteine der KI</h2>
   </summary>
   <div class="kapitel-body">
-    <p class="section-intro">Die <strong>farbigen Marken neben den Meilenstein-Titeln</strong> zeigen, worauf ein Meilenstein hauptsächlich beruht: <span class="marke regeln">Regeln von Menschen</span> (blau) bedeutet, dass Menschen das Vorgehen oder die Regeln festlegen. <span class="marke daten">Lernen aus Daten</span> (orange) bedeutet, dass ein System Muster aus Beispielen lernt. Diese Einteilung ist vereinfacht. Beim <strong>KI-Winter</strong> fehlt eine Marke, weil er eine Phase rückläufigen Interesses bezeichnet und keine neue Technik. Klickt auf einen Titel, um ein Bild, eine kurze Erklärung und die Bildquelle zu sehen.</p>
+    <p class="section-intro"><strong>Wie wurde aus einer Idee die KI von heute?</strong> Die Entwicklung der künstlichen Intelligenz begann lange vor ChatGPT: Zuerst versuchten Forschende, Denken mit festen Regeln nachzubauen. Später lernten Programme zunehmend aus Beispielen. Dazwischen gab es Erfolge, Rückschläge und neue Anläufe. Die folgenden neun Meilensteine zeigen wichtige Wendepunkte – nicht die gesamte Geschichte. Die <strong>farbigen Marken neben den Meilenstein-Titeln</strong> helfen beim Vergleichen: <span class="marke regeln">Regeln von Menschen</span> (blau) bedeutet vorgegebene Regeln, <span class="marke daten">Lernen aus Daten</span> (orange) das Erkennen gelernter Muster. Die Einteilung ist vereinfacht: Viele KI-Systeme verbinden beides. Beim <strong>KI-Winter</strong> fehlt eine Marke, weil er einen Rückgang der Erwartungen und Förderung bezeichnet, keine Technik. Klickt auf einen Titel, um ein Bild, die Erklärung und die Bildquelle zu sehen.</p>
+    <p class="timeline-thinking"><strong>Entdeckerfrage:</strong> Vergleicht die Marken von 1950 bis 1997 mit den Meilensteinen im <strong>21. Jahrhundert</strong>: Welche Art von KI dominiert in den jüngsten Beispielen? Woran könnte diese Veränderung liegen? Begründet eure Vermutung mit zwei Meilensteinen. Heisst das, dass feste Regeln heute keine Rolle mehr spielen?</p>
     <ol class="timeline">
       <li><span class="jahr">1950</span>
         <div>
@@ -17,10 +18,10 @@ Alan Turing schlägt vor, Maschinenintelligenz so zu prüfen: Kann ein Mensch im
           <p class="milestone-detail-kicker">Meilenstein der KI-Geschichte</p>
           <h2 class="milestone-detail-title">Turing-Test</h2>
           <figure>
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Alan_Turing_(1951).jpg?width=960" alt="Schwarz-weisses Porträt des Informatikers Alan Turing aus dem Jahr 1951." loading="lazy" decoding="async" referrerpolicy="no-referrer">
-            <figcaption>Alan Turing formulierte 1950 ein Gedankenexperiment: Kann eine Maschine in einem schriftlichen Gespräch so antworten, dass sie nicht zuverlässig von einem Menschen zu unterscheiden ist? Das Bild zeigt Turing 1951 – nicht die Testsituation.</figcaption>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Turing_test_diagram.svg?width=960" alt="Schema des Turing-Tests: Eine fragende Person erhält Textantworten von einer unbekannten Maschine und einem Menschen." loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            <figcaption>Alan Turing schlug 1950 diesen Versuchsaufbau vor: Eine Person stellt schriftlich Fragen und erhält Antworten von zwei verborgenen Gesprächspartnern – einem Menschen und einem Computer. Kann sie zuverlässig herausfinden, welche Antworten von der Maschine stammen? Das Bild zeigt den Versuchsaufbau, nicht Alan Turing selbst.</figcaption>
           </figure>
-          <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:Alan_Turing_(1951).jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Elliott &amp; Fry · gemeinfrei</a></p>
+          <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:Turing_test_diagram.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Schoeneh · CC0 1.0</a></p>
         </article>
         </template></li>
       <li><span class="jahr">1956</span>
@@ -125,10 +126,10 @@ Der Schachcomputer von IBM schlägt Weltmeister Garry Kasparov. Er rechnet sehr 
           <p class="milestone-detail-kicker">Meilenstein der KI-Geschichte</p>
           <h2 class="milestone-detail-title">Deep Blue</h2>
           <figure>
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Deep_Blue.jpg?width=960" alt="IBM-Schachcomputer Deep Blue im Computer History Museum." loading="lazy" decoding="async" referrerpolicy="no-referrer">
-            <figcaption>1997 gewann Deep Blue ein Schachmatch gegen Weltmeister Garri Kasparow. Dafür untersuchte der Rechner zahlreiche mögliche Zugfolgen. Das Foto entstand später im Museum und zeigt keinen Moment des Wettkampfs.</figcaption>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Deep_Blue_versus_Kasparov%2C_1997%2C_Game_6.gif?width=960" alt="Animierte Schachpartie: Die Züge von Deep Blue und Garri Kasparow im entscheidenden sechsten Spiel 1997." loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            <figcaption>Hier seht ihr die Zugfolge der entscheidenden sechsten Partie des Matches 1997. Deep Blue berechnete sehr viele mögliche Züge und bewertete Stellungen mit programmierten Regeln. Die Animation wurde später aus den überlieferten Schachzügen erstellt – sie ist kein Film vom Wettkampf.</figcaption>
           </figure>
-          <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:Deep_Blue.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Jim Gardner (James the photographer) · CC BY 2.0</a></p>
+          <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:Deep_Blue_versus_Kasparov,_1997,_Game_6.gif" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Morn · CC0 1.0</a></p>
         </article>
         </template></li>
       <li><span class="jahr">ab 2012</span>
@@ -160,11 +161,20 @@ ChatGPT macht grosse Sprachmodelle für alle zugänglich. Sie erzeugen Texte, an
         <article class="milestone-detail">
           <p class="milestone-detail-kicker">Meilenstein der KI-Geschichte</p>
           <h2 class="milestone-detail-title">Generative KI</h2>
-          <figure>
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/ChatGPT_screenshot.png?width=960" alt="Screenshot einer späteren ChatGPT-Benutzeroberfläche." loading="lazy" decoding="async" referrerpolicy="no-referrer">
-            <figcaption>Ende 2022 wurde ChatGPT öffentlich zugänglich. Sprachmodelle erzeugen Antworten, indem sie anhand gelernter Muster nächste Textbestandteile vorhersagen. Der Screenshot zeigt eine spätere Version der Anwendung.</figcaption>
-          </figure>
-          <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:ChatGPT_screenshot.png" target="_blank" rel="noopener noreferrer">Wikimedia Commons · IP address is the worst2 · CC BY-SA 3.0</a></p>
+          <p class="milestone-image-lead">Ein Text wird zur Bildidee: Zwei Bildgenerator-Ausgaben aus dem Jahr 2022 zeigen dasselbe Motiv – «ein Astronaut reitet auf einem Pferd» –, aber mit unterschiedlichen Stilvorgaben. Es sind <strong>von KI erzeugte Bilder</strong>, keine Fotos wirklicher Ereignisse.</p>
+          <div class="milestone-art-grid">
+            <figure>
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/An_astronaut_riding_a_horse_%28Monet%29_2022-08-30.png?width=720" alt="Von KI erzeugtes Bild eines Astronauten auf einem Pferd mit malerischen Pinselstrichen." loading="lazy" decoding="async" referrerpolicy="no-referrer">
+              <figcaption>Gleiches Motiv, Vorgabe «im Stil von Monet».</figcaption>
+              <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:An_astronaut_riding_a_horse_(Monet)_2022-08-30.png" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Asanagi · CC0 1.0</a></p>
+            </figure>
+            <figure>
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/An_astronaut_riding_a_horse_%28Hiroshige%29_2022-08-30.png?width=720" alt="Von KI erzeugtes Bild eines Astronauten auf einem Pferd wie in einem japanischen Holzschnitt." loading="lazy" decoding="async" referrerpolicy="no-referrer">
+              <figcaption>Gleiches Motiv, Vorgabe «im Stil von Hiroshige».</figcaption>
+              <p class="milestone-source">Bildquelle: <a href="https://commons.wikimedia.org/wiki/File:An_astronaut_riding_a_horse_(Hiroshige)_2022-08-30.png" target="_blank" rel="noopener noreferrer">Wikimedia Commons · Asanagi · gemeinfrei (algorithmisch erzeugt)</a></p>
+            </figure>
+          </div>
+          <p class="milestone-image-context">Beide Bilder entstanden mit Stable Diffusion. Die Freigabe von ChatGPT Ende 2022 machte besonders die <strong>Textgenerierung</strong> für viele Menschen zugänglich. Heute erzeugen verschiedene Modelle auch Bilder, Audio und Code. Was zeigt der Bildvergleich über die Wirkung einer Texteingabe?</p>
         </article>
         </template></li>
     </ol>
