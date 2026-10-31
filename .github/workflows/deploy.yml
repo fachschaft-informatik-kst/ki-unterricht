@@ -16,10 +16,67 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      site_changed: ${{ steps.scope.outputs.site_changed }}
+      worker_changed: ${{ steps.scope.outputs.worker_changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Detect affected deployment targets
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          # PR checkout is a merge commit: HEAD^1 is the base branch.
+          # Push events compare with "before" to include every pushed commit.
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            base="$(git rev-parse HEAD^1)"
+          else
+            base="${{ github.event.before }}"
+          fi
+          if [[ "$base" =~ ^[0-9a-f]{40}$ ]] && ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            git fetch --no-tags --depth=1 origin "$base" >/dev/null 2>&1 || true
+          fi
+          if [[ ! "$base" =~ ^[0-9a-f]{40}$ ]] || ! git cat-file -e "$base^{commit}" 2>/dev/null ||
+             ! git diff --name-only -z "$base" HEAD > /tmp/ki-changed-paths; then
+            echo "Cannot determine changed files: conservatively build and deploy both targets."
+            echo "site_changed=true" >> "$GITHUB_OUTPUT"
+            echo "worker_changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          site=false
+          worker=false
+          while IFS= read -r -d '' file; do
+            echo "Changed: $file"
+            case "$file" in
+              admin-worker/*)
+                worker=true
+                ;;
+              shared/course-model.js|shared/glossary-model.js)
+                site=true
+                worker=true
+                ;;
+              README.md|docs/*)
+                # Documentation is not included in either deployed runtime.
+                ;;
+              *)
+                # All other changes get full site CI, including CI changes.
+                site=true
+                ;;
+            esac
+          done < /tmp/ki-changed-paths
+          echo "site_changed=$site" >> "$GITHUB_OUTPUT"
+          echo "worker_changed=$worker" >> "$GITHUB_OUTPUT"
+          echo "Impact: site=$site worker=$worker"
+      - name: Verify Worker-only changes
+        if: steps.scope.outputs.worker_changed == 'true' && steps.scope.outputs.site_changed != 'true'
+        run: |
+          node --check admin-worker/src/index.mjs
+          node tests/check_admin.mjs
       - name: Setup Python
+        if: steps.scope.outputs.site_changed == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -28,14 +85,17 @@ jobs:
             requirements.txt
             requirements-preview.txt
       - name: Install the dependencies
+        if: steps.scope.outputs.site_changed == 'true'
         run: |
           python -m pip install -r requirements.txt
       - uses: actions/setup-node@v4
+        if: steps.scope.outputs.site_changed == 'true'
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: extensions/ki-autostart/package-lock.json
       - name: Verify local Makefile targets
+        if: steps.scope.outputs.site_changed == 'true'
         run: |
           make help
           make -n preview > /tmp/ki-preview-make.txt
@@ -45,6 +105,7 @@ jobs:
           grep -Fq 'scripts/copy_portal.py' /tmp/ki-local-make.txt
           grep -Fq 'http.server' /tmp/ki-local-make.txt
       - name: Smoke-test local Makefile preview
+        if: steps.scope.outputs.site_changed == 'true'
         run: |
           timeout 75s make preview PORT=8765 > /tmp/ki-preview-server.log 2>&1 &
           preview_pid=$!
@@ -64,6 +125,7 @@ jobs:
           grep -Fq 'data-answer=' /tmp/ki-preview.html
           echo 'PASS Makefile preview: isolated Python setup, course build and HTTP server'
       - name: Build notebook autostart
+        if: steps.scope.outputs.site_changed == 'true'
         run: |
           npm ci --prefix extensions/ki-autostart
           npm run build --prefix extensions/ki-autostart
@@ -81,18 +143,41 @@ jobs:
           node tests/check_fotostudio_inline.cjs
           node tests/check_course_model.mjs
           node tests/check_glossary_model.mjs
-      - name: Browser-check teacher editor
+      - name: Install Playwright test runner
+        if: steps.scope.outputs.site_changed == 'true'
+        id: playwright
         run: |
           npm install --prefix /tmp/ki-browser playwright
-          /tmp/ki-browser/node_modules/.bin/playwright install --with-deps chromium
+          node -p "require('/tmp/ki-browser/node_modules/playwright/package.json').version" | sed 's/^/version=/' >> "$GITHUB_OUTPUT"
+      - name: Restore cached Chromium
+        if: steps.scope.outputs.site_changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ runner.arch }}-${{ steps.playwright.outputs.version }}
+      - name: Prepare Chromium and required system libraries
+        if: steps.scope.outputs.site_changed == 'true'
+        run: |
+          /tmp/ki-browser/node_modules/.bin/playwright install chromium
+          # Avoid apt when the runner already has all host libraries.
+          # If Chromium cannot start, install system deps and retry.
+          if ! node -e "require('/tmp/ki-browser/node_modules/playwright').chromium.launch().then(b=>b.close())"; then
+            /tmp/ki-browser/node_modules/.bin/playwright install-deps chromium
+            node -e "require('/tmp/ki-browser/node_modules/playwright').chromium.launch().then(b=>b.close())"
+          fi
+      - name: Browser-check teacher editor
+        if: steps.scope.outputs.site_changed == 'true'
+        run: |
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_admin_form.cjs
       - name: Check simplified teaching project
+        if: steps.scope.outputs.site_changed == 'true'
         run: |
           python tests/check_ki_basis.py
           python tests/execute_all_notebooks.py
           python tests/check_pyodide_lock.py
           python tests/check_kernel_compat.py
       - name: Build the JupyterLite site
+        if: steps.scope.outputs.site_changed == 'true'
         run: |
           python scripts/build_portal.py
           python scripts/build_course.py
@@ -123,10 +208,12 @@ jobs:
           test -f dist/projekt/admin/plan-editor.js
           test -f dist/projekt/admin/glossary-model.js
       - name: Browser-check basic course
+        if: steps.scope.outputs.site_changed == 'true'
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
       - name: Check deployed notebook runtime in Chromium
+        if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 20
         run: |
           # Independent browser tests use different local ports. Run them in
@@ -148,14 +235,14 @@ jobs:
             exit 1
           fi
       - name: Upload artifact
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.scope.outputs.site_changed == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.build.outputs.site_changed == 'true'
     permissions:
       pages: write
       id-token: write
@@ -173,7 +260,7 @@ jobs:
   deploy_worker:
     name: Deploy authenticated teacher editor Worker
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.build.outputs.worker_changed == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -182,23 +269,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-      - name: Detect changes to Worker
-        id: changes
-        shell: bash
-        run: |
-          if git diff --quiet HEAD^ HEAD -- admin-worker/ shared/glossary-model.js shared/course-model.js .github/workflows/deploy.yml; then
-            echo "worker=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "worker=true" >> "$GITHUB_OUTPUT"
-          fi
       - uses: actions/setup-node@v4
-        if: steps.changes.outputs.worker == 'true'
         with:
           node-version: '22'
       - name: Verify Cloudflare credentials
-        if: steps.changes.outputs.worker == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -208,7 +282,6 @@ jobs:
             exit 1
           fi
       - name: Deploy Cloudflare Worker
-        if: steps.changes.outputs.worker == 'true'
         working-directory: admin-worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
