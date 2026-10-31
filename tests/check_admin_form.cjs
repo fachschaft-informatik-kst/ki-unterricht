@@ -499,6 +499,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#stage").click();
     assert((await page.locator("#staged").innerText()).includes("kursseiten/glossar.json"));
     publishFailure=false; // Earlier simulated 502 must not affect the successful glossary publication test.
+    await page.locator("#toggleChanges").click();
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
     assert.equal(submitted.changes.length,1);
