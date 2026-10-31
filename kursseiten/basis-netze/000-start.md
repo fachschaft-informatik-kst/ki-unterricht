@@ -2,6 +2,7 @@
 <h1>Gemeinsam mehr erkennen.</h1>
 <!-- LESSONS:basis-netze -->
 <!-- /LESSONS:basis-netze -->
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#basis-glossar-xor">XOR</a> · <a href="#basis-glossar-schicht">Schicht</a> · <a href="#basis-glossar-aktivierungsfunktion">Aktivierungsfunktion</a></p>
 <div class="callout basis-learning-route" data-p1-route="b04">
   <!-- MD:START -->
 ## Pflichtkern: XOR verstehen, statt Formeln auswendig lernen

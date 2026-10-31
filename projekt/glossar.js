@@ -50,3 +50,37 @@
     });
   });
 })();
+
+
+/* Shared DL1 history popups for both courses, with static templates in the
+   editable chapter sources. Native dialog supplies Escape and focus trapping. */
+(()=>{
+  const triggers=[...document.querySelectorAll('.timeline [data-milestone-open]')];
+  if(!triggers.length || typeof HTMLDialogElement==='undefined')return;
+  const dialog=document.createElement('dialog');
+  dialog.className='milestone-dialog';
+  dialog.setAttribute('aria-label','KI-Meilenstein: Bild und Erklärung');
+  const close=document.createElement('button');
+  close.type='button';
+  close.className='milestone-close';
+  close.textContent='×';
+  close.setAttribute('aria-label','Meilenstein schliessen');
+  close.addEventListener('click',()=>dialog.close());
+  dialog.append(close);
+  let lastTrigger=null;
+  dialog.addEventListener('close',()=>lastTrigger?.focus());
+  dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
+  document.body.append(dialog);
+  for(const trigger of triggers){
+    const template=trigger.closest('li')?.querySelector('template[data-milestone-detail]');
+    if(!template || template.dataset.milestoneDetail!==trigger.dataset.milestoneOpen)continue;
+    trigger.addEventListener('click',()=>{
+      if(typeof dialog.showModal!=='function')return;
+      dialog.querySelector('.milestone-detail')?.remove();
+      dialog.append(template.content.cloneNode(true));
+      lastTrigger=trigger;
+      dialog.showModal();
+      close.focus();
+    });
+  }
+})();

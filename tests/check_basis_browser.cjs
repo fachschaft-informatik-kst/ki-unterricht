@@ -83,6 +83,22 @@ const assert=require('node:assert/strict');
     await page.locator('.nav > a[href="#basis-ki"]').click();
     const note=page.locator('[data-basis-answer="regeln_oder_daten"]');
     assert.equal(await page.locator('#basis-ki details.kapitel').count(),6,'Retained original introductory chapters');
+
+    // Glossary access mirrors the advanced course on every first-year DL start.
+    for(const topic of ['basis-ki','basis-lernen','basis-neuron','basis-netze','basis-daten','basis-plan','basis-training','basis-abschluss','basis-sprache','basis-gesellschaft'])
+      assert(await page.locator('#'+topic+' .glossary-related a[href^="#basis-glossar-"]').count(),topic+' glossary links');
+    assert.equal(await page.locator('#basis-ki #einstieg-3 .milestone-trigger').count(),9);
+    const firstYearHistory=page.locator('#basis-ki #einstieg-3 [data-milestone-open="turing"]');
+    await firstYearHistory.click();
+    const firstYearHistoryDialog=page.locator('dialog.milestone-dialog');
+    assert(await firstYearHistoryDialog.isVisible(),'History modal in basic course');
+    assert((await firstYearHistoryDialog.locator('figcaption').innerText()).includes('Alan Turing'));
+    assert(await firstYearHistoryDialog.locator('img[alt]').count());
+    assert((await firstYearHistoryDialog.locator('.milestone-source').innerText()).includes('Bildquelle'));
+    await page.keyboard.press('Escape');
+    assert(!await firstYearHistoryDialog.isVisible());
+    assert(await firstYearHistory.evaluate(el=>el===document.activeElement));
+
     const logo=page.locator('.crumb img.school-logo');
     assert.equal(await logo.count(),1,'KST school logo must be present');
     assert(await logo.evaluate(img=>img.complete&&img.naturalWidth>0),'KST school logo must actually load');
