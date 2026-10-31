@@ -244,7 +244,7 @@ const assert=require('node:assert/strict');
     ]){
       const notebookPage=await browser.newPage();
       await notebookPage.goto('http://127.0.0.1:8770/basis/#'+lesson);
-      await notebookPage.locator('#'+lesson+' a[href*="'+link+'"]').first().click();
+      await notebookPage.locator('#'+lesson+' a.btn.primary[href*="'+link+'"]').first().click();
       await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
       const source=await notebookPage.locator('#basis-lab-frame').getAttribute('src');
       assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/'+notebook,
