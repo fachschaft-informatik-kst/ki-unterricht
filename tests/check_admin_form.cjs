@@ -168,10 +168,16 @@ const server=http.createServer((req,res)=>{
     assert.equal(await preview.locator(".timeline li").count(),9);
     const timelineStyle=await preview.locator(".timeline li").first().evaluate(el=>({
       display:getComputedStyle(el).display,
-      columns:getComputedStyle(el).gridTemplateColumns
+      columns:getComputedStyle(el).gridTemplateColumns,
+      viewport:document.documentElement.clientWidth
     }));
-    assert.equal(timelineStyle.display,"grid","Milestones must use published two-column timeline");
-    assert.match(timelineStyle.columns,/104px/,"Milestone year column must match site CSS");
+    assert.equal(timelineStyle.display,"grid","Milestones must use published timeline styles");
+    // A split-screen preview can be narrower than the site's mobile breakpoint.
+    // Check the real responsive layout at its actual iframe width.
+    if(timelineStyle.viewport<=620)
+      assert.equal(timelineStyle.columns.split(" ").length,1,"Narrow preview must match mobile course layout");
+    else
+      assert.match(timelineStyle.columns,/104px/,"Wide preview year column must match site CSS");
     const chapterStyle=await preview.locator(".kapitel > summary .kapitel-nr").evaluate(el=>({
       display:getComputedStyle(el).display,
       radius:getComputedStyle(el).borderTopLeftRadius,
