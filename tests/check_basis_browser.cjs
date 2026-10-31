@@ -100,7 +100,7 @@ const assert=require('node:assert/strict');
     assert(legendDescription.includes('blau')&&legendDescription.includes('orange')&&legendDescription.includes('KI-Winter'));
 
     const firstYearHistory=page.locator('#basis-ki #einstieg-3 [data-milestone-open="turing"]');
-    const basisScrollBefore=await page.evaluate(()=>{window.scrollTo(0,340);return window.scrollY});
+    const basisScrollBefore=await page.evaluate(()=>{window.scrollTo({top:340,behavior:'instant'});return window.scrollY});
     assert(basisScrollBefore>80,'Timeline in first-year course is scrollable');
     const basisHashBefore=await page.evaluate(()=>location.hash);
     await firstYearHistory.evaluate(el=>el.click());
