@@ -730,3 +730,18 @@ button[aria-current=true] .chapter-number{color:var(--accent);background:#fff;bo
 .notebook-editor-heading h2{margin:0;font-size:18px}
 #notebookEditor .notebook-runtime-actions{margin:12px 0}
 @media(max-width:700px){.notebook-panel-grid{grid-template-columns:1fr}.chapter-notebook-row{align-items:flex-start}}
+
+/* JupyterLite remains the executable editor; source-only cell editing is an
+   independent recovery path when third-party framing or networking fails. */
+.notebook-source-panel{margin-top:16px;border:1px solid var(--line);border-radius:11px;padding:12px 15px;background:#fbfcfb}
+.notebook-source-panel summary{cursor:pointer;font-size:14px;font-weight:750;color:var(--accent);padding:3px 0}
+.notebook-source-panel>.helper{margin:12px 0}
+.notebook-source-panel .notebook-cell{margin:9px 0;background:#fff}
+.notebook-source-panel .notebook-cell-head{flex-wrap:wrap}
+.notebook-source-panel .notebook-cell-head strong{font-size:12px}
+.notebook-source-panel .notebook-cell-head select{font-size:12px;border:1px solid var(--line);padding:6px;border-radius:6px;background:#fff}
+.notebook-source-panel .notebook-cell-head button{font-size:11px}
+.notebook-source-panel textarea{display:block;width:100%;min-height:108px;padding:10px;resize:vertical;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--text);font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
+.notebook-cell-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0}
+#notebookExternal[hidden],#notebookDraftNotice[hidden]{display:none!important}
+#notebookExternal{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
