@@ -266,7 +266,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#source").inputValue(),beforeBlock,
       "Inspecting a block must never edit the chapter");
     await page.locator('[data-block="reveal"]').focus();
-    await page.locator("#blockPreview "details summary").waitFor();
+    await page.locator("#blockPreview details summary").waitFor();
     assert.match(await page.locator("#blockPreviewHint").textContent(),/ausklappbar/);
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#blockMenu").isVisible(),false);
