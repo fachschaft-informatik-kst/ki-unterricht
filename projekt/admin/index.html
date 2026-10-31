@@ -69,6 +69,7 @@
           <button type="button" id="addHeading" title="Zwischenüberschrift an der Cursorposition einfügen"><span aria-hidden="true">H</span> Überschrift</button>
           <button type="button" id="addAnswer" title="Neues Antwortfeld mit eigener Kennung erstellen"><span aria-hidden="true">▤</span> Antwortfeld</button>
           <button type="button" id="addImage" title="Bild auswählen und in die Kursseite einfügen"><span aria-hidden="true">▧</span> Bild</button>
+          <button type="button" id="addNotebook" title="Ein Notebook mit diesem Unterkapitel verknüpfen oder neu erstellen"><span aria-hidden="true">▣</span> Notebook</button>
         </div>
         <div class="toolbar-template" role="group" aria-label="Gestaltungsbaustein einfügen">
           <span class="toolbar-label" id="blockPickerLabel">Baustein</span>
@@ -101,6 +102,7 @@
               <option value="code">Codebeispiel</option>
               <option value="reveal">Aufklappbare Erklärung</option>
               <option value="example">Begriff mit Beispiel</option>
+              <option value="notebook">Jupyter-Notebook</option>
             </optgroup>
           </select>
           <button id="addBlock" type="button" class="button primary" title="Ausgewählten Baustein an der Cursorposition einfügen">+ Einfügen</button>
@@ -119,8 +121,16 @@
         </div>
         <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden>
       </div>
+      <section id="notebookPanel" class="notebook-panel" aria-label="Notebook-Baustein im Unterkapitel" hidden>
+        <div class="notebook-panel-head"><div><h3>Notebook im Unterkapitel</h3><p>Verknüpfe eine bestehende Übung oder erstelle ein neues, bearbeitbares Jupyter-Notebook.</p></div><button id="closeNotebookPanel" type="button" class="icon-button" aria-label="Schliessen">×</button></div>
+        <div class="notebook-panel-grid">
+          <div><label for="notebookExisting">Vorhandenes Notebook</label><select id="notebookExisting"></select><button type="button" id="insertExistingNotebook" class="button light">Vorhandenes einfügen</button></div>
+          <div><label for="notebookNewTitle">Neues Notebook erstellen</label><input id="notebookNewTitle" type="text" maxlength="75" placeholder="z. B. Mein erstes Neuron"><button type="button" id="createChapterNotebook" class="button primary">Erstellen &amp; bearbeiten</button></div>
+        </div>
+      </section>
+      <div id="chapterNotebookLinks" class="chapter-notebook-links" hidden aria-label="Notebooks in diesem Unterkapitel"></div>
       <p class="helper visually-hidden" id="editorHelper">Markdown und HTML bearbeiten. Die Vorschau aktualisiert sich automatisch. Bestehende Antwort- und Notebook-IDs beibehalten.</p>
-      <section id="notebookEditor" hidden><h2>Jupyter-Notebook · ausführbare Umgebung</h2><p class="helper" id="notebookInfo"></p><p id="notebookRuntimeStatus" role="status">JupyterLite wird gestartet …</p><div class="notebook-runtime-actions"><button type="button" id="notebookSnapshot" class="button primary">Notebook-Stand übernehmen</button><button type="button" id="notebookReload" class="button light">Notebook neu öffnen</button></div><iframe id="notebookRuntime" title="Ausführbares JupyterLite-Notebook" referrerpolicy="no-referrer" allow="clipboard-read; clipboard-write"></iframe></section><div class="split-editor" id="splitEditor">
+      <section id="notebookEditor" hidden><div class="notebook-editor-heading"><h2>Jupyter-Notebook · ausführbare Umgebung</h2><button type="button" id="notebookBack" class="button light" hidden>← Zurück zum Unterkapitel</button></div><p class="helper" id="notebookInfo"></p><p id="notebookRuntimeStatus" role="status">JupyterLite wird gestartet …</p><div class="notebook-runtime-actions"><button type="button" id="notebookSnapshot" class="button primary">Notebook-Stand übernehmen</button><button type="button" id="notebookReload" class="button light">Notebook neu öffnen</button></div><iframe id="notebookRuntime" title="Ausführbares JupyterLite-Notebook" referrerpolicy="no-referrer" allow="clipboard-read; clipboard-write"></iframe></section><div class="split-editor" id="splitEditor">
         <div class="split-source">
           <div class="pane-heading">
             <label for="source" class="field-title" id="sourceLabel">HTML / Markdown</label>

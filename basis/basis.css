@@ -139,3 +139,16 @@ body .lab-head{background:#e6edff;color:#284b8e}
 body .lab-loading:not([hidden]){background:#f7faff}
 body .lab-loading-spinner{border-color:#d1dffa;border-top-color:var(--accent)}
 @media(max-width:720px){body .concept-figure img{max-width:100%}}
+
+/* Notebook as a native lesson block, usable in every chapter. */
+.ki-notebook-block{margin:20px 0;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;background:var(--white,#fff)}
+.ki-notebook-block h3{margin:0 0 8px;color:var(--accent);font-size:19px}
+.ki-notebook-block p{margin:0 0 12px;font-size:14px;color:var(--muted)}
+.ki-notebook-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0 0}
+.ki-notebook-actions button{border-radius:8px;background:var(--accent);color:#fff;border:1px solid var(--accent);font:650 13px/1.4 system-ui;padding:10px 15px;cursor:pointer}
+.ki-notebook-actions a{font-size:13px;font-weight:650}
+.ki-notebook-runtime{margin-top:15px;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--paper);min-width:0}
+.ki-notebook-runtime[hidden]{display:none!important}
+.ki-notebook-status{font-size:12px!important;color:var(--muted);margin:4px 0 10px!important}
+.ki-notebook-iframe{display:block;width:100%;height:min(78vh,850px);min-height:520px;border:1px solid var(--line);border-radius:8px;background:#fff}
+@media(max-width:640px){.ki-notebook-block{padding:13px}.ki-notebook-iframe{min-height:430px}}

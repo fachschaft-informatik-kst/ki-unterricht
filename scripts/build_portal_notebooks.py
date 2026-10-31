@@ -6,7 +6,13 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = json.loads((ROOT / "experimente/registry.json").read_text(encoding="utf-8"))
-ITEMS = [e["source"] for e in REGISTRY]
+# New notebooks inserted as chapter building blocks are first-class course
+# sources. They do not need manual registry edits to be deployed in JupyterLite.
+LESSON_ITEMS = sorted(
+    p.name for pattern in ("lesson_*.ipynb", "basis_lesson_*.ipynb")
+    for p in (ROOT / "content").glob(pattern)
+)
+ITEMS = [e["source"] for e in REGISTRY] + LESSON_ITEMS
 if len({Path(p).name for p in ITEMS}) != len(ITEMS) or sum(bool(e.get("project")) for e in REGISTRY) != 1:
     raise ValueError("Experiments need unique notebook names and exactly one project")
 
@@ -27,7 +33,7 @@ def build():
     for source in ITEMS:
         nb = nbformat.read(ROOT/'content'/source, as_version=4)
         nb.cells = [c for c in nb.cells if 'ki-standalone-only' not in c.metadata.get('tags', [])]
-        first = True
+        first = not Path(source).name.startswith(("lesson_", "basis_lesson_"))
         for cell in nb.cells:
             if cell.cell_type == 'markdown':
                 cell.source = re.sub(r'\[([^]]+)\]\((?:ki_projekt/)?[^/)]+\.ipynb\)', r'**\1** (über die Kursnavigation)', cell.source)

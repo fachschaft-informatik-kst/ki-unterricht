@@ -244,7 +244,7 @@ const assert=require('node:assert/strict');
     ]){
       const notebookPage=await browser.newPage();
       await notebookPage.goto('http://127.0.0.1:8770/basis/#'+lesson);
-      await notebookPage.locator('#'+lesson+' a[href*="'+link+'"]').first().click();
+      await notebookPage.locator('#'+lesson+' a.btn.primary[href*="'+link+'"]').first().click();
       await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
       const source=await notebookPage.locator('#basis-lab-frame').getAttribute('src');
       assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/'+notebook,
@@ -255,6 +255,47 @@ const assert=require('node:assert/strict');
       assert.equal(await notebookPage.locator('#basis-lab-fullscreen').count(),1);
       await notebookPage.close();
     }
+    // Jupyter notebooks can now be launched and edited within the chapter.
+    // The expensive Python runtime must only load after explicit interaction.
+    const notebookPageInline=await browser.newPage();
+    await notebookPageInline.route('**/lab/index.html?**',route=>route.fulfill({
+      status:200,contentType:'text/html',body:'<!doctype html><html><body>JupyterLite test runtime</body></html>'
+    }));
+    for(const [url,section,expected] of [
+      ['http://127.0.0.1:8770/basis/','basis-neuron','content/basis_neuron.ipynb'],
+      ['http://127.0.0.1:8770/projekt/','perzeptron','content/perzeptron_und_neuronale_netze.ipynb']
+    ]){
+      // Navigate just as a student would: inactive lesson sections are hidden.
+      // Opening only the nested <details> does not make a hidden lesson visible.
+      await notebookPageInline.goto(url+'#'+section);
+      const card=notebookPageInline.locator('.ki-notebook-block[data-notebook="'+expected+'"]');
+      assert.equal(await card.count(),1,'Notebook must be present in the matching chapter');
+      await card.evaluate(el=>{el.closest('details.kapitel').open=true;});
+      assert.equal(await card.locator('.ki-notebook-iframe').count(),0,'No runtime iframe before user action');
+      const launch=card.locator('button.ki-notebook-launch');
+      const scriptResult=await notebookPageInline.request.get(new URL('notebook-blocks.js',url).href);
+      assert.equal(scriptResult.status(),200,'Notebook block script must be served alongside each course');
+      await notebookPageInline.waitForFunction(path=>{
+        const card=document.querySelector('.ki-notebook-block[data-notebook="'+path+'"]');
+        return !!card?.querySelector('button.ki-notebook-launch');
+      },expected,{timeout:10000}).catch(async e=>{
+        throw Error('Notebook launcher missing: '+JSON.stringify(await card.evaluate(el=>({
+          script:[...document.scripts].map(s=>s.src).filter(x=>x.includes('notebook')),
+          outer:el.outerHTML.slice(0,1400),
+          scriptCount:document.querySelectorAll('.ki-notebook-block').length
+        })))+' '+e.message);
+      });
+      await launch.click();
+      assert.equal(await launch.getAttribute('aria-expanded'),'true');
+      const frame=card.locator('iframe.ki-notebook-iframe');
+      await frame.waitFor({state:'visible'});
+      assert.match(await frame.getAttribute('src'),new RegExp('portal%2F'+expected.split('/').pop().replace('.','\\.')));
+      assert.equal(await card.locator('.ki-notebook-runtime').isVisible(),true);
+      await card.getByRole('button',{name:'Notebook schliessen'}).click();
+      assert.equal(await card.locator('.ki-notebook-runtime').isVisible(),false);
+      assert.equal(await card.locator('a.ki-notebook-direct').getAttribute('target'),'_blank');
+    }
+    await notebookPageInline.close();
     // Glossary links open an accessible explanation without leaving the current lesson.
     const glossaryPage=await browser.newPage();
     await glossaryPage.goto('http://127.0.0.1:8770/basis/#basis-daten');

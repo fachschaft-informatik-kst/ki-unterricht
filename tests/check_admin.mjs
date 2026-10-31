@@ -178,6 +178,33 @@ try{
   const invalid=structuredClone(glossary);invalid.begriffe[0].basis=invalid.begriffe[0].vertieft;
   assert.equal((await submit(glossaryChanges(invalid))).status,400);
   assert.equal(writes.length,0,"Invalid glossary edits must not write to GitHub");
+  // A new lesson notebook may be created from the editor, but is not allowed
+  // to appear without its corresponding chapter in the same atomic PR.
+  const lessonNotebook={nbformat:4,nbformat_minor:5,
+    metadata:{kernelspec:{name:"python3",language:"python",display_name:"Python 3"}},
+    cells:[
+      {cell_type:"markdown",id:"nbtask01",metadata:{},source:["# Notebook-Auftrag\\n"]},
+      {cell_type:"code",id:"nbcode01",metadata:{},source:["print('Hallo')\\n"],execution_count:null,outputs:[]}
+    ]};
+  const lessonFile="content/lesson_einstieg_testlabor.ipynb";
+  const newNotebook={path:lessonFile,expectedSha:null,content:JSON.stringify(lessonNotebook)};
+  const chapterFile="kursseiten/einstieg/030-einstieg-3.md";
+  const chapterLinked={path:chapterFile,expectedSha:"a".repeat(40),
+    content:sources.get(chapterFile)+'\\n<div class="ki-notebook-block" data-notebook="'+lessonFile+'"></div>\\n'};
+  const alone=await submit([newNotebook]);
+  assert.equal(alone.status,400);
+  assert.match((await alone.json()).error,/Unterkapitel/);
+  assert.equal((await submit([chapterLinked,newNotebook])).status,201,
+    "Chapter and fresh notebook must be accepted in one PR");
+  assert.equal(writes.find(w=>w.path.endsWith("/git/trees")).body.tree.length,2);
+  writes.length=0;
+  const otherCourse={...chapterLinked,path:"kursseiten/basis-neuron/030-perzeptron-3.md",
+    content:sources.get("kursseiten/basis-neuron/030-perzeptron-3.md")+
+      '\\n<div class="ki-notebook-block" data-notebook="'+lessonFile+'"></div>'};
+  assert.equal((await submit([otherCourse,newNotebook])).status,400,
+    "A fourth-year notebook must not be linked from first-year pages");
+  assert.equal(writes.length,0);
+
 }finally{globalThis.fetch=priorFetch;}
 // OAuth flow is intentionally not fully simulated: no GitHub credentials in CI.
 console.log("PASS admin: protected endpoints, OAuth PKCE, app permissions, atomic course PR, stable IDs and conflict protection");
