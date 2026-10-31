@@ -10,6 +10,7 @@
   </div>
 </details>
 <!-- /LESSONS:basis-ki -->
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#basis-glossar-ki">KI</a> · <a href="#basis-glossar-maschinelles-lernen">maschinelles Lernen</a> · <a href="#basis-glossar-generative-ki">generative KI</a></p>
 <div class="callout basis-learning-route" data-p1-route="b01">
   <!-- MD:START -->
 ## Dein Lernweg: zuerst verstehen, dann vertiefen
