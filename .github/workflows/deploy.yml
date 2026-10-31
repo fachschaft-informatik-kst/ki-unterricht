@@ -118,6 +118,7 @@ jobs:
           python tests/check_content_mvc.py
           jupyter lite build --contents _build/content --output-dir dist
           python scripts/copy_portal.py dist
+          python tests/check_course_routes.py
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
           test -f dist/projekt/admin/plan-editor.js
