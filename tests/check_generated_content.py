@@ -58,6 +58,8 @@ for doc,section in ((course,"#einstieg-3"),(basis,"#basis-ki #einstieg-3")):
     def panel_image(ident):
         return timeline.select_one(f'template[data-milestone-detail="{ident}"] img')
     assert "Turing_test_diagram.svg" in panel_image("turing")["src"]
+    assert panel_image("dartmouth")["src"]=="grafiken/ki_dartmouth_1955.svg"
+    assert panel_image("perzeptron")["src"]=="grafiken/neuron_entscheider.svg"
     assert "Deep_Blue_versus_Kasparov" in panel_image("deepblue")["src"]
     generated=timeline.select_one('template[data-milestone-detail="chatgpt"]')
     assert len(generated.select("figure img"))==2
@@ -70,10 +72,23 @@ for doc,section in ((course,"#einstieg-3"),(basis,"#basis-ki #einstieg-3")):
         panel=item.select_one("template[data-milestone-detail]")
         assert trigger and panel and trigger["data-milestone-open"]==panel["data-milestone-detail"]
         assert trigger.get("aria-haspopup")=="dialog"
-        assert panel.select_one("img[alt][src^='https://commons.wikimedia.org/wiki/Special:FilePath/']")
-        assert panel.select_one("figcaption").decode_contents().strip()
-        source=panel.select_one(".milestone-source a[href^='https://commons.wikimedia.org/wiki/File:']")
-        assert source and any(token in source.decode_contents() for token in ("CC ","CC0","gemeinfrei"))
+        image=panel.select_one("img[alt][src]")
+        assert image and panel.select_one("figcaption").decode_contents().strip()
+        ident=panel["data-milestone-detail"]
+        source=panel.select_one(".milestone-source a[href]")
+        assert source
+        if ident=="dartmouth":
+            assert image["src"]=="grafiken/ki_dartmouth_1955.svg"
+            assert "A_Proposal_for_the_Dartmouth" in source["href"]
+            assert "Nachzeichnung" in panel.decode_contents()
+        elif ident=="perzeptron":
+            assert image["src"]=="grafiken/neuron_entscheider.svg"
+            assert source["href"].endswith("/projekt/grafiken/neuron_entscheider.svg")
+            assert "DL 3" in panel.decode_contents()
+        else:
+            assert image["src"].startswith("https://commons.wikimedia.org/wiki/Special:FilePath/")
+            assert source["href"].startswith("https://commons.wikimedia.org/wiki/File:")
+            assert any(token in source.decode_contents() for token in ("CC ","CC0","gemeinfrei"))
 for topic in ("basis-ki","basis-lernen","basis-neuron","basis-netze","basis-daten","basis-plan","basis-training","basis-abschluss","basis-sprache","basis-gesellschaft"):
     assert basis.select_one(f"#{topic} .glossary-related a[href^='#basis-glossar-']"), topic
 
