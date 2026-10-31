@@ -10,6 +10,13 @@ const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new M
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;});
 
+const sidebarToggle=$("toggleSidebar");
+sidebarToggle.addEventListener("click",()=>{
+  const collapsed=$("workspace").classList.toggle("sidebar-collapsed");
+  sidebarToggle.setAttribute("aria-expanded",String(!collapsed));
+  sidebarToggle.textContent=collapsed?"☰ Kapitelauswahl einblenden":"☰ Kapitelauswahl ausblenden";
+});
+
 const sourceLayer=$("sourceHighlight");
 function highlightSource(){
   const raw=$("source").value;
