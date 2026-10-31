@@ -583,7 +583,7 @@ function preview(){
   const isBasis=state.course==="basis";
   document.body.classList.toggle("course-basis",state.course==="basis");
   const previewBase=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
-  let content=isGlossary?glossaryPreviewHtml(isBasis?"basis":"vertiefung"):$("source").value;
+  let content=isGlossary?glossaryPreviewHtml(isBasis?"basis":"vertieft"):$("source").value;
   if(isGlossary){
     // Same semantic elements and stylesheet as scripts/glossary.py on the published pages.
   }else if(state.current?.path.endsWith("/planung.json")){
