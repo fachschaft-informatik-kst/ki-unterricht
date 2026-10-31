@@ -133,8 +133,103 @@ async function openChapterNotebook(path){
   await load(path);
 }
 
+// Small, browser-native unified diffs. Calculate exact line edits for normal
+// teaching files, falling back to a safe whole-middle change for very large
+// generated JSON or notebook sources to avoid quadratic browser freezes.
+function diffLines(before,after){
+  const a=before.split("\n"),b=after.split("\n");
+  if(a.length&&a[a.length-1]==="")a.pop();
+  if(b.length&&b[b.length-1]==="")b.pop();
+  let first=0;while(first<a.length&&first<b.length&&a[first]===b[first])first++;
+  let lastA=a.length,lastB=b.length;
+  while(lastA>first&&lastB>first&&a[lastA-1]===b[lastB-1]){lastA--;lastB--;}
+  const result=[];
+  const append=(kind,text,oldNum,newNum)=>result.push({kind,text,oldNum,newNum});
+  for(let i=0;i<first;i++)append("same",a[i],i+1,i+1);
+  const left=a.slice(first,lastA),right=b.slice(first,lastB),m=left.length,n=right.length;
+  if(m*n<=350000){
+    // Longest-common-subsequence table: gives a true diff, rather than
+    // incorrectly treating nearby insertions as replacements.
+    const table=Array.from({length:m+1},()=>new Uint32Array(n+1));
+    for(let i=m-1;i>=0;i--)for(let j=n-1;j>=0;j--)
+      table[i][j]=left[i]===right[j]?1+table[i+1][j+1]:
+        Math.max(table[i+1][j],table[i][j+1]);
+    let i=0,j=0;
+    while(i<m||j<n){
+      if(i<m&&j<n&&left[i]===right[j]){
+        append("same",left[i],first+i+1,first+j+1);i++;j++;
+      }else if(j<n&&(i===m||table[i][j+1]>table[i+1][j])){
+        append("add",right[j],null,first+j+1);j++;
+      }else{append("remove",left[i],first+i+1,null);i++;}
+    }
+  }else{
+    for(let i=0;i<m;i++)append("remove",left[i],first+i+1,null);
+    for(let i=0;i<n;i++)append("add",right[i],null,first+i+1);
+  }
+  for(let i=lastA;i<a.length;i++)append("same",a[i],i+1,lastB+i-lastA+1);
+  return result;
+}
+function renderStagedDiff(panel,entry,before){
+  panel.replaceChildren();
+  if(/\.(?:png|jpe?g|gif|webp|svg|ico)$/i.test(entry.path)&&
+     !entry.path.endsWith(".svg")||entry.path.endsWith(".ipynb")&&entry.content?.length>450000){
+    const note=document.createElement("p");note.className="diff-note";
+    note.textContent="Diese grosse oder binäre Datei kann hier nicht vollständig als Text-Diff angezeigt werden. Der GitHub Pull Request zeigt die Dateiunterschiede.";
+    panel.append(note);return;
+  }
+  const after=entry.delete?"":entry.content||"";
+  const items=diffLines(before,after),added=items.filter(x=>x.kind==="add").length,
+    removed=items.filter(x=>x.kind==="remove").length;
+  const header=document.createElement("div");header.className="diff-summary";
+  header.textContent=(entry.delete?"Datei gelöscht · ":!entry.expectedSha?"Neue Datei · ":"Änderungen · ")+
+    "+"+added+" / −"+removed+" Zeilen";
+  panel.append(header);
+  const viewport=document.createElement("div");viewport.className="diff-viewport";
+  viewport.setAttribute("role","region");viewport.setAttribute("aria-label","Code-Diff für "+entry.path);
+  const visible=new Set();
+  items.forEach((item,i)=>{
+    if(item.kind!=="same")for(let k=Math.max(0,i-3);k<=Math.min(items.length-1,i+3);k++)visible.add(k);
+  });
+  const significant=items.filter(x=>x.kind!=="same").length;
+  if(!significant){
+    const note=document.createElement("p");note.className="diff-note";
+    note.textContent="Keine Textänderungen gegenüber dem Ausgangsstand.";
+    panel.append(note);return;
+  }
+  const cutoff=800;
+  let shown=0,skipped=0;
+  for(let i=0;i<items.length;i++){
+    if(!visible.has(i)){skipped++;continue;}
+    if(skipped){
+      const marker=document.createElement("div");marker.className="diff-omitted";
+      marker.textContent="··· "+skipped+" unveränderte Zeilen ···";
+      viewport.append(marker);skipped=0;
+    }
+    if(shown>=cutoff)break;
+    const item=items[i],line=document.createElement("div");
+    line.className="diff-line diff-"+item.kind;
+    const oldNum=document.createElement("span");oldNum.className="diff-number";
+    oldNum.textContent=item.oldNum??"";
+    const newNum=document.createElement("span");newNum.className="diff-number";
+    newNum.textContent=item.newNum??"";
+    const marker=document.createElement("span");marker.className="diff-marker";
+    marker.textContent=item.kind==="add"?"+":item.kind==="remove"?"−":" ";
+    const code=document.createElement("code");code.textContent=item.text||" ";
+    line.append(oldNum,newNum,marker,code);viewport.append(line);
+    shown++;
+  }
+  if(shown>=cutoff&&visible.size>cutoff){
+    const note=document.createElement("div");note.className="diff-omitted";
+    note.textContent="Diff-Vorschau nach 800 Zeilen gekürzt. Nach dem Einreichen ist der vollständige Diff auf GitHub sichtbar.";
+    viewport.append(note);
+  }
+  panel.append(viewport);
+}
 function stagingList(){
-  const node=$("staged");node.replaceChildren();
+  const node=$("staged");
+  const openPaths=new Set([...node.querySelectorAll("details[data-diff-path]")].
+    filter(el=>el.open).map(el=>el.dataset.diffPath));
+  node.replaceChildren();
   const count=state.staged.size;
   $("pendingCount").textContent=String(count);
   $("pendingCount").setAttribute("aria-label",count+" vorgemerkt");
@@ -147,18 +242,51 @@ function stagingList(){
     li.textContent="Noch keine Änderungen. Bearbeite einen Inhalt und klicke auf «Änderung vormerken».";
     node.append(li);return;
   }
-  for(const c of state.staged.values()){
+  for(const entry of state.staged.values()){
     const li=document.createElement("li");li.className="staged-item";
-    const text=document.createElement("span");text.className="staged-info";
-    const name=document.createElement("strong");
-    name.textContent=c.path.split("/").pop();
-    const location=document.createElement("small");location.textContent=c.path;
-    location.title=c.path;
-    text.append(name,location);
+    const main=document.createElement("div");main.className="staged-item-main";
+    const info=document.createElement("span");info.className="staged-info";
+    const name=document.createElement("strong");name.textContent=entry.path.split("/").pop();
+    const location=document.createElement("small");location.textContent=entry.path;location.title=entry.path;
+    info.append(name,location);
     const remove=document.createElement("button");remove.type="button";remove.className="staged-remove";
-    remove.textContent="×";remove.title="Vormerkung entfernen";remove.setAttribute("aria-label",c.path+" aus Vormerkungen entfernen");
-    remove.addEventListener("click",()=>{state.staged.delete(c.path);stagingList();});
-    li.append(text,remove);node.append(li);
+    remove.textContent="×";remove.title="Vormerkung entfernen";
+    remove.setAttribute("aria-label",entry.path+" aus Vormerkungen entfernen");
+    remove.addEventListener("click",()=>{state.staged.delete(entry.path);stagingList();});
+    main.append(info,remove);li.append(main);
+    const details=document.createElement("details");details.className="staged-diff";
+    details.dataset.diffPath=entry.path;
+    const summary=document.createElement("summary");
+    summary.textContent=(entry.delete?"Gelöschte Datei":!entry.expectedSha?"Neue Datei":"Änderungen")+
+      " · Code-Diff anzeigen";
+    details.append(summary);
+    const panel=document.createElement("div");panel.className="diff-result";
+    details.append(panel);
+    let loaded=false;
+    details.addEventListener("toggle",async()=>{
+      if(!details.open||loaded)return;
+      loaded=true;
+      const note=document.createElement("p");note.className="diff-note";
+      note.textContent="Vergleiche bisherigen und neuen Stand …";panel.replaceChildren(note);
+      try{
+        // Some structured editors stage files without retaining the old text.
+        // Fetch it lazily only when the user opens that file's diff.
+        let before=entry.original;
+        if(entry.expectedSha&&before===undefined){
+          const previous=await api("/api/file?path="+encodeURIComponent(entry.path));
+          before=previous.content;
+        }
+        if(state.staged.get(entry.path)!==entry)return;
+        renderStagedDiff(panel,entry,before||"");
+      }catch(e){
+        const message=document.createElement("p");message.className="diff-note";
+        message.textContent="Diff konnte nicht geladen werden: "+e.message;
+        panel.replaceChildren(message);
+        loaded=false;
+      }
+    });
+    li.append(details);node.append(li);
+    if(openPaths.has(entry.path))details.open=true;
   }
 }
 // Section and chapter navigation share one selection state; the legacy
