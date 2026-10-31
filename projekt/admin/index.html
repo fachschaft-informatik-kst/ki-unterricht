@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <title>Lehrpersonen-Editor · KI-Unterricht</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
@@ -22,7 +23,7 @@
     <p>Die Anmeldung läuft über eine separat eingerichtete GitHub App. Auf der öffentlichen GitHub-Pages-Adresse steht dieser Editor nur als Vorschau bereit. Für Schreibzugriff wird auf den <a href="https://kst-ki-admin.kevin-bohn.workers.dev/"><strong>Admin-Worker</strong></a> weitergeleitet. <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/docs/ADMIN-EDITOR.md">Einrichtungsanleitung</a></p>
   </section>
   <main class="workspace" id="workspace" hidden>
-    <aside class="sidebar" aria-label="Kurskapitel">
+    <aside class="sidebar" id="courseSidebar" aria-label="Kurskapitel">
       <div class="sidebar-heading"><h2>Kapitel</h2><button id="refresh" class="button subtle" type="button">↻</button></div>
       <label for="courseSelect">Kurs auswählen</label><select id="courseSelect" aria-label="Kurs auswählen"><option value="vertiefung">4. Kurzgymnasium · KI vertiefen</option><option value="basis">1. Kurzgymnasium · KI entdecken</option></select><details class="sidebar-details"><summary>Unterrichtsreihenfolge anpassen</summary><p class="small">Doppellektionen am Griff ziehen. IDs bleiben erhalten.</p><div id="lessonOrder" class="order-list" aria-label="Doppellektionen sortieren"></div></details><label for="section">Kapitel eines Bereichs auswählen</label>
       <select id="section"></select>
@@ -32,6 +33,7 @@
     </aside>
     <section class="editor">
       <div class="editor-heading">
+        <button id="toggleSidebar" class="button light" type="button" aria-controls="courseSidebar" aria-expanded="true">☰ Kapitelauswahl ausblenden</button>
         <div><p class="eyebrow" id="path">Kein Kapitel ausgewählt</p><h1 id="heading">Kapitel bearbeiten</h1></div>
         <div class="actions"><button id="move" class="button light" type="button" hidden>Verschieben</button>
           <button id="archive" class="button light danger" type="button">Ausblenden</button></div>
@@ -96,14 +98,15 @@
         </div>
         <div class="glossary-preview-switch"><label for="glossaryPreviewLevel">Vorschau der Kursseite</label><select id="glossaryPreviewLevel"><option value="basis">1. Kurzgymnasium · blau</option><option value="vertiefung">4. Kurzgymnasium · grün</option></select><p class="small">Die Vorschau zeigt den ausgewählten Begriff im echten Kurslayout. Die Antwort lässt sich darin öffnen.</p></div>
       </section>
-      <section id="notebookEditor" hidden><h2>Jupyter-Notebook · ausführbare Umgebung</h2><p class="helper" id="notebookInfo"></p><p id="notebookRuntimeStatus" role="status">JupyterLite wird gestartet …</p><div class="notebook-runtime-actions"><button type="button" id="notebookSnapshot" class="button primary">Notebook-Stand übernehmen</button><button type="button" id="notebookReload" class="button light">Notebook neu öffnen</button></div><iframe id="notebookRuntime" title="Ausführbares JupyterLite-Notebook" referrerpolicy="no-referrer" allow="clipboard-read; clipboard-write"></iframe></section><label for="source" class="field-title" id="sourceLabel">Kapitelquelltext</label>
+      <section id="notebookEditor" hidden><h2>Jupyter-Notebook · ausführbare Umgebung</h2><p class="helper" id="notebookInfo"></p><p id="notebookRuntimeStatus" role="status">JupyterLite wird gestartet …</p><div class="notebook-runtime-actions"><button type="button" id="notebookSnapshot" class="button primary">Notebook-Stand übernehmen</button><button type="button" id="notebookReload" class="button light">Notebook neu öffnen</button></div><iframe id="notebookRuntime" title="Ausführbares JupyterLite-Notebook" referrerpolicy="no-referrer" allow="clipboard-read; clipboard-write"></iframe></section><div class="split-editor" id="splitEditor">
+        <div class="split-source"><label for="source" class="field-title" id="sourceLabel">Kapitelquelltext</label>
       <div class="code-editor" id="codeEditor"><pre id="sourceHighlight" class="source-highlight" aria-hidden="true"></pre><textarea id="source" spellcheck="false" rows="20" placeholder="Wähle links ein Kapitel aus." aria-label="Kapitelquelltext mit Syntaxhervorhebung"></textarea></div>
       <div class="editor-actions">
         <button id="previewButton" type="button" class="button light">Vorschau aktualisieren</button>
         <button id="stage" type="button" class="button primary">Änderung vormerken</button>
       </div>
-      <div class="preview-heading"><h2 class="preview-title" id="previewHeading">Kursvorschau <span>wie auf der Kurswebsite · ohne ausführbaren JavaScript-Code</span></h2><button id="previewFullscreen" class="button light" type="button">⛶ Vollbild-Vorschau</button></div>
-      <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer" allowfullscreen></iframe>
+        </div><div class="split-preview"><div class="preview-heading"><h2 class="preview-title" id="previewHeading">Kursvorschau <span>wie auf der Kurswebsite · ohne ausführbaren JavaScript-Code</span></h2><button id="previewFullscreen" class="button light" type="button">⛶ Vollbild-Vorschau</button></div>
+      <iframe id="preview" title="Inhaltsvorschau ohne aktive Skripte" sandbox="" referrerpolicy="no-referrer" allowfullscreen></iframe></div></div>
       <section class="publish">
         <h2>Änderungen einreichen</h2>
         <p>Alle vorgemerkten Änderungen werden zusammen in einem eigenen GitHub-Branch gespeichert. Ein Pull Request startet automatisch die bestehenden Tests.</p>

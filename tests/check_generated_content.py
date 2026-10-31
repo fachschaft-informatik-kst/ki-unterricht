@@ -34,6 +34,18 @@ for doc,scope in ((course,"#einstieg-3"),(BeautifulSoup((ROOT / "_build/site/bas
     assert intro and "Regeln von Menschen" in intro.get_text() and "Lernen aus Daten" in intro.get_text()
     assert len(intro.select(".marke.regeln"))==1 and len(intro.select(".marke.daten"))==1
     assert "KI-Winter" in intro.get_text() and "Klickt auf einen Titel" in intro.get_text()
+# The expert-system arrows point from the source toward the receiving box:
+# experts -> knowledge base, user case -> reasoning, reasoning -> result,
+# and knowledge base -> reasoning (downwards).
+from xml.etree import ElementTree as ET
+expert_svg=ET.parse(ROOT/"projekt/grafiken/expertensystem_ablauf.svg").getroot()
+svg_ns="{http://www.w3.org/2000/svg}"
+marker=expert_svg.find(f".//{svg_ns}marker[@id='arrow']")
+assert marker is not None and marker.attrib["markerUnits"]=="userSpaceOnUse"
+assert int(marker.attrib["markerWidth"])<=9 and int(marker.attrib["markerHeight"])<=9
+arrow_paths=[element.attrib["d"] for element in expert_svg.findall(f".//{svg_ns}path") if element.get("marker-end")=="url(#arrow)"]
+assert arrow_paths==["M302 184 H367","M302 396 H367","M640 396 H701","M630 261 V306 H508 V319"],arrow_paths
+
 shared_css=(ROOT / "projekt/portal.css").read_text(encoding="utf-8")
 basis_css=(ROOT / "basis/basis.css").read_text(encoding="utf-8")
 assert ".marke.regeln{background:#1e40af;color:#fff}" in shared_css

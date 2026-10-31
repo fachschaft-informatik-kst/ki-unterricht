@@ -236,14 +236,14 @@ async function auth(req,env,url){
   return new Response(null,{status:303,headers});
 }
 async function staticPage(url){
-  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/markdown-it.min.js":"markdown-it.min.js","/plan-editor.js":"plan-editor.js","/glossary-model.js":"glossary-model.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json"};
+  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/markdown-it.min.js":"markdown-it.min.js","/plan-editor.js":"plan-editor.js","/glossary-model.js":"glossary-model.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json","/favicon.svg":"../favicon.svg"};
   const file=files[url.pathname];
   if(!file)return fail(404,"Nicht gefunden.");
   const source=await fetch(STATIC+file,{redirect:"manual"});
   if(source.status>=300&&source.status<400)return fail(502,"Unerwartete Weiterleitung beim Laden der Editor-Dateien.");
   if(!source.ok)return fail(503,"Admin-Dateien sind noch nicht veröffentlicht.");
   const ext=file.split(".").pop();
-  const mime={html:"text/html",css:"text/css",js:"text/javascript",json:"application/json"}[ext];
+  const mime={html:"text/html",css:"text/css",js:"text/javascript",json:"application/json",svg:"image/svg+xml"}[ext];
   const csp=["default-src 'none'","script-src 'self'","style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io",
     "connect-src 'self'","frame-src 'self' blob:","base-uri 'none'","form-action 'none'",

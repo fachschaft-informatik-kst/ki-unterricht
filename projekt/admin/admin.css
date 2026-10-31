@@ -165,3 +165,32 @@ body.course-basis .drag-over{background:#dfe6fb!important}
 .glossary-preview-switch label{margin:0}.glossary-preview-switch select{width:auto;max-width:100%}
 .glossary-preview-switch p{width:100%;margin:0}
 @media(max-width:1080px){.glossary-edit-grid{grid-template-columns:1fr}.glossary-term-list{max-height:190px}.glossary-level-grid{grid-template-columns:1fr}}
+
+
+/* Focused two-pane editing: the real course preview stays beside the source. */
+.workspace{max-width:none;grid-template-columns:260px minmax(0,1fr);gap:15px;padding:16px}
+.workspace.sidebar-collapsed{grid-template-columns:minmax(0,1fr)}
+.workspace.sidebar-collapsed>.sidebar{display:none}
+.editor{min-width:0}
+.editor-heading{align-items:center;flex-wrap:wrap}
+.editor-heading>#toggleSidebar{flex:0 0 auto}
+.editor-heading>div:first-of-type{flex:1;min-width:175px}
+.split-editor{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.split-source,.split-preview{min-width:0}
+.split-preview{position:sticky;top:12px;align-self:start}
+.split-preview .preview-heading{min-height:41px}
+.split-preview .preview-title{font-size:17px;margin:0 0 8px}
+.split-preview iframe#preview{height:min(76vh,920px);min-height:500px}
+.split-source .code-editor{min-height:500px}
+.split-source .code-editor .source-highlight,.split-source .code-editor #source{min-height:500px;height:min(76vh,920px)}
+.split-source .editor-actions{margin:12px 0}
+@media(max-width:1050px){
+  .split-editor{grid-template-columns:1fr}
+  .split-preview{position:static}
+  .split-preview iframe#preview{height:580px;min-height:0}
+}
+@media(max-width:760px){
+  .workspace,.workspace.sidebar-collapsed{display:block;padding:12px}
+  .workspace>.sidebar{position:static;max-height:55vh;overflow:auto;margin-bottom:12px}
+  .split-source .code-editor .source-highlight,.split-source .code-editor #source{height:450px}
+}

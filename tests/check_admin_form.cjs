@@ -125,8 +125,31 @@ const server=http.createServer((req,res)=>{
       "Chapter preview must reappear after editing materials");
     assert.equal(await page.locator("#codeEditor").isVisible(),true,
       "Highlighted source editor must be visible for chapters");
+    assert.equal(await page.locator("#splitEditor").evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(" ").length),2,
+      "Editor source and course preview must be visible side by side on desktop");
+    await page.locator("#toggleSidebar").click();
+    assert.equal(await page.locator("#courseSidebar").isVisible(),false,"Chapter navigation must collapse");
+    assert.equal(await page.locator("#toggleSidebar").getAttribute("aria-expanded"),"false");
+    await page.locator("#toggleSidebar").click();
+    assert.equal(await page.locator("#courseSidebar").isVisible(),true,"Chapter navigation must expand");
+    assert.equal(await page.locator("#toggleSidebar").getAttribute("aria-expanded"),"true");
     assert.ok((await page.locator("#sourceHighlight").innerHTML()).includes("tok-"),
       "Source preview must contain syntax highlighting tokens");
+    const originalSource=await page.locator("#source").inputValue();
+    await page.locator("#source").fill('<figure class="test" data-info="1 > 0" hidden><img src="bild.svg" alt="Sonne > Wolken"></figure>\\n<!-- Kommentar -->');
+    const coloured=await page.locator("#sourceHighlight").evaluate(el=>({
+      tags:[...el.querySelectorAll(".tok-tag")].map(n=>n.textContent),
+      attrs:[...el.querySelectorAll(".tok-attr")].map(n=>n.textContent),
+      strings:[...el.querySelectorAll(".tok-string")].map(n=>n.textContent),
+      comments:[...el.querySelectorAll(".tok-comment")].map(n=>n.textContent),
+      text:el.textContent
+    }));
+    assert(coloured.tags.includes("figure")&&coloured.tags.includes("img"),"HTML tag names highlighted");
+    assert(["class","data-info","hidden","src","alt"].every(a=>coloured.attrs.includes(a)),"HTML attributes including boolean attributes highlighted");
+    assert(coloured.strings.includes('"1 > 0"')&&coloured.strings.includes('"Sonne > Wolken"'),"Quoted > in HTML attribute values preserved");
+    assert(coloured.comments.includes("<!-- Kommentar -->"),"HTML comments highlighted");
+    assert(coloured.text.includes("<figure")&&coloured.text.includes("</figure>"),"Source remains readable");
+    await page.locator("#source").fill(originalSource);
     const preview=page.frameLocator("#preview");
     await preview.locator(".timeline li").first().waitFor();
     const kstLogo=preview.locator(".crumb .school-logo");
@@ -145,10 +168,16 @@ const server=http.createServer((req,res)=>{
     assert.equal(await preview.locator(".timeline li").count(),9);
     const timelineStyle=await preview.locator(".timeline li").first().evaluate(el=>({
       display:getComputedStyle(el).display,
-      columns:getComputedStyle(el).gridTemplateColumns
+      columns:getComputedStyle(el).gridTemplateColumns,
+      viewport:document.documentElement.clientWidth
     }));
-    assert.equal(timelineStyle.display,"grid","Milestones must use published two-column timeline");
-    assert.match(timelineStyle.columns,/104px/,"Milestone year column must match site CSS");
+    assert.equal(timelineStyle.display,"grid","Milestones must use published timeline styles");
+    // A split-screen preview can be narrower than the site's mobile breakpoint.
+    // Check the real responsive layout at its actual iframe width.
+    if(timelineStyle.viewport<=620)
+      assert.equal(timelineStyle.columns.split(" ").length,1,"Narrow preview must match mobile course layout");
+    else
+      assert.match(timelineStyle.columns,/104px/,"Wide preview year column must match site CSS");
     const chapterStyle=await preview.locator(".kapitel > summary .kapitel-nr").evaluate(el=>({
       display:getComputedStyle(el).display,
       radius:getComputedStyle(el).borderTopLeftRadius,
