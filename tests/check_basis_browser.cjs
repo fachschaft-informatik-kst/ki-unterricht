@@ -94,7 +94,7 @@ const assert=require('node:assert/strict');
     assert.equal(await basisRules.locator('[data-ki-sort-card]').count(),4);
     assert.equal(await basisTerms.locator('[data-ki-sort-card]').count(),5);
     await basisRules.locator('[data-ki-sort-card="automat"]').dragTo(basisRules.locator('[data-ki-sort-bin="regeln"]'),{sourcePosition:{x:15,y:15}});
-    assert.equal(await basisRules.locator('[data-ki-sort-card="automat"] select').inputValue(),'regeln');
+    assert.equal(await basisRules.locator('[data-ki-sort-card="automat"] select').inputValue(),'regeln',JSON.stringify(await basisRules.evaluate(el=>({ready:el.classList.contains('ki-sort-ready'),pool:el.querySelector('[data-ki-sort-pool]').children.length,target:el.querySelector('[data-ki-sort-bin="regeln"] [data-ki-sort-target]').children.length}))));
     await basisTerms.locator('[data-ki-sort-card="spam"] select').selectOption('ml');
     assert.equal(await basisTerms.locator('[data-ki-sort-card="spam"] select').inputValue(),'ml');
     await note.fill('Nicht jedes automatische Programm ist KI.');

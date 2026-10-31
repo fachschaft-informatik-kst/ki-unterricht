@@ -29,7 +29,6 @@
    input.addEventListener('input',()=>{forget();render();});
    input.addEventListener('change',()=>{forget();render();});
    card.addEventListener('dragstart',e=>{
-    if(e.target!==card)return;
     dragged=card;card.classList.add('ki-sort-dragging');
     e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',card.dataset.kiSortCard);
    });
@@ -39,9 +38,14 @@
    });
   }
   for(const [area,value] of [[pool,''],...bins.map(b=>[b,b.dataset.kiSortBin])]){
-   area.addEventListener('dragover',e=>{if(!dragged)return;e.preventDefault();e.dataTransfer.dropEffect='move';area.classList.add('ki-sort-drop-active');});
+   area.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='move';area.classList.add('ki-sort-drop-active');});
    area.addEventListener('dragleave',e=>{if(!area.contains(e.relatedTarget))area.classList.remove('ki-sort-drop-active');});
-   area.addEventListener('drop',e=>{if(!dragged)return;e.preventDefault();area.classList.remove('ki-sort-drop-active');assign(dragged,value);});
+   area.addEventListener('drop',e=>{
+    e.preventDefault();area.classList.remove('ki-sort-drop-active');
+    const id=e.dataTransfer.getData('text/plain');
+    const source=cards.find(c=>c.dataset.kiSortCard===id)||dragged;
+    if(source)assign(source,value);
+   });
   }
   check.addEventListener('click',()=>{
    if(cards.some(c=>!selected(c).value)){status.textContent='Bitte zuerst alle Beispiele zuordnen.';return;}

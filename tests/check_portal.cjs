@@ -55,7 +55,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await termsTask.locator('[data-ki-sort-card]').count(),5);
     assert(await rulesTask.locator('[data-ki-sort-check]').isDisabled());
     await rulesTask.locator('[data-ki-sort-card="automat"]').dragTo(rulesTask.locator('[data-ki-sort-bin="regeln"]'),{sourcePosition:{x:15,y:15}});
-    assert.equal(await rulesTask.locator('[data-ki-sort-card="automat"] select').inputValue(),'regeln','Drag updates answer field');
+    assert.equal(await rulesTask.locator('[data-ki-sort-card="automat"] select').inputValue(),'regeln',JSON.stringify(await rulesTask.evaluate(el=>({ready:el.classList.contains('ki-sort-ready'),pool:el.querySelector('[data-ki-sort-pool]').children.length,target:el.querySelector('[data-ki-sort-bin="regeln"] [data-ki-sort-target]').children.length}))),'Drag updates answer field');
     await rulesTask.locator('[data-ki-sort-card="uebersetzung"] select').selectOption('daten');
     await rulesTask.locator('[data-ki-sort-card="ampel"] select').selectOption('regeln');
     await rulesTask.locator('[data-ki-sort-card="gesicht"] select').selectOption('daten');
