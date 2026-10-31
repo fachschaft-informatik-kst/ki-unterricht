@@ -48,6 +48,23 @@ for doc,section in ((course,"#einstieg-3"),(basis,"#basis-ki #einstieg-3")):
     assert timeline is not None, section
     events=timeline.select("ol.timeline > li")
     assert len(events)==9,(section,len(events))
+
+    intro=timeline.select_one(".section-intro")
+    thinking=timeline.select_one(".timeline-thinking")
+    assert "Wie wurde aus einer Idee" in intro.get_text(" ",strip=True)
+    assert thinking and "21. Jahrhundert" in thinking.get_text(" ",strip=True)
+    assert "Welche Art von KI dominiert" in thinking.get_text(" ",strip=True)
+    assert "Begründet eure Vermutung" in thinking.get_text(" ",strip=True)
+    def panel_image(ident):
+        return timeline.select_one(f'template[data-milestone-detail="{ident}"] img')
+    assert "Turing_test_diagram.svg" in panel_image("turing")["src"]
+    assert "Deep_Blue_versus_Kasparov" in panel_image("deepblue")["src"]
+    generated=timeline.select_one('template[data-milestone-detail="chatgpt"]')
+    assert len(generated.select("figure img"))==2
+    assert len(generated.select("figure .milestone-source a"))==2
+    assert all("2022-08-30.png" in image["src"] for image in generated.select("figure img"))
+    assert "Stable Diffusion" in generated.decode_contents()
+
     for item in events:
         trigger=item.select_one("button.milestone-trigger[data-milestone-open]")
         panel=item.select_one("template[data-milestone-detail]")
