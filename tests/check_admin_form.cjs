@@ -25,7 +25,7 @@ const server=http.createServer((req,res)=>{
     const ext=path.extname(file);
     res.writeHead(200,{"Content-Type":ext===".json"?"application/json":ext===".js"?"text/javascript":ext===".css"?"text/css":"text/html",
       // Reproduce the Worker constraint that causes <base href> to be ignored.
-      "Content-Security-Policy":"default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io; frame-src 'self' blob: https://fachschaft-informatik-kst.github.io; base-uri 'none'"});
+      "Content-Security-Policy":"default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://fachschaft-informatik-kst.github.io; frame-src 'self' blob: https://fachschaft-informatik-kst.github.io; connect-src 'self'; base-uri 'none'"});
     res.end(data);
   });
 });
