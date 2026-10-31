@@ -188,14 +188,18 @@ jobs:
           python tests/execute_all_notebooks.py
           python tests/check_pyodide_lock.py
           python tests/check_kernel_compat.py
-      - name: Build the JupyterLite site
+      - name: Generate course pages and notebook sources
         if: steps.scope.outputs.site_changed == 'true'
-        timeout-minutes: 8
+        timeout-minutes: 4
         run: |
           python scripts/build_portal.py
           python scripts/build_course.py
           python scripts/build_basis.py
           python scripts/build_portal_notebooks.py
+      - name: Validate generated content and editor parity
+        if: steps.scope.outputs.site_changed == 'true'
+        timeout-minutes: 5
+        run: |
           python tests/check_basis.py
           python tests/check_course.py
           python tests/check_generated_content.py
@@ -214,6 +218,10 @@ jobs:
           python tests/check_portal_content.py
           python tests/check_solutions.py
           python tests/check_content_mvc.py
+      - name: Build and package JupyterLite for Pages
+        if: steps.scope.outputs.site_changed == 'true'
+        timeout-minutes: 8
+        run: |
           jupyter lite build --contents _build/content --output-dir dist
           python scripts/copy_portal.py dist
           test -f dist/projekt/admin/index.html
