@@ -1,63 +1,76 @@
-# Mehrkurs-URLs und voneinander unabhängige Deployments
+# Mehrkurs-Website: gemeinsame Veröffentlichung
 
-## Aktueller Schritt
+## Architekturentscheidung
 
-Im Quellrepository `fachschaft-informatik-kst/ki-unterricht` gibt es zwei
-redaktionell gefüllte Kurse von BOK und zwei **leere, klar gekennzeichnete**
-Kursplätze für IRN. `shared/course-sites.json` definiert eindeutige Kurs-IDs
-und die öffentlichen Pfade. `scripts/build_course_routes.py` baut die vier
-Kursadressen aus den vorhandenen Build-Ausgaben:
+**Ein Repository, ein GitHub-Pages-Deployment und ein bestehender Cloudflare Worker
+für den geschützten Lehrpersonen-Editor.** Es werden ausdrücklich **keine**
+zusätzlichen Workers, Cloudflare-Pages-Projekte oder DNS-Router benötigt.
 
-| Kurs | Öffentlicher Pfad | Inhalt |
-| --- | --- | --- |
-| BOK, 1. Klasse | `/bok/1-klasse/` | Bisheriger Basiskurs |
-| BOK, 4. Klasse | `/bok/4-klasse/` | Bisheriger vertiefter Kurs |
-| IRN, 1. Klasse | `/irn/1-klasse/` | Platzhalter, **kein** Kursinhalt |
-| IRN, 4. Klasse | `/irn/4-klasse/` | Platzhalter, **kein** Kursinhalt |
+Der vollständige statische Build wird nach erfolgreichen Tests als **ein einziges
+GitHub-Pages-Artefakt** veröffentlicht. Vier eindeutige Kurs-URLs bleiben
+unabhängig voneinander navigierbar; ihre Bereitstellung ist jedoch gemeinsam.
+Kurs-URL-Trennung ist **keine** separate Deployment- oder Berechtigungstrennung.
 
-Die vollständigen öffentlich erreichbaren URLs enthalten bei GitHub Pages den
-Repository-Prefix `/ki-unterricht/`. Die alten Pfade `/basis/` und
-`/projekt/` bleiben vollständig erreichbar. Es wird **keine** Browser-Migration
-vorgenommen: bestehende LocalStorage-Schlüssel, JupyterLite-Lab-URLs und
-ZIP-Formate bleiben erhalten. `/kurse.html` ist die Kursübersicht, die
-Repository-Startadresse führt dorthin.
+| Lehrperson | Klassenstufe | URL nach `/ki-unterricht/` | Stand |
+| --- | --- | --- | --- |
+| BOK | 1. Klasse | `bok/1-klasse/` | Bisheriger Basiskurs |
+| BOK | 4. Klasse | `bok/4-klasse/` | Bisheriger vertiefter Kurs |
+| IRN | 1. Klasse | `irn/1-klasse/` | Platzhalter ohne Unterrichtsinhalte |
+| IRN | 4. Klasse | `irn/4-klasse/` | Platzhalter ohne Unterrichtsinhalte |
 
-**Aktuell werden trotz der vier Adressen weiterhin alle Kurse gemeinsam durch
-`.github/workflows/deploy.yml` als ein GitHub-Pages-Deployment veröffentlicht.**
-URL-Trennung ist nicht Deployment-Trennung.
+Die Kursauswahl unter `/ki-unterricht/kurse.html` zeigt alle vier Kursplätze
+und kennzeichnet IRN ausdrücklich als **in Vorbereitung**. Die Repository-
+Startadresse führt zur Kursauswahl. Der bisherige Kurs unter `/basis/` und
+`/projekt/` bleibt weiterhin erreichbar, auch für direkte Lesezeichen.
 
-## Geplantes unabhängiges Deployment (nächste Phase)
+## Wie der aktuelle Feature-Branch funktioniert
 
-Für wirklich unabhängige Veröffentlichungen sollte das gemeinsame Monorepo
-einen parametrisierten Build `--course bok-1-klasse` usw. erhalten, der
-ausschliesslich die für diesen Kurs benötigten Inhalte, den Kurs-Editor-Zugang
-und eine funktionsfähige, kursisolierte JupyterLite-Laufzeit paketiert. Das
-erfordert insbesondere eine Prüfung der in Notebooks gespeicherten Browserdaten
-und absoluter/relativer Lab-URLs. Bei IRN müssen zuerst eigene Inhalte,
-Manifeste, Notebooks und eindeutige Browser-Speicherschlüssel entstehen.
+1. `shared/course-sites.json` registriert vier eindeutige Kurs-IDs und Pfade.
+2. Die unveränderten BOK-Quellen werden zunächst wie bisher für `/basis/` und
+   `/projekt/` gebaut; `scripts/build_course_routes.py` ergänzt die neuen
+   URLs im **selben** Build-Artefakt.
+3. Relative Links werden für die zusätzliche URL-Ebene angepasst, insbesondere
+   für die gemeinsam genutzte JupyterLite-Laufzeit unter `/lab/`.
+4. IRN erhält eigene Platzhalterseiten **ohne** kopierte BOK-Inhalte.
+5. GitHub Actions validiert beide vorhandenen Unterrichtskurse und alle vier
+   Kurs-URLs; erst ein Merge nach `main` würde das reguläre gemeinsame
+   GitHub-Pages-Deployment auslösen.
 
-Danach können **vier Cloudflare-Pages-Projekte** aus demselben Repository
-publiziert werden, z. B. `ki-bok-1`, `ki-bok-4`, `ki-irn-1`, `ki-irn-4`.
-Jedes Projekt erhält ein eigenes GitHub-Actions-Deployment mit eigenem
-`concurrency`-Schlüssel, einer eigenen Produktionsumgebung und einem eigenen
-Build-Artefakt; Änderungen an `kurse/bok-1-klasse/` lösen nur BOK 1 aus,
-Änderungen an der gemeinsamen Plattform alle vier relevanten Builds.
-Die zentrale Übersicht kann über GitHub Pages oder ein fünftes Projekt laufen.
+Die Aliase sind eine **vorsichtige Übergangslösung**, keine vollständige
+Migration der Inhaltsdateien. Es werden keine bestehenden Browser-Speicher-
+schlüssel, Notebook-IDs oder ZIP-Dateiformate umbenannt, damit die vorhandenen
+Schülerstände weiter zugänglich bleiben.
 
-Einzelne Pages-Projekte haben zunächst **verschiedene Hostnamen**. Soll die
-einheitliche URL-Struktur `/ki-unterricht/bok/1-klasse/` auch bei unabhängigen
-Deployments erhalten bleiben, ist zusätzlich ein Domain-/Routing-Gateway
-(z. B. Cloudflare Worker unter einer eigenen Schul-Domain) nötig, der die
-voneinander unabhängig veröffentlichten Kursprojekte unter diesen Pfaden
-zusammenführt. **GitHub Pages allein bietet kein unabhängiges Deployment
-verschiedener Unterverzeichnisse desselben Projekts.**
+## Wie künftige Kurse getrennt werden
 
-Voraussetzungen für die Produktionsumstellung:
-1. Redaktionelle Daten und Editor-/Worker-Berechtigungen pro Kurs isolieren.
-2. Echte Kursprofile und parametrisierten Build mit getrennten JupyterLite-Daten einführen.
-3. Vier Deployment-Ziele, nötige Credentials und ggf. Domain/Worker-Routing einrichten.
-4. Browserbasierte Ende-zu-Ende-Tests für alle vier Kurse und ZIP-Import/Export durchführen.
-5. Erst nach grünen Tests neue Domains/Produktionsrouten umschalten; Legacy-URLs behalten.
+Sobald IRN eigene Inhalte bearbeitet, braucht jeder der vier Kurse einen
+eigenen Quellordner, ein eigenes Manifest, AVIVA-Pläne, Bilder und Notebooks.
+Build-Skripte müssen dann die explizite Kurs-ID nutzen und Dateien nur aus
+dem jeweiligen Quellbereich lesen. IDs, Browser-Speicherschlüssel und
+Notebook-Namensräume neuer Kurse müssen eindeutig sein. **Gemeinsame**
+Komponenten (Renderer, Bausteine, JupyterLite-Engine) werden zentral gepflegt.
 
-**Weder Cloudflare-Projekte noch deren Secrets/DNS werden in diesem Schritt
-automatisch angelegt.**
+Für den bestehenden **einen** Cloudflare Worker sind eine Kursauswahl,
+serverseitig geprüfte erlaubte Quellpfade und kursbezogene Pull Requests
+vorzusehen. Die aktuelle Editor-Anmeldung kennt bislang nur Basis/Vertiefung,
+noch keine vier unabhängigen Lehrpersonen-Kurse; die IRN-Platzhalter sind
+deshalb noch nicht bearbeitbare vollständige Kurse. CODEOWNERS/Reviews
+verbessern die Zusammenarbeit, sind aber keine strikte GitHub-
+Ordnerberechtigung. Eine solche lässt sich mit einem gemeinsamen Repository
+nicht vollständig erzwingen.
+
+## Deployment und Tests
+
+`.github/workflows/deploy.yml` bleibt der **einzige** Website-Deploy-Workflow:
+ein Build, Tests und ein Pages-Upload. Ein fehlgeschlagener Test blockiert die
+neue **gesamte** Veröffentlichung; die zuletzt erfolgreich veröffentlichte
+Version bleibt erreichbar. Bei Änderungen an gemeinsamen Bausteinen werden
+beide bestehenden BOK-Kurse und künftig alle vier echten Kurse getestet.
+
+Die Nutzung separater GitHub-Pages-/Cloudflare-Projekte ist **nicht**
+Bestandteil der empfohlenen Architektur. Eine echte unabhängige Veröffentlichung
+wäre eine neue, ausdrücklich zu entscheidende Anforderung, nicht ein
+versteckter Nebeneffekt der vier URLs.
+
+**Status:** Dies ist ein Feature-Branch für die URL- und Übersichtsgrundlage.
+Keine Änderungen sind durch diesen PR bereits auf `main` veröffentlicht.

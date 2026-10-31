@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 dist = ROOT / "dist"
 manifest = json.loads((ROOT / "shared/course-sites.json").read_text(encoding="utf-8"))
 assert len(manifest["courses"]) == 4
+assert len({c["id"] for c in manifest["courses"]}) == 4
+assert len({(c["teacher"], c["grade"]) for c in manifest["courses"]}) == 4
 expected = {"bok/1-klasse", "bok/4-klasse", "irn/1-klasse", "irn/4-klasse"}
 assert {row["slug"] for row in manifest["courses"]} == expected
 overview = (dist / "kurse.html").read_text(encoding="utf-8")
@@ -32,6 +34,7 @@ for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
 assert 'from \'../../projekt/archive.js\'' in (dist / "bok/1-klasse/persistence.js").read_text(encoding="utf-8")
 assert "'../../lab/index.html?path='" in (dist / "bok/4-klasse/portal.js").read_text(encoding="utf-8")
 assert (dist / "lab/index.html").is_file(), "Shared notebook runtime must remain available"
+assert (dist / "projekt/admin/index.html").is_file(), "Existing Cloudflare Worker editor must remain available"
 for slug in ("irn/1-klasse", "irn/4-klasse"):
     page = (dist / slug / "index.html").read_text(encoding="utf-8")
     assert "in Vorbereitung" in page
