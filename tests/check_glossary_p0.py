@@ -62,12 +62,21 @@ assert "20 Lernende" in rubric and "4 Minuten" in rubric
 lesson8=json.loads((ROOT/"kursseiten/basis-abschluss/planung.json").read_text(encoding="utf-8"))["lessons"][0]
 assert sum(p["minutes"] for p in lesson8["phases"])==90
 assert "20 Lernenden" in lesson8["zeit"]
+# DL10 (1. Klasse): German 45-minute documentary, scaffolded group debate, and 90-minute plan.
 video=(ROOT/"kursseiten/basis-gesellschaft/010-gesellschaft.md").read_text(encoding="utf-8")
-assert "Jurriaan" in video and "Cathy" not in video and 'data-basis-answer="video"' in video
-assert "Jurriaan" in (ROOT/"kursseiten/basis-gesellschaft/planung.json").read_text(encoding="utf-8")
-assert "Jurriaan" in (ROOT/"kursseiten/basis-gesellschaft/020-urteil.md").read_text(encoding="utf-8")
+debate=(ROOT/"kursseiten/basis-gesellschaft/020-urteil.md").read_text(encoding="utf-8")
+lesson10=json.loads((ROOT/"kursseiten/basis-gesellschaft/planung.json").read_text(encoding="utf-8"))["lessons"][0]
+assert "Quarks" in video and "ARD-Mediathek" in video and "45 Min." in video
+assert all(f'data-basis-answer="{key}"' in video for key in ("video_beispiel","video_zeit","video"))
+assert all(f'data-basis-answer="{key}"' in debate for key in ("basis-gesellschaft-fall","basis-gesellschaft-pro","basis-gesellschaft-contra","basis-gesellschaft-urteil","basis-gesellschaft-reflexion"))
+assert "Gruppen mit drei oder vier Personen" in debate and "Klassengespräch" in debate
+assert "Quarks" in lesson10["phases"][2]["schritte"][0]["text"]
+assert [p["minutes"] for p in lesson10["phases"]]==[5,5,45,27,8]
+assert sum(p["minutes"] for p in lesson10["phases"])==90
+assert all(sum(step["min"] for step in p["schritte"])==p["minutes"] for p in lesson10["phases"])
+assert all(x in debate for x in ("12 Min.","10 Min.","4 Min.","zwei Argumente dafür und zwei dagegen"))
 assert "Sie sich" not in (ROOT/"kursseiten/basis-gesellschaft/030-rueckblick.md").read_text(encoding="utf-8")
 # The fourth-year oral exam explicitly includes an extra ten minutes and must not be altered.
 fourth=(ROOT/"kursseiten/projekt/planung.json").read_text(encoding="utf-8")
 assert "100 Minuten" in fourth or "100 Minuten" in (ROOT/"kursseiten/projekt/010-projekt-1.md").read_text(encoding="utf-8")
-print("PASS 29 shared glossary terms, both course views, P0 experiment/assessment/video alignment")
+print("PASS shared glossary terms, both course views, P0 experiment/assessment and 90-min DL10 video/debate alignment")

@@ -1,26 +1,27 @@
-<details class="kapitel" id="gesellschaft-1" data-kurz="ARTE-Kurzfilm über KI-Prüfung: Wer wird geschützt, wer trägt Risiken?" open>
+<details class="kapitel" id="gesellschaft-1" data-kurz="Quarks-Dokumentation: Chancen, Risiken und Belege unterscheiden." open>
   <summary><span class="kapitel-nr">1</span>
-    <h2 class="kapitel-titel">Den ARTE-Kurzfilm auswerten</h2>
+    <h2 class="kapitel-titel">Wie verändert KI unser Leben?</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Schaut gemeinsam <a href="https://www.arte.tv/de/videos/119741-000-A/jurriaan-ki-pruefer-aus-den-niederlanden/" target="_blank" rel="noopener">ARTE: «Jurriaan, KI-Prüfer aus den Niederlanden» (ca. 3 Min.)</a>. Die Lehrperson prüft den Link vorab. Notiert zuerst <strong>eine tatsächlich im Film genannte oder gezeigte Beobachtung</strong>. Unterscheidet danach zwischen Beobachtung und eigener Vermutung.</p>
+    <p><strong>Film (45 Min.):</strong> Schaut gemeinsam die deutschsprachige Quarks-Dokumentation <a href="https://www.ardmediathek.de/video/quarks/revolution-mit-risiko-was-bringt-uns-kuenstliche-intelligenz-wirklich/Y3JpZDovL3dkci5kZS9CZWl0cmFnLXNvcGhvcmEtMzY1ZmNhZTMtNzg4YS00NTlmLTk2NTgtZTFiYmJhNDlmYjRk" target="_blank" rel="noopener">«Revolution mit Risiko – Was bringt uns künstliche Intelligenz wirklich?» (ARD-Mediathek, 45 Min., mit Untertiteln)</a>. Sie zeigt Chancen, Grenzen und gesellschaftliche Risiken von KI. Die Lehrperson prüft den Link vorab.</p>
+    <p><strong>Während des Films:</strong> Notiert kurze Stichwörter. Haltet mindestens <strong>ein konkretes Beispiel aus dem Film</strong> mit ungefährer Zeitmarke fest. Eine Beobachtung aus dem Film ist noch nicht dasselbe wie eure eigene Meinung.</p>
     <div class="lesson-steps">
       <article>
-        <b>Wer?</b>
+        <b>Chance</b>
         <!-- MD:START -->
-Was macht eine Person, die KI-Systeme überprüft? Wer könnte von den Entscheidungen betroffen sein?
+Wo kann KI Menschen unterstützen? Wer profitiert davon?
 <!-- MD:END -->
       </article>
       <article>
-        <b>Warum?</b>
+        <b>Risiko</b>
         <!-- MD:START -->
-Welches Risiko oder welche mögliche Benachteiligung wird im Film angesprochen? Was ist eure eigene Vermutung dazu?
+Wo kann KI Fehler machen, Menschen beeinflussen oder jemanden benachteiligen?
 <!-- MD:END -->
       </article>
       <article>
-        <b>Was ändern?</b>
+        <b>Genau hinschauen</b>
         <!-- MD:START -->
-Wie könnte man ein KI-System unabhängig prüfen? Woran würdet ihr merken, dass eine Massnahme hilft?
+Was wird im Film **wirklich gezeigt oder gesagt**? Was ist nur eine Vermutung oder eine Sorge?
 <!-- MD:END -->
       </article>
     </div>
@@ -28,22 +29,23 @@ Wie könnte man ein KI-System unabhängig prüfen? Woran würdet ihr merken, das
       <table class="typen">
         <thead>
           <tr>
-            <th>Beobachtung im Kurzfilm</th>
-            <th>Euer Eintrag</th>
+            <th>Filmbeobachtung</th>
+            <th>Deine Notiz</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th>Ein tatsächlich gezeigter oder genannter Punkt</th>
-            <td><input type="text" maxlength="200" data-basis-answer="video_beispiel" aria-label="Beobachtung aus dem ARTE-Kurzfilm" placeholder="Im Film wird …"></td>
+            <td><input type="text" maxlength="200" data-basis-answer="video_beispiel" aria-label="Beobachtung aus der Quarks-Dokumentation" placeholder="Im Film wird gezeigt, dass …"></td>
           </tr>
           <tr>
-            <th>Zeitmarke (ungefähr)</th>
-            <td><input type="text" maxlength="200" data-basis-answer="video_zeit" aria-label="Zeitmarke aus dem ARTE-Kurzfilm" placeholder="z. B. 01:20"></td>
+            <th>Ungefähre Zeitmarke</th>
+            <td><input type="text" maxlength="200" data-basis-answer="video_zeit" aria-label="Zeitmarke aus der Quarks-Dokumentation" placeholder="z. B. 18:30"></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <label class="field answer"><span>Eure Analyse: Beobachtung → mögliches Problem → begründete Prüfung oder Verbesserung</span><textarea data-basis-answer="video" maxlength="10000" placeholder="Im Film sehen wir … / Wir vermuten … / Prüfen könnte man …" rows="3"></textarea></label>
+    <p><strong>Nach dem Film – zuerst allein (5 Min.):</strong> Schreibe eine Chance und ein Risiko auf, die du erklären kannst. Trenne deine eigene Bewertung vom Beispiel aus dem Film. Diese Notizen helfen dir anschliessend in der Gruppe.</p>
+    <label class="field answer"><span>Meine erste Einschätzung: eine Chance, ein Risiko und ein Beispiel aus dem Film</span><textarea data-basis-answer="video" maxlength="10000" placeholder="Eine Chance ist …, weil … / Ein Risiko ist …, weil … / Im Film wurde dazu … gezeigt." rows="4"></textarea></label>
   </div>
 </details>
