@@ -717,10 +717,11 @@ const server=http.createServer((req,res)=>{
     const previewStyle=await page.frameLocator("#preview").locator(".ki-notebook-block").evaluate(el=>{
       const button=el.querySelector(".ki-notebook-launch");
       const card=getComputedStyle(el),control=getComputedStyle(button);
-      return {cardPadding:card.padding,cardBorder:card.borderLeftWidth,
+      return {width:el.ownerDocument.documentElement.clientWidth,cardPadding:card.padding,cardBorder:card.borderLeftWidth,
         buttonBackground:control.backgroundColor,buttonRadius:control.borderRadius};
     });
-    assert.equal(previewStyle.cardPadding,"18px 20px");
+    assert.equal(previewStyle.cardPadding,previewStyle.width<=640?"13px":"18px 20px",
+      "Notebook preview must use the published responsive padding at its actual iframe width");
     assert.equal(previewStyle.cardBorder,"4px");
     assert.equal(previewStyle.buttonRadius,"8px");
 
