@@ -930,22 +930,75 @@ $("source").addEventListener("input",()=>{
   if(!$("codeEditor").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
 });
 $("previewButton").addEventListener("click",preview);
-const previewFrame=$("previewFrame");
-const fullscreenButton=$("previewFullscreen");
-fullscreenButton.addEventListener("click",async()=>{
-  try{
-    if(document.fullscreenElement===previewFrame)await document.exitFullscreen();
-    else await previewFrame.requestFullscreen();
-  }catch{
-    status("Vollbildansicht wird vom Browser nicht unterstützt.",true);
-  }
+// Real resizable split pane: pointer, keyboard and double-click reset all use
+// the same 25–75% limits. Save the width, never the page or chapter contents.
+const splitEditor=$("splitEditor");
+const splitDivider=$("splitDivider");
+const SPLIT_KEY="ki-teacher-source-ratio";
+let splitRatio=50;
+function setSplitRatio(value,persist=false){
+  splitRatio=Math.max(25,Math.min(75,Number(value)||50));
+  splitEditor.style.setProperty("--split-left",splitRatio+"fr");
+  splitEditor.style.setProperty("--split-right",(100-splitRatio)+"fr");
+  splitDivider.setAttribute("aria-valuenow",String(Math.round(splitRatio)));
+  splitDivider.setAttribute("aria-valuetext",Math.round(splitRatio)+" Prozent Code, "+Math.round(100-splitRatio)+" Prozent Vorschau");
+  if(persist){try{localStorage.setItem(SPLIT_KEY,String(splitRatio));}catch{/* private browsing */}}
+}
+try{setSplitRatio(localStorage.getItem(SPLIT_KEY)??50);}catch{setSplitRatio(50);}
+let draggingSplit=false;
+function endSplitDrag(){
+  if(!draggingSplit)return;
+  draggingSplit=false;
+  splitEditor.classList.remove("is-resizing");
+  document.body.classList.remove("resizing-split");
+  setSplitRatio(splitRatio,true);
+}
+splitDivider.addEventListener("pointerdown",event=>{
+  if(event.button!==0||splitEditor.classList.contains("preview-only"))return;
+  event.preventDefault();
+  draggingSplit=true;
+  splitDivider.setPointerCapture(event.pointerId);
+  splitEditor.classList.add("is-resizing");
+  document.body.classList.add("resizing-split");
 });
+splitDivider.addEventListener("pointermove",event=>{
+  if(!draggingSplit)return;
+  const bounds=splitEditor.getBoundingClientRect();
+  setSplitRatio(100*(event.clientX-bounds.left-8)/Math.max(1,bounds.width-16));
+});
+splitDivider.addEventListener("pointerup",endSplitDrag);
+splitDivider.addEventListener("pointercancel",endSplitDrag);
+splitDivider.addEventListener("lostpointercapture",endSplitDrag);
+splitDivider.addEventListener("keydown",event=>{
+  const change={ArrowLeft:-5,ArrowRight:5,Home:25,End:75};
+  if(!(event.key in change))return;
+  event.preventDefault();
+  setSplitRatio(event.key==="Home"||event.key==="End"?change[event.key]:splitRatio+change[event.key],true);
+});
+splitDivider.addEventListener("dblclick",()=>setSplitRatio(50,true));
+
+// Fullscreen belongs to the surface itself, not to an external toolbar.
+// The source overlay, selection and syntax layer remain functional in fullscreen.
+const fullscreenSurfaces=[
+  {element:$("codeEditor"),button:$("sourceFullscreen"),name:"Code"},
+  {element:$("previewFrame"),button:$("previewFullscreen"),name:"Vorschau"}
+];
+for(const {element,button} of fullscreenSurfaces){
+  button.addEventListener("click",async()=>{
+    try{
+      if(document.fullscreenElement===element)await document.exitFullscreen();
+      else await element.requestFullscreen();
+    }catch{status("Vollbildansicht wird vom Browser nicht unterstützt.",true);}
+  });
+}
 document.addEventListener("fullscreenchange",()=>{
-  const expanded=document.fullscreenElement===previewFrame;
-  fullscreenButton.setAttribute("aria-pressed",String(expanded));
-  const label=expanded?"Vollbild schliessen":"Vorschau im Vollbild anzeigen";
-  fullscreenButton.setAttribute("aria-label",label);
-  fullscreenButton.title=label;
+  for(const {element,button,name} of fullscreenSurfaces){
+    const expanded=document.fullscreenElement===element;
+    const label=expanded?"Vollbild schliessen":name+" im Vollbild anzeigen";
+    button.setAttribute("aria-pressed",String(expanded));
+    button.setAttribute("aria-label",label);
+    button.title=label;
+  }
 });
 $("stage").addEventListener("click",()=>{try{stage();}catch(e){error(e);}});
 $("checkPermissions").addEventListener("click",async()=>{
@@ -982,6 +1035,29 @@ const blocks={
   quote:'<blockquote>\n  <p>Zitat oder zentraler Gedanke.</p>\n</blockquote>',
   code:'<pre><code class="language-python"># Python-Beispiel\nprint("Hallo Welt")</code></pre>'
 };
+// Every block uses the same course classes as the published site.
+const blockHelp={
+  task:"Aufgabe mit hervorgehobenem Arbeitsauftrag",
+  info:"Merksatz in einer Infobox",
+  warning:"Auffälliger Hinweis oder Warnung",
+  steps:"Drei nummerierte Arbeitsschritte",
+  card:"Eine Karte mit Titel und Text",
+  two:"Zwei Karten nebeneinander",
+  three:"Drei Karten in einem Raster",
+  figure:"Bild mit Alternativtext, Legende und Quelle",
+  table:"Tabelle mit zwei Spalten",
+  flow:"Eingabe, Verarbeitung und Ausgabe",
+  timeline:"Zeitachse mit zwei Meilensteinen",
+  quote:"Zitat als eigener Textblock",
+  code:"Formatiertes Codebeispiel"
+};
+function updateBlockHelp(){
+  const selector=$("blockType");
+  $("blockDescription").textContent=blockHelp[selector.value]||"Baustein auswählen";
+}
+$("blockType").addEventListener("change",updateBlockHelp);
+updateBlockHelp();
+
 function insertBlock(){
   const value=$("blockType").value;
   if(!Object.hasOwn(blocks,value))return status("Unbekannter Baustein.",true);
