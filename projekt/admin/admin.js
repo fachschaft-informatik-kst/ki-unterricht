@@ -311,7 +311,7 @@ function renderLessonOrder(){
 let navigationRevision=0;
 function useFile(path,sha,content,original=content){
   const targetSection=path.split("/")[1];
-  if(/\/\/(?:planung\.json|materialien\.md)$/.test(path) &&
+  if(/\/(?:planung\.json|materialien\.md)$/.test(path) &&
       (targetSection.startsWith("basis-")!==(state.course==="basis")))
     throw Error("Dieser Inhalt gehört zur anderen Klassenstufe. Bitte zuerst den Kurs wechseln.");
   state.current={path,sha,original};
