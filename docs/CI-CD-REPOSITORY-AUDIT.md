@@ -5,6 +5,10 @@
 Analysiert wurden die Dateien im `main`-Branch, die GitHub-Action
 `.github/workflows/deploy.yml` und mehrere GitHub-Workflow-Läufe vom 31.10.2026.
 
+**Geltungsbereich:** Ausschliesslich die auf `main` vorhandene Repository-Struktur.
+Noch nicht gemergte Feature-Branches und Pull Requests sind bewusst nicht
+Teil der Bestandsaufnahme oder der Struktur-Empfehlungen.
+
 | Untersuchte Ausführung | Beobachtung |
 | --- | --- |
 | [Main-Deployment 41241037674](https://github.com/fachschaft-informatik-kst/ki-unterricht/actions/runs/41241037674) | Erfolgreich, etwa 9 min 17 s von Erstellung bis Abschluss |
@@ -94,12 +98,6 @@ Weitere Massnahmen:
    begrenzt, und Playwright wird bei CI-Ausführung aus npm installiert.
    Ein getesteter Lockfile-/Versionspflegeprozess wäre ein eigener
    sinnvoller Folge-PR; pauschales Versions-Upgrade wäre riskant.
-5. Die Struktur für mehrere Lehrpersonen (BOK/IRN) wird in
-   [PR #100](https://github.com/fachschaft-informatik-kst/ki-unterricht/pull/100)
-   diskutiert. Diese CI-Optimierung verändert keine Kurs-URLs oder
-   Inhaltsverzeichnisse und sollte mit der dortigen Migration
-   separat geprüft werden.
-
 ## Nachweis und nächste Schritte
 
 Die Änderung liegt in
