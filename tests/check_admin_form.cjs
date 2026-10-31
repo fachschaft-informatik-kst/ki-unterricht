@@ -410,7 +410,15 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#publish").isEnabled(),true);
     assert.match(await page.locator("#staged .staged-item").first().textContent(),/planung.json/);
     const planDiff=page.locator('#staged details[data-diff-path="kursseiten/einstieg/planung.json"]');
-    await planDiff.locator("summary").click();
+    assert.equal(await page.locator("#diffControls").isVisible(),true);
+    assert.equal(await planDiff.getAttribute("open"),"",
+      "Diffs for small changesets should open automatically");
+    await page.locator("#collapseDiffs").click();
+    assert.equal(await planDiff.getAttribute("open"),null);
+    await page.locator("#expandDiffs").click();
+    assert.equal(await planDiff.getAttribute("open"),"");
+
+    await planDiff.locator(".diff-add").first().waitFor();
     await planDiff.locator(".diff-add").first().waitFor();
     assert.match(await planDiff.locator(".diff-add").allTextContents().then(lines=>lines.join("\n")),/Was ist KI\? – Überarbeitet/);
     assert.match(await planDiff.locator(".diff-remove").allTextContents().then(lines=>lines.join("\n")),/Was ist KI\?/);
