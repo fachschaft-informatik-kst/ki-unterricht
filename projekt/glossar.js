@@ -86,7 +86,7 @@
       const x=window.scrollX, y=window.scrollY;
       dialog.showModal();
       close.focus({preventScroll:true});
-      if(window.scrollX!==x || window.scrollY!==y)window.scrollTo(x,y);
+      if(window.scrollX!==x || window.scrollY!==y)window.scrollTo({left:x,top:y,behavior:'instant'});
     });
   }
 })();
