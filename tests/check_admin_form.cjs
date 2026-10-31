@@ -71,6 +71,25 @@ const server=http.createServer((req,res)=>{
     await page.locator("#courseSelect").selectOption("vertiefung");
     assert.equal(await page.locator("body").evaluate(node=>node.classList.contains("course-basis")),false,"Fourth-year editor should retain green theme");
     await page.locator("#section").selectOption("einstieg");
+    // Navigation separates course, teaching areas, chapters and resources.
+    assert.ok(await page.locator("#sectionNav .section-link").count()>=7);
+    assert.equal(await page.locator('#sectionNav [data-section="einstieg"]').getAttribute("aria-current"),"true");
+    await page.locator('#sectionNav [data-section="perzeptron"]').click();
+    assert.equal(await page.locator("#section").inputValue(),"perzeptron");
+    assert.equal(await page.locator('#sectionNav [data-section="perzeptron"]').getAttribute("aria-current"),"true");
+    await page.locator('#sectionNav [data-section="einstieg"]').click();
+    assert.equal(await page.locator("#section").inputValue(),"einstieg");
+    assert.equal(await page.locator("#chapters .chapter-number").first().textContent(),"01");
+    assert.equal(await page.locator(".sidebar-shortcuts .sidebar-action").count(),3);
+    // The publishing form is no longer rendered beneath the split panes.
+    assert.equal(await page.locator("#publishPanel").isVisible(),false);
+    await page.locator("#toggleChanges").click();
+    assert.equal(await page.locator("#publishPanel").isVisible(),true);
+    assert.equal(await page.locator("#publish").isDisabled(),true);
+    assert.match(await page.locator("#staged").textContent(),/Noch keine Änderungen/);
+    await page.keyboard.press("Escape");
+    assert.equal(await page.locator("#publishPanel").isVisible(),false);
+    assert.equal(await page.locator("#toggleChanges").getAttribute("aria-expanded"),"false");
     await page.locator(".sidebar-details summary").first().click();
     await page.locator("#lessonOrder .lesson-sort-head").first().waitFor();
     assert.equal(await page.locator("#lessonOrder .lesson-sort-head").count(),7,
@@ -301,6 +320,11 @@ const server=http.createServer((req,res)=>{
     await page.locator("#planFields input").first().fill("Was ist KI? – Überarbeitet");
     await page.locator("#stage").click();
     assert.match(await page.locator("#notice").textContent(),/Vorgemerkt/,"Initial plan change was not staged");
+    assert.equal(await page.locator("#pendingCount").textContent(),"1");
+    await page.locator("#toggleChanges").click();
+    assert.equal(await page.locator("#publish").isEnabled(),true);
+    assert.match(await page.locator("#staged .staged-item").first().textContent(),/planung.json/);
+    await page.locator("#closeChanges").click();
     await page.evaluate(()=>{
       const responses=["Vertiefung: KI im Alltag","Einstieg und Auftrag"];
       window.__promptCalls=[];
@@ -354,6 +378,7 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#path").textContent(),/kursseiten\/vertiefung-ki-im-alltag\//);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\nEin eigenes Beispiel.\n");
     await page.locator("#stage").click();
+    await page.locator("#toggleChanges").click();
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
     assert.ok(submitted);
@@ -385,6 +410,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n<!-- regression test -->");
     await page.locator("#stage").click();
     publishFailure=true;
+    await page.locator("#toggleChanges").click();
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#notice")?.textContent?.includes("HTTP 502"));
     assert.match(await page.locator("#notice").textContent(),/keine gültige JSON-Antwort/);
@@ -473,6 +499,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#stage").click();
     assert((await page.locator("#staged").innerText()).includes("kursseiten/glossar.json"));
     publishFailure=false; // Earlier simulated 502 must not affect the successful glossary publication test.
+    await page.locator("#toggleChanges").click();
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
     assert.equal(submitted.changes.length,1);
