@@ -86,6 +86,23 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_programmierung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg img[src="grafiken/ki_einteilung.png"]').count(),1);
     assert.equal(await p.locator('#einstieg .timeline li').count(),9);
+
+    // All nine history titles open sourced image panels without losing lesson position.
+    assert.equal(await p.locator('#einstieg-3 .milestone-trigger').count(),9);
+    const firstHistory=p.locator('#einstieg-3 .milestone-trigger').first();
+    await firstHistory.click();
+    const historyDialog=p.locator('dialog.milestone-dialog');
+    assert(await historyDialog.isVisible(),'KI history title opens a modal');
+    assert(await historyDialog.locator('img[alt]').count());
+    assert((await historyDialog.locator('figcaption').innerText()).length>60);
+    assert((await historyDialog.locator('.milestone-source a').getAttribute('href')).includes('commons.wikimedia.org/wiki/File:'));
+    await p.keyboard.press('Escape');
+    assert(!await historyDialog.isVisible(),'Escape closes the history modal');
+    assert(await firstHistory.evaluate(el=>el===document.activeElement),'Keyboard focus returns to milestone');
+    await p.locator('#einstieg-3 [data-milestone-open="alexnet"]').click();
+    assert((await historyDialog.innerText()).includes('AlexNet'));
+    await historyDialog.locator('.milestone-close').click();
+
     for(const [id,n] of Object.entries({einstieg:6,lernarten:9,perzeptron:7,netze:5,sprache:7,gesellschaft:6,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
     assert.equal(await p.locator('.nav-sub a').count(),6);
     assert.equal(await p.locator('.kapitel-uebersicht, .kapitel-karte').count(),0,'Duplicate chapter overview must be absent');
