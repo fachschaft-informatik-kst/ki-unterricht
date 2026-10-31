@@ -76,8 +76,12 @@ for doc,section in ((course,"#einstieg-3"),(basis,"#basis-ki #einstieg-3")):
         assert image and panel.select_one("figcaption").decode_contents().strip()
         ident=panel["data-milestone-detail"]
         source=panel.select_one(".milestone-source a[href]")
-        assert source
-        if ident=="dartmouth":
+        assert source or ident=="experten"
+        if ident=="experten":
+            assert image["src"]=="grafiken/expertensystem_ablauf.svg"
+            assert "eigene Vektorgrafik" in panel.decode_contents()
+            assert (ROOT/"projekt/grafiken/expertensystem_ablauf.svg").is_file()
+        elif ident=="dartmouth":
             assert image["src"]=="grafiken/ki_dartmouth_1955.svg"
             assert "A_Proposal_for_the_Dartmouth" in source["href"]
             assert "Nachzeichnung" in panel.decode_contents()
