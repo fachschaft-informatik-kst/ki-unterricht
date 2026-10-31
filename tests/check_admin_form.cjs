@@ -123,7 +123,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#blockPicker").click();
     assert.equal(await page.locator("#blockPicker").getAttribute("aria-expanded"),"true");
     await page.locator('[data-block="warning"]').hover();
-    await page.locator("#blockPreview callout.warn").waitFor();
+    await page.locator("#blockPreview .callout.warn").waitFor();
     await page.locator('[data-block="warning"]').click();
     assert.equal(await page.locator("#blockType").inputValue(),"warning");
     assert.equal(await page.locator("#blockMenu").isVisible(),false);
@@ -261,7 +261,7 @@ const server=http.createServer((req,res)=>{
     assert.notEqual(visualBlock.bg,"rgba(0, 0, 0, 0)","The preview canvas must be styled");
     assert.equal(visualBlock.accent,"#076959");
     await page.locator('[data-block="timeline"]').hover();
-    await page.locator("#blockPreview timeline li").first().waitFor();
+    await page.locator("#blockPreview .timeline li").first().waitFor();
     assert.match(await page.locator("#blockPreviewTitle").textContent(),/Zeitleiste/);
     assert.equal(await page.locator("#source").inputValue(),beforeBlock,
       "Inspecting a block must never edit the chapter");
@@ -284,7 +284,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#source").fill(beforeBlock);
     await page.locator("#blockPicker").click();
     await page.locator('[data-block="compare"]').hover();
-    await page.locator("#blockPreview grid.two .card").first().waitFor();
+    await page.locator("#blockPreview .grid.two .card").first().waitFor();
     await page.locator('[data-block="compare"]').click();
     await page.locator("#addBlock").click();
     await page.frameLocator("#preview").locator(".grid.two .card").first().waitFor();
