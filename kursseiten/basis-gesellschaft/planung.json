@@ -4,106 +4,106 @@
       "id": "b10",
       "view": "basis-gesellschaft",
       "title": "KI und Gesellschaft: Wer trägt die Folgen?",
-      "rueckblick": "Bezug zur vorherigen KI-Doppellektion herstellen.",
-      "goal": "Benachteiligungen durch KI anhand eines Fallbeispiels erkennen, Betroffene benennen und eine begründete Massnahme vorschlagen.",
-      "question": "Sind Entscheidungen fair, nur weil ein Computer sie trifft?",
-      "motivation": "Eigenes Ausprobieren und sachlich begründete Entscheidungen stehen im Vordergrund.",
-      "product": "Ein begründetes Fallurteil mit überprüfbarer Massnahme und einem Zielkonflikt.",
-      "zeit": "90 Minuten, Tandemarbeit mit kurzen Einzelreflexionen.",
+      "rueckblick": "Beobachtungen aus dem Bildprojekt: Auch KI kann Fehler machen, bei Menschen mit ernsten Folgen.",
+      "goal": "An einer deutschsprachigen Dokumentation Chancen und Risiken von KI erkennen, in der Gruppe Pro- und Contra-Argumente abwägen und ein persönliches, begründetes Urteil formulieren.",
+      "question": "Sollte KI über Menschen mitentscheiden – und unter welchen Bedingungen?",
+      "motivation": "Ein aktueller Film und lebensnahe Streitfragen zu Lehrstellen, Schule und sozialen Medien ermöglichen einen angeleiteten Meinungsaustausch.",
+      "product": "Beobachtung mit Zeitmarke, zwei Argumente pro/contra, begründetes Gruppenurteil und persönliche Reflexion.",
+      "zeit": "90 Minuten: 5 Min. Einstieg, 5 Min. Vorwissen, 45 Min. Film, 5 Min. Einzelarbeit, 12 Min. Gruppen, 10 Min. Plenum, 4 Min. persönliche Reflexion, 4 Min. Themenrückblick.",
       "order": 100,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Problem entdecken",
+          "titel": "Eine Streitfrage entdecken",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Tandem",
+              "wer": "Lehrperson",
               "min": 3,
-              "text": "Einstieg: Ein automatisches Bewerbungssystem benachteiligt einzelne Gruppen. Was wäre fair?"
+              "text": "Einstiegsfrage: Darf eine KI allein über die Einladung zum Bewerbungsgespräch entscheiden? Spontane erste Position sammeln, noch nicht debattieren."
             },
             {
               "art": "Ergebnis",
-              "wer": "Ergebnis",
+              "wer": "Einzeln",
               "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Jede Person überlegt, weshalb die Frage Menschen direkt betrifft."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Vorwissen verbinden",
-          "minutes": 10,
+          "titel": "An das Bildprojekt anknüpfen",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 8,
-              "text": "Eigene Erfahrungen mit algorithmischen Empfehlungen und den Folgen austauschen."
+              "wer": "Lehrperson",
+              "min": 3,
+              "text": "An ein falsch eingeordnetes Bild oder eine Datenfalle im Projekt erinnern: Welche Folgen könnten Fehler bei Entscheidungen über Menschen haben?"
             },
             {
               "art": "Ergebnis",
-              "wer": "Ergebnis",
+              "wer": "Einzeln",
               "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "text": "Eine mögliche Folge als Stichwort festhalten."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Modell kennenlernen",
-          "minutes": 15,
+          "titel": "Dokumentation: Chancen und Risiken von KI",
+          "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Lehrperson",
-              "min": 13,
-              "text": "Deutschsprachigen ARTE-Kurzfilm «Jurriaan, KI-Prüfer aus den Niederlanden» (3 Min.) zeigen, Leitfragen zu Diskriminierung und unabhängiger Prüfung besprechen; für längere Filmphase einen vorab ausgewählten Ausschnitt aus «Digital Aliens – Die neue Ungleichheit» zeigen."
-            },
-            {
-              "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "wer": "Lehrperson und Klasse",
+              "min": 45,
+              "text": "Vollständige deutschsprachige Quarks-Dokumentation «Revolution mit Risiko – Was bringt uns künstliche Intelligenz wirklich?» (ARD-Mediathek, 45 Min.) gemeinsam ansehen; Chance, Risiko und mindestens eine echte Filmbeobachtung mit Zeitmarke notieren. Link und Zugänglichkeit vorab prüfen."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Eigene Versuche",
-          "minutes": 50,
+          "titel": "Erst allein, dann in Gruppen und im Plenum",
+          "minutes": 27,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 48,
-              "text": "Ausgehend vom Video einen Fall analysieren (Wer ist betroffen? Welche Daten und Entscheidungen verursachen mögliche Nachteile? Wie prüfen wir eine Massnahme?). Eigene Erfahrungen aus dem Bildprojekt auf gesellschaftliche Folgen übertragen."
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Eine Chance und ein Risiko aus dem Film mit Begründung notieren und Beobachtung von eigener Vermutung unterscheiden."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Dreier- oder Vierergruppe",
+              "min": 12,
+              "text": "Eine von drei Streitfragen wählen, je zwei Pro- und Contra-Argumente sammeln, ein begründetes Urteil und eine überprüfbare Schutzmassnahme formulieren."
             },
             {
               "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "wer": "Plenum",
+              "min": 10,
+              "text": "Jede Gruppe trägt ihr stärkstes Argument vor. Unterschiedliche Perspektiven und Verantwortung besprechen; Lehrperson moderiert."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Erkenntnis sichern",
-          "minutes": 10,
+          "titel": "Persönliches Fazit und Themenrückblick",
+          "minutes": 8,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 8,
-              "text": "Ein persönliches Urteil schriftlich sichern, Rückblick auf die ganze Sequenz."
+              "min": 4,
+              "text": "Schriftlich festhalten, ob sich die eigene Meinung verändert hat und welches Argument überzeugt."
             },
             {
               "art": "Ergebnis",
-              "wer": "Ergebnis",
-              "min": 2,
-              "text": "Überprüfbare Beobachtung oder knappe eigene Erklärung."
+              "wer": "Einzeln",
+              "min": 4,
+              "text": "Rückblick auf den gesamten KI-Themenblock in kurzen Stichworten ausfüllen."
             }
           ]
         }
