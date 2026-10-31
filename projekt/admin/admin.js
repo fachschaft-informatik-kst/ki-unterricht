@@ -99,6 +99,8 @@ function linkedNotebookMarkup(path,title){
   return '<div class="ki-notebook-block" data-notebook="'+path+'" data-title="'+name+'">\n'+
     '  <h3>Jupyter-Notebook · '+name+'</h3>\n'+
     '  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>\n'+
+    '  <a class="ki-notebook-direct" href="https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html?path=portal/'+
+    path.split("/").pop()+'" target="_blank" rel="noopener noreferrer">Notebook in JupyterLite öffnen ↗</a>\n'+
     '</div>';
 }
 function refreshNotebookAssociations(){
