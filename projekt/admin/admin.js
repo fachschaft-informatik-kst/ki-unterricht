@@ -20,11 +20,11 @@ function highlightSource(){
     if(!start)return token("tag",part);
     let result=escape("<"+start[1])+token("tag",start[2]);
     const tail=part.slice(start[0].length);
-    const attrs=/(\s+)([^\s=/>]+)(\s*=\s*)("(?:[^"]*)"|'(?:[^'])*'|[^\s>]+)/g;
+    const attrs=/(\s+)([^\s=/>]+)(?:(\s*=\s*)("(?:[^"]*)"|'(?:[^'])*'|[^\s>]+))?/g;
     let index=0,match;
     while((match=attrs.exec(tail))){
       result+=escape(tail.slice(index,match.index)+match[1]);
-      result+=token("attr",match[2])+escape(match[3])+token("string",match[4]);
+      result+=token("attr",match[2])+(match[3]?escape(match[3])+token("string",match[4]):"");
       index=attrs.lastIndex;
     }
     return result+escape(tail.slice(index));
