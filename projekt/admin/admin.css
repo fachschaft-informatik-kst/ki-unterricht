@@ -638,3 +638,68 @@ button[aria-current=true] .chapter-number{color:var(--accent);background:#fff;bo
   .block-inspection-note{display:none}
   .toolbar .block-picker{min-width:140px}
 }
+
+
+/* AVIVA and glossary share the very same source/preview split pane as chapters. */
+.split-editor .split-source{min-width:0;min-height:0}
+.split-editor .split-source .form-editor{
+  position:relative;width:100%;height:var(--pane-height);min-height:0;min-width:0;
+  border:1px solid var(--line);border-radius:10px;
+  background:#fbfcfb;overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior:contain;scrollbar-width:thin;
+  padding:17px 16px 24px
+}
+.split-editor .form-editor:fullscreen{
+  width:100vw;height:100vh;max-height:none;border:0;border-radius:0;
+  background:#fbfcfb;overflow:auto;padding:24px clamp(20px,5vw,66px)
+}
+.form-editor .pane-fullscreen{
+  position:sticky;float:right;top:0;right:0;z-index:5;
+  width:33px;height:33px;margin:-6px -5px -32px 6px;
+  background:#fff;border:1px solid var(--line);box-shadow:0 1px 4px #192f321c
+}
+.form-editor .plan-editor,.form-editor .glossary-editor{min-width:0;max-width:100%;margin:0;padding:0}
+.form-editor .plan-editor h2,.form-editor .glossary-editor h2{padding-right:40px;font-size:18px}
+.form-editor .plan-overview{grid-template-columns:minmax(0,1fr)}
+.form-editor .plan-overview .plan-field{min-width:0}
+.form-editor .plan-phase{padding:12px;margin:12px 0}
+.form-editor .plan-phase-meta{grid-template-columns:minmax(0,2fr) minmax(75px,1fr);gap:7px}
+.form-editor .plan-step{padding:10px 0}
+.form-editor .plan-step-grid{grid-template-columns:minmax(0,1fr)}
+.form-editor .plan-field input,.form-editor .plan-field textarea{
+  max-width:100%;min-width:0;padding:8px 9px;font-size:12px
+}
+.form-editor .plan-editor .helper{padding-right:25px}
+.form-editor #planLesson{max-width:100%;font-size:12px}
+.form-editor .glossary-intro{padding:12px;margin:0 0 10px}
+.form-editor .glossary-intro h2{padding-right:0}
+.form-editor .glossary-edit-grid{display:block}
+.form-editor .glossary-picker{padding:9px;margin-bottom:13px}
+.form-editor .glossary-picker label{margin-top:0}
+.form-editor .glossary-term-list{
+  display:flex;flex-wrap:wrap;gap:4px;max-height:112px;
+  padding:2px 0;margin:7px 0;overflow:auto
+}
+.form-editor .glossary-term-list button{flex:0 1 auto;width:auto;padding:5px 8px;border:1px solid var(--line);font-size:11px}
+.form-editor .glossary-term-list small{display:none}
+.form-editor .glossary-picker .button.full{margin:8px 0 0;min-height:31px}
+.form-editor .glossary-fields{padding:12px}
+.form-editor .glossary-fields h3{font-size:15px}
+.form-editor .glossary-level-grid{grid-template-columns:1fr;margin-top:9px}
+.form-editor .glossary-level{padding:10px}
+.form-editor .glossary-shared{margin-top:10px;padding-top:10px}
+.form-editor .glossary-fields textarea{min-height:68px;font-size:12px}
+.form-editor .glossary-fields input,.form-editor .glossary-fields select{font-size:12px}
+.form-editor .glossary-fields label{margin-top:9px;font-size:11px}
+.form-editor .glossary-preview-switch{margin:8px 0 0;padding:8px}
+.form-editor .glossary-common{margin-top:13px;padding:10px 0 0;border-top:1px solid var(--line)}
+.form-editor .glossary-common summary{cursor:pointer;color:var(--muted);font-size:12px;font-weight:700}
+.form-editor .glossary-common[open] summary{color:var(--accent)}
+.form-editor .glossary-common .small{padding:5px 7px;background:#fff3ea;border-left:3px solid #b86c29}
+.level-label{display:inline-block;vertical-align:middle;margin-left:5px;padding:2px 7px;border-radius:6px;background:var(--soft);color:var(--accent);font-size:10px;line-height:1.5}
+.split-editor .split-preview .preview-frame{min-height:0}
+.split-editor .split-source:has(.form-editor:not([hidden])) + .split-divider{display:flex}
+@media(max-width:1000px){
+  .split-editor .split-source .form-editor{height:var(--pane-height)}
+  .split-editor .split-source:has(.form-editor:not([hidden])) + .split-divider{display:none}
+}
