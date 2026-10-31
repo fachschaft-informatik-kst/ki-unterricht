@@ -271,6 +271,18 @@ const assert=require('node:assert/strict');
       await card.evaluate(el=>{el.closest('details.kapitel').open=true;});
       assert.equal(await card.locator('.ki-notebook-iframe').count(),0,'No runtime iframe before user action');
       const launch=card.getByRole('button',{name:'Notebook hier öffnen'});
+      const scriptResult=await notebookPageInline.request.get(new URL('notebook-blocks.js',url).href);
+      assert.equal(scriptResult.status(),200,'Notebook block script must be served alongside each course');
+      await notebookPageInline.waitForFunction(path=>{
+        const card=document.querySelector('.ki-notebook-block[data-notebook="'+path+'"]');
+        return !!card?.querySelector('button.ki-notebook-launch');
+      },expected,{timeout:10000}).catch(async e=>{
+        throw Error('Notebook launcher missing: '+JSON.stringify(await card.evaluate(el=>({
+          script:[...document.scripts].map(s=>s.src).filter(x=>x.includes('notebook')),
+          outer:el.outerHTML.slice(0,1400),
+          scriptCount:document.querySelectorAll('.ki-notebook-block').length
+        })))+' '+e.message);
+      });
       await launch.click();
       assert.equal(await launch.getAttribute('aria-expanded'),'true');
       const frame=card.locator('iframe.ki-notebook-iframe');
