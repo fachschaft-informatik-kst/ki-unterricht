@@ -101,7 +101,8 @@ function validate(changes){
       if(doc.nbformat!==4||!Array.isArray(doc.cells)||!doc.metadata||!doc.cells.every(cell=>
         ["code","markdown","raw"].includes(cell.cell_type)&&Array.isArray(cell.source)&&cell.source.every(s=>typeof s==="string")))
         throw Error("Ungültige Jupyter-Notebook-Struktur.");
-      if(c.expectedSha===null)throw Error("Neue Notebooks müssen vorerst über GitHub angelegt werden.");
+      if(c.expectedSha===null&&!/^content\/(?:basis_)?lesson_[a-z0-9_]+\.ipynb$/.test(c.path))
+        throw Error("Neue Notebooks müssen mit einem Unterkapitel-Baustein verknüpft sein.");
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
       if(c.expectedSha===null&&/\/[0-9]{3}-/.test(c.path)&&!c.content.startsWith("---\n"))throw Error("Neue Kapitel brauchen einen YAML-Kopf.");
@@ -140,6 +141,15 @@ async function publish(req,token){
     if((known.get(c.path)||null)!==c.expectedSha)return fail(409,"Konflikt bei "+c.path+". Bitte neu laden.");
   }
   const changes=new Map(body.changes.map(c=>[c.path,c]));
+  // A newly created notebook must be published atomically with a chapter that
+  // references it. Existing notebook sources remain editable as before.
+  for(const item of body.changes.filter(x=>x.expectedSha===null&&x.path.endsWith(".ipynb"))){
+    const references=body.changes.some(x=>!x.delete&&/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)&&
+      x.content?.includes('data-notebook="'+item.path+'"')&&
+      (item.path.startsWith("content/basis_")===x.path.startsWith("kursseiten/basis-")));
+    if(!references)return fail(400,"Neue Notebooks müssen gemeinsam mit dem passenden Unterkapitel vorgemerkt werden: "+item.path);
+  }
+
   const readJson=async path=>{
     const file=await github(token,prefix+"/contents/"+path+"?ref="+baseSha);
     return JSON.parse(decoder.decode(Uint8Array.from(atob(file.content.replace(/\s/g,"")),c=>c.charCodeAt(0))));
