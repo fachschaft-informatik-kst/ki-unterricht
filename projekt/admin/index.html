@@ -71,18 +71,26 @@
           <button type="button" id="addImage" title="Bild auswählen und in die Kursseite einfügen"><span aria-hidden="true">▧</span> Bild</button>
         </div>
         <div class="toolbar-template" role="group" aria-label="Gestaltungsbaustein einfügen">
-          <label class="toolbar-label" for="blockType">Baustein</label>
-          <select id="blockType" aria-describedby="blockDescription">
+          <span class="toolbar-label" id="blockPickerLabel">Baustein</span>
+          <button id="blockPicker" class="block-picker" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="blockMenu" aria-labelledby="blockPickerLabel blockPickerName" aria-describedby="blockDescription">
+            <span id="blockPickerName">Aufgabe</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <select id="blockType" class="visually-hidden" tabindex="-1" aria-hidden="true">
             <optgroup label="Lernen &amp; Hervorheben">
               <option value="task">Aufgabe</option>
               <option value="info">Merksatz</option>
               <option value="warning">Hinweis / Warnung</option>
+              <option value="goal">Lernziel</option>
+              <option value="prior">Vorwissen aktivieren</option>
               <option value="steps">Arbeitsschritte</option>
+              <option value="checklist">Checkliste</option>
+              <option value="reflect">Reflexion</option>
             </optgroup>
             <optgroup label="Layout &amp; Inhalte">
               <option value="card">Karte</option>
               <option value="two">Zwei Spalten</option>
               <option value="three">Drei Spalten</option>
+              <option value="compare">Pro / Contra</option>
               <option value="figure">Abbildung mit Bildlegende</option>
               <option value="table">Tabelle</option>
             </optgroup>
@@ -91,10 +99,23 @@
               <option value="timeline">Zeitleiste / Meilensteine</option>
               <option value="quote">Zitat</option>
               <option value="code">Codebeispiel</option>
+              <option value="reveal">Aufklappbare Erklärung</option>
+              <option value="example">Begriff mit Beispiel</option>
             </optgroup>
           </select>
           <button id="addBlock" type="button" class="button primary" title="Ausgewählten Baustein an der Cursorposition einfügen">+ Einfügen</button>
           <span id="blockDescription" class="block-description" role="status">Aufgabe mit hervorgehobenem Arbeitsauftrag</span>
+          <div id="blockMenu" class="block-menu" role="region" aria-label="Bausteinauswahl mit Vorschau" hidden>
+            <div class="block-menu-title"><strong>Bausteine auswählen</strong><span>Über einen Baustein fahren, um ihn anzusehen</span></div>
+            <div class="block-menu-body">
+              <div id="blockChoices" class="block-choices" aria-label="Vorlagen"></div>
+              <div class="block-inspection">
+                <div class="block-inspection-heading"><strong id="blockPreviewTitle">Aufgabe</strong><span id="blockPreviewHint">Beispielansicht im aktuellen Kursstil</span></div>
+                <iframe id="blockPreview" title="Bausteinvorschau im Kursdesign" sandbox="" referrerpolicy="no-referrer" tabindex="-1"></iframe>
+                <small class="block-inspection-note">Die Vorschau zeigt die Gestaltung, ohne den Kursinhalt zu verändern.</small>
+              </div>
+            </div>
+          </div>
         </div>
         <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden>
       </div>

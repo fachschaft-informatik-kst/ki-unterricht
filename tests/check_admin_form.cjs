@@ -120,7 +120,13 @@ const server=http.createServer((req,res)=>{
     await page.locator("#source").fill("# Testmaterialien\n\n| Schritt | Ziel |\n|---|---|\n| Übung | Prüfen |\n");
     await materialFrame.locator("table td").filter({hasText:"Übung"}).waitFor();
     assert.equal(await materialFrame.locator("table td").first().textContent(),"Übung");
-    await page.locator("#blockType").selectOption("warning");
+    await page.locator("#blockPicker").click();
+    assert.equal(await page.locator("#blockPicker").getAttribute("aria-expanded"),"true");
+    await page.locator('[data-block="warning"]').hover();
+    await page.frameLocator("#blockPreview").locator(".callout.warn").waitFor();
+    await page.locator('[data-block="warning"]').click();
+    assert.equal(await page.locator("#blockType").inputValue(),"warning");
+    assert.equal(await page.locator("#blockMenu").isVisible(),false);
     await page.locator("#addBlock").click();
     await materialFrame.locator(".callout.warn").waitFor();
     assert.match(await page.locator("#source").inputValue(),/callout warn/);
@@ -226,12 +232,41 @@ const server=http.createServer((req,res)=>{
       await page.waitForFunction(()=>document.fullscreenElement===null);
       assert.equal(await page.locator("#"+button).getAttribute("aria-pressed"),"false");
     }
-    // Selected blocks describe their effect and insert the original course-compatible markup.
-    await page.locator("#blockType").selectOption("timeline");
-    assert.match(await page.locator("#blockDescription").textContent(),/Zeitachse/);
+    // Hover and keyboard focus display a genuine course-styled sandboxed
+    // example without touching the source until insertion is requested.
     const beforeBlock=await page.locator("#source").inputValue();
+    await page.locator("#blockPicker").click();
+    assert.ok(await page.locator("#blockChoices button[data-block]").count()>=20,
+      "The course template palette should offer the expanded blocks");
+    assert.equal(await page.locator("#blockPreview").getAttribute("sandbox"),"");
+    await page.locator('[data-block="timeline"]').hover();
+    await page.frameLocator("#blockPreview").locator(".timeline li").first().waitFor();
+    assert.match(await page.locator("#blockPreviewTitle").textContent(),/Zeitleiste/);
+    assert.equal(await page.locator("#source").inputValue(),beforeBlock,
+      "Inspecting a block must never edit the chapter");
+    await page.locator('[data-block="reveal"]').focus();
+    await page.frameLocator("#blockPreview").locator("details summary").waitFor();
+    assert.match(await page.locator("#blockPreviewHint").textContent(),/ausklappbar/);
+    await page.keyboard.press("Escape");
+    assert.equal(await page.locator("#blockMenu").isVisible(),false);
+    await page.locator("#blockPicker").click();
+    await page.locator('[data-block="timeline"]').click();
+    assert.match(await page.locator("#blockDescription").textContent(),/Zeitachse/);
     await page.locator("#addBlock").click();
     assert.match(await page.locator("#source").inputValue(),/class="timeline"/);
+    await page.locator("#source").fill(beforeBlock);
+    await page.locator("#blockPicker").click();
+    await page.locator('[data-block="reveal"]').click();
+    await page.locator("#addBlock").click();
+    await page.frameLocator("#preview").locator("details.card summary").waitFor();
+    assert.match(await page.locator("#source").inputValue(),/<details class="card">/);
+    await page.locator("#source").fill(beforeBlock);
+    await page.locator("#blockPicker").click();
+    await page.locator('[data-block="compare"]').hover();
+    await page.frameLocator("#blockPreview").locator(".grid.two .card").first().waitFor();
+    await page.locator('[data-block="compare"]').click();
+    await page.locator("#addBlock").click();
+    await page.frameLocator("#preview").locator(".grid.two .card").first().waitFor();
     await page.locator("#source").fill(beforeBlock);
     await page.locator("#previewButton").click(); // Restore the iframe before later course-layout assertions.
     // On a narrow viewport the stacked panes keep fullscreen buttons but hide the divider.
