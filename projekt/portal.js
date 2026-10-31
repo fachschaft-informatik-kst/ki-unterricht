@@ -81,6 +81,7 @@ function render(){
  journalFields.forEach(e=>e.value=state.journal[e.dataset.journal]||'');
  answerFields.forEach(e=>e.value=state.answers[e.dataset.answer]||'');
  renderFiles();updateChecks();
+ document.dispatchEvent(new Event('ki-answers-rendered'));
 }
 function renderFiles(){
  $('attachment-list').replaceChildren();
