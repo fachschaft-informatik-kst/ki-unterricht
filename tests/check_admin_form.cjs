@@ -118,6 +118,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#splitEditor").evaluate(el=>el.classList.contains("preview-only")),true,
       "Plan view must not reserve a blank source column");
     assert.equal(await page.locator(".split-source").isVisible(),false);
+    assert.equal(await page.locator("#splitDivider").isVisible(),false,"Plan view must not expose a resize handle");
     await page.locator("#editMaterials").click();
     await page.frameLocator("#preview").locator("table").first().waitFor();
     // Visual regression for the real CSS selectors and HTML wrappers.
@@ -128,8 +129,9 @@ const server=http.createServer((req,res)=>{
       "Chapter preview must reappear after editing materials");
     assert.equal(await page.locator("#codeEditor").isVisible(),true,
       "Highlighted source editor must be visible for chapters");
-    assert.equal(await page.locator("#splitEditor").evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(" ").length),2,
-      "Editor source and course preview must be visible side by side on desktop");
+    assert.equal(await page.locator("#splitEditor").evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(" ").length),3,
+      "Editor requires two side-by-side panels with a separate draggable divider");
+    assert.equal(await page.locator("#splitDivider").getAttribute("role"),"separator");
     // Both working surfaces must align, and fullscreen belongs inside the preview.
     const layout=await page.locator("#splitEditor").evaluate(el=>{
       const code=el.querySelector("#codeEditor").getBoundingClientRect();
@@ -150,6 +152,56 @@ const server=http.createServer((req,res)=>{
     assert.ok(layout.frameContainsButton,"Fullscreen button must overlay the preview, not use its own toolbar");
     assert.equal(layout.fullscreenParent,"previewFrame");
     assert.equal(await page.locator("#previewFullscreen").getAttribute("aria-label"),"Vorschau im Vollbild anzeigen");
+    // Both fullscreen buttons must live inside their own surface, not the header.
+    assert.equal(await page.locator("#sourceFullscreen").evaluate(el=>el.parentElement.id),"codeEditor");
+    assert.equal(await page.locator("#sourceFullscreen").getAttribute("aria-label"),"Code im Vollbild anzeigen");
+    const sourceControl=await page.locator("#codeEditor").evaluate(el=>{
+      const box=el.getBoundingClientRect();
+      const icon=el.querySelector("#sourceFullscreen").getBoundingClientRect();
+      return icon.left>=box.left&&icon.right<=box.right&&icon.top>=box.top&&icon.bottom<=box.bottom;
+    });
+    assert.ok(sourceControl,"Source fullscreen control must be inside the source textbox");
+    // Resize by pointer and then use keyboard and reset. Both panes keep equal heights.
+    const divider=page.locator("#splitDivider");
+    const dividerBox=await divider.boundingBox();
+    const originalSplit=Number(await divider.getAttribute("aria-valuenow"));
+    await page.mouse.move(dividerBox.x+dividerBox.width/2,dividerBox.y+dividerBox.height/2);
+    await page.mouse.down();
+    await page.mouse.move(dividerBox.x+dividerBox.width/2+95,dividerBox.y+dividerBox.height/2,{steps:5});
+    await page.mouse.up();
+    const resized=Number(await divider.getAttribute("aria-valuenow"));
+    assert.ok(resized>originalSplit+3,"Dragging should enlarge the code panel");
+    const resizedHeights=await page.locator("#splitEditor").evaluate(el=>[
+      el.querySelector("#codeEditor").getBoundingClientRect().height,
+      el.querySelector("#previewFrame").getBoundingClientRect().height
+    ]);
+    assert.ok(Math.abs(resizedHeights[0]-resizedHeights[1])<=2,"Resizing must preserve equal panel heights");
+    await divider.focus();
+    await page.keyboard.press("ArrowLeft");
+    assert.equal(Number(await divider.getAttribute("aria-valuenow")),Math.round(resized-5));
+    await divider.dblclick();
+    assert.equal(await divider.getAttribute("aria-valuenow"),"50","Double-click should restore 50:50");
+    // Native fullscreen must be toggled from within each respective textbox.
+    for(const [button,surface] of [["sourceFullscreen","codeEditor"],["previewFullscreen","previewFrame"]]){
+      await page.locator("#"+button).click();
+      assert.equal(await page.evaluate(()=>document.fullscreenElement?.id),surface,
+        "Expected "+surface+" to enter browser fullscreen");
+      await page.locator("#"+button).click();
+      assert.equal(await page.evaluate(()=>document.fullscreenElement),null);
+    }
+    // Selected blocks describe their effect and insert the original course-compatible markup.
+    await page.locator("#blockType").selectOption("timeline");
+    assert.match(await page.locator("#blockDescription").textContent(),/Zeitachse/);
+    const beforeBlock=await page.locator("#source").inputValue();
+    await page.locator("#addBlock").click();
+    assert.match(await page.locator("#source").inputValue(),/class="timeline"/);
+    await page.locator("#source").fill(beforeBlock);
+    // On a narrow viewport the stacked panes keep fullscreen buttons but hide the divider.
+    await page.setViewportSize({width:900,height:800});
+    assert.equal(await page.locator("#splitDivider").isVisible(),false);
+    assert.equal(await page.locator("#codeEditor").isVisible(),true);
+    assert.equal(await page.locator("#previewFrame").isVisible(),true);
+    await page.setViewportSize({width:1280,height:720});
     await page.locator("#toggleSidebar").click();
     assert.equal(await page.locator("#courseSidebar").isVisible(),false,"Chapter navigation must collapse");
     assert.equal(await page.locator("#toggleSidebar").getAttribute("aria-expanded"),"false");
