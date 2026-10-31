@@ -125,6 +125,14 @@ const server=http.createServer((req,res)=>{
       "Chapter preview must reappear after editing materials");
     assert.equal(await page.locator("#codeEditor").isVisible(),true,
       "Highlighted source editor must be visible for chapters");
+    assert.equal(await page.locator("#splitEditor").evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(" ").length),2,
+      "Editor source and course preview must be visible side by side on desktop");
+    await page.locator("#toggleSidebar").click();
+    assert.equal(await page.locator("#courseSidebar").isVisible(),false,"Chapter navigation must collapse");
+    assert.equal(await page.locator("#toggleSidebar").getAttribute("aria-expanded"),"false");
+    await page.locator("#toggleSidebar").click();
+    assert.equal(await page.locator("#courseSidebar").isVisible(),true,"Chapter navigation must expand");
+    assert.equal(await page.locator("#toggleSidebar").getAttribute("aria-expanded"),"true");
     assert.ok((await page.locator("#sourceHighlight").innerHTML()).includes("tok-"),
       "Source preview must contain syntax highlighting tokens");
     const originalSource=await page.locator("#source").inputValue();
