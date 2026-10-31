@@ -80,7 +80,7 @@ def build():
     source_svg = (ROOT / "projekt" / "grafiken" / "netz_hintergrund.svg").read_text(encoding="utf-8")
     blue_svg = source_svg.replace("#076959", "#3653a3").replace("#b84d27", "#6488d6").replace("#f5f4ee", "#f3f5fb")
     (OUT / "grafiken" / "netz_hintergrund_blau.svg").write_text(blue_svg, encoding="utf-8")
-    for filename in ("glossar.css", "glossar.js"):
+    for filename in ("glossar.css", "glossar.js", "dl1_sort.css", "dl1_sort.js"):
         (OUT / filename).write_bytes((ROOT / "projekt" / filename).read_bytes())
     for filename in ("basis.css", "basis.js", "persistence.js"):
         (OUT / filename).write_bytes((SOURCE / filename).read_bytes())

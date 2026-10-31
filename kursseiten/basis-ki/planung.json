@@ -7,7 +7,7 @@
       "goal": "An vier Beispielen entscheiden, ob feste Regeln oder Lernen aus Daten verwendet werden, und KI, maschinelles Lernen und Deep Learning mit je einem Beispiel erklären.",
       "question": "Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
-      "product": "Drei begründet eingeordnete Beispiele, zwei Argumente zum Fall «Schulweg» und eine eigene Antwort auf die Leitfrage.",
+      "product": "Vier Regel-/Daten-Zuordnungen, fünf konkrete KI-Beispiele in der passenden Kategorie und eine kurze Antwort auf die Leitfrage. Wahlvertiefung ohne Pflichtnachweis.",
       "zeit": "90 Minuten: Pflichtkern Zuordnen, Begründen und Begriffe anwenden; starke KI, Meilensteine und Robotergesetze als Wahlvertiefung.",
       "phases": [
         {
@@ -96,14 +96,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Eigene Beispiele begründet einordnen",
+          "titel": "Beispiele zuordnen und Unterschiede erkennen",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 30,
-              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Lernen aus Daten, KI/ML/Deep Learning/generative KI und schwache oder hypothetische starke KI. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk."
+              "text": "Ordnet auf der Kursseite vier konkrete Systeme «Feste Regeln» oder «Lernen aus Daten» zu. Danach ordnet ihr fünf weitere Fälle der genauesten KI-Kategorie zu (auch mit Auswahlfeldern statt Ziehen). Kontrolliert, korrigiert und besprecht die Unterschiede. Eigene zusätzliche Beispiele sind freiwillig."
             },
             {
               "art": "Input",
@@ -126,7 +126,7 @@
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Drei begründete Beispiele, offene Fragen sichtbar markiert, und zwei Argumente zum Fall «Schulweg»."
+              "text": "Neun überprüfte Zuordnungen und eine kurze Begründung; Asimovs Gesetze und Schulweg-Fall bleiben Wahlvertiefung."
             }
           ]
         },

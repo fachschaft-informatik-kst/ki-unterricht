@@ -31,7 +31,11 @@ for lesson in lessons:
         assert any(step['wer']=='Einzeln' for phase in lesson['phases'] for step in phase['schritte'])
 soup=BeautifulSoup((root/'_build/site/projekt/index.html').read_text(),'html.parser')
 rules=soup.select_one('#einstieg-1')
-assert rules.select_one('textarea[data-answer="regeln_oder_daten"][aria-label]')
+assert rules.select_one('[data-ki-sort-task="regeln"]')
+assert soup.select_one('#einstieg-2 textarea[data-answer="regeln_oder_daten"]')
+assert soup.select_one('#einstieg-2 [data-ki-sort-task="begriffe"]')
+assert len(rules.select('[data-ki-sort-card]')) == 4
+assert len(soup.select('#einstieg-2 [data-ki-sort-card]')) == 5
 task=rules.select_one('.task').get_text()
 assert 'Getränkeautomat' in task and 'Übersetzungsapp' in task
 assert 'Taschenrechner' not in task and 'Spamfilter' not in task

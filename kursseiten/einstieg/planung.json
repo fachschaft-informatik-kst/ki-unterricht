@@ -7,7 +7,7 @@
       "goal": "KI von automatisierten Programmen unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen sowie schwache und starke KI an Beispielen gegenüberstellen.",
       "question": "Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
-      "product": "Drei begründet eingeordnete Beispiele, zwei Argumente zum Fall «Schulweg» und eine eigene Antwort auf die Leitfrage.",
+      "product": "Vier Regel-/Daten-Zuordnungen, fünf begründet klassifizierte KI-Beispiele, zwei besprochene Grenzfälle und eine reflektierte Antwort auf die Leitfrage.",
       "zeit": "Asimovs Gesetze werden kurz angeschnitten; die ausführliche ethische Diskussion folgt in Doppellektion 10. Die Meilensteine sind freiwillige Vertiefung.",
       "phases": [
         {
@@ -96,14 +96,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Eigene Beispiele begründet einordnen",
+          "titel": "Vorgegebene Beispiele präzise einordnen",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 30,
-              "text": "Wählen Sie drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie jedes ein: Regeln oder Lernen aus Daten, KI/ML/Deep Learning/generative KI und schwache oder hypothetische starke KI. Begründen Sie Ihre Zuordnung und markieren Sie Unsicherheiten. Nutzen Sie die Kursseite als Nachschlagewerk."
+              "text": "Ordnen Sie vier Beispiele nach festen Regeln oder Datenlernen und fünf weitere nach der spezifischsten KI-Kategorie ein. Prüfen Sie Ihre Zuordnung, begründen Sie zwei Grenzfälle (Regel-KI versus Automatisierung sowie Entscheidungsbaum versus Deep Learning) und halten Sie Unsicherheiten fest. Eigene Beispiele sind eine freiwillige Vertiefung."
             },
             {
               "art": "Input",
@@ -126,7 +126,7 @@
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Drei begründete Beispiele, offene Fragen sichtbar markiert, und zwei Argumente zum Fall «Schulweg»."
+              "text": "Neun überprüfte Zuordnungen, zwei begründete Grenzfälle und zwei Argumente zum Fall «Schulweg»."
             }
           ]
         },

@@ -1,0 +1,46 @@
+/* DL1 cards use existing blue / green course variables. */
+.ki-sort-task{max-width:990px;margin:22px 0;padding:20px;border:1px solid var(--line);border-radius:16px;background:white}
+.ki-sort-intro{font-size:15px;line-height:1.6;margin:0 0 17px}
+.ki-sort-layout{display:grid;gap:19px}
+.ki-sort-subtitle{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:16px;margin:0 0 10px}
+.ki-sort-subtitle small{font-size:12px;color:var(--muted);font-weight:500}
+.ki-sort-pool,.ki-sort-bin-cards{display:grid;gap:9px;align-content:start}
+.ki-sort-pool{min-height:38px}
+.ki-sort-card{display:grid;grid-template-columns:27px minmax(0,1fr);gap:9px 12px;padding:13px;border:1px solid var(--line);border-radius:11px;background:white;min-width:0;box-shadow:0 2px 8px #203d3710}
+.ki-sort-card[draggable=true]{cursor:grab}
+.ki-sort-card.ki-sort-dragging{opacity:.45}
+.ki-sort-card.ki-sort-selected{outline:3px solid var(--accent);outline-offset:2px}
+.ki-sort-card-index{width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:var(--soft);color:var(--accent);font-size:13px;font-weight:800}
+.ki-sort-card-text{font-size:14px;line-height:1.5;font-weight:550;overflow-wrap:anywhere}
+.ki-sort-select-label{grid-column:2;display:grid;gap:5px;font-size:12px;color:var(--muted);font-weight:700}
+.ki-sort-card select{width:100%;min-width:0;max-width:100%;min-height:44px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);padding:7px 9px;font:13px/1.4 system-ui;cursor:pointer}
+.ki-sort-card select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ki-sort-bins{display:none;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.ki-sort-ready .ki-sort-bins{display:grid}
+.ki-sort-bin{min-width:0;min-height:110px;padding:12px;border:1px dashed var(--line);border-radius:12px;background:var(--soft);background:color-mix(in srgb,var(--soft) 60%,white)}
+.ki-sort-bin h3{font-size:13px;color:var(--accent);line-height:1.4;margin:0 0 10px}
+.ki-sort-bin-cards{min-height:45px}
+.ki-sort-bin-cards:empty::after{content:"Hier ablegen";padding:13px 5px;text-align:center;color:var(--muted);font-size:12px}
+.ki-sort-bin .ki-sort-card{padding:10px 9px}
+.ki-sort-drop-active{outline:2px solid var(--accent);outline-offset:2px}
+.ki-sort-card-result{grid-column:2;font-size:12px;font-weight:700;line-height:1.4}
+.ki-sort-card-result:empty{display:none}
+.ki-sort-card[data-ki-sort-result=correct]{border-color:#36845d}
+.ki-sort-card[data-ki-sort-result=correct] .ki-sort-card-result{color:#236044}
+.ki-sort-card[data-ki-sort-result=incorrect]{border-color:#b57933}
+.ki-sort-card[data-ki-sort-result=incorrect] .ki-sort-card-result{color:#955a13}
+.ki-sort-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:18px 0 4px}
+.ki-sort-actions button{min-height:44px;padding:8px 15px;border:1px solid var(--accent);border-radius:9px;font:700 13px/1.4 system-ui;cursor:pointer}
+.ki-sort-actions button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ki-sort-check{background:var(--accent);color:white}.ki-sort-check:disabled{opacity:.48;cursor:not-allowed}
+.ki-sort-reset{background:white;color:var(--accent)}
+.ki-sort-status{flex-basis:100%;font-size:13px;color:var(--muted);line-height:1.5}
+.ki-sort-task details.ki-sort-help{margin-top:12px;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+.ki-sort-help>summary{min-height:44px;padding:12px 0;color:var(--accent);font-size:13px}
+.ki-sort-help>p{font-size:14px;padding:0 0 12px;margin:0}
+.ki-sort-reflection{max-width:700px}
+.ki-sort-legacy{margin:22px 0;border:1px solid var(--line);border-radius:12px;background:white}
+.ki-sort-legacy>summary{padding:13px 16px;font-size:14px}
+.ki-sort-legacy-fields{padding:16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ki-sort-legacy>.small{padding:0 16px 12px;margin:0}
+@media(max-width:720px){.ki-sort-task{padding:14px 12px;margin:15px 0}.ki-sort-bins{grid-template-columns:1fr}.ki-sort-legacy-fields{grid-template-columns:1fr}.ki-sort-card[draggable=true]{cursor:auto}}
