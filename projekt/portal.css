@@ -202,3 +202,21 @@ input[type=text]{border:1px solid #aebeb5;background:#fff;border-radius:8px;padd
 .ki-notebook-status{font-size:12px!important;color:var(--muted);margin:4px 0 10px!important}
 .ki-notebook-iframe{display:block;width:100%;height:min(78vh,850px);min-height:520px;border:1px solid var(--line);border-radius:8px;background:#fff}
 @media(max-width:640px){.ki-notebook-block{padding:13px}.ki-notebook-iframe{min-height:430px}}
+
+/* Shared notebook fullscreen icon: match the teacher editor's 35px corner button.
+   Both course levels import this stylesheet. */
+.lab-head .lab-fullscreen-toggle{
+  display:grid;place-items:center;flex:0 0 35px;
+  width:35px;height:35px;min-width:35px;padding:0;
+  background:rgba(255,255,255,.97);color:#28414b;
+  border:1px solid #d8e1e1;border-radius:8px;
+  box-shadow:0 1px 4px #182d331e;cursor:pointer;
+}
+.lab-head .lab-fullscreen-toggle:hover{
+  background:var(--soft);border-color:var(--accent)
+}
+.lab-head .lab-fullscreen-toggle[aria-pressed="true"]{
+  border-color:var(--accent);background:var(--soft)
+}
+.lab-head .lab-fullscreen-toggle svg{display:block;width:18px;height:18px}
+.lab-head .lab-fullscreen-toggle:focus-visible{outline:3px solid #ba552e;outline-offset:3px}
