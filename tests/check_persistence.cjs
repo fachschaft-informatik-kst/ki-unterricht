@@ -29,12 +29,21 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await p.goto(`http://127.0.0.1:${port}/projekt/`);
   return {context,p};
  };
+ const closeNotebook=async p=>{
+  const dialog=p.locator('#project-lab');
+  if(await dialog.evaluate(el=>el.open)){
+   await dialog.locator('.lab-close-toggle').click();
+   await dialog.waitFor({state:'hidden'});
+  }
+ };
  const importZip=async(p,file)=>{
+  await closeNotebook(p);
   await p.locator('a[href="#sicherung"]').first().click();
   await p.locator('#restore-package').setInputFiles(file);
   await p.waitForFunction(()=>document.querySelector('#download-status').textContent.startsWith('Projektstand wiederhergestellt'));
  };
  const download=async(p,name)=>{
+  await closeNotebook(p);
   await p.locator('a[href="#sicherung"]').first().click();
   const event=p.waitForEvent('download',{timeout:120000});
   await p.locator('#download-backup').click();
