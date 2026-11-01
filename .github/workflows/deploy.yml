@@ -250,10 +250,16 @@ jobs:
           test -f dist/projekt/admin/admin.js
           test -f dist/projekt/admin/plan-editor.js
           test -f dist/projekt/admin/glossary-model.js
-      - name: Browser-check basic course
-        if: steps.scope.outputs.runtime_changed == 'true'
+      # Course widgets and their fullscreen controls can change with CSS/JS
+      # alone. Always exercise the lightweight course browser test on site
+      # changes, even when the expensive Python runtime is unchanged.
+      - name: Browser-check course UI and notebook fullscreen
+        if: steps.scope.outputs.site_changed == 'true'
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
+      - name: Browser-check Fotostudio storage
+        if: steps.scope.outputs.runtime_changed == 'true'
+        run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
       # The embedded course test alone cannot detect widget-manager startup
       # races in the standalone JupyterLite app. Check a clean first launch.
