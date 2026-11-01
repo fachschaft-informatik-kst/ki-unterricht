@@ -359,9 +359,16 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
           scriptCount:document.querySelectorAll('.ki-notebook-block').length
         })))+' '+e.message);
       });
+      // A deliberate pointer hover prepares one JupyterLite browsing context.
+      // The click must use this SAME frame, even before kernel readiness.
+      await launch.hover();
+      const frame=notebookPageInline.locator(url.includes('/projekt/')?'#project-frame':'#basis-lab-frame');
+      await notebookPageInline.waitForFunction(selector=>!!document.querySelector(selector)?.getAttribute('src'),
+        url.includes('/projekt/')?'#project-frame':'#basis-lab-frame',{timeout:12000});
+      const warmedSrc=await frame.getAttribute('src');
       await launch.click();
       assert.equal(await launch.getAttribute('aria-expanded'),'true');
-      const frame=notebookPageInline.locator(url.includes('/projekt/')?'#project-frame':'#basis-lab-frame');
+      assert.equal(await frame.getAttribute('src'),warmedSrc,'Notebook click must reuse its intent-warmed iframe');
       await frame.waitFor({state:'attached'});
       assert.equal(new URL(await frame.getAttribute('src'),url).searchParams.get('path'),'portal/'+expected.split('/').pop());
       assert.equal(await card.locator('.lab-panel').count(),0,'The modal must not move into lesson cards and restart the iframe');

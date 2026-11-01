@@ -18,6 +18,14 @@
     link.href = url;
     document.head.append(link);
   };
+  // Intent warming starts at most one managed course iframe, not a second
+  // throwaway kernel. Avoid surprising costs on metered or low-RAM devices.
+  const warmManaged = name => {
+    if (navigator.connection?.saveData || document.visibilityState !== "visible" ||
+        (navigator.deviceMemory && navigator.deviceMemory < 4) ||
+        /^(slow-2g|2g)$/.test(navigator.connection?.effectiveType || "")) return;
+    window.dispatchEvent(new CustomEvent("ki-notebook-warmup", {detail:{name}}));
+  };
   const warmShell = () => prefetch(labUrl.href);
   if ("requestIdleCallback" in window) requestIdleCallback(warmShell, {timeout:5000});
   else window.addEventListener("load", () => setTimeout(warmShell, 1000), {once:true});
@@ -100,8 +108,14 @@
       embed.searchParams.set("reset", "");
       prefetch(embed.href);
     };
-    open.addEventListener("pointerenter", warmNotebook, {once:true});
-    open.addEventListener("focus", warmNotebook, {once:true});
+    if (managed) {
+      const warm = () => warmManaged(name);
+      open.addEventListener("pointerenter", warm, {once:true});
+      open.addEventListener("focus", warm, {once:true});
+    } else {
+      open.addEventListener("pointerenter", warmNotebook, {once:true});
+      open.addEventListener("focus", warmNotebook, {once:true});
+    }
 
     const external = card.querySelector(".ki-notebook-direct") || document.createElement("a");
     external.className = "ki-notebook-direct";
@@ -186,4 +200,26 @@
     });
     card.append(region);
   }
+
+  // Warm only after a reader deliberately visits a chapter containing exactly
+  // one managed notebook. Home-page visits and multi-notebook chapters remain
+  // cold until the user hovers or focuses a specific launcher.
+  let chapterTimer;
+  const warmChapter = () => {
+    clearTimeout(chapterTimer);
+    const hash = location.hash;
+    if (!coursePage || hash.length < 2) return;
+    let section;
+    try { section = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { return; }
+    const cards = [...(section?.querySelectorAll(".ki-notebook-block[data-notebook]") || [])]
+      .filter(card => card.querySelector(".ki-notebook-launch") &&
+        (basic ? basicNotebooks : advancedNotebooks).has(card.dataset.notebook.split("/").pop()));
+    if (cards.length !== 1) return;
+    const name = cards[0].dataset.notebook.split("/").pop();
+    chapterTimer = setTimeout(() => {
+      if (location.hash === hash) warmManaged(name);
+    }, 1600);
+  };
+  window.addEventListener("hashchange", warmChapter);
+  warmChapter();
 })();

@@ -47,6 +47,14 @@ bindLabFullscreen(panel.querySelector('#basis-lab-fullscreen'), panel);
 const overlay=bindNotebookDialog(panel);
 loaderRetry.addEventListener('click',()=>{if(current)void openNotebook(current,owner,true);});
 let current=null,owner=null,ready=false,revision=0,restoring=false,changed=false;
+function startNotebookFrame(name,kind){
+ frame.dataset.startKind=kind;frame.dataset.startMs=String(performance.now());
+ notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Python wird vorbereitet …');
+ frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');
+}
+function refreshNotebookFrame(){
+ requestAnimationFrame(()=>{try{frame.contentWindow?.dispatchEvent(new Event('resize'));}catch{}});
+}
 let saved={},legacyNotebooks={},notebookUploads={},photoJSON=null;try{saved=JSON.parse(localStorage.getItem(NBKEY)||'{}')||{};}catch{}
 const pending=new Map();
 const storeReady=new Promise(resolve=>{
@@ -80,6 +88,20 @@ function mount(){
  const active=document.getElementById(hash)?.closest('main > section')?.id||hash;
  panel.hidden=!overlay.isOpen||!current||(active!==owner&&hash!=='basis-sicherung');
 }
+window.addEventListener('ki-notebook-warmup',event=>{
+ const name=event.detail?.name;
+ if(!notebookNames.includes(name)||current||overlay.isOpen)return;
+ void (async()=>{
+  await loaded;
+  if(current||overlay.isOpen||document.visibilityState!=='visible')return;
+  // Never replace an outdated snapshot until the learner deliberately opens it.
+  if(saved[name]&&!matchesCurrentLesson(name,saved[name]))return;
+  if(!panel.isConnected)document.getElementById('basis-sicherung').before(panel);
+  current=name;owner=null;ready=false;changed=false;
+  status.textContent='Python wird im Hintergrund vorbereitet …';
+  startNotebookFrame(name,'warmup');
+ })().catch(error=>console.warn('Notebook-Vorbereitung:',error));
+});
 async function openNotebook(name,view,force=false,host=null){
  // A native dialog must be attached before showModal(); keep it there forever.
  if(!panel.isConnected)document.getElementById('basis-sicherung').before(panel);
@@ -94,12 +116,15 @@ async function openNotebook(name,view,force=false,host=null){
  // destroys its browsing context (and Pyodide), even if its src is unchanged.
  // The chapter launch button remains the dialog's focus-return target.
  owner=view||owner;heading.textContent=notebookTitles[name]||'Experiment';
- if(current===name&&ready&&!force){overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);mount();return;}
+ if(current===name&&!force&&frame.getAttribute('src')&&loader.dataset.state!=='error'){
+  // Reuse the active/warming iframe even when Python is still starting.
+  overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);
+  mount();refreshNotebookFrame();
+  return;
+ }
  current=name;ready=false;changed=false;overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);mount();
  status.textContent='Notebook wird geladen …';
- notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Notebook wird gestartet. Python wird vorbereitet …');
- // Open the actual notebook, not JupyterLite's file browser (same as the fourth year).
- frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');
+ startNotebookFrame(name,'open');refreshNotebookFrame();
 }
 document.querySelectorAll('a[href*="../lab/index.html?path="]').forEach(a=>{const url=new URL(a.href);const name=url.searchParams.get('path')?.split('/').pop();if(!notebookNames.includes(name))return;a.addEventListener('click',event=>{event.preventDefault();openNotebook(name,a.closest('main > section')?.id,false,a.closest('.ki-notebook-block')).catch(e=>status.textContent=e.message);});});
 window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1'||!current)return;const d=event.data;if(d.path!=='portal/'+current)return;
@@ -111,6 +136,9 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
   await loaded;
   const restored=saved[current] ? await request('restore',{notebook:validate(saved[current]),keepKernel:true}) : null;
   ready=true;await snapshot();
+  const milliseconds=Math.round(performance.now()-Number(frame.dataset.startMs||performance.now()));
+  (window.KINotebookTimings ||= []).push({name:current,kind:frame.dataset.startKind||'open',milliseconds});
+  frame.dataset.loadMs=String(milliseconds);
   status.textContent=restored?.widgets?.activated
     ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
     : restored ? 'Gesicherter Stand geladen · geänderte Startzellen bitte manuell ausführen.'

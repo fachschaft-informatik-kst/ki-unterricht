@@ -131,6 +131,20 @@ $('attachments').addEventListener('change',async e=>{
 const names=Object.fromEntries(experiments.map(e=>[e.source.split('/').pop(),e.title]));
 const frame=$('project-frame'),lab=$('project-lab'),projectName=experiments.find(e=>e.project).source.split('/').pop();
 let activeName='',activeOwner='',switching=false,initializingFrame=false;
+function startNotebookFrame(name,saved,kind){
+ frame.dataset.ready='no';delete frame.dataset.restored;
+ frame.dataset.startKind=kind;frame.dataset.startMs=String(performance.now());
+ notebookLoading('loading',saved?'Gesicherten Notebook-Stand laden …':'Python und interaktive Übungen werden vorbereitet …');
+ frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
+}
+function trackNotebookReady(name){
+ const milliseconds=Math.round(performance.now()-Number(frame.dataset.startMs||performance.now()));
+ (window.KINotebookTimings ||= []).push({name,kind:frame.dataset.startKind||'open',milliseconds});
+ frame.dataset.loadMs=String(milliseconds);
+}
+function refreshNotebookFrame(){
+ requestAnimationFrame(()=>{try{frame.contentWindow?.dispatchEvent(new Event('resize'));}catch{}});
+}
 const loader=$('project-lab-loading'),loaderText=$('project-lab-loading-text'),loaderRetry=$('project-lab-retry');
 let loaderTimeout;
 function notebookLoading(phase,message='') {
@@ -152,6 +166,18 @@ function notebookLoading(phase,message='') {
  }
 }
 loaderRetry.addEventListener('click',()=>{if(activeName)void showNotebook(activeName,activeOwner,false);});
+window.addEventListener('ki-notebook-warmup',event=>{
+ const name=event.detail?.name;
+ if(!names[name]||activeName||switching||transferring)return;
+ void (async()=>{
+  await initialization;
+  if(activeName||switching||transferring||document.visibilityState!=='visible')return;
+  activeName=name;activeOwner='';initializingFrame=false;notebookRevision=0;notebookDirty=false;
+  const saved=name===projectName?notebook:others[name];
+  $('project-lab-status').textContent='Python wird im Hintergrund vorbereitet …';
+  startNotebookFrame(name,saved,'warmup');
+ })().catch(error=>console.warn('Notebook-Vorbereitung:',error));
+});
 // Never move an already loaded iframe. Saved documents are the source of truth;
 // every new frame has a fresh Python kernel, including after a page reload.
 document.querySelector('main > .footer').before(lab);$('lesson-lab').remove();
@@ -172,18 +198,16 @@ async function showNotebook(name,owner,scroll=true,trigger=null){
   // Keep the dialog attached to the page rather than reparenting its iframe
   // into each lesson card: a DOM move can restart the entire Python runtime.
   if(name!==activeName||frame.dataset.ready==='error'){
-   if(activeName&&frame.dataset.ready!=='error')await snapshotCurrent();
-   activeName=name;initializingFrame=false;notebookRevision=0;notebookDirty=false;frame.dataset.ready='no';delete frame.dataset.restored;
-   // Saved documents are authoritative for all experiments, including the neuron lab.
-   // Never discard student edits/outputs simply to show the latest template. Saved
-   // outputs remain readable; rerunning a cell recreates its interactive widgets.
+   if(activeName&&frame.dataset.ready==='yes')await snapshotCurrent();
+   activeName=name;initializingFrame=false;notebookRevision=0;notebookDirty=false;
+   // Switching notebooks requires a fresh kernel. Reopening the SAME one
+   // preserves the warmed iframe, including clicks during its startup.
    const saved=name===projectName?notebook:others[name];
    $('project-lab-status').textContent=saved?'Gesichertes Notebook wird geöffnet …':'Python startet …';
-   notebookLoading('loading',saved?'Gesicherten Notebook-Stand laden …':'Notebook wird gestartet. Python und die interaktiven Übungen werden vorbereitet …');
-   frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
+   startNotebookFrame(name,saved,'open');
   }
   activeOwner=owner;$('project-lab-title').textContent=names[name];
-  overlay.open(trigger || document.activeElement);visibility();
+  overlay.open(trigger || document.activeElement);visibility();refreshNotebookFrame();
   lab.querySelector('details').hidden=name!==projectName;
   lab.querySelector('a[href="#journal"]').hidden=name!==projectName;
   // Dialog focus replaces scrolling a large inline notebook into the lesson.
@@ -218,20 +242,24 @@ window.addEventListener('message',async event=>{
   initializingFrame=true;
   try{
    await initialization;
+   if(activeName!==name)return; // Another notebook superseded this startup.
    const saved=name===projectName?notebook:others[name];
    notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Start abgeschlossen. Ergebnisse werden gesichert …');
    let restored=null;
    if(saved){restored=await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
    else await captureSnapshot(name,await request(frame,'snapshot'));
+   if(activeName!==name)return; // An older warmup was superseded.
    frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';
+   trackNotebookReady(name);
    notebookLoading('ready');
    $('project-lab-status').textContent=saved
      ? restored?.widgets?.activated
        ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
        : 'Gesicherter Stand geladen · veränderte Startzellen bitte manuell ausführen.'
      : 'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
-  }catch(error){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
-  finally{initializingFrame=false;}
+  }catch(error){
+   if(activeName===name){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
+  }finally{if(activeName===name)initializingFrame=false;}
  }
  if(data.type==='dirty'){notebookRevision=Math.max(notebookRevision,data.revision||0);notebookDirty=true;status('Notebook wird gesichert …');}
  if(data.type==='save-error'){notebookDirty=true;status('Notebook noch nicht gesichert: '+data.error,true);}
