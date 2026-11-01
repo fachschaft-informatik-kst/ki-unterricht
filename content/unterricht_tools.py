@@ -986,9 +986,10 @@ def ziffern_vorschau():
 
 
 def xor_lernen_regler():
+    """Regler sofort anzeigen; teures Scikit-learn-Training nur auf Knopfdruck."""
     def lauf(neuronen, startwert):
         xor_lernen(neuronen=neuronen, startwert=startwert)
-    return widgets.interact(lauf,
+    return widgets.interact_manual.options(manual_name='Netz trainieren ▶')(lauf,
         neuronen=widgets.IntSlider(value=2, min=1, max=4, description='Neuronen'),
         startwert=widgets.IntSlider(value=1, min=0, max=5, description='Startwert'))
 
