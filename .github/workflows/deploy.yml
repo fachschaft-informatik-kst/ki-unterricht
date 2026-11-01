@@ -255,6 +255,13 @@ jobs:
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
+      # The embedded course test alone cannot detect widget-manager startup
+      # races in the standalone JupyterLite app. Check a clean first launch.
+      - name: Check first JupyterLite widget render without kernel restart
+        if: steps.scope.outputs.runtime_changed == 'true'
+        timeout-minutes: 4
+        run: |
+          NODE_PATH=/tmp/ki-browser/node_modules LITE_SITE=dist KI_WIDGET_COLD_START=1 node tests/check_autostart_browser.cjs
       - name: Check deployed notebook runtime in Chromium
         if: steps.scope.outputs.runtime_changed == 'true'
         timeout-minutes: 12
