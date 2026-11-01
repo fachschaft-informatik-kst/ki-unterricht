@@ -24,10 +24,14 @@ Lassen Sie das Neuron einzelne Beispiele bearbeiten. Beobachten Sie **eine Korre
       </article>
     </div>
     <div class="ki-notebook-block" data-notebook="content/perzeptron_und_neuronale_netze.ipynb" data-title="Ein Neuron entscheidet">
-  <h3>Jupyter-Notebook · Ein Neuron entscheidet</h3>
-  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
-  <button type="button" class="ki-notebook-launch" data-lab="perzeptron_und_neuronale_netze.ipynb">Notebook hier öffnen</button>
-</div>
+      <!-- MD:START -->
+### Jupyter-Notebook · Ein Neuron entscheidet
+<!-- MD:END -->
+      <!-- MD:START -->
+Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+<!-- MD:END -->
+      <button type="button" class="ki-notebook-launch" data-lab="perzeptron_und_neuronale_netze.ipynb">Notebook hier öffnen</button>
+    </div>
     <div class="protokoll-block">
       <!-- MD:START -->
 ### Mein Protokoll
