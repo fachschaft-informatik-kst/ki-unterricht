@@ -58,7 +58,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
   <button type="button" class="ki-notebook-launch" id="start-project">Notebook hier öffnen</button>
 </div>
 <p class="small">Zuerst mit Übungsdaten arbeiten. Danach eigene Fotostudio-JSON auswählen und die folgenden Zellen schrittweise ausführen. Den Abschlusstest erst nach Ihrer begründeten Auswahl freigeben.</p>
-<div class="lab-panel" hidden="" id="project-lab">
+<dialog class="lab-panel" hidden id="project-lab">
   <div class="lab-head">
     <b id="project-lab-title">Unser Versuch</b><a class="btn compact" href="#journal">Zur Reflexion ↑</a><span id="project-lab-status" role="status">Startet …</span><button type="button" class="lab-fullscreen-toggle" data-fullscreen="project-frame" aria-label="Notebook vergrössern" aria-pressed="false" title="Notebook vergrössern"></button>
   </div>
@@ -80,7 +80,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
       <button class="btn compact" id="project-lab-retry" type="button" hidden>Erneut versuchen</button>
     </div>
   </div>
-</div>
+</dialog>
 <details hidden="" id="studio-panel" open="">
   <summary>Fotostudio · eigene Bilder vorbereiten</summary>
   <p class="small">Die exportierte JSON im Versuch hochladen und unten ins Abgabepaket aufnehmen.</p>
