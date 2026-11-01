@@ -60,7 +60,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
 <p class="small">Zuerst mit Übungsdaten arbeiten. Danach eigene Fotostudio-JSON auswählen und die folgenden Zellen schrittweise ausführen. Den Abschlusstest erst nach Ihrer begründeten Auswahl freigeben.</p>
 <div class="lab-panel" hidden="" id="project-lab">
   <div class="lab-head">
-    <b id="project-lab-title">Unser Versuch</b><a class="btn compact" href="#journal">Zur Reflexion ↑</a><span id="project-lab-status" role="status">Startet …</span><button class="btn compact" data-fullscreen="project-frame">Vergrössern</button>
+    <b id="project-lab-title">Unser Versuch</b><a class="btn compact" href="#journal">Zur Reflexion ↑</a><span id="project-lab-status" role="status">Startet …</span><button type="button" class="lab-fullscreen-toggle" data-fullscreen="project-frame" aria-label="Notebook vergrössern" aria-pressed="false" title="Notebook vergrössern"></button>
   </div>
   <details>
     <summary>Die vier Schritte im Versuch</summary>
