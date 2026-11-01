@@ -222,11 +222,16 @@ window.addEventListener('message',async event=>{
    await initialization;
    const saved=name===projectName?notebook:others[name];
    notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Start abgeschlossen. Ergebnisse werden gesichert …');
-   if(saved){await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
+   let restored=null;
+   if(saved){restored=await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
    else await captureSnapshot(name,await request(frame,'snapshot'));
    frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';
    notebookLoading('ready');
-   $('project-lab-status').textContent=saved?'Gesicherte Eingaben und Ergebnisse geladen. Vorbereitung und gewünschte Zellen erneut ausführen.':'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
+   $('project-lab-status').textContent=saved
+     ? restored?.widgets?.activated
+       ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
+       : 'Gesicherter Stand geladen · veränderte Startzellen bitte manuell ausführen.'
+     : 'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
   }catch(error){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
   finally{initializingFrame=false;}
  }
