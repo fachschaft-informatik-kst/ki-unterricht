@@ -6,7 +6,7 @@
   const safe = /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/;
   const root = new URL("../lab/index.html", location.href);
   for (const card of document.querySelectorAll(".ki-notebook-block[data-notebook]")) {
-    const path=card.dataset.notebook;
+    // Rebuild the controls consistently even when lesson markup contains legacy links.\n    card.querySelectorAll(".ki-notebook-actions, .ki-notebook-runtime").forEach(node=>node.remove());\n    const path=card.dataset.notebook;
     if(!safe.test(path))continue;
     const name=path.split("/").pop();
     const url=new URL(root.href);
@@ -19,10 +19,10 @@
     const open=document.createElement("button");open.type="button";
     open.className="ki-notebook-launch";open.textContent="Notebook hier öffnen";
     open.setAttribute("aria-expanded","false");
-    const external=card.querySelector(".ki-notebook-direct")||document.createElement("a");
+    const external=card.querySelector(".ki-notebook-direct")||document.createElement("a");\n    external.className="ki-notebook-direct";
     external.href=url.href;external.target="_blank";external.rel="noopener noreferrer";
     external.textContent="In JupyterLite öffnen ↗";
-    actions.append(open,external);card.append(actions);
+    // Keep only one launch link and place all actions in the same toolbar.\n    actions.append(open,external);card.append(actions);
     const region=document.createElement("div");region.className="ki-notebook-runtime";
     region.hidden=true;
     const status=document.createElement("p");status.className="ki-notebook-status";
