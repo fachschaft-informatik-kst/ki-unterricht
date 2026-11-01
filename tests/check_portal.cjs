@@ -104,6 +104,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(introLayout.align,'justify','Milestone intro uses justified text');
     assert.equal(introLayout.hyphens,'auto','Milestone intro allows hyphenation');
     assert(Math.abs(introLayout.width-introLayout.containerWidth)<2,'Milestone intro fills its chapter box');
+    const projectIntroStyle=await p.locator('#projekt-1 .kapitel-body > .section-intro').evaluate(el=>({maxWidth:getComputedStyle(el).maxWidth,textAlign:getComputedStyle(el).textAlign}));
+    assert.deepEqual(projectIntroStyle,{maxWidth:'none',textAlign:'justify'},'Project chapter introductions also use the full box width');
 
 
     // All nine history titles open sourced image panels without losing lesson position.
