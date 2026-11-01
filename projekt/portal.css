@@ -190,18 +190,68 @@ input[type=text]{border:1px solid #aebeb5;background:#fff;border-radius:8px;padd
 @keyframes ki-notebook-loading{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.lab-loading-spinner{animation:none;border-top-color:var(--accent);border-right-color:var(--accent)}}
 
-/* Notebook as a native lesson block, usable in every chapter. */
-.ki-notebook-block{margin:20px 0;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;background:var(--white,#fff)}
-.ki-notebook-block h3{margin:0 0 8px;color:var(--accent);font-size:19px}
-.ki-notebook-block p{margin:0 0 12px;font-size:14px;color:var(--muted)}
-.ki-notebook-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0 0}
-.ki-notebook-actions .ki-notebook-launch{display:inline-flex;align-items:center;justify-content:center;border-radius:8px;background:var(--accent);color:#fff;border:1px solid var(--accent);font:650 13px/1.4 system-ui;padding:10px 15px;cursor:pointer;text-decoration:none}
-.ki-notebook-actions a{font-size:13px;font-weight:650}
-.ki-notebook-runtime{margin-top:15px;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--paper);min-width:0}
+/* Compact, shared notebook launcher.  The actual editor stays full-size
+   after the learner chooses to open it; the lesson page stays uncluttered. */
+.ki-notebook-block{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;column-gap:18px;row-gap:4px;
+  margin:14px 0;padding:13px 16px;
+  border:1px solid var(--line);border-radius:10px;
+  background:var(--white,#fff);min-width:0
+}
+.ki-notebook-block > h3{
+  grid-column:1;margin:0;
+  color:var(--ink);font-size:15px;line-height:1.4;letter-spacing:0
+}
+.ki-notebook-block > p{
+  grid-column:1;margin:0;
+  color:var(--muted);font-size:12px;line-height:1.45
+}
+.ki-notebook-actions{
+  grid-column:2;grid-row:1/span 2;
+  display:flex;align-items:center;gap:10px;
+  margin:0;flex-wrap:wrap;justify-content:flex-end
+}
+.ki-notebook-actions .ki-notebook-launch{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:36px;padding:7px 12px;
+  border:1px solid var(--accent);border-radius:7px;
+  background:var(--accent);color:#fff;
+  font:650 12px/1.4 system-ui;cursor:pointer;text-decoration:none;
+  white-space:nowrap
+}
+.ki-notebook-actions .ki-notebook-launch:hover{filter:brightness(.94)}
+.ki-notebook-actions .ki-notebook-direct{
+  font:550 12px/1.5 system-ui;color:var(--muted);text-decoration:underline;
+  text-underline-offset:3px;white-space:nowrap
+}
+.ki-notebook-block > .lab-panel,
+.ki-notebook-block > .ki-notebook-runtime{
+  grid-column:1/-1;margin:9px 0 0;min-width:0
+}
+.ki-notebook-runtime{
+  padding:0;border:1px solid var(--line);border-radius:9px;background:#fff
+}
 .ki-notebook-runtime[hidden]{display:none!important}
-.ki-notebook-status{font-size:12px!important;color:var(--muted);margin:4px 0 10px!important}
-.ki-notebook-iframe{display:block;width:100%;height:min(78vh,850px);min-height:520px;border:1px solid var(--line);border-radius:8px;background:#fff}
-@media(max-width:640px){.ki-notebook-block{padding:13px}.ki-notebook-iframe{min-height:430px}}
+.ki-notebook-status{font-size:12px!important;color:var(--muted);margin:8px 12px!important}
+.ki-notebook-iframe{
+  display:block;width:100%;height:min(78vh,850px);min-height:520px;
+  border:0;border-radius:8px;background:#fff
+}
+@media(max-width:750px){
+  .ki-notebook-block{grid-template-columns:minmax(0,1fr);padding:13px;row-gap:6px}
+  .ki-notebook-actions{grid-column:1;grid-row:auto;justify-content:flex-start;margin-top:5px}
+  .ki-notebook-block > .lab-panel,.ki-notebook-block > .ki-notebook-runtime{grid-column:1}
+}
+@media(max-width:640px){.ki-notebook-iframe{min-height:430px}}
+
+/* A quiet notebook header, keeping the status and fullscreen control visible. */
+.lab-panel{margin:14px 0;border-radius:10px}
+.lab-head{gap:9px;padding:9px 12px}
+.lab-head > b{font-size:13px}
+.lab-head > span{font-size:11px;line-height:1.3}
+.lab-panel > p.small{padding:8px 12px;font-size:12px}
+.lab-panel > .lab-frame-shell{min-width:0}
 
 /* Shared notebook fullscreen icon: match the teacher editor's 35px corner button.
    Both course levels import this stylesheet. */
