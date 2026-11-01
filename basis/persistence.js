@@ -1,5 +1,5 @@
 import {makeZip,readZip} from '../projekt/archive.js';
-import {bindLabFullscreen} from '../projekt/lab-fullscreen.js';
+import {bindLabFullscreen,bindNotebookDialog} from '../projekt/lab-fullscreen.js';
 
 // The basic course has its own backup schema and does not alter the fourth-year portal.
 const KEY='kst-ki-basis-v1', NBKEY='kst-ki-basis-notebooks-v1', SCHEMA='ki-basis-zip-v1';
@@ -12,7 +12,7 @@ const notebookTitles={
  'basis_bildmodell.ipynb':'Ziffern und Buchstaben',
  'basis_fotoprojekt.ipynb':'Eigene Fotos erkennen'
 };
-const panel=document.createElement('div');panel.id='basis-notebook-panel';panel.className='lab-panel';panel.hidden=true;
+const panel=document.createElement('dialog');panel.id='basis-notebook-panel';panel.className='lab-panel';panel.hidden=true;
 panel.innerHTML=`<div class="lab-head">
   <b id="basis-lab-title">Experiment</b>
   <span id="basis-lab-status" role="status">Noch kein Notebook geöffnet.</span>
@@ -44,6 +44,7 @@ function notebookLoading(state,message=''){
  }
 }
 bindLabFullscreen(panel.querySelector('#basis-lab-fullscreen'), panel);
+const overlay=bindNotebookDialog(panel);
 loaderRetry.addEventListener('click',()=>{if(current)void openNotebook(current,owner,true);});
 let current=null,owner=null,ready=false,revision=0,restoring=false,changed=false;
 let saved={},legacyNotebooks={},notebookUploads={},photoJSON=null;try{saved=JSON.parse(localStorage.getItem(NBKEY)||'{}')||{};}catch{}
@@ -77,7 +78,7 @@ function mount(){
  if(!panel.isConnected)document.getElementById('basis-sicherung').before(panel);
  const hash=decodeURIComponent((location.hash||'').slice(1));
  const active=document.getElementById(hash)?.closest('main > section')?.id||hash;
- panel.hidden=!current||(active!==owner&&hash!=='basis-sicherung');
+ panel.hidden=!overlay.isOpen||!current||(active!==owner&&hash!=='basis-sicherung');
 }
 async function openNotebook(name,view,force=false,host=null){
  await loaded;
@@ -95,13 +96,13 @@ async function openNotebook(name,view,force=false,host=null){
   if(current===name)force=true;
  }
  owner=view||owner;heading.textContent=notebookTitles[name]||'Experiment';
- if(current===name&&ready&&!force){mount();panel.scrollIntoView({behavior:'smooth'});return;}
- current=name;ready=false;changed=false;mount();
+ if(current===name&&ready&&!force){overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);mount();return;}
+ current=name;ready=false;changed=false;overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);mount();
  status.textContent='Notebook wird geladen …';
  notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Notebook wird gestartet. Python wird vorbereitet …');
  // Open the actual notebook, not JupyterLite's file browser (same as the fourth year).
  frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');
- panel.scrollIntoView({behavior:'smooth'});
+ // The dialog overlays the course; moving the iframe during opening is avoided.
 }
 document.querySelectorAll('a[href*="../lab/index.html?path="]').forEach(a=>{const url=new URL(a.href);const name=url.searchParams.get('path')?.split('/').pop();if(!notebookNames.includes(name))return;a.addEventListener('click',event=>{event.preventDefault();openNotebook(name,a.closest('main > section')?.id,false,a.closest('.ki-notebook-block')).catch(e=>status.textContent=e.message);});});
 window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1'||!current)return;const d=event.data;if(d.path!=='portal/'+current)return;
@@ -180,5 +181,5 @@ for(const f of raw.uploads||[]){
  (nextUploads[f.notebook]??=[]).push({name:f.name,type:f.type||'application/octet-stream',content:btoa(binary)});
 }
 if(current&&ready)await snapshot();
-saved=next;legacyNotebooks=nextLegacy;notebookUploads=nextUploads;if(files.has('fotodaten/fotostudio.json')){const content=await files.get('fotodaten/fotostudio.json').text();if(JSON.parse(content).schema!=='fotostudio-v1')throw Error('Ungültige Fotostudio-JSON');photoJSON={name:'fotostudio.json',content};}else photoJSON=null;await persist();renderRecoveredFiles();for(const f of document.querySelectorAll('[data-basis-answer]')){f.value=typeof raw.answers[f.dataset.basisAnswer]==='string'?raw.answers[f.dataset.basisAnswer]:'';f.dispatchEvent(new Event('input',{bubbles:true}));}current=null;owner=null;ready=false;frame.removeAttribute('src');panel.hidden=true;status.textContent='ZIP geladen. Öffnet ein Notebook, um die gesicherten Zellen wiederherzustellen.';backupStatus.textContent='ZIP geladen: Textfelder und Notebook-Zellen wiederhergestellt. Notebook bei Bedarf neu öffnen und Codezellen ausführen.';if(photoJSON){const blob=new Blob([photoJSON.content],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fotostudio-wiederhergestellt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}document.getElementById('basis-save-status').textContent='Reflexionen aus ZIP wiederhergestellt.';}catch(e){backupStatus.textContent='Wiederherstellung fehlgeschlagen: '+e.message;alert('Wiederherstellung fehlgeschlagen: '+e.message);}finally{restore.value='';}});
+saved=next;legacyNotebooks=nextLegacy;notebookUploads=nextUploads;if(files.has('fotodaten/fotostudio.json')){const content=await files.get('fotodaten/fotostudio.json').text();if(JSON.parse(content).schema!=='fotostudio-v1')throw Error('Ungültige Fotostudio-JSON');photoJSON={name:'fotostudio.json',content};}else photoJSON=null;await persist();renderRecoveredFiles();for(const f of document.querySelectorAll('[data-basis-answer]')){f.value=typeof raw.answers[f.dataset.basisAnswer]==='string'?raw.answers[f.dataset.basisAnswer]:'';f.dispatchEvent(new Event('input',{bubbles:true}));}current=null;owner=null;ready=false;if(overlay.isOpen)await overlay.close();frame.removeAttribute('src');panel.hidden=true;status.textContent='ZIP geladen. Öffnet ein Notebook, um die gesicherten Zellen wiederherzustellen.';backupStatus.textContent='ZIP geladen: Textfelder und Notebook-Zellen wiederhergestellt. Notebook bei Bedarf neu öffnen und Codezellen ausführen.';if(photoJSON){const blob=new Blob([photoJSON.content],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fotostudio-wiederhergestellt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}document.getElementById('basis-save-status').textContent='Reflexionen aus ZIP wiederhergestellt.';}catch(e){backupStatus.textContent='Wiederherstellung fehlgeschlagen: '+e.message;alert('Wiederherstellung fehlgeschlagen: '+e.message);}finally{restore.value='';}});
 window.addEventListener('beforeunload',event=>{if(changed){event.preventDefault();event.returnValue='Notebook-Änderungen werden noch gespeichert.';}});
