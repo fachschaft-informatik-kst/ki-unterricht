@@ -81,6 +81,9 @@ export function bindNotebookDialog(panel) {
   const close = async () => {
     if (document.fullscreenElement === panel) await document.exitFullscreen();
     if (panel.open) panel.close();
+    // The native close event fires on a later task. Update the launcher
+    // immediately so its aria-expanded state never lags behind the dialog.
+    if (opener?.isConnected) opener.setAttribute('aria-expanded', 'false');
   };
   closeButton.addEventListener('click', () => { void close(); });
   panel.addEventListener('click', event => {
