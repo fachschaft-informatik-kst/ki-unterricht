@@ -8,7 +8,11 @@
 
 **Auftrag:** Beschreiben Sie für eine Eingabe den vollständigen Weg bis zur Ausgabe. Verändern Sie bei der Lernsimulation jeweils nur eine Einstellung und halten Sie Ihre Beobachtung im Protokoll fest.
 <!-- MD:END -->
-    <button class="btn primary" data-lab="mehrschichtige_netze.ipynb">Neuronale Netze starten ▶</button>
+    <div class="ki-notebook-block" data-notebook="content/mehrschichtige_netze.ipynb" data-title="Neuronale Netze">
+  <h3>Jupyter-Notebook · Neuronale Netze</h3>
+  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
+  <button type="button" class="ki-notebook-launch" data-lab="mehrschichtige_netze.ipynb">Notebook hier öffnen</button>
+</div>
     <div class="protokoll-block">
       <!-- MD:START -->
 ### Mein Protokoll: Lernen mit mehreren Neuronen
