@@ -1,7 +1,7 @@
 <span class="section-label">05 · Unser gemeinsames Projekt</span>
 <h1>Unser Projekt: Versuch und Journal</h1>
 <div class="subnav" aria-label="Projektbereiche">
-  <a class="btn" href="#projekt">Auftrag</a><a class="btn" href="#projekt-werkbank">Versuch &amp; Fotos</a><a class="btn" href="#projekt-reflexionen">Reflexionen</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a><a class="btn primary" href="#sicherung">Sichern</a>
+  <a class="btn" href="#projekt">Auftrag</a><a class="btn" href="#projekt-fotostudio">Fotostudio</a><a class="btn" href="#projekt-werkbank">Versuch</a><a class="btn" href="#projekt-reflexionen">Reflexionen</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a><a class="btn primary" href="#sicherung">Sichern</a>
 </div>
 <p class="small">Ein gemeinsamer Stand auf einem Gerät. Für Gerätewechsel Notizen und Projekt herunterladen und später unter «Notizen &amp; Projekt» wiederherstellen.</p>
 <div class="grid two">
@@ -12,10 +12,7 @@
   <!-- MD:START -->
 ## 1 · Fotos und Versuch
 <!-- MD:END -->
-  <p>Bereiten Sie Ihre Bilder im Fotostudio vor und führen Sie danach den A/B-Vergleich im Projekt-Notebook aus. Die Datenregeln aus dem <a href="#daten">Lernpfad</a> gelten auch hier. <strong>Wichtig:</strong> Modellwahl vor Testeinsicht begründen; nach dem Abschlusstest nichts mehr optimieren.</p>
-  <div class="actions">
-    <button class="btn" id="start-studio">Fotostudio öffnen</button>
-  </div>
+  <p>Die Bilder bereiten Sie vorher in <a href="#projekt-fotostudio">Schritt 2 im Fotostudio</a> auf. Hier führen Sie den A/B-Vergleich im Projekt-Notebook durch. <strong>Wichtig:</strong> Modellwahl vor Testeinsicht begründen; nach dem Abschlusstest nichts mehr optimieren.</p>
   <div class="ki-notebook-block" data-notebook="content/ki_projekt/ki_tandemprojekt.ipynb" data-title="Unser Versuch">
     <!-- MD:START -->
 ### Jupyter-Notebook · Unser Versuch
@@ -49,11 +46,6 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
       </div>
     </div>
   </dialog>
-  <details hidden="" id="studio-panel" open="">
-    <summary>Fotostudio · eigene Bilder vorbereiten</summary>
-    <p class="small">Die exportierte JSON im Versuch hochladen und unten ins Abgabepaket aufnehmen.</p>
-    <iframe class="studio-frame" id="studio-frame" title="Fotostudio – Bilder vorbereiten"></iframe>
-  </details>
 </div>
 <div id="projekt-reflexionen">
   <!-- MD:START -->
