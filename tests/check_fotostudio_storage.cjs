@@ -30,7 +30,7 @@ const path=require('node:path');
   await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('1 Bilder wiederhergestellt'));
   assert((await page.locator('#counts').innerText()).includes('T1 / Tasse: 1'));
   assert.equal(await page.locator('#count-total').innerText(),'1','Progress count reflects restored collection');
-  assert.equal(await page.locator('#studio-progress').inputValue(),'1','Progress bar reflects restored collection');
+  assert.equal(await page.locator('#studio-progress').getAttribute('value'),'1','Progress bar reflects restored collection');
 
   const downloadEvent=page.waitForEvent('download');
   await page.locator('#save').click();
