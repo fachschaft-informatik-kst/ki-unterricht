@@ -181,6 +181,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert(JSON.stringify(lesson.cells).includes('Gatter: OR'),'Previously exported OR choice must remain in the ZIP');
   // DL4 introduces XOR; its four neuron graphics and chosen state are saved
   // independently from the DL3 OR notebook and survive reopening.
+  await closeNotebook(q);
   await q.locator('.nav a[href="#netze"]').click();
   await q.locator('[data-lab="xor_einzelne_neuronen.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/xor_einzelne_neuronen.ipynb',null,{timeout:240000});
