@@ -24,7 +24,10 @@ export function setupEmbed(app, tracker, allowed) {
     dirty = true;
     send({type:'dirty'});
     clearTimeout(timer);
-    timer = setTimeout(autoSave,600);
+    // Ein Widget-Schieberegler erzeugt viele Comm-Nachrichten. Die komplette
+    // Widget-/Notebook-Sicherung ist teuer: erst nach einer kurzen Ruhephase
+    // sichern. Vor Notebookwechsel/ZIP-Export bleibt der explizite Snapshot.
+    timer = setTimeout(autoSave,1500);
   };
   const attach = async p => {
     if (p.context.path !== path) return;
