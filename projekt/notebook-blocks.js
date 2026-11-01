@@ -6,6 +6,21 @@
 (() => {
   const safe = /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/;
   const labUrl = new URL("../lab/index.html", location.href);
+  // Warm the JupyterLite app shell in the HTTP cache while the lesson is read.
+  // This does NOT start a second Python kernel or a hidden notebook session.
+  const prefetched = new Set();
+  const prefetch = url => {
+    if (navigator.connection?.saveData || document.visibilityState !== "visible" || prefetched.has(url)) return;
+    prefetched.add(url);
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.as = "document";
+    link.href = url;
+    document.head.append(link);
+  };
+  const warmShell = () => prefetch(labUrl.href);
+  if ("requestIdleCallback" in window) requestIdleCallback(warmShell, {timeout:5000});
+  else window.addEventListener("load", () => setTimeout(warmShell, 1000), {once:true});
   const basic = /\/basis\//.test(location.pathname);
   const coursePage = /\/(?:basis|projekt)\/(?:index\.html)?$/.test(location.pathname);
   // A material index also contains direct links to notebook downloads.
@@ -77,6 +92,16 @@
     open.classList.add("ki-notebook-launch");
     open.textContent = "Notebook öffnen";
     open.setAttribute("aria-expanded", "false");
+    // Hover/focus is a useful signal for a specific notebook; prefetch its
+    // document, but leave all Python workers off until the actual open action.
+    const warmNotebook = () => {
+      const embed = new URL(url);
+      embed.searchParams.set("ki-embed", "1");
+      embed.searchParams.set("reset", "");
+      prefetch(embed.href);
+    };
+    open.addEventListener("pointerenter", warmNotebook, {once:true});
+    open.addEventListener("focus", warmNotebook, {once:true});
 
     const external = card.querySelector(".ki-notebook-direct") || document.createElement("a");
     external.className = "ki-notebook-direct";
