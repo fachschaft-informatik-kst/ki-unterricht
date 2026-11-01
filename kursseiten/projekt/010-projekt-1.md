@@ -97,9 +97,9 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
         <a href="#abgabe">Zur Abgabecheckliste →</a>
       </div>
     </details>
-        <h3 class="project-lessons-heading">Doppellektionen 5–8 · Ziele und Leitfragen</h3>
+    <h3 class="project-lessons-heading">Doppellektionen 5–8 · Ziele und Leitfragen</h3>
     <p class="small muted">Die folgenden Doppellektionsziele helfen bei der Orientierung. In Doppellektion 5 lernen Sie die Datenaufteilung selbstständig; danach arbeiten die Tandems an unterschiedlichen Etappen. Öffnen Sie die Details bei Bedarf.</p>
-<!-- LESSONS:projekt -->
+    <!-- LESSONS:projekt -->
     <details class="lesson-plan" id="doppellektion-05" data-lesson="05">
       <summary><span class="phase-num">05</span><span>Doppellektion 5 · Ihr Projekt starten und die Arbeit planen</span><small>90 Min.</small></summary>
       <div class="detail-body">
@@ -138,12 +138,16 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
     </details>
     <!-- /LESSONS:projekt -->
     <div class="callout" id="sol-rahmen">
-      <h3>Selbstständig arbeiten, fair vergleichen</h3>
-      <p>In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo selbst fest. Die sechs Etappen sind fachlich geordnet, aber keine festen Lektionstermine.</p>
+      <!-- MD:START -->
+### Selbstständig arbeiten, fair vergleichen
+<!-- MD:END -->
+      <!-- MD:START -->
+In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo selbst fest. Die sechs Etappen sind fachlich geordnet, aber keine festen Lektionstermine.
+<!-- MD:END -->
       <p><strong>Verbindlich:</strong> Fünf unabhängige Datengruppen, fairer A/B-Vergleich, fünf Reflexionen und eine begründete Modellwahl <strong>vor</strong> dem Abschlusstest. Danach keine Optimierung. <strong>Abgabe vor Beginn der Doppellektion 8.</strong></p>
       <p>Halten Sie in Reflexion 1 Ihren Plan und in Reflexion 5 die Anpassungen fest. Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> sind Orientierung, keine zusätzliche Pflicht.</p>
     </div>
-<p class="small">8. Doppellektion, während der Einzelgespräche: <a href="#sicherung">Reproduktionscheck (Teil der unbenoteten Fremdauswertung) →</a> und <a href="#fremdtest">Fremdtest und Rückmeldung →</a></p>
+    <p class="small">8. Doppellektion, während der Einzelgespräche: <a href="#sicherung">Reproduktionscheck (Teil der unbenoteten Fremdauswertung) →</a> und <a href="#fremdtest">Fremdtest und Rückmeldung →</a></p>
     <details>
       <summary>Termine ansehen</summary>
       <div class="detail-body">
