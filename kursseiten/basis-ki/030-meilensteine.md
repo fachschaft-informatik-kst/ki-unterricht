@@ -3,12 +3,12 @@
     <h2 class="kapitel-titel">Meilensteine der KI</h2>
   </summary>
   <div class="kapitel-body">
-    <p class="section-intro"><strong>Wie wurde aus einer Idee die KI von heute?</strong> Die Entwicklung der künstlichen Intelligenz begann lange vor ChatGPT: Zuerst versuchten Forschende, Denken mit festen Regeln nachzubauen. Später lernten Programme zunehmend aus Beispielen. Dazwischen gab es Erfolge, Rückschläge und neue Anläufe. Die folgenden neun Meilensteine zeigen wichtige Wendepunkte – nicht die gesamte Geschichte. Die <strong>farbigen Marken neben den Meilenstein-Titeln</strong> helfen beim Vergleichen: <span class="marke regeln">Regeln von Menschen</span> bedeutet vorgegebene Regeln, <span class="marke daten">Lernen aus Daten</span> das Erkennen gelernter Muster. Die Einteilung ist vereinfacht: Viele KI-Systeme verbinden beides. Beim <strong>KI-Winter</strong> fehlt eine Marke, weil er einen Rückgang der Erwartungen und Förderung bezeichnet, keine Technik. Klickt auf einen Titel, um ein Bild, die Erklärung und die Bildquelle zu sehen.</p>
+    <p class="section-intro"><strong>Wie wurde aus einer Idee die KI von heute?</strong> Neun Meilensteine zeigen wichtige Wendepunkte in der Geschichte der KI. Die <strong>farbigen Marken</strong> greifen die beiden Ansätze aus <a href="#einstieg-1">Unterkapitel 1</a> auf: <span class="marke regeln">Programmierung durch Menschen</span> und <span class="marke daten">Datengetriebene Programmierung</span>. Die Einteilung ist vereinfacht; viele Systeme verbinden beides. Beim <strong>KI-Winter</strong> fehlt eine Marke, weil er keine Technik bezeichnet. Klickt auf einen Titel, um Bild, Erklärung und Bildquelle zu sehen.</p>
     <p class="timeline-thinking"><strong>Entdeckerfrage:</strong> Vergleicht die Marken von 1950 bis 1997 mit den Meilensteinen im <strong>21. Jahrhundert</strong>: Welche Art von KI dominiert in den jüngsten Beispielen? Woran könnte diese Veränderung liegen? Begründet eure Vermutung mit zwei Meilensteinen. Heisst das, dass feste Regeln heute keine Rolle mehr spielen?</p>
     <ol class="timeline">
       <li><span class="jahr">1950</span>
         <div>
-          <button class="milestone-trigger" type="button" data-milestone-open="turing" aria-haspopup="dialog" aria-label="Turing-Test: Bild und Erklärung öffnen">Turing-Test <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Regeln von Menschen</span>
+          <button class="milestone-trigger" type="button" data-milestone-open="turing" aria-haspopup="dialog" aria-label="Turing-Test: Bild und Erklärung öffnen">Turing-Test <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Programmierung durch Menschen</span>
           <!-- MD:START -->
 Alan Turing schlägt vor, Maschinenintelligenz so zu prüfen: Kann ein Mensch im Gespräch nicht mehr sagen, ob er mit einer Maschine oder einem Menschen schreibt?
 <!-- MD:END -->
@@ -26,7 +26,7 @@ Alan Turing schlägt vor, Maschinenintelligenz so zu prüfen: Kann ein Mensch im
         </template></li>
       <li><span class="jahr">1956</span>
         <div>
-          <button class="milestone-trigger" type="button" data-milestone-open="dartmouth" aria-haspopup="dialog" aria-label="Der Begriff «KI»: Bild und Erklärung öffnen">Der Begriff «KI» <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Regeln von Menschen</span>
+          <button class="milestone-trigger" type="button" data-milestone-open="dartmouth" aria-haspopup="dialog" aria-label="Der Begriff «KI»: Bild und Erklärung öffnen">Der Begriff «KI» <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Programmierung durch Menschen</span>
           <!-- MD:START -->
 Auf einer Konferenz in Dartmouth wird der Begriff «Artificial Intelligence» geprägt. Forschende wollen Lernen und Denken von Maschinen untersuchen.
 <!-- MD:END -->
@@ -44,7 +44,7 @@ Auf einer Konferenz in Dartmouth wird der Begriff «Artificial Intelligence» ge
         </template></li>
       <li><span class="jahr">1958</span>
         <div>
-          <button class="milestone-trigger" type="button" data-milestone-open="perzeptron" aria-haspopup="dialog" aria-label="Perzeptron: Bild und Erklärung öffnen">Perzeptron <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke daten">Lernen aus Daten</span>
+          <button class="milestone-trigger" type="button" data-milestone-open="perzeptron" aria-haspopup="dialog" aria-label="Perzeptron: Bild und Erklärung öffnen">Perzeptron <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke daten">Datengetriebene Programmierung</span>
           <!-- MD:START -->
 Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es ist der Baustein aus Doppellektion 3.
 <!-- MD:END -->
@@ -62,7 +62,7 @@ Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es i
         </template></li>
       <li><span class="jahr">1966</span>
         <div>
-          <button class="milestone-trigger" type="button" data-milestone-open="eliza" aria-haspopup="dialog" aria-label="Eliza: Bild und Erklärung öffnen">Eliza <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Regeln von Menschen</span>
+          <button class="milestone-trigger" type="button" data-milestone-open="eliza" aria-haspopup="dialog" aria-label="Eliza: Bild und Erklärung öffnen">Eliza <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Programmierung durch Menschen</span>
           <!-- MD:START -->
 Joseph Weizenbaum programmiert Eliza. Das Programm antwortet nach festen Textmustern wie eine Therapeutin, und trotzdem fühlen sich viele verstanden.
 <!-- MD:END -->
@@ -80,7 +80,7 @@ Joseph Weizenbaum programmiert Eliza. Das Programm antwortet nach festen Textmus
         </template></li>
       <li><span class="jahr">1960er/70er</span>
         <div>
-          <button class="milestone-trigger" type="button" data-milestone-open="experten" aria-haspopup="dialog" aria-label="Expertensysteme: Bild und Erklärung öffnen">Expertensysteme <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Regeln von Menschen</span>
+          <button class="milestone-trigger" type="button" data-milestone-open="experten" aria-haspopup="dialog" aria-label="Expertensysteme: Bild und Erklärung öffnen">Expertensysteme <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Programmierung durch Menschen</span>
           <!-- MD:START -->
 Menschen halten das Wissen von Fachleuten in Wenn-dann-Regeln fest, etwa zur Diagnose von Krankheiten. Das System wendet diese Regeln an.
 <!-- MD:END -->
@@ -116,7 +116,7 @@ Die Erwartungen waren zu hoch, Rechner und Daten reichten nicht. Geld und Intere
         </template></li>
       <li><span class="jahr">1997</span>
         <div>
-          <button class="milestone-trigger" type="button" data-milestone-open="deepblue" aria-haspopup="dialog" aria-label="Deep Blue: Bild und Erklärung öffnen">Deep Blue <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Regeln von Menschen</span>
+          <button class="milestone-trigger" type="button" data-milestone-open="deepblue" aria-haspopup="dialog" aria-label="Deep Blue: Bild und Erklärung öffnen">Deep Blue <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke regeln">Programmierung durch Menschen</span>
           <!-- MD:START -->
 Der Schachcomputer von IBM schlägt Weltmeister Garry Kasparov. Er rechnet sehr viele Züge durch und bewertet sie mit festen Regeln, er lernt nicht aus Daten.
 <!-- MD:END -->
@@ -134,7 +134,7 @@ Der Schachcomputer von IBM schlägt Weltmeister Garry Kasparov. Er rechnet sehr 
         </template></li>
       <li><span class="jahr">ab 2012</span>
         <div>
-          <button class="milestone-trigger" type="button" data-milestone-open="alexnet" aria-haspopup="dialog" aria-label="Deep Learning: Bild und Erklärung öffnen">Deep Learning <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke daten">Lernen aus Daten</span>
+          <button class="milestone-trigger" type="button" data-milestone-open="alexnet" aria-haspopup="dialog" aria-label="Deep Learning: Bild und Erklärung öffnen">Deep Learning <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke daten">Datengetriebene Programmierung</span>
           <!-- MD:START -->
 Tiefe neuronale Netze gewinnen Wettbewerbe in der Bilderkennung. Möglich machen das riesige Datenmengen und schnelle Grafikprozessoren.
 <!-- MD:END -->
@@ -152,7 +152,7 @@ Tiefe neuronale Netze gewinnen Wettbewerbe in der Bilderkennung. Möglich machen
         </template></li>
       <li><span class="jahr">2022</span>
         <div>
-          <button class="milestone-trigger" type="button" data-milestone-open="chatgpt" aria-haspopup="dialog" aria-label="Generative KI: Bild und Erklärung öffnen">Generative KI <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke daten">Lernen aus Daten</span>
+          <button class="milestone-trigger" type="button" data-milestone-open="chatgpt" aria-haspopup="dialog" aria-label="Generative KI: Bild und Erklärung öffnen">Generative KI <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke daten">Datengetriebene Programmierung</span>
           <!-- MD:START -->
 ChatGPT macht grosse Sprachmodelle für alle zugänglich. Sie erzeugen Texte, andere Modelle Bilder, Musik und Code.
 <!-- MD:END -->

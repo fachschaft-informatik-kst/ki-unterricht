@@ -21,19 +21,19 @@ for rel in GENERATED:
     assert ignored.returncode == 0, f"Generated artifact should be ignored: {rel}"
 
 fragment = ROOT / "kursseiten/einstieg/030-einstieg-3.md"
-example = "farbigen Marken neben den Meilenstein-Titeln"
+example = "farbigen Marken"
 assert example in fragment.read_text(encoding="utf-8")
 course = BeautifulSoup((ROOT / GENERATED[0]).read_text(encoding="utf-8"), "html.parser")
 assert example in course.get_text(" ", strip=True)
 assert course.select_one("#einstieg-3")
 
-# The blue/orange legend must be explicit in each course and use genuinely
-# distinct shared colours rather than first-year-only blue overrides.
+# The chapter-3 badges match the green/slate programming graphic in chapter 1.
 for doc,scope in ((course,"#einstieg-3"),(BeautifulSoup((ROOT / "_build/site/basis/index.html").read_text(encoding="utf-8"),"html.parser"),"#basis-ki #einstieg-3")):
     intro=doc.select_one(scope+" .section-intro")
-    assert intro and "Regeln von Menschen" in intro.get_text() and "Lernen aus Daten" in intro.get_text()
+    assert intro and "Programmierung durch Menschen" in intro.get_text() and "Datengetriebene Programmierung" in intro.get_text()
     assert len(intro.select(".marke.regeln"))==1 and len(intro.select(".marke.daten"))==1
     assert "KI-Winter" in intro.get_text() and "Klickt auf einen Titel" in intro.get_text()
+    assert len(intro.select('a[href="#einstieg-1"]')) == 1
 # The expert-system arrows point from the source toward the receiving box:
 # experts -> knowledge base, user case -> reasoning, reasoning -> result,
 # and knowledge base -> reasoning (downwards).
@@ -48,8 +48,8 @@ assert arrow_paths==["M302 184 H367","M302 396 H367","M640 396 H701","M630 261 V
 
 shared_css=(ROOT / "projekt/portal.css").read_text(encoding="utf-8")
 basis_css=(ROOT / "basis/basis.css").read_text(encoding="utf-8")
-assert ".marke.regeln{background:#1e40af;color:#fff}" in shared_css
-assert ".marke.daten{background:#9a3412;color:#fff}" in shared_css
+assert ".marke.regeln{background:#548235;color:#fff}" in shared_css
+assert ".marke.daten{background:#334155;color:#fff}" in shared_css
 assert "body .marke.daten" not in basis_css and "body .marke.regeln" not in basis_css
 
 
@@ -60,6 +60,9 @@ for doc,section in ((course,"#einstieg-3"),(basis,"#basis-ki #einstieg-3")):
     assert timeline is not None, section
     events=timeline.select("ol.timeline > li")
     assert len(events)==9,(section,len(events))
+    for marker in timeline.select("ol.timeline > li .marke"):
+        expected = "Programmierung durch Menschen" if "regeln" in marker["class"] else "Datengetriebene Programmierung"
+        assert marker.get_text(strip=True) == expected
 
     intro=timeline.select_one(".section-intro")
     thinking=timeline.select_one(".timeline-thinking")

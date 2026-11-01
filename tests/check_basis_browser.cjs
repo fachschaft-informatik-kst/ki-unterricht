@@ -142,11 +142,12 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     const milestoneBadgeColours=await page.locator('#basis-ki #einstieg-3 .section-intro .marke').evaluateAll(nodes=>
       nodes.map(node=>({label:node.textContent.trim(),background:getComputedStyle(node).backgroundColor,color:getComputedStyle(node).color})));
     assert.deepEqual(milestoneBadgeColours,[
-      {label:'Regeln von Menschen',background:'rgb(30, 64, 175)',color:'rgb(255, 255, 255)'},
-      {label:'Lernen aus Daten',background:'rgb(154, 52, 18)',color:'rgb(255, 255, 255)'}
-    ],'Distinct blue/orange markers with white text in DL1');
+      {label:'Programmierung durch Menschen',background:'rgb(84, 130, 53)',color:'rgb(255, 255, 255)'},
+      {label:'Datengetriebene Programmierung',background:'rgb(51, 65, 85)',color:'rgb(255, 255, 255)'}
+    ],'Markers match green/slate DL1 programming graphic');
     const legendDescription=await page.locator('#basis-ki #einstieg-3 .section-intro').innerText();
-    assert(legendDescription.includes('Regeln von Menschen')&&legendDescription.includes('Lernen aus Daten')&&legendDescription.includes('KI-Winter'));
+    assert(legendDescription.includes('Programmierung durch Menschen')&&legendDescription.includes('Datengetriebene Programmierung')&&legendDescription.includes('KI-Winter'));
+    assert.equal(await page.locator('#basis-ki #einstieg-3 .section-intro a[href="#einstieg-1"]').count(),1,'Legend links to chapter 1 graphic');
     const introLayout=await page.locator('#basis-ki #einstieg-3 .section-intro').evaluate(el=>({width:el.getBoundingClientRect().width,containerWidth:el.parentElement.clientWidth-parseFloat(getComputedStyle(el.parentElement).paddingLeft)-parseFloat(getComputedStyle(el.parentElement).paddingRight),maxWidth:getComputedStyle(el).maxWidth,align:getComputedStyle(el).textAlign,hyphens:getComputedStyle(el).hyphens}));
     assert.equal(introLayout.maxWidth,'none','Milestone intro must not be limited to 760px');
     assert.equal(introLayout.align,'justify','Milestone intro uses justified text');
