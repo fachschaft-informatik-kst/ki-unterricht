@@ -179,7 +179,7 @@ MobileNet liefert 1280 Merkmale; das Notebook normiert sie je Bild. Die kleinen 
       <summary>Fotostudio: vom Handybild zum Versuch</summary>
       <div class="detail-body">
         <ol>
-          <li>Im <a href="#journal">Journal</a> das eingebettete Fotostudio öffnen.</li>
+          <li>Das <a href="#projekt-fotostudio">Fotostudio direkt hier im Datenplan</a> öffnen.</li>
           <li>Klasse, Gruppe und Quelle eintragen; JPG/PNG auswählen. HEIC vorher als JPG exportieren.</li>
           <li>Vorschauen prüfen, Bilder verarbeiten und Sammlung regelmässig als JSON herunterladen.</li>
           <li>Im Versuch <code>EIGENE_DATEN</code> und die zwei Klassen eintragen. Konfigurationszelle ausführen, JSON hochladen, dann die nächste Zelle zum Laden ausführen.</li>
@@ -188,5 +188,19 @@ MobileNet liefert 1280 Merkmale; das Notebook normiert sie je Bild. Die kleinen 
         <p class="small">Bilder werden lokal verarbeitet. Bibliotheken und Modellgewichte benötigen Internet. Eine Sammlung im Fotostudio regelmässig herunterladen.</p>
       </div>
     </details>
+    <div class="card project-photo-step" id="projekt-fotostudio">
+      <span class="project-photo-step-label">Schritt 2 · Thema und Bilder vorbereiten</span>
+      <h3>Fotostudio · Ihre Bilder aufbereiten</h3>
+      <p>Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Fotos aufnehmen. Im Fotostudio ordnen Sie Bilder den beiden Klassen und den Gruppen zu, prüfen die Vorschau und exportieren Ihre Sammlung als JSON.</p>
+      <div class="actions">
+        <button class="btn primary" id="start-studio" type="button">Fotostudio öffnen</button>
+        <a class="btn" href="#projekt-reflexionen">Datenplan im Journal festhalten</a>
+      </div>
+      <p class="small muted">Speichern Sie die JSON-Datei regelmässig. Die Originalfotos später zusätzlich unter <a href="#sicherung">Notizen &amp; Projekt</a> sichern.</p>
+      <details hidden="" id="studio-panel" open="">
+        <summary>Fotostudio · eigene Bilder vorbereiten</summary>
+        <iframe class="studio-frame" id="studio-frame" title="Fotostudio – Bilder vorbereiten"></iframe>
+      </details>
+    </div>
   </div>
 </details>
