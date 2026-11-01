@@ -270,3 +270,97 @@ input[type=text]{border:1px solid #aebeb5;background:#fff;border-radius:8px;padd
 }
 .lab-head .lab-fullscreen-toggle svg{display:block;width:18px;height:18px}
 .lab-head .lab-fullscreen-toggle:focus-visible{outline:3px solid #ba552e;outline-offset:3px}
+
+/* Quiet notebook entry cards: leave the worksheet visible and open the editor
+   only after a deliberate click. A native dialog keeps focus inside the editor. */
+.ki-notebook-block{
+  margin:14px 0;padding:13px 16px;border:1px solid var(--line);
+  border-left:1px solid var(--line);border-radius:10px;background:var(--white,#fff)
+}
+.ki-notebook-block h3{margin:0 0 4px;font-size:16px;font-weight:650;letter-spacing:0;color:var(--ink)}
+.ki-notebook-block p{margin:0 0 9px;font-size:12px;line-height:1.45;color:var(--muted)}
+.ki-notebook-actions{margin-top:8px;gap:14px}
+.ki-notebook-actions .ki-notebook-launch{
+  padding:7px 12px;background:var(--white,#fff);color:var(--accent);
+  border:1px solid var(--accent);font-size:12px;font-weight:650
+}
+.ki-notebook-actions .ki-notebook-launch:hover{background:var(--soft)}
+.ki-notebook-actions a.ki-notebook-direct{font-size:12px;font-weight:500;color:var(--muted)}
+.ki-notebook-modal-open{overflow:hidden}
+
+/* Dialog stays at its original DOM position: never detach or recreate an
+   iframe while the user closes/reopens an exercise. */
+dialog.lab-panel.lab-modal[open]{
+  position:fixed;inset:0;margin:auto;padding:0;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-sizing:border-box;width:min(1260px,96vw);max-width:96vw;
+  height:min(94dvh,1080px);max-height:calc(100dvh - 18px);
+  border:1px solid var(--line);border-radius:14px;
+  background:var(--white,#fff);color:var(--ink);
+  box-shadow:0 22px 80px #15262b38
+}
+dialog.lab-panel.lab-modal::backdrop{background:rgba(16,29,37,.55)}
+dialog.lab-panel.lab-modal > .lab-head{
+  flex:none;min-height:52px;padding:8px 14px;gap:10px;
+  border-bottom:1px solid var(--line);
+}
+dialog.lab-panel.lab-modal > .lab-head b{font-size:14px}
+dialog.lab-panel.lab-modal > .lab-head > span{font-size:11px;line-height:1.3}
+dialog.lab-panel.lab-modal > .lab-head .btn{padding:5px 8px}
+dialog.lab-panel.lab-modal > p.small{
+  flex:none;font-size:11px;padding:5px 14px;margin:0;
+  line-height:1.3;color:var(--muted)
+}
+dialog.lab-panel.lab-modal > details{flex:none;margin:0;border:0;border-bottom:1px solid var(--line);border-radius:0;max-height:28vh;overflow:auto}
+dialog.lab-panel.lab-modal > details > summary{padding:7px 14px;font-size:12px}
+dialog.lab-panel.lab-modal > .lab-frame-shell{flex:1;min-height:0;display:flex;flex-direction:column}
+dialog.lab-panel.lab-modal .lab-frame-shell > iframe{
+  flex:1;min-height:0;width:100%;height:100%;border:0;border-radius:0
+}
+.lab-head .lab-close-toggle{
+  display:grid;place-items:center;flex:0 0 35px;
+  width:35px;height:35px;min-width:35px;padding:0;
+  background:rgba(255,255,255,.97);color:#28414b;
+  border:1px solid #d8e1e1;border-radius:8px;cursor:pointer
+}
+.lab-head .lab-close-toggle:hover{background:var(--soft);border-color:var(--accent)}
+.lab-head .lab-close-toggle:focus-visible{outline:3px solid #ba552e;outline-offset:3px}
+dialog.lab-panel.lab-modal:fullscreen{
+  inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;border:0;border-radius:0
+}
+dialog.lab-panel.lab-modal:fullscreen .lab-frame-shell > iframe{height:100%}
+@media(max-width:700px){
+  dialog.lab-panel.lab-modal[open]{
+    width:100vw;max-width:none;height:100dvh;max-height:none;
+    border:0;border-radius:0
+  }
+  dialog.lab-panel.lab-modal > .lab-head{flex-wrap:wrap;gap:6px 8px;padding:8px 10px}
+  dialog.lab-panel.lab-modal > .lab-head b{flex:1 1 45%}
+  dialog.lab-panel.lab-modal > .lab-head > span{order:3;flex:1 1 100%;margin:0}
+}
+
+/* Additional, user-created or material notebooks get the same spacious modal
+   instead of an embedded 850px frame; the launcher stays compact. */
+dialog.ki-notebook-runtime.ki-notebook-dialog[open]{
+  position:fixed;inset:0;box-sizing:border-box;display:flex;flex-direction:column;
+  width:min(1260px,96vw);height:min(94dvh,1080px);max-width:96vw;
+  max-height:calc(100dvh - 18px);margin:auto;padding:0;overflow:hidden;
+  border:1px solid var(--line);border-radius:14px;background:#fff;
+  box-shadow:0 22px 80px #15262b38
+}
+dialog.ki-notebook-runtime.ki-notebook-dialog::backdrop{background:rgba(16,29,37,.55)}
+.ki-notebook-modal-head{
+  display:flex;align-items:center;gap:12px;padding:8px 14px;
+  border-bottom:1px solid var(--line);background:var(--soft)
+}
+.ki-notebook-modal-head strong{flex:1;min-width:0;font-size:14px}
+.ki-notebook-modal-head .lab-close-toggle{flex:0 0 35px}
+.ki-notebook-dialog .ki-notebook-status{margin:0!important;padding:5px 14px;font-size:11px!important}
+.ki-notebook-dialog .ki-notebook-iframe{
+  flex:1;min-height:0;width:100%;height:100%;border:0;border-radius:0
+}
+@media(max-width:700px){
+  dialog.ki-notebook-runtime.ki-notebook-dialog[open]{
+    width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0
+  }
+}
