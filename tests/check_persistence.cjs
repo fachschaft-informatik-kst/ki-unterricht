@@ -29,12 +29,21 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await p.goto(`http://127.0.0.1:${port}/projekt/`);
   return {context,p};
  };
+ const closeNotebook=async p=>{
+  const dialog=p.locator('#project-lab');
+  if(await dialog.evaluate(el=>el.open)){
+   await dialog.locator('.lab-close-toggle').click();
+   await dialog.waitFor({state:'hidden'});
+  }
+ };
  const importZip=async(p,file)=>{
+  await closeNotebook(p);
   await p.locator('a[href="#sicherung"]').first().click();
   await p.locator('#restore-package').setInputFiles(file);
   await p.waitForFunction(()=>document.querySelector('#download-status').textContent.startsWith('Projektstand wiederhergestellt'));
  };
  const download=async(p,name)=>{
+  await closeNotebook(p);
   await p.locator('a[href="#sicherung"]').first().click();
   const event=p.waitForEvent('download',{timeout:120000});
   await p.locator('#download-backup').click();
@@ -158,32 +167,21 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert(!lesson.cells.some(c=>c.outputs?.some(o=>o.data?.['application/vnd.jupyter.widget-view+json'])));
   await q.reload();await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').first().click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
-  // A saved neuron lab must NEVER be discarded on reopening. The restored
-  // widget outputs become portable, readable HTML (not live Python widgets);
-  // students can rerun individual cells when they need fresh controls.
+  // A saved neuron lab must NEVER be discarded on reopening. Recreate the
+  // trusted published widgets automatically and reapply saved selections.
   assert.equal(await q.locator('#project-frame').getAttribute('data-restored'),'yes');
   const restoredGate=q.frameLocator('#project-frame').locator('.jp-CodeCell').nth(2).locator('.jp-OutputArea');
   await restoredGate.getByText('Gatter: OR', {exact:false}).first().waitFor({state:'visible'});
   assert((await restoredGate.innerText()).includes('Gatter: OR'),'Saved OR choice must remain visible after reload');
   assert.equal(await restoredGate.locator('img[alt^="Neuron: Eingaben"]').count(),4,'Saved neuron diagrams must survive page reload');
-  // After restoring saved outputs, a dedicated control safely reactivates the
-  // published visual lessons without discarding the stored notebook.
-  const refreshDL3=q.frameLocator('#project-frame').getByRole('button',{name:'Grafiken aktivieren ↻'});
-  await refreshDL3.waitFor({state:'visible'});
-  // The course page and embedded JupyterLite notebook scroll independently.
-  // When the lesson is reopened after a reload, its iframe can be below the
-  // outer viewport even though the toolbar button is visible inside the frame.
-  // Bring the iframe's TOP (where the toolbar lives) into view first, then
-  // exercise an actual user click rather than bypassing it with DOM .click().
-  await q.locator('#project-frame').evaluate(frame =>
-    frame.scrollIntoView({block:'start',inline:'nearest',behavior:'instant'}));
-  await refreshDL3.click();
-  await q.frameLocator('#project-frame').getByRole('button',{name:'Grafiken aktualisiert ✓'}).waitFor({state:'visible',timeout:120000});
-  await restoredGate.locator('.widget-dropdown select').first().waitFor({state:'visible'});
+  await restoredGate.locator('.widget-dropdown select').first().waitFor({state:'visible',timeout:120000});
+  assert.equal(await restoredGate.locator('.widget-dropdown select').first().inputValue(),'OR',
+    'Edited OR selection must be restored as a live widget without a manual button');
   assert.equal(await restoredGate.locator('img[alt^="Neuron: Eingaben"]').count(),4,'All four figures must become interactive again');
   assert(JSON.stringify(lesson.cells).includes('Gatter: OR'),'Previously exported OR choice must remain in the ZIP');
   // DL4 introduces XOR; its four neuron graphics and chosen state are saved
   // independently from the DL3 OR notebook and survive reopening.
+  await closeNotebook(q);
   await q.locator('.nav a[href="#netze"]').click();
   await q.locator('[data-lab="xor_einzelne_neuronen.ipynb"]').click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/xor_einzelne_neuronen.ipynb',null,{timeout:240000});
@@ -226,6 +224,9 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
     .catch(async error=>{console.error('RESTORED DL4 OUTPUT',await savedXor.innerText());
       console.error('STORED DL4 STATE',JSON.stringify((await localArtifacts(q))?.others?.['xor_einzelne_neuronen.ipynb']?.cells?.[4]?.outputs||[]).slice(0,1800));throw error;});
   assert((await savedXor.innerText()).includes('Gatter: OR'),'DL4 saved Gatter choice must survive page reload');
+  await savedXor.locator('.widget-dropdown select').waitFor({state:'visible',timeout:120000});
+  assert.equal(await savedXor.locator('.widget-dropdown select').inputValue(),'OR',
+    'Edited DL4 dropdown must survive reload as a working control');
   await savedXor.locator('img[alt^="Neuron: Eingaben"]').first().waitFor({state:'visible'});
   assert.equal(await savedXor.locator('img[alt^="Neuron: Eingaben"]').count(),4,'Four DL4 cases survive refresh');
   await q.screenshot({path:path.join(tmp,'restored-widget.png'),fullPage:true});

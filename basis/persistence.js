@@ -112,9 +112,12 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
  restoring=true;
  try{
   await loaded;
-  if(saved[current])await request('restore',{notebook:validate(saved[current]),keepKernel:true});
+  const restored=saved[current] ? await request('restore',{notebook:validate(saved[current]),keepKernel:true}) : null;
   ready=true;await snapshot();
-  status.textContent='Notebook bereit; Eingaben und Ergebnisse gesichert.';
+  status.textContent=restored?.widgets?.activated
+    ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
+    : restored ? 'Gesicherter Stand geladen · geänderte Startzellen bitte manuell ausführen.'
+      : 'Notebook bereit; Eingaben und Ergebnisse gesichert.';
   notebookLoading('ready');
  }catch(e){
   status.textContent='Wiederherstellung fehlgeschlagen: '+e.message;

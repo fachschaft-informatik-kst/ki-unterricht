@@ -20,6 +20,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  const text=JSON.stringify(snapshot.cells[1].outputs);
  assert(text.includes('Gewicht: -1.5'));assert(text.includes('Aufgabe: XOR'));assert(text.includes(png));
  assert(!text.includes('application/vnd.jupyter.widget-view+json'));
+ assert.deepEqual(snapshot.metadata.ki_widget_roots,{code:['box']},
+   'Save original widget root IDs before flattening the display output');
  assert.deepEqual(portableNotebook(snapshot),snapshot,'Repeated save/restore must not duplicate results');
  assert.deepEqual(Buffer.from(uploadedFiles(widgets)[0].content,'base64'),bytes);
  const missing=structuredClone(widgets);delete missing.state.upload.buffers;

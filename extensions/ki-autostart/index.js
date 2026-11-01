@@ -1,4 +1,5 @@
 import { setupEmbed } from './embed';
+import { widgetTraitUpdates, STATE } from './rehydrate';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { CodeCell } from '@jupyterlab/cells';
 import { Widget } from '@lumino/widgets';
@@ -30,7 +31,70 @@ export default {
     // A manual kernel restart accidentally fixes this race, but must not be
     // required for a new notebook.
     await app.activatePlugin('@jupyter-widgets/jupyterlab-manager:plugin');
-    const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, allowed) : null;
+    // A saved notebook is authoritative. Once its cells are restored, revive
+    // only startup cells with identical IDs and source from the published
+    // template. Never auto-execute arbitrary edited or uploaded student code.
+    const reviveSavedWidgets = async (panel, saved) => {
+      const response = await fetch(new URL('../files/' + panel.context.path, location.href));
+      if (!response.ok) throw Error('Notebook-Vorlage ist nicht erreichbar.');
+      const template = await response.json();
+      const starts = template.cells.filter(cell => cell.cell_type === 'code' &&
+        (cell.metadata?.tags || []).includes(tag));
+      const source = cell => Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+      const cells = starts.map(cell => panel.content.widgets.find(w => w.model.id === cell.id));
+      if (!starts.length || !cells.every((cell,i) =>
+        cell?.model.type === 'code' && cell.model.sharedModel.getSource() === source(starts[i]))) {
+        return {activated:false,values:0};
+      }
+      for (const cell of cells) {
+        if (panel.isDisposed) throw Error('Notebook wurde geschlossen.');
+        const reply = await CodeCell.execute(cell, panel.sessionContext);
+        if (!reply || reply.content.status !== 'ok') throw Error('Ein Widget konnte nicht neu gestartet werden.');
+      }
+      // Re-created widgets have new comm/model IDs. Transfer only safe input
+      // values (never file uploads, Python namespaces or executable code).
+      let values = 0;
+      if (Object.keys(saved?.metadata?.widgets?.[STATE]?.state || {}).length) {
+        const kernel = panel.sessionContext.session.kernel;
+        const stateFuture = kernel.requestExecute({code:
+          "import json as _ki_json, ipywidgets as _ki_widgets\nprint(_ki_json.dumps(_ki_widgets.Widget.get_manager_state(), ensure_ascii=False))",
+          silent:true,store_history:false,stop_on_error:true});
+        let stdout = '';
+        stateFuture.onIOPub = message => {
+          if (message.header.msg_type === 'stream' && message.content.name === 'stdout') stdout += message.content.text;
+        };
+        const reply = await stateFuture.done;
+        if (reply.content.status === 'ok') {
+          const changes = widgetTraitUpdates(saved,panel.context.model.toJSON(),JSON.parse(stdout));
+          if (changes.length) {
+            const bytes = new TextEncoder().encode(JSON.stringify(changes));
+            let binary = '';
+            for (const byte of bytes) binary += String.fromCharCode(byte);
+            const encoded = btoa(binary);
+            const code = `import json as _ki_json, base64 as _ki_b64, ipywidgets as _ki_widgets
+_ki_saved = _ki_json.loads(_ki_b64.b64decode("${encoded}"))
+for _ki_item in _ki_saved:
+    _ki_widget = _ki_widgets.Widget.widgets.get(_ki_item['id'])
+    if _ki_widget is not None:
+        try:
+            _ki_widget.set_trait(_ki_item['trait'], _ki_item['value'])
+        except Exception:
+            pass
+del _ki_saved, _ki_item, _ki_widget`;
+            const apply = kernel.requestExecute({code,silent:true,store_history:false,stop_on_error:true});
+            const applied = await apply.done;
+            if (applied.content.status === 'ok') values = changes.length;
+          }
+        }
+      }
+      await panel.context.save();
+      const badge = panel.node.querySelector('.ki-autostart-status');
+      if (badge) badge.textContent = '✓ Interaktive Widgets bereit';
+      const refresh = panel.node.querySelector('.ki-activate-figures button');
+      if (refresh) refresh.textContent = 'Grafiken neu starten ↻';
+      return {activated:true,values};
+    };
+    const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, allowed, reviveSavedWidgets) : null;
     const seen = new WeakSet();
     const initialize = async panel => {
       if (seen.has(panel)) return;
