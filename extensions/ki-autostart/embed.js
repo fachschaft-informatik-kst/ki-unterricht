@@ -1,7 +1,7 @@
 import {portableNotebook, uploadedFiles} from './snapshot';
 
 // Same-origin bridge between the course website and its one notebook iframe.
-export function setupEmbed(app, tracker, allowed) {
+export function setupEmbed(app, tracker, allowed, reviveSavedWidgets = async () => ({activated:false,values:0})) {
   const query = new URLSearchParams(location.search);
   if (query.get('ki-embed') !== '1' || window.parent === window) return null;
   const path = query.get('ki-path') || query.get('path');
@@ -131,7 +131,15 @@ print(_portal_json.dumps({'widgets': _portal_widgets.Widget.get_manager_state() 
         if (preparation) preparation.metadata={...preparation.metadata,jupyter:{...preparation.metadata?.jupyter,source_hidden:false}};
         panel.context.model.fromJSON(nb);
         await panel.context.save();
-        send({type:'restored',id,notebook:nb});
+        // The saved document was deliberately flattened for portable backups.
+        // Only now, after restoration, re-run trusted published startup cells.
+        // A failure leaves the original saved source and readable outputs intact.
+        let widgets = {activated:false,values:0}, widgetError = null;
+        if (query.get('ki-restore') === '1') {
+          try { widgets = await reviveSavedWidgets(panel, nb); }
+          catch (err) { widgetError = String(err.message || err); }
+        }
+        send({type:'restored',id,notebook:nb,widgets,widgetError});
       }
       dirty=false;
     } catch (err) { send({type:'error',id,error:String(err.message||err)}); }
