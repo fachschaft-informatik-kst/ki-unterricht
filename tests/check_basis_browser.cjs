@@ -375,6 +375,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
         if(!await projectDialog.evaluate(el=>el.open)) await launch.click();
         await projectDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await projectDialog.waitFor({state:'hidden'});
+        // The native <dialog> close event updates the launcher's state asynchronously.
+        await notebookPageInline.waitForFunction(()=>document.querySelector('#project-lab')?.open===false &&
+          document.querySelector('#project-lab')?.closest('.ki-notebook-block')?.querySelector('.ki-notebook-launch')?.getAttribute('aria-expanded')==='false');
         assert.equal(await launch.getAttribute('aria-expanded'),'false','Closing the modal must reset the notebook launcher');
         assert.equal(await frame.getAttribute('src')!==null,true,'Notebook iframe must remain after closing');
         await launch.click();
