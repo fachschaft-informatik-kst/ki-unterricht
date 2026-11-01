@@ -7,6 +7,42 @@
   const safe = /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/;
   const labUrl = new URL("../lab/index.html", location.href);
   const basic = /\/basis\//.test(location.pathname);
+  const coursePage = /\/(?:basis|projekt)\/(?:index\.html)?$/.test(location.pathname);
+  // A material index also contains direct links to notebook downloads.
+  // Keep those downloads and add the same interactive notebook element.
+  if (/\/materialien\.html$/.test(location.pathname)) {
+    const titles = {
+      basis_neuron: "Ein Neuron entscheidet", xor_einzelne_neuronen: "XOR mit einem Neuron",
+      basis_netze: "Neuronale Netze", mehrschichtige_netze: "Neuronale Netze",
+      perzeptron_und_neuronale_netze: "Ein Neuron entscheidet",
+      ziffernerkennung: "Ziffernerkennung", daten_training: "Daten fair aufteilen",
+      basis_bildmodell: "Ziffern und Buchstaben", basis_fotoprojekt: "Eigene Fotos erkennen",
+      ki_lernlabor: "Projekt-Lernlabor", ki_tandemprojekt: "Unser Versuch"
+    };
+    for (const link of document.querySelectorAll("main a[href]")) {
+      if (link.closest(".ki-notebook-block")) continue;
+      const target = new URL(link.href);
+      const embedded = target.pathname.endsWith("/lab/index.html");
+      const downloadable = /\/downloads\/[a-z0-9_]+\.ipynb$/.test(target.pathname);
+      if (!embedded && !downloadable) continue;
+      const found = embedded
+        ? /^portal\/([a-z0-9_]+\.ipynb)$/.exec(target.searchParams.get("path") || "")
+        : /\/([a-z0-9_]+\.ipynb)$/.exec(target.pathname);
+      if (!found) continue;
+      const name = found[1];
+      const title = titles[name.slice(0, -6)] || name.replace(/\.ipynb$/, "").replaceAll("_", " ");
+      const card = document.createElement("div");
+      card.className = "ki-notebook-block";
+      card.dataset.notebook = "content/" + (name.startsWith("ki_") ? "ki_projekt/" : "") + name;
+      card.dataset.title = title;
+      const heading = document.createElement("h3");
+      heading.textContent = "Jupyter-Notebook · " + title;
+      const desc = document.createElement("p");
+      desc.textContent = "Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.";
+      card.append(heading, desc);
+      (link.closest("li") || link.closest("p") || link).after(card);
+    }
+  }
   const basicNotebooks = new Set([
     "basis_neuron.ipynb", "xor_einzelne_neuronen.ipynb", "basis_netze.ipynb",
     "basis_bildmodell.ipynb", "basis_fotoprojekt.ipynb"
@@ -23,7 +59,7 @@
     const name = path.split("/").pop();
     const url = new URL(labUrl);
     url.searchParams.set("path", "portal/" + name);
-    const managed = basic ? basicNotebooks.has(name) : advancedNotebooks.has(name);
+    const managed = coursePage && (basic ? basicNotebooks.has(name) : advancedNotebooks.has(name));
 
     const actions = card.querySelector(".ki-notebook-actions") || document.createElement("div");
     actions.className = "ki-notebook-actions";
