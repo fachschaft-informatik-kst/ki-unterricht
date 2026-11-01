@@ -20,8 +20,12 @@
   <a class="btn primary" href="#journal">Versuch &amp; Journal →</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a>
 </div>
 <div class="ki-notebook-block" data-notebook="content/ki_projekt/ki_lernlabor.ipynb" data-title="Projekt-Lernlabor">
-  <h3>Jupyter-Notebook · Projekt-Lernlabor</h3>
-  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
+  <!-- MD:START -->
+### Jupyter-Notebook · Projekt-Lernlabor
+<!-- MD:END -->
+  <!-- MD:START -->
+Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+<!-- MD:END -->
   <button type="button" class="ki-notebook-launch" data-lab="ki_lernlabor.ipynb">Notebook hier öffnen</button>
 </div>
 <div class="facts">
