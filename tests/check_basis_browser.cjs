@@ -9,33 +9,49 @@ const assert=require('node:assert/strict');
 // button and SVG must toggle in both directions, and browser-initiated exits
 // (for example Escape) must restore the initial icon and accessible label.
 async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
-  const button=page.locator(buttonSelector);
+  const button=page.locator(buttonSelector),panel=page.locator(panelSelector);
   await button.waitFor({state:'visible'});
   assert.equal(await button.getAttribute('aria-label'),'Notebook vergrössern');
   assert.equal(await button.getAttribute('aria-pressed'),'false');
   const corners=button.locator('svg path');
   assert.equal(await corners.count(),1,'Fullscreen control needs the editor-style SVG');
   const expand=await corners.getAttribute('d');
+  const isDialog=await panel.evaluate(el=>el.tagName==='DIALOG');
+  const waitForState=async expanded=>page.waitForFunction(({selector,expanded,isDialog})=>{
+    const el=document.querySelector(selector);
+    if(!el)return false;
+    const actual=isDialog?el.classList.contains('lab-modal-maximized'):document.fullscreenElement===el;
+    const pressed=el.querySelector('[aria-label="Notebook verkleinern"],[aria-label="Notebook vergrössern"]')
+      ?.getAttribute('aria-pressed');
+    return actual===expanded&&pressed===String(expanded);
+  },{selector:panelSelector,expanded,isDialog});
   await button.click();
-  await page.waitForFunction(sel=>document.fullscreenElement?.matches(sel)===true,panelSelector);
+  await waitForState(true);
   assert.equal(await button.getAttribute('aria-pressed'),'true');
   assert.equal(await button.getAttribute('aria-label'),'Notebook verkleinern');
   assert.equal(await button.getAttribute('title'),'Notebook verkleinern');
-  const shrink=await corners.getAttribute('d');
-  assert.notEqual(shrink,expand,'The icon must change into the minimise symbol');
+  assert.notEqual(await corners.getAttribute('d'),expand,'Icon must switch to inward-facing corners');
   await button.click();
-  await page.waitForFunction(selector=>document.fullscreenElement===null &&
-    document.querySelector(selector)?.getAttribute('aria-pressed')==='false',buttonSelector);
-  assert.equal(await button.getAttribute('aria-pressed'),'false');
+  await waitForState(false);
   assert.equal(await button.getAttribute('aria-label'),'Notebook vergrössern');
   assert.equal(await corners.getAttribute('d'),expand);
+
   await button.click();
-  await page.waitForFunction(sel=>document.fullscreenElement?.matches(sel)===true,panelSelector);
-  await page.evaluate(()=>document.exitFullscreen());
-  await page.waitForFunction(selector=>document.fullscreenElement===null &&
-    document.querySelector(selector)?.getAttribute('aria-pressed')==='false',buttonSelector);
-  assert.equal(await corners.getAttribute('d'),expand,'Escape/native exit must restore expand icon');
-  assert.equal(await button.getAttribute('aria-pressed'),'false');
+  await waitForState(true);
+  if(isDialog){
+    // Escape closes the native modal and resets its expand icon.
+    await page.keyboard.press('Escape');
+    await page.waitForFunction(sel=>{
+      const el=document.querySelector(sel);
+      return el&&!el.open&&!el.classList.contains('lab-modal-maximized');
+    },panelSelector);
+    assert.equal(await corners.getAttribute('d'),expand,'Closing the modal resets its expand icon');
+    assert.equal(await button.getAttribute('aria-pressed'),'false');
+  }else{
+    await page.evaluate(()=>document.exitFullscreen());
+    await waitForState(false);
+    assert.equal(await corners.getAttribute('d'),expand);
+  }
 }
 (async()=>{
   const directory=process.env.PORTAL_SITE||path.resolve(__dirname,'../dist');
