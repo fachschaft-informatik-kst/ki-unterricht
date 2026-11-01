@@ -44,7 +44,7 @@ def figur(f):
 
 def render(lesson, voll=False):
     """Kursseite: nur Ziel, Leitfrage und Motivation. Mit voll=True zusätzlich Ablauftabelle (Lehrperson)."""
-    return (f'<details class="lesson-plan" id="doppellektion-{lesson["id"]}" data-lesson="{lesson["id"]}" open><summary>'
+    return (f'<details class="lesson-plan" id="doppellektion-{lesson["id"]}" data-lesson="{lesson["id"]}"{" open" if voll or lesson.get("view") != "projekt" else ""}><summary>'
             f'<span class="phase-num">{str(lesson.get("number", lesson["id"])).zfill(2)}</span><span>Doppellektion {lesson.get("number", lesson["id"])} · {html.escape(lesson["title"])}</span>'
             '<small>90 Min.</small></summary><div class="detail-body">'
             + (f'<p class="lesson-recap"><strong>Rückblick:</strong> {verlinke(html.escape(lesson["rueckblick"]))}</p>' if lesson.get('rueckblick') else '')
@@ -125,17 +125,15 @@ def update_language_lesson(text):
 def update_sol_material(text):
     """Keep project guidance aligned with the SOL frame without changing saved fields."""
     sol = (
-        '<div class="callout" id="sol-rahmen"><h3>Ihr Projekt: Arbeit planen, durchführen und überprüfen</h3>'
-        '<p>In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. '
-        'Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen individuelle Einzelgespräche und die Fremdauswertung.</p>'
-        '<p><strong>Verbindlich:</strong> fünf Datengruppen, fairer A/B-Vergleich, fünf Reflexionen, '
-        'Auswahl vor Testeinsicht und danach keine Optimierung. Abgabe vor Beginn der Doppellektion 8.</p>'
-        '<p><strong>Sie entscheiden:</strong> Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. '
-        'Planen Sie in Reflexion 1 die Etappen, Zuständigkeiten und Reserve. Halten Sie am Ende jeder Arbeitsphase '
-        'kurz fest: erreicht, offen, nächster Schritt, benötigte Hilfe. Reflektieren Sie Ihren Plan in Reflexion 5. '
-        'Kein zusätzliches Lerntagebuch. Beratung und Lernlabor nutzen Sie nach Bedarf.</p>'
-        '<p><strong>Reihenfolge aus fachlichen Gründen:</strong> Daten prüfen → A/B vergleichen → Auswahl begründen '
-        '→ Abschlusstest → Fazit und Abgabe. Wie Sie diese Etappen auf die Arbeitszeit verteilen, planen Sie selbst.</p></div>'
+        '<div class="callout" id="sol-rahmen"><h3>Selbstständig arbeiten, fair vergleichen</h3>'
+        '<p>In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo selbst fest. '
+        'Die sechs Etappen sind fachlich geordnet, aber keine festen Lektionstermine.</p>'
+        '<p><strong>Verbindlich:</strong> Fünf unabhängige Datengruppen, fairer A/B-Vergleich, fünf Reflexionen '
+        'und eine begründete Modellwahl <strong>vor</strong> dem Abschlusstest. Danach keine Optimierung. '
+        '<strong>Abgabe vor Beginn der Doppellektion 8.</strong></p>'
+        '<p>Halten Sie in Reflexion 1 Ihren Plan und in Reflexion 5 die Anpassungen fest. '
+        'Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> '
+        'sind Orientierung, keine zusätzliche Pflicht.</p></div>'
     )
     text = re.sub(r'<div class="callout" id="sol-rahmen">.*?</div>', '', text, flags=re.S)
     text = text.replace('<!-- /LESSONS:projekt -->', '<!-- /LESSONS:projekt -->'+sol, 1)
