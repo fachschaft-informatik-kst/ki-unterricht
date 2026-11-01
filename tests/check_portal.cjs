@@ -108,10 +108,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     const projectIntroStyle=await p.locator('#projekt-1 .kapitel-body > .section-intro').evaluate(el=>({maxWidth:getComputedStyle(el).maxWidth,textAlign:getComputedStyle(el).textAlign}));
     assert.deepEqual(projectIntroStyle,{maxWidth:'none',textAlign:'justify'},'Project chapter introductions also use the full box width');
     assert.equal(await p.locator('#projekt .project-start-steps > li').count(),3,'Project home makes the starting sequence visible');
+    assert.equal(await p.locator('#projekt .project-start-steps > li').nth(1).locator('a[href="#projekt-fotostudio"]').count(),1,'Start step 2 links to its Fotostudio');
     assert.equal(await p.locator('#projekt-1 [id^="projekt-etappe-"]').count(),6,'Six project stages remain accessible');
     assert.equal(await p.locator('#projekt-1 .lesson-plan[open]').count(),0,'Project lesson descriptions start collapsed');
     assert.equal(await p.locator('#journal #projekt-werkbank #start-project').count(),1,'Project notebook starts in the workbench');
-    assert.equal(await p.locator('#journal #projekt-werkbank #start-studio').count(),1,'Photo studio is grouped with the notebook');
+    assert.equal(await p.locator('#projekt-3 #projekt-fotostudio #start-studio').count(),1,'Photo studio belongs to step 2 in the data plan');
+    assert.equal(await p.locator('#journal #start-studio').count(),0,'Journal is for the model experiment, not photo preparation');
     assert.equal(await p.locator('#journal #projekt-reflexionen .journal-step').count(),5,'All five saved reflections remain available');
 
 
