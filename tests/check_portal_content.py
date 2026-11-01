@@ -81,8 +81,8 @@ assert "AND-Ziel" in calculation.get_text()
 assert "|:--:" not in soup.select_one("#perzeptron-3").get_text()
 
 # Project diagram distinguishes pretrained feature extraction from the actual training.
-pipeline = soup.select("#projekt .project-train-flow > li")
-assert len(pipeline) == 4, "Expected four visible training stages in project introduction"
+pipeline = soup.select("#projekt-4 .project-train-flow > li")
+assert len(pipeline) == 4, "Expected four model-training stages in the A/B comparison chapter"
 assert [item.select_one("strong").get_text(strip=True)[0] for item in pipeline] == list("1234")
 assert "model-fixed" in pipeline[1].get("class", [])
 assert "1280" in pipeline[1].get_text()
