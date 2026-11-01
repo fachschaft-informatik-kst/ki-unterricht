@@ -61,6 +61,7 @@ Ordnen Sie zunächst ohne Hilfe zu und begründen Sie kurz:
 
 Vergleichen Sie Ihre Antworten erst, wenn Sie alle drei gelöst haben.
 <!-- MD:END -->
+      <label class="field answer"><span>Selbstcheck: Notieren Sie Ihre drei Entscheidungen zu V1/P1, unabhängigem Abschlusstest und Datenleck – jeweils mit kurzer Begründung.</span><textarea data-answer="projekt_datencheck" rows="4" maxlength="10000" placeholder="1. Zur Modellwahl … / 2. Der Abschlusstest … / 3. Dieselbe Person …"></textarea></label>
       <details>
         <summary>Musterlösung und Begründungen anzeigen</summary>
         <div class="detail-body">
