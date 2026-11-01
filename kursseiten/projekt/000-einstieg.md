@@ -7,7 +7,9 @@
 <p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung V1</a> · <a href="#glossar-testdaten">Testdaten P1/P2</a></p>
 <div class="project-start-guide" aria-labelledby="project-start-title">
   <h2 id="project-start-title">Hier beginnen Sie</h2>
-  <p>In Doppellektion 5 erarbeiten Sie die Datenregeln selbstständig. Anschliessend planen Sie Ihre Untersuchung im Tandem. Die sechs Projektetappen bearbeiten Sie in eigener Zeiteinteilung bis zur Abgabe vor Doppellektion 8.</p>
+  <!-- MD:START -->
+In Doppellektion 5 erarbeiten Sie die Datenregeln selbstständig. Anschliessend planen Sie Ihre Untersuchung im Tandem. Die sechs Projektetappen bearbeiten Sie in eigener Zeiteinteilung bis zur Abgabe vor Doppellektion 8.
+<!-- MD:END -->
   <ol class="project-start-steps">
     <li><strong>1 · Datenregeln verstehen</strong><span><a href="#daten">Lernpfad zur fairen Datenaufteilung</a> mit Beispielen, Selbstkontrolle und Übungsnotebook bearbeiten.</span></li>
     <li><strong>2 · Thema und Daten planen</strong><span><a href="#ideen">Zwei Bildklassen auswählen</a>, Vermutung formulieren und die fünf Gruppen im <a href="#journal">Journal</a> dokumentieren.</span></li>
