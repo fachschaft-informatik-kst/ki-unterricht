@@ -274,7 +274,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     }
     await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded.catch(async e=>{console.log('EXPORT STATUS',await p.locator('#download-status').innerText());console.log('CELLS',await cells.allInnerTexts());throw e;})).saveAs('/tmp/ki-portal-trained.zip');
     console.log('PASS actual training, manual final test and result package');
-    const kernelBefore=await p.locator('#project-frame').getAttribute('data-kernel-id');await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
+    const kernelBefore=await p.locator('#project-frame').getAttribute('data-kernel-id');await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').first().click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/perzeptron_und_neuronale_netze.ipynb',null,{timeout:180000});
     assert.notEqual(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore);
     assert.equal(await p.locator('iframe[src*="lab/index"]').count(),1);
