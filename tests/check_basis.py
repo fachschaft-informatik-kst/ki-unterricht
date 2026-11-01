@@ -114,7 +114,13 @@ assert 'Notebook der 1. Klasse' not in _persistence, "Remove generic first-year 
 assert "const notebookTitles=" in _persistence
 assert "className='lab-panel'" in _persistence, "Reuse fourth-year notebook presentation"
 assert "portal/'+name" in _persistence, "Open selected Jupyter notebook directly"
-assert "requestFullscreen" in _persistence
+assert "bindLabFullscreen" in _persistence, "Basic course must use the shared notebook fullscreen switch"
+_fullscreen=(ROOT/"projekt/lab-fullscreen.js").read_text(encoding="utf-8")
+assert "requestFullscreen" in _fullscreen and "exitFullscreen" in _fullscreen
+assert "fullscreenchange" in _fullscreen and "aria-pressed" in _fullscreen
+assert "bindLabFullscreen" in (ROOT/"projekt/portal.js").read_text(encoding="utf-8"), (
+    "Both course levels must use identical fullscreen behavior"
+)
 
 # The teacher footer, navbar and complete blue palette must match the fourth-year structure.
 teacher_footer = page.select_one("footer.footer > details")
