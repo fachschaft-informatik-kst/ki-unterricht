@@ -23,12 +23,36 @@ async function simulate(name, fail = false, twice = false, modification = '') {
     executed.push(cell.index); return {content: {status: fail ? 'error' : 'ok'}};
   }}, Widget: class {constructor() {this.node = {style: {}, setAttribute() {}};}}};
   vm.runInNewContext(source, context);
-  context.plugin.activate({restored:Promise.resolve()}, {widgetAdded: {connect: cb => callback = cb}, forEach: cb => cb(panel)});
+  const activated = [];
+  await context.plugin.activate({
+    restored: Promise.resolve(),
+    activatePlugin: async id => { activated.push(id); }
+  }, {widgetAdded: {connect: cb => callback = cb}, forEach: cb => cb(panel)});
+  assert.deepEqual(activated,['@jupyter-widgets/jupyterlab-manager:plugin'],
+    'Widget manager must activate before subscribing to notebook startup');
   if (twice) callback(null, panel);
   await new Promise(resolve => setImmediate(resolve));
   return {nb, executed, badges};
 }
 (async () => {
+  // Explicitly reproduce the first-launch race: notebook listeners must not
+  // run while the Jupyter widgets extension is still activating.
+  {
+    let activateManager;
+    const activation = new Promise(resolve => { activateManager=resolve; });
+    let subscribed = false, requested = null;
+    const sandbox={INotebookTracker:{}, CodeCell:{}, Widget:class{}, console};
+    vm.runInNewContext(source, sandbox);
+    const started = sandbox.plugin.activate({
+      activatePlugin:id=>{ requested=id; return activation; },
+      restored:Promise.resolve()
+    }, {widgetAdded:{connect(){ subscribed=true; }},forEach(){}});
+    assert.equal(requested,'@jupyter-widgets/jupyterlab-manager:plugin');
+    assert.equal(subscribed,false,'Autostart must not subscribe before the widget renderer');
+    activateManager();
+    await started;
+    assert.equal(subscribed,true,'Autostart must subscribe after the widget renderer');
+  }
   // SVG widgets must be usable without loading the large Matplotlib package.
   // Plotting and ML experiments continue to load their required dependencies.
   const packages = name => {
@@ -105,8 +129,11 @@ async function simulate(name, fail = false, twice = false, modification = '') {
       performance:{getEntriesByType:()=>[{type:navigation}]}, URLSearchParams,
       location:{search:query}, sessionStorage:{getItem:()=>remembered}};
     vm.runInNewContext(source, context);
-    context.plugin.activate({restored:Promise.resolve(), commands:{execute:async (command,args)=>opened.push([command,args.path])}},
-      {size,widgetAdded:{connect(){}},forEach(){}});
+    await context.plugin.activate({
+      restored:Promise.resolve(),
+      activatePlugin:async id=>assert.equal(id,'@jupyter-widgets/jupyterlab-manager:plugin'),
+      commands:{execute:async (command,args)=>opened.push([command,args.path])}
+    }, {size,widgetAdded:{connect(){}},forEach(){}});
     await new Promise(resolve=>setImmediate(resolve));
     assert.equal(opened.length,expected);
     if(expected) assert.deepEqual(opened[0],['docmanager:open','perzeptron_und_neuronale_netze.ipynb']);
