@@ -50,9 +50,9 @@ a[href^="#glossar-"]:not(.nav a),a[href^="#basis-glossar-"]:not(.nav a){text-dec
 @media print{.glossary-dialog{display:none!important}.glossary-entry{break-inside:avoid}.glossary [data-glossary-search]{display:none}}
 
 
-/* Einleitung zu den KI-Meilensteinen: ganze Kapitelbreite statt der
-   globalen 760-px-Begrenzung, mit lesbarem Blocksatz. */
-#einstieg-3 .kapitel-body > .section-intro{width:100%;max-width:none;text-align:justify;hyphens:auto}
+/* Kapitel-Einleitungen sollen die vorhandene Box ganz ausfüllen.
+   Die schmaleren Einleitungen am Seitenanfang bleiben unverändert. */
+.kapitel > .kapitel-body > .section-intro{width:100%;max-width:none;text-align:justify;hyphens:auto}
 
 /* DL1 – dieselbe interaktive KI-Zeitleiste in beiden Klassen.
    Die Bilder bleiben bis zur Dialogöffnung in HTML-Templates verborgen. */
