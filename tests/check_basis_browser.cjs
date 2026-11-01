@@ -261,6 +261,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.reload();
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await note.fill('Gesicherte Reflexion im ZIP.');
+     await page.locator('[data-basis-answer="basis-journal-namen"]').fill('Ada Beispiel');
+     await page.locator('[data-basis-answer="basis-journal-klasse"]').fill('1b');
      const timelineAnswer=page.locator('[data-basis-answer="basis-ki-zeitstrahl"]');
      await timelineAnswer.fill('Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
@@ -275,6 +277,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert(files.has('Journal.html')&&files.has('Reflexionen.txt')&&files.has('notebooks/basis_neuron.ipynb')&&files.has('fotodaten/fotostudio.json'));
      const learningJournal=await files.get('Journal.html').text(),reflections=await files.get('Reflexionen.txt').text();
      assert(learningJournal.includes('Gesicherte Reflexion im ZIP.')&&learningJournal.includes('Jüngere Beispiele lernen aus Daten'));
+     assert(learningJournal.includes('Ada Beispiel')&&learningJournal.includes('1b'),'Identity belongs in printable journal');
      assert(reflections.includes('Entdeckerfrage zum Zeitstrahl')&&reflections.includes('Gesicherte Reflexion im ZIP.'));
      assert.equal(JSON.parse(await files.get('kursstand.json').text()).answers['basis-ki-zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(JSON.parse(await files.get('notebooks/basis_neuron.ipynb').text()).cells[0].source[0],'print("Mein Versuch")');
