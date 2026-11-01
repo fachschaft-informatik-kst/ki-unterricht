@@ -47,3 +47,52 @@ export function bindLabFullscreen(button, panel) {
   document.addEventListener('fullscreenchange', sync);
   sync();
 }
+
+
+// A real in-page dialog, never a new browser tab. Do not reparent or remove the
+// iframe on close: JupyterLite's in-browser kernel and unsaved edits survive.
+export function bindNotebookDialog(panel) {
+  if (panel.tagName !== 'DIALOG') throw Error('Notebook-Overlay braucht ein dialog-Element.');
+  const heading = panel.querySelector('.lab-head');
+  if (!heading) throw Error('Notebook-Overlay ohne Kopfzeile.');
+  panel.classList.add('lab-modal');
+  const title = heading.querySelector('[id]');
+  if (title) panel.setAttribute('aria-labelledby', title.id);
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.className = 'lab-close-toggle';
+  closeButton.setAttribute('aria-label', 'Notebook schliessen');
+  closeButton.title = 'Notebook schliessen';
+  closeButton.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+  heading.append(closeButton);
+  let opener = null;
+  const close = async () => {
+    if (document.fullscreenElement === panel) await document.exitFullscreen();
+    if (panel.open) panel.close();
+  };
+  closeButton.addEventListener('click', () => { void close(); });
+  panel.addEventListener('click', event => {
+    if (event.target !== panel) return;
+    const rect = panel.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right ||
+        event.clientY < rect.top || event.clientY > rect.bottom) void close();
+  });
+  panel.addEventListener('close', () => {
+    panel.hidden = true;
+    document.body.classList.remove('ki-notebook-modal-open');
+    if (opener?.isConnected && !opener.closest('[hidden]')) opener.focus({preventScroll:true});
+  });
+  window.addEventListener('hashchange', () => { if (panel.open) void close(); });
+  return {
+    get isOpen() { return panel.open; },
+    open(trigger=null) {
+      if (panel.open) return;
+      opener = trigger || document.activeElement;
+      panel.hidden = false;
+      panel.showModal();
+      document.body.classList.add('ki-notebook-modal-open');
+      closeButton.focus({preventScroll:true});
+    },
+    close
+  };
+}
