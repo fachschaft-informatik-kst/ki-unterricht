@@ -172,6 +172,21 @@ for _a,_b,_filenames in [
         _first=(ROOT/"kursseiten"/_b/_file).read_text(encoding="utf-8")
         assert _first==_expect, f"DL3/4 source drift from fourth-year course: {_b}/{_file}"
 
+
+# All notebook entry points on pupil-facing course pages use the same card.
+# Teacher-only downloadable resources in materialien.md remain valid downloads.
+for _chapter in (ROOT/"kursseiten").glob("*/[0-9][0-9][0-9]-*.md"):
+    _source=_chapter.read_text(encoding="utf-8")
+    _legacy=_re.search(
+        r'<(?:button|a) class="btn[^"]*" (?:data-lab="[^"]+\.ipynb"|href="\.\./lab/index\.html\?path=portal/)',
+        _source)
+    assert not _legacy, f"Legacy notebook button/link in {_chapter}"
+    if 'lab/index.html?path=portal/' in _source or 'data-lab=' in _source:
+        assert 'class="ki-notebook-block"' in _source, f"Notebook card missing: {_chapter}"
+    for _path in _re.findall(r'data-notebook="([^"]+)"',_source):
+        assert _re.fullmatch(r'content/(?:ki_projekt/)?[a-z0-9_]+\.ipynb',_path), (
+            f"Invalid notebook path {_path} in {_chapter}")
+
 _nb4_neuron=_nbformat.read(ROOT/"content/perzeptron_und_neuronale_netze.ipynb",as_version=4)
 _nb1_neuron=_nbformat.read(ROOT/"content/basis_neuron.ipynb",as_version=4)
 assert [c.source for c in _nb1_neuron.cells]==[c.source for c in _nb4_neuron.cells], "DL3 notebook must match fourth year"
