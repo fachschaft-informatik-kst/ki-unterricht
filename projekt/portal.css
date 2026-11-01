@@ -374,3 +374,25 @@ dialog.ki-notebook-runtime.ki-notebook-dialog::backdrop{background:rgba(16,29,37
   .ki-notebook-block{padding:13px}
   .ki-notebook-actions{margin-top:5px}
 }
+
+/* Projektstart: eine kurze Handlungsfolge statt langer Technik vor dem ersten Schritt. */
+.project-start-guide{margin:24px 0 20px;padding:23px 25px;background:var(--soft);border:1px solid var(--line);border-radius:15px}
+.project-start-guide h2{font-size:1.3rem;margin:0 0 9px}
+.project-start-guide>p{font-size:14px;line-height:1.6;margin:0 0 15px}
+.project-start-steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0;margin:0 0 14px}
+.project-start-steps li{min-width:0;padding:16px;background:#fff;border:1px solid var(--line);border-radius:10px;line-height:1.5}
+.project-start-steps strong,.project-start-steps span{display:block}
+.project-start-steps strong{font-size:14px;margin-bottom:7px;color:var(--ink)}
+.project-start-steps span{font-size:13px;color:var(--muted)}
+.project-start-steps a,.project-start-next a{color:var(--accent);font-weight:650}
+.project-start-guide .project-start-next{margin:0}
+#projekt-1 .project-lessons-heading{margin:27px 0 8px;font-size:1.12rem}
+#projekt-1 .lesson-plan{margin:8px 0}
+#projekt-4 .project-background{margin:21px 0 16px}
+#projekt-4 .project-background>.detail-body{padding-top:15px}
+#projekt-4 .project-background .project-train-overview{margin:0}
+#projekt-werkbank,#projekt-reflexionen{scroll-margin-top:85px}
+#journal #projekt-werkbank h2,#journal #projekt-reflexionen h2{font-size:1.35rem;margin:29px 0 10px}
+#journal #projekt-werkbank>p,#journal #projekt-reflexionen>p{font-size:14px;color:var(--muted);max-width:900px}
+@media(max-width:900px){.project-start-steps{grid-template-columns:1fr}}
+@media(max-width:540px){.project-start-guide{padding:16px}.project-start-steps li{padding:13px}}
