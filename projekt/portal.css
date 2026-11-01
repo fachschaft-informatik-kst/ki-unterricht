@@ -325,10 +325,13 @@ dialog.lab-panel.lab-modal .lab-frame-shell > iframe{
 }
 .lab-head .lab-close-toggle:hover{background:var(--soft);border-color:var(--accent)}
 .lab-head .lab-close-toggle:focus-visible{outline:3px solid #ba552e;outline-offset:3px}
-dialog.lab-panel.lab-modal:fullscreen{
-  inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;border:0;border-radius:0
+/* Native fullscreen rejects <dialog>; the same icon expands our modal to
+   the entire viewport without losing its close control or JupyterLite kernel. */
+dialog.lab-panel.lab-modal[open].lab-modal-maximized{
+  inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;
+  margin:0;border:0;border-radius:0
 }
-dialog.lab-panel.lab-modal:fullscreen .lab-frame-shell > iframe{height:100%}
+dialog.lab-panel.lab-modal.lab-modal-maximized .lab-frame-shell > iframe{height:100%}
 @media(max-width:700px){
   dialog.lab-panel.lab-modal[open]{
     width:100vw;max-width:none;height:100dvh;max-height:none;
