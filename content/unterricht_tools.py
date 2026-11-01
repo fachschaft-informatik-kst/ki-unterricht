@@ -2,8 +2,17 @@
 Der Code ist für Interessierte einsehbar; Lernende ändern nur die Notebook-Einstellungen.
 """
 import numpy as np
-import matplotlib.pyplot as plt
 import ipywidgets as widgets
+
+# Die meisten Einstiegs-Widgets (Neuron, Gatter, Lernschritt) zeichnen direkt
+# als SVG/HTML. Matplotlib erst laden, wenn eine echte Plot-Funktion es braucht.
+# Das spart beim Notebookstart das Parsen des umfangreichen Plotting-Stacks.
+class _LazyPlots:
+    def __getattr__(self, name):
+        import matplotlib.pyplot as pyplot
+        return getattr(pyplot, name)
+
+plt = _LazyPlots()
 from IPython.display import display
 
 FARBEN = ['#176c63', '#be572b']
