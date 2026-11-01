@@ -59,7 +59,7 @@ async function reveal(page, selector) {
           assert.equal(await page.locator('.jp-InputPrompt').filter({hasText:'[2]:'}).count(),0);
         }
         console.log('PASS', name, pass ? 'reload' : 'open');
-        if (!pass) await page.reload();
+        if (!pass && !coldStart) await page.reload();
       }
       await browser.close();
     }
