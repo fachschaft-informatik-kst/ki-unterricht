@@ -261,6 +261,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.reload();
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await note.fill('Gesicherte Reflexion im ZIP.');
+     const timelineAnswer=page.locator('[data-basis-answer="basis-ki-zeitstrahl"]');
+     await timelineAnswer.fill('Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
     await page.locator('input[aria-label="Fotostudio-JSON zur ZIP-Sicherung hinzufügen"]').setInputFiles({name:'fotos.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(studio))});
     const downloadPromise=page.waitForEvent('download');
@@ -270,13 +272,18 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await download.saveAs(archivePath);
     const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../projekt/archive.js')).toString('base64'));
     const files=await archive.readZip(new Blob([fs.readFileSync(archivePath)]));
-    assert(files.has('Reflexionen.txt')&&files.has('notebooks/basis_neuron.ipynb')&&files.has('fotodaten/fotostudio.json'));
+    assert(files.has('Journal.html')&&files.has('Reflexionen.txt')&&files.has('notebooks/basis_neuron.ipynb')&&files.has('fotodaten/fotostudio.json'));
+     const learningJournal=await files.get('Journal.html').text(),reflections=await files.get('Reflexionen.txt').text();
+     assert(learningJournal.includes('Gesicherte Reflexion im ZIP.')&&learningJournal.includes('Jüngere Beispiele lernen aus Daten'));
+     assert(reflections.includes('Entdeckerfrage zum Zeitstrahl')&&reflections.includes('Gesicherte Reflexion im ZIP.'));
+     assert.equal(JSON.parse(await files.get('kursstand.json').text()).answers['basis-ki-zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(JSON.parse(await files.get('notebooks/basis_neuron.ipynb').text()).cells[0].source[0],'print("Mein Versuch")');
     await note.fill('Wird beim Import ersetzt');
     const restoredPhoto=page.waitForEvent('download');
     await page.locator('input[aria-label="ZIP-Kursstand wiederherstellen"]').setInputFiles(archivePath);
     await restoredPhoto;
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.');
+     assert.equal(await timelineAnswer.inputValue(),'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(JSON.parse(await page.evaluate(()=>localStorage.getItem('kst-ki-basis-notebooks-v1')))['basis_neuron.ipynb'].cells[0].execution_count,1);
     // ZIP export/import must remain accessible when the navigation becomes mobile.
     const mobilePage=await browser.newPage({viewport:{width:390,height:840}});
