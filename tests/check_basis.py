@@ -153,7 +153,7 @@ def _mirror_chapter(raw,src,dst):
         notebook={"perzeptron_und_neuronale_netze.ipynb":"basis_neuron.ipynb",
                   "mehrschichtige_netze.ipynb":"basis_netze.ipynb"}.get(m.group(1),m.group(1))
         return f'<a class="ki-notebook-launch" href="../lab/index.html?path=portal/{notebook}">{m.group(2)}</a>'
-    return _re.sub(r'<button type="button" class="ki-notebook-launch" data-lab="([^"]+)">([\\s\\S]*?)</button>',_button,raw)
+    return _re.sub(r'<button type="button" class="ki-notebook-launch" data-lab="([^"]+)">([\s\S]*?)</button>',_button,raw)
 
 for _a,_b,_filenames in [
     ("perzeptron","basis-neuron",[f"0{i}0-perzeptron-{i}.md" for i in range(1,8)]),
