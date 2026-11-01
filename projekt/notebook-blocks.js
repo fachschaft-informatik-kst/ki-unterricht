@@ -38,7 +38,7 @@
       const heading = document.createElement("h3");
       heading.textContent = "Jupyter-Notebook · " + title;
       const desc = document.createElement("p");
-      desc.textContent = "Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.";
+      desc.textContent = "Python-Zellen direkt bearbeiten und ausführen.";
       card.append(heading, desc);
       (link.closest("li") || link.closest("p") || link).after(card);
     }
@@ -75,7 +75,7 @@
       }
     }
     open.classList.add("ki-notebook-launch");
-    open.textContent = "Notebook hier öffnen";
+    open.textContent = "Notebook öffnen";
     open.setAttribute("aria-expanded", "false");
 
     const external = card.querySelector(".ki-notebook-direct") || document.createElement("a");
@@ -83,7 +83,8 @@
     external.href = url.href;
     external.target = "_blank";
     external.rel = "noopener noreferrer";
-    external.textContent = "In JupyterLite öffnen ↗";
+    external.textContent = "Separat öffnen ↗";
+    external.setAttribute("aria-label", "Notebook separat in JupyterLite öffnen");
     actions.append(open, external);
     card.append(actions);
     card.dataset.notebookInitialized = "true";
@@ -109,7 +110,7 @@
       const show = region.hidden;
       region.hidden = !show;
       open.setAttribute("aria-expanded", String(show));
-      open.textContent = show ? "Notebook schliessen" : "Notebook hier öffnen";
+      open.textContent = show ? "Notebook schliessen" : "Notebook öffnen";
       if (!show || frame) return;
       frame = document.createElement("iframe");
       frame.title = (card.dataset.title || "Jupyter-Notebook") + " · bearbeiten und ausführen";
