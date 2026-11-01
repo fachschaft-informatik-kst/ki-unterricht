@@ -1,4 +1,4 @@
-import {makeZip,readZip} from '../projekt/archive.js';
+import {makeZip,readZip,escapeHTML as esc} from '../projekt/archive.js';
 import {bindLabFullscreen,bindNotebookDialog} from '../projekt/lab-fullscreen.js';
 
 // The basic course has its own backup schema and does not alter the fourth-year portal.
@@ -180,9 +180,29 @@ function renderRecoveredFiles(){
 backupControls.append(backup,restoreLabel,photoLabel,recovered);
 loaded.then(renderRecoveredFiles);
 function answers(){return Object.fromEntries([...document.querySelectorAll('[data-basis-answer]')].map(f=>[f.dataset.basisAnswer,f.value]));}
+// The JSON retains raw values for ZIP restore; this view explains them to pupils and teachers.
+function readableAnswers(){
+ return [...document.querySelectorAll('[data-basis-answer]')].filter(f=>String(f.value||'').trim()).map(f=>{
+  const label=f.closest('label');
+  const labelSpan=label?.querySelector('span')?.textContent?.trim();
+  const externalLabel=[...document.querySelectorAll('label[for]')].find(l=>l.htmlFor===f.id)?.textContent?.trim();
+  const question=(labelSpan&&labelSpan!=='Zuordnung'?labelSpan:null)||
+   externalLabel||f.getAttribute('aria-label')||
+   (label&&!label.querySelector('option')?label.textContent.trim():null)||
+   f.closest('tr')?.querySelector('th')?.textContent?.trim()||f.dataset.basisAnswer;
+  const chapter=f.closest('.kapitel')?.querySelector('.kapitel-titel')?.textContent?.trim()||'Weitere Unterrichtsaufgaben';
+  const answer=f.tagName==='SELECT'?(Array.from(f.options).find(o=>o.value===f.value)?.textContent?.trim()||f.value):f.value;
+  return {chapter,question,answer};
+ });
+}
+function reflectionHTML(rows){
+ const sections=rows.map(e=>'<section><h2>'+esc(e.chapter)+'</h2><h3>'+esc(e.question)+'</h3><p>'+esc(e.answer).replace(/\n/g,'<br>')+'</p></section>').join('');
+ return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Lernjournal · 1. Klasse</title><style>body{max-width:850px;margin:40px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h2{font-size:19px;margin-bottom:4px}h3{font-size:16px;margin:0 0 8px}section{border-bottom:1px solid #ddd;margin:22px 0;padding-bottom:14px;break-inside:avoid}p{white-space:normal}</style><h1>KI-Lernjournal · 1. Klasse</h1><p>Antworten aus dem gesicherten Kursstand (auch Auswahlaufgaben). Notebook-Ergebnisse befinden sich separat im ZIP.</p>'+(sections||'<p>Noch keine Antworten eingetragen.</p>')+'</html>';
+}
 backup.addEventListener('click',async()=>{backup.disabled=true;try{await loaded;if(current)await snapshot();const data={schema:SCHEMA,answers:answers(),notebooks:notebookNames.filter(n=>saved[n]),archived:notebookNames.filter(n=>legacyNotebooks[n]),uploads:[]};
-const entries=[{name:'kursstand.json',data:''},{name:'Reflexionen.txt',data:Object.entries(data.answers).map(([k,v])=>k+'\n'+v).join('\n\n')},
- {name:'LESEN.txt',data:'Reflexionen.txt enthält Textantworten. notebooks/ enthält bearbeitete Jupyter-Notebooks mit Ausgaben. notebooks/archiv/ enthält die frühere DL3/4-Version, falls sie ersetzt wurde. daten/ enthält Fotostudio-JSON und im Notebook ausgewählte Uploads. Nach ZIP-Import sind Notebook-Ausgaben sichtbar; Python-Variablen und das trainierte Netz müssen durch erneutes Ausführen der Zellen erstellt werden. Fotostudio-JSON vor dem Training erneut im Notebook auswählen. Originalfotos separat sichern.\n'},
+const rows=readableAnswers();
+const entries=[{name:'kursstand.json',data:''},{name:'Journal.html',data:reflectionHTML(rows)},{name:'Reflexionen.txt',data:rows.map(e=>e.chapter+' – '+e.question+'\n'+e.answer).join('\n\n')||'Noch keine Antworten eingetragen.'},
+ {name:'LESEN.txt',data:'Journal.html enthält alle ausgefüllten Antworten in lesbarer Form, einschliesslich Auswahlfeldern. Reflexionen.txt enthält dieselben Antworten als Text. notebooks/ enthält bearbeitete Jupyter-Notebooks mit Ausgaben. notebooks/archiv/ enthält die frühere DL3/4-Version, falls sie ersetzt wurde. daten/ enthält Fotostudio-JSON und im Notebook ausgewählte Uploads. Nach ZIP-Import sind Notebook-Ausgaben sichtbar; Python-Variablen und das trainierte Netz müssen durch erneutes Ausführen der Zellen erstellt werden. Fotostudio-JSON vor dem Training erneut im Notebook auswählen. Originalfotos separat sichern.\n'},
  ...data.notebooks.map(n=>({name:'notebooks/'+n,data:JSON.stringify(saved[n])})),
  ...data.archived.map(n=>({name:'notebooks/archiv/'+n,data:JSON.stringify(legacyNotebooks[n])}))];
 if(photoJSON)entries.push({name:'fotodaten/fotostudio.json',data:photoJSON.content});
@@ -195,7 +215,7 @@ for(const [n,files] of Object.entries(notebookUploads))if(notebookNames.includes
  data.uploads.push({notebook:n,path,name:f.name,type:f.type});
 }
 entries[0].data=JSON.stringify(data,null,2);
-const zip=await makeZip(entries);const url=URL.createObjectURL(zip),a=document.createElement('a');a.href=url;a.download='KI-1-Klasse-Kursstand.zip';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);status.textContent='ZIP mit Reflexionen und Notebook-Ständen erstellt.';backupStatus.textContent='ZIP mit Reflexionen, Notebooks und angehängten Daten erstellt.';}catch(e){status.textContent='ZIP nicht erstellt: '+e.message;backupStatus.textContent='ZIP nicht erstellt: '+e.message;}finally{backup.disabled=false;}});
+const zip=await makeZip(entries);const url=URL.createObjectURL(zip),a=document.createElement('a');a.href=url;a.download='KI-1-Klasse-Kursstand.zip';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);status.textContent='ZIP mit lesbarem Journal und Notebook-Ständen erstellt.';backupStatus.textContent='ZIP mit Journal.html, Notebooks und angehängten Daten erstellt.';}catch(e){status.textContent='ZIP nicht erstellt: '+e.message;backupStatus.textContent='ZIP nicht erstellt: '+e.message;}finally{backup.disabled=false;}});
 restore.addEventListener('change',async()=>{const file=restore.files?.[0];if(!file)return;try{await loaded;const files=await readZip(file);if(!files.has('kursstand.json'))throw Error('kursstand.json fehlt.');const raw=JSON.parse(await files.get('kursstand.json').text());if(raw.schema!==SCHEMA||!raw.answers||!Array.isArray(raw.notebooks)||raw.notebooks.some(n=>!notebookNames.includes(n)))throw Error('Ungültiger Kursstand.');const next={};for(const n of raw.notebooks){const blob=files.get('notebooks/'+n);if(!blob)throw Error('Notebook fehlt: '+n);next[n]=validate(JSON.parse(await blob.text()));}
 if(raw.archived!==undefined&&(!Array.isArray(raw.archived)||raw.archived.some(n=>!notebookNames.includes(n))))throw Error('Ungültiges Notebook-Archiv.');
 const nextLegacy={};for(const n of raw.archived||[]){const blob=files.get('notebooks/archiv/'+n);if(!blob)throw Error('Archiviertes Notebook fehlt: '+n);nextLegacy[n]=validate(JSON.parse(await blob.text()));}
