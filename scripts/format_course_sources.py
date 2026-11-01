@@ -13,7 +13,7 @@ TOKENS=re.compile(
     r'|<(?:[^>"\']|"[^"]*"|\'[^\']*\')*>'
     r"|[^<]+",re.S|re.I
 )
-BLOCK={"div","details","summary","article","section","figure","figcaption",
+BLOCK={"div","dialog","details","summary","article","section","figure","figcaption",
        "ul","ol","li","p","label","h1","h2","h3","h4","h5","h6","table",
        "thead","tbody","tfoot","tr","td","th","nav","aside","blockquote",
        "header","footer","fieldset","form"}
