@@ -770,8 +770,27 @@ function glossaryPreviewHtml(level){
 // Render exactly the same initial notebook card/controls as notebook-blocks.js
 // on the published course. The preview remains script-free by design.
 function prepareNotebookPreview(content){
-  if(!content.includes("ki-notebook-block"))return content;
+  const materials=state.current?.path.endsWith("/materialien.md");
+  if(!materials&&!content.includes("ki-notebook-block"))return content;
   const host=document.createElement("template");host.innerHTML=content;
+  if(materials){
+    const base=state.course==="basis"?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
+    for(const link of host.content.querySelectorAll("a[href]")){
+      const url=new URL(link.getAttribute("href"),base);
+      const embedded=url.pathname.endsWith("/lab/index.html");
+      const downloadable=/\/downloads\/[a-z0-9_]+\.ipynb$/.test(url.pathname);
+      if(!embedded&&!downloadable)continue;
+      const found=embedded
+        ? /^portal\/([a-z0-9_]+\.ipynb)$/.exec(url.searchParams.get("path")||"")
+        : /\/([a-z0-9_]+\.ipynb)$/.exec(url.pathname);
+      if(!found||link.closest(".ki-notebook-block"))continue;
+      const name=found[1],path="content/"+(name.startsWith("ki_")?"ki_projekt/":"")+name;
+      const title=name.replace(/\.ipynb$/,"").replaceAll("_"," ");
+      const template=document.createElement("template");
+      template.innerHTML=linkedNotebookMarkup(path,title);
+      (link.closest("li")||link.closest("p")||link).after(template.content);
+    }
+  }
   for(const card of host.content.querySelectorAll(".ki-notebook-block[data-notebook]")){
     const path=card.getAttribute("data-notebook");
     if(!notebookPath(path)||card.querySelector(".ki-notebook-actions"))continue;
