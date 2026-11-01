@@ -22,7 +22,14 @@ export default {
   id: '@kst/ki-autostart:plugin',
   autoStart: true,
   requires: [INotebookTracker],
-  activate: (app, tracker) => {
+  activate: async (app, tracker) => {
+    // JupyterLite loads federated extensions asynchronously. Register the
+    // jupyterlab_widgets manager's notebook-added handler *before* our own
+    // autostart handler; otherwise the first ipywidgets comm_open/display_data
+    // may arrive while the renderer still has only its placeholder factory.
+    // A manual kernel restart accidentally fixes this race, but must not be
+    // required for a new notebook.
+    await app.activatePlugin('@jupyter-widgets/jupyterlab-manager:plugin');
     const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, allowed) : null;
     const seen = new WeakSet();
     const initialize = async panel => {
