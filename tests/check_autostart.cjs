@@ -42,7 +42,7 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   assert.deepEqual(packages('xor_einzelne_neuronen.ipynb'), ['numpy']);
   assert.deepEqual(packages('basis_neuron.ipynb'), ['numpy']);
   const tools = fs.readFileSync(path.join(root,'content/unterricht_tools.py'),'utf8');
-  assert(!/^import matplotlib\\.pyplot as plt$/m.test(tools),
+  assert(!/^import matplotlib\.pyplot as plt$/m.test(tools),
     'Matplotlib must not initialize when importing HTML/SVG teaching widgets');
   assert(tools.includes('class _LazyPlots'));
   assert(tools.includes("widgets.interact_manual.options(manual_name='Netz trainieren ▶')"),
