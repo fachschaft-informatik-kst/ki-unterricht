@@ -40,6 +40,9 @@ async function reveal(page, selector) {
           // Der kompakte Gatterversuch zeigt Ziel und Ist-Ausgabe direkt in der Live-Tabelle.
           const aufgabe = '.widget-dropdown select:has(option:text-is("OR"))';
           await reveal(page, aufgabe);
+          const widgetOutput = page.locator('.jp-CodeCell').nth(1).locator('.jp-OutputArea');
+          assert(!/FloatSlider\\(value=|HTML\\(value=/.test(await widgetOutput.innerText()),
+            'Interactive controls must never be duplicated as a Python repr');
           assert.equal(await page.locator('.jp-OutputArea').filter({hasText:'Error displaying widget: model not found'}).count(),0,
             'No widget may fail its first model registration on cold startup');
           assert.equal(await page.locator('.widget-checkbox').count(),3,
