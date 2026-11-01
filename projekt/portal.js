@@ -215,6 +215,16 @@ async function showNotebook(name,owner,scroll=true,trigger=null){
  finally{switching=false;}
 }
 $('start-project').addEventListener('click',()=>showNotebook(projectName,'journal',true,$('start-project')));
+// The same-origin Fotostudio grows with its content, avoiding a second scrollbar.
+let studioHeightObserver=null;
+$('studio-frame').addEventListener('load',()=>{
+ studioHeightObserver?.disconnect();
+ const frame=$('studio-frame'),body=frame.contentDocument?.body;
+ if(!body)return;
+ const adjust=()=>{frame.style.height=Math.max(760,body.scrollHeight+28)+'px';};
+ adjust();
+ if('ResizeObserver' in window){studioHeightObserver=new ResizeObserver(adjust);studioHeightObserver.observe(body);}
+});
 $('start-studio').addEventListener('click',()=>{const frame=$('studio-frame');$('studio-panel').hidden=false;if(!frame.getAttribute('src'))frame.src='studio/index.html';$('studio-panel').scrollIntoView({block:'start',behavior:'smooth'});});
 document.addEventListener('click',event=>{
  const button=event.target.closest('[data-lab]');
