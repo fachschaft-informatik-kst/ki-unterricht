@@ -96,22 +96,54 @@
       continue;
     }
 
-    const region = document.createElement("div");
-    region.className = "ki-notebook-runtime";
+    // Extra lesson notebooks/material-page notebooks also use a native modal.
+    // Closing it only hides the iframe, so the Python runtime remains mounted.
+    const region = document.createElement("dialog");
+    region.className = "ki-notebook-runtime ki-notebook-dialog";
     region.hidden = true;
+    region.setAttribute("aria-label", (card.dataset.title || "Jupyter-Notebook") + " bearbeiten");
+    const head = document.createElement("div");
+    head.className = "ki-notebook-modal-head";
+    const label = document.createElement("strong");
+    label.textContent = card.dataset.title || "Jupyter-Notebook";
+    const dismiss = document.createElement("button");
+    dismiss.type = "button";
+    dismiss.className = "lab-close-toggle";
+    dismiss.title = "Notebook schliessen";
+    dismiss.setAttribute("aria-label", "Notebook schliessen");
+    dismiss.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+    head.append(label, dismiss);
     const status = document.createElement("p");
     status.className = "ki-notebook-status";
     status.setAttribute("role", "status");
     status.textContent = "JupyterLite wird geladen …";
-    region.append(status);
+    region.append(head, status);
     let frame;
+    const close = () => { if (region.open) region.close(); };
+    dismiss.addEventListener("click", close);
+    region.addEventListener("click", event => {
+      if (event.target !== region) return;
+      const rect = region.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right ||
+          event.clientY < rect.top || event.clientY > rect.bottom) close();
+    });
+    region.addEventListener("close", () => {
+      region.hidden = true;
+      document.body.classList.remove("ki-notebook-modal-open");
+      open.setAttribute("aria-expanded", "false");
+      open.textContent = "Notebook öffnen";
+      if (open.isConnected) open.focus({preventScroll:true});
+    });
+    window.addEventListener("hashchange", close);
     open.addEventListener("click", event => {
       event.preventDefault();
-      const show = region.hidden;
-      region.hidden = !show;
-      open.setAttribute("aria-expanded", String(show));
-      open.textContent = show ? "Notebook schliessen" : "Notebook öffnen";
-      if (!show || frame) return;
+      if (region.open) { close(); return; }
+      region.hidden = false;
+      region.showModal();
+      document.body.classList.add("ki-notebook-modal-open");
+      open.setAttribute("aria-expanded", "true");
+      dismiss.focus({preventScroll:true});
+      if (frame) return;
       frame = document.createElement("iframe");
       frame.title = (card.dataset.title || "Jupyter-Notebook") + " · bearbeiten und ausführen";
       frame.className = "ki-notebook-iframe";
@@ -123,7 +155,7 @@
       embed.searchParams.set("reset", "");
       frame.src = embed.href;
       frame.addEventListener("load", () => {
-        status.textContent = "Notebook geöffnet. Python-Zellen mit Shift + Enter ausführen.";
+        status.textContent = "Python-Zellen mit Shift + Enter ausführen.";
       });
       region.append(frame);
     });
