@@ -196,7 +196,7 @@ document.addEventListener('click',event=>{
  if(!button||!button.closest('main'))return;
  void showNotebook(button.dataset.lab,button.closest('main > section')?.id||'projekt',true,button);
 });
-window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false);});
+window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false,$('start-project'));});
 all('[data-fullscreen]').forEach(b=>b.addEventListener('click',()=>{const node=$(b.dataset.fullscreen).closest('.lab-panel');if(node.requestFullscreen)node.requestFullscreen();}));
 window.addEventListener('beforeunload',event=>{
  if(notebookDirty||!artifactStored||!filesStored||transferring){event.preventDefault();event.returnValue='Änderungen sind noch nicht vollständig gesichert.';}
