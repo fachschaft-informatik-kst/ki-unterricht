@@ -309,6 +309,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       if(notebook==='basis_neuron.ipynb'){
         await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await basicDialog.waitFor({state:'hidden'});
+        assert.equal(await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().getAttribute('aria-expanded'),'false',
+          'Closing the modal must reset the launcher for keyboard and screen-reader users');
         assert.equal(await basicDialog.count(),1,'Closing must not destroy notebook markup');
         assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
           'Closing the dialog must not reload or remove the notebook iframe');
@@ -373,6 +375,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
         if(!await projectDialog.evaluate(el=>el.open)) await launch.click();
         await projectDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await projectDialog.waitFor({state:'hidden'});
+        assert.equal(await launch.getAttribute('aria-expanded'),'false','Closing the modal must reset the notebook launcher');
         assert.equal(await frame.getAttribute('src')!==null,true,'Notebook iframe must remain after closing');
         await launch.click();
         await notebookPageInline.waitForFunction(()=>document.querySelector('#project-lab')?.open===true);
