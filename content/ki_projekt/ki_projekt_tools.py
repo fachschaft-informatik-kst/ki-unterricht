@@ -13,11 +13,16 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
-import matplotlib.pyplot as plt
-import sklearn
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from IPython.display import HTML, display
+
+# Für den Projektstart werden weder neuronale Netze trainiert noch Diagramme
+# berechnet. Die umfangreichen Bibliotheken erst beim jeweiligen Versuch laden.
+class _LazyPlots:
+    def __getattr__(self, name):
+        import matplotlib.pyplot as pyplot
+        return getattr(pyplot, name)
+
+plt = _LazyPlots()
 import ipywidgets as widgets
 
 VERSION = '4.0'
@@ -165,6 +170,7 @@ def _auswahl(d, personen, anzahl, seed):
 
 
 def _trainieren(d, ids, neuronen, epochen, lernrate, seed):
+    from sklearn.neural_network import MLPClassifier
     netz = MLPClassifier(hidden_layer_sizes=(neuronen,), activation='relu', solver='adam',
                          batch_size=min(24, len(ids)), learning_rate_init=lernrate,
                          alpha=.0001, random_state=seed)
@@ -247,6 +253,7 @@ def ergebnisse_zeigen(exp):
 
 
 def fehler_zeigen(exp, variante='A'):
+    from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
     d=exp['daten']
     runs=[r for r in exp['laeufe'] if r['variante']==variante]
     pruefe(bool(runs), 'Variante A oder B wählen.')
@@ -267,6 +274,7 @@ def fehler_zeigen(exp, variante='A'):
 
 
 def abschlusstest(exp, variante='B', begruendung='', freigabe=False):
+    from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
     if not freigabe:
         print('Abschlusstest bleibt gesperrt. Erst auswählen und begründen.');return None
     pruefe(exp['einstellungen']['weg'] != 'ausgang', 'Zuerst eine Untersuchung durchführen.')
@@ -298,6 +306,7 @@ def abschlusstest(exp, variante='B', begruendung='', freigabe=False):
 
 
 def protokoll(exp, export=True):
+    import sklearn
     d=exp['daten']
     result=dict(tool_version=VERSION, numpy=np.__version__, sklearn=sklearn.__version__,
                 modus=d.modus, klassen=d.klassen, daten_sha256=d.checksum,
