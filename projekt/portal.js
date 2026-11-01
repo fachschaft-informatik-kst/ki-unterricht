@@ -1,4 +1,4 @@
-import {bindLabFullscreen} from './lab-fullscreen.js';
+import {bindLabFullscreen,bindNotebookDialog} from './lab-fullscreen.js';
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 import experiments from './experiments.json' with {type:'json'};
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
@@ -155,8 +155,9 @@ loaderRetry.addEventListener('click',()=>{if(activeName)void showNotebook(active
 // Never move an already loaded iframe. Saved documents are the source of truth;
 // every new frame has a fresh Python kernel, including after a page reload.
 document.querySelector('main > .footer').before(lab);$('lesson-lab').remove();
+const overlay=bindNotebookDialog(lab);
 function request(frame,type,extra={}){return new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet noch nicht. Warten und erneut versuchen.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer,source:frame.contentWindow});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
-function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!activeName||!view||view.classList.contains('view-hidden');}
+function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!overlay.isOpen||!activeName||!view||view.classList.contains('view-hidden');}
 async function snapshotCurrent(){
  await notebookUpdates;
  if(!activeName)return;
@@ -183,10 +184,11 @@ async function showNotebook(name,owner,scroll=true,trigger=null){
    notebookLoading('loading',saved?'Gesicherten Notebook-Stand laden …':'Notebook wird gestartet. Python und die interaktiven Übungen werden vorbereitet …');
    frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
   }
-  activeOwner=owner;visibility();$('project-lab-title').textContent=names[name];
+  activeOwner=owner;$('project-lab-title').textContent=names[name];
+  overlay.open(trigger || document.activeElement);visibility();
   lab.querySelector('details').hidden=name!==projectName;
   lab.querySelector('a[href="#journal"]').hidden=name!==projectName;
-  if(scroll)lab.scrollIntoView({block:'start',behavior:'smooth'});
+  // Dialog focus replaces scrolling a large inline notebook into the lesson.
  }catch(error){$('project-lab-status').textContent=error.message;notebookLoading('error',error.message+' Bitte erneut versuchen.');}
  finally{switching=false;}
 }
