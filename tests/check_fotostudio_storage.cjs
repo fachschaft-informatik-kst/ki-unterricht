@@ -18,11 +18,20 @@ const path=require('node:path');
   const url='http://127.0.0.1:8777/projekt/studio/';
   await page.goto(url,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.querySelector('#autosave-status')?.textContent.includes('aktiv'),null,{timeout:10000});
+  assert.equal(await page.locator('.eyebrow').innerText(),'KI-Bildprojekt · Schritt 2: Bilder vorbereiten');
+  assert.equal(await page.locator('.studio-card').count(),3,'Studio has the same card-based visual hierarchy as the course');
+  assert.equal(await page.locator('#studio-progress').getAttribute('max'),'80');
+  assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(245, 244, 238)','Studio uses course background');
+  assert.equal(await page.locator('#add').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(7, 105, 89)','Studio primary button uses course accent');
+
   const record={id:'local-digest-1',group:'T1',label:'Tasse',source:'Probedaten',filename:'tasse.jpg',features:Array(1280).fill(0),preview:''};
   const doc={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',tfjs:'4.22.0',mobilenet:'2.1.1',records:[record]};
   await page.locator('#resume').setInputFiles({name:'foto-backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(doc))});
   await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('1 Bilder wiederhergestellt'));
   assert((await page.locator('#counts').innerText()).includes('T1 / Tasse: 1'));
+  assert.equal(await page.locator('#count-total').innerText(),'1','Progress count reflects restored collection');
+  assert.equal(await page.locator('#studio-progress').inputValue(),'1','Progress bar reflects restored collection');
+
   const downloadEvent=page.waitForEvent('download');
   await page.locator('#save').click();
   const download=await downloadEvent;
@@ -40,6 +49,8 @@ const path=require('node:path');
   await page.locator('#clear').click();
   await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('Lokale Sammlung gelöscht'));
   assert.equal((await page.locator('#counts li').count()),0);
+  assert.equal(await page.locator('#count-total').innerText(),'0','Progress count resets on erase');
+
   await page.reload({waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.querySelector('#autosave-status')?.textContent.includes('aktiv'));
   assert.equal((await page.locator('#counts li').count()),0,'Erase must survive reload');
