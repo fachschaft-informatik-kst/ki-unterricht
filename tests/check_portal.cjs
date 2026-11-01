@@ -107,6 +107,13 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert(Math.abs(introLayout.width-introLayout.containerWidth)<2,'Milestone intro fills its chapter box');
     const projectIntroStyle=await p.locator('#projekt-1 .kapitel-body > .section-intro').evaluate(el=>({maxWidth:getComputedStyle(el).maxWidth,textAlign:getComputedStyle(el).textAlign}));
     assert.deepEqual(projectIntroStyle,{maxWidth:'none',textAlign:'justify'},'Project chapter introductions also use the full box width');
+    assert.equal(await p.locator('#projekt .project-start-steps > li').count(),3,'Project home makes the starting sequence visible');
+    assert.equal(await p.locator('#projekt-1 [id^="projekt-etappe-"]').count(),6,'Six project stages remain accessible');
+    assert.equal(await p.locator('#projekt-1 .lesson-plan[open]').count(),0,'Project lesson descriptions start collapsed');
+    assert.equal(await p.locator('#journal #projekt-werkbank #start-project').count(),1,'Project notebook starts in the workbench');
+    assert.equal(await p.locator('#journal #projekt-werkbank #start-studio').count(),1,'Photo studio is grouped with the notebook');
+    assert.equal(await p.locator('#journal #projekt-reflexionen .journal-step').count(),5,'All five saved reflections remain available');
+
 
 
     // All nine history titles open sourced image panels without losing lesson position.
@@ -384,7 +391,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     await digitFrame.getByRole('button',{name:/Vorhersage berechnen/}).first().waitFor({state:'visible',timeout:60000});
     assert.equal(await digitFrame.locator('.jp-OutputArea-error').count(),0,'Optional digit notebook must start with controls, not model errors');
 
-    await dismissNotebook();await p.locator('.nav a[href="#projekt"]').click();await p.locator('[data-lab="ki_lernlabor.ipynb"]').click();
+    await dismissNotebook();await p.locator('.nav a[href="#projekt"]').click();await p.locator('#projekt .project-start-guide a[href="#versuch"]').click();await p.locator('#projekt-4 [data-lab="ki_lernlabor.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
     assert(/\[\d+\]/.test(await lessonCells.nth(2).locator('.jp-InputPrompt').innerText()));
 
