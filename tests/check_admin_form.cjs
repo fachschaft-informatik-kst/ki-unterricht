@@ -727,10 +727,10 @@ const server=http.createServer((req,res)=>{
       return {width:el.ownerDocument.documentElement.clientWidth,cardPadding:card.padding,cardBorder:card.borderLeftWidth,
         buttonBackground:control.backgroundColor,buttonRadius:control.borderRadius};
     });
-    assert.equal(previewStyle.cardPadding,previewStyle.width<=640?"13px":"18px 20px",
+    assert.equal(previewStyle.cardPadding,previewStyle.width<=750?"13px":"13px 16px",
       "Notebook preview must use the published responsive padding at its actual iframe width");
-    assert.equal(previewStyle.cardBorder,"4px");
-    assert.equal(previewStyle.buttonRadius,"8px");
+    assert.equal(previewStyle.cardBorder,"1px");
+    assert.equal(previewStyle.buttonRadius,"7px");
 
     await notebookCard.waitFor();
     assert.equal(await notebookCard.getAttribute("data-notebook"),"content/lesson_einstieg_mein_python_labor.ipynb");
