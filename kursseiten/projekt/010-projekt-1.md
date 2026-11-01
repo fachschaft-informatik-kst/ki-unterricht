@@ -6,7 +6,7 @@
     <!-- MD:START -->
 ## Sechs Etappen – Sie bestimmen das Tempo.
 <!-- MD:END -->
-    <p class="section-intro">Wählen Sie zuerst Ihr Thema und folgen Sie dann den sechs Etappen. Die fachlichen Grundlagen zur Datenaufteilung erarbeiten Sie in Doppellektion 5 im <a href="#daten">Lernpfad</a>. Halten Sie Ihre Ergebnisse in fünf <a href="#projekt-reflexionen">Journal-Reflexionen</a> fest.</p>
+    <p class="section-intro">Bearbeiten Sie in Doppellektion 5 zuerst den <a href="#daten">Lernpfad zur fairen Datenaufteilung</a>. Danach wählen Sie Ihr Thema und arbeiten die sechs Projektetappen in eigenem Tempo durch. Ihre Ergebnisse halten Sie in fünf <a href="#projekt-reflexionen">Journal-Reflexionen</a> fest.</p>
     <div class="progress-card js-only">
       <div class="progress-title">
         <strong>Ihr persönlicher Projektstand</strong><span aria-live="polite" id="progress-text">0 von 12 Schritten</span>
