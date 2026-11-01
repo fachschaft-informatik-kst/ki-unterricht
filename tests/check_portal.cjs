@@ -245,7 +245,16 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.deepEqual(errors,[]);console.log('PASS portal navigation, persistence, attachments, ZIP download/import, Papagei learning path, mobile and page errors');
   await p.setViewportSize({width:1440,height:1000});await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lesson="03"] summary').click();await p.screenshot({path:'/tmp/ki-lesson-plan.png',fullPage:true});
   if(process.env.CHECK_NOTEBOOK){
-   await p.setViewportSize({width:1440,height:1000});await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
+   // The notebook is now a modal editor. Return to the lesson before using
+   // course navigation/backups. The live iframe continues running when closed.
+   const dismissNotebook=async()=>{
+     const close=p.locator('#project-lab[open] .lab-close-toggle');
+     if(await close.count()){
+       await close.click();
+       await p.waitForFunction(()=>!document.querySelector('#project-lab')?.open);
+     }
+   };
+   await p.setViewportSize({width:1440,height:1000});await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
    await p.locator('#project-lab-loading').waitFor({state:'visible'});
    assert.equal(await p.locator('#project-lab-loading').getAttribute('data-state'),'loading','Spinner must cover notebook during initialization');
    assert.equal(await p.locator('#project-frame').getAttribute('inert'),'','Notebook stays inert until initialization completes');
@@ -255,11 +264,11 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
    const f=p.frameLocator('#project-frame');assert.equal(await f.locator('.jp-SideBar:visible').count(),0);assert.equal(await f.locator('#jp-top-panel:visible').count(),0);assert.equal(await f.locator('#jp-left-stack:visible').count(),0);
    assert(await f.locator('.jp-NotebookPanel').evaluate(e=>{const r=e.getBoundingClientRect();return r.left===0&&r.top===0&&Math.abs(r.width-innerWidth)<2;}));
    await p.screenshot({path:'/tmp/ki-portal-embedded.png',fullPage:true});
-   await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();const file=await downloaded;await file.saveAs('/tmp/ki-portal-notebook.zip');
+   await dismissNotebook();await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();const file=await downloaded;await file.saveAs('/tmp/ki-portal-notebook.zip');
    assert.equal(await p.locator('iframe[src*="lab/index"]').count(),1);
    console.log('PASS independent project initializes on demand, hides file navigation and exports real notebook');
-  await p.reload();await p.locator('a[href="#sicherung"]').first().click();await p.locator('#restore-package').setInputFiles('/tmp/ki-portal-notebook.zip');await p.waitForFunction(()=>document.querySelector('#download-status').textContent.includes('Projektstand wiederhergestellt'));
-   await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.restored==='yes',null,{timeout:180000}).catch(async e=>{console.log('RESTORE STATUS',await p.locator('#project-lab-status').innerText());console.log('RESTORE FRAME',await p.frameLocator('#project-frame').locator('body').innerText());throw e;});
+  await p.reload();await dismissNotebook();await p.locator('a[href="#sicherung"]').first().click();await p.locator('#restore-package').setInputFiles('/tmp/ki-portal-notebook.zip');await p.waitForFunction(()=>document.querySelector('#download-status').textContent.includes('Projektstand wiederhergestellt'));
+   await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.restored==='yes',null,{timeout:180000}).catch(async e=>{console.log('RESTORE STATUS',await p.locator('#project-lab-status').innerText());console.log('RESTORE FRAME',await p.frameLocator('#project-frame').locator('body').innerText());throw e;});
    assert.equal(await p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(3).locator('.jp-InputPrompt').innerText(),'[ ]:');
    console.log('PASS imported notebook restored inside iframe without automatic training or test');
    if(process.env.CHECK_TRAINING){
@@ -272,9 +281,9 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
      await p.waitForFunction(i=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[i].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text);},i,{timeout:180000});
      assert.equal(await cells.nth(i).locator('.jp-OutputArea-error').count(),0,await cells.nth(i).innerText());
     }
-    await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded.catch(async e=>{console.log('EXPORT STATUS',await p.locator('#download-status').innerText());console.log('CELLS',await cells.allInnerTexts());throw e;})).saveAs('/tmp/ki-portal-trained.zip');
+    await dismissNotebook();await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded.catch(async e=>{console.log('EXPORT STATUS',await p.locator('#download-status').innerText());console.log('CELLS',await cells.allInnerTexts());throw e;})).saveAs('/tmp/ki-portal-trained.zip');
     console.log('PASS actual training, manual final test and result package');
-    const kernelBefore=await p.locator('#project-frame').getAttribute('data-kernel-id');await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').first().click();
+    const kernelBefore=await p.locator('#project-frame').getAttribute('data-kernel-id');await dismissNotebook();await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').first().click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/perzeptron_und_neuronale_netze.ipynb',null,{timeout:180000});
     assert.notEqual(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore);
     assert.equal(await p.locator('iframe[src*="lab/index"]').count(),1);
@@ -338,11 +347,11 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     const prior=await lessonCells.nth(1).locator('.jp-InputPrompt').innerText();await lessonCells.nth(1).locator('.cm-content').click();await p.keyboard.press('Shift+Enter');
     await p.waitForFunction(prior=>{const text=document.querySelector('#project-frame').contentDocument.querySelectorAll('.jp-CodeCell')[1].querySelector('.jp-InputPrompt').textContent;return /\[\d+\]/.test(text)&&text!==prior;},prior);
     // DL4 now starts with its own single-neuron XOR experiment after the theory.
-    await p.locator('.nav a[href="#netze"]').click();
+    await dismissNotebook();await p.locator('.nav a[href="#netze"]').click();
     assert.equal(await p.locator('#netze-1 [data-lab="xor_einzelne_neuronen.ipynb"]').count(),1);
     assert.equal(await p.locator('#netze-3 [data-lab="mehrschichtige_netze.ipynb"]').count(),1);
     assert.equal(await p.locator('#netze-5 [data-lab="ziffernerkennung.ipynb"]').count(),1);
-    await p.locator('#netze-1 [data-lab="xor_einzelne_neuronen.ipynb"]').click();
+    await dismissNotebook();await p.locator('#netze-1 [data-lab="xor_einzelne_neuronen.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/xor_einzelne_neuronen.ipynb',null,{timeout:180000});
     const xorCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
     const xorCell=xorCells.nth(1);
@@ -352,7 +361,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await xorCell.locator('.widget-dropdown option:text-is("XOR")').count(),1,'XOR should be selectable in DL4');
     assert((await xorCell.locator('.jp-OutputArea').innerText()).includes('Ziel'));
     // Network experiment is another notebook, not the XOR single-neuron cell.
-    await p.locator('#netze-3 [data-lab="mehrschichtige_netze.ipynb"]').click();
+    await dismissNotebook();await p.locator('#netze-3 [data-lab="mehrschichtige_netze.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/mehrschichtige_netze.ipynb',null,{timeout:180000});
     const multiCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
     await multiCells.nth(2).locator('.jp-OutputArea').waitFor({state:'visible',timeout:60000});
@@ -360,21 +369,21 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 
     // Optional handwriting recognition is now its own notebook. Training must
     // only start from explicit manual buttons, not while opening the notebook.
-    await p.locator('#netze-5 [data-lab="ziffernerkennung.ipynb"]').click();
+    await dismissNotebook();await p.locator('#netze-5 [data-lab="ziffernerkennung.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ziffernerkennung.ipynb',null,{timeout:180000});
     const digitFrame=p.frameLocator('#project-frame');
     await digitFrame.getByRole('button',{name:/Modell berechnen/}).first().waitFor({state:'visible',timeout:60000});
     await digitFrame.getByRole('button',{name:/Vorhersage berechnen/}).first().waitFor({state:'visible',timeout:60000});
     assert.equal(await digitFrame.locator('.jp-OutputArea-error').count(),0,'Optional digit notebook must start with controls, not model errors');
 
-    await p.locator('.nav a[href="#projekt"]').click();await p.locator('[data-lab="ki_lernlabor.ipynb"]').click();
+    await dismissNotebook();await p.locator('.nav a[href="#projekt"]').click();await p.locator('[data-lab="ki_lernlabor.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
     assert(/\[\d+\]/.test(await lessonCells.nth(2).locator('.jp-InputPrompt').innerText()));
 
-    await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_tandemprojekt.ipynb',null,{timeout:180000});assert.equal(await p.locator('#project-frame').count(),1);
+    await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_tandemprojekt.ipynb',null,{timeout:180000});assert.equal(await p.locator('#project-frame').count(),1);
     assert((await cells.nth(5).innerText()).includes('Abschlusstest'));
     assert.notEqual(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore);
-    await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-after-switch.zip');
+    await dismissNotebook();await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-after-switch.zip');
     const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../projekt/archive.js')).toString('base64'));
     const before=await archive.readZip(new Blob([fs.readFileSync('/tmp/ki-portal-trained.zip')]));const after=await archive.readZip(new Blob([fs.readFileSync('/tmp/ki-portal-after-switch.zip')]));
     assert.deepEqual(JSON.parse(await before.get('Versuchsprotokoll.json').text()),JSON.parse(await after.get('Versuchsprotokoll.json').text()));
@@ -391,7 +400,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
      window.addEventListener('message',receive);f.contentWindow.postMessage({channel:'ki-portal-v1',type:'restore',id,notebook:nb},location.origin);
     }),imported);
     assert.equal(await p.frameLocator('#project-frame').locator('.jp-OutputArea-error').count(),0);
-    await p.locator('.sidebar-bottom a[href="#journal"]').click();
+    await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();
     // Shift+Enter appends a blank cell at the end; keep the executed cell's index.
     const importedCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
     const last=importedCells.nth(await importedCells.count()-1);
@@ -406,8 +415,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     }
     assert(confirmed,'Fresh kernel not confirmed: '+await last.innerText());
     // Reload must also refuse an edited preparation, even with an original filename.
-    await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-import-check.zip');
-    await p.reload();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
+    await dismissNotebook();await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-import-check.zip');
+    await p.reload();await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
     assert.equal(await p.frameLocator('#project-frame').locator('.jp-OutputArea-error').count(),0);
     assert((await p.frameLocator('#project-frame').locator('.ki-autostart-status').innerText()).includes('Gesicherter Stand'));
