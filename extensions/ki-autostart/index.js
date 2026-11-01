@@ -57,7 +57,7 @@ export default {
       if (Object.keys(saved?.metadata?.widgets?.[STATE]?.state || {}).length) {
         const kernel = panel.sessionContext.session.kernel;
         const stateFuture = kernel.requestExecute({code:
-          "import json as _ki_json, ipywidgets as _ki_widgets\\nprint(_ki_json.dumps(_ki_widgets.Widget.get_manager_state(), ensure_ascii=False))",
+          "import json as _ki_json, ipywidgets as _ki_widgets\nprint(_ki_json.dumps(_ki_widgets.Widget.get_manager_state(), ensure_ascii=False))",
           silent:true,store_history:false,stop_on_error:true});
         let stdout = '';
         stateFuture.onIOPub = message => {
