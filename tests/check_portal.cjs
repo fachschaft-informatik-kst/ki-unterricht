@@ -99,6 +99,11 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     ],'Distinct blue/orange markers with white text in DL1');
     const legendDescription=await p.locator('#einstieg-3 .section-intro').innerText();
     assert(legendDescription.includes('Regeln von Menschen')&&legendDescription.includes('Lernen aus Daten')&&legendDescription.includes('KI-Winter'));
+    const introLayout=await p.locator('#einstieg-3 .section-intro').evaluate(el=>({width:el.getBoundingClientRect().width,containerWidth:el.parentElement.getBoundingClientRect().width,maxWidth:getComputedStyle(el).maxWidth,align:getComputedStyle(el).textAlign,hyphens:getComputedStyle(el).hyphens}));
+    assert.equal(introLayout.maxWidth,'none','Milestone intro must not be limited to 760px');
+    assert.equal(introLayout.align,'justify','Milestone intro uses justified text');
+    assert.equal(introLayout.hyphens,'auto','Milestone intro allows hyphenation');
+    assert(Math.abs(introLayout.width-introLayout.containerWidth)<2,'Milestone intro fills its chapter box');
 
 
     // All nine history titles open sourced image panels without losing lesson position.
