@@ -24,14 +24,16 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
   const shrink=await corners.getAttribute('d');
   assert.notEqual(shrink,expand,'The icon must change into the minimise symbol');
   await button.click();
-  await page.waitForFunction(()=>document.fullscreenElement===null);
+  await page.waitForFunction(selector=>document.fullscreenElement===null &&
+    document.querySelector(selector)?.getAttribute('aria-pressed')==='false',buttonSelector);
   assert.equal(await button.getAttribute('aria-pressed'),'false');
   assert.equal(await button.getAttribute('aria-label'),'Notebook vergrössern');
   assert.equal(await corners.getAttribute('d'),expand);
   await button.click();
   await page.waitForFunction(sel=>document.fullscreenElement?.matches(sel)===true,panelSelector);
   await page.evaluate(()=>document.exitFullscreen());
-  await page.waitForFunction(()=>document.fullscreenElement===null);
+  await page.waitForFunction(selector=>document.fullscreenElement===null &&
+    document.querySelector(selector)?.getAttribute('aria-pressed')==='false',buttonSelector);
   assert.equal(await corners.getAttribute('d'),expand,'Escape/native exit must restore expand icon');
   assert.equal(await button.getAttribute('aria-pressed'),'false');
 }
