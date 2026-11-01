@@ -144,6 +144,7 @@ jobs:
           node tests/check_autostart.cjs
           node tests/check_archive.cjs
           node tests/check_notebook_snapshot.cjs
+          node tests/check_widget_rehydrate.cjs
           node --check projekt/admin/admin.js
           node --check projekt/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
