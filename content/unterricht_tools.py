@@ -421,7 +421,9 @@ def live_alltag():
         widgets.VBox(sliders, layout=widgets.Layout(width='100%')),
         bild, result
     ],layout=widgets.Layout(width='100%')))
-    return sliders,result
+    # Display-only UI: returning widgets prints their Python repr in JupyterLite.
+    # The controls remain live through the displayed VBox and its observers.
+    return None
 
 
 def _neuron_zwei_svg(x1, x2, w1, w2, bias, ziel):
@@ -558,7 +560,8 @@ def live_gatter(aufgabe='AND'):
     for w in (w1,w2,b,gate):w.observe(update,names='value')
     update()
     display(widgets.VBox([gate,widgets.VBox([w1,w2,b]),diagramme,result],layout=widgets.Layout(width='100%')))
-    return gate,w1,w2,b,result
+    # No duplicate text/plain representation of the live Widget objects.
+    return None
 
 
 def regler_alltag():
@@ -790,7 +793,8 @@ def lernen_klick(aufgabe='AND', lernrate=.2):
     wahl.observe(lambda c: neu_starten(), names='value'); rate.observe(lambda c: neu_starten(), names='value')
     display(widgets.VBox([widgets.HBox([wahl, rate]), widgets.HBox([weiter, runde, neu]), beispiel_bilder, ausgabe]))
     neu_starten()
-    return l
+    # Students should only see the interactive exercise, not a Python object.
+    return None
 
 
 def lernen_regler():
