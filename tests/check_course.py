@@ -82,7 +82,9 @@ assert all(not p.has_attr('open') for p in project.select('#projekt-1 .lesson-pl
 assert str(project.select_one('#projekt-1')).index('id="progress"') < str(project.select_one('#projekt-1')).index('id="doppellektion-05"')
 journal = soup.select_one('#journal')
 assert journal.select_one('#projekt-werkbank #start-project')
-assert journal.select_one('#projekt-werkbank #start-studio')
+assert project.select_one('#projekt-3 #projekt-fotostudio #start-studio')
+assert project.select_one('#projekt-fotostudio #studio-panel #studio-frame')
+assert not journal.select_one('#start-studio')
 assert len(journal.select('#projekt-reflexionen .journal-step')) == 5
 assert journal.select_one('#projekt-reflexionen textarea[data-journal="purpose"]')
 assert str(journal).index('id="projekt-werkbank"') < str(journal).index('id="projekt-reflexionen"')
