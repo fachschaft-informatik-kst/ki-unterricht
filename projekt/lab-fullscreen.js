@@ -92,6 +92,9 @@ export function bindNotebookDialog(panel) {
   panel.addEventListener('close', () => {
     panel.hidden = true;
     document.body.classList.remove('ki-notebook-modal-open');
+    // Managed notebook buttons keep aria-expanded in sync on Escape, overlay
+    // dismissal and the close icon, not just on their initial click.
+    if (opener?.isConnected) opener.setAttribute('aria-expanded', 'false');
     if (opener?.isConnected && !opener.closest('[hidden]')) opener.focus({preventScroll:true});
   });
   window.addEventListener('hashchange', () => { if (panel.open) void close(); });
