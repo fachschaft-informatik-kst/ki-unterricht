@@ -114,6 +114,11 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   // Immediate export must include edits even before the background save delay.
   await edit(p,cells.nth(1),"print('zuletzt geändert – noch nicht ausgeführt')");
   const exported=await download(p,'export.zip'),manifest=JSON.parse(await exported.files.get('kursstand.json').text());
+  assert(exported.files.has('Journal.html'),'Human-readable journal must be in the ZIP');
+  const journalHTML=await exported.files.get('Journal.html').text();
+  assert(journalHTML.includes('Unterrichtsantworten')&&journalHTML.includes('ZIP-Test: projekt_datencheck'),
+    'Course answers must appear in the readable journal, not only kursstand.json');
+  assert(journalHTML.includes('Meine eigene Erklärung'),'Previously saved answers belong in the journal');
   for(const [key,value] of Object.entries(formSnapshot.answers))assert.equal(manifest.answers[key],value,'ZIP answer: '+key);
   for(const [key,value] of Object.entries(formSnapshot.journal))assert.equal(manifest.journal[key],value,'ZIP journal: '+key);
   assert.equal(manifest.notebooks.length,7);
@@ -123,6 +128,8 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert.deepEqual(Buffer.from(await exported.files.get('daten/original__pfel.png').arrayBuffer()),Buffer.from(png,'base64'));
   const exportedNotebook=JSON.parse(await exported.files.get('versuch.ipynb').text());
   assert(JSON.stringify(exportedNotebook).includes('zuletzt geändert'));
+  assert(JSON.stringify(exportedNotebook).includes('ZIP-Test: projekt_datencheck'),
+    'Downloaded notebook must include saved classroom answers');
   for(const n of names)assert.deepEqual(JSON.parse(await exported.files.get('notebooks/'+n).text()),doc(n));
   for(const n of ['unterricht_tools.py','ki_projekt/ki_foto_tools.py','notebooks/unterricht_tools.py'])assert(exported.files.has(n),'Missing runtime '+n);
   await p.reload();await openProject(p);cells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
