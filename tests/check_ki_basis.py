@@ -70,6 +70,17 @@ def main():
     u.drei_rollen(100);rejects(lambda:u.drei_rollen(5))
     for regler in (u.ziffern_regler,u.ziffer_regler,u.xor_lernen_regler):regler()
     u.ziffern_vorschau()
+    # Lernschritt-Diagramm ohne Matplotlib-Ausgabe: das Notebook soll auch nach
+    # einem Klick funktionieren, wenn beim Start nur NumPy geladen wurde.
+    lern_grafik=[]
+    display_alt=u.display
+    try:
+        u.display=lambda obj:lern_grafik.append(obj)
+        u._lern_bild(u._Lerner('AND',.2), {'x': (1,0)})
+    finally:
+        u.display=display_alt
+    assert len(lern_grafik)==1
+    assert '<svg' in lern_grafik[0].data and 'Aktuelle Grenze' in lern_grafik[0].data
     # Lernweg Neuron: Gatter konvergieren, XOR nie; ein Neuron löst XOR höchstens 3 von 4, vier versteckte Neuronen vollständig.
     for aufgabe in ('AND','OR','NAND','NOR'):
         w,b=u.perzeptron_lernen(aufgabe);assert np.all((u._EINGABEN@w+b>=0)==np.array(u._ZIELE[aufgabe]))
