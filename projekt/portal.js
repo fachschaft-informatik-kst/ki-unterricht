@@ -169,12 +169,10 @@ async function showNotebook(name,owner,scroll=true,trigger=null){
  switching=true;
  try{
   await initialization;
-  const target=trigger?.closest('.ki-notebook-block');
-  const relocate=Boolean(target&&lab.parentElement!==target);
-  if(name!==activeName||frame.dataset.ready==='error'||relocate){
+  // Keep the dialog attached to the page rather than reparenting its iframe
+  // into each lesson card: a DOM move can restart the entire Python runtime.
+  if(name!==activeName||frame.dataset.ready==='error'){
    if(activeName&&frame.dataset.ready!=='error')await snapshotCurrent();
-   // Move only after capturing the old kernel; a moved iframe is restarted.
-   if(relocate)target.append(lab);
    activeName=name;initializingFrame=false;notebookRevision=0;notebookDirty=false;frame.dataset.ready='no';delete frame.dataset.restored;
    // Saved documents are authoritative for all experiments, including the neuron lab.
    // Never discard student edits/outputs simply to show the latest template. Saved
