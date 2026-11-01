@@ -1,3 +1,4 @@
+import {bindLabFullscreen} from './lab-fullscreen.js';
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 import experiments from './experiments.json' with {type:'json'};
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
@@ -197,7 +198,12 @@ document.addEventListener('click',event=>{
  void showNotebook(button.dataset.lab,button.closest('main > section')?.id||'projekt',true,button);
 });
 window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false,$('start-project'));});
-all('[data-fullscreen]').forEach(b=>b.addEventListener('click',()=>{const node=$(b.dataset.fullscreen).closest('.lab-panel');if(node.requestFullscreen)node.requestFullscreen();}));
+// Match the teacher editor: expand/collapse is one persistent icon button,
+// kept in sync with the browser's fullscreen state (including Escape).
+all('[data-fullscreen]').forEach(button=>{
+ const frame=$(button.dataset.fullscreen);
+ if(frame)bindLabFullscreen(button,frame.closest('.lab-panel'));
+});
 window.addEventListener('beforeunload',event=>{
  if(notebookDirty||!artifactStored||!filesStored||transferring){event.preventDefault();event.returnValue='Änderungen sind noch nicht vollständig gesichert.';}
 });
