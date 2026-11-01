@@ -161,7 +161,7 @@ Helfen vielfältigere Trainingsbilder? Zwei Klassen, gleich viele Bilder, dassel
         <!-- MD:START -->
 Alle Antworten schreiben Sie direkt ins gemeinsame Journal.
 <!-- MD:END -->
-        <a class="btn" href="#journal">Zum Journal →</a>
+        <a class="btn" href="#projekt-reflexionen">Steckbrief im Journal ausfüllen →</a>
       </div>
     </details>
   </div>
