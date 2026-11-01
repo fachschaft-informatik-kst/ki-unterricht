@@ -64,5 +64,6 @@ Prüfen Sie für (1, 0): Was antworten OR und NAND? Was entsteht, wenn der Ausga
     <!-- MD:START -->
 **Überprüfen Sie den Aufbau:** Was berechnen die beiden Neuronen der versteckten Schicht? Wie verbindet das Ausgabeneuron ihre Antworten? Anschliessend öffnen Sie «Mit dem Netzwerk experimentieren».
 <!-- MD:END -->
+    <label class="field answer"><span>Unser Verständnischeck: Was liefern OR und NAND für (1, 0), was macht das Ausgabeneuron daraus und welche Aufgabe hat die versteckte Schicht?</span><textarea data-basis-answer="basis-netze-netze_zwischenschicht" rows="3" maxlength="10000" placeholder="OR = …, NAND = …, AND = … / Die versteckte Schicht …"></textarea></label>
   </div>
 </details>

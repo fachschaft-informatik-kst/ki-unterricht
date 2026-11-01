@@ -267,22 +267,39 @@ window.addEventListener('message',async event=>{
   notebookUpdates=notebookUpdates.then(()=>captureSnapshot(name,data)).catch(error=>{notebookDirty=true;status('Notebook noch nicht vollständig gesichert: '+error.message,true);});
  }
 });
+// All saved classroom answers also belong in the human-readable journal, not only kursstand.json.
+function courseAnswers(){
+ return answerFields.filter(e=>String(state.answers[e.dataset.answer]||'').trim()).map(e=>{
+  const label=e.closest('label');
+  const question=label?.querySelector('span')?.textContent?.trim()||
+   [...document.querySelectorAll('label[for]')].find(l=>l.htmlFor===e.id)?.textContent?.trim()||
+   e.getAttribute('aria-label')||e.closest('tr')?.querySelector('th')?.textContent?.trim()||e.dataset.answer;
+  const chapter=e.closest('.kapitel')?.querySelector('.kapitel-titel')?.textContent?.trim()||
+   e.closest('.protokoll-block')?.querySelector('h3')?.textContent?.trim()||'Weitere Unterrichtsaufgaben';
+  const value=state.answers[e.dataset.answer];
+  const answer=e.tagName==='SELECT'?(Array.from(e.options).find(o=>o.value===value)?.textContent?.trim()||value):value;
+  return {chapter,question,answer};
+ });
+}
 function notebookForExport(){
  if(!notebook)return null;
  const nb=structuredClone(notebook);nb.cells=nb.cells.filter(c=>!c.metadata?.['ki-journal-export']);
  const add=source=>({id:crypto.randomUUID(),cell_type:'markdown',metadata:{'ki-journal-export':true},source:source.split(/(?<=\n)/)});
  nb.cells.unshift(add('# Projektjournal\n\n'+state.journal.names+' · '+state.journal.class+'\n\nDie folgenden Antworten wurden auf der Kurswebseite verfasst.\n'));
  for(const e of exportFields())nb.cells.push(add('## '+e.previousElementSibling.textContent+'\n\n'+(state.journal[e.dataset.journal]||'Noch offen.')));
+ const lessons=courseAnswers();
+ if(lessons.length)nb.cells.push(add('## Antworten aus den Unterrichtsaufgaben\n\n'+lessons.map(e=>'### '+e.chapter+' – '+e.question+'\n\n'+e.answer).join('\n\n')));
  return nb;
 }
 function exportFields(){return journalFields.filter(e=>e.dataset.optional===undefined||state.journal[e.dataset.journal]?.trim());}
 function journalHTML(){
  const sections=exportFields().map(e=>'<section><h2>'+esc(e.previousElementSibling.textContent)+'</h2><p>'+esc(state.journal[e.dataset.journal]||'Noch offen.').replace(/\n/g,'<br>')+'</p></section>').join('');
+ const lessonSections=courseAnswers().map(e=>'<section><h3>'+esc(e.chapter+' · '+e.question)+'</h3><p>'+esc(e.answer).replace(/\n/g,'<br>')+'</p></section>').join('');
  const outputs=(notebook?.cells||[]).filter(c=>c.cell_type==='code').map(c=>{
   const body=(c.outputs||[]).map(o=>{if(o.data?.['image/png']){const png=Array.isArray(o.data['image/png'])?o.data['image/png'].join(''):o.data['image/png'];if(/^[A-Za-z0-9+/=\s]+$/.test(png))return '<img alt="Versuchsausgabe" src="data:image/png;base64,'+png+'">';}const value=o.text||o.data?.['text/plain']||o.evalue||'';return value?'<pre>'+esc(Array.isArray(value)?value.join(''):value)+'</pre>':'';}).join('');
   return body?'<section><details><summary>Ausgeführter Code</summary><pre>'+esc(Array.isArray(c.source)?c.source.join(''):c.source)+'</pre></details>'+body+'</section>':'';
  }).join('');
- return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Projektjournal</title><style>body{max-width:900px;margin:45px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h1,h2{line-height:1.2}h2{font-size:20px}section{margin:24px 0;padding-bottom:18px;border-bottom:1px solid #ddd}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f5f2;padding:15px;font-size:12px}img{max-width:100%;height:auto}.meta{color:#52656a}@media print{details{display:none}section{break-inside:avoid}}</style><h1>Unser KI-Projekt</h1><p class="meta">'+esc(state.journal.names)+' · '+esc(state.journal.class)+'<br>Exportiert: '+esc(new Date().toLocaleString('de-CH'))+'</p>'+sections+'<h1>Versuchsausgaben</h1>'+(outputs||'<p>Noch keine Ausgaben gesichert.</p>')+'<h2>Versuchsprotokoll</h2><pre>'+esc(protocol?JSON.stringify(protocol,null,2):'Noch kein Protokoll verfügbar.')+'</pre><h2>Datendateien</h2><ul>'+state.files.map(f=>'<li>'+esc(f.name)+'</li>').join('')+'</ul></html>';
+ return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Projektjournal</title><style>body{max-width:900px;margin:45px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h1,h2{line-height:1.2}h2{font-size:20px}section{margin:24px 0;padding-bottom:18px;border-bottom:1px solid #ddd}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f5f2;padding:15px;font-size:12px}img{max-width:100%;height:auto}.meta{color:#52656a}@media print{details{display:none}section{break-inside:avoid}}</style><h1>Unser KI-Projekt</h1><p class="meta">'+esc(state.journal.names)+' · '+esc(state.journal.class)+'<br>Exportiert: '+esc(new Date().toLocaleString('de-CH'))+'</p>'+sections+'<h1>Unterrichtsantworten</h1>'+(lessonSections||'<p>Noch keine Antworten zu Unterrichtsaufgaben eingetragen.</p>')+'<h1>Versuchsausgaben</h1>'+(outputs||'<p>Noch keine Ausgaben gesichert.</p>')+'<h2>Versuchsprotokoll</h2><pre>'+esc(protocol?JSON.stringify(protocol,null,2):'Noch kein Protokoll verfügbar.')+'</pre><h2>Datendateien</h2><ul>'+state.files.map(f=>'<li>'+esc(f.name)+'</li>').join('')+'</ul></html>';
 }
 function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}
 async function pack(submission){
@@ -296,7 +313,7 @@ async function pack(submission){
   const absent=missing();if(submission&&absent.length&&!confirm('Noch unvollständig: '+absent.join(', ')+'. Trotzdem diesen Stand herunterladen?'))return;
   const savedNames=Object.keys(others).filter(name=>names[name]&&name!==projectName);
   const snapshot={...state,exported:new Date().toISOString(),progress:window.KIProgress?.get(),protocol,protocolSignature,notebooks:[...(notebook?['versuch.ipynb']:[]),...savedNames.map(name=>'notebooks/'+name)]};
-    const entries=[{name:'kursstand.json',data:JSON.stringify(snapshot,null,2)},{name:'Journal.html',data:journalHTML()},{name:'LESEN.txt',data:'Journal.html enthält das Projektjournal und Versuchsausgaben.\nkursstand.json enthält auch Unterrichtsantworten, Häkchen und Selbsteinschätzungen.\nversuch.ipynb und notebooks/ enthalten bearbeitete Notebooks mit Code, Markdown, eingebetteten Bildern und Ausgaben. Widget-Werte und Diagramme sind als lesbarer Stand gesichert.\nDie ZIP-Datei kann auf der Kursseite als Projektstand wiederhergestellt werden.\nHinzugefügte Dateien und im Notebook ausgewählte Uploads liegen unter daten/.\nOriginalfotos und eine noch offene Fotostudio-Sammlung müssen zusätzlich unter «Notizen & Projekt» hinzugefügt werden.\nPython-Variablen und trainierte Modelle im Arbeitsspeicher sind nicht gespeichert. Nach Wiederherstellung Vorbereitung, Datenimport und benötigte Berechnungen erneut ausführen.\nFür eine lokale Wiederholung: Python 3.12, numpy, scipy, scikit-learn, matplotlib, pillow, ipywidgets; Notebook-Zellen der Reihe nach ausführen und Fotostudio-JSON aus daten/ auswählen.\nDer Download ist keine automatische Einreichung.\n'}];
+    const entries=[{name:'kursstand.json',data:JSON.stringify(snapshot,null,2)},{name:'Journal.html',data:journalHTML()},{name:'LESEN.txt',data:'Journal.html enthält das Projektjournal, die Unterrichtsantworten (auch Auswahlfelder) und Versuchsausgaben.\nkursstand.json enthält auch Unterrichtsantworten, Häkchen und Selbsteinschätzungen.\nversuch.ipynb und notebooks/ enthalten bearbeitete Notebooks mit Code, Markdown, eingebetteten Bildern und Ausgaben. Widget-Werte und Diagramme sind als lesbarer Stand gesichert.\nDie ZIP-Datei kann auf der Kursseite als Projektstand wiederhergestellt werden.\nHinzugefügte Dateien und im Notebook ausgewählte Uploads liegen unter daten/.\nOriginalfotos und eine noch offene Fotostudio-Sammlung müssen zusätzlich unter «Notizen & Projekt» hinzugefügt werden.\nPython-Variablen und trainierte Modelle im Arbeitsspeicher sind nicht gespeichert. Nach Wiederherstellung Vorbereitung, Datenimport und benötigte Berechnungen erneut ausführen.\nFür eine lokale Wiederholung: Python 3.12, numpy, scipy, scikit-learn, matplotlib, pillow, ipywidgets; Notebook-Zellen der Reihe nach ausführen und Fotostudio-JSON aus daten/ auswählen.\nDer Download ist keine automatische Einreichung.\n'}];
   const nb=notebookForExport();if(nb)entries.push({name:'versuch.ipynb',data:JSON.stringify(checkNotebook(nb),null,1)});
   if(protocol)entries.push({name:'Versuchsprotokoll.json',data:JSON.stringify(protocol,null,2)});
   for(const name of savedNames)entries.push({name:'notebooks/'+name,data:JSON.stringify(checkNotebook(others[name]),null,1)});

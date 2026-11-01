@@ -1,6 +1,6 @@
 <span class="section-label">Notizen &amp; Projekt</span>
 <h1>Alles herunterladen. Später weiterarbeiten.</h1>
-<p class="section-intro">Ein ZIP enthält Journal, Antworten, Projekt-Notebook mit Ausgaben, Protokoll, Ihre Eingaben in den Übungsnotebooks und hinzugefügte Dateien. Auf einem anderen Gerät laden Sie das ZIP hier wieder hoch.</p>
+<p class="section-intro">Ein ZIP enthält <strong>Journal.html</strong> mit dem Projektjournal und allen ausgefüllten Unterrichtsantworten (auch Auswahlaufgaben), das Projekt-Notebook mit Ausgaben, Protokoll, Ihre Eingaben in den Übungsnotebooks und hinzugefügte Dateien. Auf einem anderen Gerät laden Sie das ZIP hier wieder hoch.</p>
 <div class="card">
   <!-- MD:START -->
 ### Dateien zum Projekt hinzufügen
@@ -24,6 +24,7 @@
   <input accept=".zip" hidden="" id="restore-package" type="file"/>
 </div>
 <p class="status" id="download-status" role="status"></p>
+<p class="small">Für die Einreichung: Namen, Klasse und Journalfelder prüfen, «Abgabepaket herunterladen» wählen und die Datei <strong>Journal.html</strong> im ZIP kurz öffnen. Der Download ist noch keine Abgabe.</p>
 <p class="small">Der Download übermittelt nichts automatisch. Das Hochladen ersetzt den aktuellen Browserstand. Laden Sie nach jeder Arbeitsphase eine ZIP herunter und bewahren Sie sie ausserhalb des Browsers auf.</p>
 <details id="reproduktion" open="">
   <summary>Reproduktionsprüfung · ca. 30 Minuten · unbenotet</summary>

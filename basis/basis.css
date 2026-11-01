@@ -103,6 +103,9 @@ body .footer .detail-body a{overflow-wrap:anywhere;}
 body .footer .detail-body>p:last-child a{margin-right:18px;}
 .basis-transfer{margin:34px 0;padding:26px;background:#e9eefc;border-top:5px solid var(--accent);border-radius:0 0 12px 12px;}
 .basis-transfer h2{font-size:clamp(1.5rem,2.4vw,2rem);}
+.basis-transfer-identity{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px;max-width:680px;margin:18px 0;}
+.basis-transfer-identity .field{display:grid;gap:6px;min-width:0;}
+.basis-transfer-identity input{width:100%;padding:10px 12px;border:1px solid #9daeca;border-radius:8px;background:#fff;}
 .basis-transfer-actions{display:grid;gap:14px;max-width:680px;}
 .basis-backup-controls{display:grid;gap:14px;}
 .basis-backup-controls label{display:grid;gap:6px;font-size:14px;font-weight:650;}
@@ -110,6 +113,7 @@ body .footer .detail-body>p:last-child a{margin-right:18px;}
 .basis-backup-controls button{justify-self:start;}
 @media(max-width:720px){
   .basis-transfer{padding:19px 16px;}
+  .basis-transfer-identity{grid-template-columns:1fr;}
   .basis-backup-controls button{width:100%;}
 }
 
