@@ -147,12 +147,13 @@ def _mirror_chapter(raw,src,dst):
     # class-specific JupyterLite notebook just like the existing lab buttons.
     raw=raw.replace('content/perzeptron_und_neuronale_netze.ipynb','content/basis_neuron.ipynb')
     raw=raw.replace('portal/perzeptron_und_neuronale_netze.ipynb','portal/basis_neuron.ipynb')
+    raw=raw.replace('content/mehrschichtige_netze.ipynb','content/basis_netze.ipynb')
     raw=_re.sub(r'data-answer="([^"]+)"',lambda m:f'data-basis-answer="{dst}-{m.group(1)}"',raw)
     def _button(m):
         notebook={"perzeptron_und_neuronale_netze.ipynb":"basis_neuron.ipynb",
                   "mehrschichtige_netze.ipynb":"basis_netze.ipynb"}.get(m.group(1),m.group(1))
-        return f'<a class="btn primary" href="../lab/index.html?path=portal/{notebook}">{m.group(2)}</a>'
-    return _re.sub(r'<button class="btn primary" data-lab="([^"]+)">([\s\S]*?)</button>',_button,raw)
+        return f'<a class="ki-notebook-launch" href="../lab/index.html?path=portal/{notebook}">{m.group(2)}</a>'
+    return _re.sub(r'<button type="button" class="ki-notebook-launch" data-lab="([^"]+)">([\\s\\S]*?)</button>',_button,raw)
 
 for _a,_b,_filenames in [
     ("perzeptron","basis-neuron",[f"0{i}0-perzeptron-{i}.md" for i in range(1,8)]),
