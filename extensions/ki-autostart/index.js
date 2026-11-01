@@ -78,7 +78,7 @@ for _ki_item in _ki_saved:
     if _ki_widget is not None:
         try:
             _ki_widget.set_trait(_ki_item['trait'], _ki_item['value'])
-        except (ValueError, TypeError, KeyError):
+        except Exception:
             pass
 del _ki_saved, _ki_item, _ki_widget`;
             const apply = kernel.requestExecute({code,silent:true,store_history:false,stop_on_error:true});
