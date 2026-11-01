@@ -81,6 +81,8 @@ function mount(){
  panel.hidden=!overlay.isOpen||!current||(active!==owner&&hash!=='basis-sicherung');
 }
 async function openNotebook(name,view,force=false,host=null){
+ // A native dialog must be attached before showModal(); keep it there forever.
+ if(!panel.isConnected)document.getElementById('basis-sicherung').before(panel);
  await loaded;
  if(!notebookNames.includes(name))throw Error('Unbekanntes Notebook.');
  if(saved[name]&&!matchesCurrentLesson(name,saved[name])){
