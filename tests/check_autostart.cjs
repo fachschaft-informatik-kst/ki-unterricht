@@ -51,6 +51,13 @@ async function simulate(name, fail = false, twice = false, modification = '') {
     assert(!packages(name).includes('pillow'), name + ' must not preload unused Pillow');
     assert(packages(name).includes('scikit-learn'));
   }
+  assert.deepEqual(packages('ki_projekt/ki_tandemprojekt.ipynb'), ['numpy','pillow'],
+    'The saved project journal must not block startup on unused plotting/training packages');
+  const journalCells = JSON.parse(fs.readFileSync(path.join(root,'content/ki_projekt/ki_tandemprojekt.ipynb'))).cells;
+  assert(journalCells[11].source.join('').includes("await pyodide_js.loadPackage(['matplotlib'])"),
+    'Only the first visualisation should fetch plotting dependencies');
+  assert(journalCells[14].source.join('').includes("await pyodide_js.loadPackage(['scipy', 'scikit-learn'])"),
+    'Training should fetch scientific packages only when started');
   for (const name of ['ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb']) {
     assert(packages(name).includes('pillow'), 'Image-project experiments still need Pillow');
   }
