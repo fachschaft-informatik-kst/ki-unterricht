@@ -1,4 +1,5 @@
 import {makeZip,readZip} from '../projekt/archive.js';
+import {bindLabFullscreen} from '../projekt/lab-fullscreen.js';
 
 // The basic course has its own backup schema and does not alter the fourth-year portal.
 const KEY='kst-ki-basis-v1', NBKEY='kst-ki-basis-notebooks-v1', SCHEMA='ki-basis-zip-v1';
@@ -15,7 +16,7 @@ const panel=document.createElement('div');panel.id='basis-notebook-panel';panel.
 panel.innerHTML=`<div class="lab-head">
   <b id="basis-lab-title">Experiment</b>
   <span id="basis-lab-status" role="status">Noch kein Notebook geöffnet.</span>
-  <button type="button" class="btn compact" id="basis-lab-fullscreen">Vergrössern</button>
+  <button type="button" class="lab-fullscreen-toggle" id="basis-lab-fullscreen" aria-label="Notebook vergrössern" aria-pressed="false" title="Notebook vergrössern"></button>
 </div>
 <p class="small">Codezelle anklicken, ändern und mit Shift + Enter ausführen. Die Vorbereitung startet automatisch.</p>
 <div class="lab-frame-shell">
@@ -42,9 +43,7 @@ function notebookLoading(state,message=''){
   },180000);
  }
 }
-panel.querySelector('#basis-lab-fullscreen').addEventListener('click',()=>{
- if(panel.requestFullscreen)panel.requestFullscreen();
-});
+bindLabFullscreen(panel.querySelector('#basis-lab-fullscreen'), panel);
 loaderRetry.addEventListener('click',()=>{if(current)void openNotebook(current,owner,true);});
 let current=null,owner=null,ready=false,revision=0,restoring=false,changed=false;
 let saved={},legacyNotebooks={},notebookUploads={},photoJSON=null;try{saved=JSON.parse(localStorage.getItem(NBKEY)||'{}')||{};}catch{}
