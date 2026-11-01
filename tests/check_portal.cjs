@@ -113,6 +113,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.locator('#projekt-1 .lesson-plan[open]').count(),0,'Project lesson descriptions start collapsed');
     assert.equal(await p.locator('#journal #projekt-werkbank #start-project').count(),1,'Project notebook starts in the workbench');
     assert.equal(await p.locator('#projekt-3 #projekt-fotostudio #start-studio').count(),1,'Photo studio belongs to step 2 in the data plan');
+    assert.equal(await p.locator('#projekt #studio-frame').count(),1,'Embedded photo studio stays in the project section');
+    assert.equal(await p.locator('#journal #studio-frame').count(),0,'Do not duplicate photo studio on the journal page');
     assert.equal(await p.locator('#journal #start-studio').count(),0,'Journal is for the model experiment, not photo preparation');
     assert.equal(await p.locator('#journal #projekt-reflexionen .journal-step').count(),5,'All five saved reflections remain available');
 
