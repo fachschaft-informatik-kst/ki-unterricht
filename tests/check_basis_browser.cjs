@@ -4,6 +4,37 @@ const {spawn}=require('node:child_process');
 const path=require('node:path');
 const fs=require('node:fs'),os=require('node:os');
 const assert=require('node:assert/strict');
+
+// Browser-level contract shared by the first- and fourth-year notebook panels:
+// button and SVG must toggle in both directions, and browser-initiated exits
+// (for example Escape) must restore the initial icon and accessible label.
+async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
+  const button=page.locator(buttonSelector);
+  await button.waitFor({state:'visible'});
+  assert.equal(await button.getAttribute('aria-label'),'Notebook vergrössern');
+  assert.equal(await button.getAttribute('aria-pressed'),'false');
+  const corners=button.locator('svg path');
+  assert.equal(await corners.count(),1,'Fullscreen control needs the editor-style SVG');
+  const expand=await corners.getAttribute('d');
+  await button.click();
+  await page.waitForFunction(sel=>document.fullscreenElement?.matches(sel)===true,panelSelector);
+  assert.equal(await button.getAttribute('aria-pressed'),'true');
+  assert.equal(await button.getAttribute('aria-label'),'Notebook verkleinern');
+  assert.equal(await button.getAttribute('title'),'Notebook verkleinern');
+  const shrink=await corners.getAttribute('d');
+  assert.notEqual(shrink,expand,'The icon must change into the minimise symbol');
+  await button.click();
+  await page.waitForFunction(()=>document.fullscreenElement===null);
+  assert.equal(await button.getAttribute('aria-pressed'),'false');
+  assert.equal(await button.getAttribute('aria-label'),'Notebook vergrössern');
+  assert.equal(await corners.getAttribute('d'),expand);
+  await button.click();
+  await page.waitForFunction(sel=>document.fullscreenElement?.matches(sel)===true,panelSelector);
+  await page.evaluate(()=>document.exitFullscreen());
+  await page.waitForFunction(()=>document.fullscreenElement===null);
+  assert.equal(await corners.getAttribute('d'),expand,'Escape/native exit must restore expand icon');
+  assert.equal(await button.getAttribute('aria-pressed'),'false');
+}
 (async()=>{
   const directory=process.env.PORTAL_SITE||path.resolve(__dirname,'../dist');
   const server=spawn('python',['-m','http.server','8770','--bind','127.0.0.1','--directory',directory],{stdio:'ignore'});
@@ -253,6 +284,9 @@ const assert=require('node:assert/strict');
       assert.equal(await notebookPage.locator('#basis-notebook-panel.lab-panel').count(),1);
       assert.equal(await notebookPage.getByText('Notebook der 1. Klasse').count(),0);
       assert.equal(await notebookPage.locator('#basis-lab-fullscreen').count(),1);
+      if(notebook==='basis_neuron.ipynb'){
+        await checkNotebookFullscreen(notebookPage,'#basis-lab-fullscreen','#basis-notebook-panel');
+      }
       await notebookPage.close();
     }
     // Jupyter notebooks can now be launched and edited within the chapter.
@@ -292,6 +326,9 @@ const assert=require('node:assert/strict');
       await frame.waitFor({state:'attached'});
       assert.equal(new URL(await frame.getAttribute('src'),url).searchParams.get('path'),'portal/'+expected.split('/').pop());
       assert.equal(await card.locator('.lab-panel').count(),1,'Saved notebook runtime belongs inside the course card');
+      if(url.includes('/projekt/')){
+        await checkNotebookFullscreen(notebookPageInline,'[data-fullscreen="project-frame"]','#project-lab');
+      }
       assert.equal(await card.locator('a.ki-notebook-direct').getAttribute('target'),'_blank');
     }
     await notebookPageInline.close();
