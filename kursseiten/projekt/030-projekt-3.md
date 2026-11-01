@@ -79,10 +79,14 @@ Vergleichen Sie Ihre Antworten erst, wenn Sie alle drei gelöst haben.
 Öffnen Sie das Notebook, bearbeiten Sie zuerst **«Drei Aufgaben für Daten»**, danach **«Ein Datenleck»**. Lesen Sie jeweils die Frage, treffen Sie eine Vermutung und verändern Sie **eine Einstellung**. Vergleichen Sie Ihre Beobachtung mit dem Merksatz. Die dritte Vertiefung ist freiwillig.
 <!-- MD:END -->
       <div class="ki-notebook-block" data-notebook="content/daten_training.ipynb" data-title="Daten fair aufteilen">
-  <h3>Jupyter-Notebook · Daten fair aufteilen</h3>
-  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
-  <button type="button" class="ki-notebook-launch" data-lab="daten_training.ipynb">Notebook hier öffnen</button>
-</div>
+        <!-- MD:START -->
+### Jupyter-Notebook · Daten fair aufteilen
+<!-- MD:END -->
+        <!-- MD:START -->
+Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+<!-- MD:END -->
+        <button type="button" class="ki-notebook-launch" data-lab="daten_training.ipynb">Notebook hier öffnen</button>
+      </div>
     </div>
     <div class="card">
       <!-- MD:START -->
