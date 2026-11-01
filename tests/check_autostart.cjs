@@ -29,8 +29,8 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   return {nb, executed, badges};
 }
 (async () => {
-  // Initial import budgets: the basic neuron lab needs only numpy/matplotlib.
-  // Image-project notebooks deliberately retain Pillow and sklearn.
+  // SVG widgets must be usable without loading the large Matplotlib package.
+  // Plotting and ML experiments continue to load their required dependencies.
   const packages = name => {
     const nb = JSON.parse(fs.readFileSync(path.join(root, 'content', name)));
     const setup = nb.cells.find(c => c.cell_type==='code' && c.metadata.tags?.includes('ki-autostart'));
@@ -38,8 +38,15 @@ async function simulate(name, fail = false, twice = false, modification = '') {
     assert(match, 'Package declaration missing in ' + name);
     return [...match[1].matchAll(/'([^']+)'/g)].map(m=>m[1]);
   };
-  assert.deepEqual(packages('perzeptron_und_neuronale_netze.ipynb'), ['numpy','matplotlib']);
-  assert.deepEqual(packages('xor_einzelne_neuronen.ipynb'), ['numpy','matplotlib']);
+  assert.deepEqual(packages('perzeptron_und_neuronale_netze.ipynb'), ['numpy']);
+  assert.deepEqual(packages('xor_einzelne_neuronen.ipynb'), ['numpy']);
+  assert.deepEqual(packages('basis_neuron.ipynb'), ['numpy']);
+  const tools = fs.readFileSync(path.join(root,'content/unterricht_tools.py'),'utf8');
+  assert(!/^import matplotlib\\.pyplot as plt$/m.test(tools),
+    'Matplotlib must not initialize when importing HTML/SVG teaching widgets');
+  assert(tools.includes('class _LazyPlots'));
+  assert(tools.includes("widgets.interact_manual.options(manual_name='Netz trainieren ▶')"),
+    'The XOR learning widget must wait for an explicit click before training');
   for (const name of ['mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb']) {
     assert(!packages(name).includes('pillow'), name + ' must not preload unused Pillow');
     assert(packages(name).includes('scikit-learn'));
