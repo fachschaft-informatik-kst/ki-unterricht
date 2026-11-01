@@ -8,7 +8,13 @@ kurz: Neue Ausgabeklassen für A und B
 
 Ein Netz kann nicht automatisch neue Bildklassen erkennen. In dieser Doppellektion passt ihr es **gemeinsam mit der Lehrperson** an. Wir übernehmen die bereits gelernten Gewichte der ersten Schicht und trainieren einen **neuen Ausgabekopf** für die Buchstaben A und B.
 
-[**Notebook «Bildmodell» öffnen ↗**](../lab/index.html?path=portal/basis_bildmodell.ipynb)
+
+<div class="ki-notebook-block" data-notebook="content/basis_bildmodell.ipynb" data-title="Ziffern und Buchstaben">
+  <h3>Jupyter-Notebook · Ziffern und Buchstaben</h3>
+  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
+  <a class="ki-notebook-launch" href="../lab/index.html?path=portal/basis_bildmodell.ipynb">Notebook hier öffnen</a>
+</div>
+
 
 1. Öffnet den Abschnitt **DL 6** und schaut euch die neuen Trainings- und Testbilder an.
 2. Führt das Training des A/B-Kopfs aus. Die erste Schicht bleibt unverändert.
