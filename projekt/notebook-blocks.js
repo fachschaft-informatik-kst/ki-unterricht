@@ -31,7 +31,7 @@
     if (!open) {
       if (basic && managed) {
         open = document.createElement("a");
-        open.href = url.href;
+        open.href = "../lab/index.html?path=" + encodeURIComponent("portal/" + name);
       } else {
         open = document.createElement("button");
         open.type = "button";
