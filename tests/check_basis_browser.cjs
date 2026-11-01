@@ -244,7 +244,7 @@ const assert=require('node:assert/strict');
     ]){
       const notebookPage=await browser.newPage();
       await notebookPage.goto('http://127.0.0.1:8770/basis/#'+lesson);
-      await notebookPage.locator('#'+lesson+' a.btn.primary[href*="'+link+'"]').first().click();
+      await notebookPage.locator('#'+lesson+' a.ki-notebook-launch[href*="'+link+'"]').first().click();
       await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
       const source=await notebookPage.locator('#basis-lab-frame').getAttribute('src');
       assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/'+notebook,
@@ -268,16 +268,17 @@ const assert=require('node:assert/strict');
       // Navigate just as a student would: inactive lesson sections are hidden.
       // Opening only the nested <details> does not make a hidden lesson visible.
       await notebookPageInline.goto(url+'#'+section);
-      const card=notebookPageInline.locator('.ki-notebook-block[data-notebook="'+expected+'"]');
-      assert.equal(await card.count(),1,'Notebook must be present in the matching chapter');
+      const matches=notebookPageInline.locator('.ki-notebook-block[data-notebook="'+expected+'"]');
+      assert((await matches.count())>=1,'Notebook must be present in the matching chapter');
+      const card=matches.first();
       await card.evaluate(el=>{el.closest('details.kapitel').open=true;});
       assert.equal(await card.locator('.ki-notebook-iframe').count(),0,'No runtime iframe before user action');
-      const launch=card.locator('button.ki-notebook-launch');
+      const launch=card.locator('.ki-notebook-launch');
       const scriptResult=await notebookPageInline.request.get(new URL('notebook-blocks.js',url).href);
       assert.equal(scriptResult.status(),200,'Notebook block script must be served alongside each course');
       await notebookPageInline.waitForFunction(path=>{
         const card=document.querySelector('.ki-notebook-block[data-notebook="'+path+'"]');
-        return !!card?.querySelector('button.ki-notebook-launch');
+        return !!card?.querySelector('.ki-notebook-launch');
       },expected,{timeout:10000}).catch(async e=>{
         throw Error('Notebook launcher missing: '+JSON.stringify(await card.evaluate(el=>({
           script:[...document.scripts].map(s=>s.src).filter(x=>x.includes('notebook')),
@@ -287,12 +288,10 @@ const assert=require('node:assert/strict');
       });
       await launch.click();
       assert.equal(await launch.getAttribute('aria-expanded'),'true');
-      const frame=card.locator('iframe.ki-notebook-iframe');
-      await frame.waitFor({state:'visible'});
-      assert.match(await frame.getAttribute('src'),new RegExp('portal%2F'+expected.split('/').pop().replace('.','\\.')));
-      assert.equal(await card.locator('.ki-notebook-runtime').isVisible(),true);
-      await card.getByRole('button',{name:'Notebook schliessen'}).click();
-      assert.equal(await card.locator('.ki-notebook-runtime').isVisible(),false);
+      const frame=card.locator('.lab-panel iframe');
+      await frame.waitFor({state:'attached'});
+      assert.equal(new URL(await frame.getAttribute('src'),url).searchParams.get('path'),'portal/'+expected.split('/').pop());
+      assert.equal(await card.locator('.lab-panel').count(),1,'Saved notebook runtime belongs inside the course card');
       assert.equal(await card.locator('a.ki-notebook-direct').getAttribute('target'),'_blank');
     }
     await notebookPageInline.close();

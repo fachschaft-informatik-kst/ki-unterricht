@@ -163,13 +163,13 @@ def build(lessons: list[dict]) -> None:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <link href="favicon.svg" rel="icon" type="image/svg+xml">
-<title>Grafiken &amp; Materialien · KI-Unterricht</title><style>{STYLE}</style></head>
+<title>Grafiken &amp; Materialien · KI-Unterricht</title><link rel="stylesheet" href="portal.css"><style>{STYLE}</style></head>
 <body><main><header><p>Lehrpersonenmaterial · Kantonsschule Stadelhofen</p>
 <p><a href="unterrichtsplan.html">← Unterrichtsplan</a> · <a href="index.html">Kursseite</a></p></header>
 <nav class="quick" aria-label="Doppellektionen">{links}</nav>
 {content}
 <footer>Grafiken können durch Anklicken vergrössert werden. Quellen: <code>kursseiten/&lt;thema&gt;/materialien.md</code> und <code>lehrperson/materialien.md</code>.</footer>
-</main></body></html>
+</main><script src="notebook-blocks.js" defer></script></body></html>
 """, encoding="utf-8")
     print(f"Built teacher extras: {len(lessons)} lessons, {len(FILES)} downloads")
 

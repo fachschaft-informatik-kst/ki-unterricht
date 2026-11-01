@@ -23,6 +23,12 @@ Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergr
 
 ### Ziffernnetz und unbekannte Buchstaben
 
-[**Notebook «Bildmodell» starten ↗**](../lab/index.html?path=portal/basis_bildmodell.ipynb)
+
+<div class="ki-notebook-block" data-notebook="content/basis_bildmodell.ipynb" data-title="Ziffern und Buchstaben">
+  <h3>Jupyter-Notebook · Ziffern und Buchstaben</h3>
+  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
+  <a class="ki-notebook-launch" href="../lab/index.html?path=portal/basis_bildmodell.ipynb">Notebook hier öffnen</a>
+</div>
+
 
 Führt im Notebook den Abschnitt **DL 5** aus: Prüft zunächst Ziffernvorhersagen und testet dann die Buchstaben A und B. Notiert, welche **Ziffern** das Modell für die Buchstaben ausgibt. Das Modell kennt keine Buchstabenklasse: Die Vorhersage ist deshalb keine gültige Buchstabenerkennung. Die Bilder werden lokal erzeugt.

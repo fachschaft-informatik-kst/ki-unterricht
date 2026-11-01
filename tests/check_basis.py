@@ -147,12 +147,13 @@ def _mirror_chapter(raw,src,dst):
     # class-specific JupyterLite notebook just like the existing lab buttons.
     raw=raw.replace('content/perzeptron_und_neuronale_netze.ipynb','content/basis_neuron.ipynb')
     raw=raw.replace('portal/perzeptron_und_neuronale_netze.ipynb','portal/basis_neuron.ipynb')
+    raw=raw.replace('content/mehrschichtige_netze.ipynb','content/basis_netze.ipynb')
     raw=_re.sub(r'data-answer="([^"]+)"',lambda m:f'data-basis-answer="{dst}-{m.group(1)}"',raw)
     def _button(m):
         notebook={"perzeptron_und_neuronale_netze.ipynb":"basis_neuron.ipynb",
                   "mehrschichtige_netze.ipynb":"basis_netze.ipynb"}.get(m.group(1),m.group(1))
-        return f'<a class="btn primary" href="../lab/index.html?path=portal/{notebook}">{m.group(2)}</a>'
-    return _re.sub(r'<button class="btn primary" data-lab="([^"]+)">([\s\S]*?)</button>',_button,raw)
+        return f'<a class="ki-notebook-launch" href="../lab/index.html?path=portal/{notebook}">{m.group(2)}</a>'
+    return _re.sub(r'<button type="button" class="ki-notebook-launch" data-lab="([^"]+)">([\s\S]*?)</button>',_button,raw)
 
 for _a,_b,_filenames in [
     ("perzeptron","basis-neuron",[f"0{i}0-perzeptron-{i}.md" for i in range(1,8)]),
@@ -170,6 +171,21 @@ for _a,_b,_filenames in [
                 "In Doppellektion 5 untersucht ihr erstmals das Ziffernerkennungsmodell.")
         _first=(ROOT/"kursseiten"/_b/_file).read_text(encoding="utf-8")
         assert _first==_expect, f"DL3/4 source drift from fourth-year course: {_b}/{_file}"
+
+
+# All notebook entry points on pupil-facing course pages use the same card.
+# Teacher-only downloadable resources in materialien.md remain valid downloads.
+for _chapter in (ROOT/"kursseiten").glob("*/[0-9][0-9][0-9]-*.md"):
+    _source=_chapter.read_text(encoding="utf-8")
+    _legacy=_re.search(
+        r'<(?:button|a) class="btn[^"]*" (?:data-lab="[^"]+\.ipynb"|href="\.\./lab/index\.html\?path=portal/)',
+        _source)
+    assert not _legacy, f"Legacy notebook button/link in {_chapter}"
+    if 'lab/index.html?path=portal/' in _source or 'data-lab=' in _source:
+        assert 'class="ki-notebook-block"' in _source, f"Notebook card missing: {_chapter}"
+    for _path in _re.findall(r'data-notebook="([^"]+)"',_source):
+        assert _re.fullmatch(r'content/(?:ki_projekt/)?[a-z0-9_]+\.ipynb',_path), (
+            f"Invalid notebook path {_path} in {_chapter}")
 
 _nb4_neuron=_nbformat.read(ROOT/"content/perzeptron_und_neuronale_netze.ipynb",as_version=4)
 _nb1_neuron=_nbformat.read(ROOT/"content/basis_neuron.ipynb",as_version=4)

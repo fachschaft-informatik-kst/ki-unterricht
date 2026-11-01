@@ -10,7 +10,13 @@ kurz: MobileNet-Merkmale · eigenes Klassifikationsnetz
 
 [**Fotostudio öffnen ↗**](../projekt/studio/)
 
-[**Notebook «Eigene Fotos» starten ↗**](../lab/index.html?path=portal/basis_fotoprojekt.ipynb)
+
+<div class="ki-notebook-block" data-notebook="content/basis_fotoprojekt.ipynb" data-title="Eigene Fotos erkennen">
+  <h3>Jupyter-Notebook · Eigene Fotos erkennen</h3>
+  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
+  <a class="ki-notebook-launch" href="../lab/index.html?path=portal/basis_fotoprojekt.ipynb">Notebook hier öffnen</a>
+</div>
+
 
 1. **Wählt euren Datenweg:** Standard = im Notebook die mitgelieferten Übungsdaten «Kreis/Dreieck» verwenden; freiwillig = im Fotostudio zwei Gegenstandsklassen mit je acht Fotos pro Gruppe T1/T2/V1/P1/P2 vorbereiten (unterschiedliche Exemplare pro Gruppe, keine Personen).
 2. Nur bei eigenen Fotos: Exportiert die JSON-Datei und ladet sie im Notebook hoch. Prüft bei **beiden Wegen** Gruppen und Klassen. Die Übungsdaten sind synthetisch und keine realistische Genauigkeitsmessung für neue Fotos.

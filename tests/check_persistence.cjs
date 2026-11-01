@@ -139,7 +139,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
 
   // A real teaching widget: values and figures must survive without a Python session.
   const third=await setup(),q=third.p;
-  await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
+  await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').first().click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:240000}).catch(async e=>{console.error('LESSON',await q.locator('#project-lab-status').innerText());throw e;});
   const choices=q.frameLocator('#project-frame').locator('.widget-dropdown select:has(option:text-is("OR"))');
   await choices.first().selectOption({label:'OR'});
@@ -156,7 +156,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert(JSON.stringify(lesson.cells).includes('Fall 4'), 'All four neuron cases must be saved with the widgets');
   assert(JSON.stringify(lesson.cells).includes('Neuron: Eingaben'), 'Export must include the individual neuron drawings');
   assert(!lesson.cells.some(c=>c.outputs?.some(o=>o.data?.['application/vnd.jupyter.widget-view+json'])));
-  await q.reload();await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').click();
+  await q.reload();await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').first().click();
   await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000});
   // A saved neuron lab must NEVER be discarded on reopening. The restored
   // widget outputs become portable, readable HTML (not live Python widgets);

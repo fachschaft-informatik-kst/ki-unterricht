@@ -162,13 +162,17 @@ async function snapshotCurrent(){
  if(frame.dataset.ready!=='yes')throw Error('Das Notebook ist noch nicht bereit. Bitte warten oder erneut öffnen.');
  await captureSnapshot(activeName,await request(frame,'snapshot'));
 }
-async function showNotebook(name,owner,scroll=true){
+async function showNotebook(name,owner,scroll=true,trigger=null){
  if(!names[name]||switching||transferring)return;
  switching=true;
  try{
   await initialization;
-  if(name!==activeName||frame.dataset.ready==='error'){
+  const target=trigger?.closest('.ki-notebook-block');
+  const relocate=Boolean(target&&lab.parentElement!==target);
+  if(name!==activeName||frame.dataset.ready==='error'||relocate){
    if(activeName&&frame.dataset.ready!=='error')await snapshotCurrent();
+   // Move only after capturing the old kernel; a moved iframe is restarted.
+   if(relocate)target.append(lab);
    activeName=name;initializingFrame=false;notebookRevision=0;notebookDirty=false;frame.dataset.ready='no';delete frame.dataset.restored;
    // Saved documents are authoritative for all experiments, including the neuron lab.
    // Never discard student edits/outputs simply to show the latest template. Saved
@@ -185,10 +189,14 @@ async function showNotebook(name,owner,scroll=true){
  }catch(error){$('project-lab-status').textContent=error.message;notebookLoading('error',error.message+' Bitte erneut versuchen.');}
  finally{switching=false;}
 }
-$('start-project').addEventListener('click',()=>showNotebook(projectName,'journal'));
+$('start-project').addEventListener('click',()=>showNotebook(projectName,'journal',true,$('start-project')));
 $('start-studio').addEventListener('click',()=>{const frame=$('studio-frame');$('studio-panel').hidden=false;if(!frame.getAttribute('src'))frame.src='studio/index.html';$('studio-panel').scrollIntoView({block:'start',behavior:'smooth'});});
-all('[data-lab]').forEach(b=>b.addEventListener('click',()=>showNotebook(b.dataset.lab,b.closest('main > section')?.id||'projekt')));
-window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false);});
+document.addEventListener('click',event=>{
+ const button=event.target.closest('[data-lab]');
+ if(!button||!button.closest('main'))return;
+ void showNotebook(button.dataset.lab,button.closest('main > section')?.id||'projekt',true,button);
+});
+window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false,$('start-project'));});
 all('[data-fullscreen]').forEach(b=>b.addEventListener('click',()=>{const node=$(b.dataset.fullscreen).closest('.lab-panel');if(node.requestFullscreen)node.requestFullscreen();}));
 window.addEventListener('beforeunload',event=>{
  if(notebookDirty||!artifactStored||!filesStored||transferring){event.preventDefault();event.returnValue='Änderungen sind noch nicht vollständig gesichert.';}

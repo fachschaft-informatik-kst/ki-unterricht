@@ -45,7 +45,7 @@ main{max-width:1050px;margin:auto;padding:35px 28px 80px}
 <nav class="materials-nav" aria-label="Doppellektionen">""" + "".join(links) + """</nav>
 """ + "".join(sections) + """
 <footer class="footer">Quelle: kursseiten/basis-*/materialien.md · Kantonsschule Stadelhofen</footer>
-</main></body></html>
+</main><script src="notebook-blocks.js" defer></script></body></html>
 """
     (out / "materialien.html").write_text(document, encoding="utf-8")
     print(f"Built first-year teacher material index: {len(lessons)} lessons")

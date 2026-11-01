@@ -23,7 +23,15 @@ Lassen Sie das Neuron einzelne Beispiele bearbeiten. Beobachten Sie **eine Korre
 <!-- MD:END -->
       </article>
     </div>
-    <a class="btn primary" href="../lab/index.html?path=portal/basis_neuron.ipynb">Neuron starten ▶</a>
+    <div class="ki-notebook-block" data-notebook="content/basis_neuron.ipynb" data-title="Ein Neuron entscheidet">
+      <!-- MD:START -->
+### Jupyter-Notebook · Ein Neuron entscheidet
+<!-- MD:END -->
+      <!-- MD:START -->
+Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+<!-- MD:END -->
+      <a class="ki-notebook-launch" href="../lab/index.html?path=portal/basis_neuron.ipynb">Notebook hier öffnen</a>
+    </div>
     <div class="protokoll-block">
       <!-- MD:START -->
 ### Mein Protokoll
