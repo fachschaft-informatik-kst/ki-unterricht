@@ -88,6 +88,10 @@ del _ki_saved, _ki_item, _ki_widget`;
         }
       }
       await panel.context.save();
+      const badge = panel.node.querySelector('.ki-autostart-status');
+      if (badge) badge.textContent = '✓ Interaktive Widgets bereit';
+      const refresh = panel.node.querySelector('.ki-activate-figures button');
+      if (refresh) refresh.textContent = 'Grafiken neu starten ↻';
       return {activated:true,values};
     };
     const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, allowed, reviveSavedWidgets) : null;
