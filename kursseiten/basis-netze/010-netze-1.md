@@ -113,10 +113,14 @@ Jede Zeile ist eine Bedingung an w₁, w₂ und b (Ausgabe 1 heisst Summe ≥ 0,
 **Jetzt selbst überprüfen:** Öffnen Sie das eigenständige XOR-Notebook. Ändern Sie Gewichte und Bias und vergleichen Sie die **vier Neuron-Grafiken**. Halten Sie fest, wie viele Fälle Ihre beste Einstellung richtig löst. Danach geht es im nächsten Kapitel um einen Lösungsweg mit mehreren Neuronen.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/xor_einzelne_neuronen.ipynb" data-title="XOR mit einem Neuron">
-  <h3>Jupyter-Notebook · XOR mit einem Neuron</h3>
-  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
-  <a class="ki-notebook-launch" href="../lab/index.html?path=portal/xor_einzelne_neuronen.ipynb">Notebook hier öffnen</a>
-</div>
+      <!-- MD:START -->
+### Jupyter-Notebook · XOR mit einem Neuron
+<!-- MD:END -->
+      <!-- MD:START -->
+Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+<!-- MD:END -->
+      <a class="ki-notebook-launch" href="../lab/index.html?path=portal/xor_einzelne_neuronen.ipynb">Notebook hier öffnen</a>
+    </div>
     <label class="field answer"><span>Protokoll: Wie viele der vier XOR-Fälle schafft Ihr einzelnes Neuron mit der besten Einstellung?</span><select data-basis-answer="basis-netze-hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></label>
     <label class="field answer"><span>Welche Bedingungen lassen sich nicht gleichzeitig erfüllen? Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-basis-answer="basis-netze-xor_warum" maxlength="10000" placeholder="Die Bedingungen für (0, 1), (1, 0) und (1, 1) …" rows="4"></textarea></label>
   </div>
