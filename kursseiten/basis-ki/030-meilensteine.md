@@ -178,6 +178,7 @@ ChatGPT macht grosse Sprachmodelle für alle zugänglich. Sie erzeugen Texte, an
         </article>
         </template></li>
     </ol>
+    <label class="field answer"><span>Entdeckerfrage zum Zeitstrahl: Welche Art von KI überwiegt in den jüngsten Beispielen? Begründet mit zwei Meilensteinen und erklärt, ob feste Regeln heute noch wichtig sind.</span><textarea data-basis-answer="basis-ki-zeitstrahl" rows="4" maxlength="10000" placeholder="Wir beobachten … / Zwei Meilensteine zeigen … / Feste Regeln …"></textarea></label>
     <p class="small">Die Bilder sind Illustrationen: Einige Fotos und Darstellungen entstanden nach den beschriebenen Ereignissen. Bildautoren und Lizenzen stehen jeweils direkt unter dem Bild. Anregung für die Auswahl: Meilensteine der KI-Landkarte von inf-schule.de (CC BY-SA 4.0); Texte eigene Fassung.</p>
   </div>
 </details>
