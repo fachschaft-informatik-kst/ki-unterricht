@@ -302,6 +302,25 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       assert.equal(await notebookPage.locator('#basis-notebook-panel.lab-panel').count(),1);
       assert.equal(await notebookPage.getByText('Notebook der 1. Klasse').count(),0);
       assert.equal(await notebookPage.locator('#basis-lab-fullscreen').count(),1);
+      const basicDialog=notebookPage.locator('#basis-notebook-panel');
+      assert.equal(await basicDialog.evaluate(el=>el.tagName),'DIALOG');
+      assert.equal(await basicDialog.getAttribute('open'),'');
+      assert.equal(await basicDialog.getAttribute('aria-labelledby'),'basis-lab-title');
+      if(notebook==='basis_neuron.ipynb'){
+        await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
+        await basicDialog.waitFor({state:'hidden'});
+        assert.equal(await basicDialog.count(),1,'Closing must not destroy notebook markup');
+        assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
+          'Closing the dialog must not reload or remove the notebook iframe');
+        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().click();
+        await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
+        assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
+          'Reopen must retain the same kernel document, not restart Python');
+        await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
+        await basicDialog.waitFor({state:'hidden'});
+        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().click();
+        await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
+      }
       if(notebook==='basis_neuron.ipynb'){
         await checkNotebookFullscreen(notebookPage,'#basis-lab-fullscreen','#basis-notebook-panel');
       }
@@ -345,7 +364,16 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       assert.equal(new URL(await frame.getAttribute('src'),url).searchParams.get('path'),'portal/'+expected.split('/').pop());
       assert.equal(await card.locator('.lab-panel').count(),1,'Saved notebook runtime belongs inside the course card');
       if(url.includes('/projekt/')){
+        const projectDialog=notebookPageInline.locator('#project-lab');
+        assert.equal(await projectDialog.evaluate(el=>el.tagName),'DIALOG');
+        assert.equal(await projectDialog.getAttribute('open'),'');
         await checkNotebookFullscreen(notebookPageInline,'[data-fullscreen="project-frame"]','#project-lab');
+        await projectDialog.getByRole('button',{name:'Notebook schliessen'}).click();
+        await projectDialog.waitFor({state:'hidden'});
+        assert.equal(await frame.getAttribute('src')!==null,true,'Notebook iframe must remain after closing');
+        await launch.click();
+        await notebookPageInline.waitForFunction(()=>document.querySelector('#project-lab')?.open===true);
+        assert.equal(await card.locator('.lab-panel iframe').count(),1,'Reopening must reuse the iframe');
       }
       assert.equal(await card.locator('a.ki-notebook-direct').getAttribute('target'),'_blank');
     }
