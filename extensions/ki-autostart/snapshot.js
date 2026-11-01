@@ -3,7 +3,17 @@
 const VIEW = 'application/vnd.jupyter.widget-view+json';
 const STATE = 'application/vnd.jupyter.widget-state+json';
 const stream = text => ({output_type:'stream',name:'stdout',text});
-import {notebookWidgetRoots} from './rehydrate';
+// Keep this module self-contained so exported snapshots also work in a
+// standalone/offline browser and in the data-URL regression tests.
+function notebookWidgetRoots(nb) {
+  const roots = {};
+  for (const cell of nb?.cells || []) {
+    if (cell.cell_type !== 'code' || !cell.id) continue;
+    const ids = (cell.outputs || []).map(o => o.data?.[VIEW]?.model_id).filter(id => typeof id === 'string');
+    if (ids.length) roots[cell.id] = ids;
+  }
+  return roots;
+}
 
 export function portableNotebook(notebook, widgets) {
   const nb = structuredClone(notebook);
