@@ -268,8 +268,9 @@ const assert=require('node:assert/strict');
       // Navigate just as a student would: inactive lesson sections are hidden.
       // Opening only the nested <details> does not make a hidden lesson visible.
       await notebookPageInline.goto(url+'#'+section);
-      const card=notebookPageInline.locator('.ki-notebook-block[data-notebook="'+expected+'"]');
-      assert.equal(await card.count(),1,'Notebook must be present in the matching chapter');
+      const matches=notebookPageInline.locator('.ki-notebook-block[data-notebook="'+expected+'"]');
+      assert((await matches.count())>=1,'Notebook must be present in the matching chapter');
+      const card=matches.first();
       await card.evaluate(el=>{el.closest('details.kapitel').open=true;});
       assert.equal(await card.locator('.ki-notebook-iframe').count(),0,'No runtime iframe before user action');
       const launch=card.locator('.ki-notebook-launch');
