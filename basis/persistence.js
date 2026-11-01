@@ -88,13 +88,9 @@ async function openNotebook(name,view,force=false,host=null){
   document.getElementById('basis-backup-status').textContent='Älteres Notebook archiviert. Die neue Version wird geöffnet. Den alten Stand könnt ihr als ZIP herunterladen.';
  }
  if(current!==name&&ready)await snapshot();
- // Keep the ZIP/IndexedDB notebook bridge, but display it inside its chapter card.
- // Capture the active notebook before relocating an iframe (which restarts its kernel).
- if(host&&panel.parentElement!==host){
-  if(current===name&&ready)await snapshot();
-  host.append(panel);
-  if(current===name)force=true;
- }
+ // The modal stays in its permanent DOM position. Reparenting a live iframe
+ // destroys its browsing context (and Pyodide), even if its src is unchanged.
+ // The chapter launch button remains the dialog's focus-return target.
  owner=view||owner;heading.textContent=notebookTitles[name]||'Experiment';
  if(current===name&&ready&&!force){overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);mount();return;}
  current=name;ready=false;changed=false;overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);mount();
@@ -102,7 +98,6 @@ async function openNotebook(name,view,force=false,host=null){
  notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Notebook wird gestartet. Python wird vorbereitet …');
  // Open the actual notebook, not JupyterLite's file browser (same as the fourth year).
  frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');
- // The dialog overlays the course; moving the iframe during opening is avoided.
 }
 document.querySelectorAll('a[href*="../lab/index.html?path="]').forEach(a=>{const url=new URL(a.href);const name=url.searchParams.get('path')?.split('/').pop();if(!notebookNames.includes(name))return;a.addEventListener('click',event=>{event.preventDefault();openNotebook(name,a.closest('main > section')?.id,false,a.closest('.ki-notebook-block')).catch(e=>status.textContent=e.message);});});
 window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1'||!current)return;const d=event.data;if(d.path!=='portal/'+current)return;

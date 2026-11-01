@@ -361,10 +361,12 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       });
       await launch.click();
       assert.equal(await launch.getAttribute('aria-expanded'),'true');
-      const frame=card.locator('.lab-panel iframe');
+      const frame=notebookPageInline.locator(url.includes('/projekt/')?'#project-frame':'#basis-lab-frame');
       await frame.waitFor({state:'attached'});
       assert.equal(new URL(await frame.getAttribute('src'),url).searchParams.get('path'),'portal/'+expected.split('/').pop());
-      assert.equal(await card.locator('.lab-panel').count(),1,'Saved notebook runtime belongs inside the course card');
+      assert.equal(await card.locator('.lab-panel').count(),0,'The modal must not move into lesson cards and restart the iframe');
+      assert.equal(await frame.evaluate(el=>el.closest('dialog')?.parentElement?.tagName),'MAIN',
+        'A fixed dialog in the course page must retain its live Python browsing context');
       if(url.includes('/projekt/')){
         const projectDialog=notebookPageInline.locator('#project-lab');
         assert.equal(await projectDialog.evaluate(el=>el.tagName),'DIALOG');
@@ -376,13 +378,14 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
         await projectDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await projectDialog.waitFor({state:'hidden'});
         // The native <dialog> close event updates the launcher's state asynchronously.
-        await notebookPageInline.waitForFunction(()=>document.querySelector('#project-lab')?.open===false &&
-          document.querySelector('#project-lab')?.closest('.ki-notebook-block')?.querySelector('.ki-notebook-launch')?.getAttribute('aria-expanded')==='false');
+        await notebookPageInline.waitForFunction(()=>document.querySelector('#project-lab')?.open===false);
         assert.equal(await launch.getAttribute('aria-expanded'),'false','Closing the modal must reset the notebook launcher');
-        assert.equal(await frame.getAttribute('src')!==null,true,'Notebook iframe must remain after closing');
+        const srcBefore=await frame.getAttribute('src');
+        assert(srcBefore,'Notebook iframe must remain after closing');
         await launch.click();
         await notebookPageInline.waitForFunction(()=>document.querySelector('#project-lab')?.open===true);
-        assert.equal(await card.locator('.lab-panel iframe').count(),1,'Reopening must reuse the iframe');
+        assert.equal(await frame.getAttribute('src'),srcBefore,'Reopening must retain the iframe document');
+        assert.equal(await notebookPageInline.locator('#project-frame').count(),1,'One stable iframe only');
       }
       assert.equal(await card.locator('a.ki-notebook-direct').getAttribute('target'),'_blank');
     }
