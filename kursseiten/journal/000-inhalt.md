@@ -46,7 +46,12 @@
   </div>
 </details>
 <div class="actions">
-  <button class="btn primary" id="start-project">Versuch öffnen ▶</button><button class="btn" id="start-studio">Fotostudio öffnen</button>
+  <button class="btn" id="start-studio">Fotostudio öffnen</button>
+</div>
+<div class="ki-notebook-block" data-notebook="content/ki_projekt/ki_tandemprojekt.ipynb" data-title="Unser Versuch">
+  <h3>Jupyter-Notebook · Unser Versuch</h3>
+  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
+  <button type="button" class="ki-notebook-launch" id="start-project">Notebook hier öffnen</button>
 </div>
 <p class="small">Zuerst mit Übungsdaten arbeiten. Danach eigene Fotostudio-JSON auswählen und die folgenden Zellen schrittweise ausführen. Den Abschlusstest erst nach Ihrer begründeten Auswahl freigeben.</p>
 <div class="lab-panel" hidden="" id="project-lab">
