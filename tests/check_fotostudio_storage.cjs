@@ -18,7 +18,7 @@ const path=require('node:path');
   const url='http://127.0.0.1:8777/projekt/studio/';
   await page.goto(url,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.querySelector('#autosave-status')?.textContent.includes('aktiv'),null,{timeout:10000});
-  assert.equal(await page.locator('.eyebrow').innerText(),'KI-Bildprojekt · Schritt 2: Bilder vorbereiten');
+  assert.equal(await page.locator('.eyebrow').textContent(),'KI-Bildprojekt · Schritt 2: Bilder vorbereiten');
   assert.equal(await page.locator('.studio-card').count(),3,'Studio has the same card-based visual hierarchy as the course');
   assert.equal(await page.locator('#studio-progress').getAttribute('max'),'80');
   assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(245, 244, 238)','Studio uses course background');
