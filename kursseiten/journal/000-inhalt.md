@@ -1,7 +1,11 @@
 <span class="section-label">05 · Unser gemeinsames Projekt</span>
 <h1>Unser Projekt: Versuch und Journal</h1>
-<div class="subnav">
-  <a class="btn" href="#projekt">Auftrag</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a><a class="btn primary" href="#sicherung">Notizen &amp; Projekt</a>
+<div class="subnav" aria-label="Projektbereiche">
+  <a class="btn" href="#projekt">Auftrag</a>
+  <a class="btn" href="#projekt-werkbank">Versuch &amp; Fotos</a>
+  <a class="btn" href="#projekt-reflexionen">Reflexionen</a>
+  <a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a>
+  <a class="btn primary" href="#sicherung">Sichern</a>
 </div>
 <p class="small">Ein gemeinsamer Stand auf einem Gerät. Für Gerätewechsel Notizen und Projekt herunterladen und später unter «Notizen &amp; Projekt» wiederherstellen.</p>
 <div class="grid two">
