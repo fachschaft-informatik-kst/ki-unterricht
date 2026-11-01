@@ -146,6 +146,23 @@ Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das 
 <!-- MD:END -->
       <p><a href="#journal">Zur Reflexion im Journal →</a> · <a href="#sicherung">Stand als ZIP sichern →</a></p>
     </div>
+    <div class="card project-photo-step" id="projekt-fotostudio">
+      <span class="project-photo-step-label">Schritt 2 · Thema und Bilder vorbereiten</span>
+      <!-- MD:START -->
+### Fotostudio · Ihre Bilder aufbereiten
+<!-- MD:END -->
+      <!-- MD:START -->
+Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Fotos aufnehmen. Im Fotostudio ordnen Sie Bilder den beiden Klassen und den Gruppen zu, prüfen die Vorschau und exportieren Ihre Sammlung als JSON.
+<!-- MD:END -->
+      <div class="actions">
+        <button class="btn primary" id="start-studio" type="button">Fotostudio öffnen</button><a class="btn" href="#projekt-reflexionen">Datenplan im Journal festhalten</a>
+      </div>
+      <p class="small muted">Speichern Sie die JSON-Datei regelmässig. Die Originalfotos später zusätzlich unter <a href="#sicherung">Notizen &amp; Projekt</a> sichern.</p>
+      <details hidden="" id="studio-panel" open="">
+        <summary>Fotostudio · eigene Bilder vorbereiten</summary>
+        <iframe class="studio-frame" id="studio-frame" title="Fotostudio – Bilder vorbereiten"></iframe>
+      </details>
+    </div>
     <details>
       <summary>Fotos aufnehmen &amp; Bildformat verstehen</summary>
       <div class="detail-body">
@@ -188,22 +205,5 @@ MobileNet liefert 1280 Merkmale; das Notebook normiert sie je Bild. Die kleinen 
         <p class="small">Bilder werden lokal verarbeitet. Bibliotheken und Modellgewichte benötigen Internet. Eine Sammlung im Fotostudio regelmässig herunterladen.</p>
       </div>
     </details>
-    <div class="card project-photo-step" id="projekt-fotostudio">
-      <span class="project-photo-step-label">Schritt 2 · Thema und Bilder vorbereiten</span>
-      <!-- MD:START -->
-### Fotostudio · Ihre Bilder aufbereiten
-<!-- MD:END -->
-      <!-- MD:START -->
-Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Fotos aufnehmen. Im Fotostudio ordnen Sie Bilder den beiden Klassen und den Gruppen zu, prüfen die Vorschau und exportieren Ihre Sammlung als JSON.
-<!-- MD:END -->
-      <div class="actions">
-        <button class="btn primary" id="start-studio" type="button">Fotostudio öffnen</button><a class="btn" href="#projekt-reflexionen">Datenplan im Journal festhalten</a>
-      </div>
-      <p class="small muted">Speichern Sie die JSON-Datei regelmässig. Die Originalfotos später zusätzlich unter <a href="#sicherung">Notizen &amp; Projekt</a> sichern.</p>
-      <details hidden="" id="studio-panel" open="">
-        <summary>Fotostudio · eigene Bilder vorbereiten</summary>
-        <iframe class="studio-frame" id="studio-frame" title="Fotostudio – Bilder vorbereiten"></iframe>
-      </details>
-    </div>
   </div>
 </details>
