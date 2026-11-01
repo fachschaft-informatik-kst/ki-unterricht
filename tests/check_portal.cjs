@@ -12,8 +12,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.goto('http://127.0.0.1:8765/projekt/');
   assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,'Reading the page must not start Python');
   assert.equal(await p.locator('.course-card').count(),7);assert.equal(await p.locator('.nav a').count(),10);
-  assert.equal(await p.locator('.ki-notebook-block .ki-notebook-direct[href*="/lab/"]').count(),1,
-    'One intentional in-chapter JupyterLite link is available without launching Python');
+  assert((await p.locator('.ki-notebook-block .ki-notebook-direct[href*="/lab/"]').count())>=7,
+    'Every registered in-chapter notebook has a direct JupyterLite link');
   assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,
     'Notebook blocks must remain unloaded until explicitly opened');
   // Visual geometry smoke test: keep overview cards sizeable on desktop.
