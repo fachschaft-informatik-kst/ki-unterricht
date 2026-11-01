@@ -23,8 +23,14 @@ export function bindLabFullscreen(button, panel) {
   button.classList.add('lab-fullscreen-toggle');
   button.type = 'button';
 
+  // Browsers explicitly disallow requestFullscreen() on <dialog>. Keep the
+  // same icon behavior with a viewport-filling dialog style, preserving its
+  // close button, keyboard focus trap and existing JupyterLite iframe.
+  const isDialog = panel.tagName === 'DIALOG';
   const sync = () => {
-    const expanded = document.fullscreenElement === panel;
+    const expanded = isDialog
+      ? panel.classList.contains('lab-modal-maximized')
+      : document.fullscreenElement === panel;
     const label = expanded ? 'Notebook verkleinern' : 'Notebook vergrössern';
     corners.setAttribute('d', expanded ? COLLAPSE : EXPAND);
     button.setAttribute('aria-pressed', String(expanded));
@@ -33,7 +39,9 @@ export function bindLabFullscreen(button, panel) {
   };
   button.addEventListener('click', async () => {
     try {
-      if (document.fullscreenElement === panel) {
+      if (isDialog) {
+        panel.classList.toggle('lab-modal-maximized');
+      } else if (document.fullscreenElement === panel) {
         await document.exitFullscreen();
       } else {
         await panel.requestFullscreen();
@@ -45,6 +53,10 @@ export function bindLabFullscreen(button, panel) {
     }
   });
   document.addEventListener('fullscreenchange', sync);
+  if (isDialog) panel.addEventListener('close', () => {
+    panel.classList.remove('lab-modal-maximized');
+    sync();
+  });
   sync();
 }
 
