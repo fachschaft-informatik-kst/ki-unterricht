@@ -17,7 +17,12 @@
   <p class="project-train-note"><strong>Merken Sie sich:</strong> Die Merkmale kommen aus einem fertigen Modell. <strong>Trainiert wird nur unser nachgeschaltetes kleines Netz.</strong></p>
 </div>
 <div class="actions">
-  <a class="btn primary" href="#journal">Versuch &amp; Journal →</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a><button class="btn" data-lab="ki_lernlabor.ipynb">Lernlabor bei Bedarf ▶</button>
+  <a class="btn primary" href="#journal">Versuch &amp; Journal →</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a>
+</div>
+<div class="ki-notebook-block" data-notebook="content/ki_projekt/ki_lernlabor.ipynb" data-title="Projekt-Lernlabor">
+  <h3>Jupyter-Notebook · Projekt-Lernlabor</h3>
+  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
+  <button type="button" class="ki-notebook-launch" data-lab="ki_lernlabor.ipynb">Notebook hier öffnen</button>
 </div>
 <div class="facts">
   <div class="fact">
