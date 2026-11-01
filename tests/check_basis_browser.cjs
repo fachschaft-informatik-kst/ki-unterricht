@@ -368,6 +368,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
         assert.equal(await projectDialog.evaluate(el=>el.tagName),'DIALOG');
         assert.equal(await projectDialog.getAttribute('open'),'');
         await checkNotebookFullscreen(notebookPageInline,'[data-fullscreen="project-frame"]','#project-lab');
+        // The fullscreen regression also checks Escape, which closes a
+        // native dialog. Reopen before exercising the explicit close button.
+        if(!await projectDialog.evaluate(el=>el.open)) await launch.click();
         await projectDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await projectDialog.waitFor({state:'hidden'});
         assert.equal(await frame.getAttribute('src')!==null,true,'Notebook iframe must remain after closing');
