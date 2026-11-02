@@ -154,10 +154,10 @@ assert 'XOR' not in cards['03'], 'XOR does not belong in single-neuron DL3 learn
 assert 'XOR' in cards['04'] and 'Datenleck' not in cards['04']
 assert len(cards) == 8, 'Separate objectives for DL 5–7 and DL 8 must be visible'
 assert 'Datenlecks' in cards['05–07'] and 'A/B-Vergleich' in cards['05–07'], 'Project learning objectives belong to DL 5–7'
-assert 'reproduzieren' in cards['08'] and 'Trennschärfe' in cards['08'], 'DL 8 must address reproduction and new-image testing'
+assert 'T1/T2' in cards['08'] and 'P1/P2' in cards['08'] and 'Pflichtversuch' in cards['08'], 'DL 8 must audit dataset roles and require new-class experiment'
 assert all(x in cards['08'] for x in ['K11','K12','K7–K10']), 'DL 8 assessment and oral exam must match learning objectives'
 assert soup.select_one('#lernziele a[href="#fremdmodell"]'), 'Learning objectives must link to DL 8'
-assert '36 Punkte' in soup.select_one('#lernziele .callout').get_text()
+assert '33 Punkte' in soup.select_one('#lernziele .callout').get_text()
 for skill,anchor in [('fremd_reproduktion','#reproduktion'),('fremd_kritik','#fremdtest')]:
     node=soup.select_one(f'#lernziele [data-skill="{skill}"]')
     assert node and node.select_one('option[value="sicher"]'), f'Missing DL 8 self-assessment: {skill}'
@@ -264,7 +264,7 @@ assert dl8.select_one('#dl8-vorbereiten a[href="#projekt-werkbank"]')
 assert dl8.select_one('#fremdtest a[href="#projekt-werkbank"]')
 assert dl8.select_one('#dl8-abschluss a[href="#bewertung"]')
 why = dl8.select_one('#dl8-warum').get_text(' ', strip=True)
-assert 'Reproduzieren' in why and 'Fremdtest' in why and 'keine' in why.lower()
+assert 'T1/T2' in why and 'P1/P2' in why and 'andere Klassen' in why
 assert soup.select_one('#fremdmodell') and soup.select_one('#fremdmodell #doppellektion-08')
 assert soup.select_one('.nav a[href="#fremdmodell"]'), 'Dedicated DL 8 navigation missing'
 assert soup.select_one('#fremdmodell #fremdtest')
@@ -274,10 +274,13 @@ for n in (1,2):
     for key in ('repro','test','grenzen','transfer'):
         assert soup.select_one(f'#fremdmodell textarea[data-answer="fremd_reflexion_{n}_{key}"]')
 assert soup.select_one('#fremdmodell #download-fremdmodell')
-assert '12 Kompetenzen' in soup.select_one('#bewertung').get_text()
-assert len(soup.select('#bewertung [data-score]')) == 12
-assert 'Punktesumme ÷ 36' in soup.select_one('#bewertung').get_text()
+assert '11 benotete Kriterien' in soup.select_one('#bewertung').get_text()
+assert len(soup.select('#bewertung [data-score]')) == 11
+assert 'Punktesumme ÷ 33' in soup.select_one('#bewertung').get_text()
 assert 'Fremdauswertung' in soup.select_one('#fremdmodell').get_text()
+assert not soup.select_one('#bewertung [data-score="k11"]'), 'Shared DL8 check must remain ungraded'
+assert soup.select_one('#bewertung [data-score="k12"]'), 'Individual reflection must still be graded'
+
 export_js=(root/'projekt/portal.js').read_text()
 assert "async function packFremd()" in export_js and "ki-fremdauswertung-v1" in export_js
 assert "'Fremdauswertung.html'" in export_js and "'Fremdauswertung.json'" in export_js
@@ -285,15 +288,15 @@ assert "for(const f of state.files)entries.push" in export_js # only in the orig
 assert 'for(const f of state.files)entries.push' not in export_js.split('async function packFremd()',1)[1].split("$('download-submission')",1)[0]
 repro=soup.select_one('details#reproduktion')
 assert repro and repro.select_one('textarea[data-journal="reproduktion"][data-optional]')
-assert 'privaten Fenster' in repro.get_text() and 'daten_sha256' in repro.get_text() and 'wiederholen=True' in repro.get_text()
+assert 'privaten Fenster' in repro.get_text() and all(k in repro.get_text() for k in ('T1/T2','V1','P1/P2','wiederholen=True'))
 lesson8=plans.select_one('[data-lesson="08"]')
 assert sum(int(x.get_text()) for x in lesson8.select('.min') if x.get_text().strip().isdigit())>=70
-assert 'Reproduktionsprüfung' in lesson8.get_text() and 'Reproduktionsprüfung' in planning
-assert 'Fremdtest und Rückmeldung' in lesson8.get_text()
-assert '15 Minuten Puffer' in planning
+assert 'Trainingsgruppen T1/T2' in lesson8.get_text() and 'Trainingsgruppen T1/T2' in planning
+assert 'Pflichtversuch' in lesson8.get_text()
+assert '20 Minuten Puffer' in planning
 sol=soup.select_one('#sol-rahmen')
 assert sol and 'keine festen Lektionstermine' in sol.get_text()
-assert 'benotet' in repro.get_text()
+assert 'unbenotet' in repro.get_text()
 assert 'Freiwillige Vertiefung, kein Pflichtteil' in repro.get_text()
 assert 'Etappenplan' in soup.select_one('textarea[data-journal="contribution"]').parent.get_text()
 assert 'Ihr Arbeitsweg:' not in soup.get_text()
@@ -318,7 +321,7 @@ for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektau
 for sid,minimum in {'einstieg':5,'lernarten':4,'perzeptron':4,'netze':4,'sprache':7,'gesellschaft':5,'projekt':4}.items():
     chapters=soup.select(f'#{sid} details.kapitel')
     assert len(chapters)>=minimum and all(c.select_one('.kapitel-nr') and c.select_one('h2.kapitel-titel') for c in chapters) and all(c.get('data-kurz') for c in chapters), sid
-assert len(soup.select('[data-score]'))==12
+assert len(soup.select('[data-score]'))==11
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
 for name in ['perzeptron_und_neuronale_netze.ipynb','xor_einzelne_neuronen.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
     assert soup.select_one('[data-lab="'+name+'"]'), name

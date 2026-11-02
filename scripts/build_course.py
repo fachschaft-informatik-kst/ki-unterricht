@@ -147,7 +147,7 @@ def update_sol_material(text):
         '<tr><td>Vor Beginn der Doppellektion 8</td><td>ZIP über den Abgabekanal einreichen</td>'
         '<td>Vollständiges Journal, Versuch mit Ausgaben, Daten und Protokoll</td></tr>'
         '<tr><td>8. Doppellektion</td><td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>'
-        '<td>Ein Reproduktionslauf, Fremdtest und individuelle Reflexion (K11–K12, 6 Punkte); eigene Projektabgabe unverändert</td></tr>'
+        '<td>Training/Validierung/Test des fremden Projekts prüfen, mit eigenen Klassen experimentieren, persönliche Reflexion (nur K12: 3 Punkte); eigene Abgabe unverändert</td></tr>'
         '</tbody></table></div><p class="small muted">20 Einzelgespräche bei einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Wechsel/Notizen ab Minute 0. '
         'Die letzten 10 Minuten schliessen unmittelbar an die 90-minütige Doppellektion an. '
         'Gesprächsreihenfolge vorab bekannt, die übrigen arbeiten selbstständig; keine Zeitreserve oder weiteren Termine.</p></div></details>'
@@ -155,7 +155,7 @@ def update_sol_material(text):
     text, count = re.subn(r'<details><summary>Termine ansehen</summary>.*?</details>', schedule, text, count=1, flags=re.S)
     assert count == 1, 'Expected project schedule'
     replacements = {
-        'Reproduktionsprüfung (abgabepflichtig)': 'Reproduktionscheck (Teil der unbenoteten Fremdauswertung)',
+        'Reproduktionsprüfung (abgabepflichtig)': 'Daten- und Ergebnischeck (gemeinsam, unbenotet)',
         'unbenoteter Fremdtest →': 'Fremdtest und Rückmeldung →',
         'Reproduktionsprüfung · 45 Minuten · wird abgegeben': 'Reproduktionsprüfung · ca. 30 Minuten · unbenotet',
         'Fremdtest · 20 Minuten · unbenotet': 'Fremdtest &amp; Rückmeldung · ca. 25 Minuten · unbenotet',

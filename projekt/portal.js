@@ -349,11 +349,11 @@ async function packFremd(){
   await snapshotCurrent();await notebookUpdates;await saving;
   const fields=all('#fremdmodell [data-answer]');
   const answers=Object.fromEntries(fields.map(e=>[e.dataset.answer,state.answers[e.dataset.answer]||'']));
-  const required=['fremd_rueckmeldung',...[1,2].flatMap(n=>['fremd_name_'+n,...['repro','test','grenzen','transfer'].map(k=>'fremd_reflexion_'+n+'_'+k)])];
+  const required=['fremd_rueckmeldung',...[1,2].flatMap(n=>['fremd_name_'+n,...['test','grenzen'].map(k=>'fremd_reflexion_'+n+'_'+k)])];
   const absent=required.filter(k=>!answers[k]?.trim());
   const report=(state.journal.reproduktion||'').trim();
   if(!report)absent.unshift('Reproduktionsbericht');
-  if(!notebook)absent.push('Notebook mit Reproduktionslauf');
+  // Bei technischen Problemen genügen dokumentierte Originalergebnisse; Notebook ist optional.
   if(absent.length&&!confirm('Für die Fremdauswertung fehlen '+absent.length+' Angaben oder Nachweise. Trotzdem herunterladen?'))return;
   const meta={schema:'ki-fremdauswertung-v1',exported:new Date().toISOString(),
     reproduktionsbericht:report,antworten:answers,
@@ -367,12 +367,12 @@ async function packFremd(){
   }).join('');
   const html='<!doctype html><html lang="de-CH"><meta charset="utf-8"><title>Fremdauswertung DL 8</title>'+
     '<style>body{font:16px/1.5 system-ui;max-width:900px;margin:40px auto;padding:0 20px;color:#182b31}h2{font-size:18px}section{margin:20px 0;border-bottom:1px solid #ddd;padding:0 0 16px}p{white-space:pre-wrap;overflow-wrap:anywhere}</style>'+
-    '<h1>Fremdauswertung · Doppellektion 8</h1><h2>Gemeinsamer Reproduktionsbericht (K11)</h2><p>'+esc(report||'Noch offen.')+
+    '<h1>Fremdauswertung · Doppellektion 8</h1><h2>Gemeinsamer Daten- und Ergebnischeck (K11 · unbenotet)</h2><p>'+esc(report||'Noch offen.')+
     '</p><h2>Fremdtest und persönliche Reflexionen (K12)</h2>'+sections+'</html>';
   const entries=[
    {name:'Fremdauswertung.html',data:html},
    {name:'Fremdauswertung.json',data:JSON.stringify(meta,null,2)},
-   {name:'LESEN.txt',data:'Benotete Fremdauswertung Doppellektion 8 (K11 gemeinsam; K12 individuell).\nFremdauswertung.html enthält Bericht, Fremdtest und persönliche Reflexionen.\nFremdauswertung.json enthält Formularwerte.\nDas optionale Notebook enthält ausgeführte Zellen.\nOriginalfotos und fremde Datendateien werden nicht zusätzlich beigefügt.\nDieses ZIP ist NICHT das eigene Projekt-ZIP. Es muss separat eingereicht werden.\n'}
+   {name:'LESEN.txt',data:'Fremdauswertung Doppellektion 8: K11 gemeinsamer Pflichtcheck unbenotet; K12 persönliche Reflexion 0–3 Punkte.\nFremdauswertung.html enthält Bericht, Fremdtest und persönliche Reflexionen.\nFremdauswertung.json enthält Formularwerte.\nDas optionale Notebook enthält ausgeführte Zellen. Die gemeinsame Prüfung und das Experiment sind Pflicht, aber nicht benotet. Zwei persönliche Antworten je Person sind Pflicht.\nOriginalfotos und fremde Datendateien werden nicht zusätzlich beigefügt.\nDieses ZIP ist NICHT das eigene Projekt-ZIP. Es muss separat eingereicht werden.\n'}
   ];
   if(notebook)entries.push({name:'versuch_fremd.ipynb',data:JSON.stringify(checkNotebook(notebook),null,1)});
   const zip=await makeZip(entries);
