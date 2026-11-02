@@ -82,7 +82,7 @@ const server=http.createServer((req,res)=>{
         'setTimeout(()=>send({type:"ready",ready:true}),10);<\/script></body></html>'
       }));
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
-    await page.locator("#courseThemeSelect option").first().waitFor();
+    await page.locator("#courseThemeSelect option").first().waitFor({state:"attached"});
     assert.equal(await page.locator("#courseThemeSelect option").count(),4);
     await page.locator("#courseThemeSelect").selectOption("irn-1-klasse");
     assert.equal(await page.locator("#courseThemeColor").inputValue(),"#69419b");
