@@ -152,7 +152,17 @@ cards={card.select_one('.section-label').get_text(strip=True):card.get_text(' ',
        for card in soup.select('#lernziele .grid.two > article.card')}
 assert 'XOR' not in cards['03'], 'XOR does not belong in single-neuron DL3 learning goals'
 assert 'XOR' in cards['04'] and 'Datenleck' not in cards['04']
-assert 'Datenlecks' in cards['05–08'], 'Data split is learned independently during DL5'
+assert len(cards) == 8, 'Separate objectives for DL 5–7 and DL 8 must be visible'
+assert 'Datenlecks' in cards['05–07'] and 'A/B-Vergleich' in cards['05–07'], 'Project learning objectives belong to DL 5–7'
+assert 'reproduzieren' in cards['08'] and 'Trennschärfe' in cards['08'], 'DL 8 must address reproduction and new-image testing'
+assert all(x in cards['08'] for x in ['K11','K12','K7–K10']), 'DL 8 assessment and oral exam must match learning objectives'
+assert soup.select_one('#lernziele a[href="#fremdmodell"]'), 'Learning objectives must link to DL 8'
+assert '36 Punkte' in soup.select_one('#lernziele .callout').get_text()
+for skill,anchor in [('fremd_reproduktion','#reproduktion'),('fremd_kritik','#fremdtest')]:
+    node=soup.select_one(f'#lernziele [data-skill="{skill}"]')
+    assert node and node.select_one('option[value="sicher"]'), f'Missing DL 8 self-assessment: {skill}'
+    assert soup.select_one(f'#lernziele a[href="{anchor}"]'), f'Missing goal evidence link: {anchor}'
+assert len(soup.select('#lernziele [data-skill]')) == 10, '8 existing project skills plus 2 DL 8 skills'
 guide=(root/'lehrperson/musterloesungen.md').read_text()
 dl3_guide=guide.split('## 3 ·',1)[1].split('## 4 ·',1)[0]
 dl4_guide=guide.split('## 4 ·',1)[1].split('## 5–8 ·',1)[0]
