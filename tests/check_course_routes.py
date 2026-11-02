@@ -21,7 +21,8 @@ assert {row["slug"] for row in manifest["courses"]} == expected
 overview = (dist / "kurse.html").read_text(encoding="utf-8")
 for slug in expected:
     assert (dist / slug / "index.html").is_file(), slug
-    assert f'href="{slug}/"' in overview, slug
+    assert f'href="{slug}/"' in overview
+    assert f'style="--course-accent:{course["theme"]["accent"]}"' in overview, slug
 for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
     generated = (dist / slug / "index.html").read_text(encoding="utf-8")
     assert "BOK" in generated and f"{slug.split('/')[1][0]}. Klasse" in generated

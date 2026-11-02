@@ -82,6 +82,16 @@ const server=http.createServer((req,res)=>{
         'setTimeout(()=>send({type:"ready",ready:true}),10);<\/script></body></html>'
       }));
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
+    assert.equal(await page.locator("#courseThemeSelect option").count(),4);
+    await page.locator("#courseThemeSelect").selectOption("irn-1-klasse");
+    assert.equal(await page.locator("#courseThemeColor").inputValue(),"#69419b");
+    await page.locator("#courseThemeColor").fill("#58358b");
+    assert.match(await page.locator("#courseThemePreview").innerText(),/IRN/);
+    await page.locator("#courseThemeStage").click();
+    assert.match(await page.locator("#staged").innerText(),/shared\/course-sites\.json/);
+    await page.locator("#courseThemeColor").fill("#69419b");
+    await page.locator("#courseThemeStage").click();
+    assert.doesNotMatch(await page.locator("#staged").innerText(),/shared\/course-sites\.json/);
     await page.locator("#courseSelect").selectOption("basis");
     assert.equal(await page.locator("body").evaluate(node=>node.classList.contains("course-basis")),true,"First-year editor theme is not blue");
     assert.equal(await page.locator("body").evaluate(node=>getComputedStyle(node).getPropertyValue("--accent").trim()),"#3653a3");
