@@ -166,7 +166,7 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 
 ### Fremdauswertung (Doppellektion 8)
 
-Das fremde Modell anhand seiner Daten mit Startwert **11** nachtrainieren und Prüfsumme/Ergebnisse nachvollziehen. Danach eigene neue Klassen testen und interpretieren. Das fremde Modell hat nur die ursprünglichen zwei Klassen gelernt; **eine Umbenennung seiner Ausgänge ist kein neues Training**. Entscheidend sind die begründete Prüfung und die Grenzen, nicht eine bestimmte Erfolgsquote.
+Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1/P2 des fremden Modells anhand konkreter Exemplare, Quellen und Originalresultate prüfen. Ein Nachlauf mit Startwert **11** liefert einen weiteren Beleg. Danach die eigenen, völlig anderen Bildklassen als Pflichtversuch ausprobieren. **Ungelesene Testbilder derselben Klassen** sind erwünscht; **ganz andere Klassen** hat das Modell nie gelernt. Eine scheinbar gute Trennschärfe ist deshalb keine Klassifikationsgenauigkeit. Das fremde Modell hat nur die ursprünglichen zwei Klassen gelernt; **eine Umbenennung seiner Ausgänge ist kein neues Training**. Entscheidend sind die begründete Prüfung und die Grenzen, nicht eine bestimmte Erfolgsquote.
 
 ## 9 · Sprachmodelle (Doppellektion 9)
 
@@ -212,4 +212,4 @@ Nicht jede ungenaue KI erfüllt automatisch alle drei Kriterien.
 
 ## Erwartungshorizont statt Musterwortlaut
 
-Wichtiger als die genaue Formulierung sind **Fachrichtigkeit, selbst beobachtete Belege, alternative Erklärungen, Grenzen und nachvollziehbare Arbeitsprozesse**. Die verbindliche Bewertung bleibt unverändert: **18 Punkte** für die eigene Abgabe (K1–K6), **12 Punkte** im Fachgespräch (K7–K10), **3 gemeinsame Punkte** für die Reproduktionsprüfung (K11) und **3 individuelle Punkte** für die Fremdtest-Reflexion (K12), zusammen **36 Punkte**.
+Wichtiger als die genaue Formulierung sind **Fachrichtigkeit, selbst beobachtete Belege, alternative Erklärungen, Grenzen und nachvollziehbare Arbeitsprozesse**. Bewertet werden **18 gemeinsame Punkte** für die eigene Abgabe (K1–K6), **12 individuelle Punkte** im Fachgespräch (K7–K10) und **3 individuelle Punkte** für die Fremdreflexion (K12): zusammen **33 Punkte**. Der gemeinsame Daten-/Ergebnischeck K11 und der Pflichtversuch sind unbenotet.
