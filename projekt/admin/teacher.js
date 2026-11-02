@@ -136,13 +136,10 @@
       'Beobachtungen und Zahlen aus den Experimenten müssen anhand der eigenen Daten überprüft werden.</p>';
     const answerCards=data.entries.map(entry=>
       '<article class="solution-card">'+
-      '<div class="solution-meta"><span>Aufgabe / Frage</span><code>'+escape(entry.field)+'</code></div>'+
+      '<div class="solution-meta"><span>'+(entry.questionSource==="thema"?'Thema / Teilaufgabe':'Aufgabe / Frage')+'</span><code>'+escape(entry.field)+'</code></div>'+
       '<h3 class="solution-question">'+escape(entry.question)+'</h3>'+
-      (!entry.questionFound?'<p class="question-hint">Der genaue Wortlaut wurde nicht eindeutig erkannt. '+
-       '<a href="'+escape(entry.courseLink)+'" target="_blank" rel="noopener noreferrer">'+
-       'Originalauftrag auf der Kursseite ansehen</a>.</p>':
-       '<p class="question-source"><a href="'+escape(entry.courseLink)+
-       '" target="_blank" rel="noopener noreferrer">Zur Aufgabe auf der Kursseite</a></p>')+
+      '<p class="question-source"><a href="'+escape(entry.courseLink)+
+      '" target="_blank" rel="noopener noreferrer">Zugehörige Aufgabe auf der Kursseite öffnen</a></p>'+
       '<div class="sample-answer"><span class="answer-label">Mögliche Musterantwort</span>'+
       markdown.render(entry.answer)+'</div></article>').join("");
     return header+'<section class="resource">'+
