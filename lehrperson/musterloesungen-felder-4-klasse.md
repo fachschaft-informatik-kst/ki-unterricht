@@ -31,6 +31,8 @@
 | `typ_bsp_4` | Früheres optionales Feld: textgenerierendes Sprachmodell. |
 | `typ_4` | Frühere Kategorie: generative KI. |
 | `gesetze` | 1. Bremsen kann Verletzungen vermindern, doch ein Restschaden ist nicht vermeidbar. 2. Asimovs erstes Gesetz entscheidet nicht, wessen Risiko bei konfligierenden Optionen Vorrang haben soll; dafür braucht es Verantwortung, Regeln und gesellschaftliche Abwägung. |
+| `begriffe_saetze` | KI ist der Oberbegriff für Systeme, die Aufgaben intelligent bearbeiten. Maschinelles Lernen bestimmt Muster aus Beispieldaten. Deep Learning ist ML mit mehrschichtigen neuronalen Netzen. Generative KI erzeugt neue Inhalte, zum Beispiel Texte. |
+| `begriffe` | Nein: Eine zeitgesteuerte Ampel führt feste Regeln aus und lernt nicht. Ein Spamfilter mit gelerntem Entscheidungsbaum passt sein Modell anhand von Daten an; es gibt aber auch regelbasierte KI. Offen bleibt, wie man bei Grenzfällen KI sinnvoll abgrenzt. |
 
 ## DL 2 · Lernen aus Daten
 
