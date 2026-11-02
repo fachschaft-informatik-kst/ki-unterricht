@@ -94,28 +94,30 @@ Die Lehrperson bietet kurze Beratungen zu Ihren Fragen an, statt die Klasse bei 
 
 Die **20 Einzelgespräche** finden mit **einer Lehrperson** direkt ab Beginn der **Doppellektion 8** statt: **4 Minuten pro Person** plus **1 Minute für Bewertung, Notizen und Wechsel**. Das ergibt **100 Minuten**: 90 Minuten Unterricht und **10 Minuten im unmittelbaren Anschluss** für die letzten zwei Personen. Es gibt keinen Zeitpuffer. Die Lehrperson teilt die festen Gesprächsfenster, Austauschprojekte und den Abgabekanal spätestens vor der Doppellektion mit. Alle anderen beginnen sofort selbstständig mit der Fremdauswertung; es gibt keine zusätzliche Einführung oder gemeinsame Schlussbesprechung und keine Ersatztermine.
 
-### Während der Fachgespräche: ein fremdes Modell auswerten
+### Während der Fachgespräche: ein fremdes Modell auswerten (DL 8)
 
-Arbeiten Sie im Tandem selbstständig und pausieren Sie jeweils nur für Ihr persönliches Einzelgespräch; die andere Person kann weiterarbeiten. Die Fremdauswertung ist **verbindlich, aber unbenotet**; die bewertete eigene Abgabe bleibt unverändert.
+Arbeiten Sie im Tandem selbstständig und pausieren Sie jeweils nur für Ihr persönliches Einzelgespräch; die andere Person kann weiterarbeiten. Die Fremdauswertung ist **verbindlich und benotet (K11 und K12, zusammen 6 Punkte)**; die bewertete eigene Abgabe bleibt unverändert.
 
 1. Übernehmen Sie das zugeteilte Projekt in einem **privaten Browserfenster**, damit Sie Ihren eigenen Stand nicht ersetzen. Weitergabe nur mit geklärter Berechtigung; auch die Fotostudio-JSON enthält Vorschaubilder.
 2. **Reproduktionscheck, ca. 30 Minuten:** Prüfen Sie Daten und Einstellungen, trainieren Sie A/B einmal mit Startwert 11 nach und prüfen Sie die ursprünglich gewählte Variante. Vergleichen Sie Prüfsumme und Ergebnisse; dokumentieren Sie Abweichungen. Drei Startwerte sind freiwillige Vertiefung, kein Pflichtteil.
 3. **Fremdtest und Rückmeldung, ca. 25 Minuten:** Lassen Sie das fremde Modell Ihre eigenen Klassen beurteilen. Halten Sie vorher eine Erwartung fest und werten Sie danach Tabelle, Trennschärfe und Beispiele aus. Begründen Sie das Ergebnis, nennen Sie eine Grenze und geben Sie dem anderen Tandem eine konkrete Rückmeldung.
-4. Sichern und reichen Sie die kurze Fremdauswertung separat im bestehenden Reproduktions- und Fremdtest-Protokoll ein. Kein zusätzlicher langer Bericht.
+4. Sichern Sie den Reproduktionsbericht und das Fremdtest-Protokoll. Jede Person beantwortet ausserdem die vier kurzen Reflexionsfragen auf der eigenständigen DL-8-Kursseite. Laden Sie das separate Fremdauswertungs-ZIP herunter und reichen Sie es ein; kein zusätzlicher langer Bericht.
 
 Für Gespräch, Wiedereinstieg und Technik bleibt Reserve. Bei einem nicht lösbaren Trainingsproblem werten Sie die gespeicherten fremden Ausgaben aus und dokumentieren ausdrücklich, welcher Versuch nicht möglich war. Die Auswertung entfällt nicht, aber Sie behaupten keinen erfolgreichen Test. Erhaltene Fotos nur für diesen Auftrag verwenden und nach der vereinbarten Aufbewahrungsregel löschen.
 
 ## Bewertung
 
-Zehn Kompetenzen mit je **0–3 Punkten**, maximal **30 Punkte**. K1–K6 bewerten die Abgabe (18 Punkte), K7–K10 das individuelle vierminütige Fachgespräch (12 Punkte pro Person). Jede Kompetenz zählt gleich; keine zusätzliche Gewichtung.
+Zwölf Kompetenzen mit je **0–3 Punkten**, maximal **36 Punkte**. K1–K6 bewerten die ursprüngliche gemeinsame Projektabgabe (18 Punkte), K7–K10 das individuelle vierminütige Fachgespräch (12 Punkte), K11 die gemeinsame Fremdmodell-Reproduktion (3 Punkte) und K12 die persönliche Fremdmodell-Reflexion (3 Punkte). Jede Kompetenz zählt gleich.
 
-**Note = 1 + 5 × Punktesumme / 30**, auf Viertelnoten gerundet. Beispiele: 18 Punkte → 4,0; 24 → 5,0; 30 → 6,0. Für die gemeinsame Projektabgabe erhalten beide dieselben K1–K6-Punkte (18); die K7–K10-Punkte aus den Einzelgesprächen (12) werden für jede Person separat ermittelt. Daraus entsteht je eine individuelle Note.
+**Note = 1 + 5 × Punktesumme / 36**, auf Viertelnoten gerundet. Beispiele: 18 Punkte → 3,5; 27 → 4,75; 36 → 6,0. K1–K6 und K11 gelten für beide Tandemmitglieder gleich. K7–K10 und K12 werden individuell ermittelt. Jede Person erhält so ihre eigene Note.
 
-Die einzelnen Leistungsstufen stehen im [Bewertungsraster](../../worksheets/md/KI_Bewertungsraster.md) und auf der [Kursseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/#bewertung). Die dortige Punkteauswahl dient nur der Selbsteinschätzung.
+Die Leistungsstufen stehen im [Bewertungsraster](../../worksheets/md/KI_Bewertungsraster.md) und auf der [Kursseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/#bewertung). Die Punkteauswahl dient nur der Selbsteinschätzung.
 
-## Abgabe
+## Zwei getrennte Abgaben
 
-- Webjournal mit fünf ausgefüllten Reflexionen und Versuchsnotebook mit Ausgaben. Download als ZIP-Datei.
+- **Vor DL 8:** Webjournal mit fünf ausgefüllten Reflexionen und Versuchsnotebook mit Ausgaben als ursprüngliches Projekt-ZIP.
 - Originalfotos, Fotostudio-JSON, Gruppen-/Quellenangaben.
 
-Unter «Sichern & abgeben» Originalfotos und Fotostudio-JSON hinzufügen und das ZIP-Paket herunterladen. Der Download reicht nichts automatisch ein; ZIP über den genannten Abgabekanal einreichen. Kein zusätzlicher langer Bericht. Bei vereinbarten Ersatzdaten Herkunft und Einschränkungen offenlegen; die Lehrperson legt den passenden Nachweis zur Datenarbeit fest.
+Für das eigene Projekt unter «Sichern & abgeben» Originalfotos und Fotostudio-JSON hinzufügen und das ZIP-Paket herunterladen. Der Download reicht nichts automatisch ein; ZIP über den genannten Abgabekanal einreichen. Kein zusätzlicher langer Bericht. Bei vereinbarten Ersatzdaten Herkunft und Einschränkungen offenlegen; die Lehrperson legt den passenden Nachweis zur Datenarbeit fest.
+
+**Nach DL 8:** Eigenständige Fremdauswertung mit Reproduktionsbericht, Fremdtest und je vier individuellen Reflexionsantworten als separates ZIP einreichen. Keine Änderungen an der ursprünglichen Projektabgabe.
