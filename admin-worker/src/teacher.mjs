@@ -18,7 +18,8 @@ export async function readTeacherFile(token,path,github,repo){
 const getText=async(t,p,g,r)=>new TextDecoder().decode(await readTeacherFile(t,p,g,r));
 const getJson=async(t,p,g,r)=>JSON.parse(await getText(t,p,g,r));
 
-const sortLessons=(a,b)=>Number(a.number)-Number(b.number);
+// Match scripts/course_model.py: raw plan JSON only has order; DL numbers are derived.
+const sortLessons=(a,b)=>Number(a.order??a.number*10)-Number(b.order??b.number*10);
 const headings=source=>{
   const matches=[...source.matchAll(/^## (.+)$/gm)];
   return matches.map((m,i)=>({title:m[1],text:source.slice(m.index+m[0].length,matches[i+1]?.index??source.length).trim()}));
@@ -147,7 +148,8 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
   const views=(manifest.sections||[]).filter(s=>s.teaching&&/^[a-z][a-z0-9-]*$/.test(s.id));
   if(views.length>20)throw Error("Zu viele Unterrichtsbereiche.");
   const plans=await Promise.all(views.map(s=>getJson(token,"kursseiten/"+s.id+"/planung.json",github,repo)));
-  const lessons=plans.flatMap(p=>p.lessons||[]).sort(sortLessons);
+  const lessons=plans.flatMap(p=>p.lessons||[]).sort(sortLessons)
+    .map((lesson,index)=>({...lesson,number:index+1}));
   const current=lessons.find(l=>l.number===Number(selected))||lessons[0];
   if(!current)throw Error("Kein Unterrichtsplan vorhanden.");
   const base={kind,course,lessons:lessons.map(l=>({id:l.id,number:l.number,title:l.title,view:l.view})),
