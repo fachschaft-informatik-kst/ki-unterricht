@@ -166,4 +166,4 @@ Elf benotete Kriterien à 0–3 Punkte, insgesamt 33. K1–K6: Projektabgabe (18
 
 ## Bewertung nach DL 8
 
-Die 33 Punkte umfassen 18 gemeinsame Projektpunkte (K1–K6), 12 individuelle Fachgesprächspunkte (K7–K10) und 3 individuelle Punkte (K12). Die gemeinsame Prüfung der fremden Trainings-/Testdaten und der Pflichtversuch (K11) bleiben unbenotet. Die ursprüngliche Abgabe bleibt unverändert. Andere Klassen sind keine regulären Testbilder des fremden Modells.
+Die 33 Punkte umfassen 18 gemeinsame Projektpunkte (K1–K6), 12 individuelle Punkte im Fachgespräch (K7–K10) und 3 individuelle Punkte (K12). Die gemeinsame Prüfung der fremden Trainings-/Testdaten und der Pflichtversuch (K11) bleiben unbenotet. Die ursprüngliche Abgabe bleibt unverändert. Andere Klassen sind keine regulären Testbilder des fremden Modells.
