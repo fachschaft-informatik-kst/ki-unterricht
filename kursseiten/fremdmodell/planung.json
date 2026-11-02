@@ -3,13 +3,13 @@
     {
       "id": "08",
       "view": "fremdmodell",
-      "title": "Ein fremdes Bildmodell unabhängig prüfen",
+      "title": "Ein fremdes Bildmodell kritisch prüfen",
       "rueckblick": "Ihr eigener Abgabestand ist eingefroren. Während der Einzelgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.",
-      "goal": "Das gemeinsame Bildprojekt im vierminütigen Einzelgespräch selbstständig erklären und ein fremdes Modell anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.",
-      "question": "Leitfrage: Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?",
-      "motivation": "Eine hohe Trefferquote ist noch kein allgemeiner Zuverlässigkeitsbeweis: Erst identische Ergebnisse reproduzieren, dann an nie gelernten Bildklassen Grenzen sichtbar machen. Trennschärfe bei fremden Klassen ist keine Klassifikationsgenauigkeit.",
-      "product": "Ein gemeinsamer Reproduktionsbericht (K11), ein Fremdtest mit eigenen Bildern und vier persönliche Reflexionsantworten je Person (K12) als separates ZIP. Dazu das vierminütige individuelle Fachgespräch; das abgegebene eigene Projekt bleibt unverändert.",
-      "zeit": "20 Lernende, eine Lehrperson: 20 × (4 Minuten Einzelgespräch + 1 Minute für Notizen/Wechsel) = 100 Minuten. Gesprächsreihe beginnt direkt bei Minute 0; die ersten 90 Minuten gehören zu Doppellektion 8, die letzten 10 Minuten werden unmittelbar angehängt. Es gibt keine Gesprächsreserve und keine klassenweite Einführung oder Abschlussbesprechung: Zeitplan, Austauschprojekt und Abgabekanal sind vorab bekannt; Fremdauswertung und Sicherung laufen selbstständig. Keine zweite Lehrperson, keine Ersatztermine. Pflichtkern: ein Reproduktionslauf mit Startwert 11 und Fremdtest, drei Startwerte nur Zusatz. Ausfallpfad bei Browser-/Notebookproblemen: Die betroffene Person bearbeitet die Fremdauswertung anhand der vorab als Ausdruck bereitgelegten Modell- und Testergebnisse (Reproduktionsbeleg, Beispielbilder, Verwechslungen), dokumentiert die Einschränkung und reicht die schriftliche Beurteilung ein. Das persönliche Fachgespräch läuft unverändert zum zugeteilten Termin; kein Zusatztermin. Wenn die Technik wieder funktioniert, kann die reguläre Reproduktionsprüfung nachgeholt werden, ohne die Gesprächsreihe zu unterbrechen.",
+      "goal": "Das eigene Bildprojekt im vierminütigen Einzelgespräch selbstständig erklären; fremde Trainings-, Validierungs- und Testdaten samt Ergebnissen untersuchen, mit anderen Bildklassen experimentieren und Grenzen individuell begründen.",
+      "question": "Leitfrage: Was belegen die Tests des fremden Modells – und was zeigen die Vorhersagen auf ganz anderen Klassen?",
+      "motivation": "Unbekannte Testbilder derselben Klassen sind Voraussetzung für einen fairen Test. Andere, nie gelernte Klassen sind etwas grundsätzlich anderes: Das Modell ordnet sie erzwungen einer seiner ursprünglichen Klassen zu; Trennschärfe ist hier keine Trefferquote.",
+      "product": "Ein gemeinsamer unbenoteter Daten- und Ergebnischeck (K11) mit einem Pflichtversuch an eigenen Klassen, kurze gemeinsame Rückmeldung und je zwei persönliche Reflexionsantworten (K12, maximal 3 Punkte je Person) im separaten ZIP. Dazu das vierminütige individuelle Fachgespräch; das eigene Projekt bleibt unverändert.",
+      "zeit": "20 Lernende, eine Lehrperson: 20 × (4 Minuten Einzelgespräch + 1 Minute für Notizen/Wechsel) = 100 Minuten, davon die letzten 10 Minuten unmittelbar nach der 90-minütigen Doppellektion. Gespräche ab Minute 0; keine klassenweite Einführung oder Abschlussbesprechung, keine freie Lehrpersonenberatung. Austauschprojekt, Gesprächszeit und Abgabekanal sind vorab bekannt. Pflicht: fremde T1/T2-, V1- und P1/P2-Daten und Originalergebnisse prüfen, ein fremdes Modell nachlaufen lassen, eigene Klassen ausprobieren, kurze Rückmeldung und je zwei persönliche Reflexionsantworten. Puffer für Gesprächsunterbrechungen und Technik. Bei technischem Ausfall dokumentierte Originaldaten und Ergebnisse statt eigener Nachläufe auswerten und fehlende Versuche benennen; keine erfundenen Resultate.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -20,7 +20,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 4,
-              "text": "Starten Sie die Fremdauswertung sofort selbstständig nach der vorab verteilten schriftlichen Anleitung. Die Abgabe, der individuelle Gesprächsplan mit vier Minuten pro Person und die Austauschprojekte liegen schon bereit. Die Lehrperson führt ab Minute 0 ohne klassenweite Einführung Einzelgespräche; Gesprächsfenster bis Minute 100 (einschliesslich zehn Minuten unmittelbar nach der Doppellektion)."
+              "text": "Starten Sie selbstständig mit dem zugeteilten fremden Projekt. Der Gesprächsplan wurde vorab verteilt; die Lehrperson beginnt ab Minute 0 die 20 Einzelgespräche (bis Minute 100 einschliesslich der zehn Minuten im Anschluss)."
             },
             {
               "art": "Auftrag",
@@ -44,13 +44,13 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 2,
-              "text": "Lesen Sie Vermutung und Ergebnis des anderen Tandems. Notieren Sie, was Sie nachprüfen wollen und welches Ergebnis Sie für Ihre eigenen Bilder erwarten. Die Gespräche laufen bereits; Sie arbeiten selbstständig."
+              "text": "Lesen Sie die ursprünglichen Klassen und die Forschungsfrage des Tandems. Vermuten Sie, ob dessen unbekannte P1/P2-Testbilder fair ausgewählt sind."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 3,
-              "text": "Lesen Sie allein Vermutung und Ergebnis des anderen Tandems. Notieren Sie Ihre Prüffrage und eine Erwartung für Ihre eigenen Bilder."
+              "text": "Formulieren Sie einzeln die Vermutung: Was passiert, wenn das auf zwei fremden Klassen trainierte Modell Ihre zwei ganz anderen Klassen sieht?"
             },
             {
               "art": "Ergebnis",
@@ -68,7 +68,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Lesen Sie Reproduktionsprüfung und Fremdtest auf der Kursseite. Teilen Sie die Arbeit auf. Vergleichen Sie einen Lauf mit Startwert 11; weitere Startwerte sind freiwillig. Nutzen Sie Hilfetexte und notieren Sie technische Blockaden, ohne laufende Gespräche zu unterbrechen."
+              "text": "Lesen Sie die Datenrollen T1/T2, V1, P1/P2, die Anleitung zum Nachlauf und den Pflichtversuch mit eigenen Klassen. Sie benötigen fremde und eigene Fotostudio-JSON in getrennten Dateien, nicht zwei wiederhergestellte Projektstände."
             },
             {
               "art": "Ergebnis",
@@ -79,37 +79,37 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Fremdes Modell prüfen; Gespräche parallel",
+          "titel": "Daten prüfen, experimentieren, reflektieren; Gespräche parallel",
           "minutes": 70,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 30,
-              "text": "Reproduktionsprüfung: Stellen Sie das fremde Projekt in einem privaten Browserfenster wieder her. Laden Sie Daten und trainieren Sie A/B einmal mit den Einstellungen des Originals und Startwert 11 nach. Wiederholen Sie den Abschlusstest mit der ursprünglichen Auswahl. Vergleichen Sie Datenprüfsumme und Werte mit dem Protokoll. Dokumentieren Sie kurz, was übereinstimmt, abweicht oder nicht prüfbar ist. Dies ist der erste Teil der benotet Fremdauswertung."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Tandem",
               "min": 20,
-              "text": "Fremdtest und Rückmeldung: Lassen Sie das nachtrainierte fremde Modell Ihre eigenen Klassen C/D beurteilen. Lesen Sie Tabelle, Trennschärfe und konkrete Beispiele. Begründen Sie «Wie gut?» und «Warum?» mit mindestens zwei möglichen Erklärungen und einer Grenze. Formulieren Sie eine Rückmeldung an das andere Tandem und sichern Sie sie im bestehenden Fremdtest-Protokoll."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 5,
-              "text": "Halten Sie nach dem Fremdtest zuerst allein fest, welche Beobachtung Sie am überzeugendsten finden und welche Grenze Ihre Aussage hat."
+              "text": "Gemeinsamer Daten- und Ergebnischeck (K11, unbenotet): Trainingsgruppen T1/T2, Validierung V1 und Testgruppen P1/P2 des fremden Projekts anhand JSON, Journal und Beispielen prüfen. Originalwerte A/B auf V1, Modellwahl und Testresultat auf P1/P2 lesen. Das fremde Notebook mit Startwert 11 und den Originaldaten einmal nachlaufen lassen, einen V1-Wert und das Testresultat vergleichen; eine konkrete Beobachtung und offene Frage notieren."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 15,
-              "text": "15 Minuten Puffer ausschliesslich für die eigenständige Fremdauswertung, persönliche Gesprächsunterbrechung, Wiedereinstieg und Technik; dieser Puffer ist keine freie Zeit im eng getakteten Prüfungsplan. Beim persönlichen Aufruf pausieren Sie. Jede Person erklärt in vier Minuten selbstständig den Modellweg, eine Datenentscheidung, ein Ergebnis samt Grenze und einen nächsten Versuch. Beim nicht lösbaren Training gespeicherte fremde Ausgaben auswerten und fehlende Reproduktion ehrlich dokumentieren."
+              "text": "Pflichtversuch vor der Reflexion: Das nachtrainierte fremde Modell mit den zwei eigenen, anderen Bildklassen über Notebook-Abschnitt 6 testen. Erwartung vorab notieren, Vorhersagetabelle, Trennschärfe und mindestens ein Beispiel je Klasse untersuchen. Erklären, weshalb unbekannte Bilder derselben Klassen (Original P1/P2) kein Training benötigen, ganz andere Klassen aber keine prüfbare Trefferquote ergeben."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 15,
+              "text": "Nach beiden Versuchen beantwortet jede Person zwei kurze persönliche Fragen (K12, 0–3 Punkte): ein Beleg aus Originaltest und Eigenversuch sowie die Unterscheidung von neuen Testbildern und neuen Klassen samt nächstem Prüfschritt. Das Tandem formuliert zwei unbenotete Sätze als Rückmeldung."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 20,
+              "text": "20 Minuten Puffer für den Import der beiden JSON-Dateien, Einzelgesprächsunterbrechungen, Wiedereinstieg und Technik. Bei Ausfall anhand gespeicherter fremder Testbilder/Resultate auswerten und den fehlenden Nachlauf offen benennen. Jede Person erklärt während des zugeteilten vierminütigen Einzelgesprächs ihr eigenes Projekt; keine zusätzlichen Gesprächstermine."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Je ein vierminütiges Einzelgespräch pro Person und eine belegte Fremdauswertung; die gemeinsame Projektabgabe bleibt unverändert."
+              "text": "Gemeinsamer Daten- und Ergebnischeck mit Pflichtversuch (unbenotet), zwei persönliche Reflexionen pro Tandem (K12), und je ein unabhängiges Einzelgespräch."
             }
           ]
         },
@@ -122,12 +122,12 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Prüfen Sie Reproduktionsbericht, Messprotokoll und die vier Reflexionsantworten je Person und reichen Sie das separate benotete Fremdauswertungs-ZIP ein und teilen Sie die Rückmeldung selbstständig mit dem anderen Tandem. Notieren Sie eine Frage für Doppellektion 10 und schliessen Sie das private Fenster. Löschen Sie erhaltene Fotos nach der vereinbarten Aufbewahrungsregel. Die Lehrperson führt währenddessen weiter Einzelgespräche, die letzten zwei im unmittelbaren zehnminütigen Anschluss."
+              "text": "Prüfen Sie den gemeinsamen Daten- und Ergebnischeck, das Protokoll des Pflichtversuchs, die Rückmeldung und je zwei persönliche Pflichtantworten. Reichen Sie das separate ZIP ein; die gemeinsame Arbeit ist unbenotet, nur K12 zählt mit maximal 3 Punkten pro Person. Fremde Bilder nach der vereinbarten Regel löschen. Die Lehrperson führt parallel weiter Fachgespräche."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Gesicherte Rückmeldung und eine Transferfrage; keine nachträgliche Änderung der bewerteten Abgabe."
+              "text": "Ein separates ZIP pro Tandem mit gemeinsamem Prüfnachweis und je zwei individuellen Antworten; ursprüngliche Projektabgabe unverändert."
             }
           ]
         }
