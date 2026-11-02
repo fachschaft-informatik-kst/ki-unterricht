@@ -43,6 +43,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('#lernziele .grid > article').filter({hasText:'Eigenes Bildprojekt durchführen'}).locator('.section-label').innerText(),'05–07');
   assert.equal(await p.locator('#lernziele .grid > article').filter({hasText:'Fremdes Modell kritisch prüfen'}).locator('.section-label').innerText(),'08');
   assert.equal(await p.locator('#lernziele [data-skill]').count(),10);
+  await p.locator('#lernziele > details > summary').click();
+  assert(await p.locator('#lernziele > details').evaluate(el=>el.open),'Self-assessment must be expandable');
   await p.locator('#lernziele [data-skill="fremd_reproduktion"]').selectOption('sicher');
   await p.locator('#lernziele [data-skill="fremd_kritik"]').selectOption('hilfe');
   await p.reload();
