@@ -175,9 +175,12 @@ const post=(url,value)=>api(url,{method:"POST",headers:{"Content-Type":"applicat
 const slug=text=>text.trim().toLowerCase().replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const filename=path=>path.split("/").pop().replace(".md","");
 const notebookPath=path=>/^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path);
-const gradeNotebook=path=>notebookPath(path)&&
-  (isIrnCourse()?false:courseGrade()===1?/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path):
-    !/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path));
+const gradeNotebook=path=>{
+  if(!notebookPath(path))return false;
+  if(isIrnCourse())return new RegExp("^content/irn"+courseGrade()+"_lesson_[a-z0-9_]+\\.ipynb$").test(path);
+  return courseGrade()===1?/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path):
+    !/^content\/(?:basis_|irn[14]_)/.test(path);
+};
 let returnChapterPath=null;
 function notebookReferences(source){
   const items=[...source.matchAll(/data-notebook=["'](content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb)["']/g)]
@@ -1783,7 +1786,6 @@ document.addEventListener("pointerdown",event=>{
 renderBlockChoices();
 
 function showNotebookPanel(){
-  if(isIrnCourse()){status("Eigene IRN-Notebooks benötigen noch eine separate JupyterLite-Kursumgebung. AVIVA, Kapitel, Materialkoffer und Musterlösungen sind bereits bearbeitbar.",true);return;}
   if(!chapterPath(state.current?.path||"")){
     status("Bitte zuerst ein Unterkapitel auswählen, um dort ein Notebook einzufügen.",true);return;
   }
@@ -1815,7 +1817,7 @@ function createLessonNotebook(){
     const section=$("section").value.replaceAll("-","_");
     const basename=slug(title).replaceAll("-","_").slice(0,45);
     if(!basename)throw Error("Ungültiger Notebook-Titel.");
-    const path="content/"+(courseGrade()===1?"basis_":"")+"lesson_"+section+"_"+basename+".ipynb";
+    const path="content/"+(isIrnCourse()?"irn"+courseGrade()+"_":courseGrade()===1?"basis_":"")+"lesson_"+section+"_"+basename+".ipynb";
     if(state.notebooks.some(item=>item.path===path)||state.staged.has(path))
       throw Error("Ein Notebook mit diesem Namen existiert bereits. Bitte einen anderen Titel wählen.");
     if(state.staged.size+(state.staged.has(state.current.path)?1:2)>12)

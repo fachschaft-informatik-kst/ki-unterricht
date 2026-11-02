@@ -126,7 +126,7 @@ function validate(changes){
       if(doc.nbformat!==4||!Array.isArray(doc.cells)||!doc.metadata||!doc.cells.every(cell=>
         ["code","markdown","raw"].includes(cell.cell_type)&&Array.isArray(cell.source)&&cell.source.every(s=>typeof s==="string")))
         throw Error("Ungültige Jupyter-Notebook-Struktur.");
-      if(c.expectedSha===null&&!/^content\/(?:basis_)?lesson_[a-z0-9_]+\.ipynb$/.test(c.path))
+      if(c.expectedSha===null&&!/^content\/(?:basis_|irn[14]_)?lesson_[a-z0-9_]+\.ipynb$/.test(c.path))
         throw Error("Neue Notebooks müssen mit einem Unterkapitel-Baustein verknüpft sein.");
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
@@ -169,9 +169,13 @@ async function publish(req,token){
   // A newly created notebook must be published atomically with a chapter that
   // references it. Existing notebook sources remain editable as before.
   for(const item of body.changes.filter(x=>x.expectedSha===null&&x.path.endsWith(".ipynb"))){
+    const namespace=item.path.startsWith("content/irn1_")?"irn-1-":
+      item.path.startsWith("content/irn4_")?"irn-4-":
+      item.path.startsWith("content/basis_")?"basis-":"bok-4";
     const references=body.changes.some(x=>!x.delete&&/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)&&
       x.content?.includes('data-notebook="'+item.path+'"')&&
-      (item.path.startsWith("content/basis_")===x.path.startsWith("kursseiten/basis-")));
+      (namespace==="bok-4"?!/^(?:basis-|irn-)/.test(x.path.split("/")[1]):
+        x.path.split("/")[1].startsWith(namespace)));
     if(!references)return fail(400,"Neue Notebooks müssen gemeinsam mit dem passenden Unterkapitel vorgemerkt werden: "+item.path);
   }
 
