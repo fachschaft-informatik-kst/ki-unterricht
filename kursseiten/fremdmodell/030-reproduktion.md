@@ -2,38 +2,32 @@
 type: chapter
 id: reproduktion
 nummer: "3"
-titel: "Ergebnisse reproduzieren · 30 Min."
-kurz: "Gleiche Daten und Einstellungen – gleiche Resultate?"
+titel: "Fremde Daten und Ergebnisse prüfen · ca. 20 Min."
+kurz: "Trainingsgruppen, unabhängige Testbilder und Resultate untersuchen."
 open: false
 ---
 
-**Prüffrage (K11, gemeinsam benotet):** Kommen Sie mit dem Originaldatensatz und **Startwert 11** zum gleichen Ergebnis?
+**Prüffrage (gemeinsam, unbenotet):** Wie verlässlich sind Datenaufteilung und Ergebnisse des fremden Projekts?
 
-Bleiben Sie im <strong>privaten Fenster</strong> mit dem importierten Projekt. Bearbeiten Sie die fünf Schritte im <a href="#projekt-werkbank">importierten Projekt-Notebook</a>. Die Originalwerte finden Sie in `Versuchsprotokoll.json` des fremden ZIPs.
+Arbeiten Sie im <strong>privaten Fenster</strong> mit dem <a href="#projekt-werkbank">importierten Notebook</a> und dem fremden `Versuchsprotokoll.json`. Sie müssen **keinen neuen Modellvergleich planen**. Ein Durchlauf genügt; zusätzliche Startwerte sind freiwillig.
 
-1. **5 Min. · Daten laden:** Führen Sie die Vorbereitungszellen aus. Lassen Sie `MODUS` und `KLASSEN` wie beim Original. Laden Sie im Datenimport **die fremde Fotostudio-JSON**. Prüfen Sie zwei Klassen, fünf Gruppen und je acht Fotos pro Klasse und Gruppe.
-2. **5 Min. · Daten beurteilen:** Vergleichen Sie Klassenregel, Exemplare und Quellen mit dem <a href="#journal">importierten Journal</a>. Notieren Sie **zwei konkrete** Beobachtungen zur Datenqualität (z. B. Licht, Hintergrund oder Verwechslungen).
-3. **10 Min. · A/B trainieren:** Führen Sie die Zelle `foto.vergleichen(daten)` mit dem unveränderten Startwert **11** aus. Vergleichen Sie die Trefferquoten von **A auf V1** und **B auf V1** mit `laeufe` im Originalprotokoll.
-4. **5 Min. · Abschlusstest wiederholen:** Übernehmen Sie die **ursprünglich gewählte Variante und Begründung**. Setzen Sie nur zur Wiederholung `TEST_FREIGEBEN = True`, führen Sie die Testzelle aus und vergleichen Sie das Testergebnis. **Keine nachträgliche Modellwahl oder Optimierung.**
-5. **5 Min. · Ergebnisse prüfen:** Führen Sie die Protokollzelle aus und vergleichen Sie `daten_sha256`, beide V1-Werte und das Abschlusstestergebnis mit dem Original. Ist etwas anders, dokumentieren Sie die Abweichung statt sie zu verschweigen.
+1. **5 Min. · Daten ansehen:** Notieren Sie die **beiden Klassen** des fremden Projekts. Prüfen Sie in seiner Fotostudio-JSON und im <a href="#journal">Journal</a> die Gruppen **T1/T2 (Training), V1 (Validierung) und P1/P2 (Test)**: je Klasse und Gruppe acht Fotos. Vergleichen Sie mindestens **ein Trainings- und ein Testexemplar**: Sind es wirklich verschiedene Gegenstände oder Personen? Ist ein Hintergrund, eine Beleuchtung oder Quelle auffällig? Schreiben Sie eine konkrete Beobachtung auf.
+2. **5 Min. · Originalergebnisse verstehen:** Lesen Sie im Protokoll die **A/B-Werte auf V1**, die **ursprüngliche Modellwahl** und das **Abschlusstestergebnis auf P1/P2**. Wo liegt eine Differenz? Begründen Sie in einem Satz, warum P1/P2 nicht schon zum Trainieren benutzt werden durfte.
+3. **7 Min. · Selbst ausprobieren (Pflicht):** Führen Sie im <a href="#projekt-werkbank">Notebook</a> mit der <strong>fremden Fotostudio-JSON</strong> die Zellen zum Datenimport und `foto.vergleichen(daten)` aus; behalten Sie die ursprünglichen Klassen, Einstellungen und den Startwert **11** bei. Übernehmen Sie die <strong>ursprünglich gewählte Variante</strong>, setzen Sie `TEST_FREIGEBEN = True` und wiederholen Sie den Abschlusstest. Vergleichen Sie **einen V1-Wert und das Testergebnis** mit dem Protokoll. Nicht nachträglich optimieren.
+4. **3 Min. · Beurteilen:** Schreiben Sie die wichtigste Beobachtung zur Datenqualität, die beiden Originalergebnisse, Ihren Vergleich und **eine faire Rückfrage** an das Tandem auf. Wenn Zahlen abweichen, nennen Sie die Abweichung; Sie müssen sie nicht schönrechnen.
 
-<label class="field answer"><span>Reproduktionsbericht (gemeinsam): geprüfte Namen/Projekt · daten_sha256 gleich? · A/V1 und B/V1 «Original → eigener Lauf» · Abschlusstest «Original → eigener Lauf» · zwei Datenbeobachtungen · bei Abweichung mögliche Ursache · eine konkrete Empfehlung</span><textarea data-journal="reproduktion" data-optional="" maxlength="20000" rows="8" placeholder="Geprüftes Tandem und Thema: …
-Prüfsumme gleich? …
-A/V1: … → …; B/V1: … → …; Test: … → …
-Zwei Datenbeobachtungen: …
-Deutung bei Abweichung: …
-Empfehlung: …"></textarea></label>
+<label class="field answer"><span>Gemeinsamer Prüfbericht (Pflicht, unbenotet): Fremde Klassen · T1/T2 vs. P1/P2 (konkrete Exemplare/Quellen) · Original A/B auf V1 und Test P1/P2 · ein eigener Vergleichswert · eine Rückfrage</span><textarea data-journal="reproduktion" data-optional="" maxlength="20000" rows="6" placeholder="Klassen des fremden Modells: … / Trainings- und Testexemplare: … / Möglicher Datenleck- oder Hintergrundeffekt: …&#10;Original: A/V1 …, B/V1 …, Abschlusstest …; unser Nachlauf: V1 …, Test …&#10;Warum P1/P2 nicht ins Training gehören: … / Unsere Rückfrage: …"></textarea></label>
 
-<p><strong>Ergebnis für K11:</strong> Ein überprüfbarer Bericht mit Originalwerten, Ihren Werten und einer begründeten Aussage zur Übereinstimmung. Die Zahlen müssen nicht besser werden.</p>
+<p class="small"><strong>Technischer Hinweis:</strong> Stimmen Ergebnisse nicht genau überein, dokumentieren Sie dies. Eine identische `daten_sha256`-Prüfsumme kann zusätzlich helfen, ist aber <strong>kein Pflichtfeld</strong>. Falls das Notebook nicht startet, verwenden Sie die von der Lehrperson bereitgelegten Originalergebnisse und kennzeichnen den fehlenden eigenen Versuch ausdrücklich.</p>
 
 <details>
   <summary>Freiwillige Vertiefung, kein Pflichtteil · drei Startwerte</summary>
   <div class="detail-body">
-    <p>Nur bei Zeitreserve und <strong>vor</strong> der Abschlusstest-Zelle: In einer neuen Notebookzelle `wiederholung = foto.vergleichen(daten, wiederholen=True)` und danach `foto.vergleich_zeigen(wiederholung)` ausführen. Untersuchen Sie die Startwerte 11, 22 und 33. Die Ergebnisse gehören nur dann in Ihren Bericht, wenn Sie die Vertiefung gemacht haben.</p>
+    <p>Nur bei Zeitreserve und vor dem Abschlusstest: `wiederholung = foto.vergleichen(daten, wiederholen=True)` und danach `foto.vergleich_zeigen(wiederholung)`. Vergleichen Sie die Startwerte 11, 22 und 33. Eine zusätzliche hohe Trefferquote ist kein Bewertungsvorteil.</p>
   </div>
 </details>
 
 <div class="actions">
-  <a class="btn" href="#projekt-werkbank">Zum Notebook →</a>
-  <a class="btn primary" href="#fremdtest">Weiter: Fremdtest →</a>
+  <a class="btn" href="#projekt-werkbank">Notebook öffnen →</a>
+  <a class="btn primary" href="#fremdtest">Weiter: Eigene Bilder ausprobieren →</a>
 </div>
