@@ -96,7 +96,10 @@ function validateCourseThemeRegistry(doc){
 }
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json"||path===GLOSSARY_PATH||path==="shared/course-sites.json")||
+  (["kursseiten/manifest.json","kursseiten/basis-manifest.json",
+    "kursseiten/irn-1-manifest.json","kursseiten/irn-4-manifest.json",
+    GLOSSARY_PATH,"shared/course-sites.json"].includes(path))||
+  /^lehrperson\/irn-[14]\/(?:musterloesungen(?:-felder)?|glossar)\.md$/.test(path)||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
   /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
@@ -193,7 +196,8 @@ async function publish(req,token){
           throw Error("Nur die Akzentfarben dürfen im Farbthemen-Editor geändert werden.");
       }
     }
-    for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json"]){
+    for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json",
+      "kursseiten/irn-1-manifest.json","kursseiten/irn-4-manifest.json"]){
     const previous=await readJson(manifestPath);
     const manifest=await proposed(manifestPath);
     validateManifest(manifest);

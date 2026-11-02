@@ -10,7 +10,7 @@
     const option=coursePicker.selectedOptions[0];
     if(!option||option.disabled||coursePicker.value===course)return;
     const slug=coursePicker.value;
-    if(!/^(?:bok)\/(?:1|4)-klasse$/.test(slug))return;
+    if(!/^(?:bok|irn)\/(?:1|4)-klasse$/.test(slug))return;
     location.assign("/teacher/"+slug+"/"+kind+"?dl=1");
   });
   const escape=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;")

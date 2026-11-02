@@ -18,8 +18,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -31,8 +37,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -44,8 +56,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -57,8 +75,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -70,8 +94,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -96,8 +126,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -109,8 +145,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -122,8 +164,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -135,8 +183,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -148,8 +202,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -174,8 +234,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -187,8 +253,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -200,8 +272,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -213,8 +291,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -226,8 +310,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -252,8 +342,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -265,8 +361,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -278,8 +380,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -291,8 +399,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -304,8 +418,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -330,8 +450,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -343,8 +469,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -356,8 +488,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -369,8 +507,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -382,8 +526,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -408,8 +558,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -421,8 +577,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -434,8 +596,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -447,8 +615,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -460,8 +634,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -486,8 +666,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -499,8 +685,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -512,8 +704,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -525,8 +723,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -538,8 +742,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -564,8 +774,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -577,8 +793,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -590,8 +812,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -603,8 +831,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -616,8 +850,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -642,8 +882,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -655,8 +901,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -668,8 +920,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -681,8 +939,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -694,8 +958,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
@@ -720,8 +990,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 5,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 4,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -733,8 +1009,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -746,8 +1028,14 @@
             {
               "art": "Auftrag",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 14,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -759,8 +1047,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 50,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 49,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         },
@@ -772,8 +1066,14 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
-              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+              "min": 9,
+              "text": "Unterrichtsauftrag für diese Phase ausarbeiten (Entwurf)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Erwartetes Zwischenergebnis ergänzen (Entwurf)."
             }
           ]
         }
