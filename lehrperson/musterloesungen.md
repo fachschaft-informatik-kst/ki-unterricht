@@ -212,4 +212,4 @@ Nicht jede ungenaue KI erfüllt automatisch alle drei Kriterien.
 
 ## Erwartungshorizont statt Musterwortlaut
 
-Wichtiger als die genaue Formulierung sind **Fachrichtigkeit, selbst beobachtete Belege, alternative Erklärungen, Grenzen und nachvollziehbare Arbeitsprozesse**. Die verbindliche Bewertung bleibt unverändert: **18 Punkte** für die Abgabe (K1–K6), **12 Punkte** im Fachgespräch (K7–K10), zusammen **30 Punkte**.
+Wichtiger als die genaue Formulierung sind **Fachrichtigkeit, selbst beobachtete Belege, alternative Erklärungen, Grenzen und nachvollziehbare Arbeitsprozesse**. Die verbindliche Bewertung bleibt unverändert: **18 Punkte** für die eigene Abgabe (K1–K6), **12 Punkte** im Fachgespräch (K7–K10), **3 gemeinsame Punkte** für die Reproduktionsprüfung (K11) und **3 individuelle Punkte** für die Fremdtest-Reflexion (K12), zusammen **36 Punkte**.
