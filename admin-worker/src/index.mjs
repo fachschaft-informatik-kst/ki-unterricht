@@ -206,6 +206,9 @@ async function publish(req,token){
     const previous=await readJson(manifestPath);
     const manifest=await proposed(manifestPath);
     validateManifest(manifest);
+    const irnPrefix=/^kursseiten\/(irn-[14])-manifest\.json$/.exec(manifestPath)?.[1];
+    if(irnPrefix&&manifest.sections.some(section=>!section.id.startsWith(irnPrefix+"-")))
+      throw Error("IRN-Unterrichtsbereiche müssen im eigenen Kursnamensraum liegen: "+irnPrefix);
     if(previous.sections.some(s=>!manifest.sections.some(n=>n.id===s.id&&!!n.teaching===!!s.teaching)))
       throw Error("Bestehende Bereichs-IDs müssen erhalten bleiben.");
     const all=[];
