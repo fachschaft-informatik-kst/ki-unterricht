@@ -6,6 +6,7 @@ answer keys and notebook runtime endpoints must continue to work.
 from __future__ import annotations
 
 import json
+from html import escape
 import re
 import shutil
 import sys
@@ -25,44 +26,108 @@ def add_path_depth(source: str) -> str:
     return RELATIVE_PARENT.sub(lambda match: "../" + match.group(0), source)
 
 
-def planned_page(teacher: str, grade: int) -> str:
-    name = f"{teacher} · {grade}. Klasse"
+def shade(hexcolor: str, percent: float) -> str:
+    """Blend a dark accent with white for readable, restrained backgrounds."""
+    rgb = [int(hexcolor[i:i + 2], 16) for i in (1, 3, 5)]
+    return "#" + "".join(f"{round(x + (255 - x) * percent):02x}" for x in rgb)
+
+
+def theme_css(course: dict) -> str:
+    accent = course["theme"]["accent"]
+    return (f":root{{--accent:{accent};--soft:{shade(accent, .89)};"
+            f"--paper:{shade(accent, .965)};--line:{shade(accent, .87)};}}"
+            f" a:focus-visible{{outline-color:{accent};}}")
+
+
+def validate_registry(courses: list[dict]) -> None:
+    if not courses or len({c["id"] for c in courses}) != len(courses):
+        raise ValueError("Kurs-IDs fehlen oder sind doppelt.")
+    slugs = set()
+    for c in courses:
+        slug = c["slug"]
+        if (not re.fullmatch(r"[a-z0-9-]+/[1-9][0-9]*-klasse", slug)
+                or slug in slugs or c["status"] not in {"published", "planned"}
+                or c["teacher"].lower() != slug.split("/")[0]
+                or c["grade"] != int(slug.split("/")[1].split("-")[0])
+                or not re.fullmatch(r"#[0-9a-fA-F]{6}", c.get("theme", {}).get("accent", ""))
+                or not 1 <= len(c.get("name", "")) <= 80):
+            raise ValueError(f"Ungültige Kurskonfiguration: {slug}")
+        slugs.add(slug)
+        if (c["status"] == "planned") != (c["source"] is None):
+            raise ValueError(f"Quellstatus passt nicht: {slug}")
+        if c["source"] not in {None, "basis", "projekt"}:
+            raise ValueError(f"Unbekannter Quellkurs: {slug}")
+
+
+def planned_page(course: dict) -> str:
+    label = escape(f'{course["teacher"]} · {course["grade"]}. Klasse')
+    name = escape(course["name"])
     return f"""<!doctype html>
 <html lang="de-CH"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{name} · KI-Unterricht</title>
+<title>{label} · {name}</title>
 <link rel="icon" href="../../projekt/favicon.svg" type="image/svg+xml">
-<style>
-body{{font:16px/1.65 system-ui,sans-serif;color:#182b31;background:#f5f4ee;margin:0}}
-main{{max-width:650px;margin:12vh auto;padding:28px}}
-small{{color:#076959;font-weight:750;letter-spacing:.06em}}
+<style>{theme_css(course)}
+body{{font:16px/1.65 system-ui,sans-serif;color:#182b31;background:var(--paper);margin:0}}
+main{{max-width:650px;margin:12vh auto;padding:28px;background:white;border-top:5px solid var(--accent);border-radius:14px}}
+small{{color:var(--accent);font-weight:750;letter-spacing:.06em}}
 h1{{font-size:clamp(2rem,5vw,3rem);line-height:1.12}}
-p{{color:#52656a}}a{{color:#076959}}
-</style></head><body><main><small>{name}</small>
-<h1>Dieser Kurs ist in Vorbereitung.</h1>
-<p>IRN kann hier später eigene Unterrichtsmaterialien für die {grade}. Klasse veröffentlichen.
-Es wurden noch keine Unterrichtsinhalte übernommen.</p>
+p{{color:#52656a}}a{{color:var(--accent)}}</style>
+</head><body><main><small>{label}</small>
+<h1>{name}</h1><h2>Dieser Kurs ist in Vorbereitung.</h2>
+<p>Hier entstehen eigenständige Unterrichtsmaterialien für die {course["grade"]}. Klasse.
+Es wurden keine Inhalte einer anderen Lehrperson übernommen.</p>
 <p><a href="../../kurse.html">Zurück zur Kursübersicht</a></p>
 </main></body></html>"""
 
 
+def course_cards(courses: list[dict]) -> str:
+    groups = []
+    for teacher in dict.fromkeys(c["teacher"] for c in courses):
+        entries = [c for c in courses if c["teacher"] == teacher]
+        heading = escape(teacher)
+        cards = []
+        for c in entries:
+            accent = c["theme"]["accent"]
+            status = "Verfügbar" if c["status"] == "published" else "In Vorbereitung"
+            description = ("Eigenständige Unterrichtsmaterialien, Lernjournal und Übungen."
+                           if c["status"] == "published" else
+                           "Dieser Kursbereich ist eingerichtet. Die Inhalte folgen.")
+            cards.append(
+                f'<a class="choice{" planned-card" if c["status"] == "planned" else ""}"'
+                f' href="{escape(c["slug"])} /">'.replace(" /", "/") +
+                f'<span class="tag">{heading} · {c["grade"]}. Klasse · {status}</span>'
+                f'<h3>{escape(c["name"])}</h3><p>{description}</p>'
+                f'<span class="choice-bottom"><span>'
+                f'{"Zum Kurs" if c["status"] == "published" else "Kursstatus ansehen"}'
+                f'</span><span aria-hidden="true">↗</span></span></a>'
+            )
+        groups.append(f'<section class="group" aria-label="{heading}">'
+                      f'<div class="group-heading"><h2>{heading}</h2>'
+                      f'<span>{len(entries)} Kurse</span></div>'
+                      f'<div class="choices">{"".join(cards)}</div></section>')
+    return "\n".join(groups)
+
+
+def overview(courses: list[dict]) -> str:
+    page = (ROOT / "kurse.html").read_text(encoding="utf-8")
+    return re.sub(r'<!-- COURSE_GROUPS_START -->.*?<!-- COURSE_GROUPS_END -->',
+                  lambda _: '<!-- COURSE_GROUPS_START -->\n' +
+                  course_cards(courses) + '\n<!-- COURSE_GROUPS_END -->',
+                  page, count=1, flags=re.S)
+
+
 def build(out: Path) -> None:
     out = Path(out)
-    records = json.loads(REGISTRY.read_text(encoding="utf-8"))["courses"]
-    used = set()
-    for course in records:
+    courses = json.loads(REGISTRY.read_text(encoding="utf-8"))["courses"]
+    validate_registry(courses)
+    for course in courses:
         slug, source = course["slug"], course["source"]
-        if (not re.fullmatch(r"[a-z0-9-]+/[1-9][0-9]*-klasse", slug)
-                or slug in used or course["status"] not in {"published", "planned"}):
-            raise ValueError(f"Ungültige oder doppelte Kursadresse: {slug}")
-        used.add(slug)
         target = out / slug
         if target.exists():
             shutil.rmtree(target)
         target.parent.mkdir(parents=True, exist_ok=True)
         if course["status"] == "published":
-            if source not in {"basis", "projekt"}:
-                raise ValueError(f"Unbekannter Bestandskurs: {source}")
             origin = out / source
             if not (origin / "index.html").is_file():
                 raise FileNotFoundError(origin / "index.html")
@@ -70,21 +135,30 @@ def build(out: Path) -> None:
                 (lambda folder, names: ["admin"] if Path(folder) == origin and "admin" in names else [])
                 if source == "projekt" else None
             ))
+            label = f'{course["teacher"]} · {course["grade"]}. Klasse'
             for file in target.rglob("*"):
-                if file.suffix not in {".html", ".css", ".js"} or not file.is_file():
+                if not file.is_file() or file.suffix not in {".html", ".css", ".js"}:
                     continue
-                content = file.read_text(encoding="utf-8")
-                updated = add_path_depth(content)
-                if content != updated:
-                    file.write_text(updated, encoding="utf-8")
+                content = add_path_depth(file.read_text(encoding="utf-8"))
+                if file.suffix == ".html":
+                    # Keep the legacy /basis/ and /projekt/ pages untouched.
+                    if file.name == "index.html" and file.parent == target:
+                        content = re.sub(r"<title>[^<]*</title>",
+                                         f"<title>{escape(label)} · {escape(course['name'])}</title>",
+                                         content, count=1)
+                        content = content.replace("Intelligenz<small>Informatik</small>",
+                                                  "Intelligenz<small>" + escape(label) + "</small>")
+                    # Apply the same theme to material, AVIVA and glossary HTML.
+                    content = re.sub(r"</head>", "<style data-course-theme>" +
+                                     theme_css(course) + "</style></head>",
+                                     content, count=1, flags=re.I)
+                file.write_text(content, encoding="utf-8")
         else:
-            if source is not None:
-                raise ValueError("Geplanter Kurs darf keine fremden Inhalte übernehmen")
             target.mkdir(parents=True, exist_ok=True)
-            (target / "index.html").write_text(planned_page(course["teacher"], course["grade"]), encoding="utf-8")
+            (target / "index.html").write_text(planned_page(course), encoding="utf-8")
         print(f"Course route: /{slug}/ ({course['status']})")
-    for filename in ("kurse.html", "portal-index.html"):
-        shutil.copyfile(ROOT / filename, out / ("index.html" if filename == "portal-index.html" else filename))
+    (out / "kurse.html").write_text(overview(courses), encoding="utf-8")
+    shutil.copyfile(ROOT / "portal-index.html", out / "index.html")
 
 
 if __name__ == "__main__":

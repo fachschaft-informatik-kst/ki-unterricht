@@ -12,7 +12,7 @@ h2{font-size:1.32rem;letter-spacing:-.02em;margin:0}p{line-height:1.65;color:#52
 .eyebrow{color:#076959;font-size:.8rem;font-weight:750;letter-spacing:.11em;text-transform:uppercase}
 .intro{max-width:680px}.group{margin-top:42px}.group-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px}.group-heading span{font-size:.83rem;color:#52656a}
 .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.choice{display:flex;flex-direction:column;min-height:225px;text-decoration:none;background:#fff;border:1px solid #d8dfdb;border-radius:16px;padding:25px;color:#182b31;transition:border-color .15s,box-shadow .15s}
+.choice{display:flex;flex-direction:column;min-height:225px;text-decoration:none;background:#fff;border:1px solid #d8dfdb;border-top:5px solid var(--course-accent,#076959);border-radius:16px;padding:25px;color:#182b31;transition:border-color .15s,box-shadow .15s}
 a.choice:hover,a.choice:focus-visible{border-color:#076959;box-shadow:0 9px 25px #142d2518}
 .choice h3{margin:10px 0 3px;font-size:1.5rem;letter-spacing:-.025em}.choice p{font-size:.93rem;margin:10px 0 auto}
 .choice-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;font-size:.86rem;font-weight:650;color:#076959}
@@ -21,12 +21,14 @@ a.choice:hover,a.choice:focus-visible{border-color:#076959;box-shadow:0 9px 25px
 footer{border-top:1px solid #d8dfdb;margin-top:48px;padding-top:18px;font-size:.86rem}a{color:#076959;text-underline-offset:3px}
 @media(max-width:650px){.choices{grid-template-columns:1fr}.group-heading{align-items:flex-start;flex-direction:column}.choice{min-height:190px}}
 @media(prefers-reduced-motion:reduce){.choice{transition:none}}
+ .choice .tag,.choice .choice-bottom{color:var(--course-accent,#076959)}
 </style>
 </head>
 <body><main>
 <div class="eyebrow">Kantonsschule Stadelhofen · Informatik</div>
 <h1>KI-Unterricht</h1>
 <p class="intro">Wähle deine Lehrperson und Klassenstufe. Jede Kursseite hat ihre eigenen Unterrichtsmaterialien und ihren eigenen Lernfortschritt.</p>
+<!-- COURSE_GROUPS_START -->
 <section class="group" aria-labelledby="bok"><div class="group-heading"><h2 id="bok">BOK</h2><span>2 veröffentlichte Kurse</span></div>
 <div class="choices">
 <a class="choice" href="bok/1-klasse/"><span class="tag">BOK · 1. Klasse · Verfügbar</span><h3>KI entdecken</h3><p>Grundlagen der künstlichen Intelligenz, neuronale Netze und ein angeleitetes Bildprojekt.</p><span class="choice-bottom"><span>Zum Kurs</span><span aria-hidden="true">↗</span></span></a>
@@ -37,5 +39,6 @@ footer{border-top:1px solid #d8dfdb;margin-top:48px;padding-top:18px;font-size:.
 <a class="choice planned-card" href="irn/1-klasse/"><span class="tag planned">IRN · 1. Klasse · In Vorbereitung</span><h3>KI-Unterricht</h3><p>Der Kursbereich ist eingerichtet. Unterrichtsmaterialien werden von IRN ergänzt.</p><span class="choice-bottom"><span>Kursstatus ansehen</span><span aria-hidden="true">↗</span></span></a>
 <a class="choice planned-card" href="irn/4-klasse/"><span class="tag planned">IRN · 4. Klasse · In Vorbereitung</span><h3>KI-Unterricht</h3><p>Der Kursbereich ist eingerichtet. Unterrichtsmaterialien werden von IRN ergänzt.</p><span class="choice-bottom"><span>Kursstatus ansehen</span><span aria-hidden="true">↗</span></span></a>
 </div></section>
+<!-- COURSE_GROUPS_END -->
 <footer><a href="projekt/admin/">Lehrpersonen-Editor</a> · <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht">Quellcode auf GitHub</a></footer>
 </main></body></html>
