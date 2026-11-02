@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "courses": [
+    {
+      "id": "bok-1-klasse",
+      "teacher": "BOK",
+      "grade": 1,
+      "slug": "bok/1-klasse",
+      "source": "basis",
+      "status": "published",
+      "name": "KI entdecken",
+      "theme": {
+        "accent": "#3653a3"
+      }
+    },
+    {
+      "id": "bok-4-klasse",
+      "teacher": "BOK",
+      "grade": 4,
+      "slug": "bok/4-klasse",
+      "source": "projekt",
+      "status": "published",
+      "name": "KI vertiefen",
+      "theme": {
+        "accent": "#076959"
+      }
+    },
+    {
+      "id": "irn-1-klasse",
+      "teacher": "IRN",
+      "grade": 1,
+      "slug": "irn/1-klasse",
+      "source": null,
+      "status": "planned",
+      "name": "KI entdecken – IRN",
+      "theme": {
+        "accent": "#69419b"
+      }
+    },
+    {
+      "id": "irn-4-klasse",
+      "teacher": "IRN",
+      "grade": 4,
+      "slug": "irn/4-klasse",
+      "source": null,
+      "status": "planned",
+      "name": "KI vertiefen – IRN",
+      "theme": {
+        "accent": "#9a481d"
+      }
+    }
+  ]
+}

@@ -63,8 +63,15 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     const page=await browser.newPage();
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto('http://127.0.0.1:8770/kurse.html');
-    assert.equal(await page.locator('a.choice').count(),2,'Both Kurzgymi tracks must appear');
-    await page.locator('a.choice[href="basis/"]').click();
+    assert.equal(await page.locator('a.choice').count(),4,'BOK and IRN each provide course slots for 1st and 4th year');
+    for(const slug of ['bok/1-klasse','bok/4-klasse','irn/1-klasse','irn/4-klasse']){
+      assert.equal(await page.locator('a.choice[href="'+slug+'/"]').count(),1);
+    }
+    // Exercise the new BOK route, then continue regression coverage on the
+    // original /basis/ address to ensure existing student state still works.
+    await page.locator('a.choice[href="bok/1-klasse/"]').click();
+    assert.equal(await page.title(),'BOK · 1. Klasse · KI entdecken');
+    await page.goto('http://127.0.0.1:8770/basis/');
     assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
     assert.equal(await page.locator('main > section').count(),13);
     // Shared KST breadcrumb; track switching happens only via the landing page.
@@ -88,9 +95,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert(!await page.locator('body').evaluate(el=>el.classList.contains('nav-collapsed')));
     assert.equal(await page.locator('footer.footer details summary').innerText(),'Quellen & Hinweise für die Lehrperson');
     await page.locator('footer.footer details summary').click();
-    assert(await page.locator('footer.footer a[href="materialien.html"]').count());
-    assert(await page.locator('footer.footer a[href="unterrichtsplan.html"]').count());
-    assert.equal((await page.request.get('http://127.0.0.1:8770/basis/materialien.html')).status(),200);
+    assert(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/1-klasse/materialien"]').count());
+    assert(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/1-klasse/planung"]').count());
+    assert.equal((await page.request.get('http://127.0.0.1:8770/basis/materialien.html')).status(),404);
     await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
     await page.locator('#basis-sicherung').waitFor({state:'visible'});
     assert(await page.locator('#basis-sicherung #basis-backup-controls button').count());

@@ -77,6 +77,7 @@ local: build
 full: local
 
 test: build
+	$(VENV_PY) tests/check_course_routes.py
 	$(VENV_PY) tests/check_basis.py
 	$(VENV_PY) tests/check_course.py
 	$(VENV_PY) tests/check_generated_content.py

@@ -86,6 +86,7 @@ jobs:
         if: steps.scope.outputs.worker_changed == 'true' && steps.scope.outputs.site_changed != 'true'
         run: |
           node --check admin-worker/src/index.mjs
+          node --check admin-worker/src/teacher.mjs
           node tests/check_admin.mjs
       - name: Setup Python
         if: steps.scope.outputs.site_changed == 'true'
@@ -146,6 +147,7 @@ jobs:
           node tests/check_notebook_snapshot.cjs
           node tests/check_widget_rehydrate.cjs
           node --check projekt/admin/admin.js
+          node --check projekt/admin/teacher.js
           node --check projekt/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
           node tests/check_admin.mjs
@@ -247,6 +249,7 @@ jobs:
         run: |
           test -f dist/jupyter-lite.json
           python scripts/copy_portal.py dist
+          python tests/check_course_routes.py
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
           test -f dist/projekt/admin/plan-editor.js

@@ -1,11 +1,15 @@
 import {validatePlan,validateManifest} from "../../shared/course-model.js";
 import {validateGlossary,GLOSSARY_PATH} from "../../shared/glossary-model.js";
+import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS} from "./teacher.mjs";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const COOKIE = "HttpOnly; Secure; SameSite=Lax; Path=/";
 const MAX_BODY = 5200000;
+const safeTeacherReturn=path=>parseTeacher(path)||
+  (/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(path)&&
+    Object.prototype.hasOwnProperty.call(DOWNLOADS,path.split("/").pop()));
 const response = (data, status=200, headers={}) => new Response(JSON.stringify(data), {status,headers:{"Content-Type":"application/json","Cache-Control":"no-store",...headers}});
 const fail = (status,error) => response({error},status);
 const b64url = bytes => btoa(String.fromCharCode(...bytes)).replaceAll("+","-").replaceAll("/","_").replace(/=+$/,"");
@@ -74,9 +78,25 @@ async function appInstallationStatus(token,request=github){
   return {ready:false,reason:"Die App ist auf "+owner+" installiert, aber das Repository "+
     REPO+" gehört nicht zur App-Auswahl. In der Organisation unter Installed GitHub Apps → Configure das Repository hinzufügen."};
 }
+function validateCourseThemeRegistry(doc){
+  if(!doc||doc.version!==1||!Array.isArray(doc.courses)||doc.courses.length!==4)
+    throw Error("Farbthemen: genau vier Kursplätze erforderlich.");
+  const expected=new Set(["bok-1-klasse","bok-4-klasse","irn-1-klasse","irn-4-klasse"]);
+  for(const c of doc.courses){
+    if(!expected.delete(c.id)||!c.theme||Object.keys(c.theme).length!==1||
+       !/^#[0-9a-fA-F]{6}$/.test(c.theme.accent))
+      throw Error("Ungültiges Farbthema für "+(c?.id||"Kurs"));
+    const hex=c.theme.accent;
+    const rgb=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255)
+      .map(n=>n<=.04045?n/12.92:Math.pow((n+.055)/1.055,2.4));
+    const luminance=rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;
+    if(1.05/(luminance+.05)<4.5)throw Error("Akzentfarbe braucht ausreichenden Kontrast auf Weiss.");
+  }
+  return doc;
+}
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json"||path===GLOSSARY_PATH)||
+  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json"||path===GLOSSARY_PATH||path==="shared/course-sites.json")||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
   /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
@@ -92,7 +112,8 @@ function validate(changes){
     }else if(c.path.endsWith(".json")){
       if(typeof c.content!=="string"||c.content.length>200000)throw Error("JSON-Datei zu gross.");
       let plan;try{plan=JSON.parse(c.content);}catch{throw Error("Ungültiger Unterrichtsplan.");}
-      if(c.path===GLOSSARY_PATH)validateGlossary(plan);
+      if(c.path==="shared/course-sites.json")validateCourseThemeRegistry(plan);
+      else if(c.path===GLOSSARY_PATH)validateGlossary(plan);
       else if(c.path.endsWith("/planung.json"))validatePlan(plan);
       else validateManifest(plan);
     }else if(c.path.endsWith(".ipynb")){
@@ -163,6 +184,15 @@ async function publish(req,token){
       if(oldGlossary.begriffe.some(t=>!nextIds.has(t.id)))
         throw Error("Bestehende Glossar-IDs dürfen nicht gelöscht werden, weil Kursseiten darauf verlinken.");
     }
+    if(changes.has("shared/course-sites.json")){
+      const before=validateCourseThemeRegistry(await readJson("shared/course-sites.json"));
+      const after=validateCourseThemeRegistry(await proposed("shared/course-sites.json"));
+      for(let i=0;i<before.courses.length;i++){
+        const a=before.courses[i],b=after.courses[i];
+        if(Object.keys(a).some(k=>k!=="theme"&&JSON.stringify(a[k])!==JSON.stringify(b[k])))
+          throw Error("Nur die Akzentfarben dürfen im Farbthemen-Editor geändert werden.");
+      }
+    }
     for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json"]){
     const previous=await readJson(manifestPath);
     const manifest=await proposed(manifestPath);
@@ -224,7 +254,9 @@ async function auth(req,env,url){
     const target=new URL("https://github.com/login/oauth/authorize");
     const props={client_id:env.GITHUB_CLIENT_ID,redirect_uri:callback,state,code_challenge:challenge,code_challenge_method:"S256"};
     for(const [k,v] of Object.entries(props))target.searchParams.set(k,v);
-    const pending=await encrypt(env,{state,verifier,exp:Date.now()+600000});
+    const requested=url.searchParams.get("next")||"/";
+    const returnTo=safeTeacherReturn(requested)?requested:"/";
+    const pending=await encrypt(env,{state,verifier,returnTo,exp:Date.now()+600000});
     return new Response(null,{status:302,headers:{
       Location:target.toString(),"Set-Cookie":cookie("ki_oauth",pending,600),"Cache-Control":"no-store"
     }});
@@ -240,13 +272,13 @@ async function auth(req,env,url){
   if(!(await canWrite(token.access_token)))return fail(403,"Keine Schreibberechtigung für das Repository.");
   const ms=Math.min(3600000,Math.max(60000,Number(token.expires_in||3600)*1000-60000));
   const value=await encrypt(env,{token:token.access_token,login:user.login,exp:Date.now()+ms});
-  const headers=new Headers({Location:"/","Cache-Control":"no-store"});
+  const headers=new Headers({Location:safeTeacherReturn(pending.returnTo)?pending.returnTo:"/","Cache-Control":"no-store"});
   headers.append("Set-Cookie",cookie("ki_oauth","",0));
   headers.append("Set-Cookie",cookie("ki_session",value,Math.floor(ms/1000)));
   return new Response(null,{status:303,headers});
 }
 async function staticPage(url){
-  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/markdown-it.min.js":"markdown-it.min.js","/plan-editor.js":"plan-editor.js","/glossary-model.js":"glossary-model.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json","/favicon.svg":"../favicon.svg"};
+  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/markdown-it.min.js":"markdown-it.min.js","/teacher.js":"teacher.js","/teacher.css":"teacher.css","/plan-editor.js":"plan-editor.js","/glossary-model.js":"glossary-model.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json","/favicon.svg":"../favicon.svg"};
   const file=files[url.pathname];
   if(!file)return fail(404,"Nicht gefunden.");
   const source=await fetch(STATIC+file,{redirect:"manual"});
@@ -276,8 +308,41 @@ export default {
       const session=await decrypt(env,readCookie(req,"ki_session"));
       const active=session?.exp>Date.now()?session:null;
       if(url.pathname==="/api/session"&&req.method==="GET")return response({authenticated:!!active,login:active?.login||null});
+      if(req.method==="GET"&&url.pathname.startsWith("/teacher/")){
+        const route=parseTeacher(url.pathname);
+        const download=/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(url.pathname);
+        if(!route&&!download)return fail(404,"Lehrpersonenmaterial nicht gefunden.");
+        if(!active)return new Response(null,{status:302,headers:{
+          Location:"/auth/start?next="+encodeURIComponent(url.pathname),
+          "Cache-Control":"no-store"}});
+        if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
+        if(download){
+          const path=DOWNLOADS[download[1]];
+          if(!path)return fail(404,"Datei nicht gefunden.");
+          const bytes=await readTeacherFile(active.token,path,github,REPO);
+          return new Response(bytes,{headers:{
+            "Content-Type":download[1].endsWith(".svg")?"image/svg+xml":"text/markdown; charset=utf-8",
+            "Content-Disposition":(download[1].endsWith(".svg")?"inline":"attachment")+'; filename="'+download[1]+'"',
+            "Cache-Control":"no-store","X-Content-Type-Options":"nosniff",
+            "Content-Security-Policy":"default-src 'none'; sandbox"}});
+        }
+        return new Response(teacherShell(route),{headers:{
+          "Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store",
+          "X-Content-Type-Options":"nosniff",
+          "Content-Security-Policy":["default-src 'none'","script-src 'self'",
+            "style-src 'self'","img-src 'self' data: https://fachschaft-informatik-kst.github.io",
+            "connect-src 'self'","base-uri 'none'","frame-ancestors 'none'",
+            "form-action 'none'"].join("; ")}});
+      }
+
       if(url.pathname.startsWith("/api/")){
         if(!active)return fail(401,"Bitte mit GitHub anmelden.");
+        if(req.method==="GET"&&url.pathname==="/api/teacher"){
+          if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
+          const route=parseTeacher("/teacher/"+url.searchParams.get("course")+"/"+url.searchParams.get("kind"));
+          if(!route)return fail(404,"Unbekanntes Lehrpersonenmaterial.");
+          return response(await teacherData(route,active.token,github,REPO));
+        }
         if(req.method==="GET"&&url.pathname==="/api/permissions"){
           const humanCanWrite=await canWrite(active.token);
           const installation=await appInstallationStatus(active.token);
