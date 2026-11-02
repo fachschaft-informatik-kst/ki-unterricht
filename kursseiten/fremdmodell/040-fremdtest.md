@@ -17,38 +17,22 @@ open: false
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">01</span><span class="dl8-step-time">2 Min.</span></div>
     <h4>Vermuten</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Lesen Sie die zwei **ursprünglichen Klassen** des fremden Modells im <a href="#reproduktion">Prüfbericht</a> nochmals. Wählen Sie unten Ihre Erwartung, bevor Sie eigene Fotos testen.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Lesen Sie die zwei <strong>ursprünglichen Klassen</strong> des fremden Modells im <a href="#reproduktion">Prüfbericht</a> nochmals. Wählen Sie unten Ihre Erwartung, bevor Sie eigene Fotos testen.</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">02</span><span class="dl8-step-time">5 Min.</span></div>
     <h4>Selbst ausprobieren</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Öffnen Sie im privaten Fenster das <a href="#projekt-werkbank">nachtrainierte fremde Notebook</a> aus Kapitel 3 und gehen Sie zu **«6 · Fremdauswertung»**. Tragen Sie bei `EIGENE_KLASSEN = ['C', 'D']` die **zwei echten Klassen Ihres Projekts** ein, laden Sie die **eigene Fotostudio-JSON** (nicht das eigene ZIP wiederherstellen!) und führen Sie die Fremdtest-Zelle aus. <strong>Nicht neu trainieren.</strong>
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Öffnen Sie im privaten Fenster das <a href="#projekt-werkbank">nachtrainierte fremde Notebook</a> aus Kapitel 3 und gehen Sie zu <strong>«6 · Fremdauswertung»</strong>. Tragen Sie bei <code>EIGENE_KLASSEN = ['C', 'D']</code> die <strong>zwei echten Klassen Ihres Projekts</strong> ein, laden Sie die <strong>eigene Fotostudio-JSON</strong> (nicht das eigene ZIP wiederherstellen!) und führen Sie die Fremdtest-Zelle aus. <strong>Nicht neu trainieren.</strong></p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">03</span><span class="dl8-step-time">5 Min.</span></div>
     <h4>Zwei Beispiele untersuchen</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Lesen Sie die Ausgabe: In den Zeilen stehen Ihre Klassen, in den Spalten die **ursprünglichen fremden Klassen**. Vergleichen Sie mindestens **ein Bild aus jeder eigenen Klasse** und tragen Sie die vier Zahlen der Vorhersagetabelle sowie die Trennschärfe ein. Ist das Ergebnis überraschend?
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Lesen Sie die Ausgabe: In den Zeilen stehen Ihre Klassen, in den Spalten die <strong>ursprünglichen fremden Klassen</strong>. Vergleichen Sie mindestens <strong>ein Bild aus jeder eigenen Klasse</strong> und tragen Sie die vier Zahlen der Vorhersagetabelle sowie die Trennschärfe ein. Ist das Ergebnis überraschend?</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">04</span><span class="dl8-step-time">3 Min.</span></div>
     <h4>Erklären</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Nennen Sie <strong>eine plausible Vermutung</strong> (z. B. Farbe, Form, Licht oder Hintergrund) und <strong>einen prüfbaren nächsten Versuch</strong>. Schreiben Sie dazu, weshalb dies **keine Trefferquote für die neuen Klassen** ist.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Nennen Sie <strong>eine plausible Vermutung</strong> (z. B. Farbe, Form, Licht oder Hintergrund) und <strong>einen prüfbaren nächsten Versuch</strong>. Schreiben Sie dazu, weshalb dies <strong>keine Trefferquote für die neuen Klassen</strong> ist.</p></div>
   </li>
 </ol>
 
