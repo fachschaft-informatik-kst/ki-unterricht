@@ -49,17 +49,30 @@
     <a href="#netze">Zum Unterricht →</a>
   </article>
   <article class="card">
-    <span class="section-label">05–08</span>
+    <span class="section-label">05–07</span>
     <!-- MD:START -->
-## Das Bildprojekt untersuchen
+## Eigenes Bildprojekt durchführen
 <!-- MD:END -->
     <ul>
-      <li>Ich unterscheide Training, Validierung und Test und erkenne Datenlecks (selbstständiger Lernpfad in DL5).</li>
-      <li>Ich plane einen fairen A/B-Vergleich, dokumentiere Bildquellen und halte Exemplare in getrennten Datengruppen.</li>
-      <li>Ich begründe die Modellwahl vor dem Abschlusstest, interpretiere Ergebnisse und benenne Grenzen.</li>
-      <li>Ich erkläre den Weg vom Bild über feste Merkmale zum trainierten Netz und kann den gesamten Versuch im individuellen Fachgespräch begründen.</li>
+      <li>Ich unterscheide Training, Validierung und Test und erkenne Datenlecks (Lernpfad in DL 5).</li>
+      <li>Ich plane einen fairen A/B-Vergleich, dokumentiere die Bildquellen und trenne Exemplare nach Datengruppen.</li>
+      <li>Ich begründe die Modellwahl vor dem Abschlusstest anhand der Validierung und beurteile Resultate und Grenzen.</li>
+      <li>Ich erkläre den Weg vom Bild über feste Merkmale zum trainierten Netz und dokumentiere unseren Versuch im Journal.</li>
     </ul>
-    <a href="#projekt">Zum Unterricht →</a>
+    <a href="#projekt">Zum eigenen Projekt (DL 5–7) →</a>
+  </article>
+  <article class="card">
+    <span class="section-label">08</span>
+    <!-- MD:START -->
+## Fremdes Modell kritisch prüfen
+<!-- MD:END -->
+    <ul>
+      <li>Ich prüfe mit denselben Daten und Einstellungen, ob sich ein fremdes Ergebnis reproduzieren lässt, und vergleiche Prüfsumme, A/B-Werte und Testergebnis (K11).</li>
+      <li>Ich teste ein fremdes Modell mit unseren eigenen Bildklassen und lese Vorhersagetabelle, Trennschärfe und Modellwert korrekt (K12).</li>
+      <li>Ich erkläre, warum Trennschärfe und hohe Modellwerte bei nie gelernten Klassen keine korrekte Trefferquote beweisen, und schlage einen überprüfbaren Folgetest vor (K12).</li>
+      <li>Ich erkläre im vierminütigen Einzelgespräch unser eigenes Projekt selbstständig und begründe Vorgehen und Grenzen (K7–K10).</li>
+    </ul>
+    <a href="#fremdmodell">Zu DL 8: Fremdmodell prüfen →</a>
   </article>
   <article class="card">
     <span class="section-label">09</span>
@@ -86,16 +99,16 @@
     <a href="#gesellschaft">Zum Unterricht →</a>
   </article>
 </div>
-<p class="callout">Benotet wird die gemeinsame Projektabgabe (K1–K6) plus das individuelle vierminütige Einzelgespräch (K7–K10); jede Person erhält eine eigene Gesamtnote. Die Lernziele zu Sprachmodellen und Gesellschaft gehören zum anschliessenden Unterricht und fliessen nicht nachträglich in die Projektnote ein.</p>
+<p class="callout"><strong>Bewertung:</strong> <a href="#projekt">Eigenes Projekt (DL 5–7)</a>: K1–K6, 18 gemeinsame Punkte. <a href="#fremdmodell">DL 8</a>: vierminütiges Einzelgespräch K7–K10, 12 individuelle Punkte, sowie Fremdauswertung K11 (3 gemeinsame Punkte) und K12 (3 individuelle Punkte). Insgesamt <strong>36 Punkte</strong> und eine eigene Gesamtnote pro Person. Sprachmodelle (DL 9) und gesellschaftliche Folgen (DL 10) zählen nicht nachträglich zur Projektnote.</p>
 <a class="btn primary" href="#bewertung">Bewertungsraster öffnen →</a>
 <details>
-  <summary>Lernziele zum Projekt: Selbsteinschätzung</summary>
+  <summary>Lernziele zu DL 5–8: Selbsteinschätzung</summary>
   <div class="detail-body" id="kompetenzen">
-    <span class="section-label">06 · Wissen, was man können soll</span>
+    <span class="section-label">05–08 · Wissen, was man können soll</span>
     <!-- MD:START -->
-## Bereit fürs Projekt?
+## Wie sicher erklären Sie die Lernziele?
 <!-- MD:END -->
-    <p class="section-intro">Was können Sie bereits erklären? Schätzen Sie sich selbst ein – ohne Benotung.</p>
+    <p class="section-intro">Schätzen Sie Ihren Stand zum eigenen Projekt (DL 5–7) und zur Fremdmodellprüfung (DL 8) ein. Die Einschätzung ist unbenotet und wird im Browser gespeichert.</p>
     <div class="card" id="skills">
       <div class="skill-row">
         <div>
@@ -232,6 +245,41 @@ Ich erkläre auch den Arbeitsteil meines Tandempartners und entwickle einen begr
           </details>
         </div>
         <label><span class="small">Meine Einschätzung</span><select aria-label="Selbsteinschätzung: Eigenständig erklären und übertragen" data-skill="transfer"><option value="offen">Noch einschätzen</option><option value="ueben">Noch üben</option><option value="hilfe">Mit Unterstützung</option><option value="sicher">Sicher erklären</option></select></label>
+      </div>
+      <span class="section-label">08 · Fremdmodell unabhängig prüfen</span>
+      <div class="skill-row">
+        <div>
+          <!-- MD:START -->
+### Ein fremdes Ergebnis reproduzieren
+<!-- MD:END -->
+          <details>
+            <summary>Das gehört dazu</summary>
+            <div class="detail-body">
+              <!-- MD:START -->
+Ich prüfe die identischen Daten und Einstellungen, vergleiche Prüfsumme, A/B-Validierungswerte und Abschlusstest mit dem Original und dokumentiere Abweichungen nachvollziehbar.
+<!-- MD:END -->
+              <p class="muted" style="margin-top:7px">Nachweis: <a href="#reproduktion">gemeinsamer Reproduktionsbericht (DL 8 · K11)</a></p>
+            </div>
+          </details>
+        </div>
+        <label><span class="small">Meine Einschätzung</span><select aria-label="Selbsteinschätzung: Ein fremdes Ergebnis reproduzieren" data-skill="fremd_reproduktion"><option value="offen">Noch einschätzen</option><option value="ueben">Noch üben</option><option value="hilfe">Mit Unterstützung</option><option value="sicher">Sicher erklären</option></select></label>
+      </div>
+      <div class="skill-row">
+        <div>
+          <!-- MD:START -->
+### Unbekannte Bilder kritisch auswerten
+<!-- MD:END -->
+          <details>
+            <summary>Das gehört dazu</summary>
+            <div class="detail-body">
+              <!-- MD:START -->
+Ich lese die Vorhersagen für unsere eigenen, dem Modell unbekannten Klassen, unterscheide Trennschärfe und Modellwert von einer tatsächlichen Trefferquote und begründe einen konkreten nächsten Test.
+<!-- MD:END -->
+              <p class="muted" style="margin-top:7px">Nachweis: <a href="#fremdtest">Fremdtest</a> und <a href="#fremd-reflexion">persönliche Reflexion (DL 8 · K12)</a></p>
+            </div>
+          </details>
+        </div>
+        <label><span class="small">Meine Einschätzung</span><select aria-label="Selbsteinschätzung: Unbekannte Bilder kritisch auswerten" data-skill="fremd_kritik"><option value="offen">Noch einschätzen</option><option value="ueben">Noch üben</option><option value="hilfe">Mit Unterstützung</option><option value="sicher">Sicher erklären</option></select></label>
       </div>
     </div>
     <p aria-live="polite" class="status js-only" id="skill-summary"></p>
