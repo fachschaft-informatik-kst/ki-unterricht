@@ -105,28 +105,75 @@ export function materialForLesson(markdown,number){
 }
 const clean=source=>source.replace(/<[^>]*>/g," ").replace(/&amp;/g,"&")
   .replace(/&quot;/g,'"').replace(/&nbsp;/g," ").replace(/\s+/g," ").trim();
+// Student fields occur as data-answer (4th grade), data-basis-answer (1st
+// grade) and data-journal (the shared project). Prefer actual field labels.
+// Never silently attach a neighbouring, unrelated paragraph as the question.
 export function questionsFromSource(source){
   const out={};
-  for(const m of source.matchAll(/\bdata-answer=["']([^"']+)["']/g)){
-    const start=source.lastIndexOf("<",m.index);
-    const end=source.indexOf(">",m.index);
-    const fieldTag=source.slice(start,end+1);
-    const before=source.slice(Math.max(0,m.index-1200),m.index);
-    // aria-label must belong to this field, not to the next answer input.
-    const aria=/\baria-label=["']([^"']+)["']/.exec(fieldTag);
-    const labelIndex=before.lastIndexOf("<label"),endIndex=before.lastIndexOf("</label");
+  for(const match of source.matchAll(/\bdata-(?:answer|basis-answer|journal)=["']([^"']+)["']/g)){
+    const field=match[1];
+    const start=source.lastIndexOf("<",match.index);
+    const end=source.indexOf(">",match.index);
+    if(start<0||end<0||end-start>1500)continue;
+    const tag=source.slice(start,end+1);
+    // Some controls have a direct aria-label (especially drag-and-drop cards).
+    const aria=/\baria-label=["']([^"']+)["']/.exec(tag);
     let question=aria?clean(aria[1]):"";
-    if(!question&&labelIndex>endIndex){
-      const spans=[...before.slice(labelIndex).matchAll(/<span\b[^>]*>([\s\S]*?)<\/span>/g)];
+    const prefix=source.slice(Math.max(0,match.index-2000),start);
+    const labelStart=prefix.lastIndexOf("<label");
+    const labelEnd=prefix.lastIndexOf("</label");
+    if(!question&&labelStart>labelEnd){
+      const label=prefix.slice(labelStart);
+      const spans=[...label.matchAll(/<span\b[^>]*>([\s\S]*?)<\/span>/g)];
       if(spans.length)question=clean(spans.at(-1)[1]);
+      if(!question){
+        const raw=label.slice(label.indexOf(">")+1).replace(/<(?:select|textarea|input)\b[\s\S]*$/,"");
+        question=clean(raw);
+      }
     }
-    if(!question){
-      const p=[...before.matchAll(/<(?:p|h[234])\b[^>]*>([\s\S]*?)<\/(?:p|h[234])>/g)].at(-1);
-      if(p)question=clean(p[1]);
-    }
-    if(question.length>=5)out[m[1]]=question.slice(0,600);
+    if(question.length>=4)out[field]=question.slice(0,600);
   }
   return out;
+}
+
+// Some notebook controls and legacy journal fields are created dynamically;
+// their original texts aren't embedded as data-* attributes in chapter Markdown.
+// Give these fields a useful subject label without claiming to quote the task.
+const FIELD_GROUPS={
+  sw:"Schwimmbad-Neuron · Startgewichte",sw2:"Schwimmbad-Neuron · verbesserte Gewichte",
+  lr:"Lernrate und Trainingsverlauf",iris:"Iris-Erkennung",hand:"Logische Gatter am Perzeptron",
+  neuron:"Schwimmbad-Neuron",xornetz:"XOR-Netzwerk",netze:"Neuronale Netze",
+  zif:"Ziffernerkennung",typ:"Arten künstlicher Intelligenz",
+  pst:"Textvorhersage und Kontext",pap:"Stochastischer Papagei",netz:"Neuronales Sprachmodell",
+  soe:"Soekia-Experiment",turing:"Turing-Test",wmd:"Wahrheit und Manipulation",
+  video:"Videobeispiel",bild:"Bildbeispiel",gesellschaft:"KI und Gesellschaft",
+  wissen:"Akinator und regelbasiertes Wissen",memory:"Lernarten und Memory",
+  lernend:"Filmlandkarte",begriff:"KI-Begriffe",begriffe:"KI-Begriffe",regeln:"Regeln oder Daten",
+  projekt:"Eigenes Bildprojekt",fremd:"Prüfung des fremden Modells"
+};
+const FIELD_TERMS={
+  w1:"Gewicht 1",w2:"Gewicht 2",b:"Bias",bias:"Bias",ok:"Ergebnis prüfen",
+  gs:"Gewicht Sonne",gf:"Gewicht Freundinnen/Freunde",gp:"Gewicht Prüfung",
+  treffer:"Anzahl korrekter Vorhersagen",gefunden:"Geeignete Parameter gefunden?",
+  beob:"Beobachtung",richtig:"Richtige Vorhersagen",gewicht:"Einfluss der Gewichte",
+  lr:"Lernrate",start:"Startwerte",daten:"Daten",lernen:"Lernen",frage:"Frage",
+  anfang:"Anfangstext",kontext:"Gegebener Kontext",wort:"Nächstes Wort",
+  plausibel:"Plausibilität",wahr:"Faktenprüfung",beleg:"Begründung / Beleg",
+  art:"Art des Beispiels",text:"Textbeispiel",eindruck:"Erster Eindruck",
+  hinweise:"Erkennungsmerkmale",werte:"Werte",ausgabe:"Vorhersage",
+  variable:"Geänderte Variable",gut:"Gelingendes Beispiel",problem:"Problematisches Beispiel",
+  zeitstrahl:"KI-Zeitstrahl",ordnung:"KI-Begriffe ordnen",
+  zusammen:"Zusammenfassung",vergleichen:"Vergleich",vergleich:"Vergleich",
+  beispiel:"Eigenes Beispiel",bsp:"Beispiel"
+};
+export function fieldTopic(field,lessonTitle=""){
+  let f=field.replace(/^basis-/,"").replace(/^dl\d+_/,"");
+  const parts=f.split(/[-_]/).filter(Boolean);
+  const subject=FIELD_GROUPS[parts[0]]||lessonTitle||"Unterrichtsaufgabe";
+  const detail=parts.slice(1).map(x=>FIELD_TERMS[x]||
+    (/[a-z]+/.test(x)?x.replace(/^./,c=>c.toUpperCase()):x)).join(" · ");
+  // Keep titles short and readable; IDs remain available separately.
+  return detail?subject+": "+detail:subject;
 }
 async function getQuestions(lesson,course,token,github,repo){
   const views=new Set([lesson.view]);
@@ -139,8 +186,10 @@ async function getQuestions(lesson,course,token,github,repo){
   const files=(tree.tree||[]).filter(item=>item.type==="blob"&&
     /^kursseiten\/[a-z0-9-]+\/\d{3}-[a-z0-9-]+\.md$/.test(item.path)&&
     views.has(item.path.split("/")[1])).map(item=>item.path);
-  const data=await Promise.all(files.map(path=>getText(token,path,github,repo)));
-  return Object.assign({},...data.map(questionsFromSource));
+  // One missing chapter must not hide every other original prompt.
+  const data=await Promise.allSettled(files.map(path=>getText(token,path,github,repo)));
+  return Object.assign({},...data.filter(item=>item.status==="fulfilled")
+    .map(item=>questionsFromSource(item.value)));
 }
 export async function teacherData({course,kind},token,github,repo,selected=1){
   const profile=PROFILES[course];if(!profile)throw Error("Kurs unbekannt.");
@@ -170,9 +219,11 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
   const entries=answerRows(fields,current.number);
   let questions={};try{questions=await getQuestions(current,course,token,github,repo);}catch{ /* use explicit fallback */ }
   for(const entry of entries){
-    entry.question=questions[entry.field]||PROMPTS[entry.field]||
-      "Originalfrage im Kurs nachschlagen: "+entry.field.replace(/[-_]/g," ");
-    entry.questionFound=Boolean(questions[entry.field]||PROMPTS[entry.field]);
+    const original=questions[entry.field];
+    const curated=PROMPTS[entry.field];
+    entry.question=original||curated||fieldTopic(entry.field,current.title);
+    entry.questionSource=original?"original":curated?"sinngemaess":"thema";
+    entry.questionFound=Boolean(original||curated);
     entry.courseLink="https://fachschaft-informatik-kst.github.io/ki-unterricht/"+
       course+"/#"+current.view;
   }
