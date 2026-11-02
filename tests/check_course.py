@@ -242,6 +242,19 @@ assert len(soup.select('#einstieg-4 textarea[data-answer="ki_ordnung"]')) == 1
 assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_{n}"]')) == 1 for n in range(1,5))
 assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_bsp_{n}"]')) == 1 for n in range(1,5))
 
+# DL 8 uses five navigable, concise chapter modules rather than long unstructured tasks.
+dl8 = soup.select_one('#fremdmodell')
+assert len(dl8.select('details.kapitel')) == 5
+assert [d['id'] for d in dl8.select('details.kapitel')] == ['dl8-warum','dl8-vorbereiten','reproduktion','fremdtest','dl8-abschluss']
+assert dl8.select_one('#dl8-warum[open]') and not dl8.select_one('#reproduktion[open]')
+for chapter_id in ('dl8-warum','dl8-vorbereiten','reproduktion','fremdtest','fremd-reflexion'):
+    assert dl8.select_one(f'a[href="#{chapter_id}"]'), chapter_id
+assert dl8.select_one('#dl8-vorbereiten a[href="#sicherung"]')
+assert dl8.select_one('#dl8-vorbereiten a[href="#projekt-werkbank"]')
+assert dl8.select_one('#fremdtest a[href="#projekt-werkbank"]')
+assert dl8.select_one('#dl8-abschluss a[href="#bewertung"]')
+why = dl8.select_one('#dl8-warum').get_text(' ', strip=True)
+assert 'Reproduzieren' in why and 'Fremdtest' in why and 'keine' in why.lower()
 assert soup.select_one('#fremdmodell') and soup.select_one('#fremdmodell #doppellektion-08')
 assert soup.select_one('.nav a[href="#fremdmodell"]'), 'Dedicated DL 8 navigation missing'
 assert soup.select_one('#fremdmodell #fremdtest')

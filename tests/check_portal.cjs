@@ -50,9 +50,15 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.reload();assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
   // DL 8 is a separate, graded submission after the frozen own project.
   await p.locator('.nav a[href="#fremdmodell"]').click();
+  assert.equal(await p.locator('#fremdmodell details.kapitel').count(),5,'DL 8 must have five chapters');
+  assert(await p.locator('#fremdmodell #dl8-warum').evaluate(e=>e.open));
+  await p.locator('#fremdmodell .dl8-quicklinks a[href="#reproduktion"]').click();
+  assert(await p.locator('#fremdmodell #reproduktion').evaluate(e=>e.open),'Quicklink opens reproduction chapter');
   assert.equal(await p.locator('#fremdmodell #reproduktion').count(),1);
   assert.equal(await p.locator('#fremdmodell #fremdtest').count(),1);
   await p.locator('#fremdmodell textarea[data-journal="reproduktion"]').fill('Prüfsumme gleich; V1 A: 50 %, B: 75 %.');
+  await p.locator('#fremdmodell .dl8-quicklinks a[href="#fremd-reflexion"]').click();
+  assert(await p.locator('#fremdmodell #dl8-abschluss').evaluate(e=>e.open),'Quicklink opens submission chapter');
   await p.locator('[data-answer="fremd_rueckmeldung"]').fill('Andere Beleuchtung gezielt prüfen.');
   for(const n of [1,2]){
     await p.locator('[data-answer="fremd_name_'+n+'"]').fill('Testperson '+n);
