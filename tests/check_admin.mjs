@@ -3,7 +3,13 @@ import {randomBytes} from "node:crypto";
 import {readFileSync,readdirSync} from "node:fs";
 import {lessonTemplate} from "../shared/course-model.js";
 import backend,{appInstallationStatus} from "../admin-worker/src/index.mjs";
+import {parseTeacher,teacherData,teacherShell,DOWNLOADS} from "../admin-worker/src/teacher.mjs";
 const env={SESSION_KEY:randomBytes(32).toString("base64url")};
+assert.deepEqual(parseTeacher("/teacher/bok/4-klasse/planung"),{course:"bok/4-klasse",kind:"planung"});
+assert.equal(parseTeacher("/teacher/irn/1-klasse/musterloesungen"),null);
+assert.equal(parseTeacher("/teacher/bok/1-klasse/../../api/session"),null);
+assert.match(teacherShell({course:"bok/1-klasse",kind:"materialien"}),/Lehrpersonenbereich/);
+assert.equal(Object.keys(DOWNLOADS).length,4);
 async function route(path,opts={}){
   return backend.fetch(new Request("https://teacher-editor.example"+path,opts),env);
 }
@@ -11,6 +17,15 @@ const unauth=await route("/api/session");
 assert.equal(unauth.status,200);
 assert.equal((await unauth.json()).authenticated,false);
 assert.equal((await route("/api/chapters")).status,401);
+assert.equal((await route("/api/teacher?course=bok%2F1-klasse&kind=planung")).status,401);
+assert.equal((await route("/api/teacher?course=bok%2F4-klasse&kind=musterloesungen")).status,401);
+const teacherGuest=await route("/teacher/bok/1-klasse/materialien");
+assert.equal(teacherGuest.status,302,"Teacher pages must redirect unauthenticated users to GitHub OAuth");
+assert.equal(teacherGuest.headers.get("Location"),
+  "/auth/start?next=%2Fteacher%2Fbok%2F1-klasse%2Fmaterialien");
+assert.equal((await route("/teacher/irn/1-klasse/materialien")).status,404);
+assert.equal((await route("/teacher/downloads/Arbeitsblatt_Perzeptron_Lsg.md")).status,302);
+assert.equal((await route("/teacher/bok/4-klasse/unknown")).status,404);
 assert.equal((await route("/api/file?path=kursseiten/einstieg/010-einstieg-1.md")).status,401);
 assert.equal((await route("/api/publish",{method:"POST",headers:{"Content-Type":"application/json","Origin":"https://teacher-editor.example"},body:'{"changes":[]}'})).status,401);
 assert.equal((await route("/auth/start")).status,503);

@@ -89,3 +89,31 @@ Die beiden IRN-Kursplätze sind eigene Vorbereitungsseiten mit eigenen Farben,
 **noch keine vollständigen Inhaltseditoren**. Sie erhalten keine Kopien der BOK-
 Unterrichtsinhalte. Erst eine spätere Kursquell-Migration schafft getrennte
 Kapitel- und Notebook-Bearbeitung für IRN.
+
+## GitHub-Anmeldung für Lehrpersonenmaterial
+
+**Die Schüler-Kursseiten bleiben öffentlich** und benötigen keinen GitHub-Login.
+Musterlösungen, AVIVA-Planung und Materialkoffer sind dagegen nur unter den
+geschützten Worker-Adressen `/teacher/bok/1-klasse/{planung,materialien,musterloesungen}`
+und `/teacher/bok/4-klasse/{planung,materialien,musterloesungen}` erreichbar.
+Ohne gültige Sitzung erfolgt eine Weiterleitung zur GitHub-Anmeldung.
+Der Worker verlangt eine bestehende Schreibberechtigung für das Repository.
+Die fachlichen Daten liefert er aus explizit zugelassenen Quelldateien,
+nicht aus einer öffentlich erreichbaren GitHub-Pages-Kopie.
+
+`scripts/protect_teacher_pages.py` entfernt aus der Pages-Veröffentlichung
+`unterrichtsplan.html`, `materialien.html`, `musterloesungen/`,
+`KI_Planung.md` und gekennzeichnete Lösungs-/Bewertungsdateien. Die Links
+der Schüler-Kursseiten werden auf den Worker umgestellt. Diese Bereinigung
+erfolgt **erst nach den Inhaltstests**, damit die bestehenden Prüfungen der
+generierten AVIVA- und Materialseiten weiterhin möglich bleiben.
+
+**Sicherheitsgrenze:** Das GitHub-Repository ist weiterhin öffentlich.
+Die Originaldateien in `lehrperson/`, `kursseiten/*/planung.json`,
+`kursseiten/*/materialien.md` sowie ältere Commits können deshalb über
+GitHub direkt gelesen werden. Die Worker-Anmeldung schützt damit den
+**Zugriff auf die Kurswebsite**, nicht die Vertraulichkeit der Quellinhalte.
+Für einen tatsächlichen Geheimhaltungsschutz müssen die Lehrpersonenquellen
+in ein privates Repository oder einen privaten Speicher umziehen und die
+öffentliche Git-Historie geprüft werden. Allein `noindex`, fehlende Links
+oder GitHub OAuth am Worker reichen dafür nicht aus.
