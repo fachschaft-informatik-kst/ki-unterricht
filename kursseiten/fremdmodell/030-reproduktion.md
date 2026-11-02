@@ -9,7 +9,7 @@ open: false
 
 **Prüffrage (K11):** Kommen Sie mit dem Originaldatensatz und **Startwert 11** zum gleichen Ergebnis?
 
-Bearbeiten Sie die fünf Schritte im <a href="#projekt-werkbank">importierten Projekt-Notebook</a>. Die Originalwerte finden Sie in `Versuchsprotokoll.json` des fremden ZIPs.
+Bleiben Sie im <strong>privaten Fenster</strong> mit dem importierten Projekt. Bearbeiten Sie die fünf Schritte im <a href="#projekt-werkbank">importierten Projekt-Notebook</a>. Die Originalwerte finden Sie in `Versuchsprotokoll.json` des fremden ZIPs.
 
 1. **5 Min. · Daten laden:** Führen Sie die Vorbereitungszellen aus. Lassen Sie `MODUS` und `KLASSEN` wie beim Original. Laden Sie im Datenimport **die fremde Fotostudio-JSON**. Prüfen Sie zwei Klassen, fünf Gruppen und je acht Fotos pro Klasse und Gruppe.
 2. **5 Min. · Daten beurteilen:** Vergleichen Sie Klassenregel, Exemplare und Quellen mit dem <a href="#journal">importierten Journal</a>. Notieren Sie **zwei konkrete** Beobachtungen zur Datenqualität (z. B. Licht, Hintergrund oder Verwechslungen).
