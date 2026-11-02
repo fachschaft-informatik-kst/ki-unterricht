@@ -95,7 +95,7 @@ def course_cards(courses: list[dict]) -> str:
                            "Dieser Kursbereich ist eingerichtet. Die Inhalte folgen.")
             cards.append(
                 f'<a class="choice{" planned-card" if c["status"] == "planned" else ""}"'
-                f' href="{escape(c["slug"])} /">'.replace(" /", "/") +
+                f' href="{escape(c["slug"])}/" style="--course-accent:{accent}">' +
                 f'<span class="tag">{heading} · {c["grade"]}. Klasse · {status}</span>'
                 f'<h3>{escape(c["name"])}</h3><p>{description}</p>'
                 f'<span class="choice-bottom"><span>'
