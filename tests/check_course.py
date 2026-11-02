@@ -230,7 +230,7 @@ assert '20 Einzelgespräche bei einer Lehrperson' in soup.get_text()
 assert 'Ein gemeinsames Journal. Zwei getrennte Einzelgespräche.' in soup.get_text()
 assert 'vierminütige' in planning or 'Vier Minuten Einzelgespräch' in planning
 assert '100 Minuten' in oral['zeit'] and 'eine Lehrperson' in oral['zeit']
-assert 'individuelle Gesprächspunkte' in planning
+assert '12 individuelle Punkte' in planning and 'K12' in planning
 assert 'K10 · Individuelles Verständnis' in soup.get_text()
 assert len(soup.select('#einstieg-4 .typen tbody tr')) == 2
 assert 'Schwache und starke KI' in soup.select_one('#einstieg-4 summary').get_text()
