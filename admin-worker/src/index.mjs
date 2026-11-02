@@ -100,6 +100,7 @@ const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includ
     "kursseiten/irn-1-manifest.json","kursseiten/irn-4-manifest.json",
     GLOSSARY_PATH,"shared/course-sites.json"].includes(path))||
   /^lehrperson\/irn-[14]\/(?:musterloesungen(?:-felder)?|glossar)\.md$/.test(path)||
+  /^lehrperson\/musterloesungen(?:-felder-[14]-klasse)?\.md$/.test(path)||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
   /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
