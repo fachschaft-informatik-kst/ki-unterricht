@@ -1,36 +1,37 @@
 <span class="section-label">Projektbewertung</span>
 <h1>So entsteht Ihre Note.</h1>
-<p class="section-intro">Jede Kompetenz zählt gleich: 0, 1, 2 oder 3 Punkte. Keine zusätzlichen Gewichtungen.</p>
+<p class="section-intro">Elf benotete Kriterien (K1–K10 und K12) zählen mit jeweils 0–3 Punkten. Der gemeinsame Fremdcheck K11 ist verbindlich, aber unbenotet.</p>
 <div class="lesson-steps">
   <article>
     <b>18 Punkte · Projekt</b>
     <!-- MD:START -->
-K1–K6: gemeinsames Journal, Daten und Versuch (50 %).
+K1–K6: gemeinsames Journal, Daten und Versuch (54,5 %).
 <!-- MD:END -->
   </article>
   <article>
     <b>12 Punkte · Gespräch</b>
     <!-- MD:START -->
-K7–K10: vierminütiges Einzelgespräch je Person (33,3 %).
+K7–K10: vierminütiges Einzelgespräch je Person (36,4 %).
 <!-- MD:END -->
   </article>
   <article>
-    <b>6 Punkte · Fremdmodell</b>
+    <b>3 Punkte · Fremdmodell</b>
     <!-- MD:START -->
-K11: gemeinsame Reproduktion (3 Punkte). K12: individuelle kritische Reflexion (3 Punkte).
+K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritische Reflexion (3 Punkte).
 <!-- MD:END -->
   </article>
   <article>
-    <b>36 Punkte · insgesamt</b>
+    <b>33 Punkte · insgesamt</b>
     <!-- MD:START -->
-50 % eigenes Projekt + 16,7 % Fremdauswertung + 33,3 % Gespräch.
+54,5 % eigenes Projekt + 9,1 % persönliche Fremdreflexion + 36,4 % Gespräch.
 <!-- MD:END -->
   </article>
 </div>
+<p class="callout"><strong>Gemeinsamer Check K11 (Pflicht, unbenotet):</strong> Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2, ein nachgerechnetes Ergebnis und eine kurze Rückmeldung untersuchen. Diese Arbeit ist die Grundlage der persönlichen Reflexion, wird aber nicht mit zusätzlichen Punkten bewertet.</p>
 <p class="small">Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
 <div aria-label="Bewertungsraster, horizontal scrollbar" class="table-scroll" role="region" tabindex="0">
   <table class="rubric">
-    <caption>12 Kompetenzen × 0–3 Punkte = maximal 36 Punkte</caption>
+    <caption>11 benotete Kriterien × 0–3 Punkte = maximal 33 Punkte</caption>
     <thead>
       <tr>
         <th scope="col">Kompetenz / Nachweis</th>
@@ -123,19 +124,11 @@ K11: gemeinsame Reproduktion (3 Punkte). K12: individuelle kritische Reflexion (
         <td><select aria-label="Punkte K10: Individuelles Verständnis und Transfer" data-score="k10"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
       <tr>
-        <th scope="row">K11 · Fremdes Modell reproduzieren<small>Fremdauswertung · gemeinsam</small></th>
-        <td>Kein nachvollziehbarer Reproduktionscheck.</td>
-        <td>Einzelne Ergebnisse genannt, Vorgehen oder Vergleich unklar.</td>
-        <td>Originaldaten und Einstellungen geprüft; A/B-Werte und Testresultat nachvollziehbar verglichen.</td>
-        <td>Zusätzlich Abweichungen mit konkreten Belegen erklärt oder die genaue Übereinstimmung geprüft.</td>
-        <td><select aria-label="Punkte K11: Fremdes Modell reproduzieren" data-score="k11"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
-      </tr>
-      <tr>
-        <th scope="row">K12 · Fremdtest kritisch reflektieren<small>Fremdauswertung · individuell</small></th>
+        <th scope="row">K12 · Fremdtest und Daten kritisch reflektieren<small>Fremdauswertung · individuell</small></th>
         <td>Keine nachvollziehbare persönliche Interpretation.</td>
-        <td>Ergebnisse beschrieben, aber kaum fachlich eingeordnet.</td>
-        <td>Konkreten Fremdtest mit Messwert oder Beispiel ausgewertet, zwei Erklärungen und eine Grenze begründet.</td>
-        <td>Zusätzlich zwischen Trennschärfe und tatsächlicher Klassifikationsgenauigkeit unterschieden und einen prüfbaren Folgetest vorgeschlagen.</td>
+        <td>Ergebnisse beschrieben, aber Datenaufteilung und Modellgrenzen kaum fachlich eingeordnet.</td>
+        <td>Originale Trainings-/Testdaten und Ergebnisse sowie eigenen Versuch anhand von Beispielen verglichen; Grenze bei anderen Klassen erklärt.</td>
+        <td>Zusätzlich nachvollziehbar zwischen neuen Testbildern derselben Klassen und völlig neuen Klassen unterschieden und einen prüfbaren Folgetest vorgeschlagen.</td>
         <td><select aria-label="Punkte K12: Fremdtest kritisch reflektieren" data-score="k12"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
     </tbody>
@@ -145,12 +138,12 @@ K11: gemeinsame Reproduktion (3 Punkte). K12: individuelle kritische Reflexion (
   <!-- MD:START -->
 ## Punkte → Note
 <!-- MD:END -->
-  <p><strong>Note = 1 + 5 × (Punktesumme ÷ 36)</strong></p>
+  <p><strong>Note = 1 + 5 × (Punktesumme ÷ 33)</strong></p>
   <!-- MD:START -->
-Die Endnote wird auf die nächste Viertelnote gerundet. 18 Punkte → 3,5 · 27 Punkte → 4,75 · 36 Punkte → 6,0.
+Die Endnote wird auf die nächste Viertelnote gerundet. 16,5 Punkte → 3,5 · 24,75 Punkte → 4,75 · 33 Punkte → 6,0.
 <!-- MD:END -->
   <output aria-live="polite" id="grade-result">Wählen Sie für jede Kompetenz 0–3 Punkte.</output>
-  <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Die Fremdauswertung zählt mit K11 gemeinsam (3 Punkte) und K12 persönlich (3 Punkte). Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>
+  <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Der gemeinsame Fremdcheck K11 ist unbenotet; nur die persönliche Reflexion K12 zählt mit 3 Punkten. Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>
 </div>
 <a class="btn" href="#lernziele">Zu den Lernzielen →</a>
 <details>
