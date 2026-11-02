@@ -26,12 +26,26 @@
       "navigation": {
         "order": 6,
         "label": "05–08",
-        "title": "Unser Projekt"
+        "title": "Eigenes Bildprojekt"
       },
       "teaching": true,
       "overview": {
         "title": "Unser Bildprojekt",
         "summary": "Zu zweit forschen · Journal führen"
+      }
+    },
+    {
+      "id": "fremdmodell",
+      "class": "section",
+      "navigation": {
+        "order": 7,
+        "label": "08",
+        "title": "Fremdmodell prüfen"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Fremdmodell auf dem Prüfstand",
+        "summary": "Unabhängig prüfen · Grenzen beurteilen"
       }
     },
     {
