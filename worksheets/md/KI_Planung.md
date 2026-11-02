@@ -151,7 +151,7 @@ Die anschliessende **eine Minute** gehört zu den Notizen/Punkten und dem Wechse
 
 Eine ZIP-Abgabe enthält `Journal.html`, Versuchsnotebook mit gespeicherten Ausgaben, vorhandenes Versuchsprotokoll sowie hinzugefügte Originalfotos und Fotostudio-JSON. Foto-Upload im Notebook und Dateien der Abgabeliste sind getrennt. Nach Import zuerst Vorbereitung und Datenimport erneut ausführen; gespeicherte Ausgaben sind kein laufender Python-Zustand. Training und Test bleiben manuell.
 
-Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte). Keine weitere Gewichtung je Kompetenz. Pro Person gilt: Note = 1 + 5 × (18 gemeinsame Projektpunkte + bis zu 12 individuelle Gesprächspunkte + bis zu 3 gemeinsame Reproduktionspunkte + bis zu 3 individuelle Reflexionspunkte) / 36, auf Viertelnoten gerundet. Die SOL-Routinen schaffen keine zusätzlichen Bewertungskategorien; K11 und K12 erfassen die getrennte Fremdauswertung. Details: [Bewertungsraster](KI_Bewertungsraster.md).
+Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte). Keine weitere Gewichtung je Kompetenz. Pro Person gilt: Note = 1 + 5 × (erreichte Projektpunkte K1–K6 + erreichte Gesprächspunkte K7–K10 + erreichte Reproduktionspunkte K11 + erreichte Reflexionspunkte K12) / 36, auf Viertelnoten gerundet. Die SOL-Routinen schaffen keine zusätzlichen Bewertungskategorien; K11 und K12 erfassen die getrennte Fremdauswertung. Details: [Bewertungsraster](KI_Bewertungsraster.md).
 
 ## Didaktische und fachliche Quellen
 
