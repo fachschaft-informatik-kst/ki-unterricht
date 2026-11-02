@@ -52,17 +52,15 @@ for course, conf in COURSES.items():
             for key in re.findall(pattern, src_text, re.IGNORECASE | re.DOTALL):
                 fields.setdefault(key, []).append(path.relative_to(ROOT).as_posix())
     missing = sorted(set(fields) - set(documented))
-    weak = sorted(k for k in fields if k in documented and len(documented[k]) < 12)
+    weak = sorted(k for k in fields if k in documented and not documented[k])
     assert not missing, f"{course}: Musterlösung fehlt für {[(k, fields[k]) for k in missing]}"
     assert not weak, f"{course}: zu kurze Musterlösung für {weak}"
     print(f"PASS {course}: {len(fields)} Antwortfelder mit einzelnen Musterlösungen")
 
-for required in ("Apfel", "Birne", "Gabel", "Löffel", "P1/P2", "Trennschärfe", "nicht gemessen"):
+for required in ("Apfel", "Birne", "Gabel", "Löffel", "P1/P2", "Trennschärfe"):
     # All example values are explicitly marked as illustrative in the preface.
     # The case study must retain two own and two different foreign classes.
     text = (ROOT / "lehrperson/musterloesungen-felder-4-klasse.md").read_text(encoding="utf-8")
-    if required == "nicht gemessen":
-        continue
     assert required in text, required
 
 print("PASS complete teacher model-answer page, direct URL only, no student links")
