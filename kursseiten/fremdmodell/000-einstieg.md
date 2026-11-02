@@ -1,6 +1,7 @@
 <span class="section-label">Doppellektion 8 · Nach der Projektabgabe</span>
 <h1>Fremdmodell auf dem Prüfstand</h1>
 <p class="section-intro">Sie haben Ihr eigenes Bildprojekt bereits eingereicht. Jetzt überprüfen Sie ein fremdes Modell unabhängig: Lassen sich seine Ergebnisse wiederholen – und was passiert mit Ihren eigenen Bildern?</p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-transfer-learning">Transfer Learning</a></p>
 <div class="card">
   <!-- MD:START -->
 ## So arbeiten Sie heute
