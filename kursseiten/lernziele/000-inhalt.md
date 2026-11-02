@@ -67,9 +67,9 @@
 ## Fremdes Modell kritisch prüfen
 <!-- MD:END -->
     <ul>
-      <li>Ich prüfe mit denselben Daten und Einstellungen, ob sich ein fremdes Ergebnis reproduzieren lässt, und vergleiche Prüfsumme, A/B-Werte und Testergebnis (K11).</li>
-      <li>Ich teste ein fremdes Modell mit unseren eigenen Bildklassen und lese Vorhersagetabelle, Trennschärfe und Modellwert korrekt (K12).</li>
-      <li>Ich erkläre, warum Trennschärfe und hohe Modellwerte bei nie gelernten Klassen keine korrekte Trefferquote beweisen, und schlage einen überprüfbaren Folgetest vor (K12).</li>
+      <li>Ich prüfe mit denselben Daten und Einstellungen, wie das andere Tandem T1/T2, V1 und P1/P2 getrennt hat, und vergleiche Originalergebnisse mit einem eigenen Nachlauf (K11, unbenotet).</li>
+      <li>Ich probiere ein fremdes Modell mit unseren eigenen, anderen Bildklassen aus und beschreibe konkrete Vorhersagen (Pflichtversuch).</li>
+      <li>Ich unterscheide unabhängige Testbilder derselben Klassen von völlig anderen Klassen, erkläre die Grenzen der Vorhersagen und schlage einen prüfbaren Folgetest vor (K12).</li>
       <li>Ich erkläre im vierminütigen Einzelgespräch unser eigenes Projekt selbstständig und begründe Vorgehen und Grenzen (K7–K10).</li>
     </ul>
     <a href="#fremdmodell">Zu DL 8: Fremdmodell prüfen →</a>
@@ -99,7 +99,7 @@
     <a href="#gesellschaft">Zum Unterricht →</a>
   </article>
 </div>
-<p class="callout"><strong>Bewertung:</strong> <a href="#projekt">Eigenes Projekt (DL 5–7)</a>: K1–K6, 18 gemeinsame Punkte. <a href="#fremdmodell">DL 8</a>: vierminütiges Einzelgespräch K7–K10, 12 individuelle Punkte, sowie Fremdauswertung K11 (3 gemeinsame Punkte) und K12 (3 individuelle Punkte). Insgesamt <strong>36 Punkte</strong> und eine eigene Gesamtnote pro Person. Sprachmodelle (DL 9) und gesellschaftliche Folgen (DL 10) zählen nicht nachträglich zur Projektnote.</p>
+<p class="callout"><strong>Bewertung:</strong> <a href="#projekt">Eigenes Projekt (DL 5–7)</a>: K1–K6, 18 gemeinsame Punkte. <a href="#fremdmodell">DL 8</a>: vierminütiges Einzelgespräch K7–K10, 12 individuelle Punkte, sowie den unbenoteten gemeinsamen Fremdcheck K11 und die persönliche Reflexion K12 (3 Punkte). Insgesamt <strong>33 Punkte</strong> und eine eigene Gesamtnote pro Person. Sprachmodelle (DL 9) und gesellschaftliche Folgen (DL 10) zählen nicht nachträglich zur Projektnote.</p>
 <a class="btn primary" href="#bewertung">Bewertungsraster öffnen →</a>
 <details>
   <summary>Lernziele zu DL 5–8: Selbsteinschätzung</summary>
@@ -256,9 +256,9 @@ Ich erkläre auch den Arbeitsteil meines Tandempartners und entwickle einen begr
             <summary>Das gehört dazu</summary>
             <div class="detail-body">
               <!-- MD:START -->
-Ich prüfe die identischen Daten und Einstellungen, vergleiche Prüfsumme, A/B-Validierungswerte und Abschlusstest mit dem Original und dokumentiere Abweichungen nachvollziehbar.
+Ich untersuche die ursprünglichen Trainings- und Testgruppen und vergleiche ein eigenes Ergebnis mit dem Protokoll des anderen Tandems.
 <!-- MD:END -->
-              <p class="muted" style="margin-top:7px">Nachweis: <a href="#reproduktion">gemeinsamer Reproduktionsbericht (DL 8 · K11)</a></p>
+              <p class="muted" style="margin-top:7px">Nachweis: <a href="#reproduktion">gemeinsamer Daten- und Ergebnischeck (DL 8 · K11, unbenotet)</a></p>
             </div>
           </details>
         </div>
@@ -273,7 +273,7 @@ Ich prüfe die identischen Daten und Einstellungen, vergleiche Prüfsumme, A/B-V
             <summary>Das gehört dazu</summary>
             <div class="detail-body">
               <!-- MD:START -->
-Ich lese die Vorhersagen für unsere eigenen, dem Modell unbekannten Klassen, unterscheide Trennschärfe und Modellwert von einer tatsächlichen Trefferquote und begründe einen konkreten nächsten Test.
+Ich probiere fremde Vorhersagen mit eigenen Klassen aus, unterscheide diese von unabhängigen Testbildern derselben Klassen und begründe einen konkreten weiteren Versuch.
 <!-- MD:END -->
               <p class="muted" style="margin-top:7px">Nachweis: <a href="#fremdtest">Fremdtest</a> und <a href="#fremd-reflexion">persönliche Reflexion (DL 8 · K12)</a></p>
             </div>
