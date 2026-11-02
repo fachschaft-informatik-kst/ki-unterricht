@@ -19,7 +19,7 @@ Sichtbare Nummern entstehen erst beim Build; IDs niemals zum Umsortieren ändern
 Bei Einfügungen Nummernverweise in frei geschriebenen Texten redaktionell prüfen.
 
 Die Bereiche einstieg, lernarten, perzeptron, netze, projekt, sprache und gesellschaft
-entsprechen den Doppellektionen 1–10; projekt umfasst Doppellektionen 5–8.
+entsprechen den Doppellektionen 1–10; projekt umfasst Doppellektionen 5–7; fremdmodell ist die eigene Doppellektion 8.
 start, lernziele, journal, bewertung und sicherung sind übergreifende Bereiche.
 
 Dateien beginnen mit 000 (Einleitung), dann 010, 020 usw. (Kapitel), und 999 (Abschluss).

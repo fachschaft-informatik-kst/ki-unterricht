@@ -5,26 +5,32 @@
   <article>
     <b>18 Punkte · Projekt</b>
     <!-- MD:START -->
-K1–K6: Journal, Daten und Versuch.
+K1–K6: gemeinsames Journal, Daten und Versuch (50 %).
 <!-- MD:END -->
   </article>
   <article>
     <b>12 Punkte · Gespräch</b>
     <!-- MD:START -->
-K7–K10: vierminütiges Einzelgespräch je Person; eigene Gesprächspunkte.
+K7–K10: vierminütiges Einzelgespräch je Person (33,3 %).
 <!-- MD:END -->
   </article>
   <article>
-    <b>30 Punkte · insgesamt</b>
+    <b>6 Punkte · Fremdmodell</b>
     <!-- MD:START -->
-60 % Projekt + 40 % Fachgespräch.
+K11: gemeinsame Reproduktion (3 Punkte). K12: individuelle kritische Reflexion (3 Punkte).
+<!-- MD:END -->
+  </article>
+  <article>
+    <b>36 Punkte · insgesamt</b>
+    <!-- MD:START -->
+50 % eigenes Projekt + 16,7 % Fremdauswertung + 33,3 % Gespräch.
 <!-- MD:END -->
   </article>
 </div>
 <p class="small">Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
 <div aria-label="Bewertungsraster, horizontal scrollbar" class="table-scroll" role="region" tabindex="0">
   <table class="rubric">
-    <caption>10 Kompetenzen × 0–3 Punkte = maximal 30 Punkte</caption>
+    <caption>12 Kompetenzen × 0–3 Punkte = maximal 36 Punkte</caption>
     <thead>
       <tr>
         <th scope="col">Kompetenz / Nachweis</th>
@@ -116,6 +122,22 @@ K7–K10: vierminütiges Einzelgespräch je Person; eigene Gesprächspunkte.
         <td>Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet Anpassungen.</td>
         <td><select aria-label="Punkte K10: Individuelles Verständnis und Transfer" data-score="k10"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
+      <tr>
+        <th scope="row">K11 · Fremdes Modell reproduzieren<small>Fremdauswertung · gemeinsam</small></th>
+        <td>Kein nachvollziehbarer Reproduktionscheck.</td>
+        <td>Einzelne Ergebnisse genannt, Vorgehen oder Vergleich unklar.</td>
+        <td>Originaldaten und Einstellungen geprüft; A/B-Werte und Testresultat nachvollziehbar verglichen.</td>
+        <td>Zusätzlich Abweichungen mit konkreten Belegen erklärt oder die genaue Übereinstimmung geprüft.</td>
+        <td><select aria-label="Punkte K11: Fremdes Modell reproduzieren" data-score="k11"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+      </tr>
+      <tr>
+        <th scope="row">K12 · Fremdtest kritisch reflektieren<small>Fremdauswertung · individuell</small></th>
+        <td>Keine nachvollziehbare persönliche Interpretation.</td>
+        <td>Ergebnisse beschrieben, aber kaum fachlich eingeordnet.</td>
+        <td>Konkreten Fremdtest mit Messwert oder Beispiel ausgewertet, zwei Erklärungen und eine Grenze begründet.</td>
+        <td>Zusätzlich zwischen Trennschärfe und tatsächlicher Klassifikationsgenauigkeit unterschieden und einen prüfbaren Folgetest vorgeschlagen.</td>
+        <td><select aria-label="Punkte K12: Fremdtest kritisch reflektieren" data-score="k12"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+      </tr>
     </tbody>
   </table>
 </div>
@@ -123,16 +145,16 @@ K7–K10: vierminütiges Einzelgespräch je Person; eigene Gesprächspunkte.
   <!-- MD:START -->
 ## Punkte → Note
 <!-- MD:END -->
-  <p><strong>Note = 1 + 5 × (Punktesumme ÷ 30)</strong></p>
+  <p><strong>Note = 1 + 5 × (Punktesumme ÷ 36)</strong></p>
   <!-- MD:START -->
-Die Endnote wird auf die nächste Viertelnote gerundet. 18 Punkte → 4,0 · 24 Punkte → 5,0 · 30 Punkte → 6,0.
+Die Endnote wird auf die nächste Viertelnote gerundet. 18 Punkte → 3,5 · 27 Punkte → 4,75 · 36 Punkte → 6,0.
 <!-- MD:END -->
   <output aria-live="polite" id="grade-result">Wählen Sie für jede Kompetenz 0–3 Punkte.</output>
-  <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>
+  <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Die Fremdauswertung zählt mit K11 gemeinsam (3 Punkte) und K12 persönlich (3 Punkte). Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>
 </div>
 <a class="btn" href="#lernziele">Zu den Lernzielen →</a>
 <details>
-  <summary>Gemeinsame Abgabe &amp; Einzelgespräche</summary>
+  <summary>Eigenes Projekt &amp; Einzelgespräche</summary>
   <div class="detail-body" id="abgabe">
     <span class="section-label">07 · Zum Abschluss</span>
     <!-- MD:START -->
@@ -152,7 +174,7 @@ Die Endnote wird auf die nächste Viertelnote gerundet. 18 Punkte → 4,0 · 24 
         <label class="check"><input data-check="submit-contribution" type="checkbox"/><span>Arbeitsteilung, Quellen &amp; KI-Hilfen</span></label>
       </div>
       <div class="card">
-        <span class="tag orange">Individuell · 40 %</span>
+        <span class="tag orange">Individuell · 33,3 %</span>
         <!-- MD:START -->
 ### Das Fachgespräch
 <!-- MD:END -->

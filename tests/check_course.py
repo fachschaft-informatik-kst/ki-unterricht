@@ -77,7 +77,8 @@ assert len(project.select('.project-start-steps > li')) == 3
 assert len(project.select('#projekt-1 [id^="projekt-etappe-"]')) == 6
 assert project.select_one('#projekt-4 .project-train-flow')
 assert project.select_one('#projekt-4 [data-lab="ki_lernlabor.ipynb"]')
-assert len(project.select('#projekt-1 .lesson-plan')) == 4
+assert len(project.select('#projekt-1 .lesson-plan')) == 3
+assert len(soup.select('#fremdmodell .lesson-plan')) == 1
 assert all(not p.has_attr('open') for p in project.select('#projekt-1 .lesson-plan'))
 assert str(project.select_one('#projekt-1')).index('id="progress"') < str(project.select_one('#projekt-1')).index('id="doppellektion-05"')
 journal = soup.select_one('#journal')
@@ -229,7 +230,7 @@ assert '20 Einzelgespräche bei einer Lehrperson' in soup.get_text()
 assert 'Ein gemeinsames Journal. Zwei getrennte Einzelgespräche.' in soup.get_text()
 assert 'vierminütige' in planning or 'Vier Minuten Einzelgespräch' in planning
 assert '100 Minuten' in oral['zeit'] and 'eine Lehrperson' in oral['zeit']
-assert 'individuelle Gesprächspunkte' in planning
+assert '12 individuelle Punkte' in planning and 'K12' in planning
 assert 'K10 · Individuelles Verständnis' in soup.get_text()
 assert len(soup.select('#einstieg-4 .typen tbody tr')) == 2
 assert 'Schwache und starke KI' in soup.select_one('#einstieg-4 summary').get_text()
@@ -241,6 +242,24 @@ assert len(soup.select('#einstieg-4 textarea[data-answer="ki_ordnung"]')) == 1
 assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_{n}"]')) == 1 for n in range(1,5))
 assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_bsp_{n}"]')) == 1 for n in range(1,5))
 
+assert soup.select_one('#fremdmodell') and soup.select_one('#fremdmodell #doppellektion-08')
+assert soup.select_one('.nav a[href="#fremdmodell"]'), 'Dedicated DL 8 navigation missing'
+assert soup.select_one('#fremdmodell #fremdtest')
+assert not soup.select_one('#sicherung #fremdtest'), 'DL 8 tasks belong under DL 8, not under the backup controls'
+for n in (1,2):
+    assert soup.select_one(f'#fremdmodell [data-answer="fremd_name_{n}"]')
+    for key in ('repro','test','grenzen','transfer'):
+        assert soup.select_one(f'#fremdmodell textarea[data-answer="fremd_reflexion_{n}_{key}"]')
+assert soup.select_one('#fremdmodell #download-fremdmodell')
+assert '12 Kompetenzen' in soup.select_one('#bewertung').get_text()
+assert len(soup.select('#bewertung [data-score]')) == 12
+assert 'Punktesumme ÷ 36' in soup.select_one('#bewertung').get_text()
+assert 'Fremdauswertung' in soup.select_one('#fremdmodell').get_text()
+export_js=(root/'projekt/portal.js').read_text()
+assert "async function packFremd()" in export_js and "ki-fremdauswertung-v1" in export_js
+assert "'Fremdauswertung.html'" in export_js and "'Fremdauswertung.json'" in export_js
+assert "for(const f of state.files)entries.push" in export_js # only in the original project export
+assert 'for(const f of state.files)entries.push' not in export_js.split('async function packFremd()',1)[1].split("$('download-submission')",1)[0]
 repro=soup.select_one('details#reproduktion')
 assert repro and repro.select_one('textarea[data-journal="reproduktion"][data-optional]')
 assert 'privaten Fenster' in repro.get_text() and 'daten_sha256' in repro.get_text() and 'wiederholen=True' in repro.get_text()
@@ -251,7 +270,7 @@ assert 'Fremdtest und Rückmeldung' in lesson8.get_text()
 assert '15 Minuten Puffer' in planning
 sol=soup.select_one('#sol-rahmen')
 assert sol and 'keine festen Lektionstermine' in sol.get_text()
-assert 'unbenotet' in repro.get_text()
+assert 'benotet' in repro.get_text()
 assert 'Freiwillige Vertiefung, kein Pflichtteil' in repro.get_text()
 assert 'Etappenplan' in soup.select_one('textarea[data-journal="contribution"]').parent.get_text()
 assert 'Ihr Arbeitsweg:' not in soup.get_text()
@@ -276,7 +295,7 @@ for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektau
 for sid,minimum in {'einstieg':5,'lernarten':4,'perzeptron':4,'netze':4,'sprache':7,'gesellschaft':5,'projekt':4}.items():
     chapters=soup.select(f'#{sid} details.kapitel')
     assert len(chapters)>=minimum and all(c.select_one('.kapitel-nr') and c.select_one('h2.kapitel-titel') for c in chapters) and all(c.get('data-kurz') for c in chapters), sid
-assert len(soup.select('[data-score]'))==10
+assert len(soup.select('[data-score]'))==12
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
 for name in ['perzeptron_und_neuronale_netze.ipynb','xor_einzelne_neuronen.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
     assert soup.select_one('[data-lab="'+name+'"]'), name

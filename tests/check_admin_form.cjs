@@ -109,7 +109,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#toggleChanges").getAttribute("aria-expanded"),"false");
     await page.locator(".sidebar-details summary").first().click();
     await page.locator("#lessonOrder .lesson-sort-head").first().waitFor();
-    assert.equal(await page.locator("#lessonOrder .lesson-sort-head").count(),7,
+    assert.equal(await page.locator("#lessonOrder .lesson-sort-head").count(),8,
       "All teaching sections need an ordered draggable entry");
     assert.equal(await page.locator("#lessonOrder .lesson-sort-item").count(),10,
       "All ten existing lessons remain visible in the ordering overview");

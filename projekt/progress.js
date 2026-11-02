@@ -25,8 +25,8 @@ function grade(){
  const points=answered.reduce((sum,x)=>sum+Number(x.value),0);
  const result=$('grade-result');
  if(answered.length!==scores.length){result.textContent=points+' Punkte bisher · '+answered.length+' / '+scores.length+' Kompetenzen eingeschätzt. Noch keine Gesamtnote.';return;}
- const raw=1+5*points/30,rounded=Math.round(raw*4)/4;
- result.textContent=points+' / 30 Punkte → Note '+rounded.toLocaleString('de-CH',{minimumFractionDigits:2,maximumFractionDigits:2})+' (ungerundet: '+raw.toLocaleString('de-CH',{maximumFractionDigits:3})+').';
+ const raw=1+5*points/36,rounded=Math.round(raw*4)/4;
+ result.textContent=points+' / 36 Punkte → Note '+rounded.toLocaleString('de-CH',{minimumFractionDigits:2,maximumFractionDigits:2})+' (ungerundet: '+raw.toLocaleString('de-CH',{maximumFractionDigits:3})+').';
 }
 function choose(){topics.forEach(t=>{const on=state.topic===t.dataset.topic;t.classList.toggle('is-chosen',on);const b=t.querySelector('[data-choose]');b.setAttribute('aria-pressed',String(on));b.textContent=on?'Vorgemerkt ✓':'Als Thema vormerken';});}
 function render(){checks.forEach(x=>x.checked=state.checks[x.dataset.check]===true);skills.forEach(x=>x.value=state.skills[x.dataset.skill]||'offen');notes.forEach(x=>x.value=state.notes[x.dataset.note]||'');scores.forEach(x=>x.value=state.scores?.[x.dataset.score]??'');choose();progress();grade();}

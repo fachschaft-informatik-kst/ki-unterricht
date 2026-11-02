@@ -11,7 +11,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   const p=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());p.on('console',m=>{if(m.type()==='error')console.error('BROWSER',m.text());});
   await p.goto('http://127.0.0.1:8765/projekt/');
   assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,'Reading the page must not start Python');
-  assert.equal(await p.locator('.course-card').count(),7);assert.equal(await p.locator('.nav a').count(),10);
+  assert.equal(await p.locator('.course-card').count(),8);assert.equal(await p.locator('.nav a').count(),11);
   assert((await p.locator('.ki-notebook-block .ki-notebook-direct[href*="/lab/"]').count())>=7,
     'Every registered in-chapter notebook has a direct JupyterLite link');
   assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,
@@ -41,13 +41,45 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await glossaryDialog.locator('.glossary-close').click();
   await p.locator('.nav a[href="#lernziele"]').click();await p.locator('#lernziele').waitFor({state:'visible'});assert.equal(await p.locator('#lernziele .grid > article').count(),7);
   assert.equal(await p.locator('#lernziele .grid > article').filter({hasText:'Das Bildprojekt untersuchen'}).locator('.section-label').innerText(),'05–08');
-  await p.locator('#lernziele a[href="#bewertung"]').click();const scoring=p.locator('[data-score]');assert.equal(await scoring.count(),10);
+  await p.locator('#lernziele a[href="#bewertung"]').click();const scoring=p.locator('[data-score]');assert.equal(await scoring.count(),12);
   assert((await p.locator('#grade-result').innerText()).includes('Noch keine Gesamtnote'));
-  for(let i=0;i<10;i++)await scoring.nth(i).selectOption(i<6?'3':'0');assert((await p.locator('#grade-result').innerText()).includes('18 / 30 Punkte → Note 4.00'));
-  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('3');assert((await p.locator('#grade-result').innerText()).includes('30 / 30 Punkte → Note 6.00'));
-  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 30 Punkte → Note 1.00'));
-  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('20 / 30 Punkte → Note 4.25'));
-  await p.reload();assert((await p.locator('#grade-result').innerText()).includes('20 / 30 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
+  for(let i=0;i<12;i++)await scoring.nth(i).selectOption(i<6?'3':'0');assert((await p.locator('#grade-result').innerText()).includes('18 / 36 Punkte → Note 3.50'));
+  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('3');assert((await p.locator('#grade-result').innerText()).includes('36 / 36 Punkte → Note 6.00'));
+  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 36 Punkte → Note 1.00'));
+  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));
+  await p.reload();assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
+  // DL 8 is a separate, graded submission after the frozen own project.
+  await p.locator('.nav a[href="#fremdmodell"]').click();
+  assert.equal(await p.locator('#fremdmodell #reproduktion').count(),1);
+  assert.equal(await p.locator('#fremdmodell #fremdtest').count(),1);
+  await p.locator('#fremdmodell textarea[data-journal="reproduktion"]').fill('Prüfsumme gleich; V1 A: 50 %, B: 75 %.');
+  await p.locator('[data-answer="fremd_rueckmeldung"]').fill('Andere Beleuchtung gezielt prüfen.');
+  for(const n of [1,2]){
+    await p.locator('[data-answer="fremd_name_'+n+'"]').fill('Testperson '+n);
+    for(const field of ['repro','test','grenzen','transfer'])
+      await p.locator('[data-answer="fremd_reflexion_'+n+'_'+field+'"]').fill('Begründung und Beleg '+n+' / '+field);
+  }
+  const dl8Download=p.waitForEvent('download');
+  await p.locator('#download-fremdmodell').click();
+  const dl8File=await dl8Download;
+  assert.match(dl8File.suggestedFilename(),/^KI-Fremdauswertung-/);
+  await dl8File.saveAs('/tmp/ki-fremdauswertung.zip');
+  const bytes=fs.readFileSync('/tmp/ki-fremdauswertung.zip'),entries=new Map();
+  let offset=0;
+  while(offset+30<=bytes.length&&bytes.readUInt32LE(offset)===0x04034b50){
+    const size=bytes.readUInt32LE(offset+18),nameLength=bytes.readUInt16LE(offset+26),extraLength=bytes.readUInt16LE(offset+28);
+    const name=bytes.subarray(offset+30,offset+30+nameLength).toString('utf8'),begin=offset+30+nameLength+extraLength;
+    entries.set(name,bytes.subarray(begin,begin+size).toString('utf8'));
+    offset=begin+size;
+  }
+  assert(entries.has('Fremdauswertung.html')&&entries.has('Fremdauswertung.json'));
+  assert(!entries.has('Journal.html')&&!entries.has('kursstand.json'));
+  assert(![...entries.keys()].some(name=>name.startsWith('daten/')),'Do not re-export imported foreign pictures');
+  const submitted=JSON.parse(entries.get('Fremdauswertung.json'));
+  assert.equal(submitted.schema,'ki-fremdauswertung-v1');
+  assert.equal(submitted.antworten.fremd_name_1,'Testperson 1');
+  assert.equal(submitted.antworten.fremd_reflexion_2_transfer,'Begründung und Beleg 2 / transfer');
+  assert.match(entries.get('Fremdauswertung.html'),/Prüfsumme gleich/);
   assert.equal(await p.locator('[data-lab="lernarten.ipynb"]').count(),0);assert.equal(await p.locator('#lernarten a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]').count(),1);
 
   await p.locator('.nav a[href="#einstieg"]').click();

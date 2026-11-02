@@ -1,8 +1,8 @@
 # Bewertungsraster KI-Tandemprojekt
 
-10 Kompetenzen, jeweils 0–3 Punkte, maximal 30 Punkte. K1–K6: Abgabe (18 Punkte); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte). Keine zusätzliche Gewichtung. Es gilt die höchste vollständig erfüllte Stufe.
+12 Kompetenzen, jeweils 0–3 Punkte, maximal 36 Punkte. K1–K6: eigene Projektabgabe (18 gemeinsame Punkte); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte); K11: Fremdmodell-Reproduktion (3 gemeinsame Punkte); K12: persönliche Reflexion (3 individuelle Punkte). Keine zusätzliche Gewichtung. Es gilt die höchste vollständig erfüllte Stufe.
 
-Note = 1 + 5 × (Punkte / 30), auf die nächste Viertelnote gerundet. 18 → 4,0; 24 → 5,0; 30 → 6,0. K1–K6 (maximal 18 Punkte) gelten gemeinsam für beide Tandemmitglieder. K7–K10 (maximal 12 Punkte) werden im vierminütigen Einzelgespräch für jede Person separat erhoben. Damit hat jede Person eine individuelle Gesamtnote.
+Note = 1 + 5 × (Punkte / 36), auf die nächste Viertelnote gerundet. 18 → 3,5; 27 → 4,75; 36 → 6,0. K1–K6 (maximal 18 Punkte) gelten gemeinsam für beide Tandemmitglieder. K7–K10 (maximal 12 Punkte) werden im vierminütigen Einzelgespräch für jede Person separat erhoben. Hinzu kommen K11 (für beide gemeinsam) und K12 (individuelle Reflexion). Damit hat jede Person eine individuelle Gesamtnote.
 
 | Kompetenz / Nachweis | 0 Punkte | 1 Punkt | 2 Punkte | 3 Punkte |
 |---|---|---|---|---|
@@ -16,5 +16,10 @@ Note = 1 + 5 × (Punkte / 30), auf die nächste Viertelnote gerundet. 18 → 4,0
 | K8 Entscheidungen begründen (Gespräch) | Daten- und Versuchsentscheidungen nicht erklärbar. | Entscheidungen genannt, Begründungen bleiben unklar. | Datenaufteilung, fairer Vergleich und Auswahl verständlich begründet. | Zusätzlich Alternativen verglichen und deren Folgen richtig abgeschätzt. |
 | K9 Ergebnisse kritisch einordnen (Gespräch) | Zahlen oder Zuverlässigkeit falsch eingeordnet. | Ergebnisse beschrieben; Reichweite bleibt unklar. | Ergebnisse, konkrete Beispiele und Grenzen in eigenen Worten erklärt. | Zusätzlich mögliche andere Erklärungen und nötige Belege diskutiert. |
 | K10 Individuelles Verständnis & Transfer (Gespräch) | Eigenes Projektverständnis nicht erkennbar. | Nur einzelne Arbeitsteile erklärbar; viel Unterstützung nötig. | Erklärt das gemeinsame Projekt selbstständig und schlägt einen passenden nächsten Versuch vor. | Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet notwendige Anpassungen. |
+
+| K11 Fremdes Modell reproduzieren (Fremdauswertung, gemeinsam) | Kein nachvollziehbarer Reproduktionscheck. | Einzelne Ergebnisse genannt; Vergleich oder Vorgehen unklar. | Originaldaten und Einstellungen geprüft; A/B-Werte und Testresultat nachvollziehbar verglichen. | Zusätzlich Abweichungen mit konkreten Belegen erklärt oder eine Übereinstimmung sorgfältig überprüft. |
+| K12 Fremdtest kritisch reflektieren (Fremdauswertung, individuell) | Keine nachvollziehbare persönliche Interpretation. | Ergebnisse beschrieben, aber kaum eingeordnet. | Konkreten Fremdtest mit Messwert oder Beispiel ausgewertet; zwei Erklärungen und eine Grenze begründet. | Zusätzlich Trennschärfe von tatsächlicher Genauigkeit unterschieden und einen prüfbaren Folgetest vorgeschlagen. |
+
+**Fremdauswertung:** Nach der unveränderten gemeinsamen Projektabgabe arbeiten die Tandems während der Einzelgespräche. K11 beurteilt den gemeinsamen Reproduktionsbericht und Fremdtest, K12 eine kurze persönliche Reflexion pro Person. Ein separates ZIP wird am Ende der DL 8 eingereicht. Bei technischen Ausfällen wird die dokumentierte Auswertung bereitgestellter gespeicherter Daten beurteilt; fehlende Tests werden ausdrücklich benannt.
 
 **Organisation:** Genau 20 Einzelgespräche mit **einer Lehrperson**, je 4 Minuten Fachgespräch plus 1 Minute Notizen/Wechsel. Total **100 Minuten**, die letzten **10 Minuten unmittelbar nach den 90 Unterrichtsminuten**. Keine Reserve, keine gemeinsame Einführung und keine Ersatztermine: Gesprächsfolge, Projektabgaben und Auftrag für die selbstständig arbeitende Klasse sind vorab organisiert. Vier kurze Nachweise für K7–K10 ohne Präsentation. Die bereits abgegebene gemeinsame Projektarbeit bleibt unverändert.

@@ -1,5 +1,5 @@
 <div class="eyebrow">
-  Doppellektion 5–8 · Von eigenen Bildern zum eigenen Urteil
+  Doppellektionen 5–7 · Das eigene Bildprojekt
 </div>
 <h1>Was hat unser<br/>Netz <em>gelernt?</em></h1>
 <p class="small" id="projekt-vorabcheck-hinweis"><strong>Vor dem Projektstart:</strong> Der unbenotete <a href="#projekt-bereit-check">Lernstandscheck aus DL 4</a> hilft, offene Fragen zu Neuron und Netz zu erkennen. Die faire Datenaufteilung lernt ihr selbstständig im Lernpfad von DL 5.</p>
@@ -15,7 +15,7 @@ In Doppellektion 5 erarbeiten Sie die Datenregeln selbstständig. Anschliessend 
     <li><strong>2 · Thema und Bilder vorbereiten</strong><span><a href="#ideen">Zwei Bildklassen wählen</a>, fünf unabhängige Gruppen planen und die Fotos im <a href="#projekt-fotostudio">Fotostudio</a> vorbereiten.</span></li>
     <li><strong>3 · Versuch durchführen</strong><span><a href="#versuch">A/B-Vergleich verstehen</a>, im <a href="#projekt-werkbank">Projekt-Notebook</a> auswerten und die Ergebnisse im <a href="#projekt-reflexionen">Journal</a> begründen.</span></li>
   </ol>
-  <p class="project-start-next"><strong>Ihr roter Faden:</strong> <a href="#ablauf">Sechs Etappen mit Checkliste</a> · <a href="#projekt-reflexionen">Fünf Reflexionen</a> · <a href="#abgabe">Abgabe und Fachgespräch</a>. Die Projektetappen sind keine festen Lektionstermine.</p>
+  <p class="project-start-next"><strong>Ihr roter Faden:</strong> <a href="#ablauf">Sechs Etappen mit Checkliste</a> · <a href="#projekt-reflexionen">Fünf Reflexionen</a> · <a href="#abgabe">Projekt abgeben</a> · <a href="#fremdmodell">DL 8: Fremdmodell prüfen</a>. Die Projektetappen sind keine festen Lektionstermine.</p>
 </div>
 <div class="facts">
   <div class="fact">
@@ -28,7 +28,7 @@ In Doppellektion 5 erarbeiten Sie die Datenregeln selbstständig. Anschliessend 
     <strong>1 Vergleich</strong><small>gezielt eine Grösse verändern</small>
   </div>
   <div class="fact">
-    <strong>8. Doppellektion</strong><small>Abgabe &amp; Einzelgespräche</small>
+    <strong>Vor DL 8</strong><small>Eigenes Projekt einreichen</small>
   </div>
 </div>
 <p class="overview-note">Bewertet wird Ihre Untersuchung – nicht die höchste Trefferquote.</p>
