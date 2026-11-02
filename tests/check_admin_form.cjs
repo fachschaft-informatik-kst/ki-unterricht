@@ -88,6 +88,7 @@ const server=http.createServer((req,res)=>{
     // One course selector controls both the content and its live color preview.
     assert.equal(await page.locator("#courseThemeSelect").count(),0);
     assert.equal(await page.locator("#courseSelect option").count(),4);
+    await page.locator("#courseThemePreview strong").waitFor({state:"visible"});
     await page.locator("#courseSelect").selectOption("irn1");
     assert.equal(await page.locator("#courseThemeColor").inputValue(),"#69419b");
     assert.match(await page.locator("#courseThemePreview").innerText(),/IRN/);
