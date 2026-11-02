@@ -3,11 +3,7 @@
 <p class="section-intro">Funktioniert das Ergebnis eines anderen Tandems wirklich – und was passiert, wenn das Modell Ihre Bilder sieht? Sie prüfen beides selbstständig, während die Einzelgespräche stattfinden.</p>
 <p class="glossary-related"><strong>Begriffe:</strong> <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-transfer-learning">Transfer Learning</a></p>
 <nav class="subnav dl8-quicklinks" aria-label="Schritte in Doppellektion 8">
-  <a class="btn" href="#dl8-warum">1 · Warum?</a>
-  <a class="btn" href="#dl8-vorbereiten">2 · Vorbereiten</a>
-  <a class="btn" href="#reproduktion">3 · Reproduzieren</a>
-  <a class="btn" href="#fremdtest">4 · Fremdtest</a>
-  <a class="btn primary" href="#fremd-reflexion">5 · Reflexion &amp; ZIP</a>
+  <a class="btn" href="#dl8-warum">1 · Warum?</a><a class="btn" href="#dl8-vorbereiten">2 · Vorbereiten</a><a class="btn" href="#reproduktion">3 · Reproduzieren</a><a class="btn" href="#fremdtest">4 · Fremdtest</a><a class="btn primary" href="#fremd-reflexion">5 · Reflexion &amp; ZIP</a>
 </nav>
 <div class="callout" id="dl8-ablauf">
   <strong>Ihr Weg: erst prüfen, dann beurteilen.</strong>
