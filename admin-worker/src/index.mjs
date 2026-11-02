@@ -1,5 +1,6 @@
 import {validatePlan,validateManifest} from "../../shared/course-model.js";
 import {validateGlossary,GLOSSARY_PATH} from "../../shared/glossary-model.js";
+import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS} from "./teacher.mjs";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
 const encoder = new TextEncoder();
@@ -250,7 +251,9 @@ async function auth(req,env,url){
     const target=new URL("https://github.com/login/oauth/authorize");
     const props={client_id:env.GITHUB_CLIENT_ID,redirect_uri:callback,state,code_challenge:challenge,code_challenge_method:"S256"};
     for(const [k,v] of Object.entries(props))target.searchParams.set(k,v);
-    const pending=await encrypt(env,{state,verifier,exp:Date.now()+600000});
+    const requested=url.searchParams.get("next")||"/";
+    const returnTo=parseTeacher(requested)?requested:"/";
+    const pending=await encrypt(env,{state,verifier,returnTo,exp:Date.now()+600000});
     return new Response(null,{status:302,headers:{
       Location:target.toString(),"Set-Cookie":cookie("ki_oauth",pending,600),"Cache-Control":"no-store"
     }});
@@ -266,13 +269,13 @@ async function auth(req,env,url){
   if(!(await canWrite(token.access_token)))return fail(403,"Keine Schreibberechtigung für das Repository.");
   const ms=Math.min(3600000,Math.max(60000,Number(token.expires_in||3600)*1000-60000));
   const value=await encrypt(env,{token:token.access_token,login:user.login,exp:Date.now()+ms});
-  const headers=new Headers({Location:"/","Cache-Control":"no-store"});
+  const headers=new Headers({Location:parseTeacher(pending.returnTo)?pending.returnTo:"/","Cache-Control":"no-store"});
   headers.append("Set-Cookie",cookie("ki_oauth","",0));
   headers.append("Set-Cookie",cookie("ki_session",value,Math.floor(ms/1000)));
   return new Response(null,{status:303,headers});
 }
 async function staticPage(url){
-  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/markdown-it.min.js":"markdown-it.min.js","/plan-editor.js":"plan-editor.js","/glossary-model.js":"glossary-model.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json","/favicon.svg":"../favicon.svg"};
+  const files={"/":"index.html","/index.html":"index.html","/admin.css":"admin.css","/admin.js":"admin.js","/markdown-it.min.js":"markdown-it.min.js","/teacher.js":"teacher.js","/teacher.css":"teacher.css","/plan-editor.js":"plan-editor.js","/glossary-model.js":"glossary-model.js","/course-model.js":"course-model.js","/course-rules.json":"course-rules.json","/favicon.svg":"../favicon.svg"};
   const file=files[url.pathname];
   if(!file)return fail(404,"Nicht gefunden.");
   const source=await fetch(STATIC+file,{redirect:"manual"});
@@ -302,8 +305,41 @@ export default {
       const session=await decrypt(env,readCookie(req,"ki_session"));
       const active=session?.exp>Date.now()?session:null;
       if(url.pathname==="/api/session"&&req.method==="GET")return response({authenticated:!!active,login:active?.login||null});
+      if(req.method==="GET"&&url.pathname.startsWith("/teacher/")){
+        const route=parseTeacher(url.pathname);
+        const download=/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(url.pathname);
+        if(!route&&!download)return fail(404,"Lehrpersonenmaterial nicht gefunden.");
+        if(!active)return new Response(null,{status:302,headers:{
+          Location:"/auth/start?next="+encodeURIComponent(route?url.pathname:"/"),
+          "Cache-Control":"no-store"}});
+        if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
+        if(download){
+          const path=DOWNLOADS[download[1]];
+          if(!path)return fail(404,"Datei nicht gefunden.");
+          const bytes=await readTeacherFile(active.token,path,github,REPO);
+          return new Response(bytes,{headers:{
+            "Content-Type":download[1].endsWith(".svg")?"image/svg+xml":"text/markdown; charset=utf-8",
+            "Content-Disposition":'attachment; filename="'+download[1]+'"',
+            "Cache-Control":"no-store","X-Content-Type-Options":"nosniff",
+            "Content-Security-Policy":"default-src 'none'; sandbox"}});
+        }
+        return new Response(teacherShell(route),{headers:{
+          "Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store",
+          "X-Content-Type-Options":"nosniff",
+          "Content-Security-Policy":["default-src 'none'","script-src 'self'",
+            "style-src 'self'","img-src 'self' data: https://fachschaft-informatik-kst.github.io",
+            "connect-src 'self'","base-uri 'none'","frame-ancestors 'none'",
+            "form-action 'none'"].join("; ")}});
+      }
+
       if(url.pathname.startsWith("/api/")){
         if(!active)return fail(401,"Bitte mit GitHub anmelden.");
+        if(req.method==="GET"&&url.pathname==="/api/teacher"){
+          if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
+          const route=parseTeacher("/teacher/"+url.searchParams.get("course")+"/"+url.searchParams.get("kind"));
+          if(!route)return fail(404,"Unbekanntes Lehrpersonenmaterial.");
+          return response(await teacherData(route,active.token,github,REPO));
+        }
         if(req.method==="GET"&&url.pathname==="/api/permissions"){
           const humanCanWrite=await canWrite(active.token);
           const installation=await appInstallationStatus(active.token);
