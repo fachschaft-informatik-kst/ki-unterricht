@@ -41,13 +41,13 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await glossaryDialog.locator('.glossary-close').click();
   await p.locator('.nav a[href="#lernziele"]').click();await p.locator('#lernziele').waitFor({state:'visible'});assert.equal(await p.locator('#lernziele .grid > article').count(),7);
   assert.equal(await p.locator('#lernziele .grid > article').filter({hasText:'Das Bildprojekt untersuchen'}).locator('.section-label').innerText(),'05–08');
-  await p.locator('#lernziele a[href="#bewertung"]').click();const scoring=p.locator('[data-score]');assert.equal(await scoring.count(),10);
+  await p.locator('#lernziele a[href="#bewertung"]').click();const scoring=p.locator('[data-score]');assert.equal(await scoring.count(),12);
   assert((await p.locator('#grade-result').innerText()).includes('Noch keine Gesamtnote'));
-  for(let i=0;i<10;i++)await scoring.nth(i).selectOption(i<6?'3':'0');assert((await p.locator('#grade-result').innerText()).includes('18 / 30 Punkte → Note 4.00'));
-  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('3');assert((await p.locator('#grade-result').innerText()).includes('30 / 30 Punkte → Note 6.00'));
-  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 30 Punkte → Note 1.00'));
-  for(let i=0;i<10;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('20 / 30 Punkte → Note 4.25'));
-  await p.reload();assert((await p.locator('#grade-result').innerText()).includes('20 / 30 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
+  for(let i=0;i<12;i++)await scoring.nth(i).selectOption(i<6?'3':'0');assert((await p.locator('#grade-result').innerText()).includes('18 / 36 Punkte → Note 3.50'));
+  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('3');assert((await p.locator('#grade-result').innerText()).includes('36 / 36 Punkte → Note 6.00'));
+  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 36 Punkte → Note 1.00'));
+  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));
+  await p.reload();assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
   assert.equal(await p.locator('[data-lab="lernarten.ipynb"]').count(),0);assert.equal(await p.locator('#lernarten a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]').count(),1);
 
   await p.locator('.nav a[href="#einstieg"]').click();
