@@ -108,7 +108,9 @@ const server=http.createServer((req,res)=>{
     await page.locator('#sectionNav [data-section="einstieg"]').click();
     assert.equal(await page.locator("#section").inputValue(),"einstieg");
     assert.equal(await page.locator("#chapters .chapter-number").first().textContent(),"01");
-    assert.equal(await page.locator(".sidebar-shortcuts .sidebar-action").count(),3);
+    assert.equal(await page.locator(".sidebar-resources:not(.teacher-access) .sidebar-action").count(),3);
+    assert.equal(await page.locator(".teacher-access .sidebar-action").count(),3);
+    assert.match(await page.locator("#teacherSolutionsLink").getAttribute("href"),/bok\/4-klasse\/musterloesungen/);
     // The publishing form is no longer rendered beneath the split panes.
     assert.equal(await page.locator("#publishPanel").isVisible(),false);
     await page.locator("#toggleChanges").click();
