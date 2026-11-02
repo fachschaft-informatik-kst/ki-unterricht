@@ -107,9 +107,12 @@ const clean=source=>source.replace(/<[^>]*>/g," ").replace(/&amp;/g,"&")
 export function questionsFromSource(source){
   const out={};
   for(const m of source.matchAll(/\bdata-answer=["']([^"']+)["']/g)){
-    const after=source.slice(m.index,m.index+400);
+    const start=source.lastIndexOf("<",m.index);
+    const end=source.indexOf(">",m.index);
+    const fieldTag=source.slice(start,end+1);
     const before=source.slice(Math.max(0,m.index-1200),m.index);
-    const aria=/\baria-label=["']([^"']+)["']/.exec(after.slice(0,260));
+    // aria-label must belong to this field, not to the next answer input.
+    const aria=/\baria-label=["']([^"']+)["']/.exec(fieldTag);
     const labelIndex=before.lastIndexOf("<label"),endIndex=before.lastIndexOf("</label");
     let question=aria?clean(aria[1]):"";
     if(!question&&labelIndex>endIndex){
