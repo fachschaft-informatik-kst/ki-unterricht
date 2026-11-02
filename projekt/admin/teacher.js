@@ -136,7 +136,7 @@
       'Beobachtungen und Zahlen aus den Experimenten müssen anhand der eigenen Daten überprüft werden.</p>';
     const answerCards=data.entries.map(entry=>
       '<article class="solution-card">'+
-      '<div class="solution-meta"><span>'+(entry.questionSource==="thema"?'Thema / Teilaufgabe':'Aufgabe / Frage')+'</span><code>'+escape(entry.field)+'</code></div>'+
+      '<div class="solution-meta"><span>'+(entry.questionSource==="thema"?'Thema / Teilaufgabe':entry.questionSource==="sinngemaess"?'Fragestellung (sinngemäss)':'Originalfrage / Auftrag')+'</span><code>'+escape(entry.field)+'</code></div>'+
       '<h3 class="solution-question">'+escape(entry.question)+'</h3>'+
       '<p class="question-source"><a href="'+escape(entry.courseLink)+
       '" target="_blank" rel="noopener noreferrer">Zugehörige Aufgabe auf der Kursseite öffnen</a></p>'+
