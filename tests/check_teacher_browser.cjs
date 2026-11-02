@@ -41,6 +41,13 @@ const ROOT=path.resolve(__dirname,"..");
           notes:[{title:"Fachlicher Hinweis DL "+number,markdown:"**Fachlicher Hintergrund**"}]};
       res.writeHead(200,{"Content-Type":"application/json"}).end(JSON.stringify(data));return;
     }
+    if(url.pathname==="/teacher-theme.css"){
+      const grade=url.searchParams.get("course")==="bok/1-klasse"?"1":"4";
+      const accent=grade==="1"?"#3653a3":"#076959";
+      res.writeHead(200,{"Content-Type":"text/css"}).end(
+        'body[data-grade="'+grade+'"]{--accent:'+accent+'}');
+      return;
+    }
     const files={"/teacher.js":"projekt/admin/teacher.js","/teacher.css":"projekt/admin/teacher.css",
       "/markdown-it.min.js":"projekt/admin/markdown-it.min.js"};
     if(files[url.pathname]){

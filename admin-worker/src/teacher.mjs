@@ -209,6 +209,11 @@ export async function loadTeacherCourses(token,github,repo){
   return normalizeTeacherCourses(await getJson(token,"shared/course-sites.json",github,repo));
 }
 
+export function teacherThemeStylesheet(courses,course){
+  const selected=courses.find(item=>item.slug===course&&item.ready);
+  if(!selected)throw Error("Kurs-Farbthema nicht vorhanden.");
+  return 'body[data-grade="'+selected.grade+'"]{--accent:'+selected.accent+'}';
+}
 export function teacherShell(route,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
   const titles={planung:"AVIVA-Unterrichtsplanung",materialien:"Materialkoffer",musterloesungen:"Musterlösungen"};
   const esc=s=>String(s).replaceAll("&","&amp;").replaceAll("<","&lt;")
@@ -227,8 +232,9 @@ export function teacherShell(route,courses=normalizeTeacherCourses({version:1,co
   return '<!doctype html><html lang="de-CH"><head><meta charset="utf-8">'+
     '<meta name="viewport" content="width=device-width,initial-scale=1">'+
     '<meta name="robots" content="noindex,nofollow,noarchive">'+
-    '<title>'+esc(title)+' · '+esc(label)+'</title><link rel="stylesheet" href="/teacher.css"></head>'+
-    '<body data-grade="'+active.grade+'" style="--accent:'+active.accent+'"><header><div class="header-inner">'+
+    '<title>'+esc(title)+' · '+esc(label)+'</title><link rel="stylesheet" href="/teacher.css">'+
+    '<link rel="stylesheet" href="/teacher-theme.css?course='+encodeURIComponent(route.course)+'"></head>'+
+    '<body data-grade="'+active.grade+'"><header><div class="header-inner">'+
     '<p class="eyebrow">Geschützter Lehrpersonenbereich · '+esc(label)+'</p>'+
     '<div class="course-switcher"><div class="course-picker">'+
     '<label for="teacherCourseSelect">Kurs auswählen</label>'+

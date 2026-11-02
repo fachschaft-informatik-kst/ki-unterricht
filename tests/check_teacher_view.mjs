@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {answerRows,materialForLesson,questionsFromSource,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses} from "../admin-worker/src/teacher.mjs";
+import {answerRows,materialForLesson,questionsFromSource,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet} from "../admin-worker/src/teacher.mjs";
 const fields=[
   "## DL 1 · Was ist KI?","","| Antwortfeld | Musterantwort |","|---|---|",
   "| "+String.fromCharCode(96)+"regeln_oder_daten"+String.fromCharCode(96)+" | Regelbasiert ist nicht dasselbe wie lernend. |",
@@ -49,10 +49,12 @@ for(const kind of ["planung","materialien","musterloesungen"]){
   assert(html.includes('value="bok/1-klasse"'),"Other BOK course must be selectable");
   assert(html.includes('value="irn/1-klasse" disabled'),"Unprepared IRN course must be unavailable");
   assert(html.includes('value="irn/4-klasse" disabled'));
-  assert(html.includes('style="--accent:#076959"'));
+  assert(html.includes('/teacher-theme.css?course=bok%2F4-klasse'),"Theme must load as a stylesheet compatible with strict CSP");
 }
 assert(teacherShell({course:"bok/1-klasse",kind:"materialien"},options)
-  .includes('style="--accent:#3653a3"'));
+  .includes('/teacher-theme.css?course=bok%2F1-klasse'));
+assert.equal(teacherThemeStylesheet(options,"bok/1-klasse"),'body[data-grade="1"]{--accent:#3653a3}');
+assert.equal(teacherThemeStylesheet(options,"bok/4-klasse"),'body[data-grade="4"]{--accent:#076959}');
 assert.throws(()=>teacherShell({course:"irn/1-klasse",kind:"planung"},options),/nicht/);
 assert.throws(()=>normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES.slice(0,2)}),/vier/);
 const malicious=structuredClone(DEFAULT_COURSES);
