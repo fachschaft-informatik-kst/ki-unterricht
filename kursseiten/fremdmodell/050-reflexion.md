@@ -38,7 +38,7 @@ open: false
       </div>
     </details>
   </div>
-  <div class="card fremd-person" data-person="2">
+  <div class="card fremd-person dl8-person-card" data-person="2">
     <h3>Persönliche Reflexion · Person 2</h3>
     <label class="field answer"><span>Mein Name (Person 2)</span><input type="text" data-answer="fremd_name_2" maxlength="10000" placeholder="Vor- und Nachname"></label>
     <label class="field answer"><span>Pflichtfrage 1 · Was zeigen die ursprünglichen Testergebnisse auf P1/P2 und Ihr Versuch mit den anderen Klassen? Nennen Sie je einen konkreten Wert oder eine Beobachtung.</span><textarea data-answer="fremd_reflexion_2_test" maxlength="10000" rows="3" placeholder="Das fremde Modell erreichte auf P1/P2 …; mit unseren anderen Klassen zeigte sich …"></textarea></label>
