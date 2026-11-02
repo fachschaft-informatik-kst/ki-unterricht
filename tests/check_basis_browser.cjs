@@ -63,7 +63,10 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     const page=await browser.newPage();
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto('http://127.0.0.1:8770/kurse.html');
-    assert.equal(await page.locator('a.choice').count(),2,'Both Kurzgymi tracks must appear');
+    assert.equal(await page.locator('a.choice').count(),4,'BOK and IRN each provide course slots for 1st and 4th year');
+    for(const slug of ['bok/1-klasse','bok/4-klasse','irn/1-klasse','irn/4-klasse']){
+      assert.equal(await page.locator('a.choice[href="'+slug+'/"]').count(),1);
+    }
     await page.locator('a.choice[href="basis/"]').click();
     assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
     assert.equal(await page.locator('main > section').count(),13);
