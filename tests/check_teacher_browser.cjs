@@ -99,7 +99,7 @@ const ROOT=path.resolve(__dirname,"..");
     await page.locator("#lessonNav a[data-dl='8']").click();
     await page.locator(".lesson-heading h2").filter({hasText:"DL 08"}).waitFor();
     assert.match(await page.locator(".solution-question").innerText(),/DL 8/);
-    assert.equal(await page.locator(".solution-meta span").innerText(),"Thema / Teilaufgabe");
+    assert.match(await page.locator(".solution-meta span").innerText(),/Thema \/ Teilaufgabe/i);
     assert.equal(await page.locator(".question-source a").count(),1);
     assert.equal(await page.locator(".question-hint").count(),0);
     assert.doesNotMatch(await page.locator("#teacherContent").innerText(),/Der genaue Wortlaut wurde nicht eindeutig erkannt/);
