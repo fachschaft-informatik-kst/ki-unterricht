@@ -2,7 +2,9 @@
 <h1>Fremdmodell auf dem Prüfstand</h1>
 <p class="section-intro">Sie haben Ihr eigenes Bildprojekt bereits eingereicht. Jetzt überprüfen Sie ein fremdes Modell unabhängig: Lassen sich seine Ergebnisse wiederholen – und was passiert mit Ihren eigenen Bildern?</p>
 <div class="card">
-  <h2>So arbeiten Sie heute</h2>
+  <!-- MD:START -->
+## So arbeiten Sie heute
+<!-- MD:END -->
   <p><strong>Parallel zu den Einzelgesprächen:</strong> Reproduktionscheck und Fremdtest im Tandem durchführen. Jede Person pausiert nur für ihr individuelles vierminütiges Fachgespräch. Danach reflektiert jede Person die Ergebnisse selbstständig. Die Gesprächsreihenfolge ist vorab bekannt.</p>
   <p><strong>Bewertung:</strong> K11 (Reproduktionscheck, 3 gemeinsame Punkte) und K12 (kritische Reflexion, 3 individuelle Punkte). Zusammen maximal 6 Punkte. Die bewertete ursprüngliche Projektabgabe wird nicht verändert.</p>
   <p><strong>Datenschutz:</strong> Das zugeteilte fremde ZIP nur mit Erlaubnis in einem privaten Browserfenster oder anderen Browserprofil öffnen. Empfangene Daten nur zur Prüfung verwenden und nach Vorgabe löschen. Keine Fotos anderer Tandems im Reflexionstext weitergeben.</p>
@@ -123,28 +125,35 @@ fremd = foto.fremdtest(experiment, eigene)</code></pre></li>
     <p class="small">Hilfe: Meldet <code>projekt_laden</code> «Klassenliste muss genau den Klassen …», stimmen die Namen in <code>EIGENE_KLASSEN</code> nicht mit Ihrem Fotostudio überein. Das fremde Modell kann nur zwischen seinen zwei Klassen wählen und kennt kein «weder noch». Ein hoher Modellwert heisst deshalb nicht, dass es sich auskennt.</p>
   </div>
 </details>
-
 <div class="card" id="fremd-reflexion">
-<h2>Reflexion und Auswertung einreichen</h2>
-<p>Notieren Sie zunächst eine begründete Rückmeldung an das andere Tandem. Danach beantwortet <strong>jede Person ihre eigene Reflexion</strong>. K11 wird gemeinsam und K12 persönlich bewertet. Eine hohe Trennschärfe für neue Klassen C/D ist <strong>keine Trefferquote auf denselben Klassen</strong>: Das fremde Modell kann nur zwischen seinen ursprünglichen zwei Klassen wählen, nicht «keine davon».</p>
-<label class="field answer"><span>Gemeinsame Rückmeldung: Was ist gelungen, was sollte das andere Tandem als Nächstes prüfen?</span><textarea data-answer="fremd_rueckmeldung" maxlength="10000" rows="3" placeholder="Stark war …; unser konkreter Verbesserungsvorschlag …"></textarea></label>
-<div class="card fremd-person" data-person="1">
-<h3>Persönliche Reflexion · Person 1</h3>
-<label class="field answer"><span>Mein Name (Person 1)</span><input type="text" data-answer="fremd_name_1" maxlength="10000" placeholder="Vor- und Nachname"></label>
-<label class="field answer"><span>1. Reproduzierbarkeit: Welche Originalwerte konnten Sie nachvollziehen? Belegen Sie eine Übereinstimmung oder Abweichung.</span><textarea data-answer="fremd_reflexion_1_repro" maxlength="10000" rows="3" placeholder="Originalwert …, eigener Lauf …; daraus schliesse ich …"></textarea></label>
-<label class="field answer"><span>2. Fremdtest: Wie reagierte das Modell auf Ihre eigenen Bilder? Beschreiben Sie eine konkrete Beobachtung samt Messwert oder Beispiel.</span><textarea data-answer="fremd_reflexion_1_test" maxlength="10000" rows="3" placeholder="Bei unseren Bildern der Klasse … sagte das Modell …"></textarea></label>
-<label class="field answer"><span>3. Erklärung und Grenzen: Nennen Sie zwei mögliche Ursachen. Welche davon können Sie mit den vorhandenen Daten belegen, welche nicht?</span><textarea data-answer="fremd_reflexion_1_grenzen" maxlength="10000" rows="3" placeholder="Eine mögliche Erklärung …; alternativ …; prüfen könnte man …"></textarea></label>
-<label class="field answer"><span>4. Transfer: Was bedeutet das für die Zuverlässigkeit von Bild-KI? Schlagen Sie einen konkreten neuen Test oder eine Verbesserung vor.</span><textarea data-answer="fremd_reflexion_1_transfer" maxlength="10000" rows="3" placeholder="Das fremde Modell kennt nur …; als Nächstes würde ich …"></textarea></label>
-</div>
-<div class="card fremd-person" data-person="2">
-<h3>Persönliche Reflexion · Person 2</h3>
-<label class="field answer"><span>Mein Name (Person 2)</span><input type="text" data-answer="fremd_name_2" maxlength="10000" placeholder="Vor- und Nachname"></label>
-<label class="field answer"><span>1. Reproduzierbarkeit: Welche Originalwerte konnten Sie nachvollziehen? Belegen Sie eine Übereinstimmung oder Abweichung.</span><textarea data-answer="fremd_reflexion_2_repro" maxlength="10000" rows="3" placeholder="Originalwert …, eigener Lauf …; daraus schliesse ich …"></textarea></label>
-<label class="field answer"><span>2. Fremdtest: Wie reagierte das Modell auf Ihre eigenen Bilder? Beschreiben Sie eine konkrete Beobachtung samt Messwert oder Beispiel.</span><textarea data-answer="fremd_reflexion_2_test" maxlength="10000" rows="3" placeholder="Bei unseren Bildern der Klasse … sagte das Modell …"></textarea></label>
-<label class="field answer"><span>3. Erklärung und Grenzen: Nennen Sie zwei mögliche Ursachen. Welche davon können Sie mit den vorhandenen Daten belegen, welche nicht?</span><textarea data-answer="fremd_reflexion_2_grenzen" maxlength="10000" rows="3" placeholder="Eine mögliche Erklärung …; alternativ …; prüfen könnte man …"></textarea></label>
-<label class="field answer"><span>4. Transfer: Was bedeutet das für die Zuverlässigkeit von Bild-KI? Schlagen Sie einen konkreten neuen Test oder eine Verbesserung vor.</span><textarea data-answer="fremd_reflexion_2_transfer" maxlength="10000" rows="3" placeholder="Das fremde Modell kennt nur …; als Nächstes würde ich …"></textarea></label>
-</div>
-<p><strong>Abgabe 2 (nach DL 8):</strong> Laden Sie hier ein <strong>separates Auswertungs-ZIP</strong> mit Reproduktionsbericht, Fremdtest-Protokoll und persönlichen Reflexionen herunter und reichen Sie es im mitgeteilten Abgabekanal ein. Es enthält keine separat importierten Originalfotos. Die eigene Projektabgabe aus DL 5–7 bleibt unberührt.</p>
-<div class="actions"><button type="button" class="btn primary" id="download-fremdmodell">Fremdauswertung als ZIP herunterladen ↓</button></div>
-<p class="status" id="fremd-download-status" role="status" aria-live="polite"></p>
+  <!-- MD:START -->
+## Reflexion und Auswertung einreichen
+<!-- MD:END -->
+  <p>Notieren Sie zunächst eine begründete Rückmeldung an das andere Tandem. Danach beantwortet <strong>jede Person ihre eigene Reflexion</strong>. K11 wird gemeinsam und K12 persönlich bewertet. Eine hohe Trennschärfe für neue Klassen C/D ist <strong>keine Trefferquote auf denselben Klassen</strong>: Das fremde Modell kann nur zwischen seinen ursprünglichen zwei Klassen wählen, nicht «keine davon».</p>
+  <label class="field answer"><span>Gemeinsame Rückmeldung: Was ist gelungen, was sollte das andere Tandem als Nächstes prüfen?</span><textarea data-answer="fremd_rueckmeldung" maxlength="10000" rows="3" placeholder="Stark war …; unser konkreter Verbesserungsvorschlag …"></textarea></label>
+  <div class="card fremd-person" data-person="1">
+    <!-- MD:START -->
+### Persönliche Reflexion · Person 1
+<!-- MD:END -->
+    <label class="field answer"><span>Mein Name (Person 1)</span><input type="text" data-answer="fremd_name_1" maxlength="10000" placeholder="Vor- und Nachname"></label>
+    <label class="field answer"><span>1. Reproduzierbarkeit: Welche Originalwerte konnten Sie nachvollziehen? Belegen Sie eine Übereinstimmung oder Abweichung.</span><textarea data-answer="fremd_reflexion_1_repro" maxlength="10000" rows="3" placeholder="Originalwert …, eigener Lauf …; daraus schliesse ich …"></textarea></label>
+    <label class="field answer"><span>2. Fremdtest: Wie reagierte das Modell auf Ihre eigenen Bilder? Beschreiben Sie eine konkrete Beobachtung samt Messwert oder Beispiel.</span><textarea data-answer="fremd_reflexion_1_test" maxlength="10000" rows="3" placeholder="Bei unseren Bildern der Klasse … sagte das Modell …"></textarea></label>
+    <label class="field answer"><span>3. Erklärung und Grenzen: Nennen Sie zwei mögliche Ursachen. Welche davon können Sie mit den vorhandenen Daten belegen, welche nicht?</span><textarea data-answer="fremd_reflexion_1_grenzen" maxlength="10000" rows="3" placeholder="Eine mögliche Erklärung …; alternativ …; prüfen könnte man …"></textarea></label>
+    <label class="field answer"><span>4. Transfer: Was bedeutet das für die Zuverlässigkeit von Bild-KI? Schlagen Sie einen konkreten neuen Test oder eine Verbesserung vor.</span><textarea data-answer="fremd_reflexion_1_transfer" maxlength="10000" rows="3" placeholder="Das fremde Modell kennt nur …; als Nächstes würde ich …"></textarea></label>
+  </div>
+  <div class="card fremd-person" data-person="2">
+    <!-- MD:START -->
+### Persönliche Reflexion · Person 2
+<!-- MD:END -->
+    <label class="field answer"><span>Mein Name (Person 2)</span><input type="text" data-answer="fremd_name_2" maxlength="10000" placeholder="Vor- und Nachname"></label>
+    <label class="field answer"><span>1. Reproduzierbarkeit: Welche Originalwerte konnten Sie nachvollziehen? Belegen Sie eine Übereinstimmung oder Abweichung.</span><textarea data-answer="fremd_reflexion_2_repro" maxlength="10000" rows="3" placeholder="Originalwert …, eigener Lauf …; daraus schliesse ich …"></textarea></label>
+    <label class="field answer"><span>2. Fremdtest: Wie reagierte das Modell auf Ihre eigenen Bilder? Beschreiben Sie eine konkrete Beobachtung samt Messwert oder Beispiel.</span><textarea data-answer="fremd_reflexion_2_test" maxlength="10000" rows="3" placeholder="Bei unseren Bildern der Klasse … sagte das Modell …"></textarea></label>
+    <label class="field answer"><span>3. Erklärung und Grenzen: Nennen Sie zwei mögliche Ursachen. Welche davon können Sie mit den vorhandenen Daten belegen, welche nicht?</span><textarea data-answer="fremd_reflexion_2_grenzen" maxlength="10000" rows="3" placeholder="Eine mögliche Erklärung …; alternativ …; prüfen könnte man …"></textarea></label>
+    <label class="field answer"><span>4. Transfer: Was bedeutet das für die Zuverlässigkeit von Bild-KI? Schlagen Sie einen konkreten neuen Test oder eine Verbesserung vor.</span><textarea data-answer="fremd_reflexion_2_transfer" maxlength="10000" rows="3" placeholder="Das fremde Modell kennt nur …; als Nächstes würde ich …"></textarea></label>
+  </div>
+  <p><strong>Abgabe 2 (nach DL 8):</strong> Laden Sie hier ein <strong>separates Auswertungs-ZIP</strong> mit Reproduktionsbericht, Fremdtest-Protokoll und persönlichen Reflexionen herunter und reichen Sie es im mitgeteilten Abgabekanal ein. Es enthält keine separat importierten Originalfotos. Die eigene Projektabgabe aus DL 5–7 bleibt unberührt.</p>
+  <div class="actions">
+    <button type="button" class="btn primary" id="download-fremdmodell">Fremdauswertung als ZIP herunterladen ↓</button>
+  </div>
+  <p class="status" id="fremd-download-status" role="status" aria-live="polite"></p>
 </div>
