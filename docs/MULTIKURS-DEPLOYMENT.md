@@ -117,3 +117,23 @@ Für einen tatsächlichen Geheimhaltungsschutz müssen die Lehrpersonenquellen
 in ein privates Repository oder einen privaten Speicher umziehen und die
 öffentliche Git-Historie geprüft werden. Allein `noindex`, fehlende Links
 oder GitHub OAuth am Worker reichen dafür nicht aus.
+
+
+## Kursauswahl in den geschützten Lehrpersonenansichten
+
+AVIVA-Planung, Materialkoffer und Musterlösungen bieten oben eine gemeinsame
+**Kursauswahl**. Das Dropdown zeigt alle vier registrierten Kurse mit Lehrperson,
+Klasse und Kurstitel. BOK 1. Klasse und BOK 4. Klasse sind wählbar und beziehen
+ihre Materialien getrennt aus den jeweiligen Quellen. Die beiden IRN-Kursplätze
+stehen sichtbar als **«in Vorbereitung»**, sind aber deaktiviert: Sie besitzen
+noch keine eigenen AVIVA-Quellen, Kapitel oder Musterlösungen und dürfen nicht
+versehentlich BOK-Inhalte übernehmen.
+
+Beim Kurswechsel bleibt die gewählte Materialart (AVIVA / Materialkoffer /
+Musterlösungen) erhalten, die Doppellektion wird bewusst auf **DL 01** gesetzt.
+Beim Wechsel zwischen diesen Materialarten innerhalb desselben Kurses bleibt
+dagegen die ausgewählte Doppellektion bestehen. Der aktuelle Kurs wird im
+Kopfbereich und der seitlichen Unterrichtsübersicht genannt. Das Akzentfarbthema
+kommt aus \`shared/course-sites.json\` und wird auch im geschützten Bereich
+verwendet. Der GitHub-Login und die Berechtigungsprüfung erfolgen weiterhin
+im bestehenden Cloudflare Worker.

@@ -105,28 +105,77 @@ export function materialForLesson(markdown,number){
 }
 const clean=source=>source.replace(/<[^>]*>/g," ").replace(/&amp;/g,"&")
   .replace(/&quot;/g,'"').replace(/&nbsp;/g," ").replace(/\s+/g," ").trim();
+// Student fields occur as data-answer (4th grade), data-basis-answer (1st
+// grade) and data-journal (the shared project). Prefer actual field labels.
+// Never silently attach a neighbouring, unrelated paragraph as the question.
 export function questionsFromSource(source){
   const out={};
-  for(const m of source.matchAll(/\bdata-answer=["']([^"']+)["']/g)){
-    const start=source.lastIndexOf("<",m.index);
-    const end=source.indexOf(">",m.index);
-    const fieldTag=source.slice(start,end+1);
-    const before=source.slice(Math.max(0,m.index-1200),m.index);
-    // aria-label must belong to this field, not to the next answer input.
-    const aria=/\baria-label=["']([^"']+)["']/.exec(fieldTag);
-    const labelIndex=before.lastIndexOf("<label"),endIndex=before.lastIndexOf("</label");
+  for(const match of source.matchAll(/\bdata-(?:answer|basis-answer|journal)=["']([^"']+)["']/g)){
+    const field=match[1];
+    const start=source.lastIndexOf("<",match.index);
+    const end=source.indexOf(">",match.index);
+    if(start<0||end<0||end-start>1500)continue;
+    const tag=source.slice(start,end+1);
+    // Some controls have a direct aria-label (especially drag-and-drop cards).
+    const aria=/\baria-label=["']([^"']+)["']/.exec(tag);
     let question=aria?clean(aria[1]):"";
-    if(!question&&labelIndex>endIndex){
-      const spans=[...before.slice(labelIndex).matchAll(/<span\b[^>]*>([\s\S]*?)<\/span>/g)];
+    const prefix=source.slice(Math.max(0,match.index-2000),start);
+    const labelStart=prefix.lastIndexOf("<label");
+    const labelEnd=prefix.lastIndexOf("</label");
+    if(!question&&labelStart>labelEnd){
+      const label=prefix.slice(labelStart);
+      const spans=[...label.matchAll(/<span\b[^>]*>([\s\S]*?)<\/span>/g)];
       if(spans.length)question=clean(spans.at(-1)[1]);
+      if(!question){
+        const raw=label.slice(label.indexOf(">")+1).replace(/<(?:select|textarea|input)\b[\s\S]*$/,"");
+        question=clean(raw);
+      }
     }
-    if(!question){
-      const p=[...before.matchAll(/<(?:p|h[234])\b[^>]*>([\s\S]*?)<\/(?:p|h[234])>/g)].at(-1);
-      if(p)question=clean(p[1]);
-    }
-    if(question.length>=5)out[m[1]]=question.slice(0,600);
+    if(question.length>=4)out[field]=question.slice(0,600);
   }
   return out;
+}
+
+// Some notebook controls and legacy journal fields are created dynamically;
+// their original texts aren't embedded as data-* attributes in chapter Markdown.
+// Give these fields a useful subject label without claiming to quote the task.
+const FIELD_GROUPS={
+  zeitstrahl:"KI-Zeitstrahl",sw:"Schwimmbad-Neuron · Startgewichte",sw2:"Schwimmbad-Neuron · verbesserte Gewichte",
+  lr:"Lernrate und Trainingsverlauf",iris:"Iris-Erkennung",hand:"Logische Gatter am Perzeptron",
+  neuron:"Schwimmbad-Neuron",xornetz:"XOR-Netzwerk",netze:"Neuronale Netze",
+  zif:"Ziffernerkennung",typ:"Arten künstlicher Intelligenz",
+  pst:"Textvorhersage und Kontext",pap:"Stochastischer Papagei",netz:"Neuronales Sprachmodell",
+  soe:"Soekia-Experiment",turing:"Turing-Test",wmd:"Wahrheit und Manipulation",
+  video:"Videobeispiel",bild:"Bildbeispiel",gesellschaft:"KI und Gesellschaft",
+  wissen:"Akinator und regelbasiertes Wissen",memory:"Lernarten und Memory",
+  lernend:"Filmlandkarte",begriff:"KI-Begriffe",begriffe:"KI-Begriffe",regeln:"Regeln oder Daten",
+  projekt:"Eigenes Bildprojekt",fremd:"Prüfung des fremden Modells"
+};
+const FIELD_TERMS={
+  w1:"Gewicht 1",w2:"Gewicht 2",b:"Bias",bias:"Bias",ok:"Ergebnis prüfen",
+  and:"UND",or:"ODER",nand:"NAND",xor:"XOR",zwischenschicht:"Zwischenschicht",
+  gs:"Gewicht Sonne",gf:"Gewicht Freundinnen/Freunde",gp:"Gewicht Prüfung",
+  treffer:"Anzahl korrekter Vorhersagen",gefunden:"Geeignete Parameter gefunden?",
+  beob:"Beobachtung",richtig:"Richtige Vorhersagen",gewicht:"Einfluss der Gewichte",
+  lr:"Lernrate",start:"Startwerte",daten:"Daten",lernen:"Lernen",frage:"Frage",
+  anfang:"Anfangstext",kontext:"Gegebener Kontext",wort:"Nächstes Wort",
+  plausibel:"Plausibilität",wahr:"Faktenprüfung",beleg:"Begründung / Beleg",
+  art:"Art des Beispiels",text:"Textbeispiel",eindruck:"Erster Eindruck",
+  hinweise:"Erkennungsmerkmale",werte:"Werte",ausgabe:"Vorhersage",
+  variable:"Geänderte Variable",gut:"Gelingendes Beispiel",problem:"Problematisches Beispiel",
+  zeitstrahl:"KI-Zeitstrahl",ordnung:"KI-Begriffe ordnen",
+  zusammen:"Zusammenfassung",vergleichen:"Vergleich",vergleich:"Vergleich",
+  beispiel:"Eigenes Beispiel",bsp:"Beispiel"
+};
+export function fieldTopic(field,lessonTitle=""){
+  let f=field.replace(/^basis-/,"").replace(/^dl\d+_/,"");
+  const parts=f.split(/[-_]/).filter(Boolean);
+  const nested=["neuron","sprache","netze","ki"].includes(parts[0])&&FIELD_GROUPS[parts[1]];
+  const subject=(nested?FIELD_GROUPS[parts[1]]:FIELD_GROUPS[parts[0]])||lessonTitle||"Unterrichtsaufgabe";
+  const detail=parts.slice(nested?2:1).map(x=>FIELD_TERMS[x]||
+    (/[a-z]+/.test(x)?x.replace(/^./,c=>c.toUpperCase()):x)).join(" · ");
+  // Keep titles short and readable; IDs remain available separately.
+  return detail?subject+": "+detail:subject;
 }
 async function getQuestions(lesson,course,token,github,repo){
   const views=new Set([lesson.view]);
@@ -139,8 +188,10 @@ async function getQuestions(lesson,course,token,github,repo){
   const files=(tree.tree||[]).filter(item=>item.type==="blob"&&
     /^kursseiten\/[a-z0-9-]+\/\d{3}-[a-z0-9-]+\.md$/.test(item.path)&&
     views.has(item.path.split("/")[1])).map(item=>item.path);
-  const data=await Promise.all(files.map(path=>getText(token,path,github,repo)));
-  return Object.assign({},...data.map(questionsFromSource));
+  // One missing chapter must not hide every other original prompt.
+  const data=await Promise.allSettled(files.map(path=>getText(token,path,github,repo)));
+  return Object.assign({},...data.filter(item=>item.status==="fulfilled")
+    .map(item=>questionsFromSource(item.value)));
 }
 export async function teacherData({course,kind},token,github,repo,selected=1){
   const profile=PROFILES[course];if(!profile)throw Error("Kurs unbekannt.");
@@ -170,9 +221,11 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
   const entries=answerRows(fields,current.number);
   let questions={};try{questions=await getQuestions(current,course,token,github,repo);}catch{ /* use explicit fallback */ }
   for(const entry of entries){
-    entry.question=questions[entry.field]||PROMPTS[entry.field]||
-      "Originalfrage im Kurs nachschlagen: "+entry.field.replace(/[-_]/g," ");
-    entry.questionFound=Boolean(questions[entry.field]||PROMPTS[entry.field]);
+    const original=questions[entry.field];
+    const curated=PROMPTS[entry.field];
+    entry.question=original||curated||fieldTopic(entry.field,current.title);
+    entry.questionSource=original?"original":curated?"sinngemaess":"thema";
+    entry.questionFound=Boolean(original||curated);
     entry.courseLink="https://fachschaft-informatik-kst.github.io/ki-unterricht/"+
       course+"/#"+current.view;
   }
@@ -181,21 +234,70 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
       {title:"Feldgenaue Lösungen",markdown:fields}]};
 }
 
-export function teacherShell(route){
+
+// Course selection follows the same registry as the public course overview.
+// An unconfigured course must never fall back to BOK teacher material.
+export const DEFAULT_COURSES = [{"id":"bok-1-klasse","teacher":"BOK","grade":1,"slug":"bok/1-klasse","source":"basis","status":"published","name":"KI entdecken","theme":{"accent":"#3653a3"}},{"id":"bok-4-klasse","teacher":"BOK","grade":4,"slug":"bok/4-klasse","source":"projekt","status":"published","name":"KI vertiefen","theme":{"accent":"#076959"}},{"id":"irn-1-klasse","teacher":"IRN","grade":1,"slug":"irn/1-klasse","source":null,"status":"planned","name":"KI entdecken – IRN","theme":{"accent":"#69419b"}},{"id":"irn-4-klasse","teacher":"IRN","grade":4,"slug":"irn/4-klasse","source":null,"status":"planned","name":"KI vertiefen – IRN","theme":{"accent":"#9a481d"}}];
+const VALID_SLUGS=new Set(DEFAULT_COURSES.map(c=>c.slug));
+export function normalizeTeacherCourses(registry){
+  if(registry?.version!==1||!Array.isArray(registry.courses))throw Error("Kursregister ungültig.");
+  const courses=[];
+  for(const item of registry.courses){
+    if(!VALID_SLUGS.has(item?.slug)||courses.some(c=>c.slug===item.slug)||
+      !/^[a-z][a-z0-9-]*$/.test(item.id||"")||
+      !["BOK","IRN"].includes(item.teacher)||![1,4].includes(item.grade)||
+      !/^[#][0-9a-fA-F]{6}$/.test(item.theme?.accent||""))
+      throw Error("Kursauswahl enthält einen ungültigen Eintrag.");
+    const template=DEFAULT_COURSES.find(c=>c.slug===item.slug);
+    if(item.id!==template.id||item.teacher!==template.teacher||item.grade!==template.grade)
+      throw Error("Kursidentität darf nicht geändert werden.");
+    courses.push({id:item.id,teacher:item.teacher,grade:item.grade,slug:item.slug,
+      name:String(item.name||"").slice(0,120),accent:item.theme.accent,
+      ready:!!PROFILES[item.slug]&&item.status==="published"&&!!item.source});
+  }
+  if(courses.length!==4)throw Error("Alle vier Kursplätze müssen vorhanden sein.");
+  return courses;
+}
+export async function loadTeacherCourses(token,github,repo){
+  return normalizeTeacherCourses(await getJson(token,"shared/course-sites.json",github,repo));
+}
+
+export function teacherThemeStylesheet(courses,course){
+  const selected=courses.find(item=>item.slug===course&&item.ready);
+  if(!selected)throw Error("Kurs-Farbthema nicht vorhanden.");
+  return 'body[data-grade="'+selected.grade+'"]{--accent:'+selected.accent+'}';
+}
+export function teacherShell(route,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
   const titles={planung:"AVIVA-Unterrichtsplanung",materialien:"Materialkoffer",musterloesungen:"Musterlösungen"};
-  const title=titles[route.kind],grade=route.course.includes("/1-")?1:4;
-  const label="BOK · "+grade+". Klasse";
+  const esc=s=>String(s).replaceAll("&","&amp;").replaceAll("<","&lt;")
+    .replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
+  const active=courses.find(c=>c.slug===route.course&&c.ready);
+  if(!active)throw Error("Dieser Kurs ist noch nicht für Lehrpersonenmaterial freigeschaltet.");
+  const label=active.teacher+" · "+active.grade+". Klasse";
+  const title=titles[route.kind];
+  const opts=courses.map(c=>{
+    const name=c.teacher+" · "+c.grade+". Klasse · "+c.name+(c.ready?"":" (in Vorbereitung)");
+    return '<option value="'+esc(c.slug)+'"'+(c.slug===route.course?' selected':'')+
+      (c.ready?"":' disabled')+'>'+esc(name)+'</option>';
+  }).join("");
   const nav=Object.entries(titles).map(([id,name])=>'<a href="/teacher/'+route.course+'/'+id+'"'+
-    (id===route.kind?' aria-current="page"':'')+'>'+name+'</a>').join("");
+    (id===route.kind?' aria-current="page"':'')+'>'+esc(name)+'</a>').join("");
   return '<!doctype html><html lang="de-CH"><head><meta charset="utf-8">'+
     '<meta name="viewport" content="width=device-width,initial-scale=1">'+
     '<meta name="robots" content="noindex,nofollow,noarchive">'+
-    '<title>'+title+' · '+label+'</title><link rel="stylesheet" href="/teacher.css"></head>'+
-    '<body data-grade="'+grade+'"><header><div class="header-inner">'+
-    '<p class="eyebrow">Geschützter Lehrpersonenbereich · '+label+'</p>'+
-    '<h1>'+title+'</h1><nav class="area-nav" aria-label="Lehrpersonenmaterial">'+nav+'</nav></div></header>'+
+    '<title>'+esc(title)+' · '+esc(label)+'</title><link rel="stylesheet" href="/teacher.css">'+
+    '<link rel="stylesheet" href="/teacher-theme.css?course='+encodeURIComponent(route.course)+'"></head>'+
+    '<body data-grade="'+active.grade+'"><header><div class="header-inner">'+
+    '<p class="eyebrow">Geschützter Lehrpersonenbereich · '+esc(label)+'</p>'+
+    '<div class="course-switcher"><div class="course-picker">'+
+    '<label for="teacherCourseSelect">Kurs auswählen</label>'+
+    '<select id="teacherCourseSelect" aria-label="Lehrperson und Klasse auswählen">'+opts+'</select>'+
+    '<p class="course-picker-note">IRN-Kurse sind angelegt. Ihre eigenen Lehrpersonenmaterialien sind noch in Vorbereitung.</p>'+
+    '</div><div class="course-context"><span>Aktueller Kurs</span><strong>'+esc(label)+'</strong>'+
+    '<small>'+esc(active.name)+'</small></div></div>'+
+    '<h1>'+esc(title)+'</h1><nav class="area-nav" aria-label="Lehrpersonenmaterial">'+nav+'</nav></div></header>'+
     '<div class="teacher-layout"><aside class="lesson-sidebar">'+
-    '<p class="sidebar-eyebrow">Unterrichtsübersicht</p><h2>Doppellektionen</h2>'+
+    '<p class="sidebar-eyebrow">Unterrichtsübersicht · '+esc(label)+'</p><h2>Doppellektionen</h2>'+
     '<nav id="lessonNav" class="lesson-nav" aria-label="Doppellektion auswählen"></nav></aside>'+
     '<main id="teacherContent" data-course="'+route.course+'" data-kind="'+route.kind+'" aria-live="polite">'+
     '<p>Lade Lehrpersonenmaterial …</p></main></div>'+

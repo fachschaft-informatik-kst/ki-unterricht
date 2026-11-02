@@ -1,6 +1,6 @@
 import {validatePlan,validateManifest} from "../../shared/course-model.js";
 import {validateGlossary,GLOSSARY_PATH} from "../../shared/glossary-model.js";
-import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS} from "./teacher.mjs";
+import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS,loadTeacherCourses,teacherThemeStylesheet} from "./teacher.mjs";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
 const encoder = new TextEncoder();
@@ -308,6 +308,17 @@ export default {
       const session=await decrypt(env,readCookie(req,"ki_session"));
       const active=session?.exp>Date.now()?session:null;
       if(url.pathname==="/api/session"&&req.method==="GET")return response({authenticated:!!active,login:active?.login||null});
+      if(req.method==="GET"&&url.pathname==="/teacher-theme.css"){
+        if(!active)return fail(401,"Bitte mit GitHub anmelden.");
+        if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
+        const courses=await loadTeacherCourses(active.token,github,REPO);
+        const course=url.searchParams.get("course");
+        if(!courses.some(c=>c.slug===course&&c.ready))return fail(404,"Kurs nicht vorhanden.");
+        return new Response(teacherThemeStylesheet(courses,course),{headers:{
+          "Content-Type":"text/css; charset=utf-8","Cache-Control":"no-store",
+          "X-Content-Type-Options":"nosniff"
+        }});
+      }
       if(req.method==="GET"&&url.pathname.startsWith("/teacher/")){
         const route=parseTeacher(url.pathname);
         const download=/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(url.pathname);
@@ -326,7 +337,8 @@ export default {
             "Cache-Control":"no-store","X-Content-Type-Options":"nosniff",
             "Content-Security-Policy":"default-src 'none'; sandbox"}});
         }
-        return new Response(teacherShell(route),{headers:{
+        const courses=await loadTeacherCourses(active.token,github,REPO);
+        return new Response(teacherShell(route,courses),{headers:{
           "Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store",
           "X-Content-Type-Options":"nosniff",
           "Content-Security-Policy":["default-src 'none'","script-src 'self'",
