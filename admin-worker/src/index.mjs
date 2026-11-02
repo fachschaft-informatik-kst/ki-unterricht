@@ -322,7 +322,7 @@ export default {
           const bytes=await readTeacherFile(active.token,path,github,REPO);
           return new Response(bytes,{headers:{
             "Content-Type":download[1].endsWith(".svg")?"image/svg+xml":"text/markdown; charset=utf-8",
-            "Content-Disposition":'attachment; filename="'+download[1]+'"',
+            "Content-Disposition":(download[1].endsWith(".svg")?"inline":"attachment")+'; filename="'+download[1]+'"',
             "Cache-Control":"no-store","X-Content-Type-Options":"nosniff",
             "Content-Security-Policy":"default-src 'none'; sandbox"}});
         }
