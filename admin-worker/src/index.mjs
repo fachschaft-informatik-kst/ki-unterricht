@@ -1,6 +1,6 @@
 import {validatePlan,validateManifest} from "../../shared/course-model.js";
 import {validateGlossary,GLOSSARY_PATH} from "../../shared/glossary-model.js";
-import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS} from "./teacher.mjs";
+import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS,loadTeacherCourses} from "./teacher.mjs";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
 const encoder = new TextEncoder();
@@ -326,7 +326,8 @@ export default {
             "Cache-Control":"no-store","X-Content-Type-Options":"nosniff",
             "Content-Security-Policy":"default-src 'none'; sandbox"}});
         }
-        return new Response(teacherShell(route),{headers:{
+        const courses=await loadTeacherCourses(active.token,github,REPO);
+        return new Response(teacherShell(route,courses),{headers:{
           "Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store",
           "X-Content-Type-Options":"nosniff",
           "Content-Security-Policy":["default-src 'none'","script-src 'self'",

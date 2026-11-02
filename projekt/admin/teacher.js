@@ -3,6 +3,16 @@
   const root=document.getElementById("teacherContent");
   const nav=document.getElementById("lessonNav");
   const kind=root.dataset.kind,course=root.dataset.course;
+  // Course selection is independent of the chosen teacher material area.
+  // Switching courses resets to DL 01 to avoid carrying an unrelated lesson.
+  const coursePicker=document.getElementById("teacherCourseSelect");
+  coursePicker?.addEventListener("change",()=>{
+    const option=coursePicker.selectedOptions[0];
+    if(!option||option.disabled||coursePicker.value===course)return;
+    const slug=coursePicker.value;
+    if(!/^(?:bok)\/(?:1|4)-klasse$/.test(slug))return;
+    location.assign("/teacher/"+slug+"/"+kind+"?dl=1");
+  });
   const escape=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;")
     .replaceAll(">","&gt;").replaceAll('"',"&quot;");
   const markdown=window.markdownit({html:false,linkify:true,typographer:true}).enable("table");

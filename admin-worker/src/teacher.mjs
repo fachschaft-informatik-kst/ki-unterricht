@@ -181,21 +181,64 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
       {title:"Feldgenaue Lösungen",markdown:fields}]};
 }
 
-export function teacherShell(route){
+
+// Course selection follows the same registry as the public course overview.
+// An unconfigured course must never fall back to BOK teacher material.
+export const DEFAULT_COURSES = [{"id":"bok-1-klasse","teacher":"BOK","grade":1,"slug":"bok/1-klasse","source":"basis","status":"published","name":"KI entdecken","theme":{"accent":"#3653a3"}},{"id":"bok-4-klasse","teacher":"BOK","grade":4,"slug":"bok/4-klasse","source":"projekt","status":"published","name":"KI vertiefen","theme":{"accent":"#076959"}},{"id":"irn-1-klasse","teacher":"IRN","grade":1,"slug":"irn/1-klasse","source":null,"status":"planned","name":"KI entdecken – IRN","theme":{"accent":"#69419b"}},{"id":"irn-4-klasse","teacher":"IRN","grade":4,"slug":"irn/4-klasse","source":null,"status":"planned","name":"KI vertiefen – IRN","theme":{"accent":"#9a481d"}}];
+const VALID_SLUGS=new Set(DEFAULT_COURSES.map(c=>c.slug));
+export function normalizeTeacherCourses(registry){
+  if(registry?.version!==1||!Array.isArray(registry.courses))throw Error("Kursregister ungültig.");
+  const courses=[];
+  for(const item of registry.courses){
+    if(!VALID_SLUGS.has(item?.slug)||courses.some(c=>c.slug===item.slug)||
+      !/^[a-z][a-z0-9-]*$/.test(item.id||"")||
+      !["BOK","IRN"].includes(item.teacher)||![1,4].includes(item.grade)||
+      !/^[#][0-9a-fA-F]{6}$/.test(item.theme?.accent||""))
+      throw Error("Kursauswahl enthält einen ungültigen Eintrag.");
+    const template=DEFAULT_COURSES.find(c=>c.slug===item.slug);
+    if(item.id!==template.id||item.teacher!==template.teacher||item.grade!==template.grade)
+      throw Error("Kursidentität darf nicht geändert werden.");
+    courses.push({id:item.id,teacher:item.teacher,grade:item.grade,slug:item.slug,
+      name:String(item.name||"").slice(0,120),accent:item.theme.accent,
+      ready:!!PROFILES[item.slug]&&item.status==="published"&&!!item.source});
+  }
+  if(courses.length!==4)throw Error("Alle vier Kursplätze müssen vorhanden sein.");
+  return courses;
+}
+export async function loadTeacherCourses(token,github,repo){
+  return normalizeTeacherCourses(await getJson(token,"shared/course-sites.json",github,repo));
+}
+
+export function teacherShell(route,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
   const titles={planung:"AVIVA-Unterrichtsplanung",materialien:"Materialkoffer",musterloesungen:"Musterlösungen"};
-  const title=titles[route.kind],grade=route.course.includes("/1-")?1:4;
-  const label="BOK · "+grade+". Klasse";
+  const esc=s=>String(s).replaceAll("&","&amp;").replaceAll("<","&lt;")
+    .replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
+  const active=courses.find(c=>c.slug===route.course&&c.ready);
+  if(!active)throw Error("Dieser Kurs ist noch nicht für Lehrpersonenmaterial freigeschaltet.");
+  const label=active.teacher+" · "+active.grade+". Klasse";
+  const title=titles[route.kind];
+  const opts=courses.map(c=>{
+    const name=c.teacher+" · "+c.grade+". Klasse · "+c.name+(c.ready?"":" (in Vorbereitung)");
+    return '<option value="'+esc(c.slug)+'"'+(c.slug===route.course?' selected':'')+
+      (c.ready?"":' disabled')+'>'+esc(name)+'</option>';
+  }).join("");
   const nav=Object.entries(titles).map(([id,name])=>'<a href="/teacher/'+route.course+'/'+id+'"'+
-    (id===route.kind?' aria-current="page"':'')+'>'+name+'</a>').join("");
+    (id===route.kind?' aria-current="page"':'')+'>'+esc(name)+'</a>').join("");
   return '<!doctype html><html lang="de-CH"><head><meta charset="utf-8">'+
     '<meta name="viewport" content="width=device-width,initial-scale=1">'+
     '<meta name="robots" content="noindex,nofollow,noarchive">'+
-    '<title>'+title+' · '+label+'</title><link rel="stylesheet" href="/teacher.css"></head>'+
-    '<body data-grade="'+grade+'"><header><div class="header-inner">'+
-    '<p class="eyebrow">Geschützter Lehrpersonenbereich · '+label+'</p>'+
-    '<h1>'+title+'</h1><nav class="area-nav" aria-label="Lehrpersonenmaterial">'+nav+'</nav></div></header>'+
+    '<title>'+esc(title)+' · '+esc(label)+'</title><link rel="stylesheet" href="/teacher.css"></head>'+
+    '<body data-grade="'+active.grade+'" style="--accent:'+active.accent+'"><header><div class="header-inner">'+
+    '<p class="eyebrow">Geschützter Lehrpersonenbereich · '+esc(label)+'</p>'+
+    '<div class="course-switcher"><div class="course-picker">'+
+    '<label for="teacherCourseSelect">Kurs auswählen</label>'+
+    '<select id="teacherCourseSelect" aria-label="Lehrperson und Klasse auswählen">'+opts+'</select>'+
+    '<p class="course-picker-note">IRN-Kurse sind angelegt. Ihre eigenen Lehrpersonenmaterialien sind noch in Vorbereitung.</p>'+
+    '</div><div class="course-context"><span>Aktueller Kurs</span><strong>'+esc(label)+'</strong>'+
+    '<small>'+esc(active.name)+'</small></div></div>'+
+    '<h1>'+esc(title)+'</h1><nav class="area-nav" aria-label="Lehrpersonenmaterial">'+nav+'</nav></div></header>'+
     '<div class="teacher-layout"><aside class="lesson-sidebar">'+
-    '<p class="sidebar-eyebrow">Unterrichtsübersicht</p><h2>Doppellektionen</h2>'+
+    '<p class="sidebar-eyebrow">Unterrichtsübersicht · '+esc(label)+'</p><h2>Doppellektionen</h2>'+
     '<nav id="lessonNav" class="lesson-nav" aria-label="Doppellektion auswählen"></nav></aside>'+
     '<main id="teacherContent" data-course="'+route.course+'" data-kind="'+route.kind+'" aria-live="polite">'+
     '<p>Lade Lehrpersonenmaterial …</p></main></div>'+
