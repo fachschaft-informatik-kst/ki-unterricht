@@ -38,7 +38,7 @@ def build() -> None:
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
     sections = [SOURCE.read_text(encoding="utf-8")]
     sections.extend(path.read_text(encoding="utf-8") for path in FIELD_SOURCES)
-    OUTPUT.write_text(render("\\n\\n---\\n\\n".join(sections)), encoding="utf-8")
+    OUTPUT.write_text(render("\n\n---\n\n".join(sections)), encoding="utf-8")
     print("Built unlinked teacher solution page")
 
 if __name__ == "__main__":
