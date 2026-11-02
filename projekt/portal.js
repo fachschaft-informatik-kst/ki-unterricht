@@ -337,6 +337,53 @@ async function pack(submission){
   download(blob,(submission?'KI-Abgabe':'KI-Projektstand')+'-'+new Date().toISOString().slice(0,10)+'.zip');$('download-status').textContent=submission?'Abgabepaket heruntergeladen. '+(absent.length?'Noch offen: '+absent.join(' · '):'Vor dem Einreichen das Journal kurz prüfen.'):'Notizen, gespeicherte Notebooks und hinzugefügte Dateien heruntergeladen.';
  }catch(error){$('download-status').textContent='Download nicht erstellt: '+error.message;}finally{button.disabled=false;transferring=false;}
 }
+
+// DL 8 has its own submission. Imported foreign pictures are intentionally not re-exported.
+async function packFremd(){
+ await initialization;
+ if(transferring||switching)return;
+ transferring=true;
+ const button=$('download-fremdmodell'),feedback=$('fremd-download-status');
+ button.disabled=true;feedback.textContent='Fremdauswertung wird vorbereitet …';
+ try{
+  await snapshotCurrent();await notebookUpdates;await saving;
+  const fields=all('#fremdmodell [data-answer]');
+  const answers=Object.fromEntries(fields.map(e=>[e.dataset.answer,state.answers[e.dataset.answer]||'']));
+  const required=['fremd_rueckmeldung',...[1,2].flatMap(n=>['fremd_name_'+n,...['repro','test','grenzen','transfer'].map(k=>'fremd_reflexion_'+n+'_'+k)])];
+  const absent=required.filter(k=>!answers[k]?.trim());
+  const report=(state.journal.reproduktion||'').trim();
+  if(!report)absent.unshift('Reproduktionsbericht');
+  if(!notebook)absent.push('Notebook mit Reproduktionslauf');
+  if(absent.length&&!confirm('Für die Fremdauswertung fehlen '+absent.length+' Angaben oder Nachweise. Trotzdem herunterladen?'))return;
+  const meta={schema:'ki-fremdauswertung-v1',exported:new Date().toISOString(),
+    reproduktionsbericht:report,antworten:answers,
+    hinweis:'Getrennt von der bereits eingereichten Projektarbeit. Keine Datendateien zusätzlich beigelegt.'};
+  const sections=fields.map(e=>{
+   const question=e.closest('label')?.querySelector('span')?.textContent?.trim()||
+     e.getAttribute('aria-label')||e.dataset.answer;
+   const value=answers[e.dataset.answer]||'Noch offen.';
+   const shown=e.tagName==='SELECT'?(Array.from(e.options).find(o=>o.value===value)?.textContent||value):value;
+   return '<section><h2>'+esc(question)+'</h2><p>'+esc(shown).replace(/\n/g,'<br>')+'</p></section>';
+  }).join('');
+  const html='<!doctype html><html lang="de-CH"><meta charset="utf-8"><title>Fremdauswertung DL 8</title>'+
+    '<style>body{font:16px/1.5 system-ui;max-width:900px;margin:40px auto;padding:0 20px;color:#182b31}h2{font-size:18px}section{margin:20px 0;border-bottom:1px solid #ddd;padding:0 0 16px}p{white-space:pre-wrap;overflow-wrap:anywhere}</style>'+
+    '<h1>Fremdauswertung · Doppellektion 8</h1><h2>Gemeinsamer Reproduktionsbericht (K11)</h2><p>'+esc(report||'Noch offen.')+
+    '</p><h2>Fremdtest und persönliche Reflexionen (K12)</h2>'+sections+'</html>';
+  const entries=[
+   {name:'Fremdauswertung.html',data:html},
+   {name:'Fremdauswertung.json',data:JSON.stringify(meta,null,2)},
+   {name:'LESEN.txt',data:'Benotete Fremdauswertung Doppellektion 8 (K11 gemeinsam; K12 individuell).\nFremdauswertung.html enthält Bericht, Fremdtest und persönliche Reflexionen.\nFremdauswertung.json enthält Formularwerte.\nDas optionale Notebook enthält ausgeführte Zellen.\nOriginalfotos und fremde Datendateien werden nicht zusätzlich beigefügt.\nDieses ZIP ist NICHT das eigene Projekt-ZIP. Es muss separat eingereicht werden.\n'}
+  ];
+  if(notebook)entries.push({name:'versuch_fremd.ipynb',data:JSON.stringify(checkNotebook(notebook),null,1)});
+  const zip=await makeZip(entries);
+  if(zip.size>550*1024*1024)throw Error('Die ZIP-Datei ist zu gross.');
+  download(zip,'KI-Fremdauswertung-'+new Date().toISOString().slice(0,10)+'.zip');
+  feedback.textContent='Separates Fremdauswertungs-ZIP heruntergeladen. '+(absent.length?'Noch offene Nachweise prüfen.':'Bitte über den Abgabekanal einreichen.');
+ }catch(error){feedback.textContent='Fremdauswertung konnte nicht exportiert werden: '+error.message;}
+ finally{button.disabled=false;transferring=false;}
+}
+$('download-fremdmodell')?.addEventListener('click',packFremd);
+
 $('download-submission').addEventListener('click',()=>pack(true));$('download-backup').addEventListener('click',()=>pack(false));
 $('restore-package').addEventListener('change',async e=>{
  await initialization;const file=e.target.files[0];if(!file)return;
