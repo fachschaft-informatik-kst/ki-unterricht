@@ -7,7 +7,7 @@ const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const COOKIE = "HttpOnly; Secure; SameSite=Lax; Path=/";
 const MAX_BODY = 5200000;
-const safeTeacherReturn=path=>parseTeacher(path)||
+const safeTeacherReturn=path=>parseTeacher(path.split("?")[0])||
   (/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(path)&&
     Object.prototype.hasOwnProperty.call(DOWNLOADS,path.split("/").pop()));
 const response = (data, status=200, headers={}) => new Response(JSON.stringify(data), {status,headers:{"Content-Type":"application/json","Cache-Control":"no-store",...headers}});
@@ -313,7 +313,7 @@ export default {
         const download=/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(url.pathname);
         if(!route&&!download)return fail(404,"Lehrpersonenmaterial nicht gefunden.");
         if(!active)return new Response(null,{status:302,headers:{
-          Location:"/auth/start?next="+encodeURIComponent(url.pathname),
+          Location:"/auth/start?next="+encodeURIComponent(url.pathname+url.search),
           "Cache-Control":"no-store"}});
         if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
         if(download){
@@ -341,7 +341,7 @@ export default {
           if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
           const route=parseTeacher("/teacher/"+url.searchParams.get("course")+"/"+url.searchParams.get("kind"));
           if(!route)return fail(404,"Unbekanntes Lehrpersonenmaterial.");
-          return response(await teacherData(route,active.token,github,REPO));
+          return response(await teacherData(route,active.token,github,REPO,Number(url.searchParams.get("dl")||1)));
         }
         if(req.method==="GET"&&url.pathname==="/api/permissions"){
           const humanCanWrite=await canWrite(active.token);

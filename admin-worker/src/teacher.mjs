@@ -17,40 +17,188 @@ export async function readTeacherFile(token,path,github,repo){
 }
 const getText=async(t,p,g,r)=>new TextDecoder().decode(await readTeacherFile(t,p,g,r));
 const getJson=async(t,p,g,r)=>JSON.parse(await getText(t,p,g,r));
-export async function teacherData({course,kind},token,github,repo){
-  const profile=PROFILES[course];if(!profile)throw Error("Kurs unbekannt.");
-  if(kind==="musterloesungen"){
-    const docs=await Promise.all(["lehrperson/musterloesungen.md",
-      "lehrperson/musterloesungen-felder-"+profile.grade+"-klasse.md"]
-      .map(p=>getText(token,p,github,repo)));
-    return {kind,course,sections:[{title:"Allgemeine Musterlösungen",markdown:docs[0]},
-      {title:"Musterlösungen · "+profile.grade+". Klasse",markdown:docs[1]}]};
-  }
-  const manifest=await getJson(token,profile.manifest,github,repo);
-  const sections=(manifest.sections||[]).filter(s=>s.teaching&&/^[a-z][a-z0-9-]*$/.test(s.id));
-  if(sections.length>20)throw Error("Zu viele Unterrichtsbereiche.");
-  if(kind==="planung"){
-    const plans=await Promise.all(sections.map(s=>getJson(token,"kursseiten/"+s.id+"/planung.json",github,repo)));
-    return {kind,course,lessons:plans.flatMap(p=>p.lessons||[]).sort((a,b)=>a.number-b.number)};
-  }
-  const docs=await Promise.all(sections.map(s=>getText(token,"kursseiten/"+s.id+"/materialien.md",github,repo)));
-  const result=sections.map((s,i)=>({title:s.navigation?.title||s.id,markdown:docs[i]}));
-  if(profile.grade===4)result.unshift({title:"Materialkoffer und Projektmaterial",
-    markdown:await getText(token,"lehrperson/materialien.md",github,repo)});
-  return {kind,course,sections:result};
+
+// Match scripts/course_model.py: raw plan JSON only has order; DL numbers are derived.
+const sortLessons=(a,b)=>Number(a.order??a.number*10)-Number(b.order??b.number*10);
+const headings=source=>{
+  const matches=[...source.matchAll(/^## (.+)$/gm)];
+  return matches.map((m,i)=>({title:m[1],text:source.slice(m.index+m[0].length,matches[i+1]?.index??source.length).trim()}));
+};
+const numbers=title=>{
+  const m=/^(?:DL\s+|Doppellektion\s+)?(\d{1,2})(?:\s*[–-]\s*(\d{1,2}))?\b/.exec(title);
+  if(!m)return [];
+  const a=Number(m[1]),b=Number(m[2]||m[1]);
+  return b>=a&&b<=20?Array.from({length:b-a+1},(_,i)=>a+i):[];
+};
+const JOURNAL={
+  projekt_datencheck:5,names:5,class:5,purpose:5,hypothesis:5,groups:5,
+  sources:5,data_limits:5,comparison:6,selection:6,test:7,
+  examples:7,limits:7,conclusion:7,contribution:7,reproduktion:8
+};
+const PROMPTS={
+  projekt_datencheck:"Wie teilt ihr Trainings-, Validierungs- und Testdaten ohne Datenleck auf?",
+  names:"Wie heissen die Tandemmitglieder?",class:"Welche zwei Bildklassen werden untersucht?",
+  purpose:"Wozu ist euer Bilderkennungsmodell gedacht?",
+  hypothesis:"Was ist eure Vermutung, und wie plant ihr die Projektarbeit?",
+  groups:"Wie teilt ihr eure Bilder in fünf unabhängige Gruppen auf?",
+  sources:"Woher stammen eure Bilder, und wie habt ihr sie aufgenommen?",
+  data_limits:"Welche Grenzen und möglichen Datenfehler erkennt ihr?",
+  comparison:"Wie schneiden Modell A und B auf denselben Validierungsbildern ab?",
+  selection:"Welches Modell wählt ihr vor dem Test und warum?",
+  test:"Was zeigt der unabhängige Test nach der Modellwahl?",
+  examples:"Welche richtigen und falschen Testvorhersagen könnt ihr belegen?",
+  limits:"Welche Grenzen hat euer Bildmodell?",
+  conclusion:"Was ist das Fazit eures Versuchs?",
+  contribution:"Welchen Beitrag haben die Tandemmitglieder geleistet?",
+  reproduktion:"Lässt sich das fremde Modell anhand seiner Originaldaten nachvollziehen?",
+  "basis-daten-a":"Was gibt das bisherige Ziffernnetz aus, wenn es neue Buchstabenbilder sieht?",
+  "basis-daten-b":"Warum erkennt das alte Ziffernnetz die Buchstaben A und B nicht zuverlässig?",
+  "basis-plan-a":"Welche Schicht wird beim Transfer Learning übernommen und welche neu trainiert?",
+  "basis-plan-b":"Wie schneidet der neue A/B-Kopf im Vergleich zum unveränderten Netz ab?",
+  "basis-training-a":"Welche Bildklassen und unabhängigen Trainings- und Validierungsgruppen verwendet ihr?",
+  "basis-training-b":"Wie vergleicht ihr die beiden Modellvarianten fair auf denselben Validierungsbildern?",
+  "basis-training-test":"Welches Modell wurde vor dem Test gewählt und wie schnitt es auf den unabhängigen Testdaten ab?",
+  "basis-abschluss-a":"Welche Fragestellung, Daten und Ergebnisse könnt ihr im Fachgespräch belegen?",
+  "basis-abschluss-b":"Was habt ihr gelernt, und welche Grenzen hat euer Versuch?",
+  fremd_erwartung:"Was erwartet ihr, bevor ihr eure eigenen Bildklassen mit dem fremden Modell prüft?",
+  fremd_c_1:"Wie oft ordnet das fremde Modell eure erste eigene Klasse seiner ursprünglichen Klasse 1 zu?",
+  fremd_c_2:"Wie oft ordnet das fremde Modell eure erste eigene Klasse seiner ursprünglichen Klasse 2 zu?",
+  fremd_d_1:"Wie oft ordnet das fremde Modell eure zweite eigene Klasse seiner ursprünglichen Klasse 1 zu?",
+  fremd_d_2:"Wie oft ordnet das fremde Modell eure zweite eigene Klasse seiner ursprünglichen Klasse 2 zu?",
+  fremd_trenn:"Wie gross ist die Trennschärfe bei der günstigsten Zuordnung, und was bedeutet sie?",
+  fremd_wert:"Wie gross ist der durchschnittliche Modellwert bei eurem Fremdversuch?",
+  fremd_zuordnung:"Welchen ursprünglichen Ausgabeklassen ordnet das fremde Modell eure zwei neuen Klassen zu?",
+  fremd_trennt:"Welche Merkmale könnte das Modell bei euren unbekannten Bildklassen unterscheiden?",
+  fremd_warum:"Welchen konkreten Fehlfall habt ihr beobachtet, und wie könntet ihr die Ursache prüfen?",
+  fremd_grenze:"Warum sind Ergebnisse mit euren neuen Klassen keine Trefferquote für diese Klassen?",
+  fremd_rueckmeldung:"Welche begründete Rückmeldung gebt ihr dem fremden Tandem zu Daten und Ergebnissen?",
+  fremd_name_1:"Wie heisst die erste Person, die die individuelle Reflexion ausfüllt?",
+  fremd_reflexion_1_test:"Wie deutet Person 1 Originaltest und Fremdversuch im Vergleich?",
+  fremd_reflexion_1_grenzen:"Welche Modellgrenzen und möglichen Ursachen nennt Person 1?",
+  fremd_reflexion_1_repro:"Welche Beobachtungen aus dem Nachvollziehen des fremden Modells macht Person 1?",
+  fremd_reflexion_1_transfer:"Welchen sinnvollen zusätzlichen Kontrollversuch schlägt Person 1 vor?",
+  fremd_name_2:"Wie heisst die zweite Person, die die individuelle Reflexion ausfüllt?",
+  fremd_reflexion_2_test:"Wie deutet Person 2 Originaltest und Fremdversuch im Vergleich?",
+  fremd_reflexion_2_grenzen:"Welche Modellgrenzen und möglichen Ursachen nennt Person 2?",
+  fremd_reflexion_2_repro:"Welche Beobachtungen aus dem Nachvollziehen des fremden Modells macht Person 2?",
+  fremd_reflexion_2_transfer:"Welchen sinnvollen zusätzlichen Kontrollversuch schlägt Person 2 vor?"
+};
+const dlFor=(key,fallback)=>{
+  if(Object.prototype.hasOwnProperty.call(JOURNAL,key))return JOURNAL[key];
+  if(key.startsWith("fremd_")||key.startsWith("fremd-"))return 8;
+  const m=/^basis-(daten|plan|training|abschluss)(?:-|_)/.exec(key);
+  return m?{daten:5,plan:6,training:7,abschluss:8}[m[1]]:fallback;
+};
+export function answerRows(markdown,number){
+  return headings(markdown).flatMap(part=>{
+    const ns=numbers(part.title);if(!ns.includes(number))return [];
+    return part.text.split("\n").map(line=>{
+      const m=/^\|\s*\x60([^\x60]+)\x60\s*\|\s*(.*?)\s*\|\s*$/.exec(line);
+      return m?{field:m[1],answer:m[2]}:null;
+    }).filter(entry=>entry&&dlFor(entry.field,ns[0])===number);
+  });
 }
+export function materialForLesson(markdown,number){
+  const blocks=headings(markdown).filter(x=>/^Doppellektion\s+\d+/i.test(x.title));
+  return blocks.length?blocks.filter(x=>numbers(x.title).includes(number))
+    .map(x=>"### "+x.title+"\n\n"+x.text).join("\n\n"):markdown;
+}
+const clean=source=>source.replace(/<[^>]*>/g," ").replace(/&amp;/g,"&")
+  .replace(/&quot;/g,'"').replace(/&nbsp;/g," ").replace(/\s+/g," ").trim();
+export function questionsFromSource(source){
+  const out={};
+  for(const m of source.matchAll(/\bdata-answer=["']([^"']+)["']/g)){
+    const start=source.lastIndexOf("<",m.index);
+    const end=source.indexOf(">",m.index);
+    const fieldTag=source.slice(start,end+1);
+    const before=source.slice(Math.max(0,m.index-1200),m.index);
+    // aria-label must belong to this field, not to the next answer input.
+    const aria=/\baria-label=["']([^"']+)["']/.exec(fieldTag);
+    const labelIndex=before.lastIndexOf("<label"),endIndex=before.lastIndexOf("</label");
+    let question=aria?clean(aria[1]):"";
+    if(!question&&labelIndex>endIndex){
+      const spans=[...before.slice(labelIndex).matchAll(/<span\b[^>]*>([\s\S]*?)<\/span>/g)];
+      if(spans.length)question=clean(spans.at(-1)[1]);
+    }
+    if(!question){
+      const p=[...before.matchAll(/<(?:p|h[234])\b[^>]*>([\s\S]*?)<\/(?:p|h[234])>/g)].at(-1);
+      if(p)question=clean(p[1]);
+    }
+    if(question.length>=5)out[m[1]]=question.slice(0,600);
+  }
+  return out;
+}
+async function getQuestions(lesson,course,token,github,repo){
+  const views=new Set([lesson.view]);
+  if(lesson.number>=5&&lesson.number<=8){
+    (course==="bok/4-klasse"?["projekt","journal","fremdmodell","sicherung"]:
+      ["basis-daten","basis-plan","basis-training","basis-abschluss"]).forEach(x=>views.add(x));
+  }
+  const tree=await github(token,"/repos/"+repo+"/git/trees/main?recursive=1");
+  if(tree.truncated)throw Error("Unvollständiger Quellindex");
+  const files=(tree.tree||[]).filter(item=>item.type==="blob"&&
+    /^kursseiten\/[a-z0-9-]+\/\d{3}-[a-z0-9-]+\.md$/.test(item.path)&&
+    views.has(item.path.split("/")[1])).map(item=>item.path);
+  const data=await Promise.all(files.map(path=>getText(token,path,github,repo)));
+  return Object.assign({},...data.map(questionsFromSource));
+}
+export async function teacherData({course,kind},token,github,repo,selected=1){
+  const profile=PROFILES[course];if(!profile)throw Error("Kurs unbekannt.");
+  const manifest=await getJson(token,profile.manifest,github,repo);
+  const views=(manifest.sections||[]).filter(s=>s.teaching&&/^[a-z][a-z0-9-]*$/.test(s.id));
+  if(views.length>20)throw Error("Zu viele Unterrichtsbereiche.");
+  const plans=await Promise.all(views.map(s=>getJson(token,"kursseiten/"+s.id+"/planung.json",github,repo)));
+  const lessons=plans.flatMap(p=>p.lessons||[]).sort(sortLessons)
+    .map((lesson,index)=>({...lesson,number:index+1}));
+  const current=lessons.find(l=>l.number===Number(selected))||lessons[0];
+  if(!current)throw Error("Kein Unterrichtsplan vorhanden.");
+  const base={kind,course,lessons:lessons.map(l=>({id:l.id,number:l.number,title:l.title,view:l.view})),
+    selectedNumber:current.number,selectedTitle:current.title};
+  if(kind==="planung")return {...base,lesson:current};
+  if(kind==="materialien"){
+    const content=await getText(token,"kursseiten/"+current.view+"/materialien.md",github,repo);
+    const markdown=materialForLesson(content,current.number);
+    const intro=profile.grade===4?await getText(token,"lehrperson/materialien.md",github,repo):"";
+    return {...base,intro,sections:[{title:"Doppellektion "+current.number+" · "+current.title,
+      markdown:markdown||content}]};
+  }
+  const [general,fields]=await Promise.all([
+    getText(token,"lehrperson/musterloesungen.md",github,repo),
+    getText(token,"lehrperson/musterloesungen-felder-"+profile.grade+"-klasse.md",github,repo)]);
+  const notes=headings(general).filter(block=>numbers(block.title).includes(current.number))
+    .map(block=>({title:block.title,markdown:block.text}));
+  const entries=answerRows(fields,current.number);
+  let questions={};try{questions=await getQuestions(current,course,token,github,repo);}catch{ /* use explicit fallback */ }
+  for(const entry of entries){
+    entry.question=questions[entry.field]||PROMPTS[entry.field]||
+      "Originalfrage im Kurs nachschlagen: "+entry.field.replace(/[-_]/g," ");
+    entry.questionFound=Boolean(questions[entry.field]||PROMPTS[entry.field]);
+    entry.courseLink="https://fachschaft-informatik-kst.github.io/ki-unterricht/"+
+      course+"/#"+current.view;
+  }
+  return {...base,notes,entries,
+    sections:[{title:"Allgemeine Musterlösungen",markdown:general},
+      {title:"Feldgenaue Lösungen",markdown:fields}]};
+}
+
 export function teacherShell(route){
   const titles={planung:"AVIVA-Unterrichtsplanung",materialien:"Materialkoffer",musterloesungen:"Musterlösungen"};
-  const title=titles[route.kind],label="BOK · "+(route.course.includes("/1-")?"1.":"4.")+" Klasse";
+  const title=titles[route.kind],grade=route.course.includes("/1-")?1:4;
+  const label="BOK · "+grade+". Klasse";
   const nav=Object.entries(titles).map(([id,name])=>'<a href="/teacher/'+route.course+'/'+id+'"'+
     (id===route.kind?' aria-current="page"':'')+'>'+name+'</a>').join("");
   return '<!doctype html><html lang="de-CH"><head><meta charset="utf-8">'+
     '<meta name="viewport" content="width=device-width,initial-scale=1">'+
     '<meta name="robots" content="noindex,nofollow,noarchive">'+
     '<title>'+title+' · '+label+'</title><link rel="stylesheet" href="/teacher.css"></head>'+
-    '<body><header><p class="eyebrow">Geschützter Lehrpersonenbereich · '+label+'</p>'+
-    '<h1>'+title+'</h1><nav aria-label="Lehrpersonenmaterial">'+nav+'</nav></header>'+
-    '<main id="teacherContent" data-course="'+route.course+'" data-kind="'+route.kind+'"><p>Lade Inhalte …</p></main>'+
+    '<body data-grade="'+grade+'"><header><div class="header-inner">'+
+    '<p class="eyebrow">Geschützter Lehrpersonenbereich · '+label+'</p>'+
+    '<h1>'+title+'</h1><nav class="area-nav" aria-label="Lehrpersonenmaterial">'+nav+'</nav></div></header>'+
+    '<div class="teacher-layout"><aside class="lesson-sidebar">'+
+    '<p class="sidebar-eyebrow">Unterrichtsübersicht</p><h2>Doppellektionen</h2>'+
+    '<nav id="lessonNav" class="lesson-nav" aria-label="Doppellektion auswählen"></nav></aside>'+
+    '<main id="teacherContent" data-course="'+route.course+'" data-kind="'+route.kind+'" aria-live="polite">'+
+    '<p>Lade Lehrpersonenmaterial …</p></main></div>'+
     '<footer><a href="https://fachschaft-informatik-kst.github.io/ki-unterricht/'+route.course+'/">Zur Kursseite</a> · '+
     '<a href="/">Lehrpersonen-Editor</a> · <button type="button" id="printPage">Drucken</button></footer>'+
     '<script src="/markdown-it.min.js" defer></script><script src="/teacher.js" defer></script></body></html>';

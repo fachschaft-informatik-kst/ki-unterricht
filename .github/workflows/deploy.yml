@@ -63,7 +63,7 @@ jobs:
                 worker=true
                 runtime=true
                 ;;
-              projekt/admin/*|tests/check_admin.mjs|tests/check_admin_form.cjs)
+              projekt/admin/*|tests/check_admin.mjs|tests/check_admin_form.cjs|tests/check_teacher_view.mjs|tests/check_teacher_browser.cjs)
                 # Editor UI changes still build Pages and run editor browser tests,
                 # but do not need the Pyodide/notebook integration suite.
                 site=true
@@ -88,6 +88,7 @@ jobs:
           node --check admin-worker/src/index.mjs
           node --check admin-worker/src/teacher.mjs
           node tests/check_admin.mjs
+          node tests/check_teacher_view.mjs
       - name: Setup Python
         if: steps.scope.outputs.site_changed == 'true'
         uses: actions/setup-python@v5
@@ -184,6 +185,7 @@ jobs:
         if: steps.scope.outputs.site_changed == 'true'
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_admin_form.cjs
+          NODE_PATH=/tmp/ki-browser/node_modules node tests/check_teacher_browser.cjs
       - name: Check simplified teaching project
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
