@@ -257,6 +257,18 @@ dl8 = soup.select_one('#fremdmodell')
 assert len(dl8.select('details.kapitel')) == 5
 assert [d['id'] for d in dl8.select('details.kapitel')] == ['dl8-warum','dl8-vorbereiten','reproduktion','fremdtest','dl8-abschluss']
 assert dl8.select_one('#dl8-warum[open]') and not dl8.select_one('#reproduktion[open]')
+# All five DL8 chapters use one accessible question design and clear, responsive task cards.
+assert len(dl8.select('.dl8-question')) == 5, 'Each DL8 chapter needs one visual question panel'
+for chapter_id, count in {'dl8-vorbereiten': 5, 'reproduktion': 4, 'fremdtest': 4, 'dl8-abschluss': 3}.items():
+    cards = dl8.select(f'#{chapter_id} ol.dl8-steps > li')
+    assert len(cards) == count, f'Numbered DL8 work cards missing: {chapter_id}'
+    assert all(card.select_one('h4') and card.select_one('.dl8-step-num') for card in cards), chapter_id
+assert len(dl8.select('#fremdtest .dl8-explainer .dl8-compare-card')) == 2
+assert len(dl8.select('#dl8-abschluss .dl8-person-card')) == 2
+assert dl8.select_one('#dl8-ablauf') and dl8.select_one('#dl8-warum .dl8-note')
+dl8_css = (root / 'projekt/portal.css').read_text()
+assert all(selector in dl8_css for selector in ('.dl8-question', '.dl8-steps', '.dl8-compare', '.dl8-review', '@media(max-width:760px)'))
+
 for chapter_id in ('dl8-warum','dl8-vorbereiten','reproduktion','fremdtest','fremd-reflexion'):
     assert dl8.select_one(f'a[href="#{chapter_id}"]'), chapter_id
 assert dl8.select_one('#dl8-vorbereiten a[href="#sicherung"]')
