@@ -7,6 +7,9 @@ const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const COOKIE = "HttpOnly; Secure; SameSite=Lax; Path=/";
 const MAX_BODY = 5200000;
+const safeTeacherReturn=path=>parseTeacher(path)||
+  (/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(path)&&
+    Object.prototype.hasOwnProperty.call(DOWNLOADS,path.split("/").pop()));
 const response = (data, status=200, headers={}) => new Response(JSON.stringify(data), {status,headers:{"Content-Type":"application/json","Cache-Control":"no-store",...headers}});
 const fail = (status,error) => response({error},status);
 const b64url = bytes => btoa(String.fromCharCode(...bytes)).replaceAll("+","-").replaceAll("/","_").replace(/=+$/,"");
@@ -252,7 +255,7 @@ async function auth(req,env,url){
     const props={client_id:env.GITHUB_CLIENT_ID,redirect_uri:callback,state,code_challenge:challenge,code_challenge_method:"S256"};
     for(const [k,v] of Object.entries(props))target.searchParams.set(k,v);
     const requested=url.searchParams.get("next")||"/";
-    const returnTo=parseTeacher(requested)?requested:"/";
+    const returnTo=safeTeacherReturn(requested)?requested:"/";
     const pending=await encrypt(env,{state,verifier,returnTo,exp:Date.now()+600000});
     return new Response(null,{status:302,headers:{
       Location:target.toString(),"Set-Cookie":cookie("ki_oauth",pending,600),"Cache-Control":"no-store"
@@ -269,7 +272,7 @@ async function auth(req,env,url){
   if(!(await canWrite(token.access_token)))return fail(403,"Keine Schreibberechtigung für das Repository.");
   const ms=Math.min(3600000,Math.max(60000,Number(token.expires_in||3600)*1000-60000));
   const value=await encrypt(env,{token:token.access_token,login:user.login,exp:Date.now()+ms});
-  const headers=new Headers({Location:parseTeacher(pending.returnTo)?pending.returnTo:"/","Cache-Control":"no-store"});
+  const headers=new Headers({Location:safeTeacherReturn(pending.returnTo)?pending.returnTo:"/","Cache-Control":"no-store"});
   headers.append("Set-Cookie",cookie("ki_oauth","",0));
   headers.append("Set-Cookie",cookie("ki_session",value,Math.floor(ms/1000)));
   return new Response(null,{status:303,headers});
@@ -310,7 +313,7 @@ export default {
         const download=/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(url.pathname);
         if(!route&&!download)return fail(404,"Lehrpersonenmaterial nicht gefunden.");
         if(!active)return new Response(null,{status:302,headers:{
-          Location:"/auth/start?next="+encodeURIComponent(route?url.pathname:"/"),
+          Location:"/auth/start?next="+encodeURIComponent(url.pathname),
           "Cache-Control":"no-store"}});
         if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
         if(download){

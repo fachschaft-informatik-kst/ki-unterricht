@@ -65,7 +65,7 @@ try{
     return new Response("export const ok = true;",{status:200,headers:{"Content-Type":"text/javascript"}});
   };
   for(const [path,mime] of [["/admin.js","text/javascript"],["/markdown-it.min.js","text/javascript"],["/plan-editor.js","text/javascript"],
-      ["/course-model.js","text/javascript"],["/glossary-model.js","text/javascript"],["/course-rules.json","application/json"]]){
+      ["/course-model.js","text/javascript"],["/glossary-model.js","text/javascript"],["/course-rules.json","application/json"],["/teacher.js","text/javascript"],["/teacher.css","text/css"]]){
     const result=await route(path);
     assert.equal(result.status,200,"Worker route missing: "+path);
     assert.match(result.headers.get("Content-Type"),new RegExp(mime));
@@ -226,6 +226,27 @@ try{
   assert.equal(writes.length,0);
 
 }finally{globalThis.fetch=priorFetch;}
+
+// Direct source URLs and downloads must not be reachable without OAuth.
+// The Worker must not use public GitHub Pages as the teacher content backend.
+const fakeSources={
+  "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true,navigation:{title:"Testbereich"}}]}),
+  "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[{number:1,id:"basis-test",title:"Beispiel",phases:[]}]}),
+  "kursseiten/basis-test/materialien.md":"## Beispielmaterial",
+  "lehrperson/musterloesungen.md":"# Allgemein",
+  "lehrperson/musterloesungen-felder-1-klasse.md":"# Musterantworten"
+};
+const fakeGithub=async(_token,path)=>{
+  const name=path.split("/contents/")[1].split("?")[0];
+  if(!(name in fakeSources))throw Error("Unexpected private source path "+name);
+  return {encoding:"base64",content:Buffer.from(fakeSources[name]).toString("base64")};
+};
+const teacherPlan=await teacherData({course:"bok/1-klasse",kind:"planung"},"token",fakeGithub,"example/repo");
+assert.equal(teacherPlan.lessons[0].title,"Beispiel");
+const teacherKit=await teacherData({course:"bok/1-klasse",kind:"materialien"},"token",fakeGithub,"example/repo");
+assert.match(teacherKit.sections[0].markdown,/Beispielmaterial/);
+const teacherSolutions=await teacherData({course:"bok/1-klasse",kind:"musterloesungen"},"token",fakeGithub,"example/repo");
+assert.equal(teacherSolutions.sections.length,2);
 // OAuth flow is intentionally not fully simulated: no GitHub credentials in CI.
 console.log("PASS admin: protected endpoints, OAuth PKCE, app permissions, atomic course PR, stable IDs and conflict protection");
 
