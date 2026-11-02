@@ -1,0 +1,784 @@
+{
+  "lessons": [
+    {
+      "id": "01",
+      "view": "irn-1-kurs",
+      "title": "Einstieg und Lernfrage · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 10
+    },
+    {
+      "id": "02",
+      "view": "irn-1-kurs",
+      "title": "Grundlagen erarbeiten · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 20
+    },
+    {
+      "id": "03",
+      "view": "irn-1-kurs",
+      "title": "Begriffe und Beispiele · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 30
+    },
+    {
+      "id": "04",
+      "view": "irn-1-kurs",
+      "title": "Erste Anwendungen · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 40
+    },
+    {
+      "id": "05",
+      "view": "irn-1-kurs",
+      "title": "Eigene Fragestellung · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 50
+    },
+    {
+      "id": "06",
+      "view": "irn-1-kurs",
+      "title": "Daten und Methoden · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 60
+    },
+    {
+      "id": "07",
+      "view": "irn-1-kurs",
+      "title": "Untersuchen und Auswerten · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 70
+    },
+    {
+      "id": "08",
+      "view": "irn-1-kurs",
+      "title": "Ergebnisse überprüfen · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 80
+    },
+    {
+      "id": "09",
+      "view": "irn-1-kurs",
+      "title": "Transfer und Reflexion · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 90
+    },
+    {
+      "id": "10",
+      "view": "irn-1-kurs",
+      "title": "Abschluss und Ausblick · Thema ergänzen",
+      "goal": "Lernziel dieser Doppellektion festlegen (Entwurf).",
+      "question": "Leitfrage für die Lerngruppe formulieren (Entwurf).",
+      "motivation": "Begründung für diese Unterrichtseinheit ergänzen.",
+      "product": "Konkretes Lernprodukt und Erfolgskriterien ergänzen.",
+      "zeit": "Entwurf · vor dem Unterricht inhaltlich und zeitlich überprüfen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Ankommen · Planung ergänzen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen aktivieren · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Informieren · Planung ergänzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 15,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Verarbeiten · Planung ergänzen",
+          "minutes": 50,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Auswerten · Planung ergänzen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Didaktischen Ablauf für diese Phase konkret beschreiben (Entwurf)."
+            }
+          ]
+        }
+      ],
+      "order": 100
+    }
+  ]
+}
