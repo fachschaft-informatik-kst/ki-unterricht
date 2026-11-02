@@ -170,7 +170,7 @@ In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo
               <tr>
                 <td>8. Doppellektion</td>
                 <td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>
-                <td>Reproduktionscheck und Fremdtest mit individueller Reflexion (6 Punkte); getrennte Abgabe, eigenes Projekt bleibt unverändert</td>
+                <td>Daten und Ergebnisse prüfen, Fremdmodell ausprobieren, persönliche Reflexion (3 Punkte); getrennte Abgabe, eigenes Projekt bleibt unverändert</td>
               </tr>
             </tbody>
           </table>
