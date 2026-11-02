@@ -97,7 +97,7 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
         <a href="#abgabe">Zur Abgabecheckliste →</a>
       </div>
     </details>
-    <h3 class="project-lessons-heading">Doppellektionen 5–8 · Ziele und Leitfragen</h3>
+    <h3 class="project-lessons-heading">Doppellektionen 5–7 · Ziele und Leitfragen</h3>
     <p class="small muted">Die folgenden Doppellektionsziele helfen bei der Orientierung. In Doppellektion 5 lernen Sie die Datenaufteilung selbstständig; danach arbeiten die Tandems an unterschiedlichen Etappen. Öffnen Sie die Details bei Bedarf.</p>
     <!-- LESSONS:projekt -->
     <details class="lesson-plan" id="doppellektion-05" data-lesson="05">
@@ -127,15 +127,6 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
         <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Zum selbst organisierten Arbeiten gehört, einen klaren Schluss zu ziehen und ungesicherte Behauptungen sichtbar zu machen.</p>
       </div>
     </details>
-    <details class="lesson-plan" id="doppellektion-08" data-lesson="08">
-      <summary><span class="phase-num">08</span><span>Doppellektion 8 · Das eigene Projekt erklären und ein fremdes Modell prüfen</span><small>90 Min.</small></summary>
-      <div class="detail-body">
-        <p class="lesson-recap"><strong>Rückblick:</strong> Ihr eigener Abgabestand ist eingefroren. Während der Einzelgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.</p>
-        <p><strong>Heute können Sie:</strong> Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.</p>
-        <p class="lesson-question">Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?</p>
-        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.</p>
-      </div>
-    </details>
     <!-- /LESSONS:projekt -->
     <div class="callout" id="sol-rahmen">
       <!-- MD:START -->
@@ -147,7 +138,7 @@ In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo
       <p><strong>Verbindlich:</strong> Fünf unabhängige Datengruppen, fairer A/B-Vergleich, fünf Reflexionen und eine begründete Modellwahl <strong>vor</strong> dem Abschlusstest. Danach keine Optimierung. <strong>Abgabe vor Beginn der Doppellektion 8.</strong></p>
       <p>Halten Sie in Reflexion 1 Ihren Plan und in Reflexion 5 die Anpassungen fest. Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> sind Orientierung, keine zusätzliche Pflicht.</p>
     </div>
-    <p class="small">8. Doppellektion, während der Einzelgespräche: <a href="#sicherung">Reproduktionscheck (Teil der unbenoteten Fremdauswertung) →</a> und <a href="#fremdtest">Fremdtest und Rückmeldung →</a></p>
+    <p class="small">Nach der Abgabe: <a href="#fremdmodell">Zur eigenständigen Doppellektion 8 · Fremdmodell prüfen →</a></p>
     <details>
       <summary>Termine ansehen</summary>
       <div class="detail-body">
@@ -179,7 +170,7 @@ In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo
               <tr>
                 <td>8. Doppellektion</td>
                 <td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>
-                <td>Ein Reproduktionslauf, Fremdtest und kurze Rückmeldung; unbenotet, eigene Abgabe unverändert</td>
+                <td>Reproduktionscheck und Fremdtest mit individueller Reflexion (6 Punkte); getrennte Abgabe, eigenes Projekt bleibt unverändert</td>
               </tr>
             </tbody>
           </table>
