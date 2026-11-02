@@ -4,60 +4,9 @@
   </summary>
   <div class="kapitel-body detail-body" id="ablauf">
     <!-- MD:START -->
-## Schritt für Schritt zum eigenen Urteil.
+## Sechs Etappen – Sie bestimmen das Tempo.
 <!-- MD:END -->
-    <p class="section-intro">Sechs Arbeitsschritte, fünf Reflexionen. Schreiben Sie die Reflexionen im Journal der Kursseite.</p>
-    <!-- LESSONS:projekt -->
-    <details class="lesson-plan" id="doppellektion-05" data-lesson="05" open>
-      <summary><span class="phase-num">05</span><span>Doppellektion 5 · Ihr Projekt starten und die Arbeit planen</span><small>90 Min.</small></summary>
-      <div class="detail-body">
-        <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-04">Doppellektion 4</a> haben Sie XOR mit mehreren Neuronen gelöst. Jetzt erarbeiten Sie die Regeln zur Datenaufteilung selbstständig und planen Ihre Untersuchung.</p>
-        <p><strong>Heute können Sie:</strong> Training, Validierung und Test selbstständig unterscheiden, Datenlecks erkennen und einen überprüfbaren Datenplan mit fünf Gruppen erstellen.</p>
-        <p class="lesson-question">Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?</p>
-        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.</p>
-      </div>
-    </details>
-    <details class="lesson-plan" id="doppellektion-06" data-lesson="06" open>
-      <summary><span class="phase-num">06</span><span>Doppellektion 6 · Untersuchen und Entscheidungen begründen</span><small>90 Min.</small></summary>
-      <div class="detail-body">
-        <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-05">Doppellektion 5</a> haben Sie Ihren Lernweg geplant. Heute setzen Sie an Ihrem eigenen Arbeitsstand an, nicht an einem neuen gemeinsamen Rezept.</p>
-        <p><strong>Heute können Sie:</strong> Den eigenen Arbeitsplan steuern und einen fairen Vergleich mit Belegen und alternativen Erklärungen auswerten.</p>
-        <p class="lesson-question">Was zeigen unsere Daten, und welche andere Erklärung ist möglich?</p>
-        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Ein gutes Ergebnis ist nicht eine hohe Trefferquote, sondern ein nachvollziehbarer Vergleich und eine ehrliche Interpretation.</p>
-      </div>
-    </details>
-    <details class="lesson-plan" id="doppellektion-07" data-lesson="07" open>
-      <summary><span class="phase-num">07</span><span>Doppellektion 7 · Das Projekt abschliessen und die Arbeit überprüfen</span><small>90 Min.</small></summary>
-      <div class="detail-body">
-        <p class="lesson-recap"><strong>Rückblick:</strong> Sie haben in Ihrem eigenen Tempo Daten geprüft und Varianten verglichen. Heute organisieren Sie den Abschluss und prüfen Ihre Belege.</p>
-        <p><strong>Heute können Sie:</strong> Die Untersuchung selbstständig abschliessen, Grenzen belegen und den eigenen Arbeitsprozess reflektieren.</p>
-        <p class="lesson-question">Was können wir mit unseren Ergebnissen begründet behaupten?</p>
-        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Zum selbst organisierten Arbeiten gehört, einen klaren Schluss zu ziehen und ungesicherte Behauptungen sichtbar zu machen.</p>
-      </div>
-    </details>
-    <details class="lesson-plan" id="doppellektion-08" data-lesson="08" open>
-      <summary><span class="phase-num">08</span><span>Doppellektion 8 · Das eigene Projekt erklären und ein fremdes Modell prüfen</span><small>90 Min.</small></summary>
-      <div class="detail-body">
-        <p class="lesson-recap"><strong>Rückblick:</strong> Ihr eigener Abgabestand ist eingefroren. Während der Einzelgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.</p>
-        <p><strong>Heute können Sie:</strong> Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.</p>
-        <p class="lesson-question">Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?</p>
-        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.</p>
-      </div>
-    </details>
-    <!-- /LESSONS:projekt -->
-    <div class="callout" id="sol-rahmen">
-      <!-- MD:START -->
-### Ihr Projekt: Arbeit planen, durchführen und überprüfen
-<!-- MD:END -->
-      <!-- MD:START -->
-In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen individuelle Einzelgespräche und die Fremdauswertung.
-<!-- MD:END -->
-      <p><strong>Verbindlich:</strong> fünf Datengruppen, fairer A/B-Vergleich, fünf Reflexionen, Auswahl vor Testeinsicht und danach keine Optimierung. Abgabe vor Beginn der Doppellektion 8.</p>
-      <p><strong>Sie entscheiden:</strong> Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. Planen Sie in Reflexion 1 die Etappen, Zuständigkeiten und Reserve. Halten Sie am Ende jeder Arbeitsphase kurz fest: erreicht, offen, nächster Schritt, benötigte Hilfe. Reflektieren Sie Ihren Plan in Reflexion 5. Kein zusätzliches Lerntagebuch. Beratung und Lernlabor nutzen Sie nach Bedarf.</p>
-      <p><strong>Reihenfolge aus fachlichen Gründen:</strong> Daten prüfen → A/B vergleichen → Auswahl begründen → Abschlusstest → Fazit und Abgabe. Wie Sie diese Etappen auf die Arbeitszeit verteilen, planen Sie selbst.</p>
-      <p><strong>Orientierung ohne zusätzliche Pflicht:</strong> Prüfen Sie vor dem nächsten Schritt die kurzen <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a>. Sie zeigen, ob die Grundlagen für die nächste Etappe bereit sind; es gibt dafür weder zusätzliche Abgaben noch Punkte.</p>
-    </div>
-    <p class="small">8. Doppellektion, während der Einzelgespräche: <a href="#sicherung">Reproduktionscheck (Teil der unbenoteten Fremdauswertung) →</a> und <a href="#fremdtest">Fremdtest und Rückmeldung →</a></p>
+    <p class="section-intro">Bearbeiten Sie in Doppellektion 5 zuerst den <a href="#daten">Lernpfad zur fairen Datenaufteilung</a>. Danach wählen Sie Ihr Thema und arbeiten die sechs Projektetappen in eigenem Tempo durch. Ihre Ergebnisse halten Sie in fünf <a href="#projekt-reflexionen">Journal-Reflexionen</a> fest.</p>
     <div class="progress-card js-only">
       <div class="progress-title">
         <strong>Ihr persönlicher Projektstand</strong><span aria-live="polite" id="progress-text">0 von 12 Schritten</span>
@@ -67,7 +16,7 @@ In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. Die 
 Die Häkchen werden nur in diesem Browser gespeichert. Sie sind keine Abgabe an die Lehrperson.
 <!-- MD:END -->
     </div>
-    <details>
+    <details id="projekt-etappe-1">
       <summary><span class="phase-num">01</span> Anwendung und Vermutung</summary>
       <div class="detail-body">
         <!-- MD:START -->
@@ -80,7 +29,7 @@ Reflexion 1: Anwendung und Vermutung.
         <a href="#ideen">Zum Ideenpool →</a>
       </div>
     </details>
-    <details>
+    <details id="projekt-etappe-2">
       <summary><span class="phase-num">02</span> 80 Fotos vorbereiten</summary>
       <div class="detail-body">
         <!-- MD:START -->
@@ -96,7 +45,7 @@ Reflexion 2: Datenplan, Quellen und Grenzen.
         <a href="#daten">So funktioniert die Aufteilung →</a>
       </div>
     </details>
-    <details>
+    <details id="projekt-etappe-3">
       <summary><span class="phase-num">03</span> A und B trainieren</summary>
       <div class="detail-body">
         <!-- MD:START -->
@@ -106,9 +55,10 @@ Erst den Ablauf mit Übungsdaten starten, dann eigene Daten importieren. A lernt
 Der vorbereitete Vergleich läuft mit einem festen Startwert.
 <!-- MD:END -->
         <label class="check"><input data-check="phase-3" type="checkbox"/><span>Unser A/B-Vergleich läuft; wir verstehen die beiden Varianten.</span></label>
+        <a href="#projekt-werkbank">Zum Projekt-Notebook im Journal →</a>
       </div>
     </details>
-    <details>
+    <details id="projekt-etappe-4">
       <summary><span class="phase-num">04</span> Vergleichen und auswählen</summary>
       <div class="detail-body">
         <!-- MD:START -->
@@ -121,7 +71,7 @@ Reflexion 3: Ergebnis, Erklärung und Auswahl.
         <a href="#versuch">Den Vergleich verstehen →</a>
       </div>
     </details>
-    <details>
+    <details id="projekt-etappe-5">
       <summary><span class="phase-num">05</span> Abschliessend prüfen</summary>
       <div class="detail-body">
         <!-- MD:START -->
@@ -131,9 +81,10 @@ Prüfen Sie nur die gewählte Variante auf P1 und P2. Danach nichts mehr optimie
 Reflexion 4: drei Beispiele und Grenzen; richtige Beispiele sind erlaubt.
 <!-- MD:END -->
         <label class="check"><input data-check="phase-5" type="checkbox"/><span>Unsere Auswahl war vor Testeinsicht begründet; der Abschlusstest ist ausgewertet.</span></label>
+        <a href="#projekt-reflexionen">Ergebnisse und Grenzen im Journal festhalten →</a>
       </div>
     </details>
-    <details>
+    <details id="projekt-etappe-6">
       <summary><span class="phase-num">06</span> Fazit und Abgabe</summary>
       <div class="detail-body">
         <!-- MD:START -->
@@ -146,6 +97,57 @@ Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich 
         <a href="#abgabe">Zur Abgabecheckliste →</a>
       </div>
     </details>
+    <h3 class="project-lessons-heading">Doppellektionen 5–8 · Ziele und Leitfragen</h3>
+    <p class="small muted">Die folgenden Doppellektionsziele helfen bei der Orientierung. In Doppellektion 5 lernen Sie die Datenaufteilung selbstständig; danach arbeiten die Tandems an unterschiedlichen Etappen. Öffnen Sie die Details bei Bedarf.</p>
+    <!-- LESSONS:projekt -->
+    <details class="lesson-plan" id="doppellektion-05" data-lesson="05">
+      <summary><span class="phase-num">05</span><span>Doppellektion 5 · Ihr Projekt starten und die Arbeit planen</span><small>90 Min.</small></summary>
+      <div class="detail-body">
+        <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-04">Doppellektion 4</a> haben Sie XOR mit mehreren Neuronen gelöst. Jetzt erarbeiten Sie die Regeln zur Datenaufteilung selbstständig und planen Ihre Untersuchung.</p>
+        <p><strong>Heute können Sie:</strong> Training, Validierung und Test selbstständig unterscheiden, Datenlecks erkennen und einen überprüfbaren Datenplan mit fünf Gruppen erstellen.</p>
+        <p class="lesson-question">Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?</p>
+        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.</p>
+      </div>
+    </details>
+    <details class="lesson-plan" id="doppellektion-06" data-lesson="06">
+      <summary><span class="phase-num">06</span><span>Doppellektion 6 · Untersuchen und Entscheidungen begründen</span><small>90 Min.</small></summary>
+      <div class="detail-body">
+        <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-05">Doppellektion 5</a> haben Sie Ihren Lernweg geplant. Heute setzen Sie an Ihrem eigenen Arbeitsstand an, nicht an einem neuen gemeinsamen Rezept.</p>
+        <p><strong>Heute können Sie:</strong> Den eigenen Arbeitsplan steuern und einen fairen Vergleich mit Belegen und alternativen Erklärungen auswerten.</p>
+        <p class="lesson-question">Was zeigen unsere Daten, und welche andere Erklärung ist möglich?</p>
+        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Ein gutes Ergebnis ist nicht eine hohe Trefferquote, sondern ein nachvollziehbarer Vergleich und eine ehrliche Interpretation.</p>
+      </div>
+    </details>
+    <details class="lesson-plan" id="doppellektion-07" data-lesson="07">
+      <summary><span class="phase-num">07</span><span>Doppellektion 7 · Das Projekt abschliessen und die Arbeit überprüfen</span><small>90 Min.</small></summary>
+      <div class="detail-body">
+        <p class="lesson-recap"><strong>Rückblick:</strong> Sie haben in Ihrem eigenen Tempo Daten geprüft und Varianten verglichen. Heute organisieren Sie den Abschluss und prüfen Ihre Belege.</p>
+        <p><strong>Heute können Sie:</strong> Die Untersuchung selbstständig abschliessen, Grenzen belegen und den eigenen Arbeitsprozess reflektieren.</p>
+        <p class="lesson-question">Was können wir mit unseren Ergebnissen begründet behaupten?</p>
+        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Zum selbst organisierten Arbeiten gehört, einen klaren Schluss zu ziehen und ungesicherte Behauptungen sichtbar zu machen.</p>
+      </div>
+    </details>
+    <details class="lesson-plan" id="doppellektion-08" data-lesson="08">
+      <summary><span class="phase-num">08</span><span>Doppellektion 8 · Das eigene Projekt erklären und ein fremdes Modell prüfen</span><small>90 Min.</small></summary>
+      <div class="detail-body">
+        <p class="lesson-recap"><strong>Rückblick:</strong> Ihr eigener Abgabestand ist eingefroren. Während der Einzelgespräche untersuchen Sie selbstständig das Modell eines anderen Tandems.</p>
+        <p><strong>Heute können Sie:</strong> Das eigene Projekt gemeinsam erklären und das Modell eines anderen Tandems anhand reproduzierter Ergebnisse und neuer Bilder kritisch auswerten.</p>
+        <p class="lesson-question">Was zeigt das fremde Modell, und wie weit dürfen wir seinen Ergebnissen trauen?</p>
+        <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Eine unabhängige Prüfung zeigt, was nachvollziehbar ist und was eine hohe Trefferquote nicht beweist.</p>
+      </div>
+    </details>
+    <!-- /LESSONS:projekt -->
+    <div class="callout" id="sol-rahmen">
+      <!-- MD:START -->
+### Selbstständig arbeiten, fair vergleichen
+<!-- MD:END -->
+      <!-- MD:START -->
+In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo selbst fest. Die sechs Etappen sind fachlich geordnet, aber keine festen Lektionstermine.
+<!-- MD:END -->
+      <p><strong>Verbindlich:</strong> Fünf unabhängige Datengruppen, fairer A/B-Vergleich, fünf Reflexionen und eine begründete Modellwahl <strong>vor</strong> dem Abschlusstest. Danach keine Optimierung. <strong>Abgabe vor Beginn der Doppellektion 8.</strong></p>
+      <p>Halten Sie in Reflexion 1 Ihren Plan und in Reflexion 5 die Anpassungen fest. Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> sind Orientierung, keine zusätzliche Pflicht.</p>
+    </div>
+    <p class="small">8. Doppellektion, während der Einzelgespräche: <a href="#sicherung">Reproduktionscheck (Teil der unbenoteten Fremdauswertung) →</a> und <a href="#fremdtest">Fremdtest und Rückmeldung →</a></p>
     <details>
       <summary>Termine ansehen</summary>
       <div class="detail-body">

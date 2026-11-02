@@ -3,30 +3,19 @@
 </div>
 <h1>Was hat unser<br/>Netz <em>gelernt?</em></h1>
 <p class="small" id="projekt-vorabcheck-hinweis"><strong>Vor dem Projektstart:</strong> Der unbenotete <a href="#projekt-bereit-check">Lernstandscheck aus DL 4</a> hilft, offene Fragen zu Neuron und Netz zu erkennen. Die faire Datenaufteilung lernt ihr selbstständig im Lernpfad von DL 5.</p>
-<p class="lead">Eigene Bilder. Ein neuronales Netz. Ein fairer Vergleich – zu zweit. In Doppellektion 5 lernen Sie zunächst selbstständig, wie man Daten fair aufteilt.</p>
+<p class="lead">Eigene Bilder, ein neuronales Netz und ein fairer Vergleich im Tandem. Sie wählen Ihr Thema, untersuchen zwei Varianten und begründen, was Ihr Modell wirklich gelernt hat.</p>
 <p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung V1</a> · <a href="#glossar-testdaten">Testdaten P1/P2</a></p>
-<!-- Klarer Überblick vor dem ersten Training: nur das zweite Netz lernt. -->
-<div class="project-train-overview" aria-labelledby="projekt-training-titel">
-  <h2 id="projekt-training-titel">Was wird hier eigentlich trainiert?</h2>
-  <ol class="project-train-flow">
-    <li><strong>1 · Unsere Bilder</strong><span>80 Bilder aus zwei Klassen, z. B. Apfel und Birne.</span></li>
-    <li class="model-fixed"><strong>2 · MobileNet</strong><span>Liefert 1280 Merkmale pro Bild.</span><em>Vortrainiert · bleibt unverändert</em></li>
-    <li class="model-trained"><strong>3 · Unser kleines Netz</strong><span>16 Neuronen · lernt mit 16 Trainingsbildern pro Variante in 60 Epochen.</span><em>Hier wird wirklich trainiert!</em></li>
-    <li><strong>4 · Vorhersage &amp; Test</strong><span>Welche Klasse ist es? Funktioniert das auch mit neuen Bildern?</span></li>
+<div class="project-start-guide" aria-labelledby="project-start-title">
+  <h2 id="project-start-title">Hier beginnen Sie</h2>
+  <!-- MD:START -->
+In Doppellektion 5 erarbeiten Sie die Datenregeln selbstständig. Anschliessend planen Sie Ihre Untersuchung im Tandem. Die sechs Projektetappen bearbeiten Sie in eigener Zeiteinteilung bis zur Abgabe vor Doppellektion 8.
+<!-- MD:END -->
+  <ol class="project-start-steps">
+    <li><strong>1 · Datenregeln verstehen</strong><span><a href="#daten">Lernpfad zur fairen Datenaufteilung</a> mit Beispielen, Selbstkontrolle und Übungsnotebook bearbeiten.</span></li>
+    <li><strong>2 · Thema und Bilder vorbereiten</strong><span><a href="#ideen">Zwei Bildklassen wählen</a>, fünf unabhängige Gruppen planen und die Fotos im <a href="#projekt-fotostudio">Fotostudio</a> vorbereiten.</span></li>
+    <li><strong>3 · Versuch durchführen</strong><span><a href="#versuch">A/B-Vergleich verstehen</a>, im <a href="#projekt-werkbank">Projekt-Notebook</a> auswerten und die Ergebnisse im <a href="#projekt-reflexionen">Journal</a> begründen.</span></li>
   </ol>
-  <p class="project-train-note"><strong>Merken Sie sich:</strong> Die Merkmale kommen aus einem fertigen Modell. <strong>Trainiert wird nur unser nachgeschaltetes kleines Netz.</strong></p>
-</div>
-<div class="actions">
-  <a class="btn primary" href="#journal">Versuch &amp; Journal →</a><a class="btn" href="#bewertung">Bewertung &amp; Abgabe</a>
-</div>
-<div class="ki-notebook-block" data-notebook="content/ki_projekt/ki_lernlabor.ipynb" data-title="Projekt-Lernlabor">
-  <!-- MD:START -->
-### Jupyter-Notebook · Projekt-Lernlabor
-<!-- MD:END -->
-  <!-- MD:START -->
-Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
-<!-- MD:END -->
-  <button type="button" class="ki-notebook-launch" data-lab="ki_lernlabor.ipynb">Notebook hier öffnen</button>
+  <p class="project-start-next"><strong>Ihr roter Faden:</strong> <a href="#ablauf">Sechs Etappen mit Checkliste</a> · <a href="#projekt-reflexionen">Fünf Reflexionen</a> · <a href="#abgabe">Abgabe und Fachgespräch</a>. Die Projektetappen sind keine festen Lektionstermine.</p>
 </div>
 <div class="facts">
   <div class="fact">

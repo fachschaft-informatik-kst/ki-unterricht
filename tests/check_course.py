@@ -70,6 +70,25 @@ for lesson in lessons:
         for step in phase['schritte']:
             assert step['text'] in plan.get_text(), step['text'][:40]
             assert step['text'] in (root/'_build/site/projekt/KI_Planung.md').read_text(), step['text'][:40]
+# The project begins with actionable guidance and keeps saved field IDs intact.
+project = soup.select_one('#projekt')
+assert project.select_one('.project-start-guide ol.project-start-steps')
+assert len(project.select('.project-start-steps > li')) == 3
+assert len(project.select('#projekt-1 [id^="projekt-etappe-"]')) == 6
+assert project.select_one('#projekt-4 .project-train-flow')
+assert project.select_one('#projekt-4 [data-lab="ki_lernlabor.ipynb"]')
+assert len(project.select('#projekt-1 .lesson-plan')) == 4
+assert all(not p.has_attr('open') for p in project.select('#projekt-1 .lesson-plan'))
+assert str(project.select_one('#projekt-1')).index('id="progress"') < str(project.select_one('#projekt-1')).index('id="doppellektion-05"')
+journal = soup.select_one('#journal')
+assert journal.select_one('#projekt-werkbank #start-project')
+assert project.select_one('#projekt-3 #projekt-fotostudio #start-studio')
+assert project.select_one('#projekt-fotostudio #studio-panel #studio-frame')
+assert not journal.select_one('#start-studio')
+assert len(journal.select('#projekt-reflexionen .journal-step')) == 5
+assert journal.select_one('#projekt-reflexionen textarea[data-journal="purpose"]')
+assert str(journal).index('id="projekt-werkbank"') < str(journal).index('id="projekt-reflexionen"')
+
 for a in soup.select('a[href^="#"]'):
     assert a['href'][1:] in ids, a['href']
 for img in soup.select('img'):
