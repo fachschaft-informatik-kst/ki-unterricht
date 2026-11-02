@@ -103,7 +103,7 @@ nicht aus einer öffentlich erreichbaren GitHub-Pages-Kopie.
 
 `scripts/protect_teacher_pages.py` entfernt aus der Pages-Veröffentlichung
 `unterrichtsplan.html`, `materialien.html`, `musterloesungen/`,
-`KI_Planung.md` und gekennzeichnete Lösungs-/Bewertungsdateien. Die Links
+`KI_Planung.md`, den vollständigen AVIVA-Gesamtexport `kurs.json` und gekennzeichnete Lösungs-/Bewertungsdateien. Die Links
 der Schüler-Kursseiten werden auf den Worker umgestellt. Diese Bereinigung
 erfolgt **erst nach den Inhaltstests**, damit die bestehenden Prüfungen der
 generierten AVIVA- und Materialseiten weiterhin möglich bleiben.

@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 WORKER = "https://kst-ki-admin.kevin-bohn.workers.dev"
-TEACHER_ONLY = ("unterrichtsplan.html", "materialien.html", "KI_Planung.md")
+TEACHER_ONLY = ("unterrichtsplan.html", "materialien.html", "KI_Planung.md", "kurs.json")
 TEACHER_ONLY_DOWNLOADS = (
     "Arbeitsblatt_Perzeptron_Lsg.md",
     "KI_Bewertungsraster.md",
