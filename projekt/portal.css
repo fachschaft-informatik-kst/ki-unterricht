@@ -416,10 +416,11 @@ dialog.ki-notebook-runtime.ki-notebook-dialog::backdrop{background:rgba(16,29,37
 #fremdmodell .dl8-question h3{font-size:clamp(1.18rem,2.1vw,1.53rem);line-height:1.33;letter-spacing:-.02em;margin:0;max-width:790px}
 #fremdmodell .dl8-question h3 em{color:var(--accent);font-style:normal}
 #fremdmodell .dl8-question p{font-size:14px;line-height:1.65;margin:12px 0 0;max-width:820px}
-#fremdmodell .dl8-overview{margin:23px 0 28px;padding:22px 25px;border-radius:14px;background:var(--soft);border:1px solid #bfd5cb}
+#fremdmodell #dl8-ablauf,#fremdmodell .dl8-overview{margin:23px 0 28px;padding:22px 25px;border-radius:14px;background:var(--soft);border:1px solid #bfd5cb}
+#fremdmodell #dl8-ablauf>strong{display:block;font-size:1.23rem;line-height:1.35;letter-spacing:-.015em;margin:0 0 11px}
 #fremdmodell .dl8-overview h2{font-size:1.23rem;line-height:1.35;letter-spacing:-.015em;margin:7px 0 11px}
-#fremdmodell .dl8-overview p{font-size:14px;line-height:1.64;margin:0 0 9px}
-#fremdmodell .dl8-overview p:last-child{margin-bottom:0}
+#fremdmodell #dl8-ablauf p,#fremdmodell .dl8-overview p{font-size:14px;line-height:1.64;margin:0 0 9px}
+#fremdmodell #dl8-ablauf p:last-child,#fremdmodell .dl8-overview p:last-child{margin-bottom:0}
 #fremdmodell .dl8-section-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:5px 14px;margin:26px 0 12px}
 #fremdmodell .dl8-section-head h3{font-size:1.11rem;line-height:1.4;margin:0}
 #fremdmodell .dl8-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;list-style:none;margin:0 0 24px;padding:0}
