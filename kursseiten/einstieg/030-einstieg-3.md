@@ -4,7 +4,7 @@
   </summary>
   <div class="kapitel-body">
     <p class="section-intro"><strong>Wie wurde aus einer Idee die KI von heute?</strong> Neun Meilensteine zeigen wichtige Wendepunkte in der Geschichte der KI. Die <strong>farbigen Marken</strong> greifen die beiden Ansätze aus <a href="#einstieg-1">Unterkapitel 1</a> auf: <span class="marke regeln">Programmierung durch Menschen</span> und <span class="marke daten">Datengetriebene Programmierung</span>. Die Einteilung ist vereinfacht; viele Systeme verbinden beides. Beim <strong>KI-Winter</strong> fehlt eine Marke, weil er keine Technik bezeichnet. Klickt auf einen Titel, um Bild, Erklärung und Bildquelle zu sehen.</p>
-    <p class="timeline-thinking"><strong>Entdeckerfrage:</strong> Vergleicht die Marken von 1950 bis 1997 mit den Meilensteinen im <strong>21. Jahrhundert</strong>: Welche Art von KI dominiert in den jüngsten Beispielen? Woran könnte diese Veränderung liegen? Begründet eure Vermutung mit zwei Meilensteinen. Heisst das, dass feste Regeln heute keine Rolle mehr spielen?</p>
+    <p class="timeline-thinking"><strong>Entdeckerfrage:</strong> Vergleicht die von 1950 bis 1997 mit den Meilensteinen im <strong>21. Jahrhundert</strong>: Welche Art von KI dominiert in den jüngsten Beispielen? Woran könnte diese Veränderung liegen? Begründet eure Vermutung mit zwei Meilensteinen. Heisst das, dass feste Regeln heute keine Rolle mehr spielen?</p>
     <ol class="timeline">
       <li><span class="jahr">1950</span>
         <div>
