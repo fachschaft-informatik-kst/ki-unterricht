@@ -34,8 +34,15 @@ def shade(hexcolor: str, percent: float) -> str:
 
 def theme_css(course: dict) -> str:
     accent = course["theme"]["accent"]
-    return (f":root{{--accent:{accent};--soft:{shade(accent, .89)};"
-            f"--paper:{shade(accent, .965)};--line:{shade(accent, .87)};}}"
+    # Retain the original BOK colour schemes for course/editor parity.
+    presets = {
+        "#3653a3": ("#e9eefc", "#f3f5fb", "#d9e0ef"),
+        "#076959": ("#e7f1eb", "#f5f4ee", "#d8dfdb"),
+    }
+    soft, paper, line = presets.get(accent.lower(), (
+        shade(accent, .89), shade(accent, .965), shade(accent, .87)))
+    return (f":root{{--accent:{accent};--soft:{soft};"
+            f"--paper:{paper};--line:{line};}}"
             f" a:focus-visible{{outline-color:{accent};}}")
 
 

@@ -19,16 +19,22 @@ function selectedThemeRecord(){
   const id=state.course==="basis"?"bok-1-klasse":"bok-4-klasse";
   return courseThemeDraft?.courses.find(c=>c.id===id);
 }
+function themePalette(accent){
+  // Existing BOK palettes must render identically to the public legacy courses.
+  if(accent.toLowerCase()==="#3653a3")return {accent,soft:"#e9eefc",paper:"#f3f5fb",line:"#d9e0ef"};
+  if(accent.toLowerCase()==="#076959")return {accent,soft:"#e7f1eb",paper:"#f5f4ee",line:"#d8dfdb"};
+  return {accent,soft:blendTheme(accent,.89),paper:blendTheme(accent,.965),line:blendTheme(accent,.87)};
+}
 function courseThemeCSS(){
-  const accent=selectedThemeRecord()?.theme?.accent||(state.course==="basis"?"#3653a3":"#076959");
-  return ":root{--accent:"+accent+";--soft:"+blendTheme(accent,.89)+";--paper:"+blendTheme(accent,.965)+";--line:"+blendTheme(accent,.87)+";}";
+  const t=themePalette(selectedThemeRecord()?.theme?.accent||(state.course==="basis"?"#3653a3":"#076959"));
+  return ":root{--accent:"+t.accent+";--soft:"+t.soft+";--paper:"+t.paper+";--line:"+t.line+";}";
 }
 function applyCourseTheme(){
-  const accent=selectedThemeRecord()?.theme?.accent||(state.course==="basis"?"#3653a3":"#076959");
-  document.body.style.setProperty("--accent",accent);
-  document.body.style.setProperty("--soft",blendTheme(accent,.89));
-  document.body.style.setProperty("--bg",blendTheme(accent,.965));
-  document.body.style.setProperty("--line",blendTheme(accent,.87));
+  const t=themePalette(selectedThemeRecord()?.theme?.accent||(state.course==="basis"?"#3653a3":"#076959"));
+  document.body.style.setProperty("--accent",t.accent);
+  document.body.style.setProperty("--soft",t.soft);
+  document.body.style.setProperty("--bg",t.paper);
+  document.body.style.setProperty("--line",t.line);
 }
 function renderThemeControls(){
   if(!courseThemeDraft)return;
@@ -47,7 +53,7 @@ function renderThemeControls(){
   $("courseThemeColor").value=accent;
   const sample=$("courseThemePreview");
   sample.style.setProperty("--preview-accent",accent);
-  sample.style.setProperty("--preview-paper",blendTheme(accent,.965));
+  sample.style.setProperty("--preview-paper",themePalette(accent).paper);
   sample.replaceChildren();
   const heading=document.createElement("strong");heading.textContent=course.teacher+" · "+course.grade+". Klasse";
   const name=document.createElement("span");name.textContent=course.name+" · "+(course.status==="published"?"veröffentlicht":"in Vorbereitung");
@@ -1660,13 +1666,14 @@ function inspectBlock(value){
   const base=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
   const sample=previewAssets(blocks[value],base);
   const shadow=blockPreview.shadowRoot||blockPreview.attachShadow({mode:"open"});
+  const palette=themePalette(selectedThemeRecord()?.theme?.accent||(isBasis?"#3653a3":"#076959"));
   const styles=document.createElement("style");
   styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+courseThemeCSS()+
     '\n:host{display:block;box-sizing:border-box;font:14px/1.55 system-ui,-apple-system,sans-serif;'+
-    'color:#182b31;--accent:'+selectedThemeRecord()?.theme?.accent+';'+
-    '--soft:'+blendTheme(selectedThemeRecord()?.theme?.accent||(isBasis?'#3653a3':'#076959'),.89)+';'+
-    '--paper:'+blendTheme(selectedThemeRecord()?.theme?.accent||(isBasis?'#3653a3':'#076959'),.965)+';'+
-    '--line:'+blendTheme(selectedThemeRecord()?.theme?.accent||(isBasis?'#3653a3':'#076959'),.87)+';'+
+    'color:#182b31;--accent:'+palette.accent+';'+
+    '--soft:'+palette.soft+';'+
+    '--paper:'+palette.paper+';'+
+    '--line:'+palette.line+';'+
     '--muted:'+(isBasis?'#46536a':'#52656a')+';--ink:#182b31;}'+
     '\n.block-preview-canvas{padding:12px;min-height:100%;box-sizing:border-box;background:var(--paper);overflow-wrap:anywhere;}'+
     '\n.block-preview-canvas main,.block-preview-canvas .section,.block-preview-canvas .kapitel{display:block!important;position:static!important;'+
