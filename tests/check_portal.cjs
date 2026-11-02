@@ -50,13 +50,13 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.reload();
   assert.equal(await p.locator('#lernziele [data-skill="fremd_reproduktion"]').inputValue(),'sicher');
   assert.equal(await p.locator('#lernziele [data-skill="fremd_kritik"]').inputValue(),'hilfe');
-  await p.locator('#lernziele a[href="#bewertung"]').click();const scoring=p.locator('[data-score]');assert.equal(await scoring.count(),12);
+  await p.locator('#lernziele a[href="#bewertung"]').click();const scoring=p.locator('[data-score]');assert.equal(await scoring.count(),11);
   assert((await p.locator('#grade-result').innerText()).includes('Noch keine Gesamtnote'));
-  for(let i=0;i<12;i++)await scoring.nth(i).selectOption(i<6?'3':'0');assert((await p.locator('#grade-result').innerText()).includes('18 / 36 Punkte → Note 3.50'));
-  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('3');assert((await p.locator('#grade-result').innerText()).includes('36 / 36 Punkte → Note 6.00'));
-  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 36 Punkte → Note 1.00'));
-  for(let i=0;i<12;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));
-  await p.reload();assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
+  for(let i=0;i<11;i++)await scoring.nth(i).selectOption(i<6?'3':'0');assert((await p.locator('#grade-result').innerText()).includes('18 / 33 Punkte → Note 3.75'));
+  for(let i=0;i<11;i++)await scoring.nth(i).selectOption('3');assert((await p.locator('#grade-result').innerText()).includes('33 / 33 Punkte → Note 6.00'));
+  for(let i=0;i<11;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 33 Punkte → Note 1.00'));
+  for(let i=0;i<11;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('22 / 33 Punkte → Note 4.25'));
+  await p.reload();assert((await p.locator('#grade-result').innerText()).includes('22 / 33 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
   // DL 8 is a separate, graded submission after the frozen own project.
   await p.locator('.nav a[href="#fremdmodell"]').click();
   assert.equal(await p.locator('#fremdmodell details.kapitel').count(),5,'DL 8 must have five chapters');
@@ -71,7 +71,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.locator('[data-answer="fremd_rueckmeldung"]').fill('Andere Beleuchtung gezielt prüfen.');
   for(const n of [1,2]){
     await p.locator('[data-answer="fremd_name_'+n+'"]').fill('Testperson '+n);
-    for(const field of ['repro','test','grenzen','transfer'])
+    for(const field of ['test','grenzen'])
       await p.locator('[data-answer="fremd_reflexion_'+n+'_'+field+'"]').fill('Begründung und Beleg '+n+' / '+field);
   }
   const dl8Download=p.waitForEvent('download');
@@ -93,7 +93,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   const submitted=JSON.parse(entries.get('Fremdauswertung.json'));
   assert.equal(submitted.schema,'ki-fremdauswertung-v1');
   assert.equal(submitted.antworten.fremd_name_1,'Testperson 1');
-  assert.equal(submitted.antworten.fremd_reflexion_2_transfer,'Begründung und Beleg 2 / transfer');
+  assert.equal(submitted.antworten.fremd_reflexion_2_grenzen,'Begründung und Beleg 2 / grenzen');
+  assert.equal(submitted.antworten.fremd_reflexion_2_transfer,'','Optional reflection fields remain available but are not required');
   assert.match(entries.get('Fremdauswertung.html'),/Prüfsumme gleich/);
   assert.equal(await p.locator('[data-lab="lernarten.ipynb"]').count(),0);assert.equal(await p.locator('#lernarten a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]').count(),1);
 
