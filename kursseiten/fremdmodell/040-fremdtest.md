@@ -7,14 +7,68 @@ kurz: "Pflichtversuch vor der Reflexion: Vorhersagen auf anderen Klassen untersu
 open: false
 ---
 
-**Prüffrage (Pflichtversuch, unbenotet):** Was sagt ein Modell über **andere Klassen**, für die es nie trainiert wurde?
+<div class="dl8-question" aria-labelledby="dl8-question-4">
+  <div class="dl8-question-meta"><span class="dl8-eyebrow">Prüffrage</span><span class="dl8-meta">Pflichtversuch · unbenotet</span></div>
+  <h3 id="dl8-question-4">Was sagt ein Modell über <em>andere Klassen</em>, für die es nie trainiert wurde?</h3>
+</div>
 
-1. **2 Min. · Vermuten:** Lesen Sie die zwei **ursprünglichen Klassen** des fremden Modells im <a href="#reproduktion">Prüfbericht</a> nochmals. Wählen Sie unten Ihre Erwartung, bevor Sie eigene Fotos testen.
-2. **5 Min. · Selbst ausprobieren:** Öffnen Sie im privaten Fenster das <a href="#projekt-werkbank">nachtrainierte fremde Notebook</a> aus Kapitel 3 und gehen Sie zu **«6 · Fremdauswertung»**. Tragen Sie bei `EIGENE_KLASSEN = ['C', 'D']` die **zwei echten Klassen Ihres Projekts** ein, laden Sie die **eigene Fotostudio-JSON** (nicht das eigene ZIP wiederherstellen!) und führen Sie die Fremdtest-Zelle aus. <strong>Nicht neu trainieren.</strong>
-3. **5 Min. · Zwei Beispiele untersuchen:** Lesen Sie die Ausgabe: In den Zeilen stehen Ihre Klassen, in den Spalten die **ursprünglichen fremden Klassen**. Vergleichen Sie mindestens **ein Bild aus jeder eigenen Klasse** und tragen Sie die vier Zahlen der Vorhersagetabelle sowie die Trennschärfe ein. Ist das Ergebnis überraschend?
-4. **3 Min. · Erklären:** Nennen Sie <strong>eine plausible Vermutung</strong> (z. B. Farbe, Form, Licht oder Hintergrund) und <strong>einen prüfbaren nächsten Versuch</strong>. Schreiben Sie dazu, weshalb dies **keine Trefferquote für die neuen Klassen** ist.
+<div class="dl8-section-head"><h3>Ihr Auftrag in 4 Schritten</h3><span class="dl8-meta">Im Tandem</span></div>
+<ol class="dl8-steps">
+  <li>
+    <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">01</span><span class="dl8-step-time">2 Min.</span></div>
+    <h4>Vermuten</h4>
+    <div class="dl8-step-copy">
+      <!-- MD:START -->
+Lesen Sie die zwei **ursprünglichen Klassen** des fremden Modells im <a href="#reproduktion">Prüfbericht</a> nochmals. Wählen Sie unten Ihre Erwartung, bevor Sie eigene Fotos testen.
+      <!-- MD:END -->
+    </div>
+  </li>
+  <li>
+    <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">02</span><span class="dl8-step-time">5 Min.</span></div>
+    <h4>Selbst ausprobieren</h4>
+    <div class="dl8-step-copy">
+      <!-- MD:START -->
+Öffnen Sie im privaten Fenster das <a href="#projekt-werkbank">nachtrainierte fremde Notebook</a> aus Kapitel 3 und gehen Sie zu **«6 · Fremdauswertung»**. Tragen Sie bei `EIGENE_KLASSEN = ['C', 'D']` die **zwei echten Klassen Ihres Projekts** ein, laden Sie die **eigene Fotostudio-JSON** (nicht das eigene ZIP wiederherstellen!) und führen Sie die Fremdtest-Zelle aus. <strong>Nicht neu trainieren.</strong>
+      <!-- MD:END -->
+    </div>
+  </li>
+  <li>
+    <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">03</span><span class="dl8-step-time">5 Min.</span></div>
+    <h4>Zwei Beispiele untersuchen</h4>
+    <div class="dl8-step-copy">
+      <!-- MD:START -->
+Lesen Sie die Ausgabe: In den Zeilen stehen Ihre Klassen, in den Spalten die **ursprünglichen fremden Klassen**. Vergleichen Sie mindestens **ein Bild aus jeder eigenen Klasse** und tragen Sie die vier Zahlen der Vorhersagetabelle sowie die Trennschärfe ein. Ist das Ergebnis überraschend?
+      <!-- MD:END -->
+    </div>
+  </li>
+  <li>
+    <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">04</span><span class="dl8-step-time">3 Min.</span></div>
+    <h4>Erklären</h4>
+    <div class="dl8-step-copy">
+      <!-- MD:START -->
+Nennen Sie <strong>eine plausible Vermutung</strong> (z. B. Farbe, Form, Licht oder Hintergrund) und <strong>einen prüfbaren nächsten Versuch</strong>. Schreiben Sie dazu, weshalb dies **keine Trefferquote für die neuen Klassen** ist.
+      <!-- MD:END -->
+    </div>
+  </li>
+</ol>
 
-<p class="small"><strong>Warum kann das Ergebnis schwach oder scheinbar stark sein?</strong> Das Netz kennt nur seine ursprünglichen beiden Klassen und muss auch bei Ihren völlig anderen Motiven eine davon ausgeben. Es wurde <strong>nicht für Ihre neuen Klassen trainiert</strong>. Das ist etwas anderes als ein regulärer Test auf zuvor unbekannten <strong>Bildern derselben Klassen</strong> (P1/P2). Auch dort wurde bewusst nicht mit den Testbildern trainiert – das ist korrekt und nötig. Die <strong>Trennschärfe</strong> beschreibt hier nur eine nachträglich gewählte Trennung, nicht die Klassifikationsgenauigkeit.</p>
+<aside class="dl8-explainer" aria-labelledby="dl8-explainer-title">
+  <span class="dl8-eyebrow">Ergebnisse richtig einordnen</span>
+  <h3 id="dl8-explainer-title">Warum kann ein Modell scheinbar gut oder schlecht abschneiden?</h3>
+  <div class="dl8-compare">
+    <div class="dl8-compare-card">
+      <span class="dl8-eyebrow">Regulärer Test · P1/P2</span>
+      <h4>Neue Bilder, bekannte Klassen</h4>
+      <p>Das Modell erkennt neue Exemplare <strong>seiner zwei trainierten Klassen</strong>. Diese Testbilder waren absichtlich <strong>nicht im Training</strong>. So lässt sich die Trefferquote unabhängig prüfen.</p>
+    </div>
+    <div class="dl8-compare-card">
+      <span class="dl8-eyebrow">Ihr Fremdversuch</span>
+      <h4>Neue Bilder, andere Klassen</h4>
+      <p>Das Modell wurde <strong>nicht für Ihre beiden Klassen trainiert</strong>. Trotzdem muss es eine seiner ursprünglichen Klassen ausgeben, selbst wenn keine davon passt.</p>
+    </div>
+  </div>
+  <div class="dl8-note"><span class="dl8-eyebrow">Merksatz</span><p><strong>Trennschärfe ist keine Trefferquote</strong> für völlig neue Klassen. Auch ein hoher Modellwert beweist nicht, dass das Modell Ihr Motiv korrekt erkannt hat. Prüfen Sie mögliche Einflüsse wie Farbe, Form, Licht oder Hintergrund.</p></div>
+</aside>
 
 <div class="protokoll-block">
       <h3>Gemeinsames Versuchsprotokoll (unbenotet)</h3>
