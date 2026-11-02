@@ -26,7 +26,13 @@
 <p class="status" id="download-status" role="status"></p>
 <p class="small">Für die Einreichung: Namen, Klasse und Journalfelder prüfen, «Abgabepaket herunterladen» wählen und die Datei <strong>Journal.html</strong> im ZIP kurz öffnen. Der Download ist noch keine Abgabe.</p>
 <p class="small">Der Download übermittelt nichts automatisch. Das Hochladen ersetzt den aktuellen Browserstand. Laden Sie nach jeder Arbeitsphase eine ZIP herunter und bewahren Sie sie ausserhalb des Browsers auf.</p>
-<div class="card"><h2>Nach der Projektabgabe · Doppellektion 8</h2><p>Die benotete Fremdauswertung ist jetzt ein <a href="#fremdmodell">eigener Unterrichtsabschnitt</a>. Öffnen Sie dort das fremde Projekt in einem privaten Browserfenster. Hier bleibt der Export Ihres <strong>eigenen</strong> Projektstands verfügbar.</p><p><a class="btn" href="#fremdmodell">Zum Auftrag der Doppellektion 8 →</a></p></div>
+<div class="card">
+  <!-- MD:START -->
+## Nach der Projektabgabe · Doppellektion 8
+<!-- MD:END -->
+  <p>Die benotete Fremdauswertung ist jetzt ein <a href="#fremdmodell">eigener Unterrichtsabschnitt</a>. Öffnen Sie dort das fremde Projekt in einem privaten Browserfenster. Hier bleibt der Export Ihres <strong>eigenen</strong> Projektstands verfügbar.</p>
+  <p><a class="btn" href="#fremdmodell">Zum Auftrag der Doppellektion 8 →</a></p>
+</div>
 <details class="js-only">
   <summary>Älteren Projekt-Seitenstand importieren / exportieren</summary>
   <div class="detail-body">
