@@ -245,6 +245,27 @@ const fakeGithub=async(_token,path)=>{
 };
 const teacherPlan=await teacherData({course:"bok/1-klasse",kind:"planung"},"token",fakeGithub,"example/repo");
 assert.equal(teacherPlan.lessons[0].title,"Beispiel");
+const irnSources={
+  "kursseiten/irn-1-manifest.json":readFileSync(new URL("../kursseiten/irn-1-manifest.json",import.meta.url),"utf8"),
+  "kursseiten/irn-1-kurs/planung.json":readFileSync(new URL("../kursseiten/irn-1-kurs/planung.json",import.meta.url),"utf8"),
+  "kursseiten/irn-1-kurs/materialien.md":readFileSync(new URL("../kursseiten/irn-1-kurs/materialien.md",import.meta.url),"utf8"),
+  "lehrperson/irn-1/musterloesungen.md":readFileSync(new URL("../lehrperson/irn-1/musterloesungen.md",import.meta.url),"utf8"),
+  "lehrperson/irn-1/musterloesungen-felder.md":readFileSync(new URL("../lehrperson/irn-1/musterloesungen-felder.md",import.meta.url),"utf8")
+};
+const irnGithub=async(_token,route)=>{
+  if(route.includes("/git/trees/main"))return {tree:[],truncated:false};
+  const name=route.split("/contents/")[1]?.split("?")[0];
+  assert(name in irnSources,"IRN must only read its own sources: "+name);
+  return {encoding:"base64",content:Buffer.from(irnSources[name]).toString("base64")};
+};
+const irnPlan=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo");
+assert.equal(irnPlan.lessons.length,10);
+assert(irnPlan.lessons.every(l=>l.view==="irn-1-kurs"));
+const irnKit=await teacherData({course:"irn/1-klasse",kind:"materialien"},"token",irnGithub,"example/repo");
+assert.match(irnKit.sections[0].markdown,/Doppellektion 01/);
+const irnSolutions=await teacherData({course:"irn/1-klasse",kind:"musterloesungen"},"token",irnGithub,"example/repo");
+assert.match(irnSolutions.notes[0].markdown,/Noch keine Musterantworten/);
+
 const teacherKit=await teacherData({course:"bok/1-klasse",kind:"materialien"},"token",fakeGithub,"example/repo");
 assert.match(teacherKit.sections[0].markdown,/Beispielmaterial/);
 const teacherSolutions=await teacherData({course:"bok/1-klasse",kind:"musterloesungen"},"token",fakeGithub,"example/repo");

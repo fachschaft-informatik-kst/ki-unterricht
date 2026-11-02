@@ -10,7 +10,10 @@ const files=[
   "kursseiten/einstieg/010-einstieg-1.md",
   "kursseiten/einstieg/030-einstieg-3.md",
   "kursseiten/perzeptron/030-perzeptron-3.md",
-  "kursseiten/basis-neuron/030-perzeptron-3.md"
+  "kursseiten/basis-neuron/030-perzeptron-3.md",
+  ...[1,4].flatMap(grade=>fs.readdirSync(path.join(ROOT,"kursseiten/irn-"+grade+"-kurs"))
+    .filter(name=>/^\d{3}-[^/]+\.md$/.test(name))
+    .map(name=>"kursseiten/irn-"+grade+"-kurs/"+name))
 ];
 const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
@@ -89,6 +92,12 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#courseThemeColor").inputValue(),"#69419b");
     assert.match(await page.locator("#courseThemePreview").innerText(),/IRN/);
     assert.match(await page.locator("#teacherSolutionsLink").getAttribute("href"),/irn\/1-klasse\/musterloesungen/);
+    await page.locator("#editSolutions").click();
+    assert.match(await page.locator("#path").innerText(),/lehrperson\/irn-1\/musterloesungen.md/);
+    await page.locator("#editSolutionFields").click();
+    assert.match(await page.locator("#path").innerText(),/lehrperson\/irn-1\/musterloesungen-felder.md/);
+    await page.locator("#editGlossary").click();
+    assert.match(await page.locator("#path").innerText(),/lehrperson\/irn-1\/glossar.md/);
     await page.locator("#courseThemeColor").fill("#58358b");
     assert.equal(await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#58358b");
     await page.locator("#chapters button").first().click();

@@ -100,6 +100,14 @@ const courseMock=async(_token,path)=>{
 assert.deepEqual((await loadTeacherCourses("token",courseMock,"example/repo")).map(x=>x.ready),
   [true,true,true,true],"Course picker must use the source registry");
 
+// Real IRN scaffolds must belong to their own profiles and validate as complete AVIVA drafts.
+const sourceFiles=[1,4].map(grade=>{
+  const prefix="../kursseiten/irn-"+grade+"-kurs/planung.json";
+  return JSON.parse(readFileSync(new URL(prefix,import.meta.url),"utf8"));
+});
+assert(sourceFiles.every(p=>p.lessons.length===10));
+assert(sourceFiles[0].lessons.every(x=>x.view==="irn-1-kurs"));
+assert(sourceFiles[1].lessons.every(x=>x.view==="irn-4-kurs"));
 const fake={
   "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
   "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[

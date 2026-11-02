@@ -42,8 +42,10 @@ const ROOT=path.resolve(__dirname,"..");
       res.writeHead(200,{"Content-Type":"application/json"}).end(JSON.stringify(data));return;
     }
     if(url.pathname==="/teacher-theme.css"){
-      const grade=url.searchParams.get("course")==="bok/1-klasse"?"1":"4";
-      const accent=grade==="1"?"#3653a3":"#076959";
+      const course=url.searchParams.get("course");
+      const grade=course.endsWith("/1-klasse")?"1":"4";
+      const accent=course==="irn/1-klasse"?"#69419b":course==="irn/4-klasse"?"#9a481d":
+        grade==="1"?"#3653a3":"#076959";
       res.writeHead(200,{"Content-Type":"text/css"}).end(
         'body[data-grade="'+grade+'"]{--accent:'+accent+'}');
       return;
@@ -119,6 +121,8 @@ const ROOT=path.resolve(__dirname,"..");
     await page.locator(".lesson-heading h2").filter({hasText:"DL 01"}).waitFor();
     assert.equal(await page.locator("#teacherCourseSelect").inputValue(),"irn/4-klasse");
     assert.match(await page.locator(".course-context").innerText(),/IRN · 4. Klasse/);
+    const irnAccent=await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim());
+    assert.equal(irnAccent,"#9a481d");
 
 
     await page.setViewportSize({width:390,height:844});
