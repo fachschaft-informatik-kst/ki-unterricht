@@ -48,6 +48,38 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   for(let i=0;i<12;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 36 Punkte → Note 1.00'));
   for(let i=0;i<12;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));
   await p.reload();assert((await p.locator('#grade-result').innerText()).includes('24 / 36 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
+  // DL 8 is a separate, graded submission after the frozen own project.
+  await p.locator('.nav a[href="#fremdmodell"]').click();
+  assert.equal(await p.locator('#fremdmodell #reproduktion').count(),1);
+  assert.equal(await p.locator('#fremdmodell #fremdtest').count(),1);
+  await p.locator('#fremdmodell textarea[data-journal="reproduktion"]').fill('Prüfsumme gleich; V1 A: 50 %, B: 75 %.');
+  await p.locator('[data-answer="fremd_rueckmeldung"]').fill('Andere Beleuchtung gezielt prüfen.');
+  for(const n of [1,2]){
+    await p.locator('[data-answer="fremd_name_'+n+'"]').fill('Testperson '+n);
+    for(const field of ['repro','test','grenzen','transfer'])
+      await p.locator('[data-answer="fremd_reflexion_'+n+'_'+field+'"]').fill('Begründung und Beleg '+n+' / '+field);
+  }
+  const dl8Download=p.waitForEvent('download');
+  await p.locator('#download-fremdmodell').click();
+  const dl8File=await dl8Download;
+  assert.match(dl8File.suggestedFilename(),/^KI-Fremdauswertung-/);
+  await dl8File.saveAs('/tmp/ki-fremdauswertung.zip');
+  const bytes=fs.readFileSync('/tmp/ki-fremdauswertung.zip'),entries=new Map();
+  let offset=0;
+  while(offset+30<=bytes.length&&bytes.readUInt32LE(offset)===0x04034b50){
+    const size=bytes.readUInt32LE(offset+18),nameLength=bytes.readUInt16LE(offset+26),extraLength=bytes.readUInt16LE(offset+28);
+    const name=bytes.subarray(offset+30,offset+30+nameLength).toString('utf8'),begin=offset+30+nameLength+extraLength;
+    entries.set(name,bytes.subarray(begin,begin+size).toString('utf8'));
+    offset=begin+size;
+  }
+  assert(entries.has('Fremdauswertung.html')&&entries.has('Fremdauswertung.json'));
+  assert(!entries.has('Journal.html')&&!entries.has('kursstand.json'));
+  assert(![...entries.keys()].some(name=>name.startsWith('daten/')),'Do not re-export imported foreign pictures');
+  const submitted=JSON.parse(entries.get('Fremdauswertung.json'));
+  assert.equal(submitted.schema,'ki-fremdauswertung-v1');
+  assert.equal(submitted.antworten.fremd_name_1,'Testperson 1');
+  assert.equal(submitted.antworten.fremd_reflexion_2_transfer,'Begründung und Beleg 2 / transfer');
+  assert.match(entries.get('Fremdauswertung.html'),/Prüfsumme gleich/);
   assert.equal(await p.locator('[data-lab="lernarten.ipynb"]').count(),0);assert.equal(await p.locator('#lernarten a[href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke"]').count(),1);
 
   await p.locator('.nav a[href="#einstieg"]').click();
