@@ -70,7 +70,7 @@
   const roleClass=wer=>{
     if(wer==="Lehrperson")return "wer-l";
     if(wer==="Ergebnis")return "wer-r";
-    if(wer.startsWith("Klasse"))return "wer-k";
+    if(wer.startsWith("Klasse")||wer.startsWith("Plenum"))return "wer-k";
     if(wer.startsWith("Einzeln"))return "wer-e";
     return "wer-t";
   };
