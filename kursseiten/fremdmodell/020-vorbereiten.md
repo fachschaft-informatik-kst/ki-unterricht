@@ -18,47 +18,27 @@ open: false
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">01</span></div>
     <h4>Eigenes ZIP zuerst entpacken</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Merken Sie sich die Fotostudio-JSON im Ordner `daten/`. Diese Datei brauchen Sie erst beim <a href="#fremdtest">Fremdtest in Schritt 4</a>. Importieren Sie Ihr eigenes ZIP hier **nicht**.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Merken Sie sich die Fotostudio-JSON im Ordner <code>daten/</code>. Diese Datei brauchen Sie erst beim <a href="#fremdtest">Fremdtest in Schritt 4</a>. Importieren Sie Ihr eigenes ZIP hier <strong>nicht</strong>.</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">02</span></div>
     <h4>Fremdes ZIP entpacken</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Suchen Sie `Versuchsprotokoll.json` (Originalwerte) und die Fotostudio-JSON unter `daten/`.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Suchen Sie <code>Versuchsprotokoll.json</code> (Originalwerte) und die Fotostudio-JSON unter <code>daten/</code>.</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">03</span></div>
     <h4>Privates Fenster öffnen</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Öffnen Sie darin die <a href="#fremdmodell">Kursseite DL 8</a> neu. Nur in diesem Fenster mit fremden Daten arbeiten. Ihr normaler Browserstand bleibt so unberührt.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Öffnen Sie darin die <a href="#fremdmodell">Kursseite DL 8</a> neu. Nur in diesem Fenster mit fremden Daten arbeiten. Ihr normaler Browserstand bleibt so unberührt.</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">04</span></div>
     <h4>Fremdes Projekt wiederherstellen</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Gehen Sie im privaten Fenster zu <a href="#sicherung">Notizen &amp; Projekt → «Notizen &amp; Projekt wiederherstellen ↑»</a>. Wählen Sie das **fremde** ZIP. Die Wiederherstellung überschreibt ausschliesslich den Stand dieses Fensters.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Gehen Sie im privaten Fenster zu <a href="#sicherung">Notizen &amp; Projekt → «Notizen &amp; Projekt wiederherstellen ↑»</a>. Wählen Sie das <strong>fremde</strong> ZIP. Die Wiederherstellung überschreibt ausschliesslich den Stand dieses Fensters.</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">05</span></div>
     <h4>Notebook finden</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Öffnen Sie <a href="#projekt-werkbank">Journal → «Notebook hier öffnen»</a>. Dort liegt das importierte Projekt-Notebook. Es wird in <a href="#reproduktion">Schritt 3</a> ausgeführt.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Öffnen Sie <a href="#projekt-werkbank">Journal → «Notebook hier öffnen»</a>. Dort liegt das importierte Projekt-Notebook. Es wird in <a href="#reproduktion">Schritt 3</a> ausgeführt.</p></div>
   </li>
 </ol>
 
