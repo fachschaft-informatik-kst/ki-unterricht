@@ -20,6 +20,7 @@ def build_content():
     command(sys.executable, "scripts/build_course.py")
     command(sys.executable, "scripts/build_basis.py")
     command(sys.executable, "scripts/build_course_routes.py", "_build/site")
+    command(sys.executable, "scripts/protect_teacher_pages.py", "_build/site")
 
 
 def build_full():

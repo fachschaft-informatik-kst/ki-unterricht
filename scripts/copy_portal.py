@@ -24,3 +24,5 @@ build_previews(out)
 patch_bundle(out)
 from build_course_routes import build as build_course_routes
 build_course_routes(out)
+from protect_teacher_pages import protect
+protect(out)

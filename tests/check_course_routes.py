@@ -30,7 +30,10 @@ for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
     assert 'href="../../kurse.html"' in generated
     assert (dist / slug / "grafiken/kst_logo.png").is_file()
     assert (dist / slug / "kurs.json").is_file()
-    assert (dist / slug / "unterrichtsplan.html").is_file()
+    assert not (dist / slug / "unterrichtsplan.html").exists()
+    assert not (dist / slug / "materialien.html").exists()
+    assert not (dist / slug / "musterloesungen").exists()
+    assert "kst-ki-admin.kevin-bohn.workers.dev/teacher/" in generated
     assert not re.search(r'(?<!\\.)href="../kurse.html"', generated)
 assert 'from \'../../projekt/archive.js\'' in (dist / "bok/1-klasse/persistence.js").read_text(encoding="utf-8")
 assert "'../../lab/index.html?path='" in (dist / "bok/4-klasse/portal.js").read_text(encoding="utf-8")
@@ -51,3 +54,10 @@ for course in manifest["courses"]:
     assert course["name"] in page or course["status"] == "published"
     assert f'href="{slug}/"' in overview
 assert "COURSE_GROUPS_START" in overview
+
+for root in ("basis", "projekt", "bok/1-klasse", "bok/4-klasse"):
+    folder = dist / root
+    for path in ("unterrichtsplan.html", "materialien.html", "KI_Planung.md",
+                 "musterloesungen/index.html", "materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md",
+                 "materialien/downloads/KI_Bewertungsraster.md"):
+        assert not (folder / path).exists(), f"Public teacher-only file: {root}/{path}"
