@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {validatePlan,validateManifest} from "../shared/course-model.js";
 import {readFileSync} from "node:fs";
 import {answerRows,materialForLesson,questionsFromSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet} from "../admin-worker/src/teacher.mjs";
 const fields=[
@@ -108,6 +109,12 @@ const sourceFiles=[1,4].map(grade=>{
 assert(sourceFiles.every(p=>p.lessons.length===10));
 assert(sourceFiles[0].lessons.every(x=>x.view==="irn-1-kurs"));
 assert(sourceFiles[1].lessons.every(x=>x.view==="irn-4-kurs"));
+assert(sourceFiles.every(p=>validatePlan(p)),"IRN draft plans must pass the canonical AVIVA validator");
+for(const grade of [1,4]){
+  const manifest=JSON.parse(readFileSync(new URL("../kursseiten/irn-"+grade+"-manifest.json",import.meta.url),"utf8"));
+  assert(validateManifest(manifest));
+  assert(manifest.sections.every(x=>x.id.startsWith("irn-"+grade+"-")));
+}
 const fake={
   "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
   "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[
