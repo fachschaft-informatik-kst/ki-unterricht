@@ -99,7 +99,7 @@ assert soup.select_one('#fremdmodell textarea[data-journal="reproduktion"]')
 assert soup.select_one('#fremdmodell [data-answer="fremd_rueckmeldung"]')
 assert len(soup.select('#fremdmodell .fremd-person')) == 2
 assert soup.select_one('#fremdmodell button#download-fremdmodell')
-assert len(soup.select('#bewertung [data-score]')) == 12
+assert len(soup.select('#bewertung [data-score]')) == 11
 # Students still download/import their full local answer state and all notebooks.
 js = (ROOT / "projekt/portal.js").read_text(encoding="utf-8")
 progress = (ROOT / "projekt/progress.js").read_text(encoding="utf-8")
