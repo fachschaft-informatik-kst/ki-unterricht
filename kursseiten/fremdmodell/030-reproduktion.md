@@ -19,38 +19,22 @@ Arbeiten Sie im <strong>privaten Fenster</strong> mit dem <a href="#projekt-werk
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">01</span><span class="dl8-step-time">5 Min.</span></div>
     <h4>Daten ansehen</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Notieren Sie die **beiden Klassen** des fremden Projekts. Prüfen Sie in seiner Fotostudio-JSON und im <a href="#journal">Journal</a> die Gruppen **T1/T2 (Training), V1 (Validierung) und P1/P2 (Test)**: je Klasse und Gruppe acht Fotos. Vergleichen Sie mindestens **ein Trainings- und ein Testexemplar**: Sind es wirklich verschiedene Gegenstände oder Personen? Ist ein Hintergrund, eine Beleuchtung oder Quelle auffällig? Schreiben Sie eine konkrete Beobachtung auf.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Notieren Sie die <strong>beiden Klassen</strong> des fremden Projekts. Prüfen Sie in seiner Fotostudio-JSON und im <a href="#journal">Journal</a> die Gruppen <strong>T1/T2 (Training), V1 (Validierung) und P1/P2 (Test)</strong>: je Klasse und Gruppe acht Fotos. Vergleichen Sie mindestens <strong>ein Trainings- und ein Testexemplar</strong>: Sind es wirklich verschiedene Gegenstände oder Personen? Ist ein Hintergrund, eine Beleuchtung oder Quelle auffällig? Schreiben Sie eine konkrete Beobachtung auf.</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">02</span><span class="dl8-step-time">5 Min.</span></div>
     <h4>Originalergebnisse verstehen</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Lesen Sie im Protokoll die **A/B-Werte auf V1**, die **ursprüngliche Modellwahl** und das **Abschlusstestergebnis auf P1/P2**. Wo liegt eine Differenz? Begründen Sie in einem Satz, warum P1/P2 nicht schon zum Trainieren benutzt werden durfte.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Lesen Sie im Protokoll die <strong>A/B-Werte auf V1</strong>, die <strong>ursprüngliche Modellwahl</strong> und das <strong>Abschlusstestergebnis auf P1/P2</strong>. Wo liegt eine Differenz? Begründen Sie in einem Satz, warum P1/P2 nicht schon zum Trainieren benutzt werden durfte.</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">03</span><span class="dl8-step-time">7 Min.</span></div>
     <h4>Selbst ausprobieren (Pflicht)</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Führen Sie im <a href="#projekt-werkbank">Notebook</a> mit der <strong>fremden Fotostudio-JSON</strong> die Zellen zum Datenimport und `foto.vergleichen(daten)` aus; behalten Sie die ursprünglichen Klassen, Einstellungen und den Startwert **11** bei. Übernehmen Sie die <strong>ursprünglich gewählte Variante</strong>, setzen Sie `TEST_FREIGEBEN = True` und wiederholen Sie den Abschlusstest. Vergleichen Sie **einen V1-Wert und das Testergebnis** mit dem Protokoll. Nicht nachträglich optimieren.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Führen Sie im <a href="#projekt-werkbank">Notebook</a> mit der <strong>fremden Fotostudio-JSON</strong> die Zellen zum Datenimport und <code>foto.vergleichen(daten)</code> aus; behalten Sie die ursprünglichen Klassen, Einstellungen und den Startwert <strong>11</strong> bei. Übernehmen Sie die <strong>ursprünglich gewählte Variante</strong>, setzen Sie <code>TEST_FREIGEBEN = True</code> und wiederholen Sie den Abschlusstest. Vergleichen Sie <strong>einen V1-Wert und das Testergebnis</strong> mit dem Protokoll. Nicht nachträglich optimieren.</p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">04</span><span class="dl8-step-time">3 Min.</span></div>
     <h4>Beurteilen</h4>
-    <div class="dl8-step-copy">
-      <!-- MD:START -->
-Schreiben Sie die wichtigste Beobachtung zur Datenqualität, die beiden Originalergebnisse, Ihren Vergleich und **eine faire Rückfrage** an das Tandem auf. Wenn Zahlen abweichen, nennen Sie die Abweichung; Sie müssen sie nicht schönrechnen.
-      <!-- MD:END -->
-    </div>
+    <div class="dl8-step-copy"><p>Schreiben Sie die wichtigste Beobachtung zur Datenqualität, die beiden Originalergebnisse, Ihren Vergleich und <strong>eine faire Rückfrage</strong> an das Tandem auf. Wenn Zahlen abweichen, nennen Sie die Abweichung; Sie müssen sie nicht schönrechnen.</p></div>
   </li>
 </ol>
 
