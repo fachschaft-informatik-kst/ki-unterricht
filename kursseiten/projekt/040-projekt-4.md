@@ -26,6 +26,31 @@
 Beide: 16 Neuronen, 60 Epochen, Startwert 11 und dieselben Validierungsbilder.
 <!-- MD:END -->
     </article>
+    <details class="project-background">
+      <summary>Hintergrund: Was wird bei unserem Modell trainiert?</summary>
+      <div class="detail-body">
+        <!-- Klarer Überblick vor dem ersten Training: nur das zweite Netz lernt. -->
+        <div class="project-train-overview" aria-labelledby="projekt-training-titel">
+          <h2 id="projekt-training-titel">Was wird hier eigentlich trainiert?</h2>
+          <ol class="project-train-flow">
+            <li><strong>1 · Unsere Bilder</strong><span>80 Bilder aus zwei Klassen, z. B. Apfel und Birne.</span></li>
+            <li class="model-fixed"><strong>2 · MobileNet</strong><span>Liefert 1280 Merkmale pro Bild.</span><em>Vortrainiert · bleibt unverändert</em></li>
+            <li class="model-trained"><strong>3 · Unser kleines Netz</strong><span>16 Neuronen · lernt mit 16 Trainingsbildern pro Variante in 60 Epochen.</span><em>Hier wird wirklich trainiert!</em></li>
+            <li><strong>4 · Vorhersage &amp; Test</strong><span>Welche Klasse ist es? Funktioniert das auch mit neuen Bildern?</span></li>
+          </ol>
+          <p class="project-train-note"><strong>Merken Sie sich:</strong> Die Merkmale kommen aus einem fertigen Modell. <strong>Trainiert wird nur unser nachgeschaltetes kleines Netz.</strong></p>
+        </div>
+      </div>
+    </details>
+    <div class="ki-notebook-block" data-notebook="content/ki_projekt/ki_lernlabor.ipynb" data-title="Projekt-Lernlabor">
+      <!-- MD:START -->
+### Bei Bedarf: Projekt-Lernlabor
+<!-- MD:END -->
+      <!-- MD:START -->
+Zum Ausprobieren und Wiederholen: Python-Zellen öffnen, bearbeiten und mit Shift + Enter ausführen. Für den eigentlichen A/B-Vergleich verwenden Sie später «Unser Versuch» im Journal.
+<!-- MD:END -->
+      <button type="button" class="ki-notebook-launch" data-lab="ki_lernlabor.ipynb">Notebook hier öffnen</button>
+    </div>
     <div class="callout">
       <strong>Ein Lauf ist eine Beobachtung, kein Beweis.</strong>
       <!-- MD:START -->

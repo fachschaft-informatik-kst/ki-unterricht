@@ -44,7 +44,7 @@ def figur(f):
 
 def render(lesson, voll=False):
     """Kursseite: nur Ziel, Leitfrage und Motivation. Mit voll=True zusätzlich Ablauftabelle (Lehrperson)."""
-    return (f'<details class="lesson-plan" id="doppellektion-{lesson["id"]}" data-lesson="{lesson["id"]}" open><summary>'
+    return (f'<details class="lesson-plan" id="doppellektion-{lesson["id"]}" data-lesson="{lesson["id"]}"{" open" if voll or lesson.get("view") != "projekt" else ""}><summary>'
             f'<span class="phase-num">{str(lesson.get("number", lesson["id"])).zfill(2)}</span><span>Doppellektion {lesson.get("number", lesson["id"])} · {html.escape(lesson["title"])}</span>'
             '<small>90 Min.</small></summary><div class="detail-body">'
             + (f'<p class="lesson-recap"><strong>Rückblick:</strong> {verlinke(html.escape(lesson["rueckblick"]))}</p>' if lesson.get('rueckblick') else '')
@@ -66,7 +66,7 @@ def lehrpersonen_seite(lessons, kursseite):
             '<link href="favicon.svg" rel="icon" type="image/svg+xml">'+stil+'<link href="portal.css" rel="stylesheet">'
             '<body class="lehrpersonen-seite"><main><div class="crumb"><span>Nur für die Lehrperson</span></div>'
             f'<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller {len(lessons)} Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
-            'In Doppellektion 5–8 dient AVIVA nur als äusserer Rahmen der SOL-Arbeit, nicht als gemeinsamer Takt für die Projektetappen. '
+            'In Doppellektionen 5–7 dient AVIVA als Rahmen der selbstorganisierten Projektarbeit. In Doppellektion 8 werden das fremde Modell selbstständig geprüft und die individuellen Fachgespräche durchgeführt. '
             'Die vollständigen Ablauftabellen finden Sie direkt weiter unten.</p>'
             '<p><a href="index.html">← Zur Kursseite</a></p>\n'+plaene+'\n<p><a href="index.html">← Zur Kursseite</a></p></main></body></html>\n')
 
@@ -75,10 +75,10 @@ def remove_calendar_dates(text):
 
     def course_card(match):
         number = match.group(1)
-        label = '5.–8. Doppellektion' if number == '05–08' else f'{int(number)}. Doppellektion'
+        label = '5.–7. Doppellektion' if number == '05–07' else f'{int(number)}. Doppellektion'
         return f'<span class="tag">{label}</span>'
 
-    text = re.sub(r'<span class="tag">[^<]*</span><b>(01|02|03|04|05–08|09|10)</b>', course_card, text)
+    text = re.sub(r'<span class="tag">[^<]*</span><b>(01|02|03|04|05–07|08|09|10)</b>', course_card, text)
 
     full_date = re.compile(r'(?<!\d)(?:0[1-9]|[12]\d|3[01])\.(?:0[1-9]|1[0-2])\.20\d{2}(?!\d)')
     dates = sorted(set(full_date.findall(text)), key=lambda value: tuple(map(int, reversed(value.split('.')))))
@@ -125,17 +125,15 @@ def update_language_lesson(text):
 def update_sol_material(text):
     """Keep project guidance aligned with the SOL frame without changing saved fields."""
     sol = (
-        '<div class="callout" id="sol-rahmen"><h3>Ihr Projekt: Arbeit planen, durchführen und überprüfen</h3>'
-        '<p>In Doppellektion 5–7 planen und steuern Sie Ihre Arbeit im Tandem selbst. '
-        'Die Etappen sind keine festen Lektionstermine. In Doppellektion 8 folgen individuelle Einzelgespräche und die Fremdauswertung.</p>'
-        '<p><strong>Verbindlich:</strong> fünf Datengruppen, fairer A/B-Vergleich, fünf Reflexionen, '
-        'Auswahl vor Testeinsicht und danach keine Optimierung. Abgabe vor Beginn der Doppellektion 8.</p>'
-        '<p><strong>Sie entscheiden:</strong> Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und Hilfen. '
-        'Planen Sie in Reflexion 1 die Etappen, Zuständigkeiten und Reserve. Halten Sie am Ende jeder Arbeitsphase '
-        'kurz fest: erreicht, offen, nächster Schritt, benötigte Hilfe. Reflektieren Sie Ihren Plan in Reflexion 5. '
-        'Kein zusätzliches Lerntagebuch. Beratung und Lernlabor nutzen Sie nach Bedarf.</p>'
-        '<p><strong>Reihenfolge aus fachlichen Gründen:</strong> Daten prüfen → A/B vergleichen → Auswahl begründen '
-        '→ Abschlusstest → Fazit und Abgabe. Wie Sie diese Etappen auf die Arbeitszeit verteilen, planen Sie selbst.</p></div>'
+        '<div class="callout" id="sol-rahmen"><h3>Selbstständig arbeiten, fair vergleichen</h3>'
+        '<p>In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo selbst fest. '
+        'Die sechs Etappen sind fachlich geordnet, aber keine festen Lektionstermine.</p>'
+        '<p><strong>Verbindlich:</strong> Fünf unabhängige Datengruppen, fairer A/B-Vergleich, fünf Reflexionen '
+        'und eine begründete Modellwahl <strong>vor</strong> dem Abschlusstest. Danach keine Optimierung. '
+        '<strong>Abgabe vor Beginn der Doppellektion 8.</strong></p>'
+        '<p>Halten Sie in Reflexion 1 Ihren Plan und in Reflexion 5 die Anpassungen fest. '
+        'Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> '
+        'sind Orientierung, keine zusätzliche Pflicht.</p></div>'
     )
     text = re.sub(r'<div class="callout" id="sol-rahmen">.*?</div>', '', text, flags=re.S)
     text = text.replace('<!-- /LESSONS:projekt -->', '<!-- /LESSONS:projekt -->'+sol, 1)
@@ -149,7 +147,7 @@ def update_sol_material(text):
         '<tr><td>Vor Beginn der Doppellektion 8</td><td>ZIP über den Abgabekanal einreichen</td>'
         '<td>Vollständiges Journal, Versuch mit Ausgaben, Daten und Protokoll</td></tr>'
         '<tr><td>8. Doppellektion</td><td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>'
-        '<td>Ein Reproduktionslauf, Fremdtest und kurze Rückmeldung; unbenotet, eigene Abgabe unverändert</td></tr>'
+        '<td>Training/Validierung/Test des fremden Projekts prüfen, mit eigenen Klassen experimentieren, persönliche Reflexion (nur K12: 3 Punkte); eigene Abgabe unverändert</td></tr>'
         '</tbody></table></div><p class="small muted">20 Einzelgespräche bei einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Wechsel/Notizen ab Minute 0. '
         'Die letzten 10 Minuten schliessen unmittelbar an die 90-minütige Doppellektion an. '
         'Gesprächsreihenfolge vorab bekannt, die übrigen arbeiten selbstständig; keine Zeitreserve oder weiteren Termine.</p></div></details>'
@@ -157,7 +155,7 @@ def update_sol_material(text):
     text, count = re.subn(r'<details><summary>Termine ansehen</summary>.*?</details>', schedule, text, count=1, flags=re.S)
     assert count == 1, 'Expected project schedule'
     replacements = {
-        'Reproduktionsprüfung (abgabepflichtig)': 'Reproduktionscheck (Teil der unbenoteten Fremdauswertung)',
+        'Reproduktionsprüfung (abgabepflichtig)': 'Daten- und Ergebnischeck (gemeinsam, unbenotet)',
         'unbenoteter Fremdtest →': 'Fremdtest und Rückmeldung →',
         'Reproduktionsprüfung · 45 Minuten · wird abgegeben': 'Reproduktionsprüfung · ca. 30 Minuten · unbenotet',
         'Fremdtest · 20 Minuten · unbenotet': 'Fremdtest &amp; Rückmeldung · ca. 25 Minuten · unbenotet',

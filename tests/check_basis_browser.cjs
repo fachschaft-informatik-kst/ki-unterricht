@@ -4,6 +4,55 @@ const {spawn}=require('node:child_process');
 const path=require('node:path');
 const fs=require('node:fs'),os=require('node:os');
 const assert=require('node:assert/strict');
+
+// Browser-level contract shared by the first- and fourth-year notebook panels:
+// button and SVG must toggle in both directions, and browser-initiated exits
+// (for example Escape) must restore the initial icon and accessible label.
+async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
+  const button=page.locator(buttonSelector),panel=page.locator(panelSelector);
+  await button.waitFor({state:'visible'});
+  assert.equal(await button.getAttribute('aria-label'),'Notebook vergrössern');
+  assert.equal(await button.getAttribute('aria-pressed'),'false');
+  const corners=button.locator('svg path');
+  assert.equal(await corners.count(),1,'Fullscreen control needs the editor-style SVG');
+  const expand=await corners.getAttribute('d');
+  const isDialog=await panel.evaluate(el=>el.tagName==='DIALOG');
+  const waitForState=async expanded=>page.waitForFunction(({selector,expanded,isDialog})=>{
+    const el=document.querySelector(selector);
+    if(!el)return false;
+    const actual=isDialog?el.classList.contains('lab-modal-maximized'):document.fullscreenElement===el;
+    const pressed=el.querySelector('[aria-label="Notebook verkleinern"],[aria-label="Notebook vergrössern"]')
+      ?.getAttribute('aria-pressed');
+    return actual===expanded&&pressed===String(expanded);
+  },{selector:panelSelector,expanded,isDialog});
+  await button.click();
+  await waitForState(true);
+  assert.equal(await button.getAttribute('aria-pressed'),'true');
+  assert.equal(await button.getAttribute('aria-label'),'Notebook verkleinern');
+  assert.equal(await button.getAttribute('title'),'Notebook verkleinern');
+  assert.notEqual(await corners.getAttribute('d'),expand,'Icon must switch to inward-facing corners');
+  await button.click();
+  await waitForState(false);
+  assert.equal(await button.getAttribute('aria-label'),'Notebook vergrössern');
+  assert.equal(await corners.getAttribute('d'),expand);
+
+  await button.click();
+  await waitForState(true);
+  if(isDialog){
+    // Escape closes the native modal and resets its expand icon.
+    await page.keyboard.press('Escape');
+    await page.waitForFunction(sel=>{
+      const el=document.querySelector(sel);
+      return el&&!el.open&&!el.classList.contains('lab-modal-maximized');
+    },panelSelector);
+    assert.equal(await corners.getAttribute('d'),expand,'Closing the modal resets its expand icon');
+    assert.equal(await button.getAttribute('aria-pressed'),'false');
+  }else{
+    await page.evaluate(()=>document.exitFullscreen());
+    await waitForState(false);
+    assert.equal(await corners.getAttribute('d'),expand);
+  }
+}
 (async()=>{
   const directory=process.env.PORTAL_SITE||path.resolve(__dirname,'../dist');
   const server=spawn('python',['-m','http.server','8770','--bind','127.0.0.1','--directory',directory],{stdio:'ignore'});
@@ -14,25 +63,9 @@ const assert=require('node:assert/strict');
     const page=await browser.newPage();
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto('http://127.0.0.1:8770/kurse.html');
-    assert.equal(await page.locator('a.choice').count(),4,'Two BOK courses and two IRN course slots must appear');
-    assert.equal(await page.locator('a.choice[href="bok/1-klasse/"]').count(),1);
-    assert.equal(await page.locator('a.choice[href="bok/4-klasse/"]').count(),1);
-    assert.equal(await page.locator('a.choice[href="irn/1-klasse/"]').count(),1);
-    assert.equal(await page.locator('a.choice[href="irn/4-klasse/"]').count(),1);
-    const routed=await browser.newPage();
-    await routed.goto('http://127.0.0.1:8770/bok/1-klasse/');
-    assert.equal(await routed.title(),'BOK · 1. Klasse · KI entdecken');
-    assert.equal(await routed.locator('a[href="../../kurse.html"]').count(),1);
-    assert.equal(await routed.locator('img.school-logo').evaluate(img=>img.complete&&img.naturalWidth>0),true);
-    await routed.goto('http://127.0.0.1:8770/bok/4-klasse/');
-    assert.equal(await routed.title(),'BOK · 4. Klasse · KI vertiefen');
-    assert.equal(await routed.locator('a[href="../../kurse.html"]').count(),1);
-    await routed.goto('http://127.0.0.1:8770/irn/1-klasse/');
-    assert((await routed.locator('main').innerText()).includes('in Vorbereitung'));
-    await routed.close();
-    // Legacy URL remains available to preserve existing bookmarks and student data.
-    await page.goto('http://127.0.0.1:8770/basis/');
-    assert.equal(await page.title(),'BOK · 1. Klasse · KI entdecken');
+    assert.equal(await page.locator('a.choice').count(),2,'Both Kurzgymi tracks must appear');
+    await page.locator('a.choice[href="basis/"]').click();
+    assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
     assert.equal(await page.locator('main > section').count(),13);
     // Shared KST breadcrumb; track switching happens only via the landing page.
     const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
@@ -109,11 +142,17 @@ const assert=require('node:assert/strict');
     const milestoneBadgeColours=await page.locator('#basis-ki #einstieg-3 .section-intro .marke').evaluateAll(nodes=>
       nodes.map(node=>({label:node.textContent.trim(),background:getComputedStyle(node).backgroundColor,color:getComputedStyle(node).color})));
     assert.deepEqual(milestoneBadgeColours,[
-      {label:'Regeln von Menschen',background:'rgb(30, 64, 175)',color:'rgb(255, 255, 255)'},
-      {label:'Lernen aus Daten',background:'rgb(154, 52, 18)',color:'rgb(255, 255, 255)'}
-    ],'Distinct blue/orange markers with white text in DL1');
+      {label:'Programmierung durch Menschen',background:'rgb(84, 130, 53)',color:'rgb(255, 255, 255)'},
+      {label:'Datengetriebene Programmierung',background:'rgb(51, 65, 85)',color:'rgb(255, 255, 255)'}
+    ],'Markers match green/slate DL1 programming graphic');
     const legendDescription=await page.locator('#basis-ki #einstieg-3 .section-intro').innerText();
-    assert(legendDescription.includes('Regeln von Menschen')&&legendDescription.includes('Lernen aus Daten')&&legendDescription.includes('KI-Winter'));
+    assert(legendDescription.includes('Programmierung durch Menschen')&&legendDescription.includes('Datengetriebene Programmierung')&&legendDescription.includes('KI-Winter'));
+    assert.equal(await page.locator('#basis-ki #einstieg-3 .section-intro a[href="#einstieg-1"]').count(),1,'Legend links to chapter 1 graphic');
+    const introLayout=await page.locator('#basis-ki #einstieg-3 .section-intro').evaluate(el=>({width:el.getBoundingClientRect().width,containerWidth:el.parentElement.clientWidth-parseFloat(getComputedStyle(el.parentElement).paddingLeft)-parseFloat(getComputedStyle(el.parentElement).paddingRight),maxWidth:getComputedStyle(el).maxWidth,align:getComputedStyle(el).textAlign,hyphens:getComputedStyle(el).hyphens}));
+    assert.equal(introLayout.maxWidth,'none','Milestone intro must not be limited to 760px');
+    assert.equal(introLayout.align,'justify','Milestone intro uses justified text');
+    assert.equal(introLayout.hyphens,'auto','Milestone intro allows hyphenation');
+    assert(Math.abs(introLayout.width-introLayout.containerWidth)<2,'Milestone intro fills its chapter box');
 
     const firstYearHistory=page.locator('#basis-ki #einstieg-3 [data-milestone-open="turing"]');
     const basisScrollBefore=await page.evaluate(()=>{window.scrollTo({top:340,behavior:'instant'});return window.scrollY});
@@ -228,6 +267,10 @@ const assert=require('node:assert/strict');
     await page.reload();
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await note.fill('Gesicherte Reflexion im ZIP.');
+     await page.locator('[data-basis-answer="basis-journal-namen"]').fill('Ada Beispiel');
+     await page.locator('[data-basis-answer="basis-journal-klasse"]').fill('1b');
+     const timelineAnswer=page.locator('[data-basis-answer="basis-ki-zeitstrahl"]');
+     await timelineAnswer.fill('Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
     await page.locator('input[aria-label="Fotostudio-JSON zur ZIP-Sicherung hinzufügen"]').setInputFiles({name:'fotos.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(studio))});
     const downloadPromise=page.waitForEvent('download');
@@ -237,13 +280,19 @@ const assert=require('node:assert/strict');
     await download.saveAs(archivePath);
     const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../projekt/archive.js')).toString('base64'));
     const files=await archive.readZip(new Blob([fs.readFileSync(archivePath)]));
-    assert(files.has('Reflexionen.txt')&&files.has('notebooks/basis_neuron.ipynb')&&files.has('fotodaten/fotostudio.json'));
+    assert(files.has('Journal.html')&&files.has('Reflexionen.txt')&&files.has('notebooks/basis_neuron.ipynb')&&files.has('fotodaten/fotostudio.json'));
+     const learningJournal=await files.get('Journal.html').text(),reflections=await files.get('Reflexionen.txt').text();
+     assert(learningJournal.includes('Gesicherte Reflexion im ZIP.')&&learningJournal.includes('Jüngere Beispiele lernen aus Daten'));
+     assert(learningJournal.includes('Ada Beispiel')&&learningJournal.includes('1b'),'Identity belongs in printable journal');
+     assert(reflections.includes('Entdeckerfrage zum Zeitstrahl')&&reflections.includes('Gesicherte Reflexion im ZIP.'));
+     assert.equal(JSON.parse(await files.get('kursstand.json').text()).answers['basis-ki-zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(JSON.parse(await files.get('notebooks/basis_neuron.ipynb').text()).cells[0].source[0],'print("Mein Versuch")');
     await note.fill('Wird beim Import ersetzt');
     const restoredPhoto=page.waitForEvent('download');
     await page.locator('input[aria-label="ZIP-Kursstand wiederherstellen"]').setInputFiles(archivePath);
     await restoredPhoto;
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.');
+     assert.equal(await timelineAnswer.inputValue(),'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(JSON.parse(await page.evaluate(()=>localStorage.getItem('kst-ki-basis-notebooks-v1')))['basis_neuron.ipynb'].cells[0].execution_count,1);
     // ZIP export/import must remain accessible when the navigation becomes mobile.
     const mobilePage=await browser.newPage({viewport:{width:390,height:840}});
@@ -260,7 +309,7 @@ const assert=require('node:assert/strict');
     ]){
       const notebookPage=await browser.newPage();
       await notebookPage.goto('http://127.0.0.1:8770/basis/#'+lesson);
-      await notebookPage.locator('#'+lesson+' a.btn.primary[href*="'+link+'"]').first().click();
+      await notebookPage.locator('#'+lesson+' a.ki-notebook-launch[href*="'+link+'"]').first().click();
       await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
       const source=await notebookPage.locator('#basis-lab-frame').getAttribute('src');
       assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/'+notebook,
@@ -269,6 +318,30 @@ const assert=require('node:assert/strict');
       assert.equal(await notebookPage.locator('#basis-notebook-panel.lab-panel').count(),1);
       assert.equal(await notebookPage.getByText('Notebook der 1. Klasse').count(),0);
       assert.equal(await notebookPage.locator('#basis-lab-fullscreen').count(),1);
+      const basicDialog=notebookPage.locator('#basis-notebook-panel');
+      assert.equal(await basicDialog.evaluate(el=>el.tagName),'DIALOG');
+      assert.equal(await basicDialog.getAttribute('open'),'');
+      assert.equal(await basicDialog.getAttribute('aria-labelledby'),'basis-lab-title');
+      if(notebook==='basis_neuron.ipynb'){
+        await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
+        await basicDialog.waitFor({state:'hidden'});
+        assert.equal(await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().getAttribute('aria-expanded'),'false',
+          'Closing the modal must reset the launcher for keyboard and screen-reader users');
+        assert.equal(await basicDialog.count(),1,'Closing must not destroy notebook markup');
+        assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
+          'Closing the dialog must not reload or remove the notebook iframe');
+        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().click();
+        await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
+        assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
+          'Reopen must retain the same kernel document, not restart Python');
+        await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
+        await basicDialog.waitFor({state:'hidden'});
+        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().click();
+        await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
+      }
+      if(notebook==='basis_neuron.ipynb'){
+        await checkNotebookFullscreen(notebookPage,'#basis-lab-fullscreen','#basis-notebook-panel');
+      }
       await notebookPage.close();
     }
     // Jupyter notebooks can now be launched and edited within the chapter.
@@ -284,16 +357,17 @@ const assert=require('node:assert/strict');
       // Navigate just as a student would: inactive lesson sections are hidden.
       // Opening only the nested <details> does not make a hidden lesson visible.
       await notebookPageInline.goto(url+'#'+section);
-      const card=notebookPageInline.locator('.ki-notebook-block[data-notebook="'+expected+'"]');
-      assert.equal(await card.count(),1,'Notebook must be present in the matching chapter');
+      const matches=notebookPageInline.locator('.ki-notebook-block[data-notebook="'+expected+'"]');
+      assert((await matches.count())>=1,'Notebook must be present in the matching chapter');
+      const card=matches.first();
       await card.evaluate(el=>{el.closest('details.kapitel').open=true;});
       assert.equal(await card.locator('.ki-notebook-iframe').count(),0,'No runtime iframe before user action');
-      const launch=card.locator('button.ki-notebook-launch');
+      const launch=card.locator('.ki-notebook-launch');
       const scriptResult=await notebookPageInline.request.get(new URL('notebook-blocks.js',url).href);
       assert.equal(scriptResult.status(),200,'Notebook block script must be served alongside each course');
       await notebookPageInline.waitForFunction(path=>{
         const card=document.querySelector('.ki-notebook-block[data-notebook="'+path+'"]');
-        return !!card?.querySelector('button.ki-notebook-launch');
+        return !!card?.querySelector('.ki-notebook-launch');
       },expected,{timeout:10000}).catch(async e=>{
         throw Error('Notebook launcher missing: '+JSON.stringify(await card.evaluate(el=>({
           script:[...document.scripts].map(s=>s.src).filter(x=>x.includes('notebook')),
@@ -301,14 +375,41 @@ const assert=require('node:assert/strict');
           scriptCount:document.querySelectorAll('.ki-notebook-block').length
         })))+' '+e.message);
       });
+      // A deliberate pointer hover prepares one JupyterLite browsing context.
+      // The click must use this SAME frame, even before kernel readiness.
+      await launch.hover();
+      const frame=notebookPageInline.locator(url.includes('/projekt/')?'#project-frame':'#basis-lab-frame');
+      await notebookPageInline.waitForFunction(selector=>!!document.querySelector(selector)?.getAttribute('src'),
+        url.includes('/projekt/')?'#project-frame':'#basis-lab-frame',{timeout:12000});
+      const warmedSrc=await frame.getAttribute('src');
       await launch.click();
       assert.equal(await launch.getAttribute('aria-expanded'),'true');
-      const frame=card.locator('iframe.ki-notebook-iframe');
-      await frame.waitFor({state:'visible'});
-      assert.match(await frame.getAttribute('src'),new RegExp('portal%2F'+expected.split('/').pop().replace('.','\\.')));
-      assert.equal(await card.locator('.ki-notebook-runtime').isVisible(),true);
-      await card.getByRole('button',{name:'Notebook schliessen'}).click();
-      assert.equal(await card.locator('.ki-notebook-runtime').isVisible(),false);
+      assert.equal(await frame.getAttribute('src'),warmedSrc,'Notebook click must reuse its intent-warmed iframe');
+      await frame.waitFor({state:'attached'});
+      assert.equal(new URL(await frame.getAttribute('src'),url).searchParams.get('path'),'portal/'+expected.split('/').pop());
+      assert.equal(await card.locator('.lab-panel').count(),0,'The modal must not move into lesson cards and restart the iframe');
+      assert.equal(await frame.evaluate(el=>el.closest('dialog')?.parentElement?.tagName),'MAIN',
+        'A fixed dialog in the course page must retain its live Python browsing context');
+      if(url.includes('/projekt/')){
+        const projectDialog=notebookPageInline.locator('#project-lab');
+        assert.equal(await projectDialog.evaluate(el=>el.tagName),'DIALOG');
+        assert.equal(await projectDialog.getAttribute('open'),'');
+        await checkNotebookFullscreen(notebookPageInline,'[data-fullscreen="project-frame"]','#project-lab');
+        // The fullscreen regression also checks Escape, which closes a
+        // native dialog. Reopen before exercising the explicit close button.
+        if(!await projectDialog.evaluate(el=>el.open)) await launch.click();
+        await projectDialog.getByRole('button',{name:'Notebook schliessen'}).click();
+        await projectDialog.waitFor({state:'hidden'});
+        // The native <dialog> close event updates the launcher's state asynchronously.
+        await notebookPageInline.waitForFunction(()=>document.querySelector('#project-lab')?.open===false);
+        assert.equal(await launch.getAttribute('aria-expanded'),'false','Closing the modal must reset the notebook launcher');
+        const srcBefore=await frame.getAttribute('src');
+        assert(srcBefore,'Notebook iframe must remain after closing');
+        await launch.click();
+        await notebookPageInline.waitForFunction(()=>document.querySelector('#project-lab')?.open===true);
+        assert.equal(await frame.getAttribute('src'),srcBefore,'Reopening must retain the iframe document');
+        assert.equal(await notebookPageInline.locator('#project-frame').count(),1,'One stable iframe only');
+      }
       assert.equal(await card.locator('a.ki-notebook-direct').getAttribute('target'),'_blank');
     }
     await notebookPageInline.close();

@@ -23,14 +23,38 @@ async function simulate(name, fail = false, twice = false, modification = '') {
     executed.push(cell.index); return {content: {status: fail ? 'error' : 'ok'}};
   }}, Widget: class {constructor() {this.node = {style: {}, setAttribute() {}};}}};
   vm.runInNewContext(source, context);
-  context.plugin.activate({restored:Promise.resolve()}, {widgetAdded: {connect: cb => callback = cb}, forEach: cb => cb(panel)});
+  const activated = [];
+  await context.plugin.activate({
+    restored: Promise.resolve(),
+    activatePlugin: async id => { activated.push(id); }
+  }, {widgetAdded: {connect: cb => callback = cb}, forEach: cb => cb(panel)});
+  assert.deepEqual(activated,['@jupyter-widgets/jupyterlab-manager:plugin'],
+    'Widget manager must activate before subscribing to notebook startup');
   if (twice) callback(null, panel);
   await new Promise(resolve => setImmediate(resolve));
   return {nb, executed, badges};
 }
 (async () => {
-  // Initial import budgets: the basic neuron lab needs only numpy/matplotlib.
-  // Image-project notebooks deliberately retain Pillow and sklearn.
+  // Explicitly reproduce the first-launch race: notebook listeners must not
+  // run while the Jupyter widgets extension is still activating.
+  {
+    let activateManager;
+    const activation = new Promise(resolve => { activateManager=resolve; });
+    let subscribed = false, requested = null;
+    const sandbox={INotebookTracker:{}, CodeCell:{}, Widget:class{}, console};
+    vm.runInNewContext(source, sandbox);
+    const started = sandbox.plugin.activate({
+      activatePlugin:id=>{ requested=id; return activation; },
+      restored:Promise.resolve()
+    }, {widgetAdded:{connect(){ subscribed=true; }},forEach(){}});
+    assert.equal(requested,'@jupyter-widgets/jupyterlab-manager:plugin');
+    assert.equal(subscribed,false,'Autostart must not subscribe before the widget renderer');
+    activateManager();
+    await started;
+    assert.equal(subscribed,true,'Autostart must subscribe after the widget renderer');
+  }
+  // SVG widgets must be usable without loading the large Matplotlib package.
+  // Plotting and ML experiments continue to load their required dependencies.
   const packages = name => {
     const nb = JSON.parse(fs.readFileSync(path.join(root, 'content', name)));
     const setup = nb.cells.find(c => c.cell_type==='code' && c.metadata.tags?.includes('ki-autostart'));
@@ -38,12 +62,26 @@ async function simulate(name, fail = false, twice = false, modification = '') {
     assert(match, 'Package declaration missing in ' + name);
     return [...match[1].matchAll(/'([^']+)'/g)].map(m=>m[1]);
   };
-  assert.deepEqual(packages('perzeptron_und_neuronale_netze.ipynb'), ['numpy','matplotlib']);
-  assert.deepEqual(packages('xor_einzelne_neuronen.ipynb'), ['numpy','matplotlib']);
+  assert.deepEqual(packages('perzeptron_und_neuronale_netze.ipynb'), ['numpy']);
+  assert.deepEqual(packages('xor_einzelne_neuronen.ipynb'), ['numpy']);
+  assert.deepEqual(packages('basis_neuron.ipynb'), ['numpy']);
+  const tools = fs.readFileSync(path.join(root,'content/unterricht_tools.py'),'utf8');
+  assert(!/^import matplotlib\.pyplot as plt$/m.test(tools),
+    'Matplotlib must not initialize when importing HTML/SVG teaching widgets');
+  assert(tools.includes('class _LazyPlots'));
+  assert(tools.includes("widgets.interact_manual.options(manual_name='Netz trainieren ▶')"),
+    'The XOR learning widget must wait for an explicit click before training');
   for (const name of ['mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb']) {
     assert(!packages(name).includes('pillow'), name + ' must not preload unused Pillow');
     assert(packages(name).includes('scikit-learn'));
   }
+  assert.deepEqual(packages('ki_projekt/ki_tandemprojekt.ipynb'), ['numpy','pillow'],
+    'The saved project journal must not block startup on unused plotting/training packages');
+  const journalCells = JSON.parse(fs.readFileSync(path.join(root,'content/ki_projekt/ki_tandemprojekt.ipynb'))).cells;
+  assert(journalCells[11].source.join('').includes("await pyodide_js.loadPackage(['matplotlib'])"),
+    'Only the first visualisation should fetch plotting dependencies');
+  assert(journalCells[14].source.join('').includes("await pyodide_js.loadPackage(['scipy', 'scikit-learn'])"),
+    'Training should fetch scientific packages only when started');
   for (const name of ['ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb']) {
     assert(packages(name).includes('pillow'), 'Image-project experiments still need Pillow');
   }
@@ -91,8 +129,11 @@ async function simulate(name, fail = false, twice = false, modification = '') {
       performance:{getEntriesByType:()=>[{type:navigation}]}, URLSearchParams,
       location:{search:query}, sessionStorage:{getItem:()=>remembered}};
     vm.runInNewContext(source, context);
-    context.plugin.activate({restored:Promise.resolve(), commands:{execute:async (command,args)=>opened.push([command,args.path])}},
-      {size,widgetAdded:{connect(){}},forEach(){}});
+    await context.plugin.activate({
+      restored:Promise.resolve(),
+      activatePlugin:async id=>assert.equal(id,'@jupyter-widgets/jupyterlab-manager:plugin'),
+      commands:{execute:async (command,args)=>opened.push([command,args.path])}
+    }, {size,widgetAdded:{connect(){}},forEach(){}});
     await new Promise(resolve=>setImmediate(resolve));
     assert.equal(opened.length,expected);
     if(expected) assert.deepEqual(opened[0],['docmanager:open','perzeptron_und_neuronale_netze.ipynb']);

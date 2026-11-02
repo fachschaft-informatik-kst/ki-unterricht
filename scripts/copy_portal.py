@@ -22,5 +22,3 @@ shutil.copy(root/'kurse.html',out/'kurse.html')
 
 build_previews(out)
 patch_bundle(out)
-from build_course_routes import build as build_course_routes
-build_course_routes(out)

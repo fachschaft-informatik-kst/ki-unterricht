@@ -29,14 +29,3 @@
 - [Bewertungsraster](index.html#bewertung) · [Projektauftrag](materialien/downloads/ki_projektauftrag.md)
 
 **Hinweis:** Auswahl vor dem Test festhalten; Testdaten nicht nachträglich zur Optimierung verwenden.
-
-## Doppellektion 08
-
-### Direkt öffnen
-
-- [Unterrichtsablauf und Fachgespräche](unterrichtsplan.html#doppellektion-08)
-- [ZIP-Wiederherstellung für die Fremdauswertung](index.html#sicherung)
-- [Bewertungsraster](materialien/downloads/KI_Bewertungsraster.md) · [Musterlösungen / Erwartungshorizont](musterloesungen/)
-
-**Hinweis:** Fremdauswertung und Fachgespräche anhand des bestehenden Auftrags und Rasters durchführen, keine separaten Arbeitsblätter nötig.
-

@@ -32,7 +32,7 @@ Der A/B-Vergleich bleibt als fachliches Gerüst bestehen: zwei Klassen, 80 Fotos
 | Datencheck vor Vergleich; Auswahl vor Test; keine Optimierung nach Testeinsicht | Zeitverteilung der Etappen auf Doppellektion 5–7, Tagesziele und Rollen |
 | Fünf Reflexionen, nachvollziehbare Belege, Abgabe vor Doppellektion 8 | Benötigte Hilfen, Beratung, freiwillige Vertiefung vor Testeinsicht |
 | Jede Person erklärt das ganze Projekt im Einzelgespräch in Doppellektion 8 | Wie die Tandemmitglieder sich gegenseitig auf die individuellen Gespräche vorbereiten |
-| Fremdauswertung in Doppellektion 8, unbenotet | Eigene Prüffrage, Arbeitsteilung und begründete Rückmeldung |
+| Fremdauswertung in Doppellektion 8 (K11 unbenotet, K12 individuell) | Eigene Prüffrage, Arbeitsteilung und begründete Rückmeldung |
 
 **Kein versteckter Gleichschritt:** Die Titel der Doppellektionen 5–7 benennen den Lernprozess, keine verpflichtenden Versuchstermine. Ein Tandem darf in Doppellektion 5 schon vergleichen und ein anderes in Doppellektion 6 noch Daten ergänzen. Die fachliche Reihenfolge bleibt erhalten.
 
@@ -41,7 +41,7 @@ Der A/B-Vergleich bleibt als fachliches Gerüst bestehen: zwei Klassen, 80 Fotos
 - In **Reflexion 1** einen knappen Etappenplan ergänzen: nächste Schritte, Zuständigkeiten, geschätzte Zeit und Reserve. Rollen wechseln; nicht dauerhaft eine Person klicken und die andere schreiben lassen.
 - Pro Arbeitsphase ein eigenes Tagesziel wählen. Am Ende im bestehenden Journal kurz ergänzen: **erreicht, offen, nächster Schritt, benötigte Hilfe**. Dafür kein zusätzliches Dokument oder Lerntagebuch verlangen.
 - In **Reflexion 5** den Plan prüfen: Was funktionierte, was änderten wir, und warum?
-- Die bestehende Bewertung bleibt bei **K1–K10, maximal 30 Punkten**. Die SOL-Routinen unterstützen Lernen und Begründungen, sind keine neue benotete Kategorie.
+- Die Bewertung umfasst **11 benotete Kriterien (K1–K10, K12), maximal 33 Punkte**. Die Routinen zum selbstständigen Arbeiten unterstützen das Lernen, sind aber keine zusätzliche Bewertungskompetenz. Die gemeinsame Prüfung K11 ist unbenotet; nur die persönliche Reflexion K12 zählt 3 Punkte.
 
 ### Rolle der Lehrperson
 
@@ -87,11 +87,11 @@ Vor Ende Doppellektion 7 Abgabekanal, Gesprächsfenster und Austauschpartner mit
 
 Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrperson führt bei 20 Lernenden ab Minute 0 bis Minute 100 die vierminütigen Einzelgespräche mit jeweils einer Minute Notizen/Wechsel (90 Minuten Unterricht plus 10 Minuten direkt im Anschluss). Die anderen Tandems organisieren die Fremdauswertung selbst und pausieren jeweils nur für ihr persönliches Gespräch.
 
-**Pflichtkern der selbstständigen Fremdauswertung während der Doppellektion:** 5 Minuten Prüffrage/Erwartung, 5 Minuten Auftrag erschliessen, ca. 30 Minuten Reproduktionscheck und 25 Minuten Fremdtest mit begründeter Rückmeldung. Für Wiedereinstieg und Technik bleiben innerhalb der Schülerarbeit **15 Minuten**, nicht im lückenlosen Gesprächsplan der Lehrperson. Das Gespräch wird nicht ein zweites Mal als zusätzliche Phase eingerechnet. Ein Reproduktionslauf mit Startwert 11 genügt; drei Startwerte sind nur Zusatz.
+**Pflichtkern der selbstständigen Fremdauswertung:** ca. **20 Minuten** Trainings-, Validierungs- und Testdaten (T1/T2, V1, P1/P2) samt Originalergebnissen prüfen und einen Nachlauf mit Startwert 11 durchführen; ca. **15 Minuten** die eigenen, ganz anderen Klassen durch das fremde Modell schicken, mindestens ein Bild je Klasse und die Vorhersagetabelle betrachten; anschliessend ca. **15 Minuten** zwei persönliche Reflexionsantworten und eine gemeinsame Rückmeldung verfassen. Weitere **20 Minuten** sind für Dateiimport, Gesprächsunterbrechungen und technische Probleme reserviert. Zusätzlich selbstständiger Einstieg und ZIP-Abgabe. Gesprächsplan der Lehrperson unverändert: 100 Minuten ohne Reserve.
 
-Im privaten Browserfenster fremdes ZIP importieren, Vorbereitung und Datenimport ausführen, A/B nachtrainieren und den Test mit der Auswahl des Originals prüfen. Prüfsumme und Originalwerte vergleichen. Danach dasselbe fremde Modell die eigenen Klassen C/D beurteilen lassen. Eine hohe Trennschärfe kann mit Hintergrund, Licht oder Form zusammenhängen; das Modell kennt weiterhin nur seine ursprünglichen Klassen und kein «weder noch».
+**Fachliche Leitidee:** Die **ungesehenen Testbilder P1/P2 gehören zu den beiden ursprünglichen Modellklassen** und dürfen für eine unabhängige Trefferquote gerade nicht im Training gewesen sein. Die **eigenen, ganz anderen Klassen** hat das fremde Modell hingegen überhaupt nie gelernt. Es muss dennoch eine seiner zwei bekannten Klassen vorhersagen. Eine hohe Trennschärfe oder ein hoher Modellwert ist deshalb keine nachgewiesene Trefferquote für die neuen Klassen.
 
-Reproduktionscheck und Fremdtest bilden **eine kurze, verbindliche und unbenotete Fremdauswertung**. Bestehende Protokollfelder nutzen, eine konkrete Empfehlung ergänzen und separat einreichen; keine weitere benotete Abgabe oder nachträgliche Projektkorrektur. Die Tandems geben dem anderen Tandem ihre Rückmeldung. Bei einer nicht lösbaren technischen Blockade gespeicherte fremde Ausgaben auswerten und die fehlende Reproduktion ausdrücklich festhalten. Der Auftrag wird nicht ersatzlos gestrichen und kein Erfolg vorgetäuscht.
+**Bewertung und Abgabe:** Gemeinsamer Daten-/Ergebnischeck K11 und Pflichtversuch sind **verbindlich, unbenotet**. Nur das persönliche begründete Urteil **K12 zählt maximal 3 Punkte pro Person** (3/33 = 9,1 % der Note). Je Person zwei Pflichtantworten, dazu eine kurze gemeinsame Rückmeldung; ZIP separat einreichen. Falls das Notebook nicht startet, dokumentierte Originalbilder und -resultate auswerten und nicht ausgeführte Experimente ausdrücklich kennzeichnen. Drei Startwerte sind freiwillig.
 
 In den letzten fünf Minuten sichern und eine Transferfrage für Doppellektion 10 notieren. Erhaltene Dateien nach der vereinbarten Aufbewahrungsregel löschen.
 
@@ -151,7 +151,7 @@ Die anschliessende **eine Minute** gehört zu den Notizen/Punkten und dem Wechse
 
 Eine ZIP-Abgabe enthält `Journal.html`, Versuchsnotebook mit gespeicherten Ausgaben, vorhandenes Versuchsprotokoll sowie hinzugefügte Originalfotos und Fotostudio-JSON. Foto-Upload im Notebook und Dateien der Abgabeliste sind getrennt. Nach Import zuerst Vorbereitung und Datenimport erneut ausführen; gespeicherte Ausgaben sind kein laufender Python-Zustand. Training und Test bleiben manuell.
 
-Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte). Keine weitere Gewichtung. Pro Person gilt: Note = 1 + 5 × (gemeinsame Projektpunkte + individuelle Gesprächspunkte) / 30, auf Viertelnoten gerundet. SOL-Routinen und Fremdauswertung schaffen keine zusätzlichen Bewertungskategorien. Details: [Bewertungsraster](KI_Bewertungsraster.md).
+Elf benotete Kriterien à 0–3 Punkte, insgesamt 33. K1–K6: Projektabgabe (18); K7–K10: individuelles vierminütiges Gespräch (12); K12: persönliche DL-8-Reflexion (3). Der gemeinsame Check K11 wird als Pflichtarbeit nicht benotet. Pro Person: Note = 1 + 5 × (K1–K6 + K7–K10 + K12) / 33, auf Viertelnoten gerundet. Details: [Bewertungsraster](KI_Bewertungsraster.md).
 
 ## Didaktische und fachliche Quellen
 
@@ -162,3 +162,8 @@ Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: 
 - [inf-schule: Papagei-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke)
 
 Ältere Regressionsblätter und Prüfungsentwürfe liegen gekennzeichnet in `worksheets/archiv/`; sie gehören nicht zum aktuellen Kurs.
+
+
+## Bewertung nach DL 8
+
+Die 33 Punkte umfassen 18 gemeinsame Projektpunkte (K1–K6), 12 individuelle Punkte im Fachgespräch (K7–K10) und 3 individuelle Punkte (K12). Die gemeinsame Prüfung der fremden Trainings-/Testdaten und der Pflichtversuch (K11) bleiben unbenotet. Die ursprüngliche Abgabe bleibt unverändert. Andere Klassen sind keine regulären Testbilder des fremden Modells.

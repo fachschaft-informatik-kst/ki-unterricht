@@ -70,6 +70,26 @@ for lesson in lessons:
         for step in phase['schritte']:
             assert step['text'] in plan.get_text(), step['text'][:40]
             assert step['text'] in (root/'_build/site/projekt/KI_Planung.md').read_text(), step['text'][:40]
+# The project begins with actionable guidance and keeps saved field IDs intact.
+project = soup.select_one('#projekt')
+assert project.select_one('.project-start-guide ol.project-start-steps')
+assert len(project.select('.project-start-steps > li')) == 3
+assert len(project.select('#projekt-1 [id^="projekt-etappe-"]')) == 6
+assert project.select_one('#projekt-4 .project-train-flow')
+assert project.select_one('#projekt-4 [data-lab="ki_lernlabor.ipynb"]')
+assert len(project.select('#projekt-1 .lesson-plan')) == 3
+assert len(soup.select('#fremdmodell .lesson-plan')) == 1
+assert all(not p.has_attr('open') for p in project.select('#projekt-1 .lesson-plan'))
+assert str(project.select_one('#projekt-1')).index('id="progress"') < str(project.select_one('#projekt-1')).index('id="doppellektion-05"')
+journal = soup.select_one('#journal')
+assert journal.select_one('#projekt-werkbank #start-project')
+assert project.select_one('#projekt-3 #projekt-fotostudio #start-studio')
+assert project.select_one('#projekt-fotostudio #studio-panel #studio-frame')
+assert not journal.select_one('#start-studio')
+assert len(journal.select('#projekt-reflexionen .journal-step')) == 5
+assert journal.select_one('#projekt-reflexionen textarea[data-journal="purpose"]')
+assert str(journal).index('id="projekt-werkbank"') < str(journal).index('id="projekt-reflexionen"')
+
 for a in soup.select('a[href^="#"]'):
     assert a['href'][1:] in ids, a['href']
 for img in soup.select('img'):
@@ -132,7 +152,17 @@ cards={card.select_one('.section-label').get_text(strip=True):card.get_text(' ',
        for card in soup.select('#lernziele .grid.two > article.card')}
 assert 'XOR' not in cards['03'], 'XOR does not belong in single-neuron DL3 learning goals'
 assert 'XOR' in cards['04'] and 'Datenleck' not in cards['04']
-assert 'Datenlecks' in cards['05–08'], 'Data split is learned independently during DL5'
+assert len(cards) == 8, 'Separate objectives for DL 5–7 and DL 8 must be visible'
+assert 'Datenlecks' in cards['05–07'] and 'A/B-Vergleich' in cards['05–07'], 'Project learning objectives belong to DL 5–7'
+assert 'T1/T2' in cards['08'] and 'P1/P2' in cards['08'] and 'Pflichtversuch' in cards['08'], 'DL 8 must audit dataset roles and require new-class experiment'
+assert all(x in cards['08'] for x in ['K11','K12','K7–K10']), 'DL 8 assessment and oral exam must match learning objectives'
+assert soup.select_one('#lernziele a[href="#fremdmodell"]'), 'Learning objectives must link to DL 8'
+assert '33 Punkte' in soup.select_one('#lernziele .callout').get_text()
+for skill,anchor in [('fremd_reproduktion','#reproduktion'),('fremd_kritik','#fremdtest')]:
+    node=soup.select_one(f'#lernziele [data-skill="{skill}"]')
+    assert node and node.select_one('option[value="sicher"]'), f'Missing DL 8 self-assessment: {skill}'
+    assert soup.select_one(f'#lernziele a[href="{anchor}"]'), f'Missing goal evidence link: {anchor}'
+assert len(soup.select('#lernziele [data-skill]')) == 10, '8 existing project skills plus 2 DL 8 skills'
 guide=(root/'lehrperson/musterloesungen.md').read_text()
 dl3_guide=guide.split('## 3 ·',1)[1].split('## 4 ·',1)[0]
 dl4_guide=guide.split('## 4 ·',1)[1].split('## 5–8 ·',1)[0]
@@ -210,7 +240,7 @@ assert '20 Einzelgespräche bei einer Lehrperson' in soup.get_text()
 assert 'Ein gemeinsames Journal. Zwei getrennte Einzelgespräche.' in soup.get_text()
 assert 'vierminütige' in planning or 'Vier Minuten Einzelgespräch' in planning
 assert '100 Minuten' in oral['zeit'] and 'eine Lehrperson' in oral['zeit']
-assert 'individuelle Gesprächspunkte' in planning
+assert '12 individuelle Punkte' in planning and 'K12' in planning
 assert 'K10 · Individuelles Verständnis' in soup.get_text()
 assert len(soup.select('#einstieg-4 .typen tbody tr')) == 2
 assert 'Schwache und starke KI' in soup.select_one('#einstieg-4 summary').get_text()
@@ -222,14 +252,60 @@ assert len(soup.select('#einstieg-4 textarea[data-answer="ki_ordnung"]')) == 1
 assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_{n}"]')) == 1 for n in range(1,5))
 assert all(len(soup.select(f'#einstieg-4 [data-answer="typ_bsp_{n}"]')) == 1 for n in range(1,5))
 
+# DL 8 uses five navigable, concise chapter modules rather than long unstructured tasks.
+dl8 = soup.select_one('#fremdmodell')
+assert len(dl8.select('details.kapitel')) == 5
+assert [d['id'] for d in dl8.select('details.kapitel')] == ['dl8-warum','dl8-vorbereiten','reproduktion','fremdtest','dl8-abschluss']
+assert dl8.select_one('#dl8-warum[open]') and not dl8.select_one('#reproduktion[open]')
+# All five DL8 chapters use one accessible question design and clear, responsive task cards.
+assert len(dl8.select('.dl8-question')) == 5, 'Each DL8 chapter needs one visual question panel'
+for chapter_id, count in {'dl8-vorbereiten': 5, 'reproduktion': 4, 'fremdtest': 4, 'dl8-abschluss': 3}.items():
+    cards = dl8.select(f'#{chapter_id} ol.dl8-steps > li')
+    assert len(cards) == count, f'Numbered DL8 work cards missing: {chapter_id}'
+    assert all(card.select_one('h4') and card.select_one('.dl8-step-num') for card in cards), chapter_id
+assert len(dl8.select('#fremdtest .dl8-explainer .dl8-compare-card')) == 2
+assert len(dl8.select('#dl8-abschluss .dl8-person-card')) == 2
+assert dl8.select_one('#dl8-ablauf') and dl8.select_one('#dl8-warum .dl8-note')
+dl8_css = (root / 'projekt/portal.css').read_text()
+assert all(selector in dl8_css for selector in ('.dl8-question', '.dl8-steps', '.dl8-compare', '.dl8-review', '@media(max-width:760px)'))
+
+for chapter_id in ('dl8-warum','dl8-vorbereiten','reproduktion','fremdtest','fremd-reflexion'):
+    assert dl8.select_one(f'a[href="#{chapter_id}"]'), chapter_id
+assert dl8.select_one('#dl8-vorbereiten a[href="#sicherung"]')
+assert dl8.select_one('#dl8-vorbereiten a[href="#projekt-werkbank"]')
+assert dl8.select_one('#fremdtest a[href="#projekt-werkbank"]')
+assert dl8.select_one('#dl8-abschluss a[href="#bewertung"]')
+why = dl8.select_one('#dl8-warum').get_text(' ', strip=True)
+assert 'T1/T2' in why and 'P1/P2' in why and 'andere Klassen' in why
+assert soup.select_one('#fremdmodell') and soup.select_one('#fremdmodell #doppellektion-08')
+assert soup.select_one('.nav a[href="#fremdmodell"]'), 'Dedicated DL 8 navigation missing'
+assert soup.select_one('#fremdmodell #fremdtest')
+assert not soup.select_one('#sicherung #fremdtest'), 'DL 8 tasks belong under DL 8, not under the backup controls'
+for n in (1,2):
+    assert soup.select_one(f'#fremdmodell [data-answer="fremd_name_{n}"]')
+    for key in ('repro','test','grenzen','transfer'):
+        assert soup.select_one(f'#fremdmodell textarea[data-answer="fremd_reflexion_{n}_{key}"]')
+assert soup.select_one('#fremdmodell #download-fremdmodell')
+assert '11 benotete Kriterien' in soup.select_one('#bewertung').get_text()
+assert len(soup.select('#bewertung [data-score]')) == 11
+assert 'Punktesumme ÷ 33' in soup.select_one('#bewertung').get_text()
+assert 'Fremdauswertung' in soup.select_one('#fremdmodell').get_text()
+assert not soup.select_one('#bewertung [data-score="k11"]'), 'Shared DL8 check must remain ungraded'
+assert soup.select_one('#bewertung [data-score="k12"]'), 'Individual reflection must still be graded'
+
+export_js=(root/'projekt/portal.js').read_text()
+assert "async function packFremd()" in export_js and "ki-fremdauswertung-v1" in export_js
+assert "'Fremdauswertung.html'" in export_js and "'Fremdauswertung.json'" in export_js
+assert "for(const f of state.files)entries.push" in export_js # only in the original project export
+assert 'for(const f of state.files)entries.push' not in export_js.split('async function packFremd()',1)[1].split("$('download-submission')",1)[0]
 repro=soup.select_one('details#reproduktion')
 assert repro and repro.select_one('textarea[data-journal="reproduktion"][data-optional]')
-assert 'privaten Fenster' in repro.get_text() and 'daten_sha256' in repro.get_text() and 'wiederholen=True' in repro.get_text()
+assert 'privaten Fenster' in repro.get_text() and all(k in repro.get_text() for k in ('T1/T2','V1','P1/P2','wiederholen=True'))
 lesson8=plans.select_one('[data-lesson="08"]')
 assert sum(int(x.get_text()) for x in lesson8.select('.min') if x.get_text().strip().isdigit())>=70
-assert 'Reproduktionsprüfung' in lesson8.get_text() and 'Reproduktionsprüfung' in planning
-assert 'Fremdtest und Rückmeldung' in lesson8.get_text()
-assert '15 Minuten Puffer' in planning
+assert 'Trainingsgruppen T1/T2' in lesson8.get_text() and 'Trainingsgruppen T1/T2' in planning
+assert 'Pflichtversuch' in lesson8.get_text()
+assert '20 Minuten Puffer' in planning
 sol=soup.select_one('#sol-rahmen')
 assert sol and 'keine festen Lektionstermine' in sol.get_text()
 assert 'unbenotet' in repro.get_text()
@@ -257,7 +333,7 @@ for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektau
 for sid,minimum in {'einstieg':5,'lernarten':4,'perzeptron':4,'netze':4,'sprache':7,'gesellschaft':5,'projekt':4}.items():
     chapters=soup.select(f'#{sid} details.kapitel')
     assert len(chapters)>=minimum and all(c.select_one('.kapitel-nr') and c.select_one('h2.kapitel-titel') for c in chapters) and all(c.get('data-kurz') for c in chapters), sid
-assert len(soup.select('[data-score]'))==10
+assert len(soup.select('[data-score]'))==11
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
 for name in ['perzeptron_und_neuronale_netze.ipynb','xor_einzelne_neuronen.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
     assert soup.select_one('[data-lab="'+name+'"]'), name

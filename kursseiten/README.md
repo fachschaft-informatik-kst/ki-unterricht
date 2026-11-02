@@ -19,7 +19,7 @@ Sichtbare Nummern entstehen erst beim Build; IDs niemals zum Umsortieren ändern
 Bei Einfügungen Nummernverweise in frei geschriebenen Texten redaktionell prüfen.
 
 Die Bereiche einstieg, lernarten, perzeptron, netze, projekt, sprache und gesellschaft
-entsprechen den Doppellektionen 1–10; projekt umfasst Doppellektionen 5–8.
+entsprechen den Doppellektionen 1–10; projekt umfasst Doppellektionen 5–7; fremdmodell ist die eigene Doppellektion 8.
 start, lernziele, journal, bewertung und sicherung sind übergreifende Bereiche.
 
 Dateien beginnen mit 000 (Einleitung), dann 010, 020 usw. (Kapitel), und 999 (Abschluss).
@@ -128,7 +128,7 @@ Fachliche Texte, Aufgaben und Links werden in `kursseiten/` gepflegt; `projekt/p
 
 - **4. Kurzgymnasium (Vertiefung):** `kursseiten/manifest.json`, Kursseite `/projekt/` (historischer Speicher- und Notebook-Stand bleibt erhalten).
 - **1. Kurzgymnasium (Basis):** `kursseiten/basis-manifest.json`, zehn Doppellektionen in `kursseiten/basis-*/`, Kursseite `/basis/`.
-- **Kursauswahl:** `/kurse.html` ist auch über die Start-URL erreichbar. Öffentliche BOK-Adressen sind `/bok/1-klasse/` und `/bok/4-klasse/`; `/basis/` und `/projekt/` bleiben als alte Kurs-URLs erhalten. Die beiden IRN-Kursplätze sind noch in Vorbereitung. Siehe [Mehrkurs-Deployment](../docs/MULTIKURS-DEPLOYMENT.md).
+- **Kursauswahl:** `/kurse.html`; die ursprüngliche Start-URL führt weiterhin zum vertieften Kurs, um bestehende Links nicht zu brechen.
 - **Editor:** Gemeinsamer GitHub-Editor unter `/projekt/admin/`; dort vor dem Bearbeiten den Kurs auswählen. Neue Bereiche des Basiskurses erhalten den Präfix `basis-`.
 - **Gemeinsam:** CSS, Grafiken, Kapitelrenderer und AVIVA-Validierung. Separate Notizen des Basiskurses nutzen `kst-ki-basis-v1`; der bisherige Portal-, Journal- und Notebook-Speicher bleibt unangetastet.
 

@@ -84,7 +84,15 @@
     <!-- MD:START -->
 Das Notebook «Ziffernerkennung» ist eine **freiwillige Vertiefung**. Öffnen Sie es über die Schaltfläche unten, testen Sie verschiedene Zahlen versteckter Neuronen und tragen Sie die Trefferquoten oben ein. Falls keine Verwechslung vorkommt, wählen Sie «Keine Verwechslung beobachtet» und lassen das zweite Ziffernfeld leer.
 <!-- MD:END -->
-    <button class="btn primary" data-lab="ziffernerkennung.ipynb">Ziffernerkennung starten ▶</button>
+    <div class="ki-notebook-block" data-notebook="content/ziffernerkennung.ipynb" data-title="Ziffernerkennung">
+      <!-- MD:START -->
+### Jupyter-Notebook · Ziffernerkennung
+<!-- MD:END -->
+      <!-- MD:START -->
+Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+<!-- MD:END -->
+      <button type="button" class="ki-notebook-launch" data-lab="ziffernerkennung.ipynb">Notebook hier öffnen</button>
+    </div>
     <div class="table-scroll">
       <table class="typen protokoll">
         <thead>

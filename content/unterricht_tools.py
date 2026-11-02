@@ -2,8 +2,17 @@
 Der Code ist für Interessierte einsehbar; Lernende ändern nur die Notebook-Einstellungen.
 """
 import numpy as np
-import matplotlib.pyplot as plt
 import ipywidgets as widgets
+
+# Die meisten Einstiegs-Widgets (Neuron, Gatter, Lernschritt) zeichnen direkt
+# als SVG/HTML. Matplotlib erst laden, wenn eine echte Plot-Funktion es braucht.
+# Das spart beim Notebookstart das Parsen des umfangreichen Plotting-Stacks.
+class _LazyPlots:
+    def __getattr__(self, name):
+        import matplotlib.pyplot as pyplot
+        return getattr(pyplot, name)
+
+plt = _LazyPlots()
 from IPython.display import display
 
 FARBEN = ['#176c63', '#be572b']
@@ -412,7 +421,9 @@ def live_alltag():
         widgets.VBox(sliders, layout=widgets.Layout(width='100%')),
         bild, result
     ],layout=widgets.Layout(width='100%')))
-    return sliders,result
+    # Display-only UI: returning widgets prints their Python repr in JupyterLite.
+    # The controls remain live through the displayed VBox and its observers.
+    return None
 
 
 def _neuron_zwei_svg(x1, x2, w1, w2, bias, ziel):
@@ -549,7 +560,8 @@ def live_gatter(aufgabe='AND'):
     for w in (w1,w2,b,gate):w.observe(update,names='value')
     update()
     display(widgets.VBox([gate,widgets.VBox([w1,w2,b]),diagramme,result],layout=widgets.Layout(width='100%')))
-    return gate,w1,w2,b,result
+    # No duplicate text/plain representation of the live Widget objects.
+    return None
 
 
 def regler_alltag():
@@ -640,15 +652,77 @@ def _schritt_text(info):
 
 
 def _lern_bild(l, aktuell=None):
-    fig, ax = plt.subplots(figsize=(5.4, 4))
-    _punkte(ax, _EINGABEN, l.y)
-    for k, (wk, bk) in enumerate(l.staende):
-        letzte = k == len(l.staende) - 1
-        _grenze(ax, wk[0], wk[1], bk, color='#263b43' if letzte else plt.cm.Blues(.3 + .5 * k / max(1, len(l.staende))), lw=3 if letzte else 1.2)
+    """Leichte SVG-Grenzgeraden für DL3, ohne Matplotlib-Download beim Klick."""
+    from IPython.display import SVG
+    from html import escape
+
+    xmin, xmax = -.4, 1.4
+    left, top, breite, hoehe = 68, 50, 370, 284
+    px = lambda x: left + (x - xmin) / (xmax - xmin) * breite
+    py = lambda y: top + (xmax - y) / (xmax - xmin) * hoehe
+    clip = f'lernplot-{id(l)}'
+    svg = [
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 525 410" '
+        'role="img" aria-label="Entscheidungsgrenzen des lernenden Neurons" '
+        'style="max-width:100%;height:auto;background:#fff">',
+        f'<defs><clipPath id="{clip}"><rect x="{left}" y="{top}" '
+        f'width="{breite}" height="{hoehe}"/></clipPath></defs>',
+        f'<text x="263" y="26" text-anchor="middle" font-size="17" '
+        f'font-weight="600" fill="#263b43">{escape(l.aufgabe)}: '
+        f'Grenze nach {len(l.staende)-1} Korrektur(en)</text>',
+        f'<rect x="{left}" y="{top}" width="{breite}" height="{hoehe}" '
+        'fill="#fafcfd" stroke="#a9b8c5"/>'
+    ]
+    for tick in (0, 1):
+        x, y = px(tick), py(tick)
+        svg.append(f'<line x1="{x:.1f}" y1="{top}" x2="{x:.1f}" y2="{top+hoehe}" '
+                   'stroke="#dfe6ec"/>')
+        svg.append(f'<line x1="{left}" y1="{y:.1f}" x2="{left+breite}" y2="{y:.1f}" '
+                   'stroke="#dfe6ec"/>')
+        svg.append(f'<text x="{x:.1f}" y="{top+hoehe+20}" text-anchor="middle" '
+                   f'font-size="13">{tick}</text>')
+        svg.append(f'<text x="{left-16}" y="{y+4:.1f}" text-anchor="end" '
+                   f'font-size="13">{tick}</text>')
+    svg.append(f'<g clip-path="url(#{clip})">')
+    for k, (w, bias) in enumerate(l.staende):
+        w1, w2 = float(w[0]), float(w[1])
+        if abs(w2) > 1e-10:
+            x1, x2 = xmin, xmax
+            y1, y2 = -(w1*x1+bias)/w2, -(w1*x2+bias)/w2
+        elif abs(w1) > 1e-10:
+            x1 = x2 = -bias/w1
+            y1, y2 = xmin, xmax
+        else:
+            continue
+        letzte = k == len(l.staende)-1
+        farbe = '#263b43' if letzte else '#a9bed8'
+        svg.append(f'<line x1="{px(x1):.2f}" y1="{py(y1):.2f}" '
+                   f'x2="{px(x2):.2f}" y2="{py(y2):.2f}" '
+                   f'stroke="{farbe}" stroke-width="{3 if letzte else 1.5}"/>')
+    for (x1, x2), ziel in zip(_EINGABEN, l.y):
+        x, y = px(float(x1)), py(float(x2))
+        farbe = '#be572b' if int(ziel) else '#176c63'
+        svg.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="9" fill="{farbe}" '
+                   'stroke="#fff" stroke-width="2"/>')
     if aktuell is not None:
-        ax.scatter(*aktuell['x'], s=420, facecolors='none', edgecolors='#be572b', linewidths=2.5)
-    ax.set_title(f'{l.aufgabe}: Grenze nach {len(l.staende) - 1} Korrektur(en)')
-    plt.tight_layout(); plt.show()
+        x, y = (float(v) for v in aktuell['x'])
+        svg.append(f'<circle cx="{px(x):.1f}" cy="{py(y):.1f}" r="17" '
+                   'fill="none" stroke="#263b43" stroke-width="3"/>')
+    svg += [
+        '</g>',
+        f'<text x="{left+breite/2}" y="{top+hoehe+48}" text-anchor="middle" '
+        'font-size="14">Eingang 1</text>',
+        f'<text x="22" y="{top+hoehe/2}" transform="rotate(-90 22 '
+        f'{top+hoehe/2})" text-anchor="middle" font-size="14">Eingang 2</text>',
+        '<circle cx="75" cy="396" r="6" fill="#176c63"/>'
+        '<text x="90" y="400" font-size="12">Ziel 0</text>',
+        '<circle cx="180" cy="396" r="6" fill="#be572b"/>'
+        '<text x="195" y="400" font-size="12">Ziel 1</text>',
+        '<line x1="280" y1="396" x2="309" y2="396" stroke="#263b43" stroke-width="3"/>'
+        '<text x="320" y="400" font-size="12">Aktuelle Grenze</text>',
+        '</svg>'
+    ]
+    display(SVG(''.join(svg)))
 
 
 def lernen_klick(aufgabe='AND', lernrate=.2):
@@ -719,7 +793,8 @@ def lernen_klick(aufgabe='AND', lernrate=.2):
     wahl.observe(lambda c: neu_starten(), names='value'); rate.observe(lambda c: neu_starten(), names='value')
     display(widgets.VBox([widgets.HBox([wahl, rate]), widgets.HBox([weiter, runde, neu]), beispiel_bilder, ausgabe]))
     neu_starten()
-    return l
+    # Students should only see the interactive exercise, not a Python object.
+    return None
 
 
 def lernen_regler():
@@ -977,9 +1052,10 @@ def ziffern_vorschau():
 
 
 def xor_lernen_regler():
+    """Regler sofort anzeigen; teures Scikit-learn-Training nur auf Knopfdruck."""
     def lauf(neuronen, startwert):
         xor_lernen(neuronen=neuronen, startwert=startwert)
-    return widgets.interact(lauf,
+    return widgets.interact_manual.options(manual_name='Netz trainieren ▶')(lauf,
         neuronen=widgets.IntSlider(value=2, min=1, max=4, description='Neuronen'),
         startwert=widgets.IntSlider(value=1, min=0, max=5, description='Startwert'))
 

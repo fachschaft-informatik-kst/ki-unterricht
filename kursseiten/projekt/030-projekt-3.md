@@ -61,6 +61,7 @@ Ordnen Sie zunächst ohne Hilfe zu und begründen Sie kurz:
 
 Vergleichen Sie Ihre Antworten erst, wenn Sie alle drei gelöst haben.
 <!-- MD:END -->
+      <label class="field answer"><span>Selbstcheck: Notieren Sie Ihre drei Entscheidungen zu V1/P1, unabhängigem Abschlusstest und Datenleck – jeweils mit kurzer Begründung.</span><textarea data-answer="projekt_datencheck" rows="4" maxlength="10000" placeholder="1. Zur Modellwahl … / 2. Der Abschlusstest … / 3. Dieselbe Person …"></textarea></label>
       <details>
         <summary>Musterlösung und Begründungen anzeigen</summary>
         <div class="detail-body">
@@ -78,7 +79,15 @@ Vergleichen Sie Ihre Antworten erst, wenn Sie alle drei gelöst haben.
 
 Öffnen Sie das Notebook, bearbeiten Sie zuerst **«Drei Aufgaben für Daten»**, danach **«Ein Datenleck»**. Lesen Sie jeweils die Frage, treffen Sie eine Vermutung und verändern Sie **eine Einstellung**. Vergleichen Sie Ihre Beobachtung mit dem Merksatz. Die dritte Vertiefung ist freiwillig.
 <!-- MD:END -->
-      <button class="btn primary" data-lab="daten_training.ipynb">Notebook «Daten fair aufteilen» starten ▶</button>
+      <div class="ki-notebook-block" data-notebook="content/daten_training.ipynb" data-title="Daten fair aufteilen">
+        <!-- MD:START -->
+### Jupyter-Notebook · Daten fair aufteilen
+<!-- MD:END -->
+        <!-- MD:START -->
+Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+<!-- MD:END -->
+        <button type="button" class="ki-notebook-launch" data-lab="daten_training.ipynb">Notebook hier öffnen</button>
+      </div>
     </div>
     <div class="card">
       <!-- MD:START -->
@@ -137,6 +146,23 @@ Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das 
 <!-- MD:END -->
       <p><a href="#journal">Zur Reflexion im Journal →</a> · <a href="#sicherung">Stand als ZIP sichern →</a></p>
     </div>
+    <div class="card project-photo-step" id="projekt-fotostudio">
+      <span class="project-photo-step-label">Schritt 2 · Thema und Bilder vorbereiten</span>
+      <!-- MD:START -->
+### Fotostudio · Ihre Bilder aufbereiten
+<!-- MD:END -->
+      <!-- MD:START -->
+Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Fotos aufnehmen. Im Fotostudio ordnen Sie Bilder den beiden Klassen und den Gruppen zu, prüfen die Vorschau und exportieren Ihre Sammlung als JSON.
+<!-- MD:END -->
+      <div class="actions">
+        <button class="btn primary" id="start-studio" type="button">Fotostudio öffnen</button><a class="btn" href="#projekt-reflexionen">Datenplan im Journal festhalten</a>
+      </div>
+      <p class="small muted">Speichern Sie die JSON-Datei regelmässig. Die Originalfotos später zusätzlich unter <a href="#sicherung">Notizen &amp; Projekt</a> sichern.</p>
+      <details hidden="" id="studio-panel" open="">
+        <summary>Fotostudio · eigene Bilder vorbereiten</summary>
+        <iframe class="studio-frame" id="studio-frame" title="Fotostudio – Bilder vorbereiten"></iframe>
+      </details>
+    </div>
     <details>
       <summary>Fotos aufnehmen &amp; Bildformat verstehen</summary>
       <div class="detail-body">
@@ -170,7 +196,7 @@ MobileNet liefert 1280 Merkmale; das Notebook normiert sie je Bild. Die kleinen 
       <summary>Fotostudio: vom Handybild zum Versuch</summary>
       <div class="detail-body">
         <ol>
-          <li>Im <a href="#journal">Journal</a> das eingebettete Fotostudio öffnen.</li>
+          <li>Das <a href="#projekt-fotostudio">Fotostudio direkt hier im Datenplan</a> öffnen.</li>
           <li>Klasse, Gruppe und Quelle eintragen; JPG/PNG auswählen. HEIC vorher als JPG exportieren.</li>
           <li>Vorschauen prüfen, Bilder verarbeiten und Sammlung regelmässig als JSON herunterladen.</li>
           <li>Im Versuch <code>EIGENE_DATEN</code> und die zwei Klassen eintragen. Konfigurationszelle ausführen, JSON hochladen, dann die nächste Zelle zum Laden ausführen.</li>

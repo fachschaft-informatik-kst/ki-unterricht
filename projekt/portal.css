@@ -73,8 +73,8 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 .timeline li::before{content:"";position:absolute;left:-9px;top:14px;width:15px;height:15px;border-radius:50%;background:white;border:3px solid var(--accent)}
 .timeline .jahr{font-weight:700;color:var(--accent);font-size:14px}.timeline p{margin:4px 0 0;font-size:14px}
 .marke{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;vertical-align:middle}
-/* Both courses: high-contrast blue versus burnt orange; never theme-tint these categories. */
-.marke.regeln{background:#1e40af;color:#fff}.marke.daten{background:#9a3412;color:#fff}
+/* Match the green and slate-blue headings in the DL1 programming graphic. */
+.marke.regeln{background:#548235;color:#fff}.marke.daten{background:#334155;color:#fff}
 @media(max-width:720px){.timeline li{grid-template-columns:1fr;gap:2px}.typen tbody th{width:auto}}
 
 /* Layout: Netz im Hintergrund, ruhigere Marke, lebendigere Karten */
@@ -190,15 +190,284 @@ input[type=text]{border:1px solid #aebeb5;background:#fff;border-radius:8px;padd
 @keyframes ki-notebook-loading{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.lab-loading-spinner{animation:none;border-top-color:var(--accent);border-right-color:var(--accent)}}
 
-/* Notebook as a native lesson block, usable in every chapter. */
-.ki-notebook-block{margin:20px 0;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;background:var(--white,#fff)}
-.ki-notebook-block h3{margin:0 0 8px;color:var(--accent);font-size:19px}
-.ki-notebook-block p{margin:0 0 12px;font-size:14px;color:var(--muted)}
-.ki-notebook-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0 0}
-.ki-notebook-actions button{border-radius:8px;background:var(--accent);color:#fff;border:1px solid var(--accent);font:650 13px/1.4 system-ui;padding:10px 15px;cursor:pointer}
-.ki-notebook-actions a{font-size:13px;font-weight:650}
-.ki-notebook-runtime{margin-top:15px;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--paper);min-width:0}
+/* Compact, shared notebook launcher.  The actual editor stays full-size
+   after the learner chooses to open it; the lesson page stays uncluttered. */
+.ki-notebook-block{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;column-gap:18px;row-gap:4px;
+  margin:14px 0;padding:13px 16px;
+  border:1px solid var(--line);border-radius:10px;
+  background:var(--white,#fff);min-width:0
+}
+.ki-notebook-block > h3{
+  grid-column:1;margin:0;
+  color:var(--ink);font-size:15px;line-height:1.4;letter-spacing:0
+}
+.ki-notebook-block > p{
+  grid-column:1;margin:0;
+  color:var(--muted);font-size:12px;line-height:1.45
+}
+.ki-notebook-actions{
+  grid-column:2;grid-row:1/span 2;
+  display:flex;align-items:center;gap:10px;
+  margin:0;flex-wrap:wrap;justify-content:flex-end
+}
+.ki-notebook-actions .ki-notebook-launch{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:36px;padding:7px 12px;
+  border:1px solid var(--accent);border-radius:7px;
+  background:var(--accent);color:#fff;
+  font:650 12px/1.4 system-ui;cursor:pointer;text-decoration:none;
+  white-space:nowrap
+}
+.ki-notebook-actions .ki-notebook-launch:hover{filter:brightness(.94)}
+.ki-notebook-actions .ki-notebook-direct{
+  font:550 12px/1.5 system-ui;color:var(--muted);text-decoration:underline;
+  text-underline-offset:3px;white-space:nowrap
+}
+.ki-notebook-block > .lab-panel,
+.ki-notebook-block > .ki-notebook-runtime{
+  grid-column:1/-1;margin:9px 0 0;min-width:0
+}
+.ki-notebook-runtime{
+  padding:0;border:1px solid var(--line);border-radius:9px;background:#fff
+}
 .ki-notebook-runtime[hidden]{display:none!important}
-.ki-notebook-status{font-size:12px!important;color:var(--muted);margin:4px 0 10px!important}
-.ki-notebook-iframe{display:block;width:100%;height:min(78vh,850px);min-height:520px;border:1px solid var(--line);border-radius:8px;background:#fff}
-@media(max-width:640px){.ki-notebook-block{padding:13px}.ki-notebook-iframe{min-height:430px}}
+.ki-notebook-status{font-size:12px!important;color:var(--muted);margin:8px 12px!important}
+.ki-notebook-iframe{
+  display:block;width:100%;height:min(78vh,850px);min-height:520px;
+  border:0;border-radius:8px;background:#fff
+}
+@media(max-width:750px){
+  .ki-notebook-block{grid-template-columns:minmax(0,1fr);padding:13px;row-gap:6px}
+  .ki-notebook-actions{grid-column:1;grid-row:auto;justify-content:flex-start;margin-top:5px}
+  .ki-notebook-block > .lab-panel,.ki-notebook-block > .ki-notebook-runtime{grid-column:1}
+}
+@media(max-width:640px){.ki-notebook-iframe{min-height:430px}}
+
+/* A quiet notebook header, keeping the status and fullscreen control visible. */
+.lab-panel{margin:14px 0;border-radius:10px}
+.lab-head{gap:9px;padding:9px 12px}
+.lab-head > b{font-size:13px}
+.lab-head > span{font-size:11px;line-height:1.3}
+.lab-panel > p.small{padding:8px 12px;font-size:12px}
+.lab-panel > .lab-frame-shell{min-width:0}
+
+/* Shared notebook fullscreen icon: match the teacher editor's 35px corner button.
+   Both course levels import this stylesheet. */
+.lab-head .lab-fullscreen-toggle{
+  display:grid;place-items:center;flex:0 0 35px;
+  width:35px;height:35px;min-width:35px;padding:0;
+  background:rgba(255,255,255,.97);color:#28414b;
+  border:1px solid #d8e1e1;border-radius:8px;
+  box-shadow:0 1px 4px #182d331e;cursor:pointer;
+}
+.lab-head .lab-fullscreen-toggle:hover{
+  background:var(--soft);border-color:var(--accent)
+}
+.lab-head .lab-fullscreen-toggle[aria-pressed="true"]{
+  border-color:var(--accent);background:var(--soft)
+}
+.lab-head .lab-fullscreen-toggle svg{display:block;width:18px;height:18px}
+.lab-head .lab-fullscreen-toggle:focus-visible{outline:3px solid #ba552e;outline-offset:3px}
+
+/* Quiet notebook entry cards: leave the worksheet visible and open the editor
+   only after a deliberate click. A native dialog keeps focus inside the editor. */
+.ki-notebook-block{
+  margin:14px 0;padding:13px 16px;border:1px solid var(--line);
+  border-left:1px solid var(--line);border-radius:10px;background:var(--white,#fff)
+}
+.ki-notebook-block h3{margin:0 0 4px;font-size:16px;font-weight:650;letter-spacing:0;color:var(--ink)}
+.ki-notebook-block p{margin:0 0 9px;font-size:12px;line-height:1.45;color:var(--muted)}
+.ki-notebook-actions{margin-top:8px;gap:14px}
+.ki-notebook-actions .ki-notebook-launch{
+  padding:7px 12px;background:var(--white,#fff);color:var(--accent);
+  border:1px solid var(--accent);font-size:12px;font-weight:650
+}
+.ki-notebook-actions .ki-notebook-launch:hover{background:var(--soft)}
+.ki-notebook-actions a.ki-notebook-direct{font-size:12px;font-weight:500;color:var(--muted)}
+.ki-notebook-modal-open{overflow:hidden}
+
+/* Dialog stays at its original DOM position: never detach or recreate an
+   iframe while the user closes/reopens an exercise. */
+dialog.lab-panel.lab-modal[open]{
+  position:fixed;inset:0;margin:auto;padding:0;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-sizing:border-box;width:min(1260px,96vw);max-width:96vw;
+  height:min(94dvh,1080px);max-height:calc(100dvh - 18px);
+  border:1px solid var(--line);border-radius:14px;
+  background:var(--white,#fff);color:var(--ink);
+  box-shadow:0 22px 80px #15262b38
+}
+dialog.lab-panel.lab-modal::backdrop{background:rgba(16,29,37,.55)}
+dialog.lab-panel.lab-modal > .lab-head{
+  flex:none;min-height:52px;padding:8px 14px;gap:10px;
+  border-bottom:1px solid var(--line);
+}
+dialog.lab-panel.lab-modal > .lab-head b{font-size:14px}
+dialog.lab-panel.lab-modal > .lab-head > span{font-size:11px;line-height:1.3}
+dialog.lab-panel.lab-modal > .lab-head .btn{padding:5px 8px}
+dialog.lab-panel.lab-modal > p.small{
+  flex:none;font-size:11px;padding:5px 14px;margin:0;
+  line-height:1.3;color:var(--muted)
+}
+dialog.lab-panel.lab-modal > details{flex:none;margin:0;border:0;border-bottom:1px solid var(--line);border-radius:0;max-height:28vh;overflow:auto}
+dialog.lab-panel.lab-modal > details > summary{padding:7px 14px;font-size:12px}
+dialog.lab-panel.lab-modal > .lab-frame-shell{flex:1;min-height:0;display:flex;flex-direction:column}
+dialog.lab-panel.lab-modal .lab-frame-shell > iframe{
+  flex:1;min-height:0;width:100%;height:100%;border:0;border-radius:0
+}
+.lab-head .lab-close-toggle,.ki-notebook-modal-head .lab-close-toggle{
+  display:grid;place-items:center;flex:0 0 35px;
+  width:35px;height:35px;min-width:35px;padding:0;
+  background:rgba(255,255,255,.97);color:#28414b;
+  border:1px solid #d8e1e1;border-radius:8px;cursor:pointer
+}
+.lab-head .lab-close-toggle:hover,.ki-notebook-modal-head .lab-close-toggle:hover{background:var(--soft);border-color:var(--accent)}
+.lab-head .lab-close-toggle:focus-visible,.ki-notebook-modal-head .lab-close-toggle:focus-visible{outline:3px solid #ba552e;outline-offset:3px}
+/* Native fullscreen rejects <dialog>; the same icon expands our modal to
+   the entire viewport without losing its close control or JupyterLite kernel. */
+dialog.lab-panel.lab-modal[open].lab-modal-maximized{
+  inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;
+  margin:0;border:0;border-radius:0
+}
+dialog.lab-panel.lab-modal.lab-modal-maximized .lab-frame-shell > iframe{height:100%}
+@media(max-width:700px){
+  dialog.lab-panel.lab-modal[open]{
+    width:100vw;max-width:none;height:100dvh;max-height:none;
+    border:0;border-radius:0
+  }
+  dialog.lab-panel.lab-modal > .lab-head{flex-wrap:wrap;gap:6px 8px;padding:8px 10px}
+  dialog.lab-panel.lab-modal > .lab-head b{flex:1 1 45%}
+  dialog.lab-panel.lab-modal > .lab-head > span{order:3;flex:1 1 100%;margin:0}
+}
+
+/* Additional, user-created or material notebooks get the same spacious modal
+   instead of an embedded 850px frame; the launcher stays compact. */
+dialog.ki-notebook-runtime.ki-notebook-dialog[open]{
+  position:fixed;inset:0;box-sizing:border-box;display:flex;flex-direction:column;
+  width:min(1260px,96vw);height:min(94dvh,1080px);max-width:96vw;
+  max-height:calc(100dvh - 18px);margin:auto;padding:0;overflow:hidden;
+  border:1px solid var(--line);border-radius:14px;background:#fff;
+  box-shadow:0 22px 80px #15262b38
+}
+dialog.ki-notebook-runtime.ki-notebook-dialog::backdrop{background:rgba(16,29,37,.55)}
+.ki-notebook-modal-head{
+  display:flex;align-items:center;gap:12px;padding:8px 14px;
+  border-bottom:1px solid var(--line);background:var(--soft)
+}
+.ki-notebook-modal-head strong{flex:1;min-width:0;font-size:14px}
+.ki-notebook-modal-head .lab-close-toggle{flex:0 0 35px}
+.ki-notebook-dialog .ki-notebook-status{margin:0!important;padding:5px 14px;font-size:11px!important}
+.ki-notebook-dialog .ki-notebook-iframe{
+  flex:1;min-height:0;width:100%;height:100%;border:0;border-radius:0
+}
+@media(max-width:700px){
+  dialog.ki-notebook-runtime.ki-notebook-dialog[open]{
+    width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0
+  }
+}
+
+/* The compact course-card spacing also applies on small preview/mobile widths.
+   Keep this after the dialog-specific refinements to win the CSS cascade. */
+@media(max-width:750px){
+  .ki-notebook-block{padding:13px}
+  .ki-notebook-actions{margin-top:5px}
+}
+
+/* Projektstart: eine kurze Handlungsfolge statt langer Technik vor dem ersten Schritt. */
+.project-start-guide{margin:24px 0 20px;padding:23px 25px;background:var(--soft);border:1px solid var(--line);border-radius:15px}
+.project-start-guide h2{font-size:1.3rem;margin:0 0 9px}
+.project-start-guide>p{font-size:14px;line-height:1.6;margin:0 0 15px}
+.project-start-steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0;margin:0 0 14px}
+.project-start-steps li{min-width:0;padding:16px;background:#fff;border:1px solid var(--line);border-radius:10px;line-height:1.5}
+.project-start-steps strong,.project-start-steps span{display:block}
+.project-start-steps strong{font-size:14px;margin-bottom:7px;color:var(--ink)}
+.project-start-steps span{font-size:13px;color:var(--muted)}
+.project-start-steps a,.project-start-next a{color:var(--accent);font-weight:650}
+.project-start-guide .project-start-next{margin:0}
+#projekt-1 .project-lessons-heading{margin:27px 0 8px;font-size:1.12rem}
+#projekt-1 .lesson-plan{margin:8px 0}
+#projekt-4 .project-background{margin:21px 0 16px}
+#projekt-4 .project-background>.detail-body{padding-top:15px}
+#projekt-4 .project-background .project-train-overview{margin:0}
+#projekt-werkbank,#projekt-reflexionen{scroll-margin-top:85px}
+#journal #projekt-werkbank h2,#journal #projekt-reflexionen h2{font-size:1.35rem;margin:29px 0 10px}
+#journal #projekt-werkbank>p,#journal #projekt-reflexionen>p{font-size:14px;color:var(--muted);max-width:900px}
+@media(max-width:900px){.project-start-steps{grid-template-columns:1fr}}
+@media(max-width:540px){.project-start-guide{padding:16px}.project-start-steps li{padding:13px}}
+
+/* Fotostudio ist Bestandteil von Schritt 2 (Daten vorbereiten), nicht des Modellversuchs. */
+#projekt-fotostudio{margin:24px 0;border:1px solid var(--line);border-radius:14px;background:#fff;padding:22px}
+#projekt-fotostudio .project-photo-step-label{display:block;color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.045em;text-transform:uppercase;margin-bottom:6px}
+#projekt-fotostudio h3{font-size:1.3rem;margin:0 0 8px}
+#projekt-fotostudio p{font-size:14px;line-height:1.6;margin:0 0 12px}
+#projekt-fotostudio .actions{margin:14px 0 12px}
+#projekt-fotostudio #studio-panel{margin-top:20px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper)}
+#projekt-fotostudio #studio-panel>summary{background:var(--soft);padding:12px 17px;font-weight:700;color:var(--ink)}
+#projekt-fotostudio .studio-frame{height:1020px;background:var(--paper)}
+@media(max-width:800px){#projekt-fotostudio{padding:16px}#projekt-fotostudio .studio-frame{height:1200px}}
+
+/* DL 8: durchgängige Gestaltung für Leitfragen, Auftragskarten und Reflexion. */
+#fremdmodell .dl8-eyebrow{display:block;font-size:11px;line-height:1.45;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+#fremdmodell .dl8-meta{display:inline-block;color:var(--muted);font-size:12px;font-weight:650;line-height:1.5}
+#fremdmodell .dl8-question{background:#f0f7f3;border:1px solid #bed8cc;border-radius:15px;padding:22px 25px;margin:20px 0 24px}
+#fremdmodell .dl8-question-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:12px}
+#fremdmodell .dl8-question h3{font-size:clamp(1.18rem,2.1vw,1.53rem);line-height:1.33;letter-spacing:-.02em;margin:0;max-width:790px}
+#fremdmodell .dl8-question h3 em{color:var(--accent);font-style:normal}
+#fremdmodell .dl8-question p{font-size:14px;line-height:1.65;margin:12px 0 0;max-width:820px}
+#fremdmodell #dl8-ablauf,#fremdmodell .dl8-overview{margin:23px 0 28px;padding:22px 25px;border-radius:14px;background:var(--soft);border:1px solid #bfd5cb}
+#fremdmodell #dl8-ablauf>strong{display:block;font-size:1.23rem;line-height:1.35;letter-spacing:-.015em;margin:0 0 11px}
+#fremdmodell .dl8-overview h2{font-size:1.23rem;line-height:1.35;letter-spacing:-.015em;margin:7px 0 11px}
+#fremdmodell #dl8-ablauf p,#fremdmodell .dl8-overview p{font-size:14px;line-height:1.64;margin:0 0 9px}
+#fremdmodell #dl8-ablauf p:last-child,#fremdmodell .dl8-overview p:last-child{margin-bottom:0}
+#fremdmodell .dl8-section-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:5px 14px;margin:26px 0 12px}
+#fremdmodell .dl8-section-head h3{font-size:1.11rem;line-height:1.4;margin:0}
+#fremdmodell .dl8-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;list-style:none;margin:0 0 24px;padding:0}
+#fremdmodell .dl8-steps li{min-width:0;padding:19px 20px;background:#fff;border:1px solid var(--line);border-radius:13px;line-height:1.6}
+#fremdmodell .dl8-steps .dl8-step-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+#fremdmodell .dl8-step-num{display:grid;place-items:center;width:35px;height:35px;flex:0 0 35px;border-radius:10px;background:var(--soft);color:var(--accent);font-size:13px;font-weight:750;line-height:1}
+#fremdmodell .dl8-step-time{white-space:nowrap;padding:3px 10px;background:#f7f9f7;border:1px solid var(--line);border-radius:99px;font-size:12px;font-weight:650;color:var(--muted)}
+#fremdmodell .dl8-steps h4{font-size:1rem;line-height:1.38;letter-spacing:-.01em;margin:0 0 9px}
+#fremdmodell .dl8-steps p,#fremdmodell .dl8-steps .dl8-step-copy{font-size:14px;line-height:1.6}
+#fremdmodell .dl8-steps p{margin:0 0 9px}
+#fremdmodell .dl8-steps p:last-child,#fremdmodell .dl8-step-copy>:last-child{margin-bottom:0}
+#fremdmodell .dl8-steps code{overflow-wrap:anywhere;white-space:normal;font-size:.92em}
+#fremdmodell .dl8-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:19px 0}
+#fremdmodell .dl8-compare-card{min-width:0;padding:19px 20px;background:#fff;border:1px solid var(--line);border-radius:13px}
+#fremdmodell .dl8-compare-card h3,#fremdmodell .dl8-compare-card h4{font-size:1.02rem;line-height:1.4;margin:8px 0 10px}
+#fremdmodell .dl8-compare-card p{font-size:14px;line-height:1.6;margin:0 0 9px}
+#fremdmodell .dl8-compare-card p:last-child{margin-bottom:0}
+#fremdmodell .dl8-note{padding:16px 19px;border-left:3px solid var(--accent);border-radius:0 11px 11px 0;background:var(--soft);margin:21px 0}
+#fremdmodell .dl8-note p{font-size:14px;line-height:1.65;margin:6px 0 0}
+#fremdmodell .dl8-next{padding:16px 19px;background:#f8faf8;border:1px solid var(--line);border-radius:12px;margin:20px 0}
+#fremdmodell .dl8-next p{margin:7px 0 0;font-size:14px}
+#fremdmodell .dl8-explainer{padding:20px 22px;border:1px solid var(--line);background:#f8f9f7;border-radius:14px;margin:17px 0 25px}
+#fremdmodell .dl8-explainer>h3{font-size:1.1rem;line-height:1.4;margin:8px 0 12px}
+#fremdmodell .dl8-explainer .dl8-compare{margin:0}
+#fremdmodell .dl8-explainer .dl8-note{margin-bottom:0}
+#fremdmodell .dl8-review{padding:23px;margin-top:19px}
+#fremdmodell .dl8-review-heading{padding-bottom:10px;border-bottom:1px solid var(--line);margin:28px 0 16px}
+#fremdmodell .dl8-review-heading:first-child{margin-top:0}
+#fremdmodell .dl8-review-heading h3{display:flex;align-items:center;gap:11px}
+#fremdmodell .dl8-review-num{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:9px;background:var(--soft);color:var(--accent);font-size:12px;font-weight:750}
+#fremdmodell .dl8-person-card{background:#f9faf8;padding:19px;margin:17px 0;border-color:#cedbd3}
+#fremdmodell .dl8-person-card>h3{font-size:1.04rem;margin:0 0 12px}
+#fremdmodell .dl8-person-card .answer{background:#fff}
+#fremdmodell .dl8-review .dl8-steps{margin:0 0 20px}
+#fremdmodell .dl8-review .dl8-steps--three{grid-template-columns:repeat(3,minmax(0,1fr))}
+#fremdmodell .dl8-review .dl8-steps--three li{padding:15px 16px}
+#fremdmodell #reproduktion label.answer{border-color:#c6d6ce}
+#fremdmodell #fremdtest .protokoll-block{background:#fff;border-radius:13px;border-color:#c6d6ce}
+@media(max-width:900px){#fremdmodell .dl8-review .dl8-steps--three{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:760px){
+  #fremdmodell .dl8-overview,#fremdmodell .dl8-question,#fremdmodell .dl8-explainer{padding:17px}
+  #fremdmodell .dl8-steps,#fremdmodell .dl8-compare{grid-template-columns:minmax(0,1fr)}
+  #fremdmodell .dl8-steps li,#fremdmodell .dl8-compare-card{padding:16px}
+  #fremdmodell .dl8-review{padding:16px}
+  #fremdmodell .dl8-person-card{padding:14px}
+}
+@media print{
+  #fremdmodell .dl8-steps li,#fremdmodell .dl8-compare-card,#fremdmodell .dl8-question,#fremdmodell .dl8-note{break-inside:avoid}
+  #fremdmodell .dl8-steps,#fremdmodell .dl8-compare{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

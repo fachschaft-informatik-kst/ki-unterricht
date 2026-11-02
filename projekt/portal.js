@@ -1,3 +1,4 @@
+import {bindLabFullscreen,bindNotebookDialog} from './lab-fullscreen.js';
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 import experiments from './experiments.json' with {type:'json'};
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
@@ -130,6 +131,20 @@ $('attachments').addEventListener('change',async e=>{
 const names=Object.fromEntries(experiments.map(e=>[e.source.split('/').pop(),e.title]));
 const frame=$('project-frame'),lab=$('project-lab'),projectName=experiments.find(e=>e.project).source.split('/').pop();
 let activeName='',activeOwner='',switching=false,initializingFrame=false;
+function startNotebookFrame(name,saved,kind){
+ frame.dataset.ready='no';delete frame.dataset.restored;
+ frame.dataset.startKind=kind;frame.dataset.startMs=String(performance.now());
+ notebookLoading('loading',saved?'Gesicherten Notebook-Stand laden …':'Python und interaktive Übungen werden vorbereitet …');
+ frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
+}
+function trackNotebookReady(name){
+ const milliseconds=Math.round(performance.now()-Number(frame.dataset.startMs||performance.now()));
+ (window.KINotebookTimings ||= []).push({name,kind:frame.dataset.startKind||'open',milliseconds});
+ frame.dataset.loadMs=String(milliseconds);
+}
+function refreshNotebookFrame(){
+ requestAnimationFrame(()=>{try{frame.contentWindow?.dispatchEvent(new Event('resize'));}catch{}});
+}
 const loader=$('project-lab-loading'),loaderText=$('project-lab-loading-text'),loaderRetry=$('project-lab-retry');
 let loaderTimeout;
 function notebookLoading(phase,message='') {
@@ -151,45 +166,78 @@ function notebookLoading(phase,message='') {
  }
 }
 loaderRetry.addEventListener('click',()=>{if(activeName)void showNotebook(activeName,activeOwner,false);});
+window.addEventListener('ki-notebook-warmup',event=>{
+ const name=event.detail?.name;
+ if(!names[name]||activeName||switching||transferring)return;
+ void (async()=>{
+  await initialization;
+  if(activeName||switching||transferring||document.visibilityState!=='visible')return;
+  activeName=name;activeOwner='';initializingFrame=false;notebookRevision=0;notebookDirty=false;
+  const saved=name===projectName?notebook:others[name];
+  $('project-lab-status').textContent='Python wird im Hintergrund vorbereitet …';
+  startNotebookFrame(name,saved,'warmup');
+ })().catch(error=>console.warn('Notebook-Vorbereitung:',error));
+});
 // Never move an already loaded iframe. Saved documents are the source of truth;
 // every new frame has a fresh Python kernel, including after a page reload.
 document.querySelector('main > .footer').before(lab);$('lesson-lab').remove();
+const overlay=bindNotebookDialog(lab);
 function request(frame,type,extra={}){return new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet noch nicht. Warten und erneut versuchen.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer,source:frame.contentWindow});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
-function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!activeName||!view||view.classList.contains('view-hidden');}
+function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!overlay.isOpen||!activeName||!view||view.classList.contains('view-hidden');}
 async function snapshotCurrent(){
  await notebookUpdates;
  if(!activeName)return;
  if(frame.dataset.ready!=='yes')throw Error('Das Notebook ist noch nicht bereit. Bitte warten oder erneut öffnen.');
  await captureSnapshot(activeName,await request(frame,'snapshot'));
 }
-async function showNotebook(name,owner,scroll=true){
+async function showNotebook(name,owner,scroll=true,trigger=null){
  if(!names[name]||switching||transferring)return;
  switching=true;
  try{
   await initialization;
+  // Keep the dialog attached to the page rather than reparenting its iframe
+  // into each lesson card: a DOM move can restart the entire Python runtime.
   if(name!==activeName||frame.dataset.ready==='error'){
-   if(activeName&&frame.dataset.ready!=='error')await snapshotCurrent();
-   activeName=name;initializingFrame=false;notebookRevision=0;notebookDirty=false;frame.dataset.ready='no';delete frame.dataset.restored;
-   // Saved documents are authoritative for all experiments, including the neuron lab.
-   // Never discard student edits/outputs simply to show the latest template. Saved
-   // outputs remain readable; rerunning a cell recreates its interactive widgets.
+   if(activeName&&frame.dataset.ready==='yes')await snapshotCurrent();
+   activeName=name;initializingFrame=false;notebookRevision=0;notebookDirty=false;
+   // Switching notebooks requires a fresh kernel. Reopening the SAME one
+   // preserves the warmed iframe, including clicks during its startup.
    const saved=name===projectName?notebook:others[name];
    $('project-lab-status').textContent=saved?'Gesichertes Notebook wird geöffnet …':'Python startet …';
-   notebookLoading('loading',saved?'Gesicherten Notebook-Stand laden …':'Notebook wird gestartet. Python und die interaktiven Übungen werden vorbereitet …');
-   frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
+   startNotebookFrame(name,saved,'open');
   }
-  activeOwner=owner;visibility();$('project-lab-title').textContent=names[name];
+  activeOwner=owner;$('project-lab-title').textContent=names[name];
+  overlay.open(trigger || document.activeElement);visibility();refreshNotebookFrame();
   lab.querySelector('details').hidden=name!==projectName;
   lab.querySelector('a[href="#journal"]').hidden=name!==projectName;
-  if(scroll)lab.scrollIntoView({block:'start',behavior:'smooth'});
+  // Dialog focus replaces scrolling a large inline notebook into the lesson.
  }catch(error){$('project-lab-status').textContent=error.message;notebookLoading('error',error.message+' Bitte erneut versuchen.');}
  finally{switching=false;}
 }
-$('start-project').addEventListener('click',()=>showNotebook(projectName,'journal'));
+$('start-project').addEventListener('click',()=>showNotebook(projectName,'journal',true,$('start-project')));
+// The same-origin Fotostudio grows with its content, avoiding a second scrollbar.
+let studioHeightObserver=null;
+$('studio-frame').addEventListener('load',()=>{
+ studioHeightObserver?.disconnect();
+ const frame=$('studio-frame'),body=frame.contentDocument?.body;
+ if(!body)return;
+ const adjust=()=>{frame.style.height=Math.max(760,body.scrollHeight+28)+'px';};
+ adjust();
+ if('ResizeObserver' in window){studioHeightObserver=new ResizeObserver(adjust);studioHeightObserver.observe(body);}
+});
 $('start-studio').addEventListener('click',()=>{const frame=$('studio-frame');$('studio-panel').hidden=false;if(!frame.getAttribute('src'))frame.src='studio/index.html';$('studio-panel').scrollIntoView({block:'start',behavior:'smooth'});});
-all('[data-lab]').forEach(b=>b.addEventListener('click',()=>showNotebook(b.dataset.lab,b.closest('main > section')?.id||'projekt')));
-window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false);});
-all('[data-fullscreen]').forEach(b=>b.addEventListener('click',()=>{const node=$(b.dataset.fullscreen).closest('.lab-panel');if(node.requestFullscreen)node.requestFullscreen();}));
+document.addEventListener('click',event=>{
+ const button=event.target.closest('[data-lab]');
+ if(!button||!button.closest('main'))return;
+ void showNotebook(button.dataset.lab,button.closest('main > section')?.id||'projekt',true,button);
+});
+window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false,$('start-project'));});
+// Match the teacher editor: expand/collapse is one persistent icon button,
+// kept in sync with the browser's fullscreen state (including Escape).
+all('[data-fullscreen]').forEach(button=>{
+ const frame=$(button.dataset.fullscreen);
+ if(frame)bindLabFullscreen(button,frame.closest('.lab-panel'));
+});
 window.addEventListener('beforeunload',event=>{
  if(notebookDirty||!artifactStored||!filesStored||transferring){event.preventDefault();event.returnValue='Änderungen sind noch nicht vollständig gesichert.';}
 });
@@ -204,15 +252,24 @@ window.addEventListener('message',async event=>{
   initializingFrame=true;
   try{
    await initialization;
+   if(activeName!==name)return; // Another notebook superseded this startup.
    const saved=name===projectName?notebook:others[name];
    notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Start abgeschlossen. Ergebnisse werden gesichert …');
-   if(saved){await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
+   let restored=null;
+   if(saved){restored=await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
    else await captureSnapshot(name,await request(frame,'snapshot'));
+   if(activeName!==name)return; // An older warmup was superseded.
    frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';
+   trackNotebookReady(name);
    notebookLoading('ready');
-   $('project-lab-status').textContent=saved?'Gesicherte Eingaben und Ergebnisse geladen. Vorbereitung und gewünschte Zellen erneut ausführen.':'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
-  }catch(error){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
-  finally{initializingFrame=false;}
+   $('project-lab-status').textContent=saved
+     ? restored?.widgets?.activated
+       ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
+       : 'Gesicherter Stand geladen · veränderte Startzellen bitte manuell ausführen.'
+     : 'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
+  }catch(error){
+   if(activeName===name){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
+  }finally{if(activeName===name)initializingFrame=false;}
  }
  if(data.type==='dirty'){notebookRevision=Math.max(notebookRevision,data.revision||0);notebookDirty=true;status('Notebook wird gesichert …');}
  if(data.type==='save-error'){notebookDirty=true;status('Notebook noch nicht gesichert: '+data.error,true);}
@@ -220,22 +277,39 @@ window.addEventListener('message',async event=>{
   notebookUpdates=notebookUpdates.then(()=>captureSnapshot(name,data)).catch(error=>{notebookDirty=true;status('Notebook noch nicht vollständig gesichert: '+error.message,true);});
  }
 });
+// All saved classroom answers also belong in the human-readable journal, not only kursstand.json.
+function courseAnswers(){
+ return answerFields.filter(e=>String(state.answers[e.dataset.answer]||'').trim()).map(e=>{
+  const label=e.closest('label');
+  const question=label?.querySelector('span')?.textContent?.trim()||
+   [...document.querySelectorAll('label[for]')].find(l=>l.htmlFor===e.id)?.textContent?.trim()||
+   e.getAttribute('aria-label')||e.closest('tr')?.querySelector('th')?.textContent?.trim()||e.dataset.answer;
+  const chapter=e.closest('.kapitel')?.querySelector('.kapitel-titel')?.textContent?.trim()||
+   e.closest('.protokoll-block')?.querySelector('h3')?.textContent?.trim()||'Weitere Unterrichtsaufgaben';
+  const value=state.answers[e.dataset.answer];
+  const answer=e.tagName==='SELECT'?(Array.from(e.options).find(o=>o.value===value)?.textContent?.trim()||value):value;
+  return {chapter,question,answer};
+ });
+}
 function notebookForExport(){
  if(!notebook)return null;
  const nb=structuredClone(notebook);nb.cells=nb.cells.filter(c=>!c.metadata?.['ki-journal-export']);
  const add=source=>({id:crypto.randomUUID(),cell_type:'markdown',metadata:{'ki-journal-export':true},source:source.split(/(?<=\n)/)});
  nb.cells.unshift(add('# Projektjournal\n\n'+state.journal.names+' · '+state.journal.class+'\n\nDie folgenden Antworten wurden auf der Kurswebseite verfasst.\n'));
  for(const e of exportFields())nb.cells.push(add('## '+e.previousElementSibling.textContent+'\n\n'+(state.journal[e.dataset.journal]||'Noch offen.')));
+ const lessons=courseAnswers();
+ if(lessons.length)nb.cells.push(add('## Antworten aus den Unterrichtsaufgaben\n\n'+lessons.map(e=>'### '+e.chapter+' – '+e.question+'\n\n'+e.answer).join('\n\n')));
  return nb;
 }
 function exportFields(){return journalFields.filter(e=>e.dataset.optional===undefined||state.journal[e.dataset.journal]?.trim());}
 function journalHTML(){
  const sections=exportFields().map(e=>'<section><h2>'+esc(e.previousElementSibling.textContent)+'</h2><p>'+esc(state.journal[e.dataset.journal]||'Noch offen.').replace(/\n/g,'<br>')+'</p></section>').join('');
+ const lessonSections=courseAnswers().map(e=>'<section><h3>'+esc(e.chapter+' · '+e.question)+'</h3><p>'+esc(e.answer).replace(/\n/g,'<br>')+'</p></section>').join('');
  const outputs=(notebook?.cells||[]).filter(c=>c.cell_type==='code').map(c=>{
   const body=(c.outputs||[]).map(o=>{if(o.data?.['image/png']){const png=Array.isArray(o.data['image/png'])?o.data['image/png'].join(''):o.data['image/png'];if(/^[A-Za-z0-9+/=\s]+$/.test(png))return '<img alt="Versuchsausgabe" src="data:image/png;base64,'+png+'">';}const value=o.text||o.data?.['text/plain']||o.evalue||'';return value?'<pre>'+esc(Array.isArray(value)?value.join(''):value)+'</pre>':'';}).join('');
   return body?'<section><details><summary>Ausgeführter Code</summary><pre>'+esc(Array.isArray(c.source)?c.source.join(''):c.source)+'</pre></details>'+body+'</section>':'';
  }).join('');
- return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Projektjournal</title><style>body{max-width:900px;margin:45px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h1,h2{line-height:1.2}h2{font-size:20px}section{margin:24px 0;padding-bottom:18px;border-bottom:1px solid #ddd}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f5f2;padding:15px;font-size:12px}img{max-width:100%;height:auto}.meta{color:#52656a}@media print{details{display:none}section{break-inside:avoid}}</style><h1>Unser KI-Projekt</h1><p class="meta">'+esc(state.journal.names)+' · '+esc(state.journal.class)+'<br>Exportiert: '+esc(new Date().toLocaleString('de-CH'))+'</p>'+sections+'<h1>Versuchsausgaben</h1>'+(outputs||'<p>Noch keine Ausgaben gesichert.</p>')+'<h2>Versuchsprotokoll</h2><pre>'+esc(protocol?JSON.stringify(protocol,null,2):'Noch kein Protokoll verfügbar.')+'</pre><h2>Datendateien</h2><ul>'+state.files.map(f=>'<li>'+esc(f.name)+'</li>').join('')+'</ul></html>';
+ return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Projektjournal</title><style>body{max-width:900px;margin:45px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h1,h2{line-height:1.2}h2{font-size:20px}section{margin:24px 0;padding-bottom:18px;border-bottom:1px solid #ddd}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f5f2;padding:15px;font-size:12px}img{max-width:100%;height:auto}.meta{color:#52656a}@media print{details{display:none}section{break-inside:avoid}}</style><h1>Unser KI-Projekt</h1><p class="meta">'+esc(state.journal.names)+' · '+esc(state.journal.class)+'<br>Exportiert: '+esc(new Date().toLocaleString('de-CH'))+'</p>'+sections+'<h1>Unterrichtsantworten</h1>'+(lessonSections||'<p>Noch keine Antworten zu Unterrichtsaufgaben eingetragen.</p>')+'<h1>Versuchsausgaben</h1>'+(outputs||'<p>Noch keine Ausgaben gesichert.</p>')+'<h2>Versuchsprotokoll</h2><pre>'+esc(protocol?JSON.stringify(protocol,null,2):'Noch kein Protokoll verfügbar.')+'</pre><h2>Datendateien</h2><ul>'+state.files.map(f=>'<li>'+esc(f.name)+'</li>').join('')+'</ul></html>';
 }
 function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}
 async function pack(submission){
@@ -249,7 +323,7 @@ async function pack(submission){
   const absent=missing();if(submission&&absent.length&&!confirm('Noch unvollständig: '+absent.join(', ')+'. Trotzdem diesen Stand herunterladen?'))return;
   const savedNames=Object.keys(others).filter(name=>names[name]&&name!==projectName);
   const snapshot={...state,exported:new Date().toISOString(),progress:window.KIProgress?.get(),protocol,protocolSignature,notebooks:[...(notebook?['versuch.ipynb']:[]),...savedNames.map(name=>'notebooks/'+name)]};
-    const entries=[{name:'kursstand.json',data:JSON.stringify(snapshot,null,2)},{name:'Journal.html',data:journalHTML()},{name:'LESEN.txt',data:'Journal.html enthält das Projektjournal und Versuchsausgaben.\nkursstand.json enthält auch Unterrichtsantworten, Häkchen und Selbsteinschätzungen.\nversuch.ipynb und notebooks/ enthalten bearbeitete Notebooks mit Code, Markdown, eingebetteten Bildern und Ausgaben. Widget-Werte und Diagramme sind als lesbarer Stand gesichert.\nDie ZIP-Datei kann auf der Kursseite als Projektstand wiederhergestellt werden.\nHinzugefügte Dateien und im Notebook ausgewählte Uploads liegen unter daten/.\nOriginalfotos und eine noch offene Fotostudio-Sammlung müssen zusätzlich unter «Notizen & Projekt» hinzugefügt werden.\nPython-Variablen und trainierte Modelle im Arbeitsspeicher sind nicht gespeichert. Nach Wiederherstellung Vorbereitung, Datenimport und benötigte Berechnungen erneut ausführen.\nFür eine lokale Wiederholung: Python 3.12, numpy, scipy, scikit-learn, matplotlib, pillow, ipywidgets; Notebook-Zellen der Reihe nach ausführen und Fotostudio-JSON aus daten/ auswählen.\nDer Download ist keine automatische Einreichung.\n'}];
+    const entries=[{name:'kursstand.json',data:JSON.stringify(snapshot,null,2)},{name:'Journal.html',data:journalHTML()},{name:'LESEN.txt',data:'Journal.html enthält das Projektjournal, die Unterrichtsantworten (auch Auswahlfelder) und Versuchsausgaben.\nkursstand.json enthält auch Unterrichtsantworten, Häkchen und Selbsteinschätzungen.\nversuch.ipynb und notebooks/ enthalten bearbeitete Notebooks mit Code, Markdown, eingebetteten Bildern und Ausgaben. Widget-Werte und Diagramme sind als lesbarer Stand gesichert.\nDie ZIP-Datei kann auf der Kursseite als Projektstand wiederhergestellt werden.\nHinzugefügte Dateien und im Notebook ausgewählte Uploads liegen unter daten/.\nOriginalfotos und eine noch offene Fotostudio-Sammlung müssen zusätzlich unter «Notizen & Projekt» hinzugefügt werden.\nPython-Variablen und trainierte Modelle im Arbeitsspeicher sind nicht gespeichert. Nach Wiederherstellung Vorbereitung, Datenimport und benötigte Berechnungen erneut ausführen.\nFür eine lokale Wiederholung: Python 3.12, numpy, scipy, scikit-learn, matplotlib, pillow, ipywidgets; Notebook-Zellen der Reihe nach ausführen und Fotostudio-JSON aus daten/ auswählen.\nDer Download ist keine automatische Einreichung.\n'}];
   const nb=notebookForExport();if(nb)entries.push({name:'versuch.ipynb',data:JSON.stringify(checkNotebook(nb),null,1)});
   if(protocol)entries.push({name:'Versuchsprotokoll.json',data:JSON.stringify(protocol,null,2)});
   for(const name of savedNames)entries.push({name:'notebooks/'+name,data:JSON.stringify(checkNotebook(others[name]),null,1)});
@@ -263,6 +337,53 @@ async function pack(submission){
   download(blob,(submission?'KI-Abgabe':'KI-Projektstand')+'-'+new Date().toISOString().slice(0,10)+'.zip');$('download-status').textContent=submission?'Abgabepaket heruntergeladen. '+(absent.length?'Noch offen: '+absent.join(' · '):'Vor dem Einreichen das Journal kurz prüfen.'):'Notizen, gespeicherte Notebooks und hinzugefügte Dateien heruntergeladen.';
  }catch(error){$('download-status').textContent='Download nicht erstellt: '+error.message;}finally{button.disabled=false;transferring=false;}
 }
+
+// DL 8 has its own submission. Imported foreign pictures are intentionally not re-exported.
+async function packFremd(){
+ await initialization;
+ if(transferring||switching)return;
+ transferring=true;
+ const button=$('download-fremdmodell'),feedback=$('fremd-download-status');
+ button.disabled=true;feedback.textContent='Fremdauswertung wird vorbereitet …';
+ try{
+  await snapshotCurrent();await notebookUpdates;await saving;
+  const fields=all('#fremdmodell [data-answer]');
+  const answers=Object.fromEntries(fields.map(e=>[e.dataset.answer,state.answers[e.dataset.answer]||'']));
+  const required=['fremd_rueckmeldung',...[1,2].flatMap(n=>['fremd_name_'+n,...['test','grenzen'].map(k=>'fremd_reflexion_'+n+'_'+k)])];
+  const absent=required.filter(k=>!answers[k]?.trim());
+  const report=(state.journal.reproduktion||'').trim();
+  if(!report)absent.unshift('Reproduktionsbericht');
+  // Bei technischen Problemen genügen dokumentierte Originalergebnisse; Notebook ist optional.
+  if(absent.length&&!confirm('Für die Fremdauswertung fehlen '+absent.length+' Angaben oder Nachweise. Trotzdem herunterladen?'))return;
+  const meta={schema:'ki-fremdauswertung-v1',exported:new Date().toISOString(),
+    reproduktionsbericht:report,antworten:answers,
+    hinweis:'Getrennt von der bereits eingereichten Projektarbeit. Keine Datendateien zusätzlich beigelegt.'};
+  const sections=fields.map(e=>{
+   const question=e.closest('label')?.querySelector('span')?.textContent?.trim()||
+     e.getAttribute('aria-label')||e.dataset.answer;
+   const value=answers[e.dataset.answer]||'Noch offen.';
+   const shown=e.tagName==='SELECT'?(Array.from(e.options).find(o=>o.value===value)?.textContent||value):value;
+   return '<section><h2>'+esc(question)+'</h2><p>'+esc(shown).replace(/\n/g,'<br>')+'</p></section>';
+  }).join('');
+  const html='<!doctype html><html lang="de-CH"><meta charset="utf-8"><title>Fremdauswertung DL 8</title>'+
+    '<style>body{font:16px/1.5 system-ui;max-width:900px;margin:40px auto;padding:0 20px;color:#182b31}h2{font-size:18px}section{margin:20px 0;border-bottom:1px solid #ddd;padding:0 0 16px}p{white-space:pre-wrap;overflow-wrap:anywhere}</style>'+
+    '<h1>Fremdauswertung · Doppellektion 8</h1><h2>Gemeinsamer Daten- und Ergebnischeck (K11 · unbenotet)</h2><p>'+esc(report||'Noch offen.')+
+    '</p><h2>Fremdtest und persönliche Reflexionen (K12)</h2>'+sections+'</html>';
+  const entries=[
+   {name:'Fremdauswertung.html',data:html},
+   {name:'Fremdauswertung.json',data:JSON.stringify(meta,null,2)},
+   {name:'LESEN.txt',data:'Fremdauswertung Doppellektion 8: K11 gemeinsamer Pflichtcheck unbenotet; K12 persönliche Reflexion 0–3 Punkte.\nFremdauswertung.html enthält Bericht, Fremdtest und persönliche Reflexionen.\nFremdauswertung.json enthält Formularwerte.\nDas optionale Notebook enthält ausgeführte Zellen. Die gemeinsame Prüfung und das Experiment sind Pflicht, aber nicht benotet. Zwei persönliche Antworten je Person sind Pflicht.\nOriginalfotos und fremde Datendateien werden nicht zusätzlich beigefügt.\nDieses ZIP ist NICHT das eigene Projekt-ZIP. Es muss separat eingereicht werden.\n'}
+  ];
+  if(notebook)entries.push({name:'versuch_fremd.ipynb',data:JSON.stringify(checkNotebook(notebook),null,1)});
+  const zip=await makeZip(entries);
+  if(zip.size>550*1024*1024)throw Error('Die ZIP-Datei ist zu gross.');
+  download(zip,'KI-Fremdauswertung-'+new Date().toISOString().slice(0,10)+'.zip');
+  feedback.textContent='Separates Fremdauswertungs-ZIP heruntergeladen. '+(absent.length?'Noch offene Nachweise prüfen.':'Bitte über den Abgabekanal einreichen.');
+ }catch(error){feedback.textContent='Fremdauswertung konnte nicht exportiert werden: '+error.message;}
+ finally{button.disabled=false;transferring=false;}
+}
+$('download-fremdmodell')?.addEventListener('click',packFremd);
+
 $('download-submission').addEventListener('click',()=>pack(true));$('download-backup').addEventListener('click',()=>pack(false));
 $('restore-package').addEventListener('change',async e=>{
  await initialization;const file=e.target.files[0];if(!file)return;

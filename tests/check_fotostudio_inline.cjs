@@ -8,4 +8,9 @@ assert.equal(inline.length,1,'Expected one embedded Fotostudio controller');
 for(const script of inline)new vm.Script(script,{filename:'fotostudio.inline.js'});
 assert(html.includes('fotostudio_storage.js'));
 assert(html.includes('if(!validRecord(r))throw Error'));
+for(const id of ['label','group','source','files','add','save','clear','resume','studio-progress','count-total']){
+ assert.equal((html.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id+' must remain unique');
+}
+assert(html.includes('--accent:#076959')&&html.includes('--paper:#f5f4ee'),'Photo studio must reuse course palette');
+
 console.log('PASS Fotostudio inline JavaScript parses and validates imported records');

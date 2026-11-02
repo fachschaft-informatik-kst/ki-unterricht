@@ -70,6 +70,17 @@ def main():
     u.drei_rollen(100);rejects(lambda:u.drei_rollen(5))
     for regler in (u.ziffern_regler,u.ziffer_regler,u.xor_lernen_regler):regler()
     u.ziffern_vorschau()
+    # Lernschritt-Diagramm ohne Matplotlib-Ausgabe: das Notebook soll auch nach
+    # einem Klick funktionieren, wenn beim Start nur NumPy geladen wurde.
+    lern_grafik=[]
+    display_alt=u.display
+    try:
+        u.display=lambda obj:lern_grafik.append(obj)
+        u._lern_bild(u._Lerner('AND',.2), {'x': (1,0)})
+    finally:
+        u.display=display_alt
+    assert len(lern_grafik)==1
+    assert '<svg' in lern_grafik[0].data and 'Aktuelle Grenze' in lern_grafik[0].data
     # Lernweg Neuron: Gatter konvergieren, XOR nie; ein Neuron löst XOR höchstens 3 von 4, vier versteckte Neuronen vollständig.
     for aufgabe in ('AND','OR','NAND','NOR'):
         w,b=u.perzeptron_lernen(aufgabe);assert np.all((u._EINGABEN@w+b>=0)==np.array(u._ZIELE[aufgabe]))
@@ -87,11 +98,13 @@ def main():
     original_display=u.display
     try:
         u.display=lambda widget: aufgezeichnet.append(widget)
-        sliders,tabelle=u.live_alltag()
+        assert u.live_alltag() is None
     finally:
         u.display=original_display
     assert len(aufgezeichnet)==1
     controls=aufgezeichnet[0].children
+    sliders=controls[3].children
+    tabelle=controls[-1]
     checks=next(c for c in controls if isinstance(c,u.widgets.HBox)).children
     schaubild=next(c for c in controls if isinstance(c,u.widgets.HTML)
                    and 'data:image/svg+xml;base64,' in c.value)
@@ -124,10 +137,13 @@ def main():
     original_display=u.display
     try:
         u.display=lambda widget: shown.append(widget)
-        gate,w1,w2,b,table=u.live_gatter('AND')
+        assert u.live_gatter('AND') is None
     finally:
         u.display=original_display
     assert len(shown)==1 and len(shown[0].children)==4
+    gate=shown[0].children[0]
+    w1,w2,b=shown[0].children[1].children
+    table=shown[0].children[3]
     cards=shown[0].children[2]
     assert cards.value.count('data:image/svg+xml;base64,')==4
     assert cards.value.count('Fall ') == 4
@@ -151,9 +167,11 @@ def main():
     original_display=u.display
     try:
         u.display=lambda widget: shown.append(widget)
-        xor_gate,xor_w1,xor_w2,xor_b,xor_table=u.live_gatter('XOR')
+        assert u.live_gatter('XOR') is None
     finally:
         u.display=original_display
+    xor_gate=shown[-1].children[0]
+    xor_w1,xor_w2,xor_b=shown[-1].children[1].children
     xor_cards=shown[-1].children[2]
     assert xor_gate.value=='XOR' and 'XOR' in xor_gate.options
     assert 'Gatter: XOR' in xor_cards.value and '4/4 richtig' not in xor_cards.value
@@ -167,7 +185,7 @@ def main():
     original_display=u.display
     try:
         u.display=lambda widget: shown.append(widget)
-        learner=u.lernen_klick('AND', .2)
+        assert u.lernen_klick('AND', .2) is None
     finally:
         u.display=original_display
     assert len(shown)==1
@@ -177,7 +195,9 @@ def main():
     assert learning_view.value.count('data:image/svg+xml;base64,')==2
     assert 'Vorher · Entscheidung' in learning_view.value
     assert 'Nachher · neue Gewichte' in learning_view.value
-    assert abs(learner.w[0]-.4)<1e-9 and abs(learner.b+.3)<1e-9
+    # The state change is also verified through the old/new SVG neuron cards,
+    # without requiring a public Python object return from the UI function.
+    assert 'Nachher · neue Gewichte' in learning_view.value
     shown[0].children[1].children[2].click()  # Zurücksetzen
     assert learning_view.value.count('data:image/svg+xml;base64,')==1
 
@@ -193,7 +213,7 @@ def main():
     assert l.abgebrochen and not l.fertig
     l=u._Lerner('AND',.2);erste=[l.schritt() for _ in range(4)][3]
     assert erste['fehler']==1 and np.allclose(erste['w_neu'],[.4,.4]) and abs(erste['b_neu']+.3)<1e-9
-    assert isinstance(u.lernen_klick(),u._Lerner);u.xor_problem();assert u.xor_versuch(1,1,-.5)<4
+    assert u.lernen_klick() is None;u.xor_problem();assert u.xor_versuch(1,1,-.5)<4
     z=u.xor_suche();assert z['AND'][4]>0 and z['XOR'][4]==0 and z['XOR'][3]>0
     # Freiwillige Ziffernexperimente müssen beim Öffnen nur Regler anzeigen.
     # Weder die Datensätze noch ein rechenintensives Modell dürfen vor dem

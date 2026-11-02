@@ -55,6 +55,11 @@ try{
     assert.equal(result.status,200,"Worker route missing: "+path);
     assert.match(result.headers.get("Content-Type"),new RegExp(mime));
     assert.equal(result.headers.get("X-Content-Type-Options"),"nosniff");
+    const csp=result.headers.get("Content-Security-Policy");
+    assert.match(csp,/frame-src 'self' blob: https:\/\/fachschaft-informatik-kst\.github\.io(?:;|$)/,
+      "Authenticated editor must explicitly permit framing the trusted Pages JupyterLite runtime");
+    assert.match(csp,/frame-ancestors 'none'/,"Editor itself must remain protected against framing");
+    assert.doesNotMatch(csp,/frame-src[^;]*\*/,"Do not allow arbitrary origins in notebook frames");
   }
   assert.ok(files.every(x=>x.startsWith("https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/")));
 }finally{globalThis.fetch=priorStaticFetch;}

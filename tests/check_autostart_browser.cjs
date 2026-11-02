@@ -21,20 +21,33 @@ async function reveal(page, selector) {
   let browser;
   try {
     await new Promise(r => setTimeout(r, 1000));
-    for (const name of ['perzeptron_und_neuronale_netze.ipynb','ki_projekt/ki_tandemprojekt.ipynb']) {
+    // CI tests a genuinely cold standalone JupyterLite notebook, before any
+    // manual restart. The full local variant also checks reload + project.
+    const coldStart = process.env.KI_WIDGET_COLD_START === '1';
+    for (const name of (coldStart
+      ? ['perzeptron_und_neuronale_netze.ipynb']
+      : ['perzeptron_und_neuronale_netze.ipynb','ki_projekt/ki_tandemprojekt.ipynb'])) {
     browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH, headless:true, args:JSON.parse(process.env.CHROMIUM_ARGS || '[]')});
       const context = await browser.newContext();
       const page = await context.newPage();
       page.on('console', m=>{if (m.type()==='error') console.error(m.text());});
       page.on('pageerror',e=>console.error('PAGEERROR',e.message));
       await page.goto('http://127.0.0.1:8765/lab/index.html?path='+encodeURIComponent(name));
-      for (let pass=0;pass<2;pass++) {
+      for (let pass=0;pass<(coldStart ? 1 : 2);pass++) {
         await page.waitForFunction(() => [...document.querySelectorAll('.ki-autostart-status')].some(e=>e.textContent.includes('Bereit') || e.textContent.includes('fehlgeschlagen')), null, {timeout:180000}).catch(async error=>{console.error(await page.locator('body').innerText());throw error;});
         assert.equal(await page.locator('.ki-autostart-status').textContent(), '✓ Bereit', await page.locator('body').innerText());
         if (name.startsWith('perzeptron')) {
           // Der kompakte Gatterversuch zeigt Ziel und Ist-Ausgabe direkt in der Live-Tabelle.
           const aufgabe = '.widget-dropdown select:has(option:text-is("OR"))';
           await reveal(page, aufgabe);
+          const widgetOutput = page.locator('.jp-CodeCell').nth(1).locator('.jp-OutputArea');
+          const outputText = await widgetOutput.innerText();
+          assert(!outputText.includes('FloatSlider(value=') && !outputText.includes('HTML(value='),
+            'Interactive controls must never be duplicated as a Python repr');
+          assert.equal(await page.locator('.jp-OutputArea').filter({hasText:'Error displaying widget: model not found'}).count(),0,
+            'No widget may fail its first model registration on cold startup');
+          assert.equal(await page.locator('.widget-checkbox').count(),3,
+            'All three swimming situation inputs must render on initial launch');
           assert.equal(await page.locator('.widget-dropdown select:has(option:text-is("XOR"))').count(),0,'DL3 must not introduce XOR');
           await page.locator(aufgabe).first().selectOption({label:'OR'});
           await page.waitForTimeout(300);
@@ -50,7 +63,7 @@ async function reveal(page, selector) {
           assert.equal(await page.locator('.jp-InputPrompt').filter({hasText:'[2]:'}).count(),0);
         }
         console.log('PASS', name, pass ? 'reload' : 'open');
-        if (!pass) await page.reload();
+        if (!pass && !coldStart) await page.reload();
       }
       await browser.close();
     }

@@ -65,8 +65,8 @@ ensure(("Schweiz hat 30 Kantone","Quelle"),source("kursseiten/basis-sprache/050-
 assert "projekt_bereit_check" in source("kursseiten/netze/040-netze-4.md")
 assert "Lernstandscheck" in source("kursseiten/netze/planung.json")
 assert "Lernstandscheck" in source("kursseiten/projekt/000-einstieg.md")
-assert "100 Minuten" in source("kursseiten/projekt/planung.json")
-assert "100 Minuten" in source("kursseiten/projekt/planung.json") # unchanged exception
+assert "100 Minuten" in source("kursseiten/fremdmodell/planung.json")
+assert "100 Minuten" not in source("kursseiten/projekt/planung.json") # own project ends before DL 8
 assert "100 Minuten" not in source("kursseiten/basis-abschluss/planung.json")
 
 # Both built course pages expose the content; studio module is shipped as a

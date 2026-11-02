@@ -3,9 +3,25 @@
 const VIEW = 'application/vnd.jupyter.widget-view+json';
 const STATE = 'application/vnd.jupyter.widget-state+json';
 const stream = text => ({output_type:'stream',name:'stdout',text});
+// Keep this module self-contained so exported snapshots also work in a
+// standalone/offline browser and in the data-URL regression tests.
+function notebookWidgetRoots(nb) {
+  const roots = {};
+  for (const cell of nb?.cells || []) {
+    if (cell.cell_type !== 'code' || !cell.id) continue;
+    const ids = (cell.outputs || []).map(o => o.data?.[VIEW]?.model_id).filter(id => typeof id === 'string');
+    if (ids.length) roots[cell.id] = ids;
+  }
+  return roots;
+}
 
 export function portableNotebook(notebook, widgets) {
   const nb = structuredClone(notebook);
+  // Keep the original per-cell widget view IDs before converting the outputs
+  // into readable fallbacks. On reopen, they identify which saved sliders
+  // belong to which trusted re-created visualisation.
+  const roots = notebookWidgetRoots(nb);
+  if (Object.keys(roots).length) nb.metadata = {...nb.metadata,ki_widget_roots:roots};
   const previous = nb.metadata?.widgets?.[STATE]?.state || {};
   const models = {...previous, ...widgets?.state};
   const used = new Set();
