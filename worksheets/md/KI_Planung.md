@@ -91,7 +91,7 @@ Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrpe
 
 Im privaten Browserfenster fremdes ZIP importieren, Vorbereitung und Datenimport ausführen, A/B nachtrainieren und den Test mit der Auswahl des Originals prüfen. Prüfsumme und Originalwerte vergleichen. Danach dasselbe fremde Modell die eigenen Klassen C/D beurteilen lassen. Eine hohe Trennschärfe kann mit Hintergrund, Licht oder Form zusammenhängen; das Modell kennt weiterhin nur seine ursprünglichen Klassen und kein «weder noch».
 
-Reproduktionscheck und Fremdtest bilden **eine kurze, verbindliche und unbenotete Fremdauswertung**. Bestehende Protokollfelder nutzen, eine konkrete Empfehlung ergänzen und separat einreichen; keine weitere benotete Abgabe oder nachträgliche Projektkorrektur. Die Tandems geben dem anderen Tandem ihre Rückmeldung. Bei einer nicht lösbaren technischen Blockade gespeicherte fremde Ausgaben auswerten und die fehlende Reproduktion ausdrücklich festhalten. Der Auftrag wird nicht ersatzlos gestrichen und kein Erfolg vorgetäuscht.
+Reproduktionscheck und Fremdtest bilden **eine verbindliche, benotete Fremdauswertung (K11–K12, maximal 6 Punkte)**. Bestehende Protokollfelder nutzen, eine konkrete Empfehlung ergänzen und die kurze individuelle Reflexion auf der DL-8-Seite ausfüllen. Ein separates Auswertungs-ZIP einreichen; die bereits eingereichte Projektarbeit bleibt unverändert. Die Tandems geben dem anderen Tandem ihre Rückmeldung. Bei einer nicht lösbaren technischen Blockade gespeicherte fremde Ausgaben auswerten und die fehlende Reproduktion ausdrücklich festhalten. Der Auftrag wird nicht ersatzlos gestrichen und kein Erfolg vorgetäuscht.
 
 In den letzten fünf Minuten sichern und eine Transferfrage für Doppellektion 10 notieren. Erhaltene Dateien nach der vereinbarten Aufbewahrungsregel löschen.
 
@@ -162,3 +162,8 @@ Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: 
 - [inf-schule: Papagei-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke)
 
 Ältere Regressionsblätter und Prüfungsentwürfe liegen gekennzeichnet in `worksheets/archiv/`; sie gehören nicht zum aktuellen Kurs.
+
+
+## Bewertung nach DL 8
+
+Die 36 Punkte umfassen 18 gemeinsame Projektpunkte (K1–K6), 12 individuelle Fachgesprächspunkte (K7–K10), 3 gemeinsame Punkte für die Reproduktion eines fremden Modells (K11) und 3 individuelle Punkte für die begründete Fremdtest-Reflexion (K12). Die ursprüngliche Projektabgabe wird nicht verändert. Trennschärfe auf den fremden Klassen C/D ist keine korrekte Trefferquote für die Klassen des Originals. Bewertet werden Nachvollziehbarkeit, Belege und kritische Reflexion, nicht möglichst hohe Modellwerte.
