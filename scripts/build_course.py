@@ -66,7 +66,7 @@ def lehrpersonen_seite(lessons, kursseite):
             '<link href="favicon.svg" rel="icon" type="image/svg+xml">'+stil+'<link href="portal.css" rel="stylesheet">'
             '<body class="lehrpersonen-seite"><main><div class="crumb"><span>Nur für die Lehrperson</span></div>'
             f'<h1>Unterrichtsplan</h1><p class="section-intro">Ablauf aller {len(lessons)} Doppellektionen nach AVIVA (Ankommen, Vorwissen aktivieren, Informieren, Verarbeiten, Auswerten). '
-            'In Doppellektion 5–8 dient AVIVA nur als äusserer Rahmen der SOL-Arbeit, nicht als gemeinsamer Takt für die Projektetappen. '
+            'In Doppellektionen 5–7 dient AVIVA als Rahmen der selbstorganisierten Projektarbeit. In Doppellektion 8 werden das fremde Modell selbstständig geprüft und die individuellen Fachgespräche durchgeführt. '
             'Die vollständigen Ablauftabellen finden Sie direkt weiter unten.</p>'
             '<p><a href="index.html">← Zur Kursseite</a></p>\n'+plaene+'\n<p><a href="index.html">← Zur Kursseite</a></p></main></body></html>\n')
 
@@ -75,10 +75,10 @@ def remove_calendar_dates(text):
 
     def course_card(match):
         number = match.group(1)
-        label = '5.–8. Doppellektion' if number == '05–08' else f'{int(number)}. Doppellektion'
+        label = '5.–7. Doppellektion' if number == '05–07' else f'{int(number)}. Doppellektion'
         return f'<span class="tag">{label}</span>'
 
-    text = re.sub(r'<span class="tag">[^<]*</span><b>(01|02|03|04|05–08|09|10)</b>', course_card, text)
+    text = re.sub(r'<span class="tag">[^<]*</span><b>(01|02|03|04|05–07|08|09|10)</b>', course_card, text)
 
     full_date = re.compile(r'(?<!\d)(?:0[1-9]|[12]\d|3[01])\.(?:0[1-9]|1[0-2])\.20\d{2}(?!\d)')
     dates = sorted(set(full_date.findall(text)), key=lambda value: tuple(map(int, reversed(value.split('.')))))
