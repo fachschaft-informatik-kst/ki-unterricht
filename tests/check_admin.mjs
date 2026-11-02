@@ -6,7 +6,7 @@ import backend,{appInstallationStatus} from "../admin-worker/src/index.mjs";
 import {parseTeacher,teacherData,teacherShell,DOWNLOADS} from "../admin-worker/src/teacher.mjs";
 const env={SESSION_KEY:randomBytes(32).toString("base64url")};
 assert.deepEqual(parseTeacher("/teacher/bok/4-klasse/planung"),{course:"bok/4-klasse",kind:"planung"});
-assert.equal(parseTeacher("/teacher/irn/1-klasse/musterloesungen"),null);
+assert.deepEqual(parseTeacher("/teacher/irn/1-klasse/musterloesungen"),{course:"irn/1-klasse",kind:"musterloesungen"});
 assert.equal(parseTeacher("/teacher/bok/1-klasse/../../api/session"),null);
 assert.match(teacherShell({course:"bok/1-klasse",kind:"materialien"}),/Lehrpersonenbereich/);
 assert.equal(Object.keys(DOWNLOADS).length,4);
@@ -23,7 +23,7 @@ const teacherGuest=await route("/teacher/bok/1-klasse/materialien");
 assert.equal(teacherGuest.status,302,"Teacher pages must redirect unauthenticated users to GitHub OAuth");
 assert.equal(teacherGuest.headers.get("Location"),
   "/auth/start?next=%2Fteacher%2Fbok%2F1-klasse%2Fmaterialien");
-assert.equal((await route("/teacher/irn/1-klasse/materialien")).status,404);
+assert.equal((await route("/teacher/irn/1-klasse/materialien")).status,302);
 assert.equal((await route("/teacher/downloads/Arbeitsblatt_Perzeptron_Lsg.md")).status,302);
 assert.equal((await route("/teacher/bok/4-klasse/unknown")).status,404);
 assert.equal((await route("/api/file?path=kursseiten/einstieg/010-einstieg-1.md")).status,401);
@@ -113,9 +113,11 @@ assert.match(wrongRepo.reason,/Repository/);
 // Exercise the actual publisher against an isolated GitHub API contract.
 const manifest=JSON.parse(readFileSync(new URL("../kursseiten/manifest.json",import.meta.url)));
 const basisManifest=JSON.parse(readFileSync(new URL("../kursseiten/basis-manifest.json",import.meta.url)));
+const irnManifests=[1,4].map(grade=>JSON.parse(readFileSync(new URL("../kursseiten/irn-"+grade+"-manifest.json",import.meta.url))));
 const sources=new Map([["kursseiten/manifest.json",JSON.stringify(manifest)],["kursseiten/basis-manifest.json",JSON.stringify(basisManifest)],
+  ...irnManifests.map((manifest,i)=>["kursseiten/irn-"+(i===0?1:4)+"-manifest.json",JSON.stringify(manifest)]),
   ["kursseiten/glossar.json",readFileSync(new URL("../kursseiten/glossar.json",import.meta.url),"utf8")]]);
-for(const section of [...manifest.sections,...basisManifest.sections].filter(s=>s.teaching)){
+for(const section of [...manifest.sections,...basisManifest.sections,...irnManifests.flatMap(m=>m.sections)].filter(s=>s.teaching)){
   const prefix="kursseiten/"+section.id+"/";
   for(const name of readdirSync(new URL("../"+prefix,import.meta.url))){
     if(/\.(json|md)$/.test(name))

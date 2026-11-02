@@ -82,12 +82,17 @@ const server=http.createServer((req,res)=>{
         'setTimeout(()=>send({type:"ready",ready:true}),10);<\/script></body></html>'
       }));
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
-    await page.locator("#courseThemeSelect option").first().waitFor({state:"attached"});
-    assert.equal(await page.locator("#courseThemeSelect option").count(),4);
-    await page.locator("#courseThemeSelect").selectOption("irn-1-klasse");
+    // One course selector controls both the content and its live color preview.
+    assert.equal(await page.locator("#courseThemeSelect").count(),0);
+    assert.equal(await page.locator("#courseSelect option").count(),4);
+    await page.locator("#courseSelect").selectOption("irn1");
     assert.equal(await page.locator("#courseThemeColor").inputValue(),"#69419b");
-    await page.locator("#courseThemeColor").fill("#58358b");
     assert.match(await page.locator("#courseThemePreview").innerText(),/IRN/);
+    assert.match(await page.locator("#teacherSolutionsLink").getAttribute("href"),/irn\/1-klasse\/musterloesungen/);
+    await page.locator("#courseThemeColor").fill("#58358b");
+    assert.equal(await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#58358b");
+    await page.locator("#chapters button").first().click();
+    assert.match(await page.locator("#preview").getAttribute("srcdoc"),/--accent:#58358b/);
     await page.locator("#courseThemeStage").click();
     assert.match(await page.locator("#staged").innerText(),/shared\/course-sites\.json/);
     await page.locator("#courseThemeColor").fill("#69419b");
@@ -108,7 +113,7 @@ const server=http.createServer((req,res)=>{
     await page.locator('#sectionNav [data-section="einstieg"]').click();
     assert.equal(await page.locator("#section").inputValue(),"einstieg");
     assert.equal(await page.locator("#chapters .chapter-number").first().textContent(),"01");
-    assert.equal(await page.locator(".sidebar-resources:not(.teacher-access) .sidebar-action").count(),3);
+    assert.equal(await page.locator(".sidebar-resources:not(.teacher-access) .sidebar-action").count(),5);
     assert.equal(await page.locator(".teacher-access .sidebar-action").count(),3);
     assert.match(await page.locator("#teacherSolutionsLink").getAttribute("href"),/bok\/4-klasse\/musterloesungen/);
     // The publishing form is no longer rendered beneath the split panes.

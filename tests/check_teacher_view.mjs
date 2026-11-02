@@ -72,21 +72,23 @@ assert(shell.includes('id="lessonNav"')&&shell.includes('data-grade="4"'));
 assert(shell.includes('class="area-nav"'));
 const options=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES});
 assert.deepEqual(options.map(x=>x.slug),["bok/1-klasse","bok/4-klasse","irn/1-klasse","irn/4-klasse"]);
-assert.deepEqual(options.map(x=>x.ready),[true,true,false,false]);
+assert.deepEqual(options.map(x=>x.ready),[true,true,true,true]);
 for(const kind of ["planung","materialien","musterloesungen"]){
   const html=teacherShell({course:"bok/4-klasse",kind},options);
   assert(html.includes('id="teacherCourseSelect"'),"Course choice missing on "+kind);
   assert(html.includes('value="bok/4-klasse" selected'),"Current course must be selected");
   assert(html.includes('value="bok/1-klasse"'),"Other BOK course must be selectable");
-  assert(html.includes('value="irn/1-klasse" disabled'),"Unprepared IRN course must be unavailable");
-  assert(html.includes('value="irn/4-klasse" disabled'));
+  assert(html.includes('value="irn/1-klasse"'),"Independent IRN course should be selectable");
+  assert(html.includes('value="irn/4-klasse"'));
+  assert(!html.includes('value="irn/1-klasse" disabled'));
   assert(html.includes('/teacher-theme.css?course=bok%2F4-klasse'),"Theme must load as a stylesheet compatible with strict CSP");
 }
 assert(teacherShell({course:"bok/1-klasse",kind:"materialien"},options)
   .includes('/teacher-theme.css?course=bok%2F1-klasse'));
 assert.equal(teacherThemeStylesheet(options,"bok/1-klasse"),'body[data-grade="1"]{--accent:#3653a3}');
 assert.equal(teacherThemeStylesheet(options,"bok/4-klasse"),'body[data-grade="4"]{--accent:#076959}');
-assert.throws(()=>teacherShell({course:"irn/1-klasse",kind:"planung"},options),/nicht/);
+assert(teacherShell({course:"irn/1-klasse",kind:"planung"},options).includes('data-grade="1"'));
+assert(teacherShell({course:"irn/4-klasse",kind:"materialien"},options).includes('IRN'));
 assert.throws(()=>normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES.slice(0,2)}),/vier/);
 const malicious=structuredClone(DEFAULT_COURSES);
 malicious[0].theme.accent="red; background:url(https://example.org/steal)";
@@ -96,7 +98,7 @@ const courseMock=async(_token,path)=>{
   return {encoding:"base64",content:Buffer.from(JSON.stringify({version:1,courses:DEFAULT_COURSES})).toString("base64")};
 };
 assert.deepEqual((await loadTeacherCourses("token",courseMock,"example/repo")).map(x=>x.ready),
-  [true,true,false,false],"Course picker must use the source registry");
+  [true,true,true,true],"Course picker must use the source registry");
 
 const fake={
   "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),

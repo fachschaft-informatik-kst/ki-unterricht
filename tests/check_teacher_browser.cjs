@@ -22,9 +22,9 @@ const ROOT=path.resolve(__dirname,"..");
       {wer:"Ergebnis",text:"Sicherung"}]}]});
   const server=http.createServer((req,res)=>{
     const url=new URL(req.url,"http://127.0.0.1");
-    const route=/^\/teacher\/bok\/(1|4)-klasse\/(planung|materialien|musterloesungen)$/.exec(url.pathname);
+    const route=/^\/teacher\/(bok|irn)\/(1|4)-klasse\/(planung|materialien|musterloesungen)$/.exec(url.pathname);
     if(route){
-      const html=teacherShell({course:"bok/"+route[1]+"-klasse",kind:route[2]});
+      const html=teacherShell({course:route[1]+"/"+route[2]+"-klasse",kind:route[3]});
       res.writeHead(200,{"Content-Type":"text/html; charset=utf-8"}).end(html);return;
     }
     if(url.pathname==="/api/teacher"){
@@ -68,7 +68,7 @@ const ROOT=path.resolve(__dirname,"..");
     assert.match(await page.locator(".lesson-heading h2").innerText(),/DL 03 · Ein Neuron/);
     assert.equal(await page.locator("#teacherCourseSelect").inputValue(),"bok/4-klasse");
     assert.equal(await page.locator("#teacherCourseSelect option").count(),4);
-    assert.equal(await page.locator('#teacherCourseSelect option:disabled').count(),2);
+    assert.equal(await page.locator('#teacherCourseSelect option:disabled').count(),0);
     assert.match(await page.locator("#teacherCourseSelect").innerText(),/IRN · 1. Klasse/);
     assert.match(await page.locator("#teacherCourseSelect").innerText(),/in Vorbereitung/);
     assert.match(await page.locator(".course-context").innerText(),/BOK · 4. Klasse/);
@@ -114,6 +114,12 @@ const ROOT=path.resolve(__dirname,"..");
     assert.equal(await page.locator("#lessonNav a[aria-current=page]").count(),1);
     const accent=await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim());
     assert.equal(accent,"#3653a3","Selected course should have the registry accent");
+    await page.locator("#teacherCourseSelect").selectOption("irn/4-klasse");
+    await page.waitForURL("**/teacher/irn/4-klasse/musterloesungen?dl=1");
+    await page.locator(".lesson-heading h2").filter({hasText:"DL 01"}).waitFor();
+    assert.equal(await page.locator("#teacherCourseSelect").inputValue(),"irn/4-klasse");
+    assert.match(await page.locator(".course-context").innerText(),/IRN · 4. Klasse/);
+
 
     await page.setViewportSize({width:390,height:844});
     assert.equal(await page.locator(".lesson-link").count(),10);

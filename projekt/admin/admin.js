@@ -1496,13 +1496,13 @@ $("courseSelect").addEventListener("change",async()=>{
   state.course=selected;
   updateTeacherAccessLinks();
   document.body.classList.toggle("course-basis",selected==="basis");
-  if(courseThemeDraft)renderThemeControls();
   $("courseContext").textContent=courseProfile().teacher+" · "+courseGrade()+". Klasse · "+courseProfile().name;
   ++navigationRevision;
   state.plans.clear();
   state.manifest=null;
   $("section").replaceChildren();$("chapters").replaceChildren();$("lessonOrder").replaceChildren();
   state.current=null;
+  if(courseThemeDraft)renderThemeControls();
   $("source").value="";
   $("path").textContent="Kurs gewechselt";
   $("heading").textContent="Kapitel auswählen";
