@@ -295,7 +295,7 @@ for document in [soup.get_text(),planning,(root/'content/ki_projekt/ki_projektau
 for sid,minimum in {'einstieg':5,'lernarten':4,'perzeptron':4,'netze':4,'sprache':7,'gesellschaft':5,'projekt':4}.items():
     chapters=soup.select(f'#{sid} details.kapitel')
     assert len(chapters)>=minimum and all(c.select_one('.kapitel-nr') and c.select_one('h2.kapitel-titel') for c in chapters) and all(c.get('data-kurz') for c in chapters), sid
-assert len(soup.select('[data-score]'))==10
+assert len(soup.select('[data-score]'))==12
 assert len(soup.select('[data-lab="lernarten.ipynb"]'))==0
 for name in ['perzeptron_und_neuronale_netze.ipynb','xor_einzelne_neuronen.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_lernlabor.ipynb']:
     assert soup.select_one('[data-lab="'+name+'"]'), name
