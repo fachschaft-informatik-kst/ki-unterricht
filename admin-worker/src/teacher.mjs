@@ -276,7 +276,14 @@ export async function loadTeacherCourses(token,github,repo){
 export function teacherThemeStylesheet(courses,course){
   const selected=courses.find(item=>item.slug===course&&item.ready);
   if(!selected)throw Error("Kurs-Farbthema nicht vorhanden.");
-  return 'body[data-grade="'+selected.grade+'"]{--accent:'+selected.accent+'}';
+  const accent=selected.accent;
+  const rgb=[1,3,5].map(i=>parseInt(accent.slice(i,i+2),16));
+  const shade=p=>"#"+rgb.map(x=>Math.round(x+(255-x)*p).toString(16).padStart(2,"0")).join("");
+  const preset={"#3653a3":["#eaf0ff","#f6f7fb","#dae1f0"],
+    "#076959":["#e6f2eb","#f5f7f6","#dce4e0"]}[accent.toLowerCase()];
+  const [soft,paper,line]=preset||[shade(.89),shade(.965),shade(.87)];
+  return 'body[data-grade="'+selected.grade+'"]{--accent:'+accent+
+    ';--soft:'+soft+';--line:'+line+';background:'+paper+'}';
 }
 export function teacherShell(route,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
   const titles={planung:"AVIVA-Unterrichtsplanung",materialien:"Materialkoffer",musterloesungen:"Musterlösungen"};

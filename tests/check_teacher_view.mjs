@@ -86,8 +86,10 @@ for(const kind of ["planung","materialien","musterloesungen"]){
 }
 assert(teacherShell({course:"bok/1-klasse",kind:"materialien"},options)
   .includes('/teacher-theme.css?course=bok%2F1-klasse'));
-assert.equal(teacherThemeStylesheet(options,"bok/1-klasse"),'body[data-grade="1"]{--accent:#3653a3}');
-assert.equal(teacherThemeStylesheet(options,"bok/4-klasse"),'body[data-grade="4"]{--accent:#076959}');
+assert.match(teacherThemeStylesheet(options,"bok/1-klasse"),/--accent:#3653a3/);
+assert.match(teacherThemeStylesheet(options,"bok/4-klasse"),/--accent:#076959/);
+assert.match(teacherThemeStylesheet(options,"irn/1-klasse"),/--accent:#69419b;--soft:#[a-f0-9]{6}/);
+assert.match(teacherThemeStylesheet(options,"irn/4-klasse"),/--accent:#9a481d;--soft:#[a-f0-9]{6}/);
 assert(teacherShell({course:"irn/1-klasse",kind:"planung"},options).includes('data-grade="1"'));
 assert(teacherShell({course:"irn/4-klasse",kind:"materialien"},options).includes('IRN'));
 assert.throws(()=>normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES.slice(0,2)}),/vier/);
