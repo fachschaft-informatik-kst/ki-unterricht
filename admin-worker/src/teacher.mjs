@@ -1,5 +1,12 @@
 // Serve only explicitly selected teacher resources through the authenticated Worker.
-const PROFILES={"bok/1-klasse":{manifest:"kursseiten/basis-manifest.json",grade:1},"bok/4-klasse":{manifest:"kursseiten/manifest.json",grade:4}};
+const PROFILES={
+  "bok/1-klasse":{manifest:"kursseiten/basis-manifest.json",grade:1,owner:"BOK"},
+  "bok/4-klasse":{manifest:"kursseiten/manifest.json",grade:4,owner:"BOK"},
+  "irn/1-klasse":{manifest:"kursseiten/irn-1-manifest.json",grade:1,owner:"IRN",
+    solutions:"lehrperson/irn-1"},
+  "irn/4-klasse":{manifest:"kursseiten/irn-4-manifest.json",grade:4,owner:"IRN",
+    solutions:"lehrperson/irn-4"}
+};
 export const DOWNLOADS={
   "Arbeitsblatt_Perzeptron_Lsg.md":"worksheets/md/Arbeitsblatt_Perzeptron_Lsg.md",
   "KI_Bewertungsraster.md":"worksheets/md/KI_Bewertungsraster.md",
@@ -7,7 +14,7 @@ export const DOWNLOADS={
   "koordinatengitter_or_nand_xor.svg":"worksheets/md/svg/koordinatengitter_or_nand_xor.svg"
 };
 export function parseTeacher(path){
-  const m=/^\/teacher\/(bok\/(?:1|4)-klasse)\/(planung|materialien|musterloesungen)\/?$/.exec(path);
+  const m=/^\/teacher\/((?:bok|irn)\/(?:1|4)-klasse)\/(planung|materialien|musterloesungen)\/?$/.exec(path);
   return m&&PROFILES[m[1]]?{course:m[1],kind:m[2]}:null;
 }
 export async function readTeacherFile(token,path,github,repo){
@@ -179,7 +186,7 @@ export function fieldTopic(field,lessonTitle=""){
 }
 async function getQuestions(lesson,course,token,github,repo){
   const views=new Set([lesson.view]);
-  if(lesson.number>=5&&lesson.number<=8){
+  if(course.startsWith("bok/")&&lesson.number>=5&&lesson.number<=8){
     (course==="bok/4-klasse"?["projekt","journal","fremdmodell","sicherung"]:
       ["basis-daten","basis-plan","basis-training","basis-abschluss"]).forEach(x=>views.add(x));
   }
@@ -209,13 +216,17 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
   if(kind==="materialien"){
     const content=await getText(token,"kursseiten/"+current.view+"/materialien.md",github,repo);
     const markdown=materialForLesson(content,current.number);
-    const intro=profile.grade===4?await getText(token,"lehrperson/materialien.md",github,repo):"";
+    const intro=profile.owner==="BOK"&&profile.grade===4?
+      await getText(token,"lehrperson/materialien.md",github,repo):"";
     return {...base,intro,sections:[{title:"Doppellektion "+current.number+" · "+current.title,
       markdown:markdown||content}]};
   }
+  const generalPath=profile.solutions?profile.solutions+"/musterloesungen.md":
+    "lehrperson/musterloesungen.md";
+  const fieldPath=profile.solutions?profile.solutions+"/musterloesungen-felder.md":
+    "lehrperson/musterloesungen-felder-"+profile.grade+"-klasse.md";
   const [general,fields]=await Promise.all([
-    getText(token,"lehrperson/musterloesungen.md",github,repo),
-    getText(token,"lehrperson/musterloesungen-felder-"+profile.grade+"-klasse.md",github,repo)]);
+    getText(token,generalPath,github,repo),getText(token,fieldPath,github,repo)]);
   const notes=headings(general).filter(block=>numbers(block.title).includes(current.number))
     .map(block=>({title:block.title,markdown:block.text}));
   const entries=answerRows(fields,current.number);
@@ -253,7 +264,7 @@ export function normalizeTeacherCourses(registry){
       throw Error("Kursidentität darf nicht geändert werden.");
     courses.push({id:item.id,teacher:item.teacher,grade:item.grade,slug:item.slug,
       name:String(item.name||"").slice(0,120),accent:item.theme.accent,
-      ready:!!PROFILES[item.slug]&&item.status==="published"&&!!item.source});
+      ready:!!PROFILES[item.slug]});
   }
   if(courses.length!==4)throw Error("Alle vier Kursplätze müssen vorhanden sein.");
   return courses;
@@ -265,7 +276,14 @@ export async function loadTeacherCourses(token,github,repo){
 export function teacherThemeStylesheet(courses,course){
   const selected=courses.find(item=>item.slug===course&&item.ready);
   if(!selected)throw Error("Kurs-Farbthema nicht vorhanden.");
-  return 'body[data-grade="'+selected.grade+'"]{--accent:'+selected.accent+'}';
+  const accent=selected.accent;
+  const rgb=[1,3,5].map(i=>parseInt(accent.slice(i,i+2),16));
+  const shade=p=>"#"+rgb.map(x=>Math.round(x+(255-x)*p).toString(16).padStart(2,"0")).join("");
+  const preset={"#3653a3":["#eaf0ff","#f6f7fb","#dae1f0"],
+    "#076959":["#e6f2eb","#f5f7f6","#dce4e0"]}[accent.toLowerCase()];
+  const [soft,paper,line]=preset||[shade(.89),shade(.965),shade(.87)];
+  return 'body[data-grade="'+selected.grade+'"]{--accent:'+accent+
+    ';--soft:'+soft+';--line:'+line+';background:'+paper+'}';
 }
 export function teacherShell(route,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
   const titles={planung:"AVIVA-Unterrichtsplanung",materialien:"Materialkoffer",musterloesungen:"Musterlösungen"};
@@ -292,7 +310,7 @@ export function teacherShell(route,courses=normalizeTeacherCourses({version:1,co
     '<div class="course-switcher"><div class="course-picker">'+
     '<label for="teacherCourseSelect">Kurs auswählen</label>'+
     '<select id="teacherCourseSelect" aria-label="Lehrperson und Klasse auswählen">'+opts+'</select>'+
-    '<p class="course-picker-note">IRN-Kurse sind angelegt. Ihre eigenen Lehrpersonenmaterialien sind noch in Vorbereitung.</p>'+
+    '<p class="course-picker-note">IRN: eigenständige bearbeitbare Entwürfe; öffentliche Schülerkurse noch in Vorbereitung.</p>'+
     '</div><div class="course-context"><span>Aktueller Kurs</span><strong>'+esc(label)+'</strong>'+
     '<small>'+esc(active.name)+'</small></div></div>'+
     '<h1>'+esc(title)+'</h1><nav class="area-nav" aria-label="Lehrpersonenmaterial">'+nav+'</nav></div></header>'+

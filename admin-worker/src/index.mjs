@@ -96,7 +96,11 @@ function validateCourseThemeRegistry(doc){
 }
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json"||path===GLOSSARY_PATH||path==="shared/course-sites.json")||
+  (["kursseiten/manifest.json","kursseiten/basis-manifest.json",
+    "kursseiten/irn-1-manifest.json","kursseiten/irn-4-manifest.json",
+    GLOSSARY_PATH,"shared/course-sites.json"].includes(path))||
+  /^lehrperson\/irn-[14]\/(?:musterloesungen(?:-felder)?|glossar)\.md$/.test(path)||
+  /^lehrperson\/musterloesungen(?:-felder-[14]-klasse)?\.md$/.test(path)||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
   /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
@@ -122,7 +126,7 @@ function validate(changes){
       if(doc.nbformat!==4||!Array.isArray(doc.cells)||!doc.metadata||!doc.cells.every(cell=>
         ["code","markdown","raw"].includes(cell.cell_type)&&Array.isArray(cell.source)&&cell.source.every(s=>typeof s==="string")))
         throw Error("Ungültige Jupyter-Notebook-Struktur.");
-      if(c.expectedSha===null&&!/^content\/(?:basis_)?lesson_[a-z0-9_]+\.ipynb$/.test(c.path))
+      if(c.expectedSha===null&&!/^content\/(?:basis_|irn[14]_)?lesson_[a-z0-9_]+\.ipynb$/.test(c.path))
         throw Error("Neue Notebooks müssen mit einem Unterkapitel-Baustein verknüpft sein.");
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
@@ -165,9 +169,13 @@ async function publish(req,token){
   // A newly created notebook must be published atomically with a chapter that
   // references it. Existing notebook sources remain editable as before.
   for(const item of body.changes.filter(x=>x.expectedSha===null&&x.path.endsWith(".ipynb"))){
+    const namespace=item.path.startsWith("content/irn1_")?"irn-1-":
+      item.path.startsWith("content/irn4_")?"irn-4-":
+      item.path.startsWith("content/basis_")?"basis-":"bok-4";
     const references=body.changes.some(x=>!x.delete&&/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)&&
       x.content?.includes('data-notebook="'+item.path+'"')&&
-      (item.path.startsWith("content/basis_")===x.path.startsWith("kursseiten/basis-")));
+      (namespace==="bok-4"?!/^(?:basis-|irn-)/.test(x.path.split("/")[1]):
+        x.path.split("/")[1].startsWith(namespace)));
     if(!references)return fail(400,"Neue Notebooks müssen gemeinsam mit dem passenden Unterkapitel vorgemerkt werden: "+item.path);
   }
 
@@ -193,10 +201,14 @@ async function publish(req,token){
           throw Error("Nur die Akzentfarben dürfen im Farbthemen-Editor geändert werden.");
       }
     }
-    for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json"]){
+    for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json",
+      "kursseiten/irn-1-manifest.json","kursseiten/irn-4-manifest.json"]){
     const previous=await readJson(manifestPath);
     const manifest=await proposed(manifestPath);
     validateManifest(manifest);
+    const irnPrefix=/^kursseiten\/(irn-[14])-manifest\.json$/.exec(manifestPath)?.[1];
+    if(irnPrefix&&manifest.sections.some(section=>!section.id.startsWith(irnPrefix+"-")))
+      throw Error("IRN-Unterrichtsbereiche müssen im eigenen Kursnamensraum liegen: "+irnPrefix);
     if(previous.sections.some(s=>!manifest.sections.some(n=>n.id===s.id&&!!n.teaching===!!s.teaching)))
       throw Error("Bestehende Bereichs-IDs müssen erhalten bleiben.");
     const all=[];

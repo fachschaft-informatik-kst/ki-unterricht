@@ -137,3 +137,53 @@ Kopfbereich und der seitlichen Unterrichtsübersicht genannt. Das Akzentfarbthem
 kommt aus \`shared/course-sites.json\` und wird auch im geschützten Bereich
 verwendet. Der GitHub-Login und die Berechtigungsprüfung erfolgen weiterhin
 im bestehenden Cloudflare Worker.
+
+## IRN-Lehrpersonenbereich und vier Kursprofile (PR #118)
+
+Der Editor verwendet **genau eine Kursauswahl** für BOK 1/4 und IRN 1/4.
+Die Akzentfarbe darunter gehört immer zum ausgewählten Profil; beim Ändern
+wird sie sofort auf den Editor, die Kapitelvorschau, die AVIVA-Vorschau und
+die Bausteinvorschau angewendet. **Farbänderung vormerken** fügt die
+Änderung in `shared/course-sites.json` dem nächsten Pull Request hinzu.
+Ein zweites Auswahlfeld für die Farbverwaltung gibt es nicht mehr.
+
+Die Quellen der beiden IRN-Kurse sind strikt separat:
+
+| IRN | Kursmanifest | AVIVA, Kapitel und Materialkoffer | Musterlösungen |
+| --- | --- | --- | --- |
+| 1. Klasse | `kursseiten/irn-1-manifest.json` | `kursseiten/irn-1-kurs/` | `lehrperson/irn-1/` |
+| 4. Klasse | `kursseiten/irn-4-manifest.json` | `kursseiten/irn-4-kurs/` | `lehrperson/irn-4/` |
+
+Jeder IRN-Kurs verfügt über zehn **inhaltlich noch unausgearbeitete**
+Doppellektionen, jeweils mit vollständiger bearbeitbarer AVIVA-Struktur
+(90 Minuten), separaten Unterkapiteldateien und Materialkoffer-Abschnitten.
+Musterlösungen, feldgenaue Antworten und Glossar sind eigene Markdown-Dateien.
+**Es sind keine fertigen Unterrichtsmaterialien und keine von BOK kopierten
+Antworten.** Alle Bereiche können im Editor geöffnet, bearbeitet und
+über einen Pull Request versioniert werden.
+
+Die geschützten Ansichten `/teacher/irn/1-klasse/` und
+`/teacher/irn/4-klasse/` verwenden dieselbe OAuth-Prüfung wie BOK
+und laden nur ihre eigenen Kursquellen. Die Lehrpersonenansicht
+bietet Kursauswahl, DL-Navigation, AVIVA-Farben, Materialien und
+den aktuellen Stand der Musterlösungen.
+
+Neue Notebooks erhalten `irn1_lesson_*` bzw. `irn4_lesson_*` als
+Namensraum und werden als eigenständige JupyterLite-Lernmaterialien gebaut.
+Sie dürfen durch den Worker nur zusammen mit einem Unterkapitel desselben
+IRN-Kurses neu angelegt werden. Ein BOK-Notebook darf nicht
+irrtümlich in die IRN-Kursnavigation aufgenommen werden.
+
+**Veröffentlichung der Schülerseiten:** Die IRN-URLs bleiben zunächst
+als «in Vorbereitung» gekennzeichnet. Die geschützten Lehrpersonenansichten
+und der Editor funktionieren für ihre Entwürfe; eine öffentliche
+Veröffentlichung der neuen IRN-Unterrichtsseiten muss nach fachlicher
+Freigabe separat aktiviert werden. Neue Schülerkurse benötigen dann
+eigenständige Kurs- und Datenspeicher-IDs. Ein reiner Farbwechsel oder
+das Einreichen eines Entwurfs macht einen IRN-Kurs nicht automatisch
+öffentlich.
+
+**Quellenschutz:** Das Repository ist öffentlich. GitHub-OAuth schützt
+den Zugriff auf die gerenderten Lehrpersonenansichten, nicht die dort
+abgelegten Markdown-/AVIVA-Quelldateien auf github.com. Für echte
+Vertraulichkeit müssen diese in ein privates Repository verschoben werden.

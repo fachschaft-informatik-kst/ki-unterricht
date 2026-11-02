@@ -7,14 +7,28 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
+const COURSE_PROFILES={
+  basis:{slug:"bok/1-klasse",theme:"bok-1-klasse",teacher:"BOK",grade:1,manifest:"kursseiten/basis-manifest.json",name:"KI entdecken"},
+  vertiefung:{slug:"bok/4-klasse",theme:"bok-4-klasse",teacher:"BOK",grade:4,manifest:"kursseiten/manifest.json",name:"KI vertiefen"},
+  irn1:{slug:"irn/1-klasse",theme:"irn-1-klasse",teacher:"IRN",grade:1,manifest:"kursseiten/irn-1-manifest.json",name:"KI entdecken (Entwurf)",source:"irn-1"},
+  irn4:{slug:"irn/4-klasse",theme:"irn-4-klasse",teacher:"IRN",grade:4,manifest:"kursseiten/irn-4-manifest.json",name:"KI vertiefen (Entwurf)",source:"irn-4"}
+};
+const courseProfile=()=>COURSE_PROFILES[state.course];
+const courseGrade=()=>courseProfile().grade;
+const isIrnCourse=()=>courseProfile().teacher==="IRN";
+const teacherSource=(kind)=>{
+  const p=courseProfile();
+  return p.source?"lehrperson/"+p.source+"/"+kind+".md":
+    kind==="musterloesungen"?"lehrperson/musterloesungen.md":
+    kind==="musterloesungen-felder"?"lehrperson/musterloesungen-felder-"+p.grade+"-klasse.md":GLOSSARY_PATH;
+};
 function updateTeacherAccessLinks(){
-  const grade=state.course==="basis"?"1":"4";
-  const origin="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/"+grade+"-klasse/";
+  const origin="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/"+courseProfile().slug+"/";
   for(const [id,kind] of [["teacherPlanLink","planung"],["teacherMaterialsLink","materialien"],["teacherSolutionsLink","musterloesungen"]])
     $(id).href=origin+kind;
 }
 updateTeacherAccessLinks();
-const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
+const manifestPath=()=>courseProfile().manifest;
 
 const COURSE_THEMES_PATH="shared/course-sites.json";
 let courseThemes=null,courseThemeDraft=null;
@@ -23,7 +37,7 @@ const blendTheme=(hex,p)=>"#"+[1,3,5].map(i=>{
   return Math.round(n+(255-n)*p).toString(16).padStart(2,"0");
 }).join("");
 function selectedThemeRecord(){
-  const id=state.course==="basis"?"bok-1-klasse":"bok-4-klasse";
+  const id=courseProfile().theme;
   return courseThemeDraft?.courses.find(c=>c.id===id);
 }
 function themePalette(accent){
@@ -33,11 +47,11 @@ function themePalette(accent){
   return {accent,soft:blendTheme(accent,.89),paper:blendTheme(accent,.965),line:blendTheme(accent,.87)};
 }
 function courseThemeCSS(){
-  const t=themePalette(selectedThemeRecord()?.theme?.accent||(state.course==="basis"?"#3653a3":"#076959"));
+  const t=themePalette(selectedThemeRecord()?.theme?.accent||(courseGrade()===1?"#3653a3":"#076959"));
   return ":root{--accent:"+t.accent+";--soft:"+t.soft+";--paper:"+t.paper+";--line:"+t.line+";}";
 }
 function applyCourseTheme(){
-  const t=themePalette(selectedThemeRecord()?.theme?.accent||(state.course==="basis"?"#3653a3":"#076959"));
+  const t=themePalette(selectedThemeRecord()?.theme?.accent||(courseGrade()===1?"#3653a3":"#076959"));
   document.body.style.setProperty("--accent",t.accent);
   document.body.style.setProperty("--soft",t.soft);
   document.body.style.setProperty("--bg",t.paper);
@@ -45,16 +59,7 @@ function applyCourseTheme(){
 }
 function renderThemeControls(){
   if(!courseThemeDraft)return;
-  const select=$("courseThemeSelect");
-  if(!select.options.length){
-    for(const course of courseThemeDraft.courses){
-      const option=document.createElement("option");
-      option.value=course.id;option.textContent=course.teacher+" · "+course.grade+". Klasse";
-      select.append(option);
-    }
-    select.value=state.course==="basis"?"bok-1-klasse":"bok-4-klasse";
-  }
-  const course=courseThemeDraft.courses.find(c=>c.id===select.value);
+  const course=selectedThemeRecord();
   if(!course)return;
   const accent=course.theme.accent;
   $("courseThemeColor").value=accent;
@@ -63,10 +68,11 @@ function renderThemeControls(){
   sample.style.setProperty("--preview-paper",themePalette(accent).paper);
   sample.replaceChildren();
   const heading=document.createElement("strong");heading.textContent=course.teacher+" · "+course.grade+". Klasse";
-  const name=document.createElement("span");name.textContent=course.name+" · "+(course.status==="published"?"veröffentlicht":"in Vorbereitung");
+  const name=document.createElement("span");name.textContent=course.name+" · "+(course.status==="published"?"veröffentlicht":"Entwurf");
   sample.append(heading,name);
   applyCourseTheme();
   if(state.current&&!notebookPath(state.current.path))preview();
+  if($("blockPreview")&&typeof inspectBlock==="function")inspectBlock($("blockType").value);
 }
 async function loadCourseThemes(){
   const file=await api("/api/file?path="+encodeURIComponent(COURSE_THEMES_PATH));
@@ -74,10 +80,9 @@ async function loadCourseThemes(){
   courseThemeDraft=JSON.parse(state.staged.get(COURSE_THEMES_PATH)?.content||file.content);
   renderThemeControls();
 }
-$("courseThemeSelect").addEventListener("change",renderThemeControls);
 $("courseThemeColor").addEventListener("input",event=>{
   if(!courseThemeDraft)return;
-  const course=courseThemeDraft.courses.find(c=>c.id===$("courseThemeSelect").value);
+  const course=selectedThemeRecord();
   if(!course)return;
   course.theme.accent=event.target.value;
   renderThemeControls();
@@ -170,9 +175,12 @@ const post=(url,value)=>api(url,{method:"POST",headers:{"Content-Type":"applicat
 const slug=text=>text.trim().toLowerCase().replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const filename=path=>path.split("/").pop().replace(".md","");
 const notebookPath=path=>/^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path);
-const gradeNotebook=path=>notebookPath(path)&&
-  (state.course==="basis"?/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path):
-    !/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path));
+const gradeNotebook=path=>{
+  if(!notebookPath(path))return false;
+  if(isIrnCourse())return new RegExp("^content/irn"+courseGrade()+"_lesson_[a-z0-9_]+\\.ipynb$").test(path);
+  return courseGrade()===1?/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path):
+    !/^content\/(?:basis_|irn[14]_)/.test(path);
+};
 let returnChapterPath=null;
 function notebookReferences(source){
   const items=[...source.matchAll(/data-notebook=["'](content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb)["']/g)]
@@ -581,12 +589,19 @@ function renderLessonOrder(){
 let navigationRevision=0;
 function useFile(path,sha,content,original=content){
   const targetSection=path.split("/")[1];
-  if(/\/(?:planung\.json|materialien\.md)$/.test(path) &&
-      (targetSection.startsWith("basis-")!==(state.course==="basis")))
-    throw Error("Dieser Inhalt gehört zur anderen Klassenstufe. Bitte zuerst den Kurs wechseln.");
+  if(path.startsWith("lehrperson/")){
+    const base=courseProfile().source;
+    if(base&&!path.startsWith("lehrperson/"+base+"/"))throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
+    if(!base&&path.startsWith("lehrperson/irn-"))throw Error("IRN-Material gehört zu einem anderen Kurs.");
+  }
+  if(/\/(?:planung\.json|materialien\.md)$/.test(path)){
+    const own=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest?.content||'{"sections":[]}');
+    if(!own.sections.some(section=>section.id===targetSection))
+      throw Error("Dieser Inhalt gehört zu einem anderen Kurs. Bitte zuerst den Kurs wechseln.");
+  }
   state.current={path,sha,original};
   $("path").textContent=path;
-  $("courseContext").textContent=state.course==="basis"?"1. Kurzgymnasium · KI entdecken":"4. Kurzgymnasium · KI vertiefen";
+  $("courseContext").textContent=courseProfile().teacher+" · "+courseGrade()+". Klasse · "+courseProfile().name;
   $("heading").textContent=path===GLOSSARY_PATH?"KI-Glossar bearbeiten":
     path.endsWith("/planung.json")?"AVIVA-Unterrichtsplan":
     path.endsWith("/materialien.md")?"Unterrichtsmaterialien":filename(path);
@@ -601,7 +616,7 @@ function useFile(path,sha,content,original=content){
     $(id).hidden=isPlan||isNotebook||isGlossary;
   $("sourceLabel").hidden=isNotebook;
   $("sourceLabel").textContent=isPlan?"AVIVA-Formular":isGlossary?"Glossarbegriffe bearbeiten":"HTML / Markdown";
-  $("planCourseTag").textContent=state.course==="basis"?"1. Klasse":"4. Klasse";
+  $("planCourseTag").textContent=courseGrade()+". Klasse";
   $("formEditor").hidden=!(isPlan||isGlossary);
   $("glossaryEditor").hidden=!isGlossary;
   $("notebookEditor").hidden=!isNotebook;
@@ -627,7 +642,10 @@ function useFile(path,sha,content,original=content){
   refreshNotebookAssociations();
   chapterList();
   for(const [id,active] of [
-    ["editPlan",isPlan],["editMaterials",path.endsWith("/materialien.md")],["editGlossary",isGlossary]
+    ["editPlan",isPlan],["editMaterials",path.endsWith("/materialien.md")],
+    ["editGlossary",isGlossary||path.endsWith("/glossar.md")],
+    ["editSolutions",path.endsWith("/musterloesungen.md")],
+    ["editSolutionFields",path.includes("musterloesungen-felder")]
   ])$(id).setAttribute("aria-current",String(active));
   for(const b of $("notebooks").querySelectorAll("button"))b.setAttribute("aria-current",String(b.title===path));
 }
@@ -764,7 +782,7 @@ const glossaryDetailKey=(level,key)=>level+(key==="beispiel"?"Beispiel":key==="f
 const glossaryContent=(term,level,key)=>term[glossaryDetailKey(level,key)]??term[key];
 function glossaryFields(){
   const term=currentGlossaryTerm();if(!term)return;
-  const level=state.course==="basis"?"basis":"vertieft";
+  const level=courseGrade()===1?"basis":"vertieft";
   $("glossaryCurrent").textContent=term.begriff||"Neuer Begriff";
   $("glossaryId").textContent="Stabile Verknüpfungs-ID: "+term.id;
   $("glossaryBasis").value=term.basis;
@@ -785,15 +803,15 @@ function openGlossaryControls(content){
   state.glossary=validateGlossary(JSON.parse(content));
   if(!state.glossary.begriffe.some(t=>t.id===state.glossarySelected))
     state.glossarySelected=state.glossary.begriffe[0].id;
-  $("glossaryCourseTitle").textContent="KI-Glossar · "+(state.course==="basis"?"1. Klasse":"4. Klasse");
-  $("glossaryLevelName").textContent=state.course==="basis"?"die 1. Klasse":"die 4. Klasse";
+  $("glossaryCourseTitle").textContent="KI-Glossar · "+(courseGrade()===1?"1. Klasse":"4. Klasse");
+  $("glossaryLevelName").textContent=courseGrade()===1?"die 1. Klasse":"die 4. Klasse";
   $("glossarySearch").value="";
   $("glossaryEditor").querySelector(".glossary-common").open=false;
   glossaryList();glossaryFields();
 }
 function glossaryChange(key,value){
   const term=currentGlossaryTerm();if(!term)return;
-  const level=state.course==="basis"?"basis":"vertieft";
+  const level=courseGrade()===1?"basis":"vertieft";
   // UI guards against changing the other course even with programmatic events.
   if(key==="basis"||key==="vertieft"){
     if(key!==level)return;
@@ -830,7 +848,7 @@ function glossaryAdd(){
   $("glossarySearch").value="";
   $("source").value=JSON.stringify(state.glossary,null,2)+"\n";
   glossaryList();glossaryFields();preview();
-  $(state.course==="basis"?"glossaryBasis":"glossaryVertieft").focus();
+  $(courseGrade()===1?"glossaryBasis":"glossaryVertieft").focus();
   status("Begriff angelegt. Nur die ausgewählte Klassenstufe bearbeiten; bitte auch die andere Erklärung später ergänzen.");
 }
 function glossaryPreviewHtml(level){
@@ -860,7 +878,7 @@ function prepareNotebookPreview(content){
   if(!materials&&!content.includes("ki-notebook-block"))return content;
   const host=document.createElement("template");host.innerHTML=content;
   if(materials){
-    const base=state.course==="basis"?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
+    const base=courseGrade()===1?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
     for(const link of host.content.querySelectorAll("a[href]")){
       const url=new URL(link.getAttribute("href"),base);
       const embedded=url.pathname.endsWith("/lab/index.html");
@@ -883,7 +901,7 @@ function prepareNotebookPreview(content){
     const actions=document.createElement("div");actions.className="ki-notebook-actions";
     let button=card.querySelector(".ki-notebook-launch, button[data-lab], #start-project");
     if(!button){
-      button=document.createElement(state.course==="basis"?"a":"button");
+      button=document.createElement(courseGrade()===1?"a":"button");
       if(button.tagName==="BUTTON")button.type="button";
     }
     button.classList.add("ki-notebook-launch");button.textContent="Notebook hier öffnen";
@@ -902,8 +920,8 @@ function prepareNotebookPreview(content){
 }
 function preview(){
   const isGlossary=state.current?.path===GLOSSARY_PATH;
-  const isBasis=state.course==="basis";
-  document.body.classList.toggle("course-basis",state.course==="basis");
+  const isBasis=courseGrade()===1;
+  document.body.classList.toggle("course-basis",courseGrade()===1);
   applyCourseTheme();
   const previewBase=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
   let content=isGlossary?glossaryPreviewHtml(isBasis?"basis":"vertieft"):$("source").value;
@@ -1187,7 +1205,7 @@ async function addLesson(){
     const chapterTitle=prompt("Titel des ersten Unterkapitels:","Einstieg und Auftrag");
     if(!chapterTitle)return;
     if(!title.trim()||!slug(chapterTitle))throw Error("Titel und Kapitelname dürfen nicht leer sein.");
-    const id=($("courseSelect").value==="basis"?"basis-":"")+slug(title),view=id;
+    const id=(state.course==="basis"?"basis-":isIrnCourse()?courseProfile().source+"-":"")+slug(title),view=id;
     if(!/^[a-z]/.test(view)||manifest.sections.some(s=>s.id===view))throw Error("Bereichs-ID ungültig oder bereits vorhanden.");
     const blocks=await Promise.all(manifest.sections.filter(s=>s.teaching).map(async s=>{
       const path="kursseiten/"+s.id+"/planung.json";
@@ -1381,7 +1399,7 @@ async function openRuntimeNotebook(content,path){
   // trusted notebook and restore the new draft over it in the teacher editor.
   // After merge the lesson file will have its own published JupyterLite path.
   const name=state.current?.sha===null?
-    (state.course==="basis"?"portal/basis_neuron.ipynb":"portal/daten_training.ipynb"):
+    (courseGrade()===1?"portal/basis_neuron.ipynb":"portal/daten_training.ipynb"):
     "portal/"+path.split("/").pop();
   runtimeFrame.src=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+encodeURIComponent(name)+"&ki-embed=1&ki-restore=1&ki-teacher=1&reset";
 }
@@ -1433,7 +1451,7 @@ async function refreshNotebooks(){
   state.notebooks=[...result.notebooks,
     ...[...state.staged.values()].filter(c=>notebookPath(c.path)&&!result.notebooks.some(item=>item.path===c.path)).map(c=>({path:c.path,sha:c.expectedSha}))];
   const list=$("notebooks");list.replaceChildren();
-  for(const item of state.notebooks.filter(item=>state.course==="basis"?/\/basis_[^/]+\.ipynb$/.test(item.path):!/\/basis_[^/]+\.ipynb$/.test(item.path))){
+  for(const item of state.notebooks.filter(item=>gradeNotebook(item.path))){
     const button=document.createElement("button");button.type="button";
     button.textContent=item.path.split("/").pop().replace(".ipynb","").replaceAll("_"," ");
     button.title=item.path;button.addEventListener("click",()=>load(item.path));
@@ -1464,7 +1482,9 @@ $("createLesson").addEventListener("click",addLesson);
 $("createLessonHere").addEventListener("click",addLessonToCurrentSection);
 $("editPlan").addEventListener("click",editPlan);
 $("editMaterials").addEventListener("click",editMaterials);
-$("editGlossary").addEventListener("click",()=>load(GLOSSARY_PATH));
+$("editGlossary").addEventListener("click",()=>load(teacherSource("glossar")));
+$("editSolutions").addEventListener("click",()=>load(teacherSource("musterloesungen")));
+$("editSolutionFields").addEventListener("click",()=>load(teacherSource("musterloesungen-felder")));
 $("glossarySearch").addEventListener("input",()=>{if(state.glossary)glossaryList();});
 $("glossaryAdd").addEventListener("click",glossaryAdd);
 
@@ -1479,13 +1499,13 @@ $("courseSelect").addEventListener("change",async()=>{
   state.course=selected;
   updateTeacherAccessLinks();
   document.body.classList.toggle("course-basis",selected==="basis");
-  if(courseThemeDraft){$("courseThemeSelect").value=selected==="basis"?"bok-1-klasse":"bok-4-klasse";renderThemeControls();}
-  $("courseContext").textContent=selected==="basis"?"1. Kurzgymnasium · KI entdecken":"4. Kurzgymnasium · KI vertiefen";
+  $("courseContext").textContent=courseProfile().teacher+" · "+courseGrade()+". Klasse · "+courseProfile().name;
   ++navigationRevision;
   state.plans.clear();
   state.manifest=null;
   $("section").replaceChildren();$("chapters").replaceChildren();$("lessonOrder").replaceChildren();
   state.current=null;
+  if(courseThemeDraft)renderThemeControls();
   $("source").value="";
   $("path").textContent="Kurs gewechselt";
   $("heading").textContent="Kapitel auswählen";
@@ -1494,7 +1514,7 @@ $("courseSelect").addEventListener("change",async()=>{
   $("formEditor").hidden=true;$("splitEditor").hidden=true;
   $("notebooks").replaceChildren();
   await refresh().catch(error);
-  status("Kursauswahl geändert. Kapitel und AVIVA-Pläne gehören zum gewählten Kurs.");
+  status("Kurs gewechselt: "+courseProfile().teacher+" · "+courseGrade()+". Klasse. Die Vorschau und Materialien gehören zu diesem Kurs.");
 });
 $("refresh").addEventListener("click",()=>refresh().catch(error));
 $("create").addEventListener("click",addChapter);
@@ -1670,7 +1690,7 @@ function inspectBlock(value){
   const option=blockOption(value);
   $("blockPreviewTitle").textContent=option?.textContent||"Baustein";
   $("blockPreviewHint").textContent=blockHelp[value]||"Beispielansicht";
-  const isBasis=state.course==="basis";
+  const isBasis=courseGrade()===1;
   const base=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
   const sample=previewAssets(blocks[value],base);
   const shadow=blockPreview.shadowRoot||blockPreview.attachShadow({mode:"open"});
@@ -1797,7 +1817,7 @@ function createLessonNotebook(){
     const section=$("section").value.replaceAll("-","_");
     const basename=slug(title).replaceAll("-","_").slice(0,45);
     if(!basename)throw Error("Ungültiger Notebook-Titel.");
-    const path="content/"+(state.course==="basis"?"basis_":"")+"lesson_"+section+"_"+basename+".ipynb";
+    const path="content/"+(isIrnCourse()?"irn"+courseGrade()+"_":courseGrade()===1?"basis_":"")+"lesson_"+section+"_"+basename+".ipynb";
     if(state.notebooks.some(item=>item.path===path)||state.staged.has(path))
       throw Error("Ein Notebook mit diesem Namen existiert bereits. Bitte einen anderen Titel wählen.");
     if(state.staged.size+(state.staged.has(state.current.path)?1:2)>12)

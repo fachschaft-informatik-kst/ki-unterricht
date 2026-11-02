@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {validatePlan,validateManifest} from "../shared/course-model.js";
 import {readFileSync} from "node:fs";
 import {answerRows,materialForLesson,questionsFromSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet} from "../admin-worker/src/teacher.mjs";
 const fields=[
@@ -72,21 +73,25 @@ assert(shell.includes('id="lessonNav"')&&shell.includes('data-grade="4"'));
 assert(shell.includes('class="area-nav"'));
 const options=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES});
 assert.deepEqual(options.map(x=>x.slug),["bok/1-klasse","bok/4-klasse","irn/1-klasse","irn/4-klasse"]);
-assert.deepEqual(options.map(x=>x.ready),[true,true,false,false]);
+assert.deepEqual(options.map(x=>x.ready),[true,true,true,true]);
 for(const kind of ["planung","materialien","musterloesungen"]){
   const html=teacherShell({course:"bok/4-klasse",kind},options);
   assert(html.includes('id="teacherCourseSelect"'),"Course choice missing on "+kind);
   assert(html.includes('value="bok/4-klasse" selected'),"Current course must be selected");
   assert(html.includes('value="bok/1-klasse"'),"Other BOK course must be selectable");
-  assert(html.includes('value="irn/1-klasse" disabled'),"Unprepared IRN course must be unavailable");
-  assert(html.includes('value="irn/4-klasse" disabled'));
+  assert(html.includes('value="irn/1-klasse"'),"Independent IRN course should be selectable");
+  assert(html.includes('value="irn/4-klasse"'));
+  assert(!html.includes('value="irn/1-klasse" disabled'));
   assert(html.includes('/teacher-theme.css?course=bok%2F4-klasse'),"Theme must load as a stylesheet compatible with strict CSP");
 }
 assert(teacherShell({course:"bok/1-klasse",kind:"materialien"},options)
   .includes('/teacher-theme.css?course=bok%2F1-klasse'));
-assert.equal(teacherThemeStylesheet(options,"bok/1-klasse"),'body[data-grade="1"]{--accent:#3653a3}');
-assert.equal(teacherThemeStylesheet(options,"bok/4-klasse"),'body[data-grade="4"]{--accent:#076959}');
-assert.throws(()=>teacherShell({course:"irn/1-klasse",kind:"planung"},options),/nicht/);
+assert.match(teacherThemeStylesheet(options,"bok/1-klasse"),/--accent:#3653a3/);
+assert.match(teacherThemeStylesheet(options,"bok/4-klasse"),/--accent:#076959/);
+assert.match(teacherThemeStylesheet(options,"irn/1-klasse"),/--accent:#69419b;--soft:#[a-f0-9]{6}/);
+assert.match(teacherThemeStylesheet(options,"irn/4-klasse"),/--accent:#9a481d;--soft:#[a-f0-9]{6}/);
+assert(teacherShell({course:"irn/1-klasse",kind:"planung"},options).includes('data-grade="1"'));
+assert(teacherShell({course:"irn/4-klasse",kind:"materialien"},options).includes('IRN'));
 assert.throws(()=>normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES.slice(0,2)}),/vier/);
 const malicious=structuredClone(DEFAULT_COURSES);
 malicious[0].theme.accent="red; background:url(https://example.org/steal)";
@@ -96,8 +101,22 @@ const courseMock=async(_token,path)=>{
   return {encoding:"base64",content:Buffer.from(JSON.stringify({version:1,courses:DEFAULT_COURSES})).toString("base64")};
 };
 assert.deepEqual((await loadTeacherCourses("token",courseMock,"example/repo")).map(x=>x.ready),
-  [true,true,false,false],"Course picker must use the source registry");
+  [true,true,true,true],"Course picker must use the source registry");
 
+// Real IRN scaffolds must belong to their own profiles and validate as complete AVIVA drafts.
+const sourceFiles=[1,4].map(grade=>{
+  const prefix="../kursseiten/irn-"+grade+"-kurs/planung.json";
+  return JSON.parse(readFileSync(new URL(prefix,import.meta.url),"utf8"));
+});
+assert(sourceFiles.every(p=>p.lessons.length===10));
+assert(sourceFiles[0].lessons.every(x=>x.view==="irn-1-kurs"));
+assert(sourceFiles[1].lessons.every(x=>x.view==="irn-4-kurs"));
+assert(sourceFiles.every(p=>validatePlan(p)),"IRN draft plans must pass the canonical AVIVA validator");
+for(const grade of [1,4]){
+  const manifest=JSON.parse(readFileSync(new URL("../kursseiten/irn-"+grade+"-manifest.json",import.meta.url),"utf8"));
+  assert(validateManifest(manifest));
+  assert(manifest.sections.every(x=>x.id.startsWith("irn-"+grade+"-")));
+}
 const fake={
   "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
   "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[
