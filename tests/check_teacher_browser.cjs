@@ -36,7 +36,7 @@ const ROOT=path.resolve(__dirname,"..");
         kind==="materialien"?{...base,intro:"",sections:[{title:"DL "+number,
           markdown:"## Doppellektion "+number+"\n\nMaterial für DL "+number}]}:
         {...base,entries:[{field:"sample_"+number,question:"Welche Beobachtung gehört zu DL "+number+"?",
-          questionFound:true,answer:"Die Musterlösung zu DL "+number,
+          questionFound:number!==8,questionSource:number===8?"thema":"original",answer:"Die Musterlösung zu DL "+number,
           courseLink:"https://example.org/course#lesson"+number}],
           notes:[{title:"Fachlicher Hinweis DL "+number,markdown:"**Fachlicher Hintergrund**"}]};
       res.writeHead(200,{"Content-Type":"application/json"}).end(JSON.stringify(data));return;
@@ -99,6 +99,11 @@ const ROOT=path.resolve(__dirname,"..");
     await page.locator("#lessonNav a[data-dl='8']").click();
     await page.locator(".lesson-heading h2").filter({hasText:"DL 08"}).waitFor();
     assert.match(await page.locator(".solution-question").innerText(),/DL 8/);
+    assert.equal(await page.locator(".solution-meta span").innerText(),"Thema / Teilaufgabe");
+    assert.equal(await page.locator(".question-source a").count(),1);
+    assert.equal(await page.locator(".question-hint").count(),0);
+    assert.doesNotMatch(await page.locator("#teacherContent").innerText(),/Der genaue Wortlaut wurde nicht eindeutig erkannt/);
+
     // Switching courses must retain the material area, but start at DL 01
     // because DL numbers refer to different content in another course.
     await page.locator("#teacherCourseSelect").selectOption("bok/1-klasse");

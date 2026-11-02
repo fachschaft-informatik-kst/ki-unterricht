@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {answerRows,materialForLesson,questionsFromSource,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet} from "../admin-worker/src/teacher.mjs";
+import {answerRows,materialForLesson,questionsFromSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet} from "../admin-worker/src/teacher.mjs";
 const fields=[
   "## DL 1 · Was ist KI?","","| Antwortfeld | Musterantwort |","|---|---|",
   "| "+String.fromCharCode(96)+"regeln_oder_daten"+String.fromCharCode(96)+" | Regelbasiert ist nicht dasselbe wie lernend. |",
@@ -26,6 +26,32 @@ const sample='<label class="field answer"><span>Worin unterscheiden sich Regeln 
 const prompts=questionsFromSource(sample);
 assert.match(prompts.regeln_oder_daten,/Worin unterscheiden/);
 assert.match(prompts.dl1_regeln_ampel,/Ampel/);
+const studentSamples=[
+  '<label class="field answer"><span>Warum ist nicht jedes automatische Programm eine KI?</span><textarea data-basis-answer="regeln_oder_daten"></textarea></label>',
+  '<label class="field"><span>Was soll Ihr Modell unterscheiden – und für wen ist das nützlich?</span><textarea data-journal="purpose"></textarea></label>',
+  '<select data-basis-answer="dl1_begriffe_ampel" aria-label="Ampel mit festem Zeitplan – Kategorie"></select>'
+].join("\n");
+const associated=questionsFromSource(studentSamples);
+assert.match(associated.regeln_oder_daten,/automatische Programm/);
+assert.match(associated.purpose,/Modell unterscheiden/);
+assert.match(associated.dl1_begriffe_ampel,/Ampel mit festem Zeitplan/);
+assert.equal(Object.keys(associated).length,3,"All student input conventions should yield questions");
+assert.match(fieldTopic("basis-neuron-sw_gs"),/Gewicht Sonne/);
+assert.match(fieldTopic("basis-sprache-pst_1_anfang"),/Anfangstext/);
+assert.match(fieldTopic("sw2_gp"),/Gewicht Prüfung/);
+assert(!fieldTopic("basis-neuron-sw_gs").includes("Originalfrage"));
+const sources=[
+  ["kursseiten/basis-ki/020-reflexion.md","regeln_oder_daten"],
+  ["kursseiten/einstieg/010-einstieg-1.md","dl1_regeln_automat"],
+  ["kursseiten/journal/000-inhalt.md","purpose"],
+  ["kursseiten/fremdmodell/030-reproduktion.md","reproduktion"]
+];
+for(const [source,key] of sources){
+  const page=readFileSync(new URL("../"+source,import.meta.url),"utf8");
+  const texts=questionsFromSource(page);
+  assert(texts[key]&&texts[key].length>=10,source+": missing actual question for "+key);
+}
+
 const markdown=readFileSync(new URL("../projekt/admin/teacher.js",import.meta.url),"utf-8");
 const css=readFileSync(new URL("../projekt/admin/teacher.css",import.meta.url),"utf-8");
 for(const klass of ["wer-l","wer-e","wer-t","wer-k","wer-r"]){
@@ -36,6 +62,11 @@ assert(markdown.includes('aria-current="page"'));
 assert(markdown.includes("Doppellektion "));
 assert(markdown.includes("entry.question"));
 assert(markdown.includes("entry.courseLink"));
+assert(!markdown.includes("Der genaue Wortlaut wurde nicht eindeutig erkannt"),
+  "The teacher view must not repeatedly show a parsing warning");
+assert(markdown.includes('entry.questionSource==="thema"'),
+  "Unmatched dynamically generated fields should be labeled as topics");
+
 const shell=teacherShell({course:"bok/4-klasse",kind:"planung"});
 assert(shell.includes('id="lessonNav"')&&shell.includes('data-grade="4"'));
 assert(shell.includes('class="area-nav"'));
@@ -96,5 +127,7 @@ assert.match(kit.sections[0].markdown,/Mathematikblatt/);
 const solutions=await teacherData({course:"bok/1-klasse",kind:"musterloesungen"},...params,1);
 assert.equal(solutions.entries.length,1);
 assert.equal(solutions.entries[0].question,"Worin unterscheiden sich Regeln von Lernen?");
+assert.equal(solutions.entries[0].questionSource,"original");
+
 assert(solutions.entries[0].courseLink.endsWith("/bok/1-klasse/#basis-test"));
 console.log("PASS teacher view: DL navigation, color coding, lesson-specific materials, precise questions");
