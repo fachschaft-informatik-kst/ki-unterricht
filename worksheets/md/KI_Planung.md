@@ -93,6 +93,49 @@ Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrpe
 
 **Bewertung und Abgabe:** Gemeinsamer Daten-/Ergebnischeck K11 und Pflichtversuch sind **verbindlich, unbenotet**. Nur das persönliche begründete Urteil **K12 zählt maximal 3 Punkte pro Person** (3/33 = 9,1 % der Note). Je Person zwei Pflichtantworten, dazu eine kurze gemeinsame Rückmeldung; ZIP separat einreichen. Falls das Notebook nicht startet, dokumentierte Originalbilder und -resultate auswerten und nicht ausgeführte Experimente ausdrücklich kennzeichnen. Drei Startwerte sind freiwillig.
 
+In den letzten fünf Minuten sichern und eine Transferfrage für Doppellektion 10 notieren. Erhaltene Dateien nach der vereinbarten Aufbewahrungsregel löschen.
+
+### Doppellektion 9 · Einen Kontextvergleich vertiefen
+
+Nach dem kurzen Papierexperiment Papagei-Modell und neuronales Sprachmodell zusammenhängend erklären. Anschliessend **einen** digitalen Arbeitsweg festlegen: ausgewählte Papagei-Stationen **oder** Soekia. Nur das dazugehörige Protokoll verlangen. Soekia und Beispielausgaben vorab testen beziehungsweise bereitstellen.
+
+Human or Not ist ein Live-Chat mit Fremden, keine Simulation. Nur nach schulischer Freigabe als freiwillige Alternative innerhalb desselben Zeitbudgets einsetzen; keine persönlichen Daten. Kein zusätzlicher Pflichtwechsel.
+
+Sichern: Moderne Sprachmodelle lernen Gewichte und Zahlendarstellungen; sie sind keine blosse Häufigkeitstabelle. Plausibilität garantiert bei keinem der Beispiele Wahrheit. Das Papierexperiment illustriert Kontext, kein Modelltraining.
+
+### Doppellektion 10 · Ein Fall und ein ruhiger Abschluss
+
+Video und Wiedergabe vorab prüfen. Nach dem Video die WMD-Kriterien und Rückkopplung explizit erklären. In derselben Gruppe einen Fall bearbeiten: Kriterien, Rückkopplung, stärkstes Pro- und Gegenargument, überprüfbare Massnahme, Zielkonflikt. Debattenfragen als Hilfe, keine zusätzliche Pro/Contra-Aufstellung und keine zweite Fallrotation.
+
+Mit Video-Beispiel und Bildprojekt kurz vergleichen. Das Schulprojekt ist wahrscheinlich keine WMD, weil grosse Reichweite und erheblicher Schaden fehlen; dies begründen lassen. Rückkopplung am Kreditfall: Über Abgelehnte fehlen spätere Erfolgsdaten. Nach allgemeinen Vorschlägen fragen: Wer ändert was, und woran wäre die Verbesserung erkennbar?
+
+Für den Abschluss zwei Fallurteile diskutieren, danach jede Person kurz eine Erkenntnis, eine offene Frage und eine Rückmeldung notieren lassen. Einzelne freiwillige Stimmen statt einer zeitlich unplanbaren Runde aller Lernenden.
+
+## Fachliche Leitplanken
+
+- Bias ist additiv; bei festen Gewichten verschiebt er die Grenze parallel. Die äquivalente Schwelle für die gewichteten Eingaben ist −Bias.
+- Das konstruierte XOR-Netz zeigt Darstellbarkeit, kein Backpropagation-Training. Trainierbare Netze und Optimierung qualitativ unterscheiden.
+- Ein eingefrorenes MobileNetV2 liefert 1280 Merkmale aus 224 × 224 RGB-Bildern. Nur das nachgeschaltete Netz lernt: 16 versteckte Neuronen, 60 Epochen, Startwert 11.
+- Zwei Klassen, T1/T2/V1/P1/P2, acht Fotos je Klasse/Gruppe: 80 Fotos. A: acht je Klasse aus T1; B: je vier aus T1 und T2. V1: 16 Bilder; P1/P2: 32 Bilder.
+- Bildzahl, Netz, Startwert und Validierungsbilder bleiben gleich. Hintergrund und Licht können Störfaktoren sein; B muss nicht besser sein.
+- Auswahl samt Begründung vor Testeinsicht, danach keine Optimierung. Die Sperre unterstützt eine Arbeitsregel, ist aber kein Zugriffsschutz.
+- Drei Beispiele analysieren, keine Fehler erfinden. Mehrere Fotos eines Exemplars sind keine unabhängigen neuen Exemplare. Ein hoher Wert aus wenigen Gruppen ist keine allgemeine Zuverlässigkeitsgarantie.
+
+## Gesprächsplan · Doppellektion 8
+
+**20 Lernende, eine Lehrperson, vier Minuten Einzelgespräch pro Person plus eine Minute für Notizen und Wechsel.** Die gemeinsame Projektabgabe ist bereits vor Beginn der Doppellektion eingereicht. Jede Person erhält eigene K7–K10-Gesprächspunkte; die gemeinsame Bewertung K1–K6 wird unverändert übernommen.
+
+**Zeitbudget: 20 × (4 + 1) = 100 Minuten.** Die Lehrperson beginnt mit Gespräch 1 exakt bei Minute **0**, prüft alle 20 Personen ohne Unterbrechung bis Minute **100**. Das sind **90 Minuten Unterricht plus 10 Minuten unmittelbar anschliessend**. Die Personen 19 und 20 bleiben für die letzten zehn Minuten. Für Verzögerungen gibt es **keine Zeitreserve**; die Gesprächsreihenfolge und der Bewertungsbogen müssen vorher bereitliegen. Das ist zeitlich eng, aber rechnerisch möglich.
+
+| Personen | Gesprächsfenster ab Beginn | Zeitaufwand | Hinweis |
+| --- | --- | --- | --- |
+| 1–4 | Minute 0–20 | 20 Min. | Normaler Unterricht |
+| 5–8 | Minute 20–40 | 20 Min. | Normaler Unterricht |
+| 9–12 | Minute 40–60 | 20 Min. | Normaler Unterricht |
+| 13–16 | Minute 60–80 | 20 Min. | Normaler Unterricht |
+| 17–18 | Minute 80–90 | 10 Min. | Ende der Doppellektion |
+| 19–20 | Minute 90–100 | 10 Min. | Unmittelbarer Anschluss |
+
 **Vorbereitung vor Doppellektion 8:** Individuelle Fünfminuten-Slots sowie die zugeteilten fremden Projekte schriftlich verteilen, Zugriff und Abgabekanal prüfen, ausgefüllte Projekt-Raster und Kurzfragen bereitlegen. **Keine klassenweite Einführung oder Abschlussbesprechung am Prüfungstag.** Die übrigen Lernenden starten direkt selbstständig mit der verbindlichen, unbenoteten Fremdauswertung und pausieren nur für ihr Einzelgespräch. Die Abgabe ihrer Fremdauswertung wird selbstständig organisiert; die Lehrperson kann während der laufenden Gespräche keine Beratung leisten.
 
 | Im vierminütigen Einzelgespräch | Fokus | Kompetenz |
