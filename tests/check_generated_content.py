@@ -119,7 +119,7 @@ assert course.select_one('nav a[href="#gesellschaft"]').get_text(strip=True) == 
 # Layout and saved-state navigation contracts of the previous public portal.
 # The content model may change, but these anchors and section classes must not.
 expected_sections = [
-    ("start", "hero"), ("lernziele", "section"), ("projekt", "hero"),
+    ("start", "hero"), ("lernziele", "section"), ("projekt", "hero"), ("fremdmodell", "section"),
     ("bewertung", "section"), ("einstieg", "section"), ("lernarten", "section"),
     ("perzeptron", "section"), ("netze", "section"), ("journal", "section"),
     ("sprache", "section"), ("gesellschaft", "section"), ("sicherung", "section"), ("glossar", "section"),
@@ -128,7 +128,7 @@ actual_sections = [(node.get("id"), node.get("class", [""])[0])
                    for node in course.select("main > section[id]")]
 assert actual_sections == expected_sections, (actual_sections, expected_sections)
 expected_nav = ["start", "lernziele", "einstieg", "lernarten", "perzeptron",
-                "netze", "projekt", "sprache", "gesellschaft", "glossar"]
+                "netze", "projekt", "fremdmodell", "sprache", "gesellschaft", "glossar"]
 actual_nav = [node.get("href", "")[1:] for node in course.select(".sidebar nav a")]
 assert actual_nav == expected_nav, (actual_nav, expected_nav)
 assert course.select_one("#projekt")["data-nav"] == "projekt"
