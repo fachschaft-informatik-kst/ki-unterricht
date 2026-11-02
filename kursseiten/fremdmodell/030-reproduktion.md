@@ -7,7 +7,7 @@ kurz: "Gleiche Daten und Einstellungen – gleiche Resultate?"
 open: false
 ---
 
-**Prüffrage (K11):** Kommen Sie mit dem Originaldatensatz und **Startwert 11** zum gleichen Ergebnis?
+**Prüffrage (K11, gemeinsam benotet):** Kommen Sie mit dem Originaldatensatz und **Startwert 11** zum gleichen Ergebnis?
 
 Bleiben Sie im <strong>privaten Fenster</strong> mit dem importierten Projekt. Bearbeiten Sie die fünf Schritte im <a href="#projekt-werkbank">importierten Projekt-Notebook</a>. Die Originalwerte finden Sie in `Versuchsprotokoll.json` des fremden ZIPs.
 
