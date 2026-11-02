@@ -2,22 +2,22 @@
 type: chapter
 id: fremdtest
 nummer: "4"
-titel: "Fremdtest mit eigenen Bildern · 25 Min."
-kurz: "Ein Modell auf zwei nie gelernten Klassen ausprobieren."
+titel: "Eigene Bilder ausprobieren · ca. 15 Min."
+kurz: "Pflichtversuch vor der Reflexion: Vorhersagen auf anderen Klassen untersuchen."
 open: false
 ---
 
-**Prüffrage:** Was sagt das fremde Modell über Ihre zwei Bildklassen, obwohl es nur die Klassen des anderen Tandems kennt?
+**Prüffrage (Pflichtversuch, unbenotet):** Was sagt ein Modell über **andere Klassen**, für die es nie trainiert wurde?
 
-1. **3 Min. · Bereitstellen:** Bleiben Sie im **privaten Fenster** und im <a href="#projekt-werkbank">nachtrainierten fremden Notebook</a>. `experiment` muss aus <a href="#reproduktion">Schritt 3</a> vorhanden sein. Legen Sie Ihre **eigene Fotostudio-JSON** bereit (aus Ihrem eigenen ZIP, Ordner `daten/`). **Nicht Ihr eigenes ZIP wiederherstellen!**
-2. **2 Min. · Erwartung:** Wählen Sie unten Ihre Vermutung, **bevor** Sie Bilder testen.
-3. **5 Min. · Test ausführen:** Gehen Sie ans Ende des <a href="#projekt-werkbank">Notebooks</a> zum Abschnitt **«6 · Fremdauswertung»**. Ersetzen Sie `EIGENE_KLASSEN = ['C', 'D']` durch **Ihre tatsächlichen Klassennamen**. Führen Sie die Upload-Zelle aus, wählen Sie **Ihre eigene JSON** und starten Sie die nächste Fremdtest-Zelle. Trainieren oder optimieren Sie das Modell dabei nicht nochmals.
-4. **15 Min. · Auswerten:** Übertragen Sie die vier Anzahlen aus der Tabelle, **Trennschärfe** und **mittleren Modellwert** in das Protokoll. Beschreiben Sie einen konkreten Bildfall. Nennen Sie **zwei mögliche Ursachen**, aber unterscheiden Sie Beobachtung von Vermutung. Eine Ursache soll sich mit einem nächsten Versuch prüfen lassen.
+1. **2 Min. · Vermuten:** Lesen Sie die zwei **ursprünglichen Klassen** des fremden Modells im <a href="#reproduktion">Prüfbericht</a> nochmals. Wählen Sie unten Ihre Erwartung, bevor Sie eigene Fotos testen.
+2. **5 Min. · Selbst ausprobieren:** Öffnen Sie im privaten Fenster das <a href="#projekt-werkbank">nachtrainierte fremde Notebook</a> aus Kapitel 3 und gehen Sie zu **«6 · Fremdauswertung»**. Tragen Sie bei `EIGENE_KLASSEN = ['C', 'D']` die **zwei echten Klassen Ihres Projekts** ein, laden Sie die **eigene Fotostudio-JSON** (nicht das eigene ZIP wiederherstellen!) und führen Sie die Fremdtest-Zelle aus. <strong>Nicht neu trainieren.</strong>
+3. **5 Min. · Zwei Beispiele untersuchen:** Lesen Sie die Ausgabe: In den Zeilen stehen Ihre Klassen, in den Spalten die **ursprünglichen fremden Klassen**. Vergleichen Sie mindestens **ein Bild aus jeder eigenen Klasse** und tragen Sie die vier Zahlen der Vorhersagetabelle sowie die Trennschärfe ein. Ist das Ergebnis überraschend?
+4. **3 Min. · Erklären:** Nennen Sie <strong>eine plausible Vermutung</strong> (z. B. Farbe, Form, Licht oder Hintergrund) und <strong>einen prüfbaren nächsten Versuch</strong>. Schreiben Sie dazu, weshalb dies **keine Trefferquote für die neuen Klassen** ist.
 
-<p class="small"><strong>Leseregel:</strong> In der Tabelle stehen Ihre zwei Klassen in den Zeilen; die Spalten sind die beiden **ursprünglichen** Klassen des fremden Modells. «C» und «D» sind hier Platzhalter für Ihre Klassennamen. Eine hohe Trennschärfe oder ein hoher Modellwert beweist <strong>nicht</strong>, dass das Modell Ihre neuen Klassen korrekt erkennt.</p>
+<p class="small"><strong>Warum kann das Ergebnis schwach oder scheinbar stark sein?</strong> Das Netz kennt nur seine ursprünglichen beiden Klassen und muss auch bei Ihren völlig anderen Motiven eine davon ausgeben. Es wurde <strong>nicht für Ihre neuen Klassen trainiert</strong>. Das ist etwas anderes als ein regulärer Test auf zuvor unbekannten <strong>Bildern derselben Klassen</strong> (P1/P2). Auch dort wurde bewusst nicht mit den Testbildern trainiert – das ist korrekt und nötig. Die <strong>Trennschärfe</strong> beschreibt hier nur eine nachträglich gewählte Trennung, nicht die Klassifikationsgenauigkeit.</p>
 
 <div class="protokoll-block">
-      <h3>Gemeinsames Messprotokoll</h3>
+      <h3>Gemeinsames Versuchsprotokoll (unbenotet)</h3>
       <div class="table-scroll">
         <table class="typen protokoll">
           <thead>
@@ -67,7 +67,7 @@ open: false
           </thead>
           <tbody>
             <tr>
-              <th>Trennschärfe (Raten ergäbe etwa 50 %)</th>
+              <th>Trennschärfe bei fremden Klassen (keine Trefferquote)</th>
               <td><input type="text" inputmode="decimal" maxlength="40" data-answer="fremd_trenn" aria-label="Trennschärfe in Prozent" placeholder="in %"></td>
             </tr>
             <tr>
@@ -85,8 +85,8 @@ open: false
           </tbody>
         </table>
       </div>
-      <label class="field answer"><span>Wie gut sind die Ergebnisse, und warum? Nennen Sie mindestens zwei mögliche Gründe und sagen Sie, woran Sie einen davon prüfen könnten.</span><textarea data-answer="fremd_warum" aria-label="Wie gut und warum" maxlength="10000" placeholder="Das Modell trennt C und D … weil … Prüfen könnten wir das, indem wir …" rows="5"></textarea></label>
-      <label class="field answer"><span>Was bedeutet das für Trefferquoten? Wann darf man einem Modell trauen, und wann nicht?</span><textarea data-answer="fremd_grenze" aria-label="Bedeutung für Trefferquoten" maxlength="10000" placeholder="Eine Trefferquote gilt nur für …" rows="3"></textarea></label>
+      <label class="field answer"><span>Welche unerwartete Vorhersage haben Sie beobachtet? Nennen Sie eine mögliche Ursache und einen Versuch, mit dem Sie diese prüfen könnten.</span><textarea data-answer="fremd_warum" aria-label="Wie gut und warum" maxlength="10000" placeholder="Das Modell trennt C und D … weil … Prüfen könnten wir das, indem wir …" rows="5"></textarea></label>
+      <label class="field answer"><span>Warum ist die Vorhersage auf anderen Klassen keine Trefferquote? Vergleichen Sie mit P1/P2 des ursprünglichen Projekts.</span><textarea data-answer="fremd_grenze" aria-label="Bedeutung für Trefferquoten" maxlength="10000" placeholder="Eine Trefferquote gilt nur für …" rows="3"></textarea></label>
     </div>
 
 <div class="actions">
