@@ -7,6 +7,13 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 /* Admin editor: browser UI never receives GitHub secrets or tokens. */
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
+function updateTeacherAccessLinks(){
+  const grade=state.course==="basis"?"1":"4";
+  const origin="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/"+grade+"-klasse/";
+  for(const [id,kind] of [["teacherPlanLink","planung"],["teacherMaterialsLink","materialien"],["teacherSolutionsLink","musterloesungen"]])
+    $(id).href=origin+kind;
+}
+updateTeacherAccessLinks();
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
 
 const COURSE_THEMES_PATH="shared/course-sites.json";
@@ -1470,6 +1477,7 @@ $("courseSelect").addEventListener("change",async()=>{
   const selected=$("courseSelect").value;
   if(!confirmUnsaved()){$("courseSelect").value=state.course;return;}
   state.course=selected;
+  updateTeacherAccessLinks();
   document.body.classList.toggle("course-basis",selected==="basis");
   if(courseThemeDraft){$("courseThemeSelect").value=selected==="basis"?"bok-1-klasse":"bok-4-klasse";renderThemeControls();}
   $("courseContext").textContent=selected==="basis"?"1. Kurzgymnasium · KI entdecken":"4. Kurzgymnasium · KI vertiefen";
