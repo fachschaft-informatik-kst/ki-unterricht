@@ -186,7 +186,7 @@ export function fieldTopic(field,lessonTitle=""){
 }
 async function getQuestions(lesson,course,token,github,repo){
   const views=new Set([lesson.view]);
-  if(lesson.number>=5&&lesson.number<=8){
+  if(course.startsWith("bok/")&&lesson.number>=5&&lesson.number<=8){
     (course==="bok/4-klasse"?["projekt","journal","fremdmodell","sicherung"]:
       ["basis-daten","basis-plan","basis-training","basis-abschluss"]).forEach(x=>views.add(x));
   }
@@ -216,7 +216,8 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
   if(kind==="materialien"){
     const content=await getText(token,"kursseiten/"+current.view+"/materialien.md",github,repo);
     const markdown=materialForLesson(content,current.number);
-    const intro=profile.grade===4?await getText(token,"lehrperson/materialien.md",github,repo):"";
+    const intro=profile.owner==="BOK"&&profile.grade===4?
+      await getText(token,"lehrperson/materialien.md",github,repo):"";
     return {...base,intro,sections:[{title:"Doppellektion "+current.number+" · "+current.title,
       markdown:markdown||content}]};
   }
