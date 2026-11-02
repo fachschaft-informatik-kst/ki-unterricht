@@ -124,12 +124,12 @@ GitHub Actions baut die Seite beim Push automatisch.
 
 Fachliche Texte, Aufgaben und Links werden in `kursseiten/` gepflegt; `projekt/portal.js` enthält nur noch Controller-Logik. Für eine schnelle lokale Vorschau `python scripts/preview.py` ausführen; `--full` baut und startet zusätzlich JupyterLite. Siehe Haupt-README.
 
-## Zwei Kurse aus einer Codebasis
+## Mehrere Kursadressen aus einer Codebasis
 
 - **4. Kurzgymnasium (Vertiefung):** `kursseiten/manifest.json`, Kursseite `/projekt/` (historischer Speicher- und Notebook-Stand bleibt erhalten).
 - **1. Kurzgymnasium (Basis):** `kursseiten/basis-manifest.json`, zehn Doppellektionen in `kursseiten/basis-*/`, Kursseite `/basis/`.
-- **Kursauswahl:** `/kurse.html`; die ursprüngliche Start-URL führt weiterhin zum vertieften Kurs, um bestehende Links nicht zu brechen.
-- **Editor:** Gemeinsamer GitHub-Editor unter `/projekt/admin/`; dort vor dem Bearbeiten den Kurs auswählen. Neue Bereiche des Basiskurses erhalten den Präfix `basis-`.
+- **Kursauswahl:** `/kurse.html` ist auch die Zieladresse der Start-URL. BOK ist zusätzlich unter `/bok/1-klasse/` und `/bok/4-klasse/` erreichbar; `/basis/` und `/projekt/` bleiben für Lesezeichen und Lernstände bestehen. IRN hat zwei unabhängige, farblich unterscheidbare Kursplätze unter `/irn/1-klasse/` und `/irn/4-klasse/`, aktuell noch ohne eigene Unterrichtsinhalte.
+- **Editor:** Gemeinsamer GitHub-Editor unter `/projekt/admin/`. Die BOK-Kapitel bleiben nach Klassenstufen getrennt. Unter «Farbthemen der Kursseiten» können die Farben **aller vier** Kursplätze individuell eingestellt und als Pull Request eingereicht werden. Eigene IRN-Kapitel/Notebooks erfordern die spätere Kursquell-Trennung. Neue Bereiche des Basiskurses erhalten den Präfix `basis-`.
 - **Gemeinsam:** CSS, Grafiken, Kapitelrenderer und AVIVA-Validierung. Separate Notizen des Basiskurses nutzen `kst-ki-basis-v1`; der bisherige Portal-, Journal- und Notebook-Speicher bleibt unangetastet.
 
 Build und Vorschau erzeugen beide Seiten: `python scripts/build_portal.py && python scripts/build_course.py && python scripts/build_basis.py` bzw. `make preview`.
