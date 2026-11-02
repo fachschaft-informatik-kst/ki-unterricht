@@ -92,6 +92,14 @@ assert "60 Epochen" in pipeline[2].get_text()
 assert "Hier wird wirklich trainiert" in pipeline[2].get_text()
 assert "neuen Bildern" in pipeline[3].get_text()
 
+# DL 8 must have a separate course route with persistent individual reflections.
+assert soup.select_one('main > section#fremdmodell') is not None
+assert soup.select_one('a[href="#fremdmodell"]') is not None
+assert soup.select_one('#fremdmodell textarea[data-journal="reproduktion"]')
+assert soup.select_one('#fremdmodell [data-answer="fremd_rueckmeldung"]')
+assert len(soup.select('#fremdmodell .fremd-person')) == 2
+assert soup.select_one('#fremdmodell button#download-fremdmodell')
+assert len(soup.select('#bewertung [data-score]')) == 12
 # Students still download/import their full local answer state and all notebooks.
 js = (ROOT / "projekt/portal.js").read_text(encoding="utf-8")
 progress = (ROOT / "projekt/progress.js").read_text(encoding="utf-8")
