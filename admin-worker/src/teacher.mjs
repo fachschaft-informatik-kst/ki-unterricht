@@ -140,7 +140,7 @@ export function questionsFromSource(source){
 // their original texts aren't embedded as data-* attributes in chapter Markdown.
 // Give these fields a useful subject label without claiming to quote the task.
 const FIELD_GROUPS={
-  sw:"Schwimmbad-Neuron · Startgewichte",sw2:"Schwimmbad-Neuron · verbesserte Gewichte",
+  zeitstrahl:"KI-Zeitstrahl",sw:"Schwimmbad-Neuron · Startgewichte",sw2:"Schwimmbad-Neuron · verbesserte Gewichte",
   lr:"Lernrate und Trainingsverlauf",iris:"Iris-Erkennung",hand:"Logische Gatter am Perzeptron",
   neuron:"Schwimmbad-Neuron",xornetz:"XOR-Netzwerk",netze:"Neuronale Netze",
   zif:"Ziffernerkennung",typ:"Arten künstlicher Intelligenz",
@@ -153,6 +153,7 @@ const FIELD_GROUPS={
 };
 const FIELD_TERMS={
   w1:"Gewicht 1",w2:"Gewicht 2",b:"Bias",bias:"Bias",ok:"Ergebnis prüfen",
+  and:"UND",or:"ODER",nand:"NAND",xor:"XOR",zwischenschicht:"Zwischenschicht",
   gs:"Gewicht Sonne",gf:"Gewicht Freundinnen/Freunde",gp:"Gewicht Prüfung",
   treffer:"Anzahl korrekter Vorhersagen",gefunden:"Geeignete Parameter gefunden?",
   beob:"Beobachtung",richtig:"Richtige Vorhersagen",gewicht:"Einfluss der Gewichte",
@@ -169,8 +170,9 @@ const FIELD_TERMS={
 export function fieldTopic(field,lessonTitle=""){
   let f=field.replace(/^basis-/,"").replace(/^dl\d+_/,"");
   const parts=f.split(/[-_]/).filter(Boolean);
-  const subject=FIELD_GROUPS[parts[0]]||lessonTitle||"Unterrichtsaufgabe";
-  const detail=parts.slice(1).map(x=>FIELD_TERMS[x]||
+  const nested=["neuron","sprache","netze","ki"].includes(parts[0])&&FIELD_GROUPS[parts[1]];
+  const subject=(nested?FIELD_GROUPS[parts[1]]:FIELD_GROUPS[parts[0]])||lessonTitle||"Unterrichtsaufgabe";
+  const detail=parts.slice(nested?2:1).map(x=>FIELD_TERMS[x]||
     (/[a-z]+/.test(x)?x.replace(/^./,c=>c.toUpperCase()):x)).join(" · ");
   // Keep titles short and readable; IDs remain available separately.
   return detail?subject+": "+detail:subject;
