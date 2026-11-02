@@ -32,7 +32,7 @@ Der A/B-Vergleich bleibt als fachliches Gerüst bestehen: zwei Klassen, 80 Fotos
 | Datencheck vor Vergleich; Auswahl vor Test; keine Optimierung nach Testeinsicht | Zeitverteilung der Etappen auf Doppellektion 5–7, Tagesziele und Rollen |
 | Fünf Reflexionen, nachvollziehbare Belege, Abgabe vor Doppellektion 8 | Benötigte Hilfen, Beratung, freiwillige Vertiefung vor Testeinsicht |
 | Jede Person erklärt das ganze Projekt im Einzelgespräch in Doppellektion 8 | Wie die Tandemmitglieder sich gegenseitig auf die individuellen Gespräche vorbereiten |
-| Fremdauswertung in Doppellektion 8, unbenotet | Eigene Prüffrage, Arbeitsteilung und begründete Rückmeldung |
+| Fremdauswertung in Doppellektion 8, benotet (K11/K12) | Eigene Prüffrage, Arbeitsteilung und begründete Rückmeldung |
 
 **Kein versteckter Gleichschritt:** Die Titel der Doppellektionen 5–7 benennen den Lernprozess, keine verpflichtenden Versuchstermine. Ein Tandem darf in Doppellektion 5 schon vergleichen und ein anderes in Doppellektion 6 noch Daten ergänzen. Die fachliche Reihenfolge bleibt erhalten.
 
@@ -41,7 +41,7 @@ Der A/B-Vergleich bleibt als fachliches Gerüst bestehen: zwei Klassen, 80 Fotos
 - In **Reflexion 1** einen knappen Etappenplan ergänzen: nächste Schritte, Zuständigkeiten, geschätzte Zeit und Reserve. Rollen wechseln; nicht dauerhaft eine Person klicken und die andere schreiben lassen.
 - Pro Arbeitsphase ein eigenes Tagesziel wählen. Am Ende im bestehenden Journal kurz ergänzen: **erreicht, offen, nächster Schritt, benötigte Hilfe**. Dafür kein zusätzliches Dokument oder Lerntagebuch verlangen.
 - In **Reflexion 5** den Plan prüfen: Was funktionierte, was änderten wir, und warum?
-- Die bestehende Bewertung bleibt bei **K1–K10, maximal 30 Punkten**. Die SOL-Routinen unterstützen Lernen und Begründungen, sind keine neue benotete Kategorie.
+- Die Bewertung umfasst **K1–K12, maximal 36 Punkte**. Die Routinen zum selbstständigen Arbeiten unterstützen das Lernen, sind aber keine zusätzliche Bewertungskompetenz. Die Fremdauswertung in DL 8 wird getrennt mit K11 und K12 bewertet.
 
 ### Rolle der Lehrperson
 
@@ -151,7 +151,7 @@ Die anschliessende **eine Minute** gehört zu den Notizen/Punkten und dem Wechse
 
 Eine ZIP-Abgabe enthält `Journal.html`, Versuchsnotebook mit gespeicherten Ausgaben, vorhandenes Versuchsprotokoll sowie hinzugefügte Originalfotos und Fotostudio-JSON. Foto-Upload im Notebook und Dateien der Abgabeliste sind getrennt. Nach Import zuerst Vorbereitung und Datenimport erneut ausführen; gespeicherte Ausgaben sind kein laufender Python-Zustand. Training und Test bleiben manuell.
 
-Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte). Keine weitere Gewichtung. Pro Person gilt: Note = 1 + 5 × (gemeinsame Projektpunkte + individuelle Gesprächspunkte) / 30, auf Viertelnoten gerundet. SOL-Routinen und Fremdauswertung schaffen keine zusätzlichen Bewertungskategorien. Details: [Bewertungsraster](KI_Bewertungsraster.md).
+Zehn Kompetenzen à 0–3 Punkte, insgesamt 30. K1–K6: Abgabe (18); K7–K10: vierminütiges Einzelgespräch je Person (12 individuelle Punkte). Keine weitere Gewichtung je Kompetenz. Pro Person gilt: Note = 1 + 5 × (18 gemeinsame Projektpunkte + bis zu 12 individuelle Gesprächspunkte + bis zu 3 gemeinsame Reproduktionspunkte + bis zu 3 individuelle Reflexionspunkte) / 36, auf Viertelnoten gerundet. Die SOL-Routinen schaffen keine zusätzlichen Bewertungskategorien; K11 und K12 erfassen die getrennte Fremdauswertung. Details: [Bewertungsraster](KI_Bewertungsraster.md).
 
 ## Didaktische und fachliche Quellen
 
