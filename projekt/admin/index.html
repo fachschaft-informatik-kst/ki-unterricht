@@ -25,7 +25,17 @@
   <main class="workspace" id="workspace" hidden>
     <aside class="sidebar" id="courseSidebar" aria-label="Kursnavigation">
       <div class="sidebar-heading"><div class="sidebar-brand"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3Z"/></svg><h2>Inhalte</h2></div><button id="refresh" class="icon-button" type="button" aria-label="Navigation neu laden" title="Neu laden"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg></button></div>
-      <div class="sidebar-course"><label for="courseSelect">Kurs</label><select id="courseSelect" aria-label="Kurs auswählen"><option value="vertiefung">4. Kurzgymnasium · KI vertiefen</option><option value="basis">1. Kurzgymnasium · KI entdecken</option></select></div>
+      <div class="sidebar-course"><label for="courseSelect">Unterrichtskurs BOK</label><select id="courseSelect" aria-label="Unterrichtskurs auswählen"><option value="vertiefung">BOK · 4. Klasse · KI vertiefen</option><option value="basis">BOK · 1. Klasse · KI entdecken</option></select></div>
+      <div class="sidebar-theme" id="courseThemeControls">
+        <h3>Farbthemen der Kursseiten</h3>
+        <label for="courseThemeSelect">Kurs auswählen</label>
+        <select id="courseThemeSelect" aria-label="Farbthema für Kurs auswählen"></select>
+        <label for="courseThemeColor">Akzentfarbe</label>
+        <input id="courseThemeColor" type="color" value="#076959" aria-label="Akzentfarbe des gewählten Kurses">
+        <div id="courseThemePreview" class="course-theme-preview" aria-live="polite"></div>
+        <button id="courseThemeStage" type="button" class="button light full">Farbänderung vormerken</button>
+        <p class="helper">Farbthemen gelten für Kurs, Kursübersicht und Vorschau. Die Veröffentlichung erfolgt wie üblich über einen Pull Request.</p>
+      </div>
       <div class="sidebar-group">
         <div class="sidebar-group-heading"><h3>Unterrichtsbereiche</h3></div>
         <nav id="sectionNav" class="section-nav" aria-label="Unterrichtsbereiche"></nav>

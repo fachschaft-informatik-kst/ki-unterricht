@@ -74,9 +74,25 @@ async function appInstallationStatus(token,request=github){
   return {ready:false,reason:"Die App ist auf "+owner+" installiert, aber das Repository "+
     REPO+" gehört nicht zur App-Auswahl. In der Organisation unter Installed GitHub Apps → Configure das Repository hinzufügen."};
 }
+function validateCourseThemeRegistry(doc){
+  if(!doc||doc.version!==1||!Array.isArray(doc.courses)||doc.courses.length!==4)
+    throw Error("Farbthemen: genau vier Kursplätze erforderlich.");
+  const expected=new Set(["bok-1-klasse","bok-4-klasse","irn-1-klasse","irn-4-klasse"]);
+  for(const c of doc.courses){
+    if(!expected.delete(c.id)||!c.theme||Object.keys(c.theme).length!==1||
+       !/^#[0-9a-fA-F]{6}$/.test(c.theme.accent))
+      throw Error("Ungültiges Farbthema für "+(c?.id||"Kurs"));
+    const hex=c.theme.accent;
+    const rgb=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255)
+      .map(n=>n<=.04045?n/12.92:Math.pow((n+.055)/1.055,2.4));
+    const luminance=rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;
+    if(1.05/(luminance+.05)<4.5)throw Error("Akzentfarbe braucht ausreichenden Kontrast auf Weiss.");
+  }
+  return doc;
+}
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json"||path===GLOSSARY_PATH)||
+  (path==="kursseiten/manifest.json"||path==="kursseiten/basis-manifest.json"||path===GLOSSARY_PATH||path==="shared/course-sites.json")||
 
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
   /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
@@ -92,7 +108,8 @@ function validate(changes){
     }else if(c.path.endsWith(".json")){
       if(typeof c.content!=="string"||c.content.length>200000)throw Error("JSON-Datei zu gross.");
       let plan;try{plan=JSON.parse(c.content);}catch{throw Error("Ungültiger Unterrichtsplan.");}
-      if(c.path===GLOSSARY_PATH)validateGlossary(plan);
+      if(c.path==="shared/course-sites.json")validateCourseThemeRegistry(plan);
+      else if(c.path===GLOSSARY_PATH)validateGlossary(plan);
       else if(c.path.endsWith("/planung.json"))validatePlan(plan);
       else validateManifest(plan);
     }else if(c.path.endsWith(".ipynb")){
@@ -162,6 +179,15 @@ async function publish(req,token){
       const nextIds=new Set(nextGlossary.begriffe.map(t=>t.id));
       if(oldGlossary.begriffe.some(t=>!nextIds.has(t.id)))
         throw Error("Bestehende Glossar-IDs dürfen nicht gelöscht werden, weil Kursseiten darauf verlinken.");
+    }
+    if(changes.has("shared/course-sites.json")){
+      const before=validateCourseThemeRegistry(await readJson("shared/course-sites.json"));
+      const after=validateCourseThemeRegistry(await proposed("shared/course-sites.json"));
+      for(let i=0;i<before.courses.length;i++){
+        const a=before.courses[i],b=after.courses[i];
+        if(Object.keys(a).some(k=>k!=="theme"&&JSON.stringify(a[k])!==JSON.stringify(b[k])))
+          throw Error("Nur die Akzentfarben dürfen im Farbthemen-Editor geändert werden.");
+      }
     }
     for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json"]){
     const previous=await readJson(manifestPath);

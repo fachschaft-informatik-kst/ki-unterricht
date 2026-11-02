@@ -8,6 +8,79 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
 const manifestPath=()=>$("courseSelect").value==="basis"?"kursseiten/basis-manifest.json":"kursseiten/manifest.json";
+
+const COURSE_THEMES_PATH="shared/course-sites.json";
+let courseThemes=null,courseThemeDraft=null;
+const blendTheme=(hex,p)=>"#"+[1,3,5].map(i=>{
+  const n=parseInt(hex.slice(i,i+2),16);
+  return Math.round(n+(255-n)*p).toString(16).padStart(2,"0");
+}).join("");
+function selectedThemeRecord(){
+  const id=state.course==="basis"?"bok-1-klasse":"bok-4-klasse";
+  return courseThemeDraft?.courses.find(c=>c.id===id);
+}
+function courseThemeCSS(){
+  const accent=selectedThemeRecord()?.theme?.accent||(state.course==="basis"?"#3653a3":"#076959");
+  return ":root{--accent:"+accent+";--soft:"+blendTheme(accent,.89)+";--paper:"+blendTheme(accent,.965)+";--line:"+blendTheme(accent,.87)+";}";
+}
+function applyCourseTheme(){
+  const accent=selectedThemeRecord()?.theme?.accent||(state.course==="basis"?"#3653a3":"#076959");
+  document.body.style.setProperty("--accent",accent);
+  document.body.style.setProperty("--soft",blendTheme(accent,.89));
+  document.body.style.setProperty("--bg",blendTheme(accent,.965));
+  document.body.style.setProperty("--line",blendTheme(accent,.87));
+}
+function renderThemeControls(){
+  if(!courseThemeDraft)return;
+  const select=$("courseThemeSelect");
+  if(!select.options.length){
+    for(const course of courseThemeDraft.courses){
+      const option=document.createElement("option");
+      option.value=course.id;option.textContent=course.teacher+" · "+course.grade+". Klasse";
+      select.append(option);
+    }
+    select.value=state.course==="basis"?"bok-1-klasse":"bok-4-klasse";
+  }
+  const course=courseThemeDraft.courses.find(c=>c.id===select.value);
+  if(!course)return;
+  const accent=course.theme.accent;
+  $("courseThemeColor").value=accent;
+  const sample=$("courseThemePreview");
+  sample.style.setProperty("--preview-accent",accent);
+  sample.style.setProperty("--preview-paper",blendTheme(accent,.965));
+  sample.replaceChildren();
+  const heading=document.createElement("strong");heading.textContent=course.teacher+" · "+course.grade+". Klasse";
+  const name=document.createElement("span");name.textContent=course.name+" · "+(course.status==="published"?"veröffentlicht":"in Vorbereitung");
+  sample.append(heading,name);
+  applyCourseTheme();
+  if(state.current&&!notebookPath(state.current.path))preview();
+}
+async function loadCourseThemes(){
+  const file=await api("/api/file?path="+encodeURIComponent(COURSE_THEMES_PATH));
+  courseThemes={sha:file.sha,original:file.content};
+  courseThemeDraft=JSON.parse(state.staged.get(COURSE_THEMES_PATH)?.content||file.content);
+  renderThemeControls();
+}
+$("courseThemeSelect").addEventListener("change",renderThemeControls);
+$("courseThemeColor").addEventListener("input",event=>{
+  if(!courseThemeDraft)return;
+  const course=courseThemeDraft.courses.find(c=>c.id===$("courseThemeSelect").value);
+  if(!course)return;
+  course.theme.accent=event.target.value;
+  renderThemeControls();
+});
+$("courseThemeStage").addEventListener("click",()=>{
+  if(!courseThemes||!courseThemeDraft)return status("Farbthemen noch nicht geladen.",true);
+  const content=JSON.stringify(courseThemeDraft,null,2)+"\\n";
+  if(content===courseThemes.original){
+    state.staged.delete(COURSE_THEMES_PATH);
+    stagingList();return status("Keine Farbänderung vorhanden.");
+  }
+  state.staged.set(COURSE_THEMES_PATH,{path:COURSE_THEMES_PATH,expectedSha:courseThemes.sha,
+    content,original:courseThemes.original});
+  stagingList();status("Farbänderungen vorgemerkt. Zum Einreichen unten Pull Request erstellen.");
+});
+
 const planner=createPlanner($("planEditor"),content=>{$("source").value=content;preview();},()=>preview());
 
 const sidebarToggle=$("toggleSidebar");
@@ -818,6 +891,7 @@ function preview(){
   const isGlossary=state.current?.path===GLOSSARY_PATH;
   const isBasis=state.course==="basis";
   document.body.classList.toggle("course-basis",state.course==="basis");
+  applyCourseTheme();
   const previewBase=isBasis?BASIS_PREVIEW_BASE:COURSE_PREVIEW_BASE;
   let content=isGlossary?glossaryPreviewHtml(isBasis?"basis":"vertieft"):$("source").value;
   if(isGlossary){
@@ -876,7 +950,7 @@ function preview(){
   // Keep the preview inert: no allow-scripts and no allow-same-origin.
   const section=isGlossary?(isBasis?"basis-glossar":"glossar"):(state.current?.path.split("/")[1]||(isBasis?"basis-start":"einstieg"));
   const safeSection=/^[a-z0-9-]+$/.test(section)?section:(isBasis?"basis-start":"einstieg");
-  const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+"</style>";
+  const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+courseThemeCSS()+"</style>";
   // The Worker CSP intentionally forbids <base> (base-uri 'none'). Inline chrome
   // assets must therefore be absolute, just like images from edited chapters.
   const definitions=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content).sections;
@@ -1391,6 +1465,7 @@ $("courseSelect").addEventListener("change",async()=>{
   if(!confirmUnsaved()){$("courseSelect").value=state.course;return;}
   state.course=selected;
   document.body.classList.toggle("course-basis",selected==="basis");
+  if(courseThemeDraft){$("courseThemeSelect").value=selected==="basis"?"bok-1-klasse":"bok-4-klasse";renderThemeControls();}
   $("courseContext").textContent=selected==="basis"?"1. Kurzgymnasium · KI entdecken":"4. Kurzgymnasium · KI vertiefen";
   ++navigationRevision;
   state.plans.clear();
@@ -1586,12 +1661,12 @@ function inspectBlock(value){
   const sample=previewAssets(blocks[value],base);
   const shadow=blockPreview.shadowRoot||blockPreview.attachShadow({mode:"open"});
   const styles=document.createElement("style");
-  styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+
+  styles.textContent=COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+courseThemeCSS()+
     '\n:host{display:block;box-sizing:border-box;font:14px/1.55 system-ui,-apple-system,sans-serif;'+
-    'color:#182b31;--accent:'+(isBasis?'#3653a3':'#076959')+';'+
-    '--soft:'+(isBasis?'#e9eefc':'#e7f1eb')+';'+
-    '--paper:'+(isBasis?'#f3f5fb':'#f5f4ee')+';'+
-    '--line:'+(isBasis?'#d9e0ef':'#d8dfdb')+';'+
+    'color:#182b31;--accent:'+selectedThemeRecord()?.theme?.accent+';'+
+    '--soft:'+blendTheme(selectedThemeRecord()?.theme?.accent||(isBasis?'#3653a3':'#076959'),.89)+';'+
+    '--paper:'+blendTheme(selectedThemeRecord()?.theme?.accent||(isBasis?'#3653a3':'#076959'),.965)+';'+
+    '--line:'+blendTheme(selectedThemeRecord()?.theme?.accent||(isBasis?'#3653a3':'#076959'),.87)+';'+
     '--muted:'+(isBasis?'#46536a':'#52656a')+';--ink:#182b31;}'+
     '\n.block-preview-canvas{padding:12px;min-height:100%;box-sizing:border-box;background:var(--paper);overflow-wrap:anywhere;}'+
     '\n.block-preview-canvas main,.block-preview-canvas .section,.block-preview-canvas .kapitel{display:block!important;position:static!important;'+
@@ -1765,6 +1840,6 @@ if (!pagesOrigin) (async()=>{
     $("intro").hidden=s.authenticated;$("login").hidden=s.authenticated;$("logout").hidden=!s.authenticated;
     $("who").textContent=s.authenticated?"GitHub: "+s.login:"Nicht angemeldet";
     if(!s.authenticated){status("Mit GitHub anmelden, um Kapitel zu bearbeiten.");return;}
-    $("workspace").hidden=false;await refresh();status("Angemeldet. Kapitel auswählen.");
+    $("workspace").hidden=false;await refresh();await loadCourseThemes();status("Angemeldet. Kapitel auswählen.");
   }catch(e){$("login").hidden=true;$("intro").hidden=false;error("Admin-Gateway nicht verbunden: "+e.message);}
 })();

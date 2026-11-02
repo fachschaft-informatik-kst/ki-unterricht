@@ -780,3 +780,13 @@ button[aria-current=true] .chapter-number{color:var(--accent);background:#fff;bo
 .diff-line{font-size:11px;min-height:17px}
 .diff-line.diff-add{background:#dcf2e0;color:#185b30}
 .diff-line.diff-remove{background:#fce3e0;color:#8b2828}
+
+/* Per-course colour themes, independent from the content editor. */
+.sidebar-theme{padding:14px;margin:12px 0;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.sidebar-theme h3{font-size:13px;margin:0 0 10px}
+.sidebar-theme select{width:100%;font-size:12px}
+.sidebar-theme input[type=color]{display:block;width:100%;height:43px;padding:3px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.course-theme-preview{border:1px solid var(--line);border-left:6px solid var(--preview-accent,var(--accent));background:var(--preview-paper,#fff);border-radius:8px;margin-top:13px;padding:12px;font-size:12px;line-height:1.5}
+.course-theme-preview strong{display:block;color:var(--preview-accent,var(--accent));font-size:13px}
+.sidebar-theme .button.full{margin-top:12px;font-size:12px}
+.sidebar-theme .helper{font-size:11px;margin-bottom:0}

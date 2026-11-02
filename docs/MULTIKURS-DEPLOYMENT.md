@@ -74,3 +74,18 @@ versteckter Nebeneffekt der vier URLs.
 
 **Status:** Dies ist ein Feature-Branch für die URL- und Übersichtsgrundlage.
 Keine Änderungen sind durch diesen PR bereits auf `main` veröffentlicht.
+
+## Farbthemen im Editor
+
+Unter **Farbthemen der Kursseiten** lassen sich unabhängig von den BOK-Inhaltskursen
+alle vier Kursplätze auswählen. Über den Farbwähler wird die Akzentfarbe eingestellt;
+helle Hintergründe und Linien werden daraus automatisch abgeleitet. So bleiben
+Lesbarkeit und Gestaltung einheitlich. Die Änderungen werden über **Farbänderung
+vormerken** und danach **Pull Request erstellen** eingereicht. Sie betreffen
+`shared/course-sites.json`; der bestehende Worker erlaubt ausdrücklich nur diese
+validierte Konfigurationsdatei und prüft die Farbkontraste.
+
+Die beiden IRN-Kursplätze sind eigene Vorbereitungsseiten mit eigenen Farben,
+**noch keine vollständigen Inhaltseditoren**. Sie erhalten keine Kopien der BOK-
+Unterrichtsinhalte. Erst eine spätere Kursquell-Migration schafft getrennte
+Kapitel- und Notebook-Bearbeitung für IRN.
