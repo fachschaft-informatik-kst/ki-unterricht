@@ -22,15 +22,15 @@ const ROOT=path.resolve(__dirname,"..");
       {wer:"Ergebnis",text:"Sicherung"}]}]});
   const server=http.createServer((req,res)=>{
     const url=new URL(req.url,"http://127.0.0.1");
-    const route=/^\/teacher\/bok\/4-klasse\/(planung|materialien|musterloesungen)$/.exec(url.pathname);
+    const route=/^\/teacher\/bok\/(1|4)-klasse\/(planung|materialien|musterloesungen)$/.exec(url.pathname);
     if(route){
-      const html=teacherShell({course:"bok/4-klasse",kind:route[1]});
+      const html=teacherShell({course:"bok/"+route[1]+"-klasse",kind:route[2]});
       res.writeHead(200,{"Content-Type":"text/html; charset=utf-8"}).end(html);return;
     }
     if(url.pathname==="/api/teacher"){
       const number=Number(url.searchParams.get("dl")||1);
       const kind=url.searchParams.get("kind");
-      const base={kind,course:"bok/4-klasse",lessons,selectedNumber:number,
+      const base={kind,course:url.searchParams.get("course"),lessons,selectedNumber:number,
         selectedTitle:lessons[number-1]?.title||""};
       const data=kind==="planung"?{...base,lesson:fakeLesson(number)}:
         kind==="materialien"?{...base,intro:"",sections:[{title:"DL "+number,
@@ -59,6 +59,13 @@ const ROOT=path.resolve(__dirname,"..");
     await page.goto(origin+"/teacher/bok/4-klasse/planung?dl=3");
     await page.locator(".lesson-heading h2").waitFor();
     assert.match(await page.locator(".lesson-heading h2").innerText(),/DL 03 · Ein Neuron/);
+    assert.equal(await page.locator("#teacherCourseSelect").inputValue(),"bok/4-klasse");
+    assert.equal(await page.locator("#teacherCourseSelect option").count(),4);
+    assert.equal(await page.locator('#teacherCourseSelect option:disabled').count(),2);
+    assert.match(await page.locator("#teacherCourseSelect").innerText(),/IRN · 1. Klasse/);
+    assert.match(await page.locator("#teacherCourseSelect").innerText(),/in Vorbereitung/);
+    assert.match(await page.locator(".course-context").innerText(),/BOK · 4. Klasse/);
+
     assert.equal(await page.locator("#lessonNav a").count(),10);
     assert.equal(await page.locator("#lessonNav a[aria-current=page]").count(),1);
     assert.match(await page.locator("#lessonNav a[aria-current=page]").innerText(),/Ein Neuron/);
@@ -85,10 +92,21 @@ const ROOT=path.resolve(__dirname,"..");
     await page.locator("#lessonNav a[data-dl='8']").click();
     await page.locator(".lesson-heading h2").filter({hasText:"DL 08"}).waitFor();
     assert.match(await page.locator(".solution-question").innerText(),/DL 8/);
+    // Switching courses must retain the material area, but start at DL 01
+    // because DL numbers refer to different content in another course.
+    await page.locator("#teacherCourseSelect").selectOption("bok/1-klasse");
+    await page.waitForURL("**/teacher/bok/1-klasse/musterloesungen?dl=1");
+    await page.locator(".lesson-heading h2").filter({hasText:"DL 01"}).waitFor();
+    assert.equal(await page.locator("#teacherCourseSelect").inputValue(),"bok/1-klasse");
+    assert.match(await page.locator(".course-context").innerText(),/BOK · 1. Klasse/);
+    assert.equal(await page.locator("#lessonNav a[aria-current=page]").count(),1);
+    const accent=await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim());
+    assert.equal(accent,"#3653a3","Selected course should have the registry accent");
+
     await page.setViewportSize({width:390,height:844});
     assert.equal(await page.locator(".lesson-link").count(),10);
     assert(await page.locator(".lesson-sidebar").isVisible(),"Mobile DL navigation must remain visible");
-    console.log("PASS teacher browser: DL navigation, selected-state, AVIVA role colors, kit and precise solutions");
+    console.log("PASS teacher browser: course switch, DL navigation, AVIVA role colors, kit and precise solutions");
   }finally{
     if(browser)await browser.close();
     await new Promise(resolve=>server.close(resolve));

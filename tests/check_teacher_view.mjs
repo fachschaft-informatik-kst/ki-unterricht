@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {answerRows,materialForLesson,questionsFromSource,teacherData,teacherShell} from "../admin-worker/src/teacher.mjs";
+import {answerRows,materialForLesson,questionsFromSource,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses} from "../admin-worker/src/teacher.mjs";
 const fields=[
   "## DL 1 · Was ist KI?","","| Antwortfeld | Musterantwort |","|---|---|",
   "| "+String.fromCharCode(96)+"regeln_oder_daten"+String.fromCharCode(96)+" | Regelbasiert ist nicht dasselbe wie lernend. |",
@@ -39,6 +39,32 @@ assert(markdown.includes("entry.courseLink"));
 const shell=teacherShell({course:"bok/4-klasse",kind:"planung"});
 assert(shell.includes('id="lessonNav"')&&shell.includes('data-grade="4"'));
 assert(shell.includes('class="area-nav"'));
+const options=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES});
+assert.deepEqual(options.map(x=>x.slug),["bok/1-klasse","bok/4-klasse","irn/1-klasse","irn/4-klasse"]);
+assert.deepEqual(options.map(x=>x.ready),[true,true,false,false]);
+for(const kind of ["planung","materialien","musterloesungen"]){
+  const html=teacherShell({course:"bok/4-klasse",kind},options);
+  assert(html.includes('id="teacherCourseSelect"'),"Course choice missing on "+kind);
+  assert(html.includes('value="bok/4-klasse" selected'),"Current course must be selected");
+  assert(html.includes('value="bok/1-klasse"'),"Other BOK course must be selectable");
+  assert(html.includes('value="irn/1-klasse" disabled'),"Unprepared IRN course must be unavailable");
+  assert(html.includes('value="irn/4-klasse" disabled'));
+  assert(html.includes('style="--accent:#076959"'));
+}
+assert(teacherShell({course:"bok/1-klasse",kind:"materialien"},options)
+  .includes('style="--accent:#3653a3"'));
+assert.throws(()=>teacherShell({course:"irn/1-klasse",kind:"planung"},options),/nicht/);
+assert.throws(()=>normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES.slice(0,2)}),/vier/);
+const malicious=structuredClone(DEFAULT_COURSES);
+malicious[0].theme.accent="red; background:url(https://example.org/steal)";
+assert.throws(()=>normalizeTeacherCourses({version:1,courses:malicious}),/ungültig/);
+const courseMock=async(_token,path)=>{
+  assert(path.includes("/contents/shared/course-sites.json?ref=main"));
+  return {encoding:"base64",content:Buffer.from(JSON.stringify({version:1,courses:DEFAULT_COURSES})).toString("base64")};
+};
+assert.deepEqual((await loadTeacherCourses("token",courseMock,"example/repo")).map(x=>x.ready),
+  [true,true,false,false],"Course picker must use the source registry");
+
 const fake={
   "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
   "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[
