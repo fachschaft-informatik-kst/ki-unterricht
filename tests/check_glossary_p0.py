@@ -77,6 +77,6 @@ assert all(sum(step["min"] for step in p["schritte"])==p["minutes"] for p in les
 assert all(x in debate for x in ("12 Min.","10 Min.","4 Min.","zwei Argumente dafür und zwei dagegen"))
 assert "Sie sich" not in (ROOT/"kursseiten/basis-gesellschaft/030-rueckblick.md").read_text(encoding="utf-8")
 # The fourth-year oral exam explicitly includes an extra ten minutes and must not be altered.
-fourth=(ROOT/"kursseiten/projekt/planung.json").read_text(encoding="utf-8")
-assert "100 Minuten" in fourth or "100 Minuten" in (ROOT/"kursseiten/projekt/010-projekt-1.md").read_text(encoding="utf-8")
+fourth=(ROOT/"kursseiten/fremdmodell/planung.json").read_text(encoding="utf-8")
+assert "100 Minuten" in fourth, "DL 8 oral examination timing must remain 100 minutes"
 print("PASS shared glossary terms, both course views, P0 experiment/assessment and 90-min DL10 video/debate alignment")
