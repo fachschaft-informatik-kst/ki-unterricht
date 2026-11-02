@@ -42,8 +42,8 @@ assert(shell.includes('class="area-nav"'));
 const fake={
   "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
   "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[
-    {id:"test-1",number:1,view:"basis-test",title:"Regeln",goal:"Ziel",question:"Leitfrage",phases:[]},
-    {id:"test-2",number:2,view:"basis-test",title:"Lernen",goal:"Ziel 2",question:"Leitfrage 2",phases:[]}
+    {id:"test-1",order:10,view:"basis-test",title:"Regeln",goal:"Ziel",question:"Leitfrage",phases:[]},
+    {id:"test-2",order:20,view:"basis-test",title:"Lernen",goal:"Ziel 2",question:"Leitfrage 2",phases:[]}
   ]}),
   "kursseiten/basis-test/materialien.md":"## Materialien\n\nMathematikblatt",
   "lehrperson/musterloesungen.md":"## 1 · Was ist KI?\n\nFachlicher Hinweis",
@@ -60,6 +60,7 @@ const github=async(_token,path)=>{
 const params=["token",github,"example/repository"];
 const plan=await teacherData({course:"bok/1-klasse",kind:"planung"},...params,2);
 assert.equal(plan.selectedNumber,2);
+assert.deepEqual(plan.lessons.map(l=>l.number),[1,2],"DL numbering must be generated from order");
 assert.equal(plan.lesson.title,"Lernen");
 assert.equal(plan.lessons.length,2);
 const kit=await teacherData({course:"bok/1-klasse",kind:"materialien"},...params,1);
