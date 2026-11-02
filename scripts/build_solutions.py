@@ -4,6 +4,10 @@ from markdown_it import MarkdownIt
 from course_model import output
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "lehrperson/musterloesungen.md"
+FIELD_SOURCES = (
+    ROOT / "lehrperson/musterloesungen-felder-4-klasse.md",
+    ROOT / "lehrperson/musterloesungen-felder-1-klasse.md",
+)
 OUTPUT = output(ROOT) / "musterloesungen/index.html"
 
 def render(source: str) -> str:
@@ -25,14 +29,16 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding-top:15px;color:v
 @media(max-width:600px){main{padding:20px 16px 60px}table{display:block;overflow:auto}}
 @media print{body{background:white}main{max-width:none;padding:10px}h2,h3{break-after:avoid}}
 </style></head><body><main>
-<header><p class="eyebrow">Lehrpersonenmaterial · nicht im Kursportal verlinkt</p><p>Fachliche Musterantworten und ein beispielhaftes Tandemjournal. Offene Aufgaben erlauben mehrere begründete Antworten.</p></header>
+<header><p class="eyebrow">Lehrpersonenmaterial · nicht im Kursportal verlinkt</p><p>Fachliche Musterantworten, Feld-für-Feld-Beispiele und Tandemjournale für die 1. und 4. Klasse. Offene Aufgaben erlauben mehrere begründete Antworten.</p></header>
 """ + body + """
 <footer>Über die direkte URL erreichbar und nicht in der Navigation verlinkt. Öffentlich zugänglich für alle, die die URL kennen; kein Passwortschutz.</footer>
 </main></body></html>"""
 
 def build() -> None:
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
-    OUTPUT.write_text(render(SOURCE.read_text(encoding="utf-8")),encoding="utf-8")
+    sections = [SOURCE.read_text(encoding="utf-8")]
+    sections.extend(path.read_text(encoding="utf-8") for path in FIELD_SOURCES)
+    OUTPUT.write_text(render("\\n\\n---\\n\\n".join(sections)), encoding="utf-8")
     print("Built unlinked teacher solution page")
 
 if __name__ == "__main__":
