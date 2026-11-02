@@ -231,7 +231,7 @@ try{
 // The Worker must not use public GitHub Pages as the teacher content backend.
 const fakeSources={
   "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true,navigation:{title:"Testbereich"}}]}),
-  "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[{number:1,id:"basis-test",title:"Beispiel",phases:[]}]}),
+  "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[{number:1,id:"basis-test",view:"basis-test",title:"Beispiel",phases:[]}]}),
   "kursseiten/basis-test/materialien.md":"## Beispielmaterial",
   "lehrperson/musterloesungen.md":"# Allgemein",
   "lehrperson/musterloesungen-felder-1-klasse.md":"# Musterantworten"
