@@ -71,7 +71,7 @@ $("courseThemeColor").addEventListener("input",event=>{
 });
 $("courseThemeStage").addEventListener("click",()=>{
   if(!courseThemes||!courseThemeDraft)return status("Farbthemen noch nicht geladen.",true);
-  const content=JSON.stringify(courseThemeDraft,null,2)+"\\n";
+  const content=JSON.stringify(courseThemeDraft,null,2)+"\n";
   if(content===courseThemes.original){
     state.staged.delete(COURSE_THEMES_PATH);
     stagingList();return status("Keine Farbänderung vorhanden.");
