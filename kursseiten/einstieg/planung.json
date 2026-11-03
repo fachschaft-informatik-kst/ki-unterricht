@@ -2,7 +2,7 @@
   "lessons": [
     {
       "id": "b01",
-      "view": "basis-ki",
+      "view": "einstieg",
       "title": "Was ist KI?",
       "goal": "An vier Beispielen feste Regeln und Lernen aus Daten unterscheiden, fünf weitere Fälle der passenden KI-Kategorie zuordnen, zwei Grenzfälle begründen und die Leitfrage mit einem eigenen Beispiel beantworten.",
       "question": "Leitfrage: Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?",
