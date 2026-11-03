@@ -10,7 +10,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  assert(script.includes('window.dispatchEvent(new CustomEvent("ki-notebook-warmup"'),'Warmup uses the managed iframe');
  assert(script.includes('if (managed) {'),'Managed notebooks may not create a second iframe');
  const basic=source('basis/persistence.js'),advanced=source('projekt/portal.js');
- assert(basic.includes('if(current&&ready)await snapshot()'),'ZIP must remain available during background startup');
+ assert(basic.includes('if(current&&ready&&owner)await snapshot()'),'ZIP must remain available during background startup');
  assert(advanced.includes("frame.dataset.startKind==='warmup'"),'ZIP must remain available during background startup');
  assert(advanced.includes('notebookUploads[name]=await fileUpdates'),'Uploads must be indexed per notebook');
  assert(advanced.includes('uploads:notebookUploads'),'Upload ownership must survive browser reload and ZIP');
