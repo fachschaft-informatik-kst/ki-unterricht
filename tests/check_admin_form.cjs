@@ -132,6 +132,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#courseThemeColor").fill("#58358b");
     assert.equal(await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#58358b");
     await page.locator("#chapters button").first().click();
+    await page.waitForFunction(() => document.querySelector("#preview")?.srcdoc.includes("--accent:#58358b"), null, {timeout:5000});
     assert.match(await page.locator("#preview").getAttribute("srcdoc"),/--accent:#58358b/);
     await page.locator("#courseThemeStage").click();
     assert.match(await page.locator("#staged").innerText(),/shared\/course-sites\.json/);
