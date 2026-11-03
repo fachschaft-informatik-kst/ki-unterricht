@@ -238,6 +238,7 @@ async function showNotebook(name,owner,scroll=true,trigger=null){
    $('project-lab-status').textContent=saved?'Gesichertes Notebook wird geöffnet …':'Python startet …';
    startNotebookFrame(name,saved,'open');
   }
+  try { sessionStorage.setItem('ki-last-opened-bok-4',name); } catch {}
   activeOwner=owner;$('project-lab-title').textContent=names[name];
   overlay.open(trigger || document.activeElement);visibility();refreshNotebookFrame();
   lab.querySelector('details').hidden=name!==projectName;
