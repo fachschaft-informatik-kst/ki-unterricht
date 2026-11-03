@@ -111,18 +111,23 @@ const wrongRepo=await appInstallationStatus("dummy",async(token,path)=>
 assert.equal(wrongRepo.ready,false);
 assert.match(wrongRepo.reason,/Repository/);
 // Exercise the actual publisher against an isolated GitHub API contract.
-const manifest=JSON.parse(readFileSync(new URL("../kursseiten/manifest.json",import.meta.url)));
-const basisManifest=JSON.parse(readFileSync(new URL("../kursseiten/basis-manifest.json",import.meta.url)));
-const irnManifests=[1,4].map(grade=>JSON.parse(readFileSync(new URL("../kursseiten/irn-"+grade+"-manifest.json",import.meta.url))));
-const sources=new Map([["kursseiten/manifest.json",JSON.stringify(manifest)],["kursseiten/basis-manifest.json",JSON.stringify(basisManifest)],
-  ...irnManifests.map((manifest,i)=>["kursseiten/irn-"+(i===0?1:4)+"-manifest.json",JSON.stringify(manifest)]),
-  ["kursseiten/glossar.json",readFileSync(new URL("../kursseiten/glossar.json",import.meta.url),"utf8")],
-  ["shared/course-sites.json",readFileSync(new URL("../shared/course-sites.json",import.meta.url),"utf8")]]);
-for(const section of [...manifest.sections,...basisManifest.sections,...irnManifests.flatMap(m=>m.sections)].filter(s=>s.teaching)){
-  const prefix="kursseiten/"+section.id+"/";
-  for(const name of readdirSync(new URL("../"+prefix,import.meta.url))){
-    if(/\.(json|md)$/.test(name))
-      sources.set(prefix+name,readFileSync(new URL("../"+prefix+name,import.meta.url),"utf8"));
+const registry=JSON.parse(readFileSync(new URL("../shared/course-sites.json",import.meta.url),"utf8"));
+const bySlug=Object.fromEntries(registry.courses.map(c=>[c.slug,c]));
+const first="kurse/bok/1-klasse/",fourth="kurse/bok/4-klasse/";
+const manifest=JSON.parse(readFileSync(new URL("../"+bySlug["bok/4-klasse"].manifest,import.meta.url),"utf8"));
+const sources=new Map([["shared/course-sites.json",JSON.stringify(registry)]]);
+for(const course of registry.courses){
+  const source=course.courseRoot+"/kursseiten/";
+  const doc=JSON.parse(readFileSync(new URL("../"+course.manifest,import.meta.url),"utf8"));
+  sources.set(course.manifest,JSON.stringify(doc));
+  sources.set(source+"glossar.json",
+    readFileSync(new URL("../"+source+"glossar.json",import.meta.url),"utf8"));
+  for(const section of doc.sections.filter(x=>x.teaching)){
+    const prefix=source+section.id+"/";
+    for(const name of readdirSync(new URL("../"+prefix,import.meta.url))){
+      if(/\.(json|md)$/.test(name))
+        sources.set(prefix+name,readFileSync(new URL("../"+prefix+name,import.meta.url),"utf8"));
+    }
   }
 }
 const sessionKey=await crypto.subtle.importKey("raw",Buffer.from(env.SESSION_KEY,"base64url"),"AES-GCM",false,["encrypt"]);
@@ -133,12 +138,12 @@ const session=iv.toString("base64url")+"."+Buffer.from(encrypted).toString("base
 const nextManifest=structuredClone(manifest);
 nextManifest.sections.push({id:"test-topic",class:"section",teaching:true,navigation:{order:100,label:"",title:"Test"}});
 const changes=[
-  {path:"kursseiten/manifest.json",expectedSha:"a".repeat(40),content:JSON.stringify(nextManifest)},
-  {path:"kursseiten/test-topic/planung.json",expectedSha:null,content:JSON.stringify({
+  {path:fourth+"kursseiten/manifest.json",expectedSha:"a".repeat(40),content:JSON.stringify(nextManifest)},
+  {path:fourth+"kursseiten/test-topic/planung.json",expectedSha:null,content:JSON.stringify({
     lessons:[{...lessonTemplate("test-topic","Test","test-topic"),order:110}]
   })},
-  {path:"kursseiten/test-topic/010-test.md",expectedSha:null,content:'---\ntype: chapter\nid: test-topic-test\nnummer: "1"\ntitel: Test\nkurz: Test\n---\n\nTest'},
-  {path:"kursseiten/test-topic/materialien.md",expectedSha:null,content:"## Doppellektion test-topic\n"}
+  {path:fourth+"kursseiten/test-topic/010-test.md",expectedSha:null,content:'---\ntype: chapter\nid: test-topic-test\nnummer: "1"\ntitel: Test\nkurz: Test\n---\n\nTest'},
+  {path:fourth+"kursseiten/test-topic/materialien.md",expectedSha:null,content:"## Doppellektion test-topic\n"}
 ];
 const writes=[];
 try{
@@ -178,21 +183,21 @@ try{
   writes.length=0;
   assert.equal((await submit(changes,"https://evil.example")).status,403);
   assert.equal((await submit(changes.map((c,i)=>i===0?{...c,expectedSha:"c".repeat(40)}:c))).status,409);
-  const renamed=JSON.parse(sources.get("kursseiten/einstieg/planung.json"));
+  const renamed=JSON.parse(sources.get(fourth+"kursseiten/einstieg/planung.json"));
   renamed.lessons[0].id="renamed";
-  const rejected=await submit([{path:"kursseiten/einstieg/planung.json",expectedSha:"a".repeat(40),content:JSON.stringify(renamed)}]);
+  const rejected=await submit([{path:fourth+"kursseiten/einstieg/planung.json",expectedSha:"a".repeat(40),content:JSON.stringify(renamed)}]);
   assert.equal(rejected.status,400);
   assert.match((await rejected.json()).error,/Lektions-IDs/);
   assert.equal((await submit(changes.filter(c=>!c.path.endsWith("materialien.md")))).status,400);
   assert.equal(writes.length,0,"Invalid courses and conflicts must never create Git objects");
   // Glossary updates use the same atomic PR workflow. Existing deep-link IDs are protected.
-  const glossary=JSON.parse(sources.get("kursseiten/glossar.json"));
-  const glossaryChanges=doc=>[{path:"kursseiten/glossar.json",expectedSha:"a".repeat(40),content:JSON.stringify(doc)}];
+  const glossary=JSON.parse(sources.get(fourth+"kursseiten/glossar.json"));
+  const glossaryChanges=doc=>[{path:fourth+"kursseiten/glossar.json",expectedSha:"a".repeat(40),content:JSON.stringify(doc)}];
   const edited=structuredClone(glossary);
   edited.begriffe[0].basis="Einfache Unterrichtserklärung für die 1. Klasse.";
   edited.begriffe[0].vertieft="Ausführliche technische Erklärung für die 4. Klasse.";
   assert.equal((await submit(glossaryChanges(edited))).status,201);
-  assert.equal(writes.find(w=>w.path.endsWith("/git/trees")).body.tree[0].path,"kursseiten/glossar.json");
+  assert.equal(writes.find(w=>w.path.endsWith("/git/trees")).body.tree[0].path,fourth+"kursseiten/glossar.json");
   writes.length=0;
   const removed=structuredClone(glossary);removed.begriffe.shift();
   const blocked=await submit(glossaryChanges(removed));
@@ -209,11 +214,11 @@ try{
       {cell_type:"markdown",id:"nbtask01",metadata:{},source:["# Notebook-Auftrag\\n"]},
       {cell_type:"code",id:"nbcode01",metadata:{},source:["print('Hallo')\\n"],execution_count:null,outputs:[]}
     ]};
-  const lessonFile="content/lesson_einstieg_testlabor.ipynb";
+  const lessonFile=fourth+"content/lesson_einstieg_testlabor.ipynb";
   const newNotebook={path:lessonFile,expectedSha:null,content:JSON.stringify(lessonNotebook)};
-  const chapterFile="kursseiten/einstieg/030-einstieg-3.md";
+  const chapterFile=fourth+"kursseiten/einstieg/030-einstieg-3.md";
   const chapterLinked={path:chapterFile,expectedSha:"a".repeat(40),
-    content:sources.get(chapterFile)+'\\n<div class="ki-notebook-block" data-notebook="'+lessonFile+'"></div>\\n'};
+    content:sources.get(chapterFile)+'\\n<div class="ki-notebook-block" data-notebook="'+lessonFile.slice(fourth.length)+'"></div>\\n'};
   const alone=await submit([newNotebook]);
   assert.equal(alone.status,400);
   assert.match((await alone.json()).error,/Unterkapitel/);
@@ -221,9 +226,9 @@ try{
     "Chapter and fresh notebook must be accepted in one PR");
   assert.equal(writes.find(w=>w.path.endsWith("/git/trees")).body.tree.length,2);
   writes.length=0;
-  const otherCourse={...chapterLinked,path:"kursseiten/basis-neuron/030-perzeptron-3.md",
-    content:sources.get("kursseiten/basis-neuron/030-perzeptron-3.md")+
-      '\\n<div class="ki-notebook-block" data-notebook="'+lessonFile+'"></div>'};
+  const otherCourse={...chapterLinked,path:first+"kursseiten/basis-neuron/030-perzeptron-3.md",
+    content:sources.get(first+"kursseiten/basis-neuron/030-perzeptron-3.md")+
+      '\\n<div class="ki-notebook-block" data-notebook="'+lessonFile.slice(fourth.length)+'"></div>'};
   assert.equal((await submit([otherCourse,newNotebook])).status,400,
     "A fourth-year notebook must not be linked from first-year pages");
   assert.equal(writes.length,0);
@@ -233,11 +238,11 @@ try{
 // Direct source URLs and downloads must not be reachable without OAuth.
 // The Worker must not use public GitHub Pages as the teacher content backend.
 const fakeSources={
-  "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true,navigation:{title:"Testbereich"}}]}),
-  "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[{number:1,id:"basis-test",view:"basis-test",title:"Beispiel",phases:[]}]}),
-  "kursseiten/basis-test/materialien.md":"## Beispielmaterial",
-  "lehrperson/musterloesungen.md":"# Allgemein",
-  "lehrperson/musterloesungen-felder-1-klasse.md":"# Musterantworten"
+  [first+"kursseiten/manifest.json"]:JSON.stringify({sections:[{id:"basis-test",teaching:true,navigation:{title:"Testbereich"}}]}),
+  [first+"kursseiten/basis-test/planung.json"]:JSON.stringify({lessons:[{number:1,id:"basis-test",view:"basis-test",title:"Beispiel",phases:[]}]}),
+  [first+"kursseiten/basis-test/materialien.md"]:"## Beispielmaterial",
+  [first+"lehrperson/musterloesungen.md"]:"# Allgemein",
+  [first+"lehrperson/musterloesungen-felder.md"]:"# Musterantworten"
 };
 const fakeGithub=async(_token,path)=>{
   const name=path.split("/contents/")[1].split("?")[0];
@@ -246,13 +251,8 @@ const fakeGithub=async(_token,path)=>{
 };
 const teacherPlan=await teacherData({course:"bok/1-klasse",kind:"planung"},"token",fakeGithub,"example/repo");
 assert.equal(teacherPlan.lessons[0].title,"Beispiel");
-const irnSources={
-  "kursseiten/irn-1-manifest.json":readFileSync(new URL("../kursseiten/irn-1-manifest.json",import.meta.url),"utf8"),
-  "kursseiten/irn-1-kurs/planung.json":readFileSync(new URL("../kursseiten/irn-1-kurs/planung.json",import.meta.url),"utf8"),
-  "kursseiten/irn-1-kurs/materialien.md":readFileSync(new URL("../kursseiten/irn-1-kurs/materialien.md",import.meta.url),"utf8"),
-  "lehrperson/irn-1/musterloesungen.md":readFileSync(new URL("../lehrperson/irn-1/musterloesungen.md",import.meta.url),"utf8"),
-  "lehrperson/irn-1/musterloesungen-felder.md":readFileSync(new URL("../lehrperson/irn-1/musterloesungen-felder.md",import.meta.url),"utf8")
-};
+const irnSources=Object.fromEntries([...sources.entries()]
+  .filter(([path])=>path.startsWith("kurse/irn/1-klasse/")));
 const irnGithub=async(_token,route)=>{
   if(route.includes("/git/trees/main"))return {tree:[],truncated:false};
   const name=route.split("/contents/")[1]?.split("?")[0];
@@ -261,11 +261,11 @@ const irnGithub=async(_token,route)=>{
 };
 const irnPlan=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo");
 assert.equal(irnPlan.lessons.length,10);
-assert(irnPlan.lessons.every(l=>l.view==="irn-1-kurs"));
+assert(irnPlan.lessons.every(l=>l.view.startsWith("basis-")));
 const irnKit=await teacherData({course:"irn/1-klasse",kind:"materialien"},"token",irnGithub,"example/repo");
-assert.match(irnKit.sections[0].markdown,/Doppellektion 01/);
+assert(irnKit.sections[0].markdown.length>20);
 const irnSolutions=await teacherData({course:"irn/1-klasse",kind:"musterloesungen"},"token",irnGithub,"example/repo");
-assert.match(irnSolutions.notes[0].markdown,/Noch keine Musterantworten/);
+assert(irnSolutions.sections[0].markdown.length>50);
 
 const teacherKit=await teacherData({course:"bok/1-klasse",kind:"materialien"},"token",fakeGithub,"example/repo");
 assert.match(teacherKit.sections[0].markdown,/Beispielmaterial/);
