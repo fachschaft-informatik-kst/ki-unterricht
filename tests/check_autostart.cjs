@@ -71,12 +71,12 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   assert(tools.includes('class _LazyPlots'));
   assert(tools.includes("widgets.interact_manual.options(manual_name='Netz trainieren ▶')"),
     'The XOR learning widget must wait for an explicit click before training');
-  for (const name of ['mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','basis_netze.ipynb']) {
+  for (const name of ['mehrschichtige_netze.ipynb','daten_training.ipynb','basis_netze.ipynb']) {
     assert(!packages(name).includes('pillow'), name + ' must not preload unused Pillow');
     assert(!packages(name).includes('scikit-learn'), name + ' must defer training packages');
     assert(!packages(name).includes('scipy'), name + ' must defer unused SciPy');
   }
-  assert.deepEqual(packages('ziffernerkennung.ipynb'), ['numpy']);
+  assert(packages('ziffernerkennung.ipynb').includes('scikit-learn'),'Digit widgets need working training dependencies from the start');
   assert.deepEqual(packages('ki_projekt/ki_lernlabor.ipynb'), ['numpy','pillow']);
   assert.deepEqual(packages('ki_projekt/ki_tandemprojekt.ipynb'), ['numpy','pillow'],
     'The saved project journal must not block startup on unused plotting/training packages');
