@@ -124,15 +124,48 @@ GitHub Actions baut die Seite beim Push automatisch.
 
 Fachliche Texte, Aufgaben und Links werden in `kursseiten/` gepflegt; `projekt/portal.js` enthält nur noch Controller-Logik. Für eine schnelle lokale Vorschau `python scripts/preview.py` ausführen; `--full` baut und startet zusätzlich JupyterLite. Siehe Haupt-README.
 
-## Mehrere Kursadressen aus einer Codebasis
+## Eigenständige Quellen von BOK, IRN und neuen Lehrpersonen
 
-- **4. Kurzgymnasium (Vertiefung):** `kursseiten/manifest.json`, Kursseite `/projekt/` (historischer Speicher- und Notebook-Stand bleibt erhalten).
-- **1. Kurzgymnasium (Basis):** `kursseiten/basis-manifest.json`, zehn Doppellektionen in `kursseiten/basis-*/`, Kursseite `/basis/`.
-- **Kursauswahl:** `/kurse.html` ist auch die Zieladresse der Start-URL. BOK ist zusätzlich unter `/bok/1-klasse/` und `/bok/4-klasse/` erreichbar; `/basis/` und `/projekt/` bleiben für Lesezeichen und Lernstände bestehen. IRN hat zwei unabhängige, farblich unterscheidbare Kursplätze unter `/irn/1-klasse/` und `/irn/4-klasse/`, aktuell noch ohne eigene Unterrichtsinhalte.
-- **Editor:** Gemeinsamer GitHub-Editor unter `/projekt/admin/`. Die BOK-Kapitel bleiben nach Klassenstufen getrennt. Unter «Farbthemen der Kursseiten» können die Farben **aller vier** Kursplätze individuell eingestellt und als Pull Request eingereicht werden. Eigene IRN-Kapitel/Notebooks erfordern die spätere Kursquell-Trennung. Neue Bereiche des Basiskurses erhalten den Präfix `basis-`.
-- **Gemeinsam:** CSS, Grafiken, Kapitelrenderer und AVIVA-Validierung. Separate Notizen des Basiskurses nutzen `kst-ki-basis-v1`; der bisherige Portal-, Journal- und Notebook-Speicher bleibt unangetastet.
+Die Quelle aller Kurszuordnungen ist `shared/course-sites.json`. Der
+Build prüft mit `scripts/course_registry.py`, dass jeder Bereich nur in
+**einem** Kursmanifest vorkommt und die getrennten Namensräume gültig sind.
 
-Build und Vorschau erzeugen beide Seiten: `python scripts/build_portal.py && python scripts/build_course.py && python scripts/build_basis.py` bzw. `make preview`.
-Für einen lokalen Volltest: `make test`. Der CI-Browsercheck testet zusätzlich Kurswahl, Regler sowie Notizen beim erneuten Öffnen.
+| Kurs | Manifest | Unterrichtsbereiche | Lehrerdateien |
+| --- | --- | --- | --- |
+| BOK 1 | `basis-manifest.json` | `basis-*` | eigene Feldlösungen plus historische BOK-Grundlagen |
+| BOK 4 | `manifest.json` | Bereiche des BOK-4-Manifests | eigene Feldlösungen plus historische BOK-Grundlagen |
+| IRN 1 | `irn-1-manifest.json` | `irn-1-*` | `lehrperson/irn-1/` |
+| IRN 4 | `irn-4-manifest.json` | `irn-4-*` | `lehrperson/irn-4/` |
 
-**Didaktische Trennung:** Der Basiskurs ist eine angeleitete Bildklassifikation mit unkritischen Gegenständen und Testbildern; die 4. Klasse arbeitet weiterhin mit selbstständiger Evaluation, Notebook-Projekt und Fachgespräch. Teachable Machine ist ein externer Dienst: vor der Verwendung schulische Datenschutzregeln beachten; keine Gesichter oder persönlichen Daten hochladen.
+Die BOK-URLs `/bok/1-klasse/` und `/bok/4-klasse/` sind veröffentlicht;
+die historischen `/basis/` und `/projekt/` bleiben für Links,
+Notebook-Zustände und Schülerantworten erreichbar. Die öffentlichen
+IRN-Seiten befinden sich noch in Vorbereitung, **aber IRN besitzt eigene,
+bearbeitbare Kapitel, AVIVA-Pläne, Materialkoffer und Musterlösungen**.
+
+### Weitere Lehrperson hinzufügen
+
+```sh
+python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b" --dry-run
+python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b"
+python scripts/course_registry.py
+make preview
+```
+
+Der Generator legt das Manifest, `mai-1-kurs/` mit einem Kapitel,
+`planung.json` und `materialien.md` sowie die drei unabhängigen
+Lehrpersonenquellen unter `lehrperson/mai-1/` an. Der Kurs erscheint
+im gemeinsamen Editor mit eigener Navigation und Farbe. Ohne Freigabe
+bleibt die Schülerseite eine Vorbereitungsseite; zum Veröffentlichen im
+Register `status: published` und `source: generated` setzen.
+Dadurch wird eine einfache Schülerseite mit kursbezogenen Text-/
+Auswahlantworten und JSON-Transfer erzeugt. Für spezialisierte BOK-
+Notebooks, Fotostudio oder ZIP-Workflows braucht es eine separate Integration.
+
+Die lokalen Befehle `new_lesson.py` und `new_chapter.py` sind noch auf
+den historischen BOK-4-Kurs voreingestellt; für andere Kurse bitte die
+jeweilige Kursauswahl im Editor verwenden. Neue Lehrpersonen erhalten
+einen eigenen Präfix `<kürzel>-<stufe>-` für sämtliche Bereiche.
+Alte Schüler-IDs und ZIP-Formate werden nicht umbenannt.
+
+[Mehrkurs-Architektur und Sicherheitsgrenzen](../docs/MULTIKURS-DEPLOYMENT.md)
