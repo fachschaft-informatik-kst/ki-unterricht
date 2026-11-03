@@ -29,8 +29,11 @@
   const warmShell = () => prefetch(labUrl.href);
   if ("requestIdleCallback" in window) requestIdleCallback(warmShell, {timeout:5000});
   else window.addEventListener("load", () => setTimeout(warmShell, 1000), {once:true});
-  const basic = /\/basis\//.test(location.pathname);
-  const coursePage = /\/(?:basis|projekt)\/(?:index\.html)?$/.test(location.pathname);
+  // The published BOK routes are nested one level deeper than the legacy
+  // /basis/ and /projekt/ addresses, but they use the SAME course controllers.
+  // Treating them as standalone cards creates a competing iframe/kernel.
+  const basic = /\/(?:basis|bok\/1-klasse)\/(?:index\.html)?$/.test(location.pathname);
+  const coursePage = /\/(?:basis|projekt|bok\/(?:1|4)-klasse)\/(?:index\.html)?$/.test(location.pathname);
   // A material index also contains direct links to notebook downloads.
   // Keep those downloads and add the same interactive notebook element.
   if (/\/materialien\.html$/.test(location.pathname)) {
