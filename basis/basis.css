@@ -101,20 +101,32 @@ body .lesson-recap{border-left-color:var(--accent);}
 body .footer{border-top:1px solid var(--line);margin-top:25px;}
 body .footer .detail-body a{overflow-wrap:anywhere;}
 body .footer .detail-body>p:last-child a{margin-right:18px;}
-.basis-transfer{margin:34px 0;padding:26px;background:#e9eefc;border-top:5px solid var(--accent);border-radius:0 0 12px 12px;}
+.basis-transfer{margin:32px 0;padding:10px 0 30px;background:transparent;border-top:0;}
 .basis-transfer h2{font-size:clamp(1.5rem,2.4vw,2rem);}
-.basis-transfer-identity{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px;max-width:680px;margin:18px 0;}
+.basis-transfer-flow{display:grid;gap:15px;margin:24px 0;}
+.basis-transfer-step{padding:22px 24px;border:1px solid var(--line);border-radius:14px;background:white;}
+.basis-transfer-step h3{display:flex;align-items:center;gap:11px;font-size:1.2rem;margin:0 0 12px;line-height:1.35;}
+.basis-step-number{display:grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:#e9eefc;color:var(--accent);font-size:15px;}
+.basis-transfer-step>p:last-child{margin-bottom:0;}
+.basis-transfer-identity{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px;max-width:680px;margin:12px 0 0;}
 .basis-transfer-identity .field{display:grid;gap:6px;min-width:0;}
 .basis-transfer-identity input{width:100%;padding:10px 12px;border:1px solid #9daeca;border-radius:8px;background:#fff;}
-.basis-transfer-actions{display:grid;gap:14px;max-width:680px;}
-.basis-backup-controls{display:grid;gap:14px;}
+.basis-backup-controls{display:grid;gap:14px;max-width:680px;margin-top:15px;}
+.basis-transfer-buttons{display:flex;flex-wrap:wrap;align-items:flex-start;gap:14px;}
+.basis-transfer-buttons button{min-height:46px;font-weight:700;}
+.basis-transfer-photo{padding-bottom:4px;}
 .basis-backup-controls label{display:grid;gap:6px;font-size:14px;font-weight:650;}
 .basis-backup-controls input[type="file"]{font-weight:400;background:white;border:1px solid var(--line);border-radius:8px;padding:10px;width:100%;}
-.basis-backup-controls button{justify-self:start;}
+.basis-transfer-recovered{padding:10px 12px;}
+.basis-transfer-recovered button{display:block;margin:9px 0;}
+.basis-transfer-legacy{margin-top:14px;}
+.basis-transfer-legacy .detail-body{font-size:14px;}
 @media(max-width:720px){
-  .basis-transfer{padding:19px 16px;}
+  .basis-transfer{padding:6px 0 28px;}
+  .basis-transfer-step{padding:18px 16px;}
   .basis-transfer-identity{grid-template-columns:1fr;}
-  .basis-backup-controls button{width:100%;}
+  .basis-transfer-buttons{flex-direction:column;align-items:stretch;}
+  .basis-transfer-buttons button{width:100%;justify-content:center;}
 }
 
 
