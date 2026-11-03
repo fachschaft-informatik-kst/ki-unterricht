@@ -9,7 +9,6 @@ for(const [name,packages,manual] of [
  ['daten_training.ipynb',['numpy','matplotlib'],['u.drei_rollen(']],
  ['mehrschichtige_netze.ipynb',['numpy','matplotlib'],['u.xor_lernen_regler(']],
  ['basis_netze.ipynb',['numpy','matplotlib'],['u.xor_lernen_regler(']],
- ['ziffernerkennung.ipynb',['numpy'],['u.ziffern_regler(','u.ziffer_regler(']],
  ['ki_projekt/ki_lernlabor.ipynb',['numpy','pillow'],['daten = foto.projekt_laden(','experiment = foto.vergleichen(','foto.vorhersagen_zeigen(']]
 ]){
  const nb=notebook(name),setup=setups(nb);
@@ -29,10 +28,13 @@ for(const [name,packages,manual] of [
 for(const [name,needle] of [
  ['daten_training.ipynb','u.drei_rollen('],
  ['mehrschichtige_netze.ipynb','u.xor_lernen_regler('],
- ['ziffernerkennung.ipynb','u.ziffern_regler('],
  ['ki_projekt/ki_lernlabor.ipynb','experiment = foto.vergleichen(']
 ]){
  const cell=notebook(name).cells.find(c=>c.cell_type==='code'&&source(c).includes(needle));
  assert(source(cell).includes('await pyodide_js.loadPackage('),name+' must install deferred wheel dependencies explicitly');
 }
-console.log('PASS expensive training and scientific packages deferred to explicit notebook cells');
+const digits=notebook('ziffernerkennung.ipynb');
+assert(starts(digits).some(c=>source(c).includes('u.ziffern_regler(')),'Digit-recognition controls must be visible immediately');
+assert(starts(digits).some(c=>source(c).includes('u.ziffer_regler(')),'Digit-prediction controls must be visible immediately');
+assert(source(setups(digits)).includes("'scikit-learn'"),'Digit buttons must have working model dependencies');
+console.log('PASS heavy training deferred while primary digit widgets remain immediately interactive');
