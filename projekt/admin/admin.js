@@ -1159,13 +1159,22 @@ async function publish(){
 }
 
 
+function selectedTeachingSection(){
+  const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
+  const active=$("section").value;
+  if(manifest.sections.some(item=>item.id===active&&item.teaching))return active;
+  // Overview sections (such as Lernziele) have no AVIVA/material source.
+  // Clicking the edit shortcut should still open a usable teaching area.
+  const first=manifest.sections.find(item=>item.teaching);
+  if(!first)throw Error("Dieser Kurs enthält noch keine bearbeitbare Doppellektion.");
+  $("section").value=first.id;
+  chapterList();
+  return first.id;
+}
 async function editPlan(){
   try{
     if(!confirmUnsaved())return;
-    const section=$("section").value;
-    const currentManifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
-    if(!currentManifest.sections.some(item=>item.id===section&&item.teaching))
-      throw Error("Bitte einen Unterrichtsbereich der ausgewählten Klasse wählen.");
+    const section=selectedTeachingSection();
     const path="kursseiten/"+section+"/planung.json",staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
     const file=await api("/api/file?path="+encodeURIComponent(path));
@@ -1175,10 +1184,7 @@ async function editPlan(){
 async function editMaterials(){
   try{
     if(!confirmUnsaved())return;
-    const section=$("section").value;
-    const currentManifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
-    if(!currentManifest.sections.some(item=>item.id===section&&item.teaching))
-      throw Error("Bitte einen Unterrichtsbereich der ausgewählten Klasse wählen.");
+    const section=selectedTeachingSection();
     const path="kursseiten/"+section+"/materialien.md";
     const staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
@@ -1869,12 +1875,53 @@ $("addBlock").addEventListener("click",insertBlock);
 $("imageFile").addEventListener("change",addImage);
 $("logout").addEventListener("click",async()=>{try{await post("/auth/logout",{});location.assign("/");}catch(e){error(e);}});
 window.addEventListener("beforeunload",e=>{if(state.staged.size||(state.current&&$("source").value!==savedText())){e.preventDefault();e.returnValue="";}});
+// Deep links from the protected teacher AVIVA/materials view point to the
+// original source file, never to the read-only rendered teacher page.
+async function openRequestedTeacherEdit(params){
+  const resource=params.get("edit");
+  if(!["planung","materialien","musterloesungen"].includes(resource))return false;
+  const section=params.get("section")||"";
+  const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
+  const teaching=manifest.sections.find(item=>item.id===section&&item.teaching);
+  if(!teaching){status("Der verlinkte Unterrichtsbereich wurde nicht gefunden. Bitte links einen Bereich auswählen.",true);return true;}
+  $("section").value=section;
+  chapterList();
+  if(resource==="planung"){
+    await editPlan();
+    const requestedId=params.get("lesson")||"";
+    if(requestedId&&state.current?.path==="kursseiten/"+section+"/planung.json"){
+      const doc=JSON.parse($("source").value);
+      const index=doc.lessons.findIndex(lesson=>lesson.id===requestedId);
+      if(index>=0){
+        $("planLesson").value=String(index);
+        $("planLesson").dispatchEvent(new Event("change",{bubbles:true}));
+      }
+    }
+  }else if(resource==="materialien"){
+    await editMaterials();
+  }else{
+    await load(teacherSource("musterloesungen"));
+  }
+  const label=resource==="planung"?"AVIVA-Plan":resource==="materialien"?"Materialkoffer":"Musterlösungen";
+  status(label+" zur Bearbeitung geöffnet. Änderungen vormerken und danach einen Pull Request erstellen.");
+  return true;
+}
 if (!pagesOrigin) (async()=>{
   try{
     const s=await api("/api/session");
     $("intro").hidden=s.authenticated;$("login").hidden=s.authenticated;$("logout").hidden=!s.authenticated;
     $("who").textContent=s.authenticated?"GitHub: "+s.login:"Nicht angemeldet";
     if(!s.authenticated){status("Mit GitHub anmelden, um Kapitel zu bearbeiten.");return;}
-    $("workspace").hidden=false;await refresh();await loadCourseThemes();status("Angemeldet. Kapitel auswählen.");
+    const params=new URLSearchParams(location.search);
+    const selected=params.get("course");
+    if(Object.prototype.hasOwnProperty.call(COURSE_PROFILES,selected)){
+      state.course=selected;
+      $("courseSelect").value=selected;
+      updateTeacherAccessLinks();
+    }
+    $("workspace").hidden=false;
+    await refresh();
+    await loadCourseThemes();
+    if(!(await openRequestedTeacherEdit(params)))status("Angemeldet. Kapitel auswählen.");
   }catch(e){$("login").hidden=true;$("intro").hidden=false;error("Admin-Gateway nicht verbunden: "+e.message);}
 })();
