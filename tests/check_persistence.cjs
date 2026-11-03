@@ -165,7 +165,9 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await q.waitForFunction(async()=>{
    const db=await new Promise(resolve=>{const r=indexedDB.open('kst-ki-kursportal',1);r.onsuccess=()=>resolve(r.result);});
    const a=await new Promise(resolve=>{const r=db.transaction('artifacts').objectStore('artifacts').get('project');r.onsuccess=()=>resolve(r.result);});db.close();
-   return JSON.stringify(a?.others?.['perzeptron_und_neuronale_netze.ipynb']?.cells).includes('Gatter: OR');
+   // The first full snapshot no longer blocks Python startup. While the
+   // debounced autosave is still pending the notebook record can be absent.
+   return JSON.stringify(a?.others?.['perzeptron_und_neuronale_netze.ipynb']?.cells||[]).includes('Gatter: OR');
   },null,{timeout:60000});
   const widgetExport=await download(q,'widget.zip');
   const lesson=JSON.parse(await widgetExport.files.get('notebooks/perzeptron_und_neuronale_netze.ipynb').text());
