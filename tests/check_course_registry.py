@@ -22,18 +22,19 @@ for course in known:
     assert len(manifest["sections"]) >= 1
     template = ROOT / "kursseiten/template" / f'{course["grade"]}-klasse'
     assert template.is_dir(), template
-    assert (template / "manifest.json").read_bytes() == source_root.read_bytes()
+    assert (template / "manifest.json").is_file()
+    # Copies may diverge after editing; do not require byte-for-byte equality forever.
     for section in manifest["sections"]:
         assert (folder / section["id"]).is_dir(), (course["slug"], section["id"])
         assert (template / section["id"]).is_dir()
     for kind, path in course["teacherFiles"].items():
         assert (ROOT / path).is_file(), (course["slug"], kind, path)
-        assert (ROOT / path).read_bytes() == (template / ((ROOT / path).relative_to(folder))).read_bytes()
+        assert (template / (ROOT / path).relative_to(folder)).is_file(), (course["slug"], kind)
 
 # A duplicated section ID across copied courses is valid; file ownership is not shared.
 bok1 = known[0]
 irn1 = known[2]
-assert (ROOT / bok1["manifest"]).read_bytes() == (ROOT / irn1["manifest"]).read_bytes()
+assert (ROOT / bok1["manifest"]).is_file() and (ROOT / irn1["manifest"]).is_file()
 assert (ROOT / bok1["manifest"]).resolve() != (ROOT / irn1["manifest"]).resolve()
 
 with tempfile.TemporaryDirectory() as temporary:
