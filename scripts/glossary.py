@@ -1,4 +1,4 @@
-"""Build the two glossary views from one reviewed set of definitions."""
+"""Build each BOK glossary from its own editable course source."""
 from __future__ import annotations
 import html
 import json
@@ -10,7 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def render_glossary(course: str) -> str:
     if course not in {"basis", "vertieft"}:
         raise ValueError("Unbekanntes Glossarniveau")
-    data = json.loads((ROOT / "kursseiten/bok/4-klasse/glossar.json").read_text(encoding="utf-8"))
+    source = ROOT / ("kursseiten/bok/1-klasse/glossar.json" if course == "basis"
+                     else "kursseiten/bok/4-klasse/glossar.json")
+    data = json.loads(source.read_text(encoding="utf-8"))
     terms = data["begriffe"]
     ids = [term["id"] for term in terms]
     if len(ids) != len(set(ids)):
