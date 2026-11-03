@@ -629,7 +629,7 @@ const server=http.createServer((req,res)=>{
     await page.reload();
     await page.locator("#courseSelect").selectOption("basis");
     await page.locator("#editGlossary").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/bok/4-klasse/glossar.json");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/bok/1-klasse/glossar.json");
     assert.equal(await page.locator("#glossaryEditor").isVisible(),true);
     assert.equal(await page.locator("#formEditor").isVisible(),true);
     assert.equal(await page.locator("#splitDivider").isVisible(),true);
@@ -650,7 +650,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#pendingCount").textContent(),"1");
 
     // After changing the course, only advanced fields can be edited; the
-    // previously staged first-year values remain in the shared JSON payload.
+    // previously staged first-year values remain in their own JSON payload.
     await page.locator("#courseSelect").selectOption("vertiefung");
     await page.locator('#section option[value="einstieg"]').waitFor({state:"attached"});
     await page.locator("#editGlossary").click();
@@ -681,16 +681,25 @@ const server=http.createServer((req,res)=>{
     await page.locator("#toggleChanges").click();
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
-    assert.equal(submitted.changes.length,1);
-    assert.equal(submitted.changes[0].path,"kursseiten/bok/4-klasse/glossar.json");
-    const submittedGlossary=JSON.parse(submitted.changes[0].content);
-    assert.equal(submittedGlossary.begriffe.length,30);
-    const token=submittedGlossary.begriffe.find(t=>t.id==="token");
-    assert.equal(token.basis,"Ein Token ist ein Wort oder ein Stück davon.");
-    assert.equal(token.vertieft,"Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");
-    assert.match(token.basisBeispiel,/ersten Klasse/);
-    assert.match(token.vertieftBeispiel,/Tokenfolgen/);
-    assert(submittedGlossary.begriffe.some(t=>t.id==="testglossarbegriff"));
+    assert.equal(submitted.changes.length,2,"First- and fourth-year glossary edits must remain separate.");
+    const basisChange=submitted.changes.find(x=>x.path==="kursseiten/bok/1-klasse/glossar.json");
+    const fourthChange=submitted.changes.find(x=>x.path==="kursseiten/bok/4-klasse/glossar.json");
+    assert(basisChange&&fourthChange,"Both independent glossary files must be published.");
+    const basisGlossary=JSON.parse(basisChange.content);
+    const advancedGlossary=JSON.parse(fourthChange.content);
+    assert.equal(basisGlossary.begriffe.length,29);
+    assert.equal(advancedGlossary.begriffe.length,30);
+    const tokenBasis=basisGlossary.begriffe.find(t=>t.id==="token");
+    const tokenAdvanced=advancedGlossary.begriffe.find(t=>t.id==="token");
+    assert.equal(tokenBasis.basis,"Ein Token ist ein Wort oder ein Stück davon.");
+    assert.match(tokenBasis.basisBeispiel,/ersten Klasse/);
+    assert.notEqual(tokenAdvanced.basis,tokenBasis.basis,
+      "Editing the first-year glossary must not change the fourth-year source.");
+    assert.equal(tokenAdvanced.vertieft,"Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");
+    assert.match(tokenAdvanced.vertieftBeispiel,/Tokenfolgen/);
+    assert(basisGlossary.begriffe.every(t=>t.id!=="testglossarbegriff"),
+      "New fourth-year terms must not appear automatically in the first-year copy.");
+    assert(advancedGlossary.begriffe.some(t=>t.id==="testglossarbegriff"));
 
     // Notebook block belongs to the selected chapter and creates two files
     // atomically: a valid .ipynb and the chapter that embeds it.
