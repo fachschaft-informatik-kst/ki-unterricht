@@ -30,12 +30,30 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 .concept-figure{margin:24px 0;background:white;border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center}
 .concept-figure img{display:block;width:100%;max-width:700px;height:auto;margin:auto}
 .concept-figure figcaption{max-width:610px;margin:15px auto 0;color:var(--muted);font-size:13px}
-#sicherung.project-transfer{margin:34px 0;padding:28px;background:var(--soft);border-top:5px solid var(--accent)}
-.project-transfer-actions{display:grid;gap:18px;margin:24px 0}
-.project-transfer-primary{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.project-transfer-primary #download-backup{min-height:52px;padding:13px 22px;font-size:17px;font-weight:700}
-.project-submission-action{display:flex;flex-wrap:wrap;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:15px}
-.project-submission-action p{margin:0}
+#sicherung.project-transfer{margin:28px 0;padding:14px 0 42px;background:transparent;border-top:0}
+.transfer-flow{display:grid;gap:17px;margin:28px 0 14px}
+.transfer-step{padding:26px 28px}
+.transfer-step-heading{display:flex;gap:15px;align-items:flex-start;margin-bottom:16px}
+.transfer-step-number{flex:0 0 38px;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:var(--soft);color:var(--accent);font-size:17px;font-weight:750}
+.transfer-step-heading h2{font-size:clamp(1.25rem,2.5vw,1.55rem);margin:0 0 4px}
+.transfer-step-heading p{color:var(--muted);font-size:14px;line-height:1.5;margin:0}
+.transfer-step .field{margin:10px 0}
+.transfer-step .attachment-list:empty{display:none}
+.project-transfer-primary{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:15px}
+.project-transfer-primary .btn{min-height:48px}
+.project-transfer-primary #download-backup{font-weight:700}
+.project-submission-action{display:flex;flex-wrap:wrap;gap:12px;margin:17px 0}
+.project-submission-action .btn{font-weight:700}
+.transfer-check{padding:14px 17px;border-radius:10px;border:1px solid var(--line);background:var(--paper);font-size:14px}
+.transfer-check p{margin:0}
+.transfer-check ul{margin:10px 0 0;padding-left:20px}
+.transfer-check li{margin:4px 0}
+.transfer-check.complete{border-color:var(--accent);background:var(--soft)}
+.transfer-download-status{font-size:14px;min-height:1.5em}
+.transfer-help{margin:12px 0}
+.transfer-help .detail-body{font-size:14px}
+.transfer-help .actions{margin:12px 0}
+.transfer-help input[type=file]{font-size:13px}
 .external-map{margin:24px 0;background:white;border:1px solid var(--line);border-radius:8px;padding:10px}
 .external-map iframe{display:block;width:100%;height:680px;border:0;background:white}
 .external-map figcaption{padding:12px 8px 4px;color:var(--muted);font-size:13px}
@@ -62,7 +80,7 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 .turing-activity p{margin-bottom:12px}
 @media(max-width:720px){.lesson-plan summary{flex-wrap:wrap}.lesson-plan summary small{display:none}.phase-table{font-size:13px}.phase-table th.phase{width:90px}.phase-table td.wer{width:84px}.concept-figure{padding:15px}}
 @media(max-width:720px){.external-map{padding:6px}.external-map iframe{height:620px}}
-@media(max-width:720px){#sicherung.project-transfer{padding:22px 17px}.project-transfer-primary{display:grid;grid-template-columns:1fr}.project-transfer-primary .btn{width:100%;text-align:center}.project-submission-action{align-items:flex-start;flex-direction:column}}
+@media(max-width:720px){#sicherung.project-transfer{padding:6px 0 28px}.transfer-step{padding:18px 16px}.transfer-step-heading{gap:10px}.transfer-step-number{width:32px;height:32px;flex-basis:32px}.project-transfer-primary{display:grid;grid-template-columns:1fr}.project-transfer-primary .btn{width:100%;justify-content:center;text-align:center}.project-submission-action{align-items:stretch}.project-submission-action .btn{width:100%;justify-content:center}}
 
 .nav span{width:38px}
 .task{background:var(--soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0}
