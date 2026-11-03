@@ -72,7 +72,7 @@ const ROOT=path.resolve(__dirname,"..");
     assert.equal(await page.locator("#teacherCourseSelect option").count(),4);
     assert.equal(await page.locator('#teacherCourseSelect option:disabled').count(),0);
     assert.match(await page.locator("#teacherCourseSelect").innerText(),/IRN · 1. Klasse/);
-    assert.match(await page.locator(".course-picker-note").innerText(),/in Vorbereitung/);
+    assert.doesNotMatch(await page.locator(".course-picker-note").innerText(),/in Vorbereitung/);
     assert.match(await page.locator(".course-context").innerText(),/BOK · 4. Klasse/);
 
     assert.equal(await page.locator("#lessonNav a").count(),10);
