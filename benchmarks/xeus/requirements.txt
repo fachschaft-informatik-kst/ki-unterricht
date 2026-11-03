@@ -1,0 +1,5 @@
+# Optional benchmark environment. Not included in the BOK/IRN production site.
+jupyterlite-core==0.8.7
+jupyterlite-xeus>=5.0,<6
+jupyterlab~=4.6.0
+nbformat>=5.9,<6
