@@ -82,8 +82,10 @@ const server=http.createServer((req,res)=>{
       await page.waitForFunction(()=>document.querySelector("#pendingCount")?.textContent==="1");
       assert((await page.locator("#staged").innerText()).includes(material),slug+" staged file outside course root");
       await page.locator("#toggleChanges").click();
+      const sent=page.waitForResponse(response=>response.url().includes("/api/publish")&&response.request().method()==="POST");
       await page.locator("#publish").click();
-      await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#999"));
+      await sent;
+      await page.waitForFunction(()=>document.querySelector("#pendingCount")?.textContent==="0");
       assert.equal(submitted.changes.length,1,slug+" must submit one file");
       assert.equal(submitted.changes[0].path,material);
       assert(submitted.changes[0].content.includes("Regressionstest "+profile.id));
