@@ -155,11 +155,11 @@ if(d.type==='changed'&&ready&&!restoring){try{saved[current]=validate(d.notebook
 window.addEventListener('hashchange',()=>{if(current)mount();});
 const backupControls=document.getElementById('basis-backup-controls');
 const backupStatus=document.getElementById('basis-backup-status');
-const backup=document.createElement('button');backup.className='btn compact';backup.textContent='Gesamten Kursstand als ZIP sichern';backup.type='button';backup.classList.add('primary');
-const restore=document.createElement('input');restore.type='file';restore.accept='.zip';restore.style.display='block';restore.setAttribute('aria-label','ZIP-Kursstand wiederherstellen');const restoreLabel=document.createElement('label');restoreLabel.textContent='Gesicherten Kursstand (ZIP) laden';restoreLabel.append(restore);
-const photoInput=document.createElement('input');photoInput.type='file';photoInput.accept='.json';photoInput.setAttribute('aria-label','Fotostudio-JSON zur ZIP-Sicherung hinzufügen');const photoLabel=document.createElement('label');photoLabel.textContent='Fotostudio-JSON in die ZIP-Sicherung aufnehmen';photoLabel.append(photoInput);photoInput.style.display='block';
+const backup=document.createElement('button');backup.className='btn compact';backup.textContent='Kursstand als ZIP herunterladen ↓';backup.type='button';backup.classList.add('primary');
+const restore=document.createElement('input');restore.type='file';restore.accept='.zip';restore.style.display='block';restore.setAttribute('aria-label','ZIP-Kursstand wiederherstellen');const restoreLabel=document.createElement('label');restoreLabel.textContent='ZIP wiederherstellen ↑';restoreLabel.append(restore);
+const photoInput=document.createElement('input');photoInput.type='file';photoInput.accept='.json';photoInput.setAttribute('aria-label','Fotostudio-JSON zur ZIP-Sicherung hinzufügen');const photoLabel=document.createElement('label');photoLabel.textContent='Fotostudio-JSON hinzufügen (optional)';photoLabel.append(photoInput);photoInput.style.display='block';
 photoInput.addEventListener('change',async()=>{const file=photoInput.files?.[0];if(!file)return;try{const content=await file.text(),obj=JSON.parse(content);if(obj.schema!=='fotostudio-v1')throw Error('Keine Fotostudio-JSON');photoJSON={name:file.name,content};await persist();renderRecoveredFiles();document.getElementById('basis-save-status').textContent='Fotostudio-JSON für ZIP vorgemerkt.';backupStatus.textContent='Fotostudio-JSON hinzugefügt. Nun Kursstand als ZIP sichern.';}catch(e){alert(e.message);}});
-const recovered=document.createElement('div');recovered.id='basis-restored-files';
+const recovered=document.createElement('details');recovered.id='basis-restored-files';recovered.className='basis-transfer-recovered';recovered.hidden=true;
 function downloadBytes(data,name,type='application/octet-stream'){
  const blob=data instanceof Blob?data:new Blob([data],{type});
  const url=URL.createObjectURL(blob),a=document.createElement('a');
@@ -169,15 +169,18 @@ function renderRecoveredFiles(){
  recovered.replaceChildren();
  const files=Object.entries(notebookUploads).flatMap(([notebook,items])=>(items||[]).map(item=>({notebook,...item})));
  if(photoJSON?.content)files.unshift({name:photoJSON.name||'fotostudio.json',type:'application/json',content:btoa(unescape(encodeURIComponent(photoJSON.content))),notebook:'Fotostudio'});
+ recovered.hidden=!files.length;
  if(!files.length)return;
- const heading=document.createElement('p');heading.textContent='Wiederhergestellte Fotodaten und Notebook-Uploads (für erneuten Import herunterladen):';recovered.append(heading);
+ const heading=document.createElement('summary');heading.textContent='Wiederhergestellte Fotodaten und Notebook-Dateien erneut herunterladen ('+files.length+')';recovered.append(heading);
  for(const file of files){
   const b=document.createElement('button');b.type='button';b.className='btn compact';b.textContent=file.notebook+': '+file.name;
   b.addEventListener('click',()=>downloadBytes(Uint8Array.from(atob(file.content),c=>c.charCodeAt(0)),file.name,file.type));
   recovered.append(b);
  }
 }
-backupControls.append(backup,restoreLabel,photoLabel,recovered);
+const photoGroup=document.createElement('div');photoGroup.className='basis-transfer-photo';photoGroup.append(photoLabel);
+const actionsGroup=document.createElement('div');actionsGroup.className='basis-transfer-buttons';actionsGroup.append(backup,restoreLabel);
+backupControls.append(photoGroup,actionsGroup,recovered);
 loaded.then(renderRecoveredFiles);
 function answers(){return Object.fromEntries([...document.querySelectorAll('[data-basis-answer]')].map(f=>[f.dataset.basisAnswer,f.value]));}
 // The JSON retains raw values for ZIP restore; this view explains them to pupils and teachers.
@@ -218,7 +221,7 @@ for(const [n,files] of Object.entries(notebookUploads))if(notebookNames.includes
  data.uploads.push({notebook:n,path,name:f.name,type:f.type});
 }
 entries[0].data=JSON.stringify(data,null,2);
-const zip=await makeZip(entries);const url=URL.createObjectURL(zip),a=document.createElement('a');a.href=url;a.download='KI-1-Klasse-Kursstand.zip';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);status.textContent='ZIP mit lesbarem Journal und Notebook-Ständen erstellt.';backupStatus.textContent='ZIP mit Journal.html, Notebooks und angehängten Daten erstellt.';}catch(e){status.textContent='ZIP nicht erstellt: '+e.message;backupStatus.textContent='ZIP nicht erstellt: '+e.message;}finally{backup.disabled=false;}});
+const zip=await makeZip(entries);const url=URL.createObjectURL(zip),a=document.createElement('a');a.href=url;a.download='KI-1-Klasse-Kursstand.zip';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);status.textContent='Kursstand als ZIP gespeichert.';backupStatus.textContent='ZIP heruntergeladen. Für einen Gerätewechsel hier über «ZIP wiederherstellen» laden. Für die Abgabe Journal.html prüfen und die ZIP einreichen.';}catch(e){status.textContent='ZIP nicht erstellt: '+e.message;backupStatus.textContent='ZIP nicht erstellt: '+e.message;}finally{backup.disabled=false;}});
 restore.addEventListener('change',async()=>{const file=restore.files?.[0];if(!file)return;try{await loaded;const files=await readZip(file);if(!files.has('kursstand.json'))throw Error('kursstand.json fehlt.');const raw=JSON.parse(await files.get('kursstand.json').text());if(raw.schema!==SCHEMA||!raw.answers||!Array.isArray(raw.notebooks)||raw.notebooks.some(n=>!notebookNames.includes(n)))throw Error('Ungültiger Kursstand.');const next={};for(const n of raw.notebooks){const blob=files.get('notebooks/'+n);if(!blob)throw Error('Notebook fehlt: '+n);next[n]=validate(JSON.parse(await blob.text()));}
 if(raw.archived!==undefined&&(!Array.isArray(raw.archived)||raw.archived.some(n=>!notebookNames.includes(n))))throw Error('Ungültiges Notebook-Archiv.');
 const nextLegacy={};for(const n of raw.archived||[]){const blob=files.get('notebooks/archiv/'+n);if(!blob)throw Error('Archiviertes Notebook fehlt: '+n);nextLegacy[n]=validate(JSON.parse(await blob.text()));}
@@ -231,6 +234,9 @@ for(const f of raw.uploads||[]){
  let binary='';for(let i=0;i<bytes.length;i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,i+16384));
  (nextUploads[f.notebook]??=[]).push({name:f.name,type:f.type||'application/octet-stream',content:btoa(binary)});
 }
+let nextPhoto=null;
+if(files.has('fotodaten/fotostudio.json')){const content=await files.get('fotodaten/fotostudio.json').text();if(JSON.parse(content).schema!=='fotostudio-v1')throw Error('Ungültige Fotostudio-JSON');nextPhoto={name:'fotostudio.json',content};}
+if(!confirm('Aktuelle Textantworten, Notebooks und Fotodaten durch diese ZIP ersetzen? Ungesicherte Änderungen gehen verloren.'))return;
 if(current&&ready)await snapshot();
-saved=next;legacyNotebooks=nextLegacy;notebookUploads=nextUploads;if(files.has('fotodaten/fotostudio.json')){const content=await files.get('fotodaten/fotostudio.json').text();if(JSON.parse(content).schema!=='fotostudio-v1')throw Error('Ungültige Fotostudio-JSON');photoJSON={name:'fotostudio.json',content};}else photoJSON=null;await persist();renderRecoveredFiles();for(const f of document.querySelectorAll('[data-basis-answer]')){f.value=typeof raw.answers[f.dataset.basisAnswer]==='string'?raw.answers[f.dataset.basisAnswer]:'';f.dispatchEvent(new Event('input',{bubbles:true}));}current=null;owner=null;ready=false;if(overlay.isOpen)await overlay.close();frame.removeAttribute('src');panel.hidden=true;status.textContent='ZIP geladen. Öffnet ein Notebook, um die gesicherten Zellen wiederherzustellen.';backupStatus.textContent='ZIP geladen: Textfelder und Notebook-Zellen wiederhergestellt. Notebook bei Bedarf neu öffnen und Codezellen ausführen.';if(photoJSON){const blob=new Blob([photoJSON.content],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fotostudio-wiederhergestellt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}document.getElementById('basis-save-status').textContent='Reflexionen aus ZIP wiederhergestellt.';}catch(e){backupStatus.textContent='Wiederherstellung fehlgeschlagen: '+e.message;alert('Wiederherstellung fehlgeschlagen: '+e.message);}finally{restore.value='';}});
+saved=next;legacyNotebooks=nextLegacy;notebookUploads=nextUploads;photoJSON=nextPhoto;await persist();renderRecoveredFiles();for(const f of document.querySelectorAll('[data-basis-answer]')){f.value=typeof raw.answers[f.dataset.basisAnswer]==='string'?raw.answers[f.dataset.basisAnswer]:'';f.dispatchEvent(new Event('input',{bubbles:true}));}current=null;owner=null;ready=false;if(overlay.isOpen)await overlay.close();frame.removeAttribute('src');panel.hidden=true;status.textContent='ZIP geladen. Öffnet ein Notebook, um die gesicherten Zellen wiederherzustellen.';backupStatus.textContent='ZIP wiederhergestellt: Text- und Auswahlantworten sowie Notebookstände übernommen. Notebook bei Bedarf neu öffnen und benötigte Zellen ausführen.';if(photoJSON){const blob=new Blob([photoJSON.content],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fotostudio-wiederhergestellt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}document.getElementById('basis-save-status').textContent='Reflexionen aus ZIP wiederhergestellt.';}catch(e){backupStatus.textContent='Wiederherstellung fehlgeschlagen: '+e.message;alert('Wiederherstellung fehlgeschlagen: '+e.message);}finally{restore.value='';}});
 window.addEventListener('beforeunload',event=>{if(changed){event.preventDefault();event.returnValue='Notebook-Änderungen werden noch gespeichert.';}});
