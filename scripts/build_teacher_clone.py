@@ -86,6 +86,8 @@ def render_clone(course: dict, target: Path) -> None:
             code = code.replace("'ki-kursportal-v1'", "'ki-" + course["id"] + "-v1'")
             code = code.replace("'ki-kursantworten-v1'", "'ki-" + course["id"] + "-antworten-v1'")
             code = code.replace("'ki-last-opened-bok-4'", "'ki-last-opened-" + course["id"] + "'")
+            code = code.replace("'kst-ki-kursportal'", "'kst-ki-" + course["id"] + "'")
+            code = code.replace("indexedDB.open('kst-ki-kursportal'", "indexedDB.open('kst-ki-" + course["id"] + "'")
         if file.name == "notebook-blocks.js":
             code = code.replace('bok\\/1-klasse', 'bok\\/1-klasse|irn\\/1-klasse')
             code = code.replace('bok\\/(?:1|4)-klasse', '(?:bok|irn)\\/(?:1|4)-klasse')
@@ -96,6 +98,15 @@ def render_clone(course: dict, target: Path) -> None:
         script = target / "basis.js"
         script.write_text(script.read_text(encoding="utf-8").replace("kst-ki-basis-", "kst-ki-" + course["id"] + "-"),
                           encoding="utf-8")
+    if course["grade"] == 1:
+        persistence = target / "persistence.js"
+        code = persistence.read_text(encoding="utf-8")
+        code = code.replace("kst-ki-basis", "kst-ki-" + course["id"])
+        code = code.replace("ki-basis-zip", "ki-" + course["id"] + "-zip")
+        code = code.replace("ki-last-opened-bok-1", "ki-last-opened-" + course["id"])
+        code = code.replace("'portal/'+name", "'" + prefix + "'+name")
+        code = code.replace("'portal/'+current", "'" + prefix + "'+current")
+        persistence.write_text(code, encoding="utf-8")
     # No public teacher solutions under a teacher's student course route.
     import shutil
     shutil.rmtree(target / "musterloesungen", ignore_errors=True)
