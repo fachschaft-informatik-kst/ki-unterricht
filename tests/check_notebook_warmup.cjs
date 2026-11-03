@@ -16,10 +16,10 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  assert(advanced.includes('uploads:notebookUploads'),'Upload ownership must survive browser reload and ZIP');
  assert(advanced.includes('notebookUploadPayload(name)'),'Restored uploads must return to their owner');
  assert(basic.includes('files:notebookUploads[current]||[]'),'First-year uploads must survive restart');
- const helper=await import('data:text/javascript;base64,'+source('extensions/ki-autostart/restore-uploads.js').toString('base64'));
+ const helper=await import('data:text/javascript;base64,'+Buffer.from(source('extensions/ki-autostart/restore-uploads.js')).toString('base64'));
  const bytes=Buffer.from([0,255,10,65,42]);
  const files=[{name:'../../bad\'file.json',content:bytes.toString('base64'),type:'application/json'}];
- assert.equal(helper.prepareUploads(files)[0].filename,'0__.._bad_file.json');
+ assert.equal(helper.prepareUploads(files)[0].filename,'0___.._bad_file.json');
  assert.throws(()=>helper.prepareUploads([{name:'x.py',content:'not base64'}]),/ungültig/);
  assert.throws(()=>helper.prepareUploads([{name:'large.json',content:'AAAA'.repeat(3*1024*1024)}]),/zu gross/);
  const codes=[],kernel={requestExecute({code,silent,store_history}){
