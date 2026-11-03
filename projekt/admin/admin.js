@@ -1020,6 +1020,8 @@ function addChapter(){
 function stage(){
   const c=state.current;if(!c)throw Error("Kein Kapitel geladen.");
   if(notebookPath(c.path)&&runtimeDirty)throw Error("Notebook wurde verändert. Vor dem Vormerken bitte «Notebook-Stand übernehmen» wählen.");
+  const unrelated=[...state.staged.keys()].filter(path=>path.startsWith("kurse/")&&!path.startsWith(courseProfile().root+"/"));
+  if(unrelated.length)throw Error("Es sind noch Änderungen eines anderen Kurses vorgemerkt. Bitte zuerst diese Änderungen einreichen oder verwerfen.");
   const content=$("source").value;if(!content.trim())throw Error("Kapitel darf nicht leer sein.");
   if(c.path.endsWith("/planung.json")){
     planner.validate(content);
