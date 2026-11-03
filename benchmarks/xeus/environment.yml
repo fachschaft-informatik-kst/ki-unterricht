@@ -1,0 +1,10 @@
+# Standalone Xeus Python kernel; no Pyodide packages or classroom sessions.
+name: xeus-python-kernel
+channels:
+  - https://prefix.dev/emscripten-forge-dev
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - matplotlib
+  - ipywidgets
