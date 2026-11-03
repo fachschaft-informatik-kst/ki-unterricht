@@ -327,7 +327,7 @@ export function teacherShell(route,courses=normalizeTeacherCourses({version:1,co
     '<div class="course-switcher"><div class="course-picker">'+
     '<label for="teacherCourseSelect">Kurs auswählen</label>'+
     '<select id="teacherCourseSelect" aria-label="Lehrperson und Klasse auswählen">'+opts+'</select>'+
-    '<p class="course-picker-note">Jeder Kurs besitzt eigene Kapitel und Lehrpersonenmaterialien. Entwürfe sind nur für Berechtigte bearbeitbar.</p>'+
+    '<p class="course-picker-note">Jeder Kurs besitzt eigene Kapitel und Lehrpersonenmaterialien. Kurse in Vorbereitung sind im Editor bearbeitbar, aber öffentlich noch nicht freigeschaltet.</p>'+
     '</div><div class="course-context"><span>Aktueller Kurs</span><strong>'+esc(label)+'</strong>'+
     '<small>'+esc(active.name)+'</small></div></div>'+
     '<h1>'+esc(title)+'</h1><nav class="area-nav" aria-label="Lehrpersonenmaterial">'+nav+'</nav></div></header>'+
