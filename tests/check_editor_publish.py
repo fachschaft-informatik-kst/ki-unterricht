@@ -41,7 +41,7 @@ def verify_course(manifest_path):
 
 models = {path: verify_course(path) for path in MANIFESTS}
 
-for kind, manifest_path in (("projekt", MANIFESTS[0]), ("basis", MANIFESTS[1])):
+for kind, manifest_path in (("projekt", "kursseiten/manifest.json"), ("basis", "kursseiten/basis-manifest.json")):
     manifest, lessons = models[manifest_path]
     directory = ROOT / "_build" / "site" / kind
     index = directory / "index.html"
@@ -96,4 +96,4 @@ for kind, manifest_path in (("projekt", MANIFESTS[0]), ("basis", MANIFESTS[1])):
     )
     print(f"PASS {kind}: {len(lessons)} lessons, matching student/teacher pages and unique saved keys")
 
-print("PASS all four editable course models and both published portals")
+print(f"PASS {len(models)} editable course models and both legacy published portals")
