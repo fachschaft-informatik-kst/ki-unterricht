@@ -198,6 +198,24 @@ document.querySelector('main > .footer').before(lab);$('lesson-lab').remove();
 const overlay=bindNotebookDialog(lab);
 function request(frame,type,extra={}){return new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet noch nicht. Warten und erneut versuchen.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer,source:frame.contentWindow});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
 function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!overlay.isOpen||!activeName||!view||view.classList.contains('view-hidden');}
+// Copy only uploads that belong to this notebook into its new kernel.
+ // The original blobs remain in IndexedDB and the project ZIP, even when an
+ // upload is larger than the safe automatic-restaging limit.
+async function notebookUploadPayload(name){
+ const refs=Array.isArray(notebookUploads[name])?notebookUploads[name]:[];
+ const result=[];
+ let total=0;
+ for(const ref of refs.slice(0,30)){
+  const blob=files.get(ref.id);
+  if(!blob||blob.size>8*1024*1024||total+blob.size>16*1024*1024)continue;
+  total+=blob.size;
+  const bytes=new Uint8Array(await blob.arrayBuffer());
+  let binary='';
+  for(let i=0;i<bytes.length;i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,i+16384));
+  result.push({name:ref.name,type:ref.type,content:btoa(binary)});
+ }
+ return result;
+}
 async function snapshotCurrent(){
  await notebookUpdates;
  if(!activeName)return;
@@ -270,7 +288,7 @@ window.addEventListener('message',async event=>{
    const saved=name===projectName?notebook:others[name];
    notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Python ist gestartet. Notebook wird angezeigt …');
    let restored=null;
-   if(saved){restored=await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
+   if(saved){const uploadFiles=await notebookUploadPayload(name);if(activeName!==name)return;restored=await request(frame,'restore',{notebook:saved,keepKernel:true,files:uploadFiles});frame.dataset.restored='yes';}
    // No initial snapshot: the published notebook is already available.
    // Edits trigger autosave; switching notebooks or downloading a ZIP still
    // takes a fresh snapshot of the currently running kernel.
@@ -283,6 +301,8 @@ window.addEventListener('message',async event=>{
        ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
        : 'Gesicherter Stand geladen · veränderte Startzellen bitte manuell ausführen.'
      : 'Bereit · Änderungen werden automatisch gesichert.';
+   if(restored?.uploadError)$('project-lab-status').textContent+=' · Uploads: '+restored.uploadError;
+   else if(restored?.uploadsRestored)$('project-lab-status').textContent+=' · '+restored.uploadsRestored+' Upload-Datei(en) wiederverwendbar.';
 
   }catch(error){
    if(activeName===name){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
