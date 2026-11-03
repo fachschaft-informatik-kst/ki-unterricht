@@ -795,6 +795,9 @@ const server=http.createServer((req,res)=>{
     await page.locator("#notebookExisting").selectOption("kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb");
     assert.equal(await page.locator("#insertExistingNotebook").isEnabled(),true);
     await page.locator("#closeNotebookPanel").click();
+    // Discard the BOK4 test draft before staging an independent BOK1 notebook.
+    // The worker intentionally disallows mixing teachers/classes in one PR.
+    await page.reload();
 
     // The first-year course uses a different notebook prefix and blue theme.
     await page.locator("#courseSelect").selectOption("basis");
