@@ -1,14 +1,14 @@
 {
   "lessons": [
     {
-      "id": "01",
+      "id": "b01",
       "view": "einstieg",
       "title": "Was ist KI?",
-      "goal": "KI von automatisierten Programmen unterscheiden, KI, maschinelles Lernen, Deep Learning und generative KI einordnen sowie schwache und starke KI an Beispielen gegenüberstellen.",
-      "question": "Leitfrage: Ist jedes automatisch arbeitende Programm eine KI?",
+      "goal": "An vier Beispielen feste Regeln und Lernen aus Daten unterscheiden, fünf weitere Fälle der passenden KI-Kategorie zuordnen, zwei Grenzfälle begründen und die Leitfrage mit einem eigenen Beispiel beantworten.",
+      "question": "Leitfrage: Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
-      "product": "Vier Regel-/Daten-Zuordnungen, fünf begründet klassifizierte KI-Beispiele, zwei besprochene Grenzfälle und eine reflektierte Antwort auf die Leitfrage.",
-      "zeit": "Asimovs Gesetze werden kurz angeschnitten; die ausführliche ethische Diskussion folgt in Doppellektion 10. Die Meilensteine sind freiwillige Vertiefung.",
+      "product": "Neun überprüfte Beispielzuordnungen, Begründungen zu zwei Grenzfällen, eine begründete Entscheidung zum Fall «Schulweg» mit zwei Argumenten sowie eine eigenständige Antwort auf die Leitfrage. Eigene zusätzliche Beispiele sind freiwillig.",
+      "zeit": "90 Minuten: Ankommen 5, Vorwissen aktivieren 10, Informieren 20, Verarbeiten 45, Auswerten 10. Keine Zeitreserve; Präsentationen der Vierergruppen erfolgen sehr kurz und ohne eigenes Zeitfenster.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -19,24 +19,24 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 1,
-              "text": "Zeigt zwei Saugroboter: einer fährt feste Bahnen, einer erstellt beim Fahren eine Karte. Stellt die Frage «Wann nennen Sie ein System intelligent?»."
+              "text": "Zeigt eine Tabelle aus dem Materialkoffer mit zwei Saugrobotern: Einer fährt feste Bahnen, der andere erstellt während der Fahrt eine Karte. Stellt die Frage: «Wann nennen Sie ein System intelligent?»"
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 2,
-              "text": "Notieren Sie allein ein Kriterium für Intelligenz und Ihre Einschätzung zu den Robotern."
+              "text": "Notieren Sie ein Kriterium für Intelligenz und Ihre Einschätzung zu den beiden Robotern auf ein Blatt Papier."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 2,
-              "text": "Vergleichen Sie Ihre Einschätzungen zu den Robotern."
+              "text": "Vergleichen Sie Ihre Einschätzungen. Sind beide Roboter intelligent? Welches System erfüllt Ihr Kriterium besser?"
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein erstes Kriterium für «intelligent»."
+              "text": "Ein erstes Kriterium dafür, wann ein System als «intelligent» bezeichnet werden kann."
             }
           ]
         },
@@ -48,25 +48,19 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 5,
-              "text": "Schreiben Sie Wenn-dann-Regeln, um Katzen und Hunde auf Fotos zu unterscheiden. Prüfen Sie Ihre Regeln an zwei Gegenbeispielen und markieren Sie eine Lücke."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Sammelt zwei Regeln mit Gegenbeispielen. Daraus entsteht die Frage: Können wir statt Regeln Beispiele geben?"
+              "min": 8,
+              "text": "Schreiben Sie mindestens fünf Wenn-dann-Regeln auf ein Blatt Papier, mit denen Katzen und Hunde auf Fotos unterschieden werden können. Geben Sie das Blatt anschliessend im Uhrzeigersinn weiter. Suchen Sie beim erhaltenen Regelwerk zwei Gegenbeispiele, welche die Regeln widerlegen."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 3,
-              "text": "Vergleichen Sie zwei Regelideen und benennen Sie gemeinsam eine Lücke."
+              "min": 2,
+              "text": "Sammeln und besprechen Sie ausgewählte Regeln und passende Gegenbeispiele."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Regeln und eine begründete Grenze der Regeln."
+              "text": "Aus den Regeln, die immer wieder durch Gegenbeispiele widerlegt werden, entsteht die Frage: «Können wir statt Regeln Beispiele geben?»"
             }
           ]
         },
@@ -79,54 +73,54 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 15,
-              "text": "Erklärt zusammenhängend anhand der Kursgrafiken Regeln von Menschen gegenüber Lernen aus Daten sowie KI, maschinelles Lernen, Deep Learning und generative KI. Verwendet durchgehend Bilderkennung und ergänzt ein regelbasiertes Schachprogramm. Stellt nur schwache KI (für bestimmte Aufgabenbereiche) und hypothetische starke KI (allgemeine Intelligenz) gegenüber; Bewusstsein ist dafür keine Voraussetzung. Keine zusätzlichen Mini-Aufträge zwischen den Erklärungen."
+              "text": "Erklärt anhand der Kursgrafiken den Unterschied zwischen menschlich festgelegten Regeln und dem Lernen aus Daten. Ordnet die Begriffe KI, maschinelles Lernen, Deep Learning und generative KI ein. Verwendet durchgehend Bilderkennung als Beispiel und ergänzt ein regelbasiertes Schachprogramm. Unterscheidet schwache KI (spezifische Aufgaben) und hypothetische starke KI (allgemeine Intelligenz), ohne Bewusstsein als Voraussetzung darzustellen. Bespricht die Meilensteine der KI-Entwicklung kurz. Die Erklärung bleibt bewusst kompakt, damit die Schülerinnen und Schüler die Inhalte anschliessend selbst explorativ vertiefen und die Entdeckerfrage beantworten können. Keine zusätzlichen Zwischenaufträge."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Ordnen Sie einen Spamfilter gemeinsam ein und klären Sie Ihre Fragen zu den Begriffen."
+              "text": "Ordnen Sie einen Spamfilter gemeinsam in die besprochenen Kategorien ein und klären Sie offene Begriffsfragen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine gemeinsame Beispieleinordnung als Orientierung."
+              "text": "Eine gemeinsame Einordnung eines Beispiels als Orientierung für die anschliessende selbstständige Arbeit."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Vorgegebene Beispiele präzise einordnen",
+          "titel": "Beispiele einordnen und ethische Fragen diskutieren",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 30,
-              "text": "Ordnen Sie vier Beispiele nach festen Regeln oder Datenlernen und fünf weitere nach der spezifischsten KI-Kategorie ein. Prüfen Sie Ihre Zuordnung, begründen Sie zwei Grenzfälle (Regel-KI versus Automatisierung sowie Entscheidungsbaum versus Deep Learning) und halten Sie Unsicherheiten fest. Eigene Beispiele sind eine freiwillige Vertiefung."
+              "text": "Ordnen Sie vier Beispiele nach festen Regeln oder Lernen aus Daten und fünf weitere nach der jeweils spezifischsten KI-Kategorie ein. Überprüfen Sie Ihre Zuordnungen und begründen Sie zwei Grenzfälle: Regelbasierte KI versus Automatisierung und Entscheidungsbaum versus Deep Learning. Halten Sie offene Fragen und Unsicherheiten fest. Eigene Beispiele sind eine freiwillige Vertiefung."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 5,
-              "text": "Stellt die drei Gesetze der Robotik von Isaac Asimov (1942) kurz vor und zeigt den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen und gefährdet dabei den Fahrgast."
+              "text": "Stellt die drei Robotergesetze von Isaac Asimov (1942) kurz vor und präsentiert den Fall «Schulweg»: Ein selbstfahrendes Taxi muss ausweichen und gefährdet dabei seinen Fahrgast."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Entscheiden Sie allein, was das Auto im Fall «Schulweg» tun soll, und notieren Sie einen Grund."
+              "text": "Entscheiden Sie, was das selbstfahrende Taxi im Fall «Schulweg» tun sollte, und notieren Sie eine Begründung."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Vergleichen Sie die Einzelentscheidungen. Welches Gesetz greift, und wer legt fest, was «Schaden» heisst? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite)."
+              "text": "Vergleichen Sie Ihre Entscheidungen. Welches der Robotergesetze kommt zur Anwendung? Wer bestimmt, was als «Schaden» gilt? Halten Sie zwei Argumente fest (Kapitel 5 der Kursseite)."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Neun überprüfte Zuordnungen, zwei begründete Grenzfälle und zwei Argumente zum Fall «Schulweg»."
+              "text": "Ausgewählte Vierergruppen präsentieren ihre Entscheidungen und Begründungen. Gemeinsame Diskussionsfrage: «Gibt es eine eindeutig richtige Antwort?» (Sehr kurz, ohne eigenes Zeitfenster.)"
             }
           ]
         },
@@ -139,24 +133,24 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Bespricht zwei strittige Zuordnungen. Klärt: Ein Programm mit festen Regeln kann KI sein, lernt aber nicht aus Daten; nicht jede Automatisierung ist KI."
+              "text": "Klärt die zentralen Unterschiede: Ein Programm mit festen Regeln kann KI sein, lernt aber nicht aus Daten. Nicht jede Automatisierung ist KI."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 3,
-              "text": "Teilen Sie zwei strittige Beispielzuordnungen und prüfen Sie gemeinsam die Begründungen."
+              "text": "Besprechen Sie zwei strittige Beispielzuordnungen und überprüfen Sie gemeinsam deren Begründungen."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Beantworten Sie die Leitfrage mit einem eigenen Beispiel und erklären Sie den Unterschied zwischen festen Regeln und Lernen aus Daten."
+              "text": "Beantworten Sie die Leitfrage anhand eines eigenen Beispiels. Erklären Sie dabei den Unterschied zwischen festen Regeln und dem Lernen aus Daten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine eigene begründete Antwort auf die Leitfrage."
+              "text": "Eine eigenständige, begründete Antwort auf die Leitfrage."
             }
           ]
         }
