@@ -128,7 +128,7 @@ def build(out: Path) -> None:
                 raise FileNotFoundError(origin / "index.html")
             shutil.copytree(origin, target, ignore=(
                 (lambda folder, names: ["admin"] if Path(folder) == origin and "admin" in names else [])
-                if source == "projekt" else None
+                if origin.name == "projekt" else None
             ))
             if course["teacher"] == "IRN":
                 from build_teacher_clone import render_clone
