@@ -267,7 +267,8 @@ window.addEventListener('message',async event=>{
    notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Start abgeschlossen. Ergebnisse werden gesichert …');
    let restored=null;
    if(saved){restored=await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
-   else await captureSnapshot(name,await request(frame,'snapshot'));
+   // A large Python/widget snapshot must not block the visible Python session.
+   // An explicit snapshot is still required on notebook switch and ZIP export.
    if(activeName!==name)return; // An older warmup was superseded.
    frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';
    trackNotebookReady(name);
@@ -276,7 +277,24 @@ window.addEventListener('message',async event=>{
      ? restored?.widgets?.activated
        ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
        : 'Gesicherter Stand geladen · veränderte Startzellen bitte manuell ausführen.'
-     : 'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
+     : 'Bereit · Änderungen werden automatisch gesichert.';
+   if(!saved) {
+    // Keep the first full widget snapshot off the critical startup path.
+    // It is superseded by auto-save if the learner starts editing first.
+    const opened=name;
+    setTimeout(()=>{
+     if(activeName!==opened||frame.dataset.ready!=='yes'||notebookRevision||transferring)return;
+     notebookUpdates=notebookUpdates.then(async()=>{
+      if(activeName!==opened||frame.dataset.ready!=='yes'||notebookRevision)return;
+      const initial=await request(frame,'snapshot');
+      if(activeName===opened)await captureSnapshot(opened,initial);
+     }).catch(error=>{
+      if(activeName!==opened)return;
+      notebookDirty=true;
+      status('Notebook bereit, automatische Sicherung fehlgeschlagen: '+error.message,true);
+     });
+    },1800);
+   }
   }catch(error){
    if(activeName===name){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
   }finally{if(activeName===name)initializingFrame=false;}
