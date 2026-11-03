@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b09",
+      "view": "basis-abschluss",
+      "title": "Bildprojekt IV: individuelle Fachgespräche",
+      "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
+      "goal": "Eigene Modellresultate im individuellen Fachgespräch verständlich erklären und einen fairen Test kritisch beurteilen.",
+      "question": "Welche Ergebnisse dürfen wir aus unserem Versuch ableiten?",
+      "motivation": "Eigene Modellentscheidungen fachlich erklären; die gemeinsame Abgabe wird durch einen individuellen Leistungsnachweis ergänzt.",
+      "product": "Tandemabgabe und individuelle benotete Fachgespräche.",
+      "zeit": "90 Minuten; bei bis zu 20 Lernenden rund 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Bewertung pro Person. Alle Gespräche am selben Datum. Ab 21 Lernenden zusätzliche Prüfstation oder kürzere Gesprächsslots planen.",
+      "order": 80,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Gesprächsplan und Fremdauftrag",
+          "minutes": 3,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Gesprächsreihenfolge, Bewertungskriterien und selbstständige Fremdmodell-Analyse kurz klären. Raster und Vorbereitung sind bereits vor der Lektion zugänglich."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Gesprächsplan liegt bereit."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Drei Gesprächsfragen abrufen",
+          "minutes": 2,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 1,
+              "text": "Die drei bekannten Fragebereiche lediglich sichtbar machen. Keine zusätzliche Prüfungsvorbereitung vor Ort: Gespräche beginnen sofort."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Jede Person kennt die drei Fragebereiche."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Bewertungskriterien klären",
+          "minutes": 2,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 1,
+              "text": "Bewertungskriterien wurden vorab bekannt gegeben. Nur die Startregel und Zeittaktung wiederholen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Bewertungsraster wurde im Projekt ausgeteilt."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Individuelle Fachgespräche",
+          "minutes": 80,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 79,
+              "text": "Bis zu 20 individuelle Fachgespräche à 4 Minuten einschliesslich Wechsel und Kurzbewertung (3½ Minuten Gespräch + ½ Minute Notiz). Andere Lernende bearbeiten die unbenotete Fremdmodell-Analyse ohne Unterbrechung. LP-Hinweis: Bei mehr als 20 Personen zweite Prüfstation oder organisatorische Anpassung; keine Ersatztermine."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Bewertungsbogen pro Person dokumentiert."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Rückblick und Sicherung",
+          "minutes": 3,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Alle notieren einzeln eine eigene Erkenntnis und eine Grenze ihres Bildmodells, ohne das individuelle Prüfungsgespräch zu verlängern."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 1,
+              "text": "Individuelle Reflexion abgeschlossen."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

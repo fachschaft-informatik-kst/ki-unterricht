@@ -1,0 +1,352 @@
+{
+  "lessons": [
+    {
+      "id": "05",
+      "view": "projekt",
+      "title": "Ihr Projekt starten und die Arbeit planen",
+      "rueckblick": "In Doppellektion 4 haben Sie gesehen, weshalb XOR mehrere Neuronen benötigt. Nun starten Sie selbstständig das Bildprojekt und erarbeiten zuerst die Regeln zur fairen Datenaufteilung.",
+      "goal": "Training, Validierung und Test selbstständig unterscheiden, Datenlecks erkennen, einen unabhängigen Fünf-Gruppen-Plan erstellen und die eigene Projektarbeit planen.",
+      "question": "Leitfrage: Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?",
+      "motivation": "Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.",
+      "product": "Ausgefüllter SOL-Selbstcheck zur Datenaufteilung, fünf korrekt getrennte Bildgruppen und eine erste Vermutung mit Etappenplan im Journal.",
+      "zeit": "Doppellektion 5 ist der Start des selbstständigen Arbeitens. Der Datenaufteilungs-Lernpfad liegt vollständig hier und enthält Erklärungen, Musterbeispiele, Übungsfälle, Selbstkontrolle, Fehlersuche und Transfer auf die eigenen fünf Fotogruppen. Die Lehrperson erklärt lediglich den organisatorischen Rahmen, keinen fachlichen Datenaufteilungs-Input. Wer früher fertig ist, arbeitet selbstgesteuert am Projekt weiter; mindestens 10 Minuten Puffer.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "SOL-Auftrag öffnen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Öffnen Sie die selbstständige Lernstrecke «Daten fair aufteilen» im Projektteil und lesen Sie das Ziel. Notieren Sie vorab, wie man beurteilen könnte, ob ein Modell wirklich neue Bilder erkennt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eigene Ausgangsvermutung zum fairen Testen."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Vorwissen zum Netz aktivieren",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Wiederholen Sie allein den Unterschied zwischen einem Trainingsbeispiel und einer neuen Eingabe. Vergleichen Sie danach Ihre Antwort zu zweit; eine Musterantwort steht im Lernpfad."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein erster Vergleich zwischen bekannten und neuen Daten."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Nur den SOL-Rahmen klären",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 10,
+              "text": "Erklärt Ablauf, fünf Reflexionen, Bewertung, Abgabe vor Doppellektion 8 und ZIP-Sicherung. Verweist auf den eigenständig aufgebauten Lernpfad zur Datenaufteilung mit Erklärung, Beispielen und Lösungen. Kein gemeinsamer inhaltlicher Vortrag zu Training, Validierung, Test oder Datenlecks; Hilfe nur auf konkrete Fragen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Organisatorischer Rahmen ist klar; fachliche Regeln erschliessen sich die Lernenden selbst."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Datenaufteilung selbst erarbeiten und Projekt starten",
+          "minutes": 60,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 40,
+              "text": "Bearbeiten Sie in Ihrem eigenen Tempo den SOL-Lernpfad in Kapitel «Datenplan»: Lesen Sie die drei Datenrollen, ordnen Sie Beispiele zu, untersuchen Sie im Notebook «Datenaufteilung» ein Datenleck, kontrollieren Sie sich mit den eingeblendeten Lösungen und übertragen Sie die Regeln auf T1/T2/V1/P1/P2 mit zwei Klassen und acht Fotos je Gruppe. Halten Sie eine Begründung im bestehenden Journal fest. Danach wählen Sie Thema, Tagesziel und Rollen und ergänzen Reflexion 1–2. Wer weiter ist, beginnt das Sammeln oder Importieren; niemand muss heute bereits ein Modell trainieren."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Prüfen Sie einzeln anhand der Selbstkontrolle im Datenplan, ob Ihr Beispiel für P1 ein wirklich neues Exemplar zeigt. Notieren Sie einen möglichen Fehler und die nötige Korrektur."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Frei verfügbarer Puffer für Datenlücken, Notebook-Start, eigene Fragen oder die gründlichere Selbstkontrolle; keine zusätzliche Pflicht."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Selbstständig erarbeitete Datenregeln, begründeter Fünf-Gruppen-Plan und individueller Projektfortschritt."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Selbstkontrolle und Stand sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Prüfen Sie mithilfe der Musterlösung und des abschliessenden SOL-Checks: Unterscheiden wir Training, Validierung und Test? Ist jedes Exemplar genau einer Gruppe zugeordnet? Sind es 80 Bilder insgesamt? Übertragen Sie allfällige Korrekturen in Ihren Datenplan, sichern Sie Journal/Notebook als ZIP und notieren Sie Ihren nächsten Schritt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eigenständig korrigierter Datenplan, gesicherter Arbeitsstand und nächster Schritt."
+            }
+          ]
+        }
+      ],
+      "order": 50
+    },
+    {
+      "id": "06",
+      "view": "projekt",
+      "title": "Untersuchen und Entscheidungen begründen",
+      "rueckblick": "In Doppellektion 5 haben Sie Ihren Lernweg geplant. Heute setzen Sie an Ihrem eigenen Arbeitsstand an, nicht an einem neuen gemeinsamen Rezept.",
+      "goal": "Den eigenen Arbeitsplan steuern und einen fairen Vergleich mit Belegen und alternativen Erklärungen auswerten.",
+      "question": "Leitfrage: Was zeigen unsere Daten, und welche andere Erklärung ist möglich?",
+      "motivation": "Ein gutes Ergebnis ist nicht eine hohe Trefferquote, sondern ein nachvollziehbarer Vergleich und eine ehrliche Interpretation.",
+      "product": "Ein belegter Fortschritt an der gewählten Etappe und ein aktualisierter Plan; bei bereiten Tandems A/B-Auswertung und Auswahlbegründung.",
+      "zeit": "70 Minuten ununterbrochener SOL-Block, davon 10 Minuten Puffer. Kein neuer gemeinsamer Input und keine Synchronisierung aller Tandems. Datencheck, Vergleich und Abschluss sind Etappen, keine festen Lektionstermine.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Am eigenen Stand anknüpfen",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Öffnen Sie Ihren letzten Stand. Nach Import oder Reload führen Sie Vorbereitung und Datenimport bewusst erneut aus. Sehen Sie Ihren letzten nächsten Schritt an."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein wieder arbeitsfähiger Projektstand."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Tagesziel setzen",
+          "minutes": 3,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Wählen Sie ein realistisches Tagesziel und verteilen Sie die Rollen neu. Prüfen Sie, welche Voraussetzung Ihrer Etappe noch fehlt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein eigenes Tagesziel mit Zuständigkeiten."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Benötigte Hilfe selbst wählen",
+          "minutes": 2,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Wählen Sie bei Bedarf eine passende Hilfe im Notebook oder eine konkrete Beratungsfrage. Kein gemeinsamer Input; bei klarem Vorgehen direkt weiterarbeiten."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein passender Zugang zur nächsten Aufgabe."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Selbst organisierte Untersuchung",
+          "minutes": 70,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 50,
+              "text": "Arbeiten Sie an Ihrer gewählten Etappe. Vor jedem A/B-Lauf Daten prüfen; dann Bildzahl, Netz, Epochen und Startwert konstant halten. Lesen Sie Validierung und konkrete Vorhersagen, prüfen Sie eine alternative Erklärung und begründen Sie Ihre Auswahl in Reflexion 3 vor Testeinsicht. Bereite Tandems dürfen bereits abschliessen; andere ergänzen zuerst Daten und Reflexion 1–2. Die Lehrperson fragt in kurzen Beratungen nach Ziel, Beleg und nächstem Schritt; keine Unterbrechung der ganzen Klasse."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Bearbeiten Sie zuerst allein einen klar abgegrenzten Teil Ihrer gewählten Etappe und sichern Sie dazu einen konkreten Beleg. Greifen Sie bei fehlenden Daten weiterhin zuerst diese Lücke auf."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Frei verfügbarer Puffer für Technik, Interpretation oder Beratung. Eine Vertiefung mit weiteren Startwerten ist freiwillig und nur vor Testeinsicht möglich."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Belegte Ergebnisse der gewählten Etappe; keine Pflicht zu einem klassenweit gleichen Stand."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Zeitplan und Abgabe im Blick",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Vergleichen Sie Tagesziel und Ergebnis. Aktualisieren Sie den Etappenplan und den nächsten Schritt im Journal, sichern Sie als ZIP. Wenn die Abgabe gefährdet ist, vereinbaren Sie jetzt mit der Lehrperson eine realistische Lösung innerhalb der Projektregeln."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Gesicherter Fortschritt und ein realistischer Abschlussplan."
+            }
+          ]
+        }
+      ],
+      "order": 60
+    },
+    {
+      "id": "07",
+      "view": "projekt",
+      "title": "Das Projekt abschliessen und die Arbeit überprüfen",
+      "rueckblick": "Sie haben in Ihrem eigenen Tempo Daten geprüft und Varianten verglichen. Heute organisieren Sie den Abschluss und prüfen Ihre Belege.",
+      "goal": "Die Untersuchung selbstständig abschliessen, Grenzen belegen und den eigenen Arbeitsprozess reflektieren.",
+      "question": "Leitfrage: Was können wir mit unseren Ergebnissen begründet behaupten?",
+      "motivation": "Zum selbst organisierten Arbeiten gehört, einen klaren Schluss zu ziehen und ungesicherte Behauptungen sichtbar zu machen.",
+      "product": "Vollständiges Journal, geprüfte ZIP-Abgabe und ein von beiden erklärbares Projekt.",
+      "zeit": "70 Minuten SOL-Block, davon 15 Minuten Abschluss- und Technikpuffer. Kein zusätzlicher Bericht oder vorbereitete Präsentation. Individuelle Gesprächsfenster (je 4 Minuten) und Austauschpartner bereits vor Doppellektion 8 mitteilen.",
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "Arbeitsstand und Frist",
+          "minutes": 5,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Öffnen Sie Ihren Stand und prüfen Sie, was bis zur Abgabe noch fehlt."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine eigene Abschlussliste."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Voraussetzungen prüfen",
+          "minutes": 3,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Prüfen Sie vor dem Abschlusstest: Ist die Auswahl samt Begründung dokumentiert? Sind P1/P2 bisher unangetastet? Nach Testeinsicht wird nichts optimiert."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein selbst durchgeführter Freigabecheck."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Abgabehilfen nach Bedarf",
+          "minutes": 2,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Nutzen Sie Projektauftrag und Raster für fehlende Belege. Lesen Sie die bereits bekannt gegebenen Gesprächszeiten und Austauschregeln; Beratung nur bei konkreten Fragen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Klarheit über den eigenen Abschlussweg."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Abschluss selbst steuern",
+          "minutes": 70,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 45,
+              "text": "Schliessen Sie die noch offenen Etappen ab. Testen Sie die begründet ausgewählte Variante einmal auf P1/P2; untersuchen Sie drei konkrete Beispiele, ohne Fehler zu erfinden. Schreiben Sie Reflexion 4–5 mit Grenzen, Fazit, nächstem Versuch, Arbeitsteilung, Hilfen und einer kurzen Rückschau auf Ihren Etappenplan. Prüfen Sie Journal und Ausgaben mit dem Raster. Erklären Sie sich gegenseitig das ganze Projekt; keine Folien nötig. Bereiten Sie die erlaubten Austauschdateien vor."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 10,
+              "text": "Prüfen Sie allein einen persönlichen Anteil Ihrer Abschlussliste anhand des Rasters und notieren Sie einen noch fehlenden Beleg oder eine offene Frage."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 15,
+              "text": "Puffer für fehlende Belege, technischen Export und Beratung. Datenarbeit bei Bedarf zuerst fertigstellen, nicht zugunsten eines schnellen Tests überspringen. Keine neuen Pflichtversuche."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Eine nachvollziehbare abgeschlossene Untersuchung und vorbereitete Austauschdateien."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Abgabe sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Prüfen Sie das ZIP auf Journal, Notebook mit Ausgaben, Daten und Protokoll. Laden Sie den finalen Stand herunter und reichen Sie ihn spätestens vor Beginn der Doppellektion 8 über den angegebenen Kanal ein. Halten Sie Ihre eigene Fotostudio-JSON für die Fremdauswertung bereit. Der Download allein ist keine Einreichung."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "text": "Ein geprüftes Abgabepaket und Bereitschaft für Gespräch und Austausch."
+            }
+          ]
+        }
+      ],
+      "order": 70
+    }
+  ]
+}
