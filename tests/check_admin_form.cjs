@@ -651,6 +651,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#pendingCount").textContent(),"1");
 
     // Publish the first-year glossary separately: one course per PR.
+    publishFailure=false; // The earlier simulated HTTP 502 must not carry over.
     await page.locator("#toggleChanges").click();
     await page.locator("#publish").click();
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
