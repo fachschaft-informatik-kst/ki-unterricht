@@ -176,12 +176,8 @@ const post=(url,value)=>api(url,{method:"POST",headers:{"Content-Type":"applicat
 const slug=text=>text.trim().toLowerCase().replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const filename=path=>path.split("/").pop().replace(".md","");
 const notebookPath=path=>path.startsWith(coursePath("content/"))&&/\/(?:[a-z0-9_]+\.ipynb)$/.test(path);
-const gradeNotebook=path=>{
-  if(!notebookPath(path))return false;
-  const relative=path.slice(courseProfile().root.length+1);
-  return courseGrade()===1?relative.startsWith("content/basis_"):
-    relative.startsWith("content/")&&!relative.startsWith("content/basis_");
-};
+const gradeNotebook=path=>notebookPath(path);
+const notebookLabPath=path=>"portal/"+(courseProfile().teacher==="BOK"?"":courseProfile().slug+"/")+path.split("/").pop();
 let returnChapterPath=null;
 function notebookReferences(source){
   const items=[...source.matchAll(/data-notebook=["'](content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb)["']/g)]
@@ -189,7 +185,7 @@ function notebookReferences(source){
   return [...new Set(items)];
 }
 function linkedNotebookMarkup(path,title){
-  const name=escapeHtml(title),relative=path.slice(courseProfile().root.length+1);
+  const name=escapeHtml(title),relative=path.startsWith(courseProfile().root+"/")?path.slice(courseProfile().root.length+1):path;
   return '<div class="ki-notebook-block" data-notebook="'+relative+'" data-title="'+name+'">\n'+
     '  <h3>Jupyter-Notebook · '+name+'</h3>\n'+
     '  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>\n'+
@@ -673,7 +669,7 @@ async function refresh(){
   const unsubmitted=state.chapters.filter(c=>!c.sha&&!state.staged.has(c.path)&&!known.some(k=>k.path===c.path));
   state.chapters=[...known,...pending,...unsubmitted].sort((a,b)=>a.path.localeCompare(b.path));
   const definitions=JSON.parse(state.staged.get(manifestPath())?.content||manifest.content).sections;
-  const valid=definitions.filter(s=>s.teaching||s.id==="lernziele").map(s=>s.id);
+  const valid=definitions.map(s=>s.id);
   const previous=$("section").value;
   $("section").replaceChildren();
   for(const entry of definitions.filter(s=>valid.includes(s.id))){const option=document.createElement("option");option.value=entry.id;option.textContent=entry.navigation?.title||entry.id;$("section").append(option);}
@@ -895,7 +891,7 @@ function prepareNotebookPreview(content){
   }
   for(const card of host.content.querySelectorAll(".ki-notebook-block[data-notebook]")){
     const path=card.getAttribute("data-notebook");
-    if(!notebookPath(path)||card.querySelector(".ki-notebook-actions"))continue;
+    if(!notebookPath(coursePath(path))||card.querySelector(".ki-notebook-actions"))continue;
     const actions=document.createElement("div");actions.className="ki-notebook-actions";
     let button=card.querySelector(".ki-notebook-launch, button[data-lab], #start-project");
     if(!button){
@@ -908,7 +904,7 @@ function prepareNotebookPreview(content){
     link.className="ki-notebook-direct";link.target="_blank";link.rel="noopener noreferrer";
     link.textContent="In JupyterLite öffnen ↗";
     link.href=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+
-      encodeURIComponent("portal/"+path.split("/").pop());
+      encodeURIComponent(notebookLabPath(path));
     if(button.tagName==="A"&&!button.href)button.href=link.href;
     actions.append(button,link);card.append(actions);
     const region=document.createElement("div");region.className="ki-notebook-runtime";region.hidden=true;
@@ -1386,7 +1382,7 @@ async function openRuntimeNotebook(content,path){
   const external=$("notebookExternal");
   external.hidden=unpublished;
   if(!unpublished)external.href=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+
-    encodeURIComponent("portal/"+path.split("/").pop());
+    encodeURIComponent(notebookLabPath(path));
   runtimeStartTimer=setTimeout(()=>{
     if(!runtimeReady&&runtimePath===path)
       runtimeStatus("JupyterLite hat noch nicht geantwortet. Prüfe die Verbindung oder bearbeite die Notebook-Zellen unten direkt.");
@@ -1398,7 +1394,7 @@ async function openRuntimeNotebook(content,path){
   // After merge the lesson file will have its own published JupyterLite path.
   const name=state.current?.sha===null?
     (courseGrade()===1?"portal/basis_neuron.ipynb":"portal/daten_training.ipynb"):
-    "portal/"+path.split("/").pop();
+    notebookLabPath(path);
   runtimeFrame.src=runtimeOrigin+"/ki-unterricht/lab/index.html?path="+encodeURIComponent(name)+"&ki-embed=1&ki-restore=1&ki-teacher=1&reset";
 }
 window.addEventListener("message",async event=>{
