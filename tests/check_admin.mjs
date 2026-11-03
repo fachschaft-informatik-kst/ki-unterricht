@@ -122,7 +122,7 @@ for(const [index,profile] of courses.entries()){
     sources.set(file,readFileSync(new URL("../"+file,import.meta.url),"utf8"));
   const folder=profile.manifest.replace(/\/manifest\.json$/,"");
   for(const section of manifest.sections){
-    const prefix=folder+section.id+"/";
+    const prefix=folder+"/"+section.id+"/";
     for(const name of readdirSync(new URL("../"+prefix,import.meta.url))){
       if(/\.(json|md)$/.test(name))
         sources.set(prefix+name,readFileSync(new URL("../"+prefix+name,import.meta.url),"utf8"));
