@@ -359,6 +359,31 @@ jobs:
         with:
           path: ./dist
 
+  xeus_prototype:
+    name: Isolated Xeus Python prototype (experimental PR only)
+    if: github.event_name == 'pull_request' && github.head_ref == 'experiment/jupyterlite-0-8-xeus-benchmark-20261103'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install isolated Xeus Python environment
+        run: python -m pip install -r benchmarks/xeus/requirements.txt
+      - name: Build Xeus site with widgets and plotting packages
+        working-directory: benchmarks/xeus
+        run: |
+          jupyter lite build --contents content --output-dir ../../_build/xeus-probe
+          test -f ../../_build/xeus-probe/lab/index.html
+          test -f ../../_build/xeus-probe/files/xeus_probe.ipynb
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: xeus-poc
+          path: _build/xeus-probe/
+          retention-days: 7
+
   deploy:
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.build.outputs.site_changed == 'true'
