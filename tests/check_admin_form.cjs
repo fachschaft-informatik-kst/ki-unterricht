@@ -494,7 +494,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#stage").click();
     await page.locator("#editMaterials").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.includes("/vertiefung-ki-im-alltag/materialien.md"));
-    assert.match(await page.locator("#path").textContent(),/kursseiten\/vertiefung-ki-im-alltag\/materialien.md/);
+    assert.match(await page.locator("#path").textContent(),/kursseiten\/bok\/4-klasse\/vertiefung-ki-im-alltag\/materialien.md/);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n- Neues Experiment vorbereiten\n");
     await page.locator("#stage").click();
     await page.evaluate(()=>{
@@ -511,7 +511,7 @@ const server=http.createServer((req,res)=>{
     assert.match(await previewImage.getAttribute("src"),/^data:image\/png;base64,/);
 
     await page.locator("#chapters button").first().click();
-    assert.match(await page.locator("#path").textContent(),/kursseiten\/vertiefung-ki-im-alltag\//);
+    assert.match(await page.locator("#path").textContent(),/kursseiten\/bok\/4-klasse\/vertiefung-ki-im-alltag\//);
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\nEin eigenes Beispiel.\n");
     await page.locator("#stage").click();
     await page.locator("#toggleChanges").click();
