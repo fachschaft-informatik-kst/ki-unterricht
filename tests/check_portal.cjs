@@ -277,8 +277,11 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('#restore-package').count(),1);
   assert(await p.locator('#download-backup').getAttribute('class').then(value=>value.includes('primary')));
   assert.equal(await p.locator('.project-submission-action #download-submission').count(),1);
-  assert.equal(await p.locator('#download-backup').innerText(),'Notizen & Projekt herunterladen ↓');
-  assert.equal(await p.locator('label[for="restore-package"]').innerText(),'Notizen & Projekt wiederherstellen ↑');
+  assert.equal(await p.locator('#download-backup').innerText(),'Arbeitsstand als ZIP sichern ↓');
+  assert.equal(await p.locator('label[for="restore-package"]').innerText(),'ZIP wiederherstellen ↑');
+   assert.equal(await p.locator('.transfer-step').count(),3,'Clear steps for attachments, transfer and submission');
+   assert.equal(await p.locator('#submission-check li').count()>0,true,'Missing items must be shown as a readable checklist');
+   assert.equal(await p.locator('#export-state').isVisible(),false,'Legacy JSON export must not compete with ZIP backup');
   await p.locator('#attachments').setInputFiles([{name:'fotos.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"test"}')},{name:'äpfel.png',mimeType:'image/png',buffer:Buffer.from([137,80,78,71,13,10,26,10])}]);
   await p.waitForFunction(()=>document.querySelectorAll('#attachment-list li').length===2);
   let downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();const zip=await downloaded;assert.match(zip.suggestedFilename(),/^KI-Projektstand-/);await zip.saveAs('/tmp/ki-portal-backup.zip');
