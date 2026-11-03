@@ -32,7 +32,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  run.startNotebookTiming(frame,'direct.ipynb','open');
  const direct=run.finishNotebookTiming(frame);
  assert(Number.isInteger(direct.visibleWaitMs),'Direct click records a visible wait even if mounting happens after the click');
- assert.deepEqual(run.notebookTimingSummary().warmup.count,1);
+ assert.equal(run.notebookTimingSummary().warmup.count,2,'Both background-start samples are counted');
  for(let i=0;i<60;i++){run.startNotebookTiming(frame,'lab.ipynb','open');run.finishNotebookTiming(frame);}
  assert.equal(window.KINotebookTimings.length,50,'Timing history must stay bounded');
  assert(!JSON.stringify(window.KINotebookTimings).includes('source'),'Timings must not store notebook code');
