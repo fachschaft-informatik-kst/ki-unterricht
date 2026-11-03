@@ -43,8 +43,11 @@ assert (dist / "lab/index.html").is_file(), "Shared notebook runtime must remain
 assert (dist / "projekt/admin/index.html").is_file(), "Existing Cloudflare Worker editor must remain available"
 for slug in ("irn/1-klasse", "irn/4-klasse"):
     page = (dist / slug / "index.html").read_text(encoding="utf-8")
-    assert "in Vorbereitung" in page
-    assert "BOK" not in page
+    assert "in Vorbereitung" not in page
+    assert "data-course-theme" in page
+    assert "Jupyter" in page
+    assert "lesson-plan" in page
+    assert "portal/" + slug + "/" in page, "IRN notebooks need separate paths"
 assert 'url=kurse.html' in (dist / "index.html").read_text(encoding="utf-8")
 print("PASS 4 teacher/grade URLs, BOK course assets and legacy links, IRN placeholders")
 
