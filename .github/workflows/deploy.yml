@@ -240,6 +240,7 @@ jobs:
           python scripts/build_course.py
           python scripts/build_basis.py
           python scripts/build_portal_notebooks.py
+          python tests/check_notebook_isolation.py
       - name: Validate publishable course structure and editor parity
         if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 5

@@ -15,12 +15,12 @@ if len({Path(path).name for path in REGISTERED}) != len(REGISTERED) or sum(bool(
     raise ValueError("Experiments need unique notebook names and exactly one project")
 
 
-def prepare_notebook(source: Path, target: Path, *, source_label: str) -> None:
+def prepare_notebook(source: Path, target: Path, *, source_label: str, workspace: str | None = None) -> None:
     import nbformat
 
     nb = nbformat.read(source, as_version=4)
     nb.cells = [cell for cell in nb.cells if "ki-standalone-only" not in cell.metadata.get("tags", [])]
-    first = not source.name.startswith(("lesson_", "basis_lesson_"))
+    first = workspace is not None or not source.name.startswith(("lesson_", "basis_lesson_"))
     for cell in nb.cells:
         if cell.cell_type == "markdown":
             cell.source = re.sub(r"\[([^]]+)\]\((?:ki_projekt/)?[^/)]+\.ipynb\)",
@@ -31,12 +31,20 @@ def prepare_notebook(source: Path, target: Path, *, source_label: str) -> None:
         cell.outputs = []
         cell.execution_count = None
         if first:
-            cell.source = ("from pathlib import Path\nimport sys\n"
+            setup = ("from pathlib import Path\nimport sys\n"
                 "_basis = Path.cwd()\n"
                 "while _basis.name != 'portal' and _basis != _basis.parent:\n"
-                "    _basis = _basis.parent\n"
-                "_basis = _basis.parent if _basis.name == 'portal' else Path.cwd()\n"
-                "sys.path[:0] = [str(_basis), str(_basis / 'ki_projekt')]\n" + cell.source)
+                "    _basis = _basis.parent if _basis.name != 'portal' else _basis\n"
+                "_basis = _basis.parent if _basis.name == 'portal' else Path.cwd()\n")
+            if workspace:
+                # A local notebook's imports MUST resolve to its teacher-owned
+                # helper code before falling back to shared platform modules.
+                setup += (f"_workspace = _basis / 'portal' / {workspace!r}\n"
+                          "sys.path[:0] = [str(_workspace), str(_workspace / 'ki_projekt'), "
+                          "str(_basis), str(_basis / 'ki_projekt')]\n")
+            else:
+                setup += "sys.path[:0] = [str(_basis), str(_basis / 'ki_projekt')]\n"
+            cell.source = setup + cell.source
             cell.metadata["jupyter"] = {"source_hidden": True}
             first = False
     nb.metadata["ki_source"] = source_label
@@ -83,10 +91,20 @@ def build():
                                  source_label=item.relative_to(root).as_posix())
                 copied += 1
             continue
+        # JupyterLite must contain the teacher's own Python modules, image
+        # assets and datasets, not just their same-named notebook files.
+        workspace = out / course["slug"]
+        for asset in sorted(root.rglob("*")):
+            if not asset.is_file() or asset.is_symlink() or asset.suffix == ".ipynb":
+                continue
+            target = workspace / asset.relative_to(root)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(asset, target)
         for item in paths:
             relative = item.relative_to(root)
-            target = out / course["slug"] / relative.name
-            prepare_notebook(item, target, source_label=relative.as_posix())
+            target = workspace / relative.name
+            prepare_notebook(item, target, source_label=relative.as_posix(),
+                             workspace=course["slug"])
             copied += 1
     print(f"Generated {copied} course notebooks, preserving legacy BOK paths")
 
