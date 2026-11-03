@@ -13,14 +13,15 @@
         "accent": "#3653a3"
       },
       "editorKey": "basis",
-      "manifest": "kursseiten/basis-manifest.json",
+      "manifest": "kurse/bok/1-klasse/kursseiten/manifest.json",
       "sectionPrefix": "basis-",
       "notebookPrefix": "basis_",
       "teacherFiles": {
-        "solutions": "lehrperson/musterloesungen.md",
-        "fields": "lehrperson/musterloesungen-felder-1-klasse.md",
-        "glossary": "kursseiten/glossar.json"
-      }
+        "solutions": "kurse/bok/1-klasse/lehrperson/musterloesungen.md",
+        "fields": "kurse/bok/1-klasse/lehrperson/musterloesungen-felder.md",
+        "glossary": "kurse/bok/1-klasse/kursseiten/glossar.json"
+      },
+      "courseRoot": "kurse/bok/1-klasse"
     },
     {
       "id": "bok-4-klasse",
@@ -34,57 +35,61 @@
         "accent": "#076959"
       },
       "editorKey": "vertiefung",
-      "manifest": "kursseiten/manifest.json",
+      "manifest": "kurse/bok/4-klasse/kursseiten/manifest.json",
       "sectionPrefix": "",
       "notebookPrefix": "",
       "teacherFiles": {
-        "solutions": "lehrperson/musterloesungen.md",
-        "fields": "lehrperson/musterloesungen-felder-4-klasse.md",
-        "glossary": "kursseiten/glossar.json",
-        "materialsIntro": "lehrperson/materialien.md"
-      }
+        "solutions": "kurse/bok/4-klasse/lehrperson/musterloesungen.md",
+        "fields": "kurse/bok/4-klasse/lehrperson/musterloesungen-felder.md",
+        "glossary": "kurse/bok/4-klasse/kursseiten/glossar.json",
+        "materialsIntro": "kurse/bok/4-klasse/lehrperson/materialien.md"
+      },
+      "courseRoot": "kurse/bok/4-klasse"
     },
     {
       "id": "irn-1-klasse",
       "teacher": "IRN",
       "grade": 1,
       "slug": "irn/1-klasse",
-      "source": null,
-      "status": "planned",
+      "source": "generated",
+      "status": "published",
       "name": "KI entdecken",
       "theme": {
         "accent": "#69419b"
       },
       "editorKey": "irn1",
-      "manifest": "kursseiten/irn-1-manifest.json",
-      "sectionPrefix": "irn-1-",
-      "notebookPrefix": "irn1_",
+      "manifest": "kurse/irn/1-klasse/kursseiten/manifest.json",
+      "sectionPrefix": "basis-",
+      "notebookPrefix": "basis_",
       "teacherFiles": {
-        "solutions": "lehrperson/irn-1/musterloesungen.md",
-        "fields": "lehrperson/irn-1/musterloesungen-felder.md",
-        "glossary": "lehrperson/irn-1/glossar.md"
-      }
+        "solutions": "kurse/irn/1-klasse/lehrperson/musterloesungen.md",
+        "fields": "kurse/irn/1-klasse/lehrperson/musterloesungen-felder.md",
+        "glossary": "kurse/irn/1-klasse/kursseiten/glossar.json"
+      },
+      "courseRoot": "kurse/irn/1-klasse"
     },
     {
       "id": "irn-4-klasse",
       "teacher": "IRN",
       "grade": 4,
       "slug": "irn/4-klasse",
-      "source": null,
-      "status": "planned",
+      "source": "generated",
+      "status": "published",
       "name": "KI vertiefen",
       "theme": {
         "accent": "#9a481d"
       },
       "editorKey": "irn4",
-      "manifest": "kursseiten/irn-4-manifest.json",
-      "sectionPrefix": "irn-4-",
-      "notebookPrefix": "irn4_",
+      "manifest": "kurse/irn/4-klasse/kursseiten/manifest.json",
+      "sectionPrefix": "",
+      "notebookPrefix": "",
       "teacherFiles": {
-        "solutions": "lehrperson/irn-4/musterloesungen.md",
-        "fields": "lehrperson/irn-4/musterloesungen-felder.md",
-        "glossary": "lehrperson/irn-4/glossar.md"
-      }
+        "solutions": "kurse/irn/4-klasse/lehrperson/musterloesungen.md",
+        "fields": "kurse/irn/4-klasse/lehrperson/musterloesungen-felder.md",
+        "glossary": "kurse/irn/4-klasse/kursseiten/glossar.json",
+        "materialsIntro": "kurse/irn/4-klasse/lehrperson/materialien.md"
+      },
+      "courseRoot": "kurse/irn/4-klasse"
     }
   ]
 }

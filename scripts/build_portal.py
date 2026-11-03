@@ -50,10 +50,10 @@ def render_fragment(source: str, filename: Path) -> str:
     return re.sub(pattern, lambda m: MARKDOWN.render(m.group(1)), source, flags=re.S)
 
 
-def assemble() -> str:
-    manifest = json.loads((PAGES / "manifest.json").read_text(encoding="utf-8"))
+def assemble(pages: Path = PAGES, manifest_path: str = "kursseiten/manifest.json", glossary_path: Path | None = None) -> str:
+    manifest = json.loads((pages / "manifest.json").read_text(encoding="utf-8"))
     sections = manifest["sections"]
-    course = load_course(ROOT)
+    course = load_course(ROOT, manifest_path)
     grouped = {s["id"]: [l for l in course["lessons"] if l["view"] == s["id"]] for s in sections}
     def nav_order(section):
         return grouped[section["id"]][0]["number"] if grouped[section["id"]] else (1000 + section["navigation"]["order"] if section["navigation"]["order"] >= 9 else -100 + section["navigation"]["order"])
@@ -72,13 +72,13 @@ def assemble() -> str:
     rendered = []
     for section in sections:
         view = section["id"]
-        folder = PAGES / view
+        folder = pages / view
         files = sorted(folder.glob("[0-9][0-9][0-9]-*.md"))
         if not files:
             raise ValueError(f"No content files in {folder}")
         parts = [render_fragment(path.read_text(encoding="utf-8"), path) for path in files]
         content = "".join(parts)
-        content = content.replace("<!-- GLOSSARY -->", render_glossary("vertieft"))
+        content = content.replace("<!-- GLOSSARY -->", render_glossary("vertieft", source=glossary_path))
         content = content.replace("<!-- OVERVIEW -->", '<div class="course-grid">' + "".join(overview) + "</div>")
         lessons = [l for l in course["lessons"] if l["view"] == view]
         if lessons and f"<!-- LESSONS:{view} -->" not in content:
