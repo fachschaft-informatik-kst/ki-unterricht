@@ -264,7 +264,7 @@ document.addEventListener('click',event=>{
  if(!button||!button.closest('main'))return;
  void showNotebook(button.dataset.lab,button.closest('main > section')?.id||'projekt',true,button);
 });
-window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName)void showNotebook(projectName,'journal',false,$('start-project'));});
+window.addEventListener('hashchange',()=>{visibility();if(location.hash==='#journal'&&activeName&&activeOwner)void showNotebook(projectName,'journal',false,$('start-project'));});
 // Match the teacher editor: expand/collapse is one persistent icon button,
 // kept in sync with the browser's fullscreen state (including Escape).
 all('[data-fullscreen]').forEach(button=>{
