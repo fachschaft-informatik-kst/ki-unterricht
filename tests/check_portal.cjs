@@ -63,12 +63,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('#fremdmodell details.kapitel').count(),5,'DL 8 must have five chapters');
   assert(await p.locator('#fremdmodell #dl8-warum').evaluate(e=>e.open));
   await p.locator('#fremdmodell .dl8-quicklinks a[href="#reproduktion"]').click();
-  assert(await p.locator('#fremdmodell #reproduktion').evaluate(e=>e.open),'Quicklink opens reproduction chapter');
+  await p.waitForFunction(()=>document.querySelector('#fremdmodell #reproduktion')?.open,null,{timeout:10000}); // hashchange opens details asynchronously
   assert.equal(await p.locator('#fremdmodell #reproduktion').count(),1);
   assert.equal(await p.locator('#fremdmodell #fremdtest').count(),1);
   await p.locator('#fremdmodell textarea[data-journal="reproduktion"]').fill('Prüfsumme gleich; V1 A: 50 %, B: 75 %.');
   await p.locator('#fremdmodell .dl8-quicklinks a[href="#fremd-reflexion"]').click();
-  assert(await p.locator('#fremdmodell #dl8-abschluss').evaluate(e=>e.open),'Quicklink opens submission chapter');
+  await p.waitForFunction(()=>document.querySelector('#fremdmodell #dl8-abschluss')?.open,null,{timeout:10000}); // same navigation contract
   await p.locator('[data-answer="fremd_rueckmeldung"]').fill('Andere Beleuchtung gezielt prüfen.');
   for(const n of [1,2]){
     await p.locator('[data-answer="fremd_name_'+n+'"]').fill('Testperson '+n);
