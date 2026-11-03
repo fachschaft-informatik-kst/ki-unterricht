@@ -135,9 +135,9 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
  try{
   await loaded;
   const restored=saved[current] ? await request('restore',{notebook:validate(saved[current]),keepKernel:true}) : null;
-  // A complete kernel/widget snapshot can be very slow (or fail while an
-  // upload is active). It must never hold the interactive notebook hostage.
-  // ZIP export and notebook switching still request an explicit fresh snapshot.
+  // Published notebooks already exist in the build: a costly initial widget
+  // snapshot is unnecessary. Changes auto-save, and switching/ZIP export always
+  // take a fresh snapshot. A running Python environment is ready immediately.
   ready=true;
   const milliseconds=Math.round(performance.now()-Number(frame.dataset.startMs||performance.now()));
   (window.KINotebookTimings ||= []).push({name:current,kind:frame.dataset.startKind||'open',milliseconds});
@@ -147,17 +147,6 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
     : restored ? 'Gesicherter Stand geladen · geänderte Startzellen bitte manuell ausführen.'
       : 'Notebook bereit · Änderungen werden automatisch gesichert.';
   notebookLoading('ready');
-  const opened=name;
-  // Let JupyterLite paint its live widgets before serialising their entire
-  // state. An initial backup is useful, but not a condition for showing Python.
-  setTimeout(() => {
-   if(current!==opened||!ready||changed)return;
-   void snapshot().catch(error=>{
-    if(current!==opened)return;
-    changed=true;
-    status.textContent='Notebook ist bereit, automatische Sicherung fehlgeschlagen: '+error.message+'. Bitte ZIP herunterladen.';
-   });
-  },1800);
  }catch(e){
   status.textContent='Wiederherstellung fehlgeschlagen: '+e.message;
   notebookLoading('error','Notebook konnte nicht wiederhergestellt werden. Erneut öffnen.');
