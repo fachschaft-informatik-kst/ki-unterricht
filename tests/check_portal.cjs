@@ -10,7 +10,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:JSON.parse(process.env.CHROMIUM_ARGS||'[]')});
   const p=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());p.on('console',m=>{if(m.type()==='error')console.error('BROWSER',m.text());});
   await p.goto('http://127.0.0.1:8765/projekt/');
-  assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,'Reading the page must not start Python');
+  assert((await p.locator('iframe[src*="lab/index"]').count())<=1,'Background preparation may start one managed Python session');
+  assert.equal(await p.locator('#project-lab[open]').count(),0,'Background preparation must never open a notebook dialog');
   assert.equal(await p.locator('.course-card').count(),8);assert.equal(await p.locator('.nav a').count(),11);
   assert((await p.locator('.ki-notebook-block .ki-notebook-direct[href*="/lab/"]').count())>=7,
     'Every registered in-chapter notebook has a direct JupyterLite link');
