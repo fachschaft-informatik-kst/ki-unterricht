@@ -13,9 +13,9 @@ from build_portal import render_fragment
 assert slugify("Künstliche Intelligenz & Übung") == "kuenstliche-intelligenz-uebung"
 with TemporaryDirectory() as temp:
     root = Path(temp)
-    folder = root / "kursseiten/einstieg"
+    folder = root / "kursseiten/bok/4-klasse/einstieg"
     folder.mkdir(parents=True)
-    (root / "kursseiten/manifest.json").write_text(
+    (root / "kursseiten/bok/4-klasse/manifest.json").write_text(
         json.dumps({"sections": [{"id": "einstieg", "teaching": True}, {"id": "start"}]}), encoding="utf-8"
     )
     for n in (0, 30, 40, 999):

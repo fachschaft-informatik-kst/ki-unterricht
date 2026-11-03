@@ -32,7 +32,7 @@ def verify_course(manifest_path):
     manifest = json.loads((ROOT / manifest_path).read_text(encoding="utf-8"))
     teaching = {section["id"] for section in manifest["sections"] if section.get("teaching")}
     for view in teaching:
-        folder = ROOT / "kursseiten" / view
+        folder = (ROOT / manifest_path).parent / view
         assert (folder / "materialien.md").is_file(), f"Missing materials for {view}"
         assert list(folder.glob("[0-9][0-9][0-9]-*.md")), f"Missing chapters for {view}"
     assert all(lesson["view"] in teaching for lesson in lessons)
@@ -41,7 +41,7 @@ def verify_course(manifest_path):
 
 models = {path: verify_course(path) for path in MANIFESTS}
 
-for kind, manifest_path in (("projekt", "kursseiten/manifest.json"), ("basis", "kursseiten/basis-manifest.json")):
+for kind, manifest_path in (("projekt", "kursseiten/bok/4-klasse/manifest.json"), ("basis", "kursseiten/bok/1-klasse/manifest.json")):
     manifest, lessons = models[manifest_path]
     directory = ROOT / "_build" / "site" / kind
     index = directory / "index.html"

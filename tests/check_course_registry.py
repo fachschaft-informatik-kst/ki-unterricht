@@ -14,15 +14,27 @@ from course_model import load_course
 known=load_registry(ROOT)
 assert {"bok/1-klasse","bok/4-klasse","irn/1-klasse","irn/4-klasse"} <= {
     c["slug"] for c in known}
-views={}
 for course in known:
-    manifest=json.loads((ROOT/course["manifest"]).read_text(encoding="utf-8"))
+    source_root = ROOT / course["manifest"]
+    folder = source_root.parent
+    assert source_root.is_file()
+    manifest = json.loads(source_root.read_text(encoding="utf-8"))
+    assert len(manifest["sections"]) >= 1
+    template = ROOT / "kursseiten/template" / f'{course["grade"]}-klasse'
+    assert template.is_dir(), template
+    assert (template / "manifest.json").read_bytes() == source_root.read_bytes()
     for section in manifest["sections"]:
-        assert section["id"] not in views,(course["slug"],section["id"],views.get(section["id"]))
-        views[section["id"]]=course["slug"]
-    for kind,path in course["teacherFiles"].items():
-        assert (ROOT/path).is_file(),(course["slug"],kind,path)
-assert set(views).isdisjoint({"mai-1-kurs","mai-4-kurs"})
+        assert (folder / section["id"]).is_dir(), (course["slug"], section["id"])
+        assert (template / section["id"]).is_dir()
+    for kind, path in course["teacherFiles"].items():
+        assert (ROOT / path).is_file(), (course["slug"], kind, path)
+        assert (ROOT / path).read_bytes() == (template / (Path(path).relative_to(folder))).read_bytes()
+
+# A duplicated section ID across copied courses is valid; file ownership is not shared.
+bok1 = known[0]
+irn1 = known[2]
+assert (ROOT / bok1["manifest"]).read_bytes() == (ROOT / irn1["manifest"]).read_bytes()
+assert (ROOT / bok1["manifest"]).resolve() != (ROOT / irn1["manifest"]).resolve()
 
 with tempfile.TemporaryDirectory() as temporary:
     target=Path(temporary)
@@ -35,7 +47,7 @@ with tempfile.TemporaryDirectory() as temporary:
     assert all(file.is_file() for file in generated)
     assert len(load_registry(target))==1
     owner=load_registry(target)[0]
-    assert owner["manifest"]=="kursseiten/mai-1-manifest.json"
+    assert owner["manifest"]=="kursseiten/mai/1-klasse/manifest.json"
     assert owner["sectionPrefix"]=="mai-1-"
     assert owner["notebookPrefix"]=="mai1_"
     model=load_course(target,owner["manifest"])

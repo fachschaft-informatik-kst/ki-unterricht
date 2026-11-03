@@ -40,7 +40,7 @@ for case in invalid:
 with TemporaryDirectory() as tmp:
     root = Path(tmp)
     shutil.copytree(ROOT / "kursseiten", root / "kursseiten")
-    path = root / "kursseiten/einstieg/planung.json"
+    path = root / "kursseiten/bok/4-klasse/einstieg/planung.json"
     original = json.loads(path.read_text())
     for order in (None, float("inf"), True):
         plan = deepcopy(original)

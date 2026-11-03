@@ -22,11 +22,11 @@ with TemporaryDirectory() as tmp:
     create(root, "KI im Alltag", after="03")
     create(root, "Vertiefung", section="ki-im-alltag", after="ki-im-alltag")
     target = output(root)
-    with patch.multiple(build_solutions, SOURCE=root/"lehrperson/musterloesungen.md",
+    with patch.multiple(build_solutions, SOURCE=root/"kursseiten/bok/4-klasse/lehrperson/musterloesungen.md",
                         OUTPUT=target/"musterloesungen/index.html"):
-        with patch.multiple(build_portal, ROOT=root, PAGES=root/"kursseiten", PORTAL=root/"projekt"):
+        with patch.multiple(build_portal, ROOT=root, PAGES=root/"kursseiten/bok/4-klasse", PORTAL=root/"projekt"):
             build_portal.build()
-    with patch.multiple(build_materials, ROOT=root, SOURCE=root/"lehrperson/materialien.md",
+    with patch.multiple(build_materials, ROOT=root, SOURCE=root/"kursseiten/bok/4-klasse/lehrperson/materialien.md",
                         OUTPUT=target/"materialien.html", DOWNLOADS=target/"materialien/downloads"):
         with patch.object(build_course, "ROOT", root):
             build_course.build()
