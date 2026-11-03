@@ -19,16 +19,15 @@ def run(root:Path=ROOT,*,check:bool=False)->None:
         assert originals,template
         for teacher in ("bok","irn"):
             course=root/"kurse"/teacher/f"{grade}-klasse"
-            missing=[str(p) for p in originals if not (course/p).is_file()]
-            if missing:
-                raise AssertionError(f"Fehlende Kursdateien in {course}: {missing[:12]}")
-            changed=[p for p in originals if not filecmp.cmp(template/p,course/p,shallow=False)]
-            if check and changed:
-                raise AssertionError(f"{course}: {len(changed)} Dateien weichen vom Ausgangstemplate ab. "
-                                     "Das ist nach eigenständiger Bearbeitung normal; "
-                                     "für einen unveränderten Ausgangsklon --check verwenden.")
-            print(f"PASS {course.relative_to(root)}: {len(originals)} Quelldateien, "
-                  f"{len(changed)} Abweichungen von der Vorlage")
+            missing=[p for p in originals if not (course/p).is_file()]
+            changed=[p for p in originals if (course/p).is_file() and
+                     not filecmp.cmp(template/p,course/p,shallow=False)]
+            if check and (changed or missing):
+                raise AssertionError(f"{course}: {len(changed)} geänderte, "
+                                     f"{len(missing)} fehlende Template-Dateien. "
+                                     "Nach eigenständiger Bearbeitung ist das normal.")
+            print(f"PASS {course.relative_to(root)}: {len(originals)} Template-Dateien, "
+                  f"{len(changed)} bearbeitet, {len(missing)} entfernt/verschoben")
     print("Vorlagen geprüft; es wurden keine Dateien verändert.")
 
 if __name__=="__main__":
