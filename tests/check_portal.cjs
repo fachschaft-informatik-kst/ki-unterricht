@@ -349,9 +349,17 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
      }
    };
    await p.setViewportSize({width:1440,height:1000});await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
-   await p.locator('#project-lab-loading').waitFor({state:'visible'});
-   assert.equal(await p.locator('#project-lab-loading').getAttribute('data-state'),'loading','Spinner must cover notebook during initialization');
-   assert.equal(await p.locator('#project-frame').getAttribute('inert'),'','Notebook stays inert until initialization completes');
+   // An idle-prewarmed notebook can already be ready when the learner clicks.
+   // Verify that the iframe is never exposed while it is still initializing.
+   const initial=await p.evaluate(()=>{
+     const loader=document.querySelector('#project-lab-loading');
+     const frame=document.querySelector('#project-frame');
+     return {loading:!loader.hidden,phase:loader.dataset.state,ready:frame.dataset.ready,inert:frame.inert};
+   });
+   if(initial.loading){
+     assert.equal(initial.phase,'loading','Spinner must cover notebook during initialization');
+     assert.equal(initial.inert,true,'Notebook stays inert until initialization completes');
+   }else assert.equal(initial.ready,'yes','Notebook without a spinner must already be ready');
    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000}).catch(async e=>{console.log('FRAME',await p.frameLocator('#project-frame').locator('body').innerText());console.log('ERRORS',errors);throw e;});
    assert.equal(await p.locator('#project-lab-loading').isVisible(),false,'Spinner must disappear after all startup cells');
    assert.equal(await p.locator('#project-frame').getAttribute('inert'),null,'Ready notebook must accept input');
