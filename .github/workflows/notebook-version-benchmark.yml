@@ -1,0 +1,114 @@
+name: Benchmark PR124 vs JupyterLite 0.8 (isolated)
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  compare-real-course-startup:
+    # This is an experiment, never runs or deploys on main.
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'experiment/jupyterlite-0-8-xeus-benchmark-20261103'
+    runs-on: ubuntu-latest
+    timeout-minutes: 42
+    steps:
+      - name: Checkout exact green PR #124 reference
+        uses: actions/checkout@v4
+        with:
+          ref: 1c1be82ed77cffe18586872b0b77c34d616fac35
+          path: baseline
+      - name: Checkout experimental runtime and benchmark
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: experiment
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install both notebook runtimes in independent Python environments
+        run: |
+          set -euo pipefail
+          python -m venv baseline/.venv
+          baseline/.venv/bin/python -m pip install -r baseline/requirements.txt
+          # Same PR #124 course source + extension for the candidate;
+          # only the 0.8 runtime settings and copy script differ.
+          mkdir -p candidate
+          rsync -a --exclude='.git' --exclude='.venv' --exclude='node_modules' \
+            baseline/ candidate/
+          cp experiment/requirements.txt candidate/requirements.txt
+          cp experiment/jupyter_lite_config.json candidate/jupyter_lite_config.json
+          cp experiment/scripts/copy_portal.py candidate/scripts/copy_portal.py
+          python -m venv candidate/.venv
+          candidate/.venv/bin/python -m pip install -r candidate/requirements.txt
+          echo "REFERENCE_PR124=1c1be82ed77cffe18586872b0b77c34d616fac35"
+          echo "EXPERIMENT_REVISION=${{ github.event.pull_request.head.sha }}"
+      - name: Generate identical course notebooks and build both sites
+        run: |
+          set -euo pipefail
+          (
+            cd baseline
+            npm ci --prefix extensions/ki-autostart
+            PATH="$PWD/.venv/bin:$PATH" npm run build --prefix extensions/ki-autostart
+            .venv/bin/python scripts/build_portal.py
+            .venv/bin/python scripts/build_course.py
+            .venv/bin/python scripts/build_basis.py
+            .venv/bin/python scripts/build_portal_notebooks.py
+            .venv/bin/jupyter lite build --contents _build/content --output-dir dist
+            .venv/bin/python scripts/copy_portal.py dist
+            test -f dist/bok/1-klasse/index.html
+            test -f dist/bok/4-klasse/index.html
+          )
+          # Carry over generated notebooks and compiled JupyterLab extension.
+          rsync -a baseline/_build/ candidate/_build/
+          rsync -a baseline/labextensions/ candidate/labextensions/
+          (
+            cd candidate
+            .venv/bin/jupyter lite build --contents _build/content --output-dir dist
+            .venv/bin/python scripts/copy_portal.py dist
+            test -f dist/bok/1-klasse/index.html
+            test -f dist/bok/4-klasse/index.html
+          )
+          cmp baseline/dist/bok/1-klasse/index.html candidate/dist/bok/1-klasse/index.html
+          cmp baseline/dist/bok/4-klasse/index.html candidate/dist/bok/4-klasse/index.html
+          echo "PASS: identical teaching pages, scripts and notebook sources, different JupyterLite runtimes"
+      - name: Install Chromium browser test environment
+        run: |
+          npm install --prefix /tmp/ki-browser playwright
+          /tmp/ki-browser/node_modules/.bin/playwright install chromium
+          if ! node -e "require('/tmp/ki-browser/node_modules/playwright').chromium.launch().then(b=>b.close())"; then
+            /tmp/ki-browser/node_modules/.bin/playwright install-deps chromium
+          fi
+      - name: Measure real BOK 1 and BOK 4 cold/warm notebook readiness
+        env:
+          NODE_PATH: /tmp/ki-browser/node_modules
+          KI_REFERENCE_SHA: 1c1be82ed77cffe18586872b0b77c34d616fac35
+          KI_CANDIDATE_SHA: ${{ github.event.pull_request.head.sha }}
+          KI_BENCH_REPORT: experiment/benchmarks/xeus/results/course-start-report.json
+          KI_BENCH_ITERATIONS: '3'
+        run: |
+          set -euo pipefail
+          mkdir -p experiment/benchmarks/xeus/results
+          python -m http.server 8891 --bind 127.0.0.1 --directory baseline/dist > /tmp/ki-bench-pr124-server.log 2>&1 &
+          base_pid=$!
+          python -m http.server 8892 --bind 127.0.0.1 --directory candidate/dist > /tmp/ki-bench-08-server.log 2>&1 &
+          new_pid=$!
+          trap 'kill "$base_pid" "$new_pid" 2>/dev/null || true' EXIT
+          for port in 8891 8892; do
+            ready=0
+            for n in $(seq 1 25); do
+              if curl -fsS --max-time 2 -o /dev/null "http://127.0.0.1:$port/bok/1-klasse/"; then ready=1; break; fi
+              sleep 1
+            done
+            test "$ready" -eq 1
+          done
+          node experiment/benchmarks/xeus/compare-course-starts.cjs
+      - name: Upload raw measurements, including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr124-jupyterlite-08-browser-benchmark
+          path: experiment/benchmarks/xeus/results/
+          if-no-files-found: warn
+          retention-days: 14
