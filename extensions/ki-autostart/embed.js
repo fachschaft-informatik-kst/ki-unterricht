@@ -36,10 +36,12 @@ export function setupEmbed(app, tracker, allowed, reviveSavedWidgets = async () 
     p.content.notebookConfig = {...p.content.notebookConfig,windowingMode:'none'};
     await p.context.ready;
     await app.restored;
+    send({type:'milestone',phase:'document'});
     app.shell.mode = 'single-document';
     app.shell.collapseLeft(); app.shell.collapseRight(); app.shell.activateById(p.id);
     p.context.model.contentChanged.connect(changed);
     await p.sessionContext.ready;
+    send({type:'milestone',phase:'kernel'});
     // Sliders, uploads and Output widgets can change without a notebook-cell edit.
     p.sessionContext.session?.kernel?.iopubMessage.connect((_,message) => {
       if (message.header.msg_type === 'comm_msg') changed();
@@ -124,6 +126,7 @@ print(_portal_json.dumps({'widgets': _portal_widgets.Widget.get_manager_state() 
       if (type==='snapshot') {
         send({type:'snapshot',id,...await snapshot()});
       } else {
+        send({type:'milestone',phase:'restoring'});
         const nb = portableNotebook(checkedNotebook(notebook));
         for (const cell of nb.cells) if (cell.metadata) delete cell.metadata.trusted;
         await waitIdle();
@@ -139,6 +142,7 @@ print(_portal_json.dumps({'widgets': _portal_widgets.Widget.get_manager_state() 
           try { uploadsRestored = await restoreNotebookUploads(panel.sessionContext.session.kernel,files); }
           catch (err) { uploadError = String(err.message || err); }
         }
+        send({type:'milestone',phase:'uploads'});
         // The saved document was deliberately flattened for portable backups.
         // Only now, after restoration, re-run trusted published startup cells.
         // A failure leaves the original saved source and readable outputs intact.
@@ -147,7 +151,9 @@ print(_portal_json.dumps({'widgets': _portal_widgets.Widget.get_manager_state() 
           try { widgets = await reviveSavedWidgets(panel, nb); }
           catch (err) { widgetError = String(err.message || err); }
         }
+        send({type:'milestone',phase:'widgets'});
         send({type:'restored',id,notebook:nb,widgets,widgetError,uploadsRestored,uploadError});
+        send({type:'milestone',phase:'restored'});
       }
       dirty=false;
     } catch (err) { send({type:'error',id,error:String(err.message||err)}); }
@@ -156,11 +162,13 @@ print(_portal_json.dumps({'widgets': _portal_widgets.Widget.get_manager_state() 
   return {
     path,
     restoreOnly: query.get('ki-restore')==='1',
+    stage(phase) { send({type:'milestone',phase}); },
     async initialized(p,success) {
       if (p.context.path!==path) return;
       panel=p;
       if (success) { try { await waitIdle(); } catch { success=false; } }
       ready=success;
+      if (success) send({type:'milestone',phase:'interactive'});
       error=success?null:'Start fehlgeschlagen. Auf der Kursseite den Versuch erneut öffnen.';
       announce();
     }
