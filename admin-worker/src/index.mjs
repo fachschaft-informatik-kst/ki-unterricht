@@ -89,12 +89,14 @@ function validateCourseThemeRegistry(doc){
   }
   return doc;
 }
+const COURSE_BASE=/^kursseiten\/[a-z][a-z0-9-]*\/[1-9][0-9]*-klasse\//;
+const CHAPTER=/^kursseiten\/[a-z][a-z0-9-]*\/[1-9][0-9]*-klasse\/[a-z][a-z0-9-]*\/[0-9]{3}-[a-z0-9-]+\.md$/;
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
-  /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  /^kursseiten\/(?:manifest|basis-manifest|[a-z][a-z0-9-]*-manifest)\.json$/.test(path)||
-  [GLOSSARY_PATH,"shared/course-sites.json"].includes(path)||
-  /^lehrperson\/[a-z0-9-]+\/(?:musterloesungen(?:-felder)?|glossar)\.md$/.test(path)||
-  /^lehrperson\/(?:materialien|musterloesungen(?:-felder-[14]-klasse)?)\.md$/.test(path)||
+  (COURSE_BASE.test(path)&&(
+    /\/(?:manifest|glossar)\.json$/.test(path)||
+    /\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
+    /\/lehrperson\/(?:musterloesungen(?:-felder)?|materialien|glossar)\.md$/.test(path)))||
+  path==="shared/course-sites.json"||
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
   /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
 function validate(changes){
@@ -105,12 +107,12 @@ function validate(changes){
     seen.add(c.path);
     if(c.expectedSha!==null&&!/^[a-f0-9]{40}$/.test(c.expectedSha||""))throw Error("Ungültige Ausgangsversion.");
     if(c.delete===true){
-      if(c.expectedSha===null||c.content!==undefined||!/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(c.path))throw Error("Nur vorhandene Kapitel können verschoben werden.");
+      if(c.expectedSha===null||c.content!==undefined||!CHAPTER.test(c.path))throw Error("Nur vorhandene Kapitel können verschoben werden.");
     }else if(c.path.endsWith(".json")){
       if(typeof c.content!=="string"||c.content.length>200000)throw Error("JSON-Datei zu gross.");
       let plan;try{plan=JSON.parse(c.content);}catch{throw Error("Ungültiger Unterrichtsplan.");}
       if(c.path==="shared/course-sites.json")validateCourseThemeRegistry(plan);
-      else if(c.path===GLOSSARY_PATH)validateGlossary(plan);
+      else if(c.path.endsWith("/glossar.json"))validateGlossary(plan);
       else if(c.path.endsWith("/planung.json"))validatePlan(plan);
       else validateManifest(plan);
     }else if(c.path.endsWith(".ipynb")){
@@ -165,9 +167,9 @@ async function publish(req,token){
   };
   const proposed=async path=>changes.has(path)?JSON.parse(changes.get(path).content):readJson(path);
   try{
-    if(changes.has(GLOSSARY_PATH)){
-      const oldGlossary=validateGlossary(await readJson(GLOSSARY_PATH));
-      const nextGlossary=validateGlossary(await proposed(GLOSSARY_PATH));
+    for(const glossaryPath of [...changes.keys()].filter(p=>p.endsWith("/glossar.json"))){
+      const oldGlossary=validateGlossary(await readJson(glossaryPath));
+      const nextGlossary=validateGlossary(await proposed(glossaryPath));
       const nextIds=new Set(nextGlossary.begriffe.map(t=>t.id));
       if(oldGlossary.begriffe.some(t=>!nextIds.has(t.id)))
         throw Error("Bestehende Glossar-IDs dürfen nicht gelöscht werden, weil Kursseiten darauf verlinken.");
@@ -194,15 +196,15 @@ async function publish(req,token){
       for(const section of manifest.sections){
         if(profile.sectionPrefix&&!section.id.startsWith(profile.sectionPrefix))
           throw Error("Unterrichtsbereich gehört zu einer anderen Lehrperson: "+section.id);
-        if(sectionOwners.has(section.id))
-          throw Error("Unterrichtsbereich in mehreren Kursen: "+section.id);
-        sectionOwners.set(section.id,profile.slug);
+        const ownedPath="kursseiten/"+profile.slug+"/"+section.id;
+        if(sectionOwners.has(ownedPath))throw Error("Doppelter Unterrichtsbereich: "+ownedPath);
+        sectionOwners.set(ownedPath,profile.slug);
       }
         if(previous.sections.some(s=>!manifest.sections.some(n=>n.id===s.id&&!!n.teaching===!!s.teaching)))
       throw Error("Bestehende Bereichs-IDs müssen erhalten bleiben.");
     const all=[];
     for(const section of manifest.sections.filter(s=>s.teaching)){
-      const path="kursseiten/"+section.id+"/planung.json";
+      const path="kursseiten/"+profile.slug+"/"+section.id+"/planung.json";
       const next=await proposed(path);
       validatePlan(next);
       if(next.lessons.some(l=>l.view!==section.id))throw Error("Falsche Bereichszuordnung: "+section.id);
@@ -211,9 +213,9 @@ async function publish(req,token){
         if(old.lessons.some(l=>!next.lessons.some(n=>n.id===l.id&&n.view===l.view)))
           throw Error("Bestehende Lektions-IDs müssen erhalten bleiben.");
       }
-      const material="kursseiten/"+section.id+"/materialien.md";
+      const material="kursseiten/"+profile.slug+"/"+section.id+"/materialien.md";
       if(!known.has(material)&&!changes.has(material))throw Error("Lehrpersonenmaterial fehlt: "+section.id);
-      const chapterPrefix="kursseiten/"+section.id+"/";
+      const chapterPrefix="kursseiten/"+profile.slug+"/"+section.id+"/";
       if(![...new Set([...known.keys(),...changes.keys()])].some(p=>
         p.startsWith(chapterPrefix)&&/\/[0-9]{3}-[^/]+\.md$/.test(p)&&!changes.get(p)?.delete))
         throw Error("Kapitel fehlt: "+section.id);
@@ -230,8 +232,8 @@ async function publish(req,token){
       if(matching.length!==1)throw Error("Notebook-Namensraum gehört zu keinem eindeutigen Kurs: "+item.path);
       const owner=matching[0];
       const linked=body.changes.some(x=>!x.delete&&
-        /^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)&&
-        sectionOwners.get(x.path.split("/")[1])===owner.slug&&
+        CHAPTER.test(x.path)&&
+        sectionOwners.get(x.path.split("/").slice(0,4).join("/"))===owner.slug&&
         x.content?.includes('data-notebook="'+item.path+'"'));
       if(!linked)throw Error("Neue Notebooks müssen gemeinsam mit dem passenden Unterkapitel vorgemerkt werden: "+item.path);
     }
@@ -380,7 +382,7 @@ export default {
         if(req.method==="GET"&&url.pathname==="/api/chapters"){
           const tree=await github(active.token,"/repos/"+REPO+"/git/trees/main?recursive=1");
           if(tree.truncated)return fail(409,"Unvollständiger Dateiindex.");
-          return response({chapters:tree.tree.filter(x=>x.type==="blob"&&allowed(x.path)&&/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)).map(x=>({path:x.path,sha:x.sha}))});
+          return response({chapters:tree.tree.filter(x=>x.type==="blob"&&allowed(x.path)&&CHAPTER.test(x.path)).map(x=>({path:x.path,sha:x.sha}))});
         }
         if(req.method==="GET"&&url.pathname==="/api/notebooks"){
           const tree=await github(active.token,"/repos/"+REPO+"/git/trees/main?recursive=1");
