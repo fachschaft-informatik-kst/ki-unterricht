@@ -103,7 +103,17 @@ function missing(){
 }
 function updateChecks(){
  all('.journal-step').forEach(d=>{const inputs=[...d.querySelectorAll('[data-journal]')];d.querySelector('.completion').textContent=inputs.filter(e=>e.value.trim()).length+' / '+inputs.length;});
- const absent=missing();$('submission-check').textContent=absent.length?'Noch prüfen: '+absent.join(' · '):'Alle Bestandteile vorhanden. Inhalt und Ergebnisse vor der Abgabe nochmals prüfen.';
+ const absent=missing(),check=$('submission-check');
+ check.classList.toggle('complete',absent.length===0);
+ check.replaceChildren();
+ const message=document.createElement('p');
+ message.textContent=absent.length?absent.length+' Punkte vor der Abgabe prüfen:':'Alle Bestandteile vorhanden. Inhalt und Ergebnisse vor der Abgabe nochmals prüfen.';
+ check.append(message);
+ if(absent.length){
+  const list=document.createElement('ul');
+  for(const item of absent){const row=document.createElement('li');row.textContent=item;list.append(row);}
+  check.append(list);
+ }
 }
 const initialization=(async()=>{
  try{const raw=localStorage.getItem(KEY);if(raw)state=cleanState(JSON.parse(raw));else{const old=window.KIProgress?.get();if(old){state.journal.purpose=old.notes?.topic||old.topic||'';state.journal.groups=old.notes?.data||'';state.journal.hypothesis=old.notes?.question||'';}}}catch{status('Gespeicherter Text konnte nicht geladen werden. Projektstand hochladen.',true);}
@@ -334,7 +344,10 @@ async function pack(submission){
    entries.push({name,data});if(savedNames.length)entries.push({name:'notebooks/'+name,data});
   }}
   const blob=await makeZip(entries);if(blob.size>550*1024*1024)throw Error('Das ZIP ist zu gross zum Wiederherstellen (maximal 550 MB).');
-  download(blob,(submission?'KI-Abgabe':'KI-Projektstand')+'-'+new Date().toISOString().slice(0,10)+'.zip');$('download-status').textContent=submission?'Abgabepaket heruntergeladen. '+(absent.length?'Noch offen: '+absent.join(' · '):'Vor dem Einreichen das Journal kurz prüfen.'):'Notizen, gespeicherte Notebooks und hinzugefügte Dateien heruntergeladen.';
+  download(blob,(submission?'KI-Abgabe':'KI-Projektstand')+'-'+new Date().toISOString().slice(0,10)+'.zip');
+   $('download-status').textContent=submission
+     ?'Abgabepaket als ZIP heruntergeladen. '+(absent.length?'Bitte noch prüfen: '+absent.join(' · ')+'. ':'')+'Journal.html öffnen und die ZIP anschliessend über den Abgabekanal einreichen.'
+     :'Arbeitsstand als ZIP heruntergeladen. Für einen Gerätewechsel die ZIP aufbewahren und am anderen Gerät über «ZIP wiederherstellen» laden.';
  }catch(error){$('download-status').textContent='Download nicht erstellt: '+error.message;}finally{button.disabled=false;transferring=false;}
 }
 
