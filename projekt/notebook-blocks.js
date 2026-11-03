@@ -190,7 +190,9 @@
       frame.allow = "clipboard-read; clipboard-write";
       const embed = new URL(url);
       embed.searchParams.set("ki-embed", "1");
-      embed.searchParams.set("ki-restore", "1");
+      // These extra lesson/material notebooks have no course restore controller.
+      // ki-restore=1 would suppress all trusted autostart cells and leave their
+      // interactive widgets uninitialized on every launch.
       embed.searchParams.set("reset", "");
       frame.src = embed.href;
       frame.addEventListener("load", () => {
