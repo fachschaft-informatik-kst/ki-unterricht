@@ -482,8 +482,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     await dismissNotebook();await p.locator('.nav a[href="#projekt"]').click();await p.locator('#projekt .project-start-guide a[href="#versuch"]').click();await p.locator('#projekt-4 [data-lab="ki_lernlabor.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
     const labCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
-    assert(/\[\d+\]/.test(await labCells.nth(0).locator('.jp-InputPrompt').innerText()),
-      'The lightweight learning-lab setup still starts automatically');
+    assert((await p.frameLocator('#project-frame').locator('.ki-autostart-status').innerText()).includes('Bereit'),
+      'The lightweight trusted setup must complete before the notebook reports ready');
     assert(!/\[\d+\]/.test(await labCells.nth(2).locator('.jp-InputPrompt').innerText()),
       'The learning-lab training must wait until the student executes its cell');
 
