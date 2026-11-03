@@ -39,13 +39,14 @@ with TemporaryDirectory() as tmp:
     assert soup.select_one("#doppellektion-03"), "Existing lesson URL must survive insertion"
     assert soup.select_one("#doppellektion-vertiefung")
     material = BeautifulSoup((target/"materialien.html").read_text(), "html.parser")
-    assert len(material.select(".lesson-resources")) == 12
+    assert len(material.select(".lesson-resources")) == len(load_course(root)["lessons"])
     assert material.select_one("#dl-vertiefung")
     assert [s["id"] for s in material.select(".lesson-resources")] == [
         "dl-" + l["id"] for l in load_course(root)["lessons"]
     ]
     course = load_course(root)
-    assert next(l for l in course["lessons"] if l["id"] == "04")["number"] == 6
+    original_04 = next(l for l in load_course(ROOT)["lessons"] if l["id"] == "04")
+    assert next(l for l in course["lessons"] if l["id"] == "04")["number"] == original_04["number"] + 2
     assert "<!-- KURSPLAN -->" in (root/"worksheets/md/KI_Planung.md").read_text()
     assert "Vertiefung" in (target/"KI_Planung.md").read_text()
 print("PASS full new-topic build, grouped lessons, inserted navigation, teacher material and source isolation")

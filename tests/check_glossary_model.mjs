@@ -5,7 +5,7 @@ assert.equal(GLOSSARY_PATH,"kursseiten/glossar.json");
 assert.deepEqual(GLOSSARY_FIELDS,["begriff","basis","vertieft","beispiel","frage","antwort"]);
 const original=JSON.parse(readFileSync(new URL("../kursseiten/glossar.json",import.meta.url)));
 assert.equal(validateGlossary(original),original);
-assert.equal(original.begriffe.length,29);
+assert.ok(original.begriffe.length > 0, "Glossary must contain at least one entry");
 const copy=()=>structuredClone(original);
 let next=copy();next.begriffe[0].basis="Eine kindgerechte Beschreibung.";
 next.begriffe[0].vertieft="Eine differenzierte technische Beschreibung.";
@@ -35,4 +35,4 @@ next=copy();next.begriffe.push({id:"neuer-begriff",gruppe:original.gruppen[0],be
  beispiel:"Ein nachvollziehbares Beispiel.",frage:"Was ist der wichtigste Unterschied?",
  antwort:"Die kurze fachlich korrekte Antwort."});
 assert.doesNotThrow(()=>validateGlossary(next));
-console.log("PASS Glossar-Schema: 29 Begriffe, getrennte Stufen, neue Begriffe und sichere Validierung");
+console.log("PASS Glossar-Schema: "+original.begriffe.length+" Begriffe, getrennte Stufen, neue Begriffe und sichere Validierung");

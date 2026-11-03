@@ -47,5 +47,7 @@ main{max-width:1050px;margin:auto;padding:35px 28px 80px}
 <footer class="footer">Quelle: kursseiten/basis-*/materialien.md · Kantonsschule Stadelhofen</footer>
 </main><script src="notebook-blocks.js" defer></script></body></html>
 """
+    document = document.replace("Zehn Doppellektionen zu je 90 Minuten.",
+                                f"{len(lessons)} Doppellektionen zu je 90 Minuten.")
     (out / "materialien.html").write_text(document, encoding="utf-8")
     print(f"Built first-year teacher material index: {len(lessons)} lessons")

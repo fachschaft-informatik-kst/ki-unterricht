@@ -22,7 +22,8 @@ with TemporaryDirectory() as tmp:
     assert all(p.is_file() for p in paths)
     lessons = load_course(root)["lessons"]
     new = next(l for l in lessons if l["id"] == "ki-im-alltag")
-    assert new["number"] == 4 and new["view"] == "ki-im-alltag"
+    previous = next(l for l in original["lessons"] if l["id"] == "03")
+    assert new["number"] == previous["number"] + 1 and new["view"] == "ki-im-alltag"
     assert [l["id"] for l in lessons if l["id"] != new["id"]] == [l["id"] for l in original["lessons"]]
     create(root, "Vertiefung", section="ki-im-alltag", after="ki-im-alltag")
     assert len([l for l in load_course(root)["lessons"] if l["view"] == "ki-im-alltag"]) == 2
