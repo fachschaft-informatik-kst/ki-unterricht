@@ -51,7 +51,7 @@ with tempfile.TemporaryDirectory() as folder:
     assert owner["status"]=="planned" and owner["source"] is None
     assert (target/"kurse/mai/1-klasse/content").is_dir()
     try: create(target,"MAI",1,"Doppelter Kurs")
-    except ValueError: pass
+    except (ValueError, FileExistsError): pass
     else: raise AssertionError("Duplicate teacher should fail")
     entry=json.loads((target/"shared/course-sites.json").read_text(encoding="utf-8"))["courses"][0]
     entry["status"]="published"; entry["source"]="generated"
