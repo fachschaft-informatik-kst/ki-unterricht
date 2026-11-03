@@ -134,7 +134,7 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
  restoring=true;
  try{
   await loaded;
-  const restored=saved[current] ? await request('restore',{notebook:validate(saved[current]),keepKernel:true}) : null;
+  const restored=saved[current] ? await request('restore',{notebook:validate(saved[current]),keepKernel:true,files:notebookUploads[current]||[]}) : null;
   // Published notebooks already exist in the build: a costly initial widget
   // snapshot is unnecessary. Changes auto-save, and switching/ZIP export always
   // take a fresh snapshot. A running Python environment is ready immediately.
@@ -146,6 +146,8 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
     ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
     : restored ? 'Gesicherter Stand geladen · geänderte Startzellen bitte manuell ausführen.'
       : 'Notebook bereit · Änderungen werden automatisch gesichert.';
+  if(restored?.uploadError) status.textContent+=' · Uploads: '+restored.uploadError;
+  else if(restored?.uploadsRestored) status.textContent+=' · '+restored.uploadsRestored+' Upload-Datei(en) wiederverwendbar.';
   notebookLoading('ready');
  }catch(e){
   status.textContent='Wiederherstellung fehlgeschlagen: '+e.message;
@@ -208,7 +210,7 @@ function reflectionHTML(rows){
  const sections=rows.map(e=>'<section><h2>'+esc(e.chapter)+'</h2><h3>'+esc(e.question)+'</h3><p>'+esc(e.answer).replace(/\n/g,'<br>')+'</p></section>').join('');
  return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Lernjournal · 1. Klasse</title><style>body{max-width:850px;margin:40px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h2{font-size:19px;margin-bottom:4px}h3{font-size:16px;margin:0 0 8px}section{border-bottom:1px solid #ddd;margin:22px 0;padding-bottom:14px;break-inside:avoid}p{white-space:normal}</style><h1>KI-Lernjournal · 1. Klasse</h1>'+meta+'<p>Antworten aus dem gesicherten Kursstand (auch Auswahlaufgaben). Notebook-Ergebnisse befinden sich separat im ZIP.</p>'+(sections||'<p>Noch keine Antworten eingetragen.</p>')+'</html>';
 }
-backup.addEventListener('click',async()=>{backup.disabled=true;try{await loaded;if(current)await snapshot();const data={schema:SCHEMA,answers:answers(),notebooks:notebookNames.filter(n=>saved[n]),archived:notebookNames.filter(n=>legacyNotebooks[n]),uploads:[]};
+backup.addEventListener('click',async()=>{backup.disabled=true;try{await loaded;if(current&&ready)await snapshot();const data={schema:SCHEMA,answers:answers(),notebooks:notebookNames.filter(n=>saved[n]),archived:notebookNames.filter(n=>legacyNotebooks[n]),uploads:[]};
 const rows=readableAnswers();
 const entries=[{name:'kursstand.json',data:''},{name:'Journal.html',data:reflectionHTML(rows)},{name:'Reflexionen.txt',data:rows.map(e=>e.chapter+' – '+e.question+'\n'+e.answer).join('\n\n')||'Noch keine Antworten eingetragen.'},
  {name:'LESEN.txt',data:'Journal.html enthält alle ausgefüllten Antworten in lesbarer Form, einschliesslich Auswahlfeldern. Reflexionen.txt enthält dieselben Antworten als Text. notebooks/ enthält bearbeitete Jupyter-Notebooks mit Ausgaben. notebooks/archiv/ enthält die frühere DL3/4-Version, falls sie ersetzt wurde. daten/ enthält Fotostudio-JSON und im Notebook ausgewählte Uploads. Nach ZIP-Import sind Notebook-Ausgaben sichtbar; Python-Variablen und das trainierte Netz müssen durch erneutes Ausführen der Zellen erstellt werden. Fotostudio-JSON vor dem Training erneut im Notebook auswählen. Originalfotos separat sichern.\n'},
