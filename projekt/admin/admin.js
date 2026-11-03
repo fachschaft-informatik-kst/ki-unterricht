@@ -598,11 +598,16 @@ let navigationRevision=0;
 function useFile(path,sha,content,original=content){
   const targetSection=path.split("/")[1];
   if(path.startsWith("lehrperson/")){
-    const base=courseProfile().source;
-    if(base&&!path.startsWith("lehrperson/"+base+"/"))throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
-    if(!base&&path.startsWith("lehrperson/irn-"))throw Error("IRN-Material gehört zu einem anderen Kurs.");
+    const files=courseProfile().teacherFiles;
+    if(files&&!Object.values(files).includes(path))
+      throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
+    if(!files){
+      const base=courseProfile().source;
+      if(base&&!path.startsWith("lehrperson/"+base+"/"))throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
+      if(!base&&path.startsWith("lehrperson/irn-"))throw Error("IRN-Material gehört zu einem anderen Kurs.");
+    }
   }
-  if(/\/(?:planung\.json|materialien\.md)$/.test(path)){
+  if(/^kursseiten\/[^/]+\/(?:[0-9]{3}-[^/]+\.md|planung\.json|materialien\.md)$/.test(path)){
     const own=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest?.content||'{"sections":[]}');
     if(!own.sections.some(section=>section.id===targetSection))
       throw Error("Dieser Inhalt gehört zu einem anderen Kurs. Bitte zuerst den Kurs wechseln.");
