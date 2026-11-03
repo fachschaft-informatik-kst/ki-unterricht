@@ -781,7 +781,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(previewStyle.buttonRadius,"7px");
 
     await notebookCard.waitFor();
-    assert.equal(await notebookCard.getAttribute("data-notebook"),"kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb");
+    assert.equal(await notebookCard.getAttribute("data-notebook"),"content/lesson_einstieg_mein_python_labor.ipynb");
     assert.equal(new URL(await notebookCard.locator("a.ki-notebook-direct").getAttribute("href")).searchParams.get("path"),
       "portal/lesson_einstieg_mein_python_labor.ipynb");
     await page.locator("#chapterNotebookLinks button").click();
