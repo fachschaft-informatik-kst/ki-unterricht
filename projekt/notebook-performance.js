@@ -1,19 +1,30 @@
 // Anonymous, session-only timings for one managed JupyterLite iframe.
 // No uploads, notebook code, student identifiers or URLs are recorded.
 const sessions = new WeakMap();
+const completed = new WeakMap();
 const phases = new Set(['document','kernel','autostart','cells','interactive','restoring','uploads','widgets','restored']);
 const now = () => performance.now();
 export function startNotebookTiming(frame,name,kind) {
-  sessions.set(frame,{name,kind,start:now(),opened:null,stages:{}});
+  const start=now();
+  completed.delete(frame);
+  // Direct clicks must count even if the frame is initialized afterwards.
+  sessions.set(frame,{name,kind,start,opened:kind==='open'?start:null,stages:{}});
 }
 export function markNotebookTiming(frame,phase) {
   const entry=sessions.get(frame);
   if (!entry||!phases.has(phase)||entry.stages[phase]!==undefined) return;
   entry.stages[phase]=Math.round(now()-entry.start);
 }
-export function openedNotebook(frame) {
+export function openedNotebook(frame,name=null) {
   const entry=sessions.get(frame);
-  if(entry && entry.opened===null)entry.opened=now();
+  if(entry) {
+    if(entry.opened===null && (!name||entry.name===name))entry.opened=now();
+    return;
+  }
+  // An already-completed warmup has zero visible wait when the same
+  // notebook is opened; don't mistake clicking a different notebook for this.
+  const sample=completed.get(frame);
+  if(sample && sample.visibleWaitMs===null && (!name||sample.name===name))sample.visibleWaitMs=0;
 }
 export function finishNotebookTiming(frame) {
   const entry=sessions.get(frame);
@@ -27,6 +38,7 @@ export function finishNotebookTiming(frame) {
   if(samples.length>50)samples.splice(0,samples.length-50);
   frame.dataset.loadMs=String(milliseconds);
   sessions.delete(frame);
+  completed.set(frame,result);
   return result;
 }
 export function notebookTimingSummary(samples=window.KINotebookTimings||[]) {
