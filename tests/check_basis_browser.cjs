@@ -281,7 +281,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
     await page.locator('input[aria-label="Fotostudio-JSON zur ZIP-Sicherung hinzufügen"]').setInputFiles({name:'fotos.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(studio))});
     const downloadPromise=page.waitForEvent('download');
-    await page.getByRole('button',{name:'Gesamten Kursstand als ZIP sichern'}).click();
+    assert.equal(await page.locator('#basis-download').isVisible(),false,'Text-only JSON export should be hidden under optional tools');
+     await page.getByRole('button',{name:'Kursstand als ZIP herunterladen'}).click();
     const download=await downloadPromise;
     const archivePath=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'ki-basis-zip-')),'kursstand.zip');
     await download.saveAs(archivePath);
@@ -296,6 +297,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(JSON.parse(await files.get('notebooks/basis_neuron.ipynb').text()).cells[0].source[0],'print("Mein Versuch")');
     await note.fill('Wird beim Import ersetzt');
     const restoredPhoto=page.waitForEvent('download');
+    page.once('dialog',dialog=>dialog.accept());
     await page.locator('input[aria-label="ZIP-Kursstand wiederherstellen"]').setInputFiles(archivePath);
     await restoredPhoto;
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.');
