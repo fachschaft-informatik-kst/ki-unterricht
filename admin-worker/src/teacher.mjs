@@ -178,7 +178,7 @@ export function fieldTopic(field,lessonTitle=""){
   // Keep titles short and readable; IDs remain available separately.
   return detail?subject+": "+detail:subject;
 }
-async function getQuestions(lesson,course,token,github,repo){
+async function getQuestions(lesson,course,token,github,repo,profile){
   const views=new Set([lesson.view]);
   if(course.startsWith("bok/")&&lesson.number>=5&&lesson.number<=8){
     (course==="bok/4-klasse"?["projekt","journal","fremdmodell","sicherung"]:
@@ -187,8 +187,9 @@ async function getQuestions(lesson,course,token,github,repo){
   const tree=await github(token,"/repos/"+repo+"/git/trees/main?recursive=1");
   if(tree.truncated)throw Error("Unvollständiger Quellindex");
   const files=(tree.tree||[]).filter(item=>item.type==="blob"&&
-    /^kursseiten\/[a-z0-9-]+\/\d{3}-[a-z0-9-]+\.md$/.test(item.path)&&
-    views.has(item.path.split("/")[1])).map(item=>item.path);
+    item.path.startsWith(profile.courseRoot+"/kursseiten/")&&
+    /\/[0-9]{3}-[a-z0-9-]+\.md$/.test(item.path)&&
+    views.has(item.path.split("/")[4])).map(item=>item.path);
   // One missing chapter must not hide every other original prompt.
   const data=await Promise.allSettled(files.map(path=>getText(token,path,github,repo)));
   return Object.assign({},...data.filter(item=>item.status==="fulfilled")
@@ -200,7 +201,7 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
   const manifest=await getJson(token,profile.manifest,github,repo);
   const views=(manifest.sections||[]).filter(s=>s.teaching&&/^[a-z][a-z0-9-]*$/.test(s.id));
   if(views.length>20)throw Error("Zu viele Unterrichtsbereiche.");
-  const plans=await Promise.all(views.map(s=>getJson(token,"kursseiten/"+s.id+"/planung.json",github,repo)));
+  const plans=await Promise.all(views.map(s=>getJson(token,profile.courseRoot+"/kursseiten/"+s.id+"/planung.json",github,repo)));
   const lessons=plans.flatMap(p=>p.lessons||[]).sort(sortLessons)
     .map((lesson,index)=>({...lesson,number:index+1}));
   const current=lessons.find(l=>l.number===Number(selected))||lessons[0];
@@ -209,7 +210,7 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
     selectedNumber:current.number,selectedTitle:current.title};
   if(kind==="planung")return {...base,lesson:current};
   if(kind==="materialien"){
-    const content=await getText(token,"kursseiten/"+current.view+"/materialien.md",github,repo);
+    const content=await getText(token,profile.courseRoot+"/kursseiten/"+current.view+"/materialien.md",github,repo);
     const markdown=materialForLesson(content,current.number);
     const intro=profile.teacherFiles.materialsIntro?
       await getText(token,profile.teacherFiles.materialsIntro,github,repo):"";
@@ -223,7 +224,7 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
   const notes=headings(general).filter(block=>numbers(block.title).includes(current.number))
     .map(block=>({title:block.title,markdown:block.text}));
   const entries=answerRows(fields,current.number);
-  let questions={};try{questions=await getQuestions(current,course,token,github,repo);}catch{ /* use explicit fallback */ }
+  let questions={};try{questions=await getQuestions(current,course,token,github,repo,profile);}catch{ /* use explicit fallback */ }
   for(const entry of entries){
     const original=questions[entry.field];
     const curated=PROMPTS[entry.field];
@@ -251,42 +252,32 @@ export function normalizeTeacherCourses(registry){
     const teacher=item?.teacher,grade=item?.grade,slug=item?.slug;
     const id=typeof teacher==="string"&&Number.isInteger(grade)?
       teacher.toLowerCase()+"-"+grade+"-klasse":"";
-    const legacy={
-      "bok/1-klasse":["basis","kursseiten/basis-manifest.json","basis-","basis_"],
-      "bok/4-klasse":["vertiefung","kursseiten/manifest.json","",""],
-      "irn/1-klasse":["irn1","kursseiten/irn-1-manifest.json","irn-1-","irn1_"],
-      "irn/4-klasse":["irn4","kursseiten/irn-4-manifest.json","irn-4-","irn4_"]
-    }[slug];
-    const config=legacy||[id,"kursseiten/"+teacher?.toLowerCase()+"-"+grade+"-manifest.json",
-      teacher?.toLowerCase()+"-"+grade+"-",teacher?.toLowerCase()+grade+"_"];
+    const base="kurse/"+slug;
+    const expectedManifest=base+"/kursseiten/manifest.json";
+    const expectedSection=grade===1?"basis-":"";
+    const expectedNotebook=grade===1?"basis_":"";
+    const editorKey=({"bok/1-klasse":"basis","bok/4-klasse":"vertiefung",
+      "irn/1-klasse":"irn1","irn/4-klasse":"irn4"})[slug]||id;
     const sources=item?.teacherFiles;
+    const expectedFiles={solutions:base+"/lehrperson/musterloesungen.md",
+      fields:base+"/lehrperson/musterloesungen-felder.md",
+      glossary:base+"/kursseiten/glossar.json",
+      ...(grade===4?{materialsIntro:base+"/lehrperson/materialien.md"}:{})};
     if(!/^[A-Z][A-Z0-9]{1,9}$/.test(teacher||"")||
-       !Number.isInteger(grade)||grade<1||grade>20||
+       !Number.isInteger(grade)||![1,4].includes(grade)||
        slug!==teacher.toLowerCase()+"/"+grade+"-klasse"||item.id!==id||
-       !/^[a-z][a-z0-9-]*$/.test(item.editorKey||"")||
-       [item.editorKey,item.manifest,item.sectionPrefix,item.notebookPrefix].some((v,i)=>v!==config[i])||
+       item.editorKey!==editorKey||item.courseRoot!==base||
+       item.manifest!==expectedManifest||
+       item.sectionPrefix!==expectedSection||item.notebookPrefix!==expectedNotebook||
        !["planned","published"].includes(item.status)||
        (item.status==="planned"?item.source!==null:!["basis","projekt","generated"].includes(item.source))||
-       (legacy?item.source!==null&&item.source!==({"bok/1-klasse":"basis","bok/4-klasse":"projekt"}[slug]):
-                item.source!==null&&item.source!=="generated")||
        !/^[#][0-9a-fA-F]{6}$/.test(item.theme?.accent||"")||
        typeof item.name!=="string"||!item.name.trim()||item.name.length>80||
-       !sources||!["solutions","fields","glossary"].every(k=>typeof sources[k]==="string")||
-       Object.keys(sources).some(k=>!["solutions","fields","glossary","materialsIntro"].includes(k))||
-       Object.entries(sources).some(([kind,path])=>typeof path!=="string"||path.includes("..")||
-         !(path.startsWith("lehrperson/")&&path.endsWith(".md")||
-           kind==="glossary"&&path==="kursseiten/glossar.json")||
-         (!legacy||teacher==="IRN")&&!path.startsWith("lehrperson/"+teacher.toLowerCase()+"-"+grade+"/")||
-         legacy&&teacher==="BOK"&&(path!==({
-           solutions:"lehrperson/musterloesungen.md",
-           fields:"lehrperson/musterloesungen-felder-"+grade+"-klasse.md",
-           glossary:"kursseiten/glossar.json",
-           materialsIntro:"lehrperson/materialien.md"
-         }[kind])||kind==="materialsIntro"&&grade!==4))||
+       !sources||JSON.stringify(sources)!==JSON.stringify(expectedFiles)||
        ids.has(item.id)||slugs.has(slug)||keys.has(item.editorKey)||manifests.has(item.manifest))
-      throw Error("Kursregister enthält einen ungültigen oder doppelten Eintrag: "+slug);
+       throw Error("Kursregister enthält einen ungültigen oder doppelten Eintrag: "+slug);
     ids.add(item.id);slugs.add(slug);keys.add(item.editorKey);manifests.add(item.manifest);
-    courses.push({id:item.id,teacher,grade,slug,editorKey:item.editorKey,manifest:item.manifest,
+    courses.push({id:item.id,teacher,grade,slug,courseRoot:base,editorKey:item.editorKey,manifest:item.manifest,
       sectionPrefix:item.sectionPrefix,notebookPrefix:item.notebookPrefix,teacherFiles:sources,
       source:item.source,status:item.status,name:item.name,accent:item.theme.accent,ready:true});
   }
