@@ -52,6 +52,14 @@ for slug in ("irn/1-klasse", "irn/4-klasse"):
                     "musterloesungen/index.html"):
         assert not (dist / slug / private).exists(), "Public teacher-only file: "+slug+"/"+private
     assert "kst-ki-admin.kevin-bohn.workers.dev/teacher/" in page
+    if slug.endswith("/4-klasse"):
+        progress=(dist/slug/"progress.js").read_text(encoding="utf-8")
+        assert "kst-ki-irn-4-klasse-progress-v1" in progress
+        assert "kst-ki-projekt-2026-v1" not in progress
+    else:
+        persistence=(dist/slug/"persistence.js").read_text(encoding="utf-8")
+        assert "kst-ki-irn-1-klasse-notebooks-v1" in persistence
+        assert "kst-ki-basis-notebooks-v1" not in persistence
 assert 'url=kurse.html' in (dist / "index.html").read_text(encoding="utf-8")
 print("PASS 4 teacher/grade URLs, BOK course assets and legacy links, IRN placeholders")
 

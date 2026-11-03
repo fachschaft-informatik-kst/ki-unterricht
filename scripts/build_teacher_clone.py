@@ -98,6 +98,14 @@ def render_clone(course: dict, target: Path) -> None:
         script = target / "basis.js"
         script.write_text(script.read_text(encoding="utf-8").replace("kst-ki-basis-", "kst-ki-" + course["id"] + "-"),
                           encoding="utf-8")
+    if course["grade"] == 4:
+        progress = target / "progress.js"
+        data = progress.read_text(encoding="utf-8")
+        data = data.replace("kst-ki-projekt-2026-v1", "kst-ki-" + course["id"] + "-progress-v1")
+        data = data.replace("ki-projekt-seitenstand-v1", "ki-" + course["id"] + "-seitenstand-v1")
+        data = data.replace("kst-ki-nav-collapsed", "kst-ki-" + course["id"] + "-nav-collapsed")
+        data = data.replace("ki-projekt-seitenstand.json", "ki-" + course["id"] + "-seitenstand.json")
+        progress.write_text(data, encoding="utf-8")
     if course["grade"] == 1:
         persistence = target / "persistence.js"
         code = persistence.read_text(encoding="utf-8")
