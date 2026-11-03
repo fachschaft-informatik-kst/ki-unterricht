@@ -11,22 +11,16 @@ Ein fehlgeschlagener Build blockiert das gesamte neue Deployment.
 Die [Kursübersicht](https://fachschaft-informatik-kst.github.io/ki-unterricht/kurse.html)
 wird vollständig aus `shared/course-sites.json` erzeugt.
 
-| Kurs | URL | Manifest | Unterrichtsbereiche | Lehrpersonenunterlagen |
-| --- | --- | --- | --- | --- |
-| BOK 1 | `/bok/1-klasse/` | `kursseiten/basis-manifest.json` | `basis-*` | zentrale BOK-Lösungen plus eigene Feldantworten |
-| BOK 4 | `/bok/4-klasse/` | `kursseiten/manifest.json` | über Manifest eindeutig zugeordnet | zentrale BOK-Lösungen plus eigene Feldantworten |
-| IRN 1 | `/irn/1-klasse/` | `kursseiten/irn-1-manifest.json` | `irn-1-*` | `lehrperson/irn-1/` |
-| IRN 4 | `/irn/4-klasse/` | `kursseiten/irn-4-manifest.json` | `irn-4-*` | `lehrperson/irn-4/` |
+| Kurs | URL | Aktiver Quellordner | Status |
+| --- | --- | --- | --- |
+| BOK 1 | `/bok/1-klasse/` | `kursseiten/bok/1-klasse/` | veröffentlicht |
+| BOK 4 | `/bok/4-klasse/` | `kursseiten/bok/4-klasse/` | veröffentlicht |
+| IRN 1 | `/irn/1-klasse/` | `kursseiten/irn/1-klasse/` | Entwurf, vollständige Kopie von Vorlage 1 |
+| IRN 4 | `/irn/4-klasse/` | `kursseiten/irn/4-klasse/` | Entwurf, vollständige Kopie von Vorlage 4 |
 
-BOK ist öffentlich veröffentlicht, IRN verfügt über unabhängige bearbeitbare
-Entwürfe und geschützte Lehrpersonenansichten. Die öffentlichen IRN-Schülerseiten
-bleiben in Vorbereitung. **IRN erhält keine Kopien der BOK-Unterlagen.**
+Die initialen Inhalte aller vier Kurse wurden jeweils 1:1 aus den Vorlagen `kursseiten/template/1-klasse/` und `kursseiten/template/4-klasse/` kopiert; bei späteren Bearbeitungen entwickeln sie sich unabhängig. Jeder Ordner besitzt Manifest, sämtliche Kapitel, AVIVA-Pläne, Materialkoffer, Glossar und Musterlösungen. Gleichnamige Kapitel oder Abschnitts-IDs in verschiedenen Kursordnern sind erlaubt, aber kein Kurs darf Dateien eines anderen Kurses als Quellen verwenden.
 
-Historische BOK-Adressen `/basis/` und `/projekt/` bleiben bestehen;
-ebenso die vorhandenen Antwort-IDs, lokalen Speicherschlüssel, Notebook-Pfade
-und ZIP-Formate. Eine Verschiebung dieser Quellen würde gespeicherte Schülerstände
-und Lesezeichen gefährden. Deshalb erfolgt die Trennung über **explizite
-Eigentümerschaft**, nicht über ein massenhaftes Verschieben bestehender Dateien.
+Die öffentlichen IRN-Schülerseiten sind vorerst noch in Vorbereitung, ihre vollständigen Unterrichtsinhalte können aber bereits über den geschützten Editor bearbeitet werden. Historische BOK-Adressen `/basis/` und `/projekt/` sowie gespeicherte Antwort-IDs, Notebookpfade und ZIP-Formate bleiben bestehen. Flache alte Quellen unter `kursseiten/` bleiben nur noch für Migration und Vergleich; die produktiven BOK-Portale lesen die neuen Ordner.
 
 ## Zentrales Kursregister
 
@@ -43,18 +37,7 @@ Jeder Eintrag in `shared/course-sites.json` enthält:
   `published` für einen neuen generischen Schülerkurs.
 - `name`, `theme.accent`: sichtbarer Kurstitel und Kursfarbe.
 
-`scripts/course_registry.py` prüft das Kursregister und alle vorhandenen
-Manifeste vor dem Build. Eine Bereichs-ID darf **nur einem Kurs** zugeordnet
-sein; neue Kurse müssen ihren eigenen Lehrpersonen- und Notebook-Namensraum
-verwenden. Der Worker prüft bei der PR-Einreichung dieselben Eigentümergrenzen
-und verbietet es beispielsweise, ein neues Notebook der einen Lehrperson an
-ein Kapitel einer anderen Lehrperson anzuhängen.
-
-Die beiden BOK-Kurse verwenden bewusst ein gemeinsames strukturiertes Glossar
-(`kursseiten/glossar.json`) und allgemeine BOK-Musterlösungen;
-die feldbezogenen Antworten werden nach Klassenstufe getrennt.
-Das ist eine dokumentierte historische Ausnahme und **kein Fallback für
-neue Lehrpersonen**. IRN und alle neuen Kurse erhalten eigene Dateien.
+`scripts/course_registry.py` prüft, dass jede Lehrperson und Klassenstufe nur Dateien im eigenen Kursordner referenziert. Gleichnamige Unterrichtsbereiche der BOK- und IRN-Kopie sind zulässig. Der Worker validiert die Eigentümergrenzen bei der PR-Einreichung und stellt nur zugehörige Pläne, Kapitel und Lehrpersonendateien bereit. Das strukturierte Glossar sowie Musterlösungen sind **je Kurs physisch separat vorhanden**, auch wenn der initiale Inhalt identisch ist.
 
 ## Zusätzliche Lehrperson oder neue Klassenstufe anlegen
 
@@ -67,19 +50,20 @@ python scripts/course_registry.py
 make preview
 ```
 
-Der Generator erstellt, ohne andere Kursdateien zu verändern:
+Der Generator erstellt, ohne andere Kursdateien zu verändern (minimaler leerer Kursentwurf):
 
 ```text
 shared/course-sites.json
-kursseiten/mai-1-manifest.json
-kursseiten/mai-1-kurs/
-  010-start.md
-  planung.json
-  materialien.md
-lehrperson/mai-1/
-  musterloesungen.md
-  musterloesungen-felder.md
-  glossar.md
+kursseiten/mai/1-klasse/
+  manifest.json
+  mai-1-kurs/
+    010-start.md
+    planung.json
+    materialien.md
+  lehrperson/
+    musterloesungen.md
+    musterloesungen-felder.md
+    glossar.md
 ```
 
 Die URL ist `/mai/1-klasse/`. Bis zur Veröffentlichung wird dort eine

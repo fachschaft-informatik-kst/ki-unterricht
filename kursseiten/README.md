@@ -1,6 +1,26 @@
 # Unterrichtsinhalte bearbeiten
 
-Diese Dateien sind die Quellen der Kursseite. HTML und der vollständige Markdown-Unterrichtsplan werden unter `_build/site/projekt/` erzeugt und **nicht** in Git versioniert.
+## Verzeichnisstruktur: Vorlage und eigenständige Kurse
+
+```text
+kursseiten/
+├── template/
+│   ├── 1-klasse/       # BOK 1 als unveränderte Ausgangsvorlage
+│   └── 4-klasse/       # BOK 4 als unveränderte Ausgangsvorlage
+├── bok/
+│   ├── 1-klasse/       # eigene bearbeitbare Kopie der Vorlage 1
+│   └── 4-klasse/       # eigene bearbeitbare Kopie der Vorlage 4
+└── irn/
+    ├── 1-klasse/       # eigenständige 1:1-Kopie der Vorlage 1
+    └── 4-klasse/       # eigenständige 1:1-Kopie der Vorlage 4
+```
+
+Jeder Klassenordner enthält `manifest.json`, sämtliche Themenordner mit nummerierten Kapiteln, `planung.json` und `materialien.md`, ausserdem `glossar.json` und `lehrperson/` mit Musterlösungen und weiteren Lehrpersonenmaterialien. **BOK und IRN sind initial inhaltlich identische, aber unabhängig bearbeitbare Kopien der jeweiligen Vorlage.** Die Vorlagen unter `template/` sind keine aktiven Kurse und werden beim Build nicht als Unterrichtsseiten veröffentlicht. Änderungen an BOK ändern IRN oder die Vorlage nicht und umgekehrt.
+
+Die öffentlichen BOK-URLs und bisherigen Notebook-/Antwort-IDs bleiben erhalten. Die spezialisierten Notebook- und ZIP-Laufzeiten liegen weiterhin in gemeinsam genutzten technischen Verzeichnissen (`content/`, `basis/`, `projekt/`); eine Kopie der Kursquellen dupliziert nicht automatisch die Python-Laufzeit. IRN ist im Kursregister derzeit noch als *in Vorbereitung* markiert, verfügt im Editor aber über die vollständigen Vorlageninhalte. Historische flache Quellpfade unter `kursseiten/` bleiben vorerst aus Migrations- und Vergleichsgründen erhalten; verbindliche Quellen sind ausschliesslich die im Register angegebenen Kursordner.
+
+
+Massgeblich sind die Quellen in den im Kursregister angegebenen Kursordnern. Die alten flachen Quellen unter `kursseiten/` dienen nur noch als Migrationsreferenz. HTML und der vollständige Markdown-Unterrichtsplan werden je nach Kurs unter `_build/site/projekt/` oder `_build/site/basis/` erzeugt und **nicht** in Git versioniert.
 
 Pro Thema liegen hier `planung.json` (eine oder mehrere Doppellektionen),
 `materialien.md` (Abschnitte mit `## Doppellektion <stabile-id>`) und nummerierte
@@ -75,11 +95,11 @@ python scripts/new_chapter.py einstieg --after 030 --nummer 3a --title "Neue Per
 make preview
 ```
 
-Das erzeugt `kursseiten/einstieg/035-neue-perspektiven.md` mit dem passenden YAML-Kopf. Neue Kapitel erscheinen automatisch in der bestehenden Kapitel-Navigation. Mit `--after 030` kommt das Kapitel zwischen die Dateien 030 und 040; ohne `--after` landet es am Ende, vor `999-abschluss.md`. `--nummer` und `--title` sind erforderlich. Bestehende Dateien und stabile Schülerantwort-IDs werden nicht angefasst. Weitere Optionen: `python scripts/new_chapter.py --help`.
+Das erzeugt `kursseiten/bok/4-klasse/einstieg/035-neue-perspektiven.md` mit dem passenden YAML-Kopf. Neue Kapitel erscheinen automatisch in der bestehenden Kapitel-Navigation. Mit `--after 030` kommt das Kapitel zwischen die Dateien 030 und 040; ohne `--after` landet es am Ende, vor `999-abschluss.md`. `--nummer` und `--title` sind erforderlich. Bestehende Dateien und stabile Schülerantwort-IDs werden nicht angefasst. Weitere Optionen: `python scripts/new_chapter.py --help`.
 
 Alternativ eine Kapiteldatei von Hand anlegen:
 
-Eine neue Datei z. B. kursseiten/perzeptron/035-vertiefung.md erstellen:
+Eine neue Datei z. B. kursseiten/bok/4-klasse/perzeptron/035-vertiefung.md erstellen:
 
     ---
     type: chapter
@@ -124,48 +144,20 @@ GitHub Actions baut die Seite beim Push automatisch.
 
 Fachliche Texte, Aufgaben und Links werden in `kursseiten/` gepflegt; `projekt/portal.js` enthält nur noch Controller-Logik. Für eine schnelle lokale Vorschau `python scripts/preview.py` ausführen; `--full` baut und startet zusätzlich JupyterLite. Siehe Haupt-README.
 
-## Eigenständige Quellen von BOK, IRN und neuen Lehrpersonen
+## Kursregister, Editor und zusätzliche Lehrpersonen
 
-Die Quelle aller Kurszuordnungen ist `shared/course-sites.json`. Der
-Build prüft mit `scripts/course_registry.py`, dass jeder Bereich nur in
-**einem** Kursmanifest vorkommt und die getrennten Namensräume gültig sind.
+Im zentralen Register `shared/course-sites.json` verweist `manifest` für jeden Kurs auf den eigenen Pfad `kursseiten/<kürzel>/<stufe>-klasse/manifest.json`. Die Kapiteldateien werden relativ dazu gelesen. Die Lehrpersonenunterlagen (`teacherFiles`) und das Glossar sind im selben Kursordner. Die Einträge in `template/` besitzen keinen Kursregister-Eintrag und sind nicht im Editor auswählbar.
 
-| Kurs | Manifest | Unterrichtsbereiche | Lehrerdateien |
-| --- | --- | --- | --- |
-| BOK 1 | `basis-manifest.json` | `basis-*` | eigene Feldlösungen plus historische BOK-Grundlagen |
-| BOK 4 | `manifest.json` | Bereiche des BOK-4-Manifests | eigene Feldlösungen plus historische BOK-Grundlagen |
-| IRN 1 | `irn-1-manifest.json` | `irn-1-*` | `lehrperson/irn-1/` |
-| IRN 4 | `irn-4-manifest.json` | `irn-4-*` | `lehrperson/irn-4/` |
-
-Die BOK-URLs `/bok/1-klasse/` und `/bok/4-klasse/` sind veröffentlicht;
-die historischen `/basis/` und `/projekt/` bleiben für Links,
-Notebook-Zustände und Schülerantworten erreichbar. Die öffentlichen
-IRN-Seiten befinden sich noch in Vorbereitung, **aber IRN besitzt eigene,
-bearbeitbare Kapitel, AVIVA-Pläne, Materialkoffer und Musterlösungen**.
-
-### Weitere Lehrperson hinzufügen
+Beim ersten Anlegen wurden die zwei BOK-Kurse sowie IRN 1 und IRN 4 jeweils **1:1 aus den entsprechenden Vorlagen** übernommen. Für neue Lehrpersonen ist der einfache CLI-Einstieg ein eigener leerer Kurs:
 
 ```sh
-python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b" --dry-run
 python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b"
 python scripts/course_registry.py
 make preview
 ```
 
-Der Generator legt das Manifest, `mai-1-kurs/` mit einem Kapitel,
-`planung.json` und `materialien.md` sowie die drei unabhängigen
-Lehrpersonenquellen unter `lehrperson/mai-1/` an. Der Kurs erscheint
-im gemeinsamen Editor mit eigener Navigation und Farbe. Ohne Freigabe
-bleibt die Schülerseite eine Vorbereitungsseite; zum Veröffentlichen im
-Register `status: published` und `source: generated` setzen.
-Dadurch wird eine einfache Schülerseite mit kursbezogenen Text-/
-Auswahlantworten und JSON-Transfer erzeugt. Für spezialisierte BOK-
-Notebooks, Fotostudio oder ZIP-Workflows braucht es eine separate Integration.
+Die Dateien entstehen unter `kursseiten/mai/1-klasse/`. Für eine komplette inhaltliche Vorlagenkopie statt eines leeren Entwurfs ist vor der Veröffentlichung ein separates Kopieren und die Anpassung der Kursregister-Metadaten erforderlich; Vorlagen sollten nicht direkt bearbeitet werden. Ohne Freigabe bleibt die Schülerseite eine Vorbereitungsseite. Der Editor bearbeitet die Dateien des ausgewählten Kurses; weitere Lehrpersonen benötigen weder einen eigenen Worker noch ein zweites Repository.
 
-Die lokalen Befehle `new_lesson.py` und `new_chapter.py` sind noch auf
-den historischen BOK-4-Kurs voreingestellt; für andere Kurse bitte die
-jeweilige Kursauswahl im Editor verwenden. Neue Lehrpersonen erhalten
-einen eigenen Präfix `<kürzel>-<stufe>-` für sämtliche Bereiche.
-Alte Schüler-IDs und ZIP-Formate werden nicht umbenannt.
+Die lokalen Generatoren `new_lesson.py` und `new_chapter.py` bearbeiten standardmässig **BOK 4**, alle weiteren Kursvarianten über den Editor. Kapitel-IDs können zwischen verschiedenen Kurskopien gleich sein, dürfen sich **innerhalb eines Kurses** aber nicht überschneiden. Für vorhandene gespeicherte Antworten die IDs nicht ändern.
 
 [Mehrkurs-Architektur und Sicherheitsgrenzen](../docs/MULTIKURS-DEPLOYMENT.md)
