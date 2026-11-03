@@ -1,35 +1,43 @@
-# Kursvorlagen und getrennte Lehrpersonen-Kopien
+# Kursvorlagen, unabhängige Lehrpersonenordner und Build
 
-## Zielstruktur
+## Die Quellenhierarchie
+
+Die vorhandene, didaktisch ausgearbeitete **BOK 1. Klasse** und **BOK 4. Klasse** bilden die unveränderten Ausgangsstände `templates/1-klasse/` und `templates/4-klasse/`. Beide wurden vollständig kopiert nach `kurse/bok/<klasse>/` und `kurse/irn/<klasse>/`.
 
 ```text
-templates/
-  1-klasse/             # Referenz: vollständige BOK-1-Quellen
-  4-klasse/             # Referenz: vollständige BOK-4-Quellen
+templates/{1-klasse,4-klasse}/
 kurse/
-  bok/
-    1-klasse/           # eigene Kopie von templates/1-klasse
-    4-klasse/           # eigene Kopie von templates/4-klasse
-  irn/
-    1-klasse/           # eigene Kopie von templates/1-klasse
-    4-klasse/           # eigene Kopie von templates/4-klasse
+  bok/{1-klasse,4-klasse}/
+  irn/{1-klasse,4-klasse}/
+shared/  basis/  projekt/  admin-worker/  scripts/
 ```
 
-Jede Kopie enthält ein `kursseiten/manifest.json`, die zugehörigen Kapitelordner, AVIVA-`planung.json`, `materialien.md`, die im Kursregister zugeordneten Lehrpersonen-Unterlagen und die direkt aus Kapiteln referenzierten Notebookdateien unter `content/`. Ein `snapshot.json` benennt Herkunft und kopierte Bereiche.
+Jedes Kursverzeichnis hat dieselben internen Unterordner: `kursseiten/manifest.json`, `kursseiten/glossar.json`, `kursseiten/<kapitel>/` inklusive AVIVA-`planung.json` und `materialien.md`, `lehrperson/` mit Musterlösungen und bei Klasse 4 Einleitung zum Materialkoffer, `content/` mit Notebook- und weiteren Hilfsdateien, sowie `snapshot.json` zur Herkunftsbestimmung. Dateien sind eigene Git-Objekte im jeweiligen Namensraum; keine Symlinks.
 
-Vorlagen werden **nicht** direkt redigiert; Kursänderungen gehören ausschliesslich zur jeweiligen Lehrperson und Klasse. Es werden echte Dateien statt Symlinks verwendet. Gemeinsame Laufzeit- und Designtechnik (`projekt/`, `basis/`, `shared/`, `admin-worker/`, JupyterLite, Build-Skripte) wird nicht kopiert.
+## Welche Pfade bearbeitet werden
 
-## Snapshots erzeugen und prüfen
+`shared/course-sites.json` enthält für jeden Kurs die exakten `courseRoot`-, `manifest`- und `teacherFiles`-Pfade. Der Editor liest die Registry aus dem Cloudflare Worker und verwendet sie beim Kapitelwechsel, beim AVIVA-Formular, beim Materialkoffer, bei Glossar/Musterlösungen und beim Erstellen neuer Kapitel und Notebooks. Der Worker prüft alle vorgeschlagenen Pfade gegen das ausgewählte registrierte Verzeichnis. Ein PR kann nicht versehentlich Änderungen an zwei Lehrpersonen-Kursen enthalten.
+
+**Keine nachträgliche Template-Synchronisation:** Nach dem anfänglichen Kopieren sind BOK und IRN unabhängig; Änderungen an Templates werden nicht in laufende Kurse übertragen. Das Prüfskript `python scripts/export_course_templates.py` ist absichtlich ausschliesslich lesend. Mit `--check` verifiziert es die anfängliche Bytegleichheit, ohne diese je wiederherzustellen. Nach inhaltlichen Bearbeitungen Unterschiede statt einer erneuten Kopie prüfen.
+
+## Öffentliche Seiten und Altkompatibilität
+
+BOK 1/4 werden aus ihren neuen kanonischen Quellen gebaut. `scripts/sync_course_sources.py` erzeugt die historischen BOK-Verzeichnisse `kursseiten/` und `lehrperson/` als Kompatibilitätsspiegel, damit ältere Parser, Testdaten und die alten Routen `/basis/`, `/projekt/` weiterlaufen. Diese Spiegel nicht direkt bearbeiten.
+
+Die IRN-Kursseiten werden ebenfalls aus den eigenen Quellkopien und derselben Basisgestaltung erzeugt; eigene Browserzustände und JupyterLite-Dokumentpfade wie `portal/irn/1-klasse/` vermeiden Datenvermischung. Die Python-Laufzeit und Frontend-Runtime bleiben gemeinsam. Notebookquellen innerhalb der Kursordner sind eigene Dateien; der Notebook-Builder veröffentlicht kursbezogene JupyterLite-Dokumente. BOK behält bestehende JupyterLite-Dateipfade.
+
+Lehrpersonen-AVIVA und Materialkoffer sowie Glossar und Musterlösungen liegen in den getrennten Kursverzeichnissen; die geschützten Lehreransichten lesen diese Dateien über den Worker. Öffentliche, von GitHub gehostete Quellen sind trotz Zugangsschutz zur Lehreransicht im GitHub-Repository grundsätzlich einsehbar.
+
+## Vollständige Prüfungen
 
 ```sh
-python scripts/export_course_templates.py
+python scripts/course_registry.py
 python scripts/export_course_templates.py --check
+python tests/check_course_registry.py
+python tests/check_course_snapshots.py
+node tests/check_teacher_view.mjs
+node tests/check_admin.mjs
+make test
 ```
 
-Beide Befehle sind deterministisch. Der zweite prüft die Kopien bytegenau. **Achtung:** Ein erneuter Export überschreibt Kopien; spätere Bearbeitungen der Lehrperson dürfen deshalb nicht durch den Export ersetzt werden.
-
-## Kompatibilitäts- und Migrationsstand
-
-Die Snapshots bilden zunächst die BOK-Inhalte als unveränderte Vorlage ab, ausdrücklich **auch für IRN**. Die aktuellen IRN-Quellen unter `kursseiten/irn-*-kurs/` werden dadurch nicht gelöscht oder stillschweigend überschrieben. Da identische Ausgangskapitel noch dieselben `id`- und `data-answer`-Werte haben, dürfen Snapshots nicht ohne Namensraum-Migration gleichzeitig als Live-Kurse im gemeinsamen Portal registriert werden.
-
-Der produktive Editor, Kursrenderer und Worker verwenden derzeit weiterhin die bestehenden Pfade unter `kursseiten/` und `lehrperson/`, wie sie in `shared/course-sites.json` definiert sind. Die Ordnerstruktur hier ist ein **vorbereitender Migrationsschritt** und **noch keine abgeschlossene Laufzeitumstellung**. Für den produktiven Wechsel müssen Kursregister, Manifestauflösung, Editor-Dateipfade, Worker-Schreibvalidierung, Build, Notebook-Verlinkung und Tests in einem abgestimmten Schritt umgestellt werden. Bis dahin bleiben bestehende Kurs-URLs, Antworten und Downloads unangetastet.
+Beim Deployment müssen sowohl Site-Build als auch Worker-Checks bestehen. Die Tests der Browseroberfläche prüfen Kursauswahl, Live-Vorschau, AVIVA, Materialkoffer, Glossar und PR-Workflow.

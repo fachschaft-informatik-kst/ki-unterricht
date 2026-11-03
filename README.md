@@ -4,42 +4,47 @@ Eine gemeinsame technische Plattform für **unabhängige KI-Unterrichtskurse ver
 
 **[Kursübersicht öffnen](https://fachschaft-informatik-kst.github.io/ki-unterricht/kurse.html)** · **[Geschützter Lehrpersonen-Editor](https://kst-ki-admin.kevin-bohn.workers.dev/)** · [Architektur und Deployment](docs/MULTIKURS-DEPLOYMENT.md)
 
-## Kurse, Quellen und Zuständigkeiten
+## Vollständig getrennte Kursquellen
 
-| Lehrperson / Kurs | Öffentliche Kursadresse | Inhaltliche Quellen | Stand |
-| --- | --- | --- | --- |
-| BOK · 1. Klasse | [bok/1-klasse/](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/1-klasse/) | `kursseiten/basis-manifest.json` und `kursseiten/basis-*/` | Veröffentlicht |
-| BOK · 4. Klasse | [bok/4-klasse/](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/) | `kursseiten/manifest.json` und die zugehörigen Themenordner | Veröffentlicht |
-| IRN · 1. Klasse | [irn/1-klasse/](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/1-klasse/) | `kursseiten/irn-1-manifest.json`, `kursseiten/irn-1-kurs/` | Unterrichtsentwurf, Schülerseite in Vorbereitung |
-| IRN · 4. Klasse | [irn/4-klasse/](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/4-klasse/) | `kursseiten/irn-4-manifest.json`, `kursseiten/irn-4-kurs/` | Unterrichtsentwurf, Schülerseite in Vorbereitung |
+Die bisherigen **BOK 1. und 4. Klasse** bilden jeweils die vollständige Ausgangsvorlage. Diese Templates wurden einmalig **1:1 als echte Dateien**, nicht als Symlinks oder dynamische Vererbungen, in BOK und IRN übernommen:
 
-**Single Source of Truth:** `shared/course-sites.json` legt für jeden Kurs das Manifest, den separaten Themen-/Notebook-Namensraum, die Lehrpersonenmaterialien, das Farbthema und den Veröffentlichungsstatus fest. `scripts/course_registry.py` prüft, dass keine Kapitelbereiche zwei Kursen gehören oder versehentlich auf den Namensraum einer anderen Lehrperson verweisen. Die BOK-Pfade bleiben aus Kompatibilitätsgründen unverändert; IRN und neue Lehrpersonen erhalten unabhängige Unterrichtsdateien.
+```text
+templates/
+  1-klasse/                 # unveränderter BOK-1-Ausgangskurs
+  4-klasse/                 # unveränderter BOK-4-Ausgangskurs
+kurse/
+  bok/1-klasse/            # vollständige eigene Kurskopie
+  bok/4-klasse/
+  irn/1-klasse/
+  irn/4-klasse/
+shared/  admin-worker/  projekt/  basis/  scripts/ # gemeinsame Technik
+```
 
-AVIVA und Materialkoffer liegen jeweils unter `kursseiten/<bereich>/planung.json` und `materialien.md`; Lösungs- und Glossar-Dateien sind im Kursregister ausdrücklich zugeordnet. Die beiden historischen BOK-Kurse teilen **bewusst** einzelne zentrale Glossar-/Lösungstexte, besitzen aber getrennte feldbezogene Antworten. IRN und neu angelegte Kurse erhalten eigene Lösungs- und Glossar-Dateien.
+Jeder Kursordner enthält `kursseiten/manifest.json`, alle zugehörigen Kapitel, `planung.json` (AVIVA), `materialien.md`, `kursseiten/glossar.json`, eigene Musterlösungen und `content/` mit den Notebook-/Hilfsdateien. Alle vier Kursquellen sind unabhängig bearbeitbar. Gemeinsame Renderer, JupyterLite-Laufzeit und Worker bleiben zentral.
 
-Die Infrastruktur ist geteilt: **ein Repository, ein GitHub-Pages-Deployment, ein Cloudflare Worker**. Änderungen an einer Kursdatei ändern keine andere Kursdatei; gemeinsame Komponenten wirken dagegen auf alle. Die GitHub-Schreibberechtigung gilt weiterhin für das gesamte Repository – es gibt keine technische Ordnerberechtigung pro Lehrperson. Quell-Musterlösungen in diesem öffentlichen Repository sind auch ohne den geschützten Worker auf GitHub lesbar. [Sicherheitsgrenzen und Regeln](docs/MULTIKURS-DEPLOYMENT.md).
+**Verbindliche Dateizuordnung:** `shared/course-sites.json` legt `courseRoot`, `manifest`, `teacherFiles`, Theme und Status fest. Der geschützte Editor und der Cloudflare Worker lesen und schreiben Kursinhalte **nur unter dem gewählten `kurse/<lehrperson>/<klasse>/`-Verzeichnis**. Der Worker validiert die Kurszuordnung vor jedem PR; mehrere Kursordner werden nicht in einem PR geändert. AVIVA, Materialkoffer, Glossar und Musterlösungen sind dadurch ebenso getrennt wie die Kurskapitel. Die historischen Verzeichnisse `kursseiten/` und `lehrperson/` sind für BOK **Kompatibilitätskopien** und keine neuen Bearbeitungsquellen; `scripts/sync_course_sources.py` spiegelt sie aus BOK vor dem Build.
 
-## Kursvorlagen und Lehrpersonen-Verzeichnisse (Migration in Vorbereitung)
+Die bestehenden öffentlichen BOK-URLs und `/basis/` sowie `/projekt/` bleiben erhalten. Die früheren IRN-Platzhalter werden durch die vollständigen kopierten Kursseiten ersetzt; ihre Inhalte dürfen nach dem Klonen eigenständig verändert werden. Ausgehändigte BOK-Antworten und JupyterLite-Dokumente behalten ihre alten Pfade, IRN erhält eigene Browser-/JupyterLite-Namensräume. Lehrpersonenunterlagen werden **nicht** öffentlich über die Kursseite verlinkt, sondern vom Worker nach Anmeldung angezeigt. Quelltexte in diesem öffentlichen Repository bleiben auf GitHub sichtbar.
 
-Die angestrebte Struktur trennt `templates/1-klasse/` und `templates/4-klasse/` von den eigenen Kurskopien unter `kurse/bok/{1,4}-klasse/` und `kurse/irn/{1,4}-klasse/`. Grundlage beider Templates ist jeweils der vollständige bestehende BOK-Unterricht; BOK und IRN erhalten eigene Dateien, keine Symlinks. Gemeinsamer Editor, Renderer, Worker und JupyterLite bleiben zentral.
+Vorlagen bytegenau prüfen (**schreibt niemals Dateien und überschreibt keine Lehrpersonenbearbeitungen**):
 
-Mit `python scripts/export_course_templates.py` lassen sich die vollständigen Kapitel-/Planungsquellen und zugehörigen Lehrpersonen-Dateien sowie direkt referenzierte Notebooks in diese Verzeichnisse exportieren; `--check` prüft die bytegenaue Übereinstimmung. **Der Export ist noch nicht die Umstellung des laufenden Portals**: Bis die Referenzen in Registry, Editor, Worker, Build und Tests migriert sind, bleiben `kursseiten/` und `lehrperson/` die produktiven Pfade. Ein erneuter Export überschreibt die exportierten Kurskopien; erst nach dem letzten Export dort redigieren. Details und Grenzen: [Kursvorlagen und Migrationsplan](docs/KURSVORLAGEN.md).
+```sh
+python scripts/export_course_templates.py --check
+python tests/check_course_registry.py
+python tests/check_course_snapshots.py
+```
+
+Nach individuellen Kursanpassungen wird `--check` erwartungsgemäss Abweichungen feststellen; ohne Option zeigt der Befehl nur die Anzahl Unterschiede an. Ausführliche [Kurs- und Migrationsarchitektur](docs/KURSVORLAGEN.md).
 
 ## Eine weitere Lehrperson hinzufügen
 
-Mit dem Generator werden **eigene** Quellen angelegt – keine Kopie des BOK-Unterrichts. Beispiel für das Kürzel `MAI`:
+Der Generator legt **eine vollständige eigenständige Kopie der BOK-Vorlage** für die entsprechende Klassenstufe an. Der neue Kurs erscheint im gemeinsamen Editor mit eigener AVIVA-Planung, Materialkoffer, Glossar, Musterlösungen, Kapiteln und Notebookquellen. Der initiale Status ist `planned` (im Editor bearbeitbar). Für die Veröffentlichung `status: published` und `source: generated` setzen oder direkt mit `--publish` anlegen. Die veröffentlichten spezialisierten BOK-/IRN-Kurse verwenden die gemeinsame Laufzeit; für zusätzliche Kurse erfolgt die Integration der spezialisierten Portalsteuerung schrittweise und muss überprüft werden.
 
 ```sh
 python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b" --dry-run
 python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b"
 make preview
 ```
-
-Dadurch entstehen ein neuer Kursplatz `/mai/1-klasse/`, ein eigenes Manifest, eine erste AVIVA-Doppellektion, ein Markdown-Kapitel, ein Materialkoffer, Musterlösungen und ein Glossar. Der Kurs ist zunächst **in Vorbereitung**, aber nach Deployment im geschützten Editor für die eigene Ausarbeitung auswählbar. Der Kurs und seine Dateien sind im Register eingetragen; Editor und Worker benötigen keine neuen fest codierten Lehrpersonen-Kürzel. Die Änderungen werden als Pull Request geprüft.
-
-**Öffentliche Freigabe:** Erst nach fachlicher Prüfung in `shared/course-sites.json` `status` auf `published` und `source` auf `generated` setzen. Der generische Kursrenderer erzeugt dann eine eigenständige Schülerseite mit Navigation sowie Text- und Auswahlantworten inklusive JSON-Sicherung. Spezialisierte Jupyter-Notebook-Funktionen und vollständige Projekt-ZIP-Pakete der BOK-Portale werden damit **nicht automatisch** kopiert; dafür ist eine ausdrückliche Integration erforderlich. Alternativ erzeugt `--publish` bereits bei der Anlage eine generische veröffentlichte Kursseite.
-
-Die Nummern und Dateinamen bestehender BOK- oder IRN-Kapitel, Schüler-Antwort-IDs, Notebookpfade und ZIP-Schemata bleiben unverändert. Eine zusätzliche Doppellektion oder ein Unterkapitel für einen bestehenden Kurs lässt sich im Editor anlegen. Die lokalen CLI-Tools `new_lesson.py` und `new_chapter.py` beziehen sich derzeit standardmässig auf den BOK-4-Kurs; für weitere Kurse den Editor verwenden.
 
 ## Lehrpersonen-Editor
 
