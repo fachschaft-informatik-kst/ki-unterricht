@@ -1,189 +1,145 @@
-# Mehrkurs-Website: gemeinsame Veröffentlichung
+# Mehrere Lehrpersonen und Kursseiten
 
-## Architekturentscheidung
+## Architektur und Grenzen
 
-**Ein Repository, ein GitHub-Pages-Deployment und ein bestehender Cloudflare Worker
-für den geschützten Lehrpersonen-Editor.** Es werden ausdrücklich **keine**
-zusätzlichen Workers, Cloudflare-Pages-Projekte oder DNS-Router benötigt.
+Das Repository `fachschaft-informatik-kst/ki-unterricht` betreibt **einen gemeinsamen
+Build, ein gemeinsames GitHub-Pages-Deployment und einen Cloudflare Worker**.
+Die fachlichen Quellen werden nach Lehrperson und Klassenstufe getrennt.
+Ein Kurs wird nicht dadurch unabhängig deployt, dass er eine eigene URL hat:
+Ein fehlgeschlagener Build blockiert das gesamte neue Deployment.
 
-Der vollständige statische Build wird nach erfolgreichen Tests als **ein einziges
-GitHub-Pages-Artefakt** veröffentlicht. Vier eindeutige Kurs-URLs bleiben
-unabhängig voneinander navigierbar; ihre Bereitstellung ist jedoch gemeinsam.
-Kurs-URL-Trennung ist **keine** separate Deployment- oder Berechtigungstrennung.
+Die [Kursübersicht](https://fachschaft-informatik-kst.github.io/ki-unterricht/kurse.html)
+wird vollständig aus `shared/course-sites.json` erzeugt.
 
-| Lehrperson | Klassenstufe | URL nach `/ki-unterricht/` | Stand |
-| --- | --- | --- | --- |
-| BOK | 1. Klasse | `bok/1-klasse/` | Bisheriger Basiskurs |
-| BOK | 4. Klasse | `bok/4-klasse/` | Bisheriger vertiefter Kurs |
-| IRN | 1. Klasse | `irn/1-klasse/` | Platzhalter ohne Unterrichtsinhalte |
-| IRN | 4. Klasse | `irn/4-klasse/` | Platzhalter ohne Unterrichtsinhalte |
+| Kurs | URL | Manifest | Unterrichtsbereiche | Lehrpersonenunterlagen |
+| --- | --- | --- | --- | --- |
+| BOK 1 | `/bok/1-klasse/` | `kursseiten/basis-manifest.json` | `basis-*` | zentrale BOK-Lösungen plus eigene Feldantworten |
+| BOK 4 | `/bok/4-klasse/` | `kursseiten/manifest.json` | über Manifest eindeutig zugeordnet | zentrale BOK-Lösungen plus eigene Feldantworten |
+| IRN 1 | `/irn/1-klasse/` | `kursseiten/irn-1-manifest.json` | `irn-1-*` | `lehrperson/irn-1/` |
+| IRN 4 | `/irn/4-klasse/` | `kursseiten/irn-4-manifest.json` | `irn-4-*` | `lehrperson/irn-4/` |
 
-Die Kursauswahl unter `/ki-unterricht/kurse.html` zeigt alle vier Kursplätze
-und kennzeichnet IRN ausdrücklich als **in Vorbereitung**. Die Repository-
-Startadresse führt zur Kursauswahl. Der bisherige Kurs unter `/basis/` und
-`/projekt/` bleibt weiterhin erreichbar, auch für direkte Lesezeichen.
+BOK ist öffentlich veröffentlicht, IRN verfügt über unabhängige bearbeitbare
+Entwürfe und geschützte Lehrpersonenansichten. Die öffentlichen IRN-Schülerseiten
+bleiben in Vorbereitung. **IRN erhält keine Kopien der BOK-Unterlagen.**
 
-## Wie der aktuelle Feature-Branch funktioniert
+Historische BOK-Adressen `/basis/` und `/projekt/` bleiben bestehen;
+ebenso die vorhandenen Antwort-IDs, lokalen Speicherschlüssel, Notebook-Pfade
+und ZIP-Formate. Eine Verschiebung dieser Quellen würde gespeicherte Schülerstände
+und Lesezeichen gefährden. Deshalb erfolgt die Trennung über **explizite
+Eigentümerschaft**, nicht über ein massenhaftes Verschieben bestehender Dateien.
 
-1. `shared/course-sites.json` registriert vier eindeutige Kurs-IDs und Pfade.
-2. Die unveränderten BOK-Quellen werden zunächst wie bisher für `/basis/` und
-   `/projekt/` gebaut; `scripts/build_course_routes.py` ergänzt die neuen
-   URLs im **selben** Build-Artefakt.
-3. Relative Links werden für die zusätzliche URL-Ebene angepasst, insbesondere
-   für die gemeinsam genutzte JupyterLite-Laufzeit unter `/lab/`.
-4. IRN erhält eigene Platzhalterseiten **ohne** kopierte BOK-Inhalte.
-5. GitHub Actions validiert beide vorhandenen Unterrichtskurse und alle vier
-   Kurs-URLs; erst ein Merge nach `main` würde das reguläre gemeinsame
-   GitHub-Pages-Deployment auslösen.
+## Zentrales Kursregister
 
-Die Aliase sind eine **vorsichtige Übergangslösung**, keine vollständige
-Migration der Inhaltsdateien. Es werden keine bestehenden Browser-Speicher-
-schlüssel, Notebook-IDs oder ZIP-Dateiformate umbenannt, damit die vorhandenen
-Schülerstände weiter zugänglich bleiben.
+Jeder Eintrag in `shared/course-sites.json` enthält:
 
-## Wie künftige Kurse getrennt werden
+- `id`, `teacher`, `grade`, `slug`: unverwechselbare Identität und URL.
+- `editorKey`, `manifest`: Auswahlwert und Quellmanifest für den Editor.
+- `sectionPrefix`: zugelassener Namensraum für Kapitel und AVIVA-Bereiche.
+- `notebookPrefix`: reservierter Namensraum neuer Notebooks.
+- `teacherFiles`: explizite Pfade für `solutions`, `fields`, `glossary` und
+  optional `materialsIntro`.
+- `source`, `status`: `basis`/`projekt` für die bestehenden BOK-Portale,
+  `null` + `planned` für unveröffentlichte Entwürfe oder `generated` +
+  `published` für einen neuen generischen Schülerkurs.
+- `name`, `theme.accent`: sichtbarer Kurstitel und Kursfarbe.
 
-Sobald IRN eigene Inhalte bearbeitet, braucht jeder der vier Kurse einen
-eigenen Quellordner, ein eigenes Manifest, AVIVA-Pläne, Bilder und Notebooks.
-Build-Skripte müssen dann die explizite Kurs-ID nutzen und Dateien nur aus
-dem jeweiligen Quellbereich lesen. IDs, Browser-Speicherschlüssel und
-Notebook-Namensräume neuer Kurse müssen eindeutig sein. **Gemeinsame**
-Komponenten (Renderer, Bausteine, JupyterLite-Engine) werden zentral gepflegt.
+`scripts/course_registry.py` prüft das Kursregister und alle vorhandenen
+Manifeste vor dem Build. Eine Bereichs-ID darf **nur einem Kurs** zugeordnet
+sein; neue Kurse müssen ihren eigenen Lehrpersonen- und Notebook-Namensraum
+verwenden. Der Worker prüft bei der PR-Einreichung dieselben Eigentümergrenzen
+und verbietet es beispielsweise, ein neues Notebook der einen Lehrperson an
+ein Kapitel einer anderen Lehrperson anzuhängen.
 
-Für den bestehenden **einen** Cloudflare Worker sind eine Kursauswahl,
-serverseitig geprüfte erlaubte Quellpfade und kursbezogene Pull Requests
-vorzusehen. Die aktuelle Editor-Anmeldung kennt bislang nur Basis/Vertiefung,
-noch keine vier unabhängigen Lehrpersonen-Kurse; die IRN-Platzhalter sind
-deshalb noch nicht bearbeitbare vollständige Kurse. CODEOWNERS/Reviews
-verbessern die Zusammenarbeit, sind aber keine strikte GitHub-
-Ordnerberechtigung. Eine solche lässt sich mit einem gemeinsamen Repository
-nicht vollständig erzwingen.
+Die beiden BOK-Kurse verwenden bewusst ein gemeinsames strukturiertes Glossar
+(`kursseiten/glossar.json`) und allgemeine BOK-Musterlösungen;
+die feldbezogenen Antworten werden nach Klassenstufe getrennt.
+Das ist eine dokumentierte historische Ausnahme und **kein Fallback für
+neue Lehrpersonen**. IRN und alle neuen Kurse erhalten eigene Dateien.
 
-## Deployment und Tests
+## Zusätzliche Lehrperson oder neue Klassenstufe anlegen
 
-`.github/workflows/deploy.yml` bleibt der **einzige** Website-Deploy-Workflow:
-ein Build, Tests und ein Pages-Upload. Ein fehlgeschlagener Test blockiert die
-neue **gesamte** Veröffentlichung; die zuletzt erfolgreich veröffentlichte
-Version bleibt erreichbar. Bei Änderungen an gemeinsamen Bausteinen werden
-beide bestehenden BOK-Kurse und künftig alle vier echten Kurse getestet.
+Beispiel mit Kürzel MAI:
 
-Die Nutzung separater GitHub-Pages-/Cloudflare-Projekte ist **nicht**
-Bestandteil der empfohlenen Architektur. Eine echte unabhängige Veröffentlichung
-wäre eine neue, ausdrücklich zu entscheidende Anforderung, nicht ein
-versteckter Nebeneffekt der vier URLs.
+```sh
+python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b" --dry-run
+python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b"
+python scripts/course_registry.py
+make preview
+```
 
-**Status:** Dies ist ein Feature-Branch für die URL- und Übersichtsgrundlage.
-Keine Änderungen sind durch diesen PR bereits auf `main` veröffentlicht.
+Der Generator erstellt, ohne andere Kursdateien zu verändern:
 
-## Farbthemen im Editor
+```text
+shared/course-sites.json
+kursseiten/mai-1-manifest.json
+kursseiten/mai-1-kurs/
+  010-start.md
+  planung.json
+  materialien.md
+lehrperson/mai-1/
+  musterloesungen.md
+  musterloesungen-felder.md
+  glossar.md
+```
 
-Unter **Farbthemen der Kursseiten** lassen sich unabhängig von den BOK-Inhaltskursen
-alle vier Kursplätze auswählen. Über den Farbwähler wird die Akzentfarbe eingestellt;
-helle Hintergründe und Linien werden daraus automatisch abgeleitet. So bleiben
-Lesbarkeit und Gestaltung einheitlich. Die Änderungen werden über **Farbänderung
-vormerken** und danach **Pull Request erstellen** eingereicht. Sie betreffen
-`shared/course-sites.json`; der bestehende Worker erlaubt ausdrücklich nur diese
-validierte Konfigurationsdatei und prüft die Farbkontraste.
+Die URL ist `/mai/1-klasse/`. Bis zur Veröffentlichung wird dort eine
+Vorbereitungsseite angezeigt. Der geschützte Editor und die Lehrpersonen-
+ansichten erhalten den neuen Kurs durch das Register automatisch.
+Es werden weder ein weiteres Repository noch ein weiterer Worker benötigt.
 
-Die beiden IRN-Kursplätze sind eigene Vorbereitungsseiten mit eigenen Farben,
-**noch keine vollständigen Inhaltseditoren**. Sie erhalten keine Kopien der BOK-
-Unterrichtsinhalte. Erst eine spätere Kursquell-Migration schafft getrennte
-Kapitel- und Notebook-Bearbeitung für IRN.
+Für die Veröffentlichung nach fachlicher Freigabe im Kursregister
+`"status": "published"` und `"source": "generated"` setzen; dann
+baut `scripts/generic_course.py` aus **diesem Manifest und den eigenen
+Kapiteldateien** eine Schülerseite mit Navigation, Aufgaben und
+kursisoliertem Antwortspeicher samt JSON-Import/-Export. Mit `--publish`
+kann der Generator diesen Zustand alternativ direkt erzeugen. Das ist
+ein **schlichter Ausgangspunkt**: Die spezialisierten BOK-Fotostudio-,
+Notebook-/ZIP- und Projektjournal-Funktionen sind nicht automatisch
+Bestandteil neuer Kurse und müssen bei Bedarf bewusst integriert werden.
 
-## GitHub-Anmeldung für Lehrpersonenmaterial
+Die Kurse sollen vor der Veröffentlichung redaktionell geprüft werden;
+die generierten AVIVA-/Musterlösungs-Dateien sind zunächst Platzhalter.
+`python tests/check_course_registry.py` prüft eine Beispielanlage,
+Isolation und Veröffentlichung mit einem temporären Testverzeichnis.
 
-**Die Schüler-Kursseiten bleiben öffentlich** und benötigen keinen GitHub-Login.
-Musterlösungen, AVIVA-Planung und Materialkoffer sind dagegen nur unter den
-geschützten Worker-Adressen `/teacher/bok/1-klasse/{planung,materialien,musterloesungen}`
-und `/teacher/bok/4-klasse/{planung,materialien,musterloesungen}` erreichbar.
-Ohne gültige Sitzung erfolgt eine Weiterleitung zur GitHub-Anmeldung.
-Der Worker verlangt eine bestehende Schreibberechtigung für das Repository.
-Die fachlichen Daten liefert er aus explizit zugelassenen Quelldateien,
-nicht aus einer öffentlich erreichbaren GitHub-Pages-Kopie.
+## Zugriffsrechte und Lehrpersonen-Editor
 
-`scripts/protect_teacher_pages.py` entfernt aus der Pages-Veröffentlichung
-`unterrichtsplan.html`, `materialien.html`, `musterloesungen/`,
-`KI_Planung.md`, den vollständigen AVIVA-Gesamtexport `kurs.json` und gekennzeichnete Lösungs-/Bewertungsdateien. Die Links
-der Schüler-Kursseiten werden auf den Worker umgestellt. Diese Bereinigung
-erfolgt **erst nach den Inhaltstests**, damit die bestehenden Prüfungen der
-generierten AVIVA- und Materialseiten weiterhin möglich bleiben.
+Die Kursauswahl im [Editor](https://kst-ki-admin.kevin-bohn.workers.dev/)
+und in den geschützten AVIVA-/Materialkoffer-/Musterlösungsansichten folgt
+dem Register. Die API liest die explizit zugelassenen Quellen aus GitHub.
+Der Worker verwendet das bestehende GitHub-OAuth-Verfahren; nur
+Repository-Mitglieder mit Schreibberechtigung dürfen Inhalte ändern.
+Pull Requests bleiben der Freigabeweg. Kursbearbeitung ist **nicht**
+dasselbe wie unabhängige GitHub-Dateiberechtigungen: Schreibberechtigte
+können technisch auf alle Dateien des gemeinsamen Repositories zugreifen.
+Bei Bedarf können CODEOWNERS und Review-Regeln organisatorisch helfen.
 
-**Sicherheitsgrenze:** Das GitHub-Repository ist weiterhin öffentlich.
-Die Originaldateien in `lehrperson/`, `kursseiten/*/planung.json`,
-`kursseiten/*/materialien.md` sowie ältere Commits können deshalb über
-GitHub direkt gelesen werden. Die Worker-Anmeldung schützt damit den
-**Zugriff auf die Kurswebsite**, nicht die Vertraulichkeit der Quellinhalte.
-Für einen tatsächlichen Geheimhaltungsschutz müssen die Lehrpersonenquellen
-in ein privates Repository oder einen privaten Speicher umziehen und die
-öffentliche Git-Historie geprüft werden. Allein `noindex`, fehlende Links
-oder GitHub OAuth am Worker reichen dafür nicht aus.
+**Wichtig zur Vertraulichkeit:** Das GitHub-Repository ist öffentlich.
+Musterlösungen, AVIVA-Quelldateien und Git-Historie sind über GitHub
+öffentlich einsehbar. Das OAuth-Gateway schützt nur die gerenderte
+Lehrpersonenansicht auf der Website, **nicht** den Repository-Quellcode.
+Für tatsächlich vertrauliche Lösungen wäre ein privates Repository
+oder ein separater privater Speicher notwendig.
 
+## CI, Preview und Deployment
 
-## Kursauswahl in den geschützten Lehrpersonenansichten
+`make preview` bzw. `scripts/preview.py` baut BOK und alle registrierten
+Kursrouten. Die vollständige Laufzeit entsteht über `make build`.
+`scripts/build_course_routes.py` übernimmt registrierte veröffentlichte
+Bestandskurse an ihre URLs, erzeugt Entwurfsseiten und rendert neue
+veröffentlichte generische Kurse. Die bewährten `/projekt/`- und
+`/basis/`-Portale bleiben parallel erhalten.
 
-AVIVA-Planung, Materialkoffer und Musterlösungen bieten oben eine gemeinsame
-**Kursauswahl**. Das Dropdown zeigt alle vier registrierten Kurse mit Lehrperson,
-Klasse und Kurstitel. BOK 1. Klasse und BOK 4. Klasse sind wählbar und beziehen
-ihre Materialien getrennt aus den jeweiligen Quellen. Die beiden IRN-Kursplätze
-stehen sichtbar als **«in Vorbereitung»**, sind aber deaktiviert: Sie besitzen
-noch keine eigenen AVIVA-Quellen, Kapitel oder Musterlösungen und dürfen nicht
-versehentlich BOK-Inhalte übernehmen.
+`.github/workflows/deploy.yml` validiert die Quellzuordnung,
+führt Struktur-, Browser- und Notebook-Tests aus und veröffentlicht auf
+`main` die Website. Änderungen am Kursregister werden auch bei der
+Worker-Deployment-Auswahl berücksichtigt. `scripts/protect_teacher_pages.py`
+entfernt die bisherigen BOK-Lehrpersonen-HTML-Dateien und Lösungsdownloads
+aus dem öffentlichen Artefakt; neue generische Seiten enthalten von
+vornherein keine Lehrerdateien.
 
-Beim Kurswechsel bleibt die gewählte Materialart (AVIVA / Materialkoffer /
-Musterlösungen) erhalten, die Doppellektion wird bewusst auf **DL 01** gesetzt.
-Beim Wechsel zwischen diesen Materialarten innerhalb desselben Kurses bleibt
-dagegen die ausgewählte Doppellektion bestehen. Der aktuelle Kurs wird im
-Kopfbereich und der seitlichen Unterrichtsübersicht genannt. Das Akzentfarbthema
-kommt aus \`shared/course-sites.json\` und wird auch im geschützten Bereich
-verwendet. Der GitHub-Login und die Berechtigungsprüfung erfolgen weiterhin
-im bestehenden Cloudflare Worker.
-
-## IRN-Lehrpersonenbereich und vier Kursprofile (PR #118)
-
-Der Editor verwendet **genau eine Kursauswahl** für BOK 1/4 und IRN 1/4.
-Die Akzentfarbe darunter gehört immer zum ausgewählten Profil; beim Ändern
-wird sie sofort auf den Editor, die Kapitelvorschau, die AVIVA-Vorschau und
-die Bausteinvorschau angewendet. **Farbänderung vormerken** fügt die
-Änderung in `shared/course-sites.json` dem nächsten Pull Request hinzu.
-Ein zweites Auswahlfeld für die Farbverwaltung gibt es nicht mehr.
-
-Die Quellen der beiden IRN-Kurse sind strikt separat:
-
-| IRN | Kursmanifest | AVIVA, Kapitel und Materialkoffer | Musterlösungen |
-| --- | --- | --- | --- |
-| 1. Klasse | `kursseiten/irn-1-manifest.json` | `kursseiten/irn-1-kurs/` | `lehrperson/irn-1/` |
-| 4. Klasse | `kursseiten/irn-4-manifest.json` | `kursseiten/irn-4-kurs/` | `lehrperson/irn-4/` |
-
-Jeder IRN-Kurs verfügt über zehn **inhaltlich noch unausgearbeitete**
-Doppellektionen, jeweils mit vollständiger bearbeitbarer AVIVA-Struktur
-(90 Minuten), separaten Unterkapiteldateien und Materialkoffer-Abschnitten.
-Musterlösungen, feldgenaue Antworten und Glossar sind eigene Markdown-Dateien.
-**Es sind keine fertigen Unterrichtsmaterialien und keine von BOK kopierten
-Antworten.** Alle Bereiche können im Editor geöffnet, bearbeitet und
-über einen Pull Request versioniert werden.
-
-Die geschützten Ansichten `/teacher/irn/1-klasse/` und
-`/teacher/irn/4-klasse/` verwenden dieselbe OAuth-Prüfung wie BOK
-und laden nur ihre eigenen Kursquellen. Die Lehrpersonenansicht
-bietet Kursauswahl, DL-Navigation, AVIVA-Farben, Materialien und
-den aktuellen Stand der Musterlösungen.
-
-Neue Notebooks erhalten `irn1_lesson_*` bzw. `irn4_lesson_*` als
-Namensraum und werden als eigenständige JupyterLite-Lernmaterialien gebaut.
-Sie dürfen durch den Worker nur zusammen mit einem Unterkapitel desselben
-IRN-Kurses neu angelegt werden. Ein BOK-Notebook darf nicht
-irrtümlich in die IRN-Kursnavigation aufgenommen werden.
-
-**Veröffentlichung der Schülerseiten:** Die IRN-URLs bleiben zunächst
-als «in Vorbereitung» gekennzeichnet. Die geschützten Lehrpersonenansichten
-und der Editor funktionieren für ihre Entwürfe; eine öffentliche
-Veröffentlichung der neuen IRN-Unterrichtsseiten muss nach fachlicher
-Freigabe separat aktiviert werden. Neue Schülerkurse benötigen dann
-eigenständige Kurs- und Datenspeicher-IDs. Ein reiner Farbwechsel oder
-das Einreichen eines Entwurfs macht einen IRN-Kurs nicht automatisch
-öffentlich.
-
-**Quellenschutz:** Das Repository ist öffentlich. GitHub-OAuth schützt
-den Zugriff auf die gerenderten Lehrpersonenansichten, nicht die dort
-abgelegten Markdown-/AVIVA-Quelldateien auf github.com. Für echte
-Vertraulichkeit müssen diese in ein privates Repository verschoben werden.
+Die gemeinsame Plattform bedeutet: Änderungen an allgemeinen CSS-/JS-
+Bausteinen oder der Notebook-Laufzeit können alle veröffentlichten
+Kurse betreffen und werden entsprechend breit geprüft. Änderungen an
+reinen Kursquellen bleiben organisatorisch und durch Quellvalidierung
+getrennt.
