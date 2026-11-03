@@ -98,6 +98,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/1-klasse/materialien"]').count());
     assert(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/1-klasse/planung"]').count());
     assert.equal((await page.request.get('http://127.0.0.1:8770/basis/materialien.html')).status(),404);
+    assert.equal(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/"]').count(),1,'Footer must link directly to authenticated editor');
     await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
     await page.locator('#basis-sicherung').waitFor({state:'visible'});
     assert(await page.locator('#basis-sicherung #basis-backup-controls button').count());
