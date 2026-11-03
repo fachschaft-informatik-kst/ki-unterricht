@@ -282,7 +282,7 @@ export function normalizeTeacherCourses(registry){
            fields:"lehrperson/musterloesungen-felder-"+grade+"-klasse.md",
            glossary:"kursseiten/glossar.json",
            materialsIntro:"lehrperson/materialien.md"
-         }[kind])||kind==="materialsIntro"&&grade!==4)))||
+         }[kind])||kind==="materialsIntro"&&grade!==4))||
        ids.has(item.id)||slugs.has(slug)||keys.has(item.editorKey)||manifests.has(item.manifest))
       throw Error("Kursregister enthält einen ungültigen oder doppelten Eintrag: "+slug);
     ids.add(item.id);slugs.add(slug);keys.add(item.editorKey);manifests.add(item.manifest);
