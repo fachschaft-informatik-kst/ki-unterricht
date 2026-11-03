@@ -220,7 +220,10 @@
     let anchor = null;
     try { anchor = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch {}
     const chapter = anchor?.closest(".kapitel, main > section") || anchor;
-    const selected = cards.find(card => chapter && chapter.contains(card)) || cards[0];
+    let previous = null;
+    try { previous = sessionStorage.getItem(basic ? "ki-last-opened-bok-1" : "ki-last-opened-bok-4"); } catch {}
+    const selected = cards.find(card => chapter && chapter.contains(card)) ||
+      cards.find(card => card.dataset.notebook.split("/").pop() === previous) || cards[0];
     const name = selected.dataset.notebook.split("/").pop();
     const start = () => warmManaged(name);
     // Leave text, navigation and answers interactive before starting Pyodide.
