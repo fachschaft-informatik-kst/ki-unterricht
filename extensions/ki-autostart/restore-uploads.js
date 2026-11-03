@@ -10,7 +10,15 @@ export function prepareUploads(files) {
   let total = 0;
   return files.map((file, index) => {
     if (!file || typeof file.name !== 'string' || !file.name || file.name.length > 300 ||
-        typeof file.content !== 'string' || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(file.content)) {
+        typeof file.content !== 'string') {
+      throw Error('Eine gesicherte Notebook-Datei ist ungültig.');
+    }
+    // Check length before validating base64. Nested quantified regexes can
+    // overflow the JS stack on multi-megabyte uploads.
+    if (file.content.length > Math.ceil(MAX_FILE_BYTES / 3) * 4 + 4) {
+      throw Error('Die Notebook-Uploads sind für die automatische Wiederverwendung zu gross. Die ZIP-Sicherung enthält die Originaldaten.');
+    }
+    if (file.content.length % 4 !== 0 || !/^[A-Za-z0-9+/]*={0,2}$/.test(file.content)) {
       throw Error('Eine gesicherte Notebook-Datei ist ungültig.');
     }
     const size = file.content.length * 3 / 4 - (file.content.endsWith('==') ? 2 : file.content.endsWith('=') ? 1 : 0);
