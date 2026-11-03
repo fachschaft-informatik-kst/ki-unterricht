@@ -126,7 +126,7 @@ assert "bindLabFullscreen" in (ROOT/"projekt/portal.js").read_text(encoding="utf
 teacher_footer = page.select_one("footer.footer > details")
 assert teacher_footer is not None
 assert teacher_footer.summary.get_text(" ", strip=True) == "Quellen & Hinweise für die Lehrperson"
-for target in ("unterrichtsplan.html", "materialien.html", "../projekt/admin/"):
+for target in ("unterrichtsplan.html", "materialien.html", "https://kst-ki-admin.kevin-bohn.workers.dev/"):
     assert teacher_footer.select_one(f'a[href="{target}"]'), f"Teacher link missing: {target}"
 assert page.select_one('.sidebar-bottom a[href="#basis-sicherung"]')
 assert page.select_one("#basis-sicherung #basis-download")
