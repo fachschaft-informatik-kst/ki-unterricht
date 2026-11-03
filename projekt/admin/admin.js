@@ -422,7 +422,7 @@ function renderSectionNav(){
     nav.append(button);
   }
 }
-const chapterPath=path=>path.startsWith(coursePath(coursePath("kursseiten/")))&&/\/[0-9]{3}-[^/]+\.md$/.test(path);
+const chapterPath=path=>path.startsWith(coursePath("kursseiten/"))&&/\/[0-9]{3}-[^/]+\.md$/.test(path);
 const chaptersFor=section=>state.chapters.filter(c=>c.path.startsWith(coursePath("kursseiten/")+section+"/")&&chapterPath(c.path))
   .sort((a,b)=>a.path.localeCompare(b.path));
 function chapterContent(item){
