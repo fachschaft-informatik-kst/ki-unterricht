@@ -19,6 +19,12 @@ AVIVA und Materialkoffer liegen jeweils unter `kursseiten/<bereich>/planung.json
 
 Die Infrastruktur ist geteilt: **ein Repository, ein GitHub-Pages-Deployment, ein Cloudflare Worker**. Änderungen an einer Kursdatei ändern keine andere Kursdatei; gemeinsame Komponenten wirken dagegen auf alle. Die GitHub-Schreibberechtigung gilt weiterhin für das gesamte Repository – es gibt keine technische Ordnerberechtigung pro Lehrperson. Quell-Musterlösungen in diesem öffentlichen Repository sind auch ohne den geschützten Worker auf GitHub lesbar. [Sicherheitsgrenzen und Regeln](docs/MULTIKURS-DEPLOYMENT.md).
 
+## Kursvorlagen und Lehrpersonen-Verzeichnisse (Migration in Vorbereitung)
+
+Die angestrebte Struktur trennt `templates/1-klasse/` und `templates/4-klasse/` von den eigenen Kurskopien unter `kurse/bok/{1,4}-klasse/` und `kurse/irn/{1,4}-klasse/`. Grundlage beider Templates ist jeweils der vollständige bestehende BOK-Unterricht; BOK und IRN erhalten eigene Dateien, keine Symlinks. Gemeinsamer Editor, Renderer, Worker und JupyterLite bleiben zentral.
+
+Mit `python scripts/export_course_templates.py` lassen sich die vollständigen Kapitel-/Planungsquellen und zugehörigen Lehrpersonen-Dateien sowie direkt referenzierte Notebooks in diese Verzeichnisse exportieren; `--check` prüft die bytegenaue Übereinstimmung. **Der Export ist noch nicht die Umstellung des laufenden Portals**: Bis die Referenzen in Registry, Editor, Worker, Build und Tests migriert sind, bleiben `kursseiten/` und `lehrperson/` die produktiven Pfade. Ein erneuter Export überschreibt die exportierten Kurskopien; erst nach dem letzten Export dort redigieren. Details und Grenzen: [Kursvorlagen und Migrationsplan](docs/KURSVORLAGEN.md).
+
 ## Eine weitere Lehrperson hinzufügen
 
 Mit dem Generator werden **eigene** Quellen angelegt – keine Kopie des BOK-Unterrichts. Beispiel für das Kürzel `MAI`:
