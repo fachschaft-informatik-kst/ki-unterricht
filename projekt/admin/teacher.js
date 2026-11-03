@@ -105,9 +105,25 @@
       '<th scope="col">Min.</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
   };
   function heading(data,kicker){
-    return '<div class="lesson-heading"><p class="lesson-kicker">'+escape(kicker)+
+    const courseKeys={"bok/1-klasse":"basis","bok/4-klasse":"vertiefung",
+      "irn/1-klasse":"irn1","irn/4-klasse":"irn4"};
+    const lesson=data.lessons.find(l=>Number(l.number)===Number(data.selectedNumber));
+    let editLink="";
+    // The authenticated teacher reader is a *view*. The link opens the actual
+    // editor with this exact teacher, course, source section and stable lesson ID.
+    if(courseKeys[course]&&lesson&&/^[a-z][a-z0-9-]*$/.test(lesson.view)&&
+      /^[a-z0-9-]+$/.test(lesson.id)){
+      const query=new URLSearchParams({course:courseKeys[course],edit:kind,
+        section:lesson.view,lesson:lesson.id});
+      const label=kind==="planung"?"AVIVA bearbeiten":
+        kind==="materialien"?"Materialkoffer bearbeiten":"Musterlösungen bearbeiten";
+      editLink='<a class="teacher-edit-action" href="/?'+escape(query.toString())+
+        '" target="_blank" rel="noopener noreferrer">'+escape(label)+'</a>';
+    }
+    return '<div class="lesson-heading"><div><p class="lesson-kicker">'+escape(kicker)+
       ' · Doppellektion '+escape(data.selectedNumber)+'</p><h2>DL '+
-      String(data.selectedNumber).padStart(2,"0")+' · '+escape(data.selectedTitle)+'</h2></div>';
+      String(data.selectedNumber).padStart(2,"0")+' · '+escape(data.selectedTitle)+
+      '</h2></div>'+editLink+'</div>';
   }
   function lessonView(data){
     const l=data.lesson;
