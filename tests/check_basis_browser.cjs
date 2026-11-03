@@ -70,7 +70,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // Exercise the new BOK route, then continue regression coverage on the
     // original /basis/ address to ensure existing student state still works.
     await page.locator('a.choice[href="bok/1-klasse/"]').click();
-    assert.equal(await page.title(),'BOK · 1. Klasse · KI entdecken');
+    assert.equal(await page.title(),'BOK KI 1. Klasse');
     await page.goto('http://127.0.0.1:8770/basis/');
     assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
     assert.equal(await page.locator('main > section').count(),13);
