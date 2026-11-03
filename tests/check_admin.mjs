@@ -253,6 +253,8 @@ const teacherPlan=await teacherData({course:"bok/1-klasse",kind:"planung"},"toke
 assert.equal(teacherPlan.lessons[0].title,"Beispiel");
 const irnSources=Object.fromEntries([...sources.entries()]
   .filter(([path])=>path.startsWith("kurse/irn/1-klasse/")));
+for(const filepath of Object.values(bySlug["irn/1-klasse"].teacherFiles))
+  irnSources[filepath]=readFileSync(new URL("../"+filepath,import.meta.url),"utf8");
 const irnGithub=async(_token,route)=>{
   if(route.includes("/git/trees/main"))return {tree:[],truncated:false};
   const name=route.split("/contents/")[1]?.split("?")[0];
