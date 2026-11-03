@@ -63,6 +63,8 @@ def resolve(source: Path, url: str) -> Path | None:
     parts = local_url(url)
     if parts is None:
         return None
+    if not parts.path:
+        return source
     if parts.path.startswith("/ki-unterricht/"):
         path = parts.path[len("/ki-unterricht/"):]
     elif parts.path.startswith("/"):
@@ -119,8 +121,8 @@ def check() -> None:
                 if target not in decoded:
                     other = Refs()
                     other.feed(target.read_text(encoding="utf-8"))
-                    decoded[target] = other
-                if unquote(parts.fragment) not in decoded[target].ids:
+                    ids = other.ids
+                if unquote(parts.fragment) not in (decoded[target].ids if target in decoded else ids):
                     # Some in-page targets are created on load by controllers.
                     # They remain covered by the full-browser course tests.
                     inspected["js_anchor_targets"] += 1
@@ -136,7 +138,7 @@ def check() -> None:
                         report(source, f"Notebook not packaged: {value} (from {raw})")
                     else:
                         inspected["notebook_urls"] += 1
-        if source.relative_to(DIST).parts[:2] == ("kurse.html",):
+        if source.name == "kurse.html":
             continue
         for notebook in parsed.notebooks:
             if not re.fullmatch(r"(?:content/(?:ki_projekt/)?)?[a-z0-9_]+\.ipynb", notebook):
