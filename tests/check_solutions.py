@@ -2,7 +2,7 @@
 from pathlib import Path
 from bs4 import BeautifulSoup
 ROOT=Path(__file__).resolve().parents[1]
-src=ROOT/"lehrperson/musterloesungen.md"
+src=ROOT/"kursseiten/bok/4-klasse/lehrperson/musterloesungen.md"
 file=ROOT/"_build/site/projekt/musterloesungen/index.html"
 assert src.is_file() and file.is_file()
 soup=BeautifulSoup(file.read_text(encoding="utf-8"),"html.parser")
@@ -25,17 +25,17 @@ import re
 
 COURSES = {
     "1. Klasse": {
-        "files": list((ROOT / "kursseiten").glob("basis-*/*.md")) + [ROOT / "basis/index.template.html"],
+        "files": list((ROOT / "kursseiten/bok/1-klasse").glob("basis-*/*.md")) + [ROOT / "basis/index.template.html"],
         "attributes": ("data-basis-answer",),
-        "solution": ROOT / "lehrperson/musterloesungen-felder-1-klasse.md",
+        "solution": ROOT / "kursseiten/bok/1-klasse/lehrperson/musterloesungen-felder.md",
     },
     "4. Klasse": {
         "files": [
-            p for p in (ROOT / "kursseiten").glob("*/*.md")
+            p for p in (ROOT / "kursseiten/bok/4-klasse").glob("*/*.md")
             if not p.parent.name.startswith("basis-")
         ],
         "attributes": ("data-answer", "data-journal"),
-        "solution": ROOT / "lehrperson/musterloesungen-felder-4-klasse.md",
+        "solution": ROOT / "kursseiten/bok/4-klasse/lehrperson/musterloesungen-felder.md",
     },
 }
 for course, conf in COURSES.items():
@@ -60,7 +60,7 @@ for course, conf in COURSES.items():
 for required in ("Apfel", "Birne", "Gabel", "Löffel", "P1/P2", "Trennschärfe"):
     # All example values are explicitly marked as illustrative in the preface.
     # The case study must retain two own and two different foreign classes.
-    text = (ROOT / "lehrperson/musterloesungen-felder-4-klasse.md").read_text(encoding="utf-8")
+    text = (ROOT / "kursseiten/bok/4-klasse/lehrperson/musterloesungen-felder.md").read_text(encoding="utf-8")
     assert required in text, required
 
 print("PASS complete teacher model-answer page, direct URL only, no student links")

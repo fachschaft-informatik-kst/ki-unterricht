@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from course_model import load_course
 
-basic = load_course(ROOT, "kursseiten/basis-manifest.json")
+basic = load_course(ROOT, "kursseiten/bok/1-klasse/manifest.json")
 advanced = load_course(ROOT)
 assert len(basic["lessons"]) == 10
 assert len(advanced["lessons"]) >= 10
@@ -88,8 +88,8 @@ js=(base/"basis.js").read_text(encoding="utf-8")
 assert "kst-ki-basis-v1" in js
 assert "kst-ki-kursportal-v1" not in js
 assert "kst-ki-kursportal-v1" in (ROOT/"projekt/portal.js").read_text(encoding="utf-8")
-assert "kursseiten/basis-manifest.json" in (ROOT/"projekt/admin/admin.js").read_text(encoding="utf-8")
-assert "basis-manifest.json" in (ROOT/"admin-worker/src/index.mjs").read_text(encoding="utf-8")
+assert "kursseiten/bok/1-klasse/manifest.json" in (ROOT/"projekt/admin/admin.js").read_text(encoding="utf-8")
+assert "kursseiten/" in (ROOT/"admin-worker/src/index.mjs").read_text(encoding="utf-8")
 assert "KI entdecken" in (base/"unterrichtsplan.html").read_text(encoding="utf-8")
 assert "Papagei" in (base/"index.html").read_text(encoding="utf-8")
 # The first-year image project must be runnable and restorable after deployment.
@@ -166,7 +166,7 @@ for _a,_b,_filenames in [
     ("netze","basis-netze",[f"0{i}0-netze-{i}.md" for i in range(1,5)]),
 ]:
     for _file in _filenames:
-        _fourth=(ROOT/"kursseiten"/_a/_file).read_text(encoding="utf-8")
+        _fourth=(ROOT/"kursseiten/bok/4-klasse"/_a/_file).read_text(encoding="utf-8")
         _expect=_mirror_chapter(_fourth,_a,_b)
         if _file=="040-netze-4.md":
             # The ungraded readiness check is deliberately part of advanced DL4,
@@ -175,13 +175,13 @@ for _a,_b,_filenames in [
             _expect=_expect.replace(
                 "Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.",
                 "In Doppellektion 5 untersucht ihr erstmals das Ziffernerkennungsmodell.")
-        _first=(ROOT/"kursseiten"/_b/_file).read_text(encoding="utf-8")
+        _first=(ROOT/"kursseiten/bok/1-klasse"/_b/_file).read_text(encoding="utf-8")
         assert _first==_expect, f"DL3/4 source drift from fourth-year course: {_b}/{_file}"
 
 
 # All notebook entry points on pupil-facing course pages use the same card.
 # Teacher-only downloadable resources in materialien.md remain valid downloads.
-for _chapter in (ROOT/"kursseiten").glob("*/[0-9][0-9][0-9]-*.md"):
+for _chapter in (ROOT/"kursseiten/bok/4-klasse").glob("*/[0-9][0-9][0-9]-*.md"):
     _source=_chapter.read_text(encoding="utf-8")
     _legacy=_re.search(
         r'<(?:button|a) class="btn[^"]*" (?:data-lab="[^"]+\.ipynb"|href="\.\./lab/index\.html\?path=portal/)',
