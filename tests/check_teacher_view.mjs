@@ -95,11 +95,12 @@ assert(teacherShell({course:"irn/4-klasse",kind:"materialien"},options).includes
 const subset=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES.slice(0,2)});
 assert.equal(subset.length,2,"A registry may contain any number of valid teacher courses");
 const extra={...DEFAULT_COURSES[0],id:"mai-1-klasse",teacher:"MAI",slug:"mai/1-klasse",
-  editorKey:"mai-1-klasse",manifest:"kursseiten/mai-1-manifest.json",
-  sectionPrefix:"mai-1-",notebookPrefix:"mai1_",source:null,status:"planned",
-  teacherFiles:{solutions:"lehrperson/mai-1/musterloesungen.md",
-    fields:"lehrperson/mai-1/musterloesungen-felder.md",
-    glossary:"lehrperson/mai-1/glossar.md"}};
+  editorKey:"mai-1-klasse",courseRoot:"kurse/mai/1-klasse",
+  manifest:"kurse/mai/1-klasse/kursseiten/manifest.json",
+  sectionPrefix:"basis-",notebookPrefix:"basis_",source:null,status:"planned",
+  teacherFiles:{solutions:"kurse/mai/1-klasse/lehrperson/musterloesungen.md",
+    fields:"kurse/mai/1-klasse/lehrperson/musterloesungen-felder.md",
+    glossary:"kurse/mai/1-klasse/kursseiten/glossar.json"}};
 assert.equal(normalizeTeacherCourses({version:1,courses:[...DEFAULT_COURSES,extra]}).length,5);
 assert.deepEqual(parseTeacher("/teacher/mai/1-klasse/planung"),{course:"mai/1-klasse",kind:"planung"});
 const malicious=structuredClone(DEFAULT_COURSES);
@@ -112,34 +113,38 @@ const courseMock=async(_token,path)=>{
 assert.deepEqual((await loadTeacherCourses("token",courseMock,"example/repo")).map(x=>x.ready),
   [true,true,true,true],"Course picker must use the source registry");
 
-// Real IRN scaffolds must belong to their own profiles and validate as complete AVIVA drafts.
-const sourceFiles=[1,4].map(grade=>{
-  const prefix="../kursseiten/irn-"+grade+"-kurs/planung.json";
-  return JSON.parse(readFileSync(new URL(prefix,import.meta.url),"utf8"));
-});
-assert(sourceFiles.every(p=>p.lessons.length===10));
-assert(sourceFiles[0].lessons.every(x=>x.view==="irn-1-kurs"));
-assert(sourceFiles[1].lessons.every(x=>x.view==="irn-4-kurs"));
-assert(sourceFiles.every(p=>validatePlan(p)),"IRN draft plans must pass the canonical AVIVA validator");
+// Both IRN courses contain complete independent copies of the original BOK content.
 for(const grade of [1,4]){
-  const manifest=JSON.parse(readFileSync(new URL("../kursseiten/irn-"+grade+"-manifest.json",import.meta.url),"utf8"));
+  const root="../kurse/irn/"+grade+"-klasse/kursseiten/";
+  const template="../templates/"+grade+"-klasse/kursseiten/";
+  const manifest=JSON.parse(readFileSync(new URL(root+"manifest.json",import.meta.url),"utf8"));
+  const reference=JSON.parse(readFileSync(new URL(template+"manifest.json",import.meta.url),"utf8"));
+  assert.deepEqual(manifest,reference);
   assert(validateManifest(manifest));
-  assert(manifest.sections.every(x=>x.id.startsWith("irn-"+grade+"-")));
+  let lessonCount=0;
+  for(const section of manifest.sections.filter(s=>s.teaching)){
+    const file=section.id+"/planung.json";
+    const source=readFileSync(new URL(root+file,import.meta.url),"utf8");
+    assert.equal(source,readFileSync(new URL(template+file,import.meta.url),"utf8"));
+    const data=JSON.parse(source);assert(validatePlan(data));
+    lessonCount+=data.lessons.length;
+  }
+  assert.equal(lessonCount,10,"IRN must retain all template double lessons");
 }
 const fake={
-  "kursseiten/basis-manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
-  "kursseiten/basis-test/planung.json":JSON.stringify({lessons:[
+  "kurse/bok/1-klasse/kursseiten/manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
+  "kurse/bok/1-klasse/kursseiten/basis-test/planung.json":JSON.stringify({lessons:[
     {id:"test-1",order:10,view:"basis-test",title:"Regeln",goal:"Ziel",question:"Leitfrage",phases:[]},
     {id:"test-2",order:20,view:"basis-test",title:"Lernen",goal:"Ziel 2",question:"Leitfrage 2",phases:[]}
   ]}),
-  "kursseiten/basis-test/materialien.md":"## Materialien\n\nMathematikblatt",
-  "lehrperson/musterloesungen.md":"## 1 · Was ist KI?\n\nFachlicher Hinweis",
-  "lehrperson/musterloesungen-felder-1-klasse.md":fields,
-  "kursseiten/basis-test/010-test.md":sample
+  "kurse/bok/1-klasse/kursseiten/basis-test/materialien.md":"## Materialien\n\nMathematikblatt",
+  "kurse/bok/1-klasse/lehrperson/musterloesungen.md":"## 1 · Was ist KI?\n\nFachlicher Hinweis",
+  "kurse/bok/1-klasse/lehrperson/musterloesungen-felder.md":fields,
+  "kurse/bok/1-klasse/kursseiten/basis-test/010-test.md":sample
 };
 const github=async(_token,path)=>{
   if(path.includes("/git/trees/main?recursive=1"))return {truncated:false,
-    tree:[{type:"blob",path:"kursseiten/basis-test/010-test.md"}]};
+    tree:[{type:"blob",path:"kurse/bok/1-klasse/kursseiten/basis-test/010-test.md"}]};
   const p=path.split("/contents/")[1]?.split("?")[0];
   assert(p in fake,"Unexpected source: "+path);
   return {encoding:"base64",content:Buffer.from(fake[p]).toString("base64")};
