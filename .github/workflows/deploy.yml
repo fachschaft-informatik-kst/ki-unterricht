@@ -64,7 +64,7 @@ jobs:
                 worker=true
                 editor_content_only=false
                 ;;
-              kursseiten/*|lehrperson/*|shared/course-sites.json|projekt/grafiken/uploads/*)
+              kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|shared/course-sites.json|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
                 # Editor-written course sources and teacher notes never alter
                 # the notebook runtime. Still rebuild and publish the site.
                 site=true
@@ -174,8 +174,8 @@ jobs:
           node --check projekt/admin/teacher.js
           node --check projekt/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
-          node tests/check_admin.mjs
-          node tests/check_markdown_parity.cjs
+          # Content/chapters are editable: only run fixture-specific tests
+          # in code-change PRs, never block on a renamed editor chapter.
           node --check projekt/glossar.js
           node --check projekt/dl1_sort.js
           node --check content/ki_projekt/fotostudio_storage.js
@@ -204,6 +204,11 @@ jobs:
             /tmp/ki-browser/node_modules/.bin/playwright install-deps chromium
             node -e "require('/tmp/ki-browser/node_modules/playwright').chromium.launch().then(b=>b.close())"
           fi
+      - name: Check editor gateway and Markdown fixtures
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
+        run: |
+          node tests/check_admin.mjs
+          node tests/check_markdown_parity.cjs
       - name: Browser-check teacher editor
         # Form/browser snapshots assume a particular authored lesson set.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
