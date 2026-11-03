@@ -13,13 +13,13 @@
         "accent": "#3653a3"
       },
       "editorKey": "basis",
-      "manifest": "kursseiten/basis-manifest.json",
+      "manifest": "kursseiten/bok/1-klasse/manifest.json",
       "sectionPrefix": "basis-",
       "notebookPrefix": "basis_",
       "teacherFiles": {
-        "solutions": "lehrperson/musterloesungen.md",
-        "fields": "lehrperson/musterloesungen-felder-1-klasse.md",
-        "glossary": "kursseiten/glossar.json"
+        "solutions": "kursseiten/bok/1-klasse/lehrperson/musterloesungen.md",
+        "fields": "kursseiten/bok/1-klasse/lehrperson/musterloesungen-felder.md",
+        "glossary": "kursseiten/bok/1-klasse/glossar.json"
       }
     },
     {
@@ -34,14 +34,14 @@
         "accent": "#076959"
       },
       "editorKey": "vertiefung",
-      "manifest": "kursseiten/manifest.json",
+      "manifest": "kursseiten/bok/4-klasse/manifest.json",
       "sectionPrefix": "",
       "notebookPrefix": "",
       "teacherFiles": {
-        "solutions": "lehrperson/musterloesungen.md",
-        "fields": "lehrperson/musterloesungen-felder-4-klasse.md",
-        "glossary": "kursseiten/glossar.json",
-        "materialsIntro": "lehrperson/materialien.md"
+        "solutions": "kursseiten/bok/4-klasse/lehrperson/musterloesungen.md",
+        "fields": "kursseiten/bok/4-klasse/lehrperson/musterloesungen-felder.md",
+        "glossary": "kursseiten/bok/4-klasse/glossar.json",
+        "materialsIntro": "kursseiten/bok/4-klasse/lehrperson/materialien.md"
       }
     },
     {
@@ -56,13 +56,13 @@
         "accent": "#69419b"
       },
       "editorKey": "irn1",
-      "manifest": "kursseiten/irn-1-manifest.json",
-      "sectionPrefix": "irn-1-",
+      "manifest": "kursseiten/irn/1-klasse/manifest.json",
+      "sectionPrefix": "basis-",
       "notebookPrefix": "irn1_",
       "teacherFiles": {
-        "solutions": "lehrperson/irn-1/musterloesungen.md",
-        "fields": "lehrperson/irn-1/musterloesungen-felder.md",
-        "glossary": "lehrperson/irn-1/glossar.md"
+        "solutions": "kursseiten/irn/1-klasse/lehrperson/musterloesungen.md",
+        "fields": "kursseiten/irn/1-klasse/lehrperson/musterloesungen-felder.md",
+        "glossary": "kursseiten/irn/1-klasse/glossar.json"
       }
     },
     {
@@ -77,13 +77,14 @@
         "accent": "#9a481d"
       },
       "editorKey": "irn4",
-      "manifest": "kursseiten/irn-4-manifest.json",
-      "sectionPrefix": "irn-4-",
+      "manifest": "kursseiten/irn/4-klasse/manifest.json",
+      "sectionPrefix": "",
       "notebookPrefix": "irn4_",
       "teacherFiles": {
-        "solutions": "lehrperson/irn-4/musterloesungen.md",
-        "fields": "lehrperson/irn-4/musterloesungen-felder.md",
-        "glossary": "lehrperson/irn-4/glossar.md"
+        "solutions": "kursseiten/irn/4-klasse/lehrperson/musterloesungen.md",
+        "fields": "kursseiten/irn/4-klasse/lehrperson/musterloesungen-felder.md",
+        "glossary": "kursseiten/irn/4-klasse/glossar.json",
+        "materialsIntro": "kursseiten/irn/4-klasse/lehrperson/materialien.md"
       }
     }
   ]
