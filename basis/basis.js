@@ -60,9 +60,35 @@ for(const field of fields){
    catch{document.getElementById('basis-save-status').textContent='Speichern nicht möglich – bitte Notizen herunterladen.';}
  });
 }
+const transferStatus=document.getElementById('basis-answer-transfer-status');
 document.getElementById('basis-download').addEventListener('click',()=>{
- const blob=new Blob([JSON.stringify({schema:key,answers:data},null,2)],{type:'application/json'});
- const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ki-basis-notizen.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1200);
+ // Read every current field (including selects), not just keys seen during this session.
+ const answers=Object.fromEntries(fields.map(field=>[field.dataset.basisAnswer,field.value]));
+ const blob=new Blob([JSON.stringify({schema:key,answers},null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='KI-1-Klasse-Antworten.json';a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),60000);
+ transferStatus.textContent='Antworten heruntergeladen. Die JSON-Datei auf einem anderen Gerät hier wieder hochladen.';
+});
+document.getElementById('basis-import').addEventListener('change',async event=>{
+ const input=event.target,file=input.files?.[0];if(!file)return;
+ try{
+  if(file.size>1024*1024)throw Error('Die Antwortdatei ist zu gross (maximal 1 MB).');
+  const raw=JSON.parse(await file.text());
+  if(raw?.schema!==key||!raw.answers||typeof raw.answers!=='object'||Array.isArray(raw.answers))
+   throw Error('Keine gültige Antwortdatei der 1. Klasse.');
+  if(Object.keys(raw.answers).length>500)throw Error('Zu viele Antwortfelder in der Datei.');
+  for(const value of Object.values(raw.answers))
+   if(typeof value!=='string'||value.length>20000)throw Error('Ungültiger oder zu langer Antworttext.');
+  if(!confirm('Aktuelle Antworten durch die ausgewählte Datei ersetzen? Notebooks und Fotodaten bleiben erhalten.'))return;
+  for(const field of fields){
+   const value=raw.answers[field.dataset.basisAnswer]??'';
+   field.value=field.tagName==='SELECT'&&![...field.options].some(option=>option.value===value)?'':value;
+   field.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+  transferStatus.textContent='Antworten wiederhergestellt – auch die Auswahlaufgaben. Notebooks und Fotos wurden nicht verändert.';
+ }catch(error){transferStatus.textContent='Antworten nicht geladen: '+error.message;}
+ finally{input.value='';}
 });
 for(const lab of document.querySelectorAll('[data-basis-neuron]')){
  const sliders=[...lab.querySelectorAll('[data-weight]')],out=lab.querySelector('[data-live-output]');

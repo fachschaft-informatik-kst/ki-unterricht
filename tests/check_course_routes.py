@@ -34,6 +34,8 @@ for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
     assert not (dist / slug / "materialien.html").exists()
     assert not (dist / slug / "musterloesungen").exists()
     assert "kst-ki-admin.kevin-bohn.workers.dev/teacher/" in generated
+    assert 'href="https://kst-ki-admin.kevin-bohn.workers.dev/"' in generated, "Editor footer must link to authenticated Worker"
+    assert not re.search(r'href="(?:admin/|\.\./projekt/admin/)"', generated), "Broken relative footer link"
     assert not re.search(r'(?<!\\.)href="../kurse.html"', generated)
 assert 'from \'../../projekt/archive.js\'' in (dist / "bok/1-klasse/persistence.js").read_text(encoding="utf-8")
 assert "'../../lab/index.html?path='" in (dist / "bok/4-klasse/portal.js").read_text(encoding="utf-8")

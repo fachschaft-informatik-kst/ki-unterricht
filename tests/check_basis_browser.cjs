@@ -70,7 +70,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // Exercise the new BOK route, then continue regression coverage on the
     // original /basis/ address to ensure existing student state still works.
     await page.locator('a.choice[href="bok/1-klasse/"]').click();
-    assert.equal(await page.title(),'BOK · 1. Klasse · KI entdecken');
+    assert.equal(await page.title(),'BOK KI 1. Klasse');
     await page.goto('http://127.0.0.1:8770/basis/');
     assert.equal(await page.title(),'KI entdecken · 1. Kurzgymnasium');
     assert.equal(await page.locator('main > section').count(),13);
@@ -98,6 +98,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/1-klasse/materialien"]').count());
     assert(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/1-klasse/planung"]').count());
     assert.equal((await page.request.get('http://127.0.0.1:8770/basis/materialien.html')).status(),404);
+    assert.equal(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/"]').count(),1,'Footer must link directly to authenticated editor');
     await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
     await page.locator('#basis-sicherung').waitFor({state:'visible'});
     assert(await page.locator('#basis-sicherung #basis-backup-controls button').count());
@@ -280,8 +281,30 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
      await timelineAnswer.fill('Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
     await page.locator('input[aria-label="Fotostudio-JSON zur ZIP-Sicherung hinzufügen"]').setInputFiles({name:'fotos.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(studio))});
+    assert.equal(await page.locator('#basis-download').isVisible(),true,'Simple JSON answer backup must be visible');
+    assert.equal(await page.locator('#basis-import').count(),1,'Answer import field must exist');
+    const answerPromise=page.waitForEvent('download');
+    await page.locator('#basis-download').click();
+    const answerDownload=await answerPromise;
+    const answerPath=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'ki-basis-answers-')),'antworten.json');
+    await answerDownload.saveAs(answerPath);
+    const answerData=JSON.parse(fs.readFileSync(answerPath,'utf8'));
+    assert.equal(answerData.schema,'kst-ki-basis-v1');
+    assert.equal(answerData.answers['basis-ki-zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
+    assert.equal(answerData.answers['basis-neuron-sw_treffer'],'7','Select answers must be included');
+    await note.fill('Wird durch Antwortdatei ersetzt');
+    await timelineAnswer.fill('Noch nicht importiert');
+    page.once('dialog',dialog=>dialog.accept());
+    await page.locator('#basis-import').setInputFiles(answerPath);
+    await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Antworten wiederhergestellt'));
+    assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.');
+    assert.equal(await timelineAnswer.inputValue(),'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
+    assert.equal(await page.locator('[data-basis-answer="basis-neuron-sw_treffer"]').inputValue(),'7');
+    await page.locator('#basis-import').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"wrong","answers":{}}')});
+    await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Keine gültige Antwortdatei'));
+    assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.','Invalid import must preserve answers');
     const downloadPromise=page.waitForEvent('download');
-    await page.getByRole('button',{name:'Gesamten Kursstand als ZIP sichern'}).click();
+    await page.getByRole('button',{name:'Kursstand als ZIP herunterladen'}).click();
     const download=await downloadPromise;
     const archivePath=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'ki-basis-zip-')),'kursstand.zip');
     await download.saveAs(archivePath);
@@ -296,6 +319,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(JSON.parse(await files.get('notebooks/basis_neuron.ipynb').text()).cells[0].source[0],'print("Mein Versuch")');
     await note.fill('Wird beim Import ersetzt');
     const restoredPhoto=page.waitForEvent('download');
+    page.once('dialog',dialog=>dialog.accept());
     await page.locator('input[aria-label="ZIP-Kursstand wiederherstellen"]').setInputFiles(archivePath);
     await restoredPhoto;
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.');

@@ -24,23 +24,45 @@
 <div class="crumb"><span><img alt="Logo KST" class="school-logo" height="22" src="grafiken/kst_logo.png" width="44"/>Kantonsschule Stadelhofen</span><span>Informatik</span><span>Künstliche Intelligenz</span></div>
 <!-- COURSE -->
 <div class="basis-transfer" id="basis-sicherung" tabindex="-1">
-<h2>Notizen &amp; Projekt</h2>
-<p>Hier könnt ihr eure Antworten, Reflexionen, bearbeiteten Notebooks und die Fotostudio-JSON gemeinsam als ZIP sichern und später wiederherstellen. Speichert die Originalfotos separat.</p>
-<div class="basis-transfer-identity">
-  <label class="field answer"><span>Namen für das Lernjournal</span><input type="text" data-basis-answer="basis-journal-namen" maxlength="200" placeholder="Vorname Nachname · Vorname Nachname" autocomplete="off"></label>
-  <label class="field answer"><span>Klasse</span><input type="text" data-basis-answer="basis-journal-klasse" maxlength="100" placeholder="z. B. 1a" autocomplete="off"></label>
-</div>
-<p class="small">Für die Abgabe: Namen und Klasse eintragen, ZIP herunterladen und darin <strong>Journal.html</strong> prüfen. Das ZIP enthält alle ausgefüllten Antworten inklusive Auswahlaufgaben. Es wird nicht automatisch eingereicht.</p>
-<div class="basis-transfer-actions">
-<button class="btn compact" id="basis-download" type="button">Meine Textantworten als JSON sichern</button>
-<div id="basis-backup-controls" class="basis-backup-controls"></div>
-<p id="basis-backup-status" class="status" role="status">Noch keine ZIP-Sicherung erstellt.</p>
-</div>
+  <span class="section-label">Sichern · Wiederherstellen · Abgeben</span>
+  <h2>Antworten sichern und weiterarbeiten</h2>
+  <p>Ihr könnt eure ausgefüllten Textfelder, Reflexionen und Auswahlaufgaben als kleine JSON-Datei herunterladen und auf einem anderen Gerät wieder hochladen. Für Notebooks, Fotos und die Projektabgabe verwendet ihr zusätzlich die vollständige ZIP-Sicherung.</p>
+  <div class="basis-transfer-flow">
+    <section class="basis-transfer-step">
+      <h3><span class="basis-step-number">1</span> Namen und Klasse eintragen</h3>
+      <div class="basis-transfer-identity">
+        <label class="field answer"><span>Namen für das Lernjournal</span><input type="text" data-basis-answer="basis-journal-namen" maxlength="200" placeholder="Vorname Nachname · Vorname Nachname" autocomplete="off"></label>
+        <label class="field answer"><span>Klasse</span><input type="text" data-basis-answer="basis-journal-klasse" maxlength="100" placeholder="z. B. 1a" autocomplete="off"></label>
+      </div>
+    </section>
+    <section class="basis-transfer-step basis-answers-step">
+      <h3><span class="basis-step-number">2</span> Antworten herunterladen oder hochladen</h3>
+      <p>Damit nehmt ihr alle bisherigen Antworten aus den Aufgaben, die Reflexionen und die Angaben zum Lernjournal mit.</p>
+      <div class="basis-transfer-buttons basis-answer-buttons">
+        <button class="btn primary" id="basis-download" type="button">Antworten herunterladen ↓</button>
+        <label class="btn" for="basis-import">Antworten hochladen ↑</label>
+        <input id="basis-import" accept=".json,application/json" type="file" hidden>
+      </div>
+      <p id="basis-answer-transfer-status" class="status" role="status" aria-live="polite"></p>
+      <p class="small muted">Das Hochladen ersetzt nur die Antworten auf dieser Kursseite. Gespeicherte Notebookstände und Fotodateien bleiben erhalten.</p>
+    </section>
+    <section class="basis-transfer-step">
+      <h3><span class="basis-step-number">3</span> Ganzes Projekt als ZIP sichern oder laden</h3>
+      <p class="small muted">Wenn ihr das Fotostudio verwendet habt, fügt zuerst die dort heruntergeladene JSON hinzu. Alle ausgefüllten Aufgaben werden automatisch mitgesichert. Originalfotos zusätzlich separat aufbewahren.</p>
+      <div id="basis-backup-controls" class="basis-backup-controls"></div>
+      <p id="basis-backup-status" class="status" role="status" aria-live="polite">Noch keine ZIP-Sicherung erstellt.</p>
+      <p class="small muted">Eine Wiederherstellung ersetzt die aktuellen Antworten und Notebookstände auf diesem Gerät. Bei Bedarf vorher eine ZIP sichern.</p>
+    </section>
+    <section class="basis-transfer-step">
+      <h3><span class="basis-step-number">4</span> Für die Abgabe prüfen</h3>
+      <p>Die ZIP enthält <strong>Journal.html</strong> mit euren Antworten (auch Auswahlaufgaben). Öffnet diese Datei kurz und reicht dann die <strong>ZIP über den vereinbarten Abgabekanal</strong> ein. Der Download allein reicht nicht als Abgabe.</p>
+    </section>
+  </div>
 </div>
 <footer class="footer"><details><summary>Quellen &amp; Hinweise für die Lehrperson</summary><div class="detail-body">
 <div class="actions"><button class="btn js-only" id="print-page" type="button">Unterrichtsübersicht drucken / als PDF sichern</button><a class="btn" href="#basis-start">Nach oben ↑</a></div>
 <p>KI entdecken · 1. Kurzgymnasium · Kantonsschule Stadelhofen</p>
-<p><a href="unterrichtsplan.html">Unterrichtsplan mit Ablauftabellen (AVIVA) aller Doppellektionen</a> · <a href="materialien.html">Materialkoffer für Lehrpersonen – alle Doppellektionen</a> · <a href="../projekt/admin/">Lehrpersonen-Editor (GitHub-Anmeldung)</a></p>
+<p><a href="unterrichtsplan.html">Unterrichtsplan mit Ablauftabellen (AVIVA) aller Doppellektionen</a> · <a href="materialien.html">Materialkoffer für Lehrpersonen – alle Doppellektionen</a> · <a href="https://kst-ki-admin.kevin-bohn.workers.dev/">Lehrpersonen-Editor (GitHub-Anmeldung)</a></p>
 <p><a href="https://github.com/fachschaft-informatik-kst/ki-unterricht">Materialien auf GitHub</a><a href="https://github.com/tensorflow/tfjs-models/tree/master/mobilenet">Bildmodell: MobileNet</a><a href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html">Eigenes Netz: MLPClassifier</a></p>
 </div></details></footer>
 </main></div>
