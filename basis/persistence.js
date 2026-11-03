@@ -1,5 +1,6 @@
 import {makeZip,readZip,escapeHTML as esc} from '../projekt/archive.js';
 import {bindLabFullscreen,bindNotebookDialog} from '../projekt/lab-fullscreen.js';
+import {startNotebookTiming,markNotebookTiming,openedNotebook,finishNotebookTiming} from '../projekt/notebook-performance.js';
 
 // The basic course has its own backup schema and does not alter the fourth-year portal.
 const KEY='kst-ki-basis-v1', NBKEY='kst-ki-basis-notebooks-v1', SCHEMA='ki-basis-zip-v1';
@@ -49,6 +50,7 @@ loaderRetry.addEventListener('click',()=>{if(current)void openNotebook(current,o
 let current=null,owner=null,ready=false,revision=0,restoring=false,changed=false;
 function startNotebookFrame(name,kind){
  frame.dataset.startKind=kind;frame.dataset.startMs=String(performance.now());
+ startNotebookTiming(frame,name,kind);
  notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Python wird vorbereitet …');
  frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');
 }
@@ -117,6 +119,7 @@ async function openNotebook(name,view,force=false,host=null){
  // The chapter launch button remains the dialog's focus-return target.
  try { sessionStorage.setItem('ki-last-opened-bok-1',name); } catch {}
  owner=view||owner;heading.textContent=notebookTitles[name]||'Experiment';
+ openedNotebook(frame);
  if(current===name&&!force&&frame.getAttribute('src')&&loader.dataset.state!=='error'){
   // Reuse the active/warming iframe even when Python is still starting.
   overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);
@@ -129,6 +132,7 @@ async function openNotebook(name,view,force=false,host=null){
 }
 document.querySelectorAll('a[href*="../lab/index.html?path="]').forEach(a=>{const url=new URL(a.href);const name=url.searchParams.get('path')?.split('/').pop();if(!notebookNames.includes(name))return;a.addEventListener('click',event=>{event.preventDefault();openNotebook(name,a.closest('main > section')?.id,false,a.closest('.ki-notebook-block')).catch(e=>status.textContent=e.message);});});
 window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1'||!current)return;const d=event.data;if(d.path!=='portal/'+current)return;
+if(d.type==='milestone'){markNotebookTiming(frame,d.phase);return;}
 if(d.id&&pending.has(d.id)){const p=pending.get(d.id);clearTimeout(p.timer);pending.delete(d.id);d.type==='error'?p.reject(Error(d.error)):p.resolve(d);return;}
 if(d.type==='ready'&&d.error){status.textContent=d.error;notebookLoading('error',d.error);return;}
 if(d.type==='ready'&&d.ready&&!ready&&!restoring){
@@ -140,9 +144,7 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
   // snapshot is unnecessary. Changes auto-save, and switching/ZIP export always
   // take a fresh snapshot. A running Python environment is ready immediately.
   ready=true;
-  const milliseconds=Math.round(performance.now()-Number(frame.dataset.startMs||performance.now()));
-  (window.KINotebookTimings ||= []).push({name:current,kind:frame.dataset.startKind||'open',milliseconds});
-  frame.dataset.loadMs=String(milliseconds);
+  finishNotebookTiming(frame);
   status.textContent=restored?.widgets?.activated
     ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
     : restored ? 'Gesicherter Stand geladen · geänderte Startzellen bitte manuell ausführen.'
