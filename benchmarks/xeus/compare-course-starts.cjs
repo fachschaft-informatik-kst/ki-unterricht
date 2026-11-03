@@ -26,7 +26,7 @@ const output={schema:'ki-course-start-benchmark-v1',createdAt:new Date().toISOSt
   policy:'cold = fresh browser context; warm = new page in same context (cached resources, fresh kernel)',
   timeoutMs:maxWaitMs,iterations,results:[],summary:[]};
 const elapsed=t=>Math.round(performance.now()-t);
-const median=a=>{const b=[...a].sort((x,y)=>x-y);return b.length?b[Math.floor((b.length-1)/2)]:null;};
+const median=a=>{const b=[...a].sort((x,y)=>x-y);if(!b.length)return null;const m=Math.floor(b.length/2);return b.length%2?b[m]:(b[m-1]+b[m])/2;};
 function save(){fs.writeFileSync(reportPath,JSON.stringify(output,null,2)+'\n');}
 function summary(){
   const groups=[];
