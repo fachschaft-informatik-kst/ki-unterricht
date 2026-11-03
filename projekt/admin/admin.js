@@ -8,10 +8,10 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
 const COURSE_PROFILES={
-  basis:{slug:"bok/1-klasse",theme:"bok-1-klasse",teacher:"BOK",grade:1,manifest:"kursseiten/basis-manifest.json",name:"KI entdecken"},
-  vertiefung:{slug:"bok/4-klasse",theme:"bok-4-klasse",teacher:"BOK",grade:4,manifest:"kursseiten/manifest.json",name:"KI vertiefen"},
-  irn1:{slug:"irn/1-klasse",theme:"irn-1-klasse",teacher:"IRN",grade:1,manifest:"kursseiten/irn-1-manifest.json",name:"KI entdecken (Entwurf)",source:"irn-1"},
-  irn4:{slug:"irn/4-klasse",theme:"irn-4-klasse",teacher:"IRN",grade:4,manifest:"kursseiten/irn-4-manifest.json",name:"KI vertiefen (Entwurf)",source:"irn-4"}
+  basis:{slug:"bok/1-klasse",theme:"bok-1-klasse",teacher:"BOK",grade:1,manifest:"kursseiten/bok/1-klasse/manifest.json",name:"KI entdecken"},
+  vertiefung:{slug:"bok/4-klasse",theme:"bok-4-klasse",teacher:"BOK",grade:4,manifest:"kursseiten/bok/4-klasse/manifest.json",name:"KI vertiefen"},
+  irn1:{slug:"irn/1-klasse",theme:"irn-1-klasse",teacher:"IRN",grade:1,manifest:"kursseiten/irn/1-klasse/manifest.json",name:"KI entdecken (Entwurf)",source:"irn-1"},
+  irn4:{slug:"irn/4-klasse",theme:"irn-4-klasse",teacher:"IRN",grade:4,manifest:"kursseiten/irn/4-klasse/manifest.json",name:"KI vertiefen (Entwurf)",source:"irn-4"}
 };
 const courseProfile=()=>COURSE_PROFILES[state.course];
 const courseGrade=()=>courseProfile().grade;
@@ -22,7 +22,7 @@ const teacherSource=(kind)=>{
   if(files)return files[{musterloesungen:"solutions","musterloesungen-felder":"fields",glossar:"glossary"}[kind]];
   return p.source?"lehrperson/"+p.source+"/"+kind+".md":
     kind==="musterloesungen"?"lehrperson/musterloesungen.md":
-    kind==="musterloesungen-felder"?"lehrperson/musterloesungen-felder-"+p.grade+"-klasse.md":GLOSSARY_PATH;
+    kind==="musterloesungen-felder"?"lehrperson/musterloesungen-felder-"+p.grade+"-klasse.md":glossaryPath();
 };
 function updateTeacherAccessLinks(){
   const origin="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/"+courseProfile().slug+"/";
@@ -31,6 +31,8 @@ function updateTeacherAccessLinks(){
 }
 updateTeacherAccessLinks();
 const manifestPath=()=>courseProfile().manifest;
+const courseRoot=()=>manifestPath().replace(/\/manifest\.json$/,"");
+const glossaryPath=()=>courseProfile().teacherFiles?.glossary||GLOSSARY_PATH;
 
 const COURSE_THEMES_PATH="shared/course-sites.json";
 let courseThemes=null,courseThemeDraft=null;
@@ -429,8 +431,8 @@ function renderSectionNav(){
     nav.append(button);
   }
 }
-const chapterPath=path=>/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(path);
-const chaptersFor=section=>state.chapters.filter(c=>c.path.startsWith("kursseiten/"+section+"/")&&chapterPath(c.path))
+const chapterPath=path=>path.startsWith(courseRoot()+"/")&&/\/[0-9]{3}-[^/]+\.md$/.test(path);
+const chaptersFor=section=>state.chapters.filter(c=>c.path.startsWith(courseRoot()+"/"+section+"/")&&chapterPath(c.path))
   .sort((a,b)=>a.path.localeCompare(b.path));
 function chapterContent(item){
   if(state.current?.path===item.path)return $("source").value;
@@ -450,7 +452,7 @@ async function stageChapterOrder(section,source,target){
   const prefix=Math.floor((prev+next)/2);
   if(prefix<=prev||prefix>=next)
     throw Error("Zwischen diesen Kapiteln ist kein freier Sortierplatz. Bitte ein benachbartes Kapitel verschieben.");
-  const path="kursseiten/"+section+"/"+String(prefix).padStart(3,"0")+source.split("/").pop().slice(3);
+  const path=courseRoot()+"/"+section+"/"+String(prefix).padStart(3,"0")+source.split("/").pop().slice(3);
   if(state.chapters.some(x=>x.path===path)||state.staged.has(path))
     throw Error("Der Zielplatz ist belegt.");
   if(state.staged.size+(moving.sha?2:1)>12)
@@ -496,7 +498,7 @@ function chapterList(){
     row.addEventListener("dragleave",()=>row.classList.remove("drag-over"));
     row.addEventListener("drop",e=>{e.preventDefault();row.classList.remove("drag-over");
       const source=e.dataTransfer.getData("text/plain");
-      if(source.startsWith("kursseiten/"+section+"/"))stageChapterOrder(section,source,item.path).catch(error);
+      if(source.startsWith(courseRoot()+"/"+section+"/"))stageChapterOrder(section,source,item.path).catch(error);
     });
     nav.append(row);
   }
@@ -505,7 +507,7 @@ function chapterList(){
 async function loadPlans(){
   const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
   await Promise.all(manifest.sections.filter(x=>x.teaching).map(async section=>{
-    const path="kursseiten/"+section.id+"/planung.json";
+    const path=courseRoot()+"/"+section.id+"/planung.json";
     if(!state.plans.has(path)){
       const file=state.staged.get(path)||await api("/api/file?path="+encodeURIComponent(path));
       state.plans.set(path,{sha:file.expectedSha??file.sha,original:file.original??file.content});
@@ -516,7 +518,7 @@ async function loadPlans(){
 function orderedSections(){
   const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
   return manifest.sections.filter(x=>x.teaching).map(section=>{
-    const path="kursseiten/"+section.id+"/planung.json";
+    const path=courseRoot()+"/"+section.id+"/planung.json";
     const stored=state.staged.get(path)?.content||state.plans.get(path)?.original;
     const lessons=JSON.parse(stored).lessons.slice().sort((a,b)=>a.order-b.order);
     return {section,path,lessons};
@@ -596,18 +598,10 @@ function renderLessonOrder(){
 }
 let navigationRevision=0;
 function useFile(path,sha,content,original=content){
-  const targetSection=path.split("/")[1];
-  if(path.startsWith("lehrperson/")){
-    const files=courseProfile().teacherFiles;
-    if(files&&!Object.values(files).includes(path))
-      throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
-    if(!files){
-      const base=courseProfile().source;
-      if(base&&!path.startsWith("lehrperson/"+base+"/"))throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
-      if(!base&&path.startsWith("lehrperson/irn-"))throw Error("IRN-Material gehört zu einem anderen Kurs.");
-    }
-  }
-  if(/^kursseiten\/[^/]+\/(?:[0-9]{3}-[^/]+\.md|planung\.json|materialien\.md)$/.test(path)){
+  const targetSection=path.split("/")[3];
+  if(path.includes("/lehrperson/")&&!Object.values(courseProfile().teacherFiles||{}).includes(path))
+    throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
+  if(path.startsWith(courseRoot()+"/")&&/\/(?:[0-9]{3}-[^/]+\.md|planung\.json|materialien\.md)$/.test(path)){
     const own=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest?.content||'{"sections":[]}');
     if(!own.sections.some(section=>section.id===targetSection))
       throw Error("Dieser Inhalt gehört zu einem anderen Kurs. Bitte zuerst den Kurs wechseln.");
@@ -615,10 +609,10 @@ function useFile(path,sha,content,original=content){
   state.current={path,sha,original};
   $("path").textContent=path;
   $("courseContext").textContent=courseProfile().teacher+" · "+courseGrade()+". Klasse · "+courseProfile().name;
-  $("heading").textContent=path===GLOSSARY_PATH?"KI-Glossar bearbeiten":
+  $("heading").textContent=path===glossaryPath()?"KI-Glossar bearbeiten":
     path.endsWith("/planung.json")?"AVIVA-Unterrichtsplan":
     path.endsWith("/materialien.md")?"Unterrichtsmaterialien":filename(path);
-  const isGlossary=path===GLOSSARY_PATH;
+  const isGlossary=path===glossaryPath();
   const isPlan=path.endsWith("/planung.json");
   const isNotebook=notebookPath(path);
   $("source").value=content;
@@ -683,7 +677,7 @@ async function refresh(){
   if(course!==state.course)return;
   const known=data.chapters.filter(c=>!state.staged.get(c.path)?.delete);
   // A refresh must not discard newly created (as yet unmerged) lesson chapters.
-  const pending=[...state.staged.values()].filter(c=>/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(c.path)&&!c.delete&&!known.some(k=>k.path===c.path))
+  const pending=[...state.staged.values()].filter(c=>chapterPath(c.path)&&!c.delete&&!known.some(k=>k.path===c.path))
     .map(c=>({path:c.path,sha:c.expectedSha}));
   const unsubmitted=state.chapters.filter(c=>!c.sha&&!state.staged.has(c.path)&&!known.some(k=>k.path===c.path));
   state.chapters=[...known,...pending,...unsubmitted].sort((a,b)=>a.path.localeCompare(b.path));
@@ -692,7 +686,7 @@ async function refresh(){
   const previous=$("section").value;
   $("section").replaceChildren();
   for(const entry of definitions.filter(s=>valid.includes(s.id))){const option=document.createElement("option");option.value=entry.id;option.textContent=entry.navigation?.title||entry.id;$("section").append(option);}
-  const currentSection=state.current?.path.split("/")[1];
+  const currentSection=state.current?.path.split("/")[3];
   $("section").value=valid.includes(previous)?previous:(valid.includes(currentSection)?currentSection:valid[0]||"");
   chapterList();
   state.plans.clear();
@@ -932,7 +926,7 @@ function prepareNotebookPreview(content){
   return host.innerHTML;
 }
 function preview(){
-  const isGlossary=state.current?.path===GLOSSARY_PATH;
+  const isGlossary=state.current?.path===glossaryPath();
   const isBasis=courseGrade()===1;
   document.body.classList.toggle("course-basis",courseGrade()===1);
   applyCourseTheme();
@@ -992,7 +986,7 @@ function preview(){
   // Match the actual rendered /projekt/index.html DOM hierarchy. The course's
   // main and section layout rules must not be replaced with generic editor styles.
   // Keep the preview inert: no allow-scripts and no allow-same-origin.
-  const section=isGlossary?(isBasis?"basis-glossar":"glossar"):(state.current?.path.split("/")[1]||(isBasis?"basis-start":"einstieg"));
+  const section=isGlossary?(isBasis?"basis-glossar":"glossar"):(state.current?.path.split("/")[3]||(isBasis?"basis-start":"einstieg"));
   const safeSection=/^[a-z0-9-]+$/.test(section)?section:(isBasis?"basis-start":"einstieg");
   const stylesheet="<style>"+COURSE_PREVIEW_CSS+(isBasis?BASIS_PREVIEW_CSS:"")+courseThemeCSS()+"</style>";
   // The Worker CSP intentionally forbids <base> (base-uri 'none'). Inline chrome
@@ -1008,7 +1002,7 @@ function preview(){
 
 }
 function availableOrder(section,after){
-  const prefix="kursseiten/"+section+"/";
+  const prefix=courseRoot()+"/"+section+"/";
   const orders=state.chapters.filter(c=>c.path.startsWith(prefix)).map(c=>Number(filename(c.path).slice(0,3))).filter(Number.isFinite).sort((a,b)=>a-b);
   if(!orders.length)throw Error("Dieser Unterrichtsbereich ist leer.");
   if(!after){const last=Math.max(...orders.filter(n=>n!==999));if(last+10>=999)throw Error("Kein freier Platz am Ende.");return last+10;}
@@ -1029,8 +1023,8 @@ function addChapter(){
     const after=prompt("Nach welchem Dateipräfix einfügen (z. B. 030)? Leer = anhängen:","");if(after===null)return;
     const numberPrefix=String(availableOrder(section,after.trim())).padStart(3,"0");
     const name=slug(title);if(!name)throw Error("Ungültiger Titel.");
-    const path="kursseiten/"+section+"/"+numberPrefix+"-"+name+".md";
-    if(state.chapters.some(c=>c.path===path||c.path.split("/").pop().slice(4)===(name+".md")&&c.path.startsWith("kursseiten/"+section+"/"))||state.staged.has(path))throw Error("Kapitel-ID oder Dateiname existiert bereits.");
+    const path=courseRoot()+"/"+section+"/"+numberPrefix+"-"+name+".md";
+    if(state.chapters.some(c=>c.path===path||c.path.split("/").pop().slice(4)===(name+".md")&&c.path.startsWith(courseRoot()+"/"+section+"/"))||state.staged.has(path))throw Error("Kapitel-ID oder Dateiname existiert bereits.");
     const doc="---\ntype: chapter\nid: "+section+"-"+name+"\nnummer: "+JSON.stringify(number)+"\ntitel: "+JSON.stringify(title)+"\nkurz: "+JSON.stringify(title)+"\nopen: true\n---\n\nText hier bearbeiten.\n\n## Auftrag\n\nAufgabe formulieren.\n";
     state.chapters.push({path,sha:null});state.chapters.sort((a,b)=>a.path.localeCompare(b.path));
     useFile(path,null,doc);status("Neues Kapitel angelegt; zuerst vormerken, dann Pull Request erstellen.");
@@ -1044,7 +1038,7 @@ function stage(){
     planner.validate(content);
   }
   if(notebookPath(c.path))validateNotebook(JSON.parse(content));
-  if(c.path===GLOSSARY_PATH){
+  if(c.path===glossaryPath()){
     const doc=validateGlossary(JSON.parse(content));
     if(c.sha){
       const old=validateGlossary(JSON.parse(c.original));
@@ -1086,9 +1080,9 @@ function move(){
   const c=state.current;if(!c?.sha)return;
   try{
     const after=prompt("Nach welchem Dateipräfix verschieben?","030");if(after===null)return;
-    const section=c.path.split("/")[1];
+    const section=c.path.split("/")[3];
     const num=String(availableOrder(section,after.trim())).padStart(3,"0");
-    const target="kursseiten/"+section+"/"+num+c.path.split("/").pop().slice(3);
+    const target=courseRoot()+"/"+section+"/"+num+c.path.split("/").pop().slice(3);
     if(state.chapters.some(x=>x.path===target)||state.staged.has(target))throw Error("Zielposition schon belegt.");
     state.staged.set(c.path,{path:c.path,expectedSha:c.sha,delete:true});
     state.staged.set(target,{path:target,expectedSha:null,content:$("source").value});
@@ -1102,7 +1096,7 @@ async function imageAvivaAttribution(){
   const previous=$("source").value.slice(0,$("source").selectionStart);
   const id=[...previous.matchAll(/^## Doppellektion ([a-z0-9-]+)\s*$/gm)].at(-1)?.[1];
   if(!id)throw Error("Bild in den Materialien unter einer Doppellektion-Überschrift einfügen.");
-  const planPath="kursseiten/"+path.split("/")[1]+"/planung.json";
+  const planPath=courseRoot()+"/"+path.split("/")[3]+"/planung.json";
   const json=state.staged.get(planPath)?.content||
     (await api("/api/file?path="+encodeURIComponent(planPath))).content;
   const lesson=JSON.parse(json).lessons.find(l=>l.id===id);
@@ -1179,7 +1173,7 @@ async function editPlan(){
     const currentManifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
     if(!currentManifest.sections.some(item=>item.id===section&&item.teaching))
       throw Error("Bitte einen Unterrichtsbereich der ausgewählten Klasse wählen.");
-    const path="kursseiten/"+section+"/planung.json",staged=state.staged.get(path);
+    const path=courseRoot()+"/"+section+"/planung.json",staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
     const file=await api("/api/file?path="+encodeURIComponent(path));
     useFile(path,file.sha,file.content);status("AVIVA-Plan als Formular bearbeiten: pro Doppellektion fünf Phasen und insgesamt 90 Minuten.");
@@ -1192,7 +1186,7 @@ async function editMaterials(){
     const currentManifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
     if(!currentManifest.sections.some(item=>item.id===section&&item.teaching))
       throw Error("Bitte einen Unterrichtsbereich der ausgewählten Klasse wählen.");
-    const path="kursseiten/"+section+"/materialien.md";
+    const path=courseRoot()+"/"+section+"/materialien.md";
     const staged=state.staged.get(path);
     if(staged&&!staged.delete){useFile(path,staged.expectedSha,staged.content,staged.original||staged.content);return;}
     const file=await api("/api/file?path="+encodeURIComponent(path));
@@ -1221,7 +1215,7 @@ async function addLesson(){
     const id=(courseProfile().sectionPrefix??(state.course==="basis"?"basis-":isIrnCourse()?courseProfile().source+"-":""))+slug(title),view=id;
     if(!/^[a-z]/.test(view)||manifest.sections.some(s=>s.id===view))throw Error("Bereichs-ID ungültig oder bereits vorhanden.");
     const blocks=await Promise.all(manifest.sections.filter(s=>s.teaching).map(async s=>{
-      const path="kursseiten/"+s.id+"/planung.json";
+      const path=courseRoot()+"/"+s.id+"/planung.json";
       const draft=state.staged.get(path);
       return JSON.parse(draft?.content||(await api("/api/file?path="+encodeURIComponent(path))).content);
     }));
@@ -1229,19 +1223,19 @@ async function addLesson(){
     const order=Math.max(...blocks.flatMap(b=>b.lessons.map(l=>l.order)))+10;
     const lesson=lessonPlan(id,title.trim(),view);
     lesson.order=order;
-    const metadata="kursseiten/"+view+"/planung.json";
+    const metadata=courseRoot()+"/"+view+"/planung.json";
     const planSource=JSON.stringify({lessons:[lesson]},null,2)+"\n";
     state.staged.set(metadata,{path:metadata,expectedSha:null,content:planSource});
     const next=Math.max(...manifest.sections.map(s=>s.navigation?.order??-1))+1;
     manifest.sections.push({id:view,class:"section",teaching:true,navigation:{order:next,label:"",title:title.trim()}});
     state.staged.set(manifestPath(),{path:manifestPath(),expectedSha:file.sha,original:file.content,content:JSON.stringify(manifest,null,2)+"\n"});
-    const chapter="kursseiten/"+view+"/010-"+slug(chapterTitle)+".md";
+    const chapter=courseRoot()+"/"+view+"/010-"+slug(chapterTitle)+".md";
     const chapterSource="---\ntype: chapter\nid: "+view+"-"+slug(chapterTitle)+
       "\nnummer: \"1\"\ntitel: "+JSON.stringify(chapterTitle)+
       "\nkurz: "+JSON.stringify(chapterTitle)+"\nopen: true\n---\n\n"+
       "## Lernauftrag\n\nHier die Aufgabe beschreiben.\n";
     state.staged.set(chapter,{path:chapter,expectedSha:null,content:chapterSource});
-    const extras="kursseiten/"+view+"/materialien.md";
+    const extras=courseRoot()+"/"+view+"/materialien.md";
     state.staged.set(extras,{path:extras,expectedSha:null,content:
       "## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"+
       "Hier ergänzende Grafiken, Tabellen und Hinweise für die Lehrperson einfügen.\n\n"+
@@ -1272,12 +1266,12 @@ async function addLessonToCurrentSection(){
     const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
     if(!manifest.sections.some(x=>x.id===view&&x.teaching))throw Error("Kein Unterrichtsbereich.");
     const all=await Promise.all(manifest.sections.filter(x=>x.teaching).map(async x=>{
-      const path="kursseiten/"+x.id+"/planung.json",draft=state.staged.get(path);
+      const path=courseRoot()+"/"+x.id+"/planung.json",draft=state.staged.get(path);
       const file=draft?.expectedSha===null?null:await api("/api/file?path="+encodeURIComponent(path));
       return {path,draft,file,data:JSON.parse(draft?.content||file?.content)};
     }));
     if(all.some(x=>x.data.lessons.some(l=>l.id===id)))throw Error("Die Lektions-ID existiert bereits.");
-    const target=all.find(x=>x.path==="kursseiten/"+view+"/planung.json");
+    const target=all.find(x=>x.path===courseRoot()+"/"+view+"/planung.json");
     if(!target)throw Error("Planungsdatei fehlt.");
     const max=Math.max(...all.flatMap(x=>x.data.lessons.map(l=>l.order)));
     const lesson=lessonPlan(id,title.trim(),view);
@@ -1286,8 +1280,8 @@ async function addLessonToCurrentSection(){
     const planSource=JSON.stringify(target.data,null,2)+"\n";
     const chapterPrefix=Math.max(0,...chaptersFor(view).map(x=>Number(x.path.split("/").pop().slice(0,3))))+10;
     if(chapterPrefix>=999)throw Error("Kein Sortierplatz für ein neues Kapitel.");
-    const chapter="kursseiten/"+view+"/"+String(chapterPrefix).padStart(3,"0")+"-"+id+"-"+chapterSlug+".md";
-    const materialsPath="kursseiten/"+view+"/materialien.md";
+    const chapter=courseRoot()+"/"+view+"/"+String(chapterPrefix).padStart(3,"0")+"-"+id+"-"+chapterSlug+".md";
+    const materialsPath=courseRoot()+"/"+view+"/materialien.md";
     const materialsDraft=state.staged.get(materialsPath);
     const materials=materialsDraft?.content??(await api("/api/file?path="+encodeURIComponent(materialsPath))).content;
     const materialFile=materialsDraft?null:await api("/api/file?path="+encodeURIComponent(materialsPath));
