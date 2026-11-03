@@ -56,6 +56,10 @@ for slug in ("irn/1-klasse", "irn/4-klasse"):
         progress=(dist/slug/"progress.js").read_text(encoding="utf-8")
         assert "kst-ki-irn-4-klasse-progress-v1" in progress
         assert "kst-ki-projekt-2026-v1" not in progress
+        portal=(dist/slug/"portal.js").read_text(encoding="utf-8")
+        assert "course:'irn/4-klasse'" in portal
+        assert "raw.course!=='irn/4-klasse'" in portal
+        assert "'ki-irn-4-klasse-seitenstand-v1'" in portal
     else:
         persistence=(dist/slug/"persistence.js").read_text(encoding="utf-8")
         assert "kst-ki-irn-1-klasse-notebooks-v1" in persistence

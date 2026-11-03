@@ -86,6 +86,11 @@ def render_clone(course: dict, target: Path) -> None:
             code = code.replace("'ki-kursportal-v1'", "'ki-" + course["id"] + "-v1'")
             code = code.replace("'ki-kursantworten-v1'", "'ki-" + course["id"] + "-antworten-v1'")
             code = code.replace("'ki-last-opened-bok-4'", "'ki-last-opened-" + course["id"] + "'")
+            # ZIP and JSON transfer metadata must describe the IRN course,
+            # never the BOK source of the initial template.
+            code = code.replace("'bok/4-klasse'", "'" + course["slug"] + "'")
+            code = code.replace("'ki-projekt-seitenstand-v1'",
+                                "'ki-" + course["id"] + "-seitenstand-v1'")
             code = code.replace("'kst-ki-kursportal'", "'kst-ki-" + course["id"] + "'")
             code = code.replace("indexedDB.open('kst-ki-kursportal'", "indexedDB.open('kst-ki-" + course["id"] + "'")
         if file.name == "notebook-blocks.js":
