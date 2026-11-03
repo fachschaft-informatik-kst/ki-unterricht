@@ -10,6 +10,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Set up micromamba for the Emscripten Xeus environment
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          init-shell: bash
       - name: Install isolated benchmark dependencies
         run: python -m pip install -r benchmarks/xeus/requirements.txt
       - name: Build standalone Xeus Python site
