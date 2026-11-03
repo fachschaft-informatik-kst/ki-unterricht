@@ -79,7 +79,7 @@ function matchesCurrentLesson(name,nb){return !mirroredFrom[name]||nb?.metadata?
 function validate(nb){if(!nb||nb.nbformat!==4||!Array.isArray(nb.cells)||nb.cells.length>200||JSON.stringify(nb).length>50000000)throw Error('Ungültiges Notebook.');return nb;}
 function request(type,extra={}){return new Promise((resolve,reject)=>{if(!frame.contentWindow)return reject(Error('Notebook nicht geladen'));const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet nicht.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
 async function persist(){try{const durable=await persistDB();try{localStorage.setItem(NBKEY,JSON.stringify(saved));}catch{}if(!durable&&!localStorage.getItem(NBKEY))throw Error('Kein verfügbarer Speicher');status.textContent='Notebook im Browser gespeichert. Für eine vollständige Sicherung ZIP herunterladen.';}catch(e){changed=true;status.textContent='Notebook konnte nicht dauerhaft gespeichert werden: '+e.message+'. Bitte ZIP herunterladen.';}}
-async function snapshot(){if(!current)return;if(!ready)throw Error('Notebook noch nicht bereit.');const result=await request('snapshot');saved[current]=validate(result.notebook);if(Array.isArray(result.files)&&result.files.length){notebookUploads[current]=result.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));}await persist();}
+async function snapshot(){if(!current)return;if(!ready)throw Error('Notebook noch nicht bereit.');const name=current;const result=await request('snapshot');if(current!==name)return;saved[name]=validate(result.notebook);if(Array.isArray(result.files)&&result.files.length){notebookUploads[name]=result.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));}await persist();}
 // Never move a running JupyterLite iframe between lesson sections: moving it
 // destroys the browser kernel and may discard in-flight student edits.
 function mount(){
@@ -135,14 +135,17 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
  try{
   await loaded;
   const restored=saved[current] ? await request('restore',{notebook:validate(saved[current]),keepKernel:true}) : null;
-  ready=true;await snapshot();
+  // Published notebooks already exist in the build: a costly initial widget
+  // snapshot is unnecessary. Changes auto-save, and switching/ZIP export always
+  // take a fresh snapshot. A running Python environment is ready immediately.
+  ready=true;
   const milliseconds=Math.round(performance.now()-Number(frame.dataset.startMs||performance.now()));
   (window.KINotebookTimings ||= []).push({name:current,kind:frame.dataset.startKind||'open',milliseconds});
   frame.dataset.loadMs=String(milliseconds);
   status.textContent=restored?.widgets?.activated
     ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
     : restored ? 'Gesicherter Stand geladen · geänderte Startzellen bitte manuell ausführen.'
-      : 'Notebook bereit; Eingaben und Ergebnisse gesichert.';
+      : 'Notebook bereit · Änderungen werden automatisch gesichert.';
   notebookLoading('ready');
  }catch(e){
   status.textContent='Wiederherstellung fehlgeschlagen: '+e.message;

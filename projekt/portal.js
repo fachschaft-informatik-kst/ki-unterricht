@@ -264,10 +264,12 @@ window.addEventListener('message',async event=>{
    await initialization;
    if(activeName!==name)return; // Another notebook superseded this startup.
    const saved=name===projectName?notebook:others[name];
-   notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Start abgeschlossen. Ergebnisse werden gesichert …');
+   notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Python ist gestartet. Notebook wird angezeigt …');
    let restored=null;
    if(saved){restored=await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
-   else await captureSnapshot(name,await request(frame,'snapshot'));
+   // No initial snapshot: the published notebook is already available.
+   // Edits trigger autosave; switching notebooks or downloading a ZIP still
+   // takes a fresh snapshot of the currently running kernel.
    if(activeName!==name)return; // An older warmup was superseded.
    frame.dataset.path=data.path;frame.dataset.kernelId=data.kernelId||'';frame.dataset.ready='yes';
    trackNotebookReady(name);
@@ -276,7 +278,8 @@ window.addEventListener('message',async event=>{
      ? restored?.widgets?.activated
        ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
        : 'Gesicherter Stand geladen · veränderte Startzellen bitte manuell ausführen.'
-     : 'Bereit · Eingaben und Ergebnisse werden in diesem Browser gesichert.';
+     : 'Bereit · Änderungen werden automatisch gesichert.';
+
   }catch(error){
    if(activeName===name){frame.dataset.ready='error';$('project-lab-status').textContent=error.message+' Versuch erneut öffnen.';notebookLoading('error',error.message+' Bitte erneut versuchen.');}
   }finally{if(activeName===name)initializingFrame=false;}
