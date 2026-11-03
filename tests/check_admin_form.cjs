@@ -84,7 +84,26 @@ const server=http.createServer((req,res)=>{
         'send({type:"snapshot",id:message.id,notebook,revision:1});}});'+
         'setTimeout(()=>send({type:"ready",ready:true}),10);<\/script></body></html>'
       }));
-    await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
+    const editorOrigin="http://127.0.0.1:"+server.address().port;
+    await page.goto(editorOrigin+"/projekt/admin/?course=vertiefung&edit=planung&section=einstieg&lesson=01");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/planung.json");
+    assert.equal(await page.locator("#formEditor").isVisible(),true,"AVIVA deep link must open the actual editable form");
+    assert.equal(await page.locator("#section").inputValue(),"einstieg");
+    assert.equal(await page.locator("#planLesson").inputValue(),"0");
+    const planTitle=page.locator('#planFields .plan-overview input[type="text"]').first();
+    const originalTitle=await planTitle.inputValue();
+    await planTitle.fill(originalTitle+" – bearbeitet");
+    assert.match(await page.locator("#source").inputValue(),/bearbeitet/,"AVIVA fields must update the JSON source");
+    await planTitle.fill(originalTitle);
+    await page.goto(editorOrigin+"/projekt/admin/?course=vertiefung&edit=materialien&section=einstieg&lesson=01");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/materialien.md");
+    assert.equal(await page.locator("#codeEditor").isVisible(),true,"Materialkoffer deep link must open editable Markdown");
+    assert.equal(await page.locator("#section").inputValue(),"einstieg");
+    await page.goto(editorOrigin+"/projekt/admin/?course=irn4&edit=planung&section=irn-4-kurs");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/irn-4-kurs/planung.json");
+    assert.equal(await page.locator("#courseSelect").inputValue(),"irn4","Deep link must respect the teacher's course");
+    assert.equal(await page.locator("#formEditor").isVisible(),true);
+    await page.goto(editorOrigin+"/projekt/admin/");
     // One course selector controls both the content and its live color preview.
     assert.equal(await page.locator("#courseThemeSelect").count(),0);
     assert.equal(await page.locator("#courseSelect option").count(),4);
