@@ -104,7 +104,8 @@ def assemble(pages: Path = PAGES, manifest_path: str = "kursseiten/manifest.json
 
 def build() -> None:
     from sync_course_sources import sync
-    sync(ROOT)
+    if (ROOT / "kurse").exists():
+        sync(ROOT)
     target = output(ROOT)
     if target.exists():
         shutil.rmtree(target)
@@ -117,7 +118,7 @@ def build() -> None:
     for path in (ROOT / "shared").glob("*"):
         shutil.copyfile(path, target / "admin" / path.name)
     shutil.copyfile(ROOT / "experimente/registry.json", target / "experiments.json")
-    (target / "index.html").write_text(assemble(glossary_path=ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json"), encoding="utf-8")
+    (target / "index.html").write_text(assemble(glossary_path=(ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json" if (ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json").is_file() else None)), encoding="utf-8")
     (target / "kurs.json").write_text(json.dumps(load_course(ROOT), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     from build_solutions import build as build_solutions
     build_solutions()

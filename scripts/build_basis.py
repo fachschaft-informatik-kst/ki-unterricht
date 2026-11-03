@@ -70,7 +70,8 @@ def assemble(manifest_path: str = "kursseiten/basis-manifest.json", glossary_pat
 
 def build():
     from sync_course_sources import sync
-    sync(ROOT)
+    if (ROOT / "kurse").exists():
+        sync(ROOT)
     OUT.mkdir(parents=True, exist_ok=True)
     template = (ROOT / "projekt" / "index.template.html").read_text(encoding="utf-8")
     match = re.search(r"<style>(.*?)</style>", template, re.S)
@@ -86,7 +87,7 @@ def build():
         (OUT / filename).write_bytes((ROOT / "projekt" / filename).read_bytes())
     for filename in ("basis.css", "basis.js", "persistence.js"):
         (OUT / filename).write_bytes((SOURCE / filename).read_bytes())
-    page, lessons = assemble(glossary_path=ROOT / "kurse/bok/1-klasse/kursseiten/glossar.json")
+    page, lessons = assemble(glossary_path=(ROOT / "kurse/bok/1-klasse/kursseiten/glossar.json" if (ROOT / "kurse/bok/1-klasse/kursseiten/glossar.json").is_file() else None))
     (OUT / "index.html").write_text(page, encoding="utf-8")
     (OUT / "kurs.json").write_text(json.dumps({"course": "basis", "lessons": lessons}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     planning = ['<!doctype html><html lang="de-CH"><meta charset="utf-8"><title>Basis-Kurs · Unterrichtsplanung</title>',

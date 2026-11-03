@@ -185,7 +185,8 @@ def update_sol_material(text):
 
 def build():
     from sync_course_sources import sync
-    sync(ROOT)
+    if (ROOT / "kurse").exists():
+        sync(ROOT)
     lessons = load_course(ROOT)['lessons']
     page = output(ROOT) / 'index.html'
     text = page.read_text()
