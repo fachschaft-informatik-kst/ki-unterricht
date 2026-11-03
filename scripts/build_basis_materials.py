@@ -24,7 +24,7 @@ def build(root: Path, out: Path, lessons: list[dict]) -> None:
             f'<section class="basis-resource card" id="{ident}">'
             f'<h2>{label}</h2>{markdown.render(source)}</section>'
         )
-    document = f"""<!doctype html>
+    document = """<!doctype html>
 <html lang="de-CH"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
@@ -41,11 +41,13 @@ main{max-width:1050px;margin:auto;padding:35px 28px 80px}
 </style></head><body><main>
 <p><a href="index.html">← Zur Kursseite</a> · <a href="unterrichtsplan.html">Unterrichtsplan (AVIVA)</a></p>
 <h1>Grafiken, Quellen und Materialien</h1>
-<p class="section-intro">Materialkoffer für Lehrpersonen · 1. Kurzgymnasium. {len(lessons)} Doppellektionen zu je 90 Minuten.</p>
-<nav class="materials-nav" aria-label="Doppellektionen">{''.join(links)}</nav>
-{''.join(sections)}
+<p class="section-intro">Materialkoffer für Lehrpersonen · 1. Kurzgymnasium. Zehn Doppellektionen zu je 90 Minuten.</p>
+<nav class="materials-nav" aria-label="Doppellektionen">""" + "".join(links) + """</nav>
+""" + "".join(sections) + """
 <footer class="footer">Quelle: kursseiten/basis-*/materialien.md · Kantonsschule Stadelhofen</footer>
 </main><script src="notebook-blocks.js" defer></script></body></html>
 """
+    document = document.replace("Zehn Doppellektionen zu je 90 Minuten.",
+                                f"{len(lessons)} Doppellektionen zu je 90 Minuten.")
     (out / "materialien.html").write_text(document, encoding="utf-8")
     print(f"Built first-year teacher material index: {len(lessons)} lessons")
