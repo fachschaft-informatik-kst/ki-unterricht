@@ -225,6 +225,7 @@ jobs:
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_admin_form.cjs
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_teacher_browser.cjs
+          NODE_PATH=/tmp/ki-browser/node_modules node tests/check_editor_course_matrix.cjs
       - name: Check simplified teaching project
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
