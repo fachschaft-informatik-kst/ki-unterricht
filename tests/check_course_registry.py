@@ -28,7 +28,7 @@ for course in known:
         assert (template / section["id"]).is_dir()
     for kind, path in course["teacherFiles"].items():
         assert (ROOT / path).is_file(), (course["slug"], kind, path)
-        assert (ROOT / path).read_bytes() == (template / (Path(path).relative_to(folder))).read_bytes()
+        assert (ROOT / path).read_bytes() == (template / ((ROOT / path).relative_to(folder))).read_bytes()
 
 # A duplicated section ID across copied courses is valid; file ownership is not shared.
 bok1 = known[0]
