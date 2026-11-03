@@ -12,6 +12,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  const basic=source('basis/persistence.js'),advanced=source('projekt/portal.js');
  assert(basic.includes('if(current&&ready&&owner)await snapshot()'),'ZIP must remain available during background startup');
  assert(advanced.includes("frame.dataset.startKind==='warmup'"),'ZIP must remain available during background startup');
+ assert(advanced.includes("location.hash==='#journal'&&activeName&&activeOwner"),
+   'Passive chapter navigation must not open a warmed notebook dialog');
  assert(advanced.includes('notebookUploads[name]=await fileUpdates'),'Uploads must be indexed per notebook');
  assert(advanced.includes('uploads:notebookUploads'),'Upload ownership must survive browser reload and ZIP');
  assert(advanced.includes('notebookUploadPayload(name)'),'Restored uploads must return to their owner');
