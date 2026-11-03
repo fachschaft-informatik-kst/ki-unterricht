@@ -53,7 +53,7 @@ const server=http.createServer((req,res)=>{
     });
     const url="http://127.0.0.1:"+server.address().port+"/projekt/admin/";
     await page.goto(url);
-    await page.locator("#courseSelect option").first().waitFor();
+    await page.locator("#courseSelect option").first().waitFor({state:"attached"});
     assert.equal(await page.locator("#courseSelect option").count(),4);
     for(const profile of registry){
       const slug=profile.slug,root=profile.courseRoot;
@@ -69,6 +69,7 @@ const server=http.createServer((req,res)=>{
       const plan=root+"/kursseiten/"+section.id+"/planung.json";
       await page.waitForFunction(plan=>document.querySelector("#path")?.textContent===plan,plan);
       assert(await page.locator("#formEditor").isVisible(),slug+" AVIVA form invisible");
+      await page.frameLocator("#preview").locator(".phase-table tbody tr").first().waitFor();
       assert((await page.frameLocator("#preview").locator(".phase-table tbody tr").count())>=5,slug+" AVIVA row missing");
       await page.locator("#editMaterials").click();
       const material=root+"/kursseiten/"+section.id+"/materialien.md";
@@ -79,7 +80,7 @@ const server=http.createServer((req,res)=>{
       await page.frameLocator("#preview").locator("h2").filter({hasText:"Regressionstest "+profile.id}).waitFor();
       await page.locator("#stage").click();
       await page.waitForFunction(()=>document.querySelector("#pendingCount")?.textContent==="1");
-      assert.match(await page.locator("#staged").innerText(),new RegExp(profile.id.replaceAll("-","[-]")+".*materialien|materialien"));
+      assert((await page.locator("#staged").innerText()).includes(material),slug+" staged file outside course root");
       await page.locator("#toggleChanges").click();
       await page.locator("#publish").click();
       await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#999"));
