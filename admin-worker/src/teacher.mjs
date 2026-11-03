@@ -187,8 +187,9 @@ async function getQuestions(lesson,course,token,github,repo){
   const tree=await github(token,"/repos/"+repo+"/git/trees/main?recursive=1");
   if(tree.truncated)throw Error("Unvollständiger Quellindex");
   const files=(tree.tree||[]).filter(item=>item.type==="blob"&&
-    /^kursseiten\/[a-z0-9-]+\/\d{3}-[a-z0-9-]+\.md$/.test(item.path)&&
-    views.has(item.path.split("/")[1])).map(item=>item.path);
+    item.path.startsWith("kursseiten/"+course+"/")&&
+    /\/\d{3}-[a-z0-9-]+\.md$/.test(item.path)&&
+    views.has(item.path.split("/")[3])).map(item=>item.path);
   // One missing chapter must not hide every other original prompt.
   const data=await Promise.allSettled(files.map(path=>getText(token,path,github,repo)));
   return Object.assign({},...data.filter(item=>item.status==="fulfilled")
@@ -200,7 +201,7 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
   const manifest=await getJson(token,profile.manifest,github,repo);
   const views=(manifest.sections||[]).filter(s=>s.teaching&&/^[a-z][a-z0-9-]*$/.test(s.id));
   if(views.length>20)throw Error("Zu viele Unterrichtsbereiche.");
-  const plans=await Promise.all(views.map(s=>getJson(token,"kursseiten/"+s.id+"/planung.json",github,repo)));
+  const plans=await Promise.all(views.map(s=>getJson(token,"kursseiten/"+profile.slug+"/"+s.id+"/planung.json",github,repo)));
   const lessons=plans.flatMap(p=>p.lessons||[]).sort(sortLessons)
     .map((lesson,index)=>({...lesson,number:index+1}));
   const current=lessons.find(l=>l.number===Number(selected))||lessons[0];
@@ -209,7 +210,7 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
     selectedNumber:current.number,selectedTitle:current.title};
   if(kind==="planung")return {...base,lesson:current};
   if(kind==="materialien"){
-    const content=await getText(token,"kursseiten/"+current.view+"/materialien.md",github,repo);
+    const content=await getText(token,"kursseiten/"+profile.slug+"/"+current.view+"/materialien.md",github,repo);
     const markdown=materialForLesson(content,current.number);
     const intro=profile.teacherFiles.materialsIntro?
       await getText(token,profile.teacherFiles.materialsIntro,github,repo):"";
@@ -252,13 +253,15 @@ export function normalizeTeacherCourses(registry){
     const id=typeof teacher==="string"&&Number.isInteger(grade)?
       teacher.toLowerCase()+"-"+grade+"-klasse":"";
     const legacy={
-      "bok/1-klasse":["basis","kursseiten/basis-manifest.json","basis-","basis_"],
-      "bok/4-klasse":["vertiefung","kursseiten/manifest.json","",""],
-      "irn/1-klasse":["irn1","kursseiten/irn-1-manifest.json","irn-1-","irn1_"],
-      "irn/4-klasse":["irn4","kursseiten/irn-4-manifest.json","irn-4-","irn4_"]
+      "bok/1-klasse":["basis","basis-","basis_"],
+      "bok/4-klasse":["vertiefung","",""],
+      "irn/1-klasse":["irn1","basis-","irn1_"],
+      "irn/4-klasse":["irn4","","irn4_"]
     }[slug];
-    const config=legacy||[id,"kursseiten/"+teacher?.toLowerCase()+"-"+grade+"-manifest.json",
-      teacher?.toLowerCase()+"-"+grade+"-",teacher?.toLowerCase()+grade+"_"];
+    const own="kursseiten/"+slug;
+    const config=legacy?[legacy[0],own+"/manifest.json",legacy[1],legacy[2]]:
+      [id,own+"/manifest.json",teacher?.toLowerCase()+"-"+grade+"-",
+        teacher?.toLowerCase()+grade+"_"];
     const sources=item?.teacherFiles;
     if(!/^[A-Z][A-Z0-9]{1,9}$/.test(teacher||"")||
        !Number.isInteger(grade)||grade<1||grade>20||
@@ -273,17 +276,11 @@ export function normalizeTeacherCourses(registry){
        typeof item.name!=="string"||!item.name.trim()||item.name.length>80||
        !sources||!["solutions","fields","glossary"].every(k=>typeof sources[k]==="string")||
        Object.keys(sources).some(k=>!["solutions","fields","glossary","materialsIntro"].includes(k))||
-       Object.entries(sources).some(([kind,path])=>typeof path!=="string"||path.includes("..")||
-         !(path.startsWith("lehrperson/")&&path.endsWith(".md")||
-           kind==="glossary"&&path==="kursseiten/glossar.json")||
-         (!legacy||teacher==="IRN")&&!path.startsWith("lehrperson/"+teacher.toLowerCase()+"-"+grade+"/")||
-         legacy&&teacher==="BOK"&&(path!==({
-           solutions:"lehrperson/musterloesungen.md",
-           fields:"lehrperson/musterloesungen-felder-"+grade+"-klasse.md",
-           glossary:"kursseiten/glossar.json",
-           materialsIntro:"lehrperson/materialien.md"
-         }[kind])||kind==="materialsIntro"&&grade!==4))||
-       ids.has(item.id)||slugs.has(slug)||keys.has(item.editorKey)||manifests.has(item.manifest))
+       Object.entries(sources).some(([kind,path])=>typeof path!=="string"||
+          path.includes("..")||!path.startsWith(own+"/")||
+          !(path.startsWith(own+"/lehrperson/")&&path.endsWith(".md")||
+            kind==="glossary"&&path===own+"/glossar.json"))||
+        ids.has(item.id)||slugs.has(slug)||keys.has(item.editorKey)||manifests.has(item.manifest))
       throw Error("Kursregister enthält einen ungültigen oder doppelten Eintrag: "+slug);
     ids.add(item.id);slugs.add(slug);keys.add(item.editorKey);manifests.add(item.manifest);
     courses.push({id:item.id,teacher,grade,slug,editorKey:item.editorKey,manifest:item.manifest,
