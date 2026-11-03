@@ -64,9 +64,12 @@ async function runOnce(browser,context,variant,target,n){
   try {
     await page.goto('http://127.0.0.1:'+variant.port+target.route,{waitUntil:'domcontentloaded',timeout:35000});
     const button=page.locator(target.launch).first();
-    await button.waitFor({state:'visible',timeout:12000});
+    // Course chapter panels hide inactive sections. Trigger the same genuine
+    // DOM click handler independently of the sidebar's current chapter;
+    // the browser still runs the real course controller and Python iframe.
+    await button.waitFor({state:'attached',timeout:12000});
     clickAt=performance.now();
-    await button.click({timeout:15000});
+    await button.evaluate(el=>el.click());
     await page.waitForFunction(id=>{
       if(id==='bok1'){
         const loader=document.querySelector('#basis-lab-loading');
