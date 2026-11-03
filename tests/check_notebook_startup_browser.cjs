@@ -51,6 +51,10 @@ const embedded=`<!doctype html><html><meta charset="utf-8"><body><script>
     }));
     assert.equal(result.url,'/lab/index.html',route+': shared JupyterLite URL must resolve from nested course');
     assert.equal(result.inert,false,route+': Python editor must be interactive before background snapshot finishes');
+    assert.equal(await page.locator('iframe[src*="/lab/index.html"]').count(),1,
+      route+': exactly one managed Python session, never a competing standalone iframe');
+    assert.equal(await page.locator('.ki-notebook-iframe').count(),0,
+      route+': published course routes must use the managed course controller');
     assert.deepEqual(errors,[],route+': page errors');
     console.log('PASS '+route+': live notebook appears before stalled snapshot');
    }finally{await page.close();}
