@@ -276,7 +276,13 @@ export function normalizeTeacherCourses(registry){
        Object.entries(sources).some(([kind,path])=>typeof path!=="string"||path.includes("..")||
          !(path.startsWith("lehrperson/")&&path.endsWith(".md")||
            kind==="glossary"&&path==="kursseiten/glossar.json")||
-         !legacy&&!path.startsWith("lehrperson/"+teacher.toLowerCase()+"-"+grade+"/"))||
+         (!legacy||teacher==="IRN")&&!path.startsWith("lehrperson/"+teacher.toLowerCase()+"-"+grade+"/")||
+         legacy&&teacher==="BOK"&&(path!==({
+           solutions:"lehrperson/musterloesungen.md",
+           fields:"lehrperson/musterloesungen-felder-"+grade+"-klasse.md",
+           glossary:"kursseiten/glossar.json",
+           materialsIntro:"lehrperson/materialien.md"
+         }[kind])||kind==="materialsIntro"&&grade!==4)))||
        ids.has(item.id)||slugs.has(slug)||keys.has(item.editorKey)||manifests.has(item.manifest))
       throw Error("Kursregister enthält einen ungültigen oder doppelten Eintrag: "+slug);
     ids.add(item.id);slugs.add(slug);keys.add(item.editorKey);manifests.add(item.manifest);

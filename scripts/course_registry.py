@@ -89,8 +89,18 @@ def validate_registry(courses: list[dict], root: Path = ROOT, *, check_files: bo
                     (path.startswith("lehrperson/") and path.endswith(".md"))
                     or (kind == "glossary" and path == "kursseiten/glossar.json")):
                 raise ValueError(f"Ungültiger Lehrpersonenpfad: {path}")
-            if not legacy and not path.startswith(f"lehrperson/{teacher.lower()}-{grade}/"):
+            if (not legacy or teacher == "IRN") and not path.startswith(
+                    f"lehrperson/{teacher.lower()}-{grade}/"):
                 raise ValueError(f"Fremder Lehrpersonenordner: {path}")
+            if teacher == "BOK" and legacy:
+                allowed = {
+                    "solutions": "lehrperson/musterloesungen.md",
+                    "fields": f"lehrperson/musterloesungen-felder-{grade}-klasse.md",
+                    "glossary": "kursseiten/glossar.json",
+                    "materialsIntro": "lehrperson/materialien.md",
+                }
+                if path != allowed[kind] or (kind == "materialsIntro" and grade != 4):
+                    raise ValueError(f"BOK-Material gehört zum falschen Kurs: {path}")
             if check_files and not (root / path).is_file():
                 raise ValueError(f"Materialdatei fehlt: {path}")
         if check_files:
