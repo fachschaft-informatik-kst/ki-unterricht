@@ -313,6 +313,12 @@ jobs:
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
+      - name: Browser-check nonblocking notebook startup
+        # A stalled widget snapshot must never prevent editing. Check both
+        # public BOK URLs, including their nested relative asset paths.
+        if: steps.scope.outputs.site_changed == 'true'
+        run: |
+          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_notebook_startup_browser.cjs
       - name: Browser-check Fotostudio storage
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
