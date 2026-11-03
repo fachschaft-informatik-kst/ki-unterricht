@@ -296,11 +296,12 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await timelineAnswer.fill('Noch nicht importiert');
     page.once('dialog',dialog=>dialog.accept());
     await page.locator('#basis-import').setInputFiles(answerPath);
+    await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Antworten wiederhergestellt'));
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.');
     assert.equal(await timelineAnswer.inputValue(),'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(await page.locator('[data-basis-answer="basis-neuron-sw_treffer"]').inputValue(),'7');
     await page.locator('#basis-import').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"wrong","answers":{}}')});
-    assert.match(await page.locator('#basis-answer-transfer-status').innerText(),/Keine gültige Antwortdatei/);
+    await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Keine gültige Antwortdatei'));
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.','Invalid import must preserve answers');
     const downloadPromise=page.waitForEvent('download');
     await page.getByRole('button',{name:'Kursstand als ZIP herunterladen'}).click();

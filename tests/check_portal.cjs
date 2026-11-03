@@ -297,6 +297,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.locator('[data-answer="hand_and_w1"]').fill('9.0');
   await p.locator('a[href="#sicherung"]').first().click();
   await p.locator('#restore-answers').setInputFiles('/tmp/ki-portal-answers.json');
+  await p.waitForFunction(()=>document.querySelector('#answers-transfer-status')?.textContent?.includes('wiederhergestellt'));
   await p.locator('.nav a[href="#perzeptron"]').click();
   assert.equal(await p.locator('[data-answer="hand_and_w1"]').inputValue(),'0.5');
   assert.equal(await p.locator('[data-answer="hand_xor_max"]').inputValue(),'3');
@@ -304,7 +305,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.match(await p.locator('[data-journal="names"]').inputValue(),/Ada/);
   await p.locator('a[href="#sicherung"]').first().click();
   await p.locator('#restore-answers').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"wrong","answers":{},"journal":{}}')});
-  assert.match(await p.locator('#answers-transfer-status').innerText(),/Keine gültige Antwortdatei/);
+  await p.waitForFunction(()=>document.querySelector('#answers-transfer-status')?.textContent?.includes('Keine gültige Antwortdatei'));
   await p.locator('#attachments').setInputFiles([{name:'fotos.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"test"}')},{name:'äpfel.png',mimeType:'image/png',buffer:Buffer.from([137,80,78,71,13,10,26,10])}]);
   await p.waitForFunction(()=>document.querySelectorAll('#attachment-list li').length===2);
   let downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();const zip=await downloaded;assert.match(zip.suggestedFilename(),/^KI-Projektstand-/);await zip.saveAs('/tmp/ki-portal-backup.zip');
