@@ -23,13 +23,13 @@ for course in known:
     template = ROOT / "kursseiten/template" / f'{course["grade"]}-klasse'
     assert template.is_dir(), template
     assert (template / "manifest.json").is_file()
-    # Copies may diverge after editing; do not require byte-for-byte equality forever.
+    # A course may add/delete sections or edit teacher resources independently.
+    seed = json.loads((template / "manifest.json").read_text(encoding="utf-8"))
+    assert seed["sections"] and all((template / x["id"]).is_dir() for x in seed["sections"])
     for section in manifest["sections"]:
         assert (folder / section["id"]).is_dir(), (course["slug"], section["id"])
-        assert (template / section["id"]).is_dir()
     for kind, path in course["teacherFiles"].items():
         assert (ROOT / path).is_file(), (course["slug"], kind, path)
-        assert (template / (ROOT / path).relative_to(folder)).is_file(), (course["slug"], kind)
 
 # A duplicated section ID across copied courses is valid; file ownership is not shared.
 bok1 = known[0]
