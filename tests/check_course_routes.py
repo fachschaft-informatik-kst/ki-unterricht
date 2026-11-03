@@ -21,6 +21,7 @@ assert expected <= {row["slug"] for row in manifest["courses"]}
 overview = (dist / "kurse.html").read_text(encoding="utf-8")
 for slug in {row["slug"] for row in manifest["courses"]}:
     assert (dist / slug / "index.html").is_file(), slug
+    assert not (dist / slug / "admin").exists(), "Admin editor must not be copied into public course: "+slug
     assert f'href="{slug}/"' in overview
 for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
     generated = (dist / slug / "index.html").read_text(encoding="utf-8")
