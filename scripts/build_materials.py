@@ -88,7 +88,7 @@ def build(lessons: list[dict]) -> None:
 
     source = SOURCE.read_text(encoding="utf-8")
     for view in dict.fromkeys(l["view"] for l in lessons):
-        extension = ROOT / "kursseiten" / view / "materialien.md"
+        extension = ROOT / "kursseiten/bok/4-klasse" / view / "materialien.md"
         if not extension.is_file():
             raise FileNotFoundError(f"Missing teacher material for {view}")
         source += "\n\n" + extension.read_text(encoding="utf-8")
@@ -168,7 +168,7 @@ def build(lessons: list[dict]) -> None:
 <p><a href="unterrichtsplan.html">← Unterrichtsplan</a> · <a href="index.html">Kursseite</a></p></header>
 <nav class="quick" aria-label="Doppellektionen">{links}</nav>
 {content}
-<footer>Grafiken können durch Anklicken vergrössert werden. Quellen: <code>kursseiten/&lt;thema&gt;/materialien.md</code> und <code>lehrperson/materialien.md</code>.</footer>
+<footer>Grafiken können durch Anklicken vergrössert werden. Quellen: <code>kursseiten/bok/4-klasse/&lt;thema&gt;/materialien.md</code> und <code>kursseiten/bok/4-klasse/lehrperson/materialien.md</code>.</footer>
 </main><script src="notebook-blocks.js" defer></script></body></html>
 """, encoding="utf-8")
     print(f"Built teacher extras: {len(lessons)} lessons, {len(FILES)} downloads")
