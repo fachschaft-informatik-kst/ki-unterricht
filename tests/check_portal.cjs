@@ -15,8 +15,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('.course-card').count(),8);assert.equal(await p.locator('.nav a').count(),11);
   assert((await p.locator('.ki-notebook-block .ki-notebook-direct[href*="/lab/"]').count())>=7,
     'Every registered in-chapter notebook has a direct JupyterLite link');
-  assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,
-    'Notebook blocks must remain unloaded until explicitly opened');
+  assert((await p.locator('iframe[src*="lab/index"]').count())<=1,
+    'Notebook prewarming must not create competing Python sessions');
   // Visual geometry smoke test: keep overview cards sizeable on desktop.
   // Full-page desktop/mobile captures below remain available for review.
   const desktopCard=await p.locator('.course-card').first().boundingBox();
