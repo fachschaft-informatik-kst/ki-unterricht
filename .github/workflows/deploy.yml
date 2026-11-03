@@ -307,6 +307,7 @@ jobs:
           test -f dist/jupyter-lite.json
           python scripts/copy_portal.py dist
           python tests/check_course_routes.py
+          python tests/check_published_links.py
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
           test -f dist/projekt/admin/plan-editor.js
