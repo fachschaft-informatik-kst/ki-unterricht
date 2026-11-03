@@ -58,6 +58,7 @@ preview: install-preview
 
 build: install
 	npm run build --prefix $(NODE_DIR)
+	$(VENV_PY) scripts/sync_course_sources.py
 	$(VENV_PY) scripts/build_portal.py
 	$(VENV_PY) scripts/build_course.py
 	$(VENV_PY) scripts/build_basis.py

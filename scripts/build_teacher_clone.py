@@ -73,7 +73,7 @@ def render_clone(course: dict, target: Path) -> None:
     (target / "kurs.json").write_text(json.dumps({
         "course": course["id"], "lessons": lessons}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (target / "unterrichtsplan.html").write_text(planning_html, encoding="utf-8")
-    (target / "materialien.html").write_text(render_teacher_materials(course, lessons), encoding="utf-8")
+    (target / "materialien.html").write_text(render_teacher_materials(course, lessons).replace("portal/", prefix), encoding="utf-8")
     for file in (target / "portal.js",target / "notebook-blocks.js"):
         if not file.exists():
             continue

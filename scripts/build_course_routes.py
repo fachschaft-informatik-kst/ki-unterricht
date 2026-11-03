@@ -122,14 +122,17 @@ def build(out: Path) -> None:
         if target.exists():
             shutil.rmtree(target)
         target.parent.mkdir(parents=True, exist_ok=True)
-        if course["status"] == "published" and source in {"basis", "projekt"}:
-            origin = out / source
+        if course["status"] == "published" and (source in {"basis", "projekt"} or course["teacher"] == "IRN"):
+            origin = out / (source if source in {"basis", "projekt"} else "basis" if course["grade"] == 1 else "projekt")
             if not (origin / "index.html").is_file():
                 raise FileNotFoundError(origin / "index.html")
             shutil.copytree(origin, target, ignore=(
                 (lambda folder, names: ["admin"] if Path(folder) == origin and "admin" in names else [])
                 if source == "projekt" else None
             ))
+            if course["teacher"] == "IRN":
+                from build_teacher_clone import render_clone
+                render_clone(course, target)
             label = f'{course["teacher"]} · {course["grade"]}. Klasse'
             for file in target.rglob("*"):
                 if not file.is_file() or file.suffix not in {".html", ".css", ".js"}:

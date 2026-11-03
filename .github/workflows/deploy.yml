@@ -68,7 +68,7 @@ jobs:
                 site=true
                 worker=true
                 ;;
-              kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|lehrperson/*/*.md|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
+              kurse/*/*/*|kurse/*/*/*/*|kurse/*/*/*/*/*|templates/*/*|kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|lehrperson/*/*.md|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
                 # Editor-written course sources and teacher notes never alter
                 # the notebook runtime. Still rebuild and publish the site.
                 site=true
@@ -234,6 +234,7 @@ jobs:
         if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 4
         run: |
+          python scripts/sync_course_sources.py
           python scripts/build_portal.py
           python scripts/build_course.py
           python scripts/build_basis.py
