@@ -3,6 +3,7 @@ from pathlib import Path
 import shutil,sys
 from fix_pyodide_lock import fix_lock
 from patch_pyodide_kernel import patch_bundle
+from importlib.metadata import version
 from build_previews import build_previews
 root=Path(__file__).resolve().parents[1]
 out=Path(sys.argv[1] if len(sys.argv)>1 else root/'dist')
@@ -21,7 +22,13 @@ shutil.copy(root/'portal-index.html',out/'index.html')
 shutil.copy(root/'kurse.html',out/'kurse.html')
 
 build_previews(out)
-patch_bundle(out)
+kernel_version = version('jupyterlite-pyodide-kernel')
+if kernel_version.startswith('0.5.'):
+    patch_bundle(out)  # only the legacy kernel needs the IPython async fix
+elif kernel_version.startswith('0.8.'):
+    print('Current Pyodide kernel: no legacy wheel patch necessary')
+else:
+    raise RuntimeError('Unverified JupyterLite kernel version: '+kernel_version)
 from build_course_routes import build as build_course_routes
 build_course_routes(out)
 from protect_teacher_pages import protect
