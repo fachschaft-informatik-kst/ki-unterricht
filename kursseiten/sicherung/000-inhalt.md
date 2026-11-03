@@ -1,52 +1,70 @@
-<span class="section-label">Notizen &amp; Projekt</span>
-<h1>Alles herunterladen. Später weiterarbeiten.</h1>
-<p class="section-intro">Ein ZIP enthält <strong>Journal.html</strong> mit dem Projektjournal und allen ausgefüllten Unterrichtsantworten (auch Auswahlaufgaben), das Projekt-Notebook mit Ausgaben, Protokoll, Ihre Eingaben in den Übungsnotebooks und hinzugefügte Dateien. Auf einem anderen Gerät laden Sie das ZIP hier wieder hoch.</p>
-<div class="card">
-  <!-- MD:START -->
-### Dateien zum Projekt hinzufügen
-<!-- MD:END -->
-  <label class="field"><span>Fotostudio-JSON und Originalfotos (oder Foto-ZIP) hinzufügen</span><input accept=".json,.zip,.jpg,.jpeg,.png,.webp" id="attachments" multiple="" type="file"/></label>
-  <ul class="attachment-list" id="attachment-list">
-  </ul>
-  <p class="small">Im Notebook ausgewählte Dateien werden mitgesichert. Originalfotos und weitere Dateien hier hinzufügen. Eine Sammlung im Fotostudio zuerst herunterladen und hier hinzufügen.</p>
-</div>
-<div class="callout" id="submission-check" role="status">
-</div>
-<div class="actions project-transfer-actions">
-  <div class="project-transfer-primary">
-    <button class="btn primary" id="download-backup">Notizen &amp; Projekt herunterladen ↓</button>
-    <label class="btn" for="restore-package">Notizen &amp; Projekt wiederherstellen ↑</label>
-  </div>
-  <div class="project-submission-action">
-    <p class="small">Für die formelle Abgabe:</p>
-    <button class="btn" id="download-submission">Abgabepaket herunterladen ↓</button>
-  </div>
-  <input accept=".zip" hidden="" id="restore-package" type="file"/>
-</div>
-<p class="status" id="download-status" role="status"></p>
-<p class="small">Für die Einreichung: Namen, Klasse und Journalfelder prüfen, «Abgabepaket herunterladen» wählen und die Datei <strong>Journal.html</strong> im ZIP kurz öffnen. Der Download ist noch keine Abgabe.</p>
-<p class="small">Der Download übermittelt nichts automatisch. Das Hochladen ersetzt den aktuellen Browserstand. Laden Sie nach jeder Arbeitsphase eine ZIP herunter und bewahren Sie sie ausserhalb des Browsers auf.</p>
-<div class="card">
-  <!-- MD:START -->
-## Nach der Projektabgabe · Doppellektion 8
-<!-- MD:END -->
-  <p>Die benotete Fremdauswertung ist jetzt ein <a href="#fremdmodell">eigener Unterrichtsabschnitt</a>. Öffnen Sie dort das fremde Projekt in einem privaten Browserfenster. Hier bleibt der Export Ihres <strong>eigenen</strong> Projektstands verfügbar.</p>
-  <p><a class="btn" href="#fremdmodell">Zum Auftrag der Doppellektion 8 →</a></p>
-</div>
-<details class="js-only">
-  <summary>Älteren Projekt-Seitenstand importieren / exportieren</summary>
-  <div class="detail-body">
-    <div class="card js-only" style="margin-top:26px">
-      <!-- MD:START -->
-### Ihren Seitenstand mitnehmen
-<!-- MD:END -->
-      <p class="small muted">Exportieren Sie Checkliste, Notizen und Selbsteinschätzung als JSON. Sie können die Datei auf einem anderen Gerät importieren. Das ersetzt keine Projektabgabe.</p>
-      <div class="actions">
-        <button class="btn primary" id="export-state">Stand herunterladen</button>
-        <label class="btn" for="import-state">Stand importieren</label>
-        <input accept=".json,application/json" id="import-state" style="max-width:100%;font-size:12px" type="file"/><button class="btn" id="reset-state">Lokalen Stand zurücksetzen</button>
-      </div>
-      <p class="status" id="save-status" role="status">Bereit.</p>
+<span class="section-label">Sichern · Wiederherstellen · Abgeben</span>
+<h1>Den Kursstand sichern</h1>
+<p class="section-intro">Alle ausgefüllten Textfelder, Auswahlaufgaben, Journalantworten und gespeicherten Notebooks werden gemeinsam in <strong>einer ZIP-Datei</strong> gesichert. Damit können Sie auf einem anderen Gerät weiterarbeiten oder Ihr Projekt zur Abgabe vorbereiten.</p>
+
+<div class="transfer-flow" aria-label="Kursstand sichern und abgeben">
+  <section class="card transfer-step">
+    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">1</span><div><h2>Dateien ergänzen</h2><p>Nur nötig, wenn Sie eigene Fotos oder eine Fotostudio-Sammlung verwenden.</p></div></div>
+    <label class="field"><span>Fotostudio-JSON, Originalfotos oder Foto-ZIP auswählen</span><input accept=".json,.zip,.jpg,.jpeg,.png,.webp" id="attachments" multiple="" type="file"/></label>
+    <ul class="attachment-list" id="attachment-list" aria-label="Hinzugefügte Projektdateien"></ul>
+    <p class="small muted">Dateien, die Sie direkt im Notebook hochgeladen haben, werden automatisch mitgesichert. Eine Fotostudio-Sammlung zuerst dort als JSON herunterladen und bei Bedarf hier hinzufügen.</p>
+  </section>
+
+  <section class="card transfer-step">
+    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">2</span><div><h2>Arbeitsstand mitnehmen</h2><p>Am Ende jeder Arbeitsphase sichern – oder auf einem anderen Gerät eine ZIP wiederherstellen.</p></div></div>
+    <div class="project-transfer-primary">
+      <button class="btn primary" id="download-backup" type="button">Arbeitsstand als ZIP sichern ↓</button>
+      <label class="btn" for="restore-package">ZIP wiederherstellen ↑</label>
+      <input accept=".zip" hidden="" id="restore-package" type="file"/>
     </div>
+    <p class="small muted">Beim Wiederherstellen werden die aktuellen Antworten, Notebooks und Projektdateien auf diesem Gerät durch den Inhalt der gewählten ZIP ersetzt. Laden Sie vorher bei Bedarf einen Arbeitsstand herunter.</p>
+  </section>
+
+  <section class="card transfer-step transfer-step-submission">
+    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">3</span><div><h2>Projekt zur Abgabe vorbereiten</h2><p>Am Projektende prüfen, ob alle Nachweise vorhanden sind.</p></div></div>
+    <div id="submission-check" class="transfer-check" role="status" aria-live="polite"></div>
+    <div class="project-submission-action">
+      <button class="btn" id="download-submission" type="button">Abgabepaket als ZIP erstellen ↓</button>
+    </div>
+    <p class="small muted">Die ZIP enthält auch <strong>Journal.html</strong> zum Nachlesen. Öffnen Sie diese Datei vor der Einreichung kurz. <strong>Herunterladen ist noch keine Abgabe:</strong> Reichen Sie die ZIP anschliessend über den vereinbarten Abgabekanal ein.</p>
+  </section>
+</div>
+<p class="status transfer-download-status" id="download-status" role="status" aria-live="polite"></p>
+
+<details class="transfer-help">
+  <summary>Was befindet sich in der ZIP-Datei?</summary>
+  <div class="detail-body">
+    <ul>
+      <li><strong>Journal.html:</strong> alle ausgefüllten Journal- und Unterrichtsantworten, auch Auswahlfelder, sowie gespeicherte Versuchsausgaben.</li>
+      <li><strong>kursstand.json:</strong> Angaben, Häkchen, Selbsteinschätzungen und Wiederherstellungsdaten.</li>
+      <li><strong>Notebooks:</strong> gespeicherter Code, Texte und Ausgaben des Projekt- und der Übungsnotebooks.</li>
+      <li><strong>Dateien:</strong> hinzugefügte Originalfotos, Foto-ZIPs, Fotostudio-JSONs und Notebook-Uploads.</li>
+    </ul>
+    <p class="small muted">Python-Variablen im Arbeitsspeicher und bereits trainierte Modelle werden nicht als laufende Python-Umgebung gesichert. Nach dem Wiederherstellen müssen nötige Zellen erneut ausgeführt werden.</p>
+  </div>
+</details>
+
+<details class="transfer-help">
+  <summary>Nach der Projektabgabe: Fremdauswertung in Doppellektion 8</summary>
+  <div class="detail-body">
+    <p>Die Fremdauswertung hat einen <a href="#fremdmodell">eigenen Unterrichtsabschnitt</a> und ein separates Abgabepaket. Öffnen Sie das fremde Projekt in einem privaten Browserfenster. Stellen Sie hier kein fremdes Projekt über die Wiederherstellung des eigenen Arbeitsstands her.</p>
+    <p><a class="btn" href="#fremdmodell">Zum Auftrag der Doppellektion 8 →</a></p>
+  </div>
+</details>
+
+<details class="transfer-help js-only">
+  <summary>Ältere JSON-Seitenstände (nur bei Bedarf)</summary>
+  <div class="detail-body">
+    <p class="small muted">Diese alte Funktion sichert nur Checkliste, Notizen und Selbsteinschätzung – <strong>nicht</strong> die Notebooks, Unterrichtsantworten oder Fotos. Verwenden Sie normalerweise die ZIP-Sicherung oben. Bereits vorhandene JSON-Dateien können hier weiterhin importiert werden.</p>
+    <div class="actions">
+      <button class="btn" id="export-state" type="button">Alten Seitenstand als JSON herunterladen</button>
+      <label class="btn" for="import-state">Alte JSON importieren</label>
+      <input accept=".json,application/json" id="import-state" type="file"/>
+    </div>
+    <details>
+      <summary>Nur Seitenstand zurücksetzen</summary>
+      <div class="detail-body"><p class="small muted">Setzt Häkchen, Notizen, Themenwahl und Selbsteinschätzung auf diesem Gerät zurück; Notebooks und Fotos bleiben erhalten.</p><button class="btn" id="reset-state" type="button">Seitenstand zurücksetzen</button></div>
+    </details>
+    <p class="status" id="save-status" role="status">Bereit.</p>
   </div>
 </details>
