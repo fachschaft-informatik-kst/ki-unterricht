@@ -49,6 +49,8 @@ print("PASS 4 teacher/grade URLs, BOK course assets and legacy links, IRN placeh
 for course in manifest["courses"]:
     slug = course["slug"]
     page = (dist / slug / "index.html").read_text(encoding="utf-8")
+    tab_title = re.search(r"<title>([^<]*)</title>", page)
+    assert tab_title and tab_title.group(1) == f'{course["teacher"]} KI {course["grade"]}. Klasse', slug
     assert course["theme"]["accent"] in page, slug
     assert f'style="--course-accent:{course["theme"]["accent"]}"' in overview, slug
     assert course["name"] in page or course["status"] == "published"

@@ -66,13 +66,19 @@ def validate_registry(courses: list[dict]) -> None:
             raise ValueError(f"Unbekannter Quellkurs: {slug}")
 
 
+def course_tab_title(course: dict) -> str:
+    """Uniform browser tab title, independent of the visible course name."""
+    return f'{course["teacher"]} KI {course["grade"]}. Klasse'
+
+
 def planned_page(course: dict) -> str:
     label = escape(f'{course["teacher"]} · {course["grade"]}. Klasse')
     name = escape(course["name"])
+    tab_title = escape(course_tab_title(course))
     return f"""<!doctype html>
 <html lang="de-CH"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{label} · {name}</title>
+<title>{tab_title}</title>
 <link rel="icon" href="../../projekt/favicon.svg" type="image/svg+xml">
 <style>{theme_css(course)}
 body{{font:16px/1.65 system-ui,sans-serif;color:#182b31;background:var(--paper);margin:0}}
@@ -151,7 +157,7 @@ def build(out: Path) -> None:
                     # Keep the legacy /basis/ and /projekt/ pages untouched.
                     if file.name == "index.html" and file.parent == target:
                         content = re.sub(r"<title>[^<]*</title>",
-                                         f"<title>{escape(label)} · {escape(course['name'])}</title>",
+                                         f"<title>{escape(course_tab_title(course))}</title>",
                                          content, count=1)
                         content = content.replace("Intelligenz<small>Informatik</small>",
                                                   "Intelligenz<small>" + escape(label) + "</small>")
