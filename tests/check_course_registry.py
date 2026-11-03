@@ -31,7 +31,9 @@ for grade in (1,4):
         copied=ROOT/"kurse"/teacher/f"{grade}-klasse"
         assert copied.resolve()!=template.resolve()
         assert not copied.is_symlink()
-        assert (copied/"kursseiten/manifest.json").read_bytes()==(template/"kursseiten/manifest.json").read_bytes()
+        assert (copied/"kursseiten/manifest.json").is_file()
+        # Teachers may change their copy after initial cloning; future CI
+        # must not require equality with the immutable template.
         assert (copied/"kursseiten/glossar.json").is_file()
         assert (copied/"lehrperson/musterloesungen.md").is_file()
         assert list((copied/"content").rglob("*.ipynb"))
