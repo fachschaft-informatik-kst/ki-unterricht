@@ -7,7 +7,7 @@ const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1',ANSWERS_SCHEMA='ki-ku
 // Controller code below handles persistence, notebooks, ZIP and ephemeral widgets.
 const journalFields=all('[data-journal]'),answerFields=all('[data-answer]');
 let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=null,protocolSignature='',files=new Map(),db=null;
-let others={},filesStored=true,artifactStored=true,notebookDirty=false,notebookRevision=0;
+let others={},notebookUploads={},filesStored=true,artifactStored=true,notebookDirty=false,notebookRevision=0;
 let saving=Promise.resolve(),notebookUpdates=Promise.resolve(),fileUpdates=Promise.resolve(),artifactVersion=0,transferring=false;
 const pending=new Map();
 const status=(message,error=false)=>{$('portal-save-status').textContent=message;$('portal-save-status').classList.toggle('save-error',error);};
@@ -36,7 +36,7 @@ function transaction(store,mode,action){
 }
 function read(store,key){return new Promise((resolve,reject)=>{const q=db.transaction(store).objectStore(store).get(key);q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);});}
 function persistArtifacts(){
- const version=++artifactVersion,payload={notebook,protocol,protocolSignature,others};artifactStored=false;
+ const version=++artifactVersion,payload={notebook,protocol,protocolSignature,others,uploads:notebookUploads};artifactStored=false;
  saving=saving.then(()=>transaction('artifacts','readwrite',s=>s.put(payload,'project'))).then(()=>{
   if(version===artifactVersion){artifactStored=true;status(notebookDirty?'Notebook wird gesichert …':'Notizen und Notebooks in diesem Browser gespeichert.');}
  }).catch(()=>{artifactStored=false;status('Notebook nur vorübergehend verfügbar – Notizen & Projekt herunterladen.',true);});
@@ -57,21 +57,25 @@ function captureOther(name,nb){
 }
 function archiveName(f){return 'daten/'+f.id+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_').replace(/\.{2,}/g,'_');}
 async function rememberFiles(selected){
+ const remembered=[];
  for(const f of selected){
   if(!f.name||f.name.length>300)throw Error('Ungültiger Dateiname.');
   const bytes=await f.arrayBuffer(),hash=await crypto.subtle.digest('SHA-256',await new Blob([f.name,'\0',bytes]).arrayBuffer());
   const id=Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('');
+  remembered.push({id,name:f.name,type:f.type||'application/octet-stream'});
   if(files.has(id))continue;
   if([...files.values()].reduce((s,b)=>s+b.size,0)+f.size>500*1024*1024||state.files.length>=200)throw Error('Maximal 500 MB und 200 Dateien pro Paket.');
   files.set(id,f);state.files.push({id,name:f.name,type:f.type});
   await transaction('files','readwrite',s=>s.put(f,id)).catch(()=>{filesStored=false;});
  }
  saveText();renderFiles();
+ return remembered;
 }
 async function captureSnapshot(name,data){
  if(data.files?.length){
   const selected=data.files.map(f=>new File([Uint8Array.from(atob(f.content),c=>c.charCodeAt(0))],f.name,{type:f.type}));
-  fileUpdates=fileUpdates.catch(()=>{}).then(()=>rememberFiles(selected));await fileUpdates;
+  fileUpdates=fileUpdates.catch(()=>{}).then(()=>rememberFiles(selected));
+  notebookUploads[name]=await fileUpdates;
  }
  if((data.revision||0)>=notebookRevision)notebookDirty=false;
  if(name===projectName)capture(data.notebook,data.protocol);else captureOther(name,data.notebook);
@@ -120,7 +124,7 @@ const initialization=(async()=>{
  render();
  try{
   db=await new Promise((resolve,reject)=>{const q=indexedDB.open('kst-ki-kursportal',1);q.onupgradeneeded=()=>{q.result.createObjectStore('files');q.result.createObjectStore('artifacts');};q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);q.onblocked=()=>reject(Error('Browserspeicher blockiert'));});
-  const artifact=await read('artifacts','project');if(artifact){notebook=artifact.notebook;protocol=artifact.protocol;protocolSignature=artifact.protocolSignature||'';if(artifact.others&&typeof artifact.others==='object')others=artifact.others;}
+  const artifact=await read('artifacts','project');if(artifact){notebook=artifact.notebook;protocol=artifact.protocol;protocolSignature=artifact.protocolSignature||'';if(artifact.others&&typeof artifact.others==='object')others=artifact.others;if(artifact.uploads&&typeof artifact.uploads==='object')notebookUploads=artifact.uploads;}
   for(const f of state.files){const b=await read('files',f.id);if(b)files.set(f.id,b);}
  }catch{filesStored=false;status('Dateien werden nicht dauerhaft gespeichert. Notizen & Projekt herunterladen.',true);}
  renderFiles();updateChecks();
@@ -197,7 +201,7 @@ function visibility(){const view=document.getElementById(activeOwner);lab.hidden
 async function snapshotCurrent(){
  await notebookUpdates;
  if(!activeName)return;
- if(frame.dataset.ready!=='yes')throw Error('Das Notebook ist noch nicht bereit. Bitte warten oder erneut öffnen.');
+ if(frame.dataset.ready!=='yes'){if(frame.dataset.startKind==='warmup')return;throw Error('Das Notebook ist noch nicht bereit. Bitte warten oder erneut öffnen.');}
  await captureSnapshot(activeName,await request(frame,'snapshot'));
 }
 async function showNotebook(name,owner,scroll=true,trigger=null){
@@ -335,7 +339,7 @@ async function pack(submission){
   if(state.files.some(f=>!files.has(f.id)))throw Error('Einige Datendateien fehlen. Bitte erneut hinzufügen.');
   const absent=missing();if(submission&&absent.length&&!confirm('Noch unvollständig: '+absent.join(', ')+'. Trotzdem diesen Stand herunterladen?'))return;
   const savedNames=Object.keys(others).filter(name=>names[name]&&name!==projectName);
-  const snapshot={...state,exported:new Date().toISOString(),progress:window.KIProgress?.get(),protocol,protocolSignature,notebooks:[...(notebook?['versuch.ipynb']:[]),...savedNames.map(name=>'notebooks/'+name)]};
+  const snapshot={...state,uploads:notebookUploads,exported:new Date().toISOString(),progress:window.KIProgress?.get(),protocol,protocolSignature,notebooks:[...(notebook?['versuch.ipynb']:[]),...savedNames.map(name=>'notebooks/'+name)]};
     const entries=[{name:'kursstand.json',data:JSON.stringify(snapshot,null,2)},{name:'Journal.html',data:journalHTML()},{name:'LESEN.txt',data:'Journal.html enthält das Projektjournal, die Unterrichtsantworten (auch Auswahlfelder) und Versuchsausgaben.\nkursstand.json enthält auch Unterrichtsantworten, Häkchen und Selbsteinschätzungen.\nversuch.ipynb und notebooks/ enthalten bearbeitete Notebooks mit Code, Markdown, eingebetteten Bildern und Ausgaben. Widget-Werte und Diagramme sind als lesbarer Stand gesichert.\nDie ZIP-Datei kann auf der Kursseite als Projektstand wiederhergestellt werden.\nHinzugefügte Dateien und im Notebook ausgewählte Uploads liegen unter daten/.\nOriginalfotos und eine noch offene Fotostudio-Sammlung müssen zusätzlich unter «Notizen & Projekt» hinzugefügt werden.\nPython-Variablen und trainierte Modelle im Arbeitsspeicher sind nicht gespeichert. Nach Wiederherstellung Vorbereitung, Datenimport und benötigte Berechnungen erneut ausführen.\nFür eine lokale Wiederholung: Python 3.12, numpy, scipy, scikit-learn, matplotlib, pillow, ipywidgets; Notebook-Zellen der Reihe nach ausführen und Fotostudio-JSON aus daten/ auswählen.\nDer Download ist keine automatische Einreichung.\n'}];
   const nb=notebookForExport();if(nb)entries.push({name:'versuch.ipynb',data:JSON.stringify(checkNotebook(nb),null,1)});
   if(protocol)entries.push({name:'Versuchsprotokoll.json',data:JSON.stringify(protocol,null,2)});
