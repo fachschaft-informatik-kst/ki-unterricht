@@ -1,17 +1,27 @@
 <span class="section-label">Sichern · Wiederherstellen · Abgeben</span>
-<h1>Den Kursstand sichern</h1>
-<p class="section-intro">Alle ausgefüllten Textfelder, Auswahlaufgaben, Journalantworten und gespeicherten Notebooks werden gemeinsam in <strong>einer ZIP-Datei</strong> gesichert. Damit können Sie auf einem anderen Gerät weiterarbeiten oder Ihr Projekt zur Abgabe vorbereiten.</p>
+<h1>Antworten sichern und weiterarbeiten</h1>
+<p class="section-intro">Textfelder, Auswahlaufgaben, Journalantworten und Selbsteinschätzungen lassen sich unkompliziert als <strong>JSON-Datei</strong> herunterladen und auf einem anderen Gerät wieder hochladen. Notebooks und Fotos werden weiterhin separat im vollständigen Projekt-ZIP gesichert.</p>
 
-<div class="transfer-flow" aria-label="Kursstand sichern und abgeben">
+<div class="transfer-flow" aria-label="Antworten und Kursstand sichern">
+  <section class="card transfer-step transfer-answers-step">
+    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">1</span><div><h2>Antworten herunterladen oder hochladen</h2><p>Für das Weiterarbeiten auf einem anderen Gerät – ohne ZIP.</p></div></div>
+    <div class="project-transfer-primary">
+      <button class="btn primary" id="download-answers" type="button">Antworten herunterladen ↓</button>
+      <label class="btn" for="restore-answers">Antworten hochladen ↑</label>
+      <input accept=".json,application/json" hidden="" id="restore-answers" type="file"/>
+    </div>
+    <p id="answers-transfer-status" class="status" role="status" aria-live="polite"></p>
+    <p class="small muted">Enthält Textfelder, Auswahlantworten, Projektjournal, Checkliste und Selbsteinschätzungen. Das Hochladen ersetzt nur diese Angaben, <strong>nicht</strong> die Notebooks oder Fotodateien.</p>
+  </section>
   <section class="card transfer-step">
-    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">1</span><div><h2>Dateien ergänzen</h2><p>Nur nötig, wenn Sie eigene Fotos oder eine Fotostudio-Sammlung verwenden.</p></div></div>
+    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">2</span><div><h2>Dateien ergänzen</h2><p>Nur nötig, wenn Sie eigene Fotos oder eine Fotostudio-Sammlung verwenden.</p></div></div>
     <label class="field"><span>Fotostudio-JSON, Originalfotos oder Foto-ZIP auswählen</span><input accept=".json,.zip,.jpg,.jpeg,.png,.webp" id="attachments" multiple="" type="file"/></label>
     <ul class="attachment-list" id="attachment-list" aria-label="Hinzugefügte Projektdateien"></ul>
     <p class="small muted">Dateien, die Sie direkt im Notebook hochgeladen haben, werden automatisch mitgesichert. Eine Fotostudio-Sammlung zuerst dort als JSON herunterladen und bei Bedarf hier hinzufügen.</p>
   </section>
 
   <section class="card transfer-step">
-    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">2</span><div><h2>Arbeitsstand mitnehmen</h2><p>Am Ende jeder Arbeitsphase sichern – oder auf einem anderen Gerät eine ZIP wiederherstellen.</p></div></div>
+    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">3</span><div><h2>Ganzes Projekt als ZIP sichern</h2><p>Zusätzlich für Notebooks, Fotos und den vollständigen Projektstand.</p></div></div>
     <div class="project-transfer-primary">
       <button class="btn primary" id="download-backup" type="button">Arbeitsstand als ZIP sichern ↓</button>
       <label class="btn" for="restore-package">ZIP wiederherstellen ↑</label>
@@ -21,7 +31,7 @@
   </section>
 
   <section class="card transfer-step transfer-step-submission">
-    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">3</span><div><h2>Projekt zur Abgabe vorbereiten</h2><p>Am Projektende prüfen, ob alle Nachweise vorhanden sind.</p></div></div>
+    <div class="transfer-step-heading"><span class="transfer-step-number" aria-hidden="true">4</span><div><h2>Projekt zur Abgabe vorbereiten</h2><p>Am Projektende prüfen, ob alle Nachweise vorhanden sind.</p></div></div>
     <div id="submission-check" class="transfer-check" role="status" aria-live="polite"></div>
     <div class="project-submission-action">
       <button class="btn" id="download-submission" type="button">Abgabepaket als ZIP erstellen ↓</button>

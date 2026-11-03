@@ -30,7 +30,7 @@ for item in ("GITHUB_CLIENT_SECRET","GITHUB_CLIENT_ID","SESSION_KEY",
              "/git/commits","/pulls","SameSite=Lax","expectedSha"):
     assert item in backend,item
 course=(ROOT/"_build/site/projekt/index.html").read_text(encoding="utf-8")
-assert '<a href="admin/">' in course
+assert '<a href="https://kst-ki-admin.kevin-bohn.workers.dev/">' in course
 planner=(site/"plan-editor.js").read_text(encoding="utf-8")
 assert "function createPlanner" in planner and "validatePlan" in planner
 assert 'plan-editor.js' in code

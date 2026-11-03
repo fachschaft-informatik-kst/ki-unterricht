@@ -2,7 +2,7 @@ import {bindLabFullscreen,bindNotebookDialog} from './lab-fullscreen.js';
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 import experiments from './experiments.json' with {type:'json'};
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
-const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1';
+const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1',ANSWERS_SCHEMA='ki-kursantworten-v1';
 // Content and permanent markup are authored only in kursseiten/.
 // Controller code below handles persistence, notebooks, ZIP and ephemeral widgets.
 const journalFields=all('[data-journal]'),answerFields=all('[data-answer]');
@@ -397,6 +397,41 @@ async function packFremd(){
 }
 $('download-fremdmodell')?.addEventListener('click',packFremd);
 
+$('download-answers').addEventListener('click',async()=>{
+ await initialization;
+ const payload={schema:ANSWERS_SCHEMA,course:'bok/4-klasse',exported:new Date().toISOString(),
+  journal:Object.fromEntries(journalFields.map(field=>[field.dataset.journal,field.value])),
+  answers:Object.fromEntries(answerFields.map(field=>[field.dataset.answer,field.value])),
+  progress:window.KIProgress?.get()||null};
+ download(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),
+   'KI-4-Klasse-Antworten.json');
+ $('answers-transfer-status').textContent='Antworten heruntergeladen. Auf einem anderen Gerät die JSON-Datei hier wieder hochladen.';
+});
+$('restore-answers').addEventListener('change',async event=>{
+ await initialization;
+ const input=event.target,file=input.files?.[0];if(!file)return;
+ try{
+  if(file.size>2*1024*1024)throw Error('Die Antwortdatei ist zu gross (maximal 2 MB).');
+  const raw=JSON.parse(await file.text());
+  if(raw?.schema!==ANSWERS_SCHEMA||raw.course!=='bok/4-klasse'||
+      !raw.journal||typeof raw.journal!=='object'||Array.isArray(raw.journal)||
+      !raw.answers||typeof raw.answers!=='object'||Array.isArray(raw.answers))
+   throw Error('Keine gültige Antwortdatei der 4. Klasse.');
+  if(Object.keys(raw.answers).length>500||Object.keys(raw.journal).length>100)
+   throw Error('Zu viele Antwortfelder.');
+  for(const value of [...Object.values(raw.answers),...Object.values(raw.journal)])
+   if(typeof value!=='string'||value.length>20000)throw Error('Ungültiger oder zu langer Antworttext.');
+  if(raw.progress!==null&&raw.progress!==undefined&&raw.progress.schema!=='ki-projekt-seitenstand-v1')
+   throw Error('Ungültige Checkliste oder Selbsteinschätzung.');
+  const next=cleanState({schema:SCHEMA,journal:raw.journal,answers:raw.answers,files:[]});
+  if(!confirm('Aktuelle Antworten, Journal und Selbsteinschätzung ersetzen? Notebooks und Fotos bleiben erhalten.'))return;
+  state={...state,journal:next.journal,answers:next.answers};
+  if(raw.progress)window.KIProgress?.restore(raw.progress);
+  render();saveText();
+  $('answers-transfer-status').textContent='Antworten, Journal und Selbsteinschätzungen wiederhergestellt. Notebooks und Fotos sind unverändert.';
+ }catch(error){$('answers-transfer-status').textContent='Antworten nicht geladen: '+error.message;}
+ finally{input.value='';}
+});
 $('download-submission').addEventListener('click',()=>pack(true));$('download-backup').addEventListener('click',()=>pack(false));
 $('restore-package').addEventListener('change',async e=>{
  await initialization;const file=e.target.files[0];if(!file)return;
