@@ -1,52 +1,57 @@
 # KI-Unterricht
 
-Ein kompakter KI-Block: erleben, gezielt experimentieren und erklären.
+Eine gemeinsame technische Plattform für **unabhängige KI-Unterrichtskurse verschiedener Lehrpersonen** an der Kantonsschule Stadelhofen. Die Unterrichtsmaterialien sind kursbezogen; der Renderer, die Notebooks-Laufzeit, der Editor und die GitHub-Pipeline werden gemeinsam betrieben.
 
-- **[Kursportal öffnen](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**
-- **[Lehrpersonen: vollständiger Ablauf](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/unterrichtsplan.html)** und [didaktische Hinweise](worksheets/md/KI_Planung.md)
+**[Kursübersicht öffnen](https://fachschaft-informatik-kst.github.io/ki-unterricht/kurse.html)** · **[Geschützter Lehrpersonen-Editor](https://kst-ki-admin.kevin-bohn.workers.dev/)** · [Architektur und Deployment](docs/MULTIKURS-DEPLOYMENT.md)
 
-## Lehrpersonen-Editor (GitHub)
+## Kurse, Quellen und Zuständigkeiten
 
-Ein integrierter [Lehrpersonen-Editor](projekt/admin/) ermöglicht neue und bestehende
-Unterkapitel, Bilder, Antwortfelder, Vorschau und versionierte Pull Requests direkt
-über die Weboberfläche. Die bereits vorhandene GitHub Action prüft alle Änderungen
-und veröffentlicht sie erst nach einem Merge auf `main`. Für den **geschützten
-GitHub-Login** muss einmalig eine GitHub App plus Cloudflare Worker eingerichtet
-werden; die reine GitHub-Pages-Seite kann keine Schreib-Tokens verwalten.
-Siehe [Einrichtung und Sicherheit](docs/ADMIN-EDITOR.md).
+| Lehrperson / Kurs | Öffentliche Kursadresse | Inhaltliche Quellen | Stand |
+| --- | --- | --- | --- |
+| BOK · 1. Klasse | [bok/1-klasse/](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/1-klasse/) | `kursseiten/basis-manifest.json` und `kursseiten/basis-*/` | Veröffentlicht |
+| BOK · 4. Klasse | [bok/4-klasse/](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/) | `kursseiten/manifest.json` und die zugehörigen Themenordner | Veröffentlicht |
+| IRN · 1. Klasse | [irn/1-klasse/](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/1-klasse/) | `kursseiten/irn-1-manifest.json`, `kursseiten/irn-1-kurs/` | Unterrichtsentwurf, Schülerseite in Vorbereitung |
+| IRN · 4. Klasse | [irn/4-klasse/](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/4-klasse/) | `kursseiten/irn-4-manifest.json`, `kursseiten/irn-4-kurs/` | Unterrichtsentwurf, Schülerseite in Vorbereitung |
 
-## Inhalte einfach bearbeiten
+**Single Source of Truth:** `shared/course-sites.json` legt für jeden Kurs das Manifest, den separaten Themen-/Notebook-Namensraum, die Lehrpersonenmaterialien, das Farbthema und den Veröffentlichungsstatus fest. `scripts/course_registry.py` prüft, dass keine Kapitelbereiche zwei Kursen gehören oder versehentlich auf den Namensraum einer anderen Lehrperson verweisen. Die BOK-Pfade bleiben aus Kompatibilitätsgründen unverändert; IRN und neue Lehrpersonen erhalten unabhängige Unterrichtsdateien.
 
-**Single Source of Truth:** Texte, AVIVA-Planung und Lehrpersonenmaterial liegen gemeinsam unter `kursseiten/<thema>/`: nummerierte Kapitel, `planung.json` und `materialien.md`. Das Manifest definiert Bereiche und Navigation. `projekt/` enthält nur App-Quellen; die generierten Seiten liegen unter `_build/site/projekt/`, die veröffentlichte Website unter `dist/`. `make preview` und GitHub Actions bauen sie automatisch.
+AVIVA und Materialkoffer liegen jeweils unter `kursseiten/<bereich>/planung.json` und `materialien.md`; Lösungs- und Glossar-Dateien sind im Kursregister ausdrücklich zugeordnet. Die beiden historischen BOK-Kurse teilen **bewusst** einzelne zentrale Glossar-/Lösungstexte, besitzen aber getrennte feldbezogene Antworten. IRN und neu angelegte Kurse erhalten eigene Lösungs- und Glossar-Dateien.
 
-Ein neues Unterkapitel kannst du direkt erstellen und anschliessend als Markdown bearbeiten:
+Die Infrastruktur ist geteilt: **ein Repository, ein GitHub-Pages-Deployment, ein Cloudflare Worker**. Änderungen an einer Kursdatei ändern keine andere Kursdatei; gemeinsame Komponenten wirken dagegen auf alle. Die GitHub-Schreibberechtigung gilt weiterhin für das gesamte Repository – es gibt keine technische Ordnerberechtigung pro Lehrperson. Quell-Musterlösungen in diesem öffentlichen Repository sind auch ohne den geschützten Worker auf GitHub lesbar. [Sicherheitsgrenzen und Regeln](docs/MULTIKURS-DEPLOYMENT.md).
+
+## Eine weitere Lehrperson hinzufügen
+
+Mit dem Generator werden **eigene** Quellen angelegt – keine Kopie des BOK-Unterrichts. Beispiel für das Kürzel `MAI`:
+
+```sh
+python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b" --dry-run
+python scripts/add_teacher_course.py MAI 1 "KI entdecken" --accent "#684e9b"
+make preview
+```
+
+Dadurch entstehen ein neuer Kursplatz `/mai/1-klasse/`, ein eigenes Manifest, eine erste AVIVA-Doppellektion, ein Markdown-Kapitel, ein Materialkoffer, Musterlösungen und ein Glossar. Der Kurs ist zunächst **in Vorbereitung**, aber nach Deployment im geschützten Editor für die eigene Ausarbeitung auswählbar. Der Kurs und seine Dateien sind im Register eingetragen; Editor und Worker benötigen keine neuen fest codierten Lehrpersonen-Kürzel. Die Änderungen werden als Pull Request geprüft.
+
+**Öffentliche Freigabe:** Erst nach fachlicher Prüfung in `shared/course-sites.json` `status` auf `published` und `source` auf `generated` setzen. Der generische Kursrenderer erzeugt dann eine eigenständige Schülerseite mit Navigation sowie Text- und Auswahlantworten inklusive JSON-Sicherung. Spezialisierte Jupyter-Notebook-Funktionen und vollständige Projekt-ZIP-Pakete der BOK-Portale werden damit **nicht automatisch** kopiert; dafür ist eine ausdrückliche Integration erforderlich. Alternativ erzeugt `--publish` bereits bei der Anlage eine generische veröffentlichte Kursseite.
+
+Die Nummern und Dateinamen bestehender BOK- oder IRN-Kapitel, Schüler-Antwort-IDs, Notebookpfade und ZIP-Schemata bleiben unverändert. Eine zusätzliche Doppellektion oder ein Unterkapitel für einen bestehenden Kurs lässt sich im Editor anlegen. Die lokalen CLI-Tools `new_lesson.py` und `new_chapter.py` beziehen sich derzeit standardmässig auf den BOK-4-Kurs; für weitere Kurse den Editor verwenden.
+
+## Lehrpersonen-Editor
+
+Im [geschützten Editor](https://kst-ki-admin.kevin-bohn.workers.dev/) über GitHub anmelden, oben den Kurs auswählen und danach Kapitel, AVIVA-Plan, Materialkoffer oder Musterlösungen öffnen. Links stehen nur die Unterrichtsbereiche des gewählten Manifests. Quelltext und Vorschau können nebeneinander verwendet werden; Änderungen werden gesammelt, als Pull Request eingereicht und erst nach Tests und Merge veröffentlicht. Eine neue Lehrperson muss dieselbe GitHub-App und denselben Worker verwenden; weitere Workers sind nicht nötig.
+
+Die öffentlichen Schülerseiten enthalten **keine** Musterlösungsnavigation. Die geschützten Lesefassungen für AVIVA, Materialkoffer und Musterlösungen werden über `/teacher/<lehrperson>/<klasse>/{planung,materialien,musterloesungen}` im Worker bereitgestellt. [Einrichtung und Sicherheit](docs/ADMIN-EDITOR.md).
+
+## Unterrichtsinhalte bearbeiten
+
+Die Kapitelquellen stehen unter [`kursseiten/`](kursseiten/README.md). Dateien mit Präfixen `000-`, `010-` usw. sind Markdown/HTML; `planung.json` definiert die fünf AVIVA-Phasen und die stabile Lektions-ID. Neue Unterkapitel und Lektionen können über den Editor ergänzt werden. Lokal besteht für den historischen BOK-4-Kurs weiterhin der CLI-Weg:
 
 ```sh
 python scripts/new_chapter.py einstieg --after 030 --nummer 3a --title "Ein neuer Blick auf KI"
+python scripts/new_lesson.py "Weitere Lernarten" --section lernarten --after 02 --dry-run
 make preview
 ```
 
-Der Generator prüft Sortierung, gültigen Bereich und eindeutige IDs; bestehende Kapitel werden nicht verändert. **Neue Doppellektionen** können bereits im [Admin-Editor](projekt/admin/) inklusive AVIVA-Plan und Materialanhang erstellt werden. Alternativ funktioniert dies direkt im geklonten Repository, ohne GitHub-App-Anmeldung:
-
-```sh
-python scripts/new_lesson.py "KI im Alltag" --chapter "Anwendungen entdecken"
-make preview
-```
-
-Der Generator erstellt `kursseiten/ki-im-alltag/` mit AVIVA-Plan, erstem Kapitel und Lehrpersonenmaterial und ergänzt das Manifest. Ein bestehendes Thema kann mehrere Doppellektionen enthalten:
-
-```sh
-python scripts/new_lesson.py "Weitere Lernarten" --section lernarten --after 02
-```
-
-`--after` verwendet eine stabile Lektions-ID. Die sichtbaren Nummern werden neu berechnet; IDs, vorhandene Kapitel und gespeicherte Schülerdaten bleiben unverändert. Didaktische Nummernverweise in freien Texten nach Einfügungen prüfen. Mit `--dry-run` zeigt das Werkzeug die geplanten Dateien ohne Änderungen. Die AVIVA-Platzhalter müssen anschliessend ausgearbeitet werden. Details: [Architektur und Redaktionskonzept](docs/ARCHITEKTUR.md).
-
-Die Doppellektionen liegen kapitelweise unter [`kursseiten/`](kursseiten).
-Absätze und Zwischenüberschriften in den Markdown-Bereichen sind direkt
-lesbar und editierbar; nur Formulare, Tabellen und interaktive Teile enthalten
-noch sauber eingerücktes HTML. Die Markierungen `<!-- MD:START -->` und
-`<!-- MD:END -->` kennzeichnen Markdown-Blöcke in bestehenden Kapiteln.
-Details: [Anleitung zum Bearbeiten](kursseiten/README.md).
+Die Generatoren überschreiben keine bestehenden Kapitel. IDs und Antwortschlüssel bleiben stabil. Allgemeine Änderungen an Stylesheets oder Editorvorschau erfordern `python scripts/sync_editor_preview.py`. Details: [Quellstruktur](kursseiten/README.md) und [Redaktionskonzept](docs/ARCHITEKTUR.md).
 
 ## Lokal starten – mit Makefile
 
@@ -62,7 +67,7 @@ make
 Das Makefile legt bei Bedarf `.venv/` an, installiert Python- und npm-Pakete,
 baut die eingebetteten Jupyter-Notebooks und JupyterLite vollständig nach
 `dist/` und startet einen lokalen HTTP-Server. Anschliessend
-**[http://localhost:8000/projekt/](http://localhost:8000/projekt/)** öffnen.
+**[http://localhost:8000/kurse.html](http://localhost:8000/kurse.html)** öffnen und dort den Kurs auswählen.
 Auch der ZIP-Download, das Importieren von Sicherungen und die Python-Notebooks
 sind in diesem Modus verfügbar. Beim ersten Notebookstart lädt der Browser
 gegebenenfalls zusätzliche Laufzeitdateien. Mit `Ctrl+C` den Server beenden.
@@ -117,9 +122,9 @@ laufen weiterhin automatisch in GitHub Actions.
 
 Das Kursportal bündelt Aufgaben, kurze Erklärungen, eingebettete Python-Experimente, Fotostudio, Journal und Bewertung. Lernende benötigen keine Dateinavigation. Die folgenden Originalnotebooks bleiben als bearbeitbare Quellen für die Lehrperson erhalten; `scripts/build_portal_notebooks.py` erzeugt daraus die eingebetteten Fassungen mit allen Erklärungen und Grafik-Anhängen.
 
-Journal und Unterrichtsantworten werden auf der Webseite geschrieben und lokal gespeichert. Unter **Sichern & abgeben** entsteht eine ZIP-Datei mit lesbarem `Journal.html`, Versuchscode samt gespeicherten Ausgaben, verfügbarem Versuchsprotokoll und hinzugefügten Datendateien. Ein Zwischenstand lässt sich wieder importieren. Der Download reicht nichts automatisch ein.
+Journal und Unterrichtsantworten werden auf der Webseite geschrieben und lokal gespeichert. Einfache JSON-Downloads sichern die Text- und Auswahlantworten kursbezogen. Unter **Sichern & abgeben** entsteht ausserdem eine ZIP-Datei mit lesbarem `Journal.html`, Versuchscode samt gespeicherten Ausgaben, verfügbarem Versuchsprotokoll und hinzugefügten Datendateien. Ein Zwischenstand lässt sich wieder importieren. Der Download reicht nichts automatisch ein.
 
-Ein Tandem arbeitet gemeinsam an einem Gerät; es gibt keine gleichzeitige Online-Zusammenarbeit. Beim Gerätewechsel eine ZIP-Sicherung mitnehmen. Foto-Upload im Notebook und Datendateien der Abgabeliste sind getrennt: die Fotostudio-JSON zusätzlich in die Abgabeliste aufnehmen. Nach einem Reload oder Import müssen Daten erneut ins laufende Python geladen werden. Training und Abschlusstest bleiben bewusst manuell.
+Ein Tandem arbeitet gemeinsam an einem Gerät; es gibt keine gleichzeitige Online-Zusammenarbeit. Beim Gerätewechsel für reine Text- und Auswahlantworten die JSON-Antwortdatei verwenden, für Notebooks und Projektdateien zusätzlich die ZIP-Sicherung. Foto-Upload im Notebook und Datendateien der Abgabeliste sind getrennt: die Fotostudio-JSON zusätzlich in die Abgabeliste aufnehmen. Nach einem Reload oder Import müssen Daten erneut ins laufende Python geladen werden. Training und Abschlusstest bleiben bewusst manuell.
 
 ## Materialien und Arbeitswege
 
@@ -173,7 +178,7 @@ Anschauen `make`. Das Makefile führt dieselben Schritte aus wie GitHub
 Actions: npm-Extension, Kursportal, AVIVA-Pläne, eingebettete Notebooks,
 JupyterLite, Runtime-Dateien und die Vorschaugrafiken.
 
-Der Pages-Workflow verwendet dieselbe Reihenfolge. Die Startseite leitet ins Kursportal; `/lab/` bleibt für Lehrpersonen erreichbar. Die Kopie enthält Fotostudio und Hilfsdateien für vollständige Abgabepakete. Generierte Portalnotebooks werden nicht separat gepflegt.
+Der Pages-Workflow verwendet dieselbe Reihenfolge. Die Startseite leitet zur Kursauswahl; `/lab/` bleibt für Lehrpersonen erreichbar. Die Kopie enthält Fotostudio und Hilfsdateien für vollständige Abgabepakete. Generierte Portalnotebooks werden nicht separat gepflegt.
 
 Prüfungen: `python tests/check_course.py`, `python tests/check_ki_basis.py`, `python tests/check_ki_fotos.py`, `python tests/check_ki_projekt.py`, `node tests/check_autostart.cjs` und `node tests/check_archive.cjs`. Browserprüfung: `PORTAL_SITE=dist CHROMIUM_PATH=/pfad/zu/chromium node tests/check_portal.cjs` mit installiertem `playwright-core`; `CHECK_NOTEBOOK=1` prüft zusätzlich Start, Export und Wiederherstellung eines echten Pyodide-Notebooks. `CHECK_TRAINING=1` ergänzt einen echten Trainingslauf samt manueller Testfreigabe und einen Wechsel zum Perzeptron-Experiment. `CHROMIUM_ARGS` nimmt bei Bedarf eine JSON-Liste an.
 

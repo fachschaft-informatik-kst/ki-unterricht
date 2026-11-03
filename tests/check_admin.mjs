@@ -116,7 +116,8 @@ const basisManifest=JSON.parse(readFileSync(new URL("../kursseiten/basis-manifes
 const irnManifests=[1,4].map(grade=>JSON.parse(readFileSync(new URL("../kursseiten/irn-"+grade+"-manifest.json",import.meta.url))));
 const sources=new Map([["kursseiten/manifest.json",JSON.stringify(manifest)],["kursseiten/basis-manifest.json",JSON.stringify(basisManifest)],
   ...irnManifests.map((manifest,i)=>["kursseiten/irn-"+(i===0?1:4)+"-manifest.json",JSON.stringify(manifest)]),
-  ["kursseiten/glossar.json",readFileSync(new URL("../kursseiten/glossar.json",import.meta.url),"utf8")]]);
+  ["kursseiten/glossar.json",readFileSync(new URL("../kursseiten/glossar.json",import.meta.url),"utf8")],
+  ["shared/course-sites.json",readFileSync(new URL("../shared/course-sites.json",import.meta.url),"utf8")]]);
 for(const section of [...manifest.sections,...basisManifest.sections,...irnManifests.flatMap(m=>m.sections)].filter(s=>s.teaching)){
   const prefix="kursseiten/"+section.id+"/";
   for(const name of readdirSync(new URL("../"+prefix,import.meta.url))){

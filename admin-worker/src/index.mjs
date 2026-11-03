@@ -1,6 +1,6 @@
 import {validatePlan,validateManifest} from "../../shared/course-model.js";
 import {validateGlossary,GLOSSARY_PATH} from "../../shared/glossary-model.js";
-import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS,loadTeacherCourses,teacherThemeStylesheet} from "./teacher.mjs";
+import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS,loadTeacherCourses,teacherThemeStylesheet,normalizeTeacherCourses} from "./teacher.mjs";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
 const encoder = new TextEncoder();
@@ -79,14 +79,9 @@ async function appInstallationStatus(token,request=github){
     REPO+" gehört nicht zur App-Auswahl. In der Organisation unter Installed GitHub Apps → Configure das Repository hinzufügen."};
 }
 function validateCourseThemeRegistry(doc){
-  if(!doc||doc.version!==1||!Array.isArray(doc.courses)||doc.courses.length!==4)
-    throw Error("Farbthemen: genau vier Kursplätze erforderlich.");
-  const expected=new Set(["bok-1-klasse","bok-4-klasse","irn-1-klasse","irn-4-klasse"]);
-  for(const c of doc.courses){
-    if(!expected.delete(c.id)||!c.theme||Object.keys(c.theme).length!==1||
-       !/^#[0-9a-fA-F]{6}$/.test(c.theme.accent))
-      throw Error("Ungültiges Farbthema für "+(c?.id||"Kurs"));
-    const hex=c.theme.accent;
+  const courses=normalizeTeacherCourses(doc);
+  for(const c of courses){
+    const hex=c.accent;
     const rgb=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255)
       .map(n=>n<=.04045?n/12.92:Math.pow((n+.055)/1.055,2.4));
     const luminance=rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;
@@ -96,12 +91,10 @@ function validateCourseThemeRegistry(doc){
 }
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  (["kursseiten/manifest.json","kursseiten/basis-manifest.json",
-    "kursseiten/irn-1-manifest.json","kursseiten/irn-4-manifest.json",
-    GLOSSARY_PATH,"shared/course-sites.json"].includes(path))||
-  /^lehrperson\/irn-[14]\/(?:musterloesungen(?:-felder)?|glossar)\.md$/.test(path)||
-  /^lehrperson\/musterloesungen(?:-felder-[14]-klasse)?\.md$/.test(path)||
-
+  /^kursseiten\/(?:manifest|basis-manifest|[a-z][a-z0-9-]*-manifest)\.json$/.test(path)||
+  [GLOSSARY_PATH,"shared/course-sites.json"].includes(path)||
+  /^lehrperson\/[a-z0-9-]+\/(?:musterloesungen(?:-felder)?|glossar)\.md$/.test(path)||
+  /^lehrperson\/(?:materialien|musterloesungen(?:-felder-[14]-klasse)?)\.md$/.test(path)||
   /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
   /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
 function validate(changes){
@@ -126,7 +119,7 @@ function validate(changes){
       if(doc.nbformat!==4||!Array.isArray(doc.cells)||!doc.metadata||!doc.cells.every(cell=>
         ["code","markdown","raw"].includes(cell.cell_type)&&Array.isArray(cell.source)&&cell.source.every(s=>typeof s==="string")))
         throw Error("Ungültige Jupyter-Notebook-Struktur.");
-      if(c.expectedSha===null&&!/^content\/(?:basis_|irn[14]_)?lesson_[a-z0-9_]+\.ipynb$/.test(c.path))
+      if(c.expectedSha===null&&!/^content\/(?:[a-z][a-z0-9]*_)?lesson_[a-z0-9_]+\.ipynb$/.test(c.path))
         throw Error("Neue Notebooks müssen mit einem Unterkapitel-Baustein verknüpft sein.");
     }else if(c.path.endsWith(".md")){
       if(typeof c.content!=="string"||!c.content.trim()||encoder.encode(c.content).length>200000)throw Error("Ungültiger Markdown-Inhalt.");
@@ -166,19 +159,6 @@ async function publish(req,token){
     if((known.get(c.path)||null)!==c.expectedSha)return fail(409,"Konflikt bei "+c.path+". Bitte neu laden.");
   }
   const changes=new Map(body.changes.map(c=>[c.path,c]));
-  // A newly created notebook must be published atomically with a chapter that
-  // references it. Existing notebook sources remain editable as before.
-  for(const item of body.changes.filter(x=>x.expectedSha===null&&x.path.endsWith(".ipynb"))){
-    const namespace=item.path.startsWith("content/irn1_")?"irn-1-":
-      item.path.startsWith("content/irn4_")?"irn-4-":
-      item.path.startsWith("content/basis_")?"basis-":"bok-4";
-    const references=body.changes.some(x=>!x.delete&&/^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)&&
-      x.content?.includes('data-notebook="'+item.path+'"')&&
-      (namespace==="bok-4"?!/^(?:basis-|irn-)/.test(x.path.split("/")[1]):
-        x.path.split("/")[1].startsWith(namespace)));
-    if(!references)return fail(400,"Neue Notebooks müssen gemeinsam mit dem passenden Unterkapitel vorgemerkt werden: "+item.path);
-  }
-
   const readJson=async path=>{
     const file=await github(token,prefix+"/contents/"+path+"?ref="+baseSha);
     return JSON.parse(decoder.decode(Uint8Array.from(atob(file.content.replace(/\s/g,"")),c=>c.charCodeAt(0))));
@@ -192,24 +172,33 @@ async function publish(req,token){
       if(oldGlossary.begriffe.some(t=>!nextIds.has(t.id)))
         throw Error("Bestehende Glossar-IDs dürfen nicht gelöscht werden, weil Kursseiten darauf verlinken.");
     }
+    const originalRegistry=validateCourseThemeRegistry(await readJson("shared/course-sites.json"));
+    const currentRegistry=changes.has("shared/course-sites.json")?
+      validateCourseThemeRegistry(await proposed("shared/course-sites.json")):originalRegistry;
     if(changes.has("shared/course-sites.json")){
-      const before=validateCourseThemeRegistry(await readJson("shared/course-sites.json"));
-      const after=validateCourseThemeRegistry(await proposed("shared/course-sites.json"));
-      for(let i=0;i<before.courses.length;i++){
-        const a=before.courses[i],b=after.courses[i];
+      if(currentRegistry.courses.length!==originalRegistry.courses.length)
+        throw Error("Neue Kurse werden im Repository angelegt, nicht über den Farbeditor.");
+      for(let i=0;i<originalRegistry.courses.length;i++){
+        const a=originalRegistry.courses[i],b=currentRegistry.courses[i];
         if(Object.keys(a).some(k=>k!=="theme"&&JSON.stringify(a[k])!==JSON.stringify(b[k])))
           throw Error("Nur die Akzentfarben dürfen im Farbthemen-Editor geändert werden.");
       }
     }
-    for(const manifestPath of ["kursseiten/manifest.json","kursseiten/basis-manifest.json",
-      "kursseiten/irn-1-manifest.json","kursseiten/irn-4-manifest.json"]){
-    const previous=await readJson(manifestPath);
-    const manifest=await proposed(manifestPath);
-    validateManifest(manifest);
-    const irnPrefix=/^kursseiten\/(irn-[14])-manifest\.json$/.exec(manifestPath)?.[1];
-    if(irnPrefix&&manifest.sections.some(section=>!section.id.startsWith(irnPrefix+"-")))
-      throw Error("IRN-Unterrichtsbereiche müssen im eigenen Kursnamensraum liegen: "+irnPrefix);
-    if(previous.sections.some(s=>!manifest.sections.some(n=>n.id===s.id&&!!n.teaching===!!s.teaching)))
+    const profiles=normalizeTeacherCourses(currentRegistry);
+    const sectionOwners=new Map();
+    for(const profile of profiles){
+      const manifestPath=profile.manifest;
+      const previous=await readJson(manifestPath);
+      const manifest=await proposed(manifestPath);
+      validateManifest(manifest);
+      for(const section of manifest.sections){
+        if(profile.sectionPrefix&&!section.id.startsWith(profile.sectionPrefix))
+          throw Error("Unterrichtsbereich gehört zu einer anderen Lehrperson: "+section.id);
+        if(sectionOwners.has(section.id))
+          throw Error("Unterrichtsbereich in mehreren Kursen: "+section.id);
+        sectionOwners.set(section.id,profile.slug);
+      }
+        if(previous.sections.some(s=>!manifest.sections.some(n=>n.id===s.id&&!!n.teaching===!!s.teaching)))
       throw Error("Bestehende Bereichs-IDs müssen erhalten bleiben.");
     const all=[];
     for(const section of manifest.sections.filter(s=>s.teaching)){
@@ -233,6 +222,18 @@ async function publish(req,token){
     validatePlan({lessons:all});
     if(all.some(l=>!Number.isFinite(l.order))||new Set(all.map(l=>l.order)).size!==all.length)
       throw Error("Lektionsreihenfolge ungültig oder doppelt.");
+    }
+    // New notebooks belong to the course that owns their lesson prefix.
+    // A chapter in another teacher's course cannot reference the notebook.
+    for(const item of body.changes.filter(x=>x.expectedSha===null&&x.path.endsWith(".ipynb"))){
+      const matching=profiles.filter(p=>item.path.startsWith("content/"+p.notebookPrefix+"lesson_"));
+      if(matching.length!==1)throw Error("Notebook-Namensraum gehört zu keinem eindeutigen Kurs: "+item.path);
+      const owner=matching[0];
+      const linked=body.changes.some(x=>!x.delete&&
+        /^kursseiten\/[^/]+\/[0-9]{3}-[^/]+\.md$/.test(x.path)&&
+        sectionOwners.get(x.path.split("/")[1])===owner.slug&&
+        x.content?.includes('data-notebook="'+item.path+'"'));
+      if(!linked)throw Error("Neue Notebooks müssen gemeinsam mit dem passenden Unterkapitel vorgemerkt werden: "+item.path);
     }
   }catch(e){if(e.status)throw e;return fail(400,e.message);}
   const entries=[];
@@ -350,6 +351,7 @@ export default {
             "Content-Security-Policy":"default-src 'none'; sandbox"}});
         }
         const courses=await loadTeacherCourses(active.token,github,REPO);
+        if(!courses.some(c=>c.slug===route.course&&c.ready))return fail(404,"Kurs nicht vorhanden.");
         return new Response(teacherShell(route,courses),{headers:{
           "Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store",
           "X-Content-Type-Options":"nosniff",
@@ -365,7 +367,9 @@ export default {
           if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
           const route=parseTeacher("/teacher/"+url.searchParams.get("course")+"/"+url.searchParams.get("kind"));
           if(!route)return fail(404,"Unbekanntes Lehrpersonenmaterial.");
-          return response(await teacherData(route,active.token,github,REPO,Number(url.searchParams.get("dl")||1)));
+          const courses=await loadTeacherCourses(active.token,github,REPO);
+          if(!courses.some(c=>c.slug===route.course&&c.ready))return fail(404,"Kurs nicht vorhanden.");
+          return response(await teacherData(route,active.token,github,REPO,Number(url.searchParams.get("dl")||1),courses));
         }
         if(req.method==="GET"&&url.pathname==="/api/permissions"){
           const humanCanWrite=await canWrite(active.token);

@@ -11,6 +11,15 @@
       "name": "KI entdecken",
       "theme": {
         "accent": "#3653a3"
+      },
+      "editorKey": "basis",
+      "manifest": "kursseiten/basis-manifest.json",
+      "sectionPrefix": "basis-",
+      "notebookPrefix": "basis_",
+      "teacherFiles": {
+        "solutions": "lehrperson/musterloesungen.md",
+        "fields": "lehrperson/musterloesungen-felder-1-klasse.md",
+        "glossary": "kursseiten/glossar.json"
       }
     },
     {
@@ -23,6 +32,16 @@
       "name": "KI vertiefen",
       "theme": {
         "accent": "#076959"
+      },
+      "editorKey": "vertiefung",
+      "manifest": "kursseiten/manifest.json",
+      "sectionPrefix": "",
+      "notebookPrefix": "",
+      "teacherFiles": {
+        "solutions": "lehrperson/musterloesungen.md",
+        "fields": "lehrperson/musterloesungen-felder-4-klasse.md",
+        "glossary": "kursseiten/glossar.json",
+        "materialsIntro": "lehrperson/materialien.md"
       }
     },
     {
@@ -35,6 +54,15 @@
       "name": "KI entdecken",
       "theme": {
         "accent": "#69419b"
+      },
+      "editorKey": "irn1",
+      "manifest": "kursseiten/irn-1-manifest.json",
+      "sectionPrefix": "irn-1-",
+      "notebookPrefix": "irn1_",
+      "teacherFiles": {
+        "solutions": "lehrperson/irn-1/musterloesungen.md",
+        "fields": "lehrperson/irn-1/musterloesungen-felder.md",
+        "glossary": "lehrperson/irn-1/glossar.md"
       }
     },
     {
@@ -47,6 +75,15 @@
       "name": "KI vertiefen",
       "theme": {
         "accent": "#9a481d"
+      },
+      "editorKey": "irn4",
+      "manifest": "kursseiten/irn-4-manifest.json",
+      "sectionPrefix": "irn-4-",
+      "notebookPrefix": "irn4_",
+      "teacherFiles": {
+        "solutions": "lehrperson/irn-4/musterloesungen.md",
+        "fields": "lehrperson/irn-4/musterloesungen-felder.md",
+        "glossary": "lehrperson/irn-4/glossar.md"
       }
     }
   ]

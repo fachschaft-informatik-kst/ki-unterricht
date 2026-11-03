@@ -7,6 +7,19 @@ Notebookstände liegen im Browser und werden als ZIP gesichert. Der optionale
 Lehrpersonen-Editor verwendet einen geschützten Cloudflare Worker, um Änderungen
 als GitHub-Pull-Request einzureichen; er speichert keine Schülerdaten.
 
+## Mehrere Lehrpersonen
+
+Das Verzeichnisbild unten zeigt die historischen BOK-Quellen. Die
+verbindliche Kurszuordnung für **BOK 1/4, IRN 1/4 und weitere Lehrpersonen**
+steht in `shared/course-sites.json`. Jeder Eintrag definiert Manifest,
+Namensräume und Lehrpersonenmaterial. `scripts/course_registry.py`
+verhindert doppelte Unterrichtsbereiche und fremde Kurspräfixe.
+Mit `scripts/add_teacher_course.py` kann ein weiterer Kurs mit eigenen
+Dateien angelegt werden. Die bestehenden BOK-Dateien bleiben zur
+Kompatibilität von Antworten, Notebooks und ZIP-Sicherungen unverändert.
+
+[Dokumentation für mehrere Lehrpersonen](MULTIKURS-DEPLOYMENT.md)
+
 ## Verbindliche Quellen
 
 ```text

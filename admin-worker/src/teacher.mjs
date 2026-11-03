@@ -1,12 +1,6 @@
 // Serve only explicitly selected teacher resources through the authenticated Worker.
-const PROFILES={
-  "bok/1-klasse":{manifest:"kursseiten/basis-manifest.json",grade:1,owner:"BOK"},
-  "bok/4-klasse":{manifest:"kursseiten/manifest.json",grade:4,owner:"BOK"},
-  "irn/1-klasse":{manifest:"kursseiten/irn-1-manifest.json",grade:1,owner:"IRN",
-    solutions:"lehrperson/irn-1"},
-  "irn/4-klasse":{manifest:"kursseiten/irn-4-manifest.json",grade:4,owner:"IRN",
-    solutions:"lehrperson/irn-4"}
-};
+import courseRegistry from "../../shared/course-sites.json" with {type:"json"};
+export const DEFAULT_COURSES=courseRegistry.courses;
 export const DOWNLOADS={
   "Arbeitsblatt_Perzeptron_Lsg.md":"worksheets/md/Arbeitsblatt_Perzeptron_Lsg.md",
   "KI_Bewertungsraster.md":"worksheets/md/KI_Bewertungsraster.md",
@@ -14,8 +8,8 @@ export const DOWNLOADS={
   "koordinatengitter_or_nand_xor.svg":"worksheets/md/svg/koordinatengitter_or_nand_xor.svg"
 };
 export function parseTeacher(path){
-  const m=/^\/teacher\/((?:bok|irn)\/(?:1|4)-klasse)\/(planung|materialien|musterloesungen)\/?$/.exec(path);
-  return m&&PROFILES[m[1]]?{course:m[1],kind:m[2]}:null;
+  const m=/^\/teacher\/([a-z][a-z0-9-]+\/[1-9][0-9]*-klasse)\/(planung|materialien|musterloesungen)\/?$/.exec(path);
+  return m?{course:m[1],kind:m[2]}:null;
 }
 export async function readTeacherFile(token,path,github,repo){
   const file=await github(token,"/repos/"+repo+"/contents/"+path+"?ref=main");
@@ -200,8 +194,9 @@ async function getQuestions(lesson,course,token,github,repo){
   return Object.assign({},...data.filter(item=>item.status==="fulfilled")
     .map(item=>questionsFromSource(item.value)));
 }
-export async function teacherData({course,kind},token,github,repo,selected=1){
-  const profile=PROFILES[course];if(!profile)throw Error("Kurs unbekannt.");
+export async function teacherData({course,kind},token,github,repo,selected=1,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
+  const profile=courses.find(c=>c.slug===course&&c.ready);
+  if(!profile)throw Error("Kurs unbekannt.");
   const manifest=await getJson(token,profile.manifest,github,repo);
   const views=(manifest.sections||[]).filter(s=>s.teaching&&/^[a-z][a-z0-9-]*$/.test(s.id));
   if(views.length>20)throw Error("Zu viele Unterrichtsbereiche.");
@@ -216,15 +211,13 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
   if(kind==="materialien"){
     const content=await getText(token,"kursseiten/"+current.view+"/materialien.md",github,repo);
     const markdown=materialForLesson(content,current.number);
-    const intro=profile.owner==="BOK"&&profile.grade===4?
-      await getText(token,"lehrperson/materialien.md",github,repo):"";
+    const intro=profile.teacherFiles.materialsIntro?
+      await getText(token,profile.teacherFiles.materialsIntro,github,repo):"";
     return {...base,intro,sections:[{title:"Doppellektion "+current.number+" · "+current.title,
       markdown:markdown||content}]};
   }
-  const generalPath=profile.solutions?profile.solutions+"/musterloesungen.md":
-    "lehrperson/musterloesungen.md";
-  const fieldPath=profile.solutions?profile.solutions+"/musterloesungen-felder.md":
-    "lehrperson/musterloesungen-felder-"+profile.grade+"-klasse.md";
+  const generalPath=profile.teacherFiles.solutions;
+  const fieldPath=profile.teacherFiles.fields;
   const [general,fields]=await Promise.all([
     getText(token,generalPath,github,repo),getText(token,fieldPath,github,repo)]);
   const notes=headings(general).filter(block=>numbers(block.title).includes(current.number))
@@ -246,27 +239,57 @@ export async function teacherData({course,kind},token,github,repo,selected=1){
 }
 
 
-// Course selection follows the same registry as the public course overview.
-// An unconfigured course must never fall back to BOK teacher material.
-export const DEFAULT_COURSES = [{"id":"bok-1-klasse","teacher":"BOK","grade":1,"slug":"bok/1-klasse","source":"basis","status":"published","name":"KI entdecken","theme":{"accent":"#3653a3"}},{"id":"bok-4-klasse","teacher":"BOK","grade":4,"slug":"bok/4-klasse","source":"projekt","status":"published","name":"KI vertiefen","theme":{"accent":"#076959"}},{"id":"irn-1-klasse","teacher":"IRN","grade":1,"slug":"irn/1-klasse","source":null,"status":"planned","name":"KI entdecken – IRN","theme":{"accent":"#69419b"}},{"id":"irn-4-klasse","teacher":"IRN","grade":4,"slug":"irn/4-klasse","source":null,"status":"planned","name":"KI vertiefen – IRN","theme":{"accent":"#9a481d"}}];
-const VALID_SLUGS=new Set(DEFAULT_COURSES.map(c=>c.slug));
+// The GitHub-backed registry is authoritative. New teachers do not need edits
+// to this Worker: their course profile and allowed source files are explicit.
 export function normalizeTeacherCourses(registry){
-  if(registry?.version!==1||!Array.isArray(registry.courses))throw Error("Kursregister ungültig.");
+  if(registry?.version!==1||!Array.isArray(registry.courses)||
+      registry.courses.length<1||registry.courses.length>60)
+    throw Error("Kursregister ungültig.");
+  const ids=new Set(),slugs=new Set(),keys=new Set(),manifests=new Set();
   const courses=[];
   for(const item of registry.courses){
-    if(!VALID_SLUGS.has(item?.slug)||courses.some(c=>c.slug===item.slug)||
-      !/^[a-z][a-z0-9-]*$/.test(item.id||"")||
-      !["BOK","IRN"].includes(item.teacher)||![1,4].includes(item.grade)||
-      !/^[#][0-9a-fA-F]{6}$/.test(item.theme?.accent||""))
-      throw Error("Kursauswahl enthält einen ungültigen Eintrag.");
-    const template=DEFAULT_COURSES.find(c=>c.slug===item.slug);
-    if(item.id!==template.id||item.teacher!==template.teacher||item.grade!==template.grade)
-      throw Error("Kursidentität darf nicht geändert werden.");
-    courses.push({id:item.id,teacher:item.teacher,grade:item.grade,slug:item.slug,
-      name:String(item.name||"").slice(0,120),accent:item.theme.accent,
-      ready:!!PROFILES[item.slug]});
+    const teacher=item?.teacher,grade=item?.grade,slug=item?.slug;
+    const id=typeof teacher==="string"&&Number.isInteger(grade)?
+      teacher.toLowerCase()+"-"+grade+"-klasse":"";
+    const legacy={
+      "bok/1-klasse":["basis","kursseiten/basis-manifest.json","basis-","basis_"],
+      "bok/4-klasse":["vertiefung","kursseiten/manifest.json","",""],
+      "irn/1-klasse":["irn1","kursseiten/irn-1-manifest.json","irn-1-","irn1_"],
+      "irn/4-klasse":["irn4","kursseiten/irn-4-manifest.json","irn-4-","irn4_"]
+    }[slug];
+    const config=legacy||[id,"kursseiten/"+teacher?.toLowerCase()+"-"+grade+"-manifest.json",
+      teacher?.toLowerCase()+"-"+grade+"-",teacher?.toLowerCase()+grade+"_"];
+    const sources=item?.teacherFiles;
+    if(!/^[A-Z][A-Z0-9]{1,9}$/.test(teacher||"")||
+       !Number.isInteger(grade)||grade<1||grade>20||
+       slug!==teacher.toLowerCase()+"/"+grade+"-klasse"||item.id!==id||
+       !/^[a-z][a-z0-9-]*$/.test(item.editorKey||"")||
+       [item.editorKey,item.manifest,item.sectionPrefix,item.notebookPrefix].some((v,i)=>v!==config[i])||
+       !["planned","published"].includes(item.status)||
+       (item.status==="planned"?item.source!==null:!["basis","projekt","generated"].includes(item.source))||
+       (legacy?item.source!==null&&item.source!==({"bok/1-klasse":"basis","bok/4-klasse":"projekt"}[slug]):
+                item.source!==null&&item.source!=="generated")||
+       !/^[#][0-9a-fA-F]{6}$/.test(item.theme?.accent||"")||
+       typeof item.name!=="string"||!item.name.trim()||item.name.length>80||
+       !sources||!["solutions","fields","glossary"].every(k=>typeof sources[k]==="string")||
+       Object.keys(sources).some(k=>!["solutions","fields","glossary","materialsIntro"].includes(k))||
+       Object.entries(sources).some(([kind,path])=>typeof path!=="string"||path.includes("..")||
+         !(path.startsWith("lehrperson/")&&path.endsWith(".md")||
+           kind==="glossary"&&path==="kursseiten/glossar.json")||
+         (!legacy||teacher==="IRN")&&!path.startsWith("lehrperson/"+teacher.toLowerCase()+"-"+grade+"/")||
+         legacy&&teacher==="BOK"&&(path!==({
+           solutions:"lehrperson/musterloesungen.md",
+           fields:"lehrperson/musterloesungen-felder-"+grade+"-klasse.md",
+           glossary:"kursseiten/glossar.json",
+           materialsIntro:"lehrperson/materialien.md"
+         }[kind])||kind==="materialsIntro"&&grade!==4))||
+       ids.has(item.id)||slugs.has(slug)||keys.has(item.editorKey)||manifests.has(item.manifest))
+      throw Error("Kursregister enthält einen ungültigen oder doppelten Eintrag: "+slug);
+    ids.add(item.id);slugs.add(slug);keys.add(item.editorKey);manifests.add(item.manifest);
+    courses.push({id:item.id,teacher,grade,slug,editorKey:item.editorKey,manifest:item.manifest,
+      sectionPrefix:item.sectionPrefix,notebookPrefix:item.notebookPrefix,teacherFiles:sources,
+      source:item.source,status:item.status,name:item.name,accent:item.theme.accent,ready:true});
   }
-  if(courses.length!==4)throw Error("Alle vier Kursplätze müssen vorhanden sein.");
   return courses;
 }
 export async function loadTeacherCourses(token,github,repo){
@@ -310,7 +333,7 @@ export function teacherShell(route,courses=normalizeTeacherCourses({version:1,co
     '<div class="course-switcher"><div class="course-picker">'+
     '<label for="teacherCourseSelect">Kurs auswählen</label>'+
     '<select id="teacherCourseSelect" aria-label="Lehrperson und Klasse auswählen">'+opts+'</select>'+
-    '<p class="course-picker-note">IRN: eigenständige bearbeitbare Entwürfe; öffentliche Schülerkurse noch in Vorbereitung.</p>'+
+    '<p class="course-picker-note">Jeder Kurs besitzt eigene Kapitel und Lehrpersonenmaterialien. Kurse in Vorbereitung sind im Editor bearbeitbar, aber öffentlich noch nicht freigeschaltet.</p>'+
     '</div><div class="course-context"><span>Aktueller Kurs</span><strong>'+esc(label)+'</strong>'+
     '<small>'+esc(active.name)+'</small></div></div>'+
     '<h1>'+esc(title)+'</h1><nav class="area-nav" aria-label="Lehrpersonenmaterial">'+nav+'</nav></div></header>'+

@@ -18,6 +18,8 @@ const courseGrade=()=>courseProfile().grade;
 const isIrnCourse=()=>courseProfile().teacher==="IRN";
 const teacherSource=(kind)=>{
   const p=courseProfile();
+  const files=p.teacherFiles;
+  if(files)return files[{musterloesungen:"solutions","musterloesungen-felder":"fields",glossar:"glossary"}[kind]];
   return p.source?"lehrperson/"+p.source+"/"+kind+".md":
     kind==="musterloesungen"?"lehrperson/musterloesungen.md":
     kind==="musterloesungen-felder"?"lehrperson/musterloesungen-felder-"+p.grade+"-klasse.md":GLOSSARY_PATH;
@@ -177,9 +179,15 @@ const filename=path=>path.split("/").pop().replace(".md","");
 const notebookPath=path=>/^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path);
 const gradeNotebook=path=>{
   if(!notebookPath(path))return false;
-  if(isIrnCourse())return new RegExp("^content/irn"+courseGrade()+"_lesson_[a-z0-9_]+\\.ipynb$").test(path);
-  return courseGrade()===1?/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path):
-    !/^content\/(?:basis_|irn[14]_)/.test(path);
+  const profile=courseProfile(),prefix=profile.notebookPrefix;
+  if(prefix===undefined){
+    if(isIrnCourse())return new RegExp("^content/irn"+courseGrade()+"_lesson_[a-z0-9_]+\\.ipynb$").test(path);
+    return courseGrade()===1?/^content\/basis_[a-z0-9_]+\.ipynb$/.test(path):
+      !/^content\/(?:basis_|irn[14]_)/.test(path);
+  }
+  if(prefix==="")return !/^content\/(?:basis_|irn[14]_|[a-z][a-z0-9]*[0-9]_)/.test(path);
+  if(prefix==="basis_")return path.startsWith("content/basis_");
+  return path.startsWith("content/"+prefix+"lesson_");
 };
 let returnChapterPath=null;
 function notebookReferences(source){
@@ -590,11 +598,16 @@ let navigationRevision=0;
 function useFile(path,sha,content,original=content){
   const targetSection=path.split("/")[1];
   if(path.startsWith("lehrperson/")){
-    const base=courseProfile().source;
-    if(base&&!path.startsWith("lehrperson/"+base+"/"))throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
-    if(!base&&path.startsWith("lehrperson/irn-"))throw Error("IRN-Material gehört zu einem anderen Kurs.");
+    const files=courseProfile().teacherFiles;
+    if(files&&!Object.values(files).includes(path))
+      throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
+    if(!files){
+      const base=courseProfile().source;
+      if(base&&!path.startsWith("lehrperson/"+base+"/"))throw Error("Lehrpersonenmaterial gehört zum anderen Kurs.");
+      if(!base&&path.startsWith("lehrperson/irn-"))throw Error("IRN-Material gehört zu einem anderen Kurs.");
+    }
   }
-  if(/\/(?:planung\.json|materialien\.md)$/.test(path)){
+  if(/^kursseiten\/[^/]+\/(?:[0-9]{3}-[^/]+\.md|planung\.json|materialien\.md)$/.test(path)){
     const own=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest?.content||'{"sections":[]}');
     if(!own.sections.some(section=>section.id===targetSection))
       throw Error("Dieser Inhalt gehört zu einem anderen Kurs. Bitte zuerst den Kurs wechseln.");
@@ -1205,7 +1218,7 @@ async function addLesson(){
     const chapterTitle=prompt("Titel des ersten Unterkapitels:","Einstieg und Auftrag");
     if(!chapterTitle)return;
     if(!title.trim()||!slug(chapterTitle))throw Error("Titel und Kapitelname dürfen nicht leer sein.");
-    const id=(state.course==="basis"?"basis-":isIrnCourse()?courseProfile().source+"-":"")+slug(title),view=id;
+    const id=(courseProfile().sectionPrefix??(state.course==="basis"?"basis-":isIrnCourse()?courseProfile().source+"-":""))+slug(title),view=id;
     if(!/^[a-z]/.test(view)||manifest.sections.some(s=>s.id===view))throw Error("Bereichs-ID ungültig oder bereits vorhanden.");
     const blocks=await Promise.all(manifest.sections.filter(s=>s.teaching).map(async s=>{
       const path="kursseiten/"+s.id+"/planung.json";
@@ -1498,7 +1511,7 @@ $("courseSelect").addEventListener("change",async()=>{
   if(!confirmUnsaved()){$("courseSelect").value=state.course;return;}
   state.course=selected;
   updateTeacherAccessLinks();
-  document.body.classList.toggle("course-basis",selected==="basis");
+  document.body.classList.toggle("course-basis",courseGrade()===1);
   $("courseContext").textContent=courseProfile().teacher+" · "+courseGrade()+". Klasse · "+courseProfile().name;
   ++navigationRevision;
   state.plans.clear();
@@ -1817,7 +1830,7 @@ function createLessonNotebook(){
     const section=$("section").value.replaceAll("-","_");
     const basename=slug(title).replaceAll("-","_").slice(0,45);
     if(!basename)throw Error("Ungültiger Notebook-Titel.");
-    const path="content/"+(isIrnCourse()?"irn"+courseGrade()+"_":courseGrade()===1?"basis_":"")+"lesson_"+section+"_"+basename+".ipynb";
+    const path="content/"+(courseProfile().notebookPrefix??(isIrnCourse()?"irn"+courseGrade()+"_":courseGrade()===1?"basis_":""))+"lesson_"+section+"_"+basename+".ipynb";
     if(state.notebooks.some(item=>item.path===path)||state.staged.has(path))
       throw Error("Ein Notebook mit diesem Namen existiert bereits. Bitte einen anderen Titel wählen.");
     if(state.staged.size+(state.staged.has(state.current.path)?1:2)>12)
@@ -1869,12 +1882,42 @@ $("addBlock").addEventListener("click",insertBlock);
 $("imageFile").addEventListener("change",addImage);
 $("logout").addEventListener("click",async()=>{try{await post("/auth/logout",{});location.assign("/");}catch(e){error(e);}});
 window.addEventListener("beforeunload",e=>{if(state.staged.size||(state.current&&$("source").value!==savedText())){e.preventDefault();e.returnValue="";}});
+async function loadEditorCourses(){
+  const result=await api("/api/file?path="+encodeURIComponent(COURSE_THEMES_PATH));
+  const registry=JSON.parse(result.content);
+  if(registry.version!==1||!Array.isArray(registry.courses)||!registry.courses.length)
+    throw Error("Kursregister nicht lesbar.");
+  const fresh={};
+  const picker=$("courseSelect"),prior=state.course;
+  picker.replaceChildren();
+  for(const c of registry.courses){
+    if(!/^[a-z][a-z0-9-]*$/.test(c.editorKey||"")||!c.manifest||!c.teacherFiles)
+      throw Error("Kursprofil unvollständig: "+c.slug);
+    fresh[c.editorKey]={slug:c.slug,theme:c.id,teacher:c.teacher,grade:c.grade,
+      manifest:c.manifest,name:c.name+(c.status==="planned"?" (Entwurf)":""),
+      teacherFiles:c.teacherFiles,sectionPrefix:c.sectionPrefix,
+      notebookPrefix:c.notebookPrefix};
+    const option=document.createElement("option");
+    option.value=c.editorKey;
+    option.textContent=c.teacher+" · "+c.grade+". Klasse · "+c.name+
+      (c.status==="planned"?" (Entwurf)":"");
+    picker.append(option);
+  }
+  for(const key of Object.keys(COURSE_PROFILES))delete COURSE_PROFILES[key];
+  Object.assign(COURSE_PROFILES,fresh);
+  state.course=Object.hasOwn(fresh,prior)?prior:Object.keys(fresh)[0];
+  picker.value=state.course;
+  updateTeacherAccessLinks();
+  document.body.classList.toggle("course-basis",courseGrade()===1);
+  $("courseContext").textContent=courseProfile().teacher+" · "+courseGrade()+". Klasse · "+courseProfile().name;
+}
 if (!pagesOrigin) (async()=>{
   try{
     const s=await api("/api/session");
     $("intro").hidden=s.authenticated;$("login").hidden=s.authenticated;$("logout").hidden=!s.authenticated;
     $("who").textContent=s.authenticated?"GitHub: "+s.login:"Nicht angemeldet";
     if(!s.authenticated){status("Mit GitHub anmelden, um Kapitel zu bearbeiten.");return;}
+    await loadEditorCourses();
     $("workspace").hidden=false;await refresh();await loadCourseThemes();status("Angemeldet. Kapitel auswählen.");
   }catch(e){$("login").hidden=true;$("intro").hidden=false;error("Admin-Gateway nicht verbunden: "+e.message);}
 })();

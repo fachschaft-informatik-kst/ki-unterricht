@@ -12,6 +12,9 @@ import shutil
 import sys
 from pathlib import Path
 
+from course_registry import load_registry, validate_registry
+from generic_course import generic_page
+
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "shared/course-sites.json"
 RELATIVE_PARENT = re.compile(r"(?<![A-Za-z0-9./])(?:\.\./)+")
@@ -44,26 +47,6 @@ def theme_css(course: dict) -> str:
     return (f":root{{--accent:{accent};--soft:{soft};"
             f"--paper:{paper};--line:{line};}}"
             f" a:focus-visible{{outline-color:{accent};}}")
-
-
-def validate_registry(courses: list[dict]) -> None:
-    if not courses or len({c["id"] for c in courses}) != len(courses):
-        raise ValueError("Kurs-IDs fehlen oder sind doppelt.")
-    slugs = set()
-    for c in courses:
-        slug = c["slug"]
-        if (not re.fullmatch(r"[a-z0-9-]+/[1-9][0-9]*-klasse", slug)
-                or slug in slugs or c["status"] not in {"published", "planned"}
-                or c["teacher"].lower() != slug.split("/")[0]
-                or c["grade"] != int(slug.split("/")[1].split("-")[0])
-                or not re.fullmatch(r"#[0-9a-fA-F]{6}", c.get("theme", {}).get("accent", ""))
-                or not 1 <= len(c.get("name", "")) <= 80):
-            raise ValueError(f"Ungültige Kurskonfiguration: {slug}")
-        slugs.add(slug)
-        if (c["status"] == "planned") != (c["source"] is None):
-            raise ValueError(f"Quellstatus passt nicht: {slug}")
-        if c["source"] not in {None, "basis", "projekt"}:
-            raise ValueError(f"Unbekannter Quellkurs: {slug}")
 
 
 def course_tab_title(course: dict) -> str:
@@ -132,15 +115,14 @@ def overview(courses: list[dict]) -> str:
 
 def build(out: Path) -> None:
     out = Path(out)
-    courses = json.loads(REGISTRY.read_text(encoding="utf-8"))["courses"]
-    validate_registry(courses)
+    courses = load_registry(ROOT)
     for course in courses:
         slug, source = course["slug"], course["source"]
         target = out / slug
         if target.exists():
             shutil.rmtree(target)
         target.parent.mkdir(parents=True, exist_ok=True)
-        if course["status"] == "published":
+        if course["status"] == "published" and source in {"basis", "projekt"}:
             origin = out / source
             if not (origin / "index.html").is_file():
                 raise FileNotFoundError(origin / "index.html")
@@ -166,6 +148,9 @@ def build(out: Path) -> None:
                                      theme_css(course) + "</style></head>",
                                      content, count=1, flags=re.I)
                 file.write_text(content, encoding="utf-8")
+        elif course["status"] == "published" and source == "generated":
+            target.mkdir(parents=True, exist_ok=True)
+            (target / "index.html").write_text(generic_page(course, ROOT), encoding="utf-8")
         else:
             target.mkdir(parents=True, exist_ok=True)
             (target / "index.html").write_text(planned_page(course), encoding="utf-8")

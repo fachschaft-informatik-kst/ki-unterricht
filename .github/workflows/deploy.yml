@@ -64,7 +64,11 @@ jobs:
                 worker=true
                 editor_content_only=false
                 ;;
-              kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|shared/course-sites.json|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
+              shared/course-sites.json)
+                site=true
+                worker=true
+                ;;
+              kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|lehrperson/*/*.md|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
                 # Editor-written course sources and teacher notes never alter
                 # the notebook runtime. Still rebuild and publish the site.
                 site=true
@@ -182,6 +186,7 @@ jobs:
           node tests/check_fotostudio_inline.cjs
           node tests/check_course_model.mjs
           node tests/check_glossary_model.mjs
+          python tests/check_course_registry.py
       - name: Install Playwright test runner
         if: steps.scope.outputs.site_changed == 'true'
         id: playwright

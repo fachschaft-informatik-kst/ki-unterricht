@@ -14,7 +14,7 @@ Kapitel und neue Unterkapitel in den bestehenden Unterrichtsbereichen. Er kann:
 - alles als **einen atomaren Commit auf einem neuen Branch und Pull Request** einreichen.
 
 Eine neue Doppellektion erzeugt einen Themenordner mit `planung.json`, erstem
-Kapitel und `materialien.md` und ergänzt `kursseiten/manifest.json`. Navigation,
+Kapitel und `materialien.md` und ergänzt das **Manifest des ausgewählten Kurses**. Navigation,
 Übersichtskarte und Lehrpersonenübersichten entstehen beim Build automatisch.
 Über «Unterrichtsplan bearbeiten» erscheint ein **AVIVA-Formular für das ausgewählte
 Thema**, bei mehreren Lektionen mit Auswahlfeld. Lernziele, Leitfrage, fünf Phasen,
@@ -34,10 +34,12 @@ Merge nach \`main\` löst die Veröffentlichung über GitHub Pages aus. Es gibt
 Die bisherige Kursseite ist weiter rein statisch; es gibt kein Backend für
 Schülerdaten und keine Cloud-Speicherung von Schülerantworten.
 
-## Glossar für beide Klassen
+## Glossar der gewählten Lehrperson
 
-Unter **«Glossar bearbeiten»** lässt sich die zentrale Datei `kursseiten/glossar.json`
-über strukturierte Felder ohne JSON-Kenntnisse bearbeiten. Die Erklärungen für
+Für BOK lässt sich unter **«Glossar bearbeiten»** das gemeinsame
+`kursseiten/glossar.json` über strukturierte Felder bearbeiten.
+IRN und neue Lehrpersonen besitzen dagegen eigene Markdown-Glossare,
+die sie in ihrer Kursauswahl unabhängig bearbeiten. Die Erklärungen für
 **1. Kurzgymnasium** und **4. Kurzgymnasium** bleiben getrennt; Fachbegriff,
 Beispiel, Leitfrage und aufklappbare Kurzantwort sind aktuell gemeinsam. Die
 Vorschau lässt sich zwischen blauem Basis-Kurs und grünem vertieftem Kurs
@@ -125,7 +127,7 @@ angelegt, und GitHub-Pages-Seiten können keine geheimen OAuth-Schlüssel speich
 
 ## Redaktionsablauf
 
-1. Im Admin-Worker via GitHub anmelden.
+1. Im Admin-Worker via GitHub anmelden und die richtige **Lehrperson und Klassenstufe** auswählen.
 2. Links einen Bereich und ein Kapitel auswählen, Text im Quellfeld ändern.
 3. Bei Bedarf **Überschrift**, **Antwortfeld** oder **Bild** am Cursor einfügen.
    Bei älteren Dateien auf die bestehende HTML-Struktur achten.
@@ -137,6 +139,16 @@ angelegt, und GitHub-Pages-Seiten können keine geheimen OAuth-Schlüssel speich
 GitHub bleibt die **einzige Quelle**. Konflikte werden vor dem Schreiben gegen
 den aktuellen \`main\`-Commit geprüft. Bei parallelen Änderungen erscheint
 eine Fehlermeldung statt eines stillen Überschreibens.
+
+## Weitere Lehrperson hinzufügen
+
+`python scripts/add_teacher_course.py MAI 1 "KI entdecken"` erzeugt einen
+Kursentwurf mit eigenem Manifest, AVIVA-Platzhaltern, Aufgaben, Materialkoffer,
+Musterlösungen und Glossar. Der Editor lädt neue Kursprofile aus
+`shared/course-sites.json`; es ist kein zusätzlicher Worker nötig. Die
+Freigabe eines generischen Schülerkurses erfolgt nach Prüfung über
+`source: generated` und `status: published`.
+Siehe [Mehrkurs-Deployment](MULTIKURS-DEPLOYMENT.md).
 
 ## Einschränkungen und Sicherheit
 
