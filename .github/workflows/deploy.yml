@@ -190,6 +190,7 @@ jobs:
           node tests/check_course_model.mjs
           node tests/check_glossary_model.mjs
           python tests/check_course_registry.py
+          python tests/check_course_snapshots.py
       - name: Install Playwright test runner
         if: steps.scope.outputs.site_changed == 'true'
         id: playwright
