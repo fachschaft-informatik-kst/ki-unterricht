@@ -4,6 +4,8 @@ Dieses Experiment ist **kein Bestandteil des veröffentlichten Unterrichts**. Es
 
 ## Prototyp bauen
 
+Für das Xeus-WebAssembly-Kernelpaket muss **micromamba** installiert und auf `PATH` sein (siehe auch GitHub-Workflow). Ohne micromamba kann JupyterLite die Emscripten-/Conda-Umgebung nicht erzeugen.
+
 In einer separaten Python-3.12-Umgebung:
 
 ```sh
