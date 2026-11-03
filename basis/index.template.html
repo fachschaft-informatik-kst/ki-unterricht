@@ -24,18 +24,36 @@
 <div class="crumb"><span><img alt="Logo KST" class="school-logo" height="22" src="grafiken/kst_logo.png" width="44"/>Kantonsschule Stadelhofen</span><span>Informatik</span><span>Künstliche Intelligenz</span></div>
 <!-- COURSE -->
 <div class="basis-transfer" id="basis-sicherung" tabindex="-1">
-<h2>Notizen &amp; Projekt</h2>
-<p>Hier könnt ihr eure Antworten, Reflexionen, bearbeiteten Notebooks und die Fotostudio-JSON gemeinsam als ZIP sichern und später wiederherstellen. Speichert die Originalfotos separat.</p>
-<div class="basis-transfer-identity">
-  <label class="field answer"><span>Namen für das Lernjournal</span><input type="text" data-basis-answer="basis-journal-namen" maxlength="200" placeholder="Vorname Nachname · Vorname Nachname" autocomplete="off"></label>
-  <label class="field answer"><span>Klasse</span><input type="text" data-basis-answer="basis-journal-klasse" maxlength="100" placeholder="z. B. 1a" autocomplete="off"></label>
-</div>
-<p class="small">Für die Abgabe: Namen und Klasse eintragen, ZIP herunterladen und darin <strong>Journal.html</strong> prüfen. Das ZIP enthält alle ausgefüllten Antworten inklusive Auswahlaufgaben. Es wird nicht automatisch eingereicht.</p>
-<div class="basis-transfer-actions">
-<button class="btn compact" id="basis-download" type="button">Meine Textantworten als JSON sichern</button>
-<div id="basis-backup-controls" class="basis-backup-controls"></div>
-<p id="basis-backup-status" class="status" role="status">Noch keine ZIP-Sicherung erstellt.</p>
-</div>
+  <span class="section-label">Sichern · Wiederherstellen · Abgeben</span>
+  <h2>Deinen Kursstand sichern</h2>
+  <p>Eine <strong>ZIP-Datei</strong> sichert eure ausgefüllten Text- und Auswahlaufgaben, Reflexionen, gespeicherten Notebooks mit Ausgaben und die hinzugefügte Fotostudio-JSON. Ihr könnt sie später auf einem anderen Gerät wiederherstellen und auch für die Abgabe verwenden.</p>
+  <div class="basis-transfer-flow">
+    <section class="basis-transfer-step">
+      <h3><span class="basis-step-number">1</span> Namen und Klasse eintragen</h3>
+      <div class="basis-transfer-identity">
+        <label class="field answer"><span>Namen für das Lernjournal</span><input type="text" data-basis-answer="basis-journal-namen" maxlength="200" placeholder="Vorname Nachname · Vorname Nachname" autocomplete="off"></label>
+        <label class="field answer"><span>Klasse</span><input type="text" data-basis-answer="basis-journal-klasse" maxlength="100" placeholder="z. B. 1a" autocomplete="off"></label>
+      </div>
+    </section>
+    <section class="basis-transfer-step">
+      <h3><span class="basis-step-number">2</span> Kursstand als ZIP sichern oder laden</h3>
+      <p class="small muted">Wenn ihr das Fotostudio verwendet habt, fügt zuerst die dort heruntergeladene JSON hinzu. Alle ausgefüllten Aufgaben werden automatisch mitgesichert. Originalfotos zusätzlich separat aufbewahren.</p>
+      <div id="basis-backup-controls" class="basis-backup-controls"></div>
+      <p id="basis-backup-status" class="status" role="status" aria-live="polite">Noch keine ZIP-Sicherung erstellt.</p>
+      <p class="small muted">Eine Wiederherstellung ersetzt die aktuellen Antworten und Notebookstände auf diesem Gerät. Bei Bedarf vorher eine ZIP sichern.</p>
+    </section>
+    <section class="basis-transfer-step">
+      <h3><span class="basis-step-number">3</span> Für die Abgabe prüfen</h3>
+      <p>Die ZIP enthält <strong>Journal.html</strong> mit euren Antworten (auch Auswahlaufgaben). Öffnet diese Datei kurz und reicht dann die <strong>ZIP über den vereinbarten Abgabekanal</strong> ein. Der Download allein reicht nicht als Abgabe.</p>
+    </section>
+  </div>
+  <details class="basis-transfer-legacy">
+    <summary>Nur ältere Textsicherung als JSON (optional)</summary>
+    <div class="detail-body">
+      <p class="small muted">Diese alte Funktion enthält <strong>nur Textantworten</strong> – keine Notebookstände oder Fotodaten. Für eine vollständige Sicherung die ZIP oben verwenden.</p>
+      <button class="btn compact" id="basis-download" type="button">Textantworten als JSON herunterladen</button>
+    </div>
+  </details>
 </div>
 <footer class="footer"><details><summary>Quellen &amp; Hinweise für die Lehrperson</summary><div class="detail-body">
 <div class="actions"><button class="btn js-only" id="print-page" type="button">Unterrichtsübersicht drucken / als PDF sichern</button><a class="btn" href="#basis-start">Nach oben ↑</a></div>
