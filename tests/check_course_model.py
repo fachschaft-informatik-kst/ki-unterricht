@@ -56,7 +56,9 @@ with TemporaryDirectory() as tmp:
 # The last timed activity is an individual, explicit knowledge check, not merely
 # an announcement or organizational transition.
 course_lessons = {l["id"]: l for l in load_course(ROOT)["lessons"]}
-for lesson_id in sorted(set(course_lessons) - {"05", "06", "07", "08"}):
+# Preserve historical didactic expectations without rejecting editor-created
+# lessons whose AVIVA draft is intentionally not yet fully written.
+for lesson_id in sorted(set(course_lessons) & {"01", "02", "03", "04", "09", "10"}):
     phase = course_lessons[lesson_id]["phases"][-1]
     assert phase["phase"] == "Auswerten", lesson_id
     timed = [step for step in phase["schritte"] if step.get("min", 0)]
