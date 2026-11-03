@@ -22,6 +22,16 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  assert.equal(window.KINotebookTimings.length,1);
  assert.equal(frame.dataset.loadMs,String(result.milliseconds));
  assert.equal(run.finishNotebookTiming(frame),undefined,'Do not record twice');
+ run.startNotebookTiming(frame,'ready.ipynb','warmup');
+ const warmed=run.finishNotebookTiming(frame);
+ assert.equal(warmed.visibleWaitMs,null,'Background-only warmup has no visible click yet');
+ run.openedNotebook(frame,'other.ipynb');
+ assert.equal(warmed.visibleWaitMs,null,'Opening a different notebook cannot claim warmed session');
+ run.openedNotebook(frame,'ready.ipynb');
+ assert.equal(warmed.visibleWaitMs,0,'Opening an already-ready notebook has no visible wait');
+ run.startNotebookTiming(frame,'direct.ipynb','open');
+ const direct=run.finishNotebookTiming(frame);
+ assert(Number.isInteger(direct.visibleWaitMs),'Direct click records a visible wait even if mounting happens after the click');
  assert.deepEqual(run.notebookTimingSummary().warmup.count,1);
  for(let i=0;i<60;i++){run.startNotebookTiming(frame,'lab.ipynb','open');run.finishNotebookTiming(frame);}
  assert.equal(window.KINotebookTimings.length,50,'Timing history must stay bounded');
