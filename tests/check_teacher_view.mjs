@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {validatePlan,validateManifest} from "../shared/course-model.js";
 import {readFileSync} from "node:fs";
-import {answerRows,materialForLesson,questionsFromSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet} from "../admin-worker/src/teacher.mjs";
+import {answerRows,materialForLesson,questionsFromSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet,parseTeacher} from "../admin-worker/src/teacher.mjs";
 const fields=[
   "## DL 1 · Was ist KI?","","| Antwortfeld | Musterantwort |","|---|---|",
   "| "+String.fromCharCode(96)+"regeln_oder_daten"+String.fromCharCode(96)+" | Regelbasiert ist nicht dasselbe wie lernend. |",
@@ -92,7 +92,16 @@ assert.match(teacherThemeStylesheet(options,"irn/1-klasse"),/--accent:#69419b;--
 assert.match(teacherThemeStylesheet(options,"irn/4-klasse"),/--accent:#9a481d;--soft:#[a-f0-9]{6}/);
 assert(teacherShell({course:"irn/1-klasse",kind:"planung"},options).includes('data-grade="1"'));
 assert(teacherShell({course:"irn/4-klasse",kind:"materialien"},options).includes('IRN'));
-assert.throws(()=>normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES.slice(0,2)}),/vier/);
+const subset=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES.slice(0,2)});
+assert.equal(subset.length,2,"A registry may contain any number of valid teacher courses");
+const extra={...DEFAULT_COURSES[0],id:"mai-1-klasse",teacher:"MAI",slug:"mai/1-klasse",
+  editorKey:"mai-1-klasse",manifest:"kursseiten/mai-1-manifest.json",
+  sectionPrefix:"mai-1-",notebookPrefix:"mai1_",source:null,status:"planned",
+  teacherFiles:{solutions:"lehrperson/mai-1/musterloesungen.md",
+    fields:"lehrperson/mai-1/musterloesungen-felder.md",
+    glossary:"lehrperson/mai-1/glossar.md"}};
+assert.equal(normalizeTeacherCourses({version:1,courses:[...DEFAULT_COURSES,extra]}).length,5);
+assert.deepEqual(parseTeacher("/teacher/mai/1-klasse/planung"),{course:"mai/1-klasse",kind:"planung"});
 const malicious=structuredClone(DEFAULT_COURSES);
 malicious[0].theme.accent="red; background:url(https://example.org/steal)";
 assert.throws(()=>normalizeTeacherCourses({version:1,courses:malicious}),/ungültig/);

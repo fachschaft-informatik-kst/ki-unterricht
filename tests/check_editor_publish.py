@@ -13,12 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from course_model import load_course
 
-MANIFESTS = (
-    "kursseiten/manifest.json",
-    "kursseiten/basis-manifest.json",
-    "kursseiten/irn-1-manifest.json",
-    "kursseiten/irn-4-manifest.json",
-)
+from course_registry import load_registry
+MANIFESTS = tuple(course["manifest"] for course in load_registry(ROOT))
 
 
 def ids_are_unique(soup, attr, selector=None):

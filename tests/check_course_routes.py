@@ -13,13 +13,13 @@ assert add_path_depth("https://example.org/a/../b") == "https://example.org/a/..
 ROOT = Path(__file__).resolve().parents[1]
 dist = ROOT / "dist"
 manifest = json.loads((ROOT / "shared/course-sites.json").read_text(encoding="utf-8"))
-assert len(manifest["courses"]) == 4
+assert len(manifest["courses"]) >= 4
 assert len({c["id"] for c in manifest["courses"]}) == 4
 assert len({(c["teacher"], c["grade"]) for c in manifest["courses"]}) == 4
 expected = {"bok/1-klasse", "bok/4-klasse", "irn/1-klasse", "irn/4-klasse"}
-assert {row["slug"] for row in manifest["courses"]} == expected
+assert expected <= {row["slug"] for row in manifest["courses"]}
 overview = (dist / "kurse.html").read_text(encoding="utf-8")
-for slug in expected:
+for slug in {row["slug"] for row in manifest["courses"]}:
     assert (dist / slug / "index.html").is_file(), slug
     assert f'href="{slug}/"' in overview
 for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
