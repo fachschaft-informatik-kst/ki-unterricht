@@ -218,7 +218,7 @@ async function notebookUploadPayload(name){
 }
 async function snapshotCurrent(){
  await notebookUpdates;
- if(!activeName)return;
+ if(!activeName||(!activeOwner&&frame.dataset.startKind==='warmup'))return;
  if(frame.dataset.ready!=='yes'){if(frame.dataset.startKind==='warmup')return;throw Error('Das Notebook ist noch nicht bereit. Bitte warten oder erneut öffnen.');}
  await captureSnapshot(activeName,await request(frame,'snapshot'));
 }
