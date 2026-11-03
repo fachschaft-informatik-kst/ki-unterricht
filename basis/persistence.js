@@ -119,7 +119,7 @@ async function openNotebook(name,view,force=false,host=null){
  // The chapter launch button remains the dialog's focus-return target.
  try { sessionStorage.setItem('ki-last-opened-bok-1',name); } catch {}
  owner=view||owner;heading.textContent=notebookTitles[name]||'Experiment';
- openedNotebook(frame);
+ openedNotebook(frame,name);
  if(current===name&&!force&&frame.getAttribute('src')&&loader.dataset.state!=='error'){
   // Reuse the active/warming iframe even when Python is still starting.
   overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);
