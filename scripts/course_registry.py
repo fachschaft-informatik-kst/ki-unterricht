@@ -1,7 +1,7 @@
-"""Shared course ownership contract for routes, editors and future teachers.
+"""Authoritative ownership and source isolation for teacher courses.
 
-Existing BOK paths are intentionally kept intact: they back local student answers,
-notebooks, links and old ZIP files. All new courses use a unique teacher/grade prefix.
+Each course owns its complete `kurse/<teacher>/<grade>-klasse` source tree.
+Section IDs may match across courses because manifests and files do not overlap.
 """
 from __future__ import annotations
 
@@ -12,130 +12,94 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = "shared/course-sites.json"
 IDENT = re.compile(r"[a-z][a-z0-9-]*")
-SECTION = re.compile(r"[a-z][a-z0-9-]*")
 ACCENT = re.compile(r"#[0-9a-fA-F]{6}")
-
-LEGACY = {
-    "bok/1-klasse": ("basis", "kursseiten/basis-manifest.json", "basis-", "basis_"),
-    "bok/4-klasse": ("vertiefung", "kursseiten/manifest.json", "", ""),
-    "irn/1-klasse": ("irn1", "kursseiten/irn-1-manifest.json", "irn-1-", "irn1_"),
-    "irn/4-klasse": ("irn4", "kursseiten/irn-4-manifest.json", "irn-4-", "irn4_"),
-}
 
 
 def validate_registry(courses: list[dict], root: Path = ROOT, *, check_files: bool = True) -> list[dict]:
-    """Refuse ambiguous ownership, path escapes or cross-course sections."""
     if not isinstance(courses, list) or not courses:
         raise ValueError("Mindestens ein Kurs erforderlich.")
-    seen_ids, seen_slugs, seen_keys, seen_manifests, seen_sections = (set() for _ in range(5))
+    seen_ids, seen_slugs, seen_keys, seen_manifests, seen_roots = (set() for _ in range(5))
     for course in courses:
         if not isinstance(course, dict):
             raise ValueError("Ungültiger Kursdatensatz.")
-        teacher = course.get("teacher")
-        grade = course.get("grade")
-        if (not isinstance(teacher, str) or not re.fullmatch(r"[A-Z][A-Z0-9]{1,9}", teacher)
-                or type(grade) is not int or grade < 1 or grade > 20):
+        teacher, grade = course.get("teacher"), course.get("grade")
+        if not isinstance(teacher, str) or not re.fullmatch(r"[A-Z][A-Z0-9]{1,9}", teacher) or type(grade) is not int or not 1 <= grade <= 20:
             raise ValueError(f"Ungültige Lehrperson oder Klasse: {teacher}/{grade}")
         slug = f"{teacher.lower()}/{grade}-klasse"
         ident = f"{teacher.lower()}-{grade}-klasse"
-        if course.get("slug") != slug or course.get("id") != ident:
-            raise ValueError(f"Kursidentität und URL passen nicht: {slug}")
-        key = course.get("editorKey")
-        if not isinstance(key, str) or not IDENT.fullmatch(key):
-            raise ValueError(f"Editor-Kennung ungültig: {slug}")
-        if ident in seen_ids or slug in seen_slugs or key in seen_keys:
-            raise ValueError(f"Doppelter Kurs oder Editor-Schlüssel: {slug}")
-        seen_ids.add(ident); seen_slugs.add(slug); seen_keys.add(key)
-        name = course.get("name")
-        if not isinstance(name, str) or not name.strip() or len(name) > 80:
+        editor = course.get("editorKey")
+        if course.get("slug") != slug or course.get("id") != ident or not isinstance(editor, str) or not IDENT.fullmatch(editor):
+            raise ValueError(f"Kursidentität oder Editor-Kennung ungültig: {slug}")
+        base = f"kurse/{slug}"
+        manifest = f"{base}/kursseiten/manifest.json"
+        if course.get("courseRoot") != base or course.get("manifest") != manifest:
+            raise ValueError(f"Manifest muss zum Kursordner gehören: {slug}")
+        if any(item in (seen_ids if key == "id" else seen_slugs if key == "slug" else seen_keys if key == "editorKey" else seen_manifests if key == "manifest" else seen_roots)
+               for key, item in (("id", ident), ("slug", slug), ("editorKey", editor), ("manifest", manifest), ("root", base))):
+            raise ValueError(f"Doppelter Kurs: {slug}")
+        seen_ids.add(ident); seen_slugs.add(slug); seen_keys.add(editor)
+        seen_manifests.add(manifest); seen_roots.add(base)
+        if not isinstance(course.get("name"), str) or not course["name"].strip() or len(course["name"]) > 80:
             raise ValueError(f"Kurstitel ungültig: {slug}")
         if not ACCENT.fullmatch(course.get("theme", {}).get("accent", "")):
             raise ValueError(f"Kursfarbe ungültig: {slug}")
-        source = course.get("source")
-        status = course.get("status")
-        if (status not in {"planned", "published"}
-                or (status == "planned" and source is not None)
-                or (status == "published" and source not in {"basis", "projekt", "generated"})):
+        status, source = course.get("status"), course.get("source")
+        if status not in {"planned", "published"} or (
+            status == "planned" and source is not None
+        ) or (status == "published" and source not in {"basis", "projekt", "generated"}):
             raise ValueError(f"Veröffentlichungsstatus ungültig: {slug}")
-        manifest = course.get("manifest")
-        if not isinstance(manifest, str) or not manifest.startswith("kursseiten/") or not manifest.endswith(".json"):
-            raise ValueError(f"Manifestpfad ungültig: {slug}")
-        prefix = course.get("sectionPrefix")
-        notebook = course.get("notebookPrefix")
-        legacy = LEGACY.get(slug)
-        if legacy:
-            if (key, manifest, prefix, notebook) != legacy:
-                raise ValueError(f"Bestehende Kursquellen dürfen nicht vertauscht werden: {slug}")
-            if source not in ({None, "basis"} if slug == "bok/1-klasse" else
-                              {None, "projekt"} if slug == "bok/4-klasse" else {None}):
-                raise ValueError(f"Legacy-Quellroute ungültig: {slug}")
+        if teacher == "BOK" and grade in (1, 4) and status == "published" and source != ("basis" if grade == 1 else "projekt"):
+            raise ValueError(f"BOK-Quellroute ungültig: {slug}")
+        # A template can use historical section and notebook IDs without leaking data
+        # because its owning file paths and answer stores are isolated by course.
+        if grade in (1, 4):
+            expected_section = "basis-" if grade == 1 else ""
+            expected_notebook = "basis_" if grade == 1 else ""
+            if (course.get("sectionPrefix"), course.get("notebookPrefix")) != (expected_section, expected_notebook):
+                raise ValueError(f"Vorlagen-Namensraum ungültig: {slug}")
         else:
-            expected_prefix = f"{teacher.lower()}-{grade}-"
-            if (manifest != f"kursseiten/{teacher.lower()}-{grade}-manifest.json"
-                    or prefix != expected_prefix
-                    or notebook != f"{teacher.lower()}{grade}_"
-                    or source not in {None, "generated"}):
-                raise ValueError(f"Neue Kurse benötigen unabhängige Namensräume: {slug}")
-        if manifest in seen_manifests:
-            raise ValueError(f"Manifest wird von mehreren Kursen verwendet: {manifest}")
-        seen_manifests.add(manifest)
+            raise ValueError(f"Keine Unterrichtsvorlage für Klasse {grade}.")
         files = course.get("teacherFiles")
-        if not isinstance(files, dict) or not all(k in files for k in ("solutions", "fields", "glossary")):
-            raise ValueError(f"Lehrpersonenmaterial unvollständig: {slug}")
-        for kind, path in files.items():
-            if kind not in {"solutions", "fields", "glossary", "materialsIntro"}:
-                raise ValueError(f"Unbekannter Materialtyp: {kind}")
-            if not isinstance(path, str) or ".." in path or not (
-                    (path.startswith("lehrperson/") and path.endswith(".md"))
-                    or (kind == "glossary" and path == "kursseiten/glossar.json")):
-                raise ValueError(f"Ungültiger Lehrpersonenpfad: {path}")
-            if (not legacy or teacher == "IRN") and not path.startswith(
-                    f"lehrperson/{teacher.lower()}-{grade}/"):
-                raise ValueError(f"Fremder Lehrpersonenordner: {path}")
-            if teacher == "BOK" and legacy:
-                allowed = {
-                    "solutions": "lehrperson/musterloesungen.md",
-                    "fields": f"lehrperson/musterloesungen-felder-{grade}-klasse.md",
-                    "glossary": "kursseiten/glossar.json",
-                    "materialsIntro": "lehrperson/materialien.md",
-                }
-                if path != allowed[kind] or (kind == "materialsIntro" and grade != 4):
-                    raise ValueError(f"BOK-Material gehört zum falschen Kurs: {path}")
-            if check_files and not (root / path).is_file():
-                raise ValueError(f"Materialdatei fehlt: {path}")
+        expected_files = {
+            "solutions": f"{base}/lehrperson/musterloesungen.md",
+            "fields": f"{base}/lehrperson/musterloesungen-felder.md",
+            "glossary": f"{base}/kursseiten/glossar.json",
+        }
+        if grade == 4:
+            expected_files["materialsIntro"] = f"{base}/lehrperson/materialien.md"
+        if files != expected_files:
+            raise ValueError(f"Lehrpersonenmaterial muss vollständig und kurslokal sein: {slug}")
         if check_files:
-            manifest_file = root / manifest
-            if not manifest_file.is_file():
+            for path in files.values():
+                if not (root / path).is_file():
+                    raise ValueError(f"Materialdatei fehlt: {path}")
+            source_file = root / manifest
+            if not source_file.is_file():
                 raise ValueError(f"Kursmanifest fehlt: {manifest}")
-            data = json.loads(manifest_file.read_text(encoding="utf-8"))
-            sections = data.get("sections")
+            sections = json.loads(source_file.read_text(encoding="utf-8")).get("sections")
             if not isinstance(sections, list) or not sections:
                 raise ValueError(f"Unterrichtsbereiche fehlen: {manifest}")
+            local_ids = set()
             for section in sections:
                 sid = section.get("id", "") if isinstance(section, dict) else ""
-                if not SECTION.fullmatch(sid) or (prefix and not sid.startswith(prefix)):
-                    raise ValueError(f"Fremder Unterrichtsbereich in {manifest}: {sid}")
-                if sid in seen_sections:
-                    raise ValueError(f"Unterrichtsbereich wird von mehreren Kursen verwendet: {sid}")
-                seen_sections.add(sid)
-                folder = root / "kursseiten" / sid
+                if not IDENT.fullmatch(sid) or sid in local_ids or (course["sectionPrefix"] and not sid.startswith(course["sectionPrefix"])):
+                    raise ValueError(f"Bereich ungültig oder doppelt in {manifest}: {sid}")
+                local_ids.add(sid)
+                folder = root / base / "kursseiten" / sid
                 if not list(folder.glob("[0-9][0-9][0-9]-*.md")):
                     raise ValueError(f"Kapitel fehlen: {folder}")
-                if section.get("teaching") and not (
-                        (folder / "planung.json").is_file() and (folder / "materialien.md").is_file()):
-                    raise ValueError(f"AVIVA/Materialkoffer fehlen: {sid}")
+                if section.get("teaching") and not ((folder / "planung.json").is_file() and (folder / "materialien.md").is_file()):
+                    raise ValueError(f"AVIVA oder Materialkoffer fehlen: {sid}")
     return courses
 
 
 def load_registry(root: Path = ROOT, *, check_files: bool = True) -> list[dict]:
-    path = root / REGISTRY
-    data = json.loads(path.read_text(encoding="utf-8"))
+    data = json.loads((root / REGISTRY).read_text(encoding="utf-8"))
     if data.get("version") != 1:
         raise ValueError("Unbekannte Kursregister-Version.")
     return validate_registry(data.get("courses"), root, check_files=check_files)
 
 
 if __name__ == "__main__":
-    courses = load_registry()
-    for course in courses:
+    for course in load_registry():
         print(f"PASS {course['slug']} → {course['manifest']}")
