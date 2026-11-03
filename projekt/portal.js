@@ -1,4 +1,5 @@
 import {bindLabFullscreen,bindNotebookDialog} from './lab-fullscreen.js';
+import {startNotebookTiming,markNotebookTiming,openedNotebook,finishNotebookTiming} from './notebook-performance.js';
 import {makeZip,readZip,escapeHTML as esc} from './archive.js';
 import experiments from './experiments.json' with {type:'json'};
 const $=id=>document.getElementById(id),all=s=>[...document.querySelectorAll(s)];
@@ -148,13 +149,12 @@ let activeName='',activeOwner='',switching=false,initializingFrame=false;
 function startNotebookFrame(name,saved,kind){
  frame.dataset.ready='no';delete frame.dataset.restored;
  frame.dataset.startKind=kind;frame.dataset.startMs=String(performance.now());
+ startNotebookTiming(frame,name,kind);
  notebookLoading('loading',saved?'Gesicherten Notebook-Stand laden …':'Python und interaktive Übungen werden vorbereitet …');
  frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
 }
 function trackNotebookReady(name){
- const milliseconds=Math.round(performance.now()-Number(frame.dataset.startMs||performance.now()));
- (window.KINotebookTimings ||= []).push({name,kind:frame.dataset.startKind||'open',milliseconds});
- frame.dataset.loadMs=String(milliseconds);
+ finishNotebookTiming(frame);
 }
 function refreshNotebookFrame(){
  requestAnimationFrame(()=>{try{frame.contentWindow?.dispatchEvent(new Event('resize'));}catch{}});
@@ -240,6 +240,7 @@ async function showNotebook(name,owner,scroll=true,trigger=null){
   }
   try { sessionStorage.setItem('ki-last-opened-bok-4',name); } catch {}
   activeOwner=owner;$('project-lab-title').textContent=names[name];
+  openedNotebook(frame);
   overlay.open(trigger || document.activeElement);visibility();refreshNotebookFrame();
   lab.querySelector('details').hidden=name!==projectName;
   lab.querySelector('a[href="#journal"]').hidden=name!==projectName;
@@ -278,6 +279,7 @@ window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1')return;
  const data=event.data,name=activeName;
  if(data.path!=='portal/'+name)return;
+ if(data.type==='milestone'){markNotebookTiming(frame,data.phase);return;}
  if(data.id&&pending.has(data.id)){const p=pending.get(data.id);clearTimeout(p.timer);pending.delete(data.id);data.type==='error'?p.reject(Error(data.error)):p.resolve(data);return;}
  if(data.type==='ready'&&!initializingFrame&&frame.dataset.ready!=='yes'){
   if(data.error){frame.dataset.ready='error';$('project-lab-status').textContent=data.error;notebookLoading('error',data.error);return;}

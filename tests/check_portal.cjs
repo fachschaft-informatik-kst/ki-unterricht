@@ -63,12 +63,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('#fremdmodell details.kapitel').count(),5,'DL 8 must have five chapters');
   assert(await p.locator('#fremdmodell #dl8-warum').evaluate(e=>e.open));
   await p.locator('#fremdmodell .dl8-quicklinks a[href="#reproduktion"]').click();
-  assert(await p.locator('#fremdmodell #reproduktion').evaluate(e=>e.open),'Quicklink opens reproduction chapter');
+  await p.waitForFunction(()=>document.querySelector('#fremdmodell #reproduktion')?.open,null,{timeout:10000}); // hashchange opens details asynchronously
   assert.equal(await p.locator('#fremdmodell #reproduktion').count(),1);
   assert.equal(await p.locator('#fremdmodell #fremdtest').count(),1);
   await p.locator('#fremdmodell textarea[data-journal="reproduktion"]').fill('Prüfsumme gleich; V1 A: 50 %, B: 75 %.');
   await p.locator('#fremdmodell .dl8-quicklinks a[href="#fremd-reflexion"]').click();
-  assert(await p.locator('#fremdmodell #dl8-abschluss').evaluate(e=>e.open),'Quicklink opens submission chapter');
+  await p.waitForFunction(()=>document.querySelector('#fremdmodell #dl8-abschluss')?.open,null,{timeout:10000}); // same navigation contract
   await p.locator('[data-answer="fremd_rueckmeldung"]').fill('Andere Beleuchtung gezielt prüfen.');
   for(const n of [1,2]){
     await p.locator('[data-answer="fremd_name_'+n+'"]').fill('Testperson '+n);
@@ -481,7 +481,11 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 
     await dismissNotebook();await p.locator('.nav a[href="#projekt"]').click();await p.locator('#projekt .project-start-guide a[href="#versuch"]').click();await p.locator('#projekt-4 [data-lab="ki_lernlabor.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_lernlabor.ipynb',null,{timeout:180000});
-    assert(/\[\d+\]/.test(await lessonCells.nth(2).locator('.jp-InputPrompt').innerText()));
+    const labCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
+    assert((await p.frameLocator('#project-frame').locator('.ki-autostart-status').innerText()).includes('Bereit'),
+      'The lightweight trusted setup must complete before the notebook reports ready');
+    assert(!/\[\d+\]/.test(await labCells.nth(2).locator('.jp-InputPrompt').innerText()),
+      'The learning-lab training must wait until the student executes its cell');
 
     await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/ki_tandemprojekt.ipynb',null,{timeout:180000});assert.equal(await p.locator('#project-frame').count(),1);
     assert((await cells.nth(5).innerText()).includes('Abschlusstest'));

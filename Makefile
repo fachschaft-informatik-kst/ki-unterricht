@@ -97,6 +97,8 @@ test: build
 	node tests/check_archive.cjs
 	node tests/check_notebook_snapshot.cjs
 	node tests/check_notebook_warmup.cjs
+	node tests/check_notebook_start_budget.cjs
+	node tests/check_notebook_performance.cjs
 	node tests/check_admin.mjs
 	PYTHON=$(VENV_PY) node tests/check_course_model.mjs
 	@echo 'Lokale Tests bestanden. Echte Notebook- und ZIP-Browsertests laufen in GitHub Actions.'
