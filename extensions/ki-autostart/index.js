@@ -188,6 +188,7 @@ del _ki_saved, _ki_item, _ki_widget`;
         // Custom cells, imported tags and project training are always manual.
         const unchanged = starts.length && cells.every((c, i) => c?.model.type === 'code' && c.model.sharedModel.getSource() === source(starts[i]));
         if (unchanged) {
+          embed?.stage('autostart');
           for (const cell of cells) {
             if (panel.isDisposed) return;
             const reply = await CodeCell.execute(cell, panel.sessionContext);
@@ -196,6 +197,7 @@ del _ki_saved, _ki_item, _ki_widget`;
             }
           }
         }
+        if (unchanged) embed?.stage('cells');
         status.node.textContent = unchanged ? '✓ Bereit' : 'Geänderte Vorbereitung: Zellen selbst ausführen';
         embed?.initialized(panel, true);
         status.node.title = unchanged ? 'Startzellen ausgeführt. Nach einem manuellen Kernel-Neustart die Zellen erneut ausführen.' : 'Die gespeicherte Vorbereitung weicht von der Vorlage ab. Keine Zelle wurde automatisch ausgeführt.';
