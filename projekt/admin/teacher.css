@@ -18,10 +18,6 @@ header{background:white;border-bottom:1px solid var(--line)}.header-inner{max-wi
 .lesson-name small{font-size:.68rem;color:var(--muted)}.lesson-name strong{font-size:.86rem;font-weight:660}
 main{min-width:0;scroll-margin-top:18px}.lesson-heading{margin:0 0 19px;padding:8px 0 2px}.lesson-kicker,.section-label{color:var(--accent);text-transform:uppercase;letter-spacing:.08em;font-weight:800;font-size:.72rem;margin:0 0 6px}
 .lesson-heading h2{font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.2;letter-spacing:-.035em;margin:0}
-.lesson-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.teacher-edit-action{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 15px;border-radius:9px;background:var(--accent);color:white;text-decoration:none;font-size:.88rem;font-weight:750;white-space:nowrap}
-.teacher-edit-action:hover{filter:brightness(.92);text-decoration:none}
-.teacher-edit-action:focus-visible{outline:3px solid #c77a24;outline-offset:3px}
 .resource{padding:clamp(18px,3vw,30px);margin:0 0 18px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow-wrap:anywhere}
 .resource h1{font-size:1.7rem}.resource h2{font-size:1.4rem}.resource h3{font-size:1.1rem}.subheading{font-size:1.15rem;margin:30px 0 12px}
 .lesson-lead,.lesson-question,.lesson-output{margin:12px 0;padding:13px 16px;border-radius:9px;background:var(--soft)}
@@ -55,7 +51,7 @@ footer{max-width:1450px;margin:auto;padding:18px clamp(18px,3vw,42px) 35px;borde
 button{font:inherit;cursor:pointer;border:1px solid var(--line);border-radius:7px;padding:6px 12px;background:white}
 :focus-visible{outline:3px solid #c77a24;outline-offset:3px}
 @media(max-width:850px){.teacher-layout{grid-template-columns:minmax(0,1fr);gap:13px}.lesson-sidebar{position:static;max-height:none;padding:14px}.lesson-nav{display:flex;flex-direction:row;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:6px}.lesson-link{flex:none;width:185px;scroll-snap-align:start}.lesson-name strong{font-size:.8rem}.area-nav a{padding:8px 11px}}
-@media print{.teacher-edit-action{display:none!important}body{background:#fff}.area-nav,.lesson-sidebar,footer{display:none}.teacher-layout{display:block;padding:0;max-width:none}.header-inner{padding:12px}.resource{box-shadow:none;border:0;padding:6px}.phase-table tr,.solution-card{break-inside:avoid}main{margin:0;padding:0}}
+@media print{body{background:#fff}.area-nav,.lesson-sidebar,footer{display:none}.teacher-layout{display:block;padding:0;max-width:none}.header-inner{padding:12px}.resource{box-shadow:none;border:0;padding:6px}.phase-table tr,.solution-card{break-inside:avoid}main{margin:0;padding:0}}
 
 /* Course context and selector: mirrored across AVIVA, materials and solutions. */
 .course-switcher{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin:12px 0 20px;flex-wrap:wrap}
