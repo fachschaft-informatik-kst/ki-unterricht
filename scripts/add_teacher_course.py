@@ -22,7 +22,8 @@ def create(root: Path, teacher: str, grade: int, title: str, accent: str = "#456
     ident = f"{teacher.lower()}-{grade}"
     course_id = f"{ident}-klasse"
     section = f"{ident}-kurs"
-    manifest_path = f"kursseiten/{ident}-manifest.json"
+    manifest_path = f"kursseiten/{teacher.lower()}/{grade}-klasse/manifest.json"
+    course_root = manifest_path.rsplit("/", 1)[0]
     existing = json.loads((root / REGISTRY).read_text(encoding="utf-8"))
     if existing.get("version") != 1:
         raise ValueError("Unbekannte Kursregister-Version.")
@@ -43,9 +44,9 @@ def create(root: Path, teacher: str, grade: int, title: str, accent: str = "#456
         "sectionPrefix": f"{ident}-",
         "notebookPrefix": f"{teacher.lower()}{grade}_",
         "teacherFiles": {
-            "solutions": f"lehrperson/{ident}/musterloesungen.md",
-            "fields": f"lehrperson/{ident}/musterloesungen-felder.md",
-            "glossary": f"lehrperson/{ident}/glossar.md",
+            "solutions": f"{course_root}/lehrperson/musterloesungen.md",
+            "fields": f"{course_root}/lehrperson/musterloesungen-felder.md",
+            "glossary": f"{course_root}/lehrperson/glossar.md",
         },
     }
     validate_registry(courses + [course], root, check_files=False)
@@ -68,11 +69,11 @@ def create(root: Path, teacher: str, grade: int, title: str, accent: str = "#456
     )
     files = {
         manifest_path: json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-        f"kursseiten/{section}/planung.json": json.dumps(
+        f"{course_root}/{section}/planung.json": json.dumps(
             {"lessons": [lesson]}, ensure_ascii=False, indent=2) + "\n",
-        f"kursseiten/{section}/materialien.md":
+        f"{course_root}/{section}/materialien.md":
             "## Doppellektion 01\n\n### Materialkoffer\n\nEigenes Unterrichtsmaterial ergänzen.\n",
-        f"kursseiten/{section}/010-start.md": chapter,
+        f"{course_root}/{section}/010-start.md": chapter,
         course["teacherFiles"]["solutions"]:
             "## DL 1 · Einstieg\n\nHier eine eigene Musterlösung oder einen fachlichen Hinweis ergänzen.\n",
         course["teacherFiles"]["fields"]:

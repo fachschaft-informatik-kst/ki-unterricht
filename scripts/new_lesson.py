@@ -22,7 +22,7 @@ def create(root: Path, title: str, *, chapter_title: str = "Einstieg und Auftrag
     lessons = course["lessons"]
     if any(l["id"] == identifier for l in lessons):
         raise ValueError(f"Lektions-ID existiert bereits: {identifier}")
-    manifest_path = root / "kursseiten/manifest.json"
+    manifest_path = root / "kursseiten/bok/4-klasse/manifest.json"
     manifest = read_json(manifest_path)
     view = section or identifier
     if not re.fullmatch(r"[a-z][a-z0-9-]*", view):
@@ -39,7 +39,7 @@ def create(root: Path, title: str, *, chapter_title: str = "Einstieg und Auftrag
             raise ValueError(f"Unbekannte Lektions-ID: {after}")
         following = min((l["order"] for l in lessons if l["order"] > preceding["order"]), default=preceding["order"] + 20)
         order = (preceding["order"] + following) / 2
-    folder = root / "kursseiten" / view
+    folder = root / "kursseiten/bok/4-klasse" / view
     plan_path = folder / "planung.json"
     teacher_path = folder / "materialien.md"
     if not section and folder.exists():

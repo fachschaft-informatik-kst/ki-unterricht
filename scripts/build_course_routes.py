@@ -72,7 +72,7 @@ p{{color:#52656a}}a{{color:var(--accent)}}</style>
 </head><body><main><small>{label}</small>
 <h1>{name}</h1><h2>Dieser Kurs ist in Vorbereitung.</h2>
 <p>Hier entstehen eigenständige Unterrichtsmaterialien für die {course["grade"]}. Klasse.
-Es wurden keine Inhalte einer anderen Lehrperson übernommen.</p>
+Die Ausgangsinhalte stammen aus der gemeinsamen Kursvorlage und können unabhängig bearbeitet werden.</p>
 <p><a href="../../kurse.html">Zurück zur Kursübersicht</a></p>
 </main></body></html>"""
 
