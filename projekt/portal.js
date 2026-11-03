@@ -264,7 +264,7 @@ window.addEventListener('message',async event=>{
    await initialization;
    if(activeName!==name)return; // Another notebook superseded this startup.
    const saved=name===projectName?notebook:others[name];
-   notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Start abgeschlossen. Ergebnisse werden gesichert …');
+   notebookLoading('loading',saved?'Gespeicherte Eingaben und Ergebnisse werden wiederhergestellt …':'Python ist gestartet. Notebook wird angezeigt …');
    let restored=null;
    if(saved){restored=await request(frame,'restore',{notebook:saved,keepKernel:true});frame.dataset.restored='yes';}
    // No initial snapshot: the published notebook is already available.
