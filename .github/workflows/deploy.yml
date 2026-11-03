@@ -68,8 +68,8 @@ jobs:
                 site=true
                 worker=true
                 ;;
-              kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|lehrperson/*/*.md|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
-                # Editor-written course sources and teacher notes never alter
+              kursseiten/*.json|kursseiten/*/*.md|kursseiten/*/*/manifest.json|kursseiten/*/*/glossar.json|kursseiten/*/*/*/*.md|kursseiten/*/*/*/*.json|kursseiten/*/*/lehrperson/*.md|lehrperson/*.md|lehrperson/*/*.md|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
+                # Editor-written nested teacher sources and notes never alter
                 # the notebook runtime. Still rebuild and publish the site.
                 site=true
                 ;;
