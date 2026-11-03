@@ -13,7 +13,7 @@ from course_model import load_course, output
 from glossary import render_glossary
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ROOT / "kursseiten"
+PAGES = ROOT / "kursseiten/bok/4-klasse"
 PORTAL = ROOT / "projekt"
 MARKDOWN = MarkdownIt("commonmark", {"html": True}).enable("table")
 

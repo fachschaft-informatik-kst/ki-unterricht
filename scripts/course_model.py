@@ -47,7 +47,7 @@ def validate_lessons(lessons: list[dict]) -> None:
             raise ValueError(f"Dauer muss {RULES['duration']} Minuten betragen: {identifier}")
 
 
-def load_course(root: Path = ROOT, manifest_path: str = "kursseiten/manifest.json") -> dict:
+def load_course(root: Path = ROOT, manifest_path: str = "kursseiten/bok/4-klasse/manifest.json") -> dict:
     manifest = read_json(root / manifest_path)
     sections = manifest.get("sections")
     if not isinstance(sections, list) or not sections or any(not isinstance(s, dict) for s in sections):
@@ -71,7 +71,7 @@ def load_course(root: Path = ROOT, manifest_path: str = "kursseiten/manifest.jso
                 or any(not isinstance(nav.get(k), str) for k in ("title", "label"))
                 or type(nav.get("order")) is not int):
             raise ValueError(f"Navigation ungültig: {view}")
-        path = root / "kursseiten" / view / "planung.json"
+        path = (root / manifest_path).parent / view / "planung.json"
         if section.get("teaching"):
             block = read_json(path)["lessons"]
             validate_lessons(block)

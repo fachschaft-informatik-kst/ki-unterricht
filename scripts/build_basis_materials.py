@@ -10,7 +10,7 @@ def build(root: Path, out: Path, lessons: list[dict]) -> None:
     links = []
     sections = []
     for lesson in lessons:
-        material = root / "kursseiten" / lesson["view"] / "materialien.md"
+        material = root / "kursseiten/bok/1-klasse" / lesson["view"] / "materialien.md"
         if not material.is_file():
             raise FileNotFoundError(f"Lehrpersonenmaterial fehlt: {material}")
         source = material.read_text(encoding="utf-8")
@@ -44,7 +44,7 @@ main{max-width:1050px;margin:auto;padding:35px 28px 80px}
 <p class="section-intro">Materialkoffer für Lehrpersonen · 1. Kurzgymnasium. Zehn Doppellektionen zu je 90 Minuten.</p>
 <nav class="materials-nav" aria-label="Doppellektionen">""" + "".join(links) + """</nav>
 """ + "".join(sections) + """
-<footer class="footer">Quelle: kursseiten/basis-*/materialien.md · Kantonsschule Stadelhofen</footer>
+<footer class="footer">Quelle: kursseiten/bok/1-klasse/basis-*/materialien.md · Kantonsschule Stadelhofen</footer>
 </main><script src="notebook-blocks.js" defer></script></body></html>
 """
     document = document.replace("Zehn Doppellektionen zu je 90 Minuten.",

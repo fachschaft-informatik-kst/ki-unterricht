@@ -12,7 +12,8 @@ from course_model import load_course
 from glossary import render_glossary
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "kursseiten" / "basis-manifest.json"
+MANIFEST = ROOT / "kursseiten/bok/1-klasse/manifest.json"
+PAGES = MANIFEST.parent
 SOURCE = ROOT / "basis"
 OUT = ROOT / "_build" / "site" / "basis"
 
@@ -20,7 +21,7 @@ OUT = ROOT / "_build" / "site" / "basis"
 def assemble() -> tuple[str, list[dict]]:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     sections = manifest["sections"]
-    course = load_course(ROOT, "kursseiten/basis-manifest.json")
+    course = load_course(ROOT, "kursseiten/bok/1-klasse/manifest.json")
     lessons = course["lessons"]
     by_view = {s["id"]: [lesson for lesson in lessons if lesson["view"] == s["id"]] for s in sections}
     cards = []
@@ -39,7 +40,7 @@ def assemble() -> tuple[str, list[dict]]:
     nav = []
     for section in sorted(sections, key=lambda s: s["navigation"]["order"]):
         ident = section["id"]
-        folder = ROOT / "kursseiten" / ident
+        folder = PAGES / ident
         sources = sorted(folder.glob("[0-9][0-9][0-9]-*.md"))
         if not sources:
             raise ValueError(f"Keine Kapiteldatei: {folder}")
