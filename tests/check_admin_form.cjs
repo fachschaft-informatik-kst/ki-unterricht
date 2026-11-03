@@ -105,6 +105,30 @@ const server=http.createServer((req,res)=>{
     await page.locator("#path").filter({hasText:"kurse/irn/1-klasse/lehrperson/musterloesungen-felder.md"}).waitFor();
     await page.locator("#editGlossary").click();
     await page.locator("#path").filter({hasText:"kurse/irn/1-klasse/kursseiten/glossar.json"}).waitFor();
+
+    // The copied IRN courses must support the same four editor workflows:
+    // chapters, structured AVIVA, material cases and per-course glossary.
+    await page.locator("#section").selectOption("basis-neuron");
+    await page.locator("#chapters button").first().click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/1-klasse/kursseiten/basis-neuron/"));
+    await page.locator("#editPlan").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/1-klasse/kursseiten/basis-neuron/planung.json");
+    assert.equal(await page.locator("#formEditor").isVisible(),true);
+    await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/1-klasse/kursseiten/basis-neuron/materialien.md");
+    await page.locator("#courseSelect").selectOption("irn4");
+    await page.locator("#section").selectOption("einstieg");
+    await page.locator("#chapters button").first().click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/4-klasse/kursseiten/einstieg/"));
+    await page.locator("#editPlan").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/einstieg/planung.json");
+    assert.equal(await page.locator("#formEditor").isVisible(),true);
+    await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/einstieg/materialien.md");
+    await page.locator("#editGlossary").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/glossar.json");
+    await page.locator("#courseSelect").selectOption("irn1");
+    await page.locator("#chapters button").first().waitFor({state:"visible"});
     await page.locator("#courseThemeColor").fill("#58358b");
     assert.equal(await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#58358b");
     await page.locator("#chapters button").first().click();

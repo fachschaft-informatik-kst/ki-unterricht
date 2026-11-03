@@ -50,7 +50,8 @@ def render_fragment(source: str, filename: Path) -> str:
     return re.sub(pattern, lambda m: MARKDOWN.render(m.group(1)), source, flags=re.S)
 
 
-def assemble(pages: Path = PAGES, manifest_path: str = "kursseiten/manifest.json", glossary_path: Path | None = None) -> str:
+def assemble(pages: Path | None = None, manifest_path: str = "kursseiten/manifest.json", glossary_path: Path | None = None) -> str:
+    pages = PAGES if pages is None else pages
     manifest = json.loads((pages / "manifest.json").read_text(encoding="utf-8"))
     sections = manifest["sections"]
     course = load_course(ROOT, manifest_path)

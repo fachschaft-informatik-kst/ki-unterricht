@@ -36,11 +36,17 @@ def fingerprints():
     paths = list((ROOT / "projekt").rglob("*"))
     paths.extend((ROOT / "shared").glob("*"))
     paths.extend((ROOT / "experimente").glob("*"))
-    paths.extend((ROOT / "kurse").rglob("*.md"))
-    paths.extend((ROOT / "kursseiten").rglob("*.md"))
-    paths.extend((ROOT / "lehrperson").rglob("*.md"))
-    paths.extend((ROOT / "kurse").rglob("*.json"))
-    paths.extend((ROOT / "kursseiten").rglob("*.json"))
+    if (ROOT / "kurse").is_dir():
+        # Legacy mirrors are rebuilt from canonical sources. Watching both
+        # creates an endless feedback loop in the local live preview.
+        paths.extend((ROOT / "kurse").rglob("*.md"))
+        paths.extend((ROOT / "kurse").rglob("*.json"))
+        paths.extend((ROOT / "kurse").rglob("*.ipynb"))
+    else:
+        # Retain the old fixture mode for isolated historic lesson tests.
+        paths.extend((ROOT / "kursseiten").rglob("*.md"))
+        paths.extend((ROOT / "kursseiten").rglob("*.json"))
+        paths.extend((ROOT / "lehrperson").rglob("*.md"))
     paths.append(ROOT / "worksheets/md/KI_Planung.md")
     paths.extend((ROOT / "scripts").glob("*.py"))
     return {str(path): path.stat().st_mtime_ns for path in paths if path.is_file()}
@@ -55,6 +61,7 @@ def watch(stop):
         previous = current
         try:
             build_content()
+            previous = fingerprints()
             print("Inhalte neu erstellt. Browser aktualisieren.", flush=True)
         except subprocess.CalledProcessError:
             print("Build fehlgeschlagen: Eingabedatei korrigieren und erneut speichern.", file=sys.stderr)
