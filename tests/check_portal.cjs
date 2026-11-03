@@ -10,12 +10,13 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:JSON.parse(process.env.CHROMIUM_ARGS||'[]')});
   const p=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());p.on('console',m=>{if(m.type()==='error')console.error('BROWSER',m.text());});
   await p.goto('http://127.0.0.1:8765/projekt/');
-  assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,'Reading the page must not start Python');
+  assert((await p.locator('iframe[src*="lab/index"]').count())<=1,'Background preparation may start one managed Python session');
+  assert.equal(await p.locator('#project-lab[open]').count(),0,'Background preparation must never open a notebook dialog');
   assert.equal(await p.locator('.course-card').count(),8);assert.equal(await p.locator('.nav a').count(),11);
   assert((await p.locator('.ki-notebook-block .ki-notebook-direct[href*="/lab/"]').count())>=7,
     'Every registered in-chapter notebook has a direct JupyterLite link');
-  assert.equal(await p.locator('iframe[src*="lab/index"]').count(),0,
-    'Notebook blocks must remain unloaded until explicitly opened');
+  assert((await p.locator('iframe[src*="lab/index"]').count())<=1,
+    'Notebook prewarming must not create competing Python sessions');
   // Visual geometry smoke test: keep overview cards sizeable on desktop.
   // Full-page desktop/mobile captures below remain available for review.
   const desktopCard=await p.locator('.course-card').first().boundingBox();
@@ -349,9 +350,17 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
      }
    };
    await p.setViewportSize({width:1440,height:1000});await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
-   await p.locator('#project-lab-loading').waitFor({state:'visible'});
-   assert.equal(await p.locator('#project-lab-loading').getAttribute('data-state'),'loading','Spinner must cover notebook during initialization');
-   assert.equal(await p.locator('#project-frame').getAttribute('inert'),'','Notebook stays inert until initialization completes');
+   // An idle-prewarmed notebook can already be ready when the learner clicks.
+   // Verify that the iframe is never exposed while it is still initializing.
+   const initial=await p.evaluate(()=>{
+     const loader=document.querySelector('#project-lab-loading');
+     const frame=document.querySelector('#project-frame');
+     return {loading:!loader.hidden,phase:loader.dataset.state,ready:frame.dataset.ready,inert:frame.inert};
+   });
+   if(initial.loading){
+     assert.equal(initial.phase,'loading','Spinner must cover notebook during initialization');
+     assert.equal(initial.inert,true,'Notebook stays inert until initialization completes');
+   }else assert.equal(initial.ready,'yes','Notebook without a spinner must already be ready');
    await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000}).catch(async e=>{console.log('FRAME',await p.frameLocator('#project-frame').locator('body').innerText());console.log('ERRORS',errors);throw e;});
    assert.equal(await p.locator('#project-lab-loading').isVisible(),false,'Spinner must disappear after all startup cells');
    assert.equal(await p.locator('#project-frame').getAttribute('inert'),null,'Ready notebook must accept input');

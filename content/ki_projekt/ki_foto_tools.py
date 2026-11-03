@@ -14,6 +14,20 @@ import ki_projekt_tools as ki
 PIPELINE = 'mobilenet-v2-050-224-rgb-whitepad-v1'
 
 
+def gespeicherte_uploads():
+    """Bereits gesicherte Fotostudio-JSONs aus diesem Notebook wiederverwenden.
+
+    Die Kursseite stellt diese Dateien beim erneuten Öffnen bereit. Sie werden
+    nicht automatisch eingelesen oder trainiert: DATEIEN explizit setzen.
+    Nach einem Gerätewechsel zuerst den Kursstand als ZIP wiederherstellen.
+    """
+    folder = Path('/home/pyodide/ki-uploads')
+    if not folder.is_dir():
+        return []
+    return [str(file) for file in sorted(folder.iterdir())
+            if file.is_file() and not file.is_symlink() and file.suffix.lower() == '.json']
+
+
 def fotostudio():
     folder = Path(__file__).parent
     page = (folder / 'fotostudio.html').read_text(encoding='utf-8')

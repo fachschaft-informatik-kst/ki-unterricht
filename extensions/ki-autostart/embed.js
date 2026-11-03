@@ -1,4 +1,5 @@
 import {portableNotebook, uploadedFiles} from './snapshot';
+import {restoreNotebookUploads} from './restore-uploads';
 
 // Same-origin bridge between the course website and its one notebook iframe.
 export function setupEmbed(app, tracker, allowed, reviveSavedWidgets = async () => ({activated:false,values:0})) {
@@ -109,7 +110,7 @@ print(_portal_json.dumps({'widgets': _portal_widgets.Widget.get_manager_state() 
   }
   window.addEventListener('message',async event => {
     if (event.origin!==origin || event.source!==window.parent || event.data?.channel!=='ki-portal-v1') return;
-    const {type,id,notebook,keepKernel} = event.data;
+    const {type,id,notebook,keepKernel,files} = event.data;
     if (!panel || panel.isDisposed) return;
     if (type==='hello') { announce(); return; }
     if (!['snapshot','restore'].includes(type)) return;
@@ -131,6 +132,13 @@ print(_portal_json.dumps({'widgets': _portal_widgets.Widget.get_manager_state() 
         if (preparation) preparation.metadata={...preparation.metadata,jupyter:{...preparation.metadata?.jupyter,source_hidden:false}};
         panel.context.model.fromJSON(nb);
         await panel.context.save();
+        // Restore only this notebook's previously uploaded files in a private
+        // workspace. Never run uploaded files or restore arbitrary Python state.
+        let uploadsRestored = 0, uploadError = null;
+        if (Array.isArray(files) && files.length) {
+          try { uploadsRestored = await restoreNotebookUploads(panel.sessionContext.session.kernel,files); }
+          catch (err) { uploadError = String(err.message || err); }
+        }
         // The saved document was deliberately flattened for portable backups.
         // Only now, after restoration, re-run trusted published startup cells.
         // A failure leaves the original saved source and readable outputs intact.
@@ -139,7 +147,7 @@ print(_portal_json.dumps({'widgets': _portal_widgets.Widget.get_manager_state() 
           try { widgets = await reviveSavedWidgets(panel, nb); }
           catch (err) { widgetError = String(err.message || err); }
         }
-        send({type:'restored',id,notebook:nb,widgets,widgetError});
+        send({type:'restored',id,notebook:nb,widgets,widgetError,uploadsRestored,uploadError});
       }
       dirty=false;
     } catch (err) { send({type:'error',id,error:String(err.message||err)}); }

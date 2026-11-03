@@ -192,7 +192,11 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator(".split-source").isVisible(),true);
     assert.equal(await page.locator("#splitDivider").isVisible(),true);
     await page.frameLocator("#preview").locator(".phase-table tbody tr").first().waitFor();
-    assert.equal(await page.frameLocator("#preview").locator(".phase-table tbody tr").count(),20,
+    // Lesson text and AVIVA steps can change through the editor; match the
+    // current source rather than a historical fixed row count.
+    const plannedSteps=JSON.parse(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/planung.json"),"utf8"))
+      .lessons.flatMap(lesson=>lesson.phases.flatMap(phase=>phase.schritte)).length;
+    assert.equal(await page.frameLocator("#preview").locator(".phase-table tbody tr").count(),plannedSteps,
       "AVIVA preview must render one coloured table row for each teaching step, not only a row per phase");
     const colours=await page.frameLocator("#preview").locator(".phase-table tbody tr").evaluateAll(rows=>
       Object.fromEntries([...new Set(rows.map(row=>row.className))].map(name=>{

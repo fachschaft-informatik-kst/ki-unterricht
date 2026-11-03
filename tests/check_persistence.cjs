@@ -53,7 +53,8 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
  };
  const openProject=async p=>{
   await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
-  await p.locator('#project-lab-loading').waitFor({state:'visible'});
+  // A successful background warmup may already have hidden the loader.
+  // Both a cold start and an immediately ready notebook are valid.
   await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000}).catch(async e=>{console.error(await p.locator('#project-lab-status').innerText());throw e;});
   assert.equal(await p.locator('#project-lab-loading').isVisible(),false,'The loader must hide after every project restore');
   const metric=await p.evaluate(()=>window.KINotebookTimings?.at(-1));

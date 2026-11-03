@@ -206,6 +206,33 @@
     card.append(region);
   }
 
+  // Start one real, managed JupyterLite session while the learner reads the
+  // course page. The course controllers own this iframe, its saved notebook and
+  // its uploads. Never spawn a disposable prewarm worker or multiple kernels.
+  // Choose the notebook in the deep-linked chapter; otherwise the first course
+  // notebook. Clicking another notebook supersedes the warmup safely.
+  const warmOnPageLoad = () => {
+    if (!coursePage) return;
+    const cards = [...document.querySelectorAll(".ki-notebook-block[data-notebook]")]
+      .filter(card => (basic ? basicNotebooks : advancedNotebooks)
+        .has(card.dataset.notebook.split("/").pop()));
+    if (!cards.length) return;
+    let anchor = null;
+    try { anchor = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch {}
+    const chapter = anchor?.closest(".kapitel, main > section") || anchor;
+    let previous = null;
+    try { previous = sessionStorage.getItem(basic ? "ki-last-opened-bok-1" : "ki-last-opened-bok-4"); } catch {}
+    const selected = cards.find(card => chapter && chapter.contains(card)) ||
+      cards.find(card => card.dataset.notebook.split("/").pop() === previous) || cards[0];
+    const name = selected.dataset.notebook.split("/").pop();
+    const start = () => warmManaged(name);
+    // Leave text, navigation and answers interactive before starting Pyodide.
+    if ("requestIdleCallback" in window) requestIdleCallback(start, {timeout:2500});
+    else setTimeout(start,900);
+  };
+  if (document.readyState === "complete") warmOnPageLoad();
+  else window.addEventListener("load", warmOnPageLoad, {once:true});
+
   // Warm only after a reader deliberately visits a chapter containing exactly
   // one managed notebook. Home-page visits and multi-notebook chapters remain
   // cold until the user hovers or focuses a specific launcher.
