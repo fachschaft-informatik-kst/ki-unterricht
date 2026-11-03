@@ -691,8 +691,11 @@ const server=http.createServer((req,res)=>{
     assert((await page.locator("#staged").innerText()).includes("kurse/bok/4-klasse/kursseiten/glossar.json"));
     publishFailure=false;
     await page.locator("#toggleChanges").click();
+    const secondPublish=page.waitForResponse(response=>
+      response.url().includes("/api/publish")&&response.request().method()==="POST");
     await page.locator("#publish").click();
-    await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
+    await secondPublish;
+    await page.waitForFunction(()=>document.querySelector("#pendingCount")?.textContent==="0");
     assert.equal(submitted.changes.length,1);
     assert.equal(submitted.changes[0].path,"kurse/bok/4-klasse/kursseiten/glossar.json");
     const submittedGlossary=JSON.parse(submitted.changes[0].content);
