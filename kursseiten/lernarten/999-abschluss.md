@@ -1,1 +1,0 @@
-<a class="btn" href="#perzeptron">Weiter: Ein Neuron →</a>

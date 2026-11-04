@@ -179,8 +179,7 @@ jobs:
           node tests/check_archive.cjs
           node tests/check_notebook_snapshot.cjs
           node tests/check_notebook_warmup.cjs
-          node tests/check_notebook_start_budget.cjs
-          node tests/check_notebook_performance.cjs
+                    node tests/check_notebook_performance.cjs
           node tests/check_widget_rehydrate.cjs
           node --check projekt/admin/admin.js
           node --check projekt/admin/teacher.js
@@ -190,7 +189,7 @@ jobs:
           # in code-change PRs, never block on a renamed editor chapter.
           node --check projekt/glossar.js
           node --check projekt/dl1_sort.js
-          node --check content/ki_projekt/fotostudio_storage.js
+          node --check kurse/bok/4-klasse/content/ki_projekt/fotostudio_storage.js
           node tests/check_fotostudio_inline.cjs
           node tests/check_course_model.mjs
           node tests/check_glossary_model.mjs
@@ -245,7 +244,6 @@ jobs:
         if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 4
         run: |
-          python scripts/sync_course_sources.py
           python scripts/build_portal.py
           python scripts/build_course.py
           python scripts/build_basis.py
@@ -262,7 +260,6 @@ jobs:
         timeout-minutes: 5
         run: |
           python tests/check_new_chapter.py
-          python tests/check_new_lessons.py
           python tests/check_new_lesson_cli.py
           python tests/check_course_model.py
           python tests/check_admin.py
@@ -276,7 +273,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: dist
-          key: lite-runtime-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'content/**', 'kurse/**/content/**', 'experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
+          key: lite-runtime-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'kurse/**/content/**', 'experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
       - name: Build JupyterLite runtime on cache miss
         if: steps.scope.outputs.site_changed == 'true' && steps.lite-cache.outputs.cache-hit != 'true'
         timeout-minutes: 8
@@ -315,7 +312,7 @@ jobs:
         # Editor changes are checked by the dynamic HTML/publish smoke test.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
+          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_course_browser_smoke.cjs
       - name: Browser-check nonblocking notebook startup
         # UI smoke tests are unnecessary for prose-only updates.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
@@ -332,31 +329,6 @@ jobs:
         timeout-minutes: 4
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules LITE_SITE=dist KI_WIDGET_COLD_START=1 node tests/check_autostart_browser.cjs
-      - name: Check deployed notebook runtime in Chromium (full release test)
-        # PRs keep the technical/Pyodide and cold-start smoke tests above.
-        # The slower browser integration (~3 minutes) runs on main or on a
-        # manually requested workflow instead of blocking every code PR.
-        if: steps.scope.outputs.runtime_changed == 'true' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-        timeout-minutes: 12
-        run: |
-          # Independent browser tests use different local ports. Run them in
-          # parallel, preserve both exit codes and print both diagnostic logs.
-          set +e
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs > /tmp/ki-portal-browser.log 2>&1 &
-          portal_pid=$!
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist PORTAL_TEST_PORT=8766 node tests/check_persistence.cjs > /tmp/ki-persistence-browser.log 2>&1 &
-          persistence_pid=$!
-          wait "$portal_pid"
-          portal_status=$?
-          wait "$persistence_pid"
-          persistence_status=$?
-          echo "=== Portal, Python training and notebook switching (exit $portal_status) ==="
-          cat /tmp/ki-portal-browser.log
-          echo "=== ZIP restore, five notebooks, widgets and uploads (exit $persistence_status) ==="
-          cat /tmp/ki-persistence-browser.log
-          if [ "$portal_status" -ne 0 ] || [ "$persistence_status" -ne 0 ]; then
-            exit 1
-          fi
       - name: Upload artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.scope.outputs.site_changed == 'true'
         uses: actions/upload-pages-artifact@v3

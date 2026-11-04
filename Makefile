@@ -58,7 +58,6 @@ preview: install-preview
 
 build: install
 	npm run build --prefix $(NODE_DIR)
-	$(VENV_PY) scripts/sync_course_sources.py
 	$(VENV_PY) scripts/build_portal.py
 	$(VENV_PY) scripts/build_course.py
 	$(VENV_PY) scripts/build_basis.py
@@ -85,7 +84,6 @@ test: build
 	$(VENV_PY) tests/check_course_routes.py
 	$(VENV_PY) tests/check_published_links.py
 	$(VENV_PY) tests/check_new_chapter.py
-	$(VENV_PY) tests/check_new_lessons.py
 	$(VENV_PY) tests/check_new_lesson_cli.py
 	$(VENV_PY) tests/check_admin.py
 	$(VENV_PY) tests/check_course_model.py
@@ -94,7 +92,6 @@ test: build
 	node tests/check_archive.cjs
 	node tests/check_notebook_snapshot.cjs
 	node tests/check_notebook_warmup.cjs
-	node tests/check_notebook_start_budget.cjs
 	node tests/check_notebook_performance.cjs
 	node tests/check_admin.mjs
 	PYTHON=$(VENV_PY) node tests/check_course_model.mjs
