@@ -227,3 +227,18 @@ kaputte interne Links oder verlorene IDs bleiben technische Fehler.
 
 `make test` führt die technischen Prüfungen lokal aus. Historische Snapshot-
 und Formulierungsvergleiche gehören bewusst nicht mehr zur Pflicht-Pipeline.
+
+### Schnellere Pull-Request-Pipeline
+
+Bei einem Pull Request mit Änderungen an der Notebook-Laufzeit prüft CI die
+Python-Notebooks, Pyodide-Kompatibilität, Autostart-Logik und einen echten
+Chromium-Kaltstart. Der vollständige Browser-End-to-End-Test mit Modelltraining,
+ZIP-Sicherung und sieben Notebooks läuft **nach dem Merge auf `main`**,
+sofern sich die Laufzeit geändert hat. Er kann zusätzlich über **GitHub Actions
+→ Build and Deploy → Run workflow** manuell gestartet werden. Der PR selbst
+wird dadurch schneller; der vollständige Browsertest ist nicht mehr
+Voraussetzung für einen Merge. Kursinhalte werden weiterhin bei jeder Änderung
+gebaut und auf Schema-, Link- und Veröffentlichungsfehler geprüft.
+
+Der JupyterLite-Cache berücksichtigt die Notebook-/Python-Dateien unter
+`kurse/*/content/` und baut bei einem Cache-Miss auch die Erweiterung neu.
