@@ -6,7 +6,22 @@ const path=require("node:path");
 const {chromium}=require("playwright");
 const ROOT=path.resolve(__dirname,"..");
 (async()=>{
-  const {teacherShell}=await import("../admin-worker/src/teacher.mjs");
+  const {teacherShell,teacherThemeStylesheet,normalizeTeacherCourses,DEFAULT_COURSES}=
+    await import("../admin-worker/src/teacher.mjs");
+  const teacherCourses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES});
+  const irnTheme=DEFAULT_COURSES.find(course=>course.slug==="irn/4-klasse").theme.accent;
+  const materialLessons=fs.readdirSync(path.join(ROOT,"kurse/bok/4-klasse/kursseiten"))
+    .map(view=>path.join(ROOT,"kurse/bok/4-klasse/kursseiten",view,"planung.json"))
+    .filter(file=>fs.existsSync(file))
+    .flatMap(file=>JSON.parse(fs.readFileSync(file,"utf8")).lessons)
+    .sort((a,b)=>a.order-b.order);
+  let realIrnMaterials=false;
+  const materialFor=(number,course="bok/4-klasse")=>{
+    const lesson=materialLessons[number-1];
+    const source=fs.readFileSync(path.join(ROOT,"kurse",course,"kursseiten",lesson.view,"materialien.md"),"utf8");
+    const marker="<!-- lesson:"+lesson.id+" -->";
+    return source.includes(marker)?source.split(marker)[1].split("<!-- lesson:")[0]:source;
+  };
   const lessons=Array.from({length:10},(_,i)=>({
     id:"dl-"+(i+1),number:i+1,title:["Was ist KI?","Lernarten","Ein Neuron",
       "Neuronale Netze","Projektstart","Modellvergleich","Projektabschluss",
@@ -34,7 +49,8 @@ const ROOT=path.resolve(__dirname,"..");
         selectedTitle:lessons[number-1]?.title||""};
       const data=kind==="planung"?{...base,lesson:fakeLesson(number)}:
         kind==="materialien"?{...base,intro:"",sections:[{title:"DL "+number,
-          markdown:"## Doppellektion "+number+"\n\nMaterial für DL "+number+
+          markdown:base.course==="bok/4-klasse"||realIrnMaterials&&base.course==="irn/4-klasse"?
+            materialFor(number,base.course):"## Doppellektion "+number+"\n\nMaterial für DL "+number+
             "\n\n[Studio](studio/) · [Notebook](../lab/index.html?path=portal/basis_neuron.ipynb)"+
             " · [Lösung](materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md)"}]}:
         {...base,entries:[{field:"sample_"+number,question:"Welche Beobachtung gehört zu DL "+number+"?",
@@ -45,11 +61,8 @@ const ROOT=path.resolve(__dirname,"..");
     }
     if(url.pathname==="/teacher-theme.css"){
       const course=url.searchParams.get("course");
-      const grade=course.endsWith("/1-klasse")?"1":"4";
-      const accent=course==="irn/1-klasse"?"#69419b":course==="irn/4-klasse"?"#9a481d":
-        grade==="1"?"#3653a3":"#076959";
       res.writeHead(200,{"Content-Type":"text/css"}).end(
-        'body[data-grade="'+grade+'"]{--accent:'+accent+'}');
+        teacherThemeStylesheet(teacherCourses,course));
       return;
     }
     const files={"/teacher.js":"shared/portal/admin/teacher.js","/teacher.css":"shared/portal/admin/teacher.css",
@@ -67,6 +80,9 @@ const ROOT=path.resolve(__dirname,"..");
   try{
     browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
     const page=await browser.newPage({viewport:{width:1300,height:900}});
+    await page.route("https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/grafiken/dl01_*.jpg",
+      route=>route.fulfill({contentType:"image/jpeg",body:fs.readFileSync(path.join(
+        ROOT,"kurse/bok/4-klasse/assets/grafiken",new URL(route.request().url()).pathname.split("/").pop()))}));
     await page.goto(origin+"/teacher/bok/4-klasse/planung?dl=3");
     await page.locator(".lesson-heading h2").waitFor();
     assert.match(await page.locator(".lesson-heading h2").innerText(),/DL 03 · Ein Neuron/);
@@ -94,7 +110,8 @@ const ROOT=path.resolve(__dirname,"..");
     assert.match(await page.locator("#lessonNav a[aria-current=page]").innerText(),/Modellvergleich/);
     await page.locator('.area-nav a[href*="/materialien"]').click();
     await page.locator(".lesson-heading h2").filter({hasText:"DL 06"}).waitFor();
-    assert.match(await page.locator(".materials-content").innerText(),/Material für DL 6/);
+    assert.match(await page.locator(".materials-content").innerText(),/A und B vergleichen/);
+    assert.equal(await page.locator(".material-phase").count(),5);
     await page.locator('.area-nav a[href*="/musterloesungen"]').click();
     await page.locator(".lesson-heading h2").filter({hasText:"DL 06"}).waitFor();
     assert.match(await page.locator(".solution-question").innerText(),/Welche Beobachtung gehört zu DL 6/);
@@ -107,6 +124,36 @@ const ROOT=path.resolve(__dirname,"..");
     assert.equal(await page.locator(".question-source a").count(),1);
     assert.equal(await page.locator(".question-hint").count(),0);
     assert.doesNotMatch(await page.locator("#teacherContent").innerText(),/Der genaue Wortlaut wurde nicht eindeutig erkannt/);
+
+    await page.goto(origin+"/teacher/bok/4-klasse/materialien?dl=1");
+    for(let number=1;number<=10;number++){
+      if(number!==1)await page.locator("#lessonNav a[data-dl='"+number+"']").click();
+      await page.waitForFunction(n=>document.querySelector(".lesson-heading h2")?.textContent.includes(
+        "DL "+String(n).padStart(2,"0")),number);
+      assert.equal(await page.locator(".material-phase").count(),5,"Five AVIVA cards for DL "+number);
+      assert.equal(await page.locator(".material-phase-nav a").count(),5);
+      assert.deepEqual(await page.locator(".material-phase-label").allTextContents(),
+        materialLessons[number-1].phases.map(p=>p.phase+" · "+p.minutes+" Min."));
+      assert.equal(await page.locator(".material-table-scroll").count()>0,true);
+      if(number===1){
+        assert.match(await page.locator(".materials-workshop").innerText(),/Fünf Wenn-dann-Regeln/);
+        assert.equal(await page.locator(".material-gallery img").count(),2);
+        await page.waitForFunction(()=>[...document.querySelectorAll(".material-gallery img")]
+          .every(image=>image.complete&&image.naturalWidth>0));
+        assert.equal(await page.locator('a[href$="dl01_intelligenz_regeln.pdf"]').count(),0);
+        await page.setViewportSize({width:390,height:844});
+        assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,
+          "Material cards must not overflow on mobile");
+        await page.emulateMedia({media:"print"});
+        assert.equal(await page.locator(".material-phase-nav").isVisible(),false);
+        assert.equal(await page.locator(".material-phase").first().isVisible(),true);
+        await page.emulateMedia({media:"screen"});
+        await page.setViewportSize({width:1300,height:900});
+      }
+    }
+
+    await page.goto(origin+"/teacher/bok/4-klasse/musterloesungen?dl=8");
+    await page.locator(".lesson-heading h2").waitFor();
 
     // Switching courses must retain the material area, but start at DL 01
     // because DL numbers refer to different content in another course.
@@ -124,16 +171,35 @@ const ROOT=path.resolve(__dirname,"..");
     assert.equal(await page.locator("#teacherCourseSelect").inputValue(),"irn/4-klasse");
     assert.match(await page.locator(".course-context").innerText(),/IRN · 4. Klasse/);
     const irnAccent=await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim());
-    assert.equal(irnAccent,"#9a481d");
+    assert.equal(irnAccent,irnTheme);
     await page.locator('.area-nav a[href*="/materialien"]').click();
     await page.locator(".materials-content").waitFor();
     const site="https://fachschaft-informatik-kst.github.io/ki-unterricht/";
+    assert.equal(await page.locator(".material-phase").count(),0,
+      "Legacy material without phase headings must remain readable");
     assert.equal(await page.getByRole("link",{name:"Studio",exact:true}).getAttribute("href"),site+"irn/4-klasse/studio/");
     const notebook=new URL(await page.getByRole("link",{name:"Notebook",exact:true}).getAttribute("href"));
     assert.equal(notebook.searchParams.get("path"),"portal/irn/4-klasse/basis_neuron.ipynb");
     const solution=await page.getByRole("link",{name:"Lösung",exact:true}).getAttribute("href");
     assert.equal(new URL(solution,page.url()).searchParams.get("course"),"irn/4-klasse");
 
+    realIrnMaterials=true;
+    await page.reload();
+    for(let number=1;number<=10;number++){
+      if(number!==1)await page.locator("#lessonNav a[data-dl='"+number+"']").click();
+      await page.waitForFunction(n=>document.querySelector(".lesson-heading h2")?.textContent.includes(
+        "DL "+String(n).padStart(2,"0")),number);
+      assert.equal(await page.locator(".material-phase").count(),5,"IRN4 phase cards for DL "+number);
+      assert.deepEqual(await page.locator(".material-phase-label").allTextContents(),
+        materialLessons[number-1].phases.map(p=>p.phase+" · "+p.minutes+" Min."));
+      if(number===1){
+        assert.equal(await page.locator('a[href$="dl01_intelligenz_regeln.pdf"]').count(),0);
+        assert.equal(await page.locator(".material-gallery img").count(),2);
+        assert.equal(await page.locator(".material-phase-index").first().evaluate(
+          el=>getComputedStyle(el).backgroundColor),
+          "rgb("+irnTheme.slice(1).match(/../g).map(value=>parseInt(value,16)).join(", ")+")");
+      }
+    }
     await page.setViewportSize({width:390,height:844});
     assert.equal(await page.locator(".lesson-link").count(),10);
     assert(await page.locator(".lesson-sidebar").isVisible(),"Mobile DL navigation must remain visible");

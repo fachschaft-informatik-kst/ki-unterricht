@@ -27,6 +27,9 @@ Alles wird zusammen als Pull Request eingereicht, innerhalb des Limits von
 `scripts/new_lesson.py "Titel" --course bok/4-klasse --section <thema>` angelegt und danach im Formular bearbeitet
 werden. Siehe [Redaktionskonzept](ARCHITEKTUR.md).
 
+Der Materialkoffer bleibt in den kurslokalen `materialien.md` bearbeitbar.
+«Drucken / PDF» gibt die ausgewählte Doppellektion aus.
+
 Der Pull Request startet die **bestehende GitHub-Action**. Erst ein erfolgreicher
 Merge nach \`main\` löst die Veröffentlichung über GitHub Pages aus. Es gibt
 **keine automatische Veröffentlichung unmittelbar nach dem Bearbeiten**.
@@ -190,7 +193,7 @@ Siehe [Mehrkurs-Deployment](MULTIKURS-DEPLOYMENT.md).
   Entfernen, die CI prüft die Verträge mit gespeicherten Schülerdaten.
 - Max. 12 Dateien pro PR. Schreibbar sind nummerierte Kapitel,
   Themenpläne, Themenmaterialien, das Bereichsmanifest und neue Bilddateien
-  unter \`kurse/<lehrperson>/<klasse>/projekt/grafiken/uploads/\`. Der Worker prüft den Gesamtkurs auf
+  unter \`kurse/<lehrperson>/<klasse>/assets/grafiken/uploads/\`. Der Worker prüft den Gesamtkurs auf
   bestehende IDs, vollständige Themen, eindeutige Reihenfolge und gültige AVIVA-Pläne.
   JS, GitHub-Workflows und Administrationscode bleiben gesperrt.
 - HTML in bearbeiteten Kapiteln kann auf der veröffentlichten öffentlichen

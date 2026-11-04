@@ -21,6 +21,9 @@ for obsolete in ("basis", "projekt", "content", "kursseiten", "lehrperson",
     assert not (ROOT / obsolete).exists(), f"Root mirror remains: {obsolete}"
 
 courses = load_registry()
+for base in (ROOT / "kurse").glob("*/*-klasse"):
+    assert (base / "assets/grafiken/kst_logo.png").is_file(), base
+    assert not (base / "projekt").exists(), f"Old resource directory remains: {base}"
 for course in courses:
     with TemporaryDirectory() as temp:
         root = Path(temp)
@@ -33,7 +36,7 @@ for course in courses:
         for name in ("kurse.html", "portal-index.html"):
             shutil.copy2(ROOT / name, root / name)
         marker = "isolated-" + course["id"]
-        image = base / "projekt/grafiken/kst_logo.png"
+        image = base / "assets/grafiken/kst_logo.png"
         image.write_bytes(marker.encode())
         registry = base / "experimente/registry.json"
         entries = json.loads(registry.read_text(encoding="utf-8"))

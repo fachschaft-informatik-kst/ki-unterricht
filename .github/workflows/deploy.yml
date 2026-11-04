@@ -267,6 +267,7 @@ jobs:
           python tests/check_new_lessons.py
           python tests/check_new_lesson_cli.py
           python tests/check_materials.py
+          python tests/check_testbilder.py
           python tests/check_course_model.py
           python tests/check_admin.py
           python scripts/sync_editor_preview.py --check

@@ -135,7 +135,7 @@ Diese Inhaltsvorschau enthält keine ausführbare JupyterLite-Laufzeit. Der voll
 | Einen Glossarbegriff ändern | Editor oder `kurse/<kurs>/kursseiten/glossar.json` |
 | Ein Python-Notebook ändern | `kurse/<kurs>/content/` |
 | Layout oder interaktive Funktionen ändern | `shared/portal/`, `shared/basis/` |
-| Kursgrafiken oder Bilddaten ändern | `kurse/<kurs>/projekt/grafiken/`, `.../testbilder/` |
+| Kursgrafiken oder Bilddaten ändern | `kurse/<kurs>/assets/grafiken/`, `.../testbilder/` |
 | Neue Kapitel/Lektionen lokal anlegen | `scripts/new_chapter.py` / `scripts/new_lesson.py`, jeweils mit `--course irn/1-klasse` |
 | Einen neuen Kurs anlegen | `scripts/add_teacher_course.py` |
 

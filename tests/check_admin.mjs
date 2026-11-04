@@ -242,15 +242,15 @@ try{
   assert.equal((await submit([otherCourse,newNotebook])).status,400,
     "A fourth-year notebook must not be linked from first-year pages");
   assert.equal(writes.length,0);
-  const image={path:fourth+"projekt/grafiken/uploads/test.png",expectedSha:null,
+  const image={path:fourth+"assets/grafiken/uploads/test.png",expectedSha:null,
     content:Buffer.from([137,80,78,71,13,10,26,10,...Array(16).fill(0)]).toString("base64")};
   assert.equal((await submit([{...chapterLinked,content:sources.get(chapterFile)},image])).status,201);
   assert.equal((await submit([
     {...chapterLinked,content:sources.get(chapterFile)},
-    ...Array.from({length:11},(_,i)=>({...image,path:fourth+"projekt/grafiken/uploads/test-"+i+".png"}))
+    ...Array.from({length:11},(_,i)=>({...image,path:fourth+"assets/grafiken/uploads/test-"+i+".png"}))
   ])).status,201,"Maximum-size 12-file upload must fit the subrequest budget");
   writes.length=0;
-  assert.equal((await submit([{...image,path:"projekt/grafiken/uploads/test.png"}])).status,400);
+  assert.equal((await submit([{...image,path:"assets/grafiken/uploads/test.png"}])).status,400);
   assert.equal((await submit([otherCourse,image])).status,400,"Uploads must belong to the same course as chapters");
   assert.equal(writes.length,0);
   const download=bySlug["irn/1-klasse"].courseRoot+"/"+DOWNLOADS["Arbeitsblatt_Perzeptron_Lsg.md"];

@@ -12,7 +12,7 @@ kurse/
 shared/{basis,portal,worksheet-pdf}/  admin-worker/  scripts/
 ```
 
-Jedes Kursverzeichnis hat dieselben internen Unterordner: `kursseiten/manifest.json`, `kursseiten/glossar.json`, `kursseiten/<kapitel>/` inklusive AVIVA-`planung.json` und `materialien.md`, `lehrperson/` mit Musterlösungen und bei Klasse 4 Einleitung zum Materialkoffer, `content/` mit Notebook- und weiteren Hilfsdateien, `projekt/grafiken/`, `experimente/registry.json`, `worksheets/`, `testbilder/` sowie `snapshot.json` zur Herkunftsbestimmung. Dateien sind unabhängige Kopien, keine Symlinks. Der Snapshot beschreibt den ursprünglichen Kopierzeitpunkt, nicht einen laufend synchronisierten Stand.
+Jedes Kursverzeichnis hat dieselben internen Unterordner: `kursseiten/manifest.json`, `kursseiten/glossar.json`, `kursseiten/<kapitel>/` inklusive AVIVA-`planung.json` und `materialien.md`, `lehrperson/` mit Musterlösungen und bei Klasse 4 Einleitung zum Materialkoffer, `content/` mit Notebook- und weiteren Hilfsdateien, `assets/grafiken/`, `experimente/registry.json`, `worksheets/`, `testbilder/` sowie `snapshot.json` zur Herkunftsbestimmung. Dateien sind unabhängige Kopien, keine Symlinks. Der Snapshot beschreibt den ursprünglichen Kopierzeitpunkt, nicht einen laufend synchronisierten Stand.
 
 ## Welche Pfade bearbeitet werden
 

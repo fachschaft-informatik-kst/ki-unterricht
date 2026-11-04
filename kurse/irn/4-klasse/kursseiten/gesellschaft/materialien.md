@@ -1,9 +1,92 @@
 ## Doppellektion 10
 
-### Direkt öffnen
+**Bereitlegen:** [Cathy O’Neils TED Talk](https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end), Papier und diese Fallkarten. Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock; keine zusätzliche Pro/Contra-Raumaufteilung.
 
-- [TED Talk von Cathy O’Neil](https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end)
-- [Video-Auftrag, WMD- und Rückkopplungsgrafiken im Kurs](index.html#gesellschaft-1) · [WMD-Kriterien](index.html#wmd)
-- [Debattenfragen](index.html#kritisch) · [Schlussurteil](index.html#urteil)
+### Ankommen · 5 Min. · Eine erste Position
 
-**Ablauf:** Individuelle Ausgangsposition, gemeinsame Kriterien am Video, anschliessend **Einzelüberlegung → Gruppenurteil → Klassenaustausch**.
+**Einzeln · 5 Min.**
+
+«Gleiche Regeln sind automatisch fair.» Stimmen Sie zu, teilweise zu oder nicht zu? Notieren Sie einen Grund und behalten Sie die Antwort für den Schlussvergleich.
+
+### Vorwissen aktivieren · 5 Min. · Von der Modellgrenze zur Folge
+
+**Einzeln → Klasse · 2 / 3 Min.**
+
+Wählen Sie eine Beobachtung aus Bildprojekt, Fremdauswertung oder Sprachmodell:
+
+| Beobachtete Modellgrenze | Wer wäre betroffen? | Mögliche Folge ausserhalb des Schulversuchs |
+|---|---|---|
+| ____________________ | ____________________ | ____________________ |
+
+Die Klasse teilt zwei Beispiele. Unterscheiden Sie beobachtete Fehler von bloss vermuteten Folgen.
+
+### Informieren · 20 Min. · O’Neils Warnung prüfen
+
+**Lehrperson · 13 Min. Video / 7 Min. Einordnung**
+
+#### Beobachtungsauftrag zum Video
+
+Notieren Sie nur Stichworte: **ein konkretes Beispiel**, wer entscheidet, wer betroffen ist und ob Betroffene die Entscheidung prüfen oder anfechten können.
+
+| Opacity · Intransparenz | Scale · Reichweite | Damage · Schaden |
+|---|---|---|
+| Wer versteht die Entscheidung und kann sie prüfen? | Wie viele Menschen betrifft das Verfahren, wie oft? | Welche konkreten Nachteile entstehen, für wen? |
+
+**Rückkopplung:** Eine Entscheidung verändert spätere Daten; diese Daten können dieselbe Entscheidungspraxis bestätigen und verstärken. Zeichnen Sie einen Pfeil von der Folge zurück zu den neuen Daten. [WMD-Kriterien und Grafiken](index.html#wmd).
+
+> **Lehrpersonenhinweis:** Die drei Kriterien sind ein Analysewerkzeug, keine automatische Ja/Nein-Maschine. Ein schädlicher Einzelfall belegt nicht ohne Weiteres grosse Reichweite oder eine Rückkopplung.
+
+### Verarbeiten · 45 Min. · Eine Fallkarte, ein begründetes Urteil
+
+**Einzeln / Gruppe · 8 Min. Vorüberlegung / 37 Min. Gruppenarbeit**
+
+Die folgenden Fälle sind **fiktive Unterrichtsszenarien**. Wählen Sie gemeinsam einen Fall und bleiben Sie dabei.
+
+#### Fallkarte A · Bewerbungen
+
+Ein Unternehmen sortiert Bewerbungen anhand früherer Einstellungsentscheidungen vor. Erwerbsunterbrüche senken den Wert. Nur die bestplatzierten Personen werden zum Gespräch eingeladen. Abgelehnte erhalten keine Erklärung; der Anbieter will die Gewichtung nicht offenlegen.
+
+**Prüffokus:** Welche früheren Auswahlmuster könnten weiterwirken? Über abgelehnte Personen liegen später kaum Leistungsdaten vor. Was kann das Modell deshalb gar nicht nachprüfen?
+
+#### Fallkarte B · Schule
+
+Ein Prognosesystem schätzt anhand früherer Noten und erfasster Absenzen das Abschlussrisiko. Bei hohem Risiko empfiehlt es weniger anspruchsvolle Kurse. Die Schule prüft die Empfehlung selten; spätere Abschlüsse werden wieder als Trainingsdaten genutzt.
+
+**Prüffokus:** Fehlende Daten, Krankheit und soziale Bedingungen sind nicht gleichbedeutend mit fehlender Fähigkeit. Wie könnte eine Empfehlung selbst die spätere Lernchance verändern?
+
+#### Fallkarte C · Kredit
+
+Eine Bank nutzt unter anderem Wohngebiet und bisherige Kreditverläufe für einen Score. Personen mit niedrigem Wert erhalten schlechtere Konditionen oder keinen Kredit. Das gleiche Modell wird in vielen Filialen eingesetzt; Betroffene kennen nur die Ablehnung.
+
+**Prüffokus:** Welche Information ist ein Stellvertreter statt eine direkte Aussage über die einzelne Person? Wie könnten schlechtere Konditionen zukünftige Zahlungsschwierigkeiten verstärken?
+
+#### Urteilsbogen · Beleg, Grenze, Massnahme
+
+Prüfen Sie zuerst allein Betroffene, wichtigsten Beleg und eine möglicherweise übersehene Folge. Führen Sie die Notizen danach in der Gruppe zusammen.
+
+| Prüffrage | Stichworte zum gewählten Fall |
+|---|---|
+| Welche Entscheidung wird getroffen und wen betrifft sie? | ____________________ |
+| Opacity: Was ist nicht prüfbar? | ____________________ |
+| Scale: Welche Reichweite ist belegt, welche nur angenommen? | ____________________ |
+| Damage: Welcher konkrete Schaden droht? | ____________________ |
+| Rückkopplung: Entscheidung → Folge → neue Daten → nächste Entscheidung | ____________________ |
+| Stärkstes Argument für O’Neils Warnung | ____________________ |
+| Stärkstes Gegenargument / mögliche nützliche Anwendung | ____________________ |
+| Unsere Massnahme: Wer muss was ändern? | ____________________ |
+| Erfolgskriterium: Woran und wann wird Verbesserung geprüft? | ____________________ |
+| Zielkonflikt / verbleibende Grenze | ____________________ |
+
+**Massnahmenbeispiel, keine fertige Falllösung:** Eine Einspruchsmöglichkeit mit unabhängiger Prüfung einführen; Bearbeitungszeit und korrigierte Fehlentscheidungen über einen festgelegten Zeitraum prüfen. Zielkonflikt: Aufwand und Verzögerung versus wirksame Überprüfung.
+
+Vergleichen Sie mit einem Video-Beispiel und Ihrem Bildprojekt: Warum ist der kleine, lokal begrenzte Schulversuch wahrscheinlich keine WMD? Begrenzen Sie die Aussage: Auch er verlangt sorgfältigen Umgang mit Bildern und nachvollziehbare Behauptungen. [Debattenfragen als Gesprächshilfe](index.html#kritisch).
+
+### Auswerten · 15 Min. · Anfangsthese erneut prüfen
+
+**Klasse → Einzeln → Einzeln · 9 / 4 / 2 Min.**
+
+Vergleichen Sie zwei Fallurteile und ihre Zielkonflikte. Nicht jede Person muss vortragen. Notieren Sie danach eine Erkenntnis und eine offene Frage zum Kurs.
+
+**Persönliches Schlussurteil:** «Gleiche Regeln sind …, weil im Fall … die betroffene Person … . Eine überprüfbare Gegenmassnahme ist … . Erfolg würde sichtbar an … . Offen bleibt …».
+
+**Antwortort:** [Schlussurteil auf der Kursseite](index.html#urteil). Stichworte genügen für den gemeinsamen Bogen; das eigene Schlussurteil muss begründet sein.

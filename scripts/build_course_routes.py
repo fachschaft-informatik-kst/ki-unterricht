@@ -169,7 +169,7 @@ def copy_course_assets(course: dict, target: Path) -> None:
     target.mkdir(parents=True, exist_ok=True)
     shutil.copytree(ROOT / "shared/portal", target, dirs_exist_ok=True,
                     ignore=shutil.ignore_patterns("admin", "*.template.html", "README.md"))
-    shutil.copytree(base / "projekt", target, dirs_exist_ok=True)
+    shutil.copytree(base / "assets", target, dirs_exist_ok=True)
     entries = load_experiments(course, ROOT)
     (target / "experiments.json").write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -181,7 +181,7 @@ def copy_course_assets(course: dict, target: Path) -> None:
         if not style:
             raise ValueError("Gemeinsame CSS-Basis fehlt")
         (target / "theme.css").write_text(style.group(1) + "\n", encoding="utf-8")
-    svg = (base / "projekt/grafiken/netz_hintergrund.svg").read_text(encoding="utf-8")
+    svg = (base / "assets/grafiken/netz_hintergrund.svg").read_text(encoding="utf-8")
     (target / "grafiken/netz_hintergrund_kurs.svg").write_text(
         course_artwork(course, svg), encoding="utf-8")
     favicon = (ROOT / "shared/portal/favicon.svg").read_text(encoding="utf-8")

@@ -1,0 +1,651 @@
+{
+  "author": "Mihai Oltean",
+  "dataset": "Fruits-360",
+  "repository": "https://github.com/fruits-360/fruits-360-100x100",
+  "revision": "bed1c24ee70de1569272de3882fbde88211c08b5",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "changes": "Subset selection and renamed files; JPEG bytes unchanged. Upstream photos are background-segmented and resized to 100x100.",
+  "records": [
+    {
+      "path": "Apfel/T1/apfel_T1_1.jpg",
+      "label": "Apfel",
+      "group": "T1",
+      "collection": "Apple Red 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Red%201/0_100.jpg",
+      "sha256": "a4e5ebf0f3f677513e73ce80b1fab344237964769fc97ce8aedad9e89f25ec67"
+    },
+    {
+      "path": "Apfel/T1/apfel_T1_2.jpg",
+      "label": "Apfel",
+      "group": "T1",
+      "collection": "Apple Red 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Red%201/163_100.jpg",
+      "sha256": "b9f81ca5da5d11ac82f8f014680c8e312cf123cc70d88e9521ffbff5255442a9"
+    },
+    {
+      "path": "Apfel/T1/apfel_T1_3.jpg",
+      "label": "Apfel",
+      "group": "T1",
+      "collection": "Apple Red 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Red%201/226_100.jpg",
+      "sha256": "3f9d6075c915aac76f361a54d21c215cb627fe2223911a5d747a9311957174a2"
+    },
+    {
+      "path": "Apfel/T1/apfel_T1_4.jpg",
+      "label": "Apfel",
+      "group": "T1",
+      "collection": "Apple Red 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Red%201/28_100.jpg",
+      "sha256": "565b1a9f0c3a7745ce1edfa0f08741a5f877c909d40bdb815b374f3f7c8e1fc0"
+    },
+    {
+      "path": "Apfel/T1/apfel_T1_5.jpg",
+      "label": "Apfel",
+      "group": "T1",
+      "collection": "Apple Red 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Red%201/r_131_100.jpg",
+      "sha256": "88c57922a7924bd75beddc358ab45a093975bb02ae6a818bbf66af5bcca02825"
+    },
+    {
+      "path": "Apfel/T1/apfel_T1_6.jpg",
+      "label": "Apfel",
+      "group": "T1",
+      "collection": "Apple Red 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Red%201/r_195_100.jpg",
+      "sha256": "ac86e7adbeaf1c92e1f1809177eb6a2366fc7818a773fa521e5461455f85ac11"
+    },
+    {
+      "path": "Apfel/T1/apfel_T1_7.jpg",
+      "label": "Apfel",
+      "group": "T1",
+      "collection": "Apple Red 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Red%201/r_258_100.jpg",
+      "sha256": "a825dc06c77fec300058ab1cb06ce5c3f837888180869d212fd7956192bc8ae0"
+    },
+    {
+      "path": "Apfel/T1/apfel_T1_8.jpg",
+      "label": "Apfel",
+      "group": "T1",
+      "collection": "Apple Red 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Red%201/r_320_100.jpg",
+      "sha256": "f2128ac5c4e52e814bdf365f8d7e74198a196781f3e794b3183b1127bbb2bba7"
+    },
+    {
+      "path": "Apfel/T2/apfel_T2_1.jpg",
+      "label": "Apfel",
+      "group": "T2",
+      "collection": "Apple Golden 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Golden%201/0_100.jpg",
+      "sha256": "5a6c4e59aadfcb22546793ca5e01b4485d2b98cb27bb4b092e66637b8ea77458"
+    },
+    {
+      "path": "Apfel/T2/apfel_T2_2.jpg",
+      "label": "Apfel",
+      "group": "T2",
+      "collection": "Apple Golden 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Golden%201/205_100.jpg",
+      "sha256": "d5907ba7e7c8f8f8ba9c4c2e04d3ef2536db232b745b0c5ea7ec1e6c7a9b8d0d"
+    },
+    {
+      "path": "Apfel/T2/apfel_T2_3.jpg",
+      "label": "Apfel",
+      "group": "T2",
+      "collection": "Apple Golden 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Golden%201/268_100.jpg",
+      "sha256": "5db5a86d4ab8ba2cc1cc8744abfdb31ecdd19d9290e31cfc987366f1429688f8"
+    },
+    {
+      "path": "Apfel/T2/apfel_T2_4.jpg",
+      "label": "Apfel",
+      "group": "T2",
+      "collection": "Apple Golden 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Golden%201/48_100.jpg",
+      "sha256": "a94dd6267a46735d75d825106d69838c9f740e46fe67e0a812bc9aaa5d953018"
+    },
+    {
+      "path": "Apfel/T2/apfel_T2_5.jpg",
+      "label": "Apfel",
+      "group": "T2",
+      "collection": "Apple Golden 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Golden%201/r_136_100.jpg",
+      "sha256": "fa2ec3817d41a00953887354385edc8a22683b94e59891a80bdb9b2df6897e8e"
+    },
+    {
+      "path": "Apfel/T2/apfel_T2_6.jpg",
+      "label": "Apfel",
+      "group": "T2",
+      "collection": "Apple Golden 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Golden%201/r_198_100.jpg",
+      "sha256": "4283b1c23f255adb923d49dba60304ae98694e0a473682063e95b3e21e35d98b"
+    },
+    {
+      "path": "Apfel/T2/apfel_T2_7.jpg",
+      "label": "Apfel",
+      "group": "T2",
+      "collection": "Apple Golden 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Golden%201/r_25_100.jpg",
+      "sha256": "d5db4d266e5f5bd00b1f7d5cfb23a930a2b02c0e94cebdac8570733d0c99aa88"
+    },
+    {
+      "path": "Apfel/T2/apfel_T2_8.jpg",
+      "label": "Apfel",
+      "group": "T2",
+      "collection": "Apple Golden 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Golden%201/r_320_100.jpg",
+      "sha256": "5d2874d2c7609cfae3573ee5b88504a5dffc4abad157400a1b98faa65f9487d7"
+    },
+    {
+      "path": "Apfel/V1/apfel_V1_1.jpg",
+      "label": "Apfel",
+      "group": "V1",
+      "collection": "Apple Granny Smith 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Granny%20Smith%201/0_100.jpg",
+      "sha256": "e30514064eb45c996b4e96006f61e7b894bac4eda3c01bc98fd11412f5f253b1"
+    },
+    {
+      "path": "Apfel/V1/apfel_V1_2.jpg",
+      "label": "Apfel",
+      "group": "V1",
+      "collection": "Apple Granny Smith 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Granny%20Smith%201/163_100.jpg",
+      "sha256": "9606f7f69e22b92e7aab0f4d87f5b9f111002d15b7a2f1919c42eabdb816e6e9"
+    },
+    {
+      "path": "Apfel/V1/apfel_V1_3.jpg",
+      "label": "Apfel",
+      "group": "V1",
+      "collection": "Apple Granny Smith 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Granny%20Smith%201/226_100.jpg",
+      "sha256": "548886c01be95761dc2f362245e40b17cbd08af29fab190db88b6ba4240b1da1"
+    },
+    {
+      "path": "Apfel/V1/apfel_V1_4.jpg",
+      "label": "Apfel",
+      "group": "V1",
+      "collection": "Apple Granny Smith 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Granny%20Smith%201/28_100.jpg",
+      "sha256": "44e4c6e9b0eb104e139117a9fd747c1d6936112f2200aca80a4193db08ad4755"
+    },
+    {
+      "path": "Apfel/V1/apfel_V1_5.jpg",
+      "label": "Apfel",
+      "group": "V1",
+      "collection": "Apple Granny Smith 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Granny%20Smith%201/r_131_100.jpg",
+      "sha256": "bf52de061d5505aa4ca40eb5f33704df4a42754451d0ab0cac8c450d34ae5560"
+    },
+    {
+      "path": "Apfel/V1/apfel_V1_6.jpg",
+      "label": "Apfel",
+      "group": "V1",
+      "collection": "Apple Granny Smith 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Granny%20Smith%201/r_195_100.jpg",
+      "sha256": "1c7b759934fb4e69d59963fa4975e51d88c77703b36ef9c4ee46b2fb69ea710b"
+    },
+    {
+      "path": "Apfel/V1/apfel_V1_7.jpg",
+      "label": "Apfel",
+      "group": "V1",
+      "collection": "Apple Granny Smith 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Granny%20Smith%201/r_258_100.jpg",
+      "sha256": "a54e2296787c533bf840f0dde577a850a72e88bdb994932d68b94398a66d8e5d"
+    },
+    {
+      "path": "Apfel/V1/apfel_V1_8.jpg",
+      "label": "Apfel",
+      "group": "V1",
+      "collection": "Apple Granny Smith 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Granny%20Smith%201/r_320_100.jpg",
+      "sha256": "3dffa640e4a72a4f0fba7ba6539f2bd7ad1ffdd4be4e4ab23e837ebd692a8426"
+    },
+    {
+      "path": "Apfel/P1/apfel_P1_1.jpg",
+      "label": "Apfel",
+      "group": "P1",
+      "collection": "Apple Braeburn 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Braeburn%201/0_100.jpg",
+      "sha256": "eee6faa63ca955e0bf046423b26e552417e0d7b5d9ca4458b8043dc0f9a55a25"
+    },
+    {
+      "path": "Apfel/P1/apfel_P1_2.jpg",
+      "label": "Apfel",
+      "group": "P1",
+      "collection": "Apple Braeburn 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Braeburn%201/163_100.jpg",
+      "sha256": "0d84d6f8888f59761f4bc4289810a2d89767c92e50f82e6c83929689b21e74a7"
+    },
+    {
+      "path": "Apfel/P1/apfel_P1_3.jpg",
+      "label": "Apfel",
+      "group": "P1",
+      "collection": "Apple Braeburn 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Braeburn%201/226_100.jpg",
+      "sha256": "778ebebe6278a8228d98d739d717b945d582a5026c7e75603c94b7d550d7d8a1"
+    },
+    {
+      "path": "Apfel/P1/apfel_P1_4.jpg",
+      "label": "Apfel",
+      "group": "P1",
+      "collection": "Apple Braeburn 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Braeburn%201/28_100.jpg",
+      "sha256": "264c241481ab8a81758a245a4a707af0e6d7dc5c1a275f0229dbef1dec947cef"
+    },
+    {
+      "path": "Apfel/P1/apfel_P1_5.jpg",
+      "label": "Apfel",
+      "group": "P1",
+      "collection": "Apple Braeburn 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Braeburn%201/r_131_100.jpg",
+      "sha256": "818ef15b9f5c91741793152c389965ab9e773f0316c2acd8815f28ff9230eea5"
+    },
+    {
+      "path": "Apfel/P1/apfel_P1_6.jpg",
+      "label": "Apfel",
+      "group": "P1",
+      "collection": "Apple Braeburn 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Braeburn%201/r_195_100.jpg",
+      "sha256": "b2c41345b658ae274981132c803c0e29040928773b903fc82fa46823ad2ac92a"
+    },
+    {
+      "path": "Apfel/P1/apfel_P1_7.jpg",
+      "label": "Apfel",
+      "group": "P1",
+      "collection": "Apple Braeburn 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Braeburn%201/r_258_100.jpg",
+      "sha256": "1071daa2f30baa244561d4720f43c573c77e52b75454fc8a1641ef3123d15d5a"
+    },
+    {
+      "path": "Apfel/P1/apfel_P1_8.jpg",
+      "label": "Apfel",
+      "group": "P1",
+      "collection": "Apple Braeburn 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Braeburn%201/r_320_100.jpg",
+      "sha256": "d3d8eeb086e43faacd26a789f71db71b52f0f6915a44f8e8a4b586ba35c02078"
+    },
+    {
+      "path": "Apfel/P2/apfel_P2_1.jpg",
+      "label": "Apfel",
+      "group": "P2",
+      "collection": "Apple Pink Lady 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Pink%20Lady%201/0_100.jpg",
+      "sha256": "b2df55d23500752f22cd48df88d3b1d368b9cc51dc1416ec6f0483a75e5df9b5"
+    },
+    {
+      "path": "Apfel/P2/apfel_P2_2.jpg",
+      "label": "Apfel",
+      "group": "P2",
+      "collection": "Apple Pink Lady 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Pink%20Lady%201/159_100.jpg",
+      "sha256": "6382afbfea4533bc0b9d0d06240212b2d568afb79b2a8581c4fc7a413d659010"
+    },
+    {
+      "path": "Apfel/P2/apfel_P2_3.jpg",
+      "label": "Apfel",
+      "group": "P2",
+      "collection": "Apple Pink Lady 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Pink%20Lady%201/217_100.jpg",
+      "sha256": "7860aecad6759e7084a99c45df7c71b9d84248fab3da41a655d6978de908db99"
+    },
+    {
+      "path": "Apfel/P2/apfel_P2_4.jpg",
+      "label": "Apfel",
+      "group": "P2",
+      "collection": "Apple Pink Lady 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Pink%20Lady%201/61_100.jpg",
+      "sha256": "59d1e65fef49a47d2a7c2651eb8cb06a3976ce081c1c9b8809c2e8ad4748814c"
+    },
+    {
+      "path": "Apfel/P2/apfel_P2_5.jpg",
+      "label": "Apfel",
+      "group": "P2",
+      "collection": "Apple Pink Lady 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Pink%20Lady%201/r_129_100.jpg",
+      "sha256": "f14b686722c591f5abd2dadba68e63ec5943b57ff011e5f1f7dd40529bdb3bd4"
+    },
+    {
+      "path": "Apfel/P2/apfel_P2_6.jpg",
+      "label": "Apfel",
+      "group": "P2",
+      "collection": "Apple Pink Lady 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Pink%20Lady%201/r_188_100.jpg",
+      "sha256": "17a2c84379bb08ebd0244251dafd193b5917ef15188fe8c237265f6cded09c4a"
+    },
+    {
+      "path": "Apfel/P2/apfel_P2_7.jpg",
+      "label": "Apfel",
+      "group": "P2",
+      "collection": "Apple Pink Lady 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Pink%20Lady%201/r_2_100.jpg",
+      "sha256": "202c6561724b8609d08c392fd956442677570c96c5b5d529aeb68f1d102d7ec5"
+    },
+    {
+      "path": "Apfel/P2/apfel_P2_8.jpg",
+      "label": "Apfel",
+      "group": "P2",
+      "collection": "Apple Pink Lady 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Apple%20Pink%20Lady%201/r_9_100.jpg",
+      "sha256": "a262feaaac04aa3a9c970eca6c04b9ce6912351c24fab1ed9a8e9803e33b6728"
+    },
+    {
+      "path": "Banane/T1/banane_T1_1.jpg",
+      "label": "Banane",
+      "group": "T1",
+      "collection": "Banana 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%201/0_100.jpg",
+      "sha256": "b01131974412e89a7ebc337924f5473a5d8dc28af6713205bbda23ae661ab540"
+    },
+    {
+      "path": "Banane/T1/banane_T1_2.jpg",
+      "label": "Banane",
+      "group": "T1",
+      "collection": "Banana 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%201/193_100.jpg",
+      "sha256": "c72e7e1b318e49f33d102ecc0c27d365263b05265d14142caf497e0c89bf74e7"
+    },
+    {
+      "path": "Banane/T1/banane_T1_3.jpg",
+      "label": "Banane",
+      "group": "T1",
+      "collection": "Banana 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%201/262_100.jpg",
+      "sha256": "8a60191002b7942a5a66b29f32192a4263cb93eec7a0f17015fa577dfc847c4d"
+    },
+    {
+      "path": "Banane/T1/banane_T1_4.jpg",
+      "label": "Banane",
+      "group": "T1",
+      "collection": "Banana 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%201/65_100.jpg",
+      "sha256": "94664c9a0ca68ad8a55207cb51e0c138c0ec36a1a7a63558752c55188b6fc385"
+    },
+    {
+      "path": "Banane/T1/banane_T1_5.jpg",
+      "label": "Banane",
+      "group": "T1",
+      "collection": "Banana 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%201/r_131_100.jpg",
+      "sha256": "f61cd170860488b0e6681a9d5e88e5a9a236d151b2e9dd12b89b20e5f8cbed3a"
+    },
+    {
+      "path": "Banane/T1/banane_T1_6.jpg",
+      "label": "Banane",
+      "group": "T1",
+      "collection": "Banana 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%201/r_199_100.jpg",
+      "sha256": "a24a695ec37b38f885c602f2654cb1b9b33999dfb31bc6c3140eccef75478c57"
+    },
+    {
+      "path": "Banane/T1/banane_T1_7.jpg",
+      "label": "Banane",
+      "group": "T1",
+      "collection": "Banana 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%201/r_289_100.jpg",
+      "sha256": "45c28bc5918680079a78d1189c546cfd06226dae5d0cab99737d3cf6a15b755a"
+    },
+    {
+      "path": "Banane/T1/banane_T1_8.jpg",
+      "label": "Banane",
+      "group": "T1",
+      "collection": "Banana 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%201/r_9_100.jpg",
+      "sha256": "f89c9aac9ccda409ea53431ffd8af649cc3db4b54c884d15aac14b41995cc657"
+    },
+    {
+      "path": "Banane/T2/banane_T2_1.jpg",
+      "label": "Banane",
+      "group": "T2",
+      "collection": "Banana 2",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%202/r1_0_100.jpg",
+      "sha256": "8ed1a628ac3270bfb4c9a7818cbf40f039bacee47c8f4fd7a06494ca4100f79b"
+    },
+    {
+      "path": "Banane/T2/banane_T2_2.jpg",
+      "label": "Banane",
+      "group": "T2",
+      "collection": "Banana 2",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%202/r1_138_100.jpg",
+      "sha256": "5737ca442d9a77bbf8573c31ae65f0a07627e83b1dc82b4927bba0321f17c791"
+    },
+    {
+      "path": "Banane/T2/banane_T2_3.jpg",
+      "label": "Banane",
+      "group": "T2",
+      "collection": "Banana 2",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%202/r1_177_100.jpg",
+      "sha256": "1cec6c0bd7cd5e4e386c7592db8ff0c9a67f3370dc690155cbee428e37afe566"
+    },
+    {
+      "path": "Banane/T2/banane_T2_4.jpg",
+      "label": "Banane",
+      "group": "T2",
+      "collection": "Banana 2",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%202/r1_214_100.jpg",
+      "sha256": "84d262e178e77371059d4efbe6a74c10a29bbe80172f5ee894c09d2b428c469a"
+    },
+    {
+      "path": "Banane/T2/banane_T2_5.jpg",
+      "label": "Banane",
+      "group": "T2",
+      "collection": "Banana 2",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%202/r1_252_100.jpg",
+      "sha256": "f92895f6c47ac1d2e7ca3b7c2e3d513a49f69f0e0a954d19f3eb4510b4f9bf29"
+    },
+    {
+      "path": "Banane/T2/banane_T2_6.jpg",
+      "label": "Banane",
+      "group": "T2",
+      "collection": "Banana 2",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%202/r1_290_100.jpg",
+      "sha256": "68e77e210d153119ab55d38e9ad8f4a32b8b309e1ab01c34b3128137627cf284"
+    },
+    {
+      "path": "Banane/T2/banane_T2_7.jpg",
+      "label": "Banane",
+      "group": "T2",
+      "collection": "Banana 2",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%202/r1_60_100.jpg",
+      "sha256": "c81983e2912c059ed29f2f2f909f47b779cc6f0b9e97cc1a423aa126e61fc5cd"
+    },
+    {
+      "path": "Banane/T2/banane_T2_8.jpg",
+      "label": "Banane",
+      "group": "T2",
+      "collection": "Banana 2",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%202/r1_9_100.jpg",
+      "sha256": "0321ed552cb750f31b9a3f16c48303b4b526dca90b0d3bec11e1291a767b05d5"
+    },
+    {
+      "path": "Banane/V1/banane_V1_1.jpg",
+      "label": "Banane",
+      "group": "V1",
+      "collection": "Banana 3",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%203/r0_0_100.jpg",
+      "sha256": "612c067ae8da99e8c06ee1b4161ce5cd5fe0b0be777ab31cbb5b3fe8df810fc9"
+    },
+    {
+      "path": "Banane/V1/banane_V1_2.jpg",
+      "label": "Banane",
+      "group": "V1",
+      "collection": "Banana 3",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%203/r0_13_100.jpg",
+      "sha256": "30671c14d0480ddf89a2ebc82f597bf8d95fcc806858d7d99257304c2d72a664"
+    },
+    {
+      "path": "Banane/V1/banane_V1_3.jpg",
+      "label": "Banane",
+      "group": "V1",
+      "collection": "Banana 3",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%203/r0_17_100.jpg",
+      "sha256": "7e31a42657f2ac3643ea33aaf27162270f86ab43008a789c3a2cbd46ce27dc16"
+    },
+    {
+      "path": "Banane/V1/banane_V1_4.jpg",
+      "label": "Banane",
+      "group": "V1",
+      "collection": "Banana 3",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%203/r0_218_100.jpg",
+      "sha256": "a8a2546f795ee64f5332bc1ebbbbd470bfe62d11f6a71594833642ac6fa25648"
+    },
+    {
+      "path": "Banane/V1/banane_V1_5.jpg",
+      "label": "Banane",
+      "group": "V1",
+      "collection": "Banana 3",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%203/r0_25_100.jpg",
+      "sha256": "c1a9224b76268bed2f059d91f3134dc6f1165e148981dc87bd2591a49b3c2f44"
+    },
+    {
+      "path": "Banane/V1/banane_V1_6.jpg",
+      "label": "Banane",
+      "group": "V1",
+      "collection": "Banana 3",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%203/r0_29_100.jpg",
+      "sha256": "81d056c91b79a42a2f10c211768390abcc5164d85fbcb5848f8748c62cdd49ab"
+    },
+    {
+      "path": "Banane/V1/banane_V1_7.jpg",
+      "label": "Banane",
+      "group": "V1",
+      "collection": "Banana 3",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%203/r0_5_100.jpg",
+      "sha256": "55ccf1017eff6fb02f4dbba239329d3cb2e818e8249a9699ca1a05d51a3aae67"
+    },
+    {
+      "path": "Banane/V1/banane_V1_8.jpg",
+      "label": "Banane",
+      "group": "V1",
+      "collection": "Banana 3",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%203/r0_9_100.jpg",
+      "sha256": "5161d3f898bfd00a0c2318a9ad7210c0e291890e599a62e5aece93bd5bbce099"
+    },
+    {
+      "path": "Banane/P1/banane_P1_1.jpg",
+      "label": "Banane",
+      "group": "P1",
+      "collection": "Banana 4",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%204/r1_0_100.jpg",
+      "sha256": "d45d67aac5012fb8a34ed3421c10bc7e1984069fd441c5ef38945c25cb36fa8b"
+    },
+    {
+      "path": "Banane/P1/banane_P1_2.jpg",
+      "label": "Banane",
+      "group": "P1",
+      "collection": "Banana 4",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%204/r1_142_100.jpg",
+      "sha256": "7a89547e94f19a15fb613f44ef5c1713052f2f6f4f207716e467027fc43ef014"
+    },
+    {
+      "path": "Banane/P1/banane_P1_3.jpg",
+      "label": "Banane",
+      "group": "P1",
+      "collection": "Banana 4",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%204/r1_186_100.jpg",
+      "sha256": "150dedd401f0241dc7eb3a5a0e2597c789d662d2732f8d47db7a43826650a8c5"
+    },
+    {
+      "path": "Banane/P1/banane_P1_4.jpg",
+      "label": "Banane",
+      "group": "P1",
+      "collection": "Banana 4",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%204/r1_229_100.jpg",
+      "sha256": "649d9e3803166bfec082cae1c5744df39e1c8acce4d46389bcca2e4a30ef8667"
+    },
+    {
+      "path": "Banane/P1/banane_P1_5.jpg",
+      "label": "Banane",
+      "group": "P1",
+      "collection": "Banana 4",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%204/r1_273_100.jpg",
+      "sha256": "e101a459198020e14315205a41e7665be81ade2e658b87c73f02c8b79b345670"
+    },
+    {
+      "path": "Banane/P1/banane_P1_6.jpg",
+      "label": "Banane",
+      "group": "P1",
+      "collection": "Banana 4",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%204/r1_316_100.jpg",
+      "sha256": "fc7926fc95b4ea0e3b655b2dae207514173d93e22c0530c5743c26f3147abdb5"
+    },
+    {
+      "path": "Banane/P1/banane_P1_7.jpg",
+      "label": "Banane",
+      "group": "P1",
+      "collection": "Banana 4",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%204/r1_56_100.jpg",
+      "sha256": "770482b36c187c9831fc2e9b86e4f1f747a4610d08d7f793e339d93b9f38696f"
+    },
+    {
+      "path": "Banane/P1/banane_P1_8.jpg",
+      "label": "Banane",
+      "group": "P1",
+      "collection": "Banana 4",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%204/r1_9_100.jpg",
+      "sha256": "662c6504abd69f8b4b60970370f4207b1337a65fecd066408ee09b18ac13f5d8"
+    },
+    {
+      "path": "Banane/P2/banane_P2_1.jpg",
+      "label": "Banane",
+      "group": "P2",
+      "collection": "Banana Lady Finger 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%20Lady%20Finger%201/0_100.jpg",
+      "sha256": "a01a7e5556e6068a5d773c9722b80bbab6cc5c7c4d2cb8b2accae47b8d3ae0ce"
+    },
+    {
+      "path": "Banane/P2/banane_P2_2.jpg",
+      "label": "Banane",
+      "group": "P2",
+      "collection": "Banana Lady Finger 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%20Lady%20Finger%201/181_100.jpg",
+      "sha256": "580ce85ba0e546ed20178cf026d954a98074fc51fca2f4386e101bc18a115574"
+    },
+    {
+      "path": "Banane/P2/banane_P2_3.jpg",
+      "label": "Banane",
+      "group": "P2",
+      "collection": "Banana Lady Finger 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%20Lady%20Finger%201/80_100.jpg",
+      "sha256": "ae95522d755185d2f1b37de552046a4d5529c0aeef2b0407195c4e6607bd5766"
+    },
+    {
+      "path": "Banane/P2/banane_P2_4.jpg",
+      "label": "Banane",
+      "group": "P2",
+      "collection": "Banana Lady Finger 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%20Lady%20Finger%201/r2_14_100.jpg",
+      "sha256": "3d6565932f2a8d22d19dd94ac9c252d6df7720af9393a3faa082cc7150dee261"
+    },
+    {
+      "path": "Banane/P2/banane_P2_5.jpg",
+      "label": "Banane",
+      "group": "P2",
+      "collection": "Banana Lady Finger 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%20Lady%20Finger%201/r2_52_100.jpg",
+      "sha256": "79a5b656dde3013db0eeacfcded5fd3c5d30c2f21e408b7cdb7c4e66dd48e126"
+    },
+    {
+      "path": "Banane/P2/banane_P2_6.jpg",
+      "label": "Banane",
+      "group": "P2",
+      "collection": "Banana Lady Finger 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%20Lady%20Finger%201/r_119_100.jpg",
+      "sha256": "da3a2c3e2ee367596c3d0dfca8129d35fdf3714a9e672ad53c5be60598ee5898"
+    },
+    {
+      "path": "Banane/P2/banane_P2_7.jpg",
+      "label": "Banane",
+      "group": "P2",
+      "collection": "Banana Lady Finger 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%20Lady%20Finger%201/r_26_100.jpg",
+      "sha256": "73617024727bb0a24d2b0fc6dc8950cbac3b67b83aa9e397fe22eedc67997d3f"
+    },
+    {
+      "path": "Banane/P2/banane_P2_8.jpg",
+      "label": "Banane",
+      "group": "P2",
+      "collection": "Banana Lady Finger 1",
+      "url": "https://raw.githubusercontent.com/fruits-360/fruits-360-100x100/bed1c24ee70de1569272de3882fbde88211c08b5/Training/Banana%20Lady%20Finger%201/r_9_100.jpg",
+      "sha256": "e9294594fe4de0a6b8bbf5f013c4eeb292fb2e03ada7f2dac624c06b50e232a1"
+    }
+  ]
+}

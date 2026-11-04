@@ -134,6 +134,63 @@
         '<p class="section-label">Materialien für DL '+escape(data.selectedNumber)+'</p>'+
         markdown.render(section.markdown)+'</section>').join("");
   }
+  function formatMaterialWorkshop(){
+    if(!["bok/4-klasse","irn/4-klasse"].includes(course)||kind!=="materialien")return;
+    for(const resource of root.querySelectorAll(".materials-content")){
+      resource.classList.add("materials-workshop");
+      const quick=document.createElement("nav");
+      quick.className="material-phase-nav";quick.setAttribute("aria-label","AVIVA-Phasen im Materialkoffer");
+      const preparation=document.createElement("div");preparation.className="material-preparation";
+      let destination=preparation,index=0;
+      const nodes=[...resource.childNodes];
+      for(const node of nodes){
+        if(node.nodeType===Node.ELEMENT_NODE&&node.matches("h3")&&
+          /^(Ankommen|Vorwissen aktivieren|Informieren|Verarbeiten|Auswerten) · /.test(node.textContent)){
+          const parts=node.textContent.split(" · ");
+          destination=document.createElement("article");
+          destination.className="material-phase";destination.id="material-phase-"+(++index);
+          const badge=document.createElement("span");badge.className="material-phase-index";
+          badge.textContent=String(index).padStart(2,"0");badge.setAttribute("aria-hidden","true");
+          const header=document.createElement("header");header.className="material-phase-heading";
+          const label=document.createElement("p");label.className="material-phase-label";
+          label.textContent=parts[0]+" · "+parts[1];
+          node.textContent=parts.slice(2).join(" · ");
+          header.append(badge,label,node);destination.append(header);resource.append(destination);
+          const link=document.createElement("a");link.href="#"+destination.id;
+          link.textContent=parts[0]+" · "+parts[1];quick.append(link);
+        }else if(node.nodeType===Node.ELEMENT_NODE&&node.matches("h3")&&
+          /^Doppellektion \d+/.test(node.textContent)){
+          node.remove();
+        }else destination.append(node);
+      }
+      resource.prepend(preparation,quick);
+      for(const table of resource.querySelectorAll("table")){
+        const scroll=document.createElement("div");scroll.className="material-table-scroll";
+        scroll.tabIndex=0;scroll.setAttribute("role","region");
+        scroll.setAttribute("aria-label","Materialtabelle – horizontal scrollbar");
+        table.before(scroll);scroll.append(table);
+      }
+      for(const paragraph of resource.querySelectorAll("p")){
+        const image=paragraph.querySelector(":scope > img:only-child");
+        if(!image||paragraph.textContent.trim())continue;
+        const figure=document.createElement("figure");
+        const link=document.createElement("a");link.href=image.getAttribute("src");
+        link.target="_blank";link.rel="noopener noreferrer";
+        const caption=document.createElement("figcaption");caption.textContent=image.alt;
+        image.loading="lazy";link.append(image);figure.append(link,caption);paragraph.replaceWith(figure);
+      }
+      for(const figure of [...resource.querySelectorAll(".material-phase > figure")]){
+        if(figure.parentElement.classList.contains("material-gallery"))continue;
+        const gallery=document.createElement("div");gallery.className="material-gallery";
+        figure.before(gallery);
+        let next=figure;
+        while(next?.matches("figure")){
+          const following=next.nextElementSibling;
+          gallery.append(next);next=following;
+        }
+      }
+    }
+  }
   function solutionsView(data){
     const header=heading(data,"Musterlösungen")+
       '<p class="intro-note">Die Musterantworten sind Beispiele, keine einzig gültigen Lösungen. '+
@@ -174,6 +231,7 @@
       renderNav(current);
       root.innerHTML=data.kind==="planung"?lessonView(data):
         data.kind==="materialien"?materialsView(data):solutionsView(data);
+      formatMaterialWorkshop();
       relink();
       if(scroll)root.scrollIntoView({behavior:"smooth",block:"start"});
     }catch(error){

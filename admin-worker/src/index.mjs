@@ -92,7 +92,7 @@ function validateCourseThemeRegistry(doc){
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kurse\/[a-z][a-z0-9-]*\/(?:1|4)-klasse\/(?:kursseiten\/(?:manifest\.json|glossar\.json|[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md))|lehrperson\/(?:musterloesungen(?:-felder)?|materialien)\.md|content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb)$/.test(path)||
   path==="shared/course-sites.json"||
-  /^kurse\/[a-z][a-z0-9-]*\/(?:1|4)-klasse\/projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
+  /^kurse\/[a-z][a-z0-9-]*\/(?:1|4)-klasse\/assets\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
 function validate(changes){
   if(!Array.isArray(changes)||changes.length<1||changes.length>12)throw Error("1–12 Dateien pro Pull Request.");
   const seen=new Set();

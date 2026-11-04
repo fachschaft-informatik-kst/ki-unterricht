@@ -84,7 +84,10 @@ function readDraft(login){
       throw Error("Ungültiger lokaler Kapitelentwurf: "+slug);
     for(const entry of data.staged){
       if(!owned(entry.path))throw Error("Ungültige Kurszuordnung im lokalen Entwurf.");
-      entries.push(entry);
+      const legacy=profile.root+"/projekt/grafiken/uploads/";
+      const path=entry.path.startsWith(legacy)?
+        profile.root+"/assets/grafiken/uploads/"+entry.path.slice(legacy.length):entry.path;
+      entries.push({...entry,path});
     }
   }
   for(const entry of draft.shared){
@@ -1042,7 +1045,7 @@ function preview(){
   content=prepareNotebookPreview(content);
   // Display staged image uploads without uploading or executing their content.
   for(const item of state.staged.values()){
-    const prefix=coursePath("projekt/");
+    const prefix=coursePath("assets/");
     if(!item.path.startsWith(prefix+"grafiken/uploads/")||item.delete)continue;
     const url=previewBase+item.path.slice(prefix.length);
     const extension=item.path.split(".").pop();
@@ -1195,7 +1198,7 @@ async function addImage(event){
     const name=(slug(file.name.replace(/\.[^.]+$/,""))||"bild").slice(0,42)+"-"+crypto.randomUUID().slice(0,8)+"."+ext;
     const bytes=new Uint8Array(await file.arrayBuffer());
     let chars="";for(let i=0;i<bytes.length;i+=8192)chars+=String.fromCharCode(...bytes.subarray(i,i+8192));
-    const path=coursePath("projekt/grafiken/uploads/")+name;
+    const path=coursePath("assets/grafiken/uploads/")+name;
     state.staged.set(path,{path,expectedSha:null,content:btoa(chars)});
     insert("\n\n!["+caption.trim()+"](grafiken/uploads/"+name+attribution+")\n\n");
     stagingList();status("Bild mit AVIVA-Zuordnung vorgemerkt und im Inhalt eingefügt.");

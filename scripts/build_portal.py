@@ -113,7 +113,7 @@ def build() -> None:
         return [name for name in names if name.endswith(".template.html") or name == "README.md"
                 or (Path(folder) == PORTAL and name in generated)]
     shutil.copytree(PORTAL, target, dirs_exist_ok=True, ignore=ignore)
-    shutil.copytree(ROOT / "kurse/bok/4-klasse/projekt", target, dirs_exist_ok=True)
+    shutil.copytree(ROOT / "kurse/bok/4-klasse/assets", target, dirs_exist_ok=True)
     for path in (ROOT / "shared").glob("*"):
         if path.is_file():
             shutil.copyfile(path, target / "admin" / path.name)

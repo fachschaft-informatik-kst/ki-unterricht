@@ -75,8 +75,8 @@ def build():
     if not match:
         raise ValueError("Gemeinsame CSS-Basis der vertieften Kursseite fehlt")
     (OUT / "theme.css").write_text(match.group(1) + "\n", encoding="utf-8")
-    shutil.copytree(ROOT / "kurse/bok/1-klasse/projekt/grafiken", OUT / "grafiken", dirs_exist_ok=True)
-    source_svg = (ROOT / "kurse/bok/1-klasse/projekt/grafiken/netz_hintergrund.svg").read_text(encoding="utf-8")
+    shutil.copytree(ROOT / "kurse/bok/1-klasse/assets/grafiken", OUT / "grafiken", dirs_exist_ok=True)
+    source_svg = (ROOT / "kurse/bok/1-klasse/assets/grafiken/netz_hintergrund.svg").read_text(encoding="utf-8")
     blue_svg = source_svg.replace("#076959", "#3653a3").replace("#b84d27", "#6488d6").replace("#f5f4ee", "#f3f5fb")
     (OUT / "grafiken" / "netz_hintergrund_blau.svg").write_text(blue_svg, encoding="utf-8")
     for filename in ("glossar.css", "glossar.js", "dl1_sort.css", "dl1_sort.js", "notebook-blocks.js"):

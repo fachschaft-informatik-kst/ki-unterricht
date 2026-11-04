@@ -133,7 +133,9 @@ const server=http.createServer((req,res)=>{
       const key="ki-teacher-drafts-v1:integration-test";
       const draft=JSON.parse(localStorage.getItem(key));
       draft.courses["bok/4-klasse"].staged=[{path:draftPath,expectedSha:"a".repeat(40),
-        content:"# Vorgemerkt\n",original:"# Original\n"}];
+        content:"# Vorgemerkt\n",original:"# Original\n"},
+        {path:"kurse/bok/4-klasse/projekt/grafiken/uploads/recovered.png",
+          expectedSha:null,content:"aW1hZ2U="}];
       draft.courses["irn/1-klasse"]={staged:[],section:"basis-neuron",current:{
         path:"kurse/irn/1-klasse/kursseiten/basis-neuron/materialien.md",
         sha:"a".repeat(40),original:"# Original IRN\n",content:"# Entwurf IRN\n"}};
@@ -152,6 +154,10 @@ const server=http.createServer((req,res)=>{
     assert.match(await recovery.locator("#path").innerText(),/irn\/1-klasse/);
     const recovered=await recovery.evaluate(()=>JSON.parse(localStorage.getItem("ki-teacher-drafts-v1:integration-test")));
     assert.equal(recovered.courses["bok/4-klasse"].staged[0].expectedSha,"a".repeat(40));
+    assert.equal(recovered.courses["bok/4-klasse"].staged[1].path,
+      "kurse/bok/4-klasse/assets/grafiken/uploads/recovered.png");
+    assert.equal(recovered.courses["bok/4-klasse"].staged[1].content,"aW1hZ2U=");
+    assert.equal(recovered.courses["bok/4-klasse"].staged[1].expectedSha,null);
     await recovery.evaluate(()=>Storage.prototype.setItem=function(){throw new DOMException("Test quota","QuotaExceededError");});
     await recovery.locator("#source").fill("# Entwurf trotz vollem Speicher\n");
     await recovery.waitForFunction(()=>document.querySelector("#draftWarning")?.textContent.includes("Entwurfssicherung fehlgeschlagen"));
@@ -623,14 +629,14 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
     assert.ok(submitted);
     const names=submitted.changes.map(c=>c.path).sort();
-    assert.deepEqual(names.filter(n=>!n.startsWith("kurse/bok/4-klasse/projekt/grafiken/uploads/")),[
+    assert.deepEqual(names.filter(n=>!n.startsWith("kurse/bok/4-klasse/assets/grafiken/uploads/")),[
       "kurse/bok/4-klasse/kursseiten/einstieg/planung.json",
       "kurse/bok/4-klasse/kursseiten/manifest.json",
       "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/010-einstieg-und-auftrag.md",
       "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/materialien.md",
       "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/planung.json"
     ]);
-    assert.equal(names.filter(n=>/^kurse\/bok\/4-klasse\/projekt\/grafiken\/uploads\/test-[a-f0-9]{8}\.png$/.test(n)).length,1);
+    assert.equal(names.filter(n=>/^kurse\/bok\/4-klasse\/assets\/grafiken\/uploads\/test-[a-f0-9]{8}\.png$/.test(n)).length,1);
     const initial=JSON.parse(submitted.changes.find(c=>c.path==="kurse/bok/4-klasse/kursseiten/einstieg/planung.json").content);
     assert.equal(initial.lessons[0].title,"Was ist KI? – Überarbeitet");
     const updated=JSON.parse(submitted.changes.find(c=>c.path==="kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/planung.json").content);

@@ -100,6 +100,7 @@ test: build
 	$(VENV_PY) tests/check_new_lessons.py
 	$(VENV_PY) tests/check_new_lesson_cli.py
 	$(VENV_PY) tests/check_materials.py
+	$(VENV_PY) tests/check_testbilder.py
 	$(VENV_PY) tests/check_admin.py
 	$(VENV_PY) tests/check_course_model.py
 	$(VENV_PY) tests/check_pyodide_lock.py

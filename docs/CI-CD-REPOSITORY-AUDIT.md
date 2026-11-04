@@ -92,7 +92,7 @@ Weitere Massnahmen:
 
 **Überprüfenswerte Stellen, ohne unkontrollierte Migration:**
 
-1. Die Grafiken unter `content/img/` und `projekt/grafiken/` enthalten
+1. Die Grafiken unter `content/img/` und `assets/grafiken/` enthalten
    teilweise fast gleich grosse Versionen derselben SVGs
    (`perzeptron.svg`, `merhschichtiges_netzwerk.svg`).
    Vor dem Zusammenführen müssen relative Links und Notebook-Assets

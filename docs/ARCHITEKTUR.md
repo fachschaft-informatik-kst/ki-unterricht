@@ -26,7 +26,7 @@ nachträgliche Template-Synchronisation gibt es nicht.
 | `.venv/`, `.cache/`, `.wrangler/` | Lokale technische Umgebungen und Caches; keine Kursquellen. |
 | `.git/` | Versionsverwaltung. |
 | ehemaliges `basis/` | Layout und Controller nach `shared/basis/`; Grundlageninhalte bleiben kurslokal. |
-| ehemaliges `projekt/` | Vorlagen, CSS, Controller und Editor nach `shared/portal/`; Grafiken und Uploads nach `<kurs>/projekt/grafiken/`. |
+| ehemaliges `projekt/` | Vorlagen, CSS, Controller und Editor nach `shared/portal/`; Grafiken und Uploads nach `<kurs>/assets/grafiken/`. |
 | ehemaliges `content/` | Notebooks, Python-Hilfen, Fotostudio und Datensätze nach `<kurs>/content/`. Generierte `portal/`-Notebooks nur im Build. |
 | ehemaliges `kursseiten/` | Kapitel, Manifest, AVIVA und Glossar ausschliesslich unter `<kurs>/kursseiten/`; alte Spiegel entfernt. |
 | ehemaliges `lehrperson/` | Lösungen und Materialien ausschliesslich unter `<kurs>/lehrperson/`. |
@@ -54,7 +54,7 @@ kurse/<lehrperson>/<klasse>/
     unterricht_tools.py
     img/
     ki_projekt/
-  projekt/grafiken/          # einschliesslich kurslokaler uploads/
+  assets/grafiken/          # einschliesslich kurslokaler uploads/
   experimente/registry.json
   worksheets/
   testbilder/
@@ -111,7 +111,7 @@ und `/projekt/` enthalten keine öffentliche Kursstartseite.
 ## Redaktion und Schutz
 
 Der Editor liest und schreibt nur registrierte Kursquellen. Bild-Uploads liegen
-unter `<kurs>/projekt/grafiken/uploads/` und zählen zur gleichen Kursgrenze wie
+unter `<kurs>/assets/grafiken/uploads/` und zählen zur gleichen Kursgrenze wie
 Kapitel und Notebooks. Vorschau, Grafiken und Downloads verwenden den gewählten
 Kurs. Gemischte Kursänderungen in einem Editor-PR werden abgewiesen.
 

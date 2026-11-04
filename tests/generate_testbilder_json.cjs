@@ -11,7 +11,7 @@ const base=path.join(__dirname,"..",course.courseRoot);
 const core = require(path.join(base,"content/ki_projekt/fotostudio_core.js"));
 const root = path.join(base,"testbilder");
 const GRUPPEN = ['T1', 'T2', 'V1', 'P1', 'P2'];
-const QUELLE = 'Gezeichnete Illustration (tests/generate_testbilder.py), kein Foto';
+const provenance=JSON.parse(fs.readFileSync(path.join(root,"quellen.json"),"utf8"));
 (async () => {
   await tf.ready();
   const model = await mobilenet.load(core.MODEL);
@@ -26,7 +26,12 @@ const QUELLE = 'Gezeichnete Illustration (tests/generate_testbilder.py), kein Fo
         const id = crypto.createHash('sha256').update(canvas.getContext('2d').getImageData(0, 0, 224, 224).data).digest('hex');
         const small = createCanvas(64, 64);
         small.getContext('2d').drawImage(canvas, 0, 0, 64, 64);
-        records.push({ id, group, label, source: QUELLE, filename, features, preview: small.toDataURL('image/png') });
+        const attribution=provenance.records.find(record=>record.path===label+"/"+group+"/"+filename);
+        if(!attribution)throw Error("Bildquelle fehlt: "+filename);
+        const source=provenance.author+" · "+provenance.dataset+" · "+provenance.license+
+          " · "+provenance.licenseUrl+" · "+attribution.url+
+          " · Original: Hintergrund freigestellt, 100×100; Vorschau und Merkmale aufbereitet";
+        records.push({ id, group, label, source, filename, features, preview: small.toDataURL('image/png') });
       }
     }
     console.log(label, records.length);
