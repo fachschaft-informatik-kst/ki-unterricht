@@ -10,10 +10,10 @@ from course_model import load_course
 from new_lesson import create
 from new_chapter import create_chapter
 
-original = load_course(ROOT)
+original = load_course(ROOT, "kurse/bok/4-klasse/kursseiten/manifest.json")
 with TemporaryDirectory() as tmp:
     root = Path(tmp)
-    shutil.copytree(ROOT / "kursseiten", root / "kursseiten")
+    shutil.copytree(ROOT / "kurse/bok/4-klasse/kursseiten", root / "kursseiten")
     before = {p: p.read_bytes() for p in (root / "kursseiten").rglob("*") if p.is_file()}
     paths = create(root, "KI im Alltag", chapter_title="Mensch und Maschine", dry_run=True)
     assert not paths[0].exists()
@@ -36,5 +36,5 @@ with TemporaryDirectory() as tmp:
             pass
         else:
             raise AssertionError(f"Invalid authoring accepted: {kwargs}")
-assert load_course(ROOT) == original
+assert load_course(ROOT, "kurse/bok/4-klasse/kursseiten/manifest.json") == original
 print("PASS local authoring: dry run, insertion, grouped lessons, stable IDs, subchapters, validation")

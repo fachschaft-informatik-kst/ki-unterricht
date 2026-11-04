@@ -1,1 +1,0 @@
-<a class="btn" href="#projekt">Weiter: Unser Bildprojekt →</a>

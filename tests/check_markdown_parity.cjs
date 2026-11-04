@@ -7,7 +7,7 @@ const vm=require("node:vm");
 const {spawnSync}=require("node:child_process");
 const ROOT=path.resolve(__dirname,"..");
 const sandbox={};
-vm.runInNewContext(fs.readFileSync(path.join(ROOT,"projekt/admin/markdown-it.min.js"),"utf8"),sandbox,{timeout:5000});
+vm.runInNewContext(fs.readFileSync(path.join(ROOT,"shared/portal/admin/markdown-it.min.js"),"utf8"),sandbox,{timeout:5000});
 assert.equal(typeof sandbox.markdownit,"function");
 const browser=sandbox.markdownit("commonmark",{html:true}).enable("table");
 const files=[
@@ -27,7 +27,8 @@ const samples=[
   "### Überschrift\n\n    Ein eingerückter Codeblock"
 ];
 for(const name of files){
-  const source=fs.readFileSync(path.join(ROOT,name),"utf8");
+  const grade=name.startsWith("kursseiten/basis-")?1:4;
+  const source=fs.readFileSync(path.join(ROOT,"kurse/bok/"+grade+"-klasse",name),"utf8");
   let found=false;
   for(const match of source.matchAll(/<!-- MD:START -->\r?\n([\s\S]*?)\r?\n<!-- MD:END -->/g)){
     samples.push(match[1]);found=true;

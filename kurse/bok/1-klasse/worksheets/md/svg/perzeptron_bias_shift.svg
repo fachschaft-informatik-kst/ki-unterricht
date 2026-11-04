@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" fill="none" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Axes -->
+  <line x1="80" y1="320" x2="560" y2="320" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="120" y1="360" x2="120" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Decision lines: eine trennt (w0 < 0), eine trennt nicht (w0 > 0) -->
+  <!-- w0 = -0.5 (oben), w0 = +0.2 (unten, trennt) -->
+  <line x1="120" y1="240" x2="520" y2="240" stroke="#2c7bb6" stroke-width="3" />
+  <line x1="120" y1="290" x2="520" y2="290" stroke="#d7191c" stroke-width="3" stroke-dasharray="10 6" />
+
+  <!-- Labels -->
+  <!-- line labels removed; values in legend -->
+  <text x="540" y="340" font-size="16" fill="#333">x<tspan dy="5" font-size="12">1</tspan></text>
+  <text x="92" y="70" font-size="16" fill="#333" transform="rotate(-90 92 70)">x<tspan dy="5" font-size="12">2</tspan></text>
+
+  <!-- Example points -->
+  <g stroke="#555" stroke-width="2">
+    <circle cx="220" cy="260" r="10" fill="#7fbf7b" />
+    <circle cx="320" cy="210" r="10" fill="#7fbf7b" />
+    <circle cx="200" cy="330" r="10" fill="#fdae61" />
+    <circle cx="320" cy="310" r="10" fill="#fdae61" />
+  </g>
+
+  <!-- Hinweise entfernt -->
+
+  <!-- Hinweis: Linie nach unten verschoben, gleicher Winkel -->
+  <!-- Legend (links oben, ausserhalb der Achse) -->
+  <rect x="160" y="90" width="150" height="86" rx="6" ry="6" fill="white" stroke="#999" stroke-width="1" />
+  <line x1="170" y1="108" x2="190" y2="108" stroke="#2c7bb6" stroke-width="3" />
+  <text x="200" y="112" font-size="10.5" fill="#333">w<tspan dy="4" font-size="9">0</tspan> = -0.5</text>
+  <line x1="170" y1="124" x2="190" y2="124" stroke="#d7191c" stroke-width="3" stroke-dasharray="10 6" />
+  <text x="200" y="128" font-size="10.5" fill="#333">w<tspan dy="4" font-size="9">0</tspan> = +0.2</text>
+  <rect x="170" y="136" width="9" height="9" fill="#7fbf7b" stroke="#555" stroke-width="1" />
+  <text x="184" y="144" font-size="10.5" fill="#333">ŷ = 1</text>
+  <rect x="170" y="154" width="9" height="9" fill="#fdae61" stroke="#555" stroke-width="1" />
+  <text x="184" y="162" font-size="10.5" fill="#333">ŷ = 0</text>
+</svg>

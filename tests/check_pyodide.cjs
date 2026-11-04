@@ -22,13 +22,16 @@ const root=path.resolve(__dirname,'..');
    else if(/\.(py|json|html|js)$/.test(e.name))py.FS.writeFile(dest+'/'+e.name,fs.readFileSync(path.join(dir,e.name)));
   }
  }
- copy(path.join(root,'content'),'/project/content');copy(path.join(root,'tests'),'/project/tests');
- await py.runPythonAsync("import sys,os,matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt; sys.path[:0]=['/project/content','/project/content/ki_projekt']; plt.show=lambda *a,**k: plt.close('all')");
+ copy(path.join(root,'kurse/bok/4-klasse/content'),'/project/kurse/bok/4-klasse/content');
+ copy(path.join(root,'_build/content'),'/project/_build/content');
+ copy(path.join(root,'tests'),'/project/tests');
+ await py.runPythonAsync("import sys,os,matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt; sys.path[:0]=['/project/kurse/bok/4-klasse/content','/project/kurse/bok/4-klasse/content/ki_projekt']; plt.show=lambda *a,**k: plt.close('all')");
  py.setStdout({batched:s=>{if(s.startsWith('PASS'))console.log(s);}});
- for(const name of ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb'].flatMap(n=>[n,'portal/'+path.basename(n)])){
-  await py.runPythonAsync(`os.chdir(${JSON.stringify('/project/content/'+path.dirname(name))})`);
+ for(const name of ['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb'].flatMap(n=>[
+     'kurse/bok/4-klasse/content/'+n,'_build/content/portal/bok/4-klasse/'+path.basename(n)])){
+  await py.runPythonAsync(`os.chdir(${JSON.stringify('/project/'+path.dirname(name))})`);
   const ns=py.toPy({__name__:'__main__'});
-  for(const c of JSON.parse(fs.readFileSync(path.join(root,'content',name))).cells)if(c.cell_type==='code')await py.runPythonAsync(Array.isArray(c.source)?c.source.join(''):c.source,{globals:ns});
+  for(const c of JSON.parse(fs.readFileSync(path.join(root,name))).cells)if(c.cell_type==='code')await py.runPythonAsync(Array.isArray(c.source)?c.source.join(''):c.source,{globals:ns});
   ns.destroy();console.log('PASS Pyodide notebook:',name);
  }
  await py.runPythonAsync("import runpy; runpy.run_path('/project/tests/check_ki_basis.py',run_name='__main__')");

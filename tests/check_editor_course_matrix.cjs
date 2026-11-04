@@ -18,8 +18,8 @@ const server=http.createServer((req,res)=>{
   const rel=new URL(req.url,"http://localhost").pathname.replace(/^\//,"")||"projekt/admin/index.html";
   const clean=rel==="projekt/admin"||rel==="projekt/admin/"?"projekt/admin/index.html":rel;
   const shared=["course-model.js","course-rules.json","glossary-model.js"].includes(path.basename(clean));
-  const absolute=path.resolve(ROOT,shared?"shared/"+path.basename(clean):clean);
-  if(!absolute.startsWith(ROOT+path.sep)||(!shared&&!absolute.startsWith(path.join(ROOT,"projekt/admin")+path.sep)))return res.writeHead(404).end();
+  const absolute=path.resolve(ROOT,shared?"shared/"+path.basename(clean):clean.replace(/^projekt\//,"shared/portal/"));
+  if(!absolute.startsWith(ROOT+path.sep)||(!shared&&!absolute.startsWith(path.join(ROOT,"shared/portal/admin")+path.sep)))return res.writeHead(404).end();
   fs.readFile(absolute,(error,data)=>{
     if(error)return res.writeHead(404).end();
     const suffix=path.extname(absolute);

@@ -1,6 +1,6 @@
-"""Build full BOK-style IRN pages from their own source copies.
+"""Render any teacher course exclusively from its own sources.
 
-Shared design and controllers stay in basis/ and projekt/. Course data comes
+Shared design and controllers stay in shared/basis/ and shared/portal/. Course data comes
 exclusively from the selected kurse/<teacher>/<grade>-klasse directory.
 """
 from __future__ import annotations
@@ -65,8 +65,6 @@ def render_clone(course: dict, target: Path) -> None:
             if count != 1:
                 raise ValueError(f"AVIVA-Einbettung fehlt: {view}")
         planning_html = lehrpersonen_seite(lessons, page)
-    # Notebook document paths are isolated per IRN course. Existing BOK paths
-    # keep their old names so saved student work and older URLs still resolve.
     prefix = "portal/" + course["slug"] + "/"
     page = page.replace("portal/", prefix)
     (target / "index.html").write_text(page, encoding="utf-8")
@@ -74,6 +72,18 @@ def render_clone(course: dict, target: Path) -> None:
         "course": course["id"], "lessons": lessons}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (target / "unterrichtsplan.html").write_text(planning_html, encoding="utf-8")
     (target / "materialien.html").write_text(render_teacher_materials(course, lessons).replace("portal/", prefix), encoding="utf-8")
+    if course["teacher"] == "BOK":
+        # Keep BOK storage keys and ZIP schemas, but resolve every import and
+        # notebook document against this course (including same-named XOR labs).
+        for name in ("portal.js", "notebook-blocks.js", "persistence.js"):
+            file = target / name
+            if not file.is_file():
+                continue
+            code = file.read_text(encoding="utf-8")
+            for old in ("'portal/'+", '"portal/" + ', '"portal/"+'):
+                code = code.replace(old, repr(prefix) + "+")
+            file.write_text(code, encoding="utf-8")
+        return
     for file in (target / "portal.js",target / "notebook-blocks.js"):
         if not file.exists():
             continue

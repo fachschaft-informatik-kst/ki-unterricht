@@ -15,7 +15,7 @@ const path=require('node:path');
   const page=await context.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route(/^https:\/\//,route=>route.abort()); // No model download needed to test saved records.
-  const url='http://127.0.0.1:8777/projekt/studio/';
+  const url='http://127.0.0.1:8777/bok/4-klasse/studio/';
   await page.goto(url,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.querySelector('#autosave-status')?.textContent.includes('aktiv'),null,{timeout:10000});
   assert.equal(await page.locator('.eyebrow').textContent(),'KI-Bildprojekt · Schritt 2: Bilder vorbereiten');
@@ -31,6 +31,18 @@ const path=require('node:path');
   assert((await page.locator('#counts').innerText()).includes('T1 / Tasse: 1'));
   assert.equal(await page.locator('#count-total').innerText(),'1','Progress count reflects restored collection');
   assert.equal(await page.locator('#studio-progress').getAttribute('value'),'1','Progress bar reflects restored collection');
+  const databases=new Set([await page.evaluate(()=>PhotoStorage.NAME)]);
+  for(const slug of ["bok/1-klasse","irn/1-klasse","irn/4-klasse"]){
+   const other=await context.newPage();
+   await other.route(/^https:\/\//,route=>route.abort());
+   await other.goto("http://127.0.0.1:8777/"+slug+"/studio/",{waitUntil:"domcontentloaded"});
+   await other.waitForFunction(()=>document.querySelector("#autosave-status")?.textContent.includes("aktiv"));
+   const name=await other.evaluate(()=>PhotoStorage.NAME);
+   assert(!databases.has(name),"Each course must own a separate Fotostudio database");
+   databases.add(name);
+   assert.equal(await other.locator("#counts li").count(),0,slug+": another course's photos must not appear");
+   await other.close();
+  }
 
   const downloadEvent=page.waitForEvent('download');
   await page.locator('#save').click();

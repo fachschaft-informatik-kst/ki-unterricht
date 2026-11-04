@@ -55,6 +55,8 @@ Das Makefile richtet `.venv/` und die benötigten Pakete bei Bedarf selbst ein. 
 | `make build` | Vollständige Anwendung nach `dist/` bauen |
 | `make serve` | Vorhandenen Build in `dist/` anzeigen |
 | `make test` | Vollständigen Build und lokale technische Tests ausführen |
+| `make test-browser` | Build und sämtliche Browserprüfungen inklusive Python, Training und ZIP |
+| `make test-all` | Technische Tests, alle Notebookausführungen und sämtliche Browserprüfungen |
 | `make help` | Alle Makefile-Befehle anzeigen |
 | `make clean` | Lokale Builddateien und Umgebung entfernen |
 
@@ -68,10 +70,11 @@ kurse/
   bok/4-klasse/             # BOK-Kurs für die 4. Klasse
   irn/1-klasse/             # IRN-Kurs für die 1. Klasse
   irn/4-klasse/             # IRN-Kurs für die 4. Klasse
-templates/{1,4}-klasse/    # Vorlagen für neue, eigenständige Kurse
+kurse/_vorlagen/{1,4}-klasse/ # Vorlagen für neue, eigenständige Kurse
 shared/course-sites.json   # Kursregister: Pfade, Namen, Status, Farben
-basis/                     # Gemeinsame Darstellung des Grundlagenkurses
-projekt/                   # Gemeinsames Kursportal, CSS und Browserlogik
+shared/basis/              # Gemeinsame Darstellung des Grundlagenkurses
+shared/portal/             # Gemeinsame Vorlagen, CSS, Browserlogik und Editor
+shared/worksheet-pdf/      # Gemeinsame technische PDF-Vorlage
 admin-worker/              # GitHub-Login, geschützter Editor und PR-Erstellung
 extensions/ki-autostart/   # Erweiterung für den Notebookstart
 scripts/                   # Generatoren, Prüf- und Hilfsskripte
@@ -101,11 +104,25 @@ content/
   *.py                     # Python-Hilfsprogramme
   img/                     # Abbildungen
   ki_projekt/              # Projektdateien, Fotostudio und Hilfscode
+projekt/
+  grafiken/                # Eigene Kursgrafiken und Bild-Uploads
+experimente/
+  registry.json            # Eigene Notebooktitel und Projektzuordnung
+worksheets/                # Eigene Arbeitsblattquellen und archivierte Materialien
+testbilder/                # Eigene Bilddaten für die Fotoübungen
 ```
 
-**Nur unter `kurse/<lehrperson>/<klasse>/` bearbeiten.** Die Ordner im Repository-Stamm `kursseiten/`, `lehrperson/` und Teile von `content/` werden von bestehenden BOK-Buildpfaden verwendet; sie sind nicht der allgemeine Einstiegspunkt für kursbezogene Änderungen. Der Build gleicht BOK-Kompatibilitätsdateien mit `scripts/sync_course_sources.py` ab. Dateien in `_build/` oder `dist/` sind generiert und dürfen nicht manuell bearbeitet werden.
+**Kursinhalte nur unter `kurse/<lehrperson>/<klasse>/` bearbeiten.** Es gibt keine Root-Kopien und keine Rücksynchronisation mehr. Unter `kurse/_vorlagen/` liegen die vollständigen Ursprungsdateien zum Kopieren für neue Kurse. Alle Kurse besitzen dieselbe vollständige Ordnerstruktur; spätere Änderungen bleiben kurslokal. Dateien in `_build/` oder `dist/` sind generiert und dürfen nicht manuell bearbeitet werden.
 
-Für Änderungen an der Darstellung oder an der Notebook-Steuerung sind dagegen `basis/`, `projekt/`, `shared/`, `extensions/` und die zugehörigen Skripte relevant.
+Für Änderungen an Darstellung oder Notebook-Steuerung sind `shared/`, `extensions/` und die zugehörigen Skripte relevant. Die Entscheidung für jeden Root-Ordner ist in [Architektur](docs/ARCHITEKTUR.md) dokumentiert.
+
+Einzelnen Kurs ohne die Quellen anderer Kurse bauen:
+
+```sh
+.venv/bin/python scripts/build_course_routes.py _build/einzelkurs --course irn/1-klasse
+```
+
+Diese Inhaltsvorschau enthält keine ausführbare JupyterLite-Laufzeit. Der vollständige Build bleibt `make build`. Notebooks und Python-Hilfen werden für **alle** Kurse nach `portal/<lehrperson>/<klasse>/` paketiert. Alte BOK-Notebookadressen bleiben zusätzlich als Kompatibilitätskopien erhalten; Browser-Speicherschlüssel und ZIP-Formate bleiben unverändert.
 
 ## 5. Typische Arbeiten
 
@@ -117,7 +134,9 @@ Für Änderungen an der Darstellung oder an der Notebook-Steuerung sind dagegen 
 | Materialien oder Musterlösungen anpassen | Editor oder `kurse/<kurs>/lehrperson/` und `.../kursseiten/<bereich>/materialien.md` |
 | Einen Glossarbegriff ändern | Editor oder `kurse/<kurs>/kursseiten/glossar.json` |
 | Ein Python-Notebook ändern | `kurse/<kurs>/content/` |
-| Layout oder interaktive Funktionen ändern | `projekt/`, `basis/`, `shared/` |
+| Layout oder interaktive Funktionen ändern | `shared/portal/`, `shared/basis/` |
+| Kursgrafiken oder Bilddaten ändern | `kurse/<kurs>/projekt/grafiken/`, `.../testbilder/` |
+| Neue Kapitel/Lektionen lokal anlegen | `scripts/new_chapter.py` / `scripts/new_lesson.py`, jeweils mit `--course irn/1-klasse` |
 | Einen neuen Kurs anlegen | `scripts/add_teacher_course.py` |
 
 Bestehende Kapitel-IDs, Lektions-IDs und Antwortschlüssel möglichst beibehalten: daran hängen Navigation und gespeicherte Lernendenantworten.
@@ -132,7 +151,7 @@ python scripts/add_teacher_course.py MAI 1 "KI entdecken"
 make preview
 ```
 
-Der neue Kurs wird im Register `shared/course-sites.json` mit dem Status `planned` angelegt. Nach fachlicher Freigabe `status` auf `published` und `source` auf `generated` setzen; alternativ den Kurs direkt mit `--publish` erzeugen. Für neue Kurse funktionieren die allgemeinen Kursseiten; besondere Projekt-, Journal- oder ZIP-Abläufe müssen gesondert geprüft werden.
+Der neue Kurs wird im Register `shared/course-sites.json` mit dem Status `planned` angelegt. Nach fachlicher Freigabe `status` auf `published` und `source` auf `generated` setzen; alternativ den Kurs direkt mit `--publish` erzeugen. Auch neue Lehrpersonen verwenden den vollständigen Renderer der jeweiligen Klassenstufe mit eigenen Notebookpfaden und Browser-/ZIP-Namensräumen.
 
 ## 6. Prüfen und veröffentlichen
 
@@ -143,7 +162,9 @@ Der neue Kurs wird im Register `shared/course-sites.json` mit dem Status `planne
 - Der umfassende JupyterLite-Browsertest mit Training und ZIP-Wiederherstellung läuft bei entsprechenden Runtime-Änderungen nach dem Merge auf `main` oder manuell über **GitHub Actions → Build and Deploy → Run workflow**.
 - Der Cloudflare Worker wird separat aktualisiert, wenn seine relevanten Dateien geändert wurden.
 
-Lokal: `make test`. Die Pipeline liegt in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml); Details zur Architektur stehen in [Mehrkurs-Architektur und Deployment](docs/MULTIKURS-DEPLOYMENT.md).
+Lokal: `make test` für die technischen Prüfungen, `make test-all` für die vollständige Prüfung inklusive aller Notebookausführungen und Browserabläufe. Playwright und Chromium werden beim ersten Browserlauf installiert. Unter Linux können zusätzliche Chromium-Systembibliotheken nötig sein (`npx playwright install-deps chromium`). Die Browserprüfungen laufen bewusst nacheinander, damit sich Python-Kernel und lokale Testserver nicht gegenseitig belasten. Netzwerkzugriff für die Python-Pakete ist erforderlich; ein fehlgeschlagener Test bricht den Lauf mit Fehlerstatus ab.
+
+Die Pipeline liegt in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml); Details zur Architektur stehen in [Mehrkurs-Architektur und Deployment](docs/MULTIKURS-DEPLOYMENT.md).
 
 ## 7. Daten der Lernenden
 
@@ -157,8 +178,8 @@ Nach einem Notebookwechsel oder Import werden Python-Variablen und trainierte Mo
 - [Kursverwaltung und Veröffentlichung](docs/MULTIKURS-DEPLOYMENT.md)
 - [Kursquellen und Vorlagen](docs/KURSVORLAGEN.md)
 - [Redaktions- und Datenmodell](docs/ARCHITEKTUR.md)
-- [Notebookquellen](content/README.md)
-- [Unterrichtsmaterialien](worksheets/README.md)
+- [Notebookquellen – Beispiel BOK 4](kurse/bok/4-klasse/content/README.md)
+- [Unterrichtsmaterialien – Beispiel BOK 4](kurse/bok/4-klasse/worksheets/README.md)
 
 ## Quellenhinweise
 

@@ -1,33 +1,30 @@
-"""Copy the portal and its runtime assets into the completed JupyterLite build."""
+"""Package course-owned resources and shared UI into the JupyterLite build."""
 from pathlib import Path
-import shutil,sys
+import sys
+
+from build_course_routes import build
+from build_previews import build_previews
+from course_registry import load_registry
 from fix_pyodide_lock import fix_lock
 from patch_pyodide_kernel import patch_bundle
-from build_previews import build_previews
-root=Path(__file__).resolve().parents[1]
-out=Path(sys.argv[1] if len(sys.argv)>1 else root/'dist')
-fix_lock(out)
-shutil.copytree(root/'_build/site/projekt',out/'projekt',dirs_exist_ok=True)
-shutil.copytree(root/'_build/site/basis',out/'basis',dirs_exist_ok=True)
-(out/'projekt/studio').mkdir(exist_ok=True)
-(out/'projekt/runtime').mkdir(exist_ok=True)
-shutil.copy(root/'content/ki_projekt/fotostudio.html',out/'projekt/studio/index.html')
-shutil.copy(root/'content/ki_projekt/fotostudio_core.js',out/'projekt/studio/fotostudio_core.js')
-shutil.copy(root/'content/ki_projekt/fotostudio_storage.js',out/'projekt/studio/fotostudio_storage.js')
-for file in ['ki_foto_tools.py','ki_projekt_tools.py','foto_uebungsdaten.json']:
- shutil.copy(root/'content/ki_projekt'/file,out/'projekt/runtime'/file)
-shutil.copy(root/'content/unterricht_tools.py',out/'projekt/runtime/unterricht_tools.py')
-shutil.copy(root/'portal-index.html',out/'index.html')
-shutil.copy(root/'kurse.html',out/'kurse.html')
-
-build_previews(out)
-patch_bundle(out)
-from build_course_routes import build as build_course_routes
-build_course_routes(out)
+from patch_browser_storage import patch_bundle as patch_browser_storage
 from protect_teacher_pages import protect
-protect(out)
-# Published course entrypoints are /<teacher>/<grade>-klasse/.
-# Retain /projekt/ assets (including /projekt/admin for the Worker),
-# but do not publish the obsolete /basis/ or /projekt/ course index pages.
-for obsolete in ("basis", "projekt"):
- (out/obsolete/"index.html").unlink(missing_ok=True)
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main() -> None:
+    out = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "dist"
+    fix_lock(out)
+    courses = load_registry(ROOT)
+    build(out, courses)
+    build_previews(out, courses)
+    patch_bundle(out)
+    patch_browser_storage(out)
+    protect(out)
+    for obsolete in ("basis", "projekt"):
+        (out / obsolete / "index.html").unlink(missing_ok=True)
+
+
+if __name__ == "__main__":
+    main()

@@ -18,7 +18,7 @@ out=Path(sys.argv[1] if len(sys.argv)>1 else '/tmp/ki-notebooks');out.mkdir(pare
 paths=['perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','daten_training.ipynb','ki_projekt/ki_lernlabor.ipynb','ki_projekt/ki_tandemprojekt.ipynb']
 shell=InteractiveShell.instance()
 for name in paths:
-    path=root/'content'/name;nb=nbformat.read(path,4);env={'__name__':'__main__'}
+    path=root/'kurse/bok/4-klasse/content'/name;nb=nbformat.read(path,4);env={'__name__':'__main__'}
     os.chdir(path.parent);sys.path.insert(0,str(path.parent));counter=0
     for i,cell in enumerate(nb.cells):
         if cell.cell_type!='code':continue

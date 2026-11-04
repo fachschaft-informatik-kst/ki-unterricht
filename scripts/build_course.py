@@ -184,10 +184,7 @@ def update_sol_material(text):
     return text
 
 def build():
-    from sync_course_sources import sync
-    if (ROOT / "kurse").exists():
-        sync(ROOT)
-    lessons = load_course(ROOT)['lessons']
+    lessons = load_course(ROOT, "kurse/bok/4-klasse/kursseiten/manifest.json")['lessons']
     page = output(ROOT) / 'index.html'
     text = page.read_text()
     for view in dict.fromkeys(l['view'] for l in lessons):
@@ -209,7 +206,7 @@ def build():
         rows.append('')
         rows += ['', f'**Lernprodukt:** {l["product"]}', '']
         if l.get('zeit'): rows += [f'**Zeit:** {l["zeit"]}', '']
-    plan = ROOT/'worksheets/md/KI_Planung.md'
+    plan = ROOT/'kurse/bok/4-klasse/worksheets/md/KI_Planung.md'
     text = plan.read_text()
     text, count = re.subn(r'<!-- KURSPLAN -->', '\n'.join(rows), text)
     assert count == 1

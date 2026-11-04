@@ -6,14 +6,14 @@ the generated teacher/grade pages have been packaged.
 from __future__ import annotations
 
 import json
+import argparse
 from html import escape
 import re
 import shutil
 import sys
 from pathlib import Path
 
-from course_registry import load_registry, validate_registry
-from generic_course import generic_page
+from course_registry import load_registry, load_experiments, validate_registry
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "shared/course-sites.json"
@@ -113,26 +113,71 @@ def overview(courses: list[dict]) -> str:
                   page, count=1, flags=re.S)
 
 
-def build(out: Path) -> None:
+def copy_course_assets(course: dict, target: Path) -> None:
+    from build_materials import FILES
+
+    base = ROOT / course["courseRoot"]
+    target.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(ROOT / "shared/portal", target, dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns("admin", "*.template.html", "README.md"))
+    shutil.copytree(base / "projekt", target, dirs_exist_ok=True)
+    entries = load_experiments(course, ROOT)
+    (target / "experiments.json").write_text(
+        json.dumps(entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if course["grade"] == 1:
+        shutil.copytree(ROOT / "shared/basis", target, dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns("*.template.html"))
+        template = (ROOT / "shared/portal/index.template.html").read_text(encoding="utf-8")
+        style = re.search(r"<style>(.*?)</style>", template, re.S)
+        if not style:
+            raise ValueError("Gemeinsame CSS-Basis fehlt")
+        (target / "theme.css").write_text(style.group(1) + "\n", encoding="utf-8")
+        svg = (base / "projekt/grafiken/netz_hintergrund.svg").read_text(encoding="utf-8")
+        (target / "grafiken/netz_hintergrund_blau.svg").write_text(
+            svg.replace("#076959", "#3653a3").replace("#b84d27", "#6488d6").replace("#f5f4ee", "#f3f5fb"),
+            encoding="utf-8")
+    studio = target / "studio"
+    studio.mkdir(exist_ok=True)
+    for source, name in (("fotostudio.html", "index.html"),
+                         ("fotostudio_core.js", "fotostudio_core.js"),
+                         ("fotostudio_storage.js", "fotostudio_storage.js")):
+        shutil.copy2(base / "content/ki_projekt" / source, studio / name)
+    runtime = target / "runtime"
+    runtime.mkdir(exist_ok=True)
+    for name in ("ki_foto_tools.py", "ki_projekt_tools.py", "foto_uebungsdaten.json"):
+        shutil.copy2(base / "content/ki_projekt" / name, runtime / name)
+    shutil.copy2(base / "content/unterricht_tools.py", runtime / "unterricht_tools.py")
+    downloads = target / "materialien/downloads"
+    downloads.mkdir(parents=True, exist_ok=True)
+    for name, relative in FILES.items():
+        shutil.copy2(base / relative, downloads / name)
+    for entry in entries:
+        shutil.copy2(base / "content" / entry["source"], downloads / Path(entry["source"]).name)
+
+
+def build(out: Path, courses: list[dict] | None = None) -> None:
     out = Path(out)
-    courses = load_registry(ROOT)
+    courses = load_registry(ROOT) if courses is None else courses
+    out.mkdir(parents=True, exist_ok=True)
+    for legacy in ("projekt", "basis"):
+        folder = out / legacy
+        if folder.exists():
+            shutil.rmtree(folder)
+    shutil.copytree(ROOT / "shared/portal", out / "projekt", dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns("*.template.html", "README.md"))
+    for path in (ROOT / "shared").glob("*"):
+        if path.is_file():
+            shutil.copy2(path, out / "projekt/admin" / path.name)
     for course in courses:
         slug, source = course["slug"], course["source"]
         target = out / slug
         if target.exists():
             shutil.rmtree(target)
         target.parent.mkdir(parents=True, exist_ok=True)
-        if course["status"] == "published" and (source in {"basis", "projekt"} or course["teacher"] == "IRN"):
-            origin = out / (source if source in {"basis", "projekt"} else "basis" if course["grade"] == 1 else "projekt")
-            if not (origin / "index.html").is_file():
-                raise FileNotFoundError(origin / "index.html")
-            shutil.copytree(origin, target, ignore=(
-                (lambda folder, names: ["admin"] if Path(folder) == origin and "admin" in names else [])
-                if origin.name == "projekt" else None
-            ))
-            if course["teacher"] == "IRN":
-                from build_teacher_clone import render_clone
-                render_clone(course, target)
+        if course["status"] == "published":
+            copy_course_assets(course, target)
+            from build_teacher_clone import render_clone
+            render_clone(course, target)
             label = f'{course["teacher"]} · {course["grade"]}. Klasse'
             for file in target.rglob("*"):
                 if not file.is_file() or file.suffix not in {".html", ".css", ".js"}:
@@ -151,9 +196,6 @@ def build(out: Path) -> None:
                                      theme_css(course) + "</style></head>",
                                      content, count=1, flags=re.I)
                 file.write_text(content, encoding="utf-8")
-        elif course["status"] == "published" and source == "generated":
-            target.mkdir(parents=True, exist_ok=True)
-            (target / "index.html").write_text(generic_page(course, ROOT), encoding="utf-8")
         else:
             target.mkdir(parents=True, exist_ok=True)
             (target / "index.html").write_text(planned_page(course), encoding="utf-8")
@@ -163,4 +205,14 @@ def build(out: Path) -> None:
 
 
 if __name__ == "__main__":
-    build(Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "dist")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("out", nargs="?", type=Path, default=ROOT / "dist")
+    parser.add_argument("--course", help="Nur diesen Kurs bauen, z. B. irn/1-klasse")
+    args = parser.parse_args()
+    courses = None
+    if args.course:
+        selected = [c for c in load_registry(ROOT, check_files=False) if c["slug"] == args.course]
+        if not selected:
+            parser.error(f"Unbekannter Kurs: {args.course}")
+        courses = validate_registry(selected, ROOT)
+    build(args.out, courses)

@@ -52,7 +52,7 @@ new = render_fragment(
     "titel: Demo\nkurz: Ein neues Kapitel\n---\n\n"
     "Ein Text mit **Fettdruck**.\n\n## Unterkapitel\n\n"
     "![Neuron](grafiken/perzeptron.svg)\n",
-    ROOT / "kursseiten" / "sample.md",
+    ROOT / "kurse/bok/4-klasse/kursseiten" / "sample.md",
 )
 new_soup = BeautifulSoup(new, "html.parser")
 assert new_soup.select_one("details.kapitel#perzeptron-demo")
@@ -62,7 +62,7 @@ assert new_soup.select_one(".kapitel-body img")["src"] == "grafiken/perzeptron.s
 
 block = render_fragment(
     '<div><!-- MD:START -->\nEin **neuer** Absatz.\n<!-- MD:END --></div>',
-    ROOT / "kursseiten" / "sample.md",
+    ROOT / "kurse/bok/4-klasse/kursseiten" / "sample.md",
 )
 assert "<strong>neuer</strong>" in block
 assert "<div>" in block and "</div>" in block
@@ -101,8 +101,8 @@ assert len(soup.select('#fremdmodell .fremd-person')) == 2
 assert soup.select_one('#fremdmodell button#download-fremdmodell')
 assert len(soup.select('#bewertung [data-score]')) == 11
 # Students still download/import their full local answer state and all notebooks.
-js = (ROOT / "projekt/portal.js").read_text(encoding="utf-8")
-progress = (ROOT / "projekt/progress.js").read_text(encoding="utf-8")
+js = (ROOT / "shared/portal/portal.js").read_text(encoding="utf-8")
+progress = (ROOT / "shared/portal/progress.js").read_text(encoding="utf-8")
 for key in ['kst-ki-kursportal-v1', 'data-answer', 'data-journal', 'download-backup',
             'download-submission', 'restore-package', 'notebooks/', 'runtime/']:
     assert key in js, key
@@ -111,7 +111,7 @@ for key in ['ki-projekt-seitenstand-v1', 'data-check', 'data-skill']:
 for notebook in ["perzeptron_und_neuronale_netze.ipynb", "mehrschichtige_netze.ipynb",
                  "daten_training.ipynb", "ki_lernlabor.ipynb"]:
     assert notebook in rendered, notebook
-assert (ROOT / "content/ki_projekt/ki_tandemprojekt.ipynb").is_file()
+assert (ROOT / "kurse/bok/4-klasse/content/ki_projekt/ki_tandemprojekt.ipynb").is_file()
 assert "projectName" in js and "showNotebook(projectName" in js
 
 print("PASS lossless assembled course, stable form keys, Markdown authoring, export/import hooks")

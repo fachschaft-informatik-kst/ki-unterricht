@@ -5,14 +5,16 @@ SHELL := /bin/sh
 PYTHON ?= python3
 HOST ?= 127.0.0.1
 PORT ?= 8000
+COURSE ?= bok/4-klasse
 VENV := .venv
 VENV_PY := $(VENV)/bin/python
 PREVIEW_STAMP := $(VENV)/.preview-ready
 FULL_STAMP := $(VENV)/.full-ready
 NPM_STAMP := $(VENV)/.npm-ready
 NODE_DIR := extensions/ki-autostart
+BROWSER_STAMP := node_modules/.browser-ready
 
-.PHONY: help preview local full build serve install install-preview test clean new-chapter
+.PHONY: help preview local full build serve install install-preview test test-browser test-all clean new-chapter
 
 help:
 	@printf '%s\n' \
@@ -21,6 +23,8 @@ help:
 		'make build         Vollstaendige App inklusive JupyterLite nach dist/ bauen' \
 		'make serve         Bereits gebaute App aus dist/ anzeigen' \
 		'make test          Build und lokale Struktur-/Funktionstests (Browser-CI separat)' \
+		'make test-browser  Build und alle Browserpruefungen inklusive Python, Training und ZIP' \
+		'make test-all      Technische Tests und alle Browserpruefungen nacheinander' \
 		'make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." AFTER=030' \
 		'make install       Alle lokalen Python- und npm-Abhaengigkeiten installieren' \
 		'make clean         Lokale Build-Dateien und Umgebungen loeschen' \
@@ -43,6 +47,11 @@ $(NPM_STAMP): $(NODE_DIR)/package.json $(NODE_DIR)/package-lock.json | $(VENV_PY
 	npm ci --prefix $(NODE_DIR)
 	@touch $@
 
+$(BROWSER_STAMP): package.json package-lock.json
+	npm ci
+	npx --no-install playwright install chromium
+	@touch $@
+
 install-preview: $(PREVIEW_STAMP)
 
 install: $(FULL_STAMP) $(NPM_STAMP)
@@ -50,15 +59,14 @@ install: $(FULL_STAMP) $(NPM_STAMP)
 # Optional authoring helper (no virtual environment needed).
 new-chapter:
 	@test -n "$(SECTION)" -a -n "$(NUMMER)" -a -n "$(TITLE)" || { echo 'Benutzung: make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." [AFTER=030]' >&2; exit 2; }
-	$(PYTHON) scripts/new_chapter.py $(SECTION) --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
+	$(PYTHON) scripts/new_chapter.py $(SECTION) --course "$(COURSE)" --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
 
 preview: install-preview
 	@printf 'Schnellvorschau: http://$(HOST):$(PORT)/kurse.html\n'
 	$(VENV_PY) scripts/preview.py --host $(HOST) --port $(PORT)
 
 build: install
-	npm run build --prefix $(NODE_DIR)
-	$(VENV_PY) scripts/sync_course_sources.py
+	PATH="$(abspath $(VENV))/bin:$$PATH" npm run build --prefix $(NODE_DIR)
 	$(VENV_PY) scripts/build_portal.py
 	$(VENV_PY) scripts/build_course.py
 	$(VENV_PY) scripts/build_basis.py
@@ -81,6 +89,10 @@ full: local
 # are reviewed by teachers, not frozen in CI snapshots.
 test: build
 	$(VENV_PY) scripts/course_registry.py
+	$(VENV_PY) tests/check_course_registry.py
+	$(VENV_PY) tests/check_preview_watch.py
+	$(VENV_PY) tests/check_course_isolation.py
+	$(VENV_PY) tests/check_notebook_isolation.py
 	$(VENV_PY) tests/check_editor_publish.py
 	$(VENV_PY) tests/check_course_routes.py
 	$(VENV_PY) tests/check_published_links.py
@@ -90,15 +102,30 @@ test: build
 	$(VENV_PY) tests/check_admin.py
 	$(VENV_PY) tests/check_course_model.py
 	$(VENV_PY) tests/check_pyodide_lock.py
+	$(VENV_PY) tests/check_kernel_compat.py
+	$(VENV_PY) tests/check_browser_storage_patch.py
 	node tests/check_autostart.cjs
 	node tests/check_archive.cjs
 	node tests/check_notebook_snapshot.cjs
 	node tests/check_notebook_warmup.cjs
 	node tests/check_notebook_start_budget.cjs
 	node tests/check_notebook_performance.cjs
+	node tests/check_widget_rehydrate.cjs
+	node tests/check_fotostudio_inline.cjs
+	node tests/check_glossary_model.mjs
+	node tests/check_browser_storage.cjs
 	node tests/check_admin.mjs
+	node tests/check_teacher_view.mjs
+	PATH="$(abspath $(VENV))/bin:$$PATH" node tests/check_markdown_parity.cjs
 	PYTHON=$(VENV_PY) node tests/check_course_model.mjs
-	@echo 'Technische Tests bestanden. Browser- und ZIP-Tests laufen in GitHub Actions.'
+	@echo 'Technische Tests bestanden. Fuer Browser- und ZIP-Tests: make test-all.'
+
+test-browser: build $(BROWSER_STAMP)
+	PATH="$(abspath $(VENV))/bin:$$PATH" npm run test:browser
+
+test-all: test $(BROWSER_STAMP)
+	$(VENV_PY) tests/execute_all_notebooks.py
+	PATH="$(abspath $(VENV))/bin:$$PATH" npm run test:browser
 
 clean:
-	rm -rf dist $(VENV) $(NODE_DIR)/node_modules
+	rm -rf dist $(VENV) $(NODE_DIR)/node_modules node_modules

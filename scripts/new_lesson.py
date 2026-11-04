@@ -100,9 +100,14 @@ def main() -> None:
     parser.add_argument("--section", help="Vorhandener Themenblock statt eines neuen Bereichs")
     parser.add_argument("--after", help="Stabile ID der vorhergehenden Doppellektion")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--course", default="bok/4-klasse", help="Kurs, z. B. irn/1-klasse")
     args = parser.parse_args()
     try:
-        paths = create(ROOT, args.title, chapter_title=args.chapter, section=args.section,
+        from course_registry import load_registry
+        course = next((c for c in load_registry() if c["slug"] == args.course), None)
+        if course is None:
+            raise ValueError(f"Unbekannter Kurs: {args.course}")
+        paths = create(ROOT / course["courseRoot"], args.title, chapter_title=args.chapter, section=args.section,
                        after=args.after, dry_run=args.dry_run)
     except (OSError, ValueError, KeyError) as exc:
         parser.error(str(exc))

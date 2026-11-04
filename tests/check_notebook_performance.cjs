@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 (async()=>{
  const root=path.resolve(__dirname,'..');
  const read=relative=>fs.readFileSync(path.join(root,relative),'utf8');
- const run=await import('data:text/javascript;base64,'+Buffer.from(read('projekt/notebook-performance.js')).toString('base64'));
+ const run=await import('data:text/javascript;base64,'+Buffer.from(read('shared/portal/notebook-performance.js')).toString('base64'));
  global.window={KINotebookTimings:[]};
  const frame={dataset:{}};
  run.startNotebookTiming(frame,'basis_neuron.ipynb','warmup');
@@ -36,7 +36,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  for(let i=0;i<60;i++){run.startNotebookTiming(frame,'lab.ipynb','open');run.finishNotebookTiming(frame);}
  assert.equal(window.KINotebookTimings.length,50,'Timing history must stay bounded');
  assert(!JSON.stringify(window.KINotebookTimings).includes('source'),'Timings must not store notebook code');
- for(const course of ['projekt/portal.js','basis/persistence.js']){
+ for(const course of ['shared/portal/portal.js','shared/basis/persistence.js']){
   const s=read(course);
   assert(s.includes('startNotebookTiming(')&&s.includes('finishNotebookTiming('));
   assert(s.includes("type==='milestone'"));

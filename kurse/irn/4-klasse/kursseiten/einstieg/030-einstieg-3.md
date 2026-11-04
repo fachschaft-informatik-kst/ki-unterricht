@@ -57,7 +57,7 @@ Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es i
             <img src="grafiken/neuron_entscheider.svg" alt="Schwimmbad-Neuron aus DL 3: Sonne, Freundinnen und Freunde sowie eine Prüfung sind drei Eingaben mit unterschiedlich starken Gewichten, die zur Entscheidung Ja oder Nein führen." loading="lazy" decoding="async">
             <figcaption>Beim Schwimmbad-Beispiel entscheidet ein einzelnes künstliches Neuron anhand von Sonne, Begleitung und einer bevorstehenden Prüfung: Gehe ich schwimmen? Jede Eingabe hat ein Gewicht. <strong>In DL 3</strong> untersucht ihr dieselbe Grafik genauer und seht, wie Gewichte beim Lernen angepasst werden. Das Bild illustriert das Funktionsprinzip, nicht ein historisches Gerät.</figcaption>
           </figure>
-          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/projekt/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 3</a>.</p>
+          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/kurse/irn/4-klasse/projekt/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 3</a>.</p>
         </article>
         </template></li>
       <li><span class="jahr">1966</span>

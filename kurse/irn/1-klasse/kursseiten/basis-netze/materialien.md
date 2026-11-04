@@ -2,11 +2,11 @@
 
 ### Zusätzliche Grafiken
 
-![Leeres Koordinatengitter mit XOR-Eingaben – neue Einstiegsaufgabe](../projekt/materialien/downloads/koordinatengitter_xor_einfach.svg "Ankommen | Tandem")
+![Leeres Koordinatengitter mit XOR-Eingaben – neue Einstiegsaufgabe](materialien/downloads/koordinatengitter_xor_einfach.svg "Ankommen | Tandem")
 
-![OR- und NAND-Entscheidungsgrenzen bei XOR](../projekt/materialien/downloads/koordinatengitter_or_nand_xor.svg "Informieren | Lehrperson")
+![OR- und NAND-Entscheidungsgrenzen bei XOR](materialien/downloads/koordinatengitter_or_nand_xor.svg "Informieren | Lehrperson")
 
-![Leeres Gitter für die eigene Skizze der XOR-Zwischenschicht](../projekt/materialien/downloads/koordinatengitter_or_nand_xor_leer.svg "Verarbeiten | Einzeln")
+![Leeres Gitter für die eigene Skizze der XOR-Zwischenschicht](materialien/downloads/koordinatengitter_or_nand_xor_leer.svg "Verarbeiten | Einzeln")
 
 ### Tafelübersicht: OR + NAND ergibt XOR
 

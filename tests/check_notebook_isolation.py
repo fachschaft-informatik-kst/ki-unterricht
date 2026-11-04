@@ -11,13 +11,12 @@ courses = json.loads((ROOT / "shared/course-sites.json").read_text(encoding="utf
 assert out.is_dir(), "Run build_portal_notebooks.py first"
 
 for course in courses:
-    if course["teacher"] == "BOK":
-        continue
     sources = ROOT / course["courseRoot"] / "content"
     target = out / course["slug"]
     assert target.is_dir(), course["slug"]
     modules = sorted(path for path in sources.rglob("*")
-                     if path.is_file() and path.suffix != ".ipynb")
+                     if path.is_file() and path.suffix != ".ipynb"
+                     and "__pycache__" not in path.parts)
     assert modules, course["slug"]
     for file in modules:
         assert (target / file.relative_to(sources)).read_bytes() == file.read_bytes(), file

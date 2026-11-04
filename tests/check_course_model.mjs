@@ -7,7 +7,7 @@ const fixtures=JSON.parse(execFileSync(process.env.PYTHON||"python3",
 assert.deepEqual(lessonTemplate("transfer","Transfer","gesellschaft"),fixtures.template);
 for(const plan of fixtures.valid)assert.equal(validatePlan(plan),true);
 for(const plan of fixtures.invalid)assert.throws(()=>validatePlan(plan));
-const manifest=JSON.parse(readFileSync(new URL("../kursseiten/manifest.json",import.meta.url)));
+const manifest=JSON.parse(readFileSync(new URL("../kurse/bok/4-klasse/kursseiten/manifest.json",import.meta.url)));
 assert.equal(validateManifest(manifest),true);
 for(const sections of [[],[null],[...manifest.sections,manifest.sections[0]],
   [{id:"new",class:"section",teaching:true}]]){

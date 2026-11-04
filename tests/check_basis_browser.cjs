@@ -222,7 +222,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_biologisch.svg"]').count(),1);
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_entscheider.svg"]').count(),1);
     assert((await page.locator('#basis-neuron-4').innerText()).includes('Lernrate'),'DL3 must explain the perceptron learning rule');
-    assert.equal(await page.locator('#basis-neuron a[href*="portal/basis_neuron.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-neuron a[href*="portal/bok/1-klasse/basis_neuron.ipynb"]').count(),1);
     const neuronWeight=page.locator('[data-basis-answer="basis-neuron-sw_gs"]');
     const neuronScore=page.locator('[data-basis-answer="basis-neuron-sw_treffer"]');
     await neuronWeight.fill('2.5');
@@ -233,8 +233,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-netze details.kapitel').count(),4,'DL4 must reproduce advanced XOR and network training without digit model');
     assert.equal(await page.locator('#basis-netze img[src="grafiken/xor_gerade.svg"]').count(),1);
     assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),1);
-    assert.equal(await page.locator('#basis-netze a[href*="portal/xor_einzelne_neuronen.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-netze a[href*="portal/basis_netze.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/xor_einzelne_neuronen.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/basis_netze.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-netze a[href*="ziffernerkennung.ipynb"]').count(),0,'Digit classifier belongs to DL5 only');
     const xorScore=page.locator('[data-basis-answer="basis-netze-hand_xor_max"]');
     await xorScore.selectOption('3');
@@ -308,7 +308,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     const download=await downloadPromise;
     const archivePath=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'ki-basis-zip-')),'kursstand.zip');
     await download.saveAs(archivePath);
-    const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../projekt/archive.js')).toString('base64'));
+    const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../shared/portal/archive.js')).toString('base64'));
     const files=await archive.readZip(new Blob([fs.readFileSync(archivePath)]));
     assert(files.has('Journal.html')&&files.has('Reflexionen.txt')&&files.has('notebooks/basis_neuron.ipynb')&&files.has('fotodaten/fotostudio.json'));
      const learningJournal=await files.get('Journal.html').text(),reflections=await files.get('Reflexionen.txt').text();
@@ -343,7 +343,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       await notebookPage.locator('#'+lesson+' a.ki-notebook-launch[href*="'+link+'"]').first().click();
       await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
       const source=await notebookPage.locator('#basis-lab-frame').getAttribute('src');
-      assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/'+notebook,
+      assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/bok/1-klasse/'+notebook,
         'Notebook must launch its own Jupyter document directly');
       assert.equal(await notebookPage.locator('#basis-lab-title').innerText(),title);
       assert.equal(await notebookPage.locator('#basis-notebook-panel.lab-panel').count(),1);
@@ -417,7 +417,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       assert.equal(await launch.getAttribute('aria-expanded'),'true');
       assert.equal(await frame.getAttribute('src'),warmedSrc,'Notebook click must reuse its intent-warmed iframe');
       await frame.waitFor({state:'attached'});
-      assert.equal(new URL(await frame.getAttribute('src'),url).searchParams.get('path'),'portal/'+expected.split('/').pop());
+      assert.equal(new URL(await frame.getAttribute('src'),url).searchParams.get('path'),'portal'+new URL(url).pathname+expected.split('/').pop());
       assert.equal(await card.locator('.lab-panel').count(),0,'The modal must not move into lesson cards and restart the iframe');
       assert.equal(await frame.evaluate(el=>el.closest('dialog')?.parentElement?.tagName),'MAIN',
         'A fixed dialog in the course page must retain its live Python browsing context');

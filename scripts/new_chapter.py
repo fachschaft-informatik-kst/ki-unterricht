@@ -114,10 +114,15 @@ def main() -> None:
     parser.add_argument("--after", help="Dateipräfix, nach dem das Kapitel erscheinen soll, z. B. 030")
     parser.add_argument("--slug", help="Optionaler URL-Slug (sonst vom Titel abgeleitet)")
     parser.add_argument("--dry-run", action="store_true", help="Nur Pfad anzeigen, noch nicht schreiben")
+    parser.add_argument("--course", default="bok/4-klasse", help="Kurs, z. B. irn/1-klasse")
     args = parser.parse_args()
     try:
+        from course_registry import load_registry
+        course = next((c for c in load_registry() if c["slug"] == args.course), None)
+        if course is None:
+            raise ValueError(f"Unbekannter Kurs: {args.course}")
         path = create_chapter(
-            ROOT, args.section, args.title, args.nummer,
+            ROOT / course["courseRoot"], args.section, args.title, args.nummer,
             short=args.short, after=args.after, slug=args.slug, dry_run=args.dry_run
         )
     except (ValueError, OSError) as exc:

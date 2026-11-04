@@ -34,7 +34,9 @@ const ROOT=path.resolve(__dirname,"..");
         selectedTitle:lessons[number-1]?.title||""};
       const data=kind==="planung"?{...base,lesson:fakeLesson(number)}:
         kind==="materialien"?{...base,intro:"",sections:[{title:"DL "+number,
-          markdown:"## Doppellektion "+number+"\n\nMaterial für DL "+number}]}:
+          markdown:"## Doppellektion "+number+"\n\nMaterial für DL "+number+
+            "\n\n[Studio](studio/) · [Notebook](../lab/index.html?path=portal/basis_neuron.ipynb)"+
+            " · [Lösung](materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md)"}]}:
         {...base,entries:[{field:"sample_"+number,question:"Welche Beobachtung gehört zu DL "+number+"?",
           questionFound:number!==8,questionSource:number===8?"thema":"original",answer:"Die Musterlösung zu DL "+number,
           courseLink:"https://example.org/course#lesson"+number}],
@@ -50,8 +52,8 @@ const ROOT=path.resolve(__dirname,"..");
         'body[data-grade="'+grade+'"]{--accent:'+accent+'}');
       return;
     }
-    const files={"/teacher.js":"projekt/admin/teacher.js","/teacher.css":"projekt/admin/teacher.css",
-      "/markdown-it.min.js":"projekt/admin/markdown-it.min.js"};
+    const files={"/teacher.js":"shared/portal/admin/teacher.js","/teacher.css":"shared/portal/admin/teacher.css",
+      "/markdown-it.min.js":"shared/portal/admin/markdown-it.min.js"};
     if(files[url.pathname]){
       const file=path.join(ROOT,files[url.pathname]);
       res.writeHead(200,{"Content-Type":url.pathname.endsWith(".css")?"text/css":"text/javascript"});
@@ -123,7 +125,14 @@ const ROOT=path.resolve(__dirname,"..");
     assert.match(await page.locator(".course-context").innerText(),/IRN · 4. Klasse/);
     const irnAccent=await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim());
     assert.equal(irnAccent,"#9a481d");
-
+    await page.locator('.area-nav a[href*="/materialien"]').click();
+    await page.locator(".materials-content").waitFor();
+    const site="https://fachschaft-informatik-kst.github.io/ki-unterricht/";
+    assert.equal(await page.getByRole("link",{name:"Studio",exact:true}).getAttribute("href"),site+"irn/4-klasse/studio/");
+    const notebook=new URL(await page.getByRole("link",{name:"Notebook",exact:true}).getAttribute("href"));
+    assert.equal(notebook.searchParams.get("path"),"portal/irn/4-klasse/basis_neuron.ipynb");
+    const solution=await page.getByRole("link",{name:"Lösung",exact:true}).getAttribute("href");
+    assert.equal(new URL(solution,page.url()).searchParams.get("course"),"irn/4-klasse");
 
     await page.setViewportSize({width:390,height:844});
     assert.equal(await page.locator(".lesson-link").count(),10);

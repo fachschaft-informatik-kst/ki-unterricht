@@ -100,6 +100,26 @@ def load_registry(root: Path = ROOT, *, check_files: bool = True) -> list[dict]:
     return validate_registry(data.get("courses"), root, check_files=check_files)
 
 
+def load_experiments(course: dict, root: Path = ROOT) -> list[dict]:
+    base = root / course["courseRoot"]
+    entries = json.loads((base / "experimente/registry.json").read_text(encoding="utf-8"))
+    if not isinstance(entries, list) or not entries:
+        raise ValueError(f"Experimentregistrierung fehlt: {course['slug']}")
+    names = set()
+    for entry in entries:
+        source = entry.get("source") if isinstance(entry, dict) else None
+        if (not isinstance(source, str) or Path(source).is_absolute()
+                or ".." in Path(source).parts or Path(source).suffix != ".ipynb"
+                or not isinstance(entry.get("title"), str) or not entry["title"].strip()):
+            raise ValueError(f"Ungültiges Experiment in {course['slug']}: {entry}")
+        if Path(source).name in names or not (base / "content" / source).is_file():
+            raise ValueError(f"Experiment fehlt oder hat doppelten Namen: {course['slug']}/{source}")
+        names.add(Path(source).name)
+    if sum(bool(entry.get("project")) for entry in entries) != 1:
+        raise ValueError(f"Genau ein Projektnotebook erforderlich: {course['slug']}")
+    return entries
+
+
 if __name__ == "__main__":
     for course in load_registry():
         print(f"PASS {course['slug']} → {course['manifest']}")

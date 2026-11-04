@@ -6,12 +6,23 @@ Beide Klassen verwenden dieselben Hintergründe. Aufruf im Projektordner:
     python tests/generate_testbilder.py
 """
 import math
+import argparse
+import sys
 import random
 from pathlib import Path
 from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'testbilder'
+sys.path.insert(0, str(ROOT / "scripts"))
+from course_registry import load_registry
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--course", default="bok/4-klasse")
+args = parser.parse_args()
+course = next((c for c in load_registry() if c["slug"] == args.course), None)
+if course is None:
+    parser.error(f"Unbekannter Kurs: {args.course}")
+OUT = ROOT / course["courseRoot"] / "testbilder"
 GRUPPEN = ['T1', 'T2', 'V1', 'P1', 'P2']
 W, H, SS = 640, 480, 2  # Bildgrösse, Supersampling der Objekte
 

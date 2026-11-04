@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 
 ROOT=Path(__file__).resolve().parents[1]
-COURSE=ROOT/"kursseiten"
+COURSE=ROOT/"kurse/bok/4-klasse/kursseiten"
 TOKENS=re.compile(
     r"<!-- MD:START -->\n.*?\n<!-- MD:END -->"
     r"|<(?:textarea|pre|code|script|style|svg)\b[^>]*>.*?</(?:textarea|pre|code|script|style|svg)>"

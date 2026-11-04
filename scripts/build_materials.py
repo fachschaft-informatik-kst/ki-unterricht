@@ -2,16 +2,16 @@
 from __future__ import annotations
 
 import html
+import json
 from pathlib import Path
 import shutil
 
 from bs4 import BeautifulSoup
 from markdown_it import MarkdownIt
 from course_model import output, load_course
-from build_portal_notebooks import REGISTRY
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "lehrperson/materialien.md"
+SOURCE = ROOT / "kurse/bok/4-klasse/lehrperson/materialien.md"
 OUTPUT = output(ROOT) / "materialien.html"
 DOWNLOADS = output(ROOT) / "materialien/downloads"
 
@@ -30,7 +30,6 @@ FILES = {
     "koordinatengitter_or_nand_xor.svg": "worksheets/md/svg/koordinatengitter_or_nand_xor.svg",
     "koordinatengitter_or_nand_xor_leer.svg": "worksheets/md/svg/koordinatengitter_or_nand_xor_leer.svg",
 }
-FILES.update({Path(e["source"]).name: "content/" + e["source"] for e in REGISTRY})
 
 STYLE = """
 :root{--ink:#182b31;--muted:#52656a;--accent:#076959;--paper:#f5f4ee;--line:#d8dfdb;--soft:#e7f1eb}
@@ -67,9 +66,11 @@ footer{color:var(--muted);font-size:13px;padding-top:20px}
 """
 
 def build(lessons: list[dict]) -> None:
+    registry = json.loads((ROOT / "kurse/bok/4-klasse/experimente/registry.json").read_text(encoding="utf-8"))
+    files = FILES | {Path(e["source"]).name: "content/" + e["source"] for e in registry}
     DOWNLOADS.mkdir(parents=True, exist_ok=True)
-    for name, rel in FILES.items():
-        path = ROOT / rel
+    for name, rel in files.items():
+        path = ROOT / "kurse/bok/4-klasse" / rel
         if not path.is_file():
             raise FileNotFoundError(f"Missing teacher download: {rel}")
         shutil.copyfile(path, DOWNLOADS / name)
@@ -88,7 +89,7 @@ def build(lessons: list[dict]) -> None:
 
     source = SOURCE.read_text(encoding="utf-8")
     for view in dict.fromkeys(l["view"] for l in lessons):
-        extension = ROOT / "kursseiten" / view / "materialien.md"
+        extension = ROOT / "kurse/bok/4-klasse/kursseiten" / view / "materialien.md"
         if not extension.is_file():
             raise FileNotFoundError(f"Missing teacher material for {view}")
         source += "\n\n" + extension.read_text(encoding="utf-8")
@@ -171,8 +172,8 @@ def build(lessons: list[dict]) -> None:
 <footer>Grafiken können durch Anklicken vergrössert werden. Quellen: <code>kursseiten/&lt;thema&gt;/materialien.md</code> und <code>lehrperson/materialien.md</code>.</footer>
 </main><script src="notebook-blocks.js" defer></script></body></html>
 """, encoding="utf-8")
-    print(f"Built teacher extras: {len(lessons)} lessons, {len(FILES)} downloads")
+    print(f"Built teacher extras: {len(lessons)} lessons, {len(files)} downloads")
 
 if __name__ == "__main__":
     import json
-    build(load_course(ROOT)["lessons"])
+    build(load_course(ROOT, "kurse/bok/4-klasse/kursseiten/manifest.json")["lessons"])

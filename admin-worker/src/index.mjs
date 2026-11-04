@@ -1,5 +1,5 @@
 import {validatePlan,validateManifest} from "../../shared/course-model.js";
-import {validateGlossary,GLOSSARY_PATH} from "../../shared/glossary-model.js";
+import {validateGlossary} from "../../shared/glossary-model.js";
 import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS,loadTeacherCourses,teacherThemeStylesheet,normalizeTeacherCourses} from "./teacher.mjs";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
@@ -91,13 +91,8 @@ function validateCourseThemeRegistry(doc){
 }
 const allowed=path => typeof path==="string"&&!path.includes("..")&&!path.includes("//")&&(
   /^kurse\/[a-z][a-z0-9-]*\/(?:1|4)-klasse\/(?:kursseiten\/(?:manifest\.json|glossar\.json|[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md))|lehrperson\/(?:musterloesungen(?:-felder)?|materialien)\.md|content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb)$/.test(path)||
-  /^kursseiten\/[a-z][a-z0-9-]*\/(?:[0-9]{3}-[a-z0-9-]+\.md|planung\.json|materialien\.md)$/.test(path)||
-  /^kursseiten\/(?:manifest|basis-manifest|[a-z][a-z0-9-]*-manifest)\.json$/.test(path)||
-  [GLOSSARY_PATH,"shared/course-sites.json"].includes(path)||
-  /^lehrperson\/[a-z0-9-]+\/(?:musterloesungen(?:-felder)?|glossar)\.md$/.test(path)||
-  /^lehrperson\/(?:materialien|musterloesungen(?:-felder-[14]-klasse)?)\.md$/.test(path)||
-  /^projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path)||
-  /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/.test(path));
+  path==="shared/course-sites.json"||
+  /^kurse\/[a-z][a-z0-9-]*\/(?:1|4)-klasse\/projekt\/grafiken\/uploads\/[a-z0-9-]+\.(png|jpe?g|webp)$/.test(path));
 function validate(changes){
   if(!Array.isArray(changes)||changes.length<1||changes.length>12)throw Error("1–12 Dateien pro Pull Request.");
   const seen=new Set();
@@ -189,7 +184,7 @@ async function publish(req,token){
     const sectionOwners=new Map();
     const touchedCourses=new Set();
     for(const item of body.changes){
-      if(item.path==="shared/course-sites.json"||item.path.startsWith("projekt/grafiken/uploads/"))continue;
+      if(item.path==="shared/course-sites.json")continue;
       const owners=profiles.filter(profile=>item.path.startsWith(profile.courseRoot+"/"));
       if(owners.length!==1)throw Error("Datei gehört zu keinem registrierten Kurs: "+item.path);
       touchedCourses.add(owners[0].slug);
@@ -351,8 +346,13 @@ export default {
           "Cache-Control":"no-store"}});
         if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
         if(download){
-          const path=DOWNLOADS[download[1]];
-          if(!path)return fail(404,"Datei nicht gefunden.");
+          const relative=DOWNLOADS[download[1]];
+          if(!relative)return fail(404,"Datei nicht gefunden.");
+          const courses=await loadTeacherCourses(active.token,github,REPO);
+          const slug=url.searchParams.get("course")||"bok/4-klasse";
+          const course=courses.find(c=>c.slug===slug&&c.ready);
+          if(!course)return fail(404,"Kurs nicht vorhanden.");
+          const path=course.courseRoot+"/"+relative;
           const bytes=await readTeacherFile(active.token,path,github,REPO);
           return new Response(bytes,{headers:{
             "Content-Type":download[1].endsWith(".svg")?"image/svg+xml":"text/markdown; charset=utf-8",

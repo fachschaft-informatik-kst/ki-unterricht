@@ -3,13 +3,13 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 (async()=>{
  const root=path.resolve(__dirname,'..');
  const source=file=>fs.readFileSync(path.join(root,file),'utf8');
- const script=source('projekt/notebook-blocks.js');
+ const script=source('shared/portal/notebook-blocks.js');
  assert(script.includes('const warmOnPageLoad = () =>'),'Course page must warm up without a hover');
  assert(script.includes('window.addEventListener("load", warmOnPageLoad'),'Warmup starts only after course handlers are installed');
  assert(script.includes('const name = selected.dataset.notebook.split("/").pop()'),'Warm the target lesson only');
  assert(script.includes('window.dispatchEvent(new CustomEvent("ki-notebook-warmup"'),'Warmup uses the managed iframe');
  assert(script.includes('if (managed) {'),'Managed notebooks may not create a second iframe');
- const basic=source('basis/persistence.js'),advanced=source('projekt/portal.js');
+ const basic=source('shared/basis/persistence.js'),advanced=source('shared/portal/portal.js');
  assert(basic.includes('if(current&&ready&&owner)await snapshot()'),'ZIP must remain available during background startup');
  assert(advanced.includes("frame.dataset.startKind==='warmup'"),'ZIP must remain available during background startup');
  assert(advanced.includes("location.hash==='#journal'&&activeName&&activeOwner"),
@@ -36,7 +36,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  const embed=source('extensions/ki-autostart/embed.js');
  assert(embed.includes('restoreNotebookUploads(panel.sessionContext.session.kernel,files)'));
  assert(embed.includes('event.origin!==origin'),'The upload bridge must remain same-origin');
- const foto=source('content/ki_projekt/ki_foto_tools.py');
+ const foto=source('kurse/bok/4-klasse/content/ki_projekt/ki_foto_tools.py');
  assert(foto.includes('def gespeicherte_uploads()'));
  console.log('PASS managed idle warmup, ZIP while warming, per-notebook uploads and safe filesystem restaging');
 })().catch(error=>{console.error(error);process.exitCode=1;});

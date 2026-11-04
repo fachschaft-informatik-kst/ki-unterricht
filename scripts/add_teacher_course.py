@@ -23,7 +23,7 @@ def create(root: Path, teacher: str, grade: int, title: str, accent: str = "#456
     name = title.strip()
     ident = f"{teacher.lower()}-{grade}-klasse"
     slug = f"{teacher.lower()}/{grade}-klasse"
-    source = root / "templates" / f"{grade}-klasse"
+    source = root / "kurse/_vorlagen" / f"{grade}-klasse"
     if grade not in (1, 4) or not (source / "kursseiten/manifest.json").is_file():
         raise ValueError(f"Keine vollständige Kursvorlage für die {grade}. Klasse.")
     course_root = f"kurse/{slug}"

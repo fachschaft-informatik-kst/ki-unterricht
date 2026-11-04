@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" font-family="Helvetica, Arial, sans-serif" font-size="15">
+  <defs>
+    <marker id="pfeil" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#263b43"/></marker>
+  </defs>
+  <rect width="760" height="330" fill="#ffffff"/>
+
+  <text x="30" y="26" font-weight="bold" fill="#222">Eingaben</text>
+  <text x="215" y="26" font-weight="bold" fill="#222">Gewichte</text>
+  <text x="415" y="26" font-weight="bold" fill="#222">Neuron</text>
+  <text x="615" y="26" font-weight="bold" fill="#222">Ausgabe</text>
+
+  <g fill="#eaf1f8" stroke="#30628c" stroke-width="1.5">
+    <circle cx="90" cy="70" r="30"/><circle cx="90" cy="165" r="30"/><circle cx="90" cy="260" r="30"/>
+  </g>
+  <g text-anchor="middle" fill="#000" font-weight="bold" font-size="20">
+    <text x="90" y="77">1</text><text x="90" y="172">0</text><text x="90" y="267">1</text>
+  </g>
+  <g fill="#222" font-size="13" text-anchor="middle">
+    <text x="90" y="116">S: Sonne scheint</text>
+    <text x="90" y="211">F: Freund:innen gehen mit</text>
+    <text x="90" y="306">P: Prüfung morgen</text>
+  </g>
+
+  <g fill="none" marker-end="url(#pfeil)">
+    <line x1="125" y1="70" x2="400" y2="138" stroke="#176c63" stroke-width="3"/>
+    <line x1="125" y1="165" x2="396" y2="165" stroke="#176c63" stroke-width="3"/>
+    <line x1="125" y1="260" x2="400" y2="192" stroke="#be572b" stroke-width="5"/>
+  </g>
+  <g font-weight="bold" font-size="17">
+    <text x="215" y="86" fill="#176c63">+2</text>
+    <text x="215" y="155" fill="#176c63">+2</text>
+    <text x="215" y="262" fill="#be572b">−4</text>
+  </g>
+  <text x="215" y="306" fill="#52656a" font-size="13">Negatives Gewicht: Dieser Faktor spricht dagegen.</text>
+
+  <circle cx="450" cy="165" r="52" fill="#cfe8dc" stroke="#263b43" stroke-width="2.5"/>
+  <text x="450" y="162" text-anchor="middle" font-size="22" font-weight="bold">Σ + b</text>
+  <text x="450" y="186" text-anchor="middle" font-size="15" fill="#263b43">= −3</text>
+  <text x="450" y="240" text-anchor="middle" fill="#52656a" font-size="14">Bias b = −1</text>
+  <text x="450" y="258" text-anchor="middle" fill="#52656a" font-size="13">(Grundhaltung)</text>
+
+  <line x1="505" y1="165" x2="590" y2="165" stroke="#263b43" stroke-width="2.5" marker-end="url(#pfeil)"/>
+  <rect x="600" y="132" width="140" height="66" rx="12" fill="#e3e6e8" stroke="#263b43" stroke-width="2"/>
+  <text x="670" y="162" text-anchor="middle" font-size="22" font-weight="bold" fill="#52656a">Nein</text>
+  <text x="670" y="184" text-anchor="middle" font-size="13" fill="#52656a">y = 0</text>
+</svg>

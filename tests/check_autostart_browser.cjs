@@ -25,8 +25,8 @@ async function reveal(page, selector) {
     // manual restart. The full local variant also checks reload + project.
     const coldStart = process.env.KI_WIDGET_COLD_START === '1';
     for (const name of (coldStart
-      ? ['perzeptron_und_neuronale_netze.ipynb']
-      : ['perzeptron_und_neuronale_netze.ipynb','ki_projekt/ki_tandemprojekt.ipynb'])) {
+      ? ['portal/bok/4-klasse/perzeptron_und_neuronale_netze.ipynb']
+      : ['portal/bok/4-klasse/perzeptron_und_neuronale_netze.ipynb','portal/bok/4-klasse/ki_tandemprojekt.ipynb'])) {
     browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH, headless:true, args:JSON.parse(process.env.CHROMIUM_ARGS || '[]')});
       const context = await browser.newContext();
       const page = await context.newPage();
@@ -36,11 +36,11 @@ async function reveal(page, selector) {
       for (let pass=0;pass<(coldStart ? 1 : 2);pass++) {
         await page.waitForFunction(() => [...document.querySelectorAll('.ki-autostart-status')].some(e=>e.textContent.includes('Bereit') || e.textContent.includes('fehlgeschlagen')), null, {timeout:180000}).catch(async error=>{console.error(await page.locator('body').innerText());throw error;});
         assert.equal(await page.locator('.ki-autostart-status').textContent(), '✓ Bereit', await page.locator('body').innerText());
-        if (name.startsWith('perzeptron')) {
+        if (name.endsWith('/perzeptron_und_neuronale_netze.ipynb')) {
           // Der kompakte Gatterversuch zeigt Ziel und Ist-Ausgabe direkt in der Live-Tabelle.
           const aufgabe = '.widget-dropdown select:has(option:text-is("OR"))';
           await reveal(page, aufgabe);
-          const widgetOutput = page.locator('.jp-CodeCell').nth(1).locator('.jp-OutputArea');
+          const widgetOutput = page.locator('.jp-CodeCell').nth(1).locator('.jp-Cell-outputArea');
           const outputText = await widgetOutput.innerText();
           assert(!outputText.includes('FloatSlider(value=') && !outputText.includes('HTML(value='),
             'Interactive controls must never be duplicated as a Python repr');

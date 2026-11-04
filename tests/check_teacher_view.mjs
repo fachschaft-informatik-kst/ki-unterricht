@@ -48,13 +48,14 @@ const sources=[
   ["kursseiten/fremdmodell/030-reproduktion.md","reproduktion"]
 ];
 for(const [source,key] of sources){
-  const page=readFileSync(new URL("../"+source,import.meta.url),"utf8");
+  const grade=source.startsWith("kursseiten/basis-")?1:4;
+  const page=readFileSync(new URL("../kurse/bok/"+grade+"-klasse/"+source,import.meta.url),"utf8");
   const texts=questionsFromSource(page);
   assert(texts[key]&&texts[key].length>=10,source+": missing actual question for "+key);
 }
 
-const markdown=readFileSync(new URL("../projekt/admin/teacher.js",import.meta.url),"utf-8");
-const css=readFileSync(new URL("../projekt/admin/teacher.css",import.meta.url),"utf-8");
+const markdown=readFileSync(new URL("../shared/portal/admin/teacher.js",import.meta.url),"utf-8");
+const css=readFileSync(new URL("../shared/portal/admin/teacher.css",import.meta.url),"utf-8");
 for(const klass of ["wer-l","wer-e","wer-t","wer-k","wer-r"]){
   assert(markdown.includes(klass),"Missing class "+klass);
   assert(css.includes(".phase-table tr."+klass+" td"),"Missing row color for "+klass);
@@ -116,7 +117,7 @@ assert.deepEqual((await loadTeacherCourses("token",courseMock,"example/repo")).m
 // Both IRN courses contain complete independent copies of the original BOK content.
 for(const grade of [1,4]){
   const root="../kurse/irn/"+grade+"-klasse/kursseiten/";
-  const template="../templates/"+grade+"-klasse/kursseiten/";
+  const template="../kurse/_vorlagen/"+grade+"-klasse/kursseiten/";
   const manifest=JSON.parse(readFileSync(new URL(root+"manifest.json",import.meta.url),"utf8"));
   const reference=JSON.parse(readFileSync(new URL(template+"manifest.json",import.meta.url),"utf8"));
   assert(manifest.sections.length>=reference.sections.length,

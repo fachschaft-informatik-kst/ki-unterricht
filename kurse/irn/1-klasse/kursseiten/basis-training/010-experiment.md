@@ -8,7 +8,7 @@ kurz: MobileNet-Merkmale · eigenes Klassifikationsnetz
 
 **Projektauftrag (zwei gleichwertige Wege):** Trainiert einen Bildklassifikator – entweder mit **bereitgestellten synthetischen Übungsdaten (Standard)** oder mit **freiwillig vorbereiteten eigenen Gegenstandsfotos**. Beide Wege erfüllen den Pflichtkern und werden gleich bewertet. Anders als beim Ziffernnetz verwenden wir jetzt **MobileNet V2**, das für echte Fotos geeignete Merkmale liefert. Das vortrainierte Bildnetz bleibt eingefroren; ihr trainiert nur das nachgeschaltete Netz.
 
-[**Fotostudio öffnen ↗**](../projekt/studio/)
+[**Fotostudio öffnen ↗**](studio/)
 
 
 <div class="ki-notebook-block" data-notebook="content/basis_fotoprojekt.ipynb" data-title="Eigene Fotos erkennen">

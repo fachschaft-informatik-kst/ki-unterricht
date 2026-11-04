@@ -1,6 +1,6 @@
 # KI-Unterricht · Quellen der Lernversuche
 
-Lernende starten im **[Kursportal](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/)**. Dort stehen Aufgaben, Lernziele, zehn AVIVA-Abläufe, eingebettete Notebooks, Fotostudio, Journal und Bewertung.
+Lernende starten im **[Kursportal](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/4-klasse/)**. Dort stehen Aufgaben, Lernziele, zehn AVIVA-Abläufe, eingebettete Notebooks, Fotostudio, Journal und Bewertung.
 
 Fünf gepflegte Notebookquellen:
 
@@ -10,6 +10,6 @@ Fünf gepflegte Notebookquellen:
 4. [Lernlabor](ki_projekt/ki_lernlabor.ipynb)
 5. [Tandemprojekt](ki_projekt/ki_tandemprojekt.ipynb)
 
-`scripts/build_portal_notebooks.py` erzeugt die eingebetteten Fassungen in `portal/`. Erklärungen und Grafik-Anhänge bleiben erhalten. Jedes geöffnete Notebook verwendet eine normale Jupyter-Sitzung. Es gibt kein zusätzliches Workspace-Notebook.
+`scripts/build_portal_notebooks.py` erzeugt die eingebetteten Fassungen und kurslokalen Python-Hilfen unter `_build/content/portal/<lehrperson>/<klasse>/`. Den Befehl aus dem Repository-Root ausführen; dieser Quellordner wird nicht überschrieben. Erklärungen und Grafik-Anhänge bleiben erhalten. Jedes geöffnete Notebook verwendet eine normale Jupyter-Sitzung. Es gibt kein zusätzliches Workspace-Notebook.
 
 Die Lernarten werden mit Memory und der verlinkten NIM-Lernstrecke auf der Kursseite erarbeitet. Frühere Start-, Regressions-, Ziffern- und Symbolprojekt-Notebooks wurden entfernt; ihre früheren Versionen bleiben in der Git-Historie.

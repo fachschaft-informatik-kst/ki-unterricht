@@ -2,17 +2,17 @@
 
 ## Die Quellenhierarchie
 
-Die vorhandene, didaktisch ausgearbeitete **BOK 1. Klasse** und **BOK 4. Klasse** bilden die unveränderten Ausgangsstände `templates/1-klasse/` und `templates/4-klasse/`. Beide wurden vollständig kopiert nach `kurse/bok/<klasse>/` und `kurse/irn/<klasse>/`.
+Unter `kurse/_vorlagen/1-klasse/` und `kurse/_vorlagen/4-klasse/` liegen die vollständigen Ursprungsdateien zum Kopieren für neue Kurse. Jeder Kurs erhält eine eigenständige Kopie der passenden Klassenstufe unter `kurse/<lehrperson>/<klasse>/`.
 
 ```text
-templates/{1-klasse,4-klasse}/
 kurse/
+  _vorlagen/{1-klasse,4-klasse}/
   bok/{1-klasse,4-klasse}/
   irn/{1-klasse,4-klasse}/
-shared/  basis/  projekt/  admin-worker/  scripts/
+shared/{basis,portal,worksheet-pdf}/  admin-worker/  scripts/
 ```
 
-Jedes Kursverzeichnis hat dieselben internen Unterordner: `kursseiten/manifest.json`, `kursseiten/glossar.json`, `kursseiten/<kapitel>/` inklusive AVIVA-`planung.json` und `materialien.md`, `lehrperson/` mit Musterlösungen und bei Klasse 4 Einleitung zum Materialkoffer, `content/` mit Notebook- und weiteren Hilfsdateien, sowie `snapshot.json` zur Herkunftsbestimmung. Dateien sind eigene Git-Objekte im jeweiligen Namensraum; keine Symlinks.
+Jedes Kursverzeichnis hat dieselben internen Unterordner: `kursseiten/manifest.json`, `kursseiten/glossar.json`, `kursseiten/<kapitel>/` inklusive AVIVA-`planung.json` und `materialien.md`, `lehrperson/` mit Musterlösungen und bei Klasse 4 Einleitung zum Materialkoffer, `content/` mit Notebook- und weiteren Hilfsdateien, `projekt/grafiken/`, `experimente/registry.json`, `worksheets/`, `testbilder/` sowie `snapshot.json` zur Herkunftsbestimmung. Dateien sind unabhängige Kopien, keine Symlinks. Der Snapshot beschreibt den ursprünglichen Kopierzeitpunkt, nicht einen laufend synchronisierten Stand.
 
 ## Welche Pfade bearbeitet werden
 
@@ -22,9 +22,9 @@ Jedes Kursverzeichnis hat dieselben internen Unterordner: `kursseiten/manifest.j
 
 ## Öffentliche Seiten und Altkompatibilität
 
-BOK 1/4 werden aus ihren neuen kanonischen Quellen gebaut. `scripts/sync_course_sources.py` erzeugt die historischen BOK-Verzeichnisse `kursseiten/` und `lehrperson/` als Kompatibilitätsspiegel, damit ältere Parser und Testdaten weiterhin funktionieren. Die alten öffentlichen Kurseinstiege `/basis/` und `/projekt/` werden nicht mehr veröffentlicht. Diese Spiegel nicht direkt bearbeiten.
+BOK 1/4 werden direkt aus ihren kanonischen Kursquellen gebaut. Historische Root-Spiegel und das Synchronisationsskript sind entfernt. Die alten öffentlichen Kurseinstiege `/basis/` und `/projekt/` werden nicht mehr veröffentlicht.
 
-Die IRN-Kursseiten werden ebenfalls aus den eigenen Quellkopien und derselben Basisgestaltung erzeugt; eigene Browserzustände und JupyterLite-Dokumentpfade wie `portal/irn/1-klasse/` vermeiden Datenvermischung. Die Python-Laufzeit und Frontend-Runtime bleiben gemeinsam. Notebookquellen innerhalb der Kursordner sind eigene Dateien; der Notebook-Builder veröffentlicht kursbezogene JupyterLite-Dokumente. BOK behält bestehende JupyterLite-Dateipfade.
+Alle Kurse werden aus ihren eigenen Quellkopien und derselben Basisgestaltung erzeugt; eigene Browserzustände und JupyterLite-Dokumentpfade wie `portal/irn/1-klasse/` vermeiden Datenvermischung. Die Python-Laufzeit und Frontend-Runtime bleiben gemeinsam. Auch BOK verwendet kursbezogene Notebookpfade; alte BOK-Adressen bleiben zusätzlich verfügbar.
 
 Lehrpersonen-AVIVA und Materialkoffer sowie Glossar und Musterlösungen liegen in den getrennten Kursverzeichnissen; die geschützten Lehreransichten lesen diese Dateien über den Worker. Öffentliche, von GitHub gehostete Quellen sind trotz Zugangsschutz zur Lehreransicht im GitHub-Repository grundsätzlich einsehbar.
 
@@ -32,9 +32,10 @@ Lehrpersonen-AVIVA und Materialkoffer sowie Glossar und Musterlösungen liegen i
 
 ```sh
 python scripts/course_registry.py
-python scripts/export_course_templates.py --check
+python scripts/export_course_templates.py
 python tests/check_course_registry.py
-python tests/check_course_snapshots.py
+python tests/check_course_isolation.py
+python tests/check_notebook_isolation.py
 node tests/check_teacher_view.mjs
 node tests/check_admin.mjs
 make test

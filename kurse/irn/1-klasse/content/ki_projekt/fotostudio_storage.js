@@ -1,7 +1,8 @@
 /* IndexedDB checkpoints for the Fotostudio. A local cache, never a replacement for JSON export. */
 (function(root){
  'use strict';
- const NAME='kst-ki-fotostudio-records-v1',STORE='records';
+ const course=/\/([a-z][a-z0-9]*\/(?:1|4)-klasse)\//.exec(root.location?.pathname||'')?.[1];
+ const NAME=course&&course!=='bok/4-klasse'?'kst-ki-'+course.replace('/','-')+'-fotostudio-records-v1':'kst-ki-fotostudio-records-v1',STORE='records';
  function open(){
   if(!root.indexedDB)return Promise.reject(Error('Browser-Speicher ist nicht verfügbar'));
   return new Promise((resolve,reject)=>{

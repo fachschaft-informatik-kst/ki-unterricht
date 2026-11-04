@@ -24,7 +24,7 @@ die unveränderliche Lektions-ID. «Materialien bearbeiten» öffnet die zugehö
 Markdown-Datei. Bei Bildern werden AVIVA-Phase und Sozialform abgefragt.
 Alles wird zusammen als Pull Request eingereicht, innerhalb des Limits von
 12 Dateien. Zusätzliche Lektionen in bestehenden Themen können lokal mit
-`scripts/new_lesson.py --section <thema>` angelegt und danach im Formular bearbeitet
+`scripts/new_lesson.py "Titel" --course bok/4-klasse --section <thema>` angelegt und danach im Formular bearbeitet
 werden. Siehe [Redaktionskonzept](ARCHITEKTUR.md).
 
 Der Pull Request startet die **bestehende GitHub-Action**. Erst ein erfolgreicher
@@ -36,10 +36,9 @@ Schülerdaten und keine Cloud-Speicherung von Schülerantworten.
 
 ## Glossar der gewählten Lehrperson
 
-Für BOK lässt sich unter **«Glossar bearbeiten»** das gemeinsame
-`kursseiten/glossar.json` über strukturierte Felder bearbeiten.
-IRN und neue Lehrpersonen besitzen dagegen eigene Markdown-Glossare,
-die sie in ihrer Kursauswahl unabhängig bearbeiten. Die Erklärungen für
+Unter **«Glossar bearbeiten»** wird ausschliesslich
+`kurse/<lehrperson>/<klasse>/kursseiten/glossar.json` über strukturierte
+Felder bearbeitet. Alle Lehrpersonen haben eigene JSON-Glossare. Die Erklärungen für
 **1. Kurzgymnasium** und **4. Kurzgymnasium** bleiben getrennt; Fachbegriff,
 Beispiel, Leitfrage und aufklappbare Kurzantwort sind aktuell gemeinsam. Die
 Vorschau lässt sich zwischen blauem Basis-Kurs und grünem vertieftem Kurs
@@ -166,7 +165,7 @@ Siehe [Mehrkurs-Deployment](MULTIKURS-DEPLOYMENT.md).
   Entfernen, die CI prüft die Verträge mit gespeicherten Schülerdaten.
 - Max. 12 Dateien pro PR. Schreibbar sind nummerierte Kapitel,
   Themenpläne, Themenmaterialien, das Bereichsmanifest und neue Bilddateien
-  unter \`projekt/grafiken/uploads/\`. Der Worker prüft den Gesamtkurs auf
+  unter \`kurse/<lehrperson>/<klasse>/projekt/grafiken/uploads/\`. Der Worker prüft den Gesamtkurs auf
   bestehende IDs, vollständige Themen, eindeutige Reihenfolge und gültige AVIVA-Pläne.
   JS, GitHub-Workflows und Administrationscode bleiben gesperrt.
 - HTML in bearbeiteten Kapiteln kann auf der veröffentlichten öffentlichen
@@ -178,9 +177,9 @@ Siehe [Mehrkurs-Deployment](MULTIKURS-DEPLOYMENT.md).
 
 ## Technischer Aufbau
 
-- \`projekt/admin/index.html\` – Oberfläche
-- \`projekt/admin/admin.css\` – Gestaltung
-- \`projekt/admin/admin.js\` – Editor, Vorschau, Upload
+- \`shared/portal/admin/index.html\` – Oberfläche
+- \`shared/portal/admin/admin.css\` – Gestaltung
+- \`shared/portal/admin/admin.js\` – Editor, Vorschau, kurslokaler Upload
 - \`admin-worker/src/index.mjs\` – OAuth, Berechtigungskontrolle, atomische Commits und PR
 - \`admin-worker/wrangler.jsonc\` – Deploykonfiguration (ohne Secrets)
 - \`tests/check_admin.mjs\` – nicht authentifizierte API / OAuth Sicherheitschecks
