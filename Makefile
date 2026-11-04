@@ -80,6 +80,7 @@ full: local
 # are reviewed by teachers, not frozen in CI snapshots.
 test: build
 	$(VENV_PY) scripts/course_registry.py
+	$(VENV_PY) tests/check_course_boundaries.py
 	$(VENV_PY) tests/check_editor_publish.py
 	$(VENV_PY) tests/check_course_routes.py
 	$(VENV_PY) tests/check_published_links.py

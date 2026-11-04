@@ -226,7 +226,6 @@ jobs:
           node --check projekt/portal.js
           node --check basis/basis.js
           node tests/check_admin.mjs
-          node tests/check_markdown_parity.cjs
       - name: Browser-check teacher editor
         # Form/browser snapshots assume a particular authored lesson set.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
@@ -249,6 +248,7 @@ jobs:
           python scripts/build_basis.py
           python scripts/build_portal_notebooks.py
           python tests/check_notebook_isolation.py
+          python tests/check_course_boundaries.py
       - name: Validate course schemas and editor publication
         if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 5

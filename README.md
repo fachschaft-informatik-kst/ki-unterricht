@@ -100,10 +100,11 @@ content/
   *.ipynb                  # Jupyter-Notebooks
   *.py                     # Python-Hilfsprogramme
   img/                     # Abbildungen
+  experiments.json         # Eigener Projekt-/Notebookkatalog des Kurses
   ki_projekt/              # Projektdateien, Fotostudio und Hilfscode
 ```
 
-**Nur unter `kurse/<lehrperson>/<klasse>/` bearbeiten.** Die Ordner im Repository-Stamm `kursseiten/`, `lehrperson/` und Teile von `content/` werden von bestehenden BOK-Buildpfaden verwendet; sie sind nicht der allgemeine Einstiegspunkt für kursbezogene Änderungen. Der Build gleicht BOK-Kompatibilitätsdateien mit `scripts/sync_course_sources.py` ab. Dateien in `_build/` oder `dist/` sind generiert und dürfen nicht manuell bearbeitet werden.
+**Kursinhalte ausschliesslich unter `kurse/<lehrperson>/<klasse>/` bearbeiten.** Es gibt keine kursbezogenen Kopien mehr in `kursseiten/`, `lehrperson/` oder `content/` im Root. Auch der Projektkatalog (`content/experiments.json`), Fotostudio, Notebooks und Hilfsprogramme gehören dem jeweiligen Kurs. Dateien in `_build/` und `dist/` sind generiert.
 
 Für Änderungen an der Darstellung oder an der Notebook-Steuerung sind dagegen `basis/`, `projekt/`, `shared/`, `extensions/` und die zugehörigen Skripte relevant.
 
@@ -157,7 +158,7 @@ Nach einem Notebookwechsel oder Import werden Python-Variablen und trainierte Mo
 - [Kursverwaltung und Veröffentlichung](docs/MULTIKURS-DEPLOYMENT.md)
 - [Kursquellen und Vorlagen](docs/KURSVORLAGEN.md)
 - [Redaktions- und Datenmodell](docs/ARCHITEKTUR.md)
-- [Notebookquellen](content/README.md)
+- [Notebookquellen der 4. Klasse](kurse/bok/4-klasse/content/README.md)
 - [Unterrichtsmaterialien](worksheets/README.md)
 
 ## Quellenhinweise
