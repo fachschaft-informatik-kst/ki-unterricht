@@ -1,6 +1,6 @@
 # KI-Unterricht · Quellen der Lernversuche
 
-Lernende starten im **[Kursportal](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/)**. Dort stehen Aufgaben, Lernziele, zehn AVIVA-Abläufe, eingebettete Notebooks, Fotostudio, Journal und Bewertung.
+Lernende starten im **[Kursportal](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/)**. Dort stehen Aufgaben, Lernziele, zehn AVIVA-Abläufe, eingebettete Notebooks, Fotostudio, Journal und Bewertung.
 
 Fünf gepflegte Notebookquellen:
 
