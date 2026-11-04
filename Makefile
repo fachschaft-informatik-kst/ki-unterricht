@@ -16,7 +16,7 @@ NODE_DIR := extensions/ki-autostart
 
 help:
 	@printf '%s\n' \
-		'make / make local  Vollstaendige App erstellen und unter http://$(HOST):$(PORT)/projekt/ starten' \
+		'make / make local  Vollstaendige App erstellen und unter http://$(HOST):$(PORT)/kurse.html starten' \
 		'make preview       Schnelle Inhaltsvorschau mit automatischem Neuaufbau (ohne Notebooks)' \
 		'make build         Vollstaendige App inklusive JupyterLite nach dist/ bauen' \
 		'make serve         Bereits gebaute App aus dist/ anzeigen' \
@@ -53,7 +53,7 @@ new-chapter:
 	$(PYTHON) scripts/new_chapter.py $(SECTION) --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
 
 preview: install-preview
-	@printf 'Schnellvorschau: http://$(HOST):$(PORT)/projekt/\n'
+	@printf 'Schnellvorschau: http://$(HOST):$(PORT)/kurse.html\n'
 	$(VENV_PY) scripts/preview.py --host $(HOST) --port $(PORT)
 
 build: install
@@ -68,8 +68,8 @@ build: install
 	@printf 'Vollstaendiger lokaler Build: dist/\n'
 
 serve:
-	@test -f dist/projekt/index.html || { echo 'Kein Build in dist/. Erst make build ausfuehren.' >&2; exit 1; }
-	@printf 'Kursportal: http://$(HOST):$(PORT)/projekt/ (Ctrl+C zum Beenden)\n'
+	@test -f dist/kurse.html || { echo 'Kein Build in dist/. Erst make build ausfuehren.' >&2; exit 1; }
+	@printf 'Kursportal: http://$(HOST):$(PORT)/kurse.html (Ctrl+C zum Beenden)\n'
 	$(PYTHON) -m http.server $(PORT) --bind $(HOST) --directory dist
 
 local: build

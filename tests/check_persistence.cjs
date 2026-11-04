@@ -26,7 +26,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   p.on('dialog',d=>d.accept());p.on('pageerror',e=>errors.push(e.message));
   // External teaching links are unrelated to the local storage contract.
   await p.route(/https:\/\/(inf-schule\.de|humanornot\.so|pair-code\.github\.io)\//,r=>r.abort());
-  await p.goto(`http://127.0.0.1:${port}/projekt/`);
+  await p.goto(`http://127.0.0.1:${port}/bok/4-klasse/`);
   return {context,p};
  };
  const closeNotebook=async p=>{
