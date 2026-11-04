@@ -3,10 +3,10 @@ from pathlib import Path
 from markdown_it import MarkdownIt
 from course_model import output
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "lehrperson/musterloesungen.md"
+SOURCE = ROOT / "kurse/bok/4-klasse/lehrperson/musterloesungen.md"
 FIELD_SOURCES = (
-    ROOT / "lehrperson/musterloesungen-felder-4-klasse.md",
-    ROOT / "lehrperson/musterloesungen-felder-1-klasse.md",
+    ROOT / "kurse/bok/4-klasse/lehrperson/musterloesungen-felder.md",
+    ROOT / "kurse/bok/1-klasse/lehrperson/musterloesungen-felder.md",
 )
 OUTPUT = output(ROOT) / "musterloesungen/index.html"
 

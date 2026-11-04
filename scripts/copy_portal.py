@@ -1,33 +1,44 @@
-"""Copy the portal and its runtime assets into the completed JupyterLite build."""
+"""Package independently owned course assets with one shared JupyterLite runtime."""
 from pathlib import Path
-import shutil,sys
+import shutil
+import sys
+
 from fix_pyodide_lock import fix_lock
 from patch_pyodide_kernel import patch_bundle
 from build_previews import build_previews
-root=Path(__file__).resolve().parents[1]
-out=Path(sys.argv[1] if len(sys.argv)>1 else root/'dist')
-fix_lock(out)
-shutil.copytree(root/'_build/site/projekt',out/'projekt',dirs_exist_ok=True)
-shutil.copytree(root/'_build/site/basis',out/'basis',dirs_exist_ok=True)
-(out/'projekt/studio').mkdir(exist_ok=True)
-(out/'projekt/runtime').mkdir(exist_ok=True)
-shutil.copy(root/'content/ki_projekt/fotostudio.html',out/'projekt/studio/index.html')
-shutil.copy(root/'content/ki_projekt/fotostudio_core.js',out/'projekt/studio/fotostudio_core.js')
-shutil.copy(root/'content/ki_projekt/fotostudio_storage.js',out/'projekt/studio/fotostudio_storage.js')
-for file in ['ki_foto_tools.py','ki_projekt_tools.py','foto_uebungsdaten.json']:
- shutil.copy(root/'content/ki_projekt'/file,out/'projekt/runtime'/file)
-shutil.copy(root/'content/unterricht_tools.py',out/'projekt/runtime/unterricht_tools.py')
-shutil.copy(root/'portal-index.html',out/'index.html')
-shutil.copy(root/'kurse.html',out/'kurse.html')
-
-build_previews(out)
-patch_bundle(out)
 from build_course_routes import build as build_course_routes
-build_course_routes(out)
+from course_registry import load_registry
 from protect_teacher_pages import protect
+
+root = Path(__file__).resolve().parents[1]
+out = Path(sys.argv[1] if len(sys.argv) > 1 else root / "dist")
+fix_lock(out)
+
+# Internal template assets and shared editor. Neither has a public course index.
+shutil.copytree(root / "_build/site/projekt", out / "projekt", dirs_exist_ok=True)
+shutil.copytree(root / "_build/site/basis", out / "basis", dirs_exist_ok=True)
+patch_bundle(out)
+build_course_routes(out)
+
+for course in load_registry(root):
+    if course["status"] != "published":
+        continue
+    source = root / course["courseRoot"] / "content"
+    target = out / course["slug"]
+    studio = target / "studio"
+    studio.mkdir(exist_ok=True)
+    for filename in ("fotostudio_core.js", "fotostudio_storage.js"):
+        shutil.copy2(source / "ki_projekt" / filename, studio / filename)
+    shutil.copy2(source / "ki_projekt/fotostudio.html", studio / "index.html")
+    runtime = target / "runtime"
+    runtime.mkdir(exist_ok=True)
+    for filename in ("ki_foto_tools.py", "ki_projekt_tools.py", "foto_uebungsdaten.json"):
+        shutil.copy2(source / "ki_projekt" / filename, runtime / filename)
+    shutil.copy2(source / "unterricht_tools.py", runtime / "unterricht_tools.py")
+    build_previews(target, source)
+
+shutil.copy2(root / "portal-index.html", out / "index.html")
+shutil.copy2(root / "kurse.html", out / "kurse.html")
 protect(out)
-# Published course entrypoints are /<teacher>/<grade>-klasse/.
-# Retain /projekt/ assets (including /projekt/admin for the Worker),
-# but do not publish the obsolete /basis/ or /projekt/ course index pages.
-for obsolete in ("basis", "projekt"):
- (out/obsolete/"index.html").unlink(missing_ok=True)
+for old in ("basis", "projekt"):
+    (out / old / "index.html").unlink(missing_ok=True)

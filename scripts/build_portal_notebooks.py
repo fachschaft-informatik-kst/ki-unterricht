@@ -1,7 +1,6 @@
 """Build course-scoped notebook copies with shared Python runtime.
 
-Old BOK JupyterLite paths (portal/<filename>) are retained so saved states and
-existing URLs continue to resolve. IRN/new teachers use portal/<slug>/<filename>.
+Each course owns portal/<teacher>/<grade>-klasse/ notebooks and helper files.
 """
 from pathlib import Path
 import json
@@ -54,59 +53,36 @@ def prepare_notebook(source: Path, target: Path, *, source_label: str, workspace
 
 
 def build():
+    """Stage isolated JupyterLite workspaces entirely from kurse/."""
     staging = ROOT / "_build/content"
     if staging.exists():
         shutil.rmtree(staging)
-    shutil.copytree(ROOT / "content", staging,
-                    ignore=shutil.ignore_patterns("portal", "__pycache__", ".ipynb_checkpoints"))
     out = staging / "portal"
-    out.mkdir(exist_ok=True)
+    out.mkdir(parents=True)
     courses = json.loads((ROOT / "shared/course-sites.json").read_text(encoding="utf-8"))["courses"]
     copied = 0
-    # Keep all existing BOK entrypoint notebook names, including the old first
-    # and fourth-year shared examples, preserving browser state compatibility.
-    for item in REGISTERED:
-        filename = Path(item).name
-        grade = 1 if filename.startswith("basis_") else 4
-        source = ROOT / "kurse" / "bok" / f"{grade}-klasse" / "content" / item
-        if not source.is_file():
-            raise FileNotFoundError(source)
-        prepare_notebook(source, out / filename, source_label=item)
-        copied += 1
     for course in courses:
-        root = ROOT / course["courseRoot"] / "content"
-        if not root.is_dir():
-            raise FileNotFoundError(root)
-        paths = sorted(root.rglob("*.ipynb"))
-        # Newly authored per-course notebooks are not in the global registry.
-        if course["teacher"] == "BOK":
-            for item in paths:
-                if not item.name.startswith(("basis_lesson_", "lesson_")):
-                    continue
-                if course["grade"] == 1 and not item.name.startswith("basis_"):
-                    continue
-                if course["grade"] == 4 and item.name.startswith("basis_"):
-                    continue
-                prepare_notebook(item, out / item.name,
-                                 source_label=item.relative_to(root).as_posix())
-                copied += 1
-            continue
-        # JupyterLite must contain the teacher's own Python modules, image
-        # assets and datasets, not just their same-named notebook files.
+        source = ROOT / course["courseRoot"] / "content"
+        if not source.is_dir():
+            raise FileNotFoundError(source)
         workspace = out / course["slug"]
-        for asset in sorted(root.rglob("*")):
+        workspace.mkdir(parents=True)
+        notebooks = sorted(source.rglob("*.ipynb"))
+        names = [path.name for path in notebooks]
+        if not notebooks or len(names) != len(set(names)):
+            raise ValueError(f"Missing or duplicate notebook names in {course['slug']}")
+        for asset in sorted(source.rglob("*")):
             if not asset.is_file() or asset.is_symlink() or asset.suffix == ".ipynb":
                 continue
-            target = workspace / asset.relative_to(root)
+            target = workspace / asset.relative_to(source)
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(asset, target)
-        for item in paths:
-            relative = item.relative_to(root)
-            target = workspace / relative.name
-            prepare_notebook(item, target, source_label=relative.as_posix(),
+        for notebook in notebooks:
+            prepare_notebook(notebook, workspace / notebook.name,
+                             source_label=notebook.relative_to(source).as_posix(),
                              workspace=course["slug"])
             copied += 1
-    print(f"Generated {copied} course notebooks, preserving legacy BOK paths")
+    print(f"Generated {copied} independent course notebooks and their assets")
 
 
 if __name__ == "__main__":

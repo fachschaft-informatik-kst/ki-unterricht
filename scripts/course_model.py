@@ -48,6 +48,8 @@ def validate_lessons(lessons: list[dict]) -> None:
 
 
 def load_course(root: Path = ROOT, manifest_path: str = "kursseiten/manifest.json") -> dict:
+    if manifest_path == "kursseiten/manifest.json" and not (root / manifest_path).is_file() and (root / "kurse/bok/4-klasse/kursseiten/manifest.json").is_file():
+        manifest_path = "kurse/bok/4-klasse/kursseiten/manifest.json"
     manifest = read_json(root / manifest_path)
     sections = manifest.get("sections")
     if not isinstance(sections, list) or not sections or any(not isinstance(s, dict) for s in sections):

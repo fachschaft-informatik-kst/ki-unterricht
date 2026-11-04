@@ -1,4 +1,4 @@
-"""Build full BOK-style IRN pages from their own source copies.
+"""Render each published course from its own source copies.
 
 Shared design and controllers stay in basis/ and projekt/. Course data comes
 exclusively from the selected kurse/<teacher>/<grade>-klasse directory.
@@ -65,8 +65,7 @@ def render_clone(course: dict, target: Path) -> None:
             if count != 1:
                 raise ValueError(f"AVIVA-Einbettung fehlt: {view}")
         planning_html = lehrpersonen_seite(lessons, page)
-    # Notebook document paths are isolated per IRN course. Existing BOK paths
-    # keep their old names so saved student work and older URLs still resolve.
+    # Notebook document paths are isolated for every course, including BOK.
     prefix = "portal/" + course["slug"] + "/"
     page = page.replace("portal/", prefix)
     (target / "index.html").write_text(page, encoding="utf-8")
@@ -86,8 +85,7 @@ def render_clone(course: dict, target: Path) -> None:
             code = code.replace("'ki-kursportal-v1'", "'ki-" + course["id"] + "-v1'")
             code = code.replace("'ki-kursantworten-v1'", "'ki-" + course["id"] + "-antworten-v1'")
             code = code.replace("'ki-last-opened-bok-4'", "'ki-last-opened-" + course["id"] + "'")
-            # ZIP and JSON transfer metadata must describe the IRN course,
-            # never the BOK source of the initial template.
+            # ZIP and JSON transfer metadata must describe the selected course.
             code = code.replace("'bok/4-klasse'", "'" + course["slug"] + "'")
             code = code.replace("'ki-projekt-seitenstand-v1'",
                                 "'ki-" + course["id"] + "-seitenstand-v1'")

@@ -13,7 +13,6 @@ import sys
 from pathlib import Path
 
 from course_registry import load_registry, validate_registry
-from generic_course import generic_page
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "shared/course-sites.json"
@@ -122,17 +121,16 @@ def build(out: Path) -> None:
         if target.exists():
             shutil.rmtree(target)
         target.parent.mkdir(parents=True, exist_ok=True)
-        if course["status"] == "published" and (source in {"basis", "projekt"} or course["teacher"] == "IRN"):
-            origin = out / (source if source in {"basis", "projekt"} else "basis" if course["grade"] == 1 else "projekt")
+        if course["status"] == "published":
+            origin = out / ("basis" if course["grade"] == 1 else "projekt")
             if not (origin / "index.html").is_file():
                 raise FileNotFoundError(origin / "index.html")
             shutil.copytree(origin, target, ignore=(
                 (lambda folder, names: ["admin"] if Path(folder) == origin and "admin" in names else [])
                 if origin.name == "projekt" else None
             ))
-            if course["teacher"] == "IRN":
-                from build_teacher_clone import render_clone
-                render_clone(course, target)
+            from build_teacher_clone import render_clone
+            render_clone(course, target)
             label = f'{course["teacher"]} · {course["grade"]}. Klasse'
             for file in target.rglob("*"):
                 if not file.is_file() or file.suffix not in {".html", ".css", ".js"}:
@@ -151,9 +149,6 @@ def build(out: Path) -> None:
                                      theme_css(course) + "</style></head>",
                                      content, count=1, flags=re.I)
                 file.write_text(content, encoding="utf-8")
-        elif course["status"] == "published" and source == "generated":
-            target.mkdir(parents=True, exist_ok=True)
-            (target / "index.html").write_text(generic_page(course, ROOT), encoding="utf-8")
         else:
             target.mkdir(parents=True, exist_ok=True)
             (target / "index.html").write_text(planned_page(course), encoding="utf-8")
