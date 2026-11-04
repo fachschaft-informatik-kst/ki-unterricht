@@ -27,7 +27,7 @@ for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
     generated = (dist / slug / "index.html").read_text(encoding="utf-8")
     assert "BOK" in generated and f"{slug.split('/')[1][0]}. Klasse" in generated
     assert "data-course-theme" in generated
-    assert (dist / legacy / "index.html").is_file()
+    assert not (dist / legacy / "index.html").exists(), "Old public course entrypoint remains"
     assert 'href="../../kurse.html"' in generated
     assert (dist / slug / "grafiken/kst_logo.png").is_file()
     assert not (dist / slug / "kurs.json").exists(), "The complete AVIVA JSON must not be public"
@@ -66,7 +66,7 @@ for slug in ("irn/1-klasse", "irn/4-klasse"):
         assert "kst-ki-irn-1-klasse-notebooks-v1" in persistence
         assert "kst-ki-basis-notebooks-v1" not in persistence
 assert 'url=kurse.html' in (dist / "index.html").read_text(encoding="utf-8")
-print("PASS 4 teacher/grade URLs, BOK course assets and legacy links, IRN placeholders")
+print("PASS four teacher/grade URLs without obsolete legacy indexes")
 
 for course in manifest["courses"]:
     slug = course["slug"]

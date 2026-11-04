@@ -1,7 +1,7 @@
-"""Publish stable teacher/grade URLs without changing legacy course paths or student data.
+"""Publish teacher/grade URLs from shared, internal source templates.
 
-The existing /basis/ and /projekt/ paths remain intact: old bookmarks, stored
-answer keys and notebook runtime endpoints must continue to work.
+The former /basis/ and /projekt/ public course indexes are removed after
+the generated teacher/grade pages have been packaged.
 """
 from __future__ import annotations
 
@@ -139,7 +139,7 @@ def build(out: Path) -> None:
                     continue
                 content = add_path_depth(file.read_text(encoding="utf-8"))
                 if file.suffix == ".html":
-                    # Keep the legacy /basis/ and /projekt/ pages untouched.
+                    # Internal BOK views are templates, not public entrypoints.
                     if file.name == "index.html" and file.parent == target:
                         content = re.sub(r"<title>[^<]*</title>",
                                          f"<title>{escape(course_tab_title(course))}</title>",

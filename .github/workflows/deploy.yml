@@ -158,7 +158,7 @@ jobs:
           trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
           ready=0
           for attempt in $(seq 1 45); do
-            if curl -fsS --max-time 3 -o /tmp/ki-preview.html http://127.0.0.1:8765/projekt/; then
+            if curl -fsS --max-time 3 -o /tmp/ki-preview.html http://127.0.0.1:8765/bok/4-klasse/; then
               ready=1
               break
             fi

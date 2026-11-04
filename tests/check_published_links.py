@@ -18,7 +18,7 @@ DIST = ROOT / "dist"
 STAGING = ROOT / "_build/content"
 ORIGIN_PREFIX = "https://fachschaft-informatik-kst.github.io/ki-unterricht/"
 COURSES = ("bok/1-klasse", "bok/4-klasse", "irn/1-klasse", "irn/4-klasse")
-LEGACY = ("basis", "projekt")
+RETIRED = ("basis", "projekt")
 
 
 class Refs(HTMLParser):
@@ -88,7 +88,9 @@ def check() -> None:
     inspected = Counter()
     decoded: dict[Path, Refs] = {}
     pages = [DIST / "kurse.html"]
-    for slug in (*COURSES, *LEGACY):
+    for old in RETIRED:
+        assert not (DIST / old / "index.html").exists(), f"Retired course must have no public index: {old}"
+    for slug in COURSES:
         directory = DIST / slug
         assert (directory / "index.html").is_file(), f"Published course missing: {slug}"
         pages.extend(sorted(directory.rglob("*.html")))

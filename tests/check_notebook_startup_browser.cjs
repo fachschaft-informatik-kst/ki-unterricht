@@ -63,14 +63,14 @@ const embedded=`<!doctype html><html><meta charset="utf-8"><body><script>
   // They must not request restore-only mode, which skips all autostart cells.
   const extra=await browser.newPage();
   try{
-   await extra.route('**/projekt/notebook-startup-fixture.html',req=>req.fulfill({
+   await extra.route('**/bok/4-klasse/notebook-startup-fixture.html',req=>req.fulfill({
     status:200,contentType:'text/html',body:
       '<!doctype html><html><body><main><div class="ki-notebook-block" data-notebook="content/basis_neuron.ipynb" data-title="Zusatzversuch"></div></main><script src="./notebook-blocks.js"></script></body></html>'
    }));
-   await extra.goto(base+'/projekt/notebook-startup-fixture.html');
+   await extra.goto(base+'/bok/4-klasse/notebook-startup-fixture.html');
    await extra.locator('.ki-notebook-launch').click();
    const src=await extra.locator('.ki-notebook-iframe').getAttribute('src');
-   const url=new URL(src,base+'/projekt/');
+   const url=new URL(src,base+'/bok/4-klasse/');
    assert.equal(url.pathname,'/lab/index.html');
    assert.equal(url.searchParams.get('ki-embed'),'1');
    assert.equal(url.searchParams.has('ki-restore'),false,

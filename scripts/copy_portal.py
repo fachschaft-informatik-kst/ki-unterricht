@@ -26,3 +26,8 @@ from build_course_routes import build as build_course_routes
 build_course_routes(out)
 from protect_teacher_pages import protect
 protect(out)
+# Published course entrypoints are /<teacher>/<grade>-klasse/.
+# Retain /projekt/ assets (including /projekt/admin for the Worker),
+# but do not publish the obsolete /basis/ or /projekt/ course index pages.
+for obsolete in ("basis", "projekt"):
+ (out/obsolete/"index.html").unlink(missing_ok=True)

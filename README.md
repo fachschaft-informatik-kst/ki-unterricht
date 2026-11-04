@@ -13,7 +13,7 @@ Webbasierte Unterrichtsplattform für KI an der Kantonsschule Stadelhofen. Sie e
 | IRN · 1. Klasse | [KI entdecken](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/1-klasse/) | `kurse/irn/1-klasse/` |
 | IRN · 4. Klasse | [KI vertiefen](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/4-klasse/) | `kurse/irn/4-klasse/` |
 
-Jeder Kurs hat eigene Kapitel, Unterrichtspläne, Materialien, Glossare, Musterlösungen und Notebookquellen. Änderungen an einem Kurs verändern die anderen Kurse nicht.
+Jeder Kurs hat eigene Kapitel, Unterrichtspläne, Materialien, Glossare, Musterlösungen und Notebookquellen. Änderungen an einem Kurs verändern die anderen Kurse nicht. Die bisherigen Adressen `/basis/` und `/projekt/` werden nicht mehr als Kursseiten veröffentlicht.
 
 ## 2. Inhalte im Browser bearbeiten
 

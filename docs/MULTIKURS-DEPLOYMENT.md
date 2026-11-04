@@ -21,7 +21,7 @@ Die authentifizierten Unterrichtsunterlagen werden über `/teacher/<lehrperson>/
 
 `basis/`, `projekt/`, `shared/`, `admin-worker/`, `scripts/`, die gemeinsamen Stilvorlagen und die JupyterLite/Pyodide-Laufzeit bleiben **zentral**. `scripts/sync_course_sources.py` erzeugt die historischen BOK-Quellen unter `kursseiten/` bzw. `lehrperson/` aus ihren eigenen `kurse/bok/`-Quellen als Kompatibilitätsschicht; diese Spiegel nicht direkt editieren.
 
-Die ursprünglichen BOK-Adressen `/basis/` und `/projekt/`, gespeicherte Antworten und die alten Notebookpfade bleiben erhalten. IRN erhält eigene HTML-Seiten, Browser-/ZIP-Speicherschlüssel und Notebookdokumentpfade unter `portal/irn/<klasse>/`. Ein gemeinsamer JupyterLite-Build reicht für die unterschiedlichen Notebookkopien.
+BOK-Kurse werden nur noch unter `/bok/1-klasse/` und `/bok/4-klasse/` veröffentlicht. Die früheren Einstiegsseiten `/basis/` und `/projekt/` entfallen. Die JupyterLite-Notebookdateipfade bleiben davon unabhängig erhalten. IRN erhält eigene HTML-Seiten, Browser-/ZIP-Speicherschlüssel und Notebookdokumentpfade unter `portal/irn/<klasse>/`. Ein gemeinsamer JupyterLite-Build reicht für die unterschiedlichen Notebookkopien.
 
 Neue Lehrpersonen lassen sich mit `python scripts/add_teacher_course.py MAI 1 "KI entdecken"` als vollständige Kopie der passenden Vorlage anlegen. Sie stehen zunächst auf `planned`; nach Freigabe wird `status` auf `published` und `source` auf `generated` gesetzt. Die Standardrenderingroute für zusätzliche Lehrpersonen ist generisch; spezialisierte Projekt-Journal- oder ZIP-Abläufe erfordern für neue Kurse eine separate Integration.
 
