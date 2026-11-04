@@ -155,9 +155,13 @@ async function publish(req,token){
     if((known.get(c.path)||null)!==c.expectedSha)return fail(409,"Konflikt bei "+c.path+". Bitte neu laden.");
   }
   const changes=new Map(body.changes.map(c=>[c.path,c]));
-  const readJson=async path=>{
-    const file=await github(token,prefix+"/contents/"+path+"?ref="+baseSha);
-    return JSON.parse(decoder.decode(Uint8Array.from(atob(file.content.replace(/\s/g,"")),c=>c.charCodeAt(0))));
+  const jsonReads=new Map();
+  const readJson=path=>{
+    if(!jsonReads.has(path))jsonReads.set(path,(async()=>{
+      const file=await github(token,prefix+"/contents/"+path+"?ref="+baseSha);
+      return JSON.parse(decoder.decode(Uint8Array.from(atob(file.content.replace(/\s/g,"")),c=>c.charCodeAt(0))));
+    })());
+    return jsonReads.get(path);
   };
   const proposed=async path=>changes.has(path)?JSON.parse(changes.get(path).content):readJson(path);
   try{
@@ -190,7 +194,7 @@ async function publish(req,token){
       touchedCourses.add(owners[0].slug);
     }
     if(touchedCourses.size>1)throw Error("Nur einen Kurs pro Pull Request bearbeiten.");
-    for(const profile of profiles){
+    for(const profile of profiles.filter(p=>touchedCourses.has(p.slug))){
       const manifestPath=profile.manifest;
       const previous=await readJson(manifestPath);
       const manifest=await proposed(manifestPath);

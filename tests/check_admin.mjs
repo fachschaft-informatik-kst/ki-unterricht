@@ -146,8 +146,11 @@ const changes=[
   {path:fourth+"kursseiten/test-topic/materialien.md",expectedSha:null,content:"## Doppellektion test-topic\n"}
 ];
 const writes=[];
+let requests=[];
 try{
   globalThis.fetch=async(url,options={})=>{
+    requests.push(String(url));
+    assert.ok(requests.length<=50,"Publisher must stay within the 50-subrequest Worker budget");
     const path=new URL(url).pathname;
     const method=options.method||"GET";
     let data;
@@ -169,13 +172,20 @@ try{
     else throw Error("Unexpected API request "+path);
     return Response.json(data);
   };
-  const submit=(changes,origin="https://teacher-editor.example")=>route("/api/publish",{
+  const submit=(changes,origin="https://teacher-editor.example")=>{
+    requests=[];
+    return route("/api/publish",{
     method:"POST",headers:{"Content-Type":"application/json",Origin:origin,Cookie:"ki_session="+session},
     body:JSON.stringify({title:"New topic",changes})
-  });
+    });
+  };
   const published=await submit(changes);
   assert.equal(published.status,201,await published.clone().text());
   assert.equal((await published.json()).number,1);
+  const reads=requests.filter(url=>url.includes("/contents/"));
+  assert.equal(new Set(reads).size,reads.length,"Read each source only once per invocation");
+  assert.ok(reads.every(url=>url.includes("/contents/shared/course-sites.json")||
+    url.includes("/contents/"+fourth)),"Do not fetch unrelated courses while publishing");
   assert.equal(writes.length,4,"Exactly one tree, commit, branch and PR");
   const tree=writes.find(w=>w.path.endsWith("/git/trees")).body.tree;
   assert.deepEqual(tree.map(e=>e.path),changes.map(c=>c.path));
@@ -235,6 +245,10 @@ try{
   const image={path:fourth+"projekt/grafiken/uploads/test.png",expectedSha:null,
     content:Buffer.from([137,80,78,71,13,10,26,10,...Array(16).fill(0)]).toString("base64")};
   assert.equal((await submit([{...chapterLinked,content:sources.get(chapterFile)},image])).status,201);
+  assert.equal((await submit([
+    {...chapterLinked,content:sources.get(chapterFile)},
+    ...Array.from({length:11},(_,i)=>({...image,path:fourth+"projekt/grafiken/uploads/test-"+i+".png"}))
+  ])).status,201,"Maximum-size 12-file upload must fit the subrequest budget");
   writes.length=0;
   assert.equal((await submit([{...image,path:"projekt/grafiken/uploads/test.png"}])).status,400);
   assert.equal((await submit([otherCourse,image])).status,400,"Uploads must belong to the same course as chapters");

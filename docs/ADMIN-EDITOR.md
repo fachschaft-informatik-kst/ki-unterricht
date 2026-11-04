@@ -141,6 +141,10 @@ angelegt, und GitHub-Pages-Seiten können keine geheimen OAuth-Schlüssel speich
 GitHub bleibt die **einzige Quelle**. Konflikte werden vor dem Schreiben gegen
 den aktuellen \`main\`-Commit geprüft. Bei parallelen Änderungen erscheint
 eine Fehlermeldung statt eines stillen Überschreibens.
+Beim Einreichen validiert der Worker den betroffenen Kurs und lädt jede benötigte
+JSON-Quelldatei höchstens einmal pro Anfrage. Unbeteiligte Kurse werden nicht
+erneut abgerufen; die vollständige Prüfung aller Kurse erfolgt weiterhin in CI.
+So wächst die Zahl der GitHub-Abrufe nicht mit der Anzahl anderer Lehrpersonen.
 
 ### Lokale Entwurfssicherung
 
