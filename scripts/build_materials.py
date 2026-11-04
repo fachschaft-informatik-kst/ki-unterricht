@@ -11,26 +11,26 @@ from course_model import output, load_course
 from build_portal_notebooks import REGISTRY
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "lehrperson/materialien.md"
+SOURCE = ROOT / "kurse/bok/4-klasse/lehrperson/materialien.md"
 OUTPUT = output(ROOT) / "materialien.html"
 DOWNLOADS = output(ROOT) / "materialien/downloads"
 
 # Reuse the maintained source files rather than maintaining separate copies.
 FILES = {
-    "ki_fotodaten.md": "content/ki_projekt/ki_fotodaten.md",
-    "ki_projektauftrag.md": "content/ki_projekt/ki_projektauftrag.md",
+    "ki_fotodaten.md": "kurse/bok/4-klasse/content/ki_projekt/ki_fotodaten.md",
+    "ki_projektauftrag.md": "kurse/bok/4-klasse/content/ki_projekt/ki_projektauftrag.md",
     "KI_Bewertungsraster.md": "worksheets/md/KI_Bewertungsraster.md",
     "Arbeitsblatt_Perzeptron.md": "worksheets/md/Arbeitsblatt_Perzeptron.md",
     "Arbeitsblatt_Perzeptron_Lsg.md": "worksheets/md/Arbeitsblatt_Perzeptron_Lsg.md",
     "koordinatengitter_perzeptron.svg": "worksheets/md/svg/koordinatengitter_perzeptron.svg",
-    "perzeptron_lernregel_flussdiagramm.svg": "content/img/perzeptron_lernregel_flussdiagramm.svg",
+    "perzeptron_lernregel_flussdiagramm.svg": "kurse/bok/4-klasse/content/img/perzeptron_lernregel_flussdiagramm.svg",
     "perzeptron_bias_shift.svg": "worksheets/md/svg/perzeptron_bias_shift.svg",
     "koordinatengitter_perzeptron_and_loesung.svg": "worksheets/md/svg/koordinatengitter_perzeptron_and_loesung.svg",
     "koordinatengitter_xor_einfach.svg": "worksheets/md/svg/koordinatengitter_xor_einfach.svg",
     "koordinatengitter_or_nand_xor.svg": "worksheets/md/svg/koordinatengitter_or_nand_xor.svg",
     "koordinatengitter_or_nand_xor_leer.svg": "worksheets/md/svg/koordinatengitter_or_nand_xor_leer.svg",
 }
-FILES.update({Path(e["source"]).name: "content/" + e["source"] for e in REGISTRY})
+FILES.update({Path(e["source"]).name: "kurse/bok/4-klasse/content/" + e["source"] for e in REGISTRY})
 
 STYLE = """
 :root{--ink:#182b31;--muted:#52656a;--accent:#076959;--paper:#f5f4ee;--line:#d8dfdb;--soft:#e7f1eb}
@@ -88,7 +88,7 @@ def build(lessons: list[dict]) -> None:
 
     source = SOURCE.read_text(encoding="utf-8")
     for view in dict.fromkeys(l["view"] for l in lessons):
-        extension = ROOT / "kursseiten" / view / "materialien.md"
+        extension = ROOT / "kurse/bok/4-klasse/kursseiten" / view / "materialien.md"
         if not extension.is_file():
             raise FileNotFoundError(f"Missing teacher material for {view}")
         source += "\n\n" + extension.read_text(encoding="utf-8")
@@ -175,4 +175,4 @@ def build(lessons: list[dict]) -> None:
 
 if __name__ == "__main__":
     import json
-    build(load_course(ROOT)["lessons"])
+    build(load_course(ROOT, "kurse/bok/4-klasse/kursseiten/manifest.json")["lessons"])
