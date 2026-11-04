@@ -97,6 +97,9 @@ const server=http.createServer((req,res)=>{
         'setTimeout(()=>send({type:"ready",ready:true}),10);<\/script></body></html>'
       }));
     await page.goto("http://127.0.0.1:"+server.address().port+"/projekt/admin/");
+    assert.equal(await page.locator("body").evaluate(body=>[...body.childNodes]
+      .filter(node=>node.nodeType===Node.TEXT_NODE).map(node=>node.textContent).join("").trim()),"",
+      "Editor shell must not display stray text such as a literal newline escape");
     // One course selector controls both the content and its live color preview.
     assert.equal(await page.locator("#courseThemeSelect").count(),0);
     assert.equal(await page.locator("#courseSelect option").count(),4);
