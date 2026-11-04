@@ -37,8 +37,6 @@ for course in load_registry(root):
     shutil.copy2(source / "unterricht_tools.py", runtime / "unterricht_tools.py")
     build_previews(target, source)
 
-shutil.copy2(root / "portal-index.html", out / "index.html")
-shutil.copy2(root / "kurse.html", out / "kurse.html")
 protect(out)
 for old in ("basis", "projekt"):
     (out / old / "index.html").unlink(missing_ok=True)
