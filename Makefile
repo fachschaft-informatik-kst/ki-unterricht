@@ -21,7 +21,7 @@ help:
 		'make build         Vollstaendige App inklusive JupyterLite nach dist/ bauen' \
 		'make serve         Bereits gebaute App aus dist/ anzeigen' \
 		'make test          Build und lokale Struktur-/Funktionstests (Browser-CI separat)' \
-		'make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." AFTER=030' \
+		'make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." AFTER=030 COURSE=bok/4-klasse' \
 		'make install       Alle lokalen Python- und npm-Abhaengigkeiten installieren' \
 		'make clean         Lokale Build-Dateien und Umgebungen loeschen' \
 		'PORT=8080 make     Alternativen lokalen Port verwenden'
@@ -50,7 +50,7 @@ install: $(FULL_STAMP) $(NPM_STAMP)
 # Optional authoring helper (no virtual environment needed).
 new-chapter:
 	@test -n "$(SECTION)" -a -n "$(NUMMER)" -a -n "$(TITLE)" || { echo 'Benutzung: make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." [AFTER=030]' >&2; exit 2; }
-	$(PYTHON) scripts/new_chapter.py $(SECTION) --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
+	$(PYTHON) scripts/new_chapter.py $(SECTION) --course "$(or $(COURSE),bok/4-klasse)" --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
 
 preview: install-preview
 	@printf 'Schnellvorschau: http://$(HOST):$(PORT)/kurse.html\n'

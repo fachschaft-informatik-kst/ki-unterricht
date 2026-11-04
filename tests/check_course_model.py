@@ -39,7 +39,7 @@ for case in invalid:
         raise AssertionError(f"Accepted invalid plan: {case}")
 with TemporaryDirectory() as tmp:
     root = Path(tmp)
-    shutil.copytree(ROOT / "kursseiten", root / "kursseiten")
+    shutil.copytree(ROOT / "kurse/bok/4-klasse/kursseiten", root / "kursseiten")
     path = root / "kursseiten/einstieg/planung.json"
     original = json.loads(path.read_text())
     for order in (None, float("inf"), True):
