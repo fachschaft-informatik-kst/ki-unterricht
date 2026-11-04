@@ -136,6 +136,8 @@ def build(out: Path) -> None:
                 if not file.is_file() or file.suffix not in {".html", ".css", ".js"}:
                     continue
                 content = add_path_depth(file.read_text(encoding="utf-8"))
+                # Fotostudio belongs to this course, not an obsolete /projekt/ route.
+                content = content.replace("../../projekt/studio/", "studio/")
                 if file.suffix == ".html":
                     # Internal BOK views are templates, not public entrypoints.
                     if file.name == "index.html" and file.parent == target:
