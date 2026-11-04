@@ -16,7 +16,6 @@ def command(*args):
 
 
 def build_content():
-    command(sys.executable, "scripts/sync_course_sources.py")
     command(sys.executable, "scripts/build_portal.py")
     command(sys.executable, "scripts/build_course.py")
     command(sys.executable, "scripts/build_basis.py")
@@ -34,6 +33,7 @@ def build_full():
 
 def fingerprints():
     paths = list((ROOT / "projekt").rglob("*"))
+    paths.extend((ROOT / "basis").rglob("*"))
     paths.extend((ROOT / "shared").glob("*"))
     paths.extend((ROOT / "experimente").glob("*"))
     if (ROOT / "kurse").is_dir():
@@ -42,11 +42,6 @@ def fingerprints():
         paths.extend((ROOT / "kurse").rglob("*.md"))
         paths.extend((ROOT / "kurse").rglob("*.json"))
         paths.extend((ROOT / "kurse").rglob("*.ipynb"))
-    else:
-        # Retain the old fixture mode for isolated historic lesson tests.
-        paths.extend((ROOT / "kursseiten").rglob("*.md"))
-        paths.extend((ROOT / "kursseiten").rglob("*.json"))
-        paths.extend((ROOT / "lehrperson").rglob("*.md"))
     paths.append(ROOT / "worksheets/md/KI_Planung.md")
     paths.extend((ROOT / "scripts").glob("*.py"))
     return {str(path): path.stat().st_mtime_ns for path in paths if path.is_file()}
