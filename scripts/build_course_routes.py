@@ -152,6 +152,8 @@ def build(out: Path) -> None:
         else:
             target.mkdir(parents=True, exist_ok=True)
             (target / "index.html").write_text(planned_page(course), encoding="utf-8")
+        if course["status"] == "published":
+            shutil.copy2(ROOT / course["courseRoot"] / "content/experiments.json", target / "experiments.json")
         print(f"Course route: /{slug}/ ({course['status']})")
     (out / "kurse.html").write_text(overview(courses), encoding="utf-8")
     shutil.copyfile(ROOT / "portal-index.html", out / "index.html")

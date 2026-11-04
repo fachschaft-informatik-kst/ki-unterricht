@@ -115,7 +115,6 @@ def build() -> None:
     shutil.copytree(PORTAL, target, dirs_exist_ok=True, ignore=ignore)
     for path in (ROOT / "shared").glob("*"):
         shutil.copyfile(path, target / "admin" / path.name)
-    shutil.copyfile(ROOT / "experimente/registry.json", target / "experiments.json")
     (target / "index.html").write_text(assemble(glossary_path=(ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json" if (ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json").is_file() else None)), encoding="utf-8")
     (target / "kurs.json").write_text(json.dumps(load_course(ROOT), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     from build_solutions import build as build_solutions

@@ -8,7 +8,7 @@ import re
 import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
-REGISTRY = json.loads((ROOT / "experimente/registry.json").read_text(encoding="utf-8"))
+REGISTRY = json.loads((ROOT / "kurse/bok/4-klasse/content/experiments.json").read_text(encoding="utf-8"))
 REGISTERED = [entry["source"] for entry in REGISTRY]
 if len({Path(path).name for path in REGISTERED}) != len(REGISTERED) or sum(bool(e.get("project")) for e in REGISTRY) != 1:
     raise ValueError("Experiments need unique notebook names and exactly one project")

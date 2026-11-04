@@ -32,6 +32,8 @@ for course in courses:
     assert (pages / "glossar.json").is_file(), course["slug"]
     for name in ("musterloesungen.md", "musterloesungen-felder.md"):
         assert (teacher / name).is_file(), f"{course['slug']} missing {name}"
+    catalog = json.loads((content / "experiments.json").read_text(encoding="utf-8"))
+    assert sum(bool(item.get("project")) for item in catalog) == 1, course["slug"]
     notebooks = sorted(content.rglob("*.ipynb"))
     assert notebooks, f"{course['slug']} has no notebook"
     assert len({item.name for item in notebooks}) == len(notebooks), course["slug"]
