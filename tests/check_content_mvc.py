@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 soup = BeautifulSoup((ROOT / "_build/site/projekt/index.html").read_text(), "html.parser")
-js = (ROOT / "projekt/portal.js").read_text()
+js = (ROOT / "shared/portal/portal.js").read_text()
 for forbidden in ("createElement('figure')", "createElement('article')",
                   "createElement('iframe')", "createElement('textarea')",
                   "setChapterTitle(", "embeddedLearningPath(",
@@ -32,7 +32,7 @@ assert len(pairs) == 3 and all(len(pair) == 2 for pair in pairs)
 # Markdown/HTML generation. A build may not silently drop a field.
 import re
 source_keys = set()
-for fragment in (ROOT / "kursseiten").glob("*/*.md"):
+for fragment in (ROOT / "kurse/bok/4-klasse/kursseiten").glob("*/*.md"):
     if not re.match(r"^[0-9]{3}-", fragment.name):
         continue
     raw = fragment.read_text(encoding="utf-8")

@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 root=Path(__file__).resolve().parents[1]
-sys.path[:0]=[str(root/'content'),str(root/'content/ki_projekt')]
+sys.path[:0]=[str(root/'kurse/bok/4-klasse/content'),str(root/'kurse/bok/4-klasse/content/ki_projekt')]
 import unterricht_tools as u
 import ki_foto_tools as foto
 import ki_projekt_tools as ki
@@ -48,7 +48,7 @@ def main():
     rejects(lambda:foto.vergleichen(d))
     rejects(lambda:foto.beispiele(exp,variante='A',test=True))
     # Imported own-photo path using a schema fixture, not a claim these are real photos.
-    source=json.loads((root/'content/ki_projekt/foto_uebungsdaten.json').read_text())
+    source=json.loads((root/'kurse/bok/4-klasse/content/ki_projekt/foto_uebungsdaten.json').read_text())
     by_id={x['id']:x for x in source['records']}
     records=[dict(by_id[id],group=str(group)) for id,group in zip(d.ids,d.personen)]
     doc=dict(source,synthetic=False,records=records)

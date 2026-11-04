@@ -1,5 +1,6 @@
 """Fast local content preview. --full builds and serves the actual JupyterLite site."""
 import argparse
+import os
 import functools
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -12,11 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def command(*args):
     print("+", " ".join(map(str, args)), flush=True)
-    subprocess.run(args, cwd=ROOT, check=True)
+    env = {**os.environ, "PATH": str(Path(sys.executable).parent) + os.pathsep + os.environ.get("PATH", "")}
+    subprocess.run(args, cwd=ROOT, env=env, check=True)
 
 
 def build_content():
-    command(sys.executable, "scripts/sync_course_sources.py")
     command(sys.executable, "scripts/build_portal.py")
     command(sys.executable, "scripts/build_course.py")
     command(sys.executable, "scripts/build_basis.py")
@@ -33,23 +34,13 @@ def build_full():
 
 
 def fingerprints():
-    paths = list((ROOT / "projekt").rglob("*"))
-    paths.extend((ROOT / "shared").glob("*"))
-    paths.extend((ROOT / "experimente").glob("*"))
+    paths = list((ROOT / "shared/portal").rglob("*"))
+    paths.extend((ROOT / "shared").rglob("*"))
     if (ROOT / "kurse").is_dir():
-        # Legacy mirrors are rebuilt from canonical sources. Watching both
-        # creates an endless feedback loop in the local live preview.
-        paths.extend((ROOT / "kurse").rglob("*.md"))
-        paths.extend((ROOT / "kurse").rglob("*.json"))
-        paths.extend((ROOT / "kurse").rglob("*.ipynb"))
-    else:
-        # Retain the old fixture mode for isolated historic lesson tests.
-        paths.extend((ROOT / "kursseiten").rglob("*.md"))
-        paths.extend((ROOT / "kursseiten").rglob("*.json"))
-        paths.extend((ROOT / "lehrperson").rglob("*.md"))
-    paths.append(ROOT / "worksheets/md/KI_Planung.md")
+        paths.extend((ROOT / "kurse").rglob("*"))
     paths.extend((ROOT / "scripts").glob("*.py"))
-    return {str(path): path.stat().st_mtime_ns for path in paths if path.is_file()}
+    return {str(path): path.stat().st_mtime_ns for path in paths
+            if path.is_file() and not any(part in {"__pycache__", ".ipynb_checkpoints"} for part in path.parts)}
 
 
 def watch(stop):

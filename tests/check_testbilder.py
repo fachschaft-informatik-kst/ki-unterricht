@@ -11,20 +11,20 @@ import matplotlib
 matplotlib.use('Agg')
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'content/ki_projekt'))
+sys.path.insert(0, str(ROOT / 'kurse/bok/4-klasse/content/ki_projekt'))
 import ki_foto_tools as foto  # noqa: E402
 
-JSON_PFAD = ROOT / 'testbilder/beispielbilder_fotostudio.json'
+JSON_PFAD = ROOT / 'kurse/bok/4-klasse/testbilder/beispielbilder_fotostudio.json'
 doc = json.loads(JSON_PFAD.read_text(encoding='utf-8'))
 assert doc['schema'] == 'fotostudio-v1' and doc['pipeline'] == foto.PIPELINE and not doc.get('synthetic')
 assert len(doc['records']) == 80
 
 # Jede Zeile der JSON gehört zu genau einem Bild im Ordner und trägt dessen Klasse und Gruppe.
 for r in doc['records']:
-    datei = ROOT / 'testbilder' / r['label'] / r['group'] / r['filename']
+    datei = ROOT / 'kurse/bok/4-klasse/testbilder' / r['label'] / r['group'] / r['filename']
     assert datei.is_file(), datei
 assert len({r['id'] for r in doc['records']}) == 80, 'Bild-IDs müssen eindeutig sein'
-assert len(list((ROOT / 'testbilder').rglob('*.jpg'))) == 80
+assert len(list((ROOT / 'kurse/bok/4-klasse/testbilder').rglob('*.jpg'))) == 80
 
 daten = foto.projekt_laden('EIGENE_DATEN', ['Apfel', 'Banane'], dateien=[JSON_PFAD])
 exp = foto.vergleichen(daten, wiederholen=True)

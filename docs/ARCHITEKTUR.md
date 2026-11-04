@@ -1,126 +1,122 @@
-# Architektur und Redaktionskonzept
+# Architektur und Kursisolation
 
-## Git-basierte Inhalte, statische Unterrichtsanwendung
+## Grundregel
 
-Die Lernenden verwenden eine statische Website mit JupyterLite. Antworten und
-Notebookstände liegen im Browser und werden als ZIP gesichert. Der optionale
-Lehrpersonen-Editor verwendet einen geschützten Cloudflare Worker, um Änderungen
-als GitHub-Pull-Request einzureichen; er speichert keine Schülerdaten.
+Eine gemeinsame statische Plattform betreibt unabhängige Kurse. Fachliche Daten
+und kursveränderbare Ressourcen gehören unter `kurse/<lehrperson>/<klasse>/`.
+Der Build liest sie direkt. Root-Spiegel, Symlinks zwischen Kursen und eine
+nachträgliche Template-Synchronisation gibt es nicht.
 
-## Mehrere Lehrpersonen
+## Entscheidung für alle Root-Ordner
 
-Das Verzeichnisbild unten zeigt die historischen BOK-Quellen. Die
-verbindliche Kurszuordnung für **BOK 1/4, IRN 1/4 und weitere Lehrpersonen**
-steht in `shared/course-sites.json`. Jeder Eintrag definiert Manifest,
-Namensräume und Lehrpersonenmaterial. `scripts/course_registry.py`
-verhindert doppelte Unterrichtsbereiche und fremde Kurspräfixe.
-Mit `scripts/add_teacher_course.py` kann ein weiterer Kurs mit eigenen
-Dateien angelegt werden. Die bestehenden BOK-Dateien bleiben zur
-Kompatibilität von Antworten, Notebooks und ZIP-Sicherungen unverändert.
+| Ordner | Entscheidung und Begründung |
+| --- | --- |
+| `kurse/` | Eigenständige Kursquellen; ein Kurs benötigt keine andere Kurswurzel. |
+| ehemaliges `templates/` | Nach `kurse/_vorlagen/` verschoben: vollständige fachliche Ausgangskopien pro Klassenstufe, nicht Quelle laufender Kurse. |
+| `shared/` | Gemeinsame Technik: Kursregister, Validierungsmodelle, Layout, Browserlogik, Editor und PDF-Satzvorlage. |
+| `admin-worker/` | Gemeinsame Authentifizierung, kursbezogene GitHub-Zugriffe und PR-Erstellung. |
+| `extensions/` | Gemeinsame JupyterLite-Erweiterung für Start, Sicherung und Wiederherstellung. |
+| `labextensions/` | Generierte Notebook-Erweiterung; kein redaktioneller Inhalt. |
+| `repl/` | Gemeinsame technische JupyterLite-Konfiguration. |
+| `scripts/` | Gemeinsame Generatoren, Redaktion, Vorschau und Prüfwerkzeuge. |
+| `tests/` | Gemeinsame technische Tests und Fixtures; Kursinhalte werden über ihre Kurswurzel geladen. |
+| `docs/` | Gemeinsame Plattform- und Entwicklungsdokumentation, keine Unterrichtsquelle. |
+| `.github/` | Gemeinsame CI und Deployment. |
+| `_build/`, `dist/` | Generierte Dateien; keine Quellen. |
+| `.venv/`, `.cache/`, `.wrangler/` | Lokale technische Umgebungen und Caches; keine Kursquellen. |
+| `.git/` | Versionsverwaltung. |
+| ehemaliges `basis/` | Layout und Controller nach `shared/basis/`; Grundlageninhalte bleiben kurslokal. |
+| ehemaliges `projekt/` | Vorlagen, CSS, Controller und Editor nach `shared/portal/`; Grafiken und Uploads nach `<kurs>/projekt/grafiken/`. |
+| ehemaliges `content/` | Notebooks, Python-Hilfen, Fotostudio und Datensätze nach `<kurs>/content/`. Generierte `portal/`-Notebooks nur im Build. |
+| ehemaliges `kursseiten/` | Kapitel, Manifest, AVIVA und Glossar ausschliesslich unter `<kurs>/kursseiten/`; alte Spiegel entfernt. |
+| ehemaliges `lehrperson/` | Lösungen und Materialien ausschliesslich unter `<kurs>/lehrperson/`. |
+| ehemaliges `experimente/` | Notebooktitel und Projektzuordnung unter `<kurs>/experimente/registry.json`. |
+| ehemaliges `worksheets/` | Arbeitsblätter, SVGs und Archive unter `<kurs>/worksheets/`; PDF-/SVG-Generatoren unter `scripts/`, Satzvorlage unter `shared/worksheet-pdf/`. |
+| ehemaliges `testbilder/` | Unterrichtsbilddaten unter `<kurs>/testbilder/`. |
 
-[Dokumentation für mehrere Lehrpersonen](MULTIKURS-DEPLOYMENT.md)
+Makefile, Python-Abhängigkeiten, JupyterLite-Konfiguration und die beiden
+plattformweiten Einstiegsseiten bleiben im Root.
 
-## Verbindliche Quellen
+## Vollständiger Kurs
 
 ```text
-kursseiten/
-  manifest.json                 Bereiche, Navigation, Übersichtskarten
-  <thema>/
-    planung.json                eine oder mehrere Doppellektionen
-    010-<kapitel>.md             Markdown/YAML oder bestehendes interaktives HTML
-    materialien.md              Lehrpersonenmaterial zu diesem Thema
-shared/
-  course-rules.json              gemeinsame AVIVA-Phasen, Dauer und Vorlagenwerte
-  course-model.js                Validierung/Vorlage für Editor und Worker
-experimente/registry.json        originale Notebooks, Titel, Projektzuordnung
-projekt/                        Quellvorlage, JS, CSS, Grafiken und Editor
-admin-worker/                   GitHub-Authentifizierung und PR-Veröffentlichung
-content/                        bearbeitbare Originalnotebooks und Python-Hilfen
-worksheets/                     Arbeitsblattquellen und archivierte Materialien
-lehrperson/                     gemeinsame Hinweise und Musterlösungen
-scripts/                        Generatoren, Vorschau und Redaktionswerkzeuge
-_build/site/projekt/             generierte HTML-Seiten und kopierte App-Assets
-_build/content/                 JupyterLite-Inhalte inklusive Notebookfassungen
-dist/                           vollständige veröffentlichungsfähige Website
+kurse/<lehrperson>/<klasse>/
+  kursseiten/
+    manifest.json
+    glossar.json
+    <thema>/
+      000-*.md
+      planung.json
+      materialien.md
+  lehrperson/
+  content/
+    *.ipynb
+    unterricht_tools.py
+    img/
+    ki_projekt/
+  projekt/grafiken/          # einschliesslich kurslokaler uploads/
+  experimente/registry.json
+  worksheets/
+  testbilder/
+  snapshot.json             # Herkunft der ursprünglichen Kopie
 ```
 
-Es gibt keine getrennte Behandlung der ursprünglichen zehn und neuer Lektionen.
-Ein Thema kann mehrere Doppellektionen enthalten, wie die bestehende Projektphase.
-Die vorhandenen Quellordner bleiben bewusst bestehen: Ein blosses Umbenennen
-würde viele Notebook- und Materialpfade ändern, ohne die Redaktion zu erleichtern.
+Unter `kurse/_vorlagen/` liegen die vollständigen Ursprungsdateien zum Kopieren
+für neue Kurse, einschliesslich Notebooks und aller fachlichen Ressourcen.
+Nach dem Kopieren sind die Kurse unabhängig; spätere Änderungen werden nicht
+zwischen Vorlagen und Kursen übertragen.
 
-## Identität ist nicht Reihenfolge
+## Build und Veröffentlichung
 
-Jede Doppellektion hat eine stabile `id`, einen `view` (Themenbereich) und eine
-numerische `order`. Der Build sortiert nach `order` und erzeugt die sichtbare
-Nummer. Bestehende IDs `01`–`10` und ihre URL-Anker bleiben unverändert; neue
-Lektionen erhalten einen lesbaren Slug. Einfügen und Umordnen verändern keine IDs.
-
-`materialien.md` ordnet Abschnitte über `## Doppellektion <id>` zu, nicht über die
-sichtbare Nummer. Die Navigation gruppiert nach Thema und sortiert nach der ersten
-zugehörigen Lektion. Zusammengehörige Lektionen sollten deshalb aufeinanderfolgen.
-Didaktische Nummernverweise in frei formulierten Texten werden nicht automatisch
-umgeschrieben; nach Einfügungen diese Texte redaktionell prüfen.
-
-Bestehende Kapitel-IDs, `data-answer`, `data-journal`, `data-check`, `data-score`,
-Notebooknamen und ZIP-Pfade sind Verträge mit gespeicherten Schülerständen.
-Sie dürfen nicht beiläufig umbenannt werden.
-
-## Redaktionswege
-
-Neues Unterkapitel in einem vorhandenen Thema:
+`shared/course-sites.json` bestimmt Quellwurzel, Manifest, Klasse, Namen,
+Farbthema und Lehrpersonenmaterial. Alle veröffentlichten Kurse verwenden den
+vollständigen Renderer ihrer Klassenstufe, nicht die HTML-Ausgabe eines anderen
+Kurses. `build_course_routes.py` kopiert gemeinsame Technik und die Ressourcen
+der jeweiligen Kurswurzel und rendert deren Kapitel, AVIVA und Glossar.
 
 ```sh
-python scripts/new_chapter.py einstieg --after 030 --nummer 3a --title "Neue Perspektiven"
+python scripts/build_course_routes.py _build/einzelkurs --course irn/1-klasse
+python scripts/new_chapter.py basis-neuron --course irn/1-klasse --nummer 9 --title "Transfer"
+python scripts/new_lesson.py "KI im Alltag" --course bok/4-klasse --dry-run
+bash scripts/generate_worksheet_pdfs.sh --course irn/4-klasse
 ```
 
-Neue Doppellektion mit eigenem Thema:
+Der Einzelkursbuild ist eine Inhaltsvorschau ohne Notebooklaufzeit. `make build`
+paketiert zusätzlich eine gemeinsame JupyterLite-/Pyodide-Laufzeit. Die internen
+BOK-Ausgaben unter `_build/site/{basis,projekt}/` dienen bestehenden technischen
+Prüfungen; sie werden nicht als Quellen anderer Kurse verwendet.
 
-```sh
-python scripts/new_lesson.py "KI im Alltag" --chapter "Anwendungen entdecken"
-```
+`build_portal_notebooks.py` schreibt für jeden Kurs eigene Notebookdokumente und
+Python-Hilfen nach `_build/content/portal/<lehrperson>/<klasse>/`. Auch BOK
+verwendet diese Pfade, damit etwa das gleichnamige XOR-Notebook der 1. Klasse
+nicht die Hilfen der 4. Klasse importiert. Alte BOK-Dokumentadressen bleiben
+zusätzlich verfügbar. Antwortschlüssel, Browser-Speicher und ZIP-Schemata von
+BOK bleiben erhalten; andere Kurse haben eigene Namensräume.
 
-Zusätzliche Doppellektion im bestehenden Thema oder zwischen zwei Lektionen:
+Auch die Fotostudio-Sammlungen sind kursgetrennt. Der bisher gemeinsame
+Fotostudio-Speicher bleibt bei BOK 4 erhalten; die anderen Kurse beginnen mit
+eigenen Sammlungen und können vorhandene JSON-Exporte importieren.
 
-```sh
-python scripts/new_lesson.py "Weitere Lernarten" --section lernarten --after 02
-```
+Die öffentlichen Kursadressen bleiben `/<lehrperson>/<klasse>/`. `/projekt/admin/`
+und gemeinsame technische Assets bleiben für den Worker erreichbar; `/basis/`
+und `/projekt/` enthalten keine öffentliche Kursstartseite.
 
-`--after` erwartet die stabile Lektions-ID; beim Kapitelwerkzeug dagegen das
-dreistellige Dateipräfix. Beide Werkzeuge unterstützen `--dry-run`.
-Der Lektionsgenerator legt Plan, erstes Kapitel und Materialabschnitt an;
-bei neuen Themen ergänzt er auch das Manifest. AVIVA-Platzhalter müssen vor der
-Freigabe fachlich ausgearbeitet werden. Anschliessend `make preview`.
+## Redaktion und Schutz
 
-Der [Editor](ADMIN-EDITOR.md) bearbeitet dieselben Themenpläne und Materialien.
-Neue Themen werden zusammen mit Manifest und Kapitel atomar eingereicht.
-Weitere Lektionen innerhalb eines bestehenden Themas können lokal mit dem
-Lektionsgenerator angelegt werden; die Oberfläche hat dafür noch keinen eigenen
-Anlegeknopf. Ihre Pläne sind danach im Formular bearbeitbar.
+Der Editor liest und schreibt nur registrierte Kursquellen. Bild-Uploads liegen
+unter `<kurs>/projekt/grafiken/uploads/` und zählen zur gleichen Kursgrenze wie
+Kapitel und Notebooks. Vorschau, Grafiken und Downloads verwenden den gewählten
+Kurs. Gemischte Kursänderungen in einem Editor-PR werden abgewiesen.
 
-## Build und Validierung
+Lehrpersonenansichten bleiben OAuth-geschützt; Kursausgaben enthalten keine
+öffentlichen AVIVA-Gesamtexporte oder Lösungen. Das GitHub-Repository selbst ist
+öffentlich: Der Oberflächenschutz ist kein Schutz der Quelldateien.
 
-1. `build_portal.py` liest das Manifest und die Themenpläne über
-   `course_model.py`, rendert Kapitel, Navigation und Übersichtskarten.
-2. `build_course.py` ergänzt AVIVA-Pläne, erzeugt Lehrpersonenübersichten,
-   Materialseiten und einen vollständigen Markdown-Plan. Die Arbeitsblattquelle
-   enthält nur Einleitung und Einfügemarke und wird nicht mehr überschrieben.
-3. `build_portal_notebooks.py` erzeugt aus der Experimentregistrierung die
-   JupyterLite-Fassungen, ohne Originalnotebooks zu verändern.
-4. JupyterLite baut aus `_build/content/` nach `dist/`;
-   `copy_portal.py` ergänzt die vorbereitete App.
-
-`kurs.json` existiert nur noch als generierter Gesamtexport im Build.
-AVIVA-Regeldaten und Vorlagen werden von Python, Browser und Worker gemeinsam
-verwendet. Python- und JavaScript-Validierung werden gegen dieselben gültigen und
-ungültigen Beispiele geprüft. Der Worker kontrolliert zusätzlich den vorgeschlagenen
-Gesamtkurs und SHA-Konflikte vor dem Anlegen eines PR.
-
-`make test` prüft Inhalte, Redaktionswerkzeuge, gespeicherte Schlüssel und
-Worker-Verträge. GitHub Actions prüft zusätzlich den Editor im Browser sowie
-Notebookstart, Training, Wechsel, Uploads und ZIP-Wiederherstellung.
-Die Editorvorschau übernimmt Kurs-CSS und Layout; ihre Navigation liest dieselben
-Bereichsmetadaten. Nur nach Änderungen an CSS oder der Quellvorlage ist
-`python scripts/sync_editor_preview.py` nötig, nicht nach neuen Inhalten.
-Die Vorschau führt keine Notebooks oder anderen Skripte aus und ersetzt den
-echten Build nicht.
+`make test` prüft Build, Links und technische Verträge.
+`tests/check_course_isolation.py` baut jeden Kurs in einer temporären Umgebung,
+in der **keine anderen Kursquellen** vorhanden sind, und prüft die eigenen
+Grafiken, Experimentregistrierung, Fotostudio- und Pythondateien.
+`tests/check_notebook_isolation.py` prüft die getrennten Notebook-Arbeitsbereiche.
+Die Browserprüfung `tests/check_course_runtime_browser.cjs` startet echte
+Python-Widgets in allen vier Kursen; die Fotostudio-Prüfung kontrolliert zusätzlich,
+dass Fotos eines Kurses in den anderen Kursen nicht erscheinen.

@@ -7,12 +7,9 @@ from pathlib import Path
 import json
 import re
 import shutil
+from course_registry import load_registry, load_experiments
 
 ROOT = Path(__file__).resolve().parents[1]
-REGISTRY = json.loads((ROOT / "experimente/registry.json").read_text(encoding="utf-8"))
-REGISTERED = [entry["source"] for entry in REGISTRY]
-if len({Path(path).name for path in REGISTERED}) != len(REGISTERED) or sum(bool(e.get("project")) for e in REGISTRY) != 1:
-    raise ValueError("Experiments need unique notebook names and exactly one project")
 
 
 def prepare_notebook(source: Path, target: Path, *, source_label: str, workspace: str | None = None) -> None:
@@ -37,11 +34,8 @@ def prepare_notebook(source: Path, target: Path, *, source_label: str, workspace
                 "    _basis = _basis.parent if _basis.name != 'portal' else _basis\n"
                 "_basis = _basis.parent if _basis.name == 'portal' else Path.cwd()\n")
             if workspace:
-                # A local notebook's imports MUST resolve to its teacher-owned
-                # helper code before falling back to shared platform modules.
                 setup += (f"_workspace = _basis / 'portal' / {workspace!r}\n"
-                          "sys.path[:0] = [str(_workspace), str(_workspace / 'ki_projekt'), "
-                          "str(_basis), str(_basis / 'ki_projekt')]\n")
+                          "sys.path[:0] = [str(_workspace), str(_workspace / 'ki_projekt')]\n")
             else:
                 setup += "sys.path[:0] = [str(_basis), str(_basis / 'ki_projekt')]\n"
             cell.source = setup + cell.source
@@ -53,58 +47,42 @@ def prepare_notebook(source: Path, target: Path, *, source_label: str, workspace
     nbformat.write(nb, target)
 
 
-def build():
+def build(courses: list[dict] | None = None):
     staging = ROOT / "_build/content"
     if staging.exists():
         shutil.rmtree(staging)
-    shutil.copytree(ROOT / "content", staging,
-                    ignore=shutil.ignore_patterns("portal", "__pycache__", ".ipynb_checkpoints"))
     out = staging / "portal"
-    out.mkdir(exist_ok=True)
-    courses = json.loads((ROOT / "shared/course-sites.json").read_text(encoding="utf-8"))["courses"]
+    out.mkdir(parents=True)
+    courses = load_registry(ROOT) if courses is None else courses
     copied = 0
-    # Keep all existing BOK entrypoint notebook names, including the old first
-    # and fourth-year shared examples, preserving browser state compatibility.
-    for item in REGISTERED:
-        filename = Path(item).name
-        grade = 1 if filename.startswith("basis_") else 4
-        source = ROOT / "kurse" / "bok" / f"{grade}-klasse" / "content" / item
-        if not source.is_file():
-            raise FileNotFoundError(source)
-        prepare_notebook(source, out / filename, source_label=item)
-        copied += 1
     for course in courses:
+        if course["status"] != "published":
+            continue
+        load_experiments(course, ROOT)
         root = ROOT / course["courseRoot"] / "content"
         if not root.is_dir():
             raise FileNotFoundError(root)
         paths = sorted(root.rglob("*.ipynb"))
-        # Newly authored per-course notebooks are not in the global registry.
-        if course["teacher"] == "BOK":
-            for item in paths:
-                if not item.name.startswith(("basis_lesson_", "lesson_")):
-                    continue
-                if course["grade"] == 1 and not item.name.startswith("basis_"):
-                    continue
-                if course["grade"] == 4 and item.name.startswith("basis_"):
-                    continue
-                prepare_notebook(item, out / item.name,
-                                 source_label=item.relative_to(root).as_posix())
-                copied += 1
-            continue
-        # JupyterLite must contain the teacher's own Python modules, image
-        # assets and datasets, not just their same-named notebook files.
         workspace = out / course["slug"]
         for asset in sorted(root.rglob("*")):
-            if not asset.is_file() or asset.is_symlink() or asset.suffix == ".ipynb":
+            if (not asset.is_file() or asset.is_symlink() or asset.suffix == ".ipynb"
+                    or any(part in {"__pycache__", ".ipynb_checkpoints"} for part in asset.parts)):
                 continue
             target = workspace / asset.relative_to(root)
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(asset, target)
+        names = set()
         for item in paths:
+            if item.name in names:
+                raise ValueError(f"Doppelter Notebookname in {course['slug']}: {item.name}")
+            names.add(item.name)
             relative = item.relative_to(root)
             target = workspace / relative.name
             prepare_notebook(item, target, source_label=relative.as_posix(),
                              workspace=course["slug"])
+            # Preserve BOK document IDs used by existing browser saves and ZIPs.
+            if course["teacher"] == "BOK" and item.name.startswith("basis_") == (course["grade"] == 1):
+                shutil.copy2(target, out / item.name)
             copied += 1
     print(f"Generated {copied} course notebooks, preserving legacy BOK paths")
 

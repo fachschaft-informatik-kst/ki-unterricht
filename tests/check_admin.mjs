@@ -162,7 +162,7 @@ try{
     }else if(path.includes("/contents/")){
       const source=path.split("/contents/")[1];
       assert.ok(sources.has(source),"Unexpected source "+source);
-      data={content:Buffer.from(sources.get(source)).toString("base64")};
+      data={encoding:"base64",content:Buffer.from(sources.get(source)).toString("base64")};
     }else if(path.includes("/git/ref/"))data={object:{sha:"a".repeat(40)}};
     else if(path.includes("/git/commits/"))data={tree:{sha:"a".repeat(40)}};
     else if(path.includes("/git/trees/"))data={tree:[...sources.keys()].map(path=>({path,type:"blob",sha:"a".repeat(40)}))};
@@ -232,6 +232,23 @@ try{
   assert.equal((await submit([otherCourse,newNotebook])).status,400,
     "A fourth-year notebook must not be linked from first-year pages");
   assert.equal(writes.length,0);
+  const image={path:fourth+"projekt/grafiken/uploads/test.png",expectedSha:null,
+    content:Buffer.from([137,80,78,71,13,10,26,10,...Array(16).fill(0)]).toString("base64")};
+  assert.equal((await submit([{...chapterLinked,content:sources.get(chapterFile)},image])).status,201);
+  writes.length=0;
+  assert.equal((await submit([{...image,path:"projekt/grafiken/uploads/test.png"}])).status,400);
+  assert.equal((await submit([otherCourse,image])).status,400,"Uploads must belong to the same course as chapters");
+  assert.equal(writes.length,0);
+  const download=bySlug["irn/1-klasse"].courseRoot+"/"+DOWNLOADS["Arbeitsblatt_Perzeptron_Lsg.md"];
+  sources.set(download,"IRN course-local download");
+  const response=await route("/teacher/downloads/Arbeitsblatt_Perzeptron_Lsg.md?course=irn%2F1-klasse",{
+    headers:{Cookie:"ki_session="+session}
+  });
+  assert.equal(response.status,200,await response.clone().text());
+  assert.equal(await response.text(),"IRN course-local download");
+  assert.equal((await route("/teacher/downloads/Arbeitsblatt_Perzeptron_Lsg.md?course=unknown",{
+    headers:{Cookie:"ki_session="+session}
+  })).status,404);
 
 }finally{globalThis.fetch=priorFetch;}
 
@@ -275,4 +292,3 @@ const teacherSolutions=await teacherData({course:"bok/1-klasse",kind:"musterloes
 assert.equal(teacherSolutions.sections.length,2);
 // OAuth flow is intentionally not fully simulated: no GitHub credentials in CI.
 console.log("PASS admin: protected endpoints, OAuth PKCE, app permissions, atomic course PR, stable IDs and conflict protection");
-

@@ -14,15 +14,15 @@ matplotlib.use("Agg")
 from IPython.core.interactiveshell import InteractiveShell
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path[:0] = [str(ROOT / "content"), str(ROOT / "content/ki_projekt")]
+sys.path[:0] = [str(ROOT / "kurse/bok/4-klasse/content"), str(ROOT / "kurse/bok/4-klasse/content/ki_projekt")]
 # The registry is the single source of truth: newly separated exercises must
 # never escape the full notebook execution check.
-PATHS = [e["source"] for e in json.loads((ROOT / "experimente/registry.json").read_text())]
+PATHS = [e["source"] for e in json.loads((ROOT / "kurse/bok/4-klasse/experimente/registry.json").read_text())]
 
 def run_notebook(path):
     shell = InteractiveShell.instance()
     shell.reset(new_session=True)
-    nb = nbformat.read(ROOT / "content" / path, as_version=4)
+    nb = nbformat.read(ROOT / "kurse/bok/4-klasse/content" / path, as_version=4)
     executed = 0
     for index, cell in enumerate(nb.cells, 1):
         if cell.cell_type != "code":

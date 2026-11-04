@@ -17,16 +17,19 @@ from new_lesson import create
 
 with TemporaryDirectory() as tmp:
     root = Path(tmp)
-    for folder in ("kursseiten", "projekt", "lehrperson", "worksheets", "content", "shared", "experimente"):
-        shutil.copytree(ROOT / folder, root / folder, ignore=shutil.ignore_patterns("__pycache__", "portal", "materialien", "musterloesungen", "index.html", "unterrichtsplan.html", "materialien.html"))
-    create(root, "KI im Alltag", after="03")
-    create(root, "Vertiefung", section="ki-im-alltag", after="ki-im-alltag")
+    base = root / "kurse/bok/4-klasse"
+    shutil.copytree(ROOT / "kurse/bok/4-klasse", base,
+                    ignore=shutil.ignore_patterns("__pycache__"))
+    shutil.copytree(ROOT / "shared", root / "shared")
+    create(base, "KI im Alltag", after="03")
+    create(base, "Vertiefung", section="ki-im-alltag", after="ki-im-alltag")
     target = output(root)
-    with patch.multiple(build_solutions, SOURCE=root/"lehrperson/musterloesungen.md",
+    with patch.multiple(build_solutions, SOURCE=base/"lehrperson/musterloesungen.md",
+                        FIELD_SOURCES=(base/"lehrperson/musterloesungen-felder.md",),
                         OUTPUT=target/"musterloesungen/index.html"):
-        with patch.multiple(build_portal, ROOT=root, PAGES=root/"kursseiten", PORTAL=root/"projekt"):
+        with patch.multiple(build_portal, ROOT=root, PAGES=base/"kursseiten", PORTAL=root/"shared/portal"):
             build_portal.build()
-    with patch.multiple(build_materials, ROOT=root, SOURCE=root/"lehrperson/materialien.md",
+    with patch.multiple(build_materials, ROOT=root, SOURCE=base/"lehrperson/materialien.md",
                         OUTPUT=target/"materialien.html", DOWNLOADS=target/"materialien/downloads"):
         with patch.object(build_course, "ROOT", root):
             build_course.build()
@@ -39,14 +42,14 @@ with TemporaryDirectory() as tmp:
     assert soup.select_one("#doppellektion-03"), "Existing lesson URL must survive insertion"
     assert soup.select_one("#doppellektion-vertiefung")
     material = BeautifulSoup((target/"materialien.html").read_text(), "html.parser")
-    assert len(material.select(".lesson-resources")) == len(load_course(root)["lessons"])
+    assert len(material.select(".lesson-resources")) == len(load_course(base)["lessons"])
     assert material.select_one("#dl-vertiefung")
     assert [s["id"] for s in material.select(".lesson-resources")] == [
-        "dl-" + l["id"] for l in load_course(root)["lessons"]
+        "dl-" + l["id"] for l in load_course(base)["lessons"]
     ]
-    course = load_course(root)
-    original_04 = next(l for l in load_course(ROOT)["lessons"] if l["id"] == "04")
+    course = load_course(base)
+    original_04 = next(l for l in load_course(ROOT, "kurse/bok/4-klasse/kursseiten/manifest.json")["lessons"] if l["id"] == "04")
     assert next(l for l in course["lessons"] if l["id"] == "04")["number"] == original_04["number"] + 2
-    assert "<!-- KURSPLAN -->" in (root/"worksheets/md/KI_Planung.md").read_text()
+    assert "<!-- KURSPLAN -->" in (base/"worksheets/md/KI_Planung.md").read_text()
     assert "Vertiefung" in (target/"KI_Planung.md").read_text()
 print("PASS full new-topic build, grouped lessons, inserted navigation, teacher material and source isolation")

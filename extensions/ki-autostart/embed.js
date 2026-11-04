@@ -2,12 +2,11 @@ import {portableNotebook, uploadedFiles} from './snapshot';
 import {restoreNotebookUploads} from './restore-uploads';
 
 // Same-origin bridge between the course website and its one notebook iframe.
-export function setupEmbed(app, tracker, allowed, reviveSavedWidgets = async () => ({activated:false,values:0})) {
+export function setupEmbed(app, tracker, isAllowed, reviveSavedWidgets = async () => ({activated:false,values:0})) {
   const query = new URLSearchParams(location.search);
   if (query.get('ki-embed') !== '1' || window.parent === window) return null;
   const path = query.get('ki-path') || query.get('path');
-  if ((!allowed.has(path) && !/^portal\/(?:basis_)?lesson_[a-z0-9_]+\.ipynb$/.test(path)) ||
-      !path.startsWith('portal/')) return null;
+  if (!isAllowed(path) || !path.startsWith('portal/')) return null;
   // The authenticated teacher editor may embed the same JupyterLite runtime.
   // Accept only this exact trusted editor origin, never an arbitrary URL parameter.
   const teacherOrigin = 'https://kst-ki-admin.kevin-bohn.workers.dev';

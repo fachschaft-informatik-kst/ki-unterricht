@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520" fill="none" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Axes -->
+  <line x1="120" y1="420" x2="660" y2="420" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="120" y1="420" x2="120" y2="80" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Grid (0/1 square) -->
+  <g stroke="#bbb" stroke-dasharray="6 6" stroke-width="1.5">
+    <line x1="120" y1="420" x2="620" y2="420" />
+    <line x1="120" y1="120" x2="620" y2="120" />
+    <line x1="120" y1="420" x2="120" y2="120" />
+    <line x1="620" y1="420" x2="620" y2="120" />
+  </g>
+
+  <!-- OR decision line: x1 + x2 = 0.5  -->
+  <!-- In this plot: (0.5,0) -> (0,0.5) -->
+  <line x1="370" y1="420" x2="120" y2="270" stroke="#1e73be" stroke-width="3" stroke-dasharray="8 5" />
+
+  <!-- NAND decision line: x1 + x2 = 1 -->
+  <!-- (1,0) -> (0,1) -->
+  <line x1="620" y1="420" x2="120" y2="120" stroke="#d17a00" stroke-width="3" stroke-dasharray="8 5" />
+
+  <!-- Highlight intersection region (OR=1 and NAND=1): between the two lines -->
+  <polygon points="370,420 620,420 120,120 120,270" fill="#2e8b57" fill-opacity="0.10" stroke="none" />
+
+  <!-- Points (XOR) -->
+  <g stroke="#555" stroke-width="2">
+    <circle cx="120" cy="420" r="12" fill="#d33" /> <!-- (0,0) XOR=0 -->
+    <circle cx="120" cy="120" r="12" fill="#2e8b57" /> <!-- (0,1) XOR=1 -->
+    <circle cx="620" cy="420" r="12" fill="#2e8b57" /> <!-- (1,0) XOR=1 -->
+    <circle cx="620" cy="120" r="12" fill="#d33" /> <!-- (1,1) XOR=0 -->
+  </g>
+
+  <!-- Point labels -->
+  <g fill="#555" font-size="14">
+    <text x="82" y="454">(0,0)</text>
+    <text x="76" y="104">(0,1)</text>
+    <text x="588" y="454">(1,0)</text>
+    <text x="582" y="104">(1,1)</text>
+  </g>
+
+  <!-- Axis titles -->
+  <text x="655" y="470" font-size="16" fill="#333">x<tspan dy="5" font-size="12">1</tspan></text>
+  <text x="74" y="96" font-size="16" fill="#333" transform="rotate(-90 74 96)">x<tspan dy="5" font-size="12">2</tspan></text>
+
+  <!-- Legend (moved down so it doesn't cover point (1,1)) -->
+  <g>
+    <rect x="455" y="185" width="205" height="78" rx="8" ry="8" fill="#fff" stroke="#444" stroke-width="1.5" />
+    <line x1="470" y1="212" x2="525" y2="212" stroke="#1e73be" stroke-width="4" stroke-dasharray="8 5" />
+    <text x="535" y="217" font-size="14" fill="#111">OR-Trennlinie</text>
+    <line x1="470" y1="242" x2="525" y2="242" stroke="#d17a00" stroke-width="4" stroke-dasharray="8 5" />
+    <text x="535" y="247" font-size="14" fill="#111">NAND-Trennlinie</text>
+  </g>
+
+</svg>

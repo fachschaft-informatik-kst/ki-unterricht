@@ -71,14 +71,14 @@ jobs:
                 worker=true
                 editor_content_only=false
                 ;;
-              kurse/*/content/*|content/*)
+              kurse/*/content/*)
                 # Notebooks, helpers and datasets affect the JupyterLite runtime
                 # even when they are owned by one individual course.
                 site=true
                 runtime=true
                 editor_content_only=false
                 ;;
-              kurse/*/kursseiten/*|kurse/*/lehrperson/*|kursseiten/*.md|kursseiten/*.json|lehrperson/*.md|templates/*)
+              kurse/*/kursseiten/*|kurse/*/lehrperson/*|kurse/_vorlagen/*)
                 # Authored chapters, plans, materials and glossaries: validate
                 # the generated site, URLs and schemas, not exact wording.
                 site=true
@@ -89,7 +89,7 @@ jobs:
                 runtime=true
                 editor_content_only=false
                 ;;
-              projekt/admin/*|tests/check_admin.mjs|tests/check_admin_form.cjs|tests/check_teacher_view.mjs|tests/check_teacher_browser.cjs)
+              shared/portal/admin/*|tests/check_admin.mjs|tests/check_admin_form.cjs|tests/check_teacher_view.mjs|tests/check_teacher_browser.cjs)
                 # Editor UI changes still build Pages and run editor browser tests,
                 # but do not need the Pyodide/notebook integration suite.
                 site=true
@@ -182,19 +182,20 @@ jobs:
           node tests/check_notebook_start_budget.cjs
           node tests/check_notebook_performance.cjs
           node tests/check_widget_rehydrate.cjs
-          node --check projekt/admin/admin.js
-          node --check projekt/admin/teacher.js
-          node --check projekt/admin/plan-editor.js
+          node --check shared/portal/admin/admin.js
+          node --check shared/portal/admin/teacher.js
+          node --check shared/portal/admin/plan-editor.js
           node --check admin-worker/src/index.mjs
           # Content/chapters are editable: only run fixture-specific tests
           # in code-change PRs, never block on a renamed editor chapter.
-          node --check projekt/glossar.js
-          node --check projekt/dl1_sort.js
-          node --check content/ki_projekt/fotostudio_storage.js
+          node --check shared/portal/glossar.js
+          node --check shared/portal/dl1_sort.js
+          node --check kurse/bok/4-klasse/content/ki_projekt/fotostudio_storage.js
           node tests/check_fotostudio_inline.cjs
           node tests/check_course_model.mjs
           node tests/check_glossary_model.mjs
           python tests/check_course_registry.py
+          python tests/check_course_isolation.py
           python tests/check_preview_watch.py
       - name: Install Playwright test runner
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
@@ -221,11 +222,11 @@ jobs:
       - name: Check editor gateway, JS syntax and Markdown rendering
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
-          node --check projekt/admin/admin.js
-          node --check projekt/admin/teacher.js
-          node --check projekt/admin/plan-editor.js
-          node --check projekt/portal.js
-          node --check basis/basis.js
+          node --check shared/portal/admin/admin.js
+          node --check shared/portal/admin/teacher.js
+          node --check shared/portal/admin/plan-editor.js
+          node --check shared/portal/portal.js
+          node --check shared/basis/basis.js
           node tests/check_admin.mjs
           node tests/check_markdown_parity.cjs
       - name: Browser-check teacher editor
@@ -245,7 +246,6 @@ jobs:
         if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 4
         run: |
-          python scripts/sync_course_sources.py
           python scripts/build_portal.py
           python scripts/build_course.py
           python scripts/build_basis.py
@@ -276,7 +276,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: dist
-          key: lite-runtime-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'content/**', 'kurse/**/content/**', 'experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
+          key: lite-runtime-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'kurse/**/content/**', 'kurse/**/experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
       - name: Build JupyterLite runtime on cache miss
         if: steps.scope.outputs.site_changed == 'true' && steps.lite-cache.outputs.cache-hit != 'true'
         timeout-minutes: 8
@@ -325,6 +325,11 @@ jobs:
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
+      - name: Check real notebook startup in every teacher course
+        if: steps.scope.outputs.runtime_changed == 'true'
+        timeout-minutes: 10
+        run: |
+          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_course_runtime_browser.cjs
       # The embedded course test alone cannot detect widget-manager startup
       # races in the standalone JupyterLite app. Check a clean first launch.
       - name: Check first JupyterLite widget render without kernel restart

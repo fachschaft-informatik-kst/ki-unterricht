@@ -13,8 +13,8 @@ from course_model import load_course, output
 from glossary import render_glossary
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ROOT / "kursseiten"
-PORTAL = ROOT / "projekt"
+PAGES = ROOT / "kurse/bok/4-klasse/kursseiten"
+PORTAL = ROOT / "shared/portal"
 MARKDOWN = MarkdownIt("commonmark", {"html": True}).enable("table")
 
 
@@ -50,7 +50,7 @@ def render_fragment(source: str, filename: Path) -> str:
     return re.sub(pattern, lambda m: MARKDOWN.render(m.group(1)), source, flags=re.S)
 
 
-def assemble(pages: Path | None = None, manifest_path: str = "kursseiten/manifest.json", glossary_path: Path | None = None) -> str:
+def assemble(pages: Path | None = None, manifest_path: str = "kurse/bok/4-klasse/kursseiten/manifest.json", glossary_path: Path | None = None) -> str:
     pages = PAGES if pages is None else pages
     manifest = json.loads((pages / "manifest.json").read_text(encoding="utf-8"))
     sections = manifest["sections"]
@@ -104,9 +104,6 @@ def assemble(pages: Path | None = None, manifest_path: str = "kursseiten/manifes
 
 
 def build() -> None:
-    from sync_course_sources import sync
-    if (ROOT / "kurse").exists():
-        sync(ROOT)
     target = output(ROOT)
     if target.exists():
         shutil.rmtree(target)
@@ -116,11 +113,13 @@ def build() -> None:
         return [name for name in names if name.endswith(".template.html") or name == "README.md"
                 or (Path(folder) == PORTAL and name in generated)]
     shutil.copytree(PORTAL, target, dirs_exist_ok=True, ignore=ignore)
+    shutil.copytree(ROOT / "kurse/bok/4-klasse/projekt", target, dirs_exist_ok=True)
     for path in (ROOT / "shared").glob("*"):
-        shutil.copyfile(path, target / "admin" / path.name)
-    shutil.copyfile(ROOT / "experimente/registry.json", target / "experiments.json")
+        if path.is_file():
+            shutil.copyfile(path, target / "admin" / path.name)
+    shutil.copyfile(ROOT / "kurse/bok/4-klasse/experimente/registry.json", target / "experiments.json")
     (target / "index.html").write_text(assemble(glossary_path=(ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json" if (ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json").is_file() else None)), encoding="utf-8")
-    (target / "kurs.json").write_text(json.dumps(load_course(ROOT), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (target / "kurs.json").write_text(json.dumps(load_course(ROOT, "kurse/bok/4-klasse/kursseiten/manifest.json"), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     from build_solutions import build as build_solutions
     build_solutions()
     print("Built course portal from editable content fragments")

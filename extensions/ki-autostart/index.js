@@ -15,7 +15,10 @@ const allowed = new Set([
 ]);
 for (const path of [...allowed]) allowed.add('portal/' + path.split('/').pop());
 const lessonNotebook = path => /^portal\/(?:basis_)?lesson_[a-z0-9_]+\.ipynb$/.test(path);
-const isAllowed = path => allowed.has(path) || lessonNotebook(path);
+const canonicalPath = path => typeof path === 'string'
+  ? path.replace(/^portal\/[a-z][a-z0-9]*\/(?:1|4)-klasse\/(?=[a-z0-9_]+\.ipynb$)/, 'portal/')
+  : '';
+const isAllowed = path => allowed.has(canonicalPath(path)) || lessonNotebook(canonicalPath(path));
 const tag = 'ki-autostart';
 const rememberedPathKey = 'kst-ki-last-notebook';
 
@@ -94,7 +97,7 @@ del _ki_saved, _ki_item, _ki_widget`;
       if (refresh) refresh.textContent = 'Grafiken neu starten ↻';
       return {activated:true,values};
     };
-    const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, allowed, reviveSavedWidgets) : null;
+    const embed = typeof window !== 'undefined' ? setupEmbed(app, tracker, isAllowed, reviveSavedWidgets) : null;
     const seen = new WeakSet();
     const initialize = async panel => {
       if (seen.has(panel)) return;
@@ -126,10 +129,10 @@ del _ki_saved, _ki_item, _ki_widget`;
           // A restored notebook deliberately does not execute imported or edited
           // Python. Offer an explicit one-click restart for the untouched,
           // published visual teaching cells only; saved edits remain unchanged.
-          if (panel.context.path === 'portal/perzeptron_und_neuronale_netze.ipynb' ||
-              panel.context.path === 'portal/mehrschichtige_netze.ipynb' ||
-              panel.context.path === 'portal/xor_einzelne_neuronen.ipynb' ||
-              panel.context.path === 'portal/ziffernerkennung.ipynb') {
+          if (canonicalPath(panel.context.path) === 'portal/perzeptron_und_neuronale_netze.ipynb' ||
+              canonicalPath(panel.context.path) === 'portal/mehrschichtige_netze.ipynb' ||
+              canonicalPath(panel.context.path) === 'portal/xor_einzelne_neuronen.ipynb' ||
+              canonicalPath(panel.context.path) === 'portal/ziffernerkennung.ipynb') {
             const activate = new Widget();
             activate.node.className = 'ki-activate-figures';
             const button = document.createElement('button');

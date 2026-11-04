@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def render_glossary(course: str, *, source: Path | None = None) -> str:
     if course not in {"basis", "vertieft"}:
         raise ValueError("Unbekanntes Glossarniveau")
-    data = json.loads((source or ROOT / "kursseiten/glossar.json").read_text(encoding="utf-8"))
+    data = json.loads((source or ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json").read_text(encoding="utf-8"))
     terms = data["begriffe"]
     ids = [term["id"] for term in terms]
     if len(ids) != len(set(ids)):

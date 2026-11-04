@@ -5,7 +5,7 @@ const {spawn}=require('node:child_process');
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),assert=require('node:assert/strict');
 (async()=>{
  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'ki-persistence-'));
- const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../projekt/archive.js')).toString('base64'));
+ const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../shared/portal/archive.js')).toString('base64'));
  const names=['perzeptron_und_neuronale_netze.ipynb','xor_einzelne_neuronen.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_lernlabor.ipynb'];
  const png='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+j2ioAAAAASUVORK5CYII=';
  const doc=name=>({nbformat:4,nbformat_minor:5,metadata:{kernelspec:{display_name:'Python (Pyodide)',language:'python',name:'python'},custom:name},cells:[
@@ -197,7 +197,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await closeNotebook(q);
   await q.locator('.nav a[href="#netze"]').click();
   await q.locator('[data-lab="xor_einzelne_neuronen.ipynb"]').click();
-  await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/xor_einzelne_neuronen.ipynb',null,{timeout:240000});
+  await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/bok/4-klasse/xor_einzelne_neuronen.ipynb',null,{timeout:240000});
   const xorOutput=q.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1);
   await xorOutput.locator('img[alt^="Neuron: Eingaben"]').first().waitFor({state:'visible'});
   assert.equal(await xorOutput.locator('img[alt^="Neuron: Eingaben"]').count(),4,'DL4 must start with four XOR neurons');

@@ -10,13 +10,13 @@ import json
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGE = ROOT / "projekt/index.template.html"
-PORTAL_CSS = ROOT / "projekt/portal.css"
-GLOSSARY_CSS = ROOT / "projekt/glossar.css"
-SORT_CSS = ROOT / "projekt/dl1_sort.css"
-BASIS_PAGE = ROOT / "basis/index.template.html"
-BASIS_CSS = ROOT / "basis/basis.css"
-ADMIN = ROOT / "projekt/admin/admin.js"
+PAGE = ROOT / "shared/portal/index.template.html"
+PORTAL_CSS = ROOT / "shared/portal/portal.css"
+GLOSSARY_CSS = ROOT / "shared/portal/glossar.css"
+SORT_CSS = ROOT / "shared/portal/dl1_sort.css"
+BASIS_PAGE = ROOT / "shared/basis/index.template.html"
+BASIS_CSS = ROOT / "shared/basis/basis.css"
+ADMIN = ROOT / "shared/portal/admin/admin.js"
 
 
 def values():

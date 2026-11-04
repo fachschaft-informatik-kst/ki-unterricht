@@ -1,1 +1,0 @@
-<a class="btn" href="#netze">Weiter: Mehrere Neuronen →</a>

@@ -4,15 +4,15 @@ const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 let source = fs.readFileSync(path.join(root, 'extensions/ki-autostart/index.js'), 'utf8');
 source = source.replace(/^import .*;\n/gm, '').replace('export default', 'globalThis.plugin =');
-async function simulate(name, fail = false, twice = false, modification = '') {
-  const nb = JSON.parse(fs.readFileSync(path.join(root, 'content', name==='fremdes_notebook.ipynb'?'perzeptron_und_neuronale_netze.ipynb':name)));
+async function simulate(name, fail = false, twice = false, modification = '', notebookPath = name) {
+  const nb = JSON.parse(fs.readFileSync(path.join(root, 'kurse/bok/4-klasse/content', name==='fremdes_notebook.ipynb'?'perzeptron_und_neuronale_netze.ipynb':name)));
   const template = structuredClone(nb);
   if (modification === 'edit') nb.cells.find(c => c.cell_type === 'code').source = ['raise RuntimeError("untrusted setup")'];
   if (modification === 'tag') nb.cells.push({id:'untrusted',cell_type:'code',metadata:{tags:['ki-autostart']},source:['raise RuntimeError("untrusted tag")']});
   if (modification === 'remove') nb.cells.splice(nb.cells.findIndex(c => c.cell_type === 'code'),1);
   const executed = [], badges = [];
   const panel = {
-    context: {ready: Promise.resolve(), path: name},
+    context: {ready: Promise.resolve(), path: notebookPath},
     disposed: {connect() {}},
     content: {widgets: nb.cells.map((cell, index) => ({index, model: {id:cell.id, type: cell.cell_type, sharedModel:{getSource:()=>cell.source.join('')}, getMetadata: key => cell.metadata[key]}}))},
     sessionContext: {ready: Promise.resolve(), session: {kernel: {}}},
@@ -35,6 +35,15 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   return {nb, executed, badges};
 }
 (async () => {
+  for(const slug of ['bok/1-klasse','bok/4-klasse','irn/1-klasse','irn/4-klasse','mai/1-klasse']){
+    const scoped=await simulate('basis_neuron.ipynb',false,false,'','portal/'+slug+'/basis_neuron.ipynb');
+    assert(scoped.executed.length>0,slug+': scoped teaching notebook must initialize');
+  }
+  for(const path of ['portal/bok/4-klasse/arbitrary.ipynb','portal/bok/4-klasse/../basis_neuron.ipynb',
+      'portal/bok/4-klasse/nested/basis_neuron.ipynb','uploads/basis_neuron.ipynb']){
+    assert.equal((await simulate('basis_neuron.ipynb',false,false,'',path)).executed.length,0,
+      'Never autostart an untrusted or malformed notebook path: '+path);
+  }
   // Explicitly reproduce the first-launch race: notebook listeners must not
   // run while the Jupyter widgets extension is still activating.
   {
@@ -56,7 +65,7 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   // SVG widgets must be usable without loading the large Matplotlib package.
   // Plotting and ML experiments continue to load their required dependencies.
   const packages = name => {
-    const nb = JSON.parse(fs.readFileSync(path.join(root, 'content', name)));
+    const nb = JSON.parse(fs.readFileSync(path.join(root, 'kurse/bok/4-klasse/content', name)));
     const setup = nb.cells.find(c => c.cell_type==='code' && c.metadata.tags?.includes('ki-autostart'));
     const match = setup.source.join('').match(/await pyodide_js\.loadPackage\(\[([^\]]+)\]\)/);
     assert(match, 'Package declaration missing in ' + name);
@@ -65,7 +74,7 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   assert.deepEqual(packages('perzeptron_und_neuronale_netze.ipynb'), ['numpy']);
   assert.deepEqual(packages('xor_einzelne_neuronen.ipynb'), ['numpy']);
   assert.deepEqual(packages('basis_neuron.ipynb'), ['numpy']);
-  const tools = fs.readFileSync(path.join(root,'content/unterricht_tools.py'),'utf8');
+  const tools = fs.readFileSync(path.join(root,'kurse/bok/4-klasse/content/unterricht_tools.py'),'utf8');
   assert(!/^import matplotlib\.pyplot as plt$/m.test(tools),
     'Matplotlib must not initialize when importing HTML/SVG teaching widgets');
   assert(tools.includes('class _LazyPlots'));
@@ -80,7 +89,7 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   assert.deepEqual(packages('ki_projekt/ki_lernlabor.ipynb'), ['numpy','pillow']);
   assert.deepEqual(packages('ki_projekt/ki_tandemprojekt.ipynb'), ['numpy','pillow'],
     'The saved project journal must not block startup on unused plotting/training packages');
-  const journalCells = JSON.parse(fs.readFileSync(path.join(root,'content/ki_projekt/ki_tandemprojekt.ipynb'))).cells;
+  const journalCells = JSON.parse(fs.readFileSync(path.join(root,'kurse/bok/4-klasse/content/ki_projekt/ki_tandemprojekt.ipynb'))).cells;
   assert(journalCells[11].source.join('').includes("await pyodide_js.loadPackage(['matplotlib'])"),
     'Only the first visualisation should fetch plotting dependencies');
   assert(journalCells[14].source.join('').includes("await pyodide_js.loadPackage(['scipy', 'scikit-learn'])"),
@@ -93,7 +102,7 @@ async function simulate(name, fail = false, twice = false, modification = '') {
   // cell suppresses the final expression.  Interactive controls already call
   // display(...) internally, so their auto-run cells must end with ';'.
   const uiCells = nb => nb.cells.filter(c => c.cell_type === 'code').map(c => c.source.join('').trim());
-  for (const statement of uiCells(JSON.parse(fs.readFileSync(path.join(root, 'content', name))))) {
+  for (const statement of uiCells(JSON.parse(fs.readFileSync(path.join(root, 'kurse/bok/4-klasse/content', name))))) {
     if (/^u\.(?:live_alltag|live_gatter|lernen_klick|regler_logik)\(/.test(statement)) {
       assert(statement.endsWith(';'), `Duplicate plain-text widget output in ${name}: ${statement}`);
     }

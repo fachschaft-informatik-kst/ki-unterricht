@@ -61,7 +61,7 @@ def protect(site: Path) -> None:
                 name = target.rsplit("/", 1)[1]
                 if name not in TEACHER_ONLY_DOWNLOADS:
                     return match.group(0)  # existing student downloads stay public
-                return f'{match.group("attr")}={match.group("quote")}{WORKER}/teacher/downloads/{name}{match.group("quote")}'
+                return f'{match.group("attr")}={match.group("quote")}{WORKER}/teacher/downloads/{name}?course={slug}{match.group("quote")}'
             else:
                 return match.group(0)
             return f'{match.group("attr")}={match.group("quote")}{WORKER}/teacher/{slug}/{kind}{match.group("quote")}'

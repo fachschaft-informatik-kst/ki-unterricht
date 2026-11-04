@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def run(root:Path=ROOT,*,check:bool=False)->None:
     for grade in (1,4):
-        template=root/"templates"/f"{grade}-klasse"
+        template=root/"kurse/_vorlagen"/f"{grade}-klasse"
         if not (template/"kursseiten/manifest.json").is_file():
             raise FileNotFoundError(template/"kursseiten/manifest.json")
         originals={p.relative_to(template) for p in template.rglob("*") if p.is_file()}

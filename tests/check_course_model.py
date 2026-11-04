@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from course_model import load_course, lesson_template, validate_lessons
 
 template = lesson_template("transfer", "Transfer", "gesellschaft")
-cases = [{"lessons": [template]}, {"lessons": load_course(ROOT)["lessons"]}]
+cases = [{"lessons": [template]}, {"lessons": load_course(ROOT, "kurse/bok/4-klasse/kursseiten/manifest.json")["lessons"]}]
 invalid = [{"lessons": []}, {"lessons": [None]}]
 for change in (
     lambda l: l.pop("id"),
@@ -39,7 +39,7 @@ for case in invalid:
         raise AssertionError(f"Accepted invalid plan: {case}")
 with TemporaryDirectory() as tmp:
     root = Path(tmp)
-    shutil.copytree(ROOT / "kursseiten", root / "kursseiten")
+    shutil.copytree(ROOT / "kurse/bok/4-klasse/kursseiten", root / "kursseiten")
     path = root / "kursseiten/einstieg/planung.json"
     original = json.loads(path.read_text())
     for order in (None, float("inf"), True):

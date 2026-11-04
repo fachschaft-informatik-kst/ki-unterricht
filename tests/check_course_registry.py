@@ -25,7 +25,7 @@ for course in known:
     model=load_course(ROOT,course["manifest"])
     assert len(model["lessons"])>=1
 for grade in (1,4):
-    template=ROOT/"templates"/f"{grade}-klasse"
+    template=ROOT/"kurse/_vorlagen"/f"{grade}-klasse"
     assert (template/"kursseiten/manifest.json").is_file()
     for teacher in ("bok","irn"):
         copied=ROOT/"kurse"/teacher/f"{grade}-klasse"
@@ -41,9 +41,9 @@ with tempfile.TemporaryDirectory() as folder:
     target=Path(folder)
     (target/"shared").mkdir()
     (target/"shared/course-sites.json").write_text(json.dumps({"version":1,"courses":[]}),encoding="utf-8")
-    shutil.copytree(ROOT/"templates/1-klasse",target/"templates/1-klasse")
+    shutil.copytree(ROOT/"kurse/_vorlagen/1-klasse",target/"kurse/_vorlagen/1-klasse")
     dry=create(target,"MAI",1,"KI entdecken",dry_run=True)
-    assert not (target/"kurse").exists()
+    assert not (target/"kurse/mai").exists()
     created=create(target,"MAI",1,"KI entdecken",accent="#684e9b")
     assert all(path.is_file() for path in created)
     owner=load_registry(target)[0]

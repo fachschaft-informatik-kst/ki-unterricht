@@ -4,8 +4,12 @@
 const tf = require('@tensorflow/tfjs'), mobilenet = require('@tensorflow-models/mobilenet');
 const { createCanvas, loadImage } = require('@napi-rs/canvas');
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
-const core = require('../content/ki_projekt/fotostudio_core.js');
-const root = path.join(__dirname, '../testbilder');
+const slug=process.argv[2]||"bok/4-klasse";
+const course=require("../shared/course-sites.json").courses.find(c=>c.slug===slug);
+if(!course)throw Error("Unbekannter Kurs: "+slug);
+const base=path.join(__dirname,"..",course.courseRoot);
+const core = require(path.join(base,"content/ki_projekt/fotostudio_core.js"));
+const root = path.join(base,"testbilder");
 const GRUPPEN = ['T1', 'T2', 'V1', 'P1', 'P2'];
 const QUELLE = 'Gezeichnete Illustration (tests/generate_testbilder.py), kein Foto';
 (async () => {

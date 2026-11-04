@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Der Begriff Artificial Intelligence im Dartmouth-Forschungsantrag von 1955</title>
+  <desc id="desc">Grafische, nicht originalgetreue Nachzeichnung des Titelblatts von John McCarthys Forschungsantrag. Der Begriff Artificial Intelligence ist farbig markiert. Ein Pfeil führt zum Workshop von 1956.</desc>
+  <rect width="960" height="560" rx="22" fill="#eff3f9"/>
+  <rect x="41" y="45" width="518" height="465" rx="9" fill="#d7dce5"/>
+  <rect x="32" y="35" width="518" height="465" rx="8" fill="#fffdf6" stroke="#9e9b91" stroke-width="2"/>
+  <text x="65" y="83" font-family="Georgia,serif" font-size="17" fill="#4b5563">FORSCHUNGSANTRAG · AUGUST 1955</text>
+  <path d="M65 99 H512" stroke="#c6c1b8" stroke-width="2"/>
+  <text x="65" y="156" font-family="Georgia,serif" font-size="25" fill="#1f2937">A Proposal for the</text>
+  <text x="65" y="198" font-family="Georgia,serif" font-size="25" fill="#1f2937">Dartmouth Summer</text>
+  <text x="65" y="240" font-family="Georgia,serif" font-size="25" fill="#1f2937">Research Project on</text>
+  <rect x="56" y="254" width="458" height="55" rx="6" fill="#fae6a8"/>
+  <text x="65" y="292" font-family="Georgia,serif" font-weight="bold" font-size="32" fill="#174778">Artificial Intelligence</text>
+  <path d="M65 328 H512" stroke="#c6c1b8" stroke-width="2"/>
+  <text x="65" y="370" font-family="Georgia,serif" font-size="19" fill="#4b5563">John McCarthy et al.</text>
+  <text x="65" y="454" font-family="Arial,sans-serif" font-size="15" fill="#686868">Titel grafisch nachgezeichnet</text>
+  <path d="M585 275 H656" stroke="#1a6560" stroke-width="5" stroke-linecap="round"/>
+  <path d="M642 263 L661 275 L642 287" fill="none" stroke="#1a6560" stroke-width="5" stroke-linecap="round"/>
+  <rect x="678" y="165" width="248" height="222" rx="17" fill="#174778"/>
+  <text x="802" y="215" text-anchor="middle" font-family="Arial,sans-serif" font-size="46" font-weight="bold" fill="#fff">1956</text>
+  <text x="802" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" fill="#fff">Dartmouth-</text>
+  <text x="802" y="290" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" fill="#fff">Workshop</text>
+  <text x="802" y="336" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#d9eafe">Beginn des</text>
+  <text x="802" y="360" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#d9eafe">Forschungsfeldes KI</text>
+  <text x="480" y="539" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#465767">Eigene Illustration nach McCarthy et al., Dartmouth-Vorschlag (1955), S. 1</text>
+</svg>

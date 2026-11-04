@@ -8,7 +8,7 @@ from build_portal import render_fragment
 
 ROOT=Path(__file__).resolve().parents[1]
 subprocess.run([sys.executable, str(ROOT/"scripts/sync_editor_preview.py"), "--check"], check=True)
-site=ROOT/"projekt/admin"
+site=ROOT/"shared/portal/admin"
 worker=ROOT/"admin-worker/src/index.mjs"
 for name in ("index.html","admin.css","admin.js","plan-editor.js"):
     assert (site/name).is_file(),name
@@ -36,7 +36,7 @@ assert "function createPlanner" in planner and "validatePlan" in planner
 assert 'plan-editor.js' in code
 assert '"/plan-editor.js":"plan-editor.js"' in backend
 assert "access_token" not in source and "client_secret" not in source
-archived=render_fragment("---\ntype: chapter\nid: example-archived\nnummer: \"7\"\ntitel: \"Archiviert\"\nkurz: \"Nicht sichtbar\"\narchiviert: true\n---\n<label><textarea data-answer=\"old_answer\"></textarea></label>\n",ROOT/"kursseiten"/"test.md")
+archived=render_fragment("---\ntype: chapter\nid: example-archived\nnummer: \"7\"\ntitel: \"Archiviert\"\nkurz: \"Nicht sichtbar\"\narchiviert: true\n---\n<label><textarea data-answer=\"old_answer\"></textarea></label>\n",ROOT/"kurse/bok/4-klasse/kursseiten"/"test.md")
 fragment=BeautifulSoup(archived,"html.parser")
 chapter=fragment.select_one("details#example-archived")
 assert chapter.has_attr("hidden") and chapter["data-archived"]=="true"

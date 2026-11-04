@@ -1,7 +1,7 @@
 // Protect interactive first-paint from growing training and dependency costs.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..');
-const notebook=name=>JSON.parse(fs.readFileSync(path.join(root,'content',name),'utf8'));
+const notebook=name=>JSON.parse(fs.readFileSync(path.join(root,'kurse/bok/4-klasse/content',name),'utf8'));
 const source=cell=>Array.isArray(cell.source)?cell.source.join(''):String(cell.source||'');
 const starts=nb=>nb.cells.filter(c=>c.cell_type==='code'&&(c.metadata?.tags||[]).includes('ki-autostart'));
 const setups=nb=>starts(nb).find(c=>source(c).includes('loadPackage('));

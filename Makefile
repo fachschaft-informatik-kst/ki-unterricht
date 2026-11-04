@@ -5,6 +5,7 @@ SHELL := /bin/sh
 PYTHON ?= python3
 HOST ?= 127.0.0.1
 PORT ?= 8000
+COURSE ?= bok/4-klasse
 VENV := .venv
 VENV_PY := $(VENV)/bin/python
 PREVIEW_STAMP := $(VENV)/.preview-ready
@@ -50,15 +51,14 @@ install: $(FULL_STAMP) $(NPM_STAMP)
 # Optional authoring helper (no virtual environment needed).
 new-chapter:
 	@test -n "$(SECTION)" -a -n "$(NUMMER)" -a -n "$(TITLE)" || { echo 'Benutzung: make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." [AFTER=030]' >&2; exit 2; }
-	$(PYTHON) scripts/new_chapter.py $(SECTION) --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
+	$(PYTHON) scripts/new_chapter.py $(SECTION) --course "$(COURSE)" --nummer "$(NUMMER)" --title "$(TITLE)" $(if $(AFTER),--after $(AFTER),)
 
 preview: install-preview
 	@printf 'Schnellvorschau: http://$(HOST):$(PORT)/kurse.html\n'
 	$(VENV_PY) scripts/preview.py --host $(HOST) --port $(PORT)
 
 build: install
-	npm run build --prefix $(NODE_DIR)
-	$(VENV_PY) scripts/sync_course_sources.py
+	PATH="$(abspath $(VENV))/bin:$$PATH" npm run build --prefix $(NODE_DIR)
 	$(VENV_PY) scripts/build_portal.py
 	$(VENV_PY) scripts/build_course.py
 	$(VENV_PY) scripts/build_basis.py
@@ -81,6 +81,8 @@ full: local
 # are reviewed by teachers, not frozen in CI snapshots.
 test: build
 	$(VENV_PY) scripts/course_registry.py
+	$(VENV_PY) tests/check_course_isolation.py
+	$(VENV_PY) tests/check_notebook_isolation.py
 	$(VENV_PY) tests/check_editor_publish.py
 	$(VENV_PY) tests/check_course_routes.py
 	$(VENV_PY) tests/check_published_links.py

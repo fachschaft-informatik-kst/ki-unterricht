@@ -149,7 +149,7 @@ def check() -> None:
             name = notebook.removeprefix("content/")
             slug = source.relative_to(DIST).parts
             course_slug = "/".join(slug[:2]) if slug[0] in ("bok", "irn") else None
-            base = ROOT / "kurse" / course_slug / "content" if course_slug else ROOT / "content"
+            base = ROOT / "kurse" / course_slug / "content" if course_slug else ROOT / "kurse/bok/4-klasse/content"
             candidates = [base / name, base / "ki_projekt" / name]
             if not any(candidate.is_file() for candidate in candidates):
                 report(source, f"Missing {'course-owned' if course_slug else 'legacy'} notebook: {notebook}")

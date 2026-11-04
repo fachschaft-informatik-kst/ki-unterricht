@@ -24,8 +24,8 @@ const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
   const relative=location==="/projekt/admin/"?"projekt/admin/index.html":location.replace(/^\//,"");
   const shared=["course-model.js","course-rules.json","glossary-model.js"].includes(path.basename(relative));
-  const file=path.resolve(ROOT,shared?"shared/"+path.basename(relative):relative);
-  if(!file.startsWith(ROOT+path.sep)||(!shared&&!file.startsWith(path.join(ROOT,"projekt/admin")+path.sep))){
+  const file=path.resolve(ROOT,shared?"shared/"+path.basename(relative):relative.replace(/^projekt\//,"shared/portal/"));
+  if(!file.startsWith(ROOT+path.sep)||(!shared&&!file.startsWith(path.join(ROOT,"shared/portal/admin")+path.sep))){
     res.writeHead(404).end();return;
   }
   fs.readFile(file,(err,data)=>{
@@ -545,14 +545,14 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
     assert.ok(submitted);
     const names=submitted.changes.map(c=>c.path).sort();
-    assert.deepEqual(names.filter(n=>!n.startsWith("projekt/grafiken/uploads/")),[
+    assert.deepEqual(names.filter(n=>!n.startsWith("kurse/bok/4-klasse/projekt/grafiken/uploads/")),[
       "kurse/bok/4-klasse/kursseiten/einstieg/planung.json",
       "kurse/bok/4-klasse/kursseiten/manifest.json",
       "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/010-einstieg-und-auftrag.md",
       "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/materialien.md",
       "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/planung.json"
     ]);
-    assert.equal(names.filter(n=>/^projekt\/grafiken\/uploads\/test-[a-f0-9]{8}\.png$/.test(n)).length,1);
+    assert.equal(names.filter(n=>/^kurse\/bok\/4-klasse\/projekt\/grafiken\/uploads\/test-[a-f0-9]{8}\.png$/.test(n)).length,1);
     const initial=JSON.parse(submitted.changes.find(c=>c.path==="kurse/bok/4-klasse/kursseiten/einstieg/planung.json").content);
     assert.equal(initial.lessons[0].title,"Was ist KI? – Überarbeitet");
     const updated=JSON.parse(submitted.changes.find(c=>c.path==="kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/planung.json").content);
@@ -772,7 +772,7 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#notebookRuntimeStatus")?.textContent?.includes("Bereit:"));
     assert.match(await page.frameLocator("#notebookRuntime").locator("#notebook-code").inputValue(),/Neues Python-Experiment/);
 
-    assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fdaten_training.ipynb/,
+    assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fbok%2F4-klasse%2Fdaten_training.ipynb/,
       "Undeployed notebook must start from a trusted template to support live editing");
     assert.equal(await page.locator("#pendingCount").textContent(),"2");
     await page.locator("#toggleChanges").click();
@@ -812,7 +812,7 @@ const server=http.createServer((req,res)=>{
     await notebookCard.waitFor();
     assert.equal(await notebookCard.getAttribute("data-notebook"),"content/lesson_einstieg_mein_python_labor.ipynb");
     assert.equal(new URL(await notebookCard.locator("a.ki-notebook-direct").getAttribute("href")).searchParams.get("path"),
-      "portal/lesson_einstieg_mein_python_labor.ipynb");
+      "portal/bok/4-klasse/lesson_einstieg_mein_python_labor.ipynb");
     await page.locator("#chapterNotebookLinks button").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb");
     await page.locator("#notebookBack").click();
@@ -833,7 +833,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#notebookNewTitle").fill("Meine Neuron Übung");
     await page.locator("#createChapterNotebook").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/content/basis_lesson_basis_neuron_meine_neuron_uebung.ipynb");
-    assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fbasis_neuron.ipynb/);
+    assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fbok%2F1-klasse%2Fbasis_neuron.ipynb/);
     await page.frameLocator("#notebookRuntime").locator("#notebook-code").waitFor({state:"visible"});
     await page.waitForFunction(()=>document.querySelector("#notebookRuntimeStatus")?.textContent?.includes("Bereit:"));
     assert.equal(await page.locator("#notebookSourcePanel .notebook-cell").count(),2);

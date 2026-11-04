@@ -12,12 +12,12 @@ from course_model import load_course
 from glossary import render_glossary
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "kursseiten" / "basis-manifest.json"
-SOURCE = ROOT / "basis"
+MANIFEST = ROOT / "kurse/bok/1-klasse/kursseiten/manifest.json"
+SOURCE = ROOT / "shared/basis"
 OUT = ROOT / "_build" / "site" / "basis"
 
 
-def assemble(manifest_path: str = "kursseiten/basis-manifest.json", glossary_path: Path | None = None) -> tuple[str, list[dict]]:
+def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json", glossary_path: Path | None = None) -> tuple[str, list[dict]]:
     manifest = json.loads((ROOT / manifest_path).read_text(encoding="utf-8"))
     sections = manifest["sections"]
     course = load_course(ROOT, manifest_path)
@@ -69,22 +69,18 @@ def assemble(manifest_path: str = "kursseiten/basis-manifest.json", glossary_pat
 
 
 def build():
-    from sync_course_sources import sync
-    if (ROOT / "kurse").exists():
-        sync(ROOT)
     OUT.mkdir(parents=True, exist_ok=True)
-    template = (ROOT / "projekt" / "index.template.html").read_text(encoding="utf-8")
+    template = (ROOT / "shared/portal" / "index.template.html").read_text(encoding="utf-8")
     match = re.search(r"<style>(.*?)</style>", template, re.S)
     if not match:
         raise ValueError("Gemeinsame CSS-Basis der vertieften Kursseite fehlt")
     (OUT / "theme.css").write_text(match.group(1) + "\n", encoding="utf-8")
-    # Shared images stay authored in projekt/grafiken; copy them for relative editor URLs.
-    shutil.copytree(ROOT / "projekt" / "grafiken", OUT / "grafiken", dirs_exist_ok=True)
-    source_svg = (ROOT / "projekt" / "grafiken" / "netz_hintergrund.svg").read_text(encoding="utf-8")
+    shutil.copytree(ROOT / "kurse/bok/1-klasse/projekt/grafiken", OUT / "grafiken", dirs_exist_ok=True)
+    source_svg = (ROOT / "kurse/bok/1-klasse/projekt/grafiken/netz_hintergrund.svg").read_text(encoding="utf-8")
     blue_svg = source_svg.replace("#076959", "#3653a3").replace("#b84d27", "#6488d6").replace("#f5f4ee", "#f3f5fb")
     (OUT / "grafiken" / "netz_hintergrund_blau.svg").write_text(blue_svg, encoding="utf-8")
     for filename in ("glossar.css", "glossar.js", "dl1_sort.css", "dl1_sort.js", "notebook-blocks.js"):
-        (OUT / filename).write_bytes((ROOT / "projekt" / filename).read_bytes())
+        (OUT / filename).write_bytes((ROOT / "shared/portal" / filename).read_bytes())
     for filename in ("basis.css", "basis.js", "persistence.js"):
         (OUT / filename).write_bytes((SOURCE / filename).read_bytes())
     page, lessons = assemble(glossary_path=(ROOT / "kurse/bok/1-klasse/kursseiten/glossar.json" if (ROOT / "kurse/bok/1-klasse/kursseiten/glossar.json").is_file() else None))
@@ -99,7 +95,7 @@ def build():
     planning.append('</main></html>')
     (OUT / "unterrichtsplan.html").write_text("".join(planning), encoding="utf-8")
     from build_basis_materials import build as build_basic_materials
-    build_basic_materials(ROOT, OUT, lessons)
+    build_basic_materials(ROOT / "kurse/bok/1-klasse", OUT, lessons)
     print(f"Built independent basis portal with {len(lessons)} double lessons")
 
 
