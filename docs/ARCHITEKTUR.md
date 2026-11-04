@@ -120,3 +120,27 @@ Grafiken, Experimentregistrierung, Fotostudio- und Pythondateien.
 Die Browserprüfung `tests/check_course_runtime_browser.cjs` startet echte
 Python-Widgets in allen vier Kursen; die Fotostudio-Prüfung kontrolliert zusätzlich,
 dass Fotos eines Kurses in den anderen Kursen nicht erscheinen.
+
+`make test-all` bündelt den vollständigen Build, die technischen Tests, alle
+Notebookausführungen und zehn nacheinander ausgeführte Browsersuiten inklusive
+Training und ZIP-Wiederherstellung. `make test-browser` führt nach dem Build nur
+die Browsersuiten aus. Playwright ist über das Root-`package-lock.json` für lokale
+Prüfungen und CI auf dieselbe Version festgelegt.
+
+### Notebookstart und IndexedDB
+
+Im gebündelten localForage kann ein IndexedDB-Reconnect auf eine andere, noch
+nicht initialisierte Speicherinstanz treffen. Der Zugriff auf deren leere
+`_dbInfo` brach den Start vor der Kernelinitialisierung ab. Beim Paketieren setzt
+`scripts/patch_browser_storage.py` eng begrenzte Nullprüfungen in der festgelegten
+Bundleversion ein. Bestehende Datenbanken und Speicherformate bleiben unverändert;
+noch initialisierende Instanzen bleiben für ihren eigenen Verbindungsaufbau
+verantwortlich. Unbekannte Bundlelayouts führen zu einem Buildfehler statt zu
+einer stillschweigend ausgelassenen Korrektur. Bei einem JupyterLite-Update muss
+geprüft werden, ob die Korrektur upstream enthalten ist und entfernt werden kann.
+
+`tests/check_browser_storage.cjs` reproduziert den alten Fehler und prüft das
+Reconnect-Verhalten mit fertigen und noch initialisierenden Instanzen.
+`KI_RUNTIME_REPEATS=3 node tests/check_course_runtime_browser.cjs` wiederholt
+die echten Kursstarts ohne automatische Fehler-Retries. Bei Fehlern gibt der
+Test Startphasen, Browserwarnungen und fehlgeschlagene/offene Netzwerkanfragen aus.

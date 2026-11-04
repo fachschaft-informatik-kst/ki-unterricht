@@ -1,0 +1,10 @@
+{
+  "name": "ki-unterricht-tests",
+  "private": true,
+  "scripts": {
+    "test:browser": "node scripts/test_browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.1"
+  }
+}

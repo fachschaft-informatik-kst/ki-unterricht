@@ -138,7 +138,9 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: extensions/ki-autostart/package-lock.json
+          cache-dependency-path: |
+            extensions/ki-autostart/package-lock.json
+            package-lock.json
       - name: Verify local Makefile targets
         # CI smoke for the development commands, not a content wording gate.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
@@ -201,8 +203,8 @@ jobs:
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         id: playwright
         run: |
-          npm install --prefix /tmp/ki-browser playwright
-          node -p "require('/tmp/ki-browser/node_modules/playwright/package.json').version" | sed 's/^/version=/' >> "$GITHUB_OUTPUT"
+          npm ci
+          node -p "require('playwright/package.json').version" | sed 's/^/version=/' >> "$GITHUB_OUTPUT"
       - name: Restore cached Chromium
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         uses: actions/cache@v4
@@ -212,12 +214,12 @@ jobs:
       - name: Prepare Chromium and required system libraries
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
-          /tmp/ki-browser/node_modules/.bin/playwright install chromium
+          npx --no-install playwright install chromium
           # Avoid apt when the runner already has all host libraries.
           # If Chromium cannot start, install system deps and retry.
-          if ! node -e "require('/tmp/ki-browser/node_modules/playwright').chromium.launch().then(b=>b.close())"; then
-            /tmp/ki-browser/node_modules/.bin/playwright install-deps chromium
-            node -e "require('/tmp/ki-browser/node_modules/playwright').chromium.launch().then(b=>b.close())"
+          if ! node -e "require('playwright').chromium.launch().then(b=>b.close())"; then
+            npx --no-install playwright install-deps chromium
+            node -e "require('playwright').chromium.launch().then(b=>b.close())"
           fi
       - name: Check editor gateway, JS syntax and Markdown rendering
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
@@ -233,9 +235,9 @@ jobs:
         # Form/browser snapshots assume a particular authored lesson set.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
-          NODE_PATH=/tmp/ki-browser/node_modules node tests/check_admin_form.cjs
-          NODE_PATH=/tmp/ki-browser/node_modules node tests/check_teacher_browser.cjs
-          NODE_PATH=/tmp/ki-browser/node_modules node tests/check_editor_course_matrix.cjs
+          node tests/check_admin_form.cjs
+          node tests/check_teacher_browser.cjs
+          node tests/check_editor_course_matrix.cjs
       - name: Check notebook execution and runtime compatibility
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
@@ -301,6 +303,8 @@ jobs:
         run: |
           test -f dist/jupyter-lite.json
           python scripts/copy_portal.py dist
+          python tests/check_browser_storage_patch.py
+          node tests/check_browser_storage.cjs
           python tests/check_course_routes.py
           python tests/check_published_links.py
           test -f dist/projekt/admin/index.html
@@ -315,28 +319,28 @@ jobs:
         # Editor changes are checked by the dynamic HTML/publish smoke test.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
+          PORTAL_SITE=dist node tests/check_basis_browser.cjs
       - name: Browser-check nonblocking notebook startup
         # UI smoke tests are unnecessary for prose-only updates.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_notebook_startup_browser.cjs
+          PORTAL_SITE=dist node tests/check_notebook_startup_browser.cjs
       - name: Browser-check Fotostudio storage
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
+          PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
       - name: Check real notebook startup in every teacher course
         if: steps.scope.outputs.runtime_changed == 'true'
         timeout-minutes: 10
         run: |
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_course_runtime_browser.cjs
+          PORTAL_SITE=dist node tests/check_course_runtime_browser.cjs
       # The embedded course test alone cannot detect widget-manager startup
       # races in the standalone JupyterLite app. Check a clean first launch.
       - name: Check first JupyterLite widget render without kernel restart
         if: steps.scope.outputs.runtime_changed == 'true'
         timeout-minutes: 4
         run: |
-          NODE_PATH=/tmp/ki-browser/node_modules LITE_SITE=dist KI_WIDGET_COLD_START=1 node tests/check_autostart_browser.cjs
+          LITE_SITE=dist KI_WIDGET_COLD_START=1 node tests/check_autostart_browser.cjs
       - name: Check deployed notebook runtime in Chromium (full release test)
         # PRs keep the technical/Pyodide and cold-start smoke tests above.
         # The slower browser integration (~3 minutes) runs on main or on a
@@ -347,9 +351,9 @@ jobs:
           # Independent browser tests use different local ports. Run them in
           # parallel, preserve both exit codes and print both diagnostic logs.
           set +e
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs > /tmp/ki-portal-browser.log 2>&1 &
+          PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs > /tmp/ki-portal-browser.log 2>&1 &
           portal_pid=$!
-          NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist PORTAL_TEST_PORT=8766 node tests/check_persistence.cjs > /tmp/ki-persistence-browser.log 2>&1 &
+          PORTAL_SITE=dist PORTAL_TEST_PORT=8766 node tests/check_persistence.cjs > /tmp/ki-persistence-browser.log 2>&1 &
           persistence_pid=$!
           wait "$portal_pid"
           portal_status=$?

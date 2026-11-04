@@ -7,6 +7,7 @@ from build_previews import build_previews
 from course_registry import load_registry
 from fix_pyodide_lock import fix_lock
 from patch_pyodide_kernel import patch_bundle
+from patch_browser_storage import patch_bundle as patch_browser_storage
 from protect_teacher_pages import protect
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,7 @@ def main() -> None:
     build(out, courses)
     build_previews(out, courses)
     patch_bundle(out)
+    patch_browser_storage(out)
     protect(out)
     for obsolete in ("basis", "projekt"):
         (out / obsolete / "index.html").unlink(missing_ok=True)

@@ -55,6 +55,8 @@ Das Makefile richtet `.venv/` und die benötigten Pakete bei Bedarf selbst ein. 
 | `make build` | Vollständige Anwendung nach `dist/` bauen |
 | `make serve` | Vorhandenen Build in `dist/` anzeigen |
 | `make test` | Vollständigen Build und lokale technische Tests ausführen |
+| `make test-browser` | Build und sämtliche Browserprüfungen inklusive Python, Training und ZIP |
+| `make test-all` | Technische Tests, alle Notebookausführungen und sämtliche Browserprüfungen |
 | `make help` | Alle Makefile-Befehle anzeigen |
 | `make clean` | Lokale Builddateien und Umgebung entfernen |
 
@@ -160,7 +162,9 @@ Der neue Kurs wird im Register `shared/course-sites.json` mit dem Status `planne
 - Der umfassende JupyterLite-Browsertest mit Training und ZIP-Wiederherstellung läuft bei entsprechenden Runtime-Änderungen nach dem Merge auf `main` oder manuell über **GitHub Actions → Build and Deploy → Run workflow**.
 - Der Cloudflare Worker wird separat aktualisiert, wenn seine relevanten Dateien geändert wurden.
 
-Lokal: `make test`. Die Pipeline liegt in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml); Details zur Architektur stehen in [Mehrkurs-Architektur und Deployment](docs/MULTIKURS-DEPLOYMENT.md).
+Lokal: `make test` für die technischen Prüfungen, `make test-all` für die vollständige Prüfung inklusive aller Notebookausführungen und Browserabläufe. Playwright und Chromium werden beim ersten Browserlauf installiert. Unter Linux können zusätzliche Chromium-Systembibliotheken nötig sein (`npx playwright install-deps chromium`). Die Browserprüfungen laufen bewusst nacheinander, damit sich Python-Kernel und lokale Testserver nicht gegenseitig belasten. Netzwerkzugriff für die Python-Pakete ist erforderlich; ein fehlgeschlagener Test bricht den Lauf mit Fehlerstatus ab.
+
+Die Pipeline liegt in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml); Details zur Architektur stehen in [Mehrkurs-Architektur und Deployment](docs/MULTIKURS-DEPLOYMENT.md).
 
 ## 7. Daten der Lernenden
 
