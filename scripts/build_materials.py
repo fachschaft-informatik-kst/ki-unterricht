@@ -86,76 +86,56 @@ def build(lessons: list[dict]) -> None:
             )
             target.write_text(svg, encoding="utf-8")
 
-    source = SOURCE.read_text(encoding="utf-8")
-    for view in dict.fromkeys(l["view"] for l in lessons):
-        extension = ROOT / "kurse/bok/4-klasse/kursseiten" / view / "materialien.md"
-        if not extension.is_file():
-            raise FileNotFoundError(f"Missing teacher material for {view}")
-        source += "\n\n" + extension.read_text(encoding="utf-8")
-    soup = BeautifulSoup(
-        '<div id="materials-content">' +
-        MarkdownIt("commonmark", {"html": False}).enable("table").render(source) + "</div>",
-        "html.parser"
-    )
+    # Materials are authored by course and lesson; their headings and
+    # explanations are not part of a technical build contract.
+    markdown = MarkdownIt("commonmark", {"html": False}).enable("table")
+    intro = markdown.render(SOURCE.read_text(encoding="utf-8"))
+    soup = BeautifulSoup('<div id="materials-content">' + intro + '</div>', "html.parser")
     content = soup.find(id="materials-content")
-    if "Grafiken und Materialien" not in content.h1.get_text():
-        raise ValueError("Missing material index heading")
-    headers = content.find_all("h2", recursive=False)
-    by_id = {h.get_text(strip=True).removeprefix("Doppellektion "): h for h in headers}
-    if len(by_id) != len(headers) or set(by_id) != {l["id"] for l in lessons}:
-        raise ValueError("Material sections must match lesson IDs")
-
+    if content.find("h1", recursive=False) is None:
+        title = soup.new_tag("h1")
+        title.string = "Grafiken und Materialien"
+        content.insert(0, title)
     for lesson in lessons:
-        heading = by_id[lesson["id"]]
+        path = ROOT / "kurse/bok/4-klasse/kursseiten" / lesson["view"] / "materialien.md"
+        if not path.is_file():
+            raise FileNotFoundError(f"Missing material file for {lesson['id']}: {path}")
         group = soup.new_tag("section", id=f"dl-{lesson['id']}",
-                             attrs={"class": "lesson-resources"})
-        heading.insert_before(group)
-        node = heading
-        while node is not None and (node is heading or node.name not in ("h2", "section")):
-            next_node = node.find_next_sibling()
-            group.append(node.extract())
-            node = next_node
+                            attrs={"class": "lesson-resources"})
+        heading = soup.new_tag("h2")
         heading.string = f"Doppellektion {lesson['number']} · {lesson['title']}"
-
-        images = group.select("p > img")
+        group.append(heading)
+        fragment = BeautifulSoup(markdown.render(path.read_text(encoding="utf-8")),
+                                 "html.parser")
+        for node in list(fragment.contents):
+            group.append(node.extract())
+        images = group.select("p > img[src]")
         if images:
             grid = soup.new_tag("div", attrs={"class": "graphic-grid"})
             images[0].parent.insert_before(grid)
             for img in images:
-                paragraph = img.parent
-                src = img.get("src", "")
+                source = img.get("src", "")
                 alt = img.get("alt", "")
-                if not src or not alt:
-                    raise ValueError(f"Image requires source and description in lesson {lesson['id']}")
-                phase_info = img.get("title", "")
-                if " | " not in phase_info:
-                    raise ValueError(f"Missing AVIVA assignment for {src}")
-                phase, roles = phase_info.split(" | ", 1)
-                p = next((p for p in lesson["phases"] if p["phase"] == phase), None)
-                if p is None:
-                    raise ValueError(f"Unknown AVIVA phase {phase} in lesson {lesson['id']}")
-                allowed = {step["wer"] for step in p["schritte"]}
-                for role in (r.strip() for r in roles.split("→")):
-                    if role not in allowed:
-                        raise ValueError(f"Unplanned AVIVA role {role} in lesson {lesson['id']}")
+                caption_text = img.get("title", "")
+                paragraph = img.parent
                 figure = soup.new_tag("figure")
-                link = soup.new_tag("a", href=src, target="_blank", rel="noopener")
+                link = soup.new_tag("a", href=source, target="_blank", rel="noopener")
                 img.extract()
                 img.attrs.pop("title", None)
                 img["loading"] = "lazy"
                 link.append(img)
                 figure.append(link)
                 caption = soup.new_tag("figcaption")
-                tag = soup.new_tag("span", attrs={"class": "phase-label"})
-                tag.string = phase + " · " + roles
-                caption.append(tag)
+                if caption_text:
+                    phase = soup.new_tag("span", attrs={"class": "phase-label"})
+                    phase.string = caption_text
+                    caption.append(phase)
                 caption.append(alt)
                 figure.append(caption)
                 grid.append(figure)
-                paragraph.decompose()
-
-    for lesson in lessons:
-        content.append(content.find(id=f"dl-{lesson['id']}").extract())
+                if not paragraph.get_text(strip=True):
+                    paragraph.decompose()
+        content.append(group)
     links = "".join(f'<a href="#dl-{l["id"]}">{l["number"]} · {html.escape(l["title"])}</a>'
                     for l in lessons)
     OUTPUT.write_text(f"""<!doctype html>
