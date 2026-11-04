@@ -21,7 +21,7 @@ def generic_page(course: dict, root: Path) -> str:
     navigation, sections = [], []
     for section in sorted(manifest["sections"], key=lambda s: s["navigation"]["order"]):
         sid = section["id"]
-        path = root / "kursseiten" / sid
+        path = (root / course["manifest"]).parent / sid
         chapters = sorted(path.glob("[0-9][0-9][0-9]-*.md"))
         if not chapters:
             raise ValueError(f"Keine Kapitel für {course['slug']}: {sid}")

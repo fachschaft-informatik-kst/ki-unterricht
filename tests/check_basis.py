@@ -88,8 +88,8 @@ js=(base/"basis.js").read_text(encoding="utf-8")
 assert "kst-ki-basis-v1" in js
 assert "kst-ki-kursportal-v1" not in js
 assert "kst-ki-kursportal-v1" in (ROOT/"projekt/portal.js").read_text(encoding="utf-8")
-assert "kursseiten/basis-manifest.json" in (ROOT/"projekt/admin/admin.js").read_text(encoding="utf-8")
-assert "basis-manifest.json" in (ROOT/"admin-worker/src/index.mjs").read_text(encoding="utf-8")
+assert 'coursePath("kursseiten/")' in (ROOT/"projekt/admin/admin.js").read_text(encoding="utf-8")
+assert "profile.courseRoot" in (ROOT/"admin-worker/src/index.mjs").read_text(encoding="utf-8")
 assert "KI entdecken" in (base/"unterrichtsplan.html").read_text(encoding="utf-8")
 assert "Papagei" in (base/"index.html").read_text(encoding="utf-8")
 # The first-year image project must be runnable and restorable after deployment.

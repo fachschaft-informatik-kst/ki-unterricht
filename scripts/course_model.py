@@ -71,7 +71,7 @@ def load_course(root: Path = ROOT, manifest_path: str = "kursseiten/manifest.jso
                 or any(not isinstance(nav.get(k), str) for k in ("title", "label"))
                 or type(nav.get("order")) is not int):
             raise ValueError(f"Navigation ungültig: {view}")
-        path = root / "kursseiten" / view / "planung.json"
+        path = (root / manifest_path).parent / view / "planung.json"
         if section.get("teaching"):
             block = read_json(path)["lessons"]
             validate_lessons(block)

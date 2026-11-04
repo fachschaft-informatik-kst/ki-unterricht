@@ -1,0 +1,86 @@
+<details class="kapitel" id="basis-neuron-1" data-kurz="Ein Neuron macht aus mehreren Zahlen eine Ja/Nein-Entscheidung. Beispiel: Gehe ich schwimmen?" open>
+  <summary><span class="kapitel-nr">1</span>
+    <h2 class="kapitel-titel">Wozu ein Neuron? Ein kleiner Entscheider</h2>
+  </summary>
+  <div class="kapitel-body">
+    <p><strong>Ein Neuron ist ein kleiner Entscheider.</strong> Es bekommt mehrere Zahlen (Eingaben) und gibt genau eine Antwort aus: <strong>1 (Ja) oder 0 (Nein)</strong>. Mehr kann es nicht, und mehr braucht es nicht.</p>
+    <p><strong>Ein Beispiel aus dem Alltag: Gehe ich heute schwimmen?</strong> Drei Faktoren, je 1 (ja) oder 0 (nein): <strong>S</strong> Sonne scheint, <strong>F</strong> Freund:innen gehen mit, <strong>P</strong> Prüfung morgen. Sie wägen ab: Sonne und Freund:innen sprechen dafür, die Prüfung dagegen, und nicht alles ist gleich wichtig. Genau das macht ein Neuron mit Zahlen.</p>
+    <figure class="concept-figure">
+      <img alt="Ein Neuron als Entscheider: Die Eingaben Sonne 1, Freund:innen 0 und Prüfung 1 werden mit den Gewichten plus 2, plus 2 und minus 4 multipliziert, summiert und mit dem Bias minus 1 verrechnet. Das Ergebnis minus 3 liegt unter 0, die Ausgabe ist Nein." loading="lazy" src="grafiken/neuron_entscheider.svg"/>
+      <figcaption>Eine Situation durch das Neuron: 1·2 + 0·2 + 1·(−4) = −2, dazu der Bias −1 ergibt −3. Das ist kleiner als 0: Das Neuron sagt Nein, schwimmen fällt aus.</figcaption>
+    </figure>
+    <div class="table-scroll">
+      <table class="typen">
+        <thead>
+          <tr>
+            <th>Baustein</th>
+            <th>Im Beispiel</th>
+            <th>Bedeutung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Eingaben</th>
+            <td>S, F, P (je 1 oder 0)</td>
+            <td>Die Fakten der Situation</td>
+          </tr>
+          <tr>
+            <th>Gewichte</th>
+            <td>+2, +2, −4</td>
+            <td>Wie wichtig ist jeder Faktor? Ein negatives Gewicht spricht dagegen.</td>
+          </tr>
+          <tr>
+            <th>Summe</th>
+            <td>S·2 + F·2 + P·(−4)</td>
+            <td>Alle Gründe, gewichtet und zusammengezählt</td>
+          </tr>
+          <tr>
+            <th>Bias</th>
+            <td>−1</td>
+            <td>Grundhaltung: Wie leicht sage ich überhaupt Ja? Negativ heisst: Ich brauche gute Gründe.</td>
+          </tr>
+          <tr>
+            <th>Ausgabe</th>
+            <td>Ja (1) oder Nein (0)</td>
+            <td>Ab Summe + Bias ≥ 0 lautet die Antwort Ja</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Und in der KI?</strong> Auch dort stehen am Ende Ja/Nein-Entscheidungen. Der Unterschied zum Schwimmbad: Es sind nicht drei, sondern Tausende Eingaben, und die Gewichte schreibt niemand von Hand. Das Neuron <strong>lernt</strong> sie (Kapitel 4).</p>
+    <div class="table-scroll">
+      <table class="typen">
+        <thead>
+          <tr>
+            <th>Anwendung</th>
+            <th>Die Ja/Nein-Frage</th>
+            <th>Eingaben (Beispiele)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Spamfilter</th>
+            <td>Ist diese Mail Spam?</td>
+            <td>Vorkommen verdächtiger Wörter</td>
+          </tr>
+          <tr>
+            <th>Gesichtsentsperrung</th>
+            <td>Ist das die richtige Person?</td>
+            <td>Helligkeitswerte der Bildpunkte</td>
+          </tr>
+          <tr>
+            <th>Pflanzen-App</th>
+            <td>Ist das Art A?</td>
+            <td>Länge und Breite des Kronblatts</td>
+          </tr>
+          <tr>
+            <th>Ihr Bildprojekt</th>
+            <td>Gehört das Foto zu Klasse A?</td>
+            <td>1280 Merkmale aus dem Bild</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <label class="field answer"><span>Aufgabe: Erklären Sie in zwei bis drei Sätzen, wofür ein Neuron da ist und was Gewichte und Bias im Schwimmbad-Beispiel bedeuten. Was geschieht, wenn das Gewicht der Prüfung auf 0 gesetzt wird?</span><textarea data-basis-answer="basis-neuron-neuron_wozu" maxlength="10000" placeholder="Ein Neuron ist dafür da, … Die Gewichte … Der Bias …" rows="4"></textarea></label>
+  </div>
+</details>

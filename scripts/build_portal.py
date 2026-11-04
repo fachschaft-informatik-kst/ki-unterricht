@@ -50,10 +50,11 @@ def render_fragment(source: str, filename: Path) -> str:
     return re.sub(pattern, lambda m: MARKDOWN.render(m.group(1)), source, flags=re.S)
 
 
-def assemble() -> str:
-    manifest = json.loads((PAGES / "manifest.json").read_text(encoding="utf-8"))
+def assemble(pages: Path | None = None, manifest_path: str = "kursseiten/manifest.json", glossary_path: Path | None = None) -> str:
+    pages = PAGES if pages is None else pages
+    manifest = json.loads((pages / "manifest.json").read_text(encoding="utf-8"))
     sections = manifest["sections"]
-    course = load_course(ROOT)
+    course = load_course(ROOT, manifest_path)
     grouped = {s["id"]: [l for l in course["lessons"] if l["view"] == s["id"]] for s in sections}
     def nav_order(section):
         return grouped[section["id"]][0]["number"] if grouped[section["id"]] else (1000 + section["navigation"]["order"] if section["navigation"]["order"] >= 9 else -100 + section["navigation"]["order"])
@@ -72,13 +73,13 @@ def assemble() -> str:
     rendered = []
     for section in sections:
         view = section["id"]
-        folder = PAGES / view
+        folder = pages / view
         files = sorted(folder.glob("[0-9][0-9][0-9]-*.md"))
         if not files:
             raise ValueError(f"No content files in {folder}")
         parts = [render_fragment(path.read_text(encoding="utf-8"), path) for path in files]
         content = "".join(parts)
-        content = content.replace("<!-- GLOSSARY -->", render_glossary("vertieft"))
+        content = content.replace("<!-- GLOSSARY -->", render_glossary("vertieft", source=glossary_path))
         content = content.replace("<!-- OVERVIEW -->", '<div class="course-grid">' + "".join(overview) + "</div>")
         lessons = [l for l in course["lessons"] if l["view"] == view]
         if lessons and f"<!-- LESSONS:{view} -->" not in content:
@@ -103,6 +104,9 @@ def assemble() -> str:
 
 
 def build() -> None:
+    from sync_course_sources import sync
+    if (ROOT / "kurse").exists():
+        sync(ROOT)
     target = output(ROOT)
     if target.exists():
         shutil.rmtree(target)
@@ -115,7 +119,7 @@ def build() -> None:
     for path in (ROOT / "shared").glob("*"):
         shutil.copyfile(path, target / "admin" / path.name)
     shutil.copyfile(ROOT / "experimente/registry.json", target / "experiments.json")
-    (target / "index.html").write_text(assemble(), encoding="utf-8")
+    (target / "index.html").write_text(assemble(glossary_path=(ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json" if (ROOT / "kurse/bok/4-klasse/kursseiten/glossar.json").is_file() else None)), encoding="utf-8")
     (target / "kurs.json").write_text(json.dumps(load_course(ROOT), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     from build_solutions import build as build_solutions
     build_solutions()

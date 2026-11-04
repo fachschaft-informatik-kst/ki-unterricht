@@ -6,14 +6,19 @@ const path=require("node:path");
 const {chromium}=require("playwright");
 const ROOT=path.resolve(__dirname,"..");
 const files=[
-  "kursseiten/einstieg/000-einstieg.md",
-  "kursseiten/einstieg/010-einstieg-1.md",
-  "kursseiten/einstieg/030-einstieg-3.md",
-  "kursseiten/perzeptron/030-perzeptron-3.md",
-  "kursseiten/basis-neuron/030-perzeptron-3.md",
-  ...[1,4].flatMap(grade=>fs.readdirSync(path.join(ROOT,"kursseiten/irn-"+grade+"-kurs"))
-    .filter(name=>/^\d{3}-[^/]+\.md$/.test(name))
-    .map(name=>"kursseiten/irn-"+grade+"-kurs/"+name))
+  ...["einstieg/000-einstieg.md","einstieg/010-einstieg-1.md",
+    "einstieg/030-einstieg-3.md","perzeptron/030-perzeptron-3.md"]
+    .map(rel=>"kurse/bok/4-klasse/kursseiten/"+rel),
+  "kurse/bok/1-klasse/kursseiten/basis-neuron/030-perzeptron-3.md",
+  ...[1,4].flatMap(grade=>{
+    const base="kurse/irn/"+grade+"-klasse/kursseiten/";
+    const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,base+"manifest.json"),"utf8"));
+    return manifest.sections.flatMap(section=>{
+      const directory=path.join(ROOT,base,section.id);
+      return fs.readdirSync(directory).filter(name=>/^\d{3}-[^/]+\.md$/.test(name))
+        .map(name=>base+section.id+"/"+name);
+    });
+  })
 ];
 const server=http.createServer((req,res)=>{
   const location=new URL(req.url,"http://localhost").pathname;
@@ -42,9 +47,9 @@ const server=http.createServer((req,res)=>{
     await page.route("**/api/notebooks",route=>route.fulfill({json:{notebooks:[]}}));
     await page.route("**/api/chapters",route=>route.fulfill({json:{
       chapters:[...files.map(path=>({path,sha:"a".repeat(40)})),
-        {path:"kursseiten/einstieg/planung.json",sha:"a".repeat(40)},
-        {path:"kursseiten/einstieg/materialien.md",sha:"a".repeat(40)},
-        {path:"kursseiten/lernziele/000-inhalt.md",sha:"a".repeat(40)}]
+        {path:"kurse/bok/4-klasse/kursseiten/einstieg/planung.json",sha:"a".repeat(40)},
+        {path:"kurse/bok/4-klasse/kursseiten/einstieg/materialien.md",sha:"a".repeat(40)},
+        {path:"kurse/bok/4-klasse/kursseiten/lernziele/000-inhalt.md",sha:"a".repeat(40)}]
     }}));
     // Match query strings containing slashes too (glob * does not cross /).
     await page.route(/\/api\/file\?/,route=>{
@@ -95,14 +100,39 @@ const server=http.createServer((req,res)=>{
     assert.match(await page.locator("#courseThemePreview").innerText(),/IRN/);
     assert.match(await page.locator("#teacherSolutionsLink").getAttribute("href"),/irn\/1-klasse\/musterloesungen/);
     await page.locator("#editSolutions").click();
-    await page.locator("#path").filter({hasText:"lehrperson/irn-1/musterloesungen.md"}).waitFor();
+    await page.locator("#path").filter({hasText:"kurse/irn/1-klasse/lehrperson/musterloesungen.md"}).waitFor();
     await page.locator("#editSolutionFields").click();
-    await page.locator("#path").filter({hasText:"lehrperson/irn-1/musterloesungen-felder.md"}).waitFor();
+    await page.locator("#path").filter({hasText:"kurse/irn/1-klasse/lehrperson/musterloesungen-felder.md"}).waitFor();
     await page.locator("#editGlossary").click();
-    await page.locator("#path").filter({hasText:"lehrperson/irn-1/glossar.md"}).waitFor();
+    await page.locator("#path").filter({hasText:"kurse/irn/1-klasse/kursseiten/glossar.json"}).waitFor();
+
+    // The copied IRN courses must support the same four editor workflows:
+    // chapters, structured AVIVA, material cases and per-course glossary.
+    await page.locator("#section").selectOption("basis-neuron");
+    await page.locator("#chapters button").first().click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/1-klasse/kursseiten/basis-neuron/"));
+    await page.locator("#editPlan").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/1-klasse/kursseiten/basis-neuron/planung.json");
+    assert.equal(await page.locator("#formEditor").isVisible(),true);
+    await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/1-klasse/kursseiten/basis-neuron/materialien.md");
+    await page.locator("#courseSelect").selectOption("irn4");
+    await page.locator("#section").selectOption("einstieg");
+    await page.locator("#chapters button").first().click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/4-klasse/kursseiten/einstieg/"));
+    await page.locator("#editPlan").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/einstieg/planung.json");
+    assert.equal(await page.locator("#formEditor").isVisible(),true);
+    await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/einstieg/materialien.md");
+    await page.locator("#editGlossary").click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/glossar.json");
+    await page.locator("#courseSelect").selectOption("irn1");
+    await page.locator("#chapters button").first().waitFor({state:"visible"});
     await page.locator("#courseThemeColor").fill("#58358b");
     assert.equal(await page.locator("body").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#58358b");
     await page.locator("#chapters button").first().click();
+    await page.waitForFunction(() => document.querySelector("#preview")?.srcdoc.includes("--accent:#58358b"), null, {timeout:5000});
     assert.match(await page.locator("#preview").getAttribute("srcdoc"),/--accent:#58358b/);
     await page.locator("#courseThemeStage").click();
     assert.match(await page.locator("#staged").innerText(),/shared\/course-sites\.json/);
@@ -159,7 +189,7 @@ const server=http.createServer((req,res)=>{
     // Materials are Markdown documents with tables; they must have a usable
     // preview and update without the manual refresh button.
     await page.locator("#editMaterials").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/materialien.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/kursseiten/einstieg/materialien.md");
     const materialFrame=page.frameLocator("#preview");
     await materialFrame.locator("table").first().waitFor();
     assert.equal(await materialFrame.locator("table th").count()>=2,true);
@@ -177,13 +207,13 @@ const server=http.createServer((req,res)=>{
     await materialFrame.locator(".callout.warn").waitFor();
     assert.match(await page.locator("#source").inputValue(),/callout warn/);
     // Restore the original un-staged content before changing files.
-    await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/materialien.md"),"utf8"));
+    await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kurse/bok/4-klasse/kursseiten/einstieg/materialien.md"),"utf8"));
     await materialFrame.locator("table").first().waitFor();
 
     // Every navigation must replace the iframe document, even after viewing
     // AVIVA plans or material files. No stale material preview may remain.
     await page.locator("#editPlan").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/planung.json");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/kursseiten/einstieg/planung.json");
     assert.equal(await page.locator("#preview").isVisible(),true);
     await page.frameLocator("#preview").locator("h2").filter({hasText:"AVIVA"}).waitFor();
     assert.equal(await page.locator("#splitEditor").evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(" ").length),3,
@@ -194,7 +224,7 @@ const server=http.createServer((req,res)=>{
     await page.frameLocator("#preview").locator(".phase-table tbody tr").first().waitFor();
     // Lesson text and AVIVA steps can change through the editor; match the
     // current source rather than a historical fixed row count.
-    const plannedSteps=JSON.parse(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/planung.json"),"utf8"))
+    const plannedSteps=JSON.parse(fs.readFileSync(path.join(ROOT,"kurse/bok/4-klasse/kursseiten/einstieg/planung.json"),"utf8"))
       .lessons.flatMap(lesson=>lesson.phases.flatMap(phase=>phase.schritte)).length;
     assert.equal(await page.frameLocator("#preview").locator(".phase-table tbody tr").count(),plannedSteps,
       "AVIVA preview must render one coloured table row for each teaching step, not only a row per phase");
@@ -427,7 +457,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await preview.locator(".kapitel-nr").first().textContent(),"3a");
     assert.equal(await preview.locator(".kapitel-titel").first().textContent(),"Testtitel");
     // Restore the original source without staging a change.
-    await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kursseiten/einstieg/030-einstieg-3.md"),"utf8"));
+    await page.locator("#source").fill(fs.readFileSync(path.join(ROOT,"kurse/bok/4-klasse/kursseiten/einstieg/030-einstieg-3.md"),"utf8"));
 
     await page.locator("#editPlan").click();
     // UI operations fetch their files asynchronously; click() does not await handlers.
@@ -442,7 +472,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#toggleChanges").click();
     assert.equal(await page.locator("#publish").isEnabled(),true);
     assert.match(await page.locator("#staged .staged-item").first().textContent(),/planung.json/);
-    const planDiff=page.locator('#staged details[data-diff-path="kursseiten/einstieg/planung.json"]');
+    const planDiff=page.locator('#staged details[data-diff-path="kurse/bok/4-klasse/kursseiten/einstieg/planung.json"]');
     assert.equal(await page.locator("#diffControls").isVisible(),true);
     assert.equal(await planDiff.getAttribute("open"),"",
       "Diffs for small changesets should open automatically");
@@ -516,16 +546,16 @@ const server=http.createServer((req,res)=>{
     assert.ok(submitted);
     const names=submitted.changes.map(c=>c.path).sort();
     assert.deepEqual(names.filter(n=>!n.startsWith("projekt/grafiken/uploads/")),[
-      "kursseiten/einstieg/planung.json",
-      "kursseiten/manifest.json",
-      "kursseiten/vertiefung-ki-im-alltag/010-einstieg-und-auftrag.md",
-      "kursseiten/vertiefung-ki-im-alltag/materialien.md",
-      "kursseiten/vertiefung-ki-im-alltag/planung.json"
+      "kurse/bok/4-klasse/kursseiten/einstieg/planung.json",
+      "kurse/bok/4-klasse/kursseiten/manifest.json",
+      "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/010-einstieg-und-auftrag.md",
+      "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/materialien.md",
+      "kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/planung.json"
     ]);
     assert.equal(names.filter(n=>/^projekt\/grafiken\/uploads\/test-[a-f0-9]{8}\.png$/.test(n)).length,1);
-    const initial=JSON.parse(submitted.changes.find(c=>c.path==="kursseiten/einstieg/planung.json").content);
+    const initial=JSON.parse(submitted.changes.find(c=>c.path==="kurse/bok/4-klasse/kursseiten/einstieg/planung.json").content);
     assert.equal(initial.lessons[0].title,"Was ist KI? – Überarbeitet");
-    const updated=JSON.parse(submitted.changes.find(c=>c.path==="kursseiten/vertiefung-ki-im-alltag/planung.json").content);
+    const updated=JSON.parse(submitted.changes.find(c=>c.path==="kurse/bok/4-klasse/kursseiten/vertiefung-ki-im-alltag/planung.json").content);
     assert.equal(updated.lessons.length,1);
     assert.equal(updated.lessons[0].view,"vertiefung-ki-im-alltag");
     assert.equal(updated.lessons[0].phases.reduce((n,p)=>n+p.minutes,0),90);
@@ -538,7 +568,7 @@ const server=http.createServer((req,res)=>{
     // all staged edits. It must never masquerade as "Gateway not installed".
     await page.locator("#section").selectOption("einstieg");
     await page.locator("#chapters button").filter({hasText:"010-einstieg-1"}).click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/010-einstieg-1.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/kursseiten/einstieg/010-einstieg-1.md");
     await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n<!-- regression test -->");
     await page.locator("#stage").click();
     publishFailure=true;
@@ -552,7 +582,7 @@ const server=http.createServer((req,res)=>{
     // Non-teaching learning objectives are also editable using the same source editor.
     await page.locator("#section").selectOption("lernziele");
     await page.locator("#chapters button").first().click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/lernziele/000-inhalt.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/kursseiten/lernziele/000-inhalt.md");
     assert.equal(await page.locator("#source").isVisible(),true);
     assert.equal(await page.locator("#preview").isVisible(),true);
 
@@ -562,7 +592,7 @@ const server=http.createServer((req,res)=>{
     await page.locator('#section option[value="basis-neuron"]').waitFor({state:"attached"});
     await page.locator("#section").selectOption("basis-neuron");
     await page.locator("#chapters button").filter({hasText:"030-perzeptron-3"}).click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/030-perzeptron-3.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/kursseiten/basis-neuron/030-perzeptron-3.md");
     // The block preview must also render in the blue course style, not just
     // the main editor iframe.
     await page.locator("#blockPicker").click();
@@ -596,13 +626,13 @@ const server=http.createServer((req,res)=>{
     // Course-specific AVIVA and materials use the same split layout and
     // cannot navigate into fourth-year files.
     await page.locator("#editPlan").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/planung.json");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/kursseiten/basis-neuron/planung.json");
     assert.equal(await page.locator("#formEditor").isVisible(),true);
     assert.equal(await page.locator("#splitDivider").isVisible(),true);
     assert.match(await page.locator("#planCourseTag").textContent(),/1. Klasse/);
     assert.equal(await basisPreview.locator("html").evaluate(el=>getComputedStyle(el).getPropertyValue("--accent").trim()),"#3653a3");
     await page.locator("#editMaterials").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/materialien.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/kursseiten/basis-neuron/materialien.md");
     assert.equal(await page.locator("#codeEditor").isVisible(),true);
     assert.equal(await page.locator("#formEditor").isVisible(),false);
     assert.equal(await page.locator("#splitDivider").isVisible(),true);
@@ -613,7 +643,7 @@ const server=http.createServer((req,res)=>{
     await page.locator('#section option[value="perzeptron"]').waitFor({state:"attached"});
     await page.locator("#section").selectOption("perzeptron");
     await page.locator("#chapters button").filter({hasText:"030-perzeptron-3"}).click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/perzeptron/030-perzeptron-3.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/kursseiten/perzeptron/030-perzeptron-3.md");
     const fourthPreview=page.frameLocator("#preview");
     await fourthPreview.locator("table").first().waitFor();
     const fourthAccent=await fourthPreview.locator("html").evaluate(el=>
@@ -625,7 +655,7 @@ const server=http.createServer((req,res)=>{
     await page.reload();
     await page.locator("#courseSelect").selectOption("basis");
     await page.locator("#editGlossary").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/glossar.json");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/kursseiten/glossar.json");
     assert.equal(await page.locator("#glossaryEditor").isVisible(),true);
     assert.equal(await page.locator("#formEditor").isVisible(),true);
     assert.equal(await page.locator("#splitDivider").isVisible(),true);
@@ -645,8 +675,19 @@ const server=http.createServer((req,res)=>{
     await page.locator("#stage").click();
     assert.equal(await page.locator("#pendingCount").textContent(),"1");
 
-    // After changing the course, only advanced fields can be edited; the
-    // previously staged first-year values remain in the shared JSON payload.
+    // Publish the first-year glossary separately: one course per PR.
+    publishFailure=false; // The earlier simulated HTTP 502 must not carry over.
+    await page.locator("#toggleChanges").click();
+    await page.locator("#publish").click();
+    await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
+    assert.equal(submitted.changes.length,1);
+    assert.equal(submitted.changes[0].path,"kurse/bok/1-klasse/kursseiten/glossar.json");
+    const basisGlossary=JSON.parse(submitted.changes[0].content);
+    assert.equal(basisGlossary.begriffe.find(t=>t.id==="token").basis,
+      "Ein Token ist ein Wort oder ein Stück davon.");
+
+    // The fourth-year glossary is a DIFFERENT file and must not inherit edits.
+
     await page.locator("#courseSelect").selectOption("vertiefung");
     await page.locator('#section option[value="einstieg"]').waitFor({state:"attached"});
     await page.locator("#editGlossary").click();
@@ -672,19 +713,22 @@ const server=http.createServer((req,res)=>{
     await page.locator("#glossaryQuestion").fill("Wie kann man das technisch erklären?");
     await page.locator("#glossaryAnswer").fill("Mit einem fachlich korrekten Beispiel.");
     await page.locator("#stage").click();
-    assert((await page.locator("#staged").innerText()).includes("kursseiten/glossar.json"));
+    assert((await page.locator("#staged").innerText()).includes("kurse/bok/4-klasse/kursseiten/glossar.json"));
     publishFailure=false;
     await page.locator("#toggleChanges").click();
+    const secondPublish=page.waitForResponse(response=>
+      response.url().includes("/api/publish")&&response.request().method()==="POST");
     await page.locator("#publish").click();
-    await page.waitForFunction(()=>document.querySelector("#published")?.textContent?.includes("#123"));
+    await secondPublish;
+    await page.waitForFunction(()=>document.querySelector("#pendingCount")?.textContent==="0");
     assert.equal(submitted.changes.length,1);
-    assert.equal(submitted.changes[0].path,"kursseiten/glossar.json");
+    assert.equal(submitted.changes[0].path,"kurse/bok/4-klasse/kursseiten/glossar.json");
     const submittedGlossary=JSON.parse(submitted.changes[0].content);
     assert.equal(submittedGlossary.begriffe.length,30);
     const token=submittedGlossary.begriffe.find(t=>t.id==="token");
-    assert.equal(token.basis,"Ein Token ist ein Wort oder ein Stück davon.");
+    assert.notEqual(token.basis,"Ein Token ist ein Wort oder ein Stück davon.");
     assert.equal(token.vertieft,"Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");
-    assert.match(token.basisBeispiel,/ersten Klasse/);
+    assert.doesNotMatch(token.basisBeispiel||"",/ersten Klasse/);
     assert.match(token.vertieftBeispiel,/Tokenfolgen/);
     assert(submittedGlossary.begriffe.some(t=>t.id==="testglossarbegriff"));
 
@@ -693,7 +737,7 @@ const server=http.createServer((req,res)=>{
     await page.reload();
     await page.locator("#section").selectOption("einstieg");
     await page.locator("#chapters button").filter({hasText:"030-einstieg-3"}).click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/030-einstieg-3.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/kursseiten/einstieg/030-einstieg-3.md");
     await page.locator("#blockPicker").click();
     await page.locator('[data-block="notebook"]').hover();
     await page.locator("#blockPreview .ki-notebook-block").waitFor();
@@ -703,7 +747,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#insertExistingNotebook").isDisabled(),true);
     await page.locator("#notebookNewTitle").fill("Mein Python Labor");
     await page.locator("#createChapterNotebook").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/lesson_einstieg_mein_python_labor.ipynb");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb");
     assert.equal(await page.locator("#notebookEditor").isVisible(),true);
     assert.equal(await page.locator("#notebookBack").isVisible(),true);
     await page.frameLocator("#notebookRuntime").locator("#notebook-code").waitFor({state:"visible"});
@@ -718,7 +762,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#notebookApplyCells").click();
     assert.match(await page.locator("#source").inputValue(),/Neues Python-Experiment/);
     await page.locator("#toggleChanges").click();
-    const updatedDiff=page.locator('#staged details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
+    const updatedDiff=page.locator('#staged details[data-diff-path="kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb"]');
     if(!(await updatedDiff.evaluate(el=>el.open)))await updatedDiff.locator("summary").click();
     await updatedDiff.locator(".diff-add").first().waitFor();
     assert.match(await updatedDiff.locator(".diff-viewport").textContent(),/Neues Python-Experiment/);
@@ -732,7 +776,7 @@ const server=http.createServer((req,res)=>{
       "Undeployed notebook must start from a trusted template to support live editing");
     assert.equal(await page.locator("#pendingCount").textContent(),"2");
     await page.locator("#toggleChanges").click();
-    const newNotebookDiff=page.locator('#staged details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
+    const newNotebookDiff=page.locator('#staged details[data-diff-path="kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb"]');
     if(!(await newNotebookDiff.evaluate(el=>el.open)))await newNotebookDiff.locator("summary").click();
     await newNotebookDiff.locator(".diff-add").first().waitFor();
     assert.match(await newNotebookDiff.locator(".diff-summary").textContent(),/Neue Datei/);
@@ -740,14 +784,14 @@ const server=http.createServer((req,res)=>{
     assert.match(await newNotebookDiff.locator(".diff-viewport").textContent(),/Neues Python-Experiment/);
     // Treat HTML in diffs as literal source, never as executable markup.
     await page.evaluate(()=>{
-      const details=document.querySelector('details[data-diff-path="content/lesson_einstieg_mein_python_labor.ipynb"]');
+      const details=document.querySelector('details[data-diff-path="kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb"]');
       if(details)window.__diffOpenBefore=details.open;
     });
     await page.locator("#closeChanges").click();
 
     assert.match(await page.locator("#staged").innerText(),/lesson_einstieg_mein_python_labor.ipynb/);
     await page.locator("#notebookBack").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/einstieg/030-einstieg-3.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/kursseiten/einstieg/030-einstieg-3.md");
     assert.match(await page.locator("#source").inputValue(),/data-notebook="content\/lesson_einstieg_mein_python_labor.ipynb"/);
     assert.equal(await page.locator("#chapterNotebookLinks button").count(),1);
     const notebookCard=page.frameLocator("#preview").locator(".ki-notebook-block");
@@ -770,22 +814,25 @@ const server=http.createServer((req,res)=>{
     assert.equal(new URL(await notebookCard.locator("a.ki-notebook-direct").getAttribute("href")).searchParams.get("path"),
       "portal/lesson_einstieg_mein_python_labor.ipynb");
     await page.locator("#chapterNotebookLinks button").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/lesson_einstieg_mein_python_labor.ipynb");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb");
     await page.locator("#notebookBack").click();
     await page.locator("#addNotebook").click();
-    await page.locator("#notebookExisting").selectOption("content/lesson_einstieg_mein_python_labor.ipynb");
+    await page.locator("#notebookExisting").selectOption("kurse/bok/4-klasse/content/lesson_einstieg_mein_python_labor.ipynb");
     assert.equal(await page.locator("#insertExistingNotebook").isEnabled(),true);
     await page.locator("#closeNotebookPanel").click();
+    // Discard the BOK4 test draft before staging an independent BOK1 notebook.
+    // The worker intentionally disallows mixing teachers/classes in one PR.
+    await page.reload();
 
     // The first-year course uses a different notebook prefix and blue theme.
     await page.locator("#courseSelect").selectOption("basis");
     await page.locator("#section").selectOption("basis-neuron");
     await page.locator("#chapters button").filter({hasText:"030-perzeptron-3"}).click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kursseiten/basis-neuron/030-perzeptron-3.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/kursseiten/basis-neuron/030-perzeptron-3.md");
     await page.locator("#addNotebook").click();
     await page.locator("#notebookNewTitle").fill("Meine Neuron Übung");
     await page.locator("#createChapterNotebook").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="content/basis_lesson_basis_neuron_meine_neuron_uebung.ipynb");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/content/basis_lesson_basis_neuron_meine_neuron_uebung.ipynb");
     assert.match(await page.locator("#notebookRuntime").getAttribute("src"),/portal%2Fbasis_neuron.ipynb/);
     await page.frameLocator("#notebookRuntime").locator("#notebook-code").waitFor({state:"visible"});
     await page.waitForFunction(()=>document.querySelector("#notebookRuntimeStatus")?.textContent?.includes("Bereit:"));

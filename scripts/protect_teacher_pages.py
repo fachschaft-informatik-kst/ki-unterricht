@@ -6,6 +6,7 @@ the public GitHub repository (including history) still exposes authored files.
 """
 from __future__ import annotations
 import re
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -35,6 +36,9 @@ def protect(site: Path) -> None:
         "bok/1-klasse": "bok/1-klasse",
         "bok/4-klasse": "bok/4-klasse",
     }
+    registry = json.loads((Path(__file__).resolve().parents[1] / "shared/course-sites.json").read_text(encoding="utf-8"))
+    for course in registry["courses"]:
+        course_roots[course["slug"]] = course["slug"]
     for relative, slug in course_roots.items():
         root = site / relative
         if not root.is_dir():

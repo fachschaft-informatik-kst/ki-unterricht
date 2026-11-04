@@ -9,7 +9,7 @@ import nbformat
 from bs4 import BeautifulSoup
 root=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(root/'scripts'))
-from build_portal_notebooks import ITEMS
+from build_portal_notebooks import REGISTERED as ITEMS
 from build_course import PHASES
 
 lessons=json.loads((root/'_build/site/projekt/kurs.json').read_text())['lessons']

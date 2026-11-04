@@ -1,0 +1,22 @@
+{
+  "basedOn": "bok/4-klasse",
+  "class": 4,
+  "originalManifest": "kursseiten/manifest.json",
+  "sections": [
+    "start",
+    "lernziele",
+    "projekt",
+    "fremdmodell",
+    "bewertung",
+    "einstieg",
+    "lernarten",
+    "perzeptron",
+    "netze",
+    "journal",
+    "sprache",
+    "gesellschaft",
+    "sicherung",
+    "glossar"
+  ],
+  "source": "BOK snapshot"
+}

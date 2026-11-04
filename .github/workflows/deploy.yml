@@ -68,7 +68,7 @@ jobs:
                 site=true
                 worker=true
                 ;;
-              kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|lehrperson/*/*.md|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
+              kurse/*/*/*|kurse/*/*/*/*|kurse/*/*/*/*/*|templates/*/*|kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|lehrperson/*/*.md|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
                 # Editor-written course sources and teacher notes never alter
                 # the notebook runtime. Still rebuild and publish the site.
                 site=true
@@ -190,6 +190,8 @@ jobs:
           node tests/check_course_model.mjs
           node tests/check_glossary_model.mjs
           python tests/check_course_registry.py
+          python tests/check_course_snapshots.py
+          python tests/check_preview_watch.py
       - name: Install Playwright test runner
         if: steps.scope.outputs.site_changed == 'true'
         id: playwright
@@ -223,6 +225,7 @@ jobs:
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_admin_form.cjs
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_teacher_browser.cjs
+          NODE_PATH=/tmp/ki-browser/node_modules node tests/check_editor_course_matrix.cjs
       - name: Check simplified teaching project
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
@@ -234,10 +237,12 @@ jobs:
         if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 4
         run: |
+          python scripts/sync_course_sources.py
           python scripts/build_portal.py
           python scripts/build_course.py
           python scripts/build_basis.py
           python scripts/build_portal_notebooks.py
+          python tests/check_notebook_isolation.py
       - name: Validate publishable course structure and editor parity
         if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 5
@@ -303,6 +308,7 @@ jobs:
           test -f dist/jupyter-lite.json
           python scripts/copy_portal.py dist
           python tests/check_course_routes.py
+          python tests/check_published_links.py
           test -f dist/projekt/admin/index.html
           test -f dist/projekt/admin/admin.js
           test -f dist/projekt/admin/plan-editor.js

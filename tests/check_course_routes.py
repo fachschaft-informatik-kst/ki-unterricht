@@ -21,6 +21,7 @@ assert expected <= {row["slug"] for row in manifest["courses"]}
 overview = (dist / "kurse.html").read_text(encoding="utf-8")
 for slug in {row["slug"] for row in manifest["courses"]}:
     assert (dist / slug / "index.html").is_file(), slug
+    assert not (dist / slug / "admin").exists(), "Admin editor must not be copied into public course: "+slug
     assert f'href="{slug}/"' in overview
 for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
     generated = (dist / slug / "index.html").read_text(encoding="utf-8")
@@ -43,8 +44,27 @@ assert (dist / "lab/index.html").is_file(), "Shared notebook runtime must remain
 assert (dist / "projekt/admin/index.html").is_file(), "Existing Cloudflare Worker editor must remain available"
 for slug in ("irn/1-klasse", "irn/4-klasse"):
     page = (dist / slug / "index.html").read_text(encoding="utf-8")
-    assert "in Vorbereitung" in page
-    assert "BOK" not in page
+    assert "in Vorbereitung" not in page
+    assert "data-course-theme" in page
+    assert "Jupyter" in page
+    assert "lesson-plan" in page
+    assert "portal/" + slug + "/" in page, "IRN notebooks need separate paths"
+    for private in ("unterrichtsplan.html", "materialien.html", "kurs.json",
+                    "musterloesungen/index.html"):
+        assert not (dist / slug / private).exists(), "Public teacher-only file: "+slug+"/"+private
+    assert "kst-ki-admin.kevin-bohn.workers.dev/teacher/" in page
+    if slug.endswith("/4-klasse"):
+        progress=(dist/slug/"progress.js").read_text(encoding="utf-8")
+        assert "kst-ki-irn-4-klasse-progress-v1" in progress
+        assert "kst-ki-projekt-2026-v1" not in progress
+        portal=(dist/slug/"portal.js").read_text(encoding="utf-8")
+        assert "course:'irn/4-klasse'" in portal
+        assert "raw.course!=='irn/4-klasse'" in portal
+        assert "'ki-irn-4-klasse-seitenstand-v1'" in portal
+    else:
+        persistence=(dist/slug/"persistence.js").read_text(encoding="utf-8")
+        assert "kst-ki-irn-1-klasse-notebooks-v1" in persistence
+        assert "kst-ki-basis-notebooks-v1" not in persistence
 assert 'url=kurse.html' in (dist / "index.html").read_text(encoding="utf-8")
 print("PASS 4 teacher/grade URLs, BOK course assets and legacy links, IRN placeholders")
 

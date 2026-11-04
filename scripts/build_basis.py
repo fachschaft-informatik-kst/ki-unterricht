@@ -17,10 +17,10 @@ SOURCE = ROOT / "basis"
 OUT = ROOT / "_build" / "site" / "basis"
 
 
-def assemble() -> tuple[str, list[dict]]:
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+def assemble(manifest_path: str = "kursseiten/basis-manifest.json", glossary_path: Path | None = None) -> tuple[str, list[dict]]:
+    manifest = json.loads((ROOT / manifest_path).read_text(encoding="utf-8"))
     sections = manifest["sections"]
-    course = load_course(ROOT, "kursseiten/basis-manifest.json")
+    course = load_course(ROOT, manifest_path)
     lessons = course["lessons"]
     by_view = {s["id"]: [lesson for lesson in lessons if lesson["view"] == s["id"]] for s in sections}
     cards = []
@@ -39,12 +39,12 @@ def assemble() -> tuple[str, list[dict]]:
     nav = []
     for section in sorted(sections, key=lambda s: s["navigation"]["order"]):
         ident = section["id"]
-        folder = ROOT / "kursseiten" / ident
+        folder = (ROOT / manifest_path).parent / ident
         sources = sorted(folder.glob("[0-9][0-9][0-9]-*.md"))
         if not sources:
             raise ValueError(f"Keine Kapiteldatei: {folder}")
         content = "".join(render_fragment(file.read_text(encoding="utf-8"), file) for file in sources)
-        content = content.replace("<!-- GLOSSARY -->", render_glossary("basis"))
+        content = content.replace("<!-- GLOSSARY -->", render_glossary("basis", source=glossary_path))
         content = content.replace("<!-- OVERVIEW -->", '<div class="course-grid">' + "".join(cards) + "</div>")
         start = f"<!-- LESSONS:{ident} -->"
         finish = f"<!-- /LESSONS:{ident} -->"
@@ -69,6 +69,9 @@ def assemble() -> tuple[str, list[dict]]:
 
 
 def build():
+    from sync_course_sources import sync
+    if (ROOT / "kurse").exists():
+        sync(ROOT)
     OUT.mkdir(parents=True, exist_ok=True)
     template = (ROOT / "projekt" / "index.template.html").read_text(encoding="utf-8")
     match = re.search(r"<style>(.*?)</style>", template, re.S)
@@ -84,7 +87,7 @@ def build():
         (OUT / filename).write_bytes((ROOT / "projekt" / filename).read_bytes())
     for filename in ("basis.css", "basis.js", "persistence.js"):
         (OUT / filename).write_bytes((SOURCE / filename).read_bytes())
-    page, lessons = assemble()
+    page, lessons = assemble(glossary_path=(ROOT / "kurse/bok/1-klasse/kursseiten/glossar.json" if (ROOT / "kurse/bok/1-klasse/kursseiten/glossar.json").is_file() else None))
     (OUT / "index.html").write_text(page, encoding="utf-8")
     (OUT / "kurs.json").write_text(json.dumps({"course": "basis", "lessons": lessons}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     planning = ['<!doctype html><html lang="de-CH"><meta charset="utf-8"><title>Basis-Kurs · Unterrichtsplanung</title>',

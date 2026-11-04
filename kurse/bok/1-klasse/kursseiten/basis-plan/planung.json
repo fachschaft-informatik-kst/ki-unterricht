@@ -1,0 +1,113 @@
+{
+  "lessons": [
+    {
+      "id": "b07",
+      "view": "basis-plan",
+      "title": "Bildprojekt II: Buchstaben durch Transfer Learning",
+      "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
+      "goal": "Die eingefrorene Merkmalschicht eines Ziffernnetzes mit einem neuen Ausgabekopf für A/B verwenden und die Veränderung sachlich beurteilen.",
+      "question": "Wie kann ein vortrainiertes Netz neue Bildklassen unterscheiden?",
+      "motivation": "Selbstständig forschen und eigene Entscheidungen begründen – mit klaren Meilensteinen statt Schritt-für-Schritt-Lösung.",
+      "product": "Ausgeführtes Notebook mit neuem A/B-Kopf und Erklärung, welche Schicht übernommen wurde.",
+      "zeit": "90 Minuten: A/B-Transfer-Learning im Unterricht. Vorbereitung für DL7 wahlweise mit bereitgestellten synthetischen Übungsdaten (Standard) oder freiwillig eigenen Fotostudio-Daten; keine Foto-Hausaufgabe voraussetzen.",
+      "order": 60,
+      "phases": [
+        {
+          "phase": "Ankommen",
+          "titel": "SOL 1: eigene Frage und Plan",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Zwei Buchstabenbilder A und B zeigen: Das Ziffernnetz hat gestern Ziffern ausgegeben. Was müsste sich ändern?"
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Vorwissen aktivieren",
+          "titel": "Projektstatus abstimmen",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 8,
+              "text": "Ziffernklassen und gelernte Bildmerkmale aus DL 5 wiederholen; Vorhersage zur Wirkung eines neuen Ausgabekopfs formulieren."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Informieren",
+          "titel": "Kriterien nutzen",
+          "minutes": 15,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Lehrperson",
+              "min": 13,
+              "text": "Transfer Learning vereinfacht erklären: Gelernte Merkmale weiterverwenden, alten Ziffernkopf durch A/B-Kopf ersetzen, nur neuen Kopf trainieren; Trainings- und Testbilder trennen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Verarbeiten",
+          "titel": "Selbstständig arbeiten",
+          "minutes": 45,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 43,
+              "text": "Merkmalsübertragung erklären und den A/B-Kopf im Notebook trainieren (25 Min); neue A/B-Testbilder auswerten (10 Min); Grenzen und Unterschied zwischen Ziffern- und Buchstabenausgaben erläutern (8 Min)."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        },
+        {
+          "phase": "Auswerten",
+          "titel": "Erkenntnisse sichern",
+          "minutes": 10,
+          "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 8,
+              "text": "Sichern: Was blieb eingefroren, was wurde neu trainiert? Ausblick: In DL 7 verwenden wir MobileNet mit den vorbereiteten synthetischen Übungsdaten (Standard) oder freiwillig eigenen Gegenstandsfotos. Niemand muss zuhause 80 Fotos aufnehmen."
+            },
+            {
+              "art": "Ergebnis",
+              "wer": "Ergebnis",
+              "min": 2,
+              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+## Doppellektion 01
+
+### Saugroboter für den Einstieg
+
+| Roboter A | Roboter B |
+|---|---|
+| Fährt nach einem festgelegten Fahrmuster. | Erstellt eine Karte und plant seine Route. |
+| **Frage:** Welche Regeln sind vorgegeben? | **Frage:** Beweist eine Karte bereits maschinelles Lernen? |
+
+
+
+
+
+
+### Direkt öffnen
+
+- [Kurskapitel «Was ist KI?» mit den Kursgrafiken](index.html#einstieg)
+- [Regeln versus Daten](index.html#einstieg-1) · [Begriffe einordnen](index.html#einstieg-2)
+- [Robotergesetze und Fall «Schulweg»](index.html#einstieg-5)
+
+**Ankommen:** Zwei Saugroboter zuerst **einzeln**, dann im **Tandem** vergleichen. **Vorwissen:** Katze/Hund-Regeln im Tandem und kurze gemeinsame Sicherung. **Verarbeiten:** Beim Fall «Schulweg» zuerst allein entscheiden, dann Argumente austauschen.
+

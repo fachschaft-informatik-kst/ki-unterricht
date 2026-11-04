@@ -1,0 +1,174 @@
+{
+  "version": 2,
+  "course": "basis",
+  "title": "KI entdecken · 1. Kurzgymnasium",
+  "sections": [
+    {
+      "id": "basis-start",
+      "class": "hero",
+      "navigation": {
+        "order": 0,
+        "label": "00",
+        "title": "Übersicht"
+      }
+    },
+    {
+      "id": "basis-lernziele",
+      "class": "section",
+      "navigation": {
+        "order": 1,
+        "label": "◎",
+        "title": "Lernziele"
+      }
+    },
+    {
+      "id": "basis-ki",
+      "class": "section",
+      "navigation": {
+        "order": 2,
+        "label": "01",
+        "title": "Was ist KI?"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Was ist KI?",
+        "summary": "Begriffe · Regeln · Fallbeispiele"
+      }
+    },
+    {
+      "id": "basis-lernen",
+      "class": "section",
+      "navigation": {
+        "order": 3,
+        "label": "02",
+        "title": "Wie lernt KI?"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Wie lernt KI?",
+        "summary": "Lernarten · Memory · Beobachtungen"
+      }
+    },
+    {
+      "id": "basis-neuron",
+      "class": "section",
+      "teaching": true,
+      "overview": {
+        "title": "Ein Neuron",
+        "summary": "Schwimmbad · Gewichte und Bias · Lernregel"
+      },
+      "navigation": {
+        "order": 4,
+        "label": "03",
+        "title": "Ein Neuron"
+      }
+    },
+    {
+      "id": "basis-netze",
+      "class": "section",
+      "teaching": true,
+      "overview": {
+        "title": "Neuronale Netze",
+        "summary": "XOR · Trennlinie · Zwischenschicht · Training"
+      },
+      "navigation": {
+        "order": 5,
+        "label": "04",
+        "title": "Neuronale Netze"
+      }
+    },
+    {
+      "id": "basis-daten",
+      "class": "section",
+      "navigation": {
+        "order": 6,
+        "label": "05",
+        "title": "Ziffern und Buchstaben"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Ziffern und Buchstaben",
+        "summary": "Ziffernnetz · Ausgabeklassen · Grenzen"
+      }
+    },
+    {
+      "id": "basis-plan",
+      "class": "section",
+      "navigation": {
+        "order": 7,
+        "label": "06",
+        "title": "Buchstaben lernen"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Buchstaben lernen",
+        "summary": "Neuer A/B-Kopf · Transfer Learning"
+      }
+    },
+    {
+      "id": "basis-training",
+      "class": "section",
+      "navigation": {
+        "order": 8,
+        "label": "07",
+        "title": "Eigene Bildklassen"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Eigene Fotoklassen",
+        "summary": "Fotostudio · MobileNet · Vergleich A/B"
+      }
+    },
+    {
+      "id": "basis-abschluss",
+      "class": "section",
+      "navigation": {
+        "order": 9,
+        "label": "08",
+        "title": "Projektabschluss und Fachgespräche"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Projektabschluss und Fachgespräche",
+        "summary": "Individuell erklären · benoteter Nachweis"
+      }
+    },
+    {
+      "id": "basis-sprache",
+      "class": "section",
+      "navigation": {
+        "order": 10,
+        "label": "09",
+        "title": "Sprachmodelle"
+      },
+      "teaching": true,
+      "overview": {
+        "title": "Sprachmodelle",
+        "summary": "Kontext · Tokens · Faktenprüfung"
+      }
+    },
+    {
+      "id": "basis-gesellschaft",
+      "class": "section",
+      "teaching": true,
+      "overview": {
+        "title": "KI und Gesellschaft",
+        "summary": "Folgen · Fairness · begründetes Urteil"
+      },
+      "navigation": {
+        "order": 11,
+        "label": "10",
+        "title": "KI und Gesellschaft"
+      }
+    },
+    {
+      "id": "basis-glossar",
+      "class": "section",
+      "navigation": {
+        "order": 12,
+        "label": "A–Z",
+        "title": "Glossar"
+      }
+    }
+  ]
+}

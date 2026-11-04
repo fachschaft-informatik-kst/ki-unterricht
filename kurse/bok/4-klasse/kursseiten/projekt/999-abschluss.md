@@ -1,0 +1,3 @@
+<div aria-hidden="true" hidden="">
+  <textarea data-note="topic"></textarea><textarea data-note="data"></textarea><textarea data-note="question"></textarea>
+</div>
