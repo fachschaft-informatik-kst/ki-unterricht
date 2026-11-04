@@ -13,9 +13,14 @@ const allowed = new Set([
   'ki_projekt/ki_tandemprojekt.ipynb',
   'basis_neuron.ipynb', 'basis_netze.ipynb', 'basis_bildmodell.ipynb', 'basis_fotoprojekt.ipynb'
 ]);
-for (const path of [...allowed]) allowed.add('portal/' + path.split('/').pop());
-const lessonNotebook = path => /^portal\/(?:basis_)?lesson_[a-z0-9_]+\.ipynb$/.test(path);
-const isAllowed = path => allowed.has(path) || lessonNotebook(path);
+// A route is trusted only if it is in a known course workspace and uses
+// an approved teaching notebook name or a generated lesson notebook.
+const courseName = /^portal\/[a-z][a-z0-9-]*\/(?:1|4)-klasse\/([a-z0-9_]+\.ipynb)$/;
+const lessonNotebook = name => /^(?:basis_)?lesson_[a-z0-9_]+\.ipynb$/.test(name);
+const isAllowed = path => {
+  const name = courseName.exec(path)?.[1];
+  return Boolean(name && (allowed.has(name) || lessonNotebook(name)));
+};
 const tag = 'ki-autostart';
 const rememberedPathKey = 'kst-ki-last-notebook';
 
