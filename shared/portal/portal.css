@@ -30,6 +30,23 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 .concept-figure{margin:24px 0;background:white;border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center}
 .concept-figure img{display:block;width:100%;max-width:700px;height:auto;margin:auto}
 .concept-figure figcaption{max-width:610px;margin:15px auto 0;color:var(--muted);font-size:13px}
+
+/* Venn diagram with hover/focus explanations (DL 1). Zones are siblings stacked from outer to inner. */
+.venn-hover{max-width:460px;margin:auto}
+.venn-stage{position:relative}
+.venn-stage img{max-width:100%!important;aspect-ratio:900/851}
+.venn-zone{position:absolute;border-radius:50%;cursor:help;outline:none;transition:background .15s,box-shadow .15s}
+.venn-zone:hover,.venn-zone:focus-visible,.venn-zone:focus{background:#3653a31f;box-shadow:0 0 0 3px #3653a3}
+.venn-zone-ki{left:2.8%;top:2.4%;width:93.9%;height:95.2%}
+.venn-zone-ml{left:11.7%;top:24.1%;width:77.2%;height:64.6%}
+.venn-zone-deep{left:24.4%;top:43.5%;width:51.7%;height:41.7%}
+.venn-zone-gen{left:33.9%;top:64.4%;width:33.3%;height:16.5%}
+.venn-tips{position:relative;min-height:6.2em;margin-top:12px;text-align:left}
+.venn-tip{margin:0;padding:10px 14px;background:var(--soft);border-left:4px solid var(--accent);border-radius:8px;font-size:15px;line-height:1.45}
+.venn-tip:not(.venn-tip-hint){display:none}
+.venn-tip-hint{color:var(--muted)}
+.venn-hover:has(.venn-zone:is(:hover,:focus)) .venn-tip-hint{display:none}
+.venn-hover:has(.venn-zone-ki:is(:hover,:focus)) .venn-tip-ki,.venn-hover:has(.venn-zone-ml:is(:hover,:focus)) .venn-tip-ml,.venn-hover:has(.venn-zone-deep:is(:hover,:focus)) .venn-tip-deep,.venn-hover:has(.venn-zone-gen:is(:hover,:focus)) .venn-tip-gen{display:block}
 #sicherung.project-transfer{margin:28px 0;padding:14px 0 42px;background:transparent;border-top:0}
 .transfer-flow{display:grid;gap:17px;margin:28px 0 14px}
 .transfer-step{padding:26px 28px}
