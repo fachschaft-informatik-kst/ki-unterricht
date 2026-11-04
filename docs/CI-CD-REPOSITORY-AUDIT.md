@@ -121,3 +121,16 @@ GitHub-Actions-Zeiten gegen die Ausgangsläufe vergleichen.
 
 Keine Aussagen über eine exakte Zeitersparnis treffen, bevor
 mindestens ein frischer und ein cache-warmer Lauf abgeschlossen sind.
+
+
+## Nachtrag 04.11.2026: entschlackte technische CI
+
+Die obigen Messwerte beschreiben den historischen Stand vom 31.10.2026.
+Seit der vollständigen Migration in eigene BOK-/IRN-Kursordner basiert die
+Aktualitätsprüfung auf den kanonischen Quellen in `kurse/`.
+Die CI verwendet für reine redaktionelle Änderungen nur Build-, Modell-
+und Linkprüfungen. Historische Tests zu genauen Formulierungen,
+Kapitelzahlen, Unterrichtsbeispielen und Screenshots wurden aus der
+Pflicht-Pipeline entfernt. Bei Notebook-/Runtime-Änderungen bleiben
+Ausführung und Browserprüfungen aktiviert. Für Codeänderungen sind
+Editor-/Browser-Funktionstests vorgesehen.

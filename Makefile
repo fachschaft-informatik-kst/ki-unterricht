@@ -77,22 +77,18 @@ local: build
 
 full: local
 
+# Technical checks only: authoring words, headings and teaching examples
+# are reviewed by teachers, not frozen in CI snapshots.
 test: build
+	$(VENV_PY) scripts/course_registry.py
+	$(VENV_PY) tests/check_editor_publish.py
 	$(VENV_PY) tests/check_course_routes.py
-	$(VENV_PY) tests/check_basis.py
-	$(VENV_PY) tests/check_course.py
-	$(VENV_PY) tests/check_generated_content.py
+	$(VENV_PY) tests/check_published_links.py
 	$(VENV_PY) tests/check_new_chapter.py
 	$(VENV_PY) tests/check_new_lessons.py
 	$(VENV_PY) tests/check_new_lesson_cli.py
-	$(VENV_PY) tests/check_materials.py
 	$(VENV_PY) tests/check_admin.py
 	$(VENV_PY) tests/check_course_model.py
-	$(VENV_PY) tests/check_didactics.py
-	$(VENV_PY) tests/check_portal_content.py
-	$(VENV_PY) tests/check_solutions.py
-	$(VENV_PY) tests/check_content_mvc.py
-	$(VENV_PY) tests/check_ki_basis.py
 	$(VENV_PY) tests/check_pyodide_lock.py
 	node tests/check_autostart.cjs
 	node tests/check_archive.cjs
@@ -102,7 +98,7 @@ test: build
 	node tests/check_notebook_performance.cjs
 	node tests/check_admin.mjs
 	PYTHON=$(VENV_PY) node tests/check_course_model.mjs
-	@echo 'Lokale Tests bestanden. Echte Notebook- und ZIP-Browsertests laufen in GitHub Actions.'
+	@echo 'Technische Tests bestanden. Browser- und ZIP-Tests laufen in GitHub Actions.'
 
 clean:
 	rm -rf dist $(VENV) $(NODE_DIR)/node_modules
