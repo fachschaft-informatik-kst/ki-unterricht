@@ -12,12 +12,12 @@ from course_model import load_course
 from glossary import render_glossary
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "kursseiten" / "basis-manifest.json"
+MANIFEST = ROOT / "kurse/bok/1-klasse/kursseiten/manifest.json"
 SOURCE = ROOT / "basis"
 OUT = ROOT / "_build" / "site" / "basis"
 
 
-def assemble(manifest_path: str = "kursseiten/basis-manifest.json", glossary_path: Path | None = None) -> tuple[str, list[dict]]:
+def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json", glossary_path: Path | None = None) -> tuple[str, list[dict]]:
     manifest = json.loads((ROOT / manifest_path).read_text(encoding="utf-8"))
     sections = manifest["sections"]
     course = load_course(ROOT, manifest_path)
@@ -69,9 +69,6 @@ def assemble(manifest_path: str = "kursseiten/basis-manifest.json", glossary_pat
 
 
 def build():
-    from sync_course_sources import sync
-    if (ROOT / "kurse").exists():
-        sync(ROOT)
     OUT.mkdir(parents=True, exist_ok=True)
     template = (ROOT / "projekt" / "index.template.html").read_text(encoding="utf-8")
     match = re.search(r"<style>(.*?)</style>", template, re.S)
@@ -99,7 +96,7 @@ def build():
     planning.append('</main></html>')
     (OUT / "unterrichtsplan.html").write_text("".join(planning), encoding="utf-8")
     from build_basis_materials import build as build_basic_materials
-    build_basic_materials(ROOT, OUT, lessons)
+    build_basic_materials(ROOT / "kurse/bok/1-klasse", OUT, lessons)
     print(f"Built independent basis portal with {len(lessons)} double lessons")
 
 
