@@ -108,6 +108,7 @@ def create_chapter(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("section", help="Bestehender Unterrichtsbereich, z. B. einstieg")
+    parser.add_argument("--course", default="bok/4-klasse", help="Kurs aus shared/course-sites.json")
     parser.add_argument("--title", required=True, help="Titel des neuen Kapitels")
     parser.add_argument("--nummer", required=True, help="Sichtbare Kapitelnummer, z. B. 3a")
     parser.add_argument("--short", help="Kurzbeschreibung für die Navigation")
@@ -116,8 +117,12 @@ def main() -> None:
     parser.add_argument("--dry-run", action="store_true", help="Nur Pfad anzeigen, noch nicht schreiben")
     args = parser.parse_args()
     try:
+        from course_registry import load_registry
+        course = next((item for item in load_registry(ROOT) if item["slug"] == args.course), None)
+        if course is None:
+            parser.error("Unbekannter Kurs: " + args.course)
         path = create_chapter(
-            ROOT, args.section, args.title, args.nummer,
+            ROOT / course["courseRoot"], args.section, args.title, args.nummer,
             short=args.short, after=args.after, slug=args.slug, dry_run=args.dry_run
         )
     except (ValueError, OSError) as exc:
