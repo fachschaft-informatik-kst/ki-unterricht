@@ -197,7 +197,7 @@ window.addEventListener('ki-notebook-warmup',event=>{
 document.querySelector('main > .footer').before(lab);$('lesson-lab').remove();
 const overlay=bindNotebookDialog(lab);
 function request(frame,type,extra={}){return new Promise((resolve,reject)=>{const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet noch nicht. Warten und erneut versuchen.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer,source:frame.contentWindow});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
-function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!overlay.isOpen||!activeName||!view||view.classList.contains('view-hidden');}
+function visibility(){const view=document.getElementById(activeOwner);lab.hidden=!overlay.isOpen||!activeName||(!overlay.docked&&(!view||view.classList.contains('view-hidden')));}
 // Copy only uploads that belong to this notebook into its new kernel.
  // The original blobs remain in IndexedDB and the project ZIP, even when an
  // upload is larger than the safe automatic-restaging limit.

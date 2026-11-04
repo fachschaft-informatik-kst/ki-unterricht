@@ -377,6 +377,32 @@ dialog.lab-panel.lab-modal.lab-modal-maximized .lab-frame-shell > iframe{height:
   dialog.lab-panel.lab-modal > .lab-head > span{order:3;flex:1 1 100%;margin:0}
 }
 
+/* Docked mode: the same dialog, opened non-modally as a side panel so the
+   course page stays readable and scrollable next to the notebook. */
+.lab-dock-toggle{
+  display:inline-flex;align-items:center;gap:6px;flex:none;height:35px;padding:0 10px;
+  background:rgba(255,255,255,.97);color:#28414b;font:inherit;font-size:12px;font-weight:600;
+  border:1px solid #d8e1e1;border-radius:8px;cursor:pointer
+}
+.lab-dock-toggle:hover{background:var(--soft);border-color:var(--accent)}
+.lab-dock-toggle:focus-visible{outline:3px solid #ba552e;outline-offset:3px}
+.lab-dock-resizer{display:none}
+@media(max-width:900px){.lab-dock-toggle{display:none}}
+@media(max-width:700px){.lab-dock-text{display:none}}
+body.ki-notebook-docked{padding-right:min(var(--ki-dock-w,42vw),max(340px,calc(100vw - 700px)));overflow:auto}
+body dialog.lab-docked[open]:is(.lab-modal,.ki-notebook-dialog){
+  position:fixed;inset:0 0 0 auto;margin:0;z-index:60;
+  width:min(var(--ki-dock-w,42vw),max(340px,calc(100vw - 700px)));max-width:none;height:100dvh;max-height:none;
+  border-width:0 0 0 1px;border-radius:0;box-shadow:-10px 0 30px #15262b24
+}
+dialog.lab-docked .lab-fullscreen-toggle{display:none}
+dialog.lab-docked .lab-dock-resizer{
+  display:block;position:absolute;inset:0 auto 0 0;width:9px;z-index:5;cursor:col-resize;touch-action:none
+}
+dialog.lab-docked .lab-dock-resizer:hover,dialog.lab-docked .lab-dock-resizer:focus-visible,
+dialog.lab-docked-resizing .lab-dock-resizer{background:#3653a333;outline:none}
+dialog.lab-docked-resizing iframe{pointer-events:none}
+
 /* Additional, user-created or material notebooks get the same spacious modal
    instead of an embedded 850px frame; the launcher stays compact. */
 dialog.ki-notebook-runtime.ki-notebook-dialog[open]{

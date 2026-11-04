@@ -4,6 +4,112 @@
  * use an isolated iframe and only start after an explicit click.
  */
 (() => {
+  // Optional "next to the page" mode for every notebook dialog. A native modal
+  // makes the course page inert, so docking re-opens the same <dialog> as a
+  // non-modal side panel. The iframe is never moved, so Pyodide keeps running.
+  // Shared with lab-fullscreen.js through window.kiNotebookDock.
+  if (!window.kiNotebookDock) {
+    const docks = new Set();
+    const KEY = "ki-notebook-docked", WIDTH_KEY = "ki-notebook-dock-width";
+    const read = key => { try { return localStorage.getItem(key); } catch { return null; } };
+    const write = (key, value) => { try { localStorage.setItem(key, value); } catch {} };
+    const wide = () => window.matchMedia("(min-width:901px)").matches;
+    const clampWidth = px => Math.min(Math.max(px, 340), Math.max(340, innerWidth - 700));
+    const setWidth = px => {
+      const width = clampWidth(px);
+      document.documentElement.style.setProperty("--ki-dock-w", width + "px");
+      return width;
+    };
+    const stored = parseInt(read(WIDTH_KEY), 10);
+    if (stored) setWidth(stored);
+    const syncBody = () => document.body.classList.toggle("ki-notebook-docked",
+      [...docks].some(dock => dock.panel.open && dock.panel.classList.contains("lab-docked")));
+    const svg = path => '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" ' +
+      'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + path + '"/></svg>';
+    const DOCK_ICON = "M3 5h18v14H3zM14 5v14", WINDOW_ICON = "M5 5h14v14H5z";
+
+    window.kiNotebookDock = {
+      bind(panel, head, before = null) {
+        if (panel.dataset.dockBound) return panel.kiDock;
+        panel.dataset.dockBound = "1";
+        let docked = read(KEY) === "1";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "lab-dock-toggle";
+        before ? before.before(button) : head.append(button);
+        const handle = document.createElement("div");
+        handle.className = "lab-dock-resizer";
+        handle.setAttribute("role", "separator");
+        handle.setAttribute("aria-orientation", "vertical");
+        handle.setAttribute("aria-label", "Breite des Notebooks ändern");
+        handle.tabIndex = 0;
+        panel.append(handle);
+
+        const isDocked = () => panel.open && panel.classList.contains("lab-docked");
+        const sync = () => {
+          const on = panel.open && docked && wide();
+          panel.classList.toggle("lab-docked", on);
+          const label = docked ? "Als Fenster in der Mitte anzeigen" : "Neben der Kursseite anzeigen";
+          button.innerHTML = svg(docked ? WINDOW_ICON : DOCK_ICON) + '<span class="lab-dock-text">' + (docked ? "Fenster" : "Daneben") + "</span>";
+          button.setAttribute("aria-pressed", String(docked));
+          button.setAttribute("aria-label", label);
+          button.title = label;
+          syncBody();
+        };
+        // Close handlers of the controllers ignore the close event caused by switching mode.
+        const reopen = () => {
+          panel.dataset.switching = "1";
+          const done = () => { delete panel.dataset.switching; };
+          panel.addEventListener("close", done, {once: true});
+          setTimeout(done, 300);
+          panel.close();
+          show();
+        };
+        const show = () => {
+          for (const other of docks) if (other.panel !== panel && other.panel.open) other.panel.close();
+          if (docked && wide()) panel.show(); else panel.showModal();
+          sync();
+        };
+        button.addEventListener("click", () => {
+          docked = !docked;
+          write(KEY, docked ? "1" : "0");
+          if (docked) panel.querySelector(".lab-fullscreen-toggle[aria-pressed=true]")?.click();
+          if (panel.open) { reopen(); button.focus({preventScroll: true}); } else sync();
+        });
+        panel.addEventListener("close", () => { if (!panel.dataset.switching) sync(); });
+        window.addEventListener("resize", () => { if (isDocked() && !wide()) reopen(); });
+
+        let dragging = false;
+        handle.addEventListener("pointerdown", event => {
+          dragging = true;
+          handle.setPointerCapture(event.pointerId);
+          panel.classList.add("lab-docked-resizing");
+          event.preventDefault();
+        });
+        handle.addEventListener("pointermove", event => { if (dragging) setWidth(innerWidth - event.clientX); });
+        const stop = () => {
+          if (!dragging) return;
+          dragging = false;
+          panel.classList.remove("lab-docked-resizing");
+          write(WIDTH_KEY, String(Math.round(panel.getBoundingClientRect().width)));
+        };
+        handle.addEventListener("pointerup", stop);
+        handle.addEventListener("pointercancel", stop);
+        handle.addEventListener("keydown", event => {
+          const step = event.key === "ArrowLeft" ? 40 : event.key === "ArrowRight" ? -40 : 0;
+          if (!step) return;
+          event.preventDefault();
+          write(WIDTH_KEY, String(setWidth(panel.getBoundingClientRect().width + step)));
+        });
+
+        const api = {panel, show, get docked() { return isDocked(); }};
+        panel.kiDock = api;
+        docks.add(api);
+        sync();
+        return api;
+      }
+    };
+  }
   const safe = /^content\/(?:ki_projekt\/)?[a-z0-9_]+\.ipynb$/;
   const labUrl = new URL("../lab/index.html", location.href);
   // Warm the JupyterLite app shell in the HTTP cache while the lesson is read.
@@ -155,6 +261,7 @@
     dismiss.setAttribute("aria-label", "Notebook schliessen");
     dismiss.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
     head.append(label, dismiss);
+    const dock = window.kiNotebookDock?.bind(region, head, dismiss);
     const status = document.createElement("p");
     status.className = "ki-notebook-status";
     status.setAttribute("role", "status");
@@ -170,18 +277,19 @@
           event.clientY < rect.top || event.clientY > rect.bottom) close();
     });
     region.addEventListener("close", () => {
+      if (region.dataset.switching) return;
       region.hidden = true;
       document.body.classList.remove("ki-notebook-modal-open");
       open.setAttribute("aria-expanded", "false");
       open.textContent = "Notebook öffnen";
       if (open.isConnected) open.focus({preventScroll:true});
     });
-    window.addEventListener("hashchange", close);
+    window.addEventListener("hashchange", () => { if (!dock?.docked) close(); });
     open.addEventListener("click", event => {
       event.preventDefault();
       if (region.open) { close(); return; }
       region.hidden = false;
-      region.showModal();
+      if (dock) dock.show(); else region.showModal();
       document.body.classList.add("ki-notebook-modal-open");
       open.setAttribute("aria-expanded", "true");
       dismiss.focus({preventScroll:true});
