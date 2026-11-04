@@ -22,7 +22,7 @@ Jedes Kursverzeichnis hat dieselben internen Unterordner: `kursseiten/manifest.j
 
 ## Öffentliche Seiten und Altkompatibilität
 
-BOK 1/4 werden aus ihren neuen kanonischen Quellen gebaut. `scripts/sync_course_sources.py` erzeugt die historischen BOK-Verzeichnisse `kursseiten/` und `lehrperson/` als Kompatibilitätsspiegel, damit ältere Parser, Testdaten und die alten Routen `/basis/`, `/projekt/` weiterlaufen. Diese Spiegel nicht direkt bearbeiten.
+BOK 1/4 werden aus ihren neuen kanonischen Quellen gebaut. `scripts/sync_course_sources.py` erzeugt die historischen BOK-Verzeichnisse `kursseiten/` und `lehrperson/` als Kompatibilitätsspiegel, damit ältere Parser und Testdaten weiterhin funktionieren. Die alten öffentlichen Kurseinstiege `/basis/` und `/projekt/` werden nicht mehr veröffentlicht. Diese Spiegel nicht direkt bearbeiten.
 
 Die IRN-Kursseiten werden ebenfalls aus den eigenen Quellkopien und derselben Basisgestaltung erzeugt; eigene Browserzustände und JupyterLite-Dokumentpfade wie `portal/irn/1-klasse/` vermeiden Datenvermischung. Die Python-Laufzeit und Frontend-Runtime bleiben gemeinsam. Notebookquellen innerhalb der Kursordner sind eigene Dateien; der Notebook-Builder veröffentlicht kursbezogene JupyterLite-Dokumente. BOK behält bestehende JupyterLite-Dateipfade.
 

@@ -1,6 +1,6 @@
 # Kursportal
 
-Statische Kursseite unter https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/ mit eingebetteten Notebooks in jeweils einer frischen Jupyter-Sitzung. Keine Dateinavigation für Lernende. Unter «Notizen & Projekt» laden Lernende Journal, Versuch und hinzugefügte Datendateien gemeinsam als ZIP herunter und stellen diesen Projektstand später wieder her. Der Download ist noch keine Einreichung.
+Statische Kursseite unter https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/ mit eingebetteten Notebooks in jeweils einer frischen Jupyter-Sitzung. Keine Dateinavigation für Lernende. Unter «Notizen & Projekt» laden Lernende Journal, Versuch und hinzugefügte Datendateien gemeinsam als ZIP herunter und stellen diesen Projektstand später wieder her. Der Download ist noch keine Einreichung.
 
 ## Inhalt pflegen
 
@@ -15,7 +15,7 @@ Unterrichtsseiten, AVIVA-Pläne und Materialien liegen gemeinsam unter `kursseit
 
 ## Laufzeit und Projektstand
 
-Der Build kopiert die Seite, das Fotostudio, Hilfsdateien und vorberechnete Beispielgrafiken nach `dist/projekt/`. Python startet erst beim Öffnen eines Notebooks. Ein fester Frame zeigt genau ein aktives Notebook. Vor einem Wechsel werden das Dokument und die Projektergebnisse gesichert; anschliessend lädt der Frame neu. Es gibt keine parallelen Notebook-Sitzungen, keine gemeinsame Laufzeit und keine eigene Namespace-Verwaltung. Beim Import wird das aktive Notebook geschlossen. Beim nächsten Öffnen werden das gesicherte Dokument und seine Ausgaben in einer frischen Sitzung geladen; importierte Zellen werden nicht automatisch ausgeführt. Danach Vorbereitung und Datenimport erneut ausführen; Training und Abschlusstest bleiben manuell. Nach einem Notebookwechsel oder vollständigen Reload ebenfalls Daten erneut laden.
+Der Build kopiert die Seite, das Fotostudio, Hilfsdateien und vorberechnete Beispielgrafiken in die kanonischen Kursverzeichnisse unter `dist/bok/` und `dist/irn/`. Der Ordner `dist/projekt/` enthält weiterhin gemeinsam benötigte Ressourcen und den Editor, jedoch keine öffentliche Kursstartseite. Python startet erst beim Öffnen eines Notebooks. Ein fester Frame zeigt genau ein aktives Notebook. Vor einem Wechsel werden das Dokument und die Projektergebnisse gesichert; anschliessend lädt der Frame neu. Es gibt keine parallelen Notebook-Sitzungen, keine gemeinsame Laufzeit und keine eigene Namespace-Verwaltung. Beim Import wird das aktive Notebook geschlossen. Beim nächsten Öffnen werden das gesicherte Dokument und seine Ausgaben in einer frischen Sitzung geladen; importierte Zellen werden nicht automatisch ausgeführt. Danach Vorbereitung und Datenimport erneut ausführen; Training und Abschlusstest bleiben manuell. Nach einem Notebookwechsel oder vollständigen Reload ebenfalls Daten erneut laden.
 
 ### Notebookstart messen und optimieren
 
