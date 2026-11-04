@@ -96,13 +96,18 @@ def create(root: Path, title: str, *, chapter_title: str = "Einstieg und Auftrag
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("title")
+    parser.add_argument("--course", default="bok/4-klasse", help="Kurs-Slug aus shared/course-sites.json")
     parser.add_argument("--chapter", default="Einstieg und Auftrag")
     parser.add_argument("--section", help="Vorhandener Themenblock statt eines neuen Bereichs")
     parser.add_argument("--after", help="Stabile ID der vorhergehenden Doppellektion")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     try:
-        paths = create(ROOT, args.title, chapter_title=args.chapter, section=args.section,
+        from course_registry import load_registry
+        course = next((item for item in load_registry(ROOT) if item["slug"] == args.course), None)
+        if course is None:
+            parser.error("Unbekannter Kurs: " + args.course)
+        paths = create(ROOT / course["courseRoot"], args.title, chapter_title=args.chapter, section=args.section,
                        after=args.after, dry_run=args.dry_run)
     except (OSError, ValueError, KeyError) as exc:
         parser.error(str(exc))
