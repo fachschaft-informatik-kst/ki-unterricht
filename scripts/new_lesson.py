@@ -13,6 +13,9 @@ from new_chapter import slugify, create_chapter
 def create(root: Path, title: str, *, chapter_title: str = "Einstieg und Auftrag",
            section: str | None = None, after: str | None = None,
            dry_run: bool = False) -> tuple[Path, Path, Path]:
+    canonical = root / "kurse/bok/4-klasse"
+    if (canonical / "kursseiten/manifest.json").is_file():
+        root = canonical
     title = title.strip()
     if not title:
         raise ValueError("Titel der Doppellektion darf nicht leer sein.")

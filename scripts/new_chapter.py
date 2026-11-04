@@ -31,6 +31,11 @@ def create_chapter(
     short: str | None = None, after: str | None = None,
     slug: str | None = None, dry_run: bool = False,
 ) -> Path:
+    # The repository's canonical fourth-year course replaces the old root mirror.
+    # Temporary fixture roots that only contain kursseiten/ remain supported.
+    canonical = root / "kurse/bok/4-klasse"
+    if (canonical / "kursseiten/manifest.json").is_file():
+        root = canonical
     manifest = json.loads((root / "kursseiten/manifest.json").read_text(encoding="utf-8"))
     sections = [s["id"] for s in manifest["sections"] if s.get("teaching")]
     if section not in sections:

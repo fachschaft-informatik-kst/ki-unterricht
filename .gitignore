@@ -140,3 +140,8 @@ content/portal/
 # Generated print/download package for teacher material kit
 /projekt/materialien.html
 /projekt/materialien/downloads/
+
+# Generated compatibility mirrors. Maintained sources live exclusively in kurse/.
+/kursseiten/
+/lehrperson/
+/content/

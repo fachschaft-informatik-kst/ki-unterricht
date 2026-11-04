@@ -103,7 +103,7 @@ content/
   ki_projekt/              # Projektdateien, Fotostudio und Hilfscode
 ```
 
-**Nur unter `kurse/<lehrperson>/<klasse>/` bearbeiten.** Die Ordner im Repository-Stamm `kursseiten/`, `lehrperson/` und Teile von `content/` werden von bestehenden BOK-Buildpfaden verwendet; sie sind nicht der allgemeine Einstiegspunkt für kursbezogene Änderungen. Der Build gleicht BOK-Kompatibilitätsdateien mit `scripts/sync_course_sources.py` ab. Dateien in `_build/` oder `dist/` sind generiert und dürfen nicht manuell bearbeitet werden.
+**Nur unter `kurse/<lehrperson>/<klasse>/` bearbeiten.** Die älteren Root-Pfade `kursseiten/`, `lehrperson/` und `content/` sind **nicht mehr versioniert**. Der Build erzeugt sie bei Bedarf automatisch aus `kurse/` für bestehende Generatoren und Laufzeittests. Sie sind keine Bearbeitungsquellen. Dateien in `_build/` oder `dist/` sind generiert und dürfen nicht manuell bearbeitet werden.
 
 Für Änderungen an der Darstellung oder an der Notebook-Steuerung sind dagegen `basis/`, `projekt/`, `shared/`, `extensions/` und die zugehörigen Skripte relevant.
 
@@ -157,7 +157,7 @@ Nach einem Notebookwechsel oder Import werden Python-Variablen und trainierte Mo
 - [Kursverwaltung und Veröffentlichung](docs/MULTIKURS-DEPLOYMENT.md)
 - [Kursquellen und Vorlagen](docs/KURSVORLAGEN.md)
 - [Redaktions- und Datenmodell](docs/ARCHITEKTUR.md)
-- [Notebookquellen](content/README.md)
+- [Notebookquellen](kurse/bok/4-klasse/content/README.md)
 - [Unterrichtsmaterialien](worksheets/README.md)
 
 ## Quellenhinweise

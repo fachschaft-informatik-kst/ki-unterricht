@@ -1,4 +1,4 @@
-"""Compatibility mirror for historical BOK build scripts.
+"""Create untracked compatibility mirrors from maintained course sources.
 
 Canonical authored sources live under kurse/bok/{1,4}-klasse. This script
 materializes their historical paths for existing renderers and tests without
@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def sync(root: Path = ROOT) -> None:
+    # Only kurse/ contains maintained notebook/lesson sources. These directories
+    # are ignored by Git and reconstructed for older renderers and test helpers.
     for grade in (1, 4):
         base = root / "kurse" / "bok" / f"{grade}-klasse"
         pages = base / "kursseiten"
@@ -38,8 +40,11 @@ def sync(root: Path = ROOT) -> None:
             for name in ("materialien.md", "musterloesungen.md"):
                 (teacher / name).write_bytes((base / "lehrperson" / name).read_bytes())
             (mirror / "glossar.json").write_bytes((pages / "glossar.json").read_bytes())
+    # The historical root content/ is also a generated runtime staging input.
+    # Its entire set of tracked files was verified byte-identical to BOK 4.
+    shutil.copytree(root / "kurse/bok/4-klasse/content", root / "content", dirs_exist_ok=True)
 
 
 if __name__ == "__main__":
     sync()
-    print("PASS BOK compatibility mirrors materialized from course-owned sources")
+    print("PASS generated BOK course mirrors and notebook staging from kurse/")
