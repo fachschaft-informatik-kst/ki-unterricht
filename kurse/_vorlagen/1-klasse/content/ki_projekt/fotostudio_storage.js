@@ -29,6 +29,7 @@
      list:()=>run('readonly',s=>s.getAll()),
      put:record=>run('readwrite',s=>s.put(record)),
      putMany:records=>run('readwrite',s=>{for(const record of records)s.put(record);}),
+     deleteMany:ids=>run('readwrite',s=>{for(const id of ids)s.delete(id);}),
      clear:()=>run('readwrite',s=>s.clear())
     });
    };

@@ -20,8 +20,8 @@ h2{font-size:20px;line-height:1.35;margin:0 0 8px}p{margin:0 0 12px}
 .studio-steps strong{display:block;font-size:13px;margin-bottom:5px;color:var(--ink)}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 18px;margin-top:17px}
 label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:650;min-width:0}
-input{font:inherit;width:100%;min-width:0;min-height:43px;padding:10px 12px;border:1px solid #bdcbc6;border-radius:9px;background:#fff;color:var(--ink)}
-input:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #e0a66c;outline-offset:2px}
+input,select{font:inherit;width:100%;min-width:0;min-height:43px;padding:10px 12px;border:1px solid #bdcbc6;border-radius:9px;background:#fff;color:var(--ink)}
+input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #e0a66c;outline-offset:2px}
 input[type=file]{padding:7px}input[type=file]::file-selector-button{font:inherit;font-size:12px;font-weight:650;background:var(--soft);color:var(--accent);border:1px solid #b3d2c2;border-radius:6px;padding:6px 10px;margin-right:10px;cursor:pointer}
 .wide{grid-column:1/-1}.hint{font-size:12px;font-weight:400;color:var(--muted)}
 .preview-title{font-size:13px;font-weight:700;margin:17px 0 8px}
@@ -38,7 +38,9 @@ button.danger{background:#fff;color:var(--alert);border-color:#e3c7bb}button.dan
 .count-header .number{font-size:13px;color:var(--muted)}.count-header strong{font-size:22px;color:var(--accent)}
 progress{display:block;width:100%;height:10px;accent-color:var(--accent);margin:12px 0}
 #counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:0;list-style:none;margin:15px 0}
-#counts li{background:#f5f8f5;border:1px solid var(--line);padding:8px 12px;border-radius:8px;font-size:13px}
+#counts li{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#f5f8f5;border:1px solid var(--line);padding:6px 6px 6px 12px;border-radius:8px;font-size:13px}
+#counts button{width:auto;min-height:32px;padding:4px 11px;font-size:12px;flex:none}
+.counts-empty{grid-column:1/-1;color:var(--muted)}
 .export-panel{border-top:1px solid var(--line);padding-top:15px;margin-top:14px}
 .export-panel label{margin-top:12px;max-width:490px}
 .footnote{font-size:12px;color:var(--muted);line-height:1.6}
@@ -68,11 +70,16 @@ details p{font-size:13px;margin:10px 0 0;color:var(--muted)}
 </section>
 <section class="studio-card" aria-labelledby="studio-capture-title">
   <h2 id="studio-capture-title">1 · Bilder erfassen</h2>
-  <p>Pro Klasse und Gruppe sind acht Fotos vorgesehen. Wählen Sie die richtige Kombination, bevor Sie Bilder übernehmen.</p>
+  <p>Pro Klasse und Gruppe sind acht Fotos vorgesehen. Wählen Sie die richtige Kombination, bevor Sie Bilder übernehmen. Falsch zugeordnete Gruppen lassen sich unten in der Sammlung einzeln löschen.</p>
   <div class="fields">
     <label>Klasse<input id="label" value="Apfel" maxlength="40" autocomplete="off"></label>
-    <label>Datengruppe<input id="group" value="T1" list="gruppen" maxlength="30" autocomplete="off"></label>
-    <datalist id="gruppen"><option value="T1"><option value="T2"><option value="V1"><option value="P1"><option value="P2"></datalist>
+    <label>Datengruppe<select id="group">
+      <option value="T1" selected>T1 · Training</option>
+      <option value="T2">T2 · Training</option>
+      <option value="V1">V1 · Auswahl (Validierung)</option>
+      <option value="P1">P1 · Abschlusstest</option>
+      <option value="P2">P2 · Abschlusstest</option>
+    </select></label>
     <label class="wide">Bildquelle / Aufnahmebedingungen<input id="source" value="Eigene Fotos" maxlength="200"></label>
     <label class="wide">Bilder auswählen<input id="files" type="file" accept="image/jpeg,image/png" multiple><span class="hint">JPG oder PNG · HEIC vorher als JPG exportieren · mehrere Bilder gleichzeitig möglich</span></label>
   </div>
@@ -112,7 +119,31 @@ const ready=PhotoStorage.open().then(async db=>{
  saveStatus(saved.length?String(saved.length)+' Bilder automatisch wiederhergestellt. JSON-Backup empfohlen.':'Automatische lokale Zwischensicherung aktiv. JSON-Backup weiterhin empfohlen.');
  if(saved.length)el('status').textContent=String(saved.length)+' Bilder aus Browser-Speicher wiederhergestellt.';
 }).catch(e=>{storage=null;saveStatus('ACHTUNG: Kein automatisches Speichern ('+e.message+'). JSON nach jeder Änderung herunterladen.');});
-function counts(){const c={};records.forEach(r=>{const k=r.group+' / '+r.label;c[k]=(c[k]||0)+1;});el('counts').replaceChildren(...Object.entries(c).map(([k,v])=>{const li=document.createElement('li');li.textContent=k+': '+v;return li;}));el('count-total').textContent=String(records.length);el('studio-progress').value=Math.min(records.length,80);}
+function counts(){
+ const c=new Map();
+ records.forEach(r=>{const k=JSON.stringify([r.group,r.label]);c.set(k,(c.get(k)||0)+1);});
+ el('counts').replaceChildren(...[...c].map(([k,v])=>{
+  const [group,label]=JSON.parse(k),li=document.createElement('li'),text=document.createElement('span'),del=document.createElement('button');
+  text.textContent=group+' / '+label+': '+v;
+  del.type='button';del.className='danger';del.textContent='Löschen';
+  del.setAttribute('aria-label','Gruppe '+group+' / '+label+' mit '+v+' Bildern löschen');
+  del.onclick=()=>removeGroup(group,label);
+  li.append(text,del);return li;
+ }));
+ el('count-total').textContent=String(records.length);el('studio-progress').value=Math.min(records.length,80);
+}
+async function removeGroup(group,label){
+ if(busy)return;await ready;
+ const ids=records.filter(r=>r.group===group&&r.label===label).map(r=>r.id);
+ if(!ids.length)return;
+ if(!confirm('Gruppe «'+group+' / '+label+'» mit '+ids.length+' Bildern löschen? Die übrigen Gruppen bleiben erhalten.'))return;
+ try{
+  if(storage)await storage.deleteMany(ids);
+  const gone=new Set(ids);records=records.filter(r=>!gone.has(r.id));counts();
+  el('status').textContent='Gruppe '+group+' / '+label+' gelöscht ('+ids.length+' Bilder). Insgesamt '+records.length+'. JSON-Backup neu herunterladen.';
+  if(storage&&!unsaved)saveStatus('Lokal zwischengespeichert: '+records.length+' Bilder. JSON-Backup empfohlen.');
+ }catch(e){el('status').textContent='Löschen fehlgeschlagen: '+e.message;}
+}
 async function decode(file){const url=URL.createObjectURL(file),img=new Image();try{img.src=url;await img.decode();return img;}finally{URL.revokeObjectURL(url);}}
 async function preview(file){const img=await decode(file),canvas=PhotoCore.prepare(img,makeCanvas);el('preview').replaceChildren(img,canvas);return canvas;}
 el('files').onchange=async()=>{try{if(el('files').files.length)await preview(el('files').files[0]);}catch(e){el('status').textContent='Bild nicht lesbar: '+e.message;}};
