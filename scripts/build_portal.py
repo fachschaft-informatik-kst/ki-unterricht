@@ -13,7 +13,7 @@ from course_model import load_course, output
 from glossary import render_glossary
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ROOT / "kursseiten"
+PAGES = ROOT / "kurse/bok/4-klasse/kursseiten"
 PORTAL = ROOT / "projekt"
 MARKDOWN = MarkdownIt("commonmark", {"html": True}).enable("table")
 
@@ -50,7 +50,7 @@ def render_fragment(source: str, filename: Path) -> str:
     return re.sub(pattern, lambda m: MARKDOWN.render(m.group(1)), source, flags=re.S)
 
 
-def assemble(pages: Path | None = None, manifest_path: str = "kursseiten/manifest.json", glossary_path: Path | None = None) -> str:
+def assemble(pages: Path | None = None, manifest_path: str = "kurse/bok/4-klasse/kursseiten/manifest.json", glossary_path: Path | None = None) -> str:
     pages = PAGES if pages is None else pages
     manifest = json.loads((pages / "manifest.json").read_text(encoding="utf-8"))
     sections = manifest["sections"]
@@ -104,9 +104,6 @@ def assemble(pages: Path | None = None, manifest_path: str = "kursseiten/manifes
 
 
 def build() -> None:
-    from sync_course_sources import sync
-    if (ROOT / "kurse").exists():
-        sync(ROOT)
     target = output(ROOT)
     if target.exists():
         shutil.rmtree(target)
