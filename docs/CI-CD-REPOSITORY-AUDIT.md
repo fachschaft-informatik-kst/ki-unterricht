@@ -134,3 +134,22 @@ Kapitelzahlen, Unterrichtsbeispielen und Screenshots wurden aus der
 Pflicht-Pipeline entfernt. Bei Notebook-/Runtime-Änderungen bleiben
 Ausführung und Browserprüfungen aktiviert. Für Codeänderungen sind
 Editor-/Browser-Funktionstests vorgesehen.
+
+## Nachtrag: PR-Laufzeiten optimiert (04.11.2026)
+
+Messung PR #128: 358 Sekunden insgesamt, davon 174 Sekunden für den
+ausführlichen Notebook-Chromium-Test. Bei Runtime-Änderungen bleiben
+Notebookausführung, Runtime-/Pyodide-Prüfungen, Editor- und UI-Browsertests
+sowie der Kaltstart-Browsertest weiterhin PR-Pflicht. Nur die vollständige
+Notebook-ZIP-/Training-End-to-End-Strecke wird auf Main-Pushes und
+manuelle Workflows verschoben. Dies spart bei entsprechenden PRs bis zu
+knapp drei Minuten, ist aber **kein garantierter Wert**. Auf Main werden
+die schweren Tests weiterhin ausgeführt, bevor Pages hochgeladen werden.
+
+Reine Redaktion: keine lokalen Makefile-/Preview-Smoketests und keine
+Chromium-Installation. Die Kursseiten, Schemata und lokalen Links werden
+weiterhin geprüft. Der Runtime-Cache berücksichtigt jetzt auch alle
+kurslokalen Notebooks/Assets. Auf Cache-Miss wird die Notebook-Erweiterung
+aus den npm-Quellen gebaut, selbst wenn nur redaktionelle Texte geändert
+wurden. Der Lauf kann jederzeit über workflow_dispatch vollständig
+geprüft werden.
