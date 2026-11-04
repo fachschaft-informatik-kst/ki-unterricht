@@ -66,7 +66,7 @@ const server=http.createServer((req,res)=>{
     });
     // Mock only the published KST logo; relative requests to worker origin
     // must fail under the server rules above, just like on Cloudflare.
-    const logoUrl="https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/grafiken/kst_logo.png";
+    const logoUrl="https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/grafiken/kst_logo.png";
     const tinyPng=Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/XxkAAAAASUVORK5CYII=","base64");
     await page.route(logoUrl,route=>route.fulfill({
       status:200,contentType:"image/png",body:tinyPng
@@ -620,7 +620,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(basisTheme.paper,"#f3f5fb","First-year paper must be pale blue");
     assert.equal(basisTheme.background,"rgb(243, 245, 251)");
     assert.equal(basisTheme.brand,"#basis-start","Preview must use the first-year course shell");
-    assert.ok(basisTheme.image?.startsWith("https://fachschaft-informatik-kst.github.io/ki-unterricht/basis/grafiken/"),
+    assert.ok(basisTheme.image?.startsWith("https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/1-klasse/grafiken/"),
       "First-year images must resolve against the blue basis course");
 
     // Course-specific AVIVA and materials use the same split layout and
