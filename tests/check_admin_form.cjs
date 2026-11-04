@@ -521,7 +521,11 @@ const server=http.createServer((req,res)=>{
     await page.locator("#editMaterials").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.includes("/vertiefung-ki-im-alltag/materialien.md"));
     assert.match(await page.locator("#path").textContent(),/kursseiten\/vertiefung-ki-im-alltag\/materialien.md/);
-    await page.locator("#source").fill((await page.locator("#source").inputValue())+"\n- Neues Experiment vorbereiten\n");
+    const newMaterials=await page.locator("#source").inputValue();
+    assert.match(newMaterials,/<!-- lesson:vertiefung-ki-im-alltag -->/);
+    await page.locator("#source").fill(newMaterials.replace(
+      /^## Doppellektion .+$/m,"## Frei gewählter Materialtitel"
+    )+"\n- Neues Experiment vorbereiten\n");
     await page.locator("#stage").click();
     await page.evaluate(()=>{
       const answers=["AVIVA-Testgrafik","Ankommen","Lehrperson"];

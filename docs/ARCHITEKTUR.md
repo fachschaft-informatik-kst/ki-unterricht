@@ -112,6 +112,24 @@ Lehrpersonenansichten bleiben OAuth-geschützt; Kursausgaben enthalten keine
 öffentlichen AVIVA-Gesamtexporte oder Lösungen. Das GitHub-Repository selbst ist
 öffentlich: Der Oberflächenschutz ist kein Schutz der Quelldateien.
 
+### Materialzuordnung
+
+Materialseiten verwenden dieselbe ID-basierte Aufteilung in internen und
+veröffentlichten Kursausgaben. Bei genau einer Lektion pro Themenordner gehört
+die gesamte `materialien.md` zu dieser Lektion; Überschriften sind frei editierbar.
+Bei mehreren Lektionen im gleichen Ordner beginnen die Abschnitte mit
+`<!-- lesson:05 -->` (jeweils die stabile ID aus `planung.json`). Jede geplante
+ID muss genau einmal vorkommen. Editor und CLI erzeugen diese Markierungen bei
+neuen Lektionen und ergänzen sie auch für den bisherigen Einzelabschnitt.
+Markierungen nicht umbenennen oder löschen; die folgende Markdown-Überschrift
+darf geändert werden. Die sichtbaren Lektionsnummern stammen aus dem Kursmodell.
+
+Fehlende Materialdateien, falsche oder doppelte Zuordnungen sowie fehlende
+Bildbeschreibungen oder ungültige AVIVA-Phasen und Sozialformen brechen den Build
+ab. Diese Prüfungen gelten auch für Bilder in den veröffentlichten Materialseiten.
+Materialanker verwenden stabile Lektions-IDs; bisherige numerische Anker bleiben
+zusätzlich verfügbar, sofern sie nicht mit stabilen IDs kollidieren.
+
 `make test` prüft Build, Links und technische Verträge.
 `tests/check_course_isolation.py` baut jeden Kurs in einer temporären Umgebung,
 in der **keine anderen Kursquellen** vorhanden sind, und prüft die eigenen

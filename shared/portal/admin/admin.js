@@ -1083,12 +1083,14 @@ async function imageAvivaAttribution(){
   const path=state.current?.path||"";
   if(!path.endsWith("/materialien.md"))return "";
   const previous=$("source").value.slice(0,$("source").selectionStart);
-  const id=[...previous.matchAll(/^## Doppellektion ([a-z0-9-]+)\s*$/gm)].at(-1)?.[1];
-  if(!id)throw Error("Bild in den Materialien unter einer Doppellektion-Überschrift einfügen.");
   const planPath=coursePath("kursseiten/")+path.split("/")[4]+"/planung.json";
   const json=state.staged.get(planPath)?.content||
     (await api("/api/file?path="+encodeURIComponent(planPath))).content;
-  const lesson=JSON.parse(json).lessons.find(l=>l.id===id);
+  const lessons=JSON.parse(json).lessons;
+  const id=[...previous.matchAll(/^<!-- lesson:([a-z0-9-]+) -->\s*$/gm)].at(-1)?.[1]
+    ||(lessons.length===1?lessons[0].id:null);
+  if(!id)throw Error("Bild in den Materialien nach einer Lektionsmarkierung einfügen.");
+  const lesson=lessons.find(l=>l.id===id);
   if(!lesson)throw Error("Doppellektion "+id+" im Unterrichtsplan nicht gefunden.");
   const phases=lesson.phases.map(p=>p.phase);
   const phase=prompt("AVIVA-Phase für Doppellektion "+id+":\n"+phases.join(" / "),phases[0]);
@@ -1226,7 +1228,7 @@ async function addLesson(){
     state.staged.set(chapter,{path:chapter,expectedSha:null,content:chapterSource});
     const extras=coursePath("kursseiten/")+view+"/materialien.md";
     state.staged.set(extras,{path:extras,expectedSha:null,content:
-      "## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"+
+      "<!-- lesson:"+id+" -->\n## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"+
       "Hier ergänzende Grafiken, Tabellen und Hinweise für die Lehrperson einfügen.\n\n"+
       "- [Zur neuen Kursseite](index.html#"+view+")\n"});
     state.chapters.push({path:chapter,sha:null});state.chapters.sort((a,b)=>a.path.localeCompare(b.path));
@@ -1272,8 +1274,11 @@ async function addLessonToCurrentSection(){
     const chapter=coursePath("kursseiten/")+view+"/"+String(chapterPrefix).padStart(3,"0")+"-"+id+"-"+chapterSlug+".md";
     const materialsPath=coursePath("kursseiten/")+view+"/materialien.md";
     const materialsDraft=state.staged.get(materialsPath);
-    const materials=materialsDraft?.content??(await api("/api/file?path="+encodeURIComponent(materialsPath))).content;
     const materialFile=materialsDraft?null:await api("/api/file?path="+encodeURIComponent(materialsPath));
+    let materials=materialsDraft?.content??materialFile.content;
+    if(target.data.lessons.length===2&&!/^<!-- lesson:/m.test(materials)){
+      materials="<!-- lesson:"+target.data.lessons[0].id+" -->\n"+materials;
+    }
     if(state.staged.size+3>12)throw Error("Maximal zwölf Dateien pro Pull Request. Änderungen zuerst einreichen.");
     state.staged.set(target.path,{path:target.path,expectedSha:target.draft?.expectedSha??target.file?.sha??null,content:planSource});
     const chapterSource="---\ntype: chapter\nid: "+view+"-"+id+"-"+chapterSlug+
@@ -1282,7 +1287,7 @@ async function addLessonToCurrentSection(){
       "## Lernauftrag\n\nHier die Aufgabe beschreiben.\n";
     state.staged.set(chapter,{path:chapter,expectedSha:null,content:chapterSource});
     state.staged.set(materialsPath,{path:materialsPath,expectedSha:materialsDraft?.expectedSha??materialFile?.sha??null,
-      content:materials+"\n\n## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"});
+      content:materials+"\n\n<!-- lesson:"+id+" -->\n## Doppellektion "+id+"\n\n### Zusätzliche Materialien\n\n"});
     state.chapters.push({path:chapter,sha:null});
     state.chapters.sort((a,b)=>a.path.localeCompare(b.path));
     useFile(target.path,target.draft?.expectedSha??target.file?.sha??null,planSource);

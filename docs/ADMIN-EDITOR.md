@@ -189,3 +189,12 @@ Der Worker proxyt die statischen Editor-Assets auf seine **eigene Origin**. Das
 vermeidet Drittanbieter-Cookies und hält das GitHub-Token ausschliesslich auf
 der Serverseite. OAuth nutzt PKCE (S256) und \`state\`; Sitzungsdaten werden
 mit AES-GCM verschlüsselt und nach spätestens einer Stunde ungültig.
+
+## Materialüberschriften und Lektionszuordnung
+
+Überschriften in Materialdateien dürfen frei umbenannt werden. Gehören mehrere
+Lektionen zum gleichen Themenordner, ordnen Markierungen wie `<!-- lesson:05 -->`
+die folgenden Materialien der stabilen Lektions-ID aus dem AVIVA-Plan zu.
+Diese Markierungen beibehalten; sie sind unabhängig von der sichtbaren
+Lektionsnummer. Neue Lektionen erhalten die Markierung automatisch.
+Bild-Uploads nutzen diese Zuordnung auch nach einer Umbenennung der Überschrift.

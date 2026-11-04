@@ -1,28 +1,22 @@
 """Standalone blue teacher material index for the 1st-year course."""
 from pathlib import Path
 import html
-import re
-from markdown_it import MarkdownIt
+from build_materials import lesson_materials, material_fragment
 
 
 def build(root: Path, out: Path, lessons: list[dict]) -> None:
-    markdown = MarkdownIt("commonmark", {"html": False}).enable("table")
+    materials = lesson_materials(root, lessons)
     links = []
     sections = []
     for lesson in lessons:
-        material = root / "kursseiten" / lesson["view"] / "materialien.md"
-        if not material.is_file():
-            raise FileNotFoundError(f"Lehrpersonenmaterial fehlt: {material}")
-        source = material.read_text(encoding="utf-8")
-        # Old headings differ between lessons. The AVIVA lesson metadata is authoritative.
-        source = re.sub(r"\A\s*##[^\n]*\n", "", source, count=1)
+        source = materials[lesson["id"]]
         title = html.escape(lesson["title"])
         ident = "dl-" + lesson["id"]
         label = str(lesson["number"]) + ". " + title
         links.append(f'<a href="#{ident}">{label}</a>')
         sections.append(
             f'<section class="basis-resource card" id="{ident}">'
-            f'<h2>{label}</h2>{markdown.render(source)}</section>'
+            f'<h2>{label}</h2>{material_fragment(source, lesson)}</section>'
         )
     document = """<!doctype html>
 <html lang="de-CH"><head><meta charset="utf-8">

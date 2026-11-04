@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 from pathlib import Path
 import shutil
 
@@ -65,6 +66,55 @@ footer{color:var(--muted);font-size:13px;padding-top:20px}
 @media print{body{background:white}main{padding:0;max-width:none}nav.quick,header a{display:none}.lesson-resources{border:0;border-bottom:1px solid #aaa;border-radius:0;break-inside:avoid;padding:16px 0}.graphic-grid img{height:180px}.graphic-grid figure{break-inside:avoid}}
 """
 
+def lesson_materials(root: Path, lessons: list[dict]) -> dict[str, str]:
+    """Resolve grouped materials by stable IDs, never by editable headings."""
+    result = {}
+    for view in dict.fromkeys(lesson["view"] for lesson in lessons):
+        source = (root / "kursseiten" / view / "materialien.md").read_text(encoding="utf-8")
+        expected = [lesson["id"] for lesson in lessons if lesson["view"] == view]
+        markers = list(re.finditer(r"^<!-- lesson:([a-z0-9-]+) -->\s*$", source, re.M))
+        if not markers:
+            if len(expected) != 1:
+                raise ValueError(f"Grouped materials require lesson markers: {view}")
+            fragments = {expected[0]: source}
+        else:
+            ids = [marker[1] for marker in markers]
+            if len(ids) != len(set(ids)) or set(ids) != set(expected):
+                raise ValueError(f"Material markers must match lesson IDs: {view}")
+            if source[:markers[0].start()].strip():
+                raise ValueError(f"Material before first lesson marker: {view}")
+            fragments = {
+                marker[1]: source[marker.end():markers[index + 1].start()
+                                  if index + 1 < len(markers) else len(source)]
+                for index, marker in enumerate(markers)
+            }
+        for identifier, fragment in fragments.items():
+            # The generated lesson heading comes from planning.json.
+            result[identifier] = re.sub(r"\A\s*##[^\n]*\n", "", fragment, count=1)
+    return result
+
+
+def material_fragment(source: str, lesson: dict, *, allow_html: bool = False) -> BeautifulSoup:
+    markup = MarkdownIt("commonmark", {"html": allow_html}).enable("table").render(source)
+    fragment = BeautifulSoup(markup, "html.parser")
+    for image in fragment.select("img"):
+        src, alt = image.get("src", ""), image.get("alt", "")
+        if not src.strip() or not alt.strip():
+            raise ValueError(f"Image requires source and description in lesson {lesson['id']}")
+        attribution = image.get("title", "")
+        if " | " not in attribution:
+            raise ValueError(f"Missing AVIVA assignment for {src}")
+        phase, roles = attribution.split(" | ", 1)
+        planned = next((p for p in lesson["phases"] if p["phase"] == phase), None)
+        if planned is None:
+            raise ValueError(f"Unknown AVIVA phase {phase} in lesson {lesson['id']}")
+        allowed = {step["wer"] for step in planned["schritte"]}
+        for role in (role.strip() for role in roles.split("→")):
+            if role not in allowed:
+                raise ValueError(f"Unplanned AVIVA role {role} in lesson {lesson['id']}")
+    return fragment
+
+
 def build(lessons: list[dict]) -> None:
     registry = json.loads((ROOT / "kurse/bok/4-klasse/experimente/registry.json").read_text(encoding="utf-8"))
     files = FILES | {Path(e["source"]).name: "content/" + e["source"] for e in registry}
@@ -87,36 +137,24 @@ def build(lessons: list[dict]) -> None:
             )
             target.write_text(svg, encoding="utf-8")
 
+    fragments = lesson_materials(ROOT / "kurse/bok/4-klasse", lessons)
     source = SOURCE.read_text(encoding="utf-8")
-    for view in dict.fromkeys(l["view"] for l in lessons):
-        extension = ROOT / "kurse/bok/4-klasse/kursseiten" / view / "materialien.md"
-        if not extension.is_file():
-            raise FileNotFoundError(f"Missing teacher material for {view}")
-        source += "\n\n" + extension.read_text(encoding="utf-8")
     soup = BeautifulSoup(
         '<div id="materials-content">' +
         MarkdownIt("commonmark", {"html": False}).enable("table").render(source) + "</div>",
         "html.parser"
     )
     content = soup.find(id="materials-content")
-    if "Grafiken und Materialien" not in content.h1.get_text():
-        raise ValueError("Missing material index heading")
-    headers = content.find_all("h2", recursive=False)
-    by_id = {h.get_text(strip=True).removeprefix("Doppellektion "): h for h in headers}
-    if len(by_id) != len(headers) or set(by_id) != {l["id"] for l in lessons}:
-        raise ValueError("Material sections must match lesson IDs")
-
     for lesson in lessons:
-        heading = by_id[lesson["id"]]
         group = soup.new_tag("section", id=f"dl-{lesson['id']}",
                              attrs={"class": "lesson-resources"})
-        heading.insert_before(group)
-        node = heading
-        while node is not None and (node is heading or node.name not in ("h2", "section")):
-            next_node = node.find_next_sibling()
-            group.append(node.extract())
-            node = next_node
+        heading = soup.new_tag("h2")
         heading.string = f"Doppellektion {lesson['number']} · {lesson['title']}"
+        group.append(heading)
+        fragment = material_fragment(fragments[lesson["id"]], lesson)
+        for node in list(fragment.contents):
+            group.append(node.extract())
+        content.append(group)
 
         images = group.select("p > img")
         if images:
@@ -126,19 +164,8 @@ def build(lessons: list[dict]) -> None:
                 paragraph = img.parent
                 src = img.get("src", "")
                 alt = img.get("alt", "")
-                if not src or not alt:
-                    raise ValueError(f"Image requires source and description in lesson {lesson['id']}")
                 phase_info = img.get("title", "")
-                if " | " not in phase_info:
-                    raise ValueError(f"Missing AVIVA assignment for {src}")
                 phase, roles = phase_info.split(" | ", 1)
-                p = next((p for p in lesson["phases"] if p["phase"] == phase), None)
-                if p is None:
-                    raise ValueError(f"Unknown AVIVA phase {phase} in lesson {lesson['id']}")
-                allowed = {step["wer"] for step in p["schritte"]}
-                for role in (r.strip() for r in roles.split("→")):
-                    if role not in allowed:
-                        raise ValueError(f"Unplanned AVIVA role {role} in lesson {lesson['id']}")
                 figure = soup.new_tag("figure")
                 link = soup.new_tag("a", href=src, target="_blank", rel="noopener")
                 img.extract()
@@ -153,10 +180,8 @@ def build(lessons: list[dict]) -> None:
                 caption.append(alt)
                 figure.append(caption)
                 grid.append(figure)
-                paragraph.decompose()
-
-    for lesson in lessons:
-        content.append(content.find(id=f"dl-{lesson['id']}").extract())
+                if not paragraph.get_text(strip=True) and not paragraph.find("img"):
+                    paragraph.decompose()
     links = "".join(f'<a href="#dl-{l["id"]}">{l["number"]} · {html.escape(l["title"])}</a>'
                     for l in lessons)
     OUTPUT.write_text(f"""<!doctype html>

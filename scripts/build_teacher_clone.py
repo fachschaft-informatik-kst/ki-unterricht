@@ -10,25 +10,24 @@ import json
 import re
 from pathlib import Path
 
-from markdown_it import MarkdownIt
-
 from build_basis import assemble as assemble_basis
 from build_course import lehrpersonen_seite, render, tabelle
 from build_portal import assemble as assemble_projekt
 from course_model import load_course
+from build_materials import lesson_materials, material_fragment
 
 ROOT = Path(__file__).resolve().parents[1]
-MARKDOWN = MarkdownIt("commonmark", {"html": True}).enable("table")
-
-
 def render_teacher_materials(course: dict, lessons: list[dict]) -> str:
-    base = ROOT / course["courseRoot"] / "kursseiten"
+    materials = lesson_materials(ROOT / course["courseRoot"], lessons)
+    anchors = {"dl-" + lesson["id"] for lesson in lessons}
     entries = []
     for lesson in lessons:
-        source = (base / lesson["view"] / "materialien.md").read_text(encoding="utf-8")
-        entries.append(f'<article id="dl-{lesson["number"]}"><h2>{lesson["number"]}. '
+        source = materials[lesson["id"]]
+        legacy = f'dl-{lesson["number"]}'
+        alias = f'<span id="{legacy}"></span>' if legacy not in anchors else ""
+        entries.append(f'<article id="dl-{lesson["id"]}">{alias}<h2>{lesson["number"]}. '
                        f'{html.escape(lesson["title"])}</h2>'
-                       + MARKDOWN.render(source) + "</article>")
+                       + str(material_fragment(source, lesson, allow_html=True)) + "</article>")
     return ('<!doctype html><html lang="de-CH"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>Materialkoffer</title><link rel="stylesheet" href="portal.css">'

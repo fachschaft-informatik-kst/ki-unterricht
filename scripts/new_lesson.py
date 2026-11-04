@@ -63,8 +63,11 @@ def create(root: Path, title: str, *, chapter_title: str = "Einstieg und Auftrag
         f"kurz: {json.dumps(chapter_title, ensure_ascii=False)}\nopen: true\n---\n\n"
         "## Lernauftrag\n\nHier die Aufgabe beschreiben.\n"
     )
-    materials = (teacher_path.read_text(encoding="utf-8") if section else "") + (
-        f"\n\n## Doppellektion {identifier}\n\n### Zusätzliche Materialien\n\n"
+    materials = teacher_path.read_text(encoding="utf-8") if section else ""
+    if len(existing) == 1 and not re.search(r"^<!-- lesson:", materials, re.M):
+        materials = f"<!-- lesson:{existing[0]['id']} -->\n" + materials
+    materials += (
+        f"\n\n<!-- lesson:{identifier} -->\n## Doppellektion {identifier}\n\n### Zusätzliche Materialien\n\n"
         f"- [Zur Kursseite](index.html#{view})\n"
     )
     if not definition:

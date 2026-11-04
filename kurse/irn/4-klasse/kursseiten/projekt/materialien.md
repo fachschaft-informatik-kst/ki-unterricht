@@ -1,3 +1,4 @@
+<!-- lesson:05 -->
 ## Doppellektion 05
 
 ### Direkt öffnen
@@ -10,6 +11,7 @@
 
 **Selbstständig erarbeiten:** Ohne fachlichen Lehrpersonen-Input den Datenaufteilungs-Lernpfad lesen, Beispiele lösen, Notebook ausführen, mit Musterlösungen kontrollieren und fünf Gruppen planen. Die Lehrperson klärt nur den organisatorischen Rahmen.
 
+<!-- lesson:06 -->
 ## Doppellektion 06
 
 ### Direkt öffnen
@@ -20,6 +22,7 @@
 
 **Hinweis:** Kurze Beratung der Tandems; kein zusätzliches Material oder gemeinsamer Pflicht-Input vorgesehen.
 
+<!-- lesson:07 -->
 ## Doppellektion 07
 
 ### Direkt öffnen
