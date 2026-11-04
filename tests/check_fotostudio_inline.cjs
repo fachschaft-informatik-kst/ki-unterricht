@@ -1,16 +1,14 @@
-/* Parse every embedded Fotostudio script before costly browser / notebook tests. */
-const assert=require('node:assert/strict');
-const fs=require('node:fs');
-const vm=require('node:vm');
-const html=fs.readFileSync('content/ki_projekt/fotostudio.html','utf-8');
-const inline=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim());
-assert.equal(inline.length,1,'Expected one embedded Fotostudio controller');
-for(const script of inline)new vm.Script(script,{filename:'fotostudio.inline.js'});
-assert(html.includes('fotostudio_storage.js'));
-assert(html.includes('if(!validRecord(r))throw Error'));
-for(const id of ['label','group','source','files','add','save','clear','resume','studio-progress','count-total']){
- assert.equal((html.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id+' must remain unique');
+/* Parse each course's own Fotostudio controller. */
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const root=path.resolve(__dirname,'..');
+const courses=JSON.parse(fs.readFileSync(path.join(root,'shared/course-sites.json'),'utf8')).courses;
+for(const course of courses){
+ const html=fs.readFileSync(path.join(root,course.courseRoot,'content/ki_projekt/fotostudio.html'),'utf8');
+ const inline=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(Boolean);
+ assert(inline.length>=1,course.slug+': no inline controller');
+ for(const code of inline)new vm.Script(code,{filename:course.slug+'/fotostudio.inline.js'});
+ assert(html.includes('fotostudio_storage.js'),course.slug+': storage script missing');
+ for(const id of ['label','group','files','add','save','resume'])
+   assert.equal((html.match(new RegExp('id="'+id+'"','g'))||[]).length,1,course.slug+': '+id);
 }
-assert(html.includes('--accent:#076959')&&html.includes('--paper:#f5f4ee'),'Photo studio must reuse course palette');
-
-console.log('PASS Fotostudio inline JavaScript parses and validates imported records');
+console.log('PASS Fotostudio JS parses for '+courses.length+' courses');

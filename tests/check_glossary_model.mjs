@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {validateGlossary,GLOSSARY_PATH,GLOSSARY_FIELDS} from "../shared/glossary-model.js";
-assert.equal(GLOSSARY_PATH,"kursseiten/glossar.json");
+assert.equal(GLOSSARY_PATH,"kurse/bok/4-klasse/kursseiten/glossar.json");
 assert.deepEqual(GLOSSARY_FIELDS,["begriff","basis","vertieft","beispiel","frage","antwort"]);
-const original=JSON.parse(readFileSync(new URL("../kursseiten/glossar.json",import.meta.url)));
+const original=JSON.parse(readFileSync(new URL("../kurse/bok/4-klasse/kursseiten/glossar.json",import.meta.url)));
 assert.equal(validateGlossary(original),original);
 assert.ok(original.begriffe.length > 0, "Glossary must contain at least one entry");
 const copy=()=>structuredClone(original);

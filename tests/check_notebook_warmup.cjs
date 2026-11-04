@@ -36,7 +36,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  const embed=source('extensions/ki-autostart/embed.js');
  assert(embed.includes('restoreNotebookUploads(panel.sessionContext.session.kernel,files)'));
  assert(embed.includes('event.origin!==origin'),'The upload bridge must remain same-origin');
- const foto=source('content/ki_projekt/ki_foto_tools.py');
+ const foto=source('kurse/bok/4-klasse/content/ki_projekt/ki_foto_tools.py');
  assert(foto.includes('def gespeicherte_uploads()'));
  console.log('PASS managed idle warmup, ZIP while warming, per-notebook uploads and safe filesystem restaging');
 })().catch(error=>{console.error(error);process.exitCode=1;});

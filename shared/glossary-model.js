@@ -1,5 +1,5 @@
 /* One glossary data contract for the authenticated editor and its Worker. */
-export const GLOSSARY_PATH = "kursseiten/glossar.json";
+export const GLOSSARY_PATH = "kurse/bok/4-klasse/kursseiten/glossar.json";
 export const GLOSSARY_FIELDS = ["begriff","basis","vertieft","beispiel","frage","antwort"];
 const validText = (value,min,max) => typeof value==="string" && value.trim().length>=min && value.length<=max;
 export function validateGlossary(doc){

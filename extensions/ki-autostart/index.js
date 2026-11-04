@@ -21,6 +21,7 @@ const isAllowed = path => {
   const name = courseName.exec(path)?.[1];
   return Boolean(name && (allowed.has(name) || lessonNotebook(name)));
 };
+for (const name of [...allowed]) allowed.add(name.split('/').pop());
 const tag = 'ki-autostart';
 const rememberedPathKey = 'kst-ki-last-notebook';
 
@@ -131,10 +132,8 @@ del _ki_saved, _ki_item, _ki_widget`;
           // A restored notebook deliberately does not execute imported or edited
           // Python. Offer an explicit one-click restart for the untouched,
           // published visual teaching cells only; saved edits remain unchanged.
-          if (panel.context.path === 'portal/perzeptron_und_neuronale_netze.ipynb' ||
-              panel.context.path === 'portal/mehrschichtige_netze.ipynb' ||
-              panel.context.path === 'portal/xor_einzelne_neuronen.ipynb' ||
-              panel.context.path === 'portal/ziffernerkennung.ipynb') {
+          if (['perzeptron_und_neuronale_netze.ipynb', 'mehrschichtige_netze.ipynb',
+           'xor_einzelne_neuronen.ipynb', 'ziffernerkennung.ipynb'].includes(panel.context.path.split('/').pop())) {
             const activate = new Widget();
             activate.node.className = 'ki-activate-figures';
             const button = document.createElement('button');

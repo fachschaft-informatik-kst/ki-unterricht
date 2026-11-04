@@ -15,7 +15,7 @@ const path=require('node:path');
   const page=await context.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route(/^https:\/\//,route=>route.abort()); // No model download needed to test saved records.
-  const url='http://127.0.0.1:8777/projekt/studio/';
+  const url='http://127.0.0.1:8777/bok/4-klasse/studio/';
   await page.goto(url,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.querySelector('#autosave-status')?.textContent.includes('aktiv'),null,{timeout:10000});
   assert.equal(await page.locator('.eyebrow').textContent(),'KI-Bildprojekt · Schritt 2: Bilder vorbereiten');
