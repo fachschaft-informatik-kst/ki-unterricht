@@ -75,7 +75,7 @@ Reflexion 3: Ergebnis, Erklärung und Auswahl.
       <summary><span class="phase-num">05</span> Abschliessend prüfen</summary>
       <div class="detail-body">
         <!-- MD:START -->
-Prüfen Sie nur die gewählte Variante auf P1 und P2. Danach nichts mehr optimieren.
+Prüfen Sie nur die gewählte Variante an den unabhängigen Testbildern (Gruppen P1 und P2, siehe Datenplan). Danach nichts mehr optimieren.
 <!-- MD:END -->
         <!-- MD:START -->
 Reflexion 4: drei Beispiele und Grenzen; richtige Beispiele sind erlaubt.

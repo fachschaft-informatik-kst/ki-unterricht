@@ -4,7 +4,7 @@
 <h1>Was hat unser<br/>Netz <em>gelernt?</em></h1>
 <p class="small" id="projekt-vorabcheck-hinweis"><strong>Vor dem Projektstart:</strong> Der unbenotete <a href="#projekt-bereit-check">Lernstandscheck aus DL 4</a> hilft, offene Fragen zu Neuron und Netz zu erkennen. Die faire Datenaufteilung lernt ihr selbstständig im Lernpfad von DL 5.</p>
 <p class="lead">Eigene Bilder, ein neuronales Netz und ein fairer Vergleich im Tandem. Sie wählen Ihr Thema, untersuchen zwei Varianten und begründen, was Ihr Modell wirklich gelernt hat.</p>
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung V1</a> · <a href="#glossar-testdaten">Testdaten P1/P2</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a></p>
 <div class="project-start-guide" aria-labelledby="project-start-title">
   <h2 id="project-start-title">Hier beginnen Sie</h2>
   <!-- MD:START -->

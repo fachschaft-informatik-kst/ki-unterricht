@@ -14,6 +14,8 @@
 **Das lernen Sie hier ohne Einführung der Lehrperson:** Sie können die drei Datenrollen unterscheiden, ein Datenleck erkennen und Ihre eigenen Fotos so auf fünf Gruppen verteilen, dass das Ergebnis aussagekräftig bleibt.
 
 **Arbeitsweg:** (1) Erklärungen lesen → (2) Fälle selbst lösen → (3) mit der Lösung vergleichen → (4) Notebook ausprobieren → (5) eigene fünf Gruppen planen. Arbeiten Sie zu zweit, halten Sie die erste Vermutung aber jeweils allein fest. Bei Fehlern: Erklärung nochmals lesen und die Lösung verbessern.
+
+**Die fünf Gruppen:** Ihre Fotos werden in fünf Gruppen sortiert, benannt mit Anfangsbuchstabe und Nummer: **T1 und T2** (T = Training), **V1** (V = Validierung) und **P1 und P2** (P = Prüfung, der Abschlusstest). Jede Gruppe enthält pro Klasse ein anderes Exemplar mit acht Fotos; die Übersicht folgt weiter unten unter «Fünf Gruppen. 80 Fotos.». Welche Aufgabe jede Gruppe hat, zeigen die drei folgenden Karten.
 <!-- MD:END -->
       <div class="lesson-steps">
         <article>
