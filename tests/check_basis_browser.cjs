@@ -4,6 +4,7 @@ const {spawn}=require('node:child_process');
 const path=require('node:path');
 const fs=require('node:fs'),os=require('node:os');
 const assert=require('node:assert/strict');
+const courses=require('../shared/course-sites.json').courses;
 
 // Browser-level contract shared by the first- and fourth-year notebook panels:
 // button and SVG must toggle in both directions, and browser-initiated exits
@@ -66,13 +67,17 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('a.choice').count(),4,'BOK and IRN each provide course slots for 1st and 4th year');
     for(const slug of ['bok/1-klasse','bok/4-klasse','irn/1-klasse','irn/4-klasse']){
       assert.equal(await page.locator('a.choice[href="'+slug+'/"]').count(),1);
+      const course=courses.find(course=>course.slug===slug);
+      assert.equal(await page.locator('a.choice[href="'+slug+'/"] h3').textContent(),course.name);
     }
+    const basicCourse=courses.find(course=>course.slug==='bok/1-klasse');
+    const expectedTitle=`${basicCourse.name} · ${basicCourse.teacher} · ${basicCourse.grade}. Klasse`;
     // Exercise the new BOK route, then continue regression coverage on the
     // canonical /bok/1-klasse/ course page; the old entrypoint is retired.
     await page.locator('a.choice[href="bok/1-klasse/"]').click();
-    assert.equal(await page.title(),'BOK KI 1. Klasse');
+    assert.equal(await page.title(),expectedTitle);
     await page.goto('http://127.0.0.1:8770/bok/1-klasse/');
-    assert.equal(await page.title(),'BOK KI 1. Klasse');
+    assert.equal(await page.title(),expectedTitle);
     assert.equal(await page.locator('main > section').count(),13);
     // Shared KST breadcrumb; track switching happens only via the landing page.
     const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
