@@ -1,35 +1,37 @@
 ## Doppellektion 03
 
-**Bereitlegen:** Papier für die Handrechnung und [Neuron-Labor auf der Kursseite](index.html#perzeptron-5). [Notebook herunterladen](materialien/downloads/perzeptron_und_neuronale_netze.ipynb) · [Perzeptron-Arbeitsblatt](materialien/downloads/Arbeitsblatt_Perzeptron.md) · [Lösung](materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md).
+**Bereitlegen:** Papier für die Handrechnung, Beamer für die Live-Experimente und [Neuron-Labor auf der Kursseite](index.html#perzeptron-5). [Notebook herunterladen](materialien/downloads/perzeptron_und_neuronale_netze.ipynb) · [Perzeptron-Arbeitsblatt](materialien/downloads/Arbeitsblatt_Perzeptron.md) · [Lösung](materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md).
 
-### Ankommen · 5 Min. · Wann geht das Signal an?
+### Ankommen · 6 Min. · Wann geht das Signal an?
 
-**Tandem · 5 Min.**
+**Tandem · 6 Min.**
 
-Ein Warnsignal soll nur angehen, wenn **beide** Sensoren aktiv sind. Ergänzen Sie:
+Ein Warnsignal soll nur angehen, wenn **beide** Sensoren aktiv sind (AND). Ergänzen Sie danach die Spalte für OR: Das Signal geht an, wenn **mindestens ein** Sensor aktiv ist. Öffnen Sie zudem das Notebook «Neuron-Labor», damit Python im Hintergrund startet.
 
-| Sensor x₁ | Sensor x₂ | Gewünschtes Signal |
-|---:|---:|---|
-| 0 | 0 | ______ |
-| 0 | 1 | ______ |
-| 1 | 0 | ______ |
-| 1 | 1 | ______ |
+| Sensor x₁ | Sensor x₂ | AND: Signal | OR: Signal |
+|---:|---:|---|---|
+| 0 | 0 | ______ | ______ |
+| 0 | 1 | ______ | ______ |
+| 1 | 0 | ______ | ______ |
+| 1 | 1 | ______ | ______ |
 
-### Vorwissen aktivieren · 5 Min. · Eingaben und Labels
+### Vorwissen aktivieren · 2 Min. · Eingaben und Labels
 
-**Tandem · 5 Min.**
+**Klasse · 2 Min.**
 
-Ergänzen Sie neben der Tabelle die OR-Zielwerte. Markieren Sie: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
+Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
 
-### Informieren · 15 Min. · Rechenkarte für ein Neuron
+### Informieren · 22 Min. · Rechenkarte für ein Neuron
 
-**Lehrperson → Tandem · 12 / 3 Min.**
+**Lehrperson → Klasse → Tandem → Lehrperson · 7 / 6 / 3 / 6 Min.**
 
 #### Modell · Summe, Schwelle und Ausgabe
 
 **s = x₁ · w₁ + x₂ · w₂ + b.** Ausgabe y = 1 bei s ≥ 0, sonst y = 0.
 
-Beim Schwimmbad-Beispiel stehen zwei Ja/Nein-Eingaben für günstige Bedingungen. Ein Gewicht bestimmt den Einfluss einer Eingabe; der Bias verschiebt die Entscheidung unabhängig von der Eingabe.
+Beim Schwimmbad-Beispiel stehen zwei Ja/Nein-Eingaben für günstige Bedingungen. Ein Gewicht bestimmt den Einfluss einer Eingabe; der Bias verschiebt die Entscheidung unabhängig von der Eingabe. Die Nervenzelle genügt als ein Satz Vergleich; Kapitel 2 der Kursseite ist Selbststudium.
+
+**Klasse · Experiment 1 live am Beamer:** Die Klasse nennt Gewichte für das Schwimmbad-Neuron, die Lehrperson verändert sie im Notebook «Neuron-Labor». Gemeinsam Grafik und Ein-/Ausgabetabelle lesen.
 
 | Eingabe | w₁ / w₂ | Bias | Summe s | Ausgabe |
 |---|---|---:|---|---:|
@@ -39,7 +41,9 @@ Beim Schwimmbad-Beispiel stehen zwei Ja/Nein-Eingaben für günstige Bedingungen
 
 ![AND-Entscheidungsgrenze mit Lösung](materialien/downloads/koordinatengitter_perzeptron_and_loesung.svg "Informieren | Lehrperson")
 
-#### Ein Lernschritt zum Nachrechnen
+#### Ein Lernschritt als Demo (Experiment 3)
+
+**Lehrperson:** Zeigt den Schritt im Neuron-Labor; die Klasse sagt vorher, was sich ändert.
 
 Start: w₁ = w₂ = 0.2, b = −0.5, Lernrate η = 0.2. Beispiel (1,1), Ziel t = 1. Zunächst s = −0.1 und y = 0; Fehler e = t − y = 1.
 
@@ -55,13 +59,12 @@ Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwelle
 
 ![Lernregel eines Perzeptrons als Flussdiagramm](materialien/downloads/perzeptron_lernregel_flussdiagramm.svg "Informieren | Lehrperson")
 
-### Verarbeiten · 55 Min. · Drei Experimente, ein Rechenprotokoll
+### Verarbeiten · 50 Min. · Gatter einstellen, Rechenprotokoll
 
-**Tandem → Einzeln · 45 / 10 Min.**
+**Tandem → Einzeln → Tandem · 32 / 8 / 10 Min.**
 
-1. **Schwimmbad:** Verändern Sie zunächst nur ein Gewicht, dann nur den Bias. Notieren Sie eine Eingabe, bei der sich die Ausgabe ändert.
-2. **AND / OR:** Finden Sie für jede Funktion eine Einstellung. Prüfen Sie mit **denselben Parametern alle vier Eingaben**.
-3. **Lernen:** Verfolgen Sie den oben beschriebenen Schritt im Neuron-Labor. Vergleichen Sie Vorher und Nachher.
+1. **AND / OR (Experiment 2):** Finden Sie für jede Funktion eine Einstellung. Prüfen Sie mit **denselben Parametern alle vier Eingaben**.
+2. **Puffer (10 Min.):** Notebook-Start, Technik und Fragen. **Freiwillige Vertiefung:** Experiment 3 (Lernen) selbst durchführen und Vorher und Nachher vergleichen.
 
 | Experiment / Eingabe | w₁ / w₂ / b vorher | Summe / Ausgabe vorher | Änderung | Summe / Ausgabe nachher |
 |---|---|---|---|---|
@@ -77,7 +80,7 @@ Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwelle
 
 **Einzeln → Klasse → Lehrperson → Einzeln · 2 / 4 / 2 / 2 Min.**
 
-Erklären Sie eine eigene Rechnung und prüfen Sie zwei Lernprotokolle gemeinsam. Schreiben Sie zum Abschluss:
+Erklären Sie eine eigene Rechnung und prüfen Sie gemeinsam zwei Vorher-Nachher-Erklärungen aus der Demo oder dem eigenen Lernversuch. Schreiben Sie zum Abschluss:
 
 - **Entscheiden:** «Ein Neuron berechnet …; das Gewicht …; der Bias …».
 - **Lernen:** «Bei einem Fehler werden … angepasst; unverändert bleiben …».

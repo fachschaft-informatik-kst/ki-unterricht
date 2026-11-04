@@ -6,7 +6,7 @@
 
 ![OR- und NAND-Entscheidungsgrenzen bei XOR](materialien/downloads/koordinatengitter_or_nand_xor.svg "Informieren | Lehrperson")
 
-![Leeres Gitter für die eigene Skizze der XOR-Zwischenschicht](materialien/downloads/koordinatengitter_or_nand_xor_leer.svg "Verarbeiten | Einzeln")
+![Leeres Gitter für die Skizze der XOR-Zwischenschicht](materialien/downloads/koordinatengitter_or_nand_xor_leer.svg "Verarbeiten | Tandem")
 
 ### Tafelübersicht: OR + NAND ergibt XOR
 

@@ -14,54 +14,60 @@
       "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und was unverändert bleibt.",
       "product": "Eine nachvollziehbare Schwimmbad- und AND-Rechnung, passende Parameter für AND/OR und ein erklärter Lernschritt.",
-      "zeit": "Drei zusammenhängende Notebook-Experimente (Schwimmbad, AND/OR-Gatter, Lernschritt) mit Neuron-Grafiken. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt. Die Zeit nutzen wir für die Erklärung der Gewichte und der Korrektur.",
+      "zeit": "Pflichtkern: Schwimmbad-Neuron (Experiment 1) und Lernschritt (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2). Experiment 3 selbst durchzuführen ist freiwillig. Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt.",
       "phases": [
         {
           "phase": "Ankommen",
           "titel": "Warnsignal vermuten",
-          "minutes": 5,
+          "minutes": 6,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 5,
-              "text": "Ein Signal soll nur bei zwei aktiven Sensoren angehen. Notieren Sie die Ausgabe zu 00, 01, 10 und 11."
+              "min": 6,
+              "text": "Ein Signal soll nur bei zwei aktiven Sensoren angehen. Notieren Sie die Ausgabe zu 00, 01, 10 und 11. Ergänzen Sie danach die Ausgaben für OR (mindestens ein Sensor aktiv). Öffnen Sie zudem das Notebook «Neuron-Labor», damit Python im Hintergrund startet."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine UND-Tabelle als erste Vermutung."
+              "text": "Vier Eingabefälle mit AND- und OR-Zielwerten als erste Vermutung."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
           "titel": "Eingabe und Label",
-          "minutes": 5,
+          "minutes": 2,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 5,
-              "text": "Benennen Sie zu einer AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe. Ergänzen Sie die Ausgaben für OR und erklären Sie, worin sich AND und OR unterscheiden."
+              "wer": "Klasse",
+              "min": 2,
+              "text": "Benennen Sie gemeinsam zur AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe (Label) und sagen Sie in einem Satz, worin sich AND und OR unterscheiden."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Vier Eingabefälle mit AND- und OR-Zielwerten."
+              "text": "Eingaben und Zielwerte sind benannt."
             }
           ]
         },
         {
           "phase": "Informieren",
           "titel": "Gewicht, Bias und Lernschritt",
-          "minutes": 15,
+          "minutes": 22,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 12,
-              "text": "Erklärt am Schwimmbad-Beispiel das Neuron als Entscheider und vergleicht es kurz mit der Nervenzelle. Rechnet Summe = x₁·w₁ + x₂·w₂ + b mit Gewichten 1 und 1, Bias −1.5 für (1,1) und (1,0) vor; ab Summe 0 feuert das Neuron. Zeigt einen Lernschritt: Gewichte und Bias werden korrigiert, nicht die Eingaben oder Labels."
+              "min": 7,
+              "text": "Erklärt am Schwimmbad-Beispiel das Neuron als Entscheider und erwähnt die Nervenzelle nur in einem Satz (Kapitel 2 der Kursseite ist Selbststudium). Rechnet Summe = x₁·w₁ + x₂·w₂ + b mit Gewichten 1 und 1, Bias −1.5 für (1,1) und (1,0) vor; ab Summe 0 feuert das Neuron."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 6,
+              "text": "Experiment 1 live am Beamer: Das Schwimmbad-Neuron im Notebook «Neuron-Labor». Die Klasse nennt Gewichte, die Lehrperson verändert sie, gemeinsam wird Grafik und Ein-/Ausgabetabelle gelesen."
             },
             {
               "art": "Auftrag",
@@ -70,33 +76,45 @@
               "text": "Rechnen Sie (0,1) selbst und erklären Sie den Unterschied zwischen Gewicht und Bias."
             },
             {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 6,
+              "text": "Zeigt Experiment 3 als Demo: Korrektur des Beispiels (1,1) mit Startwerten 0.2/0.2, Bias −0.5 und Lernrate 0.2. Die Klasse sagt vorher, was sich ändert; festgehalten wird: Gewichte und Bias werden korrigiert, nicht die Eingaben oder Labels."
+            },
+            {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine geprüfte Rechnung als Orientierung für das Experiment."
+              "text": "Eine geprüfte Rechnung und ein beobachteter Lernschritt als Orientierung für das Experiment."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Mit einem Neuron entscheiden und lernen",
-          "minutes": 55,
+          "titel": "Gatter einstellen und selbst rechnen",
+          "minutes": 50,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 45,
-              "text": "Arbeiten Sie im Notebook «Neuron-Labor» mit drei Experimenten: Verändern Sie die Gewichte des Schwimmbad-Neurons und lesen Sie Grafik und Ein-/Ausgabetabelle. Stellen Sie AND und OR mit Gewichten und Bias ein. Verfolgen Sie dann beim Lernen die Korrektur des Beispiels (1,1) mit Startwerten 0.2/0.2, Bias −0.5 und Lernrate 0.2. Halten Sie eine passende Einstellung und einen Vorher-Nachher-Vergleich fest."
+              "min": 32,
+              "text": "Arbeiten Sie im Notebook «Neuron-Labor» im Experiment 2: Stellen Sie AND und OR mit Gewichten und Bias ein und halten Sie je eine passende Einstellung fest."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
+              "min": 8,
               "text": "Rechnen Sie allein für ein ausgewähltes AND- oder OR-Beispiel die gewichtete Summe samt Bias aus. Erklären Sie, welche Änderung der Parameter die Ausgabe umkehren würde."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Frei verfügbarer Puffer für Notebook-Start, Technik und Fragen. Freiwillige Vertiefung für schnelle Tandems: Experiment 3 selbst durchführen und den Vorher-Nachher-Vergleich festhalten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine eigene Handrechnung, nachvollziehbare Regler-Einstellungen und ein erklärter Lernschritt."
+              "text": "Eine eigene Handrechnung und nachvollziehbare Regler-Einstellungen für AND und OR."
             }
           ]
         },
@@ -115,7 +133,7 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Vergleichen Sie zwei Vorher-Nachher-Erklärungen aus dem Lernversuch und prüfen Sie, ob die korrigierten Werte zur Rechnung passen."
+              "text": "Vergleichen Sie zwei Vorher-Nachher-Erklärungen aus der Demo (oder aus dem eigenen Lernversuch) und prüfen Sie, ob die korrigierten Werte zur Rechnung passen."
             },
             {
               "art": "Input",
