@@ -22,7 +22,7 @@ def build(root: Path, out: Path, lessons: list[dict]) -> None:
 <html lang="de-CH"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Materialkoffer · KI entdecken · 1. Klasse</title>
+<title>Materialkoffer · Künstliche Intelligenz · 1. Klasse</title>
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="../projekt/portal.css">
 <link rel="stylesheet" href="basis.css">

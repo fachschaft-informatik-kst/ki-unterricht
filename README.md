@@ -8,10 +8,10 @@ Webbasierte Unterrichtsplattform für KI an der Kantonsschule Stadelhofen. Sie e
 
 | Kurs | Kursseite | Bearbeitbare Quellen |
 | --- | --- | --- |
-| BOK · 1. Klasse | [KI entdecken](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/1-klasse/) | `kurse/bok/1-klasse/` |
-| BOK · 4. Klasse | [KI vertiefen](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/) | `kurse/bok/4-klasse/` |
-| IRN · 1. Klasse | [KI entdecken](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/1-klasse/) | `kurse/irn/1-klasse/` |
-| IRN · 4. Klasse | [KI vertiefen](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/4-klasse/) | `kurse/irn/4-klasse/` |
+| BOK · 1. Klasse | [Künstliche Intelligenz](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/1-klasse/) | `kurse/bok/1-klasse/` |
+| BOK · 4. Klasse | [Künstliche Intelligenz](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/) | `kurse/bok/4-klasse/` |
+| IRN · 1. Klasse | [Künstliche Intelligenz](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/1-klasse/) | `kurse/irn/1-klasse/` |
+| IRN · 4. Klasse | [Künstliche Intelligenz](https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/4-klasse/) | `kurse/irn/4-klasse/` |
 
 Jeder Kurs hat eigene Kapitel, Unterrichtspläne, Materialien, Glossare, Musterlösungen und Notebookquellen. Änderungen an einem Kurs verändern die anderen Kurse nicht. Die bisherigen Adressen `/basis/` und `/projekt/` werden nicht mehr als Kursseiten veröffentlicht.
 
@@ -146,8 +146,8 @@ Bestehende Kapitel-IDs, Lektions-IDs und Antwortschlüssel möglichst beibehalte
 Eine neue Lehrperson erhält eine eigene Kopie der Vorlage für die entsprechende Klassenstufe:
 
 ```sh
-python scripts/add_teacher_course.py MAI 1 "KI entdecken" --dry-run
-python scripts/add_teacher_course.py MAI 1 "KI entdecken"
+python scripts/add_teacher_course.py MAI 1 "Künstliche Intelligenz" --dry-run
+python scripts/add_teacher_course.py MAI 1 "Künstliche Intelligenz"
 make preview
 ```
 

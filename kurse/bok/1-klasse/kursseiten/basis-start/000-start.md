@@ -1,3 +1,3 @@
 <span class="section-label">Informatik · Künstliche Intelligenz</span>
-<h1>KI entdecken</h1>
+<h1>Künstliche Intelligenz</h1>
 <!-- OVERVIEW -->

@@ -8,10 +8,10 @@ if (pagesOrigin) location.replace("https://kst-ki-admin.kevin-bohn.workers.dev/"
 const $=id=>document.getElementById(id);
 const state={chapters:[],current:null,staged:new Map(),manifest:null,plans:new Map(),notebooks:[],course:"vertiefung",glossary:null,glossarySelected:null};
 const COURSE_PROFILES={
-  basis:{slug:"bok/1-klasse",theme:"bok-1-klasse",teacher:"BOK",grade:1,root:"kurse/bok/1-klasse",manifest:"kurse/bok/1-klasse/kursseiten/manifest.json",name:"KI entdecken"},
-  vertiefung:{slug:"bok/4-klasse",theme:"bok-4-klasse",teacher:"BOK",grade:4,root:"kurse/bok/4-klasse",manifest:"kurse/bok/4-klasse/kursseiten/manifest.json",name:"KI vertiefen"},
-  irn1:{slug:"irn/1-klasse",theme:"irn-1-klasse",teacher:"IRN",grade:1,root:"kurse/irn/1-klasse",manifest:"kurse/irn/1-klasse/kursseiten/manifest.json",name:"KI entdecken (Entwurf)",source:"irn-1"},
-  irn4:{slug:"irn/4-klasse",theme:"irn-4-klasse",teacher:"IRN",grade:4,root:"kurse/irn/4-klasse",manifest:"kurse/irn/4-klasse/kursseiten/manifest.json",name:"KI vertiefen (Entwurf)",source:"irn-4"}
+  basis:{slug:"bok/1-klasse",theme:"bok-1-klasse",teacher:"BOK",grade:1,root:"kurse/bok/1-klasse",manifest:"kurse/bok/1-klasse/kursseiten/manifest.json",name:"Künstliche Intelligenz"},
+  vertiefung:{slug:"bok/4-klasse",theme:"bok-4-klasse",teacher:"BOK",grade:4,root:"kurse/bok/4-klasse",manifest:"kurse/bok/4-klasse/kursseiten/manifest.json",name:"Künstliche Intelligenz"},
+  irn1:{slug:"irn/1-klasse",theme:"irn-1-klasse",teacher:"IRN",grade:1,root:"kurse/irn/1-klasse",manifest:"kurse/irn/1-klasse/kursseiten/manifest.json",name:"Künstliche Intelligenz (Entwurf)",source:"irn-1"},
+  irn4:{slug:"irn/4-klasse",theme:"irn-4-klasse",teacher:"IRN",grade:4,root:"kurse/irn/4-klasse",manifest:"kurse/irn/4-klasse/kursseiten/manifest.json",name:"Künstliche Intelligenz (Entwurf)",source:"irn-4"}
 };
 const courseProfile=()=>COURSE_PROFILES[state.course];
 const coursePath=relative=>courseProfile().root+"/"+relative;

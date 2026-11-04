@@ -51,7 +51,7 @@ def theme_css(course: dict) -> str:
 
 def course_tab_title(course: dict) -> str:
     """Uniform browser tab title, independent of the visible course name."""
-    return f'{course["teacher"]} KI {course["grade"]}. Klasse'
+    return f'{course["name"]} · {course["teacher"]} · {course["grade"]}. Klasse'
 
 
 def planned_page(course: dict) -> str:

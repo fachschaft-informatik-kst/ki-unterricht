@@ -141,7 +141,7 @@ eine Fehlermeldung statt eines stillen Überschreibens.
 
 ## Weitere Lehrperson hinzufügen
 
-`python scripts/add_teacher_course.py MAI 1 "KI entdecken"` erzeugt einen
+`python scripts/add_teacher_course.py MAI 1 "Künstliche Intelligenz"` erzeugt einen
 Kursentwurf mit eigenem Manifest, AVIVA-Platzhaltern, Aufgaben, Materialkoffer,
 Musterlösungen und Glossar. Der Editor lädt neue Kursprofile aus
 `shared/course-sites.json`; es ist kein zusätzlicher Worker nötig. Die

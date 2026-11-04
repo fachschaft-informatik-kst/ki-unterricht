@@ -1,8 +1,8 @@
 """Add an independent teacher course by copying the complete BOK template.
 
 Examples:
-    python scripts/add_teacher_course.py MAI 1 "KI entdecken" --dry-run
-    python scripts/add_teacher_course.py MAI 4 "KI vertiefen" --publish
+    python scripts/add_teacher_course.py MAI 1 "Künstliche Intelligenz" --dry-run
+    python scripts/add_teacher_course.py MAI 4 "Künstliche Intelligenz" --publish
 
 Templates are sources, never links: changes after copying do not affect BOK,
 IRN or other teacher courses.

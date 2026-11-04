@@ -42,9 +42,9 @@ with tempfile.TemporaryDirectory() as folder:
     (target/"shared").mkdir()
     (target/"shared/course-sites.json").write_text(json.dumps({"version":1,"courses":[]}),encoding="utf-8")
     shutil.copytree(ROOT/"kurse/_vorlagen/1-klasse",target/"kurse/_vorlagen/1-klasse")
-    dry=create(target,"MAI",1,"KI entdecken",dry_run=True)
+    dry=create(target,"MAI",1,"Künstliche Intelligenz",dry_run=True)
     assert not (target/"kurse/mai").exists()
-    created=create(target,"MAI",1,"KI entdecken",accent="#684e9b")
+    created=create(target,"MAI",1,"Künstliche Intelligenz",accent="#684e9b")
     assert all(path.is_file() for path in created)
     owner=load_registry(target)[0]
     assert owner["manifest"]=="kurse/mai/1-klasse/kursseiten/manifest.json"

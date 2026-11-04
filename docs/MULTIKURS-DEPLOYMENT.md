@@ -23,7 +23,7 @@ Die authentifizierten Unterrichtsunterlagen werden über `/teacher/<lehrperson>/
 
 BOK-Kurse werden nur noch unter `/bok/1-klasse/` und `/bok/4-klasse/` veröffentlicht. Die früheren Einstiegsseiten `/basis/` und `/projekt/` entfallen. Alle Kurse erhalten eigene Notebookdokumentpfade und Hilfsdateien unter `portal/<lehrperson>/<klasse>/`. Alte BOK-Notebookadressen bleiben zusätzlich als Kompatibilitätskopien erhalten; bestehende BOK-Browser-/ZIP-Speicherschlüssel bleiben unverändert. Ein gemeinsamer JupyterLite-Build reicht für die unterschiedlichen Notebookkopien.
 
-Neue Lehrpersonen lassen sich mit `python scripts/add_teacher_course.py MAI 1 "KI entdecken"` als vollständige Kopie der passenden Vorlage anlegen. Sie stehen zunächst auf `planned`; nach Freigabe wird `status` auf `published` und `source` auf `generated` gesetzt. Auch neue Lehrpersonen verwenden den vollständigen Renderer ihrer Klassenstufe und eigene Browser-/ZIP-Namensräume.
+Neue Lehrpersonen lassen sich mit `python scripts/add_teacher_course.py MAI 1 "Künstliche Intelligenz"` als vollständige Kopie der passenden Vorlage anlegen. Sie stehen zunächst auf `planned`; nach Freigabe wird `status` auf `published` und `source` auf `generated` gesetzt. Auch neue Lehrpersonen verwenden den vollständigen Renderer ihrer Klassenstufe und eigene Browser-/ZIP-Namensräume.
 
 ## Tests und Deployment
 

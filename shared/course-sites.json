@@ -8,7 +8,7 @@
       "slug": "bok/1-klasse",
       "source": "basis",
       "status": "published",
-      "name": "KI entdecken",
+      "name": "Künstliche Intelligenz",
       "theme": {
         "accent": "#3653a3"
       },
@@ -30,7 +30,7 @@
       "slug": "bok/4-klasse",
       "source": "projekt",
       "status": "published",
-      "name": "KI vertiefen",
+      "name": "Künstliche Intelligenz",
       "theme": {
         "accent": "#076959"
       },
@@ -53,7 +53,7 @@
       "slug": "irn/1-klasse",
       "source": "generated",
       "status": "published",
-      "name": "KI entdecken",
+      "name": "Künstliche Intelligenz",
       "theme": {
         "accent": "#69419b"
       },
@@ -75,7 +75,7 @@
       "slug": "irn/4-klasse",
       "source": "generated",
       "status": "published",
-      "name": "KI vertiefen",
+      "name": "Künstliche Intelligenz",
       "theme": {
         "accent": "#9a481d"
       },
