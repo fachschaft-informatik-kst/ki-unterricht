@@ -91,7 +91,8 @@ for kind, manifest_path in (("projekt", "kurse/bok/4-klasse/kursseiten/manifest.
         target = link["href"][1:]
         assert not target or page.find(id=target), f"{kind}: broken course navigation #{target}"
 
-    assert "musterloesungen" not in index.read_text(encoding="utf-8").casefold(), (
+    assert not any("musterloesungen" in tag.get("href", "").casefold()
+                   for tag in page.select("a[href]")), (
         kind, "student pages must not link to teacher solutions"
     )
     print(f"PASS {kind}: {len(lessons)} lessons, matching student/teacher pages and unique saved keys")

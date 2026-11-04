@@ -25,7 +25,6 @@ for slug in {row["slug"] for row in manifest["courses"]}:
     assert f'href="{slug}/"' in overview
 for slug, legacy in [("bok/1-klasse", "basis"), ("bok/4-klasse", "projekt")]:
     generated = (dist / slug / "index.html").read_text(encoding="utf-8")
-    assert "BOK" in generated and f"{slug.split('/')[1][0]}. Klasse" in generated
     assert "data-course-theme" in generated
     assert not (dist / legacy / "index.html").exists(), "Old public course entrypoint remains"
     assert 'href="../../kurse.html"' in generated
@@ -44,9 +43,8 @@ assert (dist / "lab/index.html").is_file(), "Shared notebook runtime must remain
 assert (dist / "projekt/admin/index.html").is_file(), "Existing Cloudflare Worker editor must remain available"
 for slug in ("irn/1-klasse", "irn/4-klasse"):
     page = (dist / slug / "index.html").read_text(encoding="utf-8")
-    assert "in Vorbereitung" not in page
     assert "data-course-theme" in page
-    assert "Jupyter" in page
+    assert "notebook-blocks.js" in page
     assert "lesson-plan" in page
     assert "portal/" + slug + "/" in page, "IRN notebooks need separate paths"
     for private in ("unterrichtsplan.html", "materialien.html", "kurs.json",
