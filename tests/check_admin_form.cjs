@@ -47,6 +47,8 @@ const server=http.createServer((req,res)=>{
       await page.evaluate(()=>window.addEventListener("pagehide",()=>localStorage.clear(),{once:true}));
       await page.reload();
       await page.locator("#courseThemePreview strong").waitFor({state:"visible"});
+      assert.equal(await page.locator("#coursePageLink").getAttribute("href"),
+        "https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/");
     };
     page.on("pageerror",error=>{throw error;});
     let login="integration-test";
@@ -166,6 +168,8 @@ const server=http.createServer((req,res)=>{
     // Reset fixtures so the existing editing and publication flows run unchanged.
     await resetEditor();
     await page.locator("#courseSelect").selectOption("irn1");
+    assert.equal(await page.locator("#coursePageLink").getAttribute("href"),
+      "https://fachschaft-informatik-kst.github.io/ki-unterricht/irn/1-klasse/");
     await page.locator("#chapters button").first().waitFor({state:"visible"});
     assert.equal(await page.locator("#courseThemeColor").inputValue(),"#69419b");
     assert.match(await page.locator("#courseThemePreview").innerText(),/IRN/);

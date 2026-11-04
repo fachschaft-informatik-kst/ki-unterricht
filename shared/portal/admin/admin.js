@@ -25,6 +25,7 @@ const teacherSource=(kind)=>{
   return files[{musterloesungen:"solutions","musterloesungen-felder":"fields",glossar:"glossary"}[kind]];
 };
 function updateTeacherAccessLinks(){
+  $("coursePageLink").href=coursePreviewBase();
   const origin="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/"+courseProfile().slug+"/";
   for(const [id,kind] of [["teacherPlanLink","planung"],["teacherMaterialsLink","materialien"],["teacherSolutionsLink","musterloesungen"]])
     $(id).href=origin+kind;
