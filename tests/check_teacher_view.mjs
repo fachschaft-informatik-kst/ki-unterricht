@@ -163,5 +163,6 @@ assert.equal(solutions.entries.length,1);
 assert.equal(solutions.entries[0].question,"Worin unterscheiden sich Regeln von Lernen?");
 assert.equal(solutions.entries[0].questionSource,"original");
 
-assert(solutions.entries[0].courseLink.endsWith("/bok/1-klasse/#basis-test"));
+assert(solutions.entries[0].courseLink.endsWith("/bok/1-klasse/#feld-"+solutions.entries[0].field),
+  "answers with an original question must deep-link to their field");
 console.log("PASS teacher view: DL navigation, color coding, lesson-specific materials, precise questions");

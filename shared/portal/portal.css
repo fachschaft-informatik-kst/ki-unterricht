@@ -524,3 +524,6 @@ dialog.ki-notebook-runtime.ki-notebook-dialog::backdrop{background:rgba(16,29,37
   #fremdmodell .dl8-steps li,#fremdmodell .dl8-compare-card,#fremdmodell .dl8-question,#fremdmodell .dl8-note{break-inside:avoid}
   #fremdmodell .dl8-steps,#fremdmodell .dl8-compare{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* Brief highlight for a student field reached through a #feld-<name> link. */
+.field-jump{outline:3px solid #ba552e;outline-offset:4px;border-radius:6px}

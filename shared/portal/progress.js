@@ -73,15 +73,38 @@ function renderChapters(view){
  }
 }
 let currentView=null;
+// #feld-<name> jumps to the student field with that data-answer/-basis-answer/-journal name.
+function byHash(id){
+ if(!id.startsWith('feld-'))return $(id);
+ const name=id.slice(5);
+ return [...document.querySelectorAll('[data-answer],[data-basis-answer],[data-journal]')]
+  .find(e=>e.dataset.answer===name||e.dataset.basisAnswer===name||e.dataset.journal===name)||null;
+}
+// Lazy images above the field change the layout while it loads, so keep the
+// field centered until the page settles or the reader scrolls on their own.
+function jumpToField(target){
+ const spot=target.closest('label,.ki-sort-card')||target;
+ const go=()=>spot.scrollIntoView({block:'center',behavior:'instant'});
+ const stop=()=>{document.removeEventListener('load',go,true);for(const t of ['wheel','touchstart','keydown','mousedown'])window.removeEventListener(t,stop,true);};
+ go();document.addEventListener('load',go,true);
+ for(const t of ['wheel','touchstart','keydown','mousedown'])window.addEventListener(t,stop,{capture:true,once:true});
+ spot.classList.add('field-jump');
+ setTimeout(()=>{stop();spot.classList.remove('field-jump');},3500);
+}
 function route(){
  const id=decodeURIComponent(location.hash.slice(1)||'start');
- const target=$(id),view=target?.closest('main > section')||$('start');
+ const target=byHash(id),view=target?.closest('main > section')||$('start');
  views.forEach(v=>v.classList.toggle('view-hidden',v!==view));
  links.forEach(a=>{if(a.hash==='#'+(view.dataset.nav||view.id))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
  if(target&&target!==view){let p=target;while(p){if(p.tagName==='DETAILS')p.open=true;p=p.parentElement;}}
  currentView=view;renderChapters(view);
  view.tabIndex=-1;
- requestAnimationFrame(()=>{if(target&&target!==view)target.scrollIntoView({block:'start'});else window.scrollTo({top:0,behavior:'instant'});view.focus({preventScroll:true});});
+ requestAnimationFrame(()=>{
+  const field=Boolean(target)&&id.startsWith('feld-');
+  if(field)jumpToField(target);
+  else if(target&&target!==view)target.scrollIntoView({block:'start'});else window.scrollTo({top:0,behavior:'instant'});
+  view.focus({preventScroll:true});
+ });
 }
 window.addEventListener('hashchange',route);
 document.addEventListener('DOMContentLoaded',()=>{if(currentView)renderChapters(currentView);});

@@ -231,8 +231,10 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
     entry.question=original||curated||fieldTopic(entry.field,current.title);
     entry.questionSource=original?"original":curated?"sinngemaess":"thema";
     entry.questionFound=Boolean(original||curated);
+    // #feld-<name> is resolved by the course routers; fields that exist only
+    // dynamically (no source element) fall back to the lesson view.
     entry.courseLink="https://fachschaft-informatik-kst.github.io/ki-unterricht/"+
-      course+"/#"+current.view;
+      course+"/#"+(original?"feld-"+encodeURIComponent(entry.field):current.view);
   }
   return {...base,notes,entries,
     sections:[{title:"Allgemeine Musterlösungen",markdown:general},

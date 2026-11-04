@@ -5,13 +5,31 @@ const links=[...document.querySelectorAll('.nav > a')];
 const submenus=new Map();
 const key='kst-ki-basis-v1';
 document.documentElement.classList.add('has-js');
+// #feld-<name> jumps to the student field with that data-answer/-basis-answer/-journal name.
+function byHash(id){
+  if(!id.startsWith('feld-'))return document.getElementById(id);
+  const name=id.slice(5);
+  return [...document.querySelectorAll('[data-answer],[data-basis-answer],[data-journal]')]
+    .find(e=>e.dataset.answer===name||e.dataset.basisAnswer===name||e.dataset.journal===name)||null;
+}
+// Lazy images above the field change the layout while it loads, so keep the
+// field centered until the page settles or the reader scrolls on their own.
+function jumpToField(target){
+ const spot=target.closest('label,.ki-sort-card')||target;
+ const go=()=>spot.scrollIntoView({block:'center',behavior:'instant'});
+ const stop=()=>{document.removeEventListener('load',go,true);for(const t of ['wheel','touchstart','keydown','mousedown'])window.removeEventListener(t,stop,true);};
+ go();document.addEventListener('load',go,true);
+ for(const t of ['wheel','touchstart','keydown','mousedown'])window.addEventListener(t,stop,{capture:true,once:true});
+ spot.classList.add('field-jump');
+ setTimeout(()=>{stop();spot.classList.remove('field-jump');},3500);
+}
 function show(){
   const id=decodeURIComponent((location.hash||'#basis-start').slice(1));
   if(id==='basis-sicherung'){
     requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({block:'start'}));
     return;
   }
-  const chapter=document.getElementById(id);
+  const chapter=byHash(id);
   const parent=sections.find(s=>s.id===id||s.contains(chapter));
   const active=parent||sections[0];
   for(const s of sections)s.classList.toggle('basis-view-hidden',s!==active);
@@ -26,8 +44,9 @@ function show(){
     const lessonLink=links.find(a=>a.hash==='#'+lessonId);
     if(lessonLink)lessonLink.setAttribute('aria-expanded',String(expanded));
   }
-  if(chapter?.matches('details.kapitel'))chapter.open=true;
-  if(id!==active.id&&chapter)requestAnimationFrame(()=>chapter.scrollIntoView({block:'start'}));
+  for(let p=chapter;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;
+  if(id.startsWith('feld-')&&chapter)requestAnimationFrame(()=>jumpToField(chapter));
+  else if(id!==active.id&&chapter)requestAnimationFrame(()=>chapter.scrollIntoView({block:'start'}));
   else window.scrollTo({top:0,left:0});
 }
 for(const section of sections){
