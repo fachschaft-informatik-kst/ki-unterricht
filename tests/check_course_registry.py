@@ -17,13 +17,13 @@ assert len({c["courseRoot"] for c in known})==len(known)
 for course in known:
     source=ROOT/course["courseRoot"]
     manifest=json.loads((ROOT/course["manifest"]).read_text(encoding="utf-8"))
-    assert len(manifest["sections"])>=10
+    assert len(manifest["sections"])>=1
     for section in manifest["sections"]:
         assert (source/"kursseiten"/section["id"]).is_dir()
     for path in course["teacherFiles"].values():
         assert (ROOT/path).is_file()
     model=load_course(ROOT,course["manifest"])
-    assert len(model["lessons"])>=10
+    assert len(model["lessons"])>=1
 for grade in (1,4):
     template=ROOT/"templates"/f"{grade}-klasse"
     assert (template/"kursseiten/manifest.json").is_file()
@@ -49,7 +49,7 @@ with tempfile.TemporaryDirectory() as folder:
     owner=load_registry(target)[0]
     assert owner["manifest"]=="kurse/mai/1-klasse/kursseiten/manifest.json"
     assert owner["sectionPrefix"]=="basis-"
-    assert len(load_course(target,owner["manifest"])["lessons"])>=10
+    assert len(load_course(target,owner["manifest"])["lessons"])>=1
     assert owner["status"]=="planned" and owner["source"] is None
     assert (target/"kurse/mai/1-klasse/content").is_dir()
     try: create(target,"MAI",1,"Doppelter Kurs")

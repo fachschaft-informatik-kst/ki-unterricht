@@ -29,7 +29,7 @@ Journal und Unterrichtsantworten werden lokal gespeichert. Alle fünf geöffnete
 
 `node tests/check_notebook_snapshot.cjs` prüft die verlustfreie Übernahme der Notebook-Inhalte. `PORTAL_SITE=dist node tests/check_persistence.cjs` prüft alle fünf Notebooks, Uploads, Widget-Ergebnisse, Neuladen, ZIP-Import in einen frischen Browser und das vollständige Ersetzen eines Projektstands.
 
-`python tests/check_course.py` prüft Pläne, Notebooks, Grafiken, interne Verweise und entfernte Inhalte. `PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs` prüft den echten Browserweg (Playwright und Chromium erforderlich). Die Prüfung benötigt einen vollständigen JupyterLite-Build; eine reine HTML-Vorschau enthält keine Python-Laufzeit.
+`python tests/check_editor_publish.py` prüft dynamisch die aus dem Kursmodell erzeugten Seiten; `python tests/check_published_links.py` prüft lokale Dateien und Notebookziele (nach einem vollständigen Build). `PORTAL_SITE=dist CHECK_NOTEBOOK=1 CHECK_TRAINING=1 node tests/check_portal.cjs` prüft den echten Browserweg (Playwright und Chromium erforderlich). Die Prüfung benötigt einen vollständigen JupyterLite-Build; eine reine HTML-Vorschau enthält keine Python-Laufzeit.
 
 Ohne JavaScript sind Informationen lesbar, Experimente sowie Download und Wiederherstellung des Projektstands benötigen JavaScript. Beim Drucken werden alle Inhaltsbereiche angezeigt.
 

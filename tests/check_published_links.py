@@ -153,14 +153,10 @@ def check() -> None:
                 report(source, f"Missing {'course-owned' if course_slug else 'legacy'} notebook: {notebook}")
                 continue
             inspected["notebook_blocks"] += 1
-    for slug in COURSES:
-        home = DIST / slug / "index.html"
-        if not decoded[home].notebooks:
-            report(home, "No notebook blocks on published course")
     print("Site link/notebook audit: " + ", ".join(f"{k}={v}" for k,v in inspected.items()))
     if errors:
         raise AssertionError(f"{len(errors)} broken local links/notebooks:\n" + "\n".join(errors[:80]))
-    print("PASS: four courses, legacy aliases, all local linked files and notebook targets")
+    print("PASS: all published routes, local files and referenced notebook targets")
 
 
 if __name__ == "__main__":

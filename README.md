@@ -31,7 +31,7 @@ Vorlagen bytegenau prüfen (**schreibt niemals Dateien und überschreibt keine L
 ```sh
 python scripts/export_course_templates.py --check
 python tests/check_course_registry.py
-python tests/check_course_snapshots.py
+python scripts/course_registry.py
 ```
 
 Nach individuellen Kursanpassungen wird `--check` erwartungsgemäss Abweichungen feststellen; ohne Option zeigt der Befehl nur die Anzahl Unterschiede an. Ausführliche [Kurs- und Migrationsarchitektur](docs/KURSVORLAGEN.md).
@@ -195,7 +195,7 @@ JupyterLite, Runtime-Dateien und die Vorschaugrafiken.
 
 Der Pages-Workflow verwendet dieselbe Reihenfolge. Die Startseite leitet zur Kursauswahl; `/lab/` bleibt für Lehrpersonen erreichbar. Die Kopie enthält Fotostudio und Hilfsdateien für vollständige Abgabepakete. Generierte Portalnotebooks werden nicht separat gepflegt.
 
-Prüfungen: `python tests/check_course.py`, `python tests/check_ki_basis.py`, `python tests/check_ki_fotos.py`, `python tests/check_ki_projekt.py`, `node tests/check_autostart.cjs` und `node tests/check_archive.cjs`. Browserprüfung: `PORTAL_SITE=dist CHROMIUM_PATH=/pfad/zu/chromium node tests/check_portal.cjs` mit installiertem `playwright-core`; `CHECK_NOTEBOOK=1` prüft zusätzlich Start, Export und Wiederherstellung eines echten Pyodide-Notebooks. `CHECK_TRAINING=1` ergänzt einen echten Trainingslauf samt manueller Testfreigabe und einen Wechsel zum Perzeptron-Experiment. `CHROMIUM_ARGS` nimmt bei Bedarf eine JSON-Liste an.
+Prüfungen: `python tests/check_editor_publish.py`, `python tests/check_ki_basis.py`, `python tests/check_ki_fotos.py`, `python tests/check_ki_projekt.py`, `node tests/check_autostart.cjs` und `node tests/check_archive.cjs`. Browserprüfung: `PORTAL_SITE=dist CHROMIUM_PATH=/pfad/zu/chromium node tests/check_portal.cjs` mit installiertem `playwright-core`; `CHECK_NOTEBOOK=1` prüft zusätzlich Start, Export und Wiederherstellung eines echten Pyodide-Notebooks. `CHECK_TRAINING=1` ergänzt einen echten Trainingslauf samt manueller Testfreigabe und einen Wechsel zum Perzeptron-Experiment. `CHROMIUM_ARGS` nimmt bei Bedarf eine JSON-Liste an.
 
 Pyodide-Prüfung: `node tests/check_pyodide.cjs` (Pyodide 0.27.0; siehe Testskript). Diese führt Originale und eingebettete Fassungen aus. Regelmässig Zwischenstände ausserhalb des Browsers herunterladen: Browserdaten sind keine dauerhafte Sicherung.
 
@@ -212,3 +212,33 @@ Die Erweiterung startet ausschliesslich die aufgeführten Kursdateien, keine hoc
 ## Quellen und Lizenz
 
 Der Lernweg zu Neuron, Lernregel und Trennlinie in den Notebooks «Ein Neuron entscheidet» und «Mehrere Neuronen kombinieren» wurde durch die Lernstrecken «Logische Gatter mit künstl. Neuronen» und «Einzelne Neuronen» von [inf-schule.de](https://inf-schule.de) angeregt (CC BY-SA 4.0; Hürden- und Zaun-Bild, Lernregel in Worten, Trennlinie). Texte, Diagramme und Programme sind eigene Fassungen. Die Grafiken «Programmierung durch Menschen und datengetriebene Programmierung» und «Einteilung der Begriffe» in Doppellektion 1 sind Ausschnitte aus der [KI-Landkarte von inf-schule.de](https://inf-schule.de/ki/menueansicht) (CC BY-SA 4.0). Die Einteilung in vier KI-Typen folgt [robominds](https://www.robominds.de/en/blog/das-sind-die-vier-typen-von-kunstlicher-intelligenz) (eigene Zusammenfassung). Die Pflanzendaten stammen aus dem Datensatz *Iris* (R. A. Fisher, 1936), die Ziffernbilder aus dem scikit-learn-Datensatz `digits`.
+
+
+## CI-Prüfstrategie (November 2026)
+
+Die Pipeline trennt redaktionelle Kursänderungen von technischen Änderungen. Wenn der
+Lehrpersonen-Editor nur Markdown, AVIVA-Planung, Materialtexte oder Glossare in `kurse/*/kursseiten/`
+und `kurse/*/lehrperson/` verändert, prüft CI den Build, gültige Kursmodelle,
+generierte HTML-Seiten, stabile Antwortschlüssel und vorhandene lokale Links.
+Formulierungen, genaue Kapitelzahlen und didaktische Beispiele sind **keine** Pflicht-Assertions.
+Playwright, Notebookausführung und Laufzeit-Tests sind nur bei Änderungen am Code
+oder an der Notebook-Laufzeit nötig. Defekte JSON-Dateien, fehlende Kursdateien,
+kaputte interne Links oder verlorene IDs bleiben technische Fehler.
+
+`make test` führt die technischen Prüfungen lokal aus. Historische Snapshot-
+und Formulierungsvergleiche gehören bewusst nicht mehr zur Pflicht-Pipeline.
+
+### Schnellere Pull-Request-Pipeline
+
+Bei einem Pull Request mit Änderungen an der Notebook-Laufzeit prüft CI die
+Python-Notebooks, Pyodide-Kompatibilität, Autostart-Logik und einen echten
+Chromium-Kaltstart. Der vollständige Browser-End-to-End-Test mit Modelltraining,
+ZIP-Sicherung und sieben Notebooks läuft **nach dem Merge auf `main`**,
+sofern sich die Laufzeit geändert hat. Er kann zusätzlich über **GitHub Actions
+→ Build and Deploy → Run workflow** manuell gestartet werden. Der PR selbst
+wird dadurch schneller; der vollständige Browsertest ist nicht mehr
+Voraussetzung für einen Merge. Kursinhalte werden weiterhin bei jeder Änderung
+gebaut und auf Schema-, Link- und Veröffentlichungsfehler geprüft.
+
+Der JupyterLite-Cache berücksichtigt die Notebook-/Python-Dateien unter
+`kurse/*/content/` und baut bei einem Cache-Miss auch die Erweiterung neu.

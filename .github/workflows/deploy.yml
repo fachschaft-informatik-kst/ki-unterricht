@@ -12,6 +12,8 @@ on:
   pull_request:
     branches:
       - '*'
+  # Full runtime browser integration can be rechecked manually when needed.
+  workflow_dispatch:
 
 jobs:
   build:
@@ -67,17 +69,19 @@ jobs:
               shared/course-sites.json)
                 site=true
                 worker=true
+                editor_content_only=false
                 ;;
-              kurse/*/*/*|kurse/*/*/*/*|kurse/*/*/*/*/*|templates/*/*|kursseiten/*.json|kursseiten/*/*.md|lehrperson/*.md|lehrperson/*/*.md|projekt/grafiken/uploads/*.png|projekt/grafiken/uploads/*.jpg|projekt/grafiken/uploads/*.jpeg|projekt/grafiken/uploads/*.webp)
-                # Editor-written course sources and teacher notes never alter
-                # the notebook runtime. Still rebuild and publish the site.
-                site=true
-                ;;
-              content/*.ipynb|content/ki_projekt/*.ipynb)
-                # An editor-added notebook changes JupyterLite, but the course
-                # content still needs schema/smoke rather than snapshot checks.
+              kurse/*/content/*|content/*)
+                # Notebooks, helpers and datasets affect the JupyterLite runtime
+                # even when they are owned by one individual course.
                 site=true
                 runtime=true
+                editor_content_only=false
+                ;;
+              kurse/*/kursseiten/*|kurse/*/lehrperson/*|kursseiten/*.md|kursseiten/*.json|lehrperson/*.md|templates/*)
+                # Authored chapters, plans, materials and glossaries: validate
+                # the generated site, URLs and schemas, not exact wording.
+                site=true
                 ;;
               shared/course-model.js|shared/glossary-model.js)
                 site=true
@@ -136,7 +140,8 @@ jobs:
           cache: npm
           cache-dependency-path: extensions/ki-autostart/package-lock.json
       - name: Verify local Makefile targets
-        if: steps.scope.outputs.site_changed == 'true'
+        # CI smoke for the development commands, not a content wording gate.
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
           make help
           make -n preview > /tmp/ki-preview-make.txt
@@ -146,7 +151,7 @@ jobs:
           grep -Fq 'scripts/copy_portal.py' /tmp/ki-local-make.txt
           grep -Fq 'http.server' /tmp/ki-local-make.txt
       - name: Smoke-test local Makefile preview
-        if: steps.scope.outputs.site_changed == 'true'
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
           timeout 75s make preview PORT=8765 > /tmp/ki-preview-server.log 2>&1 &
           preview_pid=$!
@@ -165,8 +170,8 @@ jobs:
           fi
           grep -Fq 'data-answer=' /tmp/ki-preview.html
           echo 'PASS Makefile preview: isolated Python setup, course build and HTTP server'
-      - name: Build notebook autostart
-        if: steps.scope.outputs.site_changed == 'true'
+      - name: Build and test notebook runtime extension
+        if: steps.scope.outputs.runtime_changed == 'true'
         run: |
           npm ci --prefix extensions/ki-autostart
           npm run build --prefix extensions/ki-autostart
@@ -190,22 +195,21 @@ jobs:
           node tests/check_course_model.mjs
           node tests/check_glossary_model.mjs
           python tests/check_course_registry.py
-          python tests/check_course_snapshots.py
           python tests/check_preview_watch.py
       - name: Install Playwright test runner
-        if: steps.scope.outputs.site_changed == 'true'
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         id: playwright
         run: |
           npm install --prefix /tmp/ki-browser playwright
           node -p "require('/tmp/ki-browser/node_modules/playwright/package.json').version" | sed 's/^/version=/' >> "$GITHUB_OUTPUT"
       - name: Restore cached Chromium
-        if: steps.scope.outputs.site_changed == 'true'
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ runner.arch }}-${{ steps.playwright.outputs.version }}
       - name: Prepare Chromium and required system libraries
-        if: steps.scope.outputs.site_changed == 'true'
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
           /tmp/ki-browser/node_modules/.bin/playwright install chromium
           # Avoid apt when the runner already has all host libraries.
@@ -214,9 +218,14 @@ jobs:
             /tmp/ki-browser/node_modules/.bin/playwright install-deps chromium
             node -e "require('/tmp/ki-browser/node_modules/playwright').chromium.launch().then(b=>b.close())"
           fi
-      - name: Check editor gateway and Markdown fixtures
+      - name: Check editor gateway, JS syntax and Markdown rendering
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
+          node --check projekt/admin/admin.js
+          node --check projekt/admin/teacher.js
+          node --check projekt/admin/plan-editor.js
+          node --check projekt/portal.js
+          node --check basis/basis.js
           node tests/check_admin.mjs
           node tests/check_markdown_parity.cjs
       - name: Browser-check teacher editor
@@ -226,10 +235,9 @@ jobs:
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_admin_form.cjs
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_teacher_browser.cjs
           NODE_PATH=/tmp/ki-browser/node_modules node tests/check_editor_course_matrix.cjs
-      - name: Check simplified teaching project
+      - name: Check notebook execution and runtime compatibility
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
-          python tests/check_ki_basis.py
           python tests/execute_all_notebooks.py
           python tests/check_pyodide_lock.py
           python tests/check_kernel_compat.py
@@ -243,42 +251,22 @@ jobs:
           python scripts/build_basis.py
           python scripts/build_portal_notebooks.py
           python tests/check_notebook_isolation.py
-      - name: Validate publishable course structure and editor parity
+      - name: Validate course schemas and editor publication
         if: steps.scope.outputs.site_changed == 'true'
         timeout-minutes: 5
         run: |
-          # These checks must stay blocking, including for editor-only PRs.
-          # They derive expected lesson counts/IDs from the current manifests.
+          python scripts/course_registry.py
           python tests/check_editor_publish.py
+      - name: Verify authoring tools and editor contracts
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
+        timeout-minutes: 5
+        run: |
           python tests/check_new_chapter.py
           python tests/check_new_lessons.py
           python tests/check_new_lesson_cli.py
           python tests/check_course_model.py
           python tests/check_admin.py
           python scripts/sync_editor_preview.py --check
-      - name: Report detailed editorial regressions (advisory)
-        if: steps.scope.outputs.site_changed == 'true'
-        timeout-minutes: 5
-        continue-on-error: true
-        run: |
-          # Historical chapter counts, exact texts, answer examples and
-          # didactic snapshots are review hints, not deployment blockers.
-          # In particular, adding/editing a lesson must not fail the build.
-          failures=0
-          for test in check_basis.py check_course.py check_generated_content.py \
-                      check_didactics.py check_glossary_p0.py check_dl1_assignments.py \
-                      check_semantic_alignment.py check_materials.py \
-                      check_portal_content.py check_solutions.py check_content_mvc.py; do
-            echo "::group::Advisory: $test"
-            python "tests/$test" || { echo "::warning::Editorial regression: $test"; failures=$((failures + 1)); }
-            echo "::endgroup::"
-          done
-          python scripts/format_course_sources.py --check || {
-            echo "::warning::Source formatting differs; editor changes need not be reformatted to deploy."
-            failures=$((failures + 1))
-          }
-          echo "Advisory checks with findings: $failures (not a deployment gate)"
-          test "$failures" -eq 0
       # JupyterLite's kernel, compiled labextension and notebook snapshot are
       # independent of Markdown/CSS/editor pages. Cache the RAW runtime only.
       # Save BEFORE copy_portal.py so old course pages never enter the cache.
@@ -288,12 +276,18 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: dist
-          key: lite-runtime-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'content/**', 'experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
+          key: lite-runtime-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'content/**', 'kurse/**/content/**', 'experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
       - name: Build JupyterLite runtime on cache miss
         if: steps.scope.outputs.site_changed == 'true' && steps.lite-cache.outputs.cache-hit != 'true'
         timeout-minutes: 8
         run: |
           echo "No matching JupyterLite runtime cache: building from current notebooks"
+          # Even prose-only changes can encounter a cold cache. Ensure that
+          # the custom JupyterLab extension is present in the new runtime.
+          if [ "${{ steps.scope.outputs.runtime_changed }}" != "true" ]; then
+            npm ci --prefix extensions/ki-autostart
+            npm run build --prefix extensions/ki-autostart
+          fi
           jupyter lite build --contents _build/content --output-dir dist
       - name: Cache raw JupyterLite runtime before course overlay
         if: steps.scope.outputs.site_changed == 'true' && steps.lite-cache.outputs.cache-hit != 'true'
@@ -323,9 +317,8 @@ jobs:
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_basis_browser.cjs
       - name: Browser-check nonblocking notebook startup
-        # A stalled widget snapshot must never prevent editing. Check both
-        # public BOK URLs, including their nested relative asset paths.
-        if: steps.scope.outputs.site_changed == 'true'
+        # UI smoke tests are unnecessary for prose-only updates.
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules PORTAL_SITE=dist node tests/check_notebook_startup_browser.cjs
       - name: Browser-check Fotostudio storage
@@ -339,8 +332,11 @@ jobs:
         timeout-minutes: 4
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules LITE_SITE=dist KI_WIDGET_COLD_START=1 node tests/check_autostart_browser.cjs
-      - name: Check deployed notebook runtime in Chromium
-        if: steps.scope.outputs.runtime_changed == 'true'
+      - name: Check deployed notebook runtime in Chromium (full release test)
+        # PRs keep the technical/Pyodide and cold-start smoke tests above.
+        # The slower browser integration (~3 minutes) runs on main or on a
+        # manually requested workflow instead of blocking every code PR.
+        if: steps.scope.outputs.runtime_changed == 'true' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         timeout-minutes: 12
         run: |
           # Independent browser tests use different local ports. Run them in
