@@ -92,6 +92,13 @@
           });
         }
 
+        // A non-modal dialog no longer closes on Escape by itself.
+        panel.addEventListener("keydown", event => {
+          if (event.key !== "Escape" || event.defaultPrevented || !panel.open) return;
+          event.preventDefault();
+          panel.close();
+        });
+
         window.addEventListener("resize", () => {
           if (!panel.open || !panel.style.left) return;
           if (!wide()) { resetBox(); return; }
