@@ -90,7 +90,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       sidebar:getComputedStyle(document.querySelector('.sidebar')).backgroundImage
     }));
     assert(colors.background.includes('223, 233, 255'), 'First-year background glow must be blue');
-    assert(colors.artwork.includes('netz_hintergrund_blau.svg'), 'First-year illustration must be blue');
+    assert(colors.artwork.includes('netz_hintergrund_kurs.svg'), 'Illustration must use the course palette');
     assert(colors.sidebar.includes('245, 248, 255'), 'First-year sidebar must be blue-tinted');
     const toggle=page.locator('button.nav-toggle');
     assert.equal(await toggle.count(),1,'Desktop sidebar toggle must match the fourth year');

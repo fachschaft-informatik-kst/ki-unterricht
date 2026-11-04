@@ -321,6 +321,7 @@ jobs:
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
           PORTAL_SITE=dist node tests/check_basis_browser.cjs
+          PORTAL_SITE=dist node tests/check_course_theme.cjs
       - name: Browser-check nonblocking notebook startup
         # UI smoke tests are unnecessary for prose-only updates.
         if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'

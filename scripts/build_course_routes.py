@@ -30,9 +30,20 @@ def add_path_depth(source: str) -> str:
 
 
 def shade(hexcolor: str, percent: float) -> str:
-    """Blend a dark accent with white for readable, restrained backgrounds."""
+    """Blend an accent towards white (positive) or black (negative)."""
     rgb = [int(hexcolor[i:i + 2], 16) for i in (1, 3, 5)]
-    return "#" + "".join(f"{round(x + (255 - x) * percent):02x}" for x in rgb)
+    return "#" + "".join(
+        f"{max(0, min(255, round(x + (255 - x) * percent if percent >= 0 else x * (1 + percent)))):02x}"
+        for x in rgb)
+
+def course_artwork(course: dict, svg: str) -> str:
+    accent = course["theme"]["accent"]
+    return (svg.replace("#076959", accent)
+            .replace("#0a8a74", accent)
+            .replace("#054f43", shade(accent, -.2))
+            .replace("#b84d27", shade(accent, .4))
+            .replace("#f2a27a", shade(accent, .6))
+            .replace("#f5f4ee", shade(accent, .965)))
 
 
 def theme_css(course: dict) -> str:
@@ -44,9 +55,48 @@ def theme_css(course: dict) -> str:
     }
     soft, paper, line = presets.get(accent.lower(), (
         shade(accent, .89), shade(accent, .965), shade(accent, .87)))
+    glow = "#dfe9ff" if accent.lower() == "#3653a3" else soft
+    sidebar = "#f5f8ff" if accent.lower() == "#3653a3" else shade(accent, .975)
     return (f":root{{--accent:{accent};--soft:{soft};"
             f"--paper:{paper};--line:{line};}}"
-            f" a:focus-visible{{outline-color:{accent};}}")
+            f" a:focus-visible{{outline-color:{accent};}}"
+            f"body{{--course-glow:{glow};--course-sidebar:{sidebar};"
+            f"--course-light:{shade(accent, .4)};--course-dark:{shade(accent, -.2)};}}"
+            "body:not(.studio-page){background:radial-gradient(1200px 600px at 85% -10%,"
+            "var(--course-glow) 0,transparent 60%) no-repeat fixed,var(--paper)}"
+            "body::before{background-image:url(grafiken/netz_hintergrund_kurs.svg)}"
+            "body .sidebar{background:linear-gradient(180deg,#fff 0,var(--course-sidebar) 100%)}"
+            "body .sidebar .brand .mark{background:linear-gradient(145deg,var(--accent),var(--course-dark))}"
+            "body .course-card::before{background:linear-gradient(90deg,var(--accent),var(--course-light))}"
+            "body .course-card:hover{box-shadow:0 14px 34px color-mix(in srgb,var(--accent) 10%,transparent)}"
+            "body .nav a[aria-current],body .nav a:hover{background:var(--soft);color:var(--accent);border-left-color:var(--accent)}"
+            "body .btn.primary{background:var(--accent);border-color:var(--accent)}"
+            "body .lab-head,body .basis-language-result,body .basis-language-option:hover,"
+            "body .basis-language-option:focus-visible,body .memory-card.matched,"
+            "body .basis-memory-grid button[data-matched=true]{background:var(--soft)}"
+            "body .basis-memory-grid button[data-matched=true]{color:var(--accent)}"
+            "body .basis-answer textarea,body .basis-language-lab select,"
+            "body .basis-language-option,body .group-box.train{border-color:var(--line)}"
+            "body .basis-language-option,body .variant{background:var(--paper)}"
+            "body .basis-language-bar{background:var(--line)}"
+            "body .course-card>b{color:var(--course-light)}"
+            "body .crumb span+span::before{border-color:var(--line)}"
+            "body .lab-panel,body input[type=text]{border-color:var(--line)}"
+            "body .project-train-flow li,body .lab-loading:not([hidden]){background:var(--paper)}"
+            "body .project-train-flow em{background:var(--soft);color:var(--accent)}"
+            "body #fremdmodell .dl8-question,body #fremdmodell #dl8-ablauf,"
+            "body #fremdmodell .dl8-overview,body #fremdmodell .dl8-person-card,"
+            "body #fremdmodell #reproduktion label.answer,"
+            "body #fremdmodell #fremdtest .protokoll-block{border-color:var(--line)}"
+            "body #fremdmodell .dl8-question{background:var(--soft)}"
+            "body #fremdmodell .dl8-step-time,body #fremdmodell .dl8-next,"
+            "body #fremdmodell .dl8-explainer,body #fremdmodell .dl8-person-card{background:var(--paper)}"
+            "body .concept,body .concept div{border-color:var(--course-light);background:var(--soft)}"
+            "body .concept div{background:color-mix(in srgb,var(--accent) 15%,white)}"
+            "body .concept div div{background:color-mix(in srgb,var(--accent) 25%,white)}"
+            "body .group-box.train{background:var(--soft)}"
+            "body .lab-loading-spinner{border-color:var(--line);border-top-color:var(--accent)}"
+            "body input[type=checkbox],body input[type=radio],body progress{accent-color:var(--accent)}")
 
 
 def course_tab_title(course: dict) -> str:
@@ -132,10 +182,11 @@ def copy_course_assets(course: dict, target: Path) -> None:
         if not style:
             raise ValueError("Gemeinsame CSS-Basis fehlt")
         (target / "theme.css").write_text(style.group(1) + "\n", encoding="utf-8")
-        svg = (base / "projekt/grafiken/netz_hintergrund.svg").read_text(encoding="utf-8")
-        (target / "grafiken/netz_hintergrund_blau.svg").write_text(
-            svg.replace("#076959", "#3653a3").replace("#b84d27", "#6488d6").replace("#f5f4ee", "#f3f5fb"),
-            encoding="utf-8")
+    svg = (base / "projekt/grafiken/netz_hintergrund.svg").read_text(encoding="utf-8")
+    (target / "grafiken/netz_hintergrund_kurs.svg").write_text(
+        course_artwork(course, svg), encoding="utf-8")
+    favicon = (ROOT / "shared/portal/favicon.svg").read_text(encoding="utf-8")
+    (target / "favicon.svg").write_text(course_artwork(course, favicon), encoding="utf-8")
     studio = target / "studio"
     studio.mkdir(exist_ok=True)
     for source, name in (("fotostudio.html", "index.html"),
@@ -184,6 +235,8 @@ def build(out: Path, courses: list[dict] | None = None) -> None:
                     continue
                 content = add_path_depth(file.read_text(encoding="utf-8"))
                 if file.suffix == ".html":
+                    if file.parent == target / "studio":
+                        content = content.replace("<body>", '<body class="studio-page">', 1)
                     # Internal BOK views are templates, not public entrypoints.
                     if file.name == "index.html" and file.parent == target:
                         content = re.sub(r"<title>[^<]*</title>",

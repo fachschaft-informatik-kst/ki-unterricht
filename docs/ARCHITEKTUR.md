@@ -74,6 +74,13 @@ vollständigen Renderer ihrer Klassenstufe, nicht die HTML-Ausgabe eines anderen
 Kurses. `build_course_routes.py` kopiert gemeinsame Technik und die Ressourcen
 der jeweiligen Kurswurzel und rendert deren Kapitel, AVIVA und Glossar.
 
+Die registrierte Akzentfarbe bestimmt auch die abgeleiteten Layoutfarben für
+Navigation, Markenlogo, Karten, Notebookrahmen und Hintergrund. Hintergrundnetz
+und Favicon werden beim Build als kurslokale SVG-Ausgaben eingefärbt; die
+Quelldateien und fachlichen Abbildungen bleiben unverändert. Das gelbe
+KST-Schullogo und semantische Farben für Warnungen und AVIVA-Rollen werden nicht
+umgefärbt. `tests/check_course_theme.cjs` prüft die vier Kursfarben im Browser.
+
 ```sh
 python scripts/build_course_routes.py _build/einzelkurs --course irn/1-klasse
 python scripts/new_chapter.py basis-neuron --course irn/1-klasse --nummer 9 --title "Transfer"
@@ -140,7 +147,7 @@ Python-Widgets in allen vier Kursen; die Fotostudio-Prüfung kontrolliert zusät
 dass Fotos eines Kurses in den anderen Kursen nicht erscheinen.
 
 `make test-all` bündelt den vollständigen Build, die technischen Tests, alle
-Notebookausführungen und zehn nacheinander ausgeführte Browsersuiten inklusive
+Notebookausführungen und elf nacheinander ausgeführte Browsersuiten inklusive
 Training und ZIP-Wiederherstellung. `make test-browser` führt nach dem Build nur
 die Browsersuiten aus. Playwright ist über das Root-`package-lock.json` für lokale
 Prüfungen und CI auf dieselbe Version festgelegt.
