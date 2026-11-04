@@ -136,14 +136,13 @@ def course_cards(courses: list[dict]) -> str:
         for c in entries:
             accent = c["theme"]["accent"]
             status = "Verfügbar" if c["status"] == "published" else "In Vorbereitung"
-            description = ("Eigenständige Unterrichtsmaterialien, Lernjournal und Übungen."
-                           if c["status"] == "published" else
-                           "Dieser Kursbereich ist eingerichtet. Die Inhalte folgen.")
+            description = ("" if c["status"] == "published" else
+                           "<p>Dieser Kursbereich ist eingerichtet. Die Inhalte folgen.</p>")
             cards.append(
                 f'<a class="choice{" planned-card" if c["status"] == "planned" else ""}"'
                 f' href="{escape(c["slug"])}/" style="--course-accent:{accent}">' +
                 f'<span class="tag">{heading} · {c["grade"]}. Klasse · {status}</span>'
-                f'<h3>{escape(c["name"])}</h3><p>{description}</p>'
+                f'<h3>{escape(c["name"])}</h3>{description}'
                 f'<span class="choice-bottom"><span>'
                 f'{"Zum Kurs" if c["status"] == "published" else "Kursstatus ansehen"}'
                 f'</span><span aria-hidden="true">↗</span></span></a>'
