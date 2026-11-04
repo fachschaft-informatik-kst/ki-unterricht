@@ -88,7 +88,7 @@ function mount(){
  if(!panel.isConnected)document.getElementById('basis-sicherung').before(panel);
  const hash=decodeURIComponent((location.hash||'').slice(1));
  const active=document.getElementById(hash)?.closest('main > section')?.id||hash;
- panel.hidden=!overlay.isOpen||!current||(!overlay.docked&&active!==owner&&hash!=='basis-sicherung');
+ panel.hidden=!overlay.isOpen||!current||(!overlay.floating&&active!==owner&&hash!=='basis-sicherung');
 }
 window.addEventListener('ki-notebook-warmup',event=>{
  const name=event.detail?.name;

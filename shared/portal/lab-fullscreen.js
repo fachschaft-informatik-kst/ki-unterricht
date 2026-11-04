@@ -54,7 +54,6 @@ export function bindLabFullscreen(button, panel) {
   });
   document.addEventListener('fullscreenchange', sync);
   if (isDialog) panel.addEventListener('close', () => {
-    if (panel.dataset.switching) return;
     panel.classList.remove('lab-modal-maximized');
     sync();
   });
@@ -78,9 +77,9 @@ export function bindNotebookDialog(panel) {
   closeButton.title = 'Notebook schliessen';
   closeButton.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
   heading.append(closeButton);
-  // Created lazily: the dock helper ships with notebook-blocks.js.
-  let dock = null;
-  const dockOf = () => dock ||= window.kiNotebookDock?.bind(panel, heading, closeButton) || null;
+  // Created lazily: the floating-window helper ships with notebook-blocks.js.
+  let float = null;
+  const floatOf = () => float ||= window.kiNotebookFloat?.bind(panel, heading) || null;
   let opener = null;
   const close = async () => {
     if (document.fullscreenElement === panel) await document.exitFullscreen();
@@ -97,7 +96,6 @@ export function bindNotebookDialog(panel) {
         event.clientY < rect.top || event.clientY > rect.bottom) void close();
   });
   panel.addEventListener('close', () => {
-    if (panel.dataset.switching) return;
     panel.hidden = true;
     document.body.classList.remove('ki-notebook-modal-open');
     // Managed notebook buttons keep aria-expanded in sync on Escape, overlay
@@ -105,17 +103,17 @@ export function bindNotebookDialog(panel) {
     if (opener?.isConnected) opener.setAttribute('aria-expanded', 'false');
     if (opener?.isConnected && !opener.closest('[hidden]')) opener.focus({preventScroll:true});
   });
-  window.addEventListener('hashchange', () => { if (panel.open && !dock?.docked) void close(); });
+  window.addEventListener('hashchange', () => { if (panel.open && !float) void close(); });
   return {
     get isOpen() { return panel.open; },
-    // A docked notebook stays visible while the reader navigates the course.
-    get docked() { return Boolean(dock?.docked); },
+    // A floating notebook stays visible while the reader navigates the course.
+    get floating() { return Boolean(float?.floating); },
     open(trigger=null) {
       if (panel.open) return;
       opener = trigger || document.activeElement;
       panel.hidden = false;
-      const docking = dockOf();
-      if (docking) docking.show(); else panel.showModal();
+      const floating = floatOf();
+      if (floating) floating.show(); else panel.showModal();
       document.body.classList.add('ki-notebook-modal-open');
       closeButton.focus({preventScroll:true});
     },

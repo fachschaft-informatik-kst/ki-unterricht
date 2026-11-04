@@ -4,108 +4,120 @@
  * use an isolated iframe and only start after an explicit click.
  */
 (() => {
-  // Optional "next to the page" mode for every notebook dialog. A native modal
-  // makes the course page inert, so docking re-opens the same <dialog> as a
-  // non-modal side panel. The iframe is never moved, so Pyodide keeps running.
-  // Shared with lab-fullscreen.js through window.kiNotebookDock.
-  if (!window.kiNotebookDock) {
-    const docks = new Set();
-    const KEY = "ki-notebook-docked", WIDTH_KEY = "ki-notebook-dock-width";
-    const read = key => { try { return localStorage.getItem(key); } catch { return null; } };
-    const write = (key, value) => { try { localStorage.setItem(key, value); } catch {} };
-    const wide = () => window.matchMedia("(min-width:901px)").matches;
-    const clampWidth = px => Math.min(Math.max(px, 340), Math.max(340, innerWidth - 700));
-    const setWidth = px => {
-      const width = clampWidth(px);
-      document.documentElement.style.setProperty("--ki-dock-w", width + "px");
-      return width;
-    };
-    const stored = parseInt(read(WIDTH_KEY), 10);
-    if (stored) setWidth(stored);
-    const syncBody = () => document.body.classList.toggle("ki-notebook-docked",
-      [...docks].some(dock => dock.panel.open && dock.panel.classList.contains("lab-docked")));
-    const svg = path => '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" ' +
-      'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + path + '"/></svg>';
-    const DOCK_ICON = "M3 5h18v14H3zM14 5v14", WINDOW_ICON = "M5 5h14v14H5z";
+  // Notebook dialogs are non-modal floating windows: centered when opened,
+  // then freely movable by the title bar and resizable from every edge, so the
+  // course page stays readable and usable behind them. The same <dialog> and
+  // iframe are reused, hence Pyodide keeps running. Shared with
+  // lab-fullscreen.js through window.kiNotebookFloat.
+  if (!window.kiNotebookFloat) {
+    const floats = new Set();
+    const MIN_W = 360, MIN_H = 260, KEEP = 80;
+    const wide = () => window.matchMedia("(min-width:701px)").matches;
+    const EDGES = ["n", "s", "e", "w", "ne", "nw", "se", "sw"];
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), Math.max(min, max));
 
-    window.kiNotebookDock = {
-      bind(panel, head, before = null) {
-        if (panel.dataset.dockBound) return panel.kiDock;
-        panel.dataset.dockBound = "1";
-        let docked = read(KEY) === "1";
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "lab-dock-toggle";
-        before ? before.before(button) : head.append(button);
-        const handle = document.createElement("div");
-        handle.className = "lab-dock-resizer";
-        handle.setAttribute("role", "separator");
-        handle.setAttribute("aria-orientation", "vertical");
-        handle.setAttribute("aria-label", "Breite des Notebooks ändern");
-        handle.tabIndex = 0;
-        panel.append(handle);
+    window.kiNotebookFloat = {
+      bind(panel, head) {
+        if (panel.kiFloat) return panel.kiFloat;
+        const setBox = box => {
+          const width = clamp(box.width, MIN_W, innerWidth);
+          const height = clamp(box.height, MIN_H, innerHeight);
+          // Keep the title bar reachable so the window can always be moved back.
+          const left = clamp(box.left, KEEP - width, innerWidth - KEEP);
+          const top = clamp(box.top, 0, innerHeight - 48);
+          Object.assign(panel.style, {inset: "auto", margin: "0", left: left + "px", top: top + "px",
+            width: width + "px", height: height + "px", maxWidth: "none", maxHeight: "none"});
+        };
+        const resetBox = () => {
+          for (const name of ["inset", "margin", "left", "top", "width", "height", "maxWidth", "maxHeight"]) panel.style[name] = "";
+        };
+        const isFloating = () => panel.open && wide();
 
-        const isDocked = () => panel.open && panel.classList.contains("lab-docked");
-        const sync = () => {
-          const on = panel.open && docked && wide();
-          panel.classList.toggle("lab-docked", on);
-          const label = docked ? "Als Fenster in der Mitte anzeigen" : "Neben der Kursseite anzeigen";
-          button.innerHTML = svg(docked ? WINDOW_ICON : DOCK_ICON) + '<span class="lab-dock-text">' + (docked ? "Fenster" : "Daneben") + "</span>";
-          button.setAttribute("aria-pressed", String(docked));
-          button.setAttribute("aria-label", label);
-          button.title = label;
-          syncBody();
-        };
-        // Close handlers of the controllers ignore the close event caused by switching mode.
-        const reopen = () => {
-          panel.dataset.switching = "1";
-          const done = () => { delete panel.dataset.switching; };
-          panel.addEventListener("close", done, {once: true});
-          setTimeout(done, 300);
-          panel.close();
-          show();
-        };
+        // Drag by the title bar, but never when a control in it was pressed.
+        head.classList.add("lab-drag-handle");
+        head.addEventListener("pointerdown", event => {
+          if (!isFloating() || event.button !== 0 || event.target.closest("button,a,input,select,textarea,summary")) return;
+          if (panel.classList.contains("lab-modal-maximized")) return;
+          const start = panel.getBoundingClientRect();
+          const dx = event.clientX - start.left, dy = event.clientY - start.top;
+          head.setPointerCapture(event.pointerId);
+          panel.classList.add("lab-floating-active");
+          const move = e => setBox({left: e.clientX - dx, top: e.clientY - dy, width: start.width, height: start.height});
+          const stop = () => {
+            panel.classList.remove("lab-floating-active");
+            head.removeEventListener("pointermove", move);
+            head.removeEventListener("pointerup", stop);
+            head.removeEventListener("pointercancel", stop);
+          };
+          head.addEventListener("pointermove", move);
+          head.addEventListener("pointerup", stop);
+          head.addEventListener("pointercancel", stop);
+          event.preventDefault();
+        });
+
+        for (const edge of EDGES) {
+          const handle = document.createElement("div");
+          handle.className = "lab-resize-handle lab-resize-" + edge;
+          handle.setAttribute("aria-hidden", "true");
+          panel.append(handle);
+          handle.addEventListener("pointerdown", event => {
+            if (!isFloating() || event.button !== 0 || panel.classList.contains("lab-modal-maximized")) return;
+            const start = panel.getBoundingClientRect();
+            handle.setPointerCapture(event.pointerId);
+            panel.classList.add("lab-floating-active");
+            const move = e => {
+              const box = {left: start.left, top: start.top, width: start.width, height: start.height};
+              if (edge.includes("e")) box.width = Math.min(e.clientX, innerWidth) - start.left;
+              if (edge.includes("s")) box.height = Math.min(e.clientY, innerHeight) - start.top;
+              if (edge.includes("w")) {
+                box.width = clamp(start.right - e.clientX, MIN_W, innerWidth);
+                box.left = start.right - box.width;
+              }
+              if (edge.includes("n")) {
+                box.height = clamp(start.bottom - e.clientY, MIN_H, innerHeight);
+                box.top = start.bottom - box.height;
+              }
+              setBox(box);
+            };
+            const stop = () => {
+              panel.classList.remove("lab-floating-active");
+              handle.removeEventListener("pointermove", move);
+              handle.removeEventListener("pointerup", stop);
+              handle.removeEventListener("pointercancel", stop);
+            };
+            handle.addEventListener("pointermove", move);
+            handle.addEventListener("pointerup", stop);
+            handle.addEventListener("pointercancel", stop);
+            event.preventDefault();
+          });
+        }
+
+        window.addEventListener("resize", () => {
+          if (!panel.open || !panel.style.left) return;
+          if (!wide()) { resetBox(); return; }
+          const rect = panel.getBoundingClientRect();
+          setBox({left: rect.left, top: rect.top, width: rect.width, height: rect.height});
+        });
+
         const show = () => {
-          for (const other of docks) if (other.panel !== panel && other.panel.open) other.panel.close();
-          if (docked && wide()) panel.show(); else panel.showModal();
-          sync();
+          // One notebook window at a time: the controllers share one kernel per course.
+          for (const other of floats) if (other.panel !== panel && other.panel.open) other.panel.close();
+          resetBox();
+          panel.classList.add("lab-floating");
+          if (!panel.open) panel.show();
+          // The course shell is its own stacking context (below the sidebar).
+          // The top layer lifts the window above it without moving the iframe.
+          if (typeof panel.showPopover === "function") {
+            panel.popover = "manual";
+            if (!panel.matches(":popover-open")) panel.showPopover();
+          }
         };
-        button.addEventListener("click", () => {
-          docked = !docked;
-          write(KEY, docked ? "1" : "0");
-          if (docked) panel.querySelector(".lab-fullscreen-toggle[aria-pressed=true]")?.click();
-          if (panel.open) { reopen(); button.focus({preventScroll: true}); } else sync();
+        panel.addEventListener("close", () => {
+          if (typeof panel.hidePopover === "function" && panel.matches(":popover-open")) panel.hidePopover();
         });
-        panel.addEventListener("close", () => { if (!panel.dataset.switching) sync(); });
-        window.addEventListener("resize", () => { if (isDocked() && !wide()) reopen(); });
-
-        let dragging = false;
-        handle.addEventListener("pointerdown", event => {
-          dragging = true;
-          handle.setPointerCapture(event.pointerId);
-          panel.classList.add("lab-docked-resizing");
-          event.preventDefault();
-        });
-        handle.addEventListener("pointermove", event => { if (dragging) setWidth(innerWidth - event.clientX); });
-        const stop = () => {
-          if (!dragging) return;
-          dragging = false;
-          panel.classList.remove("lab-docked-resizing");
-          write(WIDTH_KEY, String(Math.round(panel.getBoundingClientRect().width)));
-        };
-        handle.addEventListener("pointerup", stop);
-        handle.addEventListener("pointercancel", stop);
-        handle.addEventListener("keydown", event => {
-          const step = event.key === "ArrowLeft" ? 40 : event.key === "ArrowRight" ? -40 : 0;
-          if (!step) return;
-          event.preventDefault();
-          write(WIDTH_KEY, String(setWidth(panel.getBoundingClientRect().width + step)));
-        });
-
-        const api = {panel, show, get docked() { return isDocked(); }};
-        panel.kiDock = api;
-        docks.add(api);
-        sync();
+        const api = {panel, show, get floating() { return isFloating(); }};
+        panel.kiFloat = api;
+        floats.add(api);
         return api;
       }
     };
@@ -261,7 +273,7 @@
     dismiss.setAttribute("aria-label", "Notebook schliessen");
     dismiss.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
     head.append(label, dismiss);
-    const dock = window.kiNotebookDock?.bind(region, head, dismiss);
+    const float = window.kiNotebookFloat?.bind(region, head);
     const status = document.createElement("p");
     status.className = "ki-notebook-status";
     status.setAttribute("role", "status");
@@ -277,19 +289,18 @@
           event.clientY < rect.top || event.clientY > rect.bottom) close();
     });
     region.addEventListener("close", () => {
-      if (region.dataset.switching) return;
       region.hidden = true;
       document.body.classList.remove("ki-notebook-modal-open");
       open.setAttribute("aria-expanded", "false");
       open.textContent = "Notebook öffnen";
       if (open.isConnected) open.focus({preventScroll:true});
     });
-    window.addEventListener("hashchange", () => { if (!dock?.docked) close(); });
+    window.addEventListener("hashchange", () => { if (!float) close(); });
     open.addEventListener("click", event => {
       event.preventDefault();
       if (region.open) { close(); return; }
       region.hidden = false;
-      if (dock) dock.show(); else region.showModal();
+      if (float) float.show(); else region.showModal();
       document.body.classList.add("ki-notebook-modal-open");
       open.setAttribute("aria-expanded", "true");
       dismiss.focus({preventScroll:true});

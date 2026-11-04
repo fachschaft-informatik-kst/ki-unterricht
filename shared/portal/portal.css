@@ -321,7 +321,6 @@ input[type=text]{border:1px solid #aebeb5;background:#fff;border-radius:8px;padd
 }
 .ki-notebook-actions .ki-notebook-launch:hover{background:var(--soft)}
 .ki-notebook-actions a.ki-notebook-direct{font-size:12px;font-weight:500;color:var(--muted)}
-.ki-notebook-modal-open{overflow:hidden}
 
 /* Dialog stays at its original DOM position: never detach or recreate an
    iframe while the user closes/reopens an exercise. */
@@ -363,13 +362,13 @@ dialog.lab-panel.lab-modal .lab-frame-shell > iframe{
 /* Native fullscreen rejects <dialog>; the same icon expands our modal to
    the entire viewport without losing its close control or JupyterLite kernel. */
 dialog.lab-panel.lab-modal[open].lab-modal-maximized{
-  inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;
-  margin:0;border:0;border-radius:0
+  inset:0!important;width:100vw!important;height:100dvh!important;max-width:none!important;max-height:none!important;
+  margin:0!important;border:0;border-radius:0
 }
 dialog.lab-panel.lab-modal.lab-modal-maximized .lab-frame-shell > iframe{height:100%}
 @media(max-width:700px){
   dialog.lab-panel.lab-modal[open]{
-    width:100vw;max-width:none;height:100dvh;max-height:none;
+    inset:0!important;margin:0!important;width:100vw!important;max-width:none!important;height:100dvh!important;max-height:none!important;
     border:0;border-radius:0
   }
   dialog.lab-panel.lab-modal > .lab-head{flex-wrap:wrap;gap:6px 8px;padding:8px 10px}
@@ -377,31 +376,24 @@ dialog.lab-panel.lab-modal.lab-modal-maximized .lab-frame-shell > iframe{height:
   dialog.lab-panel.lab-modal > .lab-head > span{order:3;flex:1 1 100%;margin:0}
 }
 
-/* Docked mode: the same dialog, opened non-modally as a side panel so the
-   course page stays readable and scrollable next to the notebook. */
-.lab-dock-toggle{
-  display:inline-flex;align-items:center;gap:6px;flex:none;height:35px;padding:0 10px;
-  background:rgba(255,255,255,.97);color:#28414b;font:inherit;font-size:12px;font-weight:600;
-  border:1px solid #d8e1e1;border-radius:8px;cursor:pointer
-}
-.lab-dock-toggle:hover{background:var(--soft);border-color:var(--accent)}
-.lab-dock-toggle:focus-visible{outline:3px solid #ba552e;outline-offset:3px}
-.lab-dock-resizer{display:none}
-@media(max-width:900px){.lab-dock-toggle{display:none}}
-@media(max-width:700px){.lab-dock-text{display:none}}
-body.ki-notebook-docked{padding-right:min(var(--ki-dock-w,42vw),max(340px,calc(100vw - 700px)));overflow:auto}
-body dialog.lab-docked[open]:is(.lab-modal,.ki-notebook-dialog){
-  position:fixed;inset:0 0 0 auto;margin:0;z-index:60;
-  width:min(var(--ki-dock-w,42vw),max(340px,calc(100vw - 700px)));max-width:none;height:100dvh;max-height:none;
-  border-width:0 0 0 1px;border-radius:0;box-shadow:-10px 0 30px #15262b24
-}
-dialog.lab-docked .lab-fullscreen-toggle{display:none}
-dialog.lab-docked .lab-dock-resizer{
-  display:block;position:absolute;inset:0 auto 0 0;width:9px;z-index:5;cursor:col-resize;touch-action:none
-}
-dialog.lab-docked .lab-dock-resizer:hover,dialog.lab-docked .lab-dock-resizer:focus-visible,
-dialog.lab-docked-resizing .lab-dock-resizer{background:#3653a333;outline:none}
-dialog.lab-docked-resizing iframe{pointer-events:none}
+/* Floating window: the dialog is non-modal, so the course page behind it stays
+   usable. The title bar moves it, the edge handles resize it. */
+.lab-drag-handle{cursor:move;touch-action:none;user-select:none}
+.lab-drag-handle button,.lab-drag-handle a{cursor:pointer}
+dialog.lab-floating[open]{z-index:60}
+dialog.lab-floating::backdrop{background:transparent!important;pointer-events:none}
+dialog.lab-floating.lab-floating-active{user-select:none}
+dialog.lab-floating.lab-floating-active iframe{pointer-events:none}
+.lab-resize-handle{position:absolute;z-index:5;touch-action:none}
+.lab-resize-n,.lab-resize-s{left:10px;right:10px;height:8px;cursor:ns-resize}
+.lab-resize-e,.lab-resize-w{top:10px;bottom:10px;width:8px;cursor:ew-resize}
+.lab-resize-n{top:0}.lab-resize-s{bottom:0}.lab-resize-e{right:0}.lab-resize-w{left:0}
+.lab-resize-ne,.lab-resize-nw,.lab-resize-se,.lab-resize-sw{width:22px;height:22px}
+.lab-resize-ne{top:0;right:0;cursor:nesw-resize}.lab-resize-nw{top:0;left:0;cursor:nwse-resize}
+.lab-resize-se{bottom:0;right:0;cursor:nwse-resize}.lab-resize-sw{bottom:0;left:0;cursor:nesw-resize}
+dialog.lab-modal-maximized .lab-resize-handle,dialog.lab-modal-maximized .lab-drag-handle{cursor:default}
+dialog.lab-modal-maximized .lab-resize-handle{display:none}
+@media(max-width:700px){.lab-resize-handle{display:none}.lab-drag-handle{cursor:default}}
 
 /* Additional, user-created or material notebooks get the same spacious modal
    instead of an embedded 850px frame; the launcher stays compact. */
@@ -425,7 +417,7 @@ dialog.ki-notebook-runtime.ki-notebook-dialog::backdrop{background:rgba(16,29,37
 }
 @media(max-width:700px){
   dialog.ki-notebook-runtime.ki-notebook-dialog[open]{
-    width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0
+    inset:0!important;margin:0!important;width:100vw!important;max-width:none!important;height:100dvh!important;max-height:none!important;border:0;border-radius:0
   }
 }
 
