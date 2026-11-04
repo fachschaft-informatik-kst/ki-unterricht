@@ -12,6 +12,8 @@ on:
   pull_request:
     branches:
       - '*'
+  # Full runtime browser integration can be rechecked manually when needed.
+  workflow_dispatch:
 
 jobs:
   build:
@@ -138,7 +140,8 @@ jobs:
           cache: npm
           cache-dependency-path: extensions/ki-autostart/package-lock.json
       - name: Verify local Makefile targets
-        if: steps.scope.outputs.site_changed == 'true'
+        # CI smoke for the development commands, not a content wording gate.
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
           make help
           make -n preview > /tmp/ki-preview-make.txt
@@ -148,7 +151,7 @@ jobs:
           grep -Fq 'scripts/copy_portal.py' /tmp/ki-local-make.txt
           grep -Fq 'http.server' /tmp/ki-local-make.txt
       - name: Smoke-test local Makefile preview
-        if: steps.scope.outputs.site_changed == 'true'
+        if: steps.scope.outputs.site_changed == 'true' && steps.scope.outputs.editor_content_only != 'true'
         run: |
           timeout 75s make preview PORT=8765 > /tmp/ki-preview-server.log 2>&1 &
           preview_pid=$!
@@ -273,12 +276,18 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: dist
-          key: lite-runtime-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'content/**', 'experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
+          key: lite-runtime-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('requirements.txt', 'requirements-preview.txt', 'jupyter_lite_config.json', 'content/**', 'kurse/**/content/**', 'experimente/registry.json', 'extensions/ki-autostart/**', 'scripts/build_portal_notebooks.py') }}
       - name: Build JupyterLite runtime on cache miss
         if: steps.scope.outputs.site_changed == 'true' && steps.lite-cache.outputs.cache-hit != 'true'
         timeout-minutes: 8
         run: |
           echo "No matching JupyterLite runtime cache: building from current notebooks"
+          # Even prose-only changes can encounter a cold cache. Ensure that
+          # the custom JupyterLab extension is present in the new runtime.
+          if [ "${{ steps.scope.outputs.runtime_changed }}" != "true" ]; then
+            npm ci --prefix extensions/ki-autostart
+            npm run build --prefix extensions/ki-autostart
+          fi
           jupyter lite build --contents _build/content --output-dir dist
       - name: Cache raw JupyterLite runtime before course overlay
         if: steps.scope.outputs.site_changed == 'true' && steps.lite-cache.outputs.cache-hit != 'true'
@@ -323,8 +332,11 @@ jobs:
         timeout-minutes: 4
         run: |
           NODE_PATH=/tmp/ki-browser/node_modules LITE_SITE=dist KI_WIDGET_COLD_START=1 node tests/check_autostart_browser.cjs
-      - name: Check deployed notebook runtime in Chromium
-        if: steps.scope.outputs.runtime_changed == 'true'
+      - name: Check deployed notebook runtime in Chromium (full release test)
+        # PRs keep the technical/Pyodide and cold-start smoke tests above.
+        # The slower browser integration (~3 minutes) runs on main or on a
+        # manually requested workflow instead of blocking every code PR.
+        if: steps.scope.outputs.runtime_changed == 'true' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         timeout-minutes: 12
         run: |
           # Independent browser tests use different local ports. Run them in
