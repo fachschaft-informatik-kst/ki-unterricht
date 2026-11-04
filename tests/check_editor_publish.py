@@ -14,7 +14,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from course_model import load_course
 
 from course_registry import load_registry
-MANIFESTS = tuple(course["manifest"] for course in load_registry(ROOT))
+from build_teacher_clone import render_clone
+from build_course_routes import copy_course_assets
+from tempfile import TemporaryDirectory
+
+COURSES = load_registry(ROOT)
+MANIFESTS = tuple(course["manifest"] for course in COURSES)
 
 
 def ids_are_unique(soup, attr, selector=None):
@@ -96,4 +101,43 @@ for kind, manifest_path in (("projekt", "kurse/bok/4-klasse/kursseiten/manifest.
     )
     print(f"PASS {kind}: {len(lessons)} lessons, matching student/teacher pages and unique saved keys")
 
-print(f"PASS {len(models)} editable course models and both legacy published portals")
+for course in COURSES:
+    if course["status"] != "published":
+        continue
+    _, lessons = models[course["manifest"]]
+    with TemporaryDirectory(prefix="ki-publish-") as directory:
+        target = Path(directory)
+        copy_course_assets(course, target)
+        render_clone(course, target)
+        page = BeautifulSoup((target / "index.html").read_text(encoding="utf-8"), "html.parser")
+        teacher = BeautifulSoup((target / "unterrichtsplan.html").read_text(encoding="utf-8"), "html.parser")
+        resources = BeautifulSoup((target / "materialien.html").read_text(encoding="utf-8"), "html.parser")
+        built = json.loads((target / "kurs.json").read_text(encoding="utf-8"))["lessons"]
+        expected = [lesson["id"] for lesson in lessons]
+        assert [(lesson["id"], lesson["view"], lesson["number"]) for lesson in built] == [
+            (lesson["id"], lesson["view"], lesson["number"]) for lesson in lessons
+        ], course["slug"]
+        for attr in ("id", "data-answer", "data-journal", "data-basis-answer"):
+            ids_are_unique(page, attr)
+        ids_are_unique(teacher, "id")
+        ids_are_unique(resources, "id")
+        manifest, _ = models[course["manifest"]]
+        for section in manifest["sections"]:
+            assert page.select_one("main > section#" + section["id"]), (course["slug"], section["id"])
+        actual = [item["data-lesson"] for item in page.select("details.lesson-plan[data-lesson]")]
+        assert len(actual) == len(expected) and set(actual) == set(expected), course["slug"]
+        if course["grade"] == 1:
+            assert len(teacher.select("h2")) == len(lessons), course["slug"]
+        else:
+            assert [item["data-lesson"] for item in teacher.select(
+                "details.lesson-plan[data-lesson]")] == expected, course["slug"]
+        assert [item["id"] for item in resources.select("article[id]")] == [
+            "dl-" + ident for ident in expected
+        ], course["slug"]
+        for link in page.select(".sidebar nav a[href^='#'], .nav a[href^='#']"):
+            anchor = link["href"][1:]
+            assert not anchor or page.find(id=anchor), (course["slug"], anchor)
+        assert "musterloesungen" not in str(page).casefold(), course["slug"]
+        print(f"PASS {course['slug']}: generated student page, AVIVA, materials and saved keys")
+
+print(f"PASS {len(models)} editable course models, published courses and legacy portals")

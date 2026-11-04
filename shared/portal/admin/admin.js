@@ -33,6 +33,82 @@ updateTeacherAccessLinks();
 const manifestPath=()=>courseProfile().manifest;
 
 const COURSE_THEMES_PATH="shared/course-sites.json";
+let draftLogin=null,editorLogin=null,draftCourses={},restoringDraft=false;
+const draftKey=()=>"ki-teacher-drafts-v1:"+encodeURIComponent(draftLogin);
+function draftError(message){
+  let warning=$("draftWarning");
+  if(!warning){
+    warning=document.createElement("p");warning.id="draftWarning";
+    warning.className="notice error";warning.setAttribute("role","alert");
+    $("notice").after(warning);
+  }
+  warning.textContent=message;
+}
+function saveDraft(){
+  if(!draftLogin||restoringDraft)return;
+  const slug=courseProfile().slug;
+  const current=state.current&&$("source").value!==savedText()?
+    {...state.current,content:$("source").value}:null;
+  draftCourses[slug]={current,section:$("section").value};
+  const courses={};
+  for(const profile of Object.values(COURSE_PROFILES)){
+    const staged=[...state.staged.values()].filter(entry=>entry.path.startsWith(profile.root+"/"));
+    const draft=draftCourses[profile.slug];
+    if(staged.length||draft?.current)courses[profile.slug]={...draft,staged};
+  }
+  const shared=[...state.staged.values()].filter(entry=>entry.path===COURSE_THEMES_PATH);
+  try{
+    if(Object.keys(courses).length||shared.length)
+      localStorage.setItem(draftKey(),JSON.stringify({version:1,courses,shared}));
+    else localStorage.removeItem(draftKey());
+    $("draftWarning")?.remove();
+  }catch(e){draftError("Lokale Entwurfssicherung fehlgeschlagen: "+e.message+
+    ". Änderungen bleiben nur in diesem Tab. Bitte als Pull Request einreichen.");}
+}
+function readDraft(login){
+  draftLogin=login;
+  const raw=localStorage.getItem(draftKey());
+  if(!raw)return false;
+  const draft=JSON.parse(raw);
+  if(draft.version!==1||!draft.courses||!Array.isArray(draft.shared))
+    throw Error("Lokale Entwurfssicherung hat ein unbekanntes Format.");
+  const validSha=sha=>sha===null||typeof sha==="string"&&/^[a-f0-9]{40}$/.test(sha);
+  const entries=[];
+  for(const [slug,data] of Object.entries(draft.courses)){
+    const profile=Object.values(COURSE_PROFILES).find(p=>p.slug===slug);
+    if(!profile||!Array.isArray(data.staged))throw Error("Entwurf gehört zu einem unbekannten Kurs: "+slug);
+    const owned=path=>typeof path==="string"&&path.startsWith(profile.root+"/")&&!path.split("/").includes("..");
+    if(data.current&&(!owned(data.current.path)||!validSha(data.current.sha)||
+      typeof data.current.original!=="string"||typeof data.current.content!=="string"))
+      throw Error("Ungültiger lokaler Kapitelentwurf: "+slug);
+    for(const entry of data.staged){
+      if(!owned(entry.path))throw Error("Ungültige Kurszuordnung im lokalen Entwurf.");
+      entries.push(entry);
+    }
+  }
+  for(const entry of draft.shared){
+    if(entry.path!==COURSE_THEMES_PATH)throw Error("Ungültige gemeinsame Entwurfsdatei.");
+    entries.push(entry);
+  }
+  for(const entry of entries){
+    if(!validSha(entry.expectedSha)||(!entry.delete&&typeof entry.content!=="string"))
+      throw Error("Ungültige Dateiversion in der lokalen Entwurfssicherung.");
+  }
+  draftCourses=draft.courses;
+  state.staged=new Map(entries.map(entry=>[entry.path,entry]));
+  return true;
+}
+function restoreCourseDraft(){
+  const draft=draftCourses[courseProfile().slug];
+  if(!draft?.current)return;
+  restoringDraft=true;
+  try{
+    if(draft.section&&[...$("section").options].some(o=>o.value===draft.section))
+      $("section").value=draft.section;
+    const {path,sha,content,original}=draft.current;
+    useFile(path,sha,content,original);
+  }finally{restoringDraft=false;}
+}
 let courseThemes=null,courseThemeDraft=null;
 const blendTheme=(hex,p)=>"#"+[1,3,5].map(i=>{
   const n=parseInt(hex.slice(i,i+2),16);
@@ -318,6 +394,7 @@ function renderStagedDiff(panel,entry,before){
   panel.append(viewport);
 }
 function stagingList(){
+  saveDraft();
   const node=$("staged");
   const openPaths=new Set([...node.querySelectorAll("details[data-diff-path]")].
     filter(el=>el.open).map(el=>el.dataset.diffPath));
@@ -912,6 +989,7 @@ function prepareNotebookPreview(content){
   return host.innerHTML;
 }
 function preview(){
+  saveDraft();
   const isGlossary=state.current?.path===courseGlossaryPath();
   const isBasis=courseGrade()===1;
   document.body.classList.toggle("course-basis",courseGrade()===1);
@@ -1133,6 +1211,7 @@ async function publish(){
       $("login").hidden=false;
       throw Error("Die GitHub-Sitzung ist abgelaufen. Bitte oben erneut anmelden; vorgemerkte Änderungen bleiben erhalten.");
     }
+    if(session.login!==editorLogin)throw Error("GitHub-Konto wurde gewechselt. Bitte die Seite neu laden; Entwürfe bleiben dem ursprünglichen Konto zugeordnet.");
     const c=state.current;
     if(c&&!state.staged.get(c.path)?.delete&&$("source").value!==savedText()&&!stage())return;
     status("Pull Request wird bei GitHub erstellt …");
@@ -1149,6 +1228,7 @@ async function publish(){
     // The chapter only exists on the PR branch until GitHub merges it.
     state.chapters=state.chapters.filter(c=>!newPaths.has(c.path));
     if(state.current)state.current.original=$("source").value;
+    saveDraft();
     const out=$("published");out.replaceChildren("Pull Request #"+result.number+": ");
     const link=document.createElement("a");link.href=result.url;link.rel="noopener noreferrer";link.target="_blank";link.textContent="Auf GitHub öffnen";out.append(link);
     status("Pull Request erstellt. Nach Merge und grünen CI-Tests wird veröffentlicht.");
@@ -1433,6 +1513,7 @@ async function snapshotRuntime(){
   const data=await runtimeRequest("snapshot");
   validateNotebook(data.notebook);
   $("source").value=JSON.stringify(data.notebook,null,1)+"\\n";
+  saveDraft();
   renderNotebookCells();
   runtimeDirty=false;runtimeStatus("Notebook übernommen. Jetzt «Änderung vormerken» wählen.");
 }
@@ -1497,6 +1578,7 @@ $("section").addEventListener("change",chapterList);
 $("courseSelect").addEventListener("change",async()=>{
   const selected=$("courseSelect").value;
   if(!confirmUnsaved()){$("courseSelect").value=state.course;return;}
+  delete draftCourses[courseProfile().slug];
   state.course=selected;
   updateTeacherAccessLinks();
   document.body.classList.toggle("course-basis",courseGrade()===1);
@@ -1515,6 +1597,8 @@ $("courseSelect").addEventListener("change",async()=>{
   $("formEditor").hidden=true;$("splitEditor").hidden=true;
   $("notebooks").replaceChildren();
   await refresh().catch(error);
+  restoreCourseDraft();
+  saveDraft();
   status("Kurs gewechselt: "+courseProfile().teacher+" · "+courseGrade()+". Klasse. Die Vorschau und Materialien gehören zu diesem Kurs.");
 });
 $("refresh").addEventListener("click",()=>refresh().catch(error));
@@ -1524,6 +1608,7 @@ $("archive").addEventListener("click",archive);
 // Render changes shortly after typing, but do not interrupt rapid edits.
 let previewDebounce=null;
 $("source").addEventListener("input",()=>{
+  saveDraft();
   highlightSource();
   clearTimeout(previewDebounce);
   if(!$("codeEditor").hidden)previewDebounce=setTimeout(()=>{try{preview();}catch(e){error(e);}},220);
@@ -1870,6 +1955,7 @@ $("addBlock").addEventListener("click",insertBlock);
 $("imageFile").addEventListener("change",addImage);
 $("logout").addEventListener("click",async()=>{try{await post("/auth/logout",{});location.assign("/");}catch(e){error(e);}});
 window.addEventListener("beforeunload",e=>{if(state.staged.size||(state.current&&$("source").value!==savedText())){e.preventDefault();e.returnValue="";}});
+window.addEventListener("pagehide",saveDraft);
 async function loadEditorCourses(){
   const result=await api("/api/file?path="+encodeURIComponent(COURSE_THEMES_PATH));
   const registry=JSON.parse(result.content);
@@ -1905,7 +1991,17 @@ if (!pagesOrigin) (async()=>{
     $("intro").hidden=s.authenticated;$("login").hidden=s.authenticated;$("logout").hidden=!s.authenticated;
     $("who").textContent=s.authenticated?"GitHub: "+s.login:"Nicht angemeldet";
     if(!s.authenticated){status("Mit GitHub anmelden, um Kapitel zu bearbeiten.");return;}
+    editorLogin=s.login;
     await loadEditorCourses();
-    $("workspace").hidden=false;await refresh();await loadCourseThemes();status("Angemeldet. Kapitel auswählen.");
+    let restored=false;
+    try{restored=readDraft(s.login);}catch(e){
+      draftLogin=null;
+      draftError("Lokale Entwürfe konnten nicht geladen werden: "+e.message+
+        ". Die vorhandene Sicherung wird nicht überschrieben; neue Änderungen werden nur in diesem Tab gehalten.");
+    }
+    $("workspace").hidden=false;await refresh();await loadCourseThemes();
+    restoreCourseDraft();stagingList();
+    status(restored?"Lokale Entwürfe wiederhergestellt. Ausgangsversionen bleiben erhalten; Konflikte werden beim Einreichen geprüft.":
+      "Angemeldet. Kapitel auswählen.");
   }catch(e){$("login").hidden=true;$("intro").hidden=false;error("Admin-Gateway nicht verbunden: "+e.message);}
 })();

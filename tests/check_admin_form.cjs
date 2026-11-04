@@ -41,25 +41,32 @@ const server=http.createServer((req,res)=>{
   await new Promise(r=>server.listen(0,"127.0.0.1",r));
   const browser=await chromium.launch({headless:true});
   try{
-    const page=await browser.newPage();
+    const context=await browser.newContext();
+    const page=await context.newPage();
+    const resetEditor=async()=>{
+      await page.evaluate(()=>window.addEventListener("pagehide",()=>localStorage.clear(),{once:true}));
+      await page.reload();
+      await page.locator("#courseThemePreview strong").waitFor({state:"visible"});
+    };
     page.on("pageerror",error=>{throw error;});
-    await page.route("**/api/session",route=>route.fulfill({json:{authenticated:true,login:"integration-test"}}));
-    await page.route("**/api/notebooks",route=>route.fulfill({json:{notebooks:[]}}));
-    await page.route("**/api/chapters",route=>route.fulfill({json:{
+    let login="integration-test";
+    await context.route("**/api/session",route=>route.fulfill({json:{authenticated:true,login}}));
+    await context.route("**/api/notebooks",route=>route.fulfill({json:{notebooks:[]}}));
+    await context.route("**/api/chapters",route=>route.fulfill({json:{
       chapters:[...files.map(path=>({path,sha:"a".repeat(40)})),
         {path:"kurse/bok/4-klasse/kursseiten/einstieg/planung.json",sha:"a".repeat(40)},
         {path:"kurse/bok/4-klasse/kursseiten/einstieg/materialien.md",sha:"a".repeat(40)},
         {path:"kurse/bok/4-klasse/kursseiten/lernziele/000-inhalt.md",sha:"a".repeat(40)}]
     }}));
     // Match query strings containing slashes too (glob * does not cross /).
-    await page.route(/\/api\/file\?/,route=>{
+    await context.route(/\/api\/file\?/,route=>{
       const p=new URL(route.request().url()).searchParams.get("path");
       const content=fs.readFileSync(path.join(ROOT,p),"utf8");
       return route.fulfill({json:{path:p,sha:"a".repeat(40),content}});
     });
     let submitted=null;
     let publishFailure=false;
-    await page.route("**/api/publish",route=>{
+    await context.route("**/api/publish",route=>{
       submitted=route.request().postDataJSON();
       if(publishFailure)return route.fulfill({status:502,contentType:"text/html",body:"<h1>Upstream failure</h1>"});
       return route.fulfill({json:{url:"https://github.com/example/repo/pull/123",number:123}});
@@ -68,14 +75,14 @@ const server=http.createServer((req,res)=>{
     // must fail under the server rules above, just like on Cloudflare.
     const logoUrl="https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/4-klasse/grafiken/kst_logo.png";
     const tinyPng=Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/XxkAAAAASUVORK5CYII=","base64");
-    await page.route(logoUrl,route=>route.fulfill({
+    await context.route(logoUrl,route=>route.fulfill({
       status:200,contentType:"image/png",body:tinyPng
     }));
 
     // Intercept the real GitHub Pages URL with a lightweight JupyterLite
     // protocol fixture. The strict Worker-like frame-src CSP is still active,
     // so the test fails if cross-origin notebook framing is blocked again.
-    await page.route(/^https:\/\/fachschaft-informatik-kst\.github\.io\/ki-unterricht\/lab\/index\.html\?/,route=>
+    await context.route(/^https:\/\/fachschaft-informatik-kst\.github\.io\/ki-unterricht\/lab\/index\.html\?/,route=>
       route.fulfill({status:200,contentType:"text/html",body:
         '<!doctype html><html><body><h1>JupyterLite test notebook</h1>'+
         '<textarea id="notebook-code" aria-label="Python-Zelle"></textarea>'+
@@ -94,6 +101,67 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#courseThemeSelect").count(),0);
     assert.equal(await page.locator("#courseSelect option").count(),4);
     await page.locator("#courseThemePreview strong").waitFor({state:"visible"});
+    // Recover both unstaged text and staged files without changing their base SHA.
+    const draftPath="kurse/bok/4-klasse/kursseiten/einstieg/000-einstieg.md";
+    await page.locator("#section").selectOption("einstieg");
+    // Use materials for a deterministic file selection across chapter labels.
+    await page.locator("#editMaterials").click();
+    await page.waitForFunction(()=>document.querySelector("#path").textContent===
+      "kurse/bok/4-klasse/kursseiten/einstieg/materialien.md");
+    await page.locator("#source").fill("# Lokaler Entwurf\n\nNoch nicht vorgemerkt.\n");
+    await page.reload();
+    await page.waitForFunction(()=>document.querySelector("#source").value.includes("Lokaler Entwurf"));
+    assert.match(await page.locator("#path").innerText(),/bok\/4-klasse.*materialien.md/);
+    const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("ki-teacher-drafts-v1:integration-test")));
+    assert.equal(saved.courses["bok/4-klasse"].current.sha,"a".repeat(40));
+    assert.ok(saved.courses["bok/4-klasse"].current.original.length>0);
+    // A different GitHub account never sees this user's draft.
+    login="other-teacher";
+    await page.reload();
+    await page.locator("#courseThemePreview strong").waitFor({state:"visible"});
+    assert.equal(await page.locator("#source").inputValue(),"");
+    login="integration-test";
+    await page.reload();
+    await page.waitForFunction(()=>document.querySelector("#source").value.includes("Lokaler Entwurf"));
+    // Simulate an already staged file and an independent second-course draft.
+    await page.evaluate(({draftPath})=>{
+      const key="ki-teacher-drafts-v1:integration-test";
+      const draft=JSON.parse(localStorage.getItem(key));
+      draft.courses["bok/4-klasse"].staged=[{path:draftPath,expectedSha:"a".repeat(40),
+        content:"# Vorgemerkt\n",original:"# Original\n"}];
+      draft.courses["irn/1-klasse"]={staged:[],section:"basis-neuron",current:{
+        path:"kurse/irn/1-klasse/kursseiten/basis-neuron/materialien.md",
+        sha:"a".repeat(40),original:"# Original IRN\n",content:"# Entwurf IRN\n"}};
+      localStorage.setItem(key,JSON.stringify(draft));
+    },{draftPath});
+    // Avoid pagehide overwriting the deliberately seeded recovery fixture.
+    await page.evaluate(()=>document.querySelector("#source").value="# Lokaler Entwurf\n\nNoch nicht vorgemerkt.\n");
+    // A new tab models recovery after a crash (no unload write from the old tab).
+    const recovery=await page.context().newPage();
+    await recovery.goto(page.url());
+    await recovery.waitForFunction(()=>document.querySelector("#source").value.includes("Lokaler Entwurf"));
+    assert.match(await recovery.locator("#staged").innerText(),/000-einstieg.md/);
+    recovery.on("dialog",dialog=>dialog.accept());
+    await recovery.locator("#courseSelect").selectOption("irn1");
+    await recovery.waitForFunction(()=>document.querySelector("#source").value.includes("Entwurf IRN"));
+    assert.match(await recovery.locator("#path").innerText(),/irn\/1-klasse/);
+    const recovered=await recovery.evaluate(()=>JSON.parse(localStorage.getItem("ki-teacher-drafts-v1:integration-test")));
+    assert.equal(recovered.courses["bok/4-klasse"].staged[0].expectedSha,"a".repeat(40));
+    await recovery.evaluate(()=>Storage.prototype.setItem=function(){throw new DOMException("Test quota","QuotaExceededError");});
+    await recovery.locator("#source").fill("# Entwurf trotz vollem Speicher\n");
+    await recovery.waitForFunction(()=>document.querySelector("#draftWarning")?.textContent.includes("Entwurfssicherung fehlgeschlagen"));
+    await recovery.close();
+    login="other-teacher";
+    await page.evaluate(()=>localStorage.setItem("ki-teacher-drafts-v1:other-teacher","invalid JSON"));
+    const invalid=await context.newPage();
+    await invalid.goto(page.url());
+    await invalid.locator("#courseThemePreview strong").waitFor({state:"visible"});
+    assert.match(await invalid.locator("#draftWarning").innerText(),/nicht geladen/);
+    assert.equal(await invalid.evaluate(()=>localStorage.getItem("ki-teacher-drafts-v1:other-teacher")),"invalid JSON");
+    await invalid.close();
+    login="integration-test";
+    // Reset fixtures so the existing editing and publication flows run unchanged.
+    await resetEditor();
     await page.locator("#courseSelect").selectOption("irn1");
     await page.locator("#chapters button").first().waitFor({state:"visible"});
     assert.equal(await page.locator("#courseThemeColor").inputValue(),"#69419b");
@@ -181,9 +249,8 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>document.querySelector("#staged")?.textContent?.includes("planung.json"));
     assert.ok((await lessonHeads.nth(2).textContent()).includes("Wie lernt KI?"));
     assert.ok((await page.locator("#staged").textContent()).includes("planung.json"));
-    // Reset the reorder before testing the normal editor flow by refreshing
-    // (a new page resets unstaged test changes).
-    await page.reload();
+    // Explicitly discard the local backup before testing a fresh editor flow.
+    await resetEditor();
     await page.locator("#section").selectOption("einstieg");
 
     // Materials are Markdown documents with tables; they must have a usable
@@ -656,7 +723,7 @@ const server=http.createServer((req,res)=>{
 
     // Strict grade scope: basis form has its own blue preview and only basis
     // fields. Course-specific examples/questions/answers must not leak to year 4.
-    await page.reload();
+    await resetEditor();
     await page.locator("#courseSelect").selectOption("basis");
     await page.locator("#editGlossary").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/kursseiten/glossar.json");
@@ -725,6 +792,8 @@ const server=http.createServer((req,res)=>{
     await page.locator("#publish").click();
     await secondPublish;
     await page.waitForFunction(()=>document.querySelector("#pendingCount")?.textContent==="0");
+    assert.equal(await page.evaluate(()=>localStorage.getItem("ki-teacher-drafts-v1:integration-test")),null,
+      "Successfully submitted changes must not be recovered again");
     assert.equal(submitted.changes.length,1);
     assert.equal(submitted.changes[0].path,"kurse/bok/4-klasse/kursseiten/glossar.json");
     const submittedGlossary=JSON.parse(submitted.changes[0].content);
@@ -826,7 +895,7 @@ const server=http.createServer((req,res)=>{
     await page.locator("#closeNotebookPanel").click();
     // Discard the BOK4 test draft before staging an independent BOK1 notebook.
     // The worker intentionally disallows mixing teachers/classes in one PR.
-    await page.reload();
+    await resetEditor();
 
     // The first-year course uses a different notebook prefix and blue theme.
     await page.locator("#courseSelect").selectOption("basis");

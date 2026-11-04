@@ -30,6 +30,9 @@ werden. Siehe [Redaktionskonzept](ARCHITEKTUR.md).
 Der Pull Request startet die **bestehende GitHub-Action**. Erst ein erfolgreicher
 Merge nach \`main\` löst die Veröffentlichung über GitHub Pages aus. Es gibt
 **keine automatische Veröffentlichung unmittelbar nach dem Bearbeiten**.
+Die Publikationsprüfung kontrolliert für jeden veröffentlichten Kurs die
+generierte Schülerseite, AVIVA-Pläne, Materialzuordnungen, Navigation und
+eindeutigen Antwortschlüssel, unabhängig von Formulierungen und Lektionsanzahl.
 
 Die bisherige Kursseite ist weiter rein statisch; es gibt kein Backend für
 Schülerdaten und keine Cloud-Speicherung von Schülerantworten.
@@ -138,6 +141,24 @@ angelegt, und GitHub-Pages-Seiten können keine geheimen OAuth-Schlüssel speich
 GitHub bleibt die **einzige Quelle**. Konflikte werden vor dem Schreiben gegen
 den aktuellen \`main\`-Commit geprüft. Bei parallelen Änderungen erscheint
 eine Fehlermeldung statt eines stillen Überschreibens.
+
+### Lokale Entwurfssicherung
+
+Der Editor sichert vorgemerkte Dateien und noch nicht vorgemerkten Quelltext
+automatisch im lokalen Browserspeicher, getrennt nach GitHub-Konto und Kurs.
+Nach dem Neuladen werden die Entwürfe wiederhergestellt; Entwürfe anderer Kurse
+öffnen sich beim Wechsel zum betreffenden Kurs. Die ursprünglichen Dateiversionen
+bleiben erhalten, damit zwischenzeitliche Änderungen anderer Lehrpersonen beim
+Einreichen weiterhin als Konflikt erkannt werden. Erfolgreich eingereichte
+Änderungen werden aus der lokalen Sicherung entfernt.
+
+Die Sicherung gilt nur für diesen Browser und diese Worker-Origin, ist keine
+Cloud-Sicherung und bleibt auch nach dem Abmelden lokal vorhanden. Auf gemeinsam
+genutzten Geräten Browserprofile trennen und keine vertraulichen Daten in
+Kursentwürfen ablegen. Bei gesperrtem oder vollem Browserspeicher zeigt der Editor
+einen Fehler an. Änderungen im laufenden JupyterLite müssen zuerst mit
+«Notebook-Stand übernehmen» in den Editor übernommen werden; nicht übernommene
+Kernel-Änderungen sind nicht Bestandteil dieser Sicherung.
 
 ## Weitere Lehrperson hinzufügen
 
