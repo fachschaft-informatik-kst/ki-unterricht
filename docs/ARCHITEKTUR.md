@@ -167,6 +167,15 @@ geprüft werden, ob die Korrektur upstream enthalten ist und entfernt werden kan
 `tests/check_browser_storage.cjs` reproduziert den alten Fehler und prüft das
 Reconnect-Verhalten mit fertigen und noch initialisierenden Instanzen.
 
+Mehrere Notebook-Iframes können dieselbe IndexedDB gleichzeitig erweitern.
+Überholt ein Upgrade eine andere Anfrage, meldet IndexedDB `VersionError`
+(angeforderte Version kleiner als die inzwischen vorhandene Version). Der
+Paketierungspatch öffnet dann die aktuelle Datenbank ohne feste Versionsnummer,
+prüft erneut den benötigten Store und wiederholt nur ein tatsächlich notwendiges
+Upgrade. Höchstens drei Versionskonflikte werden erneut versucht; andere Fehler
+werden unverändert weitergegeben. Bestehende Stores und Daten bleiben erhalten.
+Der technische Speichertest reproduziert auch diesen Versionskonflikt.
+
 Bereits geöffnete Notebooks behalten auf derselben Kursseite eigene Python-Kernels.
 Der JupyterLite-0.5-Service-Worker ersetzt jedoch bei jeder Dateisystem-Anfrage
 seinen gemeinsamen Broadcast-Antwort-Handler. Gleichzeitige Kernel-Anfragen können

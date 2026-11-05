@@ -16,6 +16,19 @@ REPLACEMENTS = (
         "i!==n&&(i._dbInfo.db=t.db,i._dbInfo.version=t.version)",
         "i!==n&&i._dbInfo&&(i._dbInfo.db=t.db,i._dbInfo.version=t.version)",
     ),
+    (
+        "function I(e,n){return new a(",
+        "function I(e,n,kiVersionRetries=0){return new a(",
+    ),
+    (
+        "a.onerror=function(e){e.preventDefault(),r(a.error)}",
+        'a.onerror=function(event){event.preventDefault();'
+        'if(n&&a.error&&a.error.name==="VersionError"&&kiVersionRetries<3){'
+        'console.warn("JupyterLite IndexedDB version changed; reopening",e.name);'
+        'e.db=null;I(e,!1).then(function(db){e.db=db;'
+        'return N(e)?I(e,!0,kiVersionRetries+1):db}).then(t,r);'
+        '}else r(a.error)}',
+    ),
 )
 DRIVE_WORKERS = {
     "288.da9122dbb795853aa184.js": 2,

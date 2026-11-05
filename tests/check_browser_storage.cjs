@@ -13,6 +13,65 @@ const driveStart=serviceWorker.indexOf("async function broadcastOne(");
 const driveEnd=serviceWorker.indexOf("async function openCache(",driveStart);
 assert(driveStart>=0&&driveEnd>driveStart,"Expected pinned service-worker drive bridge");
 const driveRequest=serviceWorker.slice(driveStart,driveEnd);
+async function checkVersionRace(){
+  const begin=source.indexOf("function I("),end=source.indexOf("function S(",begin);
+  assert(begin>=0&&end>begin,"Expected pinned IndexedDB open function");
+  const patched=source.slice(begin,end);
+  const original=patched
+    .replace("function I(e,n,kiVersionRetries=0)", "function I(e,n)")
+    .replace(/a.onerror=function\(event\).*?else r\(a\.error\)\}/,
+      "a.onerror=function(e){e.preventDefault(),r(a.error)}");
+  assert.notEqual(patched,original,"Build must handle IndexedDB VersionError");
+  async function run(code,{exists=false,alwaysRace=false,failure=null}={}){
+    let version=4,closed=0,deferred=0;
+    const requests=[],warnings=[],stores=new Set(exists?["lesson"]:["previous"]);
+    const existingData={answer:"preserved"};
+    const options={name:"test",storeName:"lesson",version:3,db:{close(){closed++;}}};
+    const sandbox={
+      a:Promise,v:{},l:"blobs",console:{warn:(...args)=>warnings.push(args)},
+      g(){deferred++;},_(){deferred--;},
+      N(info){
+        info.version=Math.max(info.version,info.db.version);
+        if(!stores.has(info.storeName)){info.version++;return true;}
+        return false;
+      },
+      o:{open(name,requested){
+        requests.push(requested);
+        const request={};
+        setImmediate(()=>{
+          if(failure||requested!==undefined&&(requested<version||alwaysRace)){
+            request.error={name:failure||"VersionError"};
+            request.onerror({preventDefault(){}});
+            return;
+          }
+          const previous=version;
+          if(requested!==undefined)version=requested;
+          request.result={version,existingData,close(){closed++;},
+            createObjectStore(store){stores.add(store);}};
+          if(requested!==undefined&&version>previous)request.onupgradeneeded({oldVersion:previous,newVersion:version});
+          request.onsuccess();
+        });
+        return request;
+      }}
+    };
+    const open=vm.runInNewContext("("+code+")",sandbox);
+    const result=await open(options,true);
+    return {result,requests,warnings,stores,deferred,closed};
+  }
+  await assert.rejects(run(original),error=>error.name==="VersionError");
+  const added=await run(patched);
+  assert.deepEqual(added.requests,[3,undefined,5]);
+  assert(added.stores.has("previous")&&added.stores.has("lesson"));
+  assert.equal(added.result.existingData.answer,"preserved");
+  assert.equal(added.deferred,0,"Version recovery balances deferred operations");
+  assert.equal(added.warnings.length,1,"Version conflict is reported");
+  const present=await run(patched,{exists:true});
+  assert.deepEqual(present.requests,[3,undefined],"Existing store needs no new upgrade");
+  await assert.rejects(run(patched,{failure:"QuotaExceededError"}),
+    error=>error.name==="QuotaExceededError");
+  await assert.rejects(run(patched,{alwaysRace:true}),
+    error=>error.name==="VersionError","Repeated conflicts must terminate, not loop forever");
+}
 async function checkDriveRequests(){
   const listeners=new Set(),sent=[],errors=[];
   const broadcast={
@@ -108,6 +167,8 @@ async function simulate(code,initializing){
   assert.notEqual(original,reconnect,"Build must include the storage race fix");
   await assert.rejects(simulate(original,true),/Cannot read properties of null/);
   await checkDriveRequests();
+  await checkVersionRace();
   console.log("PASS IndexedDB reconnect with initializing and ready stores; original race reproduced");
   console.log("PASS concurrent drive requests, out-of-order/duplicate responses and explicit timeout");
+  console.log("PASS IndexedDB version conflict reproduction, bounded recovery and preserved data");
 })().catch(error=>{console.error(error);process.exitCode=1;});
