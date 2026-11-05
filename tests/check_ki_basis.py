@@ -90,7 +90,28 @@ def main():
     assert '<svg' in lern_grafik[0].data and 'Aktuelle Grenze' in lern_grafik[0].data
     assert 'ausserhalb des Bildes' not in lern_grafik[0].data
     assert 'ausserhalb des Bildes' in lern_grafik[1].data and 'überall 0 aus' in lern_grafik[1].data
-    assert 'ausserhalb des Bildes' not in lern_grafik[2].data and 'stroke-width="3"/>' in lern_grafik[2].data
+    assert 'ausserhalb des Bildes' not in lern_grafik[2].data
+    assert '<clipPath' not in lern_grafik[2].data
+    import xml.etree.ElementTree as ET
+    svg_vier = ET.fromstring(lern_grafik[2].data)
+    grenzlinien = [el for el in svg_vier.iter()
+                   if el.tag.endswith('line') and el.attrib.get('data-role') == 'aktuelle-grenze']
+    assert len(grenzlinien) == 1, 'Die vierte Korrektur muss als dunkle Grenzlinie sichtbar sein.'
+    aktuell = grenzlinien[0].attrib
+    assert aktuell['stroke'] == '#263b43' and aktuell['stroke-width'] == '3'
+    for koordinaten, untergrenze, obergrenze in (('x1 x2', 68, 438), ('y1 y2', 50, 334)):
+        for name in koordinaten.split():
+            assert untergrenze <= float(aktuell[name]) <= obergrenze
+    assert abs(float(aktuell['x2']) - float(aktuell['x1'])) > 100
+    alte = [el for el in svg_vier.iter()
+            if el.tag.endswith('line') and el.attrib.get('data-role') == 'fruehere-grenze']
+    assert len(alte) >= 2  # sichtbare frühere Korrekturen bleiben im Plot
+    assert not any(el.attrib.get('data-role') == 'aktuelle-grenze'
+                   for el in ET.fromstring(lern_grafik[1].data).iter())
+    assert u._grenzabschnitt(.2, .2, -.9) is None  # 3. Korrektur: ausserhalb
+    assert u._grenzabschnitt(0, 0, -.5) is None  # ohne Gewichte keine Gerade
+    assert u._grenzabschnitt(1, 0, -.5) == ((.5, -.4), (.5, 1.4))
+    assert u._grenzabschnitt(0, 1, -.5) == ((-.4, .5), (1.4, .5))
     # Lernweg Neuron: Gatter konvergieren, XOR nie; ein Neuron löst XOR höchstens 3 von 4, vier versteckte Neuronen vollständig.
     for aufgabe in ('AND','OR','NAND','NOR'):
         w,b=u.perzeptron_lernen(aufgabe);assert np.all((u._EINGABEN@w+b>=0)==np.array(u._ZIELE[aufgabe]))

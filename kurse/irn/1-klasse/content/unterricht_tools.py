@@ -651,6 +651,31 @@ def _schritt_text(info):
     return '\n'.join(zeilen)
 
 
+
+def _grenzabschnitt(w1, w2, bias, xmin=-.4, xmax=1.4):
+    """Begrenze die mathematische Gerade auf das sichtbare Quadrat.
+
+    SVG-clipPath-IDs sind in wiederholten Jupyter-Ausgaben nicht eindeutig:
+    direkt berechnete Endpunkte funktionieren auch nach dem Wiederherstellen.
+    """
+    eps = 1e-9
+    punkte = []
+    if abs(w2) > 1e-10:
+        for x in (xmin, xmax):
+            y = -(w1 * x + bias) / w2
+            if xmin - eps <= y <= xmax + eps:
+                punkte.append((x, min(xmax, max(xmin, y))))
+    if abs(w1) > 1e-10:
+        for y in (xmin, xmax):
+            x = -(w2 * y + bias) / w1
+            if xmin - eps <= x <= xmax + eps:
+                punkte.append((min(xmax, max(xmin, x)), y))
+    eindeutig = []
+    for p in punkte:
+        if not any(abs(p[0] - q[0]) < eps and abs(p[1] - q[1]) < eps for q in eindeutig):
+            eindeutig.append(p)
+    return (eindeutig[0], eindeutig[1]) if len(eindeutig) >= 2 else None
+
 def _lern_bild(l, aktuell=None):
     """Leichte SVG-Grenzgeraden für DL3, ohne Matplotlib-Download beim Klick."""
     from IPython.display import SVG
@@ -660,13 +685,10 @@ def _lern_bild(l, aktuell=None):
     left, top, breite, hoehe = 68, 50, 370, 284
     px = lambda x: left + (x - xmin) / (xmax - xmin) * breite
     py = lambda y: top + (xmax - y) / (xmax - xmin) * hoehe
-    clip = f'lernplot-{id(l)}'
     svg = [
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 525 410" '
         'role="img" aria-label="Entscheidungsgrenzen des lernenden Neurons" '
         'style="max-width:100%;height:auto;background:#fff">',
-        f'<defs><clipPath id="{clip}"><rect x="{left}" y="{top}" '
-        f'width="{breite}" height="{hoehe}"/></clipPath></defs>',
         f'<text x="263" y="26" text-anchor="middle" font-size="17" '
         f'font-weight="600" fill="#263b43">{escape(l.aufgabe)}: '
         f'Grenze nach {len(l.staende)-1} Korrektur(en)</text>',
@@ -683,20 +705,15 @@ def _lern_bild(l, aktuell=None):
                    f'font-size="13">{tick}</text>')
         svg.append(f'<text x="{left-16}" y="{y+4:.1f}" text-anchor="end" '
                    f'font-size="13">{tick}</text>')
-    svg.append(f'<g clip-path="url(#{clip})">')
     for k, (w, bias) in enumerate(l.staende):
-        w1, w2 = float(w[0]), float(w[1])
-        if abs(w2) > 1e-10:
-            x1, x2 = xmin, xmax
-            y1, y2 = -(w1*x1+bias)/w2, -(w1*x2+bias)/w2
-        elif abs(w1) > 1e-10:
-            x1 = x2 = -bias/w1
-            y1, y2 = xmin, xmax
-        else:
+        abschnitt = _grenzabschnitt(float(w[0]), float(w[1]), float(bias), xmin, xmax)
+        if abschnitt is None:
             continue
-        letzte = k == len(l.staende)-1
+        (x1, y1), (x2, y2) = abschnitt
+        letzte = k == len(l.staende) - 1
         farbe = '#263b43' if letzte else '#a9bed8'
-        svg.append(f'<line x1="{px(x1):.2f}" y1="{py(y1):.2f}" '
+        rolle = 'aktuelle-grenze' if letzte else 'fruehere-grenze'
+        svg.append(f'<line data-role="{rolle}" x1="{px(x1):.2f}" y1="{py(y1):.2f}" '
                    f'x2="{px(x2):.2f}" y2="{py(y2):.2f}" '
                    f'stroke="{farbe}" stroke-width="{3 if letzte else 1.5}"/>')
     for (x1, x2), ziel in zip(_EINGABEN, l.y):
@@ -708,14 +725,12 @@ def _lern_bild(l, aktuell=None):
         x, y = (float(v) for v in aktuell['x'])
         svg.append(f'<circle cx="{px(x):.1f}" cy="{py(y):.1f}" r="17" '
                    'fill="none" stroke="#263b43" stroke-width="3"/>')
-    # Die aktuelle Grenze kann ganz ausserhalb des Ausschnitts liegen (z. B. AND,
-    # Lernrate 0.4, nach 3 Korrekturen: x1 + x2 = 4.5). Dann wird keine fette
-    # Linie sichtbar; stattdessen wird erklärt, was das Neuron im Bild ausgibt.
+    # Bei AND mit Lernrate 0.4 liegt die Grenze nach der dritten Korrektur
+    # ausserhalb des festen Ausschnitts. Bei der vierten ist sie wieder sichtbar.
     w_akt, b_akt = l.staende[-1]
     ecken = [float(w_akt[0]) * ex + float(w_akt[1]) * ey + float(b_akt)
              for ex in (xmin, xmax) for ey in (xmin, xmax)]
-    hat_grenze = abs(float(w_akt[0])) > 1e-10 or abs(float(w_akt[1])) > 1e-10
-    if not (hat_grenze and min(ecken) <= 0 <= max(ecken)):
+    if _grenzabschnitt(float(w_akt[0]), float(w_akt[1]), float(b_akt), xmin, xmax) is None:
         ueberall = int(ecken[0] >= 0)
         mx, my = left + breite / 2, top + hoehe / 2
         svg.append(f'<rect x="{mx-150}" y="{my-26}" width="300" height="52" rx="6" '
@@ -726,7 +741,6 @@ def _lern_bild(l, aktuell=None):
         svg.append(f'<text x="{mx}" y="{my+15}" text-anchor="middle" font-size="13" '
                    f'fill="#263b43">Das Neuron gibt hier überall {ueberall} aus.</text>')
     svg += [
-        '</g>',
         f'<text x="{left+breite/2}" y="{top+hoehe+48}" text-anchor="middle" '
         'font-size="14">Eingang 1</text>',
         f'<text x="22" y="{top+hoehe/2}" transform="rotate(-90 22 '
