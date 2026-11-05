@@ -77,10 +77,20 @@ def main():
     try:
         u.display=lambda obj:lern_grafik.append(obj)
         u._lern_bild(u._Lerner('AND',.2), {'x': (1,0)})
+        # AND mit Lernrate 0.4: Nach 3 Korrekturen liegt die Grenze (x1 + x2 = 4.5)
+        # ausserhalb des Bildes; die Grafik muss das erklären statt nichts Fettes zu zeigen.
+        lerner=u._Lerner('AND',.4)
+        while len(lerner.staende)-1<3: info=lerner.schritt()
+        u._lern_bild(lerner, info)
+        while len(lerner.staende)-1<4: info=lerner.schritt()
+        u._lern_bild(lerner, info)
     finally:
         u.display=display_alt
-    assert len(lern_grafik)==1
+    assert len(lern_grafik)==3
     assert '<svg' in lern_grafik[0].data and 'Aktuelle Grenze' in lern_grafik[0].data
+    assert 'ausserhalb des Bildes' not in lern_grafik[0].data
+    assert 'ausserhalb des Bildes' in lern_grafik[1].data and 'überall 0 aus' in lern_grafik[1].data
+    assert 'ausserhalb des Bildes' not in lern_grafik[2].data and 'stroke-width="3"/>' in lern_grafik[2].data
     # Lernweg Neuron: Gatter konvergieren, XOR nie; ein Neuron löst XOR höchstens 3 von 4, vier versteckte Neuronen vollständig.
     for aufgabe in ('AND','OR','NAND','NOR'):
         w,b=u.perzeptron_lernen(aufgabe);assert np.all((u._EINGABEN@w+b>=0)==np.array(u._ZIELE[aufgabe]))
