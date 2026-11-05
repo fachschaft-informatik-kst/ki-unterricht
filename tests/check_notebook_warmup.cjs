@@ -10,8 +10,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  assert(script.includes('window.dispatchEvent(new CustomEvent("ki-notebook-warmup"'),'Warmup uses the managed iframe');
  assert(script.includes('if (managed) {'),'Managed notebooks may not create a second iframe');
  const basic=source('shared/basis/persistence.js'),advanced=source('shared/portal/portal.js');
- assert(basic.includes('if(current&&ready&&owner)await snapshot()'),'ZIP must remain available during background startup');
- assert(advanced.includes("frame.dataset.startKind==='warmup'"),'ZIP must remain available during background startup');
+ assert(basic.includes("if(session.frame.dataset.startKind==='warmup')continue"),'ZIP must remain available during background startup');
+ assert(advanced.includes("session.frame.dataset.startKind==='warmup'"),'ZIP must remain available during background startup');
  assert(advanced.includes("location.hash==='#journal'&&activeName&&activeOwner"),
    'Passive chapter navigation must not open a warmed notebook dialog');
  assert(advanced.includes('notebookUploads[name]=await fileUpdates'),'Uploads must be indexed per notebook');

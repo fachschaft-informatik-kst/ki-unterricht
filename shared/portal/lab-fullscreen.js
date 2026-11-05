@@ -109,8 +109,11 @@ export function bindNotebookDialog(panel) {
     // A floating notebook stays visible while the reader navigates the course.
     get floating() { return Boolean(float?.floating); },
     open(trigger=null) {
+      const nextOpener = trigger || document.activeElement;
+      if (opener !== nextOpener && opener?.isConnected) opener.setAttribute('aria-expanded', 'false');
+      opener = nextOpener;
+      if (opener?.isConnected) opener.setAttribute('aria-expanded', 'true');
       if (panel.open) return;
-      opener = trigger || document.activeElement;
       panel.hidden = false;
       const floating = floatOf();
       if (floating) floating.show(); else panel.showModal();

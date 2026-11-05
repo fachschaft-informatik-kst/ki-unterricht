@@ -15,6 +15,8 @@ Webbasierte Unterrichtsplattform für KI an der Kantonsschule Stadelhofen. Sie e
 
 Jeder Kurs hat eigene Kapitel, Unterrichtspläne, Materialien, Glossare, Musterlösungen und Notebookquellen. Änderungen an einem Kurs verändern die anderen Kurse nicht. Die bisherigen Adressen `/basis/` und `/projekt/` werden nicht mehr als Kursseiten veröffentlicht.
 
+**Notebooks erneut öffnen:** Bereits gestartete Notebooks bleiben auf der geöffneten Kursseite im Arbeitsspeicher, auch beim Schliessen des Notebookfensters oder beim Wechsel zu einem anderen Notebook. Beim erneuten Öffnen wird dieselbe Python-Sitzung angezeigt; Variablen, trainierte Modelle und Uploads bleiben erhalten. Nur der erste Start benötigt die vollständige Vorbereitung. Viele geöffnete Notebooks benötigen entsprechend mehr Arbeitsspeicher. Beim Neuladen oder Verlassen der Kursseite enden diese Sitzungen: Gesicherte Notebookstände bleiben erhalten, Python-Variablen und Modelle müssen danach neu berechnet werden. ZIP-Sicherungen erfassen alle gestarteten, bereiten Kursnotebooks; eine ZIP-Wiederherstellung verwirft die bisherigen laufenden Sitzungen.
+
 ## 2. Inhalte im Browser bearbeiten
 
 Für Unterrichtstexte ist keine lokale Entwicklungsumgebung nötig.

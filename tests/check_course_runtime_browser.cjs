@@ -78,8 +78,43 @@ assert(Number.isInteger(repeats)&&repeats>0,"KI_RUNTIME_REPEATS must be a positi
         assert.equal(url.searchParams.get("path"),"portal/"+course.slug+"/"+name);
         await page.frameLocator(frame).locator(".jupyter-widgets").first().waitFor({state:"visible",timeout:20000});
         assert.equal(await page.frameLocator(frame).locator(".jp-OutputArea-error").count(),0);
+        const kernel=await page.locator(frame).getAttribute("data-kernel-id");
+        assert(kernel,"The live kernel must have an identity");
+        const editAndRun=async source=>{
+          const cells=page.frameLocator(frame).locator(".jp-CodeCell");
+          const cell=cells.nth(await cells.count()-1);
+          const editor=cell.locator(".cm-content");
+          await editor.click();await editor.press("ControlOrMeta+A");
+          await page.keyboard.insertText(source);
+          await page.keyboard.press("Shift+Enter");
+          return cell;
+        };
+        const initialCell=await editAndRun("ki_cache_test_value = 7319\nprint('cache value created')");
+        await initialCell.getByText("cache value created",{exact:true}).waitFor({timeout:20000});
+        const second="xor_einzelne_neuronen.ipynb";
+        const launch=nb=>page.locator(`.ki-notebook-block[data-notebook$="/${nb}"] .ki-notebook-launch`).first().evaluate(el=>el.click());
+        await launch(second);
+        await page.waitForFunction(([selector,notebook])=>{
+          const el=document.querySelector(selector);
+          return el?.getAttribute("src")?.includes(notebook);
+        },[frame,second],{timeout:5000});
+        await page.waitForFunction(selector=>{
+          const el=document.querySelector(selector);
+          return el?.dataset.state==="ready"&&el.hidden;
+        },loader,{timeout:180000});
+        const start=Date.now();
+        await launch(name);
+        await page.waitForFunction(([selector,notebook,loading])=>
+          document.querySelector(selector)?.getAttribute("src")?.includes(notebook)&&document.querySelector(loading)?.hidden,
+          [frame,name,loader],{timeout:1000});
+        const reopenMs=Date.now()-start;
+        assert(reopenMs<1000,"A cached real notebook must reopen within one second");
+        assert.equal(await page.locator(frame).getAttribute("data-kernel-id"),kernel,"Switching must retain the original Python kernel");
+        const retainedCell=await editAndRun("print('retained Python value:', ki_cache_test_value)");
+        await retainedCell.getByText("retained Python value: 7319",{exact:true}).waitFor({timeout:20000});
+        assert.equal(await retainedCell.locator(".jp-OutputArea-error").count(),0);
         assert.deepEqual(errors,[]);
-        console.log("PASS "+course.slug+" ("+run+"/"+repeats+", "+(Date.now()-started)+" ms): real Python, own notebook path and rendered neuron widgets");
+        console.log("PASS "+course.slug+" ("+run+"/"+repeats+", "+(Date.now()-started)+" ms): real Python/widgets and cached kernel/variable; reopen "+reopenMs+" ms");
       }finally{await context.close();}
     }
   }finally{

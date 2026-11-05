@@ -1,6 +1,7 @@
 import {makeZip,readZip,escapeHTML as esc} from '../projekt/archive.js';
 import {bindLabFullscreen,bindNotebookDialog} from '../projekt/lab-fullscreen.js';
 import {startNotebookTiming,markNotebookTiming,openedNotebook,finishNotebookTiming} from '../projekt/notebook-performance.js';
+import {notebookSessions} from '../projekt/notebook-sessions.js';
 
 // The basic course has its own backup schema and does not alter the fourth-year portal.
 const KEY='kst-ki-basis-v1', NBKEY='kst-ki-basis-notebooks-v1', SCHEMA='ki-basis-zip-v1';
@@ -28,40 +29,36 @@ panel.innerHTML=`<div class="lab-head">
   </div>
   <iframe id="basis-lab-frame" title="Jupyter Notebook" allow="clipboard-read; clipboard-write"></iframe>
 </div>`;
-const frame=panel.querySelector('iframe'),status=panel.querySelector('#basis-lab-status'),heading=panel.querySelector('#basis-lab-title');
+let frame=panel.querySelector('iframe');
+const status=panel.querySelector('#basis-lab-status'),heading=panel.querySelector('#basis-lab-title');
 const loader=panel.querySelector('#basis-lab-loading'),loaderText=panel.querySelector('#basis-lab-loading-text'),loaderRetry=panel.querySelector('#basis-lab-retry');
-let loaderTimeout;
-function notebookLoading(state,message=''){
- clearTimeout(loaderTimeout);loader.dataset.state=state;loader.hidden=state==='ready';
- frame.inert=state!=='ready';loaderRetry.hidden=state!=='error';
- if(message)loaderText.textContent=message;
- if(state==='loading'){
-  const expected=current;
-  loaderTimeout=setTimeout(()=>{
-   if(current!==expected||ready)return;
-   status.textContent='Notebook-Start dauert zu lange.';
-   notebookLoading('error','Notebook reagiert nicht. Erneut öffnen oder die Kursseite neu laden.');
-  },180000);
- }
+const runtime=notebookSessions(frame,(state,message)=>{
+ loader.dataset.state=state;loader.hidden=state==='ready';loaderRetry.hidden=state!=='error';
+ if(message){loaderText.textContent=message;status.textContent=message;}
+});
+function notebookLoading(state,message='',session=runtime.active){
+ if(session)runtime.loading(session,state,message);
 }
 bindLabFullscreen(panel.querySelector('#basis-lab-fullscreen'), panel);
 const overlay=bindNotebookDialog(panel);
 loaderRetry.addEventListener('click',()=>{if(current)void openNotebook(current,owner,true);});
-let current=null,owner=null,ready=false,revision=0,restoring=false,changed=false;
-function startNotebookFrame(name,kind){
+let current=null,owner=null,changed=false;
+function startNotebookFrame(name,kind,session=runtime.active){
+ const frame=session.frame;
+ session.initializing=false;
  frame.dataset.startKind=kind;frame.dataset.startMs=String(performance.now());
  startNotebookTiming(frame,name,kind);
- notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Python wird vorbereitet …');
+ notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Python wird vorbereitet …',session);
  frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');
 }
 // A failed start is usually one dropped download on a busy network. Try once
 // more on a fresh frame before asking the learner to do it by hand.
 const startRetries=new Map();
-function retryStartup(name){
- if(current!==name||(startRetries.get(name)||0)>=1)return false;
+function retryStartup(name,session){
+ if((startRetries.get(name)||0)>=1)return false;
  startRetries.set(name,1);
- status.textContent='Verbindung unterbrochen. Neuer Startversuch …';
- setTimeout(()=>{if(current===name&&!ready)startNotebookFrame(name,frame.dataset.startKind||'open');},1000);
+ notebookLoading('loading','Verbindung unterbrochen. Neuer Startversuch …',session);
+ setTimeout(()=>{if(runtime.sessions.get(name)===session&&session.phase!=='ready')startNotebookFrame(name,session.frame.dataset.startKind||'open',session);},1000);
  return true;
 }
 function refreshNotebookFrame(){
@@ -89,9 +86,14 @@ async function persistDB(){const db=await storeReady;if(!db)return false;await n
 const mirroredFrom={'basis_neuron.ipynb':'content/perzeptron_und_neuronale_netze.ipynb','basis_netze.ipynb':'content/mehrschichtige_netze.ipynb'};
 function matchesCurrentLesson(name,nb){return !mirroredFrom[name]||nb?.metadata?.ki_didaktik?.ursprung===mirroredFrom[name];}
 function validate(nb){if(!nb||nb.nbformat!==4||!Array.isArray(nb.cells)||nb.cells.length>200||JSON.stringify(nb).length>50000000)throw Error('Ungültiges Notebook.');return nb;}
-function request(type,extra={}){return new Promise((resolve,reject)=>{if(!frame.contentWindow)return reject(Error('Notebook nicht geladen'));const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet nicht.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer});frame.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
+function request(type,extra={},target=frame){return new Promise((resolve,reject)=>{if(!target.contentWindow)return reject(Error('Notebook nicht geladen'));const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet nicht.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer,source:target.contentWindow});target.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
 async function persist(){try{const durable=await persistDB();try{localStorage.setItem(NBKEY,JSON.stringify(saved));}catch{}if(!durable&&!localStorage.getItem(NBKEY))throw Error('Kein verfügbarer Speicher');status.textContent='Notebook im Browser gespeichert. Für eine vollständige Sicherung ZIP herunterladen.';}catch(e){changed=true;status.textContent='Notebook konnte nicht dauerhaft gespeichert werden: '+e.message+'. Bitte ZIP herunterladen.';}}
-async function snapshot(){if(!current)return;if(!ready)throw Error('Notebook noch nicht bereit.');const name=current;const result=await request('snapshot');if(current!==name)return;saved[name]=validate(result.notebook);if(Array.isArray(result.files)&&result.files.length){notebookUploads[name]=result.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));}await persist();}
+async function snapshot(){for(const session of runtime.sessions.values()){
+ if(session.phase!=='ready'){if(session.frame.dataset.startKind==='warmup')continue;throw Error('Notebook noch nicht bereit.');}
+ const name=session.name,result=await request('snapshot',{},session.frame);
+ if(runtime.sessions.get(name)!==session)return;
+ saved[name]=validate(result.notebook);if(Array.isArray(result.files)&&result.files.length){notebookUploads[name]=result.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));}await persist();
+}}
 // Never move a running JupyterLite iframe between lesson sections: moving it
 // destroys the browser kernel and may discard in-flight student edits.
 function mount(){
@@ -109,7 +111,7 @@ window.addEventListener('ki-notebook-warmup',event=>{
   // Never replace an outdated snapshot until the learner deliberately opens it.
   if(saved[name]&&!matchesCurrentLesson(name,saved[name]))return;
   if(!panel.isConnected)document.getElementById('basis-sicherung').before(panel);
-  current=name;owner=null;ready=false;changed=false;
+  current=name;owner=null;frame=runtime.select(name).frame;
   status.textContent='Python wird im Hintergrund vorbereitet …';
   startNotebookFrame(name,'warmup');
  })().catch(error=>console.warn('Notebook-Vorbereitung:',error));
@@ -123,52 +125,58 @@ async function openNotebook(name,view,force=false,host=null){
   legacyNotebooks[name]=saved[name];delete saved[name];await persist();
   document.getElementById('basis-backup-status').textContent='Älteres Notebook archiviert. Die neue Version wird geöffnet. Den alten Stand könnt ihr als ZIP herunterladen.';
  }
- if(current!==name&&ready&&owner)await snapshot();
  // The modal stays in its permanent DOM position. Reparenting a live iframe
  // destroys its browsing context (and Pyodide), even if its src is unchanged.
  // The chapter launch button remains the dialog's focus-return target.
  try { sessionStorage.setItem('ki-last-opened-bok-1',name); } catch {}
  owner=view||owner;heading.textContent=notebookTitles[name]||'Experiment';
+ current=name;
+ const session=runtime.select(name);frame=session.frame;
  openedNotebook(frame,name);
- if(current===name&&!force&&frame.getAttribute('src')&&loader.dataset.state!=='error'){
+ if(!force&&frame.getAttribute('src')&&session.phase!=='error'){
   // Reuse the active/warming iframe even when Python is still starting.
   overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);
   mount();refreshNotebookFrame();
   return;
  }
- current=name;ready=false;changed=false;overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);mount();
+ overlay.open(host?.querySelector('.ki-notebook-launch')||document.activeElement);mount();
  status.textContent='Notebook wird geladen …';
  startNotebookFrame(name,'open');refreshNotebookFrame();
 }
 document.querySelectorAll('a[href*="../lab/index.html?path="]').forEach(a=>{const url=new URL(a.href);const name=url.searchParams.get('path')?.split('/').pop();if(!notebookNames.includes(name))return;a.addEventListener('click',event=>{event.preventDefault();openNotebook(name,a.closest('main > section')?.id,false,a.closest('.ki-notebook-block')).catch(e=>status.textContent=e.message);});});
-window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1'||!current)return;const d=event.data;if(d.path!=='portal/'+current)return;
+window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.data?.channel!=='ki-portal-v1')return;
+const session=runtime.fromSource(event.source);if(!session)return;
+const frame=session.frame,current=session.name,d=event.data;if(d.path!=='portal/'+current)return;
 if(d.type==='milestone'){markNotebookTiming(frame,d.phase);return;}
-if(d.id&&pending.has(d.id)){const p=pending.get(d.id);clearTimeout(p.timer);pending.delete(d.id);d.type==='error'?p.reject(Error(d.error)):p.resolve(d);return;}
-if(d.type==='ready'&&d.error){if(retryStartup(current))return;status.textContent=d.error;notebookLoading('error',d.error);return;}
-if(d.type==='ready'&&d.ready&&!ready&&!restoring){
- restoring=true;
+if(d.id&&pending.has(d.id)){const p=pending.get(d.id);if(p.source!==event.source)return;clearTimeout(p.timer);pending.delete(d.id);d.type==='error'?p.reject(Error(d.error)):p.resolve(d);return;}
+if(d.type==='ready'&&d.error){if(retryStartup(current,session))return;notebookLoading('error',d.error,session);return;}
+if(d.type==='ready'&&d.ready&&session.phase!=='ready'&&!session.initializing){
+ session.initializing=true;
  try{
   await loaded;
-  const restored=saved[current] ? await request('restore',{notebook:validate(saved[current]),keepKernel:true,files:notebookUploads[current]||[]}) : null;
+  if(runtime.sessions.get(current)!==session)return;
+  const restored=saved[current] ? await request('restore',{notebook:validate(saved[current]),keepKernel:true,files:notebookUploads[current]||[]},frame) : null;
   // Published notebooks already exist in the build: a costly initial widget
-  // snapshot is unnecessary. Changes auto-save, and switching/ZIP export always
+  // snapshot is unnecessary. Changes auto-save, and ZIP exports always
   // take a fresh snapshot. A running Python environment is ready immediately.
-  ready=true;startRetries.delete(current);
+  if(runtime.sessions.get(current)!==session)return;
+  startRetries.delete(current);
+  frame.dataset.kernelId=d.kernelId||'';
   finishNotebookTiming(frame);
-  status.textContent=restored?.widgets?.activated
+  let message=restored?.widgets?.activated
     ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'
     : restored ? 'Gesicherter Stand geladen · geänderte Startzellen bitte manuell ausführen.'
       : 'Notebook bereit · Änderungen werden automatisch gesichert.';
-  if(restored?.uploadError) status.textContent+=' · Uploads: '+restored.uploadError;
-  else if(restored?.uploadsRestored) status.textContent+=' · '+restored.uploadsRestored+' Upload-Datei(en) wiederverwendbar.';
-  notebookLoading('ready');
+  if(restored?.uploadError) message+=' · Uploads: '+restored.uploadError;
+  else if(restored?.uploadsRestored) message+=' · '+restored.uploadsRestored+' Upload-Datei(en) wiederverwendbar.';
+  notebookLoading('ready',message,session);
  }catch(e){
-  status.textContent='Wiederherstellung fehlgeschlagen: '+e.message;
-  notebookLoading('error','Notebook konnte nicht wiederhergestellt werden. Erneut öffnen.');
- }finally{restoring=false;}
+  if(runtime.sessions.get(current)===session)notebookLoading('error','Wiederherstellung fehlgeschlagen: '+e.message+'. Erneut öffnen.',session);
+ }finally{session.initializing=false;}
 }
-if(d.type==='dirty')changed=true;
-if(d.type==='changed'&&ready&&!restoring){try{saved[current]=validate(d.notebook);if(Array.isArray(d.files)&&d.files.length)notebookUploads[current]=d.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));await persist();if(status.textContent.startsWith('Notebook im Browser'))changed=false;}catch(e){status.textContent='Notebook konnte nicht gesichert werden: '+e.message;}}
+if(d.type==='dirty'){session.dirty=true;session.revision=Math.max(session.revision,d.revision||0);}
+if(d.type==='save-error'){session.dirty=true;status.textContent='Notebook noch nicht gesichert: '+d.error;}
+if(d.type==='changed'&&session.phase==='ready'&&!session.initializing){try{saved[current]=validate(d.notebook);if(Array.isArray(d.files)&&d.files.length)notebookUploads[current]=d.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));await persist();if(status.textContent.startsWith('Notebook im Browser')){changed=false;if((d.revision||0)>=session.revision)session.dirty=false;}}catch(e){session.dirty=true;status.textContent='Notebook konnte nicht gesichert werden: '+e.message;}}
 });
 window.addEventListener('hashchange',()=>{if(current)mount();});
 const backupControls=document.getElementById('basis-backup-controls');
@@ -223,7 +231,7 @@ function reflectionHTML(rows){
  const sections=rows.map(e=>'<section><h2>'+esc(e.chapter)+'</h2><h3>'+esc(e.question)+'</h3><p>'+esc(e.answer).replace(/\n/g,'<br>')+'</p></section>').join('');
  return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Lernjournal · 1. Klasse</title><style>body{max-width:850px;margin:40px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h2{font-size:19px;margin-bottom:4px}h3{font-size:16px;margin:0 0 8px}section{border-bottom:1px solid #ddd;margin:22px 0;padding-bottom:14px;break-inside:avoid}p{white-space:normal}</style><h1>KI-Lernjournal · 1. Klasse</h1>'+meta+'<p>Antworten aus dem gesicherten Kursstand (auch Auswahlaufgaben). Notebook-Ergebnisse befinden sich separat im ZIP.</p>'+(sections||'<p>Noch keine Antworten eingetragen.</p>')+'</html>';
 }
-backup.addEventListener('click',async()=>{backup.disabled=true;try{await loaded;if(current&&ready&&owner)await snapshot();const data={schema:SCHEMA,answers:answers(),notebooks:notebookNames.filter(n=>saved[n]),archived:notebookNames.filter(n=>legacyNotebooks[n]),uploads:[]};
+backup.addEventListener('click',async()=>{backup.disabled=true;try{await loaded;await snapshot();const data={schema:SCHEMA,answers:answers(),notebooks:notebookNames.filter(n=>saved[n]),archived:notebookNames.filter(n=>legacyNotebooks[n]),uploads:[]};
 const rows=readableAnswers();
 const entries=[{name:'kursstand.json',data:''},{name:'Journal.html',data:reflectionHTML(rows)},{name:'Reflexionen.txt',data:rows.map(e=>e.chapter+' – '+e.question+'\n'+e.answer).join('\n\n')||'Noch keine Antworten eingetragen.'},
  {name:'LESEN.txt',data:'Journal.html enthält alle ausgefüllten Antworten in lesbarer Form, einschliesslich Auswahlfeldern. Reflexionen.txt enthält dieselben Antworten als Text. notebooks/ enthält bearbeitete Jupyter-Notebooks mit Ausgaben. notebooks/archiv/ enthält die frühere DL3/4-Version, falls sie ersetzt wurde. daten/ enthält Fotostudio-JSON und im Notebook ausgewählte Uploads. Nach ZIP-Import sind Notebook-Ausgaben sichtbar; Python-Variablen und das trainierte Netz müssen durch erneutes Ausführen der Zellen erstellt werden. Fotostudio-JSON vor dem Training erneut im Notebook auswählen. Originalfotos separat sichern.\n'},
@@ -255,6 +263,6 @@ for(const f of raw.uploads||[]){
 let nextPhoto=null;
 if(files.has('fotodaten/fotostudio.json')){const content=await files.get('fotodaten/fotostudio.json').text();if(JSON.parse(content).schema!=='fotostudio-v1')throw Error('Ungültige Fotostudio-JSON');nextPhoto={name:'fotostudio.json',content};}
 if(!confirm('Aktuelle Textantworten, Notebooks und Fotodaten durch diese ZIP ersetzen? Ungesicherte Änderungen gehen verloren.'))return;
-if(current&&ready)await snapshot();
-saved=next;legacyNotebooks=nextLegacy;notebookUploads=nextUploads;photoJSON=nextPhoto;await persist();renderRecoveredFiles();for(const f of document.querySelectorAll('[data-basis-answer]')){f.value=typeof raw.answers[f.dataset.basisAnswer]==='string'?raw.answers[f.dataset.basisAnswer]:'';f.dispatchEvent(new Event('input',{bubbles:true}));}current=null;owner=null;ready=false;if(overlay.isOpen)await overlay.close();frame.removeAttribute('src');panel.hidden=true;status.textContent='ZIP geladen. Öffnet ein Notebook, um die gesicherten Zellen wiederherzustellen.';backupStatus.textContent='ZIP wiederhergestellt: Text- und Auswahlantworten sowie Notebookstände übernommen. Notebook bei Bedarf neu öffnen und benötigte Zellen ausführen.';if(photoJSON){const blob=new Blob([photoJSON.content],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fotostudio-wiederhergestellt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}document.getElementById('basis-save-status').textContent='Reflexionen aus ZIP wiederhergestellt.';}catch(e){backupStatus.textContent='Wiederherstellung fehlgeschlagen: '+e.message;alert('Wiederherstellung fehlgeschlagen: '+e.message);}finally{restore.value='';}});
-window.addEventListener('beforeunload',event=>{if(changed){event.preventDefault();event.returnValue='Notebook-Änderungen werden noch gespeichert.';}});
+runtime.clear();frame=panel.querySelector('#basis-lab-frame');startRetries.clear();changed=false;
+saved=next;legacyNotebooks=nextLegacy;notebookUploads=nextUploads;photoJSON=nextPhoto;await persist();renderRecoveredFiles();for(const f of document.querySelectorAll('[data-basis-answer]')){f.value=typeof raw.answers[f.dataset.basisAnswer]==='string'?raw.answers[f.dataset.basisAnswer]:'';f.dispatchEvent(new Event('input',{bubbles:true}));}current=null;owner=null;if(overlay.isOpen)await overlay.close();panel.hidden=true;status.textContent='ZIP geladen. Öffnet ein Notebook, um die gesicherten Zellen wiederherzustellen.';backupStatus.textContent='ZIP wiederhergestellt: Text- und Auswahlantworten sowie Notebookstände übernommen. Notebook bei Bedarf neu öffnen und benötigte Zellen ausführen.';if(photoJSON){const blob=new Blob([photoJSON.content],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fotostudio-wiederhergestellt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}document.getElementById('basis-save-status').textContent='Reflexionen aus ZIP wiederhergestellt.';}catch(e){backupStatus.textContent='Wiederherstellung fehlgeschlagen: '+e.message;alert('Wiederherstellung fehlgeschlagen: '+e.message);}finally{restore.value='';}});
+window.addEventListener('beforeunload',event=>{if(changed||[...runtime.sessions.values()].some(session=>session.dirty)){event.preventDefault();event.returnValue='Notebook-Änderungen werden noch gespeichert.';}});

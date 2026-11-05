@@ -107,7 +107,7 @@
         });
 
         const show = () => {
-          // One notebook window at a time: the controllers share one kernel per course.
+          // One visible notebook window at a time; hidden kernels stay alive.
           for (const other of floats) if (other.panel !== panel && other.panel.open) other.panel.close();
           resetBox();
           panel.classList.add("lab-floating");
