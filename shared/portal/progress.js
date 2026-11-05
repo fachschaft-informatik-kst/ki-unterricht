@@ -19,7 +19,17 @@ function save(){
  try{localStorage.setItem(key,JSON.stringify(state));storageOK=true;$('save-status').textContent='Stand in diesem Browser gespeichert. Keine automatische Abgabe.';}
  catch(e){storageOK=false;$('save-status').textContent='Lokales Speichern ist nicht verfügbar. Nutzen Sie «Stand herunterladen», bevor Sie die Seite schliessen.';}
 }
-function progress(){const n=checks.filter(x=>x.checked).length;$('progress').value=n;$('progress-text').textContent=n+' von '+checks.length+' Schritten';const safe=skills.filter(x=>x.value==='sicher').length;$('skill-summary').textContent=safe+' von '+skills.length+' Kompetenzen: «Sicher erklären». Eigene Einschätzung, keine Note.';}
+// Fahrplan: erledigte Etappen abheben, die nächste offene Etappe hervorheben.
+function roadmap(){
+ let found=false;
+ all('.roadmap-step').forEach(r=>{
+  const c=r.querySelector('[data-check]'),done=Boolean(c&&c.checked),next=!found&&Boolean(c)&&!done;
+  if(next)found=true;
+  r.classList.toggle('is-done',done);
+  r.classList.toggle('is-next',next);
+ });
+}
+function progress(){const n=checks.filter(x=>x.checked).length;$('progress').value=n;$('progress-text').textContent=n+' von '+checks.length+' Schritten';roadmap();const safe=skills.filter(x=>x.value==='sicher').length;$('skill-summary').textContent=safe+' von '+skills.length+' Kompetenzen: «Sicher erklären». Eigene Einschätzung, keine Note.';}
 function grade(){
  const answered=scores.filter(x=>x.value!=='');
  const points=answered.reduce((sum,x)=>sum+Number(x.value),0);
@@ -45,10 +55,35 @@ $('reset-state').addEventListener('click',()=>{if(confirm('Häkchen, Notizen, Th
 let beforePrint=[];window.addEventListener('beforeprint',()=>{beforePrint=all('details').map(d=>[d,d.open]);all('details').forEach(d=>d.open=true);});window.addEventListener('afterprint',()=>beforePrint.forEach(([d,open])=>d.open=open));$('print-page').addEventListener('click',()=>window.print());
 const links=all('.nav a'),views=all('main > section');
 let chapterObserver=null;
+// Seitenmodus (Bildprojekt): Ein Abschnitt mit data-pages zeigt jeweils ein Kapitel als eigene Seite.
+// Die Unternavigation bleibt auch in Journal, Bewertung und Sichern (data-nav) sichtbar.
+const pagesHome=view=>{const home=$(view.dataset.nav||view.id);return home&&home.hasAttribute('data-pages')?home:null;};
+function renderPagesNav(home,view,page){
+ const navLink=links.find(a=>a.hash==='#'+home.id);
+ if(!navLink)return;
+ const box=document.createElement('div');box.className='nav-sub nav-sub--pages';
+ const add=(href,nr,title,current)=>{
+  const a=document.createElement('a'),n=document.createElement('span');
+  a.href=href;n.textContent=nr;a.append(n,title);
+  if(current)a.setAttribute('aria-current','page');
+  box.append(a);
+ };
+ add('#'+home.id,'⌂',home.dataset.pages,view===home&&!page);
+ for(const k of home.querySelectorAll(':scope > details.kapitel:not([data-archived])'))add('#'+k.id,k.querySelector('.kapitel-nr').textContent,k.querySelector('.kapitel-titel').textContent,k===page);
+ for(const s of views)if(s.dataset.nav===home.id&&s.dataset.navTitle)add('#'+s.id,s.dataset.navLabel||'',s.dataset.navTitle,s===view);
+ navLink.after(box);
+}
+for(const home of views.filter(v=>v.hasAttribute('data-pages')))
+ for(const summary of home.querySelectorAll(':scope > details.kapitel > summary')){
+  summary.tabIndex=-1;
+  summary.addEventListener('click',e=>e.preventDefault());
+ }
 // Kapitel der aktuellen Seite: Unterpunkte in der Navigation, Knopf «Alle ein-/aufklappen», aktuelle Leseposition.
-function renderChapters(view){
+function renderChapters(view,page=null){
  all('.nav-sub').forEach(e=>e.remove());
  if(chapterObserver){chapterObserver.disconnect();chapterObserver=null;}
+ const home=pagesHome(view);
+ if(home){renderPagesNav(home,view,page);return;}
  const chapters=Array.from(view.querySelectorAll('details.kapitel'));
  if(chapters.length<2)return;
  const navLink=links.find(a=>a.hash==='#'+(view.dataset.nav||view.id));
@@ -72,7 +107,7 @@ function renderChapters(view){
   chapters.forEach(k=>chapterObserver.observe(k));
  }
 }
-let currentView=null;
+let currentView=null,currentPage=null;
 // #feld-<name> jumps to the student field with that data-answer/-basis-answer/-journal name.
 function byHash(id){
  if(!id.startsWith('feld-'))return $(id);
@@ -96,18 +131,26 @@ function route(){
  const target=byHash(id),view=target?.closest('main > section')||$('start');
  views.forEach(v=>v.classList.toggle('view-hidden',v!==view));
  links.forEach(a=>{if(a.hash==='#'+(view.dataset.nav||view.id))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+ // Seitenmodus: Das Kapitel, das den Sprungpunkt enthält, ist die aktuelle Seite; ohne Kapitel zeigt der Abschnitt seinen Fahrplan.
+ const page=view.hasAttribute('data-pages')&&target?target.closest('details.kapitel'):null;
+ if(view.hasAttribute('data-pages')){
+  view.classList.toggle('has-page',Boolean(page));
+  view.querySelectorAll(':scope > details.kapitel').forEach(k=>k.classList.toggle('is-page',k===page));
+ }
  if(target&&target!==view){let p=target;while(p){if(p.tagName==='DETAILS')p.open=true;p=p.parentElement;}}
- currentView=view;renderChapters(view);
+ currentView=view;currentPage=page;renderChapters(view,page);
  view.tabIndex=-1;
  requestAnimationFrame(()=>{
   const field=Boolean(target)&&id.startsWith('feld-');
+  // Ein Link auf eine Seite oder deren Inhaltsblock (z. B. #daten) beginnt oben auf der Seite.
+  const pageTop=!target||target===view||target===page||(page!==null&&target.parentElement===page);
   if(field)jumpToField(target);
-  else if(target&&target!==view)target.scrollIntoView({block:'start'});else window.scrollTo({top:0,behavior:'instant'});
+  else if(!pageTop)target.scrollIntoView({block:'start'});else window.scrollTo({top:0,behavior:'instant'});
   view.focus({preventScroll:true});
  });
 }
 window.addEventListener('hashchange',route);
-document.addEventListener('DOMContentLoaded',()=>{if(currentView)renderChapters(currentView);});
+document.addEventListener('DOMContentLoaded',()=>{if(currentView)renderChapters(currentView,currentPage);});
 window.KIProgress={get:()=>structuredClone(state),restore:raw=>{state=valid(raw);render();save();}};
 render();filter();experiment('vielfalt');document.documentElement.classList.add('has-js');route();
 // Navigation einklappen (nur Desktop); der Zustand bleibt im Browser erhalten.

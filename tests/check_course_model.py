@@ -52,6 +52,28 @@ with TemporaryDirectory() as tmp:
             pass
         else:
             raise AssertionError(f"Accepted invalid order: {order}")
+    path.write_text(json.dumps(original))
+    manifest_path = root / "kursseiten/manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    assert next(s for s in manifest["sections"] if s["id"] == "projekt").get("pages"), "Project must use page mode"
+    section = lambda m, name: next(s for s in m["sections"] if s["id"] == name)
+    for change in (
+        lambda m: section(m, "projekt").update(pages=""),
+        lambda m: section(m, "projekt").update(pages=True),
+        lambda m: section(m, "journal").update(navChild={"label": "✎"}),
+        lambda m: section(m, "einstieg").update(navChild={"label": "x", "title": "y"}),
+    ):
+        broken = deepcopy(manifest)
+        change(broken)
+        manifest_path.write_text(json.dumps(broken))
+        try:
+            load_course(root)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Accepted invalid page navigation")
+    manifest_path.write_text(json.dumps(manifest))
+    load_course(root)
 if "--json" in sys.argv:
     print(json.dumps({"valid": cases, "invalid": invalid, "template": template}))
 else:

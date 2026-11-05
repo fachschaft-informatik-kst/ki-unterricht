@@ -23,6 +23,7 @@
       "id": "projekt",
       "class": "hero",
       "navParent": "projekt",
+      "pages": "Fahrplan",
       "navigation": {
         "order": 6,
         "label": "05–07",
@@ -112,7 +113,11 @@
     {
       "id": "journal",
       "class": "section",
-      "navParent": "projekt"
+      "navParent": "projekt",
+      "navChild": {
+        "label": "✎",
+        "title": "Journal & Notebook"
+      }
     },
     {
       "id": "sprache",

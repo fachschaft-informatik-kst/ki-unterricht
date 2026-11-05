@@ -87,6 +87,11 @@ def assemble(pages: Path | None = None, manifest_path: str = "kurse/bok/4-klasse
         attrs = f'class="{html.escape(section["class"])}" id="{view}"'
         if section.get("navParent"):
             attrs += f' data-nav="{html.escape(section["navParent"])}"'
+        if section.get("pages"):
+            attrs += f' data-pages="{html.escape(section["pages"])}"'
+        if section.get("navChild"):
+            child = section["navChild"]
+            attrs += f' data-nav-label="{html.escape(child["label"])}" data-nav-title="{html.escape(child["title"])}"'
         rendered.append(f"<section {attrs}>{content}</section>")
     navigation = []
     for section in sorted((s for s in sections if "navigation" in s), key=nav_order):

@@ -154,14 +154,17 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(introLayout.align,'justify','Milestone intro uses justified text');
     assert.equal(introLayout.hyphens,'auto','Milestone intro allows hyphenation');
     assert(Math.abs(introLayout.width-introLayout.containerWidth)<2,'Milestone intro fills its chapter box');
-    const projectIntroStyle=await p.locator('#projekt-1 .kapitel-body > .section-intro').evaluate(el=>({maxWidth:getComputedStyle(el).maxWidth,textAlign:getComputedStyle(el).textAlign}));
+    const projectIntroStyle=await p.locator('#projekt-2 .kapitel-body > .section-intro').evaluate(el=>({maxWidth:getComputedStyle(el).maxWidth,textAlign:getComputedStyle(el).textAlign}));
     assert.deepEqual(projectIntroStyle,{maxWidth:'none',textAlign:'justify'},'Project chapter introductions also use the full box width');
-    assert.equal(await p.locator('#projekt .project-start-steps > li').count(),3,'Project home makes the starting sequence visible');
-    assert.equal(await p.locator('#projekt .project-start-steps > li').nth(1).locator('a[href="#projekt-fotostudio"]').count(),1,'Start step 2 links to its Fotostudio');
-    assert.equal(await p.locator('#projekt-1 [id^="projekt-etappe-"]').count(),6,'Six project stages remain accessible');
-    assert.equal(await p.locator('#projekt-1 .lesson-plan[open]').count(),0,'Project lesson descriptions start collapsed');
+    assert.equal(await p.locator('#projekt .roadmap-step').count(),7,'Project roadmap lists the start plus six stages');
+    assert.equal(await p.locator('#ablauf [id^="projekt-etappe-"]').count(),6,'Six project stages remain accessible');
+    assert.equal(await p.locator('#projekt-start a[href="#projekt-regeln"]').count(),1,'Roadmap start opens the data rules path');
+    for(const [stage,target] of Object.entries({1:'#projekt-2',2:'#projekt-3',3:'#projekt-4',4:'#projekt-4',5:'#projekt-abschluss',6:'#projekt-abschluss'}))
+      assert.equal(await p.locator('#projekt-etappe-'+stage+' a.roadmap-go[href="'+target+'"]').count(),1,'Stage '+stage+' opens its own page');
+    assert.equal(await p.locator('#projekt .lesson-plan[open]').count(),0,'Project lesson descriptions start collapsed');
     assert.equal(await p.locator('#journal #projekt-werkbank #start-project').count(),1,'Project notebook starts in the workbench');
-    assert.equal(await p.locator('#projekt-3 #projekt-fotostudio #start-studio').count(),1,'Photo studio belongs to step 2 in the data plan');
+    assert.equal(await p.locator('#projekt-3 #projekt-fotostudio #start-studio').count(),1,'Photo studio belongs to stage 2 on the data and photos page');
+    assert.equal(await p.locator('#projekt-regeln #daten [data-answer="projekt_datencheck"]').count(),1,'The data rules path keeps its saved self-check');
     assert.equal(await p.locator('#projekt #studio-frame').count(),1,'Embedded photo studio stays in the project section');
     assert.equal(await p.locator('#journal #studio-frame').count(),0,'Do not duplicate photo studio on the journal page');
     assert.equal(await p.locator('#journal #start-studio').count(),0,'Journal is for the model experiment, not photo preparation');
@@ -199,7 +202,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     assert.equal(await p.evaluate(()=>window.scrollY),historyScrollBefore,'Opening another popup keeps position');
     await historyDialog.locator('.milestone-close').click();
 
-    for(const [id,n] of Object.entries({einstieg:6,lernarten:9,perzeptron:7,netze:5,sprache:7,gesellschaft:6,projekt:4}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
+    for(const [id,n] of Object.entries({einstieg:6,lernarten:9,perzeptron:7,netze:5,sprache:7,gesellschaft:6,projekt:5}))assert.equal(await p.locator('#'+id+' details.kapitel').count(),n,id);
     assert.equal(await p.locator('.nav-sub a').count(),6);
     assert.equal(await p.locator('.kapitel-uebersicht, .kapitel-karte').count(),0,'Duplicate chapter overview must be absent');
     await p.locator('#einstieg-3 > summary').click();
@@ -480,7 +483,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     await digitFrame.getByRole('button',{name:/Vorhersage berechnen/}).first().waitFor({state:'visible',timeout:60000});
     assert.equal(await digitFrame.locator('.jp-OutputArea-error').count(),0,'Optional digit notebook must start with controls, not model errors');
 
-    await dismissNotebook();await p.locator('.nav a[href="#projekt"]').click();await p.locator('#projekt .project-start-guide a[href="#versuch"]').click();await p.locator('#projekt-4 [data-lab="ki_lernlabor.ipynb"]').click();
+    await dismissNotebook();await p.locator('.nav a[href="#projekt"]').click();await p.locator('#projekt-etappe-3 a.roadmap-go[href="#projekt-4"]').click();await p.locator('#projekt-4 [data-lab="ki_lernlabor.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/bok/4-klasse/ki_lernlabor.ipynb',null,{timeout:180000});
     const labCells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
     assert((await p.frameLocator('#project-frame').locator('.ki-autostart-status').innerText()).includes('Bereit'),

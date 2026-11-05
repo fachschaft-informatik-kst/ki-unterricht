@@ -149,7 +149,7 @@ Die Endnote wird auf die nächste Viertelnote gerundet. 16,5 Punkte → 3,5 · 2
 <details>
   <summary>Eigenes Projekt &amp; Einzelgespräche</summary>
   <div class="detail-body" id="abgabe">
-    <span class="section-label">07 · Zum Abschluss</span>
+    <span class="section-label">Zum Abschluss</span>
     <!-- MD:START -->
 ## Ein Journal. Ein begründetes Urteil.
 <!-- MD:END -->
