@@ -234,7 +234,7 @@
       "gruppe": "Bildprojekt",
       "begriff": "MobileNet",
       "basis": "Ein vortrainiertes Bildnetz, das aus echten Fotos nützliche Merkmale berechnet.",
-      "vertieft": "Effiziente Familie von Faltungsnetzen für Bildmerkmale und Bildklassifikation; im Projekt wird MobileNet V2 als Merkmalsextraktor eingesetzt.",
+      "vertieft": "Effiziente Familie von Faltungsnetzen für Bildmerkmale und Bildklassifikation; im Projekt wird MobileNet V2 als Merkmalsextraktor eingesetzt. Sein Ausgang mit 1000 ImageNet-Klassen wird nicht verwendet.",
       "beispiel": "Aus einem Foto entstehen Merkmalswerte für euren eigenen Klassifikator.",
       "frage": "Wieso genügt nicht die direkte Betrachtung einzelner Pixel?",
       "antwort": "Einzelne Pixel erklären wenig; MobileNet verbindet sie zu nützlichen Bildmerkmalen."

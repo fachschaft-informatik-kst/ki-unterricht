@@ -17,6 +17,10 @@ Ein Netz erkennt ein Bild, das es schon beim Training gesehen hat. Was ist damit
 
 > **Selbstkontrolle:** Eine richtige Trainingsvorhersage belegt nicht, dass andere Exemplare erkannt werden. Neue Aufnahmewinkel desselben Gegenstands sind nicht automatisch unabhängige Testobjekte.
 
+Lesen Sie danach [«Wer weiss was?»](index.html#projekt-wer-weiss-was) und notieren Sie je einen Satz: Welches Netz **lernt** in unserem Projekt, welches **bleibt unverändert**?
+
+> **Selbstkontrolle:** MobileNet bleibt unverändert und liefert nur die 1280 Zahlen je Foto. Das kleine Netz dahinter lernt Ihre zwei Klassen. MobileNet kennt Ihre Klassen nicht, denn sein Ausgang mit 1000 Klassennamen wird nicht benutzt.
+
 ### Informieren · 10 Min. · Nur der organisatorische Rahmen
 
 **Lehrperson · 10 Min.**
@@ -67,6 +71,8 @@ Unsere zwei Klassen: ____________________ / ____________________.
 | V1 | ____________________ | ____________________ | ______ |
 | P1 | ____________________ | ____________________ | ______ |
 | P2 | ____________________ | ____________________ | ______ |
+
+**Freiwilliger Stresstest:** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich. Halten Sie den Ort in Reflexion 2 fest.
 
 **Allein, 10 Min.:** Prüfen Sie ein eigenes P1-Beispiel. Ist es wirklich unabhängig? Notieren Sie einen möglichen Fehler und die Korrektur.
 
@@ -193,9 +199,9 @@ Testen Sie die begründet ausgewählte Variante **einmal auf P1/P2**. Notieren S
 | 2: ____________________ | ______ | ______ | ____________________ |
 | 3: ____________________ | ______ | ______ | ____________________ |
 
-Falls keine Fehler auftreten, untersuchen Sie drei richtige Beispiele und die Grenzen des kleinen Tests. **Keine Fehler oder Ergebnisse erfinden.**
+Falls keine Fehler auftreten, untersuchen Sie drei richtige Beispiele und die Grenzen des kleinen Tests. **Keine Fehler oder Ergebnisse erfinden.** Achten Sie darauf, ob Fehler vor allem Bilder mit anderem Hintergrund oder Ort betreffen (zum Beispiel ein Stresstest mit P2).
 
-**Reflexion 4–5 im bestehenden Journal:** Welche Aussage stützen die Daten? Was bleibt ungesichert? Was wäre ein nächster Versuch? Wie waren Arbeitsteilung, Hilfen und Etappenplan? Erklären Sie sich gegenseitig das ganze Projekt.
+**Reflexion 4–5 im bestehenden Journal:** In Reflexion 4 beantworten Sie auch: Welcher Teil hat unsere zwei Klassen unterscheiden gelernt (MobileNet oder das kleine Netz), und könnten Hintergrund oder Licht mitgeholfen haben? Welche Aussage stützen die Daten? Was bleibt ungesichert? Was wäre ein nächster Versuch? Wie waren Arbeitsteilung, Hilfen und Etappenplan? Erklären Sie sich gegenseitig das ganze Projekt.
 
 **Allein, 10 Min.:** Prüfen Sie einen persönlichen Anteil Ihrer Abschlussliste mit dem Raster. Notieren Sie einen fehlenden Beleg oder eine offene Frage. Fünfzehn Minuten bleiben für Abschluss, Technik und Beratung.
 

@@ -155,6 +155,12 @@ Klassen: frei, belegt
 Helfen vielfältigere Trainingsbilder? Zwei Klassen, gleich viele Bilder, dasselbe Netz.
 <!-- MD:END -->
     </div>
+    <div class="callout" id="projekt-thema-anspruch">
+      <strong>Wie schwer ist Ihr Thema für das Netz?</strong>
+      <!-- MD:START -->
+MobileNet liefert schon brauchbare Bildmerkmale. Klassen, die sich deutlich in Form oder Farbe unterscheiden, erreichen deshalb leicht sehr hohe Trefferquoten. Dann zeigt der A/B-Vergleich vielleicht keinen Unterschied; auch das ist ein gültiges Ergebnis. Spannender wird es bei ähnlichen Klassen (zum Beispiel Gabel gegen Löffel) oder wenn Sie P2 als Stresstest an einem anderen Ort aufnehmen (siehe [Datenplan](#projekt-3)).
+<!-- MD:END -->
+    </div>
     <details class="plan">
       <summary>Unser Steckbrief</summary>
       <div class="detail-body">

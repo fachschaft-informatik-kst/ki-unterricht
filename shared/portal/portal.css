@@ -444,6 +444,19 @@ dialog.ki-notebook-runtime.ki-notebook-dialog::backdrop{background:rgba(16,29,37
 #projekt-4 .project-background{margin:21px 0 16px}
 #projekt-4 .project-background>.detail-body{padding-top:15px}
 #projekt-4 .project-background .project-train-overview{margin:0}
+/* "Wer weiss was?": same visual language as the training overview above it. */
+.project-who-knows{margin:23px 0 4px;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:14px;scroll-margin-top:85px}
+.project-who-knows h2{font-size:1.22rem;letter-spacing:-.01em;margin:0 0 15px}
+.who-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.who-card{padding:13px 15px;background:#f6f8f6;border:1px solid var(--line);border-radius:10px;font-size:13px;line-height:1.55}
+.who-card strong{display:block;font-size:14px;line-height:1.35;margin-bottom:9px}
+.who-card strong em{display:inline-block;margin-left:7px;padding:3px 7px;border-radius:6px;background:#e8ebe9;color:#435d58;font:700 11px/1.4 system-ui;white-space:nowrap}
+.who-card p{margin:0 0 7px}
+.who-card p:last-child{margin-bottom:0}
+.who-card.model-trained{border:2px solid var(--accent);background:var(--soft);padding:12px 14px}
+.who-card.model-trained strong em{background:var(--accent);color:#fff}
+@media(max-width:700px){.who-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:500px){.project-who-knows{padding:16px}.project-who-knows h2{font-size:1.1rem}}
 #projekt-werkbank,#projekt-reflexionen{scroll-margin-top:85px}
 #journal #projekt-werkbank h2,#journal #projekt-reflexionen h2{font-size:1.35rem;margin:29px 0 10px}
 #journal #projekt-werkbank>p,#journal #projekt-reflexionen>p{font-size:14px;color:var(--muted);max-width:900px}

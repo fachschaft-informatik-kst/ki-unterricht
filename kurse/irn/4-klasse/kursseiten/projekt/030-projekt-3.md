@@ -21,7 +21,7 @@
         <article>
           <b>1 · Training: Gewichte lernen</b>
           <!-- MD:START -->
-Mit den **Trainingsbildern** passt das Netz seine Gewichte an. Beispiele aus T1 und T2 dürfen beim Lernen verwendet werden. Dass das Netz diese Bilder erkennt, sagt allein noch nicht, ob es neue Bilder erkennt.
+Mit den **Trainingsbildern** passt unser **kleines Netz** seine Gewichte an; das MobileNet davor bleibt unverändert ([Wer weiss was?](#projekt-wer-weiss-was)). Beispiele aus T1 und T2 dürfen beim Lernen verwendet werden. Dass das Netz diese Bilder erkennt, sagt allein noch nicht, ob es neue Bilder erkennt.
 <!-- MD:END -->
         </article>
         <article>
@@ -136,6 +136,8 @@ Derselbe Gegenstand oder dieselbe Person bleibt immer in derselben Gruppe – au
 Tragen Sie für **beide Klassen** je fünf voneinander unabhängige Exemplare ein: T1, T2, V1, P1 und P2. Planen Sie **acht Fotos pro Exemplar**. Wenn Sie die Exemplare noch nicht haben, beschreiben Sie eindeutig, welche Sie sammeln möchten. Bei Gesten brauchen Sie fünf unterschiedliche Personen; jede zeigt beide Gesten.
 
 Rechnen Sie nach: **2 Klassen × 5 Gruppen × 8 Fotos = 80 Bilder**. Insgesamt sind **32 Trainings-, 16 Validierungs- und 32 Testbilder** vorgesehen. Die beiden Klassen sollen unter vergleichbaren Aufnahmebedingungen fotografiert werden.
+
+**Stresstest (freiwillig):** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. So prüft der Abschlusstest auch, ob das Netz nur Hintergrund und Licht gelernt hat. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich.
 
 **Abschlusskontrolle:**
 1. Steht kein realer Gegenstand oder keine Person in mehr als einer Gruppe?

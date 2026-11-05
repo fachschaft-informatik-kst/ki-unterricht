@@ -80,4 +80,4 @@ Erklären Sie einander die XOR-Grenze und prüfen Sie einen Signalweg gemeinsam.
 2. Warum benötigt XOR eine Zwischenschicht?
 3. Welche Unsicherheit möchten Sie vor der Projektarbeit klären?
 
-**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5.
+**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt (Hinweis «Ausblick auf das Bildprojekt» am Ende der Kursseite).

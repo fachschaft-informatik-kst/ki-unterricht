@@ -178,11 +178,20 @@ export function fieldTopic(field,lessonTitle=""){
   // Keep titles short and readable; IDs remain available separately.
   return detail?subject+": "+detail:subject;
 }
+// Every field of a lesson, including those without a label text. The course
+// routers can jump to any of them (#feld-<name>).
+export function fieldsInSource(source){
+  // Fields inside a hidden wrapper only keep legacy answer keys alive in old
+  // ZIP backups; there is no question on the page to jump to.
+  const visible=source.replace(/<([a-z]+)\b[^>]*\shidden\b[^>]*>[\s\S]*?<\/\1>/g,"");
+  return new Set([...visible.matchAll(/\bdata-(?:answer|basis-answer|journal)=["']([^"']+)["']/g)].map(m=>m[1]));
+}
 async function getQuestions(lesson,course,token,github,repo,profile){
   const views=new Set([lesson.view]);
-  if(course.startsWith("bok/")&&lesson.number>=5&&lesson.number<=8){
-    (course==="bok/4-klasse"?["projekt","journal","fremdmodell","sicherung"]:
-      ["basis-daten","basis-plan","basis-training","basis-abschluss"]).forEach(x=>views.add(x));
+  // The project and journal pages of DL 5-8 belong to the grade, not to one teacher.
+  if(lesson.number>=5&&lesson.number<=8){
+    if(course.endsWith("/4-klasse"))["projekt","journal","fremdmodell","sicherung"].forEach(x=>views.add(x));
+    else if(course.endsWith("/1-klasse"))["basis-daten","basis-plan","basis-training","basis-abschluss"].forEach(x=>views.add(x));
   }
   const tree=await github(token,"/repos/"+repo+"/git/trees/main?recursive=1");
   if(tree.truncated)throw Error("Unvollständiger Quellindex");
@@ -191,9 +200,10 @@ async function getQuestions(lesson,course,token,github,repo,profile){
     /\/[0-9]{3}-[a-z0-9-]+\.md$/.test(item.path)&&
     views.has(item.path.split("/")[4])).map(item=>item.path);
   // One missing chapter must not hide every other original prompt.
-  const data=await Promise.allSettled(files.map(path=>getText(token,path,github,repo)));
-  return Object.assign({},...data.filter(item=>item.status==="fulfilled")
-    .map(item=>questionsFromSource(item.value)));
+  const data=(await Promise.allSettled(files.map(path=>getText(token,path,github,repo))))
+    .filter(item=>item.status==="fulfilled").map(item=>item.value);
+  return {questions:Object.assign({},...data.map(questionsFromSource)),
+    fields:new Set(data.flatMap(source=>[...fieldsInSource(source)]))};
 }
 export async function teacherData({course,kind},token,github,repo,selected=1,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
   const profile=courses.find(c=>c.slug===course&&c.ready);
@@ -224,7 +234,8 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
   const notes=headings(general).filter(block=>numbers(block.title).includes(current.number))
     .map(block=>({title:block.title,markdown:block.text}));
   const entries=answerRows(fields,current.number);
-  let questions={};try{questions=await getQuestions(current,course,token,github,repo,profile);}catch{ /* use explicit fallback */ }
+  let questions={},pageFields=new Set();
+  try{({questions,fields:pageFields}=await getQuestions(current,course,token,github,repo,profile));}catch{ /* use explicit fallback */ }
   for(const entry of entries){
     const original=questions[entry.field];
     const curated=PROMPTS[entry.field];
@@ -234,7 +245,7 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
     // #feld-<name> is resolved by the course routers; fields that exist only
     // dynamically (no source element) fall back to the lesson view.
     entry.courseLink="https://fachschaft-informatik-kst.github.io/ki-unterricht/"+
-      course+"/#"+(original?"feld-"+encodeURIComponent(entry.field):current.view);
+      course+"/#"+(pageFields.has(entry.field)?"feld-"+encodeURIComponent(entry.field):current.view);
   }
   return {...base,notes,entries,
     sections:[{title:"Allgemeine Musterlösungen",markdown:general},

@@ -27,7 +27,7 @@ Beide: 16 Neuronen, 60 Epochen, Startwert 11 und dieselben Validierungsbilder.
 <!-- MD:END -->
     </article>
     <details class="project-background">
-      <summary>Hintergrund: Was wird bei unserem Modell trainiert?</summary>
+      <summary>Hintergrund: Was wird trainiert – und wer weiss was?</summary>
       <div class="detail-body">
         <!-- Klarer Überblick vor dem ersten Training: nur das zweite Netz lernt. -->
         <div class="project-train-overview" aria-labelledby="projekt-training-titel">
@@ -39,6 +39,22 @@ Beide: 16 Neuronen, 60 Epochen, Startwert 11 und dieselben Validierungsbilder.
             <li><strong>4 · Vorhersage &amp; Test</strong><span>Welche Klasse ist es? Funktioniert das auch mit neuen Bildern?</span></li>
           </ol>
           <p class="project-train-note"><strong>Merken Sie sich:</strong> Die Merkmale kommen aus einem fertigen Modell. <strong>Trainiert wird nur unser nachgeschaltetes kleines Netz.</strong></p>
+        </div>
+        <div class="project-who-knows" id="projekt-wer-weiss-was" aria-labelledby="projekt-wer-weiss-titel">
+          <h2 id="projekt-wer-weiss-titel">Wer weiss was?</h2>
+          <div class="who-grid">
+            <article class="who-card model-fixed">
+              <strong>MobileNet <em>vortrainiert · bleibt unverändert</em></strong>
+              <p><b>Kennt:</b> Formen, Texturen und Muster aus über einer Million fremder Fotos mit vielen Alltagsgegenständen.</p>
+              <p><b>Kennt nicht:</b> Ihre zwei Klassen. Sein Ausgang mit 1000 Klassennamen wird hier nicht benutzt.</p>
+            </article>
+            <article class="who-card model-trained">
+              <strong>Unser kleines Netz <em>lernt aus Ihren Fotos</em></strong>
+              <p><b>Lernt:</b> Welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören.</p>
+              <p><b>Kennt nicht:</b> Was ein «Apfel» ist. Es sieht nur Zahlen und Ihre Beispiele, also auch Hintergrund und Licht.</p>
+            </article>
+          </div>
+          <p class="project-train-note"><strong>Darum zählt der Test mit neuen Exemplaren:</strong> Ob das Netz Ihre Klassen oder nur Hintergrund und Licht unterscheidet, zeigt sich erst bei Bildern, die es nie gesehen hat.</p>
         </div>
       </div>
     </details>

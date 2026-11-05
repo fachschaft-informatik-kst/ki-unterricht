@@ -79,7 +79,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
     <div class="detail-body">
       <label class="field"><span>Wie lautet das Testergebnis?</span><textarea data-journal="test" maxlength="20000" placeholder="… von 32 Bildern richtig; … %; zwei neue Gruppen" rows="4"></textarea></label>
       <label class="field"><span>Wählen Sie drei Testbilder: Was war die richtige Klasse, was sagte das Modell voraus? Was fällt Ihnen auf? Auch richtige Vorhersagen zählen.</span><textarea data-journal="examples" maxlength="20000" placeholder="Was gelingt oder misslingt? Wenn fehlerfrei: Was wurde nicht geprüft?" rows="4"></textarea></label>
-      <label class="field"><span>Wo könnte das Modell helfen? Wann sollten wir seiner Vorhersage nicht vertrauen?</span><textarea data-journal="limits" maxlength="20000" placeholder="Grenzen der Daten, des Versuchs und der Anwendung …" rows="4"></textarea></label>
+      <label class="field"><span>Wo könnte das Modell helfen? Wann sollten wir seiner Vorhersage nicht vertrauen? Welcher Teil hat Ihre zwei Klassen unterscheiden gelernt, und könnten Hintergrund oder Licht mitgeholfen haben?</span><textarea data-journal="limits" maxlength="20000" placeholder="Grenzen der Daten, des Versuchs und der Anwendung. Gelernt hat …; mitgeholfen haben könnte …" rows="4"></textarea></label>
     </div>
   </details>
   <details class="journal-step">

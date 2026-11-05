@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {validatePlan,validateManifest} from "../shared/course-model.js";
 import {readFileSync} from "node:fs";
-import {answerRows,materialForLesson,questionsFromSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet,parseTeacher} from "../admin-worker/src/teacher.mjs";
+import {answerRows,materialForLesson,questionsFromSource,fieldsInSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet,parseTeacher} from "../admin-worker/src/teacher.mjs";
 const fields=[
   "## DL 1 · Was ist KI?","","| Antwortfeld | Musterantwort |","|---|---|",
   "| "+String.fromCharCode(96)+"regeln_oder_daten"+String.fromCharCode(96)+" | Regelbasiert ist nicht dasselbe wie lernend. |",
@@ -27,6 +27,11 @@ const sample='<label class="field answer"><span>Worin unterscheiden sich Regeln 
 const prompts=questionsFromSource(sample);
 assert.match(prompts.regeln_oder_daten,/Worin unterscheiden/);
 assert.match(prompts.dl1_regeln_ampel,/Ampel/);
+const unlabeled=fieldsInSource('<input data-answer="typ_1"><textarea data-journal=\'limits\'></textarea><select data-basis-answer="b_1"></select>');
+assert.deepEqual([...unlabeled].sort(),["b_1","limits","typ_1"],"fields without a label must still be jump targets");
+assert.equal(questionsFromSource('<input data-answer="typ_1">').typ_1,undefined);
+assert.deepEqual([...fieldsInSource('<div hidden aria-hidden="true"><textarea data-answer="typ_1"></textarea></div><input data-answer="ok">')],["ok"],
+  "hidden legacy fields are not jump targets");
 const studentSamples=[
   '<label class="field answer"><span>Warum ist nicht jedes automatische Programm eine KI?</span><textarea data-basis-answer="regeln_oder_daten"></textarea></label>',
   '<label class="field"><span>Was soll Ihr Modell unterscheiden – und für wen ist das nützlich?</span><textarea data-journal="purpose"></textarea></label>',

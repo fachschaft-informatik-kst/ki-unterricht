@@ -19,6 +19,8 @@ Wählen Sie ein Thema und **genau zwei Klassen**. Eigene Vorschläge sind mögli
 
 **Gut zugänglich:** Früchte, Schreibmaterial, Besteck und Gesten. Werkzeuge, Kartendecks und verschiedene Arbeitsplätze brauchen mehr Organisation. Auch gezeichnete Symbole werden fotografiert und folgen demselben Fotoablauf.
 
+**Wie schwer ist die Unterscheidung?** MobileNet liefert schon brauchbare Bildmerkmale. Deutlich verschiedene Klassen erreichen deshalb leicht sehr hohe Trefferquoten, und der A/B-Vergleich zeigt dann vielleicht keinen Unterschied. Das ist ein gültiges Ergebnis. Ähnliche Klassen (zum Beispiel Gabel gegen Löffel) oder ein Stresstest mit P2 an einem anderen Ort oder vor einem anderen Hintergrund (für beide Klassen gleich) machen die Untersuchung aussagekräftiger.
+
 Alle untersuchen **Datenvielfalt**: A lernt mit einem Exemplar pro Klasse, B mit zwei, bei gleicher Bildzahl. Wählen Sie aus den Klassenideen jeweils zwei aus. Acht Fotos je Klasse und Gruppe, fünf Gruppen: 80 Fotos. Bei Gesten brauchen Sie fünf Personen.
 
 ## Projektsteckbrief vor der Sammlung

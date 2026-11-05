@@ -200,7 +200,8 @@
       '<div class="solution-meta"><span>'+(entry.questionSource==="thema"?'Thema / Teilaufgabe':entry.questionSource==="sinngemaess"?'Fragestellung (sinngemäss)':'Originalfrage / Auftrag')+'</span><code>'+escape(entry.field)+'</code></div>'+
       '<h3 class="solution-question">'+escape(entry.question)+'</h3>'+
       '<p class="question-source"><a href="'+escape(entry.courseLink)+
-      '" target="_blank" rel="noopener noreferrer">Zugehörige Aufgabe auf der Kursseite öffnen</a></p>'+
+      '" target="_blank" rel="noopener noreferrer">'+(entry.courseLink.includes("#feld-")?
+        'Zugehörige Aufgabe auf der Kursseite öffnen':'Doppellektion auf der Kursseite öffnen')+'</a></p>'+
       '<div class="sample-answer"><span class="answer-label">Mögliche Musterantwort</span>'+
       markdown.render(entry.answer)+'</div></article>').join("");
     return header+'<section class="resource">'+

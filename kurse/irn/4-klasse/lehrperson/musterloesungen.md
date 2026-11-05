@@ -104,6 +104,10 @@ Mit einer Zwischenschicht sind auch nichtlinear trennbare Muster möglich. Beim 
 
 Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte Schicht **16 Neuronen** und der Ausgang **10 Werte** für 0 bis 9. Der höchste Wert bestimmt die Vorhersage, garantiert aber keine Korrektheit. Eine echte Verwechslung muss anhand des gezeigten Bilds erläutert werden.
 
+### Brücke zum Bildprojekt
+
+«Im Bildprojekt arbeitet ein Netz wie hier, aber mit 1280 statt 2 Eingaben. Die Zahlen berechnet MobileNet, ein fertiges Netz, das sich nicht verändert. Nur das kleine Netz dahinter lernt unsere zwei Klassen: vorhersagen, Fehler bewerten, Gewichte anpassen.» Entscheidend ist die Trennung zwischen **fest** (MobileNet) und **lernend** (kleines Netz).
+
 ## 5–8 · Tandemprojekt: beispielhafte Musterlösung
 
 ### Datenaufteilung selbstständig erarbeiten (Doppellektion 5)
@@ -142,6 +146,13 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 - **B:** je vier Fotos aus T1 und T2 je Klasse.
 - Beide verwenden **dieselbe Gesamtzahl Trainingsbilder**, Architektur, Trainingsdauer, Startwert und V1-Bilder.
 
+**Wer weiss was?** (Box in Kapitel 4)
+
+- **MobileNet** kennt Formen, Texturen und Muster aus über einer Million fremder Fotos, lernt im Projekt nichts und kennt unsere zwei Klassen nicht. Sein Ausgang mit 1000 Klassennamen wird nicht benutzt.
+- **Das kleine Netz** lernt, welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören. Es weiss nicht, was ein «Apfel» ist; Hintergrund und Licht zählen als Merkmale mit.
+
+**Häufige Fehlvorstellungen:** «MobileNet kennt Apfel und Birne schon.» Nein, es liefert nur Merkmale. «Das kleine Netz erkennt den Apfel.» Es ordnet Zahlenmuster zu, notfalls anhand von Hintergrund oder Licht. Darum zählen nur neue Exemplare als Beleg.
+
 ### Reflexion 3 – A/B-Vergleich und Auswahl
 
 **Fiktives Zahlenbeispiel:** A erkennt **12/16 = 75 %** von V1 richtig; B erkennt **14/16 = 87,5 %**. Unterschied **12,5 Prozentpunkte**.
@@ -157,6 +168,8 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 **Fiktives Zahlenbeispiel:** 26 von 32 korrekt = **81,25 %**. Drei konkrete Vorhersagen müssen wirklich beobachtet und erklärt werden; **keine Fehler erfinden**, wenn alle richtig sind.
 
 «Unser Modell wurde nur an wenigen neuen Fruchtexemplaren geprüft. Es ist nicht belegt, dass es bei allen Sorten, Lichtsituationen oder Kameras zuverlässig ist.»
+
+**Ergänzte Frage in Reflexion 4:** «Welcher Teil hat unsere zwei Klassen unterscheiden gelernt?» Erwartung: das kleine Netz auf den festen MobileNet-Merkmalen, nicht MobileNet selbst. Gute Antworten nennen mögliche Abkürzungen: «Hintergrund oder Licht könnten mitgeholfen haben; ein Stresstest mit P2 an einem anderen Ort oder weitere neue Exemplare würden das prüfen.»
 
 ### Reflexion 5 – Fazit, Zusammenarbeit, nächster Versuch
 
