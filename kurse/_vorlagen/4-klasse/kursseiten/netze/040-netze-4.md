@@ -7,6 +7,11 @@
     <!-- MD:START -->
 **Sicherung (einzeln):** Erklären Sie die Ausgaben der beiden Zwischenneuronen OR und NAND und des Ausgangsneurons AND für die Eingabe `(1,1)`. Prüfen Sie Ihre Rechnung an der Netzgrafik. Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.
 <!-- MD:END -->
+    <div class="callout" id="netze-bruecke">
+      <!-- MD:START -->
+**Ausblick auf das Bildprojekt:** Dort arbeitet ein Netz wie dieses, aber mit 1280 statt 2 Eingaben. Die Zahlen liefert MobileNet, ein fertiges Netz, das unverändert bleibt. Nur das kleine Netz dahinter lernt Ihre zwei Klassen, nach denselben Schritten wie hier: vorhersagen, Fehler bewerten, Gewichte anpassen. [Wer weiss was? →](#projekt-wer-weiss-was)
+<!-- MD:END -->
+    </div>
     <div class="callout" id="projekt-bereit-check" data-p1-diagnostic>
       <!-- MD:START -->
 ### Unbenoteter Lernstandscheck vor DL 5 (2 Minuten)

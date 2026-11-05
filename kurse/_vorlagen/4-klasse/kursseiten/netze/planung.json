@@ -14,7 +14,7 @@
       "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
       "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
       "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung.",
-      "zeit": "Drei klar getrennte DL4-Lernangebote: (1) eigenständiges XOR-Notebook nach der Theorie zu einem einzelnen Neuron; (2) Einführung der Zwischenschicht und Pflichtnotebook «Neuronale Netze» mit Netzwerk- und Lernversuchen; (3) separates freiwilliges Ziffern-Notebook als Transfer. Die 90 Minuten konzentrieren sich auf XOR und Netzwerkverständnis. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient ein zweiminütiger unbenoteter Lernstandscheck; offene Punkte vor SOL-Beginn anhand des Lernlabors klären.",
+      "zeit": "Pflichtkern: XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Pflichtnotebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo; selbst durchführen und das separate Ziffern-Notebook sind freiwillig. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient ein zweiminütiger unbenoteter Lernstandscheck; offene Punkte vor SOL-Beginn anhand des Lernlabors klären.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -25,7 +25,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Eine neue Ja/Nein-Regel: Das Signal soll angehen, wenn genau eine der beiden Tasten aktiv ist. Notieren Sie zu 00, 01, 10 und 11 die Zielwerte (XOR). Vermuten Sie, ob das bisherige Neuron die Regel lernen kann."
+              "text": "Eine neue Ja/Nein-Regel: Das Signal soll angehen, wenn genau eine der beiden Tasten aktiv ist. Notieren Sie zu 00, 01, 10 und 11 die Zielwerte (XOR). Vermuten Sie, ob das bisherige Neuron die Regel lernen kann. Öffnen Sie zudem das Notebook «Neuronale Netze», damit Python im Hintergrund startet."
             },
             {
               "art": "Ergebnis",
@@ -37,13 +37,13 @@
         {
           "phase": "Vorwissen aktivieren",
           "titel": "Einzelnes Neuron in Erinnerung rufen",
-          "minutes": 5,
+          "minutes": 3,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Tandem",
-              "min": 5,
-              "text": "Rechnen Sie eine AND-Zeile mit Gewichten 1/1 und Bias −1.5 vor. Erklären Sie, warum die Gewichte und der Bias für alle Eingabefälle gleich bleiben müssen."
+              "wer": "Klasse",
+              "min": 3,
+              "text": "Die Lehrperson ruft eine AND-Zeile mit Gewichten 1/1 und Bias −1.5 auf, die Klasse rechnet mit. Erklären Sie, warum die Gewichte und der Bias für alle Eingabefälle gleich bleiben müssen."
             },
             {
               "art": "Ergebnis",
@@ -55,13 +55,25 @@
         {
           "phase": "Informieren",
           "titel": "XOR-Grenze und Zwischenschicht",
-          "minutes": 15,
+          "minutes": 22,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Erklärt die XOR-Zielwerte, die vier widersprüchlichen Bedingungen und den fehlenden linearen Trenner. Nach der Theorie öffnen die Lernenden das eigenständige Notebook «XOR: Ein Neuron» und prüfen alle vier Fälle. Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang (AND) ein."
+              "min": 10,
+              "text": "Erklärt die XOR-Zielwerte, die vier widersprüchlichen Bedingungen und den fehlenden linearen Trenner. Zeichnet die vier XOR-Punkte an die Tafel und markiert mit der Klasse, warum keine einzelne Gerade die beiden Zielklassen trennt."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 5,
+              "text": "XOR-Rätsel am Beamer im Notebook «XOR: Ein Neuron»: Die Klasse schlägt Gewichte und Bias vor, die Lehrperson prüft alle vier Fälle. Gemeinsam feststellen: Ein Neuron schafft höchstens 3 von 4."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 7,
+              "text": "Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang (AND) ein."
             },
             {
               "art": "Ergebnis",
@@ -72,20 +84,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "XOR und Netz-Lernversuche bearbeiten",
-          "minutes": 55,
+          "titel": "Netzlösung nachvollziehen und erklären",
+          "minutes": 50,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 35,
-              "text": "Arbeiten Sie in der Reihenfolge der Kurskapitel: Im eigenständigen XOR-Notebook die vier Eingaben mit denselben Gewichten und demselben Bias prüfen (ein Neuron höchstens 3/4). Danach im Notebook «Neuronale Netze» den vollständigen Signalweg über OR, NAND und AND verfolgen und ein Netzwerk mit 1, 2 und 4 versteckten Neuronen lernen lassen. Die Ziffernerkennung ist ein freiwilliges, eigenständiges drittes Notebook und kein Teil des Pflichtdurchlaufs."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 5,
-              "text": "Skizzieren Sie allein die vier XOR-Punkte und markieren Sie, warum eine einzige Gerade die beiden Zielklassen nicht trennt."
+              "min": 30,
+              "text": "Arbeiten Sie im Notebook «Neuronale Netze»: Verfolgen Sie den vollständigen Signalweg über OR, NAND und AND und lösen Sie die vier XOR-Fälle mit dem Netz. Der Abschnitt «Selbstcheck · Ein anderer Fall» entfällt, dafür folgt die Papieraufgabe. Die Ziffernerkennung ist ein freiwilliges, eigenständiges drittes Notebook und kein Teil des Pflichtdurchlaufs."
             },
             {
               "art": "Auftrag",
@@ -94,9 +100,15 @@
               "text": "Wählen Sie einen zusätzlichen XOR-Eingabefall und zeichnen Sie die Ausgaben der beiden Zwischenneuronen und des Ausgangsneurons Schritt für Schritt nach. Vergleichen Sie mit der Vorhersage des einzelnen Neurons."
             },
             {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 5,
+              "text": "Demo am Beamer: Die Lehrperson lässt das Netz mit 1, 2 und 4 versteckten Neuronen lernen, die Klasse vergleicht die Ergebnisse. Für schnelle Tandems ist das selbstständige Durchführen im Notebook freiwillig."
+            },
+            {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "XOR-Grenze begründet, Netzlösung anhand eines vollständigen Signalwegs erklärt und Gewichtslernen beobachtet."
+              "text": "XOR-Grenze begründet, Netzlösung anhand eines vollständigen Signalwegs erklärt und Gewichtslernen in der Demo beobachtet."
             }
           ]
         },
@@ -121,7 +133,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Gibt nur den Ausblick: In Doppellektion 5 beginnt die selbstständige Projektarbeit mit dem Lernpfad «Daten fair aufteilen». Kein fachlicher Input zur Datenaufteilung in Doppellektion 4."
+              "text": "Gibt nur den Ausblick: In Doppellektion 5 beginnt die selbstständige Projektarbeit mit dem Lernpfad «Daten fair aufteilen». Ein Satz zur Brücke: Im Projekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt (Hinweis «Ausblick auf das Bildprojekt» am Ende der Kursseite). Kein fachlicher Input zur Datenaufteilung in Doppellektion 4."
             },
             {
               "art": "Auftrag",

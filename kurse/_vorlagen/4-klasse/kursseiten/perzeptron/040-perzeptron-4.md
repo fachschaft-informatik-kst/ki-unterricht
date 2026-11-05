@@ -33,7 +33,7 @@
         </tbody>
       </table>
     </div>
-    <p>Das Neuron lernt also <strong>keine Wenn-dann-Regeln</strong> und weiss nicht, was UND oder «Spam» bedeutet. Es findet Zahlen, mit denen die Beispiele stimmen.</p>
+    <p>Das Neuron lernt also <strong>keine Wenn-dann-Regeln</strong> und weiss nicht, was <strong>AND</strong> oder <strong>«Spam»</strong> bedeutet. Es findet Zahlen, mit denen die Beispiele stimmen.</p>
     <!-- MD:START -->
 ### So lernt es: die Lernregel
 <!-- MD:END -->

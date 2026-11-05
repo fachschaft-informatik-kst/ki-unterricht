@@ -15,7 +15,7 @@ Ein logisches Gatter erhält **zwei Eingaben**: `x₁` und `x₂`. **0** bedeute
 | 1 | 0 | 0 | 1 | 1 |
 | 1 | 1 | **1** | 1 | **0** |
 
-**AND:** beide aktiv · **OR:** mindestens eine aktiv · **NAND:** Gegenteil von AND.
+**AND:** beide aktiv · **OR:** mindestens eine aktiv · **NAND:** Gegenteil von **AND**.
 
 Für den ersten Versuch verwenden wir **AND** als Ziel: Ein Warnsignal soll **nur dann** leuchten, wenn beide Sensoren aktiv sind. Das Perzeptron soll diese vier Ausgaben durch eine Rechnung erzeugen.
 

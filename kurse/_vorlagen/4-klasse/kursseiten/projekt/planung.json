@@ -38,12 +38,12 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Wiederholen Sie allein den Unterschied zwischen einem Trainingsbeispiel und einer neuen Eingabe. Vergleichen Sie danach Ihre Antwort zu zweit; eine Musterantwort steht im Lernpfad."
+              "text": "Wiederholen Sie allein den Unterschied zwischen einem Trainingsbeispiel und einer neuen Eingabe. Lesen Sie dann «Wer weiss was?» (Kapitel 4, Hintergrund) und klären Sie zu zweit: Welches Netz lernt im Projekt, welches bleibt unverändert? Eine Musterantwort steht im Lernpfad und in der Box."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein erster Vergleich zwischen bekannten und neuen Daten."
+              "text": "Ein erster Vergleich zwischen bekannten und neuen Daten und die Zuordnung: MobileNet bleibt unverändert, das kleine Netz lernt."
             }
           ]
         },
@@ -74,7 +74,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 40,
-              "text": "Bearbeiten Sie in Ihrem eigenen Tempo den SOL-Lernpfad in Kapitel «Datenplan»: Lesen Sie die drei Datenrollen, ordnen Sie Beispiele zu, untersuchen Sie im Notebook «Datenaufteilung» ein Datenleck, kontrollieren Sie sich mit den eingeblendeten Lösungen und übertragen Sie die Regeln auf T1/T2/V1/P1/P2 mit zwei Klassen und acht Fotos je Gruppe. Halten Sie eine Begründung im bestehenden Journal fest. Danach wählen Sie Thema, Tagesziel und Rollen und ergänzen Reflexion 1–2. Wer weiter ist, beginnt das Sammeln oder Importieren; niemand muss heute bereits ein Modell trainieren."
+              "text": "Bearbeiten Sie in Ihrem eigenen Tempo den SOL-Lernpfad in Kapitel «Datenplan»: Lesen Sie die drei Datenrollen, ordnen Sie Beispiele zu, untersuchen Sie im Notebook «Datenaufteilung» ein Datenleck, kontrollieren Sie sich mit den eingeblendeten Lösungen und übertragen Sie die Regeln auf T1/T2/V1/P1/P2 mit zwei Klassen und acht Fotos je Gruppe (freiwilliger Stresstest: P2 für beide Klassen an einem anderen Ort oder vor einem anderen Hintergrund). Halten Sie eine Begründung im bestehenden Journal fest. Danach wählen Sie Thema, Tagesziel und Rollen und ergänzen Reflexion 1–2. Wer weiter ist, beginnt das Sammeln oder Importieren; niemand muss heute bereits ein Modell trainieren."
             },
             {
               "art": "Auftrag",
@@ -306,7 +306,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 45,
-              "text": "Schliessen Sie die noch offenen Etappen ab. Testen Sie die begründet ausgewählte Variante einmal auf P1/P2; untersuchen Sie drei konkrete Beispiele, ohne Fehler zu erfinden. Schreiben Sie Reflexion 4–5 mit Grenzen, Fazit, nächstem Versuch, Arbeitsteilung, Hilfen und einer kurzen Rückschau auf Ihren Etappenplan. Prüfen Sie Journal und Ausgaben mit dem Raster. Erklären Sie sich gegenseitig das ganze Projekt; keine Folien nötig. Bereiten Sie die erlaubten Austauschdateien vor."
+              "text": "Schliessen Sie die noch offenen Etappen ab. Testen Sie die begründet ausgewählte Variante einmal auf P1/P2; untersuchen Sie drei konkrete Beispiele, ohne Fehler zu erfinden, und achten Sie darauf, ob Fehler vor allem Bilder mit anderem Hintergrund oder Ort betreffen. Schreiben Sie Reflexion 4–5 mit Grenzen (auch: Welcher Teil hat Ihre Klassen unterscheiden gelernt, und könnten Hintergrund oder Licht mitgeholfen haben?), Fazit, nächstem Versuch, Arbeitsteilung, Hilfen und einer kurzen Rückschau auf Ihren Etappenplan. Prüfen Sie Journal und Ausgaben mit dem Raster. Erklären Sie sich gegenseitig das ganze Projekt; keine Folien nötig. Bereiten Sie die erlaubten Austauschdateien vor."
             },
             {
               "art": "Auftrag",
