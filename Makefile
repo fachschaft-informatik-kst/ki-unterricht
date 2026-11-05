@@ -24,7 +24,7 @@ help:
 		'make serve         Bereits gebaute App aus dist/ anzeigen' \
 		'make test          Build und lokale Struktur-/Funktionstests (Browser-CI separat)' \
 		'make test-browser  Build und alle Browserpruefungen inklusive Python, Training und ZIP' \
-		'make test-all      Technische Tests und alle Browserpruefungen nacheinander' \
+		'make test-all      Alle Pruefungen nacheinander (entspricht dem Nachtlauf der CI)' \
 		'make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." AFTER=030' \
 		'make install       Alle lokalen Python- und npm-Abhaengigkeiten installieren' \
 		'make clean         Lokale Build-Dateien und Umgebungen loeschen' \
@@ -126,7 +126,14 @@ test-browser: build $(BROWSER_STAMP)
 	PATH="$(abspath $(VENV))/bin:$$PATH" npm run test:browser
 
 test-all: test $(BROWSER_STAMP)
+	$(VENV_PY) tests/check_portal_content.py
+	$(VENV_PY) tests/check_content_mvc.py
+	$(VENV_PY) tests/check_ki_projekt.py
+	$(VENV_PY) tests/check_ki_fotos.py
+	$(VENV_PY) tests/check_ki_basis.py
 	$(VENV_PY) tests/execute_all_notebooks.py
+	npm install --no-save pyodide@0.27.0
+	node tests/check_pyodide.cjs
 	PATH="$(abspath $(VENV))/bin:$$PATH" npm run test:browser
 
 clean:
