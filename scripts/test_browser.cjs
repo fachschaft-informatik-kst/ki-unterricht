@@ -7,6 +7,7 @@ const tests=[
   "check_editor_course_matrix",
   "check_basis_browser",
   "check_course_theme",
+  "check_project_pages",
   "check_notebook_startup_browser",
   "check_course_runtime_browser",
   "check_fotostudio_storage",

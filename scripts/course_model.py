@@ -71,6 +71,13 @@ def load_course(root: Path = ROOT / "kurse/bok/4-klasse", manifest_path: str = "
                 or any(not isinstance(nav.get(k), str) for k in ("title", "label"))
                 or type(nav.get("order")) is not int):
             raise ValueError(f"Navigation ungültig: {view}")
+        pages = section.get("pages")
+        if pages is not None and (not isinstance(pages, str) or not pages.strip()):
+            raise ValueError(f"Seitenmodus ungültig (Name der Startseite fehlt): {view}")
+        child = section.get("navChild")
+        if child is not None and (not section.get("navParent") or not isinstance(child, dict)
+                or any(not isinstance(child.get(k), str) or not child[k].strip() for k in ("label", "title"))):
+            raise ValueError(f"Unterpunkt der Navigation ungültig: {view}")
         path = (root / manifest_path).parent / view / "planung.json"
         if section.get("teaching"):
             block = read_json(path)["lessons"]

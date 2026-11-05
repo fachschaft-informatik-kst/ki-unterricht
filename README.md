@@ -58,7 +58,7 @@ Das Makefile richtet `.venv/` und die benötigten Pakete bei Bedarf selbst ein. 
 | `make serve` | Vorhandenen Build in `dist/` anzeigen |
 | `make test` | Vollständigen Build und lokale technische Tests ausführen |
 | `make test-browser` | Build und sämtliche Browserprüfungen inklusive Python, Training und ZIP |
-| `make test-all` | Technische Tests, alle Notebookausführungen und sämtliche Browserprüfungen |
+| `make test-all` | Alle Prüfungen wie im nächtlichen CI-Lauf: technische Tests, Inhaltsprüfungen, alle Notebookausführungen (auch im echten Pyodide) und sämtliche Browserprüfungen |
 | `make help` | Alle Makefile-Befehle anzeigen |
 | `make clean` | Lokale Builddateien und Umgebung entfernen |
 
@@ -161,10 +161,10 @@ Der neue Kurs wird im Register `shared/course-sites.json` mit dem Status `planne
 
 - Bei reinen Text-, Planungs- und Glossaränderungen prüft CI insbesondere Kursstruktur, erzeugte Seiten und interne Links; Formulierungen werden nicht mit starren Snapshots verglichen.
 - Bei Änderungen am JavaScript, Editor oder der Notebooklaufzeit kommen technische und browserbasierte Prüfungen hinzu.
-- Der umfassende JupyterLite-Browsertest mit Training und ZIP-Wiederherstellung läuft bei entsprechenden Runtime-Änderungen nach dem Merge auf `main` oder manuell über **GitHub Actions → Build and Deploy → Run workflow**.
+- Die langsamen Notebook-Browsertests (echter Start in jedem Kurs, Training und ZIP-Wiederherstellung), die Ausführung aller Notebooks aller Kurse im echten Pyodide und einige selten gebrauchte Inhaltsprüfungen laufen nicht bei jedem Push oder PR, sondern täglich nachts auf `main` (01:15 UTC, in der Schweiz 02:15 bzw. 03:15) oder manuell über **GitHub Actions → Build and Deploy → Run workflow**. Ein roter Nachtlauf löst eine E-Mail aus; GitHub Pages wird weiterhin bei jedem Push auf `main` aktualisiert.
 - Der Cloudflare Worker wird separat aktualisiert, wenn seine relevanten Dateien geändert wurden.
 
-Lokal: `make test` für die technischen Prüfungen, `make test-all` für die vollständige Prüfung inklusive aller Notebookausführungen und Browserabläufe. Playwright und Chromium werden beim ersten Browserlauf installiert. Unter Linux können zusätzliche Chromium-Systembibliotheken nötig sein (`npx playwright install-deps chromium`). Die Browserprüfungen laufen bewusst nacheinander, damit sich Python-Kernel und lokale Testserver nicht gegenseitig belasten. Netzwerkzugriff für die Python-Pakete ist erforderlich; ein fehlgeschlagener Test bricht den Lauf mit Fehlerstatus ab.
+Lokal: `make test` für die technischen Prüfungen, `make test-all` für die vollständige Prüfung inklusive aller Notebookausführungen und Browserabläufe. Playwright und Chromium werden beim ersten Browserlauf installiert. Unter Linux können zusätzliche Chromium-Systembibliotheken nötig sein (`npx playwright install-deps chromium`). Die Browserprüfungen laufen bewusst nacheinander, damit sich Python-Kernel und lokale Testserver nicht gegenseitig belasten. Die Notebooks aller Kurse und Kursvorlagen lassen sich auch einzeln im echten Pyodide prüfen (nach einem Build, ca. 3 Minuten, ein einzelner Kurs ca. 45 Sekunden): `npm install --no-save pyodide@0.27.0 && node tests/check_pyodide.cjs [irn/1-klasse]`. Netzwerkzugriff für die Python-Pakete ist erforderlich; ein fehlgeschlagener Test bricht den Lauf mit Fehlerstatus ab.
 
 Die Pipeline liegt in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml); Details zur Architektur stehen in [Mehrkurs-Architektur und Deployment](docs/MULTIKURS-DEPLOYMENT.md).
 

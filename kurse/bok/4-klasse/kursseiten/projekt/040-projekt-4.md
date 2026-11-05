@@ -1,8 +1,9 @@
 <details class="kapitel" id="projekt-4" data-kurz="A gegen B: Helfen vielfältigere Bilder? Ein fairer Vergleich.">
-  <summary><span class="kapitel-nr">4</span>
-    <h2 class="kapitel-titel">Unser A/B-Vergleich</h2>
+  <summary><span class="kapitel-nr">3–4</span>
+    <h2 class="kapitel-titel">A/B-Versuch</h2>
   </summary>
   <div class="kapitel-body detail-body" id="versuch">
+    <p class="page-crumb"><a href="#projekt">‹ Fahrplan</a><span>Etappen 3–4 · Richtwert DL 6</span></p>
     <!-- MD:START -->
 ## Helfen vielfältigere Bilder?
 <!-- MD:END -->
@@ -26,6 +27,7 @@
 Beide: 16 Neuronen, 60 Epochen, Startwert 11 und dieselben Validierungsbilder.
 <!-- MD:END -->
     </article>
+    <p class="project-workplace"><strong>Durchgeführt wird der Versuch im Journal:</strong> <a href="#projekt-werkbank">Notebook «Unser Versuch» öffnen</a> · <a href="#projekt-reflexionen">Reflexion 3 festhalten</a></p>
     <details class="project-background">
       <summary>Hintergrund: Was wird trainiert – und wer weiss was?</summary>
       <div class="detail-body">
@@ -90,5 +92,9 @@ Die Bilder von A und B unterscheiden sich. Ähnliche Aufnahmebedingungen verwend
         <p>Nach Absprache und vor Testeinsicht: drei vorab festgelegte Startwerte 11, 22 und 33. Alle Ergebnisse berichten. Keine Voraussetzung für eine gute Note.</p>
       </div>
     </details>
+    <nav class="page-next" aria-label="Weiter im Projekt">
+      <a class="btn" href="#projekt-3">‹ Daten &amp; Fotos</a>
+      <a class="btn primary" href="#projekt-abschluss">Weiter: Abschluss &amp; Abgabe →</a>
+    </nav>
   </div>
 </details>

@@ -146,7 +146,7 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 - **B:** je vier Fotos aus T1 und T2 je Klasse.
 - Beide verwenden **dieselbe Gesamtzahl Trainingsbilder**, Architektur, Trainingsdauer, Startwert und V1-Bilder.
 
-**Wer weiss was?** (Box in Kapitel 4)
+**Wer weiss was?** (Box auf der Seite «A/B-Versuch», unter «Hintergrund»)
 
 - **MobileNet** kennt Formen, Texturen und Muster aus über einer Million fremder Fotos, lernt im Projekt nichts und kennt unsere zwei Klassen nicht. Sein Ausgang mit 1000 Klassennamen wird nicht benutzt.
 - **Das kleine Netz** lernt, welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören. Es weiss nicht, was ein «Apfel» ist; Hintergrund und Licht zählen als Merkmale mit.

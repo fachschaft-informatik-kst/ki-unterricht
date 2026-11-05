@@ -1,8 +1,9 @@
 <details class="kapitel" id="projekt-2" data-kurz="Zwölf Ideen für Ihr Thema und genau zwei Klassen.">
-  <summary><span class="kapitel-nr">2</span>
-    <h2 class="kapitel-titel">Thema wählen · 12 Ideen</h2>
+  <summary><span class="kapitel-nr">1</span>
+    <h2 class="kapitel-titel">Thema wählen</h2>
   </summary>
   <div class="kapitel-body detail-body" id="ideen">
+    <p class="page-crumb"><a href="#projekt">‹ Fahrplan</a><span>Etappe 1 · Richtwert DL 5</span></p>
     <!-- MD:START -->
 ## Zwölf Ideen. Platz für Ihre eigene.
 <!-- MD:END -->
@@ -158,7 +159,7 @@ Helfen vielfältigere Trainingsbilder? Zwei Klassen, gleich viele Bilder, dassel
     <div class="callout" id="projekt-thema-anspruch">
       <strong>Wie schwer ist Ihr Thema für das Netz?</strong>
       <!-- MD:START -->
-MobileNet liefert schon brauchbare Bildmerkmale. Klassen, die sich deutlich in Form oder Farbe unterscheiden, erreichen deshalb leicht sehr hohe Trefferquoten. Dann zeigt der A/B-Vergleich vielleicht keinen Unterschied; auch das ist ein gültiges Ergebnis. Spannender wird es bei ähnlichen Klassen (zum Beispiel Gabel gegen Löffel) oder wenn Sie P2 als Stresstest an einem anderen Ort aufnehmen (siehe [Datenplan](#projekt-3)).
+MobileNet liefert schon brauchbare Bildmerkmale. Klassen, die sich deutlich in Form oder Farbe unterscheiden, erreichen deshalb leicht sehr hohe Trefferquoten. Dann zeigt der A/B-Vergleich vielleicht keinen Unterschied; auch das ist ein gültiges Ergebnis. Spannender wird es bei ähnlichen Klassen (zum Beispiel Gabel gegen Löffel) oder wenn Sie P2 als Stresstest an einem anderen Ort aufnehmen (siehe [Daten &amp; Fotos](#projekt-3)).
 <!-- MD:END -->
     </div>
     <details class="plan">
@@ -170,5 +171,9 @@ Alle Antworten schreiben Sie direkt ins gemeinsame Journal.
         <a class="btn" href="#projekt-reflexionen">Steckbrief im Journal ausfüllen →</a>
       </div>
     </details>
+    <nav class="page-next" aria-label="Weiter im Projekt">
+      <a class="btn" href="#projekt-regeln">‹ Datenregeln</a>
+      <a class="btn primary" href="#projekt-3">Weiter: Daten &amp; Fotos →</a>
+    </nav>
   </div>
 </details>

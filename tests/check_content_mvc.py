@@ -15,7 +15,7 @@ for forbidden in ("createElement('figure')", "createElement('article')",
     assert forbidden not in js, f"Authored content leaked into controller: {forbidden}"
 for selector in ("#lernarten-wissen article.card", "#lernarten-lernend article.card",
                  "#lernarten-intro figure", "#sprache-2 iframe",
-                 "#sprache-4 aside.turing-activity", "#sicherung .project-transfer-actions",
+                 "#sprache-4 aside.turing-activity", "#sicherung .transfer-flow",
                  "#lernarten-5 .learning-example-links",
                  "#lernarten-6 .learning-example-links",
                  "#lernarten-7 .learning-example-links"):

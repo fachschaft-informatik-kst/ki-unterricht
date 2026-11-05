@@ -66,6 +66,24 @@ für neue Kurse, einschliesslich Notebooks und aller fachlichen Ressourcen.
 Nach dem Kopieren sind die Kurse unabhängig; spätere Änderungen werden nicht
 zwischen Vorlagen und Kursen übertragen.
 
+### Seitenmodus und Unternavigation (4. Klasse)
+
+Ein Bereich im `manifest.json` kann `"pages": "<Name der Startseite>"` setzen
+(Bildprojekt: `"Fahrplan"`). Dann zeigt der Router jedes Kapitel des Bereichs
+als eigene Seite; alles ausserhalb der Kapitel bildet die Startseite. Die
+Navigationsleiste listet Startseite und Kapitel in Arbeitsreihenfolge, die Zahl
+vor einem Kapitel (`kapitel-nr`) ist die Nummer der Etappe. Ohne Skript bleiben
+alle Kapitel wie sonst aufklappbar. Jeder Anker (`#daten`, `#projekt-fotostudio`,
+`#feld-…`) öffnet die Seite, die ihn enthält.
+
+Bereiche mit `"navParent": "<Bereich>"` behalten die Unternavigation ihres
+Elternbereichs; mit `"navChild": {"label": "✎", "title": "…"}` erscheinen sie
+zusätzlich als Eintrag darin (Journal). Das Bildprojekt gliedert sich in den
+Fahrplan (`000-einstieg.md`) und die Seiten `010`–`050`; Kapitel-IDs
+(`projekt-regeln`, `projekt-2`, `projekt-3`, `projekt-4`, `projekt-abschluss`)
+und Antwortschlüssel bleiben stabil. `tests/check_project_pages.cjs` prüft das
+Verhalten im Browser (`make test-browser` und der nächtliche CI-Lauf).
+
 ## Build und Veröffentlichung
 
 `shared/course-sites.json` bestimmt Quellwurzel, Manifest, Klasse, Namen,

@@ -153,3 +153,45 @@ kurslokalen Notebooks/Assets. Auf Cache-Miss wird die Notebook-Erweiterung
 aus den npm-Quellen gebaut, selbst wenn nur redaktionelle Texte geändert
 wurden. Der Lauf kann jederzeit über workflow_dispatch vollständig
 geprüft werden.
+
+## Nachtrag 05.11.2026: täglicher Nachtlauf mit allen Prüfungen
+
+`.github/workflows/deploy.yml` startet zusätzlich täglich um 01:15 UTC
+(02:15 Schweizer Winterzeit, 03:15 im Sommer) auf `main` und führt **alle**
+Prüfungen aus (`schedule`). Denselben Lauf startet der Knopf *Run workflow*
+(`workflow_dispatch`). Der Schritt «Detect affected deployment targets»
+setzt dafür die Ausgabe `full`; Pushes und PRs setzen sie nicht.
+
+| Prüfung | Push / PR | Nachtlauf / manuell |
+| --- | --- | --- |
+| Build, Schemata, Editor- und Seiten-Browsertests, Notebook-Ausführung, Kernel-/Lock-Prüfungen, Kaltstart des Widgets | ja | ja |
+| Echter Notebookstart in jedem Kurs (ca. 90 s) | nein (früher bei Runtime-Änderungen) | ja |
+| Vollständiger Release-Test mit Training, ZIP und Persistenz (ca. 3,5 Min.) | nein (früher bei Push auf `main`) | ja |
+| `check_portal_content.py`, `check_content_mvc.py`, `check_ki_projekt.py`, `check_ki_fotos.py`, `check_ki_basis.py` (vorher nirgends ausgeführt) | nein | ja |
+| Alle Notebooks aller Kurse und Kursvorlagen im echten Pyodide 0.27.0 (Node, ca. 3 Min.): `check_pyodide.cjs` | nein | ja |
+| `check_project_pages.cjs` (Seiten des Bildprojekts im Browser) | nein | ja |
+
+GitHub Pages und der Worker werden weiterhin bei jedem Push auf `main`
+aktualisiert; der Nachtlauf deployt nichts. Ein kaputter Notebookstart kann
+deshalb bis zum nächsten Nachtlauf online sein. Die schnellen Notebook-Prüfungen
+(Erweiterung, Ausführung aller Notebooks, Kernel, Kaltstart) bleiben in jedem
+Push. Der Nachtlauf hat eine eigene Concurrency-Gruppe, damit ein Push in
+der Nacht ihn nicht abbricht. Bei einem roten Nachtlauf sendet GitHub eine
+E-Mail an die Person, die den Cron-Eintrag zuletzt geändert hat. Geplante
+Läufe verwenden immer den Stand von `main`.
+
+Bewusst nicht verdrahtet bleibt `execute_notebooks.py` (durch
+`execute_all_notebooks.py` ersetzt). `check_pyodide.cjs` läuft im Nachtlauf
+mit `npm install --no-save pyodide@0.27.0`; die Version muss zu
+`jupyterlite-pyodide-kernel` in `requirements.txt` passen (0.5.0 bündelt
+Pyodide 0.27.0). Der Test führt für jeden veröffentlichten Kurs (Register
+`shared/course-sites.json`) und jede Kursvorlage unter `kurse/_vorlagen/`
+alle Notebooks der Experimentregistrierung aus, bei Kursen als Quelle und als
+paketierte Kopie unter `_build/content`, jeweils mit frischem Modulzustand,
+dazu das Projekt-Gate `check_ki_basis.py` (Kurswahl über
+`KI_COURSE_CONTENT`). Fehler werden gesammelt und am Ende aufgelistet. Er
+lädt die Pyodide-Pakete von jsDelivr und `ipywidgets` von PyPI; bei einem
+roten Lauf ohne Codeänderung zuerst Netzwerkfehler ausschliessen und den Lauf
+wiederholen. Die nativen Tests `execute_all_notebooks.py`,
+`check_ki_projekt.py` und `check_ki_fotos.py` sind weiterhin auf BOK 4
+festgelegt.

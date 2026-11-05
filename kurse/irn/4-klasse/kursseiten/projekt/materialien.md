@@ -1,7 +1,7 @@
 <!-- lesson:05 -->
 ## Doppellektion 05
 
-**Arbeitsplatz:** [SOL-Lernpfad «Daten fair aufteilen»](index.html#projekt-3) · [Daten-Notebook](materialien/downloads/daten_training.ipynb) · [Journal und Fotostudio](index.html#journal) · [Fotoanleitung](materialien/downloads/ki_fotodaten.md) · [Bewertungsraster](index.html#bewertung).
+**Arbeitsplatz:** [SOL-Lernpfad «Daten fair aufteilen»](index.html#projekt-regeln) · [Daten-Notebook](materialien/downloads/daten_training.ipynb) · [Daten &amp; Fotos](index.html#projekt-3) · [Journal](index.html#journal) · [Fotoanleitung](materialien/downloads/ki_fotodaten.md) · [Bewertungsraster](index.html#bewertung).
 
 ### Ankommen · 5 Min. · Wie prüfen wir neue Bilder?
 

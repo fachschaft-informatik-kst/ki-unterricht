@@ -1,96 +1,16 @@
 <details class="kapitel" id="projekt-3" data-kurz="Fünf Gruppen, 80 Fotos: so planen und sammeln Sie gute Daten.">
-  <summary><span class="kapitel-nr">3</span>
-    <h2 class="kapitel-titel">Datenplan · 80 Fotos</h2>
+  <summary><span class="kapitel-nr">2</span>
+    <h2 class="kapitel-titel">Daten &amp; Fotos</h2>
   </summary>
-  <div class="kapitel-body detail-body" id="daten">
+  <div class="kapitel-body detail-body" id="datenplan">
+    <p class="page-crumb"><a href="#projekt">‹ Fahrplan</a><span>Etappe 2 · Richtwert DL 5–6</span></p>
     <!-- MD:START -->
 ## Gute Daten beginnen mit einem Plan.
 <!-- MD:END -->
     <p class="section-intro">Eigene Fotos · klare Klassen · unabhängige Exemplare.</p>
-    <div class="card">
-      <!-- MD:START -->
-### Selbstlernauftrag · Daten fair aufteilen (ca. 20–30 Minuten)
-
-**Das lernen Sie hier ohne Einführung der Lehrperson:** Sie können die drei Datenrollen unterscheiden, ein Datenleck erkennen und Ihre eigenen Fotos so auf fünf Gruppen verteilen, dass das Ergebnis aussagekräftig bleibt.
-
-**Arbeitsweg:** (1) Erklärungen lesen → (2) Fälle selbst lösen → (3) mit der Lösung vergleichen → (4) Notebook ausprobieren → (5) eigene fünf Gruppen planen. Arbeiten Sie zu zweit, halten Sie die erste Vermutung aber jeweils allein fest. Bei Fehlern: Erklärung nochmals lesen und die Lösung verbessern.
-
-**Die fünf Gruppen:** Ihre Fotos werden in fünf Gruppen sortiert, benannt mit Anfangsbuchstabe und Nummer: **T1 und T2** (T = Training), **V1** (V = Validierung) und **P1 und P2** (P = Prüfung, der Abschlusstest). Jede Gruppe enthält pro Klasse ein anderes Exemplar mit acht Fotos; die Übersicht folgt weiter unten unter «Fünf Gruppen. 80 Fotos.». Welche Aufgabe jede Gruppe hat, zeigen die drei folgenden Karten.
+    <!-- MD:START -->
+Die Regeln für T1, T2, V1, P1 und P2 haben Sie im Lernpfad erarbeitet: [Datenregeln nachlesen](#projekt-regeln).
 <!-- MD:END -->
-      <div class="lesson-steps">
-        <article>
-          <b>1 · Training: Gewichte lernen</b>
-          <!-- MD:START -->
-Mit den **Trainingsbildern** passt unser **kleines Netz** seine Gewichte an; das MobileNet davor bleibt unverändert ([Wer weiss was?](#projekt-wer-weiss-was)). Beispiele aus T1 und T2 dürfen beim Lernen verwendet werden. Dass das Netz diese Bilder erkennt, sagt allein noch nicht, ob es neue Bilder erkennt.
-<!-- MD:END -->
-        </article>
-        <article>
-          <b>2 · Validierung: Variante auswählen</b>
-          <!-- MD:START -->
-**V1** enthält neue Exemplare, deren Bilder nicht im Training waren. Mit diesen Ergebnissen vergleichen Sie Modell A und B und entscheiden **vor** dem Abschlusstest, welche Variante Sie behalten.
-<!-- MD:END -->
-        </article>
-        <article>
-          <b>3 · Test: unabhängig prüfen</b>
-          <!-- MD:START -->
-**P1 und P2** bleiben bis nach der Auswahl unbenutzt. Sie zeigen, wie die **festgelegte** Variante mit bisher unbekannten Exemplaren zurechtkommt. Nach dem Test werden weder die Gewichte noch die Modellwahl nachträglich angepasst.
-<!-- MD:END -->
-        </article>
-      </div>
-      <!-- MD:START -->
-### Fallbeispiel · Zwei Äpfel
-
-Ein Tandem fotografiert einen roten Apfel **achtmal** mit verschiedenen Hintergründen. Vier Fotos legt es nach T1, vier nach P1. Der Test ergibt eine sehr hohe Trefferquote.
-
-**Überlegen Sie ohne Lösung:** Kann das ein überzeugender unabhängiger Test sein? Entscheidend ist nicht nur, ob zwei Bilddateien verschieden sind, sondern **ob derselbe reale Gegenstand** schon beim Training vorkam.
-<!-- MD:END -->
-      <details>
-        <summary>Lösung zum Apfelbeispiel prüfen</summary>
-        <div class="detail-body">
-          <!-- MD:START -->
-**Nein: Datenleck.** Das Netz könnte Merkmale genau dieses Apfels wiedererkennen. Andere Perspektive und anderer Hintergrund machen aus demselben Apfel **kein neues Exemplar**. Alle acht Bilder dieses Apfels gehören in dieselbe Gruppe. Für P1 benötigen Sie einen **anderen Apfel**, der im Training nicht vorkam.
-<!-- MD:END -->
-        </div>
-      </details>
-      <!-- MD:START -->
-### Selbstcheck · Drei Entscheidungen
-
-Ordnen Sie zunächst ohne Hilfe zu und begründen Sie kurz:
-
-1. Sie probieren zwei Netzwerkvarianten aus. Mit welchen Bildern entscheiden Sie, welche besser geeignet ist: T1, V1 oder P1?
-2. Nach der Modellwahl fotografieren Sie einen bisher unbekannten Gegenstand. In welchen Bereich gehört der unabhängige Abschlusstest?
-3. Eine Person wurde für T2 fotografiert und zeigt dieselbe Geste nochmals für P2. Darf das als unabhängiger Test verwendet werden?
-
-Vergleichen Sie Ihre Antworten erst, wenn Sie alle drei gelöst haben.
-<!-- MD:END -->
-      <label class="field answer"><span>Selbstcheck: Notieren Sie Ihre drei Entscheidungen zu V1/P1, unabhängigem Abschlusstest und Datenleck – jeweils mit kurzer Begründung.</span><textarea data-answer="projekt_datencheck" rows="4" maxlength="10000" placeholder="1. Zur Modellwahl … / 2. Der Abschlusstest … / 3. Dieselbe Person …"></textarea></label>
-      <details>
-        <summary>Musterlösung und Begründungen anzeigen</summary>
-        <div class="detail-body">
-          <!-- MD:START -->
-1. **V1 (Validierung):** Mit V1 vergleichen Sie A und B, ohne den Abschlusstest zu verbrauchen.
-2. **P1/P2 (Test):** Die ausgewählte Variante wird mit neuen, bislang ungesehenen Exemplaren geprüft.
-3. **Nein:** Dieselbe Person in T2 und P2 ist ein Datenleck. Für die Testgruppen braucht es andere Personen. Bei Gesten sind fünf unterschiedliche Personen nötig, die jeweils beide Gesten zeigen.
-
-**Merksatz:** Trainingsdaten helfen beim Lernen, Validierungsdaten bei der Auswahl und Testdaten prüfen am Schluss unabhängig.
-<!-- MD:END -->
-        </div>
-      </details>
-      <!-- MD:START -->
-### Interaktiver Versuch · Datenleck erkennen
-
-Öffnen Sie das Notebook, bearbeiten Sie zuerst **«Drei Aufgaben für Daten»**, danach **«Ein Datenleck»**. Lesen Sie jeweils die Frage, treffen Sie eine Vermutung und verändern Sie **eine Einstellung**. Vergleichen Sie Ihre Beobachtung mit dem Merksatz. Die dritte Vertiefung ist freiwillig.
-<!-- MD:END -->
-      <div class="ki-notebook-block" data-notebook="content/daten_training.ipynb" data-title="Daten fair aufteilen">
-        <!-- MD:START -->
-### Jupyter-Notebook · Daten fair aufteilen
-<!-- MD:END -->
-        <!-- MD:START -->
-Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
-<!-- MD:END -->
-        <button type="button" class="ki-notebook-launch" data-lab="daten_training.ipynb">Notebook hier öffnen</button>
-      </div>
-    </div>
     <div class="card">
       <!-- MD:START -->
 ### Fünf Gruppen. 80 Fotos.
@@ -146,12 +66,12 @@ Rechnen Sie nach: **2 Klassen × 5 Gruppen × 8 Fotos = 80 Bilder**. Insgesamt s
 4. Sind beide Klassen mit je 40 Fotos vertreten und die Quellen dokumentiert?
 5. Können Sie in einem Satz erklären, warum eine hohe Trefferquote auf bekannten Bildern kein unabhängiger Test ist?
 
-Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das Ergebnis in **Reflexion 2 des bestehenden Journals** fest – kein neues Formular und keine zusätzliche Abgabe. Sichern Sie Ihre Arbeit unter «Notizen &amp; Projekt» als ZIP. Bei offenen Fragen benutzen Sie zuerst die Musterlösung oben und die Notebook-Erklärungen.
+Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das Ergebnis in **Reflexion 2 des bestehenden Journals** fest – kein neues Formular und keine zusätzliche Abgabe. Sichern Sie Ihre Arbeit unter «Notizen &amp; Projekt» als ZIP. Bei offenen Fragen benutzen Sie zuerst die Musterlösung und die Notebook-Erklärungen im Lernpfad [«Datenregeln lernen»](#projekt-regeln).
 <!-- MD:END -->
       <p><a href="#journal">Zur Reflexion im Journal →</a> · <a href="#sicherung">Stand als ZIP sichern →</a></p>
     </div>
     <div class="card project-photo-step" id="projekt-fotostudio">
-      <span class="project-photo-step-label">Schritt 2 · Thema und Bilder vorbereiten</span>
+      <span class="project-photo-step-label">Etappe 2 · Fotos vorbereiten</span>
       <!-- MD:START -->
 ### Fotostudio · Ihre Bilder aufbereiten
 <!-- MD:END -->
@@ -180,6 +100,7 @@ Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Foto
               <li>Abstand, Perspektive und Licht sinnvoll variieren.</li>
               <li>Aufnahmebedingungen zwischen Klassen vergleichbar halten.</li>
               <li>Kopien und fast identische Serien vermeiden.</li>
+              <li>Personen nur mit Einverständnis fotografieren; Gesichter vermeiden, wenn die Frage sie nicht braucht.</li>
               <li>Gruppencodes, Quellen und Originalbilder sichern.</li>
             </ul>
           </article>
@@ -200,14 +121,19 @@ MobileNet liefert 1280 Merkmale; das Notebook normiert sie je Bild. Die kleinen 
       <summary>Fotostudio: vom Handybild zum Versuch</summary>
       <div class="detail-body">
         <ol>
-          <li>Das <a href="#projekt-fotostudio">Fotostudio direkt hier im Datenplan</a> öffnen.</li>
+          <li>Das <a href="#projekt-fotostudio">Fotostudio direkt hier auf dieser Seite</a> öffnen.</li>
           <li>Klasse, Gruppe und Quelle eintragen; JPG/PNG auswählen. HEIC vorher als JPG exportieren.</li>
           <li>Vorschauen prüfen, Bilder verarbeiten und Sammlung regelmässig als JSON herunterladen.</li>
           <li>Im Versuch <code>EIGENE_DATEN</code> und die zwei Klassen eintragen. Konfigurationszelle ausführen, JSON hochladen, dann die nächste Zelle zum Laden ausführen.</li>
+          <li>Die Zelle «Daten prüfen» kontrolliert Bildzahl, Gruppen und Klassen. Bei Fehlern stoppen, im Fotostudio korrigieren und neu laden.</li>
           <li>Originalfotos und JSON zusätzlich unter <a href="#sicherung">Notizen &amp; Projekt</a> hinzufügen. Am Ende der Arbeitsphase ZIP herunterladen.</li>
         </ol>
         <p class="small">Bilder werden lokal verarbeitet. Bibliotheken und Modellgewichte benötigen Internet. Eine Sammlung im Fotostudio regelmässig herunterladen.</p>
       </div>
     </details>
+    <nav class="page-next" aria-label="Weiter im Projekt">
+      <a class="btn" href="#projekt-2">‹ Thema wählen</a>
+      <a class="btn primary" href="#projekt-4">Weiter: A/B-Versuch →</a>
+    </nav>
   </div>
 </details>
