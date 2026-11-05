@@ -708,6 +708,23 @@ def _lern_bild(l, aktuell=None):
         x, y = (float(v) for v in aktuell['x'])
         svg.append(f'<circle cx="{px(x):.1f}" cy="{py(y):.1f}" r="17" '
                    'fill="none" stroke="#263b43" stroke-width="3"/>')
+    # Die aktuelle Grenze kann ganz ausserhalb des Ausschnitts liegen (z. B. AND,
+    # Lernrate 0.4, nach 3 Korrekturen: x1 + x2 = 4.5). Dann wird keine fette
+    # Linie sichtbar; stattdessen wird erklärt, was das Neuron im Bild ausgibt.
+    w_akt, b_akt = l.staende[-1]
+    ecken = [float(w_akt[0]) * ex + float(w_akt[1]) * ey + float(b_akt)
+             for ex in (xmin, xmax) for ey in (xmin, xmax)]
+    hat_grenze = abs(float(w_akt[0])) > 1e-10 or abs(float(w_akt[1])) > 1e-10
+    if not (hat_grenze and min(ecken) <= 0 <= max(ecken)):
+        ueberall = int(ecken[0] >= 0)
+        mx, my = left + breite / 2, top + hoehe / 2
+        svg.append(f'<rect x="{mx-150}" y="{my-26}" width="300" height="52" rx="6" '
+                   'fill="#fff" fill-opacity=".92" stroke="#263b43" '
+                   'stroke-width="3" stroke-dasharray="8 5"/>')
+        svg.append(f'<text x="{mx}" y="{my-5}" text-anchor="middle" font-size="13" '
+                   'font-weight="600" fill="#263b43">Aktuelle Grenze liegt ausserhalb des Bildes</text>')
+        svg.append(f'<text x="{mx}" y="{my+15}" text-anchor="middle" font-size="13" '
+                   f'fill="#263b43">Das Neuron gibt hier überall {ueberall} aus.</text>')
     svg += [
         '</g>',
         f'<text x="{left+breite/2}" y="{top+hoehe+48}" text-anchor="middle" '
