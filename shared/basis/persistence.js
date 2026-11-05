@@ -54,6 +54,16 @@ function startNotebookFrame(name,kind){
  notebookLoading('loading',saved[name]?'Gesichertes Notebook wird geöffnet …':'Python wird vorbereitet …');
  frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved[name]?'&ki-restore=1':'');
 }
+// A failed start is usually one dropped download on a busy network. Try once
+// more on a fresh frame before asking the learner to do it by hand.
+const startRetries=new Map();
+function retryStartup(name){
+ if(current!==name||(startRetries.get(name)||0)>=1)return false;
+ startRetries.set(name,1);
+ status.textContent='Verbindung unterbrochen. Neuer Startversuch …';
+ setTimeout(()=>{if(current===name&&!ready)startNotebookFrame(name,frame.dataset.startKind||'open');},1000);
+ return true;
+}
 function refreshNotebookFrame(){
  requestAnimationFrame(()=>{try{frame.contentWindow?.dispatchEvent(new Event('resize'));}catch{}});
 }
@@ -134,7 +144,7 @@ document.querySelectorAll('a[href*="../lab/index.html?path="]').forEach(a=>{cons
 window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.channel!=='ki-portal-v1'||!current)return;const d=event.data;if(d.path!=='portal/'+current)return;
 if(d.type==='milestone'){markNotebookTiming(frame,d.phase);return;}
 if(d.id&&pending.has(d.id)){const p=pending.get(d.id);clearTimeout(p.timer);pending.delete(d.id);d.type==='error'?p.reject(Error(d.error)):p.resolve(d);return;}
-if(d.type==='ready'&&d.error){status.textContent=d.error;notebookLoading('error',d.error);return;}
+if(d.type==='ready'&&d.error){if(retryStartup(current))return;status.textContent=d.error;notebookLoading('error',d.error);return;}
 if(d.type==='ready'&&d.ready&&!ready&&!restoring){
  restoring=true;
  try{
@@ -143,7 +153,7 @@ if(d.type==='ready'&&d.ready&&!ready&&!restoring){
   // Published notebooks already exist in the build: a costly initial widget
   // snapshot is unnecessary. Changes auto-save, and switching/ZIP export always
   // take a fresh snapshot. A running Python environment is ready immediately.
-  ready=true;
+  ready=true;startRetries.delete(current);
   finishNotebookTiming(frame);
   status.textContent=restored?.widgets?.activated
     ? 'Gesicherter Stand geladen · interaktive Widgets wieder aktiv.'

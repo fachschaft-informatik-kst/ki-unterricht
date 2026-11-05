@@ -121,8 +121,46 @@ def update_query_hash(raw: str, new_hash: str) -> str:
     return urlunsplit((url.scheme, url.netloc, url.path, urlencode(params), url.fragment))
 
 
+# The kernel worker downloads the Pyodide runtime and every package with plain
+# fetch() calls. A single dropped request on a busy school network aborts the
+# whole start ("Start fehlgeschlagen"). Retry idempotent GETs a few times
+# before giving up; permanent errors such as 404 are returned immediately.
+FETCH_RETRY_MARKER = "/*ki-fetch-retry*/"
+FETCH_RETRY = FETCH_RETRY_MARKER + (
+    "(()=>{const f=self.fetch;if(!f||f.kiRetry)return;"
+    "const wait=t=>new Promise(r=>setTimeout(r,t));"
+    "const again=s=>s===408||s===425||s===429||s>=500;"
+    "const g=async function(input,init){"
+    "const method=String((init&&init.method)||(input&&input.method)||'GET').toUpperCase();"
+    "if(method!=='GET')return f.call(self,input,init);"
+    "for(let i=0;;i++){"
+    "try{const r=await f.call(self,input,init);if(i>=3||!again(r.status))return r;}"
+    "catch(e){if(i>=3||(init&&init.signal&&init.signal.aborted))throw e;}"
+    "await wait(300*2**i+Math.random()*200);}};"
+    "g.kiRetry=true;self.fetch=g;})();\n"
+)
+
+
+def patch_worker_fetch(site: Path) -> int:
+    """Prepend the retry wrapper to the standalone kernel worker scripts."""
+    site = Path(site)
+    patched = 0
+    for script in site.glob("extensions/@jupyterlite/pyodide-kernel-extension/static/*.js"):
+        source = script.read_text(encoding="utf-8")
+        # Worker bundles are standalone scripts; app chunks register with webpackChunk.
+        if "importScripts(" not in source or "loadPyodide" not in source or "webpackChunk" in source:
+            continue
+        if FETCH_RETRY_MARKER not in source:
+            script.write_text(FETCH_RETRY + source, encoding="utf-8")
+        patched += 1
+    if patched == 0:
+        raise ValueError("No Pyodide kernel worker found; refusing to ship without the fetch retry")
+    return patched
+
+
 def patch_bundle(site: Path) -> None:
     site = Path(site)
+    print("Retrying failed runtime downloads in", patch_worker_fetch(site), "kernel worker(s)")
     wheels = list(site.rglob(WHEEL_PATTERN))
     if not wheels:
         raise ValueError(f"No bundled {WHEEL_PATTERN} found in {site}")

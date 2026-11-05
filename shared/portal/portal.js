@@ -154,7 +154,19 @@ function startNotebookFrame(name,saved,kind){
  frame.src='../lab/index.html?path='+encodeURIComponent('portal/'+name)+'&ki-embed=1&reset'+(saved?'&ki-restore=1':'');
 }
 function trackNotebookReady(name){
+ startRetries.delete(name);
  finishNotebookTiming(frame);
+}
+// A failed start is usually one dropped download on a busy network. Try once
+// more on a fresh frame before asking the learner to do it by hand.
+const startRetries=new Map();
+function retryStartup(name){
+ if(activeName!==name||(startRetries.get(name)||0)>=1)return false;
+ startRetries.set(name,1);
+ const saved=name===projectName?notebook:others[name];
+ $('project-lab-status').textContent='Verbindung unterbrochen. Neuer Startversuch …';
+ setTimeout(()=>{if(activeName===name&&frame.dataset.ready!=='yes')startNotebookFrame(name,saved,frame.dataset.startKind||'open');},1000);
+ return true;
 }
 function refreshNotebookFrame(){
  requestAnimationFrame(()=>{try{frame.contentWindow?.dispatchEvent(new Event('resize'));}catch{}});
@@ -282,7 +294,7 @@ window.addEventListener('message',async event=>{
  if(data.type==='milestone'){markNotebookTiming(frame,data.phase);return;}
  if(data.id&&pending.has(data.id)){const p=pending.get(data.id);clearTimeout(p.timer);pending.delete(data.id);data.type==='error'?p.reject(Error(data.error)):p.resolve(data);return;}
  if(data.type==='ready'&&!initializingFrame&&frame.dataset.ready!=='yes'){
-  if(data.error){frame.dataset.ready='error';$('project-lab-status').textContent=data.error;notebookLoading('error',data.error);return;}
+  if(data.error){if(retryStartup(name))return;frame.dataset.ready='error';$('project-lab-status').textContent=data.error;notebookLoading('error',data.error);return;}
   if(!data.ready)return;
   initializingFrame=true;
   try{

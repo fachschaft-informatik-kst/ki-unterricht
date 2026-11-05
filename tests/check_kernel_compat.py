@@ -38,10 +38,23 @@ with TemporaryDirectory() as root:
             "pipliteUrls": [f"./{index.relative_to(site)}?sha256=old"]
         }
     }}}))
+    static = folder.parent
+    worker = static / "352.test.js"
+    worker.write_text('/*! license */\n(()=>{importScripts(url);self.loadPyodide({});})();\n')
+    app_chunk = static / "288.test.js"
+    app_chunk.write_text('(self.webpackChunk_x=self.webpackChunk_x||[]).push([[288],{}]);importScripts(url);loadPyodide;')
+    try:
+        patch_bundle(site.joinpath("missing")); raise AssertionError("A bundle without a kernel must be rejected")
+    except (ValueError, OSError):
+        pass
     patch_bundle(site)
     once = wheel.read_bytes()
+    patched_worker = worker.read_text()
     patch_bundle(site)
     assert once == wheel.read_bytes(), "Must be idempotent"
+    assert worker.read_text() == patched_worker and patched_worker.count("ki-fetch-retry") == 1
+    assert patched_worker.startswith("/*ki-fetch-retry*/") and "self.fetch=g" in patched_worker
+    assert "ki-fetch-retry" not in app_chunk.read_text(), "Only the standalone worker may be patched"
     with ZipFile(wheel) as z:
         assert "transformed_cell=exec_code" in z.read("pyodide_kernel/kernel.py").decode()
         rows = list(csv.reader(io.StringIO(z.read("pyodide_kernel-0.5.0.dist-info/RECORD").decode())))
@@ -50,4 +63,4 @@ with TemporaryDirectory() as root:
     digest = hashlib.sha256(once).hexdigest()
     assert json.loads(index.read_text())["releases"]["0.5.0"][0]["digests"]["sha256"] == digest
     assert "sha256=" + hashlib.sha256(index.read_bytes()).hexdigest() in config.read_text()
-print("PASS wheel patch, wheel RECORD, piplite sha256, cache hashes and idempotence")
+print("PASS wheel patch, wheel RECORD, piplite sha256, cache hashes, worker fetch retry and idempotence")

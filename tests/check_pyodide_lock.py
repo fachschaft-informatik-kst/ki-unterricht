@@ -15,7 +15,9 @@ with tempfile.TemporaryDirectory() as directory:
                'platform':'emscripten_3_1_58','python':'3.12.7'}
     (root / 'static/pyodide/pyodide-lock.json').write_text(json.dumps({'info':runtime}))
     info = {k:v for k,v in runtime.items() if k != 'version'}
-    packages = {'example':{'file_name':'../../static/example.whl','sha256':'unchanged'}}
+    packages = {'example':{'file_name':'../../static/example.whl','sha256':'unchanged'},
+                'ipython':{'file_name':'../../static/ipython.whl','depends':['decorator','jedi','traitlets']},
+                'jedi':{'file_name':'../../static/jedi.whl','depends':['parso']}}
     lock_path = root / 'static/pyodide-lock/pyodide-lock-offline.json'
     lock_path.write_text(json.dumps({'info':info,'packages':packages}))
     kernel = {'pyodideUrl':'./static/pyodide/pyodide.js', 'loadPyodideOptions':{
@@ -26,7 +28,9 @@ with tempfile.TemporaryDirectory() as directory:
     fix_lock(root)
     fixed = json.loads(lock_path.read_text())
     assert fixed['info']['version'] == '0.27.0'
-    assert fixed['packages'] == packages
+    expected = json.loads(json.dumps(packages)); expected['ipython']['depends'] = ['decorator','traitlets']
+    assert fixed['packages'] == expected, 'jedi must leave the IPython start set; other packages stay unchanged'
+    assert 'jedi' in fixed['packages'], 'jedi stays installable on demand'
     config = json.loads(config_path.read_text())
     url = config['jupyter-config-data']['litePluginSettings']['@jupyterlite/pyodide-kernel-extension:kernel']['loadPyodideOptions']['lockFileURL']
     assert url.endswith(hashlib.sha256(lock_path.read_bytes()).hexdigest())
@@ -37,4 +41,4 @@ with tempfile.TemporaryDirectory() as directory:
         try: fix_lock(root)
         except ValueError: pass
         else: raise AssertionError('Incompatible '+key+' was accepted')
-print('PASS missing runtime version, cache hash, unchanged packages, idempotence and mismatch rejection')
+print('PASS missing runtime version, cache hash, jedi removed from the start set, idempotence and mismatch rejection')

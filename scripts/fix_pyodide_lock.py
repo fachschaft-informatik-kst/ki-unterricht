@@ -10,6 +10,21 @@ import json
 from urllib.parse import urlsplit
 
 
+# IPython lists jedi (about 4 MB, the largest single download of a notebook
+# start) only for tab completion and falls back to its own completer without it.
+# Every kernel start fetched it before the first widget could appear.
+OPTIONAL_IPYTHON_DEPENDENCIES = ('jedi',)
+
+
+def drop_optional_dependencies(lock):
+    packages = lock.get('packages', {})
+    ipython = packages.get('ipython')
+    if ipython is None:
+        return
+    dependencies = ipython.get('depends', [])
+    ipython['depends'] = [name for name in dependencies if name not in OPTIONAL_IPYTHON_DEPENDENCIES]
+
+
 def fix_lock(out):
     out = Path(out)
     config_path = out / 'jupyter-lite.json'
@@ -42,6 +57,7 @@ def fix_lock(out):
     if info.get('version') not in (None, version):
         raise ValueError('Pyodide lock/runtime mismatch: version')
     info['version'] = version
+    drop_optional_dependencies(lock)
     data = (json.dumps(lock, indent=2) + '\n').encode()
     lock_path.write_bytes(data)
     options['lockFileURL'] = urlsplit(lock_url).path + '?sha256=' + hashlib.sha256(data).hexdigest()
