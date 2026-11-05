@@ -166,6 +166,16 @@ geprüft werden, ob die Korrektur upstream enthalten ist und entfernt werden kan
 
 `tests/check_browser_storage.cjs` reproduziert den alten Fehler und prüft das
 Reconnect-Verhalten mit fertigen und noch initialisierenden Instanzen.
+
+Bereits geöffnete Notebooks behalten auf derselben Kursseite eigene Python-Kernels.
+Der JupyterLite-0.5-Service-Worker ersetzt jedoch bei jeder Dateisystem-Anfrage
+seinen gemeinsamen Broadcast-Antwort-Handler. Gleichzeitige Kernel-Anfragen können
+dadurch Antworten vertauschen oder unbeantwortet bleiben. Derselbe Paketierungspatch
+ergänzt eindeutige Anfrage-IDs und zugehörige Antwort-Listener im Service-Worker und
+den Kernel-Bundles. Verspätete oder doppelte Antworten gehören nur zu ihrer
+ursprünglichen Anfrage; Zeitüberschreitungen werden als HTTP-Fehler gemeldet.
+Speicherformate und Notebookinhalte werden dadurch nicht verändert.
+
 `KI_RUNTIME_REPEATS=3 node tests/check_course_runtime_browser.cjs` wiederholt
 die echten Kursstarts ohne automatische Fehler-Retries. Bei Fehlern gibt der
 Test Startphasen, Browserwarnungen und fehlgeschlagene/offene Netzwerkanfragen aus.

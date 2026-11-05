@@ -55,7 +55,11 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.locator('#start-project').click();
   // A successful background warmup may already have hidden the loader.
   // Both a cold start and an immediately ready notebook are valid.
-  await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000}).catch(async e=>{console.error(await p.locator('#project-lab-status').innerText());throw e;});
+  await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:180000}).catch(async e=>{
+   console.error(await p.locator('#project-lab-status').innerText());
+   console.error(await p.frameLocator('#project-frame').locator('body').innerText());
+   console.error(errors);throw e;
+  });
   assert.equal(await p.locator('#project-lab-loading').isVisible(),false,'The loader must hide after every project restore');
   const metric=await p.evaluate(()=>window.KINotebookTimings?.at(-1));
   assert(metric&&metric.milliseconds>=0&&['open','warmup'].includes(metric.kind),
@@ -131,13 +135,20 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert(JSON.stringify(exportedNotebook).includes('zuletzt geändert'));
   assert(JSON.stringify(exportedNotebook).includes('ZIP-Test: projekt_datencheck'),
     'Downloaded notebook must include saved classroom answers');
-  for(const n of names)assert.deepEqual(JSON.parse(await exported.files.get('notebooks/'+n).text()),doc(n));
+  for(const n of names){
+   const actual=JSON.parse(await exported.files.get('notebooks/'+n).text()),expected=doc(n);
+   // JupyterLab adds this default metadata when the managed warmup opens an
+   // imported document. ZIP export now snapshots that live session as well.
+   if(actual.metadata.language_info!==undefined)expected.metadata.language_info={name:''};
+   assert.deepEqual(actual,expected,'Notebook content and metadata survive export: '+n);
+  }
   for(const n of ['unterricht_tools.py','ki_projekt/ki_foto_tools.py','notebooks/unterricht_tools.py'])assert(exported.files.has(n),'Missing runtime '+n);
   await p.reload();await openProject(p);cells=p.frameLocator('#project-frame').locator('.jp-CodeCell');
   assert((await cells.nth(1).innerText()).includes('zuletzt geändert'));
   assert((await cells.nth(0).innerText()).includes('daten..json'));
   assert.equal(await p.frameLocator('#project-frame').locator('.widget-upload').count(),0,'Restored output is readable, not a stale live widget');
   console.log('PASS all seven notebooks, latest edit, Markdown/image attachment, binary files and real notebook upload in ZIP and after reload');
+  await first.context.close();
 
   const second=await setup();await importZip(second.p,exported.file);await openProject(second.p);
   assert((await second.p.frameLocator('#project-frame').locator('.jp-CodeCell').nth(1).innerText()).includes('zuletzt geändert'));
@@ -160,7 +171,11 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   // A real teaching widget: values and figures must survive without a Python session.
   const third=await setup(),q=third.p;
   await q.locator('.nav a[href="#perzeptron"]').click();await q.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').first().click();
-  await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:240000}).catch(async e=>{console.error('LESSON',await q.locator('#project-lab-status').innerText());throw e;});
+  await q.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes',null,{timeout:240000}).catch(async e=>{
+   console.error('LESSON',await q.locator('#project-lab-status').innerText());
+   console.error(await q.frameLocator('#project-frame').locator('body').innerText());
+   console.error(errors);throw e;
+  });
   const choices=q.frameLocator('#project-frame').locator('.widget-dropdown select:has(option:text-is("OR"))');
   await choices.first().selectOption({label:'OR'});
   await q.waitForFunction(async()=>{

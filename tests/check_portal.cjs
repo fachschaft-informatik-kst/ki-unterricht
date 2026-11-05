@@ -389,7 +389,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     const kernelBefore=await p.locator('#project-frame').getAttribute('data-kernel-id');await dismissNotebook();await p.locator('.nav a[href="#perzeptron"]').click();await p.locator('[data-lab="perzeptron_und_neuronale_netze.ipynb"]').first().click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/bok/4-klasse/perzeptron_und_neuronale_netze.ipynb',null,{timeout:180000});
     assert.notEqual(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore);
-    assert.equal(await p.locator('iframe[src*="lab/index"]').count(),1);
+    assert.equal(await p.locator('iframe[src*="lab/index"]').count(),2,
+      'The project and neuron notebook must retain separate cached sessions');
     assert.equal(await p.frameLocator('#project-frame').locator('.jp-NotebookPanel').count(),1);
     assert((await p.frameLocator('#project-frame').locator('body').innerText()).includes('Gewichte'));
      assert.equal(await p.locator('#project-lab-loading').isVisible(),false,'Spinner must also disappear after neuron startup');
@@ -489,12 +490,13 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 
     await dismissNotebook();await p.locator('.sidebar-bottom a[href="#journal"]').click();await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/bok/4-klasse/ki_tandemprojekt.ipynb',null,{timeout:180000});assert.equal(await p.locator('#project-frame').count(),1);
     assert((await cells.nth(5).innerText()).includes('Abschlusstest'));
-    assert.notEqual(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore);
+    assert.equal(await p.locator('#project-frame').getAttribute('data-kernel-id'),kernelBefore,
+      'Returning to the trained project must reuse its original Python kernel');
     await dismissNotebook();await p.locator('a[href="#sicherung"]').first().click();downloaded=p.waitForEvent('download');await p.locator('#download-backup').click();await(await downloaded).saveAs('/tmp/ki-portal-after-switch.zip');
     const archive=await import('data:text/javascript;base64,'+fs.readFileSync(path.join(__dirname,'../shared/portal/archive.js')).toString('base64'));
     const before=await archive.readZip(new Blob([fs.readFileSync('/tmp/ki-portal-trained.zip')]));const after=await archive.readZip(new Blob([fs.readFileSync('/tmp/ki-portal-after-switch.zip')]));
     assert.deepEqual(JSON.parse(await before.get('Versuchsprotokoll.json').text()),JSON.parse(await after.get('Versuchsprotokoll.json').text()));
-    console.log('PASS one notebook at a time, fresh kernels, interactive exercises and preserved project outputs/protocol');
+    console.log('PASS one visible notebook at a time, cached kernels, interactive exercises and preserved project outputs/protocol');
     // A twice-imported preparation and extra autostart tags must never execute.
     const imported=JSON.parse(await before.get('versuch.ipynb').text());
     imported.cells=imported.cells.filter(c=>!c.metadata?.['ki-journal-export']);
