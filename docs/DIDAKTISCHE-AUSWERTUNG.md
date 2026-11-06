@@ -2,7 +2,7 @@
 
 > Stand: 6. November 2026 · Kursstand: `main` @ `e2ddddf` · Referenzkurs: BOK 4. Klasse
 > (IRN und Vorlage: Anhang B) · Status: Entwurf zur Diskussion in der Fachschaft.
-> Umsetzungsstand der Welle 1 (Branch `feat/didaktik-welle-1`): Abschnitt 9. Die Befunde
+> Umsetzungsstand der Wellen 1 und 2 (Branch `feat/didaktik-welle-1`): Abschnitt 9. Die Befunde
 > in den Abschnitten 0–8 beschreiben weiterhin den Stand vor dieser Umsetzung.
 > Zeilenangaben («Z.») beziehen sich auf diesen Stand.
 
@@ -1161,7 +1161,7 @@ Die wichtigsten Hypothesen lassen sich mit wenig Aufwand prüfen:
 | 11 | DL 10: Verteilen sich die Gruppen auf die drei Fälle? Ändern Lernende ihre These? | Zählung `these_vorher`/`these_nachher` | R12 |
 | 12 | Passen Niveau und Stil von DL 1–2 (textgleich mit der 1. Klasse) für 17–18-Jährige? Ist Memory zu spielerisch? | Kurzes Feedback | Feinschliff DL 1–2 (die 4. Klasse ist neu im Thema) |
 
-## 9. Umsetzungsstand Welle 1 (7. November 2026)
+## 9. Umsetzungsstand Welle 1 und 2 (7. November 2026)
 
 Umgesetzt wurde, was auf **Kursseiten-Ebene** (Seiten, `planung.json`, `materialien.md`,
 Musterlösungen, `KI_Planung.md`) möglich ist, im Branch `feat/didaktik-welle-1`. Die Änderungen
@@ -1185,6 +1185,9 @@ Musterlösungszeilen bereit.
 | R10 | teilweise | Gesprächsleitfaden mit Pool (drei Varianten je Kriterium), Orientierung je Stufe, Bogen, Rotation, Zweitbewertung als Stichprobe; «Wo beurteilt?» je Lernziel mit Grundlagenfrage (K7); KI-Regel mit eigenem Journalfeld; Stufe 2 als Sollstufe ausgewiesen (Entscheid 6.11.2026: 22 Punkte = 4,25) auf Kursseite, Raster, Projektauftrag und KP | Absenzregel (Entscheid Fachteam), Überlappungen auflösen, Ankerantworten, Selbsteinschätzung nutzen |
 | R11 | offen | – (nur NOR-Variante in DL 3) | Notebooks |
 | R12 | grossteils | Soekia als digitaler Arbeitsweg (Link, Drei-Zeilen-Anleitung, Erwartung vorab, selbst erzeugtes problematisches Beispiel über den Trainingstext); Anleitung am 6.11.2026 an der echten Oberfläche geprüft und korrigiert (der Prompt steuert den Text nicht; eigener Text über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen»; Regler «Temperatur» unter «Auswahl anpassen»); Untertitel/Transkript; DL-9-Zeit neu verteilt (5/10/12/53/10) | Realitätsanker (AI Act, nDSG Art. 21) fachlich prüfen |
+
+Die Spalte «Offen» ist nach Welle 2 für R2, R5, R8, R10 und R11 überholt (Stand: siehe «Welle 2»
+weiter unten).
 
 **Annahmen, die ich getroffen habe (Lehrperson bitte bestätigen oder ändern):**
 
@@ -1256,7 +1259,126 @@ was Welle 1 eingeführt hat, danach auch die schon vorher vorhandenen Formulieru
   Entscheidungen im Tandem, «Verbindlicher Stand») und der technische Profilname `vertiefung`
   in `ki_foto_tools.py`. Die 1. Klasse ist nicht angefasst.
 
-**Verifikation (lokal, nach Welle 1c erneut):** Stufe A (Builds, Modell-, Inhalts-, Materialien-,
+**Welle 2 (7. November 2026): fachliche Korrekturen, Erleben statt Erzählen, Beurteilung.**
+Die Lehrperson hat «alles umsetzen» beauftragt, mit einer Ausnahme (Memory-Runde 3, siehe
+unten). Umsetzung in BOK, IRN und Vorlage (4. Klasse) identisch; die 1. Klasse und die Datei
+`basis_neuron.ipynb` (Variante der 1. Klasse im Ordner der 4. Klasse) sind nicht angefasst.
+Gespeicherte Antwortschlüssel: **5 neu, 0 entfernt oder umbenannt** (`wissen_akinator`,
+`lernschritt_selbst`, `datenleck_versuch`, `drei_werte`, `sprache_transkript`); die Journalfelder
+`comparison` und `selection` sind im Wortlaut ergänzt, ihre Schlüssel bleiben. Für alle neuen und
+geänderten Schlüssel stehen Musterlösungszeilen bereit.
+
+*A · Fachliche Korrekturen (Rest von R2)*
+
+| Stelle | Befund | Umsetzung |
+|--------|--------|-----------|
+| DL 2 Akinator | Die Frage «Warum lernt das System hier nicht selbst?» enthielt eine falsche Prämisse: Akinator lernt nach Angaben des Anbieters aus den Erfahrungen früherer Spieler, die Details sind nicht öffentlich. | Das Tandem baut zuerst einen Ratebaum auf Papier (fünf Tiere, Test mit einem unbekannten Tier) als wissensbasiertes Beispiel; Akinator ist der Kontrastfall (5 Min., Feld `wissen_akinator`). Plan, Materialien, KP, Musterlösungen angepasst. |
+| «Erfahrungsschatz» | In DL 2 «Trainingsbeispiele», in DL 3 «Gewichte»: zwei Bedeutungen. | Einheitlich: Trainingsbeispiele = Erfahrungen (Daten); Erfahrungsschatz = das, was das Modell daraus behalten hat (beim Neuron Gewichte und Bias). Glossareintrag, Materialien, Plan. |
+| DL 3 «korrigiert sich selbst» | Das Neuron korrigiert sich nicht selbst; die Lernregel ändert seine Werte. | Frage und Musterlösung (`perzeptron`) nennen die Lernregel: Änderung = Lernrate × (Ziel − Ausgabe) × Eingang. |
+| DL 8 Trennschärfe | Der Wert liegt immer bei mindestens 50 %; «Raten ≈ 50 %» und «Merkmale taugen nicht» waren falsch. | `ki_foto_tools.py` berechnet die Zufallsbasis aus der Bildzahl (n = 16: etwa 60 %) und verzichtet auf die falsche Schlussfolgerung. |
+| DL 10 Rückkopplung | Die Kette war als Tatsache formuliert. | Grafik und Seite sind als Gedankenexperiment mit vereinfachten Annahmen gekennzeichnet; als Beleg für reale Rückkopplung Ensign et al. 2018 («Runaway Feedback Loops in Predictive Policing»). |
+| Glossar | Neun Begriffe fehlten. | Erfahrungsschatz, Lernrate, Epoche, Startwert, Modellwert, Trennschärfe, Einbettung, Rückkopplung, WMD (jetzt 38 Begriffe, «Zum Nachschlagen»-Links in den Abschnitten). |
+| DL 2 Memory-Runde 3 | Ich hatte vorgeschlagen, die Runde zu streichen oder durch einen Mini-Bandit zu ersetzen, weil +1/0 das Vorgehen nicht ändert. | **Bleibt unverändert (Entscheid der Lehrperson).** Begründung: Beim normalen Memory-Spiel soll der Agent merken, dass eine Strategie besser ist als reiner Zufall; verstärkendes Lernen erleben die Lernenden erst bei NIM. |
+
+*B · Erleben statt Erzählen*
+
+| DL | Befund | Umsetzung (Minuten aus `planung.json`) |
+|----|--------|----------------------------------------|
+| 1 | Informieren: 15 Minuten Input am Stück. | 7 Min. Input (Regeln oder Daten) → 2 Min. Abruf ohne Unterlagen → 6 Min. Input (Begriffe, schwache/starke KI, Meilensteine) → 5 Min. Spamfilter zuerst ohne Unterlagen einordnen. Summe unverändert 20. |
+| 3 | Lernschritt nur als Demo. | Verarbeiten 27 + 5 + 8 + 10 Min.: Tandem lässt in Experiment 3 den Lernschritt mit **OR** ablaufen (Vorhersage vor jedem Klick, erste Korrektur nachrechnen; bei OR bleibt w₁ unverändert, weil x₁ = 0), Feld `lernschritt_selbst`. Welle 1c hatte «Experiment 3 selbst durchführen» gestrichen, weil es als freiwillig markiert war; jetzt ist es ein fester Planschritt. |
+| 4 | Die MobileNet-Skizze fehlte. | Neue Grafik `mobilenet_bruecke.svg` (Foto → MobileNet, bleibt fest → 1280 Zahlen → kleines Netz, lernt → Vorhersage) in der Brückenkarte. |
+| 5 | Datenleck nur gezeichnet; «Vergleich · Drei Werte» stand in keinem Plan. | Neue Funktion `u.datenleck_versuch()`: dasselbe Netz, getestet mit leicht verrauschten Kopien der Trainingsbilder und mit neuen Bildern. Beispielwerte: 100 Trainingsbilder etwa 96 % gegen 84 %, 40 Bilder etwa 100 % gegen 67 %, 400 Bilder etwa 96 % gegen 94 %. Beides im Plan: Tandem 45 Min. (vorher 40), Einzeln 5 Min. (vorher 10), Puffer 10 Min.; Felder `datenleck_versuch`, `drei_werte`. |
+| 6 | Keine Aktivität zum Lernziel «erkenne mögliche Überanpassung»; die Streuung über Startwerte entstand nur auf eigenen Wunsch. | `vergleich_zeigen` zeigt den Trainingswert als gestrichelte Linie und druckt den Abstand zu V1; die Journalfrage `comparison` fragt danach. Die Wiederholung mit den Startwerten 11, 22, 33 ist fester Teil der A/B-Etappe (eigene Zelle im Versuchsnotebook, ca. 5 Min., `selection` fragt nach der Reihenfolge); Projektauftrag und KP angepasst, «nach Absprache» und «keine Voraussetzung für eine gute Note» entfallen. |
+| 9 | «Ich prüfe KI-Aussagen, indem …» wurde nie geübt. | Konstruierter Chat mit vier «gesicherten Fakten» (eine stimmt, zwei stimmen nicht, bei einer ist die Quelle erfunden), Prüfen mit admin.ch und bfs.admin.ch, 6 Min., Feld `sprache_transkript`. Soekia 37 statt 40 Min., Puffer 2 statt 5 Min. «Einbettung» als Fachwort markiert. |
+
+*C · Beurteilung (Rest von R10)*
+
+- **Überlappungen aufgelöst** (Raster und Bewertungsseite gleichlautend, KP angepasst): K6
+  (schriftlich) bewertet Grenzen nach Ursache (Daten, Versuchsaufbau, Zufall) und die nächste
+  Untersuchung; K9 (Gespräch) bewertet, was die Zahlen aussagen und was nicht, ohne «Grenzen» und
+  «Beispiele» (K6, K5); K10 prüft das eigene Verständnis des ganzen Projekts (auch Teile des
+  Partners) und die Übertragung, ohne «nächsten Versuch». K12 bleibt. Die Datentrennung zählt
+  weiterhin in K2, K4, K8 und K12 (im KP vermerkt).
+- **Ankerantworten K7–K10** (je Stufe 1 bis 3, am Beispiel Apfel/Birne mit Zahlenbeispiel) im KP.
+  Die Datei `KI_Planung.md` wird nicht auf den Kursseiten veröffentlicht, steht aber im
+  öffentlichen Repository.
+- **Sollstufe kommunizieren:** Bewertungsseite, Raster und Projektauftrag sagen: alle elf Kriterien
+  auf Stufe 2 = 22 Punkte = 4,25; für eine 5 sind vier Punkte mehr nötig (zum Beispiel Stufe 3 in
+  vier Kriterien).
+- **Absenzregel:** Der Vorschlag steht im KP jetzt als Arbeitsregel bis zum Entscheid des Fachteams
+  (Ersatzgespräch mit anderer Fragenvariante innerhalb einer Woche, K12 wird nachgeholt). Die
+  Kursseiten sagen weiterhin «keine Ersatztermine»; sie werden erst nach dem Entscheid angepasst.
+- **Lesbarkeit:** nur gezielt (der längste Satz der Lernziele, die neuen Raster- und
+  Sollstufen-Formulierungen). Die LIX-Werte von Bewertung, Lernziele, Sicherung und Glossar (56–59)
+  sind durch Fachwörter und Kürzel (K1, T1/T2) geprägt; eine vollständige Überarbeitung steht aus.
+
+*D · Messen*
+
+Gemessen in echtem Pyodide 0.27 (WASM) unter Node auf dem Entwicklungsrechner, **nur Rechenzeit**
+(kein Netzwerk, keine Browser-Oberfläche). Schüler-Geräte sind langsamer (Faktor 2–5 ist eine
+Schätzung).
+
+| Zelle | Zeit |
+|-------|------|
+| `import unterricht_tools` | 1,7 s |
+| `datenleck_versuch(100)`, erster Lauf (inklusive scikit-learn-Import) | 3,4 s |
+| `datenleck_versuch(40)` / `(400)` | 0,5 s / 0,8 s |
+| `drei_rollen(100)` | 0,5 s |
+| `vergleichen` mit einem / drei Startwerten und Diagramm (Übungsdaten) | 0,5 s / 1,2 s |
+| dasselbe mit Apfel/Banane (Referenzdaten) | 0,4 s / 1,2 s |
+| Pakete SciPy und scikit-learn aus dem lokalen Cache | 1,9 s |
+
+Der Engpass ist der **Download**: Beim ersten Training lädt der Browser SciPy und scikit-learn
+(zusammen etwa 70 MB je Gerät, danach im Browser-Cache). Im Schul-WLAN ist das nicht gemessen.
+Die Materialien für DL 5 weisen darauf hin. Das **Referenzpaket** (Plan B in DL 8): Der Datenpfad
+mit `testbilder/beispielbilder_fotostudio.json` läuft automatisch (`check_testbilder.py`,
+einschliesslich drei Startwerten und Abschlusstest); das Journal-ZIP selbst entsteht im Browser
+und wird nicht automatisch erzeugt. Die Lehrperson erzeugt es einmal im Probelauf (Notebook mit
+`MODUS = 'EIGENE_DATEN'`, `KLASSEN = ['Apfel', 'Banane']`, Test einmal ausführen, ZIP sichern).
+
+**Annahmen, die ich getroffen habe (Lehrperson bitte bestätigen oder ändern):**
+
+1. Die Minutenverschiebungen in DL 1, 3, 5 und 9 sind Schätzungen und nicht im Unterricht
+   erprobt (Beobachtungsplan Nr. 3, 4, 6).
+2. Die Wiederholung mit drei Startwerten und der Vergleich der drei Werte gehören jetzt zum
+   Unterricht (nicht mehr «freiwillig»). Dafür sind in DL 5 Einzeln 10 → 5 Min. und in DL 9
+   Soekia 40 → 37 Min. gekürzt worden.
+3. Die Absenzregel steht nur im KP (Arbeitsregel), nicht auf den Kursseiten.
+4. Die Faktenbasis der DL-9-Übung: Landessprachen laut Bundesverfassung Art. 4, Bundesrat mit
+   sieben Mitgliedern, Bevölkerung rund 9 Millionen (Bundesamt für Statistik); «Bundesamt für
+   Sprachforschung» ist erfunden.
+5. Der Leck-Versuch ist eine Vereinfachung (Ziffernbilder, verrauschte Kopien statt neu
+   fotografierter Gegenstände). Auch die «neuen» Ziffernbilder stammen von denselben Schreibern;
+   das steht in der Ausgabe.
+
+**Weiterhin offen nach Welle 2:** R2 Nr. (10) Darstellbarkeit und Lernbarkeit in DL 4 trennen,
+(11) «Wahr?» nur für Aussagen, (13) O'Neil-Kriterien als «gängige Zusammenfassung» kennzeichnen
+und das tote Attribut `data-p1-diagnostic`; Freitext-Abruf («Vorwissen») in DL 3, 4 und 6;
+Absenzregel (Entscheid Fachteam); Probelauf im Unterricht (Zeiten, Download im Schul-WLAN,
+Referenzpaket); Rückmeldung zu Niveau und Stil von DL 1–2; Realitätsanker (AI Act, nDSG Art. 21)
+fachlich prüfen.
+
+**Verifikation Welle 2 (lokal, mit `.venv`: Python 3.14, numpy, scikit-learn, matplotlib, pillow):**
+Stufe A (Builds, Modell-, Inhalts-, Materialien-, Lehrpersonen-, Editor- und Paritätstests),
+die Routen-Tests und die Python-Tests `check_ki_fotos.py`, `check_ki_projekt.py`,
+`check_ki_basis.py` (neu mit Prüfung des Leck-Versuchs: Kopien mindestens 15 Prozentpunkte über
+neuen Bildern bei 40 Trainingsbildern) und `check_testbilder.py` bestehen, ebenso
+`check_notebook_isolation.py`. Browser: `check_project_pages`, `check_portal` (auch mit
+Notebook und Training), `check_course_theme`, `check_teacher_browser`,
+`check_editor_course_matrix`, `check_admin_form`, `check_course_runtime_browser` und
+`check_persistence`. Notebooks: `check_autostart`, `check_notebook_start_budget` (um
+`datenleck_versuch` erweitert: schwere Zellen nie beim Start), `check_notebook_warmup`,
+`check_notebook_snapshot`, `check_widget_rehydrate`, `check_notebook_performance`. In echtem
+Pyodide laufen alle Notebooks der 4. Klasse in BOK, IRN und Vorlage (Quellen und gepackte
+Kopien, 22 und 33 Läufe) sowie die Projekt-Gates fehlerfrei durch. Angepasst wurden zwei
+Tests: `check_admin_form.cjs` liest die Zahl der Glossarbegriffe jetzt aus der Datei statt eine
+feste Zahl zu erwarten (das Glossar wuchs von 29 auf 38), und `check_notebook_start_budget.cjs`
+kennt die neue Zelle. `check_course_isolation.py` besteht, wenn das alte, ignorierte
+Wurzelverzeichnis `content/` (lokales Überbleibsel, nicht im Repository) beiseitegelegt ist.
+Nicht ausgeführt: `execute_notebooks.py` (Jupyter-Kernel; die Pyodide-Läufe decken dieselben
+Notebooks ab) und alles, was ein Klassenzimmer braucht (Schul-WLAN, Schüler-Geräte, Zeiten).
+
+**Verifikation Welle 1c (lokal):** Stufe A (Builds, Modell-, Inhalts-, Materialien-,
 Lehrpersonen-, Editor- und Paritätstests) und die Routen-Tests bestehen; `check_portal.cjs`
 (inklusive Notebook und Training), `check_project_pages.cjs`, `check_course_theme.cjs`,
 `check_admin_form.cjs`, `check_teacher_browser.cjs`, `check_editor_course_matrix.cjs`,
