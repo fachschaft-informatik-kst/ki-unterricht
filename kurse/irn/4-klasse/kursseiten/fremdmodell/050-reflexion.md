@@ -11,14 +11,14 @@ open: false
 
 ## Welche Aussagen können Sie mit Ihren Beobachtungen wirklich belegen?
 
-<p class="section-intro">Reflektieren Sie <strong>erst nach</strong> der <a href="#reproduktion">Daten- und Ergebnisprüfung</a> und dem <a href="#fremdtest">Pflichtversuch</a>. Unterscheiden Sie <strong>Beobachtung</strong>, <strong>Vermutung</strong> und <strong>belegbare Schlussfolgerung</strong>.</p>
+<p class="section-intro">Reflektieren Sie <strong>erst nach</strong> der <a href="#reproduktion">Daten- und Ergebnisprüfung</a> und dem <a href="#fremdtest">Pflichtversuch</a>: Prüfbericht und Versuchsprotokoll müssen ausgefüllt sein, bevor Sie die persönlichen Antworten schreiben. Unterscheiden Sie <strong>Beobachtung</strong>, <strong>Vermutung</strong> und <strong>belegbare Schlussfolgerung</strong>.</p>
 
 <div class="card dl8-review" id="fremd-reflexion">
   <div class="dl8-section-head dl8-review-heading">
     <h3><span class="dl8-review-num">01</span> Gemeinsame Rückmeldung</h3>
     <span class="dl8-meta">Pflicht · unbenotet</span>
   </div>
-  <p>Schreiben Sie dem anderen Tandem <strong>zwei Sätze</strong>: eine belegte Stärke oder offene Frage zur Trennung von Trainings- und Testdaten und einen konkreten nächsten Test.</p>
+  <p>Schreiben Sie dem geprüften Tandem <strong>zwei Sätze</strong>: eine belegte Stärke oder offene Frage zur Trennung von Trainings- und Testdaten und einen konkreten nächsten Test. Die Lehrperson sammelt die Rückmeldungen ein und gibt sie zu Beginn von Doppellektion 9 aus; Ihr ZIP geht nur an die Lehrperson.</p>
   <label class="field answer"><span>Gemeinsame Rückmeldung: Welche Stärke oder Unsicherheit haben Sie anhand der Daten beobachtet? Was sollte das Tandem als Nächstes prüfen?</span><textarea data-answer="fremd_rueckmeldung" maxlength="10000" rows="3" placeholder="Beobachtet haben wir bei T1/T2 und P1/P2 …; als nächsten Test schlagen wir … vor, weil …"></textarea></label>
   <div class="dl8-section-head dl8-review-heading">
     <h3><span class="dl8-review-num">02</span> Persönliche Reflexion</h3>
@@ -64,12 +64,12 @@ open: false
     <li>
       <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">02</span></div>
       <h4>ZIP herunterladen</h4>
-      <p>Klicken Sie unten auf <strong>«Fremdauswertung als ZIP herunterladen»</strong> und prüfen Sie darin die Datei <code>Fremdauswertung.html</code>.</p>
+      <p>Klicken Sie unten auf <strong>«Fremdauswertung als ZIP herunterladen»</strong> und prüfen Sie darin die Datei <code>Fremdauswertung.html</code>. <strong>Schliessen Sie das private Fenster erst nach dem Download</strong>, sonst sind Ihre Antworten weg.</p>
     </li>
     <li>
       <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">03</span></div>
       <h4>Separat einreichen</h4>
-      <p>Reichen Sie das zweite ZIP im bekannten Abgabekanal ein. <strong>Der Download allein ist keine Einreichung.</strong></p>
+      <p>Reichen Sie das zweite ZIP im bekannten Abgabekanal ein. <strong>Der Download allein ist keine Einreichung.</strong> Löschen Sie danach das fremde ZIP und den entpackten Ordner (auch aus dem Papierkorb).</p>
     </li>
   </ol>
   <p class="small"><strong>Bewertung:</strong> <a href="#bewertung">Nur K12 · persönliche Reflexion (0–3 Punkte)</a>. Die gemeinsame Datenprüfung, der Pflichtversuch und die Rückmeldung sind unbenotet. Das eigene Projekt bleibt unverändert; fremde Originalfotos nicht zusätzlich einreichen.</p>

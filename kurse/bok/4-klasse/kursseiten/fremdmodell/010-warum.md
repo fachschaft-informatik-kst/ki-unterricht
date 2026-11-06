@@ -38,12 +38,12 @@ Das andere Tandem hat ein Bildmodell mit **zwei festgelegten Klassen** trainiert
       </tr>
       <tr>
         <td>den Abschlusstest auf P1/P2 gemacht und danach nichts mehr optimiert.</td>
-        <td>ob das Testresultat stimmt; ein Nachlauf mit Startwert 11 prüft es.</td>
+        <td>ob sich das Testresultat wiederholen lässt; ein Nachlauf mit Startwert 11 prüft es.</td>
         <td><a href="#reproduktion">Etappe 2</a></td>
       </tr>
       <tr>
-        <td>die Grenzen Ihres Modells benannt.</td>
-        <td>wo das fremde Modell mit Ihren eigenen Klassen an Grenzen stösst.</td>
+        <td>in Reflexion 4 begründet, was Ihr Modell nicht belegt (etwa wegen Hintergrund oder Licht).</td>
+        <td>welche Aussage die Vorhersagen des fremden Modells auf Ihren eigenen Klassen belegen können – und welche nicht.</td>
         <td><a href="#fremdtest">Etappe 3</a> · <a href="#dl8-abschluss">Etappe 4</a></td>
       </tr>
     </tbody>
@@ -54,21 +54,21 @@ Das andere Tandem hat ein Bildmodell mit **zwei festgelegten Klassen** trainiert
 <div class="dl8-compare">
   <article class="dl8-compare-card">
     <span class="dl8-eyebrow">Prüfung 1 · Etappe 2</span>
-    <h3>Gleiche Klassen, neue Testbilder</h3>
+    <h3>Gleiche Klassen, ungesehene Testbilder</h3>
     <p>Das fremde Modell wurde zum Beispiel mit Äpfeln und Birnen trainiert. Es erkennt später einen <strong>anderen, zuvor nie gesehenen Apfel</strong> aus P1/P2. Das ist der Sinn eines unabhängigen Tests: Die Testbilder dürfen vorher <strong>nicht</strong> zum Training verwendet werden.</p>
-    <p><strong>Prüffrage:</strong> Sind T1/T2, V1 und P1/P2 wirklich getrennte Exemplare? Wie gut ist das Resultat auf den passenden, ungesehenen Testbildern?</p>
+    <p><strong>Prüffrage:</strong> Sind T1/T2, V1 und P1/P2 wirklich getrennte Exemplare? Wie gut ist das Resultat auf den passenden, ungesehenen Testbildern? Der Nachlauf prüft nur, ob sich das Ergebnis wiederholen lässt.</p>
   </article>
   <article class="dl8-compare-card">
     <span class="dl8-eyebrow">Prüfung 2 · Etappe 3</span>
     <h3>Ganz andere Klassen</h3>
-    <p>Jetzt zeigen Sie demselben Modell <strong>Tassen und Flaschen</strong> aus Ihrem eigenen Projekt. Es hat dafür keine Ausgänge gelernt und sagt trotzdem «Apfel» oder «Birne».</p>
-    <p><strong>Prüffrage:</strong> Welche Vorhersagen entstehen, und warum beweist eine hohe Trennschärfe dabei keine korrekte Erkennung von Tassen und Flaschen?</p>
+    <p>Jetzt zeigen Sie demselben Modell zwei <strong>ganz andere Klassen</strong> aus Ihrem eigenen Projekt, zum Beispiel Tassen und Flaschen. Notieren Sie vorher einzeln, was Sie erwarten.</p>
+    <p><strong>Prüffrage:</strong> Welche Vorhersagen entstehen? Was lässt sich daraus ableiten, und was nicht? Die Erklärung lesen Sie nach dem Versuch in Etappe 3.</p>
   </article>
 </div>
 
 <aside class="dl8-note">
   <span class="dl8-eyebrow">Merksatz</span>
-  <p>Ein schlechter Fremdtest auf <strong>anderen Klassen</strong> beweist nicht, dass das Tandem schlecht gearbeitet hat. Auch ein scheinbar gutes Resultat beweist nicht, dass das Modell die neuen Klassen gelernt hat. <strong>Neue Bilder bekannter Klassen</strong> und <strong>völlig neue Klassen</strong> sind zwei unterschiedliche Prüfungen.</p>
+  <p>Ein schlechter Fremdtest auf <strong>anderen Klassen</strong> beweist nicht, dass das Tandem schlecht gearbeitet hat. <strong>Neue Bilder bekannter Klassen</strong> und <strong>völlig neue Klassen</strong> sind zwei unterschiedliche Prüfungen.</p>
 </aside>
 
 <nav class="page-next" aria-label="Weiter in Doppellektion 8">

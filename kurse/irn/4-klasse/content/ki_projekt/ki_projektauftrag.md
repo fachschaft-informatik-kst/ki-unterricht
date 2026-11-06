@@ -86,8 +86,10 @@ Die Lehrperson bietet kurze Beratungen zu Ihren Fragen an, statt die Klasse bei 
 
 | Zeitpunkt | Rahmen |
 |---|---|
-| Doppellektion 4 | Thema und zwei Klassen freigeben lassen; fünf unabhängige Gruppen skizzieren |
-| bis Doppellektion 5 | Datenplan prüfen und möglichst die Fotos sammeln; fehlende Fotos während der Projektarbeit gezielt ergänzen |
+| Doppellektion 4 | Vorbereitungsauftrag: Thema und zwei Klassen aus der Themenliste wählen und zehn verschiedene Exemplare besorgen (fünf je Klasse); noch nicht fotografieren, keine Datenplanung |
+| Anfang Doppellektion 5 | Lehrperson gibt Thema und zwei Klassen frei, während die Tandems den Lernpfad zur Datenaufteilung lesen |
+| Doppellektion 5 | Lernpfad, dann Exemplarliste (fünf unabhängige Gruppen) planen und abnehmen lassen; erst danach fotografieren |
+| Mitte Doppellektion 6 | Fotos importiert; fehlen sie noch, sofort mit der Lehrperson klären: gezielt nachfotografieren oder Modus `ERSATZ` (Übungsformen, offen als Ersatzdaten gekennzeichnet) |
 | Doppellektionen 5–7 | Eigener Etappenplan, selbstständige Arbeit, Beratung und laufende Sicherung; Etappen frei auf die Zeit verteilen |
 | vor Beginn der Doppellektion 8 | Vollständiges ZIP über den Abgabekanal einreichen |
 | Doppellektion 8 | Fachgespräch; parallel selbstständige Fremdauswertung mit Rückmeldung |
@@ -98,10 +100,10 @@ Die **20 Einzelgespräche** finden mit **einer Lehrperson** direkt ab Beginn der
 
 Arbeiten Sie im Tandem selbstständig und pausieren Sie jeweils nur für Ihr persönliches Einzelgespräch; die andere Person kann weiterarbeiten. Die gemeinsame Fremdauswertung ist **verbindlich, aber unbenotet (K11)**; nur die persönliche Reflexion K12 zählt 3 Punkte; die bewertete eigene Abgabe bleibt unverändert.
 
-1. Öffnen Sie das zugeteilte fremde Projekt im **privaten Browserfenster**. Legen Sie Ihre eigene Fotostudio-JSON separat bereit; stellen Sie das eigene ZIP dort nicht wieder her. Datenrechte und Bildfreigaben beachten.
+1. **Dateien vorbereiten, ca. 10 Minuten:** Öffnen Sie das zugeteilte fremde Projekt im **privaten Browserfenster**. Die Lehrperson teilt Ihnen ein Projekt mit anderen Klassen als Ihren zu. Legen Sie Ihre eigene Fotostudio-JSON separat bereit; stellen Sie das eigene ZIP dort nicht wieder her. Datenrechte und Bildfreigaben beachten. Läuft nichts, hilft die Notfallkarte auf der Seite «Dateien vorbereiten» (Referenzpaket der Lehrperson).
 2. **Daten und Ergebnisse untersuchen, ca. 20 Minuten:** Vergleichen Sie T1/T2 (Training), V1 (Validierung) und P1/P2 (unabhängiger Abschlusstest) im fremden Projekt. Prüfen Sie mindestens ein konkretes Trainings- und Testexemplar und lesen Sie Originalwerte A/B sowie das Testergebnis. Lassen Sie das fremde Notebook einmal mit Startwert 11 nachlaufen und vergleichen Sie einen Wert. Drei Startwerte sind freiwillig.
 3. **Pflichtversuch mit den eigenen Klassen, ca. 15 Minuten:** Lassen Sie dasselbe Modell eigene Bilder aus Ihren **zwei anderen Klassen** vorhersagen. Protokollieren Sie die Vorhersagen und untersuchen Sie Beispiele. Die Vorhersagen sind **keine Trefferquote für diese Klassen**: Das fremde Modell kennt nur seine ursprünglichen zwei Klassen. Seine P1/P2-Bilder sind dagegen neue Exemplare **derselben** Klassen und gehören gerade nicht ins Training.
-4. **Erst danach reflektieren:** Gemeinsam zwei Sätze als Rückmeldung formulieren; jede Person beantwortet **zwei kurze Pflichtfragen** zu Originalergebnissen, Experiment, Datenrollen, Grenzen und nächstem Test. Separates ZIP herunterladen und einreichen.
+4. **Erst danach reflektieren:** Gemeinsam zwei Sätze als Rückmeldung für das geprüfte Tandem formulieren (die Lehrperson gibt sie in Doppellektion 9 aus); jede Person beantwortet **zwei kurze Pflichtfragen** zu Originalergebnissen, Experiment, Datenrollen, Grenzen und nächstem Test. Separates ZIP herunterladen und einreichen, danach fremdes ZIP und entpackten Ordner löschen; das private Fenster erst nach dem Download schliessen.
 
 Für Gespräch, Wiedereinstieg und Technik bleibt Reserve. Bei einem nicht lösbaren Trainingsproblem werten Sie die gespeicherten fremden Ausgaben aus und dokumentieren ausdrücklich, welcher Versuch nicht möglich war. Die Auswertung entfällt nicht, aber Sie behaupten keinen erfolgreichen Test. Erhaltene Fotos nur für diesen Auftrag verwenden und nach der vereinbarten Aufbewahrungsregel löschen.
 
@@ -109,7 +111,11 @@ Für Gespräch, Wiedereinstieg und Technik bleibt Reserve. Bei einem nicht lösb
 
 Elf benotete Kriterien mit je **0–3 Punkten**, maximal **33 Punkte**. K1–K6: gemeinsame Projektabgabe (18); K7–K10: individuelles Fachgespräch (12); K12: persönliche Fremdreflexion (3). K11 ist der verbindliche, **unbenotete** Daten- und Ergebnischeck.
 
-**Note = 1 + 5 × Punktesumme / 33**, auf Viertelnoten gerundet. 16,5 Punkte → 3,5; 24,75 → 4,75; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
+**Note = 1 + 5 × Punktesumme / 33**, auf Viertelnoten gerundet. 16 Punkte → 3,5; 22 (alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
+
+## Hilfsmittel und KI
+
+Erlaubt ist KI als **Sprachhilfe** (Formulieren, Korrigieren, Begriffe erklären). **Zahlen, Beobachtungen und Deutungen** stammen von Ihnen und aus Ihrem Versuch, nicht aus einer KI-Ausgabe. Geben Sie im Journal an, welche Hilfen Sie wofür benutzt haben; im Gespräch müssen Sie jede Zahl und jede Aussage am Journal belegen können («Wo steht das im Journal, welche Zahl?»).
 
 Die Leistungsstufen stehen im [Bewertungsraster](../../worksheets/md/KI_Bewertungsraster.md) und auf der [Kursseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/#bewertung). Die Punkteauswahl dient nur der Selbsteinschätzung.
 

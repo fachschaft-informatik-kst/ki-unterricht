@@ -54,12 +54,12 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mi
               <tr>
                 <td>4. Doppellektion</td>
                 <td>XOR und die Grenzen eines einzelnen Neurons untersuchen</td>
-                <td>Erklärung der Zwischenschicht; noch keine Pflicht zur Datenplanung</td>
+                <td>Erklärung der Zwischenschicht; Vorbereitungsauftrag: Thema und zwei Klassen wählen, Gegenstände besorgen (noch nicht fotografieren, keine Datenplanung)</td>
               </tr>
               <tr>
                 <td>Doppellektionen 5–7</td>
-                <td>In DL5 Datenaufteilung selbstständig erarbeiten; anschliessend Tagesziele und Arbeitsphasen selbst planen</td>
-                <td>Datencheck → Vergleich → begründete Auswahl → Test → Fazit; Etappen frei auf die Zeit verteilen</td>
+                <td>In DL5 Datenaufteilung selbstständig erarbeiten, Exemplarliste abnehmen lassen und erst dann fotografieren; anschliessend Tagesziele und Arbeitsphasen selbst planen</td>
+                <td>Meilensteine: Ende DL 5 Exemplarliste abgenommen, Mitte DL 6 Fotos importiert. Datencheck → Vergleich → begründete Auswahl → Test → Fazit; Etappen frei auf die Zeit verteilen</td>
               </tr>
               <tr>
                 <td>Vor Beginn der Doppellektion 8</td>

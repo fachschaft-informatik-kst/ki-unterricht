@@ -66,7 +66,9 @@ Rechnen Sie nach: **2 Klassen × 5 Gruppen × 8 Fotos = 80 Bilder**. Insgesamt s
 4. Sind beide Klassen mit je 40 Fotos vertreten und die Quellen dokumentiert?
 5. Können Sie in einem Satz erklären, warum eine hohe Trefferquote auf bekannten Bildern kein unabhängiger Test ist?
 
-Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das Ergebnis in **Reflexion 2 des bestehenden Journals** fest – kein neues Formular und keine zusätzliche Abgabe. Sichern Sie Ihre Arbeit unter «Notizen &amp; Projekt» als ZIP. Bei offenen Fragen benutzen Sie zuerst die Musterlösung und die Notebook-Erklärungen im Lernpfad [«Datenregeln lernen»](#projekt-regeln).
+Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das Ergebnis in **Reflexion 2 des bestehenden Journals** fest – kein neues Formular und keine zusätzliche Abgabe (Reflexion 2 darf in DL 6 abgeschlossen werden). Sichern Sie Ihre Arbeit unter «Notizen &amp; Projekt» als ZIP. Bei offenen Fragen benutzen Sie zuerst die Musterlösung und die Notebook-Erklärungen im Lernpfad [«Datenregeln lernen»](#projekt-regeln).
+
+**Abnahme vor dem Fotografieren:** Lassen Sie die Exemplarliste von der Lehrperson oder einem Nachbartandem anhand dieser fünf Fragen abnehmen (ca. 2 Minuten). **Erst danach fotografieren.** Richtwerte: Ende DL 5 Liste abgenommen und Fotos begonnen, Mitte DL 6 Fotos importiert. Testen Sie den Übertragungsweg Handy → Laptop vorab mit einem einzigen Foto. Fehlen Fotos noch in der Mitte von DL 6, melden Sie sich bei der Lehrperson: Nachfotografieren oder der Modus `ERSATZ` mit offen gekennzeichneten Übungsformen.
 <!-- MD:END -->
       <p><a href="#journal">Zur Reflexion im Journal →</a> · <a href="#sicherung">Stand als ZIP sichern →</a></p>
     </div>

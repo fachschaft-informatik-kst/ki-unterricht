@@ -72,17 +72,17 @@ Zum Ausprobieren und Wiederholen: Python-Zellen öffnen, bearbeiten und mit Shif
     <div class="callout">
       <strong>Ein Lauf ist eine Beobachtung, kein Beweis.</strong>
       <!-- MD:START -->
-Wenige Exemplare und ein Startwert begrenzen die Aussage. B muss nicht besser sein.
+Wenige Exemplare und ein Startwert begrenzen die Aussage. B muss nicht besser sein. **V1 sind 16 Bilder, aber nur ein Exemplar je Klasse:** 16 Bilder sind nicht 16 unabhängige Tests, und ein Bild entspricht 6,25 Prozentpunkten. Faustregel (Richtwert, kein statistisches Kriterium): Ein Unterschied von höchstens zwei Bildern ist kein Beleg. Bei Gleichstand begründen Sie Ihre Wahl mit einem anderen Argument, zum Beispiel mit einzelnen Vorhersagen.
 <!-- MD:END -->
     </div>
     <details>
       <summary>Was halten wir fest?</summary>
       <div class="detail-body">
         <!-- MD:START -->
-Vorher: Vermutung. Nachher: Trefferquoten, Unterschied in Prozentpunkten und konkrete Beispiele. Modellwahl vor dem Abschlusstest begründen.
+Vorher: Vermutung. Nachher: richtig/gesamt auf V1 (zum Beispiel 11 von 16), Unterschied in Bildern und konkrete Beispiele. Modellwahl vor dem Abschlusstest begründen.
 <!-- MD:END -->
         <!-- MD:START -->
-Die Bilder von A und B unterscheiden sich. Ähnliche Aufnahmebedingungen verwenden; mögliche Einflüsse von Hintergrund und Licht offen benennen.
+Die Bilder von A und B unterscheiden sich. Ähnliche Aufnahmebedingungen verwenden; mögliche Einflüsse von Hintergrund und Licht offen benennen. Gleich bleiben bei A und B: Bildzahl, Netz, Epochen, Startwert und Validierungsbilder. Nur so lässt sich ein Unterschied der Vielfalt zuschreiben.
 <!-- MD:END -->
       </div>
     </details>

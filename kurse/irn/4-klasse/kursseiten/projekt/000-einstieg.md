@@ -33,18 +33,18 @@ Lernpfad zur fairen Datenaufteilung mit Fallbeispiel, Selbstcheck und Übungsnot
       <div class="roadmap-body">
         <div class="roadmap-head"><strong>Anwendung und Vermutung</strong><span class="roadmap-meta">Richtwert DL 5 · Reflexion 1</span></div>
         <!-- MD:START -->
-Wählen Sie zwei Klassen. Formulieren Sie einen Nutzen und vermuten Sie: Helfen vielfältigere Trainingsbilder?
+Wählen Sie zwei Klassen (Vorbereitungsauftrag aus DL 4). Formulieren Sie einen Nutzen und vermuten Sie: Helfen vielfältigere Trainingsbilder? Die Lehrperson gibt Thema und Klassen zu Beginn von DL 5 frei.
 <!-- MD:END -->
-        <label class="check"><input data-check="phase-1" type="checkbox"/><span>Unser Steckbrief ist mit der Lehrperson besprochen.</span></label>
+        <label class="check"><input data-check="phase-1" type="checkbox"/><span>Thema und zwei Klassen sind mit der Lehrperson besprochen und freigegeben.</span></label>
       </div>
       <a class="btn roadmap-go" href="#projekt-2">Thema wählen →</a>
     </li>
     <li class="roadmap-step" id="projekt-etappe-2">
       <span class="roadmap-nr" aria-hidden="true">02</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>80 Fotos vorbereiten</strong><span class="roadmap-meta">Richtwert DL 5–6 · Reflexion 2</span></div>
+        <div class="roadmap-head"><strong>80 Fotos vorbereiten</strong><span class="roadmap-meta">Richtwert DL 5–6 · Reflexion 2 (darf in DL 6 enden)</span></div>
         <!-- MD:START -->
-Fünf unabhängige Gruppen, zwei Klassen, je acht Fotos. Dieselben Objekte bleiben immer in derselben Gruppe. Beide Klassen unter gleichen Bedingungen fotografieren (Hintergrund, Licht); Personen nur mit Einverständnis.
+Fünf unabhängige Gruppen, zwei Klassen, je acht Fotos. Dieselben Objekte bleiben immer in derselben Gruppe. Erst die Exemplarliste abnehmen lassen, dann fotografieren: Ende DL 5 Liste abgenommen, Mitte DL 6 Fotos importiert. Beide Klassen unter gleichen Bedingungen fotografieren (Hintergrund, Licht); Personen nur mit Einverständnis.
 <!-- MD:END -->
         <label class="check"><input data-check="phase-2" type="checkbox"/><span>Unsere Daten sind geprüft und sauber aufgeteilt.</span></label>
       </div>

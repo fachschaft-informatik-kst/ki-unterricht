@@ -39,9 +39,28 @@ open: false
   </li>
 </ol>
 
-<label class="field answer"><span>Gemeinsamer Prüfbericht (Pflicht, unbenotet): Fremde Klassen · T1/T2 vs. P1/P2 (konkrete Exemplare/Quellen) · Original A/B auf V1 und Test P1/P2 · ein eigener Vergleichswert · eine Rückfrage</span><textarea data-journal="reproduktion" data-optional="" maxlength="20000" rows="6" placeholder="Klassen des fremden Modells: … / Trainings- und Testexemplare: … / Möglicher Datenleck- oder Hintergrundeffekt: …&#10;Original: A/V1 …, B/V1 …, Abschlusstest …; unser Nachlauf: V1 …, Test …&#10;Warum P1/P2 nicht ins Training gehören: … / Unsere Rückfrage: …"></textarea></label>
+<div class="dl8-section-head"><h3>Gemeinsamer Prüfbericht in fünf Zeilen</h3><span class="dl8-meta">Pflicht · unbenotet (K11)</span></div>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Prüfpunkt</th>
+        <th scope="col">Was notieren Sie?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1 · T1/T2: Klassen und unabhängige Exemplare</td><td>die beiden Klassen und mindestens ein Trainingsexemplar</td></tr>
+      <tr><td>2 · V1: getrennt, für die Auswahl verwendet</td><td>ob V1 ein anderes Exemplar zeigt als T1/T2</td></tr>
+      <tr><td>3 · P1/P2: getrennt, erst nach der Auswahl getestet</td><td>mindestens ein Testexemplar; auffälliger Hintergrund oder auffällige Quelle; warum P1/P2 nicht ins Training gehören</td></tr>
+      <tr><td>4 · A/B-Werte auf V1 und begründete Modellwahl</td><td>Originalwerte, Ihr Nachlauf und eine Abweichung, falls vorhanden</td></tr>
+      <tr><td>5 · Originaltest auf P1/P2</td><td>Originalwert, Ihr Nachlauf und eine faire Rückfrage an das Tandem</td></tr>
+    </tbody>
+  </table>
+</div>
 
-<p class="small"><strong>Technischer Hinweis:</strong> Stimmen Ergebnisse nicht genau überein, dokumentieren Sie dies. Eine identische <code>daten_sha256</code>-Prüfsumme kann zusätzlich helfen, ist aber <strong>kein Pflichtfeld</strong>. Falls das Notebook nicht startet, verwenden Sie die von der Lehrperson bereitgelegten Originalergebnisse und kennzeichnen den fehlenden eigenen Versuch ausdrücklich.</p>
+<label class="field answer"><span>Gemeinsamer Prüfbericht (Pflicht, unbenotet): je Prüfpunkt 1–5 eine Zeile mit Beleg oder Beobachtung, dazu eine faire Rückfrage</span><textarea data-journal="reproduktion" data-optional="" maxlength="20000" rows="6" placeholder="1 T1/T2: Klassen …, Trainingsexemplar …&#10;2 V1: …&#10;3 P1/P2: Testexemplar …, Hintergrund/Quelle …; nicht ins Training, weil …&#10;4 A/B auf V1: Original …, unser Nachlauf …; Modellwahl …&#10;5 Originaltest: Original …, unser Nachlauf … / Unsere Rückfrage: …"></textarea></label>
+
+<p class="small"><strong>Technischer Hinweis:</strong> Der Nachlauf prüft die <strong>Wiederholbarkeit</strong> (gleiche Daten, gleicher Startwert), nicht, ob das Modell mit anderen Daten gleich abschneiden würde. Stimmen Ergebnisse nicht genau überein, dokumentieren Sie dies; meist liegt eine verwechselte Datei vor. Eine identische <code>daten_sha256</code>-Prüfsumme kann zusätzlich helfen, ist aber <strong>kein Pflichtfeld</strong>. Falls das Notebook nicht startet, folgen Sie der <a href="#dl8-notfall">Notfallkarte</a> und kennzeichnen den fehlenden eigenen Versuch ausdrücklich.</p>
 
 <details>
   <summary>Freiwillige Vertiefung, kein Pflichtteil · drei Startwerte</summary>

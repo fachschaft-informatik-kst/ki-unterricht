@@ -7,7 +7,7 @@
 
 **Tandem · 5 Min.**
 
-Öffnen Sie den SOL-Lernpfad und lesen Sie das Ziel. Notieren Sie vorab: «Ein fairer Test müsste …». Behalten Sie diese Vermutung für die spätere Selbstkontrolle.
+Öffnen Sie den SOL-Lernpfad und lesen Sie das Ziel. Notieren Sie vorab: «Ein fairer Test müsste …» und greifen Sie dazu Ihre Vorschau-Antwort aus DL 4 auf. Behalten Sie diese Vermutung für die spätere Selbstkontrolle. Halten Sie Thema und zwei Klassen aus dem Vorbereitungsauftrag bereit: Die Lehrperson gibt sie in den ersten zehn Minuten frei (ca. eine Minute je Tandem).
 
 ### Vorwissen aktivieren · 5 Min. · Bekannt oder neu?
 
@@ -27,7 +27,11 @@ Lesen Sie danach [«Wer weiss was?»](index.html#projekt-wer-weiss-was) und noti
 
 Klärt Etappenplan, fünf Reflexionen, Raster, Abgabekanal, Frist **vor DL8** und ZIP-Sicherung. Die folgenden Fachkarten sind zum **selbstständigen Lesen**, nicht als zusätzlicher Vortrag gedacht. Hilfe auf konkrete Fragen.
 
-**Arbeitsvereinbarung:** Name A / Name B: ____________________ · Tagesziel: ____________________ · Rollen heute: ____________________ · Abgabekanal und Frist: ____________________.
+**Foto-Fahrplan:** erst Lernpfad und Exemplarliste, dann **Abnahme der Liste** (Lehrperson oder Nachbartandem, ca. 2 Min.), **erst danach fotografieren**. Richtwerte: Ende DL 5 Liste abgenommen und Fotos begonnen, Mitte DL 6 Fotos importiert.
+
+**Arbeitsvereinbarung:** Name A / Name B: ____________________ · Tagesziel: ____________________ · Rollen heute (wechseln Sie sie in jeder Lektion): ____________________ · Bei Absenz einer Person: ____________________ · Abgabekanal und Frist: ____________________.
+
+**Fortschrittstafel:** Auf einem Plakat oder an der Tafel tragen die Tandems selbst ihre Meilensteine ein (Liste abgenommen · Fotos importiert · A/B-Vergleich · Test · ZIP). Die Lehrperson erkennt bei Rundgängen, wer Unterstützung braucht.
 
 ### Verarbeiten · 60 Min. · Datenplan selbst erarbeiten
 
@@ -76,7 +80,9 @@ Unsere zwei Klassen: ____________________ / ____________________.
 
 **Allein, 10 Min.:** Prüfen Sie ein eigenes P1-Beispiel. Ist es wirklich unabhängig? Notieren Sie einen möglichen Fehler und die Korrektur.
 
-**Etappenplan im Journal:** Daten vervollständigen → A/B vergleichen → Auswahl vor Test dokumentieren → einmaliger Abschlusstest → Reflexion und ZIP. Halten Sie Vermutung, Tagesziel, Rollen und Reflexion 1–2 fest. Wer bereit ist, beginnt mit Sammeln oder Importieren; heute besteht **keine Trainingspflicht**. Zehn Minuten bleiben Puffer.
+**Abnahme vor dem Fotografieren (ca. 2 Min.):** Lassen Sie die Liste anhand der fünf Abschlussfragen auf [Daten &amp; Fotos](index.html#projekt-3) von der Lehrperson oder einem Nachbartandem prüfen. Testen Sie vorab den Weg Handy → Laptop mit einem Foto.
+
+**Etappenplan im Journal:** Daten vervollständigen → A/B vergleichen → Auswahl vor Test dokumentieren → einmaliger Abschlusstest → Reflexion und ZIP. Halten Sie Vermutung, Tagesziel, Rollen und Reflexion 1 fest; Reflexion 2 darf in DL 6 abgeschlossen werden. Wer die Abnahme hat, beginnt mit dem Fotografieren; heute besteht **keine Trainingspflicht**. Zehn Minuten bleiben Puffer.
 
 ### Auswerten · 10 Min. · Selbstcheck und Sicherung
 
@@ -85,6 +91,7 @@ Unsere zwei Klassen: ____________________ / ____________________.
 - Können wir Training, Validierung und Test unterscheiden?
 - Ist jedes Exemplar genau einer Gruppe zugeordnet? Sind es 80 Bilder?
 - Haben beide Klassen vergleichbare Aufnahmebedingungen und erlaubte Bildquellen?
+- Ist die Exemplarliste abgenommen? Welche Fotos fehlen noch bis Mitte DL 6?
 - Haben wir Datenplan und Reflexionen korrigiert, den Stand als ZIP gesichert und einen nächsten Schritt notiert?
 
 **Weiterarbeiten:** [Projekt-Notebook](materialien/downloads/ki_tandemprojekt.ipynb) · [Lernlabor als Hilfe](materialien/downloads/ki_lernlabor.ipynb). Keine Pflicht, bereits zum selben Stand wie andere Tandems zu gelangen.
@@ -126,7 +133,9 @@ Wählen Sie nur die Hilfe für Ihr aktuelles Problem: [Datenplan](index.html#pro
 | Vergleichsgrundlage | V1 | dieselbe V1-Gruppe |
 | P1 / P2 | bis zur Auswahl geschlossen | bis zur Auswahl geschlossen |
 
-Prüfen Sie **vor jedem Lauf** Datenrollen, Exemplare und Labels. Fehlende Daten zuerst ergänzen. Ein Vergleich bei zusätzlich geänderter Bildzahl oder anderem Netz isoliert nicht die Datenvielfalt.
+Prüfen Sie **vor jedem Lauf** Datenrollen, Exemplare und Labels. Fehlende Daten zuerst ergänzen. Ein Vergleich bei zusätzlich geänderter Bildzahl oder anderem Netz isoliert nicht die Datenvielfalt. Notieren Sie, **was bei A und B gleich bleibt** (Bildzahl, Netz, Epochen, Startwert, Validierungsbilder) und warum das für einen fairen Vergleich nötig ist.
+
+**Foto-Check Mitte DL 6:** Die Lehrperson geht einmal durch die Reihen. Ohne importierte Fotos: sofort mit der Lehrperson klären, ob gezielt nachfotografiert oder offen gekennzeichnet mit dem Modus `ERSATZ` (Übungsformen, keine echten Fotos) weitergearbeitet wird. Im Journal und im Protokoll steht dann, dass es Ersatzdaten sind.
 
 #### Ergebnisprotokoll · Beobachtung vor Erklärung
 
@@ -134,9 +143,11 @@ Prüfen Sie **vor jedem Lauf** Datenrollen, Exemplare und Labels. Fehlende Daten
 |---|---|---|---|---|
 | ____________________ | ____________________ | ____________________ | ____________________ | ____________________ |
 
+**Was V1 aussagen kann:** V1 sind 16 Bilder, aber nur **ein Exemplar je Klasse** (acht Fotos desselben Gegenstands). 16 Bilder sind darum nicht 16 unabhängige Tests. Ein Bild entspricht 6,25 Prozentpunkten. **Faustregel (Richtwert, kein statistisches Kriterium):** Ein Unterschied von höchstens zwei Bildern ist kein Beleg. In DL 4 haben Sie gesehen, dass schon ein anderer Startwert ein anderes Ergebnis geben kann.
+
 Übernehmen Sie **tatsächliche** Ausgaben. Begründen Sie die Auswahl in **Reflexion 3 vor Testeinsicht**:
 
-«Wir wählen …, weil auf V1 … . Das Beispiel … zeigt … . Eine andere Erklärung wäre … . Der Vergleich belegt noch nicht …».
+«Wir wählen …, weil auf V1 … . Das Beispiel … zeigt … . Eine andere Erklärung wäre … . Der Vergleich belegt noch nicht …». **Bei Gleichstand:** «Beide Varianten sind auf V1 gleichwertig; wir wählen …, weil …» (anderes Argument, etwa konkrete Vorhersagen).
 
 **Allein, 10 Min.:** Bearbeiten Sie einen abgegrenzten Teil Ihrer Etappe und sichern Sie einen Beleg, etwa eine überprüfte Gruppenzuordnung oder eine erklärte Vorhersage. Danach zusammenführen. Zehn Minuten bleiben Puffer.
 
@@ -150,7 +161,7 @@ Prüfen Sie **vor jedem Lauf** Datenrollen, Exemplare und Labels. Fehlende Daten
 |---|---|---|---|
 | ____________________ | ____________________ | ____________________ | ______ |
 
-Aktualisieren Sie den Etappenplan im Journal. Bei gefährdeter Abgabe jetzt eine realistische Lösung innerhalb der Projektregeln vereinbaren. [Bewertungsraster](index.html#bewertung).
+Aktualisieren Sie den Etappenplan im Journal. **Peer-Tausch (ca. 4 Min.):** Tauschen Sie Reflexion 1–3 mit einem Nachbartandem; je eine belegte Stärke und eine Rückfrage. Bei gefährdeter Abgabe jetzt eine realistische Lösung innerhalb der Projektregeln vereinbaren. [Bewertungsraster](index.html#bewertung).
 
 <!-- lesson:07 -->
 ## Doppellektion 07
@@ -177,7 +188,7 @@ Wenn eine Voraussetzung fehlt, zuerst diese Lücke bearbeiten. Ein bereits mehrf
 
 **Tandem · 2 Min.**
 
-Gleichen Sie offene Belege mit dem Raster ab. Lesen Sie die vorab verteilten vierminütigen Gesprächszeiten und Austauschregeln für DL8. Fragen Sie gezielt nach; es gibt keinen neuen gemeinsamen Pflichtversuch.
+Gleichen Sie offene Belege mit dem Raster ab. Lesen Sie die Gesprächszeiten, den Austauschpartner und die Austauschregeln für DL8, die die Lehrperson zu Beginn der Lektion mitgeteilt hat. Fragen Sie gezielt nach; es gibt keinen neuen gemeinsamen Pflichtversuch.
 
 ### Verarbeiten · 70 Min. · Test, Grenzen und Reflexion
 
@@ -185,9 +196,9 @@ Gleichen Sie offene Belege mit dem Raster ab. Lesen Sie die vorab verteilten vie
 
 #### Abschlusstest · Auswahl einfrieren
 
-Testen Sie die begründet ausgewählte Variante **einmal auf P1/P2**. Notieren Sie:
+Testen Sie die begründet ausgewählte Variante **einmal auf P1/P2**. Das Notebook meldet beide Testgruppen zusammen. Notieren Sie:
 
-| Gewählte Variante / dokumentierte Auswahl | P1: richtig / gesamt | P2: richtig / gesamt | Gesamtresultat und Grenze |
+| Gewählte Variante / dokumentierte Auswahl | Testergebnis P1 + P2 zusammen: richtig / gesamt | Warum erst jetzt P1/P2? | Gesamtresultat und Grenze |
 |---|---|---|---|
 | ____________________ | ____________________ | ____________________ | ____________________ |
 
@@ -214,7 +225,7 @@ Falls keine Fehler auftreten, untersuchen Sie drei richtige Beispiele und die Gr
 | Journal mit fünf Reflexionen und Auswahl vor Testeinsicht | ______ |
 | Notebook mit sichtbaren Ausgaben und Versuchsprotokoll | ______ |
 | Eigene Daten / Fotostudio-JSON gemäss Abgabeauftrag | ______ |
-| Finales ZIP heruntergeladen und Inhalt geprüft | ______ |
+| Finales ZIP heruntergeladen, in einem privaten Fenster probeweise wiederhergestellt (Journal, Notebook, Fotostudio-JSON vorhanden) | ______ |
 | Über vereinbarten Kanal **vor Beginn DL8 eingereicht** | ______ |
 | Erlaubte Austauschdateien und eigene JSON getrennt bereit | ______ |
 
