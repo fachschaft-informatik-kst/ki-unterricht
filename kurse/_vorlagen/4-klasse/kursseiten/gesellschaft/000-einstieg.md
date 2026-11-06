@@ -12,6 +12,4 @@
   </div>
 </details>
 <!-- /LESSONS:gesellschaft -->
-<div class="callout" id="gesellschaft-pflichtweg">
-  <p><strong>Pflichtweg:</strong> Kapitel <a href="#gesellschaft-1">1</a> → <a href="#wmd">2</a> → <a href="#rueckkopplung">3</a> → <a href="#urteil">5</a> → <a href="#rueckblick-themenblock">6</a>. <strong>Wahl:</strong> Kapitel <a href="#kritisch">4</a> (Debatte); ihre fünf Leitfragen dürfen Sie im Fallgespräch trotzdem nutzen.</p>
-</div><p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-fairness">Fairness</a> · <a href="#glossar-bias-daten">Datenverzerrung</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-fairness">Fairness</a> · <a href="#glossar-bias-daten">Datenverzerrung</a></p>

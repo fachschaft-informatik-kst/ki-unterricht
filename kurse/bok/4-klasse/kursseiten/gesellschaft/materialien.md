@@ -1,6 +1,6 @@
 ## Doppellektion 10
 
-**Bereitlegen:** [Cathy O’Neils TED Talk](https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end) (englisch: Wiedergabe und Untertitel vorab prüfen oder das Transkript der TED-Seite bereithalten), Papier und diese Fallkarten. Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock; keine zusätzliche Pro/Contra-Raumaufteilung. Die Debatte (Kapitel 4) ist Vertiefung.
+**Bereitlegen:** [Cathy O’Neils TED Talk](https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end) (englisch: Wiedergabe und Untertitel vorab prüfen oder das Transkript der TED-Seite bereithalten), Papier und diese Fallkarten. Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock; keine zusätzliche Pro/Contra-Raumaufteilung.
 
 ### Ankommen · 5 Min. · Eine erste Position
 

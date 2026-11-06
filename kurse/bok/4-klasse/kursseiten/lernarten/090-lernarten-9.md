@@ -1,6 +1,6 @@
-<details class="kapitel" id="lernarten-9" data-kurz="Wahl · Begriffe und passende Rückmeldungen als Paare finden.">
+<details class="kapitel" id="lernarten-9" data-kurz="Begriffe und passende Rückmeldungen als Paare finden.">
   <summary><span class="kapitel-nr">9</span>
-    <h2 class="kapitel-titel">Wissenssicherung: Lernarten zuordnen (Wahl)</h2>
+    <h2 class="kapitel-titel">Wissenssicherung: Lernarten zuordnen</h2>
   </summary>
   <div class="kapitel-body detail-body">
     <!-- MD:START -->

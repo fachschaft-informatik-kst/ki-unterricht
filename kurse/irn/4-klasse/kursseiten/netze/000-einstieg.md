@@ -15,7 +15,4 @@
   </div>
 </details>
 <!-- /LESSONS:netze -->
-<div class="callout" id="netze-pflichtweg">
-  <p><strong>Pflichtweg:</strong> Kapitel <a href="#netze-1">1</a> → <a href="#netze-2">2</a> → <a href="#netze-3">3</a> → <a href="#netze-4">4</a>. Die Rechnung in Kapitel 1 (Niveau B) ist Vertiefung. <strong>Wahl:</strong> Kapitel <a href="#netze-5">5</a> (Ziffern erkennen).</p>
-</div>
 <p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-xor">XOR</a> · <a href="#glossar-schicht">Zwischenschicht</a> · <a href="#glossar-aktivierungsfunktion">Aktivierungsfunktion</a></p>

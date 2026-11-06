@@ -14,7 +14,7 @@
       "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
       "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
       "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung.",
-      "zeit": "Pflichtkern: XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Pflichtnotebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo; selbst durchführen und das separate Ziffern-Notebook sind freiwillig. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Pflichtweg der Kursseite: Kapitel 1 (die Rechnung dort ist Niveau B), 2, 3 und 4; Kapitel 5 (Ziffern) ist Wahl. Als Abschluss dient eine fünfminütige unbenotete Sicherung mit zwei Fragen; offene Punkte vor SOL-Beginn anhand des Lernlabors klären.",
+      "zeit": "Pflichtkern: XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Pflichtnotebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo; selbst durchführen und das separate Ziffern-Notebook sind freiwillig. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient eine fünfminütige unbenotete Sicherung mit zwei Fragen; offene Punkte vor SOL-Beginn anhand des Lernlabors klären.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -67,13 +67,13 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 5,
-              "text": "Zeichnet die vier XOR-Punkte an die Tafel; die Klasse versucht, eine Gerade einzuzeichnen, und begründet, warum keine einzelne Gerade die beiden Zielklassen trennt. Die algebraischen Bedingungen nur nennen: Sie sind Niveau B und werden nicht vorgeführt."
+              "text": "Zeichnet die vier XOR-Punkte an die Tafel; die Klasse versucht, eine Gerade einzuzeichnen, und begründet, warum keine einzelne Gerade die beiden Zielklassen trennt. Die algebraischen Bedingungen nur nennen und nicht vorführen: Das Tandem schreibt sie im Anschluss selbst auf."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Schreiben Sie für jede der vier XOR-Zeilen die Bedingung an w₁, w₂ und b auf (Ausgabe 1 heisst Summe ≥ 0, Ausgabe 0 heisst Summe < 0) und markieren Sie, welche Bedingungen sich widersprechen. Vergleichen Sie danach mit der Tabelle im Kurskapitel (Niveau B)."
+              "text": "Schreiben Sie für jede der vier XOR-Zeilen die Bedingung an w₁, w₂ und b auf (Ausgabe 1 heisst Summe ≥ 0, Ausgabe 0 heisst Summe < 0) und markieren Sie, welche Bedingungen sich widersprechen. Vergleichen Sie danach mit der Tabelle im Kurskapitel."
             },
             {
               "art": "Input",

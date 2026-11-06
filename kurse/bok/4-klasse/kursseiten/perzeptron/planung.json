@@ -14,7 +14,7 @@
       "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und was unverändert bleibt.",
       "product": "Eine nachvollziehbare Schwimmbad- und AND-Rechnung, passende Parameter für AND/OR und ein erklärter Lernschritt.",
-      "zeit": "Pflichtkern: Schwimmbad-Neuron (Experiment 1) und Lernschritt (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2). Experiment 3 selbst durchzuführen ist freiwillig. Pflichtweg der Kursseite: Kapitel 1, 3, 4, 5 (Experiment 2) und 7; Kapitel 2 (Selbststudium) und 6 sind Wahl. Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt.",
+      "zeit": "Pflichtkern: Schwimmbad-Neuron (Experiment 1) und Lernschritt (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2). Experiment 3 selbst durchzuführen ist freiwillig. Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt.",
       "phases": [
         {
           "phase": "Ankommen",

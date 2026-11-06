@@ -24,11 +24,11 @@ Rechnen Sie gemeinsam für AND die Eingabe (1,1) mit w₁ = w₂ = 1 und b = −
 
 **Klasse · XOR-Rätsel am Beamer (zuerst vermuten):** Im Notebook «XOR: Ein Neuron» sagt die Klasse zuerst vorher, wie viele der vier Fälle ein Neuron schaffen kann. Dann schlägt sie Gewichte und Bias vor, die Lehrperson prüft alle vier Fälle. Gemeinsam feststellen: höchstens 3 von 4.
 
-**Tafelskizze (Lehrperson · 5 Min.):** Die vier XOR-Punkte mit der Klasse einzeichnen. Die Klasse versucht, eine Gerade einzuzeichnen, und begründet, warum keine einzelne Gerade die beiden Klassen trennt. Die algebraischen Bedingungen nur nennen: Sie sind Niveau B.
+**Tafelskizze (Lehrperson · 5 Min.):** Die vier XOR-Punkte mit der Klasse einzeichnen. Die Klasse versucht, eine Gerade einzuzeichnen, und begründet, warum keine einzelne Gerade die beiden Klassen trennt. Die algebraischen Bedingungen nur nennen und nicht vorführen: Das Tandem schreibt sie im Anschluss selbst auf.
 
-**Tandem · 5 Min. · Bedingungstabelle selbst ausfüllen:** Schreiben Sie für jede der vier Zeilen die Bedingung an w₁, w₂ und b auf (Ausgabe 1 heisst Summe ≥ 0, Ausgabe 0 heisst Summe < 0) und markieren Sie, welche Bedingungen sich widersprechen. Vergleichen Sie danach mit der Tafelkarte und dem Kurskapitel (Niveau B).
+**Tandem · 5 Min. · Bedingungstabelle selbst ausfüllen:** Schreiben Sie für jede der vier Zeilen die Bedingung an w₁, w₂ und b auf (Ausgabe 1 heisst Summe ≥ 0, Ausgabe 0 heisst Summe < 0) und markieren Sie, welche Bedingungen sich widersprechen. Vergleichen Sie danach mit der Tafelkarte und dem Kurskapitel.
 
-#### Tafelkarte · Vier Bedingungen für XOR (Lösung zum Vergleichen, Niveau B)
+#### Tafelkarte · Vier Bedingungen für XOR (Lösung zum Vergleichen)
 
 Bei Ausgabe 1 ab Summe 0 müssten gleichzeitig gelten:
 

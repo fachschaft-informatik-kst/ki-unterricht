@@ -1,4 +1,4 @@
-<details class="kapitel" id="netze-1" data-kurz="XOR verstehen: Wahrheitstabelle, Rätsel im Notebook und Trennlinie. Die Rechnung dazu ist Niveau B (Vertiefung)." open>
+<details class="kapitel" id="netze-1" data-kurz="XOR verstehen: Wahrheitstabelle, Rätsel im Notebook, Trennlinie und die Rechnung dazu." open>
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Das XOR-Problem: Warum reicht ein Neuron nicht?</h2>
   </summary>
@@ -82,7 +82,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
 **Fazit:** Für das einzelne Neuron gibt es **keine Kombination aus Gewichten und Bias**, die alle vier XOR-Fälle korrekt unterscheidet: Keine Gerade trennt die diagonal liegenden Punkte. Eine andere Lernrate oder mehr Trainingsrunden können diese grundsätzliche Grenze nicht aufheben.
 <!-- MD:END -->
     <details>
-      <summary>Niveau B (Vertiefung): Die Rechnung dazu, vier Bedingungen, die sich widersprechen</summary>
+      <summary>Die Rechnung dazu: vier Bedingungen, die sich widersprechen</summary>
       <div class="detail-body">
     <!-- MD:START -->
 Schreiben Sie zuerst für jede Zeile selbst die Bedingung an w₁, w₂ und b auf, bevor Sie die Tabelle ansehen. Jede Zeile ist eine Bedingung (Ausgabe 1 heisst Summe ≥ 0, Ausgabe 0 heisst Summe &lt; 0):
@@ -131,6 +131,6 @@ Schreiben Sie zuerst für jede Zeile selbst die Bedingung an w₁, w₂ und b au
     <!-- MD:START -->
 Danach geht es im nächsten Kapitel um einen Lösungsweg mit mehreren Neuronen.
 <!-- MD:END -->
-    <label class="field answer"><span>Warum kann keine Einstellung alle vier XOR-Fälle schaffen? Begründen Sie mit den Punkten (Gerade) oder, wenn Sie Niveau B bearbeitet haben, mit den Bedingungen. Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die beiden 1-Punkte liegen diagonal gegenüber, deshalb …" rows="4"></textarea></label>
+    <label class="field answer"><span>Warum kann keine Einstellung alle vier XOR-Fälle schaffen? Begründen Sie mit den Punkten (Gerade) und mit den vier Bedingungen. Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die beiden 1-Punkte liegen diagonal gegenüber, deshalb …" rows="4"></textarea></label>
   </div>
 </details>

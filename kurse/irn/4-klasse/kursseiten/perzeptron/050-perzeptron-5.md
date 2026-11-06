@@ -1,23 +1,23 @@
-<details class="kapitel" id="perzeptron-5" data-kurz="Pflicht: Experiment 2 (AND und OR einstellen). Experiment 1 und 3 zeigt die Lehrperson; selbst durchführen ist Wahl (ca. 30 Minuten)." open>
+<details class="kapitel" id="perzeptron-5" data-kurz="Drei interaktive Versuche zu Entscheidung, Gewichten und Lernen (ca. 30 Minuten)." open>
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Im Notebook: entscheiden, einstellen, lernen lassen</h2>
   </summary>
   <div class="kapitel-body">
     <div class="lesson-steps">
       <article>
-        <b>1 · Alltag: Schwimmen? (Demo mit der Lehrperson)</b>
+        <b>1 · Alltag: Schwimmen?</b>
         <!-- MD:START -->
 Ändern Sie die Gewichte des Schwimmbad-Neurons. Vergleichen Sie in der **Live-Tabelle** die acht Eingaben mit den berechneten Ausgaben und Zielen. Erreichen Sie 8 von 8?
 <!-- MD:END -->
       </article>
       <article>
-        <b>2 · Logische Gatter einstellen (Pflicht: AND und OR)</b>
+        <b>2 · Logische Gatter einstellen</b>
         <!-- MD:START -->
-Verändern Sie die Gewichte und den Bias für **AND**, anschliessend für **OR**. **NAND** ist Wahl. **Alle vier Eingabefälle** werden als einzelne Neuronen dargestellt; die darunterliegende Tabelle fasst die Ergebnisse zusammen.
+Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder **NAND**. **Alle vier Eingabefälle** werden als einzelne Neuronen dargestellt; die darunterliegende Tabelle fasst die Ergebnisse zusammen.
 <!-- MD:END -->
       </article>
       <article>
-        <b>3 · Lernen beobachten (Demo mit der Lehrperson; selbst durchführen: Wahl)</b>
+        <b>3 · Lernen beobachten</b>
         <!-- MD:START -->
 Lassen Sie das Neuron einzelne Beispiele bearbeiten. Beobachten Sie **eine Korrektur** und vergleichen Sie die Parameter vor und nach diesem Schritt.
 <!-- MD:END -->
@@ -37,7 +37,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
 ### Mein Protokoll
 <!-- MD:END -->
       <p class="small">Tragen Sie während der Notebookarbeit Ihre Einstellungen und Ergebnisse ein. Die Einträge werden im Browser gespeichert und im ZIP gesichert.</p>
-      <h4>1 · Schwimmbad-Neuron (Demo; selbst eintragen: Wahl)</h4>
+      <h4>1 · Schwimmbad-Neuron</h4>
       <div class="table-scroll">
         <table class="typen protokoll">
           <thead>
@@ -70,7 +70,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
           </tbody>
         </table>
       </div>
-      <h4>2 · Von Hand eingestellt (Pflicht: AND und OR · NAND: Wahl)</h4>
+      <h4>2 · Von Hand eingestellt</h4>
       <div class="table-scroll">
         <table class="typen protokoll">
           <thead>

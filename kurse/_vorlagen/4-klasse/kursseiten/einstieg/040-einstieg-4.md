@@ -1,6 +1,6 @@
-<details class="kapitel" id="einstieg-4" data-kurz="Wahl · Schwache und starke KI unterscheiden und eigene Beispiele begründen.">
+<details class="kapitel" id="einstieg-4" data-kurz="Schwache und starke KI unterscheiden und eigene Beispiele begründen." open>
   <summary><span class="kapitel-nr">4</span>
-    <h2 class="kapitel-titel">Schwache und starke KI (Wahl)</h2>
+    <h2 class="kapitel-titel">Schwache und starke KI</h2>
   </summary>
   <div class="kapitel-body">
     <p><strong>Schwache KI</strong> ist für bestimmte Aufgaben oder Aufgabenbereiche entwickelt, etwa Bilder erkennen, Schach spielen oder Texte erzeugen. Auch ein sehr leistungsfähiges System kann schwache KI sein.</p>

@@ -11,7 +11,4 @@
   </div>
 </details>
 <!-- /LESSONS:lernarten -->
-<div class="callout" id="lernarten-pflichtweg">
-  <p><strong>Pflichtweg:</strong> Kapitel <a href="#lernarten-1">1</a> → <a href="#lernarten-4">4</a> → <a href="#lernarten-5">5</a> → <a href="#lernarten-6">6</a> → <a href="#lernarten-7">7</a> → <a href="#lernarten-8">8</a>. <strong>Wahl:</strong> Kapitel <a href="#lernarten-2">2</a> (Akinator), <a href="#lernarten-3">3</a> (Filmlandkarte) und <a href="#lernarten-9">9</a> (Begriffscheck) vertiefen Sie selbstständig, wenn Zeit bleibt; die Lehrperson erklärt den Unterschied zwischen wissensbasierten und lernenden Systemen im Input.</p>
-</div>
 <p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#glossar-unueberwachtes-lernen">unüberwachtes Lernen</a> · <a href="#glossar-verstaerkendes-lernen">verstärkendes Lernen</a></p>

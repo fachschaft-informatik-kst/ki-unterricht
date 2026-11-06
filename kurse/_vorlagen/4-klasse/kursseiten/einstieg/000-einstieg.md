@@ -10,7 +10,4 @@
   </div>
 </details>
 <!-- /LESSONS:einstieg -->
-<div class="callout" id="einstieg-pflichtweg">
-  <p><strong>Pflichtweg:</strong> Kapitel <a href="#einstieg-1">1</a> → <a href="#einstieg-2">2</a> → <a href="#einstieg-5">5</a> → <a href="#einstieg-9">9</a>. <strong>Wahl:</strong> Kapitel <a href="#einstieg-3">3</a> (Meilensteine) und <a href="#einstieg-4">4</a> (schwache und starke KI) vertiefen Sie selbstständig, wenn Zeit bleibt; die Lehrperson bespricht beide kurz.</p>
-</div>
 <p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ki">KI</a> · <a href="#glossar-maschinelles-lernen">maschinelles Lernen</a> · <a href="#glossar-generative-ki">generative KI</a></p>

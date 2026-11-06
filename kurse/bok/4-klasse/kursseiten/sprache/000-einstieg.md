@@ -11,6 +11,4 @@
   </div>
 </details>
 <!-- /LESSONS:sprache -->
-<div class="callout" id="sprache-pflichtweg">
-  <p><strong>Pflichtweg:</strong> Kapitel <a href="#sprache-1">1</a> → <a href="#sprache-6">6</a> → <a href="#sprache-3">3</a> → <a href="#sprache-5">5</a>. <strong>Wahl:</strong> Kapitel <a href="#sprache-2">2</a> (Papagei-Lernstrecke), <a href="#sprache-4">4</a> (Turing-Test) und <a href="#sprache-7">7</a> (Papierexperiment von inf-schule).</p>
-</div><p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-token">Token</a> · <a href="#glossar-kontext">Kontext</a> · <a href="#glossar-halluzination">Halluzination</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-token">Token</a> · <a href="#glossar-kontext">Kontext</a> · <a href="#glossar-halluzination">Halluzination</a></p>

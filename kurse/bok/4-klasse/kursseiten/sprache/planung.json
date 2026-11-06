@@ -9,7 +9,7 @@
       "question": "Leitfrage: Warum ist eine plausible Fortsetzung nicht automatisch wahr?",
       "motivation": "Sprachmodelle können überzeugend schreiben, ohne die Richtigkeit einer Aussage zu prüfen.",
       "product": "Ein dokumentierter Vergleich mit Soekia, ein plausibles und ein selbst erzeugtes problematisches Beispiel, zwei Grenzen der Analogie und ein eigener Satz, wie Sie KI-Aussagen prüfen.",
-      "zeit": "Ein digitaler Pflichtweg: Soekia mit Link und Drei-Zeilen-Anleitung. Die Papagei-Lernstrecke und der Turing-Test (Human or Not, nur nach schulischer Freigabe) sind Vertiefung, nie zusätzliche Pflicht; Live-Chats mit Fremden sind keine Pflicht. Soekia und die Beispielausgaben vorab testen. Die gebündelten Rückmeldungen zu Doppellektion 8 werden in «Ankommen» ausgegeben.",
+      "zeit": "Ein digitaler Arbeitsweg: Soekia (soekia.ch/GPT) mit Link und Drei-Zeilen-Anleitung. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht. Soekia und die Beispielausgaben vorab testen. Die gebündelten Rückmeldungen zu Doppellektion 8 werden in «Ankommen» ausgegeben.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -62,12 +62,12 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 12,
-              "text": "Erklärt knapp das Papagei-Modell (Häufigkeiten von Wortfolgen liefern Fortsetzungen) und zeigt die Grafik «Papagei-Modell und neuronales Sprachmodell». Brücke in vier Sätzen (Seite «Vom Papagei zum neuronalen Netz»): Vortraining und Feinabstimmung wie beim Transfer Learning im Bildprojekt; Wörter werden zu Zahlen; der Text liefert die richtige Antwort selbst; ein Prozentwert ist keine Wahrheit. Stellt Soekia (soekia.ch/GPT) als Pflichtweg vor mit der Drei-Zeilen-Anleitung: «start» und «Schau hinein»; «N <= 2» gegen «N <= 5» und Regler «Temperatur» (unter «Auswahl anpassen»); eigener Trainingstext über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen». Die Papagei-Lernstrecke und der Turing-Test sind Vertiefung."
+              "text": "Erklärt knapp das Papagei-Modell (Häufigkeiten von Wortfolgen liefern Fortsetzungen) und zeigt die Grafik «Papagei-Modell und neuronales Sprachmodell». Brücke in vier Sätzen (Seite «Vom Papagei zum neuronalen Netz»): Vortraining und Feinabstimmung wie beim Transfer Learning im Bildprojekt; Wörter werden zu Zahlen; der Text liefert die richtige Antwort selbst; ein Prozentwert ist keine Wahrheit. Stellt Soekia (soekia.ch/GPT) als digitalen Arbeitsweg vor mit der Drei-Zeilen-Anleitung: «start» und «Schau hinein»; «N <= 2» gegen «N <= 5» und Regler «Temperatur» (unter «Auswahl anpassen»); eigener Trainingstext über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen»."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein Modellverständnis als Grundlage für den Vergleich und ein klarer Pflichtweg."
+              "text": "Ein Modellverständnis als Grundlage für den Vergleich und ein klarer Arbeitsweg."
             }
           ]
         },
@@ -86,7 +86,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 40,
-              "text": "Bearbeiten Sie den Pflichtweg mit Soekia (soekia.ch/GPT): Verändern Sie pro Vergleich nur eine Einstellung (N-Gramm-Länge «N <= 2» gegen «N <= 5», Regler «Temperatur» oder Trainingstext) und vergleichen Sie mehrere Läufe, weil jeder «start» einen neuen Text schreibt. Sichern Sie Einstellung, Veränderung und Ausgabe sowie ein plausibles und ein selbst erzeugtes problematisches Beispiel im Protokoll: Erzeugen Sie dazu über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» einen Trainingstext mit einer falschen Aussage, klicken Sie «Modell aufbauen» und «start» und beobachten Sie, was das Modell daraus macht. Erklären Sie den Unterschied mit dem Papierexperiment. Die Papagei-Lernstrecke und der Turing-Test sind freiwillig, kein Wechselauftrag. Bei technischem Ausfall denselben Vergleich mit den bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
+              "text": "Bearbeiten Sie den digitalen Arbeitsweg mit Soekia (soekia.ch/GPT): Verändern Sie pro Vergleich nur eine Einstellung (N-Gramm-Länge «N <= 2» gegen «N <= 5», Regler «Temperatur» oder Trainingstext) und vergleichen Sie mehrere Läufe, weil jeder «start» einen neuen Text schreibt. Sichern Sie Einstellung, Veränderung und Ausgabe sowie ein plausibles und ein selbst erzeugtes problematisches Beispiel im Protokoll: Erzeugen Sie dazu über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» einen Trainingstext mit einer falschen Aussage, klicken Sie «Modell aufbauen» und «start» und beobachten Sie, was das Modell daraus macht. Erklären Sie den Unterschied mit dem Papierexperiment. Bei technischem Ausfall denselben Vergleich mit den bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
             },
             {
               "art": "Auftrag",

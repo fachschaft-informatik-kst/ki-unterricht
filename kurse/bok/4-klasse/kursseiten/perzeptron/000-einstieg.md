@@ -15,7 +15,4 @@
   </div>
 </details>
 <!-- /LESSONS:perzeptron -->
-<div class="callout" id="perzeptron-pflichtweg">
-  <p><strong>Pflichtweg:</strong> Kapitel <a href="#perzeptron-1">1</a> → <a href="#perzeptron-3">3</a> → <a href="#perzeptron-4">4</a> → <a href="#perzeptron-5">5</a> (Pflicht: Experiment 2 mit AND und OR) → <a href="#perzeptron-7">7</a>. <strong>Wahl:</strong> Kapitel <a href="#perzeptron-2">2</a> (Selbststudium), <a href="#perzeptron-6">6</a> sowie in Kapitel 5 Experiment 1 und 3 selbst durchführen, NAND und die Zusatzversuche. Experiment 1 und 3 zeigt die Lehrperson.</p>
-</div>
 <p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-neuron">Neuron</a> · <a href="#glossar-gewicht">Gewicht</a> · <a href="#glossar-bias-neuron">Bias</a></p>

@@ -64,7 +64,9 @@ nur im Unterricht klärbar)
    Im Bewertungsraster stehen ein unmögliches Rechenbeispiel («24,75 Punkte → 4,75») und
    «33,3 %» statt 36,4 %.
 2. **Pflicht/Wahl unsichtbar, Zeit knapp** [A, H]. In DL 1, 2, 3, 9 und 10 sehen Lernende
-   keine Trennung von Pflicht und Wahl (sie steht nur auf der Lehrpersonenseite).
+   keine Trennung von Pflicht und Wahl (sie steht nur auf der Lehrpersonenseite; die
+   Lehrperson hat am 6. November 2026 entschieden, dass Pflicht und Wahl nicht in den
+   Kursunterlagen stehen, siehe Abschnitt 7).
    Schätzungen: DL 1 ≈ 35–40 Min. Pflicht bei 30 Min. Tandemzeit, DL 2 ≥ 100 statt
    90 Min., DL 6 65–85 Min. in 70, DL 7 55–75 Min. in 65, DL 8 Etappe 1 ohne Budget.
    Die «Entlastung» vom 4.11. (`ce8ff95`) hat DL 3/4 nicht kleiner gemacht, sondern Zeit
@@ -106,7 +108,7 @@ nur im Unterricht klärbar)
 |---|-----------|----------|---------|
 | R1 | Steuerungsdokumente angleichen: eine Wahrheit je Entscheidung | KP, `planung.json`, Seiten, Musterlösungen, Bewertung | S |
 | R2 | Fachliche Kurzkorrekturen (13 Stellen) | DL 1, 2, 3, 4, 8, Bewertung, Glossar | S |
-| R3 | Pflicht/Wahl sichtbar machen, Pflichtweg zeigen | DL 1, 2, 3, 9, 10; Minuten in DL 8 | S |
+| R3 | Pflicht/Wahl sichtbar machen, Pflichtweg zeigen (zurückgenommen, siehe Abschnitt 7) | DL 1, 2, 3, 9, 10; Minuten in DL 8 | S |
 | R4 | Individuelle Sicherung wirksam machen (Feld, Lösung, Zeit, Einsammeln) | DL 2, 4, 9, 10 | S–M |
 | R5 | Brücke DL 4→5 | DL 4, 5 | S–M |
 | R6 | Brücke DL 8→9→10, Abschluss als Synthese | DL 8, 9, 10 | S |
@@ -345,6 +347,11 @@ Krathwohl 2001; in dieser Recherche nicht neu verifiziert):
 
 Je Lektion: Ziel und Zeit, Stärken, Risiken (nach Wirkung geordnet), Anpassungen. Dateien
 liegen unter `ks/`, sofern nichts anderes steht. Kennzeichnung wie in Abschnitt 0.
+
+*Hinweis zu den Anpassungen:* Vorschläge, Pflicht und Wahl in den Kursunterlagen zu
+kennzeichnen (Badges, Pflichtweg, «Niveau B», «Vertiefung»), sind durch den Entscheid der
+Lehrperson vom 6. November 2026 hinfällig (Abschnitt 7, R3). Die Zeitbefunde bleiben
+gültig; welche Inhalte zum Unterricht gehören, zeigt die AVIVA-Planung.
 
 ### DL 1 · Was ist KI? (`einstieg`)
 
@@ -943,7 +950,7 @@ verbessert.
 | Thema | Befund (Kurzfassung) | Betrifft | Evidenz (Abschnitt 5) | Massnahme |
 |-------|----------------------|----------|------------------------|-----------|
 | **T1 Steuerungs- und Quellenkonsistenz** | Vier Dokumentebenen (KP, `planung.json`, Seite, Musterlösung/Bewertung) steuern dieselbe Lektion und widersprechen sich: XOR (DL 3), Datenrollen/Fotoauftrag (DL 4/5), Debatte (DL 10), Asimov/Ethik (DL 1/10), Gesprächszeiten (DL 7), K12 (Web vs. Markdown), Prozentzahl und Notenbeispiel. Namensdrift: Der Datenregel-Lernpfad hat drei Namen; Etappen, Checks, Reflexionen und Fortschrittsschritte zählen verschieden. [G] | DL 1, 3, 4, 5, 7, 10, Bewertung | Konsistenzfrage, kein Literaturbeleg nötig | R1 |
-| **T2 Pflicht/Wahl und Zeitbudget** | Lernende sehen nirgends, was Pflicht ist (DL 1, 2, 3, 9, 10); die Seiten verlangen teils mehr als der Plan; DL 8 Etappe 1 hat kein Budget; die «Entlastung» vom 4.11. verschob Last zur Lehrperson. [G, A, H] | DL 1, 2, 3, 6, 7, 8, 9, 10 | Kognitive Belastung (Sweller et al. 2019); UDL (CAST 2024); Differenzierung (Deunk et al. 2018) | R3 |
+| **T2 Pflicht/Wahl und Zeitbudget** | Lernende sehen nirgends, was Pflicht ist (DL 1, 2, 3, 9, 10); die Seiten verlangen teils mehr als der Plan; DL 8 Etappe 1 hat kein Budget; die «Entlastung» vom 4.11. verschob Last zur Lehrperson. [G, A, H] | DL 1, 2, 3, 6, 7, 8, 9, 10 | Kognitive Belastung (Sweller et al. 2019); UDL (CAST 2024); Differenzierung (Deunk et al. 2018) | R3 (zurückgenommen) |
 | **T3 Individuelle Sicherung und Rückmeldung** | Sicherung ohne Feld (DL 2), 2 Min. (DL 4, 9, 10), Antworten bleiben im Browser; «Vorwissen» ist in DL 3, 4, 6 Wiedererkennen statt Abruf. [G, A] | DL 2, 3, 4, 6, 9, 10 | Abruf und Verteilung (Dunlosky 2013; Latimier 2021); Feedback (Hattie & Timperley 2007; Wisniewski 2020) | R4 |
 | **T4 Steuerung des selbstorganisierten Arbeitens** | 270 Min. ohne Plenum, Lernstand nur als Selbstbericht, Beratung reaktiv und proaktiv zugleich, Tagesziele ohne Ort, ein Gerät und ein gemeinsamer Stand je Tandem, erste individuelle Evidenz erst in DL 8. [G, A] | DL 5–8 | Selbstregulation (Dignath & Büttner 2008; Panadero 2017; Elhusseini 2022); kooperatives Lernen (Johnson & Johnson 2018; Kirschner et al. 2018) | R7 |
 | **T5 Nahtstellen und Begriffsbrücken** | DL 4→5, DL 8→9, DL 9→10; verlangte, aber nicht eingeführte Begriffe; das Neuron-Vokabular endet; «Datenleck» fehlt im DL-8-Lesetext. [G, A] | DL 4, 5, 8, 9, 10 | Verteilter Abruf (Cepeda 2006); schwer lehrbar sind Vergleichs- und Designentscheidungen (Sulmont et al. 2019) | R5, R6 |
@@ -1093,16 +1100,16 @@ Arbeit für das Semester.
 |---|-----------|---------|----------|---------|
 | R1 | **Steuerungsdokumente angleichen** | Je Entscheidung eine Quelle, die anderen verlinken. Zu klären: XOR (DL 3 oder 4?), Datenrollen/Freigabe/Fotoauftrag (DL 4 oder 5?), Zeitleiste Foto/Thema, Asimov/Ethik (DL 1 oder 10?), Debatte (DL 10), Gesprächszeiten (DL 7), K12-Definition (Web vs. Markdown), K11-Lücke, «33,3 %» → 36,4 %, Beispiel «24,75 Punkte». | KP, `planung.json`, Seiten, Musterlösungen, Bewertung | S |
 | R2 | **Fachliche Kurzkorrekturen** (13 Stellen) | (1) `einstieg/020` Entscheidungsbaum-Satz; (2) `lernarten/020` Akinator ersetzen oder Frage öffnen; (3) `lernarten/070` Runde 3 und «Agent» statt «System»; (4) `perzeptron/050` Lernraten-Versuch mit NOR und korrigierte Musterwerte; (5) `netze/040` Frage 3 als Vorschau, totes Attribut `data-p1-diagnostic` entfernen oder nutzen; (6) `ki_foto_tools.py` Z. 279, Schwellen und Text «Raten ≈ 50 %»; (7) `bewertung` Z. 143 und 170; (8) Glossar: Epoche, Startwert, Modellwert, Trennschärfe, Lernrate/Lernregel, Rückkopplung, Opacity/Scale/Damage, Token/Einbettung, Erfahrungsschatz; (9) DL 3 «korrigiert sich selbst» → «Das Lernverfahren vergleicht Ausgabe und Ziel»; (10) DL 4 Darstellbarkeit und Lernbarkeit trennen; (11) DL 9 «nächstes Token» = Vortraining, «Wahr?» nur für Aussagen, Modell ≠ Produkt; (12) DL 10 Kausalkette als Modellannahme, Fall «Schule» angleichen; (13) O'Neil-Kriterien als «gängige Zusammenfassung» kennzeichnen. | DL 1–4, 8–10, Bewertung, Glossar | S |
-| R3 | **Pflicht/Wahl sichtbar machen** | Badge «Pflicht»/«Wahl» je Kapitel und Pflichtweg in der Lektionskarte (DL 1: 1→2→5→9; DL 2: 1→4→5→6→7→8; DL 3: Experiment 2; DL 9, 10); in DL 8 Minuten für Etappe 1 und 4. | DL 1, 2, 3, 8, 9, 10 | S |
+| R3 | **Pflicht/Wahl sichtbar machen** (zurückgenommen, 6. November 2026) | Vorschlag war ein Badge «Pflicht»/«Wahl» je Kapitel und ein Pflichtweg in der Lektionskarte. Die Lehrperson lehnt das ab: Die AVIVA-Planung zeigt, was Teil des Unterrichts ist. Geblieben ist nur die Minutenzuteilung in DL 8 (Etappe 1 und 4). | DL 8 | S |
 | R4 | **Individuelle Sicherung wirksam machen** | Je DL ein Feld mit Satzgerüst und Selbstkontrolle (Lösung erst nach dem Schreiben), 4–5 Min.; DL 2 Exit-Ticket mit ungesehenem Beispiel; DL 4 zwei Fragen (Netz, Brücke); DL 9/10 ein Feld; «Vorwissen» in DL 3, 4, 6 als Freitext-Abruf; Antworten einsammeln (Download) und zu drei typischen Antworten einen Satz Rückmeldung geben. | DL 2, 3, 4, 6, 9, 10 | S–M |
-| R5 | **Brücke DL 4→5** | Brückenkarte (vier Sätze, Pflichtweg): «ungesehene Daten», Runde = Epoche, Stufe vs. Wert (Aktivierung), Startwert, Merkmal und «2 → 1280 Eingaben» mit Skizze MobileNet → 1280 → kleines Netz. Bereit-Check als Vorschau; DL 5 greift ihn auf. Hook in DL 5 mit Vermutung («Wie würden Sie Training und Test trennen?»). | DL 4, 5 | S–M |
+| R5 | **Brücke DL 4→5** | Brückenkarte (vier Sätze): «ungesehene Daten», Runde = Epoche, Stufe vs. Wert (Aktivierung), Startwert, Merkmal und «2 → 1280 Eingaben» mit Skizze MobileNet → 1280 → kleines Netz. Bereit-Check als Vorschau; DL 5 greift ihn auf. Hook in DL 5 mit Vermutung («Wie würden Sie Training und Test trennen?»). | DL 4, 5 | S–M |
 | R6 | **Brücke DL 8→9→10, Abschluss als Synthese** | «Transferfrage für DL 10» in `planung.json`; Rückblick DL 9 mit dem Anker «ein Modell antwortet immer» (Gabel/Löffel-Modell sieht eine Tasse); Brücke in vier Sätzen (Vortraining → Feinabstimmung = Transfer Learning; Wörter als Zahlen; der Text liefert die Labels; Prozent ≠ Wahrheit); in DL 10 ein Chatbot-Fall und der Sicherungssatz «Ich prüfe KI-Aussagen, indem …»; Abschluss als 3-Min.-Synthese («Wo kann eine Vorhersage falsch sein? Ein Beispiel je DL»); DL-8-Rückmeldungen in DL 9 ausgeben. | DL 8, 9, 10 | S |
 | R7 | **Steuerung des selbstorganisierten Arbeitens sichtbar machen** | Verbindliche Zeitleiste mit Meilensteinen («Ende DL 5: Exemplarliste und ≥ 40 Fotos; Mitte DL 6: Import»); Go/No-Go Mitte DL 6; Fortschrittstafel (analog, vom Tandem geführt); Pflichtkontakt je Tandem und DL mit Beratungskarte (Widerspruch reaktiv/proaktiv auflösen); Feld «Tagesziele»; 5-Min.-Peer-Tausch R1–R3 am Ende DL 6; Einzelnotiz im «Einzeln»-Schritt; drei benannte Rollen mit Wechsel; Absenz- und Konfliktregel. | DL 5–8 | S–M |
 | R8 | **Versuchsdesign ehrlicher darstellen** | Satz «V1 = 1 Gegenstand je Klasse: 16 Bilder ≠ 16 Tests»; Journal-Platzhalter «richtig/gesamt»; Faustregel «Unterschied ≤ 2 Bilder = kein Beleg» (Heuristik, Fachperson prüft); Prompt «Bei Gleichstand: …» und Voreinstellung leer; Zelle Training vs. Validierung; `abschlusstest()` je Gruppe; Rückbezug auf DL 4 (Startwerte 0–5). | DL 6, 7, Journal, `ki_foto_tools.py` | S |
 | R9 | **DL 8 robust und geschlossen machen** | Disjunkte Klassenmengen, zyklische Zuteilung; Rückmeldungen bündeln und ausgeben, K11 als Eintrittsbedingung für K12; Etappe 1 mit ≈ 10 Min. und Notfallkarte; Referenz-ZIP aus `testbilder/` und Probelauf in DL 7; schlankes Austauschpaket (JSON, Protokoll, `Journal.html`) und Löschregel mit Häkchen; Datenaudit-Werkzeug (`gruppen_zeigen(test=True)`, Tabelle Gruppe × Quelle mit Duplikat-Warnung); Prüfbericht als 5-Zeilen-Tabelle; Explainer erst nach dem Versuch; Einwilligungssatz für die Weitergabe. | DL 8 | M |
 | R10 | **Beurteilung stützen** | Gesprächsleitfaden mit Pool (je Kriterium drei Varianten), Ein-Seiten-Bogen, wechselnde Reihenfolge, Absenzregel; Indikatoren und Ankerantworten je Stufe; Überlappungen auflösen (K6 nur «Grenze», K10 nur «neuer Fall»); Sollstufe und Notenschlüssel nennen; Spalte «Wo beurteilt?» mit einer Grundlagenfrage aus DL 3/4; Selbsteinschätzung in DL 7 nutzen; Drei-Zeilen-KI-Regel (erlaubt: Sprachhilfe; nicht: Zahlen und Deutung) mit eigenem Feld und «Belegfrage» im Gespräch («Wo steht das im Journal, welche Zahl?»); individuelle Spur im Tandem; Zweitbewertung von drei Proben; Musterantworten als «Erwartungshorizont» statt Musterwortlaut. | Bewertung, Journal, DL 5–8 | M |
 | R11 | **Notebooks mit Use–Modify–Create** | DL 3 Experiment 2 mit 0/0/0 starten; DL 4 Gewichtetabelle und eine Modify-Aufgabe; DL 5 Mini-Experiment zum Leck; DL 6 Training/Validierung und `bild_durchs_netz` im Versuchsnotebook. | DL 3–6 | M |
-| R12 | **DL 9/10 Feinschliff** | Soekia als Pflichtweg mit Link und Anleitung, Papagei als Vertiefung; Erwartung mit Prognose und Feld vor dem Digitalweg; problematisches Beispiel per Trainingstext erzeugen; Debatte als Vertiefung; Untertitel/Transkript; Realitätsanker (AI Act, nDSG Art. 21) fachlich prüfen; Rollenwechsel in DL 10. | DL 9, 10 | S–M |
+| R12 | **DL 9/10 Feinschliff** | Soekia als einziger digitaler Arbeitsweg mit Link und Anleitung; Erwartung mit Prognose und Feld vor dem Digitalweg; problematisches Beispiel per Trainingstext erzeugen; Untertitel/Transkript; Realitätsanker (AI Act, nDSG Art. 21) fachlich prüfen; Rollenwechsel in DL 10. | DL 9, 10 | S–M |
 
 **Entscheide der Lehrperson (6. November 2026):**
 
@@ -1114,6 +1121,9 @@ Arbeit für das Semester.
   bleiben textgleich mit der 1. Klasse; ob Niveau und Stil für 17–18-Jährige passen, klärt das
   Feedback (Abschnitt 8, Nr. 12).
 - **Die 1. Klasse bleibt unverändert** und wird vorerst nicht ausgewertet.
+- **Keine Pflicht/Wahl-Kennzeichnung in den Kursunterlagen** (R3 zurückgenommen). Welche
+  Inhalte Teil des Unterrichts sind, zeigt die AVIVA-Planung. Die in Welle 1 eingeführten
+  Pflichtweg-Kästen, die «(Wahl)»-Titel und die eingeklappten Kapitel sind wieder entfernt.
 - **Jedes Tandem wählt zwei einzigartige Bildklassen**, die kein anderes Tandem verwendet
   (Voraussetzung für DL 8). Damit ist die Zuteilung in DL 8 einfach (zyklisch, ohne Kontrolle)
   und «ganz andere Klassen» garantiert.
@@ -1137,10 +1147,10 @@ Die wichtigsten Hypothesen lassen sich mit wenig Aufwand prüfen:
 |---|-------|------------|------------------|
 | 1 | Wie lange dauert DL 8 Etappe 1 (Kaltstart im privaten Fenster, Schul-WLAN, iPad/Chromebook)? | Stoppuhr bei drei Tandems; Abbrüche zählen | R9 |
 | 2 | Wie viele Tandems haben am Ende DL 5 eine Exemplarliste, Mitte DL 6 den Import, am Ende DL 6 Etappe 5? | Fortschrittstafel | R7 |
-| 3 | Wie lange dauert der Lernpfad in DL 5 inklusive Kaltstart bei 20 Geräten? | Stoppuhr | R3, R7 |
+| 3 | Wie lange dauert der Lernpfad in DL 5 inklusive Kaltstart bei 20 Geräten? | Stoppuhr | R7 |
 | 4 | Wie lange dauert Experiment 2 in DL 3 (Hypothese 10–15 statt 32 Min.)? Wie viele Tandems rechnen Experiment 3 selbst? | Beobachtung | R11 |
 | 5 | Wie viele Antworten der DL-4-Sicherung sind lesbar und inhaltlich korrekt? | Fünf Antworten einsammeln | R4 |
-| 6 | Behandeln Lernende DL 1 Kapitel 3/4 und DL 2 Kapitel 2–3 als Pflicht, und wie lange? | Beobachtung | R3 |
+| 6 | Wie lange arbeiten Lernende in DL 1 an den Kapiteln 3 und 4 und in DL 2 an den Kapiteln 2 und 3? | Beobachtung | Zeitbudget DL 1–2 (R3 ist zurückgenommen) |
 | 7 | Gespräche: Streuung der Punkte, Fragenweitergabe, Slot-Fairness (Minute 0 vs. 95–100) | Bogen; Zweitbewertung von drei Proben | R10 |
 | 8 | Welche Fehler enthalten Datenpläne nach dem Lernpfad? | Drei Tandems stichprobenartig | R5, R8 |
 | 9 | Verstehen Lernende «Trennschärfe»? | Think-aloud mit zwei Tandems | R2, R9 |
@@ -1160,18 +1170,18 @@ Musterlösungszeilen bereit.
 
 | # | Stand | Umgesetzt | Offen (Welle 2 oder Entscheid) |
 |---|-------|-----------|--------------------------------|
-| R1 | umgesetzt | XOR gehört in DL 4; Foto-/Themen-Zeitleiste in Projektauftrag, Fotoanleitung, Abschlussseite, Plänen und KP angeglichen; Debatte = Vertiefung; Gesprächszeiten zu Beginn DL 7; K12 im Web und im Raster gleichlautend; K11-Lücke erklärt; 36,4 %; ganzzahlige Notenbeispiele; Raster-Tabelle (leere Zeile vor K12) repariert | Plan als Quelle der Wahrheit festgelegt; KP verweist nur noch |
+| R1 | umgesetzt | XOR gehört in DL 4; Foto-/Themen-Zeitleiste in Projektauftrag, Fotoanleitung, Abschlussseite, Plänen und KP angeglichen; Debatte in DL 10 mit Leitfragen als Gesprächshilfe; Gesprächszeiten zu Beginn DL 7; K12 im Web und im Raster gleichlautend; K11-Lücke erklärt; 36,4 %; ganzzahlige Notenbeispiele; Raster-Tabelle (leere Zeile vor K12) repariert | Plan als Quelle der Wahrheit festgelegt; KP verweist nur noch |
 | R2 | 5 von 13 | (1) Entscheidungsbaum; (4) Lernraten-Versuch mit NOR und Musterwerte; (5) Frage 3 als Vorschau; (7) Beispielzahlen und 36,4 %; (11) teilweise: «nächstes Token» = Vortraining, Transformer statt «dieselben Bausteine», Produkt ≠ Modell | (2) Akinator, (3) Memory Runde 3, (6) `ki_foto_tools.py`, (8) Glossar, (9) «korrigiert sich selbst», (10) Darstellbarkeit/Lernbarkeit, (11) «Wahr?» nur für Aussagen, (12), (13); `data-p1-diagnostic` |
-| R3 | umgesetzt | Je Kapitel «(Wahl)» im Titel, «Wahl · » in der Kurzbeschreibung, eingeklappt; Pflichtweg-Kasten auf den Seiten DL 1, 2, 3, 4, 9, 10; Pflichtweg und Minuten in den Lektionskarten (`zeit`); DL 8 Etappe 1 (10 Min.) und 4 (15 Min.) mit Minuten | Eigene CSS-Badges (`.tag` ist ungestylt) |
+| R3 | zurückgenommen (6.11.2026) | Keine Pflicht/Wahl-Kennzeichnung in den Kursunterlagen: Der AVIVA-Plan zeigt, was Teil des Unterrichts ist. Pflichtweg-Kästen, «(Wahl)»-Titel, «Wahl · » in den Kurzbeschreibungen und das Einklappen der Kapitel sind wieder entfernt. Geblieben: DL 8 Etappe 1 (10 Min.) und 4 (15 Min.) mit Minuten | – |
 | R4 | grossteils | DL 1 Kriterium an der Tafel und Rückgriff; DL 2 Sicherungsfeld mit ungesehenem Beispiel und Selbstkontrolle; DL 4 zwei Fragen vor Selbstkontrolle; DL 9 «Ich prüfe KI-Aussagen, indem …»; DL 10 Schlussurteil mit Selbstkontrolle | Freitext-Abruf in DL 3/4/6 (Vorwissen); Antworten einsammeln und rückmelden (für DL 9–10 entschieden: nein) |
-| R5 | umgesetzt | Rätsel vor Algebra, Algebra als Niveau B; Brückenkarte in DL 4; Bereit-Check als Vorschau (Raten erlaubt); DL 5 greift ihn auf; Datenaufteilung nicht mehr in DL 4 | Skizze MobileNet → 1280 → kleines Netz |
+| R5 | umgesetzt | Rätsel vor Algebra (das Tandem schreibt die vier Bedingungen selbst auf, die Vergleichstabelle ist aufklappbar); Brückenkarte in DL 4; Bereit-Check als Vorschau (Raten erlaubt); DL 5 greift ihn auf; Datenaufteilung nicht mehr in DL 4 | Skizze MobileNet → 1280 → kleines Netz |
 | R6 | umgesetzt | Transferfrage DL 8; Anker «Ein Modell antwortet immer» in DL 8, 9, 10; Brücke in vier Sätzen; Rückmeldungen DL 8 in DL 9 «Ankommen»; Chatbot-Fall; Kurssynthese «Wo kann eine Vorhersage falsch sein?»; Rückgriff auf Schulweg (DL 1) | – |
 | R7 | teilweise | Meilensteine, Go/No-Go (Foto-Check Mitte DL 6), Fortschrittstafel (analog), Peer-Tausch R1–R3, Rollenwechsel und Absenz in der Arbeitsvereinbarung, Abnahme der Exemplarliste | Feld «Tagesziele», Pflichtkontakt je Tandem, Konfliktregel |
 | R8 | teilweise | «16 Bilder ≠ 16 Tests», 6,25 Prozentpunkte je Bild, Faustregel ≤ 2 Bilder, «Bei Gleichstand», richtig/gesamt, Rückbezug Startwerte, Musterbeispiel angepasst (11 gegen 14 von 16) | Zelle Training/Validierung, `abschlusstest()` je Gruppe, leere Voreinstellung (Code) |
 | R9 | grossteils | Zuteilung zyklisch; dank Klassenliste (jede Bildklasse nur einmal, Entscheid 6.11.2026) sind die Klassen garantiert disjunkt; Referenzpaket und Notfallkarte, Probelauf DL 7, Rückmeldungen bündeln, K11 vor K12, Prüfbericht in fünf Zeilen, Explainer nach dem Versuch, Löschregel, Hinweis «Fenster erst nach dem Download schliessen», Einwilligungssatz | Schlankes Austauschpaket, Datenaudit-Werkzeug (Code); Referenzpaket muss die Lehrperson einmal erzeugen |
 | R10 | teilweise | Gesprächsleitfaden mit Pool (drei Varianten je Kriterium), Orientierung je Stufe, Bogen, Rotation, Zweitbewertung als Stichprobe; «Wo beurteilt?» je Lernziel mit Grundlagenfrage (K7); KI-Regel mit eigenem Journalfeld; Stufe 2 als Sollstufe ausgewiesen (Entscheid 6.11.2026: 22 Punkte = 4,25) auf Kursseite, Raster, Projektauftrag und KP | Absenzregel (Entscheid Fachteam), Überlappungen auflösen, Ankerantworten, Selbsteinschätzung nutzen |
 | R11 | offen | – (nur NOR-Variante in DL 3) | Notebooks |
-| R12 | grossteils | Soekia als Pflichtweg (Link, Drei-Zeilen-Anleitung, Erwartung vorab, selbst erzeugtes problematisches Beispiel über den Trainingstext); Anleitung am 6.11.2026 an der echten Oberfläche geprüft und korrigiert (der Prompt steuert den Text nicht; eigener Text über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen»; Regler «Temperatur» unter «Auswahl anpassen»); Papagei und Turing als Vertiefung; Untertitel/Transkript; DL-9-Zeit neu verteilt (5/10/12/53/10) | Realitätsanker (AI Act, nDSG Art. 21) fachlich prüfen |
+| R12 | grossteils | Soekia als digitaler Arbeitsweg (Link, Drei-Zeilen-Anleitung, Erwartung vorab, selbst erzeugtes problematisches Beispiel über den Trainingstext); Anleitung am 6.11.2026 an der echten Oberfläche geprüft und korrigiert (der Prompt steuert den Text nicht; eigener Text über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen»; Regler «Temperatur» unter «Auswahl anpassen»); Untertitel/Transkript; DL-9-Zeit neu verteilt (5/10/12/53/10) | Realitätsanker (AI Act, nDSG Art. 21) fachlich prüfen |
 
 **Annahmen, die ich getroffen habe (Lehrperson bitte bestätigen oder ändern):**
 
@@ -1179,8 +1189,8 @@ Musterlösungszeilen bereit.
 2. XOR in DL 4, Datenaufteilung erst in DL 5; Thema und Klassen werden in DL 4 als
    Vorbereitungsauftrag gewählt und zu Beginn DL 5 freigegeben; Fotografieren erst nach der
    Abnahme der Exemplarliste.
-3. Der Schulweg-Fall bleibt kurze Pflicht in DL 1; Meilensteine, schwache/starke KI,
-   Akinator-Kapitel und Debatte sind Wahl.
+3. Der Schulweg-Fall bleibt eine kurze erste ethische Frage in DL 1 (15 Min.); die vertiefte
+   Diskussion folgt in DL 10.
 4. Zuteilung in DL 8 zyklisch; die Klassen sind dank Klassenliste garantiert disjunkt
    (Entscheid der Lehrperson, 6.11.2026). Rückmeldungen bündelt die Lehrperson und gibt sie
    in DL 9 aus.
@@ -1205,8 +1215,25 @@ Abschnitt 7 beantwortet (siehe dort). Umsetzung in BOK, IRN und Vorlage (4. Klas
 - **DL 9–10:** KP hält fest, dass nichts eingesammelt wird.
 - **1. Klasse:** nicht angefasst.
 
-**Geänderte Tests:** `tests/check_portal.cjs` und `tests/check_admin_form.cjs` öffnen eingeklappte
-Wahl-Kapitel vor dem Zugriff (Sichtbarkeit von Timeline, Papagei-Station, Ziffern-Notebook, Turing-Kasten).
+**Welle 1c (7. November 2026): Pflicht/Wahl zurückgenommen.** Die Lehrperson will in den
+Kursunterlagen keine Pflicht/Wahl-Kennzeichnung sehen; die AVIVA-Planung zeigt, was Teil des
+Unterrichts ist (siehe Abschnitt 7). Zurückgenommen in BOK, IRN und Vorlage (4. Klasse):
+
+- **Kursseiten:** Die sechs Pflichtweg-Kästen (DL 1, 2, 3, 4, 9, 10) sind entfernt. Titel,
+  Kurzbeschreibung und geöffneter Zustand der zwölf Kapitel, die ich als «Wahl» gekennzeichnet
+  hatte, sind wieder wie vorher. In «Perzeptron 5» und «Netze 1» sind die Hinweise «Pflicht»,
+  «Wahl» und «Niveau B» entfernt; die NOR-Korrektur beim Lernraten-Versuch und die Reihenfolge
+  Rätsel vor Algebra bleiben.
+- **Pläne und Materialien:** `zeit`, Schritte und `materialien.md` (DL 1–4, 9, 10) ohne
+  «Pflichtweg», «Wahl» und «Vertiefung»; Soekia heisst «digitaler Arbeitsweg». Der Satz zu Human
+  or Not (nur als schulisch freigegebene Wahlalternative, Live-Chats mit Fremden sind keine
+  Pflicht) steht wieder im ursprünglichen Wortlaut.
+- **KP, Arbeitsblatt Perzeptron (Teil 3) und Musterlösung `xor_warum`:** ebenso bereinigt.
+- **Tests:** `tests/check_portal.cjs` und `tests/check_admin_form.cjs` sind wieder wie auf
+  `main`, weil alle Kapitel wieder offen sind.
+- **Bewusst unverändert:** Formulierungen, die schon vor Welle 1 im Kurs standen (zum Beispiel
+  «Pflichtkern», «Pflichtnotebook», «Pflichtversuch», «freiwillig», «Wahlvertiefung» im KP und
+  in einzelnen Plänen) sowie die Beurteilungsangabe «Pflicht · unbenotet» in DL 8 (K11).
 
 **Verifikation (lokal):** Stufe A (Builds, Modell-, Inhalts-, Materialien-, Lehrpersonen-, Editor- und
 Paritätstests) und die Routen-Tests bestehen; `check_portal.cjs` (inklusive Notebook und Training),

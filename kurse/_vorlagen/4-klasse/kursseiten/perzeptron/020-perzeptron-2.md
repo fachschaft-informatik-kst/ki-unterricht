@@ -1,6 +1,6 @@
-<details class="kapitel" id="perzeptron-2" data-kurz="Wahl · Wie eine Nervenzelle Reize aufnimmt, gewichtet, summiert und weiterleitet.">
+<details class="kapitel" id="perzeptron-2" data-kurz="Wie eine Nervenzelle Reize aufnimmt, gewichtet, summiert und weiterleitet." open>
   <summary><span class="kapitel-nr">2</span>
-    <h2 class="kapitel-titel">Das Vorbild: die Nervenzelle (Wahl)</h2>
+    <h2 class="kapitel-titel">Das Vorbild: die Nervenzelle</h2>
   </summary>
   <div class="kapitel-body">
     <figure class="concept-figure neuron-figure">
