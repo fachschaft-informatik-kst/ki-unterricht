@@ -42,7 +42,7 @@ Die Begriffe «KI/ML/Deep Learning/generativ» beschreiben technische Verfahren 
 
 Eine andere gut begründete Wahl ist ebenfalls richtig. Bewertet werden zwei nachvollziehbare Argumente, nicht eine bestimmte Fahrtrichtung.
 
-**Leitfrage:** «Nein. Ein Getränkeautomat führt feste Regeln aus, während ein trainierter Spamfilter Modellparameter aus Beispielen anpasst. Es gibt dennoch auch regelbasierte KI. 'Automatisch' ist nicht gleich 'KI'.»
+**Leitfrage** («Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?»): «Ein System wirkt intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz bräuchte, und mit Neuem zurechtkommt. Ein Getränkeautomat führt feste Regeln aus, während ein trainierter Spamfilter Modellparameter aus Beispielen anpasst. Es gibt dennoch auch regelbasierte KI; 'automatisch' ist nicht gleich 'KI'.» Wer sein Kriterium vom Anfang ändert oder präzisiert, hat die Frage gut genutzt.
 
 ## 2 · Lernarten (Doppellektion 2)
 
@@ -187,13 +187,13 @@ Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1
 
 **Mögliche Beobachtung:** Vier sichtbare Wörter ergeben oft einen nachvollziehbareren Satz als zwei, aber selbst längerer Kontext verhindert Widersprüche nicht.
 
-**Beispiel für eine problematische Fortsetzung, nicht als echtes Soekia-Ergebnis ausgeben:** «Eine Person ist zuerst 20 und später 80 Jahre alt.» Grammatik und Plausibilität beweisen keine Faktentreue. Die echten Texte aus den Versuchen sind im Protokoll zu dokumentieren.
+**Beispiel für eine problematische Fortsetzung, nicht als echtes Soekia-Ergebnis ausgeben:** Nach dem Hinzufügen des Trainingstexts «Die Hauptstadt der Schweiz ist Zürich.» setzt das Modell den Satz entsprechend fort; oder «Eine Person ist zuerst 20 und später 80 Jahre alt.» Das Modell gibt wieder, was in seinen Trainingstexten steht, und prüft nicht, ob es stimmt. Grammatik und Plausibilität beweisen keine Faktentreue. Die echten Texte aus den Versuchen sind im Protokoll zu dokumentieren.
 
 **Grenzen des vereinfachten Papageis:** sehr kurzer Kontext; seltene oder ungesehene Wortfolgen sind kaum abgedeckt. Er zählt Häufigkeiten, während heutige neuronale Sprachmodelle die Vorhersage aus **gelernten Gewichten und vielen Schichten** berechnen und typischerweise mit **Tokens** arbeiten.
 
 **Turing-Test:** Ein menschlich wirkender Chat ist kein Beweis für menschliches Denken oder Bewusstsein. Hinweise müssen aus dem tatsächlichen Gespräch stammen.
 
-**Festhalten:** «Mehr Kontext kann Texte verständlicher machen, garantiert aber keine korrekten Tatsachen. Wichtige Behauptungen brauchen eine unabhängige Prüfung.»
+**Festhalten:** «Mehr Kontext kann Texte verständlicher machen, garantiert aber keine korrekten Tatsachen. Wichtige Behauptungen brauchen eine unabhängige Prüfung.» Dazu: «Ich prüfe KI-Aussagen, indem ich eine zweite, unabhängige Quelle suche und die Aussage mit eigenem Wissen oder Daten vergleiche; ein Sprachmodell prüft das nicht.»
 
 ## 10 · KI und Gesellschaft (Doppellektion 10)
 
