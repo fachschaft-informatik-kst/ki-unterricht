@@ -104,7 +104,7 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal, F
 In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo selbst fest. Die sechs Etappen sind fachlich geordnet, aber keine festen Lektionstermine; die Richtwerte zeigen nur, wo sie im Unterricht voraussichtlich liegen.
 <!-- MD:END -->
   <p><strong>Verbindlich:</strong> Fünf unabhängige Datengruppen, fairer A/B-Vergleich, fünf Reflexionen und eine begründete Modellwahl <strong>vor</strong> dem Abschlusstest. Danach keine Optimierung. <strong>Abgabe vor Beginn der Doppellektion 8.</strong></p>
-  <p>Halten Sie in Reflexion 1 Ihren Plan und in Reflexion 5 die Anpassungen fest. Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> sind Orientierung, keine zusätzliche Pflicht.</p>
+  <p>Halten Sie in Reflexion 1 Ihren Plan und in Reflexion 5 die Anpassungen fest. Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> dienen der Orientierung.</p>
 </div>
 <div class="facts">
   <div class="fact">

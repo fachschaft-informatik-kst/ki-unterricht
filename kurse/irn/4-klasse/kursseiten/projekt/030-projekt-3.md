@@ -57,7 +57,7 @@ Tragen Sie für **beide Klassen** je fünf voneinander unabhängige Exemplare ei
 
 Rechnen Sie nach: **2 Klassen × 5 Gruppen × 8 Fotos = 80 Bilder**. Insgesamt sind **32 Trainings-, 16 Validierungs- und 32 Testbilder** vorgesehen. Die beiden Klassen sollen unter vergleichbaren Aufnahmebedingungen fotografiert werden.
 
-**Stresstest (freiwillig):** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. So prüft der Abschlusstest auch, ob das Netz nur Hintergrund und Licht gelernt hat. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich.
+**Stresstest:** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. So prüft der Abschlusstest auch, ob das Netz nur Hintergrund und Licht gelernt hat. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich.
 
 **Abschlusskontrolle:**
 1. Steht kein realer Gegenstand oder keine Person in mehr als einer Gruppe?

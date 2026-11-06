@@ -47,7 +47,7 @@
     <ul>
       <li>Ich begründe mit Wahrheitstabelle, Punktdarstellung und Bedingungen, warum ein einzelnes Perzeptron XOR nicht lösen kann.</li>
       <li>Ich erkläre qualitativ, wie eine Zwischenschicht das XOR-Problem lösen kann.</li>
-      <li>Freiwillige Vertiefung: Ich beschreibe am Beispiel der Ziffernerkennung ein Netz mit 64 Eingaben, einer versteckten Schicht und 10 Ausgaben.</li>
+      <li>Ich beschreibe am Beispiel der Ziffernerkennung ein Netz mit 64 Eingaben, einer versteckten Schicht und 10 Ausgaben.</li>
     </ul>
     <p class="small muted"><strong>Wo beurteilt?</strong> Im Fachgespräch (K7): eine Grundlagenfrage zur Zwischenschicht (ca. 30 Sekunden).</p>
     <a href="#netze">Zum Unterricht →</a>
@@ -73,7 +73,7 @@
 <!-- MD:END -->
     <ul>
       <li>Ich prüfe mit denselben Daten und Einstellungen, wie das andere Tandem T1/T2, V1 und P1/P2 getrennt hat, und vergleiche Originalergebnisse mit einem eigenen Nachlauf (K11, unbenotet).</li>
-      <li>Ich probiere ein fremdes Modell mit unseren eigenen, anderen Bildklassen aus und beschreibe konkrete Vorhersagen (Pflichtversuch).</li>
+      <li>Ich probiere ein fremdes Modell mit unseren eigenen, anderen Bildklassen aus und beschreibe konkrete Vorhersagen.</li>
       <li>Ich unterscheide unabhängige Testbilder derselben Klassen von völlig anderen Klassen, erkläre die Grenzen der Vorhersagen und schlage einen prüfbaren Folgetest vor (K12).</li>
       <li>Ich erkläre im vierminütigen Einzelgespräch unser eigenes Projekt selbstständig und begründe Vorgehen und Grenzen (K7–K10).</li>
     </ul>

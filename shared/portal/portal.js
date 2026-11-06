@@ -426,7 +426,7 @@ async function packFremd(){
   const entries=[
    {name:'Fremdauswertung.html',data:html},
    {name:'Fremdauswertung.json',data:JSON.stringify(meta,null,2)},
-   {name:'LESEN.txt',data:'Fremdauswertung Doppellektion 8: K11 gemeinsamer Pflichtcheck unbenotet; K12 persönliche Reflexion 0–3 Punkte.\nFremdauswertung.html enthält Bericht, Fremdtest und persönliche Reflexionen.\nFremdauswertung.json enthält Formularwerte.\nDas optionale Notebook enthält ausgeführte Zellen. Die gemeinsame Prüfung und das Experiment sind Pflicht, aber nicht benotet. Zwei persönliche Antworten je Person sind Pflicht.\nOriginalfotos und fremde Datendateien werden nicht zusätzlich beigefügt.\nDieses ZIP ist NICHT das eigene Projekt-ZIP. Es muss separat eingereicht werden.\n'}
+   {name:'LESEN.txt',data:'Fremdauswertung Doppellektion 8: K11 gemeinsamer Check unbenotet; K12 persönliche Reflexion 0–3 Punkte.\nFremdauswertung.html enthält Bericht, Fremdtest und persönliche Reflexionen.\nFremdauswertung.json enthält Formularwerte.\nEin beigelegtes Notebook enthält ausgeführte Zellen. Die gemeinsame Prüfung und das Experiment sind nicht benotet. Dazu kommen zwei persönliche Antworten je Person.\nOriginalfotos und fremde Datendateien werden nicht zusätzlich beigefügt.\nDieses ZIP ist NICHT das eigene Projekt-ZIP. Es muss separat eingereicht werden.\n'}
   ];
   if(notebook)entries.push({name:'versuch_fremd.ipynb',data:JSON.stringify(checkNotebook(notebook),null,1)});
   const zip=await makeZip(entries);

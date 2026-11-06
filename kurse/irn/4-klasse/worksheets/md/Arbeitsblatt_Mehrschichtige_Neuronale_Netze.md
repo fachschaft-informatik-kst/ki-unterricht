@@ -4,7 +4,7 @@ author: "Kantonsschule Stadelhofen"
 lang: de-CH
 ---
 
-# Mehrschichtige Netze · Pflichtteil
+# Mehrschichtige Netze
 
 **Ziel:** erklären, was eine Zwischenschicht ermöglicht.
 

@@ -36,7 +36,7 @@ Stellen Sie das fremde Projekt im privaten Fenster wieder her und finden Sie das
 | Eigene Fotostudio-JSON | andere, vom fremden Modell nicht gelernte Klassen untersuchen |
 | Separates Fremdauswertungs-ZIP | Prüfung, Rückmeldung und persönliche Reflexionen sichern |
 
-### Verarbeiten · 70 Min. · Datencheck und Pflichtversuch
+### Verarbeiten · 70 Min. · Datencheck und Versuch
 
 **Tandem / Tandem / Einzeln / Tandem · 20 / 15 / 15 / 20 Min. Puffer**
 
@@ -52,7 +52,7 @@ Stellen Sie das fremde Projekt im privaten Fenster wieder her und finden Sie das
 
 Lassen Sie das fremde Notebook mit **Startwert 11 und Originaldaten einmal nachlaufen**. Vergleichen Sie einen V1-Wert und das Testresultat mit den gespeicherten Werten. Protokollieren Sie Abweichungen offen. [Etappe 2: Nachlauf und Originalprüfung](index.html#reproduktion).
 
-#### Pflichtversuch · Eigene andere Klassen
+#### Versuch · Eigene andere Klassen
 
 Verwenden Sie Notebook-Abschnitt 6 ([Etappe 3: Eigene Bilder testen](index.html#fremdtest)). Lassen Sie das nachtrainierte fremde Modell Bilder Ihrer anderen Klassen zuordnen. Untersuchen Sie die Vorhersagetabelle, die dort angegebene Trennschärfe und mindestens ein Beispiel je Klasse.
 
@@ -78,10 +78,10 @@ Das Tandem ergänzt zwei kurze unbenotete Rückmeldesätze für das geprüfte Ta
 
 **Tandem → Einzeln · 4 / 1 Min.**
 
-- Gemeinsamer Check und Pflichtversuchsprotokoll vorhanden?
+- Gemeinsamer Check und Versuchsprotokoll vorhanden?
 - Rückmeldung und **je zwei individuelle Antworten** vorhanden?
 - Separates Fremdauswertungs-ZIP heruntergeladen und über den vereinbarten Kanal eingereicht (private Fenster erst danach schliessen)?
 - Fremdes ZIP und entpackter Ordner gelöscht (Löschregel, Etappe 1)?
 - **Einzeln, 1 Min.:** Transferfrage für DL 10 notiert: «Wenn ein System immer antwortet, auch wenn keine Antwort passt, dann …»?
 
-**Bewertung:** K11 und gemeinsame Rückmeldung sind verbindlich, aber unbenotet. Nur die persönliche Reflexion K12 zählt hier mit maximal **3 von 33 Punkten je Person**; das individuelle Fachgespräch wird separat gemäss Raster geführt.
+**Bewertung:** K11 und gemeinsame Rückmeldung sind unbenotet. Nur die persönliche Reflexion K12 zählt hier mit maximal **3 von 33 Punkten je Person**; das individuelle Fachgespräch wird separat gemäss Raster geführt.

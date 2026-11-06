@@ -4,7 +4,7 @@
 
 ## Ein roter Faden mit weniger Wechseln
 
-**Doppellektionen 1–4:** gemeinsame Grundlagen mit einem zusammenhängenden Arbeitsblock pro Thema. Die Kursseite ist eine Materialsammlung, kein vollständig abzuarbeitender Parcours. Pflichtkern und Wahlvertiefung werden jeweils vor der Arbeit deutlich benannt. Nicht jedes Antwortfeld muss ausgefüllt werden.
+**Doppellektionen 1–4:** gemeinsame Grundlagen mit einem zusammenhängenden Arbeitsblock pro Thema. Die Kursseite ist eine Materialsammlung, kein vollständig abzuarbeitender Parcours. Was zum Unterricht gehört, zeigt die AVIVA-Planung der jeweiligen Doppellektion. Nicht jedes Antwortfeld muss ausgefüllt werden.
 
 **Doppellektionen 5–8: SOL (selbst organisiertes Lernen).** Die Tandems setzen Tagesziele, verteilen Rollen und Zeit, wählen Hilfen, prüfen Fortschritte und passen ihren Plan an. In den längeren Arbeitsblöcken sind kurze individuelle Denk- und Prüfzeiten ausdrücklich eingeplant; sie ersetzen keine gemeinsame Projektarbeit. Die Lehrperson verantwortet Rahmen, Beratung und Qualitätssicherung, nicht den gemeinsamen Takt aller Etappen. Doppellektion 8 gehört zur SOL-Phase: Während die Lehrperson Einzelgespräche führt, werten die anderen Tandems selbstständig ein fremdes Modell aus.
 
@@ -14,7 +14,7 @@
 
 **PADUA** prägt die Lernversuche: Frage und Vermutung, erklärtes Beispiel, Durcharbeiten, Üben und Übertragen. Es ist keine zweite Minutenplanung. Die Notebook-Zeit kommt nicht zusätzlich zur Unterrichtszeit hinzu. Handrechnung und digitale Versuche gehören zum selben Lernweg.
 
-Alle Abläufe werden aus `kursseiten/<thema>/planung.json` in die Webseite und den generierten Markdown-Download übernommen. Diese Quelldatei enthält nur die didaktischen Hinweise und eine Einfügemarke. Die vollständige Planung steht unter `projekt/unterrichtsplan.html` auf der veröffentlichten Website. Die Puffer in den Doppellektionen 5–8 sind bereits in den 90 Minuten enthalten; sie sind nicht mit zusätzlichen Pflichtaufgaben belegt.
+Alle Abläufe werden aus `kursseiten/<thema>/planung.json` in die Webseite und den generierten Markdown-Download übernommen. Diese Quelldatei enthält nur die didaktischen Hinweise und eine Einfügemarke. Die vollständige Planung steht unter `projekt/unterrichtsplan.html` auf der veröffentlichten Website. Die Puffer in den Doppellektionen 5–8 sind bereits in den 90 Minuten enthalten; sie sind nicht mit zusätzlichen Aufgaben belegt.
 
 ## Alle Doppellektionen
 
@@ -30,11 +30,11 @@ Der A/B-Vergleich bleibt als fachliches Gerüst bestehen: zwei Klassen, 80 Fotos
 |---|---|
 | Datenregeln, Datenschutz, faire Bildzahl und konstante Einstellungen | Anwendung im genehmigten Rahmen, Klassenregeln, geeignete Exemplare und Aufnahmeorganisation |
 | Datencheck vor Vergleich; Auswahl vor Test; keine Optimierung nach Testeinsicht | Zeitverteilung der Etappen auf Doppellektion 5–7, Tagesziele und Rollen |
-| Fünf Reflexionen, nachvollziehbare Belege, Abgabe vor Doppellektion 8 | Benötigte Hilfen, Beratung, freiwillige Vertiefung vor Testeinsicht |
+| Fünf Reflexionen, nachvollziehbare Belege, Abgabe vor Doppellektion 8 | Benötigte Hilfen, Beratung, weitere Startwerte vor Testeinsicht |
 | Jede Person erklärt das ganze Projekt im Einzelgespräch in Doppellektion 8 | Wie die Tandemmitglieder sich gegenseitig auf die individuellen Gespräche vorbereiten |
 | Fremdauswertung in Doppellektion 8 (K11 unbenotet, K12 individuell) | Eigene Prüffrage, Arbeitsteilung und begründete Rückmeldung |
 
-**Kein versteckter Gleichschritt:** Die Titel der Doppellektionen 5–7 benennen den Lernprozess, keine verpflichtenden Versuchstermine. Ein Tandem darf in Doppellektion 5 schon vergleichen und ein anderes in Doppellektion 6 noch Daten ergänzen. Die fachliche Reihenfolge bleibt erhalten.
+**Kein versteckter Gleichschritt:** Die Titel der Doppellektionen 5–7 benennen den Lernprozess, keine festen Versuchstermine. Ein Tandem darf in Doppellektion 5 schon vergleichen und ein anderes in Doppellektion 6 noch Daten ergänzen. Die fachliche Reihenfolge bleibt erhalten.
 
 ### Planung und Reflexion ohne Zusatzbürokratie
 
@@ -63,7 +63,7 @@ Fachlich sichern: Ein regelbasiertes System kann KI sein, lernt aber nicht aus D
 
 Memory-Material und Rollen vorab bereitstellen. Die Gruppe bleibt über die drei Runden bestehen; nur die Rollen wechseln. Nach jeder Runde ein Lernsignal und eine Beobachtung notieren. Danach NIM gemeinsam am Beamer: Was ändert sich durch Rückmeldung?
 
-Akinator und Filmempfehlungen als Beispiele erläutern, nicht als weitere Pflichttools öffnen. Smiley, K-Means und Begriffscheck sind Wahlmaterial; Quick, Draw! nur freiwillig ohne persönliche Motive. Fachlich unterscheiden: Im Memory lernt ein Mensch; NIM zeigt das KI-Beispiel. Beim unüberwachten Lernen werden keine Zielklassen vorgegeben.
+Akinator und Filmempfehlungen als Beispiele erläutern, nicht als weitere Werkzeuge öffnen. Smiley, K-Means und Begriffscheck stehen als Material auf der Kursseite; Quick, Draw! nur ohne persönliche Motive. Fachlich unterscheiden: Im Memory lernt ein Mensch; NIM zeigt das KI-Beispiel. Beim unüberwachten Lernen werden keine Zielklassen vorgegeben.
 
 Zum Schluss schreibt jede Person die Leitfrage «Wie lernt KI?» an einem ungesehenen Beispiel (zum Beispiel einem Empfehlungsdienst) auf, bevor die Lehrperson klärt. Die Selbstkontrolle steht auf der Kursseite (Kapitel 8).
 
@@ -75,7 +75,7 @@ Gewichte und Bias werden gelernt, Eingaben und Labels nicht. Bei falscher Ausgab
 
 ### Doppellektion 4 · Netz und Projektbrücke entlasten
 
-Nur den XOR-Kern des Netz-Notebooks verbindlich durchführen. Das zweite Notebook bleibt Hilfe und Vertiefung. Keine zwei vollständigen Notebookdurchläufe. Ziffernexperimente sind optional.
+Nur den XOR-Kern des Netz-Notebooks durchführen. Das zweite Notebook bleibt Hilfe. Keine zwei vollständigen Notebookdurchläufe. Die Ziffernexperimente gehören nicht zu dieser Lektion.
 
 Reihenfolge im Kapitel «Warum eine Zwischenschicht?»: zuerst das Rätsel im Notebook (die Lernenden probieren, warum keine Einstellung funktioniert), dann an der Tafel vier Punkte mit Skizze. Die Geometrie genügt für den Input; die Algebra der vier Bedingungen wird nicht vorgeführt. Die Tandems schreiben die vier Bedingungen vor der Auflösung selbst auf und vergleichen mit der Tabelle auf der Seite. Die Datenaufteilung ist kein Thema von Doppellektion 4; der Lernpfad dazu beginnt in Doppellektion 5.
 
@@ -93,7 +93,7 @@ Go/No-Go Mitte Doppellektion 6 als Rundgang, nicht als Klassenstopp: Wer noch ke
 
 Ehrlichkeit des Versuchs: V1 ist ein Gegenstand je Klasse (acht Fotos, zusammen 16 Bilder, ein Bild entspricht 6,25 Prozentpunkten). 16 Bilder sind deshalb nicht 16 unabhängige Tests. Faustregel, kein statistisches Kriterium: Ein Unterschied von höchstens zwei Bildern gilt nicht als Beleg. Bei Gleichstand begründen die Tandems ihre Wahl mit einem anderen Argument, etwa den Vorhersagen im Einzelfall.
 
-Die Tandems prüfen selbst die Freigabevoraussetzungen: Daten korrekt, Auswahl und Begründung vor Testeinsicht im Journal, ursprüngliche Variante in der Testzelle. Die Lehrperson berät und prüft stichprobenartig. Ein Startwert genügt; drei Startwerte sind freiwillige Vertiefung vor dem Abschlusstest. Nach Testeinsicht weder Daten noch Auswahl zur Optimierung ändern.
+Die Tandems prüfen selbst die Freigabevoraussetzungen: Daten korrekt, Auswahl und Begründung vor Testeinsicht im Journal, ursprüngliche Variante in der Testzelle. Die Lehrperson berät und prüft stichprobenartig. Ein Startwert genügt. Nach Testeinsicht weder Daten noch Auswahl zur Optimierung ändern.
 
 Zu Beginn von Doppellektion 7 Abgabekanal, Gesprächsfenster und Austauschpartner mitteilen (Zuteilungsregel: siehe Doppellektion 8). Am Ende einen Probelauf durchführen: das eigene Austausch-ZIP in einem privaten Fenster wiederherstellen und prüfen, ob Journal, Notebook und Fotostudio-JSON vorhanden sind. Keine Folienpräsentation fordern. Austauschdateien und Datenschutz vorher prüfen; auch Fotostudio-JSON enthält Vorschaubilder. Personenfotos nur bei geklärter Berechtigung weitergeben; sonst ein freigegebenes, nicht personenbezogenes Austauschprojekt zuteilen.
 
@@ -101,13 +101,13 @@ Zu Beginn von Doppellektion 7 Abgabekanal, Gesprächsfenster und Austauschpartne
 
 Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrperson führt bei 20 Lernenden ab Minute 0 bis Minute 100 die vierminütigen Einzelgespräche mit jeweils einer Minute Notizen/Wechsel (90 Minuten Unterricht plus 10 Minuten direkt im Anschluss). Die anderen Tandems organisieren die Fremdauswertung selbst und pausieren jeweils nur für ihr persönliches Gespräch.
 
-**Pflichtkern der selbstständigen Fremdauswertung:** ca. **10 Minuten** Dateien vorbereiten (Etappe 1, im Einstieg); ca. **20 Minuten** Trainings-, Validierungs- und Testdaten (T1/T2, V1, P1/P2) samt Originalergebnissen prüfen und einen Nachlauf mit Startwert 11 durchführen (der Nachlauf prüft die Wiederholbarkeit, nicht die Replikation); ca. **15 Minuten** die eigenen, ganz anderen Klassen durch das fremde Modell schicken, mindestens ein Bild je Klasse und die Vorhersagetabelle betrachten; anschliessend ca. **15 Minuten** zwei persönliche Reflexionsantworten und eine gemeinsame Rückmeldung verfassen. Weitere **20 Minuten** sind für Gesprächsunterbrechungen und technische Probleme reserviert. Zusätzlich ZIP-Abgabe. Gesprächsplan der Lehrperson unverändert: 100 Minuten ohne Reserve.
+**Ablauf der selbstständigen Fremdauswertung:** ca. **10 Minuten** Dateien vorbereiten (Etappe 1, im Einstieg); ca. **20 Minuten** Trainings-, Validierungs- und Testdaten (T1/T2, V1, P1/P2) samt Originalergebnissen prüfen und einen Nachlauf mit Startwert 11 durchführen (der Nachlauf prüft die Wiederholbarkeit, nicht die Replikation); ca. **15 Minuten** die eigenen, ganz anderen Klassen durch das fremde Modell schicken, mindestens ein Bild je Klasse und die Vorhersagetabelle betrachten; anschliessend ca. **15 Minuten** zwei persönliche Reflexionsantworten und eine gemeinsame Rückmeldung verfassen. Weitere **20 Minuten** sind für Gesprächsunterbrechungen und technische Probleme reserviert. Zusätzlich ZIP-Abgabe. Gesprächsplan der Lehrperson unverändert: 100 Minuten ohne Reserve.
 
 **Zuteilung und Plan B:** Zyklisch zuteilen (Tandem 1 prüft Tandem 2, …, das letzte Tandem prüft Tandem 1), sodass jedes Tandem ein Projekt prüft und von genau einem anderen geprüft wird. Eine Kontrolle vorab ist nicht nötig: Weil jede Bildklasse nur von einem Tandem gewählt wurde (Klassenliste, Doppellektion 4 und 5), sind die Klassen des geprüften Projekts garantiert andere als die eigenen. Nur wenn die Klassenliste nicht geführt wurde, vorher prüfen und bei Überschneidung die Zuteilung verschieben. Projekte mit Personenfotos nur mit Zustimmung der abgebildeten Personen zuteilen. Ein personenfreies Referenzpaket bereithalten: das Journal-ZIP eines eigenen Probelaufs mit `testbilder/beispielbilder_fotostudio.json` (Apfel/Banane, `MODUS = 'EIGENE_DATEN'`, `KLASSEN = ['Apfel', 'Banane']`, Abschlusstest einmal ausgeführt). Das Paket dient bei Importproblemen und für nicht weitergebbare Personenfotos. Die Notfallkarte steht auf der Seite «Dateien vorbereiten».
 
 **Fachliche Leitidee:** Die **ungesehenen Testbilder P1/P2 gehören zu den beiden ursprünglichen Modellklassen** und dürfen für eine unabhängige Trefferquote gerade nicht im Training gewesen sein. Die **eigenen, ganz anderen Klassen** hat das fremde Modell hingegen überhaupt nie gelernt. Es muss dennoch eine seiner zwei bekannten Klassen vorhersagen. Eine hohe Trennschärfe oder ein hoher Modellwert ist deshalb keine nachgewiesene Trefferquote für die neuen Klassen. Die Erwartung wird vor dem Versuch einzeln notiert; die Erklärung liest man erst nach dem Versuch (Predict–Observe–Explain).
 
-**Bewertung und Abgabe:** Gemeinsamer Daten-/Ergebnischeck K11 und Pflichtversuch sind **verbindlich, unbenotet** und Voraussetzung für die persönliche Reflexion. Nur das persönliche begründete Urteil **K12 zählt maximal 3 Punkte pro Person** (3/33 = 9,1 % der Note). Je Person zwei Pflichtantworten, dazu eine kurze gemeinsame Rückmeldung für das geprüfte Tandem; ZIP separat einreichen. Falls das Notebook nicht startet, dokumentierte Originalbilder und -resultate auswerten und nicht ausgeführte Experimente ausdrücklich kennzeichnen. Drei Startwerte sind freiwillig.
+**Bewertung und Abgabe:** Der gemeinsame Daten-/Ergebnischeck K11 und der Versuch mit den eigenen Klassen sind **unbenotet** und Voraussetzung für die persönliche Reflexion. Nur das persönliche begründete Urteil **K12 zählt maximal 3 Punkte pro Person** (3/33 = 9,1 % der Note). Je Person zwei Antworten, dazu eine kurze gemeinsame Rückmeldung für das geprüfte Tandem; ZIP separat einreichen. Falls das Notebook nicht startet, dokumentierte Originalbilder und -resultate auswerten und nicht ausgeführte Experimente ausdrücklich kennzeichnen.
 
 **Rückmeldungen und Abschluss:** Die Lehrperson sammelt die gemeinsamen Rückmeldungen ein, bündelt sie je Tandem und gibt sie zu Beginn von Doppellektion 9 aus («Was nehmen wir mit?»). In den letzten fünf Minuten sichern, das private Fenster erst nach dem ZIP-Download schliessen und einzeln eine Transferfrage für Doppellektion 10 notieren («Wenn ein System immer antwortet, auch wenn keine Antwort passt, dann …»). Löschregel: Nach der Einreichung das fremde ZIP und den entpackten Ordner löschen.
 
@@ -115,7 +115,7 @@ Der eigene bewertete Abgabestand liegt **vor Unterrichtsbeginn** vor. Die Lehrpe
 
 Zu Beginn die gebündelten Rückmeldungen zu Doppellektion 8 ausgeben («Was nehmen wir mit?») und den Anker setzen: Ein Modell antwortet immer, auch wenn keine Antwort passt (das fremde Modell sah eine Tasse und sagte «Gabel»). Nach dem kurzen Papierexperiment Papagei-Modell und neuronales Sprachmodell in **vier Sätzen** verbinden: Vortraining und Feinabstimmung (Transfer Learning wie im Bildprojekt), Wörter als Zahlen (wie die 1280 Merkmale), der Text liefert seine Labels selbst, ein Prozentwert ist keine Wahrheit. Anschliessend gibt es **einen** digitalen Arbeitsweg: Soekia (soekia.ch/GPT, n-Gramm-Modell der PH Schwyz) mit Drei-Zeilen-Anleitung: N-Gramm-Länge «N <= 2» gegen «N <= 5», Regler «Temperatur» und ein eigener Trainingstext mit einer falschen Aussage («Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen»; das problematische Beispiel selbst erzeugen). Das Textfeld «Schreibe mir ein Märchen.» steuert den Text nicht; jeder «start» schreibt einen neuen Text, deshalb mehrere Läufe vergleichen. Oberfläche und Ablauf am 6.11.2026 geprüft; vorab trotzdem im Schulnetz ausprobieren und Beispielausgaben als Ersatz bereithalten. Hilfen: Handreichung für Lehrpersonen (PDF) auf der Soekia-Startseite (soekia.ch/gpt.html).
 
-Human or Not ist ein Live-Chat mit Fremden, keine Simulation. Nur nach schulischer Freigabe als freiwillige Alternative innerhalb desselben Zeitbudgets einsetzen; keine persönlichen Daten. Kein zusätzlicher Pflichtwechsel.
+Human or Not ist ein Live-Chat mit Fremden, keine Simulation. Nur nach schulischer Freigabe innerhalb desselben Zeitbudgets einsetzen; keine persönlichen Daten. Kein zusätzlicher Werkzeugwechsel.
 
 Sichern (vier Minuten, zuerst allein schreiben, dann zwei Beispiele teilen): Moderne Sprachmodelle lernen Gewichte und Zahlendarstellungen; sie sind keine blosse Häufigkeitstabelle. Plausibilität garantiert bei keinem der Beispiele Wahrheit. Das Papierexperiment illustriert Kontext, kein Modelltraining. Dazu das Sicherungsfeld «Ich prüfe KI-Aussagen, indem …» mit Selbstkontrolle. Der Ausblick auf Doppellektion 10 («Wer trägt die Folgen falscher, aber überzeugender Ausgaben?») greift ein bis zwei Transferfragen aus Doppellektion 8 auf. Es wird nichts eingesammelt (Entscheid der Lehrperson vom 6.11.2026): Die Sicherung ist Selbstkontrolle und Klassengespräch, Doppellektion 9 bleibt unbenotet.
 
@@ -125,7 +125,7 @@ Video und Wiedergabe vorab prüfen (englisch: Untertitel einschalten oder das Tr
 
 Mit Video-Beispiel und Bildprojekt kurz vergleichen. Das Schulprojekt ist wahrscheinlich keine WMD, weil grosse Reichweite und erheblicher Schaden fehlen; dies begründen lassen. Im Bildprojekt waren Daten, Protokoll und Prüfbericht einsehbar (Gegenstück zu Opacity); Hintergrund und Licht waren der benannte Störfaktor. Rückkopplung am Kreditfall: Über Abgelehnte fehlen spätere Erfolgsdaten. Beim Fall «Schulweg» aus Doppellektion 1 anknüpfen: Wer legt fest, was Schaden heisst? Nach allgemeinen Vorschlägen fragen: Wer ändert was, und woran wäre die Verbesserung erkennbar?
 
-Der Abschluss ist eine kurze Synthese: ein Schlussurteil mit Selbstkontrolle (fünf Minuten, zuerst allein), danach drei Minuten «Wo kann eine Vorhersage falsch sein?» mit je einem Beispiel aus drei Doppellektionen, danach jede Person kurz eine Erkenntnis und eine offene Frage. Einzelne freiwillige Stimmen statt einer zeitlich unplanbaren Runde aller Lernenden. Es wird nichts eingesammelt (Entscheid der Lehrperson vom 6.11.2026): Schlussurteil, Kurssynthese und Rückblick bleiben bei den Lernenden; Doppellektion 10 bleibt unbenotet.
+Der Abschluss ist eine kurze Synthese: ein Schlussurteil mit Selbstkontrolle (fünf Minuten, zuerst allein), danach drei Minuten «Wo kann eine Vorhersage falsch sein?» mit je einem Beispiel aus drei Doppellektionen, danach jede Person kurz eine Erkenntnis und eine offene Frage. Einzelne Stimmen statt einer zeitlich unplanbaren Runde aller Lernenden. Es wird nichts eingesammelt (Entscheid der Lehrperson vom 6.11.2026): Schlussurteil, Kurssynthese und Rückblick bleiben bei den Lernenden; Doppellektion 10 bleibt unbenotet.
 
 ## Fachliche Leitplanken
 
@@ -152,7 +152,7 @@ Der Abschluss ist eine kurze Synthese: ein Schlussurteil mit Selbstkontrolle (f�
 | 17–18 | Minute 80–90 | 10 Min. | Ende der Doppellektion |
 | 19–20 | Minute 90–100 | 10 Min. | Unmittelbarer Anschluss |
 
-**Vorbereitung vor Doppellektion 8:** Individuelle Fünfminuten-Slots sowie die zugeteilten fremden Projekte schriftlich verteilen (Zuteilungsregel und Plan B: siehe Doppellektion 8), Zugriff und Abgabekanal prüfen, ausgefüllte Projekt-Raster und Kurzfragen bereitlegen. **Keine klassenweite Einführung oder Abschlussbesprechung am Prüfungstag.** Die übrigen Lernenden starten direkt selbstständig mit der verbindlichen, unbenoteten Fremdauswertung und pausieren nur für ihr Einzelgespräch. Die Abgabe ihrer Fremdauswertung wird selbstständig organisiert; die Lehrperson kann während der laufenden Gespräche keine Beratung leisten.
+**Vorbereitung vor Doppellektion 8:** Individuelle Fünfminuten-Slots sowie die zugeteilten fremden Projekte schriftlich verteilen (Zuteilungsregel und Plan B: siehe Doppellektion 8), Zugriff und Abgabekanal prüfen, ausgefüllte Projekt-Raster und Kurzfragen bereitlegen. **Keine klassenweite Einführung oder Abschlussbesprechung am Prüfungstag.** Die übrigen Lernenden starten direkt selbstständig mit der unbenoteten Fremdauswertung und pausieren nur für ihr Einzelgespräch. Die Abgabe ihrer Fremdauswertung wird selbstständig organisiert; die Lehrperson kann während der laufenden Gespräche keine Beratung leisten.
 
 | Im vierminütigen Einzelgespräch | Fokus | Kompetenz |
 | --- | --- | --- |
@@ -185,7 +185,7 @@ Je Kriterium eine Frage aus dem Pool; die Variante wechselt von Gespräch zu Ges
 
 Eine ZIP-Abgabe enthält `Journal.html`, Versuchsnotebook mit gespeicherten Ausgaben, vorhandenes Versuchsprotokoll sowie hinzugefügte Originalfotos und Fotostudio-JSON. Foto-Upload im Notebook und Dateien der Abgabeliste sind getrennt. Nach Import zuerst Vorbereitung und Datenimport erneut ausführen; gespeicherte Ausgaben sind kein laufender Python-Zustand. Training und Test bleiben manuell.
 
-Elf benotete Kriterien à 0–3 Punkte, insgesamt 33. K1–K6: Projektabgabe (18); K7–K10: individuelles vierminütiges Gespräch (12); K12: persönliche DL-8-Reflexion (3). Der gemeinsame Check K11 wird als Pflichtarbeit nicht benotet; die Nummer K11 bleibt bewusst unbesetzt im Raster. Pro Person: Note = 1 + 5 × (K1–K6 + K7–K10 + K12) / 33, auf Viertelnoten gerundet. Details: [Bewertungsraster](KI_Bewertungsraster.md).
+Elf benotete Kriterien à 0–3 Punkte, insgesamt 33. K1–K6: Projektabgabe (18); K7–K10: individuelles vierminütiges Gespräch (12); K12: persönliche DL-8-Reflexion (3). Der gemeinsame Check K11 wird nicht benotet; die Nummer K11 bleibt bewusst unbesetzt im Raster. Pro Person: Note = 1 + 5 × (K1–K6 + K7–K10 + K12) / 33, auf Viertelnoten gerundet. Details: [Bewertungsraster](KI_Bewertungsraster.md).
 
 Rechenbeispiele (ganzzahlige Punkte): 16 Punkte → 3,5; 22 Punkte (alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 26 → 5,0; 32 → 5,75; 6,0 nur mit 33 Punkten. **Stufe 2 («alle Anforderungen erfüllt») ist die Sollstufe** (Entscheid der Lehrperson vom 6.11.2026): Wer überall die Sollstufe erreicht, erhält 22 Punkte und die Note 4,25; Noten ab 5 verlangen Stufe 3 in mehreren Kriterien. Die Datentrennung zählt in K2, K4, K8 und K12 (Überlappung beachten: ein Verständnisfehler kostet mehrfach).
 
@@ -204,4 +204,4 @@ Rechenbeispiele (ganzzahlige Punkte): 16 Punkte → 3,5; 22 Punkte (alle elf Kri
 
 ## Bewertung nach DL 8
 
-Die 33 Punkte umfassen 18 gemeinsame Projektpunkte (K1–K6), 12 individuelle Punkte im Fachgespräch (K7–K10) und 3 individuelle Punkte (K12). Die gemeinsame Prüfung der fremden Trainings-/Testdaten und der Pflichtversuch (K11) bleiben unbenotet. Die ursprüngliche Abgabe bleibt unverändert. Andere Klassen sind keine regulären Testbilder des fremden Modells.
+Die 33 Punkte umfassen 18 gemeinsame Projektpunkte (K1–K6), 12 individuelle Punkte im Fachgespräch (K7–K10) und 3 individuelle Punkte (K12). Die gemeinsame Prüfung der fremden Trainings-/Testdaten und der Versuch mit den eigenen Klassen (K11) bleiben unbenotet. Die ursprüngliche Abgabe bleibt unverändert. Andere Klassen sind keine regulären Testbilder des fremden Modells.

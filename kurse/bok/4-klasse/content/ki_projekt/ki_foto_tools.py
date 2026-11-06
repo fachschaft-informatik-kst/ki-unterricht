@@ -58,7 +58,7 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
                 chosen += [dict(r, group=new) for r in rows]
         docs=[dict(docs[0], records=chosen)]
     if profil == 'basis':
-        ki.pruefe(len(klassen)==2, 'Im Pflichtprojekt genau zwei Klassen wählen.')
+        ki.pruefe(len(klassen)==2, 'Im Projekt genau zwei Klassen wählen.')
     by_id = {}
     for doc in docs:
         ki.pruefe(doc.get('schema') == 'fotostudio-v1' and doc.get('pipeline') == PIPELINE,
@@ -101,7 +101,7 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
         for g in list(train)+list(val)+list(test):
             for c in range(2):
                 ki.pruefe(np.sum((gruppen==g)&(y==c)) == 8,
-                          f'{g}/{klassen[c]}: im Pflichtprojekt genau 8 verschiedene Fotos verwenden.')
+                          f'{g}/{klassen[c]}: im Projekt genau 8 verschiedene Fotos verwenden.')
     checksum=hashlib.sha256(json.dumps(records,sort_keys=True).encode()).hexdigest()
     for a in [X,y,gruppen]:a.flags.writeable=False
     d=ki.Daten(X,y,gruppen,[r['id'] for r in records],list(klassen),tuple(train),tuple(val),tuple(test),
@@ -184,7 +184,7 @@ def vorhersagen_zeigen(exp, variante='B'):
 
 def vergleichen(daten, wiederholen=False):
     """Gleiche Bildzahl: A ein Exemplar, B zwei Exemplare pro Klasse."""
-    ki.pruefe(len(daten.klassen)==2, 'Pflichtvergleich mit genau zwei Klassen.')
+    ki.pruefe(len(daten.klassen)==2, 'Vergleich mit genau zwei Klassen.')
     return ki.experiment_starten(daten,weg='vielfalt',bilder_pro_klasse=8,
         wenige_personen=daten.train_personen[:1],neuronen=16,epochen=60,
         seeds=(11,22,33) if wiederholen else (11,))

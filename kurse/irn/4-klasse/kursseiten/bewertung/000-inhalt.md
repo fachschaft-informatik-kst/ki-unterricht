@@ -1,6 +1,6 @@
 <span class="section-label">Projektbewertung</span>
 <h1>So entsteht Ihre Note.</h1>
-<p class="section-intro">Elf benotete Kriterien (K1–K10 und K12) zählen mit jeweils 0–3 Punkten. K11 ist der gemeinsame Fremdcheck: verbindlich, aber unbenotet, darum hat er keine Zeile im Raster.</p>
+<p class="section-intro">Elf benotete Kriterien (K1–K10 und K12) zählen mit jeweils 0–3 Punkten. K11 ist der gemeinsame Fremdcheck: unbenotet, darum hat er keine Zeile im Raster.</p>
 <div class="lesson-steps">
   <article>
     <b>18 Punkte · Projekt</b>
@@ -27,7 +27,7 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
 <!-- MD:END -->
   </article>
 </div>
-<p class="callout"><strong>Gemeinsamer Check K11 (Pflicht, unbenotet):</strong> Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2, ein nachgerechnetes Ergebnis und eine kurze Rückmeldung untersuchen. Diese Arbeit ist die Grundlage der persönlichen Reflexion, wird aber nicht mit zusätzlichen Punkten bewertet.</p>
+<p class="callout"><strong>Gemeinsamer Check K11 (unbenotet):</strong> Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2, ein nachgerechnetes Ergebnis und eine kurze Rückmeldung untersuchen. Diese Arbeit ist die Grundlage der persönlichen Reflexion, wird aber nicht mit zusätzlichen Punkten bewertet.</p>
 <p class="small"><strong>Stufe 2 ist die Sollstufe:</strong> Wer alle Anforderungen erfüllt, erreicht sie. Stufe 3 verlangt zusätzlich Begründung, Vertiefung oder Übertragung. Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
 <div aria-label="Bewertungsraster, horizontal scrollbar" class="table-scroll" role="region" tabindex="0">
   <table class="rubric">

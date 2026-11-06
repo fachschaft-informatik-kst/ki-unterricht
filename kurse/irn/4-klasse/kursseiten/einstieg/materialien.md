@@ -119,4 +119,4 @@ Besprechen Sie zwei strittige Zuordnungen und prüfen Sie, ob die Kriterien an d
 - Es nutzt feste Regeln / Lernen aus Daten, erkennbar an: ____________________
 - Mein Kriterium für Intelligenz vom Anfang: behalten / ändern, weil ____________________ Eine Grenze bleibt: ____________________
 
-**Erwartetes Ergebnis:** Neun kontrollierte Zuordnungen, zwei begründete Grenzfälle, zwei Argumente zum Schulweg und eine eigene Antwort auf die Leitfrage. Zusätzliche Beispiele sind freiwillig.
+**Erwartetes Ergebnis:** Neun kontrollierte Zuordnungen, zwei begründete Grenzfälle, zwei Argumente zum Schulweg und eine eigene Antwort auf die Leitfrage.

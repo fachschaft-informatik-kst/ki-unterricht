@@ -64,7 +64,7 @@ Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwelle
 **Tandem → Einzeln → Tandem · 32 / 8 / 10 Min.**
 
 1. **AND / OR (Experiment 2):** Finden Sie für jede Funktion eine Einstellung. Prüfen Sie mit **denselben Parametern alle vier Eingaben**.
-2. **Puffer (10 Min.):** Notebook-Start, Technik und Fragen. **Freiwillige Vertiefung:** Experiment 3 (Lernen) selbst durchführen und Vorher und Nachher vergleichen.
+2. **Puffer (10 Min.):** Notebook-Start, Technik und Fragen.
 
 | Experiment / Eingabe | w₁ / w₂ / b vorher | Summe / Ausgabe vorher | Änderung | Summe / Ausgabe nachher |
 |---|---|---|---|---|

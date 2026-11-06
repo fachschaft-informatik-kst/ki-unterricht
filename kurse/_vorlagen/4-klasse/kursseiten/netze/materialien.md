@@ -1,6 +1,6 @@
 ## Doppellektion 04
 
-**Bereitlegen:** Papier oder [XOR-Gitter](materialien/downloads/koordinatengitter_xor_einfach.svg); Beamer für das XOR-Rätsel; Pflichtnotebook der Lernenden ist [Neuronale Netze](materialien/downloads/mehrschichtige_netze.ipynb), das [XOR: Ein Neuron](materialien/downloads/xor_einzelne_neuronen.ipynb) zeigt die Lehrperson am Beamer.
+**Bereitlegen:** Papier oder [XOR-Gitter](materialien/downloads/koordinatengitter_xor_einfach.svg); Beamer für das XOR-Rätsel; die Lernenden arbeiten im Notebook [Neuronale Netze](materialien/downloads/mehrschichtige_netze.ipynb), das [XOR: Ein Neuron](materialien/downloads/xor_einzelne_neuronen.ipynb) zeigt die Lehrperson am Beamer.
 
 ### Ankommen · 5 Min. · Genau eine Taste
 
@@ -57,7 +57,7 @@ Aus den mittleren Zeilen folgt w₁ + w₂ + b ≥ −b > 0. Das widerspricht de
 
 1. Öffnen Sie das [Netzwerk-Kapitel](index.html#netze-2) und arbeiten Sie im Notebook «Neuronale Netze». Verfolgen Sie OR → NAND → AND und lösen Sie die vier XOR-Fälle mit dem Netz. Der Abschnitt «Selbstcheck · Ein anderer Fall» entfällt, dafür folgt die Papieraufgabe.
 2. Rechnen Sie im Tandem einen zusätzlichen Eingabefall vollständig durch (Tabelle unten).
-3. **Klasse · Demo am Beamer:** Die Lehrperson lässt das Netz mit 1, 2 und 4 versteckten Neuronen lernen. Mehr Neuronen garantieren in einem einzelnen Trainingslauf keinen Erfolg. Das selbstständige Durchführen im Notebook ist freiwillig.
+3. **Klasse · Demo am Beamer:** Die Lehrperson lässt das Netz mit 1, 2 und 4 versteckten Neuronen lernen. Mehr Neuronen garantieren in einem einzelnen Trainingslauf keinen Erfolg.
 
 | Eingabe | OR: Summe / h₁ | NAND: Summe / h₂ | Ausgang: Summe / y | XOR-Ziel |
 |---|---|---|---|---|
@@ -70,7 +70,7 @@ Aus den mittleren Zeilen folgt w₁ + w₂ + b ≥ −b > 0. Das widerspricht de
 
 > **Kontrolle für (0,1):** OR-Summe 0.5 → 1; NAND-Summe 0.5 → 1; Ausgangssumme 0.5 → 1. Die Zwischenschicht berechnet neue Merkmale; sie ist nicht nur «mehr Rechenleistung».
 
-**Nur freiwillig:** [Ziffernerkennung](index.html#netze-5) · [eigenständiges Ziffern-Notebook](materialien/downloads/ziffernerkennung.ipynb). Kein drittes Pflichtnotebook.
+Kein drittes Notebook in dieser Lektion: [Ziffernerkennung](index.html#netze-5) · [eigenständiges Ziffern-Notebook](materialien/downloads/ziffernerkennung.ipynb).
 
 ### Auswerten · 13 Min. · Sicherung vor dem Projekt
 

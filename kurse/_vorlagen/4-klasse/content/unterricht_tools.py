@@ -1,4 +1,4 @@
-"""Darstellungen für den Pflichtweg. CPython und JupyterLite/Pyodide.
+"""Darstellungen für die Notebooks. CPython und JupyterLite/Pyodide.
 Der Code ist für Interessierte einsehbar; Lernende ändern nur die Notebook-Einstellungen.
 """
 import numpy as np
@@ -1040,7 +1040,7 @@ _ZIFFERN_NEURONEN = [2, 4, 8, 16, 32]
 
 
 def ziffern_regler():
-    """Freiwillige Vertiefung: das teure Training erst auf Knopfdruck starten.
+    """Das teure Training erst auf Knopfdruck starten.
 
     Die Regler erscheinen sofort, ohne beim Öffnen des Notebooks ein Modell
     zu trainieren. Beim Ausführen und beim Export bleiben die Ergebnisse erhalten.

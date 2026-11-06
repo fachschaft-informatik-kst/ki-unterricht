@@ -74,7 +74,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 40,
-              "text": "Bearbeiten Sie in Ihrem eigenen Tempo den SOL-Lernpfad auf der Seite «Datenregeln lernen»: Lesen Sie die drei Datenrollen, ordnen Sie Beispiele zu, untersuchen Sie im Notebook «Datenaufteilung» ein Datenleck und kontrollieren Sie sich mit den eingeblendeten Lösungen. Übertragen Sie die Regeln dann auf der Seite «Daten & Fotos» auf T1/T2/V1/P1/P2 mit Ihren zwei Klassen und je fünf Exemplaren und tragen Sie die Exemplarliste ein (freiwilliger Stresstest: P2 für beide Klassen an einem anderen Ort oder vor einem anderen Hintergrund). Lassen Sie die Liste anhand der Abschlusskontrolle abnehmen (Lehrperson oder Nachbartandem, ca. 2 Minuten); erst danach wird fotografiert. Testen Sie den Weg Handy → Laptop mit einem Foto. Halten Sie Ihre Begründung im bestehenden Journal fest, wählen Sie Tagesziel und Rollen und ergänzen Sie Reflexion 1; Reflexion 2 darf in Doppellektion 6 abgeschlossen werden. Wer die Abnahme hat, beginnt mit dem Fotografieren; niemand muss heute bereits ein Modell trainieren."
+              "text": "Bearbeiten Sie in Ihrem eigenen Tempo den SOL-Lernpfad auf der Seite «Datenregeln lernen»: Lesen Sie die drei Datenrollen, ordnen Sie Beispiele zu, untersuchen Sie im Notebook «Datenaufteilung» ein Datenleck und kontrollieren Sie sich mit den eingeblendeten Lösungen. Übertragen Sie die Regeln dann auf der Seite «Daten & Fotos» auf T1/T2/V1/P1/P2 mit Ihren zwei Klassen und je fünf Exemplaren und tragen Sie die Exemplarliste ein. Lassen Sie die Liste anhand der Abschlusskontrolle abnehmen (Lehrperson oder Nachbartandem, ca. 2 Minuten); erst danach wird fotografiert. Testen Sie den Weg Handy → Laptop mit einem Foto. Halten Sie Ihre Begründung im bestehenden Journal fest, wählen Sie Tagesziel und Rollen und ergänzen Sie Reflexion 1; Reflexion 2 darf in Doppellektion 6 abgeschlossen werden. Wer die Abnahme hat, beginnt mit dem Fotografieren; niemand muss heute bereits ein Modell trainieren."
             },
             {
               "art": "Auftrag",
@@ -86,7 +86,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Frei verfügbarer Puffer für Datenlücken, Notebook-Start, eigene Fragen oder die gründlichere Selbstkontrolle; keine zusätzliche Pflicht."
+              "text": "Frei verfügbarer Puffer für Datenlücken, Notebook-Start, eigene Fragen oder die gründlichere Selbstkontrolle."
             },
             {
               "art": "Ergebnis",
@@ -202,12 +202,12 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Frei verfügbarer Puffer für Technik, Interpretation oder Beratung. Eine Vertiefung mit weiteren Startwerten ist freiwillig und nur vor Testeinsicht möglich."
+              "text": "Frei verfügbarer Puffer für Technik, Interpretation oder Beratung. Weitere Startwerte sind nur vor Testeinsicht möglich."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Belegte Ergebnisse der gewählten Etappe; keine Pflicht zu einem klassenweit gleichen Stand."
+              "text": "Belegte Ergebnisse der gewählten Etappe, jedes Tandem in seinem eigenen Stand."
             }
           ]
         },
@@ -318,7 +318,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 15,
-              "text": "Puffer für fehlende Belege, technischen Export und Beratung. Datenarbeit bei Bedarf zuerst fertigstellen, nicht zugunsten eines schnellen Tests überspringen. Keine neuen Pflichtversuche."
+              "text": "Puffer für fehlende Belege, technischen Export und Beratung. Datenarbeit bei Bedarf zuerst fertigstellen, nicht zugunsten eines schnellen Tests überspringen. Keine neuen Versuche."
             },
             {
               "art": "Ergebnis",

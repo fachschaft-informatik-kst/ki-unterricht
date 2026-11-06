@@ -108,7 +108,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
         </table>
       </div>
       <details>
-        <summary>Frühere Zusatzversuche – optional (gespeicherte Einträge bleiben erhalten)</summary>
+        <summary>Frühere Zusatzversuche (gespeicherte Einträge bleiben erhalten)</summary>
         <div class="detail-body">
           <h4>3 · Lernrate ändern (im Notebook die Aufgabe NOR wählen)</h4>
           <div class="table-scroll">

@@ -65,7 +65,7 @@ Verteilen Sie in der Gruppe die Aufgaben Spielen, Beobachten und Protokollieren.
 
 Sichern Sie **eine tatsächlich beobachtete Änderung**, nicht nur «die KI wird besser». Ein einzelner Sieg belegt noch keine dauerhaft verbesserte Strategie.
 
-**Wahlvertiefung, höchstens eine:** Smiley auf der Kursseite oder [K-Means](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/). Kein zusätzlicher Pflichtparcours mit Akinator oder Filmempfehlungen.
+Kein Wechsel zu weiteren Werkzeugen wie Akinator oder Filmempfehlungen.
 
 ### Auswerten · 10 Min. · Lernarten begründet zuordnen
 

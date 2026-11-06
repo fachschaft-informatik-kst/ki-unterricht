@@ -1,6 +1,6 @@
 # 4. Klasse · Feldgenaue Musterlösungen
 
-**Nur für Lehrpersonen.** Zu jedem in der Kursseite gespeicherten Antwortfeld steht unten eine mögliche Antwort. Die Kennung in der linken Spalte ist die technische Journal-/Antwortkennung und erleichtert den Abgleich mit ZIP-Dateien. **Alle Zahlen, Namen, Filmfortsetzungen und Beobachtungen ohne Originalnachweis sind frei erfundene didaktische Beispiele**, keine tatsächlich ausgeführten Notebooks und keine echten Projektmessungen. Bei offenen Fragen gelten andere fachlich begründete Antworten ebenso. Bei Videoaufgaben müssen Lernende den tatsächlichen Film und die echte Zeitmarke belegen. Versteckte Alt-Felder und optionale Übungen sind nur der Vollständigkeit halber dokumentiert.
+**Nur für Lehrpersonen.** Zu jedem in der Kursseite gespeicherten Antwortfeld steht unten eine mögliche Antwort. Die Kennung in der linken Spalte ist die technische Journal-/Antwortkennung und erleichtert den Abgleich mit ZIP-Dateien. **Alle Zahlen, Namen, Filmfortsetzungen und Beobachtungen ohne Originalnachweis sind frei erfundene didaktische Beispiele**, keine tatsächlich ausgeführten Notebooks und keine echten Projektmessungen. Bei offenen Fragen gelten andere fachlich begründete Antworten ebenso. Bei Videoaufgaben müssen Lernende den tatsächlichen Film und die echte Zeitmarke belegen. Versteckte Alt-Felder und weitere Übungen sind nur der Vollständigkeit halber dokumentiert.
 
 ## DL 1 · KI, Beispiele und Grenzfälle
 
@@ -22,13 +22,13 @@
 | `begriff_bsp_4` | Sprachmodell, das einen Text verfasst – generative KI. |
 | `ki_zeitstrahl` | Frühe symbolische Systeme nutzten handformulierte Regeln; tiefe neuronale Netze lernen viele Merkmale aus Beispieldaten. Regeln bleiben etwa bei Sicherheitsprüfungen wichtig. Die Meilensteine zeigen keinen vollständigen Ersatz von Regeln durch Lernen. |
 | `ki_ordnung` | 1. Regelbasiertes Schachprogramm: Regeln, regelbasierte KI, schwache KI. 2. Bilderkennung: aus Bilddaten trainiertes tiefes Netz, Deep Learning, schwache KI. 3. Allgemein intelligente Filmfigur: hypothetische starke KI, ihre technische Umsetzung ist unbekannt. Ein Chatbot kann sprachlich überzeugend wirken, ohne verlässlich allgemeine Aufgaben lösen zu können. |
-| `typ_bsp_1` | Früheres optionales Feld: regelbasiertes Schachprogramm. |
+| `typ_bsp_1` | Früheres Feld: regelbasiertes Schachprogramm. |
 | `typ_1` | Frühere Kategorie: regelbasierte KI. |
-| `typ_bsp_2` | Früheres optionales Feld: trainierter Spamfilter. |
+| `typ_bsp_2` | Früheres Feld: trainierter Spamfilter. |
 | `typ_2` | Frühere Kategorie: maschinelles Lernen. |
-| `typ_bsp_3` | Früheres optionales Feld: Tierbildklassifikator. |
+| `typ_bsp_3` | Früheres Feld: Tierbildklassifikator. |
 | `typ_3` | Frühere Kategorie: Deep Learning. |
-| `typ_bsp_4` | Früheres optionales Feld: textgenerierendes Sprachmodell. |
+| `typ_bsp_4` | Früheres Feld: textgenerierendes Sprachmodell. |
 | `typ_4` | Frühere Kategorie: generative KI. |
 | `gesetze` | 1. Bremsen kann Verletzungen vermindern, doch ein Restschaden ist nicht vermeidbar. 2. Asimovs erstes Gesetz entscheidet nicht, wessen Risiko bei konfligierenden Optionen Vorrang haben soll; dafür braucht es Verantwortung, Regeln und gesellschaftliche Abwägung. |
 | `begriffe_saetze` | KI ist der Oberbegriff für Systeme, die Aufgaben intelligent bearbeiten. Maschinelles Lernen bestimmt Muster aus Beispieldaten. Deep Learning ist ML mit mehrschichtigen neuronalen Netzen. Generative KI erzeugt neue Inhalte, zum Beispiel Texte. |
@@ -149,13 +149,13 @@
 | `fremd_name_1` | Mia Muster (fiktiv). |
 | `fremd_reflexion_1_test` | Beim fremden Gabel/Löffel-Modell wurden P1/P2 beispielhaft zu 25/32 korrekt erkannt; mit unseren Äpfeln/Birnen ergab sich eine Trennschärfe von 55 %, aber keine Apfel-/Birnen-Trefferquote. |
 | `fremd_reflexion_1_grenzen` | Neue Gabeln/Löffel auf P1/P2 testen die Generalisierung derselben gelernten Klassen. Bei Apfel/Birne erzwingt das Modell Gabel oder Löffel. Möglicher Einfluss: Hintergrund. Folgetest: dieselbe Frucht vor zwei Hintergründen, Modell unverändert. |
-| `fremd_reflexion_1_repro` | Optional: Original V1/B 13/16 und P1/P2 25/32; eigener Nachlauf mit gleichem Startwert ebenfalls 13/16 und 25/32 (nur Beispiel). |
-| `fremd_reflexion_1_transfer` | Optional: Kontrolliertes Gegenlicht bei beiden ursprünglichen Klassen Gabel/Löffel mit neuen Exemplaren erproben. |
+| `fremd_reflexion_1_repro` | Original V1/B 13/16 und P1/P2 25/32; eigener Nachlauf mit gleichem Startwert ebenfalls 13/16 und 25/32 (nur Beispiel). |
+| `fremd_reflexion_1_transfer` | Kontrolliertes Gegenlicht bei beiden ursprünglichen Klassen Gabel/Löffel mit neuen Exemplaren erproben. |
 | `fremd_name_2` | Luca Beispiel (fiktiv). |
 | `fremd_reflexion_2_test` | Der Originaltest auf ungesehenen Gabeln/Löffeln hatte im Beispiel 25/32 richtige Ergebnisse. Für Äpfel/Birnen lieferte das fremde Netz 23/17 bzw. 19/21 Vorhersagen; es kennt diese Klassen nicht. |
 | `fremd_reflexion_2_grenzen` | P1/P2 ist ein unabhängiger Test für Gabel/Löffel; bei Äpfeln/Birnen gibt es kein korrektes Label unter den Ausgaben. Die Trennung kann durch Farben oder Licht entstehen. Folgetest: gleiche Objekte mit kontrolliert wechselnder Beleuchtung fotografieren. |
-| `fremd_reflexion_2_repro` | Optional: Nachlauf mit Startwert 11 reproduziert beispielsweise die V1-Wahl B und 25/32 im Test; bei Abweichungen exakte Zahlen notieren. |
-| `fremd_reflexion_2_transfer` | Optional: Beide ursprünglichen Klassen auf einer zweiten Kamera mit neuen Exemplaren testen. |
+| `fremd_reflexion_2_repro` | Nachlauf mit Startwert 11 reproduziert beispielsweise die V1-Wahl B und 25/32 im Test; bei Abweichungen exakte Zahlen notieren. |
+| `fremd_reflexion_2_transfer` | Beide ursprünglichen Klassen auf einer zweiten Kamera mit neuen Exemplaren testen. |
 
 ## DL 9 · Sprachmodelle
 

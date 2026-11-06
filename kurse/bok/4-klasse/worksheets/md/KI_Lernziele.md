@@ -18,4 +18,4 @@ Ich kann …
 - ein Modell mit Opacity, Scale und Damage prüfen, eine Rückkopplung beschreiben und eine Quelle kritisch lesen.
 - gesellschaftliche Folgen und Gegenmassnahmen an einem Beispiel diskutieren.
 
-Keine Pflicht: lineare/logistische Regression, Backpropagation ausrechnen, eigene Trainingsbibliothek programmieren. Leistungsnachweis: gemeinsame Projektabgabe (18 Punkte) und vierminütiges Einzelgespräch je Person (12 Punkte), individuelle Gesamtnote; keine schriftliche Prüfung.
+Nicht behandelt: lineare/logistische Regression, Backpropagation ausrechnen, eigene Trainingsbibliothek programmieren. Leistungsnachweis: gemeinsame Projektabgabe (18 Punkte) und vierminütiges Einzelgespräch je Person (12 Punkte), individuelle Gesamtnote; keine schriftliche Prüfung.

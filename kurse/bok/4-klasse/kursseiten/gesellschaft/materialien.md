@@ -97,6 +97,6 @@ Vergleichen Sie mit einem Video-Beispiel und Ihrem Bildprojekt: Warum ist der kl
 
 **Kurssynthese (3 Min.):** «Wo kann eine Vorhersage falsch sein?» Je ein Beispiel aus drei Doppellektionen.
 
-**Rückblick (2 Min. + 1 Min. freiwillige Stimmen):** Notieren Sie eine Erkenntnis und eine offene Frage zum Kurs.
+**Rückblick (2 Min. + 1 Min. einzelne Stimmen):** Notieren Sie eine Erkenntnis und eine offene Frage zum Kurs.
 
 **Antwortort:** [Schlussurteil auf der Kursseite «Mein Urteil»](index.html#urteil), Kurssynthese und Rückblick im [Rückblick auf den Themenblock](index.html#rueckblick-themenblock). Stichworte genügen für den gemeinsamen Bogen; das eigene Schlussurteil muss begründet sein.

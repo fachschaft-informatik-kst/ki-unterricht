@@ -87,7 +87,7 @@ Die Bilder von A und B unterscheiden sich. Ähnliche Aufnahmebedingungen verwend
       </div>
     </details>
     <details>
-      <summary>Freiwillig: Wie stabil ist das Ergebnis?</summary>
+      <summary>Wie stabil ist das Ergebnis?</summary>
       <div class="detail-body">
         <p>Nach Absprache und vor Testeinsicht: drei vorab festgelegte Startwerte 11, 22 und 33. Alle Ergebnisse berichten. Keine Voraussetzung für eine gute Note.</p>
       </div>

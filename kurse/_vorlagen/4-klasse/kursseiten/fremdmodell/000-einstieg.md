@@ -73,7 +73,7 @@ Rückmeldung an das geprüfte Tandem, je zwei persönliche Antworten und das sep
   <!-- MD:START -->
 Sie arbeiten als Tandem selbstständig; die Lehrperson führt ab Beginn die vierminütigen Einzelgespräche. Prüfen Sie Ihre Gesprächszeit vorab. Wird eine Person aufgerufen, arbeitet die andere weiter. Die Lehrperson teilt Ihnen ein fremdes Projekt mit **anderen Klassen als Ihren** zu: Sie prüfen ein Projekt und werden von einem anderen Tandem geprüft. Läuft die Technik nicht, hilft die [Notfallkarte](#dl8-notfall).
 <!-- MD:END -->
-  <p><strong>Verbindlich:</strong> die vier Etappen unten. Die gemeinsame Prüfung ist <strong>unbenotet</strong>; nur Ihre persönliche Reflexion zählt (<a href="#bewertung">K12, maximal 3 von 33 Punkten</a>). Ihr eigenes, bereits abgegebenes Projekt bleibt unverändert.</p>
+  <p><strong>Ablauf:</strong> die vier Etappen unten. Die gemeinsame Prüfung ist <strong>unbenotet</strong>; nur Ihre persönliche Reflexion zählt (<a href="#bewertung">K12, maximal 3 von 33 Punkten</a>). Ihr eigenes, bereits abgegebenes Projekt bleibt unverändert.</p>
 </div>
 <div class="facts">
   <div class="fact">

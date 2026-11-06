@@ -4,7 +4,7 @@ author: "Kantonsschule Stadelhofen"
 lang: de-CH
 ---
 
-# Ein Perzeptron · Pflichtteil
+# Ein Perzeptron
 
 **Ziel:** Eingabe, Gewicht, Bias und Ausgabe erklären.
 
@@ -37,7 +37,7 @@ Dieser Teil gehört zu Doppellektion 4, wo XOR eingeführt wird.
 XOR: (0,0) und (1,1) gehören zu Klasse 0, (0,1) und (1,0) zu Klasse 1.
 Zeichnen Sie die vier Punkte. Kann eine Gerade die Klassen trennen?
 
-Zusatz für Schnelle: Jede Zeile ist eine Bedingung an w₁, w₂ und b. Ausgabe 1 heisst
+Jede Zeile ist eine Bedingung an w₁, w₂ und b. Ausgabe 1 heisst
 Summe ≥ 0, Ausgabe 0 heisst Summe < 0. Schreiben Sie die vier Bedingungen auf. Welche
 drei widersprechen sich?
 

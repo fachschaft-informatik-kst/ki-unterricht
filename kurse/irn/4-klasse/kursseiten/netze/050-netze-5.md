@@ -3,7 +3,7 @@
     <h2 class="kapitel-titel">Ein Netz erkennt Ziffern</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>Freiwilliger Transfer:</strong> Beim XOR-Beispiel gab es zwei Eingaben. Jetzt betrachten Sie ein grösseres Problem: Ein Netz soll <strong>handgeschriebene Ziffern</strong> lesen. Jedes Bild hat 8 × 8 Pixel, also <strong>64 Helligkeitswerte</strong>. Auch hier gibt es eine Eingabe-, eine versteckte und eine Ausgabeschicht:</p>
+    <p><strong>Transfer:</strong> Beim XOR-Beispiel gab es zwei Eingaben. Jetzt betrachten Sie ein grösseres Problem: Ein Netz soll <strong>handgeschriebene Ziffern</strong> lesen. Jedes Bild hat 8 × 8 Pixel, also <strong>64 Helligkeitswerte</strong>. Auch hier gibt es eine Eingabe-, eine versteckte und eine Ausgabeschicht:</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
@@ -82,7 +82,7 @@
       </table>
     </div>
     <!-- MD:START -->
-Das Notebook «Ziffernerkennung» ist eine **freiwillige Vertiefung**. Öffnen Sie es über die Schaltfläche unten, testen Sie verschiedene Zahlen versteckter Neuronen und tragen Sie die Trefferquoten oben ein. Falls keine Verwechslung vorkommt, wählen Sie «Keine Verwechslung beobachtet» und lassen das zweite Ziffernfeld leer.
+Öffnen Sie das Notebook «Ziffernerkennung» über die Schaltfläche unten, testen Sie verschiedene Zahlen versteckter Neuronen und tragen Sie die Trefferquoten oben ein. Falls keine Verwechslung vorkommt, wählen Sie «Keine Verwechslung beobachtet» und lassen das zweite Ziffernfeld leer.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/ziffernerkennung.ipynb" data-title="Ziffernerkennung">
       <!-- MD:START -->

@@ -3,11 +3,11 @@ type: chapter
 id: fremdtest
 nummer: "3"
 titel: "Eigene Bilder testen"
-kurz: "Pflichtversuch vor der Reflexion: Vorhersagen auf anderen Klassen untersuchen."
+kurz: "Versuch vor der Reflexion: Vorhersagen auf anderen Klassen untersuchen."
 open: false
 ---
 
-<p class="page-crumb"><a href="#fremdmodell">‹ Fahrplan</a><span>Etappe 3 · Tandem · ca. 15 Min. · Pflichtversuch, unbenotet</span></p>
+<p class="page-crumb"><a href="#fremdmodell">‹ Fahrplan</a><span>Etappe 3 · Tandem · ca. 15 Min. · unbenotet</span></p>
 
 ## Was sagt ein Modell über andere Klassen, für die es nie trainiert wurde?
 

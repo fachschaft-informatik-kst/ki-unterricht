@@ -1123,7 +1123,10 @@ Arbeit für das Semester.
 - **Die 1. Klasse bleibt unverändert** und wird vorerst nicht ausgewertet.
 - **Keine Pflicht/Wahl-Kennzeichnung in den Kursunterlagen** (R3 zurückgenommen). Welche
   Inhalte Teil des Unterrichts sind, zeigt die AVIVA-Planung. Die in Welle 1 eingeführten
-  Pflichtweg-Kästen, die «(Wahl)»-Titel und die eingeklappten Kapitel sind wieder entfernt.
+  Pflichtweg-Kästen, die «(Wahl)»-Titel und die eingeklappten Kapitel sind wieder entfernt;
+  ebenso die schon vorher vorhandenen Formulierungen («Pflichtkern», «Pflichtversuch»,
+  «freiwillig», «Wahlvertiefung») in Seiten, Plänen, Materialien, Notebooks, KP und
+  Musterlösungen (Abschnitt 9, Welle 1c).
 - **Jedes Tandem wählt zwei einzigartige Bildklassen**, die kein anderes Tandem verwendet
   (Voraussetzung für DL 8). Damit ist die Zuteilung in DL 8 einfach (zyklisch, ohne Kontrolle)
   und «ganz andere Klassen» garantiert.
@@ -1172,7 +1175,7 @@ Musterlösungszeilen bereit.
 |---|-------|-----------|--------------------------------|
 | R1 | umgesetzt | XOR gehört in DL 4; Foto-/Themen-Zeitleiste in Projektauftrag, Fotoanleitung, Abschlussseite, Plänen und KP angeglichen; Debatte in DL 10 mit Leitfragen als Gesprächshilfe; Gesprächszeiten zu Beginn DL 7; K12 im Web und im Raster gleichlautend; K11-Lücke erklärt; 36,4 %; ganzzahlige Notenbeispiele; Raster-Tabelle (leere Zeile vor K12) repariert | Plan als Quelle der Wahrheit festgelegt; KP verweist nur noch |
 | R2 | 5 von 13 | (1) Entscheidungsbaum; (4) Lernraten-Versuch mit NOR und Musterwerte; (5) Frage 3 als Vorschau; (7) Beispielzahlen und 36,4 %; (11) teilweise: «nächstes Token» = Vortraining, Transformer statt «dieselben Bausteine», Produkt ≠ Modell | (2) Akinator, (3) Memory Runde 3, (6) `ki_foto_tools.py`, (8) Glossar, (9) «korrigiert sich selbst», (10) Darstellbarkeit/Lernbarkeit, (11) «Wahr?» nur für Aussagen, (12), (13); `data-p1-diagnostic` |
-| R3 | zurückgenommen (6.11.2026) | Keine Pflicht/Wahl-Kennzeichnung in den Kursunterlagen: Der AVIVA-Plan zeigt, was Teil des Unterrichts ist. Pflichtweg-Kästen, «(Wahl)»-Titel, «Wahl · » in den Kurzbeschreibungen und das Einklappen der Kapitel sind wieder entfernt. Geblieben: DL 8 Etappe 1 (10 Min.) und 4 (15 Min.) mit Minuten | – |
+| R3 | zurückgenommen (6.11.2026) | Keine Pflicht/Wahl-Kennzeichnung in den Kursunterlagen: Der AVIVA-Plan zeigt, was Teil des Unterrichts ist. Pflichtweg-Kästen, «(Wahl)»-Titel, «Wahl · » in den Kurzbeschreibungen und das Einklappen der Kapitel sind wieder entfernt, dazu die älteren Formulierungen «Pflichtkern», «Pflichtversuch», «freiwillig» und «Wahlvertiefung» (Welle 1c). Geblieben: DL 8 Etappe 1 (10 Min.) und 4 (15 Min.) mit Minuten | – |
 | R4 | grossteils | DL 1 Kriterium an der Tafel und Rückgriff; DL 2 Sicherungsfeld mit ungesehenem Beispiel und Selbstkontrolle; DL 4 zwei Fragen vor Selbstkontrolle; DL 9 «Ich prüfe KI-Aussagen, indem …»; DL 10 Schlussurteil mit Selbstkontrolle | Freitext-Abruf in DL 3/4/6 (Vorwissen); Antworten einsammeln und rückmelden (für DL 9–10 entschieden: nein) |
 | R5 | umgesetzt | Rätsel vor Algebra (das Tandem schreibt die vier Bedingungen selbst auf, die Vergleichstabelle ist aufklappbar); Brückenkarte in DL 4; Bereit-Check als Vorschau (Raten erlaubt); DL 5 greift ihn auf; Datenaufteilung nicht mehr in DL 4 | Skizze MobileNet → 1280 → kleines Netz |
 | R6 | umgesetzt | Transferfrage DL 8; Anker «Ein Modell antwortet immer» in DL 8, 9, 10; Brücke in vier Sätzen; Rückmeldungen DL 8 in DL 9 «Ankommen»; Chatbot-Fall; Kurssynthese «Wo kann eine Vorhersage falsch sein?»; Rückgriff auf Schulweg (DL 1) | – |
@@ -1215,32 +1218,53 @@ Abschnitt 7 beantwortet (siehe dort). Umsetzung in BOK, IRN und Vorlage (4. Klas
 - **DL 9–10:** KP hält fest, dass nichts eingesammelt wird.
 - **1. Klasse:** nicht angefasst.
 
-**Welle 1c (7. November 2026): Pflicht/Wahl zurückgenommen.** Die Lehrperson will in den
+**Welle 1c (7. November 2026): Pflicht/Wahl entfernt.** Die Lehrperson will in den
 Kursunterlagen keine Pflicht/Wahl-Kennzeichnung sehen; die AVIVA-Planung zeigt, was Teil des
-Unterrichts ist (siehe Abschnitt 7). Zurückgenommen in BOK, IRN und Vorlage (4. Klasse):
+Unterrichts ist (siehe Abschnitt 7). In BOK, IRN und Vorlage (4. Klasse) zuerst zurückgenommen,
+was Welle 1 eingeführt hat, danach auch die schon vorher vorhandenen Formulierungen entfernt:
 
 - **Kursseiten:** Die sechs Pflichtweg-Kästen (DL 1, 2, 3, 4, 9, 10) sind entfernt. Titel,
   Kurzbeschreibung und geöffneter Zustand der zwölf Kapitel, die ich als «Wahl» gekennzeichnet
   hatte, sind wieder wie vorher. In «Perzeptron 5» und «Netze 1» sind die Hinweise «Pflicht»,
   «Wahl» und «Niveau B» entfernt; die NOR-Korrektur beim Lernraten-Versuch und die Reihenfolge
   Rätsel vor Algebra bleiben.
-- **Pläne und Materialien:** `zeit`, Schritte und `materialien.md` (DL 1–4, 9, 10) ohne
-  «Pflichtweg», «Wahl» und «Vertiefung»; Soekia heisst «digitaler Arbeitsweg». Der Satz zu Human
-  or Not (nur als schulisch freigegebene Wahlalternative, Live-Chats mit Fremden sind keine
-  Pflicht) steht wieder im ursprünglichen Wortlaut.
-- **KP, Arbeitsblatt Perzeptron (Teil 3) und Musterlösung `xor_warum`:** ebenso bereinigt.
+- **Pläne und Materialien (alle Lektionen):** `zeit`, Schritte und `materialien.md` ohne
+  «Pflichtweg», «Pflichtkern», «Pflichtnotebook», «Pflichtversuch», «freiwillig», «Wahlvertiefung»
+  und «Vertiefung» als Kennzeichnung. Was nur dazu diente, etwas als freiwillig zu markieren, ist
+  gestrichen (zum Beispiel «Eigene Beispiele sind freiwillig», Experiment 3 selbst durchführen,
+  drei Startwerte). Leitplanken für die Lehrperson sind neutral formuliert (zum Beispiel «Kein
+  Wechsel zu weiteren Werkzeugen», «Kein drittes Notebook in dieser Lektion»). Soekia heisst
+  «digitaler Arbeitsweg»; zu Human or Not steht: Live-Chat mit Fremden, nur nach schulischer
+  Freigabe, nie zusätzlich.
+- **DL 8:** «Pflicht · unbenotet» heisst jetzt «unbenotet» (K11), «Pflichtversuch» heisst
+  «Versuch», «Pflichtfrage» heisst «Frage», die bisherigen Antwortfelder tragen kein «Optional»
+  mehr. «Unbenotet» bleibt, weil es eine Beurteilungsangabe ist. Auch die Datei `LESEN.txt` im
+  DL-8-ZIP (gemeinsamer Portalcode `shared/portal/portal.js`, wird nur auf der DL-8-Seite der
+  4. Klasse verwendet) spricht nicht mehr von «Pflicht» und «optional».
+- **Notebooks und Werkzeug:** «Freiwilliger Zusatz», «Freiwilliger Transfer», «Pflichtkern» und
+  ähnliche Kennzeichnungen sind aus Überschriften und Texten entfernt; die Fehlermeldungen in
+  `ki_foto_tools.py` heissen «Im Projekt …» statt «Im Pflichtprojekt …», und zwei Docstrings in
+  `unterricht_tools.py` (für Interessierte einsehbar) sind bereinigt. Logik und Schlüssel sind
+  unverändert.
+- **Arbeitsblätter, Raster, Lernziele, KP, Musterlösungen:** «Pflichtteil» im Titel, «Zusatz für
+  Schnelle», «Pflicht» im Raster und in den Lernzielen sowie «Optional» in den Musterlösungen
+  sind entfernt; der KP sagt: «Was zum Unterricht gehört, zeigt die AVIVA-Planung».
 - **Tests:** `tests/check_portal.cjs` und `tests/check_admin_form.cjs` sind wieder wie auf
   `main`, weil alle Kapitel wieder offen sind.
-- **Bewusst unverändert:** Formulierungen, die schon vor Welle 1 im Kurs standen (zum Beispiel
-  «Pflichtkern», «Pflichtnotebook», «Pflichtversuch», «freiwillig», «Wahlvertiefung» im KP und
-  in einzelnen Plänen) sowie die Beurteilungsangabe «Pflicht · unbenotet» in DL 8 (K11).
+- **Bewusst stehen geblieben:** «Wahl» im Sinn von Entscheidung (Modellwahl, «begründete Wahl»,
+  `wmd_fall_wahl`), «verbindlich» in den Projektregeln (verbindlicher Rahmen gegenüber freien
+  Entscheidungen im Tandem, «Verbindlicher Stand») und der technische Profilname `vertiefung`
+  in `ki_foto_tools.py`. Die 1. Klasse ist nicht angefasst.
 
-**Verifikation (lokal):** Stufe A (Builds, Modell-, Inhalts-, Materialien-, Lehrpersonen-, Editor- und
-Paritätstests) und die Routen-Tests bestehen; `check_portal.cjs` (inklusive Notebook und Training),
-`check_project_pages.cjs`, `check_course_theme.cjs`, `check_admin_form.cjs`,
-`check_teacher_browser.cjs`, `check_editor_course_matrix.cjs`, `check_course_runtime_browser.cjs` und
-`check_persistence.cjs` bestehen. Nicht lokal ausführbar waren `check_testbilder.py` (kein
-matplotlib) und `check_course_isolation.py` (wegen eines ignorierten Verzeichnisses `content/`).
+**Verifikation (lokal, nach Welle 1c erneut):** Stufe A (Builds, Modell-, Inhalts-, Materialien-,
+Lehrpersonen-, Editor- und Paritätstests) und die Routen-Tests bestehen; `check_portal.cjs`
+(inklusive Notebook und Training), `check_project_pages.cjs`, `check_course_theme.cjs`,
+`check_admin_form.cjs`, `check_teacher_browser.cjs`, `check_editor_course_matrix.cjs`,
+`check_course_runtime_browser.cjs` und `check_persistence.cjs` bestehen, ebenso
+`check_notebook_isolation.py` nach `build_portal_notebooks.py`. Nicht lokal ausführbar waren
+`check_testbilder.py`, `check_ki_projekt.py`, `check_ki_fotos.py` und `check_ki_basis.py` (es
+fehlen numpy und matplotlib) sowie `check_course_isolation.py` (wegen eines ignorierten
+Verzeichnisses `content/`).
 
 ## Anhang A: Methodik der Messungen
 

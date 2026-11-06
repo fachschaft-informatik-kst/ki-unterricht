@@ -24,7 +24,7 @@ V1 dient der Auswahl. Erst nach der begründeten Wahl wird auf P1/P2 getestet. D
 4. **Was passiert mit neuen Bildern?** Testergebnis und drei konkrete Vorhersagen beschreiben; Nutzen und Grenzen nennen. Auch richtige Beispiele sind interessant – keine Fehler erfinden.
 5. **Was haben wir gelernt?** Fazit, nächster Versuch, Arbeitsteilung und verwendete Hilfen (einschliesslich KI).
 
-Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Wiederholungen mit drei festgelegten Startwerten sind freiwillige Vertiefung vor Testeinsicht; alle Ergebnisse berichten.
+Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Wiederholungen mit drei festgelegten Startwerten sind vor Testeinsicht möglich; alle Ergebnisse berichten.
 
 ## Etappen-Check: Bereit für den nächsten Schritt?
 
@@ -74,7 +74,7 @@ In **Doppellektion 5–7** steuern Sie Ihre Arbeit im Tandem selbst. Es gibt kei
 
 **Daten prüfen → A/B vergleichen → Auswahl begründen → Abschlusstest → Fazit und Abgabe.**
 
-- **Sie entscheiden:** Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und benötigte Hilfen. Nutzen Sie das Lernlabor einmal als Orientierung, falls Sie den Ablauf noch nicht kennen; keine Pflichtwiederholung.
+- **Sie entscheiden:** Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und benötigte Hilfen. Nutzen Sie das Lernlabor einmal als Orientierung, falls Sie den Ablauf noch nicht kennen.
 - **Verbindlich bleiben:** Datenplan, fairer Vergleich, fünf Reflexionen, Auswahl vor Testeinsicht, keine Optimierung danach und die Abgabefrist.
 - **Planen:** Ergänzen Sie in Reflexion 1 einen kurzen Etappenplan mit Zuständigkeiten, Zeitbedarf und Reserve. Beide übernehmen praktische und erklärende Aufgaben; wechseln Sie die Rollen.
 - **Steuern:** Am Ende jeder Arbeitsphase im bestehenden Journal kurz ergänzen: erreicht, offen, nächster Schritt, benötigte Hilfe. Passen Sie den Plan bei Bedarf an; kein zusätzliches Lerntagebuch.
@@ -98,18 +98,18 @@ Die **20 Einzelgespräche** finden mit **einer Lehrperson** direkt ab Beginn der
 
 ### Während der Fachgespräche: ein fremdes Modell auswerten (DL 8)
 
-Arbeiten Sie im Tandem selbstständig und pausieren Sie jeweils nur für Ihr persönliches Einzelgespräch; die andere Person kann weiterarbeiten. Die gemeinsame Fremdauswertung ist **verbindlich, aber unbenotet (K11)**; nur die persönliche Reflexion K12 zählt 3 Punkte; die bewertete eigene Abgabe bleibt unverändert.
+Arbeiten Sie im Tandem selbstständig und pausieren Sie jeweils nur für Ihr persönliches Einzelgespräch; die andere Person kann weiterarbeiten. Die gemeinsame Fremdauswertung ist **unbenotet (K11)**; nur die persönliche Reflexion K12 zählt 3 Punkte; die bewertete eigene Abgabe bleibt unverändert.
 
 1. **Dateien vorbereiten, ca. 10 Minuten:** Öffnen Sie das zugeteilte fremde Projekt im **privaten Browserfenster**. Die Lehrperson teilt Ihnen ein Projekt mit anderen Klassen als Ihren zu. Legen Sie Ihre eigene Fotostudio-JSON separat bereit; stellen Sie das eigene ZIP dort nicht wieder her. Datenrechte und Bildfreigaben beachten. Läuft nichts, hilft die Notfallkarte auf der Seite «Dateien vorbereiten» (Referenzpaket der Lehrperson).
-2. **Daten und Ergebnisse untersuchen, ca. 20 Minuten:** Vergleichen Sie T1/T2 (Training), V1 (Validierung) und P1/P2 (unabhängiger Abschlusstest) im fremden Projekt. Prüfen Sie mindestens ein konkretes Trainings- und Testexemplar und lesen Sie Originalwerte A/B sowie das Testergebnis. Lassen Sie das fremde Notebook einmal mit Startwert 11 nachlaufen und vergleichen Sie einen Wert. Drei Startwerte sind freiwillig.
-3. **Pflichtversuch mit den eigenen Klassen, ca. 15 Minuten:** Lassen Sie dasselbe Modell eigene Bilder aus Ihren **zwei anderen Klassen** vorhersagen. Protokollieren Sie die Vorhersagen und untersuchen Sie Beispiele. Die Vorhersagen sind **keine Trefferquote für diese Klassen**: Das fremde Modell kennt nur seine ursprünglichen zwei Klassen. Seine P1/P2-Bilder sind dagegen neue Exemplare **derselben** Klassen und gehören gerade nicht ins Training.
-4. **Erst danach reflektieren:** Gemeinsam zwei Sätze als Rückmeldung für das geprüfte Tandem formulieren (die Lehrperson gibt sie in Doppellektion 9 aus); jede Person beantwortet **zwei kurze Pflichtfragen** zu Originalergebnissen, Experiment, Datenrollen, Grenzen und nächstem Test. Separates ZIP herunterladen und einreichen, danach fremdes ZIP und entpackten Ordner löschen; das private Fenster erst nach dem Download schliessen.
+2. **Daten und Ergebnisse untersuchen, ca. 20 Minuten:** Vergleichen Sie T1/T2 (Training), V1 (Validierung) und P1/P2 (unabhängiger Abschlusstest) im fremden Projekt. Prüfen Sie mindestens ein konkretes Trainings- und Testexemplar und lesen Sie Originalwerte A/B sowie das Testergebnis. Lassen Sie das fremde Notebook einmal mit Startwert 11 nachlaufen und vergleichen Sie einen Wert.
+3. **Versuch mit den eigenen Klassen, ca. 15 Minuten:** Lassen Sie dasselbe Modell eigene Bilder aus Ihren **zwei anderen Klassen** vorhersagen. Protokollieren Sie die Vorhersagen und untersuchen Sie Beispiele. Die Vorhersagen sind **keine Trefferquote für diese Klassen**: Das fremde Modell kennt nur seine ursprünglichen zwei Klassen. Seine P1/P2-Bilder sind dagegen neue Exemplare **derselben** Klassen und gehören gerade nicht ins Training.
+4. **Erst danach reflektieren:** Gemeinsam zwei Sätze als Rückmeldung für das geprüfte Tandem formulieren (die Lehrperson gibt sie in Doppellektion 9 aus); jede Person beantwortet **zwei kurze Fragen** zu Originalergebnissen, Experiment, Datenrollen, Grenzen und nächstem Test. Separates ZIP herunterladen und einreichen, danach fremdes ZIP und entpackten Ordner löschen; das private Fenster erst nach dem Download schliessen.
 
 Für Gespräch, Wiedereinstieg und Technik bleibt Reserve. Bei einem nicht lösbaren Trainingsproblem werten Sie die gespeicherten fremden Ausgaben aus und dokumentieren ausdrücklich, welcher Versuch nicht möglich war. Die Auswertung entfällt nicht, aber Sie behaupten keinen erfolgreichen Test. Erhaltene Fotos nur für diesen Auftrag verwenden und nach der vereinbarten Aufbewahrungsregel löschen.
 
 ## Bewertung
 
-Elf benotete Kriterien mit je **0–3 Punkten**, maximal **33 Punkte**. K1–K6: gemeinsame Projektabgabe (18); K7–K10: individuelles Fachgespräch (12); K12: persönliche Fremdreflexion (3). K11 ist der verbindliche, **unbenotete** Daten- und Ergebnischeck.
+Elf benotete Kriterien mit je **0–3 Punkten**, maximal **33 Punkte**. K1–K6: gemeinsame Projektabgabe (18); K7–K10: individuelles Fachgespräch (12); K12: persönliche Fremdreflexion (3). K11 ist der **unbenotete** Daten- und Ergebnischeck.
 
 **Note = 1 + 5 × Punktesumme / 33**, auf Viertelnoten gerundet. 16 Punkte → 3,5; 22 (Sollstufe: alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 26 → 5,0; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
 
@@ -126,4 +126,4 @@ Die Leistungsstufen stehen im [Bewertungsraster](../../worksheets/md/KI_Bewertun
 
 Für das eigene Projekt unter «Sichern & abgeben» Originalfotos und Fotostudio-JSON hinzufügen und das ZIP-Paket herunterladen. Der Download reicht nichts automatisch ein; ZIP über den genannten Abgabekanal einreichen. Kein zusätzlicher langer Bericht. Bei vereinbarten Ersatzdaten Herkunft und Einschränkungen offenlegen; die Lehrperson legt den passenden Nachweis zur Datenarbeit fest.
 
-**Nach DL 8:** Eigenständige Fremdauswertung mit Daten-/Ergebnischeck, Pflichtversuch und je zwei individuellen Reflexionsantworten als separates ZIP einreichen. Keine Änderungen an der ursprünglichen Projektabgabe.
+**Nach DL 8:** Eigenständige Fremdauswertung mit Daten-/Ergebnischeck, Versuch mit eigenen Klassen und je zwei individuellen Reflexionsantworten als separates ZIP einreichen. Keine Änderungen an der ursprünglichen Projektabgabe.

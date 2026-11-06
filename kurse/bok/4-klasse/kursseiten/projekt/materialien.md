@@ -94,13 +94,13 @@ Unsere zwei Klassen: ____________________ / ____________________.
 | P1 | ____________________ | ____________________ | ______ |
 | P2 | ____________________ | ____________________ | ______ |
 
-**Freiwilliger Stresstest:** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich. Halten Sie den Ort in Reflexion 2 fest.
+**Stresstest:** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich. Halten Sie den Ort in Reflexion 2 fest.
 
 **Allein, 10 Min.:** Prüfen Sie ein eigenes P1-Beispiel. Ist es wirklich unabhängig? Notieren Sie einen möglichen Fehler und die Korrektur.
 
 **Abnahme vor dem Fotografieren (ca. 2 Min.):** Lassen Sie die Liste anhand der fünf Abschlussfragen auf [Daten &amp; Fotos](index.html#projekt-3) von der Lehrperson oder einem Nachbartandem prüfen. Testen Sie vorab den Weg Handy → Laptop mit einem Foto.
 
-**Etappenplan im Journal:** Daten vervollständigen → A/B vergleichen → Auswahl vor Test dokumentieren → einmaliger Abschlusstest → Reflexion und ZIP. Halten Sie Vermutung, Tagesziel, Rollen und Reflexion 1 fest; Reflexion 2 darf in DL 6 abgeschlossen werden. Wer die Abnahme hat, beginnt mit dem Fotografieren; heute besteht **keine Trainingspflicht**. Zehn Minuten bleiben Puffer.
+**Etappenplan im Journal:** Daten vervollständigen → A/B vergleichen → Auswahl vor Test dokumentieren → einmaliger Abschlusstest → Reflexion und ZIP. Halten Sie Vermutung, Tagesziel, Rollen und Reflexion 1 fest; Reflexion 2 darf in DL 6 abgeschlossen werden. Wer die Abnahme hat, beginnt mit dem Fotografieren; heute muss noch niemand ein Modell trainieren. Zehn Minuten bleiben Puffer.
 
 ### Auswerten · 10 Min. · Selbstcheck und Sicherung
 
@@ -112,7 +112,7 @@ Unsere zwei Klassen: ____________________ / ____________________.
 - Ist die Exemplarliste abgenommen? Welche Fotos fehlen noch bis Mitte DL 6?
 - Haben wir Datenplan und Reflexionen korrigiert, den Stand als ZIP gesichert und einen nächsten Schritt notiert?
 
-**Weiterarbeiten:** [Projekt-Notebook](materialien/downloads/ki_tandemprojekt.ipynb) · [Lernlabor als Hilfe](materialien/downloads/ki_lernlabor.ipynb). Keine Pflicht, bereits zum selben Stand wie andere Tandems zu gelangen.
+**Weiterarbeiten:** [Projekt-Notebook](materialien/downloads/ki_tandemprojekt.ipynb) · [Lernlabor als Hilfe](materialien/downloads/ki_lernlabor.ipynb). Tandems müssen nicht denselben Stand erreichen.
 
 <!-- lesson:06 -->
 ## Doppellektion 06
@@ -169,7 +169,7 @@ Prüfen Sie **vor jedem Lauf** Datenrollen, Exemplare und Labels. Fehlende Daten
 
 **Allein, 10 Min.:** Bearbeiten Sie einen abgegrenzten Teil Ihrer Etappe und sichern Sie einen Beleg, etwa eine überprüfte Gruppenzuordnung oder eine erklärte Vorhersage. Danach zusammenführen. Zehn Minuten bleiben Puffer.
 
-> **Beratungskarte für die Lehrperson:** «Was ist euer Ziel? Welchen Beleg habt ihr? Was bleibt konstant? Welche alternative Erklärung passt? Was ist der nächste Schritt?» Keine Synchronisierung aller Tandems. Zusätzliche Startwerte sind freiwillig und nur vor Testeinsicht sinnvoll; ein Lauf beweist keinen allgemeinen Vielfaltseffekt.
+> **Beratungskarte für die Lehrperson:** «Was ist euer Ziel? Welchen Beleg habt ihr? Was bleibt konstant? Welche alternative Erklärung passt? Was ist der nächste Schritt?» Keine Synchronisierung aller Tandems. Zusätzliche Startwerte sind nur vor Testeinsicht sinnvoll; ein Lauf beweist keinen allgemeinen Vielfaltseffekt.
 
 ### Auswerten · 10 Min. · Fortschritt und Abschlussplan
 
@@ -206,7 +206,7 @@ Wenn eine Voraussetzung fehlt, zuerst diese Lücke bearbeiten. Ein bereits mehrf
 
 **Tandem · 2 Min.**
 
-Gleichen Sie offene Belege mit dem Raster ab. Lesen Sie die Gesprächszeiten, den Austauschpartner und die Austauschregeln für DL8, die die Lehrperson zu Beginn der Lektion mitgeteilt hat. Fragen Sie gezielt nach; es gibt keinen neuen gemeinsamen Pflichtversuch.
+Gleichen Sie offene Belege mit dem Raster ab. Lesen Sie die Gesprächszeiten, den Austauschpartner und die Austauschregeln für DL8, die die Lehrperson zu Beginn der Lektion mitgeteilt hat. Fragen Sie gezielt nach; es gibt keinen neuen gemeinsamen Versuch.
 
 ### Verarbeiten · 70 Min. · Test, Grenzen und Reflexion
 
