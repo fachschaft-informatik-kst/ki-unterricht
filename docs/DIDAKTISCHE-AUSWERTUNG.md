@@ -384,7 +384,8 @@ keine Notebooks.
 6. **Textgleich mit der 1. Klasse** (`basis-ki`, bis auf 7 Zeilen der Startseite) [G].
    Zu klären: Wiederholen die Lernenden den Stoff? Falls ja, ist es eine Chance für Abruf
    über Jahre, aber nicht für Wiederholung; falls nein, ist das Niveau für 17–18-Jährige
-   zu prüfen.
+   zu prüfen. *Entscheid 6.11.2026:* Die 4. Klasse hatte noch kein KI-Thema, es ist keine
+   Wiederholung.
 7. «Deep Blue lernt nicht aus Daten» und «Selbstfahrende Autos stehen vor derselben Art
    von Frage» sind vereinfacht bzw. umstritten und gehören in die Fachprüfung [A, H].
 
@@ -800,7 +801,7 @@ Gegengewicht zu gemeinsam erstellten Texten.
   22 Punkte = 4,33 → 4,25; 26 Punkte → 5,0; 32 Punkte → 5,75; 6,0 nur mit 33 Punkten. Das
   Beispiel «24,75 Punkte → 4,75» (`bewertung` Z. 143) ist bei ganzzahligen Stufen unmöglich;
   «Individuell · 33,3 %» (Z. 170) widerspricht 36,4 % (Z. 14, 26). Offen: Ist Stufe 2 die
-  Sollstufe?
+  Sollstufe? *Entscheid 6.11.2026:* Ja (22 Punkte = 4,25).
 - **B6: Individuelle Verantwortung und KI** [A]: Journal als gemeinsamer Stand ohne Autorenspur,
   Rollenwechsel nur Empfehlung, K12-Texte entstehen unbeaufsichtigt; zu KI gibt es nur eine
   Offenlegungsfrage, keine Nutzungsregel.
@@ -931,7 +932,7 @@ Beispiel je DL» mit Rückgriff auf den Schulweg (DL 1) und «Hintergrund/Licht�
 Auskunftssystem statt der vorbestimmten Zeile «Bildprojekt» oder als Fallkarte D. Zwei
 Minuten Rollenwechsel («ein Satz aus Sicht der abgelehnten Person»). Sechs Glossareinträge.
 Untertitel oder Transkript bereithalten. Offene Fragen per Zettel oder Abgabekanal
-einsammeln.
+einsammeln (*Entscheid 6.11.2026:* DL 9–10 sammeln nichts ein, dieser Vorschlag entfällt).
 
 ## 4. Querschnittsbefunde
 
@@ -1103,14 +1104,27 @@ Arbeit für das Semester.
 | R11 | **Notebooks mit Use–Modify–Create** | DL 3 Experiment 2 mit 0/0/0 starten; DL 4 Gewichtetabelle und eine Modify-Aufgabe; DL 5 Mini-Experiment zum Leck; DL 6 Training/Validierung und `bild_durchs_netz` im Versuchsnotebook. | DL 3–6 | M |
 | R12 | **DL 9/10 Feinschliff** | Soekia als Pflichtweg mit Link und Anleitung, Papagei als Vertiefung; Erwartung mit Prognose und Feld vor dem Digitalweg; problematisches Beispiel per Trainingstext erzeugen; Debatte als Vertiefung; Untertitel/Transkript; Realitätsanker (AI Act, nDSG Art. 21) fachlich prüfen; Rollenwechsel in DL 10. | DL 9, 10 | S–M |
 
-**Entscheide für das Team (keine Massnahmen, sondern Weichen):**
+**Entscheide der Lehrperson (6. November 2026):**
 
-- Wiederholen die Lernenden der 4. Klasse den Stoff der 1. Klasse? (DL 1–2 sind textgleich.)
-- Ist Stufe 2 («alle Anforderungen erfüllt») die Sollstufe, und soll sie einer Note 4,25 entsprechen?
-- Sollen DL 9–10 etwas einsammeln (unbenotet), damit sie nicht zum «Ausklang» werden?
-- Wo liegt die Verantwortung für die Fotozeitleiste: DL 4 oder DL 5?
-- Soll in DL 9 ein echtes Sprachmodell live gezeigt werden (mit Quellenprüfung), oder bleibt es
-  bei Papagei und Soekia?
+- **DL 9–10 sammeln nichts ein.** Die Sicherung bleibt Selbstkontrolle und Klassengespräch,
+  beide Lektionen bleiben unbenotet. Der Vorschlag «Antworten einsammeln» entfällt für DL 9–10.
+- **Stufe 2 ist die Sollstufe** und entspricht der Note 4,25 (22 Punkte = alle elf Kriterien
+  auf Stufe 2). Noten ab 5 verlangen Stufe 3 in mehreren Kriterien (26 Punkte → 5,0).
+- **DL 1–2 sind keine Wiederholung:** Die 4. Klasse hatte noch kein KI-Thema. Die Lektionen
+  bleiben textgleich mit der 1. Klasse; ob Niveau und Stil für 17–18-Jährige passen, klärt das
+  Feedback (Abschnitt 8, Nr. 12).
+- **Die 1. Klasse bleibt unverändert** und wird vorerst nicht ausgewertet.
+- **Jedes Tandem wählt zwei einzigartige Bildklassen**, die kein anderes Tandem verwendet
+  (Voraussetzung für DL 8). Damit ist die Zuteilung in DL 8 einfach (zyklisch, ohne Kontrolle)
+  und «ganz andere Klassen» garantiert.
+
+**Weiterhin offen:**
+
+- Absenzregel für die Gespräche (Vorschlag im KP).
+- Soll in DL 9 ein echtes Sprachmodell live gezeigt werden (mit Quellenprüfung)? Bis auf Weiteres
+  bleibt es bei Papagei und Soekia.
+- Fotozeitleiste: umgesetzt wie vorgeschlagen (DL 4 Vorbereitungsauftrag, DL 5 Freigabe und
+  Abnahme der Exemplarliste); Rückmeldung steht aus.
 
 **Was ich nicht empfehle:** weitere Inhalte hinzufügen. Fast jede Lektion ist bereits an der
 Grenze ihres Zeitbudgets. Jede Ergänzung braucht eine Streichung.
@@ -1132,7 +1146,7 @@ Die wichtigsten Hypothesen lassen sich mit wenig Aufwand prüfen:
 | 9 | Verstehen Lernende «Trennschärfe»? | Think-aloud mit zwei Tandems | R2, R9 |
 | 10 | Glauben Lernende nach DL 9, ChatGPT zähle Wörter? | Eine Frage vor und nach DL 9 | R6, R12 |
 | 11 | DL 10: Verteilen sich die Gruppen auf die drei Fälle? Ändern Lernende ihre These? | Zählung `these_vorher`/`these_nachher` | R12 |
-| 12 | Passen DL 1–2 (textgleich mit der 1. Klasse) für 17–18-Jährige? Ist Memory zu spielerisch? | Kurzes Feedback | Entscheid zu Wiederholung |
+| 12 | Passen Niveau und Stil von DL 1–2 (textgleich mit der 1. Klasse) für 17–18-Jährige? Ist Memory zu spielerisch? | Kurzes Feedback | Feinschliff DL 1–2 (die 4. Klasse ist neu im Thema) |
 
 ## 9. Umsetzungsstand Welle 1 (7. November 2026)
 
@@ -1149,13 +1163,13 @@ Musterlösungszeilen bereit.
 | R1 | umgesetzt | XOR gehört in DL 4; Foto-/Themen-Zeitleiste in Projektauftrag, Fotoanleitung, Abschlussseite, Plänen und KP angeglichen; Debatte = Vertiefung; Gesprächszeiten zu Beginn DL 7; K12 im Web und im Raster gleichlautend; K11-Lücke erklärt; 36,4 %; ganzzahlige Notenbeispiele; Raster-Tabelle (leere Zeile vor K12) repariert | Plan als Quelle der Wahrheit festgelegt; KP verweist nur noch |
 | R2 | 5 von 13 | (1) Entscheidungsbaum; (4) Lernraten-Versuch mit NOR und Musterwerte; (5) Frage 3 als Vorschau; (7) Beispielzahlen und 36,4 %; (11) teilweise: «nächstes Token» = Vortraining, Transformer statt «dieselben Bausteine», Produkt ≠ Modell | (2) Akinator, (3) Memory Runde 3, (6) `ki_foto_tools.py`, (8) Glossar, (9) «korrigiert sich selbst», (10) Darstellbarkeit/Lernbarkeit, (11) «Wahr?» nur für Aussagen, (12), (13); `data-p1-diagnostic` |
 | R3 | umgesetzt | Je Kapitel «(Wahl)» im Titel, «Wahl · » in der Kurzbeschreibung, eingeklappt; Pflichtweg-Kasten auf den Seiten DL 1, 2, 3, 4, 9, 10; Pflichtweg und Minuten in den Lektionskarten (`zeit`); DL 8 Etappe 1 (10 Min.) und 4 (15 Min.) mit Minuten | Eigene CSS-Badges (`.tag` ist ungestylt) |
-| R4 | grossteils | DL 1 Kriterium an der Tafel und Rückgriff; DL 2 Sicherungsfeld mit ungesehenem Beispiel und Selbstkontrolle; DL 4 zwei Fragen vor Selbstkontrolle; DL 9 «Ich prüfe KI-Aussagen, indem …»; DL 10 Schlussurteil mit Selbstkontrolle | Freitext-Abruf in DL 3/4/6 (Vorwissen); Antworten einsammeln und rückmelden (Prozess) |
+| R4 | grossteils | DL 1 Kriterium an der Tafel und Rückgriff; DL 2 Sicherungsfeld mit ungesehenem Beispiel und Selbstkontrolle; DL 4 zwei Fragen vor Selbstkontrolle; DL 9 «Ich prüfe KI-Aussagen, indem …»; DL 10 Schlussurteil mit Selbstkontrolle | Freitext-Abruf in DL 3/4/6 (Vorwissen); Antworten einsammeln und rückmelden (für DL 9–10 entschieden: nein) |
 | R5 | umgesetzt | Rätsel vor Algebra, Algebra als Niveau B; Brückenkarte in DL 4; Bereit-Check als Vorschau (Raten erlaubt); DL 5 greift ihn auf; Datenaufteilung nicht mehr in DL 4 | Skizze MobileNet → 1280 → kleines Netz |
 | R6 | umgesetzt | Transferfrage DL 8; Anker «Ein Modell antwortet immer» in DL 8, 9, 10; Brücke in vier Sätzen; Rückmeldungen DL 8 in DL 9 «Ankommen»; Chatbot-Fall; Kurssynthese «Wo kann eine Vorhersage falsch sein?»; Rückgriff auf Schulweg (DL 1) | – |
 | R7 | teilweise | Meilensteine, Go/No-Go (Foto-Check Mitte DL 6), Fortschrittstafel (analog), Peer-Tausch R1–R3, Rollenwechsel und Absenz in der Arbeitsvereinbarung, Abnahme der Exemplarliste | Feld «Tagesziele», Pflichtkontakt je Tandem, Konfliktregel |
 | R8 | teilweise | «16 Bilder ≠ 16 Tests», 6,25 Prozentpunkte je Bild, Faustregel ≤ 2 Bilder, «Bei Gleichstand», richtig/gesamt, Rückbezug Startwerte, Musterbeispiel angepasst (11 gegen 14 von 16) | Zelle Training/Validierung, `abschlusstest()` je Gruppe, leere Voreinstellung (Code) |
-| R9 | grossteils | Zuteilung (zyklisch, disjunkt), Referenzpaket und Notfallkarte, Probelauf DL 7, Rückmeldungen bündeln, K11 vor K12, Prüfbericht in fünf Zeilen, Explainer nach dem Versuch, Löschregel, Hinweis «Fenster erst nach dem Download schliessen», Einwilligungssatz | Schlankes Austauschpaket, Datenaudit-Werkzeug (Code); Referenzpaket muss die Lehrperson einmal erzeugen |
-| R10 | teilweise | Gesprächsleitfaden mit Pool (drei Varianten je Kriterium), Orientierung je Stufe, Bogen, Rotation, Zweitbewertung als Stichprobe; «Wo beurteilt?» je Lernziel mit Grundlagenfrage (K7); KI-Regel mit eigenem Journalfeld; Rechenbeispiele inkl. «22 Punkte = 4,25» | Sollstufe und Absenzregel (Entscheid Fachteam), Überlappungen auflösen, Ankerantworten, Selbsteinschätzung nutzen |
+| R9 | grossteils | Zuteilung zyklisch; dank Klassenliste (jede Bildklasse nur einmal, Entscheid 6.11.2026) sind die Klassen garantiert disjunkt; Referenzpaket und Notfallkarte, Probelauf DL 7, Rückmeldungen bündeln, K11 vor K12, Prüfbericht in fünf Zeilen, Explainer nach dem Versuch, Löschregel, Hinweis «Fenster erst nach dem Download schliessen», Einwilligungssatz | Schlankes Austauschpaket, Datenaudit-Werkzeug (Code); Referenzpaket muss die Lehrperson einmal erzeugen |
+| R10 | teilweise | Gesprächsleitfaden mit Pool (drei Varianten je Kriterium), Orientierung je Stufe, Bogen, Rotation, Zweitbewertung als Stichprobe; «Wo beurteilt?» je Lernziel mit Grundlagenfrage (K7); KI-Regel mit eigenem Journalfeld; Stufe 2 als Sollstufe ausgewiesen (Entscheid 6.11.2026: 22 Punkte = 4,25) auf Kursseite, Raster, Projektauftrag und KP | Absenzregel (Entscheid Fachteam), Überlappungen auflösen, Ankerantworten, Selbsteinschätzung nutzen |
 | R11 | offen | – (nur NOR-Variante in DL 3) | Notebooks |
 | R12 | grossteils | Soekia als Pflichtweg (Link, Drei-Zeilen-Anleitung, Erwartung vorab, selbst erzeugtes problematisches Beispiel über den Trainingstext); Anleitung am 6.11.2026 an der echten Oberfläche geprüft und korrigiert (der Prompt steuert den Text nicht; eigener Text über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen»; Regler «Temperatur» unter «Auswahl anpassen»); Papagei und Turing als Vertiefung; Untertitel/Transkript; DL-9-Zeit neu verteilt (5/10/12/53/10) | Realitätsanker (AI Act, nDSG Art. 21) fachlich prüfen |
 
@@ -1167,11 +1181,29 @@ Musterlösungszeilen bereit.
    Abnahme der Exemplarliste.
 3. Der Schulweg-Fall bleibt kurze Pflicht in DL 1; Meilensteine, schwache/starke KI,
    Akinator-Kapitel und Debatte sind Wahl.
-4. Zuteilung in DL 8 zyklisch mit disjunkten Klassen; Rückmeldungen bündelt die Lehrperson und gibt sie
+4. Zuteilung in DL 8 zyklisch; die Klassen sind dank Klassenliste garantiert disjunkt
+   (Entscheid der Lehrperson, 6.11.2026). Rückmeldungen bündelt die Lehrperson und gibt sie
    in DL 9 aus.
 5. K12-Stufen: Formulierung des Rasters (Markdown) übernommen. Stufe 3 verlangt Ursache und
    Folgetest.
 6. KI-Regel: Sprachhilfe erlaubt; Zahlen, Beobachtungen und Deutung nicht.
+
+**Welle 1b (6. November 2026): Entscheide umgesetzt.** Die Lehrperson hat die Fragen aus
+Abschnitt 7 beantwortet (siehe dort). Umsetzung in BOK, IRN und Vorlage (4. Klasse):
+
+- **Klassenliste:** Jedes Tandem wählt zwei Bildklassen, die kein anderes Tandem verwendet.
+  Geändert: Hinweis-Kasten und Kurzbeschreibung auf der Seite «Thema wählen», Fahrplan
+  (Etappe 1 mit angepasstem Häkchen), Abschlussseite, Pläne DL 4, 5 und 8, `materialien.md`
+  (DL 4 und DL 5 mit Klassenliste-Vorlage, DL 8 ohne Klassenkontrolle), Ideenpool,
+  Projektauftrag, Fotoanleitung und KP. Der Knopf «Als Thema vormerken» bleibt eine reine
+  Browser-Notiz; verbindlich ist der Eintrag in der Klassenliste.
+- **Themenliste:** Die Klasse «Herz» stand bei «Gezeichnete Symbole» und bei «Spielkarten».
+  «Gezeichnete Symbole» heisst jetzt «Stern, Pfeil, Blitz», damit die Liste selbst keine
+  Überschneidung enthält.
+- **Sollstufe:** Stufe 2 ist auf der Bewertungsseite, im Raster, im Projektauftrag und im KP
+  als Sollstufe ausgewiesen (22 Punkte = 4,25; 26 Punkte = 5,0).
+- **DL 9–10:** KP hält fest, dass nichts eingesammelt wird.
+- **1. Klasse:** nicht angefasst.
 
 **Geänderte Tests:** `tests/check_portal.cjs` und `tests/check_admin_form.cjs` öffnen eingeklappte
 Wahl-Kapitel vor dem Zugriff (Sichtbarkeit von Timeline, Papagei-Station, Ziffern-Notebook, Turing-Kasten).

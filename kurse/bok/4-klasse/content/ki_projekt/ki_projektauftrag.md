@@ -6,7 +6,7 @@
 
 ## Auftrag
 
-Wählen Sie eine Anwendung aus dem Ideenpool und genau zwei Klassen. Sammeln Sie 80 Fotos gemäss Datenplan: fünf unabhängige Gruppen, acht Fotos je Klasse und Gruppe. Beide Klassen werden unter gleichen Bedingungen fotografiert; Personen nur mit Einverständnis (Details in `ki_fotodaten.md`).
+Wählen Sie eine Anwendung aus dem Ideenpool und genau zwei Klassen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste der Lehrperson). Sammeln Sie 80 Fotos gemäss Datenplan: fünf unabhängige Gruppen, acht Fotos je Klasse und Gruppe. Beide Klassen werden unter gleichen Bedingungen fotografiert; Personen nur mit Einverständnis (Details in `ki_fotodaten.md`).
 
 Das vortrainierte Bildmodell liefert feste Merkmale. Sie trainieren darauf ein eigenes kleines neuronales Netz. Sie untersuchen Daten und Ergebnisse; Sie müssen den Hilfscode nicht selbst programmieren.
 
@@ -86,8 +86,8 @@ Die Lehrperson bietet kurze Beratungen zu Ihren Fragen an, statt die Klasse bei 
 
 | Zeitpunkt | Rahmen |
 |---|---|
-| Doppellektion 4 | Vorbereitungsauftrag: Thema und zwei Klassen aus der Themenliste wählen und zehn verschiedene Exemplare besorgen (fünf je Klasse); noch nicht fotografieren, keine Datenplanung |
-| Anfang Doppellektion 5 | Lehrperson gibt Thema und zwei Klassen frei, während die Tandems den Lernpfad zur Datenaufteilung lesen |
+| Doppellektion 4 | Vorbereitungsauftrag: Thema und zwei Klassen aus der Themenliste wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste), und zehn verschiedene Exemplare besorgen (fünf je Klasse); noch nicht fotografieren, keine Datenplanung |
+| Anfang Doppellektion 5 | Lehrperson gibt Thema und zwei Klassen frei, wenn die Klassen in der Klassenliste noch frei sind, während die Tandems den Lernpfad zur Datenaufteilung lesen |
 | Doppellektion 5 | Lernpfad, dann Exemplarliste (fünf unabhängige Gruppen) planen und abnehmen lassen; erst danach fotografieren |
 | Mitte Doppellektion 6 | Fotos importiert; fehlen sie noch, sofort mit der Lehrperson klären: gezielt nachfotografieren oder Modus `ERSATZ` (Übungsformen, offen als Ersatzdaten gekennzeichnet) |
 | Doppellektionen 5–7 | Eigener Etappenplan, selbstständige Arbeit, Beratung und laufende Sicherung; Etappen frei auf die Zeit verteilen |
@@ -111,7 +111,7 @@ Für Gespräch, Wiedereinstieg und Technik bleibt Reserve. Bei einem nicht lösb
 
 Elf benotete Kriterien mit je **0–3 Punkten**, maximal **33 Punkte**. K1–K6: gemeinsame Projektabgabe (18); K7–K10: individuelles Fachgespräch (12); K12: persönliche Fremdreflexion (3). K11 ist der verbindliche, **unbenotete** Daten- und Ergebnischeck.
 
-**Note = 1 + 5 × Punktesumme / 33**, auf Viertelnoten gerundet. 16 Punkte → 3,5; 22 (alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
+**Note = 1 + 5 × Punktesumme / 33**, auf Viertelnoten gerundet. 16 Punkte → 3,5; 22 (Sollstufe: alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 26 → 5,0; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
 
 ## Hilfsmittel und KI
 

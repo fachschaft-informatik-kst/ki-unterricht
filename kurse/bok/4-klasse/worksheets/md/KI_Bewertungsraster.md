@@ -2,7 +2,7 @@
 
 **33 Punkte gesamt · 11 benotete Kriterien.** K1–K6: gemeinsames Projekt (18 Punkte); K7–K10: vierminütiges Einzelgespräch (12 persönliche Punkte); K12: persönliche kritische Fremdreflexion (3 Punkte). **K11: gemeinsamer Check von fremden Trainings-/Testdaten, Ergebnissen und Pflichtversuch (unbenotet).** Alle benoteten Kriterien haben 0–3 Punkte; keine zusätzliche Gewichtung.
 
-**Note = 1 + 5 × (Punkte / 33)**, auf die nächste Viertelnote gerundet. Beispielsweise 16 → 3,5; 22 (alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
+**Note = 1 + 5 × (Punkte / 33)**, auf die nächste Viertelnote gerundet. **Stufe 2 ist die Sollstufe** («alle Anforderungen erfüllt»): alle elf Kriterien auf Stufe 2 ergeben 22 Punkte und die Note 4,25. Beispielsweise 16 → 3,5; 22 → 4,25; 25 → 4,75; 26 → 5,0; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
 
 | Kompetenz / Nachweis | 0 Punkte | 1 Punkt | 2 Punkte | 3 Punkte |
 |---|---|---|---|---|

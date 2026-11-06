@@ -1,4 +1,4 @@
-<details class="kapitel" id="projekt-2" data-kurz="Zwölf Ideen für Ihr Thema und genau zwei Klassen.">
+<details class="kapitel" id="projekt-2" data-kurz="Zwölf Ideen für Ihr Thema und zwei Klassen, die nur Ihr Tandem verwendet.">
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Thema wählen</h2>
   </summary>
@@ -8,6 +8,12 @@
 ## Zwölf Ideen. Platz für Ihre eigene.
 <!-- MD:END -->
     <p class="section-intro">Wählen Sie eine Idee. Eigene Themen nach Absprache.</p>
+    <div class="callout warn" id="projekt-klassenliste">
+      <strong>Jede Bildklasse nur einmal.</strong>
+      <!-- MD:START -->
+Ihr Tandem wählt zwei Klassen, die kein anderes Tandem verwendet. Tragen Sie sie in die Klassenliste Ihrer Lehrperson ein, bevor Sie Gegenstände besorgen: Wer zuerst einträgt, behält die Klasse. «Als Thema vormerken» speichert Ihre Wahl nur in Ihrem Browser. Dasselbe Thema ist möglich, wenn die Klassen verschieden sind (zum Beispiel andere Kartenfarben oder andere Baumarten). Nur so prüft ein anderes Tandem Ihr Modell in Doppellektion 8 mit wirklich anderen Klassen.
+<!-- MD:END -->
+    </div>
     <div class="topic-controls js-only js-flex">
       <label class="small" for="topic-search">Themen suchen</label>
       <input id="topic-search" placeholder="z. B. Früchte, Gesten oder Symbole" type="search"/>
@@ -118,7 +124,7 @@ Klassen: Würfel, Kugel
       <article class="card topic" data-kind="planen" data-topic="Gezeichnete Symbole">
         <h3><span aria-hidden="true" class="topic-icon">★</span>Gezeichnete Symbole</h3>
         <!-- MD:START -->
-Klassen: Herz, Stern
+Klassen: Stern, Pfeil
 <!-- MD:END -->
         <details>
           <summary>Untersuchungsidee</summary>

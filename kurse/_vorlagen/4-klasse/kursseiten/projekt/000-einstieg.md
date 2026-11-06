@@ -33,9 +33,9 @@ Lernpfad zur fairen Datenaufteilung mit Fallbeispiel, Selbstcheck und Übungsnot
       <div class="roadmap-body">
         <div class="roadmap-head"><strong>Anwendung und Vermutung</strong><span class="roadmap-meta">Richtwert DL 5 · Reflexion 1</span></div>
         <!-- MD:START -->
-Wählen Sie zwei Klassen (Vorbereitungsauftrag aus DL 4). Formulieren Sie einen Nutzen und vermuten Sie: Helfen vielfältigere Trainingsbilder? Die Lehrperson gibt Thema und Klassen zu Beginn von DL 5 frei.
+Wählen Sie zwei Klassen, die kein anderes Tandem verwendet, und tragen Sie sie in die Klassenliste ein (Vorbereitungsauftrag aus DL 4). Formulieren Sie einen Nutzen und vermuten Sie: Helfen vielfältigere Trainingsbilder? Die Lehrperson gibt Thema und Klassen zu Beginn von DL 5 frei, wenn beide Klassen noch frei sind.
 <!-- MD:END -->
-        <label class="check"><input data-check="phase-1" type="checkbox"/><span>Thema und zwei Klassen sind mit der Lehrperson besprochen und freigegeben.</span></label>
+        <label class="check"><input data-check="phase-1" type="checkbox"/><span>Thema und zwei eigene Klassen sind in der Klassenliste eingetragen und von der Lehrperson freigegeben.</span></label>
       </div>
       <a class="btn roadmap-go" href="#projekt-2">Thema wählen →</a>
     </li>

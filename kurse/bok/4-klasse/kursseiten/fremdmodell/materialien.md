@@ -2,7 +2,7 @@
 
 **Vorab durch die Lehrperson:** Austauschprojekt, erlaubte Dateien, Abgabekanal und Gesprächsplan verteilen. 20 Einzelgespräche × (4 Min. Gespräch + 1 Min. Wechsel/Notiz) benötigen **100 Minuten**, also zehn Minuten unmittelbar nach der Lektion. Gespräche ab Minute 0; keine klassenweite Einführung oder Abschlussrunde.
 
-**Zuteilung:** zyklisch (Tandem 1 prüft Tandem 2, …, das letzte Tandem prüft Tandem 1), sodass jedes Tandem ein Projekt prüft und von genau einem anderen geprüft wird. Vorher kontrollieren, dass sich die zwei Klassen des geprüften Projekts von den eigenen zwei Klassen unterscheiden; bei Überschneidung die Zuteilung verschieben. Projekte mit Personenfotos nur zuteilen, wenn die Personen der Weitergabe zugestimmt haben.
+**Zuteilung:** zyklisch (Tandem 1 prüft Tandem 2, …, das letzte Tandem prüft Tandem 1), sodass jedes Tandem ein Projekt prüft und von genau einem anderen geprüft wird. Eine Kontrolle der Klassen ist nicht nötig: Weil jede Bildklasse nur von einem Tandem gewählt wurde (Klassenliste, DL 4 und 5), sind die Klassen des geprüften Projekts garantiert andere als die eigenen. Nur wenn die Klassenliste nicht geführt wurde, vorher prüfen und bei Überschneidung die Zuteilung verschieben. Projekte mit Personenfotos nur zuteilen, wenn die Personen der Weitergabe zugestimmt haben.
 
 **Plan B:** Ein personenfreies Referenzpaket bereithalten (Journal-ZIP eines eigenen Probelaufs mit `testbilder/beispielbilder_fotostudio.json`, Notebook mit `MODUS = 'EIGENE_DATEN'` und `KLASSEN = ['Apfel', 'Banane']`, Abschlusstest einmal ausgeführt). Es dient bei Importproblemen und bei nicht weitergebbaren Personenfotos.
 

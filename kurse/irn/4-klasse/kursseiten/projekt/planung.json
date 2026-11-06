@@ -9,7 +9,7 @@
       "question": "Leitfrage: Wie organisieren wir eine faire Untersuchung zur Datenvielfalt?",
       "motivation": "Selbst organisiert lernen heisst: Ziele setzen, Entscheidungen begründen, Fortschritte prüfen und bei Bedarf gezielt Hilfe nutzen.",
       "product": "Ausgefüllter SOL-Selbstcheck zur Datenaufteilung, fünf korrekt getrennte Bildgruppen und eine erste Vermutung mit Etappenplan im Journal.",
-      "zeit": "Doppellektion 5 ist der Start des selbstständigen Arbeitens. Der Datenaufteilungs-Lernpfad liegt vollständig hier und enthält Erklärungen, Musterbeispiele, Übungsfälle, Selbstkontrolle, Fehlersuche und Transfer auf die eigenen fünf Fotogruppen. Die Lehrperson erklärt lediglich den organisatorischen Rahmen, keinen fachlichen Datenaufteilungs-Input. Sie gibt Thema und zwei Klassen in den ersten zehn Minuten frei (ca. eine Minute je Tandem, während die Tandems lesen) und nimmt die Exemplarlisten im Verlauf des Arbeitsblocks ab (ca. zwei Minuten je Tandem, alternativ Nachbartandem). Wer früher fertig ist, arbeitet selbstgesteuert am Projekt weiter; mindestens 10 Minuten Puffer.",
+      "zeit": "Doppellektion 5 ist der Start des selbstständigen Arbeitens. Der Datenaufteilungs-Lernpfad liegt vollständig hier und enthält Erklärungen, Musterbeispiele, Übungsfälle, Selbstkontrolle, Fehlersuche und Transfer auf die eigenen fünf Fotogruppen. Die Lehrperson erklärt lediglich den organisatorischen Rahmen, keinen fachlichen Datenaufteilungs-Input. Sie gibt Thema und zwei Klassen in den ersten zehn Minuten frei, sofern keine der beiden Klassen schon bei einem anderen Tandem in der Klassenliste steht (ca. eine Minute je Tandem, während die Tandems lesen) und nimmt die Exemplarlisten im Verlauf des Arbeitsblocks ab (ca. zwei Minuten je Tandem, alternativ Nachbartandem). Wer früher fertig ist, arbeitet selbstgesteuert am Projekt weiter; mindestens 10 Minuten Puffer.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -20,7 +20,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Öffnen Sie die selbstständige Lernstrecke «Daten fair aufteilen» im Projektteil und lesen Sie das Ziel. Notieren Sie vorab, wie man beurteilen könnte, ob ein Modell wirklich neue Bilder erkennt, und greifen Sie dazu Ihre Vorschau-Antwort aus Doppellektion 4 auf. Halten Sie Thema und zwei Klassen aus dem Vorbereitungsauftrag bereit: Die Lehrperson gibt sie in den ersten Minuten frei."
+              "text": "Öffnen Sie die selbstständige Lernstrecke «Daten fair aufteilen» im Projektteil und lesen Sie das Ziel. Notieren Sie vorab, wie man beurteilen könnte, ob ein Modell wirklich neue Bilder erkennt, und greifen Sie dazu Ihre Vorschau-Antwort aus Doppellektion 4 auf. Halten Sie Thema und zwei Klassen aus dem Vorbereitungsauftrag bereit: Die Lehrperson gibt sie in den ersten Minuten frei, wenn kein anderes Tandem eine Ihrer Klassen verwendet (Klassenliste)."
             },
             {
               "art": "Ergebnis",
@@ -56,7 +56,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 10,
-              "text": "Erklärt Ablauf, fünf Reflexionen, Bewertung, Abgabe vor Doppellektion 8 und ZIP-Sicherung. Erklärt den Foto-Fahrplan: erst Lernpfad und Exemplarliste, dann Abnahme der Liste (Lehrperson oder Nachbartandem), erst danach fotografieren; Richtwerte: Ende Doppellektion 5 Exemplarliste abgenommen und Fotos begonnen, Mitte Doppellektion 6 Fotos importiert. Richtet die Fortschrittstafel ein (Plakat oder Tafel; die Tandems tragen ihre Meilensteine selbst ein). Thema und zwei Klassen haben alle Tandems in der Ankommens- und Vorwissensphase freigegeben bekommen (ca. eine Minute je Tandem). Verweist auf den eigenständig aufgebauten Lernpfad zur Datenaufteilung mit Erklärung, Beispielen und Lösungen. Kein gemeinsamer inhaltlicher Vortrag zu Training, Validierung, Test oder Datenlecks; Hilfe nur auf konkrete Fragen."
+              "text": "Erklärt Ablauf, fünf Reflexionen, Bewertung, Abgabe vor Doppellektion 8 und ZIP-Sicherung. Erklärt den Foto-Fahrplan: erst Lernpfad und Exemplarliste, dann Abnahme der Liste (Lehrperson oder Nachbartandem), erst danach fotografieren; Richtwerte: Ende Doppellektion 5 Exemplarliste abgenommen und Fotos begonnen, Mitte Doppellektion 6 Fotos importiert. Richtet die Fortschrittstafel ein (Plakat oder Tafel; die Tandems tragen ihre Meilensteine selbst ein). Thema und zwei Klassen haben alle Tandems in der Ankommens- und Vorwissensphase freigegeben bekommen (ca. eine Minute je Tandem; Klassenliste: jede Bildklasse nur einmal). Verweist auf den eigenständig aufgebauten Lernpfad zur Datenaufteilung mit Erklärung, Beispielen und Lösungen. Kein gemeinsamer inhaltlicher Vortrag zu Training, Validierung, Test oder Datenlecks; Hilfe nur auf konkrete Fragen."
             },
             {
               "art": "Ergebnis",

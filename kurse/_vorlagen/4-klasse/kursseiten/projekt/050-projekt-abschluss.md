@@ -54,7 +54,7 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mi
               <tr>
                 <td>4. Doppellektion</td>
                 <td>XOR und die Grenzen eines einzelnen Neurons untersuchen</td>
-                <td>Erklärung der Zwischenschicht; Vorbereitungsauftrag: Thema und zwei Klassen wählen, Gegenstände besorgen (noch nicht fotografieren, keine Datenplanung)</td>
+                <td>Erklärung der Zwischenschicht; Vorbereitungsauftrag: Thema und zwei eigene Klassen wählen und in die Klassenliste eintragen (jede Bildklasse nur einmal), Gegenstände besorgen (noch nicht fotografieren, keine Datenplanung)</td>
               </tr>
               <tr>
                 <td>Doppellektionen 5–7</td>

@@ -28,7 +28,7 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
   </article>
 </div>
 <p class="callout"><strong>Gemeinsamer Check K11 (Pflicht, unbenotet):</strong> Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2, ein nachgerechnetes Ergebnis und eine kurze Rückmeldung untersuchen. Diese Arbeit ist die Grundlage der persönlichen Reflexion, wird aber nicht mit zusätzlichen Punkten bewertet.</p>
-<p class="small">Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
+<p class="small"><strong>Stufe 2 ist die Sollstufe:</strong> Wer alle Anforderungen erfüllt, erreicht sie. Stufe 3 verlangt zusätzlich Begründung, Vertiefung oder Übertragung. Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
 <div aria-label="Bewertungsraster, horizontal scrollbar" class="table-scroll" role="region" tabindex="0">
   <table class="rubric">
     <caption>11 benotete Kriterien × 0–3 Punkte = maximal 33 Punkte</caption>
@@ -140,7 +140,7 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
 <!-- MD:END -->
   <p><strong>Note = 1 + 5 × (Punktesumme ÷ 33)</strong></p>
   <!-- MD:START -->
-Die Endnote wird auf die nächste Viertelnote gerundet. 16 Punkte → 3,5 · 22 Punkte (alle elf Kriterien auf Stufe 2) → 4,25 · 25 Punkte → 4,75 · 33 Punkte → 6,0.
+Die Endnote wird auf die nächste Viertelnote gerundet. 16 Punkte → 3,5 · 22 Punkte (Sollstufe: alle elf Kriterien auf Stufe 2) → 4,25 · 25 Punkte → 4,75 · 26 Punkte → 5,0 · 33 Punkte → 6,0.
 <!-- MD:END -->
   <output aria-live="polite" id="grade-result">Wählen Sie für jede Kompetenz 0–3 Punkte.</output>
   <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Der gemeinsame Fremdcheck K11 ist unbenotet; nur die persönliche Reflexion K12 zählt mit 3 Punkten. Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>

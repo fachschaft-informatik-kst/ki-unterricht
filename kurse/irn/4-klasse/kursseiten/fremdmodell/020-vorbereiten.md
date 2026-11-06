@@ -11,7 +11,7 @@ open: false
 
 ## Welche Dateien brauchen wir für die Prüfung?
 
-<p class="section-intro">Halten Sie das <strong>fremde und das eigene Abgabe-ZIP</strong> sowie Ihre persönliche Gesprächszeit bereit. Mit dem fremden Projekt arbeiten Sie ausschliesslich in einem privaten Fenster. Richtwert für diese Etappe: <strong>10 Minuten</strong>. Die Lehrperson hat Ihnen ein Projekt mit anderen Klassen als Ihren zugeteilt; stimmt doch eine Klasse überein, melden Sie das, bevor Sie weiterarbeiten.</p>
+<p class="section-intro">Halten Sie das <strong>fremde und das eigene Abgabe-ZIP</strong> sowie Ihre persönliche Gesprächszeit bereit. Mit dem fremden Projekt arbeiten Sie ausschliesslich in einem privaten Fenster. Richtwert für diese Etappe: <strong>10 Minuten</strong>. Die Lehrperson hat Ihnen ein Projekt zugeteilt. Weil jedes Tandem zwei einzigartige Klassen hat, sind dessen Klassen garantiert andere als Ihre. Sollte doch eine Klasse übereinstimmen, melden Sie das, bevor Sie weiterarbeiten.</p>
 
 <p class="project-workplace"><strong>Werkzeuge für diese Etappe:</strong> <a href="#sicherung">Notizen &amp; Projekt</a> (ZIP wiederherstellen) · <a href="#projekt-werkbank">Journal &amp; Notebook</a>. Zurück zu dieser Doppellektion führt die Navigation: «Fremdmodell prüfen».</p>
 

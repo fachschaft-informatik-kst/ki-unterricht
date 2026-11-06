@@ -7,7 +7,7 @@
 
 **Tandem · 5 Min.**
 
-Öffnen Sie den SOL-Lernpfad und lesen Sie das Ziel. Notieren Sie vorab: «Ein fairer Test müsste …» und greifen Sie dazu Ihre Vorschau-Antwort aus DL 4 auf. Behalten Sie diese Vermutung für die spätere Selbstkontrolle. Halten Sie Thema und zwei Klassen aus dem Vorbereitungsauftrag bereit: Die Lehrperson gibt sie in den ersten zehn Minuten frei (ca. eine Minute je Tandem).
+Öffnen Sie den SOL-Lernpfad und lesen Sie das Ziel. Notieren Sie vorab: «Ein fairer Test müsste …» und greifen Sie dazu Ihre Vorschau-Antwort aus DL 4 auf. Behalten Sie diese Vermutung für die spätere Selbstkontrolle. Halten Sie Thema und zwei Klassen aus dem Vorbereitungsauftrag bereit: Die Lehrperson gibt sie in den ersten zehn Minuten frei (ca. eine Minute je Tandem), wenn kein anderes Tandem eine Ihrer Klassen verwendet.
 
 ### Vorwissen aktivieren · 5 Min. · Bekannt oder neu?
 
@@ -32,6 +32,24 @@ Klärt Etappenplan, fünf Reflexionen, Raster, Abgabekanal, Frist **vor DL8** un
 **Arbeitsvereinbarung:** Name A / Name B: ____________________ · Tagesziel: ____________________ · Rollen heute (wechseln Sie sie in jeder Lektion): ____________________ · Bei Absenz einer Person: ____________________ · Abgabekanal und Frist: ____________________.
 
 **Fortschrittstafel:** Auf einem Plakat oder an der Tafel tragen die Tandems selbst ihre Meilensteine ein (Liste abgenommen · Fotos importiert · A/B-Vergleich · Test · ZIP). Die Lehrperson erkennt bei Rundgängen, wer Unterstützung braucht.
+
+**Klassenliste (Voraussetzung für DL 8):** Jedes Tandem wählt zwei Bildklassen, die kein anderes Tandem verwendet. Führen Sie die Liste ab DL 4 (Plakat im Zimmer oder gemeinsames Dokument): Wer zuerst einträgt, behält die Klasse; bei Überschneidung wählt das spätere Tandem eine andere Klasse oder ein anderes Thema. Freigabe in DL 5 nur, wenn beide Klassen frei sind. Dasselbe Thema ist möglich, wenn die Klassen verschieden sind. Eigene Themen als neue Zeile ergänzen.
+
+| Thema | Klassen zur Auswahl | Vergeben an (Tandem · gewählte Klassen) |
+|---|---|---|
+| Recyclinghilfe | PET-Flasche, Dose, Karton | ____________________ |
+| Schreibmaterial | Stift, Radiergummi, Lineal | ____________________ |
+| Besteck | Gabel, Messer, Löffel | ____________________ |
+| Handgesten | Faust, offene Hand, Peace | ____________________ |
+| Früchte | Apfel, Birne, Banane | ____________________ |
+| Blätter | zwei bis drei Baumarten | ____________________ |
+| Kleidungsstücke | Schuh, Mütze, Handschuh | ____________________ |
+| Werkzeuge | Hammer, Zange, Schraubenzieher | ____________________ |
+| Geometrische Körper | Würfel, Kugel, Zylinder | ____________________ |
+| Gezeichnete Symbole | Stern, Pfeil, Blitz | ____________________ |
+| Spielkarten | Herz, Karo, Pik, Kreuz | ____________________ |
+| Arbeitsplatz | frei, teilweise belegt, voll | ____________________ |
+| Eigenes Thema: ____________________ | ____________________ | ____________________ |
 
 ### Verarbeiten · 60 Min. · Datenplan selbst erarbeiten
 

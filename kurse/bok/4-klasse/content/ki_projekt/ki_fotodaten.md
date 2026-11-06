@@ -14,7 +14,7 @@ Jeder Gegenstand bleibt in genau einer Gruppe. Ein anderer Hintergrund erzeugt k
 
 ## Sammeln
 
-1. Zwei eindeutige Klassen wählen (Vorbereitungsauftrag vor Doppellektion 5). Fünf unabhängige Gruppen legen Sie in Doppellektion 5 nach dem Lernpfad fest und lassen sie abnehmen.
+1. Zwei eindeutige Klassen wählen, die kein anderes Tandem verwendet (Klassenliste; Vorbereitungsauftrag vor Doppellektion 5). Fünf unabhängige Gruppen legen Sie in Doppellektion 5 nach dem Lernpfad fest und lassen sie abnehmen.
 2. Je Klasse/Gruppe acht unterschiedliche JPG/PNG-Fotos aufnehmen. Perspektive, Abstand und Licht variieren. Ähnliche Bedingungen für beide Klassen und alle Gruppen schaffen.
 3. **Beide Klassen unter gleichen Bedingungen** aufnehmen (Hintergrund, Licht, Kamera). Sonst lernt das Netz womöglich den Hintergrund statt den Gegenstand: Liegen alle Äpfel auf Holz und alle Birnen auf Weiss, sagt «Holz» die Klasse voraus.
 4. Gruppenzuordnung (T1, T2, V1, P1, P2) **vor** dem Fotografieren festlegen und nicht nach den Ergebnissen ändern.
