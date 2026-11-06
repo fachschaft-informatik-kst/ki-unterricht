@@ -17,9 +17,9 @@ Ein Netz erkennt ein Bild, das es schon beim Training gesehen hat. Was ist damit
 
 > **Selbstkontrolle:** Eine richtige Trainingsvorhersage belegt nicht, dass andere Exemplare erkannt werden. Neue Aufnahmewinkel desselben Gegenstands sind nicht automatisch unabhängige Testobjekte.
 
-Lesen Sie danach [«Wer weiss was?»](index.html#projekt-wer-weiss-was) und notieren Sie je einen Satz: Welches Netz **lernt** in unserem Projekt, welches **bleibt unverändert**?
+Lesen Sie danach [«Wer weiss was?»](index.html#projekt-wer-weiss-was) und notieren Sie je einen Satz: Welches Netz **lernt** in unserem Projekt, welches **bleibt unverändert**, und woher kennt das lernende Netz die richtige Antwort?
 
-> **Selbstkontrolle:** MobileNet bleibt unverändert und liefert nur die 1280 Zahlen je Foto. Das kleine Netz dahinter lernt Ihre zwei Klassen. MobileNet kennt Ihre Klassen nicht, denn sein Ausgang mit 1000 Klassennamen wird nicht benutzt.
+> **Selbstkontrolle:** MobileNet bleibt unverändert und liefert nur die 1280 Zahlen je Foto. Das kleine Netz dahinter lernt Ihre zwei Klassen. MobileNet kennt Ihre Klassen nicht, denn sein Ausgang mit 1000 Klassennamen wird nicht benutzt. Die richtige Antwort steckt im Label: Jedes Foto trägt seine Klasse, das Netz lernt also überwacht (wie das Neuron in DL 3 und das Ziffernnetz in DL 4).
 
 ### Informieren · 10 Min. · Nur der organisatorische Rahmen
 
@@ -67,7 +67,7 @@ Klärt Etappenplan, fünf Reflexionen, Raster, Abgabekanal, Frist **vor DL8** un
 
 **Rechnung:** 2 Klassen × 5 Gruppen × 8 Fotos = **80 Bilder**. Jedes Exemplar gehört genau einer Gruppe. Ein neuer Hintergrund macht keinen neuen Gegenstand. Bei Gesten sind es getrennte Personen pro Gruppe, jeweils mit beiden Gesten; Spezialfälle vorher klären.
 
-**Training** passt Gewichte an. **Validierung** hilft bei der Auswahl. **Test** prüft die zuvor festgelegte Auswahl; nach Testeinsicht wird nicht weiter optimiert.
+**Training** passt Gewichte an. **Validierung** hilft bei der Auswahl. **Test** prüft die zuvor festgelegte Auswahl; nach Testeinsicht wird nicht weiter optimiert. Alle Bilder in allen Gruppen tragen ein Label (ihre Klasse). Beim überwachten Lernen lernt nur das Training daran; Validierung und Test vergleichen Vorhersage und Label, ohne danach zu lernen.
 
 #### Übungsfälle · Wo steckt ein Datenleck?
 
@@ -224,7 +224,7 @@ Testen Sie die begründet ausgewählte Variante **einmal auf P1/P2**. Das Notebo
 
 #### Drei konkrete Beispiele statt pauschaler Behauptungen
 
-| Bild / Gruppe / tatsächliche Klasse | Vorhersage | Passend oder nicht? | Vorsichtige Erklärung / offene Frage |
+| Bild / Gruppe / Label (tatsächliche Klasse) | Vorhersage | Passend oder nicht? | Vorsichtige Erklärung / offene Frage |
 |---|---|---|---|
 | 1: ____________________ | ______ | ______ | ____________________ |
 | 2: ____________________ | ______ | ______ | ____________________ |
@@ -232,7 +232,7 @@ Testen Sie die begründet ausgewählte Variante **einmal auf P1/P2**. Das Notebo
 
 Falls keine Fehler auftreten, untersuchen Sie drei richtige Beispiele und die Grenzen des kleinen Tests. **Keine Fehler oder Ergebnisse erfinden.** Achten Sie darauf, ob Fehler vor allem Bilder mit anderem Hintergrund oder Ort betreffen (zum Beispiel ein Stresstest mit P2).
 
-**Reflexion 4–5 im bestehenden Journal:** In Reflexion 4 beantworten Sie auch: Welcher Teil hat unsere zwei Klassen unterscheiden gelernt (MobileNet oder das kleine Netz), und könnten Hintergrund oder Licht mitgeholfen haben? Welche Aussage stützen die Daten? Was bleibt ungesichert? Was wäre ein nächster Versuch? Wie waren Arbeitsteilung, Hilfen und Etappenplan? Erklären Sie sich gegenseitig das ganze Projekt.
+**Reflexion 4–5 im bestehenden Journal:** In Reflexion 4 beantworten Sie auch: Welcher Teil hat unsere zwei Klassen unterscheiden gelernt (MobileNet oder das kleine Netz), und könnten Hintergrund oder Licht mitgeholfen haben? Welche Aussage stützen die Daten? Was bleibt ungesichert? Was wäre ein nächster Versuch? Wie waren Arbeitsteilung, Hilfen und Etappenplan? Erklären Sie sich gegenseitig das ganze Projekt, vom Foto mit seinem Label über das überwachte Training bis zur Vorhersage.
 
 **Allein, 10 Min.:** Prüfen Sie einen persönlichen Anteil Ihrer Abschlussliste mit dem Raster. Notieren Sie einen fehlenden Beleg oder eine offene Frage. Fünfzehn Minuten bleiben für Abschluss, Technik und Beratung.
 

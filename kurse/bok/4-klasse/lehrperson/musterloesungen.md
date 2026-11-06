@@ -58,7 +58,7 @@ Beim **Spamfilter** ist die Eingabe eine E-Mail. Beim Training sieht das Modell 
 
 ### Drei Lernarten – Memory und NIM
 
-- **Überwachtes Lernen:** Beispiele mit korrektem Label, z. B. «das Bild zeigt eine Katze».
+- **Überwachtes Lernen:** Beispiele mit korrektem Label, z. B. «das Bild zeigt eine Katze». Dieselbe Lernart begegnet den Lernenden später im Neuron (DL 3), im Ziffernnetz (DL 4) und im Bildprojekt.
 - **Unüberwachtes Lernen:** Muster und Gruppen ohne vorgegebene Labels, z. B. nach Farbe oder Form.
 - **Verstärkendes Lernen:** Rückmeldung über Erfolg/Misserfolg nach Handlungen; beim NIM-Spiel können erfolgreiche Züge verstärkt werden.
 
@@ -81,7 +81,7 @@ Es bildet die **gewichtete Summe plus Bias** und gibt ab Summe 0 die Ausgabe 1 a
 
 ### Was wird gelernt?
 
-**Gewichte und Bias** werden anhand bekannter Trainingsziele schrittweise korrigiert; die Grundrechnung und die Schwelle ändern sich nicht. Eine höhere Lernrate kann schneller korrigieren, aber auch überschiessen. Beobachtete Gewichtsänderungen müssen aus dem eigenen Notebook stammen.
+**Gewichte und Bias** werden beim überwachten Lernen anhand bekannter Trainingsziele (Labels) schrittweise korrigiert; die Grundrechnung und die Schwelle ändern sich nicht. Eine höhere Lernrate kann schneller korrigieren, aber auch überschiessen. Beobachtete Gewichtsänderungen müssen aus dem eigenen Notebook stammen.
 
 ## 4 · XOR und neuronale Netze (Doppellektion 4)
 
@@ -104,11 +104,11 @@ Mit einer Zwischenschicht sind auch nichtlinear trennbare Muster möglich. Beim 
 
 ### Ziffernerkennung
 
-Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte Schicht **16 Neuronen** und der Ausgang **10 Werte** für 0 bis 9. Der höchste Wert bestimmt die Vorhersage, garantiert aber keine Korrektheit. Eine echte Verwechslung muss anhand des gezeigten Bilds erläutert werden.
+Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte Schicht **16 Neuronen** und der Ausgang **10 Werte** für 0 bis 9. Der höchste Wert bestimmt die Vorhersage, garantiert aber keine Korrektheit. Eine echte Verwechslung muss anhand des gezeigten Bilds erläutert werden. Das Netz lernt überwacht: Zu jedem der 1257 Trainingsbilder ist die richtige Ziffer als Label bekannt, und das Netz vergleicht seine Vorhersage damit. Nur die Ausgabe wird mit dem Label verglichen; die versteckten Neuronen bekommen keine eigenen Labels. Auch die 540 Prüfbilder haben Labels, das Netz lernt aber nicht an ihnen.
 
 ### Brücke zum Bildprojekt
 
-«Im Bildprojekt arbeitet ein Netz wie hier, aber mit 1280 statt 2 Eingaben. Die Zahlen berechnet MobileNet, ein fertiges Netz, das sich nicht verändert. Nur das kleine Netz dahinter lernt unsere zwei Klassen: vorhersagen, Fehler bewerten, Gewichte anpassen.» Entscheidend ist die Trennung zwischen **fest** (MobileNet) und **lernend** (kleines Netz).
+«Im Bildprojekt arbeitet ein Netz wie hier, aber mit 1280 statt 2 Eingaben. Die Zahlen berechnet MobileNet, ein fertiges Netz, das sich nicht verändert. Nur das kleine Netz dahinter lernt unsere zwei Klassen, wieder überwacht: vorhersagen, Fehler gegen das Label bewerten, Gewichte anpassen.» Entscheidend ist die Trennung zwischen **fest** (MobileNet) und **lernend** (kleines Netz).
 
 ## 5–8 · Tandemprojekt: beispielhafte Musterlösung
 
@@ -142,7 +142,7 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 
 ### Was wird technisch tatsächlich trainiert?
 
-**MobileNet V2 ist vortrainiert und bleibt eingefroren.** Es liefert **1280 Bildmerkmale**. Nur das **nachgeschaltete Netz mit 16 Neuronen** lernt anhand der Trainingsbilder: **60 Epochen**, Startwert **11**, Adam-Optimierung.
+**MobileNet V2 ist vortrainiert und bleibt eingefroren.** Es liefert **1280 Bildmerkmale**. Nur das **nachgeschaltete Netz mit 16 Neuronen** lernt anhand der Trainingsbilder: **60 Epochen**, Startwert **11**, Adam-Optimierung. Das Training ist überwachtes Lernen: Jedes Foto trägt seine Klasse als Label, und das kleine Netz vergleicht seine Vorhersage damit. V1 und P1/P2 haben ebenfalls Labels, dienen aber nur zum Vergleichen.
 
 - **A:** acht Fotos eines Exemplars aus T1 je Klasse.
 - **B:** je vier Fotos aus T1 und T2 je Klasse.
@@ -150,8 +150,8 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 
 **Wer weiss was?** (Box auf der Seite «A/B-Versuch», unter «Hintergrund»)
 
-- **MobileNet** kennt Formen, Texturen und Muster aus über einer Million fremder Fotos, lernt im Projekt nichts und kennt unsere zwei Klassen nicht. Sein Ausgang mit 1000 Klassennamen wird nicht benutzt.
-- **Das kleine Netz** lernt, welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören. Es weiss nicht, was ein «Apfel» ist; Hintergrund und Licht zählen als Merkmale mit.
+- **MobileNet** kennt Formen, Texturen und Muster aus über einer Million fremder Fotos, lernt im Projekt nichts und kennt unsere zwei Klassen nicht. Es wurde überwacht vortrainiert (Fotos mit 1000 Klassennamen als Labels); dieser Ausgang wird nicht benutzt.
+- **Das kleine Netz** lernt, welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören, überwacht mit unseren Klassen als Labels. Es weiss nicht, was ein «Apfel» ist; Hintergrund und Licht zählen als Merkmale mit.
 
 **Häufige Fehlvorstellungen:** «MobileNet kennt Apfel und Birne schon.» Nein, es liefert nur Merkmale. «Das kleine Netz erkennt den Apfel.» Es ordnet Zahlenmuster zu, notfalls anhand von Hintergrund oder Licht. Darum zählen nur neue Exemplare als Beleg.
 
@@ -181,7 +181,7 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 
 ### Fremdauswertung (Doppellektion 8)
 
-Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1/P2 des fremden Modells anhand konkreter Exemplare, Quellen und Originalresultate prüfen. Ein Nachlauf mit Startwert **11** liefert einen weiteren Beleg. Danach die eigenen, völlig anderen Bildklassen ausprobieren. **Ungelesene Testbilder derselben Klassen** sind erwünscht; **ganz andere Klassen** hat das Modell nie gelernt. Eine scheinbar gute Trennschärfe ist deshalb keine Klassifikationsgenauigkeit. Das fremde Modell hat nur die ursprünglichen zwei Klassen gelernt; **eine Umbenennung seiner Ausgänge ist kein neues Training**. Entscheidend sind die begründete Prüfung und die Grenzen, nicht eine bestimmte Erfolgsquote.
+Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1/P2 des fremden Modells anhand konkreter Exemplare, Quellen und Originalresultate prüfen. Ein Nachlauf mit Startwert **11** liefert einen weiteren Beleg. Danach die eigenen, völlig anderen Bildklassen ausprobieren. **Ungelesene Testbilder derselben Klassen** sind erwünscht; **ganz andere Klassen** hat das Modell nie gelernt. Eine scheinbar gute Trennschärfe ist deshalb keine Klassifikationsgenauigkeit. Das fremde Modell hat überwacht nur die ursprünglichen zwei Klassen (seine Labels) gelernt; **eine Umbenennung seiner Ausgänge ist kein neues Training**. Entscheidend sind die begründete Prüfung und die Grenzen, nicht eine bestimmte Erfolgsquote.
 
 ## 9 · Sprachmodelle (Doppellektion 9)
 

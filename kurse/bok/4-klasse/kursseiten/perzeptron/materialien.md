@@ -19,7 +19,7 @@ Ein Warnsignal soll nur angehen, wenn **beide** Sensoren aktiv sind (AND). Ergä
 
 **Klasse · 2 Min.**
 
-Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
+Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Welche Lernart aus DL 2 passt, wenn zu jedem Beispiel die richtige Ausgabe bekannt ist (überwachtes Lernen)? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
 
 ### Informieren · 22 Min. · Rechenkarte für ein Neuron
 
@@ -55,7 +55,7 @@ Start: w₁ = w₂ = 0.2, b = −0.5, Lernrate η = 0.2. Beispiel (1,1), Ziel t 
 | w₂ | 0.2 | +0.2 | 0.4 |
 | b | −0.5 | +0.2 | −0.3 |
 
-Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwellenregel bleiben unverändert.
+Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwellenregel bleiben unverändert. Das ist **überwachtes Lernen**: Zu jedem Beispiel ist das Ziel (Label) bekannt, und der Unterschied zwischen Ausgabe und Ziel bestimmt die Korrektur.
 
 ![Lernregel eines Perzeptrons als Flussdiagramm](materialien/downloads/perzeptron_lernregel_flussdiagramm.svg "Informieren | Lehrperson")
 
@@ -86,4 +86,4 @@ Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwelle
 Erklären Sie eine eigene Rechnung und prüfen Sie gemeinsam zwei Vorher-Nachher-Erklärungen aus dem eigenen Lernversuch (Experiment 3). Schreiben Sie zum Abschluss:
 
 - **Entscheiden:** «Ein Neuron berechnet …; das Gewicht …; der Bias …».
-- **Lernen:** «Bei einem Fehler werden … angepasst; unverändert bleiben …».
+- **Lernen:** «Beim überwachten Lernen werden bei einem Fehler … angepasst; unverändert bleiben …».

@@ -56,7 +56,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 12,
-              "text": "Zeigt die EVA-Grafik mit Erfahrungsschatz. Vergleicht einen menschlich festgelegten Entscheidungsbaum (zum Beispiel einen Tier-Ratebaum auf Papier) mit einem lernenden Spamfilter. Führt Labels, Ähnlichkeit und Rückmeldung als drei Lernsignale ein und erklärt den Memory-Auftrag. Akinator und Filmempfehlungen dienen der Erklärung: Akinator sieht aus wie ein Entscheidungsbaum, nutzt aber Erfahrungen früherer Spielender; Filmempfehlungen lernen aus Rückmeldungen. Kein Wechsel zu zusätzlichen Werkzeugen."
+              "text": "Zeigt die EVA-Grafik mit Erfahrungsschatz. Vergleicht einen menschlich festgelegten Entscheidungsbaum (zum Beispiel einen Tier-Ratebaum auf Papier) mit einem lernenden Spamfilter. Führt Labels, Ähnlichkeit und Rückmeldung als drei Lernsignale ein und benennt die zugehörigen Lernarten: überwachtes, unüberwachtes und verstärkendes Lernen. Beim überwachten Lernen ist zu jedem Beispiel die richtige Antwort (das Label) bekannt; diesen Begriff greifen die Doppellektionen 3 bis 8 wieder auf. Erklärt den Memory-Auftrag. Akinator und Filmempfehlungen dienen der Erklärung: Akinator sieht aus wie ein Entscheidungsbaum, nutzt aber Erfahrungen früherer Spielender; Filmempfehlungen lernen aus Rückmeldungen. Kein Wechsel zu zusätzlichen Werkzeugen."
             },
             {
               "art": "Auftrag",
@@ -116,7 +116,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 3,
-              "text": "Klärt zwei strittige Zuordnungen gemeinsam, gibt die Selbstkontrolle zur Sicherung frei und hält fest: Das Bildprojekt lernt überwacht mit beschrifteten Trainingsbildern."
+              "text": "Klärt zwei strittige Zuordnungen gemeinsam, gibt die Selbstkontrolle zur Sicherung frei und hält fest: Überwachtes Lernen begleitet den Kurs weiter. Das Neuron (Doppellektion 3), das Ziffernnetz (Doppellektion 4) und das Bildprojekt lernen alle aus Beispielen mit Label."
             },
             {
               "art": "Ergebnis",

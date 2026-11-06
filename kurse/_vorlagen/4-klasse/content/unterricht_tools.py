@@ -239,7 +239,7 @@ def xor_lernen(neuronen=2, startwert=1):
     ax.set_title(f'{neuronen} versteckte Neuronen: {richtig} von 4 richtig')
     plt.tight_layout(); plt.show()
     print('Grün: Ausgabe 0, Orange: Ausgabe 1. Gestrichelte Linien: Was jedes versteckte Neuron «fragt».')
-    if richtig == 4: print('Das Netz hat XOR aus den vier Beispielen selbst gelernt. Wir haben keine Gewichte vorgegeben.')
+    if richtig == 4: print('Das Netz hat XOR überwacht aus den vier Beispielen mit ihren Zielwerten gelernt. Wir haben keine Gewichte vorgegeben.')
     elif neuronen == 1: print('Ein einziges Neuron ist eine einzige Gerade: Mehr als 3 von 4 sind nicht möglich.')
     else: print('Das Training ist hängen geblieben. Anderen Startwert oder mehr Neuronen probieren.')
     return netz
@@ -979,7 +979,7 @@ def _ziffern_netz(X, y, ids, neuronen, max_iter=100):
 def _ziffer_titel(ax, X, y, i, guess, sicherheit):
     ax.imshow(X[i].reshape(8, 8), cmap='gray_r'); ax.axis('off')
     ok = guess == y[i]
-    ax.set_title(f"{'✓' if ok else '✗'} Bild: {y[i]}\nNetz: {guess} ({sicherheit:.0%})", fontsize=9, color='#176c63' if ok else '#b84d27')
+    ax.set_title(f"{'✓' if ok else '✗'} Label: {y[i]}\nNetz: {guess} ({sicherheit:.0%})", fontsize=9, color='#176c63' if ok else '#b84d27')
 
 
 _ZIFFERNNETZE = {}
@@ -1011,8 +1011,10 @@ def ziffern(neuronen=16):
     fig.text(.005, .27, 'Fehler' if len(wrong) else 'keine Fehler', rotation=90, va='center', fontsize=9)
     plt.tight_layout(rect=(.02, 0, 1, .93)); plt.show()
     print(f'Oben je Ziffer ein richtig erkanntes Bild (Zahl in Klammern: Modellwert). Unten die ersten Fehler von {len(wrong)}.')
+    print('Über jedem Bild steht sein Label (die richtige Ziffer), darunter die Vorhersage des Netzes.')
     anzahl = sum(c.size for c in netz.coefs_) + sum(i.size for i in netz.intercepts_)
     print(f'Dieses Netz hat {anzahl} Gewichte und Bias-Werte (64 Eingaben → {neuronen} → 10 Ausgaben), alle vom Training gefunden.')
+    print(f'Überwachtes Lernen: Zu jedem der {len(train)} Trainingsbilder kannte das Netz die richtige Ziffer (das Label). Die Validierungsbilder haben ebenfalls Labels, das Netz hat aber nicht an ihnen gelernt.')
     print('Die Validierungsbilder dienen zum Vergleichen; sie sind kein unabhängiger Abschlusstest.')
     return netz
 
@@ -1032,7 +1034,7 @@ def ziffer_durchs_netz(netz, nr=0):
     axes[2].bar(netz.classes_, probs * 100, color=['#176c63' if c == guess else '#c9d3d6' for c in netz.classes_])
     axes[2].set(xticks=range(10), xlabel='Ziffer', ylabel='Modellwert (%)', ylim=(0, 105), title='3 · Ausgabe: Wert je Ziffer')
     plt.tight_layout(); plt.show()
-    print(f'Bild {nr}: tatsächlich {y[i]} · Netz: {guess} ({probs.max():.0%}) · ' + ('richtig' if guess == y[i] else 'Fehler'))
+    print(f'Bild {nr}: Label {y[i]} (die richtige Ziffer) · Netz: {guess} ({probs.max():.0%}) · ' + ('richtig' if guess == y[i] else 'Fehler'))
     print('Neuronen mit Wert 0 sind für dieses Bild «still». Jedes Neuron reagiert auf ein anderes Muster.')
 
 
@@ -1101,6 +1103,7 @@ def neuron_ziffern(ziffer_a=0, ziffer_b=1):
     plt.tight_layout(); plt.show()
     print(f'Training: {neuron.score(X[t], ziel[t]):.0%} richtig · neue Bilder: {np.mean(pred == ziel[v]):.0%} richtig ({len(v)} Bilder).')
     print('Summe = Σ Pixel × Gewicht + Bias, wie bei AND und OR, nur mit 64 statt 2 Eingaben.')
+    print('Überwachtes Lernen: Beim Training kannte das Neuron zu jedem Bild das Label, die richtige der beiden Ziffern.')
 
 
 def drei_rollen(trainingsbilder=100, neuronen=16):

@@ -57,7 +57,7 @@
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `neuron_wozu` | Positive Gewichte für Sonne und Freund:innen erhöhen die Schwimmneigung, das negative Prüfungsgewicht senkt sie; Bias legt die Schwelle fest. Bei Prüfungsgewicht 0 hätte die Prüfung keinen Einfluss mehr. |
-| `neuron_gelernt` | Beim überwachten Lernen werden Gewichte und Bias geändert, nicht die Grundform der Rechnung. Im AND-Versuch ist die Zielausgabe (1,1) → 1, sonst 0. |
+| `neuron_gelernt` | Lernart: überwachtes Lernen, denn zu jedem Beispiel ist das Ziel (Label) bekannt: Im AND-Versuch ist die Zielausgabe (1,1) → 1, sonst 0. Verändert haben sich Gewichte und Bias (der Erfahrungsschatz), nicht die Grundform der Rechnung; Eingaben und Ziele blieben gleich. |
 | `sw_gs` | +2 |
 | `sw_gf` | +2 |
 | `sw_gp` | −1 |
@@ -88,7 +88,7 @@
 | `lr_beob` | Eine sehr kleine Lernrate verändert die Parameter langsamer, hier braucht sie viele Runden; mittlere und grosse Lernraten führen schneller ans Ziel. Aus einem Lauf allein lässt sich keine grundsätzlich beste Lernrate bestimmen. |
 | `iris_richtig` | Beispielwert: 27 von 30; echte Notebook-Ausgabe übernehmen. |
 | `iris_gewicht` | Abhängig vom trainierten Versuch; das Merkmal mit dem grösseren Betrag des gelernten Gewichts eintragen und die Ausgabe nennen. |
-| `perzeptron` | Gewicht: Einfluss einer Eingabe; Bias: verschiebt die Schwelle. Beim Lernen ändern sich nur Gewichte und Bias. Die Lernregel vergleicht die Ausgabe mit dem Ziel: Bei Ziel 1 und Vorhersage 0 werden die Gewichte aktiver Eingaben erhöht, bei Ziel 0 und Vorhersage 1 gesenkt (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Das Neuron korrigiert sich nicht selbst; das Verfahren ändert seine Werte. Das Gelernte steckt in Gewichten und Bias. |
+| `perzeptron` | Gewicht: Einfluss einer Eingabe; Bias: verschiebt die Schwelle. Beim überwachten Lernen (Beispiele mit Ziel bzw. Label) ändern sich nur Gewichte und Bias. Die Lernregel vergleicht die Ausgabe mit dem Ziel: Bei Ziel 1 und Vorhersage 0 werden die Gewichte aktiver Eingaben erhöht, bei Ziel 0 und Vorhersage 1 gesenkt (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Das Neuron korrigiert sich nicht selbst; das Verfahren ändert seine Werte. Das Gelernte steckt in Gewichten und Bias. |
 
 ## DL 4 · XOR und Ziffern
 
@@ -103,7 +103,7 @@
 | `xornetz_start` | Nein; das Ergebnis kann mit anderen Startwerten variieren. |
 | `xornetz_beob` | Beispielsweise genügten 2 versteckte Neuronen bei einem Startwert; bei einem anderen scheiterte das Training. Ergebnisse nur als Beobachtung eines konkreten Laufs deuten. |
 | `netze` | Ein einzelnes Neuron hat nur eine lineare Grenze; die XOR-Punkte liegen diagonal. Eine Zwischenschicht kombiniert mehrere Teilentscheidungen, etwa OR und NAND; der Ausgang verbindet beide mit AND. Für (1,1): OR = 1, NAND = 0, AND(1, 0) = 0, also XOR = 0. |
-| `projekt_bereit_check` | Brücke: MobileNet bleibt fest und liefert 1280 Zahlen je Foto; nur das kleine Netz lernt (Gewichte und Bias), Eingaben und Ausgabeklassen bleiben. Vorschau (Raten erlaubt): Die Testbilder müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten. Das wird in DL 5 genau geklärt. Offene Frage zum Beispiel: Wie erkennt man ein Datenleck bei fast gleichen Bildern? |
+| `projekt_bereit_check` | Brücke: MobileNet bleibt fest und liefert 1280 Zahlen je Foto; nur das kleine Netz lernt (Gewichte und Bias), Eingaben und Ausgabeklassen bleiben. Die richtige Antwort kennt es aus dem Label, der Klasse jedes Fotos (überwachtes Lernen). Vorschau (Raten erlaubt): Die Testbilder müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten. Das wird in DL 5 genau geklärt. Offene Frage zum Beispiel: Wie erkennt man ein Datenleck bei fast gleichen Bildern? |
 | `zif_2` | Beispiel: 55 %; Notebookwert einsetzen. |
 | `zif_4` | Beispiel: 69 %; Notebookwert einsetzen. |
 | `zif_8` | Beispiel: 77 %; Notebookwert einsetzen. |
@@ -113,7 +113,7 @@
 | `zif_verw_a` | Beispiel: tatsächliche Ziffer 8. |
 | `zif_verw_b` | Beispiel: vorhergesagte Ziffer 3. |
 | `zif_beob` | Die handschriftliche 8 könnte wegen einer offenen Schlaufe ähnlich wie eine 3 wirken. Nur auf eine tatsächlich angezeigte Verwechslung beziehen. |
-| `netze_ziffern` | Das 8×8-Bild liefert 64 Eingaben, die verborgene Schicht umfasst z. B. 16 Neuronen, der Ausgang 10 Ziffern. Gewichte wurden aus Trainingsbeispielen gelernt; unbekannte Testbilder prüfen die Übertragung. |
+| `netze_ziffern` | Das 8×8-Bild liefert 64 Eingaben, die verborgene Schicht umfasst z. B. 16 Neuronen, der Ausgang 10 Ziffern. Gewichte wurden aus Trainingsbeispielen gelernt: Zu jedem Bild war die richtige Ziffer als Label bekannt (überwachtes Lernen), und das Netz verglich seine Vorhersage damit. Unbekannte Testbilder prüfen die Übertragung. |
 
 ## DL 5–8 · Datenlernen, eigenes Tandemjournal und Fremdprüfung
 
@@ -124,7 +124,7 @@
 | `drei_werte` | Der Test (einmal, nach der Auswahl, mit neuen Exemplaren). Der Trainingswert ist fast immer hoch, weil das Netz diese Bilder kennt; die Validierung wurde zur Auswahl benutzt und ist dadurch etwas beschönigt; nur der Test ist nach der Auswahl noch unberührt. |
 | `names` | Beispiel: Mia Muster · Luca Beispiel (fiktive Namen). |
 | `class` | Beispiel: 4a · Apfel oder Birne? |
-| `purpose` | Wir unterscheiden Äpfel und Birnen auf Fotos. Nützlich etwa als Demonstration einer Sortierhilfe; bei ungewöhnlichen Sorten kann sie irren. |
+| `purpose` | Wir unterscheiden Äpfel und Birnen auf Fotos (unsere zwei Labels: «Apfel» und «Birne»). Nützlich etwa als Demonstration einer Sortierhilfe; bei ungewöhnlichen Sorten kann sie irren. |
 | `hypothesis` | Wir vermuten, dass B mit zwei Fruchtexemplaren je Klasse besser generalisiert. DL5: Datenplan, Abnahme der Exemplarliste, erste Fotos; DL6: Import und A/B; DL7: Auswertung, Test, ZIP. Mia sammelt und dokumentiert, Luca prüft Daten/Notebook; beide kontrollieren gemeinsam. Reserve für fehlerhafte Aufnahmen. |
 | `groups` | Apfel/Birne je 8 Fotos: T1 Apfel A1/Birne B1; T2 A2/B2; V1 A3/B3; P1 A4/B4; P2 A5/B5. Insgesamt 2×5×8=80 Bilder: 32 Trainingspool, 16 V1, 32 P1/P2; kein Exemplar doppelt in zwei Gruppen. |
 | `sources` | 80 selbst fotografierte Fotos mit Zustimmung der Eigentümer. Je 8 Ansichten pro Frucht, vergleichbares Licht, gleicher Tisch und wechselnde Perspektiven. Pro Gruppe anderes Fruchtexemplar; Bildnamen und Quellen in der JSON vermerkt. |

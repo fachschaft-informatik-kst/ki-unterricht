@@ -28,7 +28,7 @@ Untersuchen Sie drei Beispiele und benennen Sie Grenzen; richtige Beispiele sind
 ### Fazit und Abgabe
 <!-- MD:END -->
         <!-- MD:START -->
-Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich jeweils auf ihr vierminütiges Einzelgespräch vor.
+Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich jeweils auf ihr vierminütiges Einzelgespräch vor: Erklären Sie das ganze Projekt, vom Foto mit seinem Label über das überwachte Training bis zur Vorhersage.
 <!-- MD:END -->
         <p><a class="btn" href="#abgabe">Abgabecheckliste →</a> <a class="btn" href="#sicherung">Stand sichern →</a></p>
       </div>

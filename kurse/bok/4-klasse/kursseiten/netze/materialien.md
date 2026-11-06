@@ -57,7 +57,7 @@ Aus den mittleren Zeilen folgt w₁ + w₂ + b ≥ −b > 0. Das widerspricht de
 
 1. Öffnen Sie das [Netzwerk-Kapitel](index.html#netze-2) und arbeiten Sie im Notebook «Neuronale Netze». Verfolgen Sie OR → NAND → AND und lösen Sie die vier XOR-Fälle mit dem Netz. Der Abschnitt «Selbstcheck · Ein anderer Fall» entfällt, dafür folgt die Papieraufgabe.
 2. Rechnen Sie im Tandem einen zusätzlichen Eingabefall vollständig durch (Tabelle unten).
-3. **Klasse · Demo am Beamer:** Die Lehrperson lässt das Netz mit 1, 2 und 4 versteckten Neuronen lernen. Mehr Neuronen garantieren in einem einzelnen Trainingslauf keinen Erfolg.
+3. **Klasse · Demo am Beamer:** Die Lehrperson lässt das Netz mit 1, 2 und 4 versteckten Neuronen lernen (überwachtes Lernen: Zu den vier Eingaben sind die XOR-Zielwerte als Labels bekannt). Mehr Neuronen garantieren in einem einzelnen Trainingslauf keinen Erfolg.
 
 | Eingabe | OR: Summe / h₁ | NAND: Summe / h₂ | Ausgang: Summe / y | XOR-Ziel |
 |---|---|---|---|---|
@@ -70,7 +70,7 @@ Aus den mittleren Zeilen folgt w₁ + w₂ + b ≥ −b > 0. Das widerspricht de
 
 > **Kontrolle für (0,1):** OR-Summe 0.5 → 1; NAND-Summe 0.5 → 1; Ausgangssumme 0.5 → 1. Die Zwischenschicht berechnet neue Merkmale; sie ist nicht nur «mehr Rechenleistung».
 
-Kein drittes Notebook in dieser Lektion: [Ziffernerkennung](index.html#netze-5) · [eigenständiges Ziffern-Notebook](materialien/downloads/ziffernerkennung.ipynb).
+Kein drittes Notebook in dieser Lektion: [Ziffernerkennung](index.html#netze-5) · [eigenständiges Ziffern-Notebook](materialien/downloads/ziffernerkennung.ipynb). Auch das Ziffernnetz lernt überwacht (zu jedem Bild ist die richtige Ziffer bekannt); nur die Ausgabe wird mit dem Label verglichen, die versteckten Neuronen bekommen keine eigenen Labels.
 
 ### Auswerten · 13 Min. · Sicherung vor dem Projekt
 
@@ -79,11 +79,11 @@ Kein drittes Notebook in dieser Lektion: [Ziffernerkennung](index.html#netze-5) 
 Erklären Sie einander mündlich die XOR-Grenze und den Signalweg. Schreiben Sie danach allein auf der Kursseite (Kapitel 4, unbenotet):
 
 1. **Netz:** Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem? Erklären Sie die Ausgaben von OR, NAND und AND für (1,1).
-2. **Brücke:** Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto. Welcher Teil lernt, welcher bleibt fest?
+2. **Brücke:** Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto. Welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort (Label, überwachtes Lernen)?
 3. **Vorschau (Raten erlaubt):** Welche Bilder sollten erst ganz am Schluss für eine unabhängige Prüfung geöffnet werden, und warum?
 
 Danach vergleichen die Lernenden mit der Selbstkontrolle; die Lehrperson liest zwei bis drei Antworten an und sammelt offene Fragen für den Start in DL 5.
 
-**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt (Skizze und Brückenkarte am Ende der Kursseite).
+**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt, wieder überwacht mit Ihren Klassen als Labels (Skizze und Brückenkarte am Ende der Kursseite).
 
 **Vorbereitungsauftrag bis DL 5:** Thema und zwei Klassen aus der [Themenliste](index.html#projekt-2) wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste; Vorlage in den Materialien zu DL 5 im Projektteil; wer zuerst einträgt, behält die Klasse), und passende Gegenstände besorgen (zehn verschiedene Exemplare, fünf je Klasse). Noch nicht fotografieren: Fotografiert wird in DL 5 erst nach dem Lernpfad und der Abnahme der Exemplarliste. Die Lehrperson gibt Thema und Klassen am Anfang von DL 5 frei, wenn beide Klassen noch frei sind (etwa eine Minute je Tandem, während die Tandems den Lernpfad lesen).

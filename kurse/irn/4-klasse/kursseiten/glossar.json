@@ -73,9 +73,9 @@
       "id": "ueberwachtes-lernen",
       "gruppe": "Lernarten",
       "begriff": "Überwachtes Lernen",
-      "basis": "Das Modell übt mit Beispielen, bei denen die richtige Antwort bekannt ist.",
+      "basis": "Das Modell übt mit Beispielen, bei denen die richtige Antwort (das Label) bekannt ist, und vergleicht seine Antwort damit.",
       "vertieft": "Lernen anhand gelabelter Eingabe-Ziel-Paare durch Minimierung eines Vorhersagefehlers.",
-      "beispiel": "Fotos sind mit «Tasse» oder «Buch» beschriftet.",
+      "beispiel": "Das AND-Neuron lernt mit dem Ziel 0 oder 1, das Ziffernnetz mit der richtigen Ziffer und Ihr Bildprojekt mit Ihrer Klasse als Label.",
       "frage": "Welche Information braucht das Modell zusätzlich zum Foto?",
       "antwort": "Das richtige Label, also die gesuchte Klasse."
     },
@@ -102,8 +102,8 @@
     {
       "id": "label",
       "gruppe": "Lernarten",
-      "begriff": "Label / Klasse",
-      "basis": "Ein Label nennt die richtige Kategorie eines Trainingsbeispiels.",
+      "begriff": "Label / Ziel / Klasse",
+      "basis": "Ein Label ist die richtige Antwort zu einem Beispiel: bei Fotos die Klasse, beim Neuron das Ziel 0 oder 1, bei Ziffern die richtige Ziffer.",
       "vertieft": "Eine Zielkennzeichnung; bei der Klassifikation ist sie die zugehörige diskrete Klasse.",
       "beispiel": "Ein Foto hat das Label «Tasse».",
       "frage": "Was passiert bei falschen Labels?",

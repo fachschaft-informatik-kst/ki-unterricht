@@ -55,7 +55,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
   <details class="journal-step" open="">
     <summary>1 · Anwendung &amp; Vermutung<span class="completion" data-completion="0"></span></summary>
     <div class="detail-body">
-      <label class="field"><span>Was soll Ihr Modell unterscheiden – und für wen ist das nützlich?</span><textarea data-journal="purpose" maxlength="20000" placeholder="Zwei Klassen, Zuordnungsregel und ein Grenzfall …" rows="4"></textarea></label>
+      <label class="field"><span>Was soll Ihr Modell unterscheiden – und für wen ist das nützlich?</span><textarea data-journal="purpose" maxlength="20000" placeholder="Zwei Klassen (Ihre Labels), Zuordnungsregel und ein Grenzfall …" rows="4"></textarea></label>
       <label class="field"><span>Was vermuten Sie: Hilft mehr Bildvielfalt? Warum? Notieren Sie auch kurz Ihren Etappenplan (wer macht was, bis wann, mit Reserve).</span><textarea data-journal="hypothesis" maxlength="20000" placeholder="Wir vermuten …, weil …" rows="4"></textarea></label>
     </div>
   </details>

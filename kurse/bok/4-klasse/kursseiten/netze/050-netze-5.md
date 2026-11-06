@@ -1,4 +1,4 @@
-<details class="kapitel" id="netze-5" data-kurz="Ziffern erkennen: 64 Pixel, 16 versteckte Neuronen, 10 Ausgaben. Alle Gewichte lernt das Netz selbst." open>
+<details class="kapitel" id="netze-5" data-kurz="Ziffern erkennen: 64 Pixel, 16 versteckte Neuronen, 10 Ausgaben. Überwachtes Lernen: Zu jedem Bild ist die richtige Ziffer bekannt." open>
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Ein Netz erkennt Ziffern</h2>
   </summary>
@@ -39,7 +39,7 @@
     <!-- MD:START -->
 ### Was wurde hier gelernt?
 <!-- MD:END -->
-    <p>Niemand hat die Gewichte vorgegeben. Das Netz sah <strong>1257 Trainingsbilder</strong> mit der richtigen Ziffer und hat daraus alle seine Gewichte gefunden, nach demselben Prinzip wie das einzelne Neuron in Doppellektion 3: vorhersagen, Fehler bewerten, Gewichte anpassen, wiederholen. Bei 16 versteckten Neuronen sind das 64·16 + 16 + 16·10 + 10 = <strong>1210 Zahlen</strong>. Geprüft wird es an <strong>540 weiteren Bildern</strong>, die es beim Training nie gesehen hat.</p>
+    <p>Niemand hat die Gewichte vorgegeben. Das Netz sah <strong>1257 Trainingsbilder</strong>, zu jedem die richtige Ziffer als <strong>Label</strong>. Das ist <strong>überwachtes Lernen</strong>: Das Netz vergleicht seine Vorhersage mit dem Label und hat daraus alle seine Gewichte gefunden, nach demselben Prinzip wie das einzelne Neuron in Doppellektion 3: vorhersagen, Fehler bewerten, Gewichte anpassen, wiederholen. Bei 16 versteckten Neuronen sind das 64·16 + 16 + 16·10 + 10 = <strong>1210 Zahlen</strong>. Nur die Ausgabe wird mit dem Label verglichen; die versteckten Neuronen bekommen keine eigenen Labels und finden ihre Muster beim Lernen selbst. Geprüft wird es an <strong>540 weiteren Bildern</strong>, die es beim Training nie gesehen hat. Auch sie haben ihr Label, nur so lässt sich zählen, wie viele Vorhersagen stimmen; das Netz lernt aber nicht an ihnen.</p>
     <!-- MD:START -->
 ### Wie viele versteckte Neuronen braucht es? Ihre Messung
 <!-- MD:END -->
@@ -114,7 +114,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
       </table>
     </div>
     <label class="field answer"><span>Warum verbessert eine grössere Zahl versteckter Neuronen die Trefferquote nicht unbedingt? Falls Sie eine Verwechslung gefunden haben: Warum könnten diese beiden Ziffern ähnlich aussehen?</span><textarea data-answer="zif_beob" maxlength="10000" placeholder="Ab einer gewissen Zahl …" rows="3"></textarea></label>
-    <p><strong>Brücke zum Bildprojekt:</strong> Ihr Projekt funktioniert genauso. Ein Foto wird von einem bereits trainierten Netz (MobileNet) in 1280 Zahlen beschrieben. Ein kleines Netz mit 16 versteckten Neuronen lernt daraus die Zuordnung zu Ihren zwei Klassen und wird an Fotos geprüft, die es nie gesehen hat. Der vorgeschaltete Bildmerkmalsextraktor bleibt unverändert.</p>
-    <label class="field answer"><span>Aufgabe: Beschreiben Sie in drei Sätzen den Weg eines Ziffernbildes durch das Netz (64 → 16 → 10). Was wurde beim Training gelernt, und warum prüft man an Bildern, die das Netz nie gesehen hat?</span><textarea data-answer="netze_ziffern" maxlength="10000" placeholder="Das Bild geht … Gelernt wurden … Geprüft wird an neuen Bildern, weil …" rows="4"></textarea></label>
+    <p><strong>Brücke zum Bildprojekt:</strong> Ihr Projekt funktioniert genauso. Ein Foto wird von einem bereits trainierten Netz (MobileNet) in 1280 Zahlen beschrieben. Ein kleines Netz mit 16 versteckten Neuronen lernt daraus die Zuordnung zu Ihren zwei Klassen, ebenfalls überwacht: Jedes Foto trägt seine Klasse als Label. Es wird an Fotos geprüft, die es nie gesehen hat. Der vorgeschaltete Bildmerkmalsextraktor bleibt unverändert.</p>
+    <label class="field answer"><span>Aufgabe: Beschreiben Sie in drei Sätzen den Weg eines Ziffernbildes durch das Netz (64 → 16 → 10). Was wurde beim Training gelernt, woher kannte das Netz dafür die richtige Antwort, und warum prüft man an Bildern, die das Netz nie gesehen hat?</span><textarea data-answer="netze_ziffern" maxlength="10000" placeholder="Das Bild geht … Gelernt wurden … Die richtige Antwort kannte das Netz aus … Geprüft wird an neuen Bildern, weil …" rows="4"></textarea></label>
   </div>
 </details>

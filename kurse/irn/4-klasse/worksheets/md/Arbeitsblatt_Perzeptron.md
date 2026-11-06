@@ -24,7 +24,7 @@ Gewichte: 1 und 1, Bias: −1.5.
 Welche AND-Regel erkennen Sie? …
 
 ## 2 · Ein Lernschritt
-Neue Startsituation: Gewichte 0.2 / 0.2, Bias −0.5; Eingabe (1,1), Ziel 1.
+Neue Startsituation: Gewichte 0.2 / 0.2, Bias −0.5; Eingabe (1,1), Ziel 1. Das Neuron lernt überwacht: Zu jedem Beispiel kennt es das Ziel (Label).
 1. Summe und Ausgabe berechnen.
 2. Muss die Summe steigen oder sinken?
 3. Lernrate 0.2: Änderung = Lernrate × (Ziel − Ausgabe) × Eingang. Für den Bias gilt Eingang 1. Neue Gewichte und Bias berechnen.

@@ -17,12 +17,14 @@
 **Arbeitsweg:** (1) Erklärungen lesen → (2) Fälle selbst lösen → (3) mit der Lösung vergleichen → (4) Notebook ausprobieren → (5) eigene fünf Gruppen planen (auf der Seite [«Daten &amp; Fotos»](#projekt-3)). Arbeiten Sie zu zweit, halten Sie die erste Vermutung aber jeweils allein fest. Bei Fehlern: Erklärung nochmals lesen und die Lösung verbessern.
 
 **Die fünf Gruppen:** Ihre Fotos werden in fünf Gruppen sortiert, benannt mit Anfangsbuchstabe und Nummer: **T1 und T2** (T = Training), **V1** (V = Validierung) und **P1 und P2** (P = Prüfung, der Abschlusstest). Jede Gruppe enthält pro Klasse ein anderes Exemplar mit acht Fotos; die Übersicht steht auf der Seite [«Daten &amp; Fotos»](#projekt-3). Welche Aufgabe jede Gruppe hat, zeigen die drei folgenden Karten.
+
+**Überwachtes Lernen braucht Labels:** Ihr Bildmodell lernt überwacht, wie das Neuron in Doppellektion 3 und das Ziffernnetz in Doppellektion 4. Jedes Foto trägt als **Label** seine Klasse (zum Beispiel «Apfel»), die Sie beim Sortieren im Fotostudio festlegen. Training, Validierung und Test nutzen dieselben Labels, aber verschieden: Das Training lernt daran. Validierung und Test vergleichen nur die Vorhersage mit dem Label, ohne danach zu lernen.
 <!-- MD:END -->
       <div class="lesson-steps">
         <article>
           <b>1 · Training: Gewichte lernen</b>
           <!-- MD:START -->
-Mit den **Trainingsbildern** passt unser **kleines Netz** seine Gewichte an; das MobileNet davor bleibt unverändert ([Wer weiss was?](#projekt-wer-weiss-was)). Beispiele aus T1 und T2 dürfen beim Lernen verwendet werden. Dass das Netz diese Bilder erkennt, sagt allein noch nicht, ob es neue Bilder erkennt.
+Mit den **Trainingsbildern** passt unser **kleines Netz** seine Gewichte an: Es vergleicht seine Vorhersage mit dem Label jedes Bildes. Das MobileNet davor bleibt unverändert ([Wer weiss was?](#projekt-wer-weiss-was)). Beispiele aus T1 und T2 dürfen beim Lernen verwendet werden. Dass das Netz diese Bilder erkennt, sagt allein noch nicht, ob es neue Bilder erkennt.
 <!-- MD:END -->
         </article>
         <article>

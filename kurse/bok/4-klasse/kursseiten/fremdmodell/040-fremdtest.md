@@ -127,7 +127,7 @@ open: false
     <div class="dl8-compare-card">
       <span class="dl8-eyebrow">Ihr Fremdversuch</span>
       <h4>Neue Bilder, andere Klassen</h4>
-      <p>Das Modell wurde <strong>nicht für Ihre beiden Klassen trainiert</strong>. Trotzdem muss es eine seiner ursprünglichen Klassen ausgeben, selbst wenn keine davon passt.</p>
+      <p>Das Modell wurde <strong>nicht für Ihre beiden Klassen trainiert</strong>. Beim überwachten Lernen kennt es nur die Labels aus seinem Training. Darum muss es eine seiner ursprünglichen Klassen ausgeben, selbst wenn keine davon passt.</p>
     </div>
   </div>
   <div class="dl8-note"><span class="dl8-eyebrow">Merksatz</span><p><strong>Trennschärfe ist keine Trefferquote</strong> für völlig neue Klassen. Auch ein hoher Modellwert beweist nicht, dass das Modell Ihr Motiv korrekt erkannt hat. Prüfen Sie mögliche Einflüsse wie Farbe, Form, Licht oder Hintergrund. <strong>Für Doppellektion 9:</strong> Ein Modell antwortet immer, auch wenn keine seiner Antworten passt; ein hoher Prozentwert ist keine Garantie, dass die Antwort stimmt.</p></div>

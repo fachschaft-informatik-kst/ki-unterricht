@@ -111,7 +111,7 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
     d.provenienz=dict(pipeline=PIPELINE,normalisierung='L2 je Bild',vortrainiert='MobileNet V2 alpha=0.5; eingefroren',
                      tfjs='4.22.0',mobilenet='2.1.1',
                      bilder=[{k:r[k] for k in ['id','group','label','source','filename']} for r in records])
-    print(f'{modus}: {len(X)} Bilder, {len(klassen)} Klassen, 1280 feste Merkmale pro Bild.')
+    print(f'{modus}: {len(X)} Bilder, {len(klassen)} Klassen (die Labels), 1280 feste Merkmale pro Bild.')
     if modus != 'EIGENE_DATEN':print('Synthetische geometrische Formen; keine Aussage über echte Fotoanwendungen.')
     print('Gruppe | '+' | '.join(klassen))
     for g in list(train)+list(val):print(g,'|',' | '.join(str(int(np.sum((gruppen==g)&(y==c)))) for c in range(len(klassen))))
@@ -158,7 +158,7 @@ def bild_durchs_netz(exp, variante='B', nr=0):
     axes[2].barh(d.klassen,probs*100,color=['#176c63' if j==guess else '#c9d3d6' for j in range(len(d.klassen))])
     axes[2].set(xlim=(0,100),xlabel='Modellwert (%)',title=f'3 · Unser Netz ({netz.hidden_layer_sizes[0]} Neuronen)')
     plt.tight_layout();plt.show()
-    print(f'Bild {nr} aus V1 · tatsächlich: {d.klassen[d.y[i]]} · Netz: {d.klassen[guess]} ({probs[guess]:.0%}) · '+('richtig' if ok else 'Fehler'))
+    print(f'Bild {nr} aus V1 · Label (tatsächliche Klasse): {d.klassen[d.y[i]]} · Netz: {d.klassen[guess]} ({probs[guess]:.0%}) · '+('richtig' if ok else 'Fehler'))
     print('Der Modellwert zeigt die Sicherheit des Netzes, nicht die Wahrscheinlichkeit, richtig zu liegen.')
 
 
@@ -180,6 +180,7 @@ def vorhersagen_zeigen(exp, variante='B'):
     plt.tight_layout();plt.show()
     unsicher=int(np.argmin(sure))
     print(f'{int(np.sum(pred==d.y[d.val]))} von {len(d.val)} richtig. Unsicherstes Bild: Nr. {unsicher} ({d.klassen[d.y[d.val[unsicher]]]}, Modellwert {sure[unsicher]:.0%}).')
+    print('Titel: erste Zeile = Label (tatsächliche Klasse), zweite Zeile = Vorhersage des Netzes mit Modellwert.')
     print('Keine Fehler: nicht erfinden. Auch dann Grenzen der Daten benennen.')
 
 

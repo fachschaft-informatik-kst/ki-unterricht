@@ -15,6 +15,6 @@ lang: de-CH
 
 Ein einzelnes Perzeptron kann XOR nicht durch eine Gerade trennen; die Kombination zweier Zwischenergebnisse kann es.
 
-Vorhersage → Fehler bewerten → Gewichte verändern → wiederholen. Ein manuell konstruiertes Step-Netz zeigt Darstellbarkeit, nicht Backpropagation. Dafür verwendet man passende Aktivierungen und ein Optimierungsverfahren.
+Vorhersage → Fehler bewerten (gegen das Label) → Gewichte verändern → wiederholen. Das ist überwachtes Lernen. Ein manuell konstruiertes Step-Netz zeigt Darstellbarkeit, nicht Backpropagation. Dafür verwendet man passende Aktivierungen und ein Optimierungsverfahren.
 
-Im Foto-Projekt wird der kleine nachgeschaltete MLP trainiert. MobileNet bleibt eingefroren. Neue Exemplare prüfen, ob die Zuordnung über die bekannten Gegenstände hinaus funktioniert. Eine hohe Trainingsgenauigkeit genügt nicht.
+Im Foto-Projekt wird der kleine nachgeschaltete MLP trainiert, überwacht mit den Klassen der Fotos als Labels. MobileNet bleibt eingefroren. Neue Exemplare prüfen, ob die Zuordnung über die bekannten Gegenstände hinaus funktioniert. Eine hohe Trainingsgenauigkeit genügt nicht.

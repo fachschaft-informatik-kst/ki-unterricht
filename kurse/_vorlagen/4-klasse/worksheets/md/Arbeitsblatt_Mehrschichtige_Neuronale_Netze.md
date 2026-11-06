@@ -23,11 +23,11 @@ Die Ausgabe bildet AND aus h1 und h2.
 Erklären Sie eine Zeile in eigenen Worten. Warum reicht ein einzelnes Neuron nicht?
 
 ## 2 · Konstruieren und Lernen unterscheiden
-Im Beispiel geben wir die Gewichte selbst vor. Beim Training werden sie verändert.
+Im Beispiel geben wir die Gewichte selbst vor. Beim Training werden sie verändert. Das Training ist überwachtes Lernen: Zu jedem Beispiel ist das Ziel (Label) bekannt, und der Fehler wird dagegen bewertet.
 Bringen Sie in die richtige Reihenfolge: Gewichte verändern; Vorhersage berechnen; Fehler bewerten; wiederholen.
 
 Backpropagation berechnet den Einfluss der Gewichte auf den Fehler. Ein Optimierungsverfahren verändert die Gewichte. Keine Rechnungen dazu nötig.
 
 ## 3 · Unser Bildprojekt
 Foto → vortrainiertes Bildmodell → feste Merkmale → eigenes kleines Netz → Klasse.
-Welcher Teil wird mit unseren Fotos trainiert? Warum brauchen wir zusätzlich neue Bilder zur Prüfung?
+Welcher Teil wird mit unseren Fotos trainiert? Woher kennt das Netz dabei die richtige Antwort? Warum brauchen wir zusätzlich neue Bilder zur Prüfung?

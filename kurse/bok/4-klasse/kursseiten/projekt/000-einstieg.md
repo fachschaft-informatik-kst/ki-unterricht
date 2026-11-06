@@ -44,7 +44,7 @@ Wählen Sie zwei Klassen, die kein anderes Tandem verwendet, und tragen Sie sie 
       <div class="roadmap-body">
         <div class="roadmap-head"><strong>80 Fotos vorbereiten</strong><span class="roadmap-meta">Richtwert DL 5–6 · Reflexion 2 (darf in DL 6 enden)</span></div>
         <!-- MD:START -->
-Fünf unabhängige Gruppen, zwei Klassen, je acht Fotos. Dieselben Objekte bleiben immer in derselben Gruppe. Erst die Exemplarliste abnehmen lassen, dann fotografieren: Ende DL 5 Liste abgenommen, Mitte DL 6 Fotos importiert. Beide Klassen unter gleichen Bedingungen fotografieren (Hintergrund, Licht); Personen nur mit Einverständnis.
+Fünf unabhängige Gruppen, zwei Klassen, je acht Fotos; jedes Foto bekommt seine Klasse als Label (überwachtes Lernen). Dieselben Objekte bleiben immer in derselben Gruppe. Erst die Exemplarliste abnehmen lassen, dann fotografieren: Ende DL 5 Liste abgenommen, Mitte DL 6 Fotos importiert. Beide Klassen unter gleichen Bedingungen fotografieren (Hintergrund, Licht); Personen nur mit Einverständnis.
 <!-- MD:END -->
         <label class="check"><input data-check="phase-2" type="checkbox"/><span>Unsere Daten sind geprüft und sauber aufgeteilt.</span></label>
       </div>
@@ -55,7 +55,7 @@ Fünf unabhängige Gruppen, zwei Klassen, je acht Fotos. Dieselben Objekte bleib
       <div class="roadmap-body">
         <div class="roadmap-head"><strong>A und B trainieren</strong><span class="roadmap-meta">Richtwert DL 6</span></div>
         <!-- MD:START -->
-Erst den Ablauf mit Übungsdaten starten, dann eigene Daten importieren. A lernt aus einem Exemplar je Klasse, B aus zwei. Beide erhalten acht Bilder je Klasse. Der Vergleich läuft mit einem festen Startwert.
+Erst den Ablauf mit Übungsdaten starten, dann eigene Daten importieren. A lernt aus einem Exemplar je Klasse, B aus zwei. Beide erhalten acht Bilder je Klasse. Das Netz lernt überwacht: Es vergleicht seine Vorhersage mit dem Label (der Klasse) jedes Trainingsbildes. Der Vergleich läuft zuerst mit dem festen Startwert 11; danach wiederholen Sie ihn mit den Startwerten 11, 22 und 33.
 <!-- MD:END -->
         <label class="check"><input data-check="phase-3" type="checkbox"/><span>Unser A/B-Vergleich läuft; wir verstehen die beiden Varianten.</span></label>
       </div>
@@ -156,4 +156,4 @@ In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo
 <!-- /LESSONS:projekt -->
   </div>
 </details>
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-epoche">Epoche</a> · <a href="#glossar-startwert">Startwert</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#glossar-label">Label</a> · <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-epoche">Epoche</a> · <a href="#glossar-startwert">Startwert</a></p>

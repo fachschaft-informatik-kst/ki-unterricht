@@ -7,7 +7,7 @@
     <!-- MD:START -->
 ## Zwölf Ideen. Platz für Ihre eigene.
 <!-- MD:END -->
-    <p class="section-intro">Wählen Sie eine Idee. Eigene Themen nach Absprache.</p>
+    <p class="section-intro">Wählen Sie eine Idee. Eigene Themen nach Absprache. Ihre zwei Klassen sind die Labels Ihres Modells: Jedes Foto gehört eindeutig zu genau einer Klasse.</p>
     <div class="callout warn" id="projekt-klassenliste">
       <strong>Jede Bildklasse nur einmal.</strong>
       <!-- MD:START -->

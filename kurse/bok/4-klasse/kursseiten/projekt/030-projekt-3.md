@@ -78,7 +78,7 @@ Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das 
 ### Fotostudio · Ihre Bilder aufbereiten
 <!-- MD:END -->
       <!-- MD:START -->
-Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Fotos aufnehmen. Im Fotostudio ordnen Sie Bilder den beiden Klassen und den Gruppen zu, prüfen die Vorschau und exportieren Ihre Sammlung als JSON.
+Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Fotos aufnehmen. Im Fotostudio ordnen Sie jedes Bild seiner Klasse (dem Label) und seiner Gruppe zu, prüfen die Vorschau und exportieren Ihre Sammlung als JSON.
 <!-- MD:END -->
       <div class="actions">
         <button class="btn primary" id="start-studio" type="button">Fotostudio öffnen</button><a class="btn" href="#projekt-reflexionen">Datenplan im Journal festhalten</a>

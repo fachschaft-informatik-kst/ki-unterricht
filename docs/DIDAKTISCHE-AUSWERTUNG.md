@@ -2,7 +2,7 @@
 
 > Stand: 6. November 2026 · Kursstand: `main` @ `e2ddddf` · Referenzkurs: BOK 4. Klasse
 > (IRN und Vorlage: Anhang B) · Status: Entwurf zur Diskussion in der Fachschaft.
-> Umsetzungsstand der Wellen 1 und 2 (Branch `feat/didaktik-welle-1`): Abschnitt 9. Die Befunde
+> Umsetzungsstand der Wellen 1 bis 3 (Branch `feat/didaktik-welle-1`): Abschnitt 9. Die Befunde
 > in den Abschnitten 0–8 beschreiben weiterhin den Stand vor dieser Umsetzung.
 > Zeilenangaben («Z.») beziehen sich auf diesen Stand.
 
@@ -1161,7 +1161,7 @@ Die wichtigsten Hypothesen lassen sich mit wenig Aufwand prüfen:
 | 11 | DL 10: Verteilen sich die Gruppen auf die drei Fälle? Ändern Lernende ihre These? | Zählung `these_vorher`/`these_nachher` | R12 |
 | 12 | Passen Niveau und Stil von DL 1–2 (textgleich mit der 1. Klasse) für 17–18-Jährige? Ist Memory zu spielerisch? | Kurzes Feedback | Feinschliff DL 1–2 (die 4. Klasse ist neu im Thema) |
 
-## 9. Umsetzungsstand Welle 1 und 2 (7. November 2026)
+## 9. Umsetzungsstand Welle 1 bis 3 (6. und 7. November 2026)
 
 Umgesetzt wurde, was auf **Kursseiten-Ebene** (Seiten, `planung.json`, `materialien.md`,
 Musterlösungen, `KI_Planung.md`) möglich ist, im Branch `feat/didaktik-welle-1`. Die Änderungen
@@ -1221,7 +1221,7 @@ Abschnitt 7 beantwortet (siehe dort). Umsetzung in BOK, IRN und Vorlage (4. Klas
 - **DL 9–10:** KP hält fest, dass nichts eingesammelt wird.
 - **1. Klasse:** nicht angefasst.
 
-**Welle 1c (7. November 2026): Pflicht/Wahl entfernt.** Die Lehrperson will in den
+**Welle 1c (6. November 2026): Pflicht/Wahl entfernt.** Die Lehrperson will in den
 Kursunterlagen keine Pflicht/Wahl-Kennzeichnung sehen; die AVIVA-Planung zeigt, was Teil des
 Unterrichts ist (siehe Abschnitt 7). In BOK, IRN und Vorlage (4. Klasse) zuerst zurückgenommen,
 was Welle 1 eingeführt hat, danach auch die schon vorher vorhandenen Formulierungen entfernt:
@@ -1259,7 +1259,7 @@ was Welle 1 eingeführt hat, danach auch die schon vorher vorhandenen Formulieru
   Entscheidungen im Tandem, «Verbindlicher Stand») und der technische Profilname `vertiefung`
   in `ki_foto_tools.py`. Die 1. Klasse ist nicht angefasst.
 
-**Welle 2 (7. November 2026): fachliche Korrekturen, Erleben statt Erzählen, Beurteilung.**
+**Welle 2 (6. November 2026): fachliche Korrekturen, Erleben statt Erzählen, Beurteilung.**
 Die Lehrperson hat «alles umsetzen» beauftragt, mit einer Ausnahme (Memory-Runde 3, siehe
 unten). Umsetzung in BOK, IRN und Vorlage (4. Klasse) identisch; die 1. Klasse und die Datei
 `basis_neuron.ipynb` (Variante der 1. Klasse im Ordner der 4. Klasse) sind nicht angefasst.
@@ -1377,6 +1377,69 @@ kennt die neue Zelle. `check_course_isolation.py` besteht, wenn das alte, ignori
 Wurzelverzeichnis `content/` (lokales Überbleibsel, nicht im Repository) beiseitegelegt ist.
 Nicht ausgeführt: `execute_notebooks.py` (Jupyter-Kernel; die Pyodide-Läufe decken dieselben
 Notebooks ab) und alles, was ein Klassenzimmer braucht (Schul-WLAN, Schüler-Geräte, Zeiten).
+
+**Welle 3 (7. November 2026): «Überwachtes Lernen» als roter Faden von DL 2 bis zum Projekt.**
+Die Lehrperson hat verlangt, den Begriff ab DL 2 konsequent bis zum Projekt weiterzuziehen, auch
+im Ziffernbeispiel. Befund vorher: Der Begriff stand nur in DL 2 (Kapitel «Überwacht · mit
+Labels», Glossar, Plan der Sicherung) und in drei Musterantworten. Die Seiten von DL 3, DL 4 und
+des Projekts nannten ihn kein einziges Mal, obwohl dort überall überwacht gelernt wird; sie sagten
+«Beispiele mit bekannter Lösung», «Ziel», «Zielwert» oder «Klasse». Die Musterantwort zu
+`neuron_gelernt` sprach vom «überwachten Lernen», ohne dass Frage oder Seite den Begriff je
+verwendet hatten. Gespeicherte Antwortschlüssel: **keine neuen, keine entfernt oder umbenannt**;
+angepasst sind nur die Fragetexte zu `neuron_gelernt`, `perzeptron`, `netze_ziffern` und
+`projekt_bereit_check` samt Musterlösungszeilen.
+
+Festgelegte Sprachregelung (steht in den Materialien zu DL 2 und im KP): **Label = Ziel = die
+richtige Antwort zu einem Beispiel** (beim Neuron «Ziel», beim Ziffernnetz «richtige Ziffer», im
+Bildprojekt «Klasse»). **Überwachtes Lernen = Lernen aus Beispielen mit Label:** Das Modell
+vergleicht seine Vorhersage mit dem Label und passt sich an.
+
+| Stelle | Umsetzung |
+|--------|-----------|
+| DL 2 | Kapitel «Überwacht · mit Labels» definiert Label und überwachtes Lernen und verweist auf DL 3, 4 und das Bildprojekt; der Plan benennt im Input die drei Lernarten und hält am Schluss den Faden fest; Materialien: Merkpunkt, «Verstärkend» einheitlich (stand «Bestärkend»). |
+| DL 3 | Karte (Rückblick, «Heute können Sie»), Vorwissen (Lernart zuordnen), Kapitel «Was lernt ein Neuron genau?»: Ziel = Label = überwachtes Lernen; die Lernregel beginnt mit «Stimmt die Antwort mit dem Ziel überein»; «verbessert sich selbst» ist ersetzt durch «die Lernregel passt die Zahlen an»; die Aufgabe fragt nach der Lernart; Notebook (Experiment 3), Arbeitsblatt samt Lösung, Festhalten und Merksätze im Plan. |
+| DL 4 | Karte, Vorwissen, Demo und Sicherung im Plan; Brückenkarte mit neuer Zeile «Überwachtes Lernen» und der Frage «Woher kennt der lernende Teil die richtige Antwort?»; die Skizze `mobilenet_bruecke.svg` zeigt das Label als gestrichelten Pfeil ins kleine Netz (nur beim Training); Notebook «Neuronale Netze», Ausgabe von `xor_lernen` und Arbeitsblatt. |
+| Ziffernbeispiel | Kapitel «Ein Netz erkennt Ziffern»: 1257 Trainingsbilder mit der richtigen Ziffer als Label; die 540 Prüfbilder haben ebenfalls Labels, das Netz lernt aber nicht an ihnen; nur die Ausgabe wird mit dem Label verglichen, die versteckten Neuronen bekommen keine eigenen Labels (Abgrenzung zum von Hand gebauten XOR-Netz aus OR und NAND); die Aufgabe `netze_ziffern` fragt nach der Herkunft der richtigen Antwort. Das Notebook «Ziffernerkennung» und die Ausgaben (`ziffern`, `ziffer_durchs_netz`, `neuron_ziffern`) benennen den Begriff; die Titel der Ziffernbilder heissen «Label: 6 / Netz: 6 (98 %)» statt «Bild: 6». Das Daten-Notebook von DL 5 (gleiche Ziffern) erklärt die Rolle der Labels in Training, Validierung und Test. |
+| Projekt DL 5–7 | Karte (Rückblick, «Heute können Sie» in DL 5), Vorwissen, Lernpfad «Datenregeln» mit dem Abschnitt «Überwachtes Lernen braucht Labels»; «Thema wählen» (Klassen = Labels), «Daten & Fotos» (im Fotostudio erhält jedes Bild sein Label), Fahrplan, A/B-Seite («Wer weiss was?»: das kleine Netz lernt überwacht, MobileNet wurde überwacht vortrainiert); Journal-Platzhalter, Projektauftrag, Versuchsnotebooks und Ausgaben von `ki_foto_tools.py` («Label (tatsächliche Klasse)»); Abschlussseite und Plan von DL 7 (das ganze Projekt vom Foto mit Label bis zur Vorhersage erklären). |
+| DL 8 | Karte (`motivation`) und Erklärkasten: Ein überwacht trainiertes Modell kennt nur die Labels seines Trainings, darum muss es fremde Klassen einer seiner zwei Klassen zuordnen. |
+| Glossar | «Überwachtes Lernen» mit einem Beispiel aus den drei Stationen des Kurses; «Label / Ziel / Klasse» gleichgesetzt; «Zum Nachschlagen» in DL 3, 4, Projekt und DL 8. |
+| Lernziele | Webseite und `KI_Lernziele.md` führen den Begriff in DL 3, 4, Projekt und DL 8. Dabei ist auch die Restformulierung zu K10 in `KI_Lernziele.md` («nächsten Versuch begründen») an die Webseite aus Welle 2 angeglichen. |
+| Lehrperson | KP: roter Faden (DL 2) und Hinweise zu DL 3, 4, 5–7 und 8; Gesprächsleitfaden K7: Grundlagenfrage a fragt auch «woher weiss es, was richtig ist?»; Ankerantworten K7 nennen den Begriff; Musterlösungen und Antwortzeilen angepasst. Das Bewertungsraster ist nicht geändert. |
+
+Kleine Korrektur aus Welle 2: Auf der Projekt-Startseite stand noch «Der Vergleich läuft mit einem
+festen Startwert»; sie nennt jetzt Startwert 11 und die Wiederholung mit 11, 22 und 33.
+
+Fachliche Prüfung der neuen Aussagen:
+
+- **MobileNet:** «Überwacht vortrainiert, mit Fotos und ihren 1000 Klassennamen als Labels»
+  folgt der Dokumentation des tfjs-Modells (liefert 1000 ImageNet-Klassen, Merkmale für Transfer
+  Learning über `infer`) und der Beschreibung von MobileNetV2 (Sandler et al. 2018, Training auf
+  ImageNet). Im Projekt wird dieser Ausgang nicht verwendet. Die Kursseiten schreiben bewusst
+  «überwacht vortrainiert» und nicht «selbst überwacht», weil Letzteres als «selbstüberwacht»
+  (Self-Supervised) gelesen würde und das Gegenteil aussagte.
+- **Ziffernnetz:** Nur die Ausgabe wird mit dem Label verglichen; die versteckten Neuronen haben
+  keine eigenen Labels und erhalten den Fehler über die Rückführung des Fehlers (Backpropagation).
+- **DL 9:** «Der Text liefert seine Labels selbst» (Vortraining von Sprachmodellen) steht jetzt
+  im Kontrast zu MobileNet (von Menschen beschriftete Fotos). DL 9 ist unverändert; ein Verweis
+  auf das «selbstüberwachte» Lernen wäre möglich, ist aber nicht umgesetzt.
+
+**Annahmen, die ich getroffen habe (Lehrperson bitte bestätigen oder ändern):**
+
+1. DL 8 gehört zum Projektstrang («bis zum Projekt»): Dort steht ein Satz, mehr nicht.
+2. Im Bildprojekt heissen die Klassen weiter «Klasse» und werden einmal als «Label» benannt; in
+   Ausgaben und Bildtiteln steht «Label» statt «Bild:» oder «tatsächlich».
+3. Der Begriff zählt im Fachgespräch bei K7 (Fragenpool, Ankerantworten); das Raster bleibt
+   wörtlich unverändert.
+4. Das Wort «Ziel» in «Ziel (auch Label genannt)» bleibt in den Formeln stehen; «Das Ziel ist
+   AND» heisst jetzt «Die Aufgabe ist AND», damit «Ziel» nur noch die richtige Antwort je Beispiel
+   meint.
+
+**Verifikation Welle 3 (lokal):** Stufe A, Routen-Tests, die Python-Tests (`check_ki_fotos`,
+`check_ki_projekt`, `check_ki_basis`, `check_testbilder`), `check_notebook_isolation.py`, alle
+Browser- und Notebook-Tests der Welle 2 und `check_course_isolation.py` (mit beiseitegelegtem
+lokalem `content/`) bestehen. In echtem Pyodide laufen alle Notebooks der 4. Klasse in BOK, IRN
+und Vorlage (55 Läufe) sowie die Projekt-Gates fehlerfrei. Keine Tests mussten angepasst werden.
+Nicht erprobt: Wirkung im Unterricht (Verständlichkeit des Begriffs für 17–18-Jährige, Zeit).
 
 **Verifikation Welle 1c (lokal):** Stufe A (Builds, Modell-, Inhalts-, Materialien-,
 Lehrpersonen-, Editor- und Paritätstests) und die Routen-Tests bestehen; `check_portal.cjs`

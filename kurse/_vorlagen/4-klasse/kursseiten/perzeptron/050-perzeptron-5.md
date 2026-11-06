@@ -19,7 +19,7 @@ Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder
       <article>
         <b>3 · Lernen beobachten</b>
         <!-- MD:START -->
-Wählen Sie die Aufgabe **OR** und sagen Sie vor jedem Klick auf «Nächstes Beispiel» voraus, ob das Neuron korrigiert wird. Rechnen Sie **die erste Korrektur** von Hand nach und vergleichen Sie die Parameter vor und nach diesem Schritt.
+Wählen Sie die Aufgabe **OR** und sagen Sie vor jedem Klick auf «Nächstes Beispiel» voraus, ob das Neuron korrigiert wird. Rechnen Sie **die erste Korrektur** von Hand nach und vergleichen Sie die Parameter vor und nach diesem Schritt. Das Ziel jedes Beispiels ist bekannt: Das Neuron lernt **überwacht**.
 <!-- MD:END -->
       </article>
     </div>
