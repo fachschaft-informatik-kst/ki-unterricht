@@ -99,6 +99,19 @@ assert soup.select_one('#fremdmodell textarea[data-journal="reproduktion"]')
 assert soup.select_one('#fremdmodell [data-answer="fremd_rueckmeldung"]')
 assert len(soup.select('#fremdmodell .fremd-person')) == 2
 assert soup.select_one('#fremdmodell button#download-fremdmodell')
+# DL 8 follows the project's roadmap-and-pages layout: a start plus four stages, one page each.
+dl8 = soup.select_one('main > section#fremdmodell')
+assert dl8.get("data-pages") == "Fahrplan", "DL 8 must use page mode"
+for stage, target in {"dl8-start": "#dl8-warum", "dl8-etappe-1": "#dl8-vorbereiten", "dl8-etappe-2": "#reproduktion",
+                      "dl8-etappe-3": "#fremdtest", "dl8-etappe-4": "#dl8-abschluss"}.items():
+    assert dl8.select_one(f'#{stage} a.roadmap-go[href="{target}"]'), f"DL 8 roadmap step {stage} must open {target}"
+assert [k["id"] for k in dl8.select(":scope > details.kapitel")] == [
+    "dl8-warum", "dl8-vorbereiten", "reproduktion", "fremdtest", "dl8-abschluss"], "DL 8 pages follow the work flow"
+for page in dl8.select(":scope > details.kapitel"):
+    assert page.select_one('.page-crumb a[href="#fremdmodell"]'), f"{page['id']} needs a crumb back to the roadmap"
+    assert page.select_one("nav.page-next a.primary"), f"{page['id']} needs a next-page button"
+assert [box["data-check"] for box in dl8.select("#dl8-ablauf [data-check]")] == ["dl8-1", "dl8-2", "dl8-3", "dl8-4"]
+assert len(dl8.select("#dl8-doppellektion .lesson-plan")) == 1, "DL 8 keeps its lesson description in the roadmap"
 assert len(soup.select('#bewertung [data-score]')) == 11
 # Students still download/import their full local answer state and all notebooks.
 js = (ROOT / "shared/portal/portal.js").read_text(encoding="utf-8")

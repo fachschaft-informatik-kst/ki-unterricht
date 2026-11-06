@@ -58,7 +58,7 @@
   <summary>Nach der Projektabgabe: Fremdauswertung in Doppellektion 8</summary>
   <div class="detail-body">
     <p>Die Fremdauswertung hat einen <a href="#fremdmodell">eigenen Unterrichtsabschnitt</a> und ein separates Abgabepaket. Öffnen Sie das fremde Projekt in einem privaten Browserfenster. Stellen Sie hier kein fremdes Projekt über die Wiederherstellung des eigenen Arbeitsstands her.</p>
-    <p><a class="btn" href="#fremdmodell">Zum Auftrag der Doppellektion 8 →</a></p>
+    <p><a class="btn" href="#fremdmodell">Zum Fahrplan der Doppellektion 8 →</a></p>
   </div>
 </details>
 

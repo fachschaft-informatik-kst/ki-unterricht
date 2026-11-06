@@ -1,17 +1,17 @@
 ---
 type: chapter
 id: dl8-abschluss
-nummer: "5"
-titel: "Persönliches Urteil und Rückmeldung"
+nummer: "4"
+titel: "Reflexion & Abgabe"
 kurz: "Erst experimentieren, dann knapp belegen und das ZIP abgeben."
 open: false
 ---
 
-<div class="dl8-question" aria-labelledby="dl8-question-5">
-  <div class="dl8-question-meta"><span class="dl8-eyebrow">Leitfrage</span><span class="dl8-meta">5 · Reflexion &amp; Abgabe</span></div>
-  <h3 id="dl8-question-5">Welche Aussagen können Sie mit Ihren Beobachtungen wirklich belegen?</h3>
-  <p>Reflektieren Sie <strong>erst nach</strong> der <a href="#reproduktion">Daten- und Ergebnisprüfung</a> und dem <a href="#fremdtest">Pflichtversuch</a>. Unterscheiden Sie <strong>Beobachtung</strong>, <strong>Vermutung</strong> und <strong>belegbare Schlussfolgerung</strong>.</p>
-</div>
+<p class="page-crumb"><a href="#fremdmodell">‹ Fahrplan</a><span>Etappe 4 · Tandem und einzeln · K12: max. 3 Punkte</span></p>
+
+## Welche Aussagen können Sie mit Ihren Beobachtungen wirklich belegen?
+
+<p class="section-intro">Reflektieren Sie <strong>erst nach</strong> der <a href="#reproduktion">Daten- und Ergebnisprüfung</a> und dem <a href="#fremdtest">Pflichtversuch</a>. Unterscheiden Sie <strong>Beobachtung</strong>, <strong>Vermutung</strong> und <strong>belegbare Schlussfolgerung</strong>.</p>
 
 <div class="card dl8-review" id="fremd-reflexion">
   <div class="dl8-section-head dl8-review-heading">
@@ -79,3 +79,8 @@ open: false
   </div>
   <p class="status" id="fremd-download-status" role="status" aria-live="polite"></p>
 </div>
+
+<nav class="page-next" aria-label="Weiter in Doppellektion 8">
+  <a class="btn" href="#fremdtest">‹ Eigene Bilder testen</a>
+  <a class="btn primary" href="#sprache">Weiter: DL 9 Sprachmodelle →</a>
+</nav>

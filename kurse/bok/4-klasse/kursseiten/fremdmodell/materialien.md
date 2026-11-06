@@ -6,13 +6,13 @@
 
 **Einzeln → Tandem · 4 / 1 Min.**
 
-Öffnen Sie das zugeteilte fremde Paket in einem **privaten Fenster** und prüfen Sie Ihre persönliche Gesprächszeit. Die eigene Projektabgabe bleibt unverändert. [Warum unabhängig prüfen?](index.html#dl8-warum) · [Dateien vorbereiten](index.html#dl8-vorbereiten).
+Öffnen Sie das zugeteilte fremde Paket in einem **privaten Fenster** und prüfen Sie Ihre persönliche Gesprächszeit. Die eigene Projektabgabe bleibt unverändert. [Fahrplan DL 8](index.html#fremdmodell) · [Etappe 1: Dateien vorbereiten](index.html#dl8-vorbereiten).
 
 ### Vorwissen aktivieren · 5 Min. · Zwei verschiedene Prüffragen
 
 **Tandem → Einzeln · 2 / 3 Min.**
 
-Notieren Sie ursprüngliche Klassen und Forschungsfrage des fremden Projekts.
+Notieren Sie ursprüngliche Klassen und Forschungsfrage des fremden Projekts. Die Seite [Warum prüfen?](index.html#dl8-warum) zeigt, wie sich die beiden Prüfungen unterscheiden und welche Regeln aus dem eigenen Projekt jetzt gelten.
 
 - **Zu zweit:** Sind dessen P1/P2-Bilder unbekannte, unabhängige Exemplare derselben Klassen?
 - **Allein:** Was erwarten Sie, wenn dieses Modell Ihre zwei **anderen** Klassen sieht? Halten Sie die Erwartung vor dem Versuch fest.
@@ -21,7 +21,7 @@ Notieren Sie ursprüngliche Klassen und Forschungsfrage des fremden Projekts.
 
 **Tandem · 5 Min.**
 
-Lesen Sie die Anleitung auf der Kursseite. Sie benötigen **fremde und eigene Fotostudio-JSON getrennt**, nicht zwei gleichzeitig wiederhergestellte Projektstände.
+Lesen Sie die Anleitung auf den Seiten [Daten &amp; Ergebnisse](index.html#reproduktion) und [Eigene Bilder testen](index.html#fremdtest). Sie benötigen **fremde und eigene Fotostudio-JSON getrennt**, nicht zwei gleichzeitig wiederhergestellte Projektstände.
 
 | Datei / Information | Verwendung |
 |---|---|
@@ -44,11 +44,11 @@ Lesen Sie die Anleitung auf der Kursseite. Sie benötigen **fremde und eigene Fo
 | A/B-Werte auf V1 und begründete Modellwahl | ____________________ | ____________________ |
 | Originaltest auf P1/P2 | ____________________ | ____________________ |
 
-Lassen Sie das fremde Notebook mit **Startwert 11 und Originaldaten einmal nachlaufen**. Vergleichen Sie einen V1-Wert und das Testresultat mit den gespeicherten Werten. Protokollieren Sie Abweichungen offen. [Nachlauf und Originalprüfung](index.html#reproduktion).
+Lassen Sie das fremde Notebook mit **Startwert 11 und Originaldaten einmal nachlaufen**. Vergleichen Sie einen V1-Wert und das Testresultat mit den gespeicherten Werten. Protokollieren Sie Abweichungen offen. [Etappe 2: Nachlauf und Originalprüfung](index.html#reproduktion).
 
 #### Pflichtversuch · Eigene andere Klassen
 
-Verwenden Sie Notebook-Abschnitt 6. Lassen Sie das nachtrainierte fremde Modell Bilder Ihrer anderen Klassen zuordnen. Untersuchen Sie die Vorhersagetabelle, die dort angegebene Trennschärfe und mindestens ein Beispiel je Klasse.
+Verwenden Sie Notebook-Abschnitt 6 ([Etappe 3: Eigene Bilder testen](index.html#fremdtest)). Lassen Sie das nachtrainierte fremde Modell Bilder Ihrer anderen Klassen zuordnen. Untersuchen Sie die Vorhersagetabelle, die dort angegebene Trennschärfe und mindestens ein Beispiel je Klasse.
 
 | Tatsächliche eigene Klasse / Bild | Ausgabe in einer der fremden Klassen | Was zeigt das? Was nicht? |
 |---|---|---|
@@ -59,7 +59,7 @@ Verwenden Sie Notebook-Abschnitt 6. Lassen Sie das nachtrainierte fremde Modell 
 
 #### K12 · Zwei persönliche Antworten je Person
 
-Schreiben Sie **nach beiden Versuchen allein** im vorgesehenen [Reflexionsbereich](index.html#fremd-reflexion):
+Schreiben Sie **nach beiden Versuchen allein** in [Etappe 4: Reflexion &amp; Abgabe](index.html#dl8-abschluss):
 
 1. Welcher konkrete Beleg aus Originaltest und Eigenversuch stützt Ihre Einschätzung der Modellgrenzen?
 2. Worin unterscheiden sich neue Testbilder und neue Klassen? Welcher nächste Prüfschritt wäre sinnvoll?

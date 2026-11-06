@@ -19,17 +19,21 @@ function save(){
  try{localStorage.setItem(key,JSON.stringify(state));storageOK=true;$('save-status').textContent='Stand in diesem Browser gespeichert. Keine automatische Abgabe.';}
  catch(e){storageOK=false;$('save-status').textContent='Lokales Speichern ist nicht verfügbar. Nutzen Sie «Stand herunterladen», bevor Sie die Seite schliessen.';}
 }
-// Fahrplan: erledigte Etappen abheben, die nächste offene Etappe hervorheben.
+// Fahrplan: erledigte Etappen abheben, in jedem Fahrplan die nächste offene Etappe hervorheben.
 function roadmap(){
- let found=false;
- all('.roadmap-step').forEach(r=>{
-  const c=r.querySelector('[data-check]'),done=Boolean(c&&c.checked),next=!found&&Boolean(c)&&!done;
-  if(next)found=true;
-  r.classList.toggle('is-done',done);
-  r.classList.toggle('is-next',next);
+ all('.roadmap').forEach(list=>{
+  let found=false;
+  list.querySelectorAll('.roadmap-step').forEach(r=>{
+   const c=r.querySelector('[data-check]'),done=Boolean(c&&c.checked),next=!found&&Boolean(c)&&!done;
+   if(next)found=true;
+   r.classList.toggle('is-done',done);
+   r.classList.toggle('is-next',next);
+  });
  });
 }
-function progress(){const n=checks.filter(x=>x.checked).length;$('progress').value=n;$('progress-text').textContent=n+' von '+checks.length+' Schritten';roadmap();const safe=skills.filter(x=>x.value==='sicher').length;$('skill-summary').textContent=safe+' von '+skills.length+' Kompetenzen: «Sicher erklären». Eigene Einschätzung, keine Note.';}
+// Die Anzeige «x von y Schritten» gehört zum Projekt; Häkchen mit Präfix «dl8-» stehen im Fahrplan von DL 8.
+const projectChecks=checks.filter(x=>!x.dataset.check.startsWith('dl8-'));
+function progress(){const n=projectChecks.filter(x=>x.checked).length;$('progress').value=n;$('progress-text').textContent=n+' von '+projectChecks.length+' Schritten';roadmap();const safe=skills.filter(x=>x.value==='sicher').length;$('skill-summary').textContent=safe+' von '+skills.length+' Kompetenzen: «Sicher erklären». Eigene Einschätzung, keine Note.';}
 function grade(){
  const answered=scores.filter(x=>x.value!=='');
  const points=answered.reduce((sum,x)=>sum+Number(x.value),0);

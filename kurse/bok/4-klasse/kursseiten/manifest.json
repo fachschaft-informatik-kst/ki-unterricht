@@ -37,7 +37,8 @@
     },
     {
       "id": "fremdmodell",
-      "class": "section",
+      "class": "hero",
+      "pages": "Fahrplan",
       "navigation": {
         "order": 7,
         "label": "08",

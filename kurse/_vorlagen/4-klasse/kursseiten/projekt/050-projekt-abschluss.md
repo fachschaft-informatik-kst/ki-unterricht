@@ -33,6 +33,11 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mi
         <p><a class="btn" href="#abgabe">Abgabecheckliste →</a> <a class="btn" href="#sicherung">Stand sichern →</a></p>
       </div>
     </div>
+    <div class="callout" id="projekt-bruecke">
+      <!-- MD:START -->
+**Ausblick auf DL 8:** Nach der Abgabe prüfen Sie das Modell eines anderen Tandems, mit denselben Regeln wie in Ihrem Projekt: getrennte Datengruppen, Auswahl vor dem Test, Test erst am Schluss. Ihr eigenes Projekt bleibt dabei unverändert. [Fahrplan DL&nbsp;8&nbsp;→](#fremdmodell)
+<!-- MD:END -->
+    </div>
     <details>
       <summary>Termine ansehen</summary>
       <div class="detail-body">

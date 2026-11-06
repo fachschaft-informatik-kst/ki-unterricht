@@ -1,14 +1,99 @@
-<span class="section-label">Doppellektion 8 · Nach der Abgabe des eigenen Projekts</span>
-<h1>Fremdes KI-Modell prüfen</h1>
-<p class="section-intro">Sie untersuchen Trainings- und Testdaten sowie Ergebnisse eines anderen Tandems. Danach experimentieren Sie mit Ihren eigenen Bildern und erklären die Grenzen des Modells.</p>
-<p class="glossary-related"><strong>Begriffe:</strong> <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-transfer-learning">Transfer Learning</a></p>
-<nav class="subnav dl8-quicklinks" aria-label="Schritte in Doppellektion 8">
-  <a class="btn" href="#dl8-warum">1 · Warum?</a><a class="btn" href="#dl8-vorbereiten">2 · Vorbereiten</a><a class="btn" href="#reproduktion">3 · Daten &amp; Ergebnisse</a><a class="btn" href="#fremdtest">4 · Experiment</a><a class="btn primary" href="#fremd-reflexion">5 · Reflexion &amp; ZIP</a>
-</nav>
-<div class="callout" id="dl8-ablauf">
-  <strong>Ihr Weg: erst prüfen, dann beurteilen.</strong>
-  <p><strong>Im Tandem:</strong> Daten und Ergebnisse prüfen (ca. 20 Min.) und mit eigenen Klassen experimentieren (ca. 15 Min.). <strong>Individuell:</strong> zwei kurze Reflexionsfragen und das zugeteilte vierminütige Fachgespräch. Die gemeinsame Prüfung ist unbenotet; nur die persönliche Reflexion zählt mit maximal 3 von 33 Punkten. Danach <a href="#fremd-reflexion">ein separates ZIP herunterladen</a>. Der Stand Ihres bereits abgegebenen Projekts bleibt unverändert.</p>
-  <p class="small">Die Lehrperson führt ab Unterrichtsbeginn Einzelgespräche; Sie arbeiten ohne gemeinsame Einführung weiter. Prüfen Sie Ihre Gesprächszeit vorab.</p>
+<div class="eyebrow">
+  Doppellektion 8 · Nach der Abgabe des eigenen Projekts
 </div>
+<h1>Was zeigen die Tests<br/>des fremden <em>Modells?</em></h1>
+<p class="lead">Ihr eigenes Projekt ist abgegeben. Jetzt prüfen Sie das Modell eines anderen Tandems: erst seine Daten und Ergebnisse, dann mit Ihren eigenen Bildern. Am Ende begründen Sie, was belegt ist und wo die Grenzen liegen.</p>
+<div class="project-roadmap" id="dl8-ablauf">
+  <!-- MD:START -->
+## Ihr Fahrplan
+<!-- MD:END -->
+  <p class="section-intro">Starten Sie mit «Warum prüfen?» und arbeiten Sie danach die vier Etappen der Reihe nach durch; jede Etappe führt auf die passende Seite. Die Prüfregeln kennen Sie aus Ihrem eigenen Projekt: Jetzt wenden Sie sie auf das Projekt eines anderen Tandems an.</p>
+  <ol class="roadmap">
+    <li class="roadmap-step roadmap-start" id="dl8-start">
+      <span class="roadmap-nr" aria-hidden="true">0</span>
+      <div class="roadmap-body">
+        <div class="roadmap-head"><strong>Start: Warum prüfen?</strong><span class="roadmap-meta">Zu Beginn · ca. 5 Min.</span></div>
+        <!-- MD:START -->
+Was Sie aus Ihrem Projekt mitbringen und welche zwei Prüfungen Sie unterscheiden: neue Bilder derselben Klassen und völlig neue Klassen.
+<!-- MD:END -->
+      </div>
+      <a class="btn primary roadmap-go" href="#dl8-warum">Warum prüfen? →</a>
+    </li>
+    <li class="roadmap-step" id="dl8-etappe-1">
+      <span class="roadmap-nr" aria-hidden="true">01</span>
+      <div class="roadmap-body">
+        <div class="roadmap-head"><strong>Dateien vorbereiten</strong><span class="roadmap-meta">Tandem · zu Beginn</span></div>
+        <!-- MD:START -->
+Eigenes und fremdes ZIP entpacken, das fremde Projekt im privaten Fenster wiederherstellen und das Notebook finden.
+<!-- MD:END -->
+        <label class="check"><input data-check="dl8-1" type="checkbox"/><span>Das fremde Projekt läuft im privaten Fenster; unser eigenes ZIP liegt entpackt bereit.</span></label>
+      </div>
+      <a class="btn roadmap-go" href="#dl8-vorbereiten">Dateien vorbereiten →</a>
+    </li>
+    <li class="roadmap-step" id="dl8-etappe-2">
+      <span class="roadmap-nr" aria-hidden="true">02</span>
+      <div class="roadmap-body">
+        <div class="roadmap-head"><strong>Daten und Ergebnisse prüfen</strong><span class="roadmap-meta">Tandem · ca. 20 Min. · unbenotet (K11)</span></div>
+        <!-- MD:START -->
+Sind T1/T2, V1 und P1/P2 wirklich getrennt? Stimmen die Originalergebnisse? Ein Nachlauf mit Startwert 11 und ein gemeinsamer Prüfbericht.
+<!-- MD:END -->
+        <label class="check"><input data-check="dl8-2" type="checkbox"/><span>Unser Prüfbericht zu Daten und Ergebnissen ist geschrieben.</span></label>
+      </div>
+      <a class="btn roadmap-go" href="#reproduktion">Daten &amp; Ergebnisse →</a>
+    </li>
+    <li class="roadmap-step" id="dl8-etappe-3">
+      <span class="roadmap-nr" aria-hidden="true">03</span>
+      <div class="roadmap-body">
+        <div class="roadmap-head"><strong>Eigene Bilder testen</strong><span class="roadmap-meta">Tandem · ca. 15 Min. · unbenotet</span></div>
+        <!-- MD:START -->
+Das fremde Modell sieht Ihre zwei eigenen Klassen. Erst die Erwartung festhalten, dann die Vorhersagen untersuchen, ohne neu zu trainieren.
+<!-- MD:END -->
+        <label class="check"><input data-check="dl8-3" type="checkbox"/><span>Unser Versuchsprotokoll ist ausgefüllt.</span></label>
+      </div>
+      <a class="btn roadmap-go" href="#fremdtest">Eigene Bilder testen →</a>
+    </li>
+    <li class="roadmap-step" id="dl8-etappe-4">
+      <span class="roadmap-nr" aria-hidden="true">04</span>
+      <div class="roadmap-body">
+        <div class="roadmap-head"><strong>Reflexion und Abgabe</strong><span class="roadmap-meta">Tandem und einzeln · K12: max. 3 Punkte</span></div>
+        <!-- MD:START -->
+Rückmeldung an das andere Tandem, je zwei persönliche Antworten und das separate ZIP. Der Download allein ist keine Einreichung.
+<!-- MD:END -->
+        <label class="check"><input data-check="dl8-4" type="checkbox"/><span>Rückmeldung und beide persönlichen Antworten stehen; das separate ZIP ist eingereicht.</span></label>
+      </div>
+      <a class="btn roadmap-go" href="#dl8-abschluss">Reflexion &amp; Abgabe →</a>
+    </li>
+  </ol>
+</div>
+<div class="callout" id="dl8-rahmen">
+  <!-- MD:START -->
+### Selbstständig prüfen, fair beurteilen
+<!-- MD:END -->
+  <!-- MD:START -->
+Sie arbeiten als Tandem selbstständig. Die Lehrperson führt ab Beginn die vierminütigen Einzelgespräche; prüfen Sie Ihre Gesprächszeit vorab. Wird eine Person aufgerufen, kann die andere weiterarbeiten. Danach zeigen die Häkchen im Fahrplan, wo Sie weitermachen.
+<!-- MD:END -->
+  <p><strong>Verbindlich:</strong> Daten und Ergebnisse des fremden Projekts prüfen, eigene Klassen am fremden Modell ausprobieren, Rückmeldung an das andere Tandem und je zwei persönliche Antworten. Die gemeinsame Prüfung ist <strong>unbenotet</strong>; nur die persönliche Reflexion zählt (<a href="#bewertung">K12, maximal 3 von 33 Punkten</a>). Ihr eigenes, bereits abgegebenes Projekt bleibt unverändert.</p>
+</div>
+<div class="facts">
+  <div class="fact">
+    <strong>1 fremdes Modell</strong><small>mit Daten und Ergebnissen prüfen</small>
+  </div>
+  <div class="fact">
+    <strong>2 eigene Klassen</strong><small>am fremden Modell ausprobieren</small>
+  </div>
+  <div class="fact">
+    <strong>2 Antworten</strong><small>persönlich, je Person (K12)</small>
+  </div>
+  <div class="fact">
+    <strong>1 separates ZIP</strong><small>zur Fremdauswertung einreichen</small>
+  </div>
+</div>
+<p class="overview-note">Bewertet wird Ihre Begründung – nicht ein perfekter Notebooklauf.</p>
+<details class="project-lessons" id="dl8-doppellektion">
+  <summary>Doppellektion 8 · Ziel und Leitfrage</summary>
+  <div class="detail-body">
 <!-- LESSONS:fremdmodell -->
 <!-- /LESSONS:fremdmodell -->
+  </div>
+</details>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-transfer-learning">Transfer Learning</a></p>
