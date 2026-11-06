@@ -1,6 +1,6 @@
-<details class="kapitel" id="einstieg-3" data-kurz="Neun Meilensteine zeigen, wann Regeln und wann Daten wichtig wurden." open>
+<details class="kapitel" id="einstieg-3" data-kurz="Wahl · Neun Meilensteine zeigen, wann Regeln und wann Daten wichtig wurden.">
   <summary><span class="kapitel-nr">3</span>
-    <h2 class="kapitel-titel">Meilensteine der KI</h2>
+    <h2 class="kapitel-titel">Meilensteine der KI (Wahl)</h2>
   </summary>
   <div class="kapitel-body">
     <p class="section-intro"><strong>Wie wurde aus einer Idee die KI von heute?</strong> Neun Meilensteine zeigen wichtige Wendepunkte in der Geschichte der KI. Die <strong>farbigen Marken</strong> greifen die beiden Ansätze aus <a href="#einstieg-1">Unterkapitel 1</a> auf: <span class="marke regeln">Programmierung durch Menschen</span> und <span class="marke daten">Datengetriebene Programmierung</span>. Die Einteilung ist vereinfacht; viele Systeme verbinden beides. Beim <strong>KI-Winter</strong> fehlt eine Marke, weil er keine Technik bezeichnet. Klickt auf einen Titel, um Bild, Erklärung und Bildquelle zu sehen.</p>

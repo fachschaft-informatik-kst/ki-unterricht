@@ -6,10 +6,10 @@
       "title": "Wie lernt KI?",
       "rueckblick": "In Doppellektion 1 haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.",
       "goal": "Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.",
-      "question": "Leitfrage: Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
+      "question": "Leitfrage: Wie lernt KI? Welche Information erhält ein System beim Lernen: Labels, Ähnlichkeit oder Rückmeldung?",
       "motivation": "Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.",
       "product": "Ein Vergleich wissensbasierter und lernender Systeme und je eine begründete Beobachtung zu den drei Lernarten.",
-      "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours.",
+      "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Pflichtweg der Kursseite: Kapitel 1, 4, 5, 6, 7 und 8. Akinator (Kapitel 2), Filmlandkarte (Kapitel 3), Smiley, K-Means und Begriffscheck (Kapitel 9) bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -107,16 +107,16 @@
               "text": "Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung. Ordnen Sie NIM und das Bildprojekt begründet zu. Erklären Sie, warum im Memory der Mensch und nicht ein KI-Modell gelernt hat."
             },
             {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 3,
-              "text": "Klärt zwei strittige Zuordnungen gemeinsam und hält fest: Das Bildprojekt lernt überwacht mit beschrifteten Trainingsbildern."
-            },
-            {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 3,
-              "text": "Sicherung: Beantworten Sie einzeln die Leitfrage «Wie lernt KI?» in zwei bis drei Sätzen. Nennen Sie zu einer Lernart ein Beispiel und begründen Sie, weshalb es dazugehört."
+              "text": "Sicherung: Beantworten Sie einzeln die Leitfrage «Wie lernt KI?» in zwei bis drei Sätzen an einem Beispiel, das wir nicht besprochen haben (zum Beispiel ein Empfehlungsdienst). Nennen Sie das Lernsignal und begründen Sie, woran Sie es erkennen. Erst schreiben, dann vergleichen."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 3,
+              "text": "Klärt zwei strittige Zuordnungen gemeinsam, gibt die Selbstkontrolle zur Sicherung frei und hält fest: Das Bildprojekt lernt überwacht mit beschrifteten Trainingsbildern."
             },
             {
               "art": "Ergebnis",

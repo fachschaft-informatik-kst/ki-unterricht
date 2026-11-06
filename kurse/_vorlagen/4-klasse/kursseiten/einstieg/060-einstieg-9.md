@@ -5,6 +5,6 @@
   <div class="kapitel-body">
     <p class="task"><b>Aufgabe:</b> Erklären Sie die Begriffe KI, maschinelles Lernen, Deep Learning und generative KI in je einem eigenen Satz.</p>
     <label class="field answer"><span>Die vier Begriffe in je einem Satz</span><textarea data-answer="begriffe_saetze" maxlength="10000" placeholder="KI: … · Maschinelles Lernen: … · Deep Learning: … · Generative KI: …" rows="4"></textarea></label>
-    <label class="field answer"><span>Ist jedes automatisch arbeitende Programm eine KI? Begründen Sie mit der Grafik «Regeln oder Daten» und einem eigenen Beispiel. Welche Frage bleibt offen?</span><textarea data-answer="begriffe" maxlength="10000" placeholder="Ihre Begründung …" rows="3"></textarea></label>
+    <label class="field answer"><span>Leitfrage: Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten? Ist jedes automatisch arbeitende Programm eine KI? Antworten Sie mit der Grafik «Regeln oder Daten» und einem eigenen Beispiel.</span><textarea data-answer="begriffe" maxlength="10000" placeholder="Mein Kriterium für Intelligenz (würde ich es ändern?): … · Mein Beispiel: … · feste Regeln oder Lernen aus Daten, erkennbar an: … · Offen bleibt: …" rows="4"></textarea></label>
   </div>
 </details>

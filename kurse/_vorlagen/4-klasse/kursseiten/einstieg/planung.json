@@ -8,7 +8,7 @@
       "question": "Leitfrage: Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
       "product": "Neun überprüfte Beispielzuordnungen, Begründungen zu zwei Grenzfällen, eine begründete Entscheidung zum Fall «Schulweg» mit zwei Argumenten sowie eine eigenständige Antwort auf die Leitfrage. Eigene zusätzliche Beispiele sind freiwillig.",
-      "zeit": "90 Minuten: Ankommen 5, Vorwissen aktivieren 10, Informieren 20, Verarbeiten 45, Auswerten 10. Keine Zeitreserve; Präsentationen der Vierergruppen erfolgen sehr kurz und ohne eigenes Zeitfenster.",
+      "zeit": "90 Minuten: Ankommen 5, Vorwissen aktivieren 10, Informieren 20, Verarbeiten 45, Auswerten 10. Keine Zeitreserve; Präsentationen der Vierergruppen erfolgen sehr kurz und ohne eigenes Zeitfenster. Pflichtweg der Kursseite: Kapitel 1, 2, 5 und 9. Kapitel 3 (Meilensteine) und 4 (schwache und starke KI) sind Wahl; die Lehrperson bespricht beide im Input kurz.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -19,7 +19,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 1,
-              "text": "Zeigt eine Tabelle aus dem Materialkoffer mit zwei Saugrobotern: Einer fährt feste Bahnen, der andere erstellt während der Fahrt eine Karte. Stellt die Frage: «Wann nennen Sie ein System intelligent?»"
+              "text": "Zeigt eine Tabelle aus dem Materialkoffer mit zwei Saugrobotern: Einer fährt feste Bahnen, der andere erstellt während der Fahrt eine Karte. Stellt die Frage: «Wann nennen Sie ein System intelligent?» Hält zwei bis drei genannte Kriterien an der Tafel fest; sie bleiben bis zum Schluss stehen."
             },
             {
               "art": "Auftrag",
@@ -139,13 +139,13 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 3,
-              "text": "Besprechen Sie zwei strittige Beispielzuordnungen und überprüfen Sie gemeinsam deren Begründungen."
+              "text": "Besprechen Sie zwei strittige Beispielzuordnungen und überprüfen Sie gemeinsam deren Begründungen. Prüfen Sie dabei, ob die Kriterien an der Tafel tragen."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Beantworten Sie die Leitfrage anhand eines eigenen Beispiels. Erklären Sie dabei den Unterschied zwischen festen Regeln und dem Lernen aus Daten."
+              "text": "Beantworten Sie die Leitfrage anhand eines eigenen Beispiels. Erklären Sie dabei den Unterschied zwischen festen Regeln und dem Lernen aus Daten und greifen Sie Ihr Kriterium vom Anfang auf: Würden Sie es ändern?"
             },
             {
               "art": "Ergebnis",

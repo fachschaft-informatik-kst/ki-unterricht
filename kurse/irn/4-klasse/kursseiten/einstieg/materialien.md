@@ -18,7 +18,7 @@
 
 **Notizvorlage:** «Intelligenz bedeutet für mich … . Roboter … erfüllt das Kriterium, weil … . Unklar bleibt … .»
 
-> **Lehrpersonenhinweis:** Eine Karte beweist noch kein maschinelles Lernen. Auch Routenplanung kann auf programmierten Regeln beruhen. Unterschiedliche begründete Intelligenzdefinitionen sind ein erwünschter Gesprächsanlass.
+> **Lehrpersonenhinweis:** Eine Karte beweist noch kein maschinelles Lernen. Auch Routenplanung kann auf programmierten Regeln beruhen. Unterschiedliche begründete Intelligenzdefinitionen sind ein erwünschter Gesprächsanlass. Halten Sie zwei bis drei Kriterien an der Tafel fest und lassen Sie sie bis zum Schluss stehen: In der Auswertung prüft die Klasse, ob sie tragen.
 
 ### Vorwissen aktivieren · 10 Min. · Regeln für Katze oder Hund
 
@@ -113,10 +113,10 @@ Die Lehrperson ordnet zuvor Asimovs fiktive Robotergesetze als Diskussionsmodell
 
 **Lehrperson → Klasse → Einzeln · 2 / 3 / 5 Min.**
 
-Besprechen Sie zwei strittige Zuordnungen. Schreiben Sie danach allein:
+Besprechen Sie zwei strittige Zuordnungen und prüfen Sie, ob die Kriterien an der Tafel tragen. Schreiben Sie danach allein:
 
 - Mein Beispiel für ein intelligentes System: ____________________
 - Es nutzt feste Regeln / Lernen aus Daten, erkennbar an: ____________________
-- Mein Kriterium für Intelligenz und eine verbleibende Grenze: ____________________
+- Mein Kriterium für Intelligenz vom Anfang: behalten / ändern, weil ____________________ Eine Grenze bleibt: ____________________
 
 **Erwartetes Ergebnis:** Neun kontrollierte Zuordnungen, zwei begründete Grenzfälle, zwei Argumente zum Schulweg und eine eigene Antwort auf die Leitfrage. Zusätzliche Beispiele sind freiwillig.

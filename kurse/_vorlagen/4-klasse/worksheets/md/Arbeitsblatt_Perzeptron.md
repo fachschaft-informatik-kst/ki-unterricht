@@ -31,7 +31,9 @@ Neue Startsituation: Gewichte 0.2 / 0.2, Bias −0.5; Eingabe (1,1), Ziel 1.
 4. Erneut prüfen. Sind dadurch automatisch alle Eingaben richtig? Begründen.
 5. Was hat sich beim Lernen verändert, was ist gleich geblieben? Wo steckt das Gelernte?
 
-## 3 · Eine Grenze entdecken
+## 3 · Ausblick (freiwillig): Eine Grenze entdecken
+Dieser Teil gehört zu Doppellektion 4, wo XOR eingeführt wird. Hier nur für schnelle Tandems.
+
 XOR: (0,0) und (1,1) gehören zu Klasse 0, (0,1) und (1,0) zu Klasse 1.
 Zeichnen Sie die vier Punkte. Kann eine Gerade die Klassen trennen?
 

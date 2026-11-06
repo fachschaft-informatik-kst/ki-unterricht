@@ -1,6 +1,6 @@
-<details class="kapitel" id="netze-5" data-kurz="Ziffern erkennen: 64 Pixel, 16 versteckte Neuronen, 10 Ausgaben. Alle Gewichte lernt das Netz selbst." open>
+<details class="kapitel" id="netze-5" data-kurz="Wahl · Ziffern erkennen: 64 Pixel, 16 versteckte Neuronen, 10 Ausgaben. Alle Gewichte lernt das Netz selbst.">
   <summary><span class="kapitel-nr">5</span>
-    <h2 class="kapitel-titel">Ein Netz erkennt Ziffern</h2>
+    <h2 class="kapitel-titel">Ein Netz erkennt Ziffern (Wahl)</h2>
   </summary>
   <div class="kapitel-body">
     <p><strong>Freiwilliger Transfer:</strong> Beim XOR-Beispiel gab es zwei Eingaben. Jetzt betrachten Sie ein grösseres Problem: Ein Netz soll <strong>handgeschriebene Ziffern</strong> lesen. Jedes Bild hat 8 × 8 Pixel, also <strong>64 Helligkeitswerte</strong>. Auch hier gibt es eine Eingabe-, eine versteckte und eine Ausgabeschicht:</p>

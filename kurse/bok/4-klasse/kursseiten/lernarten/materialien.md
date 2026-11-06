@@ -69,11 +69,11 @@ Sichern Sie **eine tatsächlich beobachtete Änderung**, nicht nur «die KI wird
 
 ### Auswerten · 10 Min. · Lernarten begründet zuordnen
 
-**Einzeln → Lehrperson → Einzeln · 4 / 3 / 3 Min.**
+**Einzeln → Einzeln → Lehrperson · 4 / 3 / 3 Min.**
 
 1. Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung anhand Ihrer Beobachtungen.
 2. Ordnen Sie NIM und das kommende Bildprojekt zu. Welche Information ist jeweils entscheidend?
 3. Erklären Sie, warum im Memory ein Mensch und nicht ein Modell gelernt hat.
-4. Antworten Sie allein in zwei bis drei Sätzen: «Wie lernt KI?» Nennen und begründen Sie ein Beispiel.
+4. Sicherung (einzeln, erst schreiben): Antworten Sie in zwei bis drei Sätzen auf «Wie lernt KI?» an einem Beispiel, das wir nicht besprochen haben (zum Beispiel ein Empfehlungsdienst). Nennen Sie das Lernsignal und begründen Sie, woran Sie es erkennen. Danach klärt die Lehrperson zwei strittige Zuordnungen, und Sie vergleichen mit der Selbstkontrolle auf der Kursseite (Kapitel 8).
 
 > **Orientierung für die Sicherung:** Das Bildprojekt ist überwachtes Lernen mit beschrifteten Bildern. NIM veranschaulicht Lernen aus Rückmeldung. Für die Begründung zählt das Lernsignal, nicht der Name des Werkzeugs.

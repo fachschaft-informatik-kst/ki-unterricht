@@ -1,6 +1,6 @@
-<details class="kapitel" id="perzeptron-6" data-kurz="Ergebnisse aus dem Schwimmbad-, Gatter- und Lernversuch noch einmal prüfen." open>
+<details class="kapitel" id="perzeptron-6" data-kurz="Wahl · Ergebnisse aus dem Schwimmbad-, Gatter- und Lernversuch noch einmal prüfen.">
   <summary><span class="kapitel-nr">6</span>
-    <h2 class="kapitel-titel">Das Neuron auf den Punkt gebracht</h2>
+    <h2 class="kapitel-titel">Das Neuron auf den Punkt gebracht (Wahl)</h2>
   </summary>
   <div class="kapitel-body">
     <p>Ein einzelnes Neuron verknüpft <strong>Eingaben</strong> mit <strong>Gewichten</strong>, addiert den <strong>Bias</strong> und entscheidet anhand der Summe, ob seine Ausgabe 0 oder 1 ist.</p>

@@ -20,9 +20,15 @@ Rechnen Sie gemeinsam für AND die Eingabe (1,1) mit w₁ = w₂ = 1 und b = −
 
 ### Informieren · 22 Min. · Warum ein Neuron nicht reicht
 
-**Lehrperson → Klasse → Lehrperson · 10 / 5 / 7 Min.**
+**Klasse → Lehrperson → Tandem → Lehrperson · 5 / 5 / 5 / 7 Min.**
 
-#### Tafelkarte · Vier Bedingungen für XOR
+**Klasse · XOR-Rätsel am Beamer (zuerst vermuten):** Im Notebook «XOR: Ein Neuron» sagt die Klasse zuerst vorher, wie viele der vier Fälle ein Neuron schaffen kann. Dann schlägt sie Gewichte und Bias vor, die Lehrperson prüft alle vier Fälle. Gemeinsam feststellen: höchstens 3 von 4.
+
+**Tafelskizze (Lehrperson · 5 Min.):** Die vier XOR-Punkte mit der Klasse einzeichnen. Die Klasse versucht, eine Gerade einzuzeichnen, und begründet, warum keine einzelne Gerade die beiden Klassen trennt. Die algebraischen Bedingungen nur nennen: Sie sind Niveau B.
+
+**Tandem · 5 Min. · Bedingungstabelle selbst ausfüllen:** Schreiben Sie für jede der vier Zeilen die Bedingung an w₁, w₂ und b auf (Ausgabe 1 heisst Summe ≥ 0, Ausgabe 0 heisst Summe < 0) und markieren Sie, welche Bedingungen sich widersprechen. Vergleichen Sie danach mit der Tafelkarte und dem Kurskapitel (Niveau B).
+
+#### Tafelkarte · Vier Bedingungen für XOR (Lösung zum Vergleichen, Niveau B)
 
 Bei Ausgabe 1 ab Summe 0 müssten gleichzeitig gelten:
 
@@ -35,10 +41,6 @@ Bei Ausgabe 1 ab Summe 0 müssten gleichzeitig gelten:
 
 Aus den mittleren Zeilen folgt w₁ + w₂ + b ≥ −b > 0. Das widerspricht der letzten Zeile. Eine Gerade trennt die diagonal gegenüberliegenden Klassen nicht. Das [einzelne XOR-Neuron](index.html#netze-1) kann mit einem festen Parametersatz höchstens drei der vier Fälle richtig entscheiden.
 
-**Tafelskizze:** Die vier XOR-Punkte mit der Klasse einzeichnen und markieren, warum keine einzelne Gerade die beiden Klassen trennt.
-
-**Klasse · XOR-Rätsel am Beamer:** Im Notebook «XOR: Ein Neuron» schlägt die Klasse Gewichte und Bias vor, die Lehrperson prüft alle vier Fälle. Gemeinsam feststellen: höchstens 3 von 4.
-
 #### Tafelkarte · OR und NAND als neue Merkmale (Lehrperson · 7 Min.)
 
 | Neuron | Gewichte | Bias | Bedeutung |
@@ -49,9 +51,9 @@ Aus den mittleren Zeilen folgt w₁ + w₂ + b ≥ −b > 0. Das widerspricht de
 
 ![OR- und NAND-Entscheidungsgrenzen bei XOR](materialien/downloads/koordinatengitter_or_nand_xor.svg "Informieren | Lehrperson")
 
-### Verarbeiten · 50 Min. · Vom Versuch zum Signalweg
+### Verarbeiten · 47 Min. · Vom Versuch zum Signalweg
 
-**Tandem → Tandem → Klasse · 30 / 15 / 5 Min.**
+**Tandem → Tandem → Klasse · 27 / 15 / 5 Min.**
 
 1. Öffnen Sie das [Netzwerk-Kapitel](index.html#netze-2) und arbeiten Sie im Notebook «Neuronale Netze». Verfolgen Sie OR → NAND → AND und lösen Sie die vier XOR-Fälle mit dem Netz. Der Abschnitt «Selbstcheck · Ein anderer Fall» entfällt, dafür folgt die Papieraufgabe.
 2. Rechnen Sie im Tandem einen zusätzlichen Eingabefall vollständig durch (Tabelle unten).
@@ -70,14 +72,18 @@ Aus den mittleren Zeilen folgt w₁ + w₂ + b ≥ −b > 0. Das widerspricht de
 
 **Nur freiwillig:** [Ziffernerkennung](index.html#netze-5) · [eigenständiges Ziffern-Notebook](materialien/downloads/ziffernerkennung.ipynb). Kein drittes Pflichtnotebook.
 
-### Auswerten · 10 Min. · Kurzcheck vor dem Projekt
+### Auswerten · 13 Min. · Sicherung vor dem Projekt
 
-**Tandem → Klasse → Lehrperson → Einzeln · 2 / 4 / 2 / 2 Min.**
+**Tandem → Einzeln → Klasse → Lehrperson · 2 / 5 / 4 / 2 Min.**
 
-Erklären Sie einander die XOR-Grenze und prüfen Sie einen Signalweg gemeinsam. Beantworten Sie allein in zwei Minuten:
+Erklären Sie einander mündlich die XOR-Grenze und den Signalweg. Schreiben Sie danach allein auf der Kursseite (Kapitel 4, unbenotet):
 
-1. Was bewirken Gewichte und Bias?
-2. Warum benötigt XOR eine Zwischenschicht?
-3. Welche Unsicherheit möchten Sie vor der Projektarbeit klären?
+1. **Netz:** Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem? Erklären Sie die Ausgaben von OR, NAND und AND für (1,1).
+2. **Brücke:** Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto. Welcher Teil lernt, welcher bleibt fest?
+3. **Vorschau (Raten erlaubt):** Welche Bilder sollten erst ganz am Schluss für eine unabhängige Prüfung geöffnet werden, und warum?
 
-**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt (Hinweis «Ausblick auf das Bildprojekt» am Ende der Kursseite).
+Danach vergleichen die Lernenden mit der Selbstkontrolle; die Lehrperson liest zwei bis drei Antworten an und sammelt offene Fragen für den Start in DL 5.
+
+**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt (Brückenkarte am Ende der Kursseite).
+
+**Vorbereitungsauftrag bis DL 5:** Thema und zwei Klassen aus der [Themenliste](index.html#projekt-2) wählen und passende Gegenstände besorgen (zehn verschiedene Exemplare, fünf je Klasse). Noch nicht fotografieren: Fotografiert wird in DL 5 erst nach dem Lernpfad und der Abnahme der Exemplarliste. Die Lehrperson gibt Thema und Klassen am Anfang von DL 5 frei (etwa eine Minute je Tandem, während die Tandems den Lernpfad lesen).
