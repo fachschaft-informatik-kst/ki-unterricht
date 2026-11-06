@@ -73,13 +73,13 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 40,
-              "text": "Bearbeiten Sie in Ihrem eigenen Tempo den SOL-Lernpfad auf der Seite «Datenregeln lernen»: Lesen Sie die drei Datenrollen, ordnen Sie Beispiele zu, untersuchen Sie im Notebook «Datenaufteilung» ein Datenleck und kontrollieren Sie sich mit den eingeblendeten Lösungen. Übertragen Sie die Regeln dann auf der Seite «Daten & Fotos» auf T1/T2/V1/P1/P2 mit Ihren zwei Klassen und je fünf Exemplaren und tragen Sie die Exemplarliste ein. Lassen Sie die Liste anhand der Abschlusskontrolle abnehmen (Lehrperson oder Nachbartandem, ca. 2 Minuten); erst danach wird fotografiert. Testen Sie den Weg Handy → Laptop mit einem Foto. Halten Sie Ihre Begründung im bestehenden Journal fest, wählen Sie Tagesziel und Rollen und ergänzen Sie Reflexion 1; Reflexion 2 darf in Doppellektion 6 abgeschlossen werden. Wer die Abnahme hat, beginnt mit dem Fotografieren; niemand muss heute bereits ein Modell trainieren."
+              "min": 45,
+              "text": "Bearbeiten Sie in Ihrem eigenen Tempo den SOL-Lernpfad auf der Seite «Datenregeln lernen»: Lesen Sie die drei Datenrollen, ordnen Sie Beispiele zu, führen Sie im Notebook «Datenaufteilung» den Datenleck-Versuch (Kopien gegen neue Bilder, mit 40, 100 und 400 Trainingsbildern) und den Vergleich der drei Werte (Training, Validierung, Test) aus und kontrollieren Sie sich mit den eingeblendeten Lösungen. Übertragen Sie die Regeln dann auf der Seite «Daten & Fotos» auf T1/T2/V1/P1/P2 mit Ihren zwei Klassen und je fünf Exemplaren und tragen Sie die Exemplarliste ein. Lassen Sie die Liste anhand der Abschlusskontrolle abnehmen (Lehrperson oder Nachbartandem, ca. 2 Minuten); erst danach wird fotografiert. Testen Sie den Weg Handy → Laptop mit einem Foto. Halten Sie Ihre Begründung im bestehenden Journal fest, wählen Sie Tagesziel und Rollen und ergänzen Sie Reflexion 1; Reflexion 2 darf in Doppellektion 6 abgeschlossen werden. Wer die Abnahme hat, beginnt mit dem Fotografieren; niemand muss heute bereits ein Modell trainieren."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 10,
+              "min": 5,
               "text": "Prüfen Sie einzeln anhand der Selbstkontrolle im Datenplan, ob Ihr Beispiel für P1 ein wirklich neues Exemplar zeigt. Notieren Sie einen möglichen Fehler und die nötige Korrektur."
             },
             {
@@ -190,7 +190,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 50,
-              "text": "Arbeiten Sie an Ihrer gewählten Etappe. Bis zur Mitte der Doppellektion sollten Ihre Fotos importiert sein; fehlen sie noch, klären Sie sofort mit der Lehrperson, ob Sie gezielt nachfotografieren oder offen gekennzeichnet mit dem Modus ERSATZ weiterarbeiten. Vor jedem A/B-Lauf Daten prüfen; dann Bildzahl, Netz, Epochen und Startwert konstant halten und notieren, was gleich bleibt und warum das wichtig ist. Lesen Sie Validierung und konkrete Vorhersagen: V1 sind 16 Bilder, aber nur ein Exemplar je Klasse; ein Bild entspricht 6,25 Prozentpunkten, und ein Unterschied von höchstens zwei Bildern gilt als kein Beleg (Faustregel). Prüfen Sie eine alternative Erklärung und begründen Sie Ihre Auswahl in Reflexion 3 vor Testeinsicht, bei Gleichstand mit einem anderen Argument. Bereite Tandems dürfen bereits abschliessen; andere ergänzen zuerst Daten und Reflexion 1–2. Die Lehrperson geht Mitte der Doppellektion einmal durch die Reihen (Foto-Check) und fragt in kurzen Beratungen nach Ziel, Beleg und nächstem Schritt; keine Unterbrechung der ganzen Klasse."
+              "text": "Arbeiten Sie an Ihrer gewählten Etappe. Bis zur Mitte der Doppellektion sollten Ihre Fotos importiert sein; fehlen sie noch, klären Sie sofort mit der Lehrperson, ob Sie gezielt nachfotografieren oder offen gekennzeichnet mit dem Modus ERSATZ weiterarbeiten. Vor jedem A/B-Lauf Daten prüfen; dann Bildzahl, Netz, Epochen und Startwert konstant halten und notieren, was gleich bleibt und warum das wichtig ist. Lesen Sie Validierung und konkrete Vorhersagen: V1 sind 16 Bilder, aber nur ein Exemplar je Klasse; ein Bild entspricht 6,25 Prozentpunkten, und ein Unterschied von höchstens zwei Bildern gilt als kein Beleg (Faustregel). Wiederholen Sie den A/B-Vergleich vor der Auswahl im Notebook mit drei Startwerten (ca. 5 Minuten; weitere Startwerte nur vor Testeinsicht) und prüfen Sie, ob A und B in jedem Lauf gleich abschneiden. Prüfen Sie eine alternative Erklärung und begründen Sie Ihre Auswahl in Reflexion 3 vor Testeinsicht, bei Gleichstand mit einem anderen Argument. Bereite Tandems dürfen bereits abschliessen; andere ergänzen zuerst Daten und Reflexion 1–2. Die Lehrperson geht Mitte der Doppellektion einmal durch die Reihen (Foto-Check) und fragt in kurzen Beratungen nach Ziel, Beleg und nächstem Schritt; keine Unterbrechung der ganzen Klasse."
             },
             {
               "art": "Auftrag",
@@ -202,7 +202,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Frei verfügbarer Puffer für Technik, Interpretation oder Beratung. Weitere Startwerte sind nur vor Testeinsicht möglich."
+              "text": "Frei verfügbarer Puffer für Technik, Interpretation oder Beratung."
             },
             {
               "art": "Ergebnis",

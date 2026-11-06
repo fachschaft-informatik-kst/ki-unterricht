@@ -72,14 +72,26 @@
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Erklärt anhand der Kursgrafiken den Unterschied zwischen menschlich festgelegten Regeln und dem Lernen aus Daten. Ordnet die Begriffe KI, maschinelles Lernen, Deep Learning und generative KI ein. Verwendet durchgehend Bilderkennung als Beispiel und ergänzt ein regelbasiertes Schachprogramm. Unterscheidet schwache KI (spezifische Aufgaben) und hypothetische starke KI (allgemeine Intelligenz), ohne Bewusstsein als Voraussetzung darzustellen. Bespricht die Meilensteine der KI-Entwicklung kurz. Die Erklärung bleibt bewusst kompakt, damit die Schülerinnen und Schüler die Inhalte anschliessend selbst explorativ vertiefen und die Entdeckerfrage beantworten können. Keine zusätzlichen Zwischenaufträge."
+              "min": 7,
+              "text": "Erklärt anhand der Kursgrafik «Regeln versus Daten» den Unterschied zwischen menschlich festgelegten Regeln und dem Lernen aus Daten. Verwendet durchgehend Bilderkennung als Beispiel und ergänzt ein regelbasiertes Schachprogramm."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Ohne Unterlagen: Erklären Sie einander in zwei Sätzen, wer bei einem Schachprogramm und wer bei einem lernenden Bilderkenner festlegt, wie entschieden wird."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 6,
+              "text": "Ordnet anhand der Begriffskreise KI, maschinelles Lernen, Deep Learning und generative KI ein. Unterscheidet schwache KI (spezifische Aufgaben) und hypothetische starke KI (allgemeine Intelligenz), ohne Bewusstsein als Voraussetzung darzustellen. Bespricht die Meilensteine der KI-Entwicklung kurz. Die Erklärung bleibt bewusst kompakt, damit die Schülerinnen und Schüler die Inhalte anschliessend selbst explorativ vertiefen und die Entdeckerfrage beantworten können. Ausser dem Abrufauftrag keine weiteren Zwischenaufträge."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Ordnen Sie einen Spamfilter gemeinsam in die besprochenen Kategorien ein und klären Sie offene Begriffsfragen."
+              "text": "Ordnen Sie einen Spamfilter zuerst ohne Unterlagen gemeinsam in die besprochenen Kategorien ein und klären Sie danach offene Begriffsfragen."
             },
             {
               "art": "Ergebnis",

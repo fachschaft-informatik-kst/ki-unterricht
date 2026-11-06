@@ -43,7 +43,7 @@ Die Lehrperson erklärt den Zusammenhang mit der Kursgrafik und fasst die **vier
 
 ### Verarbeiten · 53 Min. · Soekia gründlich untersuchen
 
-**Einzeln → Tandem → Tandem → Puffer · 2 / 40 / 6 / 5 Min.**
+**Einzeln / Tandem / Tandem / Tandem / Puffer · 2 / 37 / 6 / 6 / 2 Min.**
 
 Schreiben Sie zuerst allein im Soekia-Protokoll Ihre **echte Prognose**: «Mit N = 5 statt N = 2 ändert sich die Vorhersage, indem … . Bei einem Trainingstext mit einer falschen Aussage erwarte ich …».
 
@@ -55,6 +55,19 @@ Bearbeiten Sie danach den digitalen Arbeitsweg mit [Soekia](https://www.soekia.c
 | Vergleich: ____________________ | ____________________ | ____________________ | ____________________ |
 
 Erzeugen Sie das **problematische Beispiel selbst**: «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → einen kurzen Text mit einer falschen Aussage einfügen → «Speichern» → «Modell aufbauen» → «start». Beobachten Sie, was das Modell daraus macht. Sichern Sie zusätzlich ein plausibles Beispiel und vergleichen Sie mit dem Papierexperiment. Bearbeiten Sie danach die Aufgabe auf der Seite [Vom Papagei zum neuronalen Netz](index.html#sprache-6) (Kätzchen, 6 Min.).
+
+#### Übung · KI-Aussagen prüfen (6 Min.)
+
+Auf der Seite [Festhalten](index.html#sprache-5) steht ein **konstruierter** Chatbot-Text mit vier «gesicherten Fakten». Er stammt nicht von einem echten Modell. Die Tandems teilen die Aussagen auf, prüfen sie mit unabhängigen Quellen (admin.ch, bfs.admin.ch) und notieren «stimmt», «stimmt nicht» oder «nicht belegbar» samt Quelle.
+
+| Aussage | Befund | Beleg |
+|---|---|---|
+| 1 · Landessprachen inklusive Englisch | stimmt nicht | Landessprachen: Deutsch, Französisch, Italienisch, Rätoromanisch (Bundesverfassung Art. 4) |
+| 2 · Bundesrat mit sieben Mitgliedern | stimmt | admin.ch |
+| 3 · rund 12 Millionen Einwohner | stimmt nicht | rund 9 Millionen (bfs.admin.ch) |
+| 4 · 90 % sprechen mindestens zwei Landessprachen, «Bundesamt für Sprachforschung» | nicht belegbar | Das Bundesamt gibt es nicht; die Quelle ist erfunden |
+
+Diese Prüfung liefert die Erfahrung für den Satz «Ich prüfe KI-Aussagen, indem …» in der Auswertung.
 
 #### Offline-Ersatz · Vorgegebene Beispielausgaben
 

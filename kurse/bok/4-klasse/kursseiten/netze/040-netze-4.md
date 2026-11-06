@@ -10,7 +10,12 @@
     <div class="callout" id="netze-bruecke">
       <!-- MD:START -->
 **Ausblick auf das Bildprojekt:** Dort arbeitet ein Netz wie dieses, aber mit 1280 statt 2 Eingaben. Die Zahlen liefert MobileNet, ein fertiges Netz, das unverändert bleibt. Nur das kleine Netz dahinter lernt Ihre zwei Klassen, nach denselben Schritten wie hier: vorhersagen, Fehler bewerten, Gewichte anpassen. [Wer weiss was? →](#projekt-wer-weiss-was)
-
+<!-- MD:END -->
+      <figure class="concept-figure">
+        <img alt="Ablauf im Bildprojekt: Ein Foto geht in MobileNet, das vorab trainiert wurde und fest bleibt. MobileNet liefert 1280 Zahlen je Foto. Ein kleines Netz lernt aus diesen Zahlen Gewichte und Bias und gibt eine Vorhersage für Klasse A oder B aus." loading="lazy" src="grafiken/mobilenet_bruecke.svg"/>
+        <figcaption>Der Weg eines Fotos im Projekt: MobileNet bleibt fest, nur das kleine Netz lernt.</figcaption>
+      </figure>
+      <!-- MD:START -->
 **Brückenkarte: Vom Neuron zum Bildprojekt**
 
 | Hier (DL 3–4) | Im Projekt (DL 5–8) |

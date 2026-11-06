@@ -1127,3 +1127,41 @@ def drei_rollen(trainingsbilder=100, neuronen=16):
     print(f'Training {werte[0]:.0%} · Validierung {werte[1]:.0%} (100 Bilder) · Test {werte[2]:.0%} ({len(test)} Bilder, {len(wrong)} Fehler).')
     print('Training ist fast immer hoch: Diese Bilder kennt das Netz. Nur Validierung und Test sind neue Bilder.')
     print('Achtung: Auch die neuen Bilder stammen von denselben Schreibern. Bei Fotos wäre das ein Datenleck, hier ein leichter Test.')
+
+
+def _leck_werte(trainingsbilder, neuronen):
+    """Dasselbe Netz, getestet mit Kopien der Trainingsbilder (Datenleck) und mit neuen Bildern."""
+    X, y, pool, test = _ziffern_daten()
+    if not 20 <= trainingsbilder <= 600: raise ValueError('trainingsbilder: Zahl von 20 bis 600.')
+    t = np.random.default_rng(1).permutation(pool)[:trainingsbilder]
+    netz = _ziffern_netz(X, y, t, neuronen, max_iter=300)
+    # Eine Kopie ist dasselbe Bild mit leichtem Rauschen, wie derselbe Gegenstand mit anderem Hintergrund.
+    kopien = np.clip(X[t] + np.random.default_rng(2).normal(0, .12, X[t].shape), 0, 1)
+    werte = [netz.score(X[t], y[t]), netz.score(kopien, y[t]), netz.score(X[test], y[test])]
+    return X, y, t, kopien, test, werte
+
+
+def datenleck_versuch(trainingsbilder=100, neuronen=16):
+    """Zeigt, wie ein Datenleck die Testleistung beschönigt: Kopien der Trainingsbilder gegen wirklich neue Bilder."""
+    X, y, t, kopien, test, werte = _leck_werte(trainingsbilder, neuronen)
+    fig = plt.figure(figsize=(12, 4.2)); gs = fig.add_gridspec(2, 6)
+    ax = fig.add_subplot(gs[:, 0:2])
+    ax.bar(range(3), np.array(werte) * 100, color=['#9aa9ad', '#b84d27', '#176c63'], width=.6)
+    for k, w in enumerate(werte): ax.text(k, w * 100 + 2, f'{w:.0%}', ha='center')
+    ax.set(xticks=range(3), xticklabels=['Training\n(bekannt)', '«Test» mit Kopien\n(Datenleck)', 'Test mit\nneuen Bildern'],
+           ylim=(0, 110), ylabel='Richtig (%)')
+    for k in range(4):
+        a = fig.add_subplot(gs[0, 2 + k]); a.imshow(X[t[k]].reshape(8, 8), cmap='gray_r'); a.axis('off')
+        a.set_title(f'Training: Ziffer {y[t[k]]}', fontsize=9)
+        a = fig.add_subplot(gs[1, 2 + k]); a.imshow(kopien[k].reshape(8, 8), cmap='gray_r'); a.axis('off')
+        a.set_title('«Test»: fast dasselbe Bild', fontsize=9, color='#b84d27')
+    fig.suptitle(f'Training mit {trainingsbilder} Bildern · derselbe Test, einmal mit Kopien, einmal mit neuen Bildern')
+    plt.tight_layout(); plt.show()
+    luecke = (werte[1] - werte[2]) * 100
+    print(f'Training {werte[0]:.0%} · «Test» mit Kopien {werte[1]:.0%} · Test mit neuen Bildern {werte[2]:.0%} ({len(test)} Bilder).')
+    if luecke >= 5:
+        print(f'Die Kopien lassen das Netz um {luecke:.0f} Prozentpunkte besser aussehen, als es mit neuen Bildern ist: Scheinleistung.')
+    else:
+        print(f'Hier beträgt der Unterschied nur {luecke:.0f} Prozentpunkte. Mit weniger Trainingsbildern, zum Beispiel 40, wird er viel grösser.')
+    print('Das Netz erkennt Bekanntes wieder; es hat nicht besser gelernt. Darum darf ein Test keine Kopien von Trainingsbildern enthalten.')
+    print('Auch die neuen Bilder stammen von denselben Schreibern; der Wert für neue Bilder ist deshalb noch etwas zu optimistisch.')

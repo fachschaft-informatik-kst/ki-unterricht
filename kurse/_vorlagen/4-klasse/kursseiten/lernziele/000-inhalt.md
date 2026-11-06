@@ -72,10 +72,10 @@
 ## Fremdes Modell kritisch prüfen
 <!-- MD:END -->
     <ul>
-      <li>Ich prüfe mit denselben Daten und Einstellungen, wie das andere Tandem T1/T2, V1 und P1/P2 getrennt hat, und vergleiche Originalergebnisse mit einem eigenen Nachlauf (K11, unbenotet).</li>
+      <li>Ich prüfe, wie das andere Tandem T1/T2, V1 und P1/P2 getrennt hat, und vergleiche seine Originalergebnisse mit einem Nachlauf mit denselben Einstellungen (K11, unbenotet).</li>
       <li>Ich probiere ein fremdes Modell mit unseren eigenen, anderen Bildklassen aus und beschreibe konkrete Vorhersagen.</li>
       <li>Ich unterscheide unabhängige Testbilder derselben Klassen von völlig anderen Klassen, erkläre die Grenzen der Vorhersagen und schlage einen prüfbaren Folgetest vor (K12).</li>
-      <li>Ich erkläre im vierminütigen Einzelgespräch unser eigenes Projekt selbstständig und begründe Vorgehen und Grenzen (K7–K10).</li>
+      <li>Ich erkläre im vierminütigen Einzelgespräch unser eigenes Projekt selbstständig, begründe unsere Entscheidungen und ordne die Ergebnisse ein (K7–K10).</li>
     </ul>
     <p class="small muted"><strong>Wo beurteilt?</strong> Persönliche Reflexion K12 (3 Punkte); der Daten- und Ergebnischeck K11 ist unbenotet; das Fachgespräch K7–K10 läuft parallel.</p>
     <a href="#fremdmodell">Zu DL 8: Fremdmodell prüfen →</a>

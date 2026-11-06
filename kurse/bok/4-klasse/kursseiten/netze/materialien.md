@@ -84,6 +84,6 @@ Erklären Sie einander mündlich die XOR-Grenze und den Signalweg. Schreiben Sie
 
 Danach vergleichen die Lernenden mit der Selbstkontrolle; die Lehrperson liest zwei bis drei Antworten an und sammelt offene Fragen für den Start in DL 5.
 
-**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt (Brückenkarte am Ende der Kursseite).
+**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt (Skizze und Brückenkarte am Ende der Kursseite).
 
 **Vorbereitungsauftrag bis DL 5:** Thema und zwei Klassen aus der [Themenliste](index.html#projekt-2) wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste; Vorlage in den Materialien zu DL 5 im Projektteil; wer zuerst einträgt, behält die Klasse), und passende Gegenstände besorgen (zehn verschiedene Exemplare, fünf je Klasse). Noch nicht fotografieren: Fotografiert wird in DL 5 erst nach dem Lernpfad und der Abnahme der Exemplarliste. Die Lehrperson gibt Thema und Klassen am Anfang von DL 5 frei, wenn beide Klassen noch frei sind (etwa eine Minute je Tandem, während die Tandems den Lernpfad lesen).

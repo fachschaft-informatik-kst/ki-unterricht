@@ -8,7 +8,7 @@
       "goal": "Den Einfluss von Kontext und Trainingstext auf eine Wortvorhersage untersuchen, ein Wortfolgemodell von einem neuronalen Sprachmodell unterscheiden und beschreiben, wie Sie KI-Aussagen prüfen.",
       "question": "Leitfrage: Warum ist eine plausible Fortsetzung nicht automatisch wahr?",
       "motivation": "Sprachmodelle können überzeugend schreiben, ohne die Richtigkeit einer Aussage zu prüfen.",
-      "product": "Ein dokumentierter Vergleich mit Soekia, ein plausibles und ein selbst erzeugtes problematisches Beispiel, zwei Grenzen der Analogie und ein eigener Satz, wie Sie KI-Aussagen prüfen.",
+      "product": "Ein dokumentierter Vergleich mit Soekia, ein plausibles und ein selbst erzeugtes problematisches Beispiel, zwei Grenzen der Analogie, ein selbst geprüfter Chatbot-Text und ein eigener Satz, wie Sie KI-Aussagen prüfen.",
       "zeit": "Ein digitaler Arbeitsweg: Soekia (soekia.ch/GPT) mit Link und Drei-Zeilen-Anleitung. Human or Not ist ein Live-Chat mit Fremden: nur nach schulischer Freigabe, nie zusätzlich. Soekia und die Beispielausgaben vorab testen. Die gebündelten Rückmeldungen zu Doppellektion 8 werden in «Ankommen» ausgegeben.",
       "phases": [
         {
@@ -85,7 +85,7 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 40,
+              "min": 37,
               "text": "Bearbeiten Sie den digitalen Arbeitsweg mit Soekia (soekia.ch/GPT): Verändern Sie pro Vergleich nur eine Einstellung (N-Gramm-Länge «N <= 2» gegen «N <= 5», Regler «Temperatur» oder Trainingstext) und vergleichen Sie mehrere Läufe, weil jeder «start» einen neuen Text schreibt. Sichern Sie Einstellung, Veränderung und Ausgabe sowie ein plausibles und ein selbst erzeugtes problematisches Beispiel im Protokoll: Erzeugen Sie dazu über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» einen Trainingstext mit einer falschen Aussage, klicken Sie «Modell aufbauen» und «start» und beobachten Sie, was das Modell daraus macht. Erklären Sie den Unterschied mit dem Papierexperiment. Bei technischem Ausfall denselben Vergleich mit den bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
             },
             {
@@ -97,13 +97,19 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 5,
+              "min": 6,
+              "text": "KI-Aussagen prüfen: Prüfen Sie die vier Aussagen im konstruierten Chatbot-Text auf der Seite «Festhalten» mit unabhängigen Quellen. Teilen Sie die Aussagen auf und notieren Sie je Aussage «stimmt», «stimmt nicht» oder «nicht belegbar» samt Quelle."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
               "text": "Frei verfügbarer Puffer für Technik oder Beispiele."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein belegter Vergleich und zwei kritisch eingeordnete Beispiele, eines davon durch eigenen Trainingstext erzeugt."
+              "text": "Ein belegter Vergleich, zwei kritisch eingeordnete Beispiele (eines davon durch eigenen Trainingstext erzeugt) und ein selbst geprüfter Chatbot-Text."
             }
           ]
         },
@@ -116,7 +122,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 4,
-              "text": "Sicherung, zuerst allein schreiben: Beantworten Sie die Leitfrage mit einem eigenen Beispiel und einem Merksatz und ergänzen Sie «Ich prüfe KI-Aussagen, indem …». Nennen Sie dabei zwei Unterschiede zwischen Wortfolgetabelle und neuronalem Sprachmodell."
+              "text": "Sicherung, zuerst allein schreiben: Beantworten Sie die Leitfrage mit einem eigenen Beispiel und einem Merksatz und ergänzen Sie «Ich prüfe KI-Aussagen, indem …», gestützt auf Ihre Prüfung des Chatbot-Textes. Nennen Sie dabei zwei Unterschiede zwischen Wortfolgetabelle und neuronalem Sprachmodell."
             },
             {
               "art": "Auftrag",

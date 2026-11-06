@@ -195,15 +195,22 @@ def vergleich_zeigen(exp):
     import matplotlib.pyplot as plt
     runs=exp['laeufe'];n=len(exp['einstellungen']['seeds'])
     fig,ax=plt.subplots(figsize=(7,4))
+    zeilen=[]
     for i,name in enumerate(('A','B')):
         vals=[r['val']*100 for r in runs if r['variante']==name]
+        train=float(np.mean([r['train']*100 for r in runs if r['variante']==name]))
         ax.bar(i,np.mean(vals),color=('#176c63','#be572b')[i],width=.55)
         if n>1:ax.scatter(np.full(n,i),vals,c='black',zorder=3)
-        ax.text(i,np.mean(vals)+3,f'{np.mean(vals):.1f} %',ha='center')
-    ax.set(xticks=[0,1],xticklabels=['A: ein Exemplar','B: zwei Exemplare'],ylim=(0,110),
+        ax.hlines(train,i-.35,i+.35,colors='#263b43',linestyles='--',zorder=4)
+        ax.text(i+.37,train,f'Training\n{train:.0f} %',va='center',fontsize=9)
+        ax.text(i,np.mean(vals)+3,f'{np.mean(vals):.1f} %',ha='center',bbox=dict(fc='white',ec='none',pad=1),zorder=5)
+        zeilen.append((name,train,float(np.mean(vals))))
+    ax.set(xticks=[0,1],xticklabels=['A: ein Exemplar','B: zwei Exemplare'],ylim=(0,110),xlim=(-.55,1.95),
            ylabel='Richtige Vorhersagen (%)',title=f'Validierung · {len(exp["daten"].val)} Bilder · '+('ein Lauf' if n==1 else 'Mittelwert und einzelne Läufe'))
     ax.axhline(50,ls=':',c='#52656a');ax.text(.5,52,'Immer dieselbe Klasse: 50 %',ha='center',fontsize=9)
     plt.tight_layout();plt.show()
+    for name,train,val in zeilen:print(f'{name}: Training {train:.0f} % · Validierung {val:.0f} % · Abstand {train-val:+.0f} Prozentpunkte')
+    print('Gestrichelt: Training. Diese Bilder kennt das Netz; V1 zeigt neue Exemplare. Ein grosser Abstand heisst: Das Netz erkennt Gesehenes besser als Neues (Überanpassung).')
     print('Beide Varianten: 8 Trainingsbilder pro Klasse, dasselbe Netz und dieselben Einstellungen.')
     print('A: 8 Fotos aus T1. B: je 4 aus T1 und T2. Validierung: nur V1.')
     print('Ein Lauf und eine Validierungsgruppe: eine Beobachtung, kein Beweis allgemeiner Überlegenheit.')

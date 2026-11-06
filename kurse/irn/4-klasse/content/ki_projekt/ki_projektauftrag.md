@@ -24,7 +24,7 @@ V1 dient der Auswahl. Erst nach der begründeten Wahl wird auf P1/P2 getestet. D
 4. **Was passiert mit neuen Bildern?** Testergebnis und drei konkrete Vorhersagen beschreiben; Nutzen und Grenzen nennen. Auch richtige Beispiele sind interessant – keine Fehler erfinden.
 5. **Was haben wir gelernt?** Fazit, nächster Versuch, Arbeitsteilung und verwendete Hilfen (einschliesslich KI).
 
-Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Wiederholungen mit drei festgelegten Startwerten sind vor Testeinsicht möglich; alle Ergebnisse berichten.
+Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Darum wiederholen Sie den Vergleich vor der Auswahl mit den drei festgelegten Startwerten 11, 22 und 33; alle Ergebnisse berichten.
 
 ## Etappen-Check: Bereit für den nächsten Schritt?
 
@@ -111,7 +111,7 @@ Für Gespräch, Wiedereinstieg und Technik bleibt Reserve. Bei einem nicht lösb
 
 Elf benotete Kriterien mit je **0–3 Punkten**, maximal **33 Punkte**. K1–K6: gemeinsame Projektabgabe (18); K7–K10: individuelles Fachgespräch (12); K12: persönliche Fremdreflexion (3). K11 ist der **unbenotete** Daten- und Ergebnischeck.
 
-**Note = 1 + 5 × Punktesumme / 33**, auf Viertelnoten gerundet. 16 Punkte → 3,5; 22 (Sollstufe: alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 26 → 5,0; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
+**Note = 1 + 5 × Punktesumme / 33**, auf Viertelnoten gerundet. 16 Punkte → 3,5; 22 (Sollstufe: alle Anforderungen vollständig erfüllt, alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 26 → 5,0; 33 → 6,0. Für eine 5 sind vier Punkte mehr nötig, zum Beispiel Stufe 3 in vier Kriterien. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
 
 ## Hilfsmittel und KI
 

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="Helvetica, Arial, sans-serif" font-size="14" role="img" aria-labelledby="mb-titel mb-beschr">
+  <title id="mb-titel">Vom Foto zur Vorhersage im Bildprojekt</title>
+  <desc id="mb-beschr">Ein Foto geht in MobileNet, das fest bleibt und 1280 Zahlen liefert. Ein kleines Netz lernt aus diesen Zahlen Gewichte und Bias und gibt eine Vorhersage aus.</desc>
+  <defs>
+    <marker id="pf" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="14" markerHeight="14" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#263b43"/></marker>
+  </defs>
+  <rect width="760" height="300" fill="#ffffff"/>
+
+  <g stroke="#263b43" stroke-width="2.5">
+    <rect x="20" y="40" width="90" height="150" rx="12" fill="#ffffff"/>
+    <rect x="150" y="40" width="150" height="150" rx="12" fill="#dae8fc"/>
+    <rect x="460" y="40" width="150" height="150" rx="12" fill="#d5e8d4"/>
+    <rect x="650" y="40" width="90" height="150" rx="12" fill="#fff2cc"/>
+  </g>
+
+  <g fill="#222" text-anchor="middle" font-weight="bold" font-size="15">
+    <text x="65" y="66">Foto</text>
+    <text x="225" y="66">MobileNet</text>
+    <text x="380" y="66">1280 Zahlen</text>
+    <text x="535" y="66">Kleines Netz</text>
+    <text x="695" y="66">Vorhersage</text>
+  </g>
+
+  <g stroke="#263b43" stroke-width="1.5">
+    <rect x="33" y="84" width="64" height="48" fill="#f2f2f2"/>
+    <circle cx="51" cy="99" r="6" fill="#f4c542"/>
+    <polygon points="34,131 56,108 70,121 80,112 96,131" fill="#9fb7c9"/>
+  </g>
+  <text x="65" y="156" text-anchor="middle" fill="#222" font-size="13">Ihr Foto</text>
+
+  <g fill="#222" text-anchor="middle" font-size="13">
+    <text x="225" y="94">vorab mit Millionen</text>
+    <text x="225" y="112">Fotos trainiert</text>
+    <text x="225" y="172">lernt nichts mehr</text>
+  </g>
+  <rect x="185" y="124" width="80" height="26" rx="13" fill="#263b43"/>
+  <text x="225" y="142" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="13">bleibt fest</text>
+
+  <g stroke="#263b43" stroke-width="1.5" fill="#ffffff">
+    <rect x="350" y="76" width="60" height="20"/>
+    <rect x="350" y="99" width="60" height="20"/>
+    <rect x="350" y="122" width="60" height="20"/>
+    <rect x="350" y="164" width="60" height="20"/>
+  </g>
+  <g fill="#222" text-anchor="middle" font-size="13">
+    <text x="380" y="91">0.8</text>
+    <text x="380" y="114">0.0</text>
+    <text x="380" y="137">2.3</text>
+    <text x="380" y="158" font-size="14">⋮</text>
+    <text x="380" y="179">0.3</text>
+  </g>
+  <text x="380" y="210" text-anchor="middle" fill="#222" font-size="13">für jedes Foto</text>
+
+  <g fill="#222" text-anchor="middle" font-size="13">
+    <text x="535" y="94">lernt aus Ihren</text>
+    <text x="535" y="112">Trainingsfotos</text>
+    <text x="535" y="172">Gewichte und Bias</text>
+  </g>
+  <rect x="495" y="124" width="80" height="26" rx="13" fill="#176c63"/>
+  <text x="535" y="142" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="13">lernt</text>
+
+  <g fill="#222" font-size="13">
+    <text x="662" y="96">A</text>
+    <text x="662" y="132">B</text>
+  </g>
+  <g stroke="#263b43" stroke-width="1.5">
+    <rect x="676" y="84" width="54" height="16" fill="#ffffff"/>
+    <rect x="676" y="120" width="54" height="16" fill="#ffffff"/>
+    <rect x="676" y="84" width="46" height="16" fill="#176c63"/>
+    <rect x="676" y="120" width="8" height="16" fill="#8d9aa0"/>
+  </g>
+  <g fill="#222" text-anchor="middle" font-size="13">
+    <text x="695" y="162">grösster Wert</text>
+    <text x="695" y="178">gewinnt</text>
+  </g>
+
+  <g fill="none" stroke="#263b43" stroke-width="3" marker-end="url(#pf)">
+    <line x1="113" y1="115" x2="145" y2="115"/>
+    <line x1="303" y1="115" x2="345" y2="115"/>
+    <line x1="413" y1="115" x2="455" y2="115"/>
+    <line x1="613" y1="115" x2="645" y2="115"/>
+  </g>
+
+  <g fill="#222" text-anchor="middle" font-size="14">
+    <text x="380" y="250"><tspan font-weight="bold">Fest:</tspan> MobileNet liefert die 1280 Zahlen und wird nicht verändert.</text>
+    <text x="380" y="274"><tspan font-weight="bold">Gelernt:</tspan> nur im kleinen Netz, seine Gewichte und sein Bias, wie beim einzelnen Neuron.</text>
+  </g>
+</svg>

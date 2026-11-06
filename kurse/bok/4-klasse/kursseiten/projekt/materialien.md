@@ -53,7 +53,7 @@ Klärt Etappenplan, fünf Reflexionen, Raster, Abgabekanal, Frist **vor DL8** un
 
 ### Verarbeiten · 60 Min. · Datenplan selbst erarbeiten
 
-**Tandem → Einzeln → Tandem · 40 / 10 / 10 Min. Puffer**
+**Tandem / Einzeln / Puffer · 45 / 5 / 10 Min.**
 
 #### Lesekarte · Drei Datenrollen, fünf unabhängige Gruppen
 
@@ -80,7 +80,9 @@ Klärt Etappenplan, fünf Reflexionen, Raster, Abgabekanal, Frist **vor DL8** un
 
 > **Selbstkontrolle:** Fall 1: Exemplar-Leck; vor dem Training gruppenrein korrigieren. Fall 2: grundsätzlich passend, weitere Datenchecks bleiben nötig. Fall 3: Test beeinflusst die Auswahl; kein unabhängiger Abschlusstest mehr. Fall 4: Hintergrund kann die Klasse verraten; beide Klassen unter vergleichbaren Bedingungen sammeln.
 
-Untersuchen Sie im Daten-Notebook ein Datenleck. Vergleichen Sie mit den dortigen Musterlösungen und übertragen Sie die Regeln auf Ihre eigenen Fotos.
+Führen Sie im Daten-Notebook den **Datenleck-Versuch** aus: Das Netz wird einmal mit leicht veränderten Kopien der Trainingsbilder und einmal mit wirklich neuen Bildern getestet (mit 40, 100 und 400 Trainingsbildern, Vermutung zuerst). Danach folgt der **Vergleich der drei Werte** (Training, Validierung, Test). Beide Antworten stehen im Protokoll der Seite «Datenregeln lernen». Vergleichen Sie mit den dortigen Selbstkontrollen und übertragen Sie die Regeln auf Ihre eigenen Fotos.
+
+> **Hinweis für die Lehrperson:** Der Versuch ist eine Vereinfachung mit Ziffernbildern (Bilder von 8 × 8 Pixeln); die «Kopie» ist das Trainingsbild mit leichtem Rauschen und steht für denselben Gegenstand mit anderem Hintergrund. Beispielwerte: 100 Trainingsbilder etwa 96 % mit Kopien gegen 84 % mit neuen Bildern, 40 Bilder etwa 100 % gegen 67 %, 400 Bilder etwa 96 % gegen 94 %. Auch die neuen Bilder stammen von denselben Schreibern; der Wert für neue Bilder ist deshalb noch etwas zu optimistisch. Beim ersten Ausführen lädt der Browser SciPy und scikit-learn nach (ca. 70 MB je Gerät, danach im Browser-Cache); die Rechenzeit liegt im Entwicklungssystem unter 5 Sekunden. Schulnetz und Geräte vorab einmal testen.
 
 #### Eigener Fünf-Gruppen-Plan
 
@@ -96,7 +98,7 @@ Unsere zwei Klassen: ____________________ / ____________________.
 
 **Stresstest:** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich. Halten Sie den Ort in Reflexion 2 fest.
 
-**Allein, 10 Min.:** Prüfen Sie ein eigenes P1-Beispiel. Ist es wirklich unabhängig? Notieren Sie einen möglichen Fehler und die Korrektur.
+**Allein, 5 Min.:** Prüfen Sie ein eigenes P1-Beispiel. Ist es wirklich unabhängig? Notieren Sie einen möglichen Fehler und die Korrektur.
 
 **Abnahme vor dem Fotografieren (ca. 2 Min.):** Lassen Sie die Liste anhand der fünf Abschlussfragen auf [Daten &amp; Fotos](index.html#projekt-3) von der Lehrperson oder einem Nachbartandem prüfen. Testen Sie vorab den Weg Handy → Laptop mit einem Foto.
 
@@ -163,7 +165,7 @@ Prüfen Sie **vor jedem Lauf** Datenrollen, Exemplare und Labels. Fehlende Daten
 
 **Was V1 aussagen kann:** V1 sind 16 Bilder, aber nur **ein Exemplar je Klasse** (acht Fotos desselben Gegenstands). 16 Bilder sind darum nicht 16 unabhängige Tests. Ein Bild entspricht 6,25 Prozentpunkten. **Faustregel (Richtwert, kein statistisches Kriterium):** Ein Unterschied von höchstens zwei Bildern ist kein Beleg. In DL 4 haben Sie gesehen, dass schon ein anderer Startwert ein anderes Ergebnis geben kann.
 
-Übernehmen Sie **tatsächliche** Ausgaben. Begründen Sie die Auswahl in **Reflexion 3 vor Testeinsicht**:
+Übernehmen Sie **tatsächliche** Ausgaben. Wiederholen Sie den Vergleich **vor der Auswahl** mit den drei Startwerten 11, 22 und 33 (ca. 5 Min., eigene Zelle im Versuchsnotebook) und tragen Sie jeden Lauf in die Tabelle ein: Bleibt die Reihenfolge von A und B in allen Läufen gleich? Begründen Sie die Auswahl in **Reflexion 3 vor Testeinsicht**:
 
 «Wir wählen …, weil auf V1 … . Das Beispiel … zeigt … . Eine andere Erklärung wäre … . Der Vergleich belegt noch nicht …». **Bei Gleichstand:** «Beide Varianten sind auf V1 gleichwertig; wir wählen …, weil …» (anderes Argument, etwa konkrete Vorhersagen).
 

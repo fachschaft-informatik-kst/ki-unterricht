@@ -28,7 +28,7 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
   </article>
 </div>
 <p class="callout"><strong>Gemeinsamer Check K11 (unbenotet):</strong> Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2, ein nachgerechnetes Ergebnis und eine kurze Rückmeldung untersuchen. Diese Arbeit ist die Grundlage der persönlichen Reflexion, wird aber nicht mit zusätzlichen Punkten bewertet.</p>
-<p class="small"><strong>Stufe 2 ist die Sollstufe:</strong> Wer alle Anforderungen erfüllt, erreicht sie. Stufe 3 verlangt zusätzlich Begründung, Vertiefung oder Übertragung. Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
+<p class="small"><strong>Stufe 2 ist die Sollstufe:</strong> Wer alle Anforderungen vollständig erfüllt, erreicht sie. Alle elf Kriterien auf Stufe 2 ergeben 22 Punkte und die Note 4,25. Für eine 5 sind vier Punkte mehr nötig, zum Beispiel Stufe 3 in vier Kriterien. Stufe 3 verlangt zusätzlich Begründung, Vertiefung oder Übertragung. Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
 <div aria-label="Bewertungsraster, horizontal scrollbar" class="table-scroll" role="region" tabindex="0">
   <table class="rubric">
     <caption>11 benotete Kriterien × 0–3 Punkte = maximal 33 Punkte</caption>
@@ -87,8 +87,8 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
         <th scope="row">K6 · Fazit &amp; Grenzen<small>Projekt</small></th>
         <td>Fazit ohne Bezug zu den Ergebnissen.</td>
         <td>Allgemeines Fazit; Grenzen nur genannt.</td>
-        <td>Frage beantwortet; Grenzen des kleinen Datensatzes und Einzellaufs erklärt.</td>
-        <td>Zusätzlich nächste Untersuchung passend zu einer konkreten Grenze begründet.</td>
+        <td>Frage beantwortet; Grenzen nach Ursache (Daten, Versuchsaufbau, Zufall) erklärt.</td>
+        <td>Zusätzlich Folgen der Grenzen für die Aussage und eine dazu passende nächste Untersuchung begründet.</td>
         <td><select aria-label="Punkte K6: Fazit &amp; Grenzen" data-score="k6"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
       <tr>
@@ -111,7 +111,7 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
         <th scope="row">K9 · Ergebnisse kritisch einordnen<small>Gespräch</small></th>
         <td>Zahlen oder Zuverlässigkeit falsch eingeordnet.</td>
         <td>Ergebnisse beschrieben; Reichweite bleibt unklar.</td>
-        <td>Ergebnisse, konkrete Beispiele und Grenzen in eigenen Worten erklärt.</td>
+        <td>Erklärt in eigenen Worten, was die Zahlen aussagen und was nicht.</td>
         <td>Zusätzlich mögliche andere Erklärungen und nötige Belege diskutiert.</td>
         <td><select aria-label="Punkte K9: Ergebnisse kritisch einordnen" data-score="k9"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
@@ -119,8 +119,8 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
         <th scope="row">K10 · Individuelles Verständnis &amp; Transfer<small>Gespräch</small></th>
         <td>Eigenes Projektverständnis nicht erkennbar.</td>
         <td>Nur einzelne Arbeitsteile erklärbar; viel Unterstützung nötig.</td>
-        <td>Erklärt das gemeinsame Projekt selbstständig und schlägt einen passenden nächsten Versuch vor.</td>
-        <td>Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet Anpassungen.</td>
+        <td>Erklärt das gemeinsame Projekt selbstständig, auch Teile, die der Partner bearbeitet hat.</td>
+        <td>Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet notwendige Anpassungen.</td>
         <td><select aria-label="Punkte K10: Individuelles Verständnis und Transfer" data-score="k10"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
       <tr>

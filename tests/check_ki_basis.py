@@ -71,6 +71,9 @@ def main():
     u.ziffer_durchs_netz(netz,0);rejects(lambda:u.ziffer_durchs_netz(netz,10**6))
     u.neuron_ziffern(0,1);rejects(lambda:u.neuron_ziffern(3,3))
     u.drei_rollen(100);rejects(lambda:u.drei_rollen(5))
+    # Datenleck: Kopien der Trainingsbilder täuschen eine bessere Leistung vor als neue Bilder.
+    werte=u._leck_werte(40,16)[-1];assert werte[1]>werte[2]+.15,werte
+    u.datenleck_versuch(100);rejects(lambda:u.datenleck_versuch(5))
     for regler in (u.ziffern_regler,u.ziffer_regler,u.xor_lernen_regler):regler()
     u.ziffern_vorschau()
     # Lernschritt-Diagramm ohne Matplotlib-Ausgabe: das Notebook soll auch nach

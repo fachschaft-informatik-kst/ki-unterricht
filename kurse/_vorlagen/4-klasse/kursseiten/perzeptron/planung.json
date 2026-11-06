@@ -14,7 +14,7 @@
       "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und was unverändert bleibt.",
       "product": "Eine nachvollziehbare Schwimmbad- und AND-Rechnung, passende Parameter für AND/OR und ein erklärter Lernschritt.",
-      "zeit": "Schwimmbad-Neuron (Experiment 1) und Lernschritt (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2). Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt.",
+      "zeit": "Schwimmbad-Neuron (Experiment 1) und einen ersten Lernschritt mit AND (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2) und lassen danach selbst einen Lernschritt mit OR ablaufen (Experiment 3). Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -96,8 +96,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 32,
+              "min": 27,
               "text": "Arbeiten Sie im Notebook «Neuron-Labor» im Experiment 2: Stellen Sie AND und OR mit Gewichten und Bias ein und halten Sie je eine passende Einstellung fest."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Experiment 3 selbst: Wählen Sie die Aufgabe OR und sagen Sie vor jedem Klick auf «Nächstes Beispiel» voraus, ob das Neuron korrigiert wird. Rechnen Sie die erste Korrektur von Hand nach und halten Sie fest, welcher Wert gleich bleibt und warum."
             },
             {
               "art": "Auftrag",
@@ -114,7 +120,7 @@
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine eigene Handrechnung und nachvollziehbare Regler-Einstellungen für AND und OR."
+              "text": "Eine eigene Handrechnung, nachvollziehbare Regler-Einstellungen für AND und OR und ein selbst vorhergesagter und nachgerechneter Lernschritt."
             }
           ]
         },
@@ -133,7 +139,7 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Vergleichen Sie zwei Vorher-Nachher-Erklärungen aus der Demo (oder aus dem eigenen Lernversuch) und prüfen Sie, ob die korrigierten Werte zur Rechnung passen."
+              "text": "Vergleichen Sie zwei Vorher-Nachher-Erklärungen aus dem eigenen Lernversuch (Experiment 3) und prüfen Sie, ob die korrigierten Werte zur Rechnung passen."
             },
             {
               "art": "Input",

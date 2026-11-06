@@ -89,7 +89,7 @@ Die Bilder von A und B unterscheiden sich. Ähnliche Aufnahmebedingungen verwend
     <details>
       <summary>Wie stabil ist das Ergebnis?</summary>
       <div class="detail-body">
-        <p>Nach Absprache und vor Testeinsicht: drei vorab festgelegte Startwerte 11, 22 und 33. Alle Ergebnisse berichten. Keine Voraussetzung für eine gute Note.</p>
+        <p>Wiederholen Sie den Vergleich vor der Auswahl mit den drei vorab festgelegten Startwerten 11, 22 und 33 (eigene Zelle im Versuchsnotebook, ca. 5 Minuten). Berichten Sie alle Ergebnisse und prüfen Sie, ob A und B in jedem Lauf gleich abschneiden. Nach Testeinsicht sind keine weiteren Startwerte erlaubt.</p>
       </div>
     </details>
     <nav class="page-next" aria-label="Weiter im Projekt">
