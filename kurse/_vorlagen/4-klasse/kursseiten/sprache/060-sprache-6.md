@@ -8,7 +8,7 @@
       <strong>Vier Sätze zum Mitnehmen</strong>
       <ol>
         <li>Wie im Bildprojekt gibt es zwei Phasen: ein grosses Vortraining und danach eine Feinabstimmung für eine Aufgabe (Transfer Learning). Das Vortraining besteht darin, das nächste <a href="#glossar-token">Token</a> vorherzusagen.</li>
-        <li>Wörter werden in Zahlen umgewandelt, ähnlich wie MobileNet Bilder in 1280 Merkmale umwandelt; ähnliche Wörter erhalten ähnliche Zahlen.</li>
+        <li>Wörter werden in Zahlen umgewandelt (Fachwort: <a href="#glossar-einbettung">Einbettung</a>), ähnlich wie MobileNet Bilder in 1280 Merkmale umwandelt; ähnliche Wörter erhalten ähnliche Zahlen.</li>
         <li>Der Text liefert seine «Labels» selbst: Das tatsächlich folgende Wort ist die richtige Antwort. Darum braucht das Vortraining keine von Hand beschrifteten Daten.</li>
         <li>Ein Prozentwert beim nächsten Wort sagt, wie gut es nach dem Training in diesen Kontext passt, nicht, ob die Aussage wahr ist.</li>
       </ol>

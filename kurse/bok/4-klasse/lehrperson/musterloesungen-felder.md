@@ -39,9 +39,10 @@
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `eva_erklaerung` | Spamfilter: Eingabe neue E-Mail; Erfahrungsschatz gelernte Parameter aus beschrifteten Trainingsmails; Ausgabe Spam oder kein Spam. Eine einzelne Benutzung ändert die Parameter nicht automatisch. Das Schachprogramm folgt hier festen Suchregeln. |
-| `wissen_fragen` | «Ist die Figur erfunden?» → ja → «Kommt sie in einem Film vor?» → ja → «Hat sie besondere Kräfte?»; jede Antwort schränkt die Kandidaten ein. |
-| `wissen_unbekannt` | Das System kann die Figur verfehlen oder nach einer neuen Figur fragen; daraus allein lässt sich nicht schliessen, ob es später selbst lernt. |
-| `wissen_regeln` | Entwickler haben Fragekatalog und Entscheidungslogik vorgegeben. Das reine Fragenstellen belegt kein selbstständiges Lernen. |
+| `wissen_fragen` | Beispielbaum für fünf Tiere: «Lebt es im Wasser?» → ja → «Hat es Flossen?» → ja → Fisch, nein → Frosch; auf «Lebt es im Wasser?» → nein → «Hat es Federn?» → ja → Adler, nein → «Bellt es?» → ja → Hund, nein → Katze. Jede Antwort bestimmt die nächste Frage. |
+| `wissen_unbekannt` | Der Baum führt trotzdem zu einem der fünf Tiere (zum Beispiel Adler für den Pinguin) oder endet ohne Ergebnis. Er hat keine Regel für das neue Tier und lernt es nicht von selbst. |
+| `wissen_regeln` | Das Tandem hat Fragen und Reihenfolge festgelegt. Der Baum ändert sich nur, wenn Menschen ihn umbauen; er vergleicht keine Ergebnisse und passt sich nicht an. |
+| `wissen_akinator` | Beobachtungen können abweichen. Mögliche Belege: Er rät auch seltene Figuren, die niemand in eine feste Fragenliste geschrieben hätte; bei mehrfach falschem Raten fragt er nach dem Namen der Figur und erweitert seine Datenbank; er nutzt Erfahrungen früherer Spielender. Wie er genau arbeitet, ist nicht öffentlich; die Aussage «lernt aus früheren Spielen» stützt sich auf die Beschreibung des Anbieters und auf Beobachtungen. |
 | `lernend_nachbarn` | In meinem Beispiel lagen mehrere ähnliche Animationsfilme nahe beieinander; Gemeinsamkeiten waren Genre und ähnliche Bewertungsmuster. Tatsächliche Filmtitel aus dem eigenen Versuch einsetzen. |
 | `lernend_aendert` | Bei Genre werden Genregruppen sichtbar; bei vorhergesagter Bewertung ändern sich die Farben je Nutzer. Ein anderer User Index kann andere Prognosen ergeben. |
 | `lernend_daten` | Vermutlich aus Filmmerkmalen, Nutzendenbewertungen und ihren Mustern; die genaue Implementierung bleibt ohne Dokumentation offen. |
@@ -86,7 +87,7 @@
 | `lr_beob` | Eine sehr kleine Lernrate verändert die Parameter langsamer, hier braucht sie viele Runden; mittlere und grosse Lernraten führen schneller ans Ziel. Aus einem Lauf allein lässt sich keine grundsätzlich beste Lernrate bestimmen. |
 | `iris_richtig` | Beispielwert: 27 von 30; echte Notebook-Ausgabe übernehmen. |
 | `iris_gewicht` | Abhängig vom trainierten Versuch; das Merkmal mit dem grösseren Betrag des gelernten Gewichts eintragen und die Ausgabe nennen. |
-| `perzeptron` | Beim Fehler Ziel 1, Vorhersage 0 werden bei aktiven Eingaben die Gewichte erhöht; bei Ziel 0, Vorhersage 1 gesenkt. Das Modell speichert Gelerntes in Gewichten und Bias. |
+| `perzeptron` | Gewicht: Einfluss einer Eingabe; Bias: verschiebt die Schwelle. Beim Lernen ändern sich nur Gewichte und Bias. Die Lernregel vergleicht die Ausgabe mit dem Ziel: Bei Ziel 1 und Vorhersage 0 werden die Gewichte aktiver Eingaben erhöht, bei Ziel 0 und Vorhersage 1 gesenkt (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Das Neuron korrigiert sich nicht selbst; das Verfahren ändert seine Werte. Das Gelernte steckt in Gewichten und Bias. |
 
 ## DL 4 · XOR und Ziffern
 

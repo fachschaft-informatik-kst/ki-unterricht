@@ -17,7 +17,7 @@
 
     <text x="565" y="68" font-weight="bold" font-size="16">2 · Die Realität verändert sich</text>
     <text x="565" y="92" font-size="13">Im Quartier gibt es weniger Kredite,</text>
-    <text x="565" y="110" font-size="13">Geschäfte und Häuser gehen ein</text>
+    <text x="565" y="110" font-size="13">Weniger Geld für Geschäfte und Häuser</text>
 
     <text x="565" y="268" font-weight="bold" font-size="16">3 · Neue Daten entstehen</text>
     <text x="565" y="292" font-size="13">Es gibt mehr Zahlungsprobleme</text>
@@ -37,6 +37,7 @@
     <text x="380" y="160" font-size="17">Rückkopplung</text>
     <text x="380" y="182" font-size="13" font-weight="normal">Das Modell erzeugt die Daten,</text>
     <text x="380" y="199" font-size="13" font-weight="normal">die es später bestätigen.</text>
-    <text x="380" y="220" font-size="13" font-weight="normal">Ungleichheit wird verstärkt.</text>
+    <text x="380" y="220" font-size="13" font-weight="normal">Ungleichheit kann verstärkt werden.</text>
   </g>
+  <text x="380" y="376" text-anchor="middle" font-size="13" font-style="italic" fill="#4a5a60">Gedankenexperiment mit vereinfachten Annahmen, kein gemessener Fall</text>
 </svg>

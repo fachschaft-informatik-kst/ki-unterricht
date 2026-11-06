@@ -56,7 +56,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 12,
-              "text": "Zeigt die EVA-Grafik mit Erfahrungsschatz. Vergleicht einen menschlich festgelegten Entscheidungsbaum mit einem lernenden Spamfilter. Führt Labels, Ähnlichkeit und Rückmeldung als drei Lernsignale ein und erklärt den Memory-Auftrag. Die Beispiele Akinator und Filmempfehlungen dienen der Erklärung, nicht als zusätzliche Tool-Wechsel."
+              "text": "Zeigt die EVA-Grafik mit Erfahrungsschatz. Vergleicht einen menschlich festgelegten Entscheidungsbaum (zum Beispiel einen Tier-Ratebaum auf Papier) mit einem lernenden Spamfilter. Führt Labels, Ähnlichkeit und Rückmeldung als drei Lernsignale ein und erklärt den Memory-Auftrag. Akinator und Filmempfehlungen dienen der Erklärung: Akinator sieht aus wie ein Entscheidungsbaum, nutzt aber Erfahrungen früherer Spielender; Filmempfehlungen lernen aus Rückmeldungen. Kein Wechsel zu zusätzlichen Werkzeugen."
             },
             {
               "art": "Auftrag",

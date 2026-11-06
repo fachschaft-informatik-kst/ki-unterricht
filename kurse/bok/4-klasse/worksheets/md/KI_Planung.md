@@ -63,7 +63,7 @@ Fachlich sichern: Ein regelbasiertes System kann KI sein, lernt aber nicht aus D
 
 Memory-Material und Rollen vorab bereitstellen. Die Gruppe bleibt über die drei Runden bestehen; nur die Rollen wechseln. Nach jeder Runde ein Lernsignal und eine Beobachtung notieren. Danach NIM gemeinsam am Beamer: Was ändert sich durch Rückmeldung?
 
-Akinator und Filmempfehlungen als Beispiele erläutern, nicht als weitere Werkzeuge öffnen. Smiley, K-Means und Begriffscheck stehen als Material auf der Kursseite; Quick, Draw! nur ohne persönliche Motive. Fachlich unterscheiden: Im Memory lernt ein Mensch; NIM zeigt das KI-Beispiel. Beim unüberwachten Lernen werden keine Zielklassen vorgegeben.
+Beispiele erläutern, nicht als weitere Werkzeuge öffnen: ein Tier-Ratebaum auf Papier (wissensbasiert), Filmempfehlungen (lernend) und Akinator als Kontrastfall (sieht nach Regeln aus, nutzt aber Erfahrungen früherer Spielender). Smiley, K-Means und Begriffscheck stehen als Material auf der Kursseite; Quick, Draw! nur ohne persönliche Motive. Fachlich unterscheiden: Im Memory lernt ein Mensch; NIM zeigt das KI-Beispiel. Beim unüberwachten Lernen werden keine Zielklassen vorgegeben.
 
 Zum Schluss schreibt jede Person die Leitfrage «Wie lernt KI?» an einem ungesehenen Beispiel (zum Beispiel einem Empfehlungsdienst) auf, bevor die Lehrperson klärt. Die Selbstkontrolle steht auf der Kursseite (Kapitel 8).
 

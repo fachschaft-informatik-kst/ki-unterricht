@@ -50,7 +50,9 @@ Eine andere gut begründete Wahl ist ebenfalls richtig. Bewertet werden zwei nac
 
 Beim **Spamfilter** ist die Eingabe eine E-Mail. Beim Training sieht das Modell Beispiele mit richtigen Labels und passt Parameter an. Diese Parameter bilden den «Erfahrungsschatz». Bei einer neuen E-Mail entsteht daraus eine Vorhersage; nicht jede Benutzung trainiert das Modell erneut.
 
-**Akinator:** Fragen wie «Ist die Figur erfunden?» oder «Ist sie aus einem Film?» schränken Möglichkeiten ein. Eine unbekannte Figur kann nicht vorhanden sein. Fragen und Entscheidungslogik sind hinterlegtes Wissen. Ein realer Onlinedienst kann zusätzlich Daten sammeln und lernen; das Beispiel allein belegt keine konkrete Implementierung.
+**Wissensbasiert (Ratebaum auf Papier):** Fragen wie «Lebt es im Wasser?» oder «Hat es Federn?» schränken die Möglichkeiten ein. Ein Tier, das nicht im Baum steht, kann der Baum nicht erkennen; er endet ohne Ergebnis oder bei einem falschen Tier. Fragen und Reihenfolge sind hinterlegtes Wissen, das nur Menschen ändern.
+
+**Akinator (Kontrastfall):** Er stellt ebenfalls Ja-Nein-Fragen, nutzt aber Erfahrungen früherer Spielender; bei mehrfach falschem Raten fragt er nach dem Namen der Figur und erweitert seine Datenbank. Er ist deshalb kein Beispiel für ein System, das nicht lernt. Wie er genau arbeitet, ist nicht öffentlich.
 
 **Filmlandkarte:** Nahe Filme können Gemeinsamkeiten bei Genre oder Nutzerbewertungen haben. Beim Wechsel des Nutzers können sich prognostizierte Bewertungen ändern. **Konkrete Filmtitel und Beobachtungen müssen aus dem eigenen Versuch stammen.**
 

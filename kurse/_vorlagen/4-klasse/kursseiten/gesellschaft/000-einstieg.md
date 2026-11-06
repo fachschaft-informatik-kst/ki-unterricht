@@ -12,4 +12,4 @@
   </div>
 </details>
 <!-- /LESSONS:gesellschaft -->
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-fairness">Fairness</a> · <a href="#glossar-bias-daten">Datenverzerrung</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-fairness">Fairness</a> · <a href="#glossar-bias-daten">Datenverzerrung</a> · <a href="#glossar-rueckkopplung">Rückkopplung</a> · <a href="#glossar-wmd">WMD</a></p>

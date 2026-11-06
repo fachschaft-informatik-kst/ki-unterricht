@@ -5,6 +5,7 @@ import base64
 import hashlib
 import io
 import json
+from math import comb
 from pathlib import Path
 
 import numpy as np
@@ -272,10 +273,11 @@ def fremdtest(exp, eigene, variante=None):
     print('Zeile = Ihre Klasse, Spalte = Vorhersage des fremden Modells:')
     print(f'{"":14s}'+''.join(f'{"sagt "+k:>16s}' for k in fremd.klassen))
     for c in range(2):print(f'{eigene.klassen[c]:14s}'+''.join(f'{M[c,k]:16d}' for k in range(2)))
-    print(f'Trennschärfe: {trenn:.0%} (Zuordnung {eigene.klassen[0]} → {fremd.klassen[best[0]]}, {eigene.klassen[1]} → {fremd.klassen[best[1]]}); Raten ergäbe etwa 50 %.')
+    zufall=sum(comb(n,k)*max(k,n-k) for k in range(n+1))/2**n/n  # Erwartung der Trennschärfe bei reinem Raten
+    print(f'Trennschärfe: {trenn:.0%} (Zuordnung {eigene.klassen[0]} → {fremd.klassen[best[0]]}, {eigene.klassen[1]} → {fremd.klassen[best[1]]}). Reines Raten ergäbe bei {n} Bildern im Mittel etwa {zufall:.0%}, nicht 50 %.')
     print(f'Mittlerer Modellwert: {sicher.mean():.0%}; {int(np.sum(sicher>=.9))} von {n} Bildern mit mindestens 90 %.')
     if trenn>=.9:print('Das fremde Modell trennt Ihre Klassen fast vollständig, obwohl es sie nie gelernt hat. Prüfen Sie, woran: Gegenstand, Form, Farbe, Hintergrund oder Licht?')
-    elif trenn>=.65:print('Das fremde Modell trennt Ihre Klassen teilweise. Welche Bilder gehen schief, und was haben sie gemeinsam?')
-    else:print('Das fremde Modell trennt Ihre Klassen kaum besser als Raten. Seine Merkmale taugen für Ihre Aufgabe nicht.')
+    elif trenn>=.65:print('Das fremde Modell trennt Ihre Klassen teilweise. Bei wenigen Bildern kann auch Zufall so aussehen. Welche Bilder gehen schief, und was haben sie gemeinsam?')
+    else:print('Das fremde Modell trennt Ihre Klassen kaum besser als Raten. Es hat diese Unterscheidung nie gelernt.')
     print('Das Modell kann nur zwischen seinen zwei Klassen wählen; «weder noch» kennt es nicht. Ein hoher Modellwert heisst nicht, dass es sich auskennt.')
     return dict(variante=variante,matrix=M,trennschaerfe=float(trenn),zuordnung=best,mittlerer_modellwert=float(sicher.mean()))

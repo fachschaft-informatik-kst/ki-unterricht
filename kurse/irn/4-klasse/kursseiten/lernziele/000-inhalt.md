@@ -98,7 +98,7 @@
 ## Gesellschaftliche Folgen beurteilen
 <!-- MD:END -->
     <ul>
-      <li>Ich prüfe ein Modell mit den Kriterien Opacity, Scale und Damage und beschreibe eine Rückkopplung, die Ungleichheit verstärkt.</li>
+      <li>Ich prüfe ein Modell mit den Kriterien Opacity, Scale und Damage und beschreibe eine mögliche Rückkopplung, die Ungleichheit verstärken kann.</li>
       <li>Ich analysiere an einem Fall, wer von einer automatisierten Entscheidung betroffen ist und wie Benachteiligung entstehen kann.</li>
       <li>Ich lese eine Quelle wie Cathy O’Neils Vortrag kritisch (Interesse, Beispiele, Vergleich, Belege).</li>
       <li>Ich schlage eine konkrete Verbesserung vor und begründe, wie sich ihre Wirkung überprüfen lässt.</li>

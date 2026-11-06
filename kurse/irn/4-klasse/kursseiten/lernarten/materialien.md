@@ -25,7 +25,9 @@ Vervollständigen Sie: «Ein System lernt aus Daten, wenn …». Verwechseln Sie
 
 #### Inputkarte · Eingabe, Verarbeitung, Ausgabe und Erfahrung
 
-**Spamfilter:** E-Mail als Eingabe → Verarbeitung mit gelerntem Modell → Ausgabe «Spam / kein Spam». Der Erfahrungsschatz sind die beschrifteten Trainingsbeispiele; gelernte Parameter werden beim Training angepasst.
+**Spamfilter:** E-Mail als Eingabe → Verarbeitung mit gelerntem Modell → Ausgabe «Spam / kein Spam». Die beschrifteten Trainingsbeispiele sind die Erfahrungen; der Erfahrungsschatz ist das, was das Modell daraus gelernt und behalten hat (bei einem Neuron die Gewichte und der Bias).
+
+**Wissensbasiert:** Fragen und Reihenfolge legen Menschen fest, zum Beispiel bei einem Tier-Ratebaum auf Papier ([Kursseite Kapitel 2](index.html#lernarten-2)). **Akinator** sieht ähnlich aus, ist aber ein Kontrastfall: Er nutzt Erfahrungen früherer Spielender und fragt bei mehrfach falschem Raten nach dem Namen der Figur (Implementierung nicht öffentlich).
 
 | Lernart | Verfügbare Information | Leitfrage |
 |---|---|---|

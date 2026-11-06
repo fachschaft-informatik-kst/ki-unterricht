@@ -97,4 +97,4 @@ Sie arbeiten als Tandem selbstständig; die Lehrperson führt ab Beginn die vier
 <!-- /LESSONS:fremdmodell -->
   </div>
 </details>
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-transfer-learning">Transfer Learning</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-modellwert">Modellwert</a> · <a href="#glossar-trennschaerfe">Trennschärfe</a></p>

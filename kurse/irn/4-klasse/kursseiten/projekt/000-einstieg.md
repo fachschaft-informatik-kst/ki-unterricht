@@ -156,4 +156,4 @@ In den Doppellektionen 5–7 legen Sie als Tandem Tagesziele, Aufgaben und Tempo
 <!-- /LESSONS:projekt -->
   </div>
 </details>
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-epoche">Epoche</a> · <a href="#glossar-startwert">Startwert</a></p>
