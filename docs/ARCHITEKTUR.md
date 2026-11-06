@@ -69,7 +69,7 @@ zwischen Vorlagen und Kursen übertragen.
 ### Seitenmodus und Unternavigation (4. Klasse)
 
 Ein Bereich im `manifest.json` kann `"pages": "<Name der Startseite>"` setzen
-(Bildprojekt: `"Fahrplan"`). Dann zeigt der Router jedes Kapitel des Bereichs
+(Bildprojekt und DL 8: `"Fahrplan"`). Dann zeigt der Router jedes Kapitel des Bereichs
 als eigene Seite; alles ausserhalb der Kapitel bildet die Startseite. Die
 Navigationsleiste listet Startseite und Kapitel in Arbeitsreihenfolge, die Zahl
 vor einem Kapitel (`kapitel-nr`) ist die Nummer der Etappe. Ohne Skript bleiben
@@ -81,8 +81,15 @@ Elternbereichs; mit `"navChild": {"label": "✎", "title": "…"}` erscheinen si
 zusätzlich als Eintrag darin (Journal). Das Bildprojekt gliedert sich in den
 Fahrplan (`000-einstieg.md`) und die Seiten `010`–`050`; Kapitel-IDs
 (`projekt-regeln`, `projekt-2`, `projekt-3`, `projekt-4`, `projekt-abschluss`)
-und Antwortschlüssel bleiben stabil. `tests/check_project_pages.cjs` prüft das
-Verhalten im Browser (`make test-browser` und der nächtliche CI-Lauf).
+und Antwortschlüssel bleiben stabil.
+
+DL 8 (`fremdmodell`) folgt demselben Schema: Der Fahrplan nennt den Start und vier
+Etappen, jede Etappe hat eine Seite (`dl8-warum`, `dl8-vorbereiten`, `reproduktion`,
+`fremdtest`, `dl8-abschluss`). Die Häkchen im Fahrplan (`data-check`) bleiben im
+Browser; `progress.js` hebt in jedem Fahrplan (`.roadmap`) die nächste offene
+Etappe hervor. Die Fortschrittsanzeige des Projekts zählt nur Häkchen ohne das
+Präfix `dl8-`. `tests/check_project_pages.cjs` prüft das Verhalten beider Bereiche
+im Browser (`make test-browser` und der nächtliche CI-Lauf).
 
 ## Build und Veröffentlichung
 

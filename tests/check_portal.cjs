@@ -58,17 +58,22 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   for(let i=0;i<11;i++)await scoring.nth(i).selectOption('0');assert((await p.locator('#grade-result').innerText()).includes('0 / 33 Punkte → Note 1.00'));
   for(let i=0;i<11;i++)await scoring.nth(i).selectOption('2');assert((await p.locator('#grade-result').innerText()).includes('22 / 33 Punkte → Note 4.25'));
   await p.reload();assert((await p.locator('#grade-result').innerText()).includes('22 / 33 Punkte → Note 4.25'));await p.screenshot({path:'/tmp/ki-rubric.png',fullPage:true});
-  // DL 8 is a separate, graded submission after the frozen own project.
+  // DL 8 is a separate, graded submission after the frozen own project. It uses the same roadmap-and-pages layout as the project.
   await p.locator('.nav a[href="#fremdmodell"]').click();
-  assert.equal(await p.locator('#fremdmodell details.kapitel').count(),5,'DL 8 must have five chapters');
-  assert(await p.locator('#fremdmodell #dl8-warum').evaluate(e=>e.open));
-  await p.locator('#fremdmodell .dl8-quicklinks a[href="#reproduktion"]').click();
-  await p.waitForFunction(()=>document.querySelector('#fremdmodell #reproduktion')?.open,null,{timeout:10000}); // hashchange opens details asynchronously
+  assert.equal(await p.locator('#fremdmodell details.kapitel').count(),5,'DL 8 must have five pages');
+  assert.equal(await p.locator('#fremdmodell .roadmap-step').count(),5,'DL 8 roadmap lists the start plus four stages');
+  await p.locator('#fremdmodell .roadmap').waitFor({state:'visible'});
+  assert.equal(await p.locator('#fremdmodell #dl8-start a[href="#dl8-warum"]').count(),1,'Roadmap start opens the idea page');
+  for(const [stage,target] of Object.entries({1:'#dl8-vorbereiten',2:'#reproduktion',3:'#fremdtest',4:'#dl8-abschluss'}))
+    assert.equal(await p.locator('#dl8-etappe-'+stage+' a.roadmap-go[href="'+target+'"]').count(),1,'DL 8 stage '+stage+' opens its own page');
+  assert.equal(await p.locator('#fremdmodell .lesson-plan').count(),1,'DL 8 keeps its single lesson description');
+  await p.locator('#dl8-etappe-2 a.roadmap-go').click();
+  await p.waitForFunction(()=>document.querySelector('#fremdmodell #reproduktion')?.classList.contains('is-page'),null,{timeout:10000}); // hashchange shows the page asynchronously
   assert.equal(await p.locator('#fremdmodell #reproduktion').count(),1);
   assert.equal(await p.locator('#fremdmodell #fremdtest').count(),1);
   await p.locator('#fremdmodell textarea[data-journal="reproduktion"]').fill('Prüfsumme gleich; V1 A: 50 %, B: 75 %.');
-  await p.locator('#fremdmodell .dl8-quicklinks a[href="#fremd-reflexion"]').click();
-  await p.waitForFunction(()=>document.querySelector('#fremdmodell #dl8-abschluss')?.open,null,{timeout:10000}); // same navigation contract
+  await p.locator('.nav-sub a[href="#dl8-abschluss"]').click();
+  await p.waitForFunction(()=>document.querySelector('#fremdmodell #dl8-abschluss')?.classList.contains('is-page'),null,{timeout:10000}); // same navigation contract
   await p.locator('[data-answer="fremd_rueckmeldung"]').fill('Andere Beleuchtung gezielt prüfen.');
   for(const n of [1,2]){
     await p.locator('[data-answer="fremd_name_'+n+'"]').fill('Testperson '+n);

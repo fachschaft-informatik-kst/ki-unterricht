@@ -56,10 +56,12 @@ with TemporaryDirectory() as tmp:
     manifest_path = root / "kursseiten/manifest.json"
     manifest = json.loads(manifest_path.read_text())
     assert next(s for s in manifest["sections"] if s["id"] == "projekt").get("pages"), "Project must use page mode"
+    assert next(s for s in manifest["sections"] if s["id"] == "fremdmodell").get("pages"), "DL 8 must use page mode"
     section = lambda m, name: next(s for s in m["sections"] if s["id"] == name)
     for change in (
         lambda m: section(m, "projekt").update(pages=""),
         lambda m: section(m, "projekt").update(pages=True),
+        lambda m: section(m, "fremdmodell").update(pages=" "),
         lambda m: section(m, "journal").update(navChild={"label": "✎"}),
         lambda m: section(m, "einstieg").update(navChild={"label": "x", "title": "y"}),
     ):
