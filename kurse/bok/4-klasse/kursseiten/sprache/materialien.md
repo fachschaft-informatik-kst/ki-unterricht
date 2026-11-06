@@ -1,6 +1,8 @@
 ## Doppellektion 09
 
-**Bereitlegen:** Papierstreifen zum Abdecken; gebündelte Rückmeldungen zu DL 8 (ein Blatt je Tandem); Soekia ([soekia.ch/gpt.html](https://www.soekia.ch/gpt.html)) mit [Kursprotokoll](index.html#sprache-3) **vorab testen** (Prompt, «Schau hinein», N-Gramm-Länge, Temperatur, eigener Trainingstext). Pflichtweg ist Soekia; die [Papagei-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke) und der Turing-Test sind Vertiefung. Keine zusätzliche Tool-Kette.
+**Bereitlegen:** Papierstreifen zum Abdecken; gebündelte Rückmeldungen zu DL 8 (ein Blatt je Tandem); Soekia ([soekia.ch/GPT](https://www.soekia.ch/GPT/)) mit [Kursprotokoll](index.html#sprache-3) **vorab testen** (Ablauf siehe unten, im Schulnetz und auf den Schülergeräten). Hilfen der PH Schwyz: [Handreichung für Lehrpersonen (PDF)](https://www.soekia.ch/GPT/SoekiaGPT_Handreichung_f%C3%BCr_Lehrpersonen.pdf) und [Startseite mit Erklärvideo](https://www.soekia.ch/gpt.html). Pflichtweg ist Soekia; die [Papagei-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke) und der Turing-Test sind Vertiefung. Keine zusätzliche Tool-Kette.
+
+**Soekia in sechs Handgriffen** (Oberfläche am 6.11.2026 geprüft; Beschriftungen können sich ändern): (1) soekia.ch/GPT öffnen. (2) «start»: Soekia schreibt einen Text aus den voreingestellten Märchen; das Textfeld «Schreibe mir ein Märchen.» steuert den Text nicht. (3) «Schau hinein»: Dokumente, N-Gramme, Wortvorschläge, entstehender Text. (4) Schaltfläche «N &lt;= 5» (Wahl 1 bis 6) ändert die N-Gramm-Länge; der Regler «Temperatur» (0–100, Vorgabe 60) liegt unter «Auswahl anpassen». (5) «Pause» und «selbst auswählen»: nächste Wörter selbst aus den Wortvorschlägen wählen. (6) Eigener Text: «Einstellungen» → «Neue Kollektion» (ersetzt alle Dokumente; «Fortfahren») → «Dokument hinzufügen» (bis 20 000 Zeichen) → «Speichern» → «Modell aufbauen» → «start». Beobachtet: Mit dem Text «Die Hauptstadt der Schweiz ist Zürich. Die Hauptstadt von Frankreich ist Paris. …» gibt Soekia diese Aussagen wieder.
 
 ### Ankommen · 5 Min. · Mitnehmen und Plausibel ist nicht wahr
 
@@ -45,14 +47,14 @@ Die Lehrperson erklärt den Zusammenhang mit der Kursgrafik und fasst die **vier
 
 Schreiben Sie zuerst allein im Soekia-Protokoll Ihre **echte Prognose**: «Mit N = 5 statt N = 2 ändert sich die Vorhersage, indem … . Bei einem Trainingstext mit einer falschen Aussage erwarte ich …».
 
-Bearbeiten Sie danach den Pflichtweg mit [Soekia](https://www.soekia.ch/gpt.html). Ändern Sie pro Vergleich **nur eine Einstellung** (N-Gramm-Länge, Temperatur oder Trainingstext), nicht mehrere Bedingungen gleichzeitig.
+Bearbeiten Sie danach den Pflichtweg mit [Soekia](https://www.soekia.ch/GPT/). Ändern Sie pro Vergleich **nur eine Einstellung** (N-Gramm-Länge «N &lt;= 2» gegen «N &lt;= 5», Regler «Temperatur» oder Trainingstext), nicht mehrere Bedingungen gleichzeitig. Weil Soekia bei jedem «start» einen neuen Text schreibt, vergleichen Sie mehrere Läufe (zum Beispiel je drei) und nicht nur einen.
 
-| Satzanfang / Einstellung | Genau eine Veränderung | Beobachtete Ausgabe | Plausibel? Wahr? Welcher Beleg fehlt? |
+| Einstellung (N, Temperatur, Trainingstext) | Genau eine Veränderung | Beobachtete Ausgabe | Plausibel? Wahr? Welcher Beleg fehlt? |
 |---|---|---|---|
 | Ausgang: ____________________ | keine | ____________________ | ____________________ |
 | Vergleich: ____________________ | ____________________ | ____________________ | ____________________ |
 
-Erzeugen Sie das **problematische Beispiel selbst**: Fügen Sie bei den Trainingstexten eine falsche Aussage hinzu und beobachten Sie, was das Modell daraus macht. Sichern Sie zusätzlich ein plausibles Beispiel und vergleichen Sie mit dem Papierexperiment. Bearbeiten Sie danach die Aufgabe auf der Seite [Vom Papagei zum neuronalen Netz](index.html#sprache-6) (Kätzchen, 6 Min.). Weitere Stationen und die Papagei-Lernstrecke sind freiwillig.
+Erzeugen Sie das **problematische Beispiel selbst**: «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → einen kurzen Text mit einer falschen Aussage einfügen → «Speichern» → «Modell aufbauen» → «start». Beobachten Sie, was das Modell daraus macht. Sichern Sie zusätzlich ein plausibles Beispiel und vergleichen Sie mit dem Papierexperiment. Bearbeiten Sie danach die Aufgabe auf der Seite [Vom Papagei zum neuronalen Netz](index.html#sprache-6) (Kätzchen, 6 Min.). Weitere Stationen und die Papagei-Lernstrecke sind freiwillig.
 
 #### Offline-Ersatz · Vorgegebene Beispielausgaben
 

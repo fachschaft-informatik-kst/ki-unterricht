@@ -1,4 +1,4 @@
-<details class="kapitel" id="sprache-3" data-kurz="Mit Soekia Kontext und Wortwahl verändern und Texte vergleichen." open>
+<details class="kapitel" id="sprache-3" data-kurz="Mit Soekia N-Gramm-Länge, Temperatur und Trainingstext verändern und Texte vergleichen." open>
   <summary><span class="kapitel-nr">3</span>
     <h2 class="kapitel-titel">Übertragen: Soekia</h2>
   </summary>
@@ -7,12 +7,12 @@
       <article>
         <b>3 · Übertragen</b>
         <!-- MD:START -->
-Untersuchen Sie mit Soekia, einem didaktischen Sprachmodell der PH Schwyz, den Einfluss von Kontext und Trainingstext. Halten Sie einen gelungenen und einen selbst erzeugten problematischen Text fest.
+Untersuchen Sie mit Soekia, einem didaktischen Sprachmodell der PH Schwyz, den Einfluss von Kontextlänge (N-Gramm-Länge), Temperatur und Trainingstext. Halten Sie einen gelungenen und einen selbst erzeugten problematischen Text fest.
 <!-- MD:END -->
         <ol>
-          <li><b>Starten:</b> Öffnen Sie <a href="https://www.soekia.ch/gpt.html" target="_blank" rel="noopener noreferrer">soekia.ch/gpt.html</a>, geben Sie einen Satzanfang ein (zum Beispiel «Es war einmal») und starten Sie das Modell. Mit «Schau hinein» sehen Sie die Trainingstexte (Dokumente), die N-Gramme, die Wortvorschläge und den entstehenden Text.</li>
-          <li><b>Vergleichen:</b> Verändern Sie pro Versuch nur eine Einstellung: N-Gramm-Länge 2 gegen 5 mit demselben Satzanfang, danach niedrige gegen hohe Temperatur.</li>
-          <li><b>Problem selbst erzeugen:</b> Fügen Sie bei den Dokumenten einen eigenen kurzen Text mit einer falschen Aussage hinzu (zum Beispiel «Die Hauptstadt der Schweiz ist Zürich.», mehrmals) und lassen Sie das Modell den Satz fortsetzen. Was übernimmt es aus dem Trainingstext, und prüft es, ob das stimmt?</li>
+          <li><b>Starten:</b> Öffnen Sie <a href="https://www.soekia.ch/GPT/" target="_blank" rel="noopener noreferrer">soekia.ch/GPT</a> und klicken Sie auf «start». Soekia schreibt einen Text aus seinen Trainingstexten (voreingestellt sind Märchen). Das Textfeld mit dem Auftrag («Schreibe mir ein Märchen.») müssen Sie nicht ändern: Es bestimmt den Text nicht. «Schau hinein» zeigt, wie das Modell arbeitet: die Dokumente (Trainingstexte), die N-Gramme, die Wortvorschläge und den entstehenden Text. Mit «Pause» und «selbst auswählen» wählen Sie die nächsten Wörter selbst aus den Wortvorschlägen.</li>
+          <li><b>Vergleichen:</b> Verändern Sie pro Versuch nur eine Einstellung. Stellen Sie die N-Gramm-Länge auf «N &lt;= 2» und dann auf «N &lt;= 5» und starten Sie jeweils neu: Welcher Text hängt besser zusammen? Danach den Regler «Temperatur» (unter «Auswahl anpassen») niedrig und hoch stellen: Welche Wörter wählt das Modell?</li>
+          <li><b>Problem selbst erzeugen:</b> Öffnen Sie «Einstellungen» → «Neue Kollektion» (ersetzt die Märchen) → «Dokument hinzufügen». Fügen Sie einen eigenen kurzen Text mit einer falschen Aussage ein, zum Beispiel «Die Hauptstadt der Schweiz ist Zürich.» (mehrmals, dazu ein, zwei richtige Sätze), klicken Sie «Speichern», «Modell aufbauen» und «start». Was gibt das Modell wieder, und prüft es, ob das stimmt?</li>
         </ol>
       </article>
     </div>
@@ -35,7 +35,7 @@ Untersuchen Sie mit Soekia, einem didaktischen Sprachmodell der PH Schwyz, den E
             </tr>
             <tr>
               <th>Was haben Sie pro Versuch verändert?</th>
-              <td><select data-answer="soe_variable" aria-label="Was verändert?"><option value="">–</option><option value="n">Nur die N-Gramm-Länge</option><option value="temperatur">Nur die Temperatur</option><option value="trainingstext">Nur den Trainingstext</option><option value="kontext">Nur den Kontext (Satzanfang)</option><option value="wortwahl">Nur die Wortwahl</option><option value="beides">Mehreres abwechselnd</option></select></td>
+              <td><select data-answer="soe_variable" aria-label="Was verändert?"><option value="">–</option><option value="n">Nur die N-Gramm-Länge</option><option value="temperatur">Nur die Temperatur</option><option value="trainingstext">Nur den Trainingstext</option><option value="kontext">Nur den Kontext (selbst gewählte Anfangswörter)</option><option value="wortwahl">Nur die Wortwahl</option><option value="beides">Mehreres abwechselnd</option></select></td>
             </tr>
             <tr>
               <th>Gelungener Text (Ausschnitt)</th>

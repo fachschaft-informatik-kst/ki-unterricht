@@ -187,7 +187,7 @@ Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1
 
 **Mögliche Beobachtung:** Vier sichtbare Wörter ergeben oft einen nachvollziehbareren Satz als zwei, aber selbst längerer Kontext verhindert Widersprüche nicht.
 
-**Beispiel für eine problematische Fortsetzung, nicht als echtes Soekia-Ergebnis ausgeben:** Nach dem Hinzufügen des Trainingstexts «Die Hauptstadt der Schweiz ist Zürich.» setzt das Modell den Satz entsprechend fort; oder «Eine Person ist zuerst 20 und später 80 Jahre alt.» Das Modell gibt wieder, was in seinen Trainingstexten steht, und prüft nicht, ob es stimmt. Grammatik und Plausibilität beweisen keine Faktentreue. Die echten Texte aus den Versuchen sind im Protokoll zu dokumentieren.
+**Beispiel für eine problematische Fortsetzung (mit einer eigenen Kollektion am 6.11.2026 so beobachtet; die echten Texte der Lernenden gehören ins Protokoll):** Mit dem Trainingstext «Die Hauptstadt der Schweiz ist Zürich. Die Hauptstadt von Frankreich ist Paris. …» schreibt Soekia genau diese Aussagen. Das Modell gibt wieder, was in seinen Trainingstexten steht, und prüft nicht, ob es stimmt (die Bundesstadt ist Bern). Oder: «Eine Person ist zuerst 20 und später 80 Jahre alt.» Grammatik und Plausibilität beweisen keine Faktentreue.
 
 **Grenzen des vereinfachten Papageis:** sehr kurzer Kontext; seltene oder ungesehene Wortfolgen sind kaum abgedeckt. Er zählt Häufigkeiten, während heutige neuronale Sprachmodelle die Vorhersage aus **gelernten Gewichten und vielen Schichten** berechnen und typischerweise mit **Tokens** arbeiten.
 

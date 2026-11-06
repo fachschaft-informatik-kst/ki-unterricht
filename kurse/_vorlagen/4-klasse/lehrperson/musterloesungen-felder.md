@@ -188,7 +188,7 @@
 | `soe_gut_text` | Erfundenes Textbeispiel: «Die Schülerin öffnete das Buch und las die erste Seite.» |
 | `soe_gut_beleg` | Die Handlung ist zusammenhängend, die Personen- und Zeitbezüge widersprechen sich nicht. |
 | `soe_problem_art` | Falsche Aussage aus dem Trainingstext übernommen (bei selbst erzeugtem Beispiel); sonst Widerspruch. |
-| `soe_problem_text` | Erfundenes Textbeispiel (nicht als echtes Soekia-Ergebnis ausgeben): Nach dem Hinzufügen des Trainingstexts «Die Hauptstadt der Schweiz ist Zürich.» setzt das Modell «Die Hauptstadt der Schweiz ist …» mit «Zürich» fort. Oder: «Heute ist die Figur zwölf Jahre alt. Gestern feierte sie ihren achtzigsten Geburtstag.» |
+| `soe_problem_text` | Beispiel, wie es mit einer eigenen Kollektion entsteht (echte Ausgabe im Protokoll festhalten, nicht dieses Beispiel abschreiben): Trainingstext «Die Hauptstadt der Schweiz ist Zürich. Die Hauptstadt von Frankreich ist Paris. Die Hauptstadt der Schweiz ist Zürich.» → Soekia schreibt «Die Hauptstadt der Schweiz ist Zürich. Die Hauptstadt von Frankreich ist Paris …». Oder: «Heute ist die Figur zwölf Jahre alt. Gestern feierte sie ihren achtzigsten Geburtstag.» |
 | `soe_problem_beleg` | Das Modell gibt wieder, was in seinen Trainingstexten steht; es prüft nicht, ob es stimmt (die Hauptstadt ist Bern). Ein grammatikalisch korrekter, plausibel klingender Satz kann inhaltlich falsch sein. |
 | `turing_eindruck` | Beispiel: Ich vermutete einen Chatbot. |
 | `turing_richtig` | Beispiel: «Ja»; erst nach der Auflösung eintragen. |
