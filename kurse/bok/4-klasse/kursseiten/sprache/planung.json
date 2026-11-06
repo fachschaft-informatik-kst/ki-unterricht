@@ -4,12 +4,12 @@
       "id": "09",
       "view": "sprache",
       "title": "Wie entstehen Sprachmodelle?",
-      "rueckblick": "Im Bildprojekt haben Sie Vorhersagen und deren Grenzen geprüft. Heute untersuchen Sie Vorhersagen für Sprache.",
-      "goal": "Den Einfluss von Kontext untersuchen und ein Wortfolgemodell von einem neuronalen Sprachmodell unterscheiden.",
+      "rueckblick": "In Doppellektion 8 hat das fremde Modell Ihre eigenen Klassen einer seiner zwei Klassen zugeordnet: Ein Modell antwortet immer, auch wenn keine Antwort passt. Heute untersuchen Sie, was das für Vorhersagen mit Sprache bedeutet.",
+      "goal": "Den Einfluss von Kontext und Trainingstext auf eine Wortvorhersage untersuchen, ein Wortfolgemodell von einem neuronalen Sprachmodell unterscheiden und beschreiben, wie Sie KI-Aussagen prüfen.",
       "question": "Leitfrage: Warum ist eine plausible Fortsetzung nicht automatisch wahr?",
       "motivation": "Sprachmodelle können überzeugend schreiben, ohne die Richtigkeit einer Aussage zu prüfen.",
-      "product": "Ein dokumentierter Kontextvergleich, ein plausibles und ein problematisches Beispiel sowie zwei Grenzen der Analogie.",
-      "zeit": "Ein digitaler Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia, nicht beides als Pflicht. Human or Not nur als schulisch freigegebene Wahlalternative, nie zusätzlich; Live-Chats mit Fremden sind keine Pflicht.",
+      "product": "Ein dokumentierter Vergleich mit Soekia, ein plausibles und ein selbst erzeugtes problematisches Beispiel, zwei Grenzen der Analogie und ein eigener Satz, wie Sie KI-Aussagen prüfen.",
+      "zeit": "Ein digitaler Pflichtweg: Soekia mit Link und Drei-Zeilen-Anleitung. Die Papagei-Lernstrecke und der Turing-Test (Human or Not, nur nach schulischer Freigabe) sind Vertiefung, nie zusätzliche Pflicht; Live-Chats mit Fremden sind keine Pflicht. Soekia und die Beispielausgaben vorab testen. Die gebündelten Rückmeldungen zu Doppellektion 8 werden in «Ankommen» ausgegeben.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -19,13 +19,19 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 5,
+              "min": 2,
+              "text": "Lesen Sie die gebündelte Rückmeldung zu Ihrem Projekt aus Doppellektion 8 und notieren Sie: Was nehmen wir mit? Lesen Sie auch Ihre Transferfrage vom Schluss von Doppellektion 8."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 3,
               "text": "Ergänzen Sie «Heute gehen wir …» auf zwei Arten. Vergleichen Sie, welche Fortsetzung plausibel wirkt und ob Sie wissen können, dass sie wahr ist."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Zwei Fortsetzungen und eine erste Unterscheidung von plausibel und wahr."
+              "text": "Eine mitgenommene Erkenntnis aus der Rückmeldung, zwei Fortsetzungen und eine erste Unterscheidung von plausibel und wahr."
             }
           ]
         },
@@ -38,7 +44,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Erinnern Sie sich zuerst an das Bildprojekt: Eine überzeugende Klassifikation konnte trotzdem falsch sein. Schreiben Sie danach abwechselnd je ein Wort zu demselben Satzanfang. Lassen Sie einmal nur die letzten zwei, einmal die letzten vier Wörter sichtbar. Vergleichen Sie, wie der Kontext Ihre Fortsetzung verändert und weshalb eine plausible Fortsetzung trotzdem nicht wahr sein muss."
+              "text": "Erinnern Sie sich zuerst an Doppellektion 8: Das fremde Modell ordnete Ihre eigenen Klassen trotzdem einer seiner zwei Klassen zu. Ein Modell antwortet immer, auch wenn keine Antwort passt. Schreiben Sie danach abwechselnd je ein Wort zu demselben Satzanfang. Lassen Sie einmal nur die letzten zwei, einmal die letzten vier Wörter sichtbar. Vergleichen Sie, wie der Kontext Ihre Fortsetzung verändert und weshalb eine plausible Fortsetzung trotzdem nicht wahr sein muss."
             },
             {
               "art": "Ergebnis",
@@ -49,43 +55,55 @@
         },
         {
           "phase": "Informieren",
-          "titel": "Vom Wortfolgemodell zum Netz",
-          "minutes": 15,
+          "titel": "Vom Wortfolgemodell zum Netz in vier Sätzen",
+          "minutes": 12,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Erklärt zusammenhängend das Papagei-Modell: Häufigkeiten von Wortfolgen liefern Fortsetzungen. Zeigt danach die Grafik «Papagei-Modell und neuronales Sprachmodell»: gleiches Ziel, nächstes Token vorhersagen, aber trainierte Gewichte, Zahlendarstellungen ähnlicher Wörter und grösserer Kontext statt blosser Häufigkeitstabelle. Beide Verfahren garantieren keine Wahrheit. Nennt einen digitalen Arbeitsweg und die passenden Pflichtstationen; die Alternative dient nur bei Bedarf."
+              "min": 12,
+              "text": "Erklärt knapp das Papagei-Modell (Häufigkeiten von Wortfolgen liefern Fortsetzungen) und zeigt die Grafik «Papagei-Modell und neuronales Sprachmodell». Brücke in vier Sätzen (Seite «Vom Papagei zum neuronalen Netz»): Vortraining und Feinabstimmung wie beim Transfer Learning im Bildprojekt; Wörter werden zu Zahlen; der Text liefert die richtige Antwort selbst; ein Prozentwert ist keine Wahrheit. Stellt Soekia als Pflichtweg vor (Link und Drei-Zeilen-Anleitung: N-Gramm-Länge 2 und 5, Temperatur, eigener Trainingstext). Die Papagei-Lernstrecke und der Turing-Test sind Vertiefung."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein Modellverständnis als Grundlage für den Vergleich."
+              "text": "Ein Modellverständnis als Grundlage für den Vergleich und ein klarer Pflichtweg."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Ein Werkzeug gründlich untersuchen",
-          "minutes": 50,
+          "titel": "Soekia gründlich untersuchen",
+          "minutes": 53,
           "schritte": [
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 2,
+              "text": "Notieren Sie vor dem digitalen Arbeitsweg allein eine echte Prognose im Soekia-Protokoll: Wie verändert N = 5 statt N = 2 die nächste Wortvorhersage, und was passiert, wenn der Trainingstext eine falsche Aussage enthält?"
+            },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 40,
-              "text": "Bearbeiten Sie den gewählten Arbeitsweg: ausgewählte Papagei-Stationen oder Soekia. Verändern Sie jeweils nur den Kontext oder die Wortwahl. Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein problematisches Beispiel im passenden Protokoll. Erklären Sie den Unterschied mit dem Papierexperiment. Die nicht gewählte Strecke und weitere Stationen sind freiwillig, kein Wechselauftrag. Bei technischem Ausfall denselben Kontextvergleich mit bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
+              "text": "Bearbeiten Sie den Pflichtweg mit Soekia: Verändern Sie pro Vergleich nur eine Einstellung (N-Gramm-Länge, Temperatur oder Trainingstext). Sichern Sie Satzanfang, Veränderung und Ausgabe sowie ein plausibles und ein selbst erzeugtes problematisches Beispiel im Protokoll: Fügen Sie dazu bei den Trainingstexten eine falsche Aussage hinzu und beobachten Sie, was das Modell daraus macht. Erklären Sie den Unterschied mit dem Papierexperiment. Die Papagei-Lernstrecke und der Turing-Test sind freiwillig, kein Wechselauftrag. Bei technischem Ausfall denselben Vergleich mit den bereitgestellten Beispielausgaben untersuchen; keine neue Tool-Kette beginnen."
             },
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 10,
-              "text": "Formulieren Sie vor dem digitalen Arbeitsweg allein eine Erwartung: Wie verändert ein grösserer Kontext die nächste Wortvorhersage? Halten Sie sie für den späteren Vergleich fest."
+              "wer": "Tandem",
+              "min": 6,
+              "text": "Bearbeiten Sie die Aufgabe auf der Seite «Vom Papagei zum neuronalen Netz» (Kätzchen-Beispiel) und das Protokoll dazu."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Frei verfügbarer Puffer für Technik, Beispiele oder eine vertiefende Station."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein belegter Vergleich und zwei kritisch eingeordnete Beispiele."
+              "text": "Ein belegter Vergleich und zwei kritisch eingeordnete Beispiele, eines davon durch eigenen Trainingstext erzeugt."
             }
           ]
         },
@@ -97,14 +115,8 @@
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 2,
-              "text": "Erklären Sie anhand Ihrer Beispiele, weshalb eine plausible Fortsetzung nicht automatisch wahr ist. Nennen Sie zwei Unterschiede zwischen Wortfolgetabelle und neuronalem Sprachmodell."
-            },
-            {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 2,
-              "text": "Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen falscher, aber überzeugender Ausgaben?"
+              "min": 4,
+              "text": "Sicherung, zuerst allein schreiben: Beantworten Sie die Leitfrage mit einem eigenen Beispiel und einem Merksatz und ergänzen Sie «Ich prüfe KI-Aussagen, indem …». Nennen Sie dabei zwei Unterschiede zwischen Wortfolgetabelle und neuronalem Sprachmodell."
             },
             {
               "art": "Auftrag",
@@ -113,15 +125,15 @@
               "text": "Teilen Sie zwei Beispiele und prüfen Sie gemeinsam, weshalb Plausibilität keine Wahrheitsprüfung ist."
             },
             {
-              "art": "Auftrag",
-              "wer": "Einzeln",
+              "art": "Input",
+              "wer": "Lehrperson",
               "min": 2,
-              "text": "Sicherung: Beantworten Sie einzeln die Leitfrage mit einem eigenen Beispiel und einem Merksatz: Was leisten Sprachmodelle bei der Vorhersage, und was lässt sich daraus nicht über Wahrheit ableiten?"
+              "text": "Sichert die gemeinsame Grenze und verbindet sie mit Doppellektion 10: Wer trägt die Folgen falscher, aber überzeugender Ausgaben? Liest ein bis zwei Transferfragen aus Doppellektion 8 vor."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein eigener Merksatz mit Beispiel zur Unterscheidung von plausibler Vorhersage und Wahrheit."
+              "text": "Ein eigener Merksatz mit Beispiel und ein Satz zur Prüfung von KI-Aussagen."
             }
           ]
         }

@@ -4,6 +4,8 @@
   </summary>
   <div class="kapitel-body">
     <p>Das ist die <strong>letzte Lektion zum Thema KI</strong>. Nehmen Sie sich zum Schluss ein paar Minuten für einen Rückblick auf den ganzen Themenblock: von «Was ist KI?» über das Neuron und Ihr Bildprojekt bis zu den Sprachmodellen und der Frage, wer die Folgen trägt.</p>
+    <p>Der rote Faden des Kurses: <strong>Eine Vorhersage ist keine Garantie.</strong> Ein Modell antwortet immer, auch wenn keine Antwort passt, und ein sicherer Ton oder ein hoher Prozentwert ist kein Beleg.</p>
+    <label class="field answer"><span>Kurssynthese (3 Minuten, allein): Wo kann eine Vorhersage falsch sein? Nennen Sie je ein Beispiel aus drei Doppellektionen, zum Beispiel Schulweg-Regeln (Doppellektion 1), Hintergrund und Licht im Bildprojekt, die fremden Klassen in Doppellektion 8 oder ein Sprachmodell (Doppellektion 9).</span><textarea data-answer="rueck_synthese" maxlength="10000" placeholder="Eine Vorhersage kann falsch sein, wenn … (Beispiel 1) … (Beispiel 2) … (Beispiel 3)" rows="4"></textarea></label>
     <div class="table-scroll">
       <table class="typen">
         <thead>

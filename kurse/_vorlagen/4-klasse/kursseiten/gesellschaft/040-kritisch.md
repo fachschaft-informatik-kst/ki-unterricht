@@ -1,8 +1,9 @@
-<details class="kapitel" id="kritisch" data-kurz="Pro und Contra: Wie überzeugend sind Warnung und Forderung von Cathy O’Neil?" open>
+<details class="kapitel" id="kritisch" data-kurz="Wahl · Pro und Contra: Wie überzeugend sind Warnung und Forderung von Cathy O’Neil?">
   <summary><span class="kapitel-nr">4</span>
-    <h2 class="kapitel-titel">Debatte: Cathy O’Neil kritisch lesen</h2>
+    <h2 class="kapitel-titel">Debatte: Cathy O’Neil kritisch lesen (Wahl)</h2>
   </summary>
   <div class="kapitel-body">
+    <p class="small"><strong>Vertiefung, ca. 20 Minuten.</strong> Im Fallgespräch (Kapitel 2, 3 und 5) genügen die fünf Leitfragen unten als Gesprächshilfe; die Debatte in zwei Seiten machen Sie nur, wenn Ihre Lehrperson sie ansetzt oder Sie Zeit haben.</p>
     <p>Ein TED Talk ist eine <strong>zugespitzte Warnung</strong>, keine Studie. O’Neils Anliegen ist wichtig und begründet. Gerade deshalb prüfen Sie ihre Aussagen in einer kurzen Debatte so, wie man jede Quelle prüft.</p>
     <ol>
       <li><strong>Seiten bilden (1 Min.).</strong> Die Klasse teilt sich in zwei Seiten. <strong>Pro:</strong> «O’Neils Warnung ist überzeugend, ihre Forderung ist richtig.» <strong>Contra:</strong> «Die Warnung ist zugespitzt, Modelle können auch besser sein als Menschen, und die Forderung hat Nebenwirkungen.»</li>

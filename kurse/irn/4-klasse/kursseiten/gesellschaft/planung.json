@@ -4,12 +4,12 @@
       "id": "10",
       "view": "gesellschaft",
       "title": "Wer trägt die Folgen?",
-      "rueckblick": "Bild- und Sprachmodelle liefern Vorhersagen, keine Garantien. Heute prüfen Sie die Folgen von Entscheidungen auf dieser Grundlage.",
-      "goal": "Ein Modell mit Opacity, Scale und Damage prüfen, eine Rückkopplung erklären und eine überprüfbare Massnahme mit Zielkonflikt begründen.",
+      "rueckblick": "Bild- und Sprachmodelle liefern Vorhersagen, keine Garantien: In Doppellektion 8 hat das fremde Modell trotzdem immer geantwortet, in Doppellektion 9 war ein Text plausibel, aber nicht wahr. In Doppellektion 1 haben Sie beim Fall «Schulweg» gefragt, wer festlegt, was Schaden heisst. Heute prüfen Sie die Folgen von Entscheidungen auf dieser Grundlage.",
+      "goal": "Ein Modell mit Opacity, Scale und Damage prüfen, eine Rückkopplung erklären, eine überprüfbare Massnahme mit Zielkonflikt begründen und zusammenfassen, wo Vorhersagen im Kurs falsch sein können.",
       "question": "Leitfrage: Sind gleiche Regeln automatisch fair?",
       "motivation": "Entscheidungen mit KI betreffen Menschen. Ein begründetes Urteil braucht einen konkreten Fall, Belege und einen Blick auf die Folgen.",
-      "product": "Ein begründetes Fallurteil mit WMD-Check, Rückkopplung, Massnahme und Zielkonflikt sowie ein kurzer persönlicher Kursrückblick.",
-      "zeit": "Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock. Keine zusätzliche Pro/Contra-Raumaufteilung. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.",
+      "product": "Ein begründetes Fallurteil mit WMD-Check, Rückkopplung, Massnahme und Zielkonflikt, eine kurze Kurssynthese («Wo kann eine Vorhersage falsch sein?») sowie ein persönlicher Kursrückblick.",
+      "zeit": "Ein Fall (Bewerbungen, Schule, Kredit oder Chatbot) und dieselbe Gruppe für den gesamten Arbeitsblock. Die Debatte in zwei Seiten ist Vertiefung; im Fallgespräch dienen ihre Leitfragen als Hilfe. Keine zusätzliche Pro/Contra-Raumaufteilung. Das TED-Video ist englisch: Untertitel einschalten oder das Transkript der TED-Seite bereithalten. Kurzer Abschluss mit einzelnen Stimmen statt einer zeitkritischen Runde aller Lernenden; schriftlich nur Stichworte.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -20,7 +20,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Beziehen Sie am Platz Position zur These «Gleiche Regeln sind automatisch fair» und notieren Sie einen Grund."
+              "text": "Beziehen Sie am Platz Position zur These «Gleiche Regeln sind automatisch fair» und notieren Sie einen Grund. Denken Sie auch an den Fall «Schulweg» aus Doppellektion 1: Dort galten feste Regeln für alle; wer legte fest, was Schaden heisst?"
             },
             {
               "art": "Ergebnis",
@@ -62,7 +62,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 13,
-              "text": "Zeigt Cathy O’Neils TED Talk mit Beobachtungsauftrag: ein Beispiel, wer entscheidet, wer betroffen ist und ob Betroffene die Entscheidung prüfen können."
+              "text": "Zeigt Cathy O’Neils TED Talk (englisch: Untertitel einschalten oder Transkript bereithalten) mit Beobachtungsauftrag: ein Beispiel, wer entscheidet, wer betroffen ist und ob Betroffene die Entscheidung prüfen können."
             },
             {
               "art": "Input",
@@ -86,7 +86,7 @@
               "art": "Auftrag",
               "wer": "Gruppe",
               "min": 37,
-              "text": "Bleiben Sie in derselben Gruppe und wählen Sie Bewerbungen, Schule oder Kredit. Prüfen Sie Ihren Fall mit Opacity, Scale und Damage, erzählen Sie seine Rückkopplung und entwickeln Sie eine konkrete Massnahme mit Erfolgskriterium und Zielkonflikt. Vergleichen Sie kurz mit einem Video-Beispiel und dem Bildprojekt: Warum ist das Schulprojekt wahrscheinlich keine WMD? Prüfen Sie O’Neils Aussage an Ihrem Fall: stärkstes Argument dafür, stärkstes Gegenargument, gemeinsames Urteil. Nutzen Sie die Leitfragen der Debatte als Gesprächshilfe; halten Sie nur zentrale Stichworte fest."
+              "text": "Bleiben Sie in derselben Gruppe und wählen Sie Bewerbungen, Schule, Kredit oder Chatbot. Prüfen Sie Ihren Fall mit Opacity, Scale und Damage, erzählen Sie seine Rückkopplung und entwickeln Sie eine konkrete Massnahme mit Erfolgskriterium und Zielkonflikt. Vergleichen Sie kurz mit einem Video-Beispiel und dem Bildprojekt: Warum ist das Schulprojekt wahrscheinlich keine WMD? Dort waren Daten, Protokoll und Prüfbericht einsehbar (das Gegenstück zu Opacity), und Hintergrund und Licht waren ein benannter Störfaktor: Was wäre das Gegenstück in Ihrem Fall? Prüfen Sie O’Neils Aussage an Ihrem Fall: stärkstes Argument dafür, stärkstes Gegenargument, gemeinsames Urteil. Nutzen Sie die Leitfragen der Debatte als Gesprächshilfe; halten Sie nur zentrale Stichworte fest."
             },
             {
               "art": "Auftrag",
@@ -109,25 +109,37 @@
             {
               "art": "Auftrag",
               "wer": "Klasse",
-              "min": 9,
+              "min": 4,
               "text": "Vergleichen Sie zwei Fallurteile und ihre Zielkonflikte. Prüfen Sie die Anfangsthese erneut: Wer müsste was ändern, und woran wäre die Verbesserung erkennbar?"
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
-              "min": 4,
-              "text": "Notieren Sie eine eigene Erkenntnis und eine offene Frage zum KI-Block. Einige freiwillige Rückmeldungen schliessen die Diskussion ab."
+              "min": 5,
+              "text": "Sicherung, zuerst allein schreiben: Formulieren Sie auf der Seite «Mein Urteil» ein begründetes Schlussurteil zur Leitfrage «Sind gleiche Regeln automatisch fair?». Nennen Sie am behandelten Fall eine Folge für Betroffene und eine überprüfbare Gegenmassnahme; vergleichen Sie danach mit der Selbstkontrolle."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 3,
+              "text": "Kurssynthese: Wo kann eine Vorhersage falsch sein? Nennen Sie je ein Beispiel aus drei Doppellektionen (zum Beispiel Schulweg-Regeln, Hintergrund und Licht im Bildprojekt, fremde Klassen, Sprachmodell)."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 2,
-              "text": "Sicherung: Formulieren Sie einzeln ein begründetes Schlussurteil zur Leitfrage «Sind gleiche Regeln automatisch fair?». Nennen Sie am behandelten Fall eine Folge für Betroffene und eine überprüfbare Gegenmassnahme."
+              "text": "Notieren Sie eine eigene Erkenntnis und eine offene Frage zum KI-Block (Stichworte)."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 1,
+              "text": "Einige freiwillige Stimmen schliessen den Kurs ab: eine Erkenntnis, eine offene Frage."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein eigenständiges begründetes Schlussurteil mit konkretem Fallbeispiel und Massnahme."
+              "text": "Ein eigenständiges begründetes Schlussurteil mit konkretem Fallbeispiel und Massnahme, eine Kurssynthese und ein persönlicher Rückblick."
             }
           ]
         }

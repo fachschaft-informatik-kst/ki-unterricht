@@ -1,6 +1,6 @@
 <span class="section-label">Projektbewertung</span>
 <h1>So entsteht Ihre Note.</h1>
-<p class="section-intro">Elf benotete Kriterien (K1–K10 und K12) zählen mit jeweils 0–3 Punkten. Der gemeinsame Fremdcheck K11 ist verbindlich, aber unbenotet.</p>
+<p class="section-intro">Elf benotete Kriterien (K1–K10 und K12) zählen mit jeweils 0–3 Punkten. K11 ist der gemeinsame Fremdcheck: verbindlich, aber unbenotet, darum hat er keine Zeile im Raster.</p>
 <div class="lesson-steps">
   <article>
     <b>18 Punkte · Projekt</b>
@@ -127,8 +127,8 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
         <th scope="row">K12 · Fremdtest und Daten kritisch reflektieren<small>Fremdauswertung · individuell</small></th>
         <td>Keine nachvollziehbare persönliche Interpretation.</td>
         <td>Ergebnisse beschrieben, aber Datenaufteilung und Modellgrenzen kaum fachlich eingeordnet.</td>
-        <td>Originale Trainings-/Testdaten und Ergebnisse sowie eigenen Versuch anhand von Beispielen verglichen; Grenze bei anderen Klassen erklärt.</td>
-        <td>Zusätzlich nachvollziehbar zwischen neuen Testbildern derselben Klassen und völlig neuen Klassen unterschieden und einen prüfbaren Folgetest vorgeschlagen.</td>
+        <td>Originale Trainings-/Testdaten und Ergebnisse mit eigenem Versuch anhand von Beispielen verglichen; Unterschied zwischen neuen Testbildern derselben Klassen und anderen Klassen begründet.</td>
+        <td>Zusätzlich mögliche Ursachen und einen prüfbaren Folgetest nachvollziehbar begründet.</td>
         <td><select aria-label="Punkte K12: Fremdtest kritisch reflektieren" data-score="k12"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
     </tbody>
@@ -140,7 +140,7 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
 <!-- MD:END -->
   <p><strong>Note = 1 + 5 × (Punktesumme ÷ 33)</strong></p>
   <!-- MD:START -->
-Die Endnote wird auf die nächste Viertelnote gerundet. 16,5 Punkte → 3,5 · 24,75 Punkte → 4,75 · 33 Punkte → 6,0.
+Die Endnote wird auf die nächste Viertelnote gerundet. 16 Punkte → 3,5 · 22 Punkte (alle elf Kriterien auf Stufe 2) → 4,25 · 25 Punkte → 4,75 · 33 Punkte → 6,0.
 <!-- MD:END -->
   <output aria-live="polite" id="grade-result">Wählen Sie für jede Kompetenz 0–3 Punkte.</output>
   <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Der gemeinsame Fremdcheck K11 ist unbenotet; nur die persönliche Reflexion K12 zählt mit 3 Punkten. Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>
@@ -165,9 +165,10 @@ Die Endnote wird auf die nächste Viertelnote gerundet. 16,5 Punkte → 3,5 · 2
         <label class="check"><input data-check="submit-protocol" type="checkbox"/><span>Protokoll des Vergleichs &amp; Abschlusstest</span></label>
         <label class="check"><input data-check="submit-reflection" type="checkbox"/><span>Fehleranalyse, Grenzen &amp; Fazit</span></label>
         <label class="check"><input data-check="submit-contribution" type="checkbox"/><span>Arbeitsteilung, Quellen &amp; KI-Hilfen</span></label>
+        <p class="small muted"><strong>KI-Regel:</strong> Erlaubt ist KI als Sprachhilfe (Formulieren, Korrigieren). Zahlen, Beobachtungen und Deutungen stammen von Ihnen. Geben Sie die Hilfen im Journal an (Reflexion 5).</p>
       </div>
       <div class="card">
-        <span class="tag orange">Individuell · 33,3 %</span>
+        <span class="tag orange">Individuell · 36,4 %</span>
         <!-- MD:START -->
 ### Das Fachgespräch
 <!-- MD:END -->
@@ -180,6 +181,7 @@ Jede Person kommt einzeln und erklärt das gemeinsame Projekt selbstständig. Da
           <li>Was lässt sich daraus noch nicht schliessen?</li>
           <li>Wie würden wir ein neues Problem untersuchen?</li>
         </ul>
+        <p class="small muted">Dazu kommen eine kurze Grundlagenfrage zu Neuron oder Zwischenschicht (K7) und die Belegfrage «Wo steht das im Journal, welche Zahl?».</p>
         <p class="small muted">Doppellektion 8 · 20 Einzelgespräche mit einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Notizen/Wechsel. Insgesamt 100 Minuten, davon die letzten 10 direkt nach den 90 Unterrichtsminuten. Die festen Gesprächsfenster werden vorab mitgeteilt; die übrigen arbeiten selbstständig. Keine Zeitreserve und keine Ersatztermine.</p>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 **33 Punkte gesamt · 11 benotete Kriterien.** K1–K6: gemeinsames Projekt (18 Punkte); K7–K10: vierminütiges Einzelgespräch (12 persönliche Punkte); K12: persönliche kritische Fremdreflexion (3 Punkte). **K11: gemeinsamer Check von fremden Trainings-/Testdaten, Ergebnissen und Pflichtversuch (unbenotet).** Alle benoteten Kriterien haben 0–3 Punkte; keine zusätzliche Gewichtung.
 
-**Note = 1 + 5 × (Punkte / 33)**, auf die nächste Viertelnote gerundet. Beispielsweise 16,5 → 3,5; 24,75 → 4,75; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
+**Note = 1 + 5 × (Punkte / 33)**, auf die nächste Viertelnote gerundet. Beispielsweise 16 → 3,5; 22 (alle elf Kriterien auf Stufe 2) → 4,25; 25 → 4,75; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
 
 | Kompetenz / Nachweis | 0 Punkte | 1 Punkt | 2 Punkte | 3 Punkte |
 |---|---|---|---|---|
@@ -16,8 +16,7 @@
 | K8 Entscheidungen begründen (Gespräch) | Daten- und Versuchsentscheidungen nicht erklärbar. | Entscheidungen genannt, Begründungen bleiben unklar. | Datenaufteilung, fairer Vergleich und Auswahl verständlich begründet. | Zusätzlich Alternativen verglichen und deren Folgen richtig abgeschätzt. |
 | K9 Ergebnisse kritisch einordnen (Gespräch) | Zahlen oder Zuverlässigkeit falsch eingeordnet. | Ergebnisse beschrieben; Reichweite bleibt unklar. | Ergebnisse, konkrete Beispiele und Grenzen in eigenen Worten erklärt. | Zusätzlich mögliche andere Erklärungen und nötige Belege diskutiert. |
 | K10 Individuelles Verständnis & Transfer (Gespräch) | Eigenes Projektverständnis nicht erkennbar. | Nur einzelne Arbeitsteile erklärbar; viel Unterstützung nötig. | Erklärt das gemeinsame Projekt selbstständig und schlägt einen passenden nächsten Versuch vor. | Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet notwendige Anpassungen. |
-
-| K12 Daten, Versuch und Grenzen kritisch reflektieren (individuell) | Kein nachvollziehbares persönliches Urteil. | Ergebnisse genannt, aber Datenrollen oder Modellgrenzen kaum erklärt. | Originale Trainings-/Testdaten und Ergebnisse mit eigenem Versuch anhand eines Beispiels verglichen; Unterschied zwischen Testbildern und anderen Klassen begründet. | Zusätzlich mögliche Ursachen und einen prüfbaren Folgetest nachvollziehbar begründet. |
+| K12 Daten, Versuch und Grenzen kritisch reflektieren (individuell) | Kein nachvollziehbares persönliches Urteil. | Ergebnisse genannt, aber Datenrollen oder Modellgrenzen kaum erklärt. | Originale Trainings-/Testdaten und Ergebnisse mit eigenem Versuch anhand von Beispielen verglichen; Unterschied zwischen neuen Testbildern derselben Klassen und anderen Klassen begründet. | Zusätzlich mögliche Ursachen und einen prüfbaren Folgetest nachvollziehbar begründet. |
 
 **DL 8 (Pflicht):** Fremde Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2 und Originalergebnisse untersuchen; mit den beiden eigenen, anderen Klassen experimentieren; eine gemeinsame Rückmeldung und zwei kurze Antworten je Person. Der gemeinsame Check K11 bleibt unbenotet. Bewertet wird **nur K12** (3 Punkte je Person). Separates ZIP nach DL 8. Bei Technikproblemen Originalergebnisse auswerten und Grenzen ehrlich benennen.
 
