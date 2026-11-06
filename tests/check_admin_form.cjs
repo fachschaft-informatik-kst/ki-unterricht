@@ -492,7 +492,7 @@ const server=http.createServer((req,res)=>{
     assert(coloured.text.includes("<figure")&&coloured.text.includes("</figure>"),"Source remains readable");
     await page.locator("#source").fill(originalSource);
     const preview=page.frameLocator("#preview");
-    await preview.locator(".timeline li").first().waitFor();
+    await preview.locator(".timeline li").first().waitFor({state:"attached"});
     const kstLogo=preview.locator(".crumb .school-logo");
     await kstLogo.waitFor();
     const logoResult=await kstLogo.evaluate(img=>new Promise(resolve=>{

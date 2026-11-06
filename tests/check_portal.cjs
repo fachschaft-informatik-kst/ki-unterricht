@@ -151,7 +151,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
       {label:'Programmierung durch Menschen',background:'rgb(84, 130, 53)',color:'rgb(255, 255, 255)'},
       {label:'Datengetriebene Programmierung',background:'rgb(51, 65, 85)',color:'rgb(255, 255, 255)'}
     ],'Markers match green/slate DL1 programming graphic');
-    const legendDescription=await p.locator('#einstieg-3 .section-intro').innerText();
+    const legendDescription=await p.evaluate(()=>{document.getElementById('einstieg-3').open=true;return document.querySelector('#einstieg-3 .section-intro').innerText});
     assert(legendDescription.includes('Programmierung durch Menschen')&&legendDescription.includes('Datengetriebene Programmierung')&&legendDescription.includes('KI-Winter'));
     assert.equal(await p.locator('#einstieg-3 .section-intro a[href="#einstieg-1"]').count(),1,'Legend links to chapter 1 graphic');
     const introLayout=await p.locator('#einstieg-3 .section-intro').evaluate(el=>({width:el.getBoundingClientRect().width,containerWidth:el.parentElement.clientWidth-parseFloat(getComputedStyle(el.parentElement).paddingLeft)-parseFloat(getComputedStyle(el.parentElement).paddingRight),maxWidth:getComputedStyle(el).maxWidth,align:getComputedStyle(el).textAlign,hyphens:getComputedStyle(el).hyphens}));
@@ -222,6 +222,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
     for(const key of ['ki_ordnung','gesetze','begriffe'])assert.equal(await p.locator('#einstieg [data-answer="'+key+'"]').count(),1);
   await p.locator('.nav a[href="#lernarten"]').click();
   await p.locator('#lernarten').waitFor({state:'visible'});
+  await p.evaluate(()=>{for(const id of ['lernarten-2','lernarten-3'])document.getElementById(id).open=true});
   const systemsOverview=p.locator('#lernarten-1, #lernarten-2, #lernarten-3');
   assert.equal(await systemsOverview.count(),3);
   const systemsText=(await systemsOverview.allInnerTexts()).join(' ');
@@ -269,10 +270,12 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await p.locator('.nav a[href="#perzeptron"]').click();
   await p.locator('#perzeptron [data-answer="hand_and_w1"]').fill('0.5');await p.locator('.nav a[href="#netze"]').click();await p.locator('#netze [data-answer="hand_xor_max"]').selectOption('3');
   await p.locator('.nav a[href="#sprache"]').click();
+  await p.evaluate(()=>{for(const id of ['sprache-2','sprache-4'])document.getElementById(id).open=true});
   await p.locator('#sprache [data-answer="pap_text_a"]').fill('Am Samstag gehe ich Brot');await p.locator('#sprache [data-answer="pst_1_plausibel"]').selectOption('ja');
   await p.locator('.nav a[href="#gesellschaft"]').click();
   await p.locator('#gesellschaft [data-answer="wmd_bild_u"]').selectOption('nein');await p.locator('#gesellschaft [data-answer="loop_text"]').fill('Kredit abgelehnt');
   await p.locator('.nav a[href="#netze"]').click();
+  await p.evaluate(()=>{document.getElementById('netze-5').open=true});
   await p.locator('#netze [data-answer="zif_16"]').fill('95');await p.locator('#netze [data-answer="zif_brauchbar"]').selectOption('8');
   await p.locator('.sidebar-bottom a[href="#journal"]').click();
   await p.locator('[data-journal="names"]').fill('Ada & Alan <script>alert(1)</script>');
@@ -335,6 +338,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(await p.locator('#lernarten [data-answer="memory-reinforcement"]').inputValue(),'Beobachtung 3');
   assert((await p.locator('#lernarten [data-answer="memory"]').inputValue()).includes('unterschiedliche Lernsignale'));
   await p.locator('.nav a[href="#sprache"]').click();
+  await p.evaluate(()=>{for(const id of ['sprache-2','sprache-4'])document.getElementById(id).open=true});
   const papagei=p.locator('#sprache .external-map iframe');
   assert.equal(await papagei.count(),1);assert.equal(await papagei.getAttribute('src'),'https://inf-schule.de/ki/menueansicht/ki_erkunden/papagei/lernstrecke');
   assert.equal(await papagei.getAttribute('title'),'Papagei-Lernstrecke von inf-schule.de');
@@ -481,7 +485,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 
     // Optional handwriting recognition is now its own notebook. Training must
     // only start from explicit manual buttons, not while opening the notebook.
-    await dismissNotebook();await p.locator('#netze-5 [data-lab="ziffernerkennung.ipynb"]').click();
+    await dismissNotebook();await p.evaluate(()=>{document.getElementById('netze-5').open=true});await p.locator('#netze-5 [data-lab="ziffernerkennung.ipynb"]').click();
     await p.waitForFunction(()=>document.querySelector('#project-frame').dataset.ready==='yes'&&document.querySelector('#project-frame').dataset.path==='portal/bok/4-klasse/ziffernerkennung.ipynb',null,{timeout:180000});
     const digitFrame=p.frameLocator('#project-frame');
     await digitFrame.getByRole('button',{name:/Modell berechnen/}).first().waitFor({state:'visible',timeout:60000});
