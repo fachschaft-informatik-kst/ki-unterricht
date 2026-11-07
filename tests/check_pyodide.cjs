@@ -36,7 +36,7 @@ console.log=(...args)=>{if(!(args.length===1&&noise.test(String(args[0]))))log(.
   py.FS.mkdir('/wheels');
   for(const w of fs.readdirSync(process.env.WIDGET_WHEELS).filter(x=>x.endsWith('.whl')))py.FS.writeFile('/wheels/'+w,fs.readFileSync(path.join(process.env.WIDGET_WHEELS,w)));
   await py.runPythonAsync("import micropip,os; await micropip.install(['emfs:/wheels/'+w for w in os.listdir('/wheels')], deps=False)");
- }else await py.runPythonAsync("import micropip; await micropip.install('ipywidgets==8.1.7')");
+ }else await py.runPythonAsync("import micropip; await micropip.install('ipywidgets==8.1.0')");
  function copy(dir,dest){
   py.FS.mkdirTree(dest);
   for(const e of fs.readdirSync(dir,{withFileTypes:true})){
