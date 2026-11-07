@@ -7,7 +7,7 @@
       <article>
         <b>Überwacht · mit Labels</b>
         <!-- MD:START -->
-Das System lernt mit Beispielen und den richtigen Kategorien. Danach ordnet es neue Beispiele zu.
+Das System lernt mit Beispielen und den richtigen Antworten (**Labels**). Das ist **überwachtes Lernen**: Es vergleicht seine Antwort mit dem Label und passt sich an. Danach ordnet es neue Beispiele zu. Dieselbe Lernart begegnet Ihnen im Neuron (DL 3), im Ziffernnetz (DL 4) und in Ihrem Bildprojekt.
 <!-- MD:END -->
         <div class="learning-example-links">
           <a href="https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2" target="_blank" rel="noopener noreferrer">Smiley-Spiel: fröhlich oder traurig? · inf-schule</a><a href="https://quickdraw.withgoogle.com/" target="_blank" rel="noopener noreferrer">Quick, Draw! Zeichnungen erkennen lassen</a>

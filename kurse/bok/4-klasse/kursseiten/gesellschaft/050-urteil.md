@@ -24,7 +24,14 @@
         </tbody>
       </table>
     </div>
-    <label class="field answer"><span>Was hat Ihre Position verändert oder bestätigt?</span><textarea data-answer="these_begruendung" maxlength="10000" placeholder="Meine Position hat sich … weil …" rows="3"></textarea></label>
+    <label class="field answer"><span>Schlussurteil zur Leitfrage «Sind gleiche Regeln automatisch fair?»: Was hat Ihre Position verändert oder bestätigt? Nennen Sie an Ihrem Fall eine Folge für die Betroffenen.</span><textarea data-answer="these_begruendung" maxlength="10000" placeholder="Gleiche Regeln sind …, weil im Fall … die betroffene Person … Meine Position hat sich … weil …" rows="3"></textarea></label>
     <label class="field answer"><span>Eine konkrete Massnahme für Ihren Fall: Wer ändert was? Woran erkennen wir die Verbesserung? Welcher Zielkonflikt bleibt?</span><textarea data-answer="urteil_massnahme" maxlength="10000" placeholder="Die … ändert … Wir erkennen es daran, dass … Dafür verlieren wir …" rows="4"></textarea></label>
+    <details>
+      <summary>Selbstkontrolle (erst nach dem Schreiben öffnen)</summary>
+      <div class="detail-body">
+        <p>Prüfen Sie Ihr Schlussurteil: Steht eine <strong>Position</strong> (zustimmen, teilweise, nicht zustimmen)? Gibt es einen <strong>Grund aus dem Fall</strong>, nicht nur eine allgemeine Aussage? Ist die <strong>Folge für Betroffene</strong> konkret? Lässt sich die <strong>Massnahme überprüfen</strong> (Wer? Woran erkennbar? Bis wann?)? Ist der <strong>Zielkonflikt</strong> benannt?</p>
+        <p>Beispiel (Kreditfall): «Gleiche Regeln sind nicht automatisch fair, weil das Modell Wohngebiet als Stellvertreter nutzt und abgelehnte Personen dadurch schlechtere Konditionen erhalten. Die Bank sollte Einsprüche unabhängig prüfen lassen; Erfolg zeigt sich daran, dass ungerechtfertigte Ablehnungen sinken. Dafür steigen Aufwand und Dauer.»</p>
+      </div>
+    </details>
   </div>
 </details>

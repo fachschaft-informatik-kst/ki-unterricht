@@ -17,12 +17,14 @@
 **Arbeitsweg:** (1) Erklärungen lesen → (2) Fälle selbst lösen → (3) mit der Lösung vergleichen → (4) Notebook ausprobieren → (5) eigene fünf Gruppen planen (auf der Seite [«Daten &amp; Fotos»](#projekt-3)). Arbeiten Sie zu zweit, halten Sie die erste Vermutung aber jeweils allein fest. Bei Fehlern: Erklärung nochmals lesen und die Lösung verbessern.
 
 **Die fünf Gruppen:** Ihre Fotos werden in fünf Gruppen sortiert, benannt mit Anfangsbuchstabe und Nummer: **T1 und T2** (T = Training), **V1** (V = Validierung) und **P1 und P2** (P = Prüfung, der Abschlusstest). Jede Gruppe enthält pro Klasse ein anderes Exemplar mit acht Fotos; die Übersicht steht auf der Seite [«Daten &amp; Fotos»](#projekt-3). Welche Aufgabe jede Gruppe hat, zeigen die drei folgenden Karten.
+
+**Überwachtes Lernen braucht Labels:** Ihr Bildmodell lernt überwacht, wie das Neuron in Doppellektion 3 und das Ziffernnetz in Doppellektion 4. Jedes Foto trägt als **Label** seine Klasse (zum Beispiel «Apfel»), die Sie beim Sortieren im Fotostudio festlegen. Training, Validierung und Test nutzen dieselben Labels, aber verschieden: Das Training lernt daran. Validierung und Test vergleichen nur die Vorhersage mit dem Label, ohne danach zu lernen.
 <!-- MD:END -->
       <div class="lesson-steps">
         <article>
           <b>1 · Training: Gewichte lernen</b>
           <!-- MD:START -->
-Mit den **Trainingsbildern** passt unser **kleines Netz** seine Gewichte an; das MobileNet davor bleibt unverändert ([Wer weiss was?](#projekt-wer-weiss-was)). Beispiele aus T1 und T2 dürfen beim Lernen verwendet werden. Dass das Netz diese Bilder erkennt, sagt allein noch nicht, ob es neue Bilder erkennt.
+Mit den **Trainingsbildern** passt unser **kleines Netz** seine Gewichte an: Es vergleicht seine Vorhersage mit dem Label jedes Bildes. Das MobileNet davor bleibt unverändert ([Wer weiss was?](#projekt-wer-weiss-was)). Beispiele aus T1 und T2 dürfen beim Lernen verwendet werden. Dass das Netz diese Bilder erkennt, sagt allein noch nicht, ob es neue Bilder erkennt.
 <!-- MD:END -->
         </article>
         <article>
@@ -80,7 +82,7 @@ Vergleichen Sie Ihre Antworten erst, wenn Sie alle drei gelöst haben.
       <!-- MD:START -->
 ### Interaktiver Versuch · Datenleck erkennen
 
-Öffnen Sie das Notebook, bearbeiten Sie zuerst **«Drei Aufgaben für Daten»**, danach **«Ein Datenleck»**. Lesen Sie jeweils die Frage, treffen Sie eine Vermutung und verändern Sie **eine Einstellung**. Vergleichen Sie Ihre Beobachtung mit dem Merksatz. Die dritte Vertiefung ist freiwillig.
+Öffnen Sie das Notebook und bearbeiten Sie der Reihe nach **«Drei Aufgaben für Daten»**, **«Ein Datenleck entdecken»** und **«Vergleich · Drei Werte»**. Notieren Sie jeweils zuerst eine Vermutung und führen Sie dann die Zelle aus. Beim Datenleck-Versuch ändern Sie danach `TRAININGSBILDER` auf 40 und auf 400. Vergleichen Sie Ihre Beobachtung mit dem Merksatz.
 <!-- MD:END -->
       <div class="ki-notebook-block" data-notebook="content/daten_training.ipynb" data-title="Daten fair aufteilen">
         <!-- MD:START -->
@@ -91,6 +93,18 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
 <!-- MD:END -->
         <button type="button" class="ki-notebook-launch" data-lab="daten_training.ipynb">Notebook hier öffnen</button>
       </div>
+      <label class="field answer"><span>Datenleck-Versuch: Wie viel Prozent erreichte das Netz mit Kopien der Trainingsbilder, wie viel mit wirklich neuen Bildern? Was änderte sich bei 40 und bei 400 Trainingsbildern, und warum sagt der Wert mit Kopien nichts über neue Bilder aus?</span><textarea data-answer="datenleck_versuch" rows="4" maxlength="10000" placeholder="Mit Kopien … %, mit neuen Bildern … %. Bei 40 Bildern …, bei 400 …. Der Wert mit Kopien sagt nichts aus, weil …"></textarea></label>
+      <label class="field answer"><span>Drei Werte: Welcher Wert (Training, Validierung oder Test) beschreibt die endgültig gewählte Variante am besten, und warum nicht die beiden anderen?</span><textarea data-answer="drei_werte" rows="3" maxlength="10000" placeholder="Am besten beschreibt der … Wert die Variante, weil … Der Trainingswert ist hoch, weil …"></textarea></label>
+      <details>
+        <summary>Selbstkontrolle zum Versuch</summary>
+        <div class="detail-body">
+          <!-- MD:START -->
+**Datenleck:** Mit Kopien der Trainingsbilder schneidet das Netz deutlich besser ab als mit wirklich neuen Bildern (Beispielwerte: bei 100 Trainingsbildern etwa 96 % gegen 84 %, bei 40 Bildern etwa 100 % gegen 67 %, bei 400 Bildern nur noch etwa 96 % gegen 94 %). Der Wert mit Kopien zeigt nur, dass das Netz Bekanntes wiedererkennt. Je weniger Trainingsbilder, desto stärker täuscht ein Leck. Ihre Zahlen können abweichen, die Richtung bleibt.
+
+**Drei Werte:** Der Trainingswert ist fast immer am höchsten, weil das Netz diese Bilder kennt. Die Validierung hilft bei der Auswahl, ihr Wert ist dadurch schon etwas beschönigt. Der Test, einmal und erst nach der Auswahl mit neuen Exemplaren, beschreibt die gewählte Variante am ehrlichsten.
+<!-- MD:END -->
+        </div>
+      </details>
     </div>
     <nav class="page-next" aria-label="Weiter im Projekt">
       <a class="btn" href="#projekt">‹ Fahrplan</a>

@@ -6,9 +6,9 @@
   <div class="detail-body">
     <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-01">Doppellektion 1</a> haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.</p>
     <p><strong>Heute können Sie:</strong> Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.</p>
-    <p class="lesson-question">Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?</p>
+    <p class="lesson-question">Leitfrage: Wie lernt KI? Welche Information erhält ein System beim Lernen: Labels, Ähnlichkeit oder Rückmeldung?</p>
     <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.</p>
   </div>
 </details>
 <!-- /LESSONS:lernarten -->
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#glossar-unueberwachtes-lernen">unüberwachtes Lernen</a> · <a href="#glossar-verstaerkendes-lernen">verstärkendes Lernen</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#glossar-unueberwachtes-lernen">unüberwachtes Lernen</a> · <a href="#glossar-verstaerkendes-lernen">verstärkendes Lernen</a> · <a href="#glossar-erfahrungsschatz">Erfahrungsschatz</a></p>

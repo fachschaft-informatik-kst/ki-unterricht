@@ -4,7 +4,7 @@ author: "Kantonsschule Stadelhofen"
 lang: de-CH
 ---
 
-# Ein Perzeptron · Pflichtteil
+# Ein Perzeptron
 
 **Ziel:** Eingabe, Gewicht, Bias und Ausgabe erklären.
 
@@ -24,18 +24,20 @@ Gewichte: 1 und 1, Bias: −1.5.
 Welche AND-Regel erkennen Sie? …
 
 ## 2 · Ein Lernschritt
-Neue Startsituation: Gewichte 0.2 / 0.2, Bias −0.5; Eingabe (1,1), Ziel 1.
+Neue Startsituation: Gewichte 0.2 / 0.2, Bias −0.5; Eingabe (1,1), Ziel 1. Das Neuron lernt überwacht: Zu jedem Beispiel kennt es das Ziel (Label).
 1. Summe und Ausgabe berechnen.
 2. Muss die Summe steigen oder sinken?
 3. Lernrate 0.2: Änderung = Lernrate × (Ziel − Ausgabe) × Eingang. Für den Bias gilt Eingang 1. Neue Gewichte und Bias berechnen.
 4. Erneut prüfen. Sind dadurch automatisch alle Eingaben richtig? Begründen.
 5. Was hat sich beim Lernen verändert, was ist gleich geblieben? Wo steckt das Gelernte?
 
-## 3 · Eine Grenze entdecken
+## 3 · Ausblick: Eine Grenze entdecken
+Dieser Teil gehört zu Doppellektion 4, wo XOR eingeführt wird.
+
 XOR: (0,0) und (1,1) gehören zu Klasse 0, (0,1) und (1,0) zu Klasse 1.
 Zeichnen Sie die vier Punkte. Kann eine Gerade die Klassen trennen?
 
-Zusatz für Schnelle: Jede Zeile ist eine Bedingung an w₁, w₂ und b. Ausgabe 1 heisst
+Jede Zeile ist eine Bedingung an w₁, w₂ und b. Ausgabe 1 heisst
 Summe ≥ 0, Ausgabe 0 heisst Summe < 0. Schreiben Sie die vier Bedingungen auf. Welche
 drei widersprechen sich?
 

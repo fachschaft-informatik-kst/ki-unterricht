@@ -19,7 +19,7 @@ Ein Warnsignal soll nur angehen, wenn **beide** Sensoren aktiv sind (AND). Ergä
 
 **Klasse · 2 Min.**
 
-Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
+Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Welche Lernart aus DL 2 passt, wenn zu jedem Beispiel die richtige Ausgabe bekannt ist (überwachtes Lernen)? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
 
 ### Informieren · 22 Min. · Rechenkarte für ein Neuron
 
@@ -55,16 +55,19 @@ Start: w₁ = w₂ = 0.2, b = −0.5, Lernrate η = 0.2. Beispiel (1,1), Ziel t 
 | w₂ | 0.2 | +0.2 | 0.4 |
 | b | −0.5 | +0.2 | −0.3 |
 
-Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwellenregel bleiben unverändert.
+Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwellenregel bleiben unverändert. Das ist **überwachtes Lernen**: Zu jedem Beispiel ist das Ziel (Label) bekannt, und der Unterschied zwischen Ausgabe und Ziel bestimmt die Korrektur.
 
 ![Lernregel eines Perzeptrons als Flussdiagramm](materialien/downloads/perzeptron_lernregel_flussdiagramm.svg "Informieren | Lehrperson")
 
 ### Verarbeiten · 50 Min. · Gatter einstellen, Rechenprotokoll
 
-**Tandem → Einzeln → Tandem · 32 / 8 / 10 Min.**
+**Tandem / Tandem / Einzeln / Tandem · 27 / 5 / 8 / 10 Min.**
 
 1. **AND / OR (Experiment 2):** Finden Sie für jede Funktion eine Einstellung. Prüfen Sie mit **denselben Parametern alle vier Eingaben**.
-2. **Puffer (10 Min.):** Notebook-Start, Technik und Fragen. **Freiwillige Vertiefung:** Experiment 3 (Lernen) selbst durchführen und Vorher und Nachher vergleichen.
+2. **Lernschritt selbst (Experiment 3, 5 Min.):** Wählen Sie die Aufgabe **OR**. Sagen Sie vor jedem Klick auf «Nächstes Beispiel» voraus, ob korrigiert wird. Rechnen Sie die erste Korrektur von Hand nach: neu = alt + Lernrate × (Ziel − Ausgabe) × Eingang. Welcher Wert bleibt gleich, und warum? Eintrag im Protokoll («3 · Ein Lernschritt selbst»).
+3. **Puffer (10 Min.):** Notebook-Start, Technik und Fragen.
+
+> **Erwartung zum Lernschritt (OR, Start 0.2 / 0.2 / −0.5, Lernrate 0.2):** Das erste Beispiel (0,0) stimmt. Beim zweiten, (0,1) mit Ziel 1, ist die Summe −0.3 und die Ausgabe 0. Korrektur: w₂ 0.2 → 0.4, b −0.5 → −0.3; w₁ bleibt 0.2, weil der Eingang x₁ = 0 ist. Beim dritten, (1,0), ändern sich w₁ und b, w₂ bleibt. In Runde 2 stimmen alle vier Zeilen. Der Vorgang unterscheidet sich von der AND-Demo, bei der beide Gewichte steigen.
 
 | Experiment / Eingabe | w₁ / w₂ / b vorher | Summe / Ausgabe vorher | Änderung | Summe / Ausgabe nachher |
 |---|---|---|---|---|
@@ -80,7 +83,7 @@ Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwelle
 
 **Einzeln → Klasse → Lehrperson → Einzeln · 2 / 4 / 2 / 2 Min.**
 
-Erklären Sie eine eigene Rechnung und prüfen Sie gemeinsam zwei Vorher-Nachher-Erklärungen aus der Demo oder dem eigenen Lernversuch. Schreiben Sie zum Abschluss:
+Erklären Sie eine eigene Rechnung und prüfen Sie gemeinsam zwei Vorher-Nachher-Erklärungen aus dem eigenen Lernversuch (Experiment 3). Schreiben Sie zum Abschluss:
 
 - **Entscheiden:** «Ein Neuron berechnet …; das Gewicht …; der Bias …».
-- **Lernen:** «Bei einem Fehler werden … angepasst; unverändert bleiben …».
+- **Lernen:** «Beim überwachten Lernen werden bei einem Fehler … angepasst; unverändert bleiben …».

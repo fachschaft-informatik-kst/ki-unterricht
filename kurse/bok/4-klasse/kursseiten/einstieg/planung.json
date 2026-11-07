@@ -7,7 +7,7 @@
       "goal": "An vier Beispielen feste Regeln und Lernen aus Daten unterscheiden, fünf weitere Fälle der passenden KI-Kategorie zuordnen, zwei Grenzfälle begründen und die Leitfrage mit einem eigenen Beispiel beantworten.",
       "question": "Leitfrage: Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?",
       "motivation": "Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.",
-      "product": "Neun überprüfte Beispielzuordnungen, Begründungen zu zwei Grenzfällen, eine begründete Entscheidung zum Fall «Schulweg» mit zwei Argumenten sowie eine eigenständige Antwort auf die Leitfrage. Eigene zusätzliche Beispiele sind freiwillig.",
+      "product": "Neun überprüfte Beispielzuordnungen, Begründungen zu zwei Grenzfällen, eine begründete Entscheidung zum Fall «Schulweg» mit zwei Argumenten sowie eine eigenständige Antwort auf die Leitfrage.",
       "zeit": "90 Minuten: Ankommen 5, Vorwissen aktivieren 10, Informieren 20, Verarbeiten 45, Auswerten 10. Keine Zeitreserve; Präsentationen der Vierergruppen erfolgen sehr kurz und ohne eigenes Zeitfenster.",
       "phases": [
         {
@@ -19,7 +19,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 1,
-              "text": "Zeigt eine Tabelle aus dem Materialkoffer mit zwei Saugrobotern: Einer fährt feste Bahnen, der andere erstellt während der Fahrt eine Karte. Stellt die Frage: «Wann nennen Sie ein System intelligent?»"
+              "text": "Zeigt eine Tabelle aus dem Materialkoffer mit zwei Saugrobotern: Einer fährt feste Bahnen, der andere erstellt während der Fahrt eine Karte. Stellt die Frage: «Wann nennen Sie ein System intelligent?» Hält zwei bis drei genannte Kriterien an der Tafel fest; sie bleiben bis zum Schluss stehen."
             },
             {
               "art": "Auftrag",
@@ -72,14 +72,26 @@
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Erklärt anhand der Kursgrafiken den Unterschied zwischen menschlich festgelegten Regeln und dem Lernen aus Daten. Ordnet die Begriffe KI, maschinelles Lernen, Deep Learning und generative KI ein. Verwendet durchgehend Bilderkennung als Beispiel und ergänzt ein regelbasiertes Schachprogramm. Unterscheidet schwache KI (spezifische Aufgaben) und hypothetische starke KI (allgemeine Intelligenz), ohne Bewusstsein als Voraussetzung darzustellen. Bespricht die Meilensteine der KI-Entwicklung kurz. Die Erklärung bleibt bewusst kompakt, damit die Schülerinnen und Schüler die Inhalte anschliessend selbst explorativ vertiefen und die Entdeckerfrage beantworten können. Keine zusätzlichen Zwischenaufträge."
+              "min": 7,
+              "text": "Erklärt anhand der Kursgrafik «Regeln versus Daten» den Unterschied zwischen menschlich festgelegten Regeln und dem Lernen aus Daten. Verwendet durchgehend Bilderkennung als Beispiel und ergänzt ein regelbasiertes Schachprogramm."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 2,
+              "text": "Ohne Unterlagen: Erklären Sie einander in zwei Sätzen, wer bei einem Schachprogramm und wer bei einem lernenden Bilderkenner festlegt, wie entschieden wird."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 6,
+              "text": "Ordnet anhand der Begriffskreise KI, maschinelles Lernen, Deep Learning und generative KI ein. Unterscheidet schwache KI (spezifische Aufgaben) und hypothetische starke KI (allgemeine Intelligenz), ohne Bewusstsein als Voraussetzung darzustellen. Bespricht die Meilensteine der KI-Entwicklung kurz. Die Erklärung bleibt bewusst kompakt, damit die Schülerinnen und Schüler die Inhalte anschliessend selbst explorativ vertiefen und die Entdeckerfrage beantworten können. Ausser dem Abrufauftrag keine weiteren Zwischenaufträge."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Ordnen Sie einen Spamfilter gemeinsam in die besprochenen Kategorien ein und klären Sie offene Begriffsfragen."
+              "text": "Ordnen Sie einen Spamfilter zuerst ohne Unterlagen gemeinsam in die besprochenen Kategorien ein und klären Sie danach offene Begriffsfragen."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +109,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 30,
-              "text": "Ordnen Sie vier Beispiele nach festen Regeln oder Lernen aus Daten und fünf weitere nach der jeweils spezifischsten KI-Kategorie ein. Überprüfen Sie Ihre Zuordnungen und begründen Sie zwei Grenzfälle: Regelbasierte KI versus Automatisierung und Entscheidungsbaum versus Deep Learning. Halten Sie offene Fragen und Unsicherheiten fest. Eigene Beispiele sind eine freiwillige Vertiefung."
+              "text": "Ordnen Sie vier Beispiele nach festen Regeln oder Lernen aus Daten und fünf weitere nach der jeweils spezifischsten KI-Kategorie ein. Überprüfen Sie Ihre Zuordnungen und begründen Sie zwei Grenzfälle: Regelbasierte KI versus Automatisierung und Entscheidungsbaum versus Deep Learning. Halten Sie offene Fragen und Unsicherheiten fest."
             },
             {
               "art": "Input",
@@ -139,13 +151,13 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 3,
-              "text": "Besprechen Sie zwei strittige Beispielzuordnungen und überprüfen Sie gemeinsam deren Begründungen."
+              "text": "Besprechen Sie zwei strittige Beispielzuordnungen und überprüfen Sie gemeinsam deren Begründungen. Prüfen Sie dabei, ob die Kriterien an der Tafel tragen."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Beantworten Sie die Leitfrage anhand eines eigenen Beispiels. Erklären Sie dabei den Unterschied zwischen festen Regeln und dem Lernen aus Daten."
+              "text": "Beantworten Sie die Leitfrage anhand eines eigenen Beispiels. Erklären Sie dabei den Unterschied zwischen festen Regeln und dem Lernen aus Daten und greifen Sie Ihr Kriterium vom Anfang auf: Würden Sie es ändern?"
             },
             {
               "art": "Ergebnis",

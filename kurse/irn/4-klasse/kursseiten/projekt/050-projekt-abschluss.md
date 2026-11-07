@@ -28,7 +28,7 @@ Untersuchen Sie drei Beispiele und benennen Sie Grenzen; richtige Beispiele sind
 ### Fazit und Abgabe
 <!-- MD:END -->
         <!-- MD:START -->
-Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich jeweils auf ihr vierminütiges Einzelgespräch vor.
+Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich jeweils auf ihr vierminütiges Einzelgespräch vor: Erklären Sie das ganze Projekt, vom Foto mit seinem Label über das überwachte Training bis zur Vorhersage.
 <!-- MD:END -->
         <p><a class="btn" href="#abgabe">Abgabecheckliste →</a> <a class="btn" href="#sicherung">Stand sichern →</a></p>
       </div>
@@ -54,12 +54,12 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mi
               <tr>
                 <td>4. Doppellektion</td>
                 <td>XOR und die Grenzen eines einzelnen Neurons untersuchen</td>
-                <td>Erklärung der Zwischenschicht; noch keine Pflicht zur Datenplanung</td>
+                <td>Erklärung der Zwischenschicht; Vorbereitungsauftrag: Thema und zwei eigene Klassen wählen und in die Klassenliste eintragen (jede Bildklasse nur einmal), Gegenstände besorgen (noch nicht fotografieren, keine Datenplanung)</td>
               </tr>
               <tr>
                 <td>Doppellektionen 5–7</td>
-                <td>In DL5 Datenaufteilung selbstständig erarbeiten; anschliessend Tagesziele und Arbeitsphasen selbst planen</td>
-                <td>Datencheck → Vergleich → begründete Auswahl → Test → Fazit; Etappen frei auf die Zeit verteilen</td>
+                <td>In DL5 Datenaufteilung selbstständig erarbeiten, Exemplarliste abnehmen lassen und erst dann fotografieren; anschliessend Tagesziele und Arbeitsphasen selbst planen</td>
+                <td>Meilensteine: Ende DL 5 Exemplarliste abgenommen, Mitte DL 6 Fotos importiert. Datencheck → Vergleich → begründete Auswahl → Test → Fazit; Etappen frei auf die Zeit verteilen</td>
               </tr>
               <tr>
                 <td>Vor Beginn der Doppellektion 8</td>

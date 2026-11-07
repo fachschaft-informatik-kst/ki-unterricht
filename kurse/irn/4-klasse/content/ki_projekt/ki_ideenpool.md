@@ -1,6 +1,6 @@
 # Ideenpool: Bildklassifikation im Tandem
 
-Wählen Sie ein Thema und **genau zwei Klassen**. Eigene Vorschläge sind möglich. Entscheidend sind verfügbare unterschiedliche Exemplare und eine prüfbare Frage. Dieselbe Themenwahl durch mehrere Tandems ist erlaubt. Alle verwenden denselben technischen Ablauf und dieselben Bewertungskriterien.
+Wählen Sie ein Thema und **genau zwei Klassen**. Eigene Vorschläge sind möglich. Entscheidend sind verfügbare unterschiedliche Exemplare und eine prüfbare Frage. **Jede Bildklasse verwendet nur ein Tandem:** Tragen Sie Ihre zwei Klassen in die Klassenliste der Lehrperson ein und wählen Sie keine Klasse, die ein anderes Tandem schon eingetragen hat. Dasselbe Thema dürfen mehrere Tandems wählen, wenn ihre Klassen verschieden sind (zum Beispiel andere Kartenfarben oder andere Baumarten). Alle verwenden denselben technischen Ablauf und dieselben Bewertungskriterien.
 
 | Thema | Mögliche Klassen | Mögliche Frage / Herausforderung |
 |---|---|---|
@@ -13,7 +13,7 @@ Wählen Sie ein Thema und **genau zwei Klassen**. Eigene Vorschläge sind mögli
 | Kleidungsstücke | Schuh, Mütze, Handschuh | Funktioniert es mit anderen Farben und Materialien? |
 | Werkzeuge | Hammer, Zange, Schraubenzieher | Wie gut erkennt es andere Bauformen? |
 | Geometrische Körper | Würfel, Kugel, Zylinder | Welche Rolle spielen unterschiedliche Exemplare? |
-| Gezeichnete Symbole | Herz, Stern, Pfeil | Erkennt es Symbole neuer zeichnender Personen? |
+| Gezeichnete Symbole | Stern, Pfeil, Blitz | Erkennt es Symbole neuer zeichnender Personen? |
 | Spielkarten | Herz, Karo, Pik, Kreuz | Überträgt es auf andere Kartendesigns? Ganze Decks als Gruppen. |
 | Arbeitsplatz | frei, teilweise belegt, voll | Sind die Klassen eindeutig? Ganze Arbeitsplätze als Gruppen. |
 

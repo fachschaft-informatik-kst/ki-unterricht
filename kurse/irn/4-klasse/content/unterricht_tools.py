@@ -1,4 +1,4 @@
-"""Darstellungen für den Pflichtweg. CPython und JupyterLite/Pyodide.
+"""Darstellungen für die Notebooks. CPython und JupyterLite/Pyodide.
 Der Code ist für Interessierte einsehbar; Lernende ändern nur die Notebook-Einstellungen.
 """
 import numpy as np
@@ -239,7 +239,7 @@ def xor_lernen(neuronen=2, startwert=1):
     ax.set_title(f'{neuronen} versteckte Neuronen: {richtig} von 4 richtig')
     plt.tight_layout(); plt.show()
     print('Grün: Ausgabe 0, Orange: Ausgabe 1. Gestrichelte Linien: Was jedes versteckte Neuron «fragt».')
-    if richtig == 4: print('Das Netz hat XOR aus den vier Beispielen selbst gelernt. Wir haben keine Gewichte vorgegeben.')
+    if richtig == 4: print('Das Netz hat XOR überwacht aus den vier Beispielen mit ihren Zielwerten gelernt. Wir haben keine Gewichte vorgegeben.')
     elif neuronen == 1: print('Ein einziges Neuron ist eine einzige Gerade: Mehr als 3 von 4 sind nicht möglich.')
     else: print('Das Training ist hängen geblieben. Anderen Startwert oder mehr Neuronen probieren.')
     return netz
@@ -979,7 +979,7 @@ def _ziffern_netz(X, y, ids, neuronen, max_iter=100):
 def _ziffer_titel(ax, X, y, i, guess, sicherheit):
     ax.imshow(X[i].reshape(8, 8), cmap='gray_r'); ax.axis('off')
     ok = guess == y[i]
-    ax.set_title(f"{'✓' if ok else '✗'} Bild: {y[i]}\nNetz: {guess} ({sicherheit:.0%})", fontsize=9, color='#176c63' if ok else '#b84d27')
+    ax.set_title(f"{'✓' if ok else '✗'} Label: {y[i]}\nNetz: {guess} ({sicherheit:.0%})", fontsize=9, color='#176c63' if ok else '#b84d27')
 
 
 _ZIFFERNNETZE = {}
@@ -1011,8 +1011,10 @@ def ziffern(neuronen=16):
     fig.text(.005, .27, 'Fehler' if len(wrong) else 'keine Fehler', rotation=90, va='center', fontsize=9)
     plt.tight_layout(rect=(.02, 0, 1, .93)); plt.show()
     print(f'Oben je Ziffer ein richtig erkanntes Bild (Zahl in Klammern: Modellwert). Unten die ersten Fehler von {len(wrong)}.')
+    print('Über jedem Bild steht sein Label (die richtige Ziffer), darunter die Vorhersage des Netzes.')
     anzahl = sum(c.size for c in netz.coefs_) + sum(i.size for i in netz.intercepts_)
     print(f'Dieses Netz hat {anzahl} Gewichte und Bias-Werte (64 Eingaben → {neuronen} → 10 Ausgaben), alle vom Training gefunden.')
+    print(f'Überwachtes Lernen: Zu jedem der {len(train)} Trainingsbilder kannte das Netz die richtige Ziffer (das Label). Die Validierungsbilder haben ebenfalls Labels, das Netz hat aber nicht an ihnen gelernt.')
     print('Die Validierungsbilder dienen zum Vergleichen; sie sind kein unabhängiger Abschlusstest.')
     return netz
 
@@ -1032,7 +1034,7 @@ def ziffer_durchs_netz(netz, nr=0):
     axes[2].bar(netz.classes_, probs * 100, color=['#176c63' if c == guess else '#c9d3d6' for c in netz.classes_])
     axes[2].set(xticks=range(10), xlabel='Ziffer', ylabel='Modellwert (%)', ylim=(0, 105), title='3 · Ausgabe: Wert je Ziffer')
     plt.tight_layout(); plt.show()
-    print(f'Bild {nr}: tatsächlich {y[i]} · Netz: {guess} ({probs.max():.0%}) · ' + ('richtig' if guess == y[i] else 'Fehler'))
+    print(f'Bild {nr}: Label {y[i]} (die richtige Ziffer) · Netz: {guess} ({probs.max():.0%}) · ' + ('richtig' if guess == y[i] else 'Fehler'))
     print('Neuronen mit Wert 0 sind für dieses Bild «still». Jedes Neuron reagiert auf ein anderes Muster.')
 
 
@@ -1040,7 +1042,7 @@ _ZIFFERN_NEURONEN = [2, 4, 8, 16, 32]
 
 
 def ziffern_regler():
-    """Freiwillige Vertiefung: das teure Training erst auf Knopfdruck starten.
+    """Das teure Training erst auf Knopfdruck starten.
 
     Die Regler erscheinen sofort, ohne beim Öffnen des Notebooks ein Modell
     zu trainieren. Beim Ausführen und beim Export bleiben die Ergebnisse erhalten.
@@ -1101,6 +1103,7 @@ def neuron_ziffern(ziffer_a=0, ziffer_b=1):
     plt.tight_layout(); plt.show()
     print(f'Training: {neuron.score(X[t], ziel[t]):.0%} richtig · neue Bilder: {np.mean(pred == ziel[v]):.0%} richtig ({len(v)} Bilder).')
     print('Summe = Σ Pixel × Gewicht + Bias, wie bei AND und OR, nur mit 64 statt 2 Eingaben.')
+    print('Überwachtes Lernen: Beim Training kannte das Neuron zu jedem Bild das Label, die richtige der beiden Ziffern.')
 
 
 def drei_rollen(trainingsbilder=100, neuronen=16):
@@ -1127,3 +1130,41 @@ def drei_rollen(trainingsbilder=100, neuronen=16):
     print(f'Training {werte[0]:.0%} · Validierung {werte[1]:.0%} (100 Bilder) · Test {werte[2]:.0%} ({len(test)} Bilder, {len(wrong)} Fehler).')
     print('Training ist fast immer hoch: Diese Bilder kennt das Netz. Nur Validierung und Test sind neue Bilder.')
     print('Achtung: Auch die neuen Bilder stammen von denselben Schreibern. Bei Fotos wäre das ein Datenleck, hier ein leichter Test.')
+
+
+def _leck_werte(trainingsbilder, neuronen):
+    """Dasselbe Netz, getestet mit Kopien der Trainingsbilder (Datenleck) und mit neuen Bildern."""
+    X, y, pool, test = _ziffern_daten()
+    if not 20 <= trainingsbilder <= 600: raise ValueError('trainingsbilder: Zahl von 20 bis 600.')
+    t = np.random.default_rng(1).permutation(pool)[:trainingsbilder]
+    netz = _ziffern_netz(X, y, t, neuronen, max_iter=300)
+    # Eine Kopie ist dasselbe Bild mit leichtem Rauschen, wie derselbe Gegenstand mit anderem Hintergrund.
+    kopien = np.clip(X[t] + np.random.default_rng(2).normal(0, .12, X[t].shape), 0, 1)
+    werte = [netz.score(X[t], y[t]), netz.score(kopien, y[t]), netz.score(X[test], y[test])]
+    return X, y, t, kopien, test, werte
+
+
+def datenleck_versuch(trainingsbilder=100, neuronen=16):
+    """Zeigt, wie ein Datenleck die Testleistung beschönigt: Kopien der Trainingsbilder gegen wirklich neue Bilder."""
+    X, y, t, kopien, test, werte = _leck_werte(trainingsbilder, neuronen)
+    fig = plt.figure(figsize=(12, 4.2)); gs = fig.add_gridspec(2, 6)
+    ax = fig.add_subplot(gs[:, 0:2])
+    ax.bar(range(3), np.array(werte) * 100, color=['#9aa9ad', '#b84d27', '#176c63'], width=.6)
+    for k, w in enumerate(werte): ax.text(k, w * 100 + 2, f'{w:.0%}', ha='center')
+    ax.set(xticks=range(3), xticklabels=['Training\n(bekannt)', '«Test» mit Kopien\n(Datenleck)', 'Test mit\nneuen Bildern'],
+           ylim=(0, 110), ylabel='Richtig (%)')
+    for k in range(4):
+        a = fig.add_subplot(gs[0, 2 + k]); a.imshow(X[t[k]].reshape(8, 8), cmap='gray_r'); a.axis('off')
+        a.set_title(f'Training: Ziffer {y[t[k]]}', fontsize=9)
+        a = fig.add_subplot(gs[1, 2 + k]); a.imshow(kopien[k].reshape(8, 8), cmap='gray_r'); a.axis('off')
+        a.set_title('«Test»: fast dasselbe Bild', fontsize=9, color='#b84d27')
+    fig.suptitle(f'Training mit {trainingsbilder} Bildern · derselbe Test, einmal mit Kopien, einmal mit neuen Bildern')
+    plt.tight_layout(); plt.show()
+    luecke = (werte[1] - werte[2]) * 100
+    print(f'Training {werte[0]:.0%} · «Test» mit Kopien {werte[1]:.0%} · Test mit neuen Bildern {werte[2]:.0%} ({len(test)} Bilder).')
+    if luecke >= 5:
+        print(f'Die Kopien lassen das Netz um {luecke:.0f} Prozentpunkte besser aussehen, als es mit neuen Bildern ist: Scheinleistung.')
+    else:
+        print(f'Hier beträgt der Unterschied nur {luecke:.0f} Prozentpunkte. Mit weniger Trainingsbildern, zum Beispiel 40, wird er viel grösser.')
+    print('Das Netz erkennt Bekanntes wieder; es hat nicht besser gelernt. Darum darf ein Test keine Kopien von Trainingsbildern enthalten.')
+    print('Auch die neuen Bilder stammen von denselben Schreibern; der Wert für neue Bilder ist deshalb noch etwas zu optimistisch.')

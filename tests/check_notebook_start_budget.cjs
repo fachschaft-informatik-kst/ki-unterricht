@@ -6,7 +6,7 @@ const source=cell=>Array.isArray(cell.source)?cell.source.join(''):String(cell.s
 const starts=nb=>nb.cells.filter(c=>c.cell_type==='code'&&(c.metadata?.tags||[]).includes('ki-autostart'));
 const setups=nb=>starts(nb).find(c=>source(c).includes('loadPackage('));
 for(const [name,packages,manual] of [
- ['daten_training.ipynb',['numpy','matplotlib'],['u.drei_rollen(']],
+ ['daten_training.ipynb',['numpy','matplotlib'],['u.drei_rollen(','u.datenleck_versuch(']],
  ['mehrschichtige_netze.ipynb',['numpy','matplotlib'],['u.xor_lernen_regler(']],
  ['basis_netze.ipynb',['numpy','matplotlib'],['u.xor_lernen_regler(']],
  ['ki_projekt/ki_lernlabor.ipynb',['numpy','pillow'],['daten = foto.projekt_laden(','experiment = foto.vergleichen(','foto.vorhersagen_zeigen(']]
@@ -22,11 +22,12 @@ for(const [name,packages,manual] of [
   assert(!(cell.metadata?.tags||[]).includes('ki-autostart'),name+' starts expensive work automatically: '+needle);
  }
  for(const cell of starts(nb)){
-  assert(!/\.drei_rollen\(|foto\.vergleichen\(|u\.ziffern_regler\(|u\.ziffer_regler\(/.test(source(cell)),name+' trained on notebook launch');
+  assert(!/\.drei_rollen\(|\.datenleck_versuch\(|foto\.vergleichen\(|u\.ziffern_regler\(|u\.ziffer_regler\(/.test(source(cell)),name+' trained on notebook launch');
  }
 }
 for(const [name,needle] of [
  ['daten_training.ipynb','u.drei_rollen('],
+ ['daten_training.ipynb','u.datenleck_versuch('],
  ['mehrschichtige_netze.ipynb','u.xor_lernen_regler('],
  ['ki_projekt/ki_lernlabor.ipynb','experiment = foto.vergleichen(']
 ]){

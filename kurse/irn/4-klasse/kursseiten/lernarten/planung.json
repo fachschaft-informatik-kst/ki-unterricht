@@ -6,10 +6,10 @@
       "title": "Wie lernt KI?",
       "rueckblick": "In Doppellektion 1 haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.",
       "goal": "Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.",
-      "question": "Leitfrage: Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
+      "question": "Leitfrage: Wie lernt KI? Welche Information erhält ein System beim Lernen: Labels, Ähnlichkeit oder Rückmeldung?",
       "motivation": "Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.",
       "product": "Ein Vergleich wissensbasierter und lernender Systeme und je eine begründete Beobachtung zu den drei Lernarten.",
-      "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck bleiben als Wahlvertiefung auf der Kursseite, nicht als verpflichtender Parcours.",
+      "zeit": "Memory ist der gemeinsame Erfahrungsblock; NIM das gemeinsame digitale Beispiel. Smiley, K-Means, Akinator, Filmlandkarte und Begriffscheck stehen als Material auf der Kursseite und bilden keinen Parcours.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -56,7 +56,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 12,
-              "text": "Zeigt die EVA-Grafik mit Erfahrungsschatz. Vergleicht einen menschlich festgelegten Entscheidungsbaum mit einem lernenden Spamfilter. Führt Labels, Ähnlichkeit und Rückmeldung als drei Lernsignale ein und erklärt den Memory-Auftrag. Die Beispiele Akinator und Filmempfehlungen dienen der Erklärung, nicht als zusätzliche Tool-Wechsel."
+              "text": "Zeigt die EVA-Grafik mit Erfahrungsschatz. Vergleicht einen menschlich festgelegten Entscheidungsbaum (zum Beispiel einen Tier-Ratebaum auf Papier) mit einem lernenden Spamfilter. Führt Labels, Ähnlichkeit und Rückmeldung als drei Lernsignale ein und benennt die zugehörigen Lernarten: überwachtes, unüberwachtes und verstärkendes Lernen. Beim überwachten Lernen ist zu jedem Beispiel die richtige Antwort (das Label) bekannt; diesen Begriff greifen die Doppellektionen 3 bis 8 wieder auf. Erklärt den Memory-Auftrag. Akinator und Filmempfehlungen dienen der Erklärung: Akinator sieht aus wie ein Entscheidungsbaum, nutzt aber Erfahrungen früherer Spielender; Filmempfehlungen lernen aus Rückmeldungen. Kein Wechsel zu zusätzlichen Werkzeugen."
             },
             {
               "art": "Auftrag",
@@ -86,7 +86,7 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 25,
-              "text": "Erkunden Sie NIM am Beamer. Entscheiden Sie gemeinsam Züge und beobachten Sie, was sich durch Gewinn oder Verlust verändert. Sichern Sie eine konkrete Beobachtung. Im Memory lernte ein Mensch; hier untersuchen Sie das KI-Beispiel. Wer fertig ist, wählt höchstens eine Vertiefung (Smiley oder K-Means); kein Pflichtwechsel zu weiteren Tools."
+              "text": "Erkunden Sie NIM am Beamer. Entscheiden Sie gemeinsam Züge und beobachten Sie, was sich durch Gewinn oder Verlust verändert. Sichern Sie eine konkrete Beobachtung. Im Memory lernte ein Mensch; hier untersuchen Sie das KI-Beispiel. Kein Wechsel zu weiteren Werkzeugen."
             },
             {
               "art": "Ergebnis",
@@ -107,16 +107,16 @@
               "text": "Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung. Ordnen Sie NIM und das Bildprojekt begründet zu. Erklären Sie, warum im Memory der Mensch und nicht ein KI-Modell gelernt hat."
             },
             {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 3,
-              "text": "Klärt zwei strittige Zuordnungen gemeinsam und hält fest: Das Bildprojekt lernt überwacht mit beschrifteten Trainingsbildern."
-            },
-            {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 3,
-              "text": "Sicherung: Beantworten Sie einzeln die Leitfrage «Wie lernt KI?» in zwei bis drei Sätzen. Nennen Sie zu einer Lernart ein Beispiel und begründen Sie, weshalb es dazugehört."
+              "text": "Sicherung: Beantworten Sie einzeln die Leitfrage «Wie lernt KI?» in zwei bis drei Sätzen an einem Beispiel, das wir nicht besprochen haben (zum Beispiel ein Empfehlungsdienst). Nennen Sie das Lernsignal und begründen Sie, woran Sie es erkennen. Erst schreiben, dann vergleichen."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 3,
+              "text": "Klärt zwei strittige Zuordnungen gemeinsam, gibt die Selbstkontrolle zur Sicherung frei und hält fest: Überwachtes Lernen begleitet den Kurs weiter. Das Neuron (Doppellektion 3), das Ziffernnetz (Doppellektion 4) und das Bildprojekt lernen alle aus Beispielen mit Label."
             },
             {
               "art": "Ergebnis",

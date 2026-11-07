@@ -18,7 +18,7 @@
 
 **Notizvorlage:** «Intelligenz bedeutet für mich … . Roboter … erfüllt das Kriterium, weil … . Unklar bleibt … .»
 
-> **Lehrpersonenhinweis:** Eine Karte beweist noch kein maschinelles Lernen. Auch Routenplanung kann auf programmierten Regeln beruhen. Unterschiedliche begründete Intelligenzdefinitionen sind ein erwünschter Gesprächsanlass.
+> **Lehrpersonenhinweis:** Eine Karte beweist noch kein maschinelles Lernen. Auch Routenplanung kann auf programmierten Regeln beruhen. Unterschiedliche begründete Intelligenzdefinitionen sind ein erwünschter Gesprächsanlass. Halten Sie zwei bis drei Kriterien an der Tafel fest und lassen Sie sie bis zum Schluss stehen: In der Auswertung prüft die Klasse, ob sie tragen.
 
 ### Vorwissen aktivieren · 10 Min. · Regeln für Katze oder Hund
 
@@ -53,7 +53,9 @@ Formulieren Sie zu zweit fünf Regeln, mit denen eine Maschine Katzen von Hunden
 
 ### Informieren · 20 Min. · Begriffe an einem Beispiel ordnen
 
-**Lehrperson → Tandem · 15 / 5 Min.**
+**Lehrperson / Tandem / Lehrperson / Tandem · 7 / 2 / 6 / 5 Min.**
+
+Der Input ist in zwei Blöcke geteilt. Block 1 (7 Min.): Regeln von Menschen oder Lernen aus Daten, mit Bilderkennung und Schachprogramm. Dann der Abrufauftrag (2 Min.): Ohne Unterlagen erklären die Tandems einander in zwei Sätzen, wer bei einem Schachprogramm und wer bei einem lernenden Bilderkenner festlegt, wie entschieden wird. Block 2 (6 Min.): die Begriffe der Inputkarte, schwache und starke KI, Meilensteine.
 
 #### Inputkarte · Wer legt die Regeln fest?
 
@@ -68,9 +70,9 @@ Formulieren Sie zu zweit fünf Regeln, mit denen eine Maschine Katzen von Hunden
 
 **Grafiken und Zeitleiste für den kompakten Input:** [Regeln versus Daten](index.html#einstieg-1) · [Begriffskreise](index.html#einstieg-2) · [Kurskapitel mit Meilensteinen](index.html#einstieg).
 
-**Tandemauftrag:** Ein Spamfilter wurde mit markierten E-Mails trainiert. Was sind seine Eingaben, und woher stammt seine Entscheidung? Ist schon belegt, dass er ein tiefes Netz verwendet?
+**Tandemauftrag (zuerst ohne Unterlagen):** Ein Spamfilter wurde mit markierten E-Mails trainiert. Was sind seine Eingaben, und woher stammt seine Entscheidung? Ist schon belegt, dass er ein tiefes Netz verwendet?
 
-> **Orientierung:** «Aus Daten gelernt» belegt ML, aber noch kein Deep Learning. Das Verfahren muss in der Beschreibung erkennbar sein.
+> **Orientierung:** «Aus Daten gelernt» belegt ML, aber noch kein Deep Learning. Das Verfahren muss in der Beschreibung erkennbar sein. Zum Abrufauftrag: Beim Schachprogramm legen Menschen die Bewertungsregeln fest; beim lernenden Bilderkenner bestimmen die Trainingsbeispiele, welche Muster das Modell verwendet.
 
 ### Verarbeiten · 45 Min. · Zuordnen und Entscheidungen begründen
 
@@ -113,10 +115,10 @@ Die Lehrperson ordnet zuvor Asimovs fiktive Robotergesetze als Diskussionsmodell
 
 **Lehrperson → Klasse → Einzeln · 2 / 3 / 5 Min.**
 
-Besprechen Sie zwei strittige Zuordnungen. Schreiben Sie danach allein:
+Besprechen Sie zwei strittige Zuordnungen und prüfen Sie, ob die Kriterien an der Tafel tragen. Schreiben Sie danach allein:
 
 - Mein Beispiel für ein intelligentes System: ____________________
 - Es nutzt feste Regeln / Lernen aus Daten, erkennbar an: ____________________
-- Mein Kriterium für Intelligenz und eine verbleibende Grenze: ____________________
+- Mein Kriterium für Intelligenz vom Anfang: behalten / ändern, weil ____________________ Eine Grenze bleibt: ____________________
 
-**Erwartetes Ergebnis:** Neun kontrollierte Zuordnungen, zwei begründete Grenzfälle, zwei Argumente zum Schulweg und eine eigene Antwort auf die Leitfrage. Zusätzliche Beispiele sind freiwillig.
+**Erwartetes Ergebnis:** Neun kontrollierte Zuordnungen, zwei begründete Grenzfälle, zwei Argumente zum Schulweg und eine eigene Antwort auf die Leitfrage.

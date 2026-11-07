@@ -94,20 +94,20 @@
       <details class="ki-sort-help">
         <summary><span class="ki-sort-help-show">Hilfe zur Zuordnung anzeigen</span><span class="ki-sort-help-hide">Hilfe zur Zuordnung ausblenden</span><span class="ki-sort-help-icon" aria-hidden="true"></span></summary>
         <!-- MD:START -->
-Ein Zeitplan ist keine KI. Ein Suchverfahren kann regelbasierte KI sein. Ein Entscheidungsbaum ist maschinelles Lernen ohne tiefes Netz. Texte erzeugende Sprachmodelle sind hier generative KI.
+Ein Zeitplan ist keine KI. Ein Suchverfahren kann regelbasierte KI sein. Ein aus Daten gelernter Entscheidungsbaum ist maschinelles Lernen ohne tiefes Netz; ein von Menschen gezeichneter Baum wäre ein regelbasiertes System. Texte erzeugende Sprachmodelle sind hier generative KI.
 <!-- MD:END -->
       </details>
     </div>
     <label class="field answer ki-sort-reflection"><span><strong>Zum Schluss:</strong> Warum ist nicht jedes automatisch arbeitende Programm eine KI?</span><textarea data-answer="regeln_oder_daten" rows="2" maxlength="10000" placeholder="Ein automatisch arbeitendes Programm …"></textarea></label>
     <details class="ki-sort-legacy">
-      <summary>Wahlvertiefung: eigene Beispiele nennen</summary>
+      <summary>Eigene Beispiele nennen</summary>
       <div class="ki-sort-legacy-fields">
-        <label class="field answer"><span>Eigenes Beispiel 1 (freiwillig)</span><textarea data-answer="begriff_bsp_1" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
-        <label class="field answer"><span>Eigenes Beispiel 2 (freiwillig)</span><textarea data-answer="begriff_bsp_2" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
-        <label class="field answer"><span>Eigenes Beispiel 3 (freiwillig)</span><textarea data-answer="begriff_bsp_3" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
-        <label class="field answer"><span>Eigenes Beispiel 4 (freiwillig)</span><textarea data-answer="begriff_bsp_4" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
+        <label class="field answer"><span>Eigenes Beispiel 1</span><textarea data-answer="begriff_bsp_1" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
+        <label class="field answer"><span>Eigenes Beispiel 2</span><textarea data-answer="begriff_bsp_2" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
+        <label class="field answer"><span>Eigenes Beispiel 3</span><textarea data-answer="begriff_bsp_3" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
+        <label class="field answer"><span>Eigenes Beispiel 4</span><textarea data-answer="begriff_bsp_4" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
       </div>
-      <p class="small">Freiwillig: Frühere eigene Beispiele bleiben hier erhalten.</p>
+      <p class="small">Frühere eigene Beispiele bleiben hier erhalten.</p>
     </details>
     <p class="small">Nicht jedes KI-System lernt aus Daten. Nicht jedes lernende Modell ist Deep Learning. Unser Bildprojekt gehört zum maschinellen Lernen: MobileNet ist ein Deep-Learning-Modell, und unser kleines Netz lernt darauf aufbauend, Ihre zwei Klassen zu unterscheiden.</p>
   </div>

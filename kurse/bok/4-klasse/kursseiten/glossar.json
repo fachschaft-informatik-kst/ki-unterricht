@@ -73,9 +73,9 @@
       "id": "ueberwachtes-lernen",
       "gruppe": "Lernarten",
       "begriff": "Überwachtes Lernen",
-      "basis": "Das Modell übt mit Beispielen, bei denen die richtige Antwort bekannt ist.",
+      "basis": "Das Modell übt mit Beispielen, bei denen die richtige Antwort (das Label) bekannt ist, und vergleicht seine Antwort damit.",
       "vertieft": "Lernen anhand gelabelter Eingabe-Ziel-Paare durch Minimierung eines Vorhersagefehlers.",
-      "beispiel": "Fotos sind mit «Tasse» oder «Buch» beschriftet.",
+      "beispiel": "Das AND-Neuron lernt mit dem Ziel 0 oder 1, das Ziffernnetz mit der richtigen Ziffer und Ihr Bildprojekt mit Ihrer Klasse als Label.",
       "frage": "Welche Information braucht das Modell zusätzlich zum Foto?",
       "antwort": "Das richtige Label, also die gesuchte Klasse."
     },
@@ -102,8 +102,8 @@
     {
       "id": "label",
       "gruppe": "Lernarten",
-      "begriff": "Label / Klasse",
-      "basis": "Ein Label nennt die richtige Kategorie eines Trainingsbeispiels.",
+      "begriff": "Label / Ziel / Klasse",
+      "basis": "Ein Label ist die richtige Antwort zu einem Beispiel: bei Fotos die Klasse, beim Neuron das Ziel 0 oder 1, bei Ziffern die richtige Ziffer.",
       "vertieft": "Eine Zielkennzeichnung; bei der Klassifikation ist sie die zugehörige diskrete Klasse.",
       "beispiel": "Ein Foto hat das Label «Tasse».",
       "frage": "Was passiert bei falschen Labels?",
@@ -298,6 +298,96 @@
       "beispiel": "Ein Bewerbungsmodell lernt aus früheren einseitigen Einstellungen.",
       "frage": "Warum reicht eine hohe Genauigkeit nicht als Fairnessnachweis?",
       "antwort": "Ein Modell kann insgesamt genau sein und trotzdem bestimmte Gruppen benachteiligen."
+    },
+    {
+      "id": "erfahrungsschatz",
+      "gruppe": "Lernarten",
+      "begriff": "Erfahrungsschatz",
+      "basis": "Das, was ein System aus Beispielen gelernt und behalten hat.",
+      "vertieft": "Die gespeicherten Ergebnisse des Lernens, bei einem neuronalen Netz die gelernten Gewichte und Bias-Werte. Er ist nicht dasselbe wie die Trainingsdaten, aus denen er entstanden ist.",
+      "beispiel": "Nach einem Lernschritt stecken die Zahlen w₁ = 0.4, w₂ = 0.4 und b = −0.3 im Erfahrungsschatz des Neurons.",
+      "frage": "Ist der Erfahrungsschatz dasselbe wie die Trainingsbilder?",
+      "antwort": "Nein. Die Trainingsbilder sind die Erfahrungen. Der Erfahrungsschatz ist das, was das Netz daraus als Zahlen behalten hat."
+    },
+    {
+      "id": "lernrate",
+      "gruppe": "Neuronale Netze",
+      "begriff": "Lernrate",
+      "basis": "Sie bestimmt, wie stark sich die Gewichte bei einem Lernschritt ändern.",
+      "vertieft": "Faktor in der Lernregel (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Sie legt die Schrittweite fest, nicht die Grenze dessen, was das Neuron darstellen kann.",
+      "beispiel": "Bei Lernrate 0.2 und Eingaben 0 oder 1 ändert sich ein Gewicht pro Lernschritt um höchstens 0.2.",
+      "frage": "Löst eine grössere Lernrate das XOR-Problem?",
+      "antwort": "Nein. Sie ändert nur die Schritte. Ein einzelnes Neuron kann XOR grundsätzlich nicht darstellen."
+    },
+    {
+      "id": "epoche",
+      "gruppe": "Neuronale Netze",
+      "begriff": "Epoche",
+      "basis": "Ein Durchgang, bei dem das Netz alle Trainingsbeispiele einmal gesehen hat.",
+      "vertieft": "Ein vollständiger Durchlauf durch die Trainingsmenge. Nach jedem Schritt werden die Gewichte angepasst; mehr Epochen verbessern die Trainingswerte meist, nicht immer die Werte auf neuen Bildern.",
+      "beispiel": "Bei 60 Epochen sieht das Netz jedes Trainingsbild 60-mal.",
+      "frage": "Wird ein Modell mit mehr Epochen immer besser?",
+      "antwort": "Nein. Auf den Trainingsbildern meist schon, auf neuen Bildern kann es nach einer Weile schlechter werden."
+    },
+    {
+      "id": "startwert",
+      "gruppe": "Bildprojekt",
+      "begriff": "Startwert",
+      "basis": "Eine Zahl, die festlegt, mit welchen Zufallswerten das Netz zu lernen beginnt.",
+      "vertieft": "Der Startwert (Seed) des Zufallszahlengenerators für die Anfangsgewichte. Gleiche Daten und gleicher Startwert ergeben gleiche Ergebnisse, andere Startwerte können leicht abweichen.",
+      "beispiel": "Mit Startwert 11 gibt der Vergleich bei gleichen Daten jedes Mal dasselbe Ergebnis; Startwert 22 kann etwas anders ausfallen.",
+      "frage": "Warum vergleicht man mehrere Startwerte?",
+      "antwort": "Ein einzelner Lauf kann Zufall sein. Mehrere Startwerte zeigen, wie stark das Ergebnis schwankt."
+    },
+    {
+      "id": "modellwert",
+      "gruppe": "Bildprojekt",
+      "begriff": "Modellwert",
+      "basis": "Ein Prozentwert, der zeigt, wie stark das Modell eine Klasse bevorzugt.",
+      "vertieft": "Ausgabewert des Modells für eine Klasse (zwischen 0 und 1, oft in Prozent). Er ist nicht die Wahrscheinlichkeit, dass die Vorhersage richtig ist, und kann auch bei unbekannten Bildern hoch sein.",
+      "beispiel": "«Tasse: 93 %» heisst nicht, dass das Modell in 93 % solcher Fälle richtig liegt.",
+      "frage": "Beweist ein hoher Modellwert, dass die Vorhersage stimmt?",
+      "antwort": "Nein. Das Modell wählt immer eine seiner Klassen, auch wenn keine passt, und der Wert kann trotzdem hoch sein."
+    },
+    {
+      "id": "trennschaerfe",
+      "gruppe": "Bildprojekt",
+      "begriff": "Trennschärfe",
+      "basis": "Sie zeigt, wie sauber ein fremdes Modell Ihre zwei Klassen auf seine zwei Klassen verteilt.",
+      "vertieft": "Anteil der eigenen Bilder, die bei der besseren der beiden möglichen Zuordnungen passen. Sie liegt nie unter 50 %; reines Raten ergibt im Mittel etwas mehr (bei 40 Bildern etwa 56 %). Sie ist keine Trefferquote.",
+      "beispiel": "Von 40 Bildern passen 34 zur besseren Zuordnung: Trennschärfe 85 %.",
+      "frage": "Heisst eine hohe Trennschärfe, dass das fremde Modell Ihre Klassen gelernt hat?",
+      "antwort": "Nein. Es kennt nur seine eigenen Klassen. Die Merkmale können Ihre Bilder trennen, etwa wegen Form, Farbe, Hintergrund oder Licht."
+    },
+    {
+      "id": "einbettung",
+      "gruppe": "Sprachmodelle",
+      "begriff": "Einbettung (Embedding)",
+      "basis": "Ein Wort wird als Liste von Zahlen dargestellt, damit ähnliche Wörter ähnliche Zahlen haben.",
+      "vertieft": "Gelernte Zahlenliste (Vektor) für ein Token. Tokens mit ähnlicher Verwendung erhalten ähnliche Vektoren, mit denen das neuronale Netz rechnet.",
+      "beispiel": "«Katze» und «Kätzchen» haben ähnliche Zahlenlisten, «Katze» und «Steuer» nicht.",
+      "frage": "Warum braucht ein Sprachmodell Zahlen für Wörter?",
+      "antwort": "Ein neuronales Netz rechnet nur mit Zahlen. Die Einbettung macht aus Wörtern Zahlen und bewahrt dabei Ähnlichkeiten."
+    },
+    {
+      "id": "rueckkopplung",
+      "gruppe": "Gesellschaft",
+      "begriff": "Rückkopplung (Feedback Loop)",
+      "basis": "Entscheidungen eines Modells verändern die Wirklichkeit, und die neuen Daten bestätigen das Modell.",
+      "vertieft": "Schleife, in der die Entscheidungen eines Systems die Daten beeinflussen, mit denen es später beurteilt oder neu trainiert wird. So können Verzerrungen verstärkt werden.",
+      "beispiel": "Gedankenexperiment: Ein Quartier erhält weniger Kredite, neue Daten zeigen dort mehr Zahlungsprobleme, und das Modell sieht sich bestätigt.",
+      "frage": "Warum merkt das Modell den Fehler nicht?",
+      "antwort": "Es sieht nur die Folgen seiner eigenen Entscheidungen und erfährt nie, was aus den abgelehnten Fällen geworden wäre."
+    },
+    {
+      "id": "wmd",
+      "gruppe": "Gesellschaft",
+      "begriff": "WMD: Opacity, Scale, Damage",
+      "basis": "Ein Modell, das undurchsichtig ist, viele Menschen betrifft und ihnen schaden kann (nach Cathy O’Neil).",
+      "vertieft": "O’Neil prüft drei Merkmale: Opacity (kaum nachvollziehbar), Scale (grosse Reichweite) und Damage (Schaden für Betroffene). Das Etikett «WMD» ist eine Einschätzung, kein Beweis.",
+      "beispiel": "Ein geheimer Bewerbungsfilter, der tausende Bewerbungen aussortiert und den Betroffenen keinen Einspruch lässt.",
+      "frage": "Welche drei Fragen gehören zur WMD-Prüfung?",
+      "antwort": "Wer versteht und prüft die Entscheidung (Opacity)? Wie viele sind betroffen (Scale)? Welcher Schaden entsteht, für wen (Damage)?"
     }
   ]
 }

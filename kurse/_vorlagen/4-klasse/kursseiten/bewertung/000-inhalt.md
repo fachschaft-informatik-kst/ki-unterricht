@@ -1,6 +1,6 @@
 <span class="section-label">Projektbewertung</span>
 <h1>So entsteht Ihre Note.</h1>
-<p class="section-intro">Elf benotete Kriterien (K1–K10 und K12) zählen mit jeweils 0–3 Punkten. Der gemeinsame Fremdcheck K11 ist verbindlich, aber unbenotet.</p>
+<p class="section-intro">Elf benotete Kriterien (K1–K10 und K12) zählen mit jeweils 0–3 Punkten. K11 ist der gemeinsame Fremdcheck: unbenotet, darum hat er keine Zeile im Raster.</p>
 <div class="lesson-steps">
   <article>
     <b>18 Punkte · Projekt</b>
@@ -27,8 +27,8 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
 <!-- MD:END -->
   </article>
 </div>
-<p class="callout"><strong>Gemeinsamer Check K11 (Pflicht, unbenotet):</strong> Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2, ein nachgerechnetes Ergebnis und eine kurze Rückmeldung untersuchen. Diese Arbeit ist die Grundlage der persönlichen Reflexion, wird aber nicht mit zusätzlichen Punkten bewertet.</p>
-<p class="small">Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
+<p class="callout"><strong>Gemeinsamer Check K11 (unbenotet):</strong> Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2, ein nachgerechnetes Ergebnis und eine kurze Rückmeldung untersuchen. Diese Arbeit ist die Grundlage der persönlichen Reflexion, wird aber nicht mit zusätzlichen Punkten bewertet.</p>
+<p class="small"><strong>Stufe 2 ist die Sollstufe:</strong> Wer alle Anforderungen vollständig erfüllt, erreicht sie. Alle elf Kriterien auf Stufe 2 ergeben 22 Punkte und die Note 4,25. Für eine 5 sind vier Punkte mehr nötig, zum Beispiel Stufe 3 in vier Kriterien. Stufe 3 verlangt zusätzlich Begründung, Vertiefung oder Übertragung. Es gilt die höchste vollständig erfüllte Stufe. Eine hohe Trefferquote allein gibt keine zusätzlichen Punkte. Fehlerfreie Testdaten: richtige Beispiele untersuchen und Grenzen benennen, keine Fehler erfinden.</p>
 <div aria-label="Bewertungsraster, horizontal scrollbar" class="table-scroll" role="region" tabindex="0">
   <table class="rubric">
     <caption>11 benotete Kriterien × 0–3 Punkte = maximal 33 Punkte</caption>
@@ -87,8 +87,8 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
         <th scope="row">K6 · Fazit &amp; Grenzen<small>Projekt</small></th>
         <td>Fazit ohne Bezug zu den Ergebnissen.</td>
         <td>Allgemeines Fazit; Grenzen nur genannt.</td>
-        <td>Frage beantwortet; Grenzen des kleinen Datensatzes und Einzellaufs erklärt.</td>
-        <td>Zusätzlich nächste Untersuchung passend zu einer konkreten Grenze begründet.</td>
+        <td>Frage beantwortet; Grenzen nach Ursache (Daten, Versuchsaufbau, Zufall) erklärt.</td>
+        <td>Zusätzlich Folgen der Grenzen für die Aussage und eine dazu passende nächste Untersuchung begründet.</td>
         <td><select aria-label="Punkte K6: Fazit &amp; Grenzen" data-score="k6"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
       <tr>
@@ -111,7 +111,7 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
         <th scope="row">K9 · Ergebnisse kritisch einordnen<small>Gespräch</small></th>
         <td>Zahlen oder Zuverlässigkeit falsch eingeordnet.</td>
         <td>Ergebnisse beschrieben; Reichweite bleibt unklar.</td>
-        <td>Ergebnisse, konkrete Beispiele und Grenzen in eigenen Worten erklärt.</td>
+        <td>Erklärt in eigenen Worten, was die Zahlen aussagen und was nicht.</td>
         <td>Zusätzlich mögliche andere Erklärungen und nötige Belege diskutiert.</td>
         <td><select aria-label="Punkte K9: Ergebnisse kritisch einordnen" data-score="k9"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
@@ -119,16 +119,16 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
         <th scope="row">K10 · Individuelles Verständnis &amp; Transfer<small>Gespräch</small></th>
         <td>Eigenes Projektverständnis nicht erkennbar.</td>
         <td>Nur einzelne Arbeitsteile erklärbar; viel Unterstützung nötig.</td>
-        <td>Erklärt das gemeinsame Projekt selbstständig und schlägt einen passenden nächsten Versuch vor.</td>
-        <td>Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet Anpassungen.</td>
+        <td>Erklärt das gemeinsame Projekt selbstständig, auch Teile, die der Partner bearbeitet hat.</td>
+        <td>Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet notwendige Anpassungen.</td>
         <td><select aria-label="Punkte K10: Individuelles Verständnis und Transfer" data-score="k10"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
       <tr>
         <th scope="row">K12 · Fremdtest und Daten kritisch reflektieren<small>Fremdauswertung · individuell</small></th>
         <td>Keine nachvollziehbare persönliche Interpretation.</td>
         <td>Ergebnisse beschrieben, aber Datenaufteilung und Modellgrenzen kaum fachlich eingeordnet.</td>
-        <td>Originale Trainings-/Testdaten und Ergebnisse sowie eigenen Versuch anhand von Beispielen verglichen; Grenze bei anderen Klassen erklärt.</td>
-        <td>Zusätzlich nachvollziehbar zwischen neuen Testbildern derselben Klassen und völlig neuen Klassen unterschieden und einen prüfbaren Folgetest vorgeschlagen.</td>
+        <td>Originale Trainings-/Testdaten und Ergebnisse mit eigenem Versuch anhand von Beispielen verglichen; Unterschied zwischen neuen Testbildern derselben Klassen und anderen Klassen begründet.</td>
+        <td>Zusätzlich mögliche Ursachen und einen prüfbaren Folgetest nachvollziehbar begründet.</td>
         <td><select aria-label="Punkte K12: Fremdtest kritisch reflektieren" data-score="k12"><option value="">–</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
       </tr>
     </tbody>
@@ -140,7 +140,7 @@ K11: gemeinsamer Daten- und Ergebnischeck (unbenotet). K12: persönliche kritisc
 <!-- MD:END -->
   <p><strong>Note = 1 + 5 × (Punktesumme ÷ 33)</strong></p>
   <!-- MD:START -->
-Die Endnote wird auf die nächste Viertelnote gerundet. 16,5 Punkte → 3,5 · 24,75 Punkte → 4,75 · 33 Punkte → 6,0.
+Die Endnote wird auf die nächste Viertelnote gerundet. 16 Punkte → 3,5 · 22 Punkte (Sollstufe: alle elf Kriterien auf Stufe 2) → 4,25 · 25 Punkte → 4,75 · 26 Punkte → 5,0 · 33 Punkte → 6,0.
 <!-- MD:END -->
   <output aria-live="polite" id="grade-result">Wählen Sie für jede Kompetenz 0–3 Punkte.</output>
   <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Der gemeinsame Fremdcheck K11 ist unbenotet; nur die persönliche Reflexion K12 zählt mit 3 Punkten. Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>
@@ -165,9 +165,10 @@ Die Endnote wird auf die nächste Viertelnote gerundet. 16,5 Punkte → 3,5 · 2
         <label class="check"><input data-check="submit-protocol" type="checkbox"/><span>Protokoll des Vergleichs &amp; Abschlusstest</span></label>
         <label class="check"><input data-check="submit-reflection" type="checkbox"/><span>Fehleranalyse, Grenzen &amp; Fazit</span></label>
         <label class="check"><input data-check="submit-contribution" type="checkbox"/><span>Arbeitsteilung, Quellen &amp; KI-Hilfen</span></label>
+        <p class="small muted"><strong>KI-Regel:</strong> Erlaubt ist KI als Sprachhilfe (Formulieren, Korrigieren). Zahlen, Beobachtungen und Deutungen stammen von Ihnen. Geben Sie die Hilfen im Journal an (Reflexion 5).</p>
       </div>
       <div class="card">
-        <span class="tag orange">Individuell · 33,3 %</span>
+        <span class="tag orange">Individuell · 36,4 %</span>
         <!-- MD:START -->
 ### Das Fachgespräch
 <!-- MD:END -->
@@ -180,6 +181,7 @@ Jede Person kommt einzeln und erklärt das gemeinsame Projekt selbstständig. Da
           <li>Was lässt sich daraus noch nicht schliessen?</li>
           <li>Wie würden wir ein neues Problem untersuchen?</li>
         </ul>
+        <p class="small muted">Dazu kommen eine kurze Grundlagenfrage zu Neuron oder Zwischenschicht (K7) und die Belegfrage «Wo steht das im Journal, welche Zahl?».</p>
         <p class="small muted">Doppellektion 8 · 20 Einzelgespräche mit einer Lehrperson: je 4 Minuten Gespräch plus 1 Minute Notizen/Wechsel. Insgesamt 100 Minuten, davon die letzten 10 direkt nach den 90 Unterrichtsminuten. Die festen Gesprächsfenster werden vorab mitgeteilt; die übrigen arbeiten selbstständig. Keine Zeitreserve und keine Ersatztermine.</p>
       </div>
     </div>

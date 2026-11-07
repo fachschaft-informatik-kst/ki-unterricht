@@ -19,7 +19,7 @@ Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder
       <article>
         <b>3 · Lernen beobachten</b>
         <!-- MD:START -->
-Lassen Sie das Neuron einzelne Beispiele bearbeiten. Beobachten Sie **eine Korrektur** und vergleichen Sie die Parameter vor und nach diesem Schritt.
+Wählen Sie die Aufgabe **OR** und sagen Sie vor jedem Klick auf «Nächstes Beispiel» voraus, ob das Neuron korrigiert wird. Rechnen Sie **die erste Korrektur** von Hand nach und vergleichen Sie die Parameter vor und nach diesem Schritt. Das Ziel jedes Beispiels ist bekannt: Das Neuron lernt **überwacht**.
 <!-- MD:END -->
       </article>
     </div>
@@ -107,10 +107,12 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
           </tbody>
         </table>
       </div>
+      <h4>3 · Ein Lernschritt selbst</h4>
+      <label class="field answer"><span>Wählen Sie im Notebook beim Lernversuch die Aufgabe OR und rechnen Sie die erste Korrektur von Hand nach. Welches Beispiel war falsch, welche Werte haben sich geändert, welcher Wert ist gleich geblieben, und warum?</span><textarea data-answer="lernschritt_selbst" maxlength="10000" placeholder="Beispiel …, geändert …, gleich geblieben …, weil …" rows="3"></textarea></label>
       <details>
-        <summary>Frühere Zusatzversuche – optional (gespeicherte Einträge bleiben erhalten)</summary>
+        <summary>Frühere Zusatzversuche (gespeicherte Einträge bleiben erhalten)</summary>
         <div class="detail-body">
-          <h4>3 · Lernrate ändern (AND)</h4>
+          <h4>4 · Lernrate ändern (im Notebook die Aufgabe NOR wählen)</h4>
           <div class="table-scroll">
             <table class="typen protokoll">
               <thead>
@@ -140,7 +142,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
             </table>
           </div>
           <label class="field answer"><span>Was fällt auf, wenn die Lernrate kleiner oder grösser wird? Gibt es eine Lernrate, die schlecht ist?</span><textarea data-answer="lr_beob" maxlength="10000" placeholder="Bei kleiner Lernrate …" rows="3"></textarea></label>
-          <h4>4 · Pflanzen bestimmen</h4>
+          <h4>5 · Pflanzen bestimmen</h4>
           <div class="table-scroll">
             <table class="typen protokoll">
               <thead>

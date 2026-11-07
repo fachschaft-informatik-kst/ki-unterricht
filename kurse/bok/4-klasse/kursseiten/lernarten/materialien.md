@@ -25,13 +25,17 @@ Vervollständigen Sie: «Ein System lernt aus Daten, wenn …». Verwechseln Sie
 
 #### Inputkarte · Eingabe, Verarbeitung, Ausgabe und Erfahrung
 
-**Spamfilter:** E-Mail als Eingabe → Verarbeitung mit gelerntem Modell → Ausgabe «Spam / kein Spam». Der Erfahrungsschatz sind die beschrifteten Trainingsbeispiele; gelernte Parameter werden beim Training angepasst.
+**Spamfilter:** E-Mail als Eingabe → Verarbeitung mit gelerntem Modell → Ausgabe «Spam / kein Spam». Die beschrifteten Trainingsbeispiele sind die Erfahrungen; der Erfahrungsschatz ist das, was das Modell daraus gelernt und behalten hat (bei einem Neuron die Gewichte und der Bias).
+
+**Wissensbasiert:** Fragen und Reihenfolge legen Menschen fest, zum Beispiel bei einem Tier-Ratebaum auf Papier ([Kursseite Kapitel 2](index.html#lernarten-2)). **Akinator** sieht ähnlich aus, ist aber ein Kontrastfall: Er nutzt Erfahrungen früherer Spielender und fragt bei mehrfach falschem Raten nach dem Namen der Figur (Implementierung nicht öffentlich).
 
 | Lernart | Verfügbare Information | Leitfrage |
 |---|---|---|
 | Überwacht | Beispiele mit Zielwerten oder Labels | Wie passt die Vorhersage zum Ziel? |
 | Unüberwacht | Daten ohne vorgegebene Zielklassen | Welche Ähnlichkeiten oder Gruppen finden sich? |
-| Bestärkend | Rückmeldung zu Handlungen | Welche Handlungen führen zu mehr Belohnung? |
+| Verstärkend | Rückmeldung zu Handlungen | Welche Handlungen führen zu mehr Belohnung? |
+
+**Merkpunkt für den weiteren Kurs:** Überwacht heisst: Zu jedem Beispiel ist die richtige Antwort bekannt, das **Label** (im Neuron später auch **Ziel** genannt). Dieser Begriff kehrt in Doppellektion 3 (Neuron), 4 (Ziffernnetz), im Bildprojekt und bei der Prüfung des fremden Modells in Doppellektion 8 zurück.
 
 **Tandem:** Erklären Sie am Spamfilter Eingabe, Erfahrungsschatz und Ausgabe. [EVA-Grafik und Lernarten im Kurs](index.html#lernarten-4).
 
@@ -65,15 +69,15 @@ Verteilen Sie in der Gruppe die Aufgaben Spielen, Beobachten und Protokollieren.
 
 Sichern Sie **eine tatsächlich beobachtete Änderung**, nicht nur «die KI wird besser». Ein einzelner Sieg belegt noch keine dauerhaft verbesserte Strategie.
 
-**Wahlvertiefung, höchstens eine:** Smiley auf der Kursseite oder [K-Means](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/). Kein zusätzlicher Pflichtparcours mit Akinator oder Filmempfehlungen.
+Kein Wechsel zu weiteren Werkzeugen wie Akinator oder Filmempfehlungen.
 
 ### Auswerten · 10 Min. · Lernarten begründet zuordnen
 
-**Einzeln → Lehrperson → Einzeln · 4 / 3 / 3 Min.**
+**Einzeln → Einzeln → Lehrperson · 4 / 3 / 3 Min.**
 
 1. Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung anhand Ihrer Beobachtungen.
 2. Ordnen Sie NIM und das kommende Bildprojekt zu. Welche Information ist jeweils entscheidend?
 3. Erklären Sie, warum im Memory ein Mensch und nicht ein Modell gelernt hat.
-4. Antworten Sie allein in zwei bis drei Sätzen: «Wie lernt KI?» Nennen und begründen Sie ein Beispiel.
+4. Sicherung (einzeln, erst schreiben): Antworten Sie in zwei bis drei Sätzen auf «Wie lernt KI?» an einem Beispiel, das wir nicht besprochen haben (zum Beispiel ein Empfehlungsdienst). Nennen Sie das Lernsignal und begründen Sie, woran Sie es erkennen. Danach klärt die Lehrperson zwei strittige Zuordnungen, und Sie vergleichen mit der Selbstkontrolle auf der Kursseite (Kapitel 8).
 
-> **Orientierung für die Sicherung:** Das Bildprojekt ist überwachtes Lernen mit beschrifteten Bildern. NIM veranschaulicht Lernen aus Rückmeldung. Für die Begründung zählt das Lernsignal, nicht der Name des Werkzeugs.
+> **Orientierung für die Sicherung:** Das Bildprojekt ist überwachtes Lernen mit beschrifteten Bildern. Dieselbe Lernart zieht sich durch Doppellektion 3 (Neuron: Ausgabe gegen Ziel), 4 (Ziffernnetz: richtige Ziffer als Label) und das Bildprojekt (Ihre Klassen als Labels). NIM veranschaulicht Lernen aus Rückmeldung. Für die Begründung zählt das Lernsignal, nicht der Name des Werkzeugs.

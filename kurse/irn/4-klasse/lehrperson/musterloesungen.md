@@ -24,7 +24,7 @@ Eine Katze lässt sich nicht durch wenige handprogrammierte Merkmale erkennen: P
 
 **Zuordnungsaktivität DL 1 (spezifischste Kategorie):** Ampel mit festem Zeitplan = keine KI; regelbasiertes Schach-Suchprogramm = regelbasierte KI; Spamfilter mit gelerntem Entscheidungsbaum = maschinelles Lernen ohne Deep Learning; Bildklassifikator mit tiefem neuronalem Netz = Deep Learning; Text erzeugendes Sprachmodell = generative KI. Ein tiefes Sprachmodell gehört gleichzeitig zu Deep Learning, ML und KI; die Zuordnung ist deshalb nicht als gegenseitiger Ausschluss zu verstehen. Auf die **konkrete Systembeschreibung** kommt es an.
 
-**Didaktik:** In der 1. Klasse sind vier plus fünf eindeutige Beispiele und eine kurze Reflexion der Pflichtkern. In der 4. Klasse begründen die Lernenden zusätzlich zwei Grenzfälle; eigene Beispiele bleiben Wahlvertiefung. Tastatur-/Touch-Auswahl ist gleichwertig mit Drag-and-drop. Die automatische Selbstkontrolle gibt erst nach vollständiger Einordnung Rückmeldung.
+**Didaktik:** In der 1. Klasse sind vier plus fünf eindeutige Beispiele und eine kurze Reflexion vorgesehen. In der 4. Klasse begründen die Lernenden zusätzlich zwei Grenzfälle. Tastatur-/Touch-Auswahl ist gleichwertig mit Drag-and-drop. Die automatische Selbstkontrolle gibt erst nach vollständiger Einordnung Rückmeldung.
 
 ### Schwache und starke KI
 
@@ -42,7 +42,7 @@ Die Begriffe «KI/ML/Deep Learning/generativ» beschreiben technische Verfahren 
 
 Eine andere gut begründete Wahl ist ebenfalls richtig. Bewertet werden zwei nachvollziehbare Argumente, nicht eine bestimmte Fahrtrichtung.
 
-**Leitfrage:** «Nein. Ein Getränkeautomat führt feste Regeln aus, während ein trainierter Spamfilter Modellparameter aus Beispielen anpasst. Es gibt dennoch auch regelbasierte KI. 'Automatisch' ist nicht gleich 'KI'.»
+**Leitfrage** («Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?»): «Ein System wirkt intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz bräuchte, und mit Neuem zurechtkommt. Ein Getränkeautomat führt feste Regeln aus, während ein trainierter Spamfilter Modellparameter aus Beispielen anpasst. Es gibt dennoch auch regelbasierte KI; 'automatisch' ist nicht gleich 'KI'.» Wer sein Kriterium vom Anfang ändert oder präzisiert, hat die Frage gut genutzt.
 
 ## 2 · Lernarten (Doppellektion 2)
 
@@ -50,13 +50,15 @@ Eine andere gut begründete Wahl ist ebenfalls richtig. Bewertet werden zwei nac
 
 Beim **Spamfilter** ist die Eingabe eine E-Mail. Beim Training sieht das Modell Beispiele mit richtigen Labels und passt Parameter an. Diese Parameter bilden den «Erfahrungsschatz». Bei einer neuen E-Mail entsteht daraus eine Vorhersage; nicht jede Benutzung trainiert das Modell erneut.
 
-**Akinator:** Fragen wie «Ist die Figur erfunden?» oder «Ist sie aus einem Film?» schränken Möglichkeiten ein. Eine unbekannte Figur kann nicht vorhanden sein. Fragen und Entscheidungslogik sind hinterlegtes Wissen. Ein realer Onlinedienst kann zusätzlich Daten sammeln und lernen; das Beispiel allein belegt keine konkrete Implementierung.
+**Wissensbasiert (Ratebaum auf Papier):** Fragen wie «Lebt es im Wasser?» oder «Hat es Federn?» schränken die Möglichkeiten ein. Ein Tier, das nicht im Baum steht, kann der Baum nicht erkennen; er endet ohne Ergebnis oder bei einem falschen Tier. Fragen und Reihenfolge sind hinterlegtes Wissen, das nur Menschen ändern.
+
+**Akinator (Kontrastfall):** Er stellt ebenfalls Ja-Nein-Fragen, nutzt aber Erfahrungen früherer Spielender; bei mehrfach falschem Raten fragt er nach dem Namen der Figur und erweitert seine Datenbank. Er ist deshalb kein Beispiel für ein System, das nicht lernt. Wie er genau arbeitet, ist nicht öffentlich.
 
 **Filmlandkarte:** Nahe Filme können Gemeinsamkeiten bei Genre oder Nutzerbewertungen haben. Beim Wechsel des Nutzers können sich prognostizierte Bewertungen ändern. **Konkrete Filmtitel und Beobachtungen müssen aus dem eigenen Versuch stammen.**
 
 ### Drei Lernarten – Memory und NIM
 
-- **Überwachtes Lernen:** Beispiele mit korrektem Label, z. B. «das Bild zeigt eine Katze».
+- **Überwachtes Lernen:** Beispiele mit korrektem Label, z. B. «das Bild zeigt eine Katze». Dieselbe Lernart begegnet den Lernenden später im Neuron (DL 3), im Ziffernnetz (DL 4) und im Bildprojekt.
 - **Unüberwachtes Lernen:** Muster und Gruppen ohne vorgegebene Labels, z. B. nach Farbe oder Form.
 - **Verstärkendes Lernen:** Rückmeldung über Erfolg/Misserfolg nach Handlungen; beim NIM-Spiel können erfolgreiche Züge verstärkt werden.
 
@@ -79,7 +81,7 @@ Es bildet die **gewichtete Summe plus Bias** und gibt ab Summe 0 die Ausgabe 1 a
 
 ### Was wird gelernt?
 
-**Gewichte und Bias** werden anhand bekannter Trainingsziele schrittweise korrigiert; die Grundrechnung und die Schwelle ändern sich nicht. Eine höhere Lernrate kann schneller korrigieren, aber auch überschiessen. Beobachtete Gewichtsänderungen müssen aus dem eigenen Notebook stammen.
+**Gewichte und Bias** werden beim überwachten Lernen anhand bekannter Trainingsziele (Labels) schrittweise korrigiert; die Grundrechnung und die Schwelle ändern sich nicht. Eine höhere Lernrate kann schneller korrigieren, aber auch überschiessen. Beobachtete Gewichtsänderungen müssen aus dem eigenen Notebook stammen.
 
 ## 4 · XOR und neuronale Netze (Doppellektion 4)
 
@@ -102,11 +104,11 @@ Mit einer Zwischenschicht sind auch nichtlinear trennbare Muster möglich. Beim 
 
 ### Ziffernerkennung
 
-Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte Schicht **16 Neuronen** und der Ausgang **10 Werte** für 0 bis 9. Der höchste Wert bestimmt die Vorhersage, garantiert aber keine Korrektheit. Eine echte Verwechslung muss anhand des gezeigten Bilds erläutert werden.
+Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte Schicht **16 Neuronen** und der Ausgang **10 Werte** für 0 bis 9. Der höchste Wert bestimmt die Vorhersage, garantiert aber keine Korrektheit. Eine echte Verwechslung muss anhand des gezeigten Bilds erläutert werden. Das Netz lernt überwacht: Zu jedem der 1257 Trainingsbilder ist die richtige Ziffer als Label bekannt, und das Netz vergleicht seine Vorhersage damit. Nur die Ausgabe wird mit dem Label verglichen; die versteckten Neuronen bekommen keine eigenen Labels. Auch die 540 Prüfbilder haben Labels, das Netz lernt aber nicht an ihnen.
 
 ### Brücke zum Bildprojekt
 
-«Im Bildprojekt arbeitet ein Netz wie hier, aber mit 1280 statt 2 Eingaben. Die Zahlen berechnet MobileNet, ein fertiges Netz, das sich nicht verändert. Nur das kleine Netz dahinter lernt unsere zwei Klassen: vorhersagen, Fehler bewerten, Gewichte anpassen.» Entscheidend ist die Trennung zwischen **fest** (MobileNet) und **lernend** (kleines Netz).
+«Im Bildprojekt arbeitet ein Netz wie hier, aber mit 1280 statt 2 Eingaben. Die Zahlen berechnet MobileNet, ein fertiges Netz, das sich nicht verändert. Nur das kleine Netz dahinter lernt unsere zwei Klassen, wieder überwacht: vorhersagen, Fehler gegen das Label bewerten, Gewichte anpassen.» Entscheidend ist die Trennung zwischen **fest** (MobileNet) und **lernend** (kleines Netz).
 
 ## 5–8 · Tandemprojekt: beispielhafte Musterlösung
 
@@ -140,7 +142,7 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 
 ### Was wird technisch tatsächlich trainiert?
 
-**MobileNet V2 ist vortrainiert und bleibt eingefroren.** Es liefert **1280 Bildmerkmale**. Nur das **nachgeschaltete Netz mit 16 Neuronen** lernt anhand der Trainingsbilder: **60 Epochen**, Startwert **11**, Adam-Optimierung.
+**MobileNet V2 ist vortrainiert und bleibt eingefroren.** Es liefert **1280 Bildmerkmale**. Nur das **nachgeschaltete Netz mit 16 Neuronen** lernt anhand der Trainingsbilder: **60 Epochen**, Startwert **11**, Adam-Optimierung. Das Training ist überwachtes Lernen: Jedes Foto trägt seine Klasse als Label, und das kleine Netz vergleicht seine Vorhersage damit. V1 und P1/P2 haben ebenfalls Labels, dienen aber nur zum Vergleichen.
 
 - **A:** acht Fotos eines Exemplars aus T1 je Klasse.
 - **B:** je vier Fotos aus T1 und T2 je Klasse.
@@ -148,8 +150,8 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 
 **Wer weiss was?** (Box auf der Seite «A/B-Versuch», unter «Hintergrund»)
 
-- **MobileNet** kennt Formen, Texturen und Muster aus über einer Million fremder Fotos, lernt im Projekt nichts und kennt unsere zwei Klassen nicht. Sein Ausgang mit 1000 Klassennamen wird nicht benutzt.
-- **Das kleine Netz** lernt, welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören. Es weiss nicht, was ein «Apfel» ist; Hintergrund und Licht zählen als Merkmale mit.
+- **MobileNet** kennt Formen, Texturen und Muster aus über einer Million fremder Fotos, lernt im Projekt nichts und kennt unsere zwei Klassen nicht. Es wurde überwacht vortrainiert (Fotos mit 1000 Klassennamen als Labels); dieser Ausgang wird nicht benutzt.
+- **Das kleine Netz** lernt, welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören, überwacht mit unseren Klassen als Labels. Es weiss nicht, was ein «Apfel» ist; Hintergrund und Licht zählen als Merkmale mit.
 
 **Häufige Fehlvorstellungen:** «MobileNet kennt Apfel und Birne schon.» Nein, es liefert nur Merkmale. «Das kleine Netz erkennt den Apfel.» Es ordnet Zahlenmuster zu, notfalls anhand von Hintergrund oder Licht. Darum zählen nur neue Exemplare als Beleg.
 
@@ -179,7 +181,7 @@ Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung*
 
 ### Fremdauswertung (Doppellektion 8)
 
-Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1/P2 des fremden Modells anhand konkreter Exemplare, Quellen und Originalresultate prüfen. Ein Nachlauf mit Startwert **11** liefert einen weiteren Beleg. Danach die eigenen, völlig anderen Bildklassen als Pflichtversuch ausprobieren. **Ungelesene Testbilder derselben Klassen** sind erwünscht; **ganz andere Klassen** hat das Modell nie gelernt. Eine scheinbar gute Trennschärfe ist deshalb keine Klassifikationsgenauigkeit. Das fremde Modell hat nur die ursprünglichen zwei Klassen gelernt; **eine Umbenennung seiner Ausgänge ist kein neues Training**. Entscheidend sind die begründete Prüfung und die Grenzen, nicht eine bestimmte Erfolgsquote.
+Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1/P2 des fremden Modells anhand konkreter Exemplare, Quellen und Originalresultate prüfen. Ein Nachlauf mit Startwert **11** liefert einen weiteren Beleg. Danach die eigenen, völlig anderen Bildklassen ausprobieren. **Ungelesene Testbilder derselben Klassen** sind erwünscht; **ganz andere Klassen** hat das Modell nie gelernt. Eine scheinbar gute Trennschärfe ist deshalb keine Klassifikationsgenauigkeit. Das fremde Modell hat überwacht nur die ursprünglichen zwei Klassen (seine Labels) gelernt; **eine Umbenennung seiner Ausgänge ist kein neues Training**. Entscheidend sind die begründete Prüfung und die Grenzen, nicht eine bestimmte Erfolgsquote.
 
 ## 9 · Sprachmodelle (Doppellektion 9)
 
@@ -187,13 +189,13 @@ Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1
 
 **Mögliche Beobachtung:** Vier sichtbare Wörter ergeben oft einen nachvollziehbareren Satz als zwei, aber selbst längerer Kontext verhindert Widersprüche nicht.
 
-**Beispiel für eine problematische Fortsetzung, nicht als echtes Soekia-Ergebnis ausgeben:** «Eine Person ist zuerst 20 und später 80 Jahre alt.» Grammatik und Plausibilität beweisen keine Faktentreue. Die echten Texte aus den Versuchen sind im Protokoll zu dokumentieren.
+**Beispiel für eine problematische Fortsetzung (mit einer eigenen Kollektion am 6.11.2026 so beobachtet; die echten Texte der Lernenden gehören ins Protokoll):** Mit dem Trainingstext «Die Hauptstadt der Schweiz ist Zürich. Die Hauptstadt von Frankreich ist Paris. …» schreibt Soekia genau diese Aussagen. Das Modell gibt wieder, was in seinen Trainingstexten steht, und prüft nicht, ob es stimmt (die Bundesstadt ist Bern). Oder: «Eine Person ist zuerst 20 und später 80 Jahre alt.» Grammatik und Plausibilität beweisen keine Faktentreue.
 
 **Grenzen des vereinfachten Papageis:** sehr kurzer Kontext; seltene oder ungesehene Wortfolgen sind kaum abgedeckt. Er zählt Häufigkeiten, während heutige neuronale Sprachmodelle die Vorhersage aus **gelernten Gewichten und vielen Schichten** berechnen und typischerweise mit **Tokens** arbeiten.
 
 **Turing-Test:** Ein menschlich wirkender Chat ist kein Beweis für menschliches Denken oder Bewusstsein. Hinweise müssen aus dem tatsächlichen Gespräch stammen.
 
-**Festhalten:** «Mehr Kontext kann Texte verständlicher machen, garantiert aber keine korrekten Tatsachen. Wichtige Behauptungen brauchen eine unabhängige Prüfung.»
+**Festhalten:** «Mehr Kontext kann Texte verständlicher machen, garantiert aber keine korrekten Tatsachen. Wichtige Behauptungen brauchen eine unabhängige Prüfung.» Dazu: «Ich prüfe KI-Aussagen, indem ich eine zweite, unabhängige Quelle suche und die Aussage mit eigenem Wissen oder Daten vergleiche; ein Sprachmodell prüft das nicht.»
 
 ## 10 · KI und Gesellschaft (Doppellektion 10)
 
@@ -225,4 +227,4 @@ Nicht jede ungenaue KI erfüllt automatisch alle drei Kriterien.
 
 ## Erwartungshorizont statt Musterwortlaut
 
-Wichtiger als die genaue Formulierung sind **Fachrichtigkeit, selbst beobachtete Belege, alternative Erklärungen, Grenzen und nachvollziehbare Arbeitsprozesse**. Bewertet werden **18 gemeinsame Punkte** für die eigene Abgabe (K1–K6), **12 individuelle Punkte** im Fachgespräch (K7–K10) und **3 individuelle Punkte** für die Fremdreflexion (K12): zusammen **33 Punkte**. Der gemeinsame Daten-/Ergebnischeck K11 und der Pflichtversuch sind unbenotet.
+Wichtiger als die genaue Formulierung sind **Fachrichtigkeit, selbst beobachtete Belege, alternative Erklärungen, Grenzen und nachvollziehbare Arbeitsprozesse**. Bewertet werden **18 gemeinsame Punkte** für die eigene Abgabe (K1–K6), **12 individuelle Punkte** im Fachgespräch (K7–K10) und **3 individuelle Punkte** für die Fremdreflexion (K12): zusammen **33 Punkte**. Der gemeinsame Daten-/Ergebnischeck K11 und der Versuch mit den eigenen Klassen sind unbenotet.

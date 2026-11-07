@@ -3,7 +3,16 @@
     <h2 class="kapitel-titel">Vom Papagei zum neuronalen Netz</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Das Papagei-Modell zählt Wortfolgen. Heutige Sprachmodelle wie ChatGPT sagen ebenfalls das nächste Wort voraus, aber sie zählen nicht nur: Dahinter steckt ein <strong>neuronales Netz</strong> mit denselben Bausteinen, die Sie schon kennen (Gewichte, Summen, Schichten), nur mit Milliarden von Gewichten.</p>
+    <p>Das Papagei-Modell zählt Wortfolgen. Heutige Sprachmodelle wie ChatGPT sagen ebenfalls das nächste Wort voraus, aber sie zählen nicht nur: Dahinter steckt ein <strong>neuronales Netz</strong>. Es nutzt dieselben Grundideen, die Sie schon kennen (Gewichte, Summen, Schichten), ist aber viel grösser, anders aufgebaut (Transformer-Architektur) und hat Milliarden von Gewichten.</p>
+    <div class="callout">
+      <strong>Vier Sätze zum Mitnehmen</strong>
+      <ol>
+        <li>Wie im Bildprojekt gibt es zwei Phasen: ein grosses Vortraining und danach eine Feinabstimmung für eine Aufgabe (Transfer Learning). Das Vortraining besteht darin, das nächste <a href="#glossar-token">Token</a> vorherzusagen.</li>
+        <li>Wörter werden in Zahlen umgewandelt (Fachwort: <a href="#glossar-einbettung">Einbettung</a>), ähnlich wie MobileNet Bilder in 1280 Merkmale umwandelt; ähnliche Wörter erhalten ähnliche Zahlen.</li>
+        <li>Der Text liefert seine «Labels» selbst: Das tatsächlich folgende Wort ist die richtige Antwort. Darum braucht das Vortraining keine von Hand beschrifteten Daten.</li>
+        <li>Ein Prozentwert beim nächsten Wort sagt, wie gut es nach dem Training in diesen Kontext passt, nicht, ob die Aussage wahr ist.</li>
+      </ol>
+    </div>
     <figure class="concept-figure">
       <img alt="Vergleich: Das Papagei-Modell schlägt in einer Häufigkeitstabelle nach und kennt «Das Kätzchen verfolgt die» nicht. Das neuronale Sprachmodell wandelt Wörter in Zahlen um, rechnet in Schichten aus Neuronen und gibt Wahrscheinlichkeiten für das nächste Wort aus." loading="lazy" src="grafiken/papagei_vs_netz.svg"/>
       <figcaption>Gleiches Ziel, anderes Verfahren: Die Tabelle merkt sich Gesehenes, das Netz lernt, was ähnlich ist.</figcaption>
@@ -35,7 +44,7 @@
           </tr>
           <tr>
             <th>Was bleibt gleich</th>
-            <td colspan="2">Das Trainingsziel ist weiterhin: das nächste Token vorhersagen. Das Modell prüft nicht, ob eine Aussage wahr ist.</td>
+            <td colspan="2">Das Vortraining zielt weiterhin darauf, das nächste Token vorherzusagen (Chat-Produkte werden danach zusätzlich feinabgestimmt). Das Modell prüft nicht, ob eine Aussage wahr ist.</td>
           </tr>
         </tbody>
       </table>

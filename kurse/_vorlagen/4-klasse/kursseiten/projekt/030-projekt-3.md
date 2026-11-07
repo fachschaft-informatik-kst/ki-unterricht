@@ -57,7 +57,7 @@ Tragen Sie für **beide Klassen** je fünf voneinander unabhängige Exemplare ei
 
 Rechnen Sie nach: **2 Klassen × 5 Gruppen × 8 Fotos = 80 Bilder**. Insgesamt sind **32 Trainings-, 16 Validierungs- und 32 Testbilder** vorgesehen. Die beiden Klassen sollen unter vergleichbaren Aufnahmebedingungen fotografiert werden.
 
-**Stresstest (freiwillig):** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. So prüft der Abschlusstest auch, ob das Netz nur Hintergrund und Licht gelernt hat. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich.
+**Stresstest:** Nehmen Sie P2 für **beide Klassen** an einem anderen Ort oder vor einem anderen Hintergrund auf als T1, T2, V1 und P1. So prüft der Abschlusstest auch, ob das Netz nur Hintergrund und Licht gelernt hat. Innerhalb von P2 bleiben die Bedingungen für beide Klassen gleich.
 
 **Abschlusskontrolle:**
 1. Steht kein realer Gegenstand oder keine Person in mehr als einer Gruppe?
@@ -66,7 +66,9 @@ Rechnen Sie nach: **2 Klassen × 5 Gruppen × 8 Fotos = 80 Bilder**. Insgesamt s
 4. Sind beide Klassen mit je 40 Fotos vertreten und die Quellen dokumentiert?
 5. Können Sie in einem Satz erklären, warum eine hohe Trefferquote auf bekannten Bildern kein unabhängiger Test ist?
 
-Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das Ergebnis in **Reflexion 2 des bestehenden Journals** fest – kein neues Formular und keine zusätzliche Abgabe. Sichern Sie Ihre Arbeit unter «Notizen &amp; Projekt» als ZIP. Bei offenen Fragen benutzen Sie zuerst die Musterlösung und die Notebook-Erklärungen im Lernpfad [«Datenregeln lernen»](#projekt-regeln).
+Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das Ergebnis in **Reflexion 2 des bestehenden Journals** fest – kein neues Formular und keine zusätzliche Abgabe (Reflexion 2 darf in DL 6 abgeschlossen werden). Sichern Sie Ihre Arbeit unter «Notizen &amp; Projekt» als ZIP. Bei offenen Fragen benutzen Sie zuerst die Musterlösung und die Notebook-Erklärungen im Lernpfad [«Datenregeln lernen»](#projekt-regeln).
+
+**Abnahme vor dem Fotografieren:** Lassen Sie die Exemplarliste von der Lehrperson oder einem Nachbartandem anhand dieser fünf Fragen abnehmen (ca. 2 Minuten). **Erst danach fotografieren.** Richtwerte: Ende DL 5 Liste abgenommen und Fotos begonnen, Mitte DL 6 Fotos importiert. Testen Sie den Übertragungsweg Handy → Laptop vorab mit einem einzigen Foto. Fehlen Fotos noch in der Mitte von DL 6, melden Sie sich bei der Lehrperson: Nachfotografieren oder der Modus `ERSATZ` mit offen gekennzeichneten Übungsformen.
 <!-- MD:END -->
       <p><a href="#journal">Zur Reflexion im Journal →</a> · <a href="#sicherung">Stand als ZIP sichern →</a></p>
     </div>
@@ -76,7 +78,7 @@ Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das 
 ### Fotostudio · Ihre Bilder aufbereiten
 <!-- MD:END -->
       <!-- MD:START -->
-Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Fotos aufnehmen. Im Fotostudio ordnen Sie Bilder den beiden Klassen und den Gruppen zu, prüfen die Vorschau und exportieren Ihre Sammlung als JSON.
+Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Fotos aufnehmen. Im Fotostudio ordnen Sie jedes Bild seiner Klasse (dem Label) und seiner Gruppe zu, prüfen die Vorschau und exportieren Ihre Sammlung als JSON.
 <!-- MD:END -->
       <div class="actions">
         <button class="btn primary" id="start-studio" type="button">Fotostudio öffnen</button><a class="btn" href="#projekt-reflexionen">Datenplan im Journal festhalten</a>

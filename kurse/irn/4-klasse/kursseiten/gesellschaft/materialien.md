@@ -1,12 +1,12 @@
 ## Doppellektion 10
 
-**Bereitlegen:** [Cathy O’Neils TED Talk](https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end), Papier und diese Fallkarten. Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock; keine zusätzliche Pro/Contra-Raumaufteilung.
+**Bereitlegen:** [Cathy O’Neils TED Talk](https://www.ted.com/talks/cathy_o_neil_the_era_of_blind_faith_in_big_data_must_end) (englisch: Wiedergabe und Untertitel vorab prüfen oder das Transkript der TED-Seite bereithalten), Papier und diese Fallkarten. Ein Fall und dieselbe Gruppe für den gesamten Arbeitsblock; keine zusätzliche Pro/Contra-Raumaufteilung.
 
 ### Ankommen · 5 Min. · Eine erste Position
 
 **Einzeln · 5 Min.**
 
-«Gleiche Regeln sind automatisch fair.» Stimmen Sie zu, teilweise zu oder nicht zu? Notieren Sie einen Grund und behalten Sie die Antwort für den Schlussvergleich.
+«Gleiche Regeln sind automatisch fair.» Stimmen Sie zu, teilweise zu oder nicht zu? Notieren Sie einen Grund und behalten Sie die Antwort für den Schlussvergleich. Denken Sie an den Fall «Schulweg» aus DL 1: Dort galten feste Regeln für alle; wer legte fest, was Schaden heisst?
 
 ### Vorwissen aktivieren · 5 Min. · Von der Modellgrenze zur Folge
 
@@ -60,6 +60,12 @@ Eine Bank nutzt unter anderem Wohngebiet und bisherige Kreditverläufe für eine
 
 **Prüffokus:** Welche Information ist ein Stellvertreter statt eine direkte Aussage über die einzelne Person? Wie könnten schlechtere Konditionen zukünftige Zahlungsschwierigkeiten verstärken?
 
+#### Fallkarte D · Chatbot
+
+Schülerinnen und Schüler nutzen einen Chatbot für Hausaufgaben und Recherche. Er formuliert überzeugend, nennt aber manchmal erfundene Quellen oder falsche Zahlen und kennzeichnet keine Unsicherheit. Viele übernehmen die Antworten ohne Prüfung; Lehrpersonen merken es nur bei auffälligen Fehlern. Die entstandenen Texte stehen später im Internet und könnten wieder als Trainingstexte dienen.
+
+**Prüffokus:** Wer trägt die Folgen falscher, aber überzeugender Ausgaben, und wer prüft? Was ist Opacity (Trainingstexte und Funktionsweise sind nicht einsehbar), was Scale (viele Nutzende), was Damage (und wie gross ist er hier)? Wo könnte eine Rückkopplung entstehen? Welche Massnahme ist überprüfbar? Verwenden Sie Ihren Satz aus DL 9: «Ich prüfe KI-Aussagen, indem …».
+
 #### Urteilsbogen · Beleg, Grenze, Massnahme
 
 Prüfen Sie zuerst allein Betroffene, wichtigsten Beleg und eine möglicherweise übersehene Folge. Führen Sie die Notizen danach in der Gruppe zusammen.
@@ -79,14 +85,18 @@ Prüfen Sie zuerst allein Betroffene, wichtigsten Beleg und eine möglicherweise
 
 **Massnahmenbeispiel, keine fertige Falllösung:** Eine Einspruchsmöglichkeit mit unabhängiger Prüfung einführen; Bearbeitungszeit und korrigierte Fehlentscheidungen über einen festgelegten Zeitraum prüfen. Zielkonflikt: Aufwand und Verzögerung versus wirksame Überprüfung.
 
-Vergleichen Sie mit einem Video-Beispiel und Ihrem Bildprojekt: Warum ist der kleine, lokal begrenzte Schulversuch wahrscheinlich keine WMD? Begrenzen Sie die Aussage: Auch er verlangt sorgfältigen Umgang mit Bildern und nachvollziehbare Behauptungen. [Debattenfragen als Gesprächshilfe](index.html#kritisch).
+Vergleichen Sie mit einem Video-Beispiel und Ihrem Bildprojekt: Warum ist der kleine, lokal begrenzte Schulversuch wahrscheinlich keine WMD? Im Bildprojekt waren Daten, Protokoll und Prüfbericht einsehbar (das Gegenstück zu Opacity), und Hintergrund und Licht waren ein benannter Störfaktor: Was wäre das Gegenstück in Ihrem Fall? Begrenzen Sie die Aussage: Auch der Schulversuch verlangt sorgfältigen Umgang mit Bildern und nachvollziehbare Behauptungen. [Debattenfragen als Gesprächshilfe](index.html#kritisch).
 
-### Auswerten · 15 Min. · Anfangsthese erneut prüfen
+### Auswerten · 15 Min. · Anfangsthese erneut prüfen und Kurs abschliessen
 
-**Klasse → Einzeln → Einzeln · 9 / 4 / 2 Min.**
+**Klasse → Einzeln → Einzeln → Einzeln → Klasse · 4 / 5 / 3 / 2 / 1 Min.**
 
-Vergleichen Sie zwei Fallurteile und ihre Zielkonflikte. Nicht jede Person muss vortragen. Notieren Sie danach eine Erkenntnis und eine offene Frage zum Kurs.
+**Klasse (4 Min.):** Vergleichen Sie zwei Fallurteile und ihre Zielkonflikte. Nicht jede Person muss vortragen.
 
-**Persönliches Schlussurteil:** «Gleiche Regeln sind …, weil im Fall … die betroffene Person … . Eine überprüfbare Gegenmassnahme ist … . Erfolg würde sichtbar an … . Offen bleibt …».
+**Sicherung, zuerst allein (5 Min.):** «Gleiche Regeln sind …, weil im Fall … die betroffene Person … . Eine überprüfbare Gegenmassnahme ist … . Erfolg würde sichtbar an … . Offen bleibt …». Danach mit der Selbstkontrolle vergleichen.
 
-**Antwortort:** [Schlussurteil auf der Kursseite](index.html#urteil). Stichworte genügen für den gemeinsamen Bogen; das eigene Schlussurteil muss begründet sein.
+**Kurssynthese (3 Min.):** «Wo kann eine Vorhersage falsch sein?» Je ein Beispiel aus drei Doppellektionen.
+
+**Rückblick (2 Min. + 1 Min. einzelne Stimmen):** Notieren Sie eine Erkenntnis und eine offene Frage zum Kurs.
+
+**Antwortort:** [Schlussurteil auf der Kursseite «Mein Urteil»](index.html#urteil), Kurssynthese und Rückblick im [Rückblick auf den Themenblock](index.html#rueckblick-themenblock). Stichworte genügen für den gemeinsamen Bogen; das eigene Schlussurteil muss begründet sein.

@@ -1,6 +1,6 @@
 # 4. Klasse · Feldgenaue Musterlösungen
 
-**Nur für Lehrpersonen.** Zu jedem in der Kursseite gespeicherten Antwortfeld steht unten eine mögliche Antwort. Die Kennung in der linken Spalte ist die technische Journal-/Antwortkennung und erleichtert den Abgleich mit ZIP-Dateien. **Alle Zahlen, Namen, Filmfortsetzungen und Beobachtungen ohne Originalnachweis sind frei erfundene didaktische Beispiele**, keine tatsächlich ausgeführten Notebooks und keine echten Projektmessungen. Bei offenen Fragen gelten andere fachlich begründete Antworten ebenso. Bei Videoaufgaben müssen Lernende den tatsächlichen Film und die echte Zeitmarke belegen. Versteckte Alt-Felder und optionale Übungen sind nur der Vollständigkeit halber dokumentiert.
+**Nur für Lehrpersonen.** Zu jedem in der Kursseite gespeicherten Antwortfeld steht unten eine mögliche Antwort. Die Kennung in der linken Spalte ist die technische Journal-/Antwortkennung und erleichtert den Abgleich mit ZIP-Dateien. **Alle Zahlen, Namen, Filmfortsetzungen und Beobachtungen ohne Originalnachweis sind frei erfundene didaktische Beispiele**, keine tatsächlich ausgeführten Notebooks und keine echten Projektmessungen. Bei offenen Fragen gelten andere fachlich begründete Antworten ebenso. Bei Videoaufgaben müssen Lernende den tatsächlichen Film und die echte Zeitmarke belegen. Versteckte Alt-Felder und weitere Übungen sind nur der Vollständigkeit halber dokumentiert.
 
 ## DL 1 · KI, Beispiele und Grenzfälle
 
@@ -22,26 +22,27 @@
 | `begriff_bsp_4` | Sprachmodell, das einen Text verfasst – generative KI. |
 | `ki_zeitstrahl` | Frühe symbolische Systeme nutzten handformulierte Regeln; tiefe neuronale Netze lernen viele Merkmale aus Beispieldaten. Regeln bleiben etwa bei Sicherheitsprüfungen wichtig. Die Meilensteine zeigen keinen vollständigen Ersatz von Regeln durch Lernen. |
 | `ki_ordnung` | 1. Regelbasiertes Schachprogramm: Regeln, regelbasierte KI, schwache KI. 2. Bilderkennung: aus Bilddaten trainiertes tiefes Netz, Deep Learning, schwache KI. 3. Allgemein intelligente Filmfigur: hypothetische starke KI, ihre technische Umsetzung ist unbekannt. Ein Chatbot kann sprachlich überzeugend wirken, ohne verlässlich allgemeine Aufgaben lösen zu können. |
-| `typ_bsp_1` | Früheres optionales Feld: regelbasiertes Schachprogramm. |
+| `typ_bsp_1` | Früheres Feld: regelbasiertes Schachprogramm. |
 | `typ_1` | Frühere Kategorie: regelbasierte KI. |
-| `typ_bsp_2` | Früheres optionales Feld: trainierter Spamfilter. |
+| `typ_bsp_2` | Früheres Feld: trainierter Spamfilter. |
 | `typ_2` | Frühere Kategorie: maschinelles Lernen. |
-| `typ_bsp_3` | Früheres optionales Feld: Tierbildklassifikator. |
+| `typ_bsp_3` | Früheres Feld: Tierbildklassifikator. |
 | `typ_3` | Frühere Kategorie: Deep Learning. |
-| `typ_bsp_4` | Früheres optionales Feld: textgenerierendes Sprachmodell. |
+| `typ_bsp_4` | Früheres Feld: textgenerierendes Sprachmodell. |
 | `typ_4` | Frühere Kategorie: generative KI. |
 | `gesetze` | 1. Bremsen kann Verletzungen vermindern, doch ein Restschaden ist nicht vermeidbar. 2. Asimovs erstes Gesetz entscheidet nicht, wessen Risiko bei konfligierenden Optionen Vorrang haben soll; dafür braucht es Verantwortung, Regeln und gesellschaftliche Abwägung. |
 | `begriffe_saetze` | KI ist der Oberbegriff für Systeme, die Aufgaben intelligent bearbeiten. Maschinelles Lernen bestimmt Muster aus Beispieldaten. Deep Learning ist ML mit mehrschichtigen neuronalen Netzen. Generative KI erzeugt neue Inhalte, zum Beispiel Texte. |
-| `begriffe` | Nein: Eine zeitgesteuerte Ampel führt feste Regeln aus und lernt nicht. Ein Spamfilter mit gelerntem Entscheidungsbaum passt sein Modell anhand von Daten an; es gibt aber auch regelbasierte KI. Offen bleibt, wie man bei Grenzfällen KI sinnvoll abgrenzt. |
+| `begriffe` | Kriterium (Beispiel): Ein System ist intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz einsetzen müsste, und mit Neuem zurechtkommt. Eine zeitgesteuerte Ampel führt feste Regeln aus und lernt nicht, sie ist keine KI. Ein Schachprogramm mit festen Regeln kann regelbasierte KI sein, lernt aber nicht aus Daten; ein Spamfilter mit gelerntem Entscheidungsbaum passt sein Modell anhand von Beispielen an. Nicht jedes automatisch arbeitende Programm ist also eine KI. Offen bleibt, wie man bei Grenzfällen KI sinnvoll abgrenzt. |
 
 ## DL 2 · Lernen aus Daten
 
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `eva_erklaerung` | Spamfilter: Eingabe neue E-Mail; Erfahrungsschatz gelernte Parameter aus beschrifteten Trainingsmails; Ausgabe Spam oder kein Spam. Eine einzelne Benutzung ändert die Parameter nicht automatisch. Das Schachprogramm folgt hier festen Suchregeln. |
-| `wissen_fragen` | «Ist die Figur erfunden?» → ja → «Kommt sie in einem Film vor?» → ja → «Hat sie besondere Kräfte?»; jede Antwort schränkt die Kandidaten ein. |
-| `wissen_unbekannt` | Das System kann die Figur verfehlen oder nach einer neuen Figur fragen; daraus allein lässt sich nicht schliessen, ob es später selbst lernt. |
-| `wissen_regeln` | Entwickler haben Fragekatalog und Entscheidungslogik vorgegeben. Das reine Fragenstellen belegt kein selbstständiges Lernen. |
+| `wissen_fragen` | Beispielbaum für fünf Tiere: «Lebt es im Wasser?» → ja → «Hat es Flossen?» → ja → Fisch, nein → Frosch; auf «Lebt es im Wasser?» → nein → «Hat es Federn?» → ja → Adler, nein → «Bellt es?» → ja → Hund, nein → Katze. Jede Antwort bestimmt die nächste Frage. |
+| `wissen_unbekannt` | Der Baum führt trotzdem zu einem der fünf Tiere (zum Beispiel Adler für den Pinguin) oder endet ohne Ergebnis. Er hat keine Regel für das neue Tier und lernt es nicht von selbst. |
+| `wissen_regeln` | Das Tandem hat Fragen und Reihenfolge festgelegt. Der Baum ändert sich nur, wenn Menschen ihn umbauen; er vergleicht keine Ergebnisse und passt sich nicht an. |
+| `wissen_akinator` | Beobachtungen können abweichen. Mögliche Belege: Er rät auch seltene Figuren, die niemand in eine feste Fragenliste geschrieben hätte; bei mehrfach falschem Raten fragt er nach dem Namen der Figur und erweitert seine Datenbank; er nutzt Erfahrungen früherer Spielender. Wie er genau arbeitet, ist nicht öffentlich; die Aussage «lernt aus früheren Spielen» stützt sich auf die Beschreibung des Anbieters und auf Beobachtungen. |
 | `lernend_nachbarn` | In meinem Beispiel lagen mehrere ähnliche Animationsfilme nahe beieinander; Gemeinsamkeiten waren Genre und ähnliche Bewertungsmuster. Tatsächliche Filmtitel aus dem eigenen Versuch einsetzen. |
 | `lernend_aendert` | Bei Genre werden Genregruppen sichtbar; bei vorhergesagter Bewertung ändern sich die Farben je Nutzer. Ein anderer User Index kann andere Prognosen ergeben. |
 | `lernend_daten` | Vermutlich aus Filmmerkmalen, Nutzendenbewertungen und ihren Mustern; die genaue Implementierung bleibt ohne Dokumentation offen. |
@@ -49,13 +50,14 @@
 | `memory-unsupervised` | Ohne Labels lassen sich beispielsweise Karten nach Farbe oder Form clustern. Je nach Merkmal sind mehrere sinnvolle Gruppierungen möglich. |
 | `memory-reinforcement` | Beim NIM-Spiel wird eine erfolgreiche Zugfolge belohnt bzw. die Rückmeldung verstärkt künftige Entscheidungen; das ist verstärkendes Lernen. |
 | `memory` | Überwacht: Lernen mit richtigen Labels. Unüberwacht: ähnliche Fälle gruppieren. Verstärkend: Belohnung nach Handlungen. NIM ist verstärkend, das Bildprojekt nutzt überwachtes Lernen. |
+| `lernart_sicherung` | Beispiel: Ein Musikdienst empfiehlt Lieder. Lernsignal: Rückmeldung (angehört, übersprungen, «Gefällt mir») oder Ähnlichkeit (Menschen mit ähnlichem Geschmack). Erkennbar daran, dass die Empfehlung aus früheren Daten entsteht und nicht aus einer festgelegten Regel. Labels nur, wenn die Lieder vorher beschriftet wurden. Mehrere Antworten sind richtig, wenn das Lernsignal begründet ist; bewertet wird die Begründung, nicht der Name der Lernart. |
 
 ## DL 3 · Neuron und Protokoll
 
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `neuron_wozu` | Positive Gewichte für Sonne und Freund:innen erhöhen die Schwimmneigung, das negative Prüfungsgewicht senkt sie; Bias legt die Schwelle fest. Bei Prüfungsgewicht 0 hätte die Prüfung keinen Einfluss mehr. |
-| `neuron_gelernt` | Beim überwachten Lernen werden Gewichte und Bias geändert, nicht die Grundform der Rechnung. Im AND-Versuch ist die Zielausgabe (1,1) → 1, sonst 0. |
+| `neuron_gelernt` | Lernart: überwachtes Lernen, denn zu jedem Beispiel ist das Ziel (Label) bekannt: Im AND-Versuch ist die Zielausgabe (1,1) → 1, sonst 0. Verändert haben sich Gewichte und Bias (der Erfahrungsschatz), nicht die Grundform der Rechnung; Eingaben und Ziele blieben gleich. |
 | `sw_gs` | +2 |
 | `sw_gf` | +2 |
 | `sw_gp` | −1 |
@@ -78,29 +80,30 @@
 | `hand_nand_w2` | −1 |
 | `hand_nand_b` | 1,5 |
 | `hand_nand_ok` | Ja, 4 von 4. |
-| `lr_005` | Beispielwert: 36 Runden; echte Notebook-Ausgabe übernehmen. |
-| `lr_02` | Beispielwert: 13 Runden; echte Notebook-Ausgabe übernehmen. |
-| `lr_05` | Beispielwert: 7 Runden; echte Notebook-Ausgabe übernehmen. |
-| `lr_10` | Beispielwert: 12 Runden; echte Notebook-Ausgabe übernehmen. |
-| `lr_beob` | Eine sehr kleine Lernrate verändert die Parameter langsamer; eine grosse kann überschwingen. Aus einem Lauf allein lässt sich keine grundsätzlich beste Lernrate bestimmen. |
+| `lernschritt_selbst` | Mit OR (Start 0,2 / 0,2 / −0,5, Lernrate 0,2) stimmt das erste Beispiel (0,0). Beim zweiten, (0,1) mit Ziel 1, ist die Summe −0,3 und die Ausgabe 0, das Neuron feuert zu wenig: w₂ steigt von 0,2 auf 0,4 und der Bias von −0,5 auf −0,3. w₁ bleibt 0,2, weil der Eingang x₁ = 0 ist (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Entscheidend: Gewichte und Bias werden geändert, Eingaben und Ziele bleiben. |
+| `lr_005` | Beispielwert für NOR (Start 0,2/0,2/−0,5): 18 Runden bis alle vier Zeilen stimmen (Runde ohne Korrektur mitgezählt, sonst 17); echte Notebook-Ausgabe prüfen. |
+| `lr_02` | Beispielwert für NOR: 7 Runden (sonst 6); echte Notebook-Ausgabe prüfen. |
+| `lr_05` | Beispielwert für NOR: 4 Runden (sonst 3); echte Notebook-Ausgabe prüfen. |
+| `lr_10` | Beispielwert für NOR: 4 Runden (sonst 3); echte Notebook-Ausgabe prüfen. |
+| `lr_beob` | Eine sehr kleine Lernrate verändert die Parameter langsamer, hier braucht sie viele Runden; mittlere und grosse Lernraten führen schneller ans Ziel. Aus einem Lauf allein lässt sich keine grundsätzlich beste Lernrate bestimmen. |
 | `iris_richtig` | Beispielwert: 27 von 30; echte Notebook-Ausgabe übernehmen. |
 | `iris_gewicht` | Abhängig vom trainierten Versuch; das Merkmal mit dem grösseren Betrag des gelernten Gewichts eintragen und die Ausgabe nennen. |
-| `perzeptron` | Beim Fehler Ziel 1, Vorhersage 0 werden bei aktiven Eingaben die Gewichte erhöht; bei Ziel 0, Vorhersage 1 gesenkt. Das Modell speichert Gelerntes in Gewichten und Bias. |
+| `perzeptron` | Gewicht: Einfluss einer Eingabe; Bias: verschiebt die Schwelle. Beim überwachten Lernen (Beispiele mit Ziel bzw. Label) ändern sich nur Gewichte und Bias. Die Lernregel vergleicht die Ausgabe mit dem Ziel: Bei Ziel 1 und Vorhersage 0 werden die Gewichte aktiver Eingaben erhöht, bei Ziel 0 und Vorhersage 1 gesenkt (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Das Neuron korrigiert sich nicht selbst; das Verfahren ändert seine Werte. Das Gelernte steckt in Gewichten und Bias. |
 
 ## DL 4 · XOR und Ziffern
 
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `hand_xor_max` | Höchstens 3 von 4 Fällen; keine einzelne Gerade trennt alle XOR-Eingaben. |
-| `xor_warum` | XOR verlangt (0,1) und (1,0) positiv, aber (0,0) und (1,1) negativ. Diese Forderungen widersprechen einer einzigen linearen Schwelle. Die Lernrate verändert nur die Schritte, nicht die Modellgrenze. |
+| `xor_warum` | Geometrisch: Die beiden 1-Punkte (0,1) und (1,0) liegen diagonal gegenüber der beiden 0-Punkte (0,0) und (1,1); keine einzelne Gerade trennt sie. Rechnerisch: Die Bedingungen b < 0, w₂ + b ≥ 0, w₁ + b ≥ 0 und w₁ + w₂ + b < 0 widersprechen sich. Die Lernrate verändert nur die Schritte, nicht die Modellgrenze. |
 | `netze_zwischenschicht` | Für (1,0) liefert ODER = 1 und NAND = 1; das nachfolgende UND gibt 1. Die Zwischenschicht erzeugt Merkmale, die gemeinsam XOR lösen. |
 | `xornetz_1` | Beispiel: 3 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_2` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_4` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_start` | Nein; das Ergebnis kann mit anderen Startwerten variieren. |
 | `xornetz_beob` | Beispielsweise genügten 2 versteckte Neuronen bei einem Startwert; bei einem anderen scheiterte das Training. Ergebnisse nur als Beobachtung eines konkreten Laufs deuten. |
-| `netze` | Ein einzelnes Neuron hat nur eine lineare Grenze. Eine Zwischenschicht kombiniert mehrere Teilentscheidungen, etwa ODER und NAND; damit lässt sich XOR darstellen. |
-| `projekt_bereit_check` | Training passt Gewichte an, Validierung entscheidet zwischen A und B, P1/P2 bleibt bis nach der Wahl gesperrt. Offene Frage: Wie erkennt man ein Datenleck bei fast gleichen Bildern? |
+| `netze` | Ein einzelnes Neuron hat nur eine lineare Grenze; die XOR-Punkte liegen diagonal. Eine Zwischenschicht kombiniert mehrere Teilentscheidungen, etwa OR und NAND; der Ausgang verbindet beide mit AND. Für (1,1): OR = 1, NAND = 0, AND(1, 0) = 0, also XOR = 0. |
+| `projekt_bereit_check` | Brücke: MobileNet bleibt fest und liefert 1280 Zahlen je Foto; nur das kleine Netz lernt (Gewichte und Bias), Eingaben und Ausgabeklassen bleiben. Die richtige Antwort kennt es aus dem Label, der Klasse jedes Fotos (überwachtes Lernen). Vorschau (Raten erlaubt): Die Testbilder müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten. Das wird in DL 5 genau geklärt. Offene Frage zum Beispiel: Wie erkennt man ein Datenleck bei fast gleichen Bildern? |
 | `zif_2` | Beispiel: 55 %; Notebookwert einsetzen. |
 | `zif_4` | Beispiel: 69 %; Notebookwert einsetzen. |
 | `zif_8` | Beispiel: 77 %; Notebookwert einsetzen. |
@@ -110,28 +113,31 @@
 | `zif_verw_a` | Beispiel: tatsächliche Ziffer 8. |
 | `zif_verw_b` | Beispiel: vorhergesagte Ziffer 3. |
 | `zif_beob` | Die handschriftliche 8 könnte wegen einer offenen Schlaufe ähnlich wie eine 3 wirken. Nur auf eine tatsächlich angezeigte Verwechslung beziehen. |
-| `netze_ziffern` | Das 8×8-Bild liefert 64 Eingaben, die verborgene Schicht umfasst z. B. 16 Neuronen, der Ausgang 10 Ziffern. Gewichte wurden aus Trainingsbeispielen gelernt; unbekannte Testbilder prüfen die Übertragung. |
+| `netze_ziffern` | Das 8×8-Bild liefert 64 Eingaben, die verborgene Schicht umfasst z. B. 16 Neuronen, der Ausgang 10 Ziffern. Gewichte wurden aus Trainingsbeispielen gelernt: Zu jedem Bild war die richtige Ziffer als Label bekannt (überwachtes Lernen), und das Netz verglich seine Vorhersage damit. Unbekannte Testbilder prüfen die Übertragung. |
 
 ## DL 5–8 · Datenlernen, eigenes Tandemjournal und Fremdprüfung
 
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `projekt_datencheck` | 1. V1 für den A/B-Vergleich. 2. P1 und P2 für den unabhängigen Abschlusstest nach der Wahl. 3. Nein: Dieselbe Person in T2 und P2 wäre ein Datenleck; neue Personen verwenden. |
+| `datenleck_versuch` | Beispiel (100 Trainingsbilder): mit Kopien etwa 96 %, mit neuen Bildern etwa 84 %; bei 40 Bildern etwa 100 % gegen 67 %, bei 400 etwa 96 % gegen 94 %. Der Wert mit Kopien misst das Wiedererkennen bekannter Bilder, nicht das Lernen; je weniger Trainingsbilder, desto stärker täuscht das Leck. Die Zahlen können abweichen, die Richtung nicht. |
+| `drei_werte` | Der Test (einmal, nach der Auswahl, mit neuen Exemplaren). Der Trainingswert ist fast immer hoch, weil das Netz diese Bilder kennt; die Validierung wurde zur Auswahl benutzt und ist dadurch etwas beschönigt; nur der Test ist nach der Auswahl noch unberührt. |
 | `names` | Beispiel: Mia Muster · Luca Beispiel (fiktive Namen). |
 | `class` | Beispiel: 4a · Apfel oder Birne? |
-| `purpose` | Wir unterscheiden Äpfel und Birnen auf Fotos. Nützlich etwa als Demonstration einer Sortierhilfe; bei ungewöhnlichen Sorten kann sie irren. |
-| `hypothesis` | Wir vermuten, dass B mit zwei Fruchtexemplaren je Klasse besser generalisiert. DL5: Datenplan; DL6: Fotos und A/B; DL7: Auswertung, Test, ZIP. Mia sammelt und dokumentiert, Luca prüft Daten/Notebook; beide kontrollieren gemeinsam. Reserve für fehlerhafte Aufnahmen. |
+| `purpose` | Wir unterscheiden Äpfel und Birnen auf Fotos (unsere zwei Labels: «Apfel» und «Birne»). Nützlich etwa als Demonstration einer Sortierhilfe; bei ungewöhnlichen Sorten kann sie irren. |
+| `hypothesis` | Wir vermuten, dass B mit zwei Fruchtexemplaren je Klasse besser generalisiert. DL5: Datenplan, Abnahme der Exemplarliste, erste Fotos; DL6: Import und A/B; DL7: Auswertung, Test, ZIP. Mia sammelt und dokumentiert, Luca prüft Daten/Notebook; beide kontrollieren gemeinsam. Reserve für fehlerhafte Aufnahmen. |
 | `groups` | Apfel/Birne je 8 Fotos: T1 Apfel A1/Birne B1; T2 A2/B2; V1 A3/B3; P1 A4/B4; P2 A5/B5. Insgesamt 2×5×8=80 Bilder: 32 Trainingspool, 16 V1, 32 P1/P2; kein Exemplar doppelt in zwei Gruppen. |
 | `sources` | 80 selbst fotografierte Fotos mit Zustimmung der Eigentümer. Je 8 Ansichten pro Frucht, vergleichbares Licht, gleicher Tisch und wechselnde Perspektiven. Pro Gruppe anderes Fruchtexemplar; Bildnamen und Quellen in der JSON vermerkt. |
 | `data_limits` | Nur fünf Exemplare je Klasse, möglicherweise ähnlicher Hintergrund oder ähnliche Sorten. Das Netz kann Farbe oder Beleuchtung statt Fruchtform nutzen. |
-| `comparison` | REINES ZAHLENBEISPIEL: A 12/16=75 %, B 14/16=87,5 % auf V1; B um 12,5 Prozentpunkte besser. Ein V1-Bild der Birne B3 wurde von A als Apfel und von B als Birne vorhergesagt. Licht oder Zufall können ebenfalls die Differenz erklären. |
-| `selection` | Vor Einsicht in P1/P2 wählen wir B wegen 14 statt 12 korrekter V1-Bilder. Das beweist nicht, dass B bei beliebigen Früchten besser ist; der kleine Datensatz und Zufall bleiben andere Erklärungen. |
-| `test` | Erst nach dokumentierter Wahl TEST_FREIGEBEN = True; REINES ZAHLENBEISPIEL: B 26/32=81,25 % auf P1 und P2 zusammen. Keine Änderung am Modell nach dem Test. |
+| `comparison` | REINES ZAHLENBEISPIEL: A 11 von 16 (68,75 %), B 14 von 16 (87,5 %) auf V1; Unterschied 3 Bilder. Im Training lagen beide nahe 100 %: Das Netz kennt die Trainingsbilder, V1 zeigt neue Exemplare. Der Abstand zwischen Training und V1 zeigt, wie viel das Netz nur wiedererkennt; er ist bei A grösser (etwa 31 gegen 13 Prozentpunkte) und deutet auf Überanpassung hin. Ein V1-Bild der Birne B3 wurde von A als Apfel und von B als Birne vorhergesagt. Gleich blieben Bildzahl, Netz, Epochen, Startwert und V1; sonst wäre unklar, ob die Vielfalt oder etwas anderes den Unterschied macht. V1 ist nur ein Exemplar je Klasse: Licht, Zufall oder genau diese Exemplare können die Differenz ebenfalls erklären. |
+| `selection` | Vor Einsicht in P1/P2 wählen wir B wegen 14 statt 11 korrekten V1-Bildern (3 Bilder Unterschied, mehr als die Faustregel von zwei). Bei den Startwerten 11, 22 und 33 lag B in zwei Läufen vorn und in einem gleichauf; die Reihenfolge blieb also meist gleich (Zahlenbeispiel). Das beweist nicht, dass B bei beliebigen Früchten besser ist; V1 hat nur ein Exemplar je Klasse, und Zufall bleibt eine andere Erklärung. Bei Gleichstand oder höchstens zwei Bildern Unterschied: Wir wählen B, weil B die beiden Grenzbilder im Einzelfall richtig vorhersagt; der V1-Wert allein unterscheidet die Varianten nicht. |
+| `test` | Erst nach dokumentierter Wahl TEST_FREIGEBEN = True; REINES ZAHLENBEISPIEL: B 26 von 32 Testbildern richtig = 81,25 % (P1 und P2 zusammen). P1/P2 erst jetzt, weil ein Test, der die Auswahl beeinflusst hätte, kein unabhängiger Test mehr wäre. Keine Änderung am Modell nach dem Test. |
 | `examples` | REINE BEISPIELE: P1/Apfel A4 Bild 02: Apfel → Apfel (richtig); P1/Birne B4 Bild 05: Birne → Apfel (Fehler); P2/Birne B5 Bild 07: Birne → Birne (richtig). Tatsächliche Bild-IDs und Ausgaben ersetzen. |
 | `limits` | Hilfreich als Lernbeispiel bei bekannten Früchtearten; nicht verlässlich für beliebige Sorten, schlechte Beleuchtung oder verdeckte Objekte. Eine einzelne Teststichprobe ersetzt keine breit angelegte Prüfung. Unterschieden hat das kleine Netz auf den festen MobileNet-Merkmalen, nicht MobileNet selbst. Hintergrund oder Licht könnten mitgeholfen haben; ein Stresstest mit P2 an einem anderen Ort oder weitere neue Exemplare würden das prüfen. |
 | `conclusion` | Im Beispiel spricht V1 für die vielfältigere Trainingsauswahl B, doch der Test beweist keine allgemeine Regel. Nächster Versuch: mehr unabhängige Exemplare und mehrere vorab festgelegte Startwerte, ohne P1/P2 nachträglich zum Optimieren zu benutzen. |
-| `contribution` | Mia: Fotos und Quellenliste; Luca: Import und Vergleich; beide: Datencheck, Interpretation und Gesprächsvorbereitung. Wir mussten zwei unscharfe Fotos neu aufnehmen und eine halbe Etappe verschieben. Hilfe: Kursnotebook und Glossar; keine generierten Messergebnisse übernommen. |
-| `reproduktion` | FREMDES TANDEM – Gabel/Löffel (andere Klassen als unsere Äpfel/Birnen). T1/T2: je zwei andere Gabeln/Löffel als V1 und P1/P2; pro Klasse/Gruppe 8 Bilder, 80 insgesamt. Auf möglichen gleichen Tischhintergrund achten. Originalbeispiel A auf V1 11/16, B 13/16, Wahl B VOR Test, P1/P2 25/32. Nachlauf mit Startwert 11 beispielsweise B 13/16 und 25/32. P1/P2 gehört nicht ins Training. Rückfrage: Sind Beleuchtung und Abstand beider Klassen vergleichbar? Alle Zahlen illustrativ, keine fremden Originalwerte. |
+| `contribution` | Mia und Luca wechseln die Rollen: In DL5 sammelt Mia Fotos und Quellenliste, Luca prüft Daten; in DL6 importiert Luca und Mia prüft den Vergleich; in DL7 schreiben beide Reflexion 4–5 und erklären sich gegenseitig das Projekt. Wir mussten zwei unscharfe Fotos neu aufnehmen und eine halbe Etappe verschieben. |
+| `ki_nutzung` | Kursnotebook und Glossar als Nachschlagehilfe; eine KI nur, um zwei Sätze der Zusammenfassung sprachlich zu glätten. Alle Zahlen, Beobachtungen und Deutungen stammen aus unserem Versuch; keine generierten Messergebnisse übernommen. |
+| `reproduktion` | FREMDES TANDEM – Gabel/Löffel (andere Klassen als unsere Äpfel/Birnen). 1 T1/T2: Klassen Gabel/Löffel; je Gruppe andere Exemplare, 8 Bilder je Klasse und Gruppe, 80 insgesamt. 2 V1: anderes Exemplar als T1/T2. 3 P1/P2: andere Exemplare als T1/T2 und V1; auf möglichen gleichen Tischhintergrund achten; P1/P2 gehört nicht ins Training, sonst wäre das Testresultat kein unabhängiger Test. 4 Originalbeispiel A auf V1 11/16, B 13/16, Wahl B vor dem Test; Nachlauf mit Startwert 11: B 13/16. 5 Originaltest P1/P2 25/32, Nachlauf 25/32. Rückfragen: Sind Beleuchtung und Abstand beider Klassen vergleichbar? Der V1-Unterschied beträgt nur 2 Bilder (nach der Faustregel kein Beleg): Mit welchem Argument wurde B gewählt? Alle Zahlen illustrativ, keine fremden Originalwerte. |
 | `fremd_erwartung` | «Es rät nur» oder «teilweise» – Vermutung vor dem Versuch; jede begründete Erwartung zulässig. |
 | `fremd_c_1` | 23 (eigene Apfel-Fotos vom fremden Modell als Gabel klassifiziert, Beispiel). |
 | `fremd_c_2` | 17 (eigene Apfel-Fotos als Löffel, Beispiel). |
@@ -147,13 +153,13 @@
 | `fremd_name_1` | Mia Muster (fiktiv). |
 | `fremd_reflexion_1_test` | Beim fremden Gabel/Löffel-Modell wurden P1/P2 beispielhaft zu 25/32 korrekt erkannt; mit unseren Äpfeln/Birnen ergab sich eine Trennschärfe von 55 %, aber keine Apfel-/Birnen-Trefferquote. |
 | `fremd_reflexion_1_grenzen` | Neue Gabeln/Löffel auf P1/P2 testen die Generalisierung derselben gelernten Klassen. Bei Apfel/Birne erzwingt das Modell Gabel oder Löffel. Möglicher Einfluss: Hintergrund. Folgetest: dieselbe Frucht vor zwei Hintergründen, Modell unverändert. |
-| `fremd_reflexion_1_repro` | Optional: Original V1/B 13/16 und P1/P2 25/32; eigener Nachlauf mit gleichem Startwert ebenfalls 13/16 und 25/32 (nur Beispiel). |
-| `fremd_reflexion_1_transfer` | Optional: Kontrolliertes Gegenlicht bei beiden ursprünglichen Klassen Gabel/Löffel mit neuen Exemplaren erproben. |
+| `fremd_reflexion_1_repro` | Original V1/B 13/16 und P1/P2 25/32; eigener Nachlauf mit gleichem Startwert ebenfalls 13/16 und 25/32 (nur Beispiel). |
+| `fremd_reflexion_1_transfer` | Kontrolliertes Gegenlicht bei beiden ursprünglichen Klassen Gabel/Löffel mit neuen Exemplaren erproben. |
 | `fremd_name_2` | Luca Beispiel (fiktiv). |
 | `fremd_reflexion_2_test` | Der Originaltest auf ungesehenen Gabeln/Löffeln hatte im Beispiel 25/32 richtige Ergebnisse. Für Äpfel/Birnen lieferte das fremde Netz 23/17 bzw. 19/21 Vorhersagen; es kennt diese Klassen nicht. |
 | `fremd_reflexion_2_grenzen` | P1/P2 ist ein unabhängiger Test für Gabel/Löffel; bei Äpfeln/Birnen gibt es kein korrektes Label unter den Ausgaben. Die Trennung kann durch Farben oder Licht entstehen. Folgetest: gleiche Objekte mit kontrolliert wechselnder Beleuchtung fotografieren. |
-| `fremd_reflexion_2_repro` | Optional: Nachlauf mit Startwert 11 reproduziert beispielsweise die V1-Wahl B und 25/32 im Test; bei Abweichungen exakte Zahlen notieren. |
-| `fremd_reflexion_2_transfer` | Optional: Beide ursprünglichen Klassen auf einer zweiten Kamera mit neuen Exemplaren testen. |
+| `fremd_reflexion_2_repro` | Nachlauf mit Startwert 11 reproduziert beispielsweise die V1-Wahl B und 25/32 im Test; bei Abweichungen exakte Zahlen notieren. |
+| `fremd_reflexion_2_transfer` | Beide ursprünglichen Klassen auf einer zweiten Kamera mit neuen Exemplaren testen. |
 
 ## DL 9 · Sprachmodelle
 
@@ -181,18 +187,21 @@
 | `pst_3_plausibel` | Grammatikalisch möglich, sachlich nicht belegt. |
 | `pst_3_wahr` | Nicht prüfbar als Zukunftsaussage; die pauschale Behauptung ist unbegründet. |
 | `pst_beob` | Mit mehr Kontext passt die Fortsetzung möglicherweise besser; «Der Mond besteht aus Käse» kann sprachlich plausibel wirken und ist trotzdem falsch. |
-| `soe_variable` | Beispiel: einmal Kontextlänge, danach Trainingsgeschichte – nur eine Bedingung pro Vergleich. |
+| `soe_erwartung` | Ich erwarte, dass N = 5 die Sätze flüssiger und grammatisch korrekter macht, weil das Modell mehr Wörter als Kontext sieht, dass es aber öfter ganze Textstücke aus den Trainingstexten wiederholt. Bei einem Trainingstext mit falscher Aussage erwarte ich, dass das Modell sie wiedergibt, weil es nur zählt, was im Text steht. (Beispiel; jede begründete Prognose ist zulässig.) |
+| `soe_variable` | Beispiel: einmal nur die N-Gramm-Länge (2 gegen 5), danach nur die Temperatur, zuletzt nur den Trainingstext – nur eine Bedingung pro Vergleich. |
 | `soe_gut_text` | Erfundenes Textbeispiel: «Die Schülerin öffnete das Buch und las die erste Seite.» |
 | `soe_gut_beleg` | Die Handlung ist zusammenhängend, die Personen- und Zeitbezüge widersprechen sich nicht. |
-| `soe_problem_art` | Widerspruch. |
-| `soe_problem_text` | Erfundenes Textbeispiel: «Heute ist die Figur zwölf Jahre alt. Gestern feierte sie ihren achtzigsten Geburtstag.» |
-| `soe_problem_beleg` | Die Altersangaben widersprechen sich; ein grammatikalisch korrekter Satz kann inhaltlich falsch sein. |
+| `soe_problem_art` | Falsche Aussage aus dem Trainingstext übernommen (bei selbst erzeugtem Beispiel); sonst Widerspruch. |
+| `soe_problem_text` | Beispiel, wie es mit einer eigenen Kollektion entsteht (echte Ausgabe im Protokoll festhalten, nicht dieses Beispiel abschreiben): Trainingstext «Die Hauptstadt der Schweiz ist Zürich. Die Hauptstadt von Frankreich ist Paris. Die Hauptstadt der Schweiz ist Zürich.» → Soekia schreibt «Die Hauptstadt der Schweiz ist Zürich. Die Hauptstadt von Frankreich ist Paris …». Oder: «Heute ist die Figur zwölf Jahre alt. Gestern feierte sie ihren achtzigsten Geburtstag.» |
+| `soe_problem_beleg` | Das Modell gibt wieder, was in seinen Trainingstexten steht; es prüft nicht, ob es stimmt (die Hauptstadt ist Bern). Ein grammatikalisch korrekter, plausibel klingender Satz kann inhaltlich falsch sein. |
 | `turing_eindruck` | Beispiel: Ich vermutete einen Chatbot. |
 | `turing_richtig` | Beispiel: «Ja»; erst nach der Auflösung eintragen. |
 | `turing_hinweise` | Wiederholte allgemeine Aussagen und fehlender Bezug auf Rückfragen; echte Chatbelege verwenden. |
 | `netz_kennt` | Nein, wenn die betreffende Wortfolge nie in der kleinen Papagei-Tabelle vorkam. |
 | `netz_warum` | Ein neuronales Netz kann aus gelernten Gewichten Muster auf neue Wortfolgen übertragen. |
 | `netz_wahr` | Nein; Wortvorhersage ist keine unabhängige Faktenprüfung. |
+| `sprache_transkript` | 1: stimmt nicht, die vierte Landessprache ist Rätoromanisch, Englisch ist keine Landessprache (Quelle z. B. admin.ch, Bundesverfassung Art. 4). 2: stimmt, der Bundesrat hat sieben Mitglieder (admin.ch). 3: stimmt nicht, die Schweiz hat rund 9 Millionen Einwohnerinnen und Einwohner (bfs.admin.ch). 4: nicht belegbar, ein «Bundesamt für Sprachforschung» gibt es nicht; die Quelle ist erfunden, die Zahl bleibt unbelegt. Der sichere Ton und eine Quellenangabe belegen nichts; man prüft mit einer unabhängigen Quelle. |
+| `sprache_pruefen` | Ich prüfe KI-Aussagen, indem ich eine unabhängige zweite Quelle (Fachseite, Behörde, Lexikon) suche und die Aussage mit eigenem Wissen oder Daten vergleiche. Ein Sprachmodell kann das nicht leisten, weil es nur das wahrscheinlichste nächste Wort berechnet und nicht prüft, ob die Aussage stimmt; ein sicherer Ton oder ein hoher Prozentwert ist kein Beleg. |
 | `sprache_netz` | Neuronale Sprachmodelle lernen Parameter in vielen Schichten und arbeiten mit Tokens, statt nur kurze Häufigkeitstabellen abzulesen. Die Vorhersage garantiert dennoch keine Wahrheit. |
 | `sprache` | Ein längerer Kontext hilft oft beim Zusammenhang, garantiert aber weder logische Konsistenz noch Fakten. Der Papagei hat eine kurze, lückenhafte Tabelle und kennt viele Wortfolgen nicht. |
 
@@ -224,8 +233,9 @@
 | `crit_urteil` | Die Kritik ist plausibel, wenn Modelle intransparent, weit verbreitet und schädlich sind; es braucht Einzelfallbelege statt pauschaler Verurteilung. |
 | `these_vorher` | Eher Zustimmung (Beispielposition). |
 | `these_nachher` | Stimme nicht zu: gleiche Regeln garantieren bei ungleichen Ausgangsdaten keine Fairness. |
-| `these_begruendung` | Historisch verzerrte Trainingsdaten können durch identische Modellregeln Benachteiligung fortschreiben. |
+| `these_begruendung` | Gleiche Regeln sind nicht automatisch fair: Historisch verzerrte Trainingsdaten können durch identische Modellregeln Benachteiligung fortschreiben; im Kreditfall erhalten Personen aus einem Quartier schlechtere Konditionen, nur weil das Wohngebiet als Stellvertreter dient. |
 | `urteil_massnahme` | Beim Kreditfall: Einspruch und unabhängige Fairnessprüfungen einführen; unterschiedliche Ablehnungsraten und begründete Beschwerden vergleichen. Zielkonflikt: Transparenz vs. Datenschutz. |
+| `rueck_synthese` | Eine Vorhersage kann falsch sein, (1) wenn die Regeln nicht alle Fälle abdecken (Schulweg: wer legt fest, was Schaden heisst), (2) wenn das Modell Hintergrund oder Licht statt des Gegenstands gelernt hat (Bildprojekt), (3) wenn es für ganz andere Klassen trotzdem antwortet (DL 8) oder (4) wenn ein Text plausibel klingt, aber nicht wahr ist (Sprachmodell, DL 9). Beispiele sind individuell; entscheidend sind drei verschiedene Lektionen und je ein konkreter Fall. |
 | `rueck_erkenntnis` | Ein präzises Modell kann trotzdem unfair sein, wenn Daten und Entscheidungen gesellschaftliche Nachteile verstärken. |
 | `rueck_frage` | Wie kann man Fairness prüfen, ohne persönliche Daten unnötig offenzulegen? |
 | `rueck_best` | Der Rückkopplungskreislauf half mir, Ursache und Wirkung zu unterscheiden. |

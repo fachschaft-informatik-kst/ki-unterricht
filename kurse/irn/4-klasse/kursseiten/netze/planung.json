@@ -4,7 +4,7 @@
       "id": "04",
       "view": "netze",
       "title": "Warum mehrere Neuronen?",
-      "rueckblick": "In Doppellektion 3 haben Sie einzelne Neuronen für AND und OR berechnet, eingestellt und trainiert. Heute lernen Sie XOR als neue Herausforderung kennen und untersuchen, warum mehrere Neuronen nötig sind.",
+      "rueckblick": "In Doppellektion 3 haben Sie einzelne Neuronen für AND und OR berechnet, eingestellt und überwacht trainiert: mit Beispielen und bekanntem Ziel. Heute lernen Sie XOR als neue Herausforderung kennen und untersuchen, warum mehrere Neuronen nötig sind.",
       "rueckblick_figur": {
         "src": "grafiken/perzeptron.svg",
         "alt": "Ein künstliches Neuron mit zwei Eingängen, Gewichten und Bias.",
@@ -14,7 +14,7 @@
       "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
       "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
       "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung.",
-      "zeit": "Pflichtkern: XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Pflichtnotebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo; selbst durchführen und das separate Ziffern-Notebook sind freiwillig. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient ein zweiminütiger unbenoteter Lernstandscheck; offene Punkte vor SOL-Beginn anhand des Lernlabors klären.",
+      "zeit": "XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Notebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient eine fünfminütige unbenotete Sicherung mit zwei Fragen; offene Punkte vor SOL-Beginn anhand des Lernlabors klären.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -43,7 +43,7 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 3,
-              "text": "Die Lehrperson ruft eine AND-Zeile mit Gewichten 1/1 und Bias −1.5 auf, die Klasse rechnet mit. Erklären Sie, warum die Gewichte und der Bias für alle Eingabefälle gleich bleiben müssen."
+              "text": "Die Lehrperson ruft eine AND-Zeile mit Gewichten 1/1 und Bias −1.5 auf, die Klasse rechnet mit. Erklären Sie, warum die Gewichte und der Bias für alle Eingabefälle gleich bleiben müssen, und rufen Sie in Erinnerung, woher das Neuron beim Lernen das Ziel kannte (überwachtes Lernen)."
             },
             {
               "art": "Ergebnis",
@@ -58,16 +58,22 @@
           "minutes": 22,
           "schritte": [
             {
-              "art": "Input",
-              "wer": "Lehrperson",
-              "min": 10,
-              "text": "Erklärt die XOR-Zielwerte, die vier widersprüchlichen Bedingungen und den fehlenden linearen Trenner. Zeichnet die vier XOR-Punkte an die Tafel und markiert mit der Klasse, warum keine einzelne Gerade die beiden Zielklassen trennt."
-            },
-            {
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 5,
-              "text": "XOR-Rätsel am Beamer im Notebook «XOR: Ein Neuron»: Die Klasse schlägt Gewichte und Bias vor, die Lehrperson prüft alle vier Fälle. Gemeinsam feststellen: Ein Neuron schafft höchstens 3 von 4."
+              "text": "XOR-Rätsel am Beamer im Notebook «XOR: Ein Neuron»: Die Klasse sagt zuerst vorher, wie viele der vier Fälle ein Neuron schaffen kann, schlägt dann Gewichte und Bias vor, und die Lehrperson prüft alle vier Fälle. Gemeinsam feststellen: Ein Neuron schafft höchstens 3 von 4."
+            },
+            {
+              "art": "Input",
+              "wer": "Lehrperson",
+              "min": 5,
+              "text": "Zeichnet die vier XOR-Punkte an die Tafel; die Klasse versucht, eine Gerade einzuzeichnen, und begründet, warum keine einzelne Gerade die beiden Zielklassen trennt. Die algebraischen Bedingungen nur nennen und nicht vorführen: Das Tandem schreibt sie im Anschluss selbst auf."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Schreiben Sie für jede der vier XOR-Zeilen die Bedingung an w₁, w₂ und b auf (Ausgabe 1 heisst Summe ≥ 0, Ausgabe 0 heisst Summe < 0) und markieren Sie, welche Bedingungen sich widersprechen. Vergleichen Sie danach mit der Tabelle im Kurskapitel."
             },
             {
               "art": "Input",
@@ -85,13 +91,13 @@
         {
           "phase": "Verarbeiten",
           "titel": "Netzlösung nachvollziehen und erklären",
-          "minutes": 50,
+          "minutes": 47,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 30,
-              "text": "Arbeiten Sie im Notebook «Neuronale Netze»: Verfolgen Sie den vollständigen Signalweg über OR, NAND und AND und lösen Sie die vier XOR-Fälle mit dem Netz. Der Abschnitt «Selbstcheck · Ein anderer Fall» entfällt, dafür folgt die Papieraufgabe. Die Ziffernerkennung ist ein freiwilliges, eigenständiges drittes Notebook und kein Teil des Pflichtdurchlaufs."
+              "min": 27,
+              "text": "Arbeiten Sie im Notebook «Neuronale Netze»: Verfolgen Sie den vollständigen Signalweg über OR, NAND und AND und lösen Sie die vier XOR-Fälle mit dem Netz. Der Abschnitt «Selbstcheck · Ein anderer Fall» entfällt, dafür folgt die Papieraufgabe. Die Ziffernerkennung ist ein eigenständiges drittes Notebook und gehört nicht zu diesem Durchlauf."
             },
             {
               "art": "Auftrag",
@@ -103,7 +109,7 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 5,
-              "text": "Demo am Beamer: Die Lehrperson lässt das Netz mit 1, 2 und 4 versteckten Neuronen lernen, die Klasse vergleicht die Ergebnisse. Für schnelle Tandems ist das selbstständige Durchführen im Notebook freiwillig."
+              "text": "Demo am Beamer: Die Lehrperson lässt das Netz mit 1, 2 und 4 versteckten Neuronen lernen (überwachtes Lernen mit den vier XOR-Zielwerten), die Klasse vergleicht die Ergebnisse."
             },
             {
               "art": "Ergebnis",
@@ -115,36 +121,36 @@
         {
           "phase": "Auswerten",
           "titel": "Mehrschichtige Netze sichern",
-          "minutes": 10,
+          "minutes": 13,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 2,
-              "text": "Erklären Sie Ihrem Tandem, warum das einzelne Neuron bei XOR scheitert und wie die Zwischenschicht das Problem löst."
+              "text": "Erklären Sie Ihrem Tandem mündlich, warum das einzelne Neuron bei XOR scheitert und wie die Zwischenschicht das Problem löst."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
+              "min": 5,
+              "text": "Sicherung (unbenotet, erst schreiben): Beantworten Sie auf der Kursseite zwei Fragen. Erstens: Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem (Ausgaben für (1,1))? Zweitens: Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto; welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort? Die Vorschaufrage zu den Testbildern darf geraten werden."
             },
             {
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Prüfen Sie gemeinsam die Erklärung für einen XOR-Fall und die Aufgaben von OR, NAND und AND im Netz."
+              "text": "Vergleichen Sie Ihre Antworten mit der Selbstkontrolle auf der Kursseite. Die Lehrperson liest zwei bis drei Antworten an, klärt Missverständnisse und sammelt offene Fragen für den Start in Doppellektion 5."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Gibt nur den Ausblick: In Doppellektion 5 beginnt die selbstständige Projektarbeit mit dem Lernpfad «Daten fair aufteilen». Ein Satz zur Brücke: Im Projekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt (Hinweis «Ausblick auf das Bildprojekt» am Ende der Kursseite). Kein fachlicher Input zur Datenaufteilung in Doppellektion 4."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 2,
-              "text": "Sicherung: Kurzcheck vor dem Projektstart: einzeln in zwei Minuten erklären, was Gewichte und Bias bewirken und warum XOR eine Zwischenschicht braucht. Eine Unsicherheit zur Datentrennung markieren; der Datenaufteilungs-Lernpfad beginnt erst in DL5."
+              "text": "Gibt nur den Ausblick: In Doppellektion 5 beginnt die selbstständige Projektarbeit mit dem Lernpfad «Daten fair aufteilen». Ein Satz zur Brücke: Im Projekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt, wieder überwacht mit Ihren Klassen als Labels (Skizze und Brückenkarte am Ende der Kursseite). Vorbereitungsauftrag bis Doppellektion 5: Thema und zwei Klassen aus der Themenliste wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste, wer zuerst einträgt, behält die Klasse), und Gegenstände besorgen; noch nicht fotografieren. Kein fachlicher Input zur Datenaufteilung in Doppellektion 4."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Zwei überprüfbare Merksätze zu XOR und zur Aufgabe der Zwischenschicht."
+              "text": "Zwei überprüfbare Antworten zu XOR/Zwischenschicht und zur Brücke ins Projekt, dazu ein gewähltes Projektthema."
             }
           ]
         }

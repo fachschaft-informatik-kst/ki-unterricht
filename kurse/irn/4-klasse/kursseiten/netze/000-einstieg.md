@@ -9,10 +9,10 @@
       <img alt="Ein einzelnes Neuron mit Eingaben, Gewichten, Bias und Ausgabe." loading="lazy" src="grafiken/perzeptron.svg"/>
       <figcaption>Rückblick: Ein einzelnes Neuron verrechnet Eingaben, Gewichte und Bias zu einer Ausgabe.</figcaption>
     </figure>
-    <p><strong>Heute können Sie:</strong> Die Grenze eines einzelnen Neurons an XOR erklären und die Funktion einer Zwischenschicht anhand des Netzwerkmodells verstehen.</p>
-    <p class="lesson-question">Wie lösen mehrere einfache Entscheidungen das XOR-Problem?</p>
-    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Viele Neuronen erweitern die Möglichkeiten. Wie wir mit solchen Netzen später eigene Fotos untersuchen, erarbeiten Sie ab Doppellektion 5 selbstständig.</p>
+    <p><strong>Heute können Sie:</strong> Die XOR-Grenze eines einzelnen Neurons begründen und zeigen, wie eine Zwischenschicht das Problem löst.</p>
+    <p class="lesson-question">Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?</p>
+    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.</p>
   </div>
 </details>
 <!-- /LESSONS:netze -->
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-xor">XOR</a> · <a href="#glossar-schicht">Zwischenschicht</a> · <a href="#glossar-aktivierungsfunktion">Aktivierungsfunktion</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-xor">XOR</a> · <a href="#glossar-schicht">Zwischenschicht</a> · <a href="#glossar-aktivierungsfunktion">Aktivierungsfunktion</a> · <a href="#glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#glossar-epoche">Epoche</a></p>

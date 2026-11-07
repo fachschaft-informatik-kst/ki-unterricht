@@ -35,9 +35,9 @@ Beide: 16 Neuronen, 60 Epochen, Startwert 11 und dieselben Validierungsbilder.
         <div class="project-train-overview" aria-labelledby="projekt-training-titel">
           <h2 id="projekt-training-titel">Was wird hier eigentlich trainiert?</h2>
           <ol class="project-train-flow">
-            <li><strong>1 · Unsere Bilder</strong><span>80 Bilder aus zwei Klassen, z. B. Apfel und Birne.</span></li>
+            <li><strong>1 · Unsere Bilder</strong><span>80 Bilder aus zwei Klassen, z. B. Apfel und Birne. Jedes Bild hat sein Label: seine Klasse.</span></li>
             <li class="model-fixed"><strong>2 · MobileNet</strong><span>Liefert 1280 Merkmale pro Bild.</span><em>Vortrainiert · bleibt unverändert</em></li>
-            <li class="model-trained"><strong>3 · Unser kleines Netz</strong><span>16 Neuronen · lernt mit 16 Trainingsbildern pro Variante in 60 Epochen.</span><em>Hier wird wirklich trainiert!</em></li>
+            <li class="model-trained"><strong>3 · Unser kleines Netz</strong><span>16 Neuronen · lernt überwacht (Vorhersage gegen Label) mit 16 Trainingsbildern pro Variante in 60 Epochen.</span><em>Hier wird wirklich trainiert!</em></li>
             <li><strong>4 · Vorhersage &amp; Test</strong><span>Welche Klasse ist es? Funktioniert das auch mit neuen Bildern?</span></li>
           </ol>
           <p class="project-train-note"><strong>Merken Sie sich:</strong> Die Merkmale kommen aus einem fertigen Modell. <strong>Trainiert wird nur unser nachgeschaltetes kleines Netz.</strong></p>
@@ -47,12 +47,12 @@ Beide: 16 Neuronen, 60 Epochen, Startwert 11 und dieselben Validierungsbilder.
           <div class="who-grid">
             <article class="who-card model-fixed">
               <strong>MobileNet <em>vortrainiert · bleibt unverändert</em></strong>
-              <p><b>Kennt:</b> Formen, Texturen und Muster aus über einer Million fremder Fotos mit vielen Alltagsgegenständen.</p>
+              <p><b>Kennt:</b> Formen, Texturen und Muster aus über einer Million fremder Fotos mit vielen Alltagsgegenständen. Es wurde überwacht vortrainiert: mit Fotos und ihren 1000 Klassennamen als Labels.</p>
               <p><b>Kennt nicht:</b> Ihre zwei Klassen. Sein Ausgang mit 1000 Klassennamen wird hier nicht benutzt.</p>
             </article>
             <article class="who-card model-trained">
               <strong>Unser kleines Netz <em>lernt aus Ihren Fotos</em></strong>
-              <p><b>Lernt:</b> Welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören.</p>
+              <p><b>Lernt:</b> Welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören, überwacht mit Ihren Klassen als Labels.</p>
               <p><b>Kennt nicht:</b> Was ein «Apfel» ist. Es sieht nur Zahlen und Ihre Beispiele, also auch Hintergrund und Licht.</p>
             </article>
           </div>
@@ -72,24 +72,24 @@ Zum Ausprobieren und Wiederholen: Python-Zellen öffnen, bearbeiten und mit Shif
     <div class="callout">
       <strong>Ein Lauf ist eine Beobachtung, kein Beweis.</strong>
       <!-- MD:START -->
-Wenige Exemplare und ein Startwert begrenzen die Aussage. B muss nicht besser sein.
+Wenige Exemplare und ein Startwert begrenzen die Aussage. B muss nicht besser sein. **V1 sind 16 Bilder, aber nur ein Exemplar je Klasse:** 16 Bilder sind nicht 16 unabhängige Tests, und ein Bild entspricht 6,25 Prozentpunkten. Faustregel (Richtwert, kein statistisches Kriterium): Ein Unterschied von höchstens zwei Bildern ist kein Beleg. Bei Gleichstand begründen Sie Ihre Wahl mit einem anderen Argument, zum Beispiel mit einzelnen Vorhersagen.
 <!-- MD:END -->
     </div>
     <details>
       <summary>Was halten wir fest?</summary>
       <div class="detail-body">
         <!-- MD:START -->
-Vorher: Vermutung. Nachher: Trefferquoten, Unterschied in Prozentpunkten und konkrete Beispiele. Modellwahl vor dem Abschlusstest begründen.
+Vorher: Vermutung. Nachher: richtig/gesamt auf V1 (zum Beispiel 11 von 16), Unterschied in Bildern und konkrete Beispiele. Modellwahl vor dem Abschlusstest begründen.
 <!-- MD:END -->
         <!-- MD:START -->
-Die Bilder von A und B unterscheiden sich. Ähnliche Aufnahmebedingungen verwenden; mögliche Einflüsse von Hintergrund und Licht offen benennen.
+Die Bilder von A und B unterscheiden sich. Ähnliche Aufnahmebedingungen verwenden; mögliche Einflüsse von Hintergrund und Licht offen benennen. Gleich bleiben bei A und B: Bildzahl, Netz, Epochen, Startwert und Validierungsbilder. Nur so lässt sich ein Unterschied der Vielfalt zuschreiben.
 <!-- MD:END -->
       </div>
     </details>
     <details>
-      <summary>Freiwillig: Wie stabil ist das Ergebnis?</summary>
+      <summary>Wie stabil ist das Ergebnis?</summary>
       <div class="detail-body">
-        <p>Nach Absprache und vor Testeinsicht: drei vorab festgelegte Startwerte 11, 22 und 33. Alle Ergebnisse berichten. Keine Voraussetzung für eine gute Note.</p>
+        <p>Wiederholen Sie den Vergleich vor der Auswahl mit den drei vorab festgelegten Startwerten 11, 22 und 33 (eigene Zelle im Versuchsnotebook, ca. 5 Minuten). Berichten Sie alle Ergebnisse und prüfen Sie, ob A und B in jedem Lauf gleich abschneiden. Nach Testeinsicht sind keine weiteren Startwerte erlaubt.</p>
       </div>
     </details>
     <nav class="page-next" aria-label="Weiter im Projekt">

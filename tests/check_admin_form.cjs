@@ -810,7 +810,8 @@ const server=http.createServer((req,res)=>{
     assert.equal(submitted.changes.length,1);
     assert.equal(submitted.changes[0].path,"kurse/bok/4-klasse/kursseiten/glossar.json");
     const submittedGlossary=JSON.parse(submitted.changes[0].content);
-    assert.equal(submittedGlossary.begriffe.length,30);
+    const glossaryBefore=JSON.parse(fs.readFileSync(path.join(ROOT,"kurse/bok/4-klasse/kursseiten/glossar.json"),"utf8")).begriffe.length;
+    assert.equal(submittedGlossary.begriffe.length,glossaryBefore+1);
     const token=submittedGlossary.begriffe.find(t=>t.id==="token");
     assert.notEqual(token.basis,"Ein Token ist ein Wort oder ein Stück davon.");
     assert.equal(token.vertieft,"Ein Token ist die Einheit einer Tokenisierung im neuronalen Sprachmodell.");

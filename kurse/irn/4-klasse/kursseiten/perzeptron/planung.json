@@ -4,17 +4,17 @@
       "id": "03",
       "view": "perzeptron",
       "title": "Wie entscheidet ein Neuron?",
-      "rueckblick": "In Doppellektion 2 haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.",
+      "rueckblick": "In Doppellektion 2 haben Sie drei Lernsignale unterschieden: Labels (überwachtes Lernen), Ähnlichkeit (unüberwachtes Lernen) und Rückmeldung (verstärkendes Lernen). Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron, das überwacht lernt.",
       "rueckblick_figur": {
         "src": "grafiken/eva_erfahrungsschatz.png",
         "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
         "caption": "Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0)."
       },
-      "goal": "Gewicht und Bias erklären, die Ausgabe eines einzelnen Neurons berechnen und einen Lernschritt anhand von Vorher-Nachher-Werten nachvollziehen.",
+      "goal": "Gewicht und Bias erklären, die Ausgabe eines einzelnen Neurons berechnen und einen Lernschritt des überwachten Lernens (Ausgabe gegen Ziel) anhand von Vorher-Nachher-Werten nachvollziehen.",
       "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und was unverändert bleibt.",
       "product": "Eine nachvollziehbare Schwimmbad- und AND-Rechnung, passende Parameter für AND/OR und ein erklärter Lernschritt.",
-      "zeit": "Pflichtkern: Schwimmbad-Neuron (Experiment 1) und Lernschritt (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2). Experiment 3 selbst durchzuführen ist freiwillig. Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt.",
+      "zeit": "Schwimmbad-Neuron (Experiment 1) und einen ersten Lernschritt mit AND (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2) und lassen danach selbst einen Lernschritt mit OR ablaufen (Experiment 3). Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -43,12 +43,12 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 2,
-              "text": "Benennen Sie gemeinsam zur AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe (Label) und sagen Sie in einem Satz, worin sich AND und OR unterscheiden."
+              "text": "Benennen Sie gemeinsam zur AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe (Label), ordnen Sie das einer Lernart aus Doppellektion 2 zu und sagen Sie in einem Satz, worin sich AND und OR unterscheiden."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eingaben und Zielwerte sind benannt."
+              "text": "Eingaben und Zielwerte (Labels) sind benannt; die Lernart ist überwachtes Lernen."
             }
           ]
         },
@@ -79,7 +79,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 6,
-              "text": "Zeigt Experiment 3 als Demo: Korrektur des Beispiels (1,1) mit Startwerten 0.2/0.2, Bias −0.5 und Lernrate 0.2. Die Klasse sagt vorher, was sich ändert; festgehalten wird: Gewichte und Bias werden korrigiert, nicht die Eingaben oder Labels."
+              "text": "Zeigt Experiment 3 als Demo: Korrektur des Beispiels (1,1) mit Startwerten 0.2/0.2, Bias −0.5 und Lernrate 0.2. Die Klasse sagt vorher, was sich ändert; festgehalten wird: Das Neuron lernt überwacht, denn zu jedem Beispiel ist das Ziel (Label) bekannt und der Unterschied zwischen Ausgabe und Ziel steuert die Korrektur. Gewichte und Bias werden korrigiert, nicht die Eingaben oder Labels."
             },
             {
               "art": "Ergebnis",
@@ -96,8 +96,14 @@
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 32,
+              "min": 27,
               "text": "Arbeiten Sie im Notebook «Neuron-Labor» im Experiment 2: Stellen Sie AND und OR mit Gewichten und Bias ein und halten Sie je eine passende Einstellung fest."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Tandem",
+              "min": 5,
+              "text": "Experiment 3 selbst: Wählen Sie die Aufgabe OR und sagen Sie vor jedem Klick auf «Nächstes Beispiel» voraus, ob das Neuron korrigiert wird. Rechnen Sie die erste Korrektur von Hand nach und halten Sie fest, welcher Wert gleich bleibt und warum."
             },
             {
               "art": "Auftrag",
@@ -109,12 +115,12 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Frei verfügbarer Puffer für Notebook-Start, Technik und Fragen. Freiwillige Vertiefung für schnelle Tandems: Experiment 3 selbst durchführen und den Vorher-Nachher-Vergleich festhalten."
+              "text": "Frei verfügbarer Puffer für Notebook-Start, Technik und Fragen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Eine eigene Handrechnung und nachvollziehbare Regler-Einstellungen für AND und OR."
+              "text": "Eine eigene Handrechnung, nachvollziehbare Regler-Einstellungen für AND und OR und ein selbst vorhergesagter und nachgerechneter Lernschritt."
             }
           ]
         },
@@ -133,19 +139,19 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Vergleichen Sie zwei Vorher-Nachher-Erklärungen aus der Demo (oder aus dem eigenen Lernversuch) und prüfen Sie, ob die korrigierten Werte zur Rechnung passen."
+              "text": "Vergleichen Sie zwei Vorher-Nachher-Erklärungen aus dem eigenen Lernversuch (Experiment 3) und prüfen Sie, ob die korrigierten Werte zur Rechnung passen."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Hält fest: Gelernt werden die Gewichte und der Bias, nicht die Eingaben, Zielwerte oder die Entscheidungsregel. In Doppellektion 4 prüfen wir eine neue Entscheidungsaufgabe."
+              "text": "Hält fest: Das Neuron lernt überwacht; gelernt werden die Gewichte und der Bias, nicht die Eingaben, Zielwerte oder die Entscheidungsregel. In Doppellektion 4 prüfen wir eine neue Entscheidungsaufgabe."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 2,
-              "text": "Sicherung: Formulieren Sie einzeln einen Merksatz dazu, wie ein Neuron entscheidet, und einen weiteren dazu, wie es beim Lernen seine Parameter verändert."
+              "text": "Sicherung: Formulieren Sie einzeln einen Merksatz dazu, wie ein Neuron entscheidet, und einen weiteren dazu, wie es beim überwachten Lernen seine Parameter verändert."
             },
             {
               "art": "Ergebnis",

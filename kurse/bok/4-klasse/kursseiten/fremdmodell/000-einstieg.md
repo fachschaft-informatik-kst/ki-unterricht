@@ -3,6 +3,7 @@
 </div>
 <h1>Was zeigen die Tests<br/>des fremden <em>Modells?</em></h1>
 <p class="lead">Ihr eigenes Projekt ist abgegeben. Jetzt prüfen Sie das Modell eines anderen Tandems: erst seine Daten und Ergebnisse, dann mit Ihren eigenen Bildern. Am Ende begründen Sie, was belegt ist und wo die Grenzen liegen.</p>
+<p class="lesson-question">Leitfrage: Was belegen die Tests des fremden Modells – und was zeigen die Vorhersagen auf ganz anderen Klassen?</p>
 <div class="project-roadmap" id="dl8-ablauf">
   <!-- MD:START -->
 ## Ihr Fahrplan
@@ -22,7 +23,7 @@ Was Sie aus Ihrem Projekt mitbringen und welche zwei Prüfungen Sie unterscheide
     <li class="roadmap-step" id="dl8-etappe-1">
       <span class="roadmap-nr" aria-hidden="true">01</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Dateien vorbereiten</strong><span class="roadmap-meta">Tandem · zu Beginn</span></div>
+        <div class="roadmap-head"><strong>Dateien vorbereiten</strong><span class="roadmap-meta">Tandem · zu Beginn · ca. 10 Min.</span></div>
         <!-- MD:START -->
 Eigenes und fremdes ZIP entpacken, das fremde Projekt im privaten Fenster wiederherstellen und das Notebook finden.
 <!-- MD:END -->
@@ -55,11 +56,11 @@ Das fremde Modell sieht Ihre zwei eigenen Klassen. Erst die Erwartung festhalten
     <li class="roadmap-step" id="dl8-etappe-4">
       <span class="roadmap-nr" aria-hidden="true">04</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Reflexion und Abgabe</strong><span class="roadmap-meta">Tandem und einzeln · K12: max. 3 Punkte</span></div>
+        <div class="roadmap-head"><strong>Reflexion und Abgabe</strong><span class="roadmap-meta">Tandem und einzeln · ca. 15 Min. · K12: max. 3 Punkte</span></div>
         <!-- MD:START -->
-Rückmeldung an das andere Tandem, je zwei persönliche Antworten und das separate ZIP. Der Download allein ist keine Einreichung.
+Rückmeldung an das geprüfte Tandem, je zwei persönliche Antworten und das separate ZIP. Der Download allein ist keine Einreichung.
 <!-- MD:END -->
-        <label class="check"><input data-check="dl8-4" type="checkbox"/><span>Rückmeldung und beide persönlichen Antworten stehen; das separate ZIP ist eingereicht.</span></label>
+        <label class="check"><input data-check="dl8-4" type="checkbox"/><span>Rückmeldung und beide persönlichen Antworten stehen; das separate ZIP ist eingereicht; die fremden Dateien sind gelöscht.</span></label>
       </div>
       <a class="btn roadmap-go" href="#dl8-abschluss">Reflexion &amp; Abgabe →</a>
     </li>
@@ -70,9 +71,9 @@ Rückmeldung an das andere Tandem, je zwei persönliche Antworten und das separa
 ### Selbstständig prüfen, fair beurteilen
 <!-- MD:END -->
   <!-- MD:START -->
-Sie arbeiten als Tandem selbstständig. Die Lehrperson führt ab Beginn die vierminütigen Einzelgespräche; prüfen Sie Ihre Gesprächszeit vorab. Wird eine Person aufgerufen, kann die andere weiterarbeiten. Danach zeigen die Häkchen im Fahrplan, wo Sie weitermachen.
+Sie arbeiten als Tandem selbstständig; die Lehrperson führt ab Beginn die vierminütigen Einzelgespräche. Prüfen Sie Ihre Gesprächszeit vorab. Wird eine Person aufgerufen, arbeitet die andere weiter. Die Lehrperson teilt Ihnen ein fremdes Projekt mit **anderen Klassen als Ihren** zu: Sie prüfen ein Projekt und werden von einem anderen Tandem geprüft. Läuft die Technik nicht, hilft die [Notfallkarte](#dl8-notfall).
 <!-- MD:END -->
-  <p><strong>Verbindlich:</strong> Daten und Ergebnisse des fremden Projekts prüfen, eigene Klassen am fremden Modell ausprobieren, Rückmeldung an das andere Tandem und je zwei persönliche Antworten. Die gemeinsame Prüfung ist <strong>unbenotet</strong>; nur die persönliche Reflexion zählt (<a href="#bewertung">K12, maximal 3 von 33 Punkten</a>). Ihr eigenes, bereits abgegebenes Projekt bleibt unverändert.</p>
+  <p><strong>Ablauf:</strong> die vier Etappen unten. Die gemeinsame Prüfung ist <strong>unbenotet</strong>; nur Ihre persönliche Reflexion zählt (<a href="#bewertung">K12, maximal 3 von 33 Punkten</a>). Ihr eigenes, bereits abgegebenes Projekt bleibt unverändert.</p>
 </div>
 <div class="facts">
   <div class="fact">
@@ -96,4 +97,4 @@ Sie arbeiten als Tandem selbstständig. Die Lehrperson führt ab Beginn die vier
 <!-- /LESSONS:fremdmodell -->
   </div>
 </details>
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-transfer-learning">Transfer Learning</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-validierung">Validierung</a> · <a href="#glossar-testdaten">Testdaten</a> · <a href="#glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#glossar-transfer-learning">Transfer Learning</a> · <a href="#glossar-modellwert">Modellwert</a> · <a href="#glossar-trennschaerfe">Trennschärfe</a></p>
