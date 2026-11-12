@@ -26,6 +26,11 @@ TEACHER_ONLY = re.compile(
     r"Lösung zum Vergleichen|Bereitlegen:|Plan B:|_Lsg|_loesung|Bundesstadt ist Bern")
 
 
+# Dokumente mit nummerierten Fragen (Antwortplatz direkt nach jeder Frage).
+QUESTION_DOCS = {"4-klasse": ("DL01_1_Ankommen.docx", "DL01_4_Verarbeiten.docx", "DL02_5_Auswerten.docx",
+                              "DL04_5_Auswerten.docx", "DL08_4_Verarbeiten.docx")}
+
+
 def lessons(base: Path) -> list[dict]:
     manifest = json.loads((base / "kursseiten/manifest.json").read_text(encoding="utf-8"))
     found = []
@@ -80,6 +85,13 @@ def check(course: str) -> int:
         assert doc["bytes"] == len(data), f"{doc['file']}: Grösse im Verzeichnis veraltet"
         text = text_of(data)
         assert doc["title"] in text, f"{doc['file']}: Titel fehlt"
+        assert not re.search(r"Phase \d von 5|Sozialform:", text), f"{doc['file']}: Phasen-/Sozialformzeile gehört nicht ins Dokument"
+        with zipfile.ZipFile(io.BytesIO(data)) as word:
+            xml = word.read("word/document.xml").decode("utf-8")
+        for line in re.findall(r'w:lineRule="exact" w:line="(\d+)"', xml):
+            assert int(line) >= 2400, f"{doc['file']}: Antwortplatz unter 120 pt"
+        if doc["file"] in QUESTION_DOCS.get(grade, ()):
+            assert re.search(r'w:lineRule="exact"', xml), f"{doc['file']}: Antwortplatz nach den Fragen fehlt"
         leak = TEACHER_ONLY.search(text)
         assert not leak, f"{doc['file']}: Lehrpersonen- oder Lösungsinhalt «{leak.group(0)}»"
     archive = folder / index["zip"]["file"]

@@ -22,6 +22,7 @@ const ROOT=path.resolve(__dirname,"..");
     .flatMap(file=>JSON.parse(fs.readFileSync(file,"utf8")).lessons)
     .sort((a,b)=>a.order-b.order);
   let realIrnMaterials=false;
+  const wordLinkRequests=[];
   const materialFor=(number,course="bok/4-klasse")=>{
     const lesson=materialLessons[number-1];
     const source=fs.readFileSync(path.join(ROOT,"kurse",course,"kursseiten",lesson.view,"materialien.md"),"utf8");
@@ -53,6 +54,12 @@ const ROOT=path.resolve(__dirname,"..");
     if(route){
       const html=teacherShell({course:route[1]+"/"+route[2]+"-klasse",kind:route[3]});
       res.writeHead(200,{"Content-Type":"text/html; charset=utf-8"}).end(html);return;
+    }
+    if(url.pathname==="/api/teacher/dokument-link"){
+      wordLinkRequests.push(url.searchParams.get("course")+"|"+url.searchParams.get("file"));
+      const link="https://teacher-editor.example/teacher/dokumente/"+url.searchParams.get("file")+"?ticket=x";
+      res.writeHead(200,{"Content-Type":"application/json"}).end(JSON.stringify({url:link,word:"ms-word:ofe|u|"+link}));
+      return;
     }
     if(url.pathname==="/api/teacher"){
       const number=Number(url.searchParams.get("dl")||1);
@@ -271,6 +278,12 @@ const ROOT=path.resolve(__dirname,"..");
     const [docDownload]=await Promise.all([page.waitForEvent("download"),
       page.locator("#dokumente-dl-3 .document-list a").first().click()]);
     assert.equal(docDownload.suggestedFilename(),"DL03_1_Ankommen.docx");
+    for(let i=0;i<20&&!wordLinkRequests.includes("irn/4-klasse|DL03_1_Ankommen.docx");i++)
+      await new Promise(resolve=>setTimeout(resolve,100));
+    assert(wordLinkRequests.includes("irn/4-klasse|DL03_1_Ankommen.docx"),
+      "A document click must request the signed Word link");
+    assert.equal(wordLinkRequests.filter(r=>r.endsWith(".zip")).length,0,"The ZIP is only downloaded");
+    assert.match(await page.locator("#dokumente-dl-3 .document-list a").first().getAttribute("title"),/in Word öffnen/);
     await page.locator("#lessonNav a[data-dl='7']").click();
     await page.locator("#dokumente-dl-7.is-selected").waitFor();
     await page.waitForFunction(()=>Math.abs(document.getElementById("dokumente-dl-7").getBoundingClientRect().top)<80);

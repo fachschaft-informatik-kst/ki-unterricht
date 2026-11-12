@@ -19,8 +19,11 @@ Benutzung::
     make dokumente DOKUMENTE_KURS=irn/4-klasse
     .venv/bin/python scripts/build_student_documents.py --course _vorlagen/1-klasse
 
-Benötigt python-docx und markdown-it-py (``requirements-docs.txt``) sowie für
-SVG-Grafiken Node.js mit Playwright (``npm ci``).
+Benötigt python-docx und markdown-it-py (``requirements-docs.txt``), für SVG-Grafiken
+Node.js mit Playwright (``npm ci``) und für den Antwortplatz nach nummerierten Fragen
+LibreOffice und pdftotext (poppler): Ein Layoutlauf misst, wie viel Platz auf der Seite
+bleibt; dieser wird gleichmässig auf die Fragen verteilt (mindestens 120 pt je Frage,
+sonst rutscht die Frage samt Antwortplatz auf die nächste Seite).
 """
 from __future__ import annotations
 
@@ -29,6 +32,7 @@ import io
 import json
 import re
 import subprocess
+import sys
 import tempfile
 import zipfile
 from dataclasses import dataclass, field
@@ -38,7 +42,7 @@ from docx import Document
 from docx.enum.section import WD_ORIENT
 from docx.image.image import Image as DocxImage
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ROW_HEIGHT_RULE
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING, WD_TAB_ALIGNMENT
 from docx.opc.constants import RELATIONSHIP_TYPE
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
@@ -502,7 +506,18 @@ def field_run(paragraph, instruction: str) -> None:
             run.add_text(text)
 
 
-def build_document(phase: Phase, label: str, accent: str, images: dict[str, Path]) -> bytes:
+def question_lists(phase: Phase) -> list[int]:
+    """Nummerierte Fragen: geordnete Listen, deren Antworten nicht in eine folgende Tabelle gehören."""
+    blocks = [b for b in phase.blocks if b.kind != "meta"]
+    return [i for i, b in enumerate(blocks) if b.kind == "list" and b.ordered
+            and not (i + 1 < len(blocks) and blocks[i + 1].kind == "table")]
+
+
+def build_document(phase: Phase, label: str, accent: str, images: dict[str, Path],
+                   answer_space: dict[int, float] | None = None, markers: bool = False) -> bytes:
+    """``answer_space``: Antwortplatz (pt) je Fragenliste; ``markers`` setzt Messpunkte für den Layoutlauf."""
+    answer_space = answer_space or {}
+    questions = set(question_lists(phase))
     doc = Document()
     section = doc.sections[0]
     section.orientation = WD_ORIENT.PORTRAIT
@@ -560,16 +575,6 @@ def build_document(phase: Phase, label: str, accent: str, images: dict[str, Path
     kicker.paragraph_format.space_after = Pt(0)
     doc.add_paragraph(f"{phase.name}: {phase.title}", style="Title")
 
-    meta = next((b for b in phase.blocks if b.kind == "meta"), None)
-    info = doc.add_paragraph()
-    run = info.add_run(f"Phase {phase.index} von 5 · {phase.minutes} Minuten")
-    run.bold = True
-    if meta:
-        social = text_of(meta.runs).rstrip(".")
-        run = info.add_run(f" · Sozialform: {social}")
-    for r in info.runs:
-        r.font.size = Pt(10)
-        r.font.color.rgb = RGBColor(0x37, 0x47, 0x4F)
     if phase.question or phase.link:
         lead = doc.add_paragraph()
         lead.paragraph_format.space_after = Pt(4)
@@ -592,6 +597,7 @@ def build_document(phase: Phase, label: str, accent: str, images: dict[str, Path
     doc.add_paragraph().paragraph_format.space_after = Pt(2)
 
     blocks = [b for b in phase.blocks if b.kind != "meta"]
+    pending_marker: dict[int, str] = {}
     i = 0
     while i < len(blocks):
         block = blocks[i]
@@ -607,13 +613,34 @@ def build_document(phase: Phase, label: str, accent: str, images: dict[str, Path
         if block.kind == "heading":
             write_runs(doc.add_paragraph(style="Heading 2"), block.runs, accent)
         elif block.kind == "paragraph":
-            write_runs(doc.add_paragraph(), block.runs, accent)
+            paragraph = doc.add_paragraph()
+            write_runs(paragraph, block.runs, accent)
+            if (i - 1) in pending_marker:
+                marker(paragraph, pending_marker.pop(i - 1))
         elif block.kind == "list":
             style = "List Number" if block.ordered else "List Bullet"
-            for item in block.items:
-                write_runs(doc.add_paragraph(style=style), item, accent)
+            index = i - 1
+            items = []
+            for number, item in enumerate(block.items):
+                paragraph = doc.add_paragraph(style=style)
+                if markers and index in questions and number == 0:
+                    marker(paragraph, f"QSTART{index}")
+                write_runs(paragraph, item, accent)
+                items.append(paragraph)
+                if index in questions:
+                    if markers:
+                        marker(paragraph, f"QEND{index}x{number}")
+                    paragraph.paragraph_format.keep_with_next = True
+                    paragraph.paragraph_format.keep_together = True
+                    space = answer_space.get(index)
+                    if space:
+                        add_answer_space(doc, space)
+            if markers and index in questions:
+                follow = following_paragraphs(blocks, index)
+                if follow:
+                    pending_marker[follow] = f"QFOLLOW{index}"
             if block.ordered:
-                restart_numbering(doc, block)
+                restart_numbering(doc, items)
         elif block.kind == "table":
             add_table(doc, block, accent, width)
         elif block.kind == "box":
@@ -674,9 +701,42 @@ def add_images(doc, blocks: list[Block], paths: list[Path], width) -> None:
 
 
 
-def restart_numbering(doc, block: Block) -> None:
+def marker(paragraph, token: str) -> None:
+    """Unsichtbarer Messpunkt (1 pt, weiss) für die Layoutmessung mit LibreOffice."""
+    run = paragraph.add_run(token)
+    run.font.size = Pt(1)
+    run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+
+
+def following_paragraphs(blocks: list[Block], index: int) -> int | None:
+    """Letzter Absatz nach der Fragenliste bis zur nächsten Überschrift (soll mit auf die Seite)."""
+    last = None
+    for j in range(index + 1, len(blocks)):
+        if blocks[j].kind != "paragraph":
+            break
+        last = j
+    return last
+
+
+def add_answer_space(doc, space: float) -> None:
+    """Leerer Antwortbereich mit fester Höhe und feiner Grundlinie."""
+    paragraph = doc.add_paragraph()
+    fmt = paragraph.paragraph_format
+    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    fmt.line_spacing = Pt(round(space, 1))
+    fmt.space_before = fmt.space_after = Pt(0)
+    fmt.keep_together = True
+    props = paragraph._p.get_or_add_pPr()
+    border = OxmlElement("w:pBdr")
+    bottom = OxmlElement("w:bottom")
+    for key, value in (("w:val", "dotted"), ("w:sz", "4"), ("w:space", "1"), ("w:color", "B8C2C6")):
+        bottom.set(qn(key), value)
+    border.append(bottom)
+    props.append(border)
+
+
+def restart_numbering(doc, paragraphs: list) -> None:
     """Jede nummerierte Liste beginnt wieder bei 1."""
-    paragraphs = doc.paragraphs[-len(block.items):]
     numbering = doc.part.numbering_part.numbering_definitions._numbering
     style_num = doc.styles["List Number"].element.pPr.numPr.numId.val
     abstract = numbering.num_having_numId(style_num).abstractNumId.val
@@ -823,6 +883,61 @@ def phases_from_plan(base: Path, lessons: list[dict], links: str) -> list[Phase]
     return phases
 
 
+MIN_ANSWER = 120.0                       # pt je Frage; weniger → Frage auf die nächste Seite
+PAGE_BOTTOM = (29.7 - 1.8) / 2.54 * 72   # unterer Satzspiegel (pt von oben)
+SAFETY = 14.0                            # Abstand/Unterschiede Word ↔ LibreOffice
+PER_QUESTION = 9.0                       # Absatzabstand und Grundlinie je Antwortbereich
+
+
+def measure(docs: dict[str, bytes]) -> dict[str, dict[str, tuple[int, float, float]]]:
+    """Rendert Dokumente mit LibreOffice und liefert die Lage der Messpunkte (Seite, oben, unten)."""
+    import shutil
+    soffice, pdftotext = shutil.which("soffice") or shutil.which("libreoffice"), shutil.which("pdftotext")
+    if not docs or not soffice or not pdftotext:
+        if docs:
+            print("WARNUNG: LibreOffice/pdftotext fehlt – Antwortplatz fest 120 pt je Frage.", file=sys.stderr)
+        return {}
+    result: dict[str, dict[str, tuple[int, float, float]]] = {}
+    with tempfile.TemporaryDirectory() as tmp:
+        work = Path(tmp)
+        for name, data in docs.items():
+            (work / name).write_bytes(data)
+        subprocess.run([soffice, "--headless", f"-env:UserInstallation=file://{work}/profile",
+                        "--convert-to", "pdf", "--outdir", str(work), *[str(work / n) for n in docs]],
+                       check=True, capture_output=True, timeout=600)
+        for name in docs:
+            pdf = work / (Path(name).stem + ".pdf")
+            html = subprocess.run([pdftotext, "-bbox", str(pdf), "-"], check=True,
+                                  capture_output=True, text=True).stdout
+            points: dict[str, tuple[int, float, float]] = {}
+            for page, chunk in enumerate(html.split("<page ")[1:], 1):
+                for m in re.finditer(r'<word xMin="[\d.]+" yMin="([\d.]+)" xMax="[\d.]+" yMax="([\d.]+)">'
+                                     r'[^<]*?(Q(?:START|END|FOLLOW)[0-9x]+)</word>', chunk):
+                    points.setdefault(m.group(3), (page, float(m.group(1)), float(m.group(2))))
+            result[name] = points
+    return result
+
+
+def answer_spaces(phase: Phase, points: dict[str, tuple[int, float, float]]) -> dict[int, float]:
+    """Antwortplatz je Fragenliste: Rest der Seite gleichmässig verteilt, mindestens 120 pt."""
+    blocks = [b for b in phase.blocks if b.kind != "meta"]
+    spaces: dict[int, float] = {}
+    for index in question_lists(phase):
+        count = len(blocks[index].items)
+        start = points.get(f"QSTART{index}")
+        end = points.get(f"QEND{index}x{count - 1}")
+        follow = points.get(f"QFOLLOW{index}")
+        space = MIN_ANSWER
+        if start and end and end[0] == start[0]:
+            candidates = []
+            if follow and follow[0] == start[0]:
+                candidates.append((PAGE_BOTTOM - follow[2] - SAFETY) / count - PER_QUESTION)  # Folgetext bleibt
+            candidates.append((PAGE_BOTTOM - end[2] - SAFETY) / count - PER_QUESTION)         # nur die Fragen
+            space = next((c for c in candidates if c >= MIN_ANSWER), MIN_ANSWER)
+        spaces[index] = space
+    return spaces
+
+
 def build(course: str) -> Path:
     base = ROOT / "kurse" / course
     profile = course_profile(course)
@@ -852,10 +967,14 @@ def build(course: str) -> Path:
     entries = []
     with tempfile.TemporaryDirectory() as tmp:
         images = image_files(phases, base, Path(tmp))
+        # Layoutlauf: Messpunkte setzen, mit LibreOffice rendern, Antwortplatz berechnen.
+        measured = measure({phase.file: build_document(phase, label, accent, images, markers=True)
+                            for phase in phases if question_lists(phase)})
         archive = io.BytesIO()
         with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as bundle:
             for phase in sorted(phases, key=lambda p: (p.dl, p.index)):
-                data = build_document(phase, label, accent, images)
+                spaces = answer_spaces(phase, measured.get(phase.file, {})) if question_lists(phase) else None
+                data = build_document(phase, label, accent, images, answer_space=spaces)
                 (target / phase.file).write_bytes(data)
                 folder = f"DL{phase.dl:02d}_{slug(phase.lesson)}"
                 item = zipfile.ZipInfo(f"{folder}/{phase.file}", FIXED_DATE)
