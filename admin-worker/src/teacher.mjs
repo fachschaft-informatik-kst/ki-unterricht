@@ -394,5 +394,5 @@ export function teacherShell(route,courses=normalizeTeacherCourses({version:1,co
     '<p>Lade Lehrpersonenmaterial …</p></main></div>'+
     '<footer><a href="https://fachschaft-informatik-kst.github.io/ki-unterricht/'+route.course+'/">Zur Kursseite</a> · '+
     '<a href="/">Lehrpersonen-Editor</a> · <button type="button" id="printPage">Drucken</button></footer>'+
-    '<script src="/markdown-it.min.js" defer></script><script src="/teacher.js" defer></script></body></html>';
+    '<script src="/markdown-it.min.js" defer></script><script src="/teacher.js?view='+esc(route.kind)+'" defer></script></body></html>';
 }
