@@ -97,3 +97,26 @@ button{font:inherit;cursor:pointer;border:1px solid var(--line);border-radius:7p
 .course-context strong{font-size:1rem}.course-context small{color:var(--muted)}
 @media(max-width:560px){.course-switcher{gap:10px}.course-context{margin-top:3px}.course-picker{min-width:100%}}
 @media print{.course-picker{display:none}.course-switcher{margin:0 0 8px}.course-context{border:0;padding:0}}
+/* Word-Dokumente für Lernende: Download oben rechts je Phase und Bereich «Alle Dokumente». */
+.doc-icon{display:inline-grid;place-items:center;flex:none;width:30px;height:34px;border-radius:5px;background:#2b579a;color:#fff;font-weight:800;font-size:.85rem;box-shadow:inset 0 -3px rgba(0,0,0,.18)}
+.material-phase-heading.has-document{grid-template-columns:42px minmax(0,1fr) auto}
+.material-phase-download{grid-column:3;grid-row:1/3;align-self:start;display:flex;align-items:center;gap:9px;padding:7px 13px 7px 8px;border:1px solid #2b579a;border-radius:10px;background:#f1f5fc;color:#1d3f74;text-decoration:none;line-height:1.2;white-space:nowrap;transition:background .15s,box-shadow .15s}
+.material-phase-download:hover{background:#e3ebf8;box-shadow:0 3px 10px rgba(43,87,154,.18)}
+.material-phase-download:focus-visible,.zip-download:focus-visible,.document-list a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.material-phase-download strong{display:block;font-size:.84rem}.material-phase-download small{display:block;font-size:.7rem;color:#46618c}
+.documents-overview{margin:0 0 18px}
+.zip-download{display:flex;align-items:center;gap:16px;padding:18px 22px;margin:0 0 16px;border-radius:14px;background:var(--accent);color:#fff;text-decoration:none;box-shadow:var(--shadow);transition:filter .15s,transform .15s}
+.zip-download:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.zip-download strong{display:block;font-size:1.12rem}.zip-download small{display:block;opacity:.88;font-size:.82rem}
+.zip-icon{display:grid;place-items:center;flex:none;width:52px;height:52px;border-radius:11px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.65);font-weight:800;letter-spacing:.04em;font-size:.82rem}
+.document-group{scroll-margin-top:18px}.document-group.is-selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--soft),var(--shadow)}
+.document-group-head{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:14px;margin:0 0 12px}
+.document-group-head .section-label{flex-basis:100%}.document-group-head h3{margin:0;font-size:1.15rem;flex:1}
+.document-group-link{font-size:.8rem;font-weight:650}
+.document-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.document-list a{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit;background:#fbfcfc}
+.document-list a:hover{border-color:#2b579a;background:#f1f5fc}
+.doc-text{flex:1;min-width:0}.doc-text small{display:block;color:var(--accent);font-weight:750;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+.doc-text strong{display:block;font-weight:650}.doc-meta{flex:none;color:var(--muted);font-size:.78rem}
+@media(max-width:640px){.material-phase-heading.has-document{grid-template-columns:42px minmax(0,1fr)}.material-phase-download{grid-column:1/3;grid-row:auto;justify-self:start;margin-top:12px}.doc-meta{display:none}.zip-download{padding:15px}}
+@media print{.material-phase-download,.zip-download,.document-group-link{display:none}.material-phase-heading.has-document{grid-template-columns:42px minmax(0,1fr)}}

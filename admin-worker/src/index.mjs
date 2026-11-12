@@ -1,13 +1,13 @@
 import {validatePlan,validateManifest} from "../../shared/course-model.js";
 import {validateGlossary} from "../../shared/glossary-model.js";
-import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS,loadTeacherCourses,teacherThemeStylesheet,normalizeTeacherCourses} from "./teacher.mjs";
+import {parseTeacher,teacherData,teacherShell,readTeacherFile,DOWNLOADS,loadTeacherCourses,teacherThemeStylesheet,normalizeTeacherCourses,parseDocumentDownload,loadDocuments,documentPath} from "./teacher.mjs";
 const REPO = "fachschaft-informatik-kst/ki-unterricht";
 const STATIC = "https://fachschaft-informatik-kst.github.io/ki-unterricht/projekt/admin/";
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const COOKIE = "HttpOnly; Secure; SameSite=Lax; Path=/";
 const MAX_BODY = 5200000;
-const safeTeacherReturn=path=>parseTeacher(path.split("?")[0])||
+const safeTeacherReturn=path=>parseTeacher(path.split("?")[0])||parseDocumentDownload(path.split("?")[0])||
   (/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(path)&&
     Object.prototype.hasOwnProperty.call(DOWNLOADS,path.split("/").pop()));
 const response = (data, status=200, headers={}) => new Response(JSON.stringify(data), {status,headers:{"Content-Type":"application/json","Cache-Control":"no-store",...headers}});
@@ -344,11 +344,29 @@ export default {
       if(req.method==="GET"&&url.pathname.startsWith("/teacher/")){
         const route=parseTeacher(url.pathname);
         const download=/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(url.pathname);
-        if(!route&&!download)return fail(404,"Lehrpersonenmaterial nicht gefunden.");
+        const studentDocument=parseDocumentDownload(url.pathname);
+        if(!route&&!download&&!studentDocument)return fail(404,"Lehrpersonenmaterial nicht gefunden.");
         if(!active)return new Response(null,{status:302,headers:{
           Location:"/auth/start?next="+encodeURIComponent(url.pathname+url.search),
           "Cache-Control":"no-store"}});
         if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
+        if(studentDocument){
+          const courses=await loadTeacherCourses(active.token,github,REPO);
+          const course=courses.find(c=>c.slug===url.searchParams.get("course")&&c.ready);
+          if(!course)return fail(404,"Kurs nicht vorhanden.");
+          // Only files listed in the course's generated index can be downloaded.
+          const index=await loadDocuments(active.token,course,github,REPO);
+          const listed=index&&(index.zip?.file===studentDocument||
+            index.documents.some(d=>d.file===studentDocument));
+          if(!listed)return fail(404,"Dokument nicht gefunden.");
+          const bytes=await readTeacherFile(active.token,documentPath(course,studentDocument),github,REPO);
+          return new Response(bytes,{headers:{
+            "Content-Type":studentDocument.endsWith(".zip")?"application/zip":
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "Content-Disposition":'attachment; filename="'+studentDocument+'"',
+            "Cache-Control":"no-store","X-Content-Type-Options":"nosniff",
+            "Content-Security-Policy":"default-src 'none'; sandbox"}});
+        }
         if(download){
           const relative=DOWNLOADS[download[1]];
           if(!relative)return fail(404,"Datei nicht gefunden.");

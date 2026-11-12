@@ -134,6 +134,7 @@ Diese Inhaltsvorschau enthält keine ausführbare JupyterLite-Laufzeit. Der voll
 | Die Reihenfolge der Unterrichtsbereiche ändern | `kurse/<kurs>/kursseiten/manifest.json` |
 | Eine AVIVA-Lektion bearbeiten | Editor oder `kurse/<kurs>/kursseiten/<bereich>/planung.json` |
 | Materialien oder Musterlösungen anpassen | Editor oder `kurse/<kurs>/lehrperson/` und `.../kursseiten/<bereich>/materialien.md` |
+| Word-Dokumente für Lernende (je AVIVA-Phase) neu erzeugen | `make dokumente` (Standard `DOKUMENTE_KURS=irn/4-klasse`) → `kurse/<kurs>/lehrperson/dokumente/` |
 | Einen Glossarbegriff ändern | Editor oder `kurse/<kurs>/kursseiten/glossar.json` |
 | Ein Python-Notebook ändern | `kurse/<kurs>/content/` |
 | Layout oder interaktive Funktionen ändern | `shared/portal/`, `shared/basis/` |

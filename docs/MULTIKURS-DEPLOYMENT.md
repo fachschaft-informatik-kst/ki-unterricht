@@ -15,7 +15,7 @@ Jede Wurzel enthält alle Kapitel und AVIVA-Pläne (`kursseiten/`), den Material
 
 `shared/course-sites.json` verwaltet `courseRoot`, `manifest`, `teacherFiles`, Veröffentlichungsstatus und Farbthema. Der geschützte Lehrpersonen-Editor liest die Registry und arbeitet mit den jeweiligen Kursquellen. AVIVA, Materialkoffer, Glossar, Musterlösungen und Kurskapitel werden durch den Worker unter der gewählten Kurswurzel gelesen; der Worker validiert den Pfad jedes PR und verweigert gemischte Lehrpersonenänderungen. Die Dateizugriffe auf GitHub bleiben trotzdem technisch von der allgemeinen Repository-Schreibberechtigung abhängig, nicht von isolierten GitHub-Unterordnerrechten.
 
-Die authentifizierten Unterrichtsunterlagen werden über `/teacher/<lehrperson>/<klasse>/{planung,materialien,musterloesungen}` ausgeliefert. Das öffentliche Repository kann die Quelllösungen jedoch weiterhin offenlegen; OAuth schützt nur die gerenderte Lehreroberfläche, nicht GitHub-Quellen.
+Die authentifizierten Unterrichtsunterlagen werden über `/teacher/<lehrperson>/<klasse>/{planung,materialien,musterloesungen,dokumente}` ausgeliefert. «Alle Dokumente» (`dokumente`) listet die generierten Word-Dokumente für Lernende aus `kurse/<kurs>/lehrperson/dokumente/dokumente.json`; Downloads laufen über `/teacher/dokumente/<datei>?course=<kurs>` und sind auf die im Verzeichnis aufgeführten `.docx`- und `.zip`-Dateien beschränkt. Das öffentliche Repository kann die Quelllösungen jedoch weiterhin offenlegen; OAuth schützt nur die gerenderte Lehreroberfläche, nicht GitHub-Quellen.
 
 ## Gemeinsame Infrastruktur
 
