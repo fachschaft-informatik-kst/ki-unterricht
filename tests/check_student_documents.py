@@ -17,7 +17,8 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COURSES = ("irn/4-klasse",)
+COURSES = tuple(sorted(str(p.parent.parent.parent.relative_to(ROOT / "kurse"))
+                       for p in (ROOT / "kurse").glob("*/*-klasse/lehrperson/dokumente/dokumente.json")))
 PHASE = re.compile(r"^### (Ankommen|Vorwissen aktivieren|Informieren|Verarbeiten|Auswerten) · (\d+) Min\. · (.+)$", re.M)
 TEACHER_ONLY = re.compile(
     r"Lehrpersonenhinweis|Hinweis für die Lehrperson|Selbstkontrolle:|Kontrollbeispiele|Kontrolle für \(|"
@@ -44,7 +45,9 @@ def check(course: str) -> int:
     base = ROOT / "kurse" / course
     folder = base / "lehrperson/dokumente"
     index = json.loads((folder / "dokumente.json").read_text(encoding="utf-8"))
-    assert index["version"] == 1 and index["course"] == course
+    grade = course.split("/")[-1]
+    # Copies of a template keep the template index until `make dokumente` runs.
+    assert index["version"] == 1 and index["course"] in (course, "_vorlagen/" + grade), course
     docs = index["documents"]
     plan = lessons(base)
     # Every DL needs its five phases exactly once.
@@ -52,6 +55,11 @@ def check(course: str) -> int:
         [(dl, phase) for dl in range(1, len(plan) + 1) for phase in range(1, 6)], f"{course}: Phasen fehlen"
     expected = []
     for number, lesson in enumerate(plan, 1):
+        if grade == "1-klasse":
+            # 1st grade: tasks come from the AVIVA plan.
+            expected += [(number, i, p["phase"], int(p["minutes"]), p["titel"].strip())
+                         for i, p in enumerate(lesson["phases"], 1)]
+            continue
         source = (base / "kursseiten" / lesson["view"] / "materialien.md").read_text(encoding="utf-8")
         blocks = re.split(r"^## ", source, flags=re.M)
         block = next((b for b in blocks if re.match(rf"Doppellektion 0?{number}\b", b)), "")
@@ -86,8 +94,11 @@ def check(course: str) -> int:
 
 
 def main() -> None:
+    required = {"bok/1-klasse", "bok/4-klasse", "irn/1-klasse", "irn/4-klasse",
+                "_vorlagen/1-klasse", "_vorlagen/4-klasse"}
+    assert required <= set(COURSES), f"Dokumente fehlen für {sorted(required - set(COURSES))}"
     total = sum(check(course) for course in COURSES)
-    print(f"PASS student documents: {total} Word-Dokumente, Verzeichnis und ZIP aktuell, ohne Lehrpersonenhinweise")
+    print(f"PASS student documents: {total} Word-Dokumente in {len(COURSES)} Kursen/Vorlagen, Verzeichnis und ZIP aktuell, ohne Lehrpersonenhinweise")
 
 
 if __name__ == "__main__":

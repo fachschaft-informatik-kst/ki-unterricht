@@ -120,3 +120,13 @@ button{font:inherit;cursor:pointer;border:1px solid var(--line);border-radius:7p
 .doc-text strong{display:block;font-weight:650}.doc-meta{flex:none;color:var(--muted);font-size:.78rem}
 @media(max-width:640px){.material-phase-heading.has-document{grid-template-columns:42px minmax(0,1fr)}.material-phase-download{grid-column:1/3;grid-row:auto;justify-self:start;margin-top:12px}.doc-meta{display:none}.zip-download{padding:15px}}
 @media print{.material-phase-download,.zip-download,.document-group-link{display:none}.material-phase-heading.has-document{grid-template-columns:42px minmax(0,1fr)}}
+/* AVIVA-Planung: Word-Dokument in jeder Phase; 1. Klasse: Phasenleiste oben rechts im Materialkoffer. */
+.phase-table th.phase .phase-doc-link{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:4px 9px 4px 4px;border:1px solid #2b579a;border-radius:8px;background:#f1f5fc;color:#1d3f74;font-size:.74rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.phase-table th.phase .phase-doc-link:hover{background:#e3ebf8}.phase-doc-link .doc-icon{width:20px;height:22px;font-size:.66rem;border-radius:4px}
+.materials-content.has-document-bar{display:flow-root}
+.material-documents{float:right;width:min(330px,100%);margin:0 0 16px 22px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fbfcfc}
+.material-documents-title{margin:0 0 8px;color:var(--accent);font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.material-documents-list{display:grid;gap:6px}.material-documents .material-phase-download{grid-column:auto;grid-row:auto;white-space:normal}
+.material-documents .material-phase-download small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:240px}
+@media(max-width:640px){.material-documents{float:none;width:100%;margin:0 0 16px}}
+@media print{.phase-doc-link,.material-documents{display:none}}

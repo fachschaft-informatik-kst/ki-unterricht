@@ -39,7 +39,9 @@ export async function loadDocuments(token,profile,github,repo){
   let data;
   try{data=JSON.parse(new TextDecoder().decode(await readTeacherFile(token,documentIndexPath(profile),github,repo)));}
   catch(error){if(error.status===404)return null;throw error;}
-  if(data?.version!==1||data.course!==profile.slug||!Array.isArray(data.documents))
+  // Courses copied from kurse/_vorlagen keep the template index until regenerated.
+  const origin=data?.course===profile.slug||data?.course==="_vorlagen/"+profile.grade+"-klasse";
+  if(data?.version!==1||!origin||!Array.isArray(data.documents))
     throw Error("Dokumentverzeichnis ungültig.");
   const documents=data.documents.filter(d=>Number.isInteger(d.dl)&&Number.isInteger(d.phase)&&
     DOCUMENT_FILE.test(d.file||"")&&d.file.endsWith(".docx")).map(d=>({
@@ -252,16 +254,18 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
   if(!current)throw Error("Kein Unterrichtsplan vorhanden.");
   const base={kind,course,lessons:lessons.map(l=>({id:l.id,number:l.number,title:l.title,view:l.view})),
     selectedNumber:current.number,selectedTitle:current.title};
-  if(kind==="planung")return {...base,lesson:current};
+  const lessonDocuments=async()=>{
+    try{const index=await loadDocuments(token,profile,github,repo);
+      return {documents:(index?.documents||[]).filter(d=>d.dl===current.number),zip:index?.zip||null};}
+    catch{return {documents:[],zip:null};} // teacher views stay usable without document links
+  };
+  if(kind==="planung")return {...base,lesson:current,...await lessonDocuments()};
   if(kind==="dokumente"){
     const index=await loadDocuments(token,profile,github,repo);
     return {...base,documents:index?.documents||[],zip:index?.zip||null};
   }
   if(kind==="materialien"){
-    let documents=[],zip=null;
-    try{const index=await loadDocuments(token,profile,github,repo);
-      documents=(index?.documents||[]).filter(d=>d.dl===current.number);zip=index?.zip||null;}
-    catch{ /* material remains usable without document links */ }
+    const {documents,zip}=await lessonDocuments();
     const content=await getText(token,profile.courseRoot+"/kursseiten/"+current.view+"/materialien.md",github,repo);
     const markdown=materialForLesson(content,current.number);
     const intro=profile.teacherFiles.materialsIntro?

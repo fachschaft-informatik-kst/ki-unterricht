@@ -12,6 +12,8 @@ const ROOT=path.resolve(__dirname,"..");
   const documentIndex=JSON.parse(fs.readFileSync(path.join(documentDir,"dokumente.json"),"utf8"));
   const irnDocuments=documentIndex.documents.map(d=>({...d,url:documentUrl("irn/4-klasse",d.file)}));
   const irnZip={...documentIndex.zip,url:documentUrl("irn/4-klasse",documentIndex.zip.file)};
+  const documentsOf=course=>JSON.parse(fs.readFileSync(path.join(ROOT,"kurse",course,
+    "lehrperson/dokumente/dokumente.json"),"utf8")).documents.map(d=>({...d,url:documentUrl(course,d.file)}));
   const teacherCourses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES});
   const irnTheme=DEFAULT_COURSES.find(course=>course.slug==="irn/4-klasse").theme.accent;
   const materialLessons=fs.readdirSync(path.join(ROOT,"kurse/bok/4-klasse/kursseiten"))
@@ -58,10 +60,12 @@ const ROOT=path.resolve(__dirname,"..");
       const base={kind,course:url.searchParams.get("course"),lessons,selectedNumber:number,
         selectedTitle:lessons[number-1]?.title||""};
       const irn=base.course==="irn/4-klasse";
-      const data=kind==="planung"?{...base,lesson:fakeLesson(number)}:
+      const data=kind==="planung"?{...base,lesson:fakeLesson(number),
+          documents:documentsOf(base.course).filter(d=>d.dl===number)}:
         kind==="dokumente"?{...base,documents:irn?irnDocuments:[],zip:irn?irnZip:null}:
         kind==="materialien"?{...base,intro:"",
-          documents:irn&&realIrnMaterials?irnDocuments.filter(d=>d.dl===number):[],zip:irn?irnZip:null,
+          documents:irn&&realIrnMaterials||base.course.endsWith("1-klasse")?
+            documentsOf(base.course).filter(d=>d.dl===number):[],zip:irn?irnZip:null,
           sections:[{title:"DL "+number,
           markdown:base.course==="bok/4-klasse"||realIrnMaterials&&base.course==="irn/4-klasse"?
             materialFor(number,base.course):"## Doppellektion "+number+"\n\nMaterial für DL "+number+
@@ -118,6 +122,10 @@ const ROOT=path.resolve(__dirname,"..");
       assert.notEqual(bg,"rgba(0, 0, 0, 0)");
     }
     assert.equal(await page.locator(".role-legend span").count(),5);
+    const planDoc=page.locator(".phase-table th.phase .phase-doc-link");
+    assert.equal(await planDoc.count(),1,"AVIVA phase cell links its Word document");
+    assert.match(decodeURIComponent(await planDoc.getAttribute("href")),
+      /^\/teacher\/dokumente\/DL03_1_Ankommen\.docx\?course=bok\/4-klasse$/);
     await page.locator("#lessonNav a[data-dl='6']").click();
     await page.locator(".lesson-heading h2").filter({hasText:"DL 06"}).waitFor();
     assert.match(page.url(),/dl=6/);
@@ -228,7 +236,25 @@ const ROOT=path.resolve(__dirname,"..");
           "rgb("+irnTheme.slice(1).match(/../g).map(value=>parseInt(value,16)).join(", ")+")");
       }
     }
+    // 1st grade material has no phase sections: one bar with five documents, top right.
+    await page.goto(origin+"/teacher/irn/1-klasse/materialien?dl=3");
+    await page.locator(".material-documents").waitFor();
+    const bar=page.locator(".material-documents .material-phase-download");
+    assert.equal(await bar.count(),5);
+    assert.match(await bar.first().innerText(),/1 · Ankommen/);
+    const section=await page.locator(".materials-content").boundingBox();
+    const barBox=await page.locator(".material-documents").boundingBox();
+    assert(barBox.x+barBox.width>section.x+section.width-60&&barBox.y<section.y+80,
+      "Document bar must sit in the top-right corner of the material section");
+    const boxes=await Promise.all([0,1,2,3,4].map(i=>bar.nth(i).boundingBox()));
+    assert(boxes.every((box,i)=>!i||box.y>=boxes[i-1].y+boxes[i-1].height-1),"Phase links must not overlap");
+    for(let i=0;i<5;i++)
+      assert.match(decodeURIComponent(await bar.nth(i).getAttribute("href")),
+        new RegExp("^/teacher/dokumente/DL03_"+(i+1)+"_.+\\.docx\\?course=irn/1-klasse$"));
+
     // «Alle Dokumente»: overview of every generated file and one ZIP download.
+    await page.goto(origin+"/teacher/irn/4-klasse/materialien?dl=1");
+    await page.locator(".material-phase-download").first().waitFor();
     await page.setViewportSize({width:1300,height:900});
     assert.equal(await page.locator(".area-nav a").count(),4);
     await page.locator('.area-nav a[href*="/dokumente"]').click();

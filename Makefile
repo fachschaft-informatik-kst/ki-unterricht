@@ -14,7 +14,7 @@ NPM_STAMP := $(VENV)/.npm-ready
 NODE_DIR := extensions/ki-autostart
 BROWSER_STAMP := node_modules/.browser-ready
 DOCS_STAMP := $(VENV)/.docs-ready
-DOKUMENTE_KURS ?= irn/4-klasse
+DOKUMENTE_KURS ?= alle
 
 .PHONY: help preview local full build serve install install-preview test test-browser test-all clean new-chapter dokumente
 
@@ -28,7 +28,7 @@ help:
 		'make test-browser  Build und alle Browserpruefungen inklusive Python, Training und ZIP' \
 		'make test-all      Alle Pruefungen nacheinander (entspricht dem Nachtlauf der CI)' \
 		'make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." AFTER=030' \
-		'make dokumente     Word-Dokumente je AVIVA-Phase und ZIP neu erzeugen (DOKUMENTE_KURS=irn/4-klasse)' \
+		'make dokumente     Word-Dokumente je AVIVA-Phase und ZIP fuer alle Kurse und Vorlagen (DOKUMENTE_KURS=irn/4-klasse)' \
 		'make install       Alle lokalen Python- und npm-Abhaengigkeiten installieren' \
 		'make clean         Lokale Build-Dateien und Umgebungen loeschen' \
 		'PORT=8080 make     Alternativen lokalen Port verwenden'

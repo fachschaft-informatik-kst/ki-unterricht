@@ -1,7 +1,7 @@
 """Erzeugt Word-Dokumente (.docx) für Schülerinnen und Schüler, eines je AVIVA-Phase.
 
-Quelle sind die Materialkoffer-Texte ``kursseiten/<bereich>/materialien.md`` eines
-Kurses. Pro Doppellektion und Phase (Ankommen, Vorwissen aktivieren, Informieren,
+Quelle sind in der 4. Klasse die Materialkoffer-Texte ``kursseiten/<bereich>/materialien.md``,
+in der 1. Klasse die Schüleraufträge der AVIVA-Pläne ``kursseiten/<bereich>/planung.json``. Pro Doppellektion und Phase (Ankommen, Vorwissen aktivieren, Informieren,
 Verarbeiten, Auswerten) entsteht ein Dokument mit den Aufträgen, Tabellen und
 Grafiken dieser Phase. Lehrpersonenhinweise, Selbstkontrollen und Lösungen
 (abgesetzte Kästen, Lösungskarten, geschützte Lösungsdateien) werden nicht
@@ -15,8 +15,9 @@ Ausgabe in ``kurse/<kurs>/lehrperson/dokumente/``:
 
 Benutzung::
 
-    make dokumente                       # Standard: irn/4-klasse
-    .venv/bin/python scripts/build_student_documents.py --course irn/4-klasse
+    make dokumente                       # alle Kurse und Vorlagen
+    make dokumente DOKUMENTE_KURS=irn/4-klasse
+    .venv/bin/python scripts/build_student_documents.py --course _vorlagen/1-klasse
 
 Benötigt python-docx und markdown-it-py (``requirements-docs.txt``) sowie für
 SVG-Grafiken Node.js mit Playwright (``npm ci``).
@@ -57,8 +58,9 @@ FIXED_DATE = (2026, 1, 1, 0, 0, 0)
 
 # Sätze und Absätze, die sich an die Lehrperson richten oder Lösungen verraten.
 # Jede Regel muss genau einmal greifen; so fällt eine geänderte Vorlage sofort auf.
+# Gilt für alle Kurse der 4. Klasse (BOK, IRN, Vorlage), die denselben Materialkoffer nutzen.
 EDITS: dict[str, list[tuple[str, str]]] = {
-    "irn/4-klasse": [
+    "4-klasse": [
         ("Der Input ist in zwei Blöcke geteilt. Block 1 (7 Min.): Regeln von Menschen oder Lernen "
          "aus Daten, mit Bilderkennung und Schachprogramm. Dann der Abrufauftrag (2 Min.): Ohne "
          "Unterlagen erklären die Tandems einander in zwei Sätzen, wer bei einem Schachprogramm "
@@ -159,6 +161,8 @@ class Phase:
     minutes: int
     title: str
     blocks: list[Block] = field(default_factory=list)
+    question: str = ""
+    link: str | None = None
 
     @property
     def file(self) -> str:
@@ -188,7 +192,7 @@ def material_sources(base: Path, lessons: list[dict]) -> str:
 
 
 def apply_edits(source: str, course: str) -> str:
-    for old, new in EDITS.get(course, []):
+    for old, new in EDITS.get(course.split("/")[-1], []):
         count = source.count(old)
         if count != 1:
             raise SystemExit(f"Bearbeitungsregel greift {count}× statt genau einmal:\n  {old[:90]}…")
@@ -566,6 +570,16 @@ def build_document(phase: Phase, label: str, accent: str, images: dict[str, Path
     for r in info.runs:
         r.font.size = Pt(10)
         r.font.color.rgb = RGBColor(0x37, 0x47, 0x4F)
+    if phase.question or phase.link:
+        lead = doc.add_paragraph()
+        lead.paragraph_format.space_after = Pt(4)
+        if phase.question:
+            question = re.sub(r"^\s*Leitfrage\s*:\s*", "", phase.question)
+            write_runs(lead, [Run("Leitfrage der Doppellektion: ", True), Run(question, italic=True)], accent)
+        if phase.link:
+            write_runs(lead, [Run("  ·  "), Run("Kursseite öffnen", href=phase.link)], accent)
+        for r in lead.runs:
+            r.font.size = Pt(10)
 
     names = doc.add_table(rows=1, cols=3)
     names.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -602,6 +616,16 @@ def build_document(phase: Phase, label: str, accent: str, images: dict[str, Path
                 restart_numbering(doc, block)
         elif block.kind == "table":
             add_table(doc, block, accent, width)
+        elif block.kind == "box":
+            box = doc.add_table(rows=1, cols=1)
+            box.style = "Table Grid"
+            cell = box.rows[0].cells[0]
+            label = cell.paragraphs[0].add_run(text_of(block.runs))
+            label.font.size = Pt(9)
+            label.font.color.rgb = RGBColor(0x55, 0x65, 0x6A)
+            box.rows[0].height = Cm(4)
+            box.rows[0].height_rule = WD_ROW_HEIGHT_RULE.AT_LEAST
+            doc.add_paragraph().paragraph_format.space_after = Pt(0)
     buffer = io.BytesIO()
     doc.save(buffer)
     return normalize_zip(buffer.getvalue())
@@ -712,18 +736,110 @@ def slug(text: str) -> str:
 
 # --------------------------------------------------------------------------- Ablauf
 
+FOLDER_README = """# Word-Dokumente für Lernende
+
+Ein `.docx` je Doppellektion und AVIVA-Phase (`DLxx_<phase>_<Name>.docx`), dazu
+`{zip}` und das Verzeichnis `dokumente.json`.
+
+**Nicht von Hand bearbeiten.** Neu erzeugen mit:
+
+```sh
+make dokumente DOKUMENTE_KURS={course}
+```
+
+Quelle in der 4. Klasse sind die Materialkoffer-Texte `kursseiten/<bereich>/materialien.md`,
+in der 1. Klasse die Schüleraufträge der AVIVA-Pläne `kursseiten/<bereich>/planung.json`
+(mit den Grafiken aus dem Materialkoffer). Lehrpersonenhinweise, Selbstkontrollen und Lösungen
+werden weggelassen. Im geschützten Lehrpersonenbereich erscheinen die Dokumente im
+Materialkoffer, in der AVIVA-Planung und gesammelt unter «Alle Dokumente».
+"""
+
+GRADE_ACCENT = {1: "#3653a3", 4: "#076959"}
+STUDENT_ROLES = re.compile(r"^(Einzeln|Tandem|Gruppe|Dreier|Vierer|Partner|Klasse|Plenum)", re.I)
+WRITING_ROLES = re.compile(r"^(Einzeln|Tandem|Gruppe|Dreier|Vierer|Partner)", re.I)
+
+
+def course_profile(course: str) -> dict:
+    """Kursname, Farbe und Linkziel; Vorlagen verlinken auf den BOK-Ursprungskurs."""
+    grade = int(course.split("/")[-1].split("-")[0])
+    if course.startswith("_vorlagen/"):
+        return {"label": f"{grade}. Klasse", "accent": GRADE_ACCENT[grade], "grade": grade,
+                "zip": f"Vorlage_{grade}-Klasse_Alle_Dokumente.zip", "links": f"bok/{grade}-klasse"}
+    registry = json.loads((ROOT / "shared/course-sites.json").read_text(encoding="utf-8"))
+    entry = next(c for c in registry["courses"] if c["slug"] == course)
+    return {"label": f"{entry['teacher']} · {grade}. Klasse", "accent": entry["theme"]["accent"],
+            "grade": grade, "zip": f"{entry['teacher']}_{grade}-Klasse_Alle_Dokumente.zip", "links": course}
+
+
+def all_courses() -> list[str]:
+    registry = json.loads((ROOT / "shared/course-sites.json").read_text(encoding="utf-8"))
+    return [c["slug"] for c in registry["courses"]] + \
+        sorted("_vorlagen/" + p.name for p in (ROOT / "kurse/_vorlagen").glob("*-klasse"))
+
+
+def plan_text(text: str) -> list[Run]:
+    return [Run(text.strip())]
+
+
+def phases_from_plan(base: Path, lessons: list[dict], links: str) -> list[Phase]:
+    """1. Klasse: Schüleraufträge stehen im AVIVA-Plan, der Materialkoffer liefert Grafiken."""
+    md = MarkdownIt("commonmark")
+    phases: list[Phase] = []
+    for lesson in lessons:
+        images: dict[str, list[Block]] = {}
+        source = base / "kursseiten" / lesson["view"] / "materialien.md"
+        for token in md.parse(source.read_text(encoding="utf-8")) if source.is_file() else []:
+            for child in token.children or []:
+                if child.type != "image":
+                    continue
+                src, title = child.attrGet("src") or "", child.attrGet("title") or ""
+                phase_name, _, role = (part.strip() for part in title.partition("|"))
+                if phase_name in PHASES and not role.startswith("Lehrperson") and not PROTECTED.search(src):
+                    images.setdefault(phase_name, []).append(Block("image", src=src, alt=child.content))
+        for index, step in enumerate(lesson["phases"], 1):
+            phase = Phase(lesson["number"], lesson["title"], index, step["phase"], int(step["minutes"]),
+                          step["titel"], question=lesson.get("question", ""),
+                          link=SITE + links + "/#" + lesson["view"])
+            roles = [s.get("wer", "") for s in step["schritte"] if s.get("wer") != "Ergebnis"]
+            social = " → ".join(dict.fromkeys(r for r in roles if r))
+            phase.blocks.append(Block("meta", [Run(social, True)]))
+            tasks = [s for s in step["schritte"] if STUDENT_ROLES.match(s.get("wer", ""))]
+            for number, task in enumerate(tasks, 1):
+                head = f"Auftrag {number} · {task['wer']}" + (f" · {task['min']} Min." if task.get("min") else "")
+                phase.blocks.append(Block("heading", [Run(head)]))
+                phase.blocks.append(Block("paragraph", plan_text(task["text"])))
+                if WRITING_ROLES.match(task["wer"]):
+                    phase.blocks.append(Block("box", [Run("Notizen:")]))
+            if not tasks:
+                phase.blocks.append(Block("heading", [Run("Input der Lehrperson")]))
+                phase.blocks.append(Block("paragraph", plan_text(
+                    "Hören Sie zu und notieren Sie wichtige Begriffe, Beispiele und offene Fragen.")))
+                phase.blocks.append(Block("box", [Run("Begriffe und Fragen:")]))
+            phase.blocks += images.get(step["phase"], [])
+            result = next((s["text"] for s in step["schritte"] if s.get("wer") == "Ergebnis"), "")
+            if result:
+                phase.blocks.append(Block("paragraph", [Run("Ziel dieser Phase: ", True), Run(result.strip())]))
+            phases.append(phase)
+    return phases
+
+
 def build(course: str) -> Path:
     base = ROOT / "kurse" / course
-    registry = json.loads((ROOT / "shared/course-sites.json").read_text(encoding="utf-8"))
-    profile = next(c for c in registry["courses"] if c["slug"] == course)
-    label = f"{profile['teacher']} · {profile['grade']}. Klasse"
-    accent = profile["theme"]["accent"]
+    profile = course_profile(course)
+    label, accent = profile["label"], profile["accent"]
     lessons = lessons_of(base)
-    source = apply_edits(material_sources(base, lessons), course)
-    phases = parse(source, course, lessons)
+    if profile["grade"] == 1:
+        phases = phases_from_plan(base, lessons, profile["links"])
+    else:
+        source = apply_edits(material_sources(base, lessons), course)
+        phases = parse(source, profile["links"], lessons)
+        for phase in phases:
+            lesson = lessons[phase.dl - 1]
+            phase.question = lesson.get("question", "")
+            phase.link = SITE + profile["links"] + "/#" + lesson["view"]
     expected = {(lesson["number"], i) for lesson in lessons for i in range(1, 6)}
     found = {(p.dl, p.index) for p in phases}
-    if found != expected:
+    if found != expected or len(phases) != len(expected):
         raise SystemExit(f"Phasen fehlen oder sind doppelt: {sorted(expected ^ found)}")
 
     target = base / "lehrperson/dokumente"
@@ -732,7 +848,7 @@ def build(course: str) -> Path:
         old.unlink()
     for old in target.glob("*.zip"):
         old.unlink()
-    zip_name = f"{profile['teacher']}_{profile['grade']}-Klasse_Alle_Dokumente.zip"
+    zip_name = profile["zip"]
     entries = []
     with tempfile.TemporaryDirectory() as tmp:
         images = image_files(phases, base, Path(tmp))
@@ -754,6 +870,7 @@ def build(course: str) -> Path:
              "generator": "scripts/build_student_documents.py",
              "zip": {"file": zip_name, "bytes": (target / zip_name).stat().st_size},
              "documents": entries}
+    (target / "README.md").write_text(FOLDER_README.format(zip=zip_name, course=course), encoding="utf-8")
     (target / "dokumente.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"{len(entries)} Dokumente und {zip_name} in {target.relative_to(ROOT)}")
     return target
@@ -761,8 +878,11 @@ def build(course: str) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument("--course", default="irn/4-klasse")
-    build(parser.parse_args().course)
+    parser.add_argument("--course", default="alle",
+                        help="z. B. irn/4-klasse oder _vorlagen/1-klasse; Standard: alle Kurse und Vorlagen")
+    course = parser.parse_args().course
+    for slug_ in all_courses() if course == "alle" else [course]:
+        build(slug_)
 
 
 if __name__ == "__main__":

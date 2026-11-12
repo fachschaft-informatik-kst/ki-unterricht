@@ -94,13 +94,16 @@
     '<span class="wer-t">Tandem / Gruppe</span>'+
     '<span class="wer-k">Klasse / Plenum</span>'+
     '<span class="wer-r">Ergebnis</span></div>';
-  const phaseTable=lesson=>{
-    const rows=(lesson.phases||[]).flatMap(phase=>(phase.schritte||[]).map((step,i)=>{
+  const phaseTable=(lesson,documents=[])=>{
+    const rows=(lesson.phases||[]).flatMap((phase,phaseIndex)=>(phase.schritte||[]).map((step,i)=>{
+      const doc=documents.find(d=>d.phase===phaseIndex+1);
       const wer=String(step.wer||"");
       return '<tr class="'+roleClass(wer)+'">'+(i===0?
         '<th class="phase" scope="rowgroup" rowspan="'+phase.schritte.length+'"><strong>'+
         escape(phase.phase)+'</strong><small>'+escape(phase.titel)+' · '+escape(phase.minutes)+
-        ' Min.</small></th>':"")+
+        ' Min.</small>'+(doc?'<a class="phase-doc-link" href="'+escape(doc.url)+'" download="'+escape(doc.file)+
+        '" aria-label="Word-Dokument für Lernende herunterladen: '+escape(doc.phaseName)+' · '+escape(doc.title)+
+        '"><span class="doc-icon" aria-hidden="true">W</span>Word-Dokument</a>':"")+'</th>':"")+
         '<td class="wer">'+escape(wer)+'</td><td class="was">'+escape(step.text)+
         '</td><td class="min">'+escape(step.min??"")+'</td></tr>';
     })).join("");
@@ -122,10 +125,30 @@
       (l.motivation?'<p class="small-info"><strong>Warum diese Lektion?</strong> '+
         escape(l.motivation)+'</p>':"")+
       '<h3 class="subheading">Unterrichtsablauf · 90 Minuten</h3>'+legend+
-      phaseTable(l)+
+      phaseTable(l,data.documents||[])+
       (l.product?'<p class="lesson-output"><strong>Ergebnis am Ende</strong> '+escape(l.product)+'</p>':"")+
       (l.zeit?'<p class="small-info"><strong>Zeitliche Hinweise</strong> '+escape(l.zeit)+'</p>':"")+
       '</section>';
+  }
+  // Courses whose material has no AVIVA phase sections (1st grade): one bar,
+  // top right of the material section, with a Word document per phase.
+  function addDocumentBar(data){
+    const docs=(data.documents||[]).slice().sort((a,b)=>a.phase-b.phase);
+    if(!docs.length||root.querySelector(".material-phase-download"))return;
+    const section=root.querySelector(".materials-content");
+    if(!section)return;
+    const bar=document.createElement("nav");
+    bar.className="material-documents";bar.setAttribute("aria-label","Word-Dokumente für Lernende je AVIVA-Phase");
+    const title=document.createElement("p");title.className="material-documents-title";
+    title.textContent="Word-Dokumente für Lernende";bar.append(title);
+    const list=document.createElement("div");list.className="material-documents-list";
+    for(const doc of docs){
+      const link=documentLink(doc,"material-phase-download");
+      link.querySelector("strong").textContent=doc.phase+" · "+doc.phaseName;
+      link.querySelector("small").textContent=doc.title;
+      list.append(link);
+    }
+    bar.append(list);section.prepend(bar);section.classList.add("has-document-bar");
   }
   function materialsView(data){
     return heading(data,"Materialkoffer")+
@@ -282,6 +305,7 @@
         data.kind==="materialien"?materialsView(data):
         data.kind==="dokumente"?documentsView(data):solutionsView(data);
       formatMaterialWorkshop(data);
+      if(data.kind==="materialien")addDocumentBar(data);
       relink();
       const group=data.kind==="dokumente"&&document.getElementById("dokumente-dl-"+current);
       if(group&&(scroll||new URLSearchParams(location.search).has("dl")&&current!==1))
