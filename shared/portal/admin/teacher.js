@@ -102,6 +102,7 @@
         '<th class="phase" scope="rowgroup" rowspan="'+phase.schritte.length+'"><strong>'+
         escape(phase.phase)+'</strong><small>'+escape(phase.titel)+' · '+escape(phase.minutes)+
         ' Min.</small>'+(doc?'<a class="phase-doc-link" href="'+escape(doc.url)+'" download="'+escape(doc.file)+
+        '" data-word-file="'+escape(doc.file)+'" title="'+WORD_HINT+
         '" aria-label="Word-Dokument für Lernende herunterladen: '+escape(doc.phaseName)+' · '+escape(doc.title)+
         '"><span class="doc-icon" aria-hidden="true">W</span>Word-Dokument</a>':"")+'</th>':"")+
         '<td class="wer">'+escape(wer)+'</td><td class="was">'+escape(step.text)+
@@ -157,18 +158,38 @@
         '<p class="section-label">Materialien für DL '+escape(data.selectedNumber)+'</p>'+
         markdown.render(section.markdown)+'</section>').join("");
   }
+  const WORD_HINT="Herunterladen und direkt in Word öffnen";
+  // Download the file and hand a short-lived signed link to the local Word app
+  // (ms-word: protocol). Without Word the regular download still happens.
+  root.addEventListener("click",async event=>{
+    const link=event.target.closest("a[data-word-file]");
+    if(!link||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+    event.preventDefault();
+    const save=document.createElement("a");
+    save.href=link.href;save.download=link.dataset.wordFile;save.hidden=true;
+    document.body.append(save);save.click();save.remove();
+    try{
+      const res=await fetch("/api/teacher/dokument-link?course="+encodeURIComponent(course)+
+        "&file="+encodeURIComponent(link.dataset.wordFile),{credentials:"same-origin",cache:"no-store"});
+      if(!res.ok)return;
+      const data=await res.json();
+      if(typeof data.word==="string"&&data.word.startsWith("ms-word:ofe|u|https://"))
+        setTimeout(()=>{location.href=data.word;},400);
+    }catch{ /* the download above remains available */ }
+  });
   const fileSize=bytes=>bytes?(bytes>=1048576?(bytes/1048576).toFixed(1).replace(".",",")+" MB":
     Math.max(1,Math.round(bytes/1024))+" KB"):"";
   // Visible Word download in the top-right corner of each AVIVA phase.
   function documentLink(doc,className){
     const link=document.createElement("a");
     link.className=className;link.href=doc.url;link.setAttribute("download",doc.file);
+    link.dataset.wordFile=doc.file;link.title=WORD_HINT;
     link.setAttribute("aria-label","Word-Dokument für Schülerinnen und Schüler herunterladen: "+
       doc.phaseName+" · "+doc.title+(doc.bytes?" ("+fileSize(doc.bytes)+")":""));
     const icon=document.createElement("span");icon.className="doc-icon";icon.setAttribute("aria-hidden","true");icon.textContent="W";
     const label=document.createElement("span");label.className="doc-label";
     const strong=document.createElement("strong");strong.textContent="Word-Dokument";
-    const small=document.createElement("small");small.textContent="für Lernende · .docx";
+    const small=document.createElement("small");small.textContent="für Lernende · öffnet in Word";
     label.append(strong,small);link.append(icon,label);
     return link;
   }
@@ -252,15 +273,18 @@
         '<div class="document-group-head"><p class="section-label">Doppellektion '+escape(dl)+'</p>'+
         '<h3 id="dokumente-dl-'+escape(dl)+'-title">DL '+String(dl).padStart(2,"0")+' · '+escape(title)+'</h3>'+
         '<a class="document-group-link" href="/teacher/'+escape(course)+'/materialien?dl='+escape(dl)+'">Im Materialkoffer öffnen</a></div>'+
-        '<ol class="document-list">'+items.map(d=>'<li><a href="'+escape(d.url)+'" download="'+escape(d.file)+'">'+
+        '<ol class="document-list">'+items.map(d=>'<li><a href="'+escape(d.url)+'" download="'+escape(d.file)+
+          '" data-word-file="'+escape(d.file)+'" title="'+WORD_HINT+'">'+
           '<span class="doc-icon" aria-hidden="true">W</span><span class="doc-text"><small>Phase '+escape(d.phase)+' · '+
           escape(d.phaseName)+(d.minutes?' · '+escape(d.minutes)+' Min.':'')+'</small><strong>'+escape(d.title)+'</strong></span>'+
-          '<span class="doc-meta">.docx'+(d.bytes?' · '+escape(fileSize(d.bytes)):'')+'</span></a></li>').join("")+
+          '<span class="doc-meta">in Word öffnen · .docx'+(d.bytes?' · '+escape(fileSize(d.bytes)):'')+'</span></a></li>').join("")+
         '</ol></section>';
     }).join("");
     return head+'<div class="documents-overview">'+zip+'<p class="intro-note">Pro AVIVA-Phase ein Word-Dokument mit Aufträgen, '+
       'Tabellen und Grafiken für die Lernenden. Lehrpersonenhinweise, Selbstkontrollen und Lösungen sind nicht enthalten. '+
-      'Die Dokumente lassen sich in Word bearbeiten, drucken oder an die Klasse weitergeben.</p></div>'+groups;
+      'Ein Klick lädt das Dokument herunter und öffnet es direkt in Word (beim ersten Mal fragt der Browser, ob Word '+
+      'geöffnet werden darf). Word zeigt Dokumente aus dem Internet zuerst in der geschützten Ansicht: «Bearbeitung '+
+      'aktivieren» oder «Speichern unter» wählen.</p></div>'+groups;
   }
   function solutionsView(data){
     const header=heading(data,"Musterlösungen")+

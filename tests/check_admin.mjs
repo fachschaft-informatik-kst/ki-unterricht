@@ -264,6 +264,47 @@ try{
     headers:{Cookie:"ki_session="+session}
   })).status,404);
 
+  // Word documents: session download, signed short-lived link for the local Word app.
+  const docRoot=bySlug["irn/4-klasse"].courseRoot+"/lehrperson/dokumente/";
+  sources.set(docRoot+"dokumente.json",readFileSync(new URL("../"+docRoot+"dokumente.json",import.meta.url),"utf8"));
+  sources.set(docRoot+"DL01_1_Ankommen.docx","DOCX-BYTES");
+  const docPath="/teacher/dokumente/DL01_1_Ankommen.docx?course=irn%2F4-klasse";
+  assert.equal((await route(docPath)).status,302,"Documents require OAuth without a ticket");
+  const direct=await route(docPath,{headers:{Cookie:"ki_session="+session}});
+  assert.equal(direct.status,200,await direct.clone().text());
+  assert.equal(await direct.text(),"DOCX-BYTES");
+  assert.match(direct.headers.get("Content-Type"),/wordprocessingml/);
+  assert.equal((await route("/teacher/dokumente/Unlisted.docx?course=irn%2F4-klasse",
+    {headers:{Cookie:"ki_session="+session}})).status,404,"Only indexed documents are served");
+  assert.equal((await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL01_1_Ankommen.docx")).status,401);
+  const linkResponse=await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL01_1_Ankommen.docx",
+    {headers:{Cookie:"ki_session="+session}});
+  assert.equal(linkResponse.status,200,await linkResponse.clone().text());
+  const link=await linkResponse.json();
+  assert.equal(link.word,"ms-word:ofe|u|"+link.url);
+  assert(link.url.startsWith("https://teacher-editor.example/teacher/dokumente/DL01_1_Ankommen.docx?course=irn%2F4-klasse&ticket="));
+  assert(!link.url.includes("test-user-token"),"The GitHub token is encrypted in the ticket");
+  const signedPath=link.url.replace("https://teacher-editor.example","");
+  const viaWord=await route(signedPath);
+  assert.equal(viaWord.status,200,"Word opens the signed link without the browser cookie");
+  assert.equal(await viaWord.text(),"DOCX-BYTES");
+  const head=await route(signedPath,{method:"HEAD"});
+  assert.equal(head.status,200);assert.equal(await head.text(),"");
+  assert.equal((await route(signedPath,{method:"OPTIONS"})).status,200);
+  assert.equal((await route(signedPath.replace("DL01_1_Ankommen","DL01_2_Vorwissen_aktivieren"))).status,403,
+    "A ticket is bound to one document");
+  assert.equal((await route(signedPath.replace("irn%2F4-klasse","bok%2F4-klasse"))).status,403);
+  const ticket=new URL(link.url).searchParams.get("ticket");
+  const asSession=await route("/api/session",{headers:{Cookie:"ki_session="+ticket}});
+  assert.equal((await asSession.json()).authenticated,false,"A Word ticket is never a session");
+  assert.equal((await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=IRN_4-Klasse_Alle_Dokumente.zip",
+    {headers:{Cookie:"ki_session="+session}})).status,400,"ZIP files are not opened in Word");
+  const realNow=Date.now;
+  try{
+    Date.now=()=>realNow()+11*60*1000;
+    assert.equal((await route(signedPath)).status,403,"Word links expire after ten minutes");
+  }finally{Date.now=realNow;}
+
 }finally{globalThis.fetch=priorFetch;}
 
 // Direct source URLs and downloads must not be reachable without OAuth.

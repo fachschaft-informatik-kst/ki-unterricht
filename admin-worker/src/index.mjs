@@ -17,6 +17,44 @@ const from64url = value => Uint8Array.from(atob(value.replaceAll("-","+").replac
 const nonce = () => b64url(crypto.getRandomValues(new Uint8Array(32)));
 const cookie = (name,value,age) => name+"="+value+"; "+COOKIE+"; Max-Age="+age;
 const readCookie = (req,name) => (req.headers.get("Cookie")||"").split(";").map(x=>x.trim()).find(x=>x.startsWith(name+"="))?.slice(name.length+1);
+const WORD_LINK_SECONDS=600;
+const DOCX_TYPE="application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+// Only files listed in the course's generated index can be downloaded.
+async function listedDocumentCourse(token,slug,file){
+  const courses=await loadTeacherCourses(token,github,REPO);
+  const course=courses.find(c=>c.slug===slug&&c.ready);
+  if(!course)return null;
+  const index=await loadDocuments(token,course,github,REPO);
+  const listed=index&&(index.zip?.file===file||index.documents.some(d=>d.file===file));
+  return listed?course:null;
+}
+async function serveStudentDocument(req,env,url,file,active){
+  const headers={"Cache-Control":"no-store","X-Content-Type-Options":"nosniff",
+    "Content-Security-Policy":"default-src 'none'; sandbox"};
+  // Word probes the server before opening a document from a URL.
+  if(req.method==="OPTIONS")return new Response(null,{status:200,headers:{...headers,Allow:"GET, HEAD, OPTIONS"}});
+  const slug=url.searchParams.get("course");
+  let token=null;
+  const rawTicket=url.searchParams.get("ticket");
+  if(rawTicket){
+    const ticket=await decrypt(env,rawTicket);
+    if(ticket?.purpose!=="word-document"||!(ticket.exp>Date.now())||ticket.course!==slug||ticket.file!==file)
+      return fail(403,"Der Word-Link ist abgelaufen. Bitte das Dokument im Lehrpersonenbereich erneut öffnen.");
+    token=ticket.token;
+  }else{
+    if(!active)return new Response(null,{status:302,headers:{
+      Location:"/auth/start?next="+encodeURIComponent(url.pathname+url.search),"Cache-Control":"no-store"}});
+    if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
+    token=active.token;
+  }
+  const course=await listedDocumentCourse(token,slug,file);
+  if(!course)return fail(404,"Dokument nicht gefunden.");
+  const bytes=await readTeacherFile(token,documentPath(course,file),github,REPO);
+  return new Response(req.method==="HEAD"?null:bytes,{headers:{...headers,
+    "Content-Type":file.endsWith(".zip")?"application/zip":DOCX_TYPE,
+    "Content-Length":String(bytes.length),
+    "Content-Disposition":'attachment; filename="'+file+'"'}});
+}
 async function secret(env){
   const bytes=from64url(env.SESSION_KEY||"");
   if(bytes.length!==32)throw Error("SESSION_KEY muss 32 zufällige Bytes als base64url enthalten.");
@@ -328,7 +366,8 @@ export default {
         return response({ok:true},200,{"Set-Cookie":cookie("ki_session","",0)});
       }
       const session=await decrypt(env,readCookie(req,"ki_session"));
-      const active=session?.exp>Date.now()?session:null;
+      // Word-link tickets share the key but are never sessions.
+      const active=session?.exp>Date.now()&&!session.purpose?session:null;
       if(url.pathname==="/api/session"&&req.method==="GET")return response({authenticated:!!active,login:active?.login||null});
       if(req.method==="GET"&&url.pathname==="/teacher-theme.css"){
         if(!active)return fail(401,"Bitte mit GitHub anmelden.");
@@ -341,32 +380,19 @@ export default {
           "X-Content-Type-Options":"nosniff"
         }});
       }
+      // Student Word documents: browser download (session) or a short-lived
+      // signed link that the local Word app opens without the browser cookie.
+      const studentDocument=parseDocumentDownload(url.pathname);
+      if(studentDocument&&["GET","HEAD","OPTIONS"].includes(req.method))
+        return await serveStudentDocument(req,env,url,studentDocument,active);
       if(req.method==="GET"&&url.pathname.startsWith("/teacher/")){
         const route=parseTeacher(url.pathname);
         const download=/^\/teacher\/downloads\/([a-zA-Z0-9_.-]+)$/.exec(url.pathname);
-        const studentDocument=parseDocumentDownload(url.pathname);
-        if(!route&&!download&&!studentDocument)return fail(404,"Lehrpersonenmaterial nicht gefunden.");
+        if(!route&&!download)return fail(404,"Lehrpersonenmaterial nicht gefunden.");
         if(!active)return new Response(null,{status:302,headers:{
           Location:"/auth/start?next="+encodeURIComponent(url.pathname+url.search),
           "Cache-Control":"no-store"}});
         if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
-        if(studentDocument){
-          const courses=await loadTeacherCourses(active.token,github,REPO);
-          const course=courses.find(c=>c.slug===url.searchParams.get("course")&&c.ready);
-          if(!course)return fail(404,"Kurs nicht vorhanden.");
-          // Only files listed in the course's generated index can be downloaded.
-          const index=await loadDocuments(active.token,course,github,REPO);
-          const listed=index&&(index.zip?.file===studentDocument||
-            index.documents.some(d=>d.file===studentDocument));
-          if(!listed)return fail(404,"Dokument nicht gefunden.");
-          const bytes=await readTeacherFile(active.token,documentPath(course,studentDocument),github,REPO);
-          return new Response(bytes,{headers:{
-            "Content-Type":studentDocument.endsWith(".zip")?"application/zip":
-              "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            "Content-Disposition":'attachment; filename="'+studentDocument+'"',
-            "Cache-Control":"no-store","X-Content-Type-Options":"nosniff",
-            "Content-Security-Policy":"default-src 'none'; sandbox"}});
-        }
         if(download){
           const relative=DOWNLOADS[download[1]];
           if(!relative)return fail(404,"Datei nicht gefunden.");
@@ -395,6 +421,18 @@ export default {
 
       if(url.pathname.startsWith("/api/")){
         if(!active)return fail(401,"Bitte mit GitHub anmelden.");
+        if(req.method==="GET"&&url.pathname==="/api/teacher/dokument-link"){
+          if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
+          const file=parseDocumentDownload("/teacher/dokumente/"+encodeURIComponent(url.searchParams.get("file")||""));
+          if(!file||!file.endsWith(".docx"))return fail(400,"Ungültiges Dokument.");
+          const course=await listedDocumentCourse(active.token,url.searchParams.get("course"),file);
+          if(!course)return fail(404,"Dokument nicht gefunden.");
+          const ticket=await encrypt(env,{purpose:"word-document",token:active.token,course:course.slug,file,
+            exp:Date.now()+WORD_LINK_SECONDS*1000});
+          const link=url.origin+"/teacher/dokumente/"+encodeURIComponent(file)+
+            "?course="+encodeURIComponent(course.slug)+"&ticket="+ticket;
+          return response({url:link,word:"ms-word:ofe|u|"+link,expiresIn:WORD_LINK_SECONDS});
+        }
         if(req.method==="GET"&&url.pathname==="/api/teacher"){
           if(!(await canWrite(active.token)))return fail(403,"Keine Schreibberechtigung.");
           const route=parseTeacher("/teacher/"+url.searchParams.get("course")+"/"+url.searchParams.get("kind"));

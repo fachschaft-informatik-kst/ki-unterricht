@@ -4,7 +4,7 @@
   "generator": "scripts/build_student_documents.py",
   "zip": {
     "file": "BOK_1-Klasse_Alle_Dokumente.zip",
-    "bytes": 1885620
+    "bytes": 1883105
   },
   "documents": [
     {
@@ -15,7 +15,7 @@
       "minutes": 5,
       "title": "Wann ist ein System intelligent?",
       "file": "DL01_1_Ankommen.docx",
-      "bytes": 39115
+      "bytes": 39051
     },
     {
       "dl": 1,
@@ -25,7 +25,7 @@
       "minutes": 10,
       "title": "Regeln für Katze oder Hund",
       "file": "DL01_2_Vorwissen_aktivieren.docx",
-      "bytes": 39234
+      "bytes": 39173
     },
     {
       "dl": 1,
@@ -35,7 +35,7 @@
       "minutes": 20,
       "title": "Begriffe an einem Beispiel ordnen",
       "file": "DL01_3_Informieren.docx",
-      "bytes": 39071
+      "bytes": 39011
     },
     {
       "dl": 1,
@@ -45,7 +45,7 @@
       "minutes": 45,
       "title": "Beispiele einordnen und ethische Fragen diskutieren",
       "file": "DL01_4_Verarbeiten.docx",
-      "bytes": 39506
+      "bytes": 39433
     },
     {
       "dl": 1,
@@ -55,7 +55,7 @@
       "minutes": 10,
       "title": "Die Leitfrage beantworten",
       "file": "DL01_5_Auswerten.docx",
-      "bytes": 39103
+      "bytes": 39039
     },
     {
       "dl": 2,
@@ -65,7 +65,7 @@
       "minutes": 5,
       "title": "Was hilft beim Lernen?",
       "file": "DL02_1_Ankommen.docx",
-      "bytes": 38981
+      "bytes": 38940
     },
     {
       "dl": 2,
@@ -75,7 +75,7 @@
       "minutes": 5,
       "title": "Woher kommt die Regel?",
       "file": "DL02_2_Vorwissen_aktivieren.docx",
-      "bytes": 39033
+      "bytes": 38993
     },
     {
       "dl": 2,
@@ -85,7 +85,7 @@
       "minutes": 15,
       "title": "EVA und drei Lernsignale",
       "file": "DL02_3_Informieren.docx",
-      "bytes": 39008
+      "bytes": 38948
     },
     {
       "dl": 2,
@@ -95,7 +95,7 @@
       "minutes": 55,
       "title": "Memory und Rückmeldung bei NIM",
       "file": "DL02_4_Verarbeiten.docx",
-      "bytes": 39370
+      "bytes": 39313
     },
     {
       "dl": 2,
@@ -105,7 +105,7 @@
       "minutes": 10,
       "title": "Lernarten vergleichen und sichern",
       "file": "DL02_5_Auswerten.docx",
-      "bytes": 39205
+      "bytes": 39144
     },
     {
       "dl": 3,
@@ -115,7 +115,7 @@
       "minutes": 6,
       "title": "Warnsignal vermuten",
       "file": "DL03_1_Ankommen.docx",
-      "bytes": 39136
+      "bytes": 39096
     },
     {
       "dl": 3,
@@ -125,7 +125,7 @@
       "minutes": 2,
       "title": "Eingabe und Label",
       "file": "DL03_2_Vorwissen_aktivieren.docx",
-      "bytes": 38989
+      "bytes": 38943
     },
     {
       "dl": 3,
@@ -135,7 +135,7 @@
       "minutes": 22,
       "title": "Gewicht, Bias und Lernschritt",
       "file": "DL03_3_Informieren.docx",
-      "bytes": 39212
+      "bytes": 39146
     },
     {
       "dl": 3,
@@ -145,7 +145,7 @@
       "minutes": 50,
       "title": "Gatter einstellen und selbst rechnen",
       "file": "DL03_4_Verarbeiten.docx",
-      "bytes": 55010
+      "bytes": 54951
     },
     {
       "dl": 3,
@@ -155,7 +155,7 @@
       "minutes": 10,
       "title": "Gewichte, Bias und Lernen sichern",
       "file": "DL03_5_Auswerten.docx",
-      "bytes": 39288
+      "bytes": 39220
     },
     {
       "dl": 4,
@@ -165,7 +165,7 @@
       "minutes": 5,
       "title": "Neue Herausforderung: XOR entdecken",
       "file": "DL04_1_Ankommen.docx",
-      "bytes": 54379
+      "bytes": 54340
     },
     {
       "dl": 4,
@@ -175,7 +175,7 @@
       "minutes": 3,
       "title": "Einzelnes Neuron in Erinnerung rufen",
       "file": "DL04_2_Vorwissen_aktivieren.docx",
-      "bytes": 39042
+      "bytes": 38998
     },
     {
       "dl": 4,
@@ -185,7 +185,7 @@
       "minutes": 22,
       "title": "XOR-Grenze und Zwischenschicht",
       "file": "DL04_3_Informieren.docx",
-      "bytes": 39036
+      "bytes": 38978
     },
     {
       "dl": 4,
@@ -195,7 +195,7 @@
       "minutes": 50,
       "title": "Netzlösung nachvollziehen und erklären",
       "file": "DL04_4_Verarbeiten.docx",
-      "bytes": 53897
+      "bytes": 53836
     },
     {
       "dl": 4,
@@ -205,7 +205,7 @@
       "minutes": 10,
       "title": "Mehrschichtige Netze sichern",
       "file": "DL04_5_Auswerten.docx",
-      "bytes": 39226
+      "bytes": 39155
     },
     {
       "dl": 5,
@@ -215,7 +215,7 @@
       "minutes": 10,
       "title": "Die Datenfalle",
       "file": "DL05_1_Ankommen.docx",
-      "bytes": 39046
+      "bytes": 39002
     },
     {
       "dl": 5,
@@ -225,7 +225,7 @@
       "minutes": 10,
       "title": "Vermutungen vergleichen",
       "file": "DL05_2_Vorwissen_aktivieren.docx",
-      "bytes": 39097
+      "bytes": 39052
     },
     {
       "dl": 5,
@@ -235,7 +235,7 @@
       "minutes": 15,
       "title": "Einfaches Modell erklären",
       "file": "DL05_3_Informieren.docx",
-      "bytes": 39035
+      "bytes": 38994
     },
     {
       "dl": 5,
@@ -245,7 +245,7 @@
       "minutes": 45,
       "title": "Aktiv experimentieren",
       "file": "DL05_4_Verarbeiten.docx",
-      "bytes": 39064
+      "bytes": 39020
     },
     {
       "dl": 5,
@@ -255,7 +255,7 @@
       "minutes": 10,
       "title": "Erkenntnis sichern",
       "file": "DL05_5_Auswerten.docx",
-      "bytes": 39052
+      "bytes": 39008
     },
     {
       "dl": 6,
@@ -265,7 +265,7 @@
       "minutes": 10,
       "title": "SOL 1: eigene Frage und Plan",
       "file": "DL06_1_Ankommen.docx",
-      "bytes": 39078
+      "bytes": 39033
     },
     {
       "dl": 6,
@@ -275,7 +275,7 @@
       "minutes": 10,
       "title": "Projektstatus abstimmen",
       "file": "DL06_2_Vorwissen_aktivieren.docx",
-      "bytes": 39089
+      "bytes": 39045
     },
     {
       "dl": 6,
@@ -285,7 +285,7 @@
       "minutes": 15,
       "title": "Kriterien nutzen",
       "file": "DL06_3_Informieren.docx",
-      "bytes": 39028
+      "bytes": 38985
     },
     {
       "dl": 6,
@@ -295,7 +295,7 @@
       "minutes": 45,
       "title": "Selbstständig arbeiten",
       "file": "DL06_4_Verarbeiten.docx",
-      "bytes": 39122
+      "bytes": 39078
     },
     {
       "dl": 6,
@@ -305,7 +305,7 @@
       "minutes": 10,
       "title": "Erkenntnisse sichern",
       "file": "DL06_5_Auswerten.docx",
-      "bytes": 39151
+      "bytes": 39106
     },
     {
       "dl": 7,
@@ -315,7 +315,7 @@
       "minutes": 10,
       "title": "Geführt experimentieren und vergleichen",
       "file": "DL07_1_Ankommen.docx",
-      "bytes": 39165
+      "bytes": 39119
     },
     {
       "dl": 7,
@@ -325,7 +325,7 @@
       "minutes": 10,
       "title": "Projektstatus abstimmen",
       "file": "DL07_2_Vorwissen_aktivieren.docx",
-      "bytes": 39092
+      "bytes": 39047
     },
     {
       "dl": 7,
@@ -335,7 +335,7 @@
       "minutes": 15,
       "title": "Kriterien nutzen",
       "file": "DL07_3_Informieren.docx",
-      "bytes": 39036
+      "bytes": 38994
     },
     {
       "dl": 7,
@@ -345,7 +345,7 @@
       "minutes": 45,
       "title": "Mit Versuchsplan arbeiten",
       "file": "DL07_4_Verarbeiten.docx",
-      "bytes": 39251
+      "bytes": 39207
     },
     {
       "dl": 7,
@@ -355,7 +355,7 @@
       "minutes": 10,
       "title": "Erkenntnisse sichern",
       "file": "DL07_5_Auswerten.docx",
-      "bytes": 39131
+      "bytes": 39087
     },
     {
       "dl": 8,
@@ -365,7 +365,7 @@
       "minutes": 3,
       "title": "Gesprächsplan und Fremdauftrag",
       "file": "DL08_1_Ankommen.docx",
-      "bytes": 39074
+      "bytes": 39028
     },
     {
       "dl": 8,
@@ -375,7 +375,7 @@
       "minutes": 2,
       "title": "Drei Gesprächsfragen abrufen",
       "file": "DL08_2_Vorwissen_aktivieren.docx",
-      "bytes": 39076
+      "bytes": 39031
     },
     {
       "dl": 8,
@@ -385,7 +385,7 @@
       "minutes": 2,
       "title": "Bewertungskriterien klären",
       "file": "DL08_3_Informieren.docx",
-      "bytes": 39028
+      "bytes": 38986
     },
     {
       "dl": 8,
@@ -395,7 +395,7 @@
       "minutes": 80,
       "title": "Individuelle Fachgespräche",
       "file": "DL08_4_Verarbeiten.docx",
-      "bytes": 39169
+      "bytes": 39124
     },
     {
       "dl": 8,
@@ -405,7 +405,7 @@
       "minutes": 3,
       "title": "Rückblick und Sicherung",
       "file": "DL08_5_Auswerten.docx",
-      "bytes": 39069
+      "bytes": 39022
     },
     {
       "dl": 9,
@@ -415,7 +415,7 @@
       "minutes": 5,
       "title": "Texte als Wortvorhersage",
       "file": "DL09_1_Ankommen.docx",
-      "bytes": 39034
+      "bytes": 38993
     },
     {
       "dl": 9,
@@ -425,7 +425,7 @@
       "minutes": 20,
       "title": "Papierexperiment mit wenig/viel Kontext",
       "file": "DL09_2_Vorwissen_aktivieren.docx",
-      "bytes": 39101
+      "bytes": 39057
     },
     {
       "dl": 9,
@@ -435,7 +435,7 @@
       "minutes": 10,
       "title": "Papagei-Modell und Statistik",
       "file": "DL09_3_Informieren.docx",
-      "bytes": 39050
+      "bytes": 39007
     },
     {
       "dl": 9,
@@ -445,7 +445,7 @@
       "minutes": 45,
       "title": "Lernstrecke und Transfer zu Netzen",
       "file": "DL09_4_Verarbeiten.docx",
-      "bytes": 39364
+      "bytes": 39321
     },
     {
       "dl": 9,
@@ -455,7 +455,7 @@
       "minutes": 10,
       "title": "Was können Sprachmodelle? Was nicht?",
       "file": "DL09_5_Auswerten.docx",
-      "bytes": 39099
+      "bytes": 39055
     },
     {
       "dl": 10,
@@ -465,7 +465,7 @@
       "minutes": 5,
       "title": "Eine Streitfrage entdecken",
       "file": "DL10_1_Ankommen.docx",
-      "bytes": 38989
+      "bytes": 38933
     },
     {
       "dl": 10,
@@ -475,7 +475,7 @@
       "minutes": 5,
       "title": "An das Bildprojekt anknüpfen",
       "file": "DL10_2_Vorwissen_aktivieren.docx",
-      "bytes": 39007
+      "bytes": 38950
     },
     {
       "dl": 10,
@@ -485,7 +485,7 @@
       "minutes": 45,
       "title": "Dokumentation: Chancen und Risiken von KI",
       "file": "DL10_3_Informieren.docx",
-      "bytes": 39054
+      "bytes": 38994
     },
     {
       "dl": 10,
@@ -495,7 +495,7 @@
       "minutes": 27,
       "title": "Erst allein, dann in Gruppen und im Plenum",
       "file": "DL10_4_Verarbeiten.docx",
-      "bytes": 39268
+      "bytes": 39211
     },
     {
       "dl": 10,
@@ -505,7 +505,7 @@
       "minutes": 8,
       "title": "Persönliches Fazit und Themenrückblick",
       "file": "DL10_5_Auswerten.docx",
-      "bytes": 39093
+      "bytes": 39046
     }
   ]
 }
