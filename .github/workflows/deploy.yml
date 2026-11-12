@@ -434,8 +434,15 @@ jobs:
 
   deploy_worker:
     name: Deploy authenticated teacher editor Worker
-    needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.build.outputs.worker_changed == 'true'
+    # Teacher routes come from the Worker, but teacher.js is served from Pages.
+    # Publishing the Worker first exposes new views to a stale JS renderer.
+    # Still deploy Worker-only changes when the Pages job is skipped.
+    needs: [build, deploy]
+    if: >-
+      always() && github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+      needs.build.result == 'success' && needs.build.outputs.worker_changed == 'true' &&
+      (needs.deploy.result == 'success' ||
+        (needs.build.outputs.site_changed != 'true' && needs.deploy.result == 'skipped'))
     runs-on: ubuntu-latest
     permissions:
       contents: read
