@@ -1,0 +1,511 @@
+{
+  "version": 1,
+  "course": "bok/4-klasse",
+  "generator": "scripts/build_student_documents.py",
+  "zip": {
+    "file": "BOK_4-Klasse_Alle_Dokumente.zip",
+    "bytes": 2241740
+  },
+  "documents": [
+    {
+      "dl": 1,
+      "lesson": "Was ist KI?",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Wann ist ein System intelligent?",
+      "file": "DL01_1_Ankommen.docx",
+      "bytes": 39344
+    },
+    {
+      "dl": 1,
+      "lesson": "Was ist KI?",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 10,
+      "title": "Regeln für Katze oder Hund",
+      "file": "DL01_2_Vorwissen_aktivieren.docx",
+      "bytes": 252288
+    },
+    {
+      "dl": 1,
+      "lesson": "Was ist KI?",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 20,
+      "title": "Begriffe an einem Beispiel ordnen",
+      "file": "DL01_3_Informieren.docx",
+      "bytes": 39767
+    },
+    {
+      "dl": 1,
+      "lesson": "Was ist KI?",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 45,
+      "title": "Zuordnen und Entscheidungen begründen",
+      "file": "DL01_4_Verarbeiten.docx",
+      "bytes": 40099
+    },
+    {
+      "dl": 1,
+      "lesson": "Was ist KI?",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 10,
+      "title": "Leitfrage sichern",
+      "file": "DL01_5_Auswerten.docx",
+      "bytes": 39128
+    },
+    {
+      "dl": 2,
+      "lesson": "Wie lernt KI?",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Was hilft beim Lernen?",
+      "file": "DL02_1_Ankommen.docx",
+      "bytes": 38951
+    },
+    {
+      "dl": 2,
+      "lesson": "Wie lernt KI?",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 5,
+      "title": "Woher kommt die Regel?",
+      "file": "DL02_2_Vorwissen_aktivieren.docx",
+      "bytes": 39145
+    },
+    {
+      "dl": 2,
+      "lesson": "Wie lernt KI?",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 15,
+      "title": "EVA und drei Lernsignale",
+      "file": "DL02_3_Informieren.docx",
+      "bytes": 39811
+    },
+    {
+      "dl": 2,
+      "lesson": "Wie lernt KI?",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 55,
+      "title": "Drei Memory-Runden und NIM",
+      "file": "DL02_4_Verarbeiten.docx",
+      "bytes": 39912
+    },
+    {
+      "dl": 2,
+      "lesson": "Wie lernt KI?",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 10,
+      "title": "Lernarten begründet zuordnen",
+      "file": "DL02_5_Auswerten.docx",
+      "bytes": 39267
+    },
+    {
+      "dl": 3,
+      "lesson": "Wie entscheidet ein Neuron?",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 6,
+      "title": "Wann geht das Signal an?",
+      "file": "DL03_1_Ankommen.docx",
+      "bytes": 39164
+    },
+    {
+      "dl": 3,
+      "lesson": "Wie entscheidet ein Neuron?",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 2,
+      "title": "Eingaben und Labels",
+      "file": "DL03_2_Vorwissen_aktivieren.docx",
+      "bytes": 39013
+    },
+    {
+      "dl": 3,
+      "lesson": "Wie entscheidet ein Neuron?",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 22,
+      "title": "Rechenkarte für ein Neuron",
+      "file": "DL03_3_Informieren.docx",
+      "bytes": 167933
+    },
+    {
+      "dl": 3,
+      "lesson": "Wie entscheidet ein Neuron?",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 50,
+      "title": "Gatter einstellen, Rechenprotokoll",
+      "file": "DL03_4_Verarbeiten.docx",
+      "bytes": 55266
+    },
+    {
+      "dl": 3,
+      "lesson": "Wie entscheidet ein Neuron?",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 10,
+      "title": "Zwei eigene Merksätze",
+      "file": "DL03_5_Auswerten.docx",
+      "bytes": 39094
+    },
+    {
+      "dl": 4,
+      "lesson": "Warum mehrere Neuronen?",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Genau eine Taste",
+      "file": "DL04_1_Ankommen.docx",
+      "bytes": 54194
+    },
+    {
+      "dl": 4,
+      "lesson": "Warum mehrere Neuronen?",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 3,
+      "title": "Ein Parametersatz für alle Fälle",
+      "file": "DL04_2_Vorwissen_aktivieren.docx",
+      "bytes": 39006
+    },
+    {
+      "dl": 4,
+      "lesson": "Warum mehrere Neuronen?",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 22,
+      "title": "Warum ein Neuron nicht reicht",
+      "file": "DL04_3_Informieren.docx",
+      "bytes": 39642
+    },
+    {
+      "dl": 4,
+      "lesson": "Warum mehrere Neuronen?",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 47,
+      "title": "Vom Versuch zum Signalweg",
+      "file": "DL04_4_Verarbeiten.docx",
+      "bytes": 54164
+    },
+    {
+      "dl": 4,
+      "lesson": "Warum mehrere Neuronen?",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 13,
+      "title": "Sicherung vor dem Projekt",
+      "file": "DL04_5_Auswerten.docx",
+      "bytes": 39724
+    },
+    {
+      "dl": 5,
+      "lesson": "Ihr Projekt starten und die Arbeit planen",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Wie prüfen wir neue Bilder?",
+      "file": "DL05_1_Ankommen.docx",
+      "bytes": 39101
+    },
+    {
+      "dl": 5,
+      "lesson": "Ihr Projekt starten und die Arbeit planen",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 5,
+      "title": "Bekannt oder neu?",
+      "file": "DL05_2_Vorwissen_aktivieren.docx",
+      "bytes": 39131
+    },
+    {
+      "dl": 5,
+      "lesson": "Ihr Projekt starten und die Arbeit planen",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 10,
+      "title": "Nur der organisatorische Rahmen",
+      "file": "DL05_3_Informieren.docx",
+      "bytes": 40149
+    },
+    {
+      "dl": 5,
+      "lesson": "Ihr Projekt starten und die Arbeit planen",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 60,
+      "title": "Datenplan selbst erarbeiten",
+      "file": "DL05_4_Verarbeiten.docx",
+      "bytes": 40800
+    },
+    {
+      "dl": 5,
+      "lesson": "Ihr Projekt starten und die Arbeit planen",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 10,
+      "title": "Selbstcheck und Sicherung",
+      "file": "DL05_5_Auswerten.docx",
+      "bytes": 39248
+    },
+    {
+      "dl": 6,
+      "lesson": "Untersuchen und Entscheidungen begründen",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Arbeitsstand öffnen",
+      "file": "DL06_1_Ankommen.docx",
+      "bytes": 38966
+    },
+    {
+      "dl": 6,
+      "lesson": "Untersuchen und Entscheidungen begründen",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 3,
+      "title": "Ein realistisches Tagesziel",
+      "file": "DL06_2_Vorwissen_aktivieren.docx",
+      "bytes": 38927
+    },
+    {
+      "dl": 6,
+      "lesson": "Untersuchen und Entscheidungen begründen",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 2,
+      "title": "Hilfe gezielt auswählen",
+      "file": "DL06_3_Informieren.docx",
+      "bytes": 39022
+    },
+    {
+      "dl": 6,
+      "lesson": "Untersuchen und Entscheidungen begründen",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 70,
+      "title": "Einen fairen Vergleich belegen",
+      "file": "DL06_4_Verarbeiten.docx",
+      "bytes": 40476
+    },
+    {
+      "dl": 6,
+      "lesson": "Untersuchen und Entscheidungen begründen",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 10,
+      "title": "Fortschritt und Abschlussplan",
+      "file": "DL06_5_Auswerten.docx",
+      "bytes": 39260
+    },
+    {
+      "dl": 7,
+      "lesson": "Das Projekt abschliessen und die Arbeit überprüfen",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Eigene Abschlussliste",
+      "file": "DL07_1_Ankommen.docx",
+      "bytes": 38963
+    },
+    {
+      "dl": 7,
+      "lesson": "Das Projekt abschliessen und die Arbeit überprüfen",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 3,
+      "title": "Freigabe vor dem Test",
+      "file": "DL07_2_Vorwissen_aktivieren.docx",
+      "bytes": 39091
+    },
+    {
+      "dl": 7,
+      "lesson": "Das Projekt abschliessen und die Arbeit überprüfen",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 2,
+      "title": "Abgabehilfen nach Bedarf",
+      "file": "DL07_3_Informieren.docx",
+      "bytes": 39014
+    },
+    {
+      "dl": 7,
+      "lesson": "Das Projekt abschliessen und die Arbeit überprüfen",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 70,
+      "title": "Test, Grenzen und Reflexion",
+      "file": "DL07_4_Verarbeiten.docx",
+      "bytes": 39921
+    },
+    {
+      "dl": 7,
+      "lesson": "Das Projekt abschliessen und die Arbeit überprüfen",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 10,
+      "title": "Abgabe und Austausch vorbereiten",
+      "file": "DL07_5_Auswerten.docx",
+      "bytes": 39348
+    },
+    {
+      "dl": 8,
+      "lesson": "Ein fremdes Bildmodell kritisch prüfen",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Ohne gemeinsamen Neustart beginnen",
+      "file": "DL08_1_Ankommen.docx",
+      "bytes": 39113
+    },
+    {
+      "dl": 8,
+      "lesson": "Ein fremdes Bildmodell kritisch prüfen",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 5,
+      "title": "Zwei verschiedene Prüffragen",
+      "file": "DL08_2_Vorwissen_aktivieren.docx",
+      "bytes": 39199
+    },
+    {
+      "dl": 8,
+      "lesson": "Ein fremdes Bildmodell kritisch prüfen",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 5,
+      "title": "Fremdes Projekt laden, Auftrag lesen",
+      "file": "DL08_3_Informieren.docx",
+      "bytes": 39527
+    },
+    {
+      "dl": 8,
+      "lesson": "Ein fremdes Bildmodell kritisch prüfen",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 70,
+      "title": "Datencheck und Versuch",
+      "file": "DL08_4_Verarbeiten.docx",
+      "bytes": 40204
+    },
+    {
+      "dl": 8,
+      "lesson": "Ein fremdes Bildmodell kritisch prüfen",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 5,
+      "title": "Separat sichern",
+      "file": "DL08_5_Auswerten.docx",
+      "bytes": 39317
+    },
+    {
+      "dl": 9,
+      "lesson": "Wie entstehen Sprachmodelle?",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Mitnehmen und Plausibel ist nicht wahr",
+      "file": "DL09_1_Ankommen.docx",
+      "bytes": 39101
+    },
+    {
+      "dl": 9,
+      "lesson": "Wie entstehen Sprachmodelle?",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 10,
+      "title": "Kontext auf Papier",
+      "file": "DL09_2_Vorwissen_aktivieren.docx",
+      "bytes": 39292
+    },
+    {
+      "dl": 9,
+      "lesson": "Wie entstehen Sprachmodelle?",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 12,
+      "title": "Vom Wortfolgemodell zum Netz in vier Sätzen",
+      "file": "DL09_3_Informieren.docx",
+      "bytes": 39599
+    },
+    {
+      "dl": 9,
+      "lesson": "Wie entstehen Sprachmodelle?",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 53,
+      "title": "Soekia gründlich untersuchen",
+      "file": "DL09_4_Verarbeiten.docx",
+      "bytes": 40597
+    },
+    {
+      "dl": 9,
+      "lesson": "Wie entstehen Sprachmodelle?",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 10,
+      "title": "Eine überprüfbare Grenze",
+      "file": "DL09_5_Auswerten.docx",
+      "bytes": 39232
+    },
+    {
+      "dl": 10,
+      "lesson": "Wer trägt die Folgen?",
+      "phase": 1,
+      "phaseName": "Ankommen",
+      "minutes": 5,
+      "title": "Eine erste Position",
+      "file": "DL10_1_Ankommen.docx",
+      "bytes": 38941
+    },
+    {
+      "dl": 10,
+      "lesson": "Wer trägt die Folgen?",
+      "phase": 2,
+      "phaseName": "Vorwissen aktivieren",
+      "minutes": 5,
+      "title": "Von der Modellgrenze zur Folge",
+      "file": "DL10_2_Vorwissen_aktivieren.docx",
+      "bytes": 39079
+    },
+    {
+      "dl": 10,
+      "lesson": "Wer trägt die Folgen?",
+      "phase": 3,
+      "phaseName": "Informieren",
+      "minutes": 20,
+      "title": "O’Neils Warnung prüfen",
+      "file": "DL10_3_Informieren.docx",
+      "bytes": 39338
+    },
+    {
+      "dl": 10,
+      "lesson": "Wer trägt die Folgen?",
+      "phase": 4,
+      "phaseName": "Verarbeiten",
+      "minutes": 45,
+      "title": "Eine Fallkarte, ein begründetes Urteil",
+      "file": "DL10_4_Verarbeiten.docx",
+      "bytes": 41074
+    },
+    {
+      "dl": 10,
+      "lesson": "Wer trägt die Folgen?",
+      "phase": 5,
+      "phaseName": "Auswerten",
+      "minutes": 15,
+      "title": "Anfangsthese erneut prüfen und Kurs abschliessen",
+      "file": "DL10_5_Auswerten.docx",
+      "bytes": 39383
+    }
+  ]
+}

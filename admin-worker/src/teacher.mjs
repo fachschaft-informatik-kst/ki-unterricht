@@ -7,14 +7,50 @@ export const DOWNLOADS={
   "koordinatengitter_perzeptron_and_loesung.svg":"worksheets/md/svg/koordinatengitter_perzeptron_and_loesung.svg",
   "koordinatengitter_or_nand_xor.svg":"worksheets/md/svg/koordinatengitter_or_nand_xor.svg"
 };
+export const TEACHER_KINDS={planung:"AVIVA-Unterrichtsplanung",materialien:"Materialkoffer",
+  musterloesungen:"Musterlösungen",dokumente:"Alle Dokumente"};
 export function parseTeacher(path){
-  const m=/^\/teacher\/([a-z][a-z0-9-]+\/[1-9][0-9]*-klasse)\/(planung|materialien|musterloesungen)\/?$/.exec(path);
+  const m=/^\/teacher\/([a-z][a-z0-9-]+\/[1-9][0-9]*-klasse)\/(planung|materialien|musterloesungen|dokumente)\/?$/.exec(path);
   return m?{course:m[1],kind:m[2]}:null;
+}
+// Generated student documents (scripts/build_student_documents.py) of one course.
+export const DOCUMENT_FILE=/^[A-Za-z0-9][A-Za-z0-9_.-]{0,100}\.(?:docx|zip)$/;
+export const documentIndexPath=profile=>profile.courseRoot+"/lehrperson/dokumente/dokumente.json";
+export const documentPath=(profile,file)=>profile.courseRoot+"/lehrperson/dokumente/"+file;
+export const documentUrl=(course,file)=>"/teacher/dokumente/"+encodeURIComponent(file)+
+  "?course="+encodeURIComponent(course);
+export function parseDocumentDownload(path){
+  const m=/^\/teacher\/dokumente\/([^/]+)$/.exec(path);
+  if(!m)return null;
+  let file;
+  try{file=decodeURIComponent(m[1]);}catch{return null;}
+  return DOCUMENT_FILE.test(file)?file:null;
 }
 export async function readTeacherFile(token,path,github,repo){
   const file=await github(token,"/repos/"+repo+"/contents/"+path+"?ref=main");
-  if(file.encoding!=="base64"||typeof file.content!=="string")throw Error("Quelle nicht lesbar.");
-  return Uint8Array.from(atob(file.content.replace(/\s/g,"")),c=>c.charCodeAt(0));
+  // The contents API omits the content of files over 1 MB (e.g. the ZIP bundle).
+  const blob=file.encoding==="none"&&/^[a-f0-9]{40}$/.test(file.sha||"")?
+    await github(token,"/repos/"+repo+"/git/blobs/"+file.sha):file;
+  if(blob.encoding!=="base64"||typeof blob.content!=="string")throw Error("Quelle nicht lesbar.");
+  return Uint8Array.from(atob(blob.content.replace(/\s/g,"")),c=>c.charCodeAt(0));
+}
+// The index is optional: courses without generated documents show an empty area.
+export async function loadDocuments(token,profile,github,repo){
+  let data;
+  try{data=JSON.parse(new TextDecoder().decode(await readTeacherFile(token,documentIndexPath(profile),github,repo)));}
+  catch(error){if(error.status===404)return null;throw error;}
+  // Courses copied from kurse/_vorlagen keep the template index until regenerated.
+  const origin=data?.course===profile.slug||data?.course==="_vorlagen/"+profile.grade+"-klasse";
+  if(data?.version!==1||!origin||!Array.isArray(data.documents))
+    throw Error("Dokumentverzeichnis ungültig.");
+  const documents=data.documents.filter(d=>Number.isInteger(d.dl)&&Number.isInteger(d.phase)&&
+    DOCUMENT_FILE.test(d.file||"")&&d.file.endsWith(".docx")).map(d=>({
+    dl:d.dl,phase:d.phase,phaseName:String(d.phaseName||""),minutes:Number(d.minutes)||null,
+    title:String(d.title||""),lesson:String(d.lesson||""),file:d.file,bytes:Number(d.bytes)||null,
+    url:documentUrl(profile.slug,d.file)}));
+  const zip=DOCUMENT_FILE.test(data.zip?.file||"")&&data.zip.file.endsWith(".zip")?
+    {file:data.zip.file,bytes:Number(data.zip.bytes)||null,url:documentUrl(profile.slug,data.zip.file)}:null;
+  return {documents,zip};
 }
 const getText=async(t,p,g,r)=>new TextDecoder().decode(await readTeacherFile(t,p,g,r));
 const getJson=async(t,p,g,r)=>JSON.parse(await getText(t,p,g,r));
@@ -218,13 +254,23 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
   if(!current)throw Error("Kein Unterrichtsplan vorhanden.");
   const base={kind,course,lessons:lessons.map(l=>({id:l.id,number:l.number,title:l.title,view:l.view})),
     selectedNumber:current.number,selectedTitle:current.title};
-  if(kind==="planung")return {...base,lesson:current};
+  const lessonDocuments=async()=>{
+    try{const index=await loadDocuments(token,profile,github,repo);
+      return {documents:(index?.documents||[]).filter(d=>d.dl===current.number),zip:index?.zip||null};}
+    catch{return {documents:[],zip:null};} // teacher views stay usable without document links
+  };
+  if(kind==="planung")return {...base,lesson:current,...await lessonDocuments()};
+  if(kind==="dokumente"){
+    const index=await loadDocuments(token,profile,github,repo);
+    return {...base,documents:index?.documents||[],zip:index?.zip||null};
+  }
   if(kind==="materialien"){
+    const {documents,zip}=await lessonDocuments();
     const content=await getText(token,profile.courseRoot+"/kursseiten/"+current.view+"/materialien.md",github,repo);
     const markdown=materialForLesson(content,current.number);
     const intro=profile.teacherFiles.materialsIntro?
       await getText(token,profile.teacherFiles.materialsIntro,github,repo):"";
-    return {...base,intro,sections:[{title:"Doppellektion "+current.number+" · "+current.title,
+    return {...base,intro,documents,zip,sections:[{title:"Doppellektion "+current.number+" · "+current.title,
       markdown:markdown||content}]};
   }
   const generalPath=profile.teacherFiles.solutions;
@@ -313,7 +359,7 @@ export function teacherThemeStylesheet(courses,course){
     ';--soft:'+soft+';--line:'+line+';background:'+paper+'}';
 }
 export function teacherShell(route,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
-  const titles={planung:"AVIVA-Unterrichtsplanung",materialien:"Materialkoffer",musterloesungen:"Musterlösungen"};
+  const titles=TEACHER_KINDS;
   const esc=s=>String(s).replaceAll("&","&amp;").replaceAll("<","&lt;")
     .replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
   const active=courses.find(c=>c.slug===route.course&&c.ready);

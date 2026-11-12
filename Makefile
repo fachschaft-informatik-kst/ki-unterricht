@@ -13,8 +13,10 @@ FULL_STAMP := $(VENV)/.full-ready
 NPM_STAMP := $(VENV)/.npm-ready
 NODE_DIR := extensions/ki-autostart
 BROWSER_STAMP := node_modules/.browser-ready
+DOCS_STAMP := $(VENV)/.docs-ready
+DOKUMENTE_KURS ?= alle
 
-.PHONY: help preview local full build serve install install-preview test test-browser test-all clean new-chapter
+.PHONY: help preview local full build serve install install-preview test test-browser test-all clean new-chapter dokumente
 
 help:
 	@printf '%s\n' \
@@ -26,6 +28,7 @@ help:
 		'make test-browser  Build und alle Browserpruefungen inklusive Python, Training und ZIP' \
 		'make test-all      Alle Pruefungen nacheinander (entspricht dem Nachtlauf der CI)' \
 		'make new-chapter SECTION=einstieg NUMMER=3a TITLE="..." AFTER=030' \
+		'make dokumente     Word-Dokumente je AVIVA-Phase und ZIP fuer alle Kurse und Vorlagen (DOKUMENTE_KURS=irn/4-klasse)' \
 		'make install       Alle lokalen Python- und npm-Abhaengigkeiten installieren' \
 		'make clean         Lokale Build-Dateien und Umgebungen loeschen' \
 		'PORT=8080 make     Alternativen lokalen Port verwenden'
@@ -52,7 +55,16 @@ $(BROWSER_STAMP): package.json package-lock.json
 	npx --no-install playwright install chromium
 	@touch $@
 
+$(DOCS_STAMP): requirements-docs.txt $(PREVIEW_STAMP)
+	$(VENV_PY) -m pip install -r requirements-docs.txt
+	@touch $@
+
 install-preview: $(PREVIEW_STAMP)
+
+# Word documents for students, one per AVIVA phase (SVG via Playwright/Chromium).
+dokumente: $(DOCS_STAMP) $(BROWSER_STAMP)
+	$(VENV_PY) scripts/build_student_documents.py --course $(DOKUMENTE_KURS)
+	$(VENV_PY) tests/check_student_documents.py
 
 install: $(FULL_STAMP) $(NPM_STAMP)
 
@@ -100,6 +112,7 @@ test: build
 	$(VENV_PY) tests/check_new_lessons.py
 	$(VENV_PY) tests/check_new_lesson_cli.py
 	$(VENV_PY) tests/check_materials.py
+	$(VENV_PY) tests/check_student_documents.py
 	$(VENV_PY) tests/check_testbilder.py
 	$(VENV_PY) tests/check_admin.py
 	$(VENV_PY) tests/check_course_model.py

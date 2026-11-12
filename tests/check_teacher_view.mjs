@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {validatePlan,validateManifest} from "../shared/course-model.js";
 import {readFileSync} from "node:fs";
-import {answerRows,materialForLesson,questionsFromSource,fieldsInSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet,parseTeacher} from "../admin-worker/src/teacher.mjs";
+import {answerRows,materialForLesson,questionsFromSource,fieldsInSource,fieldTopic,teacherData,teacherShell,DEFAULT_COURSES,normalizeTeacherCourses,loadTeacherCourses,teacherThemeStylesheet,parseTeacher,parseDocumentDownload,loadDocuments,readTeacherFile,documentUrl} from "../admin-worker/src/teacher.mjs";
 const fields=[
   "## DL 1 · Was ist KI?","","| Antwortfeld | Musterantwort |","|---|---|",
   "| "+String.fromCharCode(96)+"regeln_oder_daten"+String.fromCharCode(96)+" | Regelbasiert ist nicht dasselbe wie lernend. |",
@@ -170,4 +170,54 @@ assert.equal(solutions.entries[0].questionSource,"original");
 
 assert(solutions.entries[0].courseLink.endsWith("/bok/1-klasse/#feld-"+solutions.entries[0].field),
   "answers with an original question must deep-link to their field");
+
+// Student Word documents: route, whitelist index and download of large files.
+assert.deepEqual(parseTeacher("/teacher/irn/4-klasse/dokumente"),{course:"irn/4-klasse",kind:"dokumente"});
+assert.equal(parseDocumentDownload("/teacher/dokumente/DL01_1_Ankommen.docx"),"DL01_1_Ankommen.docx");
+assert.equal(parseDocumentDownload("/teacher/dokumente/IRN_4-Klasse_Alle_Dokumente.zip"),"IRN_4-Klasse_Alle_Dokumente.zip");
+for(const bad of ["/teacher/dokumente/..%2Fmusterloesungen.md","/teacher/dokumente/x.md",
+  "/teacher/dokumente/a%2Fb.docx","/teacher/dokumente/.hidden.docx","/teacher/dokumente/%E0.docx"])
+  assert.equal(parseDocumentDownload(bad),null,bad);
+const shellDocs=teacherShell({course:"irn/4-klasse",kind:"dokumente"},options);
+assert(shellDocs.includes('href="/teacher/irn/4-klasse/dokumente" aria-current="page">Alle Dokumente</a>'));
+for(const kind of ["planung","materialien","musterloesungen"])
+  assert(teacherShell({course:"irn/4-klasse",kind},options).includes('href="/teacher/irn/4-klasse/dokumente"'),
+    "Alle Dokumente must be reachable from "+kind);
+const irnProfile=options.find(c=>c.slug==="irn/4-klasse");
+const realIndex=readFileSync(new URL("../kurse/irn/4-klasse/lehrperson/dokumente/dokumente.json",import.meta.url));
+const docGithub=async(_t,p)=>{
+  if(p.includes("/contents/kurse/irn/4-klasse/lehrperson/dokumente/dokumente.json"))
+    return {encoding:"base64",content:realIndex.toString("base64")};
+  if(p.includes("/contents/big.zip"))return {encoding:"none",content:"",sha:"a".repeat(40)};
+  if(p.endsWith("/git/blobs/"+"a".repeat(40)))return {encoding:"base64",content:Buffer.from("ZIPDATA").toString("base64")};
+  throw Object.assign(Error("missing"),{status:404});
+};
+const index=await loadDocuments("t",irnProfile,docGithub,"r");
+assert.equal(index.documents.length,50);
+assert.equal(new Set(index.documents.map(d=>d.dl+"-"+d.phase)).size,50,"One document per DL and phase");
+assert.equal(index.documents[0].url,documentUrl("irn/4-klasse","DL01_1_Ankommen.docx"));
+assert.equal(index.documents[0].url,"/teacher/dokumente/DL01_1_Ankommen.docx?course=irn%2F4-klasse");
+assert.match(index.zip.url,/^\/teacher\/dokumente\/IRN_4-Klasse_Alle_Dokumente\.zip\?course=irn%2F4-klasse$/);
+assert.equal(await loadDocuments("t",options.find(c=>c.slug==="bok/4-klasse"),docGithub,"r"),null,
+  "Courses without documents show an empty area instead of failing");
+assert.equal(new TextDecoder().decode(await readTeacherFile("t","big.zip",docGithub,"r")),"ZIPDATA",
+  "Files above 1 MB are read through the Git blob API");
+const encoded=value=>({encoding:"base64",content:Buffer.from(value).toString("base64")});
+const irnSources={
+  "kurse/irn/4-klasse/kursseiten/manifest.json":JSON.stringify({sections:[{id:"x",teaching:true}]}),
+  "kurse/irn/4-klasse/kursseiten/x/planung.json":JSON.stringify({lessons:[
+    {id:"a",order:10,view:"x",title:"A",phases:[]},{id:"b",order:20,view:"x",title:"B",phases:[]}]}),
+  "kurse/irn/4-klasse/kursseiten/x/materialien.md":"## Doppellektion 02\n\nText",
+  "kurse/irn/4-klasse/lehrperson/materialien.md":"Einleitung"
+};
+const irnGithub=async(t,p)=>{
+  const file=p.split("/contents/")[1]?.split("?")[0];
+  return file in irnSources?encoded(irnSources[file]):docGithub(t,p);
+};
+const kitDocs=await teacherData({course:"irn/4-klasse",kind:"materialien"},"t",irnGithub,"r",2,options);
+assert.deepEqual(kitDocs.documents.map(d=>d.phase),[1,2,3,4,5],"Materialkoffer receives the documents of its DL");
+assert(kitDocs.documents.every(d=>d.dl===2));
+const allDocs=await teacherData({course:"irn/4-klasse",kind:"dokumente"},"t",irnGithub,"r",1,options);
+assert.equal(allDocs.documents.length,50);
+assert(allDocs.zip.file.endsWith(".zip"));
 console.log("PASS teacher view: DL navigation, color coding, lesson-specific materials, precise questions");
