@@ -180,6 +180,13 @@ for(const bad of ["/teacher/dokumente/..%2Fmusterloesungen.md","/teacher/dokumen
   assert.equal(parseDocumentDownload(bad),null,bad);
 const shellDocs=teacherShell({course:"irn/4-klasse",kind:"dokumente"},options);
 assert(shellDocs.includes('href="/teacher/irn/4-klasse/dokumente" aria-current="page">Alle Dokumente</a>'));
+assert(shellDocs.includes('<script src="/teacher.js?view=dokumente" defer></script>'),
+  "Document overview must bypass a previously cached teacher.js renderer");
+const workerDeploy=readFileSync(new URL("../.github/workflows/deploy.yml",import.meta.url),"utf8");
+assert.match(workerDeploy,/deploy_worker:[\s\S]*?needs: \[build, deploy\]/,
+  "Deploy Worker after Pages to keep new teacher routes and frontend in sync");
+assert.match(workerDeploy,/needs\.deploy\.result == 'success'/,
+  "Worker must not deploy before the matching Pages UI succeeds");
 for(const kind of ["planung","materialien","musterloesungen"])
   assert(teacherShell({course:"irn/4-klasse",kind},options).includes('href="/teacher/irn/4-klasse/dokumente"'),
     "Alle Dokumente must be reachable from "+kind);
