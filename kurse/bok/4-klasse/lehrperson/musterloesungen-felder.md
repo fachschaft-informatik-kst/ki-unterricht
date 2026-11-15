@@ -57,7 +57,7 @@
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `neuron_wozu` | Positive Gewichte für Sonne und Freund:innen erhöhen die Schwimmneigung, das negative Prüfungsgewicht senkt sie; Bias legt die Schwelle fest. Bei Prüfungsgewicht 0 hätte die Prüfung keinen Einfluss mehr. |
-| `neuron_gelernt` | Lernart: überwachtes Lernen, denn zu jedem Beispiel ist das Ziel (Label) bekannt: Im AND-Versuch ist die Zielausgabe (1,1) → 1, sonst 0. Verändert haben sich Gewichte und Bias (der Erfahrungsschatz), nicht die Grundform der Rechnung; Eingaben und Ziele blieben gleich. |
+| `neuron_gelernt` | Überwachtes Lernen: Das Ziel (Label) ist für das Schwimmbad-Beispiel bekannt. Bei Sonne = 1, Freund:innen = 0 und Prüfung = 0 ist das Ziel Ja (1), das Neuron sagt zunächst Nein (0). Bei Lernrate 1 steigt das Sonnengewicht von 0 auf 1 und der Bias von −1,5 auf −0,5; die anderen Gewichte bleiben wegen ihrer inaktiven Eingaben unverändert. Die Eingaben und die Rechenregel bleiben gleich; das Gelernte steckt in Gewichten und Bias. |
 | `sw_gs` | +2 |
 | `sw_gf` | +2 |
 | `sw_gp` | −1 |

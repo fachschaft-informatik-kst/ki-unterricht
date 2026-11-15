@@ -55,7 +55,7 @@
 | Antwortfeld | Mögliche Musterantwort |
 |---|---|
 | `basis-neuron-neuron_wozu` | Sonne und Freund:innen geben positive Beiträge, die Prüfung einen negativen. Der Bias legt die Schwelle fest. Gewicht Prüfung = 0 würde die Prüfung völlig ignorieren. |
-| `basis-neuron-neuron_gelernt` | Gewichte und Bias werden korrigiert, wenn eine Vorhersage falsch ist. Die Eingaben und das Rechenverfahren bleiben gleich; gelernt ist in den Parametern gespeichert. |
+| `basis-neuron-neuron_gelernt` | Beim Schwimmbad-Beispiel (Sonne = 1, Freund:innen = 0, Prüfung = 0; Ziel Ja, ursprüngliche Ausgabe Nein) wird das Sonnengewicht von 0 auf 1 und der Bias von −1,5 auf −0,5 korrigiert (Lernrate 1). Die anderen Gewichte, die Eingaben und die Rechenregel bleiben gleich; das Gelernte steckt in Gewichten und Bias. |
 | `basis-neuron-sw_gs` | +2 |
 | `basis-neuron-sw_gf` | +2 |
 | `basis-neuron-sw_gp` | −1 |

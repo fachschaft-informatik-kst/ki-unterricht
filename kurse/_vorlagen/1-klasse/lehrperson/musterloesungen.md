@@ -68,7 +68,7 @@ Beim **Spamfilter** ist die Eingabe eine E-Mail. Beim Training sieht das Modell 
 
 Es bildet die **gewichtete Summe plus Bias** und gibt ab Summe 0 die Ausgabe 1 aus, sonst 0. Gewichte verändern den Einfluss der Eingaben; der Bias verschiebt die Schwelle.
 
-**UND-Beispiel:** Gewichte 1 und 1, Bias −1,5:
+**Schwimmbadregel AND** (nur bei Sonne und Freund:innen, Prüfung = 0): Gewichte 1 und 1, Bias −1,5:
 
 | Eingabe | Summe | Ausgabe |
 |---|---:|---:|
@@ -85,7 +85,7 @@ Es bildet die **gewichtete Summe plus Bias** und gibt ab Summe 0 die Ausgabe 1 a
 
 ### Warum XOR ein einzelnes Neuron überfordert
 
-**XOR:** Nur (0,1) und (1,0) ergeben 1, die beiden anderen Fälle 0. Eine einzige Gerade kann die Punkte nicht korrekt trennen. Deshalb scheitert ein einzelnes Perzeptron an XOR, egal welche Gewichte es lernt.
+**XOR als neue Schwimmbadregel** (genau eine der Bedingungen Sonne oder Freund:innen trifft zu, Prüfung = 0): Nur (0,1) und (1,0) ergeben 1, die beiden anderen Fälle 0. Eine einzige Gerade kann die Punkte nicht korrekt trennen. Deshalb scheitert ein einzelnes Perzeptron an XOR, egal welche Gewichte es lernt.
 
 ### Ein mehrschichtiges neuronales Netz löst XOR
 
