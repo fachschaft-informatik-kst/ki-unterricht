@@ -4,11 +4,11 @@
       "id": "b04",
       "view": "basis-netze",
       "title": "Warum mehrere Neuronen?",
-      "rueckblick": "In Doppellektion 3 haben Sie einzelne Neuronen für AND und OR berechnet, eingestellt und trainiert. Heute lernen Sie XOR als neue Herausforderung kennen und untersuchen, warum mehrere Neuronen nötig sind.",
+      "rueckblick": "In Doppellektion 3 haben Sie am Schwimmbad-Neuron gesehen, wie Gewichte und Bias eine Entscheidung beeinflussen und beim Lernen verändert werden. Danach haben Sie AND und OR untersucht. Heute entdecken Sie mit XOR, warum mehrere Neuronen nötig sind.",
       "rueckblick_figur": {
-        "src": "grafiken/perzeptron.svg",
-        "alt": "Ein künstliches Neuron mit zwei Eingängen, Gewichten und Bias.",
-        "caption": "Rückblick: Ein Neuron berechnet die gewichtete Summe und entscheidet anhand einer Schwelle."
+        "src": "grafiken/neuron_entscheider.svg",
+        "alt": "Schwimmbad-Neuron: Sonne, Freund:innen und Prüfung werden gewichtet und führen zu einer Ja/Nein-Entscheidung.",
+        "caption": "Rückblick: Wie entscheidet das Schwimmbad-Neuron? Was bewirken Gewichte und Bias?"
       },
       "goal": "XOR an vier Beispielen erklären, die Grenze eines einzelnen Neurons anhand einer Grafik erkennen und die OR-/NAND-/AND-Zwischenschicht verfolgen.",
       "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
