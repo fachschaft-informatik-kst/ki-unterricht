@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="465" viewBox="0 0 1200 465" role="img" aria-labelledby="titel beschreibung">
+<title id="titel">Wie lernt das Schwimmbad-Neuron? Vorher, Lernen, Nachher.</title>
+<desc id="beschreibung">Die Situation ist immer dieselbe: Sonne ja, Freundinnen und Freunde nein, Prüfung nein. Die richtige Entscheidung ist Ja. Zuerst sagt das Neuron fälschlich Nein. Eine Lernkorrektur erhöht das Sonnengewicht von 0 auf 1 und den Bias von minus 1,5 auf minus 0,5. Danach sagt das Neuron Ja. Die Eingaben und die anderen Gewichte bleiben gleich.</desc>
+<rect x="0" y="0" width="1200" height="465" rx="18" fill="#f7fafb"/>
+<text x="38" y="45" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="26" fill="#1e343d">Wie lernt das Schwimmbad-Neuron?</text>
+<rect x="36" y="66" width="1128" height="55" rx="12" fill="#e8eff2"/>
+<g font-family="Arial,Helvetica,sans-serif" font-size="19" fill="#253a43">
+ <text x="58" y="100">Sonne <tspan font-weight="700">1</tspan></text>
+ <text x="250" y="100">Freund:innen <tspan font-weight="700">0</tspan></text>
+ <text x="540" y="100">Prüfung <tspan font-weight="700">0</tspan></text>
+ <text x="815" y="100" font-weight="700">Ziel: JA (1)</text>
+</g>
+<rect x="36" y="141" width="343" height="260" rx="15" fill="#fff" stroke="#ccd9de" stroke-width="2"/>
+<rect x="429" y="141" width="342" height="260" rx="15" fill="#fff" stroke="#ccd9de" stroke-width="2"/>
+<rect x="821" y="141" width="343" height="260" rx="15" fill="#fff" stroke="#ccd9de" stroke-width="2"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#1e343d">
+ <text x="61" y="182" font-size="22" font-weight="700">1  Vorher</text>
+ <text x="454" y="182" font-size="22" font-weight="700">2  Lernen</text>
+ <text x="847" y="182" font-size="22" font-weight="700">3  Nachher</text>
+</g>
+<g font-family="Arial,Helvetica,sans-serif" font-size="19" fill="#344953">
+ <text x="61" y="221">Sonnengewicht: <tspan font-weight="700">0</tspan></text>
+ <text x="61" y="253">Bias: <tspan font-weight="700">−1,5</tspan></text>
+ <text x="61" y="291">Summe: <tspan font-weight="700">−1,5</tspan></text>
+ <text x="847" y="221">Sonnengewicht: <tspan font-weight="700">+1</tspan></text>
+ <text x="847" y="253">Bias: <tspan font-weight="700">−0,5</tspan></text>
+ <text x="847" y="291">Summe: <tspan font-weight="700">+0,5</tspan></text>
+</g>
+<rect x="61" y="313" width="286" height="56" rx="12" fill="#fdebea" stroke="#d67b72"/>
+<rect x="847" y="313" width="287" height="56" rx="12" fill="#e6f5ef" stroke="#68a68b"/>
+<g font-family="Arial,Helvetica,sans-serif" text-anchor="middle" font-weight="700" font-size="22">
+ <text x="204" y="348" fill="#a33f38">NEIN  ✕  falsch</text>
+ <text x="990" y="348" fill="#246d54">JA  ✓  richtig</text>
+</g>
+<g font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#344953">
+ <text x="454" y="225">Ziel 1 − Ausgabe 0 = <tspan font-weight="700">+1</tspan></text>
+ <text x="454" y="264" font-weight="700">Sonnengewicht</text>
+ <text x="454" y="290">0 → +1</text>
+ <text x="454" y="325" font-weight="700">Bias</text>
+ <text x="454" y="351">−1,5 → −0,5</text>
+</g>
+<g fill="none" stroke="#7195a2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M386 278 h29 m-11 -11 11 11 -11 11"/>
+<path d="M778 278 h29 m-11 -11 11 11 -11 11"/>
+</g>
+<text x="38" y="440" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#415963">Gleiche Eingaben, andere Parameter. Lernrate: 1. Die anderen Gewichte bleiben unverändert.</text>
+</svg>

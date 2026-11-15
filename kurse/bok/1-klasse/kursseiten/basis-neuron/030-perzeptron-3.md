@@ -23,10 +23,6 @@ Für den ersten Versuch verwenden wir **AND** als Ziel: Ein Warnsignal soll **nu
 
 Die Eingaben werden nicht einfach addiert: Jede wird mit ihrem **Gewicht** multipliziert; anschliessend kommt der **Bias** dazu. Die Summe `s` entscheidet: **s ≥ 0 → Ausgabe 1**, sonst **Ausgabe 0**.
 <!-- MD:END -->
-    <figure class="concept-figure">
-      <img alt="Eingaben, Gewichte und Bias führen über Summe und Step-Funktion zur Ausgabe." loading="lazy" src="grafiken/perzeptron.svg"/>
-      <figcaption>Von links nach rechts: Eingaben gewichten, Bias addieren, Ausgabe bestimmen. Die feste Eingabe 1 trägt den Bias bei.</figcaption>
-    </figure>
     <div class="process">
       <span>Eingaben × Gewichte</span><b>+</b><span>Bias</span><b>→</b><span>Summe ≥ 0?<br/><strong>Ausgabe 1 oder 0</strong></span>
     </div>
