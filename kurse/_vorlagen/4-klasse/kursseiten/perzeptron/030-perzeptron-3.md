@@ -1,42 +1,39 @@
-<details class="kapitel" id="perzeptron-3" data-kurz="Eingaben, Gewichte, Bias, Summe, Ausgabe: das künstliche Neuron im Überblick." open>
+<details class="kapitel" id="perzeptron-3" data-kurz="Sonne und Freund:innen: mit Gewichten und Bias vier Situationen berechnen." open>
   <summary><span class="kapitel-nr">3</span>
     <h2 class="kapitel-titel">Das künstliche Neuron</h2>
   </summary>
   <div class="kapitel-body">
     <!-- MD:START -->
-### Zuerst die Eingaben verstehen
+### Drei Schwimmbad-Regeln ausprobieren
 
-Ein logisches Gatter erhält **zwei Eingaben**: `x₁` und `x₂`. **0** bedeutet «nein / aus», **1** bedeutet «ja / ein». Für zwei Eingaben gibt es genau **vier mögliche Kombinationen**. Die Spalten AND, OR und NAND zeigen die **gewünschte Ausgabe** – noch keine Rechnung des Neurons.
+Wir bleiben beim Schwimmbad. Für vier übersichtliche Fälle nehmen wir an: **Morgen ist keine Prüfung (P = 0)**. Wir betrachten nur **Sonne (S = x₁)** und **Freund:innen (F = x₂)**. 1 bedeutet Ja, 0 bedeutet Nein. Wir testen bewusst **neue, vereinfachte Entscheidungsregeln** – nicht die ursprüngliche Einstellung mit drei Eingaben.
 
-| x₁ | x₂ | AND | OR | NAND |
-|:--:|:--:|:---:|:--:|:----:|
+| S | F | Nur beide (AND) | Mindestens eine (OR) | Nicht beide (NAND) |
+|:--:|:--:|:--:|:--:|:--:|
 | 0 | 0 | 0 | 0 | 1 |
 | 0 | 1 | 0 | 1 | 1 |
 | 1 | 0 | 0 | 1 | 1 |
 | 1 | 1 | **1** | 1 | **0** |
 
-**AND:** beide aktiv · **OR:** mindestens eine aktiv · **NAND:** Gegenteil von **AND**.
+**AND** bedeutet: Schwimmen nur bei Sonne **und** Freund:innen. **OR**: Sonne **oder** Freund:innen genügt. **NAND** ist die umgekehrte AND-Antwort; wir brauchen sie später als Zwischenentscheidung.
 
-Für den ersten Versuch verwenden wir **AND** als Ziel: Ein Warnsignal soll **nur dann** leuchten, wenn beide Sensoren aktiv sind. Das Perzeptron soll diese vier Ausgaben durch eine Rechnung erzeugen.
+### Wie rechnet das Neuron?
 
-### Was rechnet das Perzeptron?
-
-Die Eingaben werden nicht einfach addiert: Jede wird mit ihrem **Gewicht** multipliziert; anschliessend kommt der **Bias** dazu. Die Summe `s` entscheidet: **s ≥ 0 → Ausgabe 1**, sonst **Ausgabe 0**.
+Jede Eingabe wird mit ihrem **Gewicht** multipliziert, dann wird der **Bias** addiert. Ist die Summe **mindestens 0**, antwortet das Neuron mit **1 (Ja)**, sonst mit **0 (Nein)**.
 <!-- MD:END -->
     <div class="process">
-      <span>Eingaben × Gewichte</span><b>+</b><span>Bias</span><b>→</b><span>Summe ≥ 0?<br/><strong>Ausgabe 1 oder 0</strong></span>
+      <span>Eingaben × Gewichte</span><b>+</b><span>Bias</span><b>→</b><span>Summe ≥ 0? <strong>Ja / Nein</strong></span>
     </div>
-    <p><strong>Konkrete Einstellung für AND:</strong> Gewicht w₁ = 1, Gewicht w₂ = 1, Bias b = −1.5. So lässt sich überprüfen, ob die Ausgaben tatsächlich der AND-Spalte oben entsprechen.</p>
+    <p><strong>Beispiel: nur bei beiden schwimmen (AND).</strong> Wir wählen w₁ = 1, w₂ = 1 und b = −1.5. Diese Werte gelten für alle vier Situationen:</p>
     <!-- MD:START -->
-| Eingaben (x₁, x₂) | Rechnung → Summe s | Neuron / AND-Ziel |
+| Sonne / Freund:innen | Summe | Neuron / Ziel |
 |:---:|:---|:---:|
-| (0, 0) · aus/aus | 0 + 0 − 1.5 = **−1.5** | **0 / 0 ✓** |
-| (0, 1) · aus/ein | 0 + 1 − 1.5 = **−0.5** | **0 / 0 ✓** |
-| (1, 0) · ein/aus | 1 + 0 − 1.5 = **−0.5** | **0 / 0 ✓** |
-| (1, 1) · ein/ein | 1 + 1 − 1.5 = **+0.5** | **1 / 1 ✓** |
-<!-- MD:END -->
-    <!-- MD:START -->
-**So lesen Sie die drei Spalten:** links stehen die beiden Sensor-Eingaben (0 = aus, 1 = ein), in der Mitte die Rechnung inklusive Bias. Rechts steht **Ausgabe des Neurons / gewünschtes AND-Ziel**; ✓ bedeutet Übereinstimmung. Was würde sich ändern, wenn der Bias −0.5 wäre? Probieren Sie das später im Notebook aus.
+| (0, 0) | 0 + 0 − 1.5 = **−1.5** | 0 / 0 ✓ |
+| (0, 1) | 0 + 1 − 1.5 = **−0.5** | 0 / 0 ✓ |
+| (1, 0) | 1 + 0 − 1.5 = **−0.5** | 0 / 0 ✓ |
+| (1, 1) | 1 + 1 − 1.5 = **+0.5** | 1 / 1 ✓ |
+
+Die Gewichte und der Bias bleiben beim **Prüfen** der vier Fälle gleich. Beim **Lernen** dürfen sie sich ändern – das zeigt Kapitel 4.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/perzeptron_und_neuronale_netze.ipynb" data-title="Neuron-Labor · Doppellektion 3">
       <!-- MD:START -->

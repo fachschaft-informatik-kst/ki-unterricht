@@ -1,109 +1,24 @@
-<details class="kapitel" id="perzeptron-4" data-kurz="Nur drei Zahlen ändern sich: Gewichte und Bias. Alles andere bleibt gleich." open>
+<details class="kapitel" id="perzeptron-4" data-kurz="Überwachtes Lernen: Gewichte und Bias werden nach Fehlern korrigiert." open>
   <summary><span class="kapitel-nr">4</span>
     <h2 class="kapitel-titel">Was lernt ein Neuron genau?</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Von Hand einzustellen ist schon bei zwei Eingängen mühsam, bei 1280 Bildmerkmalen unmöglich. Darum lässt man das Neuron <strong>lernen</strong>: Es bekommt Beispiele mit bekannter Lösung, dem <strong>Ziel</strong> (auch <strong>Label</strong> genannt). Diese Lernart kennen Sie aus Doppellektion 2: <strong>überwachtes Lernen</strong>. Die Beispiele heissen <strong>Trainingsdaten</strong>; die Lernregel passt die Zahlen des Neurons Schritt für Schritt an.</p>
-    <p><strong>Gelernt werden nur die Gewichte und der Bias.</strong> Die Rechnung «Summe bilden, ab 0 feuern» ändert sich nie. Beim Lernen verschieben sich nur die Zahlen, die Sie im Notebook als Regler eingestellt haben. Diese Zahlen sind der <strong>Erfahrungsschatz</strong> des Neurons aus dem EVA-Bild: Alles, was es aus den Beispielen «behalten» hat, steckt darin.</p>
+    <p>Ein Neuron lernt aus <strong>Trainingsdaten</strong> mit bekannter richtiger Antwort – dem <strong>Ziel</strong> oder <strong>Label</strong>. Das heisst <strong>überwachtes Lernen</strong>. Bei Fehlern werden <strong>Gewichte und Bias</strong> korrigiert; Eingaben und Rechenregel «Summe bilden, ab 0 Ja» bleiben unverändert. Das Gelernte steckt in den eingestellten Zahlen.</p>
     <figure class="concept-figure">
       <img alt="Schwimmbad-Neuron beim Lernen: Bei Sonne 1, Freund:innen 0 und Prüfung 0 sagt es zuerst fälschlich Nein. Sonnengewicht und Bias werden korrigiert, danach sagt es Ja. Die Eingaben bleiben gleich." loading="lazy" src="grafiken/schwimmbad_lernschritt.svg"/>
       <figcaption>Ein Lernschritt am Schwimmbad-Beispiel: Eine falsche Ausgabe führt zur Korrektur von Gewicht und Bias.</figcaption>
     </figure>
-    <div class="table-scroll">
-      <table class="typen">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Bleibt immer gleich</th>
-            <th>Wird gelernt</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Aufbau</th>
-            <td>Eingaben, Summe, Bias, «ab 0 Ja»</td>
-            <td>–</td>
-          </tr>
-          <tr>
-            <th>Zahlen</th>
-            <td>Die Trainingsbeispiele und ihre Ziele</td>
-            <td>Gewichte w₁, w₂, … und Bias b</td>
-          </tr>
-          <tr>
-            <th>Ergebnis</th>
-            <td>–</td>
-            <td>Eine Grenzlinie, die die Klassen trennt</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p>Das Neuron lernt also <strong>keine Wenn-dann-Regeln</strong> und weiss nicht, was <strong>AND</strong> oder <strong>«Spam»</strong> bedeutet. Es findet Zahlen, mit denen die Beispiele stimmen.</p>
+    <p><strong>Ein Lernschritt:</strong> Sonne = 1, Freund:innen = 0, Prüfung = 0. Ziel <strong>Ja (1)</strong>, bisherige Ausgabe <strong>Nein (0)</strong>. Mit Lernrate 1 steigen Sonnengewicht (0 → 1) und Bias (−1.5 → −0.5) um je 1. Danach antwortet das Neuron richtig. Gewichte der Eingaben mit Wert 0 bleiben unverändert.</p>
     <!-- MD:START -->
-### So lernt es: die Lernregel
+### So funktioniert die Lernregel
+
+1. Das Neuron antwortet auf ein Beispiel und vergleicht die Ausgabe mit dem bekannten Ziel.
+2. Bei einem Fehler werden die Gewichte der aktiven Eingaben und der Bias angepasst; bei einer richtigen Antwort geschieht nichts.
+3. Das wird für die Trainingsbeispiele wiederholt, falls nötig über mehrere **Runden**.
+
 <!-- MD:END -->
-    <ol>
-      <li>Starten Sie mit beliebigen Gewichten und Bias.</li>
-      <li>Nehmen Sie ein Beispiel und lassen Sie das Neuron antworten.</li>
-      <li>Stimmt die Antwort mit dem Ziel überein, geschieht nichts. Stimmt sie nicht, wird korrigiert: Feuert es zu wenig, steigen die Gewichte der aktiven Eingänge und der Bias. Feuert es zu viel, sinken sie.</li>
-      <li>Wiederholen Sie das für alle Beispiele (eine <strong>Runde</strong>), bis alle stimmen.</li>
-    </ol>
     <p class="process"><span>neues Gewicht</span><b>=</b><span>altes Gewicht</span><b>+</b><span>Lernrate × (Ziel − Ausgabe) × Eingang</span></p>
-    <p>Beim Bias ist der Eingang 1. Die <strong>Lernrate</strong> dämpft die Korrektur: Zu grosse Schritte würden das Neuron nur auf das zuletzt gesehene Beispiel zuschneiden.</p>
-    <!-- MD:START -->
-### Beispiel: AND lernen (Lernrate 0.2)
-
-**Startwerte:** `w₁ = 0.2`, `w₂ = 0.2` und `b = −0.5`. Die Aufgabe ist **AND**: Nur bei den Eingaben `(1, 1)` soll das Neuron **1** ausgeben.
-
-**So lesen Sie die Tabelle:** *Eingabe* sind die Sensorwerte. *Ziel* ist die richtige AND-Ausgabe; *Neuron* ist seine bisherige Antwort. Die letzten Werte gelten **nach** der Korrektur.
-<!-- MD:END -->
-    <div class="table-scroll">
-      <table class="typen">
-        <thead>
-          <tr>
-            <th>Zeitpunkt</th>
-            <th>Eingabe (x₁, x₂)</th>
-            <th>Ziel / Neuron</th>
-            <th>Änderung</th>
-            <th>Werte danach (w₁, w₂, b)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Start</th>
-            <td>–</td>
-            <td>–</td>
-            <td>noch kein Training</td>
-            <td>0.2 / 0.2 / −0.5</td>
-          </tr>
-          <tr>
-            <th>Runde 1</th>
-            <td>(1, 1)</td>
-            <td>1 / <strong>0 ✗</strong></td>
-            <td>Zu wenig: w₁, w₂ und b je +0.2</td>
-            <td>0.4 / 0.4 / −0.3</td>
-          </tr>
-          <tr>
-            <th>Runde 2</th>
-            <td>(0, 1)</td>
-            <td>0 / <strong>1 ✗</strong></td>
-            <td>Zu viel: w₂ und b je −0.2</td>
-            <td>0.4 / 0.2 / −0.5</td>
-          </tr>
-          <tr>
-            <th>Runde 3</th>
-            <td>alle vier</td>
-            <td><strong>alle richtig ✓</strong></td>
-            <td>keine Korrektur mehr</td>
-            <td>0.4 / 0.2 / −0.5</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- MD:START -->
-**Weshalb fehlen andere Eingaben?** Bei ihnen lag das Neuron schon richtig; es musste nichts verändern. Das Notebook zeigt auch diese Zwischenschritte. **Beispielrechnung:** Bei (1, 1) ergibt der Startzustand `0.2 + 0.2 − 0.5 = −0.1`, also 0 statt des AND-Ziels 1. Nach der Korrektur sind die Werte `0.4 / 0.4 / −0.3`.
-
-Am Schluss stimmen alle vier Eingaben. Gelernt wurden nur die beiden Gewichte und der Bias; die Entscheidungsregel bleibt gleich. Das war überwachtes Lernen: Bei jedem Beispiel verglich das Neuron seine Antwort mit dem bekannten Ziel.
-<!-- MD:END -->
-    <label class="field answer"><span>Aufgabe: Was hat das Neuron im AND-Beispiel gelernt, und um welche Lernart handelt es sich? Was hat sich zwischen Start und Ende verändert, was nicht? Wo steckt das Gelernte?</span><textarea data-answer="neuron_gelernt" maxlength="10000" placeholder="Lernart: … Verändert haben sich … Unverändert blieb … Das Gelernte steckt in …" rows="4"></textarea></label>
+    <p>Für den Bias gilt Eingang 1. Die <strong>Lernrate</strong> legt die Grösse des Korrekturschritts fest. Das Neuron kennt keine fertige Wenn-dann-Regel und merkt sich die einzelnen Beispiele nicht als Regeln: Es findet Gewichte und Bias, die zu den Zielen passen.</p>
+    <label class="field answer"><span>Aufgabe: Erklären Sie am Schwimmbad-Neuron den Lernschritt und die Rolle des bekannten Ziels (überwachtes Lernen). Welche Werte ändern sich, was bleibt gleich und wo steckt das Gelernte?</span><textarea data-answer="neuron_gelernt" maxlength="10000" placeholder="Lernart: … Verändert haben sich … Unverändert blieb … Das Gelernte steckt in …" rows="4"></textarea></label>
   </div>
 </details>

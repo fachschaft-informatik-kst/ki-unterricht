@@ -4,9 +4,9 @@
   </summary>
   <div class="kapitel-body">
     <!-- MD:START -->
-**Jetzt geht es vom Aufbau zum Experiment:** Öffnen Sie das Notebook «Neuronale Netze». Verfolgen Sie die XOR-Ausgaben im Netz aus OR, NAND und AND. Danach untersuchen Sie, wie ein Netz mit 1, 2 und 4 versteckten Neuronen aus den vier Beispielen mit ihren Zielwerten lernt (überwachtes Lernen) und ob es alle vier Fälle löst.
+**Jetzt geht es vom Aufbau zum Experiment:** Öffnen Sie das Notebook «Neuronale Netze». Verfolgen Sie die vier Schwimmbadfälle (Sonne und Freund:innen) im Netz aus OR, NAND und AND. Danach untersuchen Sie, wie ein Netz mit 1, 2 und 4 versteckten Neuronen aus den vier Beispielen mit ihren Zielwerten lernt (überwachtes Lernen) und ob es alle vier Fälle löst.
 
-**Auftrag:** Beschreiben Sie für eine Eingabe den vollständigen Weg bis zur Ausgabe. Verändern Sie bei der Lernsimulation jeweils nur eine Einstellung und halten Sie Ihre Beobachtung im Protokoll fest.
+**Auftrag:** Beschreiben Sie für eine Schwimmbad-Situation den Weg von Sonne und Freund:innen bis zur Ja/Nein-Ausgabe. Verändern Sie bei der Lernsimulation jeweils nur eine Einstellung und halten Sie Ihre Beobachtung im Protokoll fest.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/mehrschichtige_netze.ipynb" data-title="Neuronale Netze">
       <!-- MD:START -->

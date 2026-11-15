@@ -3,56 +3,23 @@
     <h2 class="kapitel-titel">Das XOR-Problem: Warum reicht ein Neuron nicht?</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>Neue Herausforderung:</strong> In Doppellektion 3 konnten Sie AND und OR mit einem einzelnen Neuron einstellen. Gelingt das bei der folgenden Regel auch? Notieren Sie zuerst Ihre Vermutung. Untersuchen Sie danach das XOR-Problem und anschliessend das mehrschichtige Netz.</p>
-    <p><strong>XOR</strong> (exklusives Oder) gibt 1, wenn <strong>genau eine</strong> der beiden Eingaben 1 ist. Beispiel: Ein Modus startet, wenn genau eine von zwei Tasten gedrückt ist. Wir prüfen, ob sich auch diese Regel mit Gewichten und Bias eines einzelnen Neurons darstellen lässt.</p>
+    <p><strong>Neue Schwimmbadregel:</strong> Wir setzen wie zuvor «Prüfung morgen» auf 0 und betrachten nur Sonne (S = x₁) und Freund:innen (F = x₂). Diesmal heisst es bewusst ungewohnt: <strong>Schwimmen, wenn genau eine der beiden Bedingungen zutrifft.</strong> Diese Regel nennt man <strong>XOR</strong> (exklusives Oder). Kann ein einzelnes Neuron sie umsetzen?</p>
     <!-- MD:START -->
 ### 1 · XOR kennenlernen: eine neue Regel
 <!-- MD:END -->
     <div class="table-scroll">
       <table class="typen">
-        <thead>
-          <tr>
-            <th>Eingabe 1</th>
-            <th>Eingabe 2</th>
-            <th>AND</th>
-            <th>OR</th>
-            <th>XOR</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Sonne (S)</th><th>Freund:innen (F)</th><th>Schwimmen? (XOR)</th></tr></thead>
         <tbody>
-          <tr>
-            <th>0</th>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <th>0</th>
-            <td>1</td>
-            <td>0</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <th>1</th>
-            <td>0</td>
-            <td>0</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <th>1</th>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td><strong>0</strong></td>
-          </tr>
+          <tr><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td></tr>
         </tbody>
       </table>
     </div>
     <!-- MD:START -->
-Vergleichen Sie die vier Eingaben: XOR und OR unterscheiden sich nur in der letzten Zeile. Bei (1, 1) soll XOR 0 ausgeben.
+Nur Sonne oder nur Freund:innen führt hier zu Ja. Bei beiden zusammen (1, 1) lautet die bewusst neue Regel Nein – anders als bei OR.
 <!-- MD:END -->
     <!-- MD:START -->
 ### 2 · Das Rätsel: Schafft ein Neuron alle vier Fälle?
@@ -77,7 +44,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
       <img alt="Links die Wahrheitstabelle von XOR, rechts die vier Fälle als Punkte in einem Quadrat. Die beiden Punkte mit Ausgabe 1 liegen diagonal gegenüber, die beiden mit Ausgabe 0 auf der anderen Diagonale. Senkrechte, waagrechte und schräge gestrichelte Linien trennen die Farben nicht." loading="lazy" src="grafiken/xor_gerade.svg"/>
       <figcaption>Egal ob senkrecht, waagrecht oder schräg: Keine gerade Linie trennt die roten von den blauen Punkten.</figcaption>
     </figure>
-    <p>Warum eine <em>Gerade</em>? Die Grenze zwischen «feuert» und «feuert nicht» liegt dort, wo Summe + Bias genau 0 ist: w₁·x₁ + w₂·x₂ + b = 0. Das ist die Gleichung einer geraden Linie. Gewichte drehen sie, der Bias verschiebt sie. Auf der einen Seite feuert das Neuron, auf der anderen nicht. Bei AND liegt der einzige 1-Punkt (1, 1) allein in einer Ecke: Eine Linie kann ihn abtrennen. Bei XOR liegen die 1-Punkte diagonal gegenüber.</p>
+    <p>Warum eine <em>Gerade</em>? Die Grenze zwischen «feuert» und «feuert nicht» liegt dort, wo Summe + Bias genau 0 ist: w₁·x₁ + w₂·x₂ + b = 0. Das ist die Gleichung einer geraden Linie. Gewichte drehen sie, der Bias verschiebt sie. Auf der einen Seite feuert das Neuron, auf der anderen nicht. Bei der Schwimmbadregel AND («nur bei Sonne und Freund:innen») liegt der einzige Ja-Punkt in einer Ecke: Eine Linie kann ihn abtrennen. Bei XOR liegen die 1-Punkte diagonal gegenüber.</p>
     <!-- MD:START -->
 **Fazit:** Für das einzelne Neuron gibt es **keine Kombination aus Gewichten und Bias**, die alle vier XOR-Fälle korrekt unterscheidet: Keine Gerade trennt die diagonal liegenden Punkte. Eine andere Lernrate oder mehr Trainingsrunden können diese grundsätzliche Grenze nicht aufheben.
 <!-- MD:END -->
@@ -131,6 +98,6 @@ Schreiben Sie zuerst für jede Zeile selbst die Bedingung an w₁, w₂ und b au
     <!-- MD:START -->
 Danach geht es im nächsten Kapitel um einen Lösungsweg mit mehreren Neuronen.
 <!-- MD:END -->
-    <label class="field answer"><span>Warum kann keine Einstellung alle vier XOR-Fälle schaffen? Begründen Sie mit den Punkten (Gerade) und mit den vier Bedingungen. Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die beiden 1-Punkte liegen diagonal gegenüber, deshalb …" rows="4"></textarea></label>
+    <label class="field answer"><span>Warum kann keine Einstellung alle vier Schwimmbadfälle der XOR-Regel schaffen? Begründen Sie mit den Punkten (Gerade) und mit den vier Bedingungen. Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die beiden 1-Punkte liegen diagonal gegenüber, deshalb …" rows="4"></textarea></label>
   </div>
 </details>
