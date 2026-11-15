@@ -11,9 +11,9 @@
 <!-- MD:END -->
       </article>
       <article>
-        <b>2 · Logische Gatter einstellen</b>
+        <b>2 · Neue Schwimmbad-Regeln einstellen</b>
         <!-- MD:START -->
-Verändern Sie die Gewichte und den Bias für **AND**, anschliessend **OR** oder **NAND**. **Alle vier Eingabefälle** werden als einzelne Neuronen dargestellt; die darunterliegende Tabelle fasst die Ergebnisse zusammen.
+Setzen Sie Prüfung auf 0 und betrachten Sie Sonne und Freund:innen. Stellen Sie «nur beide» (**AND**) und danach «mindestens eine» (**OR**) oder «nicht beide» (**NAND**) ein. Das Notebook zeigt alle vier Fälle.
 <!-- MD:END -->
       </article>
       <article>
@@ -70,7 +70,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
           </tbody>
         </table>
       </div>
-      <h4>2 · Von Hand eingestellt</h4>
+      <h4>2 · Schwimmbad-Regeln (Prüfung = 0)</h4>
       <div class="table-scroll">
         <table class="typen protokoll">
           <thead>
@@ -84,21 +84,21 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
           </thead>
           <tbody>
             <tr>
-              <th>AND</th>
+              <th>Nur beide (AND)</th>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_and_w1" aria-label="AND Gewicht 1" placeholder=""></td>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_and_w2" aria-label="AND Gewicht 2" placeholder=""></td>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_and_b" aria-label="AND Bias" placeholder=""></td>
               <td><select data-basis-answer="basis-neuron-hand_and_ok" aria-label="AND gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td>
             </tr>
             <tr>
-              <th>OR</th>
+              <th>Mindestens eine (OR)</th>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_or_w1" aria-label="OR Gewicht 1" placeholder=""></td>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_or_w2" aria-label="OR Gewicht 2" placeholder=""></td>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_or_b" aria-label="OR Bias" placeholder=""></td>
               <td><select data-basis-answer="basis-neuron-hand_or_ok" aria-label="OR gelöst?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td>
             </tr>
             <tr>
-              <th>NAND</th>
+              <th>Nicht beide (NAND)</th>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_nand_w1" aria-label="NAND Gewicht 1" placeholder=""></td>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_nand_w2" aria-label="NAND Gewicht 2" placeholder=""></td>
               <td><input type="text" inputmode="decimal" maxlength="40" data-basis-answer="basis-neuron-hand_nand_b" aria-label="NAND Bias" placeholder=""></td>
