@@ -4,17 +4,17 @@
       "id": "b04",
       "view": "basis-netze",
       "title": "Warum mehrere Neuronen?",
-      "rueckblick": "In Doppellektion 3 haben Sie am Schwimmbad-Neuron Gewichte, Bias und das Lernen kennengelernt. Jetzt prüfen wir eine neue Regel mit Sonne und Freund:innen (Prüfung = 0).",
+      "rueckblick": "In Doppellektion 3 haben Sie am Schwimmbad-Neuron Gewichte, Bias und das Lernen kennengelernt. Jetzt prüfen wir eine neue Regel mit Sonne und Freund:innen (für das XOR-Teilproblem zunächst Prüfung = 0).",
       "rueckblick_figur": {
         "src": "grafiken/neuron_entscheider.svg",
         "alt": "Schwimmbad-Neuron: Sonne, Freund:innen und Prüfung werden gewichtet und führen zu einer Ja/Nein-Entscheidung.",
         "caption": "Rückblick: Wie entscheidet das Schwimmbad-Neuron? Was bewirken Gewichte und Bias?"
       },
-      "goal": "Vier Schwimmbadfälle als XOR erklären, die Grenze eines einzelnen Neurons erkennen und den Lösungsweg über OR, NAND und AND nachvollziehen.",
+      "goal": "Vier Schwimmbadfälle als XOR erklären, die Grenze eines einzelnen Neurons erkennen und den Lösungsweg über OR, NAND und AND nachvollziehen. Die vollständige Schwimmbadregel berücksichtigt am Ausgang auch Prüfung morgen (P, Gewicht −2).",
       "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
       "motivation": "Die vereinfachten Schwimmbadregeln AND und OR kann ein einzelnes Neuron lösen. Bei XOR – genau eine Bedingung trifft zu – braucht es mehrere Neuronen.",
-      "product": "Vier XOR-Fälle, ein eigener Notebookversuch und eine begründete Erklärung, weshalb eine Zwischenschicht hilft.",
-      "zeit": "90 Minuten: Pflichtkern sind XOR-Wahrheitstabelle, Tafelskizze, XOR-Rätsel im Notebook «XOR: Ein Neuron» am Beamer und OR/NAND/AND im Notebook «Neuronale Netze» mit Papieraufgabe. Ungleichungsbeweis und Variation der versteckten Neuronen (Demo der Lehrperson, selbst durchführen freiwillig) sind Wahlvertiefung. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Ziffernmodell erst in DL5.",
+      "product": "Vier XOR-Fälle, ein eigener Notebookversuch und eine begründete Erklärung, weshalb eine Zwischenschicht hilft. Die Klasse kann den Unterschied P = 0 versus P = 1 vorrechnen.",
+      "zeit": "90 Minuten: Pflichtkern sind XOR-Wahrheitstabelle, Tafelskizze, XOR-Rätsel im Notebook «XOR: Ein Neuron» am Beamer und OR/NAND/AND im Notebook «Neuronale Netze» mit Papieraufgabe. Ungleichungsbeweis und Variation der versteckten Neuronen (Demo der Lehrperson, selbst durchführen freiwillig) sind Wahlvertiefung. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Ziffernmodell erst in DL5. Beim Hidden Layer wird ein kurzes Gegenbeispiel S = 1, F = 0 mit Prüfung P = 0 und P = 1 gerechnet; dafür entfällt kein Pflichtschritt.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -25,7 +25,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Neue Schwimmbadregel (Prüfung = 0): Schwimmen, wenn entweder Sonne scheint oder Freund:innen mitkommen, aber nicht beides. Notieren Sie die Ziele für S/F = 00, 01, 10 und 11 (XOR) und vermuten Sie, ob ein einzelnes Neuron alle Fälle schafft. Öffnen Sie das Notebook «Neuronale Netze», damit Python im Hintergrund startet."
+              "text": "Neue Schwimmbadregel (Prüfung = 0): Schwimmen, wenn entweder Sonne scheint oder Freund:innen mitkommen, aber nicht beides. Notieren Sie die Ziele für S/F = 00, 01, 10 und 11 (XOR) und vermuten Sie, ob ein einzelnes Neuron alle Fälle schafft. Öffnen Sie das Notebook «Neuronale Netze», damit Python im Hintergrund startet. Im Netz kommt Prüfung morgen später als hemmende Eingabe P hinzu."
             },
             {
               "art": "Ergebnis",
