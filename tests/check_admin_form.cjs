@@ -10,6 +10,7 @@ const files=[
     "einstieg/030-einstieg-3.md","perzeptron/030-perzeptron-3.md"]
     .map(rel=>"kurse/bok/4-klasse/kursseiten/"+rel),
   "kurse/bok/1-klasse/kursseiten/basis-neuron/030-perzeptron-3.md",
+  "kurse/bok/1-klasse/kursseiten/basis-neuron/040-perzeptron-4.md",
   ...[1,4].flatMap(grade=>{
     const base="kurse/irn/"+grade+"-klasse/kursseiten/";
     const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,base+"manifest.json"),"utf8"));
