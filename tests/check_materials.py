@@ -51,6 +51,7 @@ irn_fragments = build_materials.lesson_materials(irn, irn_lessons)
 # IRN führt «Was ist KI?» als Theorieseite ohne Plan; die Doppellektionen 2–10 bleiben.
 assert len(irn_fragments) == 9
 assert irn_lessons[0]["number"] == 2
+assert load_course(irn)["placeholders"] == [{"number": 1, "title": "Was ist KI?", "view": "einstieg"}]
 for lesson in irn_lessons:
     source = irn_fragments[lesson["id"]]
     phases = re.findall(r"^### ([^·\n]+) · (\d+) Min\. · (.+)$", source, re.M)

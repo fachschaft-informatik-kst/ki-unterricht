@@ -4,7 +4,7 @@
   "generator": "scripts/build_student_documents.py",
   "zip": {
     "file": "IRN_4-Klasse_Alle_Dokumente.zip",
-    "bytes": 1839343
+    "bytes": 1839283
   },
   "documents": [
     {
@@ -415,7 +415,7 @@
       "minutes": 5,
       "title": "Eine erste Position",
       "file": "DL10_1_Ankommen.docx",
-      "bytes": 38888
+      "bytes": 38823
     },
     {
       "dl": 10,

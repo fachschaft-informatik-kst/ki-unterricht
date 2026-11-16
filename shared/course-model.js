@@ -5,7 +5,7 @@ const text=value=>typeof value==="string"&&value.trim().length>0;
 export function validateManifest(manifest){
   const sections=manifest?.sections;
   if(!Array.isArray(sections)||!sections.length)throw Error("Unterrichtsbereiche fehlen.");
-  const ids=new Set();
+  const ids=new Set(),slots=new Set();
   for(const s of sections){
     if(!s||typeof s.id!=="string"||!/^[a-z][a-z0-9-]*$/.test(s.id)||ids.has(s.id)||!text(s.class))
       throw Error("Ungültige oder doppelte Unterrichtsbereiche.");
@@ -14,6 +14,12 @@ export function validateManifest(manifest){
     if((s.teaching&&!nav)||(nav!==undefined&&(!nav||typeof nav.title!=="string"||
       typeof nav.label!=="string"||!Number.isInteger(nav.order))))
       throw Error("Navigation ungültig: "+s.id);
+    if(s.lessonWithoutPlan!==undefined){
+      const number=s.lessonWithoutPlan?.number;
+      if(s.teaching||!Number.isInteger(number)||number<1||slots.has(number))
+        throw Error("Doppellektion ohne Plan ungültig: "+s.id);
+      slots.add(number);
+    }
   }
   return true;
 }

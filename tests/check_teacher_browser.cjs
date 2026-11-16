@@ -21,10 +21,18 @@ const ROOT=path.resolve(__dirname,"..");
     .filter(file=>fs.existsSync(file))
     .flatMap(file=>JSON.parse(fs.readFileSync(file,"utf8")).lessons)
     .sort((a,b)=>a.order-b.order);
+  // IRN 4 führt «Was ist KI?» als Theorieseite ohne Plan; die Doppellektionen 2–10 behalten ihre Nummern.
+  const irnManifest=JSON.parse(fs.readFileSync(path.join(ROOT,"kurse/irn/4-klasse/kursseiten/manifest.json"),"utf8"));
+  const irnLessons=irnManifest.sections.filter(s=>s.teaching)
+    .flatMap(s=>JSON.parse(fs.readFileSync(path.join(ROOT,"kurse/irn/4-klasse/kursseiten",s.id,"planung.json"),"utf8")).lessons)
+    .sort((a,b)=>a.order-b.order);
+  // First double lesson with a plan (DL 01 is reserved for the theory page without plan).
+  const reservedIrn=new Set(irnManifest.sections.filter(s=>s.lessonWithoutPlan).map(s=>s.lessonWithoutPlan.number));
+  let irnStart=1;while(reservedIrn.has(irnStart))irnStart++;
   let realIrnMaterials=false;
   const wordLinkRequests=[];
   const materialFor=(number,course="bok/4-klasse")=>{
-    const lesson=materialLessons[number-1];
+    const lesson=course==="irn/4-klasse"?irnLessons[number-irnStart]:materialLessons[number-1];
     const source=fs.readFileSync(path.join(ROOT,"kurse",course,"kursseiten",lesson.view,"materialien.md"),"utf8");
     const marker="<!-- lesson:"+lesson.id+" -->";
     return source.includes(marker)?source.split(marker)[1].split("<!-- lesson:")[0]:source;
@@ -67,6 +75,10 @@ const ROOT=path.resolve(__dirname,"..");
       const base={kind,course:url.searchParams.get("course"),lessons,selectedNumber:number,
         selectedTitle:lessons[number-1]?.title||""};
       const irn=base.course==="irn/4-klasse";
+      if(irn&&realIrnMaterials&&reservedIrn.has(number)&&kind!=="dokumente"){
+        res.writeHead(200,{"Content-Type":"application/json"}).end(JSON.stringify({...base,withoutPlan:true,
+          lesson:null,documents:[],zip:null,intro:"",sections:[],notes:[],entries:[]}));return;
+      }
       const data=kind==="planung"?{...base,lesson:fakeLesson(number),
           documents:documentsOf(base.course).filter(d=>d.dl===number)}:
         kind==="dokumente"?{...base,documents:irn?irnDocuments:[],zip:irn?irnZip:null}:
@@ -74,7 +86,7 @@ const ROOT=path.resolve(__dirname,"..");
           documents:irn&&realIrnMaterials||base.course.endsWith("1-klasse")?
             documentsOf(base.course).filter(d=>d.dl===number):[],zip:irn?irnZip:null,
           sections:[{title:"DL "+number,
-          markdown:base.course==="bok/4-klasse"||realIrnMaterials&&base.course==="irn/4-klasse"?
+          markdown:base.course==="bok/4-klasse"||realIrnMaterials&&base.course==="irn/4-klasse"&&number>=irnStart?
             materialFor(number,base.course):"## Doppellektion "+number+"\n\nMaterial für DL "+number+
             "\n\n[Studio](studio/) · [Notebook](../lab/index.html?path=portal/basis_neuron.ipynb)"+
             " · [Lösung](materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md)"}]}:
@@ -214,13 +226,18 @@ const ROOT=path.resolve(__dirname,"..");
 
     realIrnMaterials=true;
     await page.reload();
-    for(let number=1;number<=10;number++){
-      if(number!==1)await page.locator("#lessonNav a[data-dl='"+number+"']").click();
+    // DL 01 (theory page without plan) keeps its place in the navigation and opens empty.
+    await page.locator("#lessonNav a[data-dl='1']").click();
+    await page.waitForFunction(()=>document.querySelector(".lesson-heading h2")?.textContent.includes("DL 01"));
+    assert.match(await page.locator("#teacherContent").innerText(),/nichts hinterlegt/);
+    assert.equal(await page.locator(".material-phase").count(),0);
+    for(let number=irnStart;number<=10;number++){
+      await page.locator("#lessonNav a[data-dl='"+number+"']").click();
       await page.waitForFunction(n=>document.querySelector(".lesson-heading h2")?.textContent.includes(
         "DL "+String(n).padStart(2,"0")),number);
       assert.equal(await page.locator(".material-phase").count(),5,"IRN4 phase cards for DL "+number);
       assert.deepEqual(await page.locator(".material-phase-label").allTextContents(),
-        materialLessons[number-1].phases.map(p=>p.phase+" · "+p.minutes+" Min."));
+        irnLessons[number-irnStart].phases.map(p=>p.phase+" · "+p.minutes+" Min."));
       const downloads=page.locator(".material-phase .material-phase-heading .material-phase-download");
       assert.equal(await downloads.count(),5,"Every IRN4 phase needs its Word document in DL "+number);
       for(let phase=1;phase<=5;phase++){
@@ -228,7 +245,7 @@ const ROOT=path.resolve(__dirname,"..");
         assert(href.startsWith("/teacher/dokumente/DL"+String(number).padStart(2,"0")+"_"+phase+"_"),href);
         assert(href.endsWith(".docx?course=irn/4-klasse"),href);
       }
-      if(number===1){
+      if(number===irnStart){
         // The download sits in the top-right corner of its phase card.
         const card=await page.locator(".material-phase").first().boundingBox();
         const link=await downloads.first().boundingBox();
@@ -236,8 +253,6 @@ const ROOT=path.resolve(__dirname,"..");
         assert(link.x+link.width>card.x+card.width-60,"Download must be right-aligned in the phase");
         assert(link.y<title.y+title.height,"Download must be at the top of the phase");
         assert(await downloads.first().isVisible());
-        assert.equal(await page.locator('a[href$="dl01_intelligenz_regeln.pdf"]').count(),0);
-        assert.equal(await page.locator(".material-gallery img").count(),2);
         assert.equal(await page.locator(".material-phase-index").first().evaluate(
           el=>getComputedStyle(el).backgroundColor),
           "rgb("+irnTheme.slice(1).match(/../g).map(value=>parseInt(value,16)).join(", ")+")");
@@ -260,16 +275,18 @@ const ROOT=path.resolve(__dirname,"..");
         new RegExp("^/teacher/dokumente/DL03_"+(i+1)+"_.+\\.docx\\?course=irn/1-klasse$"));
 
     // «Alle Dokumente»: overview of every generated file and one ZIP download.
-    await page.goto(origin+"/teacher/irn/4-klasse/materialien?dl=1");
+    await page.goto(origin+"/teacher/irn/4-klasse/materialien?dl="+irnStart);
     await page.locator(".material-phase-download").first().waitFor();
     await page.setViewportSize({width:1300,height:900});
     assert.equal(await page.locator(".area-nav a").count(),4);
     await page.locator('.area-nav a[href*="/dokumente"]').click();
     await page.locator(".zip-download").waitFor();
     assert.match(await page.locator(".area-nav a[aria-current=page]").innerText(),/Alle Dokumente/);
+    // Every DL appears, also those without documents (DL 01 has none in IRN).
     assert.equal(await page.locator(".document-group").count(),10);
+    assert.equal(await page.locator(".document-group-empty").count(),10-new Set(irnDocuments.map(d=>d.dl)).size);
     assert.equal(await page.locator(".document-list a").count(),irnDocuments.length);
-    assert.equal(irnDocuments.length,50);
+    assert.equal(irnDocuments.length,5*(11-irnStart));
     assert.match(await page.locator(".zip-download").innerText(),/Alle Dokumente als ZIP herunterladen/);
     const zipBox=await page.locator(".zip-download").boundingBox();
     assert(zipBox.y<500,"ZIP download must be visible without scrolling");
@@ -294,7 +311,7 @@ const ROOT=path.resolve(__dirname,"..");
     await page.waitForURL("**/teacher/bok/4-klasse/dokumente?dl=1");
     await page.locator(".lesson-heading h2").filter({hasText:"Alle Dokumente"}).waitFor();
     assert.match(await page.locator("#teacherContent").innerText(),/noch keine Dokumente/);
-    await page.goto(origin+"/teacher/irn/4-klasse/materialien?dl=1");
+    await page.goto(origin+"/teacher/irn/4-klasse/materialien?dl="+irnStart);
     await page.locator(".material-phase-download").first().waitFor();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,
       "Phase download must not overflow on mobile");

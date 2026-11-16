@@ -241,6 +241,19 @@ async function getQuestions(lesson,course,token,github,repo,profile){
   return {questions:Object.assign({},...data.map(questionsFromSource)),
     fields:new Set(data.flatMap(source=>[...fieldsInSource(source)]))};
 }
+export function lessonsWithoutPlan(sections){
+  const found=[];
+  for(const section of sections){
+    const number=section?.lessonWithoutPlan?.number;
+    if(section?.lessonWithoutPlan===undefined)continue;
+    if(section.teaching||!Number.isInteger(number)||number<1||number>99)
+      throw Error("lessonWithoutPlan ungültig: "+section?.id);
+    found.push({id:"ohne-plan-"+section.id,number,title:String(section.navigation?.title||section.id),
+      view:section.id,withoutPlan:true});
+  }
+  if(new Set(found.map(p=>p.number)).size!==found.length)throw Error("Doppelte Nummer bei lessonWithoutPlan.");
+  return found;
+}
 export async function teacherData({course,kind},token,github,repo,selected=1,courses=normalizeTeacherCourses({version:1,courses:DEFAULT_COURSES})){
   const profile=courses.find(c=>c.slug===course&&c.ready);
   if(!profile)throw Error("Kurs unbekannt.");
@@ -248,14 +261,25 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
   const views=(manifest.sections||[]).filter(s=>s.teaching&&/^[a-z][a-z0-9-]*$/.test(s.id));
   if(views.length>20)throw Error("Zu viele Unterrichtsbereiche.");
   const plans=await Promise.all(views.map(s=>getJson(token,profile.courseRoot+"/kursseiten/"+s.id+"/planung.json",github,repo)));
-  const start=Number(manifest.lessonNumberStart);
-  const lessonNumberStart=Number.isInteger(start)&&start>=1?start:1;
-  const lessons=plans.flatMap(p=>p.lessons||[]).sort(sortLessons)
-    .map((lesson,index)=>({...lesson,number:index+lessonNumberStart}));
+  // Doppellektionen ohne Unterrichtsplan (z. B. Theorieseite «Was ist KI?») behalten ihre feste Nummer;
+  // alle übrigen Doppellektionen werden um diese reservierten Nummern herum nummeriert.
+  const placeholders=lessonsWithoutPlan(manifest.sections||[]);
+  const reserved=new Set(placeholders.map(p=>p.number));
+  let next=1;
+  const planned=plans.flatMap(p=>p.lessons||[]).sort(sortLessons).map(lesson=>{
+    while(reserved.has(next))next++;
+    return {...lesson,number:next++};
+  });
+  const lessons=[...planned,...placeholders].sort((a,b)=>a.number-b.number);
   const current=lessons.find(l=>l.number===Number(selected))||lessons[0];
   if(!current)throw Error("Kein Unterrichtsplan vorhanden.");
-  const base={kind,course,lessons:lessons.map(l=>({id:l.id,number:l.number,title:l.title,view:l.view})),
+  const base={kind,course,lessons:lessons.map(l=>({id:l.id,number:l.number,title:l.title,view:l.view,
+      ...(l.withoutPlan?{withoutPlan:true}:{})})),
     selectedNumber:current.number,selectedTitle:current.title};
+  if(current.withoutPlan&&kind!=="dokumente"){
+    // Für diese Doppellektion gibt es bewusst keinen Plan, keinen Materialkoffer und keine Musterlösungen.
+    return {...base,withoutPlan:true,lesson:null,documents:[],zip:null,intro:"",sections:[],notes:[],entries:[]};
+  }
   const lessonDocuments=async()=>{
     try{const index=await loadDocuments(token,profile,github,repo);
       return {documents:(index?.documents||[]).filter(d=>d.dl===current.number),zip:index?.zip||null};}

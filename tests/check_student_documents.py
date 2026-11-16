@@ -37,8 +37,14 @@ def lessons(base: Path) -> list[dict]:
     for section in manifest["sections"]:
         if section.get("teaching"):
             found += json.loads((base / "kursseiten" / section["id"] / "planung.json").read_text(encoding="utf-8"))["lessons"]
-    start = manifest.get("lessonNumberStart", 1)
-    return [{**lesson, "number": i} for i, lesson in enumerate(sorted(found, key=lambda lesson: lesson["order"]), start)]
+    reserved = {s["lessonWithoutPlan"]["number"] for s in manifest["sections"] if "lessonWithoutPlan" in s}
+    numbered, number = [], 1
+    for lesson in sorted(found, key=lambda lesson: lesson["order"]):
+        while number in reserved:
+            number += 1
+        numbered.append({**lesson, "number": number})
+        number += 1
+    return numbered
 
 
 def text_of(data: bytes) -> str:

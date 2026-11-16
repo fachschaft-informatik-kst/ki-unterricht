@@ -66,6 +66,17 @@ für neue Kurse, einschliesslich Notebooks und aller fachlichen Ressourcen.
 Nach dem Kopieren sind die Kurse unabhängig; spätere Änderungen werden nicht
 zwischen Vorlagen und Kursen übertragen.
 
+### Doppellektion ohne Unterrichtsplan
+
+Ein Bereich ohne `"teaching": true` kann mit `"lessonWithoutPlan": {"number": 1}`
+eine Doppellektionsnummer fest belegen (IRN: «01 Was ist KI?» als reine
+Theorieseite). Er hat keine `planung.json`, keinen Materialkoffer, keine
+Musterlösungen und keine Word-Dokumente, erscheint aber mit seiner Nummer in
+Navigation, Übersichtskarte und allen Lehrpersonen-Reitern (dort ohne Inhalt).
+Alle übrigen Doppellektionen werden nach ihrer `order` fortlaufend nummeriert und
+überspringen reservierte Nummern. So bleiben die Nummern stabil, auch wenn im
+Editor Doppellektionen ergänzt oder umsortiert werden.
+
 ### Seitenmodus und Unternavigation (4. Klasse)
 
 Ein Bereich im `manifest.json` kann `"pages": "<Name der Startseite>"` setzen

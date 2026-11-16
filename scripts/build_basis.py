@@ -25,10 +25,11 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
     by_view = {s["id"]: [lesson for lesson in lessons if lesson["view"] == s["id"]] for s in sections}
     cards = []
     for section in sections:
-        tag = section.get("overview", {}).get("tag")
+        slot = section.get("lessonWithoutPlan")
         if not section.get("teaching"):
-            if tag:
-                # Theorieseite ohne Unterrichtsplan: Karte mit fester Beschriftung aus dem Manifest.
+            if slot:
+                # Doppellektion ohne Unterrichtsplan (Theorieseite): Karte mit ihrer fest reservierten Nummer.
+                tag = f'{slot["number"]}. Doppellektion'
                 cards.append(
                     f'<a class="course-card" href="#{section["id"]}">'
                     f'<span class="tag">{html.escape(tag)}</span><h3>{html.escape(section["navigation"]["title"])}</h3>'
@@ -69,7 +70,10 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
                            + "".join(render_lesson(item) for item in by_view[ident]) + content)
         klass = html.escape(section["class"])
         pieces.append(f'<section class="{klass}" id="{ident}">{content}</section>')
-        label = f'{by_view[ident][0]["number"]:02d}' if by_view[ident] else section["navigation"]["label"]
+        if section.get("lessonWithoutPlan"):
+            label = f'{section["lessonWithoutPlan"]["number"]:02d}'
+        else:
+            label = f'{by_view[ident][0]["number"]:02d}' if by_view[ident] else section["navigation"]["label"]
         nav.append(f'<a href="#{ident}"><span>{label}</span>{html.escape(section["navigation"]["title"])}</a>')
     template = (SOURCE / "index.template.html").read_text(encoding="utf-8")
     assert template.count("<!-- COURSE -->") == template.count("<!-- NAVIGATION -->") == 1
