@@ -89,16 +89,22 @@ Es bildet die **gewichtete Summe plus Bias** und gibt ab Summe 0 die Ausgabe 1 a
 
 **XOR als neue Schwimmbadregel** (genau eine der Bedingungen Sonne oder Freund:innen trifft zu, Prüfung = 0): Nur (0,1) und (1,0) ergeben 1, die beiden anderen Fälle 0. Eine einzige Gerade kann die Punkte nicht korrekt trennen. Deshalb scheitert ein einzelnes Perzeptron an XOR, egal welche Gewichte es lernt.
 
-### Ein mehrschichtiges neuronales Netz löst XOR
+### Ein mehrschichtiges Netz berücksichtigt auch die Prüfung
 
-Eine mögliche Zusammensetzung: Zwischenschicht mit **ODER** und **NAND**, danach **UND**:
+Die Zwischenschicht berechnet mit **OR** und **NAND** zunächst XOR für Sonne und Freund:innen. Beim vollständigen Schwimmbadmodell geht **Prüfung morgen (P)** mit dem hemmenden Gewicht **−2** direkt in das Ausgabeneuron ein. Die zwei Zwischenwerte haben dort jeweils Gewicht +1, der Bias beträgt −1,5:
 
-| Eingabe | ODER | NAND | Ergebnis |
-|---|---:|---:|---:|
-| (0,0) | 0 | 1 | 0 |
-| (0,1) | 1 | 1 | 1 |
-| (1,0) | 1 | 1 | 1 |
-| (1,1) | 1 | 0 | 0 |
+| Sonne | Freund:innen | Prüfung | OR | NAND | Schwimmen? |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 0 | 0 | 0 | 1 | 0 |
+| 0 | 1 | 0 | 1 | 1 | 1 |
+| 1 | 0 | 0 | 1 | 1 | 1 |
+| 1 | 1 | 0 | 1 | 0 | 0 |
+| 0 | 0 | 1 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 1 | 1 | 0 |
+| 1 | 0 | 1 | 1 | 1 | 0 |
+| 1 | 1 | 1 | 1 | 0 | 0 |
+
+**Vergleich:** Bei Sonne = 1 und Freund:innen = 0 liefern OR und NAND beide 1. Ohne Prüfung (P = 0) ist die Endsumme 1 + 1 − 2·0 − 1,5 = +0,5 → **Ja**; mit Prüfung (P = 1) ist sie 1 + 1 − 2·1 − 1,5 = −1,5 → **Nein**. Das Notebook behandelt beim XOR-Training zunächst nur die vier Fälle mit P = 0.
 
 Mit einer Zwischenschicht sind auch nichtlinear trennbare Muster möglich. Beim selbst trainierten Netz variiert das Ergebnis unter Umständen mit dem Startwert.
 
