@@ -21,6 +21,11 @@
     <!-- MD:START -->
 Vergleichen Sie die vier Eingaben: XOR und OR unterscheiden sich nur in der letzten Zeile. Bei (1, 1) soll XOR 0 ausgeben.
 <!-- MD:END -->
+    <p><strong>Ein Versuch mit nur einem Neuron:</strong> Wir wählen für Sonne und Freund:innen je das Gewicht +1 und einen Bias von −0,5. Damit gelingt die OR-Regel – aber bei XOR ist der Fall «beide sind 1» falsch. Die Zeichnung zeigt diese konkrete Fehlentscheidung, noch nicht den Beweis, dass keine andere Einstellung funktioniert.</p>
+    <figure class="concept-figure">
+      <img alt="Zwei Eingaben Sonne und Freund:innen gehen mit den Gewichten +1 und +1 zum einzelnen Neuron; der Bias ist −0,5. Die Ausgabe für Sonne 1 und Freund:innen 1 ist Ja, die künstliche XOR-Zielregel verlangt aber Nein. Die Vergleichstabelle zeigt drei korrekte und einen falschen Fall." loading="lazy" src="grafiken/schwimmbad_xor_einzelne_neuron.svg"/>
+      <figcaption>Ein einzelnes Neuron mit zwei Schwimmbad-Eingaben: Diese Einstellung löst drei der vier XOR-Fälle. Warum es mit keiner Einstellung alle vier schafft, zeigt die Punktgrafik weiter unten.</figcaption>
+    </figure>
     <!-- MD:START -->
 ### 2 · Das Bild: die vier Fälle als Punkte
 <!-- MD:END -->

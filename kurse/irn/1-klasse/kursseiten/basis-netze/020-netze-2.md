@@ -3,10 +3,11 @@
     <h2 class="kapitel-titel">Warum mehrere Neuronen helfen</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Ein einzelnes Neuron kann die vier XOR-Schwimmbadfälle nicht trennen. Zwei <strong>Zwischenneuronen</strong> berechnen deshalb unterschiedliche Antworten: <strong>OR</strong> («mindestens eine Bedingung») und <strong>NAND</strong> («nicht beide»). Ein drittes Neuron verbindet sie mit <strong>AND</strong>. So wird die neue Schwimmbadregel möglich.</p>
-    <div class="process">
-      <span>Sonne und Freund:innen</span><b>→</b><span>OR und NAND<br/><strong>Zwischenschicht</strong></span><b>→</b><span>AND<br/><strong>Schwimmen?</strong></span>
-    </div>
+    <p>Ein einzelnes Neuron kann die vier XOR-Schwimmbadfälle nicht trennen. Zwei <strong>Zwischenneuronen</strong> berechnen deshalb unterschiedliche Antworten: <strong>OR</strong> («mindestens eine Bedingung») und <strong>NAND</strong> («nicht beide»). Ein drittes Neuron verbindet sie mit <strong>AND</strong>. Das Bild zeigt nun dieselben Eingaben als Netz mit <strong>Hidden Layer</strong> – auch <em>versteckte Schicht</em> genannt. So wird die neue Schwimmbadregel möglich.</p>
+    <figure class="concept-figure">
+      <img alt="Schwimmbad-XOR-Netz: Sonne 1 und Freund:innen 0 speisen zwei verbundene Neuronen in der versteckten Schicht. OR liefert 1, NAND liefert 1. Beide führen mit Gewichten +1 zum Ausgabeneuron AND, das Ja 1 ausgibt. Alle drei Bias-Werte und die Berechnungen sind eingezeichnet." loading="lazy" src="grafiken/schwimmbad_xor_netz.svg"/>
+      <figcaption>Das erweiterte Schwimmbad-Netz mit Hidden Layer: <strong>Sonne und Freund:innen → OR und NAND → AND → Schwimmen?</strong> Die Zahlen zeigen den Fall (1, 0); die Tabelle darunter alle vier Fälle.</figcaption>
+    </figure>
     <div class="table-scroll">
       <table class="typen">
         <thead>

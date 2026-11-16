@@ -6,7 +6,7 @@
     <!-- MD:START -->
 **Sicherung (einzeln, unbenotet, ca. 5 Minuten):** Schreiben Sie zuerst, vergleichen Sie danach mit der Selbstkontrolle. Zwei Fragen genügen; die Vorschaufrage unten dürfen Sie raten. Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.
 <!-- MD:END -->
-    <label class="field answer"><span>1 · Netz: Warum kann ein einzelnes Neuron XOR nicht lösen, und wie hilft die Zwischenschicht? Erklären Sie dazu die Ausgaben von OR, NAND und AND für die Eingabe (1,1). Prüfen Sie Ihre Rechnung am Ablaufschema in Kapitel 2.</span><textarea data-answer="netze" maxlength="10000" placeholder="Ein einzelnes Neuron kann XOR nicht lösen, weil … Für (1,1) liefert OR …, NAND … und AND …" rows="4"></textarea></label>
+    <label class="field answer"><span>1 · Netz: Warum kann ein einzelnes Neuron XOR nicht lösen, und wie hilft die Zwischenschicht? Erklären Sie dazu die Ausgaben von OR, NAND und AND für die Eingabe (1,1). Prüfen Sie Ihre Rechnung an der Netzgrafik in Kapitel 2.</span><textarea data-answer="netze" maxlength="10000" placeholder="Ein einzelnes Neuron kann XOR nicht lösen, weil … Für (1,1) liefert OR …, NAND … und AND …" rows="4"></textarea></label>
     <div class="callout" id="netze-bruecke">
       <!-- MD:START -->
 **Ausblick auf das Bildprojekt:** Dort arbeitet ein Netz wie dieses, aber mit 1280 statt 2 Eingaben. Die Zahlen liefert MobileNet, ein fertiges Netz, das unverändert bleibt. Nur das kleine Netz dahinter lernt Ihre zwei Klassen, nach denselben Schritten wie hier: vorhersagen, Fehler bewerten (gegen das Label), Gewichte anpassen. Es ist wieder **überwachtes Lernen**: Ihre zwei Klassen sind die Labels. [Wer weiss was? →](#projekt-wer-weiss-was)

@@ -6,9 +6,10 @@
     <p>Ein Neuron kann seine Gewichte und den <strong>Bias</strong> aus Beispielen mit bekannter richtiger Antwort (<strong>Trainingsdaten</strong>) lernen. Die Eingaben und die Regel «Summe bilden, ab 0 Ja» bleiben unverändert. <strong>Das Gelernte steckt in den Gewichten und im Bias.</strong></p>
     <figure class="concept-figure">
       <img alt="Schwimmbad-Neuron beim Lernen: Bei Sonne 1, Freund:innen 0 und Prüfung 0 sagt es zuerst fälschlich Nein. Sonnengewicht und Bias werden korrigiert, danach sagt es Ja. Die Eingaben bleiben gleich." loading="lazy" src="grafiken/schwimmbad_lernschritt.svg"/>
-      <figcaption>Ein Lernschritt am Schwimmbad-Beispiel: Eine falsche Ausgabe führt zur Korrektur von Gewicht und Bias.</figcaption>
+      <figcaption>Vorher und nachher: Dieselben drei Eingaben laufen durch dasselbe Neuron. Grün markiert die korrigierten Werte an Sonnenverbindung und Bias; die anderen Gewichte bleiben gleich.</figcaption>
     </figure>
-    <p><strong>Ein Lernschritt:</strong> Sonne = 1, Freund:innen = 0, Prüfung = 0. Die richtige Antwort ist <strong>Ja (1)</strong>, das Neuron sagt zuerst <strong>Nein (0)</strong>. Bei Lernrate 1 steigt das Sonnengewicht von 0 auf 1 und der Bias von −1.5 auf −0.5. Jetzt stimmt die Antwort. Die Gewichte der Eingaben mit Wert 0 bleiben gleich.</p>
+    <p><strong>Warum ändert sich gerade die Sonnenverbindung?</strong> Sonne = 1, Freund:innen = 0, Prüfung = 0. Die richtige Antwort ist <strong>Ja (1)</strong>, das Neuron sagt zuerst <strong>Nein (0)</strong>. Weil nur Sonne den Eingabewert 1 hat, steigt bei Lernrate 1 ihr Gewicht um 1; der Bias steigt ebenfalls um 1. Die anderen Gewichte bleiben wegen Eingang 0 gleich. Bei unveränderten Eingaben lautet die neue Ausgabe Ja.</p>
+    <p class="small"><strong>Beachten Sie:</strong> Die Grafik zeigt einen beispielhaften Korrekturschritt nach derselben Lernregel wie im Notebook. Dort können andere Startgewichte und Trainingsaufgaben eingestellt werden.</p>
     <!-- MD:START -->
 ### So funktioniert die Lernregel
 
