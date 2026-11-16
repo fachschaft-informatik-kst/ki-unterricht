@@ -91,7 +91,11 @@ def load_course(root: Path = ROOT / "kurse/bok/4-klasse", manifest_path: str = "
     if len({l["order"] for l in lessons}) != len(lessons):
         raise ValueError("Doppelte Lektionsreihenfolge")
     validate_lessons(lessons)
-    for number, lesson in enumerate(lessons, 1):
+    # Optional: Kurse ohne Plan für die erste Doppellektion behalten die bisherige Nummerierung.
+    start = manifest.get("lessonNumberStart", 1)
+    if type(start) is not int or start < 1:
+        raise ValueError("lessonNumberStart muss eine positive ganze Zahl sein")
+    for number, lesson in enumerate(lessons, start):
         lesson["number"] = number
     return {"minutes": RULES["duration"], "model": "AVIVA", "lessons": lessons}
 

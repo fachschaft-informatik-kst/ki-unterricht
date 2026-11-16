@@ -60,8 +60,15 @@ def assemble(pages: Path | None = None, manifest_path: str = "kurse/bok/4-klasse
         return grouped[section["id"]][0]["number"] if grouped[section["id"]] else (1000 + section["navigation"]["order"] if section["navigation"]["order"] >= 9 else -100 + section["navigation"]["order"])
 
     overview = []
-    for section in sorted((s for s in sections if s.get("teaching")), key=nav_order):
+    for section in sorted((s for s in sections if s.get("teaching") or s.get("overview", {}).get("tag")), key=nav_order):
         lessons = grouped[section["id"]]
+        if not lessons:
+            # Theorieseite ohne Unterrichtsplan: Karte mit fester Beschriftung aus dem Manifest.
+            meta = section["overview"]
+            overview.append(f'<a class="course-card" href="#{section["id"]}"><span class="tag">{html.escape(meta["tag"])}</span>'
+                            f'<h3>{html.escape(meta.get("title", section["navigation"]["title"]))}</h3><p>{html.escape(meta.get("summary", ""))}</p>'
+                            f'<span aria-hidden="true" class="course-arrow">↗</span></a>')
+            continue
         first, last = lessons[0]["number"], lessons[-1]["number"]
         number = f"{first}.–{last}." if first != last else f"{first}."
         meta = section.get("overview", {})

@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "lessonNumberStart": 2,
   "course": "basis",
   "title": "Künstliche Intelligenz · 1. Kurzgymnasium",
   "sections": [
@@ -13,15 +14,6 @@
       }
     },
     {
-      "id": "basis-lernziele",
-      "class": "section",
-      "navigation": {
-        "order": 1,
-        "label": "◎",
-        "title": "Lernziele"
-      }
-    },
-    {
       "id": "basis-ki",
       "class": "section",
       "navigation": {
@@ -29,10 +21,10 @@
         "label": "01",
         "title": "Was ist KI?"
       },
-      "teaching": true,
       "overview": {
         "title": "Was ist KI?",
-        "summary": "Begriffe · Regeln · Fallbeispiele"
+        "tag": "1. Doppellektion",
+        "summary": "Regeln vs. Daten · Meilensteine · Kategorien von KI"
       }
     },
     {

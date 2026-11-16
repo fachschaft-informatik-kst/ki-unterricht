@@ -2,38 +2,6 @@
 
 **Nur für Lehrpersonen.** Zu jedem in der Kursseite gespeicherten Antwortfeld steht unten eine mögliche Antwort. Die Kennung in der linken Spalte ist die technische Journal-/Antwortkennung und erleichtert den Abgleich mit ZIP-Dateien. **Alle Zahlen, Namen, Filmfortsetzungen und Beobachtungen ohne Originalnachweis sind frei erfundene didaktische Beispiele**, keine tatsächlich ausgeführten Notebooks und keine echten Projektmessungen. Bei offenen Fragen gelten andere fachlich begründete Antworten ebenso. Bei Videoaufgaben müssen Lernende den tatsächlichen Film und die echte Zeitmarke belegen. Versteckte Alt-Felder und weitere Übungen sind nur der Vollständigkeit halber dokumentiert.
 
-## DL 1 · KI, Beispiele und Grenzfälle
-
-| Antwortfeld | Beispielantwort / Erwartungshorizont |
-|---|---|
-| `dl1_regeln_automat` | Regelbasiert: Ein fest programmiertes Guthaben und ein Knopfdruck steuern die Ausgabe; keine Anpassung aus Daten. |
-| `dl1_regeln_uebersetzung` | Lernt aus Daten: Das beschriebene Übersetzungsmodell wurde mit Satzpaaren trainiert. |
-| `dl1_regeln_ampel` | Regelbasiert: Sie wiederholt einen festen Zeitplan und lernt nicht. |
-| `dl1_regeln_gesicht` | Lernt aus Daten: Das Bildmodell wurde anhand von Beispielen trainiert. |
-| `dl1_begriffe_ampel` | Keine KI. |
-| `dl1_begriffe_schach` | Regelbasierte KI. |
-| `dl1_begriffe_spam` | Maschinelles Lernen (hier ausdrücklich ohne tiefes Netz). |
-| `dl1_begriffe_bilder` | Deep Learning. |
-| `dl1_begriffe_text` | Generative KI. |
-| `regeln_oder_daten` | Auch ein einfaches Programm arbeitet automatisch, ohne zu lernen oder komplexe Entscheidungen zu treffen: eine Zeitschaltuhr befolgt nur feste Regeln. Automatisierung allein ist kein Beleg für KI. |
-| `begriff_bsp_1` | Spamfilter mit gelerntem Entscheidungsbaum – maschinelles Lernen. |
-| `begriff_bsp_2` | Handgeschriebene Ziffern erkennen mit tiefem Netz – Deep Learning. |
-| `begriff_bsp_3` | Schachprogramm mit Suchbaum – regelbasierte KI. |
-| `begriff_bsp_4` | Sprachmodell, das einen Text verfasst – generative KI. |
-| `ki_zeitstrahl` | Frühe symbolische Systeme nutzten handformulierte Regeln; tiefe neuronale Netze lernen viele Merkmale aus Beispieldaten. Regeln bleiben etwa bei Sicherheitsprüfungen wichtig. Die Meilensteine zeigen keinen vollständigen Ersatz von Regeln durch Lernen. |
-| `ki_ordnung` | 1. Regelbasiertes Schachprogramm: Regeln, regelbasierte KI, schwache KI. 2. Bilderkennung: aus Bilddaten trainiertes tiefes Netz, Deep Learning, schwache KI. 3. Allgemein intelligente Filmfigur: hypothetische starke KI, ihre technische Umsetzung ist unbekannt. Ein Chatbot kann sprachlich überzeugend wirken, ohne verlässlich allgemeine Aufgaben lösen zu können. |
-| `typ_bsp_1` | Früheres Feld: regelbasiertes Schachprogramm. |
-| `typ_1` | Frühere Kategorie: regelbasierte KI. |
-| `typ_bsp_2` | Früheres Feld: trainierter Spamfilter. |
-| `typ_2` | Frühere Kategorie: maschinelles Lernen. |
-| `typ_bsp_3` | Früheres Feld: Tierbildklassifikator. |
-| `typ_3` | Frühere Kategorie: Deep Learning. |
-| `typ_bsp_4` | Früheres Feld: textgenerierendes Sprachmodell. |
-| `typ_4` | Frühere Kategorie: generative KI. |
-| `gesetze` | 1. Bremsen kann Verletzungen vermindern, doch ein Restschaden ist nicht vermeidbar. 2. Asimovs erstes Gesetz entscheidet nicht, wessen Risiko bei konfligierenden Optionen Vorrang haben soll; dafür braucht es Verantwortung, Regeln und gesellschaftliche Abwägung. |
-| `begriffe_saetze` | KI ist der Oberbegriff für Systeme, die Aufgaben intelligent bearbeiten. Maschinelles Lernen bestimmt Muster aus Beispieldaten. Deep Learning ist ML mit mehrschichtigen neuronalen Netzen. Generative KI erzeugt neue Inhalte, zum Beispiel Texte. |
-| `begriffe` | Kriterium (Beispiel): Ein System ist intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz einsetzen müsste, und mit Neuem zurechtkommt. Eine zeitgesteuerte Ampel führt feste Regeln aus und lernt nicht, sie ist keine KI. Ein Schachprogramm mit festen Regeln kann regelbasierte KI sein, lernt aber nicht aus Daten; ein Spamfilter mit gelerntem Entscheidungsbaum passt sein Modell anhand von Beispielen an. Nicht jedes automatisch arbeitende Programm ist also eine KI. Offen bleibt, wie man bei Grenzfällen KI sinnvoll abgrenzt. |
-
 ## DL 2 · Lernen aus Daten
 
 | Antwortfeld | Beispielantwort / Erwartungshorizont |

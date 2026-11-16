@@ -33,7 +33,7 @@ function roadmap(){
 }
 // Die Anzeige «x von y Schritten» gehört zum Projekt; Häkchen mit Präfix «dl8-» stehen im Fahrplan von DL 8.
 const projectChecks=checks.filter(x=>!x.dataset.check.startsWith('dl8-'));
-function progress(){const n=projectChecks.filter(x=>x.checked).length;$('progress').value=n;$('progress-text').textContent=n+' von '+projectChecks.length+' Schritten';roadmap();const safe=skills.filter(x=>x.value==='sicher').length;$('skill-summary').textContent=safe+' von '+skills.length+' Kompetenzen: «Sicher erklären». Eigene Einschätzung, keine Note.';}
+function progress(){const n=projectChecks.filter(x=>x.checked).length;$('progress').value=n;$('progress-text').textContent=n+' von '+projectChecks.length+' Schritten';roadmap();const safe=skills.filter(x=>x.value==='sicher').length;const summary=$('skill-summary');if(summary)summary.textContent=safe+' von '+skills.length+' Kompetenzen: «Sicher erklären». Eigene Einschätzung, keine Note.';}
 function grade(){
  const answered=scores.filter(x=>x.value!=='');
  const points=answered.reduce((sum,x)=>sum+Number(x.value),0);

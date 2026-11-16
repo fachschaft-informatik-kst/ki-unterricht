@@ -2,38 +2,6 @@
 
 **Nur für Lehrpersonen.** Die Antworten sind altersgerechte Beispiele und keine einzig richtigen Wortlaute. Die Kennung pro Tabellenzeile entspricht dem im Lernjournal gespeicherten Feld. **Zahlen, Namen, Texte, Filmausschnitte und Notebook-Beobachtungen sind illustrative Beispiele**, wenn nicht ausdrücklich ein mathematisch bestimmtes Ergebnis genannt wird. Das echte Unterrichtsprotokoll muss die eigenen Messwerte, Textausgaben und tatsächlichen Filmbelege zeigen. Versteckte Altfelder und freiwillige Vertiefungen sind der Vollständigkeit halber enthalten.
 
-## DL 1 · Was ist KI?
-
-| Antwortfeld | Mögliche Musterantwort |
-|---|---|
-| `dl1_regeln_automat` | Feste Regeln: Guthaben und Taste bestimmen, ob das Getränk ausgegeben wird. |
-| `dl1_regeln_uebersetzung` | Lernen aus Daten: Die Übersetzungsapp wurde mit Satzpaaren trainiert. |
-| `dl1_regeln_ampel` | Feste Regeln: Die Ampel folgt einem Zeitplan. |
-| `dl1_regeln_gesicht` | Lernen aus Daten: Das Bilderkennungsmodell hat Merkmale aus Trainingsbildern gelernt. |
-| `dl1_begriffe_ampel` | Keine KI. |
-| `dl1_begriffe_schach` | Regelbasierte KI. |
-| `dl1_begriffe_spam` | Maschinelles Lernen. |
-| `dl1_begriffe_bilder` | Deep Learning. |
-| `dl1_begriffe_text` | Generative KI. |
-| `regeln_oder_daten` | Ein Getränkeautomat arbeitet selbstständig, befolgt aber nur vorgegebene Regeln. Er lernt nicht aus Beispielen. Automatisch bedeutet nicht automatisch KI. |
-| `begriff_bsp_1` | Optional: Schachcomputer – regelbasierte KI. |
-| `begriff_bsp_2` | Optional: Spamfilter mit Trainingsdaten – maschinelles Lernen. |
-| `begriff_bsp_3` | Optional: Tierbilder mit tiefem Netz erkennen – Deep Learning. |
-| `begriff_bsp_4` | Optional: KI schreibt eine Geschichte – generative KI. |
-| `basis-ki-zeitstrahl` | Frühe KI-Systeme folgten oft von Menschen festgelegten Regeln. Später wurden viele Modelle mit Daten trainiert, etwa tiefe neuronale Netze. Heute sind Regeln weiterhin wichtig, beispielsweise für Sicherheit und Kontrolle. |
-| `ki_ordnung` | Schachcomputer: feste Regeln, schwache KI. Spamfilter: lernt aus Daten, ML und schwache KI. Fiktive allgemein intelligente Filmfigur: hypothetische starke KI. Ein Chatbot ist nicht automatisch allgemein intelligent. |
-| `typ_bsp_1` | Altes freiwilliges Feld: Schachprogramm. |
-| `typ_1` | Alte Kategorie: regelbasierte KI. |
-| `typ_bsp_2` | Altes freiwilliges Feld: Spamfilter. |
-| `typ_2` | Alte Kategorie: maschinelles Lernen. |
-| `typ_bsp_3` | Altes freiwilliges Feld: Tierbilderkennung. |
-| `typ_3` | Alte Kategorie: Deep Learning. |
-| `typ_bsp_4` | Altes freiwilliges Feld: Textgenerator. |
-| `typ_4` | Alte Kategorie: generative KI. |
-| `gesetze` | 1. Das Bremsen ist naheliegend, weil es Verletzungen verringern könnte. 2. Das Gesetz schützt nicht automatisch alle gleichzeitig; bei möglichen Schäden braucht es menschliche Regeln und Verantwortung. |
-| `begriffe_saetze` | KI ist ein Oberbegriff für Systeme, die anspruchsvolle Aufgaben bearbeiten. ML lernt aus Daten. Deep Learning benutzt tiefe neuronale Netze. Generative KI erzeugt neue Inhalte. |
-| `begriffe` | Der Getränkeautomat folgt festen Regeln; der trainierte Spamfilter hat aus Beispielen gelernt. Offen bleibt für mich, wann eine Regelmaschine als KI gilt. |
-
 ## DL 2 · Wie lernt KI?
 
 | Antwortfeld | Mögliche Musterantwort |

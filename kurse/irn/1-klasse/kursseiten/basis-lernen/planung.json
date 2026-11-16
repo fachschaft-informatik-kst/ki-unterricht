@@ -4,7 +4,7 @@
       "id": "b02",
       "view": "basis-lernen",
       "title": "Wie lernt KI?",
-      "rueckblick": "In Doppellektion 1 haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.",
+      "rueckblick": "Im Kapitel «Was ist KI?» haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.",
       "goal": "Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.",
       "question": "Leitfrage: Woher kommt die Entscheidungsregel: von Menschen oder aus Daten?",
       "motivation": "Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.",
@@ -38,7 +38,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Vergleichen Sie Schachprogramm und Spamfilter aus Doppellektion 1: Wer oder was erzeugt die Entscheidungsregel? Vervollständigen Sie «Ein System lernt aus Daten, wenn …»."
+              "text": "Vergleichen Sie Schachprogramm und Spamfilter aus dem Kapitel «Was ist KI?»: Wer oder was erzeugt die Entscheidungsregel? Vervollständigen Sie «Ein System lernt aus Daten, wenn …»."
             },
             {
               "art": "Ergebnis",

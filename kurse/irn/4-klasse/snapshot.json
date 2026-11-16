@@ -4,7 +4,6 @@
   "originalManifest": "kursseiten/manifest.json",
   "sections": [
     "start",
-    "lernziele",
     "projekt",
     "fremdmodell",
     "bewertung",

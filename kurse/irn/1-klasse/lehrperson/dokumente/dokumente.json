@@ -4,59 +4,9 @@
   "generator": "scripts/build_student_documents.py",
   "zip": {
     "file": "IRN_1-Klasse_Alle_Dokumente.zip",
-    "bytes": 1881872
+    "bytes": 1698116
   },
   "documents": [
-    {
-      "dl": 1,
-      "lesson": "Was ist KI?",
-      "phase": 1,
-      "phaseName": "Ankommen",
-      "minutes": 5,
-      "title": "Wann ist ein System intelligent?",
-      "file": "DL01_1_Ankommen.docx",
-      "bytes": 39055
-    },
-    {
-      "dl": 1,
-      "lesson": "Was ist KI?",
-      "phase": 2,
-      "phaseName": "Vorwissen aktivieren",
-      "minutes": 10,
-      "title": "Regeln für Katze oder Hund",
-      "file": "DL01_2_Vorwissen_aktivieren.docx",
-      "bytes": 39178
-    },
-    {
-      "dl": 1,
-      "lesson": "Was ist KI?",
-      "phase": 3,
-      "phaseName": "Informieren",
-      "minutes": 20,
-      "title": "Begriffe an einem Beispiel ordnen",
-      "file": "DL01_3_Informieren.docx",
-      "bytes": 39015
-    },
-    {
-      "dl": 1,
-      "lesson": "Was ist KI?",
-      "phase": 4,
-      "phaseName": "Verarbeiten",
-      "minutes": 45,
-      "title": "Beispiele einordnen und ethische Fragen diskutieren",
-      "file": "DL01_4_Verarbeiten.docx",
-      "bytes": 39438
-    },
-    {
-      "dl": 1,
-      "lesson": "Was ist KI?",
-      "phase": 5,
-      "phaseName": "Auswerten",
-      "minutes": 10,
-      "title": "Die Leitfrage beantworten",
-      "file": "DL01_5_Auswerten.docx",
-      "bytes": 39043
-    },
     {
       "dl": 2,
       "lesson": "Wie lernt KI?",
@@ -75,7 +25,7 @@
       "minutes": 5,
       "title": "Woher kommt die Regel?",
       "file": "DL02_2_Vorwissen_aktivieren.docx",
-      "bytes": 38996
+      "bytes": 39011
     },
     {
       "dl": 2,

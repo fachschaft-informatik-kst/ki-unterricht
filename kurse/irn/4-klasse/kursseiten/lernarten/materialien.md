@@ -12,7 +12,7 @@ Zeigen Sie dasselbe Motiv aus dem Memory zunächst ohne Bezeichnung, dann mit Kl
 
 **Tandem · 5 Min.**
 
-| System aus DL1 | Wer oder was erzeugt die Entscheidungsregel? | Welche Erfahrung wird gebraucht? |
+| System aus «Was ist KI?» | Wer oder was erzeugt die Entscheidungsregel? | Welche Erfahrung wird gebraucht? |
 |---|---|---|
 | Schachprogramm mit festgelegten Suchregeln | ____________________ | ____________________ |
 | Mit beschrifteten E-Mails trainierter Spamfilter | ____________________ | ____________________ |
