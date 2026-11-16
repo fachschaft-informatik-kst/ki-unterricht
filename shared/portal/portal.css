@@ -34,8 +34,9 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 /* Beschriftete Neuron-Diagramme (DL 3/4): grosse Gewichte und Bias lesbar halten.
    Auf kleinen Displays ist die Grafik bewusst horizontal scrollbar. */
 .concept-figure.neuron-detail-figure{overflow-x:auto;overscroll-behavior-inline:contain}
-.concept-figure.neuron-detail-figure img{width:100%;min-width:780px;max-width:1200px}
-.concept-figure.neuron-detail-figure img[src$="schwimmbad_xor_netz.svg"]{min-width:1080px;max-width:1320px}
+.concept-figure.neuron-detail-figure img{width:100%;min-width:0;max-width:760px}
+.concept-figure.neuron-detail-figure img[src$="schwimmbad_lernschritt.svg"]{min-width:1120px;max-width:1550px}
+.concept-figure.neuron-detail-figure img[src$="schwimmbad_xor_netz.svg"]{min-width:760px;max-width:1020px}
 .concept-figure.neuron-detail-figure:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 @media(max-width:720px){.concept-figure.neuron-detail-figure{padding:12px}}
 
