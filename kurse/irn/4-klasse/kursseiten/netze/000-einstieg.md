@@ -5,8 +5,9 @@
   <summary><span class="phase-num">04</span><span>Doppellektion 4 · Warum mehrere Neuronen?</span><small>90 Min.</small></summary>
   <div class="detail-body">
     <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-03">Doppellektion 3</a> haben Sie am Schwimmbad-Beispiel gesehen, wie ein Neuron entscheidet und lernt. Die vereinfachten Schwimmbadregeln AND und OR waren mit einem Neuron lösbar. Heute testen Sie eine dritte Regel: XOR.</p>
-    <figure class="concept-figure">
-      <img alt="Schwimmbad-Neuron: Sonne, Freund:innen und Prüfung werden gewichtet, daraus entsteht eine Ja/Nein-Entscheidung." loading="lazy" src="grafiken/neuron_entscheider.svg"/>
+    <figure class="concept-figure neuron-detail-figure neuron-detail-recap">
+      <img class="neuron-graphic-desktop" alt="Schwimmbad-Neuron: Sonne, Freund:innen und Prüfung werden gewichtet, daraus entsteht eine Ja/Nein-Entscheidung." loading="lazy" src="grafiken/neuron_entscheider.svg"/>
+      <img class="neuron-graphic-mobile" alt="Mobile Darstellung des Schwimmbad-Neurons mit Sonne 1, Freund:innen 0, Prüfung morgen 1, Gewichten plus 2, plus 2 und minus 4, Bias minus 1 und Ausgabe Nein." loading="lazy" src="grafiken/neuron_entscheider_mobil.svg"/>
       <figcaption>Rückblick: Wie entscheidet das Schwimmbad-Neuron? Was bewirken Gewichte und Bias?</figcaption>
     </figure>
     <p><strong>Heute können Sie:</strong> Die neue Schwimmbadregel XOR erklären, ihre Grenze beim einzelnen Neuron begründen und zeigen, wie eine Zwischenschicht das Problem löst.</p>

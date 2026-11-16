@@ -55,6 +55,8 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 .concept-figure.neuron-detail-learning img.neuron-graphic-desktop{max-width:1550px}
 .concept-figure.neuron-detail-net img.neuron-graphic-desktop{max-width:1020px}
 .concept-figure.neuron-detail-xor img.neuron-graphic-desktop{max-width:760px}
+.concept-figure.neuron-detail-recap img.neuron-graphic-desktop{max-width:760px}
+.concept-figure.neuron-detail-separation img.neuron-graphic-desktop{max-width:740px}
 /* Unter der passenden Mindestbreite werden die komplexen Diagramme neu
    angeordnet statt horizontal scrollbar oder unlesbar verkleinert zu sein. */
 @container (max-width:950px){
@@ -64,8 +66,12 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
  .neuron-detail-net img.neuron-graphic-mobile{display:block}
 }
 @container (max-width:580px){
- .neuron-detail-xor img.neuron-graphic-desktop{display:none}
- .neuron-detail-xor img.neuron-graphic-mobile{display:block}
+ .neuron-detail-xor img.neuron-graphic-desktop,
+ .neuron-detail-recap img.neuron-graphic-desktop,
+ .neuron-detail-separation img.neuron-graphic-desktop{display:none}
+ .neuron-detail-xor img.neuron-graphic-mobile,
+ .neuron-detail-recap img.neuron-graphic-mobile,
+ .neuron-detail-separation img.neuron-graphic-mobile{display:block}
 }
 /* Fallback für Browser ohne Container Queries. */
 @supports not (container-type:inline-size){
