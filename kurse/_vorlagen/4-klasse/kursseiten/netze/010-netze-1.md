@@ -3,7 +3,7 @@
     <h2 class="kapitel-titel">Das XOR-Problem: Warum reicht ein Neuron nicht?</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>Neue Schwimmbadregel:</strong> Die drei Eingaben bleiben Sonne (S), Freund:innen (F) und Prüfung morgen (P). Unsere neue Schwimmbadregel lautet: <strong>Schwimmen, wenn genau eine der Bedingungen Sonne oder Freund:innen erfüllt ist und morgen keine Prüfung stattfindet.</strong> Das Teilproblem bei <strong>P = 0</strong> heisst <strong>XOR</strong> (exklusives Oder). Zuerst untersuchen wir dafür die vier Kombinationen von S und F; im nächsten Kapitel ergänzen wir die Prüfung als echte Entscheidungseingabe.</p>
+    <p><strong>Neue Schwimmbadregel:</strong> Die drei Eingaben bleiben Sonne (S), Freund:innen (F) und Prüfung morgen (P). Für das Logikexperiment vereinbaren wir bewusst eine ungewöhnliche Schwimmbadregel: <strong>Schwimmen, wenn genau eine der Bedingungen Sonne oder Freund:innen erfüllt ist und morgen keine Prüfung stattfindet.</strong> Das Teilproblem bei <strong>P = 0</strong> heisst <strong>XOR</strong> (exklusives Oder). Zuerst untersuchen wir dafür die vier Kombinationen von S und F; im nächsten Kapitel ergänzen wir die Prüfung als echte Entscheidungseingabe.</p>
     <!-- MD:START -->
 ### 1 · XOR kennenlernen: eine neue Regel
 <!-- MD:END -->
