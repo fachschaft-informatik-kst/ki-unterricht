@@ -339,6 +339,38 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await mobilePage.goto('http://127.0.0.1:8770/bok/1-klasse/');
     assert(await mobilePage.locator('#basis-sicherung #basis-backup-controls button').isVisible(),
       'Mobile devices must expose the full ZIP backup controls outside the hidden sidebar');
+    // Every DL3/DL4 network illustration must use the legible mobile SVG,
+    // without introducing its own horizontal overflow at phone width.
+    for(const [lesson,selectors] of [
+      ['basis-neuron',['#basis-neuron-1 .neuron-detail-recap',
+                       '#basis-neuron-4 .neuron-detail-learning']],
+      ['basis-netze',['#basis-netze-1 .neuron-detail-xor',
+                      '#basis-netze-1 .neuron-detail-separation',
+                      '#basis-netze-2 .neuron-detail-net']]
+    ]){
+      await mobilePage.goto('http://127.0.0.1:8770/bok/1-klasse/#'+lesson);
+      for(const selector of selectors){
+        const figure=mobilePage.locator(selector);
+        await figure.waitFor({state:'visible'});
+        const mobile=figure.locator('img.neuron-graphic-mobile');
+        const desktop=figure.locator('img.neuron-graphic-desktop');
+        assert(await mobile.isVisible(),selector+' must show the mobile illustration');
+        assert.equal(await desktop.isVisible(),false,selector+' must hide desktop SVG');
+        const dimensions=await mobile.evaluate(img=>{
+          const r=img.getBoundingClientRect();
+          const parent=img.closest('figure').getBoundingClientRect();
+          return {width:r.width,right:r.right,figureWidth:parent.width,
+                  complete:img.complete,naturalWidth:img.naturalWidth,
+                  windowWidth:window.innerWidth};
+        });
+        assert(dimensions.complete && dimensions.naturalWidth>0,
+          selector+' mobile asset must load');
+        assert(dimensions.width<=dimensions.figureWidth+1,
+          selector+' image must fit inside its figure');
+        assert(dimensions.right<=dimensions.windowWidth+1,
+          selector+' image must not extend beyond mobile viewport');
+      }
+    }
     await mobilePage.close();
     // The first-year buttons must launch the selected notebook directly inside
     // the same lab-panel component used in the fourth-year course.
