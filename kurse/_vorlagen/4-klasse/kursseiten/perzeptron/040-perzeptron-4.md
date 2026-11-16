@@ -4,7 +4,7 @@
   </summary>
   <div class="kapitel-body">
     <p>Ein Neuron lernt aus <strong>Trainingsdaten</strong> mit bekannter richtiger Antwort – dem <strong>Ziel</strong> oder <strong>Label</strong>. Das heisst <strong>überwachtes Lernen</strong>. Bei Fehlern werden <strong>Gewichte und Bias</strong> korrigiert; Eingaben und Rechenregel «Summe bilden, ab 0 Ja» bleiben unverändert. Das Gelernte steckt in den eingestellten Zahlen.</p>
-    <figure class="concept-figure">
+    <figure class="concept-figure neuron-detail-figure" tabindex="0" aria-label="Beschriftetes Neuronendiagramm; auf schmalen Bildschirmen horizontal scrollen">
       <img alt="Schwimmbad-Neuron beim Lernen: Bei Sonne 1, Freund:innen 0 und Prüfung 0 sagt es zuerst fälschlich Nein. Sonnengewicht und Bias werden korrigiert, danach sagt es Ja. Die Eingaben bleiben gleich." loading="lazy" src="grafiken/schwimmbad_lernschritt.svg"/>
       <figcaption>Vorher und nachher: Dieselben drei Eingaben laufen durch dasselbe Neuron. Grün markiert die korrigierten Werte an Sonnenverbindung und Bias; die anderen Gewichte bleiben gleich.</figcaption>
     </figure>
