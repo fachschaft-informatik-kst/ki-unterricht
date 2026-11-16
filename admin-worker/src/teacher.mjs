@@ -248,8 +248,10 @@ export async function teacherData({course,kind},token,github,repo,selected=1,cou
   const views=(manifest.sections||[]).filter(s=>s.teaching&&/^[a-z][a-z0-9-]*$/.test(s.id));
   if(views.length>20)throw Error("Zu viele Unterrichtsbereiche.");
   const plans=await Promise.all(views.map(s=>getJson(token,profile.courseRoot+"/kursseiten/"+s.id+"/planung.json",github,repo)));
+  const start=Number(manifest.lessonNumberStart);
+  const lessonNumberStart=Number.isInteger(start)&&start>=1?start:1;
   const lessons=plans.flatMap(p=>p.lessons||[]).sort(sortLessons)
-    .map((lesson,index)=>({...lesson,number:index+1}));
+    .map((lesson,index)=>({...lesson,number:index+lessonNumberStart}));
   const current=lessons.find(l=>l.number===Number(selected))||lessons[0];
   if(!current)throw Error("Kein Unterrichtsplan vorhanden.");
   const base={kind,course,lessons:lessons.map(l=>({id:l.id,number:l.number,title:l.title,view:l.view})),

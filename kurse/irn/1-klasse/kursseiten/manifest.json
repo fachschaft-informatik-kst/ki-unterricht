@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "lessonNumberStart": 2,
   "course": "basis",
   "title": "Künstliche Intelligenz · 1. Kurzgymnasium",
   "sections": [
@@ -19,11 +20,6 @@
         "order": 2,
         "label": "01",
         "title": "Was ist KI?"
-      },
-      "teaching": true,
-      "overview": {
-        "title": "Was ist KI?",
-        "summary": "Begriffe · Regeln · Fallbeispiele"
       }
     },
     {

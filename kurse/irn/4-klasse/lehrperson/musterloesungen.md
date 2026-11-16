@@ -2,48 +2,6 @@
 
 **Für die Lehrperson.** Die Antworten sind Beispiele, keine einzig zulässigen Formulierungen. Bei eigenen Bildern, Lernstrecken und Notebook-Experimenten zählen tatsächliche Beobachtungen und Belege. **Illustrative Zahlen sind ausdrücklich keine gemessenen Ergebnisse.**
 
-## 1 · Was ist KI? (Doppellektion 1)
-
-### Regeln von Menschen oder Lernen aus Daten?
-
-- **Getränkeautomat:** Feste Regeln (Guthaben vorhanden, Taste gewählt → Getränk ausgeben), kein Lernen.
-- **Übersetzungsapp:** Nutzt heute üblicherweise ein anhand vieler Texte trainiertes Modell.
-- **Ampel mit festem Zeitplan:** Befolgt Regeln und lernt nicht.
-- **Gesichtserkennung:** Nutzt typischerweise gelernte Merkmale aus Beispieldaten.
-
-Eine Katze lässt sich nicht durch wenige handprogrammierte Merkmale erkennen: Posen, Licht, Perspektiven, Hintergründe und Fellfarben variieren. **Nicht jedes automatische System ist KI, aber es gibt auch regelbasierte KI.**
-
-### KI, ML, Deep Learning und generative KI
-
-- **KI:** Oberbegriff, etwa auch für ein regelbasiertes Schachprogramm.
-- **Maschinelles Lernen:** Lernparameter werden aus Daten bestimmt, z. B. Spamfilter.
-- **Deep Learning:** Teilgebiet des ML mit mehrschichtigen neuronalen Netzen, etwa MobileNet.
-- **Generative KI:** Erzeugt neue Inhalte; heutige Systeme nutzen dafür meist Deep Learning.
-
-**Zusammenhang:** Deep Learning ist Teil von ML, ML Teil von KI. «Generativ» beschreibt die Aufgabe, nicht eine vierte gleichrangige technische Schublade. Historisch führen Meilensteine von symbolischen Programmen über Expertensysteme und datengetriebenes Lernen zu tiefen und grossen generativen Modellen.
-
-**Zuordnungsaktivität DL 1 (spezifischste Kategorie):** Ampel mit festem Zeitplan = keine KI; regelbasiertes Schach-Suchprogramm = regelbasierte KI; Spamfilter mit gelerntem Entscheidungsbaum = maschinelles Lernen ohne Deep Learning; Bildklassifikator mit tiefem neuronalem Netz = Deep Learning; Text erzeugendes Sprachmodell = generative KI. Ein tiefes Sprachmodell gehört gleichzeitig zu Deep Learning, ML und KI; die Zuordnung ist deshalb nicht als gegenseitiger Ausschluss zu verstehen. Auf die **konkrete Systembeschreibung** kommt es an.
-
-**Didaktik:** In der 1. Klasse sind vier plus fünf eindeutige Beispiele und eine kurze Reflexion vorgesehen. In der 4. Klasse begründen die Lernenden zusätzlich zwei Grenzfälle. Tastatur-/Touch-Auswahl ist gleichwertig mit Drag-and-drop. Die automatische Selbstkontrolle gibt erst nach vollständiger Einordnung Rückmeldung.
-
-### Schwache und starke KI
-
-- **Schwache KI:** für bestimmte Aufgaben oder Aufgabenbereiche entwickelt; Beispiele sind Schachcomputer, Bilderkennung und heutige Chatbots. Viele Fähigkeiten bedeuten nicht automatisch allgemeine Intelligenz.
-- **Starke KI:** hypothetische allgemeine, menschenähnliche Intelligenz; bisher kein allgemein anerkanntes nachgewiesenes Beispiel. Bewusstsein ist nicht mit allgemeiner Intelligenz gleichzusetzen und keine Voraussetzung dieser Einordnung.
-- **Begründete Beispiele:** Ein regelbasierter Schachcomputer ist schwache KI ohne maschinelles Lernen; ein trainierter Spamfilter nutzt ML und ist ebenfalls schwache KI. Eine fiktionale Figur kann als starke KI gedacht sein, ohne dass dadurch ihre Existenz belegt wäre.
-
-Die Begriffe «KI/ML/Deep Learning/generativ» beschreiben technische Verfahren beziehungsweise Aufgaben, «schwach/stark» den Grad allgemeiner Fähigkeiten. Sie sind keine austauschbaren Kategorien.
-
-### Asimovs Gesetze: Fall «Schulweg»
-
-**Argument 1:** Starkes Bremsen ist plausibel, aber bei jeder der drei beschriebenen Optionen droht Verletzung. Keine Möglichkeit ist eindeutig sicher.
-
-**Argument 2:** Asimovs erstes Gesetz verbietet Schädigung, löst jedoch nicht den Konflikt, **wessen Schaden zu vermeiden ist**. Entwickler, Gesellschaft und Recht müssen Entscheidungen und Verantwortlichkeiten klären.
-
-Eine andere gut begründete Wahl ist ebenfalls richtig. Bewertet werden zwei nachvollziehbare Argumente, nicht eine bestimmte Fahrtrichtung.
-
-**Leitfrage** («Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?»): «Ein System wirkt intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz bräuchte, und mit Neuem zurechtkommt. Ein Getränkeautomat führt feste Regeln aus, während ein trainierter Spamfilter Modellparameter aus Beispielen anpasst. Es gibt dennoch auch regelbasierte KI; 'automatisch' ist nicht gleich 'KI'.» Wer sein Kriterium vom Anfang ändert oder präzisiert, hat die Frage gut genutzt.
-
 ## 2 · Lernarten (Doppellektion 2)
 
 ### EVA und Wissen

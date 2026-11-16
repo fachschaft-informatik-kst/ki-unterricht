@@ -48,7 +48,9 @@ assert "3 von 33 Punkten je Person" in fragments["08"]
 irn = ROOT / "kurse/irn/4-klasse"
 irn_lessons = load_course(irn)["lessons"]
 irn_fragments = build_materials.lesson_materials(irn, irn_lessons)
-assert len(irn_fragments) == 10
+# IRN führt «Was ist KI?» als Theorieseite ohne Plan; die Doppellektionen 2–10 bleiben.
+assert len(irn_fragments) == 9
+assert irn_lessons[0]["number"] == 2
 for lesson in irn_lessons:
     source = irn_fragments[lesson["id"]]
     phases = re.findall(r"^### ([^·\n]+) · (\d+) Min\. · (.+)$", source, re.M)
@@ -58,10 +60,6 @@ for lesson in irn_lessons:
     build_materials.material_fragment(source, lesson)
     assert len(source.split()) >= 170
     assert not re.search(r"kurse/bok|/bok/4-klasse", source), "IRN materials must be course-local"
-assert "dl01_intelligenz_regeln.pdf" not in irn_fragments["01"]
-for asset in ("grafiken/dl01_katze.jpg", "grafiken/dl01_hund.jpg"):
-    assert (irn / "assets" / asset).is_file()
-    assert not (irn / "assets" / asset).is_symlink(), "Assets must be independent copies"
 
 with TemporaryDirectory() as temporary:
     root = Path(temporary)

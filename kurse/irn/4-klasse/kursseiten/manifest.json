@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "lessonNumberStart": 2,
   "sections": [
     {
       "id": "start",
@@ -53,11 +54,6 @@
         "order": 2,
         "label": "01",
         "title": "Was ist KI?"
-      },
-      "teaching": true,
-      "overview": {
-        "title": "Was ist KI?",
-        "summary": "Begriffe ordnen · Beispiele prüfen"
       }
     },
     {

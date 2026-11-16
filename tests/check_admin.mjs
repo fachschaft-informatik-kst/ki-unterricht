@@ -267,8 +267,8 @@ try{
   // Word documents: session download, signed short-lived link for the local Word app.
   const docRoot=bySlug["irn/4-klasse"].courseRoot+"/lehrperson/dokumente/";
   sources.set(docRoot+"dokumente.json",readFileSync(new URL("../"+docRoot+"dokumente.json",import.meta.url),"utf8"));
-  sources.set(docRoot+"DL01_1_Ankommen.docx","DOCX-BYTES");
-  const docPath="/teacher/dokumente/DL01_1_Ankommen.docx?course=irn%2F4-klasse";
+  sources.set(docRoot+"DL02_1_Ankommen.docx","DOCX-BYTES");
+  const docPath="/teacher/dokumente/DL02_1_Ankommen.docx?course=irn%2F4-klasse";
   assert.equal((await route(docPath)).status,302,"Documents require OAuth without a ticket");
   const direct=await route(docPath,{headers:{Cookie:"ki_session="+session}});
   assert.equal(direct.status,200,await direct.clone().text());
@@ -276,13 +276,13 @@ try{
   assert.match(direct.headers.get("Content-Type"),/wordprocessingml/);
   assert.equal((await route("/teacher/dokumente/Unlisted.docx?course=irn%2F4-klasse",
     {headers:{Cookie:"ki_session="+session}})).status,404,"Only indexed documents are served");
-  assert.equal((await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL01_1_Ankommen.docx")).status,401);
-  const linkResponse=await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL01_1_Ankommen.docx",
+  assert.equal((await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL02_1_Ankommen.docx")).status,401);
+  const linkResponse=await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL02_1_Ankommen.docx",
     {headers:{Cookie:"ki_session="+session}});
   assert.equal(linkResponse.status,200,await linkResponse.clone().text());
   const link=await linkResponse.json();
   assert.equal(link.word,"ms-word:ofe|u|"+link.url);
-  assert(link.url.startsWith("https://teacher-editor.example/teacher/dokumente/DL01_1_Ankommen.docx?course=irn%2F4-klasse&ticket="));
+  assert(link.url.startsWith("https://teacher-editor.example/teacher/dokumente/DL02_1_Ankommen.docx?course=irn%2F4-klasse&ticket="));
   assert(!link.url.includes("test-user-token"),"The GitHub token is encrypted in the ticket");
   const signedPath=link.url.replace("https://teacher-editor.example","");
   const viaWord=await route(signedPath);
@@ -291,7 +291,7 @@ try{
   const head=await route(signedPath,{method:"HEAD"});
   assert.equal(head.status,200);assert.equal(await head.text(),"");
   assert.equal((await route(signedPath,{method:"OPTIONS"})).status,200);
-  assert.equal((await route(signedPath.replace("DL01_1_Ankommen","DL01_2_Vorwissen_aktivieren"))).status,403,
+  assert.equal((await route(signedPath.replace("DL02_1_Ankommen","DL02_2_Vorwissen_aktivieren"))).status,403,
     "A ticket is bound to one document");
   assert.equal((await route(signedPath.replace("irn%2F4-klasse","bok%2F4-klasse"))).status,403);
   const ticket=new URL(link.url).searchParams.get("ticket");
@@ -334,7 +334,8 @@ const irnGithub=async(_token,route)=>{
   return {encoding:"base64",content:Buffer.from(irnSources[name]).toString("base64")};
 };
 const irnPlan=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo");
-assert.equal(irnPlan.lessons.length,10);
+assert.equal(irnPlan.lessons.length,9);
+assert.equal(irnPlan.lessons[0].number,2,"IRN keeps double-lesson numbers without the DL 1 plan");
 assert(irnPlan.lessons.every(l=>l.view.startsWith("basis-")));
 const irnKit=await teacherData({course:"irn/1-klasse",kind:"materialien"},"token",irnGithub,"example/repo");
 assert(irnKit.sections[0].markdown.length>20);
