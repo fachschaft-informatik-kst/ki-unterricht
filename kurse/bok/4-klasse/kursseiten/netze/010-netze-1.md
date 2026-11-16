@@ -53,7 +53,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
     </figure>
     <p>Warum eine <em>Gerade</em>? Die Grenze zwischen «feuert» und «feuert nicht» liegt dort, wo Summe + Bias genau 0 ist: w₁·x₁ + w₂·x₂ + b = 0. Das ist die Gleichung einer geraden Linie. Gewichte drehen sie, der Bias verschiebt sie. Auf der einen Seite feuert das Neuron, auf der anderen nicht. Bei der Schwimmbadregel AND («nur bei Sonne und Freund:innen») liegt der einzige Ja-Punkt in einer Ecke: Eine Linie kann ihn abtrennen. Bei XOR liegen die 1-Punkte diagonal gegenüber.</p>
     <!-- MD:START -->
-**Fazit:** Für das einzelne Neuron gibt es **keine Kombination aus Gewichten und Bias**, die alle vier XOR-Fälle korrekt unterscheidet: Keine Gerade trennt die diagonal liegenden Punkte. Eine andere Lernrate oder mehr Trainingsrunden können diese grundsätzliche Grenze nicht aufheben.
+**Fazit:** Für das einzelne Neuron gibt es **keine Kombination aus Gewichten und Bias**, die alle vier XOR-Fälle korrekt unterscheidet: Keine Gerade trennt die diagonal liegenden Punkte. Eine andere Lernrate oder mehr Trainingsrunden können diese grundsätzliche Grenze nicht aufheben. Auch die dritte Eingabe P hilft dem einzelnen Neuron nicht: Für P = 0 bleibt das unlösbare XOR-Teilproblem bestehen.
 <!-- MD:END -->
     <details>
       <summary>Die Rechnung dazu: vier Bedingungen, die sich widersprechen</summary>

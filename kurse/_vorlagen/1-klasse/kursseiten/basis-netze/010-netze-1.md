@@ -87,7 +87,7 @@ Jede Zeile ist eine Bedingung an w₁, w₂ und b (Ausgabe 1 heisst Summe ≥ 0,
       </div>
     </details>
     <!-- MD:START -->
-**Fazit:** Für das einzelne Neuron gibt es **keine Kombination aus Gewichten und Bias**, die alle vier XOR-Fälle korrekt unterscheidet. Die vier XOR-Bedingungen widersprechen sich. Eine andere Lernrate oder mehr Trainingsrunden können diese grundsätzliche Grenze nicht aufheben.
+**Fazit:** Für das einzelne Neuron gibt es **keine Kombination aus Gewichten und Bias**, die alle vier XOR-Fälle korrekt unterscheidet. Die vier XOR-Bedingungen widersprechen sich. Eine andere Lernrate oder mehr Trainingsrunden können diese grundsätzliche Grenze nicht aufheben. Auch die dritte Eingabe P hilft dem einzelnen Neuron nicht: Für P = 0 bleibt das unlösbare XOR-Teilproblem bestehen.
 
 **Jetzt selbst überprüfen:** Öffnen Sie das eigenständige XOR-Notebook. Ändern Sie Gewichte und Bias und vergleichen Sie die **vier Neuron-Grafiken**. Halten Sie fest, wie viele Fälle Ihre beste Einstellung richtig löst. Danach geht es im nächsten Kapitel um einen Lösungsweg mit mehreren Neuronen.
 <!-- MD:END -->

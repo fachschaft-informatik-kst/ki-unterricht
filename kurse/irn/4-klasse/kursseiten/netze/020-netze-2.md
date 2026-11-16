@@ -24,7 +24,7 @@
         </tbody>
       </table>
     </div>
-    <p><strong>Rechenweg im Bild (S = 1, F = 0, P = 1):</strong> OR = 1, NAND = 1. Das Ausgabeneuron berechnet <strong>1·1 + 1·1 − 2·1 − 1,5 = −1,5 → Nein (0)</strong>. Ohne Prüfung wäre es <strong>1·1 + 1·1 − 2·0 − 1,5 = +0,5 → Ja (1)</strong>. Die zwei Zwischenneuronen lösen weiterhin XOR, und die Prüfung kann am Ausgang die Entscheidung verhindern. Das Notebook untersucht zuerst die vier XOR-Fälle mit P = 0.</p>
+    <p><strong>Rechenweg im Bild (S = 1, F = 0, P = 1):</strong> OR = 1, NAND = 1. Das Ausgabeneuron berechnet <strong>1·1 + 1·1 − 2·1 − 1,5 = −1,5 → Nein (0)</strong>. Ohne Prüfung wäre es <strong>1·1 + 1·1 − 2·0 − 1,5 = +0,5 → Ja (1)</strong>. Die zwei Zwischenneuronen lösen weiterhin XOR, und die Prüfung kann am Ausgang die Entscheidung verhindern. Im Notebook werden weiterhin nur die vier XOR-Fälle bei P = 0 trainiert. Die Prüfungsbremse mit Gewicht −2 haben wir für das vollständige Schwimmbadbeispiel bewusst festgelegt; sie wird hier nicht mittrainiert.</p>
     <label class="field answer"><span>Unser Verständnischeck: Was liefern OR und NAND für Sonne = 1, Freund:innen = 0? Vergleichen Sie Prüfung = 0 mit Prüfung = 1 und erklären Sie die Rolle der versteckten Schicht.</span><textarea data-answer="netze_zwischenschicht" rows="3" maxlength="10000" placeholder="OR = …, NAND = …; bei P = 0: …, bei P = 1: … / Die versteckte Schicht …"></textarea></label>
   </div>
 </details>

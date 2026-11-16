@@ -104,7 +104,7 @@ Die Zwischenschicht berechnet mit **OR** und **NAND** zunächst XOR für Sonne u
 | 1 | 0 | 1 | 1 | 1 | 0 |
 | 1 | 1 | 1 | 1 | 0 | 0 |
 
-**Vergleich:** Bei Sonne = 1 und Freund:innen = 0 liefern OR und NAND beide 1. Ohne Prüfung (P = 0) ist die Endsumme 1 + 1 − 2·0 − 1,5 = +0,5 → **Ja**; mit Prüfung (P = 1) ist sie 1 + 1 − 2·1 − 1,5 = −1,5 → **Nein**. Das Notebook behandelt beim XOR-Training zunächst nur die vier Fälle mit P = 0.
+**Vergleich:** Bei Sonne = 1 und Freund:innen = 0 liefern OR und NAND beide 1. Ohne Prüfung (P = 0) ist die Endsumme 1 + 1 − 2·0 − 1,5 = +0,5 → **Ja**; mit Prüfung (P = 1) ist sie 1 + 1 − 2·1 − 1,5 = −1,5 → **Nein**. Das Notebook trainiert ausschliesslich die vier XOR-Fälle bei P = 0. Die Prüfungsbremse (Gewicht −2) ist eine von uns festgelegte Erweiterung, kein trainiertes Ergebnis.
 
 Mit einer Zwischenschicht sind auch nichtlinear trennbare Muster möglich. Beim selbst trainierten Netz variiert das Ergebnis unter Umständen mit dem Startwert.
 
