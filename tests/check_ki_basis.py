@@ -49,11 +49,11 @@ def main():
         assert svg.find('{http://www.w3.org/2000/svg}desc') is not None
         def walk(elem,scale=1.,shift_x=0.,shift_y=0.):
             tr=elem.attrib.get('transform','')
-            m=re.search(r'translate\\(([-.\\d]+)\\s+([-.\\d]+)\\)',tr)
+            m=re.search(r'translate\(([-.\d]+)\s+([-.\d]+)\)',tr)
             if m:
                 shift_x+=scale*float(m.group(1))
                 shift_y+=scale*float(m.group(2))
-            m=re.search(r'scale\\(([-.\\d]+)\\)',tr)
+            m=re.search(r'scale\(([-.\d]+)\)',tr)
             if m:scale*=float(m.group(1))
             tag=elem.tag.rsplit('}',1)[-1]
             if tag=='rect':
