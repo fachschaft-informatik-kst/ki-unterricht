@@ -20,6 +20,11 @@
         "order": 2,
         "label": "01",
         "title": "Was ist KI?"
+      },
+      "overview": {
+        "title": "Was ist KI?",
+        "tag": "1. Doppellektion",
+        "summary": "Theorie · Regeln vs. Daten · Meilensteine · Kategorien"
       }
     },
     {

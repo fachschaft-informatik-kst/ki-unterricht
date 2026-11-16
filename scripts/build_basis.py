@@ -25,7 +25,15 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
     by_view = {s["id"]: [lesson for lesson in lessons if lesson["view"] == s["id"]] for s in sections}
     cards = []
     for section in sections:
+        tag = section.get("overview", {}).get("tag")
         if not section.get("teaching"):
+            if tag:
+                # Theorieseite ohne Unterrichtsplan: Karte mit fester Beschriftung aus dem Manifest.
+                cards.append(
+                    f'<a class="course-card" href="#{section["id"]}">'
+                    f'<span class="tag">{html.escape(tag)}</span><h3>{html.escape(section["navigation"]["title"])}</h3>'
+                    f'<p>{html.escape(section["overview"].get("summary", ""))}</p><span class="course-arrow">↗</span></a>'
+                )
             continue
         lesson = by_view[section["id"]][0]
         label = html.escape(section["navigation"]["title"])
