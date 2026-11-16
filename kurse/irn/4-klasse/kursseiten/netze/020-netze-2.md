@@ -4,8 +4,9 @@
   </summary>
   <div class="kapitel-body">
     <p>Ein einzelnes Neuron kann die XOR-Schwimmbadfälle nicht trennen. Zwei <strong>Zwischenneuronen</strong> berechnen deshalb <strong>OR</strong> («mindestens eine Bedingung») und <strong>NAND</strong> («nicht beide»). Ein drittes Neuron verbindet beide Ergebnisse mit <strong>AND</strong>. Das Bild zeigt die <strong>versteckte Schicht (Hidden Layer)</strong> mit Gewichten und Bias. So lässt sich die neue Regel darstellen.</p>
-    <figure class="concept-figure neuron-detail-figure" tabindex="0" aria-label="Beschriftetes Neuronendiagramm; auf schmalen Bildschirmen horizontal scrollen">
-      <img alt="Schwimmbad-XOR-Netz: Sonne 1 und Freund:innen 0 speisen zwei Neuronen der versteckten Schicht. Prüfung morgen ist auf 0 gesetzt und deshalb hier nicht verbunden. OR liefert 1, NAND liefert 1. Beide führen mit Gewichten +1 zum Ausgabeneuron AND, das Ja 1 ausgibt. Alle drei Bias-Werte und die Berechnungen sind eingezeichnet." loading="lazy" src="grafiken/schwimmbad_xor_netz.svg"/>
+    <figure class="concept-figure neuron-detail-figure neuron-detail-net">
+      <img class="neuron-graphic-desktop" alt="Schwimmbad-XOR-Netz: Sonne 1 und Freund:innen 0 speisen zwei Neuronen der versteckten Schicht. Prüfung morgen ist auf 0 gesetzt und deshalb hier nicht verbunden. OR liefert 1, NAND liefert 1. Beide führen mit Gewichten +1 zum Ausgabeneuron AND, das Ja 1 ausgibt. Alle drei Bias-Werte und die Berechnungen sind eingezeichnet." loading="lazy" src="grafiken/schwimmbad_xor_netz.svg"/>
+      <img class="neuron-graphic-mobile" alt="Mobile Netzwerkansicht mit versteckter Schicht: Sonne und Freund:innen führen zu OR und NAND, deren Ergebnisse zum AND-Neuron und zur Schwimmbad-Ausgabe. Prüfung bleibt 0." loading="lazy" src="grafiken/schwimmbad_xor_netz_mobil.svg"/>
       <figcaption>Das erweiterte Schwimmbad-Netz mit Hidden Layer: <strong>Sonne und Freund:innen → OR und NAND → AND → Schwimmen?</strong> Prüfung morgen bleibt 0; die Zahlen zeigen den Fall (1, 0), die Tabelle darunter alle vier Fälle.</figcaption>
     </figure>
     <div class="table-scroll">

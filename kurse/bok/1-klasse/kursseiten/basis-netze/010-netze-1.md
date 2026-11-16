@@ -22,8 +22,9 @@
 Vergleichen Sie die vier Eingaben: XOR und OR unterscheiden sich nur in der letzten Zeile. Bei (1, 1) soll XOR 0 ausgeben.
 <!-- MD:END -->
     <p><strong>Ein Versuch mit nur einem Neuron:</strong> Wir wählen für Sonne und Freund:innen je das Gewicht +1 und einen Bias von −0,5. Damit gelingt die OR-Regel – aber bei XOR ist der Fall «beide sind 1» falsch. Die Zeichnung zeigt diese konkrete Fehlentscheidung, noch nicht den Beweis, dass keine andere Einstellung funktioniert.</p>
-    <figure class="concept-figure neuron-detail-figure" tabindex="0" aria-label="Beschriftetes Neuronendiagramm; auf schmalen Bildschirmen horizontal scrollen">
-      <img alt="Drei Eingaben wie in der Repetition: Sonne 1, Freund:innen 1 und Prüfung morgen 0. Die Gewichte sind +1, +1 und −4; bei der festen Prüfungseingabe 0 hat −4 keinen Einfluss. Der Bias ist −0,5. Die Ausgabe für Sonne 1 und Freund:innen 1 ist Ja, die künstliche XOR-Zielregel verlangt aber Nein. Diese Einstellung liefert drei korrekte und einen falschen Fall." loading="lazy" src="grafiken/schwimmbad_xor_einzelne_neuron.svg"/>
+    <figure class="concept-figure neuron-detail-figure neuron-detail-xor">
+      <img class="neuron-graphic-desktop" alt="Drei Eingaben wie in der Repetition: Sonne 1, Freund:innen 1 und Prüfung morgen 0. Die Gewichte sind +1, +1 und −4; bei der festen Prüfungseingabe 0 hat −4 keinen Einfluss. Der Bias ist −0,5. Die Ausgabe für Sonne 1 und Freund:innen 1 ist Ja, die künstliche XOR-Zielregel verlangt aber Nein. Diese Einstellung liefert drei korrekte und einen falschen Fall." loading="lazy" src="grafiken/schwimmbad_xor_einzelne_neuron.svg"/>
+      <img class="neuron-graphic-mobile" alt="Kompakte Netzwerkansicht wie beim Schwimmbad-Neuron: Sonne 1, Freund:innen 1, Prüfung 0, Gewichte und Bias. Die Ausgabe Ja ist beim XOR-Ziel Nein falsch." loading="lazy" src="grafiken/schwimmbad_xor_einzelne_neuron_mobil.svg"/>
       <figcaption>Das bekannte Schwimmbad-Neuron: Prüfung bleibt 0; diese Einstellung löst drei der vier XOR-Fälle. Warum es mit keiner Einstellung alle vier schafft, zeigt die Punktgrafik weiter unten.</figcaption>
     </figure>
     <!-- MD:START -->

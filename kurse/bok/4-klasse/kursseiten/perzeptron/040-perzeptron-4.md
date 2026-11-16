@@ -4,8 +4,9 @@
   </summary>
   <div class="kapitel-body">
     <p>Ein Neuron lernt aus <strong>Trainingsdaten</strong> mit bekannter richtiger Antwort – dem <strong>Ziel</strong> oder <strong>Label</strong>. Das heisst <strong>überwachtes Lernen</strong>. Bei Fehlern werden <strong>Gewichte und Bias</strong> korrigiert; Eingaben und Rechenregel «Summe bilden, ab 0 Ja» bleiben unverändert. Das Gelernte steckt in den eingestellten Zahlen.</p>
-    <figure class="concept-figure neuron-detail-figure" tabindex="0" aria-label="Beschriftetes Neuronendiagramm; auf schmalen Bildschirmen horizontal scrollen">
-      <img alt="Schwimmbad-Neuron beim Lernen: Bei Sonne 1, Freund:innen 0 und Prüfung 0 sagt es zuerst fälschlich Nein. Sonnengewicht und Bias werden korrigiert, danach sagt es Ja. Die Eingaben bleiben gleich." loading="lazy" src="grafiken/schwimmbad_lernschritt.svg"/>
+    <figure class="concept-figure neuron-detail-figure neuron-detail-learning">
+      <img class="neuron-graphic-desktop" alt="Schwimmbad-Neuron beim Lernen: Bei Sonne 1, Freund:innen 0 und Prüfung 0 sagt es zuerst fälschlich Nein. Sonnengewicht und Bias werden korrigiert, danach sagt es Ja. Die Eingaben bleiben gleich." loading="lazy" src="grafiken/schwimmbad_lernschritt.svg"/>
+      <img class="neuron-graphic-mobile" alt="Mobile Netzwerkansicht mit Sonne, Freund:innen und Prüfung: zuerst falsche Ausgabe, danach dieselbe Eingabe mit korrigiertem Sonnengewicht und Bias." loading="lazy" src="grafiken/schwimmbad_lernschritt_mobil.svg"/>
       <figcaption>Vorher (links) und nachher (rechts): Dieselben drei Eingaben. Nur Sonnengewicht und Bias werden korrigiert; die anderen Gewichte bleiben gleich.</figcaption>
     </figure>
     <p><strong>Warum ändert sich gerade die Sonnenverbindung?</strong> Sonne = 1, Freund:innen = 0, Prüfung = 0. Ziel <strong>Ja (1)</strong>, bisherige Ausgabe <strong>Nein (0)</strong>. Nur Sonne hat den Eingangswert 1. Deshalb steigen Sonnengewicht (0 → 1) und Bias (−1,5 → −0,5) bei Lernrate 1, die beiden übrigen Gewichte bleiben gleich. Mit denselben Eingaben antwortet das Neuron danach richtig.</p>
