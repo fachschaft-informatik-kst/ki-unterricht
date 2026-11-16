@@ -139,7 +139,10 @@ for(const grade of [1,4]){
     lessonCount+=data.lessons.length;
   }
   // «Was ist KI?» is a theory page without plan in IRN; double lessons 2–10 keep their numbers.
-  assert(lessonCount+(manifest.lessonNumberStart||1)-1>=10,"IRN must retain complete double-lesson coverage");
+  // «Was ist KI?» is a theory page without plan in IRN but keeps DL number 01.
+  const withoutPlan=manifest.sections.filter(s=>s.lessonWithoutPlan).map(s=>s.lessonWithoutPlan.number);
+  assert.deepEqual(withoutPlan,[1]);
+  assert(lessonCount+withoutPlan.length>=10,"IRN must retain complete double-lesson coverage");
 }
 const fake={
   "kurse/bok/1-klasse/kursseiten/manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),

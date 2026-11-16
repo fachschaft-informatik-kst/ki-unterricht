@@ -334,12 +334,23 @@ const irnGithub=async(_token,route)=>{
   return {encoding:"base64",content:Buffer.from(irnSources[name]).toString("base64")};
 };
 const irnPlan=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo");
-assert.equal(irnPlan.lessons.length,9);
-assert.equal(irnPlan.lessons[0].number,2,"IRN keeps double-lesson numbers without the DL 1 plan");
+// «01 Was ist KI?» has no plan but keeps its number in every teacher tab; DL 2–10 keep theirs.
+assert.deepEqual(irnPlan.lessons.map(l=>l.number),[1,2,3,4,5,6,7,8,9,10]);
+assert.equal(irnPlan.lessons[0].title,"Was ist KI?");
+assert.equal(irnPlan.lessons[0].withoutPlan,true);
+assert.equal(irnPlan.selectedNumber,1);
+assert.equal(irnPlan.withoutPlan,true,"DL 01 opens empty instead of falling back to DL 02");
+assert.equal(irnPlan.lesson,null);
+const irnPlan2=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo",2);
+assert.equal(irnPlan2.lesson.view,"basis-lernen");
+for(const kind of ["materialien","musterloesungen"]){
+  const empty=await teacherData({course:"irn/1-klasse",kind},"token",irnGithub,"example/repo",1);
+  assert(empty.withoutPlan&&!empty.sections.length&&!empty.entries.length,kind+" stays empty for DL 01");
+}
 assert(irnPlan.lessons.every(l=>l.view.startsWith("basis-")));
-const irnKit=await teacherData({course:"irn/1-klasse",kind:"materialien"},"token",irnGithub,"example/repo");
+const irnKit=await teacherData({course:"irn/1-klasse",kind:"materialien"},"token",irnGithub,"example/repo",2);
 assert(irnKit.sections[0].markdown.length>20);
-const irnSolutions=await teacherData({course:"irn/1-klasse",kind:"musterloesungen"},"token",irnGithub,"example/repo");
+const irnSolutions=await teacherData({course:"irn/1-klasse",kind:"musterloesungen"},"token",irnGithub,"example/repo",2);
 assert(irnSolutions.sections[0].markdown.length>50);
 
 const teacherKit=await teacherData({course:"bok/1-klasse",kind:"materialien"},"token",fakeGithub,"example/repo");

@@ -117,6 +117,10 @@
       ' · Doppellektion '+escape(data.selectedNumber)+'</p><h2>DL '+
       String(data.selectedNumber).padStart(2,"0")+' · '+escape(data.selectedTitle)+'</h2></div>';
   }
+  // Doppellektion ohne Plan (z. B. reine Theorieseite): Nummer bleibt, Inhalt ist leer.
+  function emptyView(data,kicker){
+    return heading(data,kicker)+'<section class="resource"><p>Für diese Doppellektion ist hier nichts hinterlegt.</p></section>';
+  }
   function lessonView(data){
     const l=data.lesson;
     return heading(data,"AVIVA-Planung")+
@@ -261,13 +265,19 @@
     if(!docs.length)return head+'<section class="resource"><p>Für diesen Kurs sind noch keine Dokumente erstellt. '+
       'Sie werden mit <code>scripts/build_student_documents.py</code> aus dem Materialkoffer erzeugt.</p></section>';
     const lessonsWithDocs=[...new Set(docs.map(d=>d.dl))].sort((a,b)=>a-b);
+    const groupNumbers=[...new Set([...lessonsWithDocs,...(data.lessons||[]).map(l=>Number(l.number))])].sort((a,b)=>a-b);
     const zip=data.zip?'<a class="zip-download" href="'+escape(data.zip.url)+'" download="'+escape(data.zip.file)+'">'+
       '<span class="zip-icon" aria-hidden="true">ZIP</span><span><strong>Alle Dokumente als ZIP herunterladen</strong>'+
       '<small>'+escape(docs.length)+' Word-Dokumente · '+escape(lessonsWithDocs.length)+' Doppellektionen'+
       (data.zip.bytes?' · '+escape(fileSize(data.zip.bytes)):'')+'</small></span></a>':"";
-    const groups=lessonsWithDocs.map(dl=>{
+    const groups=groupNumbers.map(dl=>{
       const items=docs.filter(d=>d.dl===dl).sort((a,b)=>a.phase-b.phase);
       const title=(data.lessons||[]).find(l=>Number(l.number)===dl)?.title||items[0].lesson;
+      if(!items.length)return '<section class="resource document-group document-group-empty'+(dl===data.selectedNumber?' is-selected':'')+
+        '" id="dokumente-dl-'+escape(dl)+'" aria-labelledby="dokumente-dl-'+escape(dl)+'-title">'+
+        '<div class="document-group-head"><p class="section-label">Doppellektion '+escape(dl)+'</p>'+
+        '<h3 id="dokumente-dl-'+escape(dl)+'-title">DL '+String(dl).padStart(2,"0")+' · '+escape(title)+'</h3></div>'+
+        '<p class="small-info">Für diese Doppellektion gibt es keine Word-Dokumente.</p></section>';
       return '<section class="resource document-group'+(dl===data.selectedNumber?' is-selected':'')+
         '" id="dokumente-dl-'+escape(dl)+'" aria-labelledby="dokumente-dl-'+escape(dl)+'-title">'+
         '<div class="document-group-head"><p class="section-label">Doppellektion '+escape(dl)+'</p>'+
@@ -325,7 +335,9 @@
       lessons=data.lessons;
       current=data.selectedNumber;
       renderNav(current);
-      root.innerHTML=data.kind==="planung"?lessonView(data):
+      root.innerHTML=data.withoutPlan?emptyView(data,data.kind==="planung"?"AVIVA-Planung":
+          data.kind==="materialien"?"Materialkoffer":"Musterlösungen"):
+        data.kind==="planung"?lessonView(data):
         data.kind==="materialien"?materialsView(data):
         data.kind==="dokumente"?documentsView(data):solutionsView(data);
       formatMaterialWorkshop(data);

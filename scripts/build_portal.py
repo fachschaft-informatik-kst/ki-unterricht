@@ -57,15 +57,18 @@ def assemble(pages: Path | None = None, manifest_path: str = "kurse/bok/4-klasse
     course = load_course(ROOT, manifest_path)
     grouped = {s["id"]: [l for l in course["lessons"] if l["view"] == s["id"]] for s in sections}
     def nav_order(section):
+        if section.get("lessonWithoutPlan"):
+            return section["lessonWithoutPlan"]["number"]
         return grouped[section["id"]][0]["number"] if grouped[section["id"]] else (1000 + section["navigation"]["order"] if section["navigation"]["order"] >= 9 else -100 + section["navigation"]["order"])
 
     overview = []
-    for section in sorted((s for s in sections if s.get("teaching") or s.get("overview", {}).get("tag")), key=nav_order):
+    for section in sorted((s for s in sections if s.get("teaching") or s.get("lessonWithoutPlan")), key=nav_order):
         lessons = grouped[section["id"]]
         if not lessons:
-            # Theorieseite ohne Unterrichtsplan: Karte mit fester Beschriftung aus dem Manifest.
-            meta = section["overview"]
-            overview.append(f'<a class="course-card" href="#{section["id"]}"><span class="tag">{html.escape(meta["tag"])}</span>'
+            # Doppellektion ohne Unterrichtsplan (Theorieseite): Karte mit ihrer fest reservierten Nummer.
+            meta = section.get("overview", {})
+            tag = f'{section["lessonWithoutPlan"]["number"]}. Doppellektion'
+            overview.append(f'<a class="course-card" href="#{section["id"]}"><span class="tag">{html.escape(tag)}</span>'
                             f'<h3>{html.escape(meta.get("title", section["navigation"]["title"]))}</h3><p>{html.escape(meta.get("summary", ""))}</p>'
                             f'<span aria-hidden="true" class="course-arrow">↗</span></a>')
             continue
@@ -104,7 +107,9 @@ def assemble(pages: Path | None = None, manifest_path: str = "kurse/bok/4-klasse
     for section in sorted((s for s in sections if "navigation" in s), key=nav_order):
         nav = section["navigation"]
         label = nav["label"]
-        if grouped[section["id"]]:
+        if section.get("lessonWithoutPlan"):
+            label = f'{section["lessonWithoutPlan"]["number"]:02d}'
+        elif grouped[section["id"]]:
             nums = [l["number"] for l in grouped[section["id"]]]
             label = f"{nums[0]:02d}" if len(nums) == 1 else f"{nums[0]:02d}–{nums[-1]:02d}"
         navigation.append(f'<a href="#{section["id"]}"><span>{html.escape(label)}</span>{html.escape(nav["title"])}</a>')

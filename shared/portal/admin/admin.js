@@ -626,12 +626,17 @@ function renderLessonOrder(){
   selector.replaceChildren(...options);
   selector.value=selected;
   renderSectionNav();
-  let visible=0;
+  // Doppellektionen ohne Plan (lessonWithoutPlan) behalten ihre Nummer; die übrigen werden darum herum gezählt.
+  const manifest=JSON.parse(state.staged.get(manifestPath())?.content||state.manifest.content);
+  const reserved=new Set(manifest.sections.filter(s=>s.lessonWithoutPlan).map(s=>s.lessonWithoutPlan.number));
+  let counter=0;
+  const nextNumber=()=>{counter++;while(reserved.has(counter))counter++;return counter;};
   for(const group of groups){
     const box=document.createElement("div");box.className="lesson-sort-group";
     const head=document.createElement("div");head.className="lesson-sort-head";head.draggable=true;
-    const first=visible+1;visible+=group.lessons.length;
-    head.textContent="⠿  "+(first===visible?first:first+"–"+visible)+" · "+group.section.navigation.title;
+    const numbers=group.lessons.map(()=>nextNumber());
+    const first=numbers[0],last=numbers[numbers.length-1];
+    head.textContent="⠿  "+(first===last?first:first+"–"+last)+" · "+group.section.navigation.title;
     head.title="Gesamten Unterrichtsblock ziehen";
     head.addEventListener("dragstart",e=>{e.dataTransfer.setData("application/x-course-group",group.section.id);e.dataTransfer.effectAllowed="move";});
     head.addEventListener("dragover",e=>{e.preventDefault();e.stopPropagation();head.classList.add("drag-over");});
@@ -647,7 +652,7 @@ function renderLessonOrder(){
     box.append(head);
     for(const lesson of group.lessons){
       const row=document.createElement("div");row.className="lesson-sort-item";row.draggable=true;
-      row.textContent="⋮⋮  "+(group.lessons.indexOf(lesson)+first)+". "+lesson.title;
+      row.textContent="⋮⋮  "+numbers[group.lessons.indexOf(lesson)]+". "+lesson.title;
       row.title="Innerhalb dieses Bereichs verschieben";
       row.addEventListener("dragstart",e=>{e.stopPropagation();e.dataTransfer.setData("application/x-course-lesson",lesson.id);});
       row.addEventListener("dragover",e=>{e.preventDefault();e.stopPropagation();row.classList.add("drag-over");});

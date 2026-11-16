@@ -49,6 +49,9 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 from markdown_it import MarkdownIt
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from course_model import lessons_without_plan, number_lessons  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://fachschaft-informatik-kst.github.io/ki-unterricht/"
 PHASES = ("Ankommen", "Vorwissen aktivieren", "Informieren", "Verarbeiten", "Auswerten")
@@ -189,8 +192,8 @@ def lessons_of(base: Path) -> list[dict]:
             plan = json.loads((base / "kursseiten" / section["id"] / "planung.json").read_text(encoding="utf-8"))
             lessons += plan.get("lessons", [])
     lessons.sort(key=lambda lesson: lesson.get("order", 0))
-    start = manifest.get("lessonNumberStart", 1)
-    return [{**lesson, "number": i + start} for i, lesson in enumerate(lessons)]
+    reserved = {p["number"] for p in lessons_without_plan(manifest["sections"])}
+    return number_lessons([dict(lesson) for lesson in lessons], reserved)
 
 
 def material_sources(base: Path, lessons: list[dict]) -> str:

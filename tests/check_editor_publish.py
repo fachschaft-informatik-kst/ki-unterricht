@@ -33,8 +33,9 @@ def verify_course(manifest_path):
     lessons = model["lessons"]
     assert lessons, manifest_path
     manifest = json.loads((ROOT / manifest_path).read_text(encoding="utf-8"))
-    start = manifest.get("lessonNumberStart", 1)
-    assert [lesson["number"] for lesson in lessons] == list(range(start, start + len(lessons)))
+    reserved = {slot["number"] for slot in model["placeholders"]}
+    expected = [n for n in range(1, len(lessons) + len(reserved) + 1) if n not in reserved][:len(lessons)]
+    assert [lesson["number"] for lesson in lessons] == expected
     assert len({lesson["id"] for lesson in lessons}) == len(lessons)
     teaching = {section["id"] for section in manifest["sections"] if section.get("teaching")}
     for view in teaching:
