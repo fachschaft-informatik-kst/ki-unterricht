@@ -11,15 +11,6 @@
       }
     },
     {
-      "id": "lernziele",
-      "class": "section",
-      "navigation": {
-        "order": 1,
-        "label": "◎",
-        "title": "Lernziele"
-      }
-    },
-    {
       "id": "projekt",
       "class": "hero",
       "navParent": "projekt",

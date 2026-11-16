@@ -4,7 +4,6 @@
   "originalManifest": "kursseiten/basis-manifest.json",
   "sections": [
     "basis-start",
-    "basis-lernziele",
     "basis-ki",
     "basis-lernen",
     "basis-neuron",

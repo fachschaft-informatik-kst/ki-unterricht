@@ -73,9 +73,8 @@ EDITS: dict[str, list[tuple[str, str]]] = {
          "**Abrufauftrag (Tandem, 2 Min., ohne Unterlagen):** Erklären Sie einander in zwei "
          "Sätzen, wer bei einem Schachprogramm und wer bei einem lernenden Bilderkenner festlegt, "
          "wie entschieden wird."),
-        ("**Antwortort:** [Fall «Schulweg» auf der Kursseite](index.html#einstieg-5). Einzelne "
-         "Gruppen teilen ihre Argumente nur sehr kurz; kein zusätzliches Präsentationsfenster.",
-         "**Antwortort:** [Fall «Schulweg» auf der Kursseite](index.html#einstieg-5)."),
+        (" Einzelne Gruppen teilen ihre Argumente nur sehr kurz; kein zusätzliches "
+         "Präsentationsfenster.", ""),
         ("Kein Wechsel zu weiteren Werkzeugen wie Akinator oder Filmempfehlungen.\n", ""),
         ("**Lehrperson:** Zeigt den Schritt im Neuron-Labor; die Klasse sagt vorher, was sich ändert.",
          "Die Lehrperson zeigt den Schritt im Neuron-Labor. Sagen Sie vorher, was sich ändert."),

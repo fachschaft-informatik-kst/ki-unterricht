@@ -56,9 +56,9 @@ a[href^="#glossar-"]:not(.nav a),a[href^="#basis-glossar-"]:not(.nav a){text-dec
 
 /* DL1 – dieselbe interaktive KI-Zeitleiste in beiden Klassen.
    Die Bilder bleiben bis zur Dialogöffnung in HTML-Templates verborgen. */
-.timeline .milestone-trigger{display:inline-flex;align-items:center;gap:7px;max-width:100%;border:0;border-radius:5px;background:transparent;padding:2px 4px 3px 0;color:var(--accent);font-size:inherit;line-height:1.4;font-weight:800;text-align:left;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:4px;cursor:pointer}
-.timeline .milestone-trigger:hover{text-decoration-style:solid;color:var(--ink)}
-.timeline .milestone-trigger:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.timeline .milestone-trigger,.timeline .milestone-link{display:inline-flex;align-items:center;gap:7px;max-width:100%;border:0;border-radius:5px;background:transparent;padding:2px 4px 3px 0;color:var(--accent);font-size:inherit;line-height:1.4;font-weight:800;text-align:left;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:4px;cursor:pointer}
+.timeline .milestone-trigger:hover,.timeline .milestone-link:hover{text-decoration-style:solid;color:var(--ink)}
+.timeline .milestone-trigger:focus-visible,.timeline .milestone-link:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .milestone-trigger-icon{font-size:.85em;opacity:.7}
 .milestone-dialog{box-sizing:border-box;position:fixed;inset:0;width:min(740px,calc(100vw - 26px));max-height:min(88vh,900px);overflow-y:auto;margin:auto;padding:30px 32px;border:1px solid var(--line);border-radius:18px;background:white;color:var(--ink);box-shadow:0 25px 65px #182b314d}
 .milestone-dialog::backdrop{background:#14242f99}

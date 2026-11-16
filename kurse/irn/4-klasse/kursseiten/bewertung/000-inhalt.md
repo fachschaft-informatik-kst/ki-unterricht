@@ -145,7 +145,6 @@ Die Endnote wird auf die nächste Viertelnote gerundet. 16 Punkte → 3,5 · 22 
   <output aria-live="polite" id="grade-result">Wählen Sie für jede Kompetenz 0–3 Punkte.</output>
   <p class="small">Der Rechner dient der persönlichen Selbsteinschätzung. Die gemeinsame Projektabgabe zählt für beide gleich (K1–K6, maximal 18 Punkte). Der gemeinsame Fremdcheck K11 ist unbenotet; nur die persönliche Reflexion K12 zählt mit 3 Punkten. Das vierminütige Einzelgespräch wird je Person separat bewertet (K7–K10, maximal 12 Punkte). Jede Person erhält daraus eine eigene Gesamtnote.</p>
 </div>
-<a class="btn" href="#lernziele">Zu den Lernzielen →</a>
 <details>
   <summary>Eigenes Projekt &amp; Einzelgespräche</summary>
   <div class="detail-body" id="abgabe">

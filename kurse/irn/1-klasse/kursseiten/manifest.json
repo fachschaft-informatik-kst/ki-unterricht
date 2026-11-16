@@ -13,15 +13,6 @@
       }
     },
     {
-      "id": "basis-lernziele",
-      "class": "section",
-      "navigation": {
-        "order": 1,
-        "label": "◎",
-        "title": "Lernziele"
-      }
-    },
-    {
       "id": "basis-ki",
       "class": "section",
       "navigation": {

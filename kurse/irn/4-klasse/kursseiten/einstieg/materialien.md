@@ -68,7 +68,7 @@ Der Input ist in zwei Blöcke geteilt. Block 1 (7 Min.): Regeln von Menschen ode
 
 **Abgrenzung:** Nicht jede Automatisierung ist KI; eine Ampel mit festem Zeitplan genügt nicht als KI-Beispiel. Schwache KI löst bestimmte Aufgaben. Starke KI bezeichnet hypothetische allgemeine Fähigkeiten; Bewusstsein ist keine notwendige Voraussetzung dieser Begriffsunterscheidung.
 
-**Grafiken und Zeitleiste für den kompakten Input:** [Regeln versus Daten](index.html#einstieg-1) · [Begriffskreise](index.html#einstieg-2) · [Kurskapitel mit Meilensteinen](index.html#einstieg).
+**Grafiken und Zeitleiste für den kompakten Input:** [Regeln versus Daten](index.html#einstieg-1) · [Meilensteine der KI-Geschichte](index.html#einstieg-2) · [Kategorien von KI](index.html#einstieg-3).
 
 **Tandemauftrag (zuerst ohne Unterlagen):** Ein Spamfilter wurde mit markierten E-Mails trainiert. Was sind seine Eingaben, und woher stammt seine Entscheidung? Ist schon belegt, dass er ein tiefes Netz verwendet?
 
@@ -80,7 +80,7 @@ Der Input ist in zwei Blöcke geteilt. Block 1 (7 Min.): Regeln von Menschen ode
 
 #### Arbeitsblatt · Neun Zuordnungen
 
-Tragen Sie zuerst selbst ein und kontrollieren Sie anschliessend mit den [interaktiven Aufgaben](index.html#einstieg-1).
+Tragen Sie zuerst selbst ein und kontrollieren Sie anschliessend mit den Grafiken auf der [Kursseite](index.html#einstieg).
 
 | Systembeschreibung | Feste Regeln oder Lernen aus Daten? |
 |---|---|
@@ -109,7 +109,7 @@ Die Lehrperson ordnet zuvor Asimovs fiktive Robotergesetze als Diskussionsmodell
 2. Vergleichen Sie im Tandem. Wo widersprechen sich Schutzansprüche?
 3. Halten Sie **zwei Argumente** fest. Wer soll «Schaden» definieren, und welche Information fehlt?
 
-**Antwortort:** [Fall «Schulweg» auf der Kursseite](index.html#einstieg-5). Einzelne Gruppen teilen ihre Argumente nur sehr kurz; kein zusätzliches Präsentationsfenster.
+**Antwortort:** Halten Sie die zwei Argumente auf dem Blatt fest. Einzelne Gruppen teilen ihre Argumente nur sehr kurz; kein zusätzliches Präsentationsfenster.
 
 ### Auswerten · 10 Min. · Leitfrage sichern
 
