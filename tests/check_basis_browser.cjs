@@ -226,6 +226,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-neuron details.kapitel').count(),7,'DL3 must reproduce all seven advanced neuron chapters');
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_biologisch.svg"]').count(),1);
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_entscheider.svg"]').count(),1);
+    assert.equal(await page.locator('#basis-neuron-4 img[src="grafiken/schwimmbad_lernschritt.svg"]').count(),1,'DL3 learning diagram must show the updated parameters');
+    assert.equal(await page.locator('#basis-neuron-4 figure.neuron-detail-figure').count(),1,'Detailed diagram supports readable sizing');
     assert((await page.locator('#basis-neuron-4').innerText()).includes('Lernrate'),'DL3 must explain the perceptron learning rule');
     assert.equal(await page.locator('#basis-neuron a[href*="portal/bok/1-klasse/basis_neuron.ipynb"]').count(),1);
     const neuronWeight=page.locator('[data-basis-answer="basis-neuron-sw_gs"]');
@@ -237,7 +239,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await activeSubmenus.count(),1,'Navigation should show one expanded lesson submenu');
     assert.equal(await page.locator('#basis-netze details.kapitel').count(),4,'DL4 must reproduce advanced XOR and network training without digit model');
     assert.equal(await page.locator('#basis-netze img[src="grafiken/xor_gerade.svg"]').count(),1);
-    assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),1);
+    assert.equal(await page.locator('#basis-netze-1 img[src="grafiken/schwimmbad_xor_einzelne_neuron.svg"]').count(),1,'DL4 must illustrate the single-neuron XOR mismatch');
+    assert.equal(await page.locator('#basis-netze-2 img[src="grafiken/schwimmbad_xor_netz.svg"]').count(),1,'DL4 must illustrate the hidden layer');
+    assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),0,'The old abstract network image is not part of DL4');
     assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/xor_einzelne_neuronen.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/basis_netze.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-netze a[href*="ziffernerkennung.ipynb"]').count(),0,'Digit classifier belongs to DL5 only');
