@@ -79,7 +79,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 7,
-              "text": "Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang (AND) ein."
+              "text": "Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang ein. Die Prüfung kommt am Ausgang als hemmende dritte Eingabe mit Gewicht −2 hinzu."
             },
             {
               "art": "Ergebnis",
@@ -103,7 +103,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 15,
-              "text": "Wählen Sie einen zusätzlichen XOR-Eingabefall und zeichnen Sie die Ausgaben der beiden Zwischenneuronen und des Ausgangsneurons Schritt für Schritt nach. Vergleichen Sie mit der Vorhersage des einzelnen Neurons."
+              "text": "Wählen Sie einen zusätzlichen XOR-Eingabefall und zeichnen Sie die Ausgaben der beiden Zwischenneuronen und des Ausgangsneurons Schritt für Schritt nach. Vergleichen Sie mit der Vorhersage des einzelnen Neurons. Rechnen Sie zusätzlich (S,F)=(1,0) bei Prüfung P=0 und P=1: Der Prüfungswert verändert die Ausgabe."
             },
             {
               "art": "Auftrag",
@@ -133,7 +133,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Sicherung (unbenotet, erst schreiben): Beantworten Sie auf der Kursseite zwei Fragen. Erstens: Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem (Ausgaben für (1,1))? Zweitens: Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto; welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort? Die Vorschaufrage zu den Testbildern darf geraten werden."
+              "text": "Sicherung (unbenotet, erst schreiben): Beantworten Sie auf der Kursseite zwei Fragen. Erstens: Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem (Ausgaben für (1,1))? Zweitens: Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto; welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort? Die Vorschaufrage zu den Testbildern darf geraten werden. Der Prüfungsfall P = 1 wird am Netzgrafik-Ausgang mit Gewicht −2 mitberücksichtigt."
             },
             {
               "art": "Auftrag",

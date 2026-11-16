@@ -73,7 +73,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 7,
-              "text": "Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang (AND) ein."
+              "text": "Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang ein. Die Prüfung kommt am Ausgang als hemmende dritte Eingabe mit Gewicht −2 hinzu."
             },
             {
               "art": "Ergebnis",
@@ -97,7 +97,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 15,
-              "text": "Wählen Sie einen zusätzlichen XOR-Eingabefall und zeichnen Sie die Ausgaben der beiden Zwischenneuronen und des Ausgangsneurons Schritt für Schritt nach. Vergleichen Sie mit der Vorhersage des einzelnen Neurons."
+              "text": "Wählen Sie einen zusätzlichen XOR-Eingabefall und zeichnen Sie die Ausgaben der beiden Zwischenneuronen und des Ausgangsneurons Schritt für Schritt nach. Vergleichen Sie mit der Vorhersage des einzelnen Neurons. Rechnen Sie zusätzlich (S,F)=(1,0) bei Prüfung P=0 und P=1: Der Prüfungswert verändert die Ausgabe."
             },
             {
               "art": "Auftrag",
@@ -127,7 +127,7 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Prüfen Sie gemeinsam die Erklärung für einen XOR-Fall und die Aufgaben von OR, NAND und AND im Netz."
+              "text": "Prüfen Sie gemeinsam die Erklärung für einen XOR-Fall und die Aufgaben von OR, NAND und AND im Netz. Der Prüfungsfall P = 1 wird am Netzgrafik-Ausgang mit Gewicht −2 mitberücksichtigt."
             },
             {
               "art": "Input",
