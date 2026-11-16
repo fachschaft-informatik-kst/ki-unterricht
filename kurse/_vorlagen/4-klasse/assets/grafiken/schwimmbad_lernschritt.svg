@@ -1,47 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="465" viewBox="0 0 1200 465" role="img" aria-labelledby="titel beschreibung">
-<title id="titel">Wie lernt das Schwimmbad-Neuron? Vorher, Lernen, Nachher.</title>
-<desc id="beschreibung">Die Situation ist immer dieselbe: Sonne ja, Freundinnen und Freunde nein, Prüfung nein. Die richtige Entscheidung ist Ja. Zuerst sagt das Neuron fälschlich Nein. Eine Lernkorrektur erhöht das Sonnengewicht von 0 auf 1 und den Bias von minus 1,5 auf minus 0,5. Danach sagt das Neuron Ja. Die Eingaben und die anderen Gewichte bleiben gleich.</desc>
-<rect x="0" y="0" width="1200" height="465" rx="18" fill="#f7fafb"/>
-<text x="38" y="45" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="26" fill="#1e343d">Wie lernt das Schwimmbad-Neuron?</text>
-<rect x="36" y="66" width="1128" height="55" rx="12" fill="#e8eff2"/>
-<g font-family="Arial,Helvetica,sans-serif" font-size="19" fill="#253a43">
- <text x="58" y="100">Sonne <tspan font-weight="700">1</tspan></text>
- <text x="250" y="100">Freund:innen <tspan font-weight="700">0</tspan></text>
- <text x="540" y="100">Prüfung <tspan font-weight="700">0</tspan></text>
- <text x="815" y="100" font-weight="700">Ziel: JA (1)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="730" viewBox="0 0 1200 730" font-family="Arial,Helvetica,sans-serif" role="img" aria-labelledby="title description">
+<title id="title">Schwimmbad-Neuron: derselbe Input vor und nach einem Lernschritt</title>
+<desc id="description">Links und rechts dasselbe künstliche Neuron mit Sonne 1, Freundinnen und Freunde 0 und Prüfung 0. Vorher sind die Gewichte 0, plus 2 und minus 4, der Bias minus 1,5, die Ausgabe Nein 0. Nach Korrektur bei Ziel Ja 1 und Lernrate 1 wird nur das Sonnengewicht auf plus 1 sowie der Bias auf minus 0,5 erhöht, wodurch die Ausgabe Ja 1 wird. Alle Eingaben und zwei Gewichte bleiben gleich.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#536b79"/></marker><marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#24826e"/></marker></defs>
+<rect width="1200" height="730" rx="18" fill="#f3f8fa"/>
+<text x="30" y="48" fill="#173f52" font-size="27" font-weight="800" text-anchor="start">Was lernt das Neuron? Ein Fehler verändert seine Verbindungen.</text>
+<rect x="30" y="63" width="1140" height="31" rx="10" fill="#e5eef3"/>
+<text x="600" y="85" fill="#213f4e" font-size="18" font-weight="700" text-anchor="middle">Gleiche Situation: Sonne 1 · Freund:innen 0 · Prüfung 0     |     richtiges Ziel: JA (1)</text>
+<g transform="translate(30 98)">
+<rect x="0" y="0" width="554" height="463" rx="18" fill="#ffffff" stroke="#c8d6de" stroke-width="2"/>
+<text x="25" y="39" fill="#153d51" font-size="23" font-weight="750" text-anchor="start">1   VOR DER KORREKTUR</text>
+<text x="27" y="78" fill="#4c6471" font-size="16" font-weight="600" text-anchor="start">Eingaben</text>
+<text x="235" y="78" fill="#4c6471" font-size="16" font-weight="600" text-anchor="start">Gewichte</text>
+<text x="358" y="78" fill="#4c6471" font-size="16" font-weight="600" text-anchor="start">Neuron</text>
+<text x="463" y="78" fill="#4c6471" font-size="16" font-weight="600" text-anchor="start">Ausgabe</text>
+<g fill="none" stroke-linecap="round" marker-end="url(#arrow)">
+ <path d="M203 148 L316 221" stroke="#bf6342" stroke-width="4"/>
+ <path d="M203 266 L312 266" stroke="#91a7b5" stroke-width="2.8"/>
+ <path d="M203 379 L315 305" stroke="#91a7b5" stroke-width="2.8"/>
+ <path d="M413 265 L450 265" stroke="#536b79" stroke-width="3"/>
 </g>
-<rect x="36" y="141" width="343" height="260" rx="15" fill="#fff" stroke="#ccd9de" stroke-width="2"/>
-<rect x="429" y="141" width="342" height="260" rx="15" fill="#fff" stroke="#ccd9de" stroke-width="2"/>
-<rect x="821" y="141" width="343" height="260" rx="15" fill="#fff" stroke="#ccd9de" stroke-width="2"/>
-<g font-family="Arial,Helvetica,sans-serif" fill="#1e343d">
- <text x="61" y="182" font-size="22" font-weight="700">1  Vorher</text>
- <text x="454" y="182" font-size="22" font-weight="700">2  Lernen</text>
- <text x="847" y="182" font-size="22" font-weight="700">3  Nachher</text>
+<g fill="#eaf2f7" stroke="#6289a7" stroke-width="2"><circle cx="56" cy="148" r="27"/><circle cx="56" cy="266" r="27"/><circle cx="56" cy="379" r="27"/></g>
+<text x="56" y="155" fill="#15485f" font-size="23" font-weight="800" text-anchor="middle">1</text><text x="56" y="273" fill="#15485f" font-size="23" font-weight="800" text-anchor="middle">0</text><text x="56" y="386" fill="#15485f" font-size="23" font-weight="800" text-anchor="middle">0</text>
+<text x="102" y="145" fill="#263e4a" font-size="19" font-weight="700" text-anchor="start">Sonne</text><text x="102" y="265" fill="#263e4a" font-size="18" font-weight="700" text-anchor="start">Freund:innen</text><text x="102" y="379" fill="#263e4a" font-size="19" font-weight="700" text-anchor="start">Prüfung</text>
+<rect x="232" y="165" width="73" height="31" rx="10" fill="#ffede5" stroke="#bf6342"/><text x="268.5" y="186" fill="#995333" font-size="16" font-weight="700" text-anchor="middle">w = 0</text>
+<rect x="236" y="250" width="72" height="31" rx="10" fill="#f5f8fa" stroke="#cedce3"/><text x="272" y="271" fill="#536b79" font-size="16" font-weight="700" text-anchor="middle">w = +2</text>
+<rect x="236" y="348" width="72" height="31" rx="10" fill="#f5f8fa" stroke="#cedce3"/><text x="272" y="369" fill="#536b79" font-size="16" font-weight="700" text-anchor="middle">w = −4</text>
+<circle cx="364" cy="265" r="50" fill="#e0f1e9" stroke="#428676" stroke-width="3"/>
+<text x="364" y="259" fill="#175c50" font-size="21" font-weight="750" text-anchor="middle">Σ + b</text>
+<text x="364" y="283" fill="#1b6756" font-size="17" font-weight="650" text-anchor="middle">= −1,5</text>
+<rect x="313" y="339" width="104" height="31" rx="10" fill="#ffede5" stroke="#bf6342"/><text x="365" y="360" fill="#995333" font-size="16" font-weight="700" text-anchor="middle">Bias −1,5</text>
+<rect x="452" y="229" width="85" height="74" rx="13" fill="#fde6e3" stroke="#d98c81" stroke-width="2"/>
+<text x="494" y="260" fill="#a54035" font-size="18" font-weight="800" text-anchor="middle">NEIN</text>
+<text x="494" y="284" fill="#a54035" font-size="17" font-weight="700" text-anchor="middle">y = 0</text>
+<rect x="24" y="418" width="505" height="32" rx="9" fill="#f3f7f9"/>
+<text x="276" y="439" fill="#2f4856" font-size="17" font-weight="600" text-anchor="middle">1×0 + 0×2 + 0×(−4) − 1,5 = −1,5</text>
 </g>
-<g font-family="Arial,Helvetica,sans-serif" font-size="19" fill="#344953">
- <text x="61" y="221">Sonnengewicht: <tspan font-weight="700">0</tspan></text>
- <text x="61" y="253">Bias: <tspan font-weight="700">−1,5</tspan></text>
- <text x="61" y="291">Summe: <tspan font-weight="700">−1,5</tspan></text>
- <text x="847" y="221">Sonnengewicht: <tspan font-weight="700">+1</tspan></text>
- <text x="847" y="253">Bias: <tspan font-weight="700">−0,5</tspan></text>
- <text x="847" y="291">Summe: <tspan font-weight="700">+0,5</tspan></text>
+<g transform="translate(615 98)">
+<rect x="0" y="0" width="554" height="463" rx="18" fill="#ffffff" stroke="#c8d6de" stroke-width="2"/>
+<text x="25" y="39" fill="#153d51" font-size="23" font-weight="750" text-anchor="start">2   NACH DER KORREKTUR</text>
+<text x="27" y="78" fill="#4c6471" font-size="16" font-weight="600" text-anchor="start">Eingaben</text>
+<text x="235" y="78" fill="#4c6471" font-size="16" font-weight="600" text-anchor="start">Gewichte</text>
+<text x="358" y="78" fill="#4c6471" font-size="16" font-weight="600" text-anchor="start">Neuron</text>
+<text x="463" y="78" fill="#4c6471" font-size="16" font-weight="600" text-anchor="start">Ausgabe</text>
+<g fill="none" stroke-linecap="round" marker-end="url(#arrow)">
+ <path d="M203 148 L316 221" stroke="#22816b" stroke-width="4"/>
+ <path d="M203 266 L312 266" stroke="#91a7b5" stroke-width="2.8"/>
+ <path d="M203 379 L315 305" stroke="#91a7b5" stroke-width="2.8"/>
+ <path d="M413 265 L450 265" stroke="#536b79" stroke-width="3"/>
 </g>
-<rect x="61" y="313" width="286" height="56" rx="12" fill="#fdebea" stroke="#d67b72"/>
-<rect x="847" y="313" width="287" height="56" rx="12" fill="#e6f5ef" stroke="#68a68b"/>
-<g font-family="Arial,Helvetica,sans-serif" text-anchor="middle" font-weight="700" font-size="22">
- <text x="204" y="348" fill="#a33f38">NEIN  ✕  falsch</text>
- <text x="990" y="348" fill="#246d54">JA  ✓  richtig</text>
+<g fill="#eaf2f7" stroke="#6289a7" stroke-width="2"><circle cx="56" cy="148" r="27"/><circle cx="56" cy="266" r="27"/><circle cx="56" cy="379" r="27"/></g>
+<text x="56" y="155" fill="#15485f" font-size="23" font-weight="800" text-anchor="middle">1</text><text x="56" y="273" fill="#15485f" font-size="23" font-weight="800" text-anchor="middle">0</text><text x="56" y="386" fill="#15485f" font-size="23" font-weight="800" text-anchor="middle">0</text>
+<text x="102" y="145" fill="#263e4a" font-size="19" font-weight="700" text-anchor="start">Sonne</text><text x="102" y="265" fill="#263e4a" font-size="18" font-weight="700" text-anchor="start">Freund:innen</text><text x="102" y="379" fill="#263e4a" font-size="19" font-weight="700" text-anchor="start">Prüfung</text>
+<rect x="232" y="165" width="73" height="31" rx="10" fill="#dff5ec" stroke="#22816b"/><text x="268.5" y="186" fill="#206b55" font-size="16" font-weight="700" text-anchor="middle">w = +1</text>
+<rect x="236" y="250" width="72" height="31" rx="10" fill="#f5f8fa" stroke="#cedce3"/><text x="272" y="271" fill="#536b79" font-size="16" font-weight="700" text-anchor="middle">w = +2</text>
+<rect x="236" y="348" width="72" height="31" rx="10" fill="#f5f8fa" stroke="#cedce3"/><text x="272" y="369" fill="#536b79" font-size="16" font-weight="700" text-anchor="middle">w = −4</text>
+<circle cx="364" cy="265" r="50" fill="#e0f1e9" stroke="#428676" stroke-width="3"/>
+<text x="364" y="259" fill="#175c50" font-size="21" font-weight="750" text-anchor="middle">Σ + b</text>
+<text x="364" y="283" fill="#1b6756" font-size="17" font-weight="650" text-anchor="middle">= +0,5</text>
+<rect x="313" y="339" width="104" height="31" rx="10" fill="#dff5ec" stroke="#22816b"/><text x="365" y="360" fill="#206b55" font-size="16" font-weight="700" text-anchor="middle">Bias −0,5</text>
+<rect x="452" y="229" width="85" height="74" rx="13" fill="#ddf4e9" stroke="#63a68b" stroke-width="2"/>
+<text x="494" y="260" fill="#206c56" font-size="18" font-weight="800" text-anchor="middle">JA</text>
+<text x="494" y="284" fill="#206c56" font-size="17" font-weight="700" text-anchor="middle">y = 1</text>
+<rect x="24" y="418" width="505" height="32" rx="9" fill="#f3f7f9"/>
+<text x="276" y="439" fill="#2f4856" font-size="17" font-weight="600" text-anchor="middle">1×1 + 0×2 + 0×(−4) − 0,5 = +0,5</text>
 </g>
-<g font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#344953">
- <text x="454" y="225">Ziel 1 − Ausgabe 0 = <tspan font-weight="700">+1</tspan></text>
- <text x="454" y="264" font-weight="700">Sonnengewicht</text>
- <text x="454" y="290">0 → +1</text>
- <text x="454" y="325" font-weight="700">Bias</text>
- <text x="454" y="351">−1,5 → −0,5</text>
-</g>
-<g fill="none" stroke="#7195a2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-<path d="M386 278 h29 m-11 -11 11 11 -11 11"/>
-<path d="M778 278 h29 m-11 -11 11 11 -11 11"/>
-</g>
-<text x="38" y="440" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#415963">Gleiche Eingaben, andere Parameter. Lernrate: 1. Die anderen Gewichte bleiben unverändert.</text>
+<path d="M589 321 h19" stroke="#24826e" stroke-width="4" marker-end="url(#arrowGreen)"/>
+<rect x="30" y="578" width="1140" height="115" rx="17" fill="#e5f2ed" stroke="#9dc8b6"/>
+<text x="54" y="610" fill="#185943" font-size="20" font-weight="800" text-anchor="start">KORREKTUR  ·  Ziel 1 − Ausgabe 0 = +1  ·  Lernrate η = 1</text>
+<rect x="54" y="623" width="270" height="31" rx="10" fill="#ffffff" stroke="#67ad90"/><text x="189" y="644" fill="#185943" font-size="18" font-weight="700" text-anchor="middle">Sonne aktiv: w 0 → +1</text>
+<rect x="339" y="623" width="265" height="31" rx="10" fill="#ffffff" stroke="#67ad90"/><text x="471.5" y="644" fill="#185943" font-size="18" font-weight="700" text-anchor="middle">Bias: −1,5 → −0,5</text>
+<rect x="619" y="623" width="520" height="31" rx="10" fill="#ffffff" stroke="#b6cdd6"/><text x="879" y="644" fill="#456070" font-size="16" font-weight="700" text-anchor="middle">Freund:innen und Prüfung sind 0: Gewichte bleiben gleich</text>
+<text x="600" y="714" fill="#476675" font-size="17" font-weight="500" text-anchor="middle">Unverändert: die drei Eingaben, das Addieren und die Schwelle bei 0.</text>
 </svg>

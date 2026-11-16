@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="695" viewBox="0 0 1200 695" font-family="Arial,Helvetica,sans-serif" role="img" aria-labelledby="title description">
+<title id="title">Schwimmbad-XOR mit zwei Neuronen in der versteckten Schicht</title>
+<desc id="description">Eingaben Sonne 1 und Freundinnen und Freunde 0 gehen gleichzeitig an zwei versteckte Neuronen OR und NAND. OR rechnet mit Gewichten 1 und 1, Bias minus 0,5 und gibt 1 aus. NAND rechnet mit Gewichten minus 1 und minus 1, Bias plus 1,5 und gibt 1 aus. Das Ausgabeneuron AND mit Gewichten 1 und 1, Bias minus 1,5 gibt 1 aus. So ergibt sich genau die künstliche XOR-Schwimmbadregel.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#536b79"/></marker><marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#24826e"/></marker></defs>
+<rect width="1200" height="695" rx="18" fill="#f3f8fa"/>
+<text x="30" y="47" fill="#173f52" font-size="27" font-weight="800" text-anchor="start">Aus einem Schwimmbad-Neuron wird ein Netz mit Hidden Layer</text>
+<rect x="25" y="65" width="1150" height="39" rx="11" fill="#e6eef4"/>
+<text x="600" y="91" fill="#234657" font-size="18" font-weight="700" text-anchor="middle">Beispiel: Sonne S = 1 · Freund:innen F = 0 · Prüfung P = 0  →  XOR-Ziel: JA (1)</text>
+<rect x="24" y="121" width="247" height="416" rx="17" fill="#ffffff" stroke="#d1dee5"/>
+<rect x="287" y="121" width="470" height="416" rx="17" fill="#ffffff" stroke="#d1dee5"/>
+<rect x="773" y="121" width="402" height="416" rx="17" fill="#ffffff" stroke="#d1dee5"/>
+<text x="48" y="159" fill="#244e67" font-size="21" font-weight="800" text-anchor="start">Eingabeschicht</text>
+<text x="522" y="159" fill="#244e67" font-size="21" font-weight="800" text-anchor="middle">Versteckte Schicht (Hidden Layer)</text>
+<text x="973" y="159" fill="#244e67" font-size="21" font-weight="800" text-anchor="middle">Ausgabeschicht</text>
+<g stroke="#7292a4" stroke-width="2.8" fill="none" marker-end="url(#arrow)" stroke-linecap="round">
+<path d="M208 265 L467 265"/>
+<path d="M208 422 L470 292"/>
+<path d="M208 265 L470 397"/>
+<path d="M208 422 L467 422"/>
+<path d="M570 266 L875 324"/>
+<path d="M570 421 L875 348"/>
+<path d="M970 336 L1040 336"/>
+</g>
+<g fill="#eaf2f8" stroke="#6289a7" stroke-width="2"><circle cx="91" cy="265" r="35"/><circle cx="91" cy="422" r="35"/></g>
+<text x="91" y="273" fill="#184c68" font-size="25" font-weight="800" text-anchor="middle">1</text><text x="91" y="430" fill="#184c68" font-size="25" font-weight="800" text-anchor="middle">0</text>
+<text x="140" y="260" fill="#263e4a" font-size="20" font-weight="750" text-anchor="start">Sonne</text><text x="140" y="422" fill="#263e4a" font-size="18" font-weight="750" text-anchor="start">Freund:innen</text>
+<rect x="314" y="219" width="80" height="31" rx="10" fill="#ffffff" stroke="#abc5d2"/><text x="354" y="240" fill="#365c6d" font-size="16" font-weight="700" text-anchor="middle">+1 (S)</text>
+<rect x="314" y="313" width="80" height="31" rx="10" fill="#ffffff" stroke="#abc5d2"/><text x="354" y="334" fill="#365c6d" font-size="16" font-weight="700" text-anchor="middle">+1 (F)</text>
+<rect x="314" y="373" width="80" height="31" rx="10" fill="#ffffff" stroke="#abc5d2"/><text x="354" y="394" fill="#365c6d" font-size="16" font-weight="700" text-anchor="middle">−1 (S)</text>
+<rect x="314" y="447" width="80" height="31" rx="10" fill="#ffffff" stroke="#abc5d2"/><text x="354" y="468" fill="#365c6d" font-size="16" font-weight="700" text-anchor="middle">−1 (F)</text>
+<circle cx="522" cy="266" r="51" fill="#fff0da" stroke="#cf9141" stroke-width="3"/>
+<circle cx="522" cy="421" r="51" fill="#fff0da" stroke="#cf9141" stroke-width="3"/>
+<text x="522" y="262" fill="#805323" font-size="23" font-weight="800" text-anchor="middle">OR</text><text x="522" y="285" fill="#805323" font-size="18" font-weight="700" text-anchor="middle">y₁ = 1</text>
+<text x="522" y="416" fill="#805323" font-size="21" font-weight="800" text-anchor="middle">NAND</text><text x="522" y="439" fill="#805323" font-size="18" font-weight="700" text-anchor="middle">y₂ = 1</text>
+<rect x="467" y="331" width="110" height="31" rx="10" fill="#fffaf1" stroke="#d8b275"/><text x="522" y="352" fill="#865924" font-size="17" font-weight="700" text-anchor="middle">b = −0,5</text>
+<rect x="467" y="485" width="110" height="31" rx="10" fill="#fffaf1" stroke="#d8b275"/><text x="522" y="506" fill="#865924" font-size="17" font-weight="700" text-anchor="middle">b = +1,5</text>
+<rect x="705" y="272" width="80" height="31" rx="10" fill="#ffffff" stroke="#abc5d2"/><text x="745" y="293" fill="#365c6d" font-size="16" font-weight="700" text-anchor="middle">+1 (y₁)</text>
+<rect x="705" y="393" width="80" height="31" rx="10" fill="#ffffff" stroke="#abc5d2"/><text x="745" y="414" fill="#365c6d" font-size="16" font-weight="700" text-anchor="middle">+1 (y₂)</text>
+<circle cx="924" cy="336" r="52" fill="#e0f2e9" stroke="#3f9b77" stroke-width="3"/>
+<text x="924" y="330" fill="#1d674f" font-size="23" font-weight="800" text-anchor="middle">AND</text><text x="924" y="355" fill="#1d674f" font-size="18" font-weight="700" text-anchor="middle">y = 1</text>
+<rect x="865" y="412" width="118" height="31" rx="10" fill="#edf7f2" stroke="#95c5aa"/><text x="924" y="433" fill="#24674e" font-size="17" font-weight="700" text-anchor="middle">b = −1,5</text>
+<rect x="1042" y="294" width="120" height="85" rx="13" fill="#def4e9" stroke="#62a98c" stroke-width="2"/>
+<text x="1102" y="328" fill="#246b52" font-size="24" font-weight="800" text-anchor="middle">JA</text><text x="1102" y="356" fill="#246b52" font-size="22" font-weight="750" text-anchor="middle">1</text>
+<rect x="25" y="556" width="1150" height="102" rx="16" fill="#ffffff" stroke="#d1dee5"/>
+<text x="52" y="588" fill="#244e67" font-size="19" font-weight="800" text-anchor="start">Rechnung an den drei Neuronen</text>
+<text x="52" y="621" fill="#805323" font-size="17" font-weight="700" text-anchor="start">OR: 1×1 + 0×1 − 0,5 = +0,5 → 1</text>
+<text x="438" y="621" fill="#805323" font-size="17" font-weight="700" text-anchor="start">NAND: 1×(−1) + 0×(−1) + 1,5 = +0,5 → 1</text>
+<text x="908" y="621" fill="#246b52" font-size="16" font-weight="700" text-anchor="start">AND: 1+1−1,5</text>
+<text x="908" y="642" fill="#246b52" font-size="16" font-weight="700" text-anchor="start">= +0,5 → 1</text>
+<text x="600" y="683" fill="#405e6c" font-size="18" font-weight="600" text-anchor="middle">Zwei Zwischenentscheidungen (OR und NAND) ermöglichen zusammen die neue XOR-Regel.</text>
+</svg>
