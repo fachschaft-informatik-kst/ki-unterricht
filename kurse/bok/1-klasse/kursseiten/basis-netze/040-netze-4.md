@@ -5,7 +5,7 @@
   <div class="kapitel-body">
     <label class="field answer"><span>Warum kann ein einzelnes Neuron XOR nicht lösen und wie hilft die Zwischenschicht?</span><textarea data-basis-answer="basis-netze-netze" maxlength="10000" placeholder="Ihre Beobachtung …" rows="3"></textarea></label>
     <!-- MD:START -->
-**Sicherung (einzeln):** Erklären Sie die Ausgaben der beiden Zwischenneuronen OR und NAND und des Ausgangsneurons AND für die Eingabe `(1,1)`. Prüfen Sie Ihre Rechnung an der Netzgrafik in Kapitel 2. In Doppellektion 5 untersucht ihr erstmals das Ziffernerkennungsmodell.
+**Sicherung (einzeln):** Erklären Sie die Ausgaben von OR, NAND und dem Ausgabeneuron für `(S, F, P) = (1,1,0)` und vergleichen Sie mit `(1,0,1)`. Prüfen Sie Ihre Rechnung an der Netzgrafik in Kapitel 2. In Doppellektion 5 untersucht ihr erstmals das Ziffernerkennungsmodell.
 <!-- MD:END -->
   </div>
 </details>

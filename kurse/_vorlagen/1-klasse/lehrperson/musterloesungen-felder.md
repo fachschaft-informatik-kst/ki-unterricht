@@ -93,13 +93,13 @@
 |---|---|
 | `basis-netze-hand_xor_max` | Höchstens 3 von 4 korrekt; ein einzelnes Neuron hat nur eine lineare Entscheidungsgrenze. |
 | `basis-netze-xor_warum` | Bei XOR sind (0,1) und (1,0) positiv, aber (0,0) und (1,1) negativ. Eine Gerade kann das nicht trennen. Andere Lernraten ändern daran nichts. |
-| `basis-netze-netze_zwischenschicht` | (1,0) → ODER 1, NAND 1 → UND 1. Zwei Zwischenmerkmale zusammen erlauben die XOR-Entscheidung. |
+| `basis-netze-netze_zwischenschicht` | (S,F)=(1,0) → OR 1, NAND 1. P=0: 1+1−0−1,5=+0,5 → Ja; P=1: 1+1−2−1,5=−1,5 → Nein. Die Zwischenschicht berechnet XOR, der Prüfungseingang hemmt die Ausgabe. |
 | `basis-netze-xornetz_1` | Beispiel: 3 richtige Zeilen (Notebookwert ersetzen). |
 | `basis-netze-xornetz_2` | Beispiel: 4 richtige Zeilen (Notebookwert ersetzen). |
 | `basis-netze-xornetz_4` | Beispiel: 4 richtige Zeilen (Notebookwert ersetzen). |
 | `basis-netze-xornetz_start` | Nein, Startwerte können das Ergebnis verändern. |
 | `basis-netze-xornetz_beob` | Bei einem Beispielstart gelangen 2 versteckte Neuronen zu 4/4. Ein anderer Start kann scheitern; tatsächlichen Lauf dokumentieren. |
-| `basis-netze-netze` | Ein einzelnes Neuron trennt nur linear. Die Zwischenschicht kombiniert Teilentscheidungen (z. B. ODER und NAND) zu XOR. |
+| `basis-netze-netze` | Ein einzelnes Neuron trennt die XOR-Fälle bei P=0 nicht linear. Die Zwischenschicht kombiniert OR und NAND zu XOR; der Eingang P mit Gewicht −2 kann am Ausgang die Ja-Entscheidung verhindern. |
 
 ## DL 5–8 · Ziffern, Transfer, Fotoklassen und Gespräch
 

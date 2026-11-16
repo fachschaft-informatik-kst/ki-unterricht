@@ -6,7 +6,7 @@
     <!-- MD:START -->
 **Sicherung (einzeln, unbenotet, ca. 5 Minuten):** Schreiben Sie zuerst, vergleichen Sie danach mit der Selbstkontrolle. Zwei Fragen genügen; die Vorschaufrage unten dürfen Sie raten. Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.
 <!-- MD:END -->
-    <label class="field answer"><span>1 · Netz: Warum kann ein einzelnes Neuron XOR nicht lösen, und wie hilft die Zwischenschicht? Erklären Sie dazu die Ausgaben von OR, NAND und AND für die Eingabe (1,1). Prüfen Sie Ihre Rechnung an der Netzgrafik in Kapitel 2.</span><textarea data-answer="netze" maxlength="10000" placeholder="Ein einzelnes Neuron kann XOR nicht lösen, weil … Für (1,1) liefert OR …, NAND … und AND …" rows="4"></textarea></label>
+    <label class="field answer"><span>1 · Netz: Warum kann ein einzelnes Neuron XOR nicht lösen, und wie hilft die Zwischenschicht? Erklären Sie dazu die Ausgaben von OR, NAND und AND für die Eingabe (S, F, P) = (1,1,0) und vergleichen Sie mit (1,0,1). Prüfen Sie Ihre Rechnung an der Netzgrafik in Kapitel 2.</span><textarea data-answer="netze" maxlength="10000" placeholder="Ein einzelnes Neuron kann XOR nicht lösen, weil … Für (1,1) liefert OR …, NAND … und AND …" rows="4"></textarea></label>
     <div class="callout" id="netze-bruecke">
       <!-- MD:START -->
 **Ausblick auf das Bildprojekt:** Dort arbeitet ein Netz wie dieses, aber mit 1280 statt 2 Eingaben. Die Zahlen liefert MobileNet, ein fertiges Netz, das unverändert bleibt. Nur das kleine Netz dahinter lernt Ihre zwei Klassen, nach denselben Schritten wie hier: vorhersagen, Fehler bewerten (gegen das Label), Gewichte anpassen. Es ist wieder **überwachtes Lernen**: Ihre zwei Klassen sind die Labels. [Wer weiss was? →](#projekt-wer-weiss-was)
@@ -41,7 +41,7 @@
         <summary>Selbstkontrolle und Hilfe</summary>
         <div class="detail-body">
           <!-- MD:START -->
-**Zur Frage «Netz» oben:** Ein einzelnes Neuron hat nur eine gerade Grenze, die vier XOR-Fälle liegen aber diagonal. Die Zwischenschicht bildet zuerst OR und NAND, der Ausgang verbindet beide mit AND. Für (1,1): OR = 1, NAND = 0, AND(1, 0) = 0, also XOR = 0.
+**Zur Frage «Netz» oben:** Ein einzelnes Neuron hat nur eine gerade Grenze, die vier XOR-Fälle liegen aber diagonal. Die Zwischenschicht bildet zuerst OR und NAND, der Ausgang verbindet beide mit AND. Für (S,F,P)=(1,1,0): OR=1, NAND=0; der Ausgang berechnet 1+0−0−1,5=−0,5 → Nein. Für (1,0,1): OR=1, NAND=1; wegen Prüfung berechnet der Ausgang 1+1−2−1,5=−1,5 → ebenfalls Nein. Ohne Prüfung wäre (1,0,0) → Ja.
 
 1. **Brücke:** Fest bleibt MobileNet, es liefert die 1280 Zahlen. Es lernt nur das kleine Netz dahinter: seine Gewichte und sein Bias. Eingaben und Ausgabeklassen ändern sich beim Lernen nicht. Die richtige Antwort steckt im Label: In Ihrem Projekt ist es die Klasse, die Sie jedem Foto geben (überwachtes Lernen, wie bei den XOR-Zielwerten).
 2. **Vorschau:** Mögliche Antwort: Bilder für den unabhängigen Test müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten mehr und der Test sagt nichts über neue Fotos aus. Das wird in DL 5 genau geklärt; hier darf man raten.
