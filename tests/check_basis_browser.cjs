@@ -355,6 +355,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
         const mobile=figure.locator('img.neuron-graphic-mobile');
         const desktop=figure.locator('img.neuron-graphic-desktop');
         assert(await mobile.isVisible(),selector+' must show the mobile illustration');
+        // Lazy-loading images below the fold load only after scrolling into view.
+        await mobile.scrollIntoViewIfNeeded();
+        await mobile.evaluate(img=>img.decode());
         assert.equal(await desktop.isVisible(),false,selector+' must hide desktop SVG');
         const dimensions=await mobile.evaluate(img=>{
           const r=img.getBoundingClientRect();
