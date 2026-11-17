@@ -27,26 +27,12 @@
       "navigation": {
         "order": 2,
         "label": "01",
-        "title": "Was ist KI?"
+        "title": "Was ist KI und wie lernt sie?"
       },
       "teaching": true,
       "overview": {
-        "title": "Was ist KI?",
-        "summary": "Begriffe ordnen · Beispiele prüfen"
-      }
-    },
-    {
-      "id": "basis-lernen",
-      "class": "section",
-      "navigation": {
-        "order": 3,
-        "label": "02",
-        "title": "Wie lernt KI?"
-      },
-      "teaching": true,
-      "overview": {
-        "title": "Wie lernt KI?",
-        "summary": "Memory · NIM · drei Lernarten"
+        "title": "Was ist KI und wie lernt sie?",
+        "summary": "KI einordnen · Lernen mit Labels"
       }
     },
     {
@@ -55,11 +41,11 @@
       "teaching": true,
       "overview": {
         "title": "Ein Neuron",
-        "summary": "Gewichte · Bias · Grenzen"
+        "summary": "Gewichte · Bias · Lernen"
       },
       "navigation": {
-        "order": 4,
-        "label": "03",
+        "order": 3,
+        "label": "02",
         "title": "Ein Neuron"
       }
     },
@@ -69,11 +55,11 @@
       "teaching": true,
       "overview": {
         "title": "Neuronale Netze",
-        "summary": "Zwischenschichten · Daten aufteilen"
+        "summary": "XOR · Zwischenschicht · Schwimmbad"
       },
       "navigation": {
-        "order": 5,
-        "label": "04",
+        "order": 4,
+        "label": "03",
         "title": "Neuronale Netze"
       }
     },
@@ -81,70 +67,56 @@
       "id": "basis-daten",
       "class": "section",
       "navigation": {
-        "order": 6,
-        "label": "05",
-        "title": "Ziffern und Buchstaben"
+        "order": 5,
+        "label": "04",
+        "title": "Bildprojekt vorbereiten"
       },
       "teaching": true,
       "overview": {
-        "title": "Ziffern und Buchstaben",
-        "summary": "Ziffernnetz · Ausgabeklassen · Grenzen"
-      }
-    },
-    {
-      "id": "basis-plan",
-      "class": "section",
-      "navigation": {
-        "order": 7,
-        "label": "06",
-        "title": "Buchstaben lernen"
-      },
-      "teaching": true,
-      "overview": {
-        "title": "Buchstaben lernen",
-        "summary": "Neuer A/B-Kopf · Transfer Learning"
+        "title": "Bildprojekt vorbereiten",
+        "summary": "Ziffernnetz · Datenregeln · Datenplan"
       }
     },
     {
       "id": "basis-training",
       "class": "section",
       "navigation": {
-        "order": 8,
-        "label": "07",
-        "title": "Eigene Bildklassen"
+        "order": 6,
+        "label": "05",
+        "title": "Bildmodelle vergleichen"
       },
       "teaching": true,
       "overview": {
-        "title": "Eigene Fotoklassen",
-        "summary": "Fotostudio · MobileNet · Vergleich A/B"
+        "title": "Bildmodelle vergleichen",
+        "summary": "MobileNet · A/B · unabhängiger Test"
       }
     },
     {
       "id": "basis-abschluss",
       "class": "section",
       "navigation": {
-        "order": 9,
-        "label": "08",
-        "title": "Projektabschluss und Fachgespräche"
+        "order": 7,
+        "label": "06",
+        "title": "Fachgespräch & Fremdmodell"
       },
       "teaching": true,
       "overview": {
-        "title": "Projektabschluss und Fachgespräche",
-        "summary": "Individuell erklären · benoteter Nachweis"
+        "title": "Fachgespräch & Fremdmodell",
+        "summary": "Ergebnisse erklären · fremdes Modell prüfen"
       }
     },
     {
       "id": "basis-sprache",
       "class": "section",
       "navigation": {
-        "order": 10,
-        "label": "09",
+        "order": 8,
+        "label": "07",
         "title": "Sprachmodelle"
       },
       "teaching": true,
       "overview": {
         "title": "Sprachmodelle",
-        "summary": "Kontext · Tokens · Faktenprüfung"
+        "summary": "Kontext · Vorhersage · Faktenprüfung"
       }
     },
     {
@@ -153,11 +125,11 @@
       "teaching": true,
       "overview": {
         "title": "KI und Gesellschaft",
-        "summary": "Folgen · Fairness · begründetes Urteil"
+        "summary": "Folgen · Fairness · Verantwortung"
       },
       "navigation": {
-        "order": 11,
-        "label": "10",
+        "order": 9,
+        "label": "08",
         "title": "KI und Gesellschaft"
       }
     },
@@ -165,7 +137,7 @@
       "id": "basis-glossar",
       "class": "section",
       "navigation": {
-        "order": 12,
+        "order": 10,
         "label": "A–Z",
         "title": "Glossar"
       }
