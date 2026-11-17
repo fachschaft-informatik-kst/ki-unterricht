@@ -78,7 +78,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.title(),expectedTitle);
     await page.goto('http://127.0.0.1:8770/bok/1-klasse/');
     assert.equal(await page.title(),expectedTitle);
-    assert.equal(await page.locator('main > section').count(),13);
+    assert.equal(await page.locator('main > section').count(),15,'Ten lessons plus glossary, overview, journal and backup');
     // Shared KST breadcrumb; track switching happens only via the landing page.
     const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
     assert(!await page.locator('a[href="../projekt/"]').count(),'No direct link to 4th-year course');
@@ -104,8 +104,18 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/teacher/bok/1-klasse/planung"]').count());
     assert.equal((await page.request.get('http://127.0.0.1:8770/bok/1-klasse/materialien.html')).status(),404);
     assert.equal(await page.locator('footer.footer a[href="https://kst-ki-admin.kevin-bohn.workers.dev/"]').count(),1,'Footer must link directly to authenticated editor');
+    const utilityLinks=await page.locator('.sidebar-bottom > a').allTextContents();
+    assert.deepEqual(utilityLinks,['Kursauswahl','✎ Unser Journal','Notizen & Projekt'],
+      'Sidebar footer uses the same three destinations as the fourth-year course');
+    assert.equal(await page.locator('#basis-sicherung').isVisible(),false,
+      'Backup must not clutter other lesson views');
+    await page.locator('.sidebar-bottom a[href="#basis-journal"]').click();
+    await page.locator('#basis-journal').waitFor({state:'visible'});
+    assert.equal(await page.locator('#basis-sicherung').isVisible(),false);
+    assert.equal(await page.locator('[data-basis-answer="basis-journal-namen"]').count(),1);
     await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
     await page.locator('#basis-sicherung').waitFor({state:'visible'});
+    assert.equal(await page.locator('#basis-journal').isVisible(),false);
     assert(await page.locator('#basis-sicherung #basis-backup-controls button').count());
     const advanced=await browser.newPage();
     await advanced.goto('http://127.0.0.1:8770/bok/4-klasse/');
@@ -301,10 +311,13 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.reload();
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await note.fill('Gesicherte Reflexion im ZIP.');
+     await page.locator('.sidebar-bottom a[href="#basis-journal"]').click();
      await page.locator('[data-basis-answer="basis-journal-namen"]').fill('Ada Beispiel');
      await page.locator('[data-basis-answer="basis-journal-klasse"]').fill('1b');
+     await page.locator('.nav > a[href="#basis-ki"]').click();
      const timelineAnswer=page.locator('[data-basis-answer="ki_zeitstrahl"]');
      await timelineAnswer.fill('Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
+     await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
     const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
     await page.locator('input[aria-label="Fotostudio-JSON zur ZIP-Sicherung hinzufügen"]').setInputFiles({name:'fotos.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(studio))});
     assert.equal(await page.locator('#basis-download').isVisible(),true,'Simple JSON answer backup must be visible');
@@ -318,8 +331,10 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(answerData.schema,'kst-ki-basis-v1');
     assert.equal(answerData.answers['ki_zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(answerData.answers['sw_treffer'],'7','Select answers must be included');
+    await page.locator('.nav > a[href="#basis-ki"]').click();
     await note.fill('Wird durch Antwortdatei ersetzt');
     await timelineAnswer.fill('Noch nicht importiert');
+    await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
     page.once('dialog',dialog=>dialog.accept());
     await page.locator('#basis-import').setInputFiles(answerPath);
     await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Antworten wiederhergestellt'));
@@ -343,7 +358,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
      assert(reflections.includes('Entdeckerfrage zum Zeitstrahl')&&reflections.includes('Gesicherte Reflexion im ZIP.'));
      assert.equal(JSON.parse(await files.get('kursstand.json').text()).answers['ki_zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(JSON.parse(await files.get('notebooks/basis_neuron.ipynb').text()).cells[0].source[0],'print("Mein Versuch")');
+    await page.locator('.nav > a[href="#basis-ki"]').click();
     await note.fill('Wird beim Import ersetzt');
+    await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
     const restoredPhoto=page.waitForEvent('download');
     page.once('dialog',dialog=>dialog.accept());
     await page.locator('input[aria-label="ZIP-Kursstand wiederherstellen"]').setInputFiles(archivePath);
@@ -354,6 +371,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // ZIP export/import must remain accessible when the navigation becomes mobile.
     const mobilePage=await browser.newPage({viewport:{width:390,height:840}});
     await mobilePage.goto('http://127.0.0.1:8770/bok/1-klasse/');
+    assert.equal(await mobilePage.locator('#basis-sicherung').isVisible(),false,
+      'Mobile lessons must also stay focused');
+    await mobilePage.locator('.basis-mobile-links a[href="#basis-sicherung"]').click();
     assert(await mobilePage.locator('#basis-sicherung #basis-backup-controls button').isVisible(),
       'Mobile devices must expose the full ZIP backup controls outside the hidden sidebar');
     // Every DL3/DL4 network illustration must use the legible mobile SVG,
