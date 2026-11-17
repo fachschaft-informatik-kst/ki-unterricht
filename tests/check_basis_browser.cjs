@@ -78,7 +78,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.title(),expectedTitle);
     await page.goto('http://127.0.0.1:8770/bok/1-klasse/');
     assert.equal(await page.title(),expectedTitle);
-    assert.equal(await page.locator('main > section').count(),15,'Ten lessons plus glossary, overview, journal and backup');
+    assert.equal(await page.locator('main > section').count(),13,'Eight lessons plus glossary, overview, journal and backup');
     // Shared KST breadcrumb; track switching happens only via the landing page.
     const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
     assert(!await page.locator('a[href="../projekt/"]').count(),'No direct link to 4th-year course');
@@ -140,24 +140,25 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-lernziele .card').count(),8,'Separate DL3 and DL4 learning objectives');
     // Keep all double-lesson links visible, but expand one chapter list only.
     const activeSubmenus=page.locator('.nav-sub:not([hidden])');
-    assert.equal(await page.locator('.nav > a').count(),13);
+    assert.equal(await page.locator('.nav > a').count(),11);
     assert.equal(await activeSubmenus.count(),0,'Overview must not expand lesson chapters');
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await activeSubmenus.first().waitFor({state:'visible'});
     assert.equal(await activeSubmenus.count(),1);
-    assert.equal(await activeSubmenus.locator('a').count(),6,'Only lesson one chapters should expand');
+    assert.equal(await activeSubmenus.locator('a').count(),7,'DL1 has the preserved introductions and a compact learning-types chapter');
     assert.equal(await page.locator('.nav > a[href="#basis-ki"]').getAttribute('aria-expanded'),'true');
-    assert.equal(await page.locator('.nav > a[href="#basis-lernen"]').getAttribute('aria-expanded'),'false');
+    assert.equal(await page.locator('.nav > a[href="#basis-neuron"]').getAttribute('aria-expanded'),'false');
     // Deep link: selecting a chapter opens its parent lesson and the detail.
     await page.locator('.nav-sub:not([hidden]) a[href="#einstieg-3"]').click();
     assert.equal(await activeSubmenus.count(),1);
     assert.equal(await page.locator('#einstieg-3').evaluate(el=>el.open),true);
     await page.locator('.nav > a[href="#basis-ki"]').click();
     const note=page.locator('[data-basis-answer="regeln_oder_daten"]');
-    assert.equal(await page.locator('#basis-ki details.kapitel').count(),6,'Retained original introductory chapters');
+    assert.equal(await page.locator('#basis-ki details.kapitel').count(),7,'Existing KI chapters plus compact learning-types chapter');
+    assert.equal(await page.locator('#basis-ki #basis-lernen [data-answer="dl1_lernarten_kompakt"]').count(),1,'Labels are now covered within DL1');
 
     // Glossary access mirrors the advanced course on every first-year DL start.
-    for(const topic of ['basis-ki','basis-lernen','basis-neuron','basis-netze','basis-daten','basis-plan','basis-training','basis-abschluss','basis-sprache','basis-gesellschaft'])
+    for(const topic of ['basis-ki','basis-neuron','basis-netze','basis-daten','basis-training','basis-abschluss','basis-sprache','basis-gesellschaft'])
       assert(await page.locator('#'+topic+' .glossary-related a[href^="#basis-glossar-"]').count(),topic+' glossary links');
     assert.equal(await page.locator('#basis-ki #einstieg-3 .milestone-trigger').count(),9);
 
@@ -223,14 +224,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.locator('.nav > a[href="#basis-ki"]').click();
     assert.equal(await page.locator('#basis-ki [data-ki-sort-card="automat"] select').inputValue(),'regeln','Basis drag answer is saved');
     assert.equal(await page.locator('#basis-ki [data-ki-sort-card="spam"] select').inputValue(),'ml','Basis select answer is saved');
-    await page.locator('.nav > a[href="#basis-lernen"]').click();
-    await page.waitForFunction(()=>document.querySelector('.nav > a[href="#basis-lernen"]')?.getAttribute('aria-expanded')==='true');
-    assert.equal(await activeSubmenus.count(),1);
-    assert.equal(await activeSubmenus.locator('a').count(),9);
-    assert.equal(await activeSubmenus.locator('a[href^="#einstieg-"]').count(),0,'Previous lesson submenu must collapse');
-    assert.equal(await page.locator('.nav > a[href="#basis-ki"]').getAttribute('aria-expanded'),'false');
-    assert.equal(await page.locator('#basis-lernen details.kapitel').count(),9,'Retained original learning-type chapters');
-    assert.equal(await page.locator('#memory-board .basis-memory-grid button').count(),6,'Original learning memory must be interactive');
+    assert.equal(await page.locator('.nav > a[href="#basis-lernen"]').count(),0,'Learning types are now part of DL1');
+    assert.equal(await page.locator('.nav > a[href="#basis-plan"]').count(),0,'Separate letter-training lesson was removed');
+    assert.equal(await page.locator('#basis-ki #basis-lernen').count(),1,'Compact learning-types section is present');
     await page.locator('.nav > a[href="#basis-neuron"]').click();
     await page.locator('#perzeptron-1').waitFor({state:'visible'});
     assert.equal(await page.locator('#basis-neuron details.kapitel').count(),7,'DL3 must reproduce all seven advanced neuron chapters');
@@ -271,7 +267,11 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),0,'The old abstract network image is not part of DL4');
     assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/xor_einzelne_neuronen.ipynb"]').count())>=1,'Copied DL4 notebook xor_einzelne_neuronen must be present');
     assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/mehrschichtige_netze.ipynb"]').count())>=1,'Copied DL4 notebook mehrschichtige_netze must be present');
-    assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/ziffernerkennung.ipynb"]').count())>=1,'Copied DL4 notebook ziffernerkennung must be present');
+    assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/ziffernerkennung.ipynb"]').count(),0,'Additional architecture training is no longer a mandatory project detour');
+    assert.equal(await page.locator('#basis-daten .ki-notebook-block[data-notebook="content/basis_bildmodell.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-daten .ki-notebook-block[data-notebook="content/daten_training.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-training .ki-notebook-block[data-notebook="content/basis_fotoprojekt.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-abschluss [data-basis-answer="basis-abschluss-a"]').count(),1);
     const xorScore=page.locator('[data-basis-answer="hand_xor_max"]');
     await xorScore.selectOption('3');
     await page.locator('.nav > a[href="#basis-sprache"]').click();
@@ -592,6 +592,6 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await glossaryPage.locator('#basis-glossar .glossary-entry:visible').count(),expectedGlossaryCount);
     await glossaryPage.close();
     assert.deepEqual(errors,[]);
-    console.log('PASS both course links, ten lessons, reused KI/ML, blue KST layout, two-layer network, live neuron controls and isolated persistent answers');
+    console.log('PASS both course links, eight lessons, reused KI/ML, blue KST layout, two-layer network, live neuron controls and isolated persistent answers');
   }finally{if(browser)await browser.close();server.kill();}
 })().catch(e=>{console.error(e);process.exitCode=1});
