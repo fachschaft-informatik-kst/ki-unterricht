@@ -354,10 +354,18 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
         await figure.waitFor({state:'visible'});
         const mobile=figure.locator('img.neuron-graphic-mobile');
         const desktop=figure.locator('img.neuron-graphic-desktop');
-        assert(await mobile.isVisible(),selector+' must show the mobile illustration');
-        // Lazy-loading images below the fold load only after scrolling into view.
-        await mobile.scrollIntoViewIfNeeded();
+        // CSS visibility must be correct independently of image loading. Lazy
+        // images can have zero height until they enter the viewport, so checking
+        // isVisible() before scrolling would misdiagnose a valid mobile layout.
+        const displays=await figure.evaluate(el=>({
+          mobile:getComputedStyle(el.querySelector('img.neuron-graphic-mobile')).display,
+          desktop:getComputedStyle(el.querySelector('img.neuron-graphic-desktop')).display
+        }));
+        assert.notEqual(displays.mobile,'none',selector+' must select the mobile illustration');
+        assert.equal(displays.desktop,'none',selector+' must hide desktop SVG');
+        await figure.scrollIntoViewIfNeeded();
         await mobile.evaluate(img=>img.decode());
+        assert(await mobile.isVisible(),selector+' must show the loaded mobile illustration');
         assert.equal(await desktop.isVisible(),false,selector+' must hide desktop SVG');
         const dimensions=await mobile.evaluate(img=>{
           const r=img.getBoundingClientRect();
