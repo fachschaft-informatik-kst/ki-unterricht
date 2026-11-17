@@ -17,6 +17,15 @@ SOURCE = ROOT / "shared/basis"
 OUT = ROOT / "_build" / "site" / "basis"
 
 
+def render_basis_lesson(lesson):
+    """Use the visible lesson number in first-year anchors, preserving stable model IDs."""
+    rendered = render_lesson(lesson)
+    return rendered.replace(
+        f'id="doppellektion-{lesson["id"]}"',
+        f'id="doppellektion-{lesson["number"]:02d}"', 1
+    )
+
+
 def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json", glossary_path: Path | None = None) -> tuple[str, list[dict]]:
     manifest = json.loads((ROOT / manifest_path).read_text(encoding="utf-8"))
     sections = manifest["sections"]
@@ -60,14 +69,14 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
         if section.get("teaching"):
             if content.count(start) == 1 and content.count(finish) == 1:
                 content = re.sub(re.escape(start) + r".*?" + re.escape(finish),
-                                 "".join(render_lesson(lesson) for lesson in by_view[ident]), content, flags=re.S)
+                                 "".join(render_basis_lesson(lesson) for lesson in by_view[ident]), content, flags=re.S)
             elif start in content or finish in content:
                 raise ValueError(f"Unvollständiger Lektionsplatzhalter in {ident}")
             else:
                 # A newly authored topic may start with a YAML chapter only.
                 lesson = by_view[ident][0]
                 content = (f'<h1>{html.escape(lesson["title"])}</h1>'
-                           + "".join(render_lesson(item) for item in by_view[ident]) + content)
+                           + "".join(render_basis_lesson(item) for item in by_view[ident]) + content)
         # Fourth-year lesson fragments use data-answer, while first-year download,
         # restore and journal features use data-basis-answer. Bridge keys in HTML
         # so the authored lesson sources stay equivalent to the fourth-year ones.
