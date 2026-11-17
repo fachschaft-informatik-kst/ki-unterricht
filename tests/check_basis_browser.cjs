@@ -79,6 +79,13 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.goto('http://127.0.0.1:8770/bok/1-klasse/');
     assert.equal(await page.title(),expectedTitle);
     assert.equal(await page.locator('main > section').count(),13,'Eight lessons plus glossary, overview, journal and backup');
+    // Shortened eight-lesson plan must have distinct, correctly numbered section anchors.
+    for(const [section,number] of [['basis-ki',1],['basis-neuron',2],['basis-netze',3],['basis-daten',4],['basis-training',5],['basis-abschluss',6],['basis-sprache',7],['basis-gesellschaft',8]]){
+      const plan=page.locator('#'+section+' .lesson-plan');
+      assert.equal(await plan.count(),1,section+' must contain one AVIVA lesson');
+      assert.equal(await plan.getAttribute('id'),'doppellektion-'+String(number).padStart(2,'0'),section+' lesson anchor must match its visible number');
+      assert.match(await plan.locator('summary').innerText(),new RegExp('Doppellektion '+number+'\\b'),section+' must display the correct lesson number');
+    }
     // Shared KST breadcrumb; track switching happens only via the landing page.
     const basicBreadcrumb=(await page.locator('.crumb').innerText()).replace(/\s+/g,' ').trim();
     assert(!await page.locator('a[href="../projekt/"]').count(),'No direct link to 4th-year course');
@@ -444,7 +451,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // the same lab-panel component used in the fourth-year course.
     for(const [lesson,link,notebook,title] of [
       ['basis-neuron','perzeptron_und_neuronale_netze.ipynb','perzeptron_und_neuronale_netze.ipynb','Neuron-Labor · Doppellektion 2'],
-      ['basis-netze','xor_einzelne_neuronen.ipynb','xor_einzelne_neuronen.ipynb','XOR: Ein Neuron'],
+      ['basis-netze','xor_einzelne_neuronen.ipynb','xor_einzelne_neuronen.ipynb','XOR mit einem Neuron'],
       ['basis-netze','mehrschichtige_netze.ipynb','mehrschichtige_netze.ipynb','Neuronale Netze']
     ]){
       const notebookPage=await browser.newPage();

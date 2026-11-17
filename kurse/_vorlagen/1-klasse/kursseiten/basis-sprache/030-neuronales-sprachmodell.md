@@ -22,7 +22,7 @@
           <tr>
             <th>Wissen steckt in</th>
             <td>einer Tabelle mit Häufigkeiten</td>
-            <td>Gewichten in vielen Schichten, durch Training angepasst wie beim Neuron in Doppellektion 3</td>
+            <td>Gewichten in vielen Schichten, durch Training angepasst wie beim Neuron in Doppellektion 2</td>
           </tr>
           <tr>
             <th>Unbekannte Wortfolge</th>

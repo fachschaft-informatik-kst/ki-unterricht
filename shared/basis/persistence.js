@@ -138,7 +138,7 @@ async function openNotebook(name,view,force=false,host=null){
  // destroys its browsing context (and Pyodide), even if its src is unchanged.
  // The chapter launch button remains the dialog's focus-return target.
  try { sessionStorage.setItem('ki-last-opened-bok-1',name); } catch {}
- owner=view||owner;heading.textContent=notebookTitles[name]||'Experiment';
+ owner=view||owner;heading.textContent=host?.dataset?.title||notebookTitles[name]||'Experiment';
  current=name;
  const session=runtime.select(name);frame=session.frame;
  openedNotebook(frame,name);

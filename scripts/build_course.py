@@ -44,7 +44,8 @@ def figur(f):
 
 def render(lesson, voll=False):
     """Kursseite: nur Ziel, Leitfrage und Motivation. Mit voll=True zusätzlich Ablauftabelle (Lehrperson)."""
-    return (f'<details class="lesson-plan" id="doppellektion-{lesson["id"]}" data-lesson="{lesson["id"]}"{" open" if voll or lesson.get("view") != "projekt" else ""}><summary>'
+    anchor = str(lesson.get("number", lesson["id"])).zfill(2)
+    return (f'<details class="lesson-plan" id="doppellektion-{anchor}" data-lesson="{lesson["id"]}"{" open" if voll or lesson.get("view") != "projekt" else ""}><summary>'
             f'<span class="phase-num">{str(lesson.get("number", lesson["id"])).zfill(2)}</span><span>Doppellektion {lesson.get("number", lesson["id"])} · {html.escape(lesson["title"])}</span>'
             '<small>90 Min.</small></summary><div class="detail-body">'
             + (f'<p class="lesson-recap"><strong>Rückblick:</strong> {verlinke(html.escape(lesson["rueckblick"]))}</p>' if lesson.get('rueckblick') else '')
