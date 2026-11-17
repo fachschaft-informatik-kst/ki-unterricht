@@ -4,17 +4,18 @@ const root=path.resolve(__dirname,'..');
 const notebook=name=>JSON.parse(fs.readFileSync(path.join(root,'kurse/bok/4-klasse/content',name),'utf8'));
 const source=cell=>Array.isArray(cell.source)?cell.source.join(''):String(cell.source||'');
 const starts=nb=>nb.cells.filter(c=>c.cell_type==='code'&&(c.metadata?.tags||[]).includes('ki-autostart'));
-const setups=nb=>starts(nb).find(c=>source(c).includes('loadPackage('));
+const setups=nb=>starts(nb)[0]; // Some SVG-only lessons need no runtime packages at startup.
 for(const [name,packages,manual] of [
  ['daten_training.ipynb',['numpy','matplotlib'],['u.drei_rollen(','u.datenleck_versuch(']],
- ['mehrschichtige_netze.ipynb',['numpy','matplotlib'],['u.xor_lernen_regler(']],
- ['basis_netze.ipynb',['numpy','matplotlib'],['u.xor_lernen_regler(']],
+ ['mehrschichtige_netze.ipynb',[],['u.xor_lernen_regler(']],
+ ['basis_netze.ipynb',[],['u.xor_lernen_regler(']],
  ['ki_projekt/ki_lernlabor.ipynb',['numpy','pillow'],['daten = foto.projekt_laden(','experiment = foto.vergleichen(','foto.vorhersagen_zeigen(']]
 ]){
  const nb=notebook(name),setup=setups(nb);
  assert(setup,name+' missing trusted setup cell');
  const loaded=[...source(setup).matchAll(/'([^']+)'/g)].map(x=>x[1]).filter(x=>!['emscripten','ipywidgets==8.1.0'].includes(x));
  for(const p of packages)assert(loaded.includes(p),name+' missing base package '+p);
+ if(name==='mehrschichtige_netze.ipynb'||name==='basis_netze.ipynb')assert.equal(loaded.length,0,name+' must not preload packages for SVG experiment');
  for(const p of ['scipy','scikit-learn'])assert(!loaded.includes(p),name+' loads training before user intent');
  for(const needle of manual){
   const cell=nb.cells.find(c=>c.cell_type==='code'&&source(c).includes(needle));
