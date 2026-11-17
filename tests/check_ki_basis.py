@@ -92,6 +92,21 @@ def main():
             expected_bias=4 if canonical=='schwimmbad_xor_netz.svg' else (
                 2 if canonical=='schwimmbad_lernschritt.svg' else 1)
             assert len(bias_labels)==expected_bias,(diagram,len(bias_labels))
+            if canonical=='neuron_entscheider.svg':
+                # The SVG can translate/scale its content. The bias must share
+                # the sum circle's coordinate system, not sit outside its <g>.
+                panel=svg.find(f'.//{ns}g')
+                assert panel is not None,diagram
+                summation_radius=47 if diagram.endswith('_mobil.svg') else 51
+                summation=next((elem for elem in panel.findall(f'{ns}circle')
+                                if float(elem.get('r'))==summation_radius),None)
+                assert summation is not None,diagram
+                bias=panel.find(f'{ns}text[@class="neuron-bias"]')
+                assert bias is bias_labels[0],(diagram,'bias must be in the sum circle group')
+                assert bias.get('text-anchor')=='middle',diagram
+                assert float(bias.get('x'))==float(summation.get('cx')),diagram
+                distance=float(bias.get('y'))-float(summation.get('cy'))-summation_radius
+                assert 20<distance<40,(diagram,distance)
             if canonical=='schwimmbad_xor_netz.svg':
                 # Only +1 / −1 on each connection; w= is explained once in
                 # the legend. Main example: (S,F,P)=(1,0,0) -> Ja (y=1).
