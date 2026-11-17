@@ -1,8 +1,5 @@
 name: Regenerate first-year teaching documents (temporary)
 on:
-  push:
-    branches:
-      - feature/1klasse-8dl-gefuertes-bildprojekt
   pull_request:
     branches: [main]
 permissions:
@@ -41,5 +38,7 @@ jobs:
           git add -A kurse/bok/1-klasse/lehrperson/dokumente kurse/_vorlagen/1-klasse/lehrperson/dokumente
           if ! git diff --cached --quiet; then
             git commit -m "Regenerate first-year Word worksheets for eight double lessons"
+            git fetch origin feature/1klasse-8dl-gefuertes-bildprojekt
+            git rebase origin/feature/1klasse-8dl-gefuertes-bildprojekt
             git push origin HEAD:feature/1klasse-8dl-gefuertes-bildprojekt
           fi
