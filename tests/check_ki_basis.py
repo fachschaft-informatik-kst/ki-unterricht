@@ -23,14 +23,15 @@ def rejects(fn):
 
 def main():
     np.testing.assert_array_equal(u.xor_netz(),[0,1,1,0])
-    # The third swimming-pool input is real, not a disconnected label:
-    # P=1 vetoes the XOR decision, while P=0 preserves the four XOR cases.
+    # All three inputs pass through a hidden-layer decision: OR, NAND, NOT P.
+    # The output ANDs these three intermediate values; P=1 always vetoes.
     for sonnenschein in (0,1):
         for freunde in (0,1):
             zwischen_or=int(sonnenschein+freunde-.5>=0)
             zwischen_nand=int(-sonnenschein-freunde+1.5>=0)
             for pruefung in (0,1):
-                ausgang=int(zwischen_or+zwischen_nand-2*pruefung-1.5>=0)
+                zwischen_keine_pruefung=int(-pruefung+.5>=0)
+                ausgang=int(zwischen_or+zwischen_nand+zwischen_keine_pruefung-2.5>=0)
                 assert ausgang==((sonnenschein ^ freunde) and not pruefung)
     # All network SVGs must load, carry meaningful descriptions and fit their
     # declared canvas (including transformed desktop/mobile learning panels).
@@ -78,7 +79,7 @@ def main():
                 'neuron_entscheider.svg': ('+2','+2','−4'),
                 'schwimmbad_lernschritt.svg': ('+0','+2','−4','+1','+2','−4'),
                 'schwimmbad_xor_einzelne_neuron.svg': ('+1','+1','−2'),
-                'schwimmbad_xor_netz.svg': ('+1','+1','−1','−1','+1','+1','−2'),
+                'schwimmbad_xor_netz.svg': ('+1','+1','−1','−1','−1','+1','+1','+1'),
             }[canonical]
             ns='{http://www.w3.org/2000/svg}'
             labels=svg.findall(f'.//{ns}text[@class="line-weight"]')
@@ -88,9 +89,32 @@ def main():
                 assert 0<=x<=w and 0<=y<=h,(diagram,x,y)
                 assert float(el.attrib['font-size'])>=14
             bias_labels=svg.findall(f'.//{ns}text[@class="neuron-bias"]')
-            expected_bias=2 if canonical=='schwimmbad_lernschritt.svg' else (
-                3 if diagram=='schwimmbad_xor_netz_mobil.svg' else 1)
+            expected_bias=4 if canonical=='schwimmbad_xor_netz.svg' else (
+                2 if canonical=='schwimmbad_lernschritt.svg' else 1)
             assert len(bias_labels)==expected_bias,(diagram,len(bias_labels))
+            if canonical=='schwimmbad_xor_netz.svg':
+                # Position labels consistently on their own connections:
+                # 32% from each input; 50% from hidden neuron to output.
+                segments={edge.get('data-edge'):edge for edge in svg.findall(f'.//{ns}line[@class="network-edge"]')}
+                assert len(segments)==8,(diagram,len(segments))
+                assert 'p-out' not in segments and 'p-no_exam' in segments
+                for label in labels:
+                    segment=segments[label.get('data-edge')]
+                    t=.5 if label.get('data-edge').endswith('-out') else .32
+                    x1,y1,x2,y2=(float(segment.attrib[k]) for k in ('x1','y1','x2','y2'))
+                    offset=4.8 if '_mobil' in diagram else 6.
+                    assert abs(float(label.get('x'))-(x1+(x2-x1)*t))<.7,diagram
+                    assert abs(float(label.get('y'))-(y1+(y2-y1)*t+offset))<.7,diagram
+                    assert label.get('text-anchor')=='middle',diagram
+                nodes={circle.get('data-node'):circle for circle in svg.findall(f'.//{ns}circle')}
+                assert {b.get('data-node') for b in bias_labels}=={'or','nand','no_exam','out'}
+                for label in bias_labels:
+                    circle=nodes[label.get('data-node')]
+                    cx=float(circle.get('cx'))
+                    bottom=float(circle.get('cy'))+float(circle.get('r'))
+                    assert float(label.get('x'))==cx,(diagram,label.get('data-node'))
+                    assert 20<float(label.get('y'))-bottom<38,diagram
+                    assert label.get('text-anchor')=='middle',diagram
 
     regeln={
         'UND (AND)': [0,0,0,1],
