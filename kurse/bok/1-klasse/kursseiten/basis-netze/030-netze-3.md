@@ -4,16 +4,16 @@
   </summary>
   <div class="kapitel-body">
     <!-- MD:START -->
-**Jetzt geht es vom Aufbau zum Experiment:** Öffnen Sie das Notebook «Neuronale Netze». Untersuchen Sie im Notebook zunächst die vier XOR-Fälle mit P = 0: Sonne und Freund:innen gehen durch OR und NAND zum Ausgabeneuron. Die Kursgrafik zeigt danach zusätzlich die Prüfungsbremse P. Danach untersuchen Sie, wie ein Netz mit 1, 2 und 4 versteckten Neuronen lernt und ob es alle vier Fälle löst.
+**Notebook:** Verfolgen Sie XOR bei P = 0 durch OR, NAND und Ausgang. Vergleichen Sie danach das Lernen mit 1, 2 und 4 versteckten Neuronen und prüfen Sie, ob alle vier Fälle stimmen. Die Prüfungsbremse P gehört zur Kursgrafik, nicht zum XOR-Training.
 
-**Auftrag:** Beschreiben Sie für eine Schwimmbad-Situation den Weg von Sonne, Freund:innen und Prüfung bis zur Ja/Nein-Ausgabe (Prüfung bei der XOR-Notebookübung zunächst 0). Verändern Sie bei der Lernsimulation jeweils nur eine Einstellung und halten Sie Ihre Beobachtung im Protokoll fest.
+**Auftrag:** Erklären Sie für eine Schwimmbad-Situation den Weg von S, F und P zur Ausgabe (im Notebook P = 0). Ändern Sie jeweils nur eine Einstellung und notieren Sie das Ergebnis.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/basis_netze.ipynb" data-title="Neuronale Netze">
       <!-- MD:START -->
 ### Jupyter-Notebook · Neuronale Netze
 <!-- MD:END -->
       <!-- MD:START -->
-Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+Öffnen Sie das Notebook und führen Sie Zellen mit Shift + Enter aus.
 <!-- MD:END -->
       <a class="ki-notebook-launch" href="../lab/index.html?path=portal/basis_netze.ipynb">Notebook hier öffnen</a>
     </div>

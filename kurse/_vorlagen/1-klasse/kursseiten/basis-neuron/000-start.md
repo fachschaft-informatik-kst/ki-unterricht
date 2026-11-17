@@ -7,7 +7,7 @@
   <!-- MD:START -->
 ## Pflichtkern: Entscheidungen sichtbar machen
 <!-- MD:END -->
-  <p><strong>Schritt 1:</strong> Beim Schwimmbad-Neuron bedeuten 1 = Ja und 0 = Nein. Beschreibt, was Sonne, Freunde und Prüfung bewirken. <strong>Schritt 2:</strong> Stellt im Notebook die Gewichte so ein, dass die Vorhersage zu möglichst vielen Beispielen passt. <strong>Schritt 3:</strong> Erklärt mit einem Vorher-Nachher-Beispiel, was beim Lernen verändert wird.</p>
-  <p><strong>Hilfe:</strong> Ein <a href="#basis-glossar-gewicht">Gewicht</a> zeigt, wie stark ein Grund zählt. Der <a href="#basis-glossar-bias-neuron">Bias</a> ist die Grundeinstellung. Ihr dürft die Zahlen anhand der Grafik ablesen und zu zweit besprechen.</p>
-  <p><strong>Wahlvertiefung:</strong> vertiefende Rechnungen zu AND/OR, die Lernformel und zusätzliche Parameterexperimente sind für Schnelle gedacht – nicht zwingend für den Pflichtnachweis.</p>
+  <p><strong>Schritt 1:</strong> Erklärt am Schwimmbad-Neuron, wie Sonne, Freund:innen und Prüfung die Entscheidung beeinflussen. <strong>Schritt 2:</strong> Passt im Notebook die Gewichte an. <strong>Schritt 3:</strong> Zeigt an einem Lernschritt, was sich ändert.</p>
+  <p><strong>Hilfe:</strong> Gewichte bestimmen den Einfluss der Eingaben, der <a href="#basis-glossar-bias-neuron">Bias</a> die Grundeinstellung. Nutzt die Grafik und tauscht euch aus.</p>
+  <p><strong>Wahlvertiefung:</strong> Zusatzrechnungen zu AND/OR, Lernformel und weitere Parameterexperimente sind freiwillig.</p>
 </div>

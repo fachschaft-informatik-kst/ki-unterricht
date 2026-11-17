@@ -7,19 +7,19 @@
       <article>
         <b>1 · Alltag: Schwimmen?</b>
         <!-- MD:START -->
-Ändern Sie die Gewichte des Schwimmbad-Neurons. Vergleichen Sie in der **Live-Tabelle** die acht Eingaben mit den berechneten Ausgaben und Zielen. Erreichen Sie 8 von 8?
+Ändern Sie die Gewichte und vergleichen Sie in der **Live-Tabelle** Ausgaben und Ziele für alle acht Fälle. Schaffen Sie 8 von 8?
 <!-- MD:END -->
       </article>
       <article>
         <b>2 · Neue Schwimmbad-Regeln einstellen</b>
         <!-- MD:START -->
-Setzen Sie Prüfung auf 0 und betrachten Sie Sonne und Freund:innen. Stellen Sie «nur beide» (**AND**) und danach «mindestens eine» (**OR**) oder «nicht beide» (**NAND**) ein. Das Notebook zeigt alle vier Fälle.
+Setzen Sie P = 0. Stellen Sie für Sonne und Freund:innen **AND**, dann **OR** oder **NAND** ein. Prüfen Sie alle vier Fälle.
 <!-- MD:END -->
       </article>
       <article>
         <b>3 · Lernen beobachten</b>
         <!-- MD:START -->
-Lassen Sie das Neuron einzelne Beispiele bearbeiten. Beobachten Sie **eine Korrektur** und vergleichen Sie die Parameter vor und nach diesem Schritt.
+Beobachten Sie eine Korrektur und vergleichen Sie Gewichte und Bias davor und danach.
 <!-- MD:END -->
       </article>
     </div>
@@ -36,7 +36,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
       <!-- MD:START -->
 ### Mein Protokoll
 <!-- MD:END -->
-      <p class="small">Tragen Sie während der Notebookarbeit Ihre Einstellungen und Ergebnisse ein. Die Einträge werden im Browser gespeichert und im ZIP gesichert.</p>
+      <p class="small">Notieren Sie Einstellungen und Ergebnisse. Sie werden im Browser und im ZIP gespeichert.</p>
       <h4>1 · Schwimmbad-Neuron</h4>
       <div class="table-scroll">
         <table class="typen protokoll">

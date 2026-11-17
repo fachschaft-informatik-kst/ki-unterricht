@@ -7,7 +7,7 @@
   <!-- MD:START -->
 ## Pflichtkern: XOR verstehen, statt Formeln auswendig lernen
 <!-- MD:END -->
-  <p><strong>Schritt 1:</strong> Prüft zunächst die vier Schwimmbadfälle ohne Prüfung (P = 0): Nur Sonne oder nur Freund:innen führt zu Ja. <strong>Schritt 2:</strong> Versucht im XOR-Notebook mit einem einzelnen Neuron möglichst viele Fälle richtig zu treffen. <strong>Schritt 3:</strong> Verfolgt OR und NAND in der Zwischenschicht. Neu entscheidet auch die Prüfung als hemmender Eingang am Ausgang: Bei P = 1 lautet die Antwort immer Nein.</p>
-  <p><strong>Hilfe:</strong> Die beiden Ja-Fälle liegen in der Zeichnung diagonal gegenüber. Eine Gerade kann sie nicht von den Nein-Fällen trennen. Eine <a href="#basis-glossar-schicht">Zwischenschicht</a> kombiniert mehrere Entscheidungen.</p>
-  <p><strong>Wahlvertiefung:</strong> Der algebraische Widerspruch mit Ungleichungen und das Training mit verschiedenen Anzahlen versteckter Neuronen dienen der Vertiefung. Für den Pflichtkern genügt eine Erklärung anhand der vier Fälle.</p>
+  <p><strong>Schritt 1:</strong> Untersucht XOR für Sonne und Freund:innen bei P = 0: Genau eine Bedingung muss erfüllt sein. <strong>Schritt 2:</strong> Testet im Notebook die Grenze eines einzelnen Neurons. <strong>Schritt 3:</strong> Verfolgt OR und NAND im Netz; P = 1 verhindert dort jedes Ja.</p>
+  <p><strong>Hilfe:</strong> Die Ja-Punkte liegen diagonal und lassen sich nicht durch eine Gerade trennen. Eine <a href="#basis-glossar-schicht">Zwischenschicht</a> verknüpft Teilentscheidungen.</p>
+  <p><strong>Wahlvertiefung:</strong> Ungleichungsbeweis und Training mit verschiedenen Zahlen versteckter Neuronen sind freiwillig.</p>
 </div>

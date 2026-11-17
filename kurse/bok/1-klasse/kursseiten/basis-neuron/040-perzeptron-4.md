@@ -3,24 +3,24 @@
     <h2 class="kapitel-titel">Was lernt ein Neuron genau?</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Ein Neuron kann seine Gewichte und den <strong>Bias</strong> aus Beispielen mit bekannter richtiger Antwort (<strong>Trainingsdaten</strong>) lernen. Die Eingaben und die Regel «Summe bilden, ab 0 Ja» bleiben unverändert. <strong>Das Gelernte steckt in den Gewichten und im Bias.</strong></p>
+    <p>Ein Neuron lernt aus <strong>Trainingsbeispielen mit bekanntem Ziel</strong>: Bei Fehlern korrigiert es <strong>Gewichte und Bias</strong>. Eingaben und Entscheidungsregel (Summe ≥ 0 → Ja) bleiben gleich.</p>
     <figure class="concept-figure neuron-detail-figure neuron-detail-learning">
       <img class="neuron-graphic-desktop" alt="Schwimmbad-Neuron beim Lernen: Bei Sonne 1, Freund:innen 0 und Prüfung 0 sagt es zuerst fälschlich Nein. Sonnengewicht und Bias werden korrigiert, danach sagt es Ja. Die Eingaben bleiben gleich." loading="lazy" src="grafiken/schwimmbad_lernschritt.svg"/>
       <img class="neuron-graphic-mobile" alt="Mobile Netzwerkansicht mit Sonne, Freund:innen und Prüfung: zuerst falsche Ausgabe, danach dieselbe Eingabe mit korrigiertem Sonnengewicht und Bias." loading="lazy" src="grafiken/schwimmbad_lernschritt_mobil.svg"/>
-      <figcaption>Vorher und nachher: Dieselben drei Eingaben. Nur Sonnengewicht und Bias werden korrigiert; die anderen Gewichte bleiben gleich.</figcaption>
+      <figcaption>Gleiche Eingaben, neue Ausgabe: Nur Sonnengewicht und Bias ändern sich.</figcaption>
     </figure>
-    <p><strong>Warum ändert sich gerade die Sonnenverbindung?</strong> Sonne = 1, Freund:innen = 0, Prüfung = 0. Die richtige Antwort ist <strong>Ja (1)</strong>, das Neuron sagt zuerst <strong>Nein (0)</strong>. Weil nur Sonne den Eingabewert 1 hat, steigt bei Lernrate 1 ihr Gewicht um 1; der Bias steigt ebenfalls um 1. Die anderen Gewichte bleiben wegen Eingang 0 gleich. Bei unveränderten Eingaben lautet die neue Ausgabe Ja.</p>
-    <p class="small"><strong>Beachten Sie:</strong> Die Grafik zeigt einen beispielhaften Korrekturschritt nach derselben Lernregel wie im Notebook. Dort können andere Startgewichte und Trainingsaufgaben eingestellt werden.</p>
+    <p><strong>Lernschritt:</strong> Bei S = 1, F = 0, P = 0 lautet das Ziel Ja (1), die Ausgabe zunächst Nein (0). Mit Lernrate 1 steigen Sonnengewicht und Bias um 1; die Gewichte der Eingaben mit Wert 0 bleiben gleich. Danach antwortet das Neuron Ja.</p>
+    <p class="small"><strong>Hinweis:</strong> Das Notebook erlaubt andere Startwerte und Trainingsaufgaben; die Lernregel bleibt gleich.</p>
     <!-- MD:START -->
 ### So funktioniert die Lernregel
 
-1. Ein Beispiel wird eingegeben; das Neuron gibt Ja oder Nein aus.
-2. Das **Ziel** wird mit der Ausgabe verglichen. Bei einem Fehler werden die Gewichte aktiver Eingaben und der Bias korrigiert.
-3. Das wiederholt sich für die Trainingsbeispiele, bei Bedarf über mehrere **Runden**.
+1. Das Neuron gibt für ein Trainingsbeispiel Ja oder Nein aus.
+2. Es vergleicht Ausgabe und **Ziel** und korrigiert bei Fehlern Gewichte aktiver Eingaben und Bias.
+3. Es wiederholt dies für die Trainingsbeispiele über mehrere **Runden**.
 
 <!-- MD:END -->
     <p class="process"><span>neues Gewicht</span><b>=</b><span>altes Gewicht</span><b>+</b><span>Lernrate × (Ziel − Ausgabe) × Eingang</span></p>
-    <p>Für den Bias rechnet man mit Eingang 1. Eine kleinere <strong>Lernrate</strong> bewirkt kleinere Änderungen. Das Neuron speichert keine fertige Schwimmbadregel – es passt Zahlen an, bis die Antworten zu den Beispielen passen.</p>
+    <p>Beim Bias ist der Eingang immer 1. Eine kleinere <strong>Lernrate</strong> führt zu kleineren Korrekturen. Gelernt werden Zahlen, keine fertigen Regeln.</p>
     <label class="field answer"><span>Aufgabe: Was ändert sich beim Schwimmbad-Neuron zwischen Vorher und Nachher? Was bleibt gleich, und wo steckt das Gelernte?</span><textarea data-basis-answer="basis-neuron-neuron_gelernt" maxlength="10000" placeholder="Verändert haben sich … Unverändert blieb … Das Gelernte steckt in …" rows="4"></textarea></label>
   </div>
 </details>
