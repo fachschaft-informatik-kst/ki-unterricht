@@ -1,0 +1,1 @@
+<a class="btn" href="#basis-daten">Weiter: Unser Bildprojekt →</a>

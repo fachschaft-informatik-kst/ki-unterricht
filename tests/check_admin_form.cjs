@@ -763,7 +763,9 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator("#glossaryBasis").isVisible(),true);
     assert.equal(await page.locator("#glossaryVertieft").isVisible(),false);
     assert.match(await page.locator("#glossaryCourseTitle").textContent(),/1. Klasse/);
-    assert.equal(await page.locator("#glossaryTerms button").count(),29);
+    const basisGlossaryCount=JSON.parse(fs.readFileSync(path.join(ROOT,
+      "kurse/bok/1-klasse/kursseiten/glossar.json"),"utf8")).begriffe.length;
+    assert.equal(await page.locator("#glossaryTerms button").count(),basisGlossaryCount);
     await page.locator("#glossarySearch").fill("Token");
     await page.locator("#glossaryTerms button").click();
     const glossaryFrame=page.frameLocator("#preview");

@@ -1,4 +1,4 @@
-<details class="kapitel" id="basis-neuron-1" data-kurz="Ein Neuron macht aus mehreren Zahlen eine Ja/Nein-Entscheidung. Beispiel: Gehe ich schwimmen?" open>
+<details class="kapitel" id="perzeptron-1" data-kurz="Ein Neuron macht aus mehreren Zahlen eine Ja/Nein-Entscheidung. Beispiel: Gehe ich schwimmen?" open>
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Wozu ein Neuron? Ein kleiner Entscheider</h2>
   </summary>
@@ -82,6 +82,6 @@
         </tbody>
       </table>
     </div>
-    <label class="field answer"><span>Aufgabe: Erklären Sie in zwei bis drei Sätzen, wofür ein Neuron da ist und was Gewichte und Bias im Schwimmbad-Beispiel bedeuten. Was geschieht, wenn das Gewicht der Prüfung auf 0 gesetzt wird?</span><textarea data-basis-answer="basis-neuron-neuron_wozu" maxlength="10000" placeholder="Ein Neuron ist dafür da, … Die Gewichte … Der Bias …" rows="4"></textarea></label>
+    <label class="field answer"><span>Aufgabe: Erklären Sie in zwei bis drei Sätzen, wofür ein Neuron da ist und was Gewichte und Bias im Schwimmbad-Beispiel bedeuten. Was geschieht, wenn das Gewicht der Prüfung auf 0 gesetzt wird?</span><textarea data-answer="neuron_wozu" maxlength="10000" placeholder="Ein Neuron ist dafür da, … Die Gewichte … Der Bias …" rows="4"></textarea></label>
   </div>
 </details>

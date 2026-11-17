@@ -127,7 +127,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await advanced.close();
     await page.locator('.nav > a[href="#basis-lernziele"]').click();
     await page.locator('#basis-lernziele .card').first().waitFor({state:'visible'});
-    assert.equal(await page.locator('#basis-lernziele .card').count(),7);
+    assert.equal(await page.locator('#basis-lernziele .card').count(),8,'Separate DL3 and DL4 learning objectives');
     // Keep all double-lesson links visible, but expand one chapter list only.
     const activeSubmenus=page.locator('.nav-sub:not([hidden])');
     assert.equal(await page.locator('.nav > a').count(),13);
@@ -222,12 +222,12 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-lernen details.kapitel').count(),9,'Retained original learning-type chapters');
     assert.equal(await page.locator('#memory-board .basis-memory-grid button').count(),6,'Original learning memory must be interactive');
     await page.locator('.nav > a[href="#basis-neuron"]').click();
-    await page.locator('#basis-neuron-1').waitFor({state:'visible'});
+    await page.locator('#perzeptron-1').waitFor({state:'visible'});
     assert.equal(await page.locator('#basis-neuron details.kapitel').count(),7,'DL3 must reproduce all seven advanced neuron chapters');
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_biologisch.svg"]').count(),1);
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_entscheider.svg"]').count(),1);
-    assert.equal(await page.locator('#basis-neuron-4 img[src="grafiken/schwimmbad_lernschritt.svg"]').count(),1,'DL3 learning diagram must show the updated parameters');
-    assert.equal(await page.locator('#basis-neuron-4 figure.neuron-detail-figure').count(),1,'Detailed diagram supports readable sizing');
+    assert.equal(await page.locator('#perzeptron-4 img[src="grafiken/schwimmbad_lernschritt.svg"]').count(),1,'DL3 learning diagram must show the updated parameters');
+    assert.equal(await page.locator('#perzeptron-4 figure.neuron-detail-figure').count(),1,'Detailed diagram supports readable sizing');
     // Keep the DL3/DL4 diagrams compact in their cards rather than letting
     // the full-width chapter stretch them across the entire screen.
     const assertCompactFigure=async(selector,maxWidth)=>{
@@ -240,29 +240,29 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       assert(layout.visible&&layout.renderedWidth>0&&layout.renderedWidth<=maxWidth+1,
         selector+' must fit its compact card');
     };
-    await assertCompactFigure('#basis-neuron-1 .neuron-detail-recap',650);
-    await assertCompactFigure('#basis-neuron-4 .neuron-detail-learning',1050);
-    assert((await page.locator('#basis-neuron-4').innerText()).includes('Lernrate'),'DL3 must explain the perceptron learning rule');
-    assert.equal(await page.locator('#basis-neuron a[href*="portal/bok/1-klasse/basis_neuron.ipynb"]').count(),1);
-    const neuronWeight=page.locator('[data-basis-answer="basis-neuron-sw_gs"]');
-    const neuronScore=page.locator('[data-basis-answer="basis-neuron-sw_treffer"]');
+    await assertCompactFigure('#perzeptron-1 .neuron-detail-recap',650);
+    await assertCompactFigure('#perzeptron-4 .neuron-detail-learning',1050);
+    assert((await page.locator('#perzeptron-4').innerText()).includes('Lernrate'),'DL3 must explain the perceptron learning rule');
+    assert((await page.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"]').count())>=1,'DL3 has the copied first-year neuron lab');
+    const neuronWeight=page.locator('[data-basis-answer="sw_gs"]');
+    const neuronScore=page.locator('[data-basis-answer="sw_treffer"]');
     await neuronWeight.fill('2.5');
     await neuronScore.selectOption('7');
     await page.locator('.nav > a[href="#basis-netze"]').click();
     await page.waitForFunction(()=>document.querySelector('.nav > a[href="#basis-netze"]')?.getAttribute('aria-expanded')==='true');
     assert.equal(await activeSubmenus.count(),1,'Navigation should show one expanded lesson submenu');
-    assert.equal(await page.locator('#basis-netze details.kapitel').count(),4,'DL4 must reproduce advanced XOR and network training without digit model');
+    assert.equal(await page.locator('#basis-netze details.kapitel').count(),5,'DL4 must reproduce all five fourth-year chapters, including digits');
     assert.equal(await page.locator('#basis-netze img[src="grafiken/xor_gerade.svg"]').count(),1);
-    assert.equal(await page.locator('#basis-netze-1 img[src="grafiken/schwimmbad_xor_einzelne_neuron.svg"]').count(),1,'DL4 must illustrate the single-neuron XOR mismatch');
-    assert.equal(await page.locator('#basis-netze-2 img[src="grafiken/schwimmbad_xor_netz.svg"]').count(),1,'DL4 must illustrate the hidden layer');
-    await assertCompactFigure('#basis-netze-1 .neuron-detail-xor',650);
-    await assertCompactFigure('#basis-netze-1 .neuron-detail-separation',690);
-    await assertCompactFigure('#basis-netze-2 .neuron-detail-net',980);
+    assert.equal(await page.locator('#netze-1 img[src="grafiken/schwimmbad_xor_einzelne_neuron.svg"]').count(),1,'DL4 must illustrate the single-neuron XOR mismatch');
+    assert.equal(await page.locator('#netze-2 img[src="grafiken/schwimmbad_xor_netz.svg"]').count(),1,'DL4 must illustrate the hidden layer');
+    await assertCompactFigure('#netze-1 .neuron-detail-xor',650);
+    await assertCompactFigure('#netze-1 .neuron-detail-separation',690);
+    await assertCompactFigure('#netze-2 .neuron-detail-net',980);
     assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),0,'The old abstract network image is not part of DL4');
-    assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/xor_einzelne_neuronen.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/basis_netze.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-netze a[href*="ziffernerkennung.ipynb"]').count(),0,'Digit classifier belongs to DL5 only');
-    const xorScore=page.locator('[data-basis-answer="basis-netze-hand_xor_max"]');
+    assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/xor_einzelne_neuronen.ipynb"]').count())>=1,'Copied DL4 notebook xor_einzelne_neuronen must be present');
+    assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/mehrschichtige_netze.ipynb"]').count())>=1,'Copied DL4 notebook mehrschichtige_netze must be present');
+    assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/ziffernerkennung.ipynb"]').count())>=1,'Copied DL4 notebook ziffernerkennung must be present');
+    const xorScore=page.locator('[data-basis-answer="hand_xor_max"]');
     await xorScore.selectOption('3');
     await page.locator('.nav > a[href="#basis-sprache"]').click();
     assert.equal(await page.locator('#basis-sprache details.kapitel').count(),7);
@@ -303,7 +303,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await note.fill('Gesicherte Reflexion im ZIP.');
      await page.locator('[data-basis-answer="basis-journal-namen"]').fill('Ada Beispiel');
      await page.locator('[data-basis-answer="basis-journal-klasse"]').fill('1b');
-     const timelineAnswer=page.locator('[data-basis-answer="basis-ki-zeitstrahl"]');
+     const timelineAnswer=page.locator('[data-basis-answer="ki_zeitstrahl"]');
      await timelineAnswer.fill('Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
     await page.locator('input[aria-label="Fotostudio-JSON zur ZIP-Sicherung hinzufügen"]').setInputFiles({name:'fotos.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(studio))});
@@ -316,8 +316,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await answerDownload.saveAs(answerPath);
     const answerData=JSON.parse(fs.readFileSync(answerPath,'utf8'));
     assert.equal(answerData.schema,'kst-ki-basis-v1');
-    assert.equal(answerData.answers['basis-ki-zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
-    assert.equal(answerData.answers['basis-neuron-sw_treffer'],'7','Select answers must be included');
+    assert.equal(answerData.answers['ki_zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
+    assert.equal(answerData.answers['sw_treffer'],'7','Select answers must be included');
     await note.fill('Wird durch Antwortdatei ersetzt');
     await timelineAnswer.fill('Noch nicht importiert');
     page.once('dialog',dialog=>dialog.accept());
@@ -325,7 +325,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Antworten wiederhergestellt'));
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.');
     assert.equal(await timelineAnswer.inputValue(),'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
-    assert.equal(await page.locator('[data-basis-answer="basis-neuron-sw_treffer"]').inputValue(),'7');
+    assert.equal(await page.locator('[data-basis-answer="sw_treffer"]').inputValue(),'7');
     await page.locator('#basis-import').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"wrong","answers":{}}')});
     await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Keine gültige Antwortdatei'));
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.','Invalid import must preserve answers');
@@ -341,7 +341,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
      assert(learningJournal.includes('Gesicherte Reflexion im ZIP.')&&learningJournal.includes('Jüngere Beispiele lernen aus Daten'));
      assert(learningJournal.includes('Ada Beispiel')&&learningJournal.includes('1b'),'Identity belongs in printable journal');
      assert(reflections.includes('Entdeckerfrage zum Zeitstrahl')&&reflections.includes('Gesicherte Reflexion im ZIP.'));
-     assert.equal(JSON.parse(await files.get('kursstand.json').text()).answers['basis-ki-zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
+     assert.equal(JSON.parse(await files.get('kursstand.json').text()).answers['ki_zeitstrahl'],'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(JSON.parse(await files.get('notebooks/basis_neuron.ipynb').text()).cells[0].source[0],'print("Mein Versuch")');
     await note.fill('Wird beim Import ersetzt');
     const restoredPhoto=page.waitForEvent('download');
@@ -359,11 +359,11 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // Every DL3/DL4 network illustration must use the legible mobile SVG,
     // without introducing its own horizontal overflow at phone width.
     for(const [lesson,selectors] of [
-      ['basis-neuron',['#basis-neuron-1 .neuron-detail-recap',
-                       '#basis-neuron-4 .neuron-detail-learning']],
-      ['basis-netze',['#basis-netze-1 .neuron-detail-xor',
-                      '#basis-netze-1 .neuron-detail-separation',
-                      '#basis-netze-2 .neuron-detail-net']]
+      ['basis-neuron',['#perzeptron-1 .neuron-detail-recap',
+                       '#perzeptron-4 .neuron-detail-learning']],
+      ['basis-netze',['#netze-1 .neuron-detail-xor',
+                      '#netze-1 .neuron-detail-separation',
+                      '#netze-2 .neuron-detail-net']]
     ]){
       await mobilePage.goto('http://127.0.0.1:8770/bok/1-klasse/#'+lesson);
       for(const selector of selectors){
@@ -403,13 +403,13 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // The first-year buttons must launch the selected notebook directly inside
     // the same lab-panel component used in the fourth-year course.
     for(const [lesson,link,notebook,title] of [
-      ['basis-neuron','basis_neuron.ipynb','basis_neuron.ipynb','Ein Neuron'],
+      ['basis-neuron','perzeptron_und_neuronale_netze.ipynb','perzeptron_und_neuronale_netze.ipynb','Neuron-Labor · Doppellektion 3'],
       ['basis-netze','xor_einzelne_neuronen.ipynb','xor_einzelne_neuronen.ipynb','XOR: Ein Neuron'],
-      ['basis-netze','basis_netze.ipynb','basis_netze.ipynb','Neuronale Netze']
+      ['basis-netze','mehrschichtige_netze.ipynb','mehrschichtige_netze.ipynb','Neuronale Netze']
     ]){
       const notebookPage=await browser.newPage();
       await notebookPage.goto('http://127.0.0.1:8770/bok/1-klasse/#'+lesson);
-      await notebookPage.locator('#'+lesson+' a.ki-notebook-launch[href*="'+link+'"]').first().click();
+      await notebookPage.locator('#'+lesson+' .ki-notebook-block[data-notebook="content/'+notebook+'"] .ki-notebook-launch').first().click();
       await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
       const source=await notebookPage.locator('#basis-lab-frame').getAttribute('src');
       assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/bok/1-klasse/'+notebook,
@@ -422,24 +422,24 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       assert.equal(await basicDialog.evaluate(el=>el.tagName),'DIALOG');
       assert.equal(await basicDialog.getAttribute('open'),'');
       assert.equal(await basicDialog.getAttribute('aria-labelledby'),'basis-lab-title');
-      if(notebook==='basis_neuron.ipynb'){
+      if(notebook==='perzeptron_und_neuronale_netze.ipynb'){
         await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await basicDialog.waitFor({state:'hidden'});
-        assert.equal(await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().getAttribute('aria-expanded'),'false',
+        assert.equal(await notebookPage.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"] .ki-notebook-launch').first().getAttribute('aria-expanded'),'false',
           'Closing the modal must reset the launcher for keyboard and screen-reader users');
         assert.equal(await basicDialog.count(),1,'Closing must not destroy notebook markup');
         assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
           'Closing the dialog must not reload or remove the notebook iframe');
-        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().click();
+        await notebookPage.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"] .ki-notebook-launch').first().click();
         await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
         assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
           'Reopen must retain the same kernel document, not restart Python');
         await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await basicDialog.waitFor({state:'hidden'});
-        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().click();
+        await notebookPage.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"] .ki-notebook-launch').first().click();
         await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
       }
-      if(notebook==='basis_neuron.ipynb'){
+      if(notebook==='perzeptron_und_neuronale_netze.ipynb'){
         await checkNotebookFullscreen(notebookPage,'#basis-lab-fullscreen','#basis-notebook-panel');
       }
       await notebookPage.close();
@@ -451,7 +451,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       status:200,contentType:'text/html',body:'<!doctype html><html><body>JupyterLite test runtime</body></html>'
     }));
     for(const [url,section,expected] of [
-      ['http://127.0.0.1:8770/bok/1-klasse/','basis-neuron','content/basis_neuron.ipynb'],
+      ['http://127.0.0.1:8770/bok/1-klasse/','basis-neuron','content/perzeptron_und_neuronale_netze.ipynb'],
       ['http://127.0.0.1:8770/bok/4-klasse/','perzeptron','content/perzeptron_und_neuronale_netze.ipynb']
     ]){
       // Navigate just as a student would: inactive lesson sections are hidden.
@@ -547,7 +547,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert(await glossaryPage.locator('#basis-glossar-token .glossary-selfcheck').evaluate(el=>el.scrollWidth<=el.clientWidth+1),'Kein horizontales Überlaufen');
     assert(!await glossaryPage.locator('#basis-glossar-xor').isVisible());
     await glossaryPage.locator('[data-glossary-search]').fill('');
-    assert.equal(await glossaryPage.locator('#basis-glossar .glossary-entry:visible').count(),29);
+    const expectedGlossaryCount=JSON.parse(fs.readFileSync(path.resolve(__dirname,
+      '../kurse/bok/1-klasse/kursseiten/glossar.json'),'utf8')).begriffe.length;
+    assert.equal(await glossaryPage.locator('#basis-glossar .glossary-entry:visible').count(),expectedGlossaryCount);
     await glossaryPage.close();
     assert.deepEqual(errors,[]);
     console.log('PASS both course links, ten lessons, reused KI/ML, blue KST layout, two-layer network, live neuron controls and isolated persistent answers');

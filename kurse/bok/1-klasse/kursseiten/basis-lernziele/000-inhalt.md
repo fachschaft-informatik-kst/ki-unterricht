@@ -8,35 +8,49 @@
 ## KI einordnen
 <!-- MD:END -->
     <ul>
-      <li>Ich unterscheide KI, maschinelles Lernen, Deep Learning und generative KI.</li>
-      <li>Ich erkläre den Unterschied zwischen vorgegebenen Regeln und Lernen aus Beispielen.</li>
-      <li>Ich ordne reale KI-Anwendungen mit Begründung ein.</li>
+      <li>Ich unterscheide KI, maschinelles Lernen und neuronale Netze und ordne Beispiele begründet zu.</li>
+      <li>Ich erkläre, warum nicht jedes KI-System aus Daten lernt.</li>
     </ul>
+    <p class="small muted"><strong>Wo beurteilt?</strong> Nicht benotet; Selbstkontrolle im Unterricht.</p>
     <a href="#basis-ki">Zum Unterricht →</a>
   </article>
   <article class="card">
     <span class="section-label">02</span>
     <!-- MD:START -->
-## Lernarten erklären
+## Lernarten unterscheiden
 <!-- MD:END -->
     <ul>
-      <li>Ich unterscheide überwachtes, unüberwachtes und verstärkendes Lernen.</li>
-      <li>Ich erkläre anhand des Erfahrungsschatzes, warum Rückmeldung ein System verändern kann.</li>
+      <li>Ich unterscheide überwachtes, unüberwachtes und verstärkendes Lernen anhand der jeweiligen Rückmeldung.</li>
+      <li>Ich ordne die Memory-Aufgaben und das NIM-Beispiel den Lernarten zu und begründe die Zuordnung.</li>
     </ul>
+    <p class="small muted"><strong>Wo beurteilt?</strong> Nicht benotet; Selbstkontrolle im Unterricht.</p>
     <a href="#basis-lernen">Zum Unterricht →</a>
   </article>
   <article class="card">
-    <span class="section-label">03–04</span>
+    <span class="section-label">03</span>
     <!-- MD:START -->
-## Neuron und Netz verstehen
+## Ein künstliches Neuron verstehen
 <!-- MD:END -->
     <ul>
-      <li>Ich erkläre das biologische Vorbild und wie ein künstliches Neuron mithilfe von Gewichten und Bias eine 0/1-Entscheidung berechnet.</li>
-      <li>Ich stelle AND und OR mit Gewichten und Bias ein und erkläre die Perzeptron-Lernregel anhand eines konkreten Vorher-Nachher-Lernschritts.</li>
-      <li>Ich begründe mit Wahrheitstabelle, Punktdarstellung und widersprüchlichen Bedingungen, warum ein einzelnes Perzeptron XOR nicht lösen kann.</li>
-      <li>Ich zeige am Netz aus OR, NAND und AND, wie eine Zwischenschicht XOR ermöglicht, und untersuche das Training von Netzen mit 1, 2 und 4 versteckten Neuronen.</li>
+      <li>Ich erkläre, wofür ein künstliches Neuron da ist: Es macht aus mehreren Zahlen eine Ja/Nein-Entscheidung.</li>
+      <li>Ich bestimme bei gegebenen Eingaben, Gewichten, Bias und Schwelle die Ausgabe eines Perzeptrons.</li>
+      <li>Ich sage, was beim überwachten Lernen genau gelernt wird (Gewichte und Bias), und beschreibe die Lernregel (Ausgabe gegen Ziel).</li>
     </ul>
-    <a href="#basis-neuron">Zum Neuron →</a> · <a href="#basis-netze">Zum Netz →</a>
+    <p class="small muted"><strong>Wo beurteilt?</strong> Im Fachgespräch (DL 8): eine Grundlagenfrage zum Neuron (ca. 30 Sekunden).</p>
+    <a href="#basis-neuron">Zum Unterricht →</a>
+  </article>
+  <article class="card">
+    <span class="section-label">04</span>
+    <!-- MD:START -->
+## Mehrschichtige Netze verstehen
+<!-- MD:END -->
+    <ul>
+      <li>Ich begründe mit Wahrheitstabelle, Punktdarstellung und Bedingungen, warum ein einzelnes Perzeptron XOR nicht lösen kann.</li>
+      <li>Ich erkläre qualitativ, wie eine Zwischenschicht das XOR-Problem lösen kann.</li>
+      <li>Ich beschreibe am Beispiel der Ziffernerkennung ein Netz mit 64 Eingaben, einer versteckten Schicht und 10 Ausgaben und erkläre, dass es überwacht lernt (richtige Ziffer als Label).</li>
+    </ul>
+    <p class="small muted"><strong>Wo beurteilt?</strong> Im Fachgespräch (DL 8): eine Grundlagenfrage zur Zwischenschicht (ca. 30 Sekunden).</p>
+    <a href="#basis-netze">Zum Unterricht →</a>
   </article>
   <article class="card">
     <span class="section-label">05</span>
