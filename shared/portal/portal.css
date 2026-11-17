@@ -48,7 +48,7 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
   height:auto;
   margin-inline:auto;
 }
-.concept-figure.neuron-detail-figure img.neuron-graphic-mobile{
+.neuron-detail-figure img.neuron-graphic-mobile{
   display:none;
   max-width:450px;
 }
