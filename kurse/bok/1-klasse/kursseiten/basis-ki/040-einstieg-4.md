@@ -1,5 +1,5 @@
 <details class="kapitel" id="einstieg-4" data-kurz="Schwache und starke KI unterscheiden und eigene Beispiele begründen." open>
-  <summary><span class="kapitel-nr">4</span>
+  <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Schwache und starke KI</h2>
   </summary>
   <div class="kapitel-body"><p class="small muted"><strong>Wahlvertiefung:</strong> Schwache und starke KI sind Zusatzwissen; im Pflichtteil konzentrieren wir uns auf Regeln, Daten und Labels.</p>

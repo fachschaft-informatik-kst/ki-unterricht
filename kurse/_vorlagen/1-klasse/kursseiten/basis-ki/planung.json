@@ -9,7 +9,7 @@
       "question": "Wann ist ein System KI, und wie kann es aus Beispielen lernen?",
       "motivation": "Bei unserem Bildprojekt geben die Labels die richtigen Antworten vor.",
       "product": "Zwei korrekt begründete KI-Zuordnungen und eine Erklärung von überwachtem Lernen.",
-      "zeit": "90 Minuten. Pflicht: Regeln/Daten, Begriffe, kurze Memory-Erfahrung mit Labels; KI-Geschichte, starke KI, NIM und Robotergesetze nur als Vertiefung.",
+      "zeit": "90 Minuten. Pflicht: Regeln/Daten, Begriffe, kurze Memory-Erfahrung mit Labels; KI-Geschichte, starke KI und NIM nur als Vertiefung; die Ethik-Fallaufgabe entfällt und wird nicht nachgeholt.",
       "order": 10,
       "phases": [
         {

@@ -15,7 +15,7 @@
 | 7 | Sprachmodelle | Kontext, Vorhersage, Faktenprüfung |
 | 8 | KI und Gesellschaft | Chancen, Risiken und begründetes Urteil |
 
-**Verschoben bzw. freiwillig:** Ausführliche KI-Geschichte, Roboterethik, NIM, algebraische XOR-Herleitung, zusätzliche Ziffernarchitekturen und vollständiges Buchstaben-Fine-Tuning. Sprachmodelle und Gesellschaft bleiben **zwei eigenständige DL**.
+**Verschoben bzw. freiwillig:** Ausführliche KI-Geschichte, NIM, algebraische XOR-Herleitung, zusätzliche Ziffernarchitekturen und vollständiges Buchstaben-Fine-Tuning. Sprachmodelle und Gesellschaft bleiben **zwei eigenständige DL**.
 
 ## Projekt der 4. Klasse übernehmen, aber führen
 

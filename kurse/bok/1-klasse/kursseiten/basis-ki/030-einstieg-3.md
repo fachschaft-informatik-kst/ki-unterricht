@@ -1,5 +1,5 @@
 <details class="kapitel" id="einstieg-3" data-kurz="Neun Meilensteine zeigen, wann Regeln und wann Daten wichtig wurden." open>
-  <summary><span class="kapitel-nr">3</span>
+  <summary><span class="kapitel-nr">4</span>
     <h2 class="kapitel-titel">Meilensteine der KI</h2>
   </summary>
   <div class="kapitel-body"><p class="small muted"><strong>Wahlvertiefung:</strong> Die Meilensteine gehören nicht zum Pflichtteil der verkürzten DL 1. Wähle bei Interesse zwei aus.</p>

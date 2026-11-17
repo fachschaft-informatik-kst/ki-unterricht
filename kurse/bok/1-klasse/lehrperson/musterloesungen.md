@@ -34,14 +34,6 @@ Eine Katze lässt sich nicht durch wenige handprogrammierte Merkmale erkennen: P
 
 Die Begriffe «KI/ML/Deep Learning/generativ» beschreiben technische Verfahren beziehungsweise Aufgaben, «schwach/stark» den Grad allgemeiner Fähigkeiten. Sie sind keine austauschbaren Kategorien.
 
-### Asimovs Gesetze: Fall «Schulweg»
-
-**Argument 1:** Starkes Bremsen ist plausibel, aber bei jeder der drei beschriebenen Optionen droht Verletzung. Keine Möglichkeit ist eindeutig sicher.
-
-**Argument 2:** Asimovs erstes Gesetz verbietet Schädigung, löst jedoch nicht den Konflikt, **wessen Schaden zu vermeiden ist**. Entwickler, Gesellschaft und Recht müssen Entscheidungen und Verantwortlichkeiten klären.
-
-Eine andere gut begründete Wahl ist ebenfalls richtig. Bewertet werden zwei nachvollziehbare Argumente, nicht eine bestimmte Fahrtrichtung.
-
 **Leitfrage** («Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?»): «Ein System wirkt intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz bräuchte, und mit Neuem zurechtkommt. Ein Getränkeautomat führt feste Regeln aus, während ein trainierter Spamfilter Modellparameter aus Beispielen anpasst. Es gibt dennoch auch regelbasierte KI; 'automatisch' ist nicht gleich 'KI'.» Wer sein Kriterium vom Anfang ändert oder präzisiert, hat die Frage gut genutzt.
 
 ## 1 · Lernarten (integriert; frühere DL 2 als Wahlvertiefung)

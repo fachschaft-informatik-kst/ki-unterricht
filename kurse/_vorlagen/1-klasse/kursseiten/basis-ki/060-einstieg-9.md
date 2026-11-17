@@ -1,5 +1,5 @@
 <details class="kapitel" id="einstieg-9" data-kurz="Die vier Begriffe in eigenen Sätzen erklären und die Leitfrage mit Grafik und eigenem Beispiel beantworten." open>
-  <summary><span class="kapitel-nr">9</span>
+  <summary><span class="kapitel-nr">6</span>
     <h2 class="kapitel-titel">Begriffe sichern und Leitfrage beantworten</h2>
   </summary>
   <div class="kapitel-body">

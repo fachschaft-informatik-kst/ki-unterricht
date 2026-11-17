@@ -1,5 +1,5 @@
 <details class="kapitel" id="basis-lernen" data-kurz="Das wichtigste Lernsignal für unser Bildprojekt: beschriftete Beispiele." open>
-  <summary><span class="kapitel-nr">5</span><h2 class="kapitel-titel">Wie lernt KI? Drei Lernsignale</h2></summary>
+  <summary><span class="kapitel-nr">3</span><h2 class="kapitel-titel">Wie lernt KI? Drei Lernsignale</h2></summary>
   <div class="kapitel-body">
     <p class="section-intro">Für unser Bildprojekt ist vor allem <strong>überwachtes Lernen</strong> wichtig. Das Modell bekommt Bilder mit der richtigen Antwort: dem <strong>Label</strong>.</p>
     <div class="lesson-steps">
