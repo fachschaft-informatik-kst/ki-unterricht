@@ -443,7 +443,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // The first-year buttons must launch the selected notebook directly inside
     // the same lab-panel component used in the fourth-year course.
     for(const [lesson,link,notebook,title] of [
-      ['basis-neuron','perzeptron_und_neuronale_netze.ipynb','perzeptron_und_neuronale_netze.ipynb','Neuron-Labor · Doppellektion 3'],
+      ['basis-neuron','perzeptron_und_neuronale_netze.ipynb','perzeptron_und_neuronale_netze.ipynb','Neuron-Labor · Doppellektion 2'],
       ['basis-netze','xor_einzelne_neuronen.ipynb','xor_einzelne_neuronen.ipynb','XOR: Ein Neuron'],
       ['basis-netze','mehrschichtige_netze.ipynb','mehrschichtige_netze.ipynb','Neuronale Netze']
     ]){
