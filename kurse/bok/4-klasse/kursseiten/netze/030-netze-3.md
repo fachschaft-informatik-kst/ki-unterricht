@@ -4,9 +4,11 @@
   </summary>
   <div class="kapitel-body">
     <!-- MD:START -->
-**Notebook:** Untersuchen Sie XOR bei P = 0 über OR und NAND. Vergleichen Sie danach das überwachte Lernen mit 1, 2 und 4 versteckten Neuronen. In der Kursgrafik ergänzt das feste Neuron «Keine Prüfung» den XOR-Ausgang.
+**Experiment 1 · Schwimmbadnetz:** Wählen Sie nacheinander die vier S/F-Fälle. Schalten Sie P zwischen 0 und 1 um und verfolgen Sie **OR, NAND, «Keine Prüfung» und AND** in derselben Netzgrafik wie in Kapitel 2. Die Tabelle und die farbigen Entscheidungsgebiete ändern sich direkt.
 
-**Auftrag:** Erklären Sie für eine Schwimmbad-Situation den Weg von S, F und P zur Ausgabe (im Notebook bleibt P = 0). Ändern Sie jeweils nur eine Einstellung und notieren Sie das Ergebnis.
+**Experiment 2 · Gewichte verstehen:** Wählen Sie OR oder NAND und verändern Sie **nur ein Gewicht oder den Bias**. Beobachten Sie: Welche Grenze dreht oder verschiebt sich, und welche Fälle werden falsch? Stellen Sie danach die Startgewichte wieder her.
+
+**Experiment 3 · Lernen:** Vergleichen Sie das **trainierte XOR-Netz** bei P = 0 mit 1, 2 und 4 versteckten Neuronen und mehreren Startwerten. Tragen Sie unten Ihre Resultate ein.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/mehrschichtige_netze.ipynb" data-title="Neuronale Netze">
       <!-- MD:START -->
@@ -17,6 +19,8 @@
 <!-- MD:END -->
       <button type="button" class="ki-notebook-launch" data-lab="mehrschichtige_netze.ipynb">Notebook hier öffnen</button>
     </div>
+    <label class="field answer"><span>Versuch: Was ändert sich an der Entscheidungsgrenze und den vier Ergebnissen, wenn Sie bei OR oder NAND ein Gewicht bzw. den Bias verändern? Wie wirkt P = 1?</span><textarea data-answer="netz_schwimmbad_grenzen" maxlength="4000" placeholder="Bei einer Gewichtsänderung … / Beim Bias … / Bei P = 1 …" rows="3"></textarea></label>
+    <p><strong>Danach:</strong> Im zweiten Notebook-Experiment lernt ein kleines Netz XOR aus Beispielen; die Gewichte sind dort nicht vorgegeben. Halten Sie die Trefferzahlen und Startwerte im folgenden Protokoll fest.</p>
     <div class="protokoll-block">
       <!-- MD:START -->
 ### Mein Protokoll: Lernen mit mehreren Neuronen
