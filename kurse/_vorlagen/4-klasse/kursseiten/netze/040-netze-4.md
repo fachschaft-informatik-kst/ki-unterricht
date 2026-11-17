@@ -4,16 +4,16 @@
   </summary>
   <div class="kapitel-body">
     <!-- MD:START -->
-**Sicherung (einzeln, unbenotet, ca. 5 Minuten):** Schreiben Sie zuerst, vergleichen Sie danach mit der Selbstkontrolle. Zwei Fragen genügen; die Vorschaufrage unten dürfen Sie raten. Die Planung und Datenaufteilung folgen selbstständig in Doppellektion 5.
+**Sicherung (unbenotet, ca. 5 Minuten):** Beantworten Sie zuerst die Netzfrage, vergleichen Sie dann mit der Selbstkontrolle. Die Vorschau auf DL 5 dürfen Sie raten.
 <!-- MD:END -->
-    <label class="field answer"><span>1 · Netz: Warum kann ein einzelnes Neuron XOR nicht lösen, und wie hilft die Zwischenschicht? Erklären Sie dazu OR und NAND sowie den Ausgang, der bei P = 0 wie AND funktioniert, für (S, F, P) = (1,1,0) und vergleichen Sie mit (1,0,1). Prüfen Sie Ihre Rechnung an der Netzgrafik in Kapitel 2.</span><textarea data-answer="netze" maxlength="10000" placeholder="Bei P = 0 ergibt XOR …, OR …, NAND …; bei P = 1 wirkt der Prüfungswert …" rows="4"></textarea></label>
+    <label class="field answer"><span>1 · Netz: Warum scheitert ein einzelnes Neuron an XOR? Berechnen Sie mit der Zwischenschicht (OR und NAND, Ausgang wie AND bei P = 0) die Fälle (S, F, P) = (1,1,0) und (1,0,1). Nutzen Sie die Grafik aus Kapitel 2.</span><textarea data-answer="netze" maxlength="10000" placeholder="Bei P = 0 ergibt XOR …, OR …, NAND …; bei P = 1 wirkt der Prüfungswert …" rows="4"></textarea></label>
     <div class="callout" id="netze-bruecke">
       <!-- MD:START -->
-**Ausblick auf das Bildprojekt:** Dort arbeitet ein Netz nach derselben Grundidee, aber mit 1280 Merkmalen statt Sonne, Freund:innen und Prüfung als Eingaben. Die Zahlen liefert MobileNet, ein fertiges Netz, das unverändert bleibt. Nur das kleine Netz dahinter lernt Ihre zwei Klassen, nach denselben Schritten wie hier: vorhersagen, Fehler bewerten (gegen das Label), Gewichte anpassen. Es ist wieder **überwachtes Lernen**: Ihre zwei Klassen sind die Labels. [Wer weiss was? →](#projekt-wer-weiss-was)
+**Bildprojekt:** Statt S, F und P liefert das feste **MobileNet** für jedes Foto **1280 Merkmale**. Nur das kleine Netz dahinter lernt die zwei Klassen: vorhersagen, mit dem **Label** vergleichen und Gewichte korrigieren – wieder **überwachtes Lernen**. [Wer weiss was? →](#projekt-wer-weiss-was)
 <!-- MD:END -->
       <figure class="concept-figure">
         <img alt="Ablauf im Bildprojekt: Ein Foto geht in MobileNet, das vorab trainiert wurde und fest bleibt. MobileNet liefert 1280 Zahlen je Foto. Ein kleines Netz lernt aus diesen Zahlen Gewichte und Bias und gibt eine Vorhersage für Klasse A oder B aus. Beim Training bekommt es zu jedem Foto das Label, also die Klasse, die Sie dem Foto gegeben haben (überwachtes Lernen)." loading="lazy" src="grafiken/mobilenet_bruecke.svg"/>
-        <figcaption>Der Weg eines Fotos im Projekt: MobileNet bleibt fest, nur das kleine Netz lernt, überwacht mit Ihrer Klasse als Label.</figcaption>
+        <figcaption>MobileNet bleibt fest; das kleine Netz lernt aus den Klassenlabels.</figcaption>
       </figure>
       <!-- MD:START -->
 **Brückenkarte: Vom Neuron zum Bildprojekt**
@@ -33,20 +33,20 @@
 ### Lernstandscheck vor DL 5: Brücke und Vorschau (unbenotet, 2 Minuten)
 <!-- MD:END -->
       <ol>
-        <li><strong>Brücke:</strong> Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto. Welcher Teil lernt, welcher bleibt fest? Was ändert sich beim Lernen: die Eingaben, die Gewichte oder die Ausgabeklassen? Woher kennt der lernende Teil die richtige Antwort?</li>
-        <li><strong>Vorschau (Raten erlaubt):</strong> Welche Bilder sollten erst ganz am Schluss für eine unabhängige Prüfung geöffnet werden, und warum? Das erarbeiten Sie in Doppellektion 5.</li>
+        <li><strong>Brücke:</strong> Welcher Teil lernt, wenn MobileNet 1280 Zahlen pro Foto liefert? Was wird angepasst, und woher kommt das richtige Ziel?</li>
+        <li><strong>Vorschau (Raten erlaubt):</strong> Welche Bilder sollte man für einen unabhängigen Test bis zum Schluss zurückhalten – und warum?</li>
       </ol>
       <label class="field answer"><span>Meine Kurzantworten und eine offene Frage (nicht benotet)</span><textarea data-answer="projekt_bereit_check" maxlength="2000" rows="3" placeholder="1 … / 2 (Vorschau) … / Ich brauche noch Hilfe bei …"></textarea></label>
       <details class="basis-hint">
         <summary>Selbstkontrolle und Hilfe</summary>
         <div class="detail-body">
           <!-- MD:START -->
-**Zur Frage «Netz» oben:** Ein einzelnes Neuron hat nur eine gerade Grenze, die vier XOR-Fälle liegen aber diagonal. Die Zwischenschicht bildet zuerst OR und NAND; bei P = 0 verbindet der Ausgang beide wie AND, bei P = 1 hemmt das zusätzliche Gewicht −2. Für (S,F,P)=(1,1,0): OR=1, NAND=0; der Ausgang berechnet 1+0−0−1,5=−0,5 → Nein. Für (1,0,1): OR=1, NAND=1; wegen Prüfung berechnet der Ausgang 1+1−2−1,5=−1,5 → ebenfalls Nein. Ohne Prüfung wäre (1,0,0) → Ja.
+**Netz:** Ein Neuron hat nur eine gerade Entscheidungsgrenze; die XOR-Ja-Punkte liegen diagonal. OR und NAND bilden Zwischenwerte; der Ausgang verknüpft sie bei P = 0 wie AND, bei P = 1 hemmt Gewicht −2. Für (1,1,0): OR = 1, NAND = 0 → −0,5 = Nein. Für (1,0,1): OR = NAND = 1 → −1,5 = Nein. Ohne Prüfung wäre (1,0,0) → Ja.
 
-1. **Brücke:** Fest bleibt MobileNet, es liefert die 1280 Zahlen. Es lernt nur das kleine Netz dahinter: seine Gewichte und sein Bias. Eingaben und Ausgabeklassen ändern sich beim Lernen nicht. Die richtige Antwort steckt im Label: In Ihrem Projekt ist es die Klasse, die Sie jedem Foto geben (überwachtes Lernen, wie bei den XOR-Zielwerten).
-2. **Vorschau:** Mögliche Antwort: Bilder für den unabhängigen Test müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten mehr und der Test sagt nichts über neue Fotos aus. Das wird in DL 5 genau geklärt; hier darf man raten.
+1. **Brücke:** MobileNet liefert feste 1280 Merkmale; nur das kleine Netz lernt Gewichte und Bias. Eingaben und Ausgabeklassen bleiben gleich. Das richtige Ziel ist das Klassenlabel des Fotos.
+2. **Vorschau:** Testbilder bleiben bis zum Schluss ungesehen, damit die Prüfung auf neuen Daten unabhängig ist. Das folgt in DL 5.
 
-Wenn eine Antwort zu Netz oder Brücke unklar ist, wiederholt die entsprechende Aufgabe oder nutzt das Lernlabor vor dem selbstständigen Projekt.
+Falls etwas unklar ist, wiederholen Sie die passende Aufgabe oder nutzen Sie das Lernlabor.
 <!-- MD:END -->
         </div>
       </details>

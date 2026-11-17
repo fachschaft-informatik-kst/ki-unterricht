@@ -3,7 +3,7 @@
     <h2 class="kapitel-titel">Das XOR-Problem: Warum reicht ein Neuron nicht?</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>Neue Schwimmbadregel:</strong> Die drei Eingaben bleiben Sonne (S), Freund:innen (F) und Prüfung morgen (P). Für das Logikexperiment vereinbaren wir bewusst eine ungewöhnliche Schwimmbadregel: <strong>Schwimmen, wenn genau eine der Bedingungen Sonne oder Freund:innen erfüllt ist und morgen keine Prüfung stattfindet.</strong> Das Teilproblem bei <strong>P = 0</strong> heisst <strong>XOR</strong> (exklusives Oder). Zuerst untersuchen wir dafür die vier Kombinationen von S und F; im nächsten Kapitel ergänzen wir die Prüfung als echte Entscheidungseingabe.</p>
+    <p><strong>Neue Schwimmbadregel:</strong> Schwimmen, wenn <strong>genau eine</strong> Bedingung erfüllt ist – Sonne (S) oder Freund:innen (F) – <strong>und keine Prüfung (P)</strong> ansteht. Bei <strong>P = 0</strong> heisst das <strong>XOR</strong>. Erst prüfen wir vier S/F-Fälle, dann ergänzen wir P.</p>
     <!-- MD:START -->
 ### 1 · XOR kennenlernen: eine neue Regel
 <!-- MD:END -->
@@ -19,29 +19,29 @@
       </table>
     </div>
     <!-- MD:START -->
-Nur Sonne oder nur Freund:innen führt hier zu Ja. Bei beiden zusammen (1, 1) lautet die bewusst neue Regel Nein – anders als bei OR.
+Nur Sonne oder nur Freund:innen führt zu Ja; anders als bei OR gilt für (1, 1) **Nein**.
 <!-- MD:END -->
     <!-- MD:START -->
 ### 2 · Das Rätsel: Schafft ein Neuron alle vier Fälle?
 <!-- MD:END -->
     <!-- MD:START -->
-**Erst vermuten, dann prüfen:** Wie viele der vier XOR-Fälle schafft Ihrer Meinung nach ein einzelnes Neuron mit der besten Einstellung? Notieren Sie Ihre Vermutung. Öffnen Sie dann das eigenständige XOR-Notebook, ändern Sie Gewichte und Bias und vergleichen Sie die **vier Neuron-Grafiken**. Halten Sie fest, wie viele Fälle Ihre beste Einstellung richtig löst.
+**Notebook-Rätsel:** Schätzen Sie, wie viele XOR-Fälle ein Neuron löst. Testen Sie Gewichte und Bias an den vier Grafiken und notieren Sie Ihr bestes Ergebnis.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/xor_einzelne_neuronen.ipynb" data-title="XOR mit einem Neuron">
       <!-- MD:START -->
 ### Jupyter-Notebook · XOR mit einem Neuron
 <!-- MD:END -->
       <!-- MD:START -->
-Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
+Öffnen Sie das Notebook und führen Sie Zellen mit Shift + Enter aus.
 <!-- MD:END -->
       <button type="button" class="ki-notebook-launch" data-lab="xor_einzelne_neuronen.ipynb">Notebook hier öffnen</button>
     </div>
     <label class="field answer"><span>Protokoll: Wie viele der vier XOR-Fälle schafft Ihr einzelnes Neuron mit der besten Einstellung?</span><select data-answer="hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></label>
-    <p><strong>Ein Versuch mit nur einem Neuron:</strong> Für diese neue Regel wählen wir andere Gewichte als in DL 3: Sonne und Freund:innen je +1, Prüfung −2 (statt −4) und Bias −0,5. Damit gelingt die OR-Regel – aber bei XOR ist der Fall «beide sind 1» falsch. Die Zeichnung zeigt diese konkrete Fehlentscheidung, noch nicht den Beweis, dass keine andere Einstellung funktioniert.</p>
+    <p><strong>Versuch:</strong> S und F erhalten je +1, P erhält −2, der Bias −0,5. Damit stimmt OR, aber nicht XOR: Bei (1, 1) sagt das Neuron Ja statt Nein. Die Grafik zeigt diesen Fehler, noch keinen allgemeinen Beweis.</p>
     <figure class="concept-figure neuron-detail-figure neuron-detail-xor">
       <img class="neuron-graphic-desktop" alt="Drei Eingaben wie in der Repetition: Sonne 1, Freund:innen 1 und Prüfung morgen 0. Die Gewichte sind +1, +1 und −2; für P = 0 fällt der Prüfungsterm weg, bei P = 1 wirkt die negative Verbindung. Der Bias ist −0,5. Die Ausgabe für Sonne 1 und Freund:innen 1 ist Ja, die künstliche XOR-Zielregel verlangt aber Nein. Diese Einstellung liefert drei korrekte und einen falschen Fall." loading="lazy" src="grafiken/schwimmbad_xor_einzelne_neuron.svg"/>
       <img class="neuron-graphic-mobile" alt="Kompakte Netzwerkansicht wie beim Schwimmbad-Neuron: Sonne 1, Freund:innen 1, Prüfung 0, Gewichte und Bias. Die Ausgabe Ja ist beim XOR-Ziel Nein falsch; bei P = 1 würde das Prüfungsgewicht −2 die Ausgabe hemmen." loading="lazy" src="grafiken/schwimmbad_xor_einzelne_neuron_mobil.svg"/>
-      <figcaption>Das bekannte Schwimmbad-Neuron: Prüfung steht in diesem Teilversuch auf 0; diese Einstellung löst drei der vier XOR-Fälle. Warum es mit keiner Einstellung alle vier schafft, zeigt die Punktgrafik im nächsten Abschnitt.</figcaption>
+      <figcaption>Bei P = 0 erfüllt diese Einstellung drei von vier XOR-Fällen; die Punktgrafik erklärt die Grenze.</figcaption>
     </figure>
     <!-- MD:START -->
 ### 3 · Das Bild: die vier Fälle als Punkte
@@ -51,15 +51,15 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
       <img class="neuron-graphic-mobile" alt="Mobile XOR-Tabelle und Punktegrafik: Die beiden Ja-Fälle liegen diagonal und können nicht mit einer einzelnen geraden Linie von den Nein-Fällen getrennt werden." loading="lazy" src="grafiken/xor_gerade_mobil.svg"/>
       <figcaption>Egal ob senkrecht, waagrecht oder schräg: Keine gerade Linie trennt die roten von den blauen Punkten.</figcaption>
     </figure>
-    <p>Warum eine <em>Gerade</em>? Die Grenze zwischen «feuert» und «feuert nicht» liegt dort, wo Summe + Bias genau 0 ist: w₁·x₁ + w₂·x₂ + b = 0. Das ist die Gleichung einer geraden Linie. Gewichte drehen sie, der Bias verschiebt sie. Auf der einen Seite feuert das Neuron, auf der anderen nicht. Bei der Schwimmbadregel AND («nur bei Sonne und Freund:innen») liegt der einzige Ja-Punkt in einer Ecke: Eine Linie kann ihn abtrennen. Bei XOR liegen die 1-Punkte diagonal gegenüber.</p>
+    <p>Die Entscheidungsgrenze eines Neurons ist <strong>w₁·x₁ + w₂·x₂ + b = 0</strong> – eine Gerade. Gewichte drehen, der Bias verschiebt sie. Für AND ist der einzelne Ja-Punkt abtrennbar, die diagonalen XOR-Ja-Punkte jedoch nicht.</p>
     <!-- MD:START -->
-**Fazit:** Für das einzelne Neuron gibt es **keine Kombination aus Gewichten und Bias**, die alle vier XOR-Fälle korrekt unterscheidet: Keine Gerade trennt die diagonal liegenden Punkte. Eine andere Lernrate oder mehr Trainingsrunden können diese grundsätzliche Grenze nicht aufheben. Auch die dritte Eingabe P hilft dem einzelnen Neuron nicht: Für P = 0 bleibt das unlösbare XOR-Teilproblem bestehen.
+**Fazit:** Kein einzelnes Neuron kann alle vier XOR-Fälle lösen: Keine Gerade trennt die Ja- von den Nein-Punkten. Mehr Lernrunden oder eine andere Lernrate helfen nicht. P ändert daran nichts, denn bei P = 0 bleibt XOR unlösbar.
 <!-- MD:END -->
     <details>
       <summary>Die Rechnung dazu: vier Bedingungen, die sich widersprechen</summary>
       <div class="detail-body">
     <!-- MD:START -->
-Schreiben Sie zuerst für jede Zeile selbst die Bedingung an w₁, w₂ und b auf, bevor Sie die Tabelle ansehen. Jede Zeile ist eine Bedingung (Ausgabe 1 heisst Summe ≥ 0, Ausgabe 0 heisst Summe &lt; 0):
+Stellen Sie für jede Tabellenzeile die Bedingung auf: Ausgabe 1 verlangt Summe ≥ 0, Ausgabe 0 Summe &lt; 0.
 <!-- MD:END -->
     <div class="table-scroll">
       <table class="typen">
@@ -103,7 +103,7 @@ Schreiben Sie zuerst für jede Zeile selbst die Bedingung an w₁, w₂ und b au
       </div>
     </details>
     <!-- MD:START -->
-Danach geht es im nächsten Kapitel um einen Lösungsweg mit mehreren Neuronen.
+Kapitel 2 zeigt die Lösung mit mehreren Neuronen.
 <!-- MD:END -->
     <label class="field answer"><span>Warum kann keine Einstellung alle vier Schwimmbadfälle der XOR-Regel schaffen? Begründen Sie mit den Punkten (Gerade) und mit den vier Bedingungen. Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die beiden 1-Punkte liegen diagonal gegenüber, deshalb …" rows="4"></textarea></label>
   </div>
