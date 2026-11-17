@@ -32,7 +32,7 @@
       "teaching": true,
       "overview": {
         "title": "Was ist KI?",
-        "summary": "Begriffe · Regeln · Fallbeispiele"
+        "summary": "Begriffe ordnen · Beispiele prüfen"
       }
     },
     {
@@ -46,7 +46,7 @@
       "teaching": true,
       "overview": {
         "title": "Wie lernt KI?",
-        "summary": "Lernarten · Memory · Beobachtungen"
+        "summary": "Memory · NIM · drei Lernarten"
       }
     },
     {
@@ -55,7 +55,7 @@
       "teaching": true,
       "overview": {
         "title": "Ein Neuron",
-        "summary": "Schwimmbad · Gewichte und Bias · Lernregel"
+        "summary": "Gewichte · Bias · Grenzen"
       },
       "navigation": {
         "order": 4,
@@ -69,7 +69,7 @@
       "teaching": true,
       "overview": {
         "title": "Neuronale Netze",
-        "summary": "XOR · Trennlinie · Zwischenschicht · Training"
+        "summary": "Zwischenschichten · Daten aufteilen"
       },
       "navigation": {
         "order": 5,

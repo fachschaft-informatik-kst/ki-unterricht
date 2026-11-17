@@ -1,0 +1,1 @@
+<a class="btn" href="#basis-lernen">Weiter: Wie lernt KI? →</a>

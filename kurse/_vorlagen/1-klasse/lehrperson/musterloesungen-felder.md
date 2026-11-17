@@ -2,104 +2,118 @@
 
 **Nur für Lehrpersonen.** Die Antworten sind altersgerechte Beispiele und keine einzig richtigen Wortlaute. Die Kennung pro Tabellenzeile entspricht dem im Lernjournal gespeicherten Feld. **Zahlen, Namen, Texte, Filmausschnitte und Notebook-Beobachtungen sind illustrative Beispiele**, wenn nicht ausdrücklich ein mathematisch bestimmtes Ergebnis genannt wird. Das echte Unterrichtsprotokoll muss die eigenen Messwerte, Textausgaben und tatsächlichen Filmbelege zeigen. Versteckte Altfelder und freiwillige Vertiefungen sind der Vollständigkeit halber enthalten.
 
-## DL 1 · Was ist KI?
+## DL 1 · KI, Beispiele und Grenzfälle
 
-| Antwortfeld | Mögliche Musterantwort |
+| Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
-| `dl1_regeln_automat` | Feste Regeln: Guthaben und Taste bestimmen, ob das Getränk ausgegeben wird. |
-| `dl1_regeln_uebersetzung` | Lernen aus Daten: Die Übersetzungsapp wurde mit Satzpaaren trainiert. |
-| `dl1_regeln_ampel` | Feste Regeln: Die Ampel folgt einem Zeitplan. |
-| `dl1_regeln_gesicht` | Lernen aus Daten: Das Bilderkennungsmodell hat Merkmale aus Trainingsbildern gelernt. |
+| `dl1_regeln_automat` | Regelbasiert: Ein fest programmiertes Guthaben und ein Knopfdruck steuern die Ausgabe; keine Anpassung aus Daten. |
+| `dl1_regeln_uebersetzung` | Lernt aus Daten: Das beschriebene Übersetzungsmodell wurde mit Satzpaaren trainiert. |
+| `dl1_regeln_ampel` | Regelbasiert: Sie wiederholt einen festen Zeitplan und lernt nicht. |
+| `dl1_regeln_gesicht` | Lernt aus Daten: Das Bildmodell wurde anhand von Beispielen trainiert. |
 | `dl1_begriffe_ampel` | Keine KI. |
 | `dl1_begriffe_schach` | Regelbasierte KI. |
-| `dl1_begriffe_spam` | Maschinelles Lernen. |
+| `dl1_begriffe_spam` | Maschinelles Lernen (hier ausdrücklich ohne tiefes Netz). |
 | `dl1_begriffe_bilder` | Deep Learning. |
 | `dl1_begriffe_text` | Generative KI. |
-| `regeln_oder_daten` | Ein Getränkeautomat arbeitet selbstständig, befolgt aber nur vorgegebene Regeln. Er lernt nicht aus Beispielen. Automatisch bedeutet nicht automatisch KI. |
-| `begriff_bsp_1` | Optional: Schachcomputer – regelbasierte KI. |
-| `begriff_bsp_2` | Optional: Spamfilter mit Trainingsdaten – maschinelles Lernen. |
-| `begriff_bsp_3` | Optional: Tierbilder mit tiefem Netz erkennen – Deep Learning. |
-| `begriff_bsp_4` | Optional: KI schreibt eine Geschichte – generative KI. |
-| `basis-ki-zeitstrahl` | Frühe KI-Systeme folgten oft von Menschen festgelegten Regeln. Später wurden viele Modelle mit Daten trainiert, etwa tiefe neuronale Netze. Heute sind Regeln weiterhin wichtig, beispielsweise für Sicherheit und Kontrolle. |
-| `ki_ordnung` | Schachcomputer: feste Regeln, schwache KI. Spamfilter: lernt aus Daten, ML und schwache KI. Fiktive allgemein intelligente Filmfigur: hypothetische starke KI. Ein Chatbot ist nicht automatisch allgemein intelligent. |
-| `typ_bsp_1` | Altes freiwilliges Feld: Schachprogramm. |
-| `typ_1` | Alte Kategorie: regelbasierte KI. |
-| `typ_bsp_2` | Altes freiwilliges Feld: Spamfilter. |
-| `typ_2` | Alte Kategorie: maschinelles Lernen. |
-| `typ_bsp_3` | Altes freiwilliges Feld: Tierbilderkennung. |
-| `typ_3` | Alte Kategorie: Deep Learning. |
-| `typ_bsp_4` | Altes freiwilliges Feld: Textgenerator. |
-| `typ_4` | Alte Kategorie: generative KI. |
-| `gesetze` | 1. Das Bremsen ist naheliegend, weil es Verletzungen verringern könnte. 2. Das Gesetz schützt nicht automatisch alle gleichzeitig; bei möglichen Schäden braucht es menschliche Regeln und Verantwortung. |
-| `begriffe_saetze` | KI ist ein Oberbegriff für Systeme, die anspruchsvolle Aufgaben bearbeiten. ML lernt aus Daten. Deep Learning benutzt tiefe neuronale Netze. Generative KI erzeugt neue Inhalte. |
-| `begriffe` | Der Getränkeautomat folgt festen Regeln; der trainierte Spamfilter hat aus Beispielen gelernt. Offen bleibt für mich, wann eine Regelmaschine als KI gilt. |
+| `regeln_oder_daten` | Auch ein einfaches Programm arbeitet automatisch, ohne zu lernen oder komplexe Entscheidungen zu treffen: eine Zeitschaltuhr befolgt nur feste Regeln. Automatisierung allein ist kein Beleg für KI. |
+| `begriff_bsp_1` | Spamfilter mit gelerntem Entscheidungsbaum – maschinelles Lernen. |
+| `begriff_bsp_2` | Handgeschriebene Ziffern erkennen mit tiefem Netz – Deep Learning. |
+| `begriff_bsp_3` | Schachprogramm mit Suchbaum – regelbasierte KI. |
+| `begriff_bsp_4` | Sprachmodell, das einen Text verfasst – generative KI. |
+| `ki_zeitstrahl` | Frühe symbolische Systeme nutzten handformulierte Regeln; tiefe neuronale Netze lernen viele Merkmale aus Beispieldaten. Regeln bleiben etwa bei Sicherheitsprüfungen wichtig. Die Meilensteine zeigen keinen vollständigen Ersatz von Regeln durch Lernen. |
+| `ki_ordnung` | 1. Regelbasiertes Schachprogramm: Regeln, regelbasierte KI, schwache KI. 2. Bilderkennung: aus Bilddaten trainiertes tiefes Netz, Deep Learning, schwache KI. 3. Allgemein intelligente Filmfigur: hypothetische starke KI, ihre technische Umsetzung ist unbekannt. Ein Chatbot kann sprachlich überzeugend wirken, ohne verlässlich allgemeine Aufgaben lösen zu können. |
+| `typ_bsp_1` | Früheres Feld: regelbasiertes Schachprogramm. |
+| `typ_1` | Frühere Kategorie: regelbasierte KI. |
+| `typ_bsp_2` | Früheres Feld: trainierter Spamfilter. |
+| `typ_2` | Frühere Kategorie: maschinelles Lernen. |
+| `typ_bsp_3` | Früheres Feld: Tierbildklassifikator. |
+| `typ_3` | Frühere Kategorie: Deep Learning. |
+| `typ_bsp_4` | Früheres Feld: textgenerierendes Sprachmodell. |
+| `typ_4` | Frühere Kategorie: generative KI. |
+| `gesetze` | 1. Bremsen kann Verletzungen vermindern, doch ein Restschaden ist nicht vermeidbar. 2. Asimovs erstes Gesetz entscheidet nicht, wessen Risiko bei konfligierenden Optionen Vorrang haben soll; dafür braucht es Verantwortung, Regeln und gesellschaftliche Abwägung. |
+| `begriffe_saetze` | KI ist der Oberbegriff für Systeme, die Aufgaben intelligent bearbeiten. Maschinelles Lernen bestimmt Muster aus Beispieldaten. Deep Learning ist ML mit mehrschichtigen neuronalen Netzen. Generative KI erzeugt neue Inhalte, zum Beispiel Texte. |
+| `begriffe` | Kriterium (Beispiel): Ein System ist intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz einsetzen müsste, und mit Neuem zurechtkommt. Eine zeitgesteuerte Ampel führt feste Regeln aus und lernt nicht, sie ist keine KI. Ein Schachprogramm mit festen Regeln kann regelbasierte KI sein, lernt aber nicht aus Daten; ein Spamfilter mit gelerntem Entscheidungsbaum passt sein Modell anhand von Beispielen an. Nicht jedes automatisch arbeitende Programm ist also eine KI. Offen bleibt, wie man bei Grenzfällen KI sinnvoll abgrenzt. |
 
-## DL 2 · Wie lernt KI?
+## DL 2 · Lernen aus Daten
 
-| Antwortfeld | Mögliche Musterantwort |
+| Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
-| `eva_erklaerung` | Eingabe: neue E-Mail. Erfahrungsschatz: beim Training gelernte Merkmale und Gewichte aus gelabelten Beispielen. Ausgabe: Spam oder nicht. Eine neue Mail verändert das Modell nicht automatisch; das regelbasierte Schachprogramm lernt in diesem Beispiel nicht. |
-| `wissen_fragen` | «Ist die Figur erfunden?» – ja; «Kommt sie in einem Film vor?» – ja; «Hat sie Superkräfte?» – nein. Mit jeder Antwort werden Möglichkeiten ausgeschlossen. |
-| `wissen_unbekannt` | Das System kann falsch raten oder fragen, wer gemeint war. Das allein zeigt noch nicht, wie es intern lernt. |
-| `wissen_regeln` | Entwicklerinnen und Entwickler haben Fragen und Regeln vorgegeben; wir wissen ohne Einsicht nicht, ob und wann der Dienst zusätzliche Daten auswertet. |
-| `lernend_nachbarn` | Bei unserem Beispiel lagen ähnliche Animationsfilme beieinander, etwa weil die Genres oder Bewertungen ähnlich sind. Echte Titel aus dem Experiment nennen. |
-| `lernend_aendert` | Genre-Färbung zeigt Genres; bei Nutzerbewertungen ändern sich Farben und bei einem neuen User Index die erwarteten Bewertungen. |
-| `lernend_daten` | Aus Eigenschaften von Filmen und vergangenen Nutzerbewertungen; die genaue Datenquelle ist im Versuch nicht vollständig belegt. |
-| `memory-supervised` | Das Modell hat die richtigen Labels gesehen; es erkennt manche neue Bilder, verwechselt aber manchmal ähnliche Klassen. |
-| `memory-unsupervised` | Ich gruppierte nach Farbe. Andere hätten nach Form sortieren können; beides kann sinnvoll sein. |
-| `memory-reinforcement` | Im NIM-Spiel wird eine erfolgreiche Entscheidung belohnt und künftig häufiger gewählt. |
-| `memory` | Überwacht: richtige Labels. Unüberwacht: Ähnlichkeiten. Verstärkend: Belohnung. NIM ist verstärkendes Lernen; die Bildklassifikation ist überwachtes Lernen. |
+| `eva_erklaerung` | Spamfilter: Eingabe neue E-Mail; Erfahrungsschatz gelernte Parameter aus beschrifteten Trainingsmails; Ausgabe Spam oder kein Spam. Eine einzelne Benutzung ändert die Parameter nicht automatisch. Das Schachprogramm folgt hier festen Suchregeln. |
+| `wissen_fragen` | Beispielbaum für fünf Tiere: «Lebt es im Wasser?» → ja → «Hat es Flossen?» → ja → Fisch, nein → Frosch; auf «Lebt es im Wasser?» → nein → «Hat es Federn?» → ja → Adler, nein → «Bellt es?» → ja → Hund, nein → Katze. Jede Antwort bestimmt die nächste Frage. |
+| `wissen_unbekannt` | Der Baum führt trotzdem zu einem der fünf Tiere (zum Beispiel Adler für den Pinguin) oder endet ohne Ergebnis. Er hat keine Regel für das neue Tier und lernt es nicht von selbst. |
+| `wissen_regeln` | Das Tandem hat Fragen und Reihenfolge festgelegt. Der Baum ändert sich nur, wenn Menschen ihn umbauen; er vergleicht keine Ergebnisse und passt sich nicht an. |
+| `wissen_akinator` | Beobachtungen können abweichen. Mögliche Belege: Er rät auch seltene Figuren, die niemand in eine feste Fragenliste geschrieben hätte; bei mehrfach falschem Raten fragt er nach dem Namen der Figur und erweitert seine Datenbank; er nutzt Erfahrungen früherer Spielender. Wie er genau arbeitet, ist nicht öffentlich; die Aussage «lernt aus früheren Spielen» stützt sich auf die Beschreibung des Anbieters und auf Beobachtungen. |
+| `lernend_nachbarn` | In meinem Beispiel lagen mehrere ähnliche Animationsfilme nahe beieinander; Gemeinsamkeiten waren Genre und ähnliche Bewertungsmuster. Tatsächliche Filmtitel aus dem eigenen Versuch einsetzen. |
+| `lernend_aendert` | Bei Genre werden Genregruppen sichtbar; bei vorhergesagter Bewertung ändern sich die Farben je Nutzer. Ein anderer User Index kann andere Prognosen ergeben. |
+| `lernend_daten` | Vermutlich aus Filmmerkmalen, Nutzendenbewertungen und ihren Mustern; die genaue Implementierung bleibt ohne Dokumentation offen. |
+| `memory-supervised` | Mit gelabelten Beispielen werden Regeln für die beiden Klassen gelernt. Bei ähnlichen Bildern kann das Modell auch falsch zuordnen; das am eigenen Versuch prüfen. |
+| `memory-unsupervised` | Ohne Labels lassen sich beispielsweise Karten nach Farbe oder Form clustern. Je nach Merkmal sind mehrere sinnvolle Gruppierungen möglich. |
+| `memory-reinforcement` | Beim NIM-Spiel wird eine erfolgreiche Zugfolge belohnt bzw. die Rückmeldung verstärkt künftige Entscheidungen; das ist verstärkendes Lernen. |
+| `memory` | Überwacht: Lernen mit richtigen Labels. Unüberwacht: ähnliche Fälle gruppieren. Verstärkend: Belohnung nach Handlungen. NIM ist verstärkend, das Bildprojekt nutzt überwachtes Lernen. |
+| `lernart_sicherung` | Beispiel: Ein Musikdienst empfiehlt Lieder. Lernsignal: Rückmeldung (angehört, übersprungen, «Gefällt mir») oder Ähnlichkeit (Menschen mit ähnlichem Geschmack). Erkennbar daran, dass die Empfehlung aus früheren Daten entsteht und nicht aus einer festgelegten Regel. Labels nur, wenn die Lieder vorher beschriftet wurden. Mehrere Antworten sind richtig, wenn das Lernsignal begründet ist; bewertet wird die Begründung, nicht der Name der Lernart. |
 
-## DL 3 · Ein Neuron und dessen Lernregel
+## DL 3 · Neuron und Protokoll
 
-| Antwortfeld | Mögliche Musterantwort |
+| Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
-| `basis-neuron-neuron_wozu` | Sonne und Freund:innen geben positive Beiträge, die Prüfung einen negativen. Der Bias legt die Schwelle fest. Gewicht Prüfung = 0 würde die Prüfung völlig ignorieren. |
-| `basis-neuron-neuron_gelernt` | Beim Schwimmbad-Beispiel (Sonne = 1, Freund:innen = 0, Prüfung = 0; Ziel Ja, ursprüngliche Ausgabe Nein) wird das Sonnengewicht von 0 auf 1 und der Bias von −1,5 auf −0,5 korrigiert (Lernrate 1). Die anderen Gewichte, die Eingaben und die Rechenregel bleiben gleich; das Gelernte steckt in Gewichten und Bias. |
-| `basis-neuron-sw_gs` | +2 |
-| `basis-neuron-sw_gf` | +2 |
-| `basis-neuron-sw_gp` | −1 |
-| `basis-neuron-sw_bias` | −1 |
-| `basis-neuron-sw_treffer` | 5 von 8: In drei Prüfungssituationen liegt das Startneuron falsch. |
-| `basis-neuron-sw2_gs` | +2 |
-| `basis-neuron-sw2_gf` | +2 |
-| `basis-neuron-sw2_gp` | −4 |
-| `basis-neuron-sw2_bias` | −1 |
-| `basis-neuron-sw2_gefunden` | Ja: 8 von 8. Es sind auch andere richtige Einstellungen möglich. |
-| `basis-neuron-hand_and_w1` | 1 |
-| `basis-neuron-hand_and_w2` | 1 |
-| `basis-neuron-hand_and_b` | −1,5 |
-| `basis-neuron-hand_and_ok` | Ja, vier richtige Fälle. |
-| `basis-neuron-hand_or_w1` | 1 |
-| `basis-neuron-hand_or_w2` | 1 |
-| `basis-neuron-hand_or_b` | −0,5 |
-| `basis-neuron-hand_or_ok` | Ja, vier richtige Fälle. |
-| `basis-neuron-hand_nand_w1` | −1 |
-| `basis-neuron-hand_nand_w2` | −1 |
-| `basis-neuron-hand_nand_b` | 1,5 |
-| `basis-neuron-hand_nand_ok` | Ja, vier richtige Fälle. |
-| `basis-neuron-lr_005` | Beispiel: 36 Lernrunden, nicht gemessen. |
-| `basis-neuron-lr_02` | Beispiel: 13 Lernrunden, nicht gemessen. |
-| `basis-neuron-lr_05` | Beispiel: 7 Lernrunden, nicht gemessen. |
-| `basis-neuron-lr_10` | Beispiel: 12 Lernrunden, nicht gemessen. |
-| `basis-neuron-lr_beob` | Kleine Lernrate: kleinere Schritte; grosse Lernrate: unter Umständen schneller, aber unruhig. Das Ergebnis hängt vom Versuch ab. |
-| `basis-neuron-iris_richtig` | Beispiel: 27 von 30 neue Pflanzen richtig (nicht gemessen). |
-| `basis-neuron-iris_gewicht` | Abhängig vom echten Notebooklauf: die Eingabe mit dem betragsmässig grösseren gelernten Gewicht benennen. |
-| `basis-neuron-perzeptron` | Ein Neuron bildet die gewichtete Summe plus Bias. Bei einem Fehler wird das Gewicht passender Eingaben verändert, damit die Ausgabe künftig näher am Ziel liegt. |
+| `neuron_wozu` | Positive Gewichte für Sonne und Freund:innen erhöhen die Schwimmneigung, das negative Prüfungsgewicht senkt sie; Bias legt die Schwelle fest. Bei Prüfungsgewicht 0 hätte die Prüfung keinen Einfluss mehr. |
+| `neuron_gelernt` | Überwachtes Lernen: Das Ziel (Label) ist für das Schwimmbad-Beispiel bekannt. Bei Sonne = 1, Freund:innen = 0 und Prüfung = 0 ist das Ziel Ja (1), das Neuron sagt zunächst Nein (0). Bei Lernrate 1 steigt das Sonnengewicht von 0 auf 1 und der Bias von −1,5 auf −0,5; die anderen Gewichte bleiben wegen ihrer inaktiven Eingaben unverändert. Die Eingaben und die Rechenregel bleiben gleich; das Gelernte steckt in Gewichten und Bias. |
+| `sw_gs` | +2 |
+| `sw_gf` | +2 |
+| `sw_gp` | −1 |
+| `sw_bias` | −1 |
+| `sw_treffer` | 5 von 8 (Startwerte; die Regel «nie vor einer Prüfung» wird teils verletzt). |
+| `sw2_gs` | +2 |
+| `sw2_gf` | +2 |
+| `sw2_gp` | −4 |
+| `sw2_bias` | −1 |
+| `sw2_gefunden` | Ja, 8 von 8; auch andere Gewichtskombinationen sind möglich. |
+| `hand_and_w1` | 1 |
+| `hand_and_w2` | 1 |
+| `hand_and_b` | −1,5 |
+| `hand_and_ok` | Ja, 4 von 4. |
+| `hand_or_w1` | 1 |
+| `hand_or_w2` | 1 |
+| `hand_or_b` | −0,5 |
+| `hand_or_ok` | Ja, 4 von 4. |
+| `hand_nand_w1` | −1 |
+| `hand_nand_w2` | −1 |
+| `hand_nand_b` | 1,5 |
+| `hand_nand_ok` | Ja, 4 von 4. |
+| `lernschritt_selbst` | Mit OR (Start 0,2 / 0,2 / −0,5, Lernrate 0,2) stimmt das erste Beispiel (0,0). Beim zweiten, (0,1) mit Ziel 1, ist die Summe −0,3 und die Ausgabe 0, das Neuron feuert zu wenig: w₂ steigt von 0,2 auf 0,4 und der Bias von −0,5 auf −0,3. w₁ bleibt 0,2, weil der Eingang x₁ = 0 ist (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Entscheidend: Gewichte und Bias werden geändert, Eingaben und Ziele bleiben. |
+| `lr_005` | Beispielwert für NOR (Start 0,2/0,2/−0,5): 18 Runden bis alle vier Zeilen stimmen (Runde ohne Korrektur mitgezählt, sonst 17); echte Notebook-Ausgabe prüfen. |
+| `lr_02` | Beispielwert für NOR: 7 Runden (sonst 6); echte Notebook-Ausgabe prüfen. |
+| `lr_05` | Beispielwert für NOR: 4 Runden (sonst 3); echte Notebook-Ausgabe prüfen. |
+| `lr_10` | Beispielwert für NOR: 4 Runden (sonst 3); echte Notebook-Ausgabe prüfen. |
+| `lr_beob` | Eine sehr kleine Lernrate verändert die Parameter langsamer, hier braucht sie viele Runden; mittlere und grosse Lernraten führen schneller ans Ziel. Aus einem Lauf allein lässt sich keine grundsätzlich beste Lernrate bestimmen. |
+| `iris_richtig` | Beispielwert: 27 von 30; echte Notebook-Ausgabe übernehmen. |
+| `iris_gewicht` | Abhängig vom trainierten Versuch; das Merkmal mit dem grösseren Betrag des gelernten Gewichts eintragen und die Ausgabe nennen. |
+| `perzeptron` | Gewicht: Einfluss einer Eingabe; Bias: verschiebt die Schwelle. Beim überwachten Lernen (Beispiele mit Ziel bzw. Label) ändern sich nur Gewichte und Bias. Die Lernregel vergleicht die Ausgabe mit dem Ziel: Bei Ziel 1 und Vorhersage 0 werden die Gewichte aktiver Eingaben erhöht, bei Ziel 0 und Vorhersage 1 gesenkt (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Das Neuron korrigiert sich nicht selbst; das Verfahren ändert seine Werte. Das Gelernte steckt in Gewichten und Bias. |
 
-## DL 4 · Neuronale Netze
+## DL 4 · XOR und Ziffern
 
-| Antwortfeld | Mögliche Musterantwort |
+| Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
-| `basis-netze-hand_xor_max` | Höchstens 3 von 4 korrekt; ein einzelnes Neuron hat nur eine lineare Entscheidungsgrenze. |
-| `basis-netze-xor_warum` | Bei XOR sind (0,1) und (1,0) positiv, aber (0,0) und (1,1) negativ. Eine Gerade kann das nicht trennen. Andere Lernraten ändern daran nichts. |
-| `basis-netze-netze_zwischenschicht` | (S,F)=(1,0): OR = 1, NAND = 1. Bei P = 0 gilt «Keine Prüfung» = 1: 1+1+1−2,5=+0,5 → Ja. Bei P = 1 gilt «Keine Prüfung» = 0: 1+1+0−2,5=−0,5 → Nein. Die Zwischenschicht liefert drei Teilentscheidungen. |
-| `basis-netze-xornetz_1` | Beispiel: 3 richtige Zeilen (Notebookwert ersetzen). |
-| `basis-netze-xornetz_2` | Beispiel: 4 richtige Zeilen (Notebookwert ersetzen). |
-| `basis-netze-xornetz_4` | Beispiel: 4 richtige Zeilen (Notebookwert ersetzen). |
-| `basis-netze-xornetz_start` | Nein, Startwerte können das Ergebnis verändern. |
-| `basis-netze-xornetz_beob` | Bei einem Beispielstart gelangen 2 versteckte Neuronen zu 4/4. Ein anderer Start kann scheitern; tatsächlichen Lauf dokumentieren. |
-| `basis-netze-netze` | Ein einzelnes Neuron trennt XOR nicht linear. Die Zwischenschicht berechnet OR, NAND und «Keine Prüfung»; nur drei Einsen ergeben am Ausgang Ja. |
+| `hand_xor_max` | Höchstens 3 von 4 Fällen; keine einzelne Gerade trennt alle XOR-Eingaben. |
+| `xor_warum` | Geometrisch: Die beiden 1-Punkte (0,1) und (1,0) liegen diagonal gegenüber der beiden 0-Punkte (0,0) und (1,1); keine einzelne Gerade trennt sie. Rechnerisch: Die Bedingungen b < 0, w₂ + b ≥ 0, w₁ + b ≥ 0 und w₁ + w₂ + b < 0 widersprechen sich. Die Lernrate verändert nur die Schritte, nicht die Modellgrenze. |
+| `netze_zwischenschicht` | (S,F)=(1,0): OR = NAND = 1. P = 0 ergibt «Keine Prüfung» = 1 und Ja; P = 1 ergibt «Keine Prüfung» = 0 und Nein. Der Ausgang kombiniert alle drei Zwischenwerte mit Bias −2,5. |
+| `xornetz_1` | Beispiel: 3 von 4; der konkrete Notebooklauf zählt. |
+| `xornetz_2` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
+| `xornetz_4` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
+| `xornetz_start` | Nein; das Ergebnis kann mit anderen Startwerten variieren. |
+| `xornetz_beob` | Beispielsweise genügten 2 versteckte Neuronen bei einem Startwert; bei einem anderen scheiterte das Training. Ergebnisse nur als Beobachtung eines konkreten Laufs deuten. |
+| `netze` | Ein einzelnes Neuron hat nur eine gerade Grenze; XOR ist nicht linear trennbar. OR, NAND und «Keine Prüfung» werden in der Zwischenschicht berechnet. (1,1,0): 1+0+1−2,5=−0,5 → Nein. (1,0,1): 1+1+0−2,5=−0,5 → Nein. Ohne Prüfung bei (1,0,0) → Ja. |
+| `projekt_bereit_check` | Brücke: MobileNet bleibt fest und liefert 1280 Zahlen je Foto; nur das kleine Netz lernt (Gewichte und Bias), Eingaben und Ausgabeklassen bleiben. Die richtige Antwort kennt es aus dem Label, der Klasse jedes Fotos (überwachtes Lernen). Vorschau (Raten erlaubt): Die Testbilder müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten. Das wird in DL 5 genau geklärt. Offene Frage zum Beispiel: Wie erkennt man ein Datenleck bei fast gleichen Bildern? |
+| `zif_2` | Beispiel: 55 %; Notebookwert einsetzen. |
+| `zif_4` | Beispiel: 69 %; Notebookwert einsetzen. |
+| `zif_8` | Beispiel: 77 %; Notebookwert einsetzen. |
+| `zif_16` | Beispiel: 88 %; Notebookwert einsetzen. |
+| `zif_32` | Beispiel: 91 %; Notebookwert einsetzen. |
+| `zif_brauchbar` | In diesem frei erfundenen Zahlenbeispiel 16 Neuronen (erstmals mindestens 80 %); im eigenen Lauf kann die Grenze anders liegen. |
+| `zif_verw_a` | Beispiel: tatsächliche Ziffer 8. |
+| `zif_verw_b` | Beispiel: vorhergesagte Ziffer 3. |
+| `zif_beob` | Die handschriftliche 8 könnte wegen einer offenen Schlaufe ähnlich wie eine 3 wirken. Nur auf eine tatsächlich angezeigte Verwechslung beziehen. |
+| `netze_ziffern` | Das 8×8-Bild liefert 64 Eingaben, die verborgene Schicht umfasst z. B. 16 Neuronen, der Ausgang 10 Ziffern. Gewichte wurden aus Trainingsbeispielen gelernt: Zu jedem Bild war die richtige Ziffer als Label bekannt (überwachtes Lernen), und das Netz verglich seine Vorhersage damit. Unbekannte Testbilder prüfen die Übertragung. |
 
 ## DL 5–8 · Ziffern, Transfer, Fotoklassen und Gespräch
 
