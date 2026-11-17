@@ -30,23 +30,23 @@
           <div class="ki-sort-pool" data-ki-sort-pool>
             <div class="ki-sort-card" data-ki-sort-card="ampel" data-ki-sort-correct="keine" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">1</span><span class="ki-sort-card-text">Ampel mit festem Zeitplan.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_begriffe_ampel" aria-label="Ampel mit festem Zeitplan. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_begriffe_ampel" aria-label="Ampel mit festem Zeitplan. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
             </div>
             <div class="ki-sort-card" data-ki-sort-card="schach" data-ki-sort-correct="regelki" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">2</span><span class="ki-sort-card-text">Schachprogramm sucht mit programmierten Such- und Spielregeln nach guten Zügen.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_begriffe_schach" aria-label="Schachprogramm sucht mit programmierten Such- und Spielregeln nach guten Zügen. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_begriffe_schach" aria-label="Schachprogramm sucht mit programmierten Such- und Spielregeln nach guten Zügen. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
             </div>
             <div class="ki-sort-card" data-ki-sort-card="spam" data-ki-sort-correct="ml" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">3</span><span class="ki-sort-card-text">Spamfilter nutzt einen aus E-Mails gelernten Entscheidungsbaum.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_begriffe_spam" aria-label="Spamfilter nutzt einen aus E-Mails gelernten Entscheidungsbaum. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_begriffe_spam" aria-label="Spamfilter nutzt einen aus E-Mails gelernten Entscheidungsbaum. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
             </div>
             <div class="ki-sort-card" data-ki-sort-card="bilder" data-ki-sort-correct="deep" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">4</span><span class="ki-sort-card-text">Bildklassifikator erkennt Tiere mit einem tiefen neuronalen Netz.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_begriffe_bilder" aria-label="Bildklassifikator erkennt Tiere mit einem tiefen neuronalen Netz. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_begriffe_bilder" aria-label="Bildklassifikator erkennt Tiere mit einem tiefen neuronalen Netz. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
             </div>
             <div class="ki-sort-card" data-ki-sort-card="text" data-ki-sort-correct="generativ" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">5</span><span class="ki-sort-card-text">Sprachmodell erzeugt auf Anfrage neue Texte.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_begriffe_text" aria-label="Sprachmodell erzeugt auf Anfrage neue Texte. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_begriffe_text" aria-label="Sprachmodell erzeugt auf Anfrage neue Texte. – Kategorie"><option value="">Bitte zuordnen …</option><option value="keine">Keine KI</option><option value="regelki">Regelbasierte KI</option><option value="ml">Maschinelles Lernen</option><option value="deep">Deep Learning</option><option value="generativ">Generative KI</option></select></label>
             </div>
           </div>
         </div>
@@ -94,20 +94,20 @@
       <details class="ki-sort-help">
         <summary><span class="ki-sort-help-show">Hilfe zur Zuordnung anzeigen</span><span class="ki-sort-help-hide">Hilfe zur Zuordnung ausblenden</span><span class="ki-sort-help-icon" aria-hidden="true"></span></summary>
         <!-- MD:START -->
-Ein Zeitplan ist keine KI. Ein Suchverfahren kann regelbasierte KI sein. Ein Entscheidungsbaum ist maschinelles Lernen ohne tiefes Netz. Texte erzeugende Sprachmodelle sind hier generative KI.
+Ein Zeitplan ist keine KI. Ein Suchverfahren kann regelbasierte KI sein. Ein aus Daten gelernter Entscheidungsbaum ist maschinelles Lernen ohne tiefes Netz; ein von Menschen gezeichneter Baum wäre ein regelbasiertes System. Texte erzeugende Sprachmodelle sind hier generative KI.
 <!-- MD:END -->
       </details>
     </div>
-    <label class="field answer ki-sort-reflection"><span><strong>Zum Schluss:</strong> Warum ist nicht jedes automatisch arbeitende Programm eine KI?</span><textarea data-basis-answer="regeln_oder_daten" rows="2" maxlength="10000" placeholder="Ein automatisch arbeitendes Programm …"></textarea></label>
+    <label class="field answer ki-sort-reflection"><span><strong>Zum Schluss:</strong> Warum ist nicht jedes automatisch arbeitende Programm eine KI?</span><textarea data-answer="regeln_oder_daten" rows="2" maxlength="10000" placeholder="Ein automatisch arbeitendes Programm …"></textarea></label>
     <details class="ki-sort-legacy">
-      <summary>Wahlvertiefung: eigene Beispiele nennen</summary>
+      <summary>Eigene Beispiele nennen</summary>
       <div class="ki-sort-legacy-fields">
-        <label class="field answer"><span>Eigenes Beispiel 1 (freiwillig)</span><textarea data-basis-answer="begriff_bsp_1" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
-        <label class="field answer"><span>Eigenes Beispiel 2 (freiwillig)</span><textarea data-basis-answer="begriff_bsp_2" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
-        <label class="field answer"><span>Eigenes Beispiel 3 (freiwillig)</span><textarea data-basis-answer="begriff_bsp_3" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
-        <label class="field answer"><span>Eigenes Beispiel 4 (freiwillig)</span><textarea data-basis-answer="begriff_bsp_4" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
+        <label class="field answer"><span>Eigenes Beispiel 1</span><textarea data-answer="begriff_bsp_1" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
+        <label class="field answer"><span>Eigenes Beispiel 2</span><textarea data-answer="begriff_bsp_2" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
+        <label class="field answer"><span>Eigenes Beispiel 3</span><textarea data-answer="begriff_bsp_3" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
+        <label class="field answer"><span>Eigenes Beispiel 4</span><textarea data-answer="begriff_bsp_4" rows="2" maxlength="10000" placeholder="Mein Beispiel …"></textarea></label>
       </div>
-      <p class="small">Freiwillig: Frühere eigene Beispiele bleiben hier erhalten.</p>
+      <p class="small">Frühere eigene Beispiele bleiben hier erhalten.</p>
     </details>
     <p class="small">Nicht jedes KI-System lernt aus Daten. Nicht jedes lernende Modell ist Deep Learning. Unser Bildprojekt gehört zum maschinellen Lernen: MobileNet ist ein Deep-Learning-Modell, und unser kleines Netz lernt darauf aufbauend, Ihre zwei Klassen zu unterscheiden.</p>
   </div>
