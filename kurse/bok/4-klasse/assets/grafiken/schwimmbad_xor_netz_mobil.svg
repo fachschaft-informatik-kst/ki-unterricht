@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="450" height="698" viewBox="0 0 450 698" font-family="Helvetica,Arial,sans-serif" role="img" aria-labelledby="title description">
 <title id="title">Schwimmbad-Netz mit drei Teilentscheidungen</title>
-<desc id="description">Sonne 1, Freundinnen und Freunde 0, Prüfung morgen 1. Die Zwischenschicht berechnet OR 1, NAND 1 und Keine Prüfung 0. Das Ausgabeneuron kombiniert die drei Zahlen mit Gewichten plus 1 und Bias minus 2,5: Ergebnis minus 0,5, also Nein. Bei Prüfung 0 ergibt es Ja. Alle Verbindunggewichte stehen einheitlich direkt auf den Pfeilen, jeder Bias mittig unter seinem Neuron.</desc>
+<desc id="description">Sonne 1, Freundinnen und Freunde 0 und Prüfung morgen 0 ergeben in der Zwischenschicht OR 1, NAND 1 und Keine Prüfung 1. Das Ausgabeneuron verbindet die drei Werte wie AND, mit Gewichten plus 1 und Bias minus 2,5. Die Summe ist plus 0,5, das Ergebnis Ja. Bei Prüfung 1 liefert Keine Prüfung 0 und der Ausgang Nein. Die Zahlen auf den Verbindungen sind Gewichte, die Bias-Werte stehen unter den Neuronen.</desc>
 <defs><marker id="arrPos" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#176c63"/></marker><marker id="arrNeg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#be572b"/></marker><marker id="arrResult" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#263b43"/></marker></defs>
 <rect x="0" y="0" width="450" height="698" rx="14" fill="#f6f9fb" stroke="#e5edf0"/>
 <text x="16" y="31" font-size="21" fill="#263b43" font-weight="700" text-anchor="start" >Drei Teilentscheidungen</text>
-<text x="16" y="55" font-size="13" fill="#52656a" font-weight="400" text-anchor="start" >Gemeinsam entscheiden, ob wir schwimmen</text>
+<text x="16" y="55" font-size="13" fill="#52656a" font-weight="400" text-anchor="start" >Zahlen auf Pfeilen = Gewichte</text>
 <text x="54" y="106" font-size="11" fill="#52656a" font-weight="700" text-anchor="middle" >EINGABEN</text>
 <text x="221" y="106" font-size="11" fill="#52656a" font-weight="700" text-anchor="middle" >ZWISCHENSCHICHT</text>
 <text x="376" y="106" font-size="11" fill="#52656a" font-weight="700" text-anchor="middle" >AUSGABE</text>
@@ -17,22 +17,22 @@
 <line class="network-edge" data-edge="or-out" x1="266" y1="161" x2="334" y2="266" fill="none" stroke="#176c63" stroke-width="2.8" stroke-linecap="round" marker-end="url(#arrPos)"/>
 <line class="network-edge" data-edge="nand-out" x1="266" y1="288" x2="332" y2="288" fill="none" stroke="#176c63" stroke-width="2.8" stroke-linecap="round" marker-end="url(#arrPos)"/>
 <line class="network-edge" data-edge="no_exam-out" x1="266" y1="444" x2="334" y2="309" fill="none" stroke="#176c63" stroke-width="2.8" stroke-linecap="round" marker-end="url(#arrPos)"/>
-<rect x="82" y="145" width="62" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
-<text class="line-weight" x="113" y="161.8" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="s-or">w = +1</text>
-<rect x="82" y="241.8" width="62" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
-<text class="line-weight" x="113" y="258.6" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="f-or">w = +1</text>
-<rect x="82" y="179.9" width="62" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
-<text class="line-weight" x="113" y="196.7" font-size="14" fill="#be572b" font-weight="700" text-anchor="middle" data-edge="s-nand">w = −1</text>
-<rect x="82" y="276" width="62" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
-<text class="line-weight" x="113" y="292.8" font-size="14" fill="#be572b" font-weight="700" text-anchor="middle" data-edge="f-nand">w = −1</text>
-<rect x="82" y="436" width="62" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
-<text class="line-weight" x="113" y="452.8" font-size="14" fill="#be572b" font-weight="700" text-anchor="middle" data-edge="p-no_exam">w = −1</text>
-<rect x="269" y="201.5" width="62" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
-<text class="line-weight" x="300" y="218.3" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="or-out">w = +1</text>
-<rect x="268" y="276" width="62" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
-<text class="line-weight" x="299" y="292.8" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="nand-out">w = +1</text>
-<rect x="269" y="364.5" width="62" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
-<text class="line-weight" x="300" y="381.3" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="no_exam-out">w = +1</text>
+<rect x="92" y="145" width="42" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
+<text class="line-weight" x="113" y="161.8" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="s-or">+1</text>
+<rect x="92" y="241.8" width="42" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
+<text class="line-weight" x="113" y="258.6" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="f-or">+1</text>
+<rect x="92" y="179.9" width="42" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
+<text class="line-weight" x="113" y="196.7" font-size="14" fill="#be572b" font-weight="700" text-anchor="middle" data-edge="s-nand">−1</text>
+<rect x="92" y="276" width="42" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
+<text class="line-weight" x="113" y="292.8" font-size="14" fill="#be572b" font-weight="700" text-anchor="middle" data-edge="f-nand">−1</text>
+<rect x="92" y="436" width="42" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
+<text class="line-weight" x="113" y="452.8" font-size="14" fill="#be572b" font-weight="700" text-anchor="middle" data-edge="p-no_exam">−1</text>
+<rect x="279" y="201.5" width="42" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
+<text class="line-weight" x="300" y="218.3" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="or-out">+1</text>
+<rect x="278" y="276" width="42" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
+<text class="line-weight" x="299" y="292.8" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="nand-out">+1</text>
+<rect x="279" y="364.5" width="42" height="24" rx="7" fill="#ffffff" stroke="#d9e4e8"/>
+<text class="line-weight" x="300" y="381.3" font-size="14" fill="#176c63" font-weight="700" text-anchor="middle" data-edge="no_exam-out">+1</text>
 <circle data-node="s" cx="54" cy="157" r="27" fill="#e9f2fb" stroke="#30628c" stroke-width="2"/>
 <text x="54" y="164" font-size="20" fill="#263b43" font-weight="700" text-anchor="middle" >1</text>
 <text x="54" y="205" font-size="12.5" fill="#263b43" font-weight="400" text-anchor="middle" >Sonne</text>
@@ -40,7 +40,7 @@
 <text x="54" y="295" font-size="20" fill="#263b43" font-weight="700" text-anchor="middle" >0</text>
 <text x="54" y="336" font-size="12.5" fill="#263b43" font-weight="400" text-anchor="middle" >Freund:innen</text>
 <circle data-node="p" cx="54" cy="448" r="27" fill="#e9f2fb" stroke="#30628c" stroke-width="2"/>
-<text x="54" y="455" font-size="20" fill="#263b43" font-weight="700" text-anchor="middle" >1</text>
+<text x="54" y="455" font-size="20" fill="#263b43" font-weight="700" text-anchor="middle" >0</text>
 <text x="54" y="496" font-size="12.5" fill="#263b43" font-weight="400" text-anchor="middle" >Prüfung morgen</text>
 <circle data-node="or" cx="221" cy="157" r="43" fill="#d8f1e6" stroke="#176c63" stroke-width="2"/>
 <text x="221" y="150" font-size="18" fill="#176c63" font-weight="700" text-anchor="middle" >OR</text>
@@ -51,20 +51,21 @@
 <circle data-node="no_exam" cx="221" cy="448" r="43" fill="#fff0e9" stroke="#be572b" stroke-width="2"/>
 <text x="221" y="437" font-size="14" fill="#be572b" font-weight="700" text-anchor="middle" >Keine</text>
 <text x="221" y="454" font-size="14" fill="#be572b" font-weight="700" text-anchor="middle" >Prüfung</text>
-<text x="221" y="475" font-size="19" fill="#263b43" font-weight="700" text-anchor="middle" >0</text>
-<circle data-node="out" cx="376" cy="288" r="43" fill="#e0ecf3" stroke="#30628c" stroke-width="2"/>
-<text x="376" y="282" font-size="17" fill="#263b43" font-weight="700" text-anchor="middle" >Σ + b</text>
-<text x="376" y="309" font-size="17" fill="#be572b" font-weight="700" text-anchor="middle" >−0,5</text>
+<text x="221" y="475" font-size="19" fill="#263b43" font-weight="700" text-anchor="middle" >1</text>
+<circle data-node="out" cx="376" cy="288" r="43" fill="#d8f1e6" stroke="#176c63" stroke-width="2"/>
+<text x="376" y="271" font-size="19" fill="#176c63" font-weight="700" text-anchor="middle" >AND</text>
+<text x="376" y="291" font-size="13" fill="#263b43" font-weight="700" text-anchor="middle" >Σ + b</text>
+<text x="376" y="312" font-size="16" fill="#176c63" font-weight="700" text-anchor="middle" >+0,5</text>
 <text class="neuron-bias" x="221" y="226" font-size="14" fill="#263b43" font-weight="700" text-anchor="middle" data-node="or">b = −0,5</text>
 <text class="neuron-bias" x="221" y="357" font-size="14" fill="#263b43" font-weight="700" text-anchor="middle" data-node="nand">b = +1,5</text>
 <text class="neuron-bias" x="221" y="517" font-size="14" fill="#263b43" font-weight="700" text-anchor="middle" data-node="no_exam">b = +0,5</text>
 <text class="neuron-bias" x="376" y="357" font-size="14" fill="#263b43" font-weight="700" text-anchor="middle" data-node="out">b = −2,5</text>
-<rect x="319" y="407" width="114" height="51" rx="10" fill="#e4e9ed" stroke="#c8d1d7"/>
-<text x="376" y="428" font-size="18" fill="#263b43" font-weight="700" text-anchor="middle" >Nein</text>
-<text x="376" y="447" font-size="13" fill="#52656a" font-weight="400" text-anchor="middle" >y = 0</text>
+<rect x="319" y="407" width="114" height="51" rx="10" fill="#e0f3e9" stroke="#a3cfb6"/>
+<text x="376" y="428" font-size="18" fill="#176c63" font-weight="700" text-anchor="middle" >Ja</text>
+<text x="376" y="447" font-size="13" fill="#52656a" font-weight="400" text-anchor="middle" >y = 1</text>
 <rect x="14" y="559" width="422" height="120" rx="10" fill="#eaf2f4" stroke="none"/>
 <text x="27" y="580" font-size="14" fill="#263b43" font-weight="700" text-anchor="start" >Ja nur, wenn alle drei Teilfragen 1 sind.</text>
-<text x="27" y="606" font-size="13" fill="#52656a" font-weight="400" text-anchor="start" >OR = 1 · NAND = 1 · keine Prüfung = 0</text>
-<text x="27" y="632" font-size="15" fill="#263b43" font-weight="700" text-anchor="start" >1 + 1 + 0 − 2,5 = −0,5  →  Nein</text>
-<text x="27" y="657" font-size="13" fill="#52656a" font-weight="400" text-anchor="start" >Ohne Prüfung: 1 + 1 + 1 − 2,5 = +0,5 → Ja</text>
+<text x="27" y="606" font-size="13" fill="#52656a" font-weight="400" text-anchor="start" >OR = 1 · NAND = 1 · keine Prüfung = 1</text>
+<text x="27" y="632" font-size="15" fill="#263b43" font-weight="700" text-anchor="start" >1 + 1 + 1 − 2,5 = +0,5  →  Ja</text>
+<text x="27" y="657" font-size="13" fill="#52656a" font-weight="400" text-anchor="start" >Mit Prüfung: 1 + 1 + 0 − 2,5 = −0,5 → Nein</text>
 </svg>
