@@ -69,6 +69,28 @@ def main():
                 assert x-r>=-1 and y-r>=-1 and x+r<=w+1 and y+r<=h+1,(diagram,x,y,r,w,h)
             for child in elem:walk(child,scale,shift_x,shift_y)
         walk(svg)
+        # Die BOK-/Vorlagen-SVGs stellen die Gewichte wieder direkt an den
+        # Verbindungen dar; Bias-Werte bleiben beim verarbeitenden Neuron.
+        # IRN hat eigenständige Kursgrafiken und ist hier nicht betroffen.
+        if 'bok' in content.parts or '_vorlagen' in content.parts:
+            canonical=diagram.replace('_mobil.svg','.svg')
+            expected={
+                'neuron_entscheider.svg': ('+2','+2','−4'),
+                'schwimmbad_lernschritt.svg': ('+0','+2','−4','+1','+2','−4'),
+                'schwimmbad_xor_einzelne_neuron.svg': ('+1','+1','−2'),
+                'schwimmbad_xor_netz.svg': ('+1','+1','−1','−1','+1','+1','−2'),
+            }[canonical]
+            ns='{http://www.w3.org/2000/svg}'
+            labels=svg.findall(f'.//{ns}text[@class="line-weight"]')
+            assert tuple(el.text.removeprefix('w = ') for el in labels)==expected,diagram
+            for el in labels:
+                x,y=(float(el.attrib[key]) for key in ('x','y'))
+                assert 0<=x<=w and 0<=y<=h,(diagram,x,y)
+                assert float(el.attrib['font-size'])>=14
+            bias_labels=svg.findall(f'.//{ns}text[@class="neuron-bias"]')
+            expected_bias=2 if canonical=='schwimmbad_lernschritt.svg' else (
+                3 if diagram=='schwimmbad_xor_netz_mobil.svg' else 1)
+            assert len(bias_labels)==expected_bias,(diagram,len(bias_labels))
 
     regeln={
         'UND (AND)': [0,0,0,1],
