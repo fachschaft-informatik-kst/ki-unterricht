@@ -2,33 +2,18 @@
 type: chapter
 id: basis-daten-experiment
 nummer: 1
-titel: Entdecken und ausprobieren
-kurz: Mit einer Vermutung ins Experiment starten
+titel: Ziffern und Buchstaben kurz untersuchen
+kurz: Ausgabeklassen verstehen · ca. 20 Minuten
 ---
 
-### Der erste Versuch mit einem Ziffernnetz
+**Einstieg (ca. 20 Min.):** Ein bereits trainiertes Ziffernnetz erhält 8×8-Pixelbilder und hat zehn Ausgabeklassen (0–9). Vermutet zuerst, was es zu A und B ausgibt. Probiert im Notebook zwei Ziffern und die beiden Buchstaben aus. **Eine Ziffernvorhersage für A ist keine Buchstabenerkennung:** Das Modell besitzt noch keine Ausgabe «A».
 
-**Pflichtkern:** Öffnet das vorbereitete Notebook und startet den Abschnitt **DL 5**. Das Ziffernnetz wurde bereits mit Ziffernbildern trainiert: **Ihr trainiert in dieser Lektion noch kein eigenes Modell.** Prüft zuerst mindestens zwei Ziffernbilder und notiert jeweils die tatsächliche Ziffer und die Vorhersage. Testet anschliessend die Buchstaben **A und B**. Notiert, welche Ziffer (0–9) das Netz jeweils ausgibt. Eine Ziffernausgabe für A oder B ist **kein** Beleg für eine korrekte Buchstabenerkennung, weil es keine Buchstaben-Ausgabeklassen gibt.
-
-**Leitfrage:** Warum gibt ein Ziffernnetz auch bei unbekannten Buchstaben eine Ziffer aus?
-
-Begriffe zum Nachschlagen: [Modell](#basis-glossar-modell), [Label / Klasse](#basis-glossar-label) und [Training](#basis-glossar-training).
-
-### Gedankenexperiment: die Datenfalle
-
-Stellt euch vor, Tassen sind auf Trainingsfotos immer vor einem weissen Hintergrund zu sehen, Bücher immer vor einem schwarzen. Was könnte das Modell irrtümlich lernen? Das ist ein Gedankenexperiment für die späteren Fotolektionen – **kein zweiter Trainingsauftrag in DL 5**.
-
-<div class="basis-answer"><label for="basis-daten-a">Unsere Vermutung und Beobachtung</label><textarea id="basis-daten-a" data-basis-answer="basis-daten-a" rows="3" placeholder="Wir vermuten … / Wir sehen …"></textarea></div>
-
-
-### Ziffernnetz und unbekannte Buchstaben
-
-
-<div class="ki-notebook-block" data-notebook="content/basis_bildmodell.ipynb" data-title="Ziffern und Buchstaben">
+<div class="ki-notebook-block" data-notebook="content/basis_bildmodell.ipynb" data-title="Ziffern und Buchstaben – kurzer Einstieg">
   <h3>Jupyter-Notebook · Ziffern und Buchstaben</h3>
-  <p>Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.</p>
-  <a class="ki-notebook-launch" href="../lab/index.html?path=portal/basis_bildmodell.ipynb">Notebook hier öffnen</a>
+  <p>Nur den kurzen Ziffern-/Buchstabentest bearbeiten. Ein zusätzliches Buchstaben-Fine-Tuning ist in diesem Kurs nicht Pflicht.</p>
+  <button type="button" class="ki-notebook-launch" data-lab="basis_bildmodell.ipynb">Notebook hier öffnen</button>
 </div>
 
+<div class="basis-answer"><label for="basis-daten-a">Unsere Vermutung und Beobachtung</label><textarea id="basis-daten-a" data-basis-answer="basis-daten-a" rows="3" placeholder="Das Modell gab für A … und für B … aus. Das bedeutet nicht, dass …"></textarea></div>
 
-Führt im Notebook den Abschnitt **DL 5** aus: Prüft zunächst Ziffernvorhersagen und testet dann die Buchstaben A und B. Notiert, welche **Ziffern** das Modell für die Buchstaben ausgibt. Das Modell kennt keine Buchstabenklasse: Die Vorhersage ist deshalb keine gültige Buchstabenerkennung. Die Bilder werden lokal erzeugt.
+**Brücke zum Projekt:** Auch ein vortrainiertes Bildnetz kann nur die Ausgabeklassen vorhersagen, auf die sein Kopf trainiert wurde. In DL 5 verwenden wir **MobileNet V2 als festes Merkmalsnetz** und trainieren einen neuen kleinen Kopf für unsere **zwei** Klassen. Das ist die gleiche Idee des Transfer Learnings, aber ohne einen zweiten Buchstaben-Trainingsdurchlauf.
