@@ -19,7 +19,7 @@ Auf eine Handlung folgt eine Rückmeldung. Im NIM-Spiel verändert sie, welche Z
 ### Memory-Runde 3 · verstärkend · 4 + 1 Min.
 <!-- MD:END -->
       <p>Legen Sie die Memory-Paare verdeckt aus. Ein Treffer gibt +1 Punkt, ein Fehlversuch 0. Nach jeder Rückmeldung darf der Agent seine Suchstrategie ändern. Beobachten Sie, wie sich sein Vorgehen verändert.</p>
-      <label class="field answer"><span>Verstärkend: Welche Rückmeldung veränderte die Zugwahl? Was wurde belohnt?</span><textarea data-basis-answer="memory-reinforcement" maxlength="10000" placeholder="Unsere Beobachtung zu Handlung und Rückmeldung …" rows="3"></textarea></label>
+      <label class="field answer"><span>Verstärkend: Welche Rückmeldung veränderte die Zugwahl? Was wurde belohnt?</span><textarea data-answer="memory-reinforcement" maxlength="10000" placeholder="Unsere Beobachtung zu Handlung und Rückmeldung …" rows="3"></textarea></label>
     </div>
   </div>
 </details>

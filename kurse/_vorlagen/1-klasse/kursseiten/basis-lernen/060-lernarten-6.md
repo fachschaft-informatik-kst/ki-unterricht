@@ -22,7 +22,7 @@ Ohne vorgegebene Kategorien gruppiert das System ähnliche Punkte. Farben und Mi
       <!-- MD:START -->
 Decken Sie die Labels ab und sortieren Sie die Karten ohne vorgegebene Zielgruppen nach Ähnlichkeit. Vergleichen Sie zwei mögliche Gruppierungen und benennen Sie deren Merkmale. Eine vorgegebene Gruppenzahl ist hier eine Spielregel, keine Voraussetzung dieser Lernart.
 <!-- MD:END -->
-      <label class="field answer"><span>Unüberwacht: Nach welcher Ähnlichkeit haben Sie gruppiert? Gab es mehrere plausible Gruppen?</span><textarea data-basis-answer="memory-unsupervised" maxlength="10000" placeholder="Unsere Beobachtung zu Gruppen ohne Labels …" rows="3"></textarea></label>
+      <label class="field answer"><span>Unüberwacht: Nach welcher Ähnlichkeit haben Sie gruppiert? Gab es mehrere plausible Gruppen?</span><textarea data-answer="memory-unsupervised" maxlength="10000" placeholder="Unsere Beobachtung zu Gruppen ohne Labels …" rows="3"></textarea></label>
     </div>
   </div>
 </details>

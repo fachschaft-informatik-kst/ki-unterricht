@@ -21,9 +21,9 @@ Das System baut aus Beispielen einen Erfahrungsschatz auf. Neue Daten können ih
             <li>Aus welchen Daten könnte das System diese Muster gelernt haben?</li>
           </ol>
         </div>
-        <label class="field answer"><span>Was haben die «Nearest Neighbors» Ihres Films gemeinsam?</span><textarea data-basis-answer="lernend_nachbarn" maxlength="10000" rows="3" placeholder="Die Nachbarn …"></textarea></label>
-        <label class="field answer"><span>Was verändert sich beim Färben nach «Genre» und «Predicted User Rating» und beim Wechsel des «User Index»?</span><textarea data-basis-answer="lernend_aendert" maxlength="10000" rows="3" placeholder="Es verändert sich …"></textarea></label>
-        <label class="field answer"><span>Aus welchen Daten könnte das System diese Muster gelernt haben?</span><textarea data-basis-answer="lernend_daten" maxlength="10000" rows="3" placeholder="Vermutlich aus …"></textarea></label>
+        <label class="field answer"><span>Was haben die «Nearest Neighbors» Ihres Films gemeinsam?</span><textarea data-answer="lernend_nachbarn" maxlength="10000" rows="3" placeholder="Die Nachbarn …"></textarea></label>
+        <label class="field answer"><span>Was verändert sich beim Färben nach «Genre» und «Predicted User Rating» und beim Wechsel des «User Index»?</span><textarea data-answer="lernend_aendert" maxlength="10000" rows="3" placeholder="Es verändert sich …"></textarea></label>
+        <label class="field answer"><span>Aus welchen Daten könnte das System diese Muster gelernt haben?</span><textarea data-answer="lernend_daten" maxlength="10000" rows="3" placeholder="Vermutlich aus …"></textarea></label>
       </article>
     </div>
   </div>
