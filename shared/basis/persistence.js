@@ -88,7 +88,12 @@ const loaded=(async()=>{const db=await storeReady;if(!db)return;
 async function persistDB(){const db=await storeReady;if(!db)return false;await new Promise((resolve,reject)=>{const tx=db.transaction('notebooks','readwrite');const store=tx.objectStore('notebooks');store.put(saved,'all');store.put(notebookUploads,'uploads');store.put(photoJSON,'photo');store.put(legacyNotebooks,'legacy');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});return true;}
 // Older first-year notebook snapshots must not replace the new fourth-year-aligned lessons.
 const mirroredFrom={'basis_neuron.ipynb':'content/perzeptron_und_neuronale_netze.ipynb','basis_netze.ipynb':'content/mehrschichtige_netze.ipynb'};
-function matchesCurrentLesson(name,nb){return !mirroredFrom[name]||nb?.metadata?.ki_didaktik?.ursprung===mirroredFrom[name];}
+// Restore old student work as an archive, not as an obsolete DL4 diagram.
+const DL4_NETZ_REVISION='dl4-schwimmbad-v2',dl4Netze=new Set(['basis_netze.ipynb','mehrschichtige_netze.ipynb']);
+function matchesCurrentLesson(name,nb){
+ if(dl4Netze.has(name)&&nb?.metadata?.ki_didaktik?.notebook_revision!==DL4_NETZ_REVISION)return false;
+ return !mirroredFrom[name]||nb?.metadata?.ki_didaktik?.ursprung===mirroredFrom[name];
+}
 function validate(nb){if(!nb||nb.nbformat!==4||!Array.isArray(nb.cells)||nb.cells.length>200||JSON.stringify(nb).length>50000000)throw Error('Ungültiges Notebook.');return nb;}
 function request(type,extra={},target=frame){return new Promise((resolve,reject)=>{if(!target.contentWindow)return reject(Error('Notebook nicht geladen'));const id=crypto.randomUUID();const timer=setTimeout(()=>{pending.delete(id);reject(Error('Notebook antwortet nicht.'));},type==='restore'?120000:60000);pending.set(id,{resolve,reject,timer,source:target.contentWindow});target.contentWindow.postMessage({channel:'ki-portal-v1',type,id,...extra},location.origin);});}
 async function persist(){try{const durable=await persistDB();try{localStorage.setItem(NBKEY,JSON.stringify(saved));}catch{}if(!durable&&!localStorage.getItem(NBKEY))throw Error('Kein verfügbarer Speicher');status.textContent='Notebook im Browser gespeichert. Für eine vollständige Sicherung ZIP herunterladen.';}catch(e){changed=true;status.textContent='Notebook konnte nicht dauerhaft gespeichert werden: '+e.message+'. Bitte ZIP herunterladen.';}}
