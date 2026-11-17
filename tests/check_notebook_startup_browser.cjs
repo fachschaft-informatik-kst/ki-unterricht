@@ -83,7 +83,7 @@ const embedded=`<!doctype html><html><meta charset="utf-8"><body><script>
       el.contentWindow.studentValue='unsaved first notebook';
       return el.contentWindow.boot;
     });
-    const secondName=route.includes('1-klasse')?'basis_netze.ipynb':'mehrschichtige_netze.ipynb';
+    const secondName=route==='irn/1-klasse/'?'basis_netze.ipynb':'mehrschichtige_netze.ipynb';
     const clickNotebook=name=>page.locator(`.ki-notebook-block[data-notebook$="/${name}"] .ki-notebook-launch`).first().evaluate(el=>el.click());
     await clickNotebook(secondName);
     await page.waitForFunction(([sel,name])=>document.querySelector(sel)?.getAttribute('src')?.includes(encodeURIComponent(name)),
