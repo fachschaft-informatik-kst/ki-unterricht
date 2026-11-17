@@ -96,13 +96,13 @@
 |---|---|
 | `hand_xor_max` | Höchstens 3 von 4 Fällen; keine einzelne Gerade trennt alle XOR-Eingaben. |
 | `xor_warum` | Geometrisch: Die beiden 1-Punkte (0,1) und (1,0) liegen diagonal gegenüber der beiden 0-Punkte (0,0) und (1,1); keine einzelne Gerade trennt sie. Rechnerisch: Die Bedingungen b < 0, w₂ + b ≥ 0, w₁ + b ≥ 0 und w₁ + w₂ + b < 0 widersprechen sich. Die Lernrate verändert nur die Schritte, nicht die Modellgrenze. |
-| `netze_zwischenschicht` | (S,F)=(1,0): OR=1, NAND=1. P=0 führt zu Ja (1), P=1 wegen des negativen Prüfungsgewichts −2 zu Nein (0). Die Zwischenschicht erzeugt die XOR-Zwischenmerkmale. |
+| `netze_zwischenschicht` | (S,F)=(1,0): OR = NAND = 1. P = 0 ergibt «Keine Prüfung» = 1 und Ja; P = 1 ergibt «Keine Prüfung» = 0 und Nein. Der Ausgang kombiniert alle drei Zwischenwerte mit Bias −2,5. |
 | `xornetz_1` | Beispiel: 3 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_2` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_4` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_start` | Nein; das Ergebnis kann mit anderen Startwerten variieren. |
 | `xornetz_beob` | Beispielsweise genügten 2 versteckte Neuronen bei einem Startwert; bei einem anderen scheiterte das Training. Ergebnisse nur als Beobachtung eines konkreten Laufs deuten. |
-| `netze` | Ein einzelnes Neuron hat nur eine lineare Grenze; die XOR-Punkte liegen diagonal. Die Zwischenschicht kombiniert OR und NAND; am Ausgang wird zusätzlich Prüfung P mit Gewicht −2 berücksichtigt. Für (S,F,P)=(1,1,0): OR=1, NAND=0, Summe 1+0−0−1,5=−0,5 → Nein. Für (1,0,1): OR=1, NAND=1, Summe 1+1−2−1,5=−1,5 → Nein. |
+| `netze` | Ein einzelnes Neuron hat nur eine gerade Grenze; XOR ist nicht linear trennbar. OR, NAND und «Keine Prüfung» werden in der Zwischenschicht berechnet. (1,1,0): 1+0+1−2,5=−0,5 → Nein. (1,0,1): 1+1+0−2,5=−0,5 → Nein. Ohne Prüfung bei (1,0,0) → Ja. |
 | `projekt_bereit_check` | Brücke: MobileNet bleibt fest und liefert 1280 Zahlen je Foto; nur das kleine Netz lernt (Gewichte und Bias), Eingaben und Ausgabeklassen bleiben. Die richtige Antwort kennt es aus dem Label, der Klasse jedes Fotos (überwachtes Lernen). Vorschau (Raten erlaubt): Die Testbilder müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten. Das wird in DL 5 genau geklärt. Offene Frage zum Beispiel: Wie erkennt man ein Datenleck bei fast gleichen Bildern? |
 | `zif_2` | Beispiel: 55 %; Notebookwert einsetzen. |
 | `zif_4` | Beispiel: 69 %; Notebookwert einsetzen. |
