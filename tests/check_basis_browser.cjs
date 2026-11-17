@@ -409,7 +409,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     ]){
       const notebookPage=await browser.newPage();
       await notebookPage.goto('http://127.0.0.1:8770/bok/1-klasse/#'+lesson);
-      await notebookPage.locator('#'+lesson+' a.ki-notebook-launch[href*="'+link+'"]').first().click();
+      await notebookPage.locator('#'+lesson+' .ki-notebook-block[data-notebook="content/'+notebook+'"] .ki-notebook-launch').first().click();
       await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
       const source=await notebookPage.locator('#basis-lab-frame').getAttribute('src');
       assert.equal(new URL(source,notebookPage.url()).searchParams.get('path'),'portal/bok/1-klasse/'+notebook,
@@ -425,18 +425,18 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       if(notebook==='perzeptron_und_neuronale_netze.ipynb'){
         await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await basicDialog.waitFor({state:'hidden'});
-        assert.equal(await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="perzeptron_und_neuronale_netze.ipynb"]').first().getAttribute('aria-expanded'),'false',
+        assert.equal(await notebookPage.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"] .ki-notebook-launch').first().getAttribute('aria-expanded'),'false',
           'Closing the modal must reset the launcher for keyboard and screen-reader users');
         assert.equal(await basicDialog.count(),1,'Closing must not destroy notebook markup');
         assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
           'Closing the dialog must not reload or remove the notebook iframe');
-        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="perzeptron_und_neuronale_netze.ipynb"]').first().click();
+        await notebookPage.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"] .ki-notebook-launch').first().click();
         await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
         assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
           'Reopen must retain the same kernel document, not restart Python');
         await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await basicDialog.waitFor({state:'hidden'});
-        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="perzeptron_und_neuronale_netze.ipynb"]').first().click();
+        await notebookPage.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"] .ki-notebook-launch').first().click();
         await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
       }
       if(notebook==='perzeptron_und_neuronale_netze.ipynb'){
