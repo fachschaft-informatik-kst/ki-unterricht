@@ -195,9 +195,10 @@ if(d.type==='changed'&&session.phase==='ready'&&!session.initializing){try{saved
 });
 window.addEventListener('hashchange',()=>{if(current)mount();});
 const backupControls=document.getElementById('basis-backup-controls');
+const photoControls=document.getElementById('basis-photo-controls');
 const backupStatus=document.getElementById('basis-backup-status');
-const backup=document.createElement('button');backup.className='btn compact';backup.textContent='Kursstand als ZIP herunterladen ↓';backup.type='button';backup.classList.add('primary');
-const restore=document.createElement('input');restore.type='file';restore.accept='.zip';restore.style.display='block';restore.setAttribute('aria-label','ZIP-Kursstand wiederherstellen');const restoreLabel=document.createElement('label');restoreLabel.textContent='ZIP wiederherstellen ↑';restoreLabel.append(restore);
+const backup=document.createElement('button');backup.className='btn primary';backup.textContent='Arbeitsstand als ZIP sichern ↓';backup.type='button';
+const restore=document.createElement('input');restore.type='file';restore.accept='.zip';restore.hidden=true;restore.setAttribute('aria-label','ZIP-Kursstand wiederherstellen');const restoreLabel=document.createElement('label');restoreLabel.className='btn';restoreLabel.textContent='ZIP wiederherstellen ↑';restoreLabel.append(restore);
 const photoInput=document.createElement('input');photoInput.type='file';photoInput.accept='.json';photoInput.setAttribute('aria-label','Fotostudio-JSON zur ZIP-Sicherung hinzufügen');const photoLabel=document.createElement('label');photoLabel.textContent='Fotostudio-JSON hinzufügen (optional)';photoLabel.append(photoInput);photoInput.style.display='block';
 photoInput.addEventListener('change',async()=>{const file=photoInput.files?.[0];if(!file)return;try{const content=await file.text(),obj=JSON.parse(content);if(obj.schema!=='fotostudio-v1')throw Error('Keine Fotostudio-JSON');photoJSON={name:file.name,content};await persist();renderRecoveredFiles();document.getElementById('basis-save-status').textContent='Fotostudio-JSON für ZIP vorgemerkt.';backupStatus.textContent='Fotostudio-JSON hinzugefügt. Nun Kursstand als ZIP sichern.';}catch(e){alert(e.message);}});
 const recovered=document.createElement('details');recovered.id='basis-restored-files';recovered.className='basis-transfer-recovered';recovered.hidden=true;
@@ -221,7 +222,8 @@ function renderRecoveredFiles(){
 }
 const photoGroup=document.createElement('div');photoGroup.className='basis-transfer-photo';photoGroup.append(photoLabel);
 const actionsGroup=document.createElement('div');actionsGroup.className='basis-transfer-buttons';actionsGroup.append(backup,restoreLabel);
-backupControls.append(photoGroup,actionsGroup,recovered);
+photoControls.append(photoGroup);
+backupControls.append(actionsGroup,recovered);
 loaded.then(renderRecoveredFiles);
 function answers(){return Object.fromEntries([...document.querySelectorAll('[data-basis-answer]')].map(f=>[f.dataset.basisAnswer,f.value]));}
 // The JSON retains raw values for ZIP restore; this view explains them to pupils and teachers.
