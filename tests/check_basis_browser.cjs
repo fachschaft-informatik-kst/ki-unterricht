@@ -318,6 +318,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
      const timelineAnswer=page.locator('[data-basis-answer="ki_zeitstrahl"]');
      await timelineAnswer.fill('Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
      await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
+     await page.locator('#basis-sicherung').waitFor({state:'visible'});
     const studio={schema:'fotostudio-v1',pipeline:'mobilenet-v2-050-224-rgb-whitepad-v1',records:[]};
     await page.locator('input[aria-label="Fotostudio-JSON zur ZIP-Sicherung hinzufügen"]').setInputFiles({name:'fotos.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(studio))});
     assert.equal(await page.locator('#basis-download').isVisible(),true,'Simple JSON answer backup must be visible');
@@ -335,6 +336,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await note.fill('Wird durch Antwortdatei ersetzt');
     await timelineAnswer.fill('Noch nicht importiert');
     await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
+    await page.locator('#basis-sicherung').waitFor({state:'visible'});
     page.once('dialog',dialog=>dialog.accept());
     await page.locator('#basis-import').setInputFiles(answerPath);
     await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Antworten wiederhergestellt'));
@@ -361,6 +363,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await note.fill('Wird beim Import ersetzt');
     await page.locator('.sidebar-bottom a[href="#basis-sicherung"]').click();
+    await page.locator('#basis-sicherung').waitFor({state:'visible'});
     const restoredPhoto=page.waitForEvent('download');
     page.once('dialog',dialog=>dialog.accept());
     await page.locator('input[aria-label="ZIP-Kursstand wiederherstellen"]').setInputFiles(archivePath);
@@ -374,6 +377,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await mobilePage.locator('#basis-sicherung').isVisible(),false,
       'Mobile lessons must also stay focused');
     await mobilePage.locator('.basis-mobile-links a[href="#basis-sicherung"]').click();
+    await mobilePage.locator('#basis-sicherung').waitFor({state:'visible'});
     assert(await mobilePage.locator('#basis-sicherung #basis-backup-controls button').isVisible(),
       'Mobile devices must expose the full ZIP backup controls outside the hidden sidebar');
     // Every DL3/DL4 network illustration must use the legible mobile SVG,
