@@ -5,14 +5,18 @@ import {notebookSessions} from '../projekt/notebook-sessions.js';
 
 // The basic course has its own backup schema and does not alter the fourth-year portal.
 const KEY='kst-ki-basis-v1', NBKEY='kst-ki-basis-notebooks-v1', SCHEMA='ki-basis-zip-v1';
-const notebookNames=['basis_neuron.ipynb','xor_einzelne_neuronen.ipynb','basis_netze.ipynb','basis_bildmodell.ipynb','basis_fotoprojekt.ipynb'];
+const notebookNames=['basis_neuron.ipynb','xor_einzelne_neuronen.ipynb','basis_netze.ipynb','basis_bildmodell.ipynb','basis_fotoprojekt.ipynb',
+  'perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb'];
 // The fourth-year course uses the same fixed lab panel and direct JupyterLite path.
 const notebookTitles={
  'basis_neuron.ipynb':'Ein Neuron',
  'xor_einzelne_neuronen.ipynb':'XOR: Ein Neuron',
  'basis_netze.ipynb':'Neuronale Netze',
  'basis_bildmodell.ipynb':'Ziffern und Buchstaben',
- 'basis_fotoprojekt.ipynb':'Eigene Fotos erkennen'
+ 'basis_fotoprojekt.ipynb':'Eigene Fotos erkennen',
+ 'perzeptron_und_neuronale_netze.ipynb':'Neuron-Labor · Doppellektion 3',
+ 'mehrschichtige_netze.ipynb':'Neuronale Netze',
+ 'ziffernerkennung.ipynb':'Ziffernerkennung'
 };
 const panel=document.createElement('dialog');panel.id='basis-notebook-panel';panel.className='lab-panel';panel.hidden=true;
 panel.innerHTML=`<div class="lab-head">
