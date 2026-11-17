@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1240" height="682" viewBox="0 0 1240 682" font-family="Helvetica,Arial,sans-serif" role="img" aria-labelledby="title description">
 <title id="title">Schwimmbad-Netz mit drei Teilentscheidungen</title>
-<desc id="description">Sonne 1, Freundinnen und Freunde 0, Prüfung morgen 1. Die Zwischenschicht berechnet OR 1, NAND 1 und Keine Prüfung 0. Das Ausgabeneuron kombiniert die drei Zahlen mit Gewichten plus 1 und Bias minus 2,5: Ergebnis minus 0,5, also Nein. Bei Prüfung 0 ergibt es Ja. Alle Verbindunggewichte stehen einheitlich direkt auf den Pfeilen, jeder Bias mittig unter seinem Neuron.</desc>
+<desc id="description">Sonne 1, Freundinnen und Freunde 0, Prüfung morgen 1. Die Zwischenschicht berechnet OR 1, NAND 1 und Keine Prüfung 0. Das Ausgabeneuron kombiniert die drei Zahlen mit Gewichten plus 1 und Bias minus 2,5: Ergebnis minus 0,5, also Nein. Bei Prüfung 0 ergibt es Ja. Alle Verbindungsgewichte stehen einheitlich direkt auf den Pfeilen, jeder Bias mittig unter seinem Neuron.</desc>
 <defs><marker id="arrPos" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#176c63"/></marker><marker id="arrNeg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#be572b"/></marker><marker id="arrResult" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#263b43"/></marker></defs>
 <rect x="0" y="0" width="1240" height="682" rx="14" fill="#f6f9fb" stroke="#e5edf0"/>
 <text x="24" y="41" font-size="28" fill="#263b43" font-weight="700" text-anchor="start" >Warum mehrere Neuronen helfen</text>
-<text x="24" y="76" font-size="19" fill="#52656a" font-weight="400" text-anchor="start" >Drei Teilentscheidungen statt einer langen Prüfungs-Verbindung zum Ausgang.</text>
+<text x="24" y="76" font-size="19" fill="#52656a" font-weight="400" text-anchor="start" >OR, NAND und «Keine Prüfung» liefern die drei Werte für den Ausgang.</text>
 <text x="126" y="133" font-size="15" fill="#52656a" font-weight="700" text-anchor="middle" >EINGABEN</text>
 <text x="513" y="133" font-size="15" fill="#52656a" font-weight="700" text-anchor="middle" >ZWISCHENSCHICHT</text>
 <text x="966" y="133" font-size="15" fill="#52656a" font-weight="700" text-anchor="middle" >AUSGABE</text>
