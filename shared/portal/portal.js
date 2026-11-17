@@ -12,7 +12,7 @@ let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=
 let others={},previousNetze={},notebookUploads={},filesStored=true,artifactStored=true;
 const DL4_NETZ_REVISION='dl4-schwimmbad-v2';
 function isOldDL4Netz(name,nb){
- return ['basis_netze.ipynb','mehrschichtige_netze.ipynb'].includes(name)
+ return Boolean(nb) && ['basis_netze.ipynb','mehrschichtige_netze.ipynb'].includes(name)
    && nb?.metadata?.ki_didaktik?.notebook_revision!==DL4_NETZ_REVISION;
 }
 const notebookDirty=()=>[...runtime.sessions.values()].some(session=>session.dirty);
