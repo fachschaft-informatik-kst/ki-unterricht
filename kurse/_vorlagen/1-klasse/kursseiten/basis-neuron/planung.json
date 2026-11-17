@@ -4,7 +4,7 @@
       "id": "03",
       "view": "basis-neuron",
       "title": "Wie entscheidet ein Neuron?",
-      "rueckblick": "In Doppellektion 2 haben Sie drei Lernsignale unterschieden: Labels (überwachtes Lernen), Ähnlichkeit (unüberwachtes Lernen) und Rückmeldung (verstärkendes Lernen). Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron, das überwacht lernt.",
+      "rueckblick": "In Doppellektion 1 haben Sie drei Lernsignale unterschieden: Labels (überwachtes Lernen), Ähnlichkeit (unüberwachtes Lernen) und Rückmeldung (verstärkendes Lernen). Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron, das überwacht lernt.",
       "rueckblick_figur": {
         "src": "grafiken/eva_erfahrungsschatz.png",
         "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
@@ -14,7 +14,7 @@
       "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",
       "motivation": "Ein künstliches Neuron rechnet, vergleicht und korrigiert. Sie untersuchen, was dabei gelernt wird und was unverändert bleibt.",
       "product": "Eine nachvollziehbare Schwimmbad- und AND-Rechnung, passende Parameter für AND/OR und ein erklärter Lernschritt.",
-      "zeit": "Schwimmbad-Neuron (Experiment 1) und einen ersten Lernschritt mit AND (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2) und lassen danach selbst einen Lernschritt mit OR ablaufen (Experiment 3). Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 4 eingeführt.",
+      "zeit": "Schwimmbad-Neuron (Experiment 1) und einen ersten Lernschritt mit AND (Experiment 3) zeigt die Lehrperson im Plenum am Beamer; die Tandems stellen im Notebook «Neuron-Labor» AND und OR ein (Experiment 2) und lassen danach selbst einen Lernschritt mit OR ablaufen (Experiment 3). Das Notebook wird beim Ankommen gestartet, 10 Minuten Puffer decken Startzeit und Technik. XOR und die strukturelle Grenze eines einzelnen Neurons werden erst in Doppellektion 3 eingeführt.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -43,7 +43,7 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 2,
-              "text": "Benennen Sie gemeinsam zur AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe (Label), ordnen Sie das einer Lernart aus Doppellektion 2 zu und sagen Sie in einem Satz, worin sich AND und OR unterscheiden."
+              "text": "Benennen Sie gemeinsam zur AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe (Label), ordnen Sie das einer Lernart aus Doppellektion 1 zu und sagen Sie in einem Satz, worin sich AND und OR unterscheiden."
             },
             {
               "art": "Ergebnis",
@@ -145,7 +145,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Hält fest: Das Neuron lernt überwacht; gelernt werden die Gewichte und der Bias, nicht die Eingaben, Zielwerte oder die Entscheidungsregel. In Doppellektion 4 prüfen wir eine neue Entscheidungsaufgabe."
+              "text": "Hält fest: Das Neuron lernt überwacht; gelernt werden die Gewichte und der Bias, nicht die Eingaben, Zielwerte oder die Entscheidungsregel. In Doppellektion 3 prüfen wir eine neue Entscheidungsaufgabe."
             },
             {
               "art": "Auftrag",
