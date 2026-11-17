@@ -401,7 +401,23 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
         assert.notEqual(displays.mobile,'none',selector+' must select the mobile illustration');
         assert.equal(displays.desktop,'none',selector+' must hide desktop SVG');
         await figure.scrollIntoViewIfNeeded();
-        await mobile.evaluate(img=>img.decode());
+        // Some browsers can reject decode() while a freshly exposed lazy SVG
+        // is still pending. Wait for the request and report the exact image
+        // when there is a real loading/decoding failure.
+        await mobile.evaluate(async img=>{
+          if (!img.complete) {
+            await new Promise((resolve,reject)=>{
+              img.addEventListener('load',resolve,{once:true});
+              img.addEventListener('error',()=>reject(new Error('SVG network/load error: '+img.currentSrc)),{once:true});
+            });
+          }
+          try {
+            await img.decode();
+          } catch (error) {
+            throw new Error('SVG decode failed: '+img.currentSrc
+              +' (complete='+img.complete+', width='+img.naturalWidth+'): '+String(error));
+          }
+        });
         assert(await mobile.isVisible(),selector+' must show the loaded mobile illustration');
         assert.equal(await desktop.isVisible(),false,selector+' must hide desktop SVG');
         const dimensions=await mobile.evaluate(img=>{
