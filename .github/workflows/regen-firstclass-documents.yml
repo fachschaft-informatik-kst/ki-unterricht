@@ -22,6 +22,13 @@ jobs:
           python-version: '3.12'
       - name: Install document-generation dependencies
         run: python -m pip install -r requirements-docs.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium for SVG figures
+        run: |
+          npm ci
+          npx --no-install playwright install chromium
       - name: Rebuild all 40 student documents per first-year course
         run: |
           python scripts/build_student_documents.py --course bok/1-klasse
