@@ -19,19 +19,19 @@
           <div class="ki-sort-pool" data-ki-sort-pool>
             <div class="ki-sort-card" data-ki-sort-card="automat" data-ki-sort-correct="regeln" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">1</span><span class="ki-sort-card-text">Getränkeautomat gibt nach einer festen Guthabenregel ein Getränk aus.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_regeln_automat" aria-label="Getränkeautomat gibt nach einer festen Guthabenregel ein Getränk aus. – Kategorie"><option value="">Bitte zuordnen …</option><option value="regeln">Feste Regeln von Menschen</option><option value="daten">Lernen aus Daten</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_regeln_automat" aria-label="Getränkeautomat gibt nach einer festen Guthabenregel ein Getränk aus. – Kategorie"><option value="">Bitte zuordnen …</option><option value="regeln">Feste Regeln von Menschen</option><option value="daten">Lernen aus Daten</option></select></label>
             </div>
             <div class="ki-sort-card" data-ki-sort-card="uebersetzung" data-ki-sort-correct="daten" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">2</span><span class="ki-sort-card-text">Übersetzungsapp wurde mit vielen Satzpaaren trainiert.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_regeln_uebersetzung" aria-label="Übersetzungsapp wurde mit vielen Satzpaaren trainiert. – Kategorie"><option value="">Bitte zuordnen …</option><option value="regeln">Feste Regeln von Menschen</option><option value="daten">Lernen aus Daten</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_regeln_uebersetzung" aria-label="Übersetzungsapp wurde mit vielen Satzpaaren trainiert. – Kategorie"><option value="">Bitte zuordnen …</option><option value="regeln">Feste Regeln von Menschen</option><option value="daten">Lernen aus Daten</option></select></label>
             </div>
             <div class="ki-sort-card" data-ki-sort-card="ampel" data-ki-sort-correct="regeln" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">3</span><span class="ki-sort-card-text">Ampel wechselt nach einem festen Zeitplan.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_regeln_ampel" aria-label="Ampel wechselt nach einem festen Zeitplan. – Kategorie"><option value="">Bitte zuordnen …</option><option value="regeln">Feste Regeln von Menschen</option><option value="daten">Lernen aus Daten</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_regeln_ampel" aria-label="Ampel wechselt nach einem festen Zeitplan. – Kategorie"><option value="">Bitte zuordnen …</option><option value="regeln">Feste Regeln von Menschen</option><option value="daten">Lernen aus Daten</option></select></label>
             </div>
             <div class="ki-sort-card" data-ki-sort-card="gesicht" data-ki-sort-correct="daten" draggable="true">
               <span class="ki-sort-card-index" aria-hidden="true">4</span><span class="ki-sort-card-text">Handy erkennt Gesichter mithilfe eines trainierten Bildmodells.</span>
-              <label class="ki-sort-select-label">Zuordnung<select data-basis-answer="dl1_regeln_gesicht" aria-label="Handy erkennt Gesichter mithilfe eines trainierten Bildmodells. – Kategorie"><option value="">Bitte zuordnen …</option><option value="regeln">Feste Regeln von Menschen</option><option value="daten">Lernen aus Daten</option></select></label>
+              <label class="ki-sort-select-label">Zuordnung<select data-answer="dl1_regeln_gesicht" aria-label="Handy erkennt Gesichter mithilfe eines trainierten Bildmodells. – Kategorie"><option value="">Bitte zuordnen …</option><option value="regeln">Feste Regeln von Menschen</option><option value="daten">Lernen aus Daten</option></select></label>
             </div>
           </div>
         </div>

@@ -57,7 +57,7 @@ Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es i
             <img src="grafiken/neuron_entscheider.svg" alt="Schwimmbad-Neuron aus DL 3: Sonne, Freundinnen und Freunde sowie eine Prüfung sind drei Eingaben mit unterschiedlich starken Gewichten, die zur Entscheidung Ja oder Nein führen." loading="lazy" decoding="async">
             <figcaption>Beim Schwimmbad-Beispiel entscheidet ein einzelnes künstliches Neuron anhand von Sonne, Begleitung und einer bevorstehenden Prüfung: Gehe ich schwimmen? Jede Eingabe hat ein Gewicht. <strong>In DL 3</strong> untersucht ihr dieselbe Grafik genauer und seht, wie Gewichte beim Lernen angepasst werden. Das Bild illustriert das Funktionsprinzip, nicht ein historisches Gerät.</figcaption>
           </figure>
-          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/kurse/_vorlagen/1-klasse/assets/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 3</a>.</p>
+          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/kurse/_vorlagen/4-klasse/assets/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 3</a>.</p>
         </article>
         </template></li>
       <li><span class="jahr">1966</span>
@@ -178,7 +178,7 @@ ChatGPT macht grosse Sprachmodelle für alle zugänglich. Sie erzeugen Texte, an
         </article>
         </template></li>
     </ol>
-    <label class="field answer"><span>Entdeckerfrage zum Zeitstrahl: Welche Art von KI überwiegt in den jüngsten Beispielen? Begründet mit zwei Meilensteinen und erklärt, ob feste Regeln heute noch wichtig sind.</span><textarea data-basis-answer="basis-ki-zeitstrahl" rows="4" maxlength="10000" placeholder="Wir beobachten … / Zwei Meilensteine zeigen … / Feste Regeln …"></textarea></label>
+    <label class="field answer"><span>Entdeckerfrage zum Zeitstrahl: Welche Art von KI überwiegt in den jüngsten Beispielen? Begründet mit zwei Meilensteinen und erklärt, ob feste Regeln heute noch wichtig sind.</span><textarea data-answer="ki_zeitstrahl" rows="4" maxlength="10000" placeholder="Wir beobachten … / Zwei Meilensteine zeigen … / Feste Regeln …"></textarea></label>
     <p class="small">Die Bilder sind Illustrationen: Einige Fotos und Darstellungen entstanden nach den beschriebenen Ereignissen. Bildautoren und Lizenzen stehen jeweils direkt unter dem Bild. Anregung für die Auswahl: Meilensteine der KI-Landkarte von inf-schule.de (CC BY-SA 4.0); Texte eigene Fassung.</p>
   </div>
 </details>

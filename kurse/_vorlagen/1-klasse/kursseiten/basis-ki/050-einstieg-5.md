@@ -32,6 +32,6 @@ Ein selbstfahrendes Taxi ohne Fahrperson ist um 8 Uhr morgens mit 50 km/h auf ei
       </ol>
     </div>
     <p class="task"><b>Aufgabe:</b> Entscheiden Sie zuerst allein, welche Möglichkeit Sie wählen würden und warum (oder weshalb Sie keine der drei wählen können). Vergleichen Sie dann in der Vierergruppe: Wo gehen die Entscheidungen auseinander? Welches der drei Gesetze greift, und widersprechen sich die Gesetze hier? Wer legt fest, was «Schaden» heisst und wessen Schaden mehr zählt: Hersteller, Staat oder Fahrgäste? Das sind Regeln von Menschen: Lassen sie sich einfach in ein System einbauen, das aus Daten lernt? Halten Sie zwei Argumente fest.</p>
-    <label class="field answer"><span>Zwei Argumente zum Fall «Schulweg» und zu den Gesetzen der Robotik</span><textarea data-basis-answer="gesetze" maxlength="10000" placeholder="Ihre Argumente …" rows="3"></textarea></label>
+    <label class="field answer"><span>Zwei Argumente zum Fall «Schulweg» und zu den Gesetzen der Robotik</span><textarea data-answer="gesetze" maxlength="10000" placeholder="Ihre Argumente …" rows="3"></textarea></label>
   </div>
 </details>
