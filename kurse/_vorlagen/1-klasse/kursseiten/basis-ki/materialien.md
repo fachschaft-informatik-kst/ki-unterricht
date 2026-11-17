@@ -68,7 +68,7 @@ Der Input ist in zwei Blöcke geteilt. Block 1 (7 Min.): Regeln von Menschen ode
 
 **Abgrenzung:** Nicht jede Automatisierung ist KI; eine Ampel mit festem Zeitplan genügt nicht als KI-Beispiel. Schwache KI löst bestimmte Aufgaben. Starke KI bezeichnet hypothetische allgemeine Fähigkeiten; Bewusstsein ist keine notwendige Voraussetzung dieser Begriffsunterscheidung.
 
-**Grafiken und Zeitleiste für den kompakten Input:** [Regeln versus Daten](index.html#einstieg-1) · [Begriffskreise](index.html#einstieg-2) · [Kurskapitel mit Meilensteinen](index.html#einstieg).
+**Grafiken und Zeitleiste für den kompakten Input:** [Regeln versus Daten](index.html#einstieg-1) · [Begriffskreise](index.html#einstieg-2) · [Kurskapitel mit Meilensteinen](index.html#basis-ki).
 
 **Tandemauftrag (zuerst ohne Unterlagen):** Ein Spamfilter wurde mit markierten E-Mails trainiert. Was sind seine Eingaben, und woher stammt seine Entscheidung? Ist schon belegt, dass er ein tiefes Netz verwendet?
 
