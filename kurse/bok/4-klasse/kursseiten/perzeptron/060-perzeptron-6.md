@@ -3,7 +3,7 @@
     <h2 class="kapitel-titel">Das Neuron auf den Punkt gebracht</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Ein einzelnes Neuron verknüpft <strong>Eingaben</strong> mit <strong>Gewichten</strong>, addiert den <strong>Bias</strong> und entscheidet anhand der Summe, ob seine Ausgabe 0 oder 1 ist.</p>
+    <p>Ein Neuron gewichtet Eingaben, addiert den Bias und gibt je nach Summe 0 oder 1 aus.</p>
     <!-- MD:START -->
 ### Drei kurze Kontrollfragen
 
@@ -14,7 +14,7 @@
 **Transfer:** Zeigen Sie anhand der Eingaben `(1, 0)`, dass ein Neuron mit `w₁ = 1`, `w₂ = 1` und `b = −1.5` die Ausgabe 0 liefert. Welche Änderung des Bias ergibt Ausgabe 1?
 <!-- MD:END -->
     <!-- MD:START -->
-In der nächsten Doppellektion testen Sie eine neue Entscheidungsaufgabe und untersuchen, wann mehrere Neuronen nötig sind.
+In DL 4 untersuchen Sie, wann mehrere Neuronen nötig sind.
 <!-- MD:END -->
   </div>
 </details>

@@ -91,20 +91,20 @@ Es bildet die **gewichtete Summe plus Bias** und gibt ab Summe 0 die Ausgabe 1 a
 
 ### Ein mehrschichtiges Netz berücksichtigt auch die Prüfung
 
-Die Zwischenschicht berechnet mit **OR** und **NAND** zunächst XOR für Sonne und Freund:innen. Beim vollständigen Schwimmbadmodell geht **Prüfung morgen (P)** mit dem hemmenden Gewicht **−2** direkt in das Ausgabeneuron ein. Die zwei Zwischenwerte haben dort jeweils Gewicht +1, der Bias beträgt −1,5:
+Die Zwischenschicht berechnet **OR** und **NAND** aus Sonne und Freund:innen sowie **«Keine Prüfung»** aus P (Gewicht −1, Bias +0,5). Alle drei Werte gehen mit Gewicht +1 zum Ausgabeneuron (Bias −2,5). Nur drei Einsen ergeben **Ja**:
 
-| Sonne | Freund:innen | Prüfung | OR | NAND | Schwimmen? |
-|---:|---:|---:|---:|---:|---:|
-| 0 | 0 | 0 | 0 | 1 | 0 |
-| 0 | 1 | 0 | 1 | 1 | 1 |
-| 1 | 0 | 0 | 1 | 1 | 1 |
-| 1 | 1 | 0 | 1 | 0 | 0 |
-| 0 | 0 | 1 | 0 | 1 | 0 |
-| 0 | 1 | 1 | 1 | 1 | 0 |
-| 1 | 0 | 1 | 1 | 1 | 0 |
-| 1 | 1 | 1 | 1 | 0 | 0 |
+| Sonne | Freund:innen | Prüfung | OR | NAND | Keine Prüfung | Schwimmen? |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 0 | 0 | 0 | 1 | 1 | 0 |
+| 0 | 1 | 0 | 1 | 1 | 1 | 1 |
+| 1 | 0 | 0 | 1 | 1 | 1 | 1 |
+| 1 | 1 | 0 | 1 | 0 | 1 | 0 |
+| 0 | 0 | 1 | 0 | 1 | 0 | 0 |
+| 0 | 1 | 1 | 1 | 1 | 0 | 0 |
+| 1 | 0 | 1 | 1 | 1 | 0 | 0 |
+| 1 | 1 | 1 | 1 | 0 | 0 | 0 |
 
-**Vergleich:** Bei Sonne = 1 und Freund:innen = 0 liefern OR und NAND beide 1. Ohne Prüfung (P = 0) ist die Endsumme 1 + 1 − 2·0 − 1,5 = +0,5 → **Ja**; mit Prüfung (P = 1) ist sie 1 + 1 − 2·1 − 1,5 = −1,5 → **Nein**. Das Notebook trainiert ausschliesslich die vier XOR-Fälle bei P = 0. Die Prüfungsbremse (Gewicht −2) ist eine von uns festgelegte Erweiterung, kein trainiertes Ergebnis.
+**Vergleich:** Bei Sonne = 1 und Freund:innen = 0 liefern OR und NAND beide 1. Ohne Prüfung (P = 0) gilt «Keine Prüfung» = 1, somit 1 + 1 + 1 − 2,5 = +0,5 → **Ja**. Mit Prüfung (P = 1) ist der dritte Zwischenwert 0: 1 + 1 + 0 − 2,5 = −0,5 → **Nein**. Das Notebook trainiert nur die vier XOR-Fälle bei P = 0; das zusätzliche «Keine Prüfung»-Neuron ist eine von uns festgelegte Erweiterung.
 
 Mit einer Zwischenschicht sind auch nichtlinear trennbare Muster möglich. Beim selbst trainierten Netz variiert das Ergebnis unter Umständen mit dem Startwert.
 

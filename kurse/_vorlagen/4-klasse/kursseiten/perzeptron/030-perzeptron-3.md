@@ -6,7 +6,7 @@
     <!-- MD:START -->
 ### Drei Schwimmbad-Regeln ausprobieren
 
-Wir bleiben beim Schwimmbad. Für vier übersichtliche Fälle nehmen wir an: **Morgen ist keine Prüfung (P = 0)**. Wir betrachten nur **Sonne (S = x₁)** und **Freund:innen (F = x₂)**. 1 bedeutet Ja, 0 bedeutet Nein. Wir testen bewusst **neue, vereinfachte Entscheidungsregeln** – nicht die ursprüngliche Einstellung mit drei Eingaben.
+Für diese vereinfachten Regeln gilt **P = 0** (keine Prüfung). Nur **Sonne (S = x₁)** und **Freund:innen (F = x₂)** entscheiden, jeweils mit 0 oder 1. Wir testen andere Regeln als beim ursprünglichen Schwimmbad-Neuron.
 
 | S | F | Nur beide (AND) | Mindestens eine (OR) | Nicht beide (NAND) |
 |:--:|:--:|:--:|:--:|:--:|
@@ -15,16 +15,16 @@ Wir bleiben beim Schwimmbad. Für vier übersichtliche Fälle nehmen wir an: **M
 | 1 | 0 | 0 | 1 | 1 |
 | 1 | 1 | **1** | 1 | **0** |
 
-**AND** bedeutet: Schwimmen nur bei Sonne **und** Freund:innen. **OR**: Sonne **oder** Freund:innen genügt. **NAND** ist die umgekehrte AND-Antwort; wir brauchen sie später als Zwischenentscheidung.
+**AND:** beide Bedingungen müssen erfüllt sein. **OR:** mindestens eine genügt. **NAND:** nicht beide zugleich – später eine Zwischenentscheidung im Netz.
 
 ### Wie rechnet das Neuron?
 
-Jede Eingabe wird mit ihrem **Gewicht** multipliziert, dann wird der **Bias** addiert. Ist die Summe **mindestens 0**, antwortet das Neuron mit **1 (Ja)**, sonst mit **0 (Nein)**.
+Das Neuron multipliziert Eingaben mit ihren **Gewichten** und addiert den **Bias**. Ab Summe 0 gibt es **Ja (1)** aus, sonst **Nein (0)**.
 <!-- MD:END -->
     <div class="process">
       <span>Eingaben × Gewichte</span><b>+</b><span>Bias</span><b>→</b><span>Summe ≥ 0? <strong>Ja / Nein</strong></span>
     </div>
-    <p><strong>Beispiel: nur bei beiden schwimmen (AND).</strong> Wir wählen w₁ = 1, w₂ = 1 und b = −1.5. Diese Werte gelten für alle vier Situationen:</p>
+    <p><strong>Beispiel AND:</strong> w₁ = 1, w₂ = 1, b = −1.5 – für alle vier Fälle gleich.</p>
     <!-- MD:START -->
 | Sonne / Freund:innen | Summe | Neuron / Ziel |
 |:---:|:---|:---:|
@@ -33,14 +33,14 @@ Jede Eingabe wird mit ihrem **Gewicht** multipliziert, dann wird der **Bias** ad
 | (1, 0) | 1 + 0 − 1.5 = **−0.5** | 0 / 0 ✓ |
 | (1, 1) | 1 + 1 − 1.5 = **+0.5** | 1 / 1 ✓ |
 
-Die Gewichte und der Bias bleiben beim **Prüfen** der vier Fälle gleich. Beim **Lernen** dürfen sie sich ändern – das zeigt Kapitel 4.
+Beim **Prüfen** bleiben Gewichte und Bias gleich; beim **Lernen** ändern sie sich (Kapitel 4).
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/perzeptron_und_neuronale_netze.ipynb" data-title="Neuron-Labor · Doppellektion 3">
       <!-- MD:START -->
 ### Jupyter-Notebook · Neuron-Labor · Doppellektion 3
 <!-- MD:END -->
       <!-- MD:START -->
-Probieren Sie die Werte nun selbst aus. Öffnen Sie das Notebook direkt hier, bearbeiten Sie Python-Zellen und führen Sie diese mit Shift + Enter aus.
+Öffnen Sie das Notebook, passen Sie Werte an und führen Sie Python-Zellen mit Shift + Enter aus.
 <!-- MD:END -->
       <a class="ki-notebook-direct" href="https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html?path=portal/perzeptron_und_neuronale_netze.ipynb" target="_blank" rel="noopener noreferrer">Notebook in JupyterLite öffnen ↗</a>
     </div>

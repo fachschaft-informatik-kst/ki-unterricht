@@ -10,7 +10,7 @@
         "alt": "Schwimmbad-Neuron: Sonne, Freund:innen und Prüfung werden gewichtet und führen zu einer Ja/Nein-Entscheidung.",
         "caption": "Rückblick: Wie entscheidet das Schwimmbad-Neuron? Was bewirken Gewichte und Bias?"
       },
-      "goal": "Die vier Schwimmbadfälle der XOR-Regel untersuchen, die Grenze eines einzelnen Neurons begründen und die Lösung mit einer Zwischenschicht erklären. Die vollständige Schwimmbadregel berücksichtigt am Ausgang auch Prüfung morgen (P, Gewicht −2).",
+      "goal": "Die vier Schwimmbadfälle der XOR-Regel untersuchen, die Grenze eines einzelnen Neurons begründen und die Lösung mit einer Zwischenschicht erklären. Die vollständige Schwimmbadregel ergänzt in der Zwischenschicht die Entscheidung «Keine Prüfung» (Gewicht −1, Bias +0,5). Der Ausgang kombiniert alle drei Zwischenresultate (Bias −2,5).",
       "question": "Leitfrage: Warum braucht die neue Schwimmbadregel XOR mehrere Neuronen?",
       "motivation": "AND und OR kann ein einzelnes Neuron umsetzen. XOR – genau eine Bedingung trifft zu – braucht eine Zwischenschicht.",
       "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung. Die Klasse kann den Unterschied P = 0 versus P = 1 vorrechnen.",
@@ -25,7 +25,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Schwimmbad-Rätsel (Prüfung = 0): Schwimmen, wenn entweder Sonne scheint oder Freund:innen mitkommen, aber nicht beides. Notieren Sie die Ausgaben für S/F = 00, 01, 10 und 11 (XOR) und vermuten Sie, ob ein einzelnes Neuron alle vier Fälle korrekt löst. Öffnen Sie das Notebook «Neuronale Netze», damit Python im Hintergrund startet. Im Netz kommt Prüfung morgen später als hemmende Eingabe P hinzu."
+              "text": "Schwimmbad-Rätsel (Prüfung = 0): Schwimmen, wenn entweder Sonne scheint oder Freund:innen mitkommen, aber nicht beides. Notieren Sie die Ausgaben für S/F = 00, 01, 10 und 11 (XOR) und vermuten Sie, ob ein einzelnes Neuron alle vier Fälle korrekt löst. Öffnen Sie das Notebook «Neuronale Netze», damit Python im Hintergrund startet. Im vollständigen Netz wird Prüfung morgen als eigene Zwischenentscheidung «Keine Prüfung» ergänzt."
             },
             {
               "art": "Ergebnis",
@@ -79,7 +79,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 7,
-              "text": "Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang ein. Die Prüfung kommt am Ausgang als hemmende dritte Eingabe mit Gewicht −2 hinzu."
+              "text": "Zeigen Sie die Zwischenschicht mit OR, NAND und «Keine Prüfung» sowie den Ausgang, der alle drei Zwischenwerte kombiniert."
             },
             {
               "art": "Ergebnis",
@@ -133,7 +133,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Sicherung (unbenotet, erst schreiben): Beantworten Sie auf der Kursseite zwei Fragen. Erstens: Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem (Ausgaben für (1,1))? Zweitens: Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto; welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort? Die Vorschaufrage zu den Testbildern darf geraten werden. Der Prüfungsfall P = 1 wird am Netzgrafik-Ausgang mit Gewicht −2 mitberücksichtigt."
+              "text": "Sicherung (unbenotet, erst schreiben): Beantworten Sie auf der Kursseite zwei Fragen. Erstens: Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem (Ausgaben für (1,1))? Zweitens: Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto; welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort? Die Vorschaufrage zu den Testbildern darf geraten werden. Für P = 1 liefert «Keine Prüfung» den Wert 0; das Ausgabeneuron antwortet Nein."
             },
             {
               "art": "Auftrag",

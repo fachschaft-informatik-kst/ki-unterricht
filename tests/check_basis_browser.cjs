@@ -228,6 +228,20 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_entscheider.svg"]').count(),1);
     assert.equal(await page.locator('#basis-neuron-4 img[src="grafiken/schwimmbad_lernschritt.svg"]').count(),1,'DL3 learning diagram must show the updated parameters');
     assert.equal(await page.locator('#basis-neuron-4 figure.neuron-detail-figure').count(),1,'Detailed diagram supports readable sizing');
+    // Keep the DL3/DL4 diagrams compact in their cards rather than letting
+    // the full-width chapter stretch them across the entire screen.
+    const assertCompactFigure=async(selector,maxWidth)=>{
+      const layout=await page.locator(selector).evaluate(el=>({
+        cssMax:getComputedStyle(el).maxWidth,
+        renderedWidth:el.getBoundingClientRect().width,
+        visible:getComputedStyle(el).display!=='none'
+      }));
+      assert.equal(layout.cssMax,maxWidth+'px',selector+' must retain its width cap');
+      assert(layout.visible&&layout.renderedWidth>0&&layout.renderedWidth<=maxWidth+1,
+        selector+' must fit its compact card');
+    };
+    await assertCompactFigure('#basis-neuron-1 .neuron-detail-recap',650);
+    await assertCompactFigure('#basis-neuron-4 .neuron-detail-learning',1050);
     assert((await page.locator('#basis-neuron-4').innerText()).includes('Lernrate'),'DL3 must explain the perceptron learning rule');
     assert.equal(await page.locator('#basis-neuron a[href*="portal/bok/1-klasse/basis_neuron.ipynb"]').count(),1);
     const neuronWeight=page.locator('[data-basis-answer="basis-neuron-sw_gs"]');
@@ -241,6 +255,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-netze img[src="grafiken/xor_gerade.svg"]').count(),1);
     assert.equal(await page.locator('#basis-netze-1 img[src="grafiken/schwimmbad_xor_einzelne_neuron.svg"]').count(),1,'DL4 must illustrate the single-neuron XOR mismatch');
     assert.equal(await page.locator('#basis-netze-2 img[src="grafiken/schwimmbad_xor_netz.svg"]').count(),1,'DL4 must illustrate the hidden layer');
+    await assertCompactFigure('#basis-netze-1 .neuron-detail-xor',650);
+    await assertCompactFigure('#basis-netze-1 .neuron-detail-separation',690);
+    await assertCompactFigure('#basis-netze-2 .neuron-detail-net',980);
     assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),0,'The old abstract network image is not part of DL4');
     assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/xor_einzelne_neuronen.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/basis_netze.ipynb"]').count(),1);

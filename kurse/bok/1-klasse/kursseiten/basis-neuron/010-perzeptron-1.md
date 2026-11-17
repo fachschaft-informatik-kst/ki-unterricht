@@ -3,12 +3,12 @@
     <h2 class="kapitel-titel">Wozu ein Neuron? Ein kleiner Entscheider</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>Ein Neuron ist ein kleiner Entscheider.</strong> Es bekommt mehrere Zahlen (Eingaben) und gibt genau eine Antwort aus: <strong>1 (Ja) oder 0 (Nein)</strong>. Mehr kann es nicht, und mehr braucht es nicht.</p>
-    <p><strong>Ein Beispiel aus dem Alltag: Gehe ich heute schwimmen?</strong> Drei Faktoren, je 1 (ja) oder 0 (nein): <strong>S</strong> Sonne scheint, <strong>F</strong> Freund:innen gehen mit, <strong>P</strong> Prüfung morgen. Sie wägen ab: Sonne und Freund:innen sprechen dafür, die Prüfung dagegen, und nicht alles ist gleich wichtig. Genau das macht ein Neuron mit Zahlen.</p>
+    <p><strong>Ein Neuron verarbeitet Zahlen (Eingaben)</strong> und antwortet mit <strong>1 (Ja) oder 0 (Nein)</strong>.</p>
+    <p><strong>Schwimmbad-Beispiel:</strong> <strong>S</strong> = Sonne, <strong>F</strong> = Freund:innen, <strong>P</strong> = Prüfung morgen (je 1 oder 0). Sonne und Freund:innen sprechen dafür, die Prüfung dagegen. Wie stark jeder Grund zählt, bestimmen die Gewichte.</p>
     <figure class="concept-figure neuron-detail-figure neuron-detail-recap">
       <img class="neuron-graphic-desktop" alt="Ein Neuron als Entscheider: Die Eingaben Sonne 1, Freund:innen 0 und Prüfung 1 werden mit den Gewichten plus 2, plus 2 und minus 4 multipliziert, summiert und mit dem Bias minus 1 verrechnet. Das Ergebnis minus 3 liegt unter 0, die Ausgabe ist Nein." loading="lazy" src="grafiken/neuron_entscheider.svg"/>
       <img class="neuron-graphic-mobile" alt="Mobile Darstellung des Schwimmbad-Neurons mit Sonne 1, Freund:innen 0, Prüfung morgen 1, Gewichten plus 2, plus 2 und minus 4, Bias minus 1 und Ausgabe Nein." loading="lazy" src="grafiken/neuron_entscheider_mobil.svg"/>
-      <figcaption>Eine Situation durch das Neuron: 1·2 + 0·2 + 1·(−4) = −2, dazu der Bias −1 ergibt −3. Das ist kleiner als 0: Das Neuron sagt Nein, schwimmen fällt aus.</figcaption>
+      <figcaption>Beispiel: 1·2 + 0·2 + 1·(−4) − 1 = −3. Da −3 &lt; 0, lautet die Antwort <strong>Nein (0)</strong>.</figcaption>
     </figure>
     <div class="table-scroll">
       <table class="typen">
@@ -28,7 +28,7 @@
           <tr>
             <th>Gewichte</th>
             <td>+2, +2, −4</td>
-            <td>Wie wichtig ist jeder Faktor? Ein negatives Gewicht spricht dagegen.</td>
+            <td>Stärke und Richtung des Einflusses; negativ wirkt dagegen.</td>
           </tr>
           <tr>
             <th>Summe</th>
@@ -38,7 +38,7 @@
           <tr>
             <th>Bias</th>
             <td>−1</td>
-            <td>Grundhaltung: Wie leicht sage ich überhaupt Ja? Negativ heisst: Ich brauche gute Gründe.</td>
+            <td>Grundeinstellung: Ein negativer Bias verlangt stärkere Gründe für Ja.</td>
           </tr>
           <tr>
             <th>Ausgabe</th>
@@ -48,7 +48,7 @@
         </tbody>
       </table>
     </div>
-    <p><strong>Und in der KI?</strong> Auch dort stehen am Ende Ja/Nein-Entscheidungen. Der Unterschied zum Schwimmbad: Es sind nicht drei, sondern Tausende Eingaben, und die Gewichte schreibt niemand von Hand. Das Neuron <strong>lernt</strong> sie (Kapitel 4).</p>
+    <p><strong>In der KI</strong> können Neuronen viele Eingaben verarbeiten. Ihre Gewichte werden aus Beispielen gelernt statt von Hand festgelegt (Kapitel 4).</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
