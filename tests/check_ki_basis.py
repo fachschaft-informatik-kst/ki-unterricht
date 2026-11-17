@@ -93,6 +93,23 @@ def main():
                 2 if canonical=='schwimmbad_lernschritt.svg' else 1)
             assert len(bias_labels)==expected_bias,(diagram,len(bias_labels))
             if canonical=='schwimmbad_xor_netz.svg':
+                # Only +1 / −1 on each connection; w= is explained once in
+                # the legend. Main example: (S,F,P)=(1,0,0) -> Ja (y=1).
+                assert all(label.text in ('+1','−1') for label in labels),diagram
+                all_text=[label.text for label in svg.findall(f'.//{ns}text')]
+                for expected_text in ('AND','Σ + b','+0,5','Ja','y = 1'):
+                    assert expected_text in all_text,(diagram,expected_text)
+                direct_nodes=list(svg)
+                for node_id,value in (('s','1'),('f','0'),('p','0'),('or','1'),('nand','1'),('no_exam','1')):
+                    candidates=[index for index,element in enumerate(direct_nodes)
+                                if element.get('data-node')==node_id]
+                    assert len(candidates)==1,(diagram,node_id)
+                    first_text=next(element for element in direct_nodes[candidates[0]+1:]
+                                    if element.tag==f'{ns}text')
+                    if node_id=='no_exam':
+                        first_text=next(element for element in direct_nodes[candidates[0]+1:]
+                                        if element.tag==f'{ns}text' and element.text==value)
+                    assert first_text.text==value,(diagram,node_id,first_text.text)
                 # Position labels consistently on their own connections:
                 # 32% from each input; 50% from hidden neuron to output.
                 segments={edge.get('data-edge'):edge for edge in svg.findall(f'.//{ns}line[@class="network-edge"]')}
