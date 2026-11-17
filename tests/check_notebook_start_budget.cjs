@@ -13,7 +13,8 @@ for(const [name,packages,manual] of [
 ]){
  const nb=notebook(name),setup=setups(nb);
  assert(setup,name+' missing trusted setup cell');
- const loaded=[...source(setup).matchAll(/'([^']+)'/g)].map(x=>x[1]).filter(x=>!['emscripten','ipywidgets==8.1.0'].includes(x));
+ const pkgMatch=source(setup).match(/await pyodide_js\.loadPackage\(\[([^\]]+)\]\)/);
+ const loaded=pkgMatch?[...pkgMatch[1].matchAll(/'([^']+)'/g)].map(x=>x[1]):[];
  for(const p of packages)assert(loaded.includes(p),name+' missing base package '+p);
  if(name==='mehrschichtige_netze.ipynb'||name==='basis_netze.ipynb')assert.equal(loaded.length,0,name+' must not preload packages for SVG experiment');
  for(const p of ['scipy','scikit-learn'])assert(!loaded.includes(p),name+' loads training before user intent');
