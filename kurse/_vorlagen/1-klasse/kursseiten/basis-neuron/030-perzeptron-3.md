@@ -35,9 +35,9 @@ Das Neuron multipliziert Eingaben mit ihren **Gewichten** und addiert den **Bias
 
 Beim **Prüfen** bleiben Gewichte und Bias gleich; beim **Lernen** ändern sie sich (Kapitel 4).
 <!-- MD:END -->
-    <div class="ki-notebook-block" data-notebook="content/perzeptron_und_neuronale_netze.ipynb" data-title="Neuron-Labor · Doppellektion 3">
+    <div class="ki-notebook-block" data-notebook="content/perzeptron_und_neuronale_netze.ipynb" data-title="Neuron-Labor · Doppellektion 2">
       <!-- MD:START -->
-### Jupyter-Notebook · Neuron-Labor · Doppellektion 3
+### Jupyter-Notebook · Neuron-Labor · Doppellektion 2
 <!-- MD:END -->
       <!-- MD:START -->
 Öffnen Sie das Notebook, passen Sie Werte an und führen Sie Python-Zellen mit Shift + Enter aus.
