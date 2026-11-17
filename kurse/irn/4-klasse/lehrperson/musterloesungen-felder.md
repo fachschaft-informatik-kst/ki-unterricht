@@ -2,38 +2,6 @@
 
 **Nur für Lehrpersonen.** Zu jedem in der Kursseite gespeicherten Antwortfeld steht unten eine mögliche Antwort. Die Kennung in der linken Spalte ist die technische Journal-/Antwortkennung und erleichtert den Abgleich mit ZIP-Dateien. **Alle Zahlen, Namen, Filmfortsetzungen und Beobachtungen ohne Originalnachweis sind frei erfundene didaktische Beispiele**, keine tatsächlich ausgeführten Notebooks und keine echten Projektmessungen. Bei offenen Fragen gelten andere fachlich begründete Antworten ebenso. Bei Videoaufgaben müssen Lernende den tatsächlichen Film und die echte Zeitmarke belegen. Versteckte Alt-Felder und weitere Übungen sind nur der Vollständigkeit halber dokumentiert.
 
-## DL 1 · KI, Beispiele und Grenzfälle
-
-| Antwortfeld | Beispielantwort / Erwartungshorizont |
-|---|---|
-| `dl1_regeln_automat` | Regelbasiert: Ein fest programmiertes Guthaben und ein Knopfdruck steuern die Ausgabe; keine Anpassung aus Daten. |
-| `dl1_regeln_uebersetzung` | Lernt aus Daten: Das beschriebene Übersetzungsmodell wurde mit Satzpaaren trainiert. |
-| `dl1_regeln_ampel` | Regelbasiert: Sie wiederholt einen festen Zeitplan und lernt nicht. |
-| `dl1_regeln_gesicht` | Lernt aus Daten: Das Bildmodell wurde anhand von Beispielen trainiert. |
-| `dl1_begriffe_ampel` | Keine KI. |
-| `dl1_begriffe_schach` | Regelbasierte KI. |
-| `dl1_begriffe_spam` | Maschinelles Lernen (hier ausdrücklich ohne tiefes Netz). |
-| `dl1_begriffe_bilder` | Deep Learning. |
-| `dl1_begriffe_text` | Generative KI. |
-| `regeln_oder_daten` | Auch ein einfaches Programm arbeitet automatisch, ohne zu lernen oder komplexe Entscheidungen zu treffen: eine Zeitschaltuhr befolgt nur feste Regeln. Automatisierung allein ist kein Beleg für KI. |
-| `begriff_bsp_1` | Spamfilter mit gelerntem Entscheidungsbaum – maschinelles Lernen. |
-| `begriff_bsp_2` | Handgeschriebene Ziffern erkennen mit tiefem Netz – Deep Learning. |
-| `begriff_bsp_3` | Schachprogramm mit Suchbaum – regelbasierte KI. |
-| `begriff_bsp_4` | Sprachmodell, das einen Text verfasst – generative KI. |
-| `ki_zeitstrahl` | Frühe symbolische Systeme nutzten handformulierte Regeln; tiefe neuronale Netze lernen viele Merkmale aus Beispieldaten. Regeln bleiben etwa bei Sicherheitsprüfungen wichtig. Die Meilensteine zeigen keinen vollständigen Ersatz von Regeln durch Lernen. |
-| `ki_ordnung` | 1. Regelbasiertes Schachprogramm: Regeln, regelbasierte KI, schwache KI. 2. Bilderkennung: aus Bilddaten trainiertes tiefes Netz, Deep Learning, schwache KI. 3. Allgemein intelligente Filmfigur: hypothetische starke KI, ihre technische Umsetzung ist unbekannt. Ein Chatbot kann sprachlich überzeugend wirken, ohne verlässlich allgemeine Aufgaben lösen zu können. |
-| `typ_bsp_1` | Früheres Feld: regelbasiertes Schachprogramm. |
-| `typ_1` | Frühere Kategorie: regelbasierte KI. |
-| `typ_bsp_2` | Früheres Feld: trainierter Spamfilter. |
-| `typ_2` | Frühere Kategorie: maschinelles Lernen. |
-| `typ_bsp_3` | Früheres Feld: Tierbildklassifikator. |
-| `typ_3` | Frühere Kategorie: Deep Learning. |
-| `typ_bsp_4` | Früheres Feld: textgenerierendes Sprachmodell. |
-| `typ_4` | Frühere Kategorie: generative KI. |
-| `gesetze` | 1. Bremsen kann Verletzungen vermindern, doch ein Restschaden ist nicht vermeidbar. 2. Asimovs erstes Gesetz entscheidet nicht, wessen Risiko bei konfligierenden Optionen Vorrang haben soll; dafür braucht es Verantwortung, Regeln und gesellschaftliche Abwägung. |
-| `begriffe_saetze` | KI ist der Oberbegriff für Systeme, die Aufgaben intelligent bearbeiten. Maschinelles Lernen bestimmt Muster aus Beispieldaten. Deep Learning ist ML mit mehrschichtigen neuronalen Netzen. Generative KI erzeugt neue Inhalte, zum Beispiel Texte. |
-| `begriffe` | Kriterium (Beispiel): Ein System ist intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz einsetzen müsste, und mit Neuem zurechtkommt. Eine zeitgesteuerte Ampel führt feste Regeln aus und lernt nicht, sie ist keine KI. Ein Schachprogramm mit festen Regeln kann regelbasierte KI sein, lernt aber nicht aus Daten; ein Spamfilter mit gelerntem Entscheidungsbaum passt sein Modell anhand von Beispielen an. Nicht jedes automatisch arbeitende Programm ist also eine KI. Offen bleibt, wie man bei Grenzfällen KI sinnvoll abgrenzt. |
-
 ## DL 2 · Lernen aus Daten
 
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
@@ -57,7 +25,7 @@
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `neuron_wozu` | Positive Gewichte für Sonne und Freund:innen erhöhen die Schwimmneigung, das negative Prüfungsgewicht senkt sie; Bias legt die Schwelle fest. Bei Prüfungsgewicht 0 hätte die Prüfung keinen Einfluss mehr. |
-| `neuron_gelernt` | Überwachtes Lernen: Das Ziel (Label) ist für das Schwimmbad-Beispiel bekannt. Bei Sonne = 1, Freund:innen = 0 und Prüfung = 0 ist das Ziel Ja (1), das Neuron sagt zunächst Nein (0). Bei Lernrate 1 steigt das Sonnengewicht von 0 auf 1 und der Bias von −1,5 auf −0,5; die anderen Gewichte bleiben wegen ihrer inaktiven Eingaben unverändert. Die Eingaben und die Rechenregel bleiben gleich; das Gelernte steckt in Gewichten und Bias. |
+| `neuron_gelernt` | Lernart: überwachtes Lernen, denn zu jedem Beispiel ist das Ziel (Label) bekannt: Im AND-Versuch ist die Zielausgabe (1,1) → 1, sonst 0. Verändert haben sich Gewichte und Bias (der Erfahrungsschatz), nicht die Grundform der Rechnung; Eingaben und Ziele blieben gleich. |
 | `sw_gs` | +2 |
 | `sw_gf` | +2 |
 | `sw_gp` | −1 |
@@ -96,13 +64,13 @@
 |---|---|
 | `hand_xor_max` | Höchstens 3 von 4 Fällen; keine einzelne Gerade trennt alle XOR-Eingaben. |
 | `xor_warum` | Geometrisch: Die beiden 1-Punkte (0,1) und (1,0) liegen diagonal gegenüber der beiden 0-Punkte (0,0) und (1,1); keine einzelne Gerade trennt sie. Rechnerisch: Die Bedingungen b < 0, w₂ + b ≥ 0, w₁ + b ≥ 0 und w₁ + w₂ + b < 0 widersprechen sich. Die Lernrate verändert nur die Schritte, nicht die Modellgrenze. |
-| `netze_zwischenschicht` | (S,F)=(1,0): OR=1, NAND=1. P=0 führt zu Ja (1), P=1 wegen des negativen Prüfungsgewichts −2 zu Nein (0). Die Zwischenschicht erzeugt die XOR-Zwischenmerkmale. |
+| `netze_zwischenschicht` | Für (1,0) liefert ODER = 1 und NAND = 1; das nachfolgende UND gibt 1. Die Zwischenschicht erzeugt Merkmale, die gemeinsam XOR lösen. |
 | `xornetz_1` | Beispiel: 3 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_2` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_4` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_start` | Nein; das Ergebnis kann mit anderen Startwerten variieren. |
 | `xornetz_beob` | Beispielsweise genügten 2 versteckte Neuronen bei einem Startwert; bei einem anderen scheiterte das Training. Ergebnisse nur als Beobachtung eines konkreten Laufs deuten. |
-| `netze` | Ein einzelnes Neuron hat nur eine lineare Grenze; die XOR-Punkte liegen diagonal. Die Zwischenschicht kombiniert OR und NAND; am Ausgang wird zusätzlich Prüfung P mit Gewicht −2 berücksichtigt. Für (S,F,P)=(1,1,0): OR=1, NAND=0, Summe 1+0−0−1,5=−0,5 → Nein. Für (1,0,1): OR=1, NAND=1, Summe 1+1−2−1,5=−1,5 → Nein. |
+| `netze` | Ein einzelnes Neuron hat nur eine lineare Grenze; die XOR-Punkte liegen diagonal. Eine Zwischenschicht kombiniert mehrere Teilentscheidungen, etwa OR und NAND; der Ausgang verbindet beide mit AND. Für (1,1): OR = 1, NAND = 0, AND(1, 0) = 0, also XOR = 0. |
 | `projekt_bereit_check` | Brücke: MobileNet bleibt fest und liefert 1280 Zahlen je Foto; nur das kleine Netz lernt (Gewichte und Bias), Eingaben und Ausgabeklassen bleiben. Die richtige Antwort kennt es aus dem Label, der Klasse jedes Fotos (überwachtes Lernen). Vorschau (Raten erlaubt): Die Testbilder müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten. Das wird in DL 5 genau geklärt. Offene Frage zum Beispiel: Wie erkennt man ein Datenleck bei fast gleichen Bildern? |
 | `zif_2` | Beispiel: 55 %; Notebookwert einsetzen. |
 | `zif_4` | Beispiel: 69 %; Notebookwert einsetzen. |
@@ -235,7 +203,7 @@
 | `these_nachher` | Stimme nicht zu: gleiche Regeln garantieren bei ungleichen Ausgangsdaten keine Fairness. |
 | `these_begruendung` | Gleiche Regeln sind nicht automatisch fair: Historisch verzerrte Trainingsdaten können durch identische Modellregeln Benachteiligung fortschreiben; im Kreditfall erhalten Personen aus einem Quartier schlechtere Konditionen, nur weil das Wohngebiet als Stellvertreter dient. |
 | `urteil_massnahme` | Beim Kreditfall: Einspruch und unabhängige Fairnessprüfungen einführen; unterschiedliche Ablehnungsraten und begründete Beschwerden vergleichen. Zielkonflikt: Transparenz vs. Datenschutz. |
-| `rueck_synthese` | Eine Vorhersage kann falsch sein, (1) wenn die Regeln nicht alle Fälle abdecken (Schulweg: wer legt fest, was Schaden heisst), (2) wenn das Modell Hintergrund oder Licht statt des Gegenstands gelernt hat (Bildprojekt), (3) wenn es für ganz andere Klassen trotzdem antwortet (DL 8) oder (4) wenn ein Text plausibel klingt, aber nicht wahr ist (Sprachmodell, DL 9). Beispiele sind individuell; entscheidend sind drei verschiedene Lektionen und je ein konkreter Fall. |
+| `rueck_synthese` | Eine Vorhersage kann falsch sein, (1) wenn das Modell Hintergrund oder Licht statt des Gegenstands gelernt hat (Bildprojekt), (2) wenn es für ganz andere Klassen trotzdem antwortet (DL 8) oder (3) wenn ein Text plausibel klingt, aber nicht wahr ist (Sprachmodell, DL 9). Beispiele sind individuell; entscheidend sind drei verschiedene Lektionen und je ein konkreter Fall. |
 | `rueck_erkenntnis` | Ein präzises Modell kann trotzdem unfair sein, wenn Daten und Entscheidungen gesellschaftliche Nachteile verstärken. |
 | `rueck_frage` | Wie kann man Fairness prüfen, ohne persönliche Daten unnötig offenzulegen? |
 | `rueck_best` | Der Rückkopplungskreislauf half mir, Ursache und Wirkung zu unterscheiden. |

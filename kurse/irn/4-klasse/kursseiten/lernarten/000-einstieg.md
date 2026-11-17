@@ -4,7 +4,7 @@
 <details class="lesson-plan" id="doppellektion-02" data-lesson="02" open>
   <summary><span class="phase-num">02</span><span>Doppellektion 2 · Wie lernt KI?</span><small>90 Min.</small></summary>
   <div class="detail-body">
-    <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-01">Doppellektion 1</a> haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.</p>
+    <p class="lesson-recap"><strong>Rückblick:</strong> Im Kapitel <a href="#einstieg">«Was ist KI?»</a> haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.</p>
     <p><strong>Heute können Sie:</strong> Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.</p>
     <p class="lesson-question">Leitfrage: Wie lernt KI? Welche Information erhält ein System beim Lernen: Labels, Ähnlichkeit oder Rückmeldung?</p>
     <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.</p>

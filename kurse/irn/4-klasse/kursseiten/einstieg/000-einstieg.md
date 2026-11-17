@@ -1,13 +1,4 @@
-<span class="section-label">Doppellektion 1</span>
+<span class="section-label">Theorie</span>
 <h1>Was nennen wir <em>KI?</em></h1>
-<!-- LESSONS:einstieg -->
-<details class="lesson-plan" id="doppellektion-01" data-lesson="01" open>
-  <summary><span class="phase-num">01</span><span>Doppellektion 1 · Was ist KI?</span><small>90 Min.</small></summary>
-  <div class="detail-body">
-    <p><strong>Heute können Sie:</strong> An vier Beispielen feste Regeln und Lernen aus Daten unterscheiden, fünf weitere Fälle der passenden KI-Kategorie zuordnen, zwei Grenzfälle begründen und die Leitfrage mit einem eigenen Beispiel beantworten.</p>
-    <p class="lesson-question">Leitfrage: Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?</p>
-    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.</p>
-  </div>
-</details>
-<!-- /LESSONS:einstieg -->
+<p class="section-intro">Diese Seite fasst die Grundlagen zusammen: wie Systeme zu ihren Regeln kommen, wichtige Meilensteine der KI-Geschichte, die Kategorien von KI sowie den Unterschied zwischen schwacher und starker KI. Sie dient zum Nachlesen und enthält keine Aufgaben.</p>
 <p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ki">KI</a> · <a href="#glossar-maschinelles-lernen">maschinelles Lernen</a> · <a href="#glossar-generative-ki">generative KI</a></p>

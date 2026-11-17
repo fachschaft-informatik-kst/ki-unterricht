@@ -51,14 +51,6 @@ Bis Ende Doppellektion 6 bei jedem Tandem kurz den Zeitplan und mögliche Daten-
 
 ## Hinweise zu Grundlagen und Transfer
 
-### Doppellektion 1 · Begriffe an wenigen Beispielen sichern
-
-Regeln für Katze/Hund motivieren den Begriffsinput. Dieser ist in zwei kurze Blöcke (7 und 6 Minuten) geteilt, dazwischen steht ein Abrufauftrag von 2 Minuten ohne Unterlagen; so werden die Lernenden nach der ersten Kernidee (Regeln oder Daten) aktiv, bevor die Begriffe hinzukommen. Danach ordnen die Tandems die Beispiele der Kursseite ein (vier nach Regeln oder Daten, fünf nach KI-Kategorie) und begründen zwei Grenzfälle. Meilensteine und schwache/starke KI werden im Input kurz besprochen; keine zusätzliche Zeitleistenaktion oder Gruppenrotation. Asimovs Gesetze und der Fall «Schulweg» bilden eine kurze erste ethische Frage (15 Minuten). Die vertiefte ethische Diskussion findet in Doppellektion 10 statt und greift auf den Schulweg zurück.
-
-Zu Beginn zwei bis drei Intelligenz-Kriterien an der Tafel sammeln und bis zum Schluss stehen lassen: Die Leitfrage wird am Ende mit einem eigenen Beispiel und einem Rückgriff auf das eigene Kriterium beantwortet.
-
-Fachlich sichern: Ein regelbasiertes System kann KI sein, lernt aber nicht aus Daten. Nicht jede Automatisierung ist KI. Heutige Systeme werden hier als schwache KI eingeordnet; für hypothetische starke KI gibt es kein allgemein anerkanntes nachgewiesenes Beispiel.
-
 ### Doppellektion 2 · Eine Erfahrung und ein digitales Beispiel
 
 Memory-Material und Rollen vorab bereitstellen. Die Gruppe bleibt über die drei Runden bestehen; nur die Rollen wechseln. Nach jeder Runde ein Lernsignal und eine Beobachtung notieren. Danach NIM gemeinsam am Beamer: Was ändert sich durch Rückmeldung?

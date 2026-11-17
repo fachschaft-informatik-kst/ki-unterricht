@@ -339,12 +339,9 @@ def _schwimmbad_svg(eingaben, gewichte, bias):
     <line x1="125" y1="260" x2="400" y2="192" stroke="{farbe(w_p)}" stroke-width="{dicke(w_p)}"/>
   </g>
   <g font-weight="bold" font-size="17">
-    <rect x="198" y="46" width="68" height="29" rx="5" fill="#fff"/>
-    <rect x="198" y="174" width="68" height="28" rx="5" fill="#fff"/>
-    <rect x="198" y="245" width="68" height="28" rx="5" fill="#fff"/>
-    <text x="215" y="69" fill="{farbe(w_s)}">{zahl(w_s)}</text>
-    <text x="215" y="195" fill="{farbe(w_f)}">{zahl(w_f)}</text>
-    <text x="215" y="267" fill="{farbe(w_p)}">{zahl(w_p)}</text>
+    <text x="215" y="86" fill="{farbe(w_s)}">{zahl(w_s)}</text>
+    <text x="215" y="155" fill="{farbe(w_f)}">{zahl(w_f)}</text>
+    <text x="215" y="262" fill="{farbe(w_p)}">{zahl(w_p)}</text>
   </g>
   <text x="215" y="306" fill="#52656a" font-size="13">Negatives Gewicht: Dieser Faktor spricht dagegen.</text>
   <circle cx="450" cy="165" r="52" fill="#cfe8dc" stroke="#263b43" stroke-width="2.5"/>
@@ -476,10 +473,8 @@ def _neuron_zwei_svg(x1, x2, w1, w2, bias, ziel):
     <line x1="75" y1="160" x2="249" y2="128" stroke="{farbe(w2)}" stroke-width="{dicke(w2)}"/>
   </g>
   <g font-size="17" font-weight="bold">
-    <rect x="135" y="41" width="72" height="27" rx="5" fill="#fff"/>
-    <rect x="135" y="150" width="72" height="29" rx="5" fill="#fff"/>
-    <text x="144" y="62" fill="{farbe(w1)}">{zahl(w1)}</text>
-    <text x="144" y="171" fill="{farbe(w2)}">{zahl(w2)}</text>
+    <text x="144" y="64" fill="{farbe(w1)}">{zahl(w1)}</text>
+    <text x="144" y="166" fill="{farbe(w2)}">{zahl(w2)}</text>
   </g>
   <circle cx="294" cy="116" r="44" fill="#cfe8dc" stroke="#263b43" stroke-width="2"/>
   <text x="294" y="112" text-anchor="middle" font-size="20" font-weight="bold">Σ + b</text>

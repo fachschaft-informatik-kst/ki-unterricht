@@ -6,7 +6,7 @@
 
 **Einzeln · 5 Min.**
 
-«Gleiche Regeln sind automatisch fair.» Stimmen Sie zu, teilweise zu oder nicht zu? Notieren Sie einen Grund und behalten Sie die Antwort für den Schlussvergleich. Denken Sie an den Fall «Schulweg» aus DL 1: Dort galten feste Regeln für alle; wer legte fest, was Schaden heisst?
+«Gleiche Regeln sind automatisch fair.» Stimmen Sie zu, teilweise zu oder nicht zu? Notieren Sie einen Grund und behalten Sie die Antwort für den Schlussvergleich.
 
 ### Vorwissen aktivieren · 5 Min. · Von der Modellgrenze zur Folge
 

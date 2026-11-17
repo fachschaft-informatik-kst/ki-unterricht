@@ -4,7 +4,7 @@
       "id": "10",
       "view": "gesellschaft",
       "title": "Wer trägt die Folgen?",
-      "rueckblick": "Bild- und Sprachmodelle liefern Vorhersagen, keine Garantien: In Doppellektion 8 hat das fremde Modell trotzdem immer geantwortet, in Doppellektion 9 war ein Text plausibel, aber nicht wahr. In Doppellektion 1 haben Sie beim Fall «Schulweg» gefragt, wer festlegt, was Schaden heisst. Heute prüfen Sie die Folgen von Entscheidungen auf dieser Grundlage.",
+      "rueckblick": "Bild- und Sprachmodelle liefern Vorhersagen, keine Garantien: In Doppellektion 8 hat das fremde Modell trotzdem immer geantwortet, in Doppellektion 9 war ein Text plausibel, aber nicht wahr. Heute prüfen Sie die Folgen von Entscheidungen auf dieser Grundlage.",
       "goal": "Ein Modell mit Opacity, Scale und Damage prüfen, eine Rückkopplung erklären, eine überprüfbare Massnahme mit Zielkonflikt begründen und zusammenfassen, wo Vorhersagen im Kurs falsch sein können.",
       "question": "Leitfrage: Sind gleiche Regeln automatisch fair?",
       "motivation": "Entscheidungen mit KI betreffen Menschen. Ein begründetes Urteil braucht einen konkreten Fall, Belege und einen Blick auf die Folgen.",
@@ -20,7 +20,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Beziehen Sie am Platz Position zur These «Gleiche Regeln sind automatisch fair» und notieren Sie einen Grund. Denken Sie auch an den Fall «Schulweg» aus Doppellektion 1: Dort galten feste Regeln für alle; wer legte fest, was Schaden heisst?"
+              "text": "Beziehen Sie am Platz Position zur These «Gleiche Regeln sind automatisch fair» und notieren Sie einen Grund."
             },
             {
               "art": "Ergebnis",
@@ -122,7 +122,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 3,
-              "text": "Kurssynthese: Wo kann eine Vorhersage falsch sein? Nennen Sie je ein Beispiel aus drei Doppellektionen (zum Beispiel Schulweg-Regeln, Hintergrund und Licht im Bildprojekt, fremde Klassen, Sprachmodell)."
+              "text": "Kurssynthese: Wo kann eine Vorhersage falsch sein? Nennen Sie je ein Beispiel aus drei Doppellektionen (zum Beispiel Hintergrund und Licht im Bildprojekt, fremde Klassen, Sprachmodell)."
             },
             {
               "art": "Auftrag",

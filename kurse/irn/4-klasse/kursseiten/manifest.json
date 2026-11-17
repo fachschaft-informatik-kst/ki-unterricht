@@ -11,15 +11,6 @@
       }
     },
     {
-      "id": "lernziele",
-      "class": "section",
-      "navigation": {
-        "order": 1,
-        "label": "◎",
-        "title": "Lernziele"
-      }
-    },
-    {
       "id": "projekt",
       "class": "hero",
       "navParent": "projekt",
@@ -63,10 +54,12 @@
         "label": "01",
         "title": "Was ist KI?"
       },
-      "teaching": true,
       "overview": {
         "title": "Was ist KI?",
-        "summary": "Begriffe ordnen · Beispiele prüfen"
+        "summary": "Regeln vs. Daten · Meilensteine · Kategorien von KI"
+      },
+      "lessonWithoutPlan": {
+        "number": 1
       }
     },
     {

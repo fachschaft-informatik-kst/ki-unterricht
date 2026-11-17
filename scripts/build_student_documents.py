@@ -49,6 +49,9 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 from markdown_it import MarkdownIt
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from course_model import lessons_without_plan, number_lessons  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://fachschaft-informatik-kst.github.io/ki-unterricht/"
 PHASES = ("Ankommen", "Vorwissen aktivieren", "Informieren", "Verarbeiten", "Auswerten")
@@ -63,7 +66,9 @@ FIXED_DATE = (2026, 1, 1, 0, 0, 0)
 # Sätze und Absätze, die sich an die Lehrperson richten oder Lösungen verraten.
 # Jede Regel muss genau einmal greifen; so fällt eine geänderte Vorlage sofort auf.
 # Gilt für alle Kurse der 4. Klasse (BOK, IRN, Vorlage), die denselben Materialkoffer nutzen.
-EDITS: dict[str, list[tuple[str, str]]] = {
+# Regeln für den Materialkoffer der 1. Doppellektion «Was ist KI?». Sie greifen nur, wenn ein Kurs
+# diesen Plan noch hat (IRN führt «Was ist KI?» als reine Theorieseite ohne Plan).
+EINSTIEG_EDITS: dict[str, list[tuple[str, str]]] = {
     "4-klasse": [
         ("Der Input ist in zwei Blöcke geteilt. Block 1 (7 Min.): Regeln von Menschen oder Lernen "
          "aus Daten, mit Bilderkennung und Schachprogramm. Dann der Abrufauftrag (2 Min.): Ohne "
@@ -76,6 +81,10 @@ EDITS: dict[str, list[tuple[str, str]]] = {
         ("**Antwortort:** [Fall «Schulweg» auf der Kursseite](index.html#einstieg-5). Einzelne "
          "Gruppen teilen ihre Argumente nur sehr kurz; kein zusätzliches Präsentationsfenster.",
          "**Antwortort:** [Fall «Schulweg» auf der Kursseite](index.html#einstieg-5)."),
+    ],
+}
+EDITS: dict[str, list[tuple[str, str]]] = {
+    "4-klasse": [
         ("Kein Wechsel zu weiteren Werkzeugen wie Akinator oder Filmempfehlungen.\n", ""),
         ("**Lehrperson:** Zeigt den Schritt im Neuron-Labor; die Klasse sagt vorher, was sich ändert.",
          "Die Lehrperson zeigt den Schritt im Neuron-Labor. Sagen Sie vorher, was sich ändert."),
@@ -183,7 +192,8 @@ def lessons_of(base: Path) -> list[dict]:
             plan = json.loads((base / "kursseiten" / section["id"] / "planung.json").read_text(encoding="utf-8"))
             lessons += plan.get("lessons", [])
     lessons.sort(key=lambda lesson: lesson.get("order", 0))
-    return [{**lesson, "number": i + 1} for i, lesson in enumerate(lessons)]
+    reserved = {p["number"] for p in lessons_without_plan(manifest["sections"])}
+    return number_lessons([dict(lesson) for lesson in lessons], reserved)
 
 
 def material_sources(base: Path, lessons: list[dict]) -> str:
@@ -195,8 +205,12 @@ def material_sources(base: Path, lessons: list[dict]) -> str:
     return "\n\n".join(parts)
 
 
-def apply_edits(source: str, course: str) -> str:
-    for old, new in EDITS.get(course.split("/")[-1], []):
+def apply_edits(source: str, course: str, views: set[str] | None = None) -> str:
+    grade = course.split("/")[-1]
+    rules = EDITS.get(grade, [])
+    if views is None or "einstieg" in views:
+        rules = EINSTIEG_EDITS.get(grade, []) + rules
+    for old, new in rules:
         count = source.count(old)
         if count != 1:
             raise SystemExit(f"Bearbeitungsregel greift {count}× statt genau einmal:\n  {old[:90]}…")
@@ -946,10 +960,10 @@ def build(course: str) -> Path:
     if profile["grade"] == 1:
         phases = phases_from_plan(base, lessons, profile["links"])
     else:
-        source = apply_edits(material_sources(base, lessons), course)
+        source = apply_edits(material_sources(base, lessons), course, {l["view"] for l in lessons})
         phases = parse(source, profile["links"], lessons)
         for phase in phases:
-            lesson = lessons[phase.dl - 1]
+            lesson = next(l for l in lessons if l["number"] == phase.dl)
             phase.question = lesson.get("question", "")
             phase.link = SITE + profile["links"] + "/#" + lesson["view"]
     expected = {(lesson["number"], i) for lesson in lessons for i in range(1, 6)}

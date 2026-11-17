@@ -124,7 +124,10 @@ for(const grade of [1,4]){
   const template="../kurse/_vorlagen/"+grade+"-klasse/kursseiten/";
   const manifest=JSON.parse(readFileSync(new URL(root+"manifest.json",import.meta.url),"utf8"));
   const reference=JSON.parse(readFileSync(new URL(template+"manifest.json",import.meta.url),"utf8"));
-  assert(manifest.sections.length>=reference.sections.length,
+  // IRN removed the learning-objectives page on purpose; every other template section stays.
+  const removed=new Set(["lernziele","basis-lernziele"]);
+  const ids=new Set(manifest.sections.map(s=>s.id));
+  assert(reference.sections.every(s=>removed.has(s.id)||ids.has(s.id)),
     "IRN preserves its full template as the starting structure");
   assert(validateManifest(manifest));
   let lessonCount=0;
@@ -135,7 +138,11 @@ for(const grade of [1,4]){
     const data=JSON.parse(source);assert(validatePlan(data));
     lessonCount+=data.lessons.length;
   }
-  assert(lessonCount>=10,"IRN must retain complete double-lesson coverage");
+  // «Was ist KI?» is a theory page without plan in IRN; double lessons 2–10 keep their numbers.
+  // «Was ist KI?» is a theory page without plan in IRN but keeps DL number 01.
+  const withoutPlan=manifest.sections.filter(s=>s.lessonWithoutPlan).map(s=>s.lessonWithoutPlan.number);
+  assert.deepEqual(withoutPlan,[1]);
+  assert(lessonCount+withoutPlan.length>=10,"IRN must retain complete double-lesson coverage");
 }
 const fake={
   "kurse/bok/1-klasse/kursseiten/manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
@@ -193,10 +200,10 @@ const docGithub=async(_t,p)=>{
   throw Object.assign(Error("missing"),{status:404});
 };
 const index=await loadDocuments("t",irnProfile,docGithub,"r");
-assert.equal(index.documents.length,50);
-assert.equal(new Set(index.documents.map(d=>d.dl+"-"+d.phase)).size,50,"One document per DL and phase");
-assert.equal(index.documents[0].url,documentUrl("irn/4-klasse","DL01_1_Ankommen.docx"));
-assert.equal(index.documents[0].url,"/teacher/dokumente/DL01_1_Ankommen.docx?course=irn%2F4-klasse");
+assert.equal(index.documents.length,45);
+assert.equal(new Set(index.documents.map(d=>d.dl+"-"+d.phase)).size,45,"One document per DL and phase");
+assert.equal(index.documents[0].url,documentUrl("irn/4-klasse","DL02_1_Ankommen.docx"));
+assert.equal(index.documents[0].url,"/teacher/dokumente/DL02_1_Ankommen.docx?course=irn%2F4-klasse");
 assert.match(index.zip.url,/^\/teacher\/dokumente\/IRN_4-Klasse_Alle_Dokumente\.zip\?course=irn%2F4-klasse$/);
 assert.equal(await loadDocuments("t",options.find(c=>c.slug==="bok/4-klasse"),docGithub,"r"),null,
   "Courses without documents show an empty area instead of failing");
@@ -218,6 +225,6 @@ const kitDocs=await teacherData({course:"irn/4-klasse",kind:"materialien"},"t",i
 assert.deepEqual(kitDocs.documents.map(d=>d.phase),[1,2,3,4,5],"Materialkoffer receives the documents of its DL");
 assert(kitDocs.documents.every(d=>d.dl===2));
 const allDocs=await teacherData({course:"irn/4-klasse",kind:"dokumente"},"t",irnGithub,"r",1,options);
-assert.equal(allDocs.documents.length,50);
+assert.equal(allDocs.documents.length,45);
 assert(allDocs.zip.file.endsWith(".zip"));
 console.log("PASS teacher view: DL navigation, color coding, lesson-specific materials, precise questions");

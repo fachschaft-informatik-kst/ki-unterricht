@@ -199,14 +199,14 @@ const server=http.createServer((req,res)=>{
     await page.locator("#editMaterials").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/1-klasse/kursseiten/basis-neuron/materialien.md");
     await page.locator("#courseSelect").selectOption("irn4");
-    await page.locator("#section").selectOption("einstieg");
+    await page.locator("#section").selectOption("lernarten");
     await page.locator("#chapters button").first().click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/4-klasse/kursseiten/einstieg/"));
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/4-klasse/kursseiten/lernarten/"));
     await page.locator("#editPlan").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/einstieg/planung.json");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/lernarten/planung.json");
     assert.equal(await page.locator("#formEditor").isVisible(),true);
     await page.locator("#editMaterials").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/einstieg/materialien.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/lernarten/materialien.md");
     await page.locator("#editGlossary").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/glossar.json");
     await page.locator("#courseSelect").selectOption("irn1");
@@ -309,11 +309,22 @@ const server=http.createServer((req,res)=>{
       .lessons.flatMap(lesson=>lesson.phases.flatMap(phase=>phase.schritte)).length;
     assert.equal(await page.frameLocator("#preview").locator(".phase-table tbody tr").count(),plannedSteps,
       "AVIVA preview must render one coloured table row for each teaching step, not only a row per phase");
-    const colours=await page.frameLocator("#preview").locator(".phase-table tbody tr").evaluateAll(rows=>
-      Object.fromEntries([...new Set(rows.map(row=>row.className))].map(name=>{
-        const cell=rows.find(row=>row.className===name).querySelector("td.wer");
-        return [name,getComputedStyle(cell).backgroundColor];
-      })));
+    // The live preview may re-render once more after opening; retry if the frame reloads mid-read.
+    let colours;
+    for(let attempt=0;;attempt++){
+      try{
+        await page.frameLocator("#preview").locator(".phase-table tbody tr").first().waitFor();
+        colours=await page.frameLocator("#preview").locator(".phase-table tbody tr").evaluateAll(rows=>
+          Object.fromEntries([...new Set(rows.map(row=>row.className))].map(name=>{
+            const cell=rows.find(row=>row.className===name).querySelector("td.wer");
+            return [name,getComputedStyle(cell).backgroundColor];
+          })));
+        break;
+      }catch(error){
+        if(attempt>=4||!/Execution context was destroyed|Frame was detached/.test(error.message))throw error;
+        await page.waitForTimeout(300);
+      }
+    }
     assert.deepEqual(colours,{
       "wer-l":"rgb(227, 237, 251)","wer-e":"rgb(253, 240, 216)",
       "wer-t":"rgb(225, 242, 230)","wer-r":"rgb(241, 243, 244)",

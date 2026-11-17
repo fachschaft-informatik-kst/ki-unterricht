@@ -2,38 +2,6 @@
 
 **Nur für Lehrpersonen.** Die Antworten sind altersgerechte Beispiele und keine einzig richtigen Wortlaute. Die Kennung pro Tabellenzeile entspricht dem im Lernjournal gespeicherten Feld. **Zahlen, Namen, Texte, Filmausschnitte und Notebook-Beobachtungen sind illustrative Beispiele**, wenn nicht ausdrücklich ein mathematisch bestimmtes Ergebnis genannt wird. Das echte Unterrichtsprotokoll muss die eigenen Messwerte, Textausgaben und tatsächlichen Filmbelege zeigen. Versteckte Altfelder und freiwillige Vertiefungen sind der Vollständigkeit halber enthalten.
 
-## DL 1 · Was ist KI?
-
-| Antwortfeld | Mögliche Musterantwort |
-|---|---|
-| `dl1_regeln_automat` | Feste Regeln: Guthaben und Taste bestimmen, ob das Getränk ausgegeben wird. |
-| `dl1_regeln_uebersetzung` | Lernen aus Daten: Die Übersetzungsapp wurde mit Satzpaaren trainiert. |
-| `dl1_regeln_ampel` | Feste Regeln: Die Ampel folgt einem Zeitplan. |
-| `dl1_regeln_gesicht` | Lernen aus Daten: Das Bilderkennungsmodell hat Merkmale aus Trainingsbildern gelernt. |
-| `dl1_begriffe_ampel` | Keine KI. |
-| `dl1_begriffe_schach` | Regelbasierte KI. |
-| `dl1_begriffe_spam` | Maschinelles Lernen. |
-| `dl1_begriffe_bilder` | Deep Learning. |
-| `dl1_begriffe_text` | Generative KI. |
-| `regeln_oder_daten` | Ein Getränkeautomat arbeitet selbstständig, befolgt aber nur vorgegebene Regeln. Er lernt nicht aus Beispielen. Automatisch bedeutet nicht automatisch KI. |
-| `begriff_bsp_1` | Optional: Schachcomputer – regelbasierte KI. |
-| `begriff_bsp_2` | Optional: Spamfilter mit Trainingsdaten – maschinelles Lernen. |
-| `begriff_bsp_3` | Optional: Tierbilder mit tiefem Netz erkennen – Deep Learning. |
-| `begriff_bsp_4` | Optional: KI schreibt eine Geschichte – generative KI. |
-| `basis-ki-zeitstrahl` | Frühe KI-Systeme folgten oft von Menschen festgelegten Regeln. Später wurden viele Modelle mit Daten trainiert, etwa tiefe neuronale Netze. Heute sind Regeln weiterhin wichtig, beispielsweise für Sicherheit und Kontrolle. |
-| `ki_ordnung` | Schachcomputer: feste Regeln, schwache KI. Spamfilter: lernt aus Daten, ML und schwache KI. Fiktive allgemein intelligente Filmfigur: hypothetische starke KI. Ein Chatbot ist nicht automatisch allgemein intelligent. |
-| `typ_bsp_1` | Altes freiwilliges Feld: Schachprogramm. |
-| `typ_1` | Alte Kategorie: regelbasierte KI. |
-| `typ_bsp_2` | Altes freiwilliges Feld: Spamfilter. |
-| `typ_2` | Alte Kategorie: maschinelles Lernen. |
-| `typ_bsp_3` | Altes freiwilliges Feld: Tierbilderkennung. |
-| `typ_3` | Alte Kategorie: Deep Learning. |
-| `typ_bsp_4` | Altes freiwilliges Feld: Textgenerator. |
-| `typ_4` | Alte Kategorie: generative KI. |
-| `gesetze` | 1. Das Bremsen ist naheliegend, weil es Verletzungen verringern könnte. 2. Das Gesetz schützt nicht automatisch alle gleichzeitig; bei möglichen Schäden braucht es menschliche Regeln und Verantwortung. |
-| `begriffe_saetze` | KI ist ein Oberbegriff für Systeme, die anspruchsvolle Aufgaben bearbeiten. ML lernt aus Daten. Deep Learning benutzt tiefe neuronale Netze. Generative KI erzeugt neue Inhalte. |
-| `begriffe` | Der Getränkeautomat folgt festen Regeln; der trainierte Spamfilter hat aus Beispielen gelernt. Offen bleibt für mich, wann eine Regelmaschine als KI gilt. |
-
 ## DL 2 · Wie lernt KI?
 
 | Antwortfeld | Mögliche Musterantwort |
@@ -55,7 +23,7 @@
 | Antwortfeld | Mögliche Musterantwort |
 |---|---|
 | `basis-neuron-neuron_wozu` | Sonne und Freund:innen geben positive Beiträge, die Prüfung einen negativen. Der Bias legt die Schwelle fest. Gewicht Prüfung = 0 würde die Prüfung völlig ignorieren. |
-| `basis-neuron-neuron_gelernt` | Beim Schwimmbad-Beispiel (Sonne = 1, Freund:innen = 0, Prüfung = 0; Ziel Ja, ursprüngliche Ausgabe Nein) wird das Sonnengewicht von 0 auf 1 und der Bias von −1,5 auf −0,5 korrigiert (Lernrate 1). Die anderen Gewichte, die Eingaben und die Rechenregel bleiben gleich; das Gelernte steckt in Gewichten und Bias. |
+| `basis-neuron-neuron_gelernt` | Gewichte und Bias werden korrigiert, wenn eine Vorhersage falsch ist. Die Eingaben und das Rechenverfahren bleiben gleich; gelernt ist in den Parametern gespeichert. |
 | `basis-neuron-sw_gs` | +2 |
 | `basis-neuron-sw_gf` | +2 |
 | `basis-neuron-sw_gp` | −1 |
@@ -93,13 +61,13 @@
 |---|---|
 | `basis-netze-hand_xor_max` | Höchstens 3 von 4 korrekt; ein einzelnes Neuron hat nur eine lineare Entscheidungsgrenze. |
 | `basis-netze-xor_warum` | Bei XOR sind (0,1) und (1,0) positiv, aber (0,0) und (1,1) negativ. Eine Gerade kann das nicht trennen. Andere Lernraten ändern daran nichts. |
-| `basis-netze-netze_zwischenschicht` | (S,F)=(1,0) → OR 1, NAND 1. P=0: 1+1−0−1,5=+0,5 → Ja; P=1: 1+1−2−1,5=−1,5 → Nein. Die Zwischenschicht berechnet XOR, der Prüfungseingang hemmt die Ausgabe. |
+| `basis-netze-netze_zwischenschicht` | (1,0) → ODER 1, NAND 1 → UND 1. Zwei Zwischenmerkmale zusammen erlauben die XOR-Entscheidung. |
 | `basis-netze-xornetz_1` | Beispiel: 3 richtige Zeilen (Notebookwert ersetzen). |
 | `basis-netze-xornetz_2` | Beispiel: 4 richtige Zeilen (Notebookwert ersetzen). |
 | `basis-netze-xornetz_4` | Beispiel: 4 richtige Zeilen (Notebookwert ersetzen). |
 | `basis-netze-xornetz_start` | Nein, Startwerte können das Ergebnis verändern. |
 | `basis-netze-xornetz_beob` | Bei einem Beispielstart gelangen 2 versteckte Neuronen zu 4/4. Ein anderer Start kann scheitern; tatsächlichen Lauf dokumentieren. |
-| `basis-netze-netze` | Ein einzelnes Neuron trennt die XOR-Fälle bei P=0 nicht linear. Die Zwischenschicht kombiniert OR und NAND zu XOR; der Eingang P mit Gewicht −2 kann am Ausgang die Ja-Entscheidung verhindern. |
+| `basis-netze-netze` | Ein einzelnes Neuron trennt nur linear. Die Zwischenschicht kombiniert Teilentscheidungen (z. B. ODER und NAND) zu XOR. |
 
 ## DL 5–8 · Ziffern, Transfer, Fotoklassen und Gespräch
 

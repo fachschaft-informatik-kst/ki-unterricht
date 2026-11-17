@@ -4,17 +4,17 @@
       "id": "04",
       "view": "netze",
       "title": "Warum mehrere Neuronen?",
-      "rueckblick": "In Doppellektion 3 haben Sie Gewichte, Bias und das Lernen am Schwimmbad-Neuron untersucht. Jetzt testen wir mit Sonne und Freund:innen (für das XOR-Teilproblem zunächst Prüfung = 0) eine neue Regel: XOR.",
+      "rueckblick": "In Doppellektion 3 haben Sie einzelne Neuronen für AND und OR berechnet, eingestellt und überwacht trainiert: mit Beispielen und bekanntem Ziel. Heute lernen Sie XOR als neue Herausforderung kennen und untersuchen, warum mehrere Neuronen nötig sind.",
       "rueckblick_figur": {
-        "src": "grafiken/neuron_entscheider.svg",
-        "alt": "Schwimmbad-Neuron: Sonne, Freund:innen und Prüfung werden gewichtet und führen zu einer Ja/Nein-Entscheidung.",
-        "caption": "Rückblick: Wie entscheidet das Schwimmbad-Neuron? Was bewirken Gewichte und Bias?"
+        "src": "grafiken/perzeptron.svg",
+        "alt": "Ein künstliches Neuron mit zwei Eingängen, Gewichten und Bias.",
+        "caption": "Rückblick: Ein Neuron berechnet die gewichtete Summe und entscheidet anhand einer Schwelle."
       },
-      "goal": "Die vier Schwimmbadfälle der XOR-Regel untersuchen, die Grenze eines einzelnen Neurons begründen und die Lösung mit einer Zwischenschicht erklären. Die vollständige Schwimmbadregel berücksichtigt am Ausgang auch Prüfung morgen (P, Gewicht −2).",
-      "question": "Leitfrage: Warum braucht die neue Schwimmbadregel XOR mehrere Neuronen?",
-      "motivation": "AND und OR kann ein einzelnes Neuron umsetzen. XOR – genau eine Bedingung trifft zu – braucht eine Zwischenschicht.",
-      "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung. Die Klasse kann den Unterschied P = 0 versus P = 1 vorrechnen.",
-      "zeit": "XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Notebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient eine fünfminütige unbenotete Sicherung mit zwei Fragen; offene Punkte vor SOL-Beginn anhand des Lernlabors klären. Beim Hidden Layer wird ein kurzes Gegenbeispiel S = 1, F = 0 mit Prüfung P = 0 und P = 1 gerechnet; dafür entfällt kein Pflichtschritt.",
+      "goal": "Die XOR-Grenze eines einzelnen Neurons begründen und zeigen, wie eine Zwischenschicht das Problem löst.",
+      "question": "Leitfrage: Warum braucht die XOR-Entscheidung mehrere Neuronen?",
+      "motivation": "AND und OR können Sie mit einem einzelnen Neuron lösen. Bei XOR stossen Sie auf eine neue Grenze und entwickeln daraus die Idee einer Zwischenschicht.",
+      "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung.",
+      "zeit": "XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Notebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient eine fünfminütige unbenotete Sicherung mit zwei Fragen; offene Punkte vor SOL-Beginn anhand des Lernlabors klären.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -25,7 +25,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Schwimmbad-Rätsel (Prüfung = 0): Schwimmen, wenn entweder Sonne scheint oder Freund:innen mitkommen, aber nicht beides. Notieren Sie die Ausgaben für S/F = 00, 01, 10 und 11 (XOR) und vermuten Sie, ob ein einzelnes Neuron alle vier Fälle korrekt löst. Öffnen Sie das Notebook «Neuronale Netze», damit Python im Hintergrund startet. Im Netz kommt Prüfung morgen später als hemmende Eingabe P hinzu."
+              "text": "Eine neue Ja/Nein-Regel: Das Signal soll angehen, wenn genau eine der beiden Tasten aktiv ist. Notieren Sie zu 00, 01, 10 und 11 die Zielwerte (XOR). Vermuten Sie, ob das bisherige Neuron die Regel lernen kann. Öffnen Sie zudem das Notebook «Neuronale Netze», damit Python im Hintergrund startet."
             },
             {
               "art": "Ergebnis",
@@ -79,7 +79,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 7,
-              "text": "Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang ein. Die Prüfung kommt am Ausgang als hemmende dritte Eingabe mit Gewicht −2 hinzu."
+              "text": "Führt anschliessend in einem eigenen Kurskapitel Zwischenschicht (OR/NAND) und Ausgang (AND) ein."
             },
             {
               "art": "Ergebnis",
@@ -103,7 +103,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 15,
-              "text": "Wählen Sie einen zusätzlichen XOR-Eingabefall und zeichnen Sie die Ausgaben der beiden Zwischenneuronen und des Ausgangsneurons Schritt für Schritt nach. Vergleichen Sie mit der Vorhersage des einzelnen Neurons. Rechnen Sie zusätzlich (S,F)=(1,0) bei Prüfung P=0 und P=1: Der Prüfungswert verändert die Ausgabe."
+              "text": "Wählen Sie einen zusätzlichen XOR-Eingabefall und zeichnen Sie die Ausgaben der beiden Zwischenneuronen und des Ausgangsneurons Schritt für Schritt nach. Vergleichen Sie mit der Vorhersage des einzelnen Neurons."
             },
             {
               "art": "Auftrag",
@@ -133,7 +133,7 @@
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Sicherung (unbenotet, erst schreiben): Beantworten Sie auf der Kursseite zwei Fragen. Erstens: Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem (Ausgaben für (1,1))? Zweitens: Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto; welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort? Die Vorschaufrage zu den Testbildern darf geraten werden. Der Prüfungsfall P = 1 wird am Netzgrafik-Ausgang mit Gewicht −2 mitberücksichtigt."
+              "text": "Sicherung (unbenotet, erst schreiben): Beantworten Sie auf der Kursseite zwei Fragen. Erstens: Warum scheitert ein einzelnes Neuron bei XOR, und wie löst die Zwischenschicht das Problem (Ausgaben für (1,1))? Zweitens: Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto; welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort? Die Vorschaufrage zu den Testbildern darf geraten werden."
             },
             {
               "art": "Auftrag",

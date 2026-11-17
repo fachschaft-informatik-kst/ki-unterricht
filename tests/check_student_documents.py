@@ -37,7 +37,14 @@ def lessons(base: Path) -> list[dict]:
     for section in manifest["sections"]:
         if section.get("teaching"):
             found += json.loads((base / "kursseiten" / section["id"] / "planung.json").read_text(encoding="utf-8"))["lessons"]
-    return sorted(found, key=lambda lesson: lesson["order"])
+    reserved = {s["lessonWithoutPlan"]["number"] for s in manifest["sections"] if "lessonWithoutPlan" in s}
+    numbered, number = [], 1
+    for lesson in sorted(found, key=lambda lesson: lesson["order"]):
+        while number in reserved:
+            number += 1
+        numbered.append({**lesson, "number": number})
+        number += 1
+    return numbered
 
 
 def text_of(data: bytes) -> str:
@@ -57,9 +64,10 @@ def check(course: str) -> int:
     plan = lessons(base)
     # Every DL needs its five phases exactly once.
     assert sorted((d["dl"], d["phase"]) for d in docs) == \
-        [(dl, phase) for dl in range(1, len(plan) + 1) for phase in range(1, 6)], f"{course}: Phasen fehlen"
+        [(lesson["number"], phase) for lesson in plan for phase in range(1, 6)], f"{course}: Phasen fehlen"
     expected = []
-    for number, lesson in enumerate(plan, 1):
+    for lesson in plan:
+        number = lesson["number"]
         if grade == "1-klasse":
             # 1st grade: tasks come from the AVIVA plan.
             expected += [(number, i, p["phase"], int(p["minutes"]), p["titel"].strip())

@@ -4,9 +4,9 @@
   </summary>
   <div class="kapitel-body">
     <!-- MD:START -->
-**Jetzt geht es vom Aufbau zum Experiment:** Öffnen Sie das Notebook «Neuronale Netze». Untersuchen Sie im Notebook zunächst die vier XOR-Fälle mit P = 0: Sonne und Freund:innen gehen durch OR und NAND zum Ausgabeneuron. Die Kursgrafik zeigt danach zusätzlich die Prüfungsbremse P. Danach untersuchen Sie, wie ein Netz mit 1, 2 und 4 versteckten Neuronen lernt und ob es alle vier Fälle löst.
+**Jetzt geht es vom Aufbau zum Experiment:** Öffnen Sie das Notebook «Neuronale Netze». Verfolgen Sie die XOR-Ausgaben im Netz aus OR, NAND und AND. Danach untersuchen Sie, wie ein Netz mit 1, 2 und 4 versteckten Neuronen lernt und ob es alle vier Fälle löst.
 
-**Auftrag:** Beschreiben Sie für eine Schwimmbad-Situation den Weg von Sonne, Freund:innen und Prüfung bis zur Ja/Nein-Ausgabe (Prüfung bei der XOR-Notebookübung zunächst 0). Verändern Sie bei der Lernsimulation jeweils nur eine Einstellung und halten Sie Ihre Beobachtung im Protokoll fest.
+**Auftrag:** Beschreiben Sie für eine Eingabe den vollständigen Weg bis zur Ausgabe. Verändern Sie bei der Lernsimulation jeweils nur eine Einstellung und halten Sie Ihre Beobachtung im Protokoll fest.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/basis_netze.ipynb" data-title="Neuronale Netze">
       <!-- MD:START -->

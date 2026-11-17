@@ -91,9 +91,41 @@ def load_course(root: Path = ROOT / "kurse/bok/4-klasse", manifest_path: str = "
     if len({l["order"] for l in lessons}) != len(lessons):
         raise ValueError("Doppelte Lektionsreihenfolge")
     validate_lessons(lessons)
-    for number, lesson in enumerate(lessons, 1):
+    placeholders = lessons_without_plan(sections)
+    number_lessons(lessons, {p["number"] for p in placeholders})
+    return {"minutes": RULES["duration"], "model": "AVIVA", "lessons": lessons, "placeholders": placeholders}
+
+
+def lessons_without_plan(sections: list[dict]) -> list[dict]:
+    """Doppellektionen ohne Unterrichtsplan (z. B. reine Theorieseiten) mit fest reservierter Nummer.
+
+    Manifest: ``"lessonWithoutPlan": {"number": 1}`` an einem Bereich ohne ``teaching``.
+    Die Nummer bleibt fest, auch wenn andere Doppellektionen ergänzt oder umsortiert werden.
+    """
+    found = []
+    for section in sections:
+        slot = section.get("lessonWithoutPlan")
+        if slot is None:
+            continue
+        number = slot.get("number") if isinstance(slot, dict) else None
+        if section.get("teaching") or type(number) is not int or number < 1:
+            raise ValueError(f"lessonWithoutPlan ungültig: {section.get('id')}")
+        title = (section.get("navigation") or {}).get("title") or section["id"]
+        found.append({"number": number, "title": title, "view": section["id"]})
+    if len({p["number"] for p in found}) != len(found):
+        raise ValueError("Doppelte Nummer bei lessonWithoutPlan")
+    return sorted(found, key=lambda p: p["number"])
+
+
+def number_lessons(lessons: list[dict], reserved: set[int]) -> list[dict]:
+    """Nummeriert sortierte Doppellektionen fortlaufend und überspringt reservierte Nummern."""
+    number = 1
+    for lesson in lessons:
+        while number in reserved:
+            number += 1
         lesson["number"] = number
-    return {"minutes": RULES["duration"], "model": "AVIVA", "lessons": lessons}
+        number += 1
+    return lessons
 
 
 def output(root: Path = ROOT) -> Path:

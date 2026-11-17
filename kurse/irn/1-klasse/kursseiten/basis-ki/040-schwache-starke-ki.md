@@ -1,4 +1,4 @@
-<details class="kapitel" id="einstieg-4" data-kurz="Schwache und starke KI unterscheiden und eigene Beispiele begründen." open>
+<details class="kapitel" id="einstieg-4" data-kurz="Schwache und starke KI unterscheiden." open>
   <summary><span class="kapitel-nr">4</span>
     <h2 class="kapitel-titel">Schwache und starke KI</h2>
   </summary>
@@ -27,13 +27,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <p class="task"><b>Aufgabe:</b> Wählen Sie im Tandem drei Beispiele aus Alltag, Film oder Zukunft. Ordnen Sie sie jeweils begründet ein: Regeln oder Lernen aus Daten? Welche KI-Ebene? Schwache oder hypothetische starke KI? Warum beweist ein überzeugend formulierender Chatbot nicht automatisch allgemeine Intelligenz?</p>
-    <label class="field answer"><span>Unsere drei Beispiele mit Einordnung und Begründung</span><textarea data-basis-answer="ki_ordnung" maxlength="10000" placeholder="Beispiel · Regeln oder Daten? · KI/ML/Deep Learning/generativ? · schwach/stark? · Begründung" rows="5"></textarea></label>
-    <!-- Frühere Antworten zu den vier Typen bleiben in älteren ZIP-Sicherungen erhalten.
-         Versteckte Felder sichern die Schlüssel bei erneuter Speicherung, ohne die Typologie zu unterrichten. -->
-    <div hidden aria-hidden="true">
-      <textarea data-basis-answer="typ_bsp_1"></textarea><textarea data-basis-answer="typ_1"></textarea><textarea data-basis-answer="typ_bsp_2"></textarea><textarea data-basis-answer="typ_2"></textarea><textarea data-basis-answer="typ_bsp_3"></textarea><textarea data-basis-answer="typ_3"></textarea><textarea data-basis-answer="typ_bsp_4"></textarea><textarea data-basis-answer="typ_4"></textarea>
     </div>
   </div>
 </details>
