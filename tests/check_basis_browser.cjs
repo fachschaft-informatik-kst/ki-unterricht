@@ -403,9 +403,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // The first-year buttons must launch the selected notebook directly inside
     // the same lab-panel component used in the fourth-year course.
     for(const [lesson,link,notebook,title] of [
-      ['basis-neuron','basis_neuron.ipynb','basis_neuron.ipynb','Ein Neuron'],
+      ['basis-neuron','perzeptron_und_neuronale_netze.ipynb','perzeptron_und_neuronale_netze.ipynb','Neuron-Labor · Doppellektion 3'],
       ['basis-netze','xor_einzelne_neuronen.ipynb','xor_einzelne_neuronen.ipynb','XOR: Ein Neuron'],
-      ['basis-netze','basis_netze.ipynb','basis_netze.ipynb','Neuronale Netze']
+      ['basis-netze','mehrschichtige_netze.ipynb','mehrschichtige_netze.ipynb','Neuronale Netze']
     ]){
       const notebookPage=await browser.newPage();
       await notebookPage.goto('http://127.0.0.1:8770/bok/1-klasse/#'+lesson);
@@ -422,24 +422,24 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       assert.equal(await basicDialog.evaluate(el=>el.tagName),'DIALOG');
       assert.equal(await basicDialog.getAttribute('open'),'');
       assert.equal(await basicDialog.getAttribute('aria-labelledby'),'basis-lab-title');
-      if(notebook==='basis_neuron.ipynb'){
+      if(notebook==='perzeptron_und_neuronale_netze.ipynb'){
         await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await basicDialog.waitFor({state:'hidden'});
-        assert.equal(await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().getAttribute('aria-expanded'),'false',
+        assert.equal(await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="perzeptron_und_neuronale_netze.ipynb"]').first().getAttribute('aria-expanded'),'false',
           'Closing the modal must reset the launcher for keyboard and screen-reader users');
         assert.equal(await basicDialog.count(),1,'Closing must not destroy notebook markup');
         assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
           'Closing the dialog must not reload or remove the notebook iframe');
-        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().click();
+        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="perzeptron_und_neuronale_netze.ipynb"]').first().click();
         await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
         assert.equal(await notebookPage.locator('#basis-lab-frame').getAttribute('src'),source,
           'Reopen must retain the same kernel document, not restart Python');
         await basicDialog.getByRole('button',{name:'Notebook schliessen'}).click();
         await basicDialog.waitFor({state:'hidden'});
-        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="basis_neuron.ipynb"]').first().click();
+        await notebookPage.locator('#basis-neuron a.ki-notebook-launch[href*="perzeptron_und_neuronale_netze.ipynb"]').first().click();
         await notebookPage.waitForFunction(()=>document.querySelector('#basis-notebook-panel')?.open===true);
       }
-      if(notebook==='basis_neuron.ipynb'){
+      if(notebook==='perzeptron_und_neuronale_netze.ipynb'){
         await checkNotebookFullscreen(notebookPage,'#basis-lab-fullscreen','#basis-notebook-panel');
       }
       await notebookPage.close();
@@ -451,7 +451,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       status:200,contentType:'text/html',body:'<!doctype html><html><body>JupyterLite test runtime</body></html>'
     }));
     for(const [url,section,expected] of [
-      ['http://127.0.0.1:8770/bok/1-klasse/','basis-neuron','content/basis_neuron.ipynb'],
+      ['http://127.0.0.1:8770/bok/1-klasse/','basis-neuron','content/perzeptron_und_neuronale_netze.ipynb'],
       ['http://127.0.0.1:8770/bok/4-klasse/','perzeptron','content/perzeptron_und_neuronale_netze.ipynb']
     ]){
       // Navigate just as a student would: inactive lesson sections are hidden.
