@@ -1,9 +1,9 @@
-<details class="kapitel" id="basis-netze-1" data-kurz="XOR verstehen: Wahrheitstabelle, Trennlinie, widersprüchliche Bedingungen und eigenes Experiment." open>
+<details class="kapitel" id="netze-1" data-kurz="XOR verstehen: Wahrheitstabelle, Rätsel im Notebook, Trennlinie und die Rechnung dazu." open>
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Das XOR-Problem: Warum reicht ein Neuron nicht?</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>Neue Schwimmbadregel:</strong> Wir schwimmen nur, wenn <strong>genau eine</strong> Bedingung erfüllt ist – Sonne (S) oder Freund:innen (F) – <strong>und keine Prüfung (P)</strong> ansteht. Bei <strong>P = 0</strong> heisst die Regel <strong>XOR</strong>. Zuerst untersuchen wir vier S/F-Fälle, danach die Prüfungsbremse.</p>
+    <p><strong>Neue Schwimmbadregel:</strong> Schwimmen, wenn <strong>genau eine</strong> Bedingung erfüllt ist – Sonne (S) oder Freund:innen (F) – <strong>und keine Prüfung (P)</strong> ansteht. Bei <strong>P = 0</strong> heisst das <strong>XOR</strong>. Erst prüfen wir vier S/F-Fälle, dann ergänzen wir P.</p>
     <!-- MD:START -->
 ### 1 · XOR kennenlernen: eine neue Regel
 <!-- MD:END -->
@@ -19,8 +19,24 @@
       </table>
     </div>
     <!-- MD:START -->
-XOR unterscheidet sich von OR nur bei (S, F) = (1, 1): Hier gilt **Nein (0)**.
+Nur Sonne oder nur Freund:innen führt zu Ja; anders als bei OR gilt für (1, 1) **Nein**.
 <!-- MD:END -->
+    <!-- MD:START -->
+### 2 · Das Rätsel: Schafft ein Neuron alle vier Fälle?
+<!-- MD:END -->
+    <!-- MD:START -->
+**Notebook-Rätsel:** Schätzen Sie, wie viele XOR-Fälle ein Neuron löst. Testen Sie Gewichte und Bias an den vier Grafiken und notieren Sie Ihr bestes Ergebnis.
+<!-- MD:END -->
+    <div class="ki-notebook-block" data-notebook="content/xor_einzelne_neuronen.ipynb" data-title="XOR mit einem Neuron">
+      <!-- MD:START -->
+### Jupyter-Notebook · XOR mit einem Neuron
+<!-- MD:END -->
+      <!-- MD:START -->
+Öffnen Sie das Notebook und führen Sie Zellen mit Shift + Enter aus.
+<!-- MD:END -->
+      <button type="button" class="ki-notebook-launch" data-lab="xor_einzelne_neuronen.ipynb">Notebook hier öffnen</button>
+    </div>
+    <label class="field answer"><span>Protokoll: Wie viele der vier XOR-Fälle schafft Ihr einzelnes Neuron mit der besten Einstellung?</span><select data-answer="hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></label>
     <p><strong>Versuch:</strong> S und F erhalten je +1, P erhält −2, der Bias −0,5. Damit stimmt OR, aber nicht XOR: Bei (1, 1) sagt das Neuron Ja statt Nein. Die Grafik zeigt diesen Fehler, noch keinen allgemeinen Beweis.</p>
     <figure class="concept-figure neuron-detail-figure neuron-detail-xor">
       <img class="neuron-graphic-desktop" alt="Drei Eingaben wie in der Repetition: Sonne 1, Freund:innen 1 und Prüfung morgen 0. Die Gewichte sind +1, +1 und −2; für P = 0 fällt der Prüfungsterm weg, bei P = 1 wirkt die negative Verbindung. Der Bias ist −0,5. Die Ausgabe für Sonne 1 und Freund:innen 1 ist Ja, die künstliche XOR-Zielregel verlangt aber Nein. Diese Einstellung liefert drei korrekte und einen falschen Fall." loading="lazy" src="grafiken/schwimmbad_xor_einzelne_neuron.svg"/>
@@ -28,22 +44,22 @@ XOR unterscheidet sich von OR nur bei (S, F) = (1, 1): Hier gilt **Nein (0)**.
       <figcaption>Bei P = 0 erfüllt diese Einstellung drei von vier XOR-Fällen; die Punktgrafik erklärt die Grenze.</figcaption>
     </figure>
     <!-- MD:START -->
-### 2 · Das Bild: die vier Fälle als Punkte
+### 3 · Das Bild: die vier Fälle als Punkte
 <!-- MD:END -->
     <figure class="concept-figure neuron-detail-figure neuron-detail-separation">
       <img class="neuron-graphic-desktop" alt="Links die Wahrheitstabelle von XOR, rechts die vier Fälle als Punkte in einem Quadrat. Die beiden Punkte mit Ausgabe 1 liegen diagonal gegenüber, die beiden mit Ausgabe 0 auf der anderen Diagonale. Senkrechte, waagrechte und schräge gestrichelte Linien trennen die Farben nicht." loading="lazy" src="grafiken/xor_gerade.svg"/>
       <img class="neuron-graphic-mobile" alt="Mobile XOR-Tabelle und Punktegrafik: Die beiden Ja-Fälle liegen diagonal und können nicht mit einer einzelnen geraden Linie von den Nein-Fällen getrennt werden." loading="lazy" src="grafiken/xor_gerade_mobil.svg"/>
       <figcaption>Egal ob senkrecht, waagrecht oder schräg: Keine gerade Linie trennt die roten von den blauen Punkten.</figcaption>
     </figure>
-    <p>Die Entscheidungsgrenze eines Neurons ist <strong>w₁·x₁ + w₂·x₂ + b = 0</strong> – eine Gerade. Gewichte drehen, der Bias verschiebt sie. Für AND ist der einzelne Ja-Punkt abtrennbar, die beiden diagonalen XOR-Ja-Punkte jedoch nicht.</p>
-    <details class="basis-hint">
-      <summary>Wahlvertiefung: die vier Bedingungen nachrechnen</summary>
+    <p>Die Entscheidungsgrenze eines Neurons ist <strong>w₁·x₁ + w₂·x₂ + b = 0</strong> – eine Gerade. Gewichte drehen, der Bias verschiebt sie. Für AND ist der einzelne Ja-Punkt abtrennbar, die diagonalen XOR-Ja-Punkte jedoch nicht.</p>
+    <!-- MD:START -->
+**Fazit:** Kein einzelnes Neuron kann alle vier XOR-Fälle lösen: Keine Gerade trennt die Ja- von den Nein-Punkten. Mehr Lernrunden oder eine andere Lernrate helfen nicht. P ändert daran nichts, denn bei P = 0 bleibt XOR unlösbar.
+<!-- MD:END -->
+    <details>
+      <summary>Die Rechnung dazu: vier Bedingungen, die sich widersprechen</summary>
       <div class="detail-body">
     <!-- MD:START -->
-### Wahlvertiefung: Warum widersprechen sich die vier Bedingungen?
-<!-- MD:END -->
-    <!-- MD:START -->
-Jede Zeile fordert für Ausgabe 1 eine Summe ≥ 0 und für Ausgabe 0 eine Summe &lt; 0:
+Stellen Sie für jede Tabellenzeile die Bedingung auf: Ausgabe 1 verlangt Summe ≥ 0, Ausgabe 0 Summe &lt; 0.
 <!-- MD:END -->
     <div class="table-scroll">
       <table class="typen">
@@ -87,20 +103,8 @@ Jede Zeile fordert für Ausgabe 1 eine Summe ≥ 0 und für Ausgabe 0 eine Summe
       </div>
     </details>
     <!-- MD:START -->
-**Fazit:** Kein einzelnes Neuron kann alle vier XOR-Fälle lösen: Die Bedingungen widersprechen sich. Mehr Lernrunden oder eine andere Lernrate helfen nicht. Auch P ändert das nicht, denn bei P = 0 bleibt XOR unlösbar.
-
-**Notebook:** Ändern Sie Gewichte und Bias, vergleichen Sie die vier Fälle und notieren Sie die beste Trefferzahl. In Kapitel 2 kombinieren wir mehrere Neuronen.
+Kapitel 2 zeigt die Lösung mit mehreren Neuronen.
 <!-- MD:END -->
-    <div class="ki-notebook-block" data-notebook="content/xor_einzelne_neuronen.ipynb" data-title="XOR mit einem Neuron">
-      <!-- MD:START -->
-### Jupyter-Notebook · XOR mit einem Neuron
-<!-- MD:END -->
-      <!-- MD:START -->
-Öffnen Sie das Notebook und führen Sie Zellen mit Shift + Enter aus.
-<!-- MD:END -->
-      <a class="ki-notebook-launch" href="../lab/index.html?path=portal/xor_einzelne_neuronen.ipynb">Notebook hier öffnen</a>
-    </div>
-    <label class="field answer"><span>Protokoll: Wie viele der vier XOR-Fälle schafft Ihr einzelnes Neuron mit der besten Einstellung?</span><select data-basis-answer="basis-netze-hand_xor_max" aria-label="XOR: höchste Zahl richtiger Zeilen"><option value="">–</option><option value="0">höchstens 0 von 4</option><option value="1">höchstens 1 von 4</option><option value="2">höchstens 2 von 4</option><option value="3">höchstens 3 von 4</option><option value="4">höchstens 4 von 4</option></select></label>
-    <label class="field answer"><span>Welche Bedingungen lassen sich nicht gleichzeitig erfüllen? Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-basis-answer="basis-netze-xor_warum" maxlength="10000" placeholder="Die Bedingungen für (0, 1), (1, 0) und (1, 1) …" rows="4"></textarea></label>
+    <label class="field answer"><span>Warum kann keine Einstellung alle vier Schwimmbadfälle der XOR-Regel schaffen? Begründen Sie mit den Punkten (Gerade) und mit den vier Bedingungen. Weshalb löst eine andere Lernrate das Problem nicht?</span><textarea data-answer="xor_warum" maxlength="10000" placeholder="Die beiden 1-Punkte liegen diagonal gegenüber, deshalb …" rows="4"></textarea></label>
   </div>
 </details>
