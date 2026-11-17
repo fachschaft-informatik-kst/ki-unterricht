@@ -3,3 +3,5 @@
 <p class="lead">Jede Person erklärt das eigene Projekt im Fachgespräch. Währenddessen untersucht das Tandem unabhängig fremde Daten und Ergebnisse – wie in der 4. Klasse, aber mit weniger technischen Schritten.</p>
 <!-- LESSONS:basis-abschluss -->
 <!-- /LESSONS:basis-abschluss -->
+
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#basis-glossar-modell">Modell</a> · <a href="#basis-glossar-validierung">Validierung</a> · <a href="#basis-glossar-testdaten">Testdaten</a></p>
