@@ -148,6 +148,17 @@ async function openNotebook(name,view,force=false,host=null){
  startNotebookFrame(name,'open');refreshNotebookFrame();
 }
 document.querySelectorAll('a[href*="../lab/index.html?path="]').forEach(a=>{const url=new URL(a.href);const name=url.searchParams.get('path')?.split('/').pop();if(!notebookNames.includes(name))return;a.addEventListener('click',event=>{event.preventDefault();openNotebook(name,a.closest('main > section')?.id,false,a.closest('.ki-notebook-block')).catch(e=>status.textContent=e.message);});});
+// Fourth-year-aligned chapters also use button[data-lab], not only lab links.
+// Route both launcher variants through the same first-year managed notebook
+// panel so ZIP snapshots and kernel persistence work for every lesson.
+document.querySelectorAll('.ki-notebook-block button.ki-notebook-launch[data-lab]').forEach(button=>{
+ const name=button.dataset.lab;
+ if(!notebookNames.includes(name))return;
+ button.addEventListener('click',()=>{
+  openNotebook(name,button.closest('main > section')?.id,false,button.closest('.ki-notebook-block'))
+   .catch(e=>status.textContent=e.message);
+ });
+});
 window.addEventListener('message',async event=>{if(event.origin!==location.origin||event.data?.channel!=='ki-portal-v1')return;
 const session=runtime.fromSource(event.source);if(!session)return;
 const frame=session.frame,current=session.name,d=event.data;if(d.path!=='portal/'+current)return;
