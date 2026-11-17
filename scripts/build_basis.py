@@ -68,6 +68,17 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
                 lesson = by_view[ident][0]
                 content = (f'<h1>{html.escape(lesson["title"])}</h1>'
                            + "".join(render_lesson(item) for item in by_view[ident]) + content)
+        # Fourth-year lesson fragments use data-answer, while first-year download,
+        # restore and journal features use data-basis-answer. Bridge keys in HTML
+        # so the authored lesson sources stay equivalent to the fourth-year ones.
+        def mirror_answer(match):
+            tag = match.group(0)
+            if "data-basis-answer=" in tag:
+                return tag
+            field = re.search(r'\bdata-answer="([^"]+)"', tag)
+            return tag[:-1] + f' data-basis-answer="{field.group(1)}">' if field else tag
+
+        content = re.sub(r"<(?:input|select|textarea)\b[^>]*>", mirror_answer, content)
         klass = html.escape(section["class"])
         pieces.append(f'<section class="{klass}" id="{ident}">{content}</section>')
         if section.get("lessonWithoutPlan"):
