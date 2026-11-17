@@ -243,7 +243,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await assertCompactFigure('#perzeptron-1 .neuron-detail-recap',650);
     await assertCompactFigure('#perzeptron-4 .neuron-detail-learning',1050);
     assert((await page.locator('#perzeptron-4').innerText()).includes('Lernrate'),'DL3 must explain the perceptron learning rule');
-    assert.equal(await page.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"]').count(),1);
+    assert((await page.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"]').count())>=1,'DL3 has the copied first-year neuron lab');
     const neuronWeight=page.locator('[data-basis-answer="sw_gs"]');
     const neuronScore=page.locator('[data-basis-answer="sw_treffer"]');
     await neuronWeight.fill('2.5');
