@@ -87,6 +87,9 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
  }
 }
 @media(max-width:720px){
+ /* Verbindliche Mobilansicht auch bei Layouts ohne passende Containerbreite. */
+ .concept-figure.neuron-detail-figure img.neuron-graphic-desktop{display:none}
+ .concept-figure.neuron-detail-figure img.neuron-graphic-mobile{display:block}
  .concept-figure.neuron-detail-figure{padding:10px}
  .concept-figure.neuron-detail-figure figcaption{font-size:13px}
 }
