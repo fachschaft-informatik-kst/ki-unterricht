@@ -195,6 +195,7 @@ if(d.type==='changed'&&session.phase==='ready'&&!session.initializing){try{saved
 });
 window.addEventListener('hashchange',()=>{if(current)mount();});
 const backupControls=document.getElementById('basis-backup-controls');
+const photoControls=document.getElementById('basis-photo-controls');
 const backupStatus=document.getElementById('basis-backup-status');
 const backup=document.createElement('button');backup.className='btn compact';backup.textContent='Kursstand als ZIP herunterladen ↓';backup.type='button';backup.classList.add('primary');
 const restore=document.createElement('input');restore.type='file';restore.accept='.zip';restore.style.display='block';restore.setAttribute('aria-label','ZIP-Kursstand wiederherstellen');const restoreLabel=document.createElement('label');restoreLabel.textContent='ZIP wiederherstellen ↑';restoreLabel.append(restore);
@@ -221,7 +222,8 @@ function renderRecoveredFiles(){
 }
 const photoGroup=document.createElement('div');photoGroup.className='basis-transfer-photo';photoGroup.append(photoLabel);
 const actionsGroup=document.createElement('div');actionsGroup.className='basis-transfer-buttons';actionsGroup.append(backup,restoreLabel);
-backupControls.append(photoGroup,actionsGroup,recovered);
+photoControls.append(photoGroup);
+backupControls.append(actionsGroup,recovered);
 loaded.then(renderRecoveredFiles);
 function answers(){return Object.fromEntries([...document.querySelectorAll('[data-basis-answer]')].map(f=>[f.dataset.basisAnswer,f.value]));}
 // The JSON retains raw values for ZIP restore; this view explains them to pupils and teachers.
