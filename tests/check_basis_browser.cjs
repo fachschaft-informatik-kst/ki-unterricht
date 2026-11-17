@@ -226,6 +226,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-neuron details.kapitel').count(),7,'DL3 must reproduce all seven advanced neuron chapters');
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_biologisch.svg"]').count(),1);
     assert.equal(await page.locator('#basis-neuron img[src="grafiken/neuron_entscheider.svg"]').count(),1);
+    assert.equal(await page.locator('#basis-neuron-4 img[src="grafiken/schwimmbad_lernschritt.svg"]').count(),1,'DL3 learning diagram must show the updated parameters');
+    assert.equal(await page.locator('#basis-neuron-4 figure.neuron-detail-figure').count(),1,'Detailed diagram supports readable sizing');
     assert((await page.locator('#basis-neuron-4').innerText()).includes('Lernrate'),'DL3 must explain the perceptron learning rule');
     assert.equal(await page.locator('#basis-neuron a[href*="portal/bok/1-klasse/basis_neuron.ipynb"]').count(),1);
     const neuronWeight=page.locator('[data-basis-answer="basis-neuron-sw_gs"]');
@@ -237,7 +239,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await activeSubmenus.count(),1,'Navigation should show one expanded lesson submenu');
     assert.equal(await page.locator('#basis-netze details.kapitel').count(),4,'DL4 must reproduce advanced XOR and network training without digit model');
     assert.equal(await page.locator('#basis-netze img[src="grafiken/xor_gerade.svg"]').count(),1);
-    assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),1);
+    assert.equal(await page.locator('#basis-netze-1 img[src="grafiken/schwimmbad_xor_einzelne_neuron.svg"]').count(),1,'DL4 must illustrate the single-neuron XOR mismatch');
+    assert.equal(await page.locator('#basis-netze-2 img[src="grafiken/schwimmbad_xor_netz.svg"]').count(),1,'DL4 must illustrate the hidden layer');
+    assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),0,'The old abstract network image is not part of DL4');
     assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/xor_einzelne_neuronen.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/basis_netze.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-netze a[href*="ziffernerkennung.ipynb"]').count(),0,'Digit classifier belongs to DL5 only');
@@ -335,6 +339,49 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await mobilePage.goto('http://127.0.0.1:8770/bok/1-klasse/');
     assert(await mobilePage.locator('#basis-sicherung #basis-backup-controls button').isVisible(),
       'Mobile devices must expose the full ZIP backup controls outside the hidden sidebar');
+    // Every DL3/DL4 network illustration must use the legible mobile SVG,
+    // without introducing its own horizontal overflow at phone width.
+    for(const [lesson,selectors] of [
+      ['basis-neuron',['#basis-neuron-1 .neuron-detail-recap',
+                       '#basis-neuron-4 .neuron-detail-learning']],
+      ['basis-netze',['#basis-netze-1 .neuron-detail-xor',
+                      '#basis-netze-1 .neuron-detail-separation',
+                      '#basis-netze-2 .neuron-detail-net']]
+    ]){
+      await mobilePage.goto('http://127.0.0.1:8770/bok/1-klasse/#'+lesson);
+      for(const selector of selectors){
+        const figure=mobilePage.locator(selector);
+        await figure.waitFor({state:'visible'});
+        const mobile=figure.locator('img.neuron-graphic-mobile');
+        const desktop=figure.locator('img.neuron-graphic-desktop');
+        // CSS visibility must be correct independently of image loading. Lazy
+        // images can have zero height until they enter the viewport, so checking
+        // isVisible() before scrolling would misdiagnose a valid mobile layout.
+        const displays=await figure.evaluate(el=>({
+          mobile:getComputedStyle(el.querySelector('img.neuron-graphic-mobile')).display,
+          desktop:getComputedStyle(el.querySelector('img.neuron-graphic-desktop')).display
+        }));
+        assert.notEqual(displays.mobile,'none',selector+' must select the mobile illustration');
+        assert.equal(displays.desktop,'none',selector+' must hide desktop SVG');
+        await figure.scrollIntoViewIfNeeded();
+        await mobile.evaluate(img=>img.decode());
+        assert(await mobile.isVisible(),selector+' must show the loaded mobile illustration');
+        assert.equal(await desktop.isVisible(),false,selector+' must hide desktop SVG');
+        const dimensions=await mobile.evaluate(img=>{
+          const r=img.getBoundingClientRect();
+          const parent=img.closest('figure').getBoundingClientRect();
+          return {width:r.width,right:r.right,figureWidth:parent.width,
+                  complete:img.complete,naturalWidth:img.naturalWidth,
+                  windowWidth:window.innerWidth};
+        });
+        assert(dimensions.complete && dimensions.naturalWidth>0,
+          selector+' mobile asset must load');
+        assert(dimensions.width<=dimensions.figureWidth+1,
+          selector+' image must fit inside its figure');
+        assert(dimensions.right<=dimensions.windowWidth+1,
+          selector+' image must not extend beyond mobile viewport');
+      }
+    }
     await mobilePage.close();
     // The first-year buttons must launch the selected notebook directly inside
     // the same lab-panel component used in the fourth-year course.

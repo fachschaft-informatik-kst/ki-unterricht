@@ -5,8 +5,9 @@
   <div class="kapitel-body">
     <p><strong>Ein Neuron ist ein kleiner Entscheider.</strong> Es bekommt mehrere Zahlen (Eingaben) und gibt genau eine Antwort aus: <strong>1 (Ja) oder 0 (Nein)</strong>. Mehr kann es nicht, und mehr braucht es nicht.</p>
     <p><strong>Ein Beispiel aus dem Alltag: Gehe ich heute schwimmen?</strong> Drei Faktoren, je 1 (ja) oder 0 (nein): <strong>S</strong> Sonne scheint, <strong>F</strong> Freund:innen gehen mit, <strong>P</strong> Prüfung morgen. Sie wägen ab: Sonne und Freund:innen sprechen dafür, die Prüfung dagegen, und nicht alles ist gleich wichtig. Genau das macht ein Neuron mit Zahlen.</p>
-    <figure class="concept-figure">
-      <img alt="Ein Neuron als Entscheider: Die Eingaben Sonne 1, Freund:innen 0 und Prüfung 1 werden mit den Gewichten plus 2, plus 2 und minus 4 multipliziert, summiert und mit dem Bias minus 1 verrechnet. Das Ergebnis minus 3 liegt unter 0, die Ausgabe ist Nein." loading="lazy" src="grafiken/neuron_entscheider.svg"/>
+    <figure class="concept-figure neuron-detail-figure neuron-detail-recap">
+      <img class="neuron-graphic-desktop" alt="Ein Neuron als Entscheider: Die Eingaben Sonne 1, Freund:innen 0 und Prüfung 1 werden mit den Gewichten plus 2, plus 2 und minus 4 multipliziert, summiert und mit dem Bias minus 1 verrechnet. Das Ergebnis minus 3 liegt unter 0, die Ausgabe ist Nein." loading="lazy" src="grafiken/neuron_entscheider.svg"/>
+      <img class="neuron-graphic-mobile" alt="Mobile Darstellung des Schwimmbad-Neurons mit Sonne 1, Freund:innen 0, Prüfung morgen 1, Gewichten plus 2, plus 2 und minus 4, Bias minus 1 und Ausgabe Nein." loading="lazy" src="grafiken/neuron_entscheider_mobil.svg"/>
       <figcaption>Eine Situation durch das Neuron: 1·2 + 0·2 + 1·(−4) = −2, dazu der Bias −1 ergibt −3. Das ist kleiner als 0: Das Neuron sagt Nein, schwimmen fällt aus.</figcaption>
     </figure>
     <div class="table-scroll">

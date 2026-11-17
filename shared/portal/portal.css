@@ -31,6 +31,69 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 .concept-figure img{display:block;width:100%;max-width:700px;height:auto;margin:auto}
 .concept-figure figcaption{max-width:610px;margin:15px auto 0;color:var(--muted);font-size:13px}
 
+/* Die grossen SVGs bleiben auf Desktop nebeneinander / mehrschichtig.
+   Schmale Kurs-Inhaltsbereiche erhalten eigene, lesbare Hochformatgrafiken.
+   Container Queries richten sich nach der Kapitelbreite statt der Fensterbreite. */
+.concept-figure.neuron-detail-figure{
+  container-type:inline-size;
+  box-sizing:border-box;
+  min-width:0;
+  max-width:100%;
+  overflow:hidden;
+}
+.concept-figure.neuron-detail-figure img{
+  display:block;
+  width:100%;
+  min-width:0;
+  height:auto;
+  margin-inline:auto;
+}
+.neuron-detail-figure img.neuron-graphic-mobile{
+  display:none;
+  max-width:450px;
+}
+.concept-figure.neuron-detail-learning img.neuron-graphic-desktop{max-width:1550px}
+.concept-figure.neuron-detail-net img.neuron-graphic-desktop{max-width:1020px}
+.concept-figure.neuron-detail-xor img.neuron-graphic-desktop{max-width:760px}
+.concept-figure.neuron-detail-recap img.neuron-graphic-desktop{max-width:760px}
+.concept-figure.neuron-detail-separation img.neuron-graphic-desktop{max-width:740px}
+/* Unter der passenden Mindestbreite werden die komplexen Diagramme neu
+   angeordnet statt horizontal scrollbar oder unlesbar verkleinert zu sein. */
+@container (max-width:950px){
+ .neuron-detail-learning img.neuron-graphic-desktop,
+ .neuron-detail-net img.neuron-graphic-desktop{display:none}
+ .neuron-detail-learning img.neuron-graphic-mobile,
+ .neuron-detail-net img.neuron-graphic-mobile{display:block}
+}
+@container (max-width:580px){
+ .neuron-detail-xor img.neuron-graphic-desktop,
+ .neuron-detail-recap img.neuron-graphic-desktop,
+ .neuron-detail-separation img.neuron-graphic-desktop{display:none}
+ .neuron-detail-xor img.neuron-graphic-mobile,
+ .neuron-detail-recap img.neuron-graphic-mobile,
+ .neuron-detail-separation img.neuron-graphic-mobile{display:block}
+}
+/* Fallback für Browser ohne Container Queries. */
+@supports not (container-type:inline-size){
+ @media(max-width:1200px){
+  .neuron-detail-learning img.neuron-graphic-desktop,
+  .neuron-detail-net img.neuron-graphic-desktop{display:none}
+  .neuron-detail-learning img.neuron-graphic-mobile,
+  .neuron-detail-net img.neuron-graphic-mobile{display:block}
+ }
+ @media(max-width:750px){
+  .neuron-detail-xor img.neuron-graphic-desktop{display:none}
+  .neuron-detail-xor img.neuron-graphic-mobile{display:block}
+ }
+}
+@media(max-width:720px){
+ /* Verbindliche Mobilansicht auch bei Layouts ohne passende Containerbreite. */
+ .concept-figure.neuron-detail-figure img.neuron-graphic-desktop{display:none}
+ .concept-figure.neuron-detail-figure img.neuron-graphic-mobile{display:block}
+ .concept-figure.neuron-detail-figure{padding:10px}
+ .concept-figure.neuron-detail-figure figcaption{font-size:13px}
+}
+
 /* Venn diagram with hover/focus explanations (DL 1). Zones are siblings stacked from outer to inner. */
 .venn-hover{max-width:460px;margin:auto}
 .venn-stage{position:relative}

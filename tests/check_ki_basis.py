@@ -23,6 +23,53 @@ def rejects(fn):
 
 def main():
     np.testing.assert_array_equal(u.xor_netz(),[0,1,1,0])
+    # The third swimming-pool input is real, not a disconnected label:
+    # P=1 vetoes the XOR decision, while P=0 preserves the four XOR cases.
+    for sonnenschein in (0,1):
+        for freunde in (0,1):
+            zwischen_or=int(sonnenschein+freunde-.5>=0)
+            zwischen_nand=int(-sonnenschein-freunde+1.5>=0)
+            for pruefung in (0,1):
+                ausgang=int(zwischen_or+zwischen_nand-2*pruefung-1.5>=0)
+                assert ausgang==((sonnenschein ^ freunde) and not pruefung)
+    # All network SVGs must load, carry meaningful descriptions and fit their
+    # declared canvas (including transformed desktop/mobile learning panels).
+    import re
+    import xml.etree.ElementTree as ET
+    asset_dir=content.parent/'assets'/'grafiken'
+    names=('neuron_entscheider.svg','neuron_entscheider_mobil.svg',
+           'schwimmbad_lernschritt.svg','schwimmbad_lernschritt_mobil.svg',
+           'schwimmbad_xor_einzelne_neuron.svg',
+           'schwimmbad_xor_einzelne_neuron_mobil.svg',
+           'schwimmbad_xor_netz.svg','schwimmbad_xor_netz_mobil.svg')
+    for diagram in names:
+        svg=ET.parse(asset_dir/diagram).getroot()
+        w,h=(float(v) for v in svg.attrib['viewBox'].split()[2:])
+        assert w>0 and h>0 and svg.find('{http://www.w3.org/2000/svg}title') is not None
+        assert svg.find('{http://www.w3.org/2000/svg}desc') is not None
+        def walk(elem,scale=1.,shift_x=0.,shift_y=0.):
+            tr=elem.attrib.get('transform','')
+            m=re.search(r'translate\(([-.\d]+)\s+([-.\d]+)\)',tr)
+            if m:
+                shift_x+=scale*float(m.group(1))
+                shift_y+=scale*float(m.group(2))
+            m=re.search(r'scale\(([-.\d]+)\)',tr)
+            if m:scale*=float(m.group(1))
+            tag=elem.tag.rsplit('}',1)[-1]
+            if tag=='rect':
+                x=shift_x+scale*float(elem.attrib.get('x',0))
+                y=shift_y+scale*float(elem.attrib.get('y',0))
+                rw=scale*float(elem.attrib['width'])
+                rh=scale*float(elem.attrib['height'])
+                assert x>=-1 and y>=-1 and x+rw<=w+1 and y+rh<=h+1,(diagram,x,y,rw,rh,w,h)
+            elif tag=='circle':
+                x=shift_x+scale*float(elem.attrib['cx'])
+                y=shift_y+scale*float(elem.attrib['cy'])
+                r=scale*float(elem.attrib['r'])
+                assert x-r>=-1 and y-r>=-1 and x+r<=w+1 and y+r<=h+1,(diagram,x,y,r,w,h)
+            for child in elem:walk(child,scale,shift_x,shift_y)
+        walk(svg)
+
     regeln={
         'UND (AND)': [0,0,0,1],
         'ODER (OR)': [0,1,1,1],

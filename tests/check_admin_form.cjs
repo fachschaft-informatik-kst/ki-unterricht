@@ -10,6 +10,7 @@ const files=[
     "einstieg/030-einstieg-3.md","perzeptron/030-perzeptron-3.md"]
     .map(rel=>"kurse/bok/4-klasse/kursseiten/"+rel),
   "kurse/bok/1-klasse/kursseiten/basis-neuron/030-perzeptron-3.md",
+  "kurse/bok/1-klasse/kursseiten/basis-neuron/040-perzeptron-4.md",
   ...[1,4].flatMap(grade=>{
     const base="kurse/irn/"+grade+"-klasse/kursseiten/";
     const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,base+"manifest.json"),"utf8"));
@@ -708,15 +709,19 @@ const server=http.createServer((req,res)=>{
       return {accent:vars.getPropertyValue("--accent").trim(),
         paper:vars.getPropertyValue("--paper").trim(),
         background:body.backgroundColor,
-        brand:el.ownerDocument.querySelector(".sidebar .brand")?.getAttribute("href"),
-        image:el.ownerDocument.querySelector(".kapitel img")?.getAttribute("src")};
+        brand:el.ownerDocument.querySelector(".sidebar .brand")?.getAttribute("href")};
     });
     assert.equal(basisTheme.accent,"#3653a3","First-year accent must be blue");
     assert.equal(basisTheme.paper,"#f3f5fb","First-year paper must be pale blue");
     assert.equal(basisTheme.background,"rgb(243, 245, 251)");
     assert.equal(basisTheme.brand,"#basis-start","Preview must use the first-year course shell");
-    assert.ok(basisTheme.image?.startsWith("https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/1-klasse/grafiken/"),
-      "First-year images must resolve against the blue basis course");
+    // Kapitel 3 has no static diagram anymore; verify the new learning figure in Kapitel 4.
+    await page.locator("#chapters button").filter({hasText:"040-perzeptron-4"}).click();
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/bok/1-klasse/kursseiten/basis-neuron/040-perzeptron-4.md");
+    const learningImage=await basisPreview.locator(".kapitel img").first().getAttribute("src");
+    assert.ok(learningImage?.startsWith("https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/1-klasse/grafiken/") &&
+      learningImage.endsWith("/schwimmbad_lernschritt.svg"),
+      "First-year learning image must resolve against the blue basis course");
 
     // Course-specific AVIVA and materials use the same split layout and
     // cannot navigate into fourth-year files.

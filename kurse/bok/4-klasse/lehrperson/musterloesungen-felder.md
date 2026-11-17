@@ -57,7 +57,7 @@
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
 |---|---|
 | `neuron_wozu` | Positive Gewichte für Sonne und Freund:innen erhöhen die Schwimmneigung, das negative Prüfungsgewicht senkt sie; Bias legt die Schwelle fest. Bei Prüfungsgewicht 0 hätte die Prüfung keinen Einfluss mehr. |
-| `neuron_gelernt` | Lernart: überwachtes Lernen, denn zu jedem Beispiel ist das Ziel (Label) bekannt: Im AND-Versuch ist die Zielausgabe (1,1) → 1, sonst 0. Verändert haben sich Gewichte und Bias (der Erfahrungsschatz), nicht die Grundform der Rechnung; Eingaben und Ziele blieben gleich. |
+| `neuron_gelernt` | Überwachtes Lernen: Das Ziel (Label) ist für das Schwimmbad-Beispiel bekannt. Bei Sonne = 1, Freund:innen = 0 und Prüfung = 0 ist das Ziel Ja (1), das Neuron sagt zunächst Nein (0). Bei Lernrate 1 steigt das Sonnengewicht von 0 auf 1 und der Bias von −1,5 auf −0,5; die anderen Gewichte bleiben wegen ihrer inaktiven Eingaben unverändert. Die Eingaben und die Rechenregel bleiben gleich; das Gelernte steckt in Gewichten und Bias. |
 | `sw_gs` | +2 |
 | `sw_gf` | +2 |
 | `sw_gp` | −1 |
@@ -96,13 +96,13 @@
 |---|---|
 | `hand_xor_max` | Höchstens 3 von 4 Fällen; keine einzelne Gerade trennt alle XOR-Eingaben. |
 | `xor_warum` | Geometrisch: Die beiden 1-Punkte (0,1) und (1,0) liegen diagonal gegenüber der beiden 0-Punkte (0,0) und (1,1); keine einzelne Gerade trennt sie. Rechnerisch: Die Bedingungen b < 0, w₂ + b ≥ 0, w₁ + b ≥ 0 und w₁ + w₂ + b < 0 widersprechen sich. Die Lernrate verändert nur die Schritte, nicht die Modellgrenze. |
-| `netze_zwischenschicht` | Für (1,0) liefert ODER = 1 und NAND = 1; das nachfolgende UND gibt 1. Die Zwischenschicht erzeugt Merkmale, die gemeinsam XOR lösen. |
+| `netze_zwischenschicht` | (S,F)=(1,0): OR=1, NAND=1. P=0 führt zu Ja (1), P=1 wegen des negativen Prüfungsgewichts −2 zu Nein (0). Die Zwischenschicht erzeugt die XOR-Zwischenmerkmale. |
 | `xornetz_1` | Beispiel: 3 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_2` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_4` | Beispiel: 4 von 4; der konkrete Notebooklauf zählt. |
 | `xornetz_start` | Nein; das Ergebnis kann mit anderen Startwerten variieren. |
 | `xornetz_beob` | Beispielsweise genügten 2 versteckte Neuronen bei einem Startwert; bei einem anderen scheiterte das Training. Ergebnisse nur als Beobachtung eines konkreten Laufs deuten. |
-| `netze` | Ein einzelnes Neuron hat nur eine lineare Grenze; die XOR-Punkte liegen diagonal. Eine Zwischenschicht kombiniert mehrere Teilentscheidungen, etwa OR und NAND; der Ausgang verbindet beide mit AND. Für (1,1): OR = 1, NAND = 0, AND(1, 0) = 0, also XOR = 0. |
+| `netze` | Ein einzelnes Neuron hat nur eine lineare Grenze; die XOR-Punkte liegen diagonal. Die Zwischenschicht kombiniert OR und NAND; am Ausgang wird zusätzlich Prüfung P mit Gewicht −2 berücksichtigt. Für (S,F,P)=(1,1,0): OR=1, NAND=0, Summe 1+0−0−1,5=−0,5 → Nein. Für (1,0,1): OR=1, NAND=1, Summe 1+1−2−1,5=−1,5 → Nein. |
 | `projekt_bereit_check` | Brücke: MobileNet bleibt fest und liefert 1280 Zahlen je Foto; nur das kleine Netz lernt (Gewichte und Bias), Eingaben und Ausgabeklassen bleiben. Die richtige Antwort kennt es aus dem Label, der Klasse jedes Fotos (überwachtes Lernen). Vorschau (Raten erlaubt): Die Testbilder müssen bis zum Schluss ungeöffnet bleiben, sonst sind sie keine neuen Daten. Das wird in DL 5 genau geklärt. Offene Frage zum Beispiel: Wie erkennt man ein Datenleck bei fast gleichen Bildern? |
 | `zif_2` | Beispiel: 55 %; Notebookwert einsetzen. |
 | `zif_4` | Beispiel: 69 %; Notebookwert einsetzen. |
