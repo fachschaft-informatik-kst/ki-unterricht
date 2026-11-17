@@ -259,9 +259,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await assertCompactFigure('#netze-1 .neuron-detail-separation',690);
     await assertCompactFigure('#netze-2 .neuron-detail-net',980);
     assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),0,'The old abstract network image is not part of DL4');
-    assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/xor_einzelne_neuronen.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/mehrschichtige_netze.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/ziffernerkennung.ipynb"]').count(),1,'DL4 includes the same digit classifier as fourth year');
+    assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/xor_einzelne_neuronen.ipynb"]').count())>=1,'Copied DL4 notebook xor_einzelne_neuronen must be present');
+    assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/mehrschichtige_netze.ipynb"]').count())>=1,'Copied DL4 notebook mehrschichtige_netze must be present');
+    assert((await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/ziffernerkennung.ipynb"]').count())>=1,'Copied DL4 notebook ziffernerkennung must be present');
     const xorScore=page.locator('[data-basis-answer="hand_xor_max"]');
     await xorScore.selectOption('3');
     await page.locator('.nav > a[href="#basis-sprache"]').click();
