@@ -243,7 +243,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await assertCompactFigure('#perzeptron-1 .neuron-detail-recap',650);
     await assertCompactFigure('#perzeptron-4 .neuron-detail-learning',1050);
     assert((await page.locator('#perzeptron-4').innerText()).includes('Lernrate'),'DL3 must explain the perceptron learning rule');
-    assert.equal(await page.locator('#basis-neuron a[href*="portal/bok/1-klasse/perzeptron_und_neuronale_netze.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-neuron .ki-notebook-block[data-notebook="content/perzeptron_und_neuronale_netze.ipynb"]').count(),1);
     const neuronWeight=page.locator('[data-basis-answer="sw_gs"]');
     const neuronScore=page.locator('[data-basis-answer="sw_treffer"]');
     await neuronWeight.fill('2.5');
@@ -259,9 +259,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await assertCompactFigure('#netze-1 .neuron-detail-separation',690);
     await assertCompactFigure('#netze-2 .neuron-detail-net',980);
     assert.equal(await page.locator('#basis-netze img[src="grafiken/merhschichtiges_netzwerk.svg"]').count(),0,'The old abstract network image is not part of DL4');
-    assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/xor_einzelne_neuronen.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-netze a[href*="portal/bok/1-klasse/mehrschichtige_netze.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-netze a[href*="ziffernerkennung.ipynb"]').count(),1,'DL4 includes the same digit classifier as fourth year');
+    assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/xor_einzelne_neuronen.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/mehrschichtige_netze.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/ziffernerkennung.ipynb"]').count(),1,'DL4 includes the same digit classifier as fourth year');
     const xorScore=page.locator('[data-basis-answer="hand_xor_max"]');
     await xorScore.selectOption('3');
     await page.locator('.nav > a[href="#basis-sprache"]').click();
