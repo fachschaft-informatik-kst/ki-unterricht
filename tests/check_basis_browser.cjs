@@ -547,7 +547,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert(await glossaryPage.locator('#basis-glossar-token .glossary-selfcheck').evaluate(el=>el.scrollWidth<=el.clientWidth+1),'Kein horizontales Überlaufen');
     assert(!await glossaryPage.locator('#basis-glossar-xor').isVisible());
     await glossaryPage.locator('[data-glossary-search]').fill('');
-    assert.equal(await glossaryPage.locator('#basis-glossar .glossary-entry:visible').count(),29);
+    const expectedGlossaryCount=JSON.parse(fs.readFileSync(path.resolve(__dirname,
+      '../kurse/bok/1-klasse/kursseiten/glossar.json'),'utf8')).begriffe.length;
+    assert.equal(await glossaryPage.locator('#basis-glossar .glossary-entry:visible').count(),expectedGlossaryCount);
     await glossaryPage.close();
     assert.deepEqual(errors,[]);
     console.log('PASS both course links, ten lessons, reused KI/ML, blue KST layout, two-layer network, live neuron controls and isolated persistent answers');
