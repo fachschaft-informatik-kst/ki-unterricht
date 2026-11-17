@@ -9,7 +9,12 @@ const SCHEMA='ki-kursportal-v1',KEY='kst-ki-kursportal-v1',ANSWERS_SCHEMA='ki-ku
 // Controller code below handles persistence, notebooks, ZIP and ephemeral widgets.
 const journalFields=all('[data-journal]'),answerFields=all('[data-answer]');
 let state={schema:SCHEMA,journal:{},answers:{},files:[]},notebook=null,protocol=null,protocolSignature='',files=new Map(),db=null;
-let others={},notebookUploads={},filesStored=true,artifactStored=true;
+let others={},previousNetze={},notebookUploads={},filesStored=true,artifactStored=true;
+const DL4_NETZ_REVISION='dl4-schwimmbad-v2';
+function isOldDL4Netz(name,nb){
+ return Boolean(nb) && ['basis_netze.ipynb','mehrschichtige_netze.ipynb'].includes(name)
+   && nb?.metadata?.ki_didaktik?.notebook_revision!==DL4_NETZ_REVISION;
+}
 const notebookDirty=()=>[...runtime.sessions.values()].some(session=>session.dirty);
 let saving=Promise.resolve(),notebookUpdates=Promise.resolve(),fileUpdates=Promise.resolve(),artifactVersion=0,transferring=false;
 const pending=new Map();
@@ -39,7 +44,7 @@ function transaction(store,mode,action){
 }
 function read(store,key){return new Promise((resolve,reject)=>{const q=db.transaction(store).objectStore(store).get(key);q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);});}
 function persistArtifacts(){
- const version=++artifactVersion,payload={notebook,protocol,protocolSignature,others,uploads:notebookUploads};artifactStored=false;
+ const version=++artifactVersion,payload={notebook,protocol,protocolSignature,others,previousNetze,uploads:notebookUploads};artifactStored=false;
  saving=saving.then(()=>transaction('artifacts','readwrite',s=>s.put(payload,'project'))).then(()=>{
   if(version===artifactVersion){artifactStored=true;status(notebookDirty()?'Notebook wird gesichert …':'Notizen und Notebooks in diesem Browser gespeichert.');}
  }).catch(()=>{artifactStored=false;status('Notebook nur vorübergehend verfügbar – Notizen & Projekt herunterladen.',true);});
@@ -128,7 +133,7 @@ const initialization=(async()=>{
  render();
  try{
   db=await new Promise((resolve,reject)=>{const q=indexedDB.open('kst-ki-kursportal',1);q.onupgradeneeded=()=>{q.result.createObjectStore('files');q.result.createObjectStore('artifacts');};q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);q.onblocked=()=>reject(Error('Browserspeicher blockiert'));});
-  const artifact=await read('artifacts','project');if(artifact){notebook=artifact.notebook;protocol=artifact.protocol;protocolSignature=artifact.protocolSignature||'';if(artifact.others&&typeof artifact.others==='object')others=artifact.others;if(artifact.uploads&&typeof artifact.uploads==='object')notebookUploads=artifact.uploads;}
+  const artifact=await read('artifacts','project');if(artifact){notebook=artifact.notebook;protocol=artifact.protocol;protocolSignature=artifact.protocolSignature||'';if(artifact.others&&typeof artifact.others==='object')others=artifact.others;if(artifact.previousNetze&&typeof artifact.previousNetze==='object')previousNetze=artifact.previousNetze;if(artifact.uploads&&typeof artifact.uploads==='object')notebookUploads=artifact.uploads;}
   for(const f of state.files){const b=await read('files',f.id);if(b)files.set(f.id,b);}
  }catch{filesStored=false;status('Dateien werden nicht dauerhaft gespeichert. Notizen & Projekt herunterladen.',true);}
  renderFiles();updateChecks();
@@ -193,6 +198,8 @@ window.addEventListener('ki-notebook-warmup',event=>{
  void (async()=>{
   await initialization;
   if(activeName||switching||transferring||document.visibilityState!=='visible')return;
+  // Do not silently prewarm and restore an obsolete DL4 notebook.
+  if(isOldDL4Netz(name,others[name]))return;
   activeName=name;activeOwner='';frame=runtime.select(name).frame;
   const saved=name===projectName?notebook:others[name];
   $('project-lab-status').textContent='Python wird im Hintergrund vorbereitet …';
@@ -238,6 +245,12 @@ async function showNotebook(name,owner,scroll=true,trigger=null){
  switching=true;
  try{
   await initialization;
+  if(isOldDL4Netz(name,others[name])){
+   // Keep the learner's old notebook in the ZIP; published DL4 gets fresh cells.
+   previousNetze[name]=others[name];delete others[name];
+   await persistArtifacts();
+   $('project-lab-status').textContent='Älteres DL4-Notebook archiviert (im ZIP). Neue Schwimmbadversion wird geöffnet.';
+  }
   // Keep the dialog attached to the page rather than reparenting its iframe
   // into each lesson card: a DOM move can restart the entire Python runtime.
   activeName=name;
@@ -373,11 +386,13 @@ async function pack(submission){
   if(state.files.some(f=>!files.has(f.id)))throw Error('Einige Datendateien fehlen. Bitte erneut hinzufügen.');
   const absent=missing();if(submission&&absent.length&&!confirm('Noch unvollständig: '+absent.join(', ')+'. Trotzdem diesen Stand herunterladen?'))return;
   const savedNames=Object.keys(others).filter(name=>names[name]&&name!==projectName);
+  const archivedNames=Object.keys(previousNetze).filter(name=>names[name]&&name!==projectName);
   const snapshot={...state,uploads:notebookUploads,exported:new Date().toISOString(),progress:window.KIProgress?.get(),protocol,protocolSignature,notebooks:[...(notebook?['versuch.ipynb']:[]),...savedNames.map(name=>'notebooks/'+name)]};
     const entries=[{name:'kursstand.json',data:JSON.stringify(snapshot,null,2)},{name:'Journal.html',data:journalHTML()},{name:'LESEN.txt',data:'Journal.html enthält das Projektjournal, die Unterrichtsantworten (auch Auswahlfelder) und Versuchsausgaben.\nkursstand.json enthält auch Unterrichtsantworten, Häkchen und Selbsteinschätzungen.\nversuch.ipynb und notebooks/ enthalten bearbeitete Notebooks mit Code, Markdown, eingebetteten Bildern und Ausgaben. Widget-Werte und Diagramme sind als lesbarer Stand gesichert.\nDie ZIP-Datei kann auf der Kursseite als Projektstand wiederhergestellt werden.\nHinzugefügte Dateien und im Notebook ausgewählte Uploads liegen unter daten/.\nOriginalfotos und eine noch offene Fotostudio-Sammlung müssen zusätzlich unter «Notizen & Projekt» hinzugefügt werden.\nPython-Variablen und trainierte Modelle im Arbeitsspeicher sind nicht gespeichert. Nach Wiederherstellung Vorbereitung, Datenimport und benötigte Berechnungen erneut ausführen.\nFür eine lokale Wiederholung: Python 3.12, numpy, scipy, scikit-learn, matplotlib, pillow, ipywidgets; Notebook-Zellen der Reihe nach ausführen und Fotostudio-JSON aus daten/ auswählen.\nDer Download ist keine automatische Einreichung.\n'}];
   const nb=notebookForExport();if(nb)entries.push({name:'versuch.ipynb',data:JSON.stringify(checkNotebook(nb),null,1)});
   if(protocol)entries.push({name:'Versuchsprotokoll.json',data:JSON.stringify(protocol,null,2)});
   for(const name of savedNames)entries.push({name:'notebooks/'+name,data:JSON.stringify(checkNotebook(others[name]),null,1)});
+  for(const name of archivedNames)entries.push({name:'notebooks/archiv/'+name,data:JSON.stringify(checkNotebook(previousNetze[name]),null,1)});
   for(const f of state.files)entries.push({name:archiveName(f),data:files.get(f.id)});
   if(nb||savedNames.length){for(const file of ['ki_foto_tools.py','ki_projekt_tools.py','foto_uebungsdaten.json','unterricht_tools.py']){
    const r=await fetch('runtime/'+file);if(!r.ok)throw Error('Hilfsdateien konnten nicht geladen werden. Internetverbindung prüfen.');
@@ -484,11 +499,15 @@ $('restore-package').addEventListener('change',async e=>{
   if(raw.notebooks!==undefined&&(!Array.isArray(raw.notebooks)||raw.notebooks.some(name=>typeof name!=='string'||!unpacked.has(name))))throw Error('Ein gesichertes Notebook fehlt im ZIP.');
   let nextNotebook=null;
   if(unpacked.has('versuch.ipynb')){nextNotebook=checkNotebook(JSON.parse(await unpacked.get('versuch.ipynb').text()));nextNotebook.cells=nextNotebook.cells.filter(c=>!c.metadata?.['ki-journal-export']);}
-  const nextOthers={};
+  const nextOthers={},nextPreviousNetze={};
   for(const name of Object.keys(names)){
    if(name===projectName||!unpacked.has('notebooks/'+name))continue;
    const nb=JSON.parse(await unpacked.get('notebooks/'+name).text());
    nextOthers[name]=checkNotebook(nb);
+  }
+  for(const name of Object.keys(names)){
+   if(!unpacked.has('notebooks/archiv/'+name))continue;
+   nextPreviousNetze[name]=checkNotebook(JSON.parse(await unpacked.get('notebooks/archiv/'+name).text()));
   }
   for(const f of next.files){const name=archiveName(f);if(!unpacked.has(name))throw Error('Datendatei fehlt: '+f.name);nextFiles.set(f.id,new Blob([unpacked.get(name)],{type:f.type}));}
     // Older ZIPs without an upload index remain supported. The index links
@@ -510,7 +529,7 @@ $('restore-package').addEventListener('change',async e=>{
   // Its late events must never resurrect a previous tandem's work.
   runtime.clear();frame=$('project-frame');activeName='';activeOwner='';notebookLoading('ready');visibility();
   await notebookUpdates;await fileUpdates;await saving;
-  const nextArtifact={notebook:nextNotebook,others:nextOthers,uploads:nextUploads,protocol:raw.protocol||null,protocolSignature:raw.protocolSignature||''};
+  const nextArtifact={notebook:nextNotebook,others:nextOthers,previousNetze:nextPreviousNetze,uploads:nextUploads,protocol:raw.protocol||null,protocolSignature:raw.protocolSignature||''};
   try{
    if(!db)throw Error('Browserspeicher nicht verfügbar');
    await new Promise((resolve,reject)=>{
@@ -520,7 +539,7 @@ $('restore-package').addEventListener('change',async e=>{
     tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);
    });filesStored=true;artifactStored=true;
   }catch{filesStored=false;artifactStored=false;}
-  state=next;files=nextFiles;notebook=nextNotebook;others=nextOthers;notebookUploads=nextUploads;protocol=nextArtifact.protocol;protocolSignature=nextArtifact.protocolSignature;
+  state=next;files=nextFiles;notebook=nextNotebook;others=nextOthers;previousNetze=nextPreviousNetze;notebookUploads=nextUploads;protocol=nextArtifact.protocol;protocolSignature=nextArtifact.protocolSignature;
   window.KIProgress?.restore(raw.progress||{schema:'ki-projekt-seitenstand-v1'});
     render();saveText();$('download-status').textContent=filesStored&&artifactStored?'Projektstand wiederhergestellt. Notebook über die Kursseite öffnen; Vorbereitung und Datenimport erneut ausführen. Gespeicherte Ausgaben bleiben sichtbar; kein Code wurde automatisch ausgeführt.':'Projektstand wiederhergestellt, aber nur für diese Sitzung. Browserspeicher nicht verfügbar; ZIP ausserhalb des Browsers aufbewahren.';
  }catch(error){$('download-status').textContent='Import fehlgeschlagen: '+error.message;}finally{e.target.value='';transferring=false;}

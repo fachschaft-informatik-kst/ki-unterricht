@@ -68,12 +68,15 @@ async function simulate(name, fail = false, twice = false, modification = '', no
     const nb = JSON.parse(fs.readFileSync(path.join(root, 'kurse/bok/4-klasse/content', name)));
     const setup = nb.cells.find(c => c.cell_type==='code' && c.metadata.tags?.includes('ki-autostart'));
     const match = setup.source.join('').match(/await pyodide_js\.loadPackage\(\[([^\]]+)\]\)/);
-    assert(match, 'Package declaration missing in ' + name);
+    // HTML/SVG-only DL4 notebooks need no Pyodide package during startup.
+    if (!match) return [];
     return [...match[1].matchAll(/'([^']+)'/g)].map(m=>m[1]);
   };
   assert.deepEqual(packages('perzeptron_und_neuronale_netze.ipynb'), ['numpy']);
   assert.deepEqual(packages('xor_einzelne_neuronen.ipynb'), ['numpy']);
   assert.deepEqual(packages('basis_neuron.ipynb'), ['numpy']);
+  assert.deepEqual(packages('mehrschichtige_netze.ipynb'), [], 'SVG laboratory must load without NumPy or Matplotlib');
+  assert.deepEqual(packages('basis_netze.ipynb'), [], 'Mirrored course must use the same lightweight startup');
   const tools = fs.readFileSync(path.join(root,'kurse/bok/4-klasse/content/unterricht_tools.py'),'utf8');
   assert(!/^import matplotlib\.pyplot as plt$/m.test(tools),
     'Matplotlib must not initialize when importing HTML/SVG teaching widgets');

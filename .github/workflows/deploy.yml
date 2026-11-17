@@ -254,6 +254,7 @@ jobs:
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
           python tests/execute_all_notebooks.py
+          python tests/check_dl4_schwimmbad.py
           python tests/check_pyodide_lock.py
           python tests/check_kernel_compat.py
       - name: Generate course pages and notebook sources
