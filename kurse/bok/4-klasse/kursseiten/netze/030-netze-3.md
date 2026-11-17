@@ -4,9 +4,9 @@
   </summary>
   <div class="kapitel-body">
     <!-- MD:START -->
-**Notebook:** Verfolgen Sie XOR bei P = 0 durch OR, NAND und Ausgang. Untersuchen Sie danach, wie ein Netz mit 1, 2 und 4 versteckten Neuronen aus bekannten Zielen **überwacht lernt**. Die Prüfungsbremse P gehört zur Kursgrafik, nicht zum XOR-Training.
+**Notebook:** Untersuchen Sie XOR bei P = 0 über OR und NAND. Vergleichen Sie danach das überwachte Lernen mit 1, 2 und 4 versteckten Neuronen. In der Kursgrafik ergänzt das feste Neuron «Keine Prüfung» den XOR-Ausgang.
 
-**Auftrag:** Erklären Sie für eine Schwimmbad-Situation den Weg von S, F und P zur Ausgabe (im Notebook P = 0). Ändern Sie jeweils nur eine Einstellung und notieren Sie das Ergebnis.
+**Auftrag:** Erklären Sie für eine Schwimmbad-Situation den Weg von S, F und P zur Ausgabe (im Notebook bleibt P = 0). Ändern Sie jeweils nur eine Einstellung und notieren Sie das Ergebnis.
 <!-- MD:END -->
     <div class="ki-notebook-block" data-notebook="content/mehrschichtige_netze.ipynb" data-title="Neuronale Netze">
       <!-- MD:START -->
