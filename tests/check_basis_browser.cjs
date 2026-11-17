@@ -345,7 +345,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.waitForFunction(()=>document.querySelector('#basis-answer-transfer-status')?.textContent?.includes('Keine gültige Antwortdatei'));
     assert.equal(await note.inputValue(),'Gesicherte Reflexion im ZIP.','Invalid import must preserve answers');
     const downloadPromise=page.waitForEvent('download');
-    await page.getByRole('button',{name:'Kursstand als ZIP herunterladen'}).click();
+    await page.getByRole('button',{name:'Arbeitsstand als ZIP sichern'}).click();
     const download=await downloadPromise;
     const archivePath=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'ki-basis-zip-')),'kursstand.zip');
     await download.saveAs(archivePath);
