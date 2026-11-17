@@ -3,10 +3,13 @@ on:
   push:
     branches:
       - feature/1klasse-8dl-gefuertes-bildprojekt
+  pull_request:
+    branches: [main]
 permissions:
   contents: write
 jobs:
   regenerate:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.ref == 'feature/1klasse-8dl-gefuertes-bildprojekt'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
