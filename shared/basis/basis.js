@@ -25,10 +25,6 @@ function jumpToField(target){
 }
 function show(){
   const id=decodeURIComponent((location.hash||'#basis-start').slice(1));
-  if(id==='basis-sicherung'){
-    requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({block:'start'}));
-    return;
-  }
   const chapter=byHash(id);
   const parent=sections.find(s=>s.id===id||s.contains(chapter));
   const active=parent||sections[0];
