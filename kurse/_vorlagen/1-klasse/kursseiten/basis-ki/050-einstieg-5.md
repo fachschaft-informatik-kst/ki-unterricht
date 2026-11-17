@@ -2,7 +2,7 @@
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Die drei Gesetze der Robotik</h2>
   </summary>
-  <div class="kapitel-body">
+  <div class="kapitel-body"><p class="small muted"><strong>Wahlvertiefung:</strong> Diese Ethikaufgabe wird in der verkürzten DL 1 nicht gemeinsam bearbeitet. Gesellschaftliche Folgen stehen in DL 8 im Mittelpunkt.</p>
     <div class="card">
       <!-- MD:START -->
 Der Schriftsteller Isaac Asimov liess 1942 in einer Kurzgeschichte Roboter nach drei Regeln handeln:
