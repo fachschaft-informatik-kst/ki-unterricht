@@ -1,4 +1,4 @@
-<details class="kapitel" id="basis-neuron-3" data-kurz="Sonne und Freund:innen: mit Gewichten und Bias vier Situationen berechnen." open>
+<details class="kapitel" id="perzeptron-3" data-kurz="Sonne und Freund:innen: mit Gewichten und Bias vier Situationen berechnen." open>
   <summary><span class="kapitel-nr">3</span>
     <h2 class="kapitel-titel">Das künstliche Neuron</h2>
   </summary>
@@ -15,7 +15,7 @@ Für diese vereinfachten Regeln gilt **P = 0** (keine Prüfung). Nur **Sonne (S 
 | 1 | 0 | 0 | 1 | 1 |
 | 1 | 1 | **1** | 1 | **0** |
 
-**AND:** beide gehen schwimmen. **OR:** mindestens eine Bedingung genügt. **NAND:** nicht beide zugleich – später eine Zwischenentscheidung im Netz.
+**AND:** beide Bedingungen müssen erfüllt sein. **OR:** mindestens eine genügt. **NAND:** nicht beide zugleich – später eine Zwischenentscheidung im Netz.
 
 ### Wie rechnet das Neuron?
 
@@ -35,14 +35,14 @@ Das Neuron multipliziert Eingaben mit ihren **Gewichten** und addiert den **Bias
 
 Beim **Prüfen** bleiben Gewichte und Bias gleich; beim **Lernen** ändern sie sich (Kapitel 4).
 <!-- MD:END -->
-    <div class="ki-notebook-block" data-notebook="content/basis_neuron.ipynb" data-title="Neuron-Labor · Doppellektion 3">
+    <div class="ki-notebook-block" data-notebook="content/perzeptron_und_neuronale_netze.ipynb" data-title="Neuron-Labor · Doppellektion 3">
       <!-- MD:START -->
 ### Jupyter-Notebook · Neuron-Labor · Doppellektion 3
 <!-- MD:END -->
       <!-- MD:START -->
 Öffnen Sie das Notebook, passen Sie Werte an und führen Sie Python-Zellen mit Shift + Enter aus.
 <!-- MD:END -->
-      <a class="ki-notebook-direct" href="https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html?path=portal/basis_neuron.ipynb" target="_blank" rel="noopener noreferrer">Notebook in JupyterLite öffnen ↗</a>
+      <a class="ki-notebook-direct" href="https://fachschaft-informatik-kst.github.io/ki-unterricht/lab/index.html?path=portal/perzeptron_und_neuronale_netze.ipynb" target="_blank" rel="noopener noreferrer">Notebook in JupyterLite öffnen ↗</a>
     </div>
   </div>
 </details>

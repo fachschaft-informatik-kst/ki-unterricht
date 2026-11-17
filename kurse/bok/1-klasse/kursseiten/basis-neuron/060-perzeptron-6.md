@@ -1,4 +1,4 @@
-<details class="kapitel" id="basis-neuron-6" data-kurz="Ergebnisse aus dem Schwimmbad-, Gatter- und Lernversuch noch einmal prüfen." open>
+<details class="kapitel" id="perzeptron-6" data-kurz="Ergebnisse aus dem Schwimmbad-, Gatter- und Lernversuch noch einmal prüfen." open>
   <summary><span class="kapitel-nr">6</span>
     <h2 class="kapitel-titel">Das Neuron auf den Punkt gebracht</h2>
   </summary>
