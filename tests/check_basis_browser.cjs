@@ -562,8 +562,8 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await notebookPageInline.close();
     // Glossary links open an accessible explanation without leaving the current lesson.
     const glossaryPage=await browser.newPage();
-    await glossaryPage.goto('http://127.0.0.1:8770/bok/1-klasse/#basis-daten');
-    await glossaryPage.locator('a[href="#basis-glossar-modell"]').first().click();
+    await glossaryPage.goto('http://127.0.0.1:8770/bok/1-klasse/#basis-abschluss');
+    await glossaryPage.locator('#basis-abschluss a[href="#basis-glossar-modell"]').click();
     assert(await glossaryPage.locator('dialog.glossary-dialog').isVisible(),'Inline glossary dialog');
     assert((await glossaryPage.locator('dialog.glossary-dialog').innerText()).includes('Modell'));
     const popupAnswer=glossaryPage.locator('dialog.glossary-dialog details.glossary-answer');
