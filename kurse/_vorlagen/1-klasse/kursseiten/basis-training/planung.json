@@ -3,107 +3,102 @@
     {
       "id": "b08",
       "view": "basis-training",
-      "title": "Bildprojekt III: zwei eigene Fotoklassen",
+      "title": "Geführtes Bildprojekt: A/B vergleichen und abschliessen",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Auf bereitgestellten synthetischen Übungsdaten oder freiwillig eigenen Fotos den gleichen MobileNet-basierten Klassifikationsweg erproben, A/B auf V1 vergleichen und die gewählte Variante einmal auf P1/P2 testen.",
-      "question": "Kann unser eigenes Netz zwei Gegenstandsklassen anhand vortrainierter Bildmerkmale unterscheiden?",
-      "motivation": "Angeleitet untersuchen, eigene Entscheidungen begründen und mit einem fairen Test belegen.",
-      "product": "Dokumentierter Datenweg, ausgeführtes Notebook, A/B-Vergleich auf V1, begründete Modellwahl und unabhängiger Abschlusstest auf P1/P2.",
-      "zeit": "90 Minuten, klar geführter Pflichtkern mit AVIVA-Sicherung.",
+      "goal": "Mit demselben Forschungsablauf wie in der 4. Klasse zwei Bildklassifikatoren fair vergleichen, die Auswahl auf V1 begründen und einmal auf P1/P2 testen.",
+      "question": "Helfen vielfältigere Trainingsbilder bei unbekannten Beispielen?",
+      "motivation": "Wir untersuchen eine nachvollziehbare Frage statt die höchste Trefferquote zu jagen.",
+      "product": "Dokumentierte Datenquelle, fairer A/B-Vergleich, begründete Auswahl, unabhängiger Test, fünf kurze Reflexionen und eingereichtes Projekt-ZIP.",
+      "zeit": "90 Minuten mit vorbereiteten synthetischen Übungsdaten als verpflichtungsfreiem Standard. Eigene Fotos optional (80 Fotos vor Unterrichtsbeginn); gleiche Datenregeln und Bewertungsziele. P1/P2 nur nach begründeter Modellwahl. Notebookstart und Import als technischer Puffer berücksichtigen.",
       "order": 70,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Geführt experimentieren und vergleichen",
-          "minutes": 10,
+          "titel": "Datenweg prüfen",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
-              "text": "Zwischen zwei gleichwertigen Datenwegen wählen: vorbereitete synthetische Übungsdaten aus dem Notebook (Standard) oder eine freiwillig vorbereitete Fotostudio-JSON (80 Fotos). Keine Datenbeschaffung als Hausaufgabe verlangen."
+              "min": 5,
+              "text": "Mit dem Datensatz aus DL 4 starten: UEBUNG ist Standard, eigene vorbereitete Fotostudio-JSON ist freiwillig. Bei eigenen Bildern nur personenfreie Gegenstände."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Projektstatus abstimmen",
-          "minutes": 10,
+          "titel": "T1/T2, V1 und P1/P2 klären",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 8,
-              "text": "Unterschied zwischen Ziffernnetz (DL 5–6) und MobileNet-Merkmalen für echte Gegenstandsfotos klären."
+              "min": 5,
+              "text": "Im Tandem Datenrollen nennen. Warum dürfen P1/P2 noch nicht verwendet werden? MobileNet liefert feste Merkmale, der Klassifikationskopf lernt."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Kriterien nutzen",
-          "minutes": 15,
+          "titel": "Den fairen A/B-Versuch starten",
+          "minutes": 10,
           "schritte": [
             {
-              "art": "Auftrag",
+              "art": "Input",
               "wer": "Lehrperson",
-              "min": 13,
-              "text": "Die Fotostudio-Vorverarbeitung zeigen: Seitenverhältnis erhalten, weisser Rand, 224×224 RGB, 1280 MobileNet-Merkmale; Gruppen T1/T2/V1/P1/P2 zuordnen."
+              "min": 10,
+              "text": "Anhand des 4.-Klasse-Versuchs zeigen: A verwendet T1, B T1 und T2; gleiche Bildzahl und Netzparameter; nur Vielfalt der Exemplare ändert sich. Die Ausgabeklassen stammen aus den Labels."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Mit Versuchsplan arbeiten",
-          "minutes": 45,
+          "titel": "Geführten Versuch vollständig durchführen",
+          "minutes": 60,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 43,
-              "text": "Übungsdaten im Modus UEBUNG oder eigene Fotostudio-JSON im Modus EIGENE_DATEN laden und Gruppen prüfen (8 Min), eingefrorene MobileNet-Merkmale erklären (5 Min), Klassifikationsköpfe A/B trainieren (14 Min), Vergleich auf V1 auswerten und Wahl festhalten (9 Min), nach LP-Freigabe nur gewählte Variante einmal auf P1/P2 testen (7 Min). Ergebnisse synthetischer Daten nicht auf reale Fotos übertragen."
+              "min": 60,
+              "text": "Notebook starten, Datenweg wählen und Gruppen prüfen (10 Min); A/B mit identischen Einstellungen trainieren (15 Min); konkrete V1-Vorhersagen, Werte und eine plausible andere Erklärung vergleichen (10 Min); vor dem Test Variante mit Satz begründet wählen und freigeben lassen (5 Min); nur gewählte Variante einmal auf P1/P2 prüfen (10 Min); je eine kurze Reflexion zu Frage, Daten, Vergleich, Test und Grenzen/Fazit vervollständigen (10 Min). Bei Technikproblemen dokumentierte Resultate ehrlich auswerten, keine Zahlen erfinden."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Erkenntnisse sichern",
+          "titel": "Abgabe vor dem Fachgespräch",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 8,
-              "text": "ZIP-Kursstand mit Reflexionen und Notebook sichern; bei freiwilligen eigenen Fotos zusätzlich die Fotostudio-JSON exportieren. Die Modellwahl vor P1/P2 begründen; Testdaten nicht zur Optimierung verwenden."
+              "wer": "Tandem",
+              "min": 10,
+              "text": "Journal, Notebookausgaben und Datenquelle/JSON im ZIP sichern und tatsächlich einreichen. Beide bereiten eine eigenständige Erklärung von Modell, Vergleich, Test und Grenze vor; keine Präsentation."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Ein dokumentiertes Zwischenergebnis mit kurzer Begründung."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         }
