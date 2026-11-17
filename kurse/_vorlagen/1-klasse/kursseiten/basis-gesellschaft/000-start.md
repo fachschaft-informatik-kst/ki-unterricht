@@ -1,4 +1,4 @@
-<span class="section-label">Doppellektion 10</span>
+<span class="section-label">Doppellektion 8</span>
 <h1>KI und Gesellschaft: Wer trägt die Folgen?</h1>
 <p class="lead">Sind Entscheidungen fair, nur weil ein Computer sie trifft?</p>
 <!-- LESSONS:basis-gesellschaft -->

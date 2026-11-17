@@ -1,33 +1,33 @@
-# Leistungsnachweis KI – 1. Kurzgymnasium (DL 5–8)
+# Leistungsnachweis KI · 1. Klasse · DL 4–6
 
-**Rahmen:** Zweierteams bearbeiten ein angeleitetes Bildklassifikationsprojekt mit **bereitgestellten synthetischen Übungsdaten oder freiwillig eigenen Gegenstandsfotos**. Beide Wege werden gleich bewertet; die Datenwahl gibt keinen Bonus. Gemeinsame Abgabe vor DL 8; in DL 8 individuelle Fachgespräche. Die 4.-Klasse-Bewertung ist davon unabhängig.
+**Ein geführtes Bildprojekt, individuelle Fachgespräche und ein unbenoteter Fremdcheck.** Die Untersuchung entspricht methodisch der 4. Klasse: T1/T2 für Training, V1 für die Modellauswahl, P1/P2 für den einmaligen unabhängigen Abschlusstest. Der Unterschied ist die stärkere Anleitung und der vorbereitete Datenweg.
 
-## Verbindliche Abgabe
-1. Zwei Bildklassen und Datenherkunft; Trainings- und unabhängige Testbilder getrennt.
-2. Forschungsfrage, überprüfbare Hypothese und ein von der Lehrperson freigegebener Versuchsplan.
-3. Ausgangsmodell und zweite Variante; genau **ein** Einflussfaktor wird verändert.
-4. **Fairer Variantenvergleich auf denselben Validierungsbildern V1**: richtige/alle Vorhersagen **pro Klasse** für Modell A und B. **Schriftlich begründete Auswahl vor Testeinsicht**, Bestätigung durch die Lehrperson und erst dann **einmaliger unabhängiger Test der gewählten Variante auf P1/P2**. Diese Testbilder bleiben bis zur Auswahl zurückgehalten; danach keine Optimierung anhand von P1/P2.
-5. Ein beobachteter Fehler mit plausibler Erklärung oder – falls keiner auftrat – ein begründeter Grenzfall; dazu Grenzen der Aussage und persönliche Reflexion.
-6. Export bzw. Sicherung der Resultate vor DL 8. Keine Fotos von Personen und keine personenbezogenen Daten in externen Diensten.
+## Pflichtnachweise
 
-## Bewertung (30 Punkte)
+1. **DL 4:** Zwei Bildklassen, Datenquelle und Vermutung, gruppierte Trainings-/Validierungs-/Testbilder; Datenleck am Beispiel erklären.
+2. **DL 5:** A/B bei gleicher Trainingsbildzahl und gleichen Parametern vergleichen; V1-Ergebnisse und Modellwahl **vor** der Testeinsicht dokumentieren.
+3. **DL 5:** Nur die gewählte Variante einmal auf P1/P2 testen und danach nicht optimieren; konkrete Beispiele, Unsicherheit und Fazit mit Grenzen festhalten; als ZIP einreichen.
+4. **DL 6:** Jede Person erklärt das ganze Projekt im Einzelgespräch. Parallel wird ein fremdes Projekt anhand der Daten und Ergebnisse kritisch geprüft (unbenotet).
 
-| Kriterium | Punkte | Art |
+**Datenwege:** Die vorbereiteten synthetischen Übungsdaten (Kreis/Dreieck) sind der Standard. Freiwillig sind 80 selbst aufgenommene, personenfreie Gegenstandsfotos mit unabhängigen Exemplaren. Die Datenquelle gibt **keinen** Notenbonus. Ergebnisse aus Übungsdaten belegen keine Zuverlässigkeit bei neuen echten Fotos.
+
+## Bewertung: maximal 30 Punkte
+
+| Kompetenz | Punkte | Nachweis |
 |---|---:|---|
-| Forschungsfrage, Hypothese und fairer Datenplan | 0–4 | Gemeinsame Abgabe |
-| Dokumentation beider Trainingsvarianten und Testbelege | 0–4 | Gemeinsame Abgabe |
-| Fehleranalyse, Grenzen und nachvollziehbares Fazit | 0–4 | Gemeinsame Abgabe |
-| Künstliches Neuron, Gewichte und Netzaufbau erklären | 0–6 | Individuelles Gespräch |
-| Eigene Änderung und faire Testmethode begründen | 0–6 | Individuelles Gespräch |
-| Fehler oder Grenzfall und Grenzen selbstständig erklären | 0–6 | Individuelles Gespräch |
+| Forschungsfrage, Vermutung und Datenplan (inkl. Datentrennung) | 0–4 | Gemeinsame Projektabgabe |
+| Fairer A/B-Vergleich, Auswahl auf V1 und unabhängiger Test auf P1/P2 | 0–4 | Gemeinsame Projektabgabe |
+| Konkrete Vorhersagen, Fazit, Grenzen und nachvollziehbare Dokumentation | 0–4 | Gemeinsame Projektabgabe |
+| Bildmodell erklären: Eingaben, feste Merkmale, lernender Kopf, Gewichte und Labels | 0–6 | Individuelles Fachgespräch |
+| Den veränderten Faktor, konstante Bedingungen, V1 und P1/P2 begründen | 0–6 | Individuelles Fachgespräch |
+| Eigene Ergebnisse kritisch interpretieren, Grenzfall und nächsten Test erklären | 0–6 | Individuelles Fachgespräch |
 
-**Total:** 12 gemeinsame und 18 individuelle Punkte. Für jedes Kriterium: 0 = nicht erkennbar, 1 = teilweise bzw. mit deutlicher Hilfe, 2 = überwiegend nachvollziehbar, 3 = korrekt und selbstständig. Bei den 4-Punkte-Kriterien gilt zusätzlich 4 = vollständig, differenziert und mit überprüfbaren Belegen; die Zwischenstufen 0–3 entsprechen zunehmend vollständigen Leistungen. Bei 6-Punkte-Kriterien: 0–2 = ungenügend bzw. stark lückenhaft, 3–4 = teilweise bis überwiegend korrekt, 5 = korrekt und begründet, 6 = präzise und eigenständig mit Transfer. Das Raster vor dem Projekt bekanntgeben.
+Die **gemeinsame Projektleistung zählt 12 Punkte**, das **individuelle Fachgespräch 18 Punkte**. Die Fremdmodellprüfung ist **unbenotet**; sie unterstützt die kritische Reflexion und zählt nicht als zweite Projektabgabe. Eine hohe Trefferquote allein bringt keine Zusatzpunkte.
 
-**Notenvorschlag (kantonale und schulische Vorgaben prüfen):** Note = 1 + 5 × (erreichte Punkte / 30), anschliessend auf Viertelnoten runden. Kein Bonus für die höchste Modellgenauigkeit.
+**Leistungsstufen:** Bei 4-Punkte-Kriterien bedeutet 0 fehlend, 1 ansatzweise, 2 teilweise, 3 vollständig und 4 differenziert mit Belegen. Bei 6-Punkte-Kriterien bedeuten 0–2 stark lückenhaft, 3–4 überwiegend korrekt, 5 korrekt und begründet, 6 präzise und eigenständig mit Transfer.
 
-## Ablauf DL 8 (bis zu 20 Lernende)
-Die gemeinsame Abgabe liegt **vor Beginn** der Lektion vor. Reihenfolge und Raster sind vorab bekannt. Die ersten **7 Minuten** dienen einem knappen Start mit Gesprächsplan und Auftrag für die wartenden Lernenden. Danach **80 Minuten** für bis zu **20 Fachgespräche à 4 Minuten** (ungefähr 3½ Minuten Gespräch und ½ Minute Wechsel/Kurzbewertung). Die letzten **3 Minuten** dienen einer persönlichen Abschlussreflexion. Bei weniger als 20 Lernenden bleibt mehr Zeit für die selbstständige Fremdmodell-Analyse. Ab 21 Lernenden braucht es eine organisatorische Anpassung (etwa eine zweite Prüfstation).
+**Notenvorschlag:** Note = 1 + 5 × erreichte Punkte / 30, auf Viertelnoten gerundet; kantonale und schulische Vorgaben sind verbindlich.
 
-Die Gesprächsfragen sind: (1) Wie arbeitet euer neuronales Netz? (2) Was habt ihr verändert und wie fair auf V1 verglichen? (3) Was hat der einmalige Test des gewählten Modells auf P1/P2 gezeigt und wo liegen Grenzen? Die übrigen Lernenden untersuchen selbstständig ein fremdes Modell und notieren zwei Stärken, einen Fehler oder begründeten Grenzfall und einen Verbesserungsvorschlag (unbenotet).
+## Organisation DL 6
 
-**Bewertungsgrundsatz:** Jede Person wird individuell befragt; die Lehrperson dokumentiert pro Kriterium eine kurze Beobachtung. Das Gespräch überprüft das Verständnis, nicht auswendig gelernte Präsentationen.
+Für bis zu 20 Lernende mit einer Lehrperson sind **20 × 4 Minuten = 80 Minuten** vorgesehen (ca. 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Kurzbewertung). Die letzten 10 Minuten stehen für Einstieg und Sicherung zur Verfügung. Gesprächsreihenfolge und Projekte vorab bereitstellen. Ab 21 Lernenden ist eine zweite Prüfstation oder eine andere Planung nötig. Die übrige Klasse untersucht ein zugeteiltes fremdes Modell oder ein vorbereitetes Referenzprojekt; ein erneutes Training ist keine Pflicht.

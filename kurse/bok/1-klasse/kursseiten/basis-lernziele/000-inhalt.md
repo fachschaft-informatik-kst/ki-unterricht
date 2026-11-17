@@ -1,102 +1,14 @@
-<span class="section-label">Lernkompass · 1. Kurzgymnasium</span>
+<span class="section-label">Lernkompass · 1. Kurzgymnasium · 8 Doppellektionen</span>
 <h1>Das kannst du am Ende.</h1>
-<p class="section-intro">Die Lernziele gelten für den gesamten KI-Themenblock. Du sollst die Konzepte erklären, selbst untersuchen und Beispiele begründet beurteilen können.</p>
+<p class="section-intro">Verstehen, ausprobieren und begründet beurteilen. Das Bildprojekt aus der 4. Klasse bearbeiten wir in einer stärker geführten Fassung mit vorbereiteten Übungsdaten als Standard.</p>
 <div class="grid two">
-  <article class="card">
-    <span class="section-label">01</span>
-    <!-- MD:START -->
-## KI einordnen
-<!-- MD:END -->
-    <ul>
-      <li>Ich unterscheide KI, maschinelles Lernen und neuronale Netze und ordne Beispiele begründet zu.</li>
-      <li>Ich erkläre, warum nicht jedes KI-System aus Daten lernt.</li>
-    </ul>
-    <p class="small muted"><strong>Wo beurteilt?</strong> Nicht benotet; Selbstkontrolle im Unterricht.</p>
-    <a href="#basis-ki">Zum Unterricht →</a>
-  </article>
-  <article class="card">
-    <span class="section-label">02</span>
-    <!-- MD:START -->
-## Lernarten unterscheiden
-<!-- MD:END -->
-    <ul>
-      <li>Ich unterscheide überwachtes, unüberwachtes und verstärkendes Lernen anhand der jeweiligen Rückmeldung.</li>
-      <li>Ich ordne die Memory-Aufgaben und das NIM-Beispiel den Lernarten zu und begründe die Zuordnung.</li>
-    </ul>
-    <p class="small muted"><strong>Wo beurteilt?</strong> Nicht benotet; Selbstkontrolle im Unterricht.</p>
-    <a href="#basis-lernen">Zum Unterricht →</a>
-  </article>
-  <article class="card">
-    <span class="section-label">03</span>
-    <!-- MD:START -->
-## Ein künstliches Neuron verstehen
-<!-- MD:END -->
-    <ul>
-      <li>Ich erkläre, wofür ein künstliches Neuron da ist: Es macht aus mehreren Zahlen eine Ja/Nein-Entscheidung.</li>
-      <li>Ich bestimme bei gegebenen Eingaben, Gewichten, Bias und Schwelle die Ausgabe eines Perzeptrons.</li>
-      <li>Ich sage, was beim überwachten Lernen genau gelernt wird (Gewichte und Bias), und beschreibe die Lernregel (Ausgabe gegen Ziel).</li>
-    </ul>
-    <p class="small muted"><strong>Wo beurteilt?</strong> Im Fachgespräch (DL 8): eine Grundlagenfrage zum Neuron (ca. 30 Sekunden).</p>
-    <a href="#basis-neuron">Zum Unterricht →</a>
-  </article>
-  <article class="card">
-    <span class="section-label">04</span>
-    <!-- MD:START -->
-## Mehrschichtige Netze verstehen
-<!-- MD:END -->
-    <ul>
-      <li>Ich begründe mit Wahrheitstabelle, Punktdarstellung und Bedingungen, warum ein einzelnes Perzeptron XOR nicht lösen kann.</li>
-      <li>Ich erkläre qualitativ, wie eine Zwischenschicht das XOR-Problem lösen kann.</li>
-      <li>Ich beschreibe am Beispiel der Ziffernerkennung ein Netz mit 64 Eingaben, einer versteckten Schicht und 10 Ausgaben und erkläre, dass es überwacht lernt (richtige Ziffer als Label).</li>
-    </ul>
-    <p class="small muted"><strong>Wo beurteilt?</strong> Im Fachgespräch (DL 8): eine Grundlagenfrage zur Zwischenschicht (ca. 30 Sekunden).</p>
-    <a href="#basis-netze">Zum Unterricht →</a>
-  </article>
-  <article class="card">
-    <span class="section-label">05</span>
-    <!-- MD:START -->
-## Daten prüfen
-<!-- MD:END -->
-    <ul>
-      <li>Ich erkläre, weshalb ein Ziffernnetz für Buchstaben weiterhin nur Ziffern ausgibt.</li>
-      <li>Ich unterscheide Ausgabeklassen, Trainingsdaten und neue Testbilder.</li>
-    </ul>
-    <a href="#basis-daten">Zum Unterricht →</a>
-  </article>
-  <article class="card">
-    <span class="section-label">09</span>
-    <!-- MD:START -->
-## Sprachmodelle untersuchen
-<!-- MD:END -->
-    <ul>
-      <li>Ich untersuche mit einem Papierexperiment und einem Wortfolgemodell, wie Kontext die nächste Wortvorhersage beeinflusst.</li>
-      <li>Ich unterscheide eine Häufigkeitstabelle von einem neuronalen Sprachmodell mit Gewichten und Schichten.</li>
-      <li>Ich begründe, weshalb plausible Texte nicht automatisch sachlich richtig sind.</li>
-    </ul>
-    <a href="#basis-sprache">Zum Unterricht →</a>
-  </article>
-  <article class="card">
-    <span class="section-label">05–08</span>
-    <!-- MD:START -->
-## Geführtes Bildprojekt und Fachgespräch
-<!-- MD:END -->
-    <ul>
-      <li>Ich passe unter Anleitung den Ausgabekopf eines Ziffernnetzes für Buchstaben an.</li>
-      <li>Ich erstelle zwei eigene Gegenstandsklassen und trainiere mit MobileNet-Merkmalen zwei Klassifikationsvarianten.</li>
-      <li>Ich trenne Trainings-, Validierungs- und Testbilder, begründe meine Modellwahl und erkläre meine Ergebnisse im Fachgespräch.</li>
-    </ul>
-    <a href="#basis-plan">Zum Projekt →</a>
-  </article>
-  <article class="card">
-    <span class="section-label">10</span>
-    <!-- MD:START -->
-## KI und Gesellschaft
-<!-- MD:END -->
-    <ul>
-      <li>Ich analysiere, wer von einer KI-Entscheidung profitiert oder benachteiligt wird.</li>
-      <li>Ich beurteile einen Fall mit Belegen und schlage eine überprüfbare Verbesserung vor.</li>
-    </ul>
-    <a href="#basis-gesellschaft">Zum Unterricht →</a>
-  </article>
+  <article class="card"><span class="section-label">01</span><h2>KI und Lernarten</h2><p>Regelbasierte Systeme von Lernen aus Daten unterscheiden; Labels beim überwachten Lernen erklären.</p><a href="#basis-ki">Zum Unterricht →</a></article>
+  <article class="card"><span class="section-label">02</span><h2>Ein künstliches Neuron</h2><p>Gewichte, Bias, Ausgabe und einen Lernschritt am Schwimmbadbeispiel nachvollziehen.</p><a href="#basis-neuron">Zum Unterricht →</a></article>
+  <article class="card"><span class="section-label">03</span><h2>Mehrere Neuronen</h2><p>Die XOR-Grenze eines einzelnen Neurons und die Lösung durch OR, NAND und eine Zwischenschicht erklären.</p><a href="#basis-netze">Zum Unterricht →</a></article>
+  <article class="card"><span class="section-label">04</span><h2>Bildprojekt vorbereiten</h2><p>Ziffern- und Buchstabenausgaben unterscheiden und Trainings-, Validierungs- und Testgruppen sinnvoll trennen.</p><a href="#basis-daten">Zum Unterricht →</a></article>
+  <article class="card"><span class="section-label">05</span><h2>Ein Bildmodell untersuchen</h2><p>MobileNet-Merkmale und lernenden Ausgabekopf unterscheiden; Modelle A/B fair vergleichen, auf V1 wählen und auf P1/P2 einmal testen.</p><a href="#basis-training">Zum Unterricht →</a></article>
+  <article class="card"><span class="section-label">06</span><h2>Fachgespräch und Fremdcheck</h2><p>Eigene Entscheidungen und Grenzen mit Belegen erklären sowie fremde Daten und Ergebnisse kritisch prüfen.</p><a href="#basis-abschluss">Zum Unterricht →</a></article>
+  <article class="card"><span class="section-label">07</span><h2>Sprachmodelle</h2><p>Kontext und Wortvorhersage untersuchen; scheinbar plausible Aussagen anhand einer unabhängigen Quelle überprüfen.</p><a href="#basis-sprache">Zum Unterricht →</a></article>
+  <article class="card"><span class="section-label">08</span><h2>KI und Gesellschaft</h2><p>Chancen und Risiken abwägen, Betroffene benennen und eine überprüfbare Schutzmassnahme vorschlagen.</p><a href="#basis-gesellschaft">Zum Unterricht →</a></article>
 </div>
-<p class="callout">Das Bildprojekt wird schrittweise angeleitet. Verbindlich sind ein erster Trainingslauf, ein angeleitetes Buchstaben-Fine-Tuning, ein fairer Modellvergleich, eine dokumentierte Fehleranalyse und ein individuelles Fachgespräch.</p>
+<p class="callout"><strong>Bewertung des Bildprojekts (DL 4–6):</strong> 12 Punkte für das gemeinsame Projekt (Datenplan, fairer A/B-Vergleich, Test und Fazit) und 18 individuelle Punkte für das Fachgespräch. Maximal 30 Punkte. Die Fremdmodellprüfung ist eine unbenotete Lernaufgabe. Der Pflichtweg mit vorbereiteten Kreis-/Dreieck-Daten ist genauso gültig wie freiwillige eigene Fotos; das erreichte Resultat ist nicht die Note.</p>

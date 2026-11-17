@@ -1,10 +1,10 @@
-<span class="section-label">Doppellektion 4</span>
+<span class="section-label">Doppellektion 3</span>
 <h1>Gemeinsam mehr erkennen.</h1>
 <!-- LESSONS:basis-netze -->
-<details class="lesson-plan" id="doppellektion-04" data-lesson="04" open>
-  <summary><span class="phase-num">04</span><span>Doppellektion 4 · Warum mehrere Neuronen?</span><small>90 Min.</small></summary>
+<details class="lesson-plan" id="doppellektion-03" data-lesson="03" open>
+  <summary><span class="phase-num">03</span><span>Doppellektion 3 · Warum mehrere Neuronen?</span><small>90 Min.</small></summary>
   <div class="detail-body">
-    <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-03">DL 3</a> löste ein Neuron AND und OR. Heute testen wir XOR und verknüpfen OR, NAND und «Keine Prüfung» in einer Zwischenschicht.</p>
+    <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-02">DL 2</a> löste ein Neuron AND und OR. Heute testen wir XOR und verknüpfen OR, NAND und «Keine Prüfung» in einer Zwischenschicht.</p>
     <figure class="concept-figure neuron-detail-figure neuron-detail-recap">
       <img class="neuron-graphic-desktop" alt="Schwimmbad-Neuron: Sonne, Freund:innen und Prüfung werden gewichtet, daraus entsteht eine Ja/Nein-Entscheidung." loading="lazy" src="grafiken/neuron_entscheider.svg"/>
       <img class="neuron-graphic-mobile" alt="Mobile Darstellung des Schwimmbad-Neurons mit Sonne 1, Freund:innen 0, Prüfung morgen 1, Gewichten plus 2, plus 2 und minus 4, Bias minus 1 und Ausgabe Nein." loading="lazy" src="grafiken/neuron_entscheider_mobil.svg"/>

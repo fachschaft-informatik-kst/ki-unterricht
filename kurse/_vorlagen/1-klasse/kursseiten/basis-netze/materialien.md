@@ -1,4 +1,4 @@
-## Doppellektion 04
+## Doppellektion 03
 
 **Bereitlegen:** Papier oder [XOR-Gitter](materialien/downloads/koordinatengitter_xor_einfach.svg); Beamer für das XOR-Rätsel; die Lernenden arbeiten im Notebook [Neuronale Netze](materialien/downloads/mehrschichtige_netze.ipynb), das [XOR: Ein Neuron](materialien/downloads/xor_einzelne_neuronen.ipynb) zeigt die Lehrperson am Beamer.
 
@@ -6,7 +6,7 @@
 
 **Tandem · 5 Min.**
 
-Das Signal geht an, wenn **genau eine** von zwei Tasten aktiv ist. Ergänzen Sie die Zielwerte für 00, 01, 10 und 11. Vermuten Sie, ob das Neuron aus DL3 diese XOR-Regel darstellen kann. Öffnen Sie zudem das Notebook «Neuronale Netze», damit Python im Hintergrund startet.
+Das Signal geht an, wenn **genau eine** von zwei Tasten aktiv ist. Ergänzen Sie die Zielwerte für 00, 01, 10 und 11. Vermuten Sie, ob das Neuron aus DL2 diese XOR-Regel darstellen kann. Öffnen Sie zudem das Notebook «Neuronale Netze», damit Python im Hintergrund startet.
 
 ![Leeres Koordinatengitter mit XOR-Eingaben](materialien/downloads/koordinatengitter_xor_einfach.svg "Ankommen | Tandem")
 
@@ -82,8 +82,8 @@ Erklären Sie einander mündlich die XOR-Grenze und den Signalweg. Schreiben Sie
 2. **Brücke:** Im Projekt liefert ein fertiges Netz 1280 Zahlen je Foto. Welcher Teil lernt, welcher bleibt fest, und woher kennt der lernende Teil die richtige Antwort (Label, überwachtes Lernen)?
 3. **Vorschau (Raten erlaubt):** Welche Bilder sollten erst ganz am Schluss für eine unabhängige Prüfung geöffnet werden, und warum?
 
-Danach vergleichen die Lernenden mit der Selbstkontrolle; die Lehrperson liest zwei bis drei Antworten an und sammelt offene Fragen für den Start in DL 5.
+Danach vergleichen die Lernenden mit der Selbstkontrolle; die Lehrperson liest zwei bis drei Antworten an und sammelt offene Fragen für den Start in DL 4.
 
-**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL5. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt, wieder überwacht mit Ihren Klassen als Labels (Skizze und Brückenkarte am Ende der Kursseite).
+**Ausblick, kein neuer Fachinput:** Der selbstständige Lernpfad zur Datenaufteilung beginnt erst in DL4. Ein Satz zur Brücke: Im Bildprojekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt, wieder überwacht mit Ihren Klassen als Labels (Skizze und Brückenkarte am Ende der Kursseite).
 
-**Vorbereitungsauftrag bis DL 5:** Thema und zwei Klassen aus der [Themenliste](index.html#basis-daten) wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste; Vorlage in den Materialien zu DL 5 im Projektteil; wer zuerst einträgt, behält die Klasse), und passende Gegenstände besorgen (zehn verschiedene Exemplare, fünf je Klasse). Noch nicht fotografieren: Fotografiert wird in DL 5 erst nach dem Lernpfad und der Abnahme der Exemplarliste. Die Lehrperson gibt Thema und Klassen am Anfang von DL 5 frei, wenn beide Klassen noch frei sind (etwa eine Minute je Tandem, während die Tandems den Lernpfad lesen).
+**Vorbereitungsauftrag bis DL 4:** Thema und zwei Klassen aus der [Themenliste](index.html#basis-daten) wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste; Vorlage in den Materialien zu DL 4 im Projektteil; wer zuerst einträgt, behält die Klasse), und passende Gegenstände besorgen (zehn verschiedene Exemplare, fünf je Klasse). Noch nicht fotografieren: Fotografiert wird in DL 4 erst nach dem Lernpfad und der Abnahme der Exemplarliste. Die Lehrperson gibt Thema und Klassen am Anfang von DL 4 frei, wenn beide Klassen noch frei sind (etwa eine Minute je Tandem, während die Tandems den Lernpfad lesen).

@@ -1,1 +1,1 @@
-<a class="btn" href="#basis-lernen">Weiter: Wie lernt KI? →</a>
+<a class="btn" href="#basis-neuron">Weiter: DL 2 · Ein künstliches Neuron →</a>

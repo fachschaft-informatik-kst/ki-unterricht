@@ -4,7 +4,7 @@
       "id": "04",
       "view": "basis-netze",
       "title": "Warum mehrere Neuronen?",
-      "rueckblick": "In Doppellektion 3 haben Sie Gewichte, Bias und das Lernen am Schwimmbad-Neuron untersucht. Jetzt testen wir mit Sonne und Freund:innen (für das XOR-Teilproblem zunächst Prüfung = 0) eine neue Regel: XOR.",
+      "rueckblick": "In Doppellektion 2 haben Sie Gewichte, Bias und das Lernen am Schwimmbad-Neuron untersucht. Jetzt testen wir mit Sonne und Freund:innen (für das XOR-Teilproblem zunächst Prüfung = 0) eine neue Regel: XOR.",
       "rueckblick_figur": {
         "src": "grafiken/neuron_entscheider.svg",
         "alt": "Schwimmbad-Neuron: Sonne, Freund:innen und Prüfung werden gewichtet und führen zu einer Ja/Nein-Entscheidung.",
@@ -14,7 +14,7 @@
       "question": "Leitfrage: Warum braucht die neue Schwimmbadregel XOR mehrere Neuronen?",
       "motivation": "AND und OR kann ein einzelnes Neuron umsetzen. XOR – genau eine Bedingung trifft zu – braucht eine Zwischenschicht.",
       "product": "Vier untersuchte XOR-Fälle, eine nachvollziehbare Erklärung der Zwischenschicht und eine gesicherte Netzwerk-Rechnung. Die Klasse kann den Unterschied P = 0 versus P = 1 vorrechnen.",
-      "zeit": "XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Notebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL5. Als Abschluss dient eine fünfminütige unbenotete Sicherung mit zwei Fragen; offene Punkte vor SOL-Beginn anhand des Lernlabors klären. Beim Hidden Layer wird ein kurzes Gegenbeispiel S = 1, F = 0 mit Prüfung P = 0 und P = 1 gerechnet; dafür entfällt kein Pflichtschritt.",
+      "zeit": "XOR-Grenze mit Tafelskizze und Klassen-Rätsel im Notebook «XOR: Ein Neuron» am Beamer, Einführung der Zwischenschicht und Notebook «Neuronale Netze» (Signalweg und vier Fälle) mit Papieraufgabe. Das Lernen mit 1, 2 und 4 versteckten Neuronen zeigt die Lehrperson als Demo. Das Notebook «Neuronale Netze» wird beim Ankommen gestartet. Datenaufteilung ist ausschliesslich SOL-Inhalt von DL4. Als Abschluss dient eine fünfminütige unbenotete Sicherung mit zwei Fragen; offene Punkte vor SOL-Beginn anhand des Lernlabors klären. Beim Hidden Layer wird ein kurzes Gegenbeispiel S = 1, F = 0 mit Prüfung P = 0 und P = 1 gerechnet; dafür entfällt kein Pflichtschritt.",
       "phases": [
         {
           "phase": "Ankommen",
@@ -139,13 +139,13 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 4,
-              "text": "Vergleichen Sie Ihre Antworten mit der Selbstkontrolle auf der Kursseite. Die Lehrperson liest zwei bis drei Antworten an, klärt Missverständnisse und sammelt offene Fragen für den Start in Doppellektion 5."
+              "text": "Vergleichen Sie Ihre Antworten mit der Selbstkontrolle auf der Kursseite. Die Lehrperson liest zwei bis drei Antworten an, klärt Missverständnisse und sammelt offene Fragen für den Start in Doppellektion 4."
             },
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Gibt nur den Ausblick: In Doppellektion 5 beginnt die selbstständige Projektarbeit mit dem Lernpfad «Daten fair aufteilen». Ein Satz zur Brücke: Im Projekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt, wieder überwacht mit Ihren Klassen als Labels (Skizze und Brückenkarte am Ende der Kursseite). Vorbereitungsauftrag bis Doppellektion 5: Thema und zwei Klassen aus der Themenliste wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste, wer zuerst einträgt, behält die Klasse), und Gegenstände besorgen; noch nicht fotografieren. Kein fachlicher Input zur Datenaufteilung in Doppellektion 4."
+              "text": "Gibt nur den Ausblick: In Doppellektion 4 beginnt die selbstständige Projektarbeit mit dem Lernpfad «Daten fair aufteilen». Ein Satz zur Brücke: Im Projekt liefert das fertige MobileNet 1280 Zahlen je Foto, nur das kleine Netz dahinter lernt, wieder überwacht mit Ihren Klassen als Labels (Skizze und Brückenkarte am Ende der Kursseite). Vorbereitungsauftrag bis Doppellektion 4: Thema und zwei Klassen aus der Themenliste wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste, wer zuerst einträgt, behält die Klasse), und Gegenstände besorgen; noch nicht fotografieren. Kein fachlicher Input zur Datenaufteilung in Doppellektion 3."
             },
             {
               "art": "Ergebnis",

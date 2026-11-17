@@ -1,24 +1,33 @@
-# Bewertungsraster KI-Tandemprojekt
+# Leistungsnachweis KI · 1. Klasse · DL 4–6
 
-**33 Punkte gesamt · 11 benotete Kriterien.** K1–K6: gemeinsames Projekt (18 Punkte); K7–K10: vierminütiges Einzelgespräch (12 persönliche Punkte); K12: persönliche kritische Fremdreflexion (3 Punkte). **K11: gemeinsamer Check von fremden Trainings-/Testdaten, Ergebnissen und Pflichtversuch (unbenotet).** Alle benoteten Kriterien haben 0–3 Punkte; keine zusätzliche Gewichtung.
+**Ein geführtes Bildprojekt, individuelle Fachgespräche und ein unbenoteter Fremdcheck.** Die Untersuchung entspricht methodisch der 4. Klasse: T1/T2 für Training, V1 für die Modellauswahl, P1/P2 für den einmaligen unabhängigen Abschlusstest. Der Unterschied ist die stärkere Anleitung und der vorbereitete Datenweg.
 
-**Note = 1 + 5 × (Punkte / 33)**, auf die nächste Viertelnote gerundet. Beispielsweise 16,5 → 3,5; 24,75 → 4,75; 33 → 6,0. K1–K6 gelten gemeinsam, K7–K10 und K12 individuell.
+## Pflichtnachweise
 
-| Kompetenz / Nachweis | 0 Punkte | 1 Punkt | 2 Punkte | 3 Punkte |
-|---|---|---|---|---|
-| K1 Anwendung & Vermutung (Projekt) | Frage oder Klassen fehlen. | Idee erkennbar; Klassen oder Vermutung unklar. | Anwendung, zwei Klassen und prüfbare Vermutung klar. | Zusätzlich Grenzfälle und Nutzen nachvollziehbar begründet. |
-| K2 Daten & Gruppentrennung (Projekt) | Herkunft oder Aufteilung nicht nachvollziehbar. | Daten beschrieben; Quellen oder Gruppentrennung lückenhaft. | Quellen, Klassen und T1/T2/V1/P1/P2 dokumentiert und getrennt. | Zusätzlich Auswahl, Vielfalt und mögliche Verzerrungen begründet. |
-| K3 Fairer A/B-Vergleich (Projekt) | Kein nachvollziehbarer Vergleich. | Mehrere Bedingungen ändern sich unkontrolliert. | Gleiche Bildzahl, Netzparameter und Startwert; Vielfalt gezielt variiert. | Zusätzlich kontrollierte Bedingungen erklärt und vollständig belegt. |
-| K4 Modellwahl & Abschlusstest (Projekt) | Keine nachvollziehbare Auswahl oder kein unabhängiger Test. | Auswahl oder Reihenfolge unklar dokumentiert. | Auswahl mit Validierung begründet, danach einmaliger Abschlusstest. | Zusätzlich Entscheidung mit Zahlen belegt und Unabhängigkeit erklärt. |
-| K5 Ergebnisse & Beispiele (Projekt) | Ergebnisse fehlen oder werden falsch gelesen. | Trefferquoten genannt; Vergleich oder Beispiele unklar. | A/B-Ergebnisse korrekt verglichen und konkrete Bildbeispiele untersucht. | Zusätzlich Vorhersagen erklärt; Beobachtung und Vermutung getrennt. |
-| K6 Fazit & Grenzen (Projekt) | Fazit ohne Bezug zu den Ergebnissen. | Allgemeines Fazit; Grenzen nur genannt. | Frage beantwortet; Grenzen des kleinen Datensatzes und Einzellaufs erklärt. | Zusätzlich nächste Untersuchung passend zu einer konkreten Grenze begründet. |
-| K7 Modell erklären (Gespräch) | Zentrale Modellschritte nicht erklärbar. | Einzelne Begriffe richtig, Ablauf noch lückenhaft. | Bildmatrix, feste Merkmale und selbst trainiertes Netz richtig erklärt. | Zusätzlich Zusammenhang von Gewichten, Training und Vorhersage am Projekt erklärt. |
-| K8 Entscheidungen begründen (Gespräch) | Daten- und Versuchsentscheidungen nicht erklärbar. | Entscheidungen genannt, Begründungen bleiben unklar. | Datenaufteilung, fairer Vergleich und Auswahl verständlich begründet. | Zusätzlich Alternativen verglichen und deren Folgen richtig abgeschätzt. |
-| K9 Ergebnisse kritisch einordnen (Gespräch) | Zahlen oder Zuverlässigkeit falsch eingeordnet. | Ergebnisse beschrieben; Reichweite bleibt unklar. | Ergebnisse, konkrete Beispiele und Grenzen in eigenen Worten erklärt. | Zusätzlich mögliche andere Erklärungen und nötige Belege diskutiert. |
-| K10 Individuelles Verständnis & Transfer (Gespräch) | Eigenes Projektverständnis nicht erkennbar. | Nur einzelne Arbeitsteile erklärbar; viel Unterstützung nötig. | Erklärt das gemeinsame Projekt selbstständig und schlägt einen passenden nächsten Versuch vor. | Überträgt das Vorgehen selbstständig auf eine neue Anwendung und begründet notwendige Anpassungen. |
+1. **DL 4:** Zwei Bildklassen, Datenquelle und Vermutung, gruppierte Trainings-/Validierungs-/Testbilder; Datenleck am Beispiel erklären.
+2. **DL 5:** A/B bei gleicher Trainingsbildzahl und gleichen Parametern vergleichen; V1-Ergebnisse und Modellwahl **vor** der Testeinsicht dokumentieren.
+3. **DL 5:** Nur die gewählte Variante einmal auf P1/P2 testen und danach nicht optimieren; konkrete Beispiele, Unsicherheit und Fazit mit Grenzen festhalten; als ZIP einreichen.
+4. **DL 6:** Jede Person erklärt das ganze Projekt im Einzelgespräch. Parallel wird ein fremdes Projekt anhand der Daten und Ergebnisse kritisch geprüft (unbenotet).
 
-| K12 Daten, Versuch und Grenzen kritisch reflektieren (individuell) | Kein nachvollziehbares persönliches Urteil. | Ergebnisse genannt, aber Datenrollen oder Modellgrenzen kaum erklärt. | Originale Trainings-/Testdaten und Ergebnisse mit eigenem Versuch anhand eines Beispiels verglichen; Unterschied zwischen Testbildern und anderen Klassen begründet. | Zusätzlich mögliche Ursachen und einen prüfbaren Folgetest nachvollziehbar begründet. |
+**Datenwege:** Die vorbereiteten synthetischen Übungsdaten (Kreis/Dreieck) sind der Standard. Freiwillig sind 80 selbst aufgenommene, personenfreie Gegenstandsfotos mit unabhängigen Exemplaren. Die Datenquelle gibt **keinen** Notenbonus. Ergebnisse aus Übungsdaten belegen keine Zuverlässigkeit bei neuen echten Fotos.
 
-**DL 8 (Pflicht):** Fremde Trainingsgruppen T1/T2, Validierung V1, Testgruppen P1/P2 und Originalergebnisse untersuchen; mit den beiden eigenen, anderen Klassen experimentieren; eine gemeinsame Rückmeldung und zwei kurze Antworten je Person. Der gemeinsame Check K11 bleibt unbenotet. Bewertet wird **nur K12** (3 Punkte je Person). Separates ZIP nach DL 8. Bei Technikproblemen Originalergebnisse auswerten und Grenzen ehrlich benennen.
+## Bewertung: maximal 30 Punkte
 
-**Organisation:** Genau 20 Einzelgespräche mit **einer Lehrperson**, je 4 Minuten Fachgespräch plus 1 Minute Notizen/Wechsel. Total **100 Minuten**, die letzten **10 Minuten unmittelbar nach den 90 Unterrichtsminuten**. Keine Reserve, keine gemeinsame Einführung und keine Ersatztermine: Gesprächsfolge, Projektabgaben und Auftrag für die selbstständig arbeitende Klasse sind vorab organisiert. Vier kurze Nachweise für K7–K10 ohne Präsentation. Die bereits abgegebene gemeinsame Projektarbeit bleibt unverändert.
+| Kompetenz | Punkte | Nachweis |
+|---|---:|---|
+| Forschungsfrage, Vermutung und Datenplan (inkl. Datentrennung) | 0–4 | Gemeinsame Projektabgabe |
+| Fairer A/B-Vergleich, Auswahl auf V1 und unabhängiger Test auf P1/P2 | 0–4 | Gemeinsame Projektabgabe |
+| Konkrete Vorhersagen, Fazit, Grenzen und nachvollziehbare Dokumentation | 0–4 | Gemeinsame Projektabgabe |
+| Bildmodell erklären: Eingaben, feste Merkmale, lernender Kopf, Gewichte und Labels | 0–6 | Individuelles Fachgespräch |
+| Den veränderten Faktor, konstante Bedingungen, V1 und P1/P2 begründen | 0–6 | Individuelles Fachgespräch |
+| Eigene Ergebnisse kritisch interpretieren, Grenzfall und nächsten Test erklären | 0–6 | Individuelles Fachgespräch |
+
+Die **gemeinsame Projektleistung zählt 12 Punkte**, das **individuelle Fachgespräch 18 Punkte**. Die Fremdmodellprüfung ist **unbenotet**; sie unterstützt die kritische Reflexion und zählt nicht als zweite Projektabgabe. Eine hohe Trefferquote allein bringt keine Zusatzpunkte.
+
+**Leistungsstufen:** Bei 4-Punkte-Kriterien bedeutet 0 fehlend, 1 ansatzweise, 2 teilweise, 3 vollständig und 4 differenziert mit Belegen. Bei 6-Punkte-Kriterien bedeuten 0–2 stark lückenhaft, 3–4 überwiegend korrekt, 5 korrekt und begründet, 6 präzise und eigenständig mit Transfer.
+
+**Notenvorschlag:** Note = 1 + 5 × erreichte Punkte / 30, auf Viertelnoten gerundet; kantonale und schulische Vorgaben sind verbindlich.
+
+## Organisation DL 6
+
+Für bis zu 20 Lernende mit einer Lehrperson sind **20 × 4 Minuten = 80 Minuten** vorgesehen (ca. 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Kurzbewertung). Die letzten 10 Minuten stehen für Einstieg und Sicherung zur Verfügung. Gesprächsreihenfolge und Projekte vorab bereitstellen. Ab 21 Lernenden ist eine zweite Prüfstation oder eine andere Planung nötig. Die übrige Klasse untersucht ein zugeteiltes fremdes Modell oder ein vorbereitetes Referenzprojekt; ein erneutes Training ist keine Pflicht.

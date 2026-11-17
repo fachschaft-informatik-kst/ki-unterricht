@@ -1,8 +1,11 @@
-## Bildprojekt · Übungsdaten oder eigene Fotos
+## DL 5 · Geführtes Bildprojekt
 
-- [Fotostudio öffnen](studio/) – 224 × 224 RGB, weisser Rand, MobileNet V2 für 1280 Merkmale
-- [Notebook «Eigene Fotos» der 1. Klasse](../lab/index.html?path=portal/basis_fotoprojekt.ipynb)
-- **Standard ohne Hausaufgaben:** Synthetische Übungsdaten «Kreis/Dreieck» im Notebook, Modus `UEBUNG`; fairer A/B-Vergleich und unabhängiger Test sind identisch zum Foto-Weg.
-- **Freiwillige Alternative:** Zwei eigene Gegenstandsklassen, T1/T2/V1/P1/P2, acht Fotos je Klasse und Gruppe (80 insgesamt); keine Personen.
-- Vorbereitete JSON-Datensammlung oder die mitgelieferten Übungsdaten verwenden
-- Beide Wege sind **gleichwertig**. Synthetische Daten erlauben keine Aussage über neue reale Fotos. Bei eigenen Fotos zusätzlich JSON und Originalfotos separat aufbewahren; Notebook und Reflexionen im ZIP sichern.
+**Material:** [Projekt-Notebook](../lab/index.html?path=portal/basis_fotoprojekt.ipynb) · [Fotostudio](studio/) (optional) · [30-Punkte-Bewertungsraster](../worksheets/md/KI_Bewertungsraster.md) · Reflexionen 3–5 auf der Kursseite.
+
+**Wie in der 4. Klasse:** MobileNet V2 bleibt als Merkmalsnetz fest; nur der kleine Ausgabekopf für zwei Klassen wird trainiert. Variante A = T1, Variante B = je vier aus T1 und T2; konstante Bildzahl und Netzparameter. Auf V1 vergleichen, Auswahl schriftlich begründen, erst danach P1/P2 einmal prüfen.
+
+**Standard:** Vorbereitete synthetische Übungsdaten `UEBUNG`. Freiwillig: `EIGENE_DATEN` mit 80 personenfreien Bildern und sauber getrennten Gruppen. Beide gleich bewerten. **Kein Extra-Bonus für gute Prozentzahlen.**
+
+**Bei Technikproblemen:** gespeicherte Ergebnisse und die echte Datenquelle auswerten; fehlende Durchläufe offen benennen. Die Lehrperson bestätigt die Entscheidung vor `TEST_FREIGEBEN = True`.
+
+**Abgabe:** Fünf kurze Reflexionen (1–2 aus DL 4), Notebook mit Ausgaben und Kurs-ZIP **vor Beginn von DL 6** einreichen. Der Download allein ist keine Einreichung.

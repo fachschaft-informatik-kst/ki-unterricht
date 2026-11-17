@@ -1,4 +1,4 @@
-## Doppellektion 03
+## Doppellektion 02
 
 **Bereitlegen:** Papier für die Handrechnung, Beamer für die Live-Experimente und [Neuron-Labor auf der Kursseite](index.html#perzeptron-5). [Notebook herunterladen](materialien/downloads/perzeptron_und_neuronale_netze.ipynb) · [Perzeptron-Arbeitsblatt](materialien/downloads/Arbeitsblatt_Perzeptron.md) · [Lösung](materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md).
 
@@ -19,7 +19,7 @@ Ein Warnsignal soll nur angehen, wenn **beide** Sensoren aktiv sind (AND). Ergä
 
 **Klasse · 2 Min.**
 
-Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Welche Lernart aus DL 2 passt, wenn zu jedem Beispiel die richtige Ausgabe bekannt ist (überwachtes Lernen)? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
+Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Welche Lernart aus DL 1 passt, wenn zu jedem Beispiel die richtige Ausgabe bekannt ist (überwachtes Lernen)? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
 
 ### Informieren · 22 Min. · Rechenkarte für ein Neuron
 
@@ -77,7 +77,7 @@ Danach ergibt dieselbe Eingabe s = 0.5, also y = 1. Eingaben, Label und Schwelle
 
 **Allein:** Wählen Sie eine AND- oder OR-Zeile und rechnen Sie die Summe aus. Welche Parameteränderung würde die Ausgabe umkehren? [Leeres Koordinatengitter](materialien/downloads/koordinatengitter_perzeptron.svg).
 
-> **Kontrollbeispiele:** AND gelingt mit 1 / 1 / −1.5, OR mit 1 / 1 / −0.5. Ein einzelner korrekt berechneter Fall genügt nicht als Nachweis für die ganze Funktion. XOR folgt erst in DL4.
+> **Kontrollbeispiele:** AND gelingt mit 1 / 1 / −1.5, OR mit 1 / 1 / −0.5. Ein einzelner korrekt berechneter Fall genügt nicht als Nachweis für die ganze Funktion. XOR folgt erst in DL3.
 
 ### Auswerten · 10 Min. · Zwei eigene Merksätze
 

@@ -1,8 +1,8 @@
 <details class="kapitel" id="einstieg-3" data-kurz="Neun Meilensteine zeigen, wann Regeln und wann Daten wichtig wurden." open>
-  <summary><span class="kapitel-nr">3</span>
+  <summary><span class="kapitel-nr">4</span>
     <h2 class="kapitel-titel">Meilensteine der KI</h2>
   </summary>
-  <div class="kapitel-body">
+  <div class="kapitel-body"><p class="small muted"><strong>Wahlvertiefung:</strong> Die Meilensteine gehören nicht zum Pflichtteil der verkürzten DL 1. Wähle bei Interesse zwei aus.</p>
     <p class="section-intro"><strong>Wie wurde aus einer Idee die KI von heute?</strong> Neun Meilensteine zeigen wichtige Wendepunkte in der Geschichte der KI. Die <strong>farbigen Marken</strong> greifen die beiden Ansätze aus <a href="#einstieg-1">Unterkapitel 1</a> auf: <span class="marke regeln">Programmierung durch Menschen</span> und <span class="marke daten">Datengetriebene Programmierung</span>. Die Einteilung ist vereinfacht; viele Systeme verbinden beides. Beim <strong>KI-Winter</strong> fehlt eine Marke, weil er keine Technik bezeichnet. Klickt auf einen Titel, um Bild, Erklärung und Bildquelle zu sehen.</p>
     <p class="timeline-thinking"><strong>Entdeckerfrage:</strong> Vergleicht die Marken von 1950 bis 1997 mit den Meilensteinen im <strong>21. Jahrhundert</strong>: Welche Art von KI dominiert in den jüngsten Beispielen? Woran könnte diese Veränderung liegen? Begründet eure Vermutung mit zwei Meilensteinen. Heisst das, dass feste Regeln heute keine Rolle mehr spielen?</p>
     <ol class="timeline">
@@ -46,7 +46,7 @@ Auf einer Konferenz in Dartmouth wird der Begriff «Artificial Intelligence» ge
         <div>
           <button class="milestone-trigger" type="button" data-milestone-open="perzeptron" aria-haspopup="dialog" aria-label="Perzeptron: Bild und Erklärung öffnen">Perzeptron <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke daten">Datengetriebene Programmierung</span>
           <!-- MD:START -->
-Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es ist der Baustein aus Doppellektion 3.
+Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es ist der Baustein aus Doppellektion 2.
 <!-- MD:END -->
         </div>
         <template data-milestone-detail="perzeptron">
@@ -54,10 +54,10 @@ Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es i
           <p class="milestone-detail-kicker">Meilenstein der KI-Geschichte</p>
           <h2 class="milestone-detail-title">Perzeptron</h2>
           <figure>
-            <img src="grafiken/neuron_entscheider.svg" alt="Schwimmbad-Neuron aus DL 3: Sonne, Freundinnen und Freunde sowie eine Prüfung sind drei Eingaben mit unterschiedlich starken Gewichten, die zur Entscheidung Ja oder Nein führen." loading="lazy" decoding="async">
-            <figcaption>Beim Schwimmbad-Beispiel entscheidet ein einzelnes künstliches Neuron anhand von Sonne, Begleitung und einer bevorstehenden Prüfung: Gehe ich schwimmen? Jede Eingabe hat ein Gewicht. <strong>In DL 3</strong> untersucht ihr dieselbe Grafik genauer und seht, wie Gewichte beim Lernen angepasst werden. Das Bild illustriert das Funktionsprinzip, nicht ein historisches Gerät.</figcaption>
+            <img src="grafiken/neuron_entscheider.svg" alt="Schwimmbad-Neuron aus DL 2: Sonne, Freundinnen und Freunde sowie eine Prüfung sind drei Eingaben mit unterschiedlich starken Gewichten, die zur Entscheidung Ja oder Nein führen." loading="lazy" decoding="async">
+            <figcaption>Beim Schwimmbad-Beispiel entscheidet ein einzelnes künstliches Neuron anhand von Sonne, Begleitung und einer bevorstehenden Prüfung: Gehe ich schwimmen? Jede Eingabe hat ein Gewicht. <strong>In DL 2</strong> untersucht ihr dieselbe Grafik genauer und seht, wie Gewichte beim Lernen angepasst werden. Das Bild illustriert das Funktionsprinzip, nicht ein historisches Gerät.</figcaption>
           </figure>
-          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/kurse/_vorlagen/4-klasse/assets/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 3</a>.</p>
+          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/kurse/_vorlagen/4-klasse/assets/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 2</a>.</p>
         </article>
         </template></li>
       <li><span class="jahr">1966</span>

@@ -1,8 +1,8 @@
 <details class="kapitel" id="einstieg-4" data-kurz="Schwache und starke KI unterscheiden und eigene Beispiele begründen." open>
-  <summary><span class="kapitel-nr">4</span>
+  <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Schwache und starke KI</h2>
   </summary>
-  <div class="kapitel-body">
+  <div class="kapitel-body"><p class="small muted"><strong>Wahlvertiefung:</strong> Schwache und starke KI sind Zusatzwissen; im Pflichtteil konzentrieren wir uns auf Regeln, Daten und Labels.</p>
     <p><strong>Schwache KI</strong> ist für bestimmte Aufgaben oder Aufgabenbereiche entwickelt, etwa Bilder erkennen, Schach spielen oder Texte erzeugen. Auch ein sehr leistungsfähiges System kann schwache KI sein.</p>
     <p><strong>Starke KI</strong> bezeichnet die hypothetische Vorstellung einer KI mit allgemeiner, menschenähnlicher Intelligenz, die sehr unterschiedliche geistige Aufgaben selbstständig bewältigen und Neues lernen könnte. Es gibt derzeit kein allgemein anerkanntes nachgewiesenes Beispiel. <strong>Bewusstsein ist nicht dasselbe wie allgemeine Intelligenz</strong> und wird hier nicht vorausgesetzt.</p>
     <div class="table-scroll">

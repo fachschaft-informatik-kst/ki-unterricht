@@ -2,6 +2,23 @@
 
 **Nur für Lehrpersonen.** Die Antworten sind altersgerechte Beispiele und keine einzig richtigen Wortlaute. Die Kennung pro Tabellenzeile entspricht dem im Lernjournal gespeicherten Feld. **Zahlen, Namen, Texte, Filmausschnitte und Notebook-Beobachtungen sind illustrative Beispiele**, wenn nicht ausdrücklich ein mathematisch bestimmtes Ergebnis genannt wird. Das echte Unterrichtsprotokoll muss die eigenen Messwerte, Textausgaben und tatsächlichen Filmbelege zeigen. Versteckte Altfelder und freiwillige Vertiefungen sind der Vollständigkeit halber enthalten.
 
+## Aktuelle Pflichtfelder · geführte 8-DL-Fassung
+
+Die alten Antwortschlüssel bleiben zur Wiederherstellung früherer Lernjournale erhalten. **Verbindlich neu** sind DL 1 (Lernarten integriert), DL 2 Neuron, DL 3 Netze, DL 4 Datenplan, DL 5 A/B-Bildprojekt, DL 6 Fachgespräch/Fremdcheck, DL 7 Sprachmodelle und DL 8 Gesellschaft. Die fremde Projektprüfung ist **unbenotet**; insgesamt 30 Projektpunkte (12 gemeinsam, 18 individuell).
+
+| Antwortfeld | Erwartungshorizont |
+|---|---|
+| `dl1_lernarten_kompakt` | Überwachtes Lernen: Zu jedem Bild gibt es ein Klassenlabel; die Gewichte werden anhand von Fehlern korrigiert. Unüberwacht: nach Ähnlichkeit gruppieren. Verstärkend: Rückmeldung/Belohnung für Handlungen. |
+| `basis-projekt-frage` | Beispiel: Wir nutzen vorbereitete Kreis-/Dreieck-Daten und vermuten, dass abwechslungsreichere Trainingsbilder zu besseren Vorhersagen auf unbekannten Beispielen führen. Kein Beleg für reale Fotos. |
+| `basis-projekt-datenplan` | T1/T2 dienen Training, V1 zur begründeten Modellwahl, P1/P2 nur dem unabhängigen Abschlusstest; identische Exemplare nie zwischen Training und Test aufteilen. |
+| `basis-projekt-fazit` | Ergebnisse nur aus dem tatsächlich ausgeführten Notebook übernehmen. Erklärt, ob die Frage auf den untersuchten Bildern beantwortet wurde, benennt Grenzen (synthetische Daten, wenig Exemplare, Zufall) und nennt einen überprüfbaren nächsten Versuch. |
+| `basis-abschluss-a` | Unbenoteter Fremdcheck: Bildklassen, getrennte Gruppen, V1-Werte A/B, Modellwahl vor P1/P2, einmaliger Test, ein konkreter Beleg und eine faire Rückfrage. Falls Nachlauf fehlt, offen kennzeichnen. |
+| `basis-abschluss-b` | Unterschied erklären: Neue Exemplare der bekannten zwei Klassen sind ein echter Test; vollkommen andere Klassen können nicht als korrekt erkannte Zielklassen bewertet werden. Persönliche Grenze und nächster Test. |
+
+---
+
+### Archivierte beziehungsweise weiterhin gültige Einzelfelder
+
 ## DL 1 · KI, Beispiele und Grenzfälle
 
 | Antwortfeld | Beispielantwort / Erwartungshorizont |
