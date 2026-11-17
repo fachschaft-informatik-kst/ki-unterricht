@@ -3,107 +3,102 @@
     {
       "id": "b09",
       "view": "basis-abschluss",
-      "title": "Bildprojekt IV: individuelle Fachgespräche",
+      "title": "Fachgespräch und geführte Fremdmodellprüfung",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
-      "goal": "Eigene Modellresultate im individuellen Fachgespräch verständlich erklären und einen fairen Test kritisch beurteilen.",
-      "question": "Welche Ergebnisse dürfen wir aus unserem Versuch ableiten?",
-      "motivation": "Eigene Modellentscheidungen fachlich erklären; die gemeinsame Abgabe wird durch einen individuellen Leistungsnachweis ergänzt.",
-      "product": "Tandemabgabe und individuelle benotete Fachgespräche.",
-      "zeit": "90 Minuten; bei bis zu 20 Lernenden rund 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Bewertung pro Person. Alle Gespräche am selben Datum. Ab 21 Lernenden zusätzliche Prüfstation oder kürzere Gesprächsslots planen.",
+      "goal": "Die eigene Untersuchung individuell erklären und ein fremdes Projekt anhand seiner Datenrollen, Ergebnisse und Modellgrenzen kritisch prüfen.",
+      "question": "Welche Aussagen tragen die Ergebnisse eines Bildmodells – und welche nicht?",
+      "motivation": "Ein Modell prüft man nicht nur an einer hohen Trefferquote, sondern an nachvollziehbaren unabhängigen Daten.",
+      "product": "Individuelle Fachgespräche und je Tandem ein kurzer unbenoteter Fremdcheck mit begründeter persönlicher Reflexion.",
+      "zeit": "90 Minuten: bei bis zu 20 Lernenden ca. 3½ Minuten Gespräch plus ½ Minute Wechsel/Bewertung je Person (80 Minuten). Keine zusätzliche lange Einführung. Fremdprojekt/Referenzpaket, Gesprächsreihenfolge, Raster und Abgabekanal müssen im Voraus bereitstehen. Keine zusätzliche 4.-Klasse-Pflicht-Reproduktion mit neuem Modelltraining.",
       "order": 80,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Gesprächsplan und Fremdauftrag",
+          "titel": "Direkt starten",
           "minutes": 3,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 2,
-              "text": "Gesprächsreihenfolge, Bewertungskriterien und selbstständige Fremdmodell-Analyse kurz klären. Raster und Vorbereitung sind bereits vor der Lektion zugänglich."
+              "min": 3,
+              "text": "Gesprächsplan, Bewertungsraster und das von der Lehrperson zugeteilte fremde Projekt beziehungsweise vorbereitete Referenzpaket öffnen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 1,
-              "text": "Gesprächsplan liegt bereit."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Drei Gesprächsfragen abrufen",
+          "titel": "Eigene Ergebnisse bereithalten",
           "minutes": 2,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 1,
-              "text": "Die drei bekannten Fragebereiche lediglich sichtbar machen. Keine zusätzliche Prüfungsvorbereitung vor Ort: Gespräche beginnen sofort."
+              "min": 2,
+              "text": "Beide Personen kennen ihre V1-Auswahl, P1/P2-Ergebnisse und eine Grenze des eigenen Modells."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 1,
-              "text": "Jede Person kennt die drei Fragebereiche."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Bewertungskriterien klären",
+          "titel": "Fremdcheck in vier Fragen",
           "minutes": 2,
           "schritte": [
             {
-              "art": "Auftrag",
+              "art": "Input",
               "wer": "Lehrperson",
-              "min": 1,
-              "text": "Bewertungskriterien wurden vorab bekannt gegeben. Nur die Startregel und Zeittaktung wiederholen."
+              "min": 2,
+              "text": "Lest den Auftrag: zwei Klassen und Datenquelle; getrennte T1/T2/V1/P1/P2; A/B-Ergebnisse und Auswahl; Grenzen und nächster Test. Der Pflichtcheck ist unbenotet."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 1,
-              "text": "Bewertungsraster wurde im Projekt ausgeteilt."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Individuelle Fachgespräche",
+          "titel": "Fachgespräche und Fremdcheck parallel",
           "minutes": 80,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 79,
-              "text": "Bis zu 20 individuelle Fachgespräche à 4 Minuten einschliesslich Wechsel und Kurzbewertung (3½ Minuten Gespräch + ½ Minute Notiz). Andere Lernende bearbeiten die unbenotete Fremdmodell-Analyse ohne Unterbrechung. LP-Hinweis: Bei mehr als 20 Personen zweite Prüfstation oder organisatorische Anpassung; keine Ersatztermine."
+              "min": 80,
+              "text": "Eine Lehrperson führt bis zu 20 Einzelgespräche à 4 Minuten inkl. Wechsel durch. Übrige Tandems prüfen das fremde Daten- und Ergebnisprotokoll, vergleichen ein Trainings- mit einem Testbeispiel, notieren einen konkreten Befund und eine faire Rückfrage. Falls ein lauffähiges Modell und eigene andere Bildklassen vorliegen, Vorhersagen ohne neues Training freiwillig ausprobieren und zwischen neuen Exemplaren derselben Klassen und völlig anderen Klassen unterscheiden. Bei UEBUNG-Daten ohne eigene Fotos stattdessen Referenzbeispiele verwenden; keine Aussage über echte Fotos ableiten. Persönlich zwei kurze Reflexionssätze schreiben."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 1,
-              "text": "Bewertungsbogen pro Person dokumentiert."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Rückblick und Sicherung",
+          "titel": "Fremdcheck sichern",
           "minutes": 3,
           "schritte": [
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
-              "min": 2,
-              "text": "Alle notieren einzeln eine eigene Erkenntnis und eine Grenze ihres Bildmodells, ohne das individuelle Prüfungsgespräch zu verlängern."
+              "wer": "Tandem",
+              "min": 3,
+              "text": "Zwei Befunde und die persönliche Reflexion sichern, eventuell separat abgeben. Für die Projektnote zählt das eigene Projekt und das individuelle Fachgespräch; die Fremdprüfung dient der kritischen Sicherung."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 1,
-              "text": "Individuelle Reflexion abgeschlossen."
+              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
             }
           ]
         }
