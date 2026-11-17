@@ -101,32 +101,26 @@ body .lesson-recap{border-left-color:var(--accent);}
 body .footer{border-top:1px solid var(--line);margin-top:25px;}
 body .footer .detail-body a{overflow-wrap:anywhere;}
 body .footer .detail-body>p:last-child a{margin-right:18px;}
-.basis-transfer{margin:32px 0;padding:10px 0 30px;background:transparent;border-top:0;}
-.basis-transfer h2{font-size:clamp(1.5rem,2.4vw,2rem);}
-.basis-transfer-flow{display:grid;gap:15px;margin:24px 0;}
-.basis-transfer-step{padding:22px 24px;border:1px solid var(--line);border-radius:14px;background:white;}
-.basis-transfer-step h3{display:flex;align-items:center;gap:11px;font-size:1.2rem;margin:0 0 12px;line-height:1.35;}
-.basis-step-number{display:grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:#e9eefc;color:var(--accent);font-size:15px;}
-.basis-transfer-step>p:last-child{margin-bottom:0;}
-.basis-transfer-identity{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px;max-width:680px;margin:12px 0 0;}
-.basis-transfer-identity .field{display:grid;gap:6px;min-width:0;}
-.basis-transfer-identity input{width:100%;padding:10px 12px;border:1px solid #9daeca;border-radius:8px;background:#fff;}
-.basis-backup-controls{display:grid;gap:14px;max-width:680px;margin-top:15px;}
-.basis-transfer-buttons{display:flex;flex-wrap:wrap;align-items:flex-start;gap:14px;}
-.basis-transfer-buttons button{min-height:46px;font-weight:700;}
-.basis-transfer-photo{padding-bottom:4px;}
-.basis-backup-controls label{display:grid;gap:6px;font-size:14px;font-weight:650;}
-.basis-backup-controls input[type="file"]{font-weight:400;background:white;border:1px solid var(--line);border-radius:8px;padding:10px;width:100%;}
-.basis-transfer-recovered{padding:10px 12px;}
-.basis-transfer-recovered button{display:block;margin:9px 0;}
-.basis-transfer-legacy{margin-top:14px;}
-.basis-transfer-legacy .detail-body{font-size:14px;}
+/* Journal and backup are focused views, like in fourth-year courses. */
+.basis-mobile-links{display:none}
+.basis-journal-identity{max-width:800px;margin:24px 0}
+.basis-journal-identity h2{font-size:1.35rem;margin:0 0 14px}
+.basis-transfer-identity{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px;max-width:680px;margin:12px 0 0}
+.basis-transfer-identity .field{display:grid;gap:6px;min-width:0;margin:0}
+.basis-transfer-identity input{width:100%;padding:10px 12px;border:1px solid #9daeca;border-radius:8px;background:white}
+.basis-backup-controls,.basis-photo-controls{display:grid;gap:14px;max-width:680px;margin-top:15px}
+.basis-transfer-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.basis-transfer-buttons button{min-height:48px;font-weight:700}
+.basis-photo-controls label,.basis-backup-controls label{display:grid;gap:7px;font-size:14px;font-weight:650}
+.basis-photo-controls input[type=file],.basis-backup-controls input[type=file]{font-weight:400;background:white;border:1px solid var(--line);border-radius:8px;padding:10px;width:100%}
+.basis-transfer-recovered{padding:10px 12px}
+.basis-transfer-recovered button{display:block;margin:9px 0}
 @media(max-width:720px){
-  .basis-transfer{padding:6px 0 28px;}
-  .basis-transfer-step{padding:18px 16px;}
-  .basis-transfer-identity{grid-template-columns:1fr;}
-  .basis-transfer-buttons{flex-direction:column;align-items:stretch;}
-  .basis-transfer-buttons button{width:100%;justify-content:center;}
+  .basis-mobile-links{display:flex;flex:0 0 auto;align-items:center;border-left:1px solid var(--line);padding-left:8px;gap:4px}
+  .basis-mobile-links a{white-space:nowrap;font-weight:650}
+  .basis-transfer-identity{grid-template-columns:1fr}
+  .basis-transfer-buttons{flex-direction:column;align-items:stretch}
+  .basis-transfer-buttons button{width:100%;justify-content:center}
 }
 
 
