@@ -3,16 +3,26 @@
   <div class="kapitel-body">
     <p class="section-intro">KI kann auf unterschiedliche Weise lernen. Entscheidend ist, welche Informationen ein System beim Lernen erhält.</p>
     <div class="lesson-steps">
-      <article><b>Überwachtes Lernen · mit richtigen Antworten</b><p>Zu Trainingsbeispielen gehören die richtigen Bezeichnungen (<strong>Labels</strong>), etwa «Katze» und «Hund». Das System lernt, neue Beispiele einer dieser Klassen zuzuordnen.</p></article>
-      <article><b>Unüberwachtes Lernen · Ähnlichkeiten entdecken</b><p>Das System entdeckt Muster oder Gruppen in Daten, ohne dass die richtige Gruppe für jedes Beispiel vorher feststeht.</p></article>
-      <article><b>Verstärkendes Lernen · aus den Folgen lernen</b><p>Das System probiert Handlungen aus. Erfolg und Misserfolg beeinflussen, welche Handlung es beim nächsten Mal wählt.</p></article>
-    </div>
-    <div class="learning-example-links">
-      <a href="https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2" target="_blank" rel="noopener noreferrer">Überwacht: Smiley-Spiel öffnen</a>
-      <a href="https://www.naftaliharris.com/blog/visualizing-k-means-clustering/" target="_blank" rel="noopener noreferrer">Unüberwacht: K-Means erkunden</a>
-      <a href="https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke" target="_blank" rel="noopener noreferrer">Verstärkend: NIM-Lernstrecke öffnen</a>
-    </div>
-    <div class="task">
+      <article><b>Überwachtes Lernen · mit richtigen Antworten</b><p>Zu Trainingsbeispielen gehören die richtigen Bezeichnungen (<strong>Labels</strong>), etwa «Katze» und «Hund». Das System lernt, neue Beispiele einer dieser Klassen zuzuordnen.
+</p>
+<div class="callout">
+  <p><strong>Beispiel:</strong> <a href="https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2" target="_blank" rel="noopener noreferrer">Smiley-Spiel öffnen</a></p>
+</div>
+</article>
+
+<article><b>Unüberwachtes Lernen · Ähnlichkeiten entdecken</b><p>Das System entdeckt Muster oder Gruppen in Daten, ohne dass die richtige Gruppe für jedes Beispiel vorher feststeht.</p>
+<div class="callout">
+  <p><strong>Beispiel:</strong> <a hhref="https://www.naftaliharris.com/blog/visualizing-k-means-clustering/" target="_blank" rel="noopener noreferrer">K-Means erkunden</a></p>
+</div>
+</article>
+
+<article><b>Verstärkendes Lernen · aus den Folgen lernen</b><p>Das System probiert Handlungen aus. Erfolg und Misserfolg beeinflussen, welche Handlung es beim nächsten Mal wählt.</p>
+<div class="callout">
+  <p><strong>Beispiel:</strong> <a hhref="href="https://inf-schule.de/ki/ki_erkunden/nim-spiel/lernstrecke" target="_blank" rel="noopener noreferrer">Verstärkend: NIM-Lernstrecke öffnen</a></p>
+</div>
+</article>
+</div>
+<div class="task">
       <p><strong>Erkundungsauftrag: Untersuchen Sie die drei verlinkten Beispiele.</strong></p>
       <ol>
         <li><strong>Smiley-Spiel:</strong> Zeichnen Sie zwei verschiedene Gesichter und lassen Sie sie erkennen. Welche beiden Klassen kennt das Modell, und wurden Ihre Zeichnungen richtig erkannt?</li>
