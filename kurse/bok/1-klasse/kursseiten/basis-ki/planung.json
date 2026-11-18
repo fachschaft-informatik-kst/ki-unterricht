@@ -5,11 +5,11 @@
       "view": "basis-ki",
       "title": "Was ist KI – und wie lernt sie?",
       "rueckblick": "Alltagsbeispiele als Ausgangspunkt nutzen; für diese erste Doppellektion wird kein KI-Fachwissen vorausgesetzt.",
-      "goal": "Feste Regeln von Lernen aus Daten unterscheiden, KI-Begriffe einordnen und die drei Lernarten benennen.",
+      "goal": "Feste Regeln von Lernen aus Daten unterscheiden, zentrale KI-Begriffe einordnen und drei Lernarten an Beispielen erkunden.",
       "question": "Wann ist ein System KI, und auf welche drei Arten kann es lernen?",
       "motivation": "KI begegnet uns bei Übersetzungen, Empfehlungen und Bilderkennung. Nicht jedes automatisch arbeitende System lernt aus Daten.",
-      "product": "Begründete Zuordnungen und ein eigener kurzer Vergleich der drei Lernarten.",
-      "zeit": "90 Minuten: Einstieg und Regeln (15), Begriffe und Lernarten (20), interaktive Zuordnungen und Lernartenvergleich (45), schriftliche Sicherung (10).",
+      "product": "Zwei begründete KI-Zuordnungen und ein Vergleich der drei verlinkten Lernarten-Beispiele.",
+      "zeit": "90 Minuten: Einstieg und Regeln (15), KI-Begriffe und Lernarten (20), Zuordnungen und verlinkte Erkundungen (45), schriftliche Sicherung (10).",
       "order": 10,
       "phases": [
         {
@@ -77,51 +77,57 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Zuordnungen und Lernarten vergleichen",
+          "titel": "KI zuordnen und drei Lernarten erkunden",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 20,
-              "text": "Bearbeitet die interaktiven Zuordnungen auf der Kursseite (Regeln/Daten und KI-Begriffe); begründet mindestens zwei Entscheidungen."
+              "min": 15,
+              "text": "Bearbeitet die interaktiven Zuordnungen auf der Kursseite: Regeln oder Daten und KI-Begriffe. Begründet zwei Entscheidungen."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 15,
-              "text": "Lest die drei Lernarten im Kapitel «Drei verschiedene Lernarten» und findet zu jeder ein weiteres Alltagsbeispiel."
+              "min": 10,
+              "text": "Öffnet im Kapitel «Drei verschiedene Lernarten» das Smiley-Spiel. Probiert Vorhersagen aus und prüft, welche richtigen Klassenbezeichnungen das Modell aus dem Training kennt."
             },
             {
               "art": "Auftrag",
-              "wer": "Einzeln",
+              "wer": "Tandem",
               "min": 10,
-              "text": "Haltet im Antwortfeld fest, woran ihr überwachtes, unüberwachtes und verstärkendes Lernen unterscheidet."
+              "text": "Erkundet über den K-Means-Link «Gaussian Mixture» und beobachtet Gruppen und Mittelpunkte ohne vorgegebene Klassenlabels."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Klasse",
+              "min": 10,
+              "text": "Erkundet NIM im Plenum am Beamer. Wählt Züge gemeinsam und beobachtet Rückmeldungen nach Gewinn und Verlust. Haltet eine tatsächlich beobachtete Änderung fest."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 0,
-              "text": "Begründete Zuordnungen und eigener Lernartenvergleich."
+              "text": "Begründete KI-Zuordnungen und drei konkrete Beobachtungen zu den Lernarten."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Leitfrage beantworten",
+          "titel": "Drei Lernarten unterscheiden",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Erklärt an einem Beispiel den Unterschied zwischen festen Regeln und Lernen aus Daten. Nennt die drei Lernarten und den jeweiligen Unterschied."
+              "text": "Vergleicht in Kapitel 3 die drei verlinkten Anwendungen: Was steht der KI beim Lernen zur Verfügung, und welcher Lernart entspricht das? Beantwortet ausserdem die Leitfrage mit einem Alltagsbeispiel."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 0,
-              "text": "Die Leitfrage wird anhand eines passenden Beispiels schriftlich beantwortet; Ausblick auf die Erkundungen in DL 2."
+              "min": 2,
+              "text": "Schriftlicher Vergleich der drei Lernarten und eine begründete Unterscheidung von festen Regeln und Lernen aus Daten."
             }
           ]
         }
