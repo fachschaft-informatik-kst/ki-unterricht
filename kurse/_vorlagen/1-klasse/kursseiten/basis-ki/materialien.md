@@ -1,9 +1,9 @@
-## DL 1 · KI und Lernarten in einer Doppellektion
+## DL 1 · Was ist KI? Und wie lernt sie?
 
-**Bereitlegen:** Beamer mit den beiden Kursgrafiken (Regeln vs. Daten; KI-Begriffskreise), vorhandene Memory-Karten, Papier. Keine zusätzlichen digitalen Werkzeuge erforderlich.
+**Bereitlegen:** Beamer mit den Kursgrafiken «Regeln oder Daten» und «KI-Begriffskreise». Die Zuordnungsaufgaben werden direkt auf der Kursseite bearbeitet.
 
-**Pflicht (90 Min.):** Roboterfrage (5), Gegenbeispiele zu Regeln (10), kurze Begriffseinordnung und Label-Erklärung (20), Zuordnung auf der Kursseite (15), ein vereinfachter Memory-Versuch mit und ohne Klassenlabels (20), drei Lernarten je an einem Beispiel (10), eigene Sicherung (10).
+**Ablauf (90 Min.):** Alltagsbeispiele vergleichen (5), Wenn-dann-Regeln und ihre Grenzen untersuchen (10), KI-Begriffe und drei Lernarten erklären (20), die beiden digitalen Zuordnungen und drei Lernarten bearbeiten (45), Leitfrage schriftlich sichern (10).
 
-**Wahlvertiefung statt Pflicht:** KI-Meilensteine, starke KI und ausführliche NIM-Demo. Robotergesetze und Trolley-/Schulweg-Fall entfallen in DL 1; gesellschaftliche Fragen haben mit DL 8 einen eigenen Schwerpunkt. Überwachtes Lernen ist entscheidend: Ein Bild mit richtigem Klassenlabel zeigt dem Modell die gewünschte Ausgabe. Keine langen Plenumsdiskussionen zu weiteren Begriffsgrenzen.
+**Didaktischer Fokus:** Beim Einstieg wird kein Fachwissen vorausgesetzt. Bei «Regeln oder Lernen aus Daten» zählt die beschriebene Funktionsweise, nicht der Produktname. Die drei Lernarten werden zunächst unterschieden und in DL 2 anhand verlinkter Anwendungen erprobt.
 
-**Produkt:** Zwei Beispielzuordnungen und eine eigene Erklärung von Training mit Labels. Das bilden die Brücke zum Neuron (DL 2).
+**Produkt:** Begründete Beispiele für feste Regeln und Lernen aus Daten sowie ein kurzer Vergleich der drei Lernarten. Die Reflexion wird im Lernjournal festgehalten.
