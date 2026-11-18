@@ -1,9 +1,11 @@
 ## DL 1 · Was ist KI? Und wie lernt sie?
 
-**Bereitlegen:** Beamer mit den Kursgrafiken «Regeln oder Daten» und «KI-Begriffskreise». Die Zuordnungsaufgaben werden direkt auf der Kursseite bearbeitet.
+**Bereitlegen:** Beamer mit den Kursgrafiken «Regeln oder Daten» und «KI-Begriffskreise». Die Links zum [Smiley-Spiel](https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2), zur [K-Means-Visualisierung](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/) und zur [NIM-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke) vorher öffnen.
 
-**Ablauf (90 Min.):** Alltagsbeispiele vergleichen (5), Wenn-dann-Regeln und ihre Grenzen untersuchen (10), KI-Begriffe und drei Lernarten erklären (20), die beiden digitalen Zuordnungen und drei Lernarten bearbeiten (45), Leitfrage schriftlich sichern (10).
+**Ablauf (90 Min.):** Alltagsbeispiele vergleichen (5), Wenn-dann-Regeln und ihre Grenzen untersuchen (10), KI-Begriffe und die drei Lernarten erklären (20), interaktive Zuordnungen (15), Smiley erkunden (10), K-Means erkunden (10), NIM beobachten (10), Vergleich und Leitfrage sichern (10).
 
-**Didaktischer Fokus:** Beim Einstieg wird kein Fachwissen vorausgesetzt. Bei «Regeln oder Lernen aus Daten» zählt die beschriebene Funktionsweise, nicht der Produktname. Die drei Lernarten werden zunächst unterschieden und in DL 2 anhand verlinkter Anwendungen erprobt.
+**Didaktischer Fokus:** Für DL 1 wird kein KI-Fachwissen vorausgesetzt. Die drei Lernarten werden mit kurzen verlinkten Experimenten greifbar: Überwachtes Lernen verwendet beschriftete Trainingsbeispiele; K-Means gruppiert nach Ähnlichkeit ohne vorgegebene Klassenlabels; bei NIM beeinflussen Rückmeldungen die Wahl von Spielzügen.
 
-**Produkt:** Begründete Beispiele für feste Regeln und Lernen aus Daten sowie ein kurzer Vergleich der drei Lernarten. Die Reflexion wird im Lernjournal festgehalten.
+**Organisation:** Smiley und K-Means in Tandems; **NIM im Plenum** am Beamer durchführen. Bei NIM nur tatsächlich beobachtete Änderungen festhalten. Die Aufgaben stehen ohne Hinweise auf Pflicht- und Zusatzteile auf der Kursseite; die Lehrperson steuert die Auswahl und das Tempo.
+
+**Produkt:** Zwei begründete Zuordnungen sowie eine eigene Beobachtung zu jeder Lernart und ein kurzer schriftlicher Vergleich im Lernjournal.
