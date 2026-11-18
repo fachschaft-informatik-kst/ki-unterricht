@@ -109,6 +109,6 @@ Ein Zeitplan ist keine KI. Ein Suchverfahren kann regelbasierte KI sein. Ein aus
       </div>
       <p class="small">Frühere eigene Beispiele bleiben hier erhalten.</p>
     </details>
-    <p class="small">Nicht jedes KI-System lernt aus Daten. Nicht jedes lernende Modell ist Deep Learning. Unser Bildprojekt gehört zum maschinellen Lernen: MobileNet ist ein Deep-Learning-Modell, und unser kleines Netz lernt darauf aufbauend, Ihre zwei Klassen zu unterscheiden.</p>
+    <p class="small">Nicht jedes KI-System lernt aus Daten. Nicht jedes lernende Modell ist Deep Learning. Ein Bildklassifikator mit einem tiefen neuronalen Netz ist beispielsweise Deep Learning; er kann Bilder anhand gelernter Merkmale einordnen.</p>
   </div>
 </details>
