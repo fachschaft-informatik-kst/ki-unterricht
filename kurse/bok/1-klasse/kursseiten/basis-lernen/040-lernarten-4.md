@@ -1,20 +1,12 @@
-<details class="kapitel" id="lernarten-4" data-kurz="In Fünfergruppen drei Memory-Runden spielen: überwacht, unüberwacht, verstärkend." open>
-  <summary><span class="kapitel-nr">4</span>
-    <h2 class="kapitel-titel">Gruppen-Memory: Aufgabe und Ablauf</h2>
-  </summary>
+<details class="kapitel" id="lernarten-4" data-kurz="Drei interaktive Beispiele helfen, die Lernarten zu unterscheiden." open>
+  <summary><span class="kapitel-nr">4</span><h2 class="kapitel-titel">Erkundung: Drei Lernarten</h2></summary>
   <div class="kapitel-body">
-    <p><strong>Worum geht es?</strong> Sie spielen in Ihrer Gruppe dasselbe Memory-Spiel dreimal, aber jedes Mal mit einer anderen Regel. Jede Regel steht für eine Lernart. So erleben Sie selbst, woraus ein System lernen kann: aus <strong>Labels</strong>, aus <strong>Ähnlichkeit</strong> oder aus <strong>Rückmeldung</strong>. Die drei Lernarten lesen Sie in den nächsten Kapiteln nach. Dort steht auch die genaue Aufgabe jeder Runde.</p>
-    <div class="group-memory-instructions">
-      <p><strong>Gruppe und Rollen:</strong> In Fünfergruppen gibt es einen <strong>Agenten</strong> (spielt und lernt), eine <strong>Kartenleitung</strong> (zeigt die Karten und gibt die Rückmeldung), zwei <strong>Beobachtende</strong> (halten fest, was passiert) und eine Person für <strong>Zeit und Protokoll</strong>. Wechseln Sie nach jeder Runde die Rollen.</p>
-      <p><strong>Ablauf:</strong></p>
-      <ol>
-        <li>Verteilen Sie die Rollen und legen Sie die Memory-Karten bereit.</li>
-        <li><strong>Runde 1 · überwacht</strong> (4 Min. spielen, 1 Min. notieren): Der Agent lernt aus Karten mit Labels. Aufgabe und Antwortfeld stehen in Kapitel 5.</li>
-        <li>Rolle wechseln. <strong>Runde 2 · unüberwacht</strong> (4 + 1 Min.): Der Agent sortiert Karten ohne Labels nach Ähnlichkeit. Aufgabe und Antwortfeld stehen in Kapitel 6.</li>
-        <li>Rolle wechseln. <strong>Runde 3 · verstärkend</strong> (4 + 1 Min.): Der Agent sucht Paare und bekommt nach jedem Zug eine Rückmeldung. Aufgabe und Antwortfeld stehen in Kapitel 7.</li>
-        <li>Vergleichen Sie danach in Kapitel 8 die drei Lernarten. Insgesamt brauchen Sie etwa 15 Minuten.</li>
-      </ol>
-      <p class="small">Schreiben Sie Ihre Beobachtung direkt nach jeder Runde in das Antwortfeld des zugehörigen Kapitels. In Runde 3 lernt der Mensch als Agent, nicht die KI.</p>
-    </div>
+    <p>Untersuchen Sie drei Anwendungen. Finden Sie bei jeder heraus, <strong>wodurch das System lernt</strong>: durch Beispiele mit richtigen Antworten, durch Ähnlichkeiten oder durch Rückmeldungen zu Handlungen.</p>
+    <ol>
+      <li><strong>Überwachtes Lernen:</strong> Erkunden Sie in Kapitel 5 die Gesichtserkennung im Smiley-Spiel und beobachten Sie die Vorhersagen.</li>
+      <li><strong>Unüberwachtes Lernen:</strong> Beobachten Sie in Kapitel 6, wie eine K-Means-Visualisierung ähnliche Punkte zu Gruppen ordnet.</li>
+      <li><strong>Verstärkendes Lernen:</strong> Untersuchen Sie in Kapitel 7, wie eine KI im NIM-Spiel aus Erfolg und Misserfolg lernt.</li>
+    </ol>
+    <p>Folgen Sie den verlinkten Beispielen und den Arbeitsaufträgen in den drei Kapiteln. Halten Sie jeweils eine konkrete Beobachtung im Antwortfeld fest; vergleichen Sie danach die Lernarten.</p>
   </div>
 </details>
