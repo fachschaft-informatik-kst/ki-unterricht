@@ -4,124 +4,124 @@
       "id": "b01",
       "view": "basis-ki",
       "title": "Was ist KI – und wie lernt sie?",
-      "rueckblick": "Vorwissen zu intelligenten Systemen sammeln.",
-      "goal": "Regeln von Lernen aus Daten unterscheiden, KI-Begriffe einordnen und Lernen mit Labels verstehen.",
-      "question": "Wann ist ein System KI, und wie kann es aus Beispielen lernen?",
-      "motivation": "Bei unserem Bildprojekt geben die Labels die richtigen Antworten vor.",
-      "product": "Zwei korrekt begründete KI-Zuordnungen und eine Erklärung von überwachtem Lernen.",
-      "zeit": "90 Minuten. Pflicht: Regeln/Daten, Begriffe, kurze Memory-Erfahrung mit Labels; KI-Geschichte, starke KI und NIM nur als Vertiefung; die Ethik-Fallaufgabe entfällt und wird nicht nachgeholt.",
+      "rueckblick": "Alltagsbeispiele als Ausgangspunkt nutzen; für diese erste Doppellektion wird kein KI-Fachwissen vorausgesetzt.",
+      "goal": "Feste Regeln von Lernen aus Daten unterscheiden, KI-Begriffe einordnen und die drei Lernarten benennen.",
+      "question": "Wann ist ein System KI, und auf welche drei Arten kann es lernen?",
+      "motivation": "KI begegnet uns bei Übersetzungen, Empfehlungen und Bilderkennung. Nicht jedes automatisch arbeitende System lernt aus Daten.",
+      "product": "Begründete Zuordnungen und ein eigener kurzer Vergleich der drei Lernarten.",
+      "zeit": "90 Minuten: Einstieg und Regeln (15), Begriffe und Lernarten (20), interaktive Zuordnungen und Lernartenvergleich (45), schriftliche Sicherung (10).",
       "order": 10,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Zwei Roboter vergleichen",
+          "titel": "Zwei Systeme vergleichen",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Vergleicht einen Roboter mit festen Abläufen und einen, der aus Beispielen lernt. Woran erkennt ihr den Unterschied?"
+              "text": "Vergleicht zwei Alltagsroboter: Einer folgt einem festen Ablauf, der andere wurde mit Beispielen trainiert. Woran erkennt ihr den Unterschied?"
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 0,
-              "text": "Beobachtung oder Erklärung im gemeinsamen Journal sichern."
+              "text": "Erste Vermutung zur Unterscheidung Regeln und Lernen notieren."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Regeln und Gegenbeispiele",
+          "titel": "Wenn-dann-Regeln erproben",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Formuliert zwei Wenn-dann-Regeln zur Bilderkennung und sucht ein Gegenbeispiel. Welche Hilfe wären beschriftete Bilder?"
+              "text": "Erfindet eine Wenn-dann-Regel für die Erkennung eines Gegenstands und sucht ein Gegenbeispiel. Woran stösst eine handgeschriebene Regel an Grenzen? Keine Vorkenntnisse voraussetzen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 0,
-              "text": "Beobachtung oder Erklärung im gemeinsamen Journal sichern."
+              "text": "Ein Beispiel und ein Gegenbeispiel sichern."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "KI-Begriffe und Labels",
+          "titel": "KI-Begriffe und drei Lernarten",
           "minutes": 20,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 15,
-              "text": "Zeigt die vorhandenen Kursgrafiken für Regeln vs. Daten und KI/ML/Deep Learning. Erklärt kurz überwachtes Lernen: Ein Bild mit richtigem Klassennamen (Label) liefert das Lernsignal."
+              "text": "Zeigt die beiden Kursgrafiken: feste Regeln versus Lernen aus Daten und KI/ML/Deep Learning/generative KI. Erklärt die drei Lernarten an einfachen Beispielen: überwacht mit Labels, unüberwacht mit Ähnlichkeiten, verstärkend mit Belohnungen."
             },
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 5,
-              "text": "Ordnet Spamfilter, Regelprogramm und Bildklassifikator ein. Nennt bei einem Beispiel die Eingabe und das Label."
+              "text": "Ordnet drei kurze Beispiele den Lernarten zu und nennt bei einem überwachten Beispiel das Label."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 0,
-              "text": "Beobachtung oder Erklärung im gemeinsamen Journal sichern."
+              "text": "Die drei Lernarten sind benannt und voneinander abgegrenzt."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Einmal selbst Lernen mit Labels erfahren",
+          "titel": "Zuordnungen und Lernarten vergleichen",
           "minutes": 45,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 15,
-              "text": "Bearbeitet die interaktiven Zuordnungen auf der Kursseite: Regeln/Daten und KI-Begriffe. Begründet zwei Beispiele."
-            },
-            {
-              "art": "Auftrag",
-              "wer": "Gruppenarbeit",
               "min": 20,
-              "text": "Memory-Karten zuerst ohne, dann mit Klassenbezeichnungen ordnen: Was ändert sich mit einem Label? Im Anschluss das neue Kapitel «Wie lernt KI?» bearbeiten."
+              "text": "Bearbeitet die interaktiven Zuordnungen auf der Kursseite (Regeln/Daten und KI-Begriffe); begründet mindestens zwei Entscheidungen."
             },
             {
               "art": "Auftrag",
               "wer": "Tandem",
+              "min": 15,
+              "text": "Lest die drei Lernarten im Kapitel «Drei verschiedene Lernarten» und findet zu jeder ein weiteres Alltagsbeispiel."
+            },
+            {
+              "art": "Auftrag",
+              "wer": "Einzeln",
               "min": 10,
-              "text": "Ordnet überwachtes, unüberwachtes und verstärkendes Lernen je einem kurzen Beispiel zu; die beiden letzten nur qualitativ erklären."
+              "text": "Haltet im Antwortfeld fest, woran ihr überwachtes, unüberwachtes und verstärkendes Lernen unterscheidet."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
               "min": 0,
-              "text": "Beobachtung oder Erklärung im gemeinsamen Journal sichern."
+              "text": "Begründete Zuordnungen und eigener Lernartenvergleich."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Vom Label zum Neuron",
+          "titel": "Leitfrage beantworten",
           "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Einzeln",
               "min": 8,
-              "text": "Schreibt: «Ein Modell lernt überwacht, wenn …». Erklärt, warum dies zum späteren Bildprojekt passt."
+              "text": "Erklärt an einem Beispiel den Unterschied zwischen festen Regeln und Lernen aus Daten. Nennt die drei Lernarten und den jeweiligen Unterschied."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "min": 2,
-              "text": "Regeln vs. Daten und das Lernsignal Label sind verstanden; zusätzliche KI-Geschichte bleibt freiwillig."
+              "min": 0,
+              "text": "Die Leitfrage wird anhand eines passenden Beispiels schriftlich beantwortet; Ausblick auf die Erkundungen in DL 2."
             }
           ]
         }
