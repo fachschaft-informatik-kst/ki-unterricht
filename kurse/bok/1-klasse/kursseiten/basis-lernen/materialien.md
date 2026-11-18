@@ -1,83 +1,35 @@
-## Doppellektion 02
+## DL 2 · Drei Lernarten erkunden
 
-**Bereitlegen:** Vorhandene Memory-Spiele, Papier und Stifte; NIM am Beamer vorab öffnen. Dieselbe Gruppe und dasselbe Spielmaterial bleiben während der drei Runden bestehen. Es braucht keine zusätzlichen gedruckten Kartensätze.
+**Bereitlegen:** Kursseite mit den Links zu [Smiley-Spiel](https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2), [Quick, Draw!](https://quickdraw.withgoogle.com/), [K-Means](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/) und [NIM](https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke). Für NIM Beamer vorbereiten.
 
-### Ankommen · 5 Min. · Was hilft beim Lernen?
+### Ankommen · 5 Min. · Drei Arten des Lernens
 
-**Tandem · 5 Min.**
+**Tandem:** Vergleichen, wie Lernen mit richtigen Antworten, durch das Entdecken von Ähnlichkeiten und durch Erfolg oder Misserfolg aussehen könnte.
 
-Zeigen Sie dasselbe Motiv aus dem Memory zunächst ohne Bezeichnung, dann mit Klassenname. Diskutieren Sie: Welche Information liefert das Bild, welche das Label? Schreiben Sie eine Vermutung: «Das Label hilft, weil …».
+### Vorwissen aktivieren · 5 Min. · Regeln oder Daten?
 
-### Vorwissen aktivieren · 5 Min. · Woher kommt die Regel?
+**Tandem:** Ampel mit festen Regeln und trainierten Spamfilter aus DL 1 gegenüberstellen.
 
-**Tandem · 5 Min.**
+### Informieren · 15 Min. · EVA und drei Lernarten
 
-| System aus DL1 | Wer oder was erzeugt die Entscheidungsregel? | Welche Erfahrung wird gebraucht? |
-|---|---|---|
-| Schachprogramm mit festgelegten Suchregeln | ____________________ | ____________________ |
-| Mit beschrifteten E-Mails trainierter Spamfilter | ____________________ | ____________________ |
+**Lehrperson · 12 Min.:** EVA-Grafik erklären. Der Erfahrungsschatz enthält das bereits Gelernte, beim Neuron später die Gewichte und den Bias. Überwacht bedeutet Training mit Beispielen und richtigen Labels; unüberwacht bedeutet Muster in Daten ohne vorgegebene Zielklassen zu finden; verstärkend bedeutet Handlungen mit Rückmeldung zu bewerten. Kurz auf die Beobachtungsfragen in den Kapiteln 5–7 hinweisen.
 
-Vervollständigen Sie: «Ein System lernt aus Daten, wenn …». Verwechseln Sie das spätere Anwenden einer Regel nicht mit ihrem Erlernen.
+**Tandem · 3 Min.:** Eingabe, Erfahrungsschatz und Ausgabe am Spamfilter erklären.
 
-### Informieren · 15 Min. · EVA und drei Lernsignale
+### Verarbeiten · 55 Min. · Mit den Links erkunden
 
-**Lehrperson → Tandem · 12 / 3 Min.**
+**Tandem · 15 Min. – überwacht:** Smiley-Spiel öffnen, zwei Gesichter zeichnen, richtige und falsche Vorhersagen vergleichen. Den vorhandenen Trainingsbeispielen die Labels «fröhlich» und «traurig» entnehmen. Quick, Draw! als zweites Beispiel für das Erkennen gelernter Klassen untersuchen. Beobachtung in Kapitel 5 sichern.
 
-#### Inputkarte · Eingabe, Verarbeitung, Ausgabe und Erfahrung
+**Tandem · 15 Min. – unüberwacht:** Bei K-Means «Gaussian Mixture» wählen, «Reassign Points» und «Update Centroids» schrittweise verfolgen. Einen neuen Durchlauf vergleichen. Die beobachteten Gruppen, Mittelpunkte und fehlenden Klassenlabels in Kapitel 6 erläutern.
 
-**Spamfilter:** E-Mail als Eingabe → Verarbeitung mit gelerntem Modell → Ausgabe «Spam / kein Spam». Die beschrifteten Trainingsbeispiele sind die Erfahrungen; der Erfahrungsschatz ist das, was das Modell daraus gelernt und behalten hat (bei einem Neuron die Gewichte und der Bias).
+**Plenum · 20 Min. – verstärkend:** NIM-Lernstrecke am Beamer öffnen. Die Klasse entscheidet über Züge; die Lehrperson zeigt die Rückmeldung nach Gewinn und Verlust und eine wiederholte Spielsituation. **Nur tatsächlich beobachtete Veränderungen** protokollieren. Dazu Kapitel 7 verwenden. Ein einzelner Sieg beweist keine dauerhaft bessere Strategie.
 
-**Wissensbasiert:** Fragen und Reihenfolge legen Menschen fest, zum Beispiel bei einem Tier-Ratebaum auf Papier ([Kursseite Kapitel 2](index.html#lernarten-2)). **Akinator** sieht ähnlich aus, ist aber ein Kontrastfall: Er nutzt Erfahrungen früherer Spielender und fragt bei mehrfach falschem Raten nach dem Namen der Figur (Implementierung nicht öffentlich).
+**Einzeln · 5 Min.:** Drei neue Situationen im Kurzcheck (Kapitel 9) begründet zuordnen.
 
-| Lernart | Verfügbare Information | Leitfrage |
-|---|---|---|
-| Überwacht | Beispiele mit Zielwerten oder Labels | Wie passt die Vorhersage zum Ziel? |
-| Unüberwacht | Daten ohne vorgegebene Zielklassen | Welche Ähnlichkeiten oder Gruppen finden sich? |
-| Verstärkend | Rückmeldung zu Handlungen | Welche Handlungen führen zu mehr Belohnung? |
+### Auswerten · 10 Min. · Lernarten vergleichen
 
-**Merkpunkt für den weiteren Kurs:** Überwacht heisst: Zu jedem Beispiel ist die richtige Antwort bekannt, das **Label** (im Neuron später auch **Ziel** genannt). Dieser Begriff kehrt in Doppellektion 3 (Neuron), 4 (Ziffernnetz), im Bildprojekt und bei der Prüfung des fremden Modells in Doppellektion 8 zurück.
+**Einzeln · 7 Min.:** Smiley-Spiel, K-Means und NIM hinsichtlich ihrer Lernart vergleichen; ein eigenes Alltagsbeispiel begründet einordnen (Kapitel 8).
 
-**Tandem:** Erklären Sie am Spamfilter Eingabe, Erfahrungsschatz und Ausgabe. [EVA-Grafik und Lernarten im Kurs](index.html#lernarten-4).
+**Lehrperson · 3 Min.:** Kurzer gemeinsamer Abgleich: Labels liefern beim überwachten Lernen Zielwerte, Ähnlichkeiten ermöglichen unüberwachtes Gruppieren, Belohnungen beeinflussen beim verstärkenden Lernen zukünftige Handlungen. Verschiedene Implementierungen eines Alltagsdienstes können unterschiedliche Lernverfahren nutzen.
 
-### Verarbeiten · 55 Min. · Drei Memory-Runden und NIM
-
-**Gruppe → Klasse · 30 / 25 Min.**
-
-#### Spielanleitung · Drei Lernsignale mit gleichem Material
-
-Verteilen Sie in der Gruppe die Aufgaben Spielen, Beobachten und Protokollieren. Wechseln Sie Rollen nur zwischen den Runden. Nutzen Sie ungefähr zehn Minuten pro Runde einschliesslich Notizen.
-
-1. **Mit Labels:** Legen Sie einige Motive offen aus und benennen Sie deren Klassen. Ordnen Sie weitere Karten diesen benannten Gruppen zu. Welche Vorgabe hilft bei der Zuordnung?
-2. **Ohne Labels:** Legen Sie Karten offen aus und sortieren Sie nach selbst gewählter Ähnlichkeit, ohne Klassennamen vorzugeben. Sind mehrere sinnvolle Sortierungen möglich?
-3. **Mit Rückmeldung:** Suchen Sie verdeckte Paare. Ein Treffer ergibt +1, ein Fehlversuch 0. Halten Sie fest, wie frühere Rückmeldungen den nächsten Zug beeinflussen.
-
-| Runde | Lernsignal | Konkrete Beobachtung | Grenze der Analogie |
-|---|---|---|---|
-| Mit Labels | ____________________ | ____________________ | ____________________ |
-| Ohne Labels | ____________________ | ____________________ | ____________________ |
-| Mit +1 / 0 | ____________________ | ____________________ | ____________________ |
-
-> **Lehrpersonenhinweis:** Hier lernen Menschen. Das Memory trainiert kein KI-Modell. Die Runden veranschaulichen Arten von Information; sie sind keine vollständige Simulation der Lernverfahren.
-
-#### Beamer-Protokoll · Was ändert sich bei NIM?
-
-Öffnen Sie die [NIM-Lernstrecke](https://inf-schule.de/ki/menueansicht/ki_erkunden/nim-spiel/lernstrecke). Die Klasse entscheidet gemeinsam über Züge und beobachtet die Rückmeldung.
-
-| Beobachteter Spielzustand / Zug | Gewinn oder Verlust? | Was wurde laut Darstellung verändert? | Was erwarten wir beim nächsten ähnlichen Zustand? |
-|---|---|---|---|
-| ____________________ | ______ | ____________________ | ____________________ |
-
-Sichern Sie **eine tatsächlich beobachtete Änderung**, nicht nur «die KI wird besser». Ein einzelner Sieg belegt noch keine dauerhaft verbesserte Strategie.
-
-Kein Wechsel zu weiteren Werkzeugen wie Akinator oder Filmempfehlungen.
-
-### Auswerten · 10 Min. · Lernarten begründet zuordnen
-
-**Einzeln → Einzeln → Lehrperson · 4 / 3 / 3 Min.**
-
-1. Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung anhand Ihrer Beobachtungen.
-2. Ordnen Sie NIM und das kommende Bildprojekt zu. Welche Information ist jeweils entscheidend?
-3. Erklären Sie, warum im Memory ein Mensch und nicht ein Modell gelernt hat.
-4. Sicherung (einzeln, erst schreiben): Antworten Sie in zwei bis drei Sätzen auf «Wie lernt KI?» an einem Beispiel, das wir nicht besprochen haben (zum Beispiel ein Empfehlungsdienst). Nennen Sie das Lernsignal und begründen Sie, woran Sie es erkennen. Danach klärt die Lehrperson zwei strittige Zuordnungen, und Sie vergleichen mit der Selbstkontrolle auf der Kursseite (Kapitel 8).
-
-> **Orientierung für die Sicherung:** Das Bildprojekt ist überwachtes Lernen mit beschrifteten Bildern. Dieselbe Lernart zieht sich durch Doppellektion 3 (Neuron: Ausgabe gegen Ziel), 4 (Ziffernnetz: richtige Ziffer als Label) und das Bildprojekt (Ihre Klassen als Labels). NIM veranschaulicht Lernen aus Rückmeldung. Für die Begründung zählt das Lernsignal, nicht der Name des Werkzeugs.
+**Produkt:** Drei konkrete Versuchsbeobachtungen und eine nachvollziehbare schriftliche Gegenüberstellung der Lernarten.
