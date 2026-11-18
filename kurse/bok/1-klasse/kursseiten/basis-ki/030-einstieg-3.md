@@ -46,7 +46,7 @@ Auf einer Konferenz in Dartmouth wird der Begriff «Artificial Intelligence» ge
         <div>
           <button class="milestone-trigger" type="button" data-milestone-open="perzeptron" aria-haspopup="dialog" aria-label="Perzeptron: Bild und Erklärung öffnen">Perzeptron <span class="milestone-trigger-icon" aria-hidden="true">↗</span></button> <span class="marke daten">Datengetriebene Programmierung</span>
           <!-- MD:START -->
-Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es ist der Baustein aus Doppellektion 3.
+Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es ist der Baustein aus Doppellektion 2.
 <!-- MD:END -->
         </div>
         <template data-milestone-detail="perzeptron">
@@ -54,10 +54,10 @@ Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es i
           <p class="milestone-detail-kicker">Meilenstein der KI-Geschichte</p>
           <h2 class="milestone-detail-title">Perzeptron</h2>
           <figure>
-            <img src="grafiken/neuron_entscheider.svg" alt="Schwimmbad-Neuron aus DL 3: Sonne, Freundinnen und Freunde sowie eine Prüfung sind drei Eingaben mit unterschiedlich starken Gewichten, die zur Entscheidung Ja oder Nein führen." loading="lazy" decoding="async">
-            <figcaption>Beim Schwimmbad-Beispiel entscheidet ein einzelnes künstliches Neuron anhand von Sonne, Begleitung und einer bevorstehenden Prüfung: Gehe ich schwimmen? Jede Eingabe hat ein Gewicht. <strong>In DL 3</strong> untersucht ihr dieselbe Grafik genauer und seht, wie Gewichte beim Lernen angepasst werden. Das Bild illustriert das Funktionsprinzip, nicht ein historisches Gerät.</figcaption>
+            <img src="grafiken/neuron_entscheider.svg" alt="Schwimmbad-Neuron aus DL 2: Sonne, Freundinnen und Freunde sowie eine Prüfung sind drei Eingaben mit unterschiedlich starken Gewichten, die zur Entscheidung Ja oder Nein führen." loading="lazy" decoding="async">
+            <figcaption>Beim Schwimmbad-Beispiel entscheidet ein einzelnes künstliches Neuron anhand von Sonne, Begleitung und einer bevorstehenden Prüfung: Gehe ich schwimmen? Jede Eingabe hat ein Gewicht. <strong>In DL 2</strong> untersucht ihr dieselbe Grafik genauer und seht, wie Gewichte beim Lernen angepasst werden. Das Bild illustriert das Funktionsprinzip, nicht ein historisches Gerät.</figcaption>
           </figure>
-          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/kurse/bok/1-klasse/assets/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 3</a>.</p>
+          <p class="milestone-source">Illustration: <a href="https://github.com/fachschaft-informatik-kst/ki-unterricht/blob/main/kurse/bok/1-klasse/assets/grafiken/neuron_entscheider.svg" target="_blank" rel="noopener noreferrer">eigene Kursgrafik «Schwimmbad-Neuron» aus DL 2</a>.</p>
         </article>
         </template></li>
       <li><span class="jahr">1966</span>
