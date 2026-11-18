@@ -1,15 +1,12 @@
-<details class="kapitel" id="lernarten-9" data-kurz="Begriffe und passende Rückmeldungen als Paare finden.">
-  <summary><span class="kapitel-nr">9</span>
-    <h2 class="kapitel-titel">Wissenssicherung: Lernarten zuordnen</h2>
-  </summary>
+<details class="kapitel" id="lernarten-9" data-kurz="An drei neuen Situationen die passende Lernart erkennen.">
+  <summary><span class="kapitel-nr">9</span><h2 class="kapitel-titel">Kurzcheck: Lernarten zuordnen</h2></summary>
   <div class="kapitel-body detail-body">
-    <!-- MD:START -->
-Ordnen Sie die Begriffe den passenden Rückmeldungen zu und begründen Sie jedes Paar. Dieser Check sichert das Gelernte; die Gruppenrunden mit Memory stehen darüber.
-<!-- MD:END -->
-    <script type="application/json" id="memory-pairs">[["Überwachtes Lernen","Beispiele mit richtiger Antwort"],["Unüberwachtes Lernen","Gruppen ohne vorgegebene Antworten"],["Verstärkendes Lernen","Erfolg oder Misserfolg nach Handlungen"]]</script>
-    <div class="memory-board" id="memory-board">
-    </div>
-    <p id="memory-status" role="status">Drehen Sie zwei Karten um.</p>
-    <button class="btn" id="memory-reset">Neu mischen</button>
+    <p>Ordnen Sie diese Situationen den drei Lernarten zu und begründen Sie Ihre Entscheidung:</p>
+    <ol>
+      <li>Ein System lernt mit Fotos, die jeweils als «Hund» oder «Katze» beschriftet sind.</li>
+      <li>Ein Programm entdeckt Gruppen von ähnlichen Liedern, ohne dass diese zuvor in Kategorien eingeteilt wurden.</li>
+      <li>Ein Spielagent erhält nach seinen Zügen Punkte und passt seine Entscheidungen an.</li>
+    </ol>
+    <label class="field answer"><span>Welche Lernart gehört zu Situation 1, 2 und 3 – und woran erkennen Sie das?</span><textarea data-answer="lernarten_check" maxlength="10000" rows="3" placeholder="1 …, weil … / 2 …, weil … / 3 …, weil …"></textarea></label>
   </div>
 </details>
