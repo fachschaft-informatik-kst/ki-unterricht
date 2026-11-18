@@ -36,25 +36,15 @@ Die Begriffe «KI/ML/Deep Learning/generativ» beschreiben technische Verfahren 
 
 **Leitfrage** («Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?»): «Ein System wirkt intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz bräuchte, und mit Neuem zurechtkommt. Ein Getränkeautomat führt feste Regeln aus, während ein trainierter Spamfilter Modellparameter aus Beispielen anpasst. Es gibt dennoch auch regelbasierte KI; 'automatisch' ist nicht gleich 'KI'.» Wer sein Kriterium vom Anfang ändert oder präzisiert, hat die Frage gut genutzt.
 
-## 1 · Lernarten (integriert; frühere DL 2 als Wahlvertiefung)
+## 1 · Drei Lernarten anhand von Links erkunden (Doppellektion 1)
 
-### EVA und Wissen
+Beim **überwachten Lernen** trainiert ein Modell mit Beispielen, zu denen die richtige Antwort (das Label) bekannt ist. **Im Smiley-Spiel** sind das «fröhlich» und «traurig»; das System wurde bereits mit Beispielen trainiert. Eine falsche Vorhersage zeigt, dass neue Zeichnungen von den Trainingsbeispielen abweichen können. Die SuS trainieren das Modell durch das Zeichnen nicht selbst.
 
-Beim **Spamfilter** ist die Eingabe eine E-Mail. Beim Training sieht das Modell Beispiele mit richtigen Labels und passt Parameter an. Diese Parameter bilden den «Erfahrungsschatz». Bei einer neuen E-Mail entsteht daraus eine Vorhersage; nicht jede Benutzung trainiert das Modell erneut.
+Beim **unüberwachten Lernen** sucht das System Gruppen oder Muster ohne vorgegebene Klassenlabels. **K-Means** ordnet Punkte dem jeweils nahen Mittelpunkt zu und verschiebt diese Mittelpunkte in den folgenden Schritten. Die Gruppierung hängt auch von der Startkonfiguration ab.
 
-**Wissensbasiert (Ratebaum auf Papier):** Fragen wie «Lebt es im Wasser?» oder «Hat es Federn?» schränken die Möglichkeiten ein. Ein Tier, das nicht im Baum steht, kann der Baum nicht erkennen; er endet ohne Ergebnis oder bei einem falschen Tier. Fragen und Reihenfolge sind hinterlegtes Wissen, das nur Menschen ändern.
+Beim **verstärkenden Lernen** werden Handlungen anhand ihrer Folgen bewertet. **NIM** veranschaulicht, wie Gewinn oder Verlust und die daraus folgende Rückmeldung die Wahl späterer Züge beeinflussen können. Nicht behaupten, die KI habe sich verbessert, ohne eine beobachtete Veränderung zu beschreiben.
 
-**Akinator (Kontrastfall):** Er stellt ebenfalls Ja-Nein-Fragen, nutzt aber Erfahrungen früherer Spielender; bei mehrfach falschem Raten fragt er nach dem Namen der Figur und erweitert seine Datenbank. Er ist deshalb kein Beispiel für ein System, das nicht lernt. Wie er genau arbeitet, ist nicht öffentlich.
-
-**Filmlandkarte:** Nahe Filme können Gemeinsamkeiten bei Genre oder Nutzerbewertungen haben. Beim Wechsel des Nutzers können sich prognostizierte Bewertungen ändern. **Konkrete Filmtitel und Beobachtungen müssen aus dem eigenen Versuch stammen.**
-
-### Drei Lernarten – Memory und NIM
-
-- **Überwachtes Lernen:** Beispiele mit korrektem Label, z. B. «das Bild zeigt eine Katze». Dieselbe Lernart begegnet den Lernenden später im Neuron (DL 3), im Ziffernnetz (DL 4) und im Bildprojekt.
-- **Unüberwachtes Lernen:** Muster und Gruppen ohne vorgegebene Labels, z. B. nach Farbe oder Form.
-- **Verstärkendes Lernen:** Rückmeldung über Erfolg/Misserfolg nach Handlungen; beim NIM-Spiel können erfolgreiche Züge verstärkt werden.
-
-**Zuordnung:** richtige Antworten ↔ überwacht; Ähnlichkeiten ↔ unüberwacht; Belohnung ↔ verstärkend. Verschiedene plausible Gruppierungen sind beim unüberwachten Beispiel zulässig.
+**Vergleich im Antwortfeld:** Smiley-Spiel → beschriftete Trainingsbeispiele (überwacht); K-Means → Ähnlichkeit ohne Zielklassen (unüberwacht); NIM → Rückmeldung zu Spielzügen (verstärkend). Entscheidend ist die Art der Information, die beim Lernen zur Verfügung steht.
 
 ## 2 · Perzeptron (Doppellektion 2)
 
