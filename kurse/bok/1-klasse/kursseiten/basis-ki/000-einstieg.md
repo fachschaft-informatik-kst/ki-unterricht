@@ -4,8 +4,8 @@
 <details class="lesson-plan" id="doppellektion-01" data-lesson="01" open>
   <summary><span class="phase-num">01</span><span>Doppellektion 1 · Was ist KI?</span><small>90 Min.</small></summary>
   <div class="detail-body">
-    <p><strong>Heute können Sie:</strong> feste Regeln und Lernen aus Daten unterscheiden, zentrale KI-Begriffe einordnen und überwachtes Lernen mit Labels an einem Beispiel erklären.</p>
-    <p class="lesson-question">Leitfrage: Wann ist ein System KI, und wie lernt es aus Beispielen?</p>
+    <p><strong>Heute können Sie:</strong> feste Regeln und Lernen aus Daten unterscheiden, zentrale KI-Begriffe einordnen und drei verschiedene Lernarten anhand von Beispielen unterscheiden.</p>
+    <p class="lesson-question">Leitfrage: Wann ist ein System KI, und welche drei Lernarten gibt es?</p>
     <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Empfehlungen, Fotofilter und Chatbots werden als KI bezeichnet. Wer die Begriffe einordnen kann, durchschaut Werbeversprechen und unterscheidet heutige Systeme von Science-Fiction.</p>
   </div>
 </details>
