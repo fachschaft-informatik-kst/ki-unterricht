@@ -4,7 +4,7 @@
       "id": "03",
       "view": "basis-neuron",
       "title": "Wie entscheidet ein Neuron?",
-      "rueckblick": "In Doppellektion 1 haben Sie drei Lernsignale unterschieden: Labels (überwachtes Lernen), Ähnlichkeit (unüberwachtes Lernen) und Rückmeldung (verstärkendes Lernen). Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron, das überwacht lernt.",
+      "rueckblick": "In Doppellektion 1 haben Sie drei verschiedene Lernarten anhand von Smiley-Spiel, K-Means und NIM erkundet: überwachtes, unüberwachtes und verstärkendes Lernen. Heute untersuchen Sie ein einzelnes künstliches Neuron, das mit vorgegebenen Zielwerten überwacht lernt.",
       "rueckblick_figur": {
         "src": "grafiken/eva_erfahrungsschatz.png",
         "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
