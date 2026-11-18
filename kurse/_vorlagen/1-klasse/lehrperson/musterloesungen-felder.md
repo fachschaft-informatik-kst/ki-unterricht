@@ -1,6 +1,6 @@
 # 1. Klasse · Feldgenaue Musterlösungen
 
-**Nur für Lehrpersonen.** Die Antworten sind altersgerechte Beispiele und keine einzig richtigen Wortlaute. Die Kennung pro Tabellenzeile entspricht dem im Lernjournal gespeicherten Feld. **Zahlen, Namen, Texte, Filmausschnitte und Notebook-Beobachtungen sind illustrative Beispiele**, wenn nicht ausdrücklich ein mathematisch bestimmtes Ergebnis genannt wird. Das echte Unterrichtsprotokoll muss die eigenen Messwerte, Textausgaben und tatsächlichen Filmbelege zeigen. Versteckte Altfelder und freiwillige Vertiefungen sind der Vollständigkeit halber enthalten.
+**Nur für Lehrpersonen.** Die Antworten sind altersgerechte Beispiele und keine einzig richtigen Wortlaute. Die Kennung pro Tabellenzeile entspricht dem im Lernjournal gespeicherten Feld. **Zahlen, Namen, Texte, Filmausschnitte und Notebook-Beobachtungen sind illustrative Beispiele**, wenn nicht ausdrücklich ein mathematisch bestimmtes Ergebnis genannt wird. Das echte Unterrichtsprotokoll muss die eigenen Messwerte, Textausgaben und tatsächlichen Filmbelege zeigen. Archivierte Antwortfelder sind zur Wiederherstellung früherer Lernjournale dokumentiert.
 
 ## Aktuelle Pflichtfelder · geführte 8-DL-Fassung
 
@@ -8,7 +8,7 @@ Die alten Antwortschlüssel bleiben zur Wiederherstellung früherer Lernjournale
 
 | Antwortfeld | Erwartungshorizont |
 |---|---|
-| `dl1_lernarten_kompakt` | Überwachtes Lernen: Zu jedem Bild gibt es ein Klassenlabel; die Gewichte werden anhand von Fehlern korrigiert. Unüberwacht: nach Ähnlichkeit gruppieren. Verstärkend: Rückmeldung/Belohnung für Handlungen. |
+| `dl1_lernarten_kompakt` | Smiley-Spiel: Trainiert mit beschrifteten Beispielen «fröhlich» und «traurig», kann neue Zeichnungen falsch einordnen (überwacht). K-Means: Ordnet unbeschriftete Punkte nach Nähe zu Gruppenmittelpunkten (unüberwacht). NIM: Spielzüge und Rückmeldungen nach Erfolg/Misserfolg beeinflussen Entscheidungen (verstärkend). Konkrete Beobachtungen zählen. |
 | `basis-projekt-frage` | Beispiel: Wir nutzen vorbereitete Kreis-/Dreieck-Daten und vermuten, dass abwechslungsreichere Trainingsbilder zu besseren Vorhersagen auf unbekannten Beispielen führen. Kein Beleg für reale Fotos. |
 | `basis-projekt-datenplan` | T1/T2 dienen Training, V1 zur begründeten Modellwahl, P1/P2 nur dem unabhängigen Abschlusstest; identische Exemplare nie zwischen Training und Test aufteilen. |
 | `basis-projekt-fazit` | Ergebnisse nur aus dem tatsächlich ausgeführten Notebook übernehmen. Erklärt, ob die Frage auf den untersuchten Bildern beantwortet wurde, benennt Grenzen (synthetische Daten, wenig Exemplare, Zufall) und nennt einen überprüfbaren nächsten Versuch. |
