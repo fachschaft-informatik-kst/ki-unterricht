@@ -6,4 +6,4 @@ Regression und die älteren Prüfungsentwürfe liegen gekennzeichnet in `archiv/
 
 Markdown-Dateien liegen in `md/`. `bash scripts/generate_worksheet_pdfs.sh --course irn/4-klasse` erzeugt daraus PDFs; `--no-solutions` lässt Lösungsblätter aus. Benötigt werden Pandoc und eine LaTeX-Installation. In diesem Änderungsstand wurden die Markdown-Quellen überarbeitet; PDFs werden nicht eingecheckt.
 
-Word-Arbeitsblätter liegen in `word/`: `Arbeitsblatt_Wissensbasiert.docx` (DL 2, «Wissensbasiert · Regeln anwenden»: Ratebaum und Akinator-Vergleich) mit Lösung `Arbeitsblatt_Wissensbasiert_Lsg.docx`.
+Word-Arbeitsblätter liegen in `word/`: `02_Arbeitsblatt.docx` zu Kapitel 02 «Wie lernt KI?» (Aufgabe 1: Ratebaum und Akinator, wissensbasiert; Aufgabe 2: Filmempfehlungen, lernend) mit Lösungen in `02_Arbeitsblatt_Lsg.docx`.
