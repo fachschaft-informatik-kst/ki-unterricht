@@ -1,5 +1,5 @@
 <details class="kapitel" id="lernarten-4" data-kurz="In Fünfergruppen drei Memory-Runden spielen: überwacht, unüberwacht, verstärkend." open>
-  <summary><span class="kapitel-nr">4</span>
+  <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Gruppen-Memory: Aufgabe und Ablauf</h2>
   </summary>
   <div class="kapitel-body">
@@ -9,10 +9,10 @@
       <p><strong>Ablauf:</strong></p>
       <ol>
         <li>Verteilen Sie die Rollen und legen Sie die Memory-Karten bereit.</li>
-        <li><strong>Runde 1 · überwacht</strong> (4 Min. spielen, 1 Min. notieren): Der Agent lernt aus Karten mit Labels. Aufgabe und Antwortfeld stehen in Kapitel 5.</li>
-        <li>Rolle wechseln. <strong>Runde 2 · unüberwacht</strong> (4 + 1 Min.): Der Agent sortiert Karten ohne Labels nach Ähnlichkeit. Aufgabe und Antwortfeld stehen in Kapitel 6.</li>
-        <li>Rolle wechseln. <strong>Runde 3 · verstärkend</strong> (4 + 1 Min.): Der Agent sucht Paare und bekommt nach jedem Zug eine Rückmeldung. Aufgabe und Antwortfeld stehen in Kapitel 7.</li>
-        <li>Vergleichen Sie danach in Kapitel 8 die drei Lernarten. Insgesamt brauchen Sie etwa 15 Minuten.</li>
+        <li><strong>Runde 1 · überwacht</strong> (4 Min. spielen, 1 Min. notieren): Der Agent lernt aus Karten mit Labels. Aufgabe und Antwortfeld stehen in Kapitel 6.</li>
+        <li>Rolle wechseln. <strong>Runde 2 · unüberwacht</strong> (4 + 1 Min.): Der Agent sortiert Karten ohne Labels nach Ähnlichkeit. Aufgabe und Antwortfeld stehen in Kapitel 7.</li>
+        <li>Rolle wechseln. <strong>Runde 3 · verstärkend</strong> (4 + 1 Min.): Der Agent sucht Paare und bekommt nach jedem Zug eine Rückmeldung. Aufgabe und Antwortfeld stehen in Kapitel 8.</li>
+        <li>Vergleichen Sie danach in Kapitel 9 die drei Lernarten. Insgesamt brauchen Sie etwa 15 Minuten.</li>
       </ol>
       <p class="small">Schreiben Sie Ihre Beobachtung direkt nach jeder Runde in das Antwortfeld des zugehörigen Kapitels. In Runde 3 lernt der Mensch als Agent, nicht die KI.</p>
     </div>

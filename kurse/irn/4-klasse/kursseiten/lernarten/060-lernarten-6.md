@@ -1,5 +1,5 @@
 <details class="kapitel" id="lernarten-6" data-kurz="Ähnliche Beispiele zu Gruppen ordnen, ohne Vorgaben. Dazu Memory-Runde 2." open>
-  <summary><span class="kapitel-nr">6</span>
+  <summary><span class="kapitel-nr">7</span>
     <h2 class="kapitel-titel">Unüberwacht · ohne Labels</h2>
   </summary>
   <div class="kapitel-body">

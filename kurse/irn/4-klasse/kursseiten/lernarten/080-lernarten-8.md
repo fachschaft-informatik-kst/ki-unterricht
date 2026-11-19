@@ -1,5 +1,5 @@
 <details class="kapitel" id="lernarten-8" data-kurz="Was lernt ein System aus Labels, aus Ähnlichkeit und aus Rückmeldung?" open>
-  <summary><span class="kapitel-nr">8</span>
+  <summary><span class="kapitel-nr">9</span>
     <h2 class="kapitel-titel">Die drei Lernarten vergleichen</h2>
   </summary>
   <div class="kapitel-body detail-body">

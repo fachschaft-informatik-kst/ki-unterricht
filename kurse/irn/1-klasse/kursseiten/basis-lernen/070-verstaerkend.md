@@ -1,5 +1,5 @@
 <details class="kapitel" id="lernarten-7" data-kurz="Handeln, Rückmeldung bekommen, Verhalten anpassen. Dazu Memory-Runde 3." open>
-  <summary><span class="kapitel-nr">7</span>
+  <summary><span class="kapitel-nr">8</span>
     <h2 class="kapitel-titel">Verstärkend · mit Rückmeldung</h2>
   </summary>
   <div class="kapitel-body">

@@ -78,6 +78,6 @@ Kein Wechsel zu weiteren Werkzeugen wie Akinator oder Filmempfehlungen.
 1. Vergleichen Sie Labels, Ähnlichkeit und Rückmeldung anhand Ihrer Beobachtungen.
 2. Ordnen Sie NIM und das kommende Bildprojekt zu. Welche Information ist jeweils entscheidend?
 3. Erklären Sie, warum im Memory ein Mensch und nicht ein Modell gelernt hat.
-4. Sicherung (einzeln, erst schreiben): Antworten Sie in zwei bis drei Sätzen auf «Wie lernt KI?» an einem Beispiel, das wir nicht besprochen haben (zum Beispiel ein Empfehlungsdienst). Nennen Sie das Lernsignal und begründen Sie, woran Sie es erkennen. Danach klärt die Lehrperson zwei strittige Zuordnungen, und Sie vergleichen mit der Selbstkontrolle auf der Kursseite (Kapitel 8).
+4. Sicherung (einzeln, erst schreiben): Antworten Sie in zwei bis drei Sätzen auf «Wie lernt KI?» an einem Beispiel, das wir nicht besprochen haben (zum Beispiel ein Empfehlungsdienst). Nennen Sie das Lernsignal und begründen Sie, woran Sie es erkennen. Danach klärt die Lehrperson zwei strittige Zuordnungen, und Sie vergleichen mit der Selbstkontrolle auf der Kursseite (Kapitel 9).
 
 > **Orientierung für die Sicherung:** Das Bildprojekt ist überwachtes Lernen mit beschrifteten Bildern. Dieselbe Lernart zieht sich durch Doppellektion 3 (Neuron: Ausgabe gegen Ziel), 4 (Ziffernnetz: richtige Ziffer als Label) und das Bildprojekt (Ihre Klassen als Labels). NIM veranschaulicht Lernen aus Rückmeldung. Für die Begründung zählt das Lernsignal, nicht der Name des Werkzeugs.

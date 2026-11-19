@@ -1,5 +1,5 @@
 <details class="kapitel" id="lernarten-5" data-kurz="Lernen mit Beispielen und richtigen Antworten (Labels). Dazu Memory-Runde 1." open>
-  <summary><span class="kapitel-nr">5</span>
+  <summary><span class="kapitel-nr">6</span>
     <h2 class="kapitel-titel">Überwacht · mit Labels</h2>
   </summary>
   <div class="kapitel-body">
