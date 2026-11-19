@@ -1,16 +1,49 @@
-<details class="kapitel" id="lernarten-1" data-kurz="Eingabe, Erfahrungsschatz, Ausgabe: Menschen schreiben Regeln oder Daten liefern sie." open>
+<details class="kapitel" id="lernarten-1" data-kurz="EVA-Modell ohne und mit Erfahrungsschatz: feste Regeln oder gelerntes Wissen." open>
   <summary><span class="kapitel-nr">1</span>
-    <h2 class="kapitel-titel">Woher kommt die Regel?</h2>
+    <h2 class="kapitel-titel">EVA-Modell ohne und mit Erfahrungsschatz</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Im Kapitel <a href="#einstieg">«Was ist KI?»</a> haben Sie zwei Wege kennengelernt, wie ein System zu seinen Regeln kommt: <strong>Menschen schreiben die Regeln auf</strong> (Schachprogramm mit festen Bewertungsregeln) oder das System <strong>lernt die Regeln aus Daten</strong> (Spamfilter). In Doppellektion 1 haben Sie gesehen, wie schwer es ist, die Regeln für «Katze auf einem Foto» von Hand aufzuschreiben. Die Grafik zeigt das <strong>EVA-Prinzip</strong>, nach dem jedes Programm arbeitet: <strong>E</strong>ingabe, <strong>V</strong>erarbeitung, <strong>A</strong>usgabe. Bei einem lernenden System kommt etwas dazu: der <strong>Erfahrungsschatz</strong>, das gespeicherte Wissen des Systems. Die Verarbeitung nutzt diesen Erfahrungsschatz, und neue Erfahrungen können ihn verändern.</p>
-    <div id="lernarten-intro">
+    <p>Jedes Programm arbeitet nach dem <strong>EVA-Prinzip</strong>: Es erhält eine <strong>E</strong>ingabe, <strong>V</strong>erarbeitet sie und liefert eine <strong>A</strong>usgabe. Im Kapitel <a href="#einstieg">«Was ist KI?»</a> haben Sie zwei Wege kennengelernt, wie ein System zu seinen Regeln kommt: Menschen schreiben sie auf, oder das System lernt sie aus Daten. Diese beiden Wege lassen sich mit zwei Varianten des EVA-Modells darstellen.</p>
+    <div id="lernarten-intro" class="eva-compare">
       <figure class="concept-figure learning-system-figure">
-        <img src="https://inf-schule.de/content/5_ki/1_menueansicht/1_basiswissen_ki/2_lernarten/2_erkundung_LernendeSysteme/evas.png" alt="EVA-Prinzip eines lernenden Systems: Eine Eingabe wird mit dem Erfahrungsschatz verarbeitet; die Ausgabe kann den Erfahrungsschatz erweitern." loading="lazy"/>
-        <figcaption>Ein lernendes System verarbeitet Eingaben mit seinem Erfahrungsschatz. Neue Erfahrungen können ihn verändern.</figcaption>
+        <img src="grafiken/eva_ohne_erfahrungsschatz.svg" alt="EVA-Modell ohne Erfahrungsschatz: Eine Eingabe wird verarbeitet und ergibt eine Ausgabe." loading="lazy"/>
+        <figcaption><strong>Ohne Erfahrungsschatz:</strong> Die Verarbeitung folgt fest programmierten Regeln.</figcaption>
       </figure>
-      <p class="small muted">In der Praxis können feste Regeln und Lernen aus Daten auch kombiniert werden.</p>
+      <figure class="concept-figure learning-system-figure">
+        <img src="grafiken/eva_mit_erfahrungsschatz.svg" alt="EVA-Modell mit Erfahrungsschatz: Die Verarbeitung nutzt den Erfahrungsschatz und kann ihn verändern." loading="lazy"/>
+        <figcaption><strong>Mit Erfahrungsschatz:</strong> Die Verarbeitung nutzt gespeichertes, gelerntes Wissen.</figcaption>
+      </figure>
     </div>
-    <label class="field answer"><span>Aufgabe: Erklären Sie die Grafik in einfachen Worten, so dass jemand sie versteht, der noch nie von KI gehört hat. Nehmen Sie den Spamfilter als Beispiel: Was ist die Eingabe? Was steckt im Erfahrungsschatz? Was ist die Ausgabe? Wie kann eine neue Erfahrung den Erfahrungsschatz verändern? Und worin unterscheidet sich das von einem Schachprogramm mit festen Regeln?</span><textarea data-answer="eva_erklaerung" maxlength="10000" placeholder="Meine Erklärung in drei bis fünf Sätzen …" rows="5"></textarea></label>
+    <p><strong>EVA-Modell ohne Erfahrungsschatz:</strong> Menschen haben vorher festgelegt, wie die Eingabe verarbeitet wird. Das Programm wendet diese Regeln immer gleich an: Dieselbe Eingabe führt immer zur selben Ausgabe, und das Programm verändert sich durch seinen Gebrauch nicht. So arbeiten ein Taschenrechner, ein Getränkeautomat oder ein Schachprogramm mit festen Bewertungsregeln.</p>
+    <p><strong>EVA-Modell mit Erfahrungsschatz:</strong> Hier kommt ein <strong>Erfahrungsschatz</strong> dazu, das gespeicherte Wissen des Systems. Er entsteht beim Lernen aus vielen Beispielen, etwa als Gewichte oder erkannte Muster. Die Verarbeitung greift darauf zurück, um zu entscheiden; die Ausgabe hängt also von der Eingabe <em>und</em> vom Erfahrungsschatz ab. Neue Erfahrungen können den Erfahrungsschatz verändern, deshalb kann dasselbe System später anders entscheiden. Ein Beispiel ist ein Spamfilter, der aus markierten E-Mails gelernt hat, woran man Spam erkennt.</p>
+    <div class="table-scroll">
+      <table class="typen">
+        <thead>
+          <tr>
+            <th>Unterscheidung</th>
+            <th>Ohne Erfahrungsschatz</th>
+            <th>Mit Erfahrungsschatz</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Woher kommen die Regeln?</th>
+            <td>Von Menschen programmiert.</td>
+            <td>Aus Beispielen gelernt und im Erfahrungsschatz gespeichert.</td>
+          </tr>
+          <tr>
+            <th>Verändert sich das System?</th>
+            <td>Nein, gleiche Eingabe ergibt immer gleiche Ausgabe.</td>
+            <td>Ja, neue Erfahrungen können den Erfahrungsschatz verändern.</td>
+          </tr>
+          <tr>
+            <th>Beispiele</th>
+            <td>Taschenrechner, Getränkeautomat, Schachprogramm mit festen Regeln.</td>
+            <td>Spamfilter, Gesichtserkennung, Übersetzungsapp.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small muted">In der Praxis werden feste Regeln und Lernen aus Daten oft kombiniert. Die Grafiken sind eigene Nachzeichnungen nach der <a href="https://inf-schule.de/ki/menueansicht" target="_blank" rel="noopener noreferrer">KI-Landkarte von inf-schule.de</a> (CC BY-SA 4.0).</p>
   </div>
 </details>

@@ -158,7 +158,7 @@ tr.wer-l td.wer{color:#1f4e8c}tr.wer-e td.wer{color:#8a5a00}tr.wer-t td.wer{colo
 .learning-system-overview .card a{font-size:13px;font-weight:650}
 .learning-system-figure{margin:18px 0}
 .learning-system-figure img{max-height:300px}
-.learning-system-figure figcaption{max-width:720px}
+.learning-system-figure figcaption{max-width:720px}.eva-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}.eva-compare .concept-figure{margin:0;padding:14px}.eva-compare img{width:100%;height:auto;max-height:none}@media(max-width:720px){.eva-compare{grid-template-columns:1fr}}
 .group-memory-instructions{margin:0 0 18px;padding:15px 18px;border-left:3px solid var(--accent);background:var(--soft)}
 .group-memory-instructions p{margin:0 0 10px;font-size:14px}
 .group-memory-instructions ol{margin:0 0 10px;padding-left:22px}
