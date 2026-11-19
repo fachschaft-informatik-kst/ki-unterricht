@@ -3,26 +3,28 @@
     <h2 class="kapitel-titel">EVA-Modell ohne und mit Erfahrungsschatz</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Jedes Programm arbeitet nach dem <strong>EVA-Prinzip</strong>: Es erhält eine <strong>E</strong>ingabe, <strong>V</strong>erarbeitet sie und liefert eine <strong>A</strong>usgabe. Im Kapitel <a href="#einstieg">«Was ist KI?»</a> haben Sie zwei Wege kennengelernt, wie ein System zu seinen Regeln kommt: Menschen schreiben sie auf, oder das System lernt sie aus Daten. Diese beiden Wege lassen sich mit zwei Varianten des EVA-Modells darstellen.</p>
+    <p>Jedes Programm arbeitet nach dem <strong>EVA-Prinzip</strong>: Es erhält eine <strong>E</strong>ingabe, <strong>V</strong>erarbeitet sie und liefert eine <strong>A</strong>usgabe. Im Kapitel <a href="#einstieg">«Was ist KI?»</a> haben Sie zwei Wege kennengelernt, wie ein System zu seinen Regeln kommt: Menschen schreiben sie auf, oder das System lernt sie aus Daten. Diese beiden Wege lassen sich mit zwei Varianten des EVA-Modells darstellen: Ein <strong>wissensbasiertes System</strong> arbeitet nach dem EVA-Modell <em>ohne</em> Erfahrungsschatz, ein <strong>lernendes System</strong> nach dem EVA-Modell <em>mit</em> Erfahrungsschatz.</p>
     <div id="lernarten-intro" class="eva-compare">
       <figure class="concept-figure learning-system-figure">
+        <p class="eva-label"><strong>Wissensbasiertes System</strong><span>EVA-Modell ohne Erfahrungsschatz</span></p>
         <img src="grafiken/eva_ohne_erfahrungsschatz.svg" alt="EVA-Modell ohne Erfahrungsschatz: Eine Eingabe wird verarbeitet und ergibt eine Ausgabe." loading="lazy"/>
-        <figcaption><strong>Ohne Erfahrungsschatz:</strong> Die Verarbeitung folgt fest programmierten Regeln.</figcaption>
+        <figcaption>Die Verarbeitung folgt fest programmierten Regeln.</figcaption>
       </figure>
       <figure class="concept-figure learning-system-figure">
+        <p class="eva-label"><strong>Lernendes System</strong><span>EVA-Modell mit Erfahrungsschatz</span></p>
         <img src="grafiken/eva_mit_erfahrungsschatz.svg" alt="EVA-Modell mit Erfahrungsschatz: Die Verarbeitung nutzt den Erfahrungsschatz und kann ihn verändern." loading="lazy"/>
-        <figcaption><strong>Mit Erfahrungsschatz:</strong> Die Verarbeitung nutzt gespeichertes, gelerntes Wissen.</figcaption>
+        <figcaption>Die Verarbeitung nutzt gespeichertes, gelerntes Wissen.</figcaption>
       </figure>
     </div>
-    <p><strong>EVA-Modell ohne Erfahrungsschatz:</strong> Menschen haben vorher festgelegt, wie die Eingabe verarbeitet wird. Das Programm wendet diese Regeln immer gleich an: Dieselbe Eingabe führt immer zur selben Ausgabe. Das Programm verändert sich durch seinen Gebrauch nicht. So arbeiten ein Taschenrechner, ein Getränkeautomat oder ein Schachprogramm mit festen Bewertungsregeln.</p>
-    <p><strong>EVA-Modell mit Erfahrungsschatz:</strong> Hier kommt ein <strong>Erfahrungsschatz</strong> dazu, das gespeicherte Wissen des Systems. Er entsteht beim Lernen aus vielen Beispielen, zum Beispiel als Gewichte von künstlichen neuronalen Netzen. Die Verarbeitung greift darauf zurück, um zu entscheiden; die Ausgabe hängt also von der Eingabe <em>und</em> vom Erfahrungsschatz ab. Neue Erfahrungen können den Erfahrungsschatz verändern. Deshalb kann dieselbe Eingabe zu zwei verschiedenen Zeitpunkten zu zwei unterschiedlichen Ausgaben führen. Ein Beispiel ist ein Spamfilter, der aus markierten E-Mails gelernt hat, woran man Spam erkennt.</p>
+    <p><strong>Wissensbasiertes System · EVA-Modell ohne Erfahrungsschatz:</strong> Menschen haben vorher festgelegt, wie die Eingabe verarbeitet wird. Das Wissen des Systems besteht aus diesen Fakten und Regeln; deshalb heisst es <strong>wissensbasiert</strong>. Das Programm wendet diese Regeln immer gleich an: Dieselbe Eingabe führt immer zur selben Ausgabe. Das Programm verändert sich durch seinen Gebrauch nicht. So arbeiten ein Taschenrechner, ein Getränkeautomat oder ein Schachprogramm mit festen Bewertungsregeln.</p>
+    <p><strong>Lernendes System · EVA-Modell mit Erfahrungsschatz:</strong> Hier kommt ein <strong>Erfahrungsschatz</strong> dazu, das gespeicherte Wissen des Systems. Er entsteht beim Lernen aus vielen Beispielen, zum Beispiel als Gewichte von künstlichen neuronalen Netzen. Weil das System seinen Erfahrungsschatz so selbst aufbaut, heisst es <strong>lernend</strong>. Die Verarbeitung greift darauf zurück, um zu entscheiden; die Ausgabe hängt also von der Eingabe <em>und</em> vom Erfahrungsschatz ab. Neue Erfahrungen können den Erfahrungsschatz verändern. Deshalb kann dieselbe Eingabe zu zwei verschiedenen Zeitpunkten zu zwei unterschiedlichen Ausgaben führen. Ein Beispiel ist ein Spamfilter, der aus markierten E-Mails gelernt hat, woran man Spam erkennt.</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
           <tr>
             <th>Unterscheidung</th>
-            <th>Ohne Erfahrungsschatz</th>
-            <th>Mit Erfahrungsschatz</th>
+            <th>Wissensbasiertes System<br/><small>ohne Erfahrungsschatz</small></th>
+            <th>Lernendes System<br/><small>mit Erfahrungsschatz</small></th>
           </tr>
         </thead>
         <tbody>
