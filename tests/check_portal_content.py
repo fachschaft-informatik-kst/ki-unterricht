@@ -67,17 +67,33 @@ block = render_fragment(
 assert "<strong>neuer</strong>" in block
 assert "<div>" in block and "</div>" in block
 
-# Markdown tables in lesson fragments must become actual HTML tables, not pipe text.
+# Markdown tables must be rendered and preserve the four Schwimmbad cases.
+# Check the logic and structure, not historical column wording: the lesson now
+# uses Sonne/Freund:innen instead of generic x₁/x₂ input labels.
 perzeptron_tables = soup.select("#perzeptron-3 table")
 assert len(perzeptron_tables) >= 2, "Perzeptron truth/calculation tables not rendered"
 truth = perzeptron_tables[0]
-assert [c.get_text(strip=True) for c in truth.select("thead th")] == [
-    "x₁", "x₂", "AND", "OR", "NAND"
+headers = [cell.get_text(" ", strip=True) for cell in truth.select("thead th")]
+assert len(headers) == 5 and headers[:2] == ["S", "F"] and all(
+    rule in header for rule, header in zip(("AND", "OR", "NAND"), headers[2:])
+), f"Unexpected Schwimmbad truth-table columns: {headers}"
+truth_rows = [
+    [int(cell.get_text(strip=True)) for cell in row.select("td")]
+    for row in truth.select("tbody tr")
 ]
-assert len(truth.select("tbody tr")) == 4
+assert truth_rows == [
+    [0, 0, 0, 0, 1],
+    [0, 1, 0, 1, 1],
+    [1, 0, 0, 1, 1],
+    [1, 1, 1, 1, 0],
+], "AND/OR/NAND truth table must cover all four Schwimmbad cases"
 calculation = perzeptron_tables[1]
 assert len(calculation.select("tbody tr")) == 4
-assert "AND-Ziel" in calculation.get_text()
+assert all(word in calculation.get_text() for word in ("Summe", "Neuron", "Ziel"))
+assert [row.select("td")[-1].get_text(" ", strip=True)
+        for row in calculation.select("tbody tr")] == [
+    "0 / 0 ✓", "0 / 0 ✓", "0 / 0 ✓", "1 / 1 ✓"
+], "The example neuron must match the AND target in all four cases"
 assert "|:--:" not in soup.select_one("#perzeptron-3").get_text()
 
 # Project diagram distinguishes pretrained feature extraction from the actual training.
