@@ -2,22 +2,6 @@
 
 **Nur für Lehrpersonen.** Die Antworten sind altersgerechte Beispiele und keine einzig richtigen Wortlaute. Die Kennung pro Tabellenzeile entspricht dem im Lernjournal gespeicherten Feld. **Zahlen, Namen, Texte, Filmausschnitte und Notebook-Beobachtungen sind illustrative Beispiele**, wenn nicht ausdrücklich ein mathematisch bestimmtes Ergebnis genannt wird. Das echte Unterrichtsprotokoll muss die eigenen Messwerte, Textausgaben und tatsächlichen Filmbelege zeigen. Versteckte Altfelder und freiwillige Vertiefungen sind der Vollständigkeit halber enthalten.
 
-## DL 2 · Wie lernt KI?
-
-| Antwortfeld | Mögliche Musterantwort |
-|---|---|
-| `eva_erklaerung` | Eingabe: neue E-Mail. Erfahrungsschatz: beim Training gelernte Merkmale und Gewichte aus gelabelten Beispielen. Ausgabe: Spam oder nicht. Eine neue Mail verändert das Modell nicht automatisch; das regelbasierte Schachprogramm lernt in diesem Beispiel nicht. |
-| `wissen_fragen` | «Ist die Figur erfunden?» – ja; «Kommt sie in einem Film vor?» – ja; «Hat sie Superkräfte?» – nein. Mit jeder Antwort werden Möglichkeiten ausgeschlossen. |
-| `wissen_unbekannt` | Das System kann falsch raten oder fragen, wer gemeint war. Das allein zeigt noch nicht, wie es intern lernt. |
-| `wissen_regeln` | Entwicklerinnen und Entwickler haben Fragen und Regeln vorgegeben; wir wissen ohne Einsicht nicht, ob und wann der Dienst zusätzliche Daten auswertet. |
-| `lernend_nachbarn` | Bei unserem Beispiel lagen ähnliche Animationsfilme beieinander, etwa weil die Genres oder Bewertungen ähnlich sind. Echte Titel aus dem Experiment nennen. |
-| `lernend_aendert` | Genre-Färbung zeigt Genres; bei Nutzerbewertungen ändern sich Farben und bei einem neuen User Index die erwarteten Bewertungen. |
-| `lernend_daten` | Aus Eigenschaften von Filmen und vergangenen Nutzerbewertungen; die genaue Datenquelle ist im Versuch nicht vollständig belegt. |
-| `memory-supervised` | Das Modell hat die richtigen Labels gesehen; es erkennt manche neue Bilder, verwechselt aber manchmal ähnliche Klassen. |
-| `memory-unsupervised` | Ich gruppierte nach Farbe. Andere hätten nach Form sortieren können; beides kann sinnvoll sein. |
-| `memory-reinforcement` | Im NIM-Spiel wird eine erfolgreiche Entscheidung belohnt und künftig häufiger gewählt. |
-| `memory` | Überwacht: richtige Labels. Unüberwacht: Ähnlichkeiten. Verstärkend: Belohnung. NIM ist verstärkendes Lernen; die Bildklassifikation ist überwachtes Lernen. |
-
 ## DL 3 · Ein Neuron und dessen Lernregel
 
 | Antwortfeld | Mögliche Musterantwort |

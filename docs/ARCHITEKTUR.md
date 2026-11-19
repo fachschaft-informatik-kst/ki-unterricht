@@ -69,8 +69,8 @@ zwischen Vorlagen und Kursen übertragen.
 ### Doppellektion ohne Unterrichtsplan
 
 Ein Bereich ohne `"teaching": true` kann mit `"lessonWithoutPlan": {"number": 1}`
-eine Doppellektionsnummer fest belegen (IRN: «01 Was ist KI?» als reine
-Theorieseite). Er hat keine `planung.json`, keinen Materialkoffer, keine
+eine Doppellektionsnummer fest belegen (IRN: «01 Was ist KI?» und «02 Wie lernt KI?»
+als reine Theorieseiten). Er hat keine `planung.json`, keinen Materialkoffer, keine
 Musterlösungen und keine Word-Dokumente, erscheint aber mit seiner Nummer in
 Navigation, Übersichtskarte und allen Lehrpersonen-Reitern (dort ohne Inhalt).
 Alle übrigen Doppellektionen werden nach ihrer `order` fortlaufend nummeriert und

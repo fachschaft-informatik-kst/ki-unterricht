@@ -51,21 +51,11 @@ Bis Ende Doppellektion 6 bei jedem Tandem kurz den Zeitplan und mögliche Daten-
 
 ## Hinweise zu Grundlagen und Transfer
 
-### Doppellektion 2 · Eine Erfahrung und ein digitales Beispiel
-
-Memory-Material und Rollen vorab bereitstellen. Die Gruppe bleibt über die drei Runden bestehen; nur die Rollen wechseln. Nach jeder Runde ein Lernsignal und eine Beobachtung notieren. Danach NIM gemeinsam am Beamer: Was ändert sich durch Rückmeldung?
-
-Beispiele erläutern, nicht als weitere Werkzeuge öffnen: ein Tier-Ratebaum auf Papier (wissensbasiert), Filmempfehlungen (lernend) und Akinator als Kontrastfall (sieht nach Regeln aus, nutzt aber Erfahrungen früherer Spielender). Smiley, K-Means und Begriffscheck stehen als Material auf der Kursseite; Quick, Draw! nur ohne persönliche Motive. Fachlich unterscheiden: Im Memory lernt ein Mensch; NIM zeigt das KI-Beispiel. Beim unüberwachten Lernen werden keine Zielklassen vorgegeben.
-
-Roter Faden «überwachtes Lernen»: Der Begriff wird hier eingeführt (Label = die richtige Antwort zu einem Beispiel) und danach jeweils mit einem Satz in Plan, Kursseite und Notebook wieder aufgegriffen: Doppellektion 3 (Neuron: Ausgabe gegen Ziel), Doppellektion 4 (Ziffernnetz: richtige Ziffer als Label), Bildprojekt (Klassen als Labels) und Doppellektion 8 (das fremde Modell kennt nur die Labels seines Trainings). In der Prüfung zählt der Begriff über das Fachgespräch (K7) mit.
-
-Zum Schluss schreibt jede Person die Leitfrage «Wie lernt KI?» an einem ungesehenen Beispiel (zum Beispiel einem Empfehlungsdienst) auf, bevor die Lehrperson klärt. Die Selbstkontrolle steht auf der Kursseite (Kapitel 8).
-
 ### Doppellektion 3 · Ein Arbeitsweg durch das Neuron
 
 Nach einem vorgeführten Beispiel im selben Notebook arbeiten. Handrechnung auf Papier daneben, nicht zusätzlich das ganze Arbeitsblatt und das ganze Notebook abarbeiten. Die Tandems stellen im Notebook Gewicht und Bias für AND und OR ein; Schwimmbad-Neuron und einen ersten Lernschritt mit AND zeigt die Lehrperson als Demo, danach lassen die Tandems selbst einen Lernschritt mit OR ablaufen (Vorhersage, Nachrechnen der ersten Korrektur); dazu kommt eine eigene Handrechnung. Die XOR-Grenze wird erst in Doppellektion 4 eingeführt.
 
-Das Neuron lernt überwacht (Begriff aus Doppellektion 2 aufgreifen): Zu jedem Beispiel ist das Ziel (Label) bekannt. Gewichte und Bias werden gelernt, Eingaben und Labels nicht. Bei falscher Ausgabe die Richtung einer Korrektur erklären lassen. Zur Brücke nach Doppellektion 4 nur sagen, dass ein einzelnes Neuron nicht jede Entscheidungsaufgabe lösen kann; die Begründung mit den Punkten folgt dort.
+Das Neuron lernt überwacht (Begriff aus dem Kapitel «Wie lernt KI?» aufgreifen): Zu jedem Beispiel ist das Ziel (Label) bekannt. Gewichte und Bias werden gelernt, Eingaben und Labels nicht. Bei falscher Ausgabe die Richtung einer Korrektur erklären lassen. Zur Brücke nach Doppellektion 4 nur sagen, dass ein einzelnes Neuron nicht jede Entscheidungsaufgabe lösen kann; die Begründung mit den Punkten folgt dort.
 
 ### Doppellektion 4 · Netz und Projektbrücke entlasten
 

@@ -4,7 +4,7 @@
 <details class="lesson-plan" id="doppellektion-03" data-lesson="03" open>
   <summary><span class="phase-num">03</span><span>Doppellektion 3 · Wie entscheidet ein Neuron?</span><small>90 Min.</small></summary>
   <div class="detail-body">
-    <p class="lesson-recap"><strong>Rückblick:</strong> In <a href="#doppellektion-02">Doppellektion 2</a> haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.</p>
+    <p class="lesson-recap"><strong>Rückblick:</strong> Im Kapitel <a href="#lernarten">«Wie lernt KI?»</a> haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.</p>
     <figure class="concept-figure">
       <img alt="EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe." loading="lazy" src="grafiken/eva_erfahrungsschatz.png"/>
       <figcaption>Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0).</figcaption>

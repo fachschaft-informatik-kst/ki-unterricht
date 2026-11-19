@@ -36,10 +36,12 @@
         "label": "02",
         "title": "Wie lernt KI?"
       },
-      "teaching": true,
       "overview": {
         "title": "Wie lernt KI?",
-        "summary": "Lernarten · Memory · Beobachtungen"
+        "summary": "EVA-Modelle · drei Lernarten"
+      },
+      "lessonWithoutPlan": {
+        "number": 2
       }
     },
     {

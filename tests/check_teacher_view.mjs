@@ -47,7 +47,7 @@ assert.match(fieldTopic("basis-sprache-pst_1_anfang"),/Anfangstext/);
 assert.match(fieldTopic("sw2_gp"),/Gewicht Prüfung/);
 assert(!fieldTopic("basis-neuron-sw_gs").includes("Originalfrage"));
 const sources=[
-  ["kursseiten/basis-ki/020-reflexion.md","regeln_oder_daten"],
+  ["kursseiten/basis-ki/020-einstieg-2.md","regeln_oder_daten"],
   ["kursseiten/einstieg/010-einstieg-1.md","dl1_regeln_automat"],
   ["kursseiten/journal/000-inhalt.md","purpose"],
   ["kursseiten/fremdmodell/030-reproduktion.md","reproduktion"]
@@ -139,9 +139,9 @@ for(const grade of [1,4]){
     lessonCount+=data.lessons.length;
   }
   // «Was ist KI?» is a theory page without plan in IRN; double lessons 2–10 keep their numbers.
-  // «Was ist KI?» is a theory page without plan in IRN but keeps DL number 01.
+  // «Was ist KI?» and «Wie lernt KI?» are theory pages without plan in IRN but keep DL numbers 01 and 02.
   const withoutPlan=manifest.sections.filter(s=>s.lessonWithoutPlan).map(s=>s.lessonWithoutPlan.number);
-  assert.deepEqual(withoutPlan,[1]);
+  assert.deepEqual(withoutPlan,[1,2]);
   assert(lessonCount+withoutPlan.length>=10,"IRN must retain complete double-lesson coverage");
 }
 const fake={
@@ -200,10 +200,10 @@ const docGithub=async(_t,p)=>{
   throw Object.assign(Error("missing"),{status:404});
 };
 const index=await loadDocuments("t",irnProfile,docGithub,"r");
-assert.equal(index.documents.length,45);
-assert.equal(new Set(index.documents.map(d=>d.dl+"-"+d.phase)).size,45,"One document per DL and phase");
-assert.equal(index.documents[0].url,documentUrl("irn/4-klasse","DL02_1_Ankommen.docx"));
-assert.equal(index.documents[0].url,"/teacher/dokumente/DL02_1_Ankommen.docx?course=irn%2F4-klasse");
+assert.equal(index.documents.length,40);
+assert.equal(new Set(index.documents.map(d=>d.dl+"-"+d.phase)).size,40,"One document per DL and phase");
+assert.equal(index.documents[0].url,documentUrl("irn/4-klasse","DL03_1_Ankommen.docx"));
+assert.equal(index.documents[0].url,"/teacher/dokumente/DL03_1_Ankommen.docx?course=irn%2F4-klasse");
 assert.match(index.zip.url,/^\/teacher\/dokumente\/IRN_4-Klasse_Alle_Dokumente\.zip\?course=irn%2F4-klasse$/);
 assert.equal(await loadDocuments("t",options.find(c=>c.slug==="bok/4-klasse"),docGithub,"r"),null,
   "Courses without documents show an empty area instead of failing");
@@ -213,18 +213,19 @@ const encoded=value=>({encoding:"base64",content:Buffer.from(value).toString("ba
 const irnSources={
   "kurse/irn/4-klasse/kursseiten/manifest.json":JSON.stringify({sections:[{id:"x",teaching:true}]}),
   "kurse/irn/4-klasse/kursseiten/x/planung.json":JSON.stringify({lessons:[
-    {id:"a",order:10,view:"x",title:"A",phases:[]},{id:"b",order:20,view:"x",title:"B",phases:[]}]}),
-  "kurse/irn/4-klasse/kursseiten/x/materialien.md":"## Doppellektion 02\n\nText",
+    {id:"a",order:10,view:"x",title:"A",phases:[]},{id:"b",order:20,view:"x",title:"B",phases:[]},
+    {id:"c",order:30,view:"x",title:"C",phases:[]}]}),
+  "kurse/irn/4-klasse/kursseiten/x/materialien.md":"## Doppellektion 03\n\nText",
   "kurse/irn/4-klasse/lehrperson/materialien.md":"Einleitung"
 };
 const irnGithub=async(t,p)=>{
   const file=p.split("/contents/")[1]?.split("?")[0];
   return file in irnSources?encoded(irnSources[file]):docGithub(t,p);
 };
-const kitDocs=await teacherData({course:"irn/4-klasse",kind:"materialien"},"t",irnGithub,"r",2,options);
+const kitDocs=await teacherData({course:"irn/4-klasse",kind:"materialien"},"t",irnGithub,"r",3,options);
 assert.deepEqual(kitDocs.documents.map(d=>d.phase),[1,2,3,4,5],"Materialkoffer receives the documents of its DL");
-assert(kitDocs.documents.every(d=>d.dl===2));
+assert(kitDocs.documents.every(d=>d.dl===3));
 const allDocs=await teacherData({course:"irn/4-klasse",kind:"dokumente"},"t",irnGithub,"r",1,options);
-assert.equal(allDocs.documents.length,45);
+assert.equal(allDocs.documents.length,40);
 assert(allDocs.zip.file.endsWith(".zip"));
 console.log("PASS teacher view: DL navigation, color coding, lesson-specific materials, precise questions");

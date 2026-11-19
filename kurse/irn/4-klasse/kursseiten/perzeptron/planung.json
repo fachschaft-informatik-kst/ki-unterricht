@@ -4,7 +4,7 @@
       "id": "03",
       "view": "perzeptron",
       "title": "Wie entscheidet ein Neuron?",
-      "rueckblick": "In Doppellektion 2 haben Sie drei Lernsignale unterschieden: Labels (überwachtes Lernen), Ähnlichkeit (unüberwachtes Lernen) und Rückmeldung (verstärkendes Lernen). Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron, das überwacht lernt.",
+      "rueckblick": "Im Kapitel «Wie lernt KI?» haben Sie drei Lernsignale unterschieden: Labels (überwachtes Lernen), Ähnlichkeit (unüberwachtes Lernen) und Rückmeldung (verstärkendes Lernen). Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron, das überwacht lernt.",
       "rueckblick_figur": {
         "src": "grafiken/eva_erfahrungsschatz.png",
         "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
@@ -43,7 +43,7 @@
               "art": "Auftrag",
               "wer": "Klasse",
               "min": 2,
-              "text": "Benennen Sie gemeinsam zur AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe (Label), ordnen Sie das einer Lernart aus Doppellektion 2 zu und sagen Sie in einem Satz, worin sich AND und OR unterscheiden."
+              "text": "Benennen Sie gemeinsam zur AND-Entscheidung die zwei Eingaben und die gewünschte Ausgabe (Label), ordnen Sie das einer Lernart aus dem Kapitel «Wie lernt KI?» zu und sagen Sie in einem Satz, worin sich AND und OR unterscheiden."
             },
             {
               "art": "Ergebnis",

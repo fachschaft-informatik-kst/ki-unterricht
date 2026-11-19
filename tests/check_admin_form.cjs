@@ -199,14 +199,14 @@ const server=http.createServer((req,res)=>{
     await page.locator("#editMaterials").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/1-klasse/kursseiten/basis-neuron/materialien.md");
     await page.locator("#courseSelect").selectOption("irn4");
-    await page.locator("#section").selectOption("lernarten");
+    await page.locator("#section").selectOption("perzeptron");
     await page.locator("#chapters button").first().click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/4-klasse/kursseiten/lernarten/"));
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/4-klasse/kursseiten/perzeptron/"));
     await page.locator("#editPlan").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/lernarten/planung.json");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/perzeptron/planung.json");
     assert.equal(await page.locator("#formEditor").isVisible(),true);
     await page.locator("#editMaterials").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/lernarten/materialien.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/perzeptron/materialien.md");
     await page.locator("#editGlossary").click();
     await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/4-klasse/kursseiten/glossar.json");
     await page.locator("#courseSelect").selectOption("irn1");

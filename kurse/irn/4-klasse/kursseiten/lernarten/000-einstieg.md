@@ -1,14 +1,4 @@
-<span class="section-label">Doppellektion 2</span>
+<span class="section-label">Theorie</span>
 <h1>Drei Wege zu lernen.</h1>
-<!-- LESSONS:lernarten -->
-<details class="lesson-plan" id="doppellektion-02" data-lesson="02" open>
-  <summary><span class="phase-num">02</span><span>Doppellektion 2 · Wie lernt KI?</span><small>90 Min.</small></summary>
-  <div class="detail-body">
-    <p class="lesson-recap"><strong>Rückblick:</strong> Im Kapitel <a href="#einstieg">«Was ist KI?»</a> haben Sie Regeln von Menschen und Lernen aus Daten unterschieden. Heute untersuchen Sie, welche Information ein System beim Lernen erhält.</p>
-    <p><strong>Heute können Sie:</strong> Wissensbasierte und lernende Systeme sowie drei Lernarten an Beispielen unterscheiden.</p>
-    <p class="lesson-question">Leitfrage: Wie lernt KI? Welche Information erhält ein System beim Lernen: Labels, Ähnlichkeit oder Rückmeldung?</p>
-    <p class="lesson-motivation"><strong>Warum das wichtig ist:</strong> Wer weiss, woraus ein System lernt, versteht auch, was es falsch lernen kann.</p>
-  </div>
-</details>
-<!-- /LESSONS:lernarten -->
+<p class="section-intro">Diese Seite fasst die Grundlagen zusammen: wissensbasierte und lernende Systeme im EVA-Modell sowie die drei Lernarten überwachtes, unüberwachtes und verstärkendes Lernen. Sie dient zum Nachlesen und enthält keine Aufgaben.</p>
 <p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#glossar-unueberwachtes-lernen">unüberwachtes Lernen</a> · <a href="#glossar-verstaerkendes-lernen">verstärkendes Lernen</a> · <a href="#glossar-erfahrungsschatz">Erfahrungsschatz</a></p>

@@ -51,12 +51,6 @@ Bis Ende Doppellektion 6 bei jedem Tandem kurz den Zeitplan und mögliche Daten-
 
 ## Hinweise zu Grundlagen und Transfer
 
-### Doppellektion 2 · Eine Erfahrung und ein digitales Beispiel
-
-Memory-Material und Rollen vorab bereitstellen. Die Gruppe bleibt über die drei Runden bestehen; nur die Rollen wechseln. Nach jeder Runde ein Lernsignal und eine Beobachtung notieren. Danach NIM gemeinsam am Beamer: Was ändert sich durch Rückmeldung?
-
-Akinator und Filmempfehlungen als Beispiele erläutern, nicht als weitere Pflichttools öffnen. Smiley, K-Means und Begriffscheck sind Wahlmaterial; Quick, Draw! nur freiwillig ohne persönliche Motive. Fachlich unterscheiden: Im Memory lernt ein Mensch; NIM zeigt das KI-Beispiel. Beim unüberwachten Lernen werden keine Zielklassen vorgegeben.
-
 ### Doppellektion 3 · Ein Arbeitsweg durch das Neuron
 
 Nach einem vorgeführten Beispiel im selben Notebook arbeiten. Handrechnung auf Papier daneben, nicht zusätzlich das ganze Arbeitsblatt und das ganze Notebook abarbeiten. Pflicht: Gewicht/Bias, ein Lernschritt, Lernen beobachten, XOR-Grenze. Pflanzen und echte Ziffern sind Vertiefung.
