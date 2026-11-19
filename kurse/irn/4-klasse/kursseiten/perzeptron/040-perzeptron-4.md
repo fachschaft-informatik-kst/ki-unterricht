@@ -3,7 +3,7 @@
     <h2 class="kapitel-titel">Was lernt ein Neuron genau?</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Von Hand einzustellen ist schon bei zwei Eingängen mühsam, bei 1280 Bildmerkmalen unmöglich. Darum lässt man das Neuron <strong>lernen</strong>: Es bekommt Beispiele mit bekannter Lösung, dem <strong>Ziel</strong> (auch <strong>Label</strong> genannt). Diese Lernart kennen Sie aus Doppellektion 2: <strong>überwachtes Lernen</strong>. Die Beispiele heissen <strong>Trainingsdaten</strong>; die Lernregel passt die Zahlen des Neurons Schritt für Schritt an.</p>
+    <p>Von Hand einzustellen ist schon bei zwei Eingängen mühsam, bei 1280 Bildmerkmalen unmöglich. Darum lässt man das Neuron <strong>lernen</strong>: Es bekommt Beispiele mit bekannter Lösung, dem <strong>Ziel</strong> (auch <strong>Label</strong> genannt). Diese Lernart kennen Sie aus dem Kapitel <a href="#lernarten">«Wie lernt KI?»</a>: <strong>überwachtes Lernen</strong>. Die Beispiele heissen <strong>Trainingsdaten</strong>; die Lernregel passt die Zahlen des Neurons Schritt für Schritt an.</p>
     <p><strong>Gelernt werden nur die Gewichte und der Bias.</strong> Die Rechnung «Summe bilden, ab 0 feuern» ändert sich nie. Beim Lernen verschieben sich nur die Zahlen, die Sie im Notebook als Regler eingestellt haben. Diese Zahlen sind der <strong>Erfahrungsschatz</strong> des Neurons aus dem EVA-Bild: Alles, was es aus den Beispielen «behalten» hat, steckt darin.</p>
     <div class="table-scroll">
       <table class="typen">

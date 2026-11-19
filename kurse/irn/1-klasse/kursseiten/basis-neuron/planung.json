@@ -4,7 +4,7 @@
       "id": "b03",
       "view": "basis-neuron",
       "title": "Wie entscheidet ein Neuron?",
-      "rueckblick": "In Doppellektion 2 haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.",
+      "rueckblick": "Im Kapitel «Wie lernt KI?» haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.",
       "rueckblick_figur": {
         "src": "grafiken/eva_erfahrungsschatz.png",
         "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",

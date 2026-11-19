@@ -4,59 +4,9 @@
   "generator": "scripts/build_student_documents.py",
   "zip": {
     "file": "IRN_1-Klasse_Alle_Dokumente.zip",
-    "bytes": 1698116
+    "bytes": 1514724
   },
   "documents": [
-    {
-      "dl": 2,
-      "lesson": "Wie lernt KI?",
-      "phase": 1,
-      "phaseName": "Ankommen",
-      "minutes": 5,
-      "title": "Was hilft beim Lernen?",
-      "file": "DL02_1_Ankommen.docx",
-      "bytes": 38943
-    },
-    {
-      "dl": 2,
-      "lesson": "Wie lernt KI?",
-      "phase": 2,
-      "phaseName": "Vorwissen aktivieren",
-      "minutes": 5,
-      "title": "Woher kommt die Regel?",
-      "file": "DL02_2_Vorwissen_aktivieren.docx",
-      "bytes": 39011
-    },
-    {
-      "dl": 2,
-      "lesson": "Wie lernt KI?",
-      "phase": 3,
-      "phaseName": "Informieren",
-      "minutes": 15,
-      "title": "EVA und drei Lernsignale",
-      "file": "DL02_3_Informieren.docx",
-      "bytes": 38950
-    },
-    {
-      "dl": 2,
-      "lesson": "Wie lernt KI?",
-      "phase": 4,
-      "phaseName": "Verarbeiten",
-      "minutes": 55,
-      "title": "Memory und Rückmeldung bei NIM",
-      "file": "DL02_4_Verarbeiten.docx",
-      "bytes": 39314
-    },
-    {
-      "dl": 2,
-      "lesson": "Wie lernt KI?",
-      "phase": 5,
-      "phaseName": "Auswerten",
-      "minutes": 10,
-      "title": "Lernarten vergleichen und sichern",
-      "file": "DL02_5_Auswerten.docx",
-      "bytes": 39148
-    },
     {
       "dl": 3,
       "lesson": "Wie entscheidet ein Neuron?",

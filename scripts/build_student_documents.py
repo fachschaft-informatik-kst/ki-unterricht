@@ -66,10 +66,10 @@ FIXED_DATE = (2026, 1, 1, 0, 0, 0)
 # Sätze und Absätze, die sich an die Lehrperson richten oder Lösungen verraten.
 # Jede Regel muss genau einmal greifen; so fällt eine geänderte Vorlage sofort auf.
 # Gilt für alle Kurse der 4. Klasse (BOK, IRN, Vorlage), die denselben Materialkoffer nutzen.
-# Regeln für den Materialkoffer der 1. Doppellektion «Was ist KI?». Sie greifen nur, wenn ein Kurs
-# diesen Plan noch hat (IRN führt «Was ist KI?» als reine Theorieseite ohne Plan).
-EINSTIEG_EDITS: dict[str, list[tuple[str, str]]] = {
-    "4-klasse": [
+# Regeln für den Materialkoffer einzelner Bereiche. Sie greifen nur, wenn ein Kurs für diesen
+# Bereich noch einen Plan hat (IRN führt «Was ist KI?» und «Wie lernt KI?» als Theorieseiten ohne Plan).
+VIEW_EDITS: dict[str, dict[str, list[tuple[str, str]]]] = {
+    "einstieg": {"4-klasse": [
         ("Der Input ist in zwei Blöcke geteilt. Block 1 (7 Min.): Regeln von Menschen oder Lernen "
          "aus Daten, mit Bilderkennung und Schachprogramm. Dann der Abrufauftrag (2 Min.): Ohne "
          "Unterlagen erklären die Tandems einander in zwei Sätzen, wer bei einem Schachprogramm "
@@ -81,11 +81,13 @@ EINSTIEG_EDITS: dict[str, list[tuple[str, str]]] = {
         ("**Antwortort:** [Fall «Schulweg» auf der Kursseite](index.html#einstieg-5). Einzelne "
          "Gruppen teilen ihre Argumente nur sehr kurz; kein zusätzliches Präsentationsfenster.",
          "**Antwortort:** [Fall «Schulweg» auf der Kursseite](index.html#einstieg-5)."),
-    ],
+    ]},
+    "lernarten": {"4-klasse": [
+        ("Kein Wechsel zu weiteren Werkzeugen wie Akinator oder Filmempfehlungen.\n", ""),
+    ]},
 }
 EDITS: dict[str, list[tuple[str, str]]] = {
     "4-klasse": [
-        ("Kein Wechsel zu weiteren Werkzeugen wie Akinator oder Filmempfehlungen.\n", ""),
         ("**Lehrperson:** Zeigt den Schritt im Neuron-Labor; die Klasse sagt vorher, was sich ändert.",
          "Die Lehrperson zeigt den Schritt im Neuron-Labor. Sagen Sie vorher, was sich ändert."),
         ("Die algebraischen Bedingungen nur nennen und nicht vorführen: Das Tandem schreibt sie im "
@@ -208,8 +210,9 @@ def material_sources(base: Path, lessons: list[dict]) -> str:
 def apply_edits(source: str, course: str, views: set[str] | None = None) -> str:
     grade = course.split("/")[-1]
     rules = EDITS.get(grade, [])
-    if views is None or "einstieg" in views:
-        rules = EINSTIEG_EDITS.get(grade, []) + rules
+    for view, by_grade in VIEW_EDITS.items():
+        if views is None or view in views:
+            rules = by_grade.get(grade, []) + rules
     for old, new in rules:
         count = source.count(old)
         if count != 1:

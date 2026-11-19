@@ -2,24 +2,6 @@
 
 **Nur für Lehrpersonen.** Zu jedem in der Kursseite gespeicherten Antwortfeld steht unten eine mögliche Antwort. Die Kennung in der linken Spalte ist die technische Journal-/Antwortkennung und erleichtert den Abgleich mit ZIP-Dateien. **Alle Zahlen, Namen, Filmfortsetzungen und Beobachtungen ohne Originalnachweis sind frei erfundene didaktische Beispiele**, keine tatsächlich ausgeführten Notebooks und keine echten Projektmessungen. Bei offenen Fragen gelten andere fachlich begründete Antworten ebenso. Bei Videoaufgaben müssen Lernende den tatsächlichen Film und die echte Zeitmarke belegen. Versteckte Alt-Felder und weitere Übungen sind nur der Vollständigkeit halber dokumentiert.
 
-## DL 2 · Lernen aus Daten
-
-| Antwortfeld | Beispielantwort / Erwartungshorizont |
-|---|---|
-| `eva_erklaerung` | Spamfilter: Eingabe neue E-Mail; Erfahrungsschatz gelernte Parameter aus beschrifteten Trainingsmails; Ausgabe Spam oder kein Spam. Eine einzelne Benutzung ändert die Parameter nicht automatisch. Das Schachprogramm folgt hier festen Suchregeln. |
-| `wissen_fragen` | Beispielbaum für fünf Tiere: «Lebt es im Wasser?» → ja → «Hat es Flossen?» → ja → Fisch, nein → Frosch; auf «Lebt es im Wasser?» → nein → «Hat es Federn?» → ja → Adler, nein → «Bellt es?» → ja → Hund, nein → Katze. Jede Antwort bestimmt die nächste Frage. |
-| `wissen_unbekannt` | Der Baum führt trotzdem zu einem der fünf Tiere (zum Beispiel Adler für den Pinguin) oder endet ohne Ergebnis. Er hat keine Regel für das neue Tier und lernt es nicht von selbst. |
-| `wissen_regeln` | Das Tandem hat Fragen und Reihenfolge festgelegt. Der Baum ändert sich nur, wenn Menschen ihn umbauen; er vergleicht keine Ergebnisse und passt sich nicht an. |
-| `wissen_akinator` | Beobachtungen können abweichen. Mögliche Belege: Er rät auch seltene Figuren, die niemand in eine feste Fragenliste geschrieben hätte; bei mehrfach falschem Raten fragt er nach dem Namen der Figur und erweitert seine Datenbank; er nutzt Erfahrungen früherer Spielender. Wie er genau arbeitet, ist nicht öffentlich; die Aussage «lernt aus früheren Spielen» stützt sich auf die Beschreibung des Anbieters und auf Beobachtungen. |
-| `lernend_nachbarn` | In meinem Beispiel lagen mehrere ähnliche Animationsfilme nahe beieinander; Gemeinsamkeiten waren Genre und ähnliche Bewertungsmuster. Tatsächliche Filmtitel aus dem eigenen Versuch einsetzen. |
-| `lernend_aendert` | Bei Genre werden Genregruppen sichtbar; bei vorhergesagter Bewertung ändern sich die Farben je Nutzer. Ein anderer User Index kann andere Prognosen ergeben. |
-| `lernend_daten` | Vermutlich aus Filmmerkmalen, Nutzendenbewertungen und ihren Mustern; die genaue Implementierung bleibt ohne Dokumentation offen. |
-| `memory-supervised` | Mit gelabelten Beispielen werden Regeln für die beiden Klassen gelernt. Bei ähnlichen Bildern kann das Modell auch falsch zuordnen; das am eigenen Versuch prüfen. |
-| `memory-unsupervised` | Ohne Labels lassen sich beispielsweise Karten nach Farbe oder Form clustern. Je nach Merkmal sind mehrere sinnvolle Gruppierungen möglich. |
-| `memory-reinforcement` | Beim NIM-Spiel wird eine erfolgreiche Zugfolge belohnt bzw. die Rückmeldung verstärkt künftige Entscheidungen; das ist verstärkendes Lernen. |
-| `memory` | Überwacht: Lernen mit richtigen Labels. Unüberwacht: ähnliche Fälle gruppieren. Verstärkend: Belohnung nach Handlungen. NIM ist verstärkend, das Bildprojekt nutzt überwachtes Lernen. |
-| `lernart_sicherung` | Beispiel: Ein Musikdienst empfiehlt Lieder. Lernsignal: Rückmeldung (angehört, übersprungen, «Gefällt mir») oder Ähnlichkeit (Menschen mit ähnlichem Geschmack). Erkennbar daran, dass die Empfehlung aus früheren Daten entsteht und nicht aus einer festgelegten Regel. Labels nur, wenn die Lieder vorher beschriftet wurden. Mehrere Antworten sind richtig, wenn das Lernsignal begründet ist; bewertet wird die Begründung, nicht der Name der Lernart. |
-
 ## DL 3 · Neuron und Protokoll
 
 | Antwortfeld | Beispielantwort / Erwartungshorizont |

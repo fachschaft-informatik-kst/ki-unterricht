@@ -2,24 +2,6 @@
 
 **Für die Lehrperson.** Die Antworten sind Beispiele, keine einzig zulässigen Formulierungen. Bei eigenen Bildern, Lernstrecken und Notebook-Experimenten zählen tatsächliche Beobachtungen und Belege. **Illustrative Zahlen sind ausdrücklich keine gemessenen Ergebnisse.**
 
-## 2 · Lernarten (Doppellektion 2)
-
-### EVA und Wissen
-
-Beim **Spamfilter** ist die Eingabe eine E-Mail. Beim Training sieht das Modell Beispiele mit richtigen Labels und passt Parameter an. Diese Parameter bilden den «Erfahrungsschatz». Bei einer neuen E-Mail entsteht daraus eine Vorhersage; nicht jede Benutzung trainiert das Modell erneut.
-
-**Akinator:** Fragen wie «Ist die Figur erfunden?» oder «Ist sie aus einem Film?» schränken Möglichkeiten ein. Eine unbekannte Figur kann nicht vorhanden sein. Fragen und Entscheidungslogik sind hinterlegtes Wissen. Ein realer Onlinedienst kann zusätzlich Daten sammeln und lernen; das Beispiel allein belegt keine konkrete Implementierung.
-
-**Filmlandkarte:** Nahe Filme können Gemeinsamkeiten bei Genre oder Nutzerbewertungen haben. Beim Wechsel des Nutzers können sich prognostizierte Bewertungen ändern. **Konkrete Filmtitel und Beobachtungen müssen aus dem eigenen Versuch stammen.**
-
-### Drei Lernarten – Memory und NIM
-
-- **Überwachtes Lernen:** Beispiele mit korrektem Label, z. B. «das Bild zeigt eine Katze».
-- **Unüberwachtes Lernen:** Muster und Gruppen ohne vorgegebene Labels, z. B. nach Farbe oder Form.
-- **Verstärkendes Lernen:** Rückmeldung über Erfolg/Misserfolg nach Handlungen; beim NIM-Spiel können erfolgreiche Züge verstärkt werden.
-
-**Zuordnung:** richtige Antworten ↔ überwacht; Ähnlichkeiten ↔ unüberwacht; Belohnung ↔ verstärkend. Verschiedene plausible Gruppierungen sind beim unüberwachten Beispiel zulässig.
-
 ## 3 · Perzeptron (Doppellektion 3)
 
 ### Wie entscheidet ein Neuron?

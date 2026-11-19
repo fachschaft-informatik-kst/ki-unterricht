@@ -19,7 +19,7 @@ Ein Warnsignal soll nur angehen, wenn **beide** Sensoren aktiv sind (AND). Ergä
 
 **Klasse · 2 Min.**
 
-Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Welche Lernart aus DL 2 passt, wenn zu jedem Beispiel die richtige Ausgabe bekannt ist (überwachtes Lernen)? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
+Markieren Sie gemeinsam an der Tabelle: Was sind die **Eingaben**, was die **gewünschten Ausgaben / Labels**? Welche Lernart aus dem Kapitel «Wie lernt KI?» passt, wenn zu jedem Beispiel die richtige Ausgabe bekannt ist (überwachtes Lernen)? Beschreiben Sie in einem Satz, wann sich AND und OR unterscheiden.
 
 ### Informieren · 22 Min. · Rechenkarte für ein Neuron
 

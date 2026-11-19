@@ -70,10 +70,12 @@
         "label": "02",
         "title": "Wie lernt KI?"
       },
-      "teaching": true,
       "overview": {
         "title": "Wie lernt KI?",
-        "summary": "Memory · NIM · drei Lernarten"
+        "summary": "EVA-Modelle · drei Lernarten"
+      },
+      "lessonWithoutPlan": {
+        "number": 2
       }
     },
     {

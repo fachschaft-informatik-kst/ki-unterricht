@@ -18,7 +18,7 @@
       <p class="eva-label"><strong>Verstärkendes Lernen</strong><span>Lernsignal: Rückmeldung (Belohnung oder Bestrafung)</span></p>
       <div class="lernart-scroll"><img class="lernart-img lernart-img-ve" src="grafiken/lernart_verstaerkend.png" alt="Kreislauf des verstärkenden Lernens: Zustand erfassen, beste Aktion durchführen, Folgezustand bewerten, Güte der Aktion anpassen, dann wieder Zustand erfassen." loading="lazy"/></div>
     </figure>
-    <p>Das System lernt durch <strong>Handeln</strong> in einem Kreislauf: Es <strong>erfasst den Zustand</strong>, zum Beispiel die aktuelle Spielsituation, und <strong>führt die Aktion durch</strong>, die es für die beste hält. Danach <strong>bewertet es den Folgezustand</strong>: War die Aktion gut, gibt es eine Belohnung, sonst eine Bestrafung. Damit <strong>passt es die Güte der Aktion an</strong>, also wie gut es diese Aktion in diesem Zustand künftig einschätzt. Dieser Kreislauf wiederholt sich viele Male, und so entsteht nach und nach eine gute <strong>Strategie</strong>. Die Lernart eignet sich, wenn sich automatisch prüfen lässt, ob eine Entscheidung gut war. <em>Beispiele:</em> Strategiespiele wie NIM, eine Ampelsteuerung, die Wartezeiten verringern soll.</p>
+    <p>Das System lernt durch <strong>Handeln</strong> in einem Kreislauf: Es <strong>erfasst den Zustand</strong>, zum Beispiel die aktuelle Spielsituation, und <strong>führt die Aktion durch</strong>, die es für die beste hält. Danach <strong>bewertet es den Folgezustand</strong>: War die Aktion gut, gibt es eine Belohnung, sonst eine Bestrafung. Damit <strong>passt es die Güte der Aktion an</strong>, also wie gut es diese Aktion in diesem Zustand künftig einschätzt. Dieser Kreislauf wiederholt sich viele Male, und so entsteht nach und nach eine gute <strong>Strategie</strong>. Die Lernart eignet sich, wenn sich automatisch prüfen lässt, ob eine Entscheidung gut war. <em>Beispiele:</em> Strategiespiele wie NIM, ein Roboter, der durch Ausprobieren laufen lernt.</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
@@ -42,7 +42,7 @@
           <tr>
             <th>Verstärkend</th>
             <td>Aus Belohnung oder Bestrafung nach eigenen Handlungen.</td>
-            <td>Strategiespiele, Ampelsteuerung</td>
+            <td>Strategiespiele, laufender Roboter</td>
           </tr>
         </tbody>
       </table>

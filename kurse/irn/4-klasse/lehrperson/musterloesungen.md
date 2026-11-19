@@ -2,26 +2,6 @@
 
 **Für die Lehrperson.** Die Antworten sind Beispiele, keine einzig zulässigen Formulierungen. Bei eigenen Bildern, Lernstrecken und Notebook-Experimenten zählen tatsächliche Beobachtungen und Belege. **Illustrative Zahlen sind ausdrücklich keine gemessenen Ergebnisse.**
 
-## 2 · Lernarten (Doppellektion 2)
-
-### EVA und Wissen
-
-Beim **Spamfilter** ist die Eingabe eine E-Mail. Beim Training sieht das Modell Beispiele mit richtigen Labels und passt Parameter an. Diese Parameter bilden den «Erfahrungsschatz». Bei einer neuen E-Mail entsteht daraus eine Vorhersage; nicht jede Benutzung trainiert das Modell erneut.
-
-**Wissensbasiert (Ratebaum auf Papier):** Fragen wie «Lebt es im Wasser?» oder «Hat es Federn?» schränken die Möglichkeiten ein. Ein Tier, das nicht im Baum steht, kann der Baum nicht erkennen; er endet ohne Ergebnis oder bei einem falschen Tier. Fragen und Reihenfolge sind hinterlegtes Wissen, das nur Menschen ändern.
-
-**Akinator (Kontrastfall):** Er stellt ebenfalls Ja-Nein-Fragen, nutzt aber Erfahrungen früherer Spielender; bei mehrfach falschem Raten fragt er nach dem Namen der Figur und erweitert seine Datenbank. Er ist deshalb kein Beispiel für ein System, das nicht lernt. Wie er genau arbeitet, ist nicht öffentlich.
-
-**Filmlandkarte:** Nahe Filme können Gemeinsamkeiten bei Genre oder Nutzerbewertungen haben. Beim Wechsel des Nutzers können sich prognostizierte Bewertungen ändern. **Konkrete Filmtitel und Beobachtungen müssen aus dem eigenen Versuch stammen.**
-
-### Drei Lernarten – Memory und NIM
-
-- **Überwachtes Lernen:** Beispiele mit korrektem Label, z. B. «das Bild zeigt eine Katze». Dieselbe Lernart begegnet den Lernenden später im Neuron (DL 3), im Ziffernnetz (DL 4) und im Bildprojekt.
-- **Unüberwachtes Lernen:** Muster und Gruppen ohne vorgegebene Labels, z. B. nach Farbe oder Form.
-- **Verstärkendes Lernen:** Rückmeldung über Erfolg/Misserfolg nach Handlungen; beim NIM-Spiel können erfolgreiche Züge verstärkt werden.
-
-**Zuordnung:** richtige Antworten ↔ überwacht; Ähnlichkeiten ↔ unüberwacht; Belohnung ↔ verstärkend. Verschiedene plausible Gruppierungen sind beim unüberwachten Beispiel zulässig.
-
 ## 3 · Perzeptron (Doppellektion 3)
 
 ### Wie entscheidet ein Neuron?

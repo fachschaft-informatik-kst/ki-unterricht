@@ -48,10 +48,11 @@ assert "3 von 33 Punkten je Person" in fragments["08"]
 irn = ROOT / "kurse/irn/4-klasse"
 irn_lessons = load_course(irn)["lessons"]
 irn_fragments = build_materials.lesson_materials(irn, irn_lessons)
-# IRN führt «Was ist KI?» als Theorieseite ohne Plan; die Doppellektionen 2–10 bleiben.
-assert len(irn_fragments) == 9
-assert irn_lessons[0]["number"] == 2
-assert load_course(irn)["placeholders"] == [{"number": 1, "title": "Was ist KI?", "view": "einstieg"}]
+# IRN führt «Was ist KI?» und «Wie lernt KI?» als Theorieseiten ohne Plan; DL 3–10 behalten ihre Nummern.
+assert len(irn_fragments) == 8
+assert irn_lessons[0]["number"] == 3
+assert load_course(irn)["placeholders"] == [{"number": 1, "title": "Was ist KI?", "view": "einstieg"},
+                                               {"number": 2, "title": "Wie lernt KI?", "view": "lernarten"}]
 for lesson in irn_lessons:
     source = irn_fragments[lesson["id"]]
     phases = re.findall(r"^### ([^·\n]+) · (\d+) Min\. · (.+)$", source, re.M)

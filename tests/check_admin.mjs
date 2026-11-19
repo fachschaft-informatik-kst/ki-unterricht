@@ -267,8 +267,8 @@ try{
   // Word documents: session download, signed short-lived link for the local Word app.
   const docRoot=bySlug["irn/4-klasse"].courseRoot+"/lehrperson/dokumente/";
   sources.set(docRoot+"dokumente.json",readFileSync(new URL("../"+docRoot+"dokumente.json",import.meta.url),"utf8"));
-  sources.set(docRoot+"DL02_1_Ankommen.docx","DOCX-BYTES");
-  const docPath="/teacher/dokumente/DL02_1_Ankommen.docx?course=irn%2F4-klasse";
+  sources.set(docRoot+"DL03_1_Ankommen.docx","DOCX-BYTES");
+  const docPath="/teacher/dokumente/DL03_1_Ankommen.docx?course=irn%2F4-klasse";
   assert.equal((await route(docPath)).status,302,"Documents require OAuth without a ticket");
   const direct=await route(docPath,{headers:{Cookie:"ki_session="+session}});
   assert.equal(direct.status,200,await direct.clone().text());
@@ -276,13 +276,13 @@ try{
   assert.match(direct.headers.get("Content-Type"),/wordprocessingml/);
   assert.equal((await route("/teacher/dokumente/Unlisted.docx?course=irn%2F4-klasse",
     {headers:{Cookie:"ki_session="+session}})).status,404,"Only indexed documents are served");
-  assert.equal((await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL02_1_Ankommen.docx")).status,401);
-  const linkResponse=await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL02_1_Ankommen.docx",
+  assert.equal((await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL03_1_Ankommen.docx")).status,401);
+  const linkResponse=await route("/api/teacher/dokument-link?course=irn%2F4-klasse&file=DL03_1_Ankommen.docx",
     {headers:{Cookie:"ki_session="+session}});
   assert.equal(linkResponse.status,200,await linkResponse.clone().text());
   const link=await linkResponse.json();
   assert.equal(link.word,"ms-word:ofe|u|"+link.url);
-  assert(link.url.startsWith("https://teacher-editor.example/teacher/dokumente/DL02_1_Ankommen.docx?course=irn%2F4-klasse&ticket="));
+  assert(link.url.startsWith("https://teacher-editor.example/teacher/dokumente/DL03_1_Ankommen.docx?course=irn%2F4-klasse&ticket="));
   assert(!link.url.includes("test-user-token"),"The GitHub token is encrypted in the ticket");
   const signedPath=link.url.replace("https://teacher-editor.example","");
   const viaWord=await route(signedPath);
@@ -291,7 +291,7 @@ try{
   const head=await route(signedPath,{method:"HEAD"});
   assert.equal(head.status,200);assert.equal(await head.text(),"");
   assert.equal((await route(signedPath,{method:"OPTIONS"})).status,200);
-  assert.equal((await route(signedPath.replace("DL02_1_Ankommen","DL02_2_Vorwissen_aktivieren"))).status,403,
+  assert.equal((await route(signedPath.replace("DL03_1_Ankommen","DL03_2_Vorwissen_aktivieren"))).status,403,
     "A ticket is bound to one document");
   assert.equal((await route(signedPath.replace("irn%2F4-klasse","bok%2F4-klasse"))).status,403);
   const ticket=new URL(link.url).searchParams.get("ticket");
@@ -334,23 +334,27 @@ const irnGithub=async(_token,route)=>{
   return {encoding:"base64",content:Buffer.from(irnSources[name]).toString("base64")};
 };
 const irnPlan=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo");
-// «01 Was ist KI?» has no plan but keeps its number in every teacher tab; DL 2–10 keep theirs.
+// «01 Was ist KI?» and «02 Wie lernt KI?» have no plan but keep their numbers in every teacher tab; DL 3–10 keep theirs.
 assert.deepEqual(irnPlan.lessons.map(l=>l.number),[1,2,3,4,5,6,7,8,9,10]);
 assert.equal(irnPlan.lessons[0].title,"Was ist KI?");
 assert.equal(irnPlan.lessons[0].withoutPlan,true);
+assert.equal(irnPlan.lessons[1].title,"Wie lernt KI?");
+assert.equal(irnPlan.lessons[1].withoutPlan,true);
 assert.equal(irnPlan.selectedNumber,1);
 assert.equal(irnPlan.withoutPlan,true,"DL 01 opens empty instead of falling back to DL 02");
 assert.equal(irnPlan.lesson,null);
 const irnPlan2=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo",2);
-assert.equal(irnPlan2.lesson.view,"basis-lernen");
+assert.equal(irnPlan2.withoutPlan,true,"DL 02 opens empty as well");
+const irnPlan3=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo",3);
+assert.equal(irnPlan3.lesson.view,"basis-neuron");
 for(const kind of ["materialien","musterloesungen"]){
   const empty=await teacherData({course:"irn/1-klasse",kind},"token",irnGithub,"example/repo",1);
   assert(empty.withoutPlan&&!empty.sections.length&&!empty.entries.length,kind+" stays empty for DL 01");
 }
 assert(irnPlan.lessons.every(l=>l.view.startsWith("basis-")));
-const irnKit=await teacherData({course:"irn/1-klasse",kind:"materialien"},"token",irnGithub,"example/repo",2);
+const irnKit=await teacherData({course:"irn/1-klasse",kind:"materialien"},"token",irnGithub,"example/repo",3);
 assert(irnKit.sections[0].markdown.length>20);
-const irnSolutions=await teacherData({course:"irn/1-klasse",kind:"musterloesungen"},"token",irnGithub,"example/repo",2);
+const irnSolutions=await teacherData({course:"irn/1-klasse",kind:"musterloesungen"},"token",irnGithub,"example/repo",3);
 assert(irnSolutions.sections[0].markdown.length>50);
 
 const teacherKit=await teacherData({course:"bok/1-klasse",kind:"materialien"},"token",fakeGithub,"example/repo");
