@@ -240,7 +240,7 @@ body .nav a[aria-current],body .nav a:hover{border-left-color:var(--accent)}
 .kapitel>summary h2{margin:0;font-size:1.3rem;line-height:1.25;font-weight:700}
 .kapitel>.kapitel-body{padding:6px 26px 26px}
 .kapitel>.kapitel-body>:first-child{margin-top:16px}
-.nav-sub{display:grid;gap:1px;margin:2px 0 10px 22px;padding-left:8px;border-left:2px solid var(--line)}
+.nav-sub{display:grid;gap:1px;margin:2px 0 10px 22px;padding-left:8px;border-left:2px solid var(--line)}.chapter-toggle{display:block;margin:0 0 12px auto;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:white;color:var(--accent);font:600 13px/1.2 system-ui,sans-serif;cursor:pointer}.chapter-toggle:hover{border-color:var(--accent)}.chapter-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px}@media print{.chapter-toggle{display:none}}
 body .nav .nav-sub a{padding:5px 10px;border-left-width:0;border-radius:6px;font-size:12.5px;line-height:1.35}
 .nav-sub a span{width:18px;font-size:11px}
 @media(max-width:720px){.nav-sub{display:none}.kapitel>summary{padding:13px 16px}.kapitel>.kapitel-body{padding:4px 16px 18px}.kapitel>summary h2{font-size:1.1rem}}

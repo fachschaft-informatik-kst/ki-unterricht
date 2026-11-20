@@ -80,6 +80,11 @@ def assemble(pages: Path | None = None, manifest_path: str = "kurse/bok/4-klasse
         overview.append(f'<a class="course-card" href="#{section["id"]}"><span class="tag">{number} Doppellektion</span>'
                         f'<h3>{html.escape(html.unescape(title))}</h3><p>{html.escape(summary)}</p><span aria-hidden="true" class="course-arrow">↗</span></a>')
     page = (PORTAL / "index.template.html").read_text(encoding="utf-8")
+    if manifest.get("chapterControls"):
+        # Kurs-Option: Knopf «Alle Teile einklappen» und erneuter Klick auf die aktive Doppellektion klappt ein.
+        if page.count("<body>") != 1:
+            raise ValueError("Expected exactly one <body>")
+        page = page.replace("<body>", "<body data-chapter-controls>", 1)
     rendered = []
     for section in sections:
         view = section["id"]
