@@ -77,6 +77,15 @@ Alle übrigen Doppellektionen werden nach ihrer `order` fortlaufend nummeriert u
 überspringen reservierte Nummern. So bleiben die Nummern stabil, auch wenn im
 Editor Doppellektionen ergänzt oder umsortiert werden.
 
+### Teile ein- und ausklappen (Kursoption)
+
+Mit `"chapterControls": true` im `manifest.json` (aktuell nur IRN 4) erhält jede
+Doppellektion über ihren Teilen einen Knopf «Alle Teile einklappen» bzw. «Alle Teile
+ausklappen». Ein erneuter Klick auf die bereits ausgewählte Doppellektion in der
+Navigation hebt die Auswahl auf, blendet die Unterpunkte aus und klappt alle Teile
+ein; ein weiterer Klick stellt Auswahl, Unterpunkte und den vorherigen Zustand der
+Teile wieder her. Bereiche im Seitenmodus (`pages`) sind ausgenommen.
+
 ### Seitenmodus und Unternavigation (4. Klasse)
 
 Ein Bereich im `manifest.json` kann `"pages": "<Name der Startseite>"` setzen

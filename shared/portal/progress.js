@@ -154,6 +154,42 @@ function route(){
  });
 }
 window.addEventListener('hashchange',route);
+// Kurs-Option data-chapter-controls (IRN 4): Knopf «Alle Teile einklappen» je Doppellektion und
+// erneuter Klick auf die aktive Doppellektion in der Navigation klappt alle Teile ein bzw. wieder auf.
+if(document.body.hasAttribute('data-chapter-controls')){
+ const chaptersOf=view=>Array.from(view.querySelectorAll(':scope > details.kapitel'));
+ const syncButton=view=>{const b=view.querySelector(':scope > .chapter-toggle');if(!b)return;const anyOpen=chaptersOf(view).some(k=>k.open);
+  b.textContent=anyOpen?'Alle Teile einklappen':'Alle Teile ausklappen';b.setAttribute('aria-expanded',String(anyOpen));};
+ for(const view of views){
+  if(view.hasAttribute('data-pages'))continue;
+  const chapters=chaptersOf(view);if(!chapters.length)continue;
+  const b=document.createElement('button');b.type='button';b.className='chapter-toggle';
+  b.addEventListener('click',()=>{const open=!chapters.some(k=>k.open);chapters.forEach(k=>k.open=open);syncButton(view);});
+  chapters[0].before(b);chapters.forEach(k=>k.addEventListener('toggle',()=>syncButton(view)));syncButton(view);
+ }
+ const saved=new Map();
+ links.forEach(a=>a.addEventListener('click',e=>{
+  const view=views.find(v=>'#'+v.id===a.hash);
+  if(!view||view!==currentView||view.hasAttribute('data-pages'))return;
+  const chapters=chaptersOf(view);if(!chapters.length)return;
+  e.preventDefault();
+  if(a.hasAttribute('aria-current')){
+   // Auswahl aufheben: Unterpunkte ausblenden und alle Teile einklappen (Zustand merken).
+   saved.set(view,chapters.map(k=>k.open));chapters.forEach(k=>k.open=false);
+   a.removeAttribute('aria-current');a.setAttribute('aria-expanded','false');
+   all('.nav-sub').forEach(x=>x.remove());
+  }else{
+   // Erneuter Klick: wie vorher, also Auswahl, Unterpunkte und vorherige Teile wiederherstellen.
+   const prev=saved.get(view);chapters.forEach((k,i)=>k.open=prev?prev[i]:true);saved.delete(view);
+   a.setAttribute('aria-current','page');a.setAttribute('aria-expanded','true');
+   renderChapters(view,null);
+  }
+  syncButton(view);
+  if(location.hash!==a.hash)history.replaceState(null,'',a.hash);
+  window.scrollTo({top:0,behavior:'instant'});
+ }));
+ window.addEventListener('hashchange',()=>{saved.clear();links.forEach(a=>a.removeAttribute('aria-expanded'));});
+}
 document.addEventListener('DOMContentLoaded',()=>{if(currentView)renderChapters(currentView,currentPage);});
 window.KIProgress={get:()=>structuredClone(state),restore:raw=>{state=valid(raw);render();save();}};
 render();filter();experiment('vielfalt');document.documentElement.classList.add('has-js');route();
