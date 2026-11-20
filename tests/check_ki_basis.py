@@ -114,17 +114,21 @@ def main():
                 all_text=[label.text for label in svg.findall(f'.//{ns}text')]
                 for expected_text in ('AND','Σ + b','+0,5','Ja','y = 1'):
                     assert expected_text in all_text,(diagram,expected_text)
-                direct_nodes=list(svg)
+                # Bias labels reuse data-node IDs; select circles only. Some
+                # neurons also show their rule name before the numeric output,
+                # so locate the value inside each circle rather than relying on
+                # the order of SVG elements.
+                texts=svg.findall(f'.//{ns}text')
                 for node_id,value in (('s','1'),('f','0'),('p','0'),('or','1'),('nand','1'),('no_exam','1')):
-                    candidates=[index for index,element in enumerate(direct_nodes)
-                                if element.get('data-node')==node_id]
-                    assert len(candidates)==1,(diagram,node_id)
-                    first_text=next(element for element in direct_nodes[candidates[0]+1:]
-                                    if element.tag==f'{ns}text')
-                    if node_id=='no_exam':
-                        first_text=next(element for element in direct_nodes[candidates[0]+1:]
-                                        if element.tag==f'{ns}text' and element.text==value)
-                    assert first_text.text==value,(diagram,node_id,first_text.text)
+                    circles=svg.findall(f'.//{ns}circle[@data-node="{node_id}"]')
+                    assert len(circles)==1,(diagram,node_id,len(circles))
+                    circle=circles[0]
+                    cx,cy,r=(float(circle.get(key)) for key in ('cx','cy','r'))
+                    values=[el for el in texts if el.text==value and
+                            el.get('x') is not None and el.get('y') is not None and
+                            abs(float(el.get('x'))-cx)<r and
+                            abs(float(el.get('y'))-cy)<r]
+                    assert len(values)==1,(diagram,node_id,value,len(values))
                 # Position labels consistently on their own connections:
                 # 32% from each input; 50% from hidden neuron to output.
                 segments={edge.get('data-edge'):edge for edge in svg.findall(f'.//{ns}line[@class="network-edge"]')}
