@@ -42,10 +42,16 @@ console.log=(...args)=>{if(!(args.length===1&&noise.test(String(args[0]))))log(.
   for(const e of fs.readdirSync(dir,{withFileTypes:true})){
    if(e.name==='__pycache__')continue;
    if(e.isDirectory())copy(path.join(dir,e.name),dest+'/'+e.name);
-   else if(/\.(py|json|html|js)$/.test(e.name))py.FS.writeFile(dest+'/'+e.name,fs.readFileSync(path.join(dir,e.name)));
+   else if(/\.(py|json|html|js|svg)$/.test(e.name))py.FS.writeFile(dest+'/'+e.name,fs.readFileSync(path.join(dir,e.name)));
   }
  }
- for(const course of courses)copy(path.join(root,course.courseRoot,'content'),`/project/${course.courseRoot}/content`);
+ // Notebook cells reference content/img/*.svg; check_ki_basis.py also parses
+ // assets/grafiken/*.svg. Both must exist in Pyodide's isolated filesystem.
+ for(const course of courses){
+  const base=path.join(root,course.courseRoot);
+  copy(path.join(base,'content'),`/project/${course.courseRoot}/content`);
+  copy(path.join(base,'assets','grafiken'),`/project/${course.courseRoot}/assets/grafiken`);
+ }
  copy(path.join(root,'_build/content'),'/project/_build/content');
  copy(path.join(root,'tests'),'/project/tests');
  await py.runPythonAsync(`

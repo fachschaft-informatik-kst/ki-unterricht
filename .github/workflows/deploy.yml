@@ -63,11 +63,13 @@ jobs:
             echo "worker_changed=true" >> "$GITHUB_OUTPUT"
             echo "runtime_changed=true" >> "$GITHUB_OUTPUT"
             echo "editor_content_only=false" >> "$GITHUB_OUTPUT"
+            echo "pyodide_changed=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           site=false
           worker=false
           runtime=false
+          pyodide=false
           editor_content_only=true
           changed=0
           while IFS= read -r -d '' file; do
@@ -118,13 +120,16 @@ jobs:
                 editor_content_only=false
                 ;;
             esac
+            # Check the real Pyodide runner immediately when the runner itself changes.
+            if [[ "$file" == "tests/check_pyodide.cjs" ]]; then pyodide=true; fi
           done < /tmp/ki-changed-paths
           if [ "$changed" -eq 0 ]; then editor_content_only=false; fi
           echo "editor_content_only=$editor_content_only" >> "$GITHUB_OUTPUT"
           echo "site_changed=$site" >> "$GITHUB_OUTPUT"
           echo "worker_changed=$worker" >> "$GITHUB_OUTPUT"
           echo "runtime_changed=$runtime" >> "$GITHUB_OUTPUT"
-          echo "Impact: site=$site worker=$worker runtime=$runtime editor_content_only=$editor_content_only"
+          echo "pyodide_changed=$pyodide" >> "$GITHUB_OUTPUT"
+          echo "Impact: site=$site worker=$worker runtime=$runtime pyodide=$pyodide editor_content_only=$editor_content_only"
       - name: Verify Worker-only changes
         if: steps.scope.outputs.worker_changed == 'true' && steps.scope.outputs.site_changed != 'true'
         run: |
@@ -282,8 +287,9 @@ jobs:
       # version that the browser runtime uses (about 3 minutes). Keep the pin in
       # sync with jupyterlite-pyodide-kernel in requirements.txt (0.5.0 bundles
       # Pyodide 0.27.0).
-      - name: Nightly check of all notebooks in Pyodide
-        if: steps.scope.outputs.full == 'true'
+      - name: Check all notebooks in Pyodide (nightly or runner changes)
+        # Avoid waiting for the next nightly run to discover defects in this test harness.
+        if: steps.scope.outputs.full == 'true' || steps.scope.outputs.pyodide_changed == 'true'
         timeout-minutes: 15
         run: |
           npm install --no-save pyodide@0.27.0
