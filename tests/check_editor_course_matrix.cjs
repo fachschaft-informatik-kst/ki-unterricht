@@ -60,7 +60,22 @@ const server=http.createServer((req,res)=>{
       await page.locator("#courseSelect").selectOption(keys[slug]);
       const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,profile.manifest),"utf8"));
       const section=manifest.sections.find(section=>section.teaching);
-      assert(section,slug+" has no teaching lessons");
+      if(!section){
+        // A course may consist only of theory pages without plan (IRN 1: «Was ist KI?»).
+        assert(manifest.sections.some(s=>s.lessonWithoutPlan),slug+" has neither plans nor theory pages");
+        const theory=manifest.sections.find(s=>s.lessonWithoutPlan);
+        await page.locator("#section").selectOption(theory.id);
+        await page.locator("#chapters button").first().click();
+        await page.waitForFunction(root=>document.querySelector("#path")?.textContent?.startsWith(root+"/kursseiten/"),root);
+        assert.match(await page.locator("#preview").getAttribute("srcdoc"),/<section/);
+        await page.locator("#editSolutions").click();
+        await page.waitForFunction(root=>document.querySelector("#path")?.textContent===root+"/lehrperson/musterloesungen.md",root);
+        await page.locator("#editSolutionFields").click();
+        await page.waitForFunction(root=>document.querySelector("#path")?.textContent===root+"/lehrperson/musterloesungen-felder.md",root);
+        assert.equal(await page.locator("#pendingCount").textContent(),"0");
+        console.log("PASS "+slug+": theory chapters and private solutions (no AVIVA plan)");
+        continue;
+      }
       await page.locator("#section").selectOption(section.id);
       await page.locator("#chapters button").first().click();
       await page.waitForFunction(root=>document.querySelector("#path")?.textContent?.startsWith(root+"/kursseiten/"),root);

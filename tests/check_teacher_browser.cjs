@@ -258,8 +258,8 @@ const ROOT=path.resolve(__dirname,"..");
           "rgb("+irnTheme.slice(1).match(/../g).map(value=>parseInt(value,16)).join(", ")+")");
       }
     }
-    // 1st grade material has no phase sections: one bar with five documents, top right.
-    await page.goto(origin+"/teacher/irn/1-klasse/materialien?dl=3");
+    // 1st grade material has no phase sections: one bar with five documents, top right (BOK 1; IRN 1 has no plans).
+    await page.goto(origin+"/teacher/bok/1-klasse/materialien?dl=3");
     await page.locator(".material-documents").waitFor();
     const bar=page.locator(".material-documents .material-phase-download");
     assert.equal(await bar.count(),5);
@@ -272,7 +272,7 @@ const ROOT=path.resolve(__dirname,"..");
     assert(boxes.every((box,i)=>!i||box.y>=boxes[i-1].y+boxes[i-1].height-1),"Phase links must not overlap");
     for(let i=0;i<5;i++)
       assert.match(decodeURIComponent(await bar.nth(i).getAttribute("href")),
-        new RegExp("^/teacher/dokumente/DL03_"+(i+1)+"_.+\\.docx\\?course=irn/1-klasse$"));
+        new RegExp("^/teacher/dokumente/DL03_"+(i+1)+"_.+\\.docx\\?course=bok/1-klasse$"));
 
     // «Alle Dokumente»: overview of every generated file and one ZIP download.
     await page.goto(origin+"/teacher/irn/4-klasse/materialien?dl="+irnStart);

@@ -50,7 +50,7 @@ const embedded=`<!doctype html><html><meta charset="utf-8"><body><script>
   for(const [route,selector,frameSelector,loaderSelector] of [
     ['bok/1-klasse/','.ki-notebook-block .ki-notebook-launch','#basis-lab-frame','#basis-lab-loading'],
     ['bok/4-klasse/','#start-project','#project-frame','#project-lab-loading'],
-    ['irn/1-klasse/','.ki-notebook-block .ki-notebook-launch','#basis-lab-frame','#basis-lab-loading'],
+    // IRN 1 has no notebooks on its course page (only «Was ist KI?»).
     ['irn/4-klasse/','#start-project','#project-frame','#project-lab-loading']
   ]){
    const page=await browser.newPage();
@@ -83,7 +83,7 @@ const embedded=`<!doctype html><html><meta charset="utf-8"><body><script>
       el.contentWindow.studentValue='unsaved first notebook';
       return el.contentWindow.boot;
     });
-    const secondName=route==='irn/1-klasse/'?'basis_netze.ipynb':'mehrschichtige_netze.ipynb';
+    const secondName='mehrschichtige_netze.ipynb';
     const clickNotebook=name=>page.locator(`.ki-notebook-block[data-notebook$="/${name}"] .ki-notebook-launch`).first().evaluate(el=>el.click());
     await clickNotebook(secondName);
     await page.waitForFunction(([sel,name])=>document.querySelector(sel)?.getAttribute('src')?.includes(encodeURIComponent(name)),

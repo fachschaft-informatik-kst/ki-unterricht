@@ -31,7 +31,7 @@ def ids_are_unique(soup, attr, selector=None):
 def verify_course(manifest_path):
     model = load_course(ROOT, manifest_path)
     lessons = model["lessons"]
-    assert lessons, manifest_path
+    assert lessons or model["placeholders"], manifest_path
     manifest = json.loads((ROOT / manifest_path).read_text(encoding="utf-8"))
     reserved = {slot["number"] for slot in model["placeholders"]}
     expected = [n for n in range(1, len(lessons) + len(reserved) + 1) if n not in reserved][:len(lessons)]

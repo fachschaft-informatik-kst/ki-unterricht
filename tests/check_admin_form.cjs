@@ -137,8 +137,8 @@ const server=http.createServer((req,res)=>{
         content:"# Vorgemerkt\n",original:"# Original\n"},
         {path:"kurse/bok/4-klasse/projekt/grafiken/uploads/recovered.png",
           expectedSha:null,content:"aW1hZ2U="}];
-      draft.courses["irn/1-klasse"]={staged:[],section:"basis-neuron",current:{
-        path:"kurse/irn/1-klasse/kursseiten/basis-neuron/materialien.md",
+      draft.courses["irn/1-klasse"]={staged:[],section:"basis-ki",current:{
+        path:"kurse/irn/1-klasse/kursseiten/basis-ki/010-programmierung.md",
         sha:"a".repeat(40),original:"# Original IRN\n",content:"# Entwurf IRN\n"}};
       localStorage.setItem(key,JSON.stringify(draft));
     },{draftPath});
@@ -188,16 +188,11 @@ const server=http.createServer((req,res)=>{
     await page.locator("#editGlossary").click();
     await page.locator("#path").filter({hasText:"kurse/irn/1-klasse/kursseiten/glossar.json"}).waitFor();
 
-    // The copied IRN courses must support the same four editor workflows:
-    // chapters, structured AVIVA, material cases and per-course glossary.
-    await page.locator("#section").selectOption("basis-neuron");
+    // IRN 1 keeps only the theory page «Was ist KI?»; its chapters stay editable.
+    await page.locator("#section").selectOption("basis-ki");
     await page.locator("#chapters button").first().click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/1-klasse/kursseiten/basis-neuron/"));
-    await page.locator("#editPlan").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/1-klasse/kursseiten/basis-neuron/planung.json");
-    assert.equal(await page.locator("#formEditor").isVisible(),true);
-    await page.locator("#editMaterials").click();
-    await page.waitForFunction(()=>document.querySelector("#path")?.textContent==="kurse/irn/1-klasse/kursseiten/basis-neuron/materialien.md");
+    await page.waitForFunction(()=>document.querySelector("#path")?.textContent?.startsWith("kurse/irn/1-klasse/kursseiten/basis-ki/"));
+    // The copied IRN 4 course supports chapters, structured AVIVA, material cases and its glossary.
     await page.locator("#courseSelect").selectOption("irn4");
     await page.locator("#section").selectOption("perzeptron");
     await page.locator("#chapters button").first().click();

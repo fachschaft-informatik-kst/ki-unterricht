@@ -3,7 +3,11 @@ const assert=require("node:assert/strict");
 const {spawn}=require("node:child_process");
 const path=require("node:path");
 const {chromium}=require("playwright");
-const courses=require("../shared/course-sites.json").courses.filter(c=>c.status==="published"&&(!process.argv[2]||c.slug===process.argv[2]));
+const fs=require("node:fs");
+// Courses whose page has no notebooks (IRN 1: only the theory page «Was ist KI?») are skipped.
+const hasNotebookPage=c=>JSON.parse(fs.readFileSync(path.resolve(__dirname,"..",c.manifest),"utf8"))
+  .sections.some(s=>s.id===(c.grade===1?"basis-neuron":"perzeptron"));
+const courses=require("../shared/course-sites.json").courses.filter(c=>c.status==="published"&&hasNotebookPage(c)&&(!process.argv[2]||c.slug===process.argv[2]));
 assert(courses.length,"No published courses selected");
 const site=process.env.PORTAL_SITE||path.resolve(__dirname,"../dist");
 const base="http://127.0.0.1:8774";

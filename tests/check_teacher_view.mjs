@@ -118,17 +118,22 @@ const courseMock=async(_token,path)=>{
 assert.deepEqual((await loadTeacherCourses("token",courseMock,"example/repo")).map(x=>x.ready),
   [true,true,true,true],"Course picker must use the source registry");
 
-// Both IRN courses contain complete independent copies of the original BOK content.
+// IRN courses are independent copies that the teacher reshaped on purpose:
+// IRN 4 dropped the learning objectives and keeps DL 01/02 as theory pages without plan;
+// IRN 1 keeps only «01 Was ist KI?» (theory page without plan).
+const irnShape={
+  1:{removedAllBut:["basis-start","basis-ki"],withoutPlan:[1],lessons:1},
+  4:{removed:["lernziele"],withoutPlan:[1,2],lessons:10}
+};
 for(const grade of [1,4]){
   const root="../kurse/irn/"+grade+"-klasse/kursseiten/";
   const template="../kurse/_vorlagen/"+grade+"-klasse/kursseiten/";
   const manifest=JSON.parse(readFileSync(new URL(root+"manifest.json",import.meta.url),"utf8"));
   const reference=JSON.parse(readFileSync(new URL(template+"manifest.json",import.meta.url),"utf8"));
-  // IRN removed the learning-objectives page on purpose; every other template section stays.
-  const removed=new Set(["lernziele","basis-lernziele"]);
+  const shape=irnShape[grade];
   const ids=new Set(manifest.sections.map(s=>s.id));
-  assert(reference.sections.every(s=>removed.has(s.id)||ids.has(s.id)),
-    "IRN preserves its full template as the starting structure");
+  const expected=shape.removedAllBut||reference.sections.map(s=>s.id).filter(id=>!shape.removed.includes(id));
+  assert(expected.every(id=>ids.has(id)),"IRN keeps the intended sections of its template");
   assert(validateManifest(manifest));
   let lessonCount=0;
   for(const section of manifest.sections.filter(s=>s.teaching)){
@@ -138,11 +143,9 @@ for(const grade of [1,4]){
     const data=JSON.parse(source);assert(validatePlan(data));
     lessonCount+=data.lessons.length;
   }
-  // «Was ist KI?» is a theory page without plan in IRN; double lessons 2–10 keep their numbers.
-  // «Was ist KI?» and «Wie lernt KI?» are theory pages without plan in IRN but keep DL numbers 01 and 02.
   const withoutPlan=manifest.sections.filter(s=>s.lessonWithoutPlan).map(s=>s.lessonWithoutPlan.number);
-  assert.deepEqual(withoutPlan,[1,2]);
-  assert(lessonCount+withoutPlan.length>=10,"IRN must retain complete double-lesson coverage");
+  assert.deepEqual(withoutPlan,shape.withoutPlan);
+  assert.equal(lessonCount+withoutPlan.length,shape.lessons,"IRN "+grade+" double-lesson coverage");
 }
 const fake={
   "kurse/bok/1-klasse/kursseiten/manifest.json":JSON.stringify({sections:[{id:"basis-test",teaching:true}]}),
