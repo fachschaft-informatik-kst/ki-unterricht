@@ -120,8 +120,8 @@ jobs:
                 editor_content_only=false
                 ;;
             esac
-            # Check the real Pyodide runner immediately when the runner itself changes.
-            if [[ "$file" == "tests/check_pyodide.cjs" ]]; then pyodide=true; fi
+            # Recheck Pyodide when its runner or shared course tests change.
+            if [[ "$file" == "tests/check_pyodide.cjs" || "$file" == "tests/check_ki_basis.py" ]]; then pyodide=true; fi
           done < /tmp/ki-changed-paths
           if [ "$changed" -eq 0 ]; then editor_content_only=false; fi
           echo "editor_content_only=$editor_content_only" >> "$GITHUB_OUTPUT"

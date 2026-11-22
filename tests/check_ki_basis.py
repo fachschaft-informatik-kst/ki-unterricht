@@ -38,16 +38,26 @@ def main():
     import re
     import xml.etree.ElementTree as ET
     asset_dir=content.parent/'assets'/'grafiken'
-    names=('neuron_entscheider.svg','neuron_entscheider_mobil.svg',
-           'schwimmbad_lernschritt.svg','schwimmbad_lernschritt_mobil.svg',
-           'schwimmbad_xor_einzelne_neuron.svg',
-           'schwimmbad_xor_einzelne_neuron_mobil.svg',
-           'schwimmbad_xor_netz.svg','schwimmbad_xor_netz_mobil.svg')
+    # BOK and templates use the new Schwimmbad diagrams; IRN deliberately
+    # maintains its own older SVG set. Only enforce shared file integrity on IRN.
+    irn='irn' in content.parts
+    names=(('neuron_entscheider.svg','perzeptron.svg','xor_gerade.svg') if irn else
+           ('neuron_entscheider.svg','neuron_entscheider_mobil.svg',
+            'schwimmbad_lernschritt.svg','schwimmbad_lernschritt_mobil.svg',
+            'schwimmbad_xor_einzelne_neuron.svg',
+            'schwimmbad_xor_einzelne_neuron_mobil.svg',
+            'schwimmbad_xor_netz.svg','schwimmbad_xor_netz_mobil.svg'))
     for diagram in names:
         svg=ET.parse(asset_dir/diagram).getroot()
         w,h=(float(v) for v in svg.attrib['viewBox'].split()[2:])
-        assert w>0 and h>0 and svg.find('{http://www.w3.org/2000/svg}title') is not None
-        assert svg.find('{http://www.w3.org/2000/svg}desc') is not None
+        assert svg.tag=='{http://www.w3.org/2000/svg}svg' and w>0 and h>0,diagram
+        if irn:
+            # IRN originals may omit <title>/<desc> and use different geometry.
+            # Check that the independent graphics are valid, nonempty SVG files.
+            assert len(svg)>0,diagram
+            continue
+        assert svg.find('{http://www.w3.org/2000/svg}title') is not None,diagram
+        assert svg.find('{http://www.w3.org/2000/svg}desc') is not None,diagram
         def walk(elem,scale=1.,shift_x=0.,shift_y=0.):
             tr=elem.attrib.get('transform','')
             m=re.search(r'translate\(([-.\d]+)\s+([-.\d]+)\)',tr)
