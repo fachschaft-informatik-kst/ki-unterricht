@@ -2,7 +2,7 @@
 
 Ich kann …
 
-- KI, maschinelles Lernen und neuronale Netze unterscheiden und Beispiele zuordnen.
+- KI, maschinelles Lernen und künstliche neuronale Netze unterscheiden und Beispiele zuordnen.
 - überwachtes, unüberwachtes und verstärkendes Lernen anhand der Rückmeldung unterscheiden.
 - erklären, wofür ein künstliches Neuron da ist, und Eingaben, Gewichte, Bias und Ausgabe eines Perzeptrons erklären.
 - sagen, was beim überwachten Lernen gelernt wird (Gewichte und Bias), und einen Lernschritt nachvollziehen (Ausgabe gegen Ziel).

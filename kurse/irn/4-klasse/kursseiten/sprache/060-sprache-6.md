@@ -1,9 +1,9 @@
-<details class="kapitel" id="sprache-6" data-kurz="Vom Zählen zum Rechnen: Warum ein neuronales Netz mehr ist als eine Häufigkeitstabelle." open>
+<details class="kapitel" id="sprache-6" data-kurz="Vom Zählen zum Rechnen: Warum ein künstliches neuronales Netz mehr ist als eine Häufigkeitstabelle." open>
   <summary><span class="kapitel-nr">6</span>
-    <h2 class="kapitel-titel">Vom Papagei zum neuronalen Netz</h2>
+    <h2 class="kapitel-titel">Vom Papagei zum künstlichen neuronalen Netz</h2>
   </summary>
   <div class="kapitel-body">
-    <p>Das Papagei-Modell zählt Wortfolgen. Heutige Sprachmodelle wie ChatGPT sagen ebenfalls das nächste Wort voraus, aber sie zählen nicht nur: Dahinter steckt ein <strong>neuronales Netz</strong>. Es nutzt dieselben Grundideen, die Sie schon kennen (Gewichte, Summen, Schichten), ist aber viel grösser, anders aufgebaut (Transformer-Architektur) und hat Milliarden von Gewichten.</p>
+    <p>Das Papagei-Modell zählt Wortfolgen. Heutige Sprachmodelle wie ChatGPT sagen ebenfalls das nächste Wort voraus, aber sie zählen nicht nur: Dahinter steckt ein <strong>künstliches neuronales Netz</strong>. Es nutzt dieselben Grundideen, die Sie schon kennen (Gewichte, Summen, Schichten), ist aber viel grösser, anders aufgebaut (Transformer-Architektur) und hat Milliarden von Gewichten.</p>
     <div class="callout">
       <strong>Vier Sätze zum Mitnehmen</strong>
       <ol>
@@ -50,7 +50,7 @@
       </table>
     </div>
     <p class="small">Um das nächste Wort gut vorherzusagen, muss das Netz Grammatik, Zusammenhänge und Muster in seinen Gewichten speichern. Das ist mehr als Zählen. Ob man das «Verstehen» nennen soll, ist unter Fachleuten umstritten.</p>
-    <p class="task"><b>Aufgabe (Tandem, 2 Min.):</b> Die Tabelle des Papagei-Modells kennt nur «Die Katze jagt die Maus». Was sagt sie zu «Das Kätzchen verfolgt die …»? Was kann ein neuronales Netz tun, in dem «Katze» und «Kätzchen» ähnliche Zahlen haben? Begründen Sie, warum ein neuronales Sprachmodell mehr ist als eine Häufigkeitstabelle, und nennen Sie eine Grenze, die bleibt.</p>
+    <p class="task"><b>Aufgabe (Tandem, 2 Min.):</b> Die Tabelle des Papagei-Modells kennt nur «Die Katze jagt die Maus». Was sagt sie zu «Das Kätzchen verfolgt die …»? Was kann ein künstliches neuronales Netz tun, in dem «Katze» und «Kätzchen» ähnliche Zahlen haben? Begründen Sie, warum ein neuronales Sprachmodell mehr ist als eine Häufigkeitstabelle, und nennen Sie eine Grenze, die bleibt.</p>
     <div class="protokoll-block">
       <!-- MD:START -->
 ### Mein Protokoll: Papagei und Netz
@@ -69,7 +69,7 @@
               <td><select data-answer="netz_kennt" aria-label="Kennt die Tabelle den Satz?"><option value="">–</option><option value="ja">Ja</option><option value="nein">Nein</option></select></td>
             </tr>
             <tr>
-              <th>Warum kann ein neuronales Netz trotzdem eine Vorhersage machen?</th>
+              <th>Warum kann ein künstliches neuronales Netz trotzdem eine Vorhersage machen?</th>
               <td><select data-answer="netz_warum" aria-label="Warum kann das Netz vorhersagen?"><option value="">–</option><option value="aehnlich">Ähnliche Wörter haben ähnliche Zahlen</option><option value="auswendig">Es hat genau diesen Satz auswendig gelernt</option><option value="tabelle">Es schlägt in einer Häufigkeitstabelle nach</option><option value="internet">Es sucht die Antwort im Internet</option></select></td>
             </tr>
             <tr>

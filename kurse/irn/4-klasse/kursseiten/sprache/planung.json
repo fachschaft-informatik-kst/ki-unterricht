@@ -62,7 +62,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 12,
-              "text": "Erklärt knapp das Papagei-Modell (Häufigkeiten von Wortfolgen liefern Fortsetzungen) und zeigt die Grafik «Papagei-Modell und neuronales Sprachmodell». Brücke in vier Sätzen (Seite «Vom Papagei zum neuronalen Netz»): Vortraining und Feinabstimmung wie beim Transfer Learning im Bildprojekt; Wörter werden zu Zahlen; der Text liefert die richtige Antwort selbst; ein Prozentwert ist keine Wahrheit. Stellt Soekia (soekia.ch/GPT) als digitalen Arbeitsweg vor mit der Drei-Zeilen-Anleitung: «start» und «Schau hinein»; «N <= 2» gegen «N <= 5» und Regler «Temperatur» (unter «Auswahl anpassen»); eigener Trainingstext über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen»."
+              "text": "Erklärt knapp das Papagei-Modell (Häufigkeiten von Wortfolgen liefern Fortsetzungen) und zeigt die Grafik «Papagei-Modell und neuronales Sprachmodell». Brücke in vier Sätzen (Seite «Vom Papagei zum künstlichen neuronalen Netz»): Vortraining und Feinabstimmung wie beim Transfer Learning im Bildprojekt; Wörter werden zu Zahlen; der Text liefert die richtige Antwort selbst; ein Prozentwert ist keine Wahrheit. Stellt Soekia (soekia.ch/GPT) als digitalen Arbeitsweg vor mit der Drei-Zeilen-Anleitung: «start» und «Schau hinein»; «N <= 2» gegen «N <= 5» und Regler «Temperatur» (unter «Auswahl anpassen»); eigener Trainingstext über «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → «Modell aufbauen»."
             },
             {
               "art": "Ergebnis",
@@ -92,7 +92,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 6,
-              "text": "Bearbeiten Sie die Aufgabe auf der Seite «Vom Papagei zum neuronalen Netz» (Kätzchen-Beispiel) und das Protokoll dazu."
+              "text": "Bearbeiten Sie die Aufgabe auf der Seite «Vom Papagei zum künstlichen neuronalen Netz» (Kätzchen-Beispiel) und das Protokoll dazu."
             },
             {
               "art": "Auftrag",

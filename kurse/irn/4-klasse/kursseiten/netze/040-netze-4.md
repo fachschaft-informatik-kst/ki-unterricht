@@ -1,6 +1,6 @@
-<details class="kapitel" id="netze-4" data-kurz="Die Rolle der Zwischenschicht im neuronalen Netz mit eigenen Worten sichern." open>
+<details class="kapitel" id="netze-4" data-kurz="Die Rolle der Zwischenschicht im künstlichen neuronalen Netz mit eigenen Worten sichern." open>
   <summary><span class="kapitel-nr">4</span>
-    <h2 class="kapitel-titel">Was wir über neuronale Netze gelernt haben</h2>
+    <h2 class="kapitel-titel">Was wir über künstliche neuronale Netze gelernt haben</h2>
   </summary>
   <div class="kapitel-body">
     <!-- MD:START -->

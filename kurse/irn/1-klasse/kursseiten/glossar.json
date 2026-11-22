@@ -3,7 +3,7 @@
   "gruppen": [
     "Grundlagen",
     "Lernarten",
-    "Neuronale Netze",
+    "Künstliche neuronale Netze",
     "Bildprojekt",
     "Sprachmodelle",
     "Gesellschaft"
@@ -53,8 +53,8 @@
       "id": "deep-learning",
       "gruppe": "Grundlagen",
       "begriff": "Deep Learning",
-      "basis": "Maschinelles Lernen mit neuronalen Netzen, die mehrere Schichten haben.",
-      "vertieft": "Teilgebiet des maschinellen Lernens mit tiefen neuronalen Netzen und hierarchisch erlernten Repräsentationen.",
+      "basis": "Maschinelles Lernen mit künstlichen neuronalen Netzen, die mehrere Schichten haben.",
+      "vertieft": "Teilgebiet des maschinellen Lernens mit tiefen künstlichen neuronalen Netzen und hierarchisch erlernten Repräsentationen.",
       "beispiel": "Ein tiefes Bildnetz erkennt erst einfache Bildmerkmale, dann komplexere Muster.",
       "frage": "Warum helfen mehrere Schichten?",
       "antwort": "Sie verbinden einfache Merkmale schrittweise zu komplexen Mustern."
@@ -111,7 +111,7 @@
     },
     {
       "id": "neuron",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Künstliches Neuron",
       "basis": "Ein kleiner Rechenbaustein: Er bewertet Eingaben und berechnet daraus eine Ausgabe.",
       "vertieft": "Es bildet typischerweise eine gewichtete Summe mit Bias und wendet darauf eine Aktivierungsfunktion an.",
@@ -121,7 +121,7 @@
     },
     {
       "id": "gewicht",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Gewicht",
       "basis": "Eine Zahl, die bestimmt, wie stark eine Eingabe die Ausgabe beeinflusst.",
       "vertieft": "Ein trainierbarer Parameter, der den Beitrag einer Eingabe zur gewichteten Summe skaliert.",
@@ -131,7 +131,7 @@
     },
     {
       "id": "bias-neuron",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Bias (Neuron)",
       "basis": "Die Grundeinstellung eines Neurons: Sie verschiebt, wann es «Ja» sagt.",
       "vertieft": "Ein additiver Parameter b in f(w₁x₁ + … + wₙxₙ + b), der die Entscheidungsschwelle verschiebt.",
@@ -141,7 +141,7 @@
     },
     {
       "id": "aktivierungsfunktion",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Aktivierungsfunktion",
       "basis": "Eine Rechenregel, die aus der Summe eines Neurons seine Ausgabe macht.",
       "vertieft": "Eine Funktion f, häufig nichtlinear, die auf die gewichtete Summe mit Bias angewendet wird.",
@@ -151,7 +151,7 @@
     },
     {
       "id": "schicht",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Schicht / versteckte Schicht",
       "basis": "Mehrere Neuronen, die gemeinsam Werte berechnen; versteckte Schichten liegen zwischen Ein- und Ausgabe.",
       "vertieft": "Eine Ebene der Netzwerkarchitektur; Zwischenschichten ermöglichen durch Nichtlinearitäten komplexe Abbildungen.",
@@ -161,7 +161,7 @@
     },
     {
       "id": "xor",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "XOR",
       "basis": "Eine Entweder-oder-Regel: Das Ergebnis ist 1, wenn genau eine von zwei Eingaben 1 ist.",
       "vertieft": "Eine boolesche Funktion, die mit einer einzigen linearen Trennlinie nicht separierbar ist.",

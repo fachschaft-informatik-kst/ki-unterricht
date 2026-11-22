@@ -8,7 +8,7 @@
       "rueckblick_figur": {
         "src": "grafiken/eva_erfahrungsschatz.png",
         "alt": "EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe.",
-        "caption": "Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0)."
+        "caption": "Der Erfahrungsschatz eines künstlichen neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0)."
       },
       "goal": "Gewicht und Bias erklären, die Ausgabe eines einzelnen Neurons berechnen und einen Lernschritt des überwachten Lernens (Ausgabe gegen Ziel) anhand von Vorher-Nachher-Werten nachvollziehen.",
       "question": "Leitfrage: Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?",

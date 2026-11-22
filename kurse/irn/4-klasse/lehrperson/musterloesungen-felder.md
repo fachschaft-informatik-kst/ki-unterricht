@@ -148,7 +148,7 @@
 | `turing_richtig` | Beispiel: «Ja»; erst nach der Auflösung eintragen. |
 | `turing_hinweise` | Wiederholte allgemeine Aussagen und fehlender Bezug auf Rückfragen; echte Chatbelege verwenden. |
 | `netz_kennt` | Nein, wenn die betreffende Wortfolge nie in der kleinen Papagei-Tabelle vorkam. |
-| `netz_warum` | Ein neuronales Netz kann aus gelernten Gewichten Muster auf neue Wortfolgen übertragen. |
+| `netz_warum` | Ein künstliches neuronales Netz kann aus gelernten Gewichten Muster auf neue Wortfolgen übertragen. |
 | `netz_wahr` | Nein; Wortvorhersage ist keine unabhängige Faktenprüfung. |
 | `sprache_transkript` | 1: stimmt nicht, die vierte Landessprache ist Rätoromanisch, Englisch ist keine Landessprache (Quelle z. B. admin.ch, Bundesverfassung Art. 4). 2: stimmt, der Bundesrat hat sieben Mitglieder (admin.ch). 3: stimmt nicht, die Schweiz hat rund 9 Millionen Einwohnerinnen und Einwohner (bfs.admin.ch). 4: nicht belegbar, ein «Bundesamt für Sprachforschung» gibt es nicht; die Quelle ist erfunden, die Zahl bleibt unbelegt. Der sichere Ton und eine Quellenangabe belegen nichts; man prüft mit einer unabhängigen Quelle. |
 | `sprache_pruefen` | Ich prüfe KI-Aussagen, indem ich eine unabhängige zweite Quelle (Fachseite, Behörde, Lexikon) suche und die Aussage mit eigenem Wissen oder Daten vergleiche. Ein Sprachmodell kann das nicht leisten, weil es nur das wahrscheinlichste nächste Wort berechnet und nicht prüft, ob die Aussage stimmt; ein sicherer Ton oder ein hoher Prozentwert ist kein Beleg. |

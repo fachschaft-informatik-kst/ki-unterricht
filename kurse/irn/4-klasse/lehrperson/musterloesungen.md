@@ -21,13 +21,13 @@ Es bildet die **gewichtete Summe plus Bias** und gibt ab Summe 0 die Ausgabe 1 a
 
 **Gewichte und Bias** werden beim überwachten Lernen anhand bekannter Trainingsziele (Labels) schrittweise korrigiert; die Grundrechnung und die Schwelle ändern sich nicht. Eine höhere Lernrate kann schneller korrigieren, aber auch überschiessen. Beobachtete Gewichtsänderungen müssen aus dem eigenen Notebook stammen.
 
-## 4 · XOR und neuronale Netze (Doppellektion 4)
+## 4 · XOR und künstliche neuronale Netze (Doppellektion 4)
 
 ### Warum XOR ein einzelnes Neuron überfordert
 
 **XOR:** Nur (0,1) und (1,0) ergeben 1, die beiden anderen Fälle 0. Eine einzige Gerade kann die Punkte nicht korrekt trennen. Deshalb scheitert ein einzelnes Perzeptron an XOR, egal welche Gewichte es lernt.
 
-### Ein mehrschichtiges neuronales Netz löst XOR
+### Ein mehrschichtiges künstliches neuronales Netz löst XOR
 
 Eine mögliche Zusammensetzung: Zwischenschicht mit **ODER** und **NAND**, danach **UND**:
 

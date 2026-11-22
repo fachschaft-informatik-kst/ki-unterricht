@@ -2,7 +2,7 @@
   Doppellektionen 5–7 · Das eigene Bildprojekt
 </div>
 <h1>Was hat unser<br/>Netz <em>gelernt?</em></h1>
-<p class="lead">Eigene Bilder, ein neuronales Netz und ein fairer Vergleich im Tandem. Sie wählen Ihr Thema, untersuchen zwei Varianten und begründen, was Ihr Modell wirklich gelernt hat.</p>
+<p class="lead">Eigene Bilder, ein künstliches neuronales Netz und ein fairer Vergleich im Tandem. Sie wählen Ihr Thema, untersuchen zwei Varianten und begründen, was Ihr Modell wirklich gelernt hat.</p>
 <div class="project-roadmap" id="ablauf">
   <!-- MD:START -->
 ## Ihr Fahrplan

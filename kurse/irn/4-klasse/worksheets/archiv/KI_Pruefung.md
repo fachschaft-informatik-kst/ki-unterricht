@@ -68,7 +68,7 @@ Wähle pro Aussage die korrekte Antwort aus (richtig oder falsch). Jede Aussage 
 Aussage & richtig & falsch \\
 \hline
 Deep Learning ist eine Teilmenge von Machine Learning. & $\square$ & $\square$ \\
-Machine Learning wird immer mit neuronalen Netzen umgesetzt. & $\square$ & $\square$ \\
+Machine Learning wird immer mit künstlichen neuronalen Netzen umgesetzt. & $\square$ & $\square$ \\
 Zur KI zählen auch regelbasierte Expertensysteme ohne Lernen. & $\square$ & $\square$ \\
 Ein KI-System funktioniert nur, wenn es zuvor mit Trainingsdaten trainiert wurde. & $\square$ & $\square$ \\
 \hline

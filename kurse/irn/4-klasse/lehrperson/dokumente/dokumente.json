@@ -4,7 +4,7 @@
   "generator": "scripts/build_student_documents.py",
   "zip": {
     "file": "IRN_4-Klasse_Alle_Dokumente.zip",
-    "bytes": 1654510
+    "bytes": 1654546
   },
   "documents": [
     {
@@ -65,7 +65,7 @@
       "minutes": 5,
       "title": "Genau eine Taste",
       "file": "DL04_1_Ankommen.docx",
-      "bytes": 54148
+      "bytes": 54158
     },
     {
       "dl": 4,
@@ -95,7 +95,7 @@
       "minutes": 47,
       "title": "Vom Versuch zum Signalweg",
       "file": "DL04_4_Verarbeiten.docx",
-      "bytes": 54091
+      "bytes": 54101
     },
     {
       "dl": 4,
@@ -335,7 +335,7 @@
       "minutes": 12,
       "title": "Vom Wortfolgemodell zum Netz in vier Sätzen",
       "file": "DL09_3_Informieren.docx",
-      "bytes": 39548
+      "bytes": 39558
     },
     {
       "dl": 9,
@@ -345,7 +345,7 @@
       "minutes": 53,
       "title": "Soekia gründlich untersuchen",
       "file": "DL09_4_Verarbeiten.docx",
-      "bytes": 40525
+      "bytes": 40533
     },
     {
       "dl": 9,

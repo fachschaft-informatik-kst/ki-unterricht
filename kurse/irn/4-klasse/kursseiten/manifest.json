@@ -99,11 +99,11 @@
       "navigation": {
         "order": 5,
         "label": "04",
-        "title": "Neuronale Netze"
+        "title": "Künstliche neuronale Netze"
       },
       "teaching": true,
       "overview": {
-        "title": "Neuronale Netze",
+        "title": "Künstliche neuronale Netze",
         "summary": "Zwischenschichten · Daten aufteilen"
       }
     },

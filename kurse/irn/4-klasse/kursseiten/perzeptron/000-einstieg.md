@@ -7,7 +7,7 @@
     <p class="lesson-recap"><strong>Rückblick:</strong> Im Kapitel <a href="#lernarten">«Wie lernt KI?»</a> haben Sie drei Lernsignale unterschieden. Heute öffnen Sie die Verarbeitung im EVA-Modell und untersuchen ein einzelnes künstliches Neuron.</p>
     <figure class="concept-figure">
       <img alt="EVA-Prinzip mit Eingabe, Verarbeitung und Erfahrungsschatz sowie Ausgabe." loading="lazy" src="grafiken/eva_erfahrungsschatz.png"/>
-      <figcaption>Der Erfahrungsschatz eines neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0).</figcaption>
+      <figcaption>Der Erfahrungsschatz eines künstlichen neuronalen Netzes steckt in seinen gelernten Gewichten. Grafik: inf-schule.de (CC BY-SA 4.0).</figcaption>
     </figure>
     <p><strong>Heute können Sie:</strong> Gewicht und Bias erklären, einen Lernschritt nachvollziehen und die Entscheidung eines einzelnen Neurons selbst berechnen.</p>
     <p class="lesson-question">Wie trifft ein künstliches Neuron Entscheidungen und wie lernt es aus Fehlern?</p>
