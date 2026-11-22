@@ -1,12 +1,12 @@
 ## Doppellektion 04
 
-**Bereitlegen:** Papier oder [XOR-Gitter](materialien/downloads/koordinatengitter_xor_einfach.svg); Beamer für das XOR-Rätsel; die Lernenden arbeiten im Notebook [Neuronale Netze](materialien/downloads/mehrschichtige_netze.ipynb), das [XOR: Ein Neuron](materialien/downloads/xor_einzelne_neuronen.ipynb) zeigt die Lehrperson am Beamer.
+**Bereitlegen:** Papier oder [XOR-Gitter](materialien/downloads/koordinatengitter_xor_einfach.svg); Beamer für das XOR-Rätsel; die Lernenden arbeiten im Notebook [Künstliche neuronale Netze](materialien/downloads/mehrschichtige_netze.ipynb), das [XOR: Ein Neuron](materialien/downloads/xor_einzelne_neuronen.ipynb) zeigt die Lehrperson am Beamer.
 
 ### Ankommen · 5 Min. · Genau eine Taste
 
 **Tandem · 5 Min.**
 
-Das Signal geht an, wenn **genau eine** von zwei Tasten aktiv ist. Ergänzen Sie die Zielwerte für 00, 01, 10 und 11. Vermuten Sie, ob das Neuron aus DL3 diese XOR-Regel darstellen kann. Öffnen Sie zudem das Notebook «Neuronale Netze», damit Python im Hintergrund startet.
+Das Signal geht an, wenn **genau eine** von zwei Tasten aktiv ist. Ergänzen Sie die Zielwerte für 00, 01, 10 und 11. Vermuten Sie, ob das Neuron aus DL3 diese XOR-Regel darstellen kann. Öffnen Sie zudem das Notebook «Künstliche neuronale Netze», damit Python im Hintergrund startet.
 
 ![Leeres Koordinatengitter mit XOR-Eingaben](materialien/downloads/koordinatengitter_xor_einfach.svg "Ankommen | Tandem")
 
@@ -55,7 +55,7 @@ Aus den mittleren Zeilen folgt w₁ + w₂ + b ≥ −b > 0. Das widerspricht de
 
 **Tandem → Tandem → Klasse · 27 / 15 / 5 Min.**
 
-1. Öffnen Sie das [Netzwerk-Kapitel](index.html#netze-2) und arbeiten Sie im Notebook «Neuronale Netze». Verfolgen Sie OR → NAND → AND und lösen Sie die vier XOR-Fälle mit dem Netz. Der Abschnitt «Selbstcheck · Ein anderer Fall» entfällt, dafür folgt die Papieraufgabe.
+1. Öffnen Sie das [Netzwerk-Kapitel](index.html#netze-2) und arbeiten Sie im Notebook «Künstliche neuronale Netze». Verfolgen Sie OR → NAND → AND und lösen Sie die vier XOR-Fälle mit dem Netz. Der Abschnitt «Selbstcheck · Ein anderer Fall» entfällt, dafür folgt die Papieraufgabe.
 2. Rechnen Sie im Tandem einen zusätzlichen Eingabefall vollständig durch (Tabelle unten).
 3. **Klasse · Demo am Beamer:** Die Lehrperson lässt das Netz mit 1, 2 und 4 versteckten Neuronen lernen (überwachtes Lernen: Zu den vier Eingaben sind die XOR-Zielwerte als Labels bekannt). Mehr Neuronen garantieren in einem einzelnen Trainingslauf keinen Erfolg.
 

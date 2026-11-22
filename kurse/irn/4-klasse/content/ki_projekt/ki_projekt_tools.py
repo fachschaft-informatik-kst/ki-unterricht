@@ -15,7 +15,7 @@ from pathlib import Path
 import numpy as np
 from IPython.display import HTML, display
 
-# Für den Projektstart werden weder neuronale Netze trainiert noch Diagramme
+# Für den Projektstart werden weder künstliche neuronale Netze trainiert noch Diagramme
 # berechnet. Die umfangreichen Bibliotheken erst beim jeweiligen Versuch laden.
 class _LazyPlots:
     def __getattr__(self, name):

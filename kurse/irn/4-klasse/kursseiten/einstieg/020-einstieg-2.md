@@ -58,7 +58,7 @@ Der Schachcomputer von IBM schlägt Weltmeister Garry Kasparov. Er rechnet sehr 
         <div>
           <a class="milestone-link" href="https://de.wikipedia.org/wiki/Deep_Learning" target="_blank" rel="noopener noreferrer" aria-label="Deep Learning: Wikipedia-Artikel öffnen">Deep Learning <span class="milestone-trigger-icon" aria-hidden="true">↗</span></a> <span class="marke daten">Datengetriebene Programmierung</span>
           <!-- MD:START -->
-Tiefe neuronale Netze gewinnen Wettbewerbe in der Bilderkennung. Möglich machen das riesige Datenmengen und schnelle Grafikprozessoren.
+Tiefe künstliche neuronale Netze gewinnen Wettbewerbe in der Bilderkennung. Möglich machen das riesige Datenmengen und schnelle Grafikprozessoren.
 <!-- MD:END -->
         </div></li>
       <li><span class="jahr">2022</span>

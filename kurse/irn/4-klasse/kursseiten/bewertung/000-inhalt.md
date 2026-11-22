@@ -205,7 +205,7 @@ Dann könnten Fotos desselben Gegenstands oder derselben Person in Training und 
       <summary>Was haben wir tatsächlich selbst trainiert?</summary>
       <div class="detail-body">
         <!-- MD:START -->
-Im Fotoprojekt trainieren wir das kleine neuronale Netz auf den festen Bildmerkmalen. MobileNet wurde vorher auf anderen Bildern trainiert und bleibt eingefroren. Seine Vortrainingsdaten beeinflussen, welche Merkmale verfügbar sind.
+Im Fotoprojekt trainieren wir das kleine künstliche neuronale Netz auf den festen Bildmerkmalen. MobileNet wurde vorher auf anderen Bildern trainiert und bleibt eingefroren. Seine Vortrainingsdaten beeinflussen, welche Merkmale verfügbar sind.
 <!-- MD:END -->
       </div>
     </details>

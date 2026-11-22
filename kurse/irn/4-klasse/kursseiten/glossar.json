@@ -3,7 +3,7 @@
   "gruppen": [
     "Grundlagen",
     "Lernarten",
-    "Neuronale Netze",
+    "Künstliche neuronale Netze",
     "Bildprojekt",
     "Sprachmodelle",
     "Gesellschaft"
@@ -53,8 +53,8 @@
       "id": "deep-learning",
       "gruppe": "Grundlagen",
       "begriff": "Deep Learning",
-      "basis": "Maschinelles Lernen mit neuronalen Netzen, die mehrere Schichten haben.",
-      "vertieft": "Teilgebiet des maschinellen Lernens mit tiefen neuronalen Netzen und hierarchisch erlernten Repräsentationen.",
+      "basis": "Maschinelles Lernen mit künstlichen neuronalen Netzen, die mehrere Schichten haben.",
+      "vertieft": "Teilgebiet des maschinellen Lernens mit tiefen künstlichen neuronalen Netzen und hierarchisch erlernten Repräsentationen.",
       "beispiel": "Ein tiefes Bildnetz erkennt erst einfache Bildmerkmale, dann komplexere Muster.",
       "frage": "Warum helfen mehrere Schichten?",
       "antwort": "Sie verbinden einfache Merkmale schrittweise zu komplexen Mustern."
@@ -111,7 +111,7 @@
     },
     {
       "id": "neuron",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Künstliches Neuron",
       "basis": "Ein kleiner Rechenbaustein: Er bewertet Eingaben und berechnet daraus eine Ausgabe.",
       "vertieft": "Es bildet typischerweise eine gewichtete Summe mit Bias und wendet darauf eine Aktivierungsfunktion an.",
@@ -121,7 +121,7 @@
     },
     {
       "id": "gewicht",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Gewicht",
       "basis": "Eine Zahl, die bestimmt, wie stark eine Eingabe die Ausgabe beeinflusst.",
       "vertieft": "Ein trainierbarer Parameter, der den Beitrag einer Eingabe zur gewichteten Summe skaliert.",
@@ -131,7 +131,7 @@
     },
     {
       "id": "bias-neuron",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Bias (Neuron)",
       "basis": "Die Grundeinstellung eines Neurons: Sie verschiebt, wann es «Ja» sagt.",
       "vertieft": "Ein additiver Parameter b in f(w₁x₁ + … + wₙxₙ + b), der die Entscheidungsschwelle verschiebt.",
@@ -141,7 +141,7 @@
     },
     {
       "id": "aktivierungsfunktion",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Aktivierungsfunktion",
       "basis": "Eine Rechenregel, die aus der Summe eines Neurons seine Ausgabe macht.",
       "vertieft": "Eine Funktion f, häufig nichtlinear, die auf die gewichtete Summe mit Bias angewendet wird.",
@@ -151,7 +151,7 @@
     },
     {
       "id": "schicht",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Schicht / versteckte Schicht",
       "basis": "Mehrere Neuronen, die gemeinsam Werte berechnen; versteckte Schichten liegen zwischen Ein- und Ausgabe.",
       "vertieft": "Eine Ebene der Netzwerkarchitektur; Zwischenschichten ermöglichen durch Nichtlinearitäten komplexe Abbildungen.",
@@ -161,7 +161,7 @@
     },
     {
       "id": "xor",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "XOR",
       "basis": "Eine Entweder-oder-Regel: Das Ergebnis ist 1, wenn genau eine von zwei Eingaben 1 ist.",
       "vertieft": "Eine boolesche Funktion, die mit einer einzigen linearen Trennlinie nicht separierbar ist.",
@@ -304,14 +304,14 @@
       "gruppe": "Lernarten",
       "begriff": "Erfahrungsschatz",
       "basis": "Das, was ein System aus Beispielen gelernt und behalten hat.",
-      "vertieft": "Die gespeicherten Ergebnisse des Lernens, bei einem neuronalen Netz die gelernten Gewichte und Bias-Werte. Er ist nicht dasselbe wie die Trainingsdaten, aus denen er entstanden ist.",
+      "vertieft": "Die gespeicherten Ergebnisse des Lernens, bei einem künstlichen neuronalen Netz die gelernten Gewichte und Bias-Werte. Er ist nicht dasselbe wie die Trainingsdaten, aus denen er entstanden ist.",
       "beispiel": "Nach einem Lernschritt stecken die Zahlen w₁ = 0.4, w₂ = 0.4 und b = −0.3 im Erfahrungsschatz des Neurons.",
       "frage": "Ist der Erfahrungsschatz dasselbe wie die Trainingsbilder?",
       "antwort": "Nein. Die Trainingsbilder sind die Erfahrungen. Der Erfahrungsschatz ist das, was das Netz daraus als Zahlen behalten hat."
     },
     {
       "id": "lernrate",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Lernrate",
       "basis": "Sie bestimmt, wie stark sich die Gewichte bei einem Lernschritt ändern.",
       "vertieft": "Faktor in der Lernregel (Änderung = Lernrate × (Ziel − Ausgabe) × Eingang). Sie legt die Schrittweite fest, nicht die Grenze dessen, was das Neuron darstellen kann.",
@@ -321,7 +321,7 @@
     },
     {
       "id": "epoche",
-      "gruppe": "Neuronale Netze",
+      "gruppe": "Künstliche neuronale Netze",
       "begriff": "Epoche",
       "basis": "Ein Durchgang, bei dem das Netz alle Trainingsbeispiele einmal gesehen hat.",
       "vertieft": "Ein vollständiger Durchlauf durch die Trainingsmenge. Nach jedem Schritt werden die Gewichte angepasst; mehr Epochen verbessern die Trainingswerte meist, nicht immer die Werte auf neuen Bildern.",
@@ -364,10 +364,10 @@
       "gruppe": "Sprachmodelle",
       "begriff": "Einbettung (Embedding)",
       "basis": "Ein Wort wird als Liste von Zahlen dargestellt, damit ähnliche Wörter ähnliche Zahlen haben.",
-      "vertieft": "Gelernte Zahlenliste (Vektor) für ein Token. Tokens mit ähnlicher Verwendung erhalten ähnliche Vektoren, mit denen das neuronale Netz rechnet.",
+      "vertieft": "Gelernte Zahlenliste (Vektor) für ein Token. Tokens mit ähnlicher Verwendung erhalten ähnliche Vektoren, mit denen das künstliche neuronale Netz rechnet.",
       "beispiel": "«Katze» und «Kätzchen» haben ähnliche Zahlenlisten, «Katze» und «Steuer» nicht.",
       "frage": "Warum braucht ein Sprachmodell Zahlen für Wörter?",
-      "antwort": "Ein neuronales Netz rechnet nur mit Zahlen. Die Einbettung macht aus Wörtern Zahlen und bewahrt dabei Ähnlichkeiten."
+      "antwort": "Ein künstliches neuronales Netz rechnet nur mit Zahlen. Die Einbettung macht aus Wörtern Zahlen und bewahrt dabei Ähnlichkeiten."
     },
     {
       "id": "rueckkopplung",

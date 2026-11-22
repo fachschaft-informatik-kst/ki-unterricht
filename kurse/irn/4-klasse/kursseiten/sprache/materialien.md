@@ -39,7 +39,7 @@ Welche zusätzliche Verbindung ermöglicht der grössere Kontext? Warum ist dadu
 | Darstellung | konkrete Wörter in der Tabelle | gelernte Zahlendarstellungen |
 | Grenze | Häufigkeit ist keine Wahrheitsprüfung | Plausibilität ist ebenfalls keine Wahrheitsgarantie |
 
-Die Lehrperson erklärt den Zusammenhang mit der Kursgrafik und fasst die **vier Sätze** der Seite [Vom Papagei zum neuronalen Netz](index.html#sprache-6) zusammen: (1) Vortraining und Feinabstimmung wie beim Transfer Learning im Bildprojekt; (2) Wörter werden zu Zahlen, wie MobileNet Bilder zu 1280 Merkmalen; (3) der Text liefert die richtige Antwort selbst; (4) ein Prozentwert ist keine Wahrheit. Danach stellt sie **Soekia** als digitalen Arbeitsweg vor (Link, N-Gramm-Länge 2 und 5, Temperatur, eigener Trainingstext). Human or Not ist ein Live-Chat mit Fremden und wird nur nach schulischer Freigabe innerhalb desselben Zeitbudgets eingesetzt.
+Die Lehrperson erklärt den Zusammenhang mit der Kursgrafik und fasst die **vier Sätze** der Seite [Vom Papagei zum künstlichen neuronalen Netz](index.html#sprache-6) zusammen: (1) Vortraining und Feinabstimmung wie beim Transfer Learning im Bildprojekt; (2) Wörter werden zu Zahlen, wie MobileNet Bilder zu 1280 Merkmalen; (3) der Text liefert die richtige Antwort selbst; (4) ein Prozentwert ist keine Wahrheit. Danach stellt sie **Soekia** als digitalen Arbeitsweg vor (Link, N-Gramm-Länge 2 und 5, Temperatur, eigener Trainingstext). Human or Not ist ein Live-Chat mit Fremden und wird nur nach schulischer Freigabe innerhalb desselben Zeitbudgets eingesetzt.
 
 ### Verarbeiten · 53 Min. · Soekia gründlich untersuchen
 
@@ -54,7 +54,7 @@ Bearbeiten Sie danach den digitalen Arbeitsweg mit [Soekia](https://www.soekia.c
 | Ausgang: ____________________ | keine | ____________________ | ____________________ |
 | Vergleich: ____________________ | ____________________ | ____________________ | ____________________ |
 
-Erzeugen Sie das **problematische Beispiel selbst**: «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → einen kurzen Text mit einer falschen Aussage einfügen → «Speichern» → «Modell aufbauen» → «start». Beobachten Sie, was das Modell daraus macht. Sichern Sie zusätzlich ein plausibles Beispiel und vergleichen Sie mit dem Papierexperiment. Bearbeiten Sie danach die Aufgabe auf der Seite [Vom Papagei zum neuronalen Netz](index.html#sprache-6) (Kätzchen, 6 Min.).
+Erzeugen Sie das **problematische Beispiel selbst**: «Einstellungen» → «Neue Kollektion» → «Dokument hinzufügen» → einen kurzen Text mit einer falschen Aussage einfügen → «Speichern» → «Modell aufbauen» → «start». Beobachten Sie, was das Modell daraus macht. Sichern Sie zusätzlich ein plausibles Beispiel und vergleichen Sie mit dem Papierexperiment. Bearbeiten Sie danach die Aufgabe auf der Seite [Vom Papagei zum künstlichen neuronalen Netz](index.html#sprache-6) (Kätzchen, 6 Min.).
 
 #### Übung · KI-Aussagen prüfen (6 Min.)
 

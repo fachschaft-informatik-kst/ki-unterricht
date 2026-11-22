@@ -25,7 +25,7 @@
           </tr>
           <tr>
             <th>Am meisten gebracht hat mir</th>
-            <td><select data-answer="rueck_best" aria-label="Am meisten gebracht"><option value="">–</option><option value="was">Was ist KI?</option><option value="lernen">Wie lernt KI?</option><option value="neuron">Neuron und neuronale Netze</option><option value="projekt">Das Bildprojekt</option><option value="sprache">Sprachmodelle</option><option value="gesellschaft">Wer trägt die Folgen?</option></select></td>
+            <td><select data-answer="rueck_best" aria-label="Am meisten gebracht"><option value="">–</option><option value="was">Was ist KI?</option><option value="lernen">Wie lernt KI?</option><option value="neuron">Neuron und künstliche neuronale Netze</option><option value="projekt">Das Bildprojekt</option><option value="sprache">Sprachmodelle</option><option value="gesellschaft">Wer trägt die Folgen?</option></select></td>
           </tr>
           <tr>
             <th>Das würde ich im Themenblock ändern</th>
