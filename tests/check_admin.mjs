@@ -334,28 +334,18 @@ const irnGithub=async(_token,route)=>{
   return {encoding:"base64",content:Buffer.from(irnSources[name]).toString("base64")};
 };
 const irnPlan=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo");
-// «01 Was ist KI?» and «02 Wie lernt KI?» have no plan but keep their numbers in every teacher tab; DL 3–10 keep theirs.
-assert.deepEqual(irnPlan.lessons.map(l=>l.number),[1,2,3,4,5,6,7,8,9,10]);
-assert.equal(irnPlan.lessons[0].title,"Was ist KI?");
-assert.equal(irnPlan.lessons[0].withoutPlan,true);
-assert.equal(irnPlan.lessons[1].title,"Wie lernt KI?");
-assert.equal(irnPlan.lessons[1].withoutPlan,true);
+// IRN 1 consists only of «01 Was ist KI?» without a plan; every teacher tab shows it, empty.
+assert.deepEqual(irnPlan.lessons.map(l=>[l.number,l.title,l.withoutPlan]),[[1,"Was ist KI?",true]]);
 assert.equal(irnPlan.selectedNumber,1);
-assert.equal(irnPlan.withoutPlan,true,"DL 01 opens empty instead of falling back to DL 02");
+assert.equal(irnPlan.withoutPlan,true,"DL 01 opens empty");
 assert.equal(irnPlan.lesson,null);
-const irnPlan2=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo",2);
-assert.equal(irnPlan2.withoutPlan,true,"DL 02 opens empty as well");
-const irnPlan3=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo",3);
-assert.equal(irnPlan3.lesson.view,"basis-neuron");
+const irnUnknown=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo",3);
+assert.equal(irnUnknown.selectedNumber,1,"Unknown DL numbers fall back to DL 01");
 for(const kind of ["materialien","musterloesungen"]){
   const empty=await teacherData({course:"irn/1-klasse",kind},"token",irnGithub,"example/repo",1);
   assert(empty.withoutPlan&&!empty.sections.length&&!empty.entries.length,kind+" stays empty for DL 01");
 }
 assert(irnPlan.lessons.every(l=>l.view.startsWith("basis-")));
-const irnKit=await teacherData({course:"irn/1-klasse",kind:"materialien"},"token",irnGithub,"example/repo",3);
-assert(irnKit.sections[0].markdown.length>20);
-const irnSolutions=await teacherData({course:"irn/1-klasse",kind:"musterloesungen"},"token",irnGithub,"example/repo",3);
-assert(irnSolutions.sections[0].markdown.length>50);
 
 const teacherKit=await teacherData({course:"bok/1-klasse",kind:"materialien"},"token",fakeGithub,"example/repo");
 assert.match(teacherKit.sections[0].markdown,/Beispielmaterial/);

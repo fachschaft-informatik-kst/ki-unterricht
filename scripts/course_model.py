@@ -90,8 +90,10 @@ def load_course(root: Path = ROOT / "kurse/bok/4-klasse", manifest_path: str = "
     lessons.sort(key=lambda l: l["order"])
     if len({l["order"] for l in lessons}) != len(lessons):
         raise ValueError("Doppelte Lektionsreihenfolge")
-    validate_lessons(lessons)
     placeholders = lessons_without_plan(sections)
+    # Ein Kurs darf nur aus Doppellektionen ohne Plan bestehen (IRN 1: nur «Was ist KI?»).
+    if lessons or not placeholders:
+        validate_lessons(lessons)
     number_lessons(lessons, {p["number"] for p in placeholders})
     return {"minutes": RULES["duration"], "model": "AVIVA", "lessons": lessons, "placeholders": placeholders}
 

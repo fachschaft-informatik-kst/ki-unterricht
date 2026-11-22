@@ -46,9 +46,11 @@ for slug in ("irn/1-klasse", "irn/4-klasse"):
     page = (dist / slug / "index.html").read_text(encoding="utf-8")
     assert "in Vorbereitung" not in page
     assert "data-course-theme" in page
-    assert "Jupyter" in page
-    assert "lesson-plan" in page
-    assert "portal/" + slug + "/" in page, "IRN notebooks need separate paths"
+    if slug.endswith("/4-klasse"):
+        # IRN 1 has only the theory page «Was ist KI?» (no plans, no notebooks on the page).
+        assert "Jupyter" in page
+        assert "lesson-plan" in page
+        assert "portal/" + slug + "/" in page, "IRN notebooks need separate paths"
     for private in ("unterrichtsplan.html", "materialien.html", "kurs.json",
                     "musterloesungen/index.html"):
         assert not (dist / slug / private).exists(), "Public teacher-only file: "+slug+"/"+private

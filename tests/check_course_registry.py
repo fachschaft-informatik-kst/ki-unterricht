@@ -23,7 +23,8 @@ for course in known:
     for path in course["teacherFiles"].values():
         assert (ROOT/path).is_file()
     model=load_course(ROOT,course["manifest"])
-    assert len(model["lessons"])>=1
+    # Mindestens eine Doppellektion; IRN 1 besteht nur aus «Was ist KI?» ohne Unterrichtsplan.
+    assert len(model["lessons"])+len(model["placeholders"])>=1
 for grade in (1,4):
     template=ROOT/"kurse/_vorlagen"/f"{grade}-klasse"
     assert (template/"kursseiten/manifest.json").is_file()

@@ -4,17 +4,7 @@
   "originalManifest": "kursseiten/basis-manifest.json",
   "sections": [
     "basis-start",
-    "basis-ki",
-    "basis-lernen",
-    "basis-neuron",
-    "basis-netze",
-    "basis-daten",
-    "basis-plan",
-    "basis-training",
-    "basis-abschluss",
-    "basis-sprache",
-    "basis-gesellschaft",
-    "basis-glossar"
+    "basis-ki"
   ],
   "source": "BOK snapshot"
 }
