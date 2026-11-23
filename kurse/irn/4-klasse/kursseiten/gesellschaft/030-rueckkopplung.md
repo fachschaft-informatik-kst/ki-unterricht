@@ -1,4 +1,4 @@
-<details class="kapitel" id="rueckkopplung" data-kurz="Entscheidungen verändern die Realität, erzeugen neue Daten und bestätigen das Modell." open>
+<details class="kapitel" id="rueckkopplung" data-kurz="Entscheidungen verändern die Realität, erzeugen neue Daten und bestätigen das Modell.">
   <summary><span class="kapitel-nr">3</span>
     <h2 class="kapitel-titel">Rückkopplung: Das Modell bestätigt sich selbst</h2>
   </summary>

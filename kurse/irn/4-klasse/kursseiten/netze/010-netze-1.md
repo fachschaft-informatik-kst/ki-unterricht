@@ -1,4 +1,4 @@
-<details class="kapitel" id="netze-1" data-kurz="XOR verstehen: Wahrheitstabelle, Rätsel im Notebook, Trennlinie und die Rechnung dazu." open>
+<details class="kapitel" id="netze-1" data-kurz="XOR verstehen: Wahrheitstabelle, Rätsel im Notebook, Trennlinie und die Rechnung dazu.">
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Das XOR-Problem: Warum reicht ein Neuron nicht?</h2>
   </summary>

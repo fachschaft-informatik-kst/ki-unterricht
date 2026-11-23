@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 from course_registry import load_registry, load_experiments, validate_registry
+from ki_hinweis import add_ki_hinweis
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "shared/course-sites.json"
@@ -245,10 +246,15 @@ def build(out: Path, courses: list[dict] | None = None) -> None:
                     content = re.sub(r"</head>", "<style data-course-theme>" +
                                      theme_css(course) + "</style></head>",
                                      content, count=1, flags=re.I)
+                    if course["teacher"] == "IRN":
+                        content = add_ki_hinweis(content)
                 file.write_text(content, encoding="utf-8")
         else:
             target.mkdir(parents=True, exist_ok=True)
-            (target / "index.html").write_text(planned_page(course), encoding="utf-8")
+            page = planned_page(course)
+            if course["teacher"] == "IRN":
+                page = add_ki_hinweis(page)
+            (target / "index.html").write_text(page, encoding="utf-8")
         print(f"Course route: /{slug}/ ({course['status']})")
     (out / "kurse.html").write_text(overview(courses), encoding="utf-8")
     shutil.copyfile(ROOT / "portal-index.html", out / "index.html")

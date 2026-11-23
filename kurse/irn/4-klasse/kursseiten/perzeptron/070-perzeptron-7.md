@@ -1,4 +1,4 @@
-<details class="kapitel" id="perzeptron-7" data-kurz="Gewicht, Bias und Lernen eines einzelnen Neurons in eigenen Worten festhalten." open>
+<details class="kapitel" id="perzeptron-7" data-kurz="Gewicht, Bias und Lernen eines einzelnen Neurons in eigenen Worten festhalten.">
   <summary><span class="kapitel-nr">7</span>
     <h2 class="kapitel-titel">Festhalten</h2>
   </summary>

@@ -1,4 +1,4 @@
-<details class="kapitel" id="kritisch" data-kurz="Pro und Contra: Wie überzeugend sind Warnung und Forderung von Cathy O’Neil?" open>
+<details class="kapitel" id="kritisch" data-kurz="Pro und Contra: Wie überzeugend sind Warnung und Forderung von Cathy O’Neil?">
   <summary><span class="kapitel-nr">4</span>
     <h2 class="kapitel-titel">Debatte: Cathy O’Neil kritisch lesen</h2>
   </summary>

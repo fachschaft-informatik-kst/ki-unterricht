@@ -1,4 +1,4 @@
-<details class="kapitel" id="perzeptron-1" data-kurz="Ein Neuron macht aus mehreren Zahlen eine Ja/Nein-Entscheidung. Beispiel: Gehe ich schwimmen?" open>
+<details class="kapitel" id="perzeptron-1" data-kurz="Ein Neuron macht aus mehreren Zahlen eine Ja/Nein-Entscheidung. Beispiel: Gehe ich schwimmen?">
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Wozu ein Neuron? Ein kleiner Entscheider</h2>
   </summary>

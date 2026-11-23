@@ -1,4 +1,4 @@
-<details class="kapitel" id="einstieg-2" data-kurz="Neun Meilensteine zeigen, wann Regeln und wann Daten wichtig wurden; jeder Titel führt zu Wikipedia." open>
+<details class="kapitel" id="einstieg-2" data-kurz="Neun Meilensteine zeigen, wann Regeln und wann Daten wichtig wurden; jeder Titel führt zu Wikipedia.">
   <summary><span class="kapitel-nr">2</span>
     <h2 class="kapitel-titel">Meilensteine der KI-Geschichte</h2>
   </summary>

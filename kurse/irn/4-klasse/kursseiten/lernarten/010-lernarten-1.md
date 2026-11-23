@@ -1,4 +1,4 @@
-<details class="kapitel" id="lernarten-1" data-kurz="EVA-Modell ohne und mit Erfahrungsschatz: feste Regeln oder gelerntes Wissen." open>
+<details class="kapitel" id="lernarten-1" data-kurz="EVA-Modell ohne und mit Erfahrungsschatz: feste Regeln oder gelerntes Wissen.">
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">EVA-Modell ohne und mit Erfahrungsschatz</h2>
   </summary>

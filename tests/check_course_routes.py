@@ -87,3 +87,30 @@ for root in ("basis", "projekt", "bok/1-klasse", "bok/4-klasse"):
                  "musterloesungen/index.html", "kurs.json", "materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md",
                  "materialien/downloads/KI_Bewertungsraster.md"):
         assert not (folder / path).exists(), f"Public teacher-only file: {root}/{path}"
+
+# IRN pages end with the AI notice; other courses, overview and editor do not.
+from ki_hinweis import TEXT as KI_HINWEIS
+irn_pages, other_pages = [], [dist / "kurse.html", *sorted((dist / "projekt").rglob("*.html"))]
+for course in manifest["courses"]:
+    (irn_pages if course["teacher"] == "IRN" else other_pages).extend(sorted((dist / course["slug"]).rglob("*.html")))
+assert len(irn_pages) >= 4
+for page in irn_pages:
+    html = page.read_text(encoding="utf-8")
+    assert html.count(KI_HINWEIS) == 1, f"KI-Hinweis fehlt oder doppelt: {page}"
+    tail = html[html.index(KI_HINWEIS):].lower()
+    assert "</body>" in tail and "<main" not in tail and "<footer" not in tail, f"KI-Hinweis nicht ganz unten: {page}"
+for page in other_pages:
+    assert KI_HINWEIS not in page.read_text(encoding="utf-8"), f"KI-Hinweis nur für IRN: {page}"
+assert KI_HINWEIS not in (ROOT / "shared/portal/admin/index.html").read_text(encoding="utf-8")
+worker = (ROOT / "admin-worker/src/teacher.mjs").read_text(encoding="utf-8")
+assert worker.count(KI_HINWEIS) == 1 and 'route.course.startsWith("irn/")?' in worker
+print(f"PASS KI-Hinweis am Seitenende auf {len(irn_pages)} IRN-Seiten, nicht auf {len(other_pages)} anderen")
+
+# IRN: all chapters (Unterkapitel) start collapsed.
+for course in manifest["courses"]:
+    if course["teacher"] != "IRN":
+        continue
+    page = (dist / course["slug"] / "index.html").read_text(encoding="utf-8")
+    chapters = re.findall(r'<details class="kapitel"[^>]*>', page)
+    assert chapters and not any(re.search(r"\sopen[\s>]", tag) for tag in chapters), course["slug"]
+print("PASS IRN-Unterkapitel standardmässig eingeklappt")

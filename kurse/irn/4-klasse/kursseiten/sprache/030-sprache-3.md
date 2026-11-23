@@ -1,4 +1,4 @@
-<details class="kapitel" id="sprache-3" data-kurz="Mit Soekia N-Gramm-Länge, Temperatur und Trainingstext verändern und Texte vergleichen." open>
+<details class="kapitel" id="sprache-3" data-kurz="Mit Soekia N-Gramm-Länge, Temperatur und Trainingstext verändern und Texte vergleichen.">
   <summary><span class="kapitel-nr">3</span>
     <h2 class="kapitel-titel">Übertragen: Soekia</h2>
   </summary>

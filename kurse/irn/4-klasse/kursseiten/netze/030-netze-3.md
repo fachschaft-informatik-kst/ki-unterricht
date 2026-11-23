@@ -1,4 +1,4 @@
-<details class="kapitel" id="netze-3" data-kurz="XOR mit mehreren Neuronen berechnen und das Lernen des Netzes untersuchen." open>
+<details class="kapitel" id="netze-3" data-kurz="XOR mit mehreren Neuronen berechnen und das Lernen des Netzes untersuchen.">
   <summary><span class="kapitel-nr">3</span>
     <h2 class="kapitel-titel">Mit dem Netzwerk experimentieren</h2>
   </summary>
