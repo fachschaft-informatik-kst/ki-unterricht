@@ -195,3 +195,27 @@ roten Lauf ohne Codeänderung zuerst Netzwerkfehler ausschliessen und den Lauf
 wiederholen. Die nativen Tests `execute_all_notebooks.py`,
 `check_ki_projekt.py` und `check_ki_fotos.py` sind weiterhin auf BOK 4
 festgelegt.
+
+## Nachtrag 23.11.2026: leichter technischer Nachtlauf statt Volltests
+
+Der historisch beschriebene vollständige Nachtlauf wird durch einen eigenen
+`nightly_smoke`-Job ersetzt (weiterhin täglich um 01:15 UTC). Der technische
+Nachtlauf prüft das Kursregister und die Schemata, erzeugt Kursseiten und
+Notebook-Quellen, prüft die Isolation der Kurs-Notebooks und die
+Editor-Publikationsverträge sowie die Syntax von zentralen JavaScript-Dateien.
+Er benötigt weder Chromium noch den vollständigen JupyterLite-Laufzeitbuild.
+
+Damit sind frei bearbeitbare Unterrichtsbeispiele, Kapitelbezeichnungen,
+Projektetappen, frühere Navigations-Snapshots und konkrete Lernaufträge
+**keine automatischen Nachtlauf-Blocker mehr**. Die bisherigen inhaltsbezogenen
+Regressionstests bleiben im explizit gestarteten manuellen Workflow als
+`continue-on-error`-Diagnose verfügbar. Der auf ein festes Schwimmbad-Notebook
+zugeschnittene Test ist kein Pflichtcheck für normale Runtime-Änderungen mehr.
+
+**Weiterhin verbindlich bei relevanten Pushes und PRs:** der technische
+Site-Build, Schema- und interne Linkprüfungen, Notebook-Ausführung,
+Kernel-Kompatibilität, Editor-/Browser-Funktionstests, Isolation, die
+JupyterLite-Extension und der Cloudflare-Worker-Vertrag. Der vollständige
+Browser- und Pyodide-Releasecheck kann zusätzlich manuell angefordert werden.
+Die Nachtprüfung ersetzt diese Pflichtprüfungen nicht und garantiert nicht,
+dass jede Unterrichtsinteraktion auf jedem Browser funktioniert.

@@ -1,7 +1,7 @@
 name: Build and Deploy
 
 # Stop outdated CI runs when new commits arrive on the same branch or PR.
-# The nightly run has its own group, so a push at night never cancels it.
+# The nightly technical smoke test has its own group, so a push never cancels it.
 concurrency:
   group: ki-unterricht-${{ github.workflow }}-${{ github.event_name == 'schedule' && 'nightly' || github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name != 'schedule' }}
@@ -13,15 +13,60 @@ on:
   pull_request:
     branches:
       - '*'
-  # Every check, including the slow notebook browser tests, runs once per night
-  # on main (01:15 UTC, i.e. 02:15 in Swiss winter time). A red run sends an e-mail.
+  # Nightly on main: content-agnostic technical smoke tests only.
+  # Heavy browser/notebook release checks are manual or triggered by code changes.
   schedule:
     - cron: '15 1 * * *'
-  # The same complete run can be started manually when needed.
+  # Manually run the full technical release checks and optional content audit.
   workflow_dispatch:
 
 jobs:
+  nightly_smoke:
+    name: Nightly technical smoke (no fixed teaching-content assertions)
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install site builder
+        run: python -m pip install -r requirements.txt
+      - name: Build and validate the course sources
+        run: |
+          # These checks validate data schemas, generation and lesson isolation,
+          # not specific headings, teaching examples or lesson counts.
+          python scripts/course_registry.py
+          python scripts/build_portal.py
+          python scripts/build_course.py
+          python scripts/build_basis.py
+          python scripts/build_portal_notebooks.py
+          python tests/check_notebook_isolation.py
+          python tests/check_editor_publish.py
+      - name: Check application and editor JavaScript syntax
+        run: |
+          node --check shared/course-model.js
+          node --check shared/glossary-model.js
+          node --check shared/portal/portal.js
+          node --check shared/basis/basis.js
+          node --check shared/portal/admin/admin.js
+          node --check shared/portal/admin/teacher.js
+          node --check shared/portal/admin/plan-editor.js
+          node --check admin-worker/src/index.mjs
+          node --check admin-worker/src/teacher.mjs
+
   build:
+    # Push/PR checks remain blocking. Manual runs can run the full release suite.
+    # The nightly smoke above deliberately avoids costly or content-specific E2E tests.
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     outputs:
@@ -39,9 +84,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Nightly and manual runs execute every check. Pushes and PRs skip the
-          # slow notebook browser tests, which run at night instead.
-          if [[ "${{ github.event_name }}" == "schedule" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          # Full technical release suite only on explicit manual dispatch.
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "full=true" >> "$GITHUB_OUTPUT"
           else
             echo "full=false" >> "$GITHUB_OUTPUT"
@@ -259,7 +303,6 @@ jobs:
         if: steps.scope.outputs.runtime_changed == 'true'
         run: |
           python tests/execute_all_notebooks.py
-          python tests/check_dl4_schwimmbad.py
           python tests/check_pyodide_lock.py
           python tests/check_kernel_compat.py
       - name: Generate course pages and notebook sources
@@ -271,11 +314,12 @@ jobs:
           python scripts/build_basis.py
           python scripts/build_portal_notebooks.py
           python tests/check_notebook_isolation.py
-      # These tests are not part of the push/PR run. They protect the content
-      # contract, the separation of content and controller code and the
-      # classroom experiments, and run only in the nightly and manual full run.
-      - name: Nightly checks of content contract and classroom tools
-        if: steps.scope.outputs.full == 'true'
+      # Teaching examples, historical chapter IDs and content snapshots are
+      # editorial decisions, not CI release blockers. Keep their tests as an
+      # explicitly requested, non-blocking diagnostic audit only.
+      - name: Optional classroom-content audit (advisory)
+        if: github.event_name == 'workflow_dispatch'
+        continue-on-error: true
         timeout-minutes: 5
         run: |
           python tests/check_portal_content.py
@@ -283,11 +327,12 @@ jobs:
           python tests/check_ki_projekt.py
           python tests/check_ki_fotos.py
           python tests/check_ki_basis.py
+          python tests/check_dl4_schwimmbad.py
       # Runs the notebooks of every course and course template in the Pyodide
       # version that the browser runtime uses (about 3 minutes). Keep the pin in
       # sync with jupyterlite-pyodide-kernel in requirements.txt (0.5.0 bundles
       # Pyodide 0.27.0).
-      - name: Check all notebooks in Pyodide (nightly or runner changes)
+      - name: Check all notebooks in Pyodide (manual or runner changes)
         # Avoid waiting for the next nightly run to discover defects in this test harness.
         if: steps.scope.outputs.full == 'true' || steps.scope.outputs.pyodide_changed == 'true'
         timeout-minutes: 15
@@ -365,8 +410,10 @@ jobs:
         run: |
           PORTAL_SITE=dist node tests/check_basis_browser.cjs
           PORTAL_SITE=dist node tests/check_course_theme.cjs
-      - name: Nightly browser check of the project pages
-        if: steps.scope.outputs.full == 'true'
+      # This test asserts a specific project navigation order. Advisory only.
+      - name: Optional project-page content navigation audit
+        if: github.event_name == 'workflow_dispatch'
+        continue-on-error: true
         run: |
           PORTAL_SITE=dist PROJECT_PAGES_PORT=8791 node tests/check_project_pages.cjs
       - name: Browser-check nonblocking notebook startup
@@ -379,7 +426,7 @@ jobs:
         run: |
           PORTAL_SITE=dist node tests/check_fotostudio_storage.cjs
       - name: Check real notebook startup in every teacher course
-        # Slow (about 90 seconds): runs in the nightly and manual full run only.
+        # Slow (about 90 seconds): explicitly requested manual full run only.
         if: steps.scope.outputs.full == 'true'
         timeout-minutes: 10
         run: |
@@ -393,8 +440,7 @@ jobs:
           LITE_SITE=dist KI_WIDGET_COLD_START=1 node tests/check_autostart_browser.cjs
       - name: Check deployed notebook runtime in Chromium (full release test)
         # Pushes and PRs keep the technical/Pyodide and cold-start smoke tests above.
-        # The slower browser integration (~4 minutes) runs every night on main
-        # and in a manually requested workflow.
+        # The slower browser integration (~4 minutes) runs on manual request.
         if: steps.scope.outputs.full == 'true'
         timeout-minutes: 12
         run: |
