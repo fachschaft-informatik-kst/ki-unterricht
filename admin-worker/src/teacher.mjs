@@ -421,5 +421,5 @@ export function teacherShell(route,courses=normalizeTeacherCourses({version:1,co
     '<footer><a href="https://fachschaft-informatik-kst.github.io/ki-unterricht/'+route.course+'/">Zur Kursseite</a> · '+
     '<a href="/">Lehrpersonen-Editor</a> · <button type="button" id="printPage">Drucken</button></footer>'+
     '<script src="/markdown-it.min.js" defer></script><script src="/teacher.js" defer></script>'+
-    '<p class="ki-hinweis" style="clear:both;margin:2.5rem auto 1.5rem;padding:0 16px;max-width:60rem;text-align:center;font:0.85rem/1.5 system-ui,sans-serif;color:#5f6b6e">Diese Seite wurde mit Hilfe von KI erstellt.</p></body></html>';
+    (route.course.startsWith("irn/")?'<p class="ki-hinweis" style="clear:both;margin:2.5rem auto 1.5rem;padding:0 16px;max-width:60rem;text-align:center;font:0.85rem/1.5 system-ui,sans-serif;color:#5f6b6e">Diese Seite wurde mit Hilfe von KI erstellt.</p>':'')+'</body></html>';
 }

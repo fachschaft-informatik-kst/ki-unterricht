@@ -1,4 +1,4 @@
-<details class="kapitel" id="perzeptron-5" data-kurz="Drei interaktive Versuche zu Entscheidung, Gewichten und Lernen (ca. 30 Minuten)." open>
+<details class="kapitel" id="perzeptron-5" data-kurz="Drei interaktive Versuche zu Entscheidung, Gewichten und Lernen (ca. 30 Minuten).">
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Im Notebook: entscheiden, einstellen, lernen lassen</h2>
   </summary>

@@ -246,16 +246,17 @@ def build(out: Path, courses: list[dict] | None = None) -> None:
                     content = re.sub(r"</head>", "<style data-course-theme>" +
                                      theme_css(course) + "</style></head>",
                                      content, count=1, flags=re.I)
-                    content = add_ki_hinweis(content)
+                    if course["teacher"] == "IRN":
+                        content = add_ki_hinweis(content)
                 file.write_text(content, encoding="utf-8")
         else:
             target.mkdir(parents=True, exist_ok=True)
-            (target / "index.html").write_text(add_ki_hinweis(planned_page(course)),
-                                               encoding="utf-8")
+            page = planned_page(course)
+            if course["teacher"] == "IRN":
+                page = add_ki_hinweis(page)
+            (target / "index.html").write_text(page, encoding="utf-8")
         print(f"Course route: /{slug}/ ({course['status']})")
-    (out / "kurse.html").write_text(add_ki_hinweis(overview(courses)), encoding="utf-8")
-    for page in (out / "projekt").rglob("*.html"):
-        page.write_text(add_ki_hinweis(page.read_text(encoding="utf-8")), encoding="utf-8")
+    (out / "kurse.html").write_text(overview(courses), encoding="utf-8")
     shutil.copyfile(ROOT / "portal-index.html", out / "index.html")
 
 

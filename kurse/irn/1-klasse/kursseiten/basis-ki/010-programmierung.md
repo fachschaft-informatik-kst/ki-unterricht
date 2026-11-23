@@ -1,4 +1,4 @@
-<details class="kapitel" id="einstieg-1" data-kurz="Wer legt fest, wie das System entscheidet: Menschen oder die Daten?" open>
+<details class="kapitel" id="einstieg-1" data-kurz="Wer legt fest, wie das System entscheidet: Menschen oder die Daten?">
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Regeln von Menschen vs. Lernen aus Daten</h2>
   </summary>

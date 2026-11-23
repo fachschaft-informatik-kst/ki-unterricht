@@ -1,4 +1,4 @@
-<details class="kapitel" id="einstieg-3" data-kurz="KI, maschinelles Lernen, Deep Learning und generative KI sind ineinander enthalten." open>
+<details class="kapitel" id="einstieg-3" data-kurz="KI, maschinelles Lernen, Deep Learning und generative KI sind ineinander enthalten.">
   <summary><span class="kapitel-nr">3</span>
     <h2 class="kapitel-titel">Kategorien von KI</h2>
   </summary>

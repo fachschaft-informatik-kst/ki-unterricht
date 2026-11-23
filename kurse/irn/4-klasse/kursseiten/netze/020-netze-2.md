@@ -1,4 +1,4 @@
-<details class="kapitel" id="netze-2" data-kurz="Die Zwischenschicht aus OR und NAND als Lösung des XOR-Problems verstehen." open>
+<details class="kapitel" id="netze-2" data-kurz="Die Zwischenschicht aus OR und NAND als Lösung des XOR-Problems verstehen.">
   <summary><span class="kapitel-nr">2</span>
     <h2 class="kapitel-titel">Ein mehrschichtiges künstliches neuronales Netz</h2>
   </summary>

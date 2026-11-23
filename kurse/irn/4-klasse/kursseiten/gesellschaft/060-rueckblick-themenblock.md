@@ -1,4 +1,4 @@
-<details class="kapitel" id="rueckblick-themenblock" data-kurz="Letzte Doppellektion: eine Erkenntnis, eine offene Frage und eine Rückmeldung zum Themenblock." open>
+<details class="kapitel" id="rueckblick-themenblock" data-kurz="Letzte Doppellektion: eine Erkenntnis, eine offene Frage und eine Rückmeldung zum Themenblock.">
   <summary><span class="kapitel-nr">6</span>
     <h2 class="kapitel-titel">Rückblick auf den Themenblock</h2>
   </summary>

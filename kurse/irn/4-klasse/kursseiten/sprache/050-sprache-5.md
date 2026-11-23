@@ -1,4 +1,4 @@
-<details class="kapitel" id="sprache-5" data-kurz="Gelungene und problematische Texte erklären, Grenzen nennen und KI-Aussagen prüfen." open>
+<details class="kapitel" id="sprache-5" data-kurz="Gelungene und problematische Texte erklären, Grenzen nennen und KI-Aussagen prüfen.">
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Festhalten</h2>
   </summary>

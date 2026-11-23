@@ -1,4 +1,4 @@
-<details class="kapitel" id="sprache-2" data-kurz="Das Papagei-Modell sagt das nächste Wort aus Häufigkeiten voraus." open>
+<details class="kapitel" id="sprache-2" data-kurz="Das Papagei-Modell sagt das nächste Wort aus Häufigkeiten voraus.">
   <summary><span class="kapitel-nr">2</span>
     <h2 class="kapitel-titel">Mit der Lernstrecke: Papagei-Modell</h2>
   </summary>

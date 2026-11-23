@@ -1,4 +1,4 @@
-<details class="kapitel" id="perzeptron-3" data-kurz="Eingaben, Gewichte, Bias, Summe, Ausgabe: das künstliche Neuron im Überblick." open>
+<details class="kapitel" id="perzeptron-3" data-kurz="Eingaben, Gewichte, Bias, Summe, Ausgabe: das künstliche Neuron im Überblick.">
   <summary><span class="kapitel-nr">3</span>
     <h2 class="kapitel-titel">Das künstliche Neuron</h2>
   </summary>

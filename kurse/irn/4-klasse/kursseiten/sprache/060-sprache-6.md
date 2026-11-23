@@ -1,4 +1,4 @@
-<details class="kapitel" id="sprache-6" data-kurz="Vom Zählen zum Rechnen: Warum ein künstliches neuronales Netz mehr ist als eine Häufigkeitstabelle." open>
+<details class="kapitel" id="sprache-6" data-kurz="Vom Zählen zum Rechnen: Warum ein künstliches neuronales Netz mehr ist als eine Häufigkeitstabelle.">
   <summary><span class="kapitel-nr">6</span>
     <h2 class="kapitel-titel">Vom Papagei zum künstlichen neuronalen Netz</h2>
   </summary>

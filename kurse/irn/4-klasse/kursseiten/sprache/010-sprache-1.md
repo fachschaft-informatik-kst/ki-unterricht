@@ -1,4 +1,4 @@
-<details class="kapitel" id="sprache-1" data-kurz="Reihum Wörter schreiben und das Blatt falten: Wie entsteht ein plausibler Text?" open>
+<details class="kapitel" id="sprache-1" data-kurz="Reihum Wörter schreiben und das Blatt falten: Wie entsteht ein plausibler Text?">
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Ohne Computer: Papierexperiment</h2>
   </summary>

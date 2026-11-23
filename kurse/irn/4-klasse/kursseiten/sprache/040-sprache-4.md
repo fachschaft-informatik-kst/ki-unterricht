@@ -1,4 +1,4 @@
-<details class="kapitel" id="sprache-4" data-kurz="Mensch oder KI? Ein kurzes Chat-Spiel, nur nach Freigabe." open>
+<details class="kapitel" id="sprache-4" data-kurz="Mensch oder KI? Ein kurzes Chat-Spiel, nur nach Freigabe.">
   <summary><span class="kapitel-nr">4</span>
     <h2 class="kapitel-titel">Turing-Test: Mensch oder KI?</h2>
   </summary>

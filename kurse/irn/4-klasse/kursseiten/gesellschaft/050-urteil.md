@@ -1,4 +1,4 @@
-<details class="kapitel" id="urteil" data-kurz="Anfangsthese neu beurteilen und eine Massnahme festhalten." open>
+<details class="kapitel" id="urteil" data-kurz="Anfangsthese neu beurteilen und eine Massnahme festhalten.">
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Mein Urteil</h2>
   </summary>

@@ -1,4 +1,4 @@
-<details class="kapitel" id="gesellschaft-1" data-kurz="Cathy O’Neils Video: Wer entscheidet, wer profitiert, wer ist betroffen?" open>
+<details class="kapitel" id="gesellschaft-1" data-kurz="Cathy O’Neils Video: Wer entscheidet, wer profitiert, wer ist betroffen?">
   <summary><span class="kapitel-nr">1</span>
     <h2 class="kapitel-titel">Das Video auswerten</h2>
   </summary>

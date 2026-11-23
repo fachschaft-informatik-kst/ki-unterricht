@@ -1,4 +1,4 @@
-<details class="kapitel" id="netze-5" data-kurz="Ziffern erkennen: 64 Pixel, 16 versteckte Neuronen, 10 Ausgaben. Überwachtes Lernen: Zu jedem Bild ist die richtige Ziffer bekannt." open>
+<details class="kapitel" id="netze-5" data-kurz="Ziffern erkennen: 64 Pixel, 16 versteckte Neuronen, 10 Ausgaben. Überwachtes Lernen: Zu jedem Bild ist die richtige Ziffer bekannt.">
   <summary><span class="kapitel-nr">5</span>
     <h2 class="kapitel-titel">Ein Netz erkennt Ziffern</h2>
   </summary>

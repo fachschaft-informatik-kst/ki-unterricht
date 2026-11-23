@@ -1,4 +1,4 @@
-<details class="kapitel" id="einstieg-4" data-kurz="Spezialisierte und allgemeine KI unterscheiden." open>
+<details class="kapitel" id="einstieg-4" data-kurz="Spezialisierte und allgemeine KI unterscheiden.">
   <summary><span class="kapitel-nr">4</span>
     <h2 class="kapitel-titel">Spezialisierte und allgemeine KI</h2>
   </summary>

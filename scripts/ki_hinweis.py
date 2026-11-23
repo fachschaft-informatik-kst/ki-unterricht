@@ -1,8 +1,8 @@
 """Hinweis am Seitenende: «Diese Seite wurde mit Hilfe von KI erstellt.»
 
-Der Hinweis wird beim Bauen in jede veröffentlichte HTML-Seite eingefügt,
-als letztes Element vor </body>. Der Text steht nur hier und in
-admin-worker/src/teacher.mjs (Lehrpersonenbereich).
+Nur IRN-Kurse: Der Hinweis wird beim Bauen in jede HTML-Seite der IRN-Kurse
+eingefügt, als letztes Element vor </body>. Der Text steht nur hier und in
+admin-worker/src/teacher.mjs (Lehrpersonenbereich der IRN-Kurse).
 """
 from __future__ import annotations
 

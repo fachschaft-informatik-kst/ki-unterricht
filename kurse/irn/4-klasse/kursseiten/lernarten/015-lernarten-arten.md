@@ -1,4 +1,4 @@
-<details class="kapitel" id="lernarten-arten" data-kurz="Lernende Systeme lernen überwacht, unüberwacht oder verstärkend; entscheidend ist das Lernsignal." open>
+<details class="kapitel" id="lernarten-arten" data-kurz="Lernende Systeme lernen überwacht, unüberwacht oder verstärkend; entscheidend ist das Lernsignal.">
   <summary><span class="kapitel-nr">2</span>
     <h2 class="kapitel-titel">Die drei Lernarten</h2>
   </summary>

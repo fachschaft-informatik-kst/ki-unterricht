@@ -1,4 +1,4 @@
-<details class="kapitel" id="perzeptron-4" data-kurz="Nur drei Zahlen ändern sich: Gewichte und Bias. Alles andere bleibt gleich." open>
+<details class="kapitel" id="perzeptron-4" data-kurz="Nur drei Zahlen ändern sich: Gewichte und Bias. Alles andere bleibt gleich.">
   <summary><span class="kapitel-nr">4</span>
     <h2 class="kapitel-titel">Was lernt ein Neuron genau?</h2>
   </summary>
