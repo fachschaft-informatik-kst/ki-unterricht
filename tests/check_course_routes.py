@@ -87,3 +87,18 @@ for root in ("basis", "projekt", "bok/1-klasse", "bok/4-klasse"):
                  "musterloesungen/index.html", "kurs.json", "materialien/downloads/Arbeitsblatt_Perzeptron_Lsg.md",
                  "materialien/downloads/KI_Bewertungsraster.md"):
         assert not (folder / path).exists(), f"Public teacher-only file: {root}/{path}"
+
+# Every published page ends with the AI notice (teacher area: Worker template).
+from ki_hinweis import TEXT as KI_HINWEIS
+pages = [dist / "kurse.html", *sorted((dist / "projekt").rglob("*.html"))]
+for course in manifest["courses"]:
+    pages += sorted((dist / course["slug"]).rglob("*.html"))
+assert len(pages) > 4
+for page in pages:
+    html = page.read_text(encoding="utf-8")
+    assert html.count(KI_HINWEIS) == 1, f"KI-Hinweis fehlt oder doppelt: {page}"
+    tail = html[html.index(KI_HINWEIS):].lower()
+    assert "</body>" in tail and "<main" not in tail and "<footer" not in tail, f"KI-Hinweis nicht ganz unten: {page}"
+for source in (ROOT / "shared/portal/admin/index.html", ROOT / "admin-worker/src/teacher.mjs"):
+    assert source.read_text(encoding="utf-8").count(KI_HINWEIS) == 1, source
+print(f"PASS KI-Hinweis am Seitenende auf {len(pages)} Seiten")
