@@ -50,7 +50,7 @@ for(const course of ["_vorlagen/1-klasse","_vorlagen/4-klasse","bok/1-klasse","b
       if(entry.isDirectory()){scan(file);continue;}
       if(!entry.name.endsWith(".md"))continue;
       const source=readFileSync(file,"utf8");
-      assert(!/\\shhref\\s*=/.test(source),course+"/"+entry.name+": ungültiges hhref-Attribut");
+      assert(!/\shhref\s*=/.test(source),course+"/"+entry.name+": ungültiges hhref-Attribut");
       for(const match of source.matchAll(/href="#((?:basis-)?glossar-[a-z0-9-]+)"/g)){
         assert(match[1].startsWith(prefix),course+"/"+entry.name+": falsches Glossar-Präfix: "+match[1]);
         assert(ids.has(match[1].slice(prefix.length)),course+"/"+entry.name+": Glossar-Ziel fehlt: "+match[1]);
