@@ -3,9 +3,9 @@
   <div class="kapitel-body">
     <p class="section-intro">KI kann auf unterschiedliche Weise lernen. Entscheidend ist, welche Informationen ein System beim Lernen erhält.</p>
     <div class="lesson-steps">
-      <article><b>Überwachtes Lernen · mit richtigen Antworten</b><p>Zu Trainingsbeispielen gehören die richtigen Bezeichnungen (<strong>Labels</strong>), etwa «Katze» und «Hund». Das System lernt, neue Beispiele einer dieser Klassen zuzuordnen.</p></article>
-      <article><b>Unüberwachtes Lernen · Ähnlichkeiten entdecken</b><p>Das System entdeckt Muster oder Gruppen in Daten, ohne dass die richtige Gruppe für jedes Beispiel vorher feststeht.</p></article>
-      <article><b>Verstärkendes Lernen · aus den Folgen lernen</b><p>Das System probiert Handlungen aus. Erfolg und Misserfolg beeinflussen, welche Handlung es beim nächsten Mal wählt.</p></article>
+      <article><b><a href="#basis-glossar-ueberwachtes-lernen">Überwachtes Lernen</a> · mit richtigen Antworten</b><p>Zu Trainingsbeispielen gehören die richtigen Bezeichnungen (<strong><a href="#basis-glossar-label">Labels</a></strong>), etwa «Katze» und «Hund». Das System lernt, neue Beispiele einer dieser Klassen zuzuordnen.</p></article>
+      <article><b><a href="#basis-glossar-unueberwachtes-lernen">Unüberwachtes Lernen</a> · Ähnlichkeiten entdecken</b><p>Das System entdeckt Muster oder Gruppen in Daten, ohne dass die richtige Gruppe für jedes Beispiel vorher feststeht.</p></article>
+      <article><b><a href="#basis-glossar-verstaerkendes-lernen">Verstärkendes Lernen</a> · aus den Folgen lernen</b><p>Das System probiert Handlungen aus. Erfolg und Misserfolg beeinflussen, welche Handlung es beim nächsten Mal wählt.</p></article>
     </div>
     <div class="learning-example-links">
       <a href="https://inf-schule.de/kids/computerinalltag/lernende-systeme/schritt2" target="_blank" rel="noopener noreferrer">Überwacht: Smiley-Spiel öffnen</a>

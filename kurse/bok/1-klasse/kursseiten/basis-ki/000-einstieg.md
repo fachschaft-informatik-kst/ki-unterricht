@@ -10,4 +10,4 @@
   </div>
 </details>
 <!-- /LESSONS:basis-ki -->
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#basis-glossar-ki">KI</a> · <a href="#basis-glossar-maschinelles-lernen">maschinelles Lernen</a> · <a href="#basis-glossar-generative-ki">generative KI</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#basis-glossar-ki">KI</a> · <a href="#basis-glossar-maschinelles-lernen">maschinelles Lernen</a> · <a href="#basis-glossar-deep-learning">Deep Learning</a> · <a href="#basis-glossar-generative-ki">generative KI</a> · <a href="#basis-glossar-ueberwachtes-lernen">überwachtes Lernen</a> · <a href="#basis-glossar-unueberwachtes-lernen">unüberwachtes Lernen</a> · <a href="#basis-glossar-verstaerkendes-lernen">verstärkendes Lernen</a></p>

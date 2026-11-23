@@ -10,4 +10,4 @@
   </div>
 </details>
 <!-- /LESSONS:einstieg -->
-<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ki">KI</a> · <a href="#glossar-maschinelles-lernen">maschinelles Lernen</a> · <a href="#glossar-generative-ki">generative KI</a></p>
+<p class="glossary-related"><strong>Zum Nachschlagen:</strong> <a href="#glossar-ki">KI</a> · <a href="#glossar-regelbasierte-ki">regelbasierte KI</a> · <a href="#glossar-maschinelles-lernen">maschinelles Lernen</a> · <a href="#glossar-deep-learning">Deep Learning</a> · <a href="#glossar-generative-ki">generative KI</a></p>

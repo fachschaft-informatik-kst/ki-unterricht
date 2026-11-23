@@ -70,6 +70,66 @@
       "antwort": "Das Modell erzeugt plausible Inhalte, prüft aber Fakten nicht automatisch."
     },
     {
+      "id": "regelbasierte-ki",
+      "gruppe": "Grundlagen",
+      "begriff": "Regelbasierte KI",
+      "basis": "Eine KI nutzt von Menschen festgelegte Regeln, statt ihre Regeln aus Beispielen zu lernen.",
+      "vertieft": "KI-Verfahren, die etwa mit einer Wissensbasis, Suchregeln oder logischen Schlussfolgerungen arbeiten. Nicht jedes Programm mit festen Regeln ist bereits KI.",
+      "beispiel": "Ein Schachprogramm sucht mithilfe programmierter Spiel- und Suchregeln nach guten Zügen.",
+      "frage": "Ist jede Ampel mit festem Zeitplan eine regelbasierte KI?",
+      "antwort": "Nein. Automatisierung allein macht noch keine KI. Regelbasierte KI wird zum Beispiel für Suchen und Schlussfolgern eingesetzt."
+    },
+    {
+      "id": "schwache-ki",
+      "gruppe": "Grundlagen",
+      "begriff": "Schwache KI",
+      "basis": "Eine KI, die für bestimmte Aufgaben oder Aufgabenbereiche entwickelt wurde – auch wenn sie darin sehr gut ist.",
+      "vertieft": "Aufgabenbezogene KI im Unterschied zur hypothetischen allgemeinen KI. «Schwach» beschreibt keine geringe Leistung.",
+      "beispiel": "Ein Chatbot kann Texte erzeugen, ein Bildmodell kann Tiere erkennen.",
+      "frage": "Kann ein leistungsfähiger Chatbot trotzdem schwache KI sein?",
+      "antwort": "Ja. Gute Leistungen bei bestimmten Aufgaben beweisen keine allgemeine Intelligenz."
+    },
+    {
+      "id": "starke-ki",
+      "gruppe": "Grundlagen",
+      "begriff": "Starke KI (hypothetisch)",
+      "basis": "Die bisher hypothetische Idee einer KI, die sehr unterschiedliche geistige Aufgaben selbstständig bewältigen und Neues lernen könnte.",
+      "vertieft": "Vorstellung einer allgemeinen, menschenähnlich vielseitigen KI. Bisher gibt es kein allgemein anerkanntes nachgewiesenes Beispiel; allgemeine Intelligenz und Bewusstsein sind nicht dasselbe.",
+      "beispiel": "Eine gedachte KI könnte ohne spezielle Neuentwicklung verschiedenste neue Probleme lösen.",
+      "frage": "Gibt es heute ein nachgewiesenes Beispiel für starke KI?",
+      "antwort": "Nein. Heutige KI-Systeme können vielseitig wirken, das ist noch kein Nachweis für allgemeine Intelligenz."
+    },
+    {
+      "id": "turing-test",
+      "gruppe": "Grundlagen",
+      "begriff": "Turing-Test",
+      "basis": "Ein Mensch führt schriftliche Gespräche und versucht zu erkennen, ob die Antworten von einem Menschen oder einer Maschine stammen.",
+      "vertieft": "Alan Turings Vorschlag von 1950, Maschinen anhand eines Gesprächsverhaltens zu beurteilen. Ein Bestehen würde Verständnis oder Bewusstsein nicht automatisch beweisen.",
+      "beispiel": "Eine Testperson liest zwei Chats und soll den menschlichen Gesprächspartner identifizieren.",
+      "frage": "Beweist eine überzeugende Antwort, dass die Maschine wirklich versteht?",
+      "antwort": "Nein. Der Test untersucht das beobachtbare Gesprächsverhalten, nicht das innere Verständnis."
+    },
+    {
+      "id": "expertensystem",
+      "gruppe": "Grundlagen",
+      "begriff": "Expertensystem",
+      "basis": "Ein Programm benutzt das von Fachleuten gesammelte Wissen und Wenn-dann-Regeln, um Fragen zu beantworten.",
+      "vertieft": "Wissensbasiertes KI-System mit Regeln und Schlussfolgerungen. Die Regeln sind vorgegeben und müssen nicht aus Trainingsdaten gelernt werden.",
+      "beispiel": "Ein Diagnosesystem fragt Symptome ab und wendet passende Wenn-dann-Regeln an.",
+      "frage": "Woher bekommt ein klassisches Expertensystem seine Regeln?",
+      "antwort": "Sie werden von Menschen aus Fachwissen aufgeschrieben, nicht automatisch aus Beispielen gelernt."
+    },
+    {
+      "id": "ki-winter",
+      "gruppe": "Grundlagen",
+      "begriff": "KI-Winter",
+      "basis": "Eine Phase, in der die Erwartungen an KI enttäuscht wurden und Forschung weniger Aufmerksamkeit oder Geld bekam.",
+      "vertieft": "Bezeichnung für historische Rückgänge der KI-Förderung und Begeisterung, nachdem grosse Versprechen technisch nicht eingelöst wurden. Kein eigenes KI-Verfahren.",
+      "beispiel": "Nach überzogenen Erwartungen wurden einige KI-Projekte nicht weiter finanziert.",
+      "frage": "Warum hat der KI-Winter in der Zeitleiste keine Technik-Markierung?",
+      "antwort": "Weil er eine Phase der KI-Geschichte bezeichnet, keine Methode mit festen Regeln oder Lernen aus Daten."
+    },
+    {
       "id": "ueberwachtes-lernen",
       "gruppe": "Lernarten",
       "begriff": "Überwachtes Lernen",

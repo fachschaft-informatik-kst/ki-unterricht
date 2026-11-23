@@ -23,7 +23,7 @@
       <figcaption>Einteilung der Begriffe. Ausschnitt aus der <a href="https://inf-schule.de/ki/menueansicht" target="_blank" rel="noopener noreferrer">KI-Landkarte von inf-schule.de</a> (CC BY-SA 4.0).</figcaption>
     </figure>
     <div class="ki-sort-task" data-ki-sort-task="begriffe">
-      <p class="ki-sort-intro">Ordnen Sie jedem Beispiel die <strong>spezifischste passende Kategorie</strong> zu. Deep Learning gehört auch zum maschinellen Lernen und zur KI.</p>
+      <p class="ki-sort-intro">Ordnen Sie jedem Beispiel die <strong>spezifischste passende Kategorie</strong> zu. Deep Learning gehört auch zum maschinellen Lernen und zur KI. <a href="#glossar-regelbasierte-ki">Regelbasierte KI</a> folgt dagegen vorgegebenen Regeln.</p>
       <div class="ki-sort-layout">
         <div class="ki-sort-pool-wrap">
           <h3 class="ki-sort-subtitle">Beispiele <small>noch nicht zugeordnet</small></h3>

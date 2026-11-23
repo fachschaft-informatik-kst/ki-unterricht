@@ -3,8 +3,8 @@
     <h2 class="kapitel-titel">Schwache und starke KI</h2>
   </summary>
   <div class="kapitel-body">
-    <p><strong>Schwache KI</strong> ist für bestimmte Aufgaben oder Aufgabenbereiche entwickelt, etwa Bilder erkennen, Schach spielen oder Texte erzeugen. Auch ein sehr leistungsfähiges System kann schwache KI sein.</p>
-    <p><strong>Starke KI</strong> bezeichnet die hypothetische Vorstellung einer KI mit allgemeiner, menschenähnlicher Intelligenz, die sehr unterschiedliche geistige Aufgaben selbstständig bewältigen und Neues lernen könnte. Es gibt derzeit kein allgemein anerkanntes nachgewiesenes Beispiel. <strong>Bewusstsein ist nicht dasselbe wie allgemeine Intelligenz</strong> und wird hier nicht vorausgesetzt.</p>
+    <p><strong><a href="#glossar-schwache-ki">Schwache KI</a></strong> ist für bestimmte Aufgaben oder Aufgabenbereiche entwickelt, etwa Bilder erkennen, Schach spielen oder Texte erzeugen. Auch ein sehr leistungsfähiges System kann schwache KI sein.</p>
+    <p><strong><a href="#glossar-starke-ki">Starke KI</a></strong> bezeichnet die hypothetische Vorstellung einer KI mit allgemeiner, menschenähnlicher Intelligenz, die sehr unterschiedliche geistige Aufgaben selbstständig bewältigen und Neues lernen könnte. Es gibt derzeit kein allgemein anerkanntes nachgewiesenes Beispiel. <strong>Bewusstsein ist nicht dasselbe wie allgemeine Intelligenz</strong> und wird hier nicht vorausgesetzt.</p>
     <div class="table-scroll">
       <table class="typen">
         <thead>
