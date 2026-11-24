@@ -11,4 +11,3 @@
   <article class="card"><span class="section-label">07</span><h2>Sprachmodelle</h2><p>Kontext und Wortvorhersage untersuchen; scheinbar plausible Aussagen anhand einer unabhängigen Quelle überprüfen.</p><a href="#basis-sprache">Zum Unterricht →</a></article>
   <article class="card"><span class="section-label">08</span><h2>KI und Gesellschaft</h2><p>Chancen und Risiken abwägen, Betroffene benennen und eine überprüfbare Schutzmassnahme vorschlagen.</p><a href="#basis-gesellschaft">Zum Unterricht →</a></article>
 </div>
-<p class="callout"><strong>Bewertung des Bildprojekts (DL 4–6):</strong> 12 Punkte für das gemeinsame Projekt (Datenplan, fairer A/B-Vergleich, Test und Fazit) und 18 individuelle Punkte für das Fachgespräch. Maximal 30 Punkte. Die Fremdmodellprüfung ist eine unbenotete Lernaufgabe. Der vereinbarte Ersatzweg mit vorbereiteten Kreis-/Dreieck-Daten ist genauso gültig wie eigene Fotos; das erreichte Resultat ist nicht die Note.</p>
