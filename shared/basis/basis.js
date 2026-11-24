@@ -28,10 +28,21 @@ function show(){
   const chapter=byHash(id);
   const parent=sections.find(s=>s.id===id||s.contains(chapter));
   const active=parent||sections[0];
-  for(const s of sections)s.classList.toggle('basis-view-hidden',s!==active);
+  for(const s of sections){
+    s.classList.toggle('basis-view-hidden',s!==active);
+    if(s.hasAttribute('data-pages')){
+      const page=s===active?chapter?.closest('details.kapitel,#basis-bewertung'):null;
+      const selected=page?.parentElement===s?page:null;
+      s.classList.toggle('has-page',!!selected);
+      for(const child of s.children)child.classList.toggle('is-page',child===selected);
+      if(selected)selected.open=true;
+    }
+  }
   for(const a of [...document.querySelectorAll('.nav a')])a.removeAttribute('aria-current');
   const current=links.find(a=>a.hash==='#'+active.id);
   if(current)current.setAttribute('aria-current','page');
+  const chapterLink=[...document.querySelectorAll('.nav-sub a')].find(a=>a.hash==='#'+chapter?.closest('details.kapitel')?.id);
+  if(chapterLink)chapterLink.setAttribute('aria-current','page');
   // Only expand subchapters for the current double lesson. Keep all lesson
   // links visible so students can always switch lessons.
   for(const [lessonId,menu] of submenus){
@@ -52,6 +63,10 @@ for(const section of sections){
  if(!link)continue;
  const submenu=document.createElement('div');submenu.className='nav-sub';submenu.hidden=true;
  submenu.setAttribute('role','group');submenu.setAttribute('aria-label','Unterkapitel zu '+(link.textContent||section.id).trim());
+ if(section.hasAttribute('data-pages')){
+   const home=document.createElement('a');home.href='#'+section.id;home.textContent='Fahrplan';submenu.append(home);
+   for(const chapter of chapters){const summary=chapter.querySelector(':scope > summary');if(summary){summary.tabIndex=-1;summary.addEventListener('click',e=>e.preventDefault());}}
+ }
  for(const chapter of chapters){
    const a=document.createElement('a');a.href='#'+chapter.id;
    a.textContent=chapter.querySelector('.kapitel-titel')?.textContent||chapter.id;
@@ -63,22 +78,57 @@ for(const section of sections){
 }
 window.addEventListener('hashchange',show);
 show();
+// Project checkboxes and the topic selection travel with the normal JSON/ZIP.
+const checks=[...document.querySelectorAll('.roadmap [data-check]')];
+for(const field of checks)field.dataset.basisAnswer='project-check-'+field.dataset.check;
+const topics=[...document.querySelectorAll('[data-topic]')];
+let topicField=null;
+if(topics.length){
+ topicField=document.createElement('input');topicField.type='hidden';topicField.dataset.basisAnswer='project-topic';
+ topics[0].parentElement.before(topicField);
+}
+const fieldValue=f=>f.type==='checkbox'?(f.checked?'true':''):f.value;
+const setField=(f,value)=>{if(f.type==='checkbox')f.checked=value==='true';else f.value=value;};
 const fields=[...document.querySelectorAll('[data-basis-answer]')];
 let data={};
 try{const x=JSON.parse(localStorage.getItem(key)||'{}');if(x&&typeof x==='object'&&!Array.isArray(x))data=x;}catch{}
 for(const field of fields){
  const name=field.dataset.basisAnswer;
- if(typeof data[name]==='string')field.value=data[name];
+ if(typeof data[name]==='string')setField(field,data[name]);
  field.addEventListener('input',()=>{
-   data[name]=field.value;
+   data[name]=fieldValue(field);
    try{localStorage.setItem(key,JSON.stringify(data));document.getElementById('basis-save-status').textContent='Notizen in diesem Browser gespeichert.';}
    catch{document.getElementById('basis-save-status').textContent='Speichern nicht möglich – bitte Notizen herunterladen.';}
  });
 }
+function renderProject(){
+ const projectChecks=checks.filter(c=>c.dataset.check.startsWith('phase-'));
+ const progress=document.getElementById('progress'),progressText=document.getElementById('progress-text');
+ if(progress&&progressText){progress.max=projectChecks.length;progress.value=projectChecks.filter(c=>c.checked).length;progressText.textContent=progress.value+' von '+progress.max+' Schritten';}
+ for(const list of document.querySelectorAll('.roadmap')){
+  let next=false;
+  for(const step of list.querySelectorAll('.roadmap-step')){
+   const c=step.querySelector('[data-check]');step.classList.toggle('is-done',!!c?.checked);
+   step.classList.toggle('is-next',!!c&&!c.checked&&!next);if(c&&!c.checked)next=true;
+  }
+ }
+ for(const topic of topics){const selected=topic.dataset.topic===topicField?.value;topic.classList.toggle('is-chosen',selected);const b=topic.querySelector('[data-choose]');if(b){b.setAttribute('aria-pressed',String(selected));b.textContent=selected?'Vorgemerkt ✓':'Als Thema vormerken';}}
+ for(const step of document.querySelectorAll('.journal-step')){const inputs=[...step.querySelectorAll('[data-basis-answer]:not([data-optional])')],label=step.querySelector('.completion');if(label)label.textContent=inputs.filter(f=>f.value.trim()).length+' / '+inputs.length;}
+}
+for(const topic of topics)topic.querySelector('[data-choose]')?.addEventListener('click',()=>{topicField.value=topicField.value===topic.dataset.topic?'':topic.dataset.topic;topicField.dispatchEvent(new Event('input',{bubbles:true}));});
+function filterTopics(){const q=document.getElementById('topic-search')?.value.trim().toLocaleLowerCase('de')||'',kind=document.getElementById('topic-filter')?.value||'all';let count=0;for(const topic of topics){topic.hidden=!(topic.textContent.toLocaleLowerCase('de').includes(q)&&(kind==='all'||kind===topic.dataset.kind));if(!topic.hidden)count++;}const out=document.getElementById('topic-count'),empty=document.getElementById('topic-empty');if(out)out.textContent=count+' von '+topics.length+' Themen';if(empty)empty.hidden=count!==0;}
+document.getElementById('topic-search')?.addEventListener('input',filterTopics);
+document.getElementById('topic-filter')?.addEventListener('change',filterTopics);
+document.addEventListener('input',renderProject);
+renderProject();if(topics.length)filterTopics();
+document.getElementById('start-studio')?.addEventListener('click',()=>{
+ const panel=document.getElementById('studio-panel'),frame=document.getElementById('studio-frame');
+ if(!panel||!frame)return;panel.hidden=false;panel.open=true;if(!frame.getAttribute('src'))frame.src='studio/index.html';panel.scrollIntoView({block:'start'});
+});
 const transferStatus=document.getElementById('basis-answer-transfer-status');
 document.getElementById('basis-download').addEventListener('click',()=>{
  // Read every current field (including selects), not just keys seen during this session.
- const answers=Object.fromEntries(fields.map(field=>[field.dataset.basisAnswer,field.value]));
+ const answers=Object.fromEntries(fields.map(field=>[field.dataset.basisAnswer,fieldValue(field)]));
  const blob=new Blob([JSON.stringify({schema:key,answers},null,2)],{type:'application/json'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download='KI-1-Klasse-Antworten.json';a.click();
@@ -98,7 +148,7 @@ document.getElementById('basis-import').addEventListener('change',async event=>{
   if(!confirm('Aktuelle Antworten durch die ausgewählte Datei ersetzen? Notebooks und Fotodaten bleiben erhalten.'))return;
   for(const field of fields){
    const value=raw.answers[field.dataset.basisAnswer]??'';
-   field.value=field.tagName==='SELECT'&&![...field.options].some(option=>option.value===value)?'':value;
+   setField(field,field.tagName==='SELECT'&&![...field.options].some(option=>option.value===value)?'':value);
    field.dispatchEvent(new Event('input',{bubbles:true}));
   }
   transferStatus.textContent='Antworten wiederhergestellt – auch die Auswahlaufgaben. Notebooks und Fotos wurden nicht verändert.';

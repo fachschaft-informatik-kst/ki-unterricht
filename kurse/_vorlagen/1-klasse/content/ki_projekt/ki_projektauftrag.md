@@ -1,54 +1,54 @@
-# Geführtes KI-Bildprojekt · 1. Klasse
+# KI-Projekt im Tandem
 
-**DL 4–6 · Ein Projekt, zwei Bildklassen, ein A/B-Vergleich, fünf kurze Reflexionen, individuelles Fachgespräch.**
+**Zwei Bildklassen · ein fairer Vergleich · fünf kurze Reflexionen · individuelles Fachgespräch**
 
-> Helfen vielfältigere Trainingsbilder einem Klassifikator, neue Beispiele richtig zu erkennen?
+> Helfen vielfältigere Trainingsbilder beim Erkennen neuer Gegenstände?
 
-Der **wissenschaftliche Ablauf stammt aus dem Bildprojekt der 4. Klasse**. In der 1. Klasse sind Datenweg, Versuchsbedingungen, Arbeitsphasen und Reflexionsfragen stärker vorgegeben. Eigene Python-Programme oder ein langes Projektprotokoll sind nicht nötig.
+## Auftrag und Ablauf
 
-## Zwei gleichwertige Datenwege
-
-- **Ersatz `UEBUNG` (nach Absprache):** Mitgelieferte synthetische Kreis-/Dreieck-Bilder. Alle fünf Gruppen sind im Notebook vorbereitet; keine Fotos müssen zuhause gesammelt werden.
-- **Angestrebter Projektweg `EIGENE_DATEN`:** Zwei personenfreie Gegenstandsklassen. Je Klasse fünf verschiedene Exemplare (T1, T2, V1, P1, P2), je acht Fotos; insgesamt 80. Fotostudio-JSON exportieren. Keine Exemplare gruppenübergreifend wiederverwenden.
-
-Beide Wege werden gleich bewertet; die Datenquelle gibt keinen Bonus. Bei den synthetischen Daten kann man **nicht** behaupten, das Modell erkenne echte Alltagsfotos zuverlässig.
-
-## Die fünf Datengruppen
-
-| Gruppen | Rolle | Regel |
-|---|---|---|
-| T1 und T2 | **Training** | Der neue Klassifikationskopf lernt an beschrifteten Bildern. |
-| V1 | **Validierung** | Auf denselben V1-Bildern A/B vergleichen und **vor** dem Test eine Variante auswählen. |
-| P1 und P2 | **Unabhängiger Test** | Nur die gewählte Variante **einmal** prüfen. Danach nichts mehr optimieren. |
-
-Das vortrainierte **MobileNet V2** bleibt unverändert und liefert feste Bildmerkmale. Nur das kleine Netz hinter den Merkmalen lernt mit den Klassenlabels. Es geht um den Vergleich der Trainingsdaten, nicht darum, MobileNet selbst zu programmieren.
-
-## Fairer Versuch
+Wählen Sie aus den zwölf Projektideen zwei Klassen, die kein anderes Tandem verwendet. Die Lehrperson führt in die Datenregeln ein und nimmt Ihre Exemplarliste ab. Sammeln Sie danach 80 Fotos: fünf unabhängige Gruppen, je acht Fotos pro Klasse und Gruppe. Gleiche Aufnahmebedingungen für beide Klassen; Personen nur mit Einverständnis. Details: `ki_fotodaten.md`.
 
 | Variante A | Variante B | Gleich bleibt |
 |---|---|---|
-| Acht Trainingsbilder je Klasse aus T1 (ein Exemplar) | Je vier Trainingsbilder je Klasse aus T1 und T2 (zwei Exemplare) | Gesamtbildzahl, 16 Neuronen, 60 Epochen, Startwert 11, dieselben V1-Bilder |
+| 8 Fotos aus T1 je Klasse (ein Exemplar) | je 4 Fotos aus T1 und T2 je Klasse (zwei Exemplare) | Bildzahl, Netz, Einstellungen, Startwert 11, V1 |
 
-**Vermutung:** Variante B profitiert möglicherweise von vielfältigeren Trainingsbeispielen. Ein anderes Ergebnis ist kein Fehler. Vergleicht nach Anleitung auch die drei Startwerte 11, 22 und 33, ausschliesslich **vor** der Testeinsicht.
+MobileNet liefert feste Merkmale; nur das kleine Netz lernt mit Ihren Labels. Führen Sie den A/B-Vergleich einmal aus. Wählen Sie anhand von V1 eine Variante und begründen Sie sie **vor** dem Abschlusstest. Die Lehrperson kontrolliert die Wahl. Danach nur die gewählte Variante einmal auf P1/P2 testen, nicht mehr optimieren. Kleine Unterschiede sind kein sicherer Beweis; eine hohe Trefferquote ist keine Voraussetzung für eine gute Note.
 
-## Drei Doppellektionen
+## Fünf Reflexionen im Journal
 
-- **DL 4 · Projektvorbereitung:** Ziffern-/Buchstabentest als kurzer Einstieg (ohne weiteres Buchstaben-Fine-Tuning); Lernpfad Datenaufteilung, Datenleck, Themenwahl, Gruppenplan, Abnahme und Reflexionen 1–2. Bis DL 5 eigene Fotos aufnehmen und JSON exportieren; P2 vor anderem Hintergrund.
-- **DL 5 · Geführte Untersuchung:** Gruppen prüfen, A/B trainieren und auf V1 vergleichen, Modellwahl begründen, P1/P2 freigeben und einmal testen, Reflexionen 3–5, ZIP einreichen.
-- **DL 6 · Prüfen und erklären:** Einzelgespräche; parallel unbenoteter Fremdcheck eines anderen Projekts: Daten und Originalwerte prüfen, ursprüngliche Variante wiederherstellen und eigene andere Klassen ohne weiteres Training ausprobieren. Bei technischen Problemen Referenzpaket verwenden. Andere Klassen im fremden Modell sind keine gültige Trefferquote für die eigenen Klassen.
+1. Anwendung und Vermutung: Klassen, Nutzen und Vermutung.
+2. Datenplan und Quellen: Gruppen, Herkunft und mögliches Datenproblem.
+3. Vergleich und Auswahl: V1-Werte, gleiche Bedingungen und begründete Modellwahl.
+4. Abschlusstest und Grenzen: Testergebnis, zwei konkrete Vorhersagen und Grenzen.
+5. Fazit: Erkenntnis und nächster Versuch.
 
-## Fünf kurze Reflexionen im Kursjournal
+Antworten Sie kurz und mit eigenen Belegen. Kein zusätzlicher Bericht oder Zeitplan.
 
-1. **Frage und Vermutung:** Datenweg, zwei Klassen, erwarteter Vorteil vielfältigerer Beispiele.
-2. **Daten:** T1/T2, V1, P1/P2 und mögliche Datenlecks.
-3. **Vergleich:** V1-Werte von A/B, eine konkrete Vorhersage und **schriftlich begründete Wahl vor dem Test**.
-4. **Abschlusstest:** P1/P2-Wert, drei konkrete Vorhersagen und nachvollziehbare Grenzen.
-5. **Fazit:** Was können wir behaupten, was nicht? Nächster fairer Versuch und kurze Zusammenarbeit.
+## Zeitrahmen und Kontrollpunkte
 
-**Abgabe vor DL 6:** Kurs-ZIP mit Journal, bearbeitetem Notebook samt Ausgaben, Datenquelle und gegebenenfalls Fotostudio-JSON. ZIP herunterladen **und** über den vereinbarten Abgabekanal einreichen. Kein zusätzlicher Bericht und keine Präsentation.
+| Zeitpunkt | Verbindlicher Stand |
+|---|---|
+| DL 4 | Ziffern-/Buchstabentest, Datenregeln, Thema, Datenplan, Reflexionen 1–2, Exemplarliste von der Lehrperson abgenommen |
+| Zwischen DL 4 und DL 5 | Fotos aufnehmen, Fotostudio-JSON vorbereiten |
+| DL 5 | Daten prüfen, A/B einmal vergleichen, begründete Wahl kontrollieren lassen, P1/P2 einmal testen, Journal und Protokoll sichern |
+| Vor DL 6 | Eigenes ZIP eingereicht |
+| DL 6 | Fachgespräch und unbenotete Fremdauswertung |
 
-## Bewertung
+Fehlen Fotos, früh mit der Lehrperson eine Lösung vereinbaren. Ersatzdaten offen kennzeichnen; sie belegen keine Zuverlässigkeit auf echten Fotos.
 
-**Maximal 30 Punkte:** 12 gemeinsame Punkte für den dokumentierten Versuch, 18 persönliche Punkte im Fachgespräch. Der Fremdcheck in DL 6 ist unbenotet. Das Raster steht unter `kursseiten/basis-abschluss/bewertungsraster.md` bzw. `worksheets/md/KI_Bewertungsraster.md`. Bewertet werden faire Daten, Nachvollziehbarkeit und kritische Erklärungen – **nicht** die höchste Trefferquote.
+## Fachgespräch und Fremdmodell (DL 6)
 
-**KI als Hilfe:** Sprach- und Begriffshilfe ist möglich; Zahlen, Ergebnisse, Belege und Deutungen müssen aus dem eigenen Versuch stammen. Verwendete Hilfen nennen. Daten und Fotos nur mit Einverständnis teilen; Personenfotos sind in der 1. Klasse nicht vorgesehen.
+Jede Person erklärt das Modell, den fairen Vergleich, die Datenrollen, ein eigenes Ergebnis und eine Grenze. Während der Gespräche arbeitet das Tandem am fremden Projekt in einem privaten Fenster:
+
+1. Fremdes ZIP wiederherstellen, eigene JSON separat bereithalten.
+2. Datengruppen und Originalergebnisse prüfen; ursprüngliches Modell mit Startwert 11 und ursprünglicher Variante wiederherstellen.
+3. Eigene andere Klassen ohne neues Training testen; Vorhersagetabelle und zwei Beispiele betrachten.
+4. Je eine kurze persönliche Antwort zur Beobachtung und zur Grenze schreiben. Separates ZIP einreichen, fremde Dateien löschen und privates Fenster schliessen.
+
+## Bewertung und Abgabe
+
+Maximal 30 Punkte: gemeinsames Projekt (12), individuelles Fachgespräch (18). Fremdprüfung unbenotet. Das Bewertungsraster der 1. Klasse bleibt verbindlich.
+
+Das eigene ZIP enthält Journal, Notebook mit Ausgaben, Fotostudio-JSON und Versuchsprotokoll. Originalfotos separat aufbewahren. Vor der Einreichung Journal.html kontrollieren. Das Fremd-ZIP enthält nur die Fremdauswertung, keine fremden Fotos. Download allein ist keine Abgabe.
+
+KI ist als Sprachhilfe erlaubt. Zahlen, Beobachtungen und Deutungen stammen aus Ihrem Versuch. Verwendete Hilfen im Journal angeben.

@@ -1,34 +1,85 @@
----
-type: chapter
-id: basis-training-reflexion
-nummer: 2
-titel: Ergebnisse belegen und Abgabe sichern
-kurz: Validierung · Auswahl · Test · Fazit
----
-
-### Etappe 4 · Reflexion 3: Validierung und Auswahl
-
-| Variante | V1 richtig / insgesamt | Beobachtung an einem Bild |
-|---|:---:|---|
-| A – nur T1 | … / 16 | … |
-| B – T1 und T2 | … / 16 | … |
-
-Vergleicht die tatsächlichen Werte und Beispiele. Wenn ihr den Vergleich mit drei Startwerten ausgeführt habt, dokumentiert alle drei Läufe. Nennt eine weitere mögliche Erklärung für den Unterschied, etwa Hintergrund, Licht oder Zufall.
-
-<div class="basis-answer"><label for="basis-training-b">Unsere Modellwahl mit Zahlen und Begründung (vor P1/P2)</label><textarea id="basis-training-b" data-basis-answer="basis-training-b" rows="6" placeholder="V1: A … / B … / Unterschied in Bildern … / Beispiele … / Startwerte … / Wir wählen …, weil … / Andere Erklärung …"></textarea></div>
-
-**Kontrollpunkt:** Zeigt der Lehrperson die Begründung, bevor ihr im Notebook `AUSGEWAEHLT` und `BEGRUENDUNG` eintragt und `TEST_FREIGEBEN = True` setzt.
-
-### Etappe 5 · Reflexion 4: Unabhängiger Abschlusstest
-
-Prüft nur die gewählte Variante an P1/P2. Vergleicht die neuen Exemplare und bei eigenen Fotos den anderen Hintergrund bei P2. Untersucht drei konkrete Vorhersagen: Label, vorhergesagte Klasse, richtiger oder falscher Treffer und eine mögliche Erklärung. Auch richtige Beispiele sind wertvoll. Nach Einsicht in P1/P2 wird nichts mehr optimiert.
-
-<div class="basis-answer"><label for="basis-training-test">Unser Abschlusstest mit drei Beispielen</label><textarea id="basis-training-test" data-basis-answer="basis-training-test" rows="7" placeholder="Gewählte Variante … / richtig … von 32 / Bild 1: Label, Vorhersage, Erklärung … / Bild 2 … / Bild 3 … / P1 und P2, Hintergrund oder andere Grenze …"></textarea></div>
-
-### Etappe 6 · Reflexion 5: Fazit und Abgabe
-
-Beantwortet eure Forschungsfrage mit euren Zahlen. Erklärt, welche Aussage die Ergebnisse erlauben und welche nicht. Was würdet ihr bei einem nächsten unabhängigen Versuch ändern? Übungsdaten belegen keine zuverlässige Erkennung echter Fotos.
-
-<div class="basis-answer"><label for="basis-projekt-fazit">Fazit, Grenzen, nächster Versuch und Zusammenarbeit</label><textarea id="basis-projekt-fazit" data-basis-answer="basis-projekt-fazit" rows="5" placeholder="Unsere Vermutung … / Belege … / Eine Grenze … / Nächster Versuch … / Zusammenarbeit …"></textarea></div>
-
-**Abgabecheck:** Reflexionen 1–5, Notebook mit Ausgaben und Protokoll, Datenquelle, gegebenenfalls Originalfotos und Fotostudio-JSON im Kurs-ZIP sichern. Öffnet das ZIP zur Kontrolle. Reicht es vor DL 6 über den vereinbarten Kanal ein. Ein Download allein ist keine Abgabe. Jede Person bereitet sich darauf vor, den gesamten Versuch selbst zu erklären.
+<details class="kapitel" id="projekt-abschluss" data-kurz="Abschlusstest, Fazit und Abgabe: die letzten beiden Etappen und die Termine.">
+  <summary><span class="kapitel-nr">5–6</span>
+    <h2 class="kapitel-titel">Abschluss &amp; Abgabe</h2>
+  </summary>
+  <div class="kapitel-body detail-body" id="abschluss">
+    <p class="page-crumb"><a href="#basis-daten">‹ Fahrplan</a><span>Etappen 5–6 · Richtwert DL 5</span></p>
+    <!-- MD:START -->
+## Prüfen, auswerten, abgeben.
+<!-- MD:END -->
+    <p class="section-intro">Erst die begründete Auswahl, dann der Abschlusstest, dann das Fazit. <strong>Abgabe vor Beginn der Doppellektion 6.</strong></p>
+    <div class="grid two">
+      <div class="card">
+        <span class="tag">Etappe 5 · Reflexion 4</span>
+        <!-- MD:START -->
+### Abschliessend prüfen
+<!-- MD:END -->
+        <!-- MD:START -->
+Prüfen Sie nur die gewählte Variante an den unabhängigen Testbildern (Gruppen P1 und P2, siehe [Daten &amp; Fotos](#projekt-3)). Danach nichts mehr optimieren.
+<!-- MD:END -->
+        <!-- MD:START -->
+Untersuchen Sie zwei Beispiele und benennen Sie Grenzen; richtige Beispiele sind erlaubt.
+<!-- MD:END -->
+        <p><a class="btn" href="#projekt-werkbank">Notebook «Unser Versuch» →</a> <a class="btn" href="#projekt-reflexionen">Reflexion 4 →</a></p>
+      </div>
+      <div class="card">
+        <span class="tag">Etappe 6 · Reflexion 5</span>
+        <!-- MD:START -->
+### Fazit und Abgabe
+<!-- MD:END -->
+        <!-- MD:START -->
+Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mit Ausgaben, Fotos/JSON und Protokoll. Beide bereiten sich jeweils auf ihr vierminütiges Einzelgespräch vor: Erklären Sie das ganze Projekt, vom Foto mit seinem Label über das überwachte Training bis zur Vorhersage.
+<!-- MD:END -->
+        <p><a class="btn" href="#basis-sicherung">Abgabecheckliste →</a> <a class="btn" href="#basis-sicherung">Stand sichern →</a></p>
+      </div>
+    </div>
+    <div class="callout" id="projekt-bruecke">
+      <!-- MD:START -->
+**Ausblick auf DL 6:** Nach der Abgabe prüfen Sie das Modell eines anderen Tandems, mit denselben Regeln wie in Ihrem Projekt: getrennte Datengruppen, Auswahl vor dem Test, Test erst am Schluss. Ihr eigenes Projekt bleibt dabei unverändert. [Fahrplan DL&nbsp;6&nbsp;→](#basis-abschluss)
+<!-- MD:END -->
+    </div>
+    <details>
+      <summary>Termine ansehen</summary>
+      <div class="detail-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Termin</th>
+                <th scope="col">Rahmen</th>
+                <th scope="col">Verbindlicher Stand</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3. Doppellektion</td>
+                <td>XOR und die Grenzen eines einzelnen Neurons untersuchen</td>
+                <td>Erklärung der Zwischenschicht; Vorbereitungsauftrag: Thema und zwei eigene Klassen wählen und in die Klassenliste eintragen (jede Bildklasse nur einmal), Gegenstände besorgen (noch nicht fotografieren, keine Datenplanung)</td>
+              </tr>
+              <tr>
+                <td>Doppellektionen 4–5</td>
+                <td>DL 4: Datenregeln gemeinsam erarbeiten, Thema und Exemplarliste abnehmen lassen, erst danach fotografieren</td>
+                <td>Meilensteine: Ende DL 4 Exemplarliste abgenommen, zu Beginn DL 5 Fotos importiert. Datencheck → Vergleich → begründete Auswahl → Test → Fazit; DL 5: Modellwahl vor dem Test mit der Lehrperson prüfen</td>
+              </tr>
+              <tr>
+                <td>Vor Beginn der Doppellektion 6</td>
+                <td>ZIP über den Abgabekanal einreichen</td>
+                <td>Vollständiges Journal, Versuch mit Ausgaben, Daten und Protokoll</td>
+              </tr>
+              <tr>
+                <td>6. Doppellektion</td>
+                <td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>
+                <td>Daten und Ergebnisse prüfen, Fremdmodell ausprobieren, kurze persönliche Reflexion (unbenotet); getrennte Abgabe, eigenes Projekt bleibt unverändert</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">20 Einzelgespräche bei einer Lehrperson: je 4 Minuten inklusive Wechsel und Kurzbewertung; 10 Minuten für Einstieg und Sicherung.</p>
+      </div>
+    </details>
+    <nav class="page-next" aria-label="Weiter im Projekt">
+      <a class="btn" href="#projekt-4">‹ A/B-Versuch</a>
+      <a class="btn primary" href="#basis-abschluss">Nach der Abgabe: DL 6 Fremdmodell prüfen →</a>
+    </nav>
+  </div>
+</details>

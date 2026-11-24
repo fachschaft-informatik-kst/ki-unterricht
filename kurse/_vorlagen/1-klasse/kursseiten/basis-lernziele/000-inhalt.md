@@ -1,6 +1,6 @@
 <span class="section-label">Lernkompass · 1. Kurzgymnasium · 8 Doppellektionen</span>
 <h1>Das kannst du am Ende.</h1>
-<p class="section-intro">Verstehen, ausprobieren und begründet beurteilen. Das Bildprojekt aus der 4. Klasse bearbeiten wir in einer stärker geführten Fassung mit eigenen Fotos, klaren Kontrollpunkten und einem vorbereiteten Ersatzdatensatz.</p>
+<p class="section-intro">Verstehen, ausprobieren und begründet beurteilen. Im eigenen Bildprojekt untersuchen wir, was ein neuronales Netz aus unseren Fotos lernt.</p>
 <div class="grid two">
   <article class="card"><span class="section-label">01</span><h2>KI und Lernarten</h2><p>Regelbasierte Systeme von Lernen aus Daten unterscheiden; Labels beim überwachten Lernen erklären.</p><a href="#basis-ki">Zum Unterricht →</a></article>
   <article class="card"><span class="section-label">02</span><h2>Ein künstliches Neuron</h2><p>Gewichte, Bias, Ausgabe und einen Lernschritt am Schwimmbadbeispiel nachvollziehen.</p><a href="#basis-neuron">Zum Unterricht →</a></article>

@@ -1,46 +1,94 @@
----
-type: chapter
-id: basis-training-experiment
-nummer: 1
-titel: Ein fairer A/B-Versuch
-kurz: Daten prüfen · Modellvarianten vergleichen · Test erst zum Schluss
----
-
-### Was wird hier eigentlich trainiert?
-
-| Schritt | Aufgabe |
-|---|---|
-| 1 · Unsere Bilder | Jedes Bild hat ein [Label](#basis-glossar-label): seine tatsächliche Klasse. |
-| 2 · MobileNet V2 | Das vortrainierte Netz liefert pro Bild 1280 Merkmale. Seine Gewichte bleiben unverändert. |
-| 3 · Unser kleines Netz | 16 Neuronen lernen überwacht aus diesen Merkmalen und den zwei Klassenlabels. |
-| 4 · Vorhersage | Das Netz gibt eine der beiden Klassen aus. Neue Exemplare zeigen, ob es mehr als Hintergrund oder Licht gelernt hat. |
-
-MobileNet wurde mit vielen fremden Fotos vortrainiert. Seine ursprünglichen 1000 Ausgabeklassen verwenden wir nicht. Unser kleines Netz lernt, welche Merkmalsmuster zu unseren zwei Klassen gehören. Das ist Transfer Learning.
-
-### Etappe 3 · Der faire A/B-Versuch
-
-| | A · weniger Vielfalt | B · mehr Vielfalt |
-|---|---|---|
-| Exemplare je Klasse | 1 (T1) | 2 (T1 und T2) |
-| Fotos je Klasse | 8 aus T1 | 4 aus T1 + 4 aus T2 |
-| Gesamtzahl | 16 Bilder | 16 Bilder |
-
-Gleich bleiben: 16 Neuronen, 60 Epochen, Startwert 11 und dieselben 16 V1-Bilder. Nur die Vielfalt der Trainingsbeispiele soll sich unterscheiden.
-
-<div class="ki-notebook-block" data-notebook="content/basis_fotoprojekt.ipynb" data-title="Bildprojekt · Geführter A/B-Vergleich">
-  <h3>Jupyter-Notebook · Bildprojekt</h3>
-  <p>Daten importieren, zwei Varianten trainieren, Vorhersagen vergleichen und erst nach begründeter Modellwahl testen.</p>
-  <button type="button" class="ki-notebook-launch" data-lab="basis_fotoprojekt.ipynb">Notebook hier öffnen</button>
-</div>
-
-1. **Start:** Führt die Startzelle aus. Wählt `EIGENE_DATEN`, tragt die exakten Klassennamen ein und ladet die Fotostudio-JSON. Beim vereinbarten Ersatzdatensatz lasst ihr `UEBUNG` und Kreis/Dreieck stehen.
-2. **Daten prüfen:** Vergleicht T1, T2 und V1 in der Vorschau. Bei Fehlern korrigiert ihr die Sammlung im Fotostudio. P1/P2 bleiben verdeckt.
-3. **Trainieren:** Lest die V1-Balken. 50 % entsprechen bei diesen ausgeglichenen Klassen der Strategie, immer dieselbe Klasse auszugeben.
-4. **Vorhersagen untersuchen:** Verfolgt ein Bild durch das Netz und vergleicht A und B anhand konkreter V1-Beispiele. Beschreibt Label, Vorhersage und Modellwert.
-5. **Vor dem Test:** Haltet die V1-Zahlen fest und begründet die Wahl einer Variante im nächsten Kapitel.
-
-<div class="basis-answer"><label for="basis-training-a">Etappe 3 · Datencheck und fairer Vergleich</label><textarea id="basis-training-a" data-basis-answer="basis-training-a" rows="5" placeholder="Klassen und Datenquelle … / A … / B … / Gleich bleibt … / Beobachtung zur Bildvorschau …"></textarea></div>
-
-### Warum ein Lauf noch kein Beweis ist
-
-V1 enthält 16 Bilder, aber nur ein unabhängiges Exemplar je Klasse. Ein Bild entspricht 6,25 Prozentpunkten. Ein Unterschied von höchstens zwei Bildern ist nach der Faustregel der 4. Klasse kein belastbarer Beleg. Führt nach Anleitung der Lehrperson auch den Vergleich mit den Startwerten 11, 22 und 33 durch, bevor ihr P1/P2 öffnet. Bleibt der Unterschied bestehen? B muss nicht besser sein.
+<details class="kapitel" id="projekt-4" data-kurz="A gegen B: Helfen vielfältigere Bilder? Ein fairer Vergleich.">
+  <summary><span class="kapitel-nr">3–4</span>
+    <h2 class="kapitel-titel">A/B-Versuch</h2>
+  </summary>
+  <div class="kapitel-body detail-body" id="versuch">
+    <p class="page-crumb"><a href="#basis-daten">‹ Fahrplan</a><span>Etappen 3–4 · Richtwert DL 5</span></p>
+    <!-- MD:START -->
+## Helfen vielfältigere Bilder?
+<!-- MD:END -->
+    <p class="section-intro">Gleiche Bildzahl. Gleiches Netz. Unterschiedliche Exemplare.</p>
+    <article class="experiment" data-experiment="vielfalt">
+      <div class="versus">
+        <div class="variant">
+          A · weniger Vielfalt<strong>1 Exemplar</strong>
+          <!-- MD:START -->
+8 Fotos aus T1 pro Klasse
+<!-- MD:END -->
+        </div>
+        <div class="variant">
+          B · mehr Vielfalt<strong>2 Exemplare</strong>
+          <!-- MD:START -->
+4 Fotos aus T1 + 4 aus T2 pro Klasse
+<!-- MD:END -->
+        </div>
+      </div>
+      <!-- MD:START -->
+Beide: gleich viele Trainingsbilder, dasselbe Netz und dieselben Einstellungen (Startwert 11) sowie dieselben Validierungsbilder.
+<!-- MD:END -->
+    </article>
+    <p class="project-workplace"><strong>Durchgeführt wird der Versuch im Journal:</strong> <a href="#projekt-werkbank">Notebook «Unser Versuch» öffnen</a> · <a href="#projekt-reflexionen">Reflexion 3 festhalten</a></p>
+    <details class="project-background" open>
+      <summary>Hintergrund: Was wird trainiert – und wer weiss was?</summary>
+      <div class="detail-body">
+        <!-- Klarer Überblick vor dem ersten Training: nur das zweite Netz lernt. -->
+        <div class="project-train-overview" aria-labelledby="projekt-training-titel">
+          <h2 id="projekt-training-titel">Was wird hier eigentlich trainiert?</h2>
+          <ol class="project-train-flow">
+            <li><strong>1 · Unsere Bilder</strong><span>80 Bilder aus zwei Klassen, z. B. Apfel und Birne. Jedes Bild hat sein Label: seine Klasse.</span></li>
+            <li class="model-fixed"><strong>2 · MobileNet</strong><span>Erkennt Merkmale wie Formen, Farben und Muster.</span><em>Vortrainiert · bleibt unverändert</em></li>
+            <li class="model-trained"><strong>3 · Unser kleines Netz</strong><span>Lernt überwacht: Vorhersage mit dem Label vergleichen und Gewichte anpassen.</span><em>Hier wird wirklich trainiert!</em></li>
+            <li><strong>4 · Vorhersage &amp; Test</strong><span>Welche Klasse ist es? Funktioniert das auch mit neuen Bildern?</span></li>
+          </ol>
+          <p class="project-train-note"><strong>Merken Sie sich:</strong> Die Merkmale kommen aus einem fertigen Modell. <strong>Trainiert wird nur unser nachgeschaltetes kleines Netz.</strong></p>
+        </div>
+        <div class="project-who-knows" id="projekt-wer-weiss-was" aria-labelledby="projekt-wer-weiss-titel">
+          <h2 id="projekt-wer-weiss-titel">Wer weiss was?</h2>
+          <div class="who-grid">
+            <article class="who-card model-fixed">
+              <strong>MobileNet <em>vortrainiert · bleibt unverändert</em></strong>
+              <p><b>Kennt:</b> Formen, Texturen und Muster aus vielen beschrifteten Fotos.</p>
+              <p><b>Kennt nicht:</b> Ihre zwei Klassen. Seine ursprünglichen Klassen werden hier nicht benutzt.</p>
+            </article>
+            <article class="who-card model-trained">
+              <strong>Unser kleines Netz <em>lernt aus Ihren Fotos</em></strong>
+              <p><b>Lernt:</b> Welche Merkmale zu Ihren beiden Klassen gehören, mithilfe der Labels Ihrer Fotos.</p>
+              <p><b>Kennt nicht:</b> Was ein «Apfel» ist. Es sieht nur Zahlen und Ihre Beispiele, also auch Hintergrund und Licht.</p>
+            </article>
+          </div>
+          <p class="project-train-note"><strong>Darum zählt der Test mit neuen Exemplaren:</strong> Ob das Netz Ihre Klassen oder nur Hintergrund und Licht unterscheidet, zeigt sich erst bei Bildern, die es nie gesehen hat.</p>
+        </div>
+      </div>
+    </details>
+    <div class="ki-notebook-block" data-notebook="content/ki_projekt/ki_lernlabor.ipynb" data-title="Projekt-Lernlabor">
+      <!-- MD:START -->
+### Projekt-Lernlabor · Demonstration
+<!-- MD:END -->
+      <!-- MD:START -->
+Die Lehrperson zeigt anhand des Lernlabors, wie Merkmale und Vorhersagen entstehen. Ihren eigenen A/B-Versuch führen Sie unter «Unser Versuch» im Journal durch.
+<!-- MD:END -->
+      <button type="button" class="ki-notebook-launch" data-lab="ki_lernlabor.ipynb">Notebook hier öffnen</button>
+    </div>
+    <div class="callout">
+      <strong>Ein Lauf ist eine Beobachtung, kein Beweis.</strong>
+      <!-- MD:START -->
+Wenige Exemplare und ein Startwert begrenzen die Aussage. B muss nicht besser sein. **V1 sind 16 Bilder, aber nur ein Exemplar je Klasse:** Mehrere Fotos desselben Exemplars sind keine unabhängigen Tests. Kleine Unterschiede sind kein sicherer Beleg für einen Vorteil. Bei Gleichstand begründen Sie Ihre Wahl mit einem anderen Argument, zum Beispiel mit einzelnen Vorhersagen.
+<!-- MD:END -->
+    </div>
+    <details>
+      <summary>Was halten wir fest?</summary>
+      <div class="detail-body">
+        <!-- MD:START -->
+Vorher: Vermutung. Nachher: richtig/gesamt auf V1 (zum Beispiel 11 von 16), Unterschied in Bildern und konkrete Beispiele. Modellwahl vor dem Abschlusstest begründen.
+<!-- MD:END -->
+        <!-- MD:START -->
+Die Bilder von A und B unterscheiden sich. Ähnliche Aufnahmebedingungen verwenden; mögliche Einflüsse von Hintergrund und Licht offen benennen. Gleich bleiben bei A und B: Bildzahl, Netz, Epochen, Startwert und Validierungsbilder. Nur so lässt sich ein Unterschied der Vielfalt zuschreiben.
+<!-- MD:END -->
+      </div>
+    </details>
+    <nav class="page-next" aria-label="Weiter im Projekt">
+      <a class="btn" href="#projekt-3">‹ Daten &amp; Fotos</a>
+      <a class="btn primary" href="#projekt-abschluss">Weiter: Abschluss &amp; Abgabe →</a>
+    </nav>
+  </div>
+</details>

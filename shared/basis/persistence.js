@@ -6,7 +6,7 @@ import {notebookSessions} from '../projekt/notebook-sessions.js';
 // The basic course has its own backup schema and does not alter the fourth-year portal.
 const KEY='kst-ki-basis-v1', NBKEY='kst-ki-basis-notebooks-v1', SCHEMA='ki-basis-zip-v1';
 const notebookNames=['basis_neuron.ipynb','xor_einzelne_neuronen.ipynb','basis_netze.ipynb','basis_bildmodell.ipynb','basis_fotoprojekt.ipynb',
-  'perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb'];
+  'perzeptron_und_neuronale_netze.ipynb','mehrschichtige_netze.ipynb','ziffernerkennung.ipynb','daten_training.ipynb','ki_lernlabor.ipynb','ki_tandemprojekt.ipynb'];
 // The fourth-year course uses the same fixed lab panel and direct JupyterLite path.
 const notebookTitles={
  'basis_neuron.ipynb':'Ein Neuron',
@@ -101,7 +101,7 @@ async function snapshot(){for(const session of runtime.sessions.values()){
  if(session.phase!=='ready'){if(session.frame.dataset.startKind==='warmup')continue;throw Error('Notebook noch nicht bereit.');}
  const name=session.name,result=await request('snapshot',{},session.frame);
  if(runtime.sessions.get(name)!==session)return;
- saved[name]=validate(result.notebook);if(Array.isArray(result.files)&&result.files.length){notebookUploads[name]=result.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));}await persist();
+ saved[name]=validate(result.notebook);if(name==='ki_tandemprojekt.ipynb'&&result.protocol)saved[name].metadata={...saved[name].metadata,ki_project_protocol:result.protocol};if(Array.isArray(result.files)&&result.files.length){notebookUploads[name]=result.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));}await persist();
 }}
 // Never move a running JupyterLite iframe between lesson sections: moving it
 // destroys the browser kernel and may discard in-flight student edits.
@@ -196,7 +196,7 @@ if(d.type==='ready'&&d.ready&&session.phase!=='ready'&&!session.initializing){
 }
 if(d.type==='dirty'){session.dirty=true;session.revision=Math.max(session.revision,d.revision||0);}
 if(d.type==='save-error'){session.dirty=true;status.textContent='Notebook noch nicht gesichert: '+d.error;}
-if(d.type==='changed'&&session.phase==='ready'&&!session.initializing){try{saved[current]=validate(d.notebook);if(Array.isArray(d.files)&&d.files.length)notebookUploads[current]=d.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));await persist();if(status.textContent.startsWith('Notebook im Browser')){changed=false;if((d.revision||0)>=session.revision)session.dirty=false;}}catch(e){session.dirty=true;status.textContent='Notebook konnte nicht gesichert werden: '+e.message;}}
+if(d.type==='changed'&&session.phase==='ready'&&!session.initializing){try{saved[current]=validate(d.notebook);if(current==='ki_tandemprojekt.ipynb'&&d.protocol)saved[current].metadata={...saved[current].metadata,ki_project_protocol:d.protocol};if(Array.isArray(d.files)&&d.files.length)notebookUploads[current]=d.files.filter(f=>f&&typeof f.name==='string'&&typeof f.content==='string'&&f.content.length<50000000).map(f=>({name:f.name,type:f.type||'application/octet-stream',content:f.content}));await persist();if(status.textContent.startsWith('Notebook im Browser')){changed=false;if((d.revision||0)>=session.revision)session.dirty=false;}}catch(e){session.dirty=true;status.textContent='Notebook konnte nicht gesichert werden: '+e.message;}}
 });
 window.addEventListener('hashchange',()=>{if(current)mount();});
 const backupControls=document.getElementById('basis-backup-controls');
@@ -230,10 +230,11 @@ const actionsGroup=document.createElement('div');actionsGroup.className='basis-t
 photoControls.append(photoGroup);
 backupControls.append(actionsGroup,recovered);
 loaded.then(renderRecoveredFiles);
-function answers(){return Object.fromEntries([...document.querySelectorAll('[data-basis-answer]')].map(f=>[f.dataset.basisAnswer,f.value]));}
+function fieldValue(f){return f.type==='checkbox'?(f.checked?'true':''):f.value;}
+function answers(){return Object.fromEntries([...document.querySelectorAll('[data-basis-answer]')].map(f=>[f.dataset.basisAnswer,fieldValue(f)]));}
 // The JSON retains raw values for ZIP restore; this view explains them to pupils and teachers.
 function readableAnswers(){
- return [...document.querySelectorAll('[data-basis-answer]')].filter(f=>String(f.value||'').trim()).map(f=>{
+ return [...document.querySelectorAll('[data-basis-answer]')].filter(f=>String(fieldValue(f)||'').trim()).map(f=>{
   const label=f.closest('label');
   const labelSpan=label?.querySelector('span')?.textContent?.trim();
   const externalLabel=[...document.querySelectorAll('label[for]')].find(l=>l.htmlFor===f.id)?.textContent?.trim();
@@ -242,14 +243,14 @@ function readableAnswers(){
    (label&&!label.querySelector('option')?label.textContent.trim():null)||
    f.closest('tr')?.querySelector('th')?.textContent?.trim()||f.dataset.basisAnswer;
   const chapter=f.closest('.kapitel')?.querySelector('.kapitel-titel')?.textContent?.trim()||'Weitere Unterrichtsaufgaben';
-  const answer=f.tagName==='SELECT'?(Array.from(f.options).find(o=>o.value===f.value)?.textContent?.trim()||f.value):f.value;
+  const answer=f.tagName==='SELECT'?(Array.from(f.options).find(o=>o.value===f.value)?.textContent?.trim()||f.value):f.type==='checkbox'?'Erledigt':f.value;
   return {chapter,question,answer};
  });
 }
-function reflectionHTML(rows){
+function reflectionHTML(rows,{foreign=false}={}){
  const names=document.querySelector('[data-basis-answer="basis-journal-namen"]')?.value?.trim()||'';
  const schoolClass=document.querySelector('[data-basis-answer="basis-journal-klasse"]')?.value?.trim()||'';
- const meta='<p><strong>Namen:</strong> '+esc(names||'Noch offen')+' · <strong>Klasse:</strong> '+esc(schoolClass||'Noch offen')+'</p>';
+ const meta=foreign?'': '<p><strong>Namen:</strong> '+esc(names||'Noch offen')+' · <strong>Klasse:</strong> '+esc(schoolClass||'Noch offen')+'</p>';
  const sections=rows.map(e=>'<section><h2>'+esc(e.chapter)+'</h2><h3>'+esc(e.question)+'</h3><p>'+esc(e.answer).replace(/\n/g,'<br>')+'</p></section>').join('');
  return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Lernjournal · 1. Klasse</title><style>body{max-width:850px;margin:40px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h2{font-size:19px;margin-bottom:4px}h3{font-size:16px;margin:0 0 8px}section{border-bottom:1px solid #ddd;margin:22px 0;padding-bottom:14px;break-inside:avoid}p{white-space:normal}</style><h1>KI-Lernjournal · 1. Klasse</h1>'+meta+'<p>Antworten aus dem gesicherten Kursstand (auch Auswahlaufgaben). Notebook-Ergebnisse befinden sich separat im ZIP.</p>'+(sections||'<p>Noch keine Antworten eingetragen.</p>')+'</html>';
 }
@@ -260,6 +261,8 @@ const entries=[{name:'kursstand.json',data:''},{name:'Journal.html',data:reflect
  ...data.notebooks.map(n=>({name:'notebooks/'+n,data:JSON.stringify(saved[n])})),
  ...data.archived.map(n=>({name:'notebooks/archiv/'+n,data:JSON.stringify(legacyNotebooks[n])}))];
 if(photoJSON)entries.push({name:'fotodaten/fotostudio.json',data:photoJSON.content});
+const protocol=saved['ki_tandemprojekt.ipynb']?.metadata?.ki_project_protocol;
+if(protocol)entries.push({name:'Versuchsprotokoll.json',data:JSON.stringify(protocol,null,2)});
 for(const [n,files] of Object.entries(notebookUploads))if(notebookNames.includes(n))for(const [i,f] of (files||[]).entries()){
  if(!f.name||!f.content||i>=100)continue;
  const safe=f.name.replace(/[^a-zA-Z0-9._-]/g,'_').replace(/\.\.+/g,'_').slice(0,200);
@@ -286,5 +289,18 @@ let nextPhoto=null;
 if(files.has('fotodaten/fotostudio.json')){const content=await files.get('fotodaten/fotostudio.json').text();if(JSON.parse(content).schema!=='fotostudio-v1')throw Error('Ungültige Fotostudio-JSON');nextPhoto={name:'fotostudio.json',content};}
 if(!confirm('Aktuelle Textantworten, Notebooks und Fotodaten durch diese ZIP ersetzen? Ungesicherte Änderungen gehen verloren.'))return;
 runtime.clear();frame=panel.querySelector('#basis-lab-frame');startRetries.clear();changed=false;
-saved=next;legacyNotebooks=nextLegacy;notebookUploads=nextUploads;photoJSON=nextPhoto;await persist();renderRecoveredFiles();for(const f of document.querySelectorAll('[data-basis-answer]')){f.value=typeof raw.answers[f.dataset.basisAnswer]==='string'?raw.answers[f.dataset.basisAnswer]:'';f.dispatchEvent(new Event('input',{bubbles:true}));}current=null;owner=null;if(overlay.isOpen)await overlay.close();panel.hidden=true;status.textContent='ZIP geladen. Öffnet ein Notebook, um die gesicherten Zellen wiederherzustellen.';backupStatus.textContent='ZIP wiederhergestellt: Text- und Auswahlantworten sowie Notebookstände übernommen. Notebook bei Bedarf neu öffnen und benötigte Zellen ausführen.';if(photoJSON){const blob=new Blob([photoJSON.content],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fotostudio-wiederhergestellt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}document.getElementById('basis-save-status').textContent='Reflexionen aus ZIP wiederhergestellt.';}catch(e){backupStatus.textContent='Wiederherstellung fehlgeschlagen: '+e.message;alert('Wiederherstellung fehlgeschlagen: '+e.message);}finally{restore.value='';}});
+saved=next;legacyNotebooks=nextLegacy;notebookUploads=nextUploads;photoJSON=nextPhoto;await persist();renderRecoveredFiles();for(const f of document.querySelectorAll('[data-basis-answer]')){const value=typeof raw.answers[f.dataset.basisAnswer]==='string'?raw.answers[f.dataset.basisAnswer]:'';if(f.type==='checkbox')f.checked=value==='true';else f.value=value;f.dispatchEvent(new Event('input',{bubbles:true}));}current=null;owner=null;if(overlay.isOpen)await overlay.close();panel.hidden=true;status.textContent='ZIP geladen. Öffnet ein Notebook, um die gesicherten Zellen wiederherzustellen.';backupStatus.textContent='ZIP wiederhergestellt: Text- und Auswahlantworten sowie Notebookstände übernommen. Notebook bei Bedarf neu öffnen und benötigte Zellen ausführen.';if(photoJSON){const blob=new Blob([photoJSON.content],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fotostudio-wiederhergestellt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}document.getElementById('basis-save-status').textContent='Reflexionen aus ZIP wiederhergestellt.';}catch(e){backupStatus.textContent='Wiederherstellung fehlgeschlagen: '+e.message;alert('Wiederherstellung fehlgeschlagen: '+e.message);}finally{restore.value='';}});
 window.addEventListener('beforeunload',event=>{if(changed||[...runtime.sessions.values()].some(session=>session.dirty)){event.preventDefault();event.returnValue='Notebook-Änderungen werden noch gespeichert.';}});
+
+// The foreign-model export includes only the review, never the imported foreign photos.
+document.getElementById('download-fremdmodell')?.addEventListener('click',async event=>{
+ const button=event.currentTarget,feedback=document.getElementById('fremd-download-status');button.disabled=true;
+ try{
+  const section=document.getElementById('basis-abschluss');
+  const fields=[...section.querySelectorAll('[data-basis-answer]')];
+  const values=Object.fromEntries(fields.map(f=>[f.dataset.basisAnswer,fieldValue(f)]));
+  const rows=fields.filter(f=>fieldValue(f).trim()).map(f=>({chapter:f.closest('.kapitel')?.querySelector('.kapitel-titel')?.textContent||'Fremdmodellprüfung',question:f.closest('label')?.querySelector('span')?.textContent||f.getAttribute('aria-label')||f.dataset.basisAnswer,answer:f.type==='checkbox'?'Erledigt':f.tagName==='SELECT'?(f.selectedOptions[0]?.textContent||f.value):f.value}));
+  const zip=await makeZip([{name:'Fremdauswertung.html',data:reflectionHTML(rows,{foreign:true})},{name:'Fremdauswertung.json',data:JSON.stringify({schema:'ki-basis-fremdauswertung-v1',answers:values},null,2)}]);
+  downloadBytes(zip,'KI-1-Klasse-Fremdauswertung.zip','application/zip');if(feedback)feedback.textContent='Fremdauswertung heruntergeladen. ZIP separat einreichen.';
+ }catch(e){if(feedback)feedback.textContent='ZIP nicht erstellt: '+e.message;else alert(e.message);}finally{button.disabled=false;}
+});

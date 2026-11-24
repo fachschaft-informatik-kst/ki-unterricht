@@ -6,7 +6,7 @@
 
 1. **DL 4:** Zwei Bildklassen, Datenquelle und Vermutung, gruppierte Trainings-/Validierungs-/Testbilder; Datenleck am Beispiel erklären.
 2. **DL 5:** A/B bei gleicher Trainingsbildzahl und gleichen Parametern vergleichen; V1-Ergebnisse und Modellwahl **vor** der Testeinsicht dokumentieren.
-3. **DL 5:** Nur die gewählte Variante einmal auf P1/P2 testen und danach nicht optimieren; konkrete Beispiele, Unsicherheit und Fazit mit Grenzen festhalten; als ZIP einreichen.
+3. **DL 5:** Nur die gewählte Variante einmal auf P1/P2 testen und danach nicht optimieren; zwei konkrete Beispiele, Unsicherheit und Fazit mit Grenzen festhalten; als ZIP einreichen.
 4. **DL 6:** Jede Person erklärt das ganze Projekt im Einzelgespräch. Parallel wird ein fremdes Projekt anhand der Daten und Ergebnisse kritisch geprüft (unbenotet).
 
 **Datenwege:** Angestrebt sind 80 selbst aufgenommene, personenfreie Gegenstandsfotos mit unabhängigen Exemplaren. Die vorbereiteten synthetischen Übungsdaten (Kreis/Dreieck) sind nach Absprache ein gleichwertiger Ersatz. Die Datenquelle gibt **keinen** Notenbonus. Ergebnisse aus Übungsdaten belegen keine Zuverlässigkeit bei neuen echten Fotos.
@@ -22,12 +22,18 @@
 | Den veränderten Faktor, konstante Bedingungen, V1 und P1/P2 begründen | 0–6 | Individuelles Fachgespräch |
 | Eigene Ergebnisse kritisch interpretieren, Grenzfall und nächsten Test erklären | 0–6 | Individuelles Fachgespräch |
 
-Die **gemeinsame Projektleistung zählt 12 Punkte**, das **individuelle Fachgespräch 18 Punkte**. Die Fremdmodellprüfung ist **unbenotet**; sie unterstützt die kritische Reflexion und zählt nicht als zweite Projektabgabe. Eine hohe Trefferquote allein bringt keine Zusatzpunkte.
+Die **gemeinsame Projektleistung zählt 12 Punkte**, das **individuelle Fachgespräch 18 Punkte**. Die Fremdmodellprüfung ist **unbenotet**; sie unterstützt die kritische Reflexion und zählt nicht zur Projektnote; sie wird separat eingereicht. Eine hohe Trefferquote allein bringt keine Zusatzpunkte.
 
 **Leistungsstufen:** Bei 4-Punkte-Kriterien bedeutet 0 fehlend, 1 ansatzweise, 2 teilweise, 3 vollständig und 4 differenziert mit Belegen. Bei 6-Punkte-Kriterien bedeuten 0–2 stark lückenhaft, 3–4 überwiegend korrekt, 5 korrekt und begründet, 6 präzise und eigenständig mit Transfer.
 
 **Notenvorschlag:** Note = 1 + 5 × erreichte Punkte / 30, auf Viertelnoten gerundet; kantonale und schulische Vorgaben sind verbindlich.
 
+## Leitfragen für das Fachgespräch
+
+- Welcher Teil des Modells bleibt unverändert, welcher lernt? Was ist ein Label?
+- Warum ist A/B fair und wozu dienen T1/T2, V1 und P1/P2?
+- Was zeigen zwei konkrete Ergebnisse? Wo liegen Grenzen, was wäre ein sinnvoller nächster Versuch?
+
 ## Organisation DL 6
 
-Für bis zu 20 Lernende mit einer Lehrperson sind **20 × 4 Minuten = 80 Minuten** vorgesehen (ca. 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Kurzbewertung). Die letzten 10 Minuten stehen für Einstieg und Sicherung zur Verfügung. Gesprächsreihenfolge und Projekte vorab bereitstellen. Ab 21 Lernenden ist eine zweite Prüfstation oder eine andere Planung nötig. Die übrige Klasse untersucht ein zugeteiltes fremdes Modell oder ein vorbereitetes Referenzprojekt; Die ursprüngliche Variante wird nach Möglichkeit wiederhergestellt und an anderen Klassen ausprobiert; bei technischen Problemen dient ein Referenzprojekt als Ersatz.
+Für bis zu 20 Lernende mit einer Lehrperson sind **20 × 4 Minuten = 80 Minuten** vorgesehen (ca. 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Kurzbewertung). Die ersten 10 Minuten dienen der gemeinsamen Einführung; danach laufen die Gespräche parallel zur Fremdprüfung. Gesprächsreihenfolge und Projekte vorab bereitstellen. Ab 21 Lernenden ist eine zweite Prüfstation oder eine andere Planung nötig. Die übrige Klasse untersucht ein zugeteiltes fremdes Modell oder ein vorbereitetes Referenzprojekt. Die ursprüngliche Variante wird nach Möglichkeit wiederhergestellt und an anderen Klassen ausprobiert; bei technischen Problemen dient ein Referenzprojekt als Ersatz.

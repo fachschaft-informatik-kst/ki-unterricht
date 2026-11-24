@@ -14,21 +14,21 @@ Jeder Gegenstand bleibt in genau einer Gruppe. Ein anderer Hintergrund erzeugt k
 
 ## Sammeln
 
-1. Zwei eindeutige Klassen und fünf unabhängige Gruppen mit der Lehrperson festlegen.
+1. Zwei eindeutige Klassen wählen, die kein anderes Tandem verwendet (Klassenliste; Vorbereitungsauftrag vor Doppellektion 4). Fünf unabhängige Gruppen legen Sie in Doppellektion 4 nach dem Lernpfad fest und lassen sie abnehmen.
 2. Je Klasse/Gruppe acht unterschiedliche JPG/PNG-Fotos aufnehmen. Perspektive, Abstand und Licht variieren. Ähnliche Bedingungen für beide Klassen und alle Gruppen schaffen.
 3. **Beide Klassen unter gleichen Bedingungen** aufnehmen (Hintergrund, Licht, Kamera). Sonst lernt das Netz womöglich den Hintergrund statt den Gegenstand: Liegen alle Äpfel auf Holz und alle Birnen auf Weiss, sagt «Holz» die Klasse voraus.
 4. Gruppenzuordnung (T1, T2, V1, P1, P2) **vor** dem Fotografieren festlegen und nicht nach den Ergebnissen ändern.
 5. Quellen und Aufnahmebedingungen notieren. Eigene Fotos verwenden; Internetbilder nur nach Absprache mit Quellen und Nutzungsbedingungen.
-6. Fotos möglichst bis Doppellektion 5 bereithalten; fehlende Aufnahmen während Ihrer Projektarbeit ergänzen, bevor Sie trainieren. Planen Sie dafür Zeit ein. Originale ausserhalb des Browsers sichern.
+6. Erst fotografieren, wenn die Exemplarliste abgenommen ist (Doppellektion 4, nach dem Lernpfad). Richtwert: Fotos bis Beginn Doppellektion 5 importiert; fehlende Aufnahmen vor dem Training ergänzen und früh mit der Lehrperson besprechen. Planen Sie dafür Zeit ein. Originale ausserhalb des Browsers sichern.
 
-**Personen und Datenschutz:** Personen (etwa bei Gesten) nur mit Einverständnis fotografieren und die lokalen Datenschutzregeln einhalten. Gesichter vermeiden, wenn die Frage sie nicht braucht. Fotos und JSON enthalten die Bilder; das ZIP nur über den Abgabekanal der Lehrperson weitergeben.
+**Personen und Datenschutz:** Personen (etwa bei Gesten) nur mit Einverständnis fotografieren und die lokalen Datenschutzregeln einhalten. Gesichter vermeiden, wenn die Frage sie nicht braucht. Fotos und JSON enthalten die Bilder; das ZIP nur über den Abgabekanal der Lehrperson weitergeben. Das Projekt wird in Doppellektion 6 einem anderen Tandem zur Prüfung zugänglich gemacht: Personen müssen dem vorher zugestimmt haben, sonst melden Sie das der Lehrperson (kein Austausch von Personenfotos).
 
 ## Fotostudio
 
-Auf der Kursseite im Journal das eingebettete Fotostudio öffnen. Beim Arbeiten mit einem eigenständigen Notebook alternativ `foto.fotostudio()` ausführen und die angebotene HTML-Datei im Browser öffnen.
+Auf der Kursseite in Etappe 2 das eingebettete Fotostudio öffnen. Beim Arbeiten mit einem eigenständigen Notebook alternativ `foto.fotostudio()` ausführen und die angebotene HTML-Datei im Browser öffnen.
 Klasse, Gruppe (T1/T2/V1/P1/P2), Quelle und Fotos eintragen. Vorschau prüfen, verarbeiten, JSON herunterladen. Zum Fortsetzen gesicherte JSON importieren. HEIC vorher als JPG exportieren.
 
-Unter «Sichern & abgeben» Originalfotos und die heruntergeladene JSON zusätzlich hinzufügen.
+Unter «Notizen & Projekt» die heruntergeladene JSON hinzufügen. Originalfotos separat sichern.
 
 Das Studio verarbeitet lokal; Bibliotheken und Modell werden aus dem Internet geladen. Ohne Download gehen Sammlungen beim Schliessen verloren.
 

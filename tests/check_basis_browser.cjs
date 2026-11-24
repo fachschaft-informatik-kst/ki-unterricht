@@ -287,8 +287,22 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/ziffernerkennung.ipynb"]').count(),0,'Additional architecture training is no longer a mandatory project detour');
     assert.equal(await page.locator('#basis-daten .ki-notebook-block[data-notebook="content/basis_bildmodell.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-daten .ki-notebook-block[data-notebook="content/daten_training.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-training .ki-notebook-block[data-notebook="content/basis_fotoprojekt.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-abschluss [data-basis-answer="basis-abschluss-a"]').count(),1);
+    assert.equal(await page.locator('#basis-training .ki-notebook-block[data-notebook="content/ki_projekt/ki_lernlabor.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-journal .ki-notebook-block[data-notebook="content/ki_projekt/ki_tandemprojekt.ipynb"]').count(),1);
+    // Project chapter navigation and progress must work with the first-year storage.
+    await page.locator('.nav > a[href="#basis-daten"]').click();
+    const check=page.locator('#basis-daten [data-check="phase-1"]');
+    await check.check();
+    await page.reload({waitUntil:'domcontentloaded'});
+    assert(await check.isChecked(),'Project progress survives reload');
+    await page.locator('#basis-daten a[href="#projekt-regeln"]').first().click();
+    await page.locator('#projekt-regeln').waitFor({state:'visible'});
+    assert.equal(await page.locator('#projekt-2').isVisible(),false,'Other project chapters remain hidden');
+    await page.locator('.nav > a[href="#basis-daten"]').click();
+    await page.locator('#basis-daten #ablauf').waitFor({state:'visible'});
+    await check.uncheck();
+    await page.locator('.nav > a[href="#basis-netze"]').click();
+    assert.equal(await page.locator('#basis-abschluss [data-basis-answer="reproduktion"]').count(),1);
     const xorScore=page.locator('[data-basis-answer="hand_xor_max"]');
     await xorScore.selectOption('3');
     await page.locator('.nav > a[href="#basis-sprache"]').click();

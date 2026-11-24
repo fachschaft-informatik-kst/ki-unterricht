@@ -3,102 +3,102 @@
     {
       "id": "b08",
       "view": "basis-training",
-      "title": "Geführtes Bildprojekt: A/B vergleichen und abschliessen",
+      "title": "Bildprojekt: A/B-Versuch und Abschluss",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
       "goal": "Mit demselben Forschungsablauf wie in der 4. Klasse zwei Bildklassifikatoren fair vergleichen, die Auswahl auf V1 begründen und einmal auf P1/P2 testen.",
       "question": "Helfen vielfältigere Trainingsbilder bei unbekannten Beispielen?",
       "motivation": "Wir untersuchen eine nachvollziehbare Frage statt die höchste Trefferquote zu jagen.",
       "product": "Dokumentierte Datenquelle, fairer A/B-Vergleich, begründete Auswahl, unabhängiger Test, fünf kurze Reflexionen und eingereichtes Projekt-ZIP.",
-      "zeit": "90 Minuten: geführter A/B-Vergleich mit eigener Fotostudio-JSON oder vereinbartem Ersatzdatensatz. Technischen Puffer berücksichtigen; drei Startwerte vor dem Test, sofern im Zeitrahmen möglich.",
+      "zeit": "90 Minuten: Datenimport, einmaliger A/B-Vergleich mit Startwert 11, V1-Auswahl, Test, Fazit und ZIP.",
       "order": 70,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Datenweg prüfen",
+          "titel": "Daten bereithalten",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Eigene Fotostudio-JSON oder vereinbarten Ersatzdatensatz bereithalten. Notebookstart und Datenimport vorbereiten."
+              "text": "Fotostudio-JSON bereithalten, Notebook öffnen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "JSON bereit."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "T1/T2, V1 und P1/P2 klären",
+          "titel": "Datenrollen wiederholen",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Im Tandem Datenrollen nennen. Warum dürfen P1/P2 noch nicht verwendet werden? MobileNet liefert feste Merkmale, der Klassifikationskopf lernt."
+              "text": "T1/T2, V1 und P1/P2 kurz unterscheiden."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Datenrollen erklärt."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Den fairen A/B-Versuch starten",
+          "titel": "Transfer Learning und A/B",
           "minutes": 10,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
               "min": 10,
-              "text": "Lehrperson erklärt Bild → 1280 feste MobileNet-Merkmale → kleines Netz → zwei Labels; demonstriert Datenimport und Vergleich."
+              "text": "Mit Grafik und Lernlabor zeigen: MobileNet liefert feste Merkmale, der Kopf lernt mit Labels. Datenimport und fairen Vergleich demonstrieren."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Versuch verstanden."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Geführten Versuch vollständig durchführen",
-          "minutes": 60,
+          "titel": "Versuch und Auswahl",
+          "minutes": 50,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 60,
-              "text": "Datencheck (10 Min), A/B trainieren (10 Min), konkrete Vorhersagen und ggf. drei Startwerte (15 Min), V1-Wahl dokumentieren und durch Lehrperson freigeben lassen (5 Min), einmalig P1/P2 testen und drei Beispiele untersuchen (10 Min), Fazit und Reflexionen vervollständigen (10 Min). Bei technischen Problemen belegte Referenzwerte klar kennzeichnen."
+              "min": 50,
+              "text": "5 Min Daten prüfen, 15 Min A/B einmal trainieren und Vorhersagen vergleichen, 15 Min V1-Wahl im Journal begründen und von Lehrperson prüfen lassen, 15 Min P1/P2 einmal testen und zwei Beispiele untersuchen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Begründete Auswahl und Testergebnis."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Abgabe vor dem Fachgespräch",
-          "minutes": 10,
+          "titel": "Fazit und Abgabe",
+          "minutes": 20,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 10,
-              "text": "Journal, Notebookausgaben und Datenquelle/JSON im ZIP sichern und tatsächlich einreichen. Beide bereiten eine eigenständige Erklärung von Modell, Vergleich, Test und Grenze vor; keine Präsentation."
+              "min": 20,
+              "text": "Fünf kurze Reflexionen abschliessen, Protokoll und JSON im ZIP sichern und einreichen; beide bereiten sich auf das Fachgespräch vor."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Journal und ZIP fertig."
             }
           ]
         }

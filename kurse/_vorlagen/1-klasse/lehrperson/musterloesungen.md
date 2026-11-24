@@ -90,34 +90,33 @@ Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte
 
 «Im Bildprojekt arbeitet ein Netz wie hier, aber mit 1280 statt 2 Eingaben. Die Zahlen berechnet MobileNet, ein fertiges Netz, das sich nicht verändert. Nur das kleine Netz dahinter lernt unsere zwei Klassen, wieder überwacht: vorhersagen, Fehler gegen das Label bewerten, Gewichte anpassen.» Entscheidend ist die Trennung zwischen **fest** (MobileNet) und **lernend** (kleines Netz).
 
-## DL 4–6 · Geführtes Bildprojekt: Erwartungshorizont
+## DL 4–6 · Geführtes Tandemprojekt: Erwartungshorizont
 
-Die Projektmethodik entspricht der 4. Klasse: **Daten prüfen → A/B fair vergleichen → V1-Auswahl begründen → P1/P2 einmalig testen → Grenzen reflektieren**. In der 1. Klasse erhalten die Tandems vorbereitete Schritte und bei Bedarf synthetische Kreis-/Dreieck-Daten, die **keine** Aussage über neue echte Fotos erlauben. Eigene personenfreie Gegenstandsfotos sind der angestrebte Weg, nicht besser bewertet. Ein Buchstaben-Fine-Tuning ist nicht mehr Pflicht.
+Alle Zahlen sind fiktive Beispiele; im Unterricht müssen eigene Messwerte verwendet werden.
 
-### DL 4 · Kurzer Ziffern-/Buchstabentest und Datenplan
+### DL 4 · Datenregeln und Planung
 
-Das Ziffernnetz liefert für A/B weiterhin eine Ziffer, weil seine Ausgaben nur 0–9 abdecken. Für neue Klassen benötigt es einen neuen trainierbaren Ausgabekopf. Beim folgenden Fotoprojekt verwendet MobileNet feste Merkmale, nur der kleine Kopf lernt mit Labels.
+Ein Ziffernnetz hat keine Buchstaben-Ausgabe. Training passt Gewichte an, V1 dient der Auswahl, P1/P2 dem unabhängigen Abschlusstest. Dasselbe Exemplar in T1 und P1 wäre ein Datenleck; beim Daten-Notebook ist der Wert mit Kopien daher zu optimistisch.
 
-- **T1/T2:** Gewichte anhand der Klassenlabels lernen.
-- **V1:** A und B auf denselben Bildern vergleichen und eine Variante auswählen.
-- **P1/P2:** Erst nach der Auswahl einmal unabhängig prüfen, danach nicht optimieren.
-- **Datenleck:** Derselbe Apfel aus zwei Perspektiven ist nicht plötzlich ein unabhängiges Testexemplar.
+Reflexion 1: «Wir unterscheiden Äpfel und Birnen für eine Sortierhilfe. B könnte besser sein, weil es mehr verschiedene Exemplare kennt.»
 
-Musterreflexion 1: «Wir untersuchen, ob ein Modell mit vielfältigeren Trainingsbeispielen besser auf neuen Beispielen abschneidet. Wir nutzen die bereitgestellten Kreis-/Dreieck-Daten.» Musterreflexion 2: «V1 und P1/P2 bleiben getrennt; den Test schauen wir erst nach der Modellwahl an.» Bei eigenen Fotos gelten fünf Exemplare pro Klasse mit je acht Bildern (=80).
+Reflexion 2: Je Gruppe ein anderer Apfel und eine andere Birne, je acht Fotos (80 insgesamt). Eigene Fotos bei ähnlichem Licht und Hintergrund. Mögliche Grenze: alle Äpfel sind rot, alle Birnen grün.
 
-### DL 5 · Fairer A/B-Versuch mit unabhängiger Prüfung
+### DL 5 · A/B, Test und Fazit
 
-**MobileNet V2 liefert 1280 Merkmale und bleibt eingefroren.** Ein kleiner Kopf mit 16 Neuronen lernt 60 Epochen mit Startwert 11. Modell A nutzt acht Bilder aus T1 je Klasse, B je vier aus T1/T2; alle übrigen Bedingungen bleiben gleich.
+MobileNet bleibt unverändert und liefert Merkmale; nur das kleine Netz lernt anhand der Labels. Beide Varianten erhalten gleich viele Bilder, dieselben Einstellungen und dieselbe Validierung. Nur die Vielfalt der Exemplare unterscheidet sich.
 
-**Nur fiktive Rechenwerte, keine tatsächlich gemessenen Modellwerte:** A = 12/16 (75 %), B = 14/16 (87,5 %) auf V1; B wird **vor** der Testeinsicht begründet ausgewählt. Auf P1/P2 werden beispielsweise 26/32 (81,25 %) korrekt. Die Lernenden müssen die **eigenen** Notebookzahlen, drei tatsächliche Vorhersagen und eine plausible alternative Erklärung eintragen. Auch ohne beobachteten Fehler einen realistischen Grenzfall erklären, **keine Fehler erfinden**.
+Reflexion 3: A 11/16, B 14/16 auf V1. Wir wählen B vor Testeinsicht. Das Ergebnis ist eine Beobachtung, kein allgemeiner Beweis.
 
-Musterreflexion 5: «Die Ergebnisse reichen nur für diese vorbereiteten Übungsdaten. Für echte Alltagsfotos müsste ein neues Experiment mit unabhängigen echten Fotos durchgeführt werden.» Die ZIP-Sicherung muss **eingereicht**, nicht nur heruntergeladen werden.
+Reflexion 4: B 26/32 auf P1/P2. Ein Apfel wird richtig erkannt, eine Birne als Apfel ausgegeben. Hintergrund oder Farbe könnten eine Rolle spielen. P1/P2 wurden vorher nicht zur Auswahl genutzt.
 
-### DL 6 · Fachgespräch und vereinfachter Fremdcheck
+Reflexion 5: B war hier besser; nächstes Mal mehr unabhängige Exemplare bei vergleichbaren Bedingungen prüfen.
 
-Jede Person erklärt **Bild → feste Merkmale → trainierter Kopf → Label → Vorhersage**, die unveränderten Bedingungen im A/B-Vergleich, die Rolle von V1 und P1/P2 sowie mindestens einen tatsächlich belegten Ergebniswert. Ein fremdes Projekt wird parallel **unbenotet** auf Gruppen, Originalzahlen, Modellauswahl und eine Grenze geprüft. Die damalige Variante wird wiederhergestellt und an anderen Klassen ausprobiert; bei technischen Problemen dienen dokumentierte Referenzergebnisse als Ersatz. Neue Testbilder derselben Klassen sind anders zu beurteilen als völlig andere Klassen, für die das Modell keinen passenden Ausgang gelernt hat.
+### DL 6 · Fachgespräch und Fremdmodell
 
-**Bewertung:** 12 gemeinsame Projektpunkte und 18 individuelle Gesprächspunkte = **30 Punkte**. Der Fremdcheck gibt keinen Bonus. Selbstständige, sachlich korrekte Erklärungen sind wichtiger als hohe Trefferquoten.
+Leitfragen: Was lernt? Warum ist der Vergleich fair? Was zeigen V1 und P1/P2? Was bedeuten die eigenen Vorhersagen und Grenzen?
+
+Beispiel: Das fremde Modell kennt Gabel und Löffel. T1/T2, V1 und P1/P2 enthalten unterschiedliche Exemplare; V1 A 11/16, B 13/16; Wahl B, Test 25/32. Ursprüngliches Modell mit Startwert 11 wiederherstellen, nicht neu auswählen. Es gibt bei Äpfeln und Birnen weiterhin nur Gabel oder Löffel aus. Auch eine gute Trennung der neuen Klassen belegt keine richtige Erkennung. Je eine persönliche Antwort mit konkreter Beobachtung und Erklärung genügt. Fremdauswertung unbenotet.
 
 ## 7 · Sprachmodelle (Doppellektion 7)
 
