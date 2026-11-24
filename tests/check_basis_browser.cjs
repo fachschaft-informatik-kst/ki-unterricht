@@ -88,7 +88,14 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.title(),expectedTitle);
     await page.goto('http://127.0.0.1:8770/bok/1-klasse/');
     assert.equal(await page.title(),expectedTitle);
-    assert.equal(await page.locator('main > section').count(),13,'Eight lessons plus glossary, overview, journal and backup');
+    // A course section can hold several double lessons. Validate navigability
+    // rather than requiring one DOM section (or one menu entry) per lesson.
+    const destinations=await page.locator('.nav > a[href^="#"], .sidebar-bottom > a[href^="#"]').evaluateAll(links=>links.map(a=>a.hash.slice(1)));
+    assert(destinations.length>0,'Course navigation must exist');
+    for(const id of new Set(destinations)){
+      assert.equal(await page.locator('main > section[id="'+id+'"]').count(),1,'Navigation target must be a unique main section: '+id);
+    }
+    assert.equal(await page.locator('main .lesson-plan').count(),8,'Eight scheduled double lessons remain available');
     // Shortened eight-lesson plan must have distinct, correctly numbered section anchors.
     for(const [section,number] of [['basis-ki',1],['basis-neuron',2],['basis-netze',3],['basis-daten',4],['basis-daten',5],['basis-abschluss',6],['basis-sprache',7],['basis-gesellschaft',8]]){
       const plan=page.locator('#'+section+' .lesson-plan[id="doppellektion-'+String(number).padStart(2,'0')+'"]');
@@ -155,7 +162,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-lernziele .card').count(),7,'Project learning objectives are grouped in one card');
     // Keep all double-lesson links visible, but expand one chapter list only.
     const activeSubmenus=page.locator('.nav-sub:not([hidden])');
-    assert.equal(await page.locator('.nav > a').count(),11);
+    assert.equal(await page.locator('.nav > a[href="#basis-daten"]').count(),1,'One main entry for the grouped project');
     assert.equal(await activeSubmenus.count(),0,'Overview must not expand lesson chapters');
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await activeSubmenus.first().waitFor({state:'visible'});
