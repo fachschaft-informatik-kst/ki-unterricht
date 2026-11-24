@@ -96,6 +96,20 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
             label = f'{by_view[ident][0]["number"]:02d}' if by_view[ident] else section["navigation"]["label"]
         nav.append(f'<a href="#{ident}"><span>{label}</span>{html.escape(section["navigation"]["title"])}</a>')
     template = (SOURCE / "index.template.html").read_text(encoding="utf-8")
+    # The full picture-project journal is an opt-in course source. Other
+    # first-year courses retain their existing journal and storage schema.
+    journal = (ROOT / manifest_path).parent / "basis-training" / "journal.md"
+    if journal.is_file():
+        project_journal = render_fragment(journal.read_text(encoding="utf-8"), journal)
+        template = re.sub(r'(<section class="section basis-utility-view" id="basis-journal" tabindex="-1">).*?(</section>)',
+                          lambda m: m[1] + project_journal + m[2], template, count=1, flags=re.S)
+        rubric = journal.parent.parent / "basis-abschluss" / "bewertungsraster.md"
+        # Keep the assessment accessible inside the existing project view,
+        # without adding a ninth double lesson or extra navigation item.
+        for i, piece in enumerate(pieces):
+            if 'id="basis-abschluss"' in piece:
+                pieces[i] = piece.replace('</section>', '<details class="card" id="basis-bewertung"><summary>Bewertungsraster</summary>' + render_fragment(rubric.read_text(encoding="utf-8"), rubric) + '</details></section>', 1)
+                break
     assert template.count("<!-- COURSE -->") == template.count("<!-- NAVIGATION -->") == 1
     return template.replace("<!-- COURSE -->", "".join(pieces)).replace("<!-- NAVIGATION -->", "".join(nav)), lessons
 

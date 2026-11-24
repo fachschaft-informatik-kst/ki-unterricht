@@ -1,54 +1,127 @@
-# Geführtes KI-Bildprojekt · 1. Klasse
+# KI-Projekt im Tandem
 
-**DL 4–6 · Ein Projekt, zwei Bildklassen, ein A/B-Vergleich, fünf kurze Reflexionen, individuelles Fachgespräch.**
+**Zwei Bildklassen · ein Vergleich · fünf Reflexionen · individuelles Fachgespräch**
 
-> Helfen vielfältigere Trainingsbilder einem Klassifikator, neue Beispiele richtig zu erkennen?
+> Helfen vielfältigere Trainingsbilder beim Erkennen neuer Gegenstände oder Personen?
 
-Der **wissenschaftliche Ablauf stammt aus dem Bildprojekt der 4. Klasse**. In der 1. Klasse sind Datenweg, Versuchsbedingungen, Arbeitsphasen und Reflexionsfragen stärker vorgegeben. Eigene Python-Programme oder ein langes Projektprotokoll sind nicht nötig.
+## Auftrag
 
-## Zwei gleichwertige Datenwege
+Wählen Sie eine Anwendung aus dem Ideenpool und genau zwei Klassen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste der Lehrperson). Sammeln Sie 80 Fotos gemäss Datenplan: fünf unabhängige Gruppen, acht Fotos je Klasse und Gruppe. Beide Klassen werden unter gleichen Bedingungen fotografiert; Personen nur mit Einverständnis (Details in `ki_fotodaten.md`).
 
-- **Ersatz `UEBUNG` (nach Absprache):** Mitgelieferte synthetische Kreis-/Dreieck-Bilder. Alle fünf Gruppen sind im Notebook vorbereitet; keine Fotos müssen zuhause gesammelt werden.
-- **Angestrebter Projektweg `EIGENE_DATEN`:** Zwei personenfreie Gegenstandsklassen. Je Klasse fünf verschiedene Exemplare (T1, T2, V1, P1, P2), je acht Fotos; insgesamt 80. Fotostudio-JSON exportieren. Keine Exemplare gruppenübergreifend wiederverwenden.
-
-Beide Wege werden gleich bewertet; die Datenquelle gibt keinen Bonus. Bei den synthetischen Daten kann man **nicht** behaupten, das Modell erkenne echte Alltagsfotos zuverlässig.
-
-## Die fünf Datengruppen
-
-| Gruppen | Rolle | Regel |
-|---|---|---|
-| T1 und T2 | **Training** | Der neue Klassifikationskopf lernt an beschrifteten Bildern. |
-| V1 | **Validierung** | Auf denselben V1-Bildern A/B vergleichen und **vor** dem Test eine Variante auswählen. |
-| P1 und P2 | **Unabhängiger Test** | Nur die gewählte Variante **einmal** prüfen. Danach nichts mehr optimieren. |
-
-Das vortrainierte **MobileNet V2** bleibt unverändert und liefert feste Bildmerkmale. Nur das kleine Netz hinter den Merkmalen lernt mit den Klassenlabels. Es geht um den Vergleich der Trainingsdaten, nicht darum, MobileNet selbst zu programmieren.
-
-## Fairer Versuch
+Das vortrainierte Bildmodell liefert feste Merkmale. Sie trainieren darauf ein eigenes kleines neuronales Netz, überwacht mit Ihren zwei Klassen als Labels. Sie untersuchen Daten und Ergebnisse; Sie müssen den Hilfscode nicht selbst programmieren.
 
 | Variante A | Variante B | Gleich bleibt |
 |---|---|---|
-| Acht Trainingsbilder je Klasse aus T1 (ein Exemplar) | Je vier Trainingsbilder je Klasse aus T1 und T2 (zwei Exemplare) | Gesamtbildzahl, 16 Neuronen, 60 Epochen, Startwert 11, dieselben V1-Bilder |
+| Ein Exemplar je Klasse, acht Fotos aus T1 | Zwei Exemplare je Klasse, je vier Fotos aus T1 und T2 | Acht Bilder je Klasse, 16 Neuronen, 60 Epochen, Startwert 11, Validierungsbilder |
 
-**Vermutung:** Variante B profitiert möglicherweise von vielfältigeren Trainingsbeispielen. Ein anderes Ergebnis ist kein Fehler. Vergleicht nach Anleitung auch die drei Startwerte 11, 22 und 33, ausschliesslich **vor** der Testeinsicht.
+V1 dient der Auswahl. Erst nach der begründeten Wahl wird auf P1/P2 getestet. Danach nichts mehr optimieren. Die technische Sperre unterstützt diese Arbeitsregel; sie ist kein Zugriffsschutz.
 
-## Drei Doppellektionen
+## Fünf Reflexionen im Journal
 
-- **DL 4 · Projektvorbereitung:** Ziffern-/Buchstabentest als kurzer Einstieg (ohne weiteres Buchstaben-Fine-Tuning); Lernpfad Datenaufteilung, Datenleck, Themenwahl, Gruppenplan, Abnahme und Reflexionen 1–2. Bis DL 5 eigene Fotos aufnehmen und JSON exportieren; P2 vor anderem Hintergrund.
-- **DL 5 · Geführte Untersuchung:** Gruppen prüfen, A/B trainieren und auf V1 vergleichen, Modellwahl begründen, P1/P2 freigeben und einmal testen, Reflexionen 3–5, ZIP einreichen.
-- **DL 6 · Prüfen und erklären:** Einzelgespräche; parallel unbenoteter Fremdcheck eines anderen Projekts: Daten und Originalwerte prüfen, ursprüngliche Variante wiederherstellen und eigene andere Klassen ohne weiteres Training ausprobieren. Bei technischen Problemen Referenzpaket verwenden. Andere Klassen im fremden Modell sind keine gültige Trefferquote für die eigenen Klassen.
+1. **Was möchten wir erkennen?** Zwei Klassen, ein möglicher Grenzfall und unsere Vermutung zu mehr Bildvielfalt. Kurzer Etappenplan.
+2. **Sind unsere Bilder geeignet?** Fünf Gruppen, Herkunft und Aufnahmebedingungen sowie ein mögliches Datenproblem.
+3. **Was unterscheidet A und B?** Ergebnisse auf V1 und eine konkrete Vorhersage; mögliche Erklärung. **Vor dem Test** die Modellwahl begründen.
+4. **Was passiert mit neuen Bildern?** Testergebnis und drei konkrete Vorhersagen beschreiben; Nutzen und Grenzen nennen. Auch richtige Beispiele sind interessant – keine Fehler erfinden.
+5. **Was haben wir gelernt?** Fazit, nächster Versuch, Arbeitsteilung und verwendete Hilfen (einschliesslich KI).
 
-## Fünf kurze Reflexionen im Kursjournal
+Ein einziger Lauf und wenige Exemplare sind eine begrenzte Untersuchung. Eine hohe Trefferquote oder eine bestätigte Vermutung ist keine Voraussetzung für eine gute Note. Darum wiederholen Sie den Vergleich vor der Auswahl mit den drei festgelegten Startwerten 11, 22 und 33; alle Ergebnisse berichten.
 
-1. **Frage und Vermutung:** Datenweg, zwei Klassen, erwarteter Vorteil vielfältigerer Beispiele.
-2. **Daten:** T1/T2, V1, P1/P2 und mögliche Datenlecks.
-3. **Vergleich:** V1-Werte von A/B, eine konkrete Vorhersage und **schriftlich begründete Wahl vor dem Test**.
-4. **Abschlusstest:** P1/P2-Wert, drei konkrete Vorhersagen und nachvollziehbare Grenzen.
-5. **Fazit:** Was können wir behaupten, was nicht? Nächster fairer Versuch und kurze Zusammenarbeit.
+## Etappen-Check: Bereit für den nächsten Schritt?
 
-**Abgabe vor DL 6:** Kurs-ZIP mit Journal, bearbeitetem Notebook samt Ausgaben, Datenquelle und gegebenenfalls Fotostudio-JSON. ZIP herunterladen **und** über den vereinbarten Abgabekanal einreichen. Kein zusätzlicher Bericht und keine Präsentation.
+Die fünf Checks helfen Ihnen, den eigenen Fortschritt einzuschätzen. Sie sind **keine zusätzlichen Abgaben und keine zusätzlichen Bewertungskriterien**. Arbeiten Sie die Etappen in der angegebenen Reihenfolge durch, teilen Sie Ihre Zeit in Doppellektionen 4–5 aber selbst ein. Falls etwas fehlt, klären Sie es im Tandem oder holen Sie gezielt Hilfe.
+
+### 1. Anwendung und Plan
+- [ ] Wir haben zwei klar unterscheidbare Klassen und ein freigegebenes Thema.
+- [ ] Wir können in einem Satz sagen, was wir mit A und B untersuchen.
+- [ ] Wir haben eine Vermutung und einen realistischen Etappenplan mit wechselnden Rollen.
+
+**Weiter, wenn:** Wir wissen, was wir testen und welche Bilder wir benötigen.
+
+### 2. Bilder und Gruppen
+- [ ] Wir haben je Klasse acht Bilder in jeder der fünf Gruppen T1, T2, V1, P1 und P2.
+- [ ] Bilder desselben Exemplars bzw. derselben Person sind nicht auf mehrere Gruppen verteilt.
+- [ ] Beide Klassen wurden vergleichbar aufgenommen; Quellen und Besonderheiten stehen in Reflexion 2.
+- [ ] Unsere Fotos und die Fotostudio-JSON sind separat gesichert.
+
+**Weiter, wenn:** Der Datenimport funktioniert und wir erklären können, weshalb Trainings- und Prüfbilder getrennt sind.
+
+### 3. Modelle A und B vergleichen
+- [ ] Wir haben A und B mit den vorgegebenen gleichen Einstellungen trainiert.
+- [ ] Wir kennen den Unterschied zwischen den Trainingsbildern von A und B.
+- [ ] Wir haben die Resultate auf V1 und mindestens eine konkrete Vorhersage angesehen.
+- [ ] Wir haben **vor Einsicht in P1/P2** in Reflexion 3 begründet, welches Modell wir auswählen.
+
+**Weiter, wenn:** Unsere Modellwahl feststeht. Eine hohe Trefferquote ist nicht nötig.
+
+### 4. Abschlusstest verstehen
+- [ ] Wir haben nur die ausgewählte Variante auf P1/P2 getestet und danach nichts mehr optimiert.
+- [ ] Wir können drei konkrete Vorhersagen erklären, auch wenn alle richtig sind.
+- [ ] Wir unterscheiden, was unsere Ergebnisse zeigen und was wir damit noch nicht wissen.
+
+**Weiter, wenn:** Testausgaben und Reflexion 4 gesichert sind.
+
+### 5. Abgabe und Fachgespräch vorbereiten
+- [ ] Alle fünf Reflexionen sind verständlich und mit eigenen Resultaten verbunden.
+- [ ] Wir haben das Notebook mit Ausgaben, Originalbilder, JSON und Journal im ZIP überprüft.
+- [ ] Beide können die Datentrennung, den A/B-Vergleich und mindestens ein eigenes Ergebnis ohne Ablesen erklären.
+- [ ] Wir haben die ZIP-Datei **über den Abgabekanal eingereicht**; ein Download allein reicht nicht.
+
+**Fertig, wenn:** Abgabe eingereicht und beide auf das individuelle Fachgespräch vorbereitet sind.
+
+## So planen und steuern Sie Ihre Projektarbeit
+
+In **Doppellektionen 4–5** steuern Sie Ihre Arbeit im Tandem selbst. Es gibt keine gemeinsame Vorgabe «heute alle trainieren». Die fachliche Reihenfolge bleibt verbindlich:
+
+**Daten prüfen → A/B vergleichen → Auswahl begründen → Abschlusstest → Fazit und Abgabe.**
+
+- **Sie entscheiden:** Thema im genehmigten Rahmen, Tagesziele, Zeitverteilung, Rollen und benötigte Hilfen. Nutzen Sie das Lernlabor einmal als Orientierung, falls Sie den Ablauf noch nicht kennen.
+- **Verbindlich bleiben:** Datenplan, fairer Vergleich, fünf Reflexionen, Auswahl vor Testeinsicht, keine Optimierung danach und die Abgabefrist.
+- **Planen:** Ergänzen Sie in Reflexion 1 einen kurzen Etappenplan mit Zuständigkeiten, Zeitbedarf und Reserve. Beide übernehmen praktische und erklärende Aufgaben; wechseln Sie die Rollen.
+- **Steuern:** Am Ende jeder Arbeitsphase im bestehenden Journal kurz ergänzen: erreicht, offen, nächster Schritt, benötigte Hilfe. Passen Sie den Plan bei Bedarf an; kein zusätzliches Lerntagebuch.
+- **Prüfen:** Nutzen Sie das Raster für fehlende Belege und erklären Sie sich gegenseitig das ganze Projekt. In Reflexion 5 beurteilen Sie auch, was an Ihrem Plan funktionierte und was Sie änderten. Diese Hinweise sind keine zusätzlichen Bewertungskompetenzen.
+
+Die Lehrperson bietet kurze Beratungen zu Ihren Fragen an, statt die Klasse bei jeder Etappe anzuhalten. Melden Sie frühzeitig, wenn Daten oder Technik den Abschluss gefährden.
+
+## Zeitrahmen und Termine
+
+| Zeitpunkt | Rahmen |
+|---|---|
+| Doppellektion 4 | Vorbereitungsauftrag: Thema und zwei Klassen aus der Themenliste wählen, die kein anderes Tandem verwendet (Eintrag in die Klassenliste), und zehn verschiedene Exemplare besorgen (fünf je Klasse); noch nicht fotografieren, keine Datenplanung |
+| Anfang Doppellektion 5 | Lehrperson gibt Thema und zwei Klassen frei, wenn die Klassen in der Klassenliste noch frei sind, während die Tandems den Lernpfad zur Datenaufteilung lesen |
+| Doppellektion 5 | Lernpfad, dann Exemplarliste (fünf unabhängige Gruppen) planen und abnehmen lassen; erst danach fotografieren |
+| Mitte Doppellektion 6 | Fotos importiert; fehlen sie noch, sofort mit der Lehrperson klären: gezielt nachfotografieren oder Modus `ERSATZ` (Übungsformen, offen als Ersatzdaten gekennzeichnet) |
+| Doppellektionen 4–5 | Eigener Etappenplan, selbstständige Arbeit, Beratung und laufende Sicherung; Etappen frei auf die Zeit verteilen |
+| vor Beginn der Doppellektion 6 | Vollständiges ZIP über den Abgabekanal einreichen |
+| Doppellektion 6 | Fachgespräch; parallel selbstständige Fremdauswertung mit Rückmeldung |
+
+Die **Bis zu 20 Einzelgespräche à 4 Minuten inklusive Wechsel und Kurzbewertung; 10 Minuten für Einstieg und Sicherung.
+
+### Während der Fachgespräche: ein fremdes Modell auswerten (DL 6)
+
+Arbeiten Sie im Tandem selbstständig und pausieren Sie jeweils nur für Ihr persönliches Einzelgespräch; die andere Person kann weiterarbeiten. Die gemeinsame Fremdauswertung ist **unbenotet (K11)**; nur die persönliche Reflexion K12 zählt 3 Punkte; die bewertete eigene Abgabe bleibt unverändert.
+
+1. **Dateien vorbereiten, ca. 10 Minuten:** Öffnen Sie das zugeteilte fremde Projekt im **privaten Browserfenster**. Die Lehrperson teilt Ihnen ein Projekt mit anderen Klassen als Ihren zu. Legen Sie Ihre eigene Fotostudio-JSON separat bereit; stellen Sie das eigene ZIP dort nicht wieder her. Datenrechte und Bildfreigaben beachten. Läuft nichts, hilft die Notfallkarte auf der Seite «Dateien vorbereiten» (Referenzpaket der Lehrperson).
+2. **Daten und Ergebnisse untersuchen, ca. 20 Minuten:** Vergleichen Sie T1/T2 (Training), V1 (Validierung) und P1/P2 (unabhängiger Abschlusstest) im fremden Projekt. Prüfen Sie mindestens ein konkretes Trainings- und Testexemplar und lesen Sie Originalwerte A/B sowie das Testergebnis. Lassen Sie das fremde Notebook einmal mit Startwert 11 nachlaufen und vergleichen Sie einen Wert.
+3. **Versuch mit den eigenen Klassen, ca. 15 Minuten:** Lassen Sie dasselbe Modell eigene Bilder aus Ihren **zwei anderen Klassen** vorhersagen. Protokollieren Sie die Vorhersagen und untersuchen Sie Beispiele. Die Vorhersagen sind **keine Trefferquote für diese Klassen**: Das fremde Modell kennt nur seine ursprünglichen zwei Klassen. Seine P1/P2-Bilder sind dagegen neue Exemplare **derselben** Klassen und gehören gerade nicht ins Training.
+4. **Erst danach reflektieren:** Gemeinsam zwei Sätze als Rückmeldung für das geprüfte Tandem formulieren (die Lehrperson gibt sie in Doppellektion 9 aus); jede Person beantwortet **zwei kurze Fragen** zu Originalergebnissen, Experiment, Datenrollen, Grenzen und nächstem Test. Separates ZIP herunterladen und einreichen, danach fremdes ZIP und entpackten Ordner löschen; das private Fenster erst nach dem Download schliessen.
+
+Für Gespräch, Wiedereinstieg und Technik bleibt Reserve. Bei einem nicht lösbaren Trainingsproblem werten Sie die gespeicherten fremden Ausgaben aus und dokumentieren ausdrücklich, welcher Versuch nicht möglich war. Die Auswertung entfällt nicht, aber Sie behaupten keinen erfolgreichen Test. Erhaltene Fotos nur für diesen Auftrag verwenden und nach der vereinbarten Aufbewahrungsregel löschen.
 
 ## Bewertung
 
-**Maximal 30 Punkte:** 12 gemeinsame Punkte für den dokumentierten Versuch, 18 persönliche Punkte im Fachgespräch. Der Fremdcheck in DL 6 ist unbenotet. Das Raster steht unter `kursseiten/basis-abschluss/bewertungsraster.md` bzw. `worksheets/md/KI_Bewertungsraster.md`. Bewertet werden faire Daten, Nachvollziehbarkeit und kritische Erklärungen – **nicht** die höchste Trefferquote.
+Maximal 30 Punkte: gemeinsames Projekt (12), individuelles Fachgespräch (18). Die Fremdauswertung ist unbenotet. Das Bewertungsraster der 1. Klasse bleibt verbindlich.
 
-**KI als Hilfe:** Sprach- und Begriffshilfe ist möglich; Zahlen, Ergebnisse, Belege und Deutungen müssen aus dem eigenen Versuch stammen. Verwendete Hilfen nennen. Daten und Fotos nur mit Einverständnis teilen; Personenfotos sind in der 1. Klasse nicht vorgesehen.
+## Hilfsmittel und KI
+
+Erlaubt ist KI als **Sprachhilfe** (Formulieren, Korrigieren, Begriffe erklären). **Zahlen, Beobachtungen und Deutungen** stammen von Ihnen und aus Ihrem Versuch, nicht aus einer KI-Ausgabe. Geben Sie im Journal an, welche Hilfen Sie wofür benutzt haben; im Gespräch müssen Sie jede Zahl und jede Aussage am Journal belegen können («Wo steht das im Journal, welche Zahl?»).
+
+Die Leistungsstufen stehen im [Bewertungsraster](../../worksheets/md/KI_Bewertungsraster.md) und auf der [Kursseite](https://fachschaft-informatik-kst.github.io/ki-unterricht/bok/1-klasse/#basis-bewertung). 
+
+## Zwei getrennte Abgaben
+
+- **Vor DL 6:** Webjournal mit fünf ausgefüllten Reflexionen und Versuchsnotebook mit Ausgaben als ursprüngliches Projekt-ZIP.
+- Originalfotos, Fotostudio-JSON, Gruppen-/Quellenangaben.
+
+Für das eigene Projekt unter «Notizen & Projekt» Fotostudio-JSON hinzufügen und Originalfotos separat sichern und das ZIP-Paket herunterladen. Der Download reicht nichts automatisch ein; ZIP über den genannten Abgabekanal einreichen. Kein zusätzlicher langer Bericht. Bei vereinbarten Ersatzdaten Herkunft und Einschränkungen offenlegen; die Lehrperson legt den passenden Nachweis zur Datenarbeit fest.
+
+**Nach DL 6:** Eigenständige Fremdauswertung mit Daten-/Ergebnischeck, Versuch mit eigenen Klassen und je zwei individuellen Reflexionsantworten als separates ZIP einreichen. Keine Änderungen an der ursprünglichen Projektabgabe.

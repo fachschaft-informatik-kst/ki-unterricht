@@ -197,6 +197,7 @@
   const basicNotebooks = new Set([
     "basis_neuron.ipynb", "xor_einzelne_neuronen.ipynb", "basis_netze.ipynb",
     "basis_bildmodell.ipynb", "basis_fotoprojekt.ipynb",
+    "daten_training.ipynb", "ki_lernlabor.ipynb", "ki_tandemprojekt.ipynb",
     "perzeptron_und_neuronale_netze.ipynb", "mehrschichtige_netze.ipynb", "ziffernerkennung.ipynb"
   ]);
   const advancedNotebooks = new Set([

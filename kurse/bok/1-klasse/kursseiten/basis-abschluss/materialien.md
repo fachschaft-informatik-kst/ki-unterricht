@@ -1,7 +1,5 @@
 ## DL 6 · Fachgespräche und Fremdmodellprüfung
 
-**Vorbereiten:** Abgaben, 30-Punkte-Raster, Gesprächsreihenfolge und anonymisierte Fremdprojekte mit JSON und Ausgaben. Bei Bedarf lauffähiges Referenzprojekt mit anderen Klassen bzw. dokumentierten Fremdtestergebnissen vorbereiten.
+**Material:** [Fahrplan](index.html#basis-abschluss) · [Dateien vorbereiten](index.html#dl8-vorbereiten) · [Daten und Ergebnisse](index.html#reproduktion) · [Eigene Bilder testen](index.html#fremdtest) · [Reflexion und Abgabe](index.html#dl8-abschluss) · [Bewertungsraster](index.html#basis-bewertung).
 
-**Gespräche:** Bis 20 Lernende, 3½ Minuten Gespräch plus ½ Minute Wechsel. Modell, A/B, V1/P1/P2 und eigene Belege erklären.
-
-**Parallel:** In getrennter Browsersitzung fremde Daten und Originalwerte prüfen, ursprüngliche Variante mit unveränderten Einstellungen wiederherstellen, eigene andere Klassen ohne weiteres Training testen; vier Tabellenwerte, zwei Beispiele und Grenze interpretieren. Keine Trefferquote für andere Klassen. Bei Technikproblemen dokumentierte Referenzwerte verwenden und kennzeichnen. Fremdcheck unbenotet; Projekt 12 und Gespräch 18 Punkte.
+**Vorbereiten:** Gesprächsreihenfolge, je Tandem ein Projekt mit anderen Klassen, bei Bedarf Referenzpaket. Bis 20 Lernende: 3½ Minuten Gespräch plus ½ Minute Wechsel/Kurzbewertung. Währenddessen Fremdprüfung in privatem Browserfenster nach den vier Etappen der Kursseite. Nachlauf mit Originaldaten und Startwert 11, dann eigene andere Klassen ohne Nachtraining testen. Gemeinsame Rückmeldung, zwei persönliche Antworten pro Person, separates Fremdauswertungs-ZIP einreichen; fremde Dateien löschen. Fremdprüfung unbenotet; Projekt 12 und Gespräch 18 Punkte.

@@ -5,6 +5,7 @@ import base64
 import hashlib
 import io
 import json
+from math import comb
 from pathlib import Path
 
 import numpy as np
@@ -58,7 +59,7 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
                 chosen += [dict(r, group=new) for r in rows]
         docs=[dict(docs[0], records=chosen)]
     if profil == 'basis':
-        ki.pruefe(len(klassen)==2, 'Im Pflichtprojekt genau zwei Klassen wählen.')
+        ki.pruefe(len(klassen)==2, 'Im Projekt genau zwei Klassen wählen.')
     by_id = {}
     for doc in docs:
         ki.pruefe(doc.get('schema') == 'fotostudio-v1' and doc.get('pipeline') == PIPELINE,
@@ -101,7 +102,7 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
         for g in list(train)+list(val)+list(test):
             for c in range(2):
                 ki.pruefe(np.sum((gruppen==g)&(y==c)) == 8,
-                          f'{g}/{klassen[c]}: im Pflichtprojekt genau 8 verschiedene Fotos verwenden.')
+                          f'{g}/{klassen[c]}: im Projekt genau 8 verschiedene Fotos verwenden.')
     checksum=hashlib.sha256(json.dumps(records,sort_keys=True).encode()).hexdigest()
     for a in [X,y,gruppen]:a.flags.writeable=False
     d=ki.Daten(X,y,gruppen,[r['id'] for r in records],list(klassen),tuple(train),tuple(val),tuple(test),
@@ -110,7 +111,7 @@ def daten_laden(modus='UEBUNG', klassen=('Kreis', 'Dreieck'),
     d.provenienz=dict(pipeline=PIPELINE,normalisierung='L2 je Bild',vortrainiert='MobileNet V2 alpha=0.5; eingefroren',
                      tfjs='4.22.0',mobilenet='2.1.1',
                      bilder=[{k:r[k] for k in ['id','group','label','source','filename']} for r in records])
-    print(f'{modus}: {len(X)} Bilder, {len(klassen)} Klassen, 1280 feste Merkmale pro Bild.')
+    print(f'{modus}: {len(X)} Bilder, {len(klassen)} Klassen (die Labels), 1280 feste Merkmale pro Bild.')
     if modus != 'EIGENE_DATEN':print('Synthetische geometrische Formen; keine Aussage über echte Fotoanwendungen.')
     print('Gruppe | '+' | '.join(klassen))
     for g in list(train)+list(val):print(g,'|',' | '.join(str(int(np.sum((gruppen==g)&(y==c)))) for c in range(len(klassen))))
@@ -157,7 +158,7 @@ def bild_durchs_netz(exp, variante='B', nr=0):
     axes[2].barh(d.klassen,probs*100,color=['#176c63' if j==guess else '#c9d3d6' for j in range(len(d.klassen))])
     axes[2].set(xlim=(0,100),xlabel='Modellwert (%)',title=f'3 · Unser Netz ({netz.hidden_layer_sizes[0]} Neuronen)')
     plt.tight_layout();plt.show()
-    print(f'Bild {nr} aus V1 · tatsächlich: {d.klassen[d.y[i]]} · Netz: {d.klassen[guess]} ({probs[guess]:.0%}) · '+('richtig' if ok else 'Fehler'))
+    print(f'Bild {nr} aus V1 · Label (tatsächliche Klasse): {d.klassen[d.y[i]]} · Netz: {d.klassen[guess]} ({probs[guess]:.0%}) · '+('richtig' if ok else 'Fehler'))
     print('Der Modellwert zeigt die Sicherheit des Netzes, nicht die Wahrscheinlichkeit, richtig zu liegen.')
 
 
@@ -179,12 +180,13 @@ def vorhersagen_zeigen(exp, variante='B'):
     plt.tight_layout();plt.show()
     unsicher=int(np.argmin(sure))
     print(f'{int(np.sum(pred==d.y[d.val]))} von {len(d.val)} richtig. Unsicherstes Bild: Nr. {unsicher} ({d.klassen[d.y[d.val[unsicher]]]}, Modellwert {sure[unsicher]:.0%}).')
+    print('Titel: erste Zeile = Label (tatsächliche Klasse), zweite Zeile = Vorhersage des Netzes mit Modellwert.')
     print('Keine Fehler: nicht erfinden. Auch dann Grenzen der Daten benennen.')
 
 
 def vergleichen(daten, wiederholen=False):
     """Gleiche Bildzahl: A ein Exemplar, B zwei Exemplare pro Klasse."""
-    ki.pruefe(len(daten.klassen)==2, 'Pflichtvergleich mit genau zwei Klassen.')
+    ki.pruefe(len(daten.klassen)==2, 'Vergleich mit genau zwei Klassen.')
     return ki.experiment_starten(daten,weg='vielfalt',bilder_pro_klasse=8,
         wenige_personen=daten.train_personen[:1],neuronen=16,epochen=60,
         seeds=(11,22,33) if wiederholen else (11,))
@@ -194,15 +196,22 @@ def vergleich_zeigen(exp):
     import matplotlib.pyplot as plt
     runs=exp['laeufe'];n=len(exp['einstellungen']['seeds'])
     fig,ax=plt.subplots(figsize=(7,4))
+    zeilen=[]
     for i,name in enumerate(('A','B')):
         vals=[r['val']*100 for r in runs if r['variante']==name]
+        train=float(np.mean([r['train']*100 for r in runs if r['variante']==name]))
         ax.bar(i,np.mean(vals),color=('#176c63','#be572b')[i],width=.55)
         if n>1:ax.scatter(np.full(n,i),vals,c='black',zorder=3)
-        ax.text(i,np.mean(vals)+3,f'{np.mean(vals):.1f} %',ha='center')
-    ax.set(xticks=[0,1],xticklabels=['A: ein Exemplar','B: zwei Exemplare'],ylim=(0,110),
+        ax.hlines(train,i-.35,i+.35,colors='#263b43',linestyles='--',zorder=4)
+        ax.text(i+.37,train,f'Training\n{train:.0f} %',va='center',fontsize=9)
+        ax.text(i,np.mean(vals)+3,f'{np.mean(vals):.1f} %',ha='center',bbox=dict(fc='white',ec='none',pad=1),zorder=5)
+        zeilen.append((name,train,float(np.mean(vals))))
+    ax.set(xticks=[0,1],xticklabels=['A: ein Exemplar','B: zwei Exemplare'],ylim=(0,110),xlim=(-.55,1.95),
            ylabel='Richtige Vorhersagen (%)',title=f'Validierung · {len(exp["daten"].val)} Bilder · '+('ein Lauf' if n==1 else 'Mittelwert und einzelne Läufe'))
     ax.axhline(50,ls=':',c='#52656a');ax.text(.5,52,'Immer dieselbe Klasse: 50 %',ha='center',fontsize=9)
     plt.tight_layout();plt.show()
+    for name,train,val in zeilen:print(f'{name}: Training {train:.0f} % · Validierung {val:.0f} % · Abstand {train-val:+.0f} Prozentpunkte')
+    print('Gestrichelt: Training. Diese Bilder kennt das Netz; V1 zeigt neue Exemplare. Ein grosser Abstand heisst: Das Netz erkennt Gesehenes besser als Neues (Überanpassung).')
     print('Beide Varianten: 8 Trainingsbilder pro Klasse, dasselbe Netz und dieselben Einstellungen.')
     print('A: 8 Fotos aus T1. B: je 4 aus T1 und T2. Validierung: nur V1.')
     print('Ein Lauf und eine Validierungsgruppe: eine Beobachtung, kein Beweis allgemeiner Überlegenheit.')
@@ -272,10 +281,11 @@ def fremdtest(exp, eigene, variante=None):
     print('Zeile = Ihre Klasse, Spalte = Vorhersage des fremden Modells:')
     print(f'{"":14s}'+''.join(f'{"sagt "+k:>16s}' for k in fremd.klassen))
     for c in range(2):print(f'{eigene.klassen[c]:14s}'+''.join(f'{M[c,k]:16d}' for k in range(2)))
-    print(f'Trennschärfe: {trenn:.0%} (Zuordnung {eigene.klassen[0]} → {fremd.klassen[best[0]]}, {eigene.klassen[1]} → {fremd.klassen[best[1]]}); Raten ergäbe etwa 50 %.')
+    zufall=sum(comb(n,k)*max(k,n-k) for k in range(n+1))/2**n/n  # Erwartung der Trennschärfe bei reinem Raten
+    print(f'Trennschärfe: {trenn:.0%} (Zuordnung {eigene.klassen[0]} → {fremd.klassen[best[0]]}, {eigene.klassen[1]} → {fremd.klassen[best[1]]}). Reines Raten ergäbe bei {n} Bildern im Mittel etwa {zufall:.0%}, nicht 50 %.')
     print(f'Mittlerer Modellwert: {sicher.mean():.0%}; {int(np.sum(sicher>=.9))} von {n} Bildern mit mindestens 90 %.')
     if trenn>=.9:print('Das fremde Modell trennt Ihre Klassen fast vollständig, obwohl es sie nie gelernt hat. Prüfen Sie, woran: Gegenstand, Form, Farbe, Hintergrund oder Licht?')
-    elif trenn>=.65:print('Das fremde Modell trennt Ihre Klassen teilweise. Welche Bilder gehen schief, und was haben sie gemeinsam?')
-    else:print('Das fremde Modell trennt Ihre Klassen kaum besser als Raten. Seine Merkmale taugen für Ihre Aufgabe nicht.')
+    elif trenn>=.65:print('Das fremde Modell trennt Ihre Klassen teilweise. Bei wenigen Bildern kann auch Zufall so aussehen. Welche Bilder gehen schief, und was haben sie gemeinsam?')
+    else:print('Das fremde Modell trennt Ihre Klassen kaum besser als Raten. Es hat diese Unterscheidung nie gelernt.')
     print('Das Modell kann nur zwischen seinen zwei Klassen wählen; «weder noch» kennt es nicht. Ein hoher Modellwert heisst nicht, dass es sich auskennt.')
     return dict(variante=variante,matrix=M,trennschaerfe=float(trenn),zuordnung=best,mittlerer_modellwert=float(sicher.mean()))

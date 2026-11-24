@@ -9,7 +9,7 @@
       "question": "Wie prüfen wir, ob ein Bildmodell wirklich neue Beispiele erkennt?",
       "motivation": "Ein hoher Wert auf bekannten Bildern genügt nicht; das lernen wir vor dem eigenen Versuch.",
       "product": "Ziffern-/Buchstaben-Beobachtung, Datenleck-Erklärung und nachvollziehbarer T1/T2/V1/P1/P2-Datenplan.",
-      "zeit": "90 Minuten: kurzer Ziffern-/Buchstabentest, Datenleck-Versuch, Themenwahl und Gruppenplan. Eigene Fotos bis DL 5 vorbereiten; vereinbarter Ersatzdatensatz möglich.",
+      "zeit": "90 Minuten: Ziffern-/Buchstabentest, Datenregeln, Themenwahl und Gruppenplan. Eigene Fotos bis Beginn DL 5 vorbereiten.",
       "order": 50,
       "phases": [
         {
@@ -75,7 +75,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 55,
-              "text": "Datenrollen, Apfel-Fall und Notebookvergleich (25 Min); zwei Gegenstandsklassen, Vermutung und fünf unabhängige Exemplare je Klasse planen (20 Min); Fotostudio und Export mit einem Beispielfoto demonstrieren/ausprobieren (10 Min)."
+              "text": "Datenregeln und Datenleck-Versuch (25 Min); zwölf Themenideen, zwei einzigartige Klassen, Vermutung und fünf unabhängige Gruppen planen (20 Min); Fotostudio mit einem Beispielfoto ausprobieren (10 Min)."
             },
             {
               "art": "Ergebnis",

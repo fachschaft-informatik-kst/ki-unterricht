@@ -3,13 +3,13 @@
     {
       "id": "b08",
       "view": "basis-training",
-      "title": "Geführtes Bildprojekt: A/B vergleichen und abschliessen",
+      "title": "Bildprojekt: A/B-Versuch und Abschluss",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
       "goal": "Mit demselben Forschungsablauf wie in der 4. Klasse zwei Bildklassifikatoren fair vergleichen, die Auswahl auf V1 begründen und einmal auf P1/P2 testen.",
       "question": "Helfen vielfältigere Trainingsbilder bei unbekannten Beispielen?",
       "motivation": "Wir untersuchen eine nachvollziehbare Frage statt die höchste Trefferquote zu jagen.",
       "product": "Dokumentierte Datenquelle, fairer A/B-Vergleich, begründete Auswahl, unabhängiger Test, fünf kurze Reflexionen und eingereichtes Projekt-ZIP.",
-      "zeit": "90 Minuten: geführter A/B-Vergleich mit eigener Fotostudio-JSON oder vereinbartem Ersatzdatensatz. Technischen Puffer berücksichtigen; drei Startwerte vor dem Test, sofern im Zeitrahmen möglich.",
+      "zeit": "90 Minuten: A/B-Vergleich mit dem originalen Tandem-Notebook, Wiederholung mit drei Startwerten, V1-Auswahl, Test, Fazit und ZIP.",
       "order": 70,
       "phases": [
         {
@@ -68,14 +68,14 @@
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Geführten Versuch vollständig durchführen",
+          "titel": "A/B-Versuch vollständig durchführen",
           "minutes": 60,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 60,
-              "text": "Datencheck (10 Min), A/B trainieren (10 Min), konkrete Vorhersagen und ggf. drei Startwerte (15 Min), V1-Wahl dokumentieren und durch Lehrperson freigeben lassen (5 Min), einmalig P1/P2 testen und drei Beispiele untersuchen (10 Min), Fazit und Reflexionen vervollständigen (10 Min). Bei technischen Problemen belegte Referenzwerte klar kennzeichnen."
+              "text": "Datencheck (10 Min), A/B trainieren (10 Min), konkrete Vorhersagen und drei Startwerte (15 Min), V1-Wahl dokumentieren und durch Lehrperson freigeben lassen (5 Min), einmalig P1/P2 testen und drei Beispiele untersuchen (10 Min), Fazit und fünf Journal-Reflexionen vervollständigen (10 Min). Bei technischen Problemen belegte Referenzwerte klar kennzeichnen."
             },
             {
               "art": "Ergebnis",

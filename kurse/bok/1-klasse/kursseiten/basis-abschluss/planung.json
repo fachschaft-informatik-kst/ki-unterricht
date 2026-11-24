@@ -3,12 +3,12 @@
     {
       "id": "b09",
       "view": "basis-abschluss",
-      "title": "Fachgespräch und geführte Fremdmodellprüfung",
+      "title": "Fachgespräch und Fremdmodellprüfung",
       "rueckblick": "Ergebnisse des vorherigen Versuchs aufgreifen.",
       "goal": "Die eigene Untersuchung individuell erklären und ein fremdes Projekt anhand seiner Datenrollen, Ergebnisse und Modellgrenzen kritisch prüfen.",
       "question": "Welche Aussagen tragen die Ergebnisse eines Bildmodells – und welche nicht?",
       "motivation": "Ein Modell prüft man nicht nur an einer hohen Trefferquote, sondern an nachvollziehbaren unabhängigen Daten.",
-      "product": "Individuelle Fachgespräche und je Tandem ein kurzer unbenoteter Fremdcheck mit begründeter persönlicher Reflexion.",
+      "product": "Individuelle Fachgespräche und je Tandem eine separate unbenotete Fremdauswertung mit zwei persönlichen Antworten je Person.",
       "zeit": "90 Minuten: bis 20 Einzelgespräche à 4 Minuten inklusive Wechsel. Fremdes Projekt oder lauffähiges Referenzpaket, Gesprächsreihenfolge und Raster vorab bereitstellen.",
       "order": 80,
       "phases": [
@@ -93,7 +93,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 3,
-              "text": "Zwei Befunde und die persönliche Reflexion sichern, eventuell separat abgeben. Für die Projektnote zählt das eigene Projekt und das individuelle Fachgespräch; die Fremdprüfung dient der kritischen Sicherung."
+              "text": "Fremdauswertung mit Rückmeldung und beiden persönlichen Antworten pro Person als separates ZIP sichern und einreichen. Fremde Dateien löschen. Die Fremdprüfung ist unbenotet."
             },
             {
               "art": "Ergebnis",

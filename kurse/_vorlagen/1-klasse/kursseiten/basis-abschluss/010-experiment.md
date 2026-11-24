@@ -1,34 +1,77 @@
 ---
 type: chapter
-id: basis-abschluss-experiment
-nummer: 1
-titel: Ein fremdes Projekt kritisch prüfen
-kurz: T1/T2, V1 und P1/P2 · Ergebnisse · Grenzen
+id: dl8-warum
+nummer: "0"
+titel: "Warum prüfen?"
+kurz: "Was Sie aus dem eigenen Projekt mitbringen und welche zwei Prüfungen Sie unterscheiden."
+open: false
 ---
 
-**Auftrag während der Einzelgespräche (unbenotet):** Ihr untersucht ein zugeteiltes, anonymisiertes Projekt. Ziel ist nicht, andere Tandems zu benoten, sondern zu verstehen, welche Aussagen die fremden Daten und Ergebnisse erlauben.
+<p class="page-crumb"><a href="#basis-abschluss">‹ Fahrplan</a><span>Start · ca. 5 Min.</span></p>
 
-### 1 · Daten und Originalergebnisse prüfen
+## Was kann ein Modell nachweislich – und was nicht?
 
-Öffnet das fremde ZIP in einer getrennten privaten Browsersitzung, damit euer eigener Kursstand unverändert bleibt. Lest Journal und Notebookausgaben. Vergleicht die zwei Bildklassen, T1/T2, V1 und P1/P2. Betrachtet ein Trainings- und ein Testbild; sind verschiedene Exemplare und vergleichbare Bedingungen erkennbar? Notiert A/B auf V1, die begründete Modellwahl und das ursprüngliche P1/P2-Ergebnis.
+<p class="section-intro">Dieselben Regeln wie in Ihrem Projekt, jetzt als Prüfende: erst die Daten und Ergebnisse des fremden Tandems, dann Ihre eigenen Klassen.</p>
 
-### 2 · Das fremde Modell wiederherstellen
+Das andere Tandem hat ein Bildmodell mit **zwei festgelegten Klassen** trainiert. Sie untersuchen zuerst seine **Trainings-, Validierungs- und Testdaten** und die protokollierten Ergebnisse. Danach führen Sie einen kleinen Versuch mit Ihren eigenen Bildern durch. **Erst danach** ziehen Sie Schlussfolgerungen und geben Rückmeldung.
 
-Python-Modelle sind nach dem Öffnen eines gesicherten Notebooks nicht im Speicher. Führt im fremden Notebook Start, Datenimport und den ursprünglichen A/B-Vergleich mit denselben Einstellungen erneut aus. Vergleicht V1 mit der dokumentierten Abgabe. Verwendet die **damals gewählte** Variante; keine neue Modellwahl und kein Optimieren am Abschlusstest. Die Lehrperson stellt bei Bedarf ein lauffähiges Referenzprojekt bereit.
+<div class="dl8-section-head"><h3>Vom eigenen zum fremden Projekt</h3><span class="dl8-meta">Dieselben Regeln</span></div>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">In Ihrem Projekt haben Sie …</th>
+        <th scope="col">Beim fremden Projekt prüfen Sie …</th>
+        <th scope="col">Wo?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Training, Validierung und Test in T1/T2, V1 und P1/P2 getrennt.</td>
+        <td>ob diese Gruppen wirklich verschiedene Gegenstände oder Personen enthalten.</td>
+        <td><a href="#reproduktion">Etappe 2</a></td>
+      </tr>
+      <tr>
+        <td>Variante A oder B anhand von V1 gewählt, bevor Sie den Test kannten.</td>
+        <td>ob die Werte auf V1 zur ursprünglichen Modellwahl passen.</td>
+        <td><a href="#reproduktion">Etappe 2</a></td>
+      </tr>
+      <tr>
+        <td>den Abschlusstest auf P1/P2 gemacht und danach nichts mehr optimiert.</td>
+        <td>ob sich das Testresultat wiederholen lässt; ein Nachlauf mit Startwert 11 prüft es.</td>
+        <td><a href="#reproduktion">Etappe 2</a></td>
+      </tr>
+      <tr>
+        <td>in Reflexion 4 begründet, was Ihr Modell nicht belegt (etwa wegen Hintergrund oder Licht).</td>
+        <td>welche Aussage die Vorhersagen des fremden Modells auf Ihren eigenen Klassen belegen können – und welche nicht.</td>
+        <td><a href="#fremdtest">Etappe 3</a> · <a href="#dl8-abschluss">Etappe 4</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-### 3 · Eigene Bilder am fremden Modell ausprobieren
+<div class="dl8-section-head"><h3>Zwei verschiedene Prüfungen</h3><span class="dl8-meta">Nicht verwechseln</span></div>
+<div class="dl8-compare">
+  <article class="dl8-compare-card">
+    <span class="dl8-eyebrow">Prüfung 1 · Etappe 2</span>
+    <h3>Gleiche Klassen, ungesehene Testbilder</h3>
+    <p>Das fremde Modell wurde zum Beispiel mit Äpfeln und Birnen trainiert. Es erkennt später einen <strong>anderen, zuvor nie gesehenen Apfel</strong> aus P1/P2. Das ist der Sinn eines unabhängigen Tests: Die Testbilder dürfen vorher <strong>nicht</strong> zum Training verwendet werden.</p>
+    <p><strong>Prüffrage:</strong> Sind T1/T2, V1 und P1/P2 wirklich getrennte Exemplare? Wie gut ist das Resultat auf den passenden, ungesehenen Testbildern? Der Nachlauf prüft nur, ob sich das Ergebnis wiederholen lässt.</p>
+  </article>
+  <article class="dl8-compare-card">
+    <span class="dl8-eyebrow">Prüfung 2 · Etappe 3</span>
+    <h3>Ganz andere Klassen</h3>
+    <p>Jetzt zeigen Sie demselben Modell zwei <strong>ganz andere Klassen</strong> aus Ihrem eigenen Projekt, zum Beispiel Tassen und Flaschen. Notieren Sie vorher einzeln, was Sie erwarten.</p>
+    <p><strong>Prüffrage:</strong> Welche Vorhersagen entstehen? Was lässt sich daraus ableiten, und was nicht? Die Erklärung lesen Sie nach dem Versuch in Etappe 3.</p>
+  </article>
+</div>
 
-Vermutet zuerst, was das Modell mit zwei anderen Bildklassen tun wird. Öffnet im fremden Notebook den Abschnitt «Fremdmodell prüfen», tragt die eigenen Klassennamen und die ursprüngliche fremde Modellwahl ein und ladet eure eigene Fotostudio-JSON. Führt die Fremdtestzelle aus, ohne das Netz weiter zu trainieren. Vergleicht je ein Bild aus beiden eigenen Klassen und die vier Zahlen der Vorhersagetabelle. Falls ihr keine eigenen Fotos habt, nutzt einen von der Lehrperson bereitgestellten Datensatz mit zwei anderen Klassen oder ein dokumentiertes Referenzergebnis.
+<aside class="dl8-note">
+  <span class="dl8-eyebrow">Merksatz</span>
+  <p>Ein schlechter Fremdtest auf <strong>anderen Klassen</strong> beweist nicht, dass das Tandem schlecht gearbeitet hat. <strong>Neue Bilder bekannter Klassen</strong> und <strong>völlig neue Klassen</strong> sind zwei unterschiedliche Prüfungen.</p>
+</aside>
 
-| | Fremdes Label 1 | Fremdes Label 2 |
-|---|---:|---:|
-| Unsere Klasse C | … | … |
-| Unsere Klasse D | … | … |
-
-**Einordnung:** Im regulären Abschlusstest P1/P2 sind die Bilder neu, die Klassen aber bekannt. Im Fremdversuch sind auch die Klassen neu. Das Modell besitzt keine Ausgabe für sie und muss eines seiner alten Labels auswählen. Auch eine deutliche Trennung ist deshalb keine Trefferquote für eure eigenen Klassen.
-
-<div class="basis-answer"><label for="basis-abschluss-a">Fremdcheck: Daten, Originalergebnisse, Erwartung, Beobachtung und Rückfrage</label><textarea id="basis-abschluss-a" data-basis-answer="basis-abschluss-a" rows="9" placeholder="Fremde Klassen … / T1/T2 vs. P1/P2 … / V1 A/B … / ursprüngliche Wahl und Test … / Nachlauf … / Erwartung … / Tabelle C/D … / zwei Beispiele … / mögliche Ursache und Rückfrage …"></textarea></div>
-
-### 4 · Grenzen erklären
-
-Nennt eine plausible Ursache (z. B. Form, Farbe oder Hintergrund) und einen nächsten Versuch, der sie prüfen könnte. Bei technischen Problemen verwendet ihr dokumentierte Originalwerte und Referenzbeispiele. Kennzeichnet, welche Schritte ihr nicht selbst durchführen konntet; erfindet keine Messwerte. Sichert eure Rückmeldung getrennt vom fremden Projekt.
+<nav class="page-next" aria-label="Weiter in Doppellektion 6">
+  <a class="btn" href="#basis-abschluss">‹ Fahrplan</a>
+  <a class="btn primary" href="#dl8-vorbereiten">Weiter: Dateien vorbereiten →</a>
+</nav>
