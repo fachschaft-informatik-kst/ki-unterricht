@@ -61,7 +61,17 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
   try{
     await new Promise(resolve=>setTimeout(resolve,1000));
     browser=await chromium.launch({headless:true});
-    const page=await browser.newPage();
+    // This smoke test exercises our portal, not the availability of an external
+    // teaching site. Keep the iframe URL/markup intact, but answer its request
+    // locally so a third-party response cannot block navigation or reload.
+    const newPage=async(options)=>{
+      const target=await browser.newPage(options);
+      await target.route('https://inf-schule.de/**',route=>route.fulfill({
+        status:200,contentType:'text/html',body:'<!doctype html><title>External learning resource (CI stub)</title>'
+      }));
+      return target;
+    };
+    const page=await newPage();
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto('http://127.0.0.1:8770/kurse.html');
     assert.equal(await page.locator('a.choice').count(),4,'BOK and IRN each provide course slots for 1st and 4th year');
@@ -124,7 +134,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.locator('#basis-sicherung').waitFor({state:'visible'});
     assert.equal(await page.locator('#basis-journal').isVisible(),false);
     assert(await page.locator('#basis-sicherung #basis-backup-controls button').count());
-    const advanced=await browser.newPage();
+    const advanced=await newPage();
     await advanced.goto('http://127.0.0.1:8770/bok/4-klasse/');
     // Figure limits come from the same styles as the fourth-year course, not a 100% override.
     const figureSizes=async target=>({
@@ -227,7 +237,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await basisTerms.locator('[data-ki-sort-card="spam"] select').selectOption('ml');
     assert.equal(await basisTerms.locator('[data-ki-sort-card="spam"] select').inputValue(),'ml');
     await note.fill('Nicht jedes automatische Programm ist KI.');
-    await page.reload();
+    await page.reload({waitUntil:'domcontentloaded'});
     await page.locator('.nav > a[href="#basis-ki"]').click();
     assert.equal(await page.locator('#basis-ki [data-ki-sort-card="automat"] select').inputValue(),'regeln','Basis drag answer is saved');
     assert.equal(await page.locator('#basis-ki [data-ki-sort-card="spam"] select').inputValue(),'ml','Basis select answer is saved');
@@ -295,7 +305,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert((await language.locator('[data-language-result]').innerText()).includes('Fussball'));
     const languageNote=page.locator('[data-basis-answer="basis-sprache-b"]');
     await languageNote.fill('Kontext beeinflusst Fortsetzungen, Behauptungen müssen geprüft werden.');
-    await page.reload();
+    await page.reload({waitUntil:'domcontentloaded'});
     await activeSubmenus.first().waitFor({state:'visible'});
     assert.equal(await activeSubmenus.count(),1,'Reload should restore only the current lesson submenu');
     assert.equal(await page.locator('.nav > a[href="#basis-sprache"]').getAttribute('aria-expanded'),'true');
@@ -315,7 +325,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     // Full first-year ZIP round trip: reflection fields, notebook snapshots and Fotostudio JSON.
     const notebook={nbformat:4,nbformat_minor:5,metadata:{},cells:[{cell_type:'code',metadata:{},source:['print("Mein Versuch")'],execution_count:1,outputs:[{output_type:'stream',name:'stdout',text:['Mein Ergebnis\\n']}]}]};
     await page.evaluate(nb=>localStorage.setItem('kst-ki-basis-notebooks-v1',JSON.stringify({'basis_neuron.ipynb':nb})),notebook);
-    await page.reload();
+    await page.reload({waitUntil:'domcontentloaded'});
     await page.locator('.nav > a[href="#basis-ki"]').click();
     await note.fill('Gesicherte Reflexion im ZIP.');
      await page.locator('.sidebar-bottom a[href="#basis-journal"]').click();
@@ -379,7 +389,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
      assert.equal(await timelineAnswer.inputValue(),'Jüngere Beispiele lernen aus Daten, feste Regeln bleiben wichtig.');
     assert.equal(JSON.parse(await page.evaluate(()=>localStorage.getItem('kst-ki-basis-notebooks-v1')))['basis_neuron.ipynb'].cells[0].execution_count,1);
     // ZIP export/import must remain accessible when the navigation becomes mobile.
-    const mobilePage=await browser.newPage({viewport:{width:390,height:840}});
+    const mobilePage=await newPage({viewport:{width:390,height:840}});
     await mobilePage.goto('http://127.0.0.1:8770/bok/1-klasse/');
     assert.equal(await mobilePage.locator('#basis-sicherung').isVisible(),false,
       'Mobile lessons must also stay focused');
@@ -454,7 +464,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
       ['basis-netze','xor_einzelne_neuronen.ipynb','xor_einzelne_neuronen.ipynb','XOR mit einem Neuron'],
       ['basis-netze','mehrschichtige_netze.ipynb','mehrschichtige_netze.ipynb','Neuronale Netze']
     ]){
-      const notebookPage=await browser.newPage();
+      const notebookPage=await newPage();
       await notebookPage.goto('http://127.0.0.1:8770/bok/1-klasse/#'+lesson);
       await notebookPage.locator('#'+lesson+' .ki-notebook-block[data-notebook="content/'+notebook+'"] .ki-notebook-launch').first().click();
       await notebookPage.waitForFunction(()=>!!document.querySelector('#basis-lab-frame')?.getAttribute('src'));
@@ -493,7 +503,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     }
     // Jupyter notebooks can now be launched and edited within the chapter.
     // The expensive Python runtime must only load after explicit interaction.
-    const notebookPageInline=await browser.newPage();
+    const notebookPageInline=await newPage();
     await notebookPageInline.route('**/lab/index.html?**',route=>route.fulfill({
       status:200,contentType:'text/html',body:'<!doctype html><html><body>JupyterLite test runtime</body></html>'
     }));
@@ -561,7 +571,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     }
     await notebookPageInline.close();
     // Glossary links open an accessible explanation without leaving the current lesson.
-    const glossaryPage=await browser.newPage();
+    const glossaryPage=await newPage();
     await glossaryPage.goto('http://127.0.0.1:8770/bok/1-klasse/#basis-abschluss');
     await glossaryPage.locator('#basis-abschluss a[href="#basis-glossar-modell"]').click();
     assert(await glossaryPage.locator('dialog.glossary-dialog').isVisible(),'Inline glossary dialog');
