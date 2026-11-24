@@ -301,6 +301,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.locator('.nav > a[href="#basis-daten"]').click();
     assert(await page.locator('#basis-daten #ablauf').isVisible(),'Return to the roadmap');
     await check.uncheck();
+    await page.locator('.nav > a[href="#basis-netze"]').click();
     assert.equal(await page.locator('#basis-abschluss [data-basis-answer="reproduktion"]').count(),1);
     const xorScore=page.locator('[data-basis-answer="hand_xor_max"]');
     await xorScore.selectOption('3');
