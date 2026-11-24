@@ -8,11 +8,21 @@ kurz: Den Lernpfad der 4. Klasse geführt anwenden
 
 ### Drei Datenrollen verstehen
 
-Im Bildprojekt verwenden wir die Aufteilung der 4. Klasse: **T1 und T2** sind Training (hier lernt der Kopf aus Labels), **V1** ist Validierung (hier entscheiden wir zwischen A und B), **P1 und P2** sind unabhängige Testdaten (erst **nach** der Modellwahl). Das vortrainierte MobileNet bleibt fest.
+Ein Bildmodell lernt aus beschrifteten Bildern. Die Bilder, mit denen es lernt, dürfen nicht auch als unabhängige Prüfung dienen.
 
-**Datenleck-Beispiel:** Acht Fotos desselben Apfels in T1 und P1 sind kein unabhängiger Test. Auch andere Perspektiven bleiben Fotos desselben Exemplars. In eigene Fotogruppen gehören verschiedene Exemplare; mit dem vorbereiteten Übungsdatensatz sind die Gruppen schon getrennt.
+| Gruppen | Aufgabe | Bilder pro Klasse |
+|---|---|---:|
+| T1 und T2 – [Training](#basis-glossar-training) | Das Netz passt seine Gewichte an. | 16 im Trainingspool |
+| V1 – [Validierung](#basis-glossar-validierung) | Zwei Varianten vergleichen und eine auswählen. | 8 |
+| P1 und P2 – [Testdaten](#basis-glossar-testdaten) | Nur die gewählte Variante abschliessend prüfen. | 16 |
 
-**Geführter Lernpfad (ca. 25 Minuten):** Beantwortet erst die drei Datenrollen, besprecht den Apfel-Fall und probiert den Datenleck-Versuch aus der 4. Klasse im Notebook «Daten fair aufteilen». Bei Zeitknappheit genügen der Apfel-Fall und ein Vergleich von bekannten und neuen Beispielen.
+### Fallbeispiel · Zwei Äpfel
+
+Ein Tandem fotografiert einen roten Apfel achtmal. Vier Fotos landen im Training, vier im Test. Ein anderes Tandem nimmt für den Test einen anderen Apfel. Welcher Versuch prüft besser, ob das Modell neue Äpfel erkennt? Warum reicht es nicht, denselben Apfel vor einem anderen Hintergrund zu fotografieren?
+
+### Interaktiver Versuch · Datenleck erkennen
+
+Vergleicht die Trefferquote mit Kopien der Trainingsbilder und mit wirklich neuen Bildern. Wiederholt den Vergleich mit 40 und 400 Trainingsbildern. Notiert die tatsächlichen Werte.
 
 <div class="ki-notebook-block" data-notebook="content/daten_training.ipynb" data-title="Daten fair aufteilen">
   <h3>Jupyter-Notebook · Daten fair aufteilen</h3>
@@ -20,6 +30,6 @@ Im Bildprojekt verwenden wir die Aufteilung der 4. Klasse: **T1 und T2** sind Tr
   <button type="button" class="ki-notebook-launch" data-lab="daten_training.ipynb">Notebook hier öffnen</button>
 </div>
 
-<div class="basis-answer"><label for="basis-daten-b">Datenregeln: unsere Erklärung</label><textarea id="basis-daten-b" data-basis-answer="basis-daten-b" rows="4" placeholder="Training … / V1 … / P1/P2 … / Ein Datenleck entsteht, wenn …"></textarea></div>
+<div class="basis-answer"><label for="basis-daten-b">Datencheck: Apfelbeispiel, Notebookwerte und drei Datenrollen</label><textarea id="basis-daten-b" data-basis-answer="basis-daten-b" rows="6" placeholder="Der faire Apfeltest … / Kopien … %, neue Bilder … % / 40 vs. 400 … / Training … / V1 … / P1/P2 …"></textarea></div>
 
-<details><summary>Selbstkontrolle: Warum ist der Test unabhängig?</summary><div class="detail-body"><p>Die Modellwahl geschieht nur mithilfe von V1. Erst danach wird die festgelegte Variante auf bisher ungenutzten P1/P2-Bildern getestet. Gleiche reale Gegenstände dürfen nicht auf Trainings- und Testgruppen verteilt werden.</p></div></details>
+<details><summary>Selbstkontrolle</summary><div class="detail-body"><p>Fotos desselben Exemplars bleiben in einer Gruppe. Nur V1 dient zur Auswahl. P1/P2 bleiben bis nach der Wahl ungenutzt. Eine hohe Trefferquote auf Kopien belegt keine Erkennung neuer Exemplare.</p></div></details>

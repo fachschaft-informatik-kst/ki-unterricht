@@ -16,6 +16,6 @@ kurz: Modell, Entscheidungen und Grenzen erklären
 
 **Bewertet wird euer Verständnis, nicht die höchste Trefferquote.** Das benotete Raster mit insgesamt 30 Punkten unterscheidet gemeinsame Projektabgabe und persönliche Gesprächsleistung. Der Fremdcheck bleibt unbenotet.
 
-<div class="basis-answer"><label for="basis-abschluss-b">Meine persönliche Reflexion nach dem Fremdcheck</label><textarea id="basis-abschluss-b" data-basis-answer="basis-abschluss-b" rows="4" placeholder="An einem fremden Ergebnis fällt mir auf … / Neue Bilder derselben Klassen unterscheiden sich von ganz neuen Klassen, weil … / Ein fairer nächster Test wäre …"></textarea></div>
+<div class="basis-answer"><label for="basis-abschluss-b">Meine persönliche Reflexion nach dem Fremdcheck</label><textarea id="basis-abschluss-b" data-basis-answer="basis-abschluss-b" rows="4" placeholder="An einem fremden Ergebnis oder unserer Vorhersagetabelle fällt mir auf … / Neue Bilder derselben Klassen unterscheiden sich von ganz neuen Klassen, weil … / Ein fairer nächster Test wäre …"></textarea></div>
 
 <details><summary>Orientierung für eine gute Erklärung</summary><div class="detail-body"><p>Ihr könnt Bild, Label, festes Merkmalsnetz, trainierbaren Kopf, Datenaufteilung, Auswahlentscheidung, endgültigen Test und eine Grenze eures Versuchs mit eigenen Zahlen verbinden. Die Reflexion über das fremde Modell ist eine Lernaufgabe, keine zweite Projektbewertung.</p></div></details>
