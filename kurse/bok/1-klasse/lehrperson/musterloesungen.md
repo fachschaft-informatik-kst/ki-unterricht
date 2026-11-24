@@ -92,7 +92,7 @@ Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte
 
 ## DL 4–6 · Geführtes Bildprojekt: Erwartungshorizont
 
-Die Projektmethodik entspricht der 4. Klasse: **Daten prüfen → A/B fair vergleichen → V1-Auswahl begründen → P1/P2 einmalig testen → Grenzen reflektieren**. In der 1. Klasse erhalten die Tandems vorbereitete Schritte und standardmässig synthetische Kreis-/Dreieck-Daten, die **keine** Aussage über neue echte Fotos erlauben. Eigene personenfreie Gegenstandsfotos sind freiwillig, nicht besser bewertet. Ein Buchstaben-Fine-Tuning ist nicht mehr Pflicht.
+Die Projektmethodik entspricht der 4. Klasse: **Daten prüfen → A/B fair vergleichen → V1-Auswahl begründen → P1/P2 einmalig testen → Grenzen reflektieren**. In der 1. Klasse erhalten die Tandems vorbereitete Schritte und bei Bedarf synthetische Kreis-/Dreieck-Daten, die **keine** Aussage über neue echte Fotos erlauben. Eigene personenfreie Gegenstandsfotos sind der angestrebte Weg, nicht besser bewertet. Ein Buchstaben-Fine-Tuning ist nicht mehr Pflicht.
 
 ### DL 4 · Kurzer Ziffern-/Buchstabentest und Datenplan
 
@@ -103,7 +103,7 @@ Das Ziffernnetz liefert für A/B weiterhin eine Ziffer, weil seine Ausgaben nur 
 - **P1/P2:** Erst nach der Auswahl einmal unabhängig prüfen, danach nicht optimieren.
 - **Datenleck:** Derselbe Apfel aus zwei Perspektiven ist nicht plötzlich ein unabhängiges Testexemplar.
 
-Musterreflexion 1: «Wir untersuchen, ob ein Modell mit vielfältigeren Trainingsbeispielen besser auf neuen Beispielen abschneidet. Wir nutzen die bereitgestellten Kreis-/Dreieck-Daten.» Musterreflexion 2: «V1 und P1/P2 bleiben getrennt; den Test schauen wir erst nach der Modellwahl an.» Bei freiwilligen Fotos gelten fünf Exemplare pro Klasse mit je acht Bildern (=80).
+Musterreflexion 1: «Wir untersuchen, ob ein Modell mit vielfältigeren Trainingsbeispielen besser auf neuen Beispielen abschneidet. Wir nutzen die bereitgestellten Kreis-/Dreieck-Daten.» Musterreflexion 2: «V1 und P1/P2 bleiben getrennt; den Test schauen wir erst nach der Modellwahl an.» Bei eigenen Fotos gelten fünf Exemplare pro Klasse mit je acht Bildern (=80).
 
 ### DL 5 · Fairer A/B-Versuch mit unabhängiger Prüfung
 
@@ -115,7 +115,7 @@ Musterreflexion 5: «Die Ergebnisse reichen nur für diese vorbereiteten Übungs
 
 ### DL 6 · Fachgespräch und vereinfachter Fremdcheck
 
-Jede Person erklärt **Bild → feste Merkmale → trainierter Kopf → Label → Vorhersage**, die unveränderten Bedingungen im A/B-Vergleich, die Rolle von V1 und P1/P2 sowie mindestens einen tatsächlich belegten Ergebniswert. Ein fremdes Projekt wird parallel **unbenotet** auf Gruppen, Originalzahlen, Modellauswahl und eine Grenze geprüft. Ein vollständiger Modellnachlauf oder der Einsatz fremder Bildklassen ist nur freiwillig. Neue Testbilder derselben Klassen sind anders zu beurteilen als völlig andere Klassen, für die das Modell keinen passenden Ausgang gelernt hat.
+Jede Person erklärt **Bild → feste Merkmale → trainierter Kopf → Label → Vorhersage**, die unveränderten Bedingungen im A/B-Vergleich, die Rolle von V1 und P1/P2 sowie mindestens einen tatsächlich belegten Ergebniswert. Ein fremdes Projekt wird parallel **unbenotet** auf Gruppen, Originalzahlen, Modellauswahl und eine Grenze geprüft. Die damalige Variante wird wiederhergestellt und an anderen Klassen ausprobiert; bei technischen Problemen dienen dokumentierte Referenzergebnisse als Ersatz. Neue Testbilder derselben Klassen sind anders zu beurteilen als völlig andere Klassen, für die das Modell keinen passenden Ausgang gelernt hat.
 
 **Bewertung:** 12 gemeinsame Projektpunkte und 18 individuelle Gesprächspunkte = **30 Punkte**. Der Fremdcheck gibt keinen Bonus. Selbstständige, sachlich korrekte Erklärungen sind wichtiger als hohe Trefferquoten.
 

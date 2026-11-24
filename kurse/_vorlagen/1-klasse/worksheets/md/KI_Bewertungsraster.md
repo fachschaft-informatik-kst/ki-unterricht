@@ -1,6 +1,6 @@
 # Leistungsnachweis KI · 1. Klasse · DL 4–6
 
-**Ein geführtes Bildprojekt, individuelle Fachgespräche und ein unbenoteter Fremdcheck.** Die Untersuchung entspricht methodisch der 4. Klasse: T1/T2 für Training, V1 für die Modellauswahl, P1/P2 für den einmaligen unabhängigen Abschlusstest. Der Unterschied ist die stärkere Anleitung und der vorbereitete Datenweg.
+**Ein geführtes Bildprojekt, individuelle Fachgespräche und ein unbenoteter Fremdcheck.** Die Untersuchung entspricht methodisch der 4. Klasse: T1/T2 für Training, V1 für die Modellauswahl, P1/P2 für den einmaligen unabhängigen Abschlusstest. Der Unterschied ist die stärkere Anleitung mit Kontrollpunkten und einem vorbereiteten Ersatzdatenweg.
 
 ## Pflichtnachweise
 
@@ -9,7 +9,7 @@
 3. **DL 5:** Nur die gewählte Variante einmal auf P1/P2 testen und danach nicht optimieren; konkrete Beispiele, Unsicherheit und Fazit mit Grenzen festhalten; als ZIP einreichen.
 4. **DL 6:** Jede Person erklärt das ganze Projekt im Einzelgespräch. Parallel wird ein fremdes Projekt anhand der Daten und Ergebnisse kritisch geprüft (unbenotet).
 
-**Datenwege:** Die vorbereiteten synthetischen Übungsdaten (Kreis/Dreieck) sind der Standard. Freiwillig sind 80 selbst aufgenommene, personenfreie Gegenstandsfotos mit unabhängigen Exemplaren. Die Datenquelle gibt **keinen** Notenbonus. Ergebnisse aus Übungsdaten belegen keine Zuverlässigkeit bei neuen echten Fotos.
+**Datenwege:** Angestrebt sind 80 selbst aufgenommene, personenfreie Gegenstandsfotos mit unabhängigen Exemplaren. Die vorbereiteten synthetischen Übungsdaten (Kreis/Dreieck) sind nach Absprache ein gleichwertiger Ersatz. Die Datenquelle gibt **keinen** Notenbonus. Ergebnisse aus Übungsdaten belegen keine Zuverlässigkeit bei neuen echten Fotos.
 
 ## Bewertung: maximal 30 Punkte
 
@@ -30,4 +30,4 @@ Die **gemeinsame Projektleistung zählt 12 Punkte**, das **individuelle Fachgesp
 
 ## Organisation DL 6
 
-Für bis zu 20 Lernende mit einer Lehrperson sind **20 × 4 Minuten = 80 Minuten** vorgesehen (ca. 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Kurzbewertung). Die letzten 10 Minuten stehen für Einstieg und Sicherung zur Verfügung. Gesprächsreihenfolge und Projekte vorab bereitstellen. Ab 21 Lernenden ist eine zweite Prüfstation oder eine andere Planung nötig. Die übrige Klasse untersucht ein zugeteiltes fremdes Modell oder ein vorbereitetes Referenzprojekt; ein erneutes Training ist keine Pflicht.
+Für bis zu 20 Lernende mit einer Lehrperson sind **20 × 4 Minuten = 80 Minuten** vorgesehen (ca. 3½ Minuten Fachgespräch plus ½ Minute Wechsel/Kurzbewertung). Die letzten 10 Minuten stehen für Einstieg und Sicherung zur Verfügung. Gesprächsreihenfolge und Projekte vorab bereitstellen. Ab 21 Lernenden ist eine zweite Prüfstation oder eine andere Planung nötig. Die übrige Klasse untersucht ein zugeteiltes fremdes Modell oder ein vorbereitetes Referenzprojekt; Die ursprüngliche Variante wird nach Möglichkeit wiederhergestellt und an anderen Klassen ausprobiert; bei technischen Problemen dient ein Referenzprojekt als Ersatz.
