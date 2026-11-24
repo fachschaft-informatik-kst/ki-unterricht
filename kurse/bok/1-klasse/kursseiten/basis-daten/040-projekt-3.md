@@ -83,7 +83,7 @@ Erst die fünf unabhängigen Gruppen T1, T2, V1, P1 und P2 planen, dann die Foto
       <div class="actions">
         <button class="btn primary" id="start-studio" type="button">Fotostudio öffnen</button><a class="btn" href="#projekt-reflexionen">Datenplan im Journal festhalten</a>
       </div>
-      <p class="small muted">Speichern Sie die JSON-Datei regelmässig. Die Originalfotos später zusätzlich unter <a href="#basis-sicherung">Notizen &amp; Projekt</a> sichern.</p>
+      <p class="small muted">Speichern Sie die JSON-Datei regelmässig. Die Originalfotos separat aufbewahren und die JSON unter <a href="#basis-sicherung">Notizen &amp; Projekt</a> hinzufügen.</p>
       <details hidden="" id="studio-panel" open="">
         <summary>Fotostudio · eigene Bilder vorbereiten</summary>
         <iframe class="studio-frame" id="studio-frame" title="Fotostudio – Bilder vorbereiten"></iframe>
@@ -128,7 +128,7 @@ MobileNet liefert 1280 Merkmale; das Notebook normiert sie je Bild. Die kleinen 
           <li>Vorschauen prüfen, Bilder verarbeiten und Sammlung regelmässig als JSON herunterladen.</li>
           <li>Im Versuch <code>EIGENE_DATEN</code> und die zwei Klassen eintragen. Konfigurationszelle ausführen, JSON hochladen, dann die nächste Zelle zum Laden ausführen.</li>
           <li>Die Zelle «Daten prüfen» kontrolliert Bildzahl, Gruppen und Klassen. Bei Fehlern stoppen, im Fotostudio korrigieren und neu laden.</li>
-          <li>Originalfotos und JSON zusätzlich unter <a href="#basis-sicherung">Notizen &amp; Projekt</a> hinzufügen. Am Ende der Arbeitsphase ZIP herunterladen.</li>
+          <li>Originalfotos separat aufbewahren und die JSON unter <a href="#basis-sicherung">Notizen &amp; Projekt</a> hinzufügen. Am Ende der Arbeitsphase ZIP herunterladen.</li>
         </ol>
         <p class="small">Bilder werden lokal verarbeitet. Bibliotheken und Modellgewichte benötigen Internet. Eine Sammlung im Fotostudio regelmässig herunterladen.</p>
       </div>

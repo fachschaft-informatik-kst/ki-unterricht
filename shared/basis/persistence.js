@@ -247,10 +247,10 @@ function readableAnswers(){
   return {chapter,question,answer};
  });
 }
-function reflectionHTML(rows){
+function reflectionHTML(rows,{foreign=false}={}){
  const names=document.querySelector('[data-basis-answer="basis-journal-namen"]')?.value?.trim()||'';
  const schoolClass=document.querySelector('[data-basis-answer="basis-journal-klasse"]')?.value?.trim()||'';
- const meta='<p><strong>Namen:</strong> '+esc(names||'Noch offen')+' · <strong>Klasse:</strong> '+esc(schoolClass||'Noch offen')+'</p>';
+ const meta=foreign?'': '<p><strong>Namen:</strong> '+esc(names||'Noch offen')+' · <strong>Klasse:</strong> '+esc(schoolClass||'Noch offen')+'</p>';
  const sections=rows.map(e=>'<section><h2>'+esc(e.chapter)+'</h2><h3>'+esc(e.question)+'</h3><p>'+esc(e.answer).replace(/\n/g,'<br>')+'</p></section>').join('');
  return '<!doctype html><html lang="de-CH"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KI-Lernjournal · 1. Klasse</title><style>body{max-width:850px;margin:40px auto;padding:0 24px;color:#182b31;font:16px/1.6 system-ui}h2{font-size:19px;margin-bottom:4px}h3{font-size:16px;margin:0 0 8px}section{border-bottom:1px solid #ddd;margin:22px 0;padding-bottom:14px;break-inside:avoid}p{white-space:normal}</style><h1>KI-Lernjournal · 1. Klasse</h1>'+meta+'<p>Antworten aus dem gesicherten Kursstand (auch Auswahlaufgaben). Notebook-Ergebnisse befinden sich separat im ZIP.</p>'+(sections||'<p>Noch keine Antworten eingetragen.</p>')+'</html>';
 }
@@ -300,7 +300,7 @@ document.getElementById('download-fremdmodell')?.addEventListener('click',async 
   const fields=[...section.querySelectorAll('[data-basis-answer]')];
   const values=Object.fromEntries(fields.map(f=>[f.dataset.basisAnswer,fieldValue(f)]));
   const rows=fields.filter(f=>fieldValue(f).trim()).map(f=>({chapter:f.closest('.kapitel')?.querySelector('.kapitel-titel')?.textContent||'Fremdmodellprüfung',question:f.closest('label')?.querySelector('span')?.textContent||f.getAttribute('aria-label')||f.dataset.basisAnswer,answer:f.type==='checkbox'?'Erledigt':f.tagName==='SELECT'?(f.selectedOptions[0]?.textContent||f.value):f.value}));
-  const zip=await makeZip([{name:'Fremdauswertung.html',data:reflectionHTML(rows)},{name:'Fremdauswertung.json',data:JSON.stringify({schema:'ki-basis-fremdauswertung-v1',answers:values},null,2)}]);
+  const zip=await makeZip([{name:'Fremdauswertung.html',data:reflectionHTML(rows,{foreign:true})},{name:'Fremdauswertung.json',data:JSON.stringify({schema:'ki-basis-fremdauswertung-v1',answers:values},null,2)}]);
   downloadBytes(zip,'KI-1-Klasse-Fremdauswertung.zip','application/zip');if(feedback)feedback.textContent='Fremdauswertung heruntergeladen. ZIP separat einreichen.';
  }catch(e){if(feedback)feedback.textContent='ZIP nicht erstellt: '+e.message;else alert(e.message);}finally{button.disabled=false;}
 });

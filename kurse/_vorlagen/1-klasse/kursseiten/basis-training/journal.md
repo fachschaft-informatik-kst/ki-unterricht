@@ -22,7 +22,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
 <!-- MD:END -->
     <button type="button" class="ki-notebook-launch" id="start-project" data-lab="ki_tandemprojekt.ipynb">Notebook hier öffnen</button>
   </div>
-  <p class="small">Zuerst mit Übungsdaten arbeiten. Danach eigene Fotostudio-JSON auswählen und die folgenden Zellen schrittweise ausführen. Den Abschlusstest erst nach Ihrer begründeten Auswahl freigeben.</p>
+  <p class="small">Zuerst mit Übungsdaten arbeiten. Danach eigene Fotostudio-JSON auswählen und die folgenden Zellen schrittweise ausführen. Den Abschlusstest erst nach Ihrer begründeten Auswahl freigeben. Vor der Abgabe die Fotostudio-JSON unter <a href="#basis-sicherung">Notizen &amp; Projekt</a> hinzufügen und das ZIP sichern.</p>
   
 </div>
 <div id="projekt-reflexionen">

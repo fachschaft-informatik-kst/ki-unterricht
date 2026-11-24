@@ -98,7 +98,7 @@ Die **Bis zu 20 Einzelgespräche à 4 Minuten inklusive Wechsel und Kurzbewertun
 
 ### Während der Fachgespräche: ein fremdes Modell auswerten (DL 6)
 
-Arbeiten Sie im Tandem selbstständig und pausieren Sie jeweils nur für Ihr persönliches Einzelgespräch; die andere Person kann weiterarbeiten. Die gemeinsame Fremdauswertung ist **unbenotet (K11)**; nur die persönliche Reflexion K12 zählt 3 Punkte; die bewertete eigene Abgabe bleibt unverändert.
+Arbeiten Sie im Tandem selbstständig und pausieren Sie jeweils nur für Ihr persönliches Einzelgespräch; die andere Person kann weiterarbeiten. Die gemeinsame Fremdauswertung ist **unbenotet (K11)**; nur die persönliche Reflexion persönliche Reflexion (unbenotet).
 
 1. **Dateien vorbereiten, ca. 10 Minuten:** Öffnen Sie das zugeteilte fremde Projekt im **privaten Browserfenster**. Die Lehrperson teilt Ihnen ein Projekt mit anderen Klassen als Ihren zu. Legen Sie Ihre eigene Fotostudio-JSON separat bereit; stellen Sie das eigene ZIP dort nicht wieder her. Datenrechte und Bildfreigaben beachten. Läuft nichts, hilft die Notfallkarte auf der Seite «Dateien vorbereiten» (Referenzpaket der Lehrperson).
 2. **Daten und Ergebnisse untersuchen, ca. 20 Minuten:** Vergleichen Sie T1/T2 (Training), V1 (Validierung) und P1/P2 (unabhängiger Abschlusstest) im fremden Projekt. Prüfen Sie mindestens ein konkretes Trainings- und Testexemplar und lesen Sie Originalwerte A/B sowie das Testergebnis. Lassen Sie das fremde Notebook einmal mit Startwert 11 nachlaufen und vergleichen Sie einen Wert.

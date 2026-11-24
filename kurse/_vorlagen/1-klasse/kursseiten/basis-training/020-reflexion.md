@@ -69,7 +69,7 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mi
               <tr>
                 <td>6. Doppellektion</td>
                 <td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>
-                <td>Daten und Ergebnisse prüfen, Fremdmodell ausprobieren, persönliche Reflexion (3 Punkte); getrennte Abgabe, eigenes Projekt bleibt unverändert</td>
+                <td>Daten und Ergebnisse prüfen, Fremdmodell ausprobieren, persönliche Reflexion (unbenotet); getrennte Abgabe, eigenes Projekt bleibt unverändert</td>
               </tr>
             </tbody>
           </table>
