@@ -1,9 +1,7 @@
-## DL 6 · Fachgespräche und Fremdcheck
+## DL 6 · Fachgespräche und Fremdmodellprüfung
 
-**Vorbereiten:** Abgaben aus DL 5, 30-Punkte-Raster, individuelle Gesprächsfolge und für die wartenden Tandems ein fremdes, anonymisiertes Projekt oder ein vorbereitetes Referenzpaket mit Daten- und Ergebnisprotokoll.
+**Vorbereiten:** Abgaben, 30-Punkte-Raster, Gesprächsreihenfolge und anonymisierte Fremdprojekte mit JSON und Ausgaben. Bei Bedarf lauffähiges Referenzprojekt mit anderen Klassen bzw. dokumentierten Fremdtestergebnissen vorbereiten.
 
-**Gespräche:** Bei höchstens 20 Lernenden rund 3½ Minuten Erklärung plus ½ Minute Wechsel/Bewertung pro Person (80 Minuten). Drei Fragen: Modell und Labels; A/B mit V1; unabhängiger Test P1/P2 und Grenzen. Bei grösserer Klasse zweite Station/anderer Zeitrahmen.
+**Gespräche:** Bis 20 Lernende, 3½ Minuten Gespräch plus ½ Minute Wechsel. Modell, A/B, V1/P1/P2 und eigene Belege erklären.
 
-**Wartende Tandems:** Wie in der 4. Klasse die fremden Trainings-, Validierungs- und Testgruppen sowie Originalergebnisse prüfen; einen Beleg und eine faire Rückfrage notieren. Der vollständige technische Nachlauf und der Test ganz anderer Klassen sind **nur freiwillige Vertiefung**. Bei synthetischen Daten ist die Übertragung auf echte Fotos ausdrücklich begrenzt.
-
-**Bewertung:** 12 gemeinsame Projektpunkte und 18 persönliche Gesprächspunkte = 30. Fremdcheck unbenotet und keine erneute Abgabe des eigenen Projekts.
+**Parallel:** In getrennter Browsersitzung fremde Daten und Originalwerte prüfen, ursprüngliche Variante mit unveränderten Einstellungen wiederherstellen, eigene andere Klassen ohne weiteres Training testen; vier Tabellenwerte, zwei Beispiele und Grenze interpretieren. Keine Trefferquote für andere Klassen. Bei Technikproblemen dokumentierte Referenzwerte verwenden und kennzeichnen. Fremdcheck unbenotet; Projekt 12 und Gespräch 18 Punkte.

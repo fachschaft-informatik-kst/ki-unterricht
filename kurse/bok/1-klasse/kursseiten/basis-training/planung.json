@@ -9,7 +9,7 @@
       "question": "Helfen vielfältigere Trainingsbilder bei unbekannten Beispielen?",
       "motivation": "Wir untersuchen eine nachvollziehbare Frage statt die höchste Trefferquote zu jagen.",
       "product": "Dokumentierte Datenquelle, fairer A/B-Vergleich, begründete Auswahl, unabhängiger Test, fünf kurze Reflexionen und eingereichtes Projekt-ZIP.",
-      "zeit": "90 Minuten mit vorbereiteten synthetischen Übungsdaten als verpflichtungsfreiem Standard. Eigene Fotos optional (80 Fotos vor Unterrichtsbeginn); gleiche Datenregeln und Bewertungsziele. P1/P2 nur nach begründeter Modellwahl. Notebookstart und Import als technischer Puffer berücksichtigen.",
+      "zeit": "90 Minuten: geführter A/B-Vergleich mit eigener Fotostudio-JSON oder vereinbartem Ersatzdatensatz. Technischen Puffer berücksichtigen; drei Startwerte vor dem Test, sofern im Zeitrahmen möglich.",
       "order": 70,
       "phases": [
         {
@@ -21,7 +21,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Mit dem Datensatz aus DL 4 starten: UEBUNG ist Standard, eigene vorbereitete Fotostudio-JSON ist freiwillig. Bei eigenen Bildern nur personenfreie Gegenstände."
+              "text": "Eigene Fotostudio-JSON oder vereinbarten Ersatzdatensatz bereithalten. Notebookstart und Datenimport vorbereiten."
             },
             {
               "art": "Ergebnis",
@@ -57,7 +57,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 10,
-              "text": "Anhand des 4.-Klasse-Versuchs zeigen: A verwendet T1, B T1 und T2; gleiche Bildzahl und Netzparameter; nur Vielfalt der Exemplare ändert sich. Die Ausgabeklassen stammen aus den Labels."
+              "text": "Lehrperson erklärt Bild → 1280 feste MobileNet-Merkmale → kleines Netz → zwei Labels; demonstriert Datenimport und Vergleich."
             },
             {
               "art": "Ergebnis",
@@ -75,7 +75,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 60,
-              "text": "Notebook starten, Datenweg wählen und Gruppen prüfen (10 Min); A/B mit identischen Einstellungen trainieren (15 Min); konkrete V1-Vorhersagen, Werte und eine plausible andere Erklärung vergleichen (10 Min); vor dem Test Variante mit Satz begründet wählen und freigeben lassen (5 Min); nur gewählte Variante einmal auf P1/P2 prüfen (10 Min); je eine kurze Reflexion zu Frage, Daten, Vergleich, Test und Grenzen/Fazit vervollständigen (10 Min). Bei Technikproblemen dokumentierte Resultate ehrlich auswerten, keine Zahlen erfinden."
+              "text": "Datencheck (10 Min), A/B trainieren (10 Min), konkrete Vorhersagen und ggf. drei Startwerte (15 Min), V1-Wahl dokumentieren und durch Lehrperson freigeben lassen (5 Min), einmalig P1/P2 testen und drei Beispiele untersuchen (10 Min), Fazit und Reflexionen vervollständigen (10 Min). Bei technischen Problemen belegte Referenzwerte klar kennzeichnen."
             },
             {
               "art": "Ergebnis",

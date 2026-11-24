@@ -1,9 +1,7 @@
-## DL 4 · Projektstart nach dem Vorbild der 4. Klasse
+## DL 4 · Projektstart
 
-**Material:** [Ziffern-/Buchstaben-Einstieg](../lab/index.html?path=portal/basis_bildmodell.ipynb) · [Daten fair aufteilen](../lab/index.html?path=portal/daten_training.ipynb) · Projektplan und Reflexionen 1–2 auf der Kursseite.
+**Material:** [Ziffern-/Buchstaben-Einstieg](../lab/index.html?path=portal/basis_bildmodell.ipynb) · [Daten fair aufteilen](../lab/index.html?path=portal/daten_training.ipynb) · [Fotostudio](studio/) · Reflexionen 1–2 auf der Kursseite.
 
-**Pflichtkern:** Ziffern/Buchstaben nur **ca. 20 Minuten** ausprobieren, *kein* neues A/B-Buchstabenmodell trainieren. Anschliessend drei Datenrollen erklären, Apfel-Datenleck prüfen und die fünf Gruppen T1/T2/V1/P1/P2 planen.
+**Ablauf:** Kurzer Ziffern-/Buchstabentest, Apfel-Datenleck, Notebook mit 40/400 Trainingsbildern, Themenwahl und fünf unabhängige Exemplare je Klasse. Fotostudio mit einem Foto demonstrieren. Gruppenplan vor dem Fotografieren abnehmen; P2 für beide Klassen vor anderem Hintergrund. 80 Fotos und JSON bis DL 5 vorbereiten, bei Bedarf UEBUNG vereinbaren.
 
-**Standard:** Synthetische Kreis-/Dreieck-Übungsdaten werden in DL 5 automatisch bereitgestellt. Niemand muss zuhause 80 Fotos erstellen. **Freiwillig:** 80 eigene, personenfreie Gegenstandsfotos mit getrennten Exemplaren und Fotostudio-JSON vor DL 5 vorbereiten.
-
-**Meilenstein:** Datenweg und Klassen festgehalten; T1/T2, V1 und P1/P2 richtig erklärt und ein Datenleck erkannt.
+**Meilenstein:** Abgenommener Gruppenplan, dokumentierte Vermutung, gesicherte Datenquelle.
