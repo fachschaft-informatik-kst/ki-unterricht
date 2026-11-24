@@ -80,22 +80,6 @@ open: false
           </tbody>
         </table>
       </div>
-      <div class="table-scroll">
-        <table class="typen protokoll">
-          <thead>
-            <tr>
-              <th>Messung</th>
-              <th>Ihr Ergebnis</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            
-            
-            
-          </tbody>
-        </table>
-      </div>
       <label class="field answer"><span>Welche Vorhersage ist Ihnen aufgefallen? Was könnte die Ursache sein?</span><textarea data-answer="fremd_warum" aria-label="Wie gut und warum" maxlength="10000" placeholder="Das Modell sagt … voraus. Eine mögliche Ursache ist …" rows="5"></textarea></label>
       <label class="field answer"><span>Warum ist die Vorhersage auf anderen Klassen keine Trefferquote? Vergleichen Sie mit P1/P2 des ursprünglichen Projekts.</span><textarea data-answer="fremd_grenze" aria-label="Bedeutung für Trefferquoten" maxlength="10000" placeholder="Eine Trefferquote gilt nur für …" rows="3"></textarea></label>
     </div>
