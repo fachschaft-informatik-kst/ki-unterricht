@@ -6,17 +6,29 @@ titel: Ein fremdes Projekt kritisch prüfen
 kurz: T1/T2, V1 und P1/P2 · Ergebnisse · Grenzen
 ---
 
-**Auftrag für die Zeit zwischen den Einzelgesprächen (unbenotet):** Eure Lehrperson stellt euch ein anonymisiertes Tandemprojekt oder ein vorbereitetes Referenzpaket zur Verfügung. Prüft dessen Daten und Ergebnisse; verändert die ursprüngliche Abgabe nicht. Ein erneutes Trainieren des fremden Netzes ist **nicht Pflicht**.
+**Auftrag während der Einzelgespräche (unbenotet):** Ihr untersucht ein zugeteiltes, anonymisiertes Projekt. Ziel ist nicht, andere Tandems zu benoten, sondern zu verstehen, welche Aussagen die fremden Daten und Ergebnisse erlauben.
 
-### Vier Schritte – nach dem Vorbild der 4. Klasse
+### 1 · Daten und Originalergebnisse prüfen
 
-1. **Daten prüfen:** Welche zwei Klassen hat das fremde Modell gelernt? Sind T1/T2 (Training), V1 (Validierung) und P1/P2 (Test) getrennt? Vergleicht ein Trainings- und ein Testbeispiel. Gibt es eine mögliche Datenfalle?
-2. **Ergebnisse lesen:** Welche Werte erzielten A und B auf V1? Welche Variante wurde **vor** dem Test gewählt? Wie schnitt sie auf P1/P2 ab?
-3. **Neue Bilder einordnen:** Warum sind bisher unbekannte Bilder **derselben zwei Klassen** ein sinnvoller Test, während völlig andere Klassen nicht als Trefferquote beurteilt werden können? Wer ein lauffähiges fremdes Projekt und eigene andere Klassen hat, darf diese Vorhersagen zusätzlich ausprobieren – ohne neu zu trainieren.
-4. **Rückmeldung geben:** Eine belegte Stärke, eine konkrete Grenze und einen sinnvollen nächsten Test notieren. Wenn bei synthetischen Übungsbildern keine Originalfotos vorliegen, die eingeschränkte Übertragbarkeit ausdrücklich erwähnen.
+Öffnet das fremde ZIP in einer getrennten privaten Browsersitzung, damit euer eigener Kursstand unverändert bleibt. Lest Journal und Notebookausgaben. Vergleicht die zwei Bildklassen, T1/T2, V1 und P1/P2. Betrachtet ein Trainings- und ein Testbild; sind verschiedene Exemplare und vergleichbare Bedingungen erkennbar? Notiert A/B auf V1, die begründete Modellwahl und das ursprüngliche P1/P2-Ergebnis.
 
-<div class="basis-answer"><label for="basis-abschluss-a">Unser Fremdcheck (unbenotet): Daten, Originalergebnisse und Rückfrage</label><textarea id="basis-abschluss-a" data-basis-answer="basis-abschluss-a" rows="7" placeholder="Klassen … / T1/T2 … / V1 … / P1/P2 … / Modellwahl … / Ein beobachteter Beleg … / Unsere Rückfrage …"></textarea></div>
+### 2 · Das fremde Modell wiederherstellen
 
-<details><summary>Hilfe: Neue Exemplare oder neue Klassen?</summary><div class="detail-body"><p>Ein trainiertes Modell kann neue Bilder seiner beiden gelernten Klassen prüfen. Für unbekannte Klassen hat es aber keinen passenden Ausgabe-Knoten. Auch dann kann es eine seiner zwei alten Klassen ausgeben; diese Vorhersage ist keine belastbare Genauigkeitsmessung für die neuen Klassen.</p></div></details>
+Python-Modelle sind nach dem Öffnen eines gesicherten Notebooks nicht im Speicher. Führt im fremden Notebook Start, Datenimport und den ursprünglichen A/B-Vergleich mit denselben Einstellungen erneut aus. Vergleicht V1 mit der dokumentierten Abgabe. Verwendet die **damals gewählte** Variante; keine neue Modellwahl und kein Optimieren am Abschlusstest. Die Lehrperson stellt bei Bedarf ein lauffähiges Referenzprojekt bereit.
 
-**Technik-Plan B:** Falls ein fremdes ZIP nicht zuverlässig startet, verwendet die dokumentierten Originalwerte und Datenbeispiele des Referenzprojekts. Kennzeichnet ausdrücklich, dass kein eigener Nachlauf stattgefunden hat, statt Ergebnisse zu erfinden.
+### 3 · Eigene Bilder am fremden Modell ausprobieren
+
+Vermutet zuerst, was das Modell mit zwei anderen Bildklassen tun wird. Öffnet im fremden Notebook den Abschnitt «Fremdmodell prüfen», tragt die eigenen Klassennamen und die ursprüngliche fremde Modellwahl ein und ladet eure eigene Fotostudio-JSON. Führt die Fremdtestzelle aus, ohne das Netz weiter zu trainieren. Vergleicht je ein Bild aus beiden eigenen Klassen und die vier Zahlen der Vorhersagetabelle. Falls ihr keine eigenen Fotos habt, nutzt einen von der Lehrperson bereitgestellten Datensatz mit zwei anderen Klassen oder ein dokumentiertes Referenzergebnis.
+
+| | Fremdes Label 1 | Fremdes Label 2 |
+|---|---:|---:|
+| Unsere Klasse C | … | … |
+| Unsere Klasse D | … | … |
+
+**Einordnung:** Im regulären Abschlusstest P1/P2 sind die Bilder neu, die Klassen aber bekannt. Im Fremdversuch sind auch die Klassen neu. Das Modell besitzt keine Ausgabe für sie und muss eines seiner alten Labels auswählen. Auch eine deutliche Trennung ist deshalb keine Trefferquote für eure eigenen Klassen.
+
+<div class="basis-answer"><label for="basis-abschluss-a">Fremdcheck: Daten, Originalergebnisse, Erwartung, Beobachtung und Rückfrage</label><textarea id="basis-abschluss-a" data-basis-answer="basis-abschluss-a" rows="9" placeholder="Fremde Klassen … / T1/T2 vs. P1/P2 … / V1 A/B … / ursprüngliche Wahl und Test … / Nachlauf … / Erwartung … / Tabelle C/D … / zwei Beispiele … / mögliche Ursache und Rückfrage …"></textarea></div>
+
+### 4 · Grenzen erklären
+
+Nennt eine plausible Ursache (z. B. Form, Farbe oder Hintergrund) und einen nächsten Versuch, der sie prüfen könnte. Bei technischen Problemen verwendet ihr dokumentierte Originalwerte und Referenzbeispiele. Kennzeichnet, welche Schritte ihr nicht selbst durchführen konntet; erfindet keine Messwerte. Sichert eure Rückmeldung getrennt vom fremden Projekt.

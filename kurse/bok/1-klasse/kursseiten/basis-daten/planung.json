@@ -9,7 +9,7 @@
       "question": "Wie prüfen wir, ob ein Bildmodell wirklich neue Beispiele erkennt?",
       "motivation": "Ein hoher Wert auf bekannten Bildern genügt nicht; das lernen wir vor dem eigenen Versuch.",
       "product": "Ziffern-/Buchstaben-Beobachtung, Datenleck-Erklärung und nachvollziehbarer T1/T2/V1/P1/P2-Datenplan.",
-      "zeit": "90 Minuten: Ziffern/Buchstaben nur kurzer Einstieg (ca. 20 Min), danach aus der 4. Klasse übernommener Lernpfad zur Datenaufteilung. Kein gesondertes Buchstaben-Fine-Tuning. Vorbereitete synthetische Übungsdaten sind Standard; eigene, personenfreie Fotos freiwillig. Ein erstes Trainingsmodell ist in DL 5 vorgesehen.",
+      "zeit": "90 Minuten: kurzer Ziffern-/Buchstabentest, Datenleck-Versuch, Themenwahl und Gruppenplan. Eigene Fotos bis DL 5 vorbereiten; vereinbarter Ersatzdatensatz möglich.",
       "order": 50,
       "phases": [
         {
@@ -75,7 +75,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 55,
-              "text": "Lernpfad «Daten fair aufteilen»: Rollen Training/Validierung/Test selbst lösen, den Apfel-Datenleckfall und den kurzen Notebook-Versuch bearbeiten (25 Min). Dann Datenplan für den vorbereiteten Modus UEBUNG oder freiwillig eigene zwei Gegenstandsklassen mit fünf unabhängigen Exemplaren je Klasse und Gruppe entwickeln (20 Min); Datenweg, zwei Klassen, Forschungsfrage und Vermutung zu A/B im Journal festhalten (10 Min). Noch kein Abschlusstest."
+              "text": "Datenrollen, Apfel-Fall und Notebookvergleich (25 Min); zwei Gegenstandsklassen, Vermutung und fünf unabhängige Exemplare je Klasse planen (20 Min); Fotostudio und Export mit einem Beispielfoto demonstrieren/ausprobieren (10 Min)."
             },
             {
               "art": "Ergebnis",
@@ -93,7 +93,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 10,
-              "text": "Im Tandem Trainings-, Validierungs- und Testgruppen erklären, Datenleck-Selbstcheck ausfüllen, Projekt-Vorbereitung als ZIP sichern. Nächste DL: vortrainierte MobileNet-Merkmale und ein kleines lernendes Netz vergleichen."
+              "text": "Lehrperson nimmt Gruppenplan ab. Reflexionen 1–2 sichern. Bis DL 5 Fotos aufnehmen und JSON exportieren; bei fehlender Möglichkeit Ersatzdatensatz vereinbaren."
             },
             {
               "art": "Ergebnis",

@@ -12,7 +12,7 @@ Die alten Antwortschlüssel bleiben zur Wiederherstellung früherer Lernjournale
 | `basis-projekt-frage` | Beispiel: Wir nutzen vorbereitete Kreis-/Dreieck-Daten und vermuten, dass abwechslungsreichere Trainingsbilder zu besseren Vorhersagen auf unbekannten Beispielen führen. Kein Beleg für reale Fotos. |
 | `basis-projekt-datenplan` | T1/T2 dienen Training, V1 zur begründeten Modellwahl, P1/P2 nur dem unabhängigen Abschlusstest; identische Exemplare nie zwischen Training und Test aufteilen. |
 | `basis-projekt-fazit` | Ergebnisse nur aus dem tatsächlich ausgeführten Notebook übernehmen. Erklärt, ob die Frage auf den untersuchten Bildern beantwortet wurde, benennt Grenzen (synthetische Daten, wenig Exemplare, Zufall) und nennt einen überprüfbaren nächsten Versuch. |
-| `basis-abschluss-a` | Unbenoteter Fremdcheck: Bildklassen, getrennte Gruppen, V1-Werte A/B, Modellwahl vor P1/P2, einmaliger Test, ein konkreter Beleg und eine faire Rückfrage. Falls Nachlauf fehlt, offen kennzeichnen. |
+| `basis-abschluss-a` | Unbenoteter Fremdcheck: Bildklassen, getrennte Gruppen, V1-Werte A/B, Modellwahl vor P1/P2, einmaliger Test, ein konkreter Beleg und eine faire Rückfrage. Nachlauf der ursprünglichen Variante, Erwartung und vier Tabellenwerte des Fremdtests, zwei Bildbeispiele und plausible Ursache; fehlenden Nachlauf offen kennzeichnen. |
 | `basis-abschluss-b` | Unterschied erklären: Neue Exemplare der bekannten zwei Klassen sind ein echter Test; vollkommen andere Klassen können nicht als korrekt erkannte Zielklassen bewertet werden. Persönliche Grenze und nächster Test. |
 
 ---
@@ -137,10 +137,10 @@ Die alten Antwortschlüssel bleiben zur Wiederherstellung früherer Lernjournale
 | Antwortfeld | Mögliche Musterantwort |
 |---|---|
 | `basis-daten-a` | Vermutung: Das Ziffernnetz gibt für A und B ebenfalls Ziffern 0–9 aus, weil es keine Buchstabenklasse kennt. Beobachtung: Beispiel A → 4 und B → 8 (reine Beispielwerte); das ist keine korrekte Buchstabenerkennung. Bei Tassen/Büchern wäre der Hintergrund eine Datenfalle. |
-| `basis-daten-b` | Das alte Ziffernnetz kann nicht einfach Buchstaben A/B korrekt benennen. Dafür braucht es neue Trainingsbeispiele und passende Ausgabeklassen. |
+| `basis-daten-b` | Training passt Gewichte an, V1 wählt die Variante, P1/P2 prüfen die gewählte Variante einmal. Fotos desselben Apfels in Training und Test wären ein Datenleck. Notebookwerte müssen aus dem eigenen Versuch stammen. |
 | `basis-plan-a` | Die erste Merkmalschicht bleibt erhalten und eingefroren. Der neue A/B-Ausgabekopf lernt aus beschrifteten Buchstabenbildern. Neue Testbilder zeigen, ob die Buchstaben auch ausserhalb des Trainings funktionieren. |
 | `basis-plan-b` | Beispiel: Auf neuen A/B-Bildern ist die Vorhersage besser als das unveränderte Ziffernnetz (keine direkt vergleichbaren Genauigkeiten). Neue unbekannte Gegenstände sind damit noch nicht gelernt. |
-| `basis-training-a` | Standardweg: synthetische Klassen Kreis und Dreieck. Beispiel V1: A 12/16, B 14/16, Wahl B vor Test; diese Zahlen sind keine echten Notebookwerte. Alternativ eigene Gegenstandsfotos mit dokumentierten Klassen/Quellen. |
+| `basis-training-a` | Ersatzweg: synthetische Klassen Kreis und Dreieck. Beispiel V1: A 12/16, B 14/16, Wahl B vor Test; diese Zahlen sind keine echten Notebookwerte. Angestrebt sind eigene Gegenstandsfotos mit dokumentierten Klassen/Quellen. |
 | `basis-training-b` | Beispiel: A 12/16=75 %, B 14/16=87,5 % auf denselben V1-Bildern; B vor dem Test gewählt. Eine andere Erklärung für den Unterschied sind zufällige Startbedingungen oder leichterer Bildhintergrund. Synthetische Übungsdaten belegen keine zuverlässige Erkennung echter Fotos. |
 | `basis-training-test` | Beispiel: Nach dokumentierter Entscheidung für B und Freigabe durch die Lehrperson P1/P2 26/32=81,25 %. Ein unbekanntes Dreieck könnte falsch als Kreis ausgegeben werden. Nach dem Test nicht neu optimieren; echte Werte aus dem Notebook eintragen. |
 | `basis-abschluss-a` | Wir fragten, ob mehr verschiedene Trainingsbeispiele helfen. Beide Varianten hatten gleich viele Trainingsbilder; auf V1 im Beispiel A 12/16, B 14/16. B wurde vorher gewählt; der unabhängige Test ergab beispielhaft 26/32. Das gilt nur für unsere kleinen bzw. synthetischen Daten. |

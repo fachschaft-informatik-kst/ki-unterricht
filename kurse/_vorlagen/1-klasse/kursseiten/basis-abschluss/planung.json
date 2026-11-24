@@ -9,7 +9,7 @@
       "question": "Welche Aussagen tragen die Ergebnisse eines Bildmodells – und welche nicht?",
       "motivation": "Ein Modell prüft man nicht nur an einer hohen Trefferquote, sondern an nachvollziehbaren unabhängigen Daten.",
       "product": "Individuelle Fachgespräche und je Tandem ein kurzer unbenoteter Fremdcheck mit begründeter persönlicher Reflexion.",
-      "zeit": "90 Minuten: bei bis zu 20 Lernenden ca. 3½ Minuten Gespräch plus ½ Minute Wechsel/Bewertung je Person (80 Minuten). Keine zusätzliche lange Einführung. Fremdprojekt/Referenzpaket, Gesprächsreihenfolge, Raster und Abgabekanal müssen im Voraus bereitstehen. Keine zusätzliche 4.-Klasse-Pflicht-Reproduktion mit neuem Modelltraining.",
+      "zeit": "90 Minuten: bis 20 Einzelgespräche à 4 Minuten inklusive Wechsel. Fremdes Projekt oder lauffähiges Referenzpaket, Gesprächsreihenfolge und Raster vorab bereitstellen.",
       "order": 80,
       "phases": [
         {
@@ -57,7 +57,7 @@
               "art": "Input",
               "wer": "Lehrperson",
               "min": 2,
-              "text": "Lest den Auftrag: zwei Klassen und Datenquelle; getrennte T1/T2/V1/P1/P2; A/B-Ergebnisse und Auswahl; Grenzen und nächster Test. Der Pflichtcheck ist unbenotet."
+              "text": "Lehrperson erklärt getrennte Browsersitzung, Originaldaten und Wiederherstellung der damaligen Variante. Fremdtest ohne weiteres Training und ohne neue Modellwahl."
             },
             {
               "art": "Ergebnis",
@@ -75,7 +75,7 @@
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 80,
-              "text": "Eine Lehrperson führt bis zu 20 Einzelgespräche à 4 Minuten inkl. Wechsel durch. Übrige Tandems prüfen das fremde Daten- und Ergebnisprotokoll, vergleichen ein Trainings- mit einem Testbeispiel, notieren einen konkreten Befund und eine faire Rückfrage. Falls ein lauffähiges Modell und eigene andere Bildklassen vorliegen, Vorhersagen ohne neues Training freiwillig ausprobieren und zwischen neuen Exemplaren derselben Klassen und völlig anderen Klassen unterscheiden. Bei UEBUNG-Daten ohne eigene Fotos stattdessen Referenzbeispiele verwenden; keine Aussage über echte Fotos ableiten. Persönlich zwei kurze Reflexionssätze schreiben."
+              "text": "Parallel zu bis zu 20 Einzelgesprächen: Tandems prüfen fremde Daten und Originalwerte (15 Min), stellen das ursprüngliche Modell mit unveränderten Einstellungen wieder her (20 Min), formulieren eine Erwartung und testen eigene andere Klassen (15 Min), interpretieren zwei Beispiele und Vorhersagetabelle, formulieren Grenze/nächsten Versuch und persönliche Reflexion (20 Min). 10 Min Puffer; bei Technikproblemen bereitgestellte Referenzdaten oder dokumentierte Ausgaben auswerten."
             },
             {
               "art": "Ergebnis",

@@ -6,25 +6,41 @@ titel: Ein fairer A/B-Versuch
 kurz: Daten prüfen · Modellvarianten vergleichen · Test erst zum Schluss
 ---
 
-**Unsere Untersuchung entspricht dem Kernprojekt der 4. Klasse:** MobileNet V2 liefert aus jedem Bild feste Merkmale. Ein kleiner nachgeschalteter Klassifikationskopf lernt überwacht anhand der beiden Klassenlabels. **A und B erhalten gleich viele Bilder und dieselben Netzparameter**; nur die Vielfalt der Trainingsbeispiele unterscheidet sich.
+### Was wird hier eigentlich trainiert?
 
-**Datenweg wählen:** `UEBUNG` mit vorbereiteten synthetischen Kreis-/Dreieck-Bildern ist der Standard, ohne Foto-Hausaufgabe. Wer bereits eine eigene Fotostudio-JSON mit zwei personenfreien Klassen und getrennten T1/T2/V1/P1/P2-Gruppen hat, kann `EIGENE_DATEN` nutzen. Beide Wege werden gleich bewertet. Für synthetische Daten gibt es **keinen Nachweis der Erkennung neuer Alltagsfotos**.
+| Schritt | Aufgabe |
+|---|---|
+| 1 · Unsere Bilder | Jedes Bild hat ein [Label](#basis-glossar-label): seine tatsächliche Klasse. |
+| 2 · MobileNet V2 | Das vortrainierte Netz liefert pro Bild 1280 Merkmale. Seine Gewichte bleiben unverändert. |
+| 3 · Unser kleines Netz | 16 Neuronen lernen überwacht aus diesen Merkmalen und den zwei Klassenlabels. |
+| 4 · Vorhersage | Das Netz gibt eine der beiden Klassen aus. Neue Exemplare zeigen, ob es mehr als Hintergrund oder Licht gelernt hat. |
+
+MobileNet wurde mit vielen fremden Fotos vortrainiert. Seine ursprünglichen 1000 Ausgabeklassen verwenden wir nicht. Unser kleines Netz lernt, welche Merkmalsmuster zu unseren zwei Klassen gehören. Das ist Transfer Learning.
+
+### Etappe 3 · Der faire A/B-Versuch
+
+| | A · weniger Vielfalt | B · mehr Vielfalt |
+|---|---|---|
+| Exemplare je Klasse | 1 (T1) | 2 (T1 und T2) |
+| Fotos je Klasse | 8 aus T1 | 4 aus T1 + 4 aus T2 |
+| Gesamtzahl | 16 Bilder | 16 Bilder |
+
+Gleich bleiben: 16 Neuronen, 60 Epochen, Startwert 11 und dieselben 16 V1-Bilder. Nur die Vielfalt der Trainingsbeispiele soll sich unterscheiden.
 
 <div class="ki-notebook-block" data-notebook="content/basis_fotoprojekt.ipynb" data-title="Bildprojekt · Geführter A/B-Vergleich">
   <h3>Jupyter-Notebook · Bildprojekt</h3>
-  <p>Datenweg laden, zwei Varianten trainieren, auf V1 vergleichen, eine Variante begründet wählen und erst danach P1/P2 testen.</p>
+  <p>Daten importieren, zwei Varianten trainieren, Vorhersagen vergleichen und erst nach begründeter Modellwahl testen.</p>
   <button type="button" class="ki-notebook-launch" data-lab="basis_fotoprojekt.ipynb">Notebook hier öffnen</button>
 </div>
 
-### Eure verbindlichen Etappen
+1. **Start:** Führt die Startzelle aus. Wählt `EIGENE_DATEN`, tragt die exakten Klassennamen ein und ladet die Fotostudio-JSON. Beim vereinbarten Ersatzdatensatz lasst ihr `UEBUNG` und Kreis/Dreieck stehen.
+2. **Daten prüfen:** Vergleicht T1, T2 und V1 in der Vorschau. Bei Fehlern korrigiert ihr die Sammlung im Fotostudio. P1/P2 bleiben verdeckt.
+3. **Trainieren:** Lest die V1-Balken. 50 % entsprechen bei diesen ausgeglichenen Klassen der Strategie, immer dieselbe Klasse auszugeben.
+4. **Vorhersagen untersuchen:** Verfolgt ein Bild durch das Netz und vergleicht A und B anhand konkreter V1-Beispiele. Beschreibt Label, Vorhersage und Modellwert.
+5. **Vor dem Test:** Haltet die V1-Zahlen fest und begründet die Wahl einer Variante im nächsten Kapitel.
 
-1. **Daten prüfen:** Stimmen Klassenlabels und Gruppen T1/T2/V1/P1/P2? P1/P2 bleibt bis zum Schluss ungeöffnet.
-2. **A/B trainieren:** A nutzt acht Bilder aus T1 je Klasse; B je vier aus T1 und T2. Bildzahl, Netz, Epochen und Startwert sind identisch.
-3. **Validieren:** A und B auf denselben V1-Bildern vergleichen; eine konkrete Vorhersage ansehen. Notiert auch eine mögliche andere Erklärung für einen Unterschied.
-4. **Vor dem Test entscheiden:** Modellwahl und V1-Beleg auf der Kursseite aufschreiben, von der Lehrperson bestätigen lassen.
-5. **Einmalig testen:** Nur die gewählte Variante auf P1/P2 prüfen, danach **nichts mehr optimieren**.
-6. **Sichern:** Die fünf kurzen Reflexionen abschliessen, Notebook mit Ausgaben und Kursantworten als ZIP sichern und einreichen.
+<div class="basis-answer"><label for="basis-training-a">Etappe 3 · Datencheck und fairer Vergleich</label><textarea id="basis-training-a" data-basis-answer="basis-training-a" rows="5" placeholder="Klassen und Datenquelle … / A … / B … / Gleich bleibt … / Beobachtung zur Bildvorschau …"></textarea></div>
 
-<div class="basis-answer"><label for="basis-training-a">Etappe 1–2 · Welche Daten und Modelle verwenden wir?</label><textarea id="basis-training-a" data-basis-answer="basis-training-a" rows="4" placeholder="Datenweg und Klassen … / A nutzt … / B nutzt … / Gleich bleibt …"></textarea></div>
+### Warum ein Lauf noch kein Beweis ist
 
-<details><summary>Hilfe: Warum sind A und B fair vergleichbar?</summary><div class="detail-body"><p>Beide erhalten gleich viele Trainingsbilder. Lediglich die Zahl der unterschiedlichen Exemplare unterscheidet sich. Auf V1 werden die Vorhersagen mit denselben unbekannten Beispielen geprüft. Auch ein schlechteres Ergebnis ist eine wertvolle Beobachtung.</p></div></details>
+V1 enthält 16 Bilder, aber nur ein unabhängiges Exemplar je Klasse. Ein Bild entspricht 6,25 Prozentpunkten. Ein Unterschied von höchstens zwei Bildern ist nach der Faustregel der 4. Klasse kein belastbarer Beleg. Führt nach Anleitung der Lehrperson auch den Vergleich mit den Startwerten 11, 22 und 33 durch, bevor ihr P1/P2 öffnet. Bleibt der Unterschied bestehen? B muss nicht besser sein.
