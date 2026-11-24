@@ -80,26 +80,6 @@
       "antwort": "Nein. Automatisierung allein macht noch keine KI. Regelbasierte KI wird zum Beispiel für Suchen und Schlussfolgern eingesetzt."
     },
     {
-      "id": "schwache-ki",
-      "gruppe": "Grundlagen",
-      "begriff": "Schwache KI",
-      "basis": "Eine KI, die für bestimmte Aufgaben oder Aufgabenbereiche entwickelt wurde – auch wenn sie darin sehr gut ist.",
-      "vertieft": "Aufgabenbezogene KI im Unterschied zur hypothetischen allgemeinen KI. «Schwach» beschreibt keine geringe Leistung.",
-      "beispiel": "Ein Chatbot kann Texte erzeugen, ein Bildmodell kann Tiere erkennen.",
-      "frage": "Kann ein leistungsfähiger Chatbot trotzdem schwache KI sein?",
-      "antwort": "Ja. Gute Leistungen bei bestimmten Aufgaben beweisen keine allgemeine Intelligenz."
-    },
-    {
-      "id": "starke-ki",
-      "gruppe": "Grundlagen",
-      "begriff": "Starke KI (hypothetisch)",
-      "basis": "Die bisher hypothetische Idee einer KI, die sehr unterschiedliche geistige Aufgaben selbstständig bewältigen und Neues lernen könnte.",
-      "vertieft": "Vorstellung einer allgemeinen, menschenähnlich vielseitigen KI. Bisher gibt es kein allgemein anerkanntes nachgewiesenes Beispiel; allgemeine Intelligenz und Bewusstsein sind nicht dasselbe.",
-      "beispiel": "Eine gedachte KI könnte ohne spezielle Neuentwicklung verschiedenste neue Probleme lösen.",
-      "frage": "Gibt es heute ein nachgewiesenes Beispiel für starke KI?",
-      "antwort": "Nein. Heutige KI-Systeme können vielseitig wirken, das ist noch kein Nachweis für allgemeine Intelligenz."
-    },
-    {
       "id": "turing-test",
       "gruppe": "Grundlagen",
       "begriff": "Turing-Test",
