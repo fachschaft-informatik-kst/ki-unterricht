@@ -26,14 +26,6 @@ Eine Katze lässt sich nicht durch wenige handprogrammierte Merkmale erkennen: P
 
 **Didaktik:** In der 1. Klasse sind vier plus fünf eindeutige Beispiele und eine kurze Reflexion vorgesehen. In der 4. Klasse begründen die Lernenden zusätzlich zwei Grenzfälle. Tastatur-/Touch-Auswahl ist gleichwertig mit Drag-and-drop. Die automatische Selbstkontrolle gibt erst nach vollständiger Einordnung Rückmeldung.
 
-### Schwache und starke KI
-
-- **Schwache KI:** für bestimmte Aufgaben oder Aufgabenbereiche entwickelt; Beispiele sind Schachcomputer, Bilderkennung und heutige Chatbots. Viele Fähigkeiten bedeuten nicht automatisch allgemeine Intelligenz.
-- **Starke KI:** hypothetische allgemeine, menschenähnliche Intelligenz; bisher kein allgemein anerkanntes nachgewiesenes Beispiel. Bewusstsein ist nicht mit allgemeiner Intelligenz gleichzusetzen und keine Voraussetzung dieser Einordnung.
-- **Begründete Beispiele:** Ein regelbasierter Schachcomputer ist schwache KI ohne maschinelles Lernen; ein trainierter Spamfilter nutzt ML und ist ebenfalls schwache KI. Eine fiktionale Figur kann als starke KI gedacht sein, ohne dass dadurch ihre Existenz belegt wäre.
-
-Die Begriffe «KI/ML/Deep Learning/generativ» beschreiben technische Verfahren beziehungsweise Aufgaben, «schwach/stark» den Grad allgemeiner Fähigkeiten. Sie sind keine austauschbaren Kategorien.
-
 **Leitfrage** («Wann ist ein System intelligent, und worin unterscheiden sich feste Regeln vom Lernen aus Daten?»): «Ein System wirkt intelligent, wenn es eine Aufgabe löst, für die ein Mensch Intelligenz bräuchte, und mit Neuem zurechtkommt. Ein Getränkeautomat führt feste Regeln aus, während ein trainierter Spamfilter Modellparameter aus Beispielen anpasst. Es gibt dennoch auch regelbasierte KI; 'automatisch' ist nicht gleich 'KI'.» Wer sein Kriterium vom Anfang ändert oder präzisiert, hat die Frage gut genutzt.
 
 ## 1 · Drei Lernarten anhand von Links erkunden (Doppellektion 1)

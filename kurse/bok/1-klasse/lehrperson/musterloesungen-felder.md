@@ -38,7 +38,7 @@ Die alten Antwortschlüssel bleiben zur Wiederherstellung früherer Lernjournale
 | `begriff_bsp_3` | Schachprogramm mit Suchbaum – regelbasierte KI. |
 | `begriff_bsp_4` | Sprachmodell, das einen Text verfasst – generative KI. |
 | `ki_zeitstrahl` | Frühe symbolische Systeme nutzten handformulierte Regeln; tiefe neuronale Netze lernen viele Merkmale aus Beispieldaten. Regeln bleiben etwa bei Sicherheitsprüfungen wichtig. Die Meilensteine zeigen keinen vollständigen Ersatz von Regeln durch Lernen. |
-| `ki_ordnung` | 1. Regelbasiertes Schachprogramm: Regeln, regelbasierte KI, schwache KI. 2. Bilderkennung: aus Bilddaten trainiertes tiefes Netz, Deep Learning, schwache KI. 3. Allgemein intelligente Filmfigur: hypothetische starke KI, ihre technische Umsetzung ist unbekannt. Ein Chatbot kann sprachlich überzeugend wirken, ohne verlässlich allgemeine Aufgaben lösen zu können. |
+| `ki_ordnung` | Archiviertes Antwortfeld; kein aktueller Unterrichtsauftrag. |
 | `typ_bsp_1` | Früheres Feld: regelbasiertes Schachprogramm. |
 | `typ_1` | Frühere Kategorie: regelbasierte KI. |
 | `typ_bsp_2` | Früheres Feld: trainierter Spamfilter. |
