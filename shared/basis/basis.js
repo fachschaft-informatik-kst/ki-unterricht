@@ -28,10 +28,21 @@ function show(){
   const chapter=byHash(id);
   const parent=sections.find(s=>s.id===id||s.contains(chapter));
   const active=parent||sections[0];
-  for(const s of sections)s.classList.toggle('basis-view-hidden',s!==active);
+  for(const s of sections){
+    s.classList.toggle('basis-view-hidden',s!==active);
+    if(s.hasAttribute('data-pages')){
+      const page=s===active?chapter?.closest('details.kapitel,#basis-bewertung'):null;
+      const selected=page?.parentElement===s?page:null;
+      s.classList.toggle('has-page',!!selected);
+      for(const child of s.children)child.classList.toggle('is-page',child===selected);
+      if(selected)selected.open=true;
+    }
+  }
   for(const a of [...document.querySelectorAll('.nav a')])a.removeAttribute('aria-current');
   const current=links.find(a=>a.hash==='#'+active.id);
   if(current)current.setAttribute('aria-current','page');
+  const chapterLink=[...document.querySelectorAll('.nav-sub a')].find(a=>a.hash==='#'+chapter?.closest('details.kapitel')?.id);
+  if(chapterLink)chapterLink.setAttribute('aria-current','page');
   // Only expand subchapters for the current double lesson. Keep all lesson
   // links visible so students can always switch lessons.
   for(const [lessonId,menu] of submenus){
@@ -52,6 +63,10 @@ for(const section of sections){
  if(!link)continue;
  const submenu=document.createElement('div');submenu.className='nav-sub';submenu.hidden=true;
  submenu.setAttribute('role','group');submenu.setAttribute('aria-label','Unterkapitel zu '+(link.textContent||section.id).trim());
+ if(section.hasAttribute('data-pages')){
+   const home=document.createElement('a');home.href='#'+section.id;home.textContent='Fahrplan';submenu.append(home);
+   for(const chapter of chapters){const summary=chapter.querySelector(':scope > summary');if(summary){summary.tabIndex=-1;summary.addEventListener('click',e=>e.preventDefault());}}
+ }
  for(const chapter of chapters){
    const a=document.createElement('a');a.href='#'+chapter.id;
    a.textContent=chapter.querySelector('.kapitel-titel')?.textContent||chapter.id;
