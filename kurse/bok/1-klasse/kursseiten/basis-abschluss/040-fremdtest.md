@@ -20,22 +20,22 @@ open: false
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">01</span><span class="dl8-step-time">2 Min.</span></div>
     <h4>Vermuten</h4>
-    <div class="dl8-step-copy"><p>Lesen Sie die zwei <strong>ursprünglichen Klassen</strong> des fremden Modells im <a href="#reproduktion">Prüfbericht</a> nochmals. <strong>Jede Person notiert zuerst allein</strong> (Papier genügt), was das Modell mit Ihren zwei anderen Klassen tun wird. Wählen Sie danach gemeinsam unten Ihre Erwartung, bevor Sie eigene Fotos testen.</p></div>
+    <div class="dl8-step-copy"><p>Lesen Sie die zwei <strong>ursprünglichen Klassen</strong> des fremden Modells im <a href="#reproduktion">Prüfbericht</a> nochmals. <strong>Überlegen Sie gemeinsam</strong>, was das Modell mit Ihren zwei anderen Klassen tun wird. Wählen Sie unten Ihre Erwartung, bevor Sie eigene Fotos testen.</p></div>
   </li>
   <li>
-    <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">02</span><span class="dl8-step-time">5 Min.</span></div>
+    <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">02</span><span class="dl8-step-time">10 Min.</span></div>
     <h4>Selbst ausprobieren</h4>
     <div class="dl8-step-copy"><p>Öffnen Sie im privaten Fenster das <a href="#projekt-werkbank">nachtrainierte fremde Notebook</a> aus <a href="#reproduktion">Etappe 2</a> und gehen Sie zu <strong>«6 · Fremdauswertung»</strong>. Tragen Sie bei <code>EIGENE_KLASSEN = ['C', 'D']</code> die <strong>zwei echten Klassen Ihres Projekts</strong> ein, laden Sie die <strong>eigene Fotostudio-JSON</strong> (nicht das eigene ZIP wiederherstellen!) und führen Sie die Fremdtest-Zelle aus. <strong>Nicht neu trainieren.</strong></p></div>
   </li>
   <li>
     <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">03</span><span class="dl8-step-time">5 Min.</span></div>
     <h4>Zwei Beispiele untersuchen</h4>
-    <div class="dl8-step-copy"><p>Lesen Sie die Ausgabe: In den Zeilen stehen Ihre Klassen, in den Spalten die <strong>ursprünglichen fremden Klassen</strong>. Vergleichen Sie mindestens <strong>ein Bild aus jeder eigenen Klasse</strong> und tragen Sie die vier Zahlen der Vorhersagetabelle sowie die Trennschärfe ein. Ist das Ergebnis überraschend?</p></div>
+    <div class="dl8-step-copy"><p>Lesen Sie die Ausgabe: In den Zeilen stehen Ihre Klassen, in den Spalten die <strong>ursprünglichen fremden Klassen</strong>. Vergleichen Sie mindestens <strong>ein Bild aus jeder eigenen Klasse</strong> und tragen Sie die vier Zahlen der Vorhersagetabelle ein. Ist das Ergebnis überraschend?</p></div>
   </li>
   <li>
-    <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">04</span><span class="dl8-step-time">3 Min.</span></div>
+    <div class="dl8-step-top"><span class="dl8-step-num" aria-hidden="true">04</span><span class="dl8-step-time">8 Min.</span></div>
     <h4>Erklären</h4>
-    <div class="dl8-step-copy"><p>Nennen Sie <strong>eine plausible Vermutung</strong> (z. B. Farbe, Form, Licht oder Hintergrund) und <strong>einen prüfbaren nächsten Versuch</strong>. Schreiben Sie dazu, weshalb dies <strong>keine Trefferquote für die neuen Klassen</strong> ist. Die Einordnung «Nach dem Versuch» unten hilft beim Vergleich mit Ihrer Erwartung.</p></div>
+    <div class="dl8-step-copy"><p>Nennen Sie <strong>eine plausible Vermutung</strong> (z. B. Farbe, Form, Licht oder Hintergrund) . Schreiben Sie dazu, weshalb dies <strong>keine Trefferquote für die neuen Klassen</strong> ist. Die Einordnung «Nach dem Versuch» unten hilft beim Vergleich mit Ihrer Erwartung.</p></div>
   </li>
 </ol>
 

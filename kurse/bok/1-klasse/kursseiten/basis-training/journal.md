@@ -65,7 +65,7 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
     <div class="detail-body">
       <label class="field"><span>Was haben Sie über den Einfluss der Bildvielfalt gelernt?</span><textarea data-basis-answer="conclusion" maxlength="20000" placeholder="Wir haben beobachtet …" rows="3"></textarea></label>
       <label class="field"><span>Was würden Sie beim nächsten Versuch verbessern?</span><textarea data-basis-answer="contribution" maxlength="20000" placeholder="Beim nächsten Versuch würden wir …" rows="3"></textarea></label>
-      <details><summary>Verwendete Hilfen dokumentieren</summary><label class="field"><span>Welche Hilfen (auch KI) haben Sie benutzt? (Nur falls verwendet.)</span><textarea data-basis-answer="ki_nutzung" maxlength="20000" placeholder="Hilfe … wofür … ; keine Zahlen oder Deutungen aus einer KI-Ausgabe übernommen." rows="3"></textarea></label></details>
+      <details><summary>Verwendete Hilfen dokumentieren</summary><label class="field"><span>Welche Hilfen (auch KI) haben Sie benutzt? (Nur falls verwendet.)</span><textarea data-basis-answer="ki_nutzung" data-optional="" maxlength="20000" placeholder="Hilfe … wofür … ; keine Zahlen oder Deutungen aus einer KI-Ausgabe übernommen." rows="3"></textarea></label></details>
     </div>
   </details>
 </div>

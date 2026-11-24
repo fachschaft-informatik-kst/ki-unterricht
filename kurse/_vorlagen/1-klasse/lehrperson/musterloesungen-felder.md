@@ -158,13 +158,11 @@ Die alten Antwortschlüssel bleiben zur Wiederherstellung früherer Lernjournale
 | `purpose` | Wir unterscheiden Äpfel und Birnen auf Fotos (unsere zwei Labels: «Apfel» und «Birne»). Nützlich etwa als Demonstration einer Sortierhilfe; bei ungewöhnlichen Sorten kann sie irren. |
 | `hypothesis` | B könnte besser abschneiden, weil es zwei Exemplare jeder Klasse kennenlernt. |
 | `groups` | T1 A1/B1, T2 A2/B2, V1 A3/B3, P1 A4/B4, P2 A5/B5; je acht eigene Fotos pro Klasse und Gruppe, 80 insgesamt; kein Exemplar doppelt. |
-
 | `data_limits` | Nur fünf Exemplare je Klasse, möglicherweise ähnlicher Hintergrund oder ähnliche Sorten. Das Netz kann Farbe oder Beleuchtung statt Fruchtform nutzen. |
 | `comparison` | Fiktiv: A 11/16, B 14/16 auf V1; gleich bleiben Bildzahl, Netz, Startwert, Epochen und V1. |
 | `selection` | Wir wählen B vor Testeinsicht, weil es drei V1-Bilder mehr richtig erkennt. Das ist kein allgemeiner Beweis. |
 | `test` | Erst nach dokumentierter Wahl TEST_FREIGEBEN = True; REINES ZAHLENBEISPIEL: B 26 von 32 Testbildern richtig = 81,25 % (P1 und P2 zusammen). P1/P2 erst jetzt, weil ein Test, der die Auswahl beeinflusst hätte, kein unabhängiger Test mehr wäre. Keine Änderung am Modell nach dem Test. |
 | `examples` | Fiktiv: P1 Apfel → Apfel (richtig), P1 Birne → Apfel (falsch). Farbe oder Licht könnten die Vorhersage beeinflussen. |
-
 | `conclusion` | B war im Beispiel besser, aber wenige Exemplare erlauben keine allgemeine Aussage. |
 | `contribution` | Beim nächsten Versuch mehr unabhängige Exemplare bei vergleichbaren Bedingungen prüfen. |
 | `ki_nutzung` | Kursnotebook und Glossar als Nachschlagehilfe; eine KI nur, um zwei Sätze der Zusammenfassung sprachlich zu glätten. Alle Zahlen, Beobachtungen und Deutungen stammen aus unserem Versuch; keine generierten Messergebnisse übernommen. |
@@ -174,20 +172,11 @@ Die alten Antwortschlüssel bleiben zur Wiederherstellung früherer Lernjournale
 | `fremd_c_2` | 17 (eigene Apfel-Fotos als Löffel, Beispiel). |
 | `fremd_d_1` | 19 (eigene Birnen-Fotos als Gabel, Beispiel). |
 | `fremd_d_2` | 21 (eigene Birnen-Fotos als Löffel, Beispiel). |
-
-
-
-
 | `fremd_warum` | Ein heller Apfel wird als Löffel ausgegeben; vielleicht spielt Licht oder Hintergrund eine Rolle. |
 | `fremd_grenze` | P1/P2 prüft neue Gabeln/Löffel. Bei Äpfeln/Birnen fehlt die richtige Klasse unter den möglichen Ausgaben. |
-
 | `fremd_name_1` | Mia Muster (fiktiv). |
-
 | `fremd_reflexion_1_grenzen` | Ein Apfel wurde als Löffel ausgegeben. Das Modell kann nur Gabel oder Löffel vorhersagen. |
-
-
 | `fremd_name_2` | Luca Beispiel (fiktiv). |
-
 | `fremd_reflexion_2_grenzen` | Auch Birnen wurden als Gabel oder Löffel ausgegeben. Die Klassen Apfel/Birne wurden nie gelernt. |
 
 

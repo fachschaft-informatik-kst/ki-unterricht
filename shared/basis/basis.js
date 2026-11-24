@@ -113,7 +113,7 @@ function renderProject(){
   }
  }
  for(const topic of topics){const selected=topic.dataset.topic===topicField?.value;topic.classList.toggle('is-chosen',selected);const b=topic.querySelector('[data-choose]');if(b){b.setAttribute('aria-pressed',String(selected));b.textContent=selected?'Vorgemerkt ✓':'Als Thema vormerken';}}
- for(const step of document.querySelectorAll('.journal-step')){const inputs=[...step.querySelectorAll('[data-basis-answer]')],label=step.querySelector('.completion');if(label)label.textContent=inputs.filter(f=>f.value.trim()).length+' / '+inputs.length;}
+ for(const step of document.querySelectorAll('.journal-step')){const inputs=[...step.querySelectorAll('[data-basis-answer]:not([data-optional])')],label=step.querySelector('.completion');if(label)label.textContent=inputs.filter(f=>f.value.trim()).length+' / '+inputs.length;}
 }
 for(const topic of topics)topic.querySelector('[data-choose]')?.addEventListener('click',()=>{topicField.value=topicField.value===topic.dataset.topic?'':topic.dataset.topic;topicField.dispatchEvent(new Event('input',{bubbles:true}));});
 function filterTopics(){const q=document.getElementById('topic-search')?.value.trim().toLocaleLowerCase('de')||'',kind=document.getElementById('topic-filter')?.value||'all';let count=0;for(const topic of topics){topic.hidden=!(topic.textContent.toLocaleLowerCase('de').includes(q)&&(kind==='all'||kind===topic.dataset.kind));if(!topic.hidden)count++;}const out=document.getElementById('topic-count'),empty=document.getElementById('topic-empty');if(out)out.textContent=count+' von '+topics.length+' Themen';if(empty)empty.hidden=count!==0;}
