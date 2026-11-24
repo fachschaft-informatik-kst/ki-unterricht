@@ -7,7 +7,7 @@ kurz: "Versuch vor der Reflexion: Vorhersagen auf anderen Klassen untersuchen."
 open: false
 ---
 
-<p class="page-crumb"><a href="#basis-abschluss">‹ Fahrplan</a><span>Etappe 3 · Tandem · ca. 15 Min. · unbenotet</span></p>
+<p class="page-crumb"><a href="#basis-abschluss">‹ Fahrplan</a><span>Etappe 3 · Tandem · ca. 25 Min. · unbenotet</span></p>
 
 ## Was sagt ein Modell über andere Klassen, für die es nie trainiert wurde?
 
@@ -89,26 +89,14 @@ open: false
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>Trennschärfe bei fremden Klassen (keine Trefferquote)</th>
-              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="fremd_trenn" aria-label="Trennschärfe in Prozent" placeholder="in %"></td>
-            </tr>
-            <tr>
-              <th>Mittlerer Modellwert</th>
-              <td><input type="text" inputmode="decimal" maxlength="40" data-answer="fremd_wert" aria-label="Mittlerer Modellwert in Prozent" placeholder="in %"></td>
-            </tr>
-            <tr>
-              <th>Zuordnung</th>
-              <td><select data-answer="fremd_zuordnung" aria-label="Zuordnung"><option value="">–</option><option value="c1">C → Klasse 1, D → Klasse 2</option><option value="c2">C → Klasse 2, D → Klasse 1</option><option value="keine">Keine klare Zuordnung</option></select></td>
-            </tr>
-            <tr>
-              <th>Was hat das Modell wohl getrennt?</th>
-              <td><select data-answer="fremd_trennt" aria-label="Was getrennt?"><option value="">–</option><option value="gegenstand">Den Gegenstand (Form, Farbe)</option><option value="hintergrund">Hintergrund oder Licht</option><option value="bildqualitaet">Bildqualität, Abstand, Perspektive</option><option value="unklar">Das weiss ich nicht</option></select></td>
-            </tr>
+            
+            
+            
+            
           </tbody>
         </table>
       </div>
-      <label class="field answer"><span>Welche unerwartete Vorhersage haben Sie beobachtet? Nennen Sie eine mögliche Ursache und einen Versuch, mit dem Sie diese prüfen könnten.</span><textarea data-answer="fremd_warum" aria-label="Wie gut und warum" maxlength="10000" placeholder="Das Modell trennt C und D … weil … Prüfen könnten wir das, indem wir …" rows="5"></textarea></label>
+      <label class="field answer"><span>Welche Vorhersage ist Ihnen aufgefallen? Was könnte die Ursache sein?</span><textarea data-answer="fremd_warum" aria-label="Wie gut und warum" maxlength="10000" placeholder="Das Modell sagt … voraus. Eine mögliche Ursache ist …" rows="5"></textarea></label>
       <label class="field answer"><span>Warum ist die Vorhersage auf anderen Klassen keine Trefferquote? Vergleichen Sie mit P1/P2 des ursprünglichen Projekts.</span><textarea data-answer="fremd_grenze" aria-label="Bedeutung für Trefferquoten" maxlength="10000" placeholder="Eine Trefferquote gilt nur für …" rows="3"></textarea></label>
     </div>
 

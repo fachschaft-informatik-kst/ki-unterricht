@@ -14,91 +14,91 @@
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Die Grenzen des Ziffernnetzes vermuten",
+          "titel": "Vermutung zum Ziffernnetz",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Ein bereits trainiertes Ziffernnetz erkennt 0–9. Was sagt es wohl bei A und B? Vermutung notieren; Notebook öffnen."
+              "text": "Zwei Ziffern und A/B vermuten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Vermutung notiert."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Das Netz ist kein Alleskönner",
+          "titel": "Bekannte und neue Klassen",
           "minutes": 5,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 5,
-              "text": "Aus DL 3: Welchen Teil eines Netzes ändern wir bei neuen Ausgabeklassen? Unterschied Eingabe/Label/Ausgabe wiederholen."
+              "text": "Eingabe, Label und Ausgabe wiederholen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Ausgabeklassen erklärt."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Vom Ziffernnetz zur Datenfrage",
-          "minutes": 15,
+          "titel": "Ziffernnetz und Datenregeln",
+          "minutes": 30,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 15,
-              "text": "Im Notebook zwei Ziffern und A/B testen (ca. 10 Min); erklären, warum die erzwungene Ziffer keine Buchstabenerkennung ist. Transfer Learning mit einem Satz einführen: feste Merkmale, neuer trainierbarer Klassifikationskopf. Kein A/B-Buchstabentraining. Drei Datenrollen und die fünf Gruppen T1/T2/V1/P1/P2 mit Beispielbildern aus der 4. Klasse erklären."
+              "min": 30,
+              "text": "10 Min Ziffern-/Buchstabentest, 20 Min Datenrollen, Apfelbeispiel und fünf Gruppen gemeinsam erarbeiten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Datenrollen unterschieden."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Daten fair aufteilen und Projekt planen",
-          "minutes": 55,
+          "titel": "Datencheck, Thema und Plan",
+          "minutes": 35,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 55,
-              "text": "Datenregeln und Datenleck-Versuch (25 Min); zwölf Themenideen, zwei einzigartige Klassen, Vermutung und fünf unabhängige Gruppen planen (20 Min); Fotostudio mit einem Beispielfoto ausprobieren (10 Min)."
+              "min": 35,
+              "text": "10 Min Daten-Notebook (ein Durchlauf) und Selbstcheck; 25 Min Thema, Klassenliste, Datenplan und Reflexionen 1–2."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Thema und Datenplan dokumentiert."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Vor dem Training kontrollieren",
-          "minutes": 10,
+          "titel": "Abnahme und Fotostudio",
+          "minutes": 15,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 10,
-              "text": "Lehrperson nimmt Gruppenplan ab. Reflexionen 1–2 sichern. Bis DL 5 Fotos aufnehmen und JSON exportieren; bei fehlender Möglichkeit Ersatzdatensatz vereinbaren."
+              "min": 15,
+              "text": "Lehrperson nimmt die Exemplarliste ab. Fotostudio mit einem Foto zeigen und ausprobieren; bis DL 5 Fotos und JSON vorbereiten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Exemplarliste abgenommen."
             }
           ]
         }

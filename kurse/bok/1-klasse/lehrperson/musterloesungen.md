@@ -90,79 +90,33 @@ Ein handgeschriebenes Ziffernbild hat **64 Pixelwerte** (8 × 8), die versteckte
 
 «Im Bildprojekt arbeitet ein Netz wie hier, aber mit 1280 statt 2 Eingaben. Die Zahlen berechnet MobileNet, ein fertiges Netz, das sich nicht verändert. Nur das kleine Netz dahinter lernt unsere zwei Klassen, wieder überwacht: vorhersagen, Fehler gegen das Label bewerten, Gewichte anpassen.» Entscheidend ist die Trennung zwischen **fest** (MobileNet) und **lernend** (kleines Netz).
 
-## DL 4–6 · Tandemprojekt: beispielhafte Musterlösung
+## DL 4–6 · Geführtes Tandemprojekt: Erwartungshorizont
 
-### Datenaufteilung selbstständig erarbeiten (Doppellektion 4)
+Alle Zahlen sind fiktive Beispiele; im Unterricht müssen eigene Messwerte verwendet werden.
 
-### Warum Gruppen trennen?
+### DL 4 · Datenregeln und Planung
 
-- **Training:** Gewichte werden gelernt.
-- **Validierung:** A und B werden verglichen und vor der Testeinsicht ausgewählt.
-- **Abschlusstest:** Die festgelegte Variante wird auf neuen Exemplaren überprüft.
+Ein Ziffernnetz hat keine Buchstaben-Ausgabe. Training passt Gewichte an, V1 dient der Auswahl, P1/P2 dem unabhängigen Abschlusstest. Dasselbe Exemplar in T1 und P1 wäre ein Datenleck; beim Daten-Notebook ist der Wert mit Kopien daher zu optimistisch.
 
-Fotos derselben Person oder desselben Gegenstands müssen in **derselben Gruppe** bleiben. Sonst entsteht ein Datenleck, das eine zu hohe Leistung vortäuschen kann.
+Reflexion 1: «Wir unterscheiden Äpfel und Birnen für eine Sortierhilfe. B könnte besser sein, weil es mehr verschiedene Exemplare kennt.»
 
-**Beispielthema:** Apfel/Birne. Alle nachfolgenden Prozentzahlen sind **rein fiktive Rechenbeispiele**, **keine tatsächlich gemessenen Modellwerte**. Für das echte Journal müssen die Resultate aus dem ausgeführten Notebook und eigene Bilder verwendet werden.
+Reflexion 2: Je Gruppe ein anderer Apfel und eine andere Birne, je acht Fotos (80 insgesamt). Eigene Fotos bei ähnlichem Licht und Hintergrund. Mögliche Grenze: alle Äpfel sind rot, alle Birnen grün.
 
-### Reflexion 1 – Anwendung, Vermutung, Planung
+### DL 5 · A/B, Test und Fazit
 
-«Unser Modell soll zwei Fruchtarten auf Fotos unterscheiden. Wir vermuten, dass Variante B auf neuen Exemplaren besser arbeitet, weil sie zwei Exemplare jeder Klasse kennenlernt. Wir planen Datenerhebung, Prüfung, A/B-Vergleich, Auswahl, Test und Fazit. Wir teilen die Arbeit auf, prüfen alle Ergebnisse gemeinsam und reservieren Zeit für Probleme und Sicherung.»
+MobileNet bleibt unverändert und liefert Merkmale; nur das kleine Netz lernt anhand der Labels. Beide Varianten erhalten gleich viele Bilder, dieselben Einstellungen und dieselbe Validierung. Nur die Vielfalt der Exemplare unterscheidet sich.
 
-### Reflexion 2 – 80 Bilder und mögliche Probleme
+Reflexion 3: A 11/16, B 14/16 auf V1. Wir wählen B vor Testeinsicht. Das Ergebnis ist eine Beobachtung, kein allgemeiner Beweis.
 
-- **T1:** Apfel 1 und Birne 1, je acht Fotos; Training beider Varianten.
-- **T2:** Apfel 2 und Birne 2, je acht Fotos; zusätzliche Vielfalt bei B.
-- **V1:** Apfel 3 und Birne 3, je acht Fotos; Validierung.
-- **P1:** Apfel 4 und Birne 4, je acht Fotos; Test.
-- **P2:** Apfel 5 und Birne 5, je acht Fotos; Test.
+Reflexion 4: B 26/32 auf P1/P2. Ein Apfel wird richtig erkannt, eine Birne als Apfel ausgegeben. Hintergrund oder Farbe könnten eine Rolle spielen. P1/P2 wurden vorher nicht zur Auswahl genutzt.
 
-Insgesamt **80 Bilder**, davon **32 im Trainingspool**, **16 in der Validierung**, **32 im Test**. **Pro Modellvariante werden nur 16 Bilder trainiert**: acht pro Klasse.
+Reflexion 5: B war hier besser; nächstes Mal mehr unabhängige Exemplare bei vergleichbaren Bedingungen prüfen.
 
-«Unsere eigenen Fotos zeigen verschiedene Perspektiven. Eine mögliche Schwäche ist unterschiedliches Licht oder ein klassenspezifischer Hintergrund: Das Netz könnte sich daran statt am Objekt orientieren.»
+### DL 6 · Fachgespräch und Fremdmodell
 
-### Was wird technisch tatsächlich trainiert?
+Leitfragen: Was lernt? Warum ist der Vergleich fair? Was zeigen V1 und P1/P2? Was bedeuten die eigenen Vorhersagen und Grenzen?
 
-**MobileNet V2 ist vortrainiert und bleibt eingefroren.** Es liefert **1280 Bildmerkmale**. Nur das **nachgeschaltete Netz mit 16 Neuronen** lernt anhand der Trainingsbilder: **60 Epochen**, Startwert **11**, Adam-Optimierung. Das Training ist überwachtes Lernen: Jedes Foto trägt seine Klasse als Label, und das kleine Netz vergleicht seine Vorhersage damit. V1 und P1/P2 haben ebenfalls Labels, dienen aber nur zum Vergleichen.
-
-- **A:** acht Fotos eines Exemplars aus T1 je Klasse.
-- **B:** je vier Fotos aus T1 und T2 je Klasse.
-- Beide verwenden **dieselbe Gesamtzahl Trainingsbilder**, Architektur, Trainingsdauer, Startwert und V1-Bilder.
-
-**Wer weiss was?** (Box auf der Seite «A/B-Versuch», unter «Hintergrund»)
-
-- **MobileNet** kennt Formen, Texturen und Muster aus über einer Million fremder Fotos, lernt im Projekt nichts und kennt unsere zwei Klassen nicht. Es wurde überwacht vortrainiert (Fotos mit 1000 Klassennamen als Labels); dieser Ausgang wird nicht benutzt.
-- **Das kleine Netz** lernt, welche Zahlenmuster aus den 1280 Merkmalen zu Klasse A und welche zu Klasse B gehören, überwacht mit unseren Klassen als Labels. Es weiss nicht, was ein «Apfel» ist; Hintergrund und Licht zählen als Merkmale mit.
-
-**Häufige Fehlvorstellungen:** «MobileNet kennt Apfel und Birne schon.» Nein, es liefert nur Merkmale. «Das kleine Netz erkennt den Apfel.» Es ordnet Zahlenmuster zu, notfalls anhand von Hintergrund oder Licht. Darum zählen nur neue Exemplare als Beleg.
-
-### Reflexion 3 – A/B-Vergleich und Auswahl
-
-**Fiktives Zahlenbeispiel:** A erkennt **12/16 = 75 %** von V1 richtig; B erkennt **14/16 = 87,5 %**. Unterschied **12,5 Prozentpunkte**.
-
-«Wir würden B auswählen, weil die Validierungsgenauigkeit im Beispiel höher ist. Ein konkretes Bild, bei dem die Vorhersage abweicht, muss zusätzlich untersucht werden. Licht, Bildauswahl und Zufall können ebenfalls zum Unterschied beigetragen haben. Ein Lauf mit einer Validierungsgruppe beweist nicht, dass B allgemein überlegen ist.»
-
-**B muss nicht besser sein.** Bei Gleichstand kann eine Variante nachvollziehbar begründet gewählt werden. Die Auswahl erfolgt **vor** dem Abschlusstest.
-
-### Reflexion 4 – Abschlusstest und Grenzen
-
-**Testfreigabe:** Variante und Begründung zuerst im Journal und Notebook eintragen, danach die Testfreigabe-Variable auf **True** setzen. Der Test verwendet **32 Bilder aus P1 und P2**; nach Einsicht nicht weiter optimieren.
-
-**Fiktives Zahlenbeispiel:** 26 von 32 korrekt = **81,25 %**. Drei konkrete Vorhersagen müssen wirklich beobachtet und erklärt werden; **keine Fehler erfinden**, wenn alle richtig sind.
-
-«Unser Modell wurde nur an wenigen neuen Fruchtexemplaren geprüft. Es ist nicht belegt, dass es bei allen Sorten, Lichtsituationen oder Kameras zuverlässig ist.»
-
-**Ergänzte Frage in Reflexion 4:** «Welcher Teil hat unsere zwei Klassen unterscheiden gelernt?» Erwartung: das kleine Netz auf den festen MobileNet-Merkmalen, nicht MobileNet selbst. Gute Antworten nennen mögliche Abkürzungen: «Hintergrund oder Licht könnten mitgeholfen haben; ein Stresstest mit P2 an einem anderen Ort oder weitere neue Exemplare würden das prüfen.»
-
-### Reflexion 5 – Fazit, Zusammenarbeit, nächster Versuch
-
-«Die Ergebnisse sprechen im Beispiel für B, beweisen aber nicht, dass ausschliesslich die Datenvielfalt die Ursache war. Ein sinnvoller nächster Versuch wären mehr unabhängige Exemplare und mehrere vorab festgelegte Startwerte. Wir haben unseren Plan angepasst, die Aufgaben verteilt und die Datenquellen sowie eingesetzten KI-Hilfen dokumentiert.»
-
-**Abgabe:** Journal, Notebook mit Ausgaben, Versuchsprotokoll, Fotostudio-JSON und Originaldateien in die ZIP-Sicherung übernehmen und über den Abgabekanal einreichen. Beide können Trainingsgruppen, eingefrorenes MobileNet, eigenes trainiertes Netz, Modellauswahl und Grenzen erklären.
-
-### Fremdauswertung (Doppellektion 6)
-
-Trainingsbilder T1/T2, Validierungsbilder V1 und die unabhängigen Testbilder P1/P2 des fremden Modells anhand konkreter Exemplare, Quellen und Originalresultate prüfen. Ein Nachlauf mit Startwert **11** liefert einen weiteren Beleg. Danach die eigenen, völlig anderen Bildklassen ausprobieren. **Ungelesene Testbilder derselben Klassen** sind erwünscht; **ganz andere Klassen** hat das Modell nie gelernt. Eine scheinbar gute Trennschärfe ist deshalb keine Klassifikationsgenauigkeit. Das fremde Modell hat überwacht nur die ursprünglichen zwei Klassen (seine Labels) gelernt; **eine Umbenennung seiner Ausgänge ist kein neues Training**. Entscheidend sind die begründete Prüfung und die Grenzen, nicht eine bestimmte Erfolgsquote.
-
+Beispiel: Das fremde Modell kennt Gabel und Löffel. T1/T2, V1 und P1/P2 enthalten unterschiedliche Exemplare; V1 A 11/16, B 13/16; Wahl B, Test 25/32. Ursprüngliches Modell mit Startwert 11 wiederherstellen, nicht neu auswählen. Es gibt bei Äpfeln und Birnen weiterhin nur Gabel oder Löffel aus. Auch eine gute Trennung der neuen Klassen belegt keine richtige Erkennung. Je eine persönliche Antwort mit konkreter Beobachtung und Erklärung genügt. Fremdauswertung unbenotet.
 
 ## 7 · Sprachmodelle (Doppellektion 7)
 

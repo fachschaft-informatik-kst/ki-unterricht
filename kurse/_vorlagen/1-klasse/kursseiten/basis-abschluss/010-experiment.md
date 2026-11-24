@@ -38,7 +38,7 @@ Das andere Tandem hat ein Bildmodell mit **zwei festgelegten Klassen** trainiert
       </tr>
       <tr>
         <td>den Abschlusstest auf P1/P2 gemacht und danach nichts mehr optimiert.</td>
-        <td>ob sich das Testresultat wiederholen lässt; ein Nachlauf mit Startwert 11 prüft es.</td>
+        <td>ob der ursprüngliche Test neue Exemplare verwendete; das Modell wird für den Fremdversuch wiederhergestellt.</td>
         <td><a href="#reproduktion">Etappe 2</a></td>
       </tr>
       <tr>
@@ -56,7 +56,7 @@ Das andere Tandem hat ein Bildmodell mit **zwei festgelegten Klassen** trainiert
     <span class="dl8-eyebrow">Prüfung 1 · Etappe 2</span>
     <h3>Gleiche Klassen, ungesehene Testbilder</h3>
     <p>Das fremde Modell wurde zum Beispiel mit Äpfeln und Birnen trainiert. Es erkennt später einen <strong>anderen, zuvor nie gesehenen Apfel</strong> aus P1/P2. Das ist der Sinn eines unabhängigen Tests: Die Testbilder dürfen vorher <strong>nicht</strong> zum Training verwendet werden.</p>
-    <p><strong>Prüffrage:</strong> Sind T1/T2, V1 und P1/P2 wirklich getrennte Exemplare? Wie gut ist das Resultat auf den passenden, ungesehenen Testbildern? Der Nachlauf prüft nur, ob sich das Ergebnis wiederholen lässt.</p>
+    <p><strong>Prüffrage:</strong> Sind T1/T2, V1 und P1/P2 wirklich getrennte Exemplare? Wie gut ist das Resultat auf den passenden, ungesehenen Testbildern? Der Nachlauf stellt das ursprüngliche Modell für den Fremdversuch wieder her.</p>
   </article>
   <article class="dl8-compare-card">
     <span class="dl8-eyebrow">Prüfung 2 · Etappe 3</span>

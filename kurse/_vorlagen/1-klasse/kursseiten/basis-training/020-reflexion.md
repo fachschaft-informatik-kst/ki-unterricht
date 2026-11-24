@@ -18,7 +18,7 @@
 Prüfen Sie nur die gewählte Variante an den unabhängigen Testbildern (Gruppen P1 und P2, siehe [Daten &amp; Fotos](#projekt-3)). Danach nichts mehr optimieren.
 <!-- MD:END -->
         <!-- MD:START -->
-Untersuchen Sie drei Beispiele und benennen Sie Grenzen; richtige Beispiele sind erlaubt.
+Untersuchen Sie zwei Beispiele und benennen Sie Grenzen; richtige Beispiele sind erlaubt.
 <!-- MD:END -->
         <p><a class="btn" href="#projekt-werkbank">Notebook «Unser Versuch» →</a> <a class="btn" href="#projekt-reflexionen">Reflexion 4 →</a></p>
       </div>
@@ -58,8 +58,8 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mi
               </tr>
               <tr>
                 <td>Doppellektionen 4–5</td>
-                <td>In DL4 Datenaufteilung selbstständig erarbeiten, Exemplarliste abnehmen lassen und erst dann fotografieren; anschliessend Tagesziele und Arbeitsphasen selbst planen</td>
-                <td>Meilensteine: Ende DL 4 Exemplarliste abgenommen, zu Beginn DL 5 Fotos importiert. Datencheck → Vergleich → begründete Auswahl → Test → Fazit; Etappen frei auf die Zeit verteilen</td>
+                <td>DL 4: Datenregeln gemeinsam erarbeiten, Thema und Exemplarliste abnehmen lassen, erst danach fotografieren</td>
+                <td>Meilensteine: Ende DL 4 Exemplarliste abgenommen, zu Beginn DL 5 Fotos importiert. Datencheck → Vergleich → begründete Auswahl → Test → Fazit; DL 5: Modellwahl vor dem Test mit der Lehrperson prüfen</td>
               </tr>
               <tr>
                 <td>Vor Beginn der Doppellektion 6</td>
@@ -69,7 +69,7 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal mi
               <tr>
                 <td>6. Doppellektion</td>
                 <td>Vierminütige Einzelgespräche; parallel selbstständige Fremdauswertung</td>
-                <td>Daten und Ergebnisse prüfen, Fremdmodell ausprobieren, persönliche Reflexion (unbenotet); getrennte Abgabe, eigenes Projekt bleibt unverändert</td>
+                <td>Daten und Ergebnisse prüfen, Fremdmodell ausprobieren, kurze persönliche Reflexion (unbenotet); getrennte Abgabe, eigenes Projekt bleibt unverändert</td>
               </tr>
             </tbody>
           </table>

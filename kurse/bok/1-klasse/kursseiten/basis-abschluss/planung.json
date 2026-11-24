@@ -8,97 +8,97 @@
       "goal": "Die eigene Untersuchung individuell erklären und ein fremdes Projekt anhand seiner Datenrollen, Ergebnisse und Modellgrenzen kritisch prüfen.",
       "question": "Welche Aussagen tragen die Ergebnisse eines Bildmodells – und welche nicht?",
       "motivation": "Ein Modell prüft man nicht nur an einer hohen Trefferquote, sondern an nachvollziehbaren unabhängigen Daten.",
-      "product": "Individuelle Fachgespräche und je Tandem eine separate unbenotete Fremdauswertung mit zwei persönlichen Antworten je Person.",
+      "product": "Individuelle Fachgespräche und separates unbenotetes Fremd-ZIP mit einer kurzen Antwort je Person.",
       "zeit": "90 Minuten: bis 20 Einzelgespräche à 4 Minuten inklusive Wechsel. Fremdes Projekt oder lauffähiges Referenzpaket, Gesprächsreihenfolge und Raster vorab bereitstellen.",
       "order": 80,
       "phases": [
         {
           "phase": "Ankommen",
-          "titel": "Direkt starten",
+          "titel": "Gesprächsplan und Dateien",
           "minutes": 3,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 3,
-              "text": "Gesprächsplan, Bewertungsraster und das von der Lehrperson zugeteilte fremde Projekt beziehungsweise vorbereitete Referenzpaket öffnen."
+              "text": "Gesprächsreihenfolge und zugeteiltes Projekt bereithalten."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Projekte zugeteilt."
             }
           ]
         },
         {
           "phase": "Vorwissen aktivieren",
-          "titel": "Eigene Ergebnisse bereithalten",
+          "titel": "Eigene Ergebnisse",
           "minutes": 2,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
               "min": 2,
-              "text": "Beide Personen kennen ihre V1-Auswahl, P1/P2-Ergebnisse und eine Grenze des eigenen Modells."
+              "text": "Eigene Variante, Testresultat und eine Grenze in Erinnerung rufen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Eigene Ergebnisse präsent."
             }
           ]
         },
         {
           "phase": "Informieren",
-          "titel": "Fremdcheck in vier Fragen",
-          "minutes": 2,
+          "titel": "Fremdprüfung einführen",
+          "minutes": 5,
           "schritte": [
             {
               "art": "Input",
               "wer": "Lehrperson",
-              "min": 2,
-              "text": "Lehrperson erklärt getrennte Browsersitzung, Originaldaten und Wiederherstellung der damaligen Variante. Fremdtest ohne weiteres Training und ohne neue Modellwahl."
+              "min": 5,
+              "text": "Private Browsersitzung, ursprüngliche Variante wiederherstellen; Unterschied zwischen neuen Bildern und neuen Klassen erklären."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Prüfweg geklärt."
             }
           ]
         },
         {
           "phase": "Verarbeiten",
-          "titel": "Fachgespräche und Fremdcheck parallel",
-          "minutes": 80,
+          "titel": "Fachgespräche und Fremdversuch",
+          "minutes": 70,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 80,
-              "text": "Parallel zu bis zu 20 Einzelgesprächen: Tandems prüfen fremde Daten und Originalwerte (15 Min), stellen das ursprüngliche Modell mit unveränderten Einstellungen wieder her (20 Min), formulieren eine Erwartung und testen eigene andere Klassen (15 Min), interpretieren zwei Beispiele und Vorhersagetabelle, formulieren Grenze/nächsten Versuch und persönliche Reflexion (20 Min). 10 Min Puffer; bei Technikproblemen bereitgestellte Referenzdaten oder dokumentierte Ausgaben auswerten."
+              "min": 70,
+              "text": "Parallel zu den Fachgesprächen: 10 Min Dateien vorbereiten, 25 Min Daten/Originalergebnisse prüfen und ursprüngliches Modell wiederherstellen, 25 Min eigene andere Klassen testen, 10 Min kurze persönliche Reflexionen beginnen."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Datencheck und Fremdversuch dokumentiert."
             }
           ]
         },
         {
           "phase": "Auswerten",
-          "titel": "Fremdcheck sichern",
-          "minutes": 3,
+          "titel": "Sichern und Reserve",
+          "minutes": 10,
           "schritte": [
             {
               "art": "Auftrag",
               "wer": "Tandem",
-              "min": 3,
-              "text": "Fremdauswertung mit Rückmeldung und beiden persönlichen Antworten pro Person als separates ZIP sichern und einreichen. Fremde Dateien löschen. Die Fremdprüfung ist unbenotet."
+              "min": 10,
+              "text": "Persönliche Antworten fertigstellen, separates Fremd-ZIP prüfen und einreichen, fremde Dateien löschen. Zeitreserve nutzen. Fachgespräche laufen parallel bis Ende DL."
             },
             {
               "art": "Ergebnis",
               "wer": "Ergebnis",
-              "text": "Ein überprüfbarer Zwischenschritt im gemeinsamen Journal oder als Beobachtung."
+              "text": "Fremdauswertung eingereicht."
             }
           ]
         }

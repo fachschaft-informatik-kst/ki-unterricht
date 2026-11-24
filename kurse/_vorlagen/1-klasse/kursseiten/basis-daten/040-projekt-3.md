@@ -68,7 +68,7 @@ Rechnen Sie nach: **2 Klassen × 5 Gruppen × 8 Fotos = 80 Bilder**. Insgesamt s
 
 Wenn etwas noch nicht stimmt, korrigieren Sie zuerst Ihren Plan. Halten Sie das Ergebnis in **Reflexion 2 des bestehenden Journals** fest – kein neues Formular und keine zusätzliche Abgabe (Reflexion 2 darf in DL 5 abgeschlossen werden). Sichern Sie Ihre Arbeit unter «Notizen &amp; Projekt» als ZIP. Bei offenen Fragen benutzen Sie zuerst die Musterlösung und die Notebook-Erklärungen im Lernpfad [«Datenregeln lernen»](#projekt-regeln).
 
-**Abnahme vor dem Fotografieren:** Lassen Sie die Exemplarliste von der Lehrperson oder einem Nachbartandem anhand dieser fünf Fragen abnehmen (ca. 2 Minuten). **Erst danach fotografieren.** Richtwerte: Ende DL 4 Liste abgenommen und Fotos begonnen, zu Beginn DL 5 Fotos importiert. Testen Sie den Übertragungsweg Handy → Laptop vorab mit einem einzigen Foto. Fehlen Fotos noch zu Beginn von DL 5, melden Sie sich bei der Lehrperson: Nachfotografieren oder der Modus `ERSATZ` mit offen gekennzeichneten Übungsformen.
+**Abnahme vor dem Fotografieren:** Lassen Sie die Exemplarliste von der Lehrperson anhand dieser fünf Fragen abnehmen (ca. 2 Minuten). **Erst danach fotografieren.** Verbindlich: Ende DL 4 Liste abgenommen und Fotos begonnen, zu Beginn DL 5 Fotos importiert. Testen Sie den Übertragungsweg Handy → Laptop vorab mit einem einzigen Foto. Fehlen Fotos noch zu Beginn von DL 5, melden Sie sich bei der Lehrperson: Nachfotografieren oder der Modus `ERSATZ` mit offen gekennzeichneten Übungsformen.
 <!-- MD:END -->
       <p><a href="#basis-journal">Zur Reflexion im Journal →</a> · <a href="#basis-sicherung">Stand als ZIP sichern →</a></p>
     </div>

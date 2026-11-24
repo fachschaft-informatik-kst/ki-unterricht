@@ -10,11 +10,11 @@
     <p class="section-intro">Drei Datenrollen · Datenlecks erkennen · fünf Gruppen planen.</p>
     <div class="card">
       <!-- MD:START -->
-### Selbstlernauftrag · Daten fair aufteilen (ca. 20–30 Minuten)
+### Daten fair aufteilen (ca. 30 Minuten)
 
-**Das lernen Sie hier ohne Einführung der Lehrperson:** Sie können die drei Datenrollen unterscheiden, ein Datenleck erkennen und Ihre eigenen Fotos so auf fünf Gruppen verteilen, dass das Ergebnis aussagekräftig bleibt.
+**Das lernen Sie hier:** Sie können die drei Datenrollen unterscheiden, ein Datenleck erkennen und Ihre eigenen Fotos so auf fünf Gruppen verteilen, dass das Ergebnis aussagekräftig bleibt.
 
-**Arbeitsweg:** (1) Erklärungen lesen → (2) Fälle selbst lösen → (3) mit der Lösung vergleichen → (4) Notebook ausprobieren → (5) eigene fünf Gruppen planen (auf der Seite [«Daten &amp; Fotos»](#projekt-3)). Arbeiten Sie zu zweit, halten Sie die erste Vermutung aber jeweils allein fest. Bei Fehlern: Erklärung nochmals lesen und die Lösung verbessern.
+**Arbeitsweg:** Die Lehrperson bespricht die drei Datenrollen und das Apfelbeispiel mit Ihnen. Lösen Sie danach den Selbstcheck zu zweit und überprüfen Sie die Regeln im Notebook. Übertragen Sie sie auf Ihren [Datenplan](#projekt-3).
 
 **Die fünf Gruppen:** Ihre Fotos werden in fünf Gruppen sortiert, benannt mit Anfangsbuchstabe und Nummer: **T1 und T2** (T = Training), **V1** (V = Validierung) und **P1 und P2** (P = Prüfung, der Abschlusstest). Jede Gruppe enthält pro Klasse ein anderes Exemplar mit acht Fotos; die Übersicht steht auf der Seite [«Daten &amp; Fotos»](#projekt-3). Welche Aufgabe jede Gruppe hat, zeigen die drei folgenden Karten.
 
@@ -82,7 +82,7 @@ Vergleichen Sie Ihre Antworten erst, wenn Sie alle drei gelöst haben.
       <!-- MD:START -->
 ### Interaktiver Versuch · Datenleck erkennen
 
-Öffnen Sie das Notebook und bearbeiten Sie der Reihe nach **«Drei Aufgaben für Daten»**, **«Ein Datenleck entdecken»** und **«Vergleich · Drei Werte»**. Notieren Sie jeweils zuerst eine Vermutung und führen Sie dann die Zelle aus. Beim Datenleck-Versuch ändern Sie danach `TRAININGSBILDER` auf 40 und auf 400. Vergleichen Sie Ihre Beobachtung mit dem Merksatz.
+Öffnen Sie das Notebook und bearbeiten Sie der Reihe nach **«Drei Aufgaben für Daten»**, **«Ein Datenleck entdecken»** und **«Vergleich · Drei Werte»**. Notieren Sie jeweils zuerst eine Vermutung und führen Sie dann die Zelle aus. Beim Datenleck-Versuch genügt ein Durchlauf mit der voreingestellten Bildzahl. Vergleichen Sie Ihre Beobachtung mit dem Merksatz.
 <!-- MD:END -->
       <div class="ki-notebook-block" data-notebook="content/daten_training.ipynb" data-title="Daten fair aufteilen">
         <!-- MD:START -->
@@ -93,13 +93,13 @@ Die Python-Zellen hier öffnen, bearbeiten und mit Shift + Enter ausführen.
 <!-- MD:END -->
         <button type="button" class="ki-notebook-launch" data-lab="daten_training.ipynb">Notebook hier öffnen</button>
       </div>
-      <label class="field answer"><span>Datenleck-Versuch: Wie viel Prozent erreichte das Netz mit Kopien der Trainingsbilder, wie viel mit wirklich neuen Bildern? Was änderte sich bei 40 und bei 400 Trainingsbildern, und warum sagt der Wert mit Kopien nichts über neue Bilder aus?</span><textarea data-answer="datenleck_versuch" rows="4" maxlength="10000" placeholder="Mit Kopien … %, mit neuen Bildern … %. Bei 40 Bildern …, bei 400 …. Der Wert mit Kopien sagt nichts aus, weil …"></textarea></label>
+      <label class="field answer"><span>Datenleck-Versuch: Wie viel Prozent erreichte das Netz mit Kopien der Trainingsbilder, wie viel mit wirklich neuen Bildern? Warum ist der Wert mit Kopien kein unabhängiger Test?</span><textarea data-answer="datenleck_versuch" rows="4" maxlength="10000" placeholder="Mit Kopien … %, mit neuen Bildern … %. Der Wert mit Kopien sagt nichts aus, weil …"></textarea></label>
       <label class="field answer"><span>Drei Werte: Welcher Wert (Training, Validierung oder Test) beschreibt die endgültig gewählte Variante am besten, und warum nicht die beiden anderen?</span><textarea data-answer="drei_werte" rows="3" maxlength="10000" placeholder="Am besten beschreibt der … Wert die Variante, weil … Der Trainingswert ist hoch, weil …"></textarea></label>
       <details>
         <summary>Selbstkontrolle zum Versuch</summary>
         <div class="detail-body">
           <!-- MD:START -->
-**Datenleck:** Mit Kopien der Trainingsbilder schneidet das Netz deutlich besser ab als mit wirklich neuen Bildern (Beispielwerte: bei 100 Trainingsbildern etwa 96 % gegen 84 %, bei 40 Bildern etwa 100 % gegen 67 %, bei 400 Bildern nur noch etwa 96 % gegen 94 %). Der Wert mit Kopien zeigt nur, dass das Netz Bekanntes wiedererkennt. Je weniger Trainingsbilder, desto stärker täuscht ein Leck. Ihre Zahlen können abweichen, die Richtung bleibt.
+**Datenleck:** Mit Kopien der Trainingsbilder schneidet das Netz deutlich besser ab als mit wirklich neuen Bildern (Beispiel bei 100 Trainingsbildern: etwa 96 % gegen 84 %). Der Wert mit Kopien zeigt nur, dass das Netz Bekanntes wiedererkennt. Ihre Zahlen können abweichen, die Richtung bleibt.
 
 **Drei Werte:** Der Trainingswert ist fast immer am höchsten, weil das Netz diese Bilder kennt. Die Validierung hilft bei der Auswahl, ihr Wert ist dadurch schon etwas beschönigt. Der Test, einmal und erst nach der Auswahl mit neuen Exemplaren, beschreibt die gewählte Variante am ehrlichsten.
 <!-- MD:END -->

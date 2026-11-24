@@ -13,7 +13,7 @@
     <li class="roadmap-step roadmap-start" id="dl8-start">
       <span class="roadmap-nr" aria-hidden="true">0</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Start: Warum prüfen?</strong><span class="roadmap-meta">Zu Beginn · ca. 5 Min.</span></div>
+        <div class="roadmap-head"><strong>Start: Warum prüfen?</strong><span class="roadmap-meta">Zu Beginn · gemeinsam</span></div>
         <!-- MD:START -->
 Was Sie aus Ihrem Projekt mitbringen und welche zwei Prüfungen Sie unterscheiden: neue Bilder derselben Klassen und völlig neue Klassen.
 <!-- MD:END -->
@@ -34,18 +34,18 @@ Eigenes und fremdes ZIP entpacken, das fremde Projekt im privaten Fenster wieder
     <li class="roadmap-step" id="dl8-etappe-2">
       <span class="roadmap-nr" aria-hidden="true">02</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Daten und Ergebnisse prüfen</strong><span class="roadmap-meta">Tandem · ca. 20 Min. · unbenotet</span></div>
+        <div class="roadmap-head"><strong>Daten und Ergebnisse prüfen</strong><span class="roadmap-meta">Tandem · ca. 25 Min. · unbenotet</span></div>
         <!-- MD:START -->
-Sind T1/T2, V1 und P1/P2 wirklich getrennt? Stimmen die Originalergebnisse? Ein Nachlauf mit Startwert 11 und ein gemeinsamer Prüfbericht.
+Sind T1/T2, V1 und P1/P2 wirklich getrennt? Wie gut war das ursprüngliche Modell? Stellen Sie die gewählte Variante für den Fremdversuch wieder her.
 <!-- MD:END -->
-        <label class="check"><input data-check="dl8-2" type="checkbox"/><span>Unser Prüfbericht zu Daten und Ergebnissen ist geschrieben.</span></label>
+        <label class="check"><input data-check="dl8-2" type="checkbox"/><span>Wir haben Daten und Originalergebnisse geprüft und das Modell wiederhergestellt.</span></label>
       </div>
       <a class="btn roadmap-go" href="#reproduktion">Daten &amp; Ergebnisse →</a>
     </li>
     <li class="roadmap-step" id="dl8-etappe-3">
       <span class="roadmap-nr" aria-hidden="true">03</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Eigene Bilder testen</strong><span class="roadmap-meta">Tandem · ca. 15 Min. · unbenotet</span></div>
+        <div class="roadmap-head"><strong>Eigene Bilder testen</strong><span class="roadmap-meta">Tandem · ca. 25 Min. · unbenotet</span></div>
         <!-- MD:START -->
 Das fremde Modell sieht Ihre zwei eigenen Klassen. Erst die Erwartung festhalten, dann die Vorhersagen untersuchen, ohne neu zu trainieren.
 <!-- MD:END -->
@@ -58,9 +58,9 @@ Das fremde Modell sieht Ihre zwei eigenen Klassen. Erst die Erwartung festhalten
       <div class="roadmap-body">
         <div class="roadmap-head"><strong>Reflexion und Abgabe</strong><span class="roadmap-meta">Tandem und einzeln · ca. 15 Min. · unbenotet</span></div>
         <!-- MD:START -->
-Rückmeldung an das geprüfte Tandem, je zwei persönliche Antworten und das separate ZIP. Der Download allein ist keine Einreichung.
+Eine kurze persönliche Reflexion pro Person und das separate ZIP. Der Download allein ist keine Einreichung.
 <!-- MD:END -->
-        <label class="check"><input data-check="dl8-4" type="checkbox"/><span>Rückmeldung und beide persönlichen Antworten stehen; das separate ZIP ist eingereicht; die fremden Dateien sind gelöscht.</span></label>
+        <label class="check"><input data-check="dl8-4" type="checkbox"/><span>Die persönliche Antwort jeder Person steht; das separate ZIP ist eingereicht; die fremden Dateien sind gelöscht.</span></label>
       </div>
       <a class="btn roadmap-go" href="#dl8-abschluss">Reflexion &amp; Abgabe →</a>
     </li>
@@ -71,7 +71,7 @@ Rückmeldung an das geprüfte Tandem, je zwei persönliche Antworten und das sep
 ### Selbstständig prüfen, fair beurteilen
 <!-- MD:END -->
   <!-- MD:START -->
-Sie arbeiten als Tandem selbstständig; die Lehrperson führt ab Beginn die vierminütigen Einzelgespräche. Prüfen Sie Ihre Gesprächszeit vorab. Wird eine Person aufgerufen, arbeitet die andere weiter. Die Lehrperson teilt Ihnen ein fremdes Projekt mit **anderen Klassen als Ihren** zu: Sie prüfen ein Projekt und werden von einem anderen Tandem geprüft. Läuft die Technik nicht, hilft die [Notfallkarte](#dl8-notfall).
+Sie arbeiten als Tandem selbstständig; die Lehrperson führt nach der gemeinsamen Einführung die vierminütigen Einzelgespräche. Prüfen Sie Ihre Gesprächszeit vorab. Wird eine Person aufgerufen, arbeitet die andere weiter. Die Lehrperson teilt Ihnen ein fremdes Projekt mit **anderen Klassen als Ihren** zu: Sie prüfen ein Projekt und werden von einem anderen Tandem geprüft. Läuft die Technik nicht, hilft die [Notfallkarte](#dl8-notfall).
 <!-- MD:END -->
   <p><strong>Ablauf:</strong> die vier Etappen unten. Die gesamte Fremdmodellprüfung einschliesslich der persönlichen Reflexion ist <strong>unbenotet</strong>. Ihr eigenes, bereits abgegebenes Projekt bleibt unverändert.</p>
 </div>
@@ -83,7 +83,7 @@ Sie arbeiten als Tandem selbstständig; die Lehrperson führt ab Beginn die vier
     <strong>2 eigene Klassen</strong><small>am fremden Modell ausprobieren</small>
   </div>
   <div class="fact">
-    <strong>2 Antworten</strong><small>persönlich, je Person</small>
+    <strong>1 Antwort</strong><small>persönlich, je Person</small>
   </div>
   <div class="fact">
     <strong>1 separates ZIP</strong><small>zur Fremdauswertung einreichen</small>

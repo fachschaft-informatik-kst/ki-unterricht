@@ -7,7 +7,7 @@
   <!-- MD:START -->
 ## Ihr Fahrplan
 <!-- MD:END -->
-  <p class="section-intro">Starten Sie mit den Datenregeln. Danach arbeiten Sie die sechs Etappen in eigenem Tempo durch; jede Etappe führt auf die passende Seite. Ihre Ergebnisse halten Sie in fünf <a href="#projekt-reflexionen">Journal-Reflexionen</a> fest.</p>
+  <p class="section-intro">Die Lehrperson führt in die Datenregeln ein. Arbeiten Sie anschliessend die sechs Etappen der Reihe nach durch. Ihre Ergebnisse halten Sie in fünf <a href="#projekt-reflexionen">Journal-Reflexionen</a> fest.</p>
   <div class="progress-card js-only">
     <div class="progress-title">
       <strong>Ihr persönlicher Projektstand</strong><span aria-live="polite" id="progress-text">0 von 6 Schritten</span>
@@ -21,7 +21,7 @@ Die Häkchen werden nur in diesem Browser gespeichert. Sie sind keine Abgabe an 
     <li class="roadmap-step roadmap-start" id="projekt-start">
       <span class="roadmap-nr" aria-hidden="true">0</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Start: Datenregeln lernen</strong><span class="roadmap-meta">Richtwert DL 4 · 20–30 Min.</span></div>
+        <div class="roadmap-head"><strong>Start: Datenregeln lernen</strong><span class="roadmap-meta">DL 4 · 20–30 Min.</span></div>
         <!-- MD:START -->
 Lernpfad zur fairen Datenaufteilung mit Fallbeispiel, Selbstcheck und Übungsnotebook. Hilfreich vorab: der [kurze Ziffern-/Buchstabentest](#basis-daten-experiment).
 <!-- MD:END -->
@@ -31,7 +31,7 @@ Lernpfad zur fairen Datenaufteilung mit Fallbeispiel, Selbstcheck und Übungsnot
     <li class="roadmap-step" id="projekt-etappe-1">
       <span class="roadmap-nr" aria-hidden="true">01</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Anwendung und Vermutung</strong><span class="roadmap-meta">Richtwert DL 4 · Reflexion 1</span></div>
+        <div class="roadmap-head"><strong>Anwendung und Vermutung</strong><span class="roadmap-meta">DL 4 · Reflexion 1</span></div>
         <!-- MD:START -->
 Wählen Sie zwei Klassen, die kein anderes Tandem verwendet, und tragen Sie sie in die Klassenliste ein (Vorbereitungsauftrag). Formulieren Sie einen Nutzen und vermuten Sie: Helfen vielfältigere Trainingsbilder? Die Lehrperson gibt Thema und Klassen zu Beginn von DL 4 frei, wenn beide Klassen noch frei sind.
 <!-- MD:END -->
@@ -42,7 +42,7 @@ Wählen Sie zwei Klassen, die kein anderes Tandem verwendet, und tragen Sie sie 
     <li class="roadmap-step" id="projekt-etappe-2">
       <span class="roadmap-nr" aria-hidden="true">02</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>80 Fotos vorbereiten</strong><span class="roadmap-meta">Richtwert DL 4–5 · Reflexion 2 (darf in DL 5 enden)</span></div>
+        <div class="roadmap-head"><strong>80 Fotos vorbereiten</strong><span class="roadmap-meta">DL 4–5 · Reflexion 2 (darf in DL 5 enden)</span></div>
         <!-- MD:START -->
 Fünf unabhängige Gruppen, zwei Klassen, je acht Fotos; jedes Foto bekommt seine Klasse als Label (überwachtes Lernen). Dieselben Objekte bleiben immer in derselben Gruppe. Erst die Exemplarliste abnehmen lassen, dann fotografieren: Ende DL 4 Liste abgenommen, zu Beginn DL 5 Fotos importiert. Beide Klassen unter gleichen Bedingungen fotografieren (Hintergrund, Licht); Personen nur mit Einverständnis.
 <!-- MD:END -->
@@ -53,9 +53,9 @@ Fünf unabhängige Gruppen, zwei Klassen, je acht Fotos; jedes Foto bekommt sein
     <li class="roadmap-step" id="projekt-etappe-3">
       <span class="roadmap-nr" aria-hidden="true">03</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>A und B trainieren</strong><span class="roadmap-meta">Richtwert DL 5</span></div>
+        <div class="roadmap-head"><strong>A und B trainieren</strong><span class="roadmap-meta">DL 5</span></div>
         <!-- MD:START -->
-Erst den Ablauf mit Übungsdaten starten, dann eigene Daten importieren. A lernt aus einem Exemplar je Klasse, B aus zwei. Beide erhalten acht Bilder je Klasse. Das Netz lernt überwacht: Es vergleicht seine Vorhersage mit dem Label (der Klasse) jedes Trainingsbildes. Der Vergleich läuft zuerst mit dem festen Startwert 11; danach wiederholen Sie ihn mit den Startwerten 11, 22 und 33.
+Importieren Sie Ihre vorbereitete Fotostudio-JSON. A lernt aus einem Exemplar je Klasse, B aus zwei. Beide erhalten acht Bilder je Klasse. Das Netz lernt überwacht: Es vergleicht seine Vorhersage mit dem Label (der Klasse) jedes Trainingsbildes. Der Vergleich läuft einmal mit dem festen Startwert 11.
 <!-- MD:END -->
         <label class="check"><input data-check="phase-3" type="checkbox"/><span>Unser A/B-Vergleich läuft; wir verstehen die beiden Varianten.</span></label>
       </div>
@@ -64,7 +64,7 @@ Erst den Ablauf mit Übungsdaten starten, dann eigene Daten importieren. A lernt
     <li class="roadmap-step" id="projekt-etappe-4">
       <span class="roadmap-nr" aria-hidden="true">04</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Vergleichen und auswählen</strong><span class="roadmap-meta">Richtwert DL 5 · Reflexion 3</span></div>
+        <div class="roadmap-head"><strong>Vergleichen und auswählen</strong><span class="roadmap-meta">DL 5 · Reflexion 3</span></div>
         <!-- MD:START -->
 Vergleichen Sie die Validierungswerte und konkrete Vorhersagen. Wählen Sie A oder B und begründen Sie dies vor Testeinsicht.
 <!-- MD:END -->
@@ -75,7 +75,7 @@ Vergleichen Sie die Validierungswerte und konkrete Vorhersagen. Wählen Sie A od
     <li class="roadmap-step" id="projekt-etappe-5">
       <span class="roadmap-nr" aria-hidden="true">05</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Abschliessend prüfen</strong><span class="roadmap-meta">Richtwert DL 5 · Reflexion 4</span></div>
+        <div class="roadmap-head"><strong>Abschliessend prüfen</strong><span class="roadmap-meta">DL 5 · Reflexion 4</span></div>
         <!-- MD:START -->
 Prüfen Sie nur die gewählte Variante an den unabhängigen Testbildern (Gruppen P1 und P2). Danach nichts mehr optimieren.
 <!-- MD:END -->
@@ -86,7 +86,7 @@ Prüfen Sie nur die gewählte Variante an den unabhängigen Testbildern (Gruppen
     <li class="roadmap-step" id="projekt-etappe-6">
       <span class="roadmap-nr" aria-hidden="true">06</span>
       <div class="roadmap-body">
-        <div class="roadmap-head"><strong>Fazit und Abgabe</strong><span class="roadmap-meta">Richtwert DL 5 · Reflexion 5</span></div>
+        <div class="roadmap-head"><strong>Fazit und Abgabe</strong><span class="roadmap-meta">DL 5 · Reflexion 5</span></div>
         <!-- MD:START -->
 Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal, Fotos/JSON und Protokoll. Beide bereiten sich auf ihr vierminütiges Einzelgespräch vor.
 <!-- MD:END -->
@@ -98,13 +98,15 @@ Halten Sie Fazit, Grenzen und den nächsten Versuch fest. Sichern Sie Journal, F
 </div>
 <div class="callout" id="sol-rahmen">
   <!-- MD:START -->
-### Selbstständig arbeiten, fair vergleichen
+### Gemeinsam starten, im Tandem untersuchen
 <!-- MD:END -->
   <!-- MD:START -->
-In den Doppellektionen 4–5 legen Sie als Tandem Tagesziele, Aufgaben und Tempo selbst fest. Die sechs Etappen sind fachlich geordnet, aber keine festen Lektionstermine; die Richtwerte zeigen nur, wo sie im Unterricht voraussichtlich liegen.
+**DL 4:** Datenregeln, Thema und Datenplan erarbeiten; die Lehrperson nimmt die Exemplarliste ab. Fotografieren und JSON bis DL 5 vorbereiten.
+
+**DL 5:** Daten prüfen, A/B vergleichen, Modellwahl mit der Lehrperson kontrollieren, Abschlusstest und Journal fertigstellen.
 <!-- MD:END -->
   <p><strong>Verbindlich:</strong> Fünf unabhängige Datengruppen, fairer A/B-Vergleich, fünf Reflexionen und eine begründete Modellwahl <strong>vor</strong> dem Abschlusstest. Danach keine Optimierung. <strong>Abgabe vor Beginn der Doppellektion 6.</strong></p>
-  <p>Halten Sie in Reflexion 1 Ihren Plan und in Reflexion 5 die Anpassungen fest. Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> dienen der Orientierung.</p>
+  <p>Weitere <a href="materialien/downloads/ki_projektauftrag.md">Etappen-Checks im Projektauftrag</a> dienen der Orientierung.</p>
 </div>
 <div class="facts">
   <div class="fact">

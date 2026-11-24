@@ -49,7 +49,7 @@ open: false
   <div class="detail-body">
     <ol>
       <li>Fragen Sie zuerst das Nachbartandem. Hilft das nicht, melden Sie sich bei der Lehrperson (Hand heben oder Zettel; sie führt gerade Gespräche).</li>
-      <li><strong>Ohne Notebook weiterarbeiten:</strong> Lesen Sie in Etappe 2 nur die Schritte 1, 2 und 4 (Daten ansehen, Originalergebnisse lesen, beurteilen) mit dem Journal und <code>Versuchsprotokoll.json</code>. Den Nachlauf (Schritt 3) und fehlende Versuche kennzeichnen Sie im Prüfbericht ausdrücklich als «nicht durchgeführt». Keine Ergebnisse erfinden.</li>
+      <li><strong>Ohne Notebook weiterarbeiten:</strong> Prüfen Sie in Etappe 2 Daten und Originalergebnisse mit dem Journal und <code>Versuchsprotokoll.json</code>. Eine fehlende Wiederherstellung und fehlende Versuche kennzeichnen Sie ausdrücklich als «nicht durchgeführt». Keine Ergebnisse erfinden.</li>
       <li><strong>Referenzpaket:</strong> Die Lehrperson hält ein personenfreies Referenzpaket (Apfel/Banane) bereit. Damit durchlaufen Sie Etappe 2 und 3 genau wie mit einem Tandem-Projekt.</li>
     </ol>
   </div>
