@@ -68,34 +68,21 @@
       "class": "section",
       "navigation": {
         "order": 5,
-        "label": "04",
-        "title": "Bildprojekt vorbereiten"
+        "label": "04–05",
+        "title": "Eigenes Bildprojekt"
       },
       "teaching": true,
       "overview": {
-        "title": "Bildprojekt vorbereiten",
-        "summary": "Ziffernnetz · Datenregeln · Datenplan"
-      }
-    },
-    {
-      "id": "basis-training",
-      "class": "section",
-      "navigation": {
-        "order": 6,
-        "label": "05",
-        "title": "Bildmodelle vergleichen"
+        "title": "Eigenes Bildprojekt",
+        "summary": "Daten planen · A/B-Versuch · Journal führen"
       },
-      "teaching": true,
-      "overview": {
-        "title": "Bildmodelle vergleichen",
-        "summary": "MobileNet · A/B · unabhängiger Test"
-      }
+      "pages": "Fahrplan"
     },
     {
       "id": "basis-abschluss",
       "class": "section",
       "navigation": {
-        "order": 7,
+        "order": 6,
         "label": "06",
         "title": "Fachgespräch & Fremdmodell"
       },
@@ -103,13 +90,14 @@
       "overview": {
         "title": "Fachgespräch & Fremdmodell",
         "summary": "Ergebnisse erklären · fremdes Modell prüfen"
-      }
+      },
+      "pages": "Fahrplan"
     },
     {
       "id": "basis-sprache",
       "class": "section",
       "navigation": {
-        "order": 8,
+        "order": 7,
         "label": "07",
         "title": "Sprachmodelle"
       },
@@ -128,7 +116,7 @@
         "summary": "Folgen · Fairness · Verantwortung"
       },
       "navigation": {
-        "order": 9,
+        "order": 8,
         "label": "08",
         "title": "KI und Gesellschaft"
       }
@@ -137,7 +125,7 @@
       "id": "basis-glossar",
       "class": "section",
       "navigation": {
-        "order": 10,
+        "order": 9,
         "label": "A–Z",
         "title": "Glossar"
       }

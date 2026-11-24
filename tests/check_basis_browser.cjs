@@ -90,9 +90,9 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.title(),expectedTitle);
     assert.equal(await page.locator('main > section').count(),13,'Eight lessons plus glossary, overview, journal and backup');
     // Shortened eight-lesson plan must have distinct, correctly numbered section anchors.
-    for(const [section,number] of [['basis-ki',1],['basis-neuron',2],['basis-netze',3],['basis-daten',4],['basis-training',5],['basis-abschluss',6],['basis-sprache',7],['basis-gesellschaft',8]]){
-      const plan=page.locator('#'+section+' .lesson-plan');
-      assert.equal(await plan.count(),1,section+' must contain one AVIVA lesson');
+    for(const [section,number] of [['basis-ki',1],['basis-neuron',2],['basis-netze',3],['basis-daten',4],['basis-daten',5],['basis-abschluss',6],['basis-sprache',7],['basis-gesellschaft',8]]){
+      const plan=page.locator('#'+section+' .lesson-plan[id="doppellektion-'+String(number).padStart(2,'0')+'"]');
+      assert.equal(await plan.count(),1,section+' must contain the scheduled AVIVA lesson');
       assert.equal(await plan.getAttribute('id'),'doppellektion-'+String(number).padStart(2,'0'),section+' lesson anchor must match its visible number');
       assert.match(await plan.locator('summary').innerText(),new RegExp('Doppellektion '+number+'\\b'),section+' must display the correct lesson number');
     }
@@ -152,7 +152,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await advanced.close();
     await page.locator('.nav > a[href="#basis-lernziele"]').click();
     await page.locator('#basis-lernziele .card').first().waitFor({state:'visible'});
-    assert.equal(await page.locator('#basis-lernziele .card').count(),8,'Separate DL3 and DL4 learning objectives');
+    assert.equal(await page.locator('#basis-lernziele .card').count(),7,'Project learning objectives are grouped in one card');
     // Keep all double-lesson links visible, but expand one chapter list only.
     const activeSubmenus=page.locator('.nav-sub:not([hidden])');
     assert.equal(await page.locator('.nav > a').count(),11);
@@ -175,7 +175,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-ki #basis-lernen [data-answer="dl1_lernarten_kompakt"]').count(),1,'Labels are now covered within DL1');
 
     // Glossary access mirrors the advanced course on every first-year DL start.
-    for(const topic of ['basis-ki','basis-neuron','basis-netze','basis-daten','basis-training','basis-abschluss','basis-sprache','basis-gesellschaft'])
+    for(const topic of ['basis-ki','basis-neuron','basis-netze','basis-daten','basis-abschluss','basis-sprache','basis-gesellschaft'])
       assert(await page.locator('#'+topic+' .glossary-related a[href^="#basis-glossar-"]').count(),topic+' glossary links');
     assert.equal(await page.locator('#basis-ki #einstieg-3 .milestone-trigger').count(),9);
 
@@ -287,7 +287,7 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     assert.equal(await page.locator('#basis-netze .ki-notebook-block[data-notebook="content/ziffernerkennung.ipynb"]').count(),0,'Additional architecture training is no longer a mandatory project detour');
     assert.equal(await page.locator('#basis-daten .ki-notebook-block[data-notebook="content/basis_bildmodell.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-daten .ki-notebook-block[data-notebook="content/daten_training.ipynb"]').count(),1);
-    assert.equal(await page.locator('#basis-training .ki-notebook-block[data-notebook="content/ki_projekt/ki_lernlabor.ipynb"]').count(),1);
+    assert.equal(await page.locator('#basis-daten .ki-notebook-block[data-notebook="content/ki_projekt/ki_lernlabor.ipynb"]').count(),1);
     assert.equal(await page.locator('#basis-journal .ki-notebook-block[data-notebook="content/ki_projekt/ki_tandemprojekt.ipynb"]').count(),1);
     // Project chapter navigation and progress must work with the first-year storage.
     await page.locator('.nav > a[href="#basis-daten"]').click();
@@ -298,6 +298,11 @@ async function checkNotebookFullscreen(page,buttonSelector,panelSelector){
     await page.locator('#basis-daten a[href="#projekt-regeln"]').first().click();
     await page.locator('#projekt-regeln').waitFor({state:'visible'});
     assert.equal(await page.locator('#projekt-2').isVisible(),false,'Other project chapters remain hidden');
+    await page.locator('.nav > a[href="#basis-daten"]').click();
+    await page.locator('#basis-daten #ablauf').waitFor({state:'visible'});
+    assert.equal(await page.locator('.nav > a[href="#basis-training"]').count(),0,'Project has only one main navigation entry');
+    await page.locator('#basis-daten a[href="#projekt-4"]').first().click();
+    await page.locator('#projekt-4').waitFor({state:'visible'});
     await page.locator('.nav > a[href="#basis-daten"]').click();
     await page.locator('#basis-daten #ablauf').waitFor({state:'visible'});
     await check.uncheck();

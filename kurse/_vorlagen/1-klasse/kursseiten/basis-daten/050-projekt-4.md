@@ -3,6 +3,7 @@
     <h2 class="kapitel-titel">A/B-Versuch</h2>
   </summary>
   <div class="kapitel-body detail-body" id="versuch">
+    <span id="basis-training"></span>
     <p class="page-crumb"><a href="#basis-daten">‹ Fahrplan</a><span>Etappen 3–4 · Richtwert DL 5</span></p>
     <!-- MD:START -->
 ## Helfen vielfältigere Bilder?

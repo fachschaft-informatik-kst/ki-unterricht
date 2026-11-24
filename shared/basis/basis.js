@@ -39,14 +39,16 @@ function show(){
     }
   }
   for(const a of [...document.querySelectorAll('.nav a')])a.removeAttribute('aria-current');
-  const current=links.find(a=>a.hash==='#'+active.id);
+  const navId=active.dataset.navParent||active.id;
+  const current=links.find(a=>a.hash==='#'+navId);
   if(current)current.setAttribute('aria-current','page');
-  const chapterLink=[...document.querySelectorAll('.nav-sub a')].find(a=>a.hash==='#'+chapter?.closest('details.kapitel')?.id);
+  const chapterId=chapter?.closest('details.kapitel,#basis-bewertung')?.id||active.id;
+  const chapterLink=[...document.querySelectorAll('.nav-sub a')].find(a=>a.hash==='#'+chapterId);
   if(chapterLink)chapterLink.setAttribute('aria-current','page');
   // Only expand subchapters for the current double lesson. Keep all lesson
   // links visible so students can always switch lessons.
   for(const [lessonId,menu] of submenus){
-    const expanded=lessonId===active.id;
+    const expanded=lessonId===navId;
     menu.hidden=!expanded;
     const lessonLink=links.find(a=>a.hash==='#'+lessonId);
     if(lessonLink)lessonLink.setAttribute('aria-expanded',String(expanded));
@@ -71,6 +73,11 @@ for(const section of sections){
    const a=document.createElement('a');a.href='#'+chapter.id;
    a.textContent=chapter.querySelector('.kapitel-titel')?.textContent||chapter.id;
    submenu.append(a);
+ }
+ if(section.id==='basis-daten'&&section.querySelector('#projekt-4')){
+   const journal=document.getElementById('basis-journal');
+   if(journal){journal.dataset.navParent=section.id;const a=document.createElement('a');a.href='#basis-journal';a.textContent='Journal & Notebook';submenu.append(a);}
+   if(section.querySelector('#basis-bewertung')){const a=document.createElement('a');a.href='#basis-bewertung';a.textContent='Bewertung';submenu.append(a);}
  }
  link.after(submenu);
  submenus.set(section.id,submenu);

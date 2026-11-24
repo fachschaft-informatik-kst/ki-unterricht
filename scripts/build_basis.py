@@ -32,6 +32,8 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
     course = load_course(ROOT, manifest_path)
     lessons = course["lessons"]
     by_view = {s["id"]: [lesson for lesson in lessons if lesson["view"] == s["id"]] for s in sections}
+    pages_root = (ROOT / manifest_path).parent
+    journal = next((path for path in (pages_root / "basis-daten" / "journal.md", pages_root / "basis-training" / "journal.md") if path.is_file()), None)
     cards = []
     for section in sections:
         slot = section.get("lessonWithoutPlan")
@@ -45,12 +47,15 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
                     f'<p>{html.escape(section["overview"].get("summary", ""))}</p><span class="course-arrow">↗</span></a>'
                 )
             continue
-        lesson = by_view[section["id"]][0]
+        group = by_view[section["id"]]
+        lesson = group[0]
+        first, last = lesson["number"], group[-1]["number"]
+        tag = f"{first}.–{last}. Doppellektion" if first != last else f"{first}. Doppellektion"
         label = html.escape(section["navigation"]["title"])
         summary = html.escape(section.get("overview", {}).get("summary", lesson["goal"]))
         cards.append(
             f'<a class="course-card" href="#{section["id"]}">'
-            f'<span class="tag">{lesson["number"]}. Doppellektion</span><h3>{label}</h3>'
+            f'<span class="tag">{html.escape(tag)}</span><h3>{label}</h3>'
             f'<p>{summary}</p><span class="course-arrow">↗</span></a>'
         )
     pieces = []
@@ -89,19 +94,23 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
 
         content = re.sub(r"<(?:input|select|textarea)\b[^>]*>", mirror_answer, content)
         klass = html.escape(section["class"])
-        project_pages = ((ROOT / manifest_path).parent / "basis-training" / "journal.md").is_file()
-        page_mode = ' data-pages="Fahrplan"' if project_pages and ident in {"basis-daten", "basis-training", "basis-abschluss"} else ""
+        pages = section.get("pages") or ("Fahrplan" if journal and ident in {"basis-daten", "basis-training", "basis-abschluss"} else None)
+        page_mode = f' data-pages="{html.escape(pages)}"' if pages else ""
         pieces.append(f'<section class="{klass}" id="{ident}"{page_mode}>{content}</section>')
         if section.get("lessonWithoutPlan"):
             label = f'{section["lessonWithoutPlan"]["number"]:02d}'
         else:
-            label = f'{by_view[ident][0]["number"]:02d}' if by_view[ident] else section["navigation"]["label"]
+            group = by_view[ident]
+            if group:
+                first, last = group[0]["number"], group[-1]["number"]
+                label = f"{first:02d}–{last:02d}" if first != last else f"{first:02d}"
+            else:
+                label = section["navigation"]["label"]
         nav.append(f'<a href="#{ident}"><span>{label}</span>{html.escape(section["navigation"]["title"])}</a>')
     template = (SOURCE / "index.template.html").read_text(encoding="utf-8")
     # The full picture-project journal is an opt-in course source. Other
     # first-year courses retain their existing journal and storage schema.
-    journal = (ROOT / manifest_path).parent / "basis-training" / "journal.md"
-    if journal.is_file():
+    if journal:
         project_journal = render_fragment(journal.read_text(encoding="utf-8"), journal)
         template = re.sub(r'(<section class="section basis-utility-view" id="basis-journal" tabindex="-1">).*?(</section>)',
                           lambda m: m[1] + project_journal + m[2], template, count=1, flags=re.S)
@@ -109,7 +118,8 @@ def assemble(manifest_path: str = "kurse/bok/1-klasse/kursseiten/manifest.json",
         # Keep the assessment accessible inside the existing project view,
         # without adding a ninth double lesson or extra navigation item.
         for i, piece in enumerate(pieces):
-            if 'id="basis-abschluss"' in piece:
+            rubric_view = "basis-daten" if journal.parent.name == "basis-daten" else "basis-abschluss"
+            if f'id="{rubric_view}"' in piece:
                 pieces[i] = piece.removesuffix('</section>') + ( '<details class="card" id="basis-bewertung"><summary>Bewertungsraster</summary>' + MARKDOWN.render(rubric.read_text(encoding="utf-8")) + '</details></section>')
                 break
     assert template.count("<!-- COURSE -->") == template.count("<!-- NAVIGATION -->") == 1
