@@ -43,7 +43,7 @@ Frank Rosenblatt stellt das Perzeptron vor, ein einfaches lernendes Neuron. Es i
             <!-- MD:START -->
 Joseph Weizenbaum programmiert Eliza. Das Programm antwortet nach festen Textmustern wie eine Therapeutin, und trotzdem fühlen sich viele verstanden.
 <!-- MD:END -->
-            <p class="milestone-chat"><a href="https://moodle.ksstadelhofen.ch/pluginfile.php/122628/mod_resource/content/1/eliza.html" target="_blank" rel="noopener noreferrer">Mit Eliza chatten <span aria-hidden="true">↗</span></a> <small>(Moodle-Anmeldung nötig)</small></p>
+            <p class="milestone-chat"><a href="eliza/" target="_blank" data-popup-window="eliza">Mit Eliza chatten <span aria-hidden="true">↗</span></a></p>
           </details>
         </div></li>
       <li><span class="jahr">1960er/70er</span>

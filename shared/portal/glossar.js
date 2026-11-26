@@ -90,3 +90,17 @@
     });
   }
 })();
+
+
+/* Links mit data-popup-window öffnen eine eigenständige Seite (z. B. den
+   ELIZA-Chat) in einem Pop-up-Fenster. Blockiert der Browser das Fenster,
+   öffnet der Link sie wie gewohnt in einem neuen Tab. */
+document.addEventListener('click',event=>{
+  const link=event.target.closest?.('a[data-popup-window]');
+  if(!link || event.defaultPrevented || event.button!==0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)return;
+  const popup=window.open(link.href,link.dataset.popupWindow,
+    'width=820,height=650,menubar=no,toolbar=no,location=no,status=no,scrollbars=yes,resizable=yes');
+  if(!popup)return;
+  event.preventDefault();
+  popup.focus();
+});
