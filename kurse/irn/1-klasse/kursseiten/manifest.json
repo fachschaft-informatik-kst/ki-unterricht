@@ -27,6 +27,22 @@
       "lessonWithoutPlan": {
         "number": 1
       }
+    },
+    {
+      "id": "basis-lernen",
+      "class": "section",
+      "navigation": {
+        "order": 3,
+        "label": "02",
+        "title": "Wie lernt KI?"
+      },
+      "overview": {
+        "title": "Wie lernt KI?",
+        "summary": "EVA-Modelle · drei Lernarten"
+      },
+      "lessonWithoutPlan": {
+        "number": 2
+      }
     }
   ]
 }

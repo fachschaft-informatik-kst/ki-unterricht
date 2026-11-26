@@ -100,6 +100,16 @@
       "antwort": "Eine Belohnung bewertet den Erfolg einer Handlung, nicht eine vorgegebene Musterantwort."
     },
     {
+      "id": "erfahrungsschatz",
+      "gruppe": "Lernarten",
+      "begriff": "Erfahrungsschatz",
+      "basis": "Das, was ein System aus Beispielen gelernt und behalten hat.",
+      "vertieft": "Die gespeicherten Ergebnisse des Lernens, bei einem künstlichen neuronalen Netz die gelernten Gewichte und Bias-Werte. Er ist nicht dasselbe wie die Trainingsdaten, aus denen er entstanden ist.",
+      "beispiel": "Nach einem Lernschritt stecken die Zahlen w₁ = 0.4, w₂ = 0.4 und b = −0.3 im Erfahrungsschatz des Neurons.",
+      "frage": "Ist der Erfahrungsschatz dasselbe wie die Trainingsbilder?",
+      "antwort": "Nein. Die Trainingsbilder sind die Erfahrungen. Der Erfahrungsschatz ist das, was das Netz daraus als Zahlen behalten hat."
+    },
+    {
       "id": "label",
       "gruppe": "Lernarten",
       "begriff": "Label / Klasse",
