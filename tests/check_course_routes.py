@@ -114,3 +114,16 @@ for course in manifest["courses"]:
     chapters = re.findall(r'<details class="kapitel"[^>]*>', page)
     assert chapters and not any(re.search(r"\sopen[\s>]", tag) for tag in chapters), course["slug"]
 print("PASS IRN-Unterkapitel standardmässig eingeklappt")
+
+# IRN: standalone ELIZA chat, opened as a pop-up from the Eliza milestone.
+for course in manifest["courses"]:
+    chat = dist / course["slug"] / "eliza/index.html"
+    if course["teacher"] != "IRN":
+        assert not chat.exists(), course["slug"]
+        continue
+    html = chat.read_text(encoding="utf-8")
+    assert "function Eliza(" in html and "data-course-theme" not in html, course["slug"]
+    page = (dist / course["slug"] / "index.html").read_text(encoding="utf-8")
+    assert '<a href="eliza/" target="_blank" data-popup-window="eliza">' in page, course["slug"]
+assert "a[data-popup-window]" in (ROOT / "shared/portal/glossar.js").read_text(encoding="utf-8")
+print("PASS IRN-ELIZA-Chat als eigenständige Seite mit Pop-up-Link")

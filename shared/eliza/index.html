@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ELIZA – Chat mit dem ersten Chatbot</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #0c120e;
+    --panel: #131b16;
+    --line: #24352a;
+    --eliza: #7cf59a;
+    --user: #e8ece9;
+    --dim: #8fa697;
+    --accent: #7cf59a;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--user); }
+  body {
+    display: flex; flex-direction: column;
+    height: 100vh; height: 100dvh;
+    min-height: 420px;
+    font-family: var(--sans);
+  }
+  header {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+    padding: 10px 14px; background: var(--panel); border-bottom: 1px solid var(--line);
+  }
+  header h1 { margin: 0; font: 700 20px/1 var(--mono); color: var(--eliza); letter-spacing: 2px; }
+  header .sub { color: var(--dim); font-size: 13px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-left: auto; font-size: 14px; }
+  .controls label { display: inline-flex; align-items: center; gap: 6px; color: var(--user); cursor: pointer; }
+  select, button {
+    font: inherit; font-size: 14px; color: var(--user); background: #1c2821;
+    border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer;
+  }
+  button:hover, select:hover { border-color: var(--accent); }
+  input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); }
+
+  details.about { padding: 0 14px; background: var(--panel); border-bottom: 1px solid var(--line); font-size: 14px; color: var(--dim); }
+  details.about summary { cursor: pointer; padding: 8px 0; color: var(--user); }
+  details.about p { margin: 0 0 10px; max-width: 75ch; line-height: 1.45; }
+
+  #log {
+    flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 16px 14px 8px; font: 16px/1.5 var(--mono);
+  }
+  .msg { margin: 0 0 10px; white-space: pre-wrap; word-wrap: break-word; }
+  .msg .who { display: inline-block; min-width: 7ch; font-weight: 700; }
+  .msg.eliza { color: var(--eliza); }
+  .msg.user { color: var(--user); }
+  .msg.sys { color: var(--dim); font-style: italic; }
+  .dbg {
+    margin: -4px 0 12px 7ch; padding: 6px 10px; border-left: 2px solid var(--line);
+    color: var(--dim); font-size: 13px; line-height: 1.45; white-space: pre-wrap;
+  }
+  .dbg b { color: #b9d8c3; font-weight: 600; }
+  .typing { color: var(--dim); }
+
+  form {
+    display: flex; gap: 8px; align-items: center;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: var(--panel); border-top: 1px solid var(--line);
+  }
+  form .prompt { font: 700 18px var(--mono); color: var(--eliza); }
+  #input {
+    flex: 1; min-width: 0;
+    font: 16px var(--mono); /* 16px verhindert das automatische Zoomen auf iOS */
+    color: var(--user); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px;
+  }
+  #input:focus { outline: none; border-color: var(--accent); }
+  #send { background: #1f3a28; border-color: #2f5c3d; font-weight: 600; padding: 10px 14px; }
+  #status { color: var(--dim); font-size: 13px; min-width: 0; }
+  footer { padding: 4px 14px 6px; font-size: 11px; color: var(--dim); background: var(--panel); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ELIZA</h1>
+  <span class="sub">nach Joseph Weizenbaum (MIT, 1966)</span>
+  <div class="controls">
+    <select id="lang" aria-label="Sprache">
+      <option value="de" selected="selected">Deutsch</option>
+      <option value="en">English (Original)</option>
+    </select>
+    <label><input type="checkbox" id="debug"> Regeln anzeigen</label>
+    <button type="button" id="copy">Verlauf kopieren</button>
+    <button type="button" id="restart">Neu starten</button>
+    <span id="status" aria-live="polite"></span>
+  </div>
+</header>
+
+<details class="about">
+  <summary>Über ELIZA</summary>
+  <p>ELIZA wurde 1966 von Joseph Weizenbaum am MIT entwickelt und gilt als einer der ersten Chatbots. Die bekannteste Rolle von ELIZA ist die einer Psychotherapeutin (Skript «DOCTOR»).</p>
+  <p>ELIZA versteht nichts von dem, was Sie schreiben. Das Programm sucht in Ihrer Eingabe nach <b>Schlüsselwörtern</b>, zerlegt den Satz nach festen <b>Mustern</b> und setzt Teile davon in vorbereitete <b>Antwortvorlagen</b> ein. Dabei werden Pronomen umgedreht: Aus «ich» wird «Sie», aus «mein» wird «Ihr».</p>
+  <p>Schalten Sie «Regeln anzeigen» ein, um bei jeder Antwort zu sehen, welche Regel ELIZA verwendet hat. Die deutsche Fassung ist eine freie Übertragung; «English» entspricht weitgehend dem Original.</p>
+</details>
+
+<div id="log" role="log" aria-live="polite"><p class="msg eliza"><span class="who">ELIZA:</span> Guten Tag. Ich bin ELIZA. Was führt Sie zu mir?</p></div>
+
+<form id="form" autocomplete="off">
+  <span class="prompt" aria-hidden="true">&gt;</span>
+  <input id="input" type="text" placeholder="Ihre Nachricht …" aria-label="Ihre Nachricht" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="sentences" enterkeyhint="send" maxlength="300">
+  <button id="send" type="submit">Senden</button>
+</form>
+<footer>Nachbau von ELIZA für den Unterricht · läuft vollständig im Browser, es werden keine Daten gespeichert oder übertragen. · <span class="ki-hinweis">Diese Seite wurde mit Hilfe von KI erstellt.</span></footer>
+
+<script>
+/*ENGINE-START*/
+var SCRIPTS = {
+de: {
+  you: "SIE",
+  split: /[.!?;]+/,
+  initial: "Guten Tag. Ich bin ELIZA. Was führt Sie zu mir?",
+  final: "Auf Wiedersehen. Es war schön, mit Ihnen zu sprechen.",
+  ended: "(Das Gespräch ist beendet. Klicken Sie auf «Neu starten».)",
+  empty: "Sie sagen ja gar nichts.",
+  quit: ["tschüss", "tschüs", "tschau", "ciao", "adieu", "auf wiedersehen", "ende", "beenden", "bye", "goodbye", "quit"],
+  pre: { "weiß": "weiss", "großmutter": "grossmutter", "großvater": "grossvater", "genießen": "geniessen" },
+  post: {
+    "ich": "Sie", "mich": "Sie", "mir": "Ihnen",
+    "mein": "Ihr", "meine": "Ihre", "meinen": "Ihren", "meinem": "Ihrem", "meiner": "Ihrer", "meines": "Ihres",
+    "bin": "sind", "war": "waren", "habe": "haben", "hatte": "hatten", "kann": "können", "konnte": "konnten",
+    "will": "wollen", "wollte": "wollten", "muss": "müssen", "musste": "mussten", "möchte": "möchten",
+    "darf": "dürfen", "soll": "sollen", "werde": "werden", "würde": "würden", "wäre": "wären", "hätte": "hätten",
+    "weiss": "wissen",
+    "du": "ich", "dich": "mich", "dir": "mir", "bist": "bin", "ihnen": "mir",
+    "dein": "mein", "deine": "meine", "deinen": "meinen", "deinem": "meinem", "deiner": "meiner", "deines": "meines"
+  },
+  post2: {},
+  syn: {
+    traurig: ["traurig", "unglücklich", "deprimiert", "niedergeschlagen", "krank", "einsam", "müde", "gestresst", "wütend"],
+    gluecklich: ["glücklich", "froh", "fröhlich", "zufrieden", "erleichtert"],
+    familie: ["mutter", "vater", "mama", "papa", "schwester", "bruder", "eltern", "familie", "frau", "mann", "kinder", "kind", "sohn", "tochter", "oma", "opa", "grossmutter", "grossvater"],
+    wunsch: ["möchte", "will", "wünsche", "brauche"],
+    glaube: ["glaube", "denke", "finde"],
+    mein: ["mein", "meine", "meinen", "meinem", "meiner", "meines"],
+    wenn: ["wenn", "falls"]
+  },
+  keys: [
+    { w: ["computer", "computern", "maschine", "maschinen", "roboter", "ki", "programm", "chatbot"], rank: 50, d: [
+      { p: "*", r: ["Machen Computer Ihnen Sorgen?", "Warum erwähnen Sie Computer?", "Was haben Maschinen Ihrer Meinung nach mit Ihrem Problem zu tun?", "Glauben Sie nicht, dass Computer Menschen helfen können?", "Was genau beunruhigt Sie an Maschinen?", "Was halten Sie von Maschinen?"] } ] },
+    { w: ["name", "namen", "heisse", "heiße"], rank: 15, d: [
+      { p: "*", r: ["Namen interessieren mich nicht.", "Ich sagte Ihnen bereits: Namen interessieren mich nicht. Bitte fahren Sie fort."] } ] },
+    { w: ["gleich", "ähnlich", "genauso", "gleiche", "ähnlichkeit"], rank: 10, d: [
+      { p: "*", r: ["In welcher Weise?", "Welche Ähnlichkeit sehen Sie?", "Was bedeutet diese Ähnlichkeit für Sie?", "Welche anderen Zusammenhänge sehen Sie?", "Könnte es da wirklich einen Zusammenhang geben?", "Wie meinen Sie das?"] } ] },
+    { w: ["erinnere", "erinnern", "erinnerst", "erinnert"], rank: 5, d: [
+      { p: "* ich erinnere mich an *", r: ["Denken Sie oft an (2)?", "Woran denken Sie sonst noch, wenn Sie an (2) denken?", "Woran erinnern Sie sich sonst noch?", "Warum erinnern Sie sich gerade jetzt an (2)?"] },
+      { p: "* erinnern sie sich an *", r: ["Dachten Sie, ich würde (2) vergessen?", "Warum sollte ich mich jetzt an (2) erinnern?"] },
+      { p: "* erinnerst du dich an *", r: ["Dachten Sie, ich würde (2) vergessen?", "Warum sollte ich mich jetzt an (2) erinnern?"] },
+      { p: "* erinnert mich an *", r: ["goto gleich"] },
+      { p: "*", r: ["Woran erinnern Sie sich sonst noch?", "Erinnerungen können wichtig sein. Erzählen Sie mehr."] } ] },
+    { w: ["wenn", "falls"], rank: 3, d: [
+      { p: "* @wenn *", r: ["Halten Sie es für wahrscheinlich, dass (3)?", "Wünschen Sie sich, dass (3)?", "Was wissen Sie darüber, dass (3)?", "Wirklich – (2) (3)?"] } ] },
+    { w: ["traum", "träume", "träumte", "geträumt", "träumen"], rank: 3, d: [
+      { p: "*", r: ["Was bedeutet dieser Traum für Sie?", "Träumen Sie oft?", "Welche Personen kommen in Ihren Träumen vor?", "Glauben Sie, dass Träume etwas mit Ihrem Problem zu tun haben?"] } ] },
+    { w: ["mein", "meine", "meinen", "meinem", "meiner", "meines"], rank: 2, d: [
+      { p: "* @mein *", mem: true, r: ["Vorhin sagten Sie: «(2) (3)». Erzählen Sie mehr darüber.", "Hat das etwas damit zu tun, dass Sie sagten: «(2) (3)»?", "Kommen wir noch einmal darauf zurück: «(2) (3)»."] },
+      { p: "* @mein @familie *", r: ["Erzählen Sie mir mehr über Ihre Familie.", "Wer in Ihrer Familie ist Ihnen sonst noch wichtig?", "Woran denken Sie, wenn Sie an Ihre Familie denken?"] },
+      { p: "* @mein *", r: ["Warum ist Ihnen das wichtig?", "Sie sagen «(2) (3)» – warum erzählen Sie mir das?", "Erzählen Sie mehr darüber.", "Bedeutet Ihnen das viel?"] } ] },
+    { w: ["alle", "jeder", "jede", "niemand", "keiner"], rank: 2, d: [
+      { p: "*", r: ["Wirklich – alle?", "Denken Sie dabei an jemand Bestimmten?", "Wer zum Beispiel?", "Können Sie an ein bestimmtes Beispiel denken?"] } ] },
+    { w: ["immer", "nie", "niemals", "ständig"], rank: 1, d: [
+      { p: "*", r: ["Können Sie an ein bestimmtes Beispiel denken?", "Wann zum Beispiel?", "An welches Ereignis denken Sie?", "Wirklich – immer?"] } ] },
+    { w: ["mutter", "vater", "mama", "papa", "schwester", "bruder", "eltern", "familie", "sohn", "tochter", "oma", "opa", "grossmutter", "grossvater"], rank: 1, d: [
+      { p: "*", r: ["Erzählen Sie mir mehr über Ihre Familie.", "Wie ist Ihr Verhältnis zu Ihrer Familie?", "Spielt Ihre Familie eine wichtige Rolle in Ihrem Leben?"] } ] },
+    { w: ["schule", "lehrer", "lehrerin", "prüfung", "prüfungen", "test", "noten", "note", "hausaufgaben", "unterricht"], rank: 1, d: [
+      { p: "*", r: ["Wie geht es Ihnen in der Schule?", "Was beschäftigt Sie daran besonders?", "Erzählen Sie mehr über die Schule."] } ] },
+    { w: ["ich"], rank: 0, d: [
+      { p: "* ich @wunsch *", r: ["Warum ist Ihnen das so wichtig?", "Angenommen, Sie bekämen es bald – was würde sich ändern?", "Was hält Sie davon ab?", "Was würde es Ihnen bedeuten, wenn dieser Wunsch in Erfüllung ginge?"] },
+      { p: "* ich bin nicht *", r: ["Warum sind Sie nicht (2)?", "Möchten Sie gerne (2) sein?", "Seit wann sind Sie nicht (2)?"] },
+      { p: "* ich bin * @traurig *", r: ["Es tut mir leid zu hören, dass Sie (3) sind.", "Glauben Sie, dass es Ihnen hilft, mit mir zu sprechen?", "Ich bin sicher, es ist nicht angenehm, (3) zu sein.", "Können Sie erklären, was Sie (3) gemacht hat?"] },
+      { p: "* ich bin * @gluecklich *", r: ["Wie habe ich Ihnen geholfen, (3) zu sein?", "Was macht Sie gerade jetzt (3)?", "Können Sie erklären, warum Sie plötzlich (3) sind?"] },
+      { p: "* ich fühle mich *", r: ["Erzählen Sie mir mehr über dieses Gefühl.", "Fühlen Sie sich oft (2)?", "Geniessen Sie es, sich (2) zu fühlen?", "Woran erinnert Sie dieses Gefühl?"] },
+      { p: "* ich @glaube *", r: ["Glauben Sie das wirklich?", "Aber Sie sind sich nicht sicher, (3)?", "Zweifeln Sie daran, (3)?"] },
+      { p: "* ich bin *", r: ["Sind Sie zu mir gekommen, weil Sie (2) sind?", "Wie lange sind Sie schon (2)?", "Glauben Sie, es ist normal, (2) zu sein?", "Gefällt es Ihnen, (2) zu sein?"] },
+      { p: "* ich kann nicht *", r: ["Woher wissen Sie, dass Sie nicht (2) können?", "Haben Sie es versucht?", "Vielleicht könnten Sie jetzt (2).", "Möchten Sie (2) können?"] },
+      { p: "* kann ich *", r: ["Ob Sie (2) können, hängt mehr von Ihnen ab als von mir.", "Möchten Sie (2) können?", "Vielleicht wollen Sie gar nicht (2)?"] },
+      { p: "* ich * dich *", r: ["Warum sagen Sie das über mich?", "Sprechen wir lieber über Sie, nicht über mich.", "Was löst das in Ihnen aus?"] },
+      { p: "* ich * sie *", r: ["Warum erzählen Sie mir das?", "Was löst das in Ihnen aus?"] },
+      { p: "*", r: ["Können Sie das genauer ausführen?", "Sagen Sie das aus einem bestimmten Grund?", "Das ist interessant. Erzählen Sie weiter."] } ] },
+    { w: ["du", "dich", "dir", "dein", "deine", "bist", "kannst"], rank: 0, d: [
+      { p: "* du bist *", r: ["Warum interessiert es Sie, ob ich (2) bin oder nicht?", "Wäre es Ihnen lieber, wenn ich nicht (2) wäre?", "Vielleicht bin ich (2) in Ihrer Fantasie."] },
+      { p: "* kannst du *", r: ["Sie glauben, ich kann (2), nicht wahr?", "Sie möchten, dass ich (2) kann.", "Vielleicht möchten Sie selbst (2) können?"] },
+      { p: "* du * mich *", r: ["Warum glauben Sie das von mir?", "Was lässt Sie das über mich denken?", "Wirklich?"] },
+      { p: "*", r: ["Wir sprechen über Sie, nicht über mich.", "Oh, über mich?", "Sie sprechen doch nicht wirklich über mich, oder?", "Was fühlen Sie gerade jetzt?"] } ] },
+    { w: ["sie", "können"], rank: 0, d: [
+      { p: "* sind sie *", r: ["Warum interessiert es Sie, ob ich (2) bin oder nicht?", "Wäre es Ihnen lieber, wenn ich nicht (2) wäre?", "Vielleicht bin ich (2) in Ihrer Fantasie."] },
+      { p: "* können sie *", r: ["Sie glauben, ich kann (2), nicht wahr?", "Sie möchten, dass ich (2) kann.", "Vielleicht möchten Sie selbst (2) können?"] } ] },
+    { w: ["warum", "wieso", "weshalb"], rank: 0, d: [
+      { p: "* @warum kann ich nicht *", r: ["Glauben Sie, Sie sollten (3) können?", "Möchten Sie (3) können?"] },
+      { p: "*", r: ["goto was"] } ] },
+    { w: ["was", "wie", "wer", "wann", "wo"], rank: 0, d: [
+      { p: "*", r: ["Warum fragen Sie?", "Interessiert Sie diese Frage?", "Welche Antwort würde Ihnen am meisten gefallen?", "Was glauben Sie selbst?", "Beschäftigen Sie solche Fragen oft?", "Was möchten Sie wirklich wissen?"] } ] },
+    { w: ["weil", "denn"], rank: 0, d: [
+      { p: "*", r: ["Ist das der wirkliche Grund?", "Fallen Ihnen keine anderen Gründe ein?", "Erklärt dieser Grund noch etwas anderes?", "Welche anderen Gründe könnte es geben?"] } ] },
+    { w: ["vielleicht", "eventuell", "möglicherweise", "wahrscheinlich"], rank: 0, d: [
+      { p: "*", r: ["Sie scheinen sich nicht ganz sicher zu sein.", "Warum dieser unsichere Ton?", "Können Sie nicht etwas entschiedener sein?", "Wissen Sie es nicht?"] } ] },
+    { w: ["entschuldigung", "entschuldige", "verzeihung", "sorry", "leid"], rank: 0, d: [
+      { p: "*", r: ["Bitte entschuldigen Sie sich nicht.", "Entschuldigungen sind nicht nötig.", "Welche Gefühle haben Sie, wenn Sie sich entschuldigen?"] } ] },
+    { w: ["hallo", "hi", "hey", "grüezi", "sali", "servus", "grüss"], rank: 0, d: [
+      { p: "*", r: ["Guten Tag. Bitte schildern Sie Ihr Problem.", "Hallo. Was beschäftigt Sie?"] } ] },
+    { w: ["ja", "jawohl", "genau"], rank: 0, d: [
+      { p: "*", r: ["Sie scheinen sich ziemlich sicher zu sein.", "Sie sind sich sicher.", "Ich verstehe.", "Aha."] } ] },
+    { w: ["nein", "nö", "nee"], rank: 0, d: [
+      { p: "*", r: ["Sagen Sie nur nein, um negativ zu sein?", "Sie klingen ziemlich ablehnend.", "Warum nicht?", "Warum «nein»?"] } ] }
+  ],
+  xnone: ["Ich bin nicht sicher, ob ich Sie richtig verstehe.", "Bitte fahren Sie fort.", "Was sagt Ihnen das?", "Beschäftigen Sie solche Dinge oft?", "Das ist interessant. Erzählen Sie mehr.", "Können Sie das genauer erklären?", "Wie fühlen Sie sich dabei?"]
+},
+
+en: {
+  you: "YOU",
+  split: /[.!?;,]+|\bbut\b/i,
+  initial: "How do you do. Please tell me your problem.",
+  final: "Goodbye. Thank you for talking to me.",
+  ended: "(The conversation has ended. Click «Neu starten» to begin again.)",
+  empty: "You don't seem to be saying anything.",
+  quit: ["bye", "goodbye", "quit", "exit"],
+  pre: { "i'm": "i am", "you're": "you are", "dont": "don't", "cant": "can't", "wont": "won't", "dreamt": "dreamed", "dreams": "dream", "recollect": "remember", "certainly": "yes", "machine": "computer", "machines": "computer", "computers": "computer" },
+  post: { "am": "are", "your": "my", "me": "you", "myself": "yourself", "yourself": "myself", "i": "you", "you": "I", "my": "your", "mine": "yours", "yours": "mine", "i've": "you've", "you've": "I've", "i'd": "you'd", "you'd": "I'd" },
+  post2: { "you are": "I am", "i am": "you are", "you were": "I was", "i was": "you were", "are you": "am I", "am i": "are you" },
+  syn: {
+    belief: ["think", "believe", "wish"],
+    family: ["mother", "mom", "mum", "father", "dad", "sister", "brother", "wife", "husband", "children", "child", "son", "daughter"],
+    desire: ["want", "need"],
+    sad: ["unhappy", "depressed", "sick", "sad", "lonely", "tired"],
+    happy: ["happy", "elated", "glad", "better"]
+  },
+  keys: [
+    { w: ["computer", "robot", "ai"], rank: 50, d: [
+      { p: "*", r: ["Do computers worry you?", "Why do you mention computers?", "What do you think machines have to do with your problem?", "Don't you think computers can help people?", "What about machines worries you?", "What do you think about machines?"] } ] },
+    { w: ["name"], rank: 15, d: [
+      { p: "*", r: ["I am not interested in names.", "I've told you before, I don't care about names. Please continue."] } ] },
+    { w: ["alike", "same", "similar"], rank: 10, d: [
+      { p: "*", r: ["In what way?", "What resemblance do you see?", "What does that similarity suggest to you?", "What other connections do you see?", "What do you suppose that resemblance means?", "Could there really be some connection?", "How?"] } ] },
+    { w: ["remember"], rank: 5, d: [
+      { p: "* i remember *", r: ["Do you often think of (2)?", "Does thinking of (2) bring anything else to mind?", "What else do you remember?", "Why do you remember (2) just now?"] },
+      { p: "* do you remember *", r: ["Did you think I would forget (2)?", "Why do you think I should recall (2) now?", "What about (2)?"] },
+      { p: "*", r: ["What else do you remember?"] } ] },
+    { w: ["if"], rank: 3, d: [
+      { p: "* if *", r: ["Do you think it's likely that (2)?", "Do you wish that (2)?", "What do you know about (2)?", "Really, if (2)?"] } ] },
+    { w: ["dream", "dreamed"], rank: 3, d: [
+      { p: "*", r: ["What does that dream suggest to you?", "Do you dream often?", "What persons appear in your dreams?", "Do you believe that dreams have something to do with your problem?"] } ] },
+    { w: ["my"], rank: 2, d: [
+      { p: "* my *", mem: true, r: ["Let's discuss further why your (2).", "Earlier you said your (2).", "Does that have anything to do with the fact that your (2)?"] },
+      { p: "* my * @family *", r: ["Tell me more about your family.", "Who else in your family (4)?", "Your (3)?", "What else comes to mind when you think of your (3)?"] },
+      { p: "* my *", r: ["Your (2)?", "Why do you say your (2)?", "Does that suggest anything else which belongs to you?", "Is it important to you that your (2)?"] } ] },
+    { w: ["was"], rank: 2, d: [
+      { p: "* was i *", r: ["What if you were (2)?", "Do you think you were (2)?", "Were you (2)?", "What would it mean if you were (2)?"] },
+      { p: "* i was *", r: ["Were you really?", "Why do you tell me you were (2) now?", "Perhaps I already know you were (2)."] },
+      { p: "* was you *", r: ["Would you like to believe I was (2)?", "What suggests that I was (2)?", "What do you think?", "Perhaps I was (2)."] } ] },
+    { w: ["everyone", "everybody", "nobody", "noone"], rank: 2, d: [
+      { p: "*", r: ["Really, everyone?", "Surely not everyone.", "Can you think of anyone in particular?", "Who, for example?", "Are you thinking of a very special person?"] } ] },
+    { w: ["always"], rank: 1, d: [
+      { p: "*", r: ["Can you think of a specific example?", "When?", "What incident are you thinking of?", "Really, always?"] } ] },
+    { w: ["i"], rank: 0, d: [
+      { p: "* i @desire *", r: ["What would it mean to you if you got (3)?", "Why do you want (3)?", "Suppose you got (3) soon.", "What if you never got (3)?"] },
+      { p: "* i am not *", r: ["Why are you not (2)?", "Would you like to be (2)?", "How long have you not been (2)?"] },
+      { p: "* i am * @sad *", r: ["I am sorry to hear that you are (3).", "Do you think coming here will help you not to be (3)?", "I'm sure it's not pleasant to be (3).", "Can you explain what made you (3)?"] },
+      { p: "* i am * @happy *", r: ["How have I helped you to be (3)?", "What makes you (3) just now?", "Can you explain why you are suddenly (3)?"] },
+      { p: "* i feel *", r: ["Tell me more about such feelings.", "Do you often feel (2)?", "Do you enjoy feeling (2)?", "Of what does feeling (2) remind you?"] },
+      { p: "* i @belief *", r: ["Do you really think so?", "But you are not sure (3)?", "Do you really doubt (3)?"] },
+      { p: "* i am *", r: ["Is it because you are (2) that you came to me?", "How long have you been (2)?", "Do you believe it is normal to be (2)?", "Do you enjoy being (2)?"] },
+      { p: "* i can't *", r: ["How do you know that you can't (2)?", "Have you tried?", "Perhaps you could (2) now.", "Do you really want to be able to (2)?"] },
+      { p: "* i don't *", r: ["Don't you really (2)?", "Why don't you (2)?", "Do you wish to be able to (2)?", "Does that trouble you?"] },
+      { p: "* i * you *", r: ["Perhaps in your fantasies we (2) each other.", "Do you wish to (2) me?", "You seem to need to (2) me.", "Do you (2) anyone else?"] },
+      { p: "*", r: ["You say (1)?", "Can you elaborate on that?", "Do you say (1) for some special reason?", "That's quite interesting."] } ] },
+    { w: ["you"], rank: 0, d: [
+      { p: "* you remind me of *", r: ["goto alike"] },
+      { p: "* are you *", r: ["Why are you interested in whether I am (2) or not?", "Would you prefer if I weren't (2)?", "Perhaps I am (2) in your fantasies.", "Do you sometimes think I am (2)?"] },
+      { p: "* you are *", r: ["What makes you think I am (2)?", "Does it please you to believe I am (2)?", "Do you sometimes wish you were (2)?", "Perhaps you would like to be (2)."] },
+      { p: "* can you *", r: ["You believe I can (2), don't you?", "You want me to be able to (2).", "Perhaps you would like to be able to (2) yourself."] },
+      { p: "* you * me *", r: ["Why do you think I (2) you?", "You like to think I (2) you, don't you?", "What makes you think I (2) you?", "Really, I (2) you?"] },
+      { p: "*", r: ["We were discussing you, not me.", "Oh, I?", "You're not really talking about me, are you?", "What are your feelings now?"] } ] },
+    { w: ["your"], rank: 0, d: [
+      { p: "* your *", r: ["Why are you concerned over my (2)?", "What about your own (2)?", "Are you worried about someone else's (2)?", "Really, my (2)?"] } ] },
+    { w: ["can"], rank: 0, d: [
+      { p: "* can i *", r: ["Whether or not you can (2) depends on you more than on me.", "Do you want to be able to (2)?", "Perhaps you don't want to (2)."] } ] },
+    { w: ["why"], rank: 0, d: [
+      { p: "* why don't you *", r: ["Do you believe I don't (2)?", "Perhaps I will (2) in good time.", "Should you (2) yourself?"] },
+      { p: "* why can't i *", r: ["Do you think you should be able to (2)?", "Do you want to be able to (2)?"] },
+      { p: "*", r: ["goto what"] } ] },
+    { w: ["what", "how", "when", "where", "who"], rank: 0, d: [
+      { p: "*", r: ["Why do you ask?", "Does that question interest you?", "What is it you really want to know?", "Are such questions much on your mind?", "What answer would please you most?", "What do you think?", "What comes to mind when you ask that?"] } ] },
+    { w: ["because"], rank: 0, d: [
+      { p: "*", r: ["Is that the real reason?", "Don't any other reasons come to mind?", "Does that reason seem to explain anything else?", "What other reasons might there be?"] } ] },
+    { w: ["perhaps", "maybe"], rank: 0, d: [
+      { p: "*", r: ["You don't seem quite certain.", "Why the uncertain tone?", "Can't you be more positive?", "You aren't sure?", "Don't you know?"] } ] },
+    { w: ["sorry", "apologize", "apologise"], rank: 0, d: [
+      { p: "*", r: ["Please don't apologize.", "Apologies are not necessary.", "What feelings do you have when you apologize?"] } ] },
+    { w: ["hello", "hi", "hey"], rank: 0, d: [
+      { p: "*", r: ["How do you do. Please state your problem.", "Hi. What seems to be your problem?"] } ] },
+    { w: ["yes"], rank: 0, d: [
+      { p: "*", r: ["You seem to be quite positive.", "You are sure.", "I see.", "I understand."] } ] },
+    { w: ["no", "nope"], rank: 0, d: [
+      { p: "*", r: ["Are you saying no just to be negative?", "You are being a bit negative.", "Why not?", "Why 'no'?"] } ] }
+  ],
+  xnone: ["I'm not sure I understand you fully.", "Please go on.", "What does that suggest to you?", "Do you feel strongly about discussing such things?", "That is interesting. Please continue.", "Tell me more about that.", "Does talking about this bother you?"]
+}
+};
+// Synonym für "warum" (deutsches Muster "* @warum kann ich nicht *")
+SCRIPTS.de.syn.warum = ["warum", "wieso", "weshalb"];
+
+function Eliza(script) {
+  this.s = script;
+  this.keyByName = {};
+  for (var i = 0; i < script.keys.length; i++) {
+    var k = script.keys[i];
+    this.keyByName[k.w[0]] = k;
+    for (var j = 0; j < k.d.length; j++) {
+      k.d[j].pp = k.d[j].p.split(" ").map(function (t) {
+        return (t === "*" || t.charAt(0) === "@") ? t : t.toLowerCase();
+      });
+    }
+  }
+  // Englisch: "alike" ist das Ziel von "goto alike"; Deutsch: "gleich"
+  this.reset();
+}
+Eliza.prototype.reset = function () { this.counters = {}; this.mem = []; this.xi = 0; this.done = false; };
+
+Eliza.prototype.tokenize = function (text) {
+  var pre = this.s.pre, out = [];
+  var t = String(text).replace(/[’`´]/g, "'").replace(/[^\p{L}\p{N}'\-]+/gu, " ").trim();
+  if (!t) return out;
+  t.split(/\s+/).forEach(function (w) {
+    w = w.replace(/^['\-]+|['\-]+$/g, "");
+    if (!w) return;
+    var r = pre[w.toLowerCase()];
+    if (r) r.split(" ").forEach(function (x) { out.push(x); });
+    else out.push(w);
+  });
+  return out;
+};
+
+// Musterabgleich auf Wortebene: "*" = beliebig viele Wörter, "@gruppe" = ein Wort aus der Synonymgruppe
+Eliza.prototype.match = function (pat, words) {
+  var syn = this.s.syn, caps = [];
+  function rec(pi, wi) {
+    if (pi === pat.length) return wi === words.length;
+    var t = pat[pi];
+    if (t === "*") {
+      for (var k = wi; k <= words.length; k++) {
+        caps.push(words.slice(wi, k).join(" "));
+        if (rec(pi + 1, k)) return true;
+        caps.pop();
+      }
+      return false;
+    }
+    if (wi >= words.length) return false;
+    var w = words[wi].toLowerCase();
+    if (t.charAt(0) === "@") {
+      var g = syn[t.slice(1)] || [];
+      if (g.indexOf(w) < 0) return false;
+      caps.push(words[wi]);
+      if (rec(pi + 1, wi + 1)) return true;
+      caps.pop();
+      return false;
+    }
+    return w === t && rec(pi + 1, wi + 1);
+  }
+  return rec(0, 0) ? caps : null;
+};
+
+// Pronomen umdrehen: ich -> Sie, mein -> Ihr, ...
+Eliza.prototype.reflect = function (str) {
+  var post = this.s.post, post2 = this.s.post2, w = str.split(" "), out = [];
+  for (var i = 0; i < w.length; i++) {
+    var lw = w[i].toLowerCase();
+    if (i + 1 < w.length) {
+      var two = lw + " " + w[i + 1].toLowerCase();
+      if (post2[two]) { out.push(post2[two]); i++; continue; }
+    }
+    out.push(post.hasOwnProperty(lw) ? post[lw] : w[i]);
+  }
+  return out.join(" ");
+};
+
+Eliza.prototype.fill = function (tpl, caps) {
+  var self = this, ok = true;
+  var out = tpl.replace(/\((\d)\)/g, function (m, n) {
+    var c = caps[n - 1];
+    if (!c || !c.trim()) { ok = false; return ""; }
+    return self.reflect(c);
+  });
+  if (!ok) return null;
+  out = out.replace(/\s+/g, " ").replace(/\s+([?.!,»])/g, "$1").replace(/«\s+/g, "«").trim();
+  return out.charAt(0).toUpperCase() + out.slice(1);
+};
+
+Eliza.prototype.tryKey = function (k, words, hit, depth) {
+  if (!k || depth > 3) return null;
+  var self = this, i, caps;
+  // Gedächtnis-Regeln: Antwort für später merken
+  for (i = 0; i < k.d.length; i++) {
+    if (!k.d[i].mem) continue;
+    caps = this.match(k.d[i].pp, words);
+    if (!caps) continue;
+    var r = k.d[i].r, tpl = r[Math.floor(Math.random() * r.length)], txt = this.fill(tpl, caps);
+    if (txt && this.mem.length < 5 && !this.mem.some(function (m) { return m.text === txt; }))
+      this.mem.push({ text: txt, key: k.w[0], pattern: k.d[i].p, template: tpl });
+  }
+  for (i = 0; i < k.d.length; i++) {
+    var d = k.d[i];
+    if (d.mem) continue;
+    caps = this.match(d.pp, words);
+    if (!caps) continue;
+    var id = k.w[0] + "#" + i, n = d.r.length, start = this.counters[id] || 0;
+    for (var j = 0; j < n; j++) {
+      var idx = (start + j) % n, t = d.r[idx];
+      if (t.indexOf("goto ") === 0) {
+        this.counters[id] = idx + 1;
+        var res = this.tryKey(this.keyByName[t.slice(5)], words, hit, depth + 1);
+        if (res) { res.dbg.via = (res.dbg.via || []).concat([k.w[0]]); return res; }
+        break;
+      }
+      var out = this.fill(t, caps);
+      if (out === null) continue; // Vorlage braucht einen Teil, der leer ist
+      this.counters[id] = idx + 1;
+      return { text: out, dbg: { type: "rule", key: k.w[0], hit: hit, rank: k.rank, pattern: d.p,
+        caps: caps.map(function (c) { return self.reflect(c); }), template: t } };
+    }
+  }
+  return null;
+};
+
+Eliza.prototype.respond = function (input) {
+  var s = this.s, self = this;
+  if (this.done) return { text: s.ended, dbg: { type: "ended" }, sys: true };
+  var all = this.tokenize(input).join(" ").toLowerCase();
+  if (!all) return { text: s.empty, dbg: { type: "empty" } };
+  var allNoName = all.replace(/\s*eliza$/, "");
+  if (s.quit.indexOf(allNoName) >= 0) { this.done = true; return { text: s.final, dbg: { type: "quit" } }; }
+
+  var clauses = String(input).split(s.split);
+  for (var c = 0; c < clauses.length; c++) {
+    var words = this.tokenize(clauses[c]);
+    if (!words.length) continue;
+    var lw = words.map(function (w) { return w.toLowerCase(); });
+    var cands = [];
+    s.keys.forEach(function (k) {
+      var pos = -1;
+      k.w.forEach(function (a) { var p = lw.indexOf(a); if (p >= 0 && (pos < 0 || p < pos)) pos = p; });
+      if (pos >= 0) cands.push({ k: k, pos: pos, hit: words[pos] });
+    });
+    if (!cands.length) continue;
+    cands.sort(function (a, b) { return (b.k.rank - a.k.rank) || (a.pos - b.pos); });
+    for (var i = 0; i < cands.length; i++) {
+      var r = this.tryKey(cands[i].k, words, cands[i].hit, 0);
+      if (r) { r.dbg.cands = cands.map(function (x) { return x.hit + " (" + x.k.rank + ")"; }); return r; }
+    }
+  }
+  if (this.mem.length) {
+    var m = this.mem.shift();
+    return { text: m.text, dbg: { type: "mem", key: m.key, pattern: m.pattern, template: m.template } };
+  }
+  return { text: s.xnone[this.xi++ % s.xnone.length], dbg: { type: "none" } };
+};
+/*ENGINE-END*/
+
+(function () {
+  var log = document.getElementById("log"), form = document.getElementById("form"),
+      input = document.getElementById("input"), langSel = document.getElementById("lang"),
+      dbgBox = document.getElementById("debug"), status = document.getElementById("status");
+  var eliza, transcript = [], busy = false;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function scroll() { log.scrollTop = log.scrollHeight; }
+
+  function add(cls, who, text) {
+    var p = document.createElement("p");
+    p.className = "msg " + cls;
+    p.innerHTML = (who ? '<span class="who">' + esc(who) + ":</span> " : "") + esc(text);
+    log.appendChild(p);
+    if (who) transcript.push(who + ": " + text);
+    scroll();
+    return p;
+  }
+
+  function explain(d) {
+    var q = function (s) { return "«" + esc(s) + "»"; };
+    if (d.type === "rule") {
+      var parts = d.caps.map(function (c, i) { return "(" + (i + 1) + ") = " + q(c); }).join("   ");
+      return "<b>Gefundene Schlüsselwörter (Rang):</b> " + esc((d.cands || []).join(", ")) +
+        "\n<b>Verwendet:</b> " + q(d.hit) + " → Regel " + q(d.key) + ", Rang " + d.rank +
+        (d.via ? " (umgeleitet von " + q(d.via.join(", ")) + ")" : "") +
+        "\n<b>Zerlegungsmuster:</b> " + esc(d.pattern) +
+        (parts ? "\n<b>Teile (Pronomen umgedreht):</b> " + parts : "") +
+        "\n<b>Antwortvorlage:</b> " + esc(d.template);
+    }
+    if (d.type === "mem") return "<b>Kein passendes Schlüsselwort.</b> ELIZA holt eine Antwort aus dem Gedächtnis, die sie sich bei einem früheren Satz mit " + q(d.key) + " gemerkt hat.\n<b>Muster:</b> " + esc(d.pattern) + "\n<b>Vorlage:</b> " + esc(d.template);
+    if (d.type === "none") return "<b>Kein Schlüsselwort gefunden</b> und nichts im Gedächtnis → allgemeine Ausweichantwort.";
+    if (d.type === "quit") return "<b>Abschiedswort erkannt</b> → Gespräch wird beendet.";
+    if (d.type === "empty") return "<b>Leere Eingabe.</b>";
+    return "";
+  }
+
+  function addDebug(d) {
+    var html = explain(d);
+    if (!html) return;
+    var div = document.createElement("div");
+    div.className = "dbg";
+    div.innerHTML = html;
+    div.hidden = !dbgBox.checked;
+    log.appendChild(div);
+    scroll();
+  }
+
+  function start() {
+    eliza = new Eliza(SCRIPTS[langSel.value]);
+    transcript = [];
+    log.innerHTML = "";
+    busy = false;
+    add("eliza", "ELIZA", eliza.s.initial);
+    input.placeholder = langSel.value === "de" ? "Ihre Nachricht …" : "Your message …";
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var text = input.value.trim();
+    input.focus();
+    if (!text || busy) return;
+    input.value = "";
+    add("user", eliza.s.you, text);
+    var res = eliza.respond(text);
+    busy = true;
+    var typing = add("eliza typing", "", "…");
+    setTimeout(function () {
+      typing.remove();
+      add(res.sys ? "sys" : "eliza", res.sys ? "" : "ELIZA", res.text);
+      if (res.sys) transcript.push(res.text);
+      addDebug(res.dbg);
+      busy = false;
+    }, 350 + Math.random() * 500);
+  });
+
+  dbgBox.addEventListener("change", function () {
+    var list = log.querySelectorAll(".dbg");
+    for (var i = 0; i < list.length; i++) list[i].hidden = !dbgBox.checked;
+    scroll();
+  });
+
+  langSel.addEventListener("change", start);
+  document.getElementById("restart").addEventListener("click", function () { start(); input.focus(); });
+
+  function flash(msg) { status.textContent = msg; setTimeout(function () { status.textContent = ""; }, 2500); }
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+    var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+    flash(ok ? "Kopiert ✓" : "Kopieren nicht möglich");
+  }
+  document.getElementById("copy").addEventListener("click", function () {
+    var text = transcript.join("\n");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { flash("Kopiert ✓"); }, function () { fallbackCopy(text); });
+    } else fallbackCopy(text);
+  });
+
+  start();
+})();
+</script>
+
+
+</body></html>

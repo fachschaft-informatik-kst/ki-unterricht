@@ -191,6 +191,10 @@ def copy_course_assets(course: dict, target: Path) -> None:
                          ("fotostudio_core.js", "fotostudio_core.js"),
                          ("fotostudio_storage.js", "fotostudio_storage.js")):
         shutil.copy2(base / "content/ki_projekt" / source, studio / name)
+    if course["teacher"] == "IRN":
+        # Eigenständige ELIZA-Chatseite; der Meilenstein Eliza öffnet sie als Pop-up.
+        (target / "eliza").mkdir(exist_ok=True)
+        shutil.copy2(ROOT / "shared/eliza/index.html", target / "eliza/index.html")
     runtime = target / "runtime"
     runtime.mkdir(exist_ok=True)
     for name in ("ki_foto_tools.py", "ki_projekt_tools.py", "foto_uebungsdaten.json"):
@@ -231,6 +235,8 @@ def build(out: Path, courses: list[dict] | None = None) -> None:
             for file in target.rglob("*"):
                 if not file.is_file() or file.suffix not in {".html", ".css", ".js"}:
                     continue
+                if file.parent == target / "eliza":
+                    continue  # ELIZA-Chat bleibt unverändert (eigenes Aussehen, KI-Hinweis im Footer)
                 content = add_path_depth(file.read_text(encoding="utf-8"))
                 if file.suffix == ".html":
                     if file.parent == target / "studio":

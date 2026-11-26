@@ -120,9 +120,9 @@ assert.deepEqual((await loadTeacherCourses("token",courseMock,"example/repo")).m
 
 // IRN courses are independent copies that the teacher reshaped on purpose:
 // IRN 4 dropped the learning objectives and keeps DL 01/02 as theory pages without plan;
-// IRN 1 keeps only «01 Was ist KI?» (theory page without plan).
+// IRN 1 keeps only «01 Was ist KI?» and «02 Wie lernt KI?» (theory pages without plan).
 const irnShape={
-  1:{removedAllBut:["basis-start","basis-ki"],withoutPlan:[1],lessons:1},
+  1:{removedAllBut:["basis-start","basis-ki","basis-lernen"],withoutPlan:[1,2],lessons:2},
   4:{removed:["lernziele"],withoutPlan:[1,2],lessons:10}
 };
 for(const grade of [1,4]){

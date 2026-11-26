@@ -334,8 +334,8 @@ const irnGithub=async(_token,route)=>{
   return {encoding:"base64",content:Buffer.from(irnSources[name]).toString("base64")};
 };
 const irnPlan=await teacherData({course:"irn/1-klasse",kind:"planung"},"token",irnGithub,"example/repo");
-// IRN 1 consists only of «01 Was ist KI?» without a plan; every teacher tab shows it, empty.
-assert.deepEqual(irnPlan.lessons.map(l=>[l.number,l.title,l.withoutPlan]),[[1,"Was ist KI?",true]]);
+// IRN 1 consists only of «01 Was ist KI?» and «02 Wie lernt KI?» without a plan; every teacher tab shows them, empty.
+assert.deepEqual(irnPlan.lessons.map(l=>[l.number,l.title,l.withoutPlan]),[[1,"Was ist KI?",true],[2,"Wie lernt KI?",true]]);
 assert.equal(irnPlan.selectedNumber,1);
 assert.equal(irnPlan.withoutPlan,true,"DL 01 opens empty");
 assert.equal(irnPlan.lesson,null);

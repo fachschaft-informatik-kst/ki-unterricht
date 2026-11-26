@@ -8,12 +8,12 @@
       <figure class="concept-figure learning-system-figure">
         <p class="eva-label"><strong>Wissensbasiertes System</strong><span>EVA-Modell ohne Erfahrungsschatz</span></p>
         <img src="grafiken/eva_ohne_erfahrungsschatz.svg" alt="EVA-Modell ohne Erfahrungsschatz: Eine Eingabe wird verarbeitet und ergibt eine Ausgabe." loading="lazy"/>
-        <figcaption>Die Verarbeitung folgt fest programmierten Regeln.</figcaption>
+        <figcaption>Die Verarbeitung folgt fest programmierten Regeln:<img class="eva-programmierung" src="grafiken/ki_programmierung_menschen.png" alt="Programmierung durch Menschen: Eine Eingabe wird mit definierten Regeln zu einer Ausgabe verarbeitet. Der Mensch definiert Regeln für das gewünschte Systemverhalten." loading="lazy"/></figcaption>
       </figure>
       <figure class="concept-figure learning-system-figure">
         <p class="eva-label"><strong>Lernendes System</strong><span>EVA-Modell mit Erfahrungsschatz</span></p>
         <img src="grafiken/eva_mit_erfahrungsschatz.svg" alt="EVA-Modell mit Erfahrungsschatz: Die Verarbeitung nutzt den Erfahrungsschatz und kann ihn verändern." loading="lazy"/>
-        <figcaption>Die Verarbeitung nutzt gespeichertes, gelerntes Wissen.</figcaption>
+        <figcaption>Die Verarbeitung nutzt gelerntes Wissen:<img class="eva-programmierung" src="grafiken/ki_programmierung_daten.png" alt="Datengetriebene Programmierung: Aus Daten erzeugt maschinelles Lernen Regeln. Der Mensch stellt Daten bereit, aus denen Regeln erzeugt werden." loading="lazy"/></figcaption>
       </figure>
     </div>
     <p><strong>Wissensbasiertes System · EVA-Modell ohne Erfahrungsschatz:</strong> Menschen haben vorher festgelegt, wie die Eingabe verarbeitet wird. Das Wissen des Systems besteht aus diesen Fakten und Regeln; deshalb heisst es <strong>wissensbasiert</strong>. Das Programm wendet diese Regeln immer gleich an: Dieselbe Eingabe führt immer zur selben Ausgabe. Das Programm verändert sich durch seinen Gebrauch nicht. So arbeiten ein Taschenrechner, ein Getränkeautomat oder ein Schachprogramm mit festen Bewertungsregeln.</p>
@@ -46,6 +46,6 @@
         </tbody>
       </table>
     </div>
-    <p class="small muted">In der Praxis werden feste Regeln und Lernen aus Daten oft kombiniert. Die Grafiken sind eigene Nachzeichnungen nach der <a href="https://inf-schule.de/ki/menueansicht" target="_blank" rel="noopener noreferrer">KI-Landkarte von inf-schule.de</a> (CC BY-SA 4.0).</p>
+    <p class="small muted">In der Praxis werden feste Regeln und Lernen aus Daten oft kombiniert. Die EVA-Grafiken sind eigene Nachzeichnungen nach der <a href="https://inf-schule.de/ki/menueansicht" target="_blank" rel="noopener noreferrer">KI-Landkarte von inf-schule.de</a> (CC BY-SA 4.0); «Programmierung durch Menschen» und «Datengetriebene Programmierung» sind Ausschnitte daraus.</p>
   </div>
 </details>
